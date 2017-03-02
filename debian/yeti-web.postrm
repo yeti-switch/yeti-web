@@ -1,0 +1,31 @@
+#!/bin/bash
+
+user=yeti-web
+services="yeti-web.service yeti-cdr-billing.service yeti-delayed-job.service"
+
+case "$1" in
+	remove)
+		if [ -x /usr/bin/deb-systemd-helper ]; then
+			deb-systemd-helper mask ${services} >/dev/null
+		fi
+	;;
+	purge)
+		if [ -x /usr/sbin/deluser ]; then
+			deluser --quiet --remove-home $user &>/dev/null || true
+		fi
+
+		rm -rf /home/$user /etc/nginx/sites-available/yeti-web.dist || true
+
+		if [ -x /usr/bin/deb-systemd-helper ]; then
+			deb-systemd-helper purge ${services} >/dev/null
+			deb-systemd-helper unmask ${services} >/dev/null
+		fi
+	;;
+esac
+
+if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
+	deb-systemd-invoke restart rsyslog.service >/dev/null || true
+	deb-systemd-invoke reload nginx.service >/dev/null || true
+fi
+
+exit 0

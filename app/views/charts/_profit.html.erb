@@ -1,0 +1,59 @@
+<!-- dashboard  -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("div.tabs a[href='#profitability']").on("click", function () {
+
+           // if ($("#chart-placeholder-profit").hasClass('chart-placeholder')) {
+
+                $.getJSON("/remote_stats/profit.json", function (json) {
+
+                    var chart;
+                    var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+
+
+
+                    var keyColor = function (d, i) {
+                        return d.y > 0  ? '#1f77b4' : '#b22222';
+                    };
+
+                    nv.addGraph(function () {
+                        chart = nv.models.discreteBarChart()
+                                .color(keyColor)
+                                .showValues(true)
+                                .x(function (d) {
+                                                                       return formatter.parse(d.x);
+                                                                   });
+
+                        chart.xAxis.rotateLabels(-45);
+                        chart.xAxis
+                                .axisLabel("Time")
+                                .tickFormat(function (d) {
+                                    return d3.time.format('%a %H:00')(new Date(d));
+
+
+                                });
+
+                        chart.yAxis
+                                .axisLabel('Profit')
+                                .tickFormat(d3.format(',.2f'));
+
+                        d3.select('#profit-chart')
+                                .datum(json)
+                                .call(chart);
+                        jQuery("#chart-placeholder-profit").removeClass("chart-placeholder");
+                        nv.utils.windowResize(chart.update);
+                        return chart;
+                    });
+
+                });
+           // }
+        });
+    });
+
+</script>
+<div id="chart-placeholder-profit" class="chart-placeholder  chart-container">
+  <svg id="profit-chart" class="stat-chart"></svg>
+</div>
+
+

@@ -1,0 +1,20 @@
+panel "History" do
+  table_for assigns[:versions] do
+
+    column "Item" do |v|
+
+            link_to  v.item.display_name , smart_url_for(v.item, version: v.id)
+    end
+
+    column "Event" do |v| v.event end
+    column :created_at
+    column :txid
+    column "Who ID" do |c|
+      c.whodunnit
+    end
+    column "Who" do |v|
+      whodunit_link(v.whodunnit)
+    end
+    column :ip
+  end
+end

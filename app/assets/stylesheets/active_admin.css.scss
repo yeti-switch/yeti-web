@@ -1,0 +1,164 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+@import "chosen";
+@import "nv.d3";
+@import "wigu/active_admin_theme";
+@import "active_admin_sidebar";
+@import "active_admin_datetimepicker";
+@import "active_admin_date_range_preset";
+@import "font-awesome";
+
+fieldset.inputs {
+  input.date-time-picker {
+    width: 286px;
+  }
+}
+
+
+
+
+//
+
+
+
+// Sizes
+//$horizontal-page-margin: 15px;
+//$sidebar-width: 800px;
+//$cell-padding: 5px 5px 3px 5px;
+//$cell-horizontal-padding: 10px;
+//$section-padding: 7px;
+//$text-input-horizontal-padding: 5px;
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+.attributes_table table th, .attributes_table table td {
+  padding: 5px 0;
+}
+
+.attributes_table table th {
+  width: 200px;
+}
+
+form fieldset ol > li {
+  padding: 5px 10px;
+}
+
+
+
+//dirty fix for #268
+form.filter_form .filter_form_field.select_and_search input[type=text].search_filter_string {
+  margin-left: 0px;
+  width: 218px;
+}
+
+#wrapper .sidebar_section.panel .filter_form_field input {
+  border: 1px solid #A1A7B2;
+  background-color: #fdfefe;
+}
+
+.sidebar_section {
+  margin-bottom: 14px;
+}
+
+// for static messages
+#wrapper .flashes .flash_ok_message {
+  background-color: #4676c1;
+  border-bottom: 2px solid #243c63;
+}
+
+#wrapper .flashes .flash_notice_message {
+  background-color: #669148;
+  border-bottom: 2px solid #496834;
+}
+
+#wrapper .flashes .flash_warning_message {
+  background-color: #BDBC45;
+  border-bottom: 2px solid #6f6e29;
+}
+
+#wrapper .flashes .flash_error_message {
+  background-color: #CD3333;
+  border-bottom: 2px solid #731c1c;
+}
+
+#wrapper .flashes .flash_alert {
+  background-color: #d87543;
+}
+
+#wrapper .flashes .flash_authorize_error {
+  background-color: #CD3333;
+  border-bottom: 2px solid #731c1c;
+}
+
+#wrapper .flashes .flash {
+  white-space: pre-wrap;
+}
+
+#toggle_block_available_columns {
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+#block_available_columns {
+  margin: 7px 15px 0 15px;
+  select {
+    width: 100%;
+  }
+}
+
+body.active_admin.index #active_admin_content {
+  .collapse_btn, .uncollapse_btn {
+    background-color: #3B76A4;
+  }
+}
+
+
+//hueta
+
+#active_admin_content {
+  margin: 0;
+  padding: 15px;
+}
+
+#footer {
+  padding: 0px 15px 0px;
+  font-size: 0.8em;
+  clear: both;
+}
+
+#main_content_wrapper! {
+  float: inherit;
+  margin-left: 288px;
+  width: auto;
+}
+
+#wrapper table.index_table {
+  background-color: #ffffff;
+  border: 1px solid #e6e9ee;
+  border-bottom: 1px solid #e6e9ee;
+  border-radius: 4px;
+}
+
+#wrapper table.index_table th {
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  font-size: 1.0em;
+  font-weight: bold;
+  background-color: #e6e9ee;
+  padding: 10px 12px 10px 12px;
+  border-bottom: 1px solid #d7dce4;
+  border-right: 1px solid #d7dce4;
+}

@@ -1,0 +1,14 @@
+block_id = GuiConfig.try(:active_calls_autorefresh_enable) ?  :active_calls_dynamic_page :  :active_calls_static_page
+
+div id: block_id do
+columns do
+  column max_width: "100%", min_width: "100%" do
+    panel "60 min chart"  do
+      render partial: 'charts/active_calls_nodes', locals: {path: 'hour_nodes'}
+    end
+  end
+  column do
+
+  end
+end if GuiConfig.active_calls_show_chart
+end

@@ -1,0 +1,60 @@
+<!-- dashboard  -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("div.tabs a[href='#calls-duration']").on("click", function () {
+
+
+
+                $.getJSON("/remote_stats/duration.json", function (json) {
+
+                    json[0].values =  json[0].values.map(function(p){ p.y = (parseFloat(p.y)/60.0); return  p; });
+
+                    var chart;
+                    var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+
+
+                    var colors = d3.scale.category10();
+                    var keyColor = function (d, i) {
+                        return colors(0);
+                    };
+
+                    nv.addGraph(function () {
+                        chart = nv.models.discreteBarChart()
+                                .color(keyColor)
+                                .showValues(false)
+                                .x(function (d) {
+                                                                return formatter.parse(d.x);
+                                                            });
+
+                        chart.xAxis.rotateLabels(-45);
+                        chart.xAxis
+                                .axisLabel("Time")
+                                .tickFormat(function (d) {
+                               return d3.time.format('%a %H:00')(new Date(d));
+
+                            });
+
+
+                        chart.yAxis
+                                .axisLabel('Duration (min)');
+
+                        d3.select('#duration-chart')
+                                .datum(json)
+                                .call(chart);
+                        jQuery("#chart-placeholder-duration").removeClass("chart-placeholder");
+                        nv.utils.windowResize(chart.update);
+                        return chart;
+                    });
+
+                });
+
+        });
+    });
+
+</script>
+<div id="chart-placeholder-duration" class="chart-placeholder  chart-container">
+  <svg id="duration-chart" class="stat-chart"></svg>
+</div>
+
+

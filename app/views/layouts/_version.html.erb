@@ -1,0 +1,32 @@
+
+<% if @last_version %>
+<h3>Current Version: <%= @versions_total_count %></h3>
+<b>Created At:</b>
+<%= @last_version.created_at%>
+<br>
+<b>Admin</b>: <%=whodunit_link @last_version.whodunnit %>
+<br>
+<% if @versions_total_count > 1 %>
+  <% if @previous_version  %>
+    <%= link_to "Previous version", {:version => @previous_version.id}%>
+    <br>
+
+  <% end %>
+  <%= link_to "History", {action: :history, id: resource.id} %>
+  <br>
+  <% if @next_version %>
+    <h3>This is <%= "#{@version.index + 1}"%> version</h3>
+
+    <b>Modify at:</b>
+    <%= @version.created_at %>
+    <br>
+    <b>Admin</b>:
+    <%= whodunit_link @version.whodunnit %>
+    <br>
+
+    <%= link_to "Go to current version"%>
+  <% end %>
+<% end %>
+ <% else %>
+ <h3>No history was found for this record</h3>
+<% end %>

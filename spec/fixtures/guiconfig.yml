@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: guiconfig
+#
+#  rows_per_page                   :string           default("50,100"), not null
+#  id                              :integer          not null, primary key
+#  cdr_unload_dir                  :string
+#  cdr_unload_uri                  :string
+#  max_records                     :integer          default(100500), not null
+#  import_max_threads              :integer          default(4), not null
+#  import_helpers_dir              :string           default("/tmp")
+#  cdr_archive_delay               :integer          default(4), not null
+#  cdr_remove_delay                :integer          default(120), not null
+#  active_calls_require_filter     :boolean          default(TRUE), not null
+#  registrations_require_filter    :boolean          default(TRUE), not null
+#  active_calls_show_chart         :boolean          default(FALSE), not null
+#  active_calls_autorefresh_enable :boolean          default(FALSE), not null
+#  max_call_duration               :integer          default(7200), not null
+#  random_disconnect_enable        :boolean          default(FALSE), not null
+#  random_disconnect_length        :integer          default(7000), not null
+#  drop_call_if_lnp_fail           :boolean          default(FALSE), not null
+#  short_call_length               :integer          default(15), not null
+#  termination_stats_window        :integer          default(24), not null
+#  lnp_cache_ttl                   :integer          default(10800), not null
+#  quality_control_min_calls       :integer          default(100), not null
+#  quality_control_min_duration    :integer          default(3600), not null
+#  lnp_e2e_timeout                 :integer          default(1000), not null
+#  web_url                         :string           default("http://127.0.0.1"), not null
+#
+
+gui_conf_1:
+  id: 1
+  rows_per_page: 30,50,100
+  cdr_unload_dir: /tmp
+  cdr_unload_uri: https://127.0.0.1/tmexport
+  max_records: 100500
+  rows_per_page: 50,100
+  import_max_threads: 4
+  import_helpers_dir: /home/yeti-web/yeti-xml2rates
+  # cdr_archive_delay: 4
+  # cdr_remove_delay: 120

@@ -1,0 +1,59 @@
+<!-- account  -->
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+
+        $("div.tabs a[href='#active-calls-charts']").on("click", function () {
+
+
+                $.getJSON("/remote_stats/<%=params[:id]%>/aggregated_vendor_account.json", function (json) {
+
+
+                    var chart;
+                    var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+
+                    nv.addGraph(function () {
+
+                        chart = nv.models.lineChart().useInteractiveGuideline(true).options({
+                                                 useVoronoi: false
+                                             }) ;
+                        chart.xAxis
+                                .axisLabel("Time (h)")
+//                                .tickFormat(function (d) {
+//                                    return d3.time.format('%b %d %H:00')(new Date(formatter.parse(d)));
+//
+//
+//                                });
+                                .tickFormat(function (d) {
+                                    return d3.time.format('%b %d %H:00')(new Date(d))
+                                });
+
+                        chart.yAxis
+                                .axisLabel('Calls count')
+                                .tickFormat(d3.format('f'))
+                        ;
+
+
+                        d3.select('#agg-vendor-account-chart')
+                                .datum(json)
+                                .call(chart);
+                        jQuery("#agg-chart-placeholder-vendor-account").removeClass("chart-placeholder");
+                        nv.utils.windowResize(chart.update);
+                        return chart;
+                    });
+
+                });
+
+
+        });
+
+
+    });
+
+</script>
+
+<div id="agg-chart-placeholder-vendor-account" class="chart-placeholder  chart-container">
+  <svg id="agg-vendor-account-chart" class="stat-chart"></svg>
+</div>

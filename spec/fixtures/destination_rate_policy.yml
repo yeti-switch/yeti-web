@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: destination_rate_policy
+#
+#  id   :integer          not null, primary key
+#  name :string           not null
+#
+
+dest_1:
+  id: 1
+  name: Fixed
+dest_2:
+  id: 2
+  name: Based on used dialpeer
+dest_3:
+  id: 3
+  name: MIN(Fixed,Based on used dialpeer)
+dest_4:
+  id: 4
+  name: MAX(Fixed,Based on used dialpeer)

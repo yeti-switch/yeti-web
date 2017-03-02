@@ -1,0 +1,25 @@
+[Unit]
+Description=YETI system web interface
+Documentation=https://yeti-switch.org/docs/
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=yeti-web
+Group=yeti-web
+LimitNOFILE=65536
+LimitCORE=infinity
+
+Environment=RAILS_ENV=production
+Environment=RACK_ENV=production
+Environment=RAKE_ENV=production
+Environment=BUNDLE_GEMFILE=/home/yeti-web/Gemfile
+Environment=GEM_HOME=/home/yeti-web/.gem
+Environment=GEM_PATH=/home/yeti-web/.gem:/home/yeti-web/.bundle_gem
+
+RuntimeDirectory=yeti
+ExecStart=/usr/bin/ruby /home/yeti-web/.gem/bin/bundle exec unicorn -D -c /home/yeti-web/config/unicorn.rb -E production
+PIDFile=/run/yeti/yeti-web-unicorn.pid
+Type=forking
+Restart=on-abnormal

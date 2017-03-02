@@ -1,0 +1,24 @@
+<!--variables:-->
+<!--data_item - object of EmailData type-->
+<!--report - report model instance-->
+
+<% table_styles = "border: 1px solid #e8e8e8; border-collapse: collapse; width: 100%;" %>
+<% tr_styles = "border: 1px solid #e8e8e8;" %>
+<% td_styles_odd = "border: 1px solid #e8e8e8; padding: 5px; background-color: #f4f5f5;" %>
+<% td_styles_even = "border: 1px solid #e8e8e8; padding: 5px; background-color: #ffffff;" %>
+<% th_styles = "border: 1px solid #e8e8e8; border-right: 1px solid #d7dce4; padding: 5px; background-color: #e6e9ee;" %>
+
+<table style="<%= table_styles %>">
+  <tr style="<%= tr_styles %>">
+    <% data_item.columns.each do |column| %>
+        <th style="<%= th_styles %>"><%= data_item.column_title(column) %></th>
+    <% end %>
+  </tr>
+  <% data_item.decorated_collection.each_with_index do |row,index| %>
+      <tr style="<%= tr_styles %>">
+        <% data_item.columns.each do |column| %>
+            <td nowrap style="<%= index.odd? ? td_styles_odd : td_styles_even  %>"><%= data_item.column_value(row, column) %></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>

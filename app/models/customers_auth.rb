@@ -1,0 +1,145 @@
+# == Schema Information
+#
+# Table name: customers_auth
+#
+#  id                               :integer          not null, primary key
+#  customer_id                      :integer          not null
+#  rateplan_id                      :integer          not null
+#  enabled                          :boolean          default(TRUE), not null
+#  ip                               :inet
+#  account_id                       :integer
+#  gateway_id                       :integer          not null
+#  src_rewrite_rule                 :string
+#  src_rewrite_result               :string
+#  dst_rewrite_rule                 :string
+#  dst_rewrite_result               :string
+#  src_prefix                       :string           default(""), not null
+#  dst_prefix                       :string           default(""), not null
+#  x_yeti_auth                      :string
+#  name                             :string           not null
+#  dump_level_id                    :integer          default(0), not null
+#  capacity                         :integer
+#  pop_id                           :integer
+#  uri_domain                       :string
+#  src_name_rewrite_rule            :string
+#  src_name_rewrite_result          :string
+#  diversion_policy_id              :integer          default(1), not null
+#  diversion_rewrite_rule           :string
+#  diversion_rewrite_result         :string
+#  dst_blacklist_id                 :integer
+#  src_blacklist_id                 :integer
+#  routing_plan_id                  :integer          not null
+#  allow_receive_rate_limit         :boolean          default(FALSE), not null
+#  send_billing_information         :boolean          default(FALSE), not null
+#  radius_auth_profile_id           :integer
+#  src_number_radius_rewrite_rule   :string
+#  src_number_radius_rewrite_result :string
+#  dst_number_radius_rewrite_rule   :string
+#  dst_number_radius_rewrite_result :string
+#  enable_audio_recording           :boolean          default(FALSE), not null
+#  radius_accounting_profile_id     :integer
+#  enable_redirect                  :boolean          default(FALSE), not null
+#  redirect_method                  :integer
+#  redirect_to                      :string
+#  from_domain                      :string
+#  to_domain                        :string
+#
+
+class CustomersAuth < Yeti::ActiveRecord
+  self.table_name = 'customers_auth'
+
+  belongs_to :customer, -> { where customer: true }, class_name: 'Contractor', foreign_key: :customer_id
+
+  belongs_to :rateplan
+  belongs_to :routing_plan, class_name: 'Routing::RoutingPlan'
+  belongs_to :gateway
+  belongs_to :account
+  belongs_to :dump_level
+  belongs_to :pop
+  belongs_to :diversion_policy
+  belongs_to :dst_blacklist, class_name: Routing::Blacklist, foreign_key: :dst_blacklist_id
+  belongs_to :src_blacklist, class_name: Routing::Blacklist, foreign_key: :src_blacklist_id
+  belongs_to :radius_auth_profile, class_name: Equipment::Radius::AuthProfile, foreign_key: :radius_auth_profile_id
+  belongs_to :radius_accounting_profile, class_name: Equipment::Radius::AccountingProfile, foreign_key: :radius_accounting_profile_id
+
+  has_paper_trail class_name: 'AuditLogItem'
+
+  # REDIRECT_METHODS = [
+  #     301,
+  #     302
+  # ]
+
+  validates_format_of :src_prefix, without: /\s/
+  validates_format_of :dst_prefix, without: /\s/
+  validates_format_of :ip, with: /\A((0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\.){3}(0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})(\/([0-9]|[1-2][0-9]|3[0-2])|)\z/
+  validates_uniqueness_of :name, allow_blank: :false
+  validates_presence_of :name
+
+  validates_presence_of :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy
+
+  # validates_presence_of :redirect_method, :redirect_to, if: :enable_redirect
+  # validates_inclusion_of :redirect_method, in: REDIRECT_METHODS, if: :enable_redirect
+
+  validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+
+
+
+  scope :with_radius, -> { where("radius_auth_profile_id is not null") }
+
+  include Yeti::ResourceStatus
+
+  include PgEvent
+  has_pg_queue 'gateway-sync'
+
+
+  scope :ip_covers, lambda { |ip| where("ip>>=?", ip)   }
+
+  def display_name
+    "#{self.name} | #{self.id}"
+  end
+
+  def raw_ip
+    read_attribute_before_type_cast('ip')
+  end
+
+  def display_name_for_debug
+    b="#{self.customer.display_name} -> #{self.name} | #{self.id} IP: #{self.raw_ip}"
+    if !self.uri_domain.blank?
+      b=b+", Domain: #{self.uri_domain}"
+    end
+    if !self.pop_id.nil?
+      b=b+", POP: #{self.pop.try(:name)}"
+    end
+    if !self.x_yeti_auth.blank?
+      b=b+", X-Yeti-Auth: #{self.x_yeti_auth}"
+    end
+    b
+  end
+
+ # def pop_name
+ #   pop.nil? ? "Any" : pop.name
+ # end
+
+  def self.search_for_debug(src,dst)
+    if src.blank?&&dst.blank?
+      CustomersAuth.all.reorder(:name)
+    elsif src.blank?
+      CustomersAuth.where("prefix_range(customers_auth.dst_prefix)@>prefix_range(?)",dst).reorder(:name)
+    elsif dst.blank?
+      CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?)",src).reorder(:name)
+    else
+      CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?) AND
+  prefix_range(customers_auth.dst_prefix)@>prefix_range(?)",src,dst).reorder(:name)
+    end
+  end
+
+  private
+
+  def self.ransackable_scopes(auth_object = nil)
+    [
+        :ip_covers
+    ]
+  end
+
+end
+

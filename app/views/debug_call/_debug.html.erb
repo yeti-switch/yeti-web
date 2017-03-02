@@ -1,0 +1,18 @@
+<%= semantic_form_for dc, :url => '/debug_call#detailed', :method => :get do |form| %>
+    <%= form.semantic_errors *form.object.errors.keys %>
+    <%= form.inputs do %>
+        <%= form.input :remote_ip %>
+        <%= form.input :remote_port %>
+        <%= form.input :src_prefix %>
+        <%= form.input :dst_prefix %>
+        <%= form.input :uri_domain %>
+        <%= form.input :pop_id, :collection => Pop.all, :as => :select %>
+        <%= form.input :x_yeti_auth %>
+    <% end %>
+
+    <%= form.submit :value => 'Simulate routing' %>
+<% end %>
+
+
+
+

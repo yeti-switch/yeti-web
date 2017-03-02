@@ -1,0 +1,27 @@
+[Unit]
+Description=YETI system web interface
+Documentation=https://yeti-switch.org/docs/
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=yeti-web
+Group=yeti-web
+LimitNOFILE=65536
+LimitCORE=infinity
+
+ExecStart=export YETI_TZ=`/bin/cat /etc/timezone`
+Environment=RAILS_ENV=production
+Environment=RACK_ENV=production
+Environment=RAKE_ENV=production
+Environment=BUNDLE_GEMFILE=/home/yeti-web/pgq-processors/Gemfile
+Environment=GEM_HOME=/home/yeti-web/.gem
+Environment=GEM_PATH=/home/yeti-web/.gem:/home/yeti-web/.bundle_gem
+
+WorkingDirectory=/home/yeti-web/pgq-processors
+RuntimeDirectory=yeti-cdr-billing
+ExecStart=/usr/bin/ruby /home/yeti-web/.gem/bin/bundle exec rake pgq:worker RACK_ENV=production
+PIDFile=/run/yeti-cdr-billing/yeti-cdr-billing.pid
+Type=simple
+Restart=on-abnormal

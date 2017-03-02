@@ -1,0 +1,60 @@
+<!--  dashboard  -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("div.tabs a[href='#<%= href %>']").on("click", function () {
+
+            $.getJSON("/remote_stats/<%=path %>.json", function (json) {
+
+                var colors = d3.scale.category20();
+                var keyColor = function (d, i) {
+                    return colors(d.key)
+                };
+                var chart;
+
+                nv.addGraph(function () {
+                    var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+                    chart = nv.models.stackedAreaChart()
+                            .useInteractiveGuideline(true)
+                            .x(function (d) {
+                                return  formatter.parse(d[0]); //d[0];
+                            })
+                            .y(function (d) {
+                                return d[1];
+                            })
+                            .controlLabels({stacked: "Stacked"})
+                            .color(keyColor)
+                            .duration(300);
+                    chart.xAxis
+                            .tickFormat(function (d) {
+                               return d3.time.format('%X')(new Date(d)) ;
+                            } );
+//                            ;
+//
+//
+//                                                        });
+//                            .tickFormat(function (d) {
+//                        return d3.time.format.utc('%X')(new Date(d))
+//                    });
+                    // chart.yAxis.tickFormat(d3.format(',.2f'));
+                    chart.yAxis.tickFormat(d3.format('d'));
+                    d3.select('#nodes-chart')
+                            .datum(json)
+                            .transition().duration(1000)
+                            .call(chart);
+                    jQuery("#chart-placeholder-nodes").removeClass("chart-placeholder");
+                    nv.utils.windowResize(chart.update);
+                    return chart;
+                });
+
+            });
+
+        });
+        $("div.tabs a[href='#<%= href %>']").trigger('click');
+    });
+</script>
+<div id="chart-placeholder-nodes" class="chart-placeholder  chart-container">
+  <svg id="nodes-chart" class="stat-chart"></svg>
+</div>
+
+

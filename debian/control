@@ -1,0 +1,15 @@
+Source: yeti-web
+Maintainer: yeti team <dev@yeti-switch.org>
+Section: net
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9), devscripts, python-jinja2, ruby2.3, ruby2.3-dev, ruby, zlib1g-dev, libpq-dev, python-yaml
+
+Package: yeti-web
+Section: net
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby2.3, ruby, nginx, python, python-yaml, python-psycopg2, postgresql-client, curl
+Conflicts: yeti-web
+Description: UI for YETI project
+	YETI user interface
+

@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: session_refresh_methods
+#
+#  id    :integer          not null, primary key
+#  value :string           not null
+#  name  :string
+#
+
+srm_1:
+  id: 1
+  value: INVITE
+  name: Invite
+srm_2:
+  id: 2
+  value: UPDATE
+  name: Update request
+srm_3:
+  id: 3
+  value: UPDATE_FALLBACK_INVITE
+  name: Update request and invite if unsupported

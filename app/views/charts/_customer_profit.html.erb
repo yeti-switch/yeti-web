@@ -1,0 +1,59 @@
+<!-- account  -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("div.tabs a[href='#profitability']").on("click", function () {
+
+
+            $.getJSON("/remote_stats/<%=params[:id]%>/customers_traffic.json", function (json) {
+
+
+                var chart;
+                var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+
+                nv.addGraph(function () {
+                    chart = nv.models.multiBarChart()
+                            .x(function (d) {
+                                                     return  formatter.parse(d.x); //d[0];
+                                                 });
+                    chart.xAxis.rotateLabels(-45);
+                    chart.xAxis
+                            .axisLabel("Time")
+                            .tickFormat(function (d) {
+                                return d3.time.format('%X')(new Date(d));
+
+
+                            });
+//                                .tickFormat(function (d) {
+//                                    return d3.time.format.utc('%X')(new Date(d))
+//                                });
+
+                    chart.yAxis
+                            .axisLabel('Amount')
+                            .tickFormat(d3.format('.6f'));
+                    ymin = d3.min(json[0].values.map(function (p) {
+                        return p.y
+                    }));
+
+
+                    chart.forceY(ymin);
+
+                    d3.select('#customer-profit-chart')
+                            .datum(json).transition().duration(500)
+                            .call(chart);
+                    jQuery("#chart-placeholder-customer-profit").removeClass("chart-placeholder");
+                    nv.utils.windowResize(chart.update);
+                    return chart;
+                });
+
+            });
+
+        });
+    });
+
+</script>
+<div id="chart-placeholder-customer-profit" class="chart-placeholder">
+  <svg id="customer-profit-chart" class="stat-chart"></svg>
+</div>
+
+

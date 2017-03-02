@@ -1,0 +1,5 @@
+<% data.each_with_index do |data_item, i| %>
+
+    <%= render partial: 'table_with_footer', locals: {data_item: data_item, report: report} %>
+    <br/>
+<% end %>

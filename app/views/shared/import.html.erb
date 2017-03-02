@@ -1,0 +1,34 @@
+<% if @active_admin_import_model.hint.present? %>
+    <p>
+      <%= raw(@active_admin_import_model.hint) %>
+    </p>
+<% end %>
+
+<%= semantic_form_for @active_admin_import_model, url: {action: :do_import},
+                      html: {multipart: true} do |f| %>
+    <%=  f.semantic_errors %>
+    <%= f.inputs "CSV options", for: [:csv_options, OpenStruct.new(@active_admin_import_model.csv_options)] do |csv|%>
+        <% csv.with_options input_html: {style: 'width:40px;'} do |opts| %>
+            <%= opts.input :col_sep %>
+            <%= opts.input :row_sep %>
+            <%= opts.input :quote_char %>
+        <% end %>
+    <% end %>
+
+    <%= f.inputs "Import" do %>
+        <%= f.input :file, as: :file %>
+        <%= f.input :script, as: :select, collection: GuiConfig.import_scripts('r2c_') %>
+        <%= f.input :select_all, as: :boolean %>
+        <%= f.input :unique_columns_values, as: :check_boxes,
+                    collection: @active_admin_import_model.unique_columns.sort %>
+
+    <% end %>
+
+
+
+    <%= f.actions do %>
+        <%= f.action :submit, label: "Import", button_html: {disable_with: "Wait..."} %>
+    <% end %>
+<% end %>
+
+

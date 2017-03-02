@@ -1,0 +1,51 @@
+# == Schema Information
+#
+# Table name: nodes
+#
+#  id              :integer          not null, primary key
+#  signalling_ip   :string
+#  signalling_port :integer
+#  name            :string
+#  pop_id          :integer          not null
+#  rpc_endpoint    :string
+#
+
+node_1:
+  id: 10
+  signalling_ip: 46.19.209.17
+  signalling_port: 5060
+  rpc_uri: http://10.15.80.10:8090
+  name: yeti-us-10
+  pop_id: 1
+  
+node_2:
+  id: 11
+  signalling_ip: 46.19.209.45
+  signalling_port: 5060
+  rpc_uri: http://10.15.80.11:8090
+  name: yeti-us-11
+  pop_id: 1
+  
+node_3:
+  id: 12
+  signalling_ip: 46.19.210.19
+  signalling_port: 5060
+  rpc_uri: http://10.15.82.12:8090
+  name: yeti-eu-12
+  pop_id: 2
+  
+node_4:
+  id: 13
+  signalling_ip: 1.1.1.1
+  signalling_port: 5060
+  rpc_uri: http://10.15.82.13:8090
+  name: yeti-eu-13
+  pop_id: 2
+  
+node_5:
+  id: 14
+  signalling_ip: 46.19.211.21
+  signalling_port: 5060
+  rpc_uri: http://10.15.84.14:8090
+  name: yeti-me-14
+  pop_id: 3

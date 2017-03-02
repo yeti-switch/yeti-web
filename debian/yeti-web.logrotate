@@ -1,0 +1,12 @@
+/var/log/yeti-admin.log {
+	daily
+	rotate 7
+	copytruncate
+	delaycompress
+	compress
+	notifempty
+	missingok
+	postrotate
+		invoke-rc.d rsyslog rotate > /dev/null
+	endscript
+}

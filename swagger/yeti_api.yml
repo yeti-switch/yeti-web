@@ -1,0 +1,82 @@
+host: 'localhost:6666'
+#encoding: application/vnd.api+json
+encoding: application/json
+objects:
+  Destination:
+    plural: True
+    parent: 'rateplan'
+    fields:
+      - { name: enabled, type: boolean, default: 'true', desc: 'փորձություն նկարագրությունը' }
+      - { name: prefix, type: string }
+      - { name: rateplan_id, type: integer, format: int64 }
+      - { name: next_rate, type: number, format: float }
+      - { name: connect_fee, type: number, format: float }
+      - { name: initial_interval, type: integer }
+      - { name: next_interval, type: integer }
+      - { name: dp_margin_fixed, type: number, format: float}
+      - { name: dp_margin_percent, type: number, format: float }
+      - { name: rate_policy_id, type: integer, format: int64 }
+      - { name: initial_rate, type: number, format: float }
+      - { name: reject_calls, type: boolean, default: 'false' }
+      - { name: use_dp_intervals, type: boolean, default: 'false' }
+      - { name: valid_from, type: string, format: date-time }
+      - { name: valid_till, type: string, format: date-time }
+      - { name: profit_control_mode_id, type: integer, format: int64 }
+      - { name: external_id, type: integer, format: int64 }
+      - { name: asr_limit, type: integer }
+      - { name: acd_limit, type: integer }
+      - { name: short_calls_limit, type: integer }
+  Dialpeer:
+    plural: True
+    fields:
+      - { name: enabled, type: boolean, default: 'true' }
+      - { name: prefix, type: string }
+      - { name: src_rewrite_rule, type: string }
+      - { name: dst_rewrite_rule, type: string }
+      - { name: asr_limit, type: integer }
+      - { name: acd_limit, type: integer }
+      - { name: gateway_id, type: integer, format: int64 }
+      - { name: routing_group_id, type: integer, format: int64 }
+      - { name: next_rate, type: number, format: float }
+      - { name: connect_fee, type: number, format: float }
+      - { name: vendor_id, type: integer, format: int64 }
+      - { name: account_id, type: integer, format: int64 }
+      - { name: src_rewrite_result, type: string }
+      - { name: dst_rewrite_result, type: string }
+      - { name: locked, type: boolean, default: 'false' }
+      - { name: priority, type: integer }
+      - { name: capacity, type: integer }
+      - { name: lcr_rate_multiplier, type: number, format: float }
+      - { name: initial_rate, type: number, format: float }
+      - { name: initial_interval, type: integer }
+      - { name: valid_from, type: string, format: date-time }
+      - { name: valid_till, type: string, format: date-time }
+      - { name: gateway_group_id, type: integer, format: int64 }
+      - { name: force_hit_rate, type: boolean }
+      - { name: network_prefix_id, type: integer, format: int64 }
+      - { name: created_at, type: string, format: date-time }
+      - { name: short_calls_limit, type: integer }
+      - { name: short_calls_limit, type: integer }
+      - { name: external_id, type: integer, format: int64 }
+
+  Dialpeer_next_rate:
+    plural: True
+    parent: 'dialpeer'
+    fields:
+      - { name: rate, type: number, format: float }
+      - { name: initial_interval, type: integer }
+      - { name: next_interval, type: integer }
+      - { name: connect_fee, type: number, format: float }
+      - { name: apply_time, type: string, format: date-time }
+      - { name: external_id, type: integer, format: int64 }
+
+  Rateplan:
+    plural: True
+    fields:
+      - { name: name, type: string }
+      - { name: profit_control_mode_id, type: integer, format: int64 }
+
+  Routing_group:
+    plural: True
+    fields:
+      - { name: name, type: string }

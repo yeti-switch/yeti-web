@@ -1,0 +1,23 @@
+{%- import 'helpers.j2' as h -%}
+{
+	"host": "{{ host }}",
+	"swagger": "2.0",
+	"info": {
+		"title": "YETI private API",
+		"description": "RESTful internal entities management",
+		"version": "{{ version }}"
+	},
+	"schemes": [ "http", "https" ],
+	"basePath": "/api/rest/private",
+	"produces": [ "{{encoding}}" ],
+	"consumes": [ "{{encoding}}" ],
+	"paths": {
+		{{ h.obj_crud(objects,'destination') }},
+		{{ h.obj_crud(objects,'dialpeer') }},
+		{{ h.obj_crud(objects,'dialpeer_next_rate') }},
+		{{ h.obj_crud(objects,'rateplan') }},
+		{{ h.obj_crud(objects,'routing_group') }}
+	},
+	"definitions": { {{ h.definitions(objects) }}
+	}
+}

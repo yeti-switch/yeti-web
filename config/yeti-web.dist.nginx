@@ -1,0 +1,197 @@
+upstream ts {
+        server 127.0.0.1:80;
+}
+upstream ds {
+        server 127.0.0.1:80;
+}
+
+upstream yeti-unicorn {
+        server unix:/run/yeti/yeti-unicorn.sock;
+}
+
+#server {
+#        listen 80;
+#        server_name localhost;
+#        root /home/yeti-web;
+#        access_log /var/log/nginx/yeti-web.access.log;
+#        location / {
+#                rewrite ^/(.*) https://localhost$request_uri? permanent;
+#        }
+#}
+
+server {
+	listen 127.0.0.1:6666;
+	server_name _;
+
+	proxy_redirect off;
+	proxy_set_header Host $host;
+	proxy_set_header X-Proxy-Port $proxy_port;
+	proxy_set_header X-Real-IP $remote_addr;
+	proxy_set_header X-Forwarded-For $remote_addr;
+	proxy_set_header HTTP_CLIENT_IP $remote_addr;
+	proxy_set_header HTTP_X_FORWARDED_FOR $remote_addr;
+	client_max_body_size        100m;
+	client_body_buffer_size     128k;
+	proxy_connect_timeout       100;
+	proxy_send_timeout          20000;
+	proxy_read_timeout          20000;
+	proxy_buffer_size           32k;
+	proxy_buffers               8 32k;
+	proxy_busy_buffers_size     64k;
+	proxy_temp_file_write_size  640k;
+
+	allow 127.0.0.1;
+	deny all;
+
+	location /api/rest/system/jobs{
+        	allow 127.0.0.1;
+	    	deny all;
+		proxy_pass  http://yeti-unicorn;
+	}
+	
+	location /api/rest/system/{
+ 		allow 127.0.0.1;
+	       	deny all;
+		proxy_pass  http://yeti-unicorn;
+	}
+
+	location /api/rest/private/ {
+		allow 127.0.0.1;
+		deny all;
+		proxy_pass  http://yeti-unicorn;
+
+		if ($request_method = 'OPTIONS') {
+			add_header 'Access-Control-Allow-Origin' '*';
+			add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, api_key, Authorization';
+			add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, PUT, PATCH, OPTIONS';
+			add_header 'Access-Control-Max-Age' 1728000;
+			add_header 'Content-Type' 'text/plain charset=UTF-8';
+			add_header 'Content-Length' 0;
+			return 204;
+		}
+		add_header 'Access-Control-Allow-Origin' '*' always;
+		add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, api_key, Authorization' always;
+		add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, PUT, PATCH, OPTIONS' always;
+		add_header 'Access-Control-Allow-Credentials' 'true' always;
+
+        }
+
+}
+
+
+server {
+#       listen 443;
+        listen 80;
+        server_name _;
+
+#        ssl on;
+#        ssl_certificate /etc/nginx/ssl/localhost.crt;
+#        ssl_certificate_key /etc/nginx/ssl/localhost.key;
+#        ssl_session_timeout 50m;
+#        ssl_session_cache builtin:1000;
+#        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;# SSLv3;
+#        ssl_ciphers  ECDHE-RSA-AES256-SHA384:AES256-SHA256:RC4:HIGH:!MD5:!aNULL:!eNULL:!NULL:!DH:!EDH:!AESGCM;
+#        add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+#        ssl_prefer_server_ciphers   on;
+
+
+        access_log /var/log/nginx/yeti-web.access.log;
+
+        location ~* /\.ht {
+                deny  all;
+        }
+        location ~ /.svn {
+                deny all;
+        }
+        location ~ /.git {
+                deny all;
+        }
+        location /favicon.ico {
+                deny all;
+        }
+        location /assets {
+                root /home/yeti-web/public;
+                expires 5h;
+        }
+	location /swagger {
+                expires 5h;
+	}
+        location /images {
+                root /home/yeti-web/public;
+                expires 5h;
+        }
+        root /home/yeti-web/public;
+	
+	    location /api/{
+		        deny all;
+        }
+
+
+        location / {
+                proxy_pass  http://yeti-unicorn;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Proxy-Port $proxy_port;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header HTTP_CLIENT_IP $remote_addr;
+                proxy_set_header HTTP_X_FORWARDED_FOR $remote_addr;
+                client_max_body_size        100m;
+                client_body_buffer_size     128k;
+                proxy_connect_timeout       100;
+                proxy_send_timeout          20000;
+                proxy_read_timeout          20000;
+                proxy_buffer_size           32k;
+                proxy_buffers               8 32k;
+                proxy_busy_buffers_size     64k;
+                proxy_temp_file_write_size  640k;
+        }
+
+        location ~ ^/dump/(.*)$ {
+                internal;
+                set $filename $1;
+                proxy_hide_header Content-Disposition;
+                add_header Content-Disposition 'attachment; filename="$filename"';
+
+                proxy_pass http://ts;
+                proxy_next_upstream http_404;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Proxy-Port $proxy_port;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header HTTP_CLIENT_IP $remote_addr;
+                proxy_set_header HTTP_X_FORWARDED_FOR $remote_addr;
+                client_max_body_size        100m;
+                client_body_buffer_size     128k;
+                proxy_connect_timeout       100;
+                proxy_send_timeout          20000;
+                proxy_read_timeout          20000;
+                proxy_buffer_size           32k;
+                proxy_buffers               8 32k;
+                proxy_busy_buffers_size     64k;
+                proxy_temp_file_write_size  640k;
+        }
+
+        location /tmexport/ {
+                proxy_pass http://ds;
+                proxy_next_upstream http_404;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Proxy-Port $proxy_port;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header HTTP_CLIENT_IP $remote_addr;
+                proxy_set_header HTTP_X_FORWARDED_FOR $remote_addr;
+                client_max_body_size        100m;
+                client_body_buffer_size     128k;
+                proxy_connect_timeout       100;
+                proxy_send_timeout          20000;
+                proxy_read_timeout          20000;
+                proxy_buffer_size           32k;
+                proxy_buffers               8 32k;
+                proxy_busy_buffers_size     64k;
+                proxy_temp_file_write_size  640k;
+        }
+}
+

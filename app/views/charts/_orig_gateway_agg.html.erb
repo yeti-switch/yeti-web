@@ -1,0 +1,62 @@
+<!-- gateway  -->
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("div.tabs a[href='#origination-chart']").on("click", function () {
+
+            $.getJSON("/remote_stats/<%=params[:id]%>/aggregated_orig_gateway.json", function (json) {
+
+                var chart;
+                var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+                nv.addGraph(function () {
+
+                    chart = nv.models.lineChart()
+                            .useInteractiveGuideline(true)
+                            .options({
+                                useVoronoi: false
+                            })
+                            .x(function (d) {
+                               return  formatter.parse(d.x); //d[0];
+                            });
+
+                    chart.xAxis
+                            .axisLabel("Time (h)")
+                            .tickFormat(function (d) {
+                                return d3.time.format('%b %d %H:00')(new Date(d));
+
+
+                            });
+//                                .tickFormat(function (d) {
+//                                    return d3.time.format('%b %d %H:00')(new Date(d))
+//                                });
+                    chart.yAxis
+                            .axisLabel('Calls count')
+                            .tickFormat(d3.format('f'))
+                    ;
+
+
+                    d3.select('#agg-orig-gw-chart')
+                            .datum(json)
+                            .call(chart);
+                    jQuery("#agg-chart-placeholder-orig-gw").removeClass("chart-placeholder");
+                    nv.utils.windowResize(chart.update);
+                    return chart;
+                });
+
+            });
+
+        });
+
+
+    });
+
+</script>
+
+
+<div id="agg-chart-placeholder-orig-gw" class="chart-placeholder  chart-container">
+  <svg id="agg-orig-gw-chart" class="stat-chart"></svg>
+</div>
+
+

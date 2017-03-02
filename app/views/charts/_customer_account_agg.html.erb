@@ -1,0 +1,61 @@
+<!-- account  -->
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("div.tabs a[href='#active-calls-charts']").on("click", function () {
+
+
+            $.getJSON("/remote_stats/<%=params[:id]%>/aggregated_customer_account.json", function (json) {
+
+                var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+                var chart;
+
+                nv.addGraph(function () {
+
+                    chart = nv.models.lineChart()
+                            .x(function (d) {
+                               return formatter.parse(d.x);
+                             })
+                            .useInteractiveGuideline(true)
+                            .options({
+                                useVoronoi: false
+                            });
+                    chart.xAxis
+                            .axisLabel("Time (h)")
+                            .tickFormat(function (d) {
+                                return d3.time.format('%b %d %H:00')(new Date(d));
+
+
+                            });
+//                                .tickFormat(function (d) {
+//                                    return d3.time.format('%b %d %H:00')(new Date(d))
+//                                });
+                    chart.yAxis
+                            .axisLabel('Calls count')
+                            .tickFormat(d3.format('d'))
+                    ;
+
+
+                    d3.select('#agg-customer-account-chart')
+                            .datum(json)
+                            .call(chart);
+                    jQuery("#agg-chart-placeholder-customer-account").removeClass("chart-placeholder");
+                    nv.utils.windowResize(chart.update);
+                    return chart;
+                });
+
+            });
+
+        });
+
+
+    });
+
+</script>
+
+<div id="agg-chart-placeholder-customer-account" class="chart-placeholder  chart-container">
+  <svg id="agg-customer-account-chart" class="stat-chart"></svg>
+</div>
+

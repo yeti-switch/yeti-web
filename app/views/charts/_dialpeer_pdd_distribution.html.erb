@@ -1,0 +1,40 @@
+<!-- account  -->
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("div.tabs a[href='#termination-chart']").on("click", function () {
+
+            $.getJSON("/remote_stats/<%=params[:id]%>/dialpeer_pdd_distribution.json", function (json) {
+                var chart;
+                nv.addGraph(function () {
+                    chart = nv.models.discreteBarChart()
+                            .color([d3.rgb(31,119,180)]); // default color
+
+                    chart.xAxis
+                            .axisLabel("PDD (seconds)")
+                            .tickFormat(d3.format("d"));
+
+                    chart.yAxis
+                            .axisLabel("Count")
+                            .tickFormat(d3.format("d"));
+
+                    d3.select("#dialpeer-pdd-chart")
+                            .datum(json)
+                            .call(chart);
+                    jQuery("#chart-placeholder-account").removeClass("chart-placeholder");
+                    nv.utils.windowResize(chart.update);
+
+                });
+            });
+
+
+        });
+
+    });
+
+</script>
+<div id="chart-placeholder-account" class="chart-placeholder  chart-container">
+  <svg id="dialpeer-pdd-chart" class="stat-chart"></svg>
+</div>

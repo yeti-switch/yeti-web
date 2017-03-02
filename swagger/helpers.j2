@@ -1,0 +1,255 @@
+{% macro index_get(objs,objname,objtype) -%}
+			"get": {
+				{% if objs[objtype].parent %}
+				"tags": [ "{{objs[objtype].parent | capitalize}}s" ],
+				{% else %}
+				"tags": [ "{{objtype}}s" ],
+				{% endif %}
+				"summary": "index",
+				"description": "get {{objname}}s",
+				"parameters": [
+					{% if objs[objtype].parent %}
+					{
+						"in": "path",
+						"name": "{{objs[objtype].parent}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{% endif %}
+					{
+						"in": "query",
+						"name": "per_page",
+						"type": "integer",
+						"description": "pagination limit"
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"type": "integer",
+						"description": "pagination offset in per_page units"
+					},
+					{
+						"in": "query",
+						"name": "order",
+						"type": "string",
+						"description": "sorting by certain field (asc/desc). e.g: id_desc"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "array of {{objname}}s",
+						"schema": { "$ref": "#/definitions/{{objtype}}s" }
+					},
+					"404" : { "description" : "not found" },
+					"500" : { "description" : "server error" }
+				}
+			}
+{%- endmacro %}
+
+{% macro obj_get(objs,objname,objtype) -%}
+			"get": {
+				{% if objs[objtype].parent %}
+				"tags": [ "{{objs[objtype].parent | capitalize}}s" ],
+				{% else %}
+				"tags": [ "{{objtype}}s" ],
+				{% endif %}
+				"summary": "get",
+				"description": "get {{objname}}",
+				"parameters": [
+					{% if objs[objtype].parent %}
+					{
+						"in": "path",
+						"name": "{{objs[objtype].parent}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{% endif %}
+					{
+						"in": "path",
+						"name": "{{objname}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "{{objname}}",
+						"schema": { "$ref": "#/definitions/{{objtype}}" }
+					},
+					"404" : { "description" : "not found" },
+					"500" : { "description" : "server error" }
+				}
+			}
+{%- endmacro %}
+
+{% macro obj_post(objs,objname,objtype) -%}
+			"post": {
+				{% if objs[objtype].parent %}
+				"tags": [ "{{objs[objtype].parent | capitalize}}s" ],
+				{% else %}
+				"tags": [ "{{objtype}}s" ],
+				{% endif %}
+				"summary": "create",
+				"description": "create {{objname}}",
+				"parameters": [
+					{% if objs[objtype].parent %}
+					{
+						"in": "path",
+						"name": "{{objs[objtype].parent}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{% endif %}
+					{
+						"in": "body",
+						"name": "body",
+						"required": true,
+						"schema": { "$ref": "#/definitions/{{objtype}}" }
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "{{objname}} created",
+						"schema": { "$ref": "#/definitions/{{objtype}}" }
+					}
+				}
+			}
+{%- endmacro %}
+
+{% macro obj_put(objs,objname,objtype) -%}
+			"put": {
+				{% if objs[objtype].parent %}
+				"tags": [ "{{objs[objtype].parent | capitalize}}s" ],
+				{% else %}
+				"tags": [ "{{objtype}}s" ],
+				{% endif %}
+				"summary": "update",
+				"description": "update {{objname}}",
+				"parameters": [
+					{% if objs[objtype].parent %}
+					{
+						"in": "path",
+						"name": "{{objs[objtype].parent}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{% endif %}
+					{
+						"in": "path",
+						"name": "{{objname}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"required": true,
+						"schema": { "$ref": "#/definitions/{{objtype}}" }
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "{{objname}} created",
+						"schema": { "$ref": "#/definitions/{{objtype}}" }
+					}
+				}
+			}
+{%- endmacro %}
+
+{% macro obj_delete(objs,objname,objtype) -%}
+			"delete": {
+				{% if objs[objtype].parent %}
+				"tags": [ "{{objs[objtype].parent | capitalize}}s" ],
+				{% else %}
+				"tags": [ "{{objtype}}s" ],
+				{% endif %}
+				"summary": "delete",
+				"description": "delete {{objname}}",
+				"parameters": [
+					{% if objs[objtype].parent %}
+					{
+						"in": "path",
+						"name": "{{objs[objtype].parent}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{% endif %}
+					{
+						"in": "path",
+						"name": "{{objname}}_id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"204" : { "description": "{{objname}} deleted" },
+					"404" : { "description" : "not found" },
+					"500" : { "description" : "server error" }
+				}
+			}
+{%- endmacro %}
+
+{% macro obj_crud(objs,name) -%}
+		{%- set objtype = name | capitalize -%}
+		{% if objs[objtype].parent %}
+		"/{{ objs[objtype].parent }}s/{{ '{' + objs[objtype].parent + '_id}' }}/{{name}}s": {
+		{% else %}
+		"/{{name}}s": {
+		{% endif %}
+			{{ index_get(objs,name,objtype) }},
+			{{ obj_post(objs,name,objtype) }}
+		},
+		{% if objs[objtype].parent %}
+		"/{{ objs[objtype].parent }}s/{{ '{' + objs[objtype].parent + '_id}' }}/{{name}}s/{{ '{' + name + '_id}' }}": {
+		{% else %}
+		"/{{name}}s/{{ '{' + name + '_id}' }}": {
+		{% endif %}
+			{{ obj_get(objs,name,objtype) }},
+			{{ obj_put(objs,name,objtype) }},
+			{{ obj_delete(objs,name,objtype) }}
+		}
+{%- endmacro %}
+
+{% macro definitions(objs) -%}
+{% for obj,data in objs.iteritems() %}
+		"{{ obj }}": {
+			"required": [
+				{%- for f in data.fields if f.required %}
+				"{{ f.name }}"{% if not loop.last %},{% endif %}
+				{%- endfor %}
+			],
+			"properties": {
+				{%- for f in data.fields %}
+				"{{f.name}}": {
+					{% if f.default -%}
+					"default": {{ f.default }},
+					{% endif -%}
+					{% if f.format -%}
+					"format": "{{ f.format }}",
+					{% endif -%}
+					{% if f.desc -%}
+					"description": "{{ f.desc }}",
+					{% endif -%}
+					"type": "{{ f.type }}"
+				}{% if not loop.last %},{% endif %}
+				{%- endfor %}
+			}
+		}
+		{%- if data.plural %},
+		"{{ obj }}s": {
+			"type" : "array",
+			"items": {
+				"$ref": "#/definitions/{{ obj }}"
+			}
+		}
+		{%- endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+{%- endmacro %}

@@ -1,0 +1,20 @@
+<%=
+    Arbre::Context.new do
+      div :id => 'active_admin_content' do
+        div :class => 'blank_slate_container' do
+          div :class => 'blank_slate' do
+            h1 "404"
+            img :src => "/assets/logo.png"
+            h3 "NOT FOUND"
+            small do
+              a href: '/' do
+                'main page'
+              end
+            end
+          end
+        end
+      end
+    end.to_s
+%>
+
+

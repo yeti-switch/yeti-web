@@ -1,0 +1,9 @@
+#!/bin/bash
+
+services="yeti-web.service yeti-cdr-billing.service yeti-delayed-job.service"
+
+if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
+	deb-systemd-invoke stop ${services} >/dev/null
+fi
+
+exit 0

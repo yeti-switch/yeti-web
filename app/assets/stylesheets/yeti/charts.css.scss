@@ -1,0 +1,38 @@
+html {
+  body div#wrapper {
+
+    .stat-chart {
+      height: 400px;
+      position: relative;
+      width: 100%;
+
+    }
+    .chart-placeholder {
+      height: 400px;
+      margin: 1px auto;
+      width: 100%;
+      text-align: center;
+      background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
+    }
+
+    .loader {
+      background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
+      height: 70px;
+    }
+
+    svg {
+      display: block;
+    }
+
+  }
+  body.active_calls div#wrapper {
+
+    .chart-placeholder {
+      height: 300px;
+    }
+    .stat-chart {
+      height: 300px;
+    }
+  }
+
+}

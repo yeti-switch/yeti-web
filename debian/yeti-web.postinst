@@ -1,0 +1,51 @@
+#!/bin/bash
+
+user=yeti-web
+services="yeti-web.service yeti-cdr-billing.service yeti-delayed-job.service"
+
+case "$1" in 
+	configure)
+		#apply files permissions for new user
+		chown -R $user:$user /home/$user
+		#remove default nginx config
+		rm -f /etc/nginx/sites-enabled/default || true
+		
+		if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
+			deb-systemd-invoke reload nginx.service >/dev/null || true
+			deb-systemd-invoke restart rsyslog.service >/dev/null || true
+		fi
+
+		if [ -x /usr/bin/deb-systemd-helper ]; then
+			deb-systemd-helper unmask ${services} >/dev/null || true
+			for s in ${services}; do
+				if deb-systemd-helper --quiet was-enabled ${s}; then
+					deb-systemd-helper enable ${s} >/dev/null || true
+				else
+					deb-systemd-helper update-state ${s} >/dev/null || true
+				fi
+			done
+		fi
+
+		if [ -d /run/systemd/system ]; then
+			systemctl --system daemon-reload >/dev/null || true
+			#if [ -x /usr/bin/deb-systemd-invoke ]; then
+			#	deb-systemd-invoke start ${services} >/dev/null || true
+			#fi
+		fi
+		
+		#remove old init scripts
+		rm -f /etc/init.d/yeti-cdr-billing /etc/init.d/yeti-web /etc/init.d/yeti-delayed-job || true
+
+	;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+		exit 0
+	;;
+	*)
+		echo "postinst called with unknown argument \$1'" >&2
+		exit 1
+    ;;
+esac
+
+. /usr/share/debconf/confmodule
+
+exit 0

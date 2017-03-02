@@ -1,0 +1,19 @@
+div.toggle.panel {
+  h3 {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .panel_contents {
+    display: none;
+  }
+}
+
+div.toggle.panel.on {
+  .panel_contents {
+     display: block;
+   }
+}
+
+

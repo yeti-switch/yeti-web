@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+extra_services=yeti-cdr-billing yeti-delayed-job
+
+%:
+	dh $@
+
+override_dh_installinit:
+	for s in ${extra_services}; do dh_installinit --name=$$s; done
+	dh_installinit
+
+.PHONY: override_dh_strip
+override_dh_strip:

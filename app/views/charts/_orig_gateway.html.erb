@@ -1,0 +1,52 @@
+<!-- gateway  -->
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("div.tabs a[href='#origination-chart']").on("click", function () {
+
+                $.getJSON("/remote_stats/<%=params[:id]%>/orig_gateway.json", function (json) {
+                    var chart;
+                    var formatter = d3.time.format("%Y-%m-%d %H:%M:%S");
+                    nv.addGraph(function () {
+                        chart = nv.models.lineChart()
+                                .options({
+                                    transitionDuration: 300,
+                                    useInteractiveGuideline: true
+                                })
+                                .x(function (d) {
+                                       return  formatter.parse(d.x); //d[0];
+                                   });
+
+
+                        chart.xAxis
+                                .axisLabel("Time")
+                                .tickFormat(function (d) {
+                                          return d3.time.format('%X')(new Date(d));
+                               });
+//                                .tickFormat(function (d) {
+//                                    return d3.time.format.utc('%X')(new Date(d))
+//                                });
+
+                        chart.yAxis
+                                .axisLabel('Active Calls')
+                                .tickFormat(d3.format('d'));
+
+                        d3.select('#orig-gw-chart')
+                                .datum(json)
+                                .call(chart);
+                        jQuery("#chart-placeholder-orig-gw").removeClass("chart-placeholder");
+                        nv.utils.windowResize(chart.update);
+
+                        return chart;
+                    });
+                });
+
+        });
+    });
+
+</script>
+<div id="chart-placeholder-orig-gw" class="chart-placeholder  chart-container">
+  <svg id="orig-gw-chart" class="stat-chart"></svg>
+</div>

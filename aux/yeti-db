@@ -1,0 +1,236 @@
+#!/usr/bin/env python
+
+import psycopg2, psycopg2.extras, sys, os, re, yaml
+from glob import glob
+from subprocess import Popen, PIPE, STDOUT
+
+YETI_DB_PATCH_PATH = '/home/yeti-web/sql'
+YETI_DB_CFG_PATH = '/home/yeti-web/config/database.yml'
+
+def confirm(what):
+	print what
+
+	yes_ans = ["Y","y"]
+	allowed_ans = yes_ans + [ "N","n","" ]
+
+	while True:
+		ans = raw_input("are you sure [y/N] ")
+		if ans not in allowed_ans:
+			print "unexpected input. choose between suggested answers"
+			continue
+		break
+
+	if ans not in yes_ans:
+		raise SystemExit
+
+class dbh:
+	patches_path=''
+	patches=dict()
+	cfg=dict()
+	last_version=0
+	env_set=''
+
+	def get_db_version(self):
+		cfg = self.cfg
+		c = psycopg2.connect('host=%s port=%s dbname=%s user=%s password=%s' % (cfg['host'],cfg['port'],cfg['database'],cfg['username'],cfg['password']))
+		cr = c.cursor(cursor_factory=psycopg2.extras.DictCursor)
+		cr.execute('select number from sys.version order by apply_date desc limit 1')
+		r = cr.fetchone()
+		return r[0]
+
+	def exec_sql_file(self,path):
+		psql_cmd = "psql --set ON_ERROR_STOP= -f {}".format(path)
+
+		print "apply {}...".format(path),
+		sys.stdout.flush()
+
+		p = Popen(self.env_set+psql_cmd, stdout=None, stderr=PIPE, shell=True)
+		ret = p.wait()
+
+		if ret!=0:
+			print "fail {}".format(ret)
+			print p.stderr.read()
+			return False
+		else:
+			print "ok"
+		return True
+
+
+	def load_cfg(self,section):
+
+		if not os.path.isfile(YETI_DB_CFG_PATH):
+			raise StandardError("no config file. check path at: {}".format(YETI_DB_CFG_PATH))
+
+		with open(YETI_DB_CFG_PATH) as f:
+			c = yaml.load(f)
+			self.cfg = c[section]
+
+		self.set_pg_env()
+
+	def set_pg_env(self):
+		cfg = self.cfg
+		pg_env = {
+			'PGHOST': cfg['host'],
+			'PGPORT': cfg['port'],
+			'PGDATABASE': cfg['database'],
+			'PGUSER': cfg['username'],
+			'PGPASSWORD': cfg['password'],
+		}
+		for k, v in pg_env.iteritems():
+			self.env_set+='export {}={}; '.format(k,v)
+
+	
+	def load_patches_info(self):
+		global patches, patches_path, last_version
+		for path in glob(self.patches_path+'/*.sql'):
+			f = os.path.splitext(os.path.basename(path))[0]
+			# patch file format is:
+			#	srcver_dstver.sql - deprecated
+			#   srcver_dstver_schema.sql
+			schema = None
+			v = re.split('_',f)
+			if len(v) == 3 :
+				schema = v[2] if re.match(r'switch[0-9]{1,2}$', v[2]) else None
+			elif len(v) != 2:
+				continue
+			self.patches[int(v[0])]= { 'dst': int(v[1]), 'path': path , 'schema': schema}
+			if v[1] > self.last_version:
+				self.last_version = v[1]
+
+	def usage(self):
+		print """
+usage: yeti-db [--cdr] action
+
+--cdr - switch to work with CDR database
+
+possible actions:
+
+cfg	
+	show destination db config
+
+version
+	show current database version
+
+show [version]
+	show available patch for version
+	if version not specified will be used current database version
+
+apply
+	apply one patch
+
+apply_all
+	apply sequence of patches from current to last possible version
+
+init
+	init database
+	"""
+
+	def __init__(self,argv):
+		nargs = len(argv)
+
+		if nargs  < 2:
+			self.usage()
+			raise SystemExit
+
+		if nargs > 1 and argv[1]=='--cdr':
+			self.patches_path=YETI_DB_PATCH_PATH+'/cdr'
+			self.load_cfg('production_cdr')
+			argv.pop(1)
+		else:
+			self.patches_path=YETI_DB_PATCH_PATH+'/main'
+			self.load_cfg('production')
+
+		self.action = argv[1]
+		self.version = argv[2] if self.action=='show' and nargs > 2 else None
+			
+	def process(self):
+		cfg = self.cfg
+
+		if self.action=='cfg':
+			print "choosen database is:\n\t{}@{}:{}/{}".format(cfg['username'],cfg['host'],cfg['port'],cfg['database'])
+			
+		elif self.action=='version':
+			v = self.get_db_version()
+			print "current database version is: {}".format(v)
+
+		elif self.action=='show':
+			self.load_patches_info()
+			v = self.version if self.version is not None else self.get_db_version()
+			if int(v) not in self.patches.keys():
+				print "no patch for version {}".format(v)
+				raise SystemExit
+			p =  self.patches[int(v)]
+			print "patch for version {} is {}".format(v,p['path'])
+
+		elif self.action=='apply':
+			self.load_patches_info()
+			v = self.get_db_version()
+			print "current database version is: {}".format(v)
+			if v not in self.patches.keys():
+				print "no patch for current version"	
+				raise SystemExit
+			p = self.patches[v]
+			confirm("going to apply patch for version {} to {} file '{}'".format(v,p['dst'],p['path']))
+			fn = p['path']
+			self.exec_sql_file(fn)
+			if p['schema']:
+				print("WARNING! You must switch your switches to new schema '{}' and restart it.".format(p['schema']))
+		elif self.action=='apply_all':
+			self.load_patches_info()
+			v = self.get_db_version()
+			print "current database version is: {}".format(v)
+
+			# compute sequence of patches to last possible version
+			seq = list()
+			last_version = v
+			while True:
+				if v not in self.patches.keys():
+					break
+				p = self.patches[v]
+				if v==p['dst']: #avoid infinite loop
+					print "wrong patch name '{}'. fix patches directory content".format(p['path'])
+					raise SystemExit
+
+				seq.append(p)
+				v = p['dst']
+
+			if not seq:
+				print "no patches sequence for this version"
+				raise SystemExit
+
+			print "going to apply sequence of patches: "
+			for p in seq:
+				print "\t{}".format(p['path'])
+			confirm("this will update database to version {}".format(v))
+			latest_schema = None
+			for p in seq:
+				if not self.exec_sql_file(p['path']):
+					print "ERROR: sql error during sequence processing. exit"
+					print "achieved database version is: {}".format(self.get_db_version())
+					raise SystemExit
+				v = self.get_db_version()
+				if p['dst'] != v:
+					print "ERROR: patch was successfully applied but resulting database version differ from expected.\n\t(expected: {}, got: {})\nexit".format(p['dst'],v)
+					raise SystemExit
+				print "patch was applied. new database version is: {}".format(v)
+				if p['schema']:
+					print("WARNING! You must switch your switches to new schema '{}' and restart it.".format(p['schema']))
+					latest_schema = p['schema']
+			print "all patches were successfully applied"
+			if latest_schema:
+				print("WARNING! You must switch your switches to LATEST SCHEMA '{}' and restart it.".format(latest_schema))
+		elif self.action=='init':
+			confirm("this will try run script to init database")
+			self.exec_sql_file(self.patches_path+'/init.sql')
+		else:
+			self.usage()
+
+def main(argv):
+	try:
+		dbh(argv).process()
+	except StandardError as e:
+		print e
+		pass
+
+if __name__ == "__main__":
+	main(sys.argv)
