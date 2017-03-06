@@ -144,6 +144,9 @@ class Gateway < Yeti::ActiveRecord
   validates :transit_headers_from_origination, :transit_headers_from_termination,
             format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: "Enter headers separated by comma. Header name can contain letters, * and -" }
 
+  validate :vendor_owners_the_gateway_group
+  validate :vendor_can_be_changed
+
   include Yeti::ResourceStatus
 
 
@@ -197,6 +200,18 @@ class Gateway < Yeti::ActiveRecord
       self.locked=false
       self.save
       Notification::Alert.fire_unlock(self)
+    end
+  end
+
+  protected
+
+  def vendor_owners_the_gateway_group
+    self.errors.add(:gateway_group, "must be owned by selected vendor") unless self.gateway_group_id.nil? || (self.contractor_id && self.contractor_id == self.gateway_group.vendor_id)
+  end
+
+  def vendor_can_be_changed
+    if contractor_id_changed?
+      self.errors.add(:contractor, "can't be changed because Gateway belongs to dialpeers") if dialpeers.any?
     end
   end
 

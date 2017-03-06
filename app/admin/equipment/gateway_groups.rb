@@ -63,10 +63,11 @@ ActiveAdmin.register GatewayGroup do
   end
 
   form do |f|
-    f.semantic_errors # show errors on :base by default
+    #f.semantic_errors # show errors on :base by default
+    f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
-      f.input :vendor, input_html: {class: 'chosen'}
+      f.input :vendor, input_html: {class: 'chosen'}, collection: Contractor.vendors
       f.input :prefer_same_pop
     end
     f.actions

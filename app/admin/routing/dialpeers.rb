@@ -186,7 +186,7 @@ ActiveAdmin.register Dialpeer do
       f.input :enabled
       f.input :routing_group, input_html: {class: 'chosen'}
       f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
-      f.input :vendor,  collection: Contractor.where(vendor: true) ,
+      f.input :vendor,  collection: Contractor.vendors,
               input_html: {
                   class: 'chosen',
                   onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :dialpeer_account_id) +

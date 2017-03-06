@@ -96,13 +96,13 @@ ActiveAdmin.register Gateway do
     column :enabled
     column :locked
 
-    column :gateway_group
-    column :priority
-    column :pop
-
     column :contractor do |c|
       auto_link(c.contractor, c.contractor.decorated_display_name)
     end
+
+    column :gateway_group
+    column :priority
+    column :pop
 
     column :host, sortable: 'host' do |gw|
       "#{gw.host}:#{gw.port}".chomp(":")
@@ -250,11 +250,15 @@ ActiveAdmin.register Gateway do
           f.input :name
           f.input :external_id
           f.input :enabled
+          f.input :contractor,
+                  input_html: {
+                      class: 'chosen',
+                      onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :gateway_gateway_group_id)
+                  }
           f.input :gateway_group, as: :select, include_blank: 'NONE', input_html: {class: 'chosen'}
           f.input :priority
           f.input :pop, input_html: {class: 'chosen'}
 
-          f.input :contractor, input_html: {class: 'chosen'}
           f.input :allow_origination
           f.input :allow_termination
 
@@ -391,16 +395,17 @@ ActiveAdmin.register Gateway do
     tabs do
       tab :general do
         attributes_table_for s do
+          row :id
           row :name
           row :external_id
           row :enabled
           row :locked
-          row :gateway_group
-          row :priority
-          row :pop
           row :contractor do
             auto_link(s.contractor, s.contractor.decorated_display_name)
           end
+          row :gateway_group
+          row :priority
+          row :pop
           row :allow_origination
           row :allow_termination
           row :origination_capacity

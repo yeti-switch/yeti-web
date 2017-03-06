@@ -71,6 +71,8 @@ class Dialpeer < Yeti::ActiveRecord
   validate :contractor_is_vendor
   validate :vendor_owners_the_account
   validate :gateway_presence
+  validate :vendor_owners_the_gateway
+  validate :vendor_owners_the_gateway_group
 
   attr_accessor :batch_prefix
 
@@ -161,6 +163,14 @@ class Dialpeer < Yeti::ActiveRecord
 
   def vendor_owners_the_account
     self.errors.add(:account, "must be owned by selected vendor") unless self.vendor_id && self.vendor_id == self.account.contractor_id
+  end
+
+  def vendor_owners_the_gateway
+    self.errors.add(:gateway, "must be owned by selected vendor") unless self.gateway_id.nil? || (self.vendor_id && self.vendor_id == self.gateway.contractor_id)
+  end
+
+  def vendor_owners_the_gateway_group
+    self.errors.add(:gateway_group, "must be owned by selected vendor") unless self.gateway_group_id.nil? || (self.vendor_id && self.gateway_group_id && self.vendor_id == self.gateway_group.vendor_id)
   end
 
   private
