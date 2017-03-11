@@ -18,13 +18,16 @@
 #  force_expire     :boolean          default(FALSE), not null
 #
 
-class Equipment::Registration < ActiveRecord::Base
+class Equipment::Registration < Yeti::ActiveRecord
 
   validates_uniqueness_of :name, allow_blank: false
-  validates_presence_of :name, :domain, :username
+  validates_presence_of :name, :domain, :username, :retry_delay
 
   #validates_format_of :contact, :with => /\Asip:(.*)\z/
   validates :contact, :format => URI::regexp(%w(sip))
+
+  validates_numericality_of :retry_delay, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
+  validates_numericality_of :max_attempts, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   belongs_to :pop
   belongs_to :node

@@ -21,14 +21,20 @@ ActiveAdmin.register Equipment::Registration do
                  :proxy,
                  :contact,
                  :expire,
-                 :force_expire
+                 :force_expire,
+                 :retry_delay,
+                 :max_attempts
 
   acts_as_import resource_class: Importing::Registration
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
 
-  permit_params :name, :enabled, :pop_id, :node_id, :domain, :username, :display_username, :auth_user, :proxy, :contact, :auth_password, :expire, :force_expire
+  permit_params :name, :enabled, :pop_id, :node_id, :domain, :username, :display_username,
+                :auth_user, :proxy, :contact,
+                :auth_password,
+                :expire, :force_expire,
+                :retry_delay, :max_attempts
 
   index do
     selectable_column
@@ -47,6 +53,8 @@ ActiveAdmin.register Equipment::Registration do
     column :contact
     column :expire
     column :force_expire
+    column :retry_delay
+    column :max_attempts
   end
 
   filter :id
@@ -75,6 +83,8 @@ ActiveAdmin.register Equipment::Registration do
       f.input :contact, hint: I18n.t('hints.registrations.contact')
       f.input :expire
       f.input :force_expire
+      f.input :retry_delay
+      f.input :max_attempts
     end
     f.actions
   end
@@ -94,6 +104,8 @@ ActiveAdmin.register Equipment::Registration do
       row :contact
       row :expire
       row :force_expire
+      row :retry_delay
+      row :max_attempts
     end
   end
 
