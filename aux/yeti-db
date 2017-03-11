@@ -199,7 +199,7 @@ actions:
 				print "no patch for current version"	
 				raise SystemExit
 			p = self.patches[v]
-			confirm("going to apply patch for version {} to {} file '{}'".format(v,p['dst'],p['path']))
+			self.confirm("going to apply patch for version {} to {} file '{}'".format(v,p['dst'],p['path']))
 			fn = p['path']
 			self.exec_sql_file(fn)
 			if p['schema']:
@@ -231,7 +231,7 @@ actions:
 			print "going to apply sequence of patches: "
 			for p in seq:
 				print "\t{}".format(p['path'])
-			confirm("going to update database to version {}".format(v))
+			self.confirm("going to update database to version {}".format(v))
 			latest_schema = None
 			for p in seq:
 				if not self.exec_sql_file(p['path']):
@@ -251,7 +251,7 @@ actions:
 				print("WARNING! do not forget to reconfigure your db-related services to the new schema '{}' and restart them.".format(latest_schema))
 
 		elif self.action=='init':
-			confirm("going to execute database initialization script")
+			self.confirm("going to execute database initialization script")
 			self.exec_sql_file(self.patches_path+'/init.sql')
 
 		else:
