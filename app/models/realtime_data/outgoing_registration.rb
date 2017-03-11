@@ -12,7 +12,16 @@ class RealtimeData::OutgoingRegistration  < YetiResource
       :contact,
       :proxy,
       :expires,
-      :node_id
+      :expires_left,
+      :node_id,
+      :last_error_code,
+      :last_error_initiator,
+      :last_error_reason,
+      :last_request_time,
+      :last_succ_reg_time,
+      :attempt,
+      :max_attempts,
+      :retry_delay
   ]
 
   attr_accessor *DYNAMIC_ATTRIBUTES
