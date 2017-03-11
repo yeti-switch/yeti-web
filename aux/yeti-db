@@ -7,22 +7,6 @@ from subprocess import Popen, PIPE, STDOUT
 YETI_DB_PATCH_PATH = '/home/yeti-web/sql'
 YETI_DB_CFG_PATH = '/home/yeti-web/config/database.yml'
 
-def confirm(what):
-	print what
-
-	yes_ans = ["Y","y"]
-	allowed_ans = yes_ans + [ "N","n","" ]
-
-	while True:
-		ans = raw_input("are you sure [y/N] ")
-		if ans not in allowed_ans:
-			print "unexpected input. choose between suggested answers"
-			continue
-		break
-
-	if ans not in yes_ans:
-		raise SystemExit
-
 class dbh:
 	patches_path=''
 	patches=dict()
@@ -31,6 +15,28 @@ class dbh:
 	env_set=''
 	cfg_path = YETI_DB_CFG_PATH
 	sql_dir = YETI_DB_PATCH_PATH
+	auto_confirm = False
+	confirm_prompt = "are you sure [y/N] "
+
+	def confirm(self, what):
+		if self.auto_confirm:
+			print what + "\n" + self.confirm_prompt + 'y (auto confirm)'
+			return
+
+		print what
+
+		yes_ans = ["Y","y"]
+		allowed_ans = yes_ans + [ "N","n","" ]
+
+		while True:
+			ans = raw_input(self.confirm_prompt)
+			if ans not in allowed_ans:
+				print "unexpected input. choose between suggested answers"
+				continue
+			break
+
+		if ans not in yes_ans:
+			raise SystemExit
 
 	def get_db_version(self):
 		cfg = self.cfg
@@ -106,6 +112,7 @@ usage: yeti-db [options] action
 options:
 
 --cdr, -c           - switch to work with CDR database
+--yes, -y           - answer yes for all questions
 --config file_path  - specify alternate config path
                       default: """ + YETI_DB_CFG_PATH + """
 --sql-dir dir_path  - specify durectory with sql patches
@@ -128,12 +135,14 @@ actions:
 			cdr = False
 			opts, args = getopt.getopt(
 				sys.argv[1:],
-				"ch",
-				["cdr", "help", "config=","sql-dir="])
+				"chy",
+				["cdr", "yes", "help", "config=","sql-dir="])
 			for o,v in opts:
 				if o in ("--help","-h"):
 					self.usage()
 					raise SystemExit
+				elif o in ("--yes","-y"):
+					self.auto_confirm = True
 				elif o in ("--cdr","-c"):
 					cdr = True
 				elif o=="--config":
