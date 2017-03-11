@@ -52,6 +52,8 @@ ActiveAdmin.register Importing::Registration do
     column :contact
     column :expire
     column :force_expire
+    column :retry_delay
+    column :max_attempts
   end
 
 end
