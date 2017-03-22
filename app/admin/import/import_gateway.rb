@@ -51,6 +51,7 @@ ActiveAdmin.register Importing::Gateway do
       end
     end
 
+    column :transport_protocol_name
     column :host, sortable: 'host' do |gw|
       "#{gw.host}:#{gw.port}".chomp(":")
     end
@@ -96,6 +97,7 @@ ActiveAdmin.register Importing::Gateway do
     column :auth_from_domain
 
     column :term_use_outbound_proxy
+    column :term_proxy_transport_protocol
     column :term_outbound_proxy
     column :term_force_outbound_proxy
     column :term_next_hop

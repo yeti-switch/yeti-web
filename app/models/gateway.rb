@@ -116,7 +116,9 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :dtmf_receive_mode, class_name: 'System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: 'System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
   belongs_to :radius_accounting_profile, class_name: Equipment::Radius::AccountingProfile, foreign_key: :radius_accounting_profile_id
-
+  belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+  belongs_to :term_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :term_proxy_transport_protocol_id
+  belongs_to :orig_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
 
   has_many :dialpeers, class_name: Dialpeer, dependent: :restrict_with_error
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :gateway_id, dependent: :nullify
@@ -140,6 +142,7 @@ class Gateway < Yeti::ActiveRecord
   validates_numericality_of :port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
 
   validates_numericality_of :fake_180_timer, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol
 
   validates :transit_headers_from_origination, :transit_headers_from_termination,
             format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: "Enter headers separated by comma. Header name can contain letters, * and -" }

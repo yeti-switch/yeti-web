@@ -133,6 +133,9 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
   belongs_to :lnp_database, class_name: Lnp::Database, foreign_key: :lnp_database_id
+  belongs_to :auth_orig_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :auth_orig_transport_protocol_id
+  belongs_to :sign_orig_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :sign_orig_transport_protocol_id
+  belongs_to :sign_term_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :sign_term_transport_protocol_id
 
   scope :success, -> { where success: true }
   scope :failure, -> { where success: false }

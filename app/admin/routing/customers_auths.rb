@@ -13,7 +13,8 @@ ActiveAdmin.register CustomersAuth do
   acts_as_batch_changeable [:enabled, :uri_domain, :x_yeti_auth, :ip, :src_prefix, :dst_prefix]
 
   acts_as_export :id, :enabled, :name,
-                 :ip,
+                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
+                 [:ip, proc {|row| row.raw_ip}],
                  [:pop_name, proc { |row| row.pop.try(:name) || "" }],
                  :src_prefix, :dst_prefix,
                  :uri_domain, :from_domain, :to_domain,
@@ -55,11 +56,12 @@ ActiveAdmin.register CustomersAuth do
                 :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
                 :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
                 :radius_accounting_profile_id,
-                :enable_audio_recording
+                :enable_audio_recording,
+                :transport_protocol_id
                 #, :enable_redirect, :redirect_method, :redirect_to
 
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_blacklist, :dst_blacklist,
-           :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, account: :contractor
+           :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
 
   # controller do
   #   def scoped_collection
@@ -102,6 +104,7 @@ ActiveAdmin.register CustomersAuth do
     actions
     column :name
     column :enabled
+    column :transport_protocol
     column :ip do |row|
       row.raw_ip
     end
@@ -173,6 +176,7 @@ ActiveAdmin.register CustomersAuth do
   filter :routing_plan, input_html: {class: 'chosen'}
   filter :dump_level
   filter :enable_audio_recording, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :transport_protocol
   filter :ip_covers, as: :string, input_html: {class: 'search_filter_string'}
   filter :pop, input_html: {class: 'chosen'}
   filter :src_prefix
@@ -223,6 +227,7 @@ ActiveAdmin.register CustomersAuth do
         end
 
         f.inputs "Match conditions" do
+          f.input :transport_protocol, as: :select, include_blank: "Any"
           f.input :ip
           f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
           f.input :src_prefix
@@ -298,6 +303,7 @@ ActiveAdmin.register CustomersAuth do
         end
         panel "Match conditions" do
           attributes_table_for s do
+            row :transport_protocol
             row :ip do
               s.raw_ip
             end

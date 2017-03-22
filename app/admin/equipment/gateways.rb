@@ -30,9 +30,11 @@ ActiveAdmin.register Gateway do
                  :orig_next_hop,
                  :orig_append_headers_req,
                  :orig_use_outbound_proxy, :orig_force_outbound_proxy,
+                 [:orig_proxy_transport_protocol_name, proc { |row| row.orig_proxy_transport_protocol.try(:name) }],
                  :orig_outbound_proxy,
                  :dialog_nat_handling, # :transparent_dialog_id,
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
+                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  :host, :port, :resolve_ruri,
                  [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) }],
                  :diversion_rewrite_rule, :diversion_rewrite_result,
@@ -40,7 +42,9 @@ ActiveAdmin.register Gateway do
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :auth_enabled, :auth_user, :auth_password, :auth_from_user, :auth_from_domain,
-                 :term_use_outbound_proxy, :term_force_outbound_proxy, :term_outbound_proxy,
+                 :term_use_outbound_proxy, :term_force_outbound_proxy,
+                 [:term_proxy_transport_protocol_name, proc { |row| row.term_proxy_transport_protocol.try(:name) }],
+                 :term_outbound_proxy,
                  :term_next_hop_for_replies, :term_next_hop,
                  [:term_disconnect_policy_name, proc { |row| row.term_disconnect_policy.try(:name) }],
                  :term_append_headers_req,
@@ -72,8 +76,11 @@ ActiveAdmin.register Gateway do
   includes :contractor, :gateway_group, :pop, :statistic, :diversion_policy,
            :session_refresh_method, :codec_group,
            :term_disconnect_policy, :orig_disconnect_policy,
-           :sdp_alines_filter_type, :sensor, :sensor_level, :dtmf_send_mode, :dtmf_receive_mode,
-           :radius_accounting_profile
+           :sdp_c_location, :sdp_alines_filter_type,
+           :sensor, :sensor_level,
+           :dtmf_send_mode, :dtmf_receive_mode,
+           :radius_accounting_profile,
+           :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol
 
   controller do
     def resource_params
@@ -104,6 +111,7 @@ ActiveAdmin.register Gateway do
     column :priority
     column :pop
 
+    column :transport_protocol
     column :host, sortable: 'host' do |gw|
       "#{gw.host}:#{gw.port}".chomp(":")
     end
@@ -157,6 +165,7 @@ ActiveAdmin.register Gateway do
     column :orig_append_headers_req
     column :orig_use_outbound_proxy
     column :orig_force_outbound_proxy
+    column :orig_proxy_transport_protocol
     column :orig_outbound_proxy
     column :transparent_dialog_id
     column :dialog_nat_handling
@@ -171,6 +180,7 @@ ActiveAdmin.register Gateway do
 
     column :term_use_outbound_proxy
     column :term_force_outbound_proxy
+    column :term_proxy_transport_protocol
     column :term_outbound_proxy
     column :term_next_hop
     column :term_next_hop_for_replies
@@ -228,6 +238,7 @@ ActiveAdmin.register Gateway do
   filter :gateway_group, input_html: {class: 'chosen'}
   filter :pop, input_html: {class: 'chosen'}
   filter :contractor, input_html: {class: 'chosen'}
+  filter :transport_protocol
   filter :host
   filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
   filter :allow_origination, as: :select, collection: [["Yes", true], ["No", false]]
@@ -255,7 +266,7 @@ ActiveAdmin.register Gateway do
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :gateway_gateway_group_id)
                   }
-          f.input :gateway_group, as: :select, include_blank: 'NONE', input_html: {class: 'chosen'}
+          f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
           f.input :priority
           f.input :pop, input_html: {class: 'chosen'}
 
@@ -304,12 +315,14 @@ ActiveAdmin.register Gateway do
           f.input :orig_append_headers_req
           f.input :orig_use_outbound_proxy
           f.input :orig_force_outbound_proxy
+          f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
           f.input :orig_outbound_proxy
           f.input :transparent_dialog_id
           f.input :dialog_nat_handling
           f.input :orig_disconnect_policy
         end
         f.inputs "Termination" do
+          f.input :transport_protocol, as: :select, include_blank: false
           f.input :host
           f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
           f.input :resolve_ruri
@@ -320,6 +333,7 @@ ActiveAdmin.register Gateway do
           f.input :auth_from_domain
           f.input :term_use_outbound_proxy
           f.input :term_force_outbound_proxy
+          f.input :term_proxy_transport_protocol, as: :select, include_blank: false
           f.input :term_outbound_proxy
           f.input :term_next_hop_for_replies
           f.input :term_next_hop
@@ -452,6 +466,7 @@ ActiveAdmin.register Gateway do
             row :orig_append_headers_req
             row :orig_use_outbound_proxy
             row :orig_force_outbound_proxy
+            row :orig_proxy_transport_protocol
             row :orig_outbound_proxy
             row :transparent_dialog_id
             row :dialog_nat_handling
@@ -460,6 +475,7 @@ ActiveAdmin.register Gateway do
         end
         panel "Termination" do
           attributes_table_for s do
+            row :transport_protocol
             row :host
             row :port
             row :resolve_ruri
@@ -470,6 +486,7 @@ ActiveAdmin.register Gateway do
             row :auth_from_domain
             row :term_use_outbound_proxy
             row :term_force_outbound_proxy
+            row :orig_proxy_transport_protocol
             row :term_outbound_proxy
             row :term_next_hop_for_replies
             row :term_next_hop

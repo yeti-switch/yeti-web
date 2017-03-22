@@ -27,6 +27,13 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :o_id
     column :name
     column :enabled
+    column :transport_protocol, sortable: :transport_protocol_name do |row|
+      if row.transport_protocol.blank?
+        row.transport_protocol_name
+      else
+        auto_link(row.transport_protocol, row.transport_protocol_name)
+      end
+    end
     column :ip
 
     column :pop, sortable: :pop_name do |row|

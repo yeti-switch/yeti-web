@@ -65,6 +65,8 @@ class Importing::CustomersAuth  < Importing::Base
     belongs_to :src_blacklist, class_name: '::Routing::Blacklist', foreign_key: :src_blacklist_id
     belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id
     belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
+    belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+
 
     self.import_attributes = [
         'enabled',
@@ -103,7 +105,8 @@ class Importing::CustomersAuth  < Importing::Base
         'src_number_radius_rewrite_result',
         'dst_number_radius_rewrite_rule',
         'dst_number_radius_rewrite_result',
-        'radius_accounting_profile_id'
+        'radius_accounting_profile_id',
+        'transport_protocol_id'
     ]
 
 
