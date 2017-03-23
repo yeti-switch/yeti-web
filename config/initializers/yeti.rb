@@ -1,6 +1,6 @@
 Delayed::Worker.destroy_failed_jobs = false
-
-Dir[File.join(Rails.root, "lib", "**", "*.rb")].each { |s| require s }
+Dir[File.join(Rails.root, "lib", "ext", "**", "*.rb")].each { |s| require s }
+Dir[File.join(Rails.root, "lib", "resource_dsl", "**", "*.rb")].each { |s| require s }
 
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsClone
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsStatus
