@@ -68,13 +68,13 @@ class Yeti::ActiveRecord < ActiveRecord::Base
     fetch_sp_val("SELECT pg_size_pretty(pg_database_size(current_database()))")
   end
 
-  DB_VER=db_version
-  ROUTING_SCHEMA="switch11"
+  DB_VER = db_version
+  ROUTING_SCHEMA = "switch11"
 
-  PG_MAX_SMALLINT=32767
-  PG_MIN_SMALLINT=-32768
+  PG_MAX_SMALLINT = 32767
+  PG_MIN_SMALLINT = -32768
 
-  L4_PORT_MIN=1
-  L4_PORT_MAX=65535
+  L4_PORT_MIN = 1
+  L4_PORT_MAX = 65535
 
 end
