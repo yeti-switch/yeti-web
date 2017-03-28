@@ -142,14 +142,16 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
 
-  member_action :debug, method: :get do
+  member_action :routing_simulation, method: :get do
 
     @cdr = Cdr::Cdr.find(params[:id])
-    redirect_to debug_call_path({debug_call: {
+    @proto =  @cdr.auth_orig_transport_protocol_id.nil? ? 1 : @cdr.auth_orig_transport_protocol_id #proto = UDP if no info in DB
+    redirect_to routing_simulation_path({routing_simulation: {
+                                    transport_protocol_id: @proto,
                                     remote_ip: @cdr.auth_orig_ip,
                                     remote_port: @cdr.auth_orig_port,
-                                    src_prefix: @cdr.src_prefix_in,
-                                    dst_prefix: @cdr.dst_prefix_in,
+                                    src_number: @cdr.src_prefix_in,
+                                    dst_number: @cdr.dst_prefix_in,
                                     pop_id: @cdr.pop_id,
                                     x_yeti_auth: @cdr.customer_auth.try!(:x_yeti_auth),
                                     uri_domain: @cdr.ruri_domain
@@ -157,8 +159,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
 
-  action_item :debug, only: :show do
-    link_to('Debug', debug_cdr_path(resource))
+  action_item :routing_simulation, only: :show do
+    link_to('Routing simulation', routing_simulation_cdr_path(resource))
   end
 
   action_item :log_level_trace, only: :show do
@@ -561,31 +563,32 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :orig_gw
 
 
-    column(:sign_orig_ip, sortable: 'sign_orig_ip') do |cdr|
-      if cdr.sign_term_transport_protocol_id.nil?
+    column('LegA remote socket', sortable: 'sign_orig_ip') do |cdr|
+      if cdr.sign_orig_transport_protocol_id.nil?
         "#{cdr.sign_orig_ip}:#{cdr.sign_orig_port}".chomp(":")
       else
-        "#{cdr.sign_term_transport_protocol}://#{cdr.sign_orig_ip}:#{cdr.sign_orig_port}".chomp(":")
+        "#{cdr.sign_orig_transport_protocol.name}://#{cdr.sign_orig_ip}:#{cdr.sign_orig_port}".chomp(":")
       end
     end
-    column(:sign_orig_local_ip, sortable: 'sign_orig_local_ip') do |cdr|
+    column('LegA local socket', sortable: 'sign_orig_local_ip') do |cdr|
+      "#{cdr.sign_orig_local_ip}:#{cdr.sign_orig_local_port}".chomp(":")
     end
-    column :auth_orig_ip do |cdr|
+    column('LegA originator address', sotrable: 'auth_orig_ip') do |cdr|
       if cdr.auth_orig_transport_protocol_id.nil?
         "#{cdr.auth_orig_ip}:#{cdr.auth_orig_port}".chomp(":")
       else
-        "#{cdr.auth_orig_transport_protocol}://#{cdr.auth_orig_ip}:#{cdr.auth_orig_port}".chomp(":")
+        "#{cdr.auth_orig_transport_protocol.name}://#{cdr.auth_orig_ip}:#{cdr.auth_orig_port}".chomp(":")
       end
     end
     column :term_gw
-    column(:sign_term_ip, sortable: :sign_term_ip) do |cdr|
+    column('LegB remote socket', sortable: :sign_term_ip) do |cdr|
       if cdr.sign_term_transport_protocol_id.nil?
         "#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(":")
       else
-        "#{cdr.sign_term_transport_protocol}://#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(":")
+        "#{cdr.sign_term_transport_protocol.name}://#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(":")
       end
     end
-    column(:sign_term_local_ip, sortable: 'sign_term_local_ip') do |cdr|
+    column('LegB local socket', sortable: 'sign_term_local_ip') do |cdr|
       "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(":")
     end
     column :routing_delay

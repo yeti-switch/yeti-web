@@ -20,8 +20,13 @@
 
 class Equipment::Registration < Yeti::ActiveRecord
 
+  belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+  belongs_to :proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :proxy_transport_protocol_id
+  belongs_to :pop
+  belongs_to :node
+
   validates_uniqueness_of :name, allow_blank: false
-  validates_presence_of :name, :domain, :username, :retry_delay
+  validates_presence_of :name, :domain, :username, :retry_delay, :transport_protocol, :proxy_transport_protocol
 
   #validates_format_of :contact, :with => /\Asip:(.*)\z/
   validates :contact, :format => URI::regexp(%w(sip))
@@ -29,8 +34,6 @@ class Equipment::Registration < Yeti::ActiveRecord
   validates_numericality_of :retry_delay, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
   validates_numericality_of :max_attempts, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
-  belongs_to :pop
-  belongs_to :node
 
   has_paper_trail class_name: 'AuditLogItem'
 

@@ -1,0 +1,19 @@
+<%= semantic_form_for dc, :url => '/routing_simulation', :method => :get do |form| %>
+    <%= form.semantic_errors *form.object.errors.keys %>
+    <%= form.inputs do %>
+        <%= form.input :transport_protocol_id, collection: Equipment::TransportProtocol.all, as: :select, include_blank: false %>
+        <%= form.input :remote_ip %>
+        <%= form.input :remote_port %>
+        <%= form.input :pop_id, collection: Pop.all, as: :select, include_blank: false %>
+        <%= form.input :src_number %>
+        <%= form.input :dst_number %>
+        <%= form.input :uri_domain %>
+        <%= form.input :x_yeti_auth %>
+    <% end %>
+
+    <%= form.submit :value => 'Simulate routing' %>
+<% end %>
+
+
+
+

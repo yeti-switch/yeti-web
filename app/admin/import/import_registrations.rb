@@ -13,10 +13,9 @@ ActiveAdmin.register Importing::Registration do
       return [] if request.get?
       [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
     end
-    def scoped_collection
-      super.includes(:pop, :node)
-    end
   end
+
+  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
 
   index do
     selectable_column
@@ -43,12 +42,27 @@ ActiveAdmin.register Importing::Registration do
       end
     end
 
+    column :transport_protocol, sortable: :transport_protocol_name do |row|
+      if row.transport_protocol.blank?
+        row.transport_protocol_name
+      else
+        auto_link(row.transport_protocol, row.transport_protocol_name)
+      end
+    end
+
     column :domain
     column :username
     column :display_username
     column :auth_user
     column :auth_password
     column :proxy
+    column :proxy_transport_protocol, sortable: :proxy_transport_protocol_name do |row|
+      if row.proxy_transport_protocol.blank?
+        row.proxy_transport_protocol_name
+      else
+        auto_link(row.proxy_transport_protocol, row.proxy_transport_protocol_name)
+      end
+    end
     column :contact
     column :expire
     column :force_expire

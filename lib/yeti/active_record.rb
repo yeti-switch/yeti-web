@@ -69,7 +69,7 @@ class Yeti::ActiveRecord < ActiveRecord::Base
   end
 
   DB_VER=db_version
-  ROUTING_SCHEMA="switch11"
+  ROUTING_SCHEMA="switch12"
 
   PG_MAX_SMALLINT=32767
   PG_MIN_SMALLINT=-32768

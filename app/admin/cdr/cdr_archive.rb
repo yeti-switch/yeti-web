@@ -539,7 +539,7 @@ ActiveAdmin.register Cdr::CdrArchive do
   member_action :debug, method: :get do
 
     @cdr = Cdr::CdrArchive.find(params[:id])
-    redirect_to debug_call_path({debug_call: {
+    redirect_to debug_call_path({routing_simulation: {
                                     remote_ip: @cdr.sign_orig_ip,
                                     remote_port: @cdr.sign_orig_port,
                                     src_prefix: @cdr.src_prefix_in,
