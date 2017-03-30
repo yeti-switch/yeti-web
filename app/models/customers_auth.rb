@@ -61,6 +61,7 @@ class CustomersAuth < Yeti::ActiveRecord
   belongs_to :src_blacklist, class_name: Routing::Blacklist, foreign_key: :src_blacklist_id
   belongs_to :radius_auth_profile, class_name: Equipment::Radius::AuthProfile, foreign_key: :radius_auth_profile_id
   belongs_to :radius_accounting_profile, class_name: Equipment::Radius::AccountingProfile, foreign_key: :radius_accounting_profile_id
+  belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -71,7 +72,6 @@ class CustomersAuth < Yeti::ActiveRecord
 
   validates_format_of :src_prefix, without: /\s/
   validates_format_of :dst_prefix, without: /\s/
-  validates_format_of :ip, with: /\A((0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\.){3}(0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})(\/([0-9]|[1-2][0-9]|3[0-2])|)\z/
   validates_uniqueness_of :name, allow_blank: :false
   validates_presence_of :name
 
@@ -82,6 +82,7 @@ class CustomersAuth < Yeti::ActiveRecord
 
   validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
+  validate :ip_is_valid
 
 
   scope :with_radius, -> { where("radius_auth_profile_id is not null") }
@@ -92,7 +93,7 @@ class CustomersAuth < Yeti::ActiveRecord
   has_pg_queue 'gateway-sync'
 
 
-  scope :ip_covers, lambda { |ip| where("ip>>=?", ip)   }
+  scope :ip_covers, lambda { |ip| where("ip>>=?", ip) }
 
   def display_name
     "#{self.name} | #{self.id}"
@@ -116,21 +117,26 @@ class CustomersAuth < Yeti::ActiveRecord
     b
   end
 
- # def pop_name
- #   pop.nil? ? "Any" : pop.name
- # end
+  # def pop_name
+  #   pop.nil? ? "Any" : pop.name
+  # end
 
-  def self.search_for_debug(src,dst)
+  def self.search_for_debug(src, dst)
     if src.blank?&&dst.blank?
       CustomersAuth.all.reorder(:name)
     elsif src.blank?
-      CustomersAuth.where("prefix_range(customers_auth.dst_prefix)@>prefix_range(?)",dst).reorder(:name)
+      CustomersAuth.where("prefix_range(customers_auth.dst_prefix)@>prefix_range(?)", dst).reorder(:name)
     elsif dst.blank?
-      CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?)",src).reorder(:name)
+      CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?)", src).reorder(:name)
     else
       CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?) AND
-  prefix_range(customers_auth.dst_prefix)@>prefix_range(?)",src,dst).reorder(:name)
+  prefix_range(customers_auth.dst_prefix)@>prefix_range(?)", src, dst).reorder(:name)
     end
+  end
+
+  #force update IP
+  def keys_for_partial_write
+    (changed + ['ip']).uniq
   end
 
   private
@@ -140,6 +146,16 @@ class CustomersAuth < Yeti::ActiveRecord
         :ip_covers
     ]
   end
+
+  protected
+  def ip_is_valid
+    begin
+      _tmp=IPAddr.new(raw_ip)
+    rescue IPAddr::Error => error
+      self.errors.add(:ip, "is not valid")
+    end
+  end
+
 
 end
 

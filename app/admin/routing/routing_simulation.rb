@@ -1,29 +1,23 @@
-ActiveAdmin.register_page "Debug Call" do
-  menu parent: "Routing", priority: 999, label: "Call Simulation"
+ActiveAdmin.register_page "Routing simulation" do
+  menu parent: "Routing", priority: 999, label: "Routing Simulation"
 
   content do
     begin
-      @dc = DebugCall.new(params[:debug_call])
-      @dc.save!
-
+      @dc = Routing::Simulation.new(params[:routing_simulation])
+      if !params[:routing_simulation].nil? and @dc.valid? #force object validation before form rendering
+        @dc.save!
+        p @dc.errors
+      end
     rescue Exception => e
       pre do
         e.message
       end
-
     end
-#    panel 'debug inputs' do
-      tabs do
-        tab :Simple do
-          render("debug_call/debug_simple", {dc: @dc}) # Calls a partial
-        end
-        tab :Detailed do
-          render("debug_call/debug", {dc: @dc}) # Calls a partial
-        end
-      end
+    panel 'Call simulation' do
+      render("routing_simulation/form", {dc: @dc}) # Calls a partial
+    end
 
- #   end
-    if @dc.valid?
+    if !params[:routing_simulation].nil? and @dc.valid? and !@dc.debug.nil?
 
       panel 'results' do
         table_for @dc.debug do

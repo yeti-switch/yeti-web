@@ -122,6 +122,9 @@ class Importing::Gateway  < Importing::Base
   belongs_to :sensor_level, class_name: '::System::SensorLevel',foreign_key: :sensor_level_id
   belongs_to :dtmf_receive_mode, class_name: '::System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: '::System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
+  belongs_to :transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+  belongs_to :term_proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :term_proxy_transport_protocol_id
+  belongs_to :orig_proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
     
   self.import_attributes = [
       'name','enabled',
@@ -165,7 +168,10 @@ class Importing::Gateway  < Importing::Base
       'symmetric_rtp_ignore_rtcp', 'force_dtmf_relay', 'rtp_ping',
       'rtp_timeout', 'filter_noaudio_streams', 'rtp_relay_timestamp_aligning',
       'rtp_force_relay_cn',
-      'dtmf_receive_mode_id', 'dtmf_send_mode_id'
+      'dtmf_receive_mode_id', 'dtmf_send_mode_id',
+      'transport_protocol_id',
+      'term_proxy_transport_protocol_id',
+      'orig_proxy_transport_protocol_id'
   ]
   
   self.import_class = ::Gateway

@@ -3,22 +3,19 @@ ActiveAdmin.register Equipment::Registration do
   menu parent: "Equipment", priority: 81, label: "Registrations"
   config.batch_actions = true
 
-
-  controller do
-    def scoped_collection
-      super.eager_load(:pop, :node)
-    end
-  end
+  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
 
   acts_as_export :id, :name, :enabled,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
+                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  :domain,
                  :username,
                  :display_username,
                  :auth_user,
                  :auth_password,
                  :proxy,
+                 [:proxy_transport_protocol_name, proc { |row| row.proxy_transport_protocol.try(:name) }],
                  :contact,
                  :expire,
                  :force_expire,
@@ -34,7 +31,7 @@ ActiveAdmin.register Equipment::Registration do
                 :auth_user, :proxy, :contact,
                 :auth_password,
                 :expire, :force_expire,
-                :retry_delay, :max_attempts
+                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id
 
   index do
     selectable_column
@@ -44,12 +41,14 @@ ActiveAdmin.register Equipment::Registration do
     column :enabled
     column :pop
     column :node
+    column :transport_protocol
     column :domain
     column :username
     column :display_username
     column :auth_user
     column :auth_password
     column :proxy
+    column :proxy_transport_protocol
     column :contact
     column :expire
     column :force_expire
@@ -74,12 +73,14 @@ ActiveAdmin.register Equipment::Registration do
       f.input :node, as: :select,
               include_blank: "Any",
               input_html: {class: 'chosen'}
+      f.input :transport_protocol
       f.input :domain
       f.input :username
       f.input :display_username
       f.input :auth_user
       f.input :auth_password, as: :string
       f.input :proxy
+      f.input :proxy_transport_protocol
       f.input :contact, hint: I18n.t('hints.registrations.contact')
       f.input :expire
       f.input :force_expire
@@ -95,12 +96,14 @@ ActiveAdmin.register Equipment::Registration do
       row :enabled
       row :pop
       row :node
+      row :transport_protocol
       row :domain
       row :username
       row :display_username
       row :auth_user
       row :auth_password
       row :proxy
+      row :proxy_transport_protocol
       row :contact
       row :expire
       row :force_expire
