@@ -154,7 +154,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
                                     dst_number: @cdr.dst_prefix_in,
                                     pop_id: @cdr.pop_id,
                                     x_yeti_auth: @cdr.customer_auth.try!(:x_yeti_auth),
-                                    uri_domain: @cdr.ruri_domain
+                                    uri_domain: @cdr.ruri_domain,
+                                    from_domain: @cdr.from_domain,
+                                    to_domain: @cdr.to_domain
                                 }, anchor: 'detailed'})
   end
 
