@@ -125,7 +125,8 @@ class Importing::Gateway  < Importing::Base
   belongs_to :transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :transport_protocol_id
   belongs_to :term_proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :term_proxy_transport_protocol_id
   belongs_to :orig_proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
-    
+  belongs_to :rel100_mode, class_name: ::Equipment::GatewayRel100Mode, foreign_key: :rel100_mode_id
+
   self.import_attributes = [
       'name','enabled',
       'gateway_group_id',
@@ -133,13 +134,14 @@ class Importing::Gateway  < Importing::Base
       'priority',
       'pop_id',
       'host','port',
-      'capacity',
+      'origination_capacity',
+      'termination_capacity',
       'diversion_policy_id',
       'diversion_rewrite_rule', 'diversion_rewrite_result',
       'src_name_rewrite_rule', 'src_name_rewrite_result',
       'src_rewrite_rule', 'src_rewrite_result',
       'dst_rewrite_rule', 'dst_rewrite_result',
-      'acd_limit', 'asr_limit',
+      'acd_limit', 'asr_limit', 'short_calls_limit',
       'allow_termination', 'allow_origination',
       'anonymize_sdp', 'proxy_media',
       'transparent_seqno', 'transparent_ssrc',
@@ -171,7 +173,8 @@ class Importing::Gateway  < Importing::Base
       'dtmf_receive_mode_id', 'dtmf_send_mode_id',
       'transport_protocol_id',
       'term_proxy_transport_protocol_id',
-      'orig_proxy_transport_protocol_id'
+      'orig_proxy_transport_protocol_id',
+      'rel_100_mode_id'
   ]
   
   self.import_class = ::Gateway

@@ -11,10 +11,11 @@ ActiveAdmin.register Importing::Gateway do
       return [] if request.get?
       [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
     end
-    def scoped_collection
-      super.includes(:contractor, :gateway_group)
-    end
   end
+
+  includes :contractor, :gateway_group, :rel100_mode,
+           :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
+           :sensor, :sensor_level
 
   index do
     selectable_column
@@ -56,7 +57,8 @@ ActiveAdmin.register Importing::Gateway do
       "#{gw.host}:#{gw.port}".chomp(":")
     end
 
-    column :capacity
+    column :origination_capacity
+    column :termination_capacity
 
     column :diversion_policy, sortable: :diversion_policy_name do |row|
       if row.diversion_policy.blank?
@@ -80,6 +82,7 @@ ActiveAdmin.register Importing::Gateway do
 
     column :acd_limit
     column :asr_limit
+    column :short_calls_limit
 
     column :allow_termination
     column :allow_origination
@@ -140,9 +143,13 @@ ActiveAdmin.register Importing::Gateway do
     end
 
     column :single_codec_in_200ok
-
     column :term_next_hop_for_replies
 
+    #SST
+    column :sst_enabled
+    column :sst_session_expires
+    column :sst_minimum_timer
+    column :sst_maximum_timer
     column :session_refresh_method, sortable: :session_refresh_method_name do |row|
       if row.session_refresh_method.blank?
         row.session_refresh_method_name
@@ -150,12 +157,41 @@ ActiveAdmin.register Importing::Gateway do
         auto_link(row.session_refresh_method, row.session_refresh_method_name)
       end
     end
-
-    column :sst_enabled
     column :sst_accept501
-    column :sst_session_expires
-    column :sst_minimum_timer
-    column :sst_maximum_timer
+
+    #SENSOR
+    column :sensor, sortable: :sensor_name do |row|
+      if row.sensor.blank?
+        row.sensor_name
+      else
+        auto_link(row.sensor, row.sensor_name)
+      end
+    end
+
+    column :sensor_level, sortable: :sensor_level_name do |row|
+      if row.sensor_level.blank?
+        row.sensor_level_name
+      else
+        auto_link(row.sensor_level, row.sensor_level_name)
+      end
+    end
+
+    #SIGNALING
+    column :relay_options
+    column :relay_reinvite
+    column :relay_prack
+    column :rel100_mode, sortable: :rel100_mode_name do |row|
+      if row.rel100_mode.blank?
+        row.rel100_mode_name
+      else
+        auto_link(row.rel100_mode, row.rel100_mode_name)
+      end
+    end
+
+    column :relay_update
+    column :transit_headers_from_origination
+    column :transit_headers_from_termination
+    column :sip_interface_name
 
   end
 end
