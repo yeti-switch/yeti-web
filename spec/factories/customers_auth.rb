@@ -43,6 +43,7 @@
 #  redirect_to                      :string
 #  from_domain                      :string
 #  to_domain                        :string
+#  transport_protocol_id            :integer
 #
 
 FactoryGirl.define do

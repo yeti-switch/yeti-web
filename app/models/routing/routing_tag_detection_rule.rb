@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: class4.routing_tag_detection_rules
+#
+#  id             :integer          not null, primary key
+#  src_area_id    :integer
+#  dst_area_id    :integer
+#  routing_tag_id :integer          not null
+#
+
 class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
   self.table_name='class4.routing_tag_detection_rules'

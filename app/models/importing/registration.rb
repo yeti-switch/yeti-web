@@ -2,24 +2,30 @@
 #
 # Table name: data_import.import_registrations
 #
-#  id               :integer          not null, primary key
-#  o_id             :integer
-#  name             :string
-#  enabled          :boolean
-#  pop_name         :string
-#  pop_id           :integer
-#  node_name        :string
-#  node_id          :integer
-#  domain           :string
-#  username         :string
-#  display_username :string
-#  auth_user        :string
-#  proxy            :string
-#  contact          :string
-#  auth_password    :string
-#  expire           :integer
-#  force_expire     :boolean
-#  error_string     :string
+#  id                            :integer          not null, primary key
+#  o_id                          :integer
+#  name                          :string
+#  enabled                       :boolean
+#  pop_name                      :string
+#  pop_id                        :integer
+#  node_name                     :string
+#  node_id                       :integer
+#  domain                        :string
+#  username                      :string
+#  display_username              :string
+#  auth_user                     :string
+#  proxy                         :string
+#  contact                       :string
+#  auth_password                 :string
+#  expire                        :integer
+#  force_expire                  :boolean
+#  error_string                  :string
+#  retry_delay                   :integer
+#  max_attempts                  :integer
+#  transport_protocol_id         :integer
+#  proxy_transport_protocol_id   :integer
+#  transport_protocol_name       :string
+#  proxy_transport_protocol_name :string
 #
 
 class Importing::Registration < Importing::Base

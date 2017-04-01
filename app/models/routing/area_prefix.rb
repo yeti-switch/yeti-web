@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: class4.area_prefixes
+#
+#  id      :integer          not null, primary key
+#  area_id :integer          not null
+#  prefix  :string           not null
+#
+
 class Routing::AreaPrefix < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
 

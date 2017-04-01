@@ -24,8 +24,8 @@ ActiveAdmin.register CustomersAuth do
                  [:gateway_name, proc { |row| row.gateway.try(:name) || "" }],
                  [:rateplan_name, proc { |row| row.rateplan.try(:name) || "" }],
                  [:routing_plan_name, proc { |row| row.routing_plan.try(:name) || "" }],
-                 [:dst_blacklist_name, proc { |row| row.dst_blacklist.try(:name) || "" }],
-                 [:src_blacklist_name, proc { |row| row.src_blacklist.try(:name) || "" }],
+                 [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) || "" }],
+                 [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) || "" }],
                  [:dump_level_name, proc { |row| row.dump_level.try(:name) || "" }],
                  :enable_audio_recording,
                  :capacity,
@@ -48,7 +48,8 @@ ActiveAdmin.register CustomersAuth do
                 :diversion_rewrite_rule, :diversion_rewrite_result,
                 :src_name_rewrite_rule, :src_name_rewrite_result,
                 :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule,
-                :dst_rewrite_result, :dst_blacklist_id, :src_blacklist_id,
+                :dst_rewrite_result,
+                :dst_numberlist_id, :src_numberlist_id,
                 :dump_level_id, :capacity, :allow_receive_rate_limit,
                 :send_billing_information, :ip, :pop_id, :src_prefix,
                 :dst_prefix, :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
@@ -60,16 +61,8 @@ ActiveAdmin.register CustomersAuth do
                 :transport_protocol_id
                 #, :enable_redirect, :redirect_method, :redirect_to
 
-  includes :rateplan, :routing_plan, :gateway, :dump_level, :src_blacklist, :dst_blacklist,
+  includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
-
-  # controller do
-  #   def scoped_collection
-  #     super.eager_load(:rateplan, :routing_plan, :gateway, :dump_level, :src_blacklist, :dst_blacklist,
-  #                      :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, account: :contractor
-  #     )
-  #   end
-  # end
 
 
   batch_action :change_dump_level, priority: 1, form: -> {
@@ -133,8 +126,8 @@ ActiveAdmin.register CustomersAuth do
       auto_link(row.routing_plan, row.routing_plan.decorated_display_name)
     end
 
-    column :dst_blacklist
-    column :src_blacklist
+    column :dst_numberlist
+    column :src_numberlist
 
     column :dump_level
     column :enable_audio_recording
@@ -217,8 +210,8 @@ ActiveAdmin.register CustomersAuth do
           f.input :routing_plan, input_html: {class: 'chosen'}
 
 
-          f.input :dst_blacklist, input_html: {class: 'chosen'}, include_blank: "None"
-          f.input :src_blacklist, input_html: {class: 'chosen'}, include_blank: "None"
+          f.input :dst_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
+          f.input :src_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
           f.input :dump_level, as: :select, include_blank: false
           f.input :enable_audio_recording
           f.input :capacity
@@ -291,8 +284,8 @@ ActiveAdmin.register CustomersAuth do
             auto_link(s.routing_plan, s.routing_plan.decorated_display_name)
           end
 
-          row :dst_blacklist
-          row :src_blacklist
+          row :dst_numberlist
+          row :src_numberlist
 
           row :dump_level
           row :enable_audio_recording

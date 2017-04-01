@@ -38,6 +38,8 @@
 #  short_calls_limit   :float            default(1.0), not null
 #  force_hit_rate      :float
 #  exclusive_route     :boolean
+#  routing_tag_name    :string
+#  routing_tag_id      :integer
 #
 
 class Importing::Dialpeer < Importing::Base

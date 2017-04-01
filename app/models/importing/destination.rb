@@ -24,6 +24,8 @@
 #  valid_till               :datetime
 #  profit_control_mode_id   :integer
 #  profit_control_mode_name :string
+#  routing_tag_name         :string
+#  routing_tag_id           :integer
 #
 
 class Importing::Destination < Importing::Base

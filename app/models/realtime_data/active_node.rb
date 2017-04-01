@@ -1,13 +1,12 @@
 # == Schema Information
 #
-# Table name: sys.signalling_node
+# Table name: nodes
 #
 #  id              :integer          not null, primary key
-#  signalling_ip   :inet
+#  signalling_ip   :string
 #  signalling_port :integer
-#  name            :string           not null
+#  name            :string
 #  pop_id          :integer          not null
-#  rpc_uri         :string
 #  rpc_endpoint    :string
 #
 
