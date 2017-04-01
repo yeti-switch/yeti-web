@@ -119,6 +119,7 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
   belongs_to :term_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :term_proxy_transport_protocol_id
   belongs_to :orig_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
+  belongs_to :rel100_mode, class_name: Equipment::GatewayRel100Mode, foreign_key: :rel100_mode_id
 
   has_many :dialpeers, class_name: Dialpeer, dependent: :restrict_with_error
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :gateway_id, dependent: :nullify
@@ -127,7 +128,7 @@ class Gateway < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
 
   validates_presence_of :contractor, :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id
-  validates_presence_of :dtmf_receive_mode, :dtmf_send_mode
+  validates_presence_of :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode
   validates_presence_of :name, :priority
   validates_uniqueness_of :name
 

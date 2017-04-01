@@ -14,7 +14,7 @@ ActiveAdmin.register Gateway do
   decorate_with GatewayDecorator
 
 
-  acts_as_export :id, :external_id, :name, :enabled,
+  acts_as_export :id, :name, :enabled,
                  [:gateway_group_name, proc { |row| row.gateway_group.try(:name) }],
                  :priority,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
@@ -51,7 +51,11 @@ ActiveAdmin.register Gateway do
                  [:sdp_alines_filter_type_name, proc { |row| row.sdp_alines_filter_type.try(:name) }],
                  :sdp_alines_filter_list,
                  :ringing_timeout,
-                 :relay_options, :relay_reinvite, :relay_hold, :relay_prack, :allow_1xx_without_to_tag,
+                 :relay_options, :relay_reinvite, :relay_hold,
+                 :relay_prack,
+                 [:rel100_mode_name, proc { |row| row.rel100_mode.try(:name) }],
+                 :relay_update,
+                 :allow_1xx_without_to_tag,
                  :sip_timer_b, :dns_srv_failover_timer,
                  [:sdp_c_location_name, proc { |row| row.sdp_c_location.try(:name) }],
                  [:codec_group_name, proc { |row| row.codec_group.try(:name) }],
@@ -62,7 +66,6 @@ ActiveAdmin.register Gateway do
                  :rtp_force_relay_cn,
                  [:dtmf_send_mode_name, proc { |row| row.dtmf_send_mode.try(:name) }],
                  [:dtmf_receive_mode_name, proc { |row| row.dtmf_receive_mode.try(:name) }],
-                 :relay_update,
                  :suppress_early_media,
                  :send_lnp_information,
                  :force_one_way_early_media
@@ -80,7 +83,8 @@ ActiveAdmin.register Gateway do
            :sensor, :sensor_level,
            :dtmf_send_mode, :dtmf_receive_mode,
            :radius_accounting_profile,
-           :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol
+           :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
+           :rel100_mode
 
   controller do
     def resource_params
@@ -156,6 +160,7 @@ ActiveAdmin.register Gateway do
     column :relay_options
     column :relay_reinvite
     column :relay_prack
+    column :rel100_mode
     column :relay_update
     column :transit_headers_from_origination
     column :transit_headers_from_termination
@@ -303,9 +308,8 @@ ActiveAdmin.register Gateway do
           f.input :relay_reinvite
           f.input :relay_hold
           f.input :relay_prack
+          f.input :rel100_mode, as: :select, include_blank: false
           f.input :relay_update
-
-
           f.input :transit_headers_from_origination, hint: "Use comma as delimiter"
           f.input :transit_headers_from_termination, hint: "Use comma as delimiter"
           f.input :sip_interface_name
@@ -454,6 +458,7 @@ ActiveAdmin.register Gateway do
             row :relay_reinvite
             row :relay_hold
             row :relay_prack
+            row :rel100_mode
             row :relay_update
             row :transit_headers_from_origination
             row :transit_headers_from_termination
