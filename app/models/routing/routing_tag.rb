@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: class4.routing_tags
+#
+#  id   :integer          not null, primary key
+#  name :string           not null
+#
+
 class Routing::RoutingTag < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
   self.table_name='class4.routing_tags'

@@ -36,6 +36,7 @@
 #  src_name_rewrite_rule   :string
 #  src_name_rewrite_result :string
 #  exclusive_route         :boolean          default(FALSE), not null
+#  routing_tag_id          :integer
 #
 
 class Dialpeer < Yeti::ActiveRecord

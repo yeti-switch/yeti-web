@@ -2,49 +2,62 @@
 #
 # Table name: data_import.import_customers_auth
 #
-#  id                       :integer          not null, primary key
-#  o_id                     :integer
-#  customer_name            :string
-#  customer_id              :integer
-#  routing_group_name       :string
-#  routing_group_id         :integer
-#  rateplan_name            :string
-#  rateplan_id              :integer
-#  enabled                  :boolean
-#  account_name             :string
-#  account_id               :integer
-#  gateway_name             :string
-#  gateway_id               :integer
-#  src_rewrite_rule         :string
-#  src_rewrite_result       :string
-#  dst_rewrite_rule         :string
-#  dst_rewrite_result       :string
-#  src_prefix               :string
-#  dst_prefix               :string
-#  x_yeti_auth              :string
-#  name                     :string
-#  dump_level_id            :integer
-#  dump_level_name          :string
-#  capacity                 :integer
-#  ip                       :inet
-#  uri_domain               :string
-#  pop_name                 :string
-#  pop_id                   :integer
-#  diversion_policy_id      :integer
-#  diversion_policy_name    :string
-#  diversion_rewrite_result :string
-#  diversion_rewrite_rule   :string
-#  src_name_rewrite_result  :string
-#  src_name_rewrite_rule    :string
-#  error_string             :string
-#  dst_blacklist_id         :integer
-#  dst_blacklist_name       :string
-#  src_blacklist_id         :integer
-#  src_blacklist_name       :string
-#  allow_receive_rate_limit :boolean          default(FALSE), not null
-#  send_billing_information :boolean          default(FALSE), not null
-#  routing_plan_id          :integer
-#  routing_plan_name        :string
+#  id                               :integer          not null, primary key
+#  o_id                             :integer
+#  customer_name                    :string
+#  customer_id                      :integer
+#  rateplan_name                    :string
+#  rateplan_id                      :integer
+#  enabled                          :boolean
+#  account_name                     :string
+#  account_id                       :integer
+#  gateway_name                     :string
+#  gateway_id                       :integer
+#  src_rewrite_rule                 :string
+#  src_rewrite_result               :string
+#  dst_rewrite_rule                 :string
+#  dst_rewrite_result               :string
+#  src_prefix                       :string
+#  dst_prefix                       :string
+#  x_yeti_auth                      :string
+#  name                             :string
+#  dump_level_id                    :integer
+#  dump_level_name                  :string
+#  capacity                         :integer
+#  ip                               :string
+#  uri_domain                       :string
+#  pop_name                         :string
+#  pop_id                           :integer
+#  diversion_policy_id              :integer
+#  diversion_policy_name            :string
+#  diversion_rewrite_result         :string
+#  diversion_rewrite_rule           :string
+#  src_name_rewrite_result          :string
+#  src_name_rewrite_rule            :string
+#  error_string                     :string
+#  allow_receive_rate_limit         :boolean          default(FALSE), not null
+#  send_billing_information         :boolean          default(FALSE), not null
+#  dst_blacklist_id                 :integer
+#  dst_blacklist_name               :string
+#  src_blacklist_id                 :integer
+#  src_blacklist_name               :string
+#  routing_plan_id                  :integer
+#  routing_plan_name                :string
+#  routing_group_id                 :integer
+#  routing_group_name               :string
+#  radius_auth_profile_id           :integer
+#  radius_auth_profile_name         :string
+#  radius_accounting_profile_id     :integer
+#  radius_accounting_profile_name   :string
+#  src_number_radius_rewrite_rule   :string
+#  src_number_radius_rewrite_result :string
+#  dst_number_radius_rewrite_rule   :string
+#  dst_number_radius_rewrite_result :string
+#  enable_audio_recording           :boolean
+#  from_domain                      :string
+#  to_domain                        :string
+#  transport_protocol_id            :integer
+#  transport_protocol_name          :string
 #
 
 class Importing::CustomersAuth  < Importing::Base

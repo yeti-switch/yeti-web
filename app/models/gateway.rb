@@ -3,7 +3,7 @@
 # Table name: gateways
 #
 #  id                               :integer          not null, primary key
-#  host                             :string           not null
+#  host                             :string
 #  port                             :integer
 #  src_rewrite_rule                 :string
 #  dst_rewrite_rule                 :string
@@ -96,6 +96,13 @@
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string
 #  external_id                      :integer
+#  fake_180_timer                   :integer
+#  sip_interface_name               :string
+#  rtp_interface_name               :string
+#  transport_protocol_id            :integer          default(1), not null
+#  term_proxy_transport_protocol_id :integer          default(1), not null
+#  orig_proxy_transport_protocol_id :integer          default(1), not null
+#  rel100_mode_id                   :integer          default(1), not null
 #
 
 require 'resolv'

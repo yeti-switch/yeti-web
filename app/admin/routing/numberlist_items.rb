@@ -1,11 +1,11 @@
-ActiveAdmin.register Routing::BlacklistItem do
+ActiveAdmin.register Routing::NumberlistItem do
 
 #
 #  menu parent: "Routing", priority: 120
 
   menu false
   #actions :index
-  belongs_to :blacklist, parent_class: Routing::Blacklist
+  belongs_to :numberlist, parent_class: Routing::Numberlist
 
   navigation_menu :default
   config.batch_actions = true
@@ -16,19 +16,21 @@ ActiveAdmin.register Routing::BlacklistItem do
 
   controller do
     def permitted_params
-      params.permit *active_admin_namespace.permitted_params, :blacklist_id,
+      params.permit *active_admin_namespace.permitted_params, :numberlist_id,
                     active_admin_config.param_key => [
-                        :key
+                        :key,
+                        :action_id
                     ]
     end
   end
 
 
-  sidebar :blacklist, priority: 1 do
-    attributes_table_for assigns[:blacklist] do
+  sidebar :numberlist, priority: 1 do
+    attributes_table_for assigns[:numberlist] do
       row :id
       row :name
       row :mode
+      row :default_action
       row :created_at
       row :updated_at
     end
@@ -39,6 +41,9 @@ ActiveAdmin.register Routing::BlacklistItem do
     id_column
     actions
     column :key
+    column :action do |c|
+      c.action.blank? ? 'Default action' : c.action.name
+    end
     column :created_at
     column :updated_at
   end
@@ -46,6 +51,7 @@ ActiveAdmin.register Routing::BlacklistItem do
   form do |f|
     f.inputs do
       f.input :key
+      f.input :action, as: :select, include_blank: 'Default action'
     end
     f.actions
   end
