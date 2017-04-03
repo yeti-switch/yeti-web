@@ -4,7 +4,8 @@
 #
 #  id               :integer          not null, primary key
 #  dialpeer_id      :integer          not null
-#  rate             :decimal(, )      not null
+#  next_rate        :decimal(, )      not_null
+#  initial_rate     :decimal(, )      not null
 #  initial_interval :integer          not null
 #  next_interval    :integer          not null
 #  connect_fee      :decimal(, )      not null
@@ -18,14 +19,15 @@
 class DialpeerNextRate < Yeti::ActiveRecord
 
   validates_presence_of :dialpeer
-  validates_presence_of :rate,
+  validates_presence_of :next_rate,
+                        :initial_rate,
                         :initial_interval,
                         :next_interval,
                         :connect_fee,
                         :apply_time
 
   validates_numericality_of :initial_interval, :next_interval, greater_than: 0 # we have DB constraints for this
-  validates_numericality_of :rate, :connect_fee
+  validates_numericality_of :next_rate, :initial_rate, :connect_fee
 
 
   belongs_to :dialpeer

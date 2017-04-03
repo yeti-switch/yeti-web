@@ -8,8 +8,8 @@ module Jobs
               current_rate_id: rate.id,
               initial_interval: rate.initial_interval,
               next_interval: rate.next_interval,
-              initial_rate: rate.rate,
-              next_rate: rate.rate,
+              initial_rate: rate.initial_rate,
+              next_rate: rate.next_rate,
               connect_fee: rate.connect_fee
           )
           rate.update!(applied: true)
