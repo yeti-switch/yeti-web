@@ -63,7 +63,8 @@ objects:
     plural: True
     parent: 'dialpeer'
     fields:
-      - { name: rate, type: number, format: float }
+      - { name: next_rate, type: number, format: float }
+      - { name: initial_rate, type: number, format: float }
       - { name: initial_interval, type: integer }
       - { name: next_interval, type: integer }
       - { name: connect_fee, type: number, format: float }

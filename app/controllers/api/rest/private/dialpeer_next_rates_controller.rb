@@ -42,7 +42,8 @@ class Api::Rest::Private::DialpeerNextRatesController < Api::RestController
 
   def dialpeer_next_rate_params
     params.require(:dialpeer_next_rate).permit(
-        :rate,
+        :next_rate,
+	:initial_rate,
         :initial_interval,
         :next_interval,
         :connect_fee,

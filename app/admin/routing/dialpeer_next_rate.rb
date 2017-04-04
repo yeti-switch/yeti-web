@@ -11,7 +11,8 @@ ActiveAdmin.register DialpeerNextRate do
                     active_admin_config.param_key => [
                         :initial_interval,
                         :next_interval,
-                        :rate,
+                        :initial_rate,
+                        :next_rate,
                         :connect_fee,
                         :apply_time
                     ]
@@ -55,7 +56,8 @@ ActiveAdmin.register DialpeerNextRate do
     f.inputs do
       f.input :initial_interval
       f.input :next_interval
-      f.input :rate
+      f.input :initial_rate
+      f.input :next_rate
       f.input :connect_fee
       f.input :apply_time, as: :date_time_picker,  datepicker_options: {defaultTime: '00:00'}
     end
@@ -71,7 +73,8 @@ ActiveAdmin.register DialpeerNextRate do
       collection: [['Yes', true], ['No', false]]
 
   filter :apply_time
-  filter :rate
+  filter :initial_rate
+  filter :next_rate
   filter :initial_interval
   filter :next_interval
   filter :connect_fee
@@ -86,7 +89,8 @@ ActiveAdmin.register DialpeerNextRate do
     actions
     column :applied
     column :apply_time
-    column :rate
+    column :initial_rate
+    column :next_rate
     column :initial_interval
     column :next_interval
     column :connect_fee
