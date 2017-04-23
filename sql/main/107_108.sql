@@ -1,5 +1,5 @@
 begin;
-insert into sys.version(number,comment) values(108,'rewrite in numberlists')
+insert into sys.version(number,comment) values(108,'rewrite in numberlists');
 
 update class4.gateways set rel100_mode_id=4; -- set to ignore
 alter table class4.gateways alter column rel100_mode_id set DEFAULT 4;
