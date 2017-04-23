@@ -4,8 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  dialpeer_id      :integer          not null
-#  next_rate        :decimal(, )      not_null
-#  initial_rate     :decimal(, )      not null
+#  rate             :decimal(, )      not null
 #  initial_interval :integer          not null
 #  next_interval    :integer          not null
 #  connect_fee      :decimal(, )      not null

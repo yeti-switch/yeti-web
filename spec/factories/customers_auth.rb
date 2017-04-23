@@ -26,8 +26,8 @@
 #  diversion_policy_id              :integer          default(1), not null
 #  diversion_rewrite_rule           :string
 #  diversion_rewrite_result         :string
-#  dst_blacklist_id                 :integer
-#  src_blacklist_id                 :integer
+#  dst_numberlist_id                :integer
+#  src_numberlist_id                :integer
 #  routing_plan_id                  :integer          not null
 #  allow_receive_rate_limit         :boolean          default(FALSE), not null
 #  send_billing_information         :boolean          default(FALSE), not null
