@@ -8,19 +8,21 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   includes :mode, :default_action
 
-  permit_params :name, :mode_id, :default_action_id
-
+  permit_params :name, :mode_id, :default_action_id,
+                :default_src_rewrite_rule, :default_src_rewrite_result,
+                :default_dst_rewrite_rule, :default_dst_rewrite_result
 
   index do
     selectable_column
     id_column
-    #actions
-    actions do |row|
-      link_to "Items", numberlist_routing_numberlist_items_path(row)
-    end
+    actions
     column :name
     column :mode
     column :default_action
+    column :default_src_rewrite_rule
+    column :default_src_rewrite_result
+    column :default_dst_rewrite_rule
+    column :default_dst_rewrite_result
     column :created_at
     column :updated_at
   end
@@ -31,6 +33,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :name
       row :mode
       row :default_action
+      row :default_src_rewrite_rule
+      row :default_src_rewrite_result
+      row :default_dst_rewrite_rule
+      row :default_dst_rewrite_result
       row :created_at
       row :updated_at
     end
@@ -41,6 +47,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       f.input :name
       f.input :mode, as: :select, include_blank: false
       f.input :default_action, as: :select, include_blank: false
+      f.input :default_src_rewrite_rule
+      f.input :default_src_rewrite_result
+      f.input :default_dst_rewrite_rule
+      f.input :default_dst_rewrite_result
     end
     f.actions
   end

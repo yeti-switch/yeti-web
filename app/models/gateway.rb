@@ -102,7 +102,7 @@
 #  transport_protocol_id            :integer          default(1), not null
 #  term_proxy_transport_protocol_id :integer          default(1), not null
 #  orig_proxy_transport_protocol_id :integer          default(1), not null
-#  rel100_mode_id                   :integer          default(1), not null
+#  rel100_mode_id                   :integer          default(4), not null
 #
 
 require 'resolv'
