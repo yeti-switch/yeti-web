@@ -21,7 +21,8 @@ ActiveAdmin.register Destination do
                  :initial_rate, :next_rate, :connect_fee,
                  :dp_margin_fixed, :dp_margin_percent,
                  [:profit_control_mode_name, proc { |row| row.profit_control_mode.try(:name) }],
-                 :valid_from, :valid_till
+                 :valid_from, :valid_till,
+                 :asr_limit, :acd_limit, :short_calls_limit
 
   acts_as_import resource_class: Importing::Destination
   acts_as_batch_changeable [:enabled, :initial_interval,:next_interval, :initial_rate, :next_rate, :connect_fee,
