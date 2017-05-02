@@ -83,11 +83,6 @@ install: $(app_files)
 	@$(info:msg=install crontab cfg file)
 	@install -v -m0644 -D config/$(pkg_name).crontab $(DESTDIR)/etc/cron.d/$(pkg_name)
 
-	@$(info:msg=install nginx example cfg file)
-	@install -v -m0644 -D config/yeti-web.dist.nginx $(DESTDIR)/etc/nginx/sites-available/yeti-web
-	@mkdir -p $(DESTDIR)/etc/nginx/sites-enabled
-	@ln -s "../sites-available/yeti-web" $(DESTDIR)/etc/nginx/sites-enabled/yeti-web
-
 	@$(info:msg=install auxiliary scripts)
 	@install -v -m0755 -D aux/yeti-db $(DESTDIR)/usr/bin/yeti-db
 

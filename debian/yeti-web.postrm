@@ -14,7 +14,7 @@ case "$1" in
 			deluser --quiet --remove-home $user &>/dev/null || true
 		fi
 
-		rm -rf /home/$user /etc/nginx/sites-available/yeti-web.dist || true
+		rm -rf /home/$user || true
 
 		if [ -x /usr/bin/deb-systemd-helper ]; then
 			deb-systemd-helper purge ${services} >/dev/null
@@ -25,7 +25,6 @@ esac
 
 if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
 	deb-systemd-invoke restart rsyslog.service >/dev/null || true
-	deb-systemd-invoke reload nginx.service >/dev/null || true
 fi
 
 exit 0
