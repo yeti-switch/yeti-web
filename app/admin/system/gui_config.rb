@@ -23,7 +23,7 @@ ActiveAdmin.register GuiConfig do
   end
 
   form do |f|
-    f.semantic_errors # show errors on :base by default
+    f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       GuiConfig::SETTINGS_NAMES.each do |name|
         f.input name

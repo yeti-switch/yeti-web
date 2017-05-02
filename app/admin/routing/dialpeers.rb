@@ -175,7 +175,7 @@ ActiveAdmin.register Dialpeer do
 
 
   form do |f|
-    f.semantic_errors # show errors on :base by default
+    f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       if f.object.new_record? # allow multiple prefixes delimited by comma in NEW form.
         f.input :batch_prefix, label: "Prefix", input_html: {class: :prefix_detector} , hint: f.object.network_details_hint

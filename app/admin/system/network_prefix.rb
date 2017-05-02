@@ -58,7 +58,7 @@ ActiveAdmin.register System::NetworkPrefix do
   end
 
   form do |f|
-    f.semantic_errors # show errors on :base by default
+    f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :prefix
       f.input :country, input_html: {class: 'chosen'}
