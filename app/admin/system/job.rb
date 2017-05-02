@@ -13,7 +13,6 @@ ActiveAdmin.register BaseJob, as: 'Job' do
   end
 
   member_action :run, method: :put do
-
      begin
        BaseJob.launch!(resource.id)
        flash[:notice] = "Finished!"
@@ -24,8 +23,13 @@ ActiveAdmin.register BaseJob, as: 'Job' do
        flash[:warning] = e.message
        redirect_to action: :index
      end
+  end
 
-   end
+  member_action :unlock, method: :put do
+      resource.release_lock!
+      redirect_to action: :index
+  end
+
 
   index do
     id_column
@@ -37,7 +41,12 @@ ActiveAdmin.register BaseJob, as: 'Job' do
     end
     column :running
     actions defaults: false do  |row|
-           link_to 'Run', run_job_path(row), method: :put,  data: { confirm: "Are you sure?" }
+      if row.running
+        link_to('Unlock', unlock_job_path(row), method: :put,  data: { confirm: "Are you sure?" })
+      else
+        link_to('Run', run_job_path(row), method: :put,  data: { confirm: "Are you sure?" })
+      end
+
     end
 
   end
