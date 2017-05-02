@@ -7,11 +7,8 @@ case "$1" in
 	configure)
 		#apply files permissions for new user
 		chown -R $user:$user /home/$user
-		#remove default nginx config
-		rm -f /etc/nginx/sites-enabled/default || true
-		
+
 		if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
-			deb-systemd-invoke reload nginx.service >/dev/null || true
 			deb-systemd-invoke restart rsyslog.service >/dev/null || true
 		fi
 
