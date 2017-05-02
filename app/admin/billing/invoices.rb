@@ -249,7 +249,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   form do |f|
-    f.semantic_errors # show errors on :base by default
+    f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :vendor_invoice
       f.input :contractor, collection: Contractor.all,

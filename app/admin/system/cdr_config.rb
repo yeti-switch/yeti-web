@@ -21,7 +21,7 @@ ActiveAdmin.register System::CdrConfig do
   end
 
   form do |f|
-    f.semantic_errors # show errors on :base by default
+    f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :call_duration_round_mode
     end

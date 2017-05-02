@@ -163,7 +163,7 @@ class Dialpeer < Yeti::ActiveRecord
   end
 
   def vendor_owners_the_account
-    self.errors.add(:account, "must be owned by selected vendor") unless self.vendor_id && self.vendor_id == self.account.contractor_id
+    self.errors.add(:account, "must be owned by selected vendor") unless self.account_id.nil? || (self.vendor_id && self.vendor_id == self.account.contractor_id)
   end
 
   def vendor_owners_the_gateway
