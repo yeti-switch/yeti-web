@@ -14,10 +14,9 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
       return [] if request.get?
       [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
     end
-    def scoped_collection
-        super.includes(:rateplan, :routing_tag, :rate_policy)
-    end
   end
+
+  includes :rateplan, :routing_tag, :rate_policy
 
   index do
     selectable_column
@@ -60,6 +59,11 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
     column :use_dp_intervals
     column :dp_margin_fixed
     column :dp_margin_percent
+    column :valid_from
+    column :valid_till
+    column :asr_limit
+    column :acd_limit
+    column :short_calls_limit
   end
 
 end
