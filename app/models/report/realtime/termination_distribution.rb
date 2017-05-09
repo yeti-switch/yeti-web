@@ -109,7 +109,7 @@
 #  sign_term_transport_protocol_id :integer
 #
 
-class Report::Realtime::TerminationDistribution < Cdr::Cdr
+class Report::Realtime::TerminationDistribution < Report::Realtime::Base
 
   scope :detailed_scope, -> do
     select('

@@ -109,7 +109,7 @@
 #  sign_term_transport_protocol_id :integer
 #
 
-class Report::Realtime::BadRouting < Cdr::Cdr
+class Report::Realtime::BadRouting < Report::Realtime::Base
 
   attr_accessor :l
 

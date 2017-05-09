@@ -109,7 +109,7 @@
 #  sign_term_transport_protocol_id :integer
 #
 
-class Report::Realtime::OriginationPerformance < Cdr::Cdr
+class Report::Realtime::OriginationPerformance < Report::Realtime::Base
 
   attr_accessor :l
 
