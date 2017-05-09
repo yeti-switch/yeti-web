@@ -10,7 +10,7 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
 
   filter :time_interval_eq, label: 'Time Interval',
          as: :select,
-         collection: [['5 Minutes', 5.minute], ['10 Minutes', 10.minute], ['15 Minutes', 15.minute], ['1 Hour', 1.hour]],
+         collection: Report::Realtime::Base::INTERVALS,
          input_html: {class: 'chosen'}, include_blank: false
 
   filter :customer_id, label: 'Customer',
@@ -21,8 +21,8 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
   before_filter only: [:index] do
     params[:q] ||= {}
     if params[:q][:time_interval_eq].blank?
-      params[:q][:time_interval_eq] = 5.minute
-      flash.now[:notice_message] = 'Records for time interval 5 minutes are displayed by default'
+      params[:q][:time_interval_eq] = Report::Realtime::Base::DEFAULT_INTERVAL
+      flash.now[:notice_message] = "Records for time interval #{Report::Realtime::Base::DEFAULT_INTERVAL} seconds are displayed by default"
     end
   end
 
@@ -38,7 +38,7 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
       if !row.customer_auth_id.nil?
         auto_link(row.customer_auth) || status_tag(:unknown)
       else
-        status_tag(:not_authenticated,:red)
+        status_tag(:not_authenticated, :red)
       end
     end
 
