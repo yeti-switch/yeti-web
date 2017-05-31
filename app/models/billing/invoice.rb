@@ -33,7 +33,9 @@ class Billing::Invoice < Cdr::Base
 
   has_one :invoice_document, dependent: :destroy
   has_many :full_destinations, class_name: Billing::InvoiceDestination, foreign_key: :invoice_id, dependent: :delete_all
+  has_many :full_networks, class_name: Billing::InvoiceNetwork, foreign_key: :invoice_id, dependent: :delete_all
   has_many :destinations, -> {where("successful_calls_count>0") }, class_name: Billing::InvoiceDestination, foreign_key: :invoice_id
+  has_many :networks, -> {where("successful_calls_count>0") }, class_name: Billing::InvoiceNetwork, foreign_key: :invoice_id
 
 
   before_destroy do
@@ -122,6 +124,36 @@ class Billing::Invoice < Cdr::Base
         group by dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
                  self.id, self.account_id, self.start_date, self.end_date, self.id
       )
+
+      execute_sp("
+        insert into billing.invoice_networks(
+          country_id, network_id, rate,
+          calls_count,
+          successful_calls_count,
+          calls_duration,
+          amount,
+          invoice_id,
+          first_call_at,
+          first_successful_call_at,
+          last_call_at,
+          last_successful_call_at
+        ) select
+          country_id, network_id, rate,
+          sum(calls_count),
+          sum(successful_calls_count),
+          sum(calls_duration),
+          sum(amount),
+          ?,
+          min(first_call_at),
+          min(first_successful_call_at),
+          max(last_call_at),
+          max(last_successful_call_at)
+        from billing.invoice_destinations
+        where invoice_id=?
+        group by country_id, network_id, rate",
+                 self.id, self.id
+      )
+
     else # customer invoice
 
       res=fetch_sp_val("select 1 from cdr.cdr WHERE customer_acc_id=? AND time_start>=? and time_start<? AND customer_invoice_id IS NOT NULL LIMIT 1",
@@ -167,6 +199,36 @@ class Billing::Invoice < Cdr::Base
         group by destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
                  self.id, self.account_id, self.start_date, self.end_date, self.id
       )
+
+      execute_sp("
+        insert into billing.invoice_networks(
+          country_id, network_id, rate,
+          calls_count,
+          successful_calls_count,
+          calls_duration,
+          amount,
+          invoice_id,
+          first_call_at,
+          first_successful_call_at,
+          last_call_at,
+          last_successful_call_at
+        ) select
+          country_id, network_id, rate,
+          sum(calls_count),
+          sum(successful_calls_count),
+          sum(calls_duration),
+          sum(amount),
+          ?,
+          min(first_call_at),
+          min(first_successful_call_at),
+          max(last_call_at),
+          max(last_successful_call_at)
+        from billing.invoice_destinations
+        where invoice_id=?
+        group by country_id, network_id, rate",
+                 self.id, self.id
+      )
+
     end
     detalize_invoice
 
