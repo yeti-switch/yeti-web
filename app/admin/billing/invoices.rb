@@ -221,7 +221,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
           row :last_successful_call_at
         end
       end
-      tab "Traffic details" do
+      tab "Destination prefixes" do
         panel "" do
           table_for resource.destinations do
             column :dst_prefix
@@ -245,6 +245,31 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
           end
         end
       end
+
+      tab "Destination networks" do
+        panel "" do
+          table_for resource.networks do
+            column :country
+            column :network
+            column :rate
+            column :calls_count
+            column :successful_calls_count
+            column :calls_duration do |r|
+              r.decorated_calls_duration
+            end
+            column :amount do |r|
+              strong do
+                r.decorated_amount
+              end
+            end
+            column :first_call_at
+            column :first_successful_call_at
+            column :last_call_at
+            column :last_successful_call_at
+          end
+        end
+      end
+
     end
   end
 

@@ -1,10 +1,7 @@
-class InvoiceDecorator < BillingDecorator
+class InvoiceNetworkDecorator < BillingDecorator
 
   delegate_all
-  decorates Billing::Invoice
-
-  decorates_association :destinations, with: InvoiceDestinationDecorator
-  decorates_association :networks, with: InvoiceNetworkDecorator
+  decorates Billing::InvoiceNetwork
 
   def decorated_amount
     money_format :amount
@@ -17,7 +14,6 @@ class InvoiceDecorator < BillingDecorator
   def decorated_calls_duration_kolon
     time_format_min_kolon :calls_duration
   end
-
   def decorated_calls_duration_dec
     time_format_min_dec :calls_duration
   end

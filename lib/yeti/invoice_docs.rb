@@ -135,6 +135,22 @@ class InvoiceDocs
         t.add_column(:first_successful_call_at)
         t.add_column(:last_successful_call_at)
       end
+      r.add_table("INV_NETWORKS_TABLE", InvoiceNetworkDecorator.decorate_collection(invoice.networks.for_invoice.order('country_id, network_id').to_a), header: true, footer: true) do |t|
+        t.add_column(:country) { |field| field.country.try(:name) }
+        t.add_column(:network) { |field| field.network.try(:name) }
+        t.add_column(:rate)
+        t.add_column(:calls_count)
+        t.add_column(:successful_calls_count)
+        t.add_column(:calls_duration)
+        t.add_column(:calls_durationm) {|field| field.decorated_calls_duration_kolon }
+        t.add_column(:calls_duration_dec) {|field| field.decorated_calls_duration_dec }
+        t.add_column(:amount)
+        t.add_column(:amount_decorated) {|field| field.decorated_amount }
+        t.add_column(:first_call_at)
+        t.add_column(:last_call_at)
+        t.add_column(:first_successful_call_at)
+        t.add_column(:last_successful_call_at)
+      end
     end.generate(odf_path) # New ODFReport constructor return data, not a file name
 
     #generate pdf
