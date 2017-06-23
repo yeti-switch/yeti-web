@@ -340,7 +340,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :legb_rx_decode_errs
         column :legb_rx_no_buf_errs
         column :legb_rx_parse_errs
-
+        column :core_version
+        column :yeti_version
+        column :lega_user_agent
+        column :legb_user_agent
       end if cdr.attempts.length > 0
     end
 
@@ -455,6 +458,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :legb_rx_decode_errs
           row :legb_rx_no_buf_errs
           row :legb_rx_parse_errs
+          row :core_version
+          row :yeti_version
+          row :lega_user_agent
+          row :legb_user_agent
         end
 
       end
@@ -643,6 +650,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 #    column :legb_rx_decode_errs
 #    column :legb_rx_no_buf_errs
 #    column :legb_rx_parse_errs
+
+    column :core_version
+    column :yeti_version
+    column :lega_user_agent
+    column :legb_user_agent
 
   end
 
