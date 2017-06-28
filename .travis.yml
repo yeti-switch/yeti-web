@@ -8,7 +8,7 @@ script:
   - sh ci/travis.sh
 branches:
   except:
-  - "/^debian\/\d/"
+  - "/^debian\\/\\d/"
 deploy:
   file: ".bintray.json"
   key:
