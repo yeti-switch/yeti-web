@@ -1,5 +1,5 @@
 begin;
-insert into sys.version(number,comment) values(48,'More CDR fields being put to the queue');
+insert into sys.version(number,comment) values(50,'More CDR fields being put to the queue');
 
 alter table cdr.cdr
     add core_version varchar,
