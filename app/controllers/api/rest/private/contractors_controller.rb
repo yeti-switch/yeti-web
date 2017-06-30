@@ -8,7 +8,7 @@ class Api::Rest::Private::ContractorsController < Api::RestController
 
   def index
     @contractors = resource_collection(Contractor.all)
-    respond_with @contractors, serializer: ActiveModel::ArraySerializer, each_serializer: ContractorSerializer
+    respond_with @contractors, each_serializer: ContractorSerializer
   end
 
   def show
