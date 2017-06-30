@@ -1,5 +1,5 @@
 class Pgq::Worker
-  attr_reader :logger, :consumers, :sleep_time
+  attr_reader :logger, :class, :sleep_time
 
   cattr_accessor :interrupted do false end
   cattr_accessor :logger
@@ -18,26 +18,24 @@ class Pgq::Worker
 
   def initialize(env)
     @logger = env.logger
-    @consumers = []
+    @class_name = env.config["class"]
 
-    env.config["consumers"].each do |consumer|
-      require "#{ENV['ROOT_PATH']}/consumers/#{consumer}.rb"
-      @consumers << consumer.camelize.constantize.new(@logger, env.config['queue'])
-    end
-
+    require "#{ENV['ROOT_PATH']}/processors/#{@class_name}.rb"
+    @class = @class_name.camelize.constantize.new(
+        @logger,
+        env.config['queue'],
+        env.config['consumer'],
+        env.config.config
+    )
     @sleep_time = 0.5
   end
 
   def process_batch
-    process_count = 0
-    @consumers.each do |consumer|
-      process_count += consumer.perform_batch
-    end
-    process_count
+    @class.perform_batch
   end
 
   def run
-    logger.info "Worker for (#{@consumers.join(',')}) started"
+    logger.info "Worker for #{@class_name} started"
 
     loop do
       Pgq::Worker.check_interrupted(__FILE__, __LINE__)

@@ -16,11 +16,11 @@ class Pgq::Consumer < Pgq::ConsumerBase
 
   # == magick consume
 
-  attr_reader :options
+  attr_reader :params
 
-  def initialize(logger, queue)
-    super(logger, queue)
-#    @options = options
+  def initialize(logger, queue, consumer, params)
+    super(logger, queue, consumer)
+    @params = params
   end
 
   def perform(method_name, *args)
