@@ -1,5 +1,25 @@
 begin;
-insert into sys.version(number,comment) values(50,'Fill more CDR fields for the queue');
+insert into sys.version(number,comment) values(48,'More CDR fields being put to the queue');
+
+alter table cdr.cdr
+    add core_version varchar,
+    add yeti_version varchar,
+    add lega_user_agent varchar,
+    add legb_user_agent varchar;
+
+alter table cdr.cdr_archive
+  add core_version varchar,
+  add yeti_version varchar,
+  add lega_user_agent varchar,
+  add legb_user_agent varchar;
+
+
+CREATE TYPE switch.versions_ty AS (
+  core character varying,
+  yeti varchar,
+  aleg varchar,
+  bleg varchar
+);
 
 CREATE OR REPLACE FUNCTION switch.writecdr(
   i_is_master boolean,
@@ -39,6 +59,7 @@ CREATE OR REPLACE FUNCTION switch.writecdr(
   i_failed_resource_type_id smallint,
   i_failed_resource_id bigint,
   i_dtmf_events json,
+  i_versions json,
   i_customer_id character varying,
   i_vendor_id character varying,
   i_customer_acc_id character varying,
@@ -95,6 +116,7 @@ DECLARE
 
   v_rtp_stats_data switch.rtp_stats_data_ty;
   v_time_data switch.time_data_ty;
+  v_version_data switch.versions_ty;
 
 
   v_nozerolen boolean;
@@ -103,7 +125,12 @@ BEGIN
   --  RAISE warning 'DTMF: %', i_dtmf_events;
 
   v_time_data:=json_populate_record(null::switch.time_data_ty, i_time_data);
+  v_version_data:=json_populate_record(null::switch.versions_ty, i_versions);
 
+  v_cdr.core_version=v_version_data.core;
+  v_cdr.yeti_version=v_version_data.yeti;
+  v_cdr.lega_user_agent=v_version_data.aleg;
+  v_cdr.legb_user_agent=v_version_data.bleg;
 
   v_cdr.pop_id=i_pop_id;
   v_cdr.node_id=i_node_id;
@@ -300,7 +327,6 @@ BEGIN
   v_billing_event.local_tag=v_cdr.local_tag;
   v_billing_event.from_domain=v_cdr.from_domain;
 
-
   -- generate event to routing engine
   perform event.billing_insert_event('cdr_full',v_billing_event);
   INSERT INTO cdr.cdr VALUES( v_cdr.*);
@@ -309,6 +335,5 @@ END;
 $BODY$
 LANGUAGE plpgsql VOLATILE SECURITY DEFINER
 COST 10;
-
 
 commit;
