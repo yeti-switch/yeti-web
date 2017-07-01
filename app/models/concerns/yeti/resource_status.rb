@@ -2,8 +2,8 @@ module Yeti
   module ResourceStatus
     extend ActiveSupport::Concern
     included do
-      scope :disabled, -> { base.where enabled: false }
-      scope :enabled, -> { base.where enabled: true }
+      scope :disabled, -> { where enabled: false }
+      scope :enabled, -> { where enabled: true }
 
       def status_sym
         self.enabled? ? :enabled : :disabled
