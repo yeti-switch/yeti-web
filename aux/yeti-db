@@ -42,7 +42,13 @@ class dbh:
 		cfg = self.cfg
 		c = psycopg2.connect('host=%s port=%s dbname=%s user=%s password=%s' % (cfg['host'],cfg['port'],cfg['database'],cfg['username'],cfg['password']))
 		cr = c.cursor(cursor_factory=psycopg2.extras.DictCursor)
-		cr.execute('select number from sys.version order by apply_date desc limit 1')
+
+		try:
+		    cr.execute('select number from sys.version order by apply_date desc limit 1')
+		except psycopg2.Error as e:
+		    sys.stderr.write('ERROR: %sn' % str(e))
+		    raise SystemExit(1)
+
 		r = cr.fetchone()
 		return r[0]
 
@@ -153,7 +159,7 @@ actions:
 			if not len(args):
 				print "missed action"
 				self.usage()
-				raise SystemExit
+				raise SystemExit(1)
 
 			self.action = args[0]
 			self.version = args[1] if self.action=='show' and len(args) > 1 else None
@@ -168,7 +174,7 @@ actions:
 		except getopt.GetoptError as err:
 			print str(err)
 			self.usage()
-			raise SystemExit
+			raise SystemExit(1)
 
 	def process(self):
 		cfg = self.cfg
@@ -219,7 +225,7 @@ actions:
 				p = self.patches[v]
 				if v==p['dst']: #avoid infinite loop
 					print "wrong patch name '{}'. fix patches directory content".format(p['path'])
-					raise SystemExit
+					raise SystemExit(1)
 
 				seq.append(p)
 				v = p['dst']
@@ -237,11 +243,11 @@ actions:
 				if not self.exec_sql_file(p['path']):
 					print "ERROR: sql error during sequence processing. exit"
 					print "actual database version is: {}".format(self.get_db_version())
-					raise SystemExit
+					raise SystemExit(1)
 				v = self.get_db_version()
 				if p['dst'] != v:
 					print "ERROR: patch was successfully applied but resulting database version differs from expected.\n\t(expected: {}, got: {})\nexit".format(p['dst'],v)
-					raise SystemExit
+					raise SystemExit(1)
 				print "patch was applied. new database version is: {}".format(v)
 				if p['schema']:
 					print("WARNING! do not forget to reconfigure your db-related services to the new schema '{}' and restart them.".format(p['schema']))
