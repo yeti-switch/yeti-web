@@ -1,22 +1,17 @@
 namespace :pgq do
 
-  desc 'Start worker rake pgq:worker'
+  desc 'Start PQG worker'
   task :worker do
     require_relative 'pgq_env'
 
-
-    dbconfig = YAML.load(File.read("../config/database.yml"))
-    sysconfig = YAML.load(File.read("../config/cdr_billing.yml"))
-
-    config = dbconfig.merge(sysconfig)
-    pgq_env = PgqEnv.new(config)
+    pgq_env = PgqEnv.new
 
     w = Pgq::Worker.new(pgq_env)
 
-    pid_file =  pgq_env.config["pid_file"]
-    raise "Please setup pid_file in config_file" if pid_file.blank?
+    pid_file = ENV['pid_file']
+    raise 'pid_file is mandatory option!' if pid_file.blank?
     raise 'pid file exists!' if File.exists? pid_file
-    File.open(pid_file, 'w'){|f| f.puts Process.pid}
+    File.open(pid_file, 'w') { |f| f.puts Process.pid }
     begin
       w.run
     ensure

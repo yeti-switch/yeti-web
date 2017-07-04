@@ -1,6 +1,15 @@
 class  CdrBilling < Pgq::ConsumerGroup
   @consumer_name = 'cdr_billing'
 
+  def initialize(logger, queue, consumer, options)
+    super
+    Dir['models/*.rb'].each { |file| require_relative File.join("../", file) }
+    p options
+    key=options['mode']
+    ::RoutingBase.establish_connection options['databases'][key]
+
+    #dbkey = @config['mode'] || 'development'
+  end
 
   def perform_events(events)
     group = []

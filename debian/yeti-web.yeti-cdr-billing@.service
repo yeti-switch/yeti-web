@@ -1,0 +1,34 @@
+[Unit]
+Description=YETI CDR billing: %i
+Documentation=https://yeti-switch.org/docs/
+
+ConditionPathExists=/home/yeti-web/config/cdr_billing.yml
+PartOf=yeti-cdr-billing.service
+ReloadPropagatedFrom=yeti-cdr-billing.service
+Before=yeti-cdr-billing
+
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=yeti-web
+Group=yeti-web
+LimitNOFILE=65536
+LimitCORE=infinity
+
+ExecStart=export YETI_TZ=`/bin/cat /etc/timezone`
+Environment=RAILS_ENV=production
+Environment=RACK_ENV=production
+Environment=RAKE_ENV=production
+Environment=BUNDLE_GEMFILE=/home/yeti-web/pgq-processors/Gemfile
+Environment=GEM_HOME=/home/yeti-web/.gem
+Environment=GEM_PATH=/home/yeti-web/.gem:/home/yeti-web/.bundle_gem
+
+WorkingDirectory=/home/yeti-web/pgq-processors
+RuntimeDirectory=yeti-cdr-billing-%i
+ExecStart=/usr/bin/ruby /home/yeti-web/.gem/bin/bundle exec rake pgq:worker processor=%i pidfile=/run/yeti-cdr-billing-%i/%i.pid config_file=/home/yeti-web/config/cdr_billing.yml
+PIDFile=/run/yeti-cdr-billing-%i/%i.pid
+Type=simple
+Restart=on-abnormal
+

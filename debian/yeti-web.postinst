@@ -1,7 +1,7 @@
 #!/bin/bash
 
 user=yeti-web
-services="yeti-web.service yeti-cdr-billing.service yeti-delayed-job.service"
+services="yeti-web.service yeti-delayed-job.service"
 
 case "$1" in 
 	configure)
@@ -25,9 +25,7 @@ case "$1" in
 
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
-			#if [ -x /usr/bin/deb-systemd-invoke ]; then
-			#	deb-systemd-invoke start ${services} >/dev/null || true
-			#fi
+			systemctl enable yeti-cdr-billing@cdr_billing.service
 		fi
 		
 		#remove old init scripts
