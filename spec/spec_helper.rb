@@ -81,3 +81,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+RspecApiDocumentation.configure do |config|
+  config.format = :json
+end
