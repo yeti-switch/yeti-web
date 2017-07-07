@@ -21,7 +21,7 @@ resource 'Destinations' do
   end
 
   post '/api/rest/private/destinations' do
-    parameter :enabled,                'Enabled',                scope: :destination, required: true
+    parameter :enabled,                'Enabled flag',           scope: :destination, required: true
     parameter :prefix,                 'Prefix',                 scope: :destination
     parameter :rateplan_id,            'Rateplan id',            scope: :destination, required: true
     parameter :next_rate,              'Next rate',              scope: :destination, required: true
@@ -59,7 +59,7 @@ resource 'Destinations' do
   end
 
   put '/api/rest/private/destinations/:id' do
-    parameter :enabled,                'Enabled',                scope: :destination, required: true
+    parameter :enabled,                'Enabled flag',           scope: :destination, required: true
     parameter :prefix,                 'Prefix',                 scope: :destination
     parameter :rateplan_id,            'Rateplan id',            scope: :destination, required: true
     parameter :next_rate,              'Next rate',              scope: :destination, required: true
