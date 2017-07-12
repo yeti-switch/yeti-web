@@ -1,10 +1,10 @@
 class Api::Rest::Private::RateplansController < Api::RestController
 
-  after_filter only: [:index] do
+  after_action only: [:index] do
     send_x_headers(@rateplans)
   end
 
-  before_filter only: [:show, :update, :destroy] do
+  before_action only: [:show, :update, :destroy] do
     @rateplan = Rateplan.find(params[:id])
   end
 
@@ -37,9 +37,8 @@ class Api::Rest::Private::RateplansController < Api::RestController
 
   def rateplan_params
     params.require(:rateplan).permit(
-        :name,
-        :profit_control_mode_id
+      :name,
+      :profit_control_mode_id
     )
   end
-
 end
