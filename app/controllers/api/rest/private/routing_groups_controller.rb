@@ -1,10 +1,10 @@
 class Api::Rest::Private::RoutingGroupsController < Api::RestController
 
-  after_filter only: [:index] do
+  after_action only: [:index] do
     send_x_headers(@routing_groups)
   end
 
-  before_filter only: [:show, :update, :destroy] do
+  before_action only: [:show, :update, :destroy] do
     @routing_group = RoutingGroup.find(params[:id])
   end
 
@@ -36,9 +36,6 @@ class Api::Rest::Private::RoutingGroupsController < Api::RestController
   private
 
   def routing_group_params
-    params.require(:routing_group).permit(
-        :name
-    )
+    params.require(:routing_group).permit(:name)
   end
-
 end
