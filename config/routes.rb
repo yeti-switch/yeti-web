@@ -60,6 +60,7 @@ Yeti::Application.routes.draw do
           api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
           api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
           api.resources :destinations, only: [:index, :show, :update, :destroy, :create]
+          api.resources :customers_auths, only: [:index, :show, :update, :destroy, :create]
         end
       end
     end
