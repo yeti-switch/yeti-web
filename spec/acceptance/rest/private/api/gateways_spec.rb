@@ -5,7 +5,7 @@ resource 'Gateways' do
   header 'Accept', 'application/json'
 
   required_params = [
-    :name,:enabled, :priority, :acd_limit, :asr_limit,
+    :name, :enabled, :priority, :acd_limit, :asr_limit,
     :contractor_id, :sdp_alines_filter_type_id, :codec_group_id, :sdp_c_location_id, :sensor_level_id,
     :dtmf_receive_mode_id, :dtmf_send_mode_id, :rel100_mode_id, :session_refresh_method_id, :transport_protocol_id,
     :term_proxy_transport_protocol_id, :orig_proxy_transport_protocol_id
