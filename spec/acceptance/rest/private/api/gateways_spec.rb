@@ -4,14 +4,14 @@ require 'rspec_api_documentation/dsl'
 resource 'Gateways' do
   header 'Accept', 'application/json'
 
-  @required_params = [
+  required_params = [
     :name,:enabled, :priority, :acd_limit, :asr_limit,
     :contractor_id, :sdp_alines_filter_type_id, :codec_group_id, :sdp_c_location_id, :sensor_level_id,
     :dtmf_receive_mode_id, :dtmf_send_mode_id, :rel100_mode_id, :session_refresh_method_id, :transport_protocol_id,
     :term_proxy_transport_protocol_id, :orig_proxy_transport_protocol_id
   ]
 
-  @optional_params = [
+  optional_params = [
     :gateway_group_id, :pop_id, :allow_origination, :allow_termination, :sst_enabled,
     :sensor_id, :host, :port, :resolve_ruri, :diversion_policy_id, :diversion_rewrite_rule,
     :diversion_rewrite_result, :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule,
@@ -25,14 +25,6 @@ resource 'Gateways' do
     :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay,
     :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning, :rtp_force_relay_cn
   ]
-
-  @required_params.each do |param|
-    parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway, required: true
-  end
-
-  @optional_params.each do |param|
-    parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway
-  end
 
   get '/api/rest/private/gateways' do
     before { create_list(:gateway, 2) }
@@ -51,6 +43,14 @@ resource 'Gateways' do
   end
 
   post '/api/rest/private/gateways' do
+    required_params.each do |param|
+      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway, required: true
+    end
+
+    optional_params.each do |param|
+      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway
+    end
+
     let(:name) { 'name' }
     let(:enabled) { true }
     let(:priority) { 1 }
@@ -75,6 +75,14 @@ resource 'Gateways' do
   end
 
   put '/api/rest/private/gateways/:id' do
+    required_params.each do |param|
+      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway, required: true
+    end
+
+    optional_params.each do |param|
+      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway
+    end
+
     let(:id) { create(:gateway).id }
     let(:name) { 'name' }
     let(:acd_limit) { 1.0 }
