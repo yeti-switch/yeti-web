@@ -71,10 +71,10 @@ class Yeti::ActiveRecord < ActiveRecord::Base
   DB_VER=db_version
   ROUTING_SCHEMA="switch12"
 
-  PG_MAX_SMALLINT=32767
-  PG_MIN_SMALLINT=-32768
+  PG_MAX_SMALLINT = 32767
+  PG_MIN_SMALLINT = -32768
 
-  L4_PORT_MIN=1
-  L4_PORT_MAX=65535
+  L4_PORT_MIN = 1
+  L4_PORT_MAX = 65535
 
 end

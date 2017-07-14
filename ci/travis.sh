@@ -228,10 +228,11 @@ RUN git checkout .travis.yml || true
 RUN mkdir -p /build
 RUN service postgresql start&& su postgres -c"psql -f ci/prepare-db.sql"
 RUN cp config/database.yml.distr config/database.yml
-RUN service postgresql start&& ./aux/yeti-db --config config/database.yml --sql-dir sql --yes init > /dev/null
-RUN service postgresql start&& ./aux/yeti-db --config config/database.yml --sql-dir sql --yes --cdr init > /dev/null
-RUN service postgresql start&& ./aux/yeti-db --config config/database.yml --sql-dir sql --yes apply_all > /dev/null
-RUN service postgresql start&& ./aux/yeti-db --config config/database.yml --sql-dir sql --yes --cdr apply_all > /dev/null
+RUN service postgresql start && sleep 20 &&\
+./aux/yeti-db --config config/database.yml --sql-dir sql --yes init > /dev/null &&\
+./aux/yeti-db --config config/database.yml --sql-dir sql --yes --cdr init > /dev/null &&\
+./aux/yeti-db --config config/database.yml --sql-dir sql --yes apply_all &&\
+./aux/yeti-db --config config/database.yml --sql-dir sql --yes --cdr apply_all
 CMD service postgresql start&&export GEMRC=".gemrc"&&make package
 EOF
 
