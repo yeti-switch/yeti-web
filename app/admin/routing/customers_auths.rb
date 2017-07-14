@@ -89,6 +89,7 @@ ActiveAdmin.register CustomersAuth do
   end
 
   scope :with_radius
+  scope :with_dump
 
 
   index do
@@ -167,7 +168,7 @@ ActiveAdmin.register CustomersAuth do
   filter :gateway, input_html: {class: 'chosen'}
   filter :rateplan, input_html: {class: 'chosen'}
   filter :routing_plan, input_html: {class: 'chosen'}
-  filter :dump_level
+  filter :dump_level, as: :select, collection: DumpLevel.select([:id, :name]).reorder(:id)
   filter :enable_audio_recording, as: :select, collection: [["Yes", true], ["No", false]]
   filter :transport_protocol
   filter :ip_covers, as: :string, input_html: {class: 'search_filter_string'}
@@ -212,7 +213,7 @@ ActiveAdmin.register CustomersAuth do
 
           f.input :dst_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
           f.input :src_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
-          f.input :dump_level, as: :select, include_blank: false
+          f.input :dump_level, as: :select, include_blank: false, collection: DumpLevel.select([:id, :name]).reorder(:id)
           f.input :enable_audio_recording
           f.input :capacity
           f.input :allow_receive_rate_limit

@@ -50,6 +50,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :successful_calls, show_count: false
   scope :short_calls, show_count: false
   scope :rerouted_calls, show_count: false
+  scope :with_trace, show_count: false
   scope :no_rtp, show_count: false
   scope :not_authorized, show_count: false
   scope :bad_routing, show_count: false
@@ -69,6 +70,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :status, as: :select, collection: proc { [['FAILURE', false], ['SUCCESS', true]] }
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
+  filter :dump_level, as: :select, collection: DumpLevel.select([:id, :name]).reorder(:id)
 
   filter :orig_gw, collection: proc { Gateway.select([:id, :name]).reorder(:name) }, input_html: {class: 'chosen'}
   filter :term_gw, collection: proc { Gateway.select([:id, :name]).reorder(:name) }, input_html: {class: 'chosen'}
@@ -504,7 +506,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
 
   index download_links: false do
-    id_column
+    column :id do |cdr|
+      if cdr.dump_level_id>0
+        link_to( cdr.id, resource_path(cdr), class: "resource_id_link", title: 'Details') + " " + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
+      else
+        link_to( cdr.id, resource_path(cdr), class: "resource_id_link", title: 'Details')
+      end
+    end
+
     column :time_start
     column :time_connect
     column :time_end

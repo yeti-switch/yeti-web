@@ -165,6 +165,7 @@ class Cdr::Cdr < Cdr::Base
   scope :no_rtp, -> { where('success AND (lega_tx_bytes=0 OR lega_rx_bytes=0 OR legb_tx_bytes=0 OR legb_rx_bytes=0)') }
   scope :not_authorized,  -> { where('customer_auth_id is null') }
   scope :bad_routing, -> { where('customer_auth_id is not null AND disconnect_initiator_id=0') }
+  scope :with_trace, -> { where('dump_level_id > 0') }
 
   scope :account_id_eq, lambda { |account_id| where('vendor_acc_id =? OR customer_acc_id =?', account_id, account_id) }
 
