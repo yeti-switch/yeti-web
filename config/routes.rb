@@ -50,12 +50,20 @@ Yeti::Application.routes.draw do
         end
 
         namespace :private do
+          api.resources :accounts, only: [:index, :show, :update, :destroy, :create]
+          api.resources :contractors, only: [:index, :show, :update, :destroy, :create]
           api.resources :dialpeers, only: [:index, :show, :update, :destroy, :create] do
             api.resources :dialpeer_next_rates, only: [:index, :show, :update, :destroy, :create], controller: :dialpeer_next_rates
           end
+          api.resources :gateways, only: [:index, :show, :update, :destroy, :create]
+          api.resources :gateway_groups, only: [:index, :show, :update, :destroy, :create]
           api.resources :routing_groups, only: [:index, :show, :update, :destroy, :create]
+          api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
           api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
           api.resources :destinations, only: [:index, :show, :update, :destroy, :create]
+          api.resources :customers_auths, only: [:index, :show, :update, :destroy, :create]
+
+          api.resources :payments, only: [:index, :show, :create]
         end
       end
     end

@@ -1,10 +1,10 @@
 class Api::Rest::Private::DialpeersController < Api::RestController
 
-  after_filter only: [:index] do
+  after_action only: [:index] do
     send_x_headers(@dialpeers)
   end
 
-  before_filter only: [:show, :update, :destroy] do
+  before_action only: [:show, :update, :destroy] do
     @dialpeer = Dialpeer.find(params[:id])
   end
 
@@ -70,5 +70,4 @@ class Api::Rest::Private::DialpeersController < Api::RestController
         :external_id
     )
   end
-
 end

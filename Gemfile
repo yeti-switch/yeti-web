@@ -13,7 +13,7 @@ gem 'd3-rails'
 
 # ActiveAdmin
 gem 'ransack', '~> 1.4.0'
-gem 'draper', '~>  1.4'
+gem 'draper', '~>  2.1.0'
 gem 'activeadmin', github: 'yeti-switch/active_admin'
 gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
 gem 'active_admin_theme'
@@ -27,6 +27,8 @@ gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 # XLS generation
 gem 'excelinator', github: 'livingsocial/excelinator'
 
+# REST API
+gem 'active_model_serializers', '~> 0.9.7'
 
 # gem 'activeadmin_async_export'
 
@@ -76,6 +78,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'rspec_api_documentation', '~> 5.0.0'
 end
 gem 'unicorn-worker-killer'
 gem 'ipaddress'

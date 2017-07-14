@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :contractor, class: Contractor do
-    name nil
+    sequence(:name) { |n| "contractor#{n}" }
     enabled true
     vendor false
     customer false
