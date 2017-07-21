@@ -4,13 +4,8 @@ require 'rspec_api_documentation/dsl'
 resource 'Gateways' do
   header 'Accept', 'application/json'
 
-<<<<<<< f7c91c1623c88ac22bdd8edbe36132954a8a0336
   required_params = [
     :name, :enabled, :priority, :acd_limit, :asr_limit,
-=======
-  @required_params = [
-    :name,:enabled, :priority, :acd_limit, :asr_limit,
->>>>>>> gateway api docs
     :contractor_id, :sdp_alines_filter_type_id, :codec_group_id, :sdp_c_location_id, :sensor_level_id,
     :dtmf_receive_mode_id, :dtmf_send_mode_id, :rel100_mode_id, :session_refresh_method_id, :transport_protocol_id,
     :term_proxy_transport_protocol_id, :orig_proxy_transport_protocol_id
