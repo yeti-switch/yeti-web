@@ -7,7 +7,7 @@ resource 'Routing groups' do
   get '/api/rest/private/routing_groups' do
     before { create_list(:routing_group, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -15,7 +15,7 @@ resource 'Routing groups' do
   get '/api/rest/private/routing_groups/:id' do
     let(:id) { create(:routing_group).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -25,7 +25,7 @@ resource 'Routing groups' do
 
     let(:name) { 'name' }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -36,7 +36,7 @@ resource 'Routing groups' do
     let(:id) { create(:routing_group).id }
     let(:name) { 'name' }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -44,7 +44,7 @@ resource 'Routing groups' do
   delete '/api/rest/private/routing_groups/:id' do
     let(:id) { create(:routing_group).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end

@@ -7,7 +7,7 @@ resource 'Rateplans' do
   get '/api/rest/private/rateplans' do
     before { create_list(:rateplan, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -15,7 +15,7 @@ resource 'Rateplans' do
   get '/api/rest/private/rateplans/:id' do
     let(:id) { create(:rateplan).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -27,7 +27,7 @@ resource 'Rateplans' do
     let(:name) { 'name' }
     let(:profit_control_mode_id) { create(:rate_profit_control_mode).id }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -40,7 +40,7 @@ resource 'Rateplans' do
     let(:name) { 'name' }
     let(:profit_control_mode_id) { create(:rate_profit_control_mode).id }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -48,7 +48,7 @@ resource 'Rateplans' do
   delete '/api/rest/private/rateplans/:id' do
     let(:id) { create(:rateplan).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end
