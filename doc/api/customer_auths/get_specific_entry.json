@@ -1,0 +1,45 @@
+{
+  "resource": "Customer Auths",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/customers_auths/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/customers_auths/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"id\": 3,\n  \"customer_id\": 19,\n  \"rateplan_id\": 3,\n  \"enabled\": true,\n  \"ip\": {\n    \"family\": 2,\n    \"addr\": 0,\n    \"mask_addr\": 4294967295\n  },\n  \"account_id\": 9,\n  \"gateway_id\": 3,\n  \"src_rewrite_rule\": null,\n  \"src_rewrite_result\": null,\n  \"dst_rewrite_rule\": null,\n  \"dst_rewrite_result\": null,\n  \"src_prefix\": \"\",\n  \"dst_prefix\": \"\",\n  \"x_yeti_auth\": null,\n  \"name\": \"customers_auth_3\",\n  \"dump_level_id\": 1,\n  \"capacity\": null,\n  \"pop_id\": null,\n  \"uri_domain\": null,\n  \"src_name_rewrite_rule\": null,\n  \"src_name_rewrite_result\": null,\n  \"diversion_policy_id\": 1,\n  \"diversion_rewrite_rule\": null,\n  \"diversion_rewrite_result\": null,\n  \"dst_numberlist_id\": null,\n  \"src_numberlist_id\": null,\n  \"routing_plan_id\": 3,\n  \"allow_receive_rate_limit\": false,\n  \"send_billing_information\": false,\n  \"radius_auth_profile_id\": null,\n  \"enable_audio_recording\": false,\n  \"src_number_radius_rewrite_rule\": null,\n  \"src_number_radius_rewrite_result\": null,\n  \"dst_number_radius_rewrite_rule\": null,\n  \"dst_number_radius_rewrite_result\": null,\n  \"radius_accounting_profile_id\": null,\n  \"from_domain\": null,\n  \"to_domain\": null,\n  \"transport_protocol_id\": null\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "\"2b4a95a7afcbedc8ea917de85ee7d585\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "ce43016c-65c7-4390-ba73-4516cee4e3be",
+        "X-Runtime": "0.011831",
+        "Content-Length": "979"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

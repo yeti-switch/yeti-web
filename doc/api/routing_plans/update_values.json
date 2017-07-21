@@ -1,0 +1,63 @@
+{
+  "resource": "Routing plans",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/routing_plans/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "routing_plan",
+      "required": true,
+      "name": "name",
+      "description": "Routing plan name"
+    },
+    {
+      "scope": "routing_plan",
+      "name": "rate_delta_max",
+      "description": "Rate delta max"
+    },
+    {
+      "scope": "routing_plan",
+      "name": "use_lnp",
+      "description": "Use lnp flag"
+    },
+    {
+      "scope": "routing_plan",
+      "name": "sorting_id",
+      "description": "Sorting id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/routing_plans/11",
+      "request_body": "routing_plan[name]=name",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "533a3b60-f8f6-4250-812a-2922924381ab",
+        "X-Runtime": "0.012893"
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}

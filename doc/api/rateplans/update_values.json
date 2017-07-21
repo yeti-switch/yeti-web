@@ -1,0 +1,54 @@
+{
+  "resource": "Rateplans",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/rateplans/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "rateplan",
+      "required": true,
+      "name": "name",
+      "description": "Rateplan name"
+    },
+    {
+      "scope": "rateplan",
+      "required": true,
+      "name": "profit_control_mode_id",
+      "description": "Rate profit control mode id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/rateplans/17",
+      "request_body": "rateplan[name]=name&rateplan[profit_control_mode_id]=27",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "42761cd7-000a-450f-a8e2-9b7fb46efa49",
+        "X-Runtime": "0.014813"
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}

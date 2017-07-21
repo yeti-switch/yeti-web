@@ -1,0 +1,83 @@
+{
+  "resource": "Contractors",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/contractors/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "contractor",
+      "required": true,
+      "name": "name",
+      "description": "Contractor name"
+    },
+    {
+      "scope": "contractor",
+      "name": "vendor",
+      "description": "Vendor flag"
+    },
+    {
+      "scope": "contractor",
+      "name": "customer",
+      "description": "Customer flag"
+    },
+    {
+      "scope": "contractor",
+      "name": "enabled",
+      "description": "Enabled flag"
+    },
+    {
+      "scope": "contractor",
+      "name": "description",
+      "description": "Description"
+    },
+    {
+      "scope": "contractor",
+      "name": "address",
+      "description": "Address"
+    },
+    {
+      "scope": "contractor",
+      "name": "phones",
+      "description": "Phones"
+    },
+    {
+      "scope": "contractor",
+      "name": "smtp_connection_id",
+      "description": "SMTP connection id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/contractors/11",
+      "request_body": "contractor[name]=name&contractor[customer]=true",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "18932716-4fc5-4ce2-918d-065981f98b19",
+        "X-Runtime": "0.016207"
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}

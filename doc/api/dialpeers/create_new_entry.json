@@ -1,0 +1,211 @@
+{
+  "resource": "Dialpeers",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/dialpeers",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "enabled",
+      "description": "Enabled flag"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "prefix",
+      "description": "Prefix"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "src_rewrite_rule",
+      "description": "Src rewrite rule"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "dst_rewrite_rule",
+      "description": "Dst rewrite rule"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "acd_limit",
+      "description": "Acd limit"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "asr_limit",
+      "description": "Asr limit"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "gateway_id",
+      "description": "Gateway id"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "routing_group_id",
+      "description": "Routing group id"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "next_rate",
+      "description": "Next rate"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "connect_fee",
+      "description": "Connect fee"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "vendor_id",
+      "description": "Vendor id"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "account_id",
+      "description": "Account id"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "src_rewrite_result",
+      "description": "Src rewrite result"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "dst_rewrite_result",
+      "description": "Dst rewrite result"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "locked",
+      "description": "Locked"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "priority",
+      "description": "Priority"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "exclusive_route",
+      "description": "Exclusive route"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "capacity",
+      "description": "Capacity"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "lcr_rate_multiplier",
+      "description": "Lcr rate multiplier"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "initial_rate",
+      "description": "Initial rate"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "initial_interval",
+      "description": "Initial interval"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "next_interval",
+      "description": "Next interval"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "valid_from",
+      "description": "Valid from"
+    },
+    {
+      "scope": "dialpeer",
+      "required": true,
+      "name": "valid_till",
+      "description": "Valid till"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "gateway_group_id",
+      "description": "Gateway group id"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "test",
+      "description": "Test"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "force_hit_rate",
+      "description": "Force hit rate"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "network_prefix_id",
+      "description": "Network prefix id"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "created_at",
+      "description": "Created at"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "short_calls_limit",
+      "description": "Short calls limit"
+    },
+    {
+      "scope": "dialpeer",
+      "name": "external_id",
+      "description": "External id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/dialpeers",
+      "request_body": "dialpeer[enabled]=true&dialpeer[routing_group_id]=4&dialpeer[next_rate]=0.0&dialpeer[vendor_id]=34&dialpeer[account_id]=16&dialpeer[initial_rate]=0.0&dialpeer[initial_interval]=60&dialpeer[next_interval]=60&dialpeer[valid_from]=2017-07-21T15%3A26%3A37%2B07%3A00&dialpeer[valid_till]=2018-07-21+15%3A26%3A37+%2B0700&dialpeer[gateway_group_id]=4",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"id\": 4,\n  \"enabled\": true,\n  \"prefix\": \"\",\n  \"src_rewrite_rule\": null,\n  \"dst_rewrite_rule\": null,\n  \"acd_limit\": 0.0,\n  \"asr_limit\": 0.0,\n  \"gateway_id\": null,\n  \"routing_group_id\": 4,\n  \"next_rate\": \"0.0\",\n  \"connect_fee\": \"0.0\",\n  \"vendor_id\": 34,\n  \"account_id\": 16,\n  \"src_rewrite_result\": null,\n  \"dst_rewrite_result\": null,\n  \"locked\": false,\n  \"priority\": 100,\n  \"capacity\": null,\n  \"lcr_rate_multiplier\": \"1.0\",\n  \"initial_rate\": \"0.0\",\n  \"initial_interval\": 60,\n  \"next_interval\": 60,\n  \"valid_from\": \"2017-07-21T15:26:37.000+07:00\",\n  \"valid_till\": \"2018-07-21T15:26:37.000+07:00\",\n  \"gateway_group_id\": 4,\n  \"force_hit_rate\": null,\n  \"network_prefix_id\": null,\n  \"created_at\": \"2017-07-21T15:26:37.770+07:00\",\n  \"short_calls_limit\": 1.0,\n  \"current_rate_id\": null,\n  \"external_id\": null,\n  \"src_name_rewrite_rule\": null,\n  \"src_name_rewrite_result\": null,\n  \"exclusive_route\": false,\n  \"routing_tag_id\": null\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "\"dc1c31e0dd61ad647896957c0facccbb\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "21fbefbc-23f0-4b33-8ba2-e17f53929810",
+        "X-Runtime": "0.026963",
+        "Content-Length": "786"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

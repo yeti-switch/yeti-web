@@ -1,0 +1,51 @@
+{
+  "resource": "Routing groups",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/routing_groups",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "routing_group",
+      "required": true,
+      "name": "name",
+      "description": "Routing group name"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/routing_groups",
+      "request_body": "routing_group[name]=name",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"id\": 10,\n  \"name\": \"name\"\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "\"cdbe263c3a504e2fdc05336c9e070893\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "67d5c102-e05e-4ffc-9166-cbc9cb296a9b",
+        "X-Runtime": "0.014709",
+        "Content-Length": "23"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
