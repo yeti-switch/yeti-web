@@ -14,7 +14,7 @@ resource 'Accounts' do
   get '/api/rest/private/accounts' do
     before { create_list(:account, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -22,7 +22,7 @@ resource 'Accounts' do
   get '/api/rest/private/accounts/:id' do
     let(:id) { create(:account).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -43,7 +43,7 @@ resource 'Accounts' do
     let(:diversion_policy_id) { 1 }
     let(:contractor_id) { create(:contractor, vendor: true).id }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -61,7 +61,7 @@ resource 'Accounts' do
     let(:name) { 'name' }
     let(:max_balance) { 20 }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -69,7 +69,7 @@ resource 'Accounts' do
   delete '/api/rest/private/accounts/:id' do
     let(:id) { create(:account).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end

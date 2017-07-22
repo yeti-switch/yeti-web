@@ -1,0 +1,45 @@
+{
+  "resource": "Payments",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/payments/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/payments/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"account_id\": 21,\n  \"amount\": \"10.0\",\n  \"notes\": \"notes text\",\n  \"id\": 3,\n  \"created_at\": \"2017-07-21T15:26:40.547+07:00\"\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "\"4ceeefd1a29e7741a8cb717c7722e72d\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "a48f1db1-332d-4c73-913d-eb4431a0351f",
+        "X-Runtime": "0.010723",
+        "Content-Length": "106"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

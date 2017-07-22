@@ -1,0 +1,155 @@
+{
+  "resource": "Destinations",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/destinations/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "enabled",
+      "description": "Enabled flag"
+    },
+    {
+      "scope": "destination",
+      "name": "prefix",
+      "description": "Prefix"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "rateplan_id",
+      "description": "Rateplan id"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "next_rate",
+      "description": "Next rate"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "connect_fee",
+      "description": "Connect fee"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "initial_interval",
+      "description": "Initial interval"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "next_interval",
+      "description": "Next interval"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "dp_margin_fixed",
+      "description": "Dp margin fixed"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "dp_margin_percent",
+      "description": "Dp margin percent"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "rate_policy_id",
+      "description": "Rate policy id"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "initial_rate",
+      "description": "Initial rate"
+    },
+    {
+      "scope": "destination",
+      "name": "reject_calls",
+      "description": "Reject calls"
+    },
+    {
+      "scope": "destination",
+      "name": "use_dp_intervals",
+      "description": "Use dp intervals"
+    },
+    {
+      "scope": "destination",
+      "name": "valid_from",
+      "description": "Valid from"
+    },
+    {
+      "scope": "destination",
+      "name": "valid_till",
+      "description": "Valid till"
+    },
+    {
+      "scope": "destination",
+      "name": "profit_control_mode_id",
+      "description": "Profit control mode id"
+    },
+    {
+      "scope": "destination",
+      "name": "external_id",
+      "description": "External id"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "asr_limit",
+      "description": "Asr limit"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "acd_limit",
+      "description": "Acd limit"
+    },
+    {
+      "scope": "destination",
+      "required": true,
+      "name": "short_calls_limit",
+      "description": "Short calls limit"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/destinations/5",
+      "request_body": "destination[enabled]=false",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "39cab84d-7592-4d78-808a-c029e515a65f",
+        "X-Runtime": "0.014966"
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}

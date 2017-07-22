@@ -7,7 +7,7 @@ resource 'Dialpeers' do
   get '/api/rest/private/dialpeers' do
     before { create_list(:dialpeer, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -15,7 +15,7 @@ resource 'Dialpeers' do
   get '/api/rest/private/dialpeers/:id' do
     let(:id) { create(:dialpeer).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -70,7 +70,7 @@ resource 'Dialpeers' do
     let(:initial_rate) { 0.0 }
     let(:next_rate) { 0.0 }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -110,7 +110,7 @@ resource 'Dialpeers' do
     let(:id) { create(:dialpeer).id }
     let(:capacity) { 20 }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -118,7 +118,7 @@ resource 'Dialpeers' do
   delete '/api/rest/private/dialpeers/:id' do
     let(:id) { create(:dialpeer).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end

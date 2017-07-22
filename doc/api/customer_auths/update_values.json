@@ -1,0 +1,241 @@
+{
+  "resource": "Customer Auths",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/customers_auths/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "ip",
+      "description": "Ip"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "customer_id",
+      "description": "Customer id"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "rateplan_id",
+      "description": "Rateplan id"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "routing_plan_id",
+      "description": "Routing plan id"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "gateway_id",
+      "description": "Gateway id"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "account_id",
+      "description": "Account id"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "dump_level_id",
+      "description": "Dump level id"
+    },
+    {
+      "scope": "customers_auth",
+      "required": true,
+      "name": "diversion_policy_id",
+      "description": "Diversion policy id"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "enabled",
+      "description": "Enabled"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_rewrite_rule",
+      "description": "Src rewrite rule"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_rewrite_result",
+      "description": "Src rewrite result"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "dst_rewrite_rule",
+      "description": "Dst rewrite rule"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "dst_rewrite_result",
+      "description": "Dst rewrite result"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_prefix",
+      "description": "Src prefix"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "dst_prefix",
+      "description": "Dst prefix"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "x_yeti_auth",
+      "description": "X yeti auth"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "capacity",
+      "description": "Capacity"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "pop_id",
+      "description": "Pop id"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "uri_domain",
+      "description": "Uri domain"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_name_rewrite_rule",
+      "description": "Src name rewrite rule"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_name_rewrite_result",
+      "description": "Src name rewrite result"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "diversion_rewrite_rule",
+      "description": "Diversion rewrite rule"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "diversion_rewrite_result",
+      "description": "Diversion rewrite result"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "dst_numberlist_id",
+      "description": "Dst numberlist id"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_numberlist_id",
+      "description": "Src numberlist id"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "allow_receive_rate_limit",
+      "description": "Allow receive rate limit"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "send_billing_information",
+      "description": "Send billing information"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "radius_auth_profile_id",
+      "description": "Radius auth profile id"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "enable_audio_recording",
+      "description": "Enable audio recording"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_number_radius_rewrite_rule",
+      "description": "Src number radius rewrite rule"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "src_number_radius_rewrite_result",
+      "description": "Src number radius rewrite result"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "dst_number_radius_rewrite_rule",
+      "description": "Dst number radius rewrite rule"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "dst_number_radius_rewrite_result",
+      "description": "Dst number radius rewrite result"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "radius_accounting_profile_id",
+      "description": "Radius accounting profile id"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "from_domain",
+      "description": "From domain"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "to_domain",
+      "description": "To domain"
+    },
+    {
+      "scope": "customers_auth",
+      "name": "transport_protocol_id",
+      "description": "Transport protocol id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/customers_auths/5",
+      "request_body": "customers_auth[name]=name&customers_auth[capacity]=2",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "5165c874-7080-484d-a090-ba3469713868",
+        "X-Runtime": "0.025992"
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}
