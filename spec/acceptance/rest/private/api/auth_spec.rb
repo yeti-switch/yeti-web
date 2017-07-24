@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
-resource 'Accounts' do
+resource 'Authentication' do
   header 'Accept', 'application/json'
 
   post '/api/rest/private/auth' do
@@ -14,6 +14,7 @@ resource 'Accounts' do
     before { create :admin_user, username: username, password: password }
 
     example_request 'get token' do
+      explanation 'Pass received token to each request to private API as \'token\' parameter or \'Authorization\' header.'
       expect(status).to eq(201)
     end
   end

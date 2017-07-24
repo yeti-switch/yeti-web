@@ -1,16 +1,22 @@
 {
-  "resource": "Routing groups",
+  "resource": "Authentication",
   "resource_explanation": null,
   "http_method": "POST",
-  "route": "/api/rest/private/routing_groups",
-  "description": "create new entry",
-  "explanation": null,
+  "route": "/api/rest/private/auth",
+  "description": "get token",
+  "explanation": "Pass received token to each request to private API as 'token' parameter or 'Authorization' header.",
   "parameters": [
     {
-      "scope": "routing_group",
-      "required": true,
-      "name": "name",
-      "description": "Routing group name"
+      "scope": "auth",
+      "requred": true,
+      "name": "username",
+      "description": "Login"
+    },
+    {
+      "scope": "auth",
+      "requred": true,
+      "name": "password",
+      "description": "Password"
     }
   ],
   "response_fields": [
@@ -19,11 +25,10 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/rest/private/routing_groups",
-      "request_body": "routing_group[name]=name",
+      "request_path": "/api/rest/private/auth",
+      "request_body": "auth[username]=admin&auth[password]=password",
       "request_headers": {
         "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMzEsInN1YiI6NDd9.WQR1PiKDDrOBOqyECBZM9_fGasTkeV6oOkEbY_4scEM",
         "Host": "example.org",
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
@@ -33,17 +38,17 @@
       "request_content_type": "application/x-www-form-urlencoded",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"id\": 10,\n  \"name\": \"name\"\n}",
+      "response_body": "{\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjEsInN1YiI6Nn0.zoHTh77ITT_5hcdqP4rNv-lWLX0oNsnZwt2kE6q90Ks\"\n}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"cdbe263c3a504e2fdc05336c9e070893\"",
+        "ETag": "W/\"f8a418f0a1e905b4cbc03238e315f4c9\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "9d5f18d5-d0db-46e0-97da-311c543d5bcf",
-        "X-Runtime": "0.013713",
-        "Content-Length": "23"
+        "X-Request-Id": "78016cf6-2f8d-4a7c-83f3-4578a62cb32e",
+        "X-Runtime": "0.073319",
+        "Content-Length": "126"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": null
