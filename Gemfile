@@ -79,8 +79,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'rspec_api_documentation', '~> 5.0.0'
-  gem 'apitome', '~> 0.1.0'
 end
 gem 'unicorn-worker-killer'
 gem 'ipaddress'
+gem 'apitome', '~> 0.1.0'
 
