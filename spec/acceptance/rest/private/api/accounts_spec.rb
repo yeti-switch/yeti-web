@@ -3,6 +3,10 @@ require 'rspec_api_documentation/dsl'
 
 resource 'Accounts' do
   header 'Accept', 'application/json'
+  header 'Authorization', :auth_token
+
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   required_params = [:name, :min_balance, :max_balance, :contractor_id, :timezone_id]
 

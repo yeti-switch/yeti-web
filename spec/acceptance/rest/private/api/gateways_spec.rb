@@ -3,6 +3,10 @@ require 'rspec_api_documentation/dsl'
 
 resource 'Gateways' do
   header 'Accept', 'application/json'
+  header 'Authorization', :auth_token
+
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   required_params = [
     :name, :enabled, :priority, :acd_limit, :asr_limit,

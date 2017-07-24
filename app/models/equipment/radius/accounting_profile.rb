@@ -19,12 +19,12 @@ class Equipment::Radius::AccountingProfile < Yeti::ActiveRecord
   self.table_name='class4.radius_accounting_profiles'
   has_paper_trail class_name: 'AuditLogItem'
 
-  has_many :stop_avps, class: Equipment::Radius::AccountingProfileStopAttribute, foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
-  has_many :start_avps, class: Equipment::Radius::AccountingProfileStartAttribute, foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
-  has_many :interim_avps, class: Equipment::Radius::AccountingProfileInterimAttribute, foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
+  has_many :stop_avps, class_name: 'Equipment::Radius::AccountingProfileStopAttribute', foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
+  has_many :start_avps, class_name: 'Equipment::Radius::AccountingProfileStartAttribute', foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
+  has_many :interim_avps, class_name: 'Equipment::Radius::AccountingProfileInterimAttribute', foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
 
-  has_many :customers_auths, class: CustomersAuth, foreign_key: :radius_accounting_profile_id, dependent: :restrict_with_error
-  has_many :gateways, class: Gateway, foreign_key: :radius_accounting_profile_id, dependent: :restrict_with_error
+  has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :radius_accounting_profile_id, dependent: :restrict_with_error
+  has_many :gateways, class_name: 'Gateway', foreign_key: :radius_accounting_profile_id, dependent: :restrict_with_error
 
 
   accepts_nested_attributes_for :stop_avps, allow_destroy: true

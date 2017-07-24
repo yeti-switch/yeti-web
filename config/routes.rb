@@ -1,6 +1,6 @@
 Yeti::Application.routes.draw do
-
   devise_for :admin_users, ActiveAdmin::Devise.config
+  post 'api/rest/private/auth', to: 'api/rest/private/auth#create'
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
@@ -46,7 +46,6 @@ Yeti::Application.routes.draw do
 
           api.resources :admin_users, only: [:index]
           api.resources :nodes, only: [:index]
-
         end
 
         namespace :private do
@@ -70,7 +69,7 @@ Yeti::Application.routes.draw do
   end
 
   #404
-   match '*a' => 'application#render_404', via: :get
+  match '*a' => 'application#render_404', via: :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
