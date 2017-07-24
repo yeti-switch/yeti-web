@@ -3,6 +3,10 @@ require 'rspec_api_documentation/dsl'
 
 resource 'Gateway groups' do
   header 'Accept', 'application/json'
+  header 'Authorization', :auth_token
+
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   get '/api/rest/private/gateway_groups' do
     before { create_list(:gateway_group, 2) }

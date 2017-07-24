@@ -3,6 +3,10 @@ require 'rspec_api_documentation/dsl'
 
 resource 'Customer Auths' do
   header 'Accept', 'application/json'
+  header 'Authorization', :auth_token
+
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   required_params = [
     :name, :ip, :customer_id, :rateplan_id, :routing_plan_id, :gateway_id, :account_id, :dump_level_id,

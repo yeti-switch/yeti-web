@@ -3,7 +3,13 @@ require 'spec_helper'
 describe Api::Rest::Private::RateplansController, type: :controller do
   let(:rpcm) { create :rate_profit_control_mode }
 
-  before { request.accept = 'application/json' }
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+
+  before do
+    request.accept = 'application/json'
+    request.headers['Authorization'] = auth_token
+  end
 
   describe 'GET index' do
     let!(:rateplans) { create_list :rateplan, 2 }

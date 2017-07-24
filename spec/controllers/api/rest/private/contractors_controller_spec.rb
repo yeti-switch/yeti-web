@@ -1,8 +1,13 @@
 require 'spec_helper'
 
 describe Api::Rest::Private::ContractorsController, type: :controller do
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
-  before { request.accept = 'application/json' }
+  before do
+    request.accept = 'application/json'
+    request.headers['Authorization'] = auth_token
+  end
 
   describe 'GET index' do
     let!(:contractors) { create_list :contractor, 2, vendor: true }
