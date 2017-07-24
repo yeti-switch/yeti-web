@@ -29,7 +29,7 @@ resource 'Gateways' do
   get '/api/rest/private/gateways' do
     before { create_list(:gateway, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -37,7 +37,7 @@ resource 'Gateways' do
   get '/api/rest/private/gateways/:id' do
     let(:id) { create(:gateway).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -69,7 +69,7 @@ resource 'Gateways' do
     let(:contractor_id) { create(:contractor, vendor: true).id }
     let(:codec_group_id) { create(:codec_group).id }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -87,7 +87,7 @@ resource 'Gateways' do
     let(:name) { 'name' }
     let(:acd_limit) { 1.0 }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -95,7 +95,7 @@ resource 'Gateways' do
   delete '/api/rest/private/gateways/:id' do
     let(:id) { create(:gateway).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end

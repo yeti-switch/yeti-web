@@ -85,4 +85,5 @@ group :development, :test do
 end
 gem 'unicorn-worker-killer'
 gem 'ipaddress'
+gem 'apitome', '~> 0.1.0'
 

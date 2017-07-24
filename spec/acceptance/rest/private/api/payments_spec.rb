@@ -11,7 +11,7 @@ resource 'Payments' do
   get '/api/rest/private/payments' do
     before { create_list(:payment, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -19,7 +19,7 @@ resource 'Payments' do
   get '/api/rest/private/payments/:id' do
     let(:id) { create(:payment).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -36,7 +36,7 @@ resource 'Payments' do
     let(:amount) { 10 }
     let(:account_id) { create(:account).id }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end

@@ -1,0 +1,54 @@
+{
+  "resource": "Gateway groups",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/gateway_groups/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "gateway_group",
+      "required": true,
+      "name": "name",
+      "description": "Gateway group name"
+    },
+    {
+      "scope": "gateway_group",
+      "required": true,
+      "name": "vendor_id",
+      "description": "Vendor id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/gateway_groups/11",
+      "request_body": "gateway_group[name]=name&gateway_group[vendor_id]=42",
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-cache",
+        "X-Request-Id": "85d6c1a9-ac15-4d5b-a232-e553f1cf92b2",
+        "X-Runtime": "0.021414"
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}

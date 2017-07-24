@@ -1,0 +1,45 @@
+{
+  "resource": "Contractors",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/contractors/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/contractors/9",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"contractor\": {\n    \"id\": 9,\n    \"name\": \"contractor9\",\n    \"enabled\": true,\n    \"vendor\": true,\n    \"customer\": false,\n    \"description\": null,\n    \"address\": null,\n    \"phones\": null,\n    \"smtp_connection_id\": null\n  }\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "\"01edf57f95c94fd190a19e20cc5ac824\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "3ff779a0-6d2c-44d6-8857-decef858b567",
+        "X-Runtime": "0.010630",
+        "Content-Length": "164"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
