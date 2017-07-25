@@ -41,7 +41,8 @@ RSpec.configure do |config|
       :codecs,
       :dump_level,
       'class4.dtmf_send_modes',
-      'class4.dtmf_receive_modes'
+      'class4.dtmf_receive_modes',
+      'sys.timezones'
   ]
 
   # RSpec Rails can automatically mix in different behaviours to your tests

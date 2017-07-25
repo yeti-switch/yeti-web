@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :routing_group, class: RoutingGroup do
-    name nil
+    sequence(:name) { |n| "routing_group_#{n}" }
   end
 end

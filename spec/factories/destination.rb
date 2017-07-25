@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :destination, class: Destination do
     prefix nil
-    rateplan_id nil
     connect_fee 0
     enabled true
     reject_calls false
@@ -13,5 +12,6 @@ FactoryGirl.define do
     dp_margin_fixed 0
     dp_margin_percent 0
     use_dp_intervals false
+    association :rateplan
   end
 end
