@@ -94,6 +94,9 @@ GEM
       rchardet (~> 1.5)
       rubyzip (~> 1.0, >= 1.0.0)
     active_admin_theme (1.0.3)
+    active_model_serializers (0.9.7)
+      activemodel (>= 3.2)
+      concurrent-ruby (~> 1.0)
     activeldap (4.0.4)
       activemodel (> 4.0.0)
       gettext
@@ -162,6 +165,7 @@ GEM
       compass (~> 1.0.0)
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
+    concurrent-ruby (1.0.5)
     d3-rails (3.5.2)
       railties (>= 3.1)
     daemons (1.1.9)
@@ -180,7 +184,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    draper (1.4.0)
+    draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -243,6 +247,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
+    mustache (1.0.5)
     net-ldap (0.3.1)
     net_tcp_client (1.0.2)
     netstring (0.0.3)
@@ -290,9 +295,13 @@ GEM
       ffi (>= 0.5.0)
     rchardet (1.6.1)
     ref (1.0.5)
-    request_store (1.1.0)
+    request_store (1.3.2)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
     rspec-core (3.2.0)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -310,6 +319,10 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.1)
+    rspec_api_documentation (5.0.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0)
     ruby-ole (1.2.11.8)
     ruby2ruby (2.1.3)
       ruby_parser (~> 3.1)
@@ -381,6 +394,7 @@ DEPENDENCIES
   active_admin_import (= 3.0.0.pre)
   active_admin_sidebar!
   active_admin_theme
+  active_model_serializers (~> 0.9.7)
   activeadmin!
   activeldap
   annotate
@@ -395,7 +409,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (~> 3.4.1)
   devise_ldap_authenticatable (~> 0.8)!
-  draper (~> 1.4)
+  draper (~> 2.1.0)
   excelinator!
   factory_girl_rails
   font-awesome-rails
@@ -413,6 +427,7 @@ DEPENDENCIES
   rails (= 4.1.9)
   ransack (~> 1.4.0)
   rspec-rails
+  rspec_api_documentation (~> 5.0.0)
   sass-rails (~> 4.0.0)
   sourcify
   sprockets (= 2.11.0)
@@ -426,4 +441,4 @@ DEPENDENCIES
   zip-zip
 
 BUNDLED WITH
-   1.12.5
+   1.15.1
