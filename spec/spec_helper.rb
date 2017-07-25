@@ -42,6 +42,8 @@ RSpec.configure do |config|
       :dump_level,
       'class4.dtmf_send_modes',
       'class4.dtmf_receive_modes',
+      'class4.gateway_rel100_modes',
+      'class4.transport_protocols',
       'sys.timezones'
   ]
 

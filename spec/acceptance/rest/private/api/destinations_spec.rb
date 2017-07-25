@@ -3,11 +3,15 @@ require 'rspec_api_documentation/dsl'
 
 resource 'Destinations' do
   header 'Accept', 'application/json'
+  header 'Authorization', :auth_token
+
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   get '/api/rest/private/destinations' do
     before { create_list(:destination, 2) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -15,7 +19,7 @@ resource 'Destinations' do
   get '/api/rest/private/destinations/:id' do
     let(:id) { create(:destination).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -53,7 +57,7 @@ resource 'Destinations' do
     let(:dp_margin_percent) { 0 }
     let(:rate_policy_id) { 1 }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -83,7 +87,7 @@ resource 'Destinations' do
     let(:id) { create(:destination).id }
     let(:enabled) { false }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -91,7 +95,7 @@ resource 'Destinations' do
   delete '/api/rest/private/destinations/:id' do
     let(:id) { create(:destination).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end

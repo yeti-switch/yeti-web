@@ -1,0 +1,111 @@
+{
+  "resource": "Accounts",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/accounts",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "account",
+      "required": true,
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "scope": "account",
+      "required": true,
+      "name": "min_balance",
+      "description": "Min balance"
+    },
+    {
+      "scope": "account",
+      "required": true,
+      "name": "max_balance",
+      "description": "Max balance"
+    },
+    {
+      "scope": "account",
+      "required": true,
+      "name": "contractor_id",
+      "description": "Contractor id"
+    },
+    {
+      "scope": "account",
+      "required": true,
+      "name": "timezone_id",
+      "description": "Timezone id"
+    },
+    {
+      "scope": "account",
+      "name": "origination_capacity",
+      "description": "Origination capacity"
+    },
+    {
+      "scope": "account",
+      "name": "termination_capacity",
+      "description": "Termination capacity"
+    },
+    {
+      "scope": "account",
+      "name": "customer_invoice_period_id",
+      "description": "Customer invoice period id"
+    },
+    {
+      "scope": "account",
+      "name": "vendor_invoice_period_id",
+      "description": "Vendor invoice period id"
+    },
+    {
+      "scope": "account",
+      "name": "customer_invoice_template_id",
+      "description": "Customer invoice template id"
+    },
+    {
+      "scope": "account",
+      "name": "vendor_invoice_template_id",
+      "description": "Vendor invoice template id"
+    },
+    {
+      "scope": "account",
+      "name": "send_invoices_to",
+      "description": "Send invoices to"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/accounts",
+      "request_body": "account[name]=name&account[min_balance]=1&account[max_balance]=10&account[contractor_id]=4&account[timezone_id]=1",
+      "request_headers": {
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjAsInN1YiI6M30.dWSPwuWy183O8kRXaNqilvCM4hZj-E2aiCj6aLteh30",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"id\": 4,\n  \"contractor_id\": 4,\n  \"balance\": \"0.0\",\n  \"min_balance\": \"1.0\",\n  \"max_balance\": \"10.0\",\n  \"name\": \"name\",\n  \"origination_capacity\": null,\n  \"termination_capacity\": null,\n  \"customer_invoice_period_id\": null,\n  \"customer_invoice_template_id\": null,\n  \"vendor_invoice_template_id\": null,\n  \"next_customer_invoice_at\": null,\n  \"next_vendor_invoice_at\": null,\n  \"vendor_invoice_period_id\": null,\n  \"send_invoices_to\": null,\n  \"timezone_id\": 1,\n  \"next_customer_invoice_type_id\": null,\n  \"next_vendor_invoice_type_id\": null\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"289eac2cf0478a9e129a091fe4bde08f\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "f633fcc8-bee1-4fb9-964b-3b1bde7b5f35",
+        "X-Runtime": "0.029253",
+        "Content-Length": "463"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

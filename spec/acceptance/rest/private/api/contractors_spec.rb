@@ -3,11 +3,15 @@ require 'rspec_api_documentation/dsl'
 
 resource 'Contractors' do
   header 'Accept', 'application/json'
+  header 'Authorization', :auth_token
+
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   get '/api/rest/private/contractors' do
     before { create_list(:contractor, 2, vendor: true) }
 
-    example_request 'returns listing' do
+    example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
@@ -15,7 +19,7 @@ resource 'Contractors' do
   get '/api/rest/private/contractors/:id' do
     let(:id) { create(:contractor, vendor: true).id }
 
-    example_request 'returns specific entry' do
+    example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
@@ -33,7 +37,7 @@ resource 'Contractors' do
     let(:name) { 'name' }
     let(:vendor) { true }
 
-    example_request 'creates new entry' do
+    example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
@@ -52,7 +56,7 @@ resource 'Contractors' do
     let(:name) { 'name' }
     let(:customer) { true }
 
-    example_request 'updates values' do
+    example_request 'update values' do
       expect(status).to eq(204)
     end
   end
@@ -60,7 +64,7 @@ resource 'Contractors' do
   delete '/api/rest/private/contractors/:id' do
     let(:id) { create(:contractor, vendor: true).id }
 
-    example_request 'deletes resource' do
+    example_request 'delete entry' do
       expect(status).to eq(204)
     end
   end

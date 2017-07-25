@@ -3,7 +3,13 @@ require 'spec_helper'
 describe Api::Rest::Private::DestinationsController, type: :controller do
   let(:rateplan) { create :rateplan }
 
-  before { request.accept = 'application/json' }
+  let(:user) { create :admin_user }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+
+  before do
+    request.accept = 'application/json'
+    request.headers['Authorization'] = auth_token
+  end
 
   describe 'GET index' do
     let!(:destinations) { create_list :destination, 2, rateplan: rateplan }

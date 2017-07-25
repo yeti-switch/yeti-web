@@ -1,8 +1,11 @@
-require "base64"
-class Api::RestController < ApiController
+require 'base64'
 
-  before_filter :restrict_access
-  skip_before_filter :verify_authenticity_token
+class Api::RestController < ApiController
+  include Knock::Authenticable
+  undef :current_admin_user
+
+  before_action :authenticate_admin_user
+  skip_before_action :verify_authenticity_token
 
   respond_to :json
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
@@ -73,5 +76,9 @@ class Api::RestController < ApiController
     true
   end
 
+  private
 
+  def authenticate_admin_user
+    unauthorized_entity('admin_user') unless authenticate_for(::AdminUser)
+  end
 end

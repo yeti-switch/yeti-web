@@ -87,6 +87,7 @@ class CustomersAuth < Yeti::ActiveRecord
 
 
   scope :with_radius, -> { where("radius_auth_profile_id is not null") }
+  scope :with_dump, -> { where("dump_level_id > 0") }
 
   include Yeti::ResourceStatus
 
