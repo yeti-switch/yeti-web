@@ -71,10 +71,4 @@ class Api::RestController < ApiController
   def restrict_access
     true
   end
-
-  private
-
-  def authenticate_admin_user
-    unauthorized_entity('admin_user') unless authenticate_for(::AdminUser)
-  end
 end
