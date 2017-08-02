@@ -1,10 +1,6 @@
 require 'base64'
 
 class Api::RestController < ApiController
-  include Knock::Authenticable
-  undef :current_admin_user
-
-  before_action :authenticate_admin_user
   skip_before_action :verify_authenticity_token
 
   respond_to :json
