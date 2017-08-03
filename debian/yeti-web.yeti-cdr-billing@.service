@@ -26,11 +26,8 @@ Environment=GEM_HOME=/home/yeti-web/.gem
 Environment=GEM_PATH=/home/yeti-web/.gem:/home/yeti-web/.bundle_gem
 
 WorkingDirectory=/home/yeti-web/pgq-processors
-
-RuntimeDirectory=yeti-cdr-billing-%i
-ExecStart=/usr/bin/ruby /home/yeti-web/.gem/bin/bundle exec rake pgq:worker processor=%i pidfile=/run/yeti-cdr-billing-%i/%i.pid config_file=/home/yeti-web/config/cdr_billing.yml
-PIDFile=/run/yeti-cdr-billing-%i/%i.pid
-
+RuntimeDirectory=yeti-cdr-billing
+ExecStart=/usr/bin/ruby /home/yeti-web/.gem/bin/bundle exec rake pgq:worker processor=%i pid_file=/run/yeti-cdr-billing/%i.pid config_file=/home/yeti-web/config/cdr_billing.yml
+PIDFile=/run/yeti-cdr-billing/%i.pid
 Type=simple
 Restart=on-abnormal
-
