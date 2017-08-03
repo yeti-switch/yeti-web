@@ -42,7 +42,7 @@ module Concerns::Rescuers
     elsif request.xhr?
       render status: 404, nothing: true
     else
-      render template: "404", layout: 'application', status: 404
+      render template: "404", layout: 'application', status: 404, formats: [:html]
     end
   end
 
