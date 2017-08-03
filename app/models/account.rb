@@ -67,12 +67,20 @@ class Account < Yeti::ActiveRecord
     contacts_for_invoices.map(&:email).join(",")
   end
 
+  def send_balance_notifications_to_emails
+    contacts_for_balance_notifications.map(&:email).join(",")
+  end
+
   def self.totals
      except(:eager_load).select("sum(balance) as total_balance").take
   end
 
   def contacts_for_invoices
     @contacts ||= Billing::Contact.where(id: send_invoices_to)
+  end
+
+  def contacts_for_balance_notifications
+    @contacts_balance ||= Billing::Contact.where(id: send_balance_notifications_to)
   end
 
   before_save do
@@ -149,7 +157,20 @@ class Account < Yeti::ActiveRecord
     balance*1.1>=max_balance
   end
 
+  def fire_low_balance_alarm(data)
+    Notification::Alert.fire_account_low_balance(self, data)
+  end
 
+  def clear_low_balance_alarm(data)
+    Notification::Alert.clear_account_low_balance(self, data)
+  end
 
+  def fire_high_balance_alarm(data)
+    Notification::Alert.fire_account_high_balance(self, data)
+  end
+
+  def clear_high_balance_alarm(data)
+    Notification::Alert.clear_account_high_balance(self, data)
+  end
 
 end

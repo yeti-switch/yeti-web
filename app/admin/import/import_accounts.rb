@@ -35,6 +35,8 @@ ActiveAdmin.register Importing::Account do
     column :balance
     column :min_balance
     column :max_balance
+    column :balance_low_threshold
+    column :balance_high_threshold
     column :origination_capacity
     column :termination_capacity
   end

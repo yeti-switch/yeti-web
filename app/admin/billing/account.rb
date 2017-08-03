@@ -14,6 +14,8 @@ ActiveAdmin.register Account do
                  :balance,
                  :min_balance,
                  :max_balance,
+                 :balance_low_threshold,
+                 :balance_high_threshold,
                  :origination_capacity,
                  :termination_capacity,
                  :customer_invoice_period,
@@ -27,12 +29,14 @@ ActiveAdmin.register Account do
   scope :customers_accounts
   scope :insufficient_balance
 
-  permit_params :contractor_id, :balance, :min_balance,
-                :max_balance, :name, :origination_capacity,
+  permit_params :contractor_id, :balance,
+                :min_balance, :max_balance,
+                :balance_low_threshold, :balance_high_threshold,
+                :name, :origination_capacity,
                 :termination_capacity, :customer_invoice_period_id, :vendor_invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
-                send_invoices_to: []
+                send_invoices_to: [], send_balance_notifications_to: []
 
 
 
@@ -73,6 +77,9 @@ ActiveAdmin.register Account do
       c.decorated_max_balance
     end
 
+    column :balance_low_threshold
+    column :balance_high_threshold
+
     column :origination_capacity
     column :termination_capacity
 
@@ -82,6 +89,12 @@ ActiveAdmin.register Account do
     column :vendor_invoice_template
     column :customer_invoice_template
     column :timezone
+    column :send_invoices_to do |c|
+      c.send_invoices_to_emails
+    end
+    column :send_balance_notifications_to do |c|
+      c.send_balance_notifications_to_emails
+    end
   end
 
   filter :id
@@ -107,6 +120,9 @@ ActiveAdmin.register Account do
             s.decorated_max_balance
           end
 
+          row :balance_low_threshold
+          row :balance_high_threshold
+
           row :name
           row :origination_capacity
           row :termination_capacity
@@ -114,6 +130,9 @@ ActiveAdmin.register Account do
           row :customer_invoice_template
           row :send_invoices_to do |row|
              row.send_invoices_to_emails
+          end
+          row :send_balance_notifications_to do |row|
+            row.send_balance_notifications_to_emails
           end
           row :vendor_invoice_period do
             if s.vendor_invoice_period
@@ -181,6 +200,8 @@ ActiveAdmin.register Account do
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance
       f.input :max_balance
+      f.input :balance_low_threshold
+      f.input :balance_high_threshold
       f.input :origination_capacity
       f.input :termination_capacity
       f.input :vendor_invoice_period
@@ -191,6 +212,7 @@ ActiveAdmin.register Account do
       f.input :customer_invoice_template
 
       f.input :send_invoices_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
+      f.input :send_balance_notifications_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
       f.input :timezone, as: :select, input_html: {class: 'chosen'}
     end
     f.actions
