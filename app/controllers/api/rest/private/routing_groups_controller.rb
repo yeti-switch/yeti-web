@@ -1,4 +1,4 @@
-class Api::Rest::Private::RoutingGroupsController < Api::RestController
+class Api::Rest::Private::RoutingGroupsController < Api::Rest::Private::BaseController
 
   after_action only: [:index] do
     send_x_headers(@routing_groups)

@@ -1,4 +1,4 @@
-class Api::Rest::Private::AccountsController < Api::RestController
+class Api::Rest::Private::AccountsController < Api::Rest::Private::BaseController
 
   after_action only: [:index] do
     send_x_headers(@accounts)
