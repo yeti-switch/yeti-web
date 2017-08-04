@@ -196,24 +196,25 @@ ActiveAdmin.register Account do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name
-      f.input :contractor, input_html: {class: 'chosen'}
-      f.input :min_balance
-      f.input :max_balance
+      f.input :name, hint: I18n.t('hints.billing.account.name')
+      f.input :contractor, hint: I18n.t('hints.billing.account.contractor'), input_html: {class: 'chosen'}
+      f.input :min_balance, hint: I18n.t('hints.billing.account.min_balance')
+      f.input :max_balance, hint: I18n.t('hints.billing.account.max_balance')
       f.input :balance_low_threshold
       f.input :balance_high_threshold
-      f.input :origination_capacity
-      f.input :termination_capacity
-      f.input :vendor_invoice_period
-      f.input :customer_invoice_period
+      f.input :origination_capacity, hint: I18n.t('hints.billing.account.origination_capacity')
+      f.input :termination_capacity, hint: I18n.t('hints.billing.account.termination_capacity')
+      f.input :vendor_invoice_period, hint: I18n.t('hints.billing.account.vendor_invoice_period')
+      f.input :customer_invoice_period, hint: I18n.t('hints.billing.account.customer_invoice_period')
 
 
-      f.input :vendor_invoice_template
-      f.input :customer_invoice_template
+      f.input :vendor_invoice_template, hint: I18n.t('hints.billing.account.vendor_invoice_template')
+      f.input :customer_invoice_template, hint: I18n.t('hints.billing.account.customer_invoice_template')
 
-      f.input :send_invoices_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
+      f.input :send_invoices_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection,
+              hint: I18n.t('hints.billing.account.send_invoices_to')
       f.input :send_balance_notifications_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
-      f.input :timezone, as: :select, input_html: {class: 'chosen'}
+      f.input :timezone, as: :select, input_html: {class: 'chosen'}, hint: I18n.t('hints.billing.account.timezone')
     end
     f.actions
   end

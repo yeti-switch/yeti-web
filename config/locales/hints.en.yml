@@ -1,0 +1,482 @@
+en:
+  hints:
+    billing:
+      account:
+        name: "No description"
+        contractor:  "No description"
+        min_balance: "No description"
+        max_balance: "No description"
+        origination_capacity: "No description"
+        termination_capacity: "No description"
+        vendor_invoice_period: "No description"
+        customer_invoice_period: "No description"
+        vendor_invoice_template: "No description"
+        customer_invoice_template: "No description"
+        send_invoices_to: "No description"
+        timezone: "No description"
+
+      contact:
+        contractor: "No description"
+        admin_user: "No description"
+        email: "No description"
+        notes: "No description"
+
+      contractors:
+        name: "No description"
+        description: "No description"
+        address: "No description"
+        phones: "No description"
+        smtp_connection: "No description"
+
+      invoice_templates:
+        name: "No description"
+        template_file: "No description"
+
+      invoices:
+        contractor: "No description"
+        account: "No description"
+        date: "Customer timezone will be used"
+
+      payments:
+        account: "No description"
+        amount: "No description"
+        notes: "No description"
+
+    equipment:
+      codec_group:
+        name:  "No description"
+        codec_id: "No description"
+        priority: "No description"
+        dynamic_payload_type: "Payload type must be between 96 and 127"
+        format_parameters: "No description"
+
+      disconnect_policy_code:
+        policy: "No description"
+        code:  "No description"
+        rewrited_code:  "No description"
+        rewrited_reason:  "No description"
+
+      gateway_groups:
+        name: "No description"
+        vendor: "No description"
+
+      gateways:
+        name: "No description"
+        external_id: "No description"
+        contractor: "No description"
+        gateway_group: "No description"
+        priority: "No description"
+        pop: "No description"
+        origination_capacity: "No description"
+        termination_capacity: "No description"
+        acd_limit: "No description"
+        asr_limit: "No description"
+        short_calls_limit: "No description"
+        sst_session_expires: "No description"
+        sst_minimum_timer: "No description"
+        sst_maximum_timer: "No description"
+        session_refresh_method: "No description"
+        sensor_level: "No description"
+        sensor: "No description"
+        rel100_mode: "No description"
+        transit_headers: "Use comma as delimiter"
+        sip_interface_name: "No description"
+        orig_next_hop: "No description"
+        orig_append_headers_req: "No description"
+        orig_proxy_transport_protocol: "No description"
+        orig_outbound_proxy: "No description"
+        orig_disconnect_policy: "No description"
+        transport_protocol: "No description"
+        host: "No description"
+        port: "Leave it empty for enable DNS SRV resolving"
+        auth_user: "No description"
+        auth_password: "No description"
+        auth_from_user: "No description"
+        auth_from_domain: "No description"
+        term_proxy_transport_protocol: "No description"
+        term_outbound_proxy: "No description"
+        term_next_hop: "No description"
+        term_disconnect_policy: "No description"
+        term_append_headers_req: "No description"
+        sdp_alines_filter_type: "No description"
+        sdp_alines_filter_list: "No description"
+        ringing_timeout: "No description"
+        sip_timer_b: "No description"
+        dns_srv_failover_timer: "No description"
+        fake_180_timer: "Timeout in ms."
+        diversion_policy: "No description"
+        diversion_rewrite_rule: "No description"
+        diversion_rewrite_result: "No description"
+        src_name_rewrite_rule: "No description"
+        src_name_rewrite_result: "No description"
+        src_rewrite_rule: "No description"
+        src_rewrite_result: "No description"
+        dst_rewrite_rule: "No description"
+        dst_rewrite_result: "No description"
+        sdp_c_location: "No description"
+        codec_group: "No description"
+        rtp_timeout: "No description"
+        rtp_interface_name: "No description"
+        dtmf_send_mode: "No description"
+        dtmf_receive_mode: "No description"
+        radius_accounting_profile: "RADIUS accounting profile for LegB(Termination)"
+
+      lnp_database:
+        name: "No description"
+        driver: "No description"
+        host: "No description"
+        port: "No description"
+        timeout: "Request timeout in ms."
+        thinq_username: "No description"
+        thinq_token: "No description"
+        csv_file: "No description"
+
+      radius_accounting_profile:
+        name: "No description"
+        server: "No description"
+        port: "No description"
+        secret: "No description"
+        interim_accounting_interval: "No description"
+
+        start_avps:
+          type_id: "Attribute type, see rfc2865"
+          name: "Informational only"
+          vsa_vendor_id: "No description"
+          vsa_vendor_type: "No description"
+          value: "No description"
+          format: "No description"
+
+        interim_avps:
+          type_id: "Attribute type, see rfc2865"
+          name: "Informational only"
+          vsa_vendor_id: "No description"
+          vsa_vendor_type: "No description"
+          value: "No description"
+          format: "No description"
+
+        stop_avps:
+          type_id: "Attribute type, see rfc2865"
+          name: "Informational only"
+          vsa_vendor_id: "No description"
+          vsa_vendor_type: "No description"
+          value: "No description"
+          format: "No description"
+
+      radius_auth_profile:
+        name: "No description"
+        server: "No description"
+        port: "No description"
+        secret: "No description"
+
+        avps:
+          type_id: "Attribute type, see rfc2865"
+          name: "Informational only"
+          vsa_vendor_id: "No description"
+          vsa_vendor_type: "No description"
+          value: "No description"
+          format: "No description"
+
+      registrations:
+        name: "No description"
+        pop: "No description"
+        node: "No description"
+        transport_protocol: "No description"
+        domain: "No description"
+        username: "No description"
+        display_username: "No description"
+        auth_user: "No description"
+        auth_password: "No description"
+        proxy: "No description"
+        proxy_transport_protocol: "No description"
+        contact: "Must be in URI format"
+        expire: "No description"
+        retry_delay: "No description"
+        max_attempts: "No description"
+
+    reports:
+      custom_cdr:
+        date_start: "No description"
+        date_end: "No description"
+        customer: "No description"
+        filter: "No description"
+        group_by_fields: "No description"
+
+      custom_cdr_scheduler:
+        period: "No description"
+        customer: "No description"
+        filter: "No description"
+        group_by: "No description"
+
+      customer_traffic:
+        date_start: "No description"
+        date_end: "No description"
+        customer: "No description"
+
+      customer_traffic_scheduler:
+        period: "No description"
+        customer: "No description"
+
+      interval_cdr:
+        date_start: "No description"
+        date_end: "No description"
+        customer: "No description"
+        interval_length: "No description"
+        aggregation_function: "No description"
+        aggregate_by: "No description"
+        filter: "No description"
+        group_by_fields: "No description"
+
+      interval_cdr_scheduler:
+        period: "No description"
+        interval_length: "No description"
+        aggregation_function: "No description"
+        aggregate_by: "No description"
+        filter: "No description"
+        group_by: "No description"
+
+      vendor_traffic:
+        date_start: "No description"
+        date_end: "No description"
+        vendor: "No description"
+
+      vendor_traffic_scheduler:
+        period: "No description"
+        vendor: "No description"
+
+    routing:
+      area_prefixes:
+        prefix: "No description"
+        area: "No description"
+
+      areas:
+        name: "No description"
+
+      customers_auth:
+        name: "No description"
+        customer: "No description"
+        account: "No description"
+        gateway: "No description"
+        rateplan: "No description"
+        routing_plan: "No description"
+        dst_numberlist: "No description"
+        src_numberlist: "No description"
+        dump_level: "No description"
+        capacity: "No description"
+        transport_protocol: "No description"
+        ip: "No description"
+        pop: "No description"
+        src_prefix: "No description"
+        dst_prefix: "No description"
+        uri_domain: "No description"
+        from_domain: "No description"
+        to_domain: "No description"
+        x_yeti_auth: "No description"
+        diversion_policy: "No description"
+        diversion_rewrite_rule: "No description"
+        diversion_rewrite_result: "No description"
+        src_name_rewrite_rule: "No description"
+        src_name_rewrite_result: "No description"
+        src_rewrite_rule: "No description"
+        src_rewrite_result: "No description"
+        dst_rewrite_rule: "No description"
+        dst_rewrite_result: "No description"
+        radius_auth_profile: "Select for additional RADIUS authentification"
+        src_number_radius_rewrite_rule: "No description"
+        src_number_radius_rewrite_result: "No description"
+        dst_number_radius_rewrite_rule: "No description"
+        dst_number_radius_rewrite_result: "No description"
+        radius_accounting_profile: "Accounting profile for LegA"
+
+      destinations:
+        rateplan: "No description"
+        routing_tag: "No description"
+        valid_from: "No description"
+        valid_till: "No description"
+        rate_policy: "No description"
+        initial_interval: "No description"
+        next_interval: "No description"
+
+        initial_rate: "No description"
+        next_rate: "No description"
+        connect_fee: "No description"
+        profit_control_mode: "Leave it empty to inherit Profit control mode from Rateplan"
+        dp_margin_fixed: "No description"
+        dp_margin_percent: "No description"
+        asr_limit: "No description"
+        acd_limit: "No description"
+        short_calls_limit: "No description"
+
+      dialpeer_next_rate:
+        initial_interval: "No description"
+        next_interval: "No description"
+        initial_rate: "No description"
+        next_rate: "No description"
+        connect_fee: "No description"
+        apply_time: "No description"
+
+      dialpeers:
+        routing_group: "No description"
+        routing_tag: "No description"
+        vendor: "No description"
+        account: "No description"
+        priority: "No description"
+        force_hit_rate: "No description"
+        initial_interval: "No description"
+        initial_rate: "No description"
+        next_interval: "No description"
+        next_rate: "No description"
+        lcr_rate_multiplier: "No description"
+        connect_fee: "No description"
+        gateway: "No description"
+        gateway_group: "No description"
+        valid_from: "No description"
+        valid_till: "No description"
+        acd_limit: "No description"
+        asr_limit: "No description"
+        short_calls_limit: "No description"
+        capacity: "No description"
+        src_name_rewrite_rule: "No description"
+        src_name_rewrite_result: "No description"
+        src_rewrite_rule: "No description"
+        src_rewrite_result: "No description"
+        dst_rewrite_rule: "No description"
+        dst_rewrite_result: "No description"
+
+      numberlist_items:
+        numberlist: "No description"
+        key: "No description"
+        action: "No description"
+        src_rewrite_rule: "No description"
+        src_rewrite_result: "No description"
+        dst_rewrite_rule: "No description"
+        dst_rewrite_result: "No description"
+
+      numberlists:
+        name: "No description"
+        mode: "No description"
+        default_action: "No description"
+        default_src_rewrite_rule: "No description"
+        default_src_rewrite_result: "No description"
+        default_dst_rewrite_rule: "No description"
+        default_dst_rewrite_result: "No description"
+
+      rateplan_duplicator:
+        id: "No description"
+        name: "No description"
+        profit_control_mode_id: "No description"
+        send_quality_alarms_to: "No description"
+
+      rateplans:
+        name: "No description"
+        profit_control_mode: "No description"
+        send_quality_alarms_to: "No description"
+
+      routing_group_duplicator:
+        name: "No description"
+        id:  "No description"
+
+      routing_plan:
+        name: "No description"
+        sorting: "No description"
+        rate_delta_max: "No description"
+        routing_groups: "No description"
+
+      routing_plan_lnp_rule:
+        routing_plan: "No description"
+        dst_prefix: "No description"
+        req_dst_rewrite_rule: "No description"
+        req_dst_rewrite_result: "No description"
+        database: "No description"
+        lrn_rewrite_rule: "No description"
+        lrn_rewrite_result: "No description"
+
+      routing_plan_static_route:
+        routing_plan: "No description"
+        priority: "No description"
+        vendor: "No description"
+
+      routing_plan_static_route_batch_creator:
+        routing_plan: "No description"
+        network: "No description"
+        priority: "No description"
+        prefixes: "Enter prefix OR choose Network. You can enter multiple prefixes separated by comma."
+        vendors: "Priority will be decremented on 5 for each next Vendor"
+
+      routing_simulations:
+        transport_protocol_id: "No description"
+        remote_ip: "No description"
+        remote_port: "No description"
+        pop_id: "No description"
+        src_number: "No description"
+        dst_number: "No description"
+        uri_domain: "No description"
+        from_domain: "No description"
+        to_domain: "No description"
+        x_yeti_auth: "No description"
+
+      routing_tag_detection_rules:
+        src_area: "No description"
+        dst_area: "No description"
+        routing_tag: "No description"
+
+      routing_tags:
+        name: "No description"
+
+    system:
+      admin_user:
+        email: "No description"
+        username: "No description"
+        password: "No description"
+        password_confirmation: "No description"
+        ssh_key: "No description"
+
+      cdr_config:
+        call_duration_round_mode: "No description"
+
+      disconnect_codes:
+        namespace: "No description"
+        code: "No description"
+        reason: "No description"
+        rewrited_code: "No description"
+        rewrited_reason: "No description"
+
+      lnp_resolver:
+        name: "No description"
+        address: "No description"
+        port: "No description"
+
+      load_balancer:
+        name: "No description"
+        signalling_ip: "No description"
+
+      network:
+        name: "No description"
+
+      network_prefix:
+        prefix: "No description"
+        country: "No description"
+        network: "No description"
+
+      nodes:
+        name: "No description"
+        pop: "No description"
+        signalling_ip: "No description"
+        signalling_port: "No description"
+        rpc_endpoint: "No description"
+
+      sensor:
+        name: "No description"
+        mode: "No description"
+        source_interface: "No description"
+        target_mac: "No description"
+        source_ip: "No description"
+        target_ip: "No description"
+
+      smtp_connections:
+        name: "No description"
+        host: "No description"
+        port: "No description"
+        from_address: "No description"
+        auth_user: "No description"
+        auth_password: "No description"
+

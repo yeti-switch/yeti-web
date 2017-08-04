@@ -184,47 +184,51 @@ ActiveAdmin.register Dialpeer do
       end
 
       f.input :enabled
-      f.input :routing_group, input_html: {class: 'chosen'}
-      f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
+      f.input :routing_group, input_html: {class: 'chosen'}, hint: I18n.t('hints.routing.dialpeers.routing_group')
+      f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None", hint: I18n.t('hints.routing.dialpeers.routing_tag')
       f.input :vendor,  collection: Contractor.vendors,
               input_html: {
                   class: 'chosen',
                   onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :dialpeer_account_id) +
                       remote_chosen_request(:get, with_contractor_gateways_path, {contractor_id: "$(this).val()"}, :dialpeer_gateway_id) +
                       remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :dialpeer_gateway_group_id)
-              }
+              },
+              hint: I18n.t('hints.routing.dialpeers.vendor')
       f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),
-                        include_blank: false ,
-                        input_html: {class: 'chosen'}
-      f.input :priority
-      f.input :force_hit_rate
+              include_blank: false,
+              input_html: {class: 'chosen'},
+              hint: I18n.t('hints.routing.dialpeers.account')
+      f.input :priority, hint: I18n.t('hints.routing.dialpeers.priority')
+      f.input :force_hit_rate, hint: I18n.t('hints.routing.dialpeers.force_hit_rate')
       f.input :exclusive_route
-      f.input :initial_interval
-      f.input :initial_rate
-      f.input :next_interval
-      f.input :next_rate
-      f.input :lcr_rate_multiplier
-      f.input :connect_fee
+      f.input :initial_interval, hint: I18n.t('hints.routing.dialpeers.initial_interval')
+      f.input :initial_rate, hint: I18n.t('hints.routing.dialpeers.initial_rate')
+      f.input :next_interval, hint: I18n.t('hints.routing.dialpeers.next_interval')
+      f.input :next_rate, hint: I18n.t('hints.routing.dialpeers.next_rate')
+      f.input :lcr_rate_multiplier, hint: I18n.t('hints.routing.dialpeers.lcr_rate_multiplier')
+      f.input :connect_fee, hint: I18n.t('hints.routing.dialpeers.connect_fee')
 
       f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateways),
               include_blank: "None" ,
-              input_html: {class: 'chosen'}
+              input_html: {class: 'chosen'},
+              hint: I18n.t('hints.routing.dialpeers.gateway')
       f.input :gateway_group, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateway_groups),
               include_blank: "None" ,
-              input_html: {class: 'chosen'}
+              input_html: {class: 'chosen'},
+              hint: I18n.t('hints.routing.dialpeers.gateway_group')
 
-      f.input :valid_from, as: :date_time_picker
-      f.input :valid_till, as: :date_time_picker
-      f.input :acd_limit
-      f.input :asr_limit
-      f.input :short_calls_limit
-      f.input :capacity
-      f.input :src_name_rewrite_rule
-      f.input :src_name_rewrite_result
-      f.input :src_rewrite_rule
-      f.input :src_rewrite_result
-      f.input :dst_rewrite_rule
-      f.input :dst_rewrite_result
+      f.input :valid_from, as: :date_time_picker, hint: I18n.t('hints.routing.dialpeers.valid_from')
+      f.input :valid_till, as: :date_time_picker, hint: I18n.t('hints.routing.dialpeers.valid_till')
+      f.input :acd_limit, hint: I18n.t('hints.routing.dialpeers.acd_limit')
+      f.input :asr_limit, hint: I18n.t('hints.routing.dialpeers.asr_limit')
+      f.input :short_calls_limit, hint: I18n.t('hints.routing.dialpeers.short_calls_limit')
+      f.input :capacity, hint: I18n.t('hints.routing.dialpeers.capacity')
+      f.input :src_name_rewrite_rule, hint: I18n.t('hints.routing.dialpeers.src_name_rewrite_rule')
+      f.input :src_name_rewrite_result, hint: I18n.t('hints.routing.dialpeers.src_name_rewrite_result')
+      f.input :src_rewrite_rule, hint: I18n.t('hints.routing.dialpeers.src_rewrite_rule')
+      f.input :src_rewrite_result, hint: I18n.t('hints.routing.dialpeers.src_rewrite_result')
+      f.input :dst_rewrite_rule, hint: I18n.t('hints.routing.dialpeers.dst_rewrite_rule')
+      f.input :dst_rewrite_result, hint: I18n.t('hints.routing.dialpeers.dst_rewrite_result')
     end
     f.actions
   end

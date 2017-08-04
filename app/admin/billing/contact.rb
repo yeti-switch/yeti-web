@@ -50,10 +50,10 @@ ActiveAdmin.register Billing::Contact do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :contractor, input_html: {class: 'chosen'}
-      f.input :admin_user, input_html: {class: 'chosen'}
-      f.input :email
-      f.input :notes
+      f.input :contractor, input_html: {class: 'chosen'}, hint: I18n.t('hints.billing.contact.contractor')
+      f.input :admin_user, input_html: {class: 'chosen'}, hint: I18n.t('hints.billing.contact.admin_user')
+      f.input :email, hint: I18n.t('hints.billing.contact.email')
+      f.input :notes, hint: I18n.t('hints.billing.contact.notes')
     end
     f.actions
   end

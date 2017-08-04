@@ -52,13 +52,13 @@ ActiveAdmin.register Routing::NumberlistItem do
 
   form do |f|
     f.inputs do
-      f.input :numberlist, input_html: {class: 'chosen'}
-      f.input :key
-      f.input :action, as: :select, include_blank: 'Default action'
-      f.input :src_rewrite_rule
-      f.input :src_rewrite_result
-      f.input :dst_rewrite_rule
-      f.input :dst_rewrite_result
+      f.input :numberlist, input_html: {class: 'chosen'}, hint: I18n.t('hints.routing.numberlist_items.numberlist')
+      f.input :key, hint: I18n.t('hints.routing.numberlist_items.key')
+      f.input :action, as: :select, include_blank: 'Default action', hint: I18n.t('hints.routing.numberlist_items.action')
+      f.input :src_rewrite_rule, hint: I18n.t('hints.routing.numberlist_items.src_rewrite_rule')
+      f.input :src_rewrite_result, hint: I18n.t('hints.routing.numberlist_items.src_rewrite_result')
+      f.input :dst_rewrite_rule, hint: I18n.t('hints.routing.numberlist_items.dst_rewrite_rule')
+      f.input :dst_rewrite_result, hint: I18n.t('hints.routing.numberlist_items.dst_rewrite_result')
     end
     f.actions
   end

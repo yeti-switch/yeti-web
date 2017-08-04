@@ -65,8 +65,8 @@ ActiveAdmin.register GatewayGroup do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name
-      f.input :vendor, input_html: {class: 'chosen'}, collection: Contractor.vendors
+      f.input :name, hint: I18n.t('hints.equipment.gateway_groups.name')
+      f.input :vendor, hint: I18n.t('hints.equipment.gateway_groups.vendor'), input_html: {class: 'chosen'}, collection: Contractor.vendors
       f.input :prefer_same_pop
     end
     f.actions
