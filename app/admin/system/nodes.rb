@@ -46,11 +46,11 @@ ActiveAdmin.register Node do
 
   form do |f|
     f.inputs do
-      f.input :name
-      f.input :pop
-      f.input :signalling_ip
-      f.input :signalling_port
-      f.input :rpc_endpoint
+      f.input :name, hint: I18n.t('hints.system.nodes.name')
+      f.input :pop, hint: I18n.t('hints.system.nodes.pop')
+      f.input :signalling_ip, hint: I18n.t('hints.system.nodes.signalling_ip')
+      f.input :signalling_port, hint: I18n.t('hints.system.nodes.signalling_port')
+      f.input :rpc_endpoint, hint: I18n.t('hints.system.nodes.rpc_endpoint')
     end
     f.actions
   end

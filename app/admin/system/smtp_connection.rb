@@ -66,12 +66,12 @@ ActiveAdmin.register System::SmtpConnection do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name
-      f.input :host
-      f.input :port
-      f.input :from_address
-      f.input :auth_user
-      f.input :auth_password, :as => :string
+      f.input :name, hint: I18n.t('hints.system.smtp_connection.name')
+      f.input :host, hint: I18n.t('hints.system.smtp_connection.host')
+      f.input :port, hint: I18n.t('hints.system.smtp_connection.port')
+      f.input :from_address, hint: I18n.t('hints.system.smtp_connection.from_address')
+      f.input :auth_user, hint: I18n.t('hints.system.smtp_connection.auth_user')
+      f.input :auth_password, :as => :string, hint: I18n.t('hints.system.smtp_connection.auth_password')
       f.input :global
     end
     f.actions

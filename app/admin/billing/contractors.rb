@@ -80,14 +80,14 @@ ActiveAdmin.register Contractor do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name
+      f.input :name, hint: I18n.t('hints.billing.contractors.name')
       f.input :enabled
       f.input :vendor
       f.input :customer
-      f.input :description
-      f.input :address
-      f.input :phones
-      f.input :smtp_connection
+      f.input :description, hint: I18n.t('hints.billing.contractors.description')
+      f.input :address, hint: I18n.t('hints.billing.contractors.address')
+      f.input :phones, hint: I18n.t('hints.billing.contractors.phones')
+      f.input :smtp_connection, hint: I18n.t('hints.billing.contractors.smtp_connection')
     end
     f.actions
   end

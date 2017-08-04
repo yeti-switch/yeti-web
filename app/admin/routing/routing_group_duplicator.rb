@@ -26,8 +26,8 @@ ActiveAdmin.register Routing::RoutingGroupDuplicator do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs "Copy Routing Group" do
-      f.input :id, as: :hidden
-      f.input :name
+      f.input :id, as: :hidden, hint: I18n.t('hints.routing.routing_group_duplicator.id')
+      f.input :name, hint: I18n.t('hints.routing.routing_group_duplicator.name')
     end
     f.actions do
       action(:submit)

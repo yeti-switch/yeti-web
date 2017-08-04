@@ -47,13 +47,13 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
 
   form do |f|
     f.inputs do
-      f.input :routing_plan
-      f.input :dst_prefix
-      f.input :req_dst_rewrite_rule
-      f.input :req_dst_rewrite_result
-      f.input :database
-      f.input :lrn_rewrite_rule
-      f.input :lrn_rewrite_result
+      f.input :routing_plan, hint: I18n.t('hints.routing.routing_plan_lnp_rule.routing_plan')
+      f.input :dst_prefix, hint: I18n.t('hints.routing.routing_plan_lnp_rule.dst_prefix')
+      f.input :req_dst_rewrite_rule, hint: I18n.t('hints.routing.routing_plan_lnp_rule.req_dst_rewrite_rule')
+      f.input :req_dst_rewrite_result, hint: I18n.t('hints.routing.routing_plan_lnp_rule.req_dst_rewrite_result')
+      f.input :database, hint: I18n.t('hints.routing.routing_plan_lnp_rule.database')
+      f.input :lrn_rewrite_rule, hint: I18n.t('hints.routing.routing_plan_lnp_rule.lrn_rewrite_rule')
+      f.input :lrn_rewrite_result, hint: I18n.t('hints.routing.routing_plan_lnp_rule.lrn_rewrite_result')
     end
     actions
   end

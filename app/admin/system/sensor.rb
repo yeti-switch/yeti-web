@@ -55,13 +55,17 @@ ActiveAdmin.register System::Sensor do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name
-      f.input :mode
-      f.input :source_interface, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET}
-      f.input :target_mac, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET}
+      f.input :name, hint: I18n.t('hints.system.sensor.name')
+      f.input :mode, hint: I18n.t('hints.system.sensor.mode')
+      f.input :source_interface, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET},
+              hint: I18n.t('hints.system.sensor.source_interface')
+      f.input :target_mac, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET},
+              hint: I18n.t('hints.system.sensor.target_mac')
       # f.input :use_routing
-      f.input :source_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP}
-      f.input :target_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP}
+      f.input :source_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP},
+              hint: I18n.t('hints.system.sensor.source_ip')
+      f.input :target_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP},
+              hint: I18n.t('hints.system.sensor.target_ip')
     end
     f.actions
   end

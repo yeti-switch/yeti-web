@@ -44,8 +44,8 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
   form do |f|
     f.semantic_errors *f.object.errors.keys.uniq
     f.inputs form_title do
-      f.input :name
-      f.input :template_file, as: :file
+      f.input :name, hint: I18n.t('hints.billing.invoice_templates.name')
+      f.input :template_file, hint: I18n.t('hints.billing.invoice_templates.template_file'), as: :file
     end
     panel "test" do
       "You can use next placeholders:"

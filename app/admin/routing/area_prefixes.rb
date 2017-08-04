@@ -29,8 +29,8 @@ ActiveAdmin.register Routing::AreaPrefix do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :prefix
-      f.input :area
+      f.input :prefix, hint: I18n.t('hints.routing.area_prefixes.prefix')
+      f.input :area, hint: I18n.t('hints.routing.area_prefixes.area')
     end
     f.actions
   end
