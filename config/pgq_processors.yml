@@ -1,0 +1,29 @@
+cdr_billing:
+  mode: production
+  class: cdr_billing
+  queue: cdr_billing
+  consumer: cdr_billing
+  syslog_program_name: "YETI-cdr-billing"
+  mail_to: "bug-report@yeti-switch.org"
+  mail_from: "yeti-cdr-billing@example.com"
+  mail_subject: "Exception happened in CDR billing"
+
+cdr_http:
+  mode: production
+  class: cdr_http
+  queue: cdr_billing
+  consumer: cdr_billing
+  syslog_program_name: "YETI-cdr-billing"
+  mail_to: "bug-report@yeti-switch.org"
+  mail_from: "yeti-cdr-billing@example.com"
+  mail_subject: "Exception happened in CDR http"
+  url: "http://example.com/api/cdrs"
+  method: POST
+  # may be an array:
+  #  cdr_fields: [
+  #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
+  #                 'time_connect', 'time_end',  'duration', 'customer', 'vendor',  'destination_fee',
+  #                 'destination_initial_interval', 'destination_initial_rate', 'destination_next_interval',
+  #                 'destination_next_rate', 'customer_price',  'orig_call_id', 'local_tag', 'term_call_id'
+  #              ]
+  cdr_fields: all
