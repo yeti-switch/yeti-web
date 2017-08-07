@@ -19,14 +19,15 @@
 #  autogenerate_customer_invoices :boolean          default(FALSE), not null
 #
 
-class Importing::Account  < Importing::Base
-    self.table_name = 'data_import.import_accounts'
-    attr_accessor :file
-    belongs_to :contractor, class_name: '::Contractor'
-    
-    self.import_attributes = ['contractor_id','name', 'balance',
-                  'min_balance', 'max_balance','origination_capacity','termination_capacity']
+class Importing::Account < Importing::Base
+  self.table_name = 'data_import.import_accounts'
+  attr_accessor :file
+  belongs_to :contractor, class_name: '::Contractor'
 
-    self.import_class = ::Account
+  self.import_attributes = ['contractor_id', 'name', 'balance',
+                            'min_balance', 'max_balance', 'origination_capacity', 'termination_capacity',
+                            'balance_high_threshold', 'balance_low_threshold']
+
+  self.import_class = ::Account
 
 end
