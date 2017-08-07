@@ -32,10 +32,12 @@ ActiveAdmin.register Report::CustomCdrScheduler, as: 'CustomCdrScheduler' do
 
   form do |f|
     f.inputs do
-      f.input :period
-      f.input :customer, as: :select, input_html: {class: 'chosen'}
-      f.input :filter
-      f.input :group_by, as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection:  Report::CustomCdr::CDR_COLUMNS.map{ |a| [a, a] }
+      f.input :period, hint: I18n.t('hints.reports.custom_cdr_scheduler.period')
+      f.input :customer, as: :select, input_html: {class: 'chosen'}, hint: I18n.t('hints.reports.custom_cdr_scheduler.customer')
+      f.input :filter, hint: I18n.t('hints.reports.custom_cdr_scheduler.filter')
+      f.input :group_by, as: :select, input_html: {class: 'chosen-sortable', multiple: true},
+              collection:  Report::CustomCdr::CDR_COLUMNS.map{ |a| [a, a] },
+              hint: I18n.t('hints.reports.custom_cdr_scheduler.group_by')
       f.input :send_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

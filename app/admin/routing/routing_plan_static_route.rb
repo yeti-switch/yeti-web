@@ -120,10 +120,12 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: {class: 'chosen'}
+      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: {class: 'chosen'},
+              hint: I18n.t('hints.routing.routing_plan_static_route.routing_plan')
       f.input :prefix, input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
-      f.input :priority
-      f.input :vendor, collection:  Contractor.vendors , input_html: {class: 'chosen', multiple: false}
+      f.input :priority, hint: I18n.t('hints.routing.routing_plan_static_route.priority')
+      f.input :vendor, collection:  Contractor.vendors , input_html: {class: 'chosen', multiple: false},
+              hint: I18n.t('hints.routing.routing_plan_static_route.vendor')
     end
     f.actions
   end

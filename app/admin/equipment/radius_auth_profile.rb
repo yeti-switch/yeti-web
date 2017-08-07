@@ -48,10 +48,10 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
   form do |f|
     f.semantic_errors *f.object.errors.keys.uniq
     f.inputs form_title do
-      f.input :name
-      f.input :server
-      f.input :port
-      f.input :secret
+      f.input :name, hint: I18n.t('hints.equipment.radius_auth_profile.name')
+      f.input :server, hint: I18n.t('hints.equipment.radius_auth_profile.name')
+      f.input :port, hint: I18n.t('hints.equipment.radius_auth_profile.name')
+      f.input :secret, hint: I18n.t('hints.equipment.radius_auth_profile.name')
       f.input :reject_on_error
       f.input :timeout, hint: "Request timeout in ms. Allowed values #{Equipment::Radius::AuthProfile::TIMEOUT_MIN}..#{Equipment::Radius::AuthProfile::TIMEOUT_MAX}"
       f.input :attempts, hint: "Max request attempts. Allowed values #{Equipment::Radius::AuthProfile::ATTEMPTS_MIN}..#{Equipment::Radius::AuthProfile::ATTEMPTS_MAX}"
@@ -59,13 +59,14 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
 
     f.inputs "Attributes" do
       f.has_many :avps do |t|
-        t.input :type_id, hint: "Attribute type, see rfc2865"
-        t.input :name, hint: "Informational only"
+        t.input :type_id, hint: I18n.t('hints.equipment.radius_auth_profile.avps.type_id')
+        t.input :name, hint: I18n.t('hints.equipment.radius_auth_profile.avps.name')
         t.input :is_vsa
-        t.input :vsa_vendor_id
-        t.input :vsa_vendor_type
-        t.input :value
-        t.input :format, as: :select, collection: Equipment::Radius::AuthProfileAttribute::FORMATS
+        t.input :vsa_vendor_id, hint: I18n.t('hints.equipment.radius_auth_profile.avps.vsa_vendor_id')
+        t.input :vsa_vendor_type, hint: I18n.t('hints.equipment.radius_auth_profile.avps.vsa_vendor_type')
+        t.input :value, hint: I18n.t('hints.equipment.radius_auth_profile.avps.value')
+        t.input :format, as: :select, collection: Equipment::Radius::AuthProfileAttribute::FORMATS,
+                hint: I18n.t('hints.equipment.radius_auth_profile.avps.format')
         t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless  t.object.new_record?
       end
     end

@@ -144,31 +144,31 @@ ActiveAdmin.register Destination do
       end
       f.input :enabled
       f.input :reject_calls
-      f.input :rateplan, input_html: { class: 'chosen'}
-      f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
-      f.input :valid_from, as: :date_time_picker
-      f.input :valid_till, as: :date_time_picker
-      f.input :rate_policy
-      f.input :initial_interval
-      f.input :next_interval
+      f.input :rateplan, input_html: { class: 'chosen'}, hint: I18n.t('hints.routing.destinations.rateplan')
+      f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None", hint: I18n.t('hints.routing.destinations.routing_tag')
+      f.input :valid_from, as: :date_time_picker, hint: I18n.t('hints.routing.destinations.valid_from')
+      f.input :valid_till, as: :date_time_picker, hint: I18n.t('hints.routing.destinations.valid_till')
+      f.input :rate_policy, hint: I18n.t('hints.routing.destinations.rate_policy')
+      f.input :initial_interval, hint: I18n.t('hints.routing.destinations.initial_interval')
+      f.input :next_interval, hint: I18n.t('hints.routing.destinations.next_interval')
       f.input :use_dp_intervals
     end
     f.inputs "Fixed rating configuration" do
-      f.input :initial_rate
-      f.input :next_rate
-      f.input :connect_fee
-      f.input :profit_control_mode, hint: "Leave it empty to inherit Profit control mode from Rateplan"
+      f.input :initial_rate, hint: I18n.t('hints.routing.destinations.initial_rate')
+      f.input :next_rate, hint: I18n.t('hints.routing.destinations.next_rate')
+      f.input :connect_fee, hint: I18n.t('hints.routing.destinations.connect_fee')
+      f.input :profit_control_mode, hint: I18n.t('hints.routing.destinations.profit_control_mode')
     end
 
     f.inputs "Dialpeer based rating configuration" do
-      f.input :dp_margin_fixed
-      f.input :dp_margin_percent
+      f.input :dp_margin_fixed, hint: I18n.t('hints.routing.destinations.dp_margin_fixed')
+      f.input :dp_margin_percent, hint: I18n.t('hints.routing.destinations.dp_margin_percent')
     end
 
     f.inputs "Quality notifications configuration" do
-      f.input :asr_limit
-      f.input :acd_limit
-      f.input :short_calls_limit
+      f.input :asr_limit, hint: I18n.t('hints.routing.destinations.asr_limit')
+      f.input :acd_limit, hint: I18n.t('hints.routing.destinations.acd_limit')
+      f.input :short_calls_limit, hint: I18n.t('hints.routing.destinations.short_calls_limit')
     end
     f.actions
   end

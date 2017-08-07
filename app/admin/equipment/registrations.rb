@@ -65,27 +65,27 @@ ActiveAdmin.register Equipment::Registration do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name
+      f.input :name, hint: I18n.t('hints.equipment.registrations.name')
       f.input :enabled
-      f.input :pop, as: :select,
+      f.input :pop, as: :select, hint: I18n.t('hints.equipment.registrations.pop'),
               include_blank: "Any",
               input_html: {class: 'chosen'}
-      f.input :node, as: :select,
+      f.input :node, as: :select, hint: I18n.t('hints.equipment.registrations.node'),
               include_blank: "Any",
               input_html: {class: 'chosen'}
-      f.input :transport_protocol
-      f.input :domain
-      f.input :username
-      f.input :display_username
-      f.input :auth_user
-      f.input :auth_password, as: :string
-      f.input :proxy
-      f.input :proxy_transport_protocol
-      f.input :contact, hint: I18n.t('hints.registrations.contact')
-      f.input :expire
+      f.input :transport_protocol, hint: I18n.t('hints.equipment.registrations.transport_protocol')
+      f.input :domain, hint: I18n.t('hints.equipment.registrations.domain')
+      f.input :username, hint: I18n.t('hints.equipment.registrations.username')
+      f.input :display_username, hint: I18n.t('hints.equipment.registrations.display_username')
+      f.input :auth_user, hint: I18n.t('hints.equipment.registrations.auth_user')
+      f.input :auth_password, as: :string, hint: I18n.t('hints.equipment.registrations.auth_password')
+      f.input :proxy, hint: I18n.t('hints.equipment.registrations.proxy')
+      f.input :proxy_transport_protocol, hint: I18n.t('hints.equipment.registrations.proxy_transport_protocol')
+      f.input :contact, hint: I18n.t('hints.equipment.registrations.contact')
+      f.input :expire, hint: I18n.t('hints.equipment.registrations.expire')
       f.input :force_expire
-      f.input :retry_delay
-      f.input :max_attempts
+      f.input :retry_delay, hint: I18n.t('hints.equipment.registrations.retry_delay')
+      f.input :max_attempts, hint: I18n.t('hints.equipment.registrations.max_attempts')
     end
     f.actions
   end
