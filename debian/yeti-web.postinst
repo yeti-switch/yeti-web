@@ -23,9 +23,11 @@ case "$1" in
 			done
 		fi
 
+        rm -f /lib/systemd/system/yeti-cdr-billing.service || true
+
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
-			systemctl enable yeti-cdr-billing@cdr_billing.service
+			systemctl enable yeti-cdr-billing@cdr_billing
 		fi
 		
 		#remove old init scripts
