@@ -1,4 +1,6 @@
 ActiveAdmin.setup do |config|
+  active_admin_config = YAML.load_file(File.join(Rails.root, '/config/active_admin.yml')) rescue {}
+
   config.namespace :root do |admin|
 #        admin.build_menu :utility_navigation do |menu|
     admin.build_menu do |menu|
@@ -35,8 +37,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Yeti Admin"
-
+  config.site_title = active_admin_config['site_title']
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
@@ -47,7 +48,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Recommended image height is 21px to properly fit in the header
   #
-  config.site_title_image = "/images/yeti.png"
+  config.site_title_image = active_admin_config['site_title_image']
 
   # == Default Namespace
   #

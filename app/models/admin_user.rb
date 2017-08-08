@@ -32,8 +32,10 @@ class AdminUser < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, unless:  proc { self.persisted? && email.blank? }
 
   after_save do
-    contact = billing_contact || build_billing_contact
-    contact.update!(email: self.email) if @email
+    unless Rails.env.test?
+      contact = billing_contact || build_billing_contact
+      contact.update!(email: self.email) if @email
+    end
   end
 
   before_destroy :check_if_last
