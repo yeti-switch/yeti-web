@@ -36,7 +36,7 @@ resource 'Contractors' do
     parameter :description, 'Description', scope: [:data, :attributes]
     parameter :address, 'Address', scope: [:data, :attributes]
     parameter :phones, 'Phones', scope: [:data, :attributes]
-    parameter :smtp_connection_id, 'SMTP connection id', scope: [:data, :attributes]
+    parameter :'smtp-сonnection-id', 'SMTP connection id', scope: [:data, :attributes]
 
     let(:name) { 'name' }
     let(:vendor) { true }
@@ -57,7 +57,7 @@ resource 'Contractors' do
     parameter :description, 'Description', scope: [:data, :attributes]
     parameter :address, 'Address', scope: [:data, :attributes]
     parameter :phones, 'Phones', scope: [:data, :attributes]
-    parameter :smtp_connection_id, 'SMTP connection id', scope: [:data, :attributes]
+    parameter :'smtp-сonnection-id', 'SMTP connection id', scope: [:data, :attributes]
 
     let(:id) { create(:contractor, vendor: true).id }
     let(:name) { 'name' }
