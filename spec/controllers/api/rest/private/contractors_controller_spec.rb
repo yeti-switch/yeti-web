@@ -33,7 +33,7 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
       before { get :show, id: contractor.id + 10 }
 
       it { expect(response.status).to eq(404) }
-      it { expect(assigns(:contractor)).to eq(nil) }
+      it { expect(response_data).to eq(nil) }
     end
   end
 
