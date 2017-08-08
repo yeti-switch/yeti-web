@@ -81,6 +81,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'cucumber-rails', :require => false
+  gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
 gem 'unicorn-worker-killer'
