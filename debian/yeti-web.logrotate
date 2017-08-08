@@ -10,3 +10,16 @@
 		invoke-rc.d rsyslog rotate > /dev/null
 	endscript
 }
+
+/var/log/yeti-cdr-billing.log {
+	daily
+	rotate 7
+	copytruncate
+	delaycompress
+	compress
+	notifempty
+	missingok
+	postrotate
+		invoke-rc.d rsyslog rotate > /dev/null
+	endscript
+}
