@@ -31,7 +31,8 @@ gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 gem 'excelinator', github: 'livingsocial/excelinator'
 
 # REST API
-gem 'active_model_serializers', '~> 0.9.7'
+# gem 'active_model_serializers', '~> 0.9.7'
+gem 'jsonapi-resources', '~> 0.9.0'
 
 # gem 'activeadmin_async_export'
 
