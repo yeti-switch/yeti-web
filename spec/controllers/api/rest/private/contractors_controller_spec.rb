@@ -5,7 +5,8 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   before do
-    request.accept = 'application/json'
+    request.accept = 'application/vnd.api+json'
+    request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
 
@@ -15,7 +16,7 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(assigns(:contractors)).to match_array(contractors) }
+    it { expect(response_data.size).to eq(contractors.size) }
   end
 
   describe 'GET show' do
@@ -25,7 +26,7 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
       before { get :show, id: contractor.to_param }
 
       it { expect(response.status).to eq(200) }
-      it { expect(assigns(:contractor)).to eq(contractor) }
+      it { expect(response_data['id']).to eq(contractor.id.to_s) }
     end
 
     context 'when contractor does not exist' do
@@ -37,7 +38,7 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, contractor: attributes }
+    before { post :create, data: { type: 'contractors', attributes: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name', vendor: true } }
@@ -56,12 +57,12 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
 
   describe 'PUT update' do
     let!(:contractor) { create :contractor, vendor: true }
-    before { put :update, id: contractor.to_param, contractor: attributes }
+    before { put :update, id: contractor.to_param, data: { type: 'contractors', id: contractor.to_param, attributes: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
 
-      it { expect(response.status).to eq(204) }
+      it { expect(response.status).to eq(200) }
       it { expect(contractor.reload.name).to eq('name') }
     end
 
