@@ -50,8 +50,8 @@ Yeti::Application.routes.draw do
 
         namespace :private do
           jsonapi_resources :contractors
+          jsonapi_resources :accounts
 
-          api.resources :accounts, only: [:index, :show, :update, :destroy, :create]
           api.resources :dialpeers, only: [:index, :show, :update, :destroy, :create] do
             api.resources :dialpeer_next_rates, only: [:index, :show, :update, :destroy, :create], controller: :dialpeer_next_rates
           end
