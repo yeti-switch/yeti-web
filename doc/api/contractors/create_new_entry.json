@@ -7,44 +7,74 @@
   "explanation": null,
   "parameters": [
     {
-      "scope": "contractor",
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (contractors)"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "name",
       "description": "Contractor name"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "vendor",
       "description": "Vendor flag"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "customer",
       "description": "Customer flag"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "enabled",
       "description": "Enabled flag"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "description",
       "description": "Description"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "address",
       "description": "Address"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "phones",
       "description": "Phones"
     },
     {
-      "scope": "contractor",
-      "name": "smtp_connection_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "smtp-сonnection-id",
       "description": "SMTP connection id"
     }
   ],
@@ -55,32 +85,33 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/contractors",
-      "request_body": "contractor[name]=name&contractor[vendor]=true",
+      "request_body": "{\"data\":{\"type\":\"contractors\",\"attributes\":{\"name\":\"name\",\"vendor\":true}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjIsInN1YiI6OX0.z5BHM8gD3QcFwKrjqxkxpmPqbYuLk7qb_Xh_SLN7FmY",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzNzksInN1YiI6OX0.HY0XMT50goquHiIJLuSZwbUCOGkN3kSoXjZysfLq49g",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
+      "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"contractor\": {\n    \"id\": 10,\n    \"name\": \"name\",\n    \"enabled\": null,\n    \"vendor\": true,\n    \"customer\": null,\n    \"description\": null,\n    \"address\": null,\n    \"phones\": null,\n    \"smtp_connection_id\": null\n  }\n}",
+      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"contractors\",\"links\":{\"self\":\"http://example.org/api/rest/private/contractors/10\"},\"attributes\":{\"name\":\"name\",\"enabled\":null,\"vendor\":true,\"customer\":null,\"description\":null,\"address\":null,\"phones\":null,\"smtp-connection-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"1453bc5abd746b30e0d913b49ea2fe1a\"",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/contractors/10",
+        "ETag": "W/\"098c938734287662895d94170582873c\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "4c61d9fa-1d34-4a54-a54d-73b03b960be3",
-        "X-Runtime": "0.020940",
-        "Content-Length": "157"
+        "X-Request-Id": "48e3073d-4bc0-4000-ba27-1aeeef4f7417",
+        "X-Runtime": "0.058293",
+        "Content-Length": "259"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

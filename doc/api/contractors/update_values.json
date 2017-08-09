@@ -7,44 +7,80 @@
   "explanation": null,
   "parameters": [
     {
-      "scope": "contractor",
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (contractors)"
+    },
+    {
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Contractor ID"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "name",
       "description": "Contractor name"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "vendor",
       "description": "Vendor flag"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "customer",
       "description": "Customer flag"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "enabled",
       "description": "Enabled flag"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "description",
       "description": "Description"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "address",
       "description": "Address"
     },
     {
-      "scope": "contractor",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "phones",
       "description": "Phones"
     },
     {
-      "scope": "contractor",
-      "name": "smtp_connection_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "smtp-сonnection-id",
       "description": "SMTP connection id"
     }
   ],
@@ -55,29 +91,32 @@
     {
       "request_method": "PUT",
       "request_path": "/api/rest/private/contractors/11",
-      "request_body": "contractor[name]=name&contractor[customer]=true",
+      "request_body": "{\"data\":{\"type\":\"contractors\",\"id\":11,\"attributes\":{\"name\":\"name\",\"customer\":true}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjIsInN1YiI6MTB9.jWPxmy2ELas4F4M-lgRK9UW_X5JF2oeNZ9djUQrU8-k",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzNzksInN1YiI6MTB9.683CS_DIl_Ba9hJFvl63U0aVuzJreizpnMgjAEwpeNA",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 204,
-      "response_status_text": "No Content",
-      "response_body": null,
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"contractors\",\"links\":{\"self\":\"http://example.org/api/rest/private/contractors/11\"},\"attributes\":{\"name\":\"name\",\"enabled\":true,\"vendor\":true,\"customer\":true,\"description\":null,\"address\":null,\"phones\":null,\"smtp-connection-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Cache-Control": "no-cache",
-        "X-Request-Id": "88acd4ac-0ea6-44d5-ac43-acb143af6566",
-        "X-Runtime": "0.019396"
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"e001132d665e004a5770421ac9c22394\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "5060c7aa-e80e-4533-993e-1fdd78ebd118",
+        "X-Runtime": "0.033502",
+        "Content-Length": "259"
       },
-      "response_content_type": null,
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

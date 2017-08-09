@@ -7,19 +7,34 @@
   "explanation": null,
   "parameters": [
     {
-      "scope": "payment",
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (payments)"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "amount",
       "description": "Amount"
     },
     {
-      "scope": "payment",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "account_id",
+      "name": "account-id",
       "description": "Account id"
     },
     {
-      "scope": "payment",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "notes",
       "description": "Notes"
     }
@@ -31,32 +46,33 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/payments",
-      "request_body": "payment[amount]=10&payment[account_id]=22",
+      "request_body": "{\"data\":{\"type\":\"payments\",\"attributes\":{\"amount\":10,\"account-id\":22}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMzAsInN1YiI6Mzl9.ddZ81LMhFUFZKJwFUUXDjePTGu0hi4tVj2O8IhjKJNY",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODcsInN1YiI6Mzl9.XYN2TB3zEat-uiG0jkVj-lAyx6eKfZccMutBhk2O13s",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
+      "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"account_id\": 22,\n  \"amount\": \"10.0\",\n  \"notes\": null,\n  \"id\": 4,\n  \"created_at\": \"2017-07-24T18:08:50.113+07:00\"\n}",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"payments\",\"links\":{\"self\":\"http://example.org/api/rest/private/payments/4\"},\"attributes\":{\"account-id\":22,\"amount\":\"10.0\",\"notes\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"c0c35dca3694455a23ec0354c06e4623\"",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/payments/4",
+        "ETag": "W/\"9e511d79025af10616662d3618d7f097\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "bfeeb97b-ba2e-4ed5-a030-6c49d2e493fb",
-        "X-Runtime": "0.031766",
-        "Content-Length": "98"
+        "X-Request-Id": "382eebf3-b256-4065-b446-75c43b1bacad",
+        "X-Runtime": "0.043767",
+        "Content-Length": "163"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

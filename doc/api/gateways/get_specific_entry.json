@@ -17,29 +17,30 @@
       "request_path": "/api/rest/private/gateways/9",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjgsInN1YiI6MzN9.PNCG_5IO9ONJVOx0lPRPemNnBVDSVgHDDdC_j6horSg",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODUsInN1YiI6MzN9.Vo9Wuuv4xpn1-tAKYMp1sTgcLuk-CHhQtggwvs4M3Qw",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 9,\n  \"host\": null,\n  \"port\": null,\n  \"src_rewrite_rule\": null,\n  \"dst_rewrite_rule\": null,\n  \"acd_limit\": 0.0,\n  \"asr_limit\": 0.0,\n  \"enabled\": true,\n  \"name\": \"gateway9\",\n  \"auth_enabled\": false,\n  \"auth_user\": null,\n  \"auth_password\": null,\n  \"term_outbound_proxy\": null,\n  \"term_next_hop_for_replies\": false,\n  \"term_use_outbound_proxy\": false,\n  \"contractor_id\": 46,\n  \"allow_termination\": true,\n  \"allow_origination\": true,\n  \"anonymize_sdp\": true,\n  \"proxy_media\": true,\n  \"transparent_seqno\": false,\n  \"transparent_ssrc\": false,\n  \"sst_enabled\": false,\n  \"sst_minimum_timer\": 50,\n  \"sst_maximum_timer\": 50,\n  \"sst_accept501\": true,\n  \"session_refresh_method_id\": 1,\n  \"sst_session_expires\": 50,\n  \"term_force_outbound_proxy\": false,\n  \"locked\": false,\n  \"codecs_payload_order\": \"\",\n  \"codecs_prefer_transcoding_for\": null,\n  \"src_rewrite_result\": null,\n  \"dst_rewrite_result\": null,\n  \"termination_capacity\": null,\n  \"term_next_hop\": null,\n  \"orig_next_hop\": null,\n  \"orig_append_headers_req\": null,\n  \"term_append_headers_req\": null,\n  \"dialog_nat_handling\": true,\n  \"orig_force_outbound_proxy\": false,\n  \"orig_use_outbound_proxy\": false,\n  \"orig_outbound_proxy\": null,\n  \"prefer_existing_codecs\": true,\n  \"force_symmetric_rtp\": true,\n  \"transparent_dialog_id\": false,\n  \"sdp_alines_filter_type_id\": 0,\n  \"sdp_alines_filter_list\": null,\n  \"gateway_group_id\": null,\n  \"orig_disconnect_policy_id\": null,\n  \"term_disconnect_policy_id\": null,\n  \"diversion_policy_id\": 1,\n  \"diversion_rewrite_rule\": null,\n  \"diversion_rewrite_result\": null,\n  \"src_name_rewrite_rule\": null,\n  \"src_name_rewrite_result\": null,\n  \"priority\": 100,\n  \"pop_id\": null,\n  \"codec_group_id\": 9,\n  \"single_codec_in_200ok\": false,\n  \"ringing_timeout\": null,\n  \"symmetric_rtp_nonstop\": false,\n  \"symmetric_rtp_ignore_rtcp\": false,\n  \"resolve_ruri\": false,\n  \"force_dtmf_relay\": false,\n  \"relay_options\": false,\n  \"rtp_ping\": false,\n  \"filter_noaudio_streams\": false,\n  \"relay_reinvite\": false,\n  \"sdp_c_location_id\": 2,\n  \"auth_from_user\": null,\n  \"auth_from_domain\": null,\n  \"relay_hold\": false,\n  \"rtp_timeout\": 30,\n  \"relay_prack\": false,\n  \"rtp_relay_timestamp_aligning\": false,\n  \"allow_1xx_without_to_tag\": false,\n  \"sip_timer_b\": 8000,\n  \"dns_srv_failover_timer\": 2000,\n  \"rtp_force_relay_cn\": true,\n  \"sensor_id\": null,\n  \"sensor_level_id\": 1,\n  \"dtmf_send_mode_id\": 1,\n  \"dtmf_receive_mode_id\": 1,\n  \"relay_update\": false,\n  \"suppress_early_media\": false,\n  \"send_lnp_information\": false,\n  \"short_calls_limit\": 1.0,\n  \"origination_capacity\": null,\n  \"force_one_way_early_media\": false,\n  \"radius_accounting_profile_id\": null,\n  \"transit_headers_from_origination\": null,\n  \"transit_headers_from_termination\": null,\n  \"external_id\": null,\n  \"fake_180_timer\": null,\n  \"sip_interface_name\": null,\n  \"rtp_interface_name\": null,\n  \"transport_protocol_id\": 1,\n  \"term_proxy_transport_protocol_id\": 1,\n  \"orig_proxy_transport_protocol_id\": 1,\n  \"rel100_mode_id\": 1\n}",
+      "response_body": "{\"data\":{\"id\":\"9\",\"type\":\"gateways\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/9\"},\"attributes\":{\"name\":\"gateway9\",\"enabled\":true,\"priority\":100,\"acd-limit\":0.0,\"asr-limit\":0.0,\"contractor-id\":46,\"sdp-alines-filter-type-id\":0,\"codec-group-id\":9,\"sdp-c-location-id\":2,\"sensor-level-id\":1,\"dtmf-receive-mode-id\":1,\"dtmf-send-mode-id\":1,\"rel100-mode-id\":1,\"session-refresh-method-id\":1,\"transport-protocol-id\":1,\"term-proxy-transport-protocol-id\":1,\"orig-proxy-transport-protocol-id\":1,\"gateway-group-id\":null,\"pop-id\":null,\"allow-origination\":true,\"allow-termination\":true,\"sst-enabled\":false,\"sensor-id\":null,\"host\":null,\"port\":null,\"resolve-ruri\":false,\"diversion-policy-id\":1,\"diversion-rewrite-rule\":null,\"diversion-rewrite-result\":null,\"src-name-rewrite-rule\":null,\"src-name-rewrite-result\":null,\"src-rewrite-rule\":null,\"src-rewrite-result\":null,\"dst-rewrite-rule\":null,\"dst-rewrite-result\":null,\"auth-enabled\":false,\"auth-user\":null,\"auth-password\":null,\"auth-from-user\":null,\"auth-from-domain\":null,\"term-use-outbound-proxy\":false,\"term-force-outbound-proxy\":false,\"term-outbound-proxy\":null,\"term-next-hop-for-replies\":false,\"term-next-hop\":null,\"term-disconnect-policy-id\":null,\"term-append-headers-req\":null,\"sdp-alines-filter-list\":null,\"ringing-timeout\":null,\"relay-options\":false,\"relay-reinvite\":false,\"relay-hold\":false,\"relay-prack\":false,\"relay-update\":false,\"suppress-early-media\":false,\"fake-180-timer\":null,\"transit-headers-from-origination\":null,\"transit-headers-from-termination\":null,\"sip-interface-name\":null,\"allow-1xx-without-to-tag\":false,\"sip-timer-b\":8000,\"dns-srv-failover-timer\":2000,\"anonymize-sdp\":true,\"proxy-media\":true,\"single-codec-in-200ok\":false,\"transparent-seqno\":false,\"transparent-ssrc\":false,\"force-symmetric-rtp\":true,\"symmetric-rtp-nonstop\":false,\"symmetric-rtp-ignore-rtcp\":false,\"force-dtmf-relay\":false,\"rtp-ping\":false,\"rtp-timeout\":30,\"filter-noaudio-streams\":false,\"rtp-relay-timestamp-aligning\":false,\"rtp-force-relay-cn\":true}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"224041021f6297b5b3528e7e15f4cd41\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"e1d7a7e74357e589d74d94b3633eef3a\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "3290d3f6-a7b2-44bd-ab58-add9ba4cf848",
-        "X-Runtime": "0.029566",
-        "Content-Length": "2548"
+        "X-Request-Id": "c82fe655-11e8-47d5-aeb8-740866a9bb18",
+        "X-Runtime": "0.036418",
+        "Content-Length": "1999"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

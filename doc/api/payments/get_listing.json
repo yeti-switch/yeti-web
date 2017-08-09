@@ -17,34 +17,30 @@
       "request_path": "/api/rest/private/payments",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjksInN1YiI6Mzd9.tvPs18_pPSlrtik6RYjMMztvmlJqujqH9vl8EsgrgJg",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODYsInN1YiI6Mzd9.ma0eOFtW3De2Etyv-ha2z_3ZUokFS20jLYVwzV-N2YA",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"payments\": [\n    {\n      \"account_id\": 20,\n      \"amount\": \"10.0\",\n      \"notes\": \"notes text\",\n      \"id\": 2,\n      \"created_at\": \"2017-07-24T18:08:49.619+07:00\"\n    },\n    {\n      \"account_id\": 19,\n      \"amount\": \"10.0\",\n      \"notes\": \"notes text\",\n      \"id\": 1,\n      \"created_at\": \"2017-07-24T18:08:49.598+07:00\"\n    }\n  ]\n}",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"payments\",\"links\":{\"self\":\"http://example.org/api/rest/private/payments/1\"},\"attributes\":{\"account-id\":19,\"amount\":\"10.0\",\"notes\":\"notes text\"}},{\"id\":\"2\",\"type\":\"payments\",\"links\":{\"self\":\"http://example.org/api/rest/private/payments/2\"},\"attributes\":{\"account-id\":20,\"amount\":\"10.0\",\"notes\":\"notes text\"}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "X-Total-Count": "2",
-        "X-Offset-Value": "0",
-        "X-Limit-Value": "50",
-        "X-Num-Pages": "1",
-        "X-Current-Page": "1",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"af2e86145a731cde920171bd550e888c\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"46d2e729fdc500423f1bf737f680904a\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "bc03f107-b8d7-47b3-8534-6055b80befa3",
-        "X-Runtime": "0.054154",
-        "Content-Length": "228"
+        "X-Request-Id": "7f96fb34-9ccf-4037-bd54-757f19959a85",
+        "X-Runtime": "0.048886",
+        "Content-Length": "336"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

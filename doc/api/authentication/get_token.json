@@ -26,28 +26,28 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/auth",
-      "request_body": "auth[username]=admin&auth[password]=password",
+      "request_body": "{\"auth\":{\"username\":\"admin\",\"password\":\"password\"}}",
       "request_headers": {
         "Accept": "application/json",
+        "Content-Type": "application/json",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
+      "request_content_type": "application/json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjEsInN1YiI6Nn0.zoHTh77ITT_5hcdqP4rNv-lWLX0oNsnZwt2kE6q90Ks\"\n}",
+      "response_body": "{\n  \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzNzgsInN1YiI6Nn0.9X3yUeTPD7eZyoSj5d5Z7w_3wm6_JtoOJZH2TahneSk\"\n}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"f8a418f0a1e905b4cbc03238e315f4c9\"",
+        "ETag": "W/\"905a491ece7d9419fd24704bb00412e7\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "78016cf6-2f8d-4a7c-83f3-4578a62cb32e",
-        "X-Runtime": "0.073319",
+        "X-Request-Id": "46b4bd6d-51e8-454d-9db1-ecbeaaf353b2",
+        "X-Runtime": "0.057563",
         "Content-Length": "126"
       },
       "response_content_type": "application/json; charset=utf-8",

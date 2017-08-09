@@ -17,34 +17,30 @@
       "request_path": "/api/rest/private/destinations",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjQsInN1YiI6MTd9.xzR3eozBIiG8Uh2005P8b8Vk13EksiB-TO6j9qcyyB8",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODIsInN1YiI6MTd9.kUGzoB7KsWeSu-sVC1qoiaEQcLUH-p4TPNcKmIBWrSM",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"destinations\": [\n    {\n      \"id\": 2,\n      \"enabled\": true,\n      \"prefix\": \"\",\n      \"rateplan_id\": 8,\n      \"next_rate\": \"0.0\",\n      \"connect_fee\": \"0.0\",\n      \"initial_interval\": 60,\n      \"next_interval\": 60,\n      \"dp_margin_fixed\": \"0.0\",\n      \"dp_margin_percent\": \"0.0\",\n      \"rate_policy_id\": 1,\n      \"initial_rate\": \"0.0\",\n      \"reject_calls\": false,\n      \"use_dp_intervals\": false,\n      \"valid_from\": \"2017-07-24T18:08:44.955+07:00\",\n      \"valid_till\": \"2022-07-24T18:08:44.955+07:00\",\n      \"profit_control_mode_id\": null,\n      \"network_prefix_id\": null,\n      \"external_id\": null,\n      \"asr_limit\": 0.0,\n      \"acd_limit\": 0.0,\n      \"short_calls_limit\": 0.0,\n      \"quality_alarm\": false,\n      \"routing_tag_id\": null\n    },\n    {\n      \"id\": 1,\n      \"enabled\": true,\n      \"prefix\": \"\",\n      \"rateplan_id\": 7,\n      \"next_rate\": \"0.0\",\n      \"connect_fee\": \"0.0\",\n      \"initial_interval\": 60,\n      \"next_interval\": 60,\n      \"dp_margin_fixed\": \"0.0\",\n      \"dp_margin_percent\": \"0.0\",\n      \"rate_policy_id\": 1,\n      \"initial_rate\": \"0.0\",\n      \"reject_calls\": false,\n      \"use_dp_intervals\": false,\n      \"valid_from\": \"2017-07-24T18:08:44.934+07:00\",\n      \"valid_till\": \"2022-07-24T18:08:44.935+07:00\",\n      \"profit_control_mode_id\": null,\n      \"network_prefix_id\": null,\n      \"external_id\": null,\n      \"asr_limit\": 0.0,\n      \"acd_limit\": 0.0,\n      \"short_calls_limit\": 0.0,\n      \"quality_alarm\": false,\n      \"routing_tag_id\": null\n    }\n  ]\n}",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/1\"},\"attributes\":{\"enabled\":true,\"rateplan-id\":7,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"rate-policy-id\":1,\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-09T18:19:42.040+07:00\",\"valid-till\":\"2022-08-09T18:19:42.040+07:00\",\"profit-control-mode-id\":null,\"external-id\":null}},{\"id\":\"2\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/2\"},\"attributes\":{\"enabled\":true,\"rateplan-id\":8,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"rate-policy-id\":1,\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-09T18:19:42.058+07:00\",\"valid-till\":\"2022-08-09T18:19:42.058+07:00\",\"profit-control-mode-id\":null,\"external-id\":null}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "X-Total-Count": "2",
-        "X-Offset-Value": "0",
-        "X-Limit-Value": "50",
-        "X-Num-Pages": "1",
-        "X-Current-Page": "1",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"0e6bdf37e1d2449ac19cad71682ae87d\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"46300d3e60a07a3c1f7e01b6d48f147a\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "5dfb0c2b-c896-4719-adf3-a09a3ebe10a3",
-        "X-Runtime": "0.058531",
-        "Content-Length": "1080"
+        "X-Request-Id": "88b108bd-8c30-40c6-acb7-f54e0abf320b",
+        "X-Runtime": "0.047694",
+        "Content-Length": "1152"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

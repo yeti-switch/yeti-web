@@ -2,15 +2,24 @@
   "resource": "Routing groups",
   "resource_explanation": null,
   "http_method": "POST",
-  "route": "/api/rest/private/routing_groups",
+  "route": "/api/rest/private/routing-groups",
   "description": "create new entry",
   "explanation": null,
   "parameters": [
     {
-      "scope": "routing_group",
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (routing-groups)"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "name",
-      "description": "Routing group name"
+      "description": "Name"
     }
   ],
   "response_fields": [
@@ -19,33 +28,34 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/rest/private/routing_groups",
-      "request_body": "routing_group[name]=name",
+      "request_path": "/api/rest/private/routing-groups",
+      "request_body": "{\"data\":{\"type\":\"routing-groups\",\"attributes\":{\"name\":\"name\"}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMzEsInN1YiI6NDd9.WQR1PiKDDrOBOqyECBZM9_fGasTkeV6oOkEbY_4scEM",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODksInN1YiI6NDd9.nXIqElta5wbLYK0FzmSwOxXQOcRU5CnM-NTSwl1PdcU",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
+      "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"id\": 10,\n  \"name\": \"name\"\n}",
+      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"routing-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/routing-groups/10\"},\"attributes\":{\"name\":\"name\"}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"cdbe263c3a504e2fdc05336c9e070893\"",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/routing-groups/10",
+        "ETag": "W/\"524e58cc1d3627f5ea74a96ae6122704\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "9d5f18d5-d0db-46e0-97da-311c543d5bcf",
-        "X-Runtime": "0.013713",
-        "Content-Length": "23"
+        "X-Request-Id": "1ad99102-16e9-4c19-8a74-67cb8d4ae079",
+        "X-Runtime": "0.031708",
+        "Content-Length": "146"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

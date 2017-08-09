@@ -2,7 +2,7 @@
   "resource": "Gateway groups",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/rest/private/gateway_groups",
+  "route": "/api/rest/private/gateway-groups",
   "description": "get listing",
   "explanation": null,
   "parameters": [
@@ -14,37 +14,33 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/rest/private/gateway_groups",
+      "request_path": "/api/rest/private/gateway-groups",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjcsInN1YiI6Mjd9.CUZnJ4pKWa8hnWUc1hwFE1bJCpXzaFKmRfOA4exeaH4",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODQsInN1YiI6Mjd9.1Vgdt4YnW7M0WHdECMrwW2ETSQBJusA7mgNcpD0MMJ8",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"gateway_groups\": [\n    {\n      \"id\": 8,\n      \"vendor_id\": 38,\n      \"name\": \"gateway_group_8\",\n      \"prefer_same_pop\": true\n    },\n    {\n      \"id\": 7,\n      \"vendor_id\": 37,\n      \"name\": \"gateway_group_7\",\n      \"prefer_same_pop\": true\n    }\n  ]\n}",
+      "response_body": "{\"data\":[{\"id\":\"7\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/7\"},\"attributes\":{\"name\":\"gateway_group_7\",\"vendor-id\":37}},{\"id\":\"8\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/8\"},\"attributes\":{\"name\":\"gateway_group_8\",\"vendor-id\":38}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "X-Total-Count": "2",
-        "X-Offset-Value": "0",
-        "X-Limit-Value": "50",
-        "X-Num-Pages": "1",
-        "X-Current-Page": "1",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"b7f847ed835966b0f2d65aadbce6ca6a\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"a4a9b2119b221bd0434ea964de1a2dc5\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "bddd184a-b51d-49e2-b5f8-aa5a21443686",
-        "X-Runtime": "0.054083",
-        "Content-Length": "164"
+        "X-Request-Id": "b6340af6-c61c-4274-9021-a40c54e41611",
+        "X-Runtime": "0.047122",
+        "Content-Length": "334"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]
