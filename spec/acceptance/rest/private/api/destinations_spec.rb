@@ -2,11 +2,20 @@ require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
 resource 'Destinations' do
-  header 'Accept', 'application/json'
+  header 'Accept', 'application/vnd.api+json'
+  header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token
 
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+  let(:type) { 'destinations' }
+
+  required_params = %i(
+    enabled rateplan-id next-rate connect-fee initial-interval next-interval dp-margin-fixed dp-margin-percent
+    rate-policy-id initial-rate asr-limit acd-limit short-calls-limit
+  )
+
+  optional_params = %i(prefix reject-calls use-dp-intervals valid-from valid-till profit-control-mode-id external-id)
 
   get '/api/rest/private/destinations' do
     before { create_list(:destination, 2) }
@@ -25,37 +34,20 @@ resource 'Destinations' do
   end
 
   post '/api/rest/private/destinations' do
-    parameter :enabled,                'Enabled flag',           scope: :destination, required: true
-    parameter :prefix,                 'Prefix',                 scope: :destination
-    parameter :rateplan_id,            'Rateplan id',            scope: :destination, required: true
-    parameter :next_rate,              'Next rate',              scope: :destination, required: true
-    parameter :connect_fee,            'Connect fee',            scope: :destination, required: true
-    parameter :initial_interval,       'Initial interval',       scope: :destination, required: true
-    parameter :next_interval,          'Next interval',          scope: :destination, required: true
-    parameter :dp_margin_fixed,        'Dp margin fixed',        scope: :destination, required: true
-    parameter :dp_margin_percent,      'Dp margin percent',      scope: :destination, required: true
-    parameter :rate_policy_id,         'Rate policy id',         scope: :destination, required: true
-    parameter :initial_rate,           'Initial rate',           scope: :destination, required: true
-    parameter :reject_calls,           'Reject calls',           scope: :destination
-    parameter :use_dp_intervals,       'Use dp intervals',       scope: :destination
-    parameter :valid_from,             'Valid from',             scope: :destination
-    parameter :valid_till,             'Valid till',             scope: :destination
-    parameter :profit_control_mode_id, 'Profit control mode id', scope: :destination
-    parameter :external_id,            'External id',            scope: :destination
-    parameter :asr_limit,              'Asr limit',              scope: :destination, required: true
-    parameter :acd_limit,              'Acd limit',              scope: :destination, required: true
-    parameter :short_calls_limit,      'Short calls limit',      scope: :destination, required: true
+    parameter :type, 'Resource type (destinations)', scope: :data, required: true
 
-    let(:rateplan_id) { create(:rateplan).id }
+    define_parameters(required_params, optional_params)
+
+    let(:'rateplan-id') { create(:rateplan).id }
     let(:enabled) { true }
-    let(:initial_interval) { 60 }
-    let(:next_interval) { 60 }
-    let(:initial_rate) { 0 }
-    let(:next_rate) { 0 }
-    let(:connect_fee) { 0 }
-    let(:dp_margin_fixed) { 0 }
-    let(:dp_margin_percent) { 0 }
-    let(:rate_policy_id) { 1 }
+    let(:'initial-interval') { 60 }
+    let(:'next-interval') { 60 }
+    let(:'initial-rate') { 0 }
+    let(:'next-rate') { 0 }
+    let(:'connect-fee') { 0 }
+    let(:'dp-margin-fixed') { 0 }
+    let(:'dp-margin-percent') { 0 }
+    let(:'rate-policy-id') { 1 }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -63,32 +55,16 @@ resource 'Destinations' do
   end
 
   put '/api/rest/private/destinations/:id' do
-    parameter :enabled,                'Enabled flag',           scope: :destination, required: true
-    parameter :prefix,                 'Prefix',                 scope: :destination
-    parameter :rateplan_id,            'Rateplan id',            scope: :destination, required: true
-    parameter :next_rate,              'Next rate',              scope: :destination, required: true
-    parameter :connect_fee,            'Connect fee',            scope: :destination, required: true
-    parameter :initial_interval,       'Initial interval',       scope: :destination, required: true
-    parameter :next_interval,          'Next interval',          scope: :destination, required: true
-    parameter :dp_margin_fixed,        'Dp margin fixed',        scope: :destination, required: true
-    parameter :dp_margin_percent,      'Dp margin percent',      scope: :destination, required: true
-    parameter :rate_policy_id,         'Rate policy id',         scope: :destination, required: true
-    parameter :initial_rate,           'Initial rate',           scope: :destination, required: true
-    parameter :reject_calls,           'Reject calls',           scope: :destination
-    parameter :use_dp_intervals,       'Use dp intervals',       scope: :destination
-    parameter :valid_from,             'Valid from',             scope: :destination
-    parameter :valid_till,             'Valid till',             scope: :destination
-    parameter :profit_control_mode_id, 'Profit control mode id', scope: :destination
-    parameter :external_id,            'External id',            scope: :destination
-    parameter :asr_limit,              'Asr limit',              scope: :destination, required: true
-    parameter :acd_limit,              'Acd limit',              scope: :destination, required: true
-    parameter :short_calls_limit,      'Short calls limit',      scope: :destination, required: true
+    parameter :type, 'Resource type (destinations)', scope: :data, required: true
+    parameter :id, 'Destination ID', scope: :data, required: true
+
+    define_parameters(required_params, optional_params)
 
     let(:id) { create(:destination).id }
     let(:enabled) { false }
 
     example_request 'update values' do
-      expect(status).to eq(204)
+      expect(status).to eq(200)
     end
   end
 
