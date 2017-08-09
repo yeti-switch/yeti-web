@@ -2,13 +2,15 @@ require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
 resource 'Routing plans' do
-  header 'Accept', 'application/json'
+  header 'Accept', 'application/vnd.api+json'
+  header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token
 
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+  let(:type) { 'routing-plans' }
 
-  get '/api/rest/private/routing_plans' do
+  get '/api/rest/private/routing-plans' do
     before { create_list(:routing_plan, 2) }
 
     example_request 'get listing' do
@@ -16,7 +18,7 @@ resource 'Routing plans' do
     end
   end
 
-  get '/api/rest/private/routing_plans/:id' do
+  get '/api/rest/private/routing-plans/:id' do
     let(:id) { create(:routing_plan).id }
 
     example_request 'get specific entry' do
@@ -24,11 +26,10 @@ resource 'Routing plans' do
     end
   end
 
-  post '/api/rest/private/routing_plans' do
-    parameter :name, 'Routing plan name', scope: :routing_plan, required: true
-    parameter :rate_delta_max, 'Rate delta max', scope: :routing_plan
-    parameter :use_lnp, 'Use lnp flag', scope: :routing_plan
-    parameter :sorting_id, 'Sorting id', scope: :routing_plan
+  post '/api/rest/private/routing-plans' do
+    parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
+
+    define_parameters([:name], [:rate_delta_max, :use_lnp, :sorting_id])
 
     let(:name) { 'name' }
 
@@ -37,21 +38,21 @@ resource 'Routing plans' do
     end
   end
 
-  put '/api/rest/private/routing_plans/:id' do
-    parameter :name, 'Routing plan name', scope: :routing_plan, required: true
-    parameter :rate_delta_max, 'Rate delta max', scope: :routing_plan
-    parameter :use_lnp, 'Use lnp flag', scope: :routing_plan
-    parameter :sorting_id, 'Sorting id', scope: :routing_plan
+  put '/api/rest/private/routing-plans/:id' do
+    parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
+    parameter :id, 'Routing plan ID', scope: :data, required: true
+
+    define_parameters([:name], [:rate_delta_max, :use_lnp, :sorting_id])
 
     let(:id) { create(:routing_plan).id }
     let(:name) { 'name' }
 
     example_request 'update values' do
-      expect(status).to eq(204)
+      expect(status).to eq(200)
     end
   end
 
-  delete '/api/rest/private/routing_plans/:id' do
+  delete '/api/rest/private/routing-plans/:id' do
     let(:id) { create(:routing_plan).id }
 
     example_request 'delete entry' do

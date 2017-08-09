@@ -49,8 +49,8 @@ Yeti::Application.routes.draw do
         end
 
         namespace :private do
-          jsonapi_resources :contractors
           jsonapi_resources :accounts
+          jsonapi_resources :contractors
           jsonapi_resources :customers_auths
           jsonapi_resources :destinations
           jsonapi_resources :dialpeers  do
@@ -61,8 +61,8 @@ Yeti::Application.routes.draw do
           jsonapi_resources :gateways
           jsonapi_resources :gateway_groups
           jsonapi_resources :routing_groups
+          jsonapi_resources :routing_plans
 
-          api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
           api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
 
           api.resources :payments, only: [:index, :show, :create]
