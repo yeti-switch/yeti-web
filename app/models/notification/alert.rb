@@ -32,6 +32,51 @@ class Notification::Alert < Yeti::ActiveRecord
     "#{self.event} | #{self.id}"
   end
 
+
+  def self.fire_account_low_balance(account, data)
+    event_name = "AccountLowThesholdReached"
+    a = Notification::Alert.where("event=?", event_name).take
+    return if a.nil?
+    a.fire_event(
+        "#{account.class} with id #{account.id} low balance",
+        "#{data.to_s}",
+        account.contacts_for_balance_notifications
+    )
+  end
+
+  def self.fire_account_high_balance(account, data)
+    event_name = "AccountHighThesholdReached"
+    a = Notification::Alert.where("event=?", event_name).take
+    return if a.nil?
+    a.fire_event(
+        "#{account.class} with id #{account.id} high balance",
+        "#{data.to_s}",
+        account.contacts_for_balance_notifications
+    )
+  end
+
+  def self.clear_account_low_balance(account, data)
+    event_name = "AccountLowThesholdCleared"
+    a = Notification::Alert.where("event=?", event_name).take
+    return if a.nil?
+    a.fire_event(
+        "#{account.class} with id #{account.id} low balance cleared",
+        "#{data.to_s}",
+        account.contacts_for_balance_notifications
+    )
+  end
+
+  def self.clear_account_high_balance(account, data)
+    event_name = "AccountHighThesholdCleader"
+    a = Notification::Alert.where("event=?", event_name).take
+    return if a.nil?
+    a.fire_event(
+        "#{account.class} with id #{account.id} high balance cleared",
+        "#{data.to_s}",
+        account.contacts_for_balance_notifications
+    )
+  end
+
   def self.fire_quality_alarm(dst, stats)
     event_name = "#{dst.class}QualityAlarmFired"
     a = Notification::Alert.where("event=?", event_name).take

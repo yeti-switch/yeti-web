@@ -44,6 +44,10 @@ class Billing::Contact < Yeti::ActiveRecord
       c.send_invoices_to = c.send_invoices_to.reject { |el| el == self.id }
       c.save!
     end
+    Account.where("? = ANY(send_balance_notifications_to)", self.id).each do |c|
+      c.send_balance_notifications_to = c.send_balance_notifications_to.reject { |el| el == self.id }
+      c.save!
+    end
     Rateplan.where("? = ANY(send_quality_alarms_to)", self.id).each do |c|
       c.send_quality_alarms_to = c.send_quality_alarms_to.reject { |el| el == self.id }
       c.save!
