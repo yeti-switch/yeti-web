@@ -7,7 +7,8 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   before do
-    request.accept = 'application/json'
+    request.accept = 'application/vnd.api+json'
+    request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
 
@@ -17,7 +18,7 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(assigns(:gateway_groups)).to match_array(gateway_groups) }
+    it { expect(response_data.size).to eq(gateway_groups.size) }
   end
 
   describe 'GET show' do
@@ -27,22 +28,22 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
       before { get :show, id: gateway_group.to_param }
 
       it { expect(response.status).to eq(200) }
-      it { expect(assigns(:gateway_group)).to eq(gateway_group) }
+      it { expect(response_data['id']).to eq(gateway_group.id.to_s) }
     end
 
     context 'when gateway_group does not exist' do
       before { get :show, id: gateway_group.id + 10 }
 
       it { expect(response.status).to eq(404) }
-      it { expect(assigns(:gateway_group)).to eq(nil) }
+      it { expect(response_data).to eq(nil) }
     end
   end
 
   describe 'POST create' do
-    before { post :create, gateway_group: attributes }
+    before { post :create, data: { type: 'gateway-groups', attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', vendor_id: vendor.id } }
+      let(:attributes) { { name: 'name', 'vendor-id': vendor.id } }
 
       it { expect(response.status).to eq(201) }
       it { expect(GatewayGroup.count).to eq(1) }
@@ -58,12 +59,14 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
 
   describe 'PUT update' do
     let!(:gateway_group) { create :gateway_group }
-    before { put :update, id: gateway_group.to_param, gateway_group: attributes }
+    before { put :update, id: gateway_group.to_param, data: { type: 'gateway-groups',
+                                                              id: gateway_group.to_param,
+                                                              attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', vendor_id: vendor.id } }
+      let(:attributes) { { name: 'name', 'vendor-id': vendor.id } }
 
-      it { expect(response.status).to eq(204) }
+      it { expect(response.status).to eq(200) }
       it { expect(gateway_group.reload.name).to eq('name') }
     end
 

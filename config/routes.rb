@@ -59,8 +59,8 @@ Yeti::Application.routes.draw do
                           controller: :dialpeer_next_rates
           end
           jsonapi_resources :gateways
+          jsonapi_resources :gateway_groups
 
-          api.resources :gateway_groups, only: [:index, :show, :update, :destroy, :create]
           api.resources :routing_groups, only: [:index, :show, :update, :destroy, :create]
           api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
           api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
