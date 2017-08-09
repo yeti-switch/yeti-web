@@ -5,7 +5,8 @@ describe Api::Rest::Private::RoutingPlansController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   before do
-    request.accept = 'application/json'
+    request.accept = 'application/vnd.api+json'
+    request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
 
@@ -15,7 +16,7 @@ describe Api::Rest::Private::RoutingPlansController, type: :controller do
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(assigns(:routing_plans)).to match_array(routing_plans) }
+    it { expect(response_data.size).to eq(routing_plans.size) }
   end
 
   describe 'GET show' do
@@ -25,29 +26,29 @@ describe Api::Rest::Private::RoutingPlansController, type: :controller do
       before { get :show, id: routing_plan.to_param }
 
       it { expect(response.status).to eq(200) }
-      it { expect(assigns(:routing_plan)).to eq(routing_plan) }
+      it { expect(response_data['id']).to eq(routing_plan.id.to_s) }
     end
 
     context 'when routing_plan does not exist' do
       before { get :show, id: routing_plan.id + 10 }
 
       it { expect(response.status).to eq(404) }
-      it { expect(assigns(:routing_plan)).to eq(nil) }
+      it { expect(response_data).to eq(nil) }
     end
   end
 
   describe 'POST create' do
-    before { post :create, routing_plan: attributes }
+    before { post :create, data: { type: 'routing-plans', attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', use_lnp: true } }
+      let(:attributes) { { name: 'name', 'use-lnp': true } }
 
       it { expect(response.status).to eq(201) }
       it { expect(Routing::RoutingPlan.count).to eq(1) }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { name: nil, use_lnp: true } }
+      let(:attributes) { { name: nil, 'use-lnp': true } }
 
       it { expect(response.status).to eq(422) }
       it { expect(Routing::RoutingPlan.count).to eq(0) }
@@ -56,17 +57,19 @@ describe Api::Rest::Private::RoutingPlansController, type: :controller do
 
   describe 'PUT update' do
     let!(:routing_plan) { create :routing_plan }
-    before { put :update, id: routing_plan.to_param, routing_plan: attributes }
+    before { put :update, id: routing_plan.to_param, data: { type: 'routing-plans',
+                                                             id: routing_plan.to_param,
+                                                             attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', use_lnp: true } }
+      let(:attributes) { { name: 'name', 'use-lnp': true } }
 
-      it { expect(response.status).to eq(204) }
+      it { expect(response.status).to eq(200) }
       it { expect(routing_plan.reload.name).to eq('name') }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { name: nil, use_lnp: true } }
+      let(:attributes) { { name: nil, 'use-lnp': true } }
 
       it { expect(response.status).to eq(422) }
       it { expect(routing_plan.reload.name).to_not eq(nil) }
