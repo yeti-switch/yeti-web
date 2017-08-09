@@ -37,11 +37,11 @@ resource 'Accounts' do
     parameter :type, 'Resource type (accounts)', scope: :data, required: true
 
     required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: [:data, :attributes], required: true
+      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes], required: true
     end
 
     optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: [:data, :attributes]
+      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes]
     end
 
     let(:name) { 'name' }
@@ -60,11 +60,11 @@ resource 'Accounts' do
     parameter :id, 'Account ID', scope: :data, required: true
 
     required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: [:data, :attributes], required: true
+      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes], required: true
     end
 
     optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: [:data, :attributes]
+      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes]
     end
 
     let(:id) { create(:account).id }

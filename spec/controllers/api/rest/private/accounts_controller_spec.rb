@@ -22,14 +22,14 @@ describe Api::Rest::Private::AccountsController, type: :controller do
   describe 'GET show' do
     let!(:account) { create :account }
 
-    context 'when contractor exists' do
+    context 'when account exists' do
       before { get :show, id: account.to_param }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(account.id.to_s) }
     end
 
-    context 'when contractor does not exist' do
+    context 'when account does not exist' do
       before { get :show, id: account.id + 10 }
 
       it { expect(response.status).to eq(404) }
