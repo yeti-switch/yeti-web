@@ -17,8 +17,8 @@ class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
 
 
-  has_many :customers_auths, class: CustomersAuth, foreign_key: :radius_auth_profile_id, dependent: :restrict_with_error
-  has_many :avps, class: Equipment::Radius::AuthProfileAttribute, foreign_key: :profile_id,  inverse_of: :profile , dependent: :destroy
+  has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :radius_auth_profile_id, dependent: :restrict_with_error
+  has_many :avps, class_name: 'Equipment::Radius::AuthProfileAttribute', foreign_key: :profile_id,  inverse_of: :profile , dependent: :destroy
 
 
   accepts_nested_attributes_for :avps, allow_destroy: true

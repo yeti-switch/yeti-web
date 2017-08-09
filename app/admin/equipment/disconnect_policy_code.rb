@@ -53,14 +53,14 @@ ActiveAdmin.register DisconnectPolicyCode do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :policy, input_html: {class: 'chosen'}
-      f.input :code, as: :select,
+      f.input :policy, input_html: {class: 'chosen'}, hint: I18n.t('hints.equipment.disconnect_policy_code.policy')
+      f.input :code, as: :select, hint: I18n.t('hints.equipment.disconnect_policy_code.code'),
               collection: DisconnectCode.where(namespace_id: DisconnectCode::NS_SIP).order(:code),
               input_html: {class: 'chosen'}
       f.input :stop_hunting
       f.input :pass_reason_to_originator
-      f.input :rewrited_code
-      f.input :rewrited_reason
+      f.input :rewrited_code, hint: I18n.t('hints.equipment.disconnect_policy_code.rewrited_code')
+      f.input :rewrited_reason, hint: I18n.t('hints.equipment.disconnect_policy_code.rewrited_reason')
     end
     f.actions
   end

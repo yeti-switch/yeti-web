@@ -1,14 +1,18 @@
 sudo: required
 language: generic
-
 services:
-  - docker
+- docker
 env:
-  - TRAVIS_DEBIAN_DISTRIBUTION=jessie
-
+- TRAVIS_DEBIAN_DISTRIBUTION=jessie
 script:
-  - sh ci/travis.sh
-
+- sh ci/travis.sh
 branches:
   except:
-    - /^debian\/\d/
+  - "/^debian\\/\\d/"
+deploy:
+  provider: bintray
+  user:
+    secure: SeorGkW/38clsrAAKjkYMlYP6lxZwVPk3Q/coNsJsrJ7JfW91NMDZHPlyi21yfcUxd0l4LoD5sNXOkzFw128dyWtlq9s2HQ/WoSpcg47PPZaO+9uzbSoLeQ1fh0RK+ckL4U40mAoOIECKN7Tz687nnIy08pNXtcm+LH59x9X9AKKBwdCnSJHoXiRXj8qQOlks+FlSkS2CDEtuTmXB9cQd6nZk0oH4XqMMGxSRRCjHeu77enO6LlkenZ2x1tLeT1oPHBVCmDrjyUoPlj5dh55oRg2tfWUqB4/rUzxN22v2/5aApZQ/Mmj+fcVJcAT/dfFQn7GiEM0T5kgu2Qbm5o/nsSd7+hlJl9e6b/RB2otoUt0CJa2GEVzQB8oACZ3bb2LW5zgPBKRRc0EGD16akIZ7Z/XTszIr0xrZ9yc9uQDNvY23NqLYswJOt7OhlUyB5i0AFhCpIVn8A52h7tkxN4BsKYkbdS1pUniBbcnFumxcp3SltOgQsb7Z0Kz+VPtTqY5yHQWtsSULMeZZOQlaxOBB9MayemPTIn0EguErsICI1HUOO0ZKfghTKTr+bg5WH2i8gbMO/f/+RXHIVA8GDqvhEATiTExVNDfJSQLsfNvw+KFM5Bn8LBE1TJwk6/qoPkNHicE8wFhHpl4nNwnhm2larsa7usfF+iy8kKnPpByyuA=
+  file: ".bintray.json"
+  key: 
+    secure:"idHDCUXepsbZKEeMRTYSLs+brrr+++oxJwdBz/wt3hQHNw/ZYQ/1OLr/PhmI7YFKIF4ruluCUkpz2XgoTisNZ+d+sY3WMiWdf+3vMUu065V2Gn5+0I9XMkHgCI7HQ2SB0Zj6dinqUj5Pq6A1y3jO2FuXtVVbazzh5BCenyCFaItI2OEf2/KctYdc9lK5lLYwqd10Qqnb0Sm6jtgarkIzqSQOmTO1xDZBLfhyVRPUd86Xpxs/S7YaUonbXb2Xb5TyEAifpeNcio+5pftJq5OUsrjLjzbCBcKHSrHnTMgeqAC5FsGdL7v7l7hPVDULtx+zRUt2IzyBUi3zZaRzkGVxmhkkclu6Alkp+6ilrYwGllHxxbkXBUyWgI21zWPDX2zX1bLJegx+3w5HmW24GZXDr3vdlLbDTeMLf/9XRMLAZgf5S1OQZ4k7XpiTUQCL06sRCa40D3YTYW3+kkYdqUrkBHvCZid21bGZz8iugcCppLtT+nI3m2neGiHtrGWCeDN5+YqyTjWcyAT4P6kFQ3mdPqmKMNCREvTRwkyKX0d4KY//QGcPwXG/XPoAkW1/SKa3kd3RP5KsZ5CI+TU69ATi8M+JmUVdg1I6zZ2F7PhDPyE/waHeA9paQW/WH0bMApq5dINWv0hHoKWL/XrhG/d8f6rAr2Bl8iz4uEZF02zM4vM="

@@ -277,15 +277,15 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :vendor_invoice
-      f.input :contractor, collection: Contractor.all,
+      f.input :contractor, collection: Contractor.all, hint: I18n.t('hints.billing.invoices.contractor'),
               input_html: {
                   class: 'chosen',
                   onchange: remote_chosen_request(:get, get_accounts_contractors_path, {contractor_id: "$(this).val()"}, :billing_invoice_account_id)
 
               }
-      f.input :account, collection: [], input_html: {class: 'chosen'}
-      f.input :start_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, hint: "Customer timezone will be used", wrapper_html: {class: 'datetime_preset_pair', data: {show_time: 'true'}}
-      f.input :end_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, hint: "Customer timezone will be used"
+      f.input :account, collection: [], input_html: {class: 'chosen'}, hint: I18n.t('hints.billing.invoices.account')
+      f.input :start_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, hint: I18n.t('hints.billing.invoices.date'), wrapper_html: {class: 'datetime_preset_pair', data: {show_time: 'true'}}
+      f.input :end_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, hint: I18n.t('hints.billing.invoices.date')
     end
     f.actions
   end

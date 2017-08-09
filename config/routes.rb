@@ -1,6 +1,6 @@
 Yeti::Application.routes.draw do
-
   devise_for :admin_users, ActiveAdmin::Devise.config
+  post 'api/rest/private/auth', to: 'api/rest/private/auth#create'
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
@@ -46,23 +46,30 @@ Yeti::Application.routes.draw do
 
           api.resources :admin_users, only: [:index]
           api.resources :nodes, only: [:index]
-
         end
 
         namespace :private do
+          api.resources :accounts, only: [:index, :show, :update, :destroy, :create]
+          api.resources :contractors, only: [:index, :show, :update, :destroy, :create]
           api.resources :dialpeers, only: [:index, :show, :update, :destroy, :create] do
             api.resources :dialpeer_next_rates, only: [:index, :show, :update, :destroy, :create], controller: :dialpeer_next_rates
           end
+          api.resources :gateways, only: [:index, :show, :update, :destroy, :create]
+          api.resources :gateway_groups, only: [:index, :show, :update, :destroy, :create]
           api.resources :routing_groups, only: [:index, :show, :update, :destroy, :create]
+          api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
           api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
           api.resources :destinations, only: [:index, :show, :update, :destroy, :create]
+          api.resources :customers_auths, only: [:index, :show, :update, :destroy, :create]
+
+          api.resources :payments, only: [:index, :show, :create]
         end
       end
     end
   end
 
   #404
-   match '*a' => 'application#render_404', via: :get
+  match '*a' => 'application#render_404', via: :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

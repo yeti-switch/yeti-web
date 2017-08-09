@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :gateway_group, class: GatewayGroup do
-    vendor_id nil
-    name nil
+    sequence(:name) { |n| "gateway_group_#{n}"}
     prefer_same_pop true
+
+    association :vendor, factory: :contractor, vendor: true
   end
 end

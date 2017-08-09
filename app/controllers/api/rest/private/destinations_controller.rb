@@ -1,10 +1,10 @@
-class Api::Rest::Private::DestinationsController < Api::RestController
+class Api::Rest::Private::DestinationsController < Api::Rest::Private::BaseController
 
-  after_filter only: [:index] do
+  after_action only: [:index] do
     send_x_headers(@destinations)
   end
 
-  before_filter only: [:show, :update, :destroy] do
+  before_action only: [:show, :update, :destroy] do
     @destination = Destination.find(params[:id])
   end
 
@@ -60,5 +60,4 @@ class Api::Rest::Private::DestinationsController < Api::RestController
         :short_calls_limit
     )
   end
-
 end

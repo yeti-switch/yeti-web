@@ -1,8 +1,7 @@
-require "base64"
-class Api::RestController < ApiController
+require 'base64'
 
-  before_filter :restrict_access
-  skip_before_filter :verify_authenticity_token
+class Api::RestController < ApiController
+  skip_before_action :verify_authenticity_token
 
   respond_to :json
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
@@ -72,6 +71,4 @@ class Api::RestController < ApiController
   def restrict_access
     true
   end
-
-
 end

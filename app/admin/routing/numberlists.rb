@@ -44,13 +44,13 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   form do |f|
     f.inputs do
-      f.input :name
-      f.input :mode, as: :select, include_blank: false
-      f.input :default_action, as: :select, include_blank: false
-      f.input :default_src_rewrite_rule
-      f.input :default_src_rewrite_result
-      f.input :default_dst_rewrite_rule
-      f.input :default_dst_rewrite_result
+      f.input :name, hint: I18n.t('hints.routing.numberlists.name')
+      f.input :mode, as: :select, include_blank: false, hint: I18n.t('hints.routing.numberlists.mode')
+      f.input :default_action, as: :select, include_blank: false, hint: I18n.t('hints.routing.numberlists.default_action')
+      f.input :default_src_rewrite_rule, hint: I18n.t('hints.routing.numberlists.default_src_rewrite_rule')
+      f.input :default_src_rewrite_result, hint: I18n.t('hints.routing.numberlists.default_src_rewrite_result')
+      f.input :default_dst_rewrite_rule, hint: I18n.t('hints.routing.numberlists.default_dst_rewrite_rule')
+      f.input :default_dst_rewrite_result, hint: I18n.t('hints.routing.numberlists.default_dst_rewrite_result')
     end
     f.actions
   end

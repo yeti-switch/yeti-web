@@ -25,7 +25,7 @@ ActiveAdmin.register Routing::Area do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :name
+      f.input :name, hint: I18n.t('hints.routing.areas.name')
     end
     f.actions
   end

@@ -2,18 +2,21 @@ source 'https://rubygems.org'
 
 # Core
 gem 'pg'
-gem 'rails', '4.1.9'
+gem 'rails', '~> 4.2.9'
+gem 'responders', '~> 2.2.0'
+
 
 # Authentication
-gem 'devise', '~> 3.4.1'
+gem 'devise', '~> 3.5.10'
 gem 'devise_ldap_authenticatable', '~> 0.8', github: 'yeti-switch/devise_ldap_authenticatable'
 gem 'activeldap'
 gem 'net-ldap', '~> 0.3.1'
 gem 'd3-rails'
+gem 'knock', '~> 2.1.1'
 
 # ActiveAdmin
 gem 'ransack', '~> 1.4.0'
-gem 'draper', '~>  1.4'
+gem 'draper', '~>  2.1.0'
 gem 'activeadmin', github: 'yeti-switch/active_admin'
 gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
 gem 'active_admin_theme'
@@ -27,6 +30,8 @@ gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 # XLS generation
 gem 'excelinator', github: 'livingsocial/excelinator'
 
+# REST API
+gem 'active_model_serializers', '~> 0.9.7'
 
 # gem 'activeadmin_async_export'
 
@@ -73,10 +78,12 @@ end
 group :development, :test do
   gem 'thin'
 
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'rspec_api_documentation', '~> 5.0.0'
 end
 gem 'unicorn-worker-killer'
 gem 'ipaddress'
+gem 'apitome', '~> 0.1.0'
 
