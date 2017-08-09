@@ -5,7 +5,8 @@ describe Api::Rest::Private::RoutingGroupsController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   before do
-    request.accept = 'application/json'
+    request.accept = 'application/vnd.api+json'
+    request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
 
@@ -15,7 +16,7 @@ describe Api::Rest::Private::RoutingGroupsController, type: :controller do
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(assigns(:routing_groups)).to match_array(routing_groups) }
+    it { expect(response_data.size).to eq(routing_groups.size) }
   end
 
   describe 'GET show' do
@@ -25,19 +26,19 @@ describe Api::Rest::Private::RoutingGroupsController, type: :controller do
       before { get :show, id: routing_group.to_param }
 
       it { expect(response.status).to eq(200) }
-      it { expect(assigns(:routing_group)).to eq(routing_group) }
+      it { expect(response_data['id']).to eq(routing_group.id.to_s) }
     end
 
     context 'when routing_group does not exist' do
       before { get :show, id: routing_group.id + 10 }
 
       it { expect(response.status).to eq(404) }
-      it { expect(assigns(:routing_group)).to eq(nil) }
+      it { expect(response_data).to eq(nil) }
     end
   end
 
   describe 'POST create' do
-    before { post :create, routing_group: attributes }
+    before { post :create, data: { type: 'routing-groups', attributes: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
@@ -56,12 +57,14 @@ describe Api::Rest::Private::RoutingGroupsController, type: :controller do
 
   describe 'PUT update' do
     let!(:routing_group) { create :routing_group }
-    before { put :update, id: routing_group.to_param, routing_group: attributes }
+    before { put :update, id: routing_group.to_param, data: { type: 'routing-groups',
+                                                              id: routing_group.to_param,
+                                                              attributes: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
 
-      it { expect(response.status).to eq(204) }
+      it { expect(response.status).to eq(200) }
       it { expect(routing_group.reload.name).to eq('name') }
     end
 
