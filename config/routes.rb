@@ -60,8 +60,8 @@ Yeti::Application.routes.draw do
           end
           jsonapi_resources :gateways
           jsonapi_resources :gateway_groups
+          jsonapi_resources :routing_groups
 
-          api.resources :routing_groups, only: [:index, :show, :update, :destroy, :create]
           api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
           api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
 
