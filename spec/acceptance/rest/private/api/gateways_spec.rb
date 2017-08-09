@@ -2,11 +2,13 @@ require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
 resource 'Gateways' do
-  header 'Accept', 'application/json'
+  header 'Accept', 'application/vnd.api+json'
+  header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token
 
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+  let(:type) { 'gateways' }
 
   required_params = [
     :name, :enabled, :priority, :acd_limit, :asr_limit,
@@ -47,31 +49,27 @@ resource 'Gateways' do
   end
 
   post '/api/rest/private/gateways' do
-    required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway, required: true
-    end
+    parameter :type, 'Resource type (gateways)', scope: :data, required: true
 
-    optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway
-    end
+    define_parameters(required_params, optional_params)
 
     let(:name) { 'name' }
     let(:enabled) { true }
     let(:priority) { 1 }
-    let(:acd_limit) { 0.0 }
-    let(:asr_limit) { 0.0 }
-    let(:sdp_alines_filter_type_id) { 0 }
-    let(:session_refresh_method_id) { 1 }
-    let(:sdp_c_location_id) { 2 }
-    let(:sensor_level_id) { 1 }
-    let(:dtmf_receive_mode_id) { 1 }
-    let(:dtmf_send_mode_id) { 1 }
-    let(:rel100_mode_id) { 1 }
-    let(:transport_protocol_id) { 1 }
-    let(:term_proxy_transport_protocol_id) { 1 }
-    let(:orig_proxy_transport_protocol_id) { 1 }
-    let(:contractor_id) { create(:contractor, vendor: true).id }
-    let(:codec_group_id) { create(:codec_group).id }
+    let(:'acd-limit') { 0.0 }
+    let(:'asr-limit') { 0.0 }
+    let(:'sdp-alines-filter-type-id') { 0 }
+    let(:'session-refresh-method-id') { 1 }
+    let(:'sdp-c-location-id') { 2 }
+    let(:'sensor-level-id') { 1 }
+    let(:'dtmf-receive-mode-id') { 1 }
+    let(:'dtmf-send-mode-id') { 1 }
+    let(:'rel100-mode-id') { 1 }
+    let(:'transport-protocol-id') { 1 }
+    let(:'term-proxy-transport-protocol-id') { 1 }
+    let(:'orig-proxy-transport-protocol-id') { 1 }
+    let(:'contractor-id') { create(:contractor, vendor: true).id }
+    let(:'codec-group-id') { create(:codec_group).id }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -79,20 +77,17 @@ resource 'Gateways' do
   end
 
   put '/api/rest/private/gateways/:id' do
-    required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway, required: true
-    end
+    parameter :type, 'Resource type (gateways)', scope: :data, required: true
+    parameter :id, 'Gateway ID', scope: :data, required: true
 
-    optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('_', ' '), scope: :gateway
-    end
+    define_parameters(required_params, optional_params)
 
     let(:id) { create(:gateway).id }
     let(:name) { 'name' }
-    let(:acd_limit) { 1.0 }
+    let(:'acd-limit') { 1.0 }
 
     example_request 'update values' do
-      expect(status).to eq(204)
+      expect(status).to eq(200)
     end
   end
 
