@@ -5,7 +5,8 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   before do
-    request.accept = 'application/json'
+    request.accept = 'application/vnd.api+json'
+    request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
 
@@ -15,7 +16,7 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(assigns(:dialpeers)).to match_array(dialpeers) }
+    it { expect(response_data.size).to eq(dialpeers.size) }
   end
 
   describe 'GET show' do
@@ -25,14 +26,14 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
       before { get :show, id: dialpeer.to_param }
 
       it { expect(response.status).to eq(200) }
-      it { expect(assigns(:dialpeer)).to eq(dialpeer) }
+      it { expect(response_data['id']).to eq(dialpeer.id.to_s) }
     end
 
     context 'when dialpeer does not exist' do
       before { get :show, id: dialpeer.id + 10 }
 
       it { expect(response.status).to eq(404) }
-      it { expect(assigns(:dialpeer)).to eq(nil) }
+      it { expect(response_data).to eq(nil) }
     end
   end
 
@@ -41,23 +42,23 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
     let(:account) { create :account, contractor: vendor }
     let(:gateway_group) { create :gateway_group, vendor: vendor }
     let(:routing_group) { create :routing_group }
-    before { post :create, dialpeer: attributes }
+    before { post :create, data: { type: 'dialpeers', attributes: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) do
         {
           enabled: true,
-          vendor_id: vendor.id,
-          account_id: account.id,
-          gateway_group_id: gateway_group.id,
-          routing_group_id: routing_group.id,
-          valid_from: DateTime.now,
-          valid_till: 1.year.from_now,
-          initial_interval: 60,
-          next_interval: 60,
-          initial_rate: 0.0,
-          next_rate: 0.0,
-          connection_fee: 0.0
+          'vendor-id': vendor.id,
+          'account-id': account.id,
+          'gateway-group-id': gateway_group.id,
+          'routing-group-id': routing_group.id,
+          'valid-from': DateTime.now,
+          'valid-till': 1.year.from_now,
+          'initial-interval': 60,
+          'next-interval': 60,
+          'initial-rate': 0.0,
+          'next-rate': 0.0,
+          'connect-fee': 0.0
         }
       end
 
@@ -66,7 +67,7 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { enabled: true, vendor_id: nil } }
+      let(:attributes) { { enabled: true, 'vendor-id': nil } }
 
       it { expect(response.status).to eq(422) }
       it { expect(Dialpeer.count).to eq(0) }
@@ -75,17 +76,19 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
 
   describe 'PUT update' do
     let!(:dialpeer) { create :dialpeer }
-    before { put :update, id: dialpeer.to_param, dialpeer: attributes }
+    before { put :update, id: dialpeer.to_param, data: { type: 'dialpeers',
+                                                         id: dialpeer.to_param,
+                                                         attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { next_interval: 90 } }
+      let(:attributes) { { 'next-interval': 90 } }
 
-      it { expect(response.status).to eq(204) }
+      it { expect(response.status).to eq(200) }
       it { expect(dialpeer.reload.next_interval).to eq(90) }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { next_interval: 90, vendor_id: nil } }
+      let(:attributes) { { 'next-interval': 90, 'vendor-id': nil } }
 
       it { expect(response.status).to eq(422) }
       it { expect(dialpeer.reload.next_interval).to_not eq(90) }
@@ -101,4 +104,3 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
     it { expect(Dialpeer.count).to eq(0) }
   end
 end
-
