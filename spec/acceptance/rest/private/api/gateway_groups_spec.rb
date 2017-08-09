@@ -2,13 +2,15 @@ require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
 resource 'Gateway groups' do
-  header 'Accept', 'application/json'
+  header 'Accept', 'application/vnd.api+json'
+  header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token
 
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+  let(:type) { 'gateway-groups' }
 
-  get '/api/rest/private/gateway_groups' do
+  get '/api/rest/private/gateway-groups' do
     before { create_list(:gateway_group, 2) }
 
     example_request 'get listing' do
@@ -16,7 +18,7 @@ resource 'Gateway groups' do
     end
   end
 
-  get '/api/rest/private/gateway_groups/:id' do
+  get '/api/rest/private/gateway-groups/:id' do
     let(:id) { create(:gateway_group).id }
 
     example_request 'get specific entry' do
@@ -24,32 +26,37 @@ resource 'Gateway groups' do
     end
   end
 
-  post '/api/rest/private/gateway_groups' do
-    parameter :name, 'Gateway group name', scope: :gateway_group, required: true
-    parameter :vendor_id, 'Vendor id', scope: :gateway_group, required: true
+  post '/api/rest/private/gateway-groups' do
+    parameter :type, 'Resource type (gateway-groups)', scope: :data, required: true
+
+    define_parameter :name, required: true
+    define_parameter :vendor_id, required: true
 
     let(:name) { 'name' }
-    let(:vendor_id) { create(:contractor, vendor: true).id }
+    let(:'vendor-id') { create(:contractor, vendor: true).id }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
     end
   end
 
-  put '/api/rest/private/gateway_groups/:id' do
-    parameter :name, 'Gateway group name', scope: :gateway_group, required: true
-    parameter :vendor_id, 'Vendor id', scope: :gateway_group, required: true
+  put '/api/rest/private/gateway-groups/:id' do
+    parameter :type, 'Resource type (gateway-groups)', scope: :data, required: true
+    parameter :id, 'Gateway group ID', scope: :data, required: true
+
+    define_parameter :name, required: true
+    define_parameter :vendor_id, required: true
 
     let(:id) { create(:gateway_group).id }
     let(:name) { 'name' }
-    let(:vendor_id) { create(:contractor, vendor: true).id }
+    let(:'vendor-id') { create(:contractor, vendor: true).id }
 
     example_request 'update values' do
-      expect(status).to eq(204)
+      expect(status).to eq(200)
     end
   end
 
-  delete '/api/rest/private/gateway_groups/:id' do
+  delete '/api/rest/private/gateway-groups/:id' do
     let(:id) { create(:gateway_group).id }
 
     example_request 'delete entry' do
