@@ -60,11 +60,10 @@ Yeti::Application.routes.draw do
           end
           jsonapi_resources :gateways
           jsonapi_resources :gateway_groups
+          jsonapi_resources :payments, except: [:update, :destroy]
           jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_plans
-
-          api.resources :payments, only: [:index, :show, :create]
         end
       end
     end
