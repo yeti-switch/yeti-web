@@ -1,20 +1,34 @@
 FactoryGirl.define do
   factory :gateway, class: Gateway do
+    sequence(:name) { |n| "gateway#{n}" }
+    enabled true
+    priority 100
+    acd_limit 0.0
+    asr_limit 0.0
+    sdp_alines_filter_type_id 0
+    session_refresh_method_id 1
+    sdp_c_location_id 2
+    sensor_level_id 1
+    dtmf_receive_mode_id 1
+    dtmf_send_mode_id 1
+    rel100_mode_id 1
+    transport_protocol_id 1
+    term_proxy_transport_protocol_id 1
+    orig_proxy_transport_protocol_id 1
+
+    association :contractor, factory: :contractor, vendor: true
+    association :codec_group
+
     host nil
     port nil
     src_rewrite_rule nil
     dst_rewrite_rule nil
-    acd_limit nil
-    asr_limit nil
-    enabled nil
-    name nil
     auth_enabled false
     auth_user nil
     auth_password nil
     term_outbound_proxy nil
     term_next_hop_for_replies false
     term_use_outbound_proxy false
-    contractor_id nil
     allow_termination true
     allow_origination true
     anonymize_sdp true
@@ -25,7 +39,6 @@ FactoryGirl.define do
     sst_minimum_timer 50
     sst_maximum_timer 50
     sst_accept501 true
-    session_refresh_method_id 3
     sst_session_expires 50
     term_force_outbound_proxy false
     locked false
@@ -33,7 +46,6 @@ FactoryGirl.define do
     codecs_prefer_transcoding_for nil
     src_rewrite_result nil
     dst_rewrite_result nil
-    capacity 0
     term_next_hop nil
     orig_next_hop nil
     orig_append_headers_req nil
@@ -45,7 +57,6 @@ FactoryGirl.define do
     prefer_existing_codecs true
     force_symmetric_rtp true
     transparent_dialog_id false
-    sdp_alines_filter_type_id 0
     sdp_alines_filter_list nil
     gateway_group_id nil
     orig_disconnect_policy_id nil
@@ -55,9 +66,7 @@ FactoryGirl.define do
     diversion_rewrite_result nil
     src_name_rewrite_rule nil
     src_name_rewrite_result nil
-    priority 100
     pop_id nil
-    codec_group_id 1
     single_codec_in_200ok false
     ringing_timeout nil
     symmetric_rtp_nonstop false
@@ -67,7 +76,6 @@ FactoryGirl.define do
     relay_options false
     rtp_ping false
     relay_reinvite false
-    sdp_c_location_id 2
     auth_from_user nil
     auth_from_domain nil
     relay_hold false
@@ -79,9 +87,6 @@ FactoryGirl.define do
     dns_srv_failover_timer 2000
     rtp_force_relay_cn true
     sensor_id nil
-    sensor_level_id 1
     filter_noaudio_streams false
-    dtmf_send_mode_id 1
-    dtmf_receive_mode_id 1
   end
 end

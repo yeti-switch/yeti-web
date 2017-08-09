@@ -1,0 +1,87 @@
+{
+  "resource": "Contractors",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/contractors",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "contractor",
+      "required": true,
+      "name": "name",
+      "description": "Contractor name"
+    },
+    {
+      "scope": "contractor",
+      "name": "vendor",
+      "description": "Vendor flag"
+    },
+    {
+      "scope": "contractor",
+      "name": "customer",
+      "description": "Customer flag"
+    },
+    {
+      "scope": "contractor",
+      "name": "enabled",
+      "description": "Enabled flag"
+    },
+    {
+      "scope": "contractor",
+      "name": "description",
+      "description": "Description"
+    },
+    {
+      "scope": "contractor",
+      "name": "address",
+      "description": "Address"
+    },
+    {
+      "scope": "contractor",
+      "name": "phones",
+      "description": "Phones"
+    },
+    {
+      "scope": "contractor",
+      "name": "smtp_connection_id",
+      "description": "SMTP connection id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/contractors",
+      "request_body": "contractor[name]=name&contractor[vendor]=true",
+      "request_headers": {
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjIsInN1YiI6OX0.z5BHM8gD3QcFwKrjqxkxpmPqbYuLk7qb_Xh_SLN7FmY",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"contractor\": {\n    \"id\": 10,\n    \"name\": \"name\",\n    \"enabled\": null,\n    \"vendor\": true,\n    \"customer\": null,\n    \"description\": null,\n    \"address\": null,\n    \"phones\": null,\n    \"smtp_connection_id\": null\n  }\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"1453bc5abd746b30e0d913b49ea2fe1a\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "4c61d9fa-1d34-4a54-a54d-73b03b960be3",
+        "X-Runtime": "0.020940",
+        "Content-Length": "157"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

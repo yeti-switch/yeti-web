@@ -1,0 +1,58 @@
+{
+  "resource": "Rateplans",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/rateplans",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "rateplan",
+      "required": true,
+      "name": "name",
+      "description": "Rateplan name"
+    },
+    {
+      "scope": "rateplan",
+      "required": true,
+      "name": "profit_control_mode_id",
+      "description": "Rate profit control mode id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/rateplans",
+      "request_body": "rateplan[name]=name&rateplan[profit_control_mode_id]=25",
+      "request_headers": {
+        "Accept": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMzAsInN1YiI6NDJ9.96Sge2RtXspB1Hx2pUKD4ks2E_qMRdMmwuQrccMLcV8",
+        "Host": "example.org",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"id\": 16,\n  \"name\": \"name\",\n  \"profit_control_mode_id\": 25,\n  \"send_quality_alarms_to\": null\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"dc2b4ba0e84fa5cd3ca08d6700b6718b\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "3e495941-37d1-4817-8a35-be8f17426b13",
+        "X-Runtime": "0.016366",
+        "Content-Length": "81"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

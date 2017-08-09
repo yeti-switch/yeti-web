@@ -25,14 +25,27 @@
 #
 
 class AdminUser < ActiveRecord::Base
+  include Yeti::ResourceStatus
 
+  has_one :billing_contact, class_name: 'Billing::Contact', dependent: :destroy, autosave: true
+
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, unless:  proc { self.persisted? && email.blank? }
+
+  after_save do
+    contact = billing_contact || build_billing_contact
+    contact.update!(email: self.email) if @email
+  end
 
   before_destroy :check_if_last
 
-  include Yeti::ResourceStatus
-  has_one :billing_contact, class_name: 'Billing::Contact', dependent: :destroy, autosave: true
+  def self.from_token_request(request)
+    name = request.params[:auth].kind_of?(Hash) && request.params[:auth][:username]
+    name.present? ? find_by(username: name) : nil
+  end
 
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, unless:  proc{self.persisted? && email.blank?  }
+  def self.ldap?
+    AdminUser.devise_modules.include?(:ldap_authenticatable)
+  end
 
   def self.ldap_config
     File.join(Rails.root, "config", "ldap.yml")
@@ -42,17 +55,20 @@ class AdminUser < ActiveRecord::Base
     File.exists?(self.ldap_config)
   end
 
+  if ldap_config_exists?
+    include AdminUserLdapHandler
+  else
+    include AdminUserDatabaseHandler
+  end
+
+  alias_method :authenticate, :valid_password?
+
   def email
     @email ||= billing_contact.try!(:email)
   end
 
   def email=(mail)
     @email = mail
-  end
-
-  after_save do
-    contact = billing_contact || build_billing_contact
-    contact.update!(email: self.email) if @email
   end
 
   def display_name
@@ -89,18 +105,6 @@ class AdminUser < ActiveRecord::Base
     super && self.enabled?
   end
 
-  if ldap_config_exists?
-    include AdminUserLdapHandler
-
-  else
-    include AdminUserDatabaseHandler
-  end
-
-  def self.ldap?
-    AdminUser.devise_modules.include?(:ldap_authenticatable)
-  end
-
-
 
 ##### devise ####
   def email_required?
@@ -112,14 +116,13 @@ class AdminUser < ActiveRecord::Base
   end
 
   protected
+
   def check_if_last
     if self.class.count <= 1
       errors.add(:base, "Last admin user can't  be deleted")
       false
     end
   end
-
-
 end
 
 

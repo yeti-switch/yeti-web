@@ -1,14 +1,11 @@
 sudo: required
 language: generic
-
 services:
-  - docker
+- docker
 env:
-  - TRAVIS_DEBIAN_DISTRIBUTION=jessie
-
+- TRAVIS_DEBIAN_DISTRIBUTION=jessie
 script:
-  - sh ci/travis.sh
-
+- sh ci/travis.sh
 branches:
   except:
-    - /^debian\/\d/
+  - "/^debian\\/\\d/"

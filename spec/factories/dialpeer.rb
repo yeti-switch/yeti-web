@@ -8,21 +8,26 @@ FactoryGirl.define do
     asr_limit 0
     gateway_id nil
     routing_group_id nil
-    next_rate nil
-    connect_fee nil
-    vendor_id nil
-    account_id nil
+    connect_fee 0
     src_rewrite_result nil
     dst_rewrite_result nil
     locked false
     priority 100
-    capacity 0
+    capacity 1
     lcr_rate_multiplier 1
+    next_rate 0.0
     initial_rate 0.0
-    initial_interval 60
     next_interval 60
+    initial_interval 60
     valid_from '1970-01-01 00:00:00'
     valid_till '2020-01-01 00:00:00'
-    gateway_group_id nil
+
+    association :routing_group
+
+    after :build do |dialpeer|
+      dialpeer.vendor ||= create(:contractor, vendor: true)
+      dialpeer.account ||= create(:account, contractor: dialpeer.vendor)
+      dialpeer.gateway_group ||= create(:gateway_group, vendor: dialpeer.vendor) if dialpeer.gateway.blank?
+    end
   end
 end

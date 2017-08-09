@@ -1,4 +1,4 @@
-class Api::Rest::Private::DialpeerNextRatesController < Api::RestController
+class Api::Rest::Private::DialpeerNextRatesController < Api::Rest::Private::BaseController
 
   after_filter only: [:index] do
     send_x_headers(@dialpeer_next_rates)
