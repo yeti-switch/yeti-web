@@ -17,29 +17,30 @@
       "request_path": "/api/rest/private/contractors/9",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjEsInN1YiI6OH0.rDBcKGgjOtc7J4ABd_TgG-dvl1Vsj0GnaXDs4TT9y2k",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzNzksInN1YiI6OH0.zZ7NSwzdAh79dTqg_-vbqweK8bArbgzKqaNJ6pLtt_Y",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"contractor\": {\n    \"id\": 9,\n    \"name\": \"contractor9\",\n    \"enabled\": true,\n    \"vendor\": true,\n    \"customer\": false,\n    \"description\": null,\n    \"address\": null,\n    \"phones\": null,\n    \"smtp_connection_id\": null\n  }\n}",
+      "response_body": "{\"data\":{\"id\":\"9\",\"type\":\"contractors\",\"links\":{\"self\":\"http://example.org/api/rest/private/contractors/9\"},\"attributes\":{\"name\":\"contractor9\",\"enabled\":true,\"vendor\":true,\"customer\":false,\"description\":null,\"address\":null,\"phones\":null,\"smtp-connection-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"01edf57f95c94fd190a19e20cc5ac824\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"9369dbc6ef9a66759e47ddb6bf81c3d5\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "45790472-d542-4a99-961c-4e45a0faff6d",
-        "X-Runtime": "0.021233",
-        "Content-Length": "164"
+        "X-Request-Id": "18d9ad29-80b8-4c47-b093-118437925ee6",
+        "X-Runtime": "0.035944",
+        "Content-Length": "265"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

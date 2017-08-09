@@ -17,29 +17,30 @@
       "request_path": "/api/rest/private/destinations/3",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjUsInN1YiI6MTh9.PPZ0KOVkfEqsUUEyv-ufyWx8_MjZKFipY_4Iygl9WZQ",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODIsInN1YiI6MTh9.AH9iGyLPQtLirlywMMcOJOVhXukg8ifNhUaXUmJEaZU",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 3,\n  \"enabled\": true,\n  \"prefix\": \"\",\n  \"rateplan_id\": 9,\n  \"next_rate\": \"0.0\",\n  \"connect_fee\": \"0.0\",\n  \"initial_interval\": 60,\n  \"next_interval\": 60,\n  \"dp_margin_fixed\": \"0.0\",\n  \"dp_margin_percent\": \"0.0\",\n  \"rate_policy_id\": 1,\n  \"initial_rate\": \"0.0\",\n  \"reject_calls\": false,\n  \"use_dp_intervals\": false,\n  \"valid_from\": \"2017-07-24T18:08:45.204+07:00\",\n  \"valid_till\": \"2022-07-24T18:08:45.204+07:00\",\n  \"profit_control_mode_id\": null,\n  \"network_prefix_id\": null,\n  \"external_id\": null,\n  \"asr_limit\": 0.0,\n  \"acd_limit\": 0.0,\n  \"short_calls_limit\": 0.0,\n  \"quality_alarm\": false,\n  \"routing_tag_id\": null\n}",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/3\"},\"attributes\":{\"enabled\":true,\"rateplan-id\":9,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"rate-policy-id\":1,\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-09T18:19:42.287+07:00\",\"valid-till\":\"2022-08-09T18:19:42.287+07:00\",\"profit-control-mode-id\":null,\"external-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"fa9779fccd1afa6fc487757fabb08170\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"5df7b2f9a3ab4611a316386835d9ea47\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "2d5fa7cf-27fe-4410-98c5-a0f7580a8bea",
-        "X-Runtime": "0.017182",
-        "Content-Length": "530"
+        "X-Request-Id": "b4fc85d3-dd49-407b-b6dc-75ce61b2bbd2",
+        "X-Runtime": "0.033918",
+        "Content-Length": "579"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

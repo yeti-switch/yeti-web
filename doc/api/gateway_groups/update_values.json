@@ -2,20 +2,38 @@
   "resource": "Gateway groups",
   "resource_explanation": null,
   "http_method": "PUT",
-  "route": "/api/rest/private/gateway_groups/:id",
+  "route": "/api/rest/private/gateway-groups/:id",
   "description": "update values",
   "explanation": null,
   "parameters": [
     {
-      "scope": "gateway_group",
+      "scope": "data",
       "required": true,
-      "name": "name",
-      "description": "Gateway group name"
+      "name": "type",
+      "description": "Resource type (gateway-groups)"
     },
     {
-      "scope": "gateway_group",
+      "scope": "data",
       "required": true,
-      "name": "vendor_id",
+      "name": "id",
+      "description": "Gateway group ID"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "vendor-id",
       "description": "Vendor id"
     }
   ],
@@ -25,30 +43,33 @@
   "requests": [
     {
       "request_method": "PUT",
-      "request_path": "/api/rest/private/gateway_groups/11",
-      "request_body": "gateway_group[name]=name&gateway_group[vendor_id]=42",
+      "request_path": "/api/rest/private/gateway-groups/11",
+      "request_body": "{\"data\":{\"type\":\"gateway-groups\",\"id\":11,\"attributes\":{\"name\":\"name\",\"vendor-id\":42}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjcsInN1YiI6MzB9.vDpSrnRC2pQbQ3qjowv_tL6Xa2BSAFat4P2DaydlfIM",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODQsInN1YiI6MzB9.DANfr1HabE_Q11ChphbvF6uwyLhZvwRog7ICQTLMAyU",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 204,
-      "response_status_text": "No Content",
-      "response_body": null,
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/11\"},\"attributes\":{\"name\":\"name\",\"vendor-id\":42}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Cache-Control": "no-cache",
-        "X-Request-Id": "4a17aa22-2082-445f-864e-ef8054888bca",
-        "X-Runtime": "0.022568"
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"47faba509ddbca5edc31390221f3e88e\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "0f90816e-d253-44a4-a4e1-8b69ec5ed3c1",
+        "X-Runtime": "0.041284",
+        "Content-Length": "161"
       },
-      "response_content_type": null,
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

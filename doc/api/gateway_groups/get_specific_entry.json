@@ -2,7 +2,7 @@
   "resource": "Gateway groups",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/rest/private/gateway_groups/:id",
+  "route": "/api/rest/private/gateway-groups/:id",
   "description": "get specific entry",
   "explanation": null,
   "parameters": [
@@ -14,32 +14,33 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/rest/private/gateway_groups/9",
+      "request_path": "/api/rest/private/gateway-groups/9",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjcsInN1YiI6Mjh9.zXUTxc6_75uBb0jjKQy4HOixI3euxlDFbmfBSZjEaGc",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODQsInN1YiI6Mjh9.uVu18rprkL6iyFWovlzqwW44QZyXpR86A0e8JNrwkes",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 9,\n  \"vendor_id\": 39,\n  \"name\": \"gateway_group_9\",\n  \"prefer_same_pop\": true\n}",
+      "response_body": "{\"data\":{\"id\":\"9\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/9\"},\"attributes\":{\"name\":\"gateway_group_9\",\"vendor-id\":39}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"85fc790a64f83e30d7a43db335ad675b\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"8ff42d688d71d33b2b02a6261f15c675\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "d616f984-a595-4511-8191-68976f115cc3",
-        "X-Runtime": "0.017311",
-        "Content-Length": "71"
+        "X-Request-Id": "05ae531f-c658-445d-9e48-83137fe37523",
+        "X-Runtime": "0.033030",
+        "Content-Length": "170"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

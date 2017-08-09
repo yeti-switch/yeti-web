@@ -7,164 +7,266 @@
   "explanation": null,
   "parameters": [
     {
-      "scope": "dialpeer",
+      "scope": "data",
       "required": true,
-      "name": "enabled",
-      "description": "Enabled flag"
+      "name": "type",
+      "description": "Resource type (dialpeers)"
     },
     {
-      "scope": "dialpeer",
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Dialpeer ID"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "enabled",
+      "description": "Enabled"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "routing-group-id",
+      "description": "Routing group id"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "next-rate",
+      "description": "Next rate"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "connect-fee",
+      "description": "Connect fee"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "vendor-id",
+      "description": "Vendor id"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "account-id",
+      "description": "Account id"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "initial-rate",
+      "description": "Initial rate"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "initial-interval",
+      "description": "Initial interval"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "next-interval",
+      "description": "Next interval"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "valid-from",
+      "description": "Valid from"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "valid-till",
+      "description": "Valid till"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "prefix",
       "description": "Prefix"
     },
     {
-      "scope": "dialpeer",
-      "name": "src_rewrite_rule",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "src-rewrite-rule",
       "description": "Src rewrite rule"
     },
     {
-      "scope": "dialpeer",
-      "name": "dst_rewrite_rule",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "dst-rewrite-rule",
       "description": "Dst rewrite rule"
     },
     {
-      "scope": "dialpeer",
-      "name": "acd_limit",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "acd-limit",
       "description": "Acd limit"
     },
     {
-      "scope": "dialpeer",
-      "name": "asr_limit",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "asr-limit",
       "description": "Asr limit"
     },
     {
-      "scope": "dialpeer",
-      "name": "gateway_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "gateway-id",
       "description": "Gateway id"
     },
     {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "routing_group_id",
-      "description": "Routing group id"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "next_rate",
-      "description": "Next rate"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "connect_fee",
-      "description": "Connect fee"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "vendor_id",
-      "description": "Vendor id"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "account_id",
-      "description": "Account id"
-    },
-    {
-      "scope": "dialpeer",
-      "name": "src_rewrite_result",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "src-rewrite-result",
       "description": "Src rewrite result"
     },
     {
-      "scope": "dialpeer",
-      "name": "dst_rewrite_result",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "dst-rewrite-result",
       "description": "Dst rewrite result"
     },
     {
-      "scope": "dialpeer",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "locked",
       "description": "Locked"
     },
     {
-      "scope": "dialpeer",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "priority",
       "description": "Priority"
     },
     {
-      "scope": "dialpeer",
-      "name": "exclusive_route",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "exclusive-route",
       "description": "Exclusive route"
     },
     {
-      "scope": "dialpeer",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "capacity",
       "description": "Capacity"
     },
     {
-      "scope": "dialpeer",
-      "name": "lcr_rate_multiplier",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "lcr-rate-multiplier",
       "description": "Lcr rate multiplier"
     },
     {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "initial_rate",
-      "description": "Initial rate"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "initial_interval",
-      "description": "Initial interval"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "next_interval",
-      "description": "Next interval"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "valid_from",
-      "description": "Valid from"
-    },
-    {
-      "scope": "dialpeer",
-      "required": true,
-      "name": "valid_till",
-      "description": "Valid till"
-    },
-    {
-      "scope": "dialpeer",
-      "name": "gateway_group_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "gateway-group-id",
       "description": "Gateway group id"
     },
     {
-      "scope": "dialpeer",
-      "name": "force_hit_rate",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "force-hit-rate",
       "description": "Force hit rate"
     },
     {
-      "scope": "dialpeer",
-      "name": "network_prefix_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "network-prefix-id",
       "description": "Network prefix id"
     },
     {
-      "scope": "dialpeer",
-      "name": "created_at",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "created-at",
       "description": "Created at"
     },
     {
-      "scope": "dialpeer",
-      "name": "short_calls_limit",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "short-calls-limit",
       "description": "Short calls limit"
     },
     {
-      "scope": "dialpeer",
-      "name": "external_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "external-id",
       "description": "External id"
     }
   ],
@@ -175,29 +277,32 @@
     {
       "request_method": "PUT",
       "request_path": "/api/rest/private/dialpeers/5",
-      "request_body": "dialpeer[capacity]=20",
+      "request_body": "{\"data\":{\"type\":\"dialpeers\",\"id\":5,\"attributes\":{\"capacity\":20}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjYsInN1YiI6MjV9.UDMC5wiNm8GO1BfghC4FNXAaLTDGkyAKoetijpj66_8",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODMsInN1YiI6MjV9.xpbv5lfGKzOy_h5YFgF616-kI06iEwlrqFusAElE0N0",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 204,
-      "response_status_text": "No Content",
-      "response_body": null,
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"dialpeers\",\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/5\"},\"attributes\":{\"enabled\":true,\"routing-group-id\":5,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"vendor-id\":35,\"account-id\":17,\"initial-rate\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"valid-from\":\"1970-01-01T00:00:00.000+07:00\",\"valid-till\":\"2020-01-01T00:00:00.000+07:00\",\"prefix\":\"\",\"src-rewrite-rule\":null,\"dst-rewrite-rule\":null,\"acd-limit\":0.0,\"asr-limit\":0.0,\"gateway-id\":null,\"src-rewrite-result\":null,\"dst-rewrite-result\":null,\"locked\":false,\"priority\":100,\"exclusive-route\":false,\"capacity\":20,\"lcr-rate-multiplier\":\"1.0\",\"gateway-group-id\":5,\"force-hit-rate\":null,\"network-prefix-id\":null,\"created-at\":\"2017-08-09T18:19:43.827+07:00\",\"short-calls-limit\":1.0,\"external-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Cache-Control": "no-cache",
-        "X-Request-Id": "df866ad8-880a-4bc1-9046-a86efbbcf35a",
-        "X-Runtime": "0.029727"
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"4f03409c7757005069cdbc412d5a70f8\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "9ba8f98c-fb27-4639-b58c-652175dd73f8",
+        "X-Runtime": "0.045027",
+        "Content-Length": "791"
       },
-      "response_content_type": null,
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

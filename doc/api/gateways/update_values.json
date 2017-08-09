@@ -7,400 +7,640 @@
   "explanation": null,
   "parameters": [
     {
-      "scope": "gateway",
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (gateways)"
+    },
+    {
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Gateway ID"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "name",
       "description": "Name"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "enabled",
       "description": "Enabled"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "priority",
       "description": "Priority"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "acd_limit",
+      "name": "acd-limit",
       "description": "Acd limit"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "asr_limit",
+      "name": "asr-limit",
       "description": "Asr limit"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "contractor_id",
+      "name": "contractor-id",
       "description": "Contractor id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "sdp_alines_filter_type_id",
+      "name": "sdp-alines-filter-type-id",
       "description": "Sdp alines filter type id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "codec_group_id",
+      "name": "codec-group-id",
       "description": "Codec group id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "sdp_c_location_id",
+      "name": "sdp-c-location-id",
       "description": "Sdp c location id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "sensor_level_id",
+      "name": "sensor-level-id",
       "description": "Sensor level id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "dtmf_receive_mode_id",
+      "name": "dtmf-receive-mode-id",
       "description": "Dtmf receive mode id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "dtmf_send_mode_id",
+      "name": "dtmf-send-mode-id",
       "description": "Dtmf send mode id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "rel100_mode_id",
+      "name": "rel100-mode-id",
       "description": "Rel100 mode id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "session_refresh_method_id",
+      "name": "session-refresh-method-id",
       "description": "Session refresh method id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "transport_protocol_id",
+      "name": "transport-protocol-id",
       "description": "Transport protocol id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "term_proxy_transport_protocol_id",
+      "name": "term-proxy-transport-protocol-id",
       "description": "Term proxy transport protocol id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "orig_proxy_transport_protocol_id",
+      "name": "orig-proxy-transport-protocol-id",
       "description": "Orig proxy transport protocol id"
     },
     {
-      "scope": "gateway",
-      "name": "gateway_group_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "gateway-group-id",
       "description": "Gateway group id"
     },
     {
-      "scope": "gateway",
-      "name": "pop_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "pop-id",
       "description": "Pop id"
     },
     {
-      "scope": "gateway",
-      "name": "allow_origination",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "allow-origination",
       "description": "Allow origination"
     },
     {
-      "scope": "gateway",
-      "name": "allow_termination",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "allow-termination",
       "description": "Allow termination"
     },
     {
-      "scope": "gateway",
-      "name": "sst_enabled",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "sst-enabled",
       "description": "Sst enabled"
     },
     {
-      "scope": "gateway",
-      "name": "sensor_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "sensor-id",
       "description": "Sensor id"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "host",
       "description": "Host"
     },
     {
-      "scope": "gateway",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "name": "port",
       "description": "Port"
     },
     {
-      "scope": "gateway",
-      "name": "resolve_ruri",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "resolve-ruri",
       "description": "Resolve ruri"
     },
     {
-      "scope": "gateway",
-      "name": "diversion_policy_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "diversion-policy-id",
       "description": "Diversion policy id"
     },
     {
-      "scope": "gateway",
-      "name": "diversion_rewrite_rule",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "diversion-rewrite-rule",
       "description": "Diversion rewrite rule"
     },
     {
-      "scope": "gateway",
-      "name": "diversion_rewrite_result",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "diversion-rewrite-result",
       "description": "Diversion rewrite result"
     },
     {
-      "scope": "gateway",
-      "name": "src_name_rewrite_rule",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "src-name-rewrite-rule",
       "description": "Src name rewrite rule"
     },
     {
-      "scope": "gateway",
-      "name": "src_name_rewrite_result",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "src-name-rewrite-result",
       "description": "Src name rewrite result"
     },
     {
-      "scope": "gateway",
-      "name": "src_rewrite_rule",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "src-rewrite-rule",
       "description": "Src rewrite rule"
     },
     {
-      "scope": "gateway",
-      "name": "src_rewrite_result",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "src-rewrite-result",
       "description": "Src rewrite result"
     },
     {
-      "scope": "gateway",
-      "name": "dst_rewrite_rule",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "dst-rewrite-rule",
       "description": "Dst rewrite rule"
     },
     {
-      "scope": "gateway",
-      "name": "dst_rewrite_result",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "dst-rewrite-result",
       "description": "Dst rewrite result"
     },
     {
-      "scope": "gateway",
-      "name": "auth_enabled",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-enabled",
       "description": "Auth enabled"
     },
     {
-      "scope": "gateway",
-      "name": "auth_user",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-user",
       "description": "Auth user"
     },
     {
-      "scope": "gateway",
-      "name": "auth_password",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-password",
       "description": "Auth password"
     },
     {
-      "scope": "gateway",
-      "name": "auth_from_user",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-from-user",
       "description": "Auth from user"
     },
     {
-      "scope": "gateway",
-      "name": "auth_from_domain",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-from-domain",
       "description": "Auth from domain"
     },
     {
-      "scope": "gateway",
-      "name": "term_use_outbound_proxy",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-use-outbound-proxy",
       "description": "Term use outbound proxy"
     },
     {
-      "scope": "gateway",
-      "name": "term_force_outbound_proxy",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-force-outbound-proxy",
       "description": "Term force outbound proxy"
     },
     {
-      "scope": "gateway",
-      "name": "term_outbound_proxy",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-outbound-proxy",
       "description": "Term outbound proxy"
     },
     {
-      "scope": "gateway",
-      "name": "term_next_hop_for_replies",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-next-hop-for-replies",
       "description": "Term next hop for replies"
     },
     {
-      "scope": "gateway",
-      "name": "term_next_hop",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-next-hop",
       "description": "Term next hop"
     },
     {
-      "scope": "gateway",
-      "name": "term_disconnect_policy_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-disconnect-policy-id",
       "description": "Term disconnect policy id"
     },
     {
-      "scope": "gateway",
-      "name": "term_append_headers_req",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "term-append-headers-req",
       "description": "Term append headers req"
     },
     {
-      "scope": "gateway",
-      "name": "sdp_alines_filter_list",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "sdp-alines-filter-list",
       "description": "Sdp alines filter list"
     },
     {
-      "scope": "gateway",
-      "name": "ringing_timeout",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "ringing-timeout",
       "description": "Ringing timeout"
     },
     {
-      "scope": "gateway",
-      "name": "relay_options",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "relay-options",
       "description": "Relay options"
     },
     {
-      "scope": "gateway",
-      "name": "relay_reinvite",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "relay-reinvite",
       "description": "Relay reinvite"
     },
     {
-      "scope": "gateway",
-      "name": "relay_hold",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "relay-hold",
       "description": "Relay hold"
     },
     {
-      "scope": "gateway",
-      "name": "relay_prack",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "relay-prack",
       "description": "Relay prack"
     },
     {
-      "scope": "gateway",
-      "name": "relay_update",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "relay-update",
       "description": "Relay update"
     },
     {
-      "scope": "gateway",
-      "name": "suppress_early_media",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "suppress-early-media",
       "description": "Suppress early media"
     },
     {
-      "scope": "gateway",
-      "name": "fake_180_timer",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "fake-180-timer",
       "description": "Fake 180 timer"
     },
     {
-      "scope": "gateway",
-      "name": "transit_headers_from_origination",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "transit-headers-from-origination",
       "description": "Transit headers from origination"
     },
     {
-      "scope": "gateway",
-      "name": "transit_headers_from_termination",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "transit-headers-from-termination",
       "description": "Transit headers from termination"
     },
     {
-      "scope": "gateway",
-      "name": "sip_interface_name",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "sip-interface-name",
       "description": "Sip interface name"
     },
     {
-      "scope": "gateway",
-      "name": "allow_1xx_without_to_tag",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "allow-1xx-without-to-tag",
       "description": "Allow 1xx without to tag"
     },
     {
-      "scope": "gateway",
-      "name": "sip_timer_b",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "sip-timer-b",
       "description": "Sip timer b"
     },
     {
-      "scope": "gateway",
-      "name": "dns_srv_failover_timer",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "dns-srv-failover-timer",
       "description": "Dns srv failover timer"
     },
     {
-      "scope": "gateway",
-      "name": "anonymize_sdp",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "anonymize-sdp",
       "description": "Anonymize sdp"
     },
     {
-      "scope": "gateway",
-      "name": "proxy_media",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "proxy-media",
       "description": "Proxy media"
     },
     {
-      "scope": "gateway",
-      "name": "single_codec_in_200ok",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "single-codec-in-200ok",
       "description": "Single codec in 200ok"
     },
     {
-      "scope": "gateway",
-      "name": "transparent_seqno",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "transparent-seqno",
       "description": "Transparent seqno"
     },
     {
-      "scope": "gateway",
-      "name": "transparent_ssrc",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "transparent-ssrc",
       "description": "Transparent ssrc"
     },
     {
-      "scope": "gateway",
-      "name": "force_symmetric_rtp",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "force-symmetric-rtp",
       "description": "Force symmetric rtp"
     },
     {
-      "scope": "gateway",
-      "name": "symmetric_rtp_nonstop",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "symmetric-rtp-nonstop",
       "description": "Symmetric rtp nonstop"
     },
     {
-      "scope": "gateway",
-      "name": "symmetric_rtp_ignore_rtcp",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "symmetric-rtp-ignore-rtcp",
       "description": "Symmetric rtp ignore rtcp"
     },
     {
-      "scope": "gateway",
-      "name": "force_dtmf_relay",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "force-dtmf-relay",
       "description": "Force dtmf relay"
     },
     {
-      "scope": "gateway",
-      "name": "rtp_ping",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "rtp-ping",
       "description": "Rtp ping"
     },
     {
-      "scope": "gateway",
-      "name": "rtp_timeout",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "rtp-timeout",
       "description": "Rtp timeout"
     },
     {
-      "scope": "gateway",
-      "name": "filter_noaudio_streams",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "filter-noaudio-streams",
       "description": "Filter noaudio streams"
     },
     {
-      "scope": "gateway",
-      "name": "rtp_relay_timestamp_aligning",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "rtp-relay-timestamp-aligning",
       "description": "Rtp relay timestamp aligning"
     },
     {
-      "scope": "gateway",
-      "name": "rtp_force_relay_cn",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "rtp-force-relay-cn",
       "description": "Rtp force relay cn"
     }
   ],
@@ -411,29 +651,32 @@
     {
       "request_method": "PUT",
       "request_path": "/api/rest/private/gateways/11",
-      "request_body": "gateway[name]=name&gateway[acd_limit]=1.0",
+      "request_body": "{\"data\":{\"type\":\"gateways\",\"id\":11,\"attributes\":{\"name\":\"name\",\"acd-limit\":1.0}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjksInN1YiI6MzV9.NlXRCKpXX1if53NFzbQsacNMO9_xiJuxqKhessvBg0Q",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODYsInN1YiI6MzV9.KMYnKdJDVi64AGTN1LzUI0RwS-MJHb8NaligDfxAFm0",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 204,
-      "response_status_text": "No Content",
-      "response_body": null,
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"gateways\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/11\"},\"attributes\":{\"name\":\"name\",\"enabled\":true,\"priority\":100,\"acd-limit\":1.0,\"asr-limit\":0.0,\"contractor-id\":48,\"sdp-alines-filter-type-id\":0,\"codec-group-id\":11,\"sdp-c-location-id\":2,\"sensor-level-id\":1,\"dtmf-receive-mode-id\":1,\"dtmf-send-mode-id\":1,\"rel100-mode-id\":1,\"session-refresh-method-id\":1,\"transport-protocol-id\":1,\"term-proxy-transport-protocol-id\":1,\"orig-proxy-transport-protocol-id\":1,\"gateway-group-id\":null,\"pop-id\":null,\"allow-origination\":true,\"allow-termination\":true,\"sst-enabled\":false,\"sensor-id\":null,\"host\":null,\"port\":null,\"resolve-ruri\":false,\"diversion-policy-id\":1,\"diversion-rewrite-rule\":null,\"diversion-rewrite-result\":null,\"src-name-rewrite-rule\":null,\"src-name-rewrite-result\":null,\"src-rewrite-rule\":null,\"src-rewrite-result\":null,\"dst-rewrite-rule\":null,\"dst-rewrite-result\":null,\"auth-enabled\":false,\"auth-user\":null,\"auth-password\":null,\"auth-from-user\":null,\"auth-from-domain\":null,\"term-use-outbound-proxy\":false,\"term-force-outbound-proxy\":false,\"term-outbound-proxy\":null,\"term-next-hop-for-replies\":false,\"term-next-hop\":null,\"term-disconnect-policy-id\":null,\"term-append-headers-req\":null,\"sdp-alines-filter-list\":null,\"ringing-timeout\":null,\"relay-options\":false,\"relay-reinvite\":false,\"relay-hold\":false,\"relay-prack\":false,\"relay-update\":false,\"suppress-early-media\":false,\"fake-180-timer\":null,\"transit-headers-from-origination\":null,\"transit-headers-from-termination\":null,\"sip-interface-name\":null,\"allow-1xx-without-to-tag\":false,\"sip-timer-b\":8000,\"dns-srv-failover-timer\":2000,\"anonymize-sdp\":true,\"proxy-media\":true,\"single-codec-in-200ok\":false,\"transparent-seqno\":false,\"transparent-ssrc\":false,\"force-symmetric-rtp\":true,\"symmetric-rtp-nonstop\":false,\"symmetric-rtp-ignore-rtcp\":false,\"force-dtmf-relay\":false,\"rtp-ping\":false,\"rtp-timeout\":30,\"filter-noaudio-streams\":false,\"rtp-relay-timestamp-aligning\":false,\"rtp-force-relay-cn\":true}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Cache-Control": "no-cache",
-        "X-Request-Id": "01654f70-9b60-4a84-807d-5f0422c001e6",
-        "X-Runtime": "0.041908"
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"e698d5ea5bc33443599b9babdbe8bdef\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "def4aac0-d068-4154-bc0c-9c038f239573",
+        "X-Runtime": "0.085082",
+        "Content-Length": "1998"
       },
-      "response_content_type": null,
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

@@ -7,68 +7,116 @@
   "explanation": null,
   "parameters": [
     {
-      "scope": "account",
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (accounts)"
+    },
+    {
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Account ID"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
       "name": "name",
       "description": "Name"
     },
     {
-      "scope": "account",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "min_balance",
+      "name": "min-balance",
       "description": "Min balance"
     },
     {
-      "scope": "account",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "max_balance",
+      "name": "max-balance",
       "description": "Max balance"
     },
     {
-      "scope": "account",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "contractor_id",
+      "name": "contractor-id",
       "description": "Contractor id"
     },
     {
-      "scope": "account",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "timezone_id",
+      "name": "timezone-id",
       "description": "Timezone id"
     },
     {
-      "scope": "account",
-      "name": "origination_capacity",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "origination-capacity",
       "description": "Origination capacity"
     },
     {
-      "scope": "account",
-      "name": "termination_capacity",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "termination-capacity",
       "description": "Termination capacity"
     },
     {
-      "scope": "account",
-      "name": "customer_invoice_period_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "customer-invoice-period-id",
       "description": "Customer invoice period id"
     },
     {
-      "scope": "account",
-      "name": "vendor_invoice_period_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "vendor-invoice-period-id",
       "description": "Vendor invoice period id"
     },
     {
-      "scope": "account",
-      "name": "customer_invoice_template_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "customer-invoice-template-id",
       "description": "Customer invoice template id"
     },
     {
-      "scope": "account",
-      "name": "vendor_invoice_template_id",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "vendor-invoice-template-id",
       "description": "Vendor invoice template id"
     },
     {
-      "scope": "account",
-      "name": "send_invoices_to",
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "send-invoices-to",
       "description": "Send invoices to"
     }
   ],
@@ -79,29 +127,32 @@
     {
       "request_method": "PUT",
       "request_path": "/api/rest/private/accounts/5",
-      "request_body": "account[name]=name&account[max_balance]=20",
+      "request_body": "{\"data\":{\"type\":\"accounts\",\"id\":5,\"attributes\":{\"name\":\"name\",\"max-balance\":20}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjEsInN1YiI6NH0.hrYaIEbbKx62KIyESbHxwqFFL2CwnnjWkzonF_LrlgQ",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzNzgsInN1YiI6NH0.oJUanxYJhkz-7glPDyGb2HrNt-yLx_PTimWY5K9-egE",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 204,
-      "response_status_text": "No Content",
-      "response_body": null,
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5\"},\"attributes\":{\"name\":\"name\",\"min-balance\":\"0.0\",\"max-balance\":\"20.0\",\"contractor-id\":5,\"timezone-id\":1,\"origination-capacity\":1,\"termination-capacity\":2,\"customer-invoice-period-id\":null,\"vendor-invoice-period-id\":null,\"customer-invoice-template-id\":null,\"vendor-invoice-template-id\":null,\"send-invoices-to\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Cache-Control": "no-cache",
-        "X-Request-Id": "dbcbecce-e1cb-4d36-8ca9-e8e66ec7556a",
-        "X-Runtime": "0.041785"
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"1347b26b1c1a9cb176d33844e797d770\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "0e1d1504-388b-402f-8c3b-a4a74a0e581f",
+        "X-Runtime": "0.036597",
+        "Content-Length": "417"
       },
-      "response_content_type": null,
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

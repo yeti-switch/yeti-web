@@ -2,20 +2,32 @@
   "resource": "Gateway groups",
   "resource_explanation": null,
   "http_method": "POST",
-  "route": "/api/rest/private/gateway_groups",
+  "route": "/api/rest/private/gateway-groups",
   "description": "create new entry",
   "explanation": null,
   "parameters": [
     {
-      "scope": "gateway_group",
+      "scope": "data",
       "required": true,
-      "name": "name",
-      "description": "Gateway group name"
+      "name": "type",
+      "description": "Resource type (gateway-groups)"
     },
     {
-      "scope": "gateway_group",
+      "scope": [
+        "data",
+        "attributes"
+      ],
       "required": true,
-      "name": "vendor_id",
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "required": true,
+      "name": "vendor-id",
       "description": "Vendor id"
     }
   ],
@@ -25,33 +37,34 @@
   "requests": [
     {
       "request_method": "POST",
-      "request_path": "/api/rest/private/gateway_groups",
-      "request_body": "gateway_group[name]=name&gateway_group[vendor_id]=40",
+      "request_path": "/api/rest/private/gateway-groups",
+      "request_body": "{\"data\":{\"type\":\"gateway-groups\",\"attributes\":{\"name\":\"name\",\"vendor-id\":40}}}",
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjcsInN1YiI6Mjl9.m2LxvihppE0QyDzn8S8Xdl4VuFHLuh8ZTIjyAj2UQ9w",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODQsInN1YiI6Mjl9.fkv8U2-BG1-CvBNgWTMzJeQ1ttRQ97LDHVKF6MQ6gDE",
         "Host": "example.org",
-        "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": "application/x-www-form-urlencoded",
+      "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"id\": 10,\n  \"vendor_id\": 40,\n  \"name\": \"name\",\n  \"prefer_same_pop\": true\n}",
+      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/10\"},\"attributes\":{\"name\":\"name\",\"vendor-id\":40}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"0deb832836989409931b6aad671c5457\"",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/gateway-groups/10",
+        "ETag": "W/\"96c9394e755f6baba33ca25d0f618da4\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "628dfdb1-7861-47c2-a510-03c1b449a2ef",
-        "X-Runtime": "0.019802",
-        "Content-Length": "61"
+        "X-Request-Id": "e0aae9b0-7444-43e5-b6aa-4b141ec90e45",
+        "X-Runtime": "0.054815",
+        "Content-Length": "161"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

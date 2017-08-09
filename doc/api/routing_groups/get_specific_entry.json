@@ -2,7 +2,7 @@
   "resource": "Routing groups",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/rest/private/routing_groups/:id",
+  "route": "/api/rest/private/routing-groups/:id",
   "description": "get specific entry",
   "explanation": null,
   "parameters": [
@@ -14,32 +14,33 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/rest/private/routing_groups/9",
+      "request_path": "/api/rest/private/routing-groups/9",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMzEsInN1YiI6NDZ9.BV5qwUcj8WVewRowQ-sxfvQk5QOCvAyK_I1gGh3ISWo",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODgsInN1YiI6NDZ9.GlyID-VwB1W-ejnLHBK5-rp3iZLDCY3bvygl0AJoc_U",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 9,\n  \"name\": \"routing_group_9\"\n}",
+      "response_body": "{\"data\":{\"id\":\"9\",\"type\":\"routing-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/routing-groups/9\"},\"attributes\":{\"name\":\"routing_group_9\"}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"28321b004a64d662004dc1a320af80ea\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"3d96d327e2fb160e4b9f9a325a9d703f\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "4f17f3b2-8199-4f88-9aaa-c0fbd7a15753",
-        "X-Runtime": "0.019007",
-        "Content-Length": "33"
+        "X-Request-Id": "c233132e-420a-4318-889f-3b9f1c873359",
+        "X-Runtime": "0.036057",
+        "Content-Length": "155"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]

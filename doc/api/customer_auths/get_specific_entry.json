@@ -2,7 +2,7 @@
   "resource": "Customer Auths",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/rest/private/customers_auths/:id",
+  "route": "/api/rest/private/customers-auths/:id",
   "description": "get specific entry",
   "explanation": null,
   "parameters": [
@@ -14,32 +14,33 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/rest/private/customers_auths/3",
+      "request_path": "/api/rest/private/customers-auths/3",
       "request_body": null,
       "request_headers": {
-        "Accept": "application/json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDE0OTkzMjMsInN1YiI6MTN9.A26ka3BVXU3gF_6UtpHmKerXJgtVv2ldT-zXalXablg",
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI4ODIzODAsInN1YiI6MTN9.SFUf-R3Ct-FVdAZVudajVUb4ZG3CzhtV_6jLnxqhYZA",
         "Host": "example.org",
         "Cookie": ""
       },
       "request_query_parameters": {
       },
-      "request_content_type": null,
+      "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"id\": 3,\n  \"customer_id\": 19,\n  \"rateplan_id\": 3,\n  \"enabled\": true,\n  \"ip\": {\n    \"family\": 2,\n    \"addr\": 0,\n    \"mask_addr\": 4294967295\n  },\n  \"account_id\": 9,\n  \"gateway_id\": 3,\n  \"src_rewrite_rule\": null,\n  \"src_rewrite_result\": null,\n  \"dst_rewrite_rule\": null,\n  \"dst_rewrite_result\": null,\n  \"src_prefix\": \"\",\n  \"dst_prefix\": \"\",\n  \"x_yeti_auth\": null,\n  \"name\": \"customers_auth_3\",\n  \"dump_level_id\": 1,\n  \"capacity\": null,\n  \"pop_id\": null,\n  \"uri_domain\": null,\n  \"src_name_rewrite_rule\": null,\n  \"src_name_rewrite_result\": null,\n  \"diversion_policy_id\": 1,\n  \"diversion_rewrite_rule\": null,\n  \"diversion_rewrite_result\": null,\n  \"dst_numberlist_id\": null,\n  \"src_numberlist_id\": null,\n  \"routing_plan_id\": 3,\n  \"allow_receive_rate_limit\": false,\n  \"send_billing_information\": false,\n  \"radius_auth_profile_id\": null,\n  \"enable_audio_recording\": false,\n  \"src_number_radius_rewrite_rule\": null,\n  \"src_number_radius_rewrite_result\": null,\n  \"dst_number_radius_rewrite_rule\": null,\n  \"dst_number_radius_rewrite_result\": null,\n  \"radius_accounting_profile_id\": null,\n  \"from_domain\": null,\n  \"to_domain\": null,\n  \"transport_protocol_id\": null\n}",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"customers-auths\",\"links\":{\"self\":\"http://example.org/api/rest/private/customers-auths/3\"},\"attributes\":{\"name\":\"customers_auth_3\",\"ip\":\"0.0.0.0\",\"customer-id\":19,\"rateplan-id\":3,\"routing-plan-id\":3,\"gateway-id\":3,\"account-id\":9,\"dump-level-id\":1,\"diversion-policy-id\":1,\"enabled\":true,\"src-rewrite-rule\":null,\"src-rewrite-result\":null,\"dst-rewrite-rule\":null,\"dst-rewrite-result\":null,\"src-prefix\":\"\",\"dst-prefix\":\"\",\"x-yeti-auth\":null,\"capacity\":null,\"pop-id\":null,\"uri-domain\":null,\"src-name-rewrite-rule\":null,\"src-name-rewrite-result\":null,\"diversion-rewrite-rule\":null,\"diversion-rewrite-result\":null,\"dst-numberlist-id\":null,\"src-numberlist-id\":null,\"allow-receive-rate-limit\":false,\"send-billing-information\":false,\"radius-auth-profile-id\":null,\"enable-audio-recording\":false,\"src-number-radius-rewrite-rule\":null,\"src-number-radius-rewrite-result\":null,\"dst-number-radius-rewrite-rule\":null,\"dst-number-radius-rewrite-result\":null,\"radius-accounting-profile-id\":null,\"from-domain\":null,\"to-domain\":null,\"transport-protocol-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
-        "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"2b4a95a7afcbedc8ea917de85ee7d585\"",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"6c6a32f449f9e439698a3512d33bcf65\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "70c9707a-39d0-498e-a131-c3abd1909874",
-        "X-Runtime": "0.023684",
-        "Content-Length": "979"
+        "X-Request-Id": "156a1613-6675-48f2-8bfa-af8f02e4f07f",
+        "X-Runtime": "0.040429",
+        "Content-Length": "1068"
       },
-      "response_content_type": "application/json; charset=utf-8",
+      "response_content_type": "application/vnd.api+json",
       "curl": null
     }
   ]
