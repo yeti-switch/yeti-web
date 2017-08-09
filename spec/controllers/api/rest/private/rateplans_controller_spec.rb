@@ -7,7 +7,8 @@ describe Api::Rest::Private::RateplansController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
   before do
-    request.accept = 'application/json'
+    request.accept = 'application/vnd.api+json'
+    request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
 
@@ -17,7 +18,7 @@ describe Api::Rest::Private::RateplansController, type: :controller do
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(assigns(:rateplans)).to match_array(rateplans) }
+    it { expect(response_data.size).to eq(rateplans.size) }
   end
 
   describe 'GET show' do
@@ -27,22 +28,22 @@ describe Api::Rest::Private::RateplansController, type: :controller do
       before { get :show, id: rateplan.to_param }
 
       it { expect(response.status).to eq(200) }
-      it { expect(assigns(:rateplan)).to eq(rateplan) }
+      it { expect(response_data['id']).to eq(rateplan.id.to_s) }
     end
 
     context 'when rateplan does not exist' do
       before { get :show, id: rateplan.id + 10 }
 
       it { expect(response.status).to eq(404) }
-      it { expect(assigns(:rateplan)).to eq(nil) }
+      it { expect(response_data).to eq(nil) }
     end
   end
 
   describe 'POST create' do
-    before { post :create, rateplan: attributes }
+    before { post :create, data: { type: 'rateplans', attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', profit_control_mode_id: rpcm.id } }
+      let(:attributes) { { name: 'name', 'profit-control-mode-id': rpcm.id } }
 
       it { expect(response.status).to eq(201) }
       it { expect(Rateplan.count).to eq(1) }
@@ -58,12 +59,14 @@ describe Api::Rest::Private::RateplansController, type: :controller do
 
   describe 'PUT update' do
     let!(:rateplan) { create :rateplan }
-    before { put :update, id: rateplan.to_param, rateplan: attributes }
+    before { put :update, id: rateplan.to_param, data: { type: 'rateplans',
+                                                         id: rateplan.to_param,
+                                                         attributes: attributes } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', profit_control_mode_id: rpcm.id } }
+      let(:attributes) { { name: 'name', 'profit-control-mode-id': rpcm.id } }
 
-      it { expect(response.status).to eq(204) }
+      it { expect(response.status).to eq(200) }
       it { expect(rateplan.reload.name).to eq('name') }
     end
 
