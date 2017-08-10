@@ -5,6 +5,8 @@ class Api::Rest::Private::DialpeerResource < JSONAPI::Resource
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
              :gateway_group_id, :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id
 
+  has_many :dialpeer_next_rates
+
   def self.updatable_fields(context)
     [
       :enabled,
