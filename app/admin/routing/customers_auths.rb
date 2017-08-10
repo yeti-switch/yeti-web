@@ -192,7 +192,7 @@ ActiveAdmin.register CustomersAuth do
                   input_html: {
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :customers_auth_account_id) +
-                          remote_chosen_request(:get, with_contractor_gateways_path, {contractor_id: "$(this).val()"}, :customers_auth_gateway_id)
+                          remote_chosen_request(:get, for_origination_gateways_path, {contractor_id: "$(this).val()"}, :customers_auth_gateway_id)
                   }
           f.input :account, collection: (f.object.customer.nil? ? [] : f.object.customer.accounts),
                   include_blank: true,
