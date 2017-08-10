@@ -1,9 +1,9 @@
 {
-  "resource": "Gateway groups",
+  "resource": "Dialpeer next rates",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/rest/private/gateway-groups",
-  "description": "get listing",
+  "route": "/api/rest/private/dialpeer-next-rates/:id",
+  "description": "get specific entry",
   "explanation": null,
   "parameters": [
 
@@ -14,12 +14,12 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/rest/private/gateway-groups",
+      "request_path": "/api/rest/private/dialpeer-next-rates/3",
       "request_body": null,
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDIsInN1YiI6MzJ9.EqodTvBV06RS_3PSe-4pVXwrbgsOAS281Rx_jng-4AQ",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDAsInN1YiI6MjN9.TsSMKvJSbmyBOLurWCOFQ9p18BEhxljVFc6gzM7U0cA",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -28,17 +28,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"12\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/12\"},\"attributes\":{\"name\":\"gateway_group_12\",\"vendor-id\":42}},{\"id\":\"13\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/13\"},\"attributes\":{\"name\":\"gateway_group_13\",\"vendor-id\":43}}]}",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"dialpeer-next-rates\",\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeer-next-rates/3\"},\"attributes\":{\"next-rate\":\"0.0\",\"initial-rate\":\"0.0\",\"initial-interval\":5,\"next-interval\":10,\"connect-fee\":\"0.0\",\"apply-time\":\"2017-08-10T16:08:50.367+07:00\",\"applied\":false,\"dialpeer-id\":2,\"external-id\":null}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
-        "ETag": "W/\"67453541e595fcb30373d3eafd620dc0\"",
+        "ETag": "W/\"d8d592cec1361060f98d471e3f5e6bb7\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "131d8193-b8bf-46e0-ab14-ad933bb6ec71",
-        "X-Runtime": "0.051857",
-        "Content-Length": "340"
+        "X-Request-Id": "ca74313c-07d1-4ad6-ba3d-f197ce9a041f",
+        "X-Runtime": "0.034994",
+        "Content-Length": "335"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null
