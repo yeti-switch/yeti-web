@@ -50,9 +50,9 @@ ActiveAdmin.register CodecGroup do
     f.inputs "Codecs" do
         f.has_many :codec_group_codecs do |t|
 
-            t.input :codec_id, as: :select, collection: Codec.all ,  input_html: { class: 'chosen'}
+            t.input :codec_id, as: :select, collection: Codec.all , input_html: { class: 'chosen'}
             t.input :priority
-            t.input :dynamic_payload_type, hint: "Payload type must be between 96 and 127"
+            t.input :dynamic_payload_type
             t.input :format_parameters
             t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless  t.object.new_record?
 

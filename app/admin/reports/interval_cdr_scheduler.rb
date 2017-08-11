@@ -30,11 +30,14 @@ ActiveAdmin.register Report::IntervalCdrScheduler, as: 'IntervalCdrScheduler' do
   form do |f|
     f.inputs do
       f.input :period
-      f.input :interval_length, as: :select, collection: [["5 Min", 5], ["10 Min", 10], ["30 Min", 30], ["1 Hour", 60], ["6 Hours", 360], ["1 Day", 1440]]
+      f.input :interval_length,
+              as: :select, collection: [["5 Min", 5], ["10 Min", 10], ["30 Min", 30], ["1 Hour", 60], ["6 Hours", 360], ["1 Day", 1440]]
       f.input :aggregation_function
-      f.input :aggregate_by, as: :select, input_html: {class: 'chosen'}, collection: Report::IntervalCdr::CDR_AGG_COLUMNS
+      f.input :aggregate_by,
+              as: :select, input_html: {class: 'chosen'}, collection: Report::IntervalCdr::CDR_AGG_COLUMNS
       f.input :filter
-      f.input :group_by, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Report::IntervalCdr::CDR_COLUMNS
+      f.input :group_by,
+              as: :select, input_html: {class: 'chosen', multiple: true}, collection: Report::IntervalCdr::CDR_COLUMNS
       f.input :send_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

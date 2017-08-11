@@ -252,12 +252,12 @@ ActiveAdmin.register CustomersAuth do
 
       tab :radius do
         f.inputs do
-          f.input :radius_auth_profile, hint: 'Select for additional RADIUS authentification'
+          f.input :radius_auth_profile
           f.input :src_number_radius_rewrite_rule
           f.input :src_number_radius_rewrite_result
           f.input :dst_number_radius_rewrite_rule
           f.input :dst_number_radius_rewrite_result
-          f.input :radius_accounting_profile, hint: 'Accounting profile for LegA'
+          f.input :radius_accounting_profile
         end
       end
 

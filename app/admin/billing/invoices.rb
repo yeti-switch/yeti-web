@@ -284,8 +284,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
               }
       f.input :account, collection: [], input_html: {class: 'chosen'}
-      f.input :start_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, hint: "Customer timezone will be used", wrapper_html: {class: 'datetime_preset_pair', data: {show_time: 'true'}}
-      f.input :end_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, hint: "Customer timezone will be used"
+      f.input :start_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}, wrapper_html: {class: 'datetime_preset_pair', data: {show_time: 'true'}}
+      f.input :end_date, as: :date_time_picker, datepicker_options: {defaultTime: '00:00'}
     end
     f.actions
   end

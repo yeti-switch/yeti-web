@@ -194,8 +194,8 @@ ActiveAdmin.register Dialpeer do
                       remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :dialpeer_gateway_group_id)
               }
       f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),
-                        include_blank: false ,
-                        input_html: {class: 'chosen'}
+              include_blank: false,
+              input_html: {class: 'chosen'}
       f.input :priority
       f.input :force_hit_rate
       f.input :exclusive_route

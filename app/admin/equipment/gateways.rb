@@ -271,7 +271,8 @@ ActiveAdmin.register Gateway do
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :gateway_gateway_group_id)
                   }
-          f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
+          f.input :gateway_group, as: :select, include_blank: 'None',
+                  input_html: {class: 'chosen'}
           f.input :priority
           f.input :pop, input_html: {class: 'chosen'}
 
@@ -310,8 +311,8 @@ ActiveAdmin.register Gateway do
           f.input :relay_prack
           f.input :rel100_mode, as: :select, include_blank: false
           f.input :relay_update
-          f.input :transit_headers_from_origination, hint: "Use comma as delimiter"
-          f.input :transit_headers_from_termination, hint: "Use comma as delimiter"
+          f.input :transit_headers_from_origination
+          f.input :transit_headers_from_termination
           f.input :sip_interface_name
         end
         f.inputs "Origination" do
@@ -328,7 +329,7 @@ ActiveAdmin.register Gateway do
         f.inputs "Termination" do
           f.input :transport_protocol, as: :select, include_blank: false
           f.input :host
-          f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
+          f.input :port
           f.input :resolve_ruri
           f.input :auth_enabled
           f.input :auth_user
@@ -350,7 +351,7 @@ ActiveAdmin.register Gateway do
           f.input :sip_timer_b
           f.input :dns_srv_failover_timer
           f.input :suppress_early_media
-          f.input :fake_180_timer, hint: "Timeout in ms."
+          f.input :fake_180_timer
           f.input :send_lnp_information
         end
       end
@@ -398,7 +399,7 @@ ActiveAdmin.register Gateway do
       end
       tab :radius do
         f.inputs :radius do
-          f.input :radius_accounting_profile, hint: "RADIUS accounting profile for LegB(Termination)"
+          f.input :radius_accounting_profile
         end
 
       end

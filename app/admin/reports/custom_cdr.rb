@@ -42,7 +42,8 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
       f.input :date_end, as: :date_time_picker
       f.input :customer, as: :select, input_html: {class: 'chosen'}
       f.input :filter
-      f.input :group_by_fields, label: "Group by", as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection:  Report::CustomCdr::CDR_COLUMNS.map{ |a| [a, a] }
+      f.input :group_by_fields, label: "Group by", as: :select, input_html: {class: 'chosen-sortable', multiple: true},
+              collection:  Report::CustomCdr::CDR_COLUMNS.map{ |a| [a, a] }
       f.input :send_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

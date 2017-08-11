@@ -73,12 +73,12 @@ ActiveAdmin.register Lnp::Database do
     f.inputs do
       f.input :name
       f.input :driver
-      f.input :host#, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
-      f.input :port#, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
-      f.input :timeout, hint: "Request timeout in ms." #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
-      f.input :thinq_username#, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
-      f.input :thinq_token#, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
-      f.input :csv_file#, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::INMEMORY}
+      f.input :host #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
+      f.input :port #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
+      f.input :timeout #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
+      f.input :thinq_username #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
+      f.input :thinq_token #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
+      f.input :csv_file #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::INMEMORY}
     end
     actions
   end

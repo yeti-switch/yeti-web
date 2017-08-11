@@ -162,3 +162,17 @@ body.active_admin.index #active_admin_content {
   border-bottom: 1px solid #d7dce4;
   border-right: 1px solid #d7dce4;
 }
+
+form fieldset ol li p.inline-hints {
+  max-height: 0;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+
+.inputs label:hover ~ p.inline-hints {max-height: 100px; opacity: 1;}
+.inputs label:hover {
+  cursor: pointer
+}

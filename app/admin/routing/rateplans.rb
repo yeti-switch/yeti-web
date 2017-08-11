@@ -38,7 +38,8 @@ ActiveAdmin.register Rateplan do
     f.inputs do
       f.input :name
       f.input :profit_control_mode
-      f.input :send_quality_alarms_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection: Billing::Contact.collection
+      f.input :send_quality_alarms_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true},
+              collection: Billing::Contact.collection
     end
     f.actions
   end

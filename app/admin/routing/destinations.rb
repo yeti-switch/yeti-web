@@ -157,7 +157,7 @@ ActiveAdmin.register Destination do
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
-      f.input :profit_control_mode, hint: "Leave it empty to inherit Profit control mode from Rateplan"
+      f.input :profit_control_mode
     end
 
     f.inputs "Dialpeer based rating configuration" do
