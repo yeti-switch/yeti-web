@@ -18,8 +18,8 @@ ActiveAdmin.register System::LoadBalancer do
   form do |f|
     f.semantic_errors *f.object.errors.keys.uniq
     f.inputs form_title do
-      f.input :name, hint: I18n.t('hints.system.load_balancer.name')
-      f.input :signalling_ip, hint: I18n.t('hints.system.load_balancer.signalling_ip')
+      f.input :name
+      f.input :signalling_ip
     end
     f.actions
   end

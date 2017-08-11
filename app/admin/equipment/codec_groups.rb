@@ -44,16 +44,16 @@ ActiveAdmin.register CodecGroup do
   form do |f|
     f.semantic_errors *f.object.errors.keys.uniq
     f.inputs form_title do
-      f.input :name, hint: I18n.t('hints.equipment.codec_group.name')
+      f.input :name
     end
 
     f.inputs "Codecs" do
         f.has_many :codec_group_codecs do |t|
 
-            t.input :codec_id, as: :select, collection: Codec.all , input_html: { class: 'chosen'}, hint: I18n.t('hints.equipment.codec_group.codec_id')
-            t.input :priority, hint: I18n.t('hints.equipment.codec_group.priority')
-            t.input :dynamic_payload_type, hint: I18n.t('hints.equipment.codec_group.dynamic_payload_type')
-            t.input :format_parameters, hint: I18n.t('hints.equipment.codec_group.format_parameters')
+            t.input :codec_id, as: :select, collection: Codec.all , input_html: { class: 'chosen'}
+            t.input :priority
+            t.input :dynamic_payload_type
+            t.input :format_parameters
             t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless  t.object.new_record?
 
         end

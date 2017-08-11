@@ -50,12 +50,11 @@ ActiveAdmin.register Routing::RoutingPlan do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name, hint: I18n.t('hints.routing.routing_plan.name')
-      f.input :sorting, hint: I18n.t('hints.routing.routing_plan.sorting')
+      f.input :name
+      f.input :sorting
       f.input :use_lnp
-      f.input :rate_delta_max, hint: I18n.t('hints.routing.routing_plan.rate_delta_max')
-      f.input :routing_groups, input_html: {class: 'chosen-sortable', multiple: true},
-              hint: I18n.t('hints.routing.routing_plan.routing_groups')
+      f.input :rate_delta_max
+      f.input :routing_groups, input_html: {class: 'chosen-sortable', multiple: true}
     end
     f.actions
   end

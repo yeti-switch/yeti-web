@@ -71,14 +71,14 @@ ActiveAdmin.register Lnp::Database do
 
   form do |f|
     f.inputs do
-      f.input :name, hint: I18n.t('hints.equipment.lnp_database.name')
-      f.input :driver, hint: I18n.t('hints.equipment.lnp_database.driver')
-      f.input :host, hint: I18n.t('hints.equipment.lnp_database.host') #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
-      f.input :port, hint: I18n.t('hints.equipment.lnp_database.port') #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
-      f.input :timeout, hint: I18n.t('hints.equipment.lnp_database.timeout') #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
-      f.input :thinq_username, hint: I18n.t('hints.equipment.lnp_database.thinq_username') #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
-      f.input :thinq_token, hint: I18n.t('hints.equipment.lnp_database.thinq_token') #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
-      f.input :csv_file, hint: I18n.t('hints.equipment.lnp_database.csv_file') #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::INMEMORY}
+      f.input :name
+      f.input :driver
+      f.input :host #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
+      f.input :port #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
+      f.input :timeout #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::SIP}
+      f.input :thinq_username #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
+      f.input :thinq_token #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::THINQ}
+      f.input :csv_file #, input_html: {'data-depend_selector' => '#lnp_database_driver_id', 'data-depend_value' => Lnp::DatabaseDriver::INMEMORY}
     end
     actions
   end

@@ -186,9 +186,9 @@ ActiveAdmin.register CustomersAuth do
     tabs do
       tab :general do
         f.inputs do
-          f.input :name, hint: I18n.t('hints.routing.customers_auth.name')
+          f.input :name
           f.input :enabled
-          f.input :customer, hint: I18n.t('hints.routing.customers_auth.customer'),
+          f.input :customer,
                   input_html: {
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :customers_auth_account_id) +
@@ -196,71 +196,68 @@ ActiveAdmin.register CustomersAuth do
                   }
           f.input :account, collection: (f.object.customer.nil? ? [] : f.object.customer.accounts),
                   include_blank: true,
-                  input_html: {class: 'chosen'},
-                  hint: I18n.t('hints.routing.customers_auth.account')
+                  input_html: {class: 'chosen'}
 
           f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.gateways),
                   include_blank: true,
-                  input_html: {class: 'chosen'},
-                  hint: I18n.t('hints.routing.customers_auth.gateway')
+                  input_html: {class: 'chosen'}
 
 
           # f.input :enable_redirect
           # f.input :redirect_method, as: :select,  collection: CustomersAuth::REDIRECT_METHODS
           # f.input :redirect_to
 
-          f.input :rateplan, input_html: {class: 'chosen'}, hint: I18n.t('hints.routing.customers_auth.rateplan')
-          f.input :routing_plan, input_html: {class: 'chosen'}, hint: I18n.t('hints.routing.customers_auth.routing_plan')
+          f.input :rateplan, input_html: {class: 'chosen'}
+          f.input :routing_plan, input_html: {class: 'chosen'}
 
 
-          f.input :dst_numberlist, input_html: {class: 'chosen'}, include_blank: "None", hint: I18n.t('hints.routing.customers_auth.dst_numberlist')
-          f.input :src_numberlist, input_html: {class: 'chosen'}, include_blank: "None", hint: I18n.t('hints.routing.customers_auth.src_numberlist')
-          f.input :dump_level, as: :select, include_blank: false, collection: DumpLevel.select([:id, :name]).reorder(:id),
-                  hint: I18n.t('hints.routing.customers_auth.dump_level')
+          f.input :dst_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
+          f.input :src_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
+          f.input :dump_level, as: :select, include_blank: false, collection: DumpLevel.select([:id, :name]).reorder(:id)
           f.input :enable_audio_recording
-          f.input :capacity, hint: I18n.t('hints.routing.customers_auth.capacity')
+          f.input :capacity
           f.input :allow_receive_rate_limit
           f.input :send_billing_information
         end
 
         f.inputs "Match conditions" do
-          f.input :transport_protocol, as: :select, include_blank: "Any", hint: I18n.t('hints.routing.customers_auth.transport_protocol')
-          f.input :ip, hint: I18n.t('hints.routing.customers_auth.ip')
-          f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}, hint: I18n.t('hints.routing.customers_auth.pop')
-          f.input :src_prefix, hint: I18n.t('hints.routing.customers_auth.src_prefix')
-          f.input :dst_prefix, hint: I18n.t('hints.routing.customers_auth.dst_prefix')
-          f.input :uri_domain, hint: I18n.t('hints.routing.customers_auth.uri_domain')
-          f.input :from_domain, hint: I18n.t('hints.routing.customers_auth.from_domain')
-          f.input :to_domain, hint: I18n.t('hints.routing.customers_auth.to_domain')
-          f.input :x_yeti_auth, label: 'X-Yeti-Auth', hint: I18n.t('hints.routing.customers_auth.x_yeti_auth')
+          f.input :transport_protocol, as: :select, include_blank: "Any"
+          f.input :ip
+          f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
+          f.input :src_prefix
+          f.input :dst_prefix
+          f.input :uri_domain
+          f.input :from_domain
+          f.input :to_domain
+          f.input :x_yeti_auth, label: 'X-Yeti-Auth'
         end
       end
 
       tab :number_translation do
         f.inputs do
-          f.input :diversion_policy, as: :select, include_blank: false, hint: I18n.t('hints.routing.customers_auth.diversion_policy')
-          f.input :diversion_rewrite_rule, hint: I18n.t('hints.routing.customers_auth.diversion_rewrite_rule')
-          f.input :diversion_rewrite_result, hint: I18n.t('hints.routing.customers_auth.diversion_rewrite_result')
+          f.input :diversion_policy, as: :select, include_blank: false
+          f.input :diversion_rewrite_rule
+          f.input :diversion_rewrite_result
 
-          f.input :src_name_rewrite_rule, hint: I18n.t('hints.routing.customers_auth.src_name_rewrite_rule')
-          f.input :src_name_rewrite_result, hint: I18n.t('hints.routing.customers_auth.src_name_rewrite_result')
+          f.input :src_name_rewrite_rule
+          f.input :src_name_rewrite_result
 
-          f.input :src_rewrite_rule, hint: I18n.t('hints.routing.customers_auth.src_rewrite_rule')
-          f.input :src_rewrite_result, hint: I18n.t('hints.routing.customers_auth.src_rewrite_result')
+          f.input :src_rewrite_rule
+          f.input :src_rewrite_result
 
-          f.input :dst_rewrite_rule, hint: I18n.t('hints.routing.customers_auth.dst_rewrite_rule')
-          f.input :dst_rewrite_result, hint: I18n.t('hints.routing.customers_auth.dst_rewrite_result')
+          f.input :dst_rewrite_rule
+          f.input :dst_rewrite_result
         end
       end
 
       tab :radius do
         f.inputs do
-          f.input :radius_auth_profile, hint: I18n.t('hints.routing.customers_auth.radius_auth_profile')
-          f.input :src_number_radius_rewrite_rule, hint: I18n.t('hints.routing.customers_auth.src_number_radius_rewrite_rule')
-          f.input :src_number_radius_rewrite_result, hint: I18n.t('hints.routing.customers_auth.src_number_radius_rewrite_result')
-          f.input :dst_number_radius_rewrite_rule, hint: I18n.t('hints.routing.customers_auth.dst_number_radius_rewrite_rule')
-          f.input :dst_number_radius_rewrite_result, hint: I18n.t('hints.routing.customers_auth.dst_number_radius_rewrite_result')
-          f.input :radius_accounting_profile, hint: I18n.t('hints.routing.customers_auth.radius_accounting_profile')
+          f.input :radius_auth_profile
+          f.input :src_number_radius_rewrite_rule
+          f.input :src_number_radius_rewrite_result
+          f.input :dst_number_radius_rewrite_rule
+          f.input :dst_number_radius_rewrite_result
+          f.input :radius_accounting_profile
         end
       end
 

@@ -17,9 +17,9 @@ ActiveAdmin.register System::LnpResolver do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name, hint: I18n.t('hints.system.lnp_resolver.name')
-      f.input :address, hint: I18n.t('hints.system.lnp_resolver.address')
-      f.input :port, hint: I18n.t('hints.system.lnp_resolver.port')
+      f.input :name
+      f.input :address
+      f.input :port
     end
     f.actions
   end

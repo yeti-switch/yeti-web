@@ -17,7 +17,7 @@ ActiveAdmin.register System::Network do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :name, hint: I18n.t('hints.system.network.name')
+      f.input :name
     end
     f.actions
   end

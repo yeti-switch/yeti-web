@@ -60,9 +60,9 @@ ActiveAdmin.register System::NetworkPrefix do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :prefix, hint: I18n.t('hints.system.network_prefix.prefix')
-      f.input :country, input_html: {class: 'chosen'}, hint: I18n.t('hints.system.network_prefix.country')
-      f.input :network, input_html: {class: 'chosen'}, hint: I18n.t('hints.system.network_prefix.network')
+      f.input :prefix
+      f.input :country, input_html: {class: 'chosen'}
+      f.input :network, input_html: {class: 'chosen'}
     end
     f.actions
   end

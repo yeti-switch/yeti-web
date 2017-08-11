@@ -85,27 +85,27 @@ ActiveAdmin.register DisconnectCode do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       if resource.namespace_id==DisconnectCode::NS_TM ## TM
-        f.input :namespace, input_html: {readonly: true, disabled: true}, hint: I18n.t('hints.system.disconnect_codes.namespace')
-        f.input :code, input_html: {readonly: true, disabled: true}, hint: I18n.t('hints.system.disconnect_codes.code')
-        f.input :reason, input_html: {readonly: true, disabled: true}, hint: I18n.t('hints.system.disconnect_codes.reason')
+        f.input :namespace, input_html: {readonly: true, disabled: true}
+        f.input :code, input_html: {readonly: true, disabled: true}
+        f.input :reason, input_html: {readonly: true, disabled: true}
         f.input :success, input_html: {readonly: true, disabled: true}
         f.input :successnozerolen, input_html: {readonly: true, disabled: true}
         f.input :stop_hunting, input_html: {readonly: true, disabled: true}
         f.input :pass_reason_to_originator
-        f.input :rewrited_code, hint: I18n.t('hints.system.disconnect_codes.rewrited_code')
-        f.input :rewrited_reason, hint: I18n.t('hints.system.disconnect_codes.rewrited_reason')
+        f.input :rewrited_code
+        f.input :rewrited_reason
         f.input :store_cdr
         f.input :silently_drop
       else
-        f.input :namespace, input_html: {readonly: true, disabled: true}, hint: I18n.t('hints.system.disconnect_codes.namespace')
-        f.input :code, input_html: {readonly: true, disabled: true}, hint: I18n.t('hints.system.disconnect_codes.code')
-        f.input :reason, input_html: {readonly: true, disabled: true}, hint: I18n.t('hints.system.disconnect_codes.reason')
+        f.input :namespace, input_html: {readonly: true, disabled: true}
+        f.input :code, input_html: {readonly: true, disabled: true}
+        f.input :reason, input_html: {readonly: true, disabled: true}
         f.input :success, input_html: {readonly: true, disabled: true}
         f.input :successnozerolen, input_html: {readonly: true, disabled: true}
         f.input :stop_hunting
         f.input :pass_reason_to_originator
-        f.input :rewrited_code, hint: I18n.t('hints.system.disconnect_codes.rewrited_code')
-        f.input :rewrited_reason, hint: I18n.t('hints.system.disconnect_codes.rewrited_reason')
+        f.input :rewrited_code
+        f.input :rewrited_reason
         f.input :store_cdr, input_html: {readonly: true, disabled: true}
         f.input :silently_drop, input_html: {readonly: true, disabled: true}
       end

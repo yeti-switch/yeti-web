@@ -263,44 +263,44 @@ ActiveAdmin.register Gateway do
     tabs do
       tab :general do
         f.inputs "General" do
-          f.input :name, hint: I18n.t('hints.equipment.gateways.name')
-          f.input :external_id, hint: I18n.t('hints.equipment.gateways.external_id')
+          f.input :name
+          f.input :external_id
           f.input :enabled
-          f.input :contractor, hint: I18n.t('hints.equipment.gateways.contractor'),
+          f.input :contractor,
                   input_html: {
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :gateway_gateway_group_id)
                   }
-          f.input :gateway_group, hint: I18n.t('hints.equipment.gateways.gateway_group'), as: :select, include_blank: 'None',
+          f.input :gateway_group, as: :select, include_blank: 'None',
                   input_html: {class: 'chosen'}
-          f.input :priority, hint: I18n.t('hints.equipment.gateways.priority')
-          f.input :pop, input_html: {class: 'chosen'}, hint: I18n.t('hints.equipment.gateways.pop')
+          f.input :priority
+          f.input :pop, input_html: {class: 'chosen'}
 
           f.input :allow_origination
           f.input :allow_termination
 
-          f.input :origination_capacity, hint: I18n.t('hints.equipment.gateways.origination_capacity')
-          f.input :termination_capacity, hint: I18n.t('hints.equipment.gateways.termination_capacity')
-          f.input :acd_limit, hint: I18n.t('hints.equipment.gateways.acd_limit')
-          f.input :asr_limit, hint: I18n.t('hints.equipment.gateways.asr_limit')
-          f.input :short_calls_limit, hint: I18n.t('hints.equipment.gateways.short_calls_limit')
+          f.input :origination_capacity
+          f.input :termination_capacity
+          f.input :acd_limit
+          f.input :asr_limit
+          f.input :short_calls_limit
         end
       end
       tab :sst do
         f.inputs "Session timers" do
           f.input :sst_enabled
-          f.input :sst_session_expires, hint: I18n.t('hints.equipment.gateways.sst_session_expires')
-          f.input :sst_minimum_timer, hint: I18n.t('hints.equipment.gateways.sst_minimum_timer')
-          f.input :sst_maximum_timer, hint: I18n.t('hints.equipment.gateways.sst_maximum_timer')
-          f.input :session_refresh_method, hint: I18n.t('hints.equipment.gateways.session_refresh_method')
+          f.input :sst_session_expires
+          f.input :sst_minimum_timer
+          f.input :sst_maximum_timer
+          f.input :session_refresh_method
           f.input :sst_accept501
         end
       end
 
       tab :sensor do
         f.inputs "Sensor" do
-          f.input :sensor_level, hint: I18n.t('hints.equipment.gateways.sensor_level')
-          f.input :sensor, hint: I18n.t('hints.equipment.gateways.sensor')
+          f.input :sensor_level
+          f.input :sensor
         end
       end
       tab :signaling do
@@ -309,69 +309,69 @@ ActiveAdmin.register Gateway do
           f.input :relay_reinvite
           f.input :relay_hold
           f.input :relay_prack
-          f.input :rel100_mode, hint: I18n.t('hints.equipment.gateways.rel100_mode'), as: :select, include_blank: false
+          f.input :rel100_mode, as: :select, include_blank: false
           f.input :relay_update
-          f.input :transit_headers_from_origination, hint: I18n.t('hints.equipment.gateways.transit_headers')
-          f.input :transit_headers_from_termination, hint: I18n.t('hints.equipment.gateways.transit_headers')
-          f.input :sip_interface_name, hint: I18n.t('hints.equipment.gateways.sip_interface_name')
+          f.input :transit_headers_from_origination
+          f.input :transit_headers_from_termination
+          f.input :sip_interface_name
         end
         f.inputs "Origination" do
-          f.input :orig_next_hop, hint: I18n.t('hints.equipment.gateways.orig_next_hop')
-          f.input :orig_append_headers_req, hint: I18n.t('hints.equipment.gateways.orig_append_headers_req')
+          f.input :orig_next_hop
+          f.input :orig_append_headers_req
           f.input :orig_use_outbound_proxy
           f.input :orig_force_outbound_proxy
-          f.input :orig_proxy_transport_protocol, as: :select, include_blank: false, hint: I18n.t('hints.equipment.gateways.orig_proxy_transport_protocol')
-          f.input :orig_outbound_proxy, hint: I18n.t('hints.equipment.gateways.orig_outbound_proxy')
+          f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
+          f.input :orig_outbound_proxy
           f.input :transparent_dialog_id
           f.input :dialog_nat_handling
-          f.input :orig_disconnect_policy, hint: I18n.t('hints.equipment.gateways.orig_disconnect_policy')
+          f.input :orig_disconnect_policy
         end
         f.inputs "Termination" do
-          f.input :transport_protocol, as: :select, include_blank: false, hint: I18n.t('hints.equipment.gateways.transport_protocol')
-          f.input :host, hint: I18n.t('hints.equipment.gateways.host')
-          f.input :port, hint: I18n.t('hints.equipment.gateways.port')
+          f.input :transport_protocol, as: :select, include_blank: false
+          f.input :host
+          f.input :port
           f.input :resolve_ruri
           f.input :auth_enabled
-          f.input :auth_user, hint: I18n.t('hints.equipment.gateways.auth_user')
-          f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}, hint: I18n.t('hints.equipment.gateways.auth_password')
-          f.input :auth_from_user, hint: I18n.t('hints.equipment.gateways.auth_from_user')
-          f.input :auth_from_domain, hint: I18n.t('hints.equipment.gateways.auth_from_domain')
+          f.input :auth_user
+          f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}
+          f.input :auth_from_user
+          f.input :auth_from_domain
           f.input :term_use_outbound_proxy
           f.input :term_force_outbound_proxy
-          f.input :term_proxy_transport_protocol, as: :select, include_blank: false, hint: I18n.t('hints.equipment.gateways.term_proxy_transport_protocol')
-          f.input :term_outbound_proxy, hint: I18n.t('hints.equipment.gateways.term_outbound_proxy')
+          f.input :term_proxy_transport_protocol, as: :select, include_blank: false
+          f.input :term_outbound_proxy
           f.input :term_next_hop_for_replies
-          f.input :term_next_hop, hint: I18n.t('hints.equipment.gateways.term_next_hop')
-          f.input :term_disconnect_policy, hint: I18n.t('hints.equipment.gateways.term_disconnect_policy')
-          f.input :term_append_headers_req, hint: I18n.t('hints.equipment.gateways.term_append_headers_req')
-          f.input :sdp_alines_filter_type, hint: I18n.t('hints.equipment.gateways.sdp_alines_filter_type')
-          f.input :sdp_alines_filter_list, hint: I18n.t('hints.equipment.gateways.sdp_alines_filter_list')
-          f.input :ringing_timeout, hint: I18n.t('hints.equipment.gateways.ringing_timeout')
+          f.input :term_next_hop
+          f.input :term_disconnect_policy
+          f.input :term_append_headers_req
+          f.input :sdp_alines_filter_type
+          f.input :sdp_alines_filter_list
+          f.input :ringing_timeout
           f.input :allow_1xx_without_to_tag
-          f.input :sip_timer_b, hint: I18n.t('hints.equipment.gateways.sip_timer_b')
-          f.input :dns_srv_failover_timer, hint: I18n.t('hints.equipment.gateways.dns_srv_failover_timer')
+          f.input :sip_timer_b
+          f.input :dns_srv_failover_timer
           f.input :suppress_early_media
-          f.input :fake_180_timer, hint: I18n.t('hints.equipment.gateways.fake_180_timer')
+          f.input :fake_180_timer
           f.input :send_lnp_information
         end
       end
       tab "Translations" do
         f.inputs "Translations" do
-          f.input :diversion_policy, hint: I18n.t('hints.equipment.gateways.diversion_policy')
-          f.input :diversion_rewrite_rule, hint: I18n.t('hints.equipment.gateways.diversion_rewrite_rule')
-          f.input :diversion_rewrite_result, hint: I18n.t('hints.equipment.gateways.diversion_rewrite_result')
-          f.input :src_name_rewrite_rule, hint: I18n.t('hints.equipment.gateways.src_name_rewrite_rule')
-          f.input :src_name_rewrite_result, hint: I18n.t('hints.equipment.gateways.src_name_rewrite_result')
-          f.input :src_rewrite_rule, hint: I18n.t('hints.equipment.gateways.src_rewrite_rule')
-          f.input :src_rewrite_result, hint: I18n.t('hints.equipment.gateways.src_rewrite_result')
-          f.input :dst_rewrite_rule, hint: I18n.t('hints.equipment.gateways.dst_rewrite_rule')
-          f.input :dst_rewrite_result, hint: I18n.t('hints.equipment.gateways.dst_rewrite_result')
+          f.input :diversion_policy
+          f.input :diversion_rewrite_rule
+          f.input :diversion_rewrite_result
+          f.input :src_name_rewrite_rule
+          f.input :src_name_rewrite_result
+          f.input :src_rewrite_rule
+          f.input :src_rewrite_result
+          f.input :dst_rewrite_rule
+          f.input :dst_rewrite_result
         end
       end
       tab :media do
         f.inputs "Media settings" do
-          f.input :sdp_c_location, hint: I18n.t('hints.equipment.gateways.sdp_c_location')
-          f.input :codec_group, hint: I18n.t('hints.equipment.gateways.codec_group')
+          f.input :sdp_c_location
+          f.input :codec_group
           f.input :anonymize_sdp
           f.input :proxy_media
           f.input :single_codec_in_200ok
@@ -381,25 +381,25 @@ ActiveAdmin.register Gateway do
           f.input :symmetric_rtp_nonstop
           f.input :symmetric_rtp_ignore_rtcp
           f.input :rtp_ping
-          f.input :rtp_timeout, hint: I18n.t('hints.equipment.gateways.rtp_timeout')
+          f.input :rtp_timeout
           f.input :filter_noaudio_streams
           f.input :rtp_relay_timestamp_aligning
           f.input :rtp_force_relay_cn
           f.input :force_one_way_early_media
-          f.input :rtp_interface_name, hint: I18n.t('hints.equipment.gateways.rtp_interface_name')
+          f.input :rtp_interface_name
         end
       end
       tab :dtmf do
         f.inputs :dtmf do
           f.input :force_dtmf_relay
-          f.input :dtmf_send_mode, hint: I18n.t('hints.equipment.gateways.dtmf_send_mode')
-          f.input :dtmf_receive_mode, hint: I18n.t('hints.equipment.gateways.dtmf_receive_mode')
+          f.input :dtmf_send_mode
+          f.input :dtmf_receive_mode
         end
 
       end
       tab :radius do
         f.inputs :radius do
-          f.input :radius_accounting_profile, hint: I18n.t('hints.equipment.gateways.radius_accounting_profile')
+          f.input :radius_accounting_profile
         end
 
       end

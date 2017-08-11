@@ -54,13 +54,12 @@ ActiveAdmin.register DialpeerNextRate do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :initial_interval, hint: I18n.t('hints.routing.dialpeer_next_rate.initial_interval')
-      f.input :next_interval, hint: I18n.t('hints.routing.dialpeer_next_rate.next_interval')
-      f.input :initial_rate, hint: I18n.t('hints.routing.dialpeer_next_rate.initial_rate')
-      f.input :next_rate, hint: I18n.t('hints.routing.dialpeer_next_rate.next_rate')
-      f.input :connect_fee, hint: I18n.t('hints.routing.dialpeer_next_rate.connect_fee')
-      f.input :apply_time, as: :date_time_picker,  datepicker_options: {defaultTime: '00:00'},
-              hint: I18n.t('hints.routing.dialpeer_next_rate.apply_time')
+      f.input :initial_interval
+      f.input :next_interval
+      f.input :initial_rate
+      f.input :next_rate
+      f.input :connect_fee
+      f.input :apply_time, as: :date_time_picker,  datepicker_options: {defaultTime: '00:00'}
     end
     f.actions
   end

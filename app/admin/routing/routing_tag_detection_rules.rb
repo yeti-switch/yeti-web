@@ -31,9 +31,9 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :src_area, hint: I18n.t('hints.routing.routing_tag_detection_rules.src_area')
-      f.input :dst_area, hint: I18n.t('hints.routing.routing_tag_detection_rules.dst_area')
-      f.input :routing_tag, hint: I18n.t('hints.routing.routing_tag_detection_rules.routing_tag')
+      f.input :src_area
+      f.input :dst_area
+      f.input :routing_tag
     end
     f.actions
   end

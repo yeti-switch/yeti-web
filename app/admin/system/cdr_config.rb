@@ -23,7 +23,7 @@ ActiveAdmin.register System::CdrConfig do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :call_duration_round_mode, hint: I18n.t('hints.system.cdr_config.call_duration_round_mode')
+      f.input :call_duration_round_mode
     end
     f.actions
   end

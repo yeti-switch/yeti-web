@@ -82,12 +82,12 @@ ActiveAdmin.register AdminUser do
     f.semantic_errors *f.object.errors.keys.uniq
     f.inputs "Admin Details" do
       unless AdminUser.ldap?
-        f.input :email, hint: I18n.t('hints.system.admin_user.email')
-        f.input :username, hint: I18n.t('hints.system.admin_user.username')
-        f.input :password, hint: I18n.t('hints.system.admin_user.password')
-        f.input :password_confirmation, hint: I18n.t('hints.system.admin_user.password_confirmation')
+        f.input :email
+        f.input :username
+        f.input :password
+        f.input :password_confirmation
       end
-      f.input :ssh_key, hint: I18n.t('hints.system.admin_user.ssh_key')
+      f.input :ssh_key
       f.input :stateful_filters
     end
     f.actions

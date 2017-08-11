@@ -1,16 +1,16 @@
 <%= semantic_form_for dc, :url => '/routing_simulation', :method => :get do |form| %>
     <%= form.semantic_errors *form.object.errors.keys %>
     <%= form.inputs do %>
-        <%= form.input :transport_protocol_id, collection: Equipment::TransportProtocol.all, as: :select, include_blank: false, hint: I18n.t('hints.routing.routing_simulations.transport_protocol_id') %>
-        <%= form.input :remote_ip, hint: I18n.t('hints.routing.routing_simulations.remote_ip') %>
-        <%= form.input :remote_port, hint: I18n.t('hints.routing.routing_simulations.remote_port') %>
-        <%= form.input :pop_id, collection: Pop.all, as: :select, include_blank: false, hint: I18n.t('hints.routing.routing_simulations.pop_id') %>
-        <%= form.input :src_number, hint: I18n.t('hints.routing.routing_simulations.src_number') %>
-        <%= form.input :dst_number, hint: I18n.t('hints.routing.routing_simulations.dst_number') %>
-        <%= form.input :uri_domain, hint: I18n.t('hints.routing.routing_simulations.uri_domain') %>
-        <%= form.input :from_domain, hint: I18n.t('hints.routing.routing_simulations.from_domain') %>
-        <%= form.input :to_domain, hint: I18n.t('hints.routing.routing_simulations.to_domain') %>
-        <%= form.input :x_yeti_auth, hint: I18n.t('hints.routing.routing_simulations.x_yeti_auth') %>
+        <%= form.input :transport_protocol_id, collection: Equipment::TransportProtocol.all, as: :select, include_blank: false %>
+        <%= form.input :remote_ip %>
+        <%= form.input :remote_port %>
+        <%= form.input :pop_id, collection: Pop.all, as: :select, include_blank: false %>
+        <%= form.input :src_number %>
+        <%= form.input :dst_number %>
+        <%= form.input :uri_domain %>
+        <%= form.input :from_domain %>
+        <%= form.input :to_domain %>
+        <%= form.input :x_yeti_auth %>
         <%= form.input :release_mode, as: :boolean %>
     <% end %>
 

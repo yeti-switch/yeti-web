@@ -38,14 +38,12 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
 
   form do |f|
     f.inputs do
-      f.input :date_start, as: :date_time_picker, wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } },
-              hint: I18n.t('hints.reports.custom_cdr.date_start')
-      f.input :date_end, as: :date_time_picker, hint: I18n.t('hints.reports.custom_cdr.date_end')
-      f.input :customer, as: :select, input_html: {class: 'chosen'}, hint: I18n.t('hints.reports.custom_cdr.customer')
-      f.input :filter, hint: I18n.t('hints.reports.custom_cdr.filter')
+      f.input :date_start, as: :date_time_picker, wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
+      f.input :date_end, as: :date_time_picker
+      f.input :customer, as: :select, input_html: {class: 'chosen'}
+      f.input :filter
       f.input :group_by_fields, label: "Group by", as: :select, input_html: {class: 'chosen-sortable', multiple: true},
-              collection:  Report::CustomCdr::CDR_COLUMNS.map{ |a| [a, a] },
-              hint: I18n.t('hints.reports.custom_cdr.group_by_fields')
+              collection:  Report::CustomCdr::CDR_COLUMNS.map{ |a| [a, a] }
       f.input :send_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

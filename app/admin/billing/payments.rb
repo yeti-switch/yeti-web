@@ -20,9 +20,9 @@ ActiveAdmin.register Payment do
   form do |f|
     f.inputs form_title do
 
-      f.input :account, input_html: {class: 'chosen'}, hint: I18n.t('hints.billing.payments.account')
-      f.input :amount, hint: I18n.t('hints.billing.payments.amount')
-      f.input :notes, hint: I18n.t('hints.billing.payments.notes')
+      f.input :account, input_html: {class: 'chosen'}
+      f.input :amount
+      f.input :notes
 
 
     end

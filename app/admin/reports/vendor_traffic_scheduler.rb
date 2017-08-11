@@ -27,9 +27,8 @@ ActiveAdmin.register Report::VendorTrafficScheduler, as: 'VendorTrafficScheduler
 
   form do |f|
     f.inputs do
-      f.input :period, hint: I18n.t('hints.reports.vendor_traffic_scheduler.period')
-      f.input :vendor, as: :select, input_html: {class: 'chosen'}, collection: Contractor.where(vendor: true),
-              hint: I18n.t('hints.reports.vendor_traffic_scheduler.vendor')
+      f.input :period
+      f.input :vendor, as: :select, input_html: {class: 'chosen'}, collection: Contractor.where(vendor: true)
       f.input :send_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

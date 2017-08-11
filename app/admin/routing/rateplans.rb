@@ -36,11 +36,10 @@ ActiveAdmin.register Rateplan do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :name, hint: I18n.t('hints.routing.rateplans.name')
-      f.input :profit_control_mode, hint: I18n.t('hints.routing.rateplans.profit_control_mode')
+      f.input :name
+      f.input :profit_control_mode
       f.input :send_quality_alarms_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true},
-              collection: Billing::Contact.collection,
-              hint: I18n.t('hints.routing.rateplans.send_quality_alarms_to')
+              collection: Billing::Contact.collection
     end
     f.actions
   end

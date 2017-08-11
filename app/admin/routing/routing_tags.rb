@@ -25,7 +25,7 @@ ActiveAdmin.register Routing::RoutingTag do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :name, hint: I18n.t('hints.routing.routing_tags.name')
+      f.input :name
       end
     f.actions
   end
