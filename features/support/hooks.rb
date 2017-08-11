@@ -1,10 +1,10 @@
 require 'fileutils'
 
 After('@change_color') do
-  FileUtils.cd("#{Rails.root}/app/assets/stylesheets/themes")
-  if File.exist?("old_variables.css.scss")
-    File.delete("variables.css.scss")
-    File.rename("old_variables.css.scss", "variables.css.scss")
+  if File.exist?("#{Rails.root}/app/assets/stylesheets/hidden_themes")
+    FileUtils.cd("#{Rails.root}/app/assets/stylesheets")
+    FileUtils.rm_r("#{Rails.root}/app/assets/stylesheets/themes")
+    File.rename("#{Rails.root}/app/assets/stylesheets/hidden_themes", "#{Rails.root}/app/assets/stylesheets/themes")
   end
 end
 
