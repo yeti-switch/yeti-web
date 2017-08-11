@@ -55,6 +55,7 @@ gem 'jquery-ui-rails', '5.0.3'
 gem 'chosen-rails', '1.3.0'
 gem 'jquery-tablesorter'
 gem 'font-awesome-rails'
+gem 'sass-globbing'
 
 # Server Tools
 gem 'delayed_job_active_record'

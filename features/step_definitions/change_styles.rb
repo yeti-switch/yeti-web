@@ -26,10 +26,9 @@ end
 # change color scenario
 
 When (/^I open variables.css.scss file and override variable "(.*?)"$/) do |variable|
+  File.rename("#{Rails.root}/app/assets/stylesheets/themes", "#{Rails.root}/app/assets/stylesheets/hidden_themes")
+  FileUtils.mkdir("#{Rails.root}/app/assets/stylesheets/themes")
   FileUtils.cd("#{Rails.root}/app/assets/stylesheets/themes")
-  if File.exist?("variables.css.scss")
-    File.rename("variables.css.scss", "old_variables.css.scss")
-  end
   new_file = File.new("#{Rails.root}/app/assets/stylesheets/themes/variables.css.scss", "w")
   new_file.puts variable
   new_file.close
