@@ -141,6 +141,7 @@ class Importing::Gateway  < Importing::Base
       'name','enabled',
       'gateway_group_id',
       'contractor_id',
+      'is_shared',
       'priority',
       'pop_id',
       'host','port',

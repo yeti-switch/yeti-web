@@ -163,6 +163,8 @@ class Gateway < Yeti::ActiveRecord
 
   scope :locked, -> { where locked: true }
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null'}
+  scope :shared, -> { where is_shared: true }
+  scope :for_origination,->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
 
   before_validation do
     self.term_next_hop = nil if self.term_next_hop.blank?
