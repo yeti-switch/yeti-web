@@ -16,6 +16,11 @@ ActiveAdmin.register Dialpeer do
 
   scope :locked
 
+  batch_update_attributes ["Enabled", "Prefix", "Src rewrite rule", "Dst rewrite rule", "Acd limit", "Asr limit", "Next rate",
+                          "Connect fee", "Src rewrite result", "Dst rewrite result", "Locked", "Priority",
+                          "Capacity", "Lcr rate multiplier", "Initial rate", "Initial interval", "Next interval",
+                          "Force hit rate", "Short calls limit", "Current rate", "Src name rewrite rule",
+                          "Src name rewrite result", "Exclusive route", "Valid from", "Valid till"]
 
   #"Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
   acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,

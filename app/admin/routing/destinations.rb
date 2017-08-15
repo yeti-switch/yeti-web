@@ -30,6 +30,9 @@ ActiveAdmin.register Destination do
 
   scope :low_quality
 
+  batch_update_attributes ["Enabled", "Prefix", "Next rate", "Connect fee", "Initial interval", "Next interval", "Dp margin fixed",
+                           "Dp margin percent", "Initial rate", "Reject calls", "Use dp intervals", "Asr limit", "Acd limit",
+                           "Short calls limit", "Quality alarm", "Valid from", "Valid till"]
 
   filter :id
   filter :enabled, as: :select , collection: [ ["Yes", true], ["No", false]]
