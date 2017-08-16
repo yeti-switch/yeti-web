@@ -146,8 +146,6 @@ class Cdr::Cdr < Cdr::Base
   scope :success, -> { where success: true }
   scope :failure, -> { where success: false }
 
-  DISCONNECTORS = DisconnectInitiator.all.index_by(&:id)
-
 
 
 
@@ -185,8 +183,10 @@ class Cdr::Cdr < Cdr::Base
   end
 
 
+  # TODO: use DisconnectInitiator#display_name instead
+  # Why in was cached this way? `DISCONNECTORS = DisconnectInitiator.all.index_by(&:id)`
   def disconnect_initiator_name
-    DISCONNECTORS[self.disconnect_initiator_id].try(:name)
+    disconnect_initiator.try(:name)
   end
 
   def has_dump?

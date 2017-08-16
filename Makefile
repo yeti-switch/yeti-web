@@ -49,7 +49,7 @@ all_env:
 	make -C pgq-processors
 
 	make swagger
-	
+
 	@$(info:msg=apply prod .gemrc)
 	@cp -v .gemrc_prod .gemrc
 
@@ -69,8 +69,6 @@ install: $(app_files)
 	tar -c --no-auto-compress $(addprefix --exclude , $(exclude_files)) $^ | tar -x -C $(DESTDIR)$(app_dir)
 	@mkdir -v -p $(addprefix $(DESTDIR)$(app_dir)/, log tmp )
 
-	@install -v -m0755 -D aux/yeti-db $(DESTDIR)/usr/bin/yeti-db
-
 	@$(info:msg=install swagger specs)
 	@make -C swagger install DESTDIR=$(DESTDIR)$(app_dir)/public version=$(version)
 
@@ -83,8 +81,6 @@ install: $(app_files)
 	@$(info:msg=install crontab cfg file)
 	@install -v -m0644 -D config/$(pkg_name).crontab $(DESTDIR)/etc/cron.d/$(pkg_name)
 
-	@$(info:msg=install auxiliary scripts)
-	@install -v -m0755 -D aux/yeti-db $(DESTDIR)/usr/bin/yeti-db
 
 clean:
 	make -C debian clean
