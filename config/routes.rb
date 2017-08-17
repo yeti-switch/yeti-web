@@ -47,6 +47,7 @@ Yeti::Application.routes.draw do
 
           api.resources :admin_users, only: [:index]
           api.resources :nodes, only: [:index]
+          api.resources :ip_access, only: [:index]
         end
 
         namespace :admin do
