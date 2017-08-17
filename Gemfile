@@ -84,6 +84,5 @@ group :development, :test do
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
 gem 'unicorn-worker-killer'
-gem 'ipaddress'
 gem 'apitome', '~> 0.1.0'
 
