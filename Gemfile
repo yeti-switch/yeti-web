@@ -33,7 +33,7 @@ gem 'excelinator', github: 'livingsocial/excelinator'
 
 # REST API
 # gem 'active_model_serializers', '~> 0.9.7'
-gem 'jsonapi-resources', '~> 0.9.0'
+gem 'jsonapi-resources', '~> 0.9.1.beta1'
 
 # gem 'activeadmin_async_export'
 

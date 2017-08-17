@@ -61,6 +61,15 @@ Yeti::Application.routes.draw do
           jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_plans
+
+          namespace :billing do
+            jsonapi_resources :invoice_period
+            jsonapi_resources :invoice_template
+          end
+
+          namespace :system do
+            jsonapi_resources :timezones
+          end
         end
       end
     end
