@@ -10,11 +10,12 @@ resource 'Accounts' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'accounts' }
 
-  required_params = %i(name min-balance max-balance contractor-id timezone-id)
+  required_params = %i(name min-balance max-balance)
+  optional_params = %i(origination-capacity termination-capacity send-invoices-to)
 
-  optional_params = %i(
-    origination-capacity termination-capacity customer-invoice-period-id vendor-invoice-period-id
-    customer-invoice-template-id vendor-invoice-template-id send-invoices-to
+  required_relationships = %i(contractor timezone)
+  optional_relationships = %i(
+    customer-invoice-period vendor-invoice-period customer-invoice-template vendor-invoice-template
   )
 
   get '/api/rest/private/accounts' do
@@ -36,19 +37,14 @@ resource 'Accounts' do
   post '/api/rest/private/accounts' do
     parameter :type, 'Resource type (accounts)', scope: :data, required: true
 
-    required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes], required: true
-    end
-
-    optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes]
-    end
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:name) { 'name' }
     let(:'min-balance') { 1 }
     let(:'max-balance') { 10 }
-    let(:'timezone-id') { 1 }
-    let(:'contractor-id') { create(:contractor, vendor: true).id }
+    let(:timezone) { wrap_relationship(:'system/timezones', 1) }
+    let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -59,13 +55,8 @@ resource 'Accounts' do
     parameter :type, 'Resource type (accounts)', scope: :data, required: true
     parameter :id, 'Account ID', scope: :data, required: true
 
-    required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes], required: true
-    end
-
-    optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes]
-    end
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:id) { create(:account).id }
     let(:name) { 'name' }

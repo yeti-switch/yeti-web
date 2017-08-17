@@ -38,15 +38,22 @@ describe Api::Rest::Private::AccountsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'accounts', attributes: attributes } }
+    before do
+      post :create, data: { type: 'accounts',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) do
         { name: 'name',
           'min-balance': 1,
-          'max-balance': 10,
-          'timezone-id': 1,
-          'contractor-id': create(:contractor, vendor: true).id }
+          'max-balance': 10 }
+      end
+
+      let(:relationships) do
+        { timezone: wrap_relationship(:'system/timezones', 1),
+          contractor: wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
       end
 
       it { expect(response.status).to eq(201) }
@@ -54,7 +61,8 @@ describe Api::Rest::Private::AccountsController, type: :controller do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { name: 'name', 'contractor-id': nil } }
+      let(:attributes) { { name: 'name', 'max-balance': -1 } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(Account.count).to eq(0) }
@@ -77,7 +85,7 @@ describe Api::Rest::Private::AccountsController, type: :controller do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { name: 'name', 'max-balance': 0 } }
+      let(:attributes) { { name: 'name', 'min-balance': 10, 'max-balance': 0 } }
 
       it { expect(response.status).to eq(422) }
       it { expect(account.reload.name).to_not eq('name') }

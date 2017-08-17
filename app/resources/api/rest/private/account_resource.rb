@@ -1,22 +1,30 @@
-class Api::Rest::Private::AccountResource < JSONAPI::Resource
-  attributes :name, :min_balance, :max_balance, :contractor_id, :timezone_id,
-             :origination_capacity, :termination_capacity, :customer_invoice_period_id, :vendor_invoice_period_id,
-             :customer_invoice_template_id, :vendor_invoice_template_id, :send_invoices_to
+class Api::Rest::Private::AccountResource < ::BaseResource
+  attributes :name, :min_balance, :max_balance,
+             :origination_capacity, :termination_capacity, :send_invoices_to
+
+  has_one :contractor
+  has_one :timezone, class_name: 'System::Timezone'
+
+  has_one :customer_invoice_period, class_name: 'Billing::InvoicePeriod'
+  has_one :vendor_invoice_period, class_name: 'Billing::InvoicePeriod'
+  has_one :customer_invoice_template, class_name: 'Billing::InvoiceTemplate'
+  has_one :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate'
 
   def self.updatable_fields(context)
     [
       :name,
-      :contractor_id,
       :min_balance,
       :max_balance,
       :origination_capacity,
       :termination_capacity,
-      :customer_invoice_period_id,
-      :vendor_invoice_period_id,
-      :customer_invoice_template_id,
-      :vendor_invoice_template_id,
       :send_invoices_to,
-      :timezone_id
+
+      :contractor,
+      :timezone,
+      :customer_invoice_period,
+      :vendor_invoice_period,
+      :customer_invoice_template,
+      :vendor_invoice_template
     ]
   end
 
