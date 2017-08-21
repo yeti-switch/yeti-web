@@ -3,12 +3,16 @@ define info
 endef
 
 all:
-	GEM_PATH=../.gem make all_env
+	GEM_PATH=vendor/bundler make all_env
 
 all_env:
-	@$(info:msg=install/update gems)
-	@../.gem/bin/bundle install
+	@$(info:msg=PGQ: install bundler)
+	@gem install --install-dir vendor/bundler bundler
+
+	@$(info:msg=PGQ: install gems)
+	@vendor/bundler/bin/bundle install --jobs=4 --frozen --deployment --binstubs
 
 clean:
-	rm -rf .bundle_gem
+	@$(info:msg=PGQ. removing bundler and gems)
+	rm -rf vendor/bundler vendor/bundle
 
