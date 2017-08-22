@@ -1,10 +1,15 @@
 class Api::Rest::Private::DialpeerResource < JSONAPI::Resource
-  attributes :enabled, :routing_group_id, :next_rate, :connect_fee, :vendor_id, :account_id, :initial_rate,
+  attributes :enabled, :next_rate, :connect_fee, :initial_rate,
              :initial_interval, :next_interval, :valid_from, :valid_till,
-             :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :gateway_id, :src_rewrite_result,
+             :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
-             :gateway_group_id, :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id
+             :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id
 
+  has_one :gateway
+  has_one :gateway_group
+  has_one :routing_group
+  has_one :vendor, class_name: 'Contractor'
+  has_one :account
   has_many :dialpeer_next_rates
 
   def self.updatable_fields(context)
@@ -15,12 +20,12 @@ class Api::Rest::Private::DialpeerResource < JSONAPI::Resource
       :dst_rewrite_rule,
       :acd_limit,
       :asr_limit,
-      :gateway_id,
-      :routing_group_id,
+      :gateway,
+      :routing_group,
       :next_rate,
       :connect_fee,
-      :vendor_id,
-      :account_id,
+      :vendor,
+      :account,
       :src_rewrite_result,
       :dst_rewrite_result,
       :locked,
@@ -33,7 +38,7 @@ class Api::Rest::Private::DialpeerResource < JSONAPI::Resource
       :next_interval,
       :valid_from,
       :valid_till,
-      :gateway_group_id,
+      :gateway_group,
       :force_hit_rate,
       :network_prefix_id,
       :created_at,

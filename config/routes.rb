@@ -62,6 +62,17 @@ Yeti::Application.routes.draw do
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_plans
 
+          jsonapi_resources :codec_groups
+          jsonapi_resources :destination_rate_policies
+          jsonapi_resources :disconnect_policies
+          jsonapi_resources :diversion_policies
+          jsonapi_resources :dump_levels
+          jsonapi_resources :filter_types
+          jsonapi_resources :pops
+          jsonapi_resources :sdp_c_locations
+          jsonapi_resources :session_refresh_methods
+          jsonapi_resources :sortings
+
           namespace :billing do
             jsonapi_resources :invoice_period
             jsonapi_resources :invoice_template
@@ -69,6 +80,25 @@ Yeti::Application.routes.draw do
 
           namespace :system do
             jsonapi_resources :timezones
+            jsonapi_resources :dtmf_receive_modes
+            jsonapi_resources :dtmf_send_modes
+            jsonapi_resources :sensor_levels
+            jsonapi_resources :sensors
+            jsonapi_resources :smtp_connections
+          end
+
+          namespace :equipment do
+            jsonapi_resources :gateway_rel100_modes
+            jsonapi_resources :transport_protocols
+            namespace :radius do
+              jsonapi_resources :accounting_profiles
+              jsonapi_resources :auth_profiles
+            end
+          end
+
+          namespace :routing do
+            jsonapi_resources :numberlists
+            jsonapi_resources :rate_profit_control_modes
           end
         end
       end

@@ -1,10 +1,12 @@
 class Api::Rest::Private::GatewayGroupResource < JSONAPI::Resource
-  attributes :name, :vendor_id
+  attributes :name
+
+  has_one :vendor, class_name: 'Contractor'
 
   def self.updatable_fields(context)
     [
       :name,
-      :vendor_id
+      :vendor
     ]
   end
 

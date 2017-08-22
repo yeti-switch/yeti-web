@@ -1,9 +1,11 @@
 class Api::Rest::Private::PaymentResource < JSONAPI::Resource
-  attributes :account_id, :amount, :notes
+  attributes :amount, :notes
+
+  has_one :account
 
   def self.updatable_fields(context)
     [
-      :account_id,
+      :account,
       :amount,
       :notes
     ]
