@@ -29,11 +29,11 @@ resource 'Gateway groups' do
   post '/api/rest/private/gateway-groups' do
     parameter :type, 'Resource type (gateway-groups)', scope: :data, required: true
 
-    define_parameter :name, required: true
-    define_parameter :vendor_id, required: true
+    jsonapi_attributes([:name], [])
+    jsonapi_relationships([:vendor], [])
 
     let(:name) { 'name' }
-    let(:'vendor-id') { create(:contractor, vendor: true).id }
+    let(:vendor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -44,12 +44,12 @@ resource 'Gateway groups' do
     parameter :type, 'Resource type (gateway-groups)', scope: :data, required: true
     parameter :id, 'Gateway group ID', scope: :data, required: true
 
-    define_parameter :name, required: true
-    define_parameter :vendor_id, required: true
+    jsonapi_attributes([:name], [])
+    jsonapi_relationships([:vendor], [])
 
     let(:id) { create(:gateway_group).id }
     let(:name) { 'name' }
-    let(:'vendor-id') { create(:contractor, vendor: true).id }
+    let(:vendor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'update values' do
       expect(status).to eq(200)

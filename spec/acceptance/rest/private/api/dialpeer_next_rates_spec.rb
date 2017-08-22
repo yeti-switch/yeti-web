@@ -12,11 +12,11 @@ resource 'Dialpeer next rates' do
   let(:dialpeer) { create(:dialpeer) }
   let(:dialpeer_id) { dialpeer.id }
 
-  required_params = [
-    :dialpeer_id, :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :apply_time, :applied
-  ]
-
-  optional_params = [:external_id]
+  required_params = %i(
+    next-rate initial-rate initial-interval next-interval connect-fee apply-time applied
+  )
+  optional_params = %i(external-id)
+  required_relationships = %i(dialpeer)
 
   get '/api/rest/private/dialpeer-next-rates' do
     before { create_list(:dialpeer_next_rate, 2, dialpeer: dialpeer) }
@@ -37,10 +37,11 @@ resource 'Dialpeer next rates' do
   post '/api/rest/private/dialpeer-next-rates' do
     parameter :type, 'Resource type (dialpeers-next-rates)', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, [])
 
     let(:applied) { false }
-    let(:'dialpeer-id') { create(:dialpeer).id }
+    let(:dialpeer) { wrap_relationship(:dialpeers, create(:dialpeer).id) }
     let(:'apply-time') { 1.hour.from_now }
     let(:'connect-fee') { 0 }
     let(:'initial-interval') { 60 }
@@ -57,7 +58,7 @@ resource 'Dialpeer next rates' do
     parameter :type, 'Resource type (dialpeers-next-rates)', scope: :data, required: true
     parameter :id, 'Dialpeer next rate ID', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes(required_params, optional_params)
 
     let(:id) { create(:dialpeer_next_rate, dialpeer: dialpeer).id }
     let(:'initial-rate') { 22 }

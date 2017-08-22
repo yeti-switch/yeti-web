@@ -10,10 +10,6 @@ resource 'Payments' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'payments' }
 
-  required_params = [:amount, :account_id]
-
-  optional_params = [:notes]
-
   get '/api/rest/private/payments' do
     before { create_list(:payment, 2) }
 
@@ -33,10 +29,11 @@ resource 'Payments' do
   post '/api/rest/private/payments' do
     parameter :type, 'Resource type (payments)', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes([:amount], [:notes])
+    jsonapi_relationships([:account], [])
 
     let(:amount) { 10 }
-    let(:'account-id') { create(:account).id }
+    let(:account) { wrap_relationship(:accounts, create(:account).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

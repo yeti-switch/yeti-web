@@ -29,7 +29,7 @@ resource 'Routing groups' do
   post '/api/rest/private/routing-groups' do
     parameter :type, 'Resource type (routing-groups)', scope: :data, required: true
 
-    define_parameter :name, required: true
+    jsonapi_attributes([:name], [])
 
     let(:name) { 'name' }
 
@@ -42,7 +42,7 @@ resource 'Routing groups' do
     parameter :type, 'Resource type (routing-groups)', scope: :data, required: true
     parameter :id, 'Routing group ID', scope: :data, required: true
 
-    define_parameter :name, required: true
+    jsonapi_attributes([:name], [])
 
     let(:id) { create(:routing_group).id }
     let(:name) { 'name' }

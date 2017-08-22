@@ -10,27 +10,26 @@ resource 'Gateways' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'gateways' }
 
-  required_params = [
-    :name, :enabled, :priority, :acd_limit, :asr_limit,
-    :contractor_id, :sdp_alines_filter_type_id, :codec_group_id, :sdp_c_location_id, :sensor_level_id,
-    :dtmf_receive_mode_id, :dtmf_send_mode_id, :rel100_mode_id, :session_refresh_method_id, :transport_protocol_id,
-    :term_proxy_transport_protocol_id, :orig_proxy_transport_protocol_id
-  ]
-
-  optional_params = [
-    :gateway_group_id, :pop_id, :allow_origination, :allow_termination, :sst_enabled,
-    :sensor_id, :host, :port, :resolve_ruri, :diversion_policy_id, :diversion_rewrite_rule,
-    :diversion_rewrite_result, :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule,
-    :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result, :auth_enabled, :auth_user, :auth_password,
-    :auth_from_user, :auth_from_domain, :term_use_outbound_proxy, :term_force_outbound_proxy, :term_outbound_proxy,
-    :term_next_hop_for_replies, :term_next_hop, :term_disconnect_policy_id, :term_append_headers_req,
-    :sdp_alines_filter_list, :ringing_timeout, :relay_options, :relay_reinvite, :relay_hold, :relay_prack,
-    :relay_update, :suppress_early_media, :fake_180_timer, :transit_headers_from_origination,
-    :transit_headers_from_termination, :sip_interface_name, :allow_1xx_without_to_tag, :sip_timer_b,
-    :dns_srv_failover_timer, :anonymize_sdp, :proxy_media, :single_codec_in_200ok, :transparent_seqno,
-    :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay,
-    :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning, :rtp_force_relay_cn
-  ]
+  required_params = %i(name enabled priority acd-limit asr-limit)
+  optional_params = %i(
+    allow-origination allow-termination sst-enabled host port resolve-ruri diversion-rewrite-rule
+    diversion-rewrite-result src-name-rewrite-rule src-name-rewrite-result src-rewrite-rule src-rewrite-result 
+    dst-rewrite-rule dst-rewrite-result auth-enabled auth-user auth-password auth-from-user auth-from-domain 
+    term-use-outbound-proxy term-force-outbound-proxy term-outbound-proxy term-next-hop-for-replies term-next-hop 
+    term-append-headers-req sdp-alines-filter-list ringing-timeout relay-options relay-reinvite relay-hold relay-prack
+    relay-update suppress-early-media fake-180-timer transit-headers-from-origination transit-headers-from-termination  
+    sip-interface-name allow-1xx-without-to-tag sip-timer-b dns-srv-failover-timer anonymize-sdp proxy-media 
+    single-codec-in-200ok transparent-seqno transparent-ssrc force-symmetric-rtp symmetric-rtp-nonstop symmetric-rtp-ignore-rtcp 
+    force-dtmf-relay rtp-ping rtp-timeout filter-noaudio-streams rtp-relay-timestamp-aligning rtp-force-relay-cn
+  )
+  
+  required_relationships = %i(
+    contractor codec-group sdp-c-location sensor-level dtmf-receive-mode dtmf-send-mode rel100-mode
+    session-refresh-method transport-protocol sdp-alines-filter-type term-proxy-transport-protocol orig-proxy-transport-protocol
+  )
+  optional_relationships = %i(
+    gateway-group pop sensor diversion-policy term-disconnect-policy 
+  )
 
   get '/api/rest/private/gateways' do
     before { create_list(:gateway, 2) }
@@ -51,25 +50,26 @@ resource 'Gateways' do
   post '/api/rest/private/gateways' do
     parameter :type, 'Resource type (gateways)', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:name) { 'name' }
     let(:enabled) { true }
     let(:priority) { 1 }
     let(:'acd-limit') { 0.0 }
     let(:'asr-limit') { 0.0 }
-    let(:'sdp-alines-filter-type-id') { 0 }
-    let(:'session-refresh-method-id') { 1 }
-    let(:'sdp-c-location-id') { 2 }
-    let(:'sensor-level-id') { 1 }
-    let(:'dtmf-receive-mode-id') { 1 }
-    let(:'dtmf-send-mode-id') { 1 }
-    let(:'rel100-mode-id') { 1 }
-    let(:'transport-protocol-id') { 1 }
-    let(:'term-proxy-transport-protocol-id') { 1 }
-    let(:'orig-proxy-transport-protocol-id') { 1 }
-    let(:'contractor-id') { create(:contractor, vendor: true).id }
-    let(:'codec-group-id') { create(:codec_group).id }
+    let(:'sdp-alines-filter-type') { wrap_relationship(:'filter-types', 0) }
+    let(:'session-refresh-method') { wrap_relationship(:'session-refresh-methods', 1) }
+    let(:'sdp-c-location') { wrap_relationship(:'sdp-c-locations', 2) }
+    let(:'sensor-level') { wrap_relationship(:'system/sensor-levels', 1) }
+    let(:'dtmf-receive-mode') { wrap_relationship(:'system/dtmf-receive-modes', 1) }
+    let(:'dtmf-send-mode') { wrap_relationship(:'system/dtmf-send-modes', 1) }
+    let(:'rel100-mode') { wrap_relationship(:'equipment/gateway-rel100-modes', 1) }
+    let(:'transport-protocol') { wrap_relationship(:'equipment/transport-protocols', 1) }
+    let(:'term-proxy-transport-protocol') { wrap_relationship(:'equipment/transport-protocols', 1) }
+    let(:'orig-proxy-transport-protocol') { wrap_relationship(:'equipment/transport-protocols', 1) }
+    let(:'contractor') { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
+    let(:'codec-group') { wrap_relationship(:'codec-groups', create(:codec_group).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -80,7 +80,7 @@ resource 'Gateways' do
     parameter :type, 'Resource type (gateways)', scope: :data, required: true
     parameter :id, 'Gateway ID', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes(required_params, optional_params)
 
     let(:id) { create(:gateway).id }
     let(:name) { 'name' }

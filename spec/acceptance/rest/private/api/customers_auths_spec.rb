@@ -10,18 +10,18 @@ resource 'Customer Auths' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'customers-auths' }
 
-  required_params = %i(
-    name ip customer-id rateplan-id routing-plan-id gateway-id account-id
-    dump-level-id diversion-policy-id
-  )
-
+  required_params = %i(name ip)
   optional_params = %i(
     enabled src-rewrite-rule src-rewrite-result dst-rewrite-rule dst-rewrite-result src-prefix dst-prefix x-yeti-auth
-    capacity pop-id uri-domain src-name-rewrite-rule src-name-rewrite-result diversion-rewrite-rule
-    diversion-rewrite-result dst-numberlist-id src-numberlist-id allow-receive-rate-limit send-billing-information
-    radius-auth-profile-id enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
-    dst-number-radius-rewrite-rule dst-number-radius-rewrite-result radius-accounting-profile-id from-domain to-domain
-    transport-protocol-id
+    capacity uri-domain src-name-rewrite-rule src-name-rewrite-result diversion-rewrite-rule
+    diversion-rewrite-result allow-receive-rate-limit send-billing-information
+    enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
+    dst-number-radius-rewrite-rule dst-number-radius-rewrite-result from-domain to-domain
+  )
+
+  required_relationships = %i(customer rateplan routing-plan gateway account dump-level diversion-policy)
+  optional_relationships = %i(
+    pop dst-numberlist src-numberlist radius-auth-profile radius-accounting-profile transport-protocol
   )
 
   get '/api/rest/private/customers-auths' do
@@ -43,24 +43,19 @@ resource 'Customer Auths' do
   post '/api/rest/private/customers-auths' do
     parameter :type, 'Resource type (customers-auths)', scope: :data, required: true
 
-    required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes], required: true
-    end
-
-    optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes]
-    end
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:name) { 'name' }
     let(:enabled) { true }
     let(:ip) { '0.0.0.0' }
-    let(:'dump-level-id') { 1 }
-    let(:'diversion-policy-id') { 1 }
-    let(:'customer-id') { create(:contractor, customer: true).id }
-    let(:'rateplan-id') { create(:rateplan).id }
-    let(:'routing-plan-id') { create(:routing_plan).id }
-    let(:'gateway-id') { create(:gateway).id }
-    let(:'account-id') { create(:account).id }
+    let(:'dump-level') { wrap_relationship(:'dump_levels', 1) }
+    let(:'diversion-policy') { wrap_relationship(:'diversion-policies', 1) }
+    let(:customer) { wrap_relationship(:contractors, create(:contractor, customer: true).id) }
+    let(:rateplan) { wrap_relationship(:rateplans, create(:rateplan).id) }
+    let(:'routing-plan') { wrap_relationship(:'routing-plans', create(:routing_plan).id) }
+    let(:gateway) { wrap_relationship(:gateways, create(:gateway).id) }
+    let(:account) { wrap_relationship(:accounts, create(:account).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -71,13 +66,7 @@ resource 'Customer Auths' do
     parameter :type, 'Resource type (customers-auths)', scope: :data, required: true
     parameter :id, 'Customer Auth ID', scope: :data, required: true
 
-    required_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes], required: true
-    end
-
-    optional_params.each do |param|
-      parameter param, param.to_s.capitalize.gsub('-', ' '), scope: [:data, :attributes]
-    end
+    jsonapi_attributes(required_params, optional_params)
 
     let(:id) { create(:customers_auth).id }
     let(:name) { 'name' }

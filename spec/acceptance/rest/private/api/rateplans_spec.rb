@@ -29,11 +29,11 @@ resource 'Rateplans' do
   post '/api/rest/private/rateplans' do
     parameter :type, 'Resource type (rateplans)', scope: :data, required: true
 
-    define_parameter :name, required: true
-    define_parameter :profit_control_mode_id, required: true
+    jsonapi_attributes([:name], [])
+    jsonapi_relationships([:'profit-control-mode'], [])
 
     let(:name) { 'name' }
-    let(:'profit-control-mode-id') { create(:rate_profit_control_mode).id }
+    let(:'profit-control-mode') { wrap_relationship(:'routing/rate_profit_control_modes', create(:rate_profit_control_mode).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -44,12 +44,12 @@ resource 'Rateplans' do
     parameter :type, 'Resource type (rateplans)', scope: :data, required: true
     parameter :id, 'Rateplan ID', scope: :data, required: true
 
-    define_parameter :name, required: true
-    define_parameter :profit_control_mode_id, required: true
+    jsonapi_attributes([:name], [])
+    jsonapi_relationships([:'profit-control-mode'], [])
 
     let(:id) { create(:rateplan).id }
     let(:name) { 'name' }
-    let(:'profit-control-mode-id') { create(:rate_profit_control_mode).id }
+    let(:'profit-control-mode') { wrap_relationship(:'routing/rate_profit_control_modes', create(:rate_profit_control_mode).id) }
 
     example_request 'update values' do
       expect(status).to eq(200)

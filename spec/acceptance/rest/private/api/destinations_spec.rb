@@ -11,11 +11,13 @@ resource 'Destinations' do
   let(:type) { 'destinations' }
 
   required_params = %i(
-    enabled rateplan-id next-rate connect-fee initial-interval next-interval dp-margin-fixed dp-margin-percent
-    rate-policy-id initial-rate asr-limit acd-limit short-calls-limit
+    enabled next-rate connect-fee initial-interval next-interval dp-margin-fixed dp-margin-percent
+    initial-rate asr-limit acd-limit short-calls-limit
   )
+  optional_params = %i(prefix reject-calls use-dp-intervals valid-from valid-till external-id)
 
-  optional_params = %i(prefix reject-calls use-dp-intervals valid-from valid-till profit-control-mode-id external-id)
+  required_relationships = %i(rateplan rate-policy)
+  optional_relationships = %i(profit-control-mode)
 
   get '/api/rest/private/destinations' do
     before { create_list(:destination, 2) }
@@ -36,9 +38,10 @@ resource 'Destinations' do
   post '/api/rest/private/destinations' do
     parameter :type, 'Resource type (destinations)', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, optional_relationships)
 
-    let(:'rateplan-id') { create(:rateplan).id }
+    let(:rateplan) { wrap_relationship(:rateplans, create(:rateplan).id) }
     let(:enabled) { true }
     let(:'initial-interval') { 60 }
     let(:'next-interval') { 60 }
@@ -47,7 +50,7 @@ resource 'Destinations' do
     let(:'connect-fee') { 0 }
     let(:'dp-margin-fixed') { 0 }
     let(:'dp-margin-percent') { 0 }
-    let(:'rate-policy-id') { 1 }
+    let(:'rate-policy') { wrap_relationship(:'destination-rate-policies', 1) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -58,7 +61,7 @@ resource 'Destinations' do
     parameter :type, 'Resource type (destinations)', scope: :data, required: true
     parameter :id, 'Destination ID', scope: :data, required: true
 
-    define_parameters(required_params, optional_params)
+    jsonapi_attributes(required_params, optional_params)
 
     let(:id) { create(:destination).id }
     let(:enabled) { false }
