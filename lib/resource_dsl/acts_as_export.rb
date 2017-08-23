@@ -2,7 +2,7 @@ module ResourceDSL
   module ActsAsExport
 
     def acts_as_export(*c_names)
-      c_names =  config.resource_class.column_names if c_names.empty?
+      # c_names = config.resource_class.column_names if c_names.empty?
       # xlsx do
       #   clear_columns
       #   c_names.each do |c_name|
@@ -26,7 +26,7 @@ module ResourceDSL
             column(c_name.to_sym)
           end
         end
-      end
+      end if c_names.present?
 
     end
   end

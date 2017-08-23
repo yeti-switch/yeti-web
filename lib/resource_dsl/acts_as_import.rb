@@ -31,7 +31,8 @@ module ResourceDSL
       }.merge(options)
 
       options[:template_object] = Importing::Model.new(
-          unique_columns: config.resource_class.column_names - ["id"],
+          # "proc" prevents error on `rake db:structure:dump`
+          unique_columns_proc: proc { config.resource_class.column_names - ["id"] },
           csv_options: {col_sep: ",", row_sep: nil, quote_char: nil}
       )
 
