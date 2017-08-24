@@ -229,7 +229,7 @@ ActiveAdmin.register CustomersAuth do
 
         f.inputs "Match conditions" do
           f.input :transport_protocol, as: :select, include_blank: "Any"
-          f.input :ip
+          f.input :ip , input_html: { value: f.object.raw_ip }  #dirty hack to display address mask on edit form
           f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
           f.input :src_prefix
           f.input :dst_prefix
