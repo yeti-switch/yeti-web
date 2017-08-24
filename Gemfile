@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'pg'
 gem 'rails', '~> 4.2.9'
 gem 'responders', '~> 2.2.0'
-
+gem 'activerecord-postgres-dump-schemas' # TODO: deprecated for Rails 5
+gem 'secondbase', github: 'workgena/secondbase'
 
 # Authentication
 gem 'devise', '~> 3.5.10'
@@ -86,3 +87,6 @@ end
 gem 'unicorn-worker-killer'
 gem 'apitome', '~> 0.1.0'
 
+group :test do
+  gem 'capybara'
+end
