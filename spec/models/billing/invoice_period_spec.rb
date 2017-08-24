@@ -9,7 +9,8 @@
 require 'spec_helper'
 
 describe Billing::InvoicePeriod do
-  before { @invoice_period = Billing::InvoicePeriod.create(name: name) }
+  let(:id) { Billing::InvoicePeriod::NAMES.key(name.upcase) }
+  before { @invoice_period = Billing::InvoicePeriod.create(id: id, name: name) }
   subject { @invoice_period }
 
   shared_examples :should_set_correct_dates do

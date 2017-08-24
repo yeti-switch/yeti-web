@@ -13,14 +13,15 @@ production:
   port: 5432
   #min_messages: warning
 
-production_cdr:
-  adapter: postgresql
-  encoding: unicode
-  database: cdr
-  pool: 5
-  username: yeti
-  password: somepassword
-  host: 127.0.0.1
-  schema_search_path: 'cdr, reports, billing'
-  port: 5432
-  #min_messages: warning
+secondbase:
+  production:
+    adapter: postgresql
+    encoding: unicode
+    database: cdr
+    pool: 5
+    username: yeti
+    password: somepassword
+    host: 127.0.0.1
+    schema_search_path: 'cdr, reports, billing'
+    port: 5432
+    #min_messages: warning
