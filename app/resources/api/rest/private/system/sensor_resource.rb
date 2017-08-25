@@ -1,5 +1,4 @@
 class Api::Rest::Private::System::SensorResource < ::BaseResource
-  immutable
   model_name 'System::Sensor'
   type 'system/sensors'
 
