@@ -4,7 +4,7 @@ ActiveAdmin.register System::Sensor do
   config.batch_actions = false
 
   permit_params :name, :mode_id, :source_interface, :target_mac, :source_ip,
-                :target_ip
+                :target_ip, :target_port, :hep_capture_id
 
   controller do
     def scoped_collection
@@ -37,6 +37,8 @@ ActiveAdmin.register System::Sensor do
     # column :use_routing
     column :source_ip
     column :target_ip
+    column :target_port
+    column :hep_capture_id
   end
 
   show do |s|
@@ -49,6 +51,8 @@ ActiveAdmin.register System::Sensor do
       # row :use_routing
       row :source_ip
       row :target_ip
+      row :target_port
+      row :hep_capture_id
     end
   end
 
@@ -62,6 +66,9 @@ ActiveAdmin.register System::Sensor do
       # f.input :use_routing
       f.input :source_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP}
       f.input :target_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP}
+      f.input :target_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3}
+      f.input :target_port, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3}
+      f.input :hep_capture_id, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3}
     end
     f.actions
   end

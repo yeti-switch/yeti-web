@@ -12,5 +12,6 @@ class System::SensorMode < Yeti::ActiveRecord
   # mode_id constants from this table
   IP_IP       = 1  # IP-IP encapsulation
   IP_ETHERNET = 2  # IP-Ethernet encapsulation
+  HEPv3 = 3
 
 end
