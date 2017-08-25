@@ -57,6 +57,9 @@ resource 'Gateways' do
 
     let(:name) { 'name' }
     let(:enabled) { true }
+    let(:allow_origination) { true }
+    let(:allow_termination) { true }
+    let(:host) { 'test.example.com' }
     let(:priority) { 1 }
     let(:acd_limit) { 0.0 }
     let(:asr_limit) { 0.0 }
