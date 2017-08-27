@@ -11,7 +11,7 @@ version_file = version.yml
 
 bundle_bin=vendor/bundler/bin/bundle
 
-app_files = bin app .bundle config config.ru db doc Gemfile Gemfile.lock lib public Rakefile README.rdoc sql test vendor pgq-processors $(version_file)
+app_files = bin app .bundle config config.ru db doc Gemfile Gemfile.lock lib public Rakefile test vendor pgq-processors $(version_file)
 
 exclude_files = config/database.yml
 
@@ -35,6 +35,9 @@ all_env:
 
 	@$(info:msg=install/update gems)
 	@$(bundle_bin) install --jobs=4 --frozen --deployment --binstubs
+	
+	@$(info:msg=generating bin/delayed_job)
+	@$(bundle_bin) exec rails generate delayed_job
 
 	@$(info:msg=precompile assets)
 	@$(bundle_bin) exec ./bin/rake assets:precompile

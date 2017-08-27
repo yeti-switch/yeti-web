@@ -4,7 +4,7 @@ working_directory "/home/yeti-web" # available in 0.94.0+
 
 listen "/run/yeti/yeti-unicorn.sock", backlog: 1024
 
-timeout 600
+timeout 1800
 
 pid "/run/yeti/yeti-web-unicorn.pid"
 
@@ -63,8 +63,7 @@ after_fork do |server, worker|
 
   # the following is *required* for Rails + "preload_app true",
   ActiveRecord::Base.establish_connection
-  Cdr::Base.establish_connection "#{ENV['RACK_ENV']}_cdr".to_sym
-
+  SecondBase::Base.establish_connection
 
   # if preload_app is true, then you may also want to check and
   # restart any other shared sockets/descriptors such as Memcached,

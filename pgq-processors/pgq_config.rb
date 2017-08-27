@@ -25,7 +25,7 @@ class PgqConfig
       raise "Invalid db configuration file"
     end
 
-    @config['source_database'] = @dbconfig["#{dbkey}_cdr"]
+    @config['source_database'] = @dbconfig["secondbase"]["#{dbkey}"]
     @config['databases'] = @dbconfig
     @config
   end
