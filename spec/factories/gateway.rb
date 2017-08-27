@@ -19,7 +19,7 @@ FactoryGirl.define do
     association :contractor, factory: :contractor, vendor: true
     association :codec_group
 
-    host nil
+    host "test.example.com"
     port nil
     src_rewrite_rule nil
     dst_rewrite_rule nil
