@@ -30,10 +30,18 @@ resource 'Codec groups' do
     parameter :type, 'Resource type (codec-groups)', scope: :data, required: true
 
     jsonapi_attributes([:name], [])
+    jsonapi_relationships([:codecs], [])
+
+    let(:group) { create :codec_group }
+    let(:codec) { create :codec_group_codec, codec_group: group }
 
     let(:name) { 'name' }
+    let(:codecs) { wrap_has_many_relationship(:'codec-group-codecs', [codec.id]) }
 
     example_request 'create new entry' do
+      Rails.logger.info 'tttt'
+      Rails.logger.info params
+      Rails.logger.info response_body
       expect(status).to eq(201)
     end
   end
