@@ -43,7 +43,7 @@ resource 'Accounts' do
     let(:name) { 'name' }
     let(:'min-balance') { 1 }
     let(:'max-balance') { 10 }
-    let(:timezone) { wrap_relationship(:'system/timezones', 1) }
+    let(:timezone) { wrap_relationship(:'timezones', 1) }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'create new entry' do

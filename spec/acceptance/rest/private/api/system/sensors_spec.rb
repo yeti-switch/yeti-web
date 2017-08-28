@@ -10,6 +10,9 @@ resource 'Sensors' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'sensors' }
 
+  required_params = %i(name mode-id target-ip source-ip)
+  optional_params = %i(source-interface target-mac use-routing)
+
   get '/api/rest/private/system/sensors' do
     before { create_list(:sensor, 2) }
 
@@ -29,9 +32,12 @@ resource 'Sensors' do
   post '/api/rest/private/system/sensors' do
     parameter :type, 'Resource type (sensors)', scope: :data, required: true
 
-    jsonapi_attributes([:name], [])
+    jsonapi_attributes(required_params, optional_params)
 
     let(:name) { 'name' }
+    let(:'mode-id') { 1 }
+    let(:'source-ip') { '192.168.0.1' }
+    let(:'target-ip') { '192.168.0.2' }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

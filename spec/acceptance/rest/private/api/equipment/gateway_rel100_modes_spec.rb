@@ -34,8 +34,6 @@ resource 'Gateway rel100 modes' do
     let(:name) { 'name' }
 
     example_request 'create new entry' do
-      Rails.logger.info 'jjjj'
-      Rails.logger.info response_body
       expect(status).to eq(201)
     end
   end

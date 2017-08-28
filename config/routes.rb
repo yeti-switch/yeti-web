@@ -61,7 +61,6 @@ Yeti::Application.routes.draw do
           jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_plans
-
           jsonapi_resources :codec_groups
           jsonapi_resources :destination_rate_policies
           jsonapi_resources :disconnect_policies

@@ -11,7 +11,6 @@ resource 'Sortings' do
   let(:type) { 'sortings' }
 
   get '/api/rest/private/sortings' do
-    # before { create_list(:filter_type, 2) }
     before do
       Sorting.create(name: 'name')
     end
@@ -21,9 +20,7 @@ resource 'Sortings' do
   end
 
   get '/api/rest/private/sortings/:id' do
-    # let(:id) { create(:filter_type).id }
     let(:id) { Sorting.create(name: 'name').id }
-
 
     example_request 'get specific entry' do
       expect(status).to eq(200)

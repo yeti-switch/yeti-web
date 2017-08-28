@@ -61,13 +61,13 @@ resource 'Gateways' do
     let(:'sdp-alines-filter-type') { wrap_relationship(:'filter-types', 0) }
     let(:'session-refresh-method') { wrap_relationship(:'session-refresh-methods', 1) }
     let(:'sdp-c-location') { wrap_relationship(:'sdp-c-locations', 2) }
-    let(:'sensor-level') { wrap_relationship(:'system/sensor-levels', 1) }
+    let(:'sensor-level') { wrap_relationship(:'sensor-levels', 1) }
     let(:'dtmf-receive-mode') { wrap_relationship(:'system/dtmf-receive-modes', 1) }
-    let(:'dtmf-send-mode') { wrap_relationship(:'system/dtmf-send-modes', 1) }
-    let(:'rel100-mode') { wrap_relationship(:'equipment/gateway-rel100-modes', 1) }
-    let(:'transport-protocol') { wrap_relationship(:'equipment/transport-protocols', 1) }
-    let(:'term-proxy-transport-protocol') { wrap_relationship(:'equipment/transport-protocols', 1) }
-    let(:'orig-proxy-transport-protocol') { wrap_relationship(:'equipment/transport-protocols', 1) }
+    let(:'dtmf-send-mode') { wrap_relationship(:'dtmf-send-modes', 1) }
+    let(:'rel100-mode') { wrap_relationship(:'gateway-rel100-modes', 1) }
+    let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
+    let(:'term-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
+    let(:'orig-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'contractor') { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
     let(:'codec-group') { wrap_relationship(:'codec-groups', create(:codec_group).id) }
 
