@@ -39,9 +39,6 @@ resource 'Codec groups' do
     let(:codecs) { wrap_has_many_relationship(:'codec-group-codecs', [codec.id]) }
 
     example_request 'create new entry' do
-      Rails.logger.info 'tttt'
-      Rails.logger.info params
-      Rails.logger.info response_body
       expect(status).to eq(201)
     end
   end
