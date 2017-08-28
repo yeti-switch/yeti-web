@@ -11,7 +11,6 @@ resource 'Dtmf receive modes' do
   let(:type) { 'dtmf-receive-modes' }
 
   get '/api/rest/private/system/dtmf-receive-modes' do
-    before { create_list(:dtmf_receive_mode, 2) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
@@ -19,44 +18,11 @@ resource 'Dtmf receive modes' do
   end
 
   get '/api/rest/private/system/dtmf-receive-modes/:id' do
-    let(:id) { create(:dtmf_receive_mode).id }
+    let(:id) { System::DtmfReceiveMode.first.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
 
-  post '/api/rest/private/system/dtmf-receive-modes' do
-    parameter :type, 'Resource type (dtmf-receive-modes)', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:name) { 'name' }
-
-    example_request 'create new entry' do
-      expect(status).to eq(201)
-    end
-  end
-
-  put '/api/rest/private/system/dtmf-receive-modes/:id' do
-    parameter :type, 'Resource type (dtmf-receive-modes)', scope: :data, required: true
-    parameter :id, 'Dtmf receive mode ID', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:id) { create(:dtmf_receive_mode).id }
-    let(:name) { 'name' }
-
-    example_request 'update values' do
-      expect(status).to eq(200)
-    end
-  end
-
-  delete '/api/rest/private/system/dtmf-receive-modes/:id' do
-    let(:id) { create(:dtmf_receive_mode).id }
-
-    example_request 'delete entry' do
-      expect(status).to eq(204)
-    end
-  end
 end

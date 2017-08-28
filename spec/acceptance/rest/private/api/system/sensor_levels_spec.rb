@@ -11,7 +11,6 @@ resource 'Sensor levels' do
   let(:type) { 'sensor-levels' }
 
   get '/api/rest/private/system/sensor-levels' do
-    before { create_list(:sensor_level, 2) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
@@ -19,44 +18,11 @@ resource 'Sensor levels' do
   end
 
   get '/api/rest/private/system/sensor-levels/:id' do
-    let(:id) { create(:sensor_level).id }
+    let(:id) { System::SensorLevel.first.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
 
-  post '/api/rest/private/system/sensor-levels' do
-    parameter :type, 'Resource type (sensor-levels)', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:name) { 'name' }
-
-    example_request 'create new entry' do
-      expect(status).to eq(201)
-    end
-  end
-
-  put '/api/rest/private/system/sensor-levels/:id' do
-    parameter :type, 'Resource type (sensor-levels)', scope: :data, required: true
-    parameter :id, 'Sensor level ID', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:id) { create(:sensor_level).id }
-    let(:name) { 'name' }
-
-    example_request 'update values' do
-      expect(status).to eq(200)
-    end
-  end
-
-  delete '/api/rest/private/system/sensor-levels/:id' do
-    let(:id) { create(:sensor_level).id }
-
-    example_request 'delete entry' do
-      expect(status).to eq(204)
-    end
-  end
 end

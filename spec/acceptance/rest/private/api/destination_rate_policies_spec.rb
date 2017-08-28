@@ -11,7 +11,6 @@ resource 'Destination rate policies' do
   let(:type) { 'destination-rate-policies' }
 
   get '/api/rest/private/destination-rate-policies' do
-    before { create_list(:destination_rate_policy, 2) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
@@ -19,44 +18,11 @@ resource 'Destination rate policies' do
   end
 
   get '/api/rest/private/destination-rate-policies/:id' do
-    let(:id) { create(:destination_rate_policy).id }
+    let(:id) { DestinationRatePolicy.first.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
 
-  post '/api/rest/private/destination-rate-policies' do
-    parameter :type, 'Resource type (destination-rate-policies)', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:name) { 'name' }
-
-    example_request 'create new entry' do
-      expect(status).to eq(201)
-    end
-  end
-
-  put '/api/rest/private/destination-rate-policies/:id' do
-    parameter :type, 'Resource type (destination-rate-policies)', scope: :data, required: true
-    parameter :id, 'Destination rate policies ID', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:id) { create(:destination_rate_policy).id }
-    let(:name) { 'name' }
-
-    example_request 'update values' do
-      expect(status).to eq(200)
-    end
-  end
-
-  delete '/api/rest/private/destination-rate-policies/:id' do
-    let(:id) { create(:destination_rate_policy).id }
-
-    example_request 'delete entry' do
-      expect(status).to eq(204)
-    end
-  end
 end

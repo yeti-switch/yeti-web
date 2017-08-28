@@ -11,7 +11,6 @@ resource 'Transport protocol' do
   let(:type) { 'transport-protocols' }
 
   get '/api/rest/private/equipment/transport-protocols' do
-    before { create_list(:transport_protocol, 2) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
@@ -19,44 +18,11 @@ resource 'Transport protocol' do
   end
 
   get '/api/rest/private/equipment/transport-protocols/:id' do
-    let(:id) { create(:transport_protocol).id }
+    let(:id) { Equipment::TransportProtocol.first.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
 
-  post '/api/rest/private/equipment/transport-protocols' do
-    parameter :type, 'Resource type (transport-protocols)', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:name) { 'name' }
-
-    example_request 'create new entry' do
-      expect(status).to eq(201)
-    end
-  end
-
-  put '/api/rest/private/equipment/transport-protocols/:id' do
-    parameter :type, 'Resource type (transport-protocols)', scope: :data, required: true
-    parameter :id, 'Transport protocol ID', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:id) { create(:transport_protocol).id }
-    let(:name) { 'name' }
-
-    example_request 'update values' do
-      expect(status).to eq(200)
-    end
-  end
-
-  delete '/api/rest/private/equipment/transport-protocols/:id' do
-    let(:id) { create(:transport_protocol).id }
-
-    example_request 'delete entry' do
-      expect(status).to eq(204)
-    end
-  end
 end

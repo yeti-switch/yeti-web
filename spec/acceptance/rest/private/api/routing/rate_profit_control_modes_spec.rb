@@ -26,37 +26,4 @@ resource 'Rate profit control modes' do
     end
   end
 
-  post '/api/rest/private/routing/rate-profit-control-modes' do
-    parameter :type, 'Resource type (rate-profit-control-modes)', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:name) { 'name' }
-
-    example_request 'create new entry' do
-      expect(status).to eq(201)
-    end
-  end
-
-  put '/api/rest/private/routing/rate-profit-control-modes/:id' do
-    parameter :type, 'Resource type (rate-profit-control-modes)', scope: :data, required: true
-    parameter :id, 'Rate profit control mode ID', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:id) { create(:rate_profit_control_mode).id }
-    let(:name) { 'name' }
-
-    example_request 'update values' do
-      expect(status).to eq(200)
-    end
-  end
-
-  delete '/api/rest/private/routing/rate-profit-control-modes/:id' do
-    let(:id) { create(:rate_profit_control_mode).id }
-
-    example_request 'delete entry' do
-      expect(status).to eq(204)
-    end
-  end
 end

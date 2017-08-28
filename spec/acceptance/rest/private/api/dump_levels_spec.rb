@@ -11,7 +11,6 @@ resource 'Dump levels' do
   let(:type) { 'dump-levels' }
 
   get '/api/rest/private/dump-levels' do
-    before { create_list(:dump_level, 2) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
@@ -19,44 +18,11 @@ resource 'Dump levels' do
   end
 
   get '/api/rest/private/dump-levels/:id' do
-    let(:id) { create(:dump_level).id }
+    let(:id) { DumpLevel.first.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
     end
   end
 
-  post '/api/rest/private/dump-levels' do
-    parameter :type, 'Resource type (dump-levels)', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:name) { 'name' }
-
-    example_request 'create new entry' do
-      expect(status).to eq(201)
-    end
-  end
-
-  put '/api/rest/private/dump-levels/:id' do
-    parameter :type, 'Resource type (dump-levels)', scope: :data, required: true
-    parameter :id, 'Dump level ID', scope: :data, required: true
-
-    jsonapi_attributes([:name], [])
-
-    let(:id) { create(:dump_level).id }
-    let(:name) { 'name' }
-
-    example_request 'update values' do
-      expect(status).to eq(200)
-    end
-  end
-
-  delete '/api/rest/private/dump-levels/:id' do
-    let(:id) { create(:dump_level).id }
-
-    example_request 'delete entry' do
-      expect(status).to eq(204)
-    end
-  end
 end
