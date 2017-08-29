@@ -10,6 +10,10 @@ resource 'Contractors' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'contractors' }
 
+  required_params = %i(name vendor customer)
+  optional_params = %i(enabled description address phones)
+  optional_relationships = %i(smtp-connection)
+
   get '/api/rest/private/contractors' do
     before { create_list(:contractor, 2, vendor: true) }
 
@@ -29,17 +33,17 @@ resource 'Contractors' do
   post '/api/rest/private/contractors' do
     parameter :type, 'Resource type (contractors)', scope: :data, required: true
 
-    parameter :name, 'Contractor name', scope: [:data, :attributes], required: true
-    parameter :vendor, 'Vendor flag', scope: [:data, :attributes]
-    parameter :customer, 'Customer flag', scope: [:data, :attributes]
-    parameter :enabled, 'Enabled flag', scope: [:data, :attributes]
-    parameter :description, 'Description', scope: [:data, :attributes]
-    parameter :address, 'Address', scope: [:data, :attributes]
-    parameter :phones, 'Phones', scope: [:data, :attributes]
-    parameter :'smtp-сonnection-id', 'SMTP connection id', scope: [:data, :attributes]
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships([], optional_relationships)
 
-    let(:name) { 'name' }
+    let(:name) { 'Contractor name' }
     let(:vendor) { true }
+    let(:customer) { true }
+    let(:enabled) { true }
+    let(:description) { 'Description' }
+    let(:address) { 'Address' }
+    let(:phones) { 'Phones' }
+    let(:'smtp-сonnection') { wrap_relationship(:'smtp-connections', create(:smtp_connection).id ) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -50,14 +54,8 @@ resource 'Contractors' do
     parameter :type, 'Resource type (contractors)', scope: :data, required: true
     parameter :id, 'Contractor ID', scope: :data, required: true
 
-    parameter :name, 'Contractor name', scope: [:data, :attributes], required: true
-    parameter :vendor, 'Vendor flag', scope: [:data, :attributes]
-    parameter :customer, 'Customer flag', scope: [:data, :attributes]
-    parameter :enabled, 'Enabled flag', scope: [:data, :attributes]
-    parameter :description, 'Description', scope: [:data, :attributes]
-    parameter :address, 'Address', scope: [:data, :attributes]
-    parameter :phones, 'Phones', scope: [:data, :attributes]
-    parameter :'smtp-сonnection-id', 'SMTP connection id', scope: [:data, :attributes]
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships([], optional_relationships)
 
     let(:id) { create(:contractor, vendor: true).id }
     let(:name) { 'name' }

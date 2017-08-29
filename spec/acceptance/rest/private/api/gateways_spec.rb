@@ -62,7 +62,7 @@ resource 'Gateways' do
     let(:'session-refresh-method') { wrap_relationship(:'session-refresh-methods', 1) }
     let(:'sdp-c-location') { wrap_relationship(:'sdp-c-locations', 2) }
     let(:'sensor-level') { wrap_relationship(:'sensor-levels', 1) }
-    let(:'dtmf-receive-mode') { wrap_relationship(:'system/dtmf-receive-modes', 1) }
+    let(:'dtmf-receive-mode') { wrap_relationship(:'dtmf-receive-modes', 1) }
     let(:'dtmf-send-mode') { wrap_relationship(:'dtmf-send-modes', 1) }
     let(:'rel100-mode') { wrap_relationship(:'gateway-rel100-modes', 1) }
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }

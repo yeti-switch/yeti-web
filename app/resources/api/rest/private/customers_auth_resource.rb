@@ -8,7 +8,7 @@ class Api::Rest::Private::CustomersAuthResource < JSONAPI::Resource
 
   has_one :customer
   has_one :rateplan
-  has_one :routing_plan, class_name: 'Routing::RoutingPlan'
+  has_one :routing_plan, class_name: 'RoutingPlan'
   has_one :gateway
   has_one :account
   has_one :dump_level
