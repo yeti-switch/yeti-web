@@ -1,6 +1,6 @@
 Yeti::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
-  post 'api/rest/private/auth', to: 'api/rest/private/auth#create'
+  post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
@@ -48,7 +48,7 @@ Yeti::Application.routes.draw do
           api.resources :nodes, only: [:index]
         end
 
-        namespace :private do
+        namespace :admin do
           jsonapi_resources :accounts
           jsonapi_resources :contractors
           jsonapi_resources :customers_auths
