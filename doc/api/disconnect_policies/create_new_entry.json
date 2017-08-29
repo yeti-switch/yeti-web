@@ -1,0 +1,62 @@
+{
+  "resource": "Disconnect policies",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/disconnect-policies",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (disconnect-policies)"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/disconnect-policies",
+      "request_body": "{\"data\":{\"type\":\"disconnect-policies\",\"attributes\":{\"name\":\"name\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTAsInN1YiI6NTF9.hsoKo-5RNP5SyHVw_Eb79gPYRuFSLv86C2CyPVa3UFM",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"disconnect-policies\",\"links\":{\"self\":\"http://example.org/api/rest/private/disconnect-policies/4\"},\"attributes\":{\"name\":\"name\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/disconnect-policies/4",
+        "ETag": "W/\"65978ddd9f94d5680ac036aca2c9963a\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "e9eaef67-df8a-43bf-9c02-6a10f748433f",
+        "X-Runtime": "0.074384",
+        "Content-Length": "154"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

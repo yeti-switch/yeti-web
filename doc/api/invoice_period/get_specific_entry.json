@@ -1,0 +1,47 @@
+{
+  "resource": "Invoice period",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/billing/invoice-period/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/billing/invoice-period/2",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTEsInN1YiI6OH0.Lnn83CsXVdgF-Ki20P-MY7WOTLKKezX9c06zGbKAwK0",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"2\",\"type\":\"invoice-periods\",\"links\":{\"self\":\"http://example.org/api/rest/private/billing/invoice-periods/2\"},\"attributes\":{\"name\":\"Weekly\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"c3cc15a7b17c5c353218be176d090924\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "cd77c590-2cbc-4f51-9ac2-7898339666bf",
+        "X-Runtime": "0.129600",
+        "Content-Length": "156"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

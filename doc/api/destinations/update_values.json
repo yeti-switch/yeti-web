@@ -19,119 +19,101 @@
       "description": "Destination ID"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "enabled",
       "description": "Enabled"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "rateplan-id",
-      "description": "Rateplan id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
       "name": "next-rate",
       "description": "Next rate"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "connect-fee",
       "description": "Connect fee"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "initial-interval",
       "description": "Initial interval"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "next-interval",
       "description": "Next interval"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "dp-margin-fixed",
       "description": "Dp margin fixed"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "dp-margin-percent",
       "description": "Dp margin percent"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "rate-policy-id",
-      "description": "Rate policy id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
       "name": "initial-rate",
       "description": "Initial rate"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "asr-limit",
       "description": "Asr limit"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "acd-limit",
       "description": "Acd limit"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "short-calls-limit",
       "description": "Short calls limit"
     },
@@ -180,14 +162,6 @@
         "data",
         "attributes"
       ],
-      "name": "profit-control-mode-id",
-      "description": "Profit control mode id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
       "name": "external-id",
       "description": "External id"
     }
@@ -203,7 +177,7 @@
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczMzksInN1YiI6MjB9.OvOuXQM1hzm6oklYYEjw7aa0bCS_0-VqU79ZCSeqmq8",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MDQsInN1YiI6Mzd9.2OBMvVRfjk6VX85b_c0Gia52JmkUbUNqllFpq5qlUs8",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -212,17 +186,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/5\"},\"attributes\":{\"enabled\":false,\"rateplan-id\":11,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"rate-policy-id\":1,\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-10T15:08:59.468+07:00\",\"valid-till\":\"2022-08-10T15:08:59.469+07:00\",\"profit-control-mode-id\":null,\"external-id\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/5\"},\"attributes\":{\"enabled\":false,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-29T10:21:44.335Z\",\"valid-till\":\"2022-08-29T10:21:44.335Z\",\"external-id\":null},\"relationships\":{\"rateplan\":{\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/5/relationships/rateplan\",\"related\":\"http://example.org/api/rest/private/destinations/5/rateplan\"}},\"rate-policy\":{\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/5/relationships/rate-policy\",\"related\":\"http://example.org/api/rest/private/destinations/5/rate-policy\"}},\"profit-control-mode\":{\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/5/relationships/profit-control-mode\",\"related\":\"http://example.org/api/rest/private/destinations/5/profit-control-mode\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
-        "ETag": "W/\"0cce8f4100a88334f63891cb4887850c\"",
+        "ETag": "W/\"a3cb07f544219972c75980d07d33d1ab\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "4eb57a95-dd40-4b80-a671-65fad220a886",
-        "X-Runtime": "0.039751",
-        "Content-Length": "581"
+        "X-Request-Id": "21dea9e3-c253-4d10-9a7a-c07a8c3b501e",
+        "X-Runtime": "0.072351",
+        "Content-Length": "1099"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

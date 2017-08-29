@@ -19,11 +19,11 @@
       "description": "Routing plan ID"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
       "description": "Name"
     },
@@ -42,14 +42,6 @@
       ],
       "name": "use-lnp",
       "description": "Use lnp"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "sorting-id",
-      "description": "Sorting id"
     }
   ],
   "response_fields": [
@@ -63,7 +55,7 @@
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDgsInN1YiI6NTh9.QEA77estITCiEVbyuIlPvFkcA-aA20unWDQTFNjJXM8",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MzUsInN1YiI6MTA5fQ.Ccn2g-QRwOj-uUZG0KD4RMgLFCF85oD-5lOHLPQhwa8",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -72,17 +64,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"routing-plans\",\"links\":{\"self\":\"http://example.org/api/rest/private/routing-plans/11\"},\"attributes\":{\"name\":\"name\",\"rate-delta-max\":\"0.0\",\"use-lnp\":false,\"sorting-id\":1}}}",
+      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"routing-plans\",\"links\":{\"self\":\"http://example.org/api/rest/private/routing-plans/11\"},\"attributes\":{\"name\":\"name\",\"rate-delta-max\":\"0.0\",\"use-lnp\":false},\"relationships\":{\"sorting\":{\"links\":{\"self\":\"http://example.org/api/rest/private/routing-plans/11/relationships/sorting\",\"related\":\"http://example.org/api/rest/private/routing-plans/11/sorting\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
-        "ETag": "W/\"f75c127bcf55db9dc557a7dea41c5aea\"",
+        "ETag": "W/\"2d5f892c9e74efbffce988691b48295c\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "3a1a0e06-26c2-44c2-9bb6-c5fff119f9e1",
-        "X-Runtime": "0.037948",
-        "Content-Length": "198"
+        "X-Request-Id": "0d33feaf-f38e-488d-94ed-a29738d04e7a",
+        "X-Runtime": "0.054427",
+        "Content-Length": "380"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

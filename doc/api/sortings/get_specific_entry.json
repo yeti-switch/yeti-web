@@ -1,0 +1,47 @@
+{
+  "resource": "Sortings",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/sortings/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/sortings/5",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MzcsInN1YiI6MTE2fQ.hvHGcMP1DYPlR40QiIMZyjW-RzMUEQ-KW1Zv9YQ3Axg",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"sortings\",\"links\":{\"self\":\"http://example.org/api/rest/private/sortings/5\"},\"attributes\":{\"name\":\"name\",\"description\":null,\"use-static-routes\":false}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"c74a248143c2b7b46dded3b99a91dd43\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "f058e228-7b09-4811-9627-9dac9dfcc4fd",
+        "X-Runtime": "0.058338",
+        "Content-Length": "177"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

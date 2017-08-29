@@ -1,0 +1,47 @@
+{
+  "resource": "Timezones",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/system/timezones",
+  "description": "get listing",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/system/timezones",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3NDQsInN1YiI6MTM2fQ.4aCSxdfzZn3uJQC-1renrZgqEsx_QjYqFrFVdHXl0KI",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"timezones\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/timezones/1\"},\"attributes\":{\"name\":\"UTC\",\"abbrev\":\"UTC\",\"utc-offset\":\"00:00:00\",\"is-dst\":false}},{\"id\":\"2\",\"type\":\"timezones\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/timezones/2\"},\"attributes\":{\"name\":\"timezone1\",\"abbrev\":\"UTC\",\"utc-offset\":\"00:00:00\",\"is-dst\":false}},{\"id\":\"3\",\"type\":\"timezones\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/timezones/3\"},\"attributes\":{\"name\":\"timezone2\",\"abbrev\":\"UTC\",\"utc-offset\":\"00:00:00\",\"is-dst\":false}}]}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"166ddf0d4861975043d0e671dd070d6d\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "65ca354a-72b7-41ad-b332-0bcfdab42a77",
+        "X-Runtime": "0.064810",
+        "Content-Length": "580"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

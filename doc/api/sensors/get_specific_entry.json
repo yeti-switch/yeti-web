@@ -1,0 +1,47 @@
+{
+  "resource": "Sensors",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/system/sensors/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/system/sensors/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3NDEsInN1YiI6MTI3fQ.x-xxYio2XUfMi7pl3rqFWrBgUkguzve0cUHHF3FhAKI",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"sensors\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/sensors/3\"},\"attributes\":{\"name\":\"sensor3\",\"mode-id\":1,\"source-interface\":null,\"target-mac\":null,\"use-routing\":false,\"target-ip\":\"192.168.0.2\",\"source-ip\":\"192.168.0.1\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"efb958298380b8fb29f262c5cadfb231\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "bba93077-002d-489e-a607-e328e11c73a0",
+        "X-Runtime": "0.076850",
+        "Content-Length": "266"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "resource": "Invoice template",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/billing/invoice-template",
+  "description": "get listing",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/billing/invoice-template",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTIsInN1YiI6MTJ9.9LwkW0Kpb-5WomSWL2A39CGIzLHYmS_f4egOT_BunQU",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"invoice-templates\",\"links\":{\"self\":\"http://example.org/api/rest/private/billing/invoice-templates/1\"},\"attributes\":{\"name\":\"invoice_template1\",\"filename\":\"filename.odt\"}},{\"id\":\"2\",\"type\":\"invoice-templates\",\"links\":{\"self\":\"http://example.org/api/rest/private/billing/invoice-templates/2\"},\"attributes\":{\"name\":\"invoice_template2\",\"filename\":\"filename.odt\"}}]}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"28c448f5be5c30eef6c3fca7bb709b0b\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "e97cba98-4dae-4069-96e6-5fcd74e067c4",
+        "X-Runtime": "0.089187",
+        "Content-Length": "388"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

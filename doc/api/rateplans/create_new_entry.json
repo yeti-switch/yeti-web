@@ -13,22 +13,22 @@
       "description": "Resource type (rateplans)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
       "description": "Name"
     },
     {
+      "required": true,
       "scope": [
         "data",
-        "attributes"
+        "relationships"
       ],
-      "required": true,
-      "name": "profit-control-mode-id",
-      "description": "Profit control mode id"
+      "name": "profit-control-mode",
+      "description": "Profit control mode"
     }
   ],
   "response_fields": [
@@ -38,11 +38,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/rateplans",
-      "request_body": "{\"data\":{\"type\":\"rateplans\",\"attributes\":{\"name\":\"name\",\"profit-control-mode-id\":25}}}",
+      "request_body": "{\"data\":{\"type\":\"rateplans\",\"attributes\":{\"name\":\"name\"},\"relationships\":{\"profit-control-mode\":{\"data\":{\"type\":\"rate_profit_control_modes\",\"id\":25}}}}}",
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDUsInN1YiI6NDd9.Gl_s_E_CRchNw13Rgy7mMmzGkbJs4sN85zTkHQSnXW4",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MjksInN1YiI6OTR9.r9ZYqG4_UVJs4GXJsLPpEdyTqeBOb_BnPfteua90Es8",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -51,18 +51,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"16\",\"type\":\"rateplans\",\"links\":{\"self\":\"http://example.org/api/rest/private/rateplans/16\"},\"attributes\":{\"name\":\"name\",\"profit-control-mode-id\":25}}}",
+      "response_body": "{\"data\":{\"id\":\"16\",\"type\":\"rateplans\",\"links\":{\"self\":\"http://example.org/api/rest/private/rateplans/16\"},\"attributes\":{\"name\":\"name\"},\"relationships\":{\"profit-control-mode\":{\"links\":{\"self\":\"http://example.org/api/rest/private/rateplans/16/relationships/profit-control-mode\",\"related\":\"http://example.org/api/rest/private/rateplans/16/profit-control-mode\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/rateplans/16",
-        "ETag": "W/\"35773d26b4de3cd299b09eaba4d10564\"",
+        "ETag": "W/\"499f5302dd689d767c431ebc692b0efb\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "1d595b85-cd0c-4898-976c-929a41734a3d",
-        "X-Runtime": "0.032607",
-        "Content-Length": "164"
+        "X-Request-Id": "16e018d2-8062-4bad-b168-5b62ac112d56",
+        "X-Runtime": "0.074260",
+        "Content-Length": "361"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

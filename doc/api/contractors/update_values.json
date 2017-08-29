@@ -19,29 +19,31 @@
       "description": "Contractor ID"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
-      "description": "Contractor name"
+      "description": "Name"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
       "name": "vendor",
-      "description": "Vendor flag"
+      "description": "Vendor"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
       "name": "customer",
-      "description": "Customer flag"
+      "description": "Customer"
     },
     {
       "scope": [
@@ -49,7 +51,7 @@
         "attributes"
       ],
       "name": "enabled",
-      "description": "Enabled flag"
+      "description": "Enabled"
     },
     {
       "scope": [
@@ -78,10 +80,10 @@
     {
       "scope": [
         "data",
-        "attributes"
+        "relationships"
       ],
-      "name": "smtp-сonnection-id",
-      "description": "SMTP connection id"
+      "name": "smtp-connection",
+      "description": "Smtp connection"
     }
   ],
   "response_fields": [
@@ -95,7 +97,7 @@
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczMzYsInN1YiI6MTB9.d8quMxVw5ZX53UzQ7o8mi8XPrDon2N2RLXgfssxxevA",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTgsInN1YiI6MjV9.sZzeB0onjUNMOGufZSFRNLPCp9OWHPz5dOGDBTahqTY",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -104,17 +106,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"contractors\",\"links\":{\"self\":\"http://example.org/api/rest/private/contractors/11\"},\"attributes\":{\"name\":\"name\",\"enabled\":true,\"vendor\":true,\"customer\":true,\"description\":null,\"address\":null,\"phones\":null,\"smtp-connection-id\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"11\",\"type\":\"contractors\",\"links\":{\"self\":\"http://example.org/api/rest/private/contractors/11\"},\"attributes\":{\"name\":\"name\",\"enabled\":true,\"vendor\":true,\"customer\":true,\"description\":null,\"address\":null,\"phones\":null},\"relationships\":{\"smtp-connection\":{\"links\":{\"self\":\"http://example.org/api/rest/private/contractors/11/relationships/smtp-connection\",\"related\":\"http://example.org/api/rest/private/contractors/11/smtp-connection\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
-        "ETag": "W/\"e001132d665e004a5770421ac9c22394\"",
+        "ETag": "W/\"87f140b388bdffdb38d46d7aa5aba834\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "9c3bbc73-10fd-4816-828a-d12dd446ba41",
-        "X-Runtime": "0.033527",
-        "Content-Length": "259"
+        "X-Request-Id": "3a7a8923-aff2-4469-b542-8baee7d396b9",
+        "X-Runtime": "0.082827",
+        "Content-Length": "450"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

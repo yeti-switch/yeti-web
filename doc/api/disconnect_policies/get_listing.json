@@ -1,0 +1,47 @@
+{
+  "resource": "Disconnect policies",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/disconnect-policies",
+  "description": "get listing",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/disconnect-policies",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MDksInN1YiI6NDl9.nogWavVOg_xvdfHjCYGvl827uLJDQbYxt-BWBTE7NSw",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"disconnect-policies\",\"links\":{\"self\":\"http://example.org/api/rest/private/disconnect-policies/1\"},\"attributes\":{\"name\":\"not_send_503\"}},{\"id\":\"3\",\"type\":\"disconnect-policies\",\"links\":{\"self\":\"http://example.org/api/rest/private/disconnect-policies/3\"},\"attributes\":{\"name\":\"can_not_send_503\"}},{\"id\":\"4\",\"type\":\"disconnect-policies\",\"links\":{\"self\":\"http://example.org/api/rest/private/disconnect-policies/4\"},\"attributes\":{\"name\":\"disconnect_policy1\"}},{\"id\":\"5\",\"type\":\"disconnect-policies\",\"links\":{\"self\":\"http://example.org/api/rest/private/disconnect-policies/5\"},\"attributes\":{\"name\":\"disconnect_policy2\"}}]}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"8312ac9df93f3c7bb92e837ba90e3c54\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "d3afd960-d979-48ba-b247-54038c321494",
+        "X-Runtime": "0.084011",
+        "Content-Length": "642"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "resource": "Invoice template",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/billing/invoice-template/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (invoice-templates)"
+    },
+    {
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Invoice template ID"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/billing/invoice-template/5",
+      "request_body": "{\"data\":{\"type\":\"invoice-templates\",\"id\":5,\"attributes\":{\"name\":\"name\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTMsInN1YiI6MTV9.HFRPz6rLh5qNBcknYV_qXcQbfP4EBJLeLUg9Romyiuw",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"invoice-templates\",\"links\":{\"self\":\"http://example.org/api/rest/private/billing/invoice-templates/5\"},\"attributes\":{\"name\":\"name\",\"filename\":\"filename.odt\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"90b1bf0b9bcf1c9bccfdd6cbad0bab38\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "0b629879-9720-496a-b127-214587575979",
+        "X-Runtime": "0.059184",
+        "Content-Length": "184"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

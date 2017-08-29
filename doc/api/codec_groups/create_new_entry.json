@@ -1,0 +1,71 @@
+{
+  "resource": "Codec groups",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/codec-groups",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (codec-groups)"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "codecs",
+      "description": "Codecs"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/codec-groups",
+      "request_body": "{\"data\":{\"type\":\"codec-groups\",\"attributes\":{\"name\":\"name\"},\"relationships\":{\"codecs\":{\"data\":[{\"type\":\"codec-group-codecs\",\"id\":9}]}}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTUsInN1YiI6MTl9.iojjLjq8LscVtkWrQZRG3kIQqflEd7GWJPF6Z_2Tr1E",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"codec-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/codec-groups/5\"},\"attributes\":{\"name\":\"name\"},\"relationships\":{\"codecs\":{\"links\":{\"self\":\"http://example.org/api/rest/private/codec-groups/5/relationships/codecs\",\"related\":\"http://example.org/api/rest/private/codec-groups/5/codecs\"}}}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/codec-groups/5",
+        "ETag": "W/\"3da9279434d699f5daf707dd5543e59c\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "24da09e1-d015-41eb-a138-756fe03f9893",
+        "X-Runtime": "0.111850",
+        "Content-Length": "330"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

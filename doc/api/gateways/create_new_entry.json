@@ -13,173 +13,49 @@
       "description": "Resource type (gateways)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
       "description": "Name"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "enabled",
       "description": "Enabled"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "priority",
       "description": "Priority"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "acd-limit",
       "description": "Acd limit"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "asr-limit",
       "description": "Asr limit"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "contractor-id",
-      "description": "Contractor id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "sdp-alines-filter-type-id",
-      "description": "Sdp alines filter type id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "codec-group-id",
-      "description": "Codec group id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "sdp-c-location-id",
-      "description": "Sdp c location id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "sensor-level-id",
-      "description": "Sensor level id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "dtmf-receive-mode-id",
-      "description": "Dtmf receive mode id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "dtmf-send-mode-id",
-      "description": "Dtmf send mode id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "rel100-mode-id",
-      "description": "Rel100 mode id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "session-refresh-method-id",
-      "description": "Session refresh method id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "transport-protocol-id",
-      "description": "Transport protocol id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "term-proxy-transport-protocol-id",
-      "description": "Term proxy transport protocol id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "orig-proxy-transport-protocol-id",
-      "description": "Orig proxy transport protocol id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "gateway-group-id",
-      "description": "Gateway group id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "pop-id",
-      "description": "Pop id"
     },
     {
       "scope": [
@@ -210,14 +86,6 @@
         "data",
         "attributes"
       ],
-      "name": "sensor-id",
-      "description": "Sensor id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
       "name": "host",
       "description": "Host"
     },
@@ -236,14 +104,6 @@
       ],
       "name": "resolve-ruri",
       "description": "Resolve ruri"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "diversion-policy-id",
-      "description": "Diversion policy id"
     },
     {
       "scope": [
@@ -388,14 +248,6 @@
       ],
       "name": "term-next-hop",
       "description": "Term next hop"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "term-disconnect-policy-id",
-      "description": "Term disconnect policy id"
     },
     {
       "scope": [
@@ -636,6 +488,154 @@
       ],
       "name": "rtp-force-relay-cn",
       "description": "Rtp force relay cn"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "contractor",
+      "description": "Contractor"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "codec-group",
+      "description": "Codec group"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "sdp-c-location",
+      "description": "Sdp c location"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "sensor-level",
+      "description": "Sensor level"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "dtmf-receive-mode",
+      "description": "Dtmf receive mode"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "dtmf-send-mode",
+      "description": "Dtmf send mode"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "rel100-mode",
+      "description": "Rel100 mode"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "session-refresh-method",
+      "description": "Session refresh method"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "transport-protocol",
+      "description": "Transport protocol"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "sdp-alines-filter-type",
+      "description": "Sdp alines filter type"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "term-proxy-transport-protocol",
+      "description": "Term proxy transport protocol"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "orig-proxy-transport-protocol",
+      "description": "Orig proxy transport protocol"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "gateway-group",
+      "description": "Gateway group"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "pop",
+      "description": "Pop"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "sensor",
+      "description": "Sensor"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "diversion-policy",
+      "description": "Diversion policy"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "term-disconnect-policy",
+      "description": "Term disconnect policy"
     }
   ],
   "response_fields": [
@@ -645,11 +645,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/gateways",
-      "request_body": "{\"data\":{\"type\":\"gateways\",\"attributes\":{\"name\":\"name\",\"enabled\":true,\"priority\":1,\"acd-limit\":0.0,\"asr-limit\":0.0,\"contractor-id\":52,\"sdp-alines-filter-type-id\":0,\"codec-group-id\":10,\"sdp-c-location-id\":2,\"sensor-level-id\":1,\"dtmf-receive-mode-id\":1,\"dtmf-send-mode-id\":1,\"rel100-mode-id\":1,\"session-refresh-method-id\":1,\"transport-protocol-id\":1,\"term-proxy-transport-protocol-id\":1,\"orig-proxy-transport-protocol-id\":1}}}",
+      "request_body": "{\"data\":{\"type\":\"gateways\",\"attributes\":{\"name\":\"name\",\"enabled\":true,\"priority\":1,\"acd-limit\":0.0,\"asr-limit\":0.0},\"relationships\":{\"contractor\":{\"data\":{\"type\":\"contractors\",\"id\":52}},\"codec-group\":{\"data\":{\"type\":\"codec-groups\",\"id\":17}},\"sdp-c-location\":{\"data\":{\"type\":\"sdp-c-locations\",\"id\":2}},\"sensor-level\":{\"data\":{\"type\":\"sensor-levels\",\"id\":1}},\"dtmf-receive-mode\":{\"data\":{\"type\":\"dtmf-receive-modes\",\"id\":1}},\"dtmf-send-mode\":{\"data\":{\"type\":\"dtmf-send-modes\",\"id\":1}},\"rel100-mode\":{\"data\":{\"type\":\"gateway-rel100-modes\",\"id\":1}},\"session-refresh-method\":{\"data\":{\"type\":\"session-refresh-methods\",\"id\":1}},\"transport-protocol\":{\"data\":{\"type\":\"transport-protocols\",\"id\":1}},\"sdp-alines-filter-type\":{\"data\":{\"type\":\"filter-types\",\"id\":0}},\"term-proxy-transport-protocol\":{\"data\":{\"type\":\"transport-protocols\",\"id\":1}},\"orig-proxy-transport-protocol\":{\"data\":{\"type\":\"transport-protocols\",\"id\":1}}}}}",
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDQsInN1YiI6Mzl9.ALfp5GrHB3sX9Yu0hAzGEBLa_LutKRq7hOMY5p0r6kg",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MjMsInN1YiI6ODF9.0XnzR2_WFfMzgcNCBEabWqgS5ZsnFxlbJvp9DgiFHBg",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -658,18 +658,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"gateways\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10\"},\"attributes\":{\"name\":\"name\",\"enabled\":true,\"priority\":1,\"acd-limit\":0.0,\"asr-limit\":0.0,\"contractor-id\":52,\"sdp-alines-filter-type-id\":0,\"codec-group-id\":10,\"sdp-c-location-id\":2,\"sensor-level-id\":1,\"dtmf-receive-mode-id\":1,\"dtmf-send-mode-id\":1,\"rel100-mode-id\":1,\"session-refresh-method-id\":1,\"transport-protocol-id\":1,\"term-proxy-transport-protocol-id\":1,\"orig-proxy-transport-protocol-id\":1,\"gateway-group-id\":null,\"pop-id\":null,\"allow-origination\":true,\"allow-termination\":true,\"sst-enabled\":false,\"sensor-id\":null,\"host\":null,\"port\":null,\"resolve-ruri\":false,\"diversion-policy-id\":1,\"diversion-rewrite-rule\":null,\"diversion-rewrite-result\":null,\"src-name-rewrite-rule\":null,\"src-name-rewrite-result\":null,\"src-rewrite-rule\":null,\"src-rewrite-result\":null,\"dst-rewrite-rule\":null,\"dst-rewrite-result\":null,\"auth-enabled\":false,\"auth-user\":null,\"auth-password\":null,\"auth-from-user\":null,\"auth-from-domain\":null,\"term-use-outbound-proxy\":false,\"term-force-outbound-proxy\":false,\"term-outbound-proxy\":null,\"term-next-hop-for-replies\":false,\"term-next-hop\":null,\"term-disconnect-policy-id\":null,\"term-append-headers-req\":null,\"sdp-alines-filter-list\":null,\"ringing-timeout\":null,\"relay-options\":false,\"relay-reinvite\":false,\"relay-hold\":false,\"relay-prack\":false,\"relay-update\":false,\"suppress-early-media\":false,\"fake-180-timer\":null,\"transit-headers-from-origination\":null,\"transit-headers-from-termination\":null,\"sip-interface-name\":null,\"allow-1xx-without-to-tag\":false,\"sip-timer-b\":8000,\"dns-srv-failover-timer\":2000,\"anonymize-sdp\":true,\"proxy-media\":false,\"single-codec-in-200ok\":false,\"transparent-seqno\":false,\"transparent-ssrc\":false,\"force-symmetric-rtp\":true,\"symmetric-rtp-nonstop\":false,\"symmetric-rtp-ignore-rtcp\":false,\"force-dtmf-relay\":false,\"rtp-ping\":false,\"rtp-timeout\":30,\"filter-noaudio-streams\":false,\"rtp-relay-timestamp-aligning\":false,\"rtp-force-relay-cn\":true}}}",
+      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"gateways\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10\"},\"attributes\":{\"name\":\"name\",\"enabled\":true,\"priority\":1,\"acd-limit\":0.0,\"asr-limit\":0.0,\"allow-origination\":true,\"allow-termination\":true,\"sst-enabled\":false,\"host\":null,\"port\":null,\"resolve-ruri\":false,\"diversion-rewrite-rule\":null,\"diversion-rewrite-result\":null,\"src-name-rewrite-rule\":null,\"src-name-rewrite-result\":null,\"src-rewrite-rule\":null,\"src-rewrite-result\":null,\"dst-rewrite-rule\":null,\"dst-rewrite-result\":null,\"auth-enabled\":false,\"auth-user\":null,\"auth-password\":null,\"auth-from-user\":null,\"auth-from-domain\":null,\"term-use-outbound-proxy\":false,\"term-force-outbound-proxy\":false,\"term-outbound-proxy\":null,\"term-next-hop-for-replies\":false,\"term-next-hop\":null,\"term-append-headers-req\":null,\"sdp-alines-filter-list\":null,\"ringing-timeout\":null,\"relay-options\":false,\"relay-reinvite\":false,\"relay-hold\":false,\"relay-prack\":false,\"relay-update\":false,\"suppress-early-media\":false,\"fake-180-timer\":null,\"transit-headers-from-origination\":null,\"transit-headers-from-termination\":null,\"sip-interface-name\":null,\"allow-1xx-without-to-tag\":false,\"sip-timer-b\":8000,\"dns-srv-failover-timer\":2000,\"anonymize-sdp\":true,\"proxy-media\":false,\"single-codec-in-200ok\":false,\"transparent-seqno\":false,\"transparent-ssrc\":false,\"force-symmetric-rtp\":true,\"symmetric-rtp-nonstop\":false,\"symmetric-rtp-ignore-rtcp\":false,\"force-dtmf-relay\":false,\"rtp-ping\":false,\"rtp-timeout\":30,\"filter-noaudio-streams\":false,\"rtp-relay-timestamp-aligning\":false,\"rtp-force-relay-cn\":true},\"relationships\":{\"contractor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/contractor\",\"related\":\"http://example.org/api/rest/private/gateways/10/contractor\"}},\"session-refresh-method\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/session-refresh-method\",\"related\":\"http://example.org/api/rest/private/gateways/10/session-refresh-method\"}},\"sdp-alines-filter-type\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/sdp-alines-filter-type\",\"related\":\"http://example.org/api/rest/private/gateways/10/sdp-alines-filter-type\"}},\"term-disconnect-policy\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/term-disconnect-policy\",\"related\":\"http://example.org/api/rest/private/gateways/10/term-disconnect-policy\"}},\"gateway-group\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/gateway-group\",\"related\":\"http://example.org/api/rest/private/gateways/10/gateway-group\"}},\"diversion-policy\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/diversion-policy\",\"related\":\"http://example.org/api/rest/private/gateways/10/diversion-policy\"}},\"pop\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/pop\",\"related\":\"http://example.org/api/rest/private/gateways/10/pop\"}},\"codec-group\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/codec-group\",\"related\":\"http://example.org/api/rest/private/gateways/10/codec-group\"}},\"sdp-c-location\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/sdp-c-location\",\"related\":\"http://example.org/api/rest/private/gateways/10/sdp-c-location\"}},\"sensor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/sensor\",\"related\":\"http://example.org/api/rest/private/gateways/10/sensor\"}},\"sensor-level\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/sensor-level\",\"related\":\"http://example.org/api/rest/private/gateways/10/sensor-level\"}},\"dtmf-receive-mode\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/dtmf-receive-mode\",\"related\":\"http://example.org/api/rest/private/gateways/10/dtmf-receive-mode\"}},\"dtmf-send-mode\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/dtmf-send-mode\",\"related\":\"http://example.org/api/rest/private/gateways/10/dtmf-send-mode\"}},\"transport-protocol\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/transport-protocol\",\"related\":\"http://example.org/api/rest/private/gateways/10/transport-protocol\"}},\"term-proxy-transport-protocol\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/term-proxy-transport-protocol\",\"related\":\"http://example.org/api/rest/private/gateways/10/term-proxy-transport-protocol\"}},\"orig-proxy-transport-protocol\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/orig-proxy-transport-protocol\",\"related\":\"http://example.org/api/rest/private/gateways/10/orig-proxy-transport-protocol\"}},\"rel100-mode\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateways/10/relationships/rel100-mode\",\"related\":\"http://example.org/api/rest/private/gateways/10/rel100-mode\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/gateways/10",
-        "ETag": "W/\"2449c16bab2901a050bf9e202c62697b\"",
+        "ETag": "W/\"284243e077f2d88a71d2bf18e2ea80bf\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "f10fa5a0-d612-43fd-b6b3-1521d867fc89",
-        "X-Runtime": "0.056406",
-        "Content-Length": "1997"
+        "X-Request-Id": "a775238c-2271-4ba7-a0ea-92fcfa025b72",
+        "X-Runtime": "0.100046",
+        "Content-Length": "4919"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

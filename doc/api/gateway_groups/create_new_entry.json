@@ -13,22 +13,22 @@
       "description": "Resource type (gateway-groups)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
       "description": "Name"
     },
     {
+      "required": true,
       "scope": [
         "data",
-        "attributes"
+        "relationships"
       ],
-      "required": true,
-      "name": "vendor-id",
-      "description": "Vendor id"
+      "name": "vendor",
+      "description": "Vendor"
     }
   ],
   "response_fields": [
@@ -38,11 +38,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/gateway-groups",
-      "request_body": "{\"data\":{\"type\":\"gateway-groups\",\"attributes\":{\"name\":\"name\",\"vendor-id\":45}}}",
+      "request_body": "{\"data\":{\"type\":\"gateway-groups\",\"attributes\":{\"name\":\"name\"},\"relationships\":{\"vendor\":{\"data\":{\"type\":\"contractors\",\"id\":45}}}}}",
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDIsInN1YiI6MzR9.U9bcdKuGsfkzS-IfmH3cN1-8GU62QWaJG7MiORJ80bs",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MjEsInN1YiI6NzZ9.oChzXZ6BIOAQvnBCnoC_3wtC8JiD2GmCleJrtnkxMWA",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -51,18 +51,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"15\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/15\"},\"attributes\":{\"name\":\"name\",\"vendor-id\":45}}}",
+      "response_body": "{\"data\":{\"id\":\"15\",\"type\":\"gateway-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/15\"},\"attributes\":{\"name\":\"name\"},\"relationships\":{\"vendor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/gateway-groups/15/relationships/vendor\",\"related\":\"http://example.org/api/rest/private/gateway-groups/15/vendor\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/gateway-groups/15",
-        "ETag": "W/\"ba1231561a53c07d30ffd02a5ab966e5\"",
+        "ETag": "W/\"86414fd7c5716f65de29931d501ab476\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "0d146648-5d71-4c8f-8f3f-48a501a5c171",
-        "X-Runtime": "0.034149",
-        "Content-Length": "161"
+        "X-Request-Id": "59cb9655-9a2f-4cc6-a9a9-33ab9bd27307",
+        "X-Runtime": "0.089419",
+        "Content-Length": "342"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

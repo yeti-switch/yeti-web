@@ -1,0 +1,47 @@
+{
+  "resource": "Smtp connections",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/system/smtp-connections/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/system/smtp-connections/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3NDMsInN1YiI6MTMyfQ.vyheulrElIGMqM5BpBcjue8N12pUrGI8HgiynF4P3Oc",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"smtp-connections\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/smtp-connections/3\"},\"attributes\":{\"name\":\"smtp_connection3\",\"host\":\"host\",\"port\":25,\"from-address\":\"address@email.com\",\"auth-user\":null,\"auth-password\":null,\"global\":true}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"e51d0e06821d03a9099f0b8dcaffc0b0\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "339519f8-55c1-4f66-91c9-b04232b78159",
+        "X-Runtime": "0.048473",
+        "Content-Length": "278"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "resource": "Timezones",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/system/timezones",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (timezones)"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "abbrev",
+      "description": "Abbrev"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "utc-offset",
+      "description": "Utc offset"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "is-dst",
+      "description": "Is dst"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/system/timezones",
+      "request_body": "{\"data\":{\"type\":\"timezones\",\"attributes\":{\"name\":\"name\",\"abbrev\":\"UTC\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3NDQsInN1YiI6MTM4fQ.-w-hn5onDy3Up1NENvctApHHVx_NfL3GPaFpfKtnW_8",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"2\",\"type\":\"timezones\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/timezones/2\"},\"attributes\":{\"name\":\"name\",\"abbrev\":\"UTC\",\"utc-offset\":null,\"is-dst\":null}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/system/timezones/2",
+        "ETag": "W/\"c3625510bef877b69c11758e87074849\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "f772dd89-3e29-4072-b28c-9ac7dae32182",
+        "X-Runtime": "0.047008",
+        "Content-Length": "188"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

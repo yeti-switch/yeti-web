@@ -1,0 +1,47 @@
+{
+  "resource": "Accounting profiles",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/equipment/radius/accounting-profiles/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/equipment/radius/accounting-profiles/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTQsInN1YiI6NjF9.uLXg-VOHdJbkZ2Eo77DSO_HA7BDqwDuvW7cgINnFwnw",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"accounting-profiles\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/radius/accounting-profiles/3\"},\"attributes\":{\"name\":\"profile3\",\"server\":\"server\",\"port\":1,\"secret\":\"secret\",\"timeout\":100,\"attempts\":2,\"enable-start-accounting\":false,\"enable-interim-accounting\":false,\"interim-accounting-interval\":30,\"enable-stop-accounting\":true}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"0ea0688d22e5b65ba1d9cc97da6a392d\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "7aa67e13-1ba0-457d-9e2e-a180f9bff35f",
+        "X-Runtime": "0.093216",
+        "Content-Length": "376"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

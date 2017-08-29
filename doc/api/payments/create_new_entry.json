@@ -13,11 +13,11 @@
       "description": "Resource type (payments)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "amount",
       "description": "Amount"
     },
@@ -26,17 +26,17 @@
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "account-id",
-      "description": "Account id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
       "name": "notes",
       "description": "Notes"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "account",
+      "description": "Account"
     }
   ],
   "response_fields": [
@@ -46,11 +46,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/payments",
-      "request_body": "{\"data\":{\"type\":\"payments\",\"attributes\":{\"amount\":10,\"account-id\":27}}}",
+      "request_body": "{\"data\":{\"type\":\"payments\",\"attributes\":{\"amount\":10},\"relationships\":{\"account\":{\"data\":{\"type\":\"accounts\",\"id\":27}}}}}",
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDUsInN1YiI6NDR9.WO5O6cF655xDVjXYaafSe7RwpNsDH6ogW_IVSdeTNTo",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MjUsInN1YiI6ODZ9.1mK_G6EXNnbnxXkBHMOBUDpzV-l-3yfNey6P86lFw2c",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -59,18 +59,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"payments\",\"links\":{\"self\":\"http://example.org/api/rest/private/payments/4\"},\"attributes\":{\"account-id\":27,\"amount\":\"10.0\",\"notes\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"payments\",\"links\":{\"self\":\"http://example.org/api/rest/private/payments/4\"},\"attributes\":{\"amount\":\"10.0\",\"notes\":null},\"relationships\":{\"account\":{\"links\":{\"self\":\"http://example.org/api/rest/private/payments/4/relationships/account\",\"related\":\"http://example.org/api/rest/private/payments/4/account\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/payments/4",
-        "ETag": "W/\"37e7a3b3d4d47e2cc8f301e0906b6757\"",
+        "ETag": "W/\"64c2fc851a8b2463de51b003d49d6b72\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "26ae3bdb-4876-4323-b5c6-7c70d16e8be0",
-        "X-Runtime": "0.060953",
-        "Content-Length": "163"
+        "X-Request-Id": "ae54c3ab-e9a0-40a9-9061-0de5a90c8b1c",
+        "X-Runtime": "0.073667",
+        "Content-Length": "332"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

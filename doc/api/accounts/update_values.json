@@ -19,49 +19,31 @@
       "description": "Account ID"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
       "description": "Name"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "min-balance",
       "description": "Min balance"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "max-balance",
       "description": "Max balance"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "contractor-id",
-      "description": "Contractor id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "timezone-id",
-      "description": "Timezone id"
     },
     {
       "scope": [
@@ -84,40 +66,58 @@
         "data",
         "attributes"
       ],
-      "name": "customer-invoice-period-id",
-      "description": "Customer invoice period id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "vendor-invoice-period-id",
-      "description": "Vendor invoice period id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "customer-invoice-template-id",
-      "description": "Customer invoice template id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "vendor-invoice-template-id",
-      "description": "Vendor invoice template id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
       "name": "send-invoices-to",
       "description": "Send invoices to"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "contractor",
+      "description": "Contractor"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "timezone",
+      "description": "Timezone"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "customer-invoice-period",
+      "description": "Customer invoice period"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "vendor-invoice-period",
+      "description": "Vendor invoice period"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "customer-invoice-template",
+      "description": "Customer invoice template"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "vendor-invoice-template",
+      "description": "Vendor invoice template"
     }
   ],
   "response_fields": [
@@ -131,7 +131,7 @@
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczMzUsInN1YiI6NH0.Xbr9NfjkPa1P8UVEIOWlEz1QWYrRf0lrr9lbEdSHOvk",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2ODksInN1YiI6NH0.vel7cATUOmaQ6BKm2nE-Q57Dg644JsFbUDc1NGbKWS0",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -140,17 +140,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5\"},\"attributes\":{\"name\":\"name\",\"min-balance\":\"0.0\",\"max-balance\":\"20.0\",\"contractor-id\":5,\"timezone-id\":1,\"origination-capacity\":1,\"termination-capacity\":2,\"customer-invoice-period-id\":null,\"vendor-invoice-period-id\":null,\"customer-invoice-template-id\":null,\"vendor-invoice-template-id\":null,\"send-invoices-to\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5\"},\"attributes\":{\"name\":\"name\",\"min-balance\":\"0.0\",\"max-balance\":\"20.0\",\"origination-capacity\":1,\"termination-capacity\":2,\"send-invoices-to\":null},\"relationships\":{\"contractor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5/relationships/contractor\",\"related\":\"http://example.org/api/rest/private/accounts/5/contractor\"}},\"timezone\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5/relationships/timezone\",\"related\":\"http://example.org/api/rest/private/accounts/5/timezone\"}},\"customer-invoice-period\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5/relationships/customer-invoice-period\",\"related\":\"http://example.org/api/rest/private/accounts/5/customer-invoice-period\"}},\"vendor-invoice-period\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5/relationships/vendor-invoice-period\",\"related\":\"http://example.org/api/rest/private/accounts/5/vendor-invoice-period\"}},\"customer-invoice-template\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5/relationships/customer-invoice-template\",\"related\":\"http://example.org/api/rest/private/accounts/5/customer-invoice-template\"}},\"vendor-invoice-template\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/5/relationships/vendor-invoice-template\",\"related\":\"http://example.org/api/rest/private/accounts/5/vendor-invoice-template\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
-        "ETag": "W/\"1347b26b1c1a9cb176d33844e797d770\"",
+        "ETag": "W/\"917b82b57b032c41f97c68aa5b4ee95f\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "c17f8265-5aad-4a2b-af7a-4f0ce7d73589",
-        "X-Runtime": "0.038271",
-        "Content-Length": "417"
+        "X-Request-Id": "339d97a9-5a0b-4b70-8a99-76a0e042c08f",
+        "X-Runtime": "0.093639",
+        "Content-Length": "1471"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

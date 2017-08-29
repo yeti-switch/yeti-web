@@ -13,119 +13,101 @@
       "description": "Resource type (destinations)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "enabled",
       "description": "Enabled"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "rateplan-id",
-      "description": "Rateplan id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
       "name": "next-rate",
       "description": "Next rate"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "connect-fee",
       "description": "Connect fee"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "initial-interval",
       "description": "Initial interval"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "next-interval",
       "description": "Next interval"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "dp-margin-fixed",
       "description": "Dp margin fixed"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "dp-margin-percent",
       "description": "Dp margin percent"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "rate-policy-id",
-      "description": "Rate policy id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
       "name": "initial-rate",
       "description": "Initial rate"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "asr-limit",
       "description": "Asr limit"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "acd-limit",
       "description": "Acd limit"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "short-calls-limit",
       "description": "Short calls limit"
     },
@@ -174,16 +156,34 @@
         "data",
         "attributes"
       ],
-      "name": "profit-control-mode-id",
-      "description": "Profit control mode id"
+      "name": "external-id",
+      "description": "External id"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "rateplan",
+      "description": "Rateplan"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "rate-policy",
+      "description": "Rate policy"
     },
     {
       "scope": [
         "data",
-        "attributes"
+        "relationships"
       ],
-      "name": "external-id",
-      "description": "External id"
+      "name": "profit-control-mode",
+      "description": "Profit control mode"
     }
   ],
   "response_fields": [
@@ -193,11 +193,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/destinations",
-      "request_body": "{\"data\":{\"type\":\"destinations\",\"attributes\":{\"enabled\":true,\"rateplan-id\":10,\"next-rate\":0,\"connect-fee\":0,\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":0,\"dp-margin-percent\":0,\"rate-policy-id\":1,\"initial-rate\":0}}}",
+      "request_body": "{\"data\":{\"type\":\"destinations\",\"attributes\":{\"enabled\":true,\"next-rate\":0,\"connect-fee\":0,\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":0,\"dp-margin-percent\":0,\"initial-rate\":0},\"relationships\":{\"rateplan\":{\"data\":{\"type\":\"rateplans\",\"id\":10}},\"rate-policy\":{\"data\":{\"type\":\"destination-rate-policies\",\"id\":1}}}}}",
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczMzksInN1YiI6MTl9.cRG13D_Rx5TUfG8ZS7xYkXmdXp8hsqj31zp_Ifm-6VM",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MDMsInN1YiI6MzZ9.OjsrmjJ07huauE_reJivddy65imxmJJHWEYJbByWTtw",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -206,18 +206,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/4\"},\"attributes\":{\"enabled\":true,\"rateplan-id\":10,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"rate-policy-id\":1,\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-10T15:08:59.322+07:00\",\"valid-till\":\"2022-08-10T15:08:59.322+07:00\",\"profit-control-mode-id\":null,\"external-id\":null}}}",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"destinations\",\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/4\"},\"attributes\":{\"enabled\":true,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"dp-margin-fixed\":\"0.0\",\"dp-margin-percent\":\"0.0\",\"initial-rate\":\"0.0\",\"asr-limit\":0.0,\"acd-limit\":0.0,\"short-calls-limit\":0.0,\"prefix\":\"\",\"reject-calls\":false,\"use-dp-intervals\":false,\"valid-from\":\"2017-08-29T03:21:44.000Z\",\"valid-till\":\"2022-08-29T03:21:44.001Z\",\"external-id\":null},\"relationships\":{\"rateplan\":{\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/4/relationships/rateplan\",\"related\":\"http://example.org/api/rest/private/destinations/4/rateplan\"}},\"rate-policy\":{\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/4/relationships/rate-policy\",\"related\":\"http://example.org/api/rest/private/destinations/4/rate-policy\"}},\"profit-control-mode\":{\"links\":{\"self\":\"http://example.org/api/rest/private/destinations/4/relationships/profit-control-mode\",\"related\":\"http://example.org/api/rest/private/destinations/4/profit-control-mode\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/destinations/4",
-        "ETag": "W/\"4ac0cbb7f659f436c631b1f0c636fc7f\"",
+        "ETag": "W/\"470a591f9bfc648c10acff68283696fb\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "1e0654a8-5540-4d18-933c-bb4510629cb0",
-        "X-Runtime": "0.044106",
-        "Content-Length": "580"
+        "X-Request-Id": "282d25ce-1e9c-474f-8aea-df09eb369b56",
+        "X-Runtime": "0.065563",
+        "Content-Length": "1098"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

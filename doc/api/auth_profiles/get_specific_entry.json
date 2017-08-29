@@ -1,0 +1,47 @@
+{
+  "resource": "Auth profiles",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/equipment/radius/auth-profiles/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/equipment/radius/auth-profiles/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTYsInN1YiI6NjZ9.4iQldxLLNYZThP1mIadvIMrYIveuptdYGf-5u7FMT8E",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"auth-profiles\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/radius/auth-profiles/3\"},\"attributes\":{\"name\":\"auth_profile3\",\"server\":\"server\",\"port\":1,\"secret\":\"secret\",\"reject-on-error\":true,\"timeout\":100,\"attempts\":2}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"decb26c20acba4ddb6ca0da33b5d576a\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "7d6f4ef9-4764-4278-a430-ea76d82bede4",
+        "X-Runtime": "0.168454",
+        "Content-Length": "263"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

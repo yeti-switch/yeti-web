@@ -1,0 +1,47 @@
+{
+  "resource": "Auth profiles",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/equipment/radius/auth-profiles",
+  "description": "get listing",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/equipment/radius/auth-profiles",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTYsInN1YiI6NjV9.ZbdQowo6KvKo2mghP1SsULAWqnfRdjtGoylrehon1H0",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"auth-profiles\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/radius/auth-profiles/1\"},\"attributes\":{\"name\":\"auth_profile1\",\"server\":\"server\",\"port\":1,\"secret\":\"secret\",\"reject-on-error\":true,\"timeout\":100,\"attempts\":2}},{\"id\":\"2\",\"type\":\"auth-profiles\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/radius/auth-profiles/2\"},\"attributes\":{\"name\":\"auth_profile2\",\"server\":\"server\",\"port\":1,\"secret\":\"secret\",\"reject-on-error\":true,\"timeout\":100,\"attempts\":2}}]}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"00e2d7c1535b775a7461f8aae59d37bd\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "6deb71f2-8360-46ab-91f6-50a32aad5380",
+        "X-Runtime": "0.171694",
+        "Content-Length": "520"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

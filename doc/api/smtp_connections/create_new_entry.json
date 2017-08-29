@@ -1,0 +1,113 @@
+{
+  "resource": "Smtp connections",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/system/smtp-connections",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (smtp-connections)"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "host",
+      "description": "Host"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "port",
+      "description": "Port"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "from-address",
+      "description": "From address"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-user",
+      "description": "Auth user"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "auth-password",
+      "description": "Auth password"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "global",
+      "description": "Global"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/system/smtp-connections",
+      "request_body": "{\"data\":{\"type\":\"smtp-connections\",\"attributes\":{\"name\":\"name\",\"host\":\"host\",\"port\":25,\"from-address\":\"address@email.com\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3NDMsInN1YiI6MTMzfQ.h-esQyvSMVtB4OxqzEqOaXZNCoNQLFIjUc6dUeNeLys",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"smtp-connections\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/smtp-connections/4\"},\"attributes\":{\"name\":\"name\",\"host\":\"host\",\"port\":25,\"from-address\":\"address@email.com\",\"auth-user\":null,\"auth-password\":null,\"global\":true}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/system/smtp-connections/4",
+        "ETag": "W/\"561ec4273c2e3bfbe33e1349f90cee5d\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "63e77c99-60d2-41a6-ac43-05e98feed5bb",
+        "X-Runtime": "0.063295",
+        "Content-Length": "266"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

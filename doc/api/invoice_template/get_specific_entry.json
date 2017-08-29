@@ -1,0 +1,47 @@
+{
+  "resource": "Invoice template",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/billing/invoice-template/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/billing/invoice-template/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTMsInN1YiI6MTN9.QypyCeqXvmyRzVw_9MrI_NX8GA5dlhYxmg3SgEacxoc",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"invoice-templates\",\"links\":{\"self\":\"http://example.org/api/rest/private/billing/invoice-templates/3\"},\"attributes\":{\"name\":\"invoice_template3\",\"filename\":\"filename.odt\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"db8d320a3f27fb5fa902af080506f3c8\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "b5835824-deb6-4937-b87f-c5229cc67902",
+        "X-Runtime": "0.064268",
+        "Content-Length": "197"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

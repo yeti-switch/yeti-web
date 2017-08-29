@@ -19,7 +19,7 @@
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczMzQsInN1YiI6MX0.MMBtfvuklP3xtGXkOMsOXWTn-pWtD4K7HGA5sTsQO4Q",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2ODcsInN1YiI6MX0.Q6QPD3vfsHSv5TACrR5n9ZEJW3WPxHLPhTW9fdKIXfQ",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -28,17 +28,17 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1\"},\"attributes\":{\"name\":\"account1\",\"min-balance\":\"0.0\",\"max-balance\":\"0.0\",\"contractor-id\":1,\"timezone-id\":1,\"origination-capacity\":1,\"termination-capacity\":2,\"customer-invoice-period-id\":null,\"vendor-invoice-period-id\":null,\"customer-invoice-template-id\":null,\"vendor-invoice-template-id\":null,\"send-invoices-to\":null}},{\"id\":\"2\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2\"},\"attributes\":{\"name\":\"account2\",\"min-balance\":\"0.0\",\"max-balance\":\"0.0\",\"contractor-id\":2,\"timezone-id\":1,\"origination-capacity\":1,\"termination-capacity\":2,\"customer-invoice-period-id\":null,\"vendor-invoice-period-id\":null,\"customer-invoice-template-id\":null,\"vendor-invoice-template-id\":null,\"send-invoices-to\":null}}]}",
+      "response_body": "{\"data\":[{\"id\":\"1\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1\"},\"attributes\":{\"name\":\"account1\",\"min-balance\":\"0.0\",\"max-balance\":\"0.0\",\"origination-capacity\":1,\"termination-capacity\":2,\"send-invoices-to\":null},\"relationships\":{\"contractor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1/relationships/contractor\",\"related\":\"http://example.org/api/rest/private/accounts/1/contractor\"}},\"timezone\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1/relationships/timezone\",\"related\":\"http://example.org/api/rest/private/accounts/1/timezone\"}},\"customer-invoice-period\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1/relationships/customer-invoice-period\",\"related\":\"http://example.org/api/rest/private/accounts/1/customer-invoice-period\"}},\"vendor-invoice-period\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1/relationships/vendor-invoice-period\",\"related\":\"http://example.org/api/rest/private/accounts/1/vendor-invoice-period\"}},\"customer-invoice-template\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1/relationships/customer-invoice-template\",\"related\":\"http://example.org/api/rest/private/accounts/1/customer-invoice-template\"}},\"vendor-invoice-template\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/1/relationships/vendor-invoice-template\",\"related\":\"http://example.org/api/rest/private/accounts/1/vendor-invoice-template\"}}}},{\"id\":\"2\",\"type\":\"accounts\",\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2\"},\"attributes\":{\"name\":\"account2\",\"min-balance\":\"0.0\",\"max-balance\":\"0.0\",\"origination-capacity\":1,\"termination-capacity\":2,\"send-invoices-to\":null},\"relationships\":{\"contractor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2/relationships/contractor\",\"related\":\"http://example.org/api/rest/private/accounts/2/contractor\"}},\"timezone\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2/relationships/timezone\",\"related\":\"http://example.org/api/rest/private/accounts/2/timezone\"}},\"customer-invoice-period\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2/relationships/customer-invoice-period\",\"related\":\"http://example.org/api/rest/private/accounts/2/customer-invoice-period\"}},\"vendor-invoice-period\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2/relationships/vendor-invoice-period\",\"related\":\"http://example.org/api/rest/private/accounts/2/vendor-invoice-period\"}},\"customer-invoice-template\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2/relationships/customer-invoice-template\",\"related\":\"http://example.org/api/rest/private/accounts/2/customer-invoice-template\"}},\"vendor-invoice-template\":{\"links\":{\"self\":\"http://example.org/api/rest/private/accounts/2/relationships/vendor-invoice-template\",\"related\":\"http://example.org/api/rest/private/accounts/2/vendor-invoice-template\"}}}}]}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
-        "ETag": "W/\"9fa1770a6218ba1d09bf2c02ac6e1364\"",
+        "ETag": "W/\"7812f98b95c193ed85fc24b23c74d54d\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "b3ec8829-37b3-4859-ba01-2595e0af281a",
-        "X-Runtime": "0.294936",
-        "Content-Length": "834"
+        "X-Request-Id": "7b227c13-6830-4a14-a3c8-918edd4fff7c",
+        "X-Runtime": "0.608134",
+        "Content-Length": "2942"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

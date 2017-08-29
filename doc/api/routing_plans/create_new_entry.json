@@ -13,11 +13,11 @@
       "description": "Resource type (routing-plans)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "name",
       "description": "Name"
     },
@@ -40,10 +40,10 @@
     {
       "scope": [
         "data",
-        "attributes"
+        "relationships"
       ],
-      "name": "sorting-id",
-      "description": "Sorting id"
+      "name": "sorting",
+      "description": "Sorting"
     }
   ],
   "response_fields": [
@@ -57,7 +57,7 @@
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDgsInN1YiI6NTd9.FSCoQVUTcPOZNRjup5H69-jNmNxGhCKERFfiWDxL66s",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MzUsInN1YiI6MTA4fQ.5-OteLGibvUp3GqTqAGwGcwT-OQkDbFCVh88zja1jvA",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -66,18 +66,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"routing-plans\",\"links\":{\"self\":\"http://example.org/api/rest/private/routing-plans/10\"},\"attributes\":{\"name\":\"name\",\"rate-delta-max\":\"0.0\",\"use-lnp\":false,\"sorting-id\":1}}}",
+      "response_body": "{\"data\":{\"id\":\"10\",\"type\":\"routing-plans\",\"links\":{\"self\":\"http://example.org/api/rest/private/routing-plans/10\"},\"attributes\":{\"name\":\"name\",\"rate-delta-max\":\"0.0\",\"use-lnp\":false},\"relationships\":{\"sorting\":{\"links\":{\"self\":\"http://example.org/api/rest/private/routing-plans/10/relationships/sorting\",\"related\":\"http://example.org/api/rest/private/routing-plans/10/sorting\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/routing-plans/10",
-        "ETag": "W/\"0c3413e734113562ae599ed952f175d6\"",
+        "ETag": "W/\"a38cbe8069d15ce054b075d65243d389\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "e9e090ad-e76c-4c8c-a6a1-fbe99a015b26",
-        "X-Runtime": "0.034829",
-        "Content-Length": "198"
+        "X-Request-Id": "f389f1e1-4d70-4757-8d0c-a276b04642f1",
+        "X-Runtime": "0.050928",
+        "Content-Length": "380"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

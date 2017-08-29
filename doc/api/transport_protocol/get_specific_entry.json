@@ -1,0 +1,47 @@
+{
+  "resource": "Transport protocol",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/equipment/transport-protocols/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/equipment/transport-protocols/1",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTksInN1YiI6NzF9.E800mbzqHuqt96o4-WQ7CTWfnm7ERB-A4Kf5lTb8IBU",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"1\",\"type\":\"transport-protocols\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/transport-protocols/1\"},\"attributes\":{\"name\":\"UDP\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"227288d32e7688b0be35e276b497692b\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "aa1aa36c-01b8-456f-a522-2328087971f8",
+        "X-Runtime": "0.072002",
+        "Content-Length": "163"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

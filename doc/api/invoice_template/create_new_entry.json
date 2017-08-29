@@ -1,0 +1,71 @@
+{
+  "resource": "Invoice template",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/billing/invoice-template",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (invoice-templates)"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "filename",
+      "description": "Filename"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/billing/invoice-template",
+      "request_body": "{\"data\":{\"type\":\"invoice-templates\",\"attributes\":{\"name\":\"Daily\",\"filename\":\"filename.odt\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTMsInN1YiI6MTR9.bbiYRkrT5qGqtkBHP73Xe_KdbVtuVaKRBAE06esO1MU",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"invoice-templates\",\"links\":{\"self\":\"http://example.org/api/rest/private/billing/invoice-templates/4\"},\"attributes\":{\"name\":\"Daily\",\"filename\":\"filename.odt\"}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/billing/invoice-templates/4",
+        "ETag": "W/\"3fe65cbd82e8f1a852987fb704f5aeb4\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "3366516a-7880-451d-b02f-6a0228b5593e",
+        "X-Runtime": "0.054268",
+        "Content-Length": "185"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

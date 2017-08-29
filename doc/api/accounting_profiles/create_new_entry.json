@@ -1,0 +1,139 @@
+{
+  "resource": "Accounting profiles",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/rest/private/equipment/radius/accounting-profiles",
+  "description": "create new entry",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (accounting_profiles)"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "server",
+      "description": "Server"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "port",
+      "description": "Port"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "secret",
+      "description": "Secret"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "timeout",
+      "description": "Timeout"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "attempts",
+      "description": "Attempts"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "enable-start-accounting",
+      "description": "Enable start accounting"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "enable-interim-accounting",
+      "description": "Enable interim accounting"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "interim-accounting-interval",
+      "description": "Interim accounting interval"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "enable-stop-accounting",
+      "description": "Enable stop accounting"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/rest/private/equipment/radius/accounting-profiles",
+      "request_body": "{\"data\":{\"type\":\"accounting-profiles\",\"attributes\":{\"name\":\"name\",\"server\":\"server\",\"port\":\"1\",\"secret\":\"secret\",\"timeout\":100,\"attempts\":2}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTQsInN1YiI6NjJ9.iJkaH40dCvRUlKtZd-9OTg570HXOsDzZJM3NbA_DN5w",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"4\",\"type\":\"accounting-profiles\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/radius/accounting-profiles/4\"},\"attributes\":{\"name\":\"name\",\"server\":\"server\",\"port\":1,\"secret\":\"secret\",\"timeout\":100,\"attempts\":2,\"enable-start-accounting\":false,\"enable-interim-accounting\":false,\"interim-accounting-interval\":30,\"enable-stop-accounting\":true}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "Location": "http://example.org/api/rest/private/equipment/radius/accounting-profiles/4",
+        "ETag": "W/\"3ad90f8538e54c9c40bb97475e59b8d8\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "b7d22a3f-2439-4718-818e-7bd0c3e73c12",
+        "X-Runtime": "0.105140",
+        "Content-Length": "372"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

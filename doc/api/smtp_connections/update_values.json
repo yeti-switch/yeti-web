@@ -1,0 +1,67 @@
+{
+  "resource": "Smtp connections",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/system/smtp-connections/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (smtp-connections)"
+    },
+    {
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Smtp connection ID"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/system/smtp-connections/5",
+      "request_body": "{\"data\":{\"type\":\"smtp-connections\",\"id\":5,\"attributes\":{\"name\":\"name\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3NDMsInN1YiI6MTM0fQ.8OZ1tAuUX2ROfNe_icRA3XK9q0VJZXWNbFAfD2JCdoo",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"smtp-connections\",\"links\":{\"self\":\"http://example.org/api/rest/private/system/smtp-connections/5\"},\"attributes\":{\"name\":\"name\",\"host\":\"host\",\"port\":25,\"from-address\":\"address@email.com\",\"auth-user\":null,\"auth-password\":null,\"global\":true}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"a89e4df6c8ac60391fcd9d5eb80ee3dd\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "c785405c-0a92-49c6-a5a2-ec459cd0e34f",
+        "X-Runtime": "0.052092",
+        "Content-Length": "266"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

@@ -1,6 +1,47 @@
 {
   "resources": [
     {
+      "name": "Accounting profiles",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "accounting_profiles/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/accounting-profiles",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "accounting_profiles/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/accounting-profiles/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "accounting_profiles/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/accounting-profiles",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "accounting_profiles/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/accounting-profiles/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "accounting_profiles/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/accounting-profiles/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
       "name": "Accounts",
       "explanation": null,
       "examples": [
@@ -42,6 +83,47 @@
       ]
     },
     {
+      "name": "Auth profiles",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "auth_profiles/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/auth-profiles",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "auth_profiles/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/auth-profiles/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "auth_profiles/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/auth-profiles",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "auth_profiles/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/auth-profiles/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "auth_profiles/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/radius/auth-profiles/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
       "name": "Authentication",
       "explanation": null,
       "examples": [
@@ -51,6 +133,47 @@
           "groups": "all",
           "route": "/api/rest/private/auth",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "name": "Codec groups",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "codec_groups/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/codec-groups",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "codec_groups/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/codec-groups/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "codec_groups/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/codec-groups",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "codec_groups/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/codec-groups/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "codec_groups/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/codec-groups/:id",
+          "method": "put"
         }
       ]
     },
@@ -133,6 +256,26 @@
           "groups": "all",
           "route": "/api/rest/private/customers-auths/:id",
           "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Destination rate policies",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "destination_rate_policies/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/destination-rate-policies",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "destination_rate_policies/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/destination-rate-policies/:id",
+          "method": "get"
         }
       ]
     },
@@ -260,6 +403,147 @@
       ]
     },
     {
+      "name": "Disconnect policies",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "disconnect_policies/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/disconnect-policies",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "disconnect_policies/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/disconnect-policies/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "disconnect_policies/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/disconnect-policies",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "disconnect_policies/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/disconnect-policies/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "disconnect_policies/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/disconnect-policies/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Diversion policies",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "diversion_policies/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/diversion-policies",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "diversion_policies/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/diversion-policies/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Dtmf receive modes",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "dtmf_receive_modes/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/dtmf-receive-modes",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "dtmf_receive_modes/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/dtmf-receive-modes/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Dtmf send modes",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "dtmf_send_modes/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/dtmf-send-modes",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "dtmf_send_modes/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/dtmf-send-modes/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Dump levels",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "dump_levels/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/dump-levels",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "dump_levels/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/dump-levels/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Filter types",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "filter_types/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/filter-types",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "filter_types/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/filter-types/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "name": "Gateway groups",
       "explanation": null,
       "examples": [
@@ -297,6 +581,26 @@
           "groups": "all",
           "route": "/api/rest/private/gateway-groups/:id",
           "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Gateway rel100 modes",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "gateway_rel100_modes/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/gateway-rel100-modes",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "gateway_rel100_modes/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/gateway-rel100-modes/:id",
+          "method": "get"
         }
       ]
     },
@@ -342,6 +646,108 @@
       ]
     },
     {
+      "name": "Invoice period",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "invoice_period/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-period",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "invoice_period/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-period/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "invoice_period/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-period",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "invoice_period/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-period/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "invoice_period/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-period/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Invoice template",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "invoice_template/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-template",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "invoice_template/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-template/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "invoice_template/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-template",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "invoice_template/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-template/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "invoice_template/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/billing/invoice-template/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Numberlist",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "numberlist/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/routing/numberlists",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "numberlist/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/routing/numberlists/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "name": "Payments",
       "explanation": null,
       "examples": [
@@ -364,6 +770,67 @@
           "link": "payments/get_specific_entry.json",
           "groups": "all",
           "route": "/api/rest/private/payments/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Pops",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "pops/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/pops",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "pops/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/pops/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "pops/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/pops",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "pops/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/pops/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "pops/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/pops/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Rate profit control modes",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "rate_profit_control_modes/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/routing/rate-profit-control-modes",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "rate_profit_control_modes/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/routing/rate-profit-control-modes/:id",
           "method": "get"
         }
       ]
@@ -488,6 +955,250 @@
           "groups": "all",
           "route": "/api/rest/private/routing-plans/:id",
           "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Sdp c locations",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "sdp_c_locations/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/sdp-c-locations",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "sdp_c_locations/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/sdp-c-locations/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Sensor levels",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "sensor_levels/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensor-levels",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "sensor_levels/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensor-levels/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Sensors",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "sensors/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensors",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "sensors/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensors/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "sensors/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensors",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "sensors/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensors/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "sensors/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/sensors/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Session refresh methods",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "session_refresh_methods/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/session-refresh-methods",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "session_refresh_methods/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/session-refresh-methods/:id",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "Smtp connections",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "smtp_connections/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/smtp-connections",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "smtp_connections/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/smtp-connections/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "smtp_connections/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/smtp-connections",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "smtp_connections/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/smtp-connections/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "smtp_connections/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/smtp-connections/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Sortings",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "sortings/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/sortings",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "sortings/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/sortings/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "sortings/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/sortings",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "sortings/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/sortings/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "sortings/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/sortings/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Timezones",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create new entry",
+          "link": "timezones/create_new_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/timezones",
+          "method": "post"
+        },
+        {
+          "description": "delete entry",
+          "link": "timezones/delete_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/timezones/:id",
+          "method": "delete"
+        },
+        {
+          "description": "get listing",
+          "link": "timezones/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/timezones",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "timezones/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/timezones/:id",
+          "method": "get"
+        },
+        {
+          "description": "update values",
+          "link": "timezones/update_values.json",
+          "groups": "all",
+          "route": "/api/rest/private/system/timezones/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "name": "Transport protocol",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "get listing",
+          "link": "transport_protocol/get_listing.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/transport-protocols",
+          "method": "get"
+        },
+        {
+          "description": "get specific entry",
+          "link": "transport_protocol/get_specific_entry.json",
+          "groups": "all",
+          "route": "/api/rest/private/equipment/transport-protocols/:id",
+          "method": "get"
         }
       ]
     }

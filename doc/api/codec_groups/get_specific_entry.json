@@ -1,0 +1,47 @@
+{
+  "resource": "Codec groups",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/rest/private/codec-groups/:id",
+  "description": "get specific entry",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/rest/private/codec-groups/3",
+      "request_body": null,
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE2OTUsInN1YiI6MTh9.3WwvT0qiionfdYWCe7I3rqGNXdsJtERY9kB9O0a_ypQ",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"3\",\"type\":\"codec-groups\",\"links\":{\"self\":\"http://example.org/api/rest/private/codec-groups/3\"},\"attributes\":{\"name\":\"codec_group3\"},\"relationships\":{\"codecs\":{\"links\":{\"self\":\"http://example.org/api/rest/private/codec-groups/3/relationships/codecs\",\"related\":\"http://example.org/api/rest/private/codec-groups/3/codecs\"}}}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"fc7e8a052b5374e30d55947eb645c1c0\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "ba57ba9f-ed5b-478f-bb57-4037328630ca",
+        "X-Runtime": "0.045152",
+        "Content-Length": "338"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}

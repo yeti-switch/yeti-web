@@ -13,101 +13,74 @@
       "description": "Resource type (dialpeers)"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "enabled",
       "description": "Enabled"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "routing-group-id",
-      "description": "Routing group id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
       "name": "next-rate",
       "description": "Next rate"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "connect-fee",
       "description": "Connect fee"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
-      "name": "vendor-id",
-      "description": "Vendor id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
-      "name": "account-id",
-      "description": "Account id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "required": true,
       "name": "initial-rate",
       "description": "Initial rate"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "initial-interval",
       "description": "Initial interval"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "next-interval",
       "description": "Next interval"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "valid-from",
       "description": "Valid from"
     },
     {
+      "required": true,
       "scope": [
         "data",
         "attributes"
       ],
-      "required": true,
       "name": "valid-till",
       "description": "Valid till"
     },
@@ -150,14 +123,6 @@
       ],
       "name": "asr-limit",
       "description": "Asr limit"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
-      "name": "gateway-id",
-      "description": "Gateway id"
     },
     {
       "scope": [
@@ -220,14 +185,6 @@
         "data",
         "attributes"
       ],
-      "name": "gateway-group-id",
-      "description": "Gateway group id"
-    },
-    {
-      "scope": [
-        "data",
-        "attributes"
-      ],
       "name": "force-hit-rate",
       "description": "Force hit rate"
     },
@@ -262,6 +219,49 @@
       ],
       "name": "external-id",
       "description": "External id"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "routing-group",
+      "description": "Routing group"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "vendor",
+      "description": "Vendor"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "account",
+      "description": "Account"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "gateway",
+      "description": "Gateway"
+    },
+    {
+      "scope": [
+        "data",
+        "relationships"
+      ],
+      "name": "gateway-group",
+      "description": "Gateway group"
     }
   ],
   "response_fields": [
@@ -271,11 +271,11 @@
     {
       "request_method": "POST",
       "request_path": "/api/rest/private/dialpeers",
-      "request_body": "{\"data\":{\"type\":\"dialpeers\",\"attributes\":{\"enabled\":true,\"routing-group-id\":9,\"next-rate\":0.0,\"vendor-id\":39,\"account-id\":21,\"initial-rate\":0.0,\"initial-interval\":60,\"next-interval\":60,\"valid-from\":\"2017-08-10T15:09:01.642+07:00\",\"valid-till\":\"2018-08-10T15:09:01.641+07:00\",\"gateway-group-id\":9}}}",
+      "request_body": "{\"data\":{\"type\":\"dialpeers\",\"attributes\":{\"enabled\":true,\"next-rate\":0.0,\"initial-rate\":0.0,\"initial-interval\":60,\"next-interval\":60,\"valid-from\":\"2017-08-29T10:21:48.126+07:00\",\"valid-till\":\"2018-08-29T03:21:48.126Z\"},\"relationships\":{\"routing-group\":{\"data\":{\"type\":\"routing-groups\",\"id\":9}},\"vendor\":{\"data\":{\"type\":\"contractors\",\"id\":39}},\"account\":{\"data\":{\"type\":\"accounts\",\"id\":21}},\"gateway-group\":{\"data\":{\"type\":\"gateway-groups\",\"id\":9}}}}}",
       "request_headers": {
         "Accept": "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDI5NTczNDEsInN1YiI6Mjl9.A-cKerS1M6WvzNO4TbIJxqikYNdRXz0aWhDRLtdzZCU",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MDgsInN1YiI6NDZ9.rX6NxkfrAjJCBlQO0UHi3KLqEYpdN-wJNwZV3r2QajY",
         "Host": "example.org",
         "Cookie": ""
       },
@@ -284,18 +284,18 @@
       "request_content_type": "application/vnd.api+json",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\"data\":{\"id\":\"9\",\"type\":\"dialpeers\",\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9\"},\"attributes\":{\"enabled\":true,\"routing-group-id\":9,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"vendor-id\":39,\"account-id\":21,\"initial-rate\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"valid-from\":\"2017-08-10T15:09:01.642+07:00\",\"valid-till\":\"2018-08-10T15:09:01.641+07:00\",\"prefix\":\"\",\"src-rewrite-rule\":null,\"dst-rewrite-rule\":null,\"acd-limit\":0.0,\"asr-limit\":0.0,\"gateway-id\":null,\"src-rewrite-result\":null,\"dst-rewrite-result\":null,\"locked\":false,\"priority\":100,\"exclusive-route\":false,\"capacity\":null,\"lcr-rate-multiplier\":\"1.0\",\"gateway-group-id\":9,\"force-hit-rate\":null,\"network-prefix-id\":null,\"created-at\":\"2017-08-10T15:09:01.708+07:00\",\"short-calls-limit\":1.0,\"external-id\":null},\"relationships\":{\"dialpeer-next-rates\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/dialpeer-next-rates\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/dialpeer-next-rates\"}}}}}",
+      "response_body": "{\"data\":{\"id\":\"9\",\"type\":\"dialpeers\",\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9\"},\"attributes\":{\"enabled\":true,\"next-rate\":\"0.0\",\"connect-fee\":\"0.0\",\"initial-rate\":\"0.0\",\"initial-interval\":60,\"next-interval\":60,\"valid-from\":\"2017-08-29T03:21:48.126Z\",\"valid-till\":\"2018-08-29T03:21:48.126Z\",\"prefix\":\"\",\"src-rewrite-rule\":null,\"dst-rewrite-rule\":null,\"acd-limit\":0.0,\"asr-limit\":0.0,\"src-rewrite-result\":null,\"dst-rewrite-result\":null,\"locked\":false,\"priority\":100,\"exclusive-route\":false,\"capacity\":null,\"lcr-rate-multiplier\":\"1.0\",\"force-hit-rate\":null,\"network-prefix-id\":null,\"created-at\":\"2017-08-29T03:21:48.227Z\",\"short-calls-limit\":1.0,\"external-id\":null},\"relationships\":{\"gateway\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/gateway\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/gateway\"}},\"gateway-group\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/gateway-group\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/gateway-group\"}},\"routing-group\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/routing-group\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/routing-group\"}},\"vendor\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/vendor\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/vendor\"}},\"account\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/account\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/account\"}},\"dialpeer-next-rates\":{\"links\":{\"self\":\"http://example.org/api/rest/private/dialpeers/9/relationships/dialpeer-next-rates\",\"related\":\"http://example.org/api/rest/private/dialpeers/9/dialpeer-next-rates\"}}}}}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "X-Content-Type-Options": "nosniff",
         "Content-Type": "application/vnd.api+json",
         "Location": "http://example.org/api/rest/private/dialpeers/9",
-        "ETag": "W/\"f6b7ba95d3033aac0ae2160b013562f6\"",
+        "ETag": "W/\"3f293b05c5024e0188177ca318da8808\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "81ae1079-8197-4451-99f8-4a3b20908472",
-        "X-Runtime": "0.062668",
-        "Content-Length": "1016"
+        "X-Request-Id": "8d18d626-9f47-4534-a0e3-bb39967ecc7e",
+        "X-Runtime": "0.075531",
+        "Content-Length": "1788"
       },
       "response_content_type": "application/vnd.api+json",
       "curl": null

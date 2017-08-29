@@ -1,0 +1,144 @@
+{
+  "resource": "Auth profiles",
+  "resource_explanation": null,
+  "http_method": "PUT",
+  "route": "/api/rest/private/equipment/radius/auth-profiles/:id",
+  "description": "update values",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "data",
+      "required": true,
+      "name": "type",
+      "description": "Resource type (auth-profiles)"
+    },
+    {
+      "scope": "data",
+      "required": true,
+      "name": "id",
+      "description": "Auth profile ID"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "name",
+      "description": "Name"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "server",
+      "description": "Server"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "port",
+      "description": "Port"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "secret",
+      "description": "Secret"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "timeout",
+      "description": "Timeout"
+    },
+    {
+      "required": true,
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "attempts",
+      "description": "Attempts"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "enable-start-accounting",
+      "description": "Enable start accounting"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "enable-interim-accounting",
+      "description": "Enable interim accounting"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "interim-accounting-interval",
+      "description": "Interim accounting interval"
+    },
+    {
+      "scope": [
+        "data",
+        "attributes"
+      ],
+      "name": "enable-stop-accounting",
+      "description": "Enable stop accounting"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/api/rest/private/equipment/radius/auth-profiles/5",
+      "request_body": "{\"data\":{\"type\":\"auth-profiles\",\"id\":5,\"attributes\":{\"name\":\"name\"}}}",
+      "request_headers": {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDQ1ODE3MTcsInN1YiI6Njh9.ilX9XYyR3_ftnS0QFYNo2QDuIzHAtdmvpswLPsQuVoQ",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\"data\":{\"id\":\"5\",\"type\":\"auth-profiles\",\"links\":{\"self\":\"http://example.org/api/rest/private/equipment/radius/auth-profiles/5\"},\"attributes\":{\"name\":\"name\",\"server\":\"server\",\"port\":1,\"secret\":\"secret\",\"reject-on-error\":true,\"timeout\":100,\"attempts\":2}}}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Type": "application/vnd.api+json",
+        "ETag": "W/\"d1baa8084dcfbac5286125d24ae739bd\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "1a253916-610a-49e2-b1c4-59328c77ab03",
+        "X-Runtime": "0.108209",
+        "Content-Length": "254"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}
