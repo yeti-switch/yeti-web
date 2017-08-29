@@ -3,7 +3,11 @@
 And (/^I create two destinations$/) do
   FactoryGirl.create :rate_profit_control_mode
   FactoryGirl.create :rateplan, profit_control_mode: Routing::RateProfitControlMode.last
-  FactoryGirl.create_list(:destination, 2, enabled: true, initial_rate: 2.0, rateplan: Rateplan.last)
+  FactoryGirl.create_list(:destination, 2,
+                          enabled: true,
+                          initial_rate: 2.0,
+                          rateplan: Rateplan.last,
+                          rate_policy: DestinationRatePolicy.first)
 end
 
 When (/^I click checkbox to select all records$/) do
