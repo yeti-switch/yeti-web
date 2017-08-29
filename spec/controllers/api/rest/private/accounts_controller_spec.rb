@@ -52,7 +52,7 @@ describe Api::Rest::Private::AccountsController, type: :controller do
       end
 
       let(:relationships) do
-        { timezone: wrap_relationship(:'system/timezones', 1),
+        { timezone: wrap_relationship(:'timezones', 1),
           contractor: wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
       end
 

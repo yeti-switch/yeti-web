@@ -40,10 +40,15 @@ describe Api::Rest::Private::PaymentsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'payments', attributes: attributes } }
+    before do
+      post :create, data: { type: 'payments',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
 
     context 'when attributes are valid' do
-      let(:attributes) { { amount: 10, 'account-id': account.id } }
+      let(:attributes) { { amount: 10 } }
+      let(:relationships) { { account: wrap_relationship(:accounts, create(:account).id) } }
 
       it { expect(response.status).to eq(201) }
       it { expect(Payment.count).to eq(1) }
@@ -51,6 +56,7 @@ describe Api::Rest::Private::PaymentsController, type: :controller do
 
     context 'when attributes are invalid' do
       let(:attributes) { { amount: nil } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(Payment.count).to eq(0) }

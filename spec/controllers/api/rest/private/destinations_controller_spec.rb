@@ -40,12 +40,15 @@ describe Api::Rest::Private::DestinationsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'destinations', attributes: attributes } }
+    before do
+      post :create, data: { type: 'destinations',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) do
         { prefix: 'test',
-          'rateplan-id': rateplan.id,
           enabled: true,
           'initial-interval': 60,
           'next-interval': 60,
@@ -54,8 +57,12 @@ describe Api::Rest::Private::DestinationsController, type: :controller do
           'connect-fee': 0,
           'dp-margin-fixed': 0,
           'dp-margin-percent': 0,
-          'rate-policy-id': 1
         }
+      end
+
+      let(:relationships) do
+        { rateplan:  wrap_relationship(:rateplans, create(:rateplan).id),
+          'rate-policy': wrap_relationship(:'destination-rate-policies', 1) }
       end
 
       it { expect(response.status).to eq(201) }
@@ -64,6 +71,7 @@ describe Api::Rest::Private::DestinationsController, type: :controller do
 
     context 'when attributes are invalid' do
       let(:attributes) { { prefix: 'test' } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(Destination.count).to eq(0) }
@@ -74,17 +82,22 @@ describe Api::Rest::Private::DestinationsController, type: :controller do
     let!(:destination) { create :destination, rateplan: rateplan }
     before { put :update, id: destination.to_param, data: { type: 'destinations',
                                                             id: destination.to_param,
-                                                            attributes: attributes } }
+                                                            attributes: attributes,
+                                                            relationships: relationships} }
 
     context 'when attributes are valid' do
       let(:attributes) { { prefix: 'test' } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(200) }
       it { expect(destination.reload.prefix).to eq('test') }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { prefix: 'test', 'rateplan-id': nil } }
+      let(:attributes) { { prefix: 'test' } }
+      let(:relationships) do
+        { rateplan: wrap_relationship(:'rateplans', nil) }
+      end
 
       it { expect(response.status).to eq(422) }
       it { expect(destination.reload.prefix).to_not eq('test') }

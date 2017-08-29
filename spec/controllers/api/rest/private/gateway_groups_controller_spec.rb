@@ -40,10 +40,17 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'gateway-groups', attributes: attributes } }
+    before do
+      post :create, data: { type: 'gateway-groups',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', 'vendor-id': vendor.id } }
+      let(:attributes) { { name: 'name' } }
+      let(:relationships) do
+        { vendor: wrap_relationship(:contractors, vendor.id) }
+      end
 
       it { expect(response.status).to eq(201) }
       it { expect(GatewayGroup.count).to eq(1) }
@@ -51,6 +58,7 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
 
     context 'when attributes are invalid' do
       let(:attributes) { { name: nil } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(GatewayGroup.count).to eq(0) }
@@ -61,10 +69,12 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
     let!(:gateway_group) { create :gateway_group }
     before { put :update, id: gateway_group.to_param, data: { type: 'gateway-groups',
                                                               id: gateway_group.to_param,
-                                                              attributes: attributes } }
+                                                              attributes: attributes,
+                                                              relationships: relationships} }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', 'vendor-id': vendor.id } }
+      let(:attributes) { { name: 'name' } }
+      let(:relationships) { { vendor: wrap_relationship(:contractors, vendor.id) } }
 
       it { expect(response.status).to eq(200) }
       it { expect(gateway_group.reload.name).to eq('name') }
@@ -72,6 +82,7 @@ describe Api::Rest::Private::GatewayGroupsController, type: :controller do
 
     context 'when attributes are invalid' do
       let(:attributes) { { name: nil } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(gateway_group.reload.name).to_not eq(nil) }

@@ -38,10 +38,18 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'contractors', attributes: attributes } }
+    before do
+      post :create, data: { type: 'contractors',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name', vendor: true } }
+
+      let(:relationships) do
+        { 'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id ) }
+      end
 
       it { expect(response.status).to eq(201) }
       it { expect(Contractor.count).to eq(1) }
@@ -49,6 +57,7 @@ describe Api::Rest::Private::ContractorsController, type: :controller do
 
     context 'when attributes are invalid' do
       let(:attributes) { { vendor: false, customer: false } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(Contractor.count).to eq(0) }

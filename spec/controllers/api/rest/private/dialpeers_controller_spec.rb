@@ -42,16 +42,16 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
     let(:account) { create :account, contractor: vendor }
     let(:gateway_group) { create :gateway_group, vendor: vendor }
     let(:routing_group) { create :routing_group }
-    before { post :create, data: { type: 'dialpeers', attributes: attributes } }
 
+    before do
+      post :create, data: { type: 'dialpeers',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
     context 'when attributes are valid' do
       let(:attributes) do
         {
           enabled: true,
-          'vendor-id': vendor.id,
-          'account-id': account.id,
-          'gateway-group-id': gateway_group.id,
-          'routing-group-id': routing_group.id,
           'valid-from': DateTime.now,
           'valid-till': 1.year.from_now,
           'initial-interval': 60,
@@ -62,12 +62,20 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
         }
       end
 
+      let(:relationships) do
+        { vendor: wrap_relationship(:contractors, vendor.id),
+          account: wrap_relationship(:accounts, account.id),
+          'gateway-group': wrap_relationship(:'gateway-groups', gateway_group.id),
+          'routing-group': wrap_relationship(:'routing-groups', routing_group.id) }
+      end
+
       it { expect(response.status).to eq(201) }
       it { expect(Dialpeer.count).to eq(1) }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { enabled: true, 'vendor-id': nil } }
+      let(:attributes) { { enabled: true} }
+      let(:relationships) { { vendor: wrap_relationship(:contractors, nil) } }
 
       it { expect(response.status).to eq(422) }
       it { expect(Dialpeer.count).to eq(0) }
@@ -78,17 +86,20 @@ describe Api::Rest::Private::DialpeersController, type: :controller do
     let!(:dialpeer) { create :dialpeer }
     before { put :update, id: dialpeer.to_param, data: { type: 'dialpeers',
                                                          id: dialpeer.to_param,
-                                                         attributes: attributes } }
+                                                         attributes: attributes,
+                                                         relationships: relationships} }
 
     context 'when attributes are valid' do
       let(:attributes) { { 'next-interval': 90 } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(200) }
       it { expect(dialpeer.reload.next_interval).to eq(90) }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { 'next-interval': 90, 'vendor-id': nil } }
+      let(:attributes) { { 'next-interval': 90 } }
+      let(:relationships) { { vendor: wrap_relationship(:contractors, nil) } }
 
       it { expect(response.status).to eq(422) }
       it { expect(dialpeer.reload.next_interval).to_not eq(90) }

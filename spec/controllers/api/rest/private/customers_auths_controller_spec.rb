@@ -38,7 +38,11 @@ describe Api::Rest::Private::CustomersAuthsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'customers-auths', attributes: attributes } }
+    before do
+      post :create, data: { type: 'customers-auths',
+                            attributes: attributes,
+                            relationships: relationships }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) do
@@ -46,13 +50,17 @@ describe Api::Rest::Private::CustomersAuthsController, type: :controller do
           name: 'name',
           enabled: true,
           ip: '0.0.0.0',
-          'dump-level-id': 1,
-          'diversion-policy-id': 1,
-          'customer-id': create(:contractor, customer: true).id,
-          'rateplan-id': create(:rateplan).id,
-          'routing-plan-id': create(:routing_plan).id,
-          'gateway-id': create(:gateway).id,
-          'account-id': create(:account).id
+        }
+      end
+
+      let(:relationships) do
+        { 'dump-level': wrap_relationship(:'dump-levels', 1),
+          'diversion-policy': wrap_relationship(:'diversion-policies', 1),
+          customer: wrap_relationship(:contractors, create(:contractor, customer: true).id),
+          rateplan: wrap_relationship(:rateplans, create(:rateplan).id),
+          'routing-plan': wrap_relationship(:'routing-plans', create(:routing_plan).id),
+          gateway: wrap_relationship(:gateways, create(:gateway).id),
+          account: wrap_relationship(:accounts, create(:account).id)
         }
       end
 
@@ -61,13 +69,8 @@ describe Api::Rest::Private::CustomersAuthsController, type: :controller do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) do
-        {
-          name: 'name',
-          'dump-level-id': 1,
-          'diversion-policy-id': 1
-        }
-      end
+      let(:attributes) { {  name: 'name' } }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
       it { expect(CustomersAuth.count).to eq(0) }
