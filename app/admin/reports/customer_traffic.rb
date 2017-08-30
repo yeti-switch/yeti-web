@@ -43,7 +43,7 @@ ActiveAdmin.register Report::CustomerTraffic, as: 'CustomerTraffic' do
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at, as: :date_time_range
-  filter :customer,as: :select, input_html: {class: 'chosen'}, collection: Contractor.where(customer: true)
+  filter :customer,as: :select, input_html: {class: 'chosen'}, collection: proc { Contractor.where(customer: true) }
 
 
 

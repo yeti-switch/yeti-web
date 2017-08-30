@@ -1,6 +1,0 @@
-begin;
-insert into sys.version(number,comment) values(39,'remove old CDR SP');
-
-DROP FUNCTION switch.writecdr(boolean, integer, integer, integer, boolean, integer, character varying, integer, character varying, integer, character varying, integer, character varying, integer, double precision, double precision, double precision, double precision, double precision, double precision, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer);
-commit;
-

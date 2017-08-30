@@ -81,6 +81,17 @@ describe System::Sensor do
         end
       end
 
+      context 'when mode HEPv3 encapsulation' do
+        let(:mode_id) { 3 }
+        let(:target_ip) {'192.168.0.2'}
+        let(:target_port) { nil }
+        let(:hep_capture_id) { nil }
+
+        it 'raise error' do
+          expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+        end
+      end
+
       context 'when sensor-name duplicates' do
         let(:mode_id) { 1 }
         let(:source_ip) {'192.168.0.1'}

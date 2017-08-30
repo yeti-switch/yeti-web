@@ -42,7 +42,7 @@ ActiveAdmin.register Report::VendorTraffic, as: 'VendorTraffic' do
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at , as: :date_time_range
-  filter :vendor, as: :select, input_html: {class: 'chosen'},  collection: Contractor.where(vendor: true)
+  filter :vendor, as: :select, input_html: {class: 'chosen'},  collection: proc { Contractor.where(vendor: true) }
 
 end
 

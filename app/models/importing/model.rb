@@ -20,6 +20,9 @@ class Importing::Model < ActiveAdminImport::Model
                 })
   end
 
+  def unique_columns
+    @unique_columns ||= unique_columns_proc.call
+  end
 
   def run_script
     if self.script.present?

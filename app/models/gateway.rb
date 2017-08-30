@@ -157,12 +157,15 @@ class Gateway < Yeti::ActiveRecord
 
   validate :vendor_owners_the_gateway_group
   validate :vendor_can_be_changed
+  validate :allow_termination_can_be_enabled
 
   include Yeti::ResourceStatus
 
 
   scope :locked, -> { where locked: true }
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null'}
+  scope :shared, -> { where is_shared: true }
+  scope :for_origination,->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
 
   before_validation do
     self.term_next_hop = nil if self.term_next_hop.blank?
@@ -216,13 +219,20 @@ class Gateway < Yeti::ActiveRecord
 
   protected
 
+  def allow_termination_can_be_enabled
+    if self.host.blank? and self.allow_termination==true
+      self.errors.add(:allow_termination, I18n.t('activerecord.errors.models.gateway.attributes.allow_termination.empty_host_for_termination'))
+      self.errors.add(:host, I18n.t('activerecord.errors.models.gateway.attributes.host.empty_host_for_termination'))
+    end
+  end
+
   def vendor_owners_the_gateway_group
-    self.errors.add(:gateway_group, "must be owned by selected vendor") unless self.gateway_group_id.nil? || (self.contractor_id && self.contractor_id == self.gateway_group.vendor_id)
+    self.errors.add(:gateway_group, I18n.t('activerecord.errors.models.gateway.attributes.gateway_group.wrong_owner')) unless self.gateway_group_id.nil? || (self.contractor_id && self.contractor_id == self.gateway_group.vendor_id)
   end
 
   def vendor_can_be_changed
     if contractor_id_changed?
-      self.errors.add(:contractor, "can't be changed because Gateway belongs to dialpeers") if dialpeers.any?
+      self.errors.add(:contractor, I18n.t('activerecord.errors.models.gateway.attributes.contractor.vendor_cant_be_changed')) if dialpeers.any?
     end
   end
 

@@ -19,6 +19,7 @@ ActiveAdmin.register Gateway do
                  :priority,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:contractor_name, proc { |row| row.contractor.try(:name) }],
+                 :is_shared,
                  :allow_origination, :allow_termination, :sst_enabled,
                  :origination_capacity, :termination_capacity,
                  :acd_limit, :asr_limit, :short_calls_limit,
@@ -74,6 +75,7 @@ ActiveAdmin.register Gateway do
   acts_as_batch_changeable [:enabled, :priority, :origination_capacity, :termination_capacity]
 
   scope :locked
+  scope :shared
   scope :with_radius_accounting
 
   includes :contractor, :gateway_group, :pop, :statistic, :diversion_policy,
@@ -99,6 +101,11 @@ ActiveAdmin.register Gateway do
     render text: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
   end
 
+  collection_action :for_origination do
+    @gateways = Gateway.for_origination(params[:contractor_id].to_i)
+    render text: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
+  end
+
   index do
     selectable_column
     id_column
@@ -110,7 +117,7 @@ ActiveAdmin.register Gateway do
     column :contractor do |c|
       auto_link(c.contractor, c.contractor.decorated_display_name)
     end
-
+    column :is_shared
     column :gateway_group
     column :priority
     column :pop
@@ -271,6 +278,7 @@ ActiveAdmin.register Gateway do
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :gateway_gateway_group_id)
                   }
+          f.input :is_shared
           f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
           f.input :priority
           f.input :pop, input_html: {class: 'chosen'}

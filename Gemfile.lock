@@ -26,6 +26,13 @@ GIT
     active_admin_date_range_preset (0.1.0)
 
 GIT
+  remote: git://github.com/workgena/secondbase.git
+  revision: 11801e3a915248e04408bfc99ab115b8d11bf317
+  specs:
+    secondbase (2.1.4)
+      rails (>= 4.0)
+
+GIT
   remote: git://github.com/yeti-switch/active_admin.git
   revision: 67095c3fbf42fc96bd92f430a45b5c5581571c10
   specs:
@@ -120,6 +127,9 @@ GEM
       arel (~> 6.0)
     activerecord-import (0.8.0)
       activerecord (>= 3.0)
+    activerecord-postgres-dump-schemas (0.1.0)
+      activerecord (< 5)
+      railties (< 5)
     activesupport (4.2.9)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -265,7 +275,6 @@ GEM
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
-    ipaddress (0.8.3)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -297,7 +306,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_mime (0.1.3)
+    mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
     multi_json (1.12.1)
@@ -471,11 +480,13 @@ DEPENDENCIES
   active_model_serializers (~> 0.9.7)
   activeadmin!
   activeldap
+  activerecord-postgres-dump-schemas
   annotate
   apitome (~> 0.1.0)
   better_errors
   binding_of_caller
   cancan (= 1.6.10)
+  capybara
   chosen-rails (= 1.3.0)
   coffee-rails (~> 4.0)
   cucumber-rails
@@ -489,7 +500,6 @@ DEPENDENCIES
   excelinator!
   factory_girl_rails
   font-awesome-rails
-  ipaddress
   jquery-rails (= 3.1.2)
   jquery-tablesorter
   jquery-ui-rails (= 5.0.3)
@@ -509,6 +519,7 @@ DEPENDENCIES
   sass-globbing
   sass-rails (~> 4.0.0)
   selenium-webdriver (~> 2.53)
+  secondbase!
   sourcify
   sprockets (= 2.11.0)
   syslog-logger
@@ -521,4 +532,4 @@ DEPENDENCIES
   zip-zip
 
 BUNDLED WITH
-   1.15.1
+   1.15.3

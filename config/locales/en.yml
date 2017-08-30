@@ -17,6 +17,27 @@ en:
     importing:
       pending: "Please finish your previous import session."
 
+  formtastic:
+    hints:
+      gateway:
+        is_shared: "Allows gateway to be used as origination equipment for any customer"
+      system_sensor:
+        hep_capture_id: "Leave it empty to use YETI Node ID as HEP_CAPTURE_ID"
+
+  activerecord:
+    errors:
+      models:
+        gateway:
+          attributes:
+            allow_termination:
+              empty_host_for_termination: "can't be enabled when host is empty"
+            host:
+              empty_host_for_termination: "should be specified to allow termination"
+            gateway_group:
+              wrong_owner: "must be owned by selected vendor"
+            contractor:
+              vendor_cant_be_changed: "can't be changed because Gateway belongs to dialpeers"
+
 
   hints:
     registrations:

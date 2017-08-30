@@ -4,7 +4,7 @@ development: &default
   database: yeti_dev
   pool: 5
   username: postgres
-  password: password
+  password:
   host: 127.0.0.1
   schema_search_path: >
     gui, public, switch,
@@ -13,22 +13,23 @@ development: &default
   port: 5432
   #min_messages: warning
 
-development_cdr: &default_cdr
-  adapter: postgresql
-  encoding: unicode
-  database: yeti_cdr_dev
-  pool: 5
-  username: postgres
-  password: password
-  host: 127.0.0.1
-  schema_search_path: 'cdr, reports, billing'
-  port: 5432
-  #min_messages: warning
-
 test:
   <<: *default
   database: yeti_test
 
-test_cdr:
-  <<: *default_cdr
-  database: yeti_cdr_test
+secondbase:
+  development: &default_cdr
+    adapter: postgresql
+    encoding: unicode
+    database: yeti_cdr_dev
+    pool: 5
+    username: postgres
+    password:
+    host: 127.0.0.1
+    schema_search_path: 'cdr, reports, billing'
+    port: 5432
+    #min_messages: warning
+
+  test:
+    <<: *default_cdr
+    database: yeti_cdr_test

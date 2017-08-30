@@ -68,8 +68,11 @@ class Yeti::ActiveRecord < ActiveRecord::Base
     fetch_sp_val("SELECT pg_size_pretty(pg_database_size(current_database()))")
   end
 
-  DB_VER=db_version
+  DB_VER = LazyObject.new { db_version }
   ROUTING_SCHEMA="switch12"
+
+  PG_MAX_INT = 2147483647
+  PG_MIN_INT = 2147483647
 
   PG_MAX_SMALLINT = 32767
   PG_MIN_SMALLINT = -32768

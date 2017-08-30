@@ -17,6 +17,7 @@ ActiveAdmin.register CustomersAuth do
                  [:ip, proc {|row| row.raw_ip}],
                  [:pop_name, proc { |row| row.pop.try(:name) || "" }],
                  :src_prefix, :dst_prefix,
+                 :min_dst_number_length, :max_dst_number_length,
                  :uri_domain, :from_domain, :to_domain,
                  :x_yeti_auth,
                  [:customer_name, proc { |row| row.customer.try(:name) }],
@@ -51,8 +52,11 @@ ActiveAdmin.register CustomersAuth do
                 :dst_rewrite_result,
                 :dst_numberlist_id, :src_numberlist_id,
                 :dump_level_id, :capacity, :allow_receive_rate_limit,
-                :send_billing_information, :ip, :pop_id, :src_prefix,
-                :dst_prefix, :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
+                :send_billing_information,
+                :ip, :pop_id,
+                :src_prefix, :dst_prefix,
+                :min_dst_number_length, :max_dst_number_length,
+                :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
                 :radius_auth_profile_id,
                 :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
                 :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
@@ -105,6 +109,9 @@ ActiveAdmin.register CustomersAuth do
     column :pop
     column :src_prefix
     column :dst_prefix
+    column :dst_number_length do |c|
+      c.min_dst_number_length==c.max_dst_number_length ? "#{c.min_dst_number_length}" : "#{c.min_dst_number_length}..#{c.max_dst_number_length}"
+    end
     column :uri_domain
     column :from_domain
     column :to_domain
@@ -192,7 +199,7 @@ ActiveAdmin.register CustomersAuth do
                   input_html: {
                       class: 'chosen',
                       onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :customers_auth_account_id) +
-                          remote_chosen_request(:get, with_contractor_gateways_path, {contractor_id: "$(this).val()"}, :customers_auth_gateway_id)
+                          remote_chosen_request(:get, for_origination_gateways_path, {contractor_id: "$(this).val()"}, :customers_auth_gateway_id)
                   }
           f.input :account, collection: (f.object.customer.nil? ? [] : f.object.customer.accounts),
                   include_blank: true,
@@ -222,10 +229,12 @@ ActiveAdmin.register CustomersAuth do
 
         f.inputs "Match conditions" do
           f.input :transport_protocol, as: :select, include_blank: "Any"
-          f.input :ip
+          f.input :ip , input_html: { value: f.object.raw_ip }  #dirty hack to display address mask on edit form
           f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
           f.input :src_prefix
           f.input :dst_prefix
+          f.input :min_dst_number_length
+          f.input :max_dst_number_length
           f.input :uri_domain
           f.input :from_domain
           f.input :to_domain
@@ -304,6 +313,8 @@ ActiveAdmin.register CustomersAuth do
             row :pop
             row :src_prefix
             row :dst_prefix
+            row :min_dst_number_length
+            row :max_dst_number_length
             row :uri_domain
             row :from_domain
             row :to_domain

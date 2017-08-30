@@ -1,7 +1,6 @@
 class Cdr::Base < Yeti::ActiveRecord
   self.abstract_class = true
-  establish_connection "#{Rails.env}_cdr".to_sym
+  establish_connection SecondBase.config
 
-
-  DB_VER = db_version
+  DB_VER = LazyObject.new { db_version }
 end

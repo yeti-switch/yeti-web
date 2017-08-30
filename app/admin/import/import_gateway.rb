@@ -41,6 +41,7 @@ ActiveAdmin.register Importing::Gateway do
         auto_link(row.contractor, row.contractor_name)
       end
     end
+    column :is_shared
 
     column :priority
 
