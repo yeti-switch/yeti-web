@@ -35,7 +35,7 @@ When (/^I open variables.css.scss file and override variable "(.*?)"$/) do |vari
 end
 
 Then (/^The page text should be blue$/) do
-  page.evaluate_script("$('.footer p').css('color')").should == 'rgb(0, 0, 255)'
+  expect(page.evaluate_script("$('.footer p').css('color')")).to eq 'rgb(0, 0, 255)'
 end
 
 # change logo src scenario
@@ -63,5 +63,5 @@ And ("Reinitialize ActiveAdmin") do
 end
 
 Then (/^The title image src should be "(.*?)"$/) do |src|
-  page.evaluate_script("$('img#site_title_image').attr('src')").should == src
+  expect(page.evaluate_script("$('img#site_title_image').attr('src')")).to eq src
 end
