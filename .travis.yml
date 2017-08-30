@@ -6,6 +6,9 @@ services:
   - postgresql
 
 addons:
+  artifacts:
+    paths:
+    - $(ls tmp/capybara/*.html tmp/capybara/*.png | tr "\n" ":")
   postgresql: "9.4"
 
 before_install:

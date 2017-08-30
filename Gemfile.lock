@@ -166,6 +166,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.17)
+      capybara (>= 1.0, < 3)
+      launchy
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
     chosen-rails (1.3.0)
@@ -174,6 +177,7 @@ GEM
       railties (>= 3.0)
       sass-rails (>= 3.2)
     chunky_png (1.3.3)
+    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -297,6 +301,8 @@ GEM
       jwt (~> 1.5)
       rails (>= 4.2)
     kramdown (1.14.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     libv8 (3.16.14.7)
     locale (2.1.0)
     loofah (2.0.3)
@@ -324,6 +330,10 @@ GEM
       activesupport (>= 3.0, < 5.0)
     parallel (1.3.4)
     pg (0.18.1)
+    poltergeist (1.16.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     public_suffix (2.0.5)
@@ -460,6 +470,9 @@ GEM
     warden (1.2.7)
       rack (>= 1.0)
     websocket (1.2.4)
+    websocket-driver (0.6.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     xdan-datetimepicker-rails (2.4.3)
       jquery-rails
       rails (>= 3.2.16)
@@ -487,6 +500,7 @@ DEPENDENCIES
   binding_of_caller
   cancan (= 1.6.10)
   capybara
+  capybara-screenshot
   chosen-rails (= 1.3.0)
   coffee-rails (~> 4.0)
   cucumber-rails
@@ -510,6 +524,7 @@ DEPENDENCIES
   paper_trail (~> 3.0.6)
   parallel
   pg
+  poltergeist
   quiet_assets
   rails (~> 4.2.9)
   ransack (~> 1.4.0)

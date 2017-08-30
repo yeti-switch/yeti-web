@@ -9,7 +9,7 @@ Given(/^A new admin user with username "(.*?)"$/) do |username|
 end
 
 Given(/^I signed in as admin user with username "(.*?)"$/) do |username|
-  visit "login"
+  visit "/login"
   sleep 1
   within 'div#login' do
     find(:css, "input[type='text']").set(username)

@@ -83,13 +83,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'cucumber-rails', :require => false
   gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
+
 gem 'unicorn-worker-killer'
 gem 'apitome', '~> 0.1.0'
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'cucumber-rails', :require => false
+  gem 'poltergeist'
 end
