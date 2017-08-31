@@ -36933,6 +36933,7 @@ INSERT INTO sensor_levels VALUES (3, 'Signaling+RTP');
 
 INSERT INTO sensor_modes VALUES (1, 'IP-IP encapsulation');
 INSERT INTO sensor_modes VALUES (2, 'IP-Ethernet encapsulation');
+INSERT INTO sensor_modes VALUES (3, 'HEPv3');
 
 
 --

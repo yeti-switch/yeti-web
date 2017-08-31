@@ -17,12 +17,11 @@ Environment=RAILS_ENV=production
 Environment=RACK_ENV=production
 Environment=RAKE_ENV=production
 Environment=BUNDLE_GEMFILE=/home/yeti-web/pgq-processors/Gemfile
-Environment=GEM_HOME=/home/yeti-web/.gem
-Environment=GEM_PATH=/home/yeti-web/.gem:/home/yeti-web/.bundle_gem
+Environment=GEM_PATH=/home/yeti-web/pgq-processors/vendor/bundler
 
 WorkingDirectory=/home/yeti-web/pgq-processors
 RuntimeDirectory=yeti-cdr-billing
-ExecStart=/usr/bin/ruby /home/yeti-web/.gem/bin/bundle exec rake pgq:worker processor=%i pid_file=/run/yeti-cdr-billing/%i.pid config_file=/home/yeti-web/config/pgq_processors.yml
+ExecStart=/usr/bin/ruby /home/yeti-web/pgq-processors/vendor/bundler/bin/bundle exec rake pgq:worker processor=%i pid_file=/run/yeti-cdr-billing/%i.pid config_file=/home/yeti-web/config/pgq_processors.yml
 PIDFile=/run/yeti-cdr-billing/%i.pid
 
 Type=simple

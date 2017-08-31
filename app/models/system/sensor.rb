@@ -28,7 +28,7 @@ class System::Sensor < Yeti::ActiveRecord
             format: { with: /\A\z|\A((0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\.){3}(0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\z/ }
 
   validates :target_ip,
-            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_IP } },
+            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_IP or sensor.mode_id.to_i == System::SensorMode::HEPv3 } },
             format: { with: /\A\z|\A((0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\.){3}(0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\z/ }
 
   validates :source_interface,
@@ -37,6 +37,12 @@ class System::Sensor < Yeti::ActiveRecord
   validates :target_mac,
             presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_ETHERNET } },
             format: { with: /\A\z|\A(([0-9A-Fa-f]{2})\-){5}(([0-9A-Fa-f]{2}))$|^(([0-9A-Fa-f]{2})\:){5}(([0-9A-Fa-f]{2}))\z/ }
+
+  validates_numericality_of :target_port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
+  validates :target_port,
+            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::HEPv3 } }
+
+  validates_numericality_of :hep_capture_id, greater_than_or_equal_to: 0, less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_INT, allow_nil: true, only_integer: true
 
   before_save :on_save_change_empty_to_null
 

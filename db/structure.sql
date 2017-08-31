@@ -18740,7 +18740,7 @@ $$;
 -- Name: load_sensor(); Type: FUNCTION; Schema: switch12; Owner: -
 --
 
-CREATE FUNCTION load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_source_ip inet)
+CREATE FUNCTION load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -18753,6 +18753,8 @@ BEGIN
           target_mac macaddr,
           use_routing,
           target_ip,
+          target_port,
+          hep_capture_id,
           source_ip from sys.sensors;
 END;
 $$;
@@ -48773,7 +48775,9 @@ CREATE TABLE sensors (
     target_mac macaddr,
     use_routing boolean NOT NULL,
     target_ip inet,
-    source_ip inet
+    source_ip inet,
+    target_port integer,
+    hep_capture_id integer
 );
 
 
@@ -52739,10 +52743,11 @@ ALTER TABLE ONLY sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151442');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20170825100629');
 

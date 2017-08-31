@@ -5,7 +5,7 @@ gem 'pg'
 gem 'rails', '~> 4.2.9'
 gem 'responders', '~> 2.2.0'
 gem 'activerecord-postgres-dump-schemas' # TODO: deprecated for Rails 5
-gem 'secondbase', github: 'workgena/secondbase'
+gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'devise', '~> 3.5.10'
@@ -85,7 +85,6 @@ group :development, :test do
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
 gem 'unicorn-worker-killer'
-gem 'ipaddress'
 gem 'apitome', '~> 0.1.0'
 
 group :test do
