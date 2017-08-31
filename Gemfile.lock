@@ -73,6 +73,16 @@ GIT
       jrpc (>= 0.4.6)
 
 GIT
+  remote: https://github.com/nsarno/knock.git
+  revision: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
+  ref: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
+  specs:
+    knock (2.1.1)
+      bcrypt (~> 3.1)
+      jwt (~> 1.5)
+      rails (>= 4.2)
+
+GIT
   remote: https://github.com/yeti-switch/secondbase.git
   revision: 11801e3a915248e04408bfc99ab115b8d11bf317
   specs:
@@ -155,6 +165,7 @@ GEM
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.3)
+    byebug (9.1.0)
     cancan (1.6.10)
     capybara (2.15.1)
       addressable
@@ -297,10 +308,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    knock (2.1.1)
-      bcrypt (~> 3.1)
-      jwt (~> 1.5)
-      rails (>= 4.2)
     kramdown (1.14.0)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -498,6 +505,7 @@ DEPENDENCIES
   apitome (~> 0.1.0)
   better_errors
   binding_of_caller
+  byebug
   cancan (= 1.6.10)
   capybara
   capybara-screenshot
@@ -518,7 +526,7 @@ DEPENDENCIES
   jquery-tablesorter
   jquery-ui-rails (= 5.0.3)
   jsonapi-resources (~> 0.9.1.beta1)
-  knock (~> 2.1.1)
+  knock!
   net-ldap (~> 0.3.1)
   novus-nvd3-rails!
   odf-report!
@@ -548,4 +556,4 @@ DEPENDENCIES
   zip-zip
 
 BUNDLED WITH
-   1.15.3
+   1.15.4

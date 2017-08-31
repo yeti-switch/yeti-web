@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: customers_auth
+# Table name: class4.customers_auth
 #
 #  id                               :integer          not null, primary key
 #  customer_id                      :integer          not null
@@ -47,7 +47,7 @@
 #
 
 class CustomersAuth < Yeti::ActiveRecord
-  self.table_name = 'customers_auth'
+  self.table_name = 'class4.customers_auth'
 
   belongs_to :customer, -> { where customer: true }, class_name: 'Contractor', foreign_key: :customer_id
 
@@ -63,6 +63,8 @@ class CustomersAuth < Yeti::ActiveRecord
   belongs_to :radius_auth_profile, class_name: Equipment::Radius::AuthProfile, foreign_key: :radius_auth_profile_id
   belongs_to :radius_accounting_profile, class_name: Equipment::Radius::AccountingProfile, foreign_key: :radius_accounting_profile_id
   belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+
+  has_many :destinations, through: :rateplan
 
   has_paper_trail class_name: 'AuditLogItem'
 

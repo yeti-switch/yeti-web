@@ -46,9 +46,15 @@ module ApplicationHelper
           '#{path}',
           { #{params.collect { |p| "#{p[0]}: #{p[1]}" }.join(', ')} },
           function(data) {
-            var target = $(#{target_selector});
+            var target = $(#{target_selector}),
+                prompt = '#{prompt}';
             if ( target.is( 'select' ) ) {
-              target.html('<option value=\"\">#{prompt}</option>'+ data);
+              var options_html = '';
+              if ( prompt ) {
+                options_html += '<option value=\"\">' + prompt + '</option>';
+              }
+              options_html += data;
+              target.html(options_html);
             } else {
               target.val(data);
             }

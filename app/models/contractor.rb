@@ -17,8 +17,10 @@ class Contractor < ActiveRecord::Base
   has_many :gateways, dependent: :restrict_with_error
   has_many :gateway_groups, foreign_key: :vendor_id, dependent: :restrict_with_error
   has_many :customers_auths, foreign_key: :customer_id, dependent: :restrict_with_error
+  has_many :rateplans, through: :customers_auths
   has_many :accounts, dependent: :restrict_with_error
   has_many :contacts, class_name: 'Billing::Contact', foreign_key: 'contractor_id', dependent: :delete_all
+  has_many :api_access, class_name: 'System::ApiAccess', foreign_key: 'customer_id', dependent: :destroy
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection'
 
   has_paper_trail class_name: 'AuditLogItem'
@@ -52,4 +54,4 @@ class Contractor < ActiveRecord::Base
   end
 
 end
-  
+
