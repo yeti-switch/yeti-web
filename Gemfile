@@ -55,6 +55,7 @@ gem 'jquery-ui-rails', '5.0.3'
 gem 'chosen-rails', '1.3.0'
 gem 'jquery-tablesorter'
 gem 'font-awesome-rails'
+gem 'sass-globbing'
 
 # Server Tools
 gem 'delayed_job_active_record'
@@ -82,11 +83,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
+
 gem 'unicorn-worker-killer'
 gem 'apitome', '~> 0.1.0'
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'cucumber-rails', :require => false
+  gem 'poltergeist'
 end

@@ -6,12 +6,17 @@ services:
   - postgresql
 
 addons:
+  artifacts:
+    paths:
+    - $(ls tmp/capybara/*.html tmp/capybara/*.png | tr "\n" ":")
   postgresql: "9.4"
 
 before_install:
   - sudo apt-get install postgresql-9.4-prefix postgresql-9.4-pgq3
   - sudo /etc/init.d/postgresql stop
   - sudo /etc/init.d/postgresql start 9.4
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 before_script:
   - cp config/database.example.yml config/database.yml
@@ -19,5 +24,8 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
   - RAILS_ENV=test bundle exec rake db:seed
 
-script:
-  - bundle exec rspec
+jobs:
+  include:
+    - stage: test
+      script: bundle exec rspec
+    - script: bundle exec cucumber

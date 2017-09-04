@@ -124,5 +124,3 @@ class AdminUser < ActiveRecord::Base
     end
   end
 end
-
-
