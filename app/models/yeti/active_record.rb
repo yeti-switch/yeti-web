@@ -4,7 +4,7 @@ class Yeti::ActiveRecord < ActiveRecord::Base
 
 
   def self.db_version
-    self.fetch_sp_val("select max(number) from sys.version")
+    self.fetch_sp_val("select max(version) from public.schema_migrations")
   end
 
 

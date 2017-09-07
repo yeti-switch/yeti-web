@@ -4332,37 +4332,6 @@ CREATE TABLE config (
 );
 
 
---
--- Name: version; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
---
-
-CREATE TABLE version (
-    id bigint NOT NULL,
-    number integer NOT NULL,
-    apply_date timestamp with time zone DEFAULT now() NOT NULL,
-    comment character varying
-);
-
-
---
--- Name: version_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE version_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: version_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE version_id_seq OWNED BY version.id;
-
-
 SET search_path = billing, pg_catalog;
 
 --
@@ -4714,13 +4683,6 @@ SET search_path = sys, pg_catalog;
 --
 
 ALTER TABLE ONLY cdr_tables ALTER COLUMN id SET DEFAULT nextval('cdr_tables_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY version ALTER COLUMN id SET DEFAULT nextval('version_id_seq'::regclass);
 
 
 SET search_path = billing, pg_catalog;
@@ -5157,22 +5119,6 @@ ALTER TABLE ONLY config
     ADD CONSTRAINT config_pkey PRIMARY KEY (id);
 
 
---
--- Name: version_number_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY version
-    ADD CONSTRAINT version_number_key UNIQUE (number);
-
-
---
--- Name: version_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY version
-    ADD CONSTRAINT version_pkey PRIMARY KEY (id);
-
-
 SET search_path = billing, pg_catalog;
 
 --
@@ -5465,5 +5411,5 @@ ALTER TABLE ONLY config
 
 SET search_path TO cdr, reports, billing;
 
-
+INSERT INTO public.schema_migrations (version) VALUES ('20170907204350');
 
