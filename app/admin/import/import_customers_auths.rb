@@ -91,19 +91,19 @@ ActiveAdmin.register Importing::CustomersAuth do
       end
     end
 
-    column :dst_blacklist, sortable: :dst_blacklist_name do |row|
-      if row.dst_blacklist.blank?
-        row.dst_blacklist_name
+    column :dst_numberlist, sortable: :dst_numberlist_name do |row|
+      if row.dst_numberlist.blank?
+        row.dst_numberlist_name
       else
-        auto_link(row.dst_blacklist, row.dst_blacklist_name)
+        auto_link(row.dst_numberlist, row.dst_numberlist_name)
       end
     end
 
-    column :src_blacklist, sortable: :src_blacklist_name do |row|
-      if row.src_blacklist.blank?
-        row.src_blacklist_name
+    column :src_numberlist, sortable: :src_numberlist_name do |row|
+      if row.src_numberlist.blank?
+        row.src_numberlist_name
       else
-        auto_link(row.src_blacklist, row.src_blacklist_name)
+        auto_link(row.src_numberlist, row.src_numberlist_name)
       end
     end
 
