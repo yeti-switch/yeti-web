@@ -1,6 +1,6 @@
 Yeti::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
-  post 'api/rest/private/auth', to: 'api/rest/private/auth#create'
+  post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
@@ -48,21 +48,57 @@ Yeti::Application.routes.draw do
           api.resources :nodes, only: [:index]
         end
 
-        namespace :private do
-          api.resources :accounts, only: [:index, :show, :update, :destroy, :create]
-          api.resources :contractors, only: [:index, :show, :update, :destroy, :create]
-          api.resources :dialpeers, only: [:index, :show, :update, :destroy, :create] do
-            api.resources :dialpeer_next_rates, only: [:index, :show, :update, :destroy, :create], controller: :dialpeer_next_rates
-          end
-          api.resources :gateways, only: [:index, :show, :update, :destroy, :create]
-          api.resources :gateway_groups, only: [:index, :show, :update, :destroy, :create]
-          api.resources :routing_groups, only: [:index, :show, :update, :destroy, :create]
-          api.resources :routing_plans, only: [:index, :show, :update, :destroy, :create]
-          api.resources :rateplans, only: [:index, :show, :update, :destroy, :create]
-          api.resources :destinations, only: [:index, :show, :update, :destroy, :create]
-          api.resources :customers_auths, only: [:index, :show, :update, :destroy, :create]
+        namespace :admin do
+          jsonapi_resources :accounts
+          jsonapi_resources :contractors
+          jsonapi_resources :customers_auths
+          jsonapi_resources :destinations
+          jsonapi_resources :dialpeers
+          jsonapi_resources :dialpeer_next_rates
+          jsonapi_resources :gateways
+          jsonapi_resources :gateway_groups
+          jsonapi_resources :payments, except: [:update, :destroy]
+          jsonapi_resources :rateplans
+          jsonapi_resources :routing_groups
+          jsonapi_resources :routing_plans
+          jsonapi_resources :codec_groups
+          jsonapi_resources :destination_rate_policies
+          jsonapi_resources :disconnect_policies
+          jsonapi_resources :diversion_policies
+          jsonapi_resources :dump_levels
+          jsonapi_resources :filter_types
+          jsonapi_resources :pops
+          jsonapi_resources :sdp_c_locations
+          jsonapi_resources :session_refresh_methods
+          jsonapi_resources :sortings
 
-          api.resources :payments, only: [:index, :show, :create]
+          namespace :billing do
+            jsonapi_resources :invoice_period
+            jsonapi_resources :invoice_template
+          end
+
+          namespace :system do
+            jsonapi_resources :timezones
+            jsonapi_resources :dtmf_receive_modes
+            jsonapi_resources :dtmf_send_modes
+            jsonapi_resources :sensor_levels
+            jsonapi_resources :sensors
+            jsonapi_resources :smtp_connections
+          end
+
+          namespace :equipment do
+            jsonapi_resources :gateway_rel100_modes
+            jsonapi_resources :transport_protocols
+            namespace :radius do
+              jsonapi_resources :accounting_profiles
+              jsonapi_resources :auth_profiles
+            end
+          end
+
+          namespace :routing do
+            jsonapi_resources :numberlists
+            jsonapi_resources :rate_profit_control_modes
+          end
         end
       end
     end
