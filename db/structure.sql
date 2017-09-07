@@ -45982,10 +45982,10 @@ CREATE TABLE import_customers_auth (
     src_name_rewrite_result character varying,
     src_name_rewrite_rule character varying,
     error_string character varying,
-    dst_blacklist_id integer,
-    dst_blacklist_name character varying,
-    src_blacklist_id integer,
-    src_blacklist_name character varying,
+    dst_numberlist_id integer,
+    dst_numberlist_name character varying,
+    src_numberlist_id integer,
+    src_numberlist_name character varying,
     allow_receive_rate_limit boolean DEFAULT false NOT NULL,
     send_billing_information boolean DEFAULT false NOT NULL,
     routing_plan_id integer,
@@ -52750,4 +52750,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151442');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170825100629');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20170907201109');
 
