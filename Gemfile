@@ -5,7 +5,7 @@ gem 'pg'
 gem 'rails', '~> 4.2.9'
 gem 'responders', '~> 2.2.0'
 gem 'activerecord-postgres-dump-schemas' # TODO: deprecated for Rails 5
-gem 'secondbase', github: 'workgena/secondbase'
+gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'devise', '~> 3.5.10'
@@ -32,7 +32,7 @@ gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 gem 'excelinator', github: 'livingsocial/excelinator'
 
 # REST API
-gem 'active_model_serializers', '~> 0.9.7'
+gem 'jsonapi-resources', '~> 0.9.1.beta1'
 
 # gem 'activeadmin_async_export'
 
@@ -83,13 +83,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'cucumber-rails', :require => false
   gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
+
 gem 'unicorn-worker-killer'
 gem 'apitome', '~> 0.1.0'
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'cucumber-rails', :require => false
+  gem 'poltergeist'
 end

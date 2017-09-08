@@ -45982,10 +45982,10 @@ CREATE TABLE import_customers_auth (
     src_name_rewrite_result character varying,
     src_name_rewrite_rule character varying,
     error_string character varying,
-    dst_blacklist_id integer,
-    dst_blacklist_name character varying,
-    src_blacklist_id integer,
-    src_blacklist_name character varying,
+    dst_numberlist_id integer,
+    dst_numberlist_name character varying,
+    src_numberlist_id integer,
+    src_numberlist_name character varying,
     allow_receive_rate_limit boolean DEFAULT false NOT NULL,
     send_billing_information boolean DEFAULT false NOT NULL,
     routing_plan_id integer,
@@ -48867,37 +48867,6 @@ CREATE SEQUENCE timezones_id_seq
 ALTER SEQUENCE timezones_id_seq OWNED BY timezones.id;
 
 
---
--- Name: version; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
---
-
-CREATE TABLE version (
-    id bigint NOT NULL,
-    number integer NOT NULL,
-    apply_date timestamp with time zone DEFAULT now() NOT NULL,
-    comment character varying
-);
-
-
---
--- Name: version_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE version_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: version_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE version_id_seq OWNED BY version.id;
-
-
 SET search_path = billing, pg_catalog;
 
 --
@@ -49716,13 +49685,6 @@ ALTER TABLE ONLY smtp_connections ALTER COLUMN id SET DEFAULT nextval('smtp_conn
 --
 
 ALTER TABLE ONLY timezones ALTER COLUMN id SET DEFAULT nextval('timezones_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY version ALTER COLUMN id SET DEFAULT nextval('version_id_seq'::regclass);
 
 
 SET search_path = billing, pg_catalog;
@@ -51705,22 +51667,6 @@ ALTER TABLE ONLY timezones
     ADD CONSTRAINT timezones_pkey PRIMARY KEY (id);
 
 
---
--- Name: version_number_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY version
-    ADD CONSTRAINT version_number_key UNIQUE (number);
-
-
---
--- Name: version_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY version
-    ADD CONSTRAINT version_pkey PRIMARY KEY (id);
-
-
 SET search_path = class4, pg_catalog;
 
 --
@@ -52750,4 +52696,8 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151442');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170825100629');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20170907201109');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20170907203538');
 

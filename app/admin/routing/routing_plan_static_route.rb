@@ -72,7 +72,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   #   resource.routing_plan_id = from[:routing_plan_id_eq] if from.any?
   # end
 
-  action_item do
+  action_item :batch_create do
     link_to("Batch create",new_routing_routing_plan_static_route_batch_creator_path())
   end
 
