@@ -34,7 +34,7 @@ all_env:
 	@gem install --install-dir vendor/bundler bundler
 
 	@$(info:msg=install/update gems)
-	@$(bundle_bin) install --jobs=4 --frozen --deployment --binstubs
+	@$(bundle_bin) install --jobs=4 --frozen --deployment --binstubs --without development test
 	
 	@$(info:msg=generating bin/delayed_job)
 	@$(bundle_bin) exec rails generate delayed_job
