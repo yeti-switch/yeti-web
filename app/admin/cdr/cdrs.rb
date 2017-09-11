@@ -326,6 +326,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         end
         column :customer_invoice_id
         column :vendor_invoice_id
+
+        column :pai_in
+        column :ppi_in
+        column :privacy_in
+        column :rpid_in
+        column :rpid_privacy_in
+        column :pai_out
+        column :ppi_out
+        column :privacy_out
+        column :rpid_out
+        column :rpid_privacy_out
+
         column :lega_rx_payloads
         column :lega_tx_payloads
         column :legb_rx_payloads
@@ -346,6 +358,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :yeti_version
         column :lega_user_agent
         column :legb_user_agent
+        column :uuid
       end if cdr.attempts.length > 0
     end
 
@@ -353,6 +366,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       tab :general_information do
         attributes_table do
           row :id
+          row :uuid
           row :time_start
           row :time_connect
           row :time_end
@@ -501,6 +515,20 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
         end
       end
+      tab :privacy_information do
+        attributes_table do
+          column :pai_in
+          column :ppi_in
+          column :privacy_in
+          column :rpid_in
+          column :rpid_privacy_in
+          column :pai_out
+          column :ppi_out
+          column :privacy_out
+          column :rpid_out
+          column :rpid_privacy_out
+        end
+      end
     end
   end
 
@@ -643,6 +671,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :term_call_id
     column :customer_invoice_id
     column :vendor_invoice_id
+
+    column :pai_in
+    column :ppi_in
+    column :privacy_in
+    column :rpid_in
+    column :rpid_privacy_in
+    column :pai_out
+    column :ppi_out
+    column :privacy_out
+    column :rpid_out
+    column :rpid_privacy_out
+
     column :lega_rx_payloads
     column :lega_tx_payloads
     column :legb_rx_payloads
@@ -664,6 +704,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :yeti_version
     column :lega_user_agent
     column :legb_user_agent
+    column :uuid
 
   end
 

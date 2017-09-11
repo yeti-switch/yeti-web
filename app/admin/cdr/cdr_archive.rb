@@ -217,6 +217,18 @@ ActiveAdmin.register Cdr::CdrArchive do
         end
         column :customer_invoice_id
         column :vendor_invoice_id
+
+        column :pai_in
+        column :ppi_in
+        column :privacy_in
+        column :rpid_in
+        column :rpid_privacy_in
+        column :pai_out
+        column :ppi_out
+        column :privacy_out
+        column :rpid_out
+        column :rpid_privacy_out
+
         column :lega_rx_payloads
         column :lega_tx_payloads
         column :legb_rx_payloads
@@ -233,6 +245,7 @@ ActiveAdmin.register Cdr::CdrArchive do
         column :legb_rx_decode_errs
         column :legb_rx_no_buf_errs
         column :legb_rx_parse_errs
+        column :uuid
 
       end if cdr.attempts.length > 0
     end
@@ -376,6 +389,20 @@ ActiveAdmin.register Cdr::CdrArchive do
 
         end
       end
+      tab :privacy_information do
+        attributes_table do
+          column :pai_in
+          column :ppi_in
+          column :privacy_in
+          column :rpid_in
+          column :rpid_privacy_in
+          column :pai_out
+          column :ppi_out
+          column :privacy_out
+          column :rpid_out
+          column :rpid_privacy_out
+        end
+      end
     end
   end
 
@@ -493,6 +520,18 @@ ActiveAdmin.register Cdr::CdrArchive do
     column :term_call_id
     column :customer_invoice_id
     column :vendor_invoice_id
+
+    column :pai_in
+    column :ppi_in
+    column :privacy_in
+    column :rpid_in
+    column :rpid_privacy_in
+    column :pai_out
+    column :ppi_out
+    column :privacy_out
+    column :rpid_out
+    column :rpid_privacy_out
+
     column :lega_rx_payloads
     column :lega_tx_payloads
     column :legb_rx_payloads
@@ -509,7 +548,7 @@ ActiveAdmin.register Cdr::CdrArchive do
     column :legb_rx_decode_errs
     column :legb_rx_no_buf_errs
     column :legb_rx_parse_errs
-
+    column :uuid
   end
 
 
