@@ -1,3 +1,4 @@
+require 'rails/generators' 
 Knock.setup do |config|
 
   ## Expiration claim
