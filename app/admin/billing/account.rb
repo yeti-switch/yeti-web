@@ -29,7 +29,7 @@ ActiveAdmin.register Account do
   scope :customers_accounts
   scope :insufficient_balance
 
-  permit_params :contractor_id, :balance,
+  permit_params :uuid, :contractor_id, :balance,
                 :min_balance, :max_balance,
                 :balance_low_threshold, :balance_high_threshold,
                 :name, :origination_capacity,
@@ -95,9 +95,11 @@ ActiveAdmin.register Account do
     column :send_balance_notifications_to do |c|
       c.send_balance_notifications_to_emails
     end
+    column :uuid
   end
 
   filter :id
+  filter :uuid_equals, label: 'UUID'
   filter :contractor, input_html: {class: 'chosen'}
   filter :name
   filter :balance
@@ -107,6 +109,7 @@ ActiveAdmin.register Account do
       tab :details do
         attributes_table_for s do
           row :id
+          row :uuid
           row :contractor
           row :balance do
             s.decorated_balance
@@ -196,6 +199,7 @@ ActiveAdmin.register Account do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
+      f.input :uuid, as: :string
       f.input :name
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance

@@ -4,5 +4,10 @@ FactoryGirl.define do
     enabled true
     vendor false
     customer false
+
+    factory :customer do
+      vendor false
+      customer true
+    end
   end
 end
