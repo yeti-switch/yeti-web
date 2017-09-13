@@ -5,11 +5,13 @@ Given(/^A new admin user with username "(.*?)"$/) do |username|
 end
 
 And(/^I signed in as admin user with username "(.*?)"$/) do |username|
-  visit "login"
+  visit "/login"
   sleep 1
-  find(:css, "input#admin_user_username").set(username)
-  find(:css, "input#admin_user_password").set('password')
-  find('[type="submit"]').click
+  within 'div#login' do
+    find(:css, "input[type='text']").set(username)
+    find(:css, "input[type='password']").set('password')
+    find('[type="submit"]').click
+  end
 end
 
 And (/^I open the "(.*?)" page$/) do |path|

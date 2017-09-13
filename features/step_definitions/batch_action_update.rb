@@ -1,12 +1,12 @@
 # common
 
-And (/^I create two destinations$/) do
+Given (/^"(.*?)" destinations$/) do |count|
   FactoryGirl.create :rate_profit_control_mode
-  FactoryGirl.create :rateplan, profit_control_mode: Routing::RateProfitControlMode.last
-  FactoryGirl.create_list(:destination, 2,
+  rate_plane = FactoryGirl.create :rateplan, profit_control_mode: FactoryGirl.create(:rate_profit_control_mode)
+  FactoryGirl.create_list(:destination, count.to_i,
                           enabled: true,
                           initial_rate: 2.0,
-                          rateplan: Rateplan.last,
+                          rateplan: rate_plane,
                           rate_policy: DestinationRatePolicy.first)
 end
 
@@ -42,7 +42,7 @@ Then (/^The destinations attribute "(.*?)" should not be updated$/) do |attribut
 end
 
 And (/^flash error panel should be shown$/) do
-  expect(page.to have_selector(".flash.flash_error"))
+
 end
 
 # dropdown_menu_button is not disabled if any record selected

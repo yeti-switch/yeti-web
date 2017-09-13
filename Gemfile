@@ -78,6 +78,7 @@ end
 #end
 
 group :development, :test do
+  gem 'byebug'
   gem 'thin'
 
   gem 'rspec-rails', '~> 3.4.2'
@@ -94,5 +95,6 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'cucumber-rails', :require => false
+  gem 'faker'
   gem 'poltergeist'
 end
