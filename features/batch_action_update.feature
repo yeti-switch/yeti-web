@@ -2,7 +2,7 @@ Feature: Batch action update
 
   Background:
     Given A new admin user with username "admin1"
-    # And "2" destinations
+     And "2" destinations
 
   @javascript
   Scenario: Update boolean field
