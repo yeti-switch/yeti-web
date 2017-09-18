@@ -137,13 +137,19 @@ server {
 	location /swagger {
                 expires 5h;
 	}
+
+        location /doc {
+                root /home/yeti-web;
+        	try_files $uri $uri/index.html /doc/index.html;
+	}
+
         location /images {
                 root /home/yeti-web/public;
                 expires 5h;
         }
         root /home/yeti-web/public;
 	
-	    location /api/{
+	location /api/ {
 		        deny all;
         }
 
