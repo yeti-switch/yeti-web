@@ -13,13 +13,17 @@
 #  customer_invoice_period_id    :integer
 #  customer_invoice_template_id  :integer
 #  vendor_invoice_template_id    :integer
-#  vendor_invoice_period_id      :integer
 #  next_customer_invoice_at      :datetime
 #  next_vendor_invoice_at        :datetime
+#  vendor_invoice_period_id      :integer
 #  send_invoices_to              :integer          is an Array
-#  timezone_id                   :integer          default(1), not null
+#  timezone_id                   :integer          default("1"), not null
 #  next_customer_invoice_type_id :integer
 #  next_vendor_invoice_type_id   :integer
+#  balance_high_threshold        :decimal(, )
+#  balance_low_threshold         :decimal(, )
+#  send_balance_notifications_to :integer          is an Array
+#  uuid                          :uuid
 #
 
 class Account < Yeti::ActiveRecord
@@ -39,6 +43,7 @@ class Account < Yeti::ActiveRecord
 
   has_many :payments
   has_many :invoices, class_name: 'Billing::Invoice'
+  has_many :api_access, ->(record) { unscope(:where).where("? = ANY(#{table_name}.account_ids)", record.id) }, class_name: 'System::ApiAccess', autosave: false
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -46,10 +51,10 @@ class Account < Yeti::ActiveRecord
   default_scope { includes(:contractor) }
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }
   scope :customers_accounts, -> { joins(:contractor).where('contractors.customer' => true) }
-
+  scope :collection, -> { order(:name) }
 
   validates_numericality_of :min_balance, :balance
-  validates_uniqueness_of :name
+  validates_uniqueness_of :uuid, :name
   validates_presence_of :name, :contractor, :timezone
   validates_numericality_of :max_balance, greater_than_or_equal_to: ->(account) { account.min_balance }
 
@@ -108,6 +113,8 @@ class Account < Yeti::ActiveRecord
     end
 
   end
+
+  before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
     invoices.for_customer.order("end_date desc").limit(1).take.try!(:end_date) || customer_invoice_period.initial_date
@@ -173,4 +180,10 @@ class Account < Yeti::ActiveRecord
     Notification::Alert.clear_account_high_balance(self, data)
   end
 
+  def remove_self_from_related_api_access!
+    api_access.each do |record|
+      record.account_ids.delete(id)
+      record.save!
+    end
+  end
 end

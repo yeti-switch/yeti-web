@@ -43,19 +43,19 @@ server {
 	allow 127.0.0.1;
 	deny all;
 
-	location /api/rest/system/jobs{
+	location /api/rest/system/jobs {
         	allow 127.0.0.1;
 	    	deny all;
 		proxy_pass  http://yeti-unicorn;
 	}
 	
-	location /api/rest/system/{
+	location /api/rest/system {
  		allow 127.0.0.1;
 	       	deny all;
 		proxy_pass  http://yeti-unicorn;
 	}
 
-	location /api/rest/private/ {
+	location /api/rest/admin {
 		allow 127.0.0.1;
 		deny all;
 		proxy_pass  http://yeti-unicorn;
@@ -73,6 +73,27 @@ server {
 		add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, api_key, Authorization';
 		add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, PUT, PATCH, OPTIONS';
 		add_header 'Access-Control-Allow-Credentials' 'true';
+
+        }
+
+        location /api/rest/customer {
+                allow 127.0.0.1;
+                deny all;
+                proxy_pass  http://yeti-unicorn;
+
+                if ($request_method = 'OPTIONS') {
+                        add_header 'Access-Control-Allow-Origin' '*';
+                        add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, api_key, Authorization';
+                        add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, PUT, PATCH, OPTIONS';
+                        add_header 'Access-Control-Max-Age' 1728000;
+                        add_header 'Content-Type' 'text/plain charset=UTF-8';
+                        add_header 'Content-Length' 0;
+                        return 204;
+                }
+                add_header 'Access-Control-Allow-Origin' '*';
+                add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, api_key, Authorization';
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, DELETE, PUT, PATCH, OPTIONS';
+                add_header 'Access-Control-Allow-Credentials' 'true';
 
         }
 
@@ -116,13 +137,19 @@ server {
 	location /swagger {
                 expires 5h;
 	}
+
+        location /doc {
+                root /home/yeti-web;
+        	try_files $uri $uri/index.html /doc/index.html;
+	}
+
         location /images {
                 root /home/yeti-web/public;
                 expires 5h;
         }
         root /home/yeti-web/public;
 	
-	    location /api/{
+	location /api/ {
 		        deny all;
         }
 

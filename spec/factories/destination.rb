@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :destination, class: Destination do
+  factory :destination, aliases: [:rate], class: Destination do
     prefix nil
     connect_fee 0
     enabled true

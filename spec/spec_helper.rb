@@ -86,6 +86,17 @@ RSpec.configure do |config|
 end
 
 RspecApiDocumentation.configure do |config|
-  config.format = :json
+  config.format = [:json, :html]
   config.request_body_formatter = :json
+
+  config.exclusion_filter = :customer_v1 # important
+  config.docs_dir = Rails.root.join("doc", "api", "admin")
+  config.api_name = "Admin API"
+
+  config.define_group :customer_v1 do |config|
+    config.exclusion_filter = :admin # must be overriden to anything
+    config.filter = :customer_v1
+    config.docs_dir = Rails.root.join("doc", "api", "customer", 'v1')
+    config.api_name = "Customer API V2"
+  end
 end

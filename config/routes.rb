@@ -1,6 +1,7 @@
 Yeti::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
+  post 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#create'
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
@@ -51,6 +52,7 @@ Yeti::Application.routes.draw do
         namespace :admin do
           jsonapi_resources :accounts
           jsonapi_resources :contractors
+          jsonapi_resources :api_accesses
           jsonapi_resources :customers_auths
           jsonapi_resources :destinations
           jsonapi_resources :dialpeers
@@ -99,6 +101,14 @@ Yeti::Application.routes.draw do
             jsonapi_resources :numberlists
             jsonapi_resources :rate_profit_control_modes
           end
+        end
+
+        namespace :customer do
+          namespace :v1 do
+            jsonapi_resources :accounts
+            jsonapi_resources :rateplans
+            jsonapi_resources :rates
+           end
         end
       end
     end

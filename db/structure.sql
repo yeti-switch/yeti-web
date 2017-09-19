@@ -219,6 +219,20 @@ CREATE EXTENSION IF NOT EXISTS prefix WITH SCHEMA public;
 COMMENT ON EXTENSION prefix IS 'Prefix Range module for PostgreSQL';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = billing, pg_catalog;
 
 --
@@ -9044,7 +9058,8 @@ CREATE TABLE accounts (
     next_vendor_invoice_type_id smallint,
     balance_high_threshold numeric,
     balance_low_threshold numeric,
-    send_balance_notifications_to integer[]
+    send_balance_notifications_to integer[],
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -10475,6 +10490,7 @@ CREATE TABLE destinations (
     short_calls_limit real DEFAULT 0 NOT NULL,
     quality_alarm boolean DEFAULT false NOT NULL,
     routing_tag_id smallint,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
     CONSTRAINT destinations_non_zero_next_interval CHECK ((next_interval > 0))
 );
@@ -45422,7 +45438,8 @@ CREATE TABLE rateplans (
     id integer NOT NULL,
     name character varying,
     profit_control_mode_id smallint DEFAULT 1 NOT NULL,
-    send_quality_alarms_to integer[]
+    send_quality_alarms_to integer[],
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -48269,6 +48286,39 @@ ALTER SEQUENCE active_currencies_id_seq OWNED BY active_currencies.id;
 
 
 --
+-- Name: api_access; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE api_access (
+    id integer NOT NULL,
+    customer_id integer NOT NULL,
+    login character varying NOT NULL,
+    password_digest character varying NOT NULL,
+    account_ids integer[] DEFAULT '{}'::integer[] NOT NULL,
+    allowed_ips inet[] DEFAULT '{0.0.0.0/0}'::inet[] NOT NULL
+);
+
+
+--
+-- Name: api_access_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE api_access_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: api_access_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE api_access_id_seq OWNED BY api_access.id;
+
+
+--
 -- Name: api_log_config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -49572,6 +49622,13 @@ ALTER TABLE ONLY active_currencies ALTER COLUMN id SET DEFAULT nextval('active_c
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
+ALTER TABLE ONLY api_access ALTER COLUMN id SET DEFAULT nextval('api_access_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
 ALTER TABLE ONLY api_log_config ALTER COLUMN id SET DEFAULT nextval('api_log_config_id_seq'::regclass);
 
 
@@ -49703,6 +49760,14 @@ ALTER TABLE ONLY accounts
 
 ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: accounts_uuid_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY accounts
+    ADD CONSTRAINT accounts_uuid_key UNIQUE (uuid);
 
 
 --
@@ -49921,6 +49986,14 @@ ALTER TABLE ONLY destination_rate_policy
 
 ALTER TABLE ONLY destinations
     ADD CONSTRAINT destinations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: destinations_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY destinations
+    ADD CONSTRAINT destinations_uuid_key UNIQUE (uuid);
 
 
 --
@@ -50249,6 +50322,14 @@ ALTER TABLE ONLY rateplans
 
 ALTER TABLE ONLY rateplans
     ADD CONSTRAINT rateplans_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rateplans_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY rateplans
+    ADD CONSTRAINT rateplans_uuid_key UNIQUE (uuid);
 
 
 --
@@ -51369,6 +51450,22 @@ ALTER TABLE ONLY active_currencies
 
 ALTER TABLE ONLY active_currencies
     ADD CONSTRAINT active_currencies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_access_login_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY api_access
+    ADD CONSTRAINT api_access_login_key UNIQUE (login);
+
+
+--
+-- Name: api_access_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY api_access
+    ADD CONSTRAINT api_access_pkey PRIMARY KEY (id);
 
 
 --
@@ -52638,6 +52735,14 @@ ALTER TABLE ONLY active_currencies
 
 
 --
+-- Name: api_access_customer_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY api_access
+    ADD CONSTRAINT api_access_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.contractors(id);
+
+
+--
 -- Name: currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -52689,7 +52794,8 @@ ALTER TABLE ONLY sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -52700,4 +52806,8 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170825100629');
 INSERT INTO public.schema_migrations (version) VALUES ('20170907201109');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170907203538');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20170907203628');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20170907203638');
 

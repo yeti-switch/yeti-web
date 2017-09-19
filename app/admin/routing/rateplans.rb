@@ -26,13 +26,14 @@ ActiveAdmin.register Rateplan do
     column :send_quality_alarms_to do |r|
       r.contacts.map { |p| p.email }.sort.join(", ")
     end
+    column :uuid
   end
 
 
 
   filter :id
+  filter :uuid_equals, label: 'UUID'
   filter :name
-
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
@@ -46,6 +47,7 @@ ActiveAdmin.register Rateplan do
   show do |s|
     attributes_table do
       row :id
+      row :uuid
       row :name
       row :profit_control_mode
       row :send_quality_alarms_to do

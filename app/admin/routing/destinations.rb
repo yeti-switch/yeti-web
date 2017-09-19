@@ -62,6 +62,7 @@ ActiveAdmin.register Destination do
                             }
                           end
   filter :id
+  filter :uuid_equals, label: 'UUID'
   filter :enabled, as: :select , collection: [ ["Yes", true], ["No", false]]
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: {class: 'search_filter_string'}
@@ -162,6 +163,8 @@ ActiveAdmin.register Destination do
     column :asr_limit
     column :acd_limit
     column :short_calls_limit
+
+    column :uuid
   end
 
   form do |f|
@@ -205,6 +208,8 @@ ActiveAdmin.register Destination do
 
   show do |s|
     attributes_table do
+      row :id
+      row :uuid
       row :enabled
       row :prefix
       row :country
