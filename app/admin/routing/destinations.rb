@@ -9,6 +9,8 @@ ActiveAdmin.register Destination do
   acts_as_quality_stat
   acts_as_stats_actions
 
+  config.batch_actions = true
+
   decorate_with DestinationDecorator
 
   acts_as_export :id, :enabled, :prefix,
@@ -30,10 +32,35 @@ ActiveAdmin.register Destination do
 
   scope :low_quality
 
-  batch_update_attributes ["Enabled", "Prefix", "Next rate", "Connect fee", "Initial interval", "Next interval", "Dp margin fixed",
-                           "Dp margin percent", "Initial rate", "Reject calls", "Use dp intervals", "Asr limit", "Acd limit",
-                           "Short calls limit", "Quality alarm", "Valid from", "Valid till"]
+  batch_update_attributes ["Enabled", "Prefix", "Next rate", "Connect fee", "Initial interval", "Next interval",
+                           "Dp margin fixed", "Dp margin percent", "Initial rate", "Reject calls", "Use dp intervals",
+                           "Asr limit", "Acd limit", "Short calls limit", "Quality alarm", "Valid from",
+                           "Valid till"].freeze
 
+ scoped_collection_action :scoped_collection_update,
+                          class: 'scoped_collection_action_button ui buttom',
+                          form: -> do
+                            boolean = [ ['Yes', 't'], ['No', 'f']]
+                            {
+                              enabled: boolean,
+                              prefix: 'text',
+                              next_rate: 'text',
+                              connect_fee: 'text',
+                              initial_interval: 'text',
+                              next_interval: 'text',
+                              dp_margin_fixed: 'text',
+                              dp_margin_percent: 'text',
+                              initial_rate: 'text',
+                              reject_calls: boolean,
+                              use_dp_intervals: boolean,
+                              asr_limit: 'text',
+                              acd_limit: 'text',
+                              short_calls_limit: 'text',
+                              valid_from: 'datepicker',
+                              valid_till: 'datepicker',
+                              quality_alarm: boolean
+                            }
+                          end
   filter :id
   filter :enabled, as: :select , collection: [ ["Yes", true], ["No", false]]
   filter :prefix

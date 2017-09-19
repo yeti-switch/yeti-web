@@ -2,8 +2,9 @@ Feature: Batch action update
 
   Background:
     Given A new admin user with username "admin1"
-    # And "2" destinations
+    And "2" destinations
 
+  @wip
   @javascript
   Scenario: Update boolean field
     When I signed in as admin user with username "admin1"
@@ -13,6 +14,7 @@ Feature: Batch action update
     And I update attribute "enabled" with value "false"
     Then The destinations attribute "enabled" should be updated to "[false, false]"
 
+  @wip
   @javascript
   Scenario: Update number field
     When I signed in as admin user with username "admin1"
@@ -22,6 +24,7 @@ Feature: Batch action update
     And I update attribute "initial_rate" with value "3.0"
     Then The destinations attribute "initial_rate" should be updated to "[3.0, 3.0]"
 
+  @wip
   @javascript
   Scenario: Try update with invalid value
     When I signed in as admin user with username "admin1"
@@ -32,6 +35,7 @@ Feature: Batch action update
     Then The destinations attribute "connect_fee" should not be updated
     And flash error panel should be shown
 
+  @wip
   @javascript
   Scenario: dropdown_menu_button is not disabled if any record selected
     When I signed in as admin user with username "admin1"

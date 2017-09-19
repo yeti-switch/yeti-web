@@ -12,6 +12,8 @@ ActiveAdmin.register Dialpeer do
   acts_as_lock
   acts_as_stats_actions
 
+  config.batch_actions = true
+
   decorate_with DialpeerDecorator
 
   scope :locked
@@ -21,6 +23,36 @@ ActiveAdmin.register Dialpeer do
                           "Capacity", "Lcr rate multiplier", "Initial rate", "Initial interval", "Next interval",
                           "Force hit rate", "Short calls limit", "Current rate", "Src name rewrite rule",
                           "Src name rewrite result", "Exclusive route", "Valid from", "Valid till"]
+
+  scoped_collection_action :scoped_collection_update, form: -> do
+                                         boolean = [ ['Yes', 't'], ['No', 'f']]
+                                         {
+                                           enabled: boolean,
+                                           prefix: 'text',
+                                           src_rewrite_rule: 'text',
+                                           dst_rewrite_rule: 'text',
+                                           acd_limit: 'text',
+                                           asr_limit: 'text',
+                                           next_rate: 'text',
+                                           connect_fee: 'text',
+                                           src_rewrite_result: 'text',
+                                           dst_rewrite_result: 'text',
+                                           locked: boolean,
+                                           priority: 'text',
+                                           capacity: 'text',
+                                           lcr_rate_multiplier: 'text',
+                                           initial_rate: 'text',
+                                           initial_interval: 'text',
+                                           next_interval: 'text',
+                                           valid_from: 'datepicker',
+                                           valid_till: 'datepicker',
+                                           force_hit_rate: 'text',
+                                           short_calls_limit: 'text',
+                                           src_name_rewrite_rule: 'text',
+                                           src_name_rewrite_result: 'text',
+                                           exclusive_route: boolean
+                                         }
+                                        end
 
   #"Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
   acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,
@@ -38,7 +70,7 @@ ActiveAdmin.register Dialpeer do
                  :created_at
 
   acts_as_import resource_class: Importing::Dialpeer
-  
+
   acts_as_batch_changeable [:enabled, :priority, :initial_interval, :next_interval,
                             :initial_rate, :next_rate, :connect_fee,
                             :lcr_rate_multiplier, :force_hit_rate,
@@ -233,7 +265,7 @@ ActiveAdmin.register Dialpeer do
     end
     f.actions
   end
-  
+
   show do |s|
     tabs do
 

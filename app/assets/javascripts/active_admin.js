@@ -21,6 +21,7 @@
 
 //= require active_admin_date_range_preset
 //= require active_admin_datetimepicker
+//= require active_admin_scoped_collection_actions
 //= require mousewheel_disable
 //= require clear_filters
 //= require debug_call_form
@@ -69,4 +70,3 @@ $(document).ready(function () {
     });
 
 });
-
