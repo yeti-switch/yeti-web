@@ -391,16 +391,16 @@ ActiveAdmin.register Cdr::CdrArchive do
       end
       tab :privacy_information do
         attributes_table do
-          column :pai_in
-          column :ppi_in
-          column :privacy_in
-          column :rpid_in
-          column :rpid_privacy_in
-          column :pai_out
-          column :ppi_out
-          column :privacy_out
-          column :rpid_out
-          column :rpid_privacy_out
+          row :pai_in
+          row :ppi_in
+          row :privacy_in
+          row :rpid_in
+          row :rpid_privacy_in
+          row :pai_out
+          row :ppi_out
+          row :privacy_out
+          row :rpid_out
+          row :rpid_privacy_out
         end
       end
     end
