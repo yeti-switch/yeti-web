@@ -27,13 +27,34 @@ endef
 
 all: version.yml
 	@$(info:msg=init environment)
+	RAILS_ENV=$(env_mode) RACK_ENV=$(env_mode) RAKE_ENV=$(env_mode) GEM_PATH=vendor/bundler make docs
 	RAILS_ENV=$(env_mode) RACK_ENV=$(env_mode) RAKE_ENV=$(env_mode) GEM_PATH=vendor/bundler make all_env
+
+docs:
+	@$(info:msg=install bundler)
+	@gem install --install-dir vendor/bundler bundler
+	
+	@$(info:msg=install/update gems for tests)
+	@$(bundle_bin) install --jobs=4 --frozen --deployment
+
+	@$(info:msg=Preparing test database)
+	RAILS_ENV=test $(bundle_bin) exec rake db:drop db:create db:structure:load db:migrate
+	RAILS_ENV=test $(bundle_bin) exec rake db:second_base:drop db:second_base:create db:second_base:structure:load db:second_base:migrate
+	RAILS_ENV=test $(bundle_bin) exec rake db:seed
+
+	git checkout db/structure.sql db/secondbase/structure.sql
+
+	@$(info:msg=Generating documentation)
+	RAILS_ENV=test $(bundle_bin) exec rake docs:generate
+
+	@$(info:msg=Clean GEMS and bundler config)
+	rm -rf .bundle vendor/bundler vendor/bundle
 
 all_env:
 	@$(info:msg=install bundler)
 	@gem install --install-dir vendor/bundler bundler
 
-	@$(info:msg=install/update gems)
+	@$(info:msg=install gems for production mode)
 	@$(bundle_bin) install --jobs=4 --frozen --deployment --binstubs --without development test
 	
 	@$(info:msg=generating bin/delayed_job)
@@ -81,7 +102,7 @@ clean:
 	make -C swagger clean
 	make -C pgq-processors clean
 	rm -rf public/assets $(version_file)
-	rm -rf .bundle vendor/bundler vendor/bundle
+	rm -rf .bundle vendor/bundler vendor/bundle doc/api
 
 package:
 	 dpkg-buildpackage -us -uc -b

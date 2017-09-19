@@ -13,7 +13,10 @@ gem 'devise_ldap_authenticatable', '~> 0.8', github: 'yeti-switch/devise_ldap_au
 gem 'activeldap'
 gem 'net-ldap', '~> 0.3.1'
 gem 'd3-rails'
-gem 'knock', '~> 2.1.1'
+
+# Seamless JWT authentication for Rails API
+# need this fix https://github.com/nsarno/knock/pull/126
+gem 'knock', git: 'https://github.com/nsarno/knock.git', ref: '66b60437a5acc28e4863f011ab59324dc1b5d0ae'
 
 # ActiveAdmin
 gem 'ransack', '~> 1.4.0'
@@ -79,6 +82,7 @@ end
 
 group :development, :test do
   gem 'thin'
+  gem 'byebug'
 
   gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'

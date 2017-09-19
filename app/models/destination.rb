@@ -1,35 +1,39 @@
 # == Schema Information
 #
-# Table name: destinations
+# Table name: class4.destinations
 #
 #  id                     :integer          not null, primary key
 #  enabled                :boolean          not null
 #  prefix                 :string           not null
 #  rateplan_id            :integer          not null
 #  next_rate              :decimal(, )      not null
-#  connect_fee            :decimal(, )      default(0.0)
-#  initial_interval       :integer          default(1), not null
-#  next_interval          :integer          default(1), not null
-#  dp_margin_fixed        :decimal(, )      default(0.0), not null
-#  dp_margin_percent      :decimal(, )      default(0.0), not null
-#  rate_policy_id         :integer          default(1), not null
+#  connect_fee            :decimal(, )      default("0.0")
+#  initial_interval       :integer          default("1"), not null
+#  next_interval          :integer          default("1"), not null
+#  dp_margin_fixed        :decimal(, )      default("0"), not null
+#  dp_margin_percent      :decimal(, )      default("0"), not null
+#  rate_policy_id         :integer          default("1"), not null
 #  initial_rate           :decimal(, )      not null
-#  reject_calls           :boolean          default(FALSE), not null
-#  use_dp_intervals       :boolean          default(FALSE), not null
+#  reject_calls           :boolean          default("false"), not null
+#  use_dp_intervals       :boolean          default("false"), not null
 #  valid_from             :datetime         not null
 #  valid_till             :datetime         not null
 #  profit_control_mode_id :integer
 #  network_prefix_id      :integer
 #  external_id            :integer
-#  asr_limit              :float            default(0.0), not null
-#  acd_limit              :float            default(0.0), not null
-#  short_calls_limit      :float            default(0.0), not null
-#  quality_alarm          :boolean          default(FALSE), not null
+#  asr_limit              :float            default("0"), not null
+#  acd_limit              :float            default("0"), not null
+#  short_calls_limit      :float            default("0"), not null
+#  quality_alarm          :boolean          default("false"), not null
 #  routing_tag_id         :integer
+#  uuid                   :uuid             not null
 #
 
 class Destination < ActiveRecord::Base
+  self.table_name = 'class4.destinations'
+
   belongs_to :rateplan
+  has_many :customers_auths, through: :rateplan
   belongs_to :rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :rate_policy_id
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
   belongs_to :routing_tag, class_name: Routing::RoutingTag, foreign_key: :routing_tag_id
@@ -44,6 +48,14 @@ class Destination < ActiveRecord::Base
   include Yeti::NetworkDetector
 
   scope :low_quality, -> { where quality_alarm: true }
+
+  scope :where_customer, -> (id) do
+    joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
+  end
+
+  scope :where_account, -> (id) do
+    joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
+  end
 
   validates_presence_of :rateplan, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,

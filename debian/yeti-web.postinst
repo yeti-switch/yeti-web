@@ -23,11 +23,15 @@ case "$1" in
 			done
 		fi
 
-        rm -f /lib/systemd/system/yeti-cdr-billing.service || true
+        	rm -f /lib/systemd/system/yeti-cdr-billing.service || true
 
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
 			systemctl enable yeti-cdr-billing@cdr_billing
+		fi
+
+		if [ ! -f /home/yeti-web/config/pgq_processors.yml ]; then
+			cp -p /home/yeti-web/config/pgq_processors.yml.distr /home/yeti-web/config/pgq_processors.yml
 		fi
 		
 		#remove old init scripts
