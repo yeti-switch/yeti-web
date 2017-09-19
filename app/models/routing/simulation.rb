@@ -58,7 +58,8 @@ class Routing::Simulation
 
   attr_accessor :transport_protocol_id, :remote_ip, :remote_port, :src_number, :dst_number, :pop_id,
                 :uri_domain, :from_domain, :to_domain,
-                :x_yeti_auth, :release_mode
+                :x_yeti_auth, :release_mode,
+                :pai, :ppi, :privacy, :rpid, :rpid_privacy
 
   validates_presence_of :remote_ip, :remote_port, :src_number, :dst_number, :pop_id
   validates_numericality_of :pop_id, :transport_protocol_id
@@ -103,7 +104,7 @@ class Routing::Simulation
     begin
       t = ActiveRecord::Base.connection.raw_connection.set_notice_processor { |result| @notices << result.to_s.chomp }
       @debug = Yeti::ActiveRecord.fetch_sp(
-          "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.debug(?::smallint,?::inet,?::integer,?,?,?,?,?,?,?,?)",
+          "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.debug(?::smallint,?::inet,?::integer,?,?,?,?,?,?,?,?,?,?,?,?,?)",
           self.transport_protocol_id.to_i,
           self.remote_ip,
           self.remote_port.to_i,
@@ -114,7 +115,12 @@ class Routing::Simulation
           self.from_domain,
           self.to_domain,
           self.x_yeti_auth,
-          self.release_mode
+          self.release_mode,
+          self.pai,
+          self.ppi,
+          self.privacy,
+          self.rpid,
+          self.rpid_privacy
       )
     rescue Exception => e
       p "EXCEPTION"

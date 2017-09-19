@@ -300,6 +300,18 @@ BEGIN
   v_cdr.id:=nextval('cdr.cdr_id_seq'::regclass);
   v_cdr.uuid:=public.uuid_generate_v1();
 
+  v_cdr.pai_in=i_pai_in;
+  v_cdr.ppi_in=i_ppi_in;
+  v_cdr.privacy_in=i_privacy_in;
+  v_cdr.rpid_in=i_rpid_in;
+  v_cdr.rpid_privacy_in=i_rpid_privacy_in;
+  v_cdr.pai_out=i_pai_out;
+  v_cdr.ppi_out=i_ppi_out;
+  v_cdr.privacy_out=i_privacy_out;
+  v_cdr.rpid_out=i_rpid_out;
+  v_cdr.rpid_privacy_out=i_rpid_privacy_out;
+
+
   v_cdr:=billing.bill_cdr(v_cdr);
 
   perform stats.update_rt_stats(v_cdr);
