@@ -240,6 +240,20 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
+--
+-- Name: yeti; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS yeti WITH SCHEMA yeti_ext;
+
+
+--
+-- Name: EXTENSION yeti; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION yeti IS 'helper functions for YETI project';
+
+
 SET search_path = billing, pg_catalog;
 
 --
