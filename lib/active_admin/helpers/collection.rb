@@ -1,3 +1,4 @@
+# TODO: remove this patch after updating to AA 1.x.x
 module ActiveAdmin
   module Helpers
     module Collection
@@ -11,6 +12,9 @@ module ActiveAdmin
         end
       end
 
+      def collection_is_empty?(c = collection)
+        collection_size(c) == 0
+      end
 
     end
   end

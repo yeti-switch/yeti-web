@@ -175,6 +175,9 @@ class RealtimeData::ActiveCall < YetiResource
     self.human_attributes
   end
 
+  def self.human_attribute_name(attribute_key_name, options = {})
+    attribute_key_name
+  end
   # def self.short_human_attributes
   #   self::SHORT_DYNAMIC_ATTRIBUTES - self::SHORT_FOREIGN_KEYS_ATTRIBUTES.keys + self::SHORT_FOREIGN_KEYS_ATTRIBUTES.keys.collect { |k| k.to_s[0..-4].to_sym }
   # end
