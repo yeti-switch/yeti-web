@@ -1,6 +1,8 @@
 class Api::Rest::Admin::RoutingGroupResource < JSONAPI::Resource
   attributes :name
 
+  filter :name
+
   def self.updatable_fields(context)
     [ :name ]
   end

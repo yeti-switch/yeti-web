@@ -20,6 +20,8 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
   has_one :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile'
   has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
 
+  filter :name
+
   def self.updatable_fields(context)
     [
       :name,

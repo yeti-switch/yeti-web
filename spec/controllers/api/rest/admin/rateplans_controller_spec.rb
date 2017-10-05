@@ -21,6 +21,14 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
     it { expect(response_data.size).to eq(rateplans.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :rateplan, 2 }
+
+    it_behaves_like :jsonapi_filter_by_name do
+      let(:subject_record) { create :rateplan }
+    end
+  end
+
   describe 'GET show' do
     let!(:rateplan) { create :rateplan }
 
@@ -100,4 +108,3 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
     it { expect(Rateplan.count).to eq(0) }
   end
 end
-

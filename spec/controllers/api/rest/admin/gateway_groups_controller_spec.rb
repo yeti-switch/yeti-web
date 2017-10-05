@@ -39,6 +39,14 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
     end
   end
 
+  describe 'GET index with filters' do
+    before { create_list :gateway_group, 2 }
+
+    it_behaves_like :jsonapi_filter_by_name do
+      let(:subject_record) { create :gateway_group }
+    end
+  end
+
   describe 'POST create' do
     before do
       post :create, data: { type: 'gateway-groups',
@@ -98,4 +106,3 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
     it { expect(GatewayGroup.count).to eq(0) }
   end
 end
-

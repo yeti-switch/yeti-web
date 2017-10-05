@@ -31,6 +31,8 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
   has_one :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :rel100_mode, class_name: 'Equipment::GatewayRel100Mode'
 
+  filter :name
+
   def self.updatable_fields(context)
     [
       :name,

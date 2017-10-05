@@ -7,6 +7,7 @@ class Api::Rest::Admin::DestinationResource < JSONAPI::Resource
   has_one :rate_policy, class_name: 'DestinationRatePolicy'
   has_one :profit_control_mode, class_name: 'Routing::RateProfitControlMode'
 
+  filters :external_id, :prefix, :rateplan_id
 
   def self.updatable_fields(context)
     [

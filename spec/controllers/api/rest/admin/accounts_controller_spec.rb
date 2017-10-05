@@ -19,6 +19,14 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     it { expect(response_data.size).to eq(accounts.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :account, 2 }
+
+    it_behaves_like :jsonapi_filter_by_name do
+      let(:subject_record) { create(:account) }
+    end
+  end
+
   describe 'GET show' do
     let!(:account) { create :account }
 
@@ -101,4 +109,3 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     it { expect(Account.count).to eq(0) }
   end
 end
-

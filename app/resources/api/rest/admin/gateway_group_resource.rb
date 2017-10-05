@@ -3,6 +3,8 @@ class Api::Rest::Admin::GatewayGroupResource < JSONAPI::Resource
 
   has_one :vendor, class_name: 'Contractor'
 
+  filter :name
+
   def self.updatable_fields(context)
     [
       :name,

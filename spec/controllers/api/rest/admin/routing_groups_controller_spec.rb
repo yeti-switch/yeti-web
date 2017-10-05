@@ -19,6 +19,14 @@ describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
     it { expect(response_data.size).to eq(routing_groups.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :routing_group, 2 }
+
+    it_behaves_like :jsonapi_filter_by_name do
+      let(:subject_record) { create :routing_group }
+    end
+  end
+
   describe 'GET show' do
     let!(:routing_group) { create :routing_group }
 
@@ -85,4 +93,3 @@ describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
     it { expect(RoutingGroup.count).to eq(0) }
   end
 end
-
