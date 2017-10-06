@@ -5,6 +5,8 @@ class Api::Rest::Admin::RoutingPlanResource < JSONAPI::Resource
 
   has_one :sorting
 
+  filter :name
+
   def self.updatable_fields(context)
     [
       :name,

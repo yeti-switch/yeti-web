@@ -21,6 +21,24 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     it { expect(response_data.size).to eq(destinations.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :destination, 2 }
+
+    it_behaves_like :jsonapi_filter_by_external_id do
+      let(:subject_record) { create(:destination) }
+    end
+
+    it_behaves_like :jsonapi_filter_by, :prefix do
+      let(:subject_record) { create :destination, prefix: attr_value }
+      let(:attr_value) { '987' }
+    end
+
+    it_behaves_like :jsonapi_filter_by, :rateplan_id do
+      let(:subject_record) { create :destination, rateplan: rateplan }
+      let(:attr_value) { subject_record.rateplan_id }
+    end
+  end
+
   describe 'GET show' do
     let!(:destination) { create :destination }
 
@@ -113,4 +131,3 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     it { expect(Destination.count).to eq(0) }
   end
 end
-

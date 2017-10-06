@@ -10,6 +10,8 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   has_one :customer_invoice_template, class_name: 'Billing::InvoiceTemplate'
   has_one :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate'
 
+  filter :name
+
   def self.updatable_fields(context)
     [
       :name,

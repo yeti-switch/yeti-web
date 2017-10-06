@@ -12,6 +12,8 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
   has_one :account
   has_many :dialpeer_next_rates
 
+  filters :external_id, :prefix, :routing_group_id
+
   def self.updatable_fields(context)
     [
       :enabled,
