@@ -13,7 +13,7 @@ class System::Country < Yeti::ActiveRecord
   has_many :networks, -> { uniq },  through: :prefixes
 
   def display_name
-    "#{self.name}"
+    "#{id} | #{name}"
   end
 
   def self.collection
