@@ -6,6 +6,8 @@
 #  o_id                             :integer
 #  customer_name                    :string
 #  customer_id                      :integer
+#  routing_group_name               :string
+#  routing_group_id                 :integer
 #  rateplan_name                    :string
 #  rateplan_id                      :integer
 #  enabled                          :boolean
@@ -35,16 +37,14 @@
 #  src_name_rewrite_result          :string
 #  src_name_rewrite_rule            :string
 #  error_string                     :string
-#  allow_receive_rate_limit         :boolean          default(FALSE), not null
-#  send_billing_information         :boolean          default(FALSE), not null
-#  dst_blacklist_id                 :integer
-#  dst_blacklist_name               :string
-#  src_blacklist_id                 :integer
-#  src_blacklist_name               :string
+#  dst_numberlist_id                :integer
+#  dst_numberlist_name              :string
+#  src_numberlist_id                :integer
+#  src_numberlist_name              :string
+#  allow_receive_rate_limit         :boolean          default("false"), not null
+#  send_billing_information         :boolean          default("false"), not null
 #  routing_plan_id                  :integer
 #  routing_plan_name                :string
-#  routing_group_id                 :integer
-#  routing_group_name               :string
 #  radius_auth_profile_id           :integer
 #  radius_auth_profile_name         :string
 #  radius_accounting_profile_id     :integer
@@ -58,6 +58,8 @@
 #  to_domain                        :string
 #  transport_protocol_id            :integer
 #  transport_protocol_name          :string
+#  min_dst_number_length            :integer
+#  max_dst_number_length            :integer
 #
 
 class Importing::CustomersAuth  < Importing::Base
@@ -74,8 +76,8 @@ class Importing::CustomersAuth  < Importing::Base
     belongs_to :diversion_policy, class_name: '::DiversionPolicy'
     belongs_to :dump_level, class_name: '::DumpLevel'
 
-    belongs_to :dst_blacklist, class_name: '::Routing::Blacklist', foreign_key: :dst_blacklist_id
-    belongs_to :src_blacklist, class_name: '::Routing::Blacklist', foreign_key: :src_blacklist_id
+    belongs_to :dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :dst_numberlist_id
+    belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id
     belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id
     belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
     belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
