@@ -13,6 +13,8 @@ FactoryGirl.define do
     dp_margin_fixed 0
     dp_margin_percent 0
     use_dp_intervals false
+    valid_from { 1.day.ago.utc }
+    valid_till { 1.day.from_now.utc }
     association :rateplan
   end
 end
