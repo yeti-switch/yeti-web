@@ -205,7 +205,7 @@ ActiveAdmin.register CustomersAuth do
                   include_blank: true,
                   input_html: {class: 'chosen'}
 
-          f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.gateways),
+          f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.for_origination_gateways),
                   include_blank: true,
                   input_html: {class: 'chosen'}
 

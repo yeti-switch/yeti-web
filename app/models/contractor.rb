@@ -44,6 +44,10 @@ class Contractor < ActiveRecord::Base
     self.enabled
   end
 
+  def for_origination_gateways
+    Gateway.for_origination(id)
+  end
+
   private
 
   def vendor_or_customer?
