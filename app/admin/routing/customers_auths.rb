@@ -55,7 +55,7 @@ ActiveAdmin.register CustomersAuth do
                 :send_billing_information,
                 :ip, :pop_id,
                 :src_prefix, :dst_prefix,
-                :min_dst_number_length, :max_dst_number_length,
+                :dst_number_min_length, :dst_number_max_length,
                 :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
                 :radius_auth_profile_id,
                 :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
@@ -110,7 +110,7 @@ ActiveAdmin.register CustomersAuth do
     column :src_prefix
     column :dst_prefix
     column :dst_number_length do |c|
-      c.min_dst_number_length==c.max_dst_number_length ? "#{c.min_dst_number_length}" : "#{c.min_dst_number_length}..#{c.max_dst_number_length}"
+      c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
     column :uri_domain
     column :from_domain
@@ -162,9 +162,6 @@ ActiveAdmin.register CustomersAuth do
     column :dst_number_radius_rewrite_rule
     column :dst_number_radius_rewrite_result
     column :radius_accounting_profile, sortable: 'radius_accounting_profiles.name'
-    # column :enable_redirect
-    # column :redirect_method
-    # column :redirect_to
   end
 
   filter :id
@@ -186,7 +183,6 @@ ActiveAdmin.register CustomersAuth do
   filter :from_domain
   filter :to_domain
   filter :x_yeti_auth
-#  filter :enable_redirect, as: :select, collection: [["Yes", true], ["No", false]]
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -209,11 +205,6 @@ ActiveAdmin.register CustomersAuth do
                   include_blank: true,
                   input_html: {class: 'chosen'}
 
-
-          # f.input :enable_redirect
-          # f.input :redirect_method, as: :select,  collection: CustomersAuth::REDIRECT_METHODS
-          # f.input :redirect_to
-
           f.input :rateplan, input_html: {class: 'chosen'}
           f.input :routing_plan, input_html: {class: 'chosen'}
 
@@ -233,8 +224,8 @@ ActiveAdmin.register CustomersAuth do
           f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
           f.input :src_prefix
           f.input :dst_prefix
-          f.input :min_dst_number_length
-          f.input :max_dst_number_length
+          f.input :dst_number_min_length
+          f.input :dst_number_max_length
           f.input :uri_domain
           f.input :from_domain
           f.input :to_domain
@@ -313,8 +304,8 @@ ActiveAdmin.register CustomersAuth do
             row :pop
             row :src_prefix
             row :dst_prefix
-            row :min_dst_number_length
-            row :max_dst_number_length
+            row :dst_number_min_length
+            row :dst_number_max_length
             row :uri_domain
             row :from_domain
             row :to_domain

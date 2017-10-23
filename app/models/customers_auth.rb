@@ -79,13 +79,10 @@ class CustomersAuth < Yeti::ActiveRecord
   validates_presence_of :name
 
   validates_presence_of :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy
-  validates_presence_of :min_dst_number_length, :max_dst_number_length
 
-  validates_numericality_of :min_dst_number_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :max_dst_number_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-
-  # validates_presence_of :redirect_method, :redirect_to, if: :enable_redirect
-  # validates_inclusion_of :redirect_method, in: REDIRECT_METHODS, if: :enable_redirect
+  validates_presence_of :dst_number_min_length, :dst_number_max_length
+  validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
 
   validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 

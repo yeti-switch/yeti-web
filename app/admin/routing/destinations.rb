@@ -11,7 +11,7 @@ ActiveAdmin.register Destination do
 
   decorate_with DestinationDecorator
 
-  acts_as_export :id, :enabled, :prefix,
+  acts_as_export :id, :enabled, :prefix, :dst_number_min_length, :dst_number_max_length,
                  [:rateplan_name, proc { |row| row.rateplan.try(:name) }],
                  [:routing_tag_name, proc { |row| row.routing_tag.try(:name) }],
                  :reject_calls,
@@ -64,7 +64,7 @@ ActiveAdmin.register Destination do
 
 
 
-  permit_params :enabled, :prefix, :rateplan_id, :next_rate, :connect_fee,
+  permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rateplan_id, :next_rate, :connect_fee,
                 :initial_interval, :next_interval, :dp_margin_fixed,
                 :dp_margin_percent, :rate_policy_id, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
@@ -96,6 +96,9 @@ ActiveAdmin.register Destination do
     actions
     column :enabled
     column :prefix
+    column :dst_number_length do |c|
+      c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
+    end
     column :country, sortable: 'countries.name' do |row|
       auto_link row.network_prefix.try!(:country)
     end
@@ -145,6 +148,8 @@ ActiveAdmin.register Destination do
       else
         f.input :prefix, label: "Prefix", input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
       end
+      f.input :dst_number_min_length
+      f.input :dst_number_max_length
       f.input :enabled
       f.input :reject_calls
       f.input :rateplan, input_html: { class: 'chosen'}
@@ -182,6 +187,8 @@ ActiveAdmin.register Destination do
       row :uuid
       row :enabled
       row :prefix
+      row :dst_number_min_length
+      row :dst_number_max_length
       row :country
       row :network
       row :reject_calls
