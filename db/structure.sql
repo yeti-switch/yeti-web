@@ -27485,8 +27485,8 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth.routing_plan_id;
         if v_rp.sorting_id=5 then -- route testing
-          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)*(.*)','')::integer;
-          v_routing_key=regexp_replace(v_routing_key,'(.*)*(.*)','');
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
           v_ret.dst_prefix_out=v_routing_key;
           v_ret.dst_prefix_routing=v_routing_key;
         end if;
@@ -28361,8 +28361,8 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth.routing_plan_id;
         if v_rp.sorting_id=5 then -- route testing
-          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)*(.*)','')::integer;
-          v_routing_key=regexp_replace(v_routing_key,'(.*)*(.*)','');
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
           v_ret.dst_prefix_out=v_routing_key;
           v_ret.dst_prefix_routing=v_routing_key;
         end if;
@@ -29179,8 +29179,8 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth.routing_plan_id;
         if v_rp.sorting_id=5 then -- route testing
-          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)*(.*)','')::integer;
-          v_routing_key=regexp_replace(v_routing_key,'(.*)*(.*)','');
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
           v_ret.dst_prefix_out=v_routing_key;
           v_ret.dst_prefix_routing=v_routing_key;
         end if;
@@ -59830,4 +59830,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170907203638');
 INSERT INTO public.schema_migrations (version) VALUES ('20170919200403');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171020164700');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171031211812');
 
