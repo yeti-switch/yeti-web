@@ -1,5 +1,9 @@
 class Switch13 < ActiveRecord::Migration
 
+  def stop_step
+    true
+  end
+
   def down
     execute %q{
       drop schema switch13 cascade;
