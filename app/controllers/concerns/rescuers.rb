@@ -3,7 +3,7 @@ module Concerns::Rescuers
 
   included do
 
-    rescue_from XMLRPC::FaultException, SystemCallError, CanCan::AccessDenied do |e|
+    rescue_from SystemCallError, CanCan::AccessDenied do |e|
       flash[:warning] = e.message
       redirect_to self.root_path
     end
@@ -48,5 +48,3 @@ module Concerns::Rescuers
 
 
 end
-
-
