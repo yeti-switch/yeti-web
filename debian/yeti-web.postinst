@@ -33,6 +33,10 @@ case "$1" in
 		if [ ! -f /home/yeti-web/config/pgq_processors.yml ]; then
 			cp -p /home/yeti-web/config/pgq_processors.yml.distr /home/yeti-web/config/pgq_processors.yml
 		fi
+
+                if [ ! -f /home/yeti-web/config/active_admin.yml ]; then
+                        cp -p /home/yeti-web/config/active_admin.yml.distr /home/yeti-web/config/active_admin.yml
+                fi
 		
 		#remove old init scripts
 		rm -f /etc/init.d/yeti-cdr-billing /etc/init.d/yeti-web /etc/init.d/yeti-delayed-job || true
