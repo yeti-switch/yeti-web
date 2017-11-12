@@ -13,6 +13,14 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
 
   controller do
 
+    def show
+      begin
+        show!
+      rescue YetisNode::Error => e
+        flash[:warning] = e.message
+        redirect_to_back
+      end
+    end
 
     def find_collection
       @search = OpenStruct.new(params[:q])
@@ -24,7 +32,6 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
         registrations = Kaminari.paginate_array(registrations).page(1).per(registrations.count)
       rescue StandardError => e
         flash.now[:warning] = e.message
-        raise e
       end
       @skip_drop_down_pagination = true
       registrations
