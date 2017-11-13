@@ -24,7 +24,7 @@ describe System::Sensor do
   let(:target_mac) { nil }
 
   it_behaves_like 'Event originator for all Nodes' do
-    let(:request_command) { 'request sensors reload' }
+    let(:request_command) { 'request.sensors.reload' }
     let(:object_name) { :sensor }
     let(:object_fields) do
       {

@@ -30,9 +30,8 @@ module Jobs
     def process_event(ev)
       args = ev.command.split /\s+/
       logger.info "RPC send #{args} to node #{ev.node.id}"
-      ev.node.api.rpc_send(*args)
+      ev.node.api.rpc_send(args.shift, args)
     end
 
   end
 end
-
