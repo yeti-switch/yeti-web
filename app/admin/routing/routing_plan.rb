@@ -5,10 +5,21 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_clone
   acts_as_safe_destroy
 
-
-  acts_as_batch_changeable [:enabled, :use_lnp, :rate_delta_max]
-
   permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, {routing_group_ids: []}
+
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f'] ]
+                             {
+                               sorting_id: Sorting.all.map { |sorting| [sorting.name, sorting.id] },
+                               use_lnp: boolean,
+                               rate_delta_max: 'text'
+                             }
+                           end
 
   filter :id
   filter :name

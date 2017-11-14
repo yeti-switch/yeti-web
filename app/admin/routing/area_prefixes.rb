@@ -10,6 +10,17 @@ ActiveAdmin.register Routing::AreaPrefix do
 
   includes :area
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             {
+                               area_id: Routing::Area.all.map{ |area| [area.name, area.id] }
+                             }
+                           end
+
   index do
     selectable_column
     id_column

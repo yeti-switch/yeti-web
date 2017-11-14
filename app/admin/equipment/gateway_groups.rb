@@ -9,11 +9,22 @@ ActiveAdmin.register GatewayGroup do
   acts_as_export :id, :name, [:vendor_name, proc { |row| row.vendor.try(:name) }], :prefer_same_pop
   acts_as_import resource_class: Importing::GatewayGroup
 
-  acts_as_batch_changeable [:prefer_same_pop]
-
   decorate_with GatewayGroupDecorator
 
   permit_params :vendor_id, :name, :prefer_same_pop
+
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f']]
+                             {
+                               vendor_id: Contractor.vendors.all.map { |vendor| [vendor.name, vendor.id] },
+                               prefer_same_pop: boolean
+                             }
+                           end
 
   controller do
     def scoped_collection

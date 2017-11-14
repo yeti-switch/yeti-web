@@ -14,6 +14,24 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
 
   includes :routing_plan, :database
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             {
+                               routing_plan_id: Routing::RoutingPlan.all.map{
+                                 |routing_plan| [routing_plan.name, routing_plan.id]
+                               },
+                               req_dst_rewrite_rule: 'text',
+                               req_dst_rewrite_result: 'text',
+                               database_id: Lnp::Database.all.map{ |database| [database.name, database.id]},
+                               lrn_rewrite_rule: 'text',
+                               lrn_rewrite_result: 'text',
+                             }
+                           end
+
   index do
     selectable_column
     id_column

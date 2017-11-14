@@ -9,8 +9,6 @@ ActiveAdmin.register Destination do
   acts_as_quality_stat
   acts_as_stats_actions
 
-  config.batch_actions = true
-
   decorate_with DestinationDecorator
 
   acts_as_export :id, :enabled, :prefix,
@@ -27,38 +25,44 @@ ActiveAdmin.register Destination do
                  :asr_limit, :acd_limit, :short_calls_limit
 
   acts_as_import resource_class: Importing::Destination
-  acts_as_batch_changeable [:enabled, :initial_interval,:next_interval, :initial_rate, :next_rate, :connect_fee,
-                            :dp_margin_fixed, :dp_margin_percent ]
 
   scope :low_quality
 
-  batch_update_attributes ["Enabled", "Prefix", "Next rate", "Connect fee", "Initial interval", "Next interval",
-                           "Dp margin fixed", "Dp margin percent", "Initial rate", "Reject calls", "Use dp intervals",
-                           "Asr limit", "Acd limit", "Short calls limit", "Quality alarm", "Valid from",
-                           "Valid till"].freeze
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
 
- scoped_collection_action :scoped_collection_update,
-                          class: 'scoped_collection_action_button ui buttom',
+  scoped_collection_action :scoped_collection_update,
+                          class: 'scoped_collection_action_button ui',
                           form: -> do
                             boolean = [ ['Yes', 't'], ['No', 'f']]
                             {
                               enabled: boolean,
                               prefix: 'text',
-                              next_rate: 'text',
-                              connect_fee: 'text',
+                              reject_calls: boolean,
+                              quality_alarm: boolean,
+                              rateplan_id: Rateplan.all.map { |rateplan| [rateplan.name, rateplan.id] },
+                              routing_tag_id: Routing::RoutingTag.all.map {
+                                |routing_tag| [routing_tag.name, routing_tag.id]
+                              },
+                              valid_from: 'datepicker',
+                              valid_till: 'datepicker',
+                              rate_policy_id: DestinationRatePolicy.all.map {
+                                |rate_policy| [rate_policy.name, rate_policy.id]
+                              },
                               initial_interval: 'text',
+                              initial_rate: 'text',
                               next_interval: 'text',
+                              next_rate: 'text',
+                              use_dp_intervals: boolean,
+                              connect_fee: 'text',
+                              profit_control_mode_id: Routing::RateProfitControlMode.all.map {
+                                |profit_control_mode| [profit_control_mode.name, profit_control_mode.id]
+                              },
                               dp_margin_fixed: 'text',
                               dp_margin_percent: 'text',
-                              initial_rate: 'text',
-                              reject_calls: boolean,
-                              use_dp_intervals: boolean,
                               asr_limit: 'text',
                               acd_limit: 'text',
                               short_calls_limit: 'text',
-                              valid_from: 'datepicker',
-                              valid_till: 'datepicker',
-                              quality_alarm: boolean
                             }
                           end
   filter :id
@@ -91,7 +95,6 @@ ActiveAdmin.register Destination do
          }
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
-
 
 
   permit_params :enabled, :prefix, :rateplan_id, :next_rate, :connect_fee,

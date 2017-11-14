@@ -11,6 +11,19 @@ ActiveAdmin.register Payment do
 
   acts_as_export
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             {
+                               account_id: Account.all.map{ |account| [account.name, account.id]},
+                               amount: 'text',
+                               notes: 'text',
+                             }
+                           end
+
   controller do
     def scoped_collection
       Payment.includes(:account)

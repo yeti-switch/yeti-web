@@ -9,12 +9,31 @@ ActiveAdmin.register Contractor do
   
   acts_as_export :id, :enabled, :name, :vendor,:customer
   acts_as_import resource_class: Importing::Contractor
-  acts_as_batch_changeable [:enabled, :vendor, :customer]
 
   scope :vendors
   scope :customers
 
   permit_params :name, :enabled, :vendor, :customer ,:description, :address, :phones, :tech_contact, :fin_contact, :smtp_connection_id
+
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f']]
+                             {
+                               enabled: boolean,
+                               vendor: boolean,
+                               customer: boolean,
+                               description: 'text',
+                               address: 'text',
+                               phones: 'text',
+                               smtp_connection_id: System::SmtpConnection.all.map {
+                                 |smtp_connection| [smtp_connection.name, smtp_connection.id]
+                               }
+                             }
+                           end
 
   includes :smtp_connection
 

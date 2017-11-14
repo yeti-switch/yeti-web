@@ -8,6 +8,11 @@ ActiveAdmin.register Lnp::Cache do
 
   includes :database
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_destroy
+
   index do
     selectable_column
     id_column

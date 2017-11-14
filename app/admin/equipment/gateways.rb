@@ -72,7 +72,6 @@ ActiveAdmin.register Gateway do
                  :force_one_way_early_media
 
   acts_as_import resource_class: Importing::Gateway
-  acts_as_batch_changeable [:enabled, :priority, :origination_capacity, :termination_capacity]
 
   scope :locked
   scope :shared
@@ -87,6 +86,24 @@ ActiveAdmin.register Gateway do
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode
+
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f'] ]
+                             {
+                               enabled: boolean,
+                               locked: boolean,
+                               priority: 'text',
+                               is_shared: boolean,
+                               acd_limit: 'text',
+                               asr_limit: 'text',
+                               short_calls_limit: 'text'
+                             }
+                           end
 
   controller do
     def resource_params

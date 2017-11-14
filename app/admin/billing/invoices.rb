@@ -18,6 +18,25 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
   includes :contractor, :account, :state, :type
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f']]
+                             {
+                               contractor_id: Contractor.all.map{ |contractor| [contractor.name, contractor.id]},
+                               account_id: Account.all.map{ |account| [account.name, account.id]},
+                               state_id: Billing::InvoiceState.all.map{ |state| [state.name, state.id]},
+                               start_date: 'datepicker',
+                               end_date: 'datepicker',
+                               amount: 'text',
+                               type_id: Billing::InvoiceType.all.map{ |type| [type.name, type.id]},
+                               vendor_invoice: boolean,
+                             }
+                           end
+
   controller do
 
     def create_resource(object)

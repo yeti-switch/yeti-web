@@ -10,8 +10,6 @@ ActiveAdmin.register CustomersAuth do
 
   decorate_with CustomersAuthDecorator
 
-  acts_as_batch_changeable [:enabled, :uri_domain, :x_yeti_auth, :ip, :src_prefix, :dst_prefix]
-
   acts_as_export :id, :enabled, :name,
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
                  [:ip, proc {|row| row.raw_ip}],
@@ -68,22 +66,43 @@ ActiveAdmin.register CustomersAuth do
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
 
-  batch_action :change_dump_level, priority: 1, form: -> {
-    {
-        dump_level: DumpLevel.order(:name).pluck(:name, :id)
-    }
-  } do |ids, inputs|
-    begin
-      count = apply_authorization_scope(scoped_collection).where(id: ids).update_all(dump_level_id: inputs['dump_level'])
-      flash[:notice] = "#{count}/#{ids.count} records updated ##{inputs['group']}"
-    rescue StandardError => e
-      flash[:error] = e.message
-      Rails.logger.warn "UCS#batch_assign_to_group raise exception: #{e.message}\n#{e.backtrace.join("\n")}"
-    end
-    redirect_to :back
-  end
-
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f'] ]
+                             {
+                               enabled: boolean,
+                               transport_protocol_id: Equipment::TransportProtocol.all.map {
+                                 |transport_protocol| [transport_protocol.name, transport_protocol.id]
+                               },
+                               ip: 'text',
+                               src_prefix: 'text',
+                               dst_prefix: 'text',
+                               min_dst_number_length: 'text',
+                               max_dst_number_length: 'text',
+                               from_domain: 'text',
+                               to_domain: 'text',
+                               x_yeti_auth: 'text',
+                               dst_numberlist_id: Routing::Numberlist.all.map {
+                                 |numberlist| [numberlist.name, numberlist.id]
+                               },
+                               src_numberlist_id: Routing::Numberlist.all.map {
+                                 |numberlist| [numberlist.name, numberlist.id]
+                               },
+                               dump_level_id: DumpLevel.all.map{
+                                 |dump_level| [dump_level.name, dump_level.id]
+                               },
+                               rateplan_id: Rateplan.all.map {
+                                 |rateplan| [rateplan.name, rateplan.id]
+                               },
+                               routing_plan_id: Routing::RoutingPlan.all.map {
+                                 |routing_plan| [routing_plan.name, routing_plan.id]
+                               }
+                             }
+                           end
 
   collection_action :search_for_debug do
     src_prefix=params[:src_prefix].to_s

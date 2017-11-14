@@ -22,7 +22,6 @@ ActiveAdmin.register Account do
                  :vendor_invoice_period
 
   acts_as_import resource_class: Importing::Account
-  acts_as_batch_changeable [:min_balance, :max_balance, :origination_capacity, :termination_capacity, :customer_invoice_period, :vendor_invoice_period]
 
   scope :all
   scope :vendors_accounts
@@ -42,7 +41,36 @@ ActiveAdmin.register Account do
 
   includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
 
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             {
+                               contractor_id: Contractor.all.map { |contractor| [contractor.name, contractor.id] },
+                               balance: 'text',
+                               min_balance: 'text',
+                               max_balance: 'text',
+                               balance_low_threshold: 'text',
+                               balance_high_threshold: 'text',
+                               origination_capacity: 'text',
+                               termination_capacity: 'text',
+                               vendor_invoice_period_id: Billing::InvoicePeriod.all.map {
+                                   |invoice_period| [invoice_period.name, invoice_period.id]
+                               },
+                               customer_invoice_period_id: Billing::InvoicePeriod.all.map {
+                                   |invoice_period| [invoice_period.name, invoice_period.id]
+                               },
+                               vendor_invoice_template_id: Billing::InvoiceTemplate.all.map {
+                                   |invoice_template| [invoice_template.name, invoice_template.id]
+                               },
+                               customer_invoice_template_id: Billing::InvoiceTemplate.all.map {
+                                   |invoice_template| [invoice_template.name, invoice_template.id]
+                               },
+                               timezone: 'datepicker',
+                             }
+                           end
 
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals)} do

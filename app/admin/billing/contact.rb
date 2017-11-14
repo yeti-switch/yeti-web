@@ -13,6 +13,20 @@ ActiveAdmin.register Billing::Contact do
                  :created_at,
                  :updated_at
 
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             {
+                               contractor_id: Contractor.all.map { |contractor| [contractor.name, contractor.id] },
+                               admin_user_id: AdminUser.all.map { |admin| [admin.username, admin.id] },
+                               email: 'text',
+                               notes: 'text'
+                             }
+                           end
+
   permit_params :contractor_id, :admin_user_id, :email, :notes, :created_at, :updated_at
 
   index do

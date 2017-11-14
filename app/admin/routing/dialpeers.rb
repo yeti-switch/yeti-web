@@ -12,47 +12,9 @@ ActiveAdmin.register Dialpeer do
   acts_as_lock
   acts_as_stats_actions
 
-  config.batch_actions = true
-
   decorate_with DialpeerDecorator
 
   scope :locked
-
-  batch_update_attributes ["Enabled", "Prefix", "Src rewrite rule", "Dst rewrite rule", "Acd limit", "Asr limit", "Next rate",
-                          "Connect fee", "Src rewrite result", "Dst rewrite result", "Locked", "Priority",
-                          "Capacity", "Lcr rate multiplier", "Initial rate", "Initial interval", "Next interval",
-                          "Force hit rate", "Short calls limit", "Current rate", "Src name rewrite rule",
-                          "Src name rewrite result", "Exclusive route", "Valid from", "Valid till"]
-
-  scoped_collection_action :scoped_collection_update, form: -> do
-                                         boolean = [ ['Yes', 't'], ['No', 'f']]
-                                         {
-                                           enabled: boolean,
-                                           prefix: 'text',
-                                           src_rewrite_rule: 'text',
-                                           dst_rewrite_rule: 'text',
-                                           acd_limit: 'text',
-                                           asr_limit: 'text',
-                                           next_rate: 'text',
-                                           connect_fee: 'text',
-                                           src_rewrite_result: 'text',
-                                           dst_rewrite_result: 'text',
-                                           locked: boolean,
-                                           priority: 'text',
-                                           capacity: 'text',
-                                           lcr_rate_multiplier: 'text',
-                                           initial_rate: 'text',
-                                           initial_interval: 'text',
-                                           next_interval: 'text',
-                                           valid_from: 'datepicker',
-                                           valid_till: 'datepicker',
-                                           force_hit_rate: 'text',
-                                           short_calls_limit: 'text',
-                                           src_name_rewrite_rule: 'text',
-                                           src_name_rewrite_result: 'text',
-                                           exclusive_route: boolean
-                                         }
-                                        end
 
   #"Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
   acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,
@@ -71,14 +33,57 @@ ActiveAdmin.register Dialpeer do
 
   acts_as_import resource_class: Importing::Dialpeer
 
-  acts_as_batch_changeable [:enabled, :priority, :initial_interval, :next_interval,
-                            :initial_rate, :next_rate, :connect_fee,
-                            :lcr_rate_multiplier, :force_hit_rate,
-                            :capacity, :acd_limit, :asr_limit, :short_calls_limit,
-                            :src_rewrite_rule, :src_rewrite_result,
-                            :dst_rewrite_rule, :dst_rewrite_result
-                           ]
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
 
+  scoped_collection_action :scoped_collection_update,
+                           class: 'scoped_collection_action_button ui',
+                           form: -> do
+                             boolean = [ ['Yes', 't'], ['No', 'f']]
+                             {
+                               enabled: boolean,
+                               prefix: 'text',
+                               routing_group_id: RoutingGroup.all.map {
+                                 |routing_group| [routing_group.name, routing_group.id]
+                               },
+                               routing_tag_id: Routing::RoutingTag.all.map {
+                                 |routing_tag| [routing_tag.name, routing_tag.id]
+                               },
+                               priority: 'text',
+                               force_hit_rate: 'text',
+                               exclusive_route: boolean,
+                               initial_interval: 'text',
+                               initial_rate: 'text',
+                               next_interval: 'text',
+                               next_rate: 'text',
+                               connect_fee: 'text',
+                               lcr_rate_multiplier: 'text',
+                               gateway_id: Gateway.all.map {
+                                 |gateway| [gateway.name, gateway.id]
+                               },
+                               gateway_group_id: GatewayGroup.all.map {
+                                 |gateway_group| [gateway_group.name, gateway_group.id]
+                               },
+                               vendor_id: Contractor.vendors.all.map {
+                                 |vendor| [vendor.name, vendor.id]
+                               },
+                               account_id: Account.all.map {
+                                 |account| [account.name, account.id]
+                               },
+                               valid_from: 'datepicker',
+                               valid_till: 'datepicker',
+                               asr_limit: 'text',
+                               acd_limit: 'text',
+                               short_calls_limit: 'text',
+                               capacity: 'text',
+                               src_name_rewrite_rule: 'text',
+                               src_name_rewrite_result: 'text',
+                               src_rewrite_rule: 'text',
+                               src_rewrite_result: 'text',
+                               dst_rewrite_rule: 'text',
+                               dst_rewrite_result: 'text'
+                             }
+                           end
 
   controller do
     def resource_params
