@@ -1,18 +1,28 @@
 module Yeti
   class OutgoingRegistrations
+
+    attr_reader :errors
+
     def initialize(nodes, params = {})
       @params = clean_search_params(params).with_indifferent_access
+      @errors = []
       set_nodes(nodes)
     end
 
-    def search
-      raw_registrations
+    def search(options = {})
+      raw_registrations(options)
     end
 
-    def raw_registrations
+    def raw_registrations(options = {})
       raw = Parallel.map(@nodes.to_a, in_threads: @nodes.count) do |node|
         Rails.logger.info { "request to node #{node.id}" }
-        registrations = node.registrations
+        registrations = []
+        begin
+          registrations = node.registrations
+        rescue YetisNode::Error => e
+          raise e unless options[:empty_on_error]
+          @errors << e.message
+        end
         Rails.logger.info { " loading  #{registrations.count} registrations" }
         registrations
       end

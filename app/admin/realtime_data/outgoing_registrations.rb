@@ -28,8 +28,10 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
       registrations = []
 
       begin
-        registrations = Yeti::OutgoingRegistrations.new(Node.all, params[:q]).search
+        searcher = Yeti::OutgoingRegistrations.new(Node.all, params[:q])
+        registrations = searcher.search(empty_on_error: true)
         registrations = Kaminari.paginate_array(registrations).page(1).per(registrations.count)
+        flash.now[:warning] = searcher.errors if searcher.errors.any?
       rescue StandardError => e
         flash.now[:warning] = e.message
       end
