@@ -19,7 +19,7 @@ module Yeti
         registrations = []
         begin
           registrations = node.registrations
-        rescue YetisNode::Error => e
+        rescue StandardError => e
           raise e unless options[:empty_on_error]
           @errors << e.message
         end
