@@ -46616,6 +46616,45 @@ ALTER SEQUENCE background_threads_id_seq OWNED BY background_threads.id;
 
 
 --
+-- Name: delayed_jobs; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+--
+
+CREATE TABLE delayed_jobs (
+    id integer NOT NULL,
+    priority integer DEFAULT 0 NOT NULL,
+    attempts integer DEFAULT 0 NOT NULL,
+    handler text NOT NULL,
+    last_error text,
+    run_at timestamp without time zone,
+    locked_at timestamp without time zone,
+    failed_at timestamp without time zone,
+    locked_by character varying,
+    queue character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
+--
+
+CREATE SEQUENCE delayed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
+--
+
+ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
+
+
+--
 -- Name: sessions; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
 --
 
@@ -48444,45 +48483,6 @@ ALTER SEQUENCE currencies_id_seq OWNED BY currencies.id;
 
 
 --
--- Name: delayed_jobs; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
---
-
-CREATE TABLE delayed_jobs (
-    id integer NOT NULL,
-    priority integer DEFAULT 0 NOT NULL,
-    attempts integer DEFAULT 0 NOT NULL,
-    handler text NOT NULL,
-    last_error text,
-    run_at timestamp with time zone,
-    locked_at timestamp with time zone,
-    failed_at timestamp with time zone,
-    locked_by character varying(255),
-    queue character varying(255),
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL
-);
-
-
---
--- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE delayed_jobs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
-
-
---
 -- Name: events_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
@@ -49314,6 +49314,13 @@ ALTER TABLE ONLY background_threads ALTER COLUMN id SET DEFAULT nextval('backgro
 -- Name: id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
+ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+--
+
 ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq'::regclass);
 
 
@@ -49651,13 +49658,6 @@ ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq
 --
 
 ALTER TABLE ONLY currencies ALTER COLUMN id SET DEFAULT nextval('currencies_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
 
 
 --
@@ -50625,6 +50625,14 @@ ALTER TABLE ONLY background_threads
 
 
 --
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY delayed_jobs
+    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sessions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
@@ -51525,14 +51533,6 @@ ALTER TABLE ONLY currencies
 
 
 --
--- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY delayed_jobs
-    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
-
-
---
 -- Name: events_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -51881,6 +51881,13 @@ CREATE UNIQUE INDEX admin_users_username_idx ON admin_users USING btree (usernam
 
 
 --
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+--
+
+CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
+
+
+--
 -- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
 --
 
@@ -51947,13 +51954,6 @@ SET search_path = sys, pg_catalog;
 --
 
 CREATE UNIQUE INDEX cdr_tables_name_idx ON cdr_tables USING btree (name);
-
-
---
--- Name: delayed_jobs_priority; Type: INDEX; Schema: sys; Owner: -; Tablespace: 
---
-
-CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
 
 
 --
@@ -52810,4 +52810,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170907203538');
 INSERT INTO public.schema_migrations (version) VALUES ('20170907203628');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170907203638');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171115043504');
 

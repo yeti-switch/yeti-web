@@ -18,6 +18,8 @@ ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBatchChangeable
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ReportScheduler
 ActiveAdmin::ResourceController.send(:include, ActiveAdmin::PerPageExtension)
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::BatchActionUpdate
+ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsAsyncDestroy
+ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsAsyncUpdate
 
 # ActiveAdmin::CSVBuilder.send(:include, Yeti::CSVBuilder)
 

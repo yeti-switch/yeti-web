@@ -11,6 +11,54 @@ ActiveAdmin.register Dialpeer do
   acts_as_quality_stat
   acts_as_lock
   acts_as_stats_actions
+  acts_as_async_destroy('Dialpeer')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('Dialpeer',
+                       enabled: boolean,
+                       prefix: 'text',
+                       routing_group_id: RoutingGroup.all.map {
+                         |routing_group| [routing_group.name, routing_group.id]
+                       },
+                       routing_tag_id: Routing::RoutingTag.all.map {
+                         |routing_tag| [routing_tag.name, routing_tag.id]
+                       },
+                       priority: 'text',
+                       force_hit_rate: 'text',
+                       exclusive_route: boolean,
+                       initial_interval: 'text',
+                       initial_rate: 'text',
+                       next_interval: 'text',
+                       next_rate: 'text',
+                       connect_fee: 'text',
+                       lcr_rate_multiplier: 'text',
+                       gateway_id: Gateway.all.map {
+                         |gateway| [gateway.name, gateway.id]
+                       },
+                       gateway_group_id: GatewayGroup.all.map {
+                         |gateway_group| [gateway_group.name, gateway_group.id]
+                       },
+                       vendor_id: Contractor.vendors.all.map {
+                         |vendor| [vendor.name, vendor.id]
+                       },
+                       account_id: Account.all.map {
+                         |account| [account.name, account.id]
+                       },
+                       valid_from: 'datepicker',
+                       valid_till: 'datepicker',
+                       asr_limit: 'text',
+                       acd_limit: 'text',
+                       short_calls_limit: 'text',
+                       capacity: 'text',
+                       src_name_rewrite_rule: 'text',
+                       src_name_rewrite_result: 'text',
+                       src_rewrite_rule: 'text',
+                       src_rewrite_result: 'text',
+                       dst_rewrite_rule: 'text',
+                       dst_rewrite_result: 'text')
+
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+  batch_action :destroy, false
 
   decorate_with DialpeerDecorator
 
@@ -32,58 +80,6 @@ ActiveAdmin.register Dialpeer do
                  :created_at
 
   acts_as_import resource_class: Importing::Dialpeer
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             boolean = [ ['Yes', 't'], ['No', 'f']]
-                             {
-                               enabled: boolean,
-                               prefix: 'text',
-                               routing_group_id: RoutingGroup.all.map {
-                                 |routing_group| [routing_group.name, routing_group.id]
-                               },
-                               routing_tag_id: Routing::RoutingTag.all.map {
-                                 |routing_tag| [routing_tag.name, routing_tag.id]
-                               },
-                               priority: 'text',
-                               force_hit_rate: 'text',
-                               exclusive_route: boolean,
-                               initial_interval: 'text',
-                               initial_rate: 'text',
-                               next_interval: 'text',
-                               next_rate: 'text',
-                               connect_fee: 'text',
-                               lcr_rate_multiplier: 'text',
-                               gateway_id: Gateway.all.map {
-                                 |gateway| [gateway.name, gateway.id]
-                               },
-                               gateway_group_id: GatewayGroup.all.map {
-                                 |gateway_group| [gateway_group.name, gateway_group.id]
-                               },
-                               vendor_id: Contractor.vendors.all.map {
-                                 |vendor| [vendor.name, vendor.id]
-                               },
-                               account_id: Account.all.map {
-                                 |account| [account.name, account.id]
-                               },
-                               valid_from: 'datepicker',
-                               valid_till: 'datepicker',
-                               asr_limit: 'text',
-                               acd_limit: 'text',
-                               short_calls_limit: 'text',
-                               capacity: 'text',
-                               src_name_rewrite_rule: 'text',
-                               src_name_rewrite_result: 'text',
-                               src_rewrite_rule: 'text',
-                               src_rewrite_result: 'text',
-                               dst_rewrite_rule: 'text',
-                               dst_rewrite_result: 'text'
-                             }
-                           end
 
   controller do
     def resource_params

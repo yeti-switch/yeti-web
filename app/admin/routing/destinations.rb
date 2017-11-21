@@ -8,6 +8,40 @@ ActiveAdmin.register Destination do
   acts_as_status
   acts_as_quality_stat
   acts_as_stats_actions
+  acts_as_async_destroy('Destination')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('Destination',
+                       enabled: boolean,
+                       prefix: 'text',
+                       reject_calls: boolean,
+                       quality_alarm: boolean,
+                       rateplan_id: Rateplan.all.map { |rateplan| [rateplan.name, rateplan.id] },
+                       routing_tag_id: Routing::RoutingTag.all.map {
+                         |routing_tag| [routing_tag.name, routing_tag.id]
+                       },
+                       valid_from: 'datepicker',
+                       valid_till: 'datepicker',
+                       rate_policy_id: DestinationRatePolicy.all.map {
+                         |rate_policy| [rate_policy.name, rate_policy.id]
+                       },
+                       initial_interval: 'text',
+                       initial_rate: 'text',
+                       next_interval: 'text',
+                       next_rate: 'text',
+                       use_dp_intervals: boolean,
+                       connect_fee: 'text',
+                       profit_control_mode_id: Routing::RateProfitControlMode.all.map {
+                         |profit_control_mode| [profit_control_mode.name, profit_control_mode.id]
+                       },
+                       dp_margin_fixed: 'text',
+                       dp_margin_percent: 'text',
+                       asr_limit: 'text',
+                       acd_limit: 'text',
+                       short_calls_limit: 'text')
+
+  config.batch_actions = true
+  config.scoped_collection_actions_if = -> { true }
+  batch_action :destroy, false
 
   decorate_with DestinationDecorator
 
@@ -28,43 +62,6 @@ ActiveAdmin.register Destination do
 
   scope :low_quality
 
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                          class: 'scoped_collection_action_button ui',
-                          form: -> do
-                            boolean = [ ['Yes', 't'], ['No', 'f']]
-                            {
-                              enabled: boolean,
-                              prefix: 'text',
-                              reject_calls: boolean,
-                              quality_alarm: boolean,
-                              rateplan_id: Rateplan.all.map { |rateplan| [rateplan.name, rateplan.id] },
-                              routing_tag_id: Routing::RoutingTag.all.map {
-                                |routing_tag| [routing_tag.name, routing_tag.id]
-                              },
-                              valid_from: 'datepicker',
-                              valid_till: 'datepicker',
-                              rate_policy_id: DestinationRatePolicy.all.map {
-                                |rate_policy| [rate_policy.name, rate_policy.id]
-                              },
-                              initial_interval: 'text',
-                              initial_rate: 'text',
-                              next_interval: 'text',
-                              next_rate: 'text',
-                              use_dp_intervals: boolean,
-                              connect_fee: 'text',
-                              profit_control_mode_id: Routing::RateProfitControlMode.all.map {
-                                |profit_control_mode| [profit_control_mode.name, profit_control_mode.id]
-                              },
-                              dp_margin_fixed: 'text',
-                              dp_margin_percent: 'text',
-                              asr_limit: 'text',
-                              acd_limit: 'text',
-                              short_calls_limit: 'text',
-                            }
-                          end
   filter :id
   filter :uuid_equals, label: 'UUID'
   filter :enabled, as: :select , collection: [ ["Yes", true], ["No", false]]
