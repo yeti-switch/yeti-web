@@ -32,7 +32,7 @@ class Node < ActiveRecord::Base
   end
 
   def api
-    @api ||= YetisNode::Client.new(self.rpc_endpoint, transport: :json_rpc)
+    @api ||= YetisNode::Client.new(self.rpc_endpoint, transport: :json_rpc, logger: logger)
   end
 
   def total_calls_count

@@ -64,14 +64,11 @@ gem 'sass-globbing'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
-gem 'syslog-logger'
+gem 'rails_semantic_logger' # Net::TCPClient uses only semantic_logger
+gem 'syslog_protocol' # required for remote logging using the Syslog protol
 #gem 'odf-report', github: 'sandrods/odf-report'
 gem 'odf-report', github: 'yeti-switch/odf-report'
 gem 'zip-zip'
-
-group :development do
-  gem 'quiet_assets'
-end
 
 #group :development do
   gem 'sourcify'
