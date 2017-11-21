@@ -26,14 +26,14 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
                            form: -> do
                              boolean = [ ['Yes', 't'], ['No', 'f']]
                              {
-                               contractor_id: Contractor.all.map{ |contractor| [contractor.name, contractor.id]},
-                               account_id: Account.all.map{ |account| [account.name, account.id]},
-                               state_id: Billing::InvoiceState.all.map{ |state| [state.name, state.id]},
+                               contractor_id: Contractor.all.map{ |c| [c.name, c.id] },
+                               account_id: Account.all.map{ |a| [a.name, a.id] },
+                               state_id: Billing::InvoiceState.all.map{ |is| [is.name, is.id] },
                                start_date: 'datepicker',
                                end_date: 'datepicker',
                                amount: 'text',
-                               type_id: Billing::InvoiceType.all.map{ |type| [type.name, type.id]},
-                               vendor_invoice: boolean,
+                               type_id: Billing::InvoiceType.all.map{ |it| [it.name, it.id] },
+                               vendor_invoice: boolean
                              }
                            end
 

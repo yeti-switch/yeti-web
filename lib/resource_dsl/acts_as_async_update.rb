@@ -11,7 +11,7 @@ module ResourceDSL
         AsyncBatchUpdateJob.perform_later(model_name,
                                           scoped_collection_records.to_sql,
                                           params[:changes])
-        flash[:notice] = 'Batch Update is scheduled'
+        flash[:notice] = I18n.t('flash.actions.batch_update.job_scheduled')
         head :ok
       end
     end

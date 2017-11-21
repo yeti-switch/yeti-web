@@ -15,7 +15,7 @@ ActiveAdmin.register Routing::RoutingPlan do
                            form: -> do
                              boolean = [ ['Yes', 't'], ['No', 'f'] ]
                              {
-                               sorting_id: Sorting.all.map { |sorting| [sorting.name, sorting.id] },
+                               sorting_id: Sorting.all.map { |s| [s.name, s.id] },
                                use_lnp: boolean,
                                rate_delta_max: 'text'
                              }

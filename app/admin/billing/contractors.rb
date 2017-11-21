@@ -29,9 +29,7 @@ ActiveAdmin.register Contractor do
                                description: 'text',
                                address: 'text',
                                phones: 'text',
-                               smtp_connection_id: System::SmtpConnection.all.map {
-                                 |smtp_connection| [smtp_connection.name, smtp_connection.id]
-                               }
+                               smtp_connection_id: System::SmtpConnection.all.map { |smtpc| [smtpc.name, smtpc.id] }
                              }
                            end
 

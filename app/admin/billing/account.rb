@@ -48,7 +48,7 @@ ActiveAdmin.register Account do
                            class: 'scoped_collection_action_button ui',
                            form: -> do
                              {
-                               contractor_id: Contractor.all.map { |contractor| [contractor.name, contractor.id] },
+                               contractor_id: Contractor.all.map { |c| [c.name, c.id] },
                                balance: 'text',
                                min_balance: 'text',
                                max_balance: 'text',
@@ -56,19 +56,11 @@ ActiveAdmin.register Account do
                                balance_high_threshold: 'text',
                                origination_capacity: 'text',
                                termination_capacity: 'text',
-                               vendor_invoice_period_id: Billing::InvoicePeriod.all.map {
-                                   |invoice_period| [invoice_period.name, invoice_period.id]
-                               },
-                               customer_invoice_period_id: Billing::InvoicePeriod.all.map {
-                                   |invoice_period| [invoice_period.name, invoice_period.id]
-                               },
-                               vendor_invoice_template_id: Billing::InvoiceTemplate.all.map {
-                                   |invoice_template| [invoice_template.name, invoice_template.id]
-                               },
-                               customer_invoice_template_id: Billing::InvoiceTemplate.all.map {
-                                   |invoice_template| [invoice_template.name, invoice_template.id]
-                               },
-                               timezone: 'datepicker',
+                               vendor_invoice_period_id: Billing::InvoicePeriod.all.map { |ip| [ip.name, ip.id] },
+                               customer_invoice_period_id: Billing::InvoicePeriod.all.map { |ip| [ip.name, ip.id] },
+                               vendor_invoice_template_id: Billing::InvoiceTemplate.all.map { |it| [it.name, it.id]},
+                               customer_invoice_template_id: Billing::InvoiceTemplate.all.map { |it| [it.name, it.id] },
+                               timezone: 'datepicker'
                              }
                            end
 

@@ -18,9 +18,9 @@ ActiveAdmin.register Payment do
                            class: 'scoped_collection_action_button ui',
                            form: -> do
                              {
-                               account_id: Account.all.map{ |account| [account.name, account.id]},
+                               account_id: Account.all.map{ |a| [a.name, a.id]},
                                amount: 'text',
-                               notes: 'text',
+                               notes: 'text'
                              }
                            end
 

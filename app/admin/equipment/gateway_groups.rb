@@ -21,7 +21,7 @@ ActiveAdmin.register GatewayGroup do
                            form: -> do
                              boolean = [ ['Yes', 't'], ['No', 'f']]
                              {
-                               vendor_id: Contractor.vendors.all.map { |vendor| [vendor.name, vendor.id] },
+                               vendor_id: Contractor.vendors.all.map { |v| [v.name, v.id] },
                                prefer_same_pop: boolean
                              }
                            end

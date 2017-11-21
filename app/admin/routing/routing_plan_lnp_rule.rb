@@ -21,12 +21,10 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
                            class: 'scoped_collection_action_button ui',
                            form: -> do
                              {
-                               routing_plan_id: Routing::RoutingPlan.all.map{
-                                 |routing_plan| [routing_plan.name, routing_plan.id]
-                               },
+                               routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
                                req_dst_rewrite_rule: 'text',
                                req_dst_rewrite_result: 'text',
-                               database_id: Lnp::Database.all.map{ |database| [database.name, database.id]},
+                               database_id: Lnp::Database.all.map{ |db| [db.name, db.id] },
                                lrn_rewrite_rule: 'text',
                                lrn_rewrite_result: 'text',
                              }

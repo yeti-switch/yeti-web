@@ -75,9 +75,7 @@ ActiveAdmin.register CustomersAuth do
                              boolean = [ ['Yes', 't'], ['No', 'f'] ]
                              {
                                enabled: boolean,
-                               transport_protocol_id: Equipment::TransportProtocol.all.map {
-                                 |transport_protocol| [transport_protocol.name, transport_protocol.id]
-                               },
+                               transport_protocol_id: Equipment::TransportProtocol.all.map { |tp| [tp.name, tp.id] },
                                ip: 'text',
                                src_prefix: 'text',
                                dst_prefix: 'text',
@@ -86,21 +84,11 @@ ActiveAdmin.register CustomersAuth do
                                from_domain: 'text',
                                to_domain: 'text',
                                x_yeti_auth: 'text',
-                               dst_numberlist_id: Routing::Numberlist.all.map {
-                                 |numberlist| [numberlist.name, numberlist.id]
-                               },
-                               src_numberlist_id: Routing::Numberlist.all.map {
-                                 |numberlist| [numberlist.name, numberlist.id]
-                               },
-                               dump_level_id: DumpLevel.all.map{
-                                 |dump_level| [dump_level.name, dump_level.id]
-                               },
-                               rateplan_id: Rateplan.all.map {
-                                 |rateplan| [rateplan.name, rateplan.id]
-                               },
-                               routing_plan_id: Routing::RoutingPlan.all.map {
-                                 |routing_plan| [routing_plan.name, routing_plan.id]
-                               }
+                               dst_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
+                               src_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
+                               dump_level_id: DumpLevel.all.map { |dl| [dl.name, dl.id] },
+                               rateplan_id: Rateplan.all.map { |r| [r.name, r.id] },
+                               routing_plan_id: Routing::RoutingPlan.all.map { |rp| [rp.name, rp.id] }
                              }
                            end
 

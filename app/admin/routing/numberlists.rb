@@ -19,12 +19,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                            class: 'scoped_collection_action_button ui',
                            form: -> do
                              {
-                               mode_id: Routing::NumberlistMode.all.map{
-                                 |mode| [mode.name, mode.id]
-                               },
-                               default_action_id: Routing::NumberlistAction.all.map{
-                                 |default_action| [default_action.name, default_action.id]
-                               },
+                               mode_id: Routing::NumberlistMode.all.map{ |nm| [nm.name, nm.id] },
+                               default_action_id: Routing::NumberlistAction.all.map{ |na| [na.name, na.id] },
                                default_src_rewrite_rule: 'text',
                                default_src_rewrite_result: 'text',
                                default_dst_rewrite_rule: 'text',

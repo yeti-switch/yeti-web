@@ -18,12 +18,10 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
                            class: 'scoped_collection_action_button ui',
                            form: -> do
                              {
-                               routing_plan_id: Routing::RoutingPlan.all.map{
-                                 |routing_plan| [routing_plan.name, routing_plan.id]
-                               },
+                               routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
                                prefix: 'text',
                                priority: 'text',
-                               vendor_id: Contractor.vendors.all.map{ |vendor| [vendor.name, vendor.id] }
+                               vendor_id: Contractor.vendors.all.map{ |v| [v.name, v.id] }
                              }
                            end
 

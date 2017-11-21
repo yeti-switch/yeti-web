@@ -15,24 +15,18 @@ ActiveAdmin.register Destination do
                        prefix: 'text',
                        reject_calls: boolean,
                        quality_alarm: boolean,
-                       rateplan_id: Rateplan.all.map { |rateplan| [rateplan.name, rateplan.id] },
-                       routing_tag_id: Routing::RoutingTag.all.map {
-                         |routing_tag| [routing_tag.name, routing_tag.id]
-                       },
+                       rateplan_id: Rateplan.all.map { |r| [r.name, r.id] },
+                       routing_tag_id: Routing::RoutingTag.all.map { |rt| [rt.name, rt.id] },
                        valid_from: 'datepicker',
                        valid_till: 'datepicker',
-                       rate_policy_id: DestinationRatePolicy.all.map {
-                         |rate_policy| [rate_policy.name, rate_policy.id]
-                       },
+                       rate_policy_id: DestinationRatePolicy.all.map { |drp| [drp.name, drp.id] },
                        initial_interval: 'text',
                        initial_rate: 'text',
                        next_interval: 'text',
                        next_rate: 'text',
                        use_dp_intervals: boolean,
                        connect_fee: 'text',
-                       profit_control_mode_id: Routing::RateProfitControlMode.all.map {
-                         |profit_control_mode| [profit_control_mode.name, profit_control_mode.id]
-                       },
+                       profit_control_mode_id: Routing::RateProfitControlMode.all.map { |rpcm| [rpcm.name, rpcm.id] },
                        dp_margin_fixed: 'text',
                        dp_margin_percent: 'text',
                        asr_limit: 'text',
@@ -41,7 +35,6 @@ ActiveAdmin.register Destination do
 
   config.batch_actions = true
   config.scoped_collection_actions_if = -> { true }
-  batch_action :destroy, false
 
   decorate_with DestinationDecorator
 

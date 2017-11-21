@@ -16,12 +16,8 @@ ActiveAdmin.register Dialpeer do
   acts_as_async_update('Dialpeer',
                        enabled: boolean,
                        prefix: 'text',
-                       routing_group_id: RoutingGroup.all.map {
-                         |routing_group| [routing_group.name, routing_group.id]
-                       },
-                       routing_tag_id: Routing::RoutingTag.all.map {
-                         |routing_tag| [routing_tag.name, routing_tag.id]
-                       },
+                       routing_group_id: RoutingGroup.all.map { |rg| [rg.name, rg.id] },
+                       routing_tag_id: Routing::RoutingTag.all.map { |rt| [rt.name, rt.id] },
                        priority: 'text',
                        force_hit_rate: 'text',
                        exclusive_route: boolean,
@@ -31,18 +27,10 @@ ActiveAdmin.register Dialpeer do
                        next_rate: 'text',
                        connect_fee: 'text',
                        lcr_rate_multiplier: 'text',
-                       gateway_id: Gateway.all.map {
-                         |gateway| [gateway.name, gateway.id]
-                       },
-                       gateway_group_id: GatewayGroup.all.map {
-                         |gateway_group| [gateway_group.name, gateway_group.id]
-                       },
-                       vendor_id: Contractor.vendors.all.map {
-                         |vendor| [vendor.name, vendor.id]
-                       },
-                       account_id: Account.all.map {
-                         |account| [account.name, account.id]
-                       },
+                       gateway_id: Gateway.all.map { |g| [g.name, g.id] },
+                       gateway_group_id: GatewayGroup.all.map { |gg| [gg.name, gg.id] },
+                       vendor_id: Contractor.vendors.all.map { |v| [v.name, v.id] },
+                       account_id: Account.all.map { |a| [a.name, a.id] },
                        valid_from: 'datepicker',
                        valid_till: 'datepicker',
                        asr_limit: 'text',
@@ -58,7 +46,6 @@ ActiveAdmin.register Dialpeer do
 
   config.batch_actions = true
   config.scoped_collection_actions_if = -> { true }
-  batch_action :destroy, false
 
   decorate_with DialpeerDecorator
 

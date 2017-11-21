@@ -20,8 +20,8 @@ ActiveAdmin.register Billing::Contact do
                            class: 'scoped_collection_action_button ui',
                            form: -> do
                              {
-                               contractor_id: Contractor.all.map { |contractor| [contractor.name, contractor.id] },
-                               admin_user_id: AdminUser.all.map { |admin| [admin.username, admin.id] },
+                               contractor_id: Contractor.all.map { |c| [c.name, c.id] },
+                               admin_user_id: AdminUser.all.map { |au| [au.username, au.id] },
                                email: 'text',
                                notes: 'text'
                              }
