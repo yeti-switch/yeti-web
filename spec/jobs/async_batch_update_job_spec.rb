@@ -54,6 +54,13 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
           it { expect {subject}.to change(Destination.where(prefix: '300', reject_calls: false), :count).by(1) }
           it { expect {subject}.to change(Destination.where(id: 1, prefix: 300), :count).by(1) }
         end
+
+        context 'records filtered and ordering by attribute to be updated' do
+          let(:sql_query) { Destination.where('initial_rate < ?', 0.5).order(:prefix).to_sql }
+
+          it { expect {subject}.to change(Destination.where(prefix: '300', reject_calls: false), :count).by(1) }
+          it { expect {subject}.to change(Destination.where(id: 1, prefix: 300), :count).by(1) }
+        end
       end
     end
 

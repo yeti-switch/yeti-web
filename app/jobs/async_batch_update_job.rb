@@ -1,14 +1,15 @@
 class AsyncBatchUpdateJob < ActiveJob::Base
-  queue_as :records_change
+  queue_as :batch_actions
+
+  BATCH_SIZE = 1
 
   def perform(model_class, sql_query, changes)
-    limit = 1000
     total_count = model_class.constantize.count_by_sql(total_count_sql sql_query)
     sql_query_reordered = order_by_id_sql sql_query
 
-    ((total_count.to_f / limit).ceil).times do |batch_number|
-      offset = batch_number * limit
-      scoped_records = model_class.constantize.find_by_sql(sql_query_reordered + " OFFSET #{offset} LIMIT #{limit}")
+    ((total_count.to_f / BATCH_SIZE).ceil).times do |batch_number|
+      offset = batch_number * BATCH_SIZE
+      scoped_records = model_class.constantize.find_by_sql(sql_query_reordered + " OFFSET #{offset} LIMIT #{BATCH_SIZE}")
       scoped_records.each { |record| record.update!(changes) }
     end
 

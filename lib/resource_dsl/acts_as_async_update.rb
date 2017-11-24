@@ -5,9 +5,7 @@ module ResourceDSL
       scoped_collection_action :async_update,
                                title: 'Update batch',
                                class: 'scoped_collection_action_button ui',
-                               form: -> do
-                                 attrs_to_update
-                               end do
+                               form: -> { attrs_to_update } do
         AsyncBatchUpdateJob.perform_later(model_class,
                                           scoped_collection_records.to_sql,
                                           params[:changes])
