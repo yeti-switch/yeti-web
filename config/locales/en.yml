@@ -13,10 +13,13 @@ en:
     actions:
       destroy:
         alert: "%{resource_name} could not be removed. %{resource_errors}"
-      batch_destroy:
-        job_scheduled: 'Batch Delete is scheduled'
-      batch_update:
-        job_scheduled: 'Batch Update is scheduled'
+      batch_actions:
+        batch_destroy:
+          job_scheduled: 'Batch Delete is scheduled'
+        batch_update:
+          job_scheduled: 'Batch Update is scheduled'
+        editing_prohibited: 'Background job is in progress. Editing records is prohibited.'
+        destroying_prohibited: 'Background job is in progress. Destroying records is prohibited.'
 
     importing:
       pending: "Please finish your previous import session."

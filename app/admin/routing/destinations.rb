@@ -33,6 +33,8 @@ ActiveAdmin.register Destination do
                        acd_limit: 'text',
                        short_calls_limit: 'text')
 
+  acts_as_delayed_job_lock
+
   config.batch_actions = true
   config.scoped_collection_actions_if = -> { true }
 

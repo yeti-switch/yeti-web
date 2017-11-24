@@ -44,6 +44,8 @@ ActiveAdmin.register Dialpeer do
                        dst_rewrite_rule: 'text',
                        dst_rewrite_result: 'text')
 
+  acts_as_delayed_job_lock
+
   config.batch_actions = true
   config.scoped_collection_actions_if = -> { true }
 
