@@ -1,10 +1,10 @@
 ## Welcome to YETI
 
-# Contributin, Development setup
+# Contributing, Development setup
 
 
-It is strongly recomended to use PostgreSQL version 9.4.
-The easiest way to install it - is to use Debian Linux and follow official PostreSQL instruction
+It is strongly recommended to use PostgreSQL version 9.4.
+The easiest way to install it - is to use Debian Linux and follow official PostgreSQL instruction
 https://www.postgresql.org/download/linux/debian/
 
 You need to install:
@@ -13,7 +13,7 @@ You need to install:
 $ sudo apt-get install postgresql-9.4 postgresql-contrib-9.4 postgresql-9.4-prefix postgresql-9.4-pgq3 skytools3 skytools3-ticker
 $ sudo apt-get install -t stretch-pgdg libpq-dev
 ```
-In addition you need to compile or install from .deb package Yeti postgresql extension https://github.com/yeti-switch/yeti-pg-ext
+In addition you need to compile or install from .deb package Yeti PostgreSQL extension https://github.com/yeti-switch/yeti-pg-ext
 
 Then fork and clone yeti-web repository and run:
 
