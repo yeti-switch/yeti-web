@@ -45,11 +45,15 @@ Yeti::Application.configure do
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
 
-  # Use a different logger for distributed setups
-  config.logger =  Logger::Syslog.new('YETI-admin', Syslog::LOG_LOCAL7)
-
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  # write logs only to syslog
+  # http://rocketjob.github.io/semantic_logger/rails.html#disable-default-rails-file-logging
+  config.rails_semantic_logger.add_file_appender = false
+  config.semantic_logger.add_appender(
+    appender: SemanticLogger::Appender::Syslog.new(
+      application: 'YETI-admin',
+      facility: ::Syslog::LOG_LOCAL7
+    )
+  )
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
