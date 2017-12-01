@@ -33,7 +33,7 @@ ActiveAdmin.register Dialpeer do
                  :created_at
 
   acts_as_import resource_class: Importing::Dialpeer
-  
+
   acts_as_batch_changeable [:enabled, :priority, :initial_interval, :next_interval,
                             :initial_rate, :next_rate, :connect_fee,
                             :lcr_rate_multiplier, :force_hit_rate,
@@ -210,9 +210,10 @@ ActiveAdmin.register Dialpeer do
       f.input :lcr_rate_multiplier
       f.input :connect_fee
 
-      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateways),
+      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_origination_gateways),
               include_blank: "None" ,
               input_html: {class: 'chosen'}
+
       f.input :gateway_group, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateway_groups),
               include_blank: "None" ,
               input_html: {class: 'chosen'}
@@ -232,7 +233,7 @@ ActiveAdmin.register Dialpeer do
     end
     f.actions
   end
-  
+
   show do |s|
     tabs do
 
