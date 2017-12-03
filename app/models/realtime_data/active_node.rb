@@ -19,9 +19,9 @@ class RealtimeData::ActiveNode < Node
 
   def api
     @api ||= if rpc_endpoint.present?
-               YetisNode::Client.new(rpc_endpoint, transport: :json_rpc, logger: logger)
+               YetisNode::Client.new(rpc_endpoint, transport: :json_rpc)
              else
-               YetisNode::Client.new(rpc_uri, logger: logger)
+               YetisNode::Client.new(rpc_uri)
              end
   end
 
