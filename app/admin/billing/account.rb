@@ -6,7 +6,7 @@ ActiveAdmin.register Account do
   acts_as_clone
   acts_as_async_destroy('Account')
   acts_as_async_update('Account',
-                       lamda do
+                       lambda do
                          {
                          contractor_id: Contractor.all.map { |c| [c.name, c.id] },
                          balance: 'text',
