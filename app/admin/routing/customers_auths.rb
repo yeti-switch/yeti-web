@@ -7,6 +7,30 @@ ActiveAdmin.register CustomersAuth do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
+  acts_as_async_destroy('CustomersAuth')
+  boolean = [ ['Yes', 't'], ['No', 'f'] ]
+  acts_as_async_update('CustomersAuth',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           transport_protocol_id: Equipment::TransportProtocol.all.map { |tp| [tp.name, tp.id] },
+                           ip: 'text',
+                           src_prefix: 'text',
+                           dst_prefix: 'text',
+                           min_dst_number_length: 'text',
+                           max_dst_number_length: 'text',
+                           from_domain: 'text',
+                           to_domain: 'text',
+                           x_yeti_auth: 'text',
+                           dst_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
+                           src_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
+                           dump_level_id: DumpLevel.all.map { |dl| [dl.name, dl.id] },
+                           rateplan_id: Rateplan.all.map { |r| [r.name, r.id] },
+                           routing_plan_id: Routing::RoutingPlan.all.map { |rp| [rp.name, rp.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with CustomersAuthDecorator
 
@@ -66,32 +90,6 @@ ActiveAdmin.register CustomersAuth do
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
 
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             boolean = [ ['Yes', 't'], ['No', 'f'] ]
-                             {
-                               enabled: boolean,
-                               transport_protocol_id: Equipment::TransportProtocol.all.map { |tp| [tp.name, tp.id] },
-                               ip: 'text',
-                               src_prefix: 'text',
-                               dst_prefix: 'text',
-                               min_dst_number_length: 'text',
-                               max_dst_number_length: 'text',
-                               from_domain: 'text',
-                               to_domain: 'text',
-                               x_yeti_auth: 'text',
-                               dst_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
-                               src_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
-                               dump_level_id: DumpLevel.all.map { |dl| [dl.name, dl.id] },
-                               rateplan_id: Rateplan.all.map { |r| [r.name, r.id] },
-                               routing_plan_id: Routing::RoutingPlan.all.map { |rp| [rp.name, rp.id] }
-                             }
-                           end
-
   collection_action :search_for_debug do
     src_prefix=params[:src_prefix].to_s
     dst_prefix=params[:dst_prefix].to_s
@@ -101,7 +99,6 @@ ActiveAdmin.register CustomersAuth do
 
   scope :with_radius
   scope :with_dump
-
 
   index do
     selectable_column

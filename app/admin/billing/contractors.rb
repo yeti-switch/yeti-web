@@ -6,6 +6,22 @@ ActiveAdmin.register Contractor do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
+  acts_as_async_destroy('Contractor')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('Contractor',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           vendor: boolean,
+                           customer: boolean,
+                           description: 'text',
+                           address: 'text',
+                           phones: 'text',
+                           smtp_connection_id: System::SmtpConnection.all.map { |smtpc| [smtpc.name, smtpc.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
   
   acts_as_export :id, :enabled, :name, :vendor,:customer
   acts_as_import resource_class: Importing::Contractor
@@ -14,24 +30,6 @@ ActiveAdmin.register Contractor do
   scope :customers
 
   permit_params :name, :enabled, :vendor, :customer ,:description, :address, :phones, :tech_contact, :fin_contact, :smtp_connection_id
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             boolean = [ ['Yes', 't'], ['No', 'f']]
-                             {
-                               enabled: boolean,
-                               vendor: boolean,
-                               customer: boolean,
-                               description: 'text',
-                               address: 'text',
-                               phones: 'text',
-                               smtp_connection_id: System::SmtpConnection.all.map { |smtpc| [smtpc.name, smtpc.id] }
-                             }
-                           end
 
   includes :smtp_connection
 

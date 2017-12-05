@@ -5,28 +5,26 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::Numberlist')
+  acts_as_async_update('Routing::Numberlist',
+                       lambda do
+                         {
+                           mode_id: Routing::NumberlistMode.all.map{ |nm| [nm.name, nm.id] },
+                           default_action_id: Routing::NumberlistAction.all.map{ |na| [na.name, na.id] },
+                           default_src_rewrite_rule: 'text',
+                           default_src_rewrite_result: 'text',
+                           default_dst_rewrite_rule: 'text',
+                           default_dst_rewrite_result: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   includes :mode, :default_action
 
   permit_params :name, :mode_id, :default_action_id,
                 :default_src_rewrite_rule, :default_src_rewrite_result,
                 :default_dst_rewrite_rule, :default_dst_rewrite_result
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             {
-                               mode_id: Routing::NumberlistMode.all.map{ |nm| [nm.name, nm.id] },
-                               default_action_id: Routing::NumberlistAction.all.map{ |na| [na.name, na.id] },
-                               default_src_rewrite_rule: 'text',
-                               default_src_rewrite_result: 'text',
-                               default_dst_rewrite_rule: 'text',
-                               default_dst_rewrite_result: 'text'
-                             }
-                           end
 
   index do
     selectable_column

@@ -10,6 +10,22 @@ ActiveAdmin.register Gateway do
   acts_as_quality_stat
   acts_as_lock
   acts_as_stats_actions
+  acts_as_async_destroy('Gateway')
+  boolean = [ ['Yes', 't'], ['No', 'f'] ]
+  acts_as_async_update('Gateway',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           locked: boolean,
+                           priority: 'text',
+                           is_shared: boolean,
+                           acd_limit: 'text',
+                           asr_limit: 'text',
+                           short_calls_limit: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with GatewayDecorator
 
@@ -86,24 +102,6 @@ ActiveAdmin.register Gateway do
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             boolean = [ ['Yes', 't'], ['No', 'f'] ]
-                             {
-                               enabled: boolean,
-                               locked: boolean,
-                               priority: 'text',
-                               is_shared: boolean,
-                               acd_limit: 'text',
-                               asr_limit: 'text',
-                               short_calls_limit: 'text'
-                             }
-                           end
 
   controller do
     def resource_params

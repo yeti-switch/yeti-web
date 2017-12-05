@@ -4,6 +4,18 @@ ActiveAdmin.register Billing::Contact do
   acts_as_safe_destroy
   acts_as_audit
   acts_as_clone
+  acts_as_async_destroy('Billing::Contact')
+  acts_as_async_update('Billing::Contact',
+                       lambda do
+                         {
+                           contractor_id: Contractor.all.map { |c| [c.name, c.id] },
+                           admin_user_id: AdminUser.all.map { |au| [au.username, au.id] },
+                           email: 'text',
+                           notes: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   acts_as_export :id,
                  [:contractor_name, proc { |row| row.contractor.try(:name) }],
@@ -12,20 +24,6 @@ ActiveAdmin.register Billing::Contact do
                  :notes,
                  :created_at,
                  :updated_at
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             {
-                               contractor_id: Contractor.all.map { |c| [c.name, c.id] },
-                               admin_user_id: AdminUser.all.map { |au| [au.username, au.id] },
-                               email: 'text',
-                               notes: 'text'
-                             }
-                           end
 
   permit_params :contractor_id, :admin_user_id, :email, :notes, :created_at, :updated_at
 

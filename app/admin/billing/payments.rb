@@ -4,25 +4,24 @@ ActiveAdmin.register Payment do
   config.batch_actions = false
   actions :index, :create, :new, :show
 
+  acts_as_async_destroy('Payment')
+  acts_as_async_update('Payment',
+                       lambda do
+                         {
+                           account_id: Account.all.map{ |a| [a.name, a.id]},
+                           amount: 'text',
+                           notes: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
+
   permit_params :account_id, :amount, :notes
   scope :all, default: true
   scope :today
   scope :yesterday
 
   acts_as_export
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             {
-                               account_id: Account.all.map{ |a| [a.name, a.id]},
-                               amount: 'text',
-                               notes: 'text'
-                             }
-                           end
 
   controller do
     def scoped_collection

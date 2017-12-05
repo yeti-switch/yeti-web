@@ -4,22 +4,20 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::RoutingPlan')
+  boolean = [ ['Yes', 't'], ['No', 'f'] ]
+  acts_as_async_update('Routing::RoutingPlan',
+                       lambda do
+                         {
+                           sorting_id: Sorting.all.map { |s| [s.name, s.id] },
+                           use_lnp: boolean,
+                           rate_delta_max: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, {routing_group_ids: []}
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             boolean = [ ['Yes', 't'], ['No', 'f'] ]
-                             {
-                               sorting_id: Sorting.all.map { |s| [s.name, s.id] },
-                               use_lnp: boolean,
-                               rate_delta_max: 'text'
-                             }
-                           end
 
   filter :id
   filter :name

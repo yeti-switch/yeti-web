@@ -3,15 +3,12 @@ ActiveAdmin.register Lnp::Cache do
   actions :index, :show, :destroy
 
   acts_as_safe_destroy
+  acts_as_async_destroy('Lnp::Cache')
+  acts_as_delayed_job_lock
 
   acts_as_export :id, :dst, :lrn, :tag, :created_at, :expires_at
 
   includes :database
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_destroy
 
   index do
     selectable_column

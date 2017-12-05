@@ -5,6 +5,20 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   #acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Lnp::RoutingPlanLnpRule')
+  acts_as_async_update('Lnp::RoutingPlanLnpRule',
+                       lambda do
+                         {
+                           routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
+                           req_dst_rewrite_rule: 'text',
+                           req_dst_rewrite_result: 'text',
+                           database_id: Lnp::Database.all.map{ |db| [db.name, db.id] },
+                           lrn_rewrite_rule: 'text',
+                           lrn_rewrite_result: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   acts_as_export :id, :name
 
@@ -13,22 +27,6 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
                 :lrn_rewrite_rule, :lrn_rewrite_result
 
   includes :routing_plan, :database
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             {
-                               routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
-                               req_dst_rewrite_rule: 'text',
-                               req_dst_rewrite_result: 'text',
-                               database_id: Lnp::Database.all.map{ |db| [db.name, db.id] },
-                               lrn_rewrite_rule: 'text',
-                               lrn_rewrite_result: 'text',
-                             }
-                           end
 
   index do
     selectable_column

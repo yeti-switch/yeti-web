@@ -5,25 +5,23 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::RoutingPlanStaticRoute')
+  acts_as_async_update('Routing::RoutingPlanStaticRoute',
+                       lambda do
+                         {
+                           routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
+                           prefix: 'text',
+                           priority: 'text',
+                           vendor_id: Contractor.vendors.all.map{ |v| [v.name, v.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
 
   includes :vendor, :routing_plan, network_prefix: [:country, :network]
 
   permit_params :routing_plan_id, :prefix, :priority, :vendor_id
-
-  config.batch_actions = true
-  config.scoped_collection_actions_if = -> { true }
-
-  scoped_collection_action :scoped_collection_update,
-                           class: 'scoped_collection_action_button ui',
-                           form: -> do
-                             {
-                               routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
-                               prefix: 'text',
-                               priority: 'text',
-                               vendor_id: Contractor.vendors.all.map{ |v| [v.name, v.id] }
-                             }
-                           end
 
   filter :id
   filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: {class: 'chosen'}
