@@ -66,6 +66,10 @@ class Dialpeer < Yeti::ActiveRecord
   validates_numericality_of :force_hit_rate, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00, allow_blank: true
   validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
+  validates_presence_of :dst_number_min_length, :dst_number_max_length
+  validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+
   validates_format_of :prefix, without: /\s/
   validates_format_of :batch_prefix, without: /\s/
 
@@ -147,9 +151,12 @@ class Dialpeer < Yeti::ActiveRecord
         SELECT t_dp.id as id,
         rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(t_dp.prefix) desc) as r
         FROM class4.dialpeers t_dp
-        WHERE prefix_range(t_dp.prefix)@>prefix_range(?)
+        WHERE
+          prefix_range(t_dp.prefix)@>prefix_range(?) and
+          length(?)>=t_dp.dst_number_min_length and
+          length(?)<=t_dp.dst_number_max_length
       ) h where h.r=1
-    )', "#{prx}")
+    )', prx, prx, prx)
   }
 
   protected
@@ -167,7 +174,11 @@ class Dialpeer < Yeti::ActiveRecord
   end
 
   def vendor_owners_the_gateway
-    self.errors.add(:gateway, "must be owned by selected vendor") unless self.gateway_id.nil? || (self.vendor_id && self.vendor_id == self.gateway.contractor_id)
+    return true if self.gateway_id.nil? || self.gateway.is_shared?
+
+    unless self.vendor_id && self.vendor_id == self.gateway.contractor_id
+      self.errors.add(:gateway, "must be owned by selected vendor or be shared")
+    end
   end
 
   def vendor_owners_the_gateway_group
@@ -183,4 +194,3 @@ class Dialpeer < Yeti::ActiveRecord
   end
 
 end
-  

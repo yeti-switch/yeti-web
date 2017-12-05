@@ -63,6 +63,11 @@ class Destination < ActiveRecord::Base
   validates_numericality_of :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee
   validates_format_of :prefix, without: /\s/
 
+  validates_presence_of :dst_number_min_length, :dst_number_max_length
+  validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+
+
 #  validates_uniqueness_of :prefix, scope: [:rateplan_id]
   attr_accessor :batch_prefix
 
@@ -132,9 +137,11 @@ class Destination < ActiveRecord::Base
         SELECT t_dst.id as id,
         rank() OVER (PARTITION BY t_dst.rateplan_id ORDER BY length(t_dst.prefix) desc) as r
         FROM class4.destinations t_dst
-        WHERE prefix_range(t_dst.prefix)@>prefix_range(?)
+        WHERE prefix_range(t_dst.prefix)@>prefix_range(?) and
+          length(?)>=t_dst.dst_number_min_length and
+          length(?)<=t_dst.dst_number_max_length
       ) h where h.r=1
-    )', "#{prx}")
+    )', prx, prx, prx)
   }
 
   private

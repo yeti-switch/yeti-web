@@ -48,5 +48,34 @@ class Rateplan < ActiveRecord::Base
     @contacts ||= Billing::Contact.where(id: send_quality_alarms_to)
   end
 
+  def number_rates(number)
+    sql_query = %{
+      SELECT *
+      FROM (
+        SELECT
+        d.*,
+        class4.routing_tags.name AS routing_tag_name,
+        rank() OVER (
+          PARTITION BY d.routing_tag_id
+          ORDER BY length(prefix_range(prefix)) DESC
+        ) AS rank
+        FROM class4.destinations d
+
+        LEFT JOIN class4.routing_tags ON d.routing_tag_id = class4.routing_tags.id
+
+        WHERE
+          prefix_range(prefix)@>prefix_range('#{number}')
+            AND rateplan_id=#{self.id}
+            AND enabled
+            AND valid_from <= now()
+            AND valid_till >= now()
+      ) AS data
+      WHERE data.rank=1;
+    }
+    result = self.class.connection.exec_query(sql_query)
+    return [] if result.empty?
+    # fix boolean columns: 't' => true, 'f' => false
+    result.cast_values.map { |values| Hash[[result.columns, values].transpose] }
+  end
+
 end
-  

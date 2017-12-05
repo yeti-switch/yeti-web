@@ -39,3 +39,6 @@ end
 ].each do |filename|
   execute_sql_file("db/seeds/cdr/#{filename}.sql", Cdr::Base.connection);
 end
+
+# Create partition for current+next monthes if not exists
+Cdr::Table.add_partition

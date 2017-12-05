@@ -98,6 +98,9 @@ ActiveAdmin.register Dialpeer do
     column :enabled
     column :locked
     column :prefix
+    column :dst_number_length do |c|
+      c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
+    end
     column :country, sortable: 'countries.name' do |row|
       auto_link row.network_prefix.try!(:country)
     end
@@ -210,7 +213,8 @@ ActiveAdmin.register Dialpeer do
       else
         f.input :prefix, label: "Prefix", input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
       end
-
+      f.input :dst_number_min_length
+      f.input :dst_number_max_length
       f.input :enabled
       f.input :routing_group, input_html: {class: 'chosen'}
       f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
@@ -234,9 +238,10 @@ ActiveAdmin.register Dialpeer do
       f.input :lcr_rate_multiplier
       f.input :connect_fee
 
-      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateways),
+      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_origination_gateways),
               include_blank: "None" ,
               input_html: {class: 'chosen'}
+
       f.input :gateway_group, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateway_groups),
               include_blank: "None" ,
               input_html: {class: 'chosen'}
@@ -263,6 +268,8 @@ ActiveAdmin.register Dialpeer do
       tab :general do
         attributes_table do
           row :prefix
+          row :dst_number_min_length
+          row :dst_number_max_length
           row :country
           row :network
           row :enabled

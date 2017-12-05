@@ -53,3 +53,26 @@ And run tests:
 ```sh
 $ bundle exec rspec
 ```
+
+# Migrations
+
+When you run several migrations in a row, you may wish to stop at some point. In this case you should add `stop_step` method to the migration:
+
+```ruby
+# example /db/migrate/20171105085529_one.rb
+def change
+  # do something
+end
+
+def stop_step
+  true
+end
+```
+
+In this case all migrations after this one will no be performed. To continue migration process you should run `rake db:migrate` command again.
+
+If you do not want to migrate with stops, use env-variable IGNORE_STOPS=true
+
+```sh
+IGNORE_STOPS=true bundle exec rake db:migrate
+```

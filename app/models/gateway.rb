@@ -128,6 +128,7 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :orig_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
   belongs_to :rel100_mode, class_name: Equipment::GatewayRel100Mode, foreign_key: :rel100_mode_id
 
+  has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: Dialpeer, dependent: :restrict_with_error
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :gateway_id, dependent: :nullify
   has_one :statistic, class_name: 'GatewaysStat', dependent: :delete
@@ -158,6 +159,7 @@ class Gateway < Yeti::ActiveRecord
   validate :vendor_owners_the_gateway_group
   validate :vendor_can_be_changed
   validate :allow_termination_can_be_enabled
+  validate :is_shared_can_be_changed
 
   include Yeti::ResourceStatus
 
@@ -236,5 +238,16 @@ class Gateway < Yeti::ActiveRecord
     end
   end
 
+
+  def is_shared_can_be_changed
+    return true unless is_shared_changed?(from: true, to: false)
+
+    if dialpeers.any?
+      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_dialpeer'))
+    end
+    if customers_auths.any?
+      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_customers_auth'))
+    end
+  end
 
 end

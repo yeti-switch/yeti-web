@@ -108,6 +108,7 @@ Yeti::Application.routes.draw do
             jsonapi_resources :accounts
             jsonapi_resources :rateplans
             jsonapi_resources :rates
+            jsonapi_resource :check_rate, only: [:create]
             jsonapi_resources :cdrs
            end
         end

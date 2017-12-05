@@ -12608,6 +12608,10 @@ CREATE TABLE destinations (
     quality_alarm boolean DEFAULT false NOT NULL,
     routing_tag_id smallint,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
+    dst_number_max_length smallint DEFAULT 100 NOT NULL,
+    CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
+    CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
     CONSTRAINT destinations_non_zero_next_interval CHECK ((next_interval > 0))
 );
@@ -12653,6 +12657,10 @@ CREATE TABLE dialpeers (
     src_name_rewrite_result character varying,
     exclusive_route boolean DEFAULT false NOT NULL,
     routing_tag_id smallint,
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
+    dst_number_max_length smallint DEFAULT 100 NOT NULL,
+    CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
+    CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
     CONSTRAINT dialpeers_non_zero_next_interval CHECK ((next_interval > 0))
 );
@@ -27206,7 +27214,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
               COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.min_dst_number_length and ca.max_dst_number_length and
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
               c.enabled and c.customer
         ORDER BY
           masklen(ca.ip) DESC,
@@ -27477,8 +27485,8 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth.routing_plan_id;
         if v_rp.sorting_id=5 then -- route testing
-          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)*(.*)','')::integer;
-          v_routing_key=regexp_replace(v_routing_key,'(.*)*(.*)','');
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
           v_ret.dst_prefix_out=v_routing_key;
           v_ret.dst_prefix_routing=v_routing_key;
         end if;
@@ -27560,6 +27568,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/ from class4.destinations d
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
+          AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
           AND rateplan_id=v_customer_auth.rateplan_id
           AND enabled
           AND valid_from <= v_now
@@ -27629,6 +27638,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27642,7 +27652,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
             WHERE
               r=1
               and exclusive_rank=1
-              AND dp_next_rate<v_rate_limit
+              AND dp_next_rate<=v_rate_limit
               AND dp_enabled
               and not dp_locked --ACD&ASR control for DP
             ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC limit 10
@@ -27674,6 +27684,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27688,7 +27699,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
               r=1
               and exclusive_rank=1
               AND dp_enabled
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
             ORDER BY dp_metric limit 10
           ) LOOP
             RETURN QUERY
@@ -27719,6 +27730,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27732,7 +27744,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
             WHERE
               r=1
               and exclusive_rank=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
               and not dp_locked
             ORDER BY dp_metric_priority DESC, dp_metric limit 10
@@ -27764,6 +27776,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27777,7 +27790,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
             WHERE
               r=1
               and exclusive_rank=1
-              and dp_next_rate < v_rate_limit
+              and dp_next_rate <= v_rate_limit
               and dp_enabled
               and not dp_locked --ACD&ASR control for DP
             ORDER BY r2 ASC limit 10
@@ -27809,6 +27822,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27824,7 +27838,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
               r=1
               and exclusive_rank=1
               and dp_enabled
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
             ORDER BY dp_metric_priority DESC, dp_metric limit 10
           )LOOP
             RETURN QUERY
@@ -27863,6 +27877,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                       AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27877,7 +27892,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
               r=1
               and exclusive_rank=1
               and r2=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
               and not dp_locked
             ORDER BY coalesce(v_random<=dp_force_hit_rate,false) desc, coalesce(rpsr_priority,0) DESC, dp_metric limit 10
@@ -27917,6 +27932,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                       AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -27931,7 +27947,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
               r=1
               and exclusive_rank=1
               and r2=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
             ORDER BY coalesce(v_random<=dp_force_hit_rate,false) desc, rpsr_priority DESC, dp_metric limit 10
           )LOOP
@@ -28074,7 +28090,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
               COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.min_dst_number_length and ca.max_dst_number_length and
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
               c.enabled and c.customer
         ORDER BY
           masklen(ca.ip) DESC,
@@ -28345,8 +28361,8 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth.routing_plan_id;
         if v_rp.sorting_id=5 then -- route testing
-          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)*(.*)','')::integer;
-          v_routing_key=regexp_replace(v_routing_key,'(.*)*(.*)','');
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
           v_ret.dst_prefix_out=v_routing_key;
           v_ret.dst_prefix_routing=v_routing_key;
         end if;
@@ -28428,6 +28444,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/ from class4.destinations d
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
+          AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
           AND rateplan_id=v_customer_auth.rateplan_id
           AND enabled
           AND valid_from <= v_now
@@ -28497,6 +28514,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28510,7 +28528,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
             WHERE
               r=1
               and exclusive_rank=1
-              AND dp_next_rate<v_rate_limit
+              AND dp_next_rate<=v_rate_limit
               AND dp_enabled
               and not dp_locked --ACD&ASR control for DP
             ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC limit 10
@@ -28542,6 +28560,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28556,7 +28575,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
               r=1
               and exclusive_rank=1
               AND dp_enabled
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
             ORDER BY dp_metric limit 10
           ) LOOP
             RETURN QUERY
@@ -28587,6 +28606,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28600,7 +28620,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
             WHERE
               r=1
               and exclusive_rank=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
               and not dp_locked
             ORDER BY dp_metric_priority DESC, dp_metric limit 10
@@ -28632,6 +28652,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28645,7 +28666,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
             WHERE
               r=1
               and exclusive_rank=1
-              and dp_next_rate < v_rate_limit
+              and dp_next_rate <= v_rate_limit
               and dp_enabled
               and not dp_locked --ACD&ASR control for DP
             ORDER BY r2 ASC limit 10
@@ -28677,6 +28698,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28692,7 +28714,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
               r=1
               and exclusive_rank=1
               and dp_enabled
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
             ORDER BY dp_metric_priority DESC, dp_metric limit 10
           )LOOP
             RETURN QUERY
@@ -28731,6 +28753,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                       AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28745,7 +28768,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
               r=1
               and exclusive_rank=1
               and r2=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
               and not dp_locked
             ORDER BY coalesce(v_random<=dp_force_hit_rate,false) desc, coalesce(rpsr_priority,0) DESC, dp_metric limit 10
@@ -28785,6 +28808,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
                       AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -28799,7 +28823,7 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
               r=1
               and exclusive_rank=1
               and r2=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
             ORDER BY coalesce(v_random<=dp_force_hit_rate,false) desc, rpsr_priority DESC, dp_metric limit 10
           )LOOP
@@ -28932,7 +28956,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
               COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.min_dst_number_length and ca.max_dst_number_length and
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
               c.enabled and c.customer
         ORDER BY
           masklen(ca.ip) DESC,
@@ -29155,8 +29179,8 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth.routing_plan_id;
         if v_rp.sorting_id=5 then -- route testing
-          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)*(.*)','')::integer;
-          v_routing_key=regexp_replace(v_routing_key,'(.*)*(.*)','');
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
           v_ret.dst_prefix_out=v_routing_key;
           v_ret.dst_prefix_routing=v_routing_key;
         end if;
@@ -29211,6 +29235,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/ from class4.destinations d
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
+          AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
           AND rateplan_id=v_customer_auth.rateplan_id
           AND enabled
           AND valid_from <= v_now
@@ -29271,6 +29296,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29284,7 +29310,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
             WHERE
               r=1
               and exclusive_rank=1
-              AND dp_next_rate<v_rate_limit
+              AND dp_next_rate<=v_rate_limit
               AND dp_enabled
               and not dp_locked --ACD&ASR control for DP
             ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC limit 10
@@ -29316,6 +29342,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29330,7 +29357,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
               r=1
               and exclusive_rank=1
               AND dp_enabled
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
             ORDER BY dp_metric limit 10
           ) LOOP
             RETURN QUERY
@@ -29361,6 +29388,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29374,7 +29402,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
             WHERE
               r=1
               and exclusive_rank=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
               and not dp_locked
             ORDER BY dp_metric_priority DESC, dp_metric limit 10
@@ -29406,6 +29434,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29419,7 +29448,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
             WHERE
               r=1
               and exclusive_rank=1
-              and dp_next_rate < v_rate_limit
+              and dp_next_rate <= v_rate_limit
               and dp_enabled
               and not dp_locked --ACD&ASR control for DP
             ORDER BY r2 ASC limit 10
@@ -29451,6 +29480,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                   JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29466,7 +29496,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
               r=1
               and exclusive_rank=1
               and dp_enabled
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
             ORDER BY dp_metric_priority DESC, dp_metric limit 10
           )LOOP
             RETURN QUERY
@@ -29505,6 +29535,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                       AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29519,7 +29550,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
               r=1
               and exclusive_rank=1
               and r2=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
               and not dp_locked
             ORDER BY coalesce(v_random<=dp_force_hit_rate,false) desc, coalesce(rpsr_priority,0) DESC, dp_metric limit 10
@@ -29559,6 +29590,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
                       AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_rpg.routing_plan_id=v_customer_auth.routing_plan_id
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
@@ -29573,7 +29605,7 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
               r=1
               and exclusive_rank=1
               and r2=1
-              and dp_next_rate<v_rate_limit
+              and dp_next_rate<=v_rate_limit
               and dp_enabled
             ORDER BY coalesce(v_random<=dp_force_hit_rate,false) desc, rpsr_priority DESC, dp_metric limit 10
           )LOOP
@@ -51516,10 +51548,10 @@ CREATE TABLE customers_auth (
     from_domain character varying,
     to_domain character varying,
     transport_protocol_id smallint,
-    min_dst_number_length smallint DEFAULT 0 NOT NULL,
-    max_dst_number_length smallint DEFAULT 100 NOT NULL,
-    CONSTRAINT customers_auth_max_dst_number_length CHECK ((min_dst_number_length >= 0)),
-    CONSTRAINT customers_auth_min_dst_number_length CHECK ((min_dst_number_length >= 0))
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
+    dst_number_max_length smallint DEFAULT 100 NOT NULL,
+    CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
+    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
 );
 
 
@@ -53361,7 +53393,7 @@ ALTER SEQUENCE background_threads_id_seq OWNED BY background_threads.id;
 
 
 --
--- Name: delayed_jobs; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+-- Name: delayed_jobs; Type: TABLE; Schema: gui; Owner: -; Tablespace:
 --
 
 CREATE TABLE delayed_jobs (
@@ -57526,7 +57558,7 @@ ALTER TABLE ONLY background_threads
 
 
 --
--- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY delayed_jobs
@@ -58856,7 +58888,7 @@ CREATE UNIQUE INDEX admin_users_username_idx ON admin_users USING btree (usernam
 
 
 --
--- Name: delayed_jobs_priority; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: gui; Owner: -; Tablespace:
 --
 
 CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
@@ -59796,5 +59828,9 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170907203628');
 INSERT INTO public.schema_migrations (version) VALUES ('20170907203638');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170919200403');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171020164700');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171031211812');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171115043504');

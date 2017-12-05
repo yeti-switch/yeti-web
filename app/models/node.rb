@@ -73,8 +73,9 @@ class Node < ActiveRecord::Base
   def calls(options = {})
     empty_on_error = !!options[:empty_on_error]
     args = []
+    method_name = 'calls'
     if options[:only]
-      args << 'filtered'
+      method_name << '.filtered'
       args << options[:only]
     end
     if options[:where]
@@ -83,7 +84,7 @@ class Node < ActiveRecord::Base
     end
 
     begin
-       api.calls(*args.flatten)
+      api.invoke_show_command(method_name, args.flatten)
     rescue StandardError => e
        if empty_on_error
          logger.warn { e.message }
