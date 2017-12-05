@@ -100,6 +100,5 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'cucumber-rails', :require => false
-  gem 'faker'
   gem 'poltergeist'
 end
