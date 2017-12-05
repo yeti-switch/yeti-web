@@ -59795,9 +59795,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170907203628');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170907203638');
 
-<<<<<<< HEAD
-INSERT INTO public.schema_migrations (version) VALUES ('20171115043504');
-=======
 INSERT INTO public.schema_migrations (version) VALUES ('20170919200403');
->>>>>>> origin/master
 
+INSERT INTO public.schema_migrations (version) VALUES ('20171115043504');
