@@ -19,6 +19,14 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     it { expect(response_data.size).to eq(routing_plans.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :routing_plan, 2 }
+
+    it_behaves_like :jsonapi_filter_by_name do
+      let(:subject_record) { create :routing_plan }
+    end
+  end
+
   describe 'GET show' do
     let!(:routing_plan) { create :routing_plan }
 
@@ -85,4 +93,3 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     it { expect(Routing::RoutingPlan.count).to eq(0) }
   end
 end
-

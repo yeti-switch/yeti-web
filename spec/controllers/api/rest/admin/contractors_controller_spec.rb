@@ -19,6 +19,14 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
     it { expect(response_data.size).to eq(contractors.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :contractor, 2, vendor: true }
+
+    it_behaves_like :jsonapi_filter_by_name do
+      let(:subject_record) { create(:contractor, vendor: true) }
+    end
+  end
+
   describe 'GET show' do
     let!(:contractor) { create :contractor, vendor: true }
 
@@ -92,4 +100,3 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
     it { expect(Contractor.count).to eq(0) }
   end
 end
-

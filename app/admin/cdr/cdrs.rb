@@ -158,7 +158,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
                                     x_yeti_auth: @cdr.customer_auth.try!(:x_yeti_auth),
                                     uri_domain: @cdr.ruri_domain,
                                     from_domain: @cdr.from_domain,
-                                    to_domain: @cdr.to_domain
+                                    to_domain: @cdr.to_domain,
+                                    pai: @cdr.pai_in,
+                                    ppi: @cdr.ppi_in,
+                                    privacy: @cdr.privacy_in,
+                                    rpid: @cdr.rpid_in,
+                                    rpid_privacy: @cdr.rpid_privacy_in
                                 }, anchor: 'detailed'})
   end
 
@@ -326,6 +331,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         end
         column :customer_invoice_id
         column :vendor_invoice_id
+
+        column :pai_in
+        column :ppi_in
+        column :privacy_in
+        column :rpid_in
+        column :rpid_privacy_in
+        column :pai_out
+        column :ppi_out
+        column :privacy_out
+        column :rpid_out
+        column :rpid_privacy_out
+
         column :lega_rx_payloads
         column :lega_tx_payloads
         column :legb_rx_payloads
@@ -346,6 +363,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :yeti_version
         column :lega_user_agent
         column :legb_user_agent
+        column :uuid
       end if cdr.attempts.length > 0
     end
 
@@ -353,6 +371,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       tab :general_information do
         attributes_table do
           row :id
+          row :uuid
           row :time_start
           row :time_connect
           row :time_end
@@ -501,6 +520,20 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
         end
       end
+      tab :privacy_information do
+        attributes_table do
+          row :pai_in
+          row :ppi_in
+          row :privacy_in
+          row :rpid_in
+          row :rpid_privacy_in
+          row :pai_out
+          row :ppi_out
+          row :privacy_out
+          row :rpid_out
+          row :rpid_privacy_out
+        end
+      end
     end
   end
 
@@ -643,6 +676,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :term_call_id
     column :customer_invoice_id
     column :vendor_invoice_id
+
+    column :pai_in
+    column :ppi_in
+    column :privacy_in
+    column :rpid_in
+    column :rpid_privacy_in
+    column :pai_out
+    column :ppi_out
+    column :privacy_out
+    column :rpid_out
+    column :rpid_privacy_out
+
     column :lega_rx_payloads
     column :lega_tx_payloads
     column :legb_rx_payloads
@@ -664,6 +709,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :yeti_version
     column :lega_user_agent
     column :legb_user_agent
+    column :uuid
 
   end
 

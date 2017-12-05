@@ -16,7 +16,7 @@ class System::Network < Yeti::ActiveRecord
 
 
   def display_name
-    "#{self.name}"
+    "#{id} | #{name}"
   end
 
   def self.collection

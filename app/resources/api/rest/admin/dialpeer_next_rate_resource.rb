@@ -4,6 +4,8 @@ class Api::Rest::Admin::DialpeerNextRateResource < JSONAPI::Resource
 
   has_one :dialpeer
 
+  filter :external_id
+
   # def self.updatable_fields(context)
   #   super
   # end

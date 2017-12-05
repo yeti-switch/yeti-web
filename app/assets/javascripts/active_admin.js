@@ -34,14 +34,14 @@
 
 
 $(document).ready(function () {
-    $("select.chosen").chosen({no_results_text: "No results matched", width: '240px'});
-    $("select.chosen-wide").chosen({no_results_text: "No results matched", width: '80%'});
-    $("select.chosen-sortable").chosen({no_results_text: "No results matched", width: '80%'}).chosenSortable();
+    $("select.chosen").chosen({no_results_text: "No results matched", width: '240px', search_contains: true});
+    $("select.chosen-wide").chosen({no_results_text: "No results matched", width: '80%', search_contains: true});
+    $("select.chosen-sortable").chosen({no_results_text: "No results matched", width: '80%', search_contains: true}).chosenSortable();
 
 
     $('.index_as_table .index_table').stickyTableHeaders();
     $(document).on('has_many_add:after', function (e, fieldset) {
-        fieldset.find('select.chosen').chosen({no_results_text: "No results matched", width: '240px'});
+        fieldset.find('select.chosen').chosen({no_results_text: "No results matched", width: '240px', search_contains: true});
     });
 
     $('#active_admin_content .tabs').on("tabsactivate", function (event, ui) {

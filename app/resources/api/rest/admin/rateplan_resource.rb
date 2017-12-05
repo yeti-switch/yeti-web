@@ -3,6 +3,8 @@ class Api::Rest::Admin::RateplanResource < JSONAPI::Resource
 
   has_one :profit_control_mode, class_name: 'Routing::RateProfitControlMode'
 
+  filter :name
+
   def self.updatable_fields(context)
     [
       :name,

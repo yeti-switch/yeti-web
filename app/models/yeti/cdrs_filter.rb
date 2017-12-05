@@ -3,6 +3,7 @@ module Yeti
 
     EQ_FILTERABLE = [
         :dst_country_id,
+        :dst_network_id,
         :vendor_id,
         :customer_id,
         :customer_acc_id,

@@ -19,6 +19,24 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     it { expect(response_data.size).to eq(dialpeers.size) }
   end
 
+  describe 'GET index with filters' do
+    before { create_list :dialpeer, 2 }
+
+    it_behaves_like :jsonapi_filter_by_external_id do
+      let(:subject_record) { create :dialpeer }
+    end
+
+    it_behaves_like :jsonapi_filter_by, :prefix do
+      let(:subject_record) { create :dialpeer, prefix: attr_value }
+      let(:attr_value) { '987' }
+    end
+
+    it_behaves_like :jsonapi_filter_by, :routing_group_id do
+      let(:subject_record) { create :dialpeer }
+      let(:attr_value) { subject_record.routing_group_id }
+    end
+  end
+
   describe 'GET show' do
     let!(:dialpeer) { create :dialpeer }
 

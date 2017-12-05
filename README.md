@@ -13,6 +13,7 @@ You need to install:
 $ sudo apt-get install postgresql-9.4 postgresql-contrib-9.4 postgresql-9.4-prefix postgresql-9.4-pgq3 skytools3 skytools3-ticker
 $ sudo apt-get install -t stretch-pgdg libpq-dev
 ```
+In addition you need to compile or install from .deb package Yeti postgresql extension https://github.com/yeti-switch/yeti-pg-ext
 
 Then fork and clone yeti-web repository and run:
 

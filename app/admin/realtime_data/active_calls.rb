@@ -17,13 +17,19 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
   filter :dst_country_id_eq,
          as: :select,
-         collection: proc { System::Country.all.pluck(:name, :id) },
+         collection: proc { System::Country.all },
          label: 'Destination country',
-         input_html: {class: 'chosen'},
+         input_html: { class: 'chosen' },
          if: proc{
            !request.xhr?
          }
 
+  filter :dst_network_id_eq,
+         as: :select,
+         collection: proc { System::Network.all },
+         label: 'Destination network',
+         input_html: { class: 'chosen' },
+         if: proc { !request.xhr? }
 
   filter :vendor_id_eq,
          as: :select,
@@ -138,7 +144,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
       active_calls.first
     end
 
-    def find_collection
+    def find_collection(options = {})
       @search = OpenStruct.new(params[:q])
 
       return [] if params[:q].blank? && GuiConfig.active_calls_require_filter
