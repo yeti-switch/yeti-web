@@ -5,11 +5,20 @@ ActiveAdmin.register GatewayGroup do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('GatewayGroup')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('GatewayGroup',
+                       lambda do
+                         {
+                           vendor_id: Contractor.vendors.all.map { |v| [v.name, v.id] },
+                           prefer_same_pop: boolean
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   acts_as_export :id, :name, [:vendor_name, proc { |row| row.vendor.try(:name) }], :prefer_same_pop
   acts_as_import resource_class: Importing::GatewayGroup
-
-  acts_as_batch_changeable [:prefer_same_pop]
 
   decorate_with GatewayGroupDecorator
 

@@ -25,6 +25,7 @@ gem 'activeadmin', github: 'yeti-switch/active_admin'
 gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
 gem 'active_admin_theme'
 gem 'active_admin_import' , '3.0.0.pre'
+gem 'active_admin_scoped_collection_actions', github: 'Zamyatin-AA/active_admin_scoped_collection_actions', branch: 'batch_action_collection_fix', ref: 'd199e2867d950143a6b2c74e54c3f289d8a9b1e0'
 gem 'active_admin_datetimepicker', github: 'activeadmin-plugins/activeadmin_datetimepicker'
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
 
@@ -81,6 +82,7 @@ end
 #end
 
 group :development, :test do
+  gem 'byebug'
   gem 'thin'
   gem 'byebug'
 

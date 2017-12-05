@@ -43,7 +43,6 @@ After do |scenario|
   # Poltergeist black magic to avoid phantomjs to die mid-run
   page.driver.reset!
 end
-
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
 #
@@ -62,4 +61,31 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+
+# TODO: Add all tables with constant data
+CONSTANT_TABLES = %w[
+  billing.invoice_periods
+  class4.codecs
+  class4.codec_group_codecs
+  class4.destination_rate_policy
+  class4.disconnect_code_namespace
+  class4.disconnect_code
+  class4.disconnect_initiators
+  class4.diversion_policy
+  class4.dtmf_receive_modes
+  class4.dtmf_send_modes
+  class4.dump_level
+  class4.filter_types
+  class4.gateway_rel100_modes
+  class4.numberlist_actions
+  class4.numberlist_modes
+  class4.rate_profit_control_modes
+  class4.routing_groups
+  class4.sdp_c_location
+  class4.session_refresh_methods
+  class4.sortings
+  class4.transport_protocols
+  sys.guiconfig
+].freeze
+
+Cucumber::Rails::Database.javascript_strategy = :truncation, {except: CONSTANT_TABLES}

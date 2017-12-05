@@ -4,7 +4,27 @@ ActiveAdmin.register Account do
   acts_as_safe_destroy
   acts_as_audit
   acts_as_clone
+  acts_as_async_destroy('Account')
+  acts_as_async_update('Account',
+                       lambda do
+                         {
+                         contractor_id: Contractor.all.map { |c| [c.name, c.id] },
+                         balance: 'text',
+                         min_balance: 'text',
+                         max_balance: 'text',
+                         balance_low_threshold: 'text',
+                         balance_high_threshold: 'text',
+                         origination_capacity: 'text',
+                         termination_capacity: 'text',
+                         vendor_invoice_period_id: Billing::InvoicePeriod.all.map { |ip| [ip.name, ip.id] },
+                         customer_invoice_period_id: Billing::InvoicePeriod.all.map { |ip| [ip.name, ip.id] },
+                         vendor_invoice_template_id: Billing::InvoiceTemplate.all.map { |it| [it.name, it.id]},
+                         customer_invoice_template_id: Billing::InvoiceTemplate.all.map { |it| [it.name, it.id] },
+                         timezone: 'datepicker'
+                         }
+                       end)
 
+  acts_as_delayed_job_lock
 
   decorate_with AccountDecorator
 
@@ -22,7 +42,6 @@ ActiveAdmin.register Account do
                  :vendor_invoice_period
 
   acts_as_import resource_class: Importing::Account
-  acts_as_batch_changeable [:min_balance, :max_balance, :origination_capacity, :termination_capacity, :customer_invoice_period, :vendor_invoice_period]
 
   scope :all
   scope :vendors_accounts
@@ -39,11 +58,7 @@ ActiveAdmin.register Account do
                 send_invoices_to: [], send_balance_notifications_to: []
 
 
-
   includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone
-
-
-
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals)} do
     selectable_column

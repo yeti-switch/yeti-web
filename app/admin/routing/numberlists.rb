@@ -5,6 +5,20 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::Numberlist')
+  acts_as_async_update('Routing::Numberlist',
+                       lambda do
+                         {
+                           mode_id: Routing::NumberlistMode.all.map{ |nm| [nm.name, nm.id] },
+                           default_action_id: Routing::NumberlistAction.all.map{ |na| [na.name, na.id] },
+                           default_src_rewrite_rule: 'text',
+                           default_src_rewrite_result: 'text',
+                           default_dst_rewrite_rule: 'text',
+                           default_dst_rewrite_result: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   includes :mode, :default_action
 

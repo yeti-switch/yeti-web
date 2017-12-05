@@ -5,6 +5,24 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
   acts_as_audit
   acts_as_safe_destroy
+  acts_as_async_destroy('Billing::Invoice')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('Billing::Invoice',
+                       lambda do
+                         {
+                           contractor_id: Contractor.all.map{ |c| [c.name, c.id] },
+                           account_id: Account.all.map{ |a| [a.name, a.id] },
+                           state_id: Billing::InvoiceState.all.map{ |is| [is.name, is.id] },
+                           start_date: 'datepicker',
+                           end_date: 'datepicker',
+                           amount: 'text',
+                           type_id: Billing::InvoiceType.all.map{ |it| [it.name, it.id] },
+                           vendor_invoice: boolean
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
+
   decorate_with InvoiceDecorator
 
   scope :all

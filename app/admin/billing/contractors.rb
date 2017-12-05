@@ -6,10 +6,25 @@ ActiveAdmin.register Contractor do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
+  acts_as_async_destroy('Contractor')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('Contractor',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           vendor: boolean,
+                           customer: boolean,
+                           description: 'text',
+                           address: 'text',
+                           phones: 'text',
+                           smtp_connection_id: System::SmtpConnection.all.map { |smtpc| [smtpc.name, smtpc.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
   
   acts_as_export :id, :enabled, :name, :vendor,:customer
   acts_as_import resource_class: Importing::Contractor
-  acts_as_batch_changeable [:enabled, :vendor, :customer]
 
   scope :vendors
   scope :customers

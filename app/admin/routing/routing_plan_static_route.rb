@@ -5,54 +5,23 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::RoutingPlanStaticRoute')
+  acts_as_async_update('Routing::RoutingPlanStaticRoute',
+                       lambda do
+                         {
+                           routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
+                           prefix: 'text',
+                           priority: 'text',
+                           vendor_id: Contractor.vendors.all.map{ |v| [v.name, v.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
 
   includes :vendor, :routing_plan, network_prefix: [:country, :network]
 
   permit_params :routing_plan_id, :prefix, :priority, :vendor_id
-
-  batch_action :change_priority, priority: 1, form: ->{
-      {
-          priority: 'text'
-      }
-                                 } do |ids, inputs|
-    begin
-      #TODO fix. Papertrail not used.
-      count = 0
-      Routing::RoutingPlanStaticRoute.transaction do
-        apply_authorization_scope(scoped_collection).where(id: ids).each do |x|
-          x.update(priority: inputs['priority'])
-          ++count
-        end
-      end
-      flash[:notice] = "#{count}/#{ids.count} records updated ##{inputs['group']}"
-    rescue StandardError => e
-      flash[:error] = e.message
-      Rails.logger.warn "UCS#batch_assign_to_group raise exception: #{e.message}\n#{e.backtrace.join("\n")}"
-    end
-      redirect_to :back
-  end
-
-  batch_action :change_vendor, priority: 2, form: ->{
-                                 {
-                                     vendor: Contractor.vendors.order(:name).pluck(:name,:id)
-                                 }
-                               } do |ids, inputs|
-    begin
-      count=0
-      Routing::RoutingPlanStaticRoute.transaction do
-        apply_authorization_scope(scoped_collection).where(id: ids).each do |x|
-          x.update(vendor_id: inputs['vendor'])
-          ++count
-        end
-      end
-      flash[:notice] = "#{count}/#{ids.count} records updated ##{inputs['group']}"
-    rescue StandardError => e
-      flash[:error] = e.message
-      Rails.logger.warn "UCS#batch_assign_to_group raise exception: #{e.message}\n#{e.backtrace.join("\n")}"
-    end
-    redirect_to :back
-  end
 
   filter :id
   filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: {class: 'chosen'}
@@ -75,11 +44,6 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   action_item :batch_create do
     link_to("Batch create",new_routing_routing_plan_static_route_batch_creator_path())
   end
-
-
-
-
-
 
   index do
     selectable_column

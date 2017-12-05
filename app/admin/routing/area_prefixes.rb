@@ -5,6 +5,15 @@ ActiveAdmin.register Routing::AreaPrefix do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::AreaPrefix')
+  acts_as_async_update('Routing::AreaPrefix',
+                       lambda do
+                         {
+                          area_id: Routing::Area.all.map{ |area| [area.name, area.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   permit_params :prefix, :area_id
 

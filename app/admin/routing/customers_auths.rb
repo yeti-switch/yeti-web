@@ -7,10 +7,32 @@ ActiveAdmin.register CustomersAuth do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
+  acts_as_async_destroy('CustomersAuth')
+  boolean = [ ['Yes', 't'], ['No', 'f'] ]
+  acts_as_async_update('CustomersAuth',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           transport_protocol_id: Equipment::TransportProtocol.all.map { |tp| [tp.name, tp.id] },
+                           ip: 'text',
+                           src_prefix: 'text',
+                           dst_prefix: 'text',
+                           min_dst_number_length: 'text',
+                           max_dst_number_length: 'text',
+                           from_domain: 'text',
+                           to_domain: 'text',
+                           x_yeti_auth: 'text',
+                           dst_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
+                           src_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
+                           dump_level_id: DumpLevel.all.map { |dl| [dl.name, dl.id] },
+                           rateplan_id: Rateplan.all.map { |r| [r.name, r.id] },
+                           routing_plan_id: Routing::RoutingPlan.all.map { |rp| [rp.name, rp.id] }
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with CustomersAuthDecorator
-
-  acts_as_batch_changeable [:enabled, :uri_domain, :x_yeti_auth, :ip, :src_prefix, :dst_prefix]
 
   acts_as_export :id, :enabled, :name,
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
@@ -68,23 +90,6 @@ ActiveAdmin.register CustomersAuth do
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
 
-
-  batch_action :change_dump_level, priority: 1, form: -> {
-    {
-        dump_level: DumpLevel.order(:name).pluck(:name, :id)
-    }
-  } do |ids, inputs|
-    begin
-      count = apply_authorization_scope(scoped_collection).where(id: ids).update_all(dump_level_id: inputs['dump_level'])
-      flash[:notice] = "#{count}/#{ids.count} records updated ##{inputs['group']}"
-    rescue StandardError => e
-      flash[:error] = e.message
-      Rails.logger.warn "UCS#batch_assign_to_group raise exception: #{e.message}\n#{e.backtrace.join("\n")}"
-    end
-    redirect_to :back
-  end
-
-
   collection_action :search_for_debug do
     src_prefix=params[:src_prefix].to_s
     dst_prefix=params[:dst_prefix].to_s
@@ -94,7 +99,6 @@ ActiveAdmin.register CustomersAuth do
 
   scope :with_radius
   scope :with_dump
-
 
   index do
     selectable_column

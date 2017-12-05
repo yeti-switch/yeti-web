@@ -68,7 +68,7 @@ class GuiConfig < ActiveRecord::Base
   end
 
   def self.instance
-    self.first
+    self.first || self.new
   end
 
   def self.per_page

@@ -11,11 +11,48 @@ ActiveAdmin.register Dialpeer do
   acts_as_quality_stat
   acts_as_lock
   acts_as_stats_actions
+  acts_as_async_destroy('Dialpeer')
+  boolean = [ ['Yes', 't'], ['No', 'f']]
+  acts_as_async_update('Dialpeer',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           prefix: 'text',
+                           routing_group_id: RoutingGroup.all.map { |rg| [rg.name, rg.id] },
+                           routing_tag_id: Routing::RoutingTag.all.map { |rt| [rt.name, rt.id] },
+                           priority: 'text',
+                           force_hit_rate: 'text',
+                           exclusive_route: boolean,
+                           initial_interval: 'text',
+                           initial_rate: 'text',
+                           next_interval: 'text',
+                           next_rate: 'text',
+                           connect_fee: 'text',
+                           lcr_rate_multiplier: 'text',
+                           gateway_id: Gateway.all.map { |g| [g.name, g.id] },
+                           gateway_group_id: GatewayGroup.all.map { |gg| [gg.name, gg.id] },
+                           vendor_id: Contractor.vendors.all.map { |v| [v.name, v.id] },
+                           account_id: Account.all.map { |a| [a.name, a.id] },
+                           valid_from: 'datepicker',
+                           valid_till: 'datepicker',
+                           asr_limit: 'text',
+                           acd_limit: 'text',
+                           short_calls_limit: 'text',
+                           capacity: 'text',
+                           src_name_rewrite_rule: 'text',
+                           src_name_rewrite_result: 'text',
+                           src_rewrite_rule: 'text',
+                           src_rewrite_result: 'text',
+                           dst_rewrite_rule: 'text',
+                           dst_rewrite_result: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with DialpeerDecorator
 
   scope :locked
-
 
   #"Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
   acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,
@@ -33,15 +70,6 @@ ActiveAdmin.register Dialpeer do
                  :created_at
 
   acts_as_import resource_class: Importing::Dialpeer
-
-  acts_as_batch_changeable [:enabled, :priority, :initial_interval, :next_interval,
-                            :initial_rate, :next_rate, :connect_fee,
-                            :lcr_rate_multiplier, :force_hit_rate,
-                            :capacity, :acd_limit, :asr_limit, :short_calls_limit,
-                            :src_rewrite_rule, :src_rewrite_result,
-                            :dst_rewrite_rule, :dst_rewrite_result
-                           ]
-
 
   controller do
     def resource_params

@@ -10,6 +10,22 @@ ActiveAdmin.register Gateway do
   acts_as_quality_stat
   acts_as_lock
   acts_as_stats_actions
+  acts_as_async_destroy('Gateway')
+  boolean = [ ['Yes', 't'], ['No', 'f'] ]
+  acts_as_async_update('Gateway',
+                       lambda do
+                         {
+                           enabled: boolean,
+                           locked: boolean,
+                           priority: 'text',
+                           is_shared: boolean,
+                           acd_limit: 'text',
+                           asr_limit: 'text',
+                           short_calls_limit: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with GatewayDecorator
 
@@ -72,7 +88,6 @@ ActiveAdmin.register Gateway do
                  :force_one_way_early_media
 
   acts_as_import resource_class: Importing::Gateway
-  acts_as_batch_changeable [:enabled, :priority, :origination_capacity, :termination_capacity]
 
   scope :locked
   scope :shared

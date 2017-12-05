@@ -1,0 +1,21 @@
+.ui-dialog.active_admin_dialog_mass_update_by_filter {
+  form ul li label {
+    display: inline-block;
+  }
+}
+
+button.scoped_collection_action_button {
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  @include rounded($skinBorderRadius);
+  background-color: $skinMainSecondColor;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  &:hover {
+    background-color: lighten( $skinMainSecondColor, 5% )!important;
+    background-image: none;
+  }
+}
