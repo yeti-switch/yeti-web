@@ -34,8 +34,14 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    amq-protocol (2.2.0)
     arel (8.0.0)
     builder (3.2.3)
+    bunny (2.7.2)
+      amq-protocol (>= 2.2.0)
+    bunny-mock (1.7.0)
+      bunny (>= 1.7)
+    byebug (9.1.0)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crack (0.4.3)
@@ -99,6 +105,9 @@ DEPENDENCIES
   activeresource
   activeresource-persistent
   bundler
+  bunny
+  bunny-mock
+  byebug
   http_logger
   pg
   pgq!
@@ -110,4 +119,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.13.7
+   1.16.0
