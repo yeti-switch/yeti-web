@@ -59833,3 +59833,5 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171020164700');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171031211812');
 
+INSERT INTO public.schema_migrations (version) VALUES ('20171209201956');
+
