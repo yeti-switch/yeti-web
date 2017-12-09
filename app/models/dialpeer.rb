@@ -179,6 +179,10 @@ class Dialpeer < Yeti::ActiveRecord
     unless self.vendor_id && self.vendor_id == self.gateway.contractor_id
       self.errors.add(:gateway, "must be owned by selected vendor or be shared")
     end
+
+    unless self.gateway.allow_termination
+      self.errors.add(:gateway, 'must be allowed for termination')
+    end
   end
 
   def vendor_owners_the_gateway_group
