@@ -31,12 +31,12 @@ INSERT INTO resource_action VALUES (3, 'Accept');
 -- Data for Name: resource_type; Type: TABLE DATA; Schema: switch13; Owner: yeti
 --
 
-INSERT INTO resource_type VALUES (1, 'Customer account', 503, 'Resource $name $id overloaded', 1);
-INSERT INTO resource_type VALUES (3, 'Customer auth', 503, 'Resource $name $id overloaded', 1);
-INSERT INTO resource_type VALUES (4, 'Customer gateway', 503, 'Resource $name $id overloaded', 1);
-INSERT INTO resource_type VALUES (2, 'Vendor account', 503, 'Resource $name $id overloaded', 2);
-INSERT INTO resource_type VALUES (5, 'Vendor gateway', 503, 'Resource $name $id overloaded', 2);
-INSERT INTO resource_type VALUES (6, 'Dialpeer', 503, 'Resource $name $id overloaded', 2);
+INSERT INTO resource_type VALUES (1, 'Customer account', 480, 'Resource $name $id overloaded', 1);
+INSERT INTO resource_type VALUES (3, 'Customer auth', 480, 'Resource $name $id overloaded', 1);
+INSERT INTO resource_type VALUES (4, 'Customer gateway', 480, 'Resource $name $id overloaded', 1);
+INSERT INTO resource_type VALUES (2, 'Vendor account', 480, 'Resource $name $id overloaded', 2);
+INSERT INTO resource_type VALUES (5, 'Vendor gateway', 480, 'Resource $name $id overloaded', 2);
+INSERT INTO resource_type VALUES (6, 'Dialpeer', 480, 'Resource $name $id overloaded', 2);
 
 
 --

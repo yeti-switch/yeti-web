@@ -109,6 +109,7 @@ require 'resolv'
 class Gateway < Yeti::ActiveRecord
 
   belongs_to :contractor
+  belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id
   belongs_to :session_refresh_method
   belongs_to :sdp_alines_filter_type, class_name: 'FilterType', foreign_key: :sdp_alines_filter_type_id
   belongs_to :orig_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :orig_disconnect_policy_id
@@ -168,6 +169,12 @@ class Gateway < Yeti::ActiveRecord
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null'}
   scope :shared, -> { where is_shared: true }
   scope :for_origination,->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
+
+  scope :for_termination, ->(contractor_id) do
+    where("#{table_name}.allow_termination AND (#{table_name}.contractor_id=? OR #{table_name}.is_shared)", contractor_id)
+      .joins(:vendor)
+      .order(:name)
+  end
 
   before_validation do
     self.term_next_hop = nil if self.term_next_hop.blank?
