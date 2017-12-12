@@ -28,9 +28,7 @@ gem 'active_admin_import' , '3.0.0.pre'
 gem 'active_admin_datetimepicker', github: 'activeadmin-plugins/activeadmin_datetimepicker'
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
 
-# Freeze gems to GitHub /temporary/
-gem 'yetis_node', git: 'https://github.com/workgena/yetis_node.git', branch: 'timeouts_and_logger', ref: '05117f1'
-gem 'jrpc',       git: 'https://github.com/senid231/jrpc.git',       branch: 'master',              ref: 'c0f313a'
+gem 'yetis_node', git: 'https://github.com/yeti-switch/yetis_node.git'
 
 gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 

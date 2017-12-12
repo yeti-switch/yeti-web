@@ -76,31 +76,18 @@ GIT
       rails (>= 4.2)
 
 GIT
-  remote: https://github.com/senid231/jrpc.git
-  revision: c0f313ac4de73fe223285abd274ddf77884a4218
-  ref: c0f313a
-  branch: master
-  specs:
-    jrpc (1.0.0)
-      net_tcp_client (~> 2.0)
-      netstring (~> 0)
-      oj (~> 2.0)
-
-GIT
-  remote: https://github.com/workgena/yetis_node.git
-  revision: 05117f17b44ccaaa10c9da734aec57f7c550fb15
-  ref: 05117f1
-  branch: timeouts_and_logger
-  specs:
-    yetis_node (1.0.0)
-      jrpc (~> 1.0, >= 0.4.6)
-
-GIT
   remote: https://github.com/yeti-switch/secondbase.git
   revision: 11801e3a915248e04408bfc99ab115b8d11bf317
   specs:
     secondbase (2.1.4)
       rails (>= 4.0)
+
+GIT
+  remote: https://github.com/yeti-switch/yetis_node.git
+  revision: 1b0b40789a5385ff3935d7739211f42402e385c4
+  specs:
+    yetis_node (1.0.0)
+      jrpc (~> 1.0, >= 0.4.6)
 
 GEM
   remote: https://rubygems.org/
@@ -307,6 +294,10 @@ GEM
       railties (>= 3.1, < 5)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
+    jrpc (1.0.1)
+      net_tcp_client (~> 2.0)
+      netstring (~> 0)
+      oj (~> 2.0)
     json (2.1.0)
     jsonapi-resources (0.9.1.beta1)
       activerecord (>= 4.1)
@@ -534,7 +525,6 @@ DEPENDENCIES
   jquery-rails (= 3.1.2)
   jquery-tablesorter
   jquery-ui-rails (= 5.0.3)
-  jrpc!
   jsonapi-resources (~> 0.9.1.beta1)
   knock!
   net-ldap (~> 0.3.1)
