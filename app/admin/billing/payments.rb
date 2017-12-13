@@ -8,7 +8,7 @@ ActiveAdmin.register Payment do
   acts_as_async_update('Payment',
                        lambda do
                          {
-                           account_id: Account.all.map{ |a| [a.name, a.id]},
+                           account_id: Account.pluck(:name, :id),
                            amount: 'text',
                            notes: 'text'
                          }
@@ -35,7 +35,6 @@ ActiveAdmin.register Payment do
       f.input :account, input_html: {class: 'chosen'}
       f.input :amount
       f.input :notes
-
 
     end
     f.actions

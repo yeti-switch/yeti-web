@@ -8,8 +8,8 @@ ActiveAdmin.register Billing::Contact do
   acts_as_async_update('Billing::Contact',
                        lambda do
                          {
-                           contractor_id: Contractor.all.map { |c| [c.name, c.id] },
-                           admin_user_id: AdminUser.all.map { |au| [au.username, au.id] },
+                           contractor_id: Contractor.pluck(:name, :id),
+                           admin_user_id: AdminUser.pluck(:username, :id),
                            email: 'text',
                            notes: 'text'
                          }

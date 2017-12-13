@@ -8,19 +8,19 @@ ActiveAdmin.register Account do
   acts_as_async_update('Account',
                        lambda do
                          {
-                         contractor_id: Contractor.all.map { |c| [c.name, c.id] },
-                         balance: 'text',
-                         min_balance: 'text',
-                         max_balance: 'text',
-                         balance_low_threshold: 'text',
-                         balance_high_threshold: 'text',
-                         origination_capacity: 'text',
-                         termination_capacity: 'text',
-                         vendor_invoice_period_id: Billing::InvoicePeriod.all.map { |ip| [ip.name, ip.id] },
-                         customer_invoice_period_id: Billing::InvoicePeriod.all.map { |ip| [ip.name, ip.id] },
-                         vendor_invoice_template_id: Billing::InvoiceTemplate.all.map { |it| [it.name, it.id]},
-                         customer_invoice_template_id: Billing::InvoiceTemplate.all.map { |it| [it.name, it.id] },
-                         timezone: 'datepicker'
+                           contractor_id: Contractor.pluck(:name, :id),
+                           balance: 'text',
+                           min_balance: 'text',
+                           max_balance: 'text',
+                           balance_low_threshold: 'text',
+                           balance_high_threshold: 'text',
+                           origination_capacity: 'text',
+                           termination_capacity: 'text',
+                           vendor_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
+                           customer_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
+                           vendor_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
+                           customer_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
+                           timezone: 'datepicker'
                          }
                        end)
 

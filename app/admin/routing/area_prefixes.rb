@@ -9,7 +9,7 @@ ActiveAdmin.register Routing::AreaPrefix do
   acts_as_async_update('Routing::AreaPrefix',
                        lambda do
                          {
-                          area_id: Routing::Area.all.map{ |area| [area.name, area.id] }
+                          area_id: Routing::Area.pluck(:name, :id)
                          }
                        end)
 

@@ -5,12 +5,11 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_async_destroy('Routing::RoutingPlan')
-  boolean = [ ['Yes', 't'], ['No', 'f'] ]
   acts_as_async_update('Routing::RoutingPlan',
                        lambda do
                          {
-                           sorting_id: Sorting.all.map { |s| [s.name, s.id] },
-                           use_lnp: boolean,
+                           sorting_id: Sorting.pluck(:name, :id),
+                           use_lnp: boolean_select,
                            rate_delta_max: 'text'
                          }
                        end)

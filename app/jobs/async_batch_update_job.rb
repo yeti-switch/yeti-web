@@ -1,7 +1,7 @@
 class AsyncBatchUpdateJob < ActiveJob::Base
   queue_as :batch_actions
 
-  BATCH_SIZE = 1
+  BATCH_SIZE = 1000
 
   def perform(model_class, sql_query, changes)
     total_count = model_class.constantize.count_by_sql(total_count_sql sql_query)

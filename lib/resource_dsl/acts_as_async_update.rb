@@ -17,5 +17,9 @@ module ResourceDSL
       end
     end
 
+    def boolean_select
+      [ ['Yes', 't'], ['No', 'f'] ]
+    end
+
   end
 end

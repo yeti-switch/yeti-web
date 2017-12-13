@@ -9,6 +9,10 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
 
     subject { described_class.new.perform(model_class, sql_query)}
 
+    before :each do
+      stub_const('AsyncBatchDestroyJob::BATCH_SIZE', 2)
+    end
+
     context 'incorrect class_name' do
       let(:model_class) { 'Fake' }
 

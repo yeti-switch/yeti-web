@@ -8,12 +8,11 @@ ActiveAdmin.register CustomersAuth do
   acts_as_safe_destroy
   acts_as_status
   acts_as_async_destroy('CustomersAuth')
-  boolean = [ ['Yes', 't'], ['No', 'f'] ]
   acts_as_async_update('CustomersAuth',
                        lambda do
                          {
-                           enabled: boolean,
-                           transport_protocol_id: Equipment::TransportProtocol.all.map { |tp| [tp.name, tp.id] },
+                           enabled: boolean_select,
+                           transport_protocol_id: Equipment::TransportProtocol..pluck(:name, :id),
                            ip: 'text',
                            src_prefix: 'text',
                            dst_prefix: 'text',
@@ -22,11 +21,11 @@ ActiveAdmin.register CustomersAuth do
                            from_domain: 'text',
                            to_domain: 'text',
                            x_yeti_auth: 'text',
-                           dst_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
-                           src_numberlist_id: Routing::Numberlist.all.map { |nl| [nl.name, nl.id] },
-                           dump_level_id: DumpLevel.all.map { |dl| [dl.name, dl.id] },
-                           rateplan_id: Rateplan.all.map { |r| [r.name, r.id] },
-                           routing_plan_id: Routing::RoutingPlan.all.map { |rp| [rp.name, rp.id] }
+                           dst_numberlist_id: Routing::Numberlist.pluck(:name, :id),
+                           src_numberlist_id: Routing::Numberlist.pluck(:name, :id),
+                           dump_level_id: DumpLevel.pluck(:name, :id),
+                           rateplan_id: Rateplan.pluck(:name, :id),
+                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id)
                          }
                        end)
 

@@ -9,10 +9,10 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   acts_as_async_update('Routing::RoutingPlanStaticRoute',
                        lambda do
                          {
-                           routing_plan_id: Routing::RoutingPlan.all.map{ |rp| [rp.name, rp.id] },
+                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id),
                            prefix: 'text',
                            priority: 'text',
-                           vendor_id: Contractor.vendors.all.map{ |v| [v.name, v.id] }
+                           vendor_id: Contractor.vendors.pluck(:name, :id)
                          }
                        end)
 

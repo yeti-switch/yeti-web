@@ -6,12 +6,11 @@ ActiveAdmin.register GatewayGroup do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_async_destroy('GatewayGroup')
-  boolean = [ ['Yes', 't'], ['No', 'f']]
   acts_as_async_update('GatewayGroup',
                        lambda do
                          {
-                           vendor_id: Contractor.vendors.all.map { |v| [v.name, v.id] },
-                           prefer_same_pop: boolean
+                           vendor_id: Contractor.vendors.pluck(:name, :id),
+                           prefer_same_pop: boolean_select
                          }
                        end)
 

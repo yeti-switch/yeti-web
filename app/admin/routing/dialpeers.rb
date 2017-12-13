@@ -12,27 +12,26 @@ ActiveAdmin.register Dialpeer do
   acts_as_lock
   acts_as_stats_actions
   acts_as_async_destroy('Dialpeer')
-  boolean = [ ['Yes', 't'], ['No', 'f']]
   acts_as_async_update('Dialpeer',
                        lambda do
                          {
-                           enabled: boolean,
+                           enabled: boolean_select,
                            prefix: 'text',
-                           routing_group_id: RoutingGroup.all.map { |rg| [rg.name, rg.id] },
-                           routing_tag_id: Routing::RoutingTag.all.map { |rt| [rt.name, rt.id] },
+                           routing_group_id: RoutingGroup.pluck(:name, :id),
+                           routing_tag_id: Routing::RoutingTag.pluck(:name, :id),
                            priority: 'text',
                            force_hit_rate: 'text',
-                           exclusive_route: boolean,
+                           exclusive_route: boolean_select,
                            initial_interval: 'text',
                            initial_rate: 'text',
                            next_interval: 'text',
                            next_rate: 'text',
                            connect_fee: 'text',
                            lcr_rate_multiplier: 'text',
-                           gateway_id: Gateway.all.map { |g| [g.name, g.id] },
-                           gateway_group_id: GatewayGroup.all.map { |gg| [gg.name, gg.id] },
-                           vendor_id: Contractor.vendors.all.map { |v| [v.name, v.id] },
-                           account_id: Account.all.map { |a| [a.name, a.id] },
+                           gateway_id: Gateway.pluck(:name, :id),
+                           gateway_group_id: GatewayGroup.pluck(:name, :id),
+                           vendor_id: Contractor.vendors.pluck(:name, :id),
+                           account_id: Account.pluck(:name, :id),
                            valid_from: 'datepicker',
                            valid_till: 'datepicker',
                            asr_limit: 'text',

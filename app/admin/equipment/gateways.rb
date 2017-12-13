@@ -11,14 +11,13 @@ ActiveAdmin.register Gateway do
   acts_as_lock
   acts_as_stats_actions
   acts_as_async_destroy('Gateway')
-  boolean = [ ['Yes', 't'], ['No', 'f'] ]
   acts_as_async_update('Gateway',
                        lambda do
                          {
-                           enabled: boolean,
-                           locked: boolean,
+                           enabled: boolean_select,
+                           locked: boolean_select,
                            priority: 'text',
-                           is_shared: boolean,
+                           is_shared: boolean_select,
                            acd_limit: 'text',
                            asr_limit: 'text',
                            short_calls_limit: 'text'
