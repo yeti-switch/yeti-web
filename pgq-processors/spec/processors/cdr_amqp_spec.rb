@@ -40,13 +40,16 @@ RSpec.describe CdrAmqp do
     allow(logger).to receive(:info)
     allow(logger).to receive(:error)
     allow(AmqpFactory.instance).to receive(:get_connection).and_return connection
-    allow(consumer).to receive(:event_done?).and_return false
+    allow(consumer).to receive(:event_done?)
     allow(consumer).to receive(:event_done!)
   end
 
   subject { consumer.perform_group cdrs }
 
-  it { expect{subject}.to change{queue.message_count}.by 2 }
+  it 'publish events to queue' do
+    allow(consumer).to receive(:event_done?).and_return false
+    expect{subject}.to change{queue.message_count}.by 2
+  end
 
   it 'do not publish events that are consumed already' do
     allow(consumer).to receive(:event_done?).and_return true

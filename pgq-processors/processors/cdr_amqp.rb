@@ -6,8 +6,6 @@ class CdrAmqp < Pgq::ConsumerGroup
 
   def initialize(logger, queue, consumer, options)
     super
-    @consumer = consumer
-    @options = options
     conn = AmqpFactory.instance.get_connection(options[:connect])
     conn.start
     set_exchange_and_queue conn
