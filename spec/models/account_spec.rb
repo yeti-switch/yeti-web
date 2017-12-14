@@ -4,15 +4,15 @@ describe Account, type: :model do
 
   let!(:account) {}
 
+  subject do
+    account.destroy!
+  end
+
   context '#destroy' do
 
     context 'wihtout linked ApiAccess records' do
       let!(:api_access) { create(:api_access) }
       let(:account) { create(:account) }
-
-      subject do
-        account.destroy!
-      end
 
       it 'removes Account successfully' do
         expect { subject }.to change { described_class.count }.by(-1)
@@ -39,6 +39,39 @@ describe Account, type: :model do
         expect { subject }.to change {
           api_access.reload.account_ids
         }.from(accounts.map(&:id)).to(accounts.map(&:id).values_at(0,2))
+      end
+    end
+
+    context 'when Account has Payments' do
+      let(:account) { create(:account) }
+
+      before do
+        $p1 = create(:payment, account: account)
+        $p2 = create(:payment) # for another account
+      end
+
+      it 'removes all related Payments' do
+        expect { subject }.to change {
+          Payment.pluck(:id)
+        }.from([$p1.id, $p2.id]).to([$p2.id])
+      end
+    end
+
+    context 'when Account has related CustomersAuth' do
+      let(:customers_auth) { create(:customers_auth) }
+      let(:account) { customers_auth.account }
+
+      it 'throw error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+      end
+    end
+
+    context 'when Account has related Dialpeer' do
+      let(:dialpeer) { create(:dialpeer) }
+      let(:account) { dialpeer.account }
+
+      it 'throw error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
       end
     end
 

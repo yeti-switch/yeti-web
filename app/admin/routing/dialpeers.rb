@@ -221,7 +221,7 @@ ActiveAdmin.register Dialpeer do
               input_html: {
                   class: 'chosen',
                   onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :dialpeer_account_id) +
-                      remote_chosen_request(:get, with_contractor_gateways_path, {contractor_id: "$(this).val()"}, :dialpeer_gateway_id) +
+                      remote_chosen_request(:get, for_termination_gateways_path, {contractor_id: "$(this).val()"}, :dialpeer_gateway_id) +
                       remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :dialpeer_gateway_group_id)
               }
       f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),

@@ -7,8 +7,10 @@ require 'active_resource/persistent'
 require 'syslog-logger'
 require File.join(File.dirname(__FILE__), '../lib/json_coder')
 require File.join(File.dirname(__FILE__), '../lib/shutdown')
+require File.join(File.dirname(__FILE__), '../lib/amqp_factory')
 
 require 'webmock/rspec'
+require 'bunny-mock'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -18,3 +20,4 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+

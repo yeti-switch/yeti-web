@@ -8,6 +8,7 @@ require 'syslog-logger'
 require_relative 'pgq_config'
 require_relative 'lib/json_coder'
 require_relative 'lib/shutdown'
+require_relative 'lib/amqp_factory'
 
 ENV['ROOT_PATH'] ||= Dir.getwd
 

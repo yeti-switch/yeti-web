@@ -29,7 +29,8 @@ gem 'active_admin_scoped_collection_actions'
 gem 'active_admin_datetimepicker', github: 'activeadmin-plugins/activeadmin_datetimepicker'
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
 
-gem 'yetis_node', github: 'yeti-switch/yetis_node'
+gem 'yetis_node', git: 'https://github.com/yeti-switch/yetis_node.git'
+
 gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 
 # XLS generation

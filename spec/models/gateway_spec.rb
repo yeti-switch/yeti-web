@@ -45,4 +45,33 @@ describe Gateway, type: :model do
 
   end
 
+  context 'scope :for_termination' do
+
+    before do
+      # in scope
+      @record = create(:gateway, is_shared: false, allow_termination: true, name: 'b-gateway')
+      @record_2 = create(:gateway, is_shared: true, allow_termination: true, name: 'a-gateway')
+    end
+
+    # out of scope
+    before do
+      # other vendor
+      create(:gateway, allow_termination: true)
+      # shared but not for termination
+      create(:gateway, allow_termination: false, is_shared: true)
+      # same vendor but not for termination
+      create(:gateway, allow_termination: false, contractor: vendor)
+    end
+
+    let(:vendor) { @record.vendor }
+
+    subject do
+      described_class.for_termination(vendor.id)
+    end
+
+    it 'allow_termination is mandatory, then look for shared or vendors gateways, order by name' do
+      expect(subject.pluck(:id)).to match_array([@record_2.id, @record.id])
+    end
+
+  end
 end
