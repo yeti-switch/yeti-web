@@ -67,6 +67,8 @@ ActiveAdmin.register Importing::CustomersAuth do
       end
     end
 
+    column :check_account_balance
+
     column :gateway, sortable: :gateway_name do |row|
       if row.gateway.blank?
         row.gateway_name

@@ -2,10 +2,6 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.4.13
--- Dumped by pg_dump version 9.4.13
--- Started on 2017-08-20 19:24:03 EEST
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -13,21 +9,21 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-SET search_path = switch10, pg_catalog;
+SET search_path = switch14, pg_catalog;
 
 --
--- TOC entry 3885 (class 0 OID 0)
--- Dependencies: 430
--- Name: events_id_seq; Type: SEQUENCE SET; Schema: switch10; Owner: yeti
+-- TOC entry 4107 (class 0 OID 0)
+-- Dependencies: 589
+-- Name: events_id_seq; Type: SEQUENCE SET; Schema: switch14; Owner: -
 --
 
 SELECT pg_catalog.setval('events_id_seq', 280, true);
 
 
 --
--- TOC entry 3870 (class 0 OID 19710)
--- Dependencies: 431
--- Data for Name: resource_action; Type: TABLE DATA; Schema: switch10; Owner: yeti
+-- TOC entry 4095 (class 0 OID 156110)
+-- Dependencies: 590
+-- Data for Name: resource_action; Type: TABLE DATA; Schema: switch14; Owner: -
 --
 
 INSERT INTO resource_action (id, name) VALUES (1, 'Reject');
@@ -36,9 +32,9 @@ INSERT INTO resource_action (id, name) VALUES (3, 'Accept');
 
 
 --
--- TOC entry 3868 (class 0 OID 18493)
--- Dependencies: 272
--- Data for Name: resource_type; Type: TABLE DATA; Schema: switch10; Owner: yeti
+-- TOC entry 4093 (class 0 OID 156077)
+-- Dependencies: 588
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: switch14; Owner: -
 --
 
 INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (1, 'Customer account', 503, 'Resource $name $id overloaded', 1);
@@ -50,48 +46,54 @@ INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALU
 
 
 --
--- TOC entry 3886 (class 0 OID 0)
--- Dependencies: 432
--- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: switch10; Owner: yeti
+-- TOC entry 4108 (class 0 OID 0)
+-- Dependencies: 591
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: switch14; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_type_id_seq', 6, true);
 
 
 --
--- TOC entry 3887 (class 0 OID 0)
--- Dependencies: 433
--- Name: switch_in_interface_id_seq; Type: SEQUENCE SET; Schema: switch10; Owner: yeti
+-- TOC entry 4109 (class 0 OID 0)
+-- Dependencies: 592
+-- Name: switch_in_interface_id_seq; Type: SEQUENCE SET; Schema: switch14; Owner: -
 --
 
-SELECT pg_catalog.setval('switch_in_interface_id_seq', 4, true);
-
-
---
--- TOC entry 3888 (class 0 OID 0)
--- Dependencies: 435
--- Name: switch_interface_id_seq; Type: SEQUENCE SET; Schema: switch10; Owner: yeti
---
-
-SELECT pg_catalog.setval('switch_interface_id_seq', 912, true);
+SELECT pg_catalog.setval('switch_in_interface_id_seq', 10, true);
 
 
 --
--- TOC entry 3875 (class 0 OID 19729)
--- Dependencies: 436
--- Data for Name: switch_interface_in; Type: TABLE DATA; Schema: switch10; Owner: yeti
+-- TOC entry 4110 (class 0 OID 0)
+-- Dependencies: 594
+-- Name: switch_interface_id_seq; Type: SEQUENCE SET; Schema: switch14; Owner: -
+--
+
+SELECT pg_catalog.setval('switch_interface_id_seq', 1015, true);
+
+
+--
+-- TOC entry 4100 (class 0 OID 156129)
+-- Dependencies: 595
+-- Data for Name: switch_interface_in; Type: TABLE DATA; Schema: switch14; Owner: -
 --
 
 INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (2, 'Diversion', 'varchar', 2, 'uri_user', false, NULL);
 INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (1, 'X-YETI-AUTH', 'varchar', 1, NULL, true, NULL);
 INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (3, 'X-ORIG-IP', 'varchar', 3, NULL, true, NULL);
 INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (4, 'X-ORIG-PORT', 'integer', 4, NULL, true, NULL);
+INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (5, 'X-ORIG-PROTO', 'integer', 5, NULL, true, NULL);
+INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (6, 'P-Asserted-Identity', 'varchar', 6, NULL, true, NULL);
+INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (9, 'Remote-Party-ID', 'varchar', 9, NULL, true, NULL);
+INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (10, 'RPID-Privacy', 'varchar', 10, NULL, true, NULL);
+INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (8, 'P-Preferred-Identity', 'varchar', 7, NULL, true, NULL);
+INSERT INTO switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (7, 'Privacy', 'varchar', 8, NULL, true, NULL);
 
 
 --
--- TOC entry 3873 (class 0 OID 19720)
--- Dependencies: 434
--- Data for Name: switch_interface_out; Type: TABLE DATA; Schema: switch10; Owner: yeti
+-- TOC entry 4098 (class 0 OID 156120)
+-- Dependencies: 593
+-- Data for Name: switch_interface_out; Type: TABLE DATA; Schema: switch14; Owner: -
 --
 
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (890, 'src_number_radius', 'varchar', false, 1050, true);
@@ -104,7 +106,6 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (901, 'bleg_radius_acc_profile_id', 'smallint', false, 1025, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (739, 'ruri', 'varchar', false, 10, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (899, 'record_audio', 'boolean', false, 1023, false);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (740, 'ruri_host', 'varchar', false, 20, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (741, 'from', 'varchar', false, 30, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (744, 'call_id', 'varchar', false, 60, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (745, 'transparent_dlg_id', 'boolean', false, 70, false);
@@ -275,27 +276,53 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (910, 'from_domain', 'varchar', true, 1938, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (911, 'to_domain', 'varchar', true, 1939, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (912, 'ruri_domain', 'varchar', true, 1940, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (913, 'fake_180_timer', 'smallint', false, 1060, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (914, 'src_area_id', 'integer', true, 1941, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (915, 'dst_area_id', 'integer', true, 1942, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (916, 'routing_tag_id', 'smallint', true, 1943, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (917, 'bleg_transport_protocol_id', 'smallint', false, 21, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (918, 'aleg_outbound_proxy_transport_protocol_id', 'smallint', false, 121, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (919, 'bleg_outbound_proxy_transport_protocol_id', 'smallint', false, 101, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (920, 'auth_orig_protocol_id', 'smallint', true, 1919, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (921, 'aleg_rel100_mode_id', 'smallint', false, 1061, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (922, 'bleg_rel100_mode_id', 'smallint', false, 1062, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (923, 'pai_in', 'varchar', true, 1944, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1000, 'ppi_in', 'varchar', true, 1945, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1002, 'privacy_in', 'varchar', true, 1946, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1003, 'rpid_in', 'varchar', true, 1947, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1005, 'rpid_privacy_in', 'varchar', true, 1948, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1006, 'pai_out', 'varchar', true, 1949, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1007, 'ppi_out', 'varchar', true, 1950, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1008, 'privacy_out', 'varchar', true, 1951, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1009, 'rpid_out', 'varchar', true, 1952, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1010, 'rpid_privacy_out', 'varchar', true, 1953, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1011, 'bleg_max_30x_redirects', 'smallint', false, 1063, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1012, 'bleg_max_transfers', 'smallint', false, 1064, false);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1013, 'customer_acc_check_balance', 'boolean', true, 1954, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1014, 'destination_reverse_billing', 'boolean', true, 1955, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1015, 'dialpeer_reverse_billing', 'boolean', true, 1956, true);
 
 
 --
--- TOC entry 3876 (class 0 OID 19737)
--- Dependencies: 437
--- Data for Name: trusted_headers; Type: TABLE DATA; Schema: switch10; Owner: yeti
+-- TOC entry 4101 (class 0 OID 156137)
+-- Dependencies: 596
+-- Data for Name: trusted_headers; Type: TABLE DATA; Schema: switch14; Owner: -
 --
 
 
 
 --
--- TOC entry 3889 (class 0 OID 0)
--- Dependencies: 438
--- Name: trusted_headers_id_seq; Type: SEQUENCE SET; Schema: switch10; Owner: yeti
+-- TOC entry 4111 (class 0 OID 0)
+-- Dependencies: 597
+-- Name: trusted_headers_id_seq; Type: SEQUENCE SET; Schema: switch14; Owner: -
 --
 
 SELECT pg_catalog.setval('trusted_headers_id_seq', 2, true);
 
 
--- Completed on 2017-08-20 19:24:03 EEST
+-- Completed on 2017-11-20 22:23:07 EET
 
 --
 -- PostgreSQL database dump complete
 --
+

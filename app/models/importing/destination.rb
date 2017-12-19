@@ -39,7 +39,7 @@ class Importing::Destination < Importing::Base
 
   self.import_attributes =['enabled', 'prefix', 'reject_calls', 'rateplan_id',
                            'initial_interval', 'next_interval', 'initial_rate', 'next_rate',
-                           'connect_fee', 'rate_policy_id', 'dp_margin_fixed', 'dp_margin_percent', 'use_dp_intervals',
+                           'connect_fee', 'rate_policy_id', 'reverse_billing', 'dp_margin_fixed', 'dp_margin_percent', 'use_dp_intervals',
                            'valid_from', 'valid_till', 'profit_control_mode_id', 'routing_tag_id',
                            'asr_limit', 'acd_limit', 'short_calls_limit']
 

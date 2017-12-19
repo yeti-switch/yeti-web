@@ -69,7 +69,7 @@ class Yeti::ActiveRecord < ActiveRecord::Base
   end
 
   DB_VER = LazyObject.new { db_version }
-  ROUTING_SCHEMA="switch13"
+  ROUTING_SCHEMA="switch14"
 
   PG_MAX_INT = 2147483647
   PG_MIN_INT = 2147483647
