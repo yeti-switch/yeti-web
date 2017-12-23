@@ -1,6 +1,98 @@
 module Jobs
   class CallsMonitoring < ::BaseJob
 
+    class CallCollection
+      attr_reader :collection,
+                  :key,
+                  :balance, :min_balance, :max_balance
+
+      def initialize(collection, key:, account:)
+        @collection = collection
+        @key = key
+        @balance = account[0]
+        @min_balance = account[1]
+        @max_balance = account[2]
+      end
+
+      def normal_calls
+        collection.select do |c|
+         c[call_reverse_billing_key] == false && c['check_account_balance']
+        end
+      end
+
+      def reverse_calls
+        collection.select do |c|
+         c[call_reverse_billing_key] == true && c['check_account_balance']
+        end
+      end
+
+      def exceed_min_balance?
+        balance_after_calls < min_balance
+      end
+
+      def exceed_max_balance?
+        balance_after_calls > max_balance
+      end
+
+      private
+
+      def call_reverse_billing_key
+        "#{key}_reverse_billing"
+      end
+
+      # Customer: every call charges balance
+      # Vendor: every call adds funds to the balance
+      def balance_after_calls
+        if key == 'destination'
+          balance - total_calls_cost
+        elsif key == 'dialpeer'
+          balance + total_calls_cost
+        end
+      end
+
+      # normal  calls: '+'
+      # reverse calls: '-'
+      def total_calls_cost
+        collection.inject(0) do |sum, call|
+          if call[call_reverse_billing_key] == false
+            sum += call_price(call)
+          else
+            sum -= call_price(call)
+          end
+        end
+      end
+
+      #   :destination_fee
+      #   :destination_initial_interval
+      #   :destination_initial_rate
+      #   :destination_next_interval
+      #   :destination_next_rate
+      # or
+      #   :dialpeer_fee,
+      #   :dialpeer_initial_interval,
+      #   :dialpeer_initial_rate,
+      #   :dialpeer_next_interval,
+      #   :dialpeer_next_rate
+      #
+      # attrs hash with calls attributes
+      # key  'destination' | 'dialpeer'
+      #
+      def call_price(attrs)
+        i_per_second_rate = attrs.fetch("#{key}_initial_rate").to_f / 60.0
+        n_per_second_rate = attrs.fetch("#{key}_next_rate").to_f / 60.0
+        duration = attrs.fetch('duration').to_i #TODO: check if needed cast to int
+        initial_interval = attrs.fetch("#{key}_initial_interval").to_i #TODO: check if needed cast to int
+        next_interval = attrs.fetch("#{key}_next_interval").to_i #TODO: check if needed cast to int
+        connect_fee = attrs.fetch("#{key}_fee").to_f
+
+        initial_interval_billing = connect_fee + initial_interval * i_per_second_rate
+        next_interval_billing = (duration > initial_interval ? 1 : 0) * ((duration - initial_interval).to_f / next_interval).ceil * next_interval * n_per_second_rate
+        initial_interval_billing + next_interval_billing
+      end
+
+    end #END CallCollection
+
+
     attr_reader :now
 
     MONITORED_COLUMNS = [
@@ -23,6 +115,10 @@ module Jobs
         :dialpeer_initial_rate,
         :dialpeer_next_interval,
         :dialpeer_next_rate,
+
+        :check_account_balance,
+        :destination_reverse_billing,
+        :dialpeer_reverse_billing,
 
          :duration
     ].freeze
@@ -54,29 +150,51 @@ module Jobs
     end
 
     def detect_customers_calls_to_reject
-      customers_active_calls.each do |customer_id, calls|
-        total_calls_amount = 0
-        calls.each do |call|
-          total_calls_amount += call_price(call, "destination")
+      customers_active_calls.each do |acc_id, calls|
+        call_collection = CallCollection.new(calls,
+                                             key: 'destination',
+                                             account: active_customers_balances()[acc_id])
+
+        if call_collection.exceed_min_balance?
+          @terminate_calls.merge!(
+            call_collection
+              .normal_calls
+              .index_by { |c| c["local_tag"] }
+          )
         end
 
-        if total_calls_amount > 0 and !active_customer_balance_enough?(customer_id.to_i, total_calls_amount)
-          @terminate_calls.merge! calls.index_by { |c| c["local_tag"] }
+        if call_collection.exceed_max_balance?
+          @terminate_calls.merge!(
+            call_collection
+              .reverse_calls
+              .index_by { |c| c["local_tag"] }
+          )
         end
-
       end
     end
 
     def detect_vendors_calls_to_reject
-      vendors_active_calls.each do |vendor_id, calls|
-        total_calls_amount = 0
-        calls.each do |call|
-          total_calls_amount += call_price(call, "dialpeer")
-        end
-        if total_calls_amount > 0 and !active_vendor_balance_enough?(vendor_id.to_i, total_calls_amount)
-          @terminate_calls.merge! calls.index_by { |c| c["local_tag"] }
+      vendors_active_calls.each do |acc_id, calls|
+        call_collection = CallCollection.new(calls,
+                                             key: 'dialpeer',
+                                             account: active_vendors_balances()[acc_id])
+        # drop reverse-billing calls when balance reaches minimum
+        if call_collection.exceed_min_balance?
+          @terminate_calls.merge!(
+            call_collection
+              .reverse_calls
+              .index_by { |c| c["local_tag"] }
+          )
         end
 
+        # drop normal calls when balance reaches maximum
+        if call_collection.exceed_max_balance?
+          @terminate_calls.merge!(
+            call_collection
+              .normal_calls
+              .index_by { |c| c["local_tag"] }
+          )
+        end
       end
     end
 
@@ -101,20 +219,6 @@ module Jobs
           pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
-    #amount + balance < min_balance
-    def active_customer_balance_enough?(id, amount)
-      logger.warn { "checking  enough balance for customer #{id}, #{amount} " }
-      begin
-        logger.warn { "balance: #{active_customers_balances()[id][0]}, min: #{active_customers_balances()[id][1]}, amount: #{amount} " }
-        enough =    active_customers_balances()[id][0] - active_customers_balances()[id][1] > amount
-        logger.warn { " enough  #{enough} " }
-        enough
-      rescue StandardError => e
-        logger.error("active_customers_balances: #{id} => #{e.message} ")
-        raise e
-      end
-    end
-
     #
     #  returns array of hashes
     #  [ {vendor_id => [balance,  min_balance, max_balance, vendor_id]}]
@@ -124,56 +228,14 @@ module Jobs
           pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
-    #amount + balance > max_balance
-    def active_vendor_balance_enough?(id, amount)
-      logger.warn { "checking  enough balance  for vendor  #{id}" }
-      begin
-        logger.warn { "balance: #{active_vendors_balances[id][0]}, max: #{active_vendors_balances[id][2]}, amount: #{amount} " }
-        enough = active_vendors_balances[id][2] - active_vendors_balances[id][0] > amount
-        logger.warn { " enough  #{enough} " }
-        enough
-      rescue StandardError => e
-        logger.error("active_vendors_balances: #{id} => #{e.message} ")
-        raise e
-      end
-    end
-
-    #uniq list of all customer_acc_id from all current calls
+    #unique list of all customer_acc_id from all current calls
     def active_customers_ids
       @active_customers_ids ||= flatten_calls.collect { |c| c["customer_acc_id"] }.uniq
     end
 
-    #uniq list of all vendor_acc_id from all current calls
+    #unique list of all vendor_acc_id from all current calls
     def active_vendors_ids
       @active_vendors_ids ||= flatten_calls.collect { |c| c["vendor_acc_id"] }.uniq
-    end
-
-    # 'destination_fee': '0.0',
-    #  'destination_initial_interval': 1,
-    #  'destination_initial_rate': '0.0350',
-    #     'destination_next_interval': 1,
-    #     'destination_next_rate': '0.0350',
-    #or
-    #     :dialpeer_fee,
-    #     :dialpeer_initial_interval,
-    #     :dialpeer_initial_rate,
-    #     :dialpeer_next_interval,
-    #     :dialpeer_next_rate
-
-    # attrs hash with calls attributes
-    # key  destination | dialpeer
-
-    def call_price(attrs, key)
-      i_per_second_rate = attrs.fetch("#{key}_initial_rate").to_f / 60.0
-      n_per_second_rate = attrs.fetch("#{key}_next_rate").to_f / 60.0
-      duration = attrs.fetch('duration').to_i #todo check if needed cast to int
-      initial_interval = attrs.fetch("#{key}_initial_interval").to_i #todo check if needed cast to int
-      next_interval = attrs.fetch("#{key}_next_interval").to_i #todo check if needed cast to int
-      connect_fee = attrs.fetch("#{key}_fee").to_f
-
-      initial_interval_billing = connect_fee + initial_interval * i_per_second_rate
-      next_interval_billing = (duration > initial_interval ? 1 : 0) * ((duration - initial_interval).to_f / next_interval).ceil * next_interval * n_per_second_rate
-      initial_interval_billing + next_interval_billing
     end
 
     def active_calls
@@ -208,7 +270,7 @@ module Jobs
     def terminate_calls!
       nodes = Node.all.index_by(&:id)
       @terminate_calls.each do |local_tag, call|
-        logger.warn { "CallsMonitoring#terminate_calls! node #{call['node_id']}, local_tag :#{local_tag}" }
+        logger.warn { "CallsMonitoring#terminate_calls! Node #{call['node_id']}, local_tag :#{local_tag}" }
         begin
           nodes[call['node_id'].to_i].drop_call(local_tag)
         rescue StandardError => e
