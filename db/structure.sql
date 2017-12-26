@@ -184,6 +184,20 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
+--
+-- Name: yeti; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS yeti WITH SCHEMA yeti_ext;
+
+
+--
+-- Name: EXTENSION yeti; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION yeti IS 'helper functions for YETI project';
+
+
 SET search_path = billing, pg_catalog;
 
 --
@@ -4382,7 +4396,9 @@ CREATE TABLE gateways (
     rel100_mode_id smallint DEFAULT 4 NOT NULL,
     is_shared boolean DEFAULT false NOT NULL,
     max_30x_redirects smallint DEFAULT 0 NOT NULL,
-    max_transfers smallint DEFAULT 0 NOT NULL
+    max_transfers smallint DEFAULT 0 NOT NULL,
+    incoming_auth_username character varying,
+    incoming_auth_password character varying
 );
 
 
@@ -8627,6 +8643,19 @@ BEGIN
             ON dc.id=dpc.code_id
         where dc.namespace_id=2 -- ONLY SIP
         order by dpc.id;
+END;
+$$;
+
+
+--
+-- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch14; Owner: -
+--
+
+CREATE FUNCTION load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+    LANGUAGE plpgsql COST 10 ROWS 10
+    AS $$
+BEGIN
+  RETURN QUERY SELECT gw.id, gw.incoming_auth_username, gw.incoming_auth_password from class4.gateways gw where gw.enabled;
 END;
 $$;
 
@@ -13832,6 +13861,7 @@ CREATE TABLE customers_auth (
     dst_number_min_length smallint DEFAULT 0 NOT NULL,
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     check_account_balance boolean DEFAULT true NOT NULL,
+    require_sip_auth boolean DEFAULT false NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
 );
@@ -15081,7 +15111,8 @@ CREATE TABLE import_customers_auth (
     transport_protocol_name character varying,
     min_dst_number_length smallint,
     max_dst_number_length smallint,
-    check_account_balance boolean
+    check_account_balance boolean,
+    require_sip_auth boolean
 );
 
 
@@ -15405,7 +15436,9 @@ CREATE TABLE import_gateways (
     termination_capacity smallint,
     rel100_mode_id smallint,
     rel100_mode_name character varying,
-    is_shared boolean
+    is_shared boolean,
+    incoming_auth_username character varying,
+    incoming_auth_password character varying
 );
 
 
@@ -20181,8 +20214,7 @@ ALTER TABLE ONLY sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -20207,4 +20239,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171031211812');
 INSERT INTO public.schema_migrations (version) VALUES ('20171102183313');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171209201956');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
 

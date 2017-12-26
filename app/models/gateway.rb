@@ -155,6 +155,10 @@ class Gateway < Yeti::ActiveRecord
 
   validates_numericality_of :fake_180_timer, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
   validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol
+  validates_presence_of :incoming_auth_username, :incoming_auth_password,
+                        if: Proc.new { |gw|
+                          !gw.incoming_auth_username.blank? or !gw.incoming_auth_password.blank?
+                        }
 
   validates :transit_headers_from_origination, :transit_headers_from_termination,
             format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: "Enter headers separated by comma. Header name can contain letters, * and -" }
@@ -163,6 +167,7 @@ class Gateway < Yeti::ActiveRecord
   validate :vendor_can_be_changed
   validate :allow_termination_can_be_enabled
   validate :is_shared_can_be_changed
+  validate :incoming_auth_can_be_disabled
 
   include Yeti::ResourceStatus
 
@@ -257,6 +262,16 @@ class Gateway < Yeti::ActiveRecord
     if customers_auths.any?
       errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_customers_auth'))
     end
+  end
+
+  def incoming_auth_can_be_disabled
+    return true if incoming_auth_username_changed?(from: nil) or incoming_auth_username_changed?(from: '')
+
+    if customers_auths.where(require_sip_auth: true).any?
+      self.errors.add(:incoming_auth_username, 'cant disable')
+      self.errors.add(:incoming_auth_password, 'cant disable')
+    end
+
   end
 
 end

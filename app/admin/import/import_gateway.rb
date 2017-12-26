@@ -94,6 +94,9 @@ ActiveAdmin.register Importing::Gateway do
     column :transparent_seqno
     column :transparent_ssrc
 
+    column :incoming_auth_username
+    column :incoming_auth_password
+
     column :auth_enabled
     column :auth_user
     column :auth_password

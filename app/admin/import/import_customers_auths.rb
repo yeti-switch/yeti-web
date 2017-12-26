@@ -77,6 +77,8 @@ ActiveAdmin.register Importing::CustomersAuth do
       end
     end
 
+    column :require_sip_auth
+
     column :rateplan, sortable: :rateplan_name do |row|
       if row.rateplan.blank?
         row.rateplan_name
