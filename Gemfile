@@ -29,6 +29,7 @@ gem 'active_admin_datetimepicker', github: 'activeadmin-plugins/activeadmin_date
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
 
 gem 'yetis_node', git: 'https://github.com/yeti-switch/yetis_node.git'
+gem 'jrpc', git: 'https://github.com/yeti-switch/jrpc.git', ref: 'ddb9bf3'
 
 gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
 
