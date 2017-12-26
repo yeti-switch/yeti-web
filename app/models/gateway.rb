@@ -148,6 +148,8 @@ class Gateway < Yeti::ActiveRecord
   validates_numericality_of :asr_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
   validates_numericality_of :short_calls_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
 
+  validates_numericality_of :max_30x_redirects, :max_transfers, greater_than_or_equal_to: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+
   validates_numericality_of :origination_capacity, :termination_capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
   validates_numericality_of :port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
 

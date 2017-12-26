@@ -21,8 +21,19 @@ en:
     hints:
       gateway:
         is_shared: "Allows gateway to be used as origination equipment for any customer"
+        max_30x_redirects: "How many 301/302 redirects Yeti will process"
+        max_transfers: "How many SIP REFERs Yeti will process"
       system_sensor:
         hep_capture_id: "Leave it empty to use YETI Node ID as HEP_CAPTURE_ID"
+      customers_auth:
+        check_account_balance: "Reject calls if originator hasn't enough funds"
+      destinaion:
+        reverse_billing: "If enabled, customer account balance is raised"
+      dialpeers:
+        reverse_billing: "If enabled, vendor account balance is lowered"
+      equipment_registration:
+        contact: "Must be in URI format (sip:user@domain or sip:domain)"
+
 
   activerecord:
     errors:
@@ -40,11 +51,6 @@ en:
             is_shared:
               cant_be_changed_when_linked_to_dialpeer: "cant'be changed because Gateway belongs to Dialpeers"
               cant_be_changed_when_linked_to_customers_auth: "cant'be changed because Gateway belongs to CustomersAuth"
-
-
-  hints:
-    registrations:
-      contact: "Must be in URI format"
 
   invoice_template:
     placeholders:

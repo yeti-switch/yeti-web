@@ -22,7 +22,7 @@ ActiveAdmin.register Destination do
                  :dp_margin_fixed, :dp_margin_percent,
                  [:profit_control_mode_name, proc { |row| row.profit_control_mode.try(:name) }],
                  :valid_from, :valid_till,
-                 :asr_limit, :acd_limit, :short_calls_limit
+                 :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing
 
   acts_as_import resource_class: Importing::Destination
   acts_as_batch_changeable [:enabled, :initial_interval,:next_interval, :initial_rate, :next_rate, :connect_fee,
@@ -118,6 +118,7 @@ ActiveAdmin.register Destination do
     end
 
     column :rate_policy
+    column :reverse_billing
 
     ## fixed price
     column :initial_interval
@@ -157,6 +158,7 @@ ActiveAdmin.register Destination do
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
       f.input :rate_policy
+      f.input :reverse_billing
       f.input :initial_interval
       f.input :next_interval
       f.input :use_dp_intervals
@@ -202,6 +204,7 @@ ActiveAdmin.register Destination do
         c.decorated_valid_till
       end
       row :rate_policy
+      row :reverse_billing
       row :initial_interval
       row :next_interval
       row :use_dp_intervals

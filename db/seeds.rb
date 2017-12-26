@@ -15,16 +15,8 @@ end
   'class4',
   'gui',
   'notifications', # depends on gui.admin_users
-  'switch4',
-  'switch5',
-  'switch6',
-  'switch7',
-  'switch8',
-  'switch9',
-  'switch10',
-  'switch11',
-  'switch12',
   'switch13',
+  'switch14',
   'sys'
 ].each do |filename|
   execute_sql_file("db/seeds/main/#{filename}.sql");
