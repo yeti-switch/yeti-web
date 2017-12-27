@@ -163,7 +163,7 @@ class CustomersAuth < Yeti::ActiveRecord
   end
 
   def gateway_supports_incoming_auth
-    if self.gateway.incoming_auth_username.blank? and self.require_incoming_auth
+    if self.gateway.try(:incoming_auth_username).blank? and self.require_incoming_auth
       self.errors.add(:gateway, 'Should support SIP incoming auth')
       self.errors.add(:require_incoming_auth, 'Can be enabled only for if gateway supports incoming auth')
     end
