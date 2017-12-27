@@ -30,7 +30,7 @@ class Billing::InvoicePeriod < Yeti::ActiveRecord
   DAILY_AGO = -> { self.today - 1.day }
 
   WEEKLY_FROM_NOW = -> {
-    Date.commercial(self.today.year, self.today.cweek + 1)
+    Date.commercial(self.today.year, self.today.cweek) + 1.week
   }
 
   WEEKLY_AGO = -> {
