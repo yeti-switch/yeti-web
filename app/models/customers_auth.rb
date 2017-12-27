@@ -164,8 +164,8 @@ class CustomersAuth < Yeti::ActiveRecord
 
   def gateway_supports_incoming_auth
     if self.gateway.try(:incoming_auth_username).blank? and self.require_incoming_auth
-      self.errors.add(:gateway, 'Should support SIP incoming auth')
-      self.errors.add(:require_incoming_auth, 'Can be enabled only for if gateway supports incoming auth')
+      self.errors.add(:gateway, I18n.t('activerecord.errors.models.customer_auth.attributes.gateway.incoming_auth_required'))
+      self.errors.add(:require_incoming_auth, I18n.t('activerecord.errors.models.customer_auth.attributes.require_incoming_auth.gateway_with_auth_reqired'))
     end
   end
 end
