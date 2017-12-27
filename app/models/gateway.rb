@@ -267,7 +267,7 @@ class Gateway < Yeti::ActiveRecord
   def incoming_auth_can_be_disabled
     return true if incoming_auth_username_changed?(from: nil) or incoming_auth_username_changed?(from: '')
 
-    if customers_auths.where(require_sip_auth: true).any?
+    if customers_auths.where(require_incoming_auth: true).any?
       self.errors.add(:incoming_auth_username, 'cant disable')
       self.errors.add(:incoming_auth_password, 'cant disable')
     end

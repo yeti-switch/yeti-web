@@ -87,7 +87,7 @@ class CustomersAuth < Yeti::ActiveRecord
   validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   validate :ip_is_valid
-  validate :gateway_supports_sip_auth
+  validate :gateway_supports_incoming_auth
 
 
   scope :with_radius, -> { where("radius_auth_profile_id is not null") }
@@ -162,10 +162,10 @@ class CustomersAuth < Yeti::ActiveRecord
     end
   end
 
-  def gateway_supports_sip_auth
-    if self.gateway.incoming_auth_username.blank? and self.require_sip_auth
+  def gateway_supports_incoming_auth
+    if self.gateway.incoming_auth_username.blank? and self.require_incoming_auth
       self.errors.add(:gateway, 'Should support SIP incoming auth')
-      self.errors.add(:require_sip_auth, 'Can be enabled only for if gateway supports incoming auth')
+      self.errors.add(:require_incoming_auth, 'Can be enabled only for if gateway supports incoming auth')
     end
   end
 end

@@ -123,7 +123,7 @@ class Importing::CustomersAuth < Importing::Base
       'dst_number_radius_rewrite_result',
       'radius_accounting_profile_id',
       'transport_protocol_id',
-      'require_sip_auth'
+      'require_incoming_auth'
   ]
 
 
