@@ -8870,7 +8870,7 @@ CREATE FUNCTION load_incoming_auth() RETURNS TABLE(id integer, username characte
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 BEGIN
-  RETURN QUERY SELECT gw.id, gw.incoming_auth_username, gw.incoming_auth_password from class4.gateways gw where gw.enabled;
+  RETURN QUERY SELECT gw.id, gw.incoming_auth_username, gw.incoming_auth_password from class4.gateways gw where gw.enabled and gw.incoming_auth_username is not null and gw.incoming_auth_password is not null;
 END;
 $$;
 

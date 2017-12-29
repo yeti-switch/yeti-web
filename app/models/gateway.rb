@@ -265,13 +265,12 @@ class Gateway < Yeti::ActiveRecord
   end
 
   def incoming_auth_can_be_disabled
-    return true if incoming_auth_username_changed?(from: nil) or incoming_auth_username_changed?(from: '')
-
-    if customers_auths.where(require_incoming_auth: true).any?
+    if incoming_auth_username_changed?(to: nil) or incoming_auth_username_changed?(to: '') and customers_auths.where(require_incoming_auth: true).any?
       self.errors.add(:incoming_auth_username, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_username.cant_be_cleared'))
       self.errors.add(:incoming_auth_password, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_password.cant_be_cleared'))
     end
-
   end
+
+  include Yeti::IncomingAuthReloader
 
 end
