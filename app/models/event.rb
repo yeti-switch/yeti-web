@@ -21,7 +21,8 @@ class Event < ActiveRecord::Base
         reload_codec_groups: 'request.router.codec-groups.reload', #'reload codecs_groups',
         reload_sensors: 'request.sensors.reload',
         reload_radius_auth_profiles: 'request.radius.authorization.profiles.reload',
-        reload_radius_acc_profiles: 'request.radius.accounting.profiles.reload'
+        reload_radius_acc_profiles: 'request.radius.accounting.profiles.reload',
+        reload_incoming_auth: 'request.auth.credentials.reload'
   }
 
 
@@ -54,6 +55,10 @@ class Event < ActiveRecord::Base
   end
 
   def self.reload_sensors
+    create_events_for_nodes CMD[__method__]
+  end
+
+  def self.reload_incoming_auth
     create_events_for_nodes CMD[__method__]
   end
 

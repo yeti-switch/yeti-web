@@ -37,12 +37,12 @@ INSERT INTO resource_action (id, name) VALUES (3, 'Accept');
 -- Data for Name: resource_type; Type: TABLE DATA; Schema: switch14; Owner: -
 --
 
-INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (1, 'Customer account', 503, 'Resource $name $id overloaded', 1);
-INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (3, 'Customer auth', 503, 'Resource $name $id overloaded', 1);
-INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (4, 'Customer gateway', 503, 'Resource $name $id overloaded', 1);
-INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (2, 'Vendor account', 503, 'Resource $name $id overloaded', 2);
-INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (5, 'Vendor gateway', 503, 'Resource $name $id overloaded', 2);
-INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (6, 'Dialpeer', 503, 'Resource $name $id overloaded', 2);
+INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (1, 'Customer account', 480, 'Resource $name $id overloaded', 1);
+INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (3, 'Customer auth', 480, 'Resource $name $id overloaded', 1);
+INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (4, 'Customer gateway', 480, 'Resource $name $id overloaded', 1);
+INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (2, 'Vendor account', 480, 'Resource $name $id overloaded', 2);
+INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (5, 'Vendor gateway', 480, 'Resource $name $id overloaded', 2);
+INSERT INTO resource_type (id, name, reject_code, reject_reason, action_id) VALUES (6, 'Dialpeer', 480, 'Resource $name $id overloaded', 2);
 
 
 --
@@ -69,7 +69,7 @@ SELECT pg_catalog.setval('switch_in_interface_id_seq', 10, true);
 -- Name: switch_interface_id_seq; Type: SEQUENCE SET; Schema: switch14; Owner: -
 --
 
-SELECT pg_catalog.setval('switch_interface_id_seq', 1015, true);
+SELECT pg_catalog.setval('switch_interface_id_seq', 1016, true);
 
 
 --
@@ -301,6 +301,7 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1013, 'customer_acc_check_balance', 'boolean', true, 1954, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1014, 'destination_reverse_billing', 'boolean', true, 1955, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1015, 'dialpeer_reverse_billing', 'boolean', true, 1956, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1016, 'aleg_auth_required', 'boolean', false, 1065, false);
 
 
 --

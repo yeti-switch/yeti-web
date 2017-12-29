@@ -185,7 +185,9 @@ class Importing::Gateway  < Importing::Base
       'transport_protocol_id',
       'term_proxy_transport_protocol_id',
       'orig_proxy_transport_protocol_id',
-      'rel_100_mode_id'
+      'rel_100_mode_id',
+      'incoming_auth_username',
+      'incoming_auth_password'
   ]
   
   self.import_class = ::Gateway

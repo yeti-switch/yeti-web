@@ -184,6 +184,20 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
+--
+-- Name: yeti; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS yeti WITH SCHEMA yeti_ext;
+
+
+--
+-- Name: EXTENSION yeti; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION yeti IS 'helper functions for YETI project';
+
+
 SET search_path = billing, pg_catalog;
 
 --
@@ -2635,6 +2649,220 @@ CREATE TYPE callprofile56_ty AS (
 
 
 --
+-- Name: callprofile57_ty; Type: TYPE; Schema: switch14; Owner: -
+--
+
+CREATE TYPE callprofile57_ty AS (
+	ruri character varying,
+	bleg_transport_protocol_id smallint,
+	"from" character varying,
+	"to" character varying,
+	call_id character varying,
+	transparent_dlg_id boolean,
+	dlg_nat_handling boolean,
+	force_outbound_proxy boolean,
+	outbound_proxy character varying,
+	bleg_outbound_proxy_transport_protocol_id smallint,
+	aleg_force_outbound_proxy boolean,
+	aleg_outbound_proxy character varying,
+	aleg_outbound_proxy_transport_protocol_id smallint,
+	next_hop character varying,
+	next_hop_1st_req boolean,
+	aleg_next_hop character varying,
+	message_filter_type_id integer,
+	message_filter_list character varying,
+	anonymize_sdp boolean,
+	sdp_filter_type_id integer,
+	sdp_filter_list character varying,
+	sdp_alines_filter_type_id integer,
+	sdp_alines_filter_list character varying,
+	enable_session_timer boolean,
+	enable_aleg_session_timer boolean,
+	session_expires integer,
+	minimum_timer integer,
+	maximum_timer integer,
+	session_refresh_method_id integer,
+	accept_501_reply character varying,
+	aleg_session_expires integer,
+	aleg_minimum_timer integer,
+	aleg_maximum_timer integer,
+	aleg_session_refresh_method_id integer,
+	aleg_accept_501_reply character varying,
+	enable_auth boolean,
+	auth_user character varying,
+	auth_pwd character varying,
+	enable_aleg_auth boolean,
+	auth_aleg_user character varying,
+	auth_aleg_pwd character varying,
+	append_headers character varying,
+	append_headers_req character varying,
+	aleg_append_headers_req character varying,
+	disconnect_code_id integer,
+	enable_rtprelay boolean,
+	rtprelay_msgflags_symmetric_rtp boolean,
+	rtprelay_interface character varying,
+	aleg_rtprelay_interface character varying,
+	rtprelay_transparent_seqno boolean,
+	rtprelay_transparent_ssrc boolean,
+	outbound_interface character varying,
+	aleg_outbound_interface character varying,
+	contact_displayname character varying,
+	contact_user character varying,
+	contact_host character varying,
+	contact_port smallint,
+	enable_contact_hiding boolean,
+	contact_hiding_prefix character varying,
+	contact_hiding_vars character varying,
+	try_avoid_transcoding boolean,
+	rtprelay_dtmf_filtering boolean,
+	rtprelay_dtmf_detection boolean,
+	dtmf_transcoding character varying,
+	lowfi_codecs character varying,
+	dump_level_id integer,
+	enable_reg_caching boolean,
+	min_reg_expires integer,
+	max_ua_expires integer,
+	time_limit integer,
+	resources character varying,
+	cache_time integer,
+	reply_translations character varying,
+	aleg_policy_id integer,
+	bleg_policy_id integer,
+	aleg_codecs_group_id integer,
+	bleg_codecs_group_id integer,
+	aleg_single_codec_in_200ok boolean,
+	bleg_single_codec_in_200ok boolean,
+	ringing_timeout integer,
+	global_tag character varying,
+	patch_ruri_next_hop boolean,
+	rtprelay_force_dtmf_relay boolean,
+	aleg_force_symmetric_rtp boolean,
+	bleg_force_symmetric_rtp boolean,
+	aleg_symmetric_rtp_nonstop boolean,
+	bleg_symmetric_rtp_nonstop boolean,
+	aleg_symmetric_rtp_ignore_rtcp boolean,
+	bleg_symmetric_rtp_ignore_rtcp boolean,
+	aleg_rtp_ping boolean,
+	bleg_rtp_ping boolean,
+	aleg_relay_options boolean,
+	bleg_relay_options boolean,
+	filter_noaudio_streams boolean,
+	aleg_relay_reinvite boolean,
+	bleg_relay_reinvite boolean,
+	aleg_relay_hold boolean,
+	bleg_relay_hold boolean,
+	aleg_relay_prack boolean,
+	bleg_relay_prack boolean,
+	aleg_sdp_c_location_id integer,
+	bleg_sdp_c_location_id integer,
+	trusted_hdrs_gw boolean,
+	aleg_append_headers_reply character varying,
+	bleg_sdp_alines_filter_list character varying,
+	bleg_sdp_alines_filter_type_id integer,
+	dead_rtp_time integer,
+	rtp_relay_timestamp_aligning boolean,
+	allow_1xx_wo2tag boolean,
+	invite_timeout integer,
+	srv_failover_timeout integer,
+	rtp_force_relay_cn boolean,
+	aleg_sensor_id smallint,
+	aleg_sensor_level_id smallint,
+	bleg_sensor_id smallint,
+	bleg_sensor_level_id smallint,
+	aleg_dtmf_send_mode_id integer,
+	bleg_dtmf_send_mode_id integer,
+	aleg_dtmf_recv_modes integer,
+	bleg_dtmf_recv_modes integer,
+	suppress_early_media boolean,
+	aleg_relay_update boolean,
+	bleg_relay_update boolean,
+	force_one_way_early_media boolean,
+	radius_auth_profile_id smallint,
+	record_audio boolean,
+	aleg_radius_acc_profile_id smallint,
+	bleg_radius_acc_profile_id smallint,
+	transit_headers_a2b character varying,
+	transit_headers_b2a character varying,
+	src_number_radius character varying,
+	dst_number_radius character varying,
+	orig_gw_name character varying,
+	customer_auth_name character varying,
+	customer_name character varying,
+	customer_account_name character varying,
+	term_gw_name character varying,
+	orig_gw_external_id bigint,
+	term_gw_external_id bigint,
+	fake_180_timer smallint,
+	aleg_rel100_mode_id smallint,
+	bleg_rel100_mode_id smallint,
+	bleg_max_30x_redirects smallint,
+	bleg_max_transfers smallint,
+	aleg_auth_required boolean,
+	customer_id character varying,
+	vendor_id character varying,
+	customer_acc_id character varying,
+	vendor_acc_id character varying,
+	customer_auth_id character varying,
+	destination_id character varying,
+	destination_prefix character varying,
+	dialpeer_id character varying,
+	dialpeer_prefix character varying,
+	orig_gw_id character varying,
+	term_gw_id character varying,
+	routing_group_id character varying,
+	rateplan_id character varying,
+	destination_initial_rate character varying,
+	destination_next_rate character varying,
+	destination_initial_interval integer,
+	destination_next_interval integer,
+	destination_rate_policy_id integer,
+	dialpeer_initial_interval integer,
+	dialpeer_next_interval integer,
+	dialpeer_next_rate character varying,
+	destination_fee character varying,
+	dialpeer_initial_rate character varying,
+	dialpeer_fee character varying,
+	dst_prefix_in character varying,
+	dst_prefix_out character varying,
+	src_prefix_in character varying,
+	src_prefix_out character varying,
+	src_name_in character varying,
+	src_name_out character varying,
+	diversion_in character varying,
+	diversion_out character varying,
+	auth_orig_protocol_id smallint,
+	auth_orig_ip inet,
+	auth_orig_port integer,
+	dst_country_id integer,
+	dst_network_id integer,
+	dst_prefix_routing character varying,
+	src_prefix_routing character varying,
+	routing_plan_id integer,
+	lrn character varying,
+	lnp_database_id smallint,
+	from_domain character varying,
+	to_domain character varying,
+	ruri_domain character varying,
+	src_area_id integer,
+	dst_area_id integer,
+	routing_tag_id smallint,
+	pai_in character varying,
+	ppi_in character varying,
+	privacy_in character varying,
+	rpid_in character varying,
+	rpid_privacy_in character varying,
+	pai_out character varying,
+	ppi_out character varying,
+	privacy_out character varying,
+	rpid_out character varying,
+	rpid_privacy_out character varying,
+	customer_acc_check_balance boolean,
+	destination_reverse_billing boolean,
+	dialpeer_reverse_billing boolean
+);
+
+
+--
 -- Name: lnp_resolve; Type: TYPE; Schema: switch14; Owner: -
 --
 
@@ -4382,7 +4610,9 @@ CREATE TABLE gateways (
     rel100_mode_id smallint DEFAULT 4 NOT NULL,
     is_shared boolean DEFAULT false NOT NULL,
     max_30x_redirects smallint DEFAULT 0 NOT NULL,
-    max_transfers smallint DEFAULT 0 NOT NULL
+    max_transfers smallint DEFAULT 0 NOT NULL,
+    incoming_auth_username character varying,
+    incoming_auth_password character varying
 );
 
 
@@ -8336,7 +8566,7 @@ $$;
 -- Name: debug(smallint, inet, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, boolean, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
 DECLARE
@@ -8368,7 +8598,8 @@ BEGIN
         i_remote_ip::varchar,    --i_contact_domain
         i_remote_port::int,  --i_contact_port
         i_dst_prefix::varchar,   --i_user,
-        i_uri_domain::varchar,   -- URI domain
+        i_uri_domain::varchar,   -- URI domain,
+        null, -- i_auth_id
         i_x_yeti_auth::varchar,            --i_headers,
         NULL, --diversion
         NULL, --X-ORIG-IP
@@ -8627,6 +8858,19 @@ BEGIN
             ON dc.id=dpc.code_id
         where dc.namespace_id=2 -- ONLY SIP
         order by dpc.id;
+END;
+$$;
+
+
+--
+-- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch14; Owner: -
+--
+
+CREATE FUNCTION load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+    LANGUAGE plpgsql COST 10 ROWS 10
+    AS $$
+BEGIN
+  RETURN QUERY SELECT gw.id, gw.incoming_auth_username, gw.incoming_auth_password from class4.gateways gw where gw.enabled and gw.incoming_auth_username is not null and gw.incoming_auth_password is not null;
 END;
 $$;
 
@@ -9041,10 +9285,10 @@ $$;
 
 
 --
--- Name: process_dp(callprofile56_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_dp(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION process_dp(i_profile callprofile56_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION process_dp(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -9124,10 +9368,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(callprofile56_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_dp_debug(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION process_dp_debug(i_profile callprofile56_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION process_dp_debug(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -9194,10 +9438,10 @@ $$;
 
 
 --
--- Name: process_dp_release(callprofile56_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_dp_release(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION process_dp_release(i_profile callprofile56_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION process_dp_release(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -9248,10 +9492,10 @@ $$;
 
 
 --
--- Name: process_gw(callprofile56_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_gw(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION process_gw(i_profile callprofile56_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile56_ty
+CREATE FUNCTION process_gw(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -9465,7 +9709,7 @@ BEGIN
     v_from_domain='$Oi';
   end if;
 
-  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<sip:'||v_from_user||'@'||v_from_domain||'>';
+  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<sip:'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
   i_profile."to":='<sip:'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
@@ -9633,10 +9877,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(callprofile56_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_gw_debug(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION process_gw_debug(i_profile callprofile56_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile56_ty
+CREATE FUNCTION process_gw_debug(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -9850,7 +10094,7 @@ BEGIN
     v_from_domain='$Oi';
   end if;
 
-  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<sip:'||v_from_user||'@'||v_from_domain||'>';
+  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<sip:'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
   i_profile."to":='<sip:'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
@@ -10018,10 +10262,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(callprofile56_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_gw_release(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION process_gw_release(i_profile callprofile56_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile56_ty
+CREATE FUNCTION process_gw_release(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -10215,7 +10459,7 @@ BEGIN
     v_from_domain='$Oi';
   end if;
 
-  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<sip:'||v_from_user||'@'||v_from_domain||'>';
+  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<sip:'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
   i_profile."to":='<sip:'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
@@ -10401,14 +10645,14 @@ $$;
 
 
 --
--- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
-        v_ret switch14.callprofile56_ty;
+        v_ret switch14.callprofile57_ty;
         i integer;
         v_ip inet;
         v_remote_ip inet;
@@ -10503,10 +10747,12 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         /*}dbg*/
         v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
         --  v_uri_domain:=COALESCE(i_uri_domain,'');
-        SELECT into v_customer_auth ca.*
-        from class4.customers_auth ca
-          JOIN public.contractors c ON c.id=ca.customer_id
-        WHERE ca.enabled AND
+
+        if i_auth_id is null then
+            SELECT into v_customer_auth ca.*
+            from class4.customers_auth ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
               ca.ip>>=v_remote_ip AND
               prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
               prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
@@ -10518,25 +10764,68 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
               c.enabled and c.customer
-        ORDER BY
-          masklen(ca.ip) DESC,
-          ca.transport_protocol_id is null,
-          length(prefix_range(ca.dst_prefix)) DESC,
-          length(prefix_range(ca.src_prefix)) DESC,
-          ca.pop_id is null,
-          ca.uri_domain is null,
-          ca.to_domain is null,
-          ca.from_domain is null
-        LIMIT 1;
-        IF NOT FOUND THEN
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
-          /*}dbg*/
-          v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-          RETURN NEXT v_ret;
-          RETURN;
-        END IF;
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null,
+                ca.require_incoming_auth
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF; 
+            if v_customer_auth.require_incoming_auth then
+                v_ret.aleg_auth_required=true;
+                RETURN NEXT v_ret;
+                RETURN;
+            end IF;
+        else
+            SELECT into v_customer_auth ca.*
+            from class4.customers_auth ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              c.enabled and c.customer and
+              ca.require_incoming_auth and gateway_id = i_auth_id
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+        end IF;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -11279,14 +11568,14 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
 
 
 --
--- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
-        v_ret switch14.callprofile56_ty;
+        v_ret switch14.callprofile57_ty;
         i integer;
         v_ip inet;
         v_remote_ip inet;
@@ -11381,10 +11670,12 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
         /*}dbg*/
         v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
         --  v_uri_domain:=COALESCE(i_uri_domain,'');
-        SELECT into v_customer_auth ca.*
-        from class4.customers_auth ca
-          JOIN public.contractors c ON c.id=ca.customer_id
-        WHERE ca.enabled AND
+
+        if i_auth_id is null then
+            SELECT into v_customer_auth ca.*
+            from class4.customers_auth ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
               ca.ip>>=v_remote_ip AND
               prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
               prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
@@ -11396,25 +11687,68 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
               c.enabled and c.customer
-        ORDER BY
-          masklen(ca.ip) DESC,
-          ca.transport_protocol_id is null,
-          length(prefix_range(ca.dst_prefix)) DESC,
-          length(prefix_range(ca.src_prefix)) DESC,
-          ca.pop_id is null,
-          ca.uri_domain is null,
-          ca.to_domain is null,
-          ca.from_domain is null
-        LIMIT 1;
-        IF NOT FOUND THEN
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
-          /*}dbg*/
-          v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-          RETURN NEXT v_ret;
-          RETURN;
-        END IF;
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null,
+                ca.require_incoming_auth
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF; 
+            if v_customer_auth.require_incoming_auth then
+                v_ret.aleg_auth_required=true;
+                RETURN NEXT v_ret;
+                RETURN;
+            end IF;
+        else
+            SELECT into v_customer_auth ca.*
+            from class4.customers_auth ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              c.enabled and c.customer and
+              ca.require_incoming_auth and gateway_id = i_auth_id
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+        end IF;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -12157,14 +12491,14 @@ CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id s
 
 
 --
--- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile56_ty
+CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
-        v_ret switch14.callprofile56_ty;
+        v_ret switch14.callprofile57_ty;
         i integer;
         v_ip inet;
         v_remote_ip inet;
@@ -12249,10 +12583,12 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
         
         v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
         --  v_uri_domain:=COALESCE(i_uri_domain,'');
-        SELECT into v_customer_auth ca.*
-        from class4.customers_auth ca
-          JOIN public.contractors c ON c.id=ca.customer_id
-        WHERE ca.enabled AND
+
+        if i_auth_id is null then
+            SELECT into v_customer_auth ca.*
+            from class4.customers_auth ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
               ca.ip>>=v_remote_ip AND
               prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
               prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
@@ -12264,22 +12600,62 @@ CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
               c.enabled and c.customer
-        ORDER BY
-          masklen(ca.ip) DESC,
-          ca.transport_protocol_id is null,
-          length(prefix_range(ca.dst_prefix)) DESC,
-          length(prefix_range(ca.src_prefix)) DESC,
-          ca.pop_id is null,
-          ca.uri_domain is null,
-          ca.to_domain is null,
-          ca.from_domain is null
-        LIMIT 1;
-        IF NOT FOUND THEN
-          
-          v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-          RETURN NEXT v_ret;
-          RETURN;
-        END IF;
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null,
+                ca.require_incoming_auth
+            LIMIT 1;
+            IF NOT FOUND THEN
+            
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF; 
+            if v_customer_auth.require_incoming_auth then
+                v_ret.aleg_auth_required=true;
+                RETURN NEXT v_ret;
+                RETURN;
+            end IF;
+        else
+            SELECT into v_customer_auth ca.*
+            from class4.customers_auth ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              c.enabled and c.customer and
+              ca.require_incoming_auth and gateway_id = i_auth_id
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null
+            LIMIT 1;
+            IF NOT FOUND THEN
+            
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+        end IF;
 
         
 
@@ -13832,6 +14208,7 @@ CREATE TABLE customers_auth (
     dst_number_min_length smallint DEFAULT 0 NOT NULL,
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     check_account_balance boolean DEFAULT true NOT NULL,
+    require_incoming_auth boolean DEFAULT false NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
 );
@@ -15081,7 +15458,8 @@ CREATE TABLE import_customers_auth (
     transport_protocol_name character varying,
     min_dst_number_length smallint,
     max_dst_number_length smallint,
-    check_account_balance boolean
+    check_account_balance boolean,
+    require_incoming_auth boolean
 );
 
 
@@ -15405,7 +15783,9 @@ CREATE TABLE import_gateways (
     termination_capacity smallint,
     rel100_mode_id smallint,
     rel100_mode_name character varying,
-    is_shared boolean
+    is_shared boolean,
+    incoming_auth_username character varying,
+    incoming_auth_password character varying
 );
 
 
@@ -20181,8 +20561,7 @@ ALTER TABLE ONLY sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -20207,4 +20586,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171031211812');
 INSERT INTO public.schema_migrations (version) VALUES ('20171102183313');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171209201956');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
 

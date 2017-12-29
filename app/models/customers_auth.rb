@@ -87,6 +87,7 @@ class CustomersAuth < Yeti::ActiveRecord
   validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   validate :ip_is_valid
+  validate :gateway_supports_incoming_auth
 
 
   scope :with_radius, -> { where("radius_auth_profile_id is not null") }
@@ -161,6 +162,11 @@ class CustomersAuth < Yeti::ActiveRecord
     end
   end
 
-
+  def gateway_supports_incoming_auth
+    if self.gateway.try(:incoming_auth_username).blank? and self.require_incoming_auth
+      self.errors.add(:gateway, I18n.t('activerecord.errors.models.customer_auth.attributes.gateway.incoming_auth_required'))
+      self.errors.add(:require_incoming_auth, I18n.t('activerecord.errors.models.customer_auth.attributes.require_incoming_auth.gateway_with_auth_reqired'))
+    end
+  end
 end
 

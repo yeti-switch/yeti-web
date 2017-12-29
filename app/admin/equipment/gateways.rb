@@ -58,6 +58,7 @@ ActiveAdmin.register Gateway do
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :auth_enabled, :auth_user, :auth_password, :auth_from_user, :auth_from_domain,
+                 :incoming_auth_username, :incoming_auth_password,
                  :term_use_outbound_proxy, :term_force_outbound_proxy,
                  [:term_proxy_transport_protocol_name, proc { |row| row.term_proxy_transport_protocol.try(:name) }],
                  :term_outbound_proxy,
@@ -203,6 +204,10 @@ ActiveAdmin.register Gateway do
     column :orig_disconnect_policy
 
     column :resolve_ruri
+
+    column :incoming_auth_username
+    column :incoming_auth_password
+
     column :auth_enabled
     column :auth_user
     column :auth_password
@@ -359,6 +364,10 @@ ActiveAdmin.register Gateway do
           f.input :host
           f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
           f.input :resolve_ruri
+
+          f.input :incoming_auth_username
+          f.input :incoming_auth_password, as: :string, input_html: {autocomplete: 'off'}
+
           f.input :auth_enabled
           f.input :auth_user
           f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}
@@ -507,6 +516,9 @@ ActiveAdmin.register Gateway do
             row :transparent_dialog_id
             row :dialog_nat_handling
             row :orig_disconnect_policy
+
+            row :incoming_auth_username
+            row :incoming_auth_password
           end
         end
         panel "Termination" do

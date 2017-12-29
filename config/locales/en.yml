@@ -58,6 +58,16 @@ en:
             is_shared:
               cant_be_changed_when_linked_to_dialpeer: "cant'be changed because Gateway belongs to Dialpeers"
               cant_be_changed_when_linked_to_customers_auth: "cant'be changed because Gateway belongs to CustomersAuth"
+            incoming_auth_username:
+              cant_be_cleared: "Can't be cleared when gateway used at Customer auth with require_incoming_auth"
+            incoming_auth_password:
+              cant_be_cleared: "Can't be cleared when gateway used at Customer auth with require_incoming_auth"
+        customer_auth:
+          attributes:
+            gateway:
+              incoming_auth_required: "Should support SIP incoming auth"
+            require_incoming_auth:
+              gateway_with_auth_reqired: "could be enabled only if gateway supports incoming auth"
 
   invoice_template:
     placeholders:
