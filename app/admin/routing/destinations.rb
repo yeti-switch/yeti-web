@@ -8,6 +8,35 @@ ActiveAdmin.register Destination do
   acts_as_status
   acts_as_quality_stat
   acts_as_stats_actions
+  acts_as_async_destroy('Destination')
+  acts_as_async_update('Destination',
+                       lambda do
+                         {
+                           enabled: boolean_select,
+                           prefix: 'text',
+                           reject_calls: boolean_select,
+                           quality_alarm: boolean_select,
+                           rateplan_id: Rateplan.pluck(:name, :id),
+                           routing_tag_id: Routing::RoutingTag.pluck(:name, :id),
+                           valid_from: 'datepicker',
+                           valid_till: 'datepicker',
+                           rate_policy_id: DestinationRatePolicy.pluck(:name, :id),
+                           initial_interval: 'text',
+                           initial_rate: 'text',
+                           next_interval: 'text',
+                           next_rate: 'text',
+                           use_dp_intervals: boolean_select,
+                           connect_fee: 'text',
+                           profit_control_mode_id: Routing::RateProfitControlMode.pluck(:name, :id),
+                           dp_margin_fixed: 'text',
+                           dp_margin_percent: 'text',
+                           asr_limit: 'text',
+                           acd_limit: 'text',
+                           short_calls_limit: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with DestinationDecorator
 
@@ -25,11 +54,8 @@ ActiveAdmin.register Destination do
                  :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing
 
   acts_as_import resource_class: Importing::Destination
-  acts_as_batch_changeable [:enabled, :initial_interval,:next_interval, :initial_rate, :next_rate, :connect_fee,
-                            :dp_margin_fixed, :dp_margin_percent ]
 
   scope :low_quality
-
 
   filter :id
   filter :uuid_equals, label: 'UUID'

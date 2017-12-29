@@ -4,9 +4,17 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::RoutingPlan')
+  acts_as_async_update('Routing::RoutingPlan',
+                       lambda do
+                         {
+                           sorting_id: Sorting.pluck(:name, :id),
+                           use_lnp: boolean_select,
+                           rate_delta_max: 'text'
+                         }
+                       end)
 
-
-  acts_as_batch_changeable [:enabled, :use_lnp, :rate_delta_max]
+  acts_as_delayed_job_lock
 
   permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, {routing_group_ids: []}
 

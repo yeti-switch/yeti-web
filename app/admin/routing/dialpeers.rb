@@ -11,11 +11,47 @@ ActiveAdmin.register Dialpeer do
   acts_as_quality_stat
   acts_as_lock
   acts_as_stats_actions
+  acts_as_async_destroy('Dialpeer')
+  acts_as_async_update('Dialpeer',
+                       lambda do
+                         {
+                           enabled: boolean_select,
+                           prefix: 'text',
+                           routing_group_id: RoutingGroup.pluck(:name, :id),
+                           routing_tag_id: Routing::RoutingTag.pluck(:name, :id),
+                           priority: 'text',
+                           force_hit_rate: 'text',
+                           exclusive_route: boolean_select,
+                           initial_interval: 'text',
+                           initial_rate: 'text',
+                           next_interval: 'text',
+                           next_rate: 'text',
+                           connect_fee: 'text',
+                           lcr_rate_multiplier: 'text',
+                           gateway_id: Gateway.pluck(:name, :id),
+                           gateway_group_id: GatewayGroup.pluck(:name, :id),
+                           vendor_id: Contractor.vendors.pluck(:name, :id),
+                           account_id: Account.pluck(:name, :id),
+                           valid_from: 'datepicker',
+                           valid_till: 'datepicker',
+                           asr_limit: 'text',
+                           acd_limit: 'text',
+                           short_calls_limit: 'text',
+                           capacity: 'text',
+                           src_name_rewrite_rule: 'text',
+                           src_name_rewrite_result: 'text',
+                           src_rewrite_rule: 'text',
+                           src_rewrite_result: 'text',
+                           dst_rewrite_rule: 'text',
+                           dst_rewrite_result: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   decorate_with DialpeerDecorator
 
   scope :locked
-
 
   #"Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
   acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,
@@ -33,15 +69,6 @@ ActiveAdmin.register Dialpeer do
                  :created_at, :reverse_billing
 
   acts_as_import resource_class: Importing::Dialpeer
-
-  acts_as_batch_changeable [:enabled, :priority, :initial_interval, :next_interval,
-                            :initial_rate, :next_rate, :connect_fee,
-                            :lcr_rate_multiplier, :force_hit_rate,
-                            :capacity, :acd_limit, :asr_limit, :short_calls_limit,
-                            :src_rewrite_rule, :src_rewrite_result,
-                            :dst_rewrite_rule, :dst_rewrite_result
-                           ]
-
 
   controller do
     def resource_params

@@ -5,6 +5,20 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   #acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Lnp::RoutingPlanLnpRule')
+  acts_as_async_update('Lnp::RoutingPlanLnpRule',
+                       lambda do
+                         {
+                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id),
+                           req_dst_rewrite_rule: 'text',
+                           req_dst_rewrite_result: 'text',
+                           database_id: Lnp::Database.pluck(:name, :id),
+                           lrn_rewrite_rule: 'text',
+                           lrn_rewrite_result: 'text'
+                         }
+                       end)
+
+  acts_as_delayed_job_lock
 
   acts_as_export :id, :name
 
