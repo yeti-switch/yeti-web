@@ -12,7 +12,7 @@ ActiveAdmin.register CustomersAuth do
                        lambda do
                          {
                            enabled: boolean_select,
-                           transport_protocol_id: Equipment::TransportProtocol..pluck(:name, :id),
+                           transport_protocol_id: Equipment::TransportProtocol.pluck(:name, :id),
                            ip: 'text',
                            src_prefix: 'text',
                            dst_prefix: 'text',
