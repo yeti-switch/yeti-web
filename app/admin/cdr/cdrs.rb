@@ -294,6 +294,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column(:sign_term_local_ip) do |cdr|
           "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(":")
         end
+        column :is_redirected
         column :routing_delay
         column :pdd
         column :rtt
@@ -457,6 +458,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :sign_term_local_ip do
             "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(":")
           end
+
+          row :is_redirected
 
           row :local_tag
           row :routing_delay
@@ -642,6 +645,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column('LegB local socket', sortable: 'sign_term_local_ip') do |cdr|
       "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(":")
     end
+    column :is_redirected
     column :routing_delay
     column :pdd
     column :rtt
@@ -903,6 +907,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column(:sign_term_local_ip, sortable: 'sign_term_local_ip') do |cdr|
           "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(':')
         end
+        column :is_redirected
         column :routing_delay
         column :pdd
         column :rtt

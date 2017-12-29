@@ -50,6 +50,7 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
          auto_link(row.rate_policy, row.rate_policy_name)
        end
     end
+    column :reverse_billing
     
     column :initial_interval
     column :initial_rate

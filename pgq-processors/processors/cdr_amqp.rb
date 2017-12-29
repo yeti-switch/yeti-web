@@ -2,6 +2,7 @@ require 'bunny'
 require 'byebug'
 
 class CdrAmqp < Pgq::ConsumerGroup
+  @consumer_name = 'cdr_amqp'
 
   def initialize(logger, queue, consumer, options)
     super
@@ -20,7 +21,10 @@ class CdrAmqp < Pgq::ConsumerGroup
 
   def send_event_by_amqp(event)
     logger.info "Sending cdr #{event.try :id}"
-    @exchange.publish(event.to_json)
+    unless event_done?(event[:id])
+      @exchange.publish(event.to_json)
+      event_done!(event[:id])
+    end
   end
 
   def send_events_by_amqp(group)

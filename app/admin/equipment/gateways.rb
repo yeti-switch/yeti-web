@@ -84,7 +84,7 @@ ActiveAdmin.register Gateway do
                  [:dtmf_receive_mode_name, proc { |row| row.dtmf_receive_mode.try(:name) }],
                  :suppress_early_media,
                  :send_lnp_information,
-                 :force_one_way_early_media
+                 :force_one_way_early_media, :process_30x_redirect, :term_process_refer
 
   acts_as_import resource_class: Importing::Gateway
 
@@ -221,6 +221,8 @@ ActiveAdmin.register Gateway do
     column :sdp_alines_filter_list
     column :ringing_timeout
     column :allow_1xx_without_to_tag
+    column :max_30x_redirects
+    column :max_transfers
     column :sip_timer_b
     column :dns_srv_failover_timer
     column :suppress_early_media
@@ -374,6 +376,8 @@ ActiveAdmin.register Gateway do
           f.input :sdp_alines_filter_list
           f.input :ringing_timeout
           f.input :allow_1xx_without_to_tag
+          f.input :max_30x_redirects
+          f.input :max_transfers
           f.input :sip_timer_b
           f.input :dns_srv_failover_timer
           f.input :suppress_early_media
@@ -528,6 +532,8 @@ ActiveAdmin.register Gateway do
             row :sdp_alines_filter_list
             row :ringing_timeout
             row :allow_1xx_without_to_tag
+            row :max_30x_redirects
+            row :max_transfers
             row :sip_timer_b
             row :dns_srv_failover_timer
             row :suppress_early_media

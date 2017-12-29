@@ -53,6 +53,14 @@ describe Billing::InvoicePeriod do
       end
     end
 
+    context 'when invoice on last week of the year' do
+      include_examples :should_set_correct_dates do
+        let(:dt) { Time.parse('2017-12-27 00:00:00') }
+        let(:expected_next_dt) { dt + 1.week }
+        let(:expected_initial_dt) { dt.beginning_of_week }
+        let(:expected_next_from_now_dt) { expected_next_dt.beginning_of_week }
+      end
+    end
 
   end # WEEKLY
 

@@ -43,6 +43,7 @@ ActiveAdmin.register CustomersAuth do
                  :x_yeti_auth,
                  [:customer_name, proc { |row| row.customer.try(:name) }],
                  [:account_name, proc { |row| row.account.try(:name) || "" }],
+                 :check_account_balance,
                  [:gateway_name, proc { |row| row.gateway.try(:name) || "" }],
                  [:rateplan_name, proc { |row| row.rateplan.try(:name) || "" }],
                  [:routing_plan_name, proc { |row| row.routing_plan.try(:name) || "" }],
@@ -66,7 +67,7 @@ ActiveAdmin.register CustomersAuth do
   acts_as_import resource_class: Importing::CustomersAuth
 
   permit_params :name, :enabled, :customer_id, :rateplan_id, :routing_plan_id,
-                :gateway_id, :account_id, :diversion_policy_id,
+                :gateway_id, :account_id, :check_account_balance, :diversion_policy_id,
                 :diversion_rewrite_rule, :diversion_rewrite_result,
                 :src_name_rewrite_rule, :src_name_rewrite_result,
                 :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule,
@@ -128,6 +129,7 @@ ActiveAdmin.register CustomersAuth do
     column :account, sortable: 'accounts.name' do |row|
       auto_link(row.account, row.account.decorated_customer_display_name)
     end
+    column :check_account_balance
 
     column :gateway, sortable: 'gateways.name' do |row|
       auto_link(row.gateway, row.gateway.decorated_origination_display_name)
@@ -203,6 +205,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :account, collection: (f.object.customer.nil? ? [] : f.object.customer.accounts),
                   include_blank: true,
                   input_html: {class: 'chosen'}
+          f.input :check_account_balance
 
           f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.for_origination_gateways),
                   include_blank: true,
@@ -277,6 +280,7 @@ ActiveAdmin.register CustomersAuth do
           row :enabled
           row :customer
           row :account
+          row :check_account_balance
           row :gateway
 
           # row :enable_redirect

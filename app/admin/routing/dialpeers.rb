@@ -66,7 +66,7 @@ ActiveAdmin.register Dialpeer do
                  :acd_limit, :asr_limit, :short_calls_limit, :capacity,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
-                 :created_at
+                 :created_at, :reverse_billing
 
   acts_as_import resource_class: Importing::Dialpeer
 
@@ -116,6 +116,7 @@ ActiveAdmin.register Dialpeer do
     column :next_interval
     column :next_rate
     column :connect_fee
+    column :reverse_billing
     column :lcr_rate_multiplier
     column :gateway, sortable: 'gateways.name' do |c|
       auto_link(c.gateway, c.gateway.decorated_termination_display_name) unless c.gateway.nil?
@@ -236,6 +237,7 @@ ActiveAdmin.register Dialpeer do
       f.input :next_rate
       f.input :lcr_rate_multiplier
       f.input :connect_fee
+      f.input :reverse_billing
 
       f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_origination_gateways),
               include_blank: "None" ,
@@ -290,6 +292,7 @@ ActiveAdmin.register Dialpeer do
           row :next_rate
           row :lcr_rate_multiplier
           row :connect_fee
+          row :reverse_billing
 
           row :gateway do
             auto_link(s.gateway, s.gateway.decorated_termination_display_name) unless s.gateway.nil?

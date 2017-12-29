@@ -81,7 +81,7 @@ ActiveAdmin.register Equipment::Registration do
       f.input :auth_password, as: :string
       f.input :proxy
       f.input :proxy_transport_protocol
-      f.input :contact, hint: I18n.t('hints.registrations.contact')
+      f.input :contact
       f.input :expire
       f.input :force_expire
       f.input :retry_delay
