@@ -8632,6 +8632,7 @@ BEGIN
         i_remote_port::int,  --i_contact_port
         i_dst_prefix::varchar,   --i_user,
         i_uri_domain::varchar,   -- URI domain
+        null, -- i_auth_id
         i_x_yeti_auth::varchar,            --i_headers,
         NULL, --diversion
         NULL, --X-ORIG-IP
@@ -20588,4 +20589,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171102183313');
 INSERT INTO public.schema_migrations (version) VALUES ('20171209201956');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171231175152');
 
