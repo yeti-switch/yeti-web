@@ -19,6 +19,9 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
+  - cd pgq-processors
+  - bundle install --gemfile="./Gemfile"
+  - cd ..
   - cp config/database.example.yml config/database.yml
   - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
   - RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
@@ -29,3 +32,7 @@ jobs:
     - stage: test
       script: bundle exec rspec
     - script: bundle exec cucumber
+    - script:
+        - cd pgq-processors
+        - BUNDLE_GEMFILE=./Gemfile ./bin/bundle exec rspec
+        - cd ..
