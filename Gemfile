@@ -68,7 +68,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
 gem 'syslog-logger'
-gem 'odf-report', git: 'https://github.com/yeti-switch/odf-report.git'
+gem 'odf-report', git: 'https://github.com/yeti-switch/odf-report.git', branch: 'master-2018'
 gem 'zip-zip'
 
 group :development do
