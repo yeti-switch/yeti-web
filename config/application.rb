@@ -94,5 +94,11 @@ module Yeti
 
     config.active_job.queue_adapter = :delayed_job
 
+    # Use RSpec for testing
+    config.generators do |g|
+      g.test_framework :rspec
+      g.integration_tool :rspec
+    end
+
   end
 end
