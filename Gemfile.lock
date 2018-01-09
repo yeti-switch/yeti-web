@@ -1,32 +1,43 @@
 GIT
-  remote: git://github.com/activeadmin-plugins/active_admin_sidebar.git
-  revision: 5b0fde545e3edd78de6d58db64d3634047aa09a6
+  remote: https://github.com/activeadmin-plugins/active_admin_sidebar.git
+  revision: ff3e1e4f35c1d59de4e3788a237fe0bed6f41271
   specs:
-    active_admin_sidebar (0.1.0.rc3)
+    active_admin_sidebar (1.0.0)
       activeadmin
 
 GIT
-  remote: git://github.com/activeadmin-plugins/activeadmin_datetimepicker.git
+  remote: https://github.com/activeadmin-plugins/activeadmin_datetimepicker.git
   revision: 16f2d40484172a5fdb0a4a7c0a12add51a762bd0
+  ref: 16f2d40484172a5fdb0a4a7c0a12add51a762bd0
   specs:
     active_admin_datetimepicker (0.1.1)
       xdan-datetimepicker-rails (~> 2.4)
 
 GIT
-  remote: git://github.com/livingsocial/excelinator.git
-  revision: 7131870d82e830f8be4feea0a8c5a7b0daa4c185
+  remote: https://github.com/livingsocial/excelinator.git
+  revision: 51cd9dbdbcc0e610ff5bd31b85e4744ac379e8c5
   specs:
-    excelinator (1.3.0)
-      spreadsheet (= 0.6.8)
+    excelinator (1.3.1)
+      spreadsheet
 
 GIT
-  remote: git://github.com/workgena/active_admin_date_range_preset.git
-  revision: 0741096a23975cfe6a296f3a8028d7291e7bad62
+  remote: https://github.com/nsarno/knock.git
+  revision: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
+  ref: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
   specs:
-    active_admin_date_range_preset (0.1.0)
+    knock (2.1.1)
+      bcrypt (~> 3.1)
+      jwt (~> 1.5)
+      rails (>= 4.2)
 
 GIT
-  remote: git://github.com/yeti-switch/active_admin.git
+  remote: https://github.com/workgena/active_admin_date_range_preset.git
+  revision: 1bfb64ceb9639bb76dcad2c8e2df4c5199b138f3
+  specs:
+    active_admin_date_range_preset (0.3.1)
+
+GIT
+  remote: https://github.com/yeti-switch/active_admin.git
   revision: 67095c3fbf42fc96bd92f430a45b5c5581571c10
   specs:
     activeadmin (1.0.0.pre2)
@@ -44,36 +55,12 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/yeti-switch/devise_ldap_authenticatable.git
+  remote: https://github.com/yeti-switch/devise_ldap_authenticatable.git
   revision: c4dc9b7273693eec4970149dc1ec0684e285b755
   specs:
     devise_ldap_authenticatable (0.8.3)
       devise (>= 3.0)
       net-ldap (>= 0.3.1, < 0.6.0)
-
-GIT
-  remote: git://github.com/yeti-switch/nvd3-community-rails.git
-  revision: 34afaba76846debbfcb7b17528d02834c2723cc2
-  specs:
-    novus-nvd3-rails (1.7.1)
-
-GIT
-  remote: git://github.com/yeti-switch/odf-report.git
-  revision: 6664254773787e3b42b12d4d2541799ccef9f4cc
-  specs:
-    odf-report (0.5.1)
-      nokogiri (>= 1.5.0)
-      rubyzip (~> 1.1.0)
-
-GIT
-  remote: https://github.com/nsarno/knock.git
-  revision: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
-  ref: 66b60437a5acc28e4863f011ab59324dc1b5d0ae
-  specs:
-    knock (2.1.1)
-      bcrypt (~> 3.1)
-      jwt (~> 1.5)
-      rails (>= 4.2)
 
 GIT
   remote: https://github.com/yeti-switch/jrpc.git
@@ -84,6 +71,21 @@ GIT
       net_tcp_client (~> 2.0)
       netstring (~> 0)
       oj (~> 2.0)
+
+GIT
+  remote: https://github.com/yeti-switch/nvd3-community-rails.git
+  revision: 34afaba76846debbfcb7b17528d02834c2723cc2
+  specs:
+    novus-nvd3-rails (1.7.1)
+
+GIT
+  remote: https://github.com/yeti-switch/odf-report.git
+  revision: 3e956a60c0ed9eaeff53350707b36e48da7e13d6
+  branch: master-2018
+  specs:
+    odf-report (0.5.2)
+      nokogiri (>= 1.5.0)
+      rubyzip (~> 1.2.0)
 
 GIT
   remote: https://github.com/yeti-switch/secondbase.git
@@ -162,7 +164,7 @@ GEM
       kramdown
       railties
       rspec_api_documentation
-    arbre (1.0.3)
+    arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (6.0.4)
     bcrypt (3.1.11)
@@ -172,7 +174,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (4.2.5)
+    bourbon (4.3.4)
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.3)
@@ -276,9 +278,9 @@ GEM
       tins (~> 1.0)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
-    formtastic (3.1.3)
+    formtastic (3.1.5)
       actionpack (>= 3.2.13)
-    formtastic_i18n (0.4.1)
+    formtastic_i18n (0.6.0)
     get_process_mem (0.2.0)
     gettext (3.1.6)
       locale (>= 2.0.5)
@@ -288,15 +290,15 @@ GEM
     gherkin (4.1.3)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    has_scope (0.6.0)
-      actionpack (>= 3.2, < 5)
-      activesupport (>= 3.2, < 5)
+    has_scope (0.7.1)
+      actionpack (>= 4.1, < 5.2)
+      activesupport (>= 4.1, < 5.2)
     hike (1.2.3)
     i18n (0.8.6)
-    inherited_resources (1.6.0)
-      actionpack (>= 3.2, < 5)
-      has_scope (~> 0.6.0.rc)
-      railties (>= 3.2, < 5)
+    inherited_resources (1.8.0)
+      actionpack (>= 4.2, <= 5.2)
+      has_scope (~> 0.6)
+      railties (>= 4.2, <= 5.2)
       responders
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
@@ -311,7 +313,7 @@ GEM
       concurrent-ruby
       railties (>= 4.1)
     jwt (1.5.6)
-    kaminari (0.16.3)
+    kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
@@ -328,7 +330,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_mime (0.1.4)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.1)
     multi_test (0.1.2)
@@ -336,8 +338,8 @@ GEM
     net-ldap (0.3.1)
     net_tcp_client (2.0.1)
     netstring (0.0.3)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     oj (2.18.5)
     orm_adapter (0.5.0)
     paper_trail (3.0.6)
@@ -422,13 +424,13 @@ GEM
       activesupport (>= 3.0.0)
       mustache (~> 1.0, >= 0.99.4)
       rspec (~> 3.0)
-    ruby-ole (1.2.11.8)
+    ruby-ole (1.2.12.1)
     ruby2ruby (2.1.3)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
     ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
-    rubyzip (1.1.7)
+    rubyzip (1.2.1)
     sass (3.4.18)
     sass-globbing (1.1.5)
       sass (>= 3.1)
@@ -446,7 +448,7 @@ GEM
       ruby2ruby (>= 1.2.5)
       ruby_parser (>= 2.0.5)
       sexp_processor (>= 3.0.5)
-    spreadsheet (0.6.8)
+    spreadsheet (1.1.5)
       ruby-ole (>= 1.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -488,7 +490,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    xdan-datetimepicker-rails (2.4.3)
+    xdan-datetimepicker-rails (2.5.4)
       jquery-rails
       rails (>= 3.2.16)
     xpath (2.1.0)

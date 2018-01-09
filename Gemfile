@@ -9,7 +9,7 @@ gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'devise', '~> 3.5.10'
-gem 'devise_ldap_authenticatable', '~> 0.8', github: 'yeti-switch/devise_ldap_authenticatable'
+gem 'devise_ldap_authenticatable', '~> 0.8', git: 'https://github.com/yeti-switch/devise_ldap_authenticatable.git'
 gem 'activeldap'
 gem 'net-ldap', '~> 0.3.1'
 gem 'd3-rails'
@@ -21,21 +21,21 @@ gem 'knock', git: 'https://github.com/nsarno/knock.git', ref: '66b60437a5acc28e4
 # ActiveAdmin
 gem 'ransack', '~> 1.4.0'
 gem 'draper', '~>  2.1.0'
-gem 'activeadmin', github: 'yeti-switch/active_admin'
-gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
+gem 'activeadmin', git: 'https://github.com/yeti-switch/active_admin.git'
+gem 'novus-nvd3-rails', git: 'https://github.com/yeti-switch/nvd3-community-rails.git'
 gem 'active_admin_theme'
 gem 'active_admin_import' , '3.0.0.pre'
 gem 'active_admin_scoped_collection_actions'
-gem 'active_admin_datetimepicker', github: 'activeadmin-plugins/activeadmin_datetimepicker'
-gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
+gem 'active_admin_datetimepicker', git: 'https://github.com/activeadmin-plugins/activeadmin_datetimepicker.git', ref: '16f2d40484172a5fdb0a4a7c0a12add51a762bd0'
+gem 'active_admin_date_range_preset', git: 'https://github.com/workgena/active_admin_date_range_preset.git'
 
 gem 'yetis_node', git: 'https://github.com/yeti-switch/yetis_node.git'
 gem 'jrpc', git: 'https://github.com/yeti-switch/jrpc.git', ref: 'ddb9bf3'
 
-gem 'active_admin_sidebar', github: 'activeadmin-plugins/active_admin_sidebar'
+gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
 
 # XLS generation
-gem 'excelinator', github: 'livingsocial/excelinator'
+gem 'excelinator', git: 'https://github.com/livingsocial/excelinator.git'
 
 # REST API
 gem 'jsonapi-resources', '~> 0.9.1.beta1'
@@ -68,8 +68,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
 gem 'syslog-logger'
-#gem 'odf-report', github: 'sandrods/odf-report'
-gem 'odf-report', github: 'yeti-switch/odf-report'
+gem 'odf-report', git: 'https://github.com/yeti-switch/odf-report.git', branch: 'master-2018'
 gem 'zip-zip'
 
 group :development do
@@ -86,7 +85,6 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'thin'
-  gem 'byebug'
 
   gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
@@ -101,6 +99,6 @@ gem 'apitome', '~> 0.1.0'
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   gem 'poltergeist'
 end
