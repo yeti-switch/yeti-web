@@ -9,9 +9,10 @@ module ResourceDSL
                                title: 'Update batch',
                                class: 'scoped_collection_action_button ui',
                                form: attrs_to_update do
-        AsyncBatchUpdateJob.perform_later(model_class,
-                                          scoped_collection_records.except(:eager_load).to_sql,
-                                          params[:changes])
+        Delayed::Job.enqueue AsyncBatchUpdateJob.new(model_class,
+                                                     scoped_collection_records.except(:eager_load).to_sql,
+                                                     params[:changes]),
+                             queue: 'batch_actions'
         flash[:notice] = I18n.t('flash.actions.batch_actions.batch_update.job_scheduled')
         head :ok
       end
