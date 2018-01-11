@@ -11,7 +11,7 @@ module ResourceDSL
                                form: attrs_to_update do
         Delayed::Job.enqueue AsyncBatchUpdateJob.new(model_class,
                                                      scoped_collection_records.except(:eager_load).to_sql,
-                                                     params[:changes]),
+                                                     params[:changes].permit!),
                              queue: 'batch_actions'
         flash[:notice] = I18n.t('flash.actions.batch_actions.batch_update.job_scheduled')
         head :ok
