@@ -1,4 +1,5 @@
 class AsyncBatchUpdateJob
+  include BatchJobsLog
   BATCH_SIZE = 1000
 
   attr_reader :model_class, :sql_query, :changes
@@ -7,6 +8,7 @@ class AsyncBatchUpdateJob
     @model_class = model_class
     @sql_query = sql_query
     @changes = changes
+    @last_transaction = ''
   end
 
   def perform
