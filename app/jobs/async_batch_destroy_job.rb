@@ -1,4 +1,5 @@
 class AsyncBatchDestroyJob
+  include BatchJobsLog
   BATCH_SIZE = 1000
 
   attr_reader :model_class, :sql_query
@@ -23,6 +24,22 @@ class AsyncBatchDestroyJob
 
   def max_attempts
     3
+  end
+
+  def success(job)
+    LogicLog.create!(
+      source: 'Batch destroy job ' + job.id.to_s,
+      level: 0,
+      msg: 'success'
+    )
+  end
+
+  def failure(job)
+    LogicLog.create!(
+      source: 'Batch destroy job ' + job.id.to_s,
+      level: 0,
+      msg: job.last_error
+    )
   end
 
 end
