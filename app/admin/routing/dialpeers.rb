@@ -239,7 +239,7 @@ ActiveAdmin.register Dialpeer do
       f.input :connect_fee
       f.input :reverse_billing
 
-      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_origination_gateways),
+      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_termination_gateways),
               include_blank: "None" ,
               input_html: {class: 'chosen'}
 
