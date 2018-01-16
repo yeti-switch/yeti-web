@@ -7,7 +7,7 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
     include_context :init_destination, id: 2, initial_rate: 0.5
     include_context :init_destination, id: 3, initial_rate: 0.7
 
-    subject { described_class.new.perform(model_class, sql_query, changes)}
+    subject { described_class.new(model_class, sql_query, changes).perform}
 
     before :each do
       stub_const('AsyncBatchUpdateJob::BATCH_SIZE', 2)

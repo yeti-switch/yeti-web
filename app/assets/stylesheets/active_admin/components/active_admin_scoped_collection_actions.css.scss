@@ -1,6 +1,16 @@
 .ui-dialog.active_admin_dialog_mass_update_by_filter {
-  form ul li label {
-    display: inline-block;
+  width: auto!important;
+  form ul li {
+    label, select, input{
+      display: inline-block;
+    }
+    select, input:not([type='checkbox']){
+      float: right;
+      width: 235px;
+    }
+    select{
+      width: 255px;
+    }
   }
 }
 

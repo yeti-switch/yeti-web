@@ -94,7 +94,8 @@ ActiveAdmin.register Destination do
                 :initial_interval, :next_interval, :dp_margin_fixed,
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
-                :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix, :routing_tag_id
+                :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix, :routing_tag_id,
+                :reverse_billing
 
   includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag, network_prefix: [:country, :network]
 

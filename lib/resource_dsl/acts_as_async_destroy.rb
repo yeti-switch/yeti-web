@@ -8,8 +8,9 @@ module ResourceDSL
 
       scoped_collection_action :async_destroy,
                                title: 'Delete batch' do
-        AsyncBatchDestroyJob.perform_later(model_class,
-                                           scoped_collection_records.except(:eager_load).to_sql)
+        Delayed::Job.enqueue AsyncBatchDestroyJob.new(model_class,
+                                                      scoped_collection_records.except(:eager_load).to_sql),
+                             queue: 'batch_actions'
         flash[:notice] = I18n.t('flash.actions.batch_actions.batch_destroy.job_scheduled')
         head :ok
       end
