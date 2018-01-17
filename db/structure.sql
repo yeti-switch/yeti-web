@@ -333,7 +333,9 @@ CREATE TYPE cdr_v2 AS (
 	orig_call_id character varying,
 	term_call_id character varying,
 	local_tag character varying,
-	from_domain character varying
+	from_domain character varying,
+	destination_reverse_billing boolean,
+	dialpeer_reverse_billing boolean
 );
 
 
@@ -2999,8 +3001,18 @@ CREATE FUNCTION bill_cdr(i_cdr cdr_v2) RETURNS void
     AS $$
 DECLARE
 BEGIN
-    UPDATE billing.accounts SET balance=balance+i_cdr.vendor_price WHERE id=i_cdr.vendor_acc_id;
-    UPDATE billing.accounts SET balance=balance-i_cdr.customer_price WHERE id=i_cdr.customer_acc_id;
+    if i_cdr.dialpeer_reverse_billing is not null and i_cdr.dialpeer_reverse_billing=true then
+      UPDATE billing.accounts SET balance=balance-i_cdr.vendor_price WHERE id=i_cdr.vendor_acc_id;
+    else
+      UPDATE billing.accounts SET balance=balance+i_cdr.vendor_price WHERE id=i_cdr.vendor_acc_id;
+    end if;
+
+    if i_cdr.destination_reverse_billing is not null and i_cdr.destination_reverse_billing=true then
+      UPDATE billing.accounts SET balance=balance+i_cdr.customer_price WHERE id=i_cdr.customer_acc_id;
+    else
+      UPDATE billing.accounts SET balance=balance-i_cdr.customer_price WHERE id=i_cdr.customer_acc_id;
+    end if;
+
     return;
 END;
 $$;
@@ -8632,6 +8644,7 @@ BEGIN
         i_remote_port::int,  --i_contact_port
         i_dst_prefix::varchar,   --i_user,
         i_uri_domain::varchar,   -- URI domain
+        null, -- i_auth_id
         i_x_yeti_auth::varchar,            --i_headers,
         NULL, --diversion
         NULL, --X-ORIG-IP
@@ -20588,4 +20601,8 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171102183313');
 INSERT INTO public.schema_migrations (version) VALUES ('20171209201956');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20171231175152');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180101202120');
 
