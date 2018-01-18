@@ -41,7 +41,14 @@ class Rateplan < ActiveRecord::Base
 
 
   def send_quality_alarms_to=(send_to_ids)
-    self[:send_quality_alarms_to] = send_to_ids.reject {|i| i.blank? }
+    # This "else" statement is needed only cause of this PR
+    # https://github.com/yeti-switch/yeti-web/pull/129
+    # TODO: Rewrite PR #129 in other way and remove this hotfix here
+    if send_to_ids.is_a?(Array)
+      self[:send_quality_alarms_to] = send_to_ids.reject {|i| i.blank? }
+    else
+      self[:send_quality_alarms_to] = send_to_ids # hotfix
+    end
   end
 
   def contacts

@@ -59,11 +59,14 @@ module ResourceDSL
       controller do
 
         protected
+
         def fill_resource(klass)
           resource = scoped_collection.new
           @source_object ||= klass.find(params[:from])
           attributes = @source_object.attributes rescue {}
-          attributes.map { |k, v| resource.send("#{k}=", v) }
+          attributes
+            .reject { |k| k == 'uuid' } # TODO: improve this
+            .map { |k, v| resource.send("#{k}=", v) }
           set_resource_ivar(resource)
         end
 
