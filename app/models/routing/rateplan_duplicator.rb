@@ -22,6 +22,7 @@ class Routing::RateplanDuplicator
         src=Rateplan.find(id)
         src.destinations.each do |n|
           x=n.dup
+          x.uuid = nil
           x.rateplan_id=dst.id
           x.save!
         end
