@@ -3,14 +3,7 @@ require 'spec_helper'
 describe Api::Rest::Admin::DestinationsController, type: :controller do
   let(:rateplan) { create :rateplan }
 
-  let(:user) { create :admin_user }
-  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
-
-  before do
-    request.accept = 'application/vnd.api+json'
-    request.headers['Content-Type'] = 'application/vnd.api+json'
-    request.headers['Authorization'] = auth_token
-  end
+  include_context :jsonapi_admin_headers
 
   describe 'GET index' do
     let!(:destinations) { create_list :destination, 2, rateplan: rateplan }
@@ -130,4 +123,12 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     it { expect(response.status).to eq(204) }
     it { expect(Destination.count).to eq(0) }
   end
+
+  describe 'editable routing_tag_ids' do
+    include_examples :jsonapi_resource_with_routing_tag_ids do
+      let(:resource_type) { 'destinations' }
+      let(:factory_name) { :destination }
+    end
+  end
+
 end

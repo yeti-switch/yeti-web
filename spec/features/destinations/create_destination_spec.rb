@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe 'Create new Destinations', type: :feature do
-
-  let(:admin_user) { create :admin_user }
-  before { login_as(admin_user, scope: :admin_user) }
+  include_context :login_as_admin
 
   context 'success' do
 
+    let!(:tag) { create(:routing_tag, :ua) }
     let!(:rateplan) { create(:rateplan) }
 
     before { visit new_destination_path }
@@ -22,7 +21,8 @@ describe 'Create new Destinations', type: :feature do
         reverse_billing: true,
         initial_rate: 60,
         next_rate: 30,
-        profit_control_mode_id: rateplan.profit_control_mode.name
+        profit_control_mode_id: rateplan.profit_control_mode.name,
+        routing_tag_ids: [tag.name, 'any tags']
       }
     end
 
@@ -38,7 +38,8 @@ describe 'Create new Destinations', type: :feature do
         reverse_billing: true,
         initial_rate: attributes[:initial_rate],
         next_rate: attributes[:next_rate],
-        profit_control_mode_id: rateplan.profit_control_mode.id
+        profit_control_mode_id: rateplan.profit_control_mode.id,
+        routing_tag_ids: [tag.id, nil]
       )
     end
   end

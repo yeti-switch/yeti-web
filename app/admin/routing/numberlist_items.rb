@@ -4,6 +4,8 @@ ActiveAdmin.register Routing::NumberlistItem do
   navigation_menu :default
   config.batch_actions = true
 
+  decorate_with NumberlistItemDecorator
+
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
@@ -12,11 +14,21 @@ ActiveAdmin.register Routing::NumberlistItem do
 
   permit_params :numberlist_id, :key, :action_id,
                 :src_rewrite_rule, :src_rewrite_result,
-                :dst_rewrite_rule, :dst_rewrite_result
+                :dst_rewrite_rule, :dst_rewrite_result,
+                :tag_action_id, tag_action_value: []
 
   filter :id
   filter :numberlist, input_html: {class: 'chosen'}
   filter :key
+
+  controller do
+    def update
+      if params['routing_numberlist_item']['tag_action_value'].nil?
+        params['routing_numberlist_item']['tag_action_value'] = []
+      end
+      super
+    end
+  end
 
   index do
     selectable_column
@@ -33,6 +45,8 @@ ActiveAdmin.register Routing::NumberlistItem do
     column :dst_rewrite_result
     column :created_at
     column :updated_at
+    column :tag_action
+    column :routing_tags
   end
 
   show do |s|
@@ -47,6 +61,8 @@ ActiveAdmin.register Routing::NumberlistItem do
       row :dst_rewrite_result
       row :createa_at
       row :updated_at
+      row :tag_action
+      row :routing_tags
     end
   end
 
@@ -59,6 +75,13 @@ ActiveAdmin.register Routing::NumberlistItem do
       f.input :src_rewrite_result
       f.input :dst_rewrite_rule
       f.input :dst_rewrite_result
+
+      f.input :tag_action
+      f.input :tag_action_value, as: :select,
+        collection: Routing::RoutingTag.all,
+        multiple: true,
+        include_hidden: false,
+        input_html: { class: 'chosen' }
     end
     f.actions
   end

@@ -3,6 +3,7 @@ class DestinationDecorator < BillingDecorator
   delegate_all
   decorates Destination
 
+  include RoutingTagIdsDecorator
 
   def decorated_display_name
     if reject_calls?

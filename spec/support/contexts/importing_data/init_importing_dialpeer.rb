@@ -1,5 +1,7 @@
 shared_context :init_importing_dialpeer do |args|
 
+  include_context :init_routing_tag_collection
+
   args ||= {}
 
   before do
@@ -24,11 +26,12 @@ shared_context :init_importing_dialpeer do |args|
         dst_rewrite_result: '',
         locked: false,
         priority: 105,
-        capacity: 0,
+        capacity: 1,
         lcr_rate_multiplier: 1.0,
         initial_rate: 0.0092,
         initial_interval: 1,
-        next_interval: 1
+        next_interval: 1,
+        routing_tag_ids: [@tag_ua.id, @tag_us.id]
     }.merge(args)
 
     @importing_dialpeer = FactoryGirl.create(:importing_dialpeer, fields)

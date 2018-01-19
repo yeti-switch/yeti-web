@@ -17,11 +17,13 @@ resource 'Customer Auths' do
     diversion-rewrite-result allow-receive-rate-limit send-billing-information
     enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
     dst-number-radius-rewrite-rule dst-number-radius-rewrite-result from-domain to-domain
+    tag-action-value
   )
 
   required_relationships = %i(customer rateplan routing-plan gateway account dump-level diversion-policy)
   optional_relationships = %i(
     pop dst-numberlist src-numberlist radius-auth-profile radius-accounting-profile transport-protocol
+    tag-action
   )
 
   get '/api/rest/admin/customers-auths' do

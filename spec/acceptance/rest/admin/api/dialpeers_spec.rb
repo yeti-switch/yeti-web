@@ -17,7 +17,7 @@ resource 'Dialpeers' do
   optional_params = %i(
     prefix src-rewrite-rule dst-rewrite-rule acd-limit asr-limit src-rewrite-result
     dst-rewrite-result locked priority exclusive-route capacity lcr-rate-multiplier
-    force-hit-rate network-prefix-id created-at short-calls-limit external-id
+    force-hit-rate network-prefix-id created-at short-calls-limit external-id routing-tag-ids
   )
 
   required_relationships = %i(routing-group vendor account)

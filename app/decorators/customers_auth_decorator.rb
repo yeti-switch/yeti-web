@@ -8,6 +8,7 @@ class CustomersAuthDecorator < BillingDecorator
   decorates_association :account, with: AccountDecorator
   decorates_association :routing_plan, with: RoutingPlanDecorator
 
+  include RoutingTagActionDecorator
 
   def decorated_display_name
     if !enabled?

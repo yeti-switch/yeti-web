@@ -4457,6 +4457,7 @@ CREATE TABLE destinations (
     dst_number_min_length smallint DEFAULT 0 NOT NULL,
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     reverse_billing boolean DEFAULT false NOT NULL,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -4507,6 +4508,7 @@ CREATE TABLE dialpeers (
     dst_number_min_length smallint DEFAULT 0 NOT NULL,
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     reverse_billing boolean DEFAULT false NOT NULL,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -14023,7 +14025,9 @@ CREATE TABLE numberlist_items (
     src_rewrite_rule character varying,
     src_rewrite_result character varying,
     dst_rewrite_rule character varying,
-    dst_rewrite_result character varying
+    dst_rewrite_result character varying,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -14060,7 +14064,9 @@ CREATE TABLE numberlists (
     default_src_rewrite_rule character varying,
     default_src_rewrite_result character varying,
     default_dst_rewrite_rule character varying,
-    default_dst_rewrite_result character varying
+    default_dst_rewrite_result character varying,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -14222,6 +14228,8 @@ CREATE TABLE customers_auth (
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     check_account_balance boolean DEFAULT true NOT NULL,
     require_incoming_auth boolean DEFAULT false NOT NULL,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
 );
@@ -15124,7 +15132,9 @@ CREATE TABLE routing_tag_detection_rules (
     id smallint NOT NULL,
     dst_area_id integer,
     src_area_id integer,
-    routing_tag_id smallint NOT NULL
+    routing_tag_id smallint NOT NULL,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -15245,6 +15255,16 @@ CREATE SEQUENCE sortings_id_seq
 --
 
 ALTER SEQUENCE sortings_id_seq OWNED BY sortings.id;
+
+
+--
+-- Name: tag_actions; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_actions (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
 
 
 --
@@ -15472,7 +15492,9 @@ CREATE TABLE import_customers_auth (
     min_dst_number_length smallint,
     max_dst_number_length smallint,
     check_account_balance boolean,
-    require_incoming_auth boolean
+    require_incoming_auth boolean,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -15528,7 +15550,8 @@ CREATE TABLE import_destinations (
     asr_limit real,
     acd_limit real,
     short_calls_limit real,
-    reverse_billing boolean
+    reverse_billing boolean,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -15593,7 +15616,8 @@ CREATE TABLE import_dialpeers (
     exclusive_route boolean,
     routing_tag_id smallint,
     routing_tag_name character varying,
-    reverse_billing boolean
+    reverse_billing boolean,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -18876,6 +18900,22 @@ ALTER TABLE ONLY sortings
 
 
 --
+-- Name: tag_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_actions
+    ADD CONSTRAINT tag_actions_name_key UNIQUE (name);
+
+
+--
+-- Name: tag_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_actions
+    ADD CONSTRAINT tag_actions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: transport_protocols_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -20056,6 +20096,14 @@ ALTER TABLE ONLY customers_auth
 
 
 --
+-- Name: customers_auth_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
+
+
+--
 -- Name: customers_auth_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -20360,11 +20408,27 @@ ALTER TABLE ONLY numberlist_items
 
 
 --
+-- Name: numberlist_items_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY numberlist_items
+    ADD CONSTRAINT numberlist_items_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
+
+
+--
 -- Name: numberlists_default_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY numberlists
     ADD CONSTRAINT numberlists_default_action_id_fkey FOREIGN KEY (default_action_id) REFERENCES numberlist_actions(id);
+
+
+--
+-- Name: numberlists_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY numberlists
+    ADD CONSTRAINT numberlists_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
 
 
 --
@@ -20509,6 +20573,14 @@ ALTER TABLE ONLY routing_tag_detection_rules
 
 ALTER TABLE ONLY routing_tag_detection_rules
     ADD CONSTRAINT routing_tag_detection_rules_src_area_id_fkey FOREIGN KEY (src_area_id) REFERENCES areas(id);
+
+
+--
+-- Name: routing_tag_detection_rules_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY routing_tag_detection_rules
+    ADD CONSTRAINT routing_tag_detection_rules_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
 
 
 SET search_path = notifications, pg_catalog;
@@ -20661,6 +20733,8 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
 INSERT INTO public.schema_migrations (version) VALUES ('20171231175152');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180101202120');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180119133842');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
 

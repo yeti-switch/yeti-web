@@ -30,5 +30,6 @@ FactoryGirl.define do
     valid_till '2020-01-01 00:00:00'
     gateway_group_id nil
     error_string nil
+    reverse_billing false
   end
 end

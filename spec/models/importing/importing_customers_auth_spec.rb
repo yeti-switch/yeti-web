@@ -1,12 +1,11 @@
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-xdescribe Importing::CustomersAuth do
+describe Importing::CustomersAuth do
 
   include_context :init_contractor, name: 'iBasis', vendor: true, customer: true
 
   include_context :init_rateplan
-  include_context :init_routing_group
   include_context :init_routing_plan
   include_context :init_account
 
@@ -28,7 +27,6 @@ xdescribe Importing::CustomersAuth do
                     {
                         o_id: 8,
                         customer_id: nil,
-                        routing_group_id: nil,
                         routing_plan_id: nil,
                         rateplan_id: nil,
                         account_id: nil,

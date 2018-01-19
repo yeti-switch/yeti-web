@@ -85,11 +85,21 @@ ActiveAdmin.register CustomersAuth do
                 :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
                 :radius_accounting_profile_id,
                 :enable_audio_recording,
-                :transport_protocol_id
+                :transport_protocol_id,
+                :tag_action_id, tag_action_value: []
                 #, :enable_redirect, :redirect_method, :redirect_to
 
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
+
+  controller do
+    def update
+      if params['customers_auth']['tag_action_value'].nil?
+        params['customers_auth']['tag_action_value'] = []
+      end
+      super
+    end
+  end
 
   collection_action :search_for_debug do
     src_prefix=params[:src_prefix].to_s
@@ -170,6 +180,9 @@ ActiveAdmin.register CustomersAuth do
     column :dst_number_radius_rewrite_rule
     column :dst_number_radius_rewrite_result
     column :radius_accounting_profile, sortable: 'radius_accounting_profiles.name'
+
+    column :tag_action
+    column :routing_tags
   end
 
   filter :id
@@ -272,6 +285,17 @@ ActiveAdmin.register CustomersAuth do
         end
       end
 
+      tab :routing_tags do
+        f.inputs do
+          f.input :tag_action
+          f.input :tag_action_value, as: :select,
+            collection: Routing::RoutingTag.all,
+            multiple: true,
+            include_hidden: false,
+            input_html: { class: 'chosen' }
+        end
+      end
+
     end
     f.actions
 
@@ -353,6 +377,12 @@ ActiveAdmin.register CustomersAuth do
 
       end
 
+      tab :routing_tags do
+        attributes_table do
+          row :tag_action
+          row :routing_tags
+        end
+      end
     end
 
 

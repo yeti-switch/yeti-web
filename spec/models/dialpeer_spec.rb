@@ -33,7 +33,7 @@ describe Dialpeer, type: :model do
 
         include_examples :validation_error_on_field, :gateway, 'must be allowed for termination'
       end
-    
+
       context 'different vendor' do
         let(:vendor) { create(:vendor) }
         let(:g_attr) { { allow_termination: true } }
@@ -50,6 +50,10 @@ describe Dialpeer, type: :model do
 
     end
 
+  end
+
+  context 'validate routing_tag_ids' do
+    include_examples :test_model_with_routing_tag_ids
   end
 
 end

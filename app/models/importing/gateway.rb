@@ -2,7 +2,6 @@
 #
 # Table name: data_import.import_gateways
 #
-#  id                                 :integer          not null, primary key
 #  host                               :string
 #  port                               :integer
 #  src_rewrite_rule                   :string
@@ -59,6 +58,7 @@
 #  src_name_rewrite_result            :string
 #  priority                           :integer
 #  pop_id                             :integer
+#  id                                 :integer          not null, primary key
 #  o_id                               :integer
 #  gateway_group_name                 :string
 #  contractor_name                    :string
@@ -79,6 +79,7 @@
 #  force_dtmf_relay                   :boolean
 #  relay_options                      :boolean
 #  rtp_ping                           :boolean
+#  filter_noaudio_streams             :boolean
 #  relay_reinvite                     :boolean
 #  sdp_c_location_id                  :integer
 #  sdp_c_location_name                :string
@@ -96,7 +97,6 @@
 #  sensor_name                        :string
 #  sensor_level_id                    :integer
 #  sensor_level_name                  :string
-#  filter_noaudio_streams             :boolean
 #  dtmf_send_mode_id                  :integer
 #  dtmf_send_mode_name                :string
 #  dtmf_receive_mode_id               :integer
@@ -107,11 +107,14 @@
 #  transport_protocol_name            :string
 #  term_proxy_transport_protocol_name :string
 #  orig_proxy_transport_protocol_name :string
-#  rel100_mode_id                     :integer
-#  rel100_mode_name                   :string
+#  short_calls_limit                  :float
 #  origination_capacity               :integer
 #  termination_capacity               :integer
-#  short_calls_limit                  :float
+#  rel100_mode_id                     :integer
+#  rel100_mode_name                   :string
+#  is_shared                          :boolean
+#  incoming_auth_username             :string
+#  incoming_auth_password             :string
 #
 
 class Importing::Gateway  < Importing::Base

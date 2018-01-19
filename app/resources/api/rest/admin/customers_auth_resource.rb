@@ -4,7 +4,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
              :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_rewrite_rule, :diversion_rewrite_result,
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
-             :from_domain, :to_domain
+             :from_domain, :to_domain, :tag_action_value
 
   has_one :customer
   has_one :rateplan
@@ -16,6 +16,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
   has_one :pop
   has_one :dst_numberlist, class_name: 'Routing::Numberlist'
   has_one :src_numberlist, class_name: 'Routing::Numberlist'
+  has_one :tag_action, class_name: 'Routing::TagAction'
   has_one :radius_auth_profile, class_name: 'Equipment::Radius::AuthProfile'
   has_one :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile'
   has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
@@ -38,7 +39,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
       :src_prefix,
       :dst_prefix,
       :x_yeti_auth,
-      :name,
+      :tag_action_value,
       :dump_level,
       :capacity,
       :pop,
@@ -50,6 +51,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
       :diversion_rewrite_result,
       :dst_numberlist,
       :src_numberlist,
+      :tag_action,
       :routing_plan,
       :allow_receive_rate_limit,
       :send_billing_information,

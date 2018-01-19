@@ -60,6 +60,10 @@
 #  transport_protocol_name          :string
 #  min_dst_number_length            :integer
 #  max_dst_number_length            :integer
+#  check_account_balance            :boolean
+#  require_incoming_auth            :boolean
+#  tag_action_id                    :integer
+#  tag_action_value                 :integer          default("{}"), not null, is an Array
 #
 
 class Importing::CustomersAuth < Importing::Base
@@ -68,7 +72,6 @@ class Importing::CustomersAuth < Importing::Base
 
   belongs_to :gateway, class_name: '::Gateway'
   belongs_to :account, class_name: '::Account'
-  belongs_to :routing_group, class_name: '::RoutingGroup'
   belongs_to :routing_plan, class_name: '::Routing::RoutingPlan', foreign_key: :routing_plan_id
   belongs_to :rateplan, class_name: '::Rateplan'
   belongs_to :pop, class_name: '::Pop'
@@ -123,12 +126,18 @@ class Importing::CustomersAuth < Importing::Base
       'dst_number_radius_rewrite_result',
       'radius_accounting_profile_id',
       'transport_protocol_id',
-      'require_incoming_auth'
+      'require_incoming_auth',
+      'tag_action_id',
+      'tag_action_value'
   ]
 
 
   self.import_class = ::CustomersAuth
 
+  # "customers_auth.ip [inte]" equal this:
+  def ip
+    self[:ip].present? ? IPAddr.new(self[:ip]) : self[:ip]
+  end
 
   def self.after_import_hook(unique_columns = [])
     self.where(src_prefix: nil).update_all(src_prefix: '')

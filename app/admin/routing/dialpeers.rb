@@ -76,6 +76,13 @@ ActiveAdmin.register Dialpeer do
       [ params[active_admin_config.resource_class.name.underscore.to_sym].permit! ]
     end
 
+    def update
+      if params['dialpeer']['routing_tag_ids'].nil?
+        params['dialpeer']['routing_tag_ids'] = []
+      end
+      super
+    end
+
   end
 
   includes :gateway, :gateway_group, :routing_group, :vendor, :account, :statistic, :routing_tag, network_prefix: [:country, :network]
@@ -108,6 +115,7 @@ ActiveAdmin.register Dialpeer do
     end
     column :routing_group, sortable: 'routing_groups.name'
     column :routing_tag, sortable: 'routing_tags.name'
+    column :routing_tags
     column :priority
     column :force_hit_rate
     column :exclusive_route
@@ -218,6 +226,13 @@ ActiveAdmin.register Dialpeer do
       f.input :enabled
       f.input :routing_group, input_html: {class: 'chosen'}
       f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
+
+      f.input :routing_tag_ids, as: :select,
+        collection: DialpeerDecorator.decorate(f.object).routing_tag_options,
+        multiple: true,
+        include_hidden: false,
+        input_html: { class: 'chosen' }
+
       f.input :vendor,  collection: Contractor.vendors,
               input_html: {
                   class: 'chosen',
@@ -276,6 +291,7 @@ ActiveAdmin.register Dialpeer do
           row :enabled
           row :locked
           row :routing_group
+          row :routing_tags
           row :routing_tag
           row :vendor do
             auto_link(s.vendor, s.vendor.decorated_vendor_display_name)
