@@ -16,13 +16,13 @@ module Jobs
 
       def normal_calls
         collection.select do |c|
-         c[call_reverse_billing_key] == false && c['check_account_balance']
+         c[call_reverse_billing_key] == false && c['customer_acc_check_balance']
         end
       end
 
       def reverse_calls
         collection.select do |c|
-         c[call_reverse_billing_key] == true && c['check_account_balance']
+         c[call_reverse_billing_key] == true && c['customer_acc_check_balance']
         end
       end
 
@@ -116,11 +116,11 @@ module Jobs
         :dialpeer_next_interval,
         :dialpeer_next_rate,
 
-        :check_account_balance,
+        :customer_acc_check_balance,
         :destination_reverse_billing,
         :dialpeer_reverse_billing,
 
-         :duration
+        :duration
     ].freeze
 
     def after_start

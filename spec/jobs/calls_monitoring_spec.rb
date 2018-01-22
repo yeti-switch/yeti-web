@@ -23,7 +23,7 @@ describe Jobs::CallsMonitoring do
   end
 
   shared_examples :keep_emergency_calls do
-    let(:check_account_balance) { false }
+    let(:customer_acc_check_balance) { false }
     include_examples :keep_calls
   end
 
@@ -57,7 +57,7 @@ describe Jobs::CallsMonitoring do
       double('Yeti::CdrsFilter', raw_cdrs: [ {'node_id' => 1}, {'node_id' => 2} ])
     end
 
-    let(:check_account_balance) { true }
+    let(:customer_acc_check_balance) { true }
 
     let(:cdr_list_unsorted) do
       [
@@ -83,7 +83,7 @@ describe Jobs::CallsMonitoring do
           'dialpeer_initial_rate' => '0.0000',
           'dialpeer_next_interval' => 30,
           'dialpeer_next_rate' => '0.0000',
-          'check_account_balance' => check_account_balance,
+          'customer_acc_check_balance' => customer_acc_check_balance,
           'destination_reverse_billing' => false,
           'dialpeer_reverse_billing' => false
         },
@@ -109,7 +109,7 @@ describe Jobs::CallsMonitoring do
           'dialpeer_initial_rate' => '0.0000',
           'dialpeer_next_interval' => 30,
           'dialpeer_next_rate' => '0.0000',
-          'check_account_balance' => check_account_balance,
+          'customer_acc_check_balance' => customer_acc_check_balance,
           'destination_reverse_billing' => true,
           'dialpeer_reverse_billing' => true
         }
