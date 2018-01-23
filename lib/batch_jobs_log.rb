@@ -16,8 +16,8 @@ module BatchJobsLog
   end
 
   def set_audit_log_data
-    ::PaperTrail.whodunnit = who_is.try(:id)
-    ::PaperTrail.controller_info = { ip: who_is.try(:current_sign_in_ip) }
+    ::PaperTrail.whodunnit = who_is[:whodunnit]
+    ::PaperTrail.controller_info = who_is[:controller_info]
   end
 
 end
