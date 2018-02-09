@@ -101,4 +101,5 @@ group :test do
   gem 'capybara-screenshot'
   gem 'cucumber-rails', require: false
   gem 'poltergeist'
+  gem 'shoulda-matchers'
 end

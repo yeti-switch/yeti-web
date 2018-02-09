@@ -17213,6 +17213,38 @@ ALTER SEQUENCE load_balancers_id_seq OWNED BY load_balancers.id;
 
 
 --
+-- Name: lua_scripts; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lua_scripts (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    source character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lua_scripts_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE lua_scripts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lua_scripts_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE lua_scripts_id_seq OWNED BY lua_scripts.id;
+
+
+--
 -- Name: network_prefixes_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
@@ -18061,6 +18093,13 @@ ALTER TABLE ONLY lnp_resolvers ALTER COLUMN id SET DEFAULT nextval('lnp_resolver
 --
 
 ALTER TABLE ONLY load_balancers ALTER COLUMN id SET DEFAULT nextval('load_balancers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY lua_scripts ALTER COLUMN id SET DEFAULT nextval('lua_scripts_id_seq'::regclass);
 
 
 --
@@ -19471,6 +19510,22 @@ ALTER TABLE ONLY load_balancers
 
 
 --
+-- Name: lua_scripts_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lua_scripts
+    ADD CONSTRAINT lua_scripts_name_key UNIQUE (name);
+
+
+--
+-- Name: lua_scripts_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lua_scripts
+    ADD CONSTRAINT lua_scripts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: network_prefixes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -20574,7 +20629,8 @@ ALTER TABLE ONLY sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -20605,4 +20661,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
 INSERT INTO public.schema_migrations (version) VALUES ('20171231175152');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180101202120');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
 
