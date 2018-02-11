@@ -2,6 +2,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   menu parent: "Routing", priority: 110
 
+  decorate_with NumberlistDecorator
+
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
@@ -24,7 +26,16 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   permit_params :name, :mode_id, :default_action_id,
                 :default_src_rewrite_rule, :default_src_rewrite_result,
-                :default_dst_rewrite_rule, :default_dst_rewrite_result
+                :default_dst_rewrite_rule, :default_dst_rewrite_result,
+                :tag_action_id, tag_action_value: []
+  controller do
+    def update
+      if params['routing_numberlist']['tag_action_value'].nil?
+        params['routing_numberlist']['tag_action_value'] = []
+      end
+      super
+    end
+  end
 
   index do
     selectable_column
@@ -39,6 +50,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :default_dst_rewrite_result
     column :created_at
     column :updated_at
+    column :tag_action
+    column :routing_tags
   end
 
   show do |s|
@@ -53,6 +66,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :default_dst_rewrite_result
       row :created_at
       row :updated_at
+      row :tag_action
+      row :routing_tags
     end
   end
 
@@ -65,6 +80,13 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       f.input :default_src_rewrite_result
       f.input :default_dst_rewrite_rule
       f.input :default_dst_rewrite_result
+
+      f.input :tag_action
+      f.input :tag_action_value, as: :select,
+        collection: Routing::RoutingTag.all,
+        multiple: true,
+        include_hidden: false,
+        input_html: { class: 'chosen' }
     end
     f.actions
   end

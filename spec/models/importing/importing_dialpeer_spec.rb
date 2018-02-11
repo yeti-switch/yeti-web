@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-xdescribe Importing::Dialpeer do
+describe Importing::Dialpeer do
 
   include_context :init_contractor, name: 'iBasis', vendor: true, customer: true
   include_context :init_routing_group

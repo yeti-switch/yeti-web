@@ -3,7 +3,8 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
              :initial_interval, :next_interval, :valid_from, :valid_till,
              :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
-             :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id
+             :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id,
+             :routing_tag_ids
 
   has_one :gateway
   has_one :gateway_group
@@ -45,7 +46,8 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
       :network_prefix_id,
       :created_at,
       :short_calls_limit,
-      :external_id
+      :external_id,
+      :routing_tag_ids
     ]
   end
 

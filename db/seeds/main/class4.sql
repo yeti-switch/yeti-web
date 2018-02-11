@@ -908,3 +908,22 @@ INSERT INTO transport_protocols (id, name) VALUES (2, 'TCP');
 --
 -- PostgreSQL database dump complete
 --
+
+
+--
+-- TOC entry 3286 (class 0 OID 695650)
+-- Dependencies: 443
+-- Data for Name: tag_actions; Type: TABLE DATA; Schema: class4; Owner: yeti
+--
+
+INSERT INTO tag_actions VALUES (1, 'Clear tags');
+INSERT INTO tag_actions VALUES (2, 'Remove selected tags');
+INSERT INTO tag_actions VALUES (3, 'Append selected tags');
+INSERT INTO tag_actions VALUES (4, 'Intersection with selected tags');
+
+
+-- Completed on 2018-01-19 16:08:50 EET
+
+--
+-- PostgreSQL database dump complete
+--

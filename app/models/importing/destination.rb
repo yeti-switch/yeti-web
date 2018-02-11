@@ -24,8 +24,14 @@
 #  valid_till               :datetime
 #  profit_control_mode_id   :integer
 #  profit_control_mode_name :string
-#  routing_tag_name         :string
+#  network_prefix_id        :integer
 #  routing_tag_id           :integer
+#  routing_tag_name         :string
+#  asr_limit                :float
+#  acd_limit                :float
+#  short_calls_limit        :float
+#  reverse_billing          :boolean
+#  routing_tag_ids          :integer          default("{}"), not null, is an Array
 #
 
 class Importing::Destination < Importing::Base
@@ -41,7 +47,7 @@ class Importing::Destination < Importing::Base
                            'initial_interval', 'next_interval', 'initial_rate', 'next_rate',
                            'connect_fee', 'rate_policy_id', 'reverse_billing', 'dp_margin_fixed', 'dp_margin_percent', 'use_dp_intervals',
                            'valid_from', 'valid_till', 'profit_control_mode_id', 'routing_tag_id',
-                           'asr_limit', 'acd_limit', 'short_calls_limit']
+                           'asr_limit', 'acd_limit', 'short_calls_limit', 'routing_tag_ids']
 
   self.import_class = ::Destination
 

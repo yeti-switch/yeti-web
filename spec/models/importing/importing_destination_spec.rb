@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-xdescribe Importing::Destination do
+describe Importing::Destination do
 
   include_context :init_rateplan, name: 'Cost'
 

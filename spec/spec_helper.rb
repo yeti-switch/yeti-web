@@ -44,6 +44,9 @@ RSpec.configure do |config|
       'class4.dtmf_receive_modes',
       'class4.gateway_rel100_modes',
       'class4.transport_protocols',
+      'class4.numberlist_modes',
+      'class4.numberlist_actions',
+      'class4.tag_actions',
       'sys.timezones'
   ]
 

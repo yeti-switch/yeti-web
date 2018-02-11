@@ -20,7 +20,7 @@ shared_context :init_dialpeer do |args|
         dst_rewrite_result: '',
         locked: false,
         priority: 105,
-        capacity: 0,
+        capacity: 1,
         lcr_rate_multiplier: 1.0,
         initial_rate: 0.0092,
         initial_interval: 1,

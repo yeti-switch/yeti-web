@@ -1,14 +1,8 @@
 require 'spec_helper'
 
 describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
-  let(:user) { create :admin_user }
-  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
-  before do
-    request.accept = 'application/vnd.api+json'
-    request.headers['Content-Type'] = 'application/vnd.api+json'
-    request.headers['Authorization'] = auth_token
-  end
+  include_context :jsonapi_admin_headers
 
   describe 'GET index' do
     let!(:customers_auths) { create_list :customers_auth, 2 }
@@ -108,5 +102,12 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     it { expect(response.status).to eq(204) }
     it { expect(CustomersAuth.count).to eq(0) }
   end
-end
 
+  describe 'editable tag_action and tag_action_value' do
+
+    include_examples :jsonapi_resource_with_multiple_tags do
+      let(:resource_type) { 'customers-auths' }
+      let(:factory_name) { :customers_auth }
+    end
+  end
+end

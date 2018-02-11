@@ -3,6 +3,8 @@ class DialpeerDecorator < BillingDecorator
   delegate_all
   decorates Dialpeer
 
+  include RoutingTagIdsDecorator
+
   decorates_association :gateway, with: GatewayDecorator
   decorates_association :gateway_group, with: GatewayGroupDecorator
   decorates_association :vendor, with: ContractorDecorator

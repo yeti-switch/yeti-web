@@ -27,6 +27,10 @@
 #  quality_alarm          :boolean          default("false"), not null
 #  routing_tag_id         :integer
 #  uuid                   :uuid             not null
+#  dst_number_min_length  :integer          default("0"), not null
+#  dst_number_max_length  :integer          default("100"), not null
+#  reverse_billing        :boolean          default("false"), not null
+#  routing_tag_ids        :integer          default("{}"), not null, is an Array
 #
 
 class Destination < ActiveRecord::Base
@@ -66,6 +70,8 @@ class Destination < ActiveRecord::Base
   validates_presence_of :dst_number_min_length, :dst_number_max_length
   validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
   validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+
+  validates_with RoutingTagIdsValidator
 
 
 #  validates_uniqueness_of :prefix, scope: [:rateplan_id]
@@ -128,7 +134,7 @@ class Destination < ActiveRecord::Base
   def is_valid_till?
     valid_till > Time.now
   end
-   
+
   scope :routing_for_contains, lambda {
                                #NEW logic, same as in routing procedures
   |prx| where('destinations.id in (
@@ -153,4 +159,4 @@ class Destination < ActiveRecord::Base
   end
 
 end
-  
+

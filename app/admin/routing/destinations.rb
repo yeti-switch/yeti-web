@@ -95,10 +95,18 @@ ActiveAdmin.register Destination do
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix, :routing_tag_id,
-                :reverse_billing
+                :reverse_billing, routing_tag_ids: []
 
   includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag, network_prefix: [:country, :network]
 
+  controller do
+    def update
+      if params['destination']['routing_tag_ids'].nil?
+        params['destination']['routing_tag_ids'] = []
+      end
+      super
+    end
+  end
 
   member_action :clear_quality_alarm do
     #todo  cancan support   ?
@@ -137,6 +145,7 @@ ActiveAdmin.register Destination do
     column :quality_alarm
     column :rateplan, sortable: 'rateplans.name'
     column :routing_tag, sortable: 'routing_tags.name'
+    column :routing_tags
     column :valid_from do |c|
       c.decorated_valid_from
     end
@@ -182,6 +191,12 @@ ActiveAdmin.register Destination do
       f.input :reject_calls
       f.input :rateplan, input_html: { class: 'chosen'}
       f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
+
+      f.input :routing_tag_ids, as: :select,
+        collection:  DestinationDecorator.decorate(f.object).routing_tag_options,
+        include_hidden: false,
+        input_html: { class: 'chosen', multiple: true }
+
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
       f.input :rate_policy
@@ -207,6 +222,7 @@ ActiveAdmin.register Destination do
       f.input :acd_limit
       f.input :short_calls_limit
     end
+
     f.actions
   end
 
@@ -224,6 +240,7 @@ ActiveAdmin.register Destination do
       row :quality_alarm
       row :rateplan
       row :routing_tag
+      row :routing_tags
       row :valid_from do |c|
         c.decorated_valid_from
       end
