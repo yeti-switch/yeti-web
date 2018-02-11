@@ -32,6 +32,9 @@
 //= require modal_confirm_fix
 //= require d3_charts.coffee
 
+//= require vendor/highlight.pack
+//= require highlightjs
+
 
 $(document).ready(function () {
     $("select.chosen").chosen({no_results_text: "No results matched", width: '240px', search_contains: true});
