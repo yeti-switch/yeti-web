@@ -111,6 +111,13 @@ ActiveAdmin.register CustomersAuth do
   scope :with_radius
   scope :with_dump
 
+  sidebar :normalized_copies, only: :show do
+    ul do
+      li "#{resource.normalized_copies.count} copies"
+    end
+    link_to "View copies", customers_auth_normalized_copies_path(resource)
+  end
+
   index do
     selectable_column
     id_column
@@ -118,9 +125,7 @@ ActiveAdmin.register CustomersAuth do
     column :name
     column :enabled
     column :transport_protocol
-    column :ip do |row|
-      row.raw_ip
-    end
+    column :ip
     column :external_id
     column :pop
     column :src_prefix
@@ -131,9 +136,7 @@ ActiveAdmin.register CustomersAuth do
     column :uri_domain
     column :from_domain
     column :to_domain
-    column 'X-Yeti-Auth', sortable: 'x_yeti_auth' do |auth|
-      auth.x_yeti_auth
-    end
+    column :x_yeti_auth
 
     column :customer, sortable: 'contractors.name' do |row|
       auto_link(row.customer, row.customer.decorated_customer_display_name)
@@ -198,14 +201,14 @@ ActiveAdmin.register CustomersAuth do
   filter :dump_level, as: :select, collection: DumpLevel.select([:id, :name]).reorder(:id)
   filter :enable_audio_recording, as: :select, collection: [["Yes", true], ["No", false]]
   filter :transport_protocol
-  filter :ip_covers, as: :string, input_html: {class: 'search_filter_string'}
+  filter :ip_array_contains, label: I18n.t('activerecord.attributes.customers_auth.ip')
   filter :pop, input_html: {class: 'chosen'}
-  filter :src_prefix
-  filter :dst_prefix
-  filter :uri_domain
-  filter :from_domain
-  filter :to_domain
-  filter :x_yeti_auth
+  filter :src_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.src_prefix')
+  filter :dst_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.dst_prefix')
+  filter :uri_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.uri_domain')
+  filter :from_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.from_domain')
+  filter :to_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.to_domain')
+  filter :x_yeti_auth_array_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -246,16 +249,16 @@ ActiveAdmin.register CustomersAuth do
 
         f.inputs "Match conditions" do
           f.input :transport_protocol, as: :select, include_blank: "Any"
-          f.input :ip , input_html: { value: f.object.raw_ip }  #dirty hack to display address mask on edit form
+          f.input :ip, as: :array_of_strings
           f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
-          f.input :src_prefix
-          f.input :dst_prefix
+          f.input :src_prefix, as: :array_of_strings
+          f.input :dst_prefix, as: :array_of_strings
           f.input :dst_number_min_length
           f.input :dst_number_max_length
-          f.input :uri_domain
-          f.input :from_domain
-          f.input :to_domain
-          f.input :x_yeti_auth, label: 'X-Yeti-Auth'
+          f.input :uri_domain, as: :array_of_strings
+          f.input :from_domain, as: :array_of_strings
+          f.input :to_domain, as: :array_of_strings
+          f.input :x_yeti_auth, as: :array_of_strings
         end
       end
 
@@ -338,9 +341,7 @@ ActiveAdmin.register CustomersAuth do
         panel "Match conditions" do
           attributes_table_for s do
             row :transport_protocol
-            row :ip do
-              s.raw_ip
-            end
+            row :ip
             row :pop
             row :src_prefix
             row :dst_prefix

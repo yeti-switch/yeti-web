@@ -7,6 +7,11 @@ class Api::Rest::System::IpAccessController < Api::RestController
   private
 
   def addresses
-    CustomersAuth.all.map{|a| "#{a.ip.to_s}/#{a.ip.cidr_mask}"}.uniq
+    CustomersAuthNormalized
+      .pluck(:ip)
+      .uniq
+      .map { |ip| IPAddr.new(ip) }
+      .map { |ip| "#{ip.to_s}/#{ip.cidr_mask}" }
+      .uniq
   end
 end

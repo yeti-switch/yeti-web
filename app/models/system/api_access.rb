@@ -2,12 +2,12 @@
 #
 # Table name: sys.api_access
 #
-#  id          :integer          not null, primary key
-#  customer_id :integer          not null
-#  login       :string           not null
-#  password    :string           not null
-#  account_ids :integer          is an Array
-#  allowed_ips :inet             default("{0.0.0.0/0}"), is an Array
+#  id              :integer          not null, primary key
+#  customer_id     :integer          not null
+#  login           :string           not null
+#  password_digest :string           not null
+#  account_ids     :integer          default("{}"), not null, is an Array
+#  allowed_ips     :inet             default("{0.0.0.0/0}"), not null, is an Array
 #
 
 class System::ApiAccess < ActiveRecord::Base
@@ -39,7 +39,7 @@ class System::ApiAccess < ActiveRecord::Base
   end
 
   def formtastic_allowed_ips
-    read_attribute_before_type_cast('allowed_ips')[1..-2]
+    allowed_ips.map(&:strip).join(', ')
   end
 
   def accounts

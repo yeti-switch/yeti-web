@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Core
 gem 'pg'
+gem 'postgres_ext'
 gem 'rails', '~> 4.2.9'
 gem 'responders', '~> 2.2.0'
 gem 'activerecord-postgres-dump-schemas' # TODO: deprecated for Rails 5
@@ -84,6 +85,7 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem 'awesome_print'
   gem 'thin'
 
   gem 'rspec-rails', '~> 3.4.2'
