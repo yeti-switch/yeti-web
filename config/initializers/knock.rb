@@ -7,9 +7,8 @@ Knock.setup do |config|
   ## How long before a token is expired. If nil is provided, token will
   ## last forever.
   ##
-  config.token_lifetime = 7.days
-
-
+  config.token_lifetime = Rails.configuration.yeti_web['api']['token_lifetime'].presence
+  
   ## Audience claim
   ## --------------
   ##

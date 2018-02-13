@@ -23,6 +23,7 @@ before_script:
   - bundle install --gemfile="./Gemfile"
   - cd ..
   - cp config/database.example.yml config/database.yml
+  - cp config/yeti_web.yml.distr config/yeti_web.yml
   - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
   - RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
   - RAILS_ENV=test bundle exec rake db:seed

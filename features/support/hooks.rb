@@ -10,10 +10,10 @@ end
 
 After('@change_logo_src') do
   FileUtils.cd("#{Rails.root}/config")
-  if File.exist?("old_active_admin.yml")
-    File.delete("active_admin.yml")
-    File.rename("old_active_admin.yml", "active_admin.yml")
+  if File.exist?("old_yeti_web.yml")
+    File.delete("yeti_web.yml")
+    File.rename("old_yeti_web.yml", "yeti_web.yml")
   else
-    File.delete("active_admin.yml")
+    File.delete("yeti_web.yml")
   end
 end
