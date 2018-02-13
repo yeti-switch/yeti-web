@@ -23,25 +23,26 @@ end
 
 # change logo src scenario
 
-When (/^I create active_admin yml file and add site title "(.*?)"$/) do |title|
+When (/^I create yeti_web yml file and add site title "(.*?)"$/) do |title|
   FileUtils.cd("#{Rails.root}/config")
-  if File.exist?("active_admin.yml")
-    File.rename("active_admin.yml", "old_active_admin.yml")
+  if File.exist?("yeti_web.yml")
+    File.rename("yeti_web.yml", "old_yeti_web.yml")
   end
-  new_yml = File.new("active_admin.yml", "w")
+  new_yml = File.new("yeti_web.yml", "w")
   new_yml.puts title
   new_yml.close
 end
 
 And (/^I add site image src "(.*?)"$/) do |image_src|
   FileUtils.cd("#{Rails.root}/config")
-  File.open("active_admin.yml", "a") do |file|
+  File.open("yeti_web.yml", "a") do |file|
     file << image_src
     file.close
   end
 end
 
-And ("Reinitialize ActiveAdmin") do
+And ("Reinitialize YetiWeb") do
+  load "#{Rails.root}/config/initializers/_config.rb"
   load "#{Rails.root}/config/initializers/active_admin.rb"
 end
 

@@ -34,8 +34,8 @@ case "$1" in
 			cp -p /home/yeti-web/config/pgq_processors.yml.distr /home/yeti-web/config/pgq_processors.yml
 		fi
 
-                if [ ! -f /home/yeti-web/config/active_admin.yml ]; then
-                        cp -p /home/yeti-web/config/active_admin.yml.distr /home/yeti-web/config/active_admin.yml
+                if [ ! -f /home/yeti-web/config/yeti_web.yml ]; then
+                        cp -p /home/yeti-web/config/yeti_web.yml.distr /home/yeti-web/config/yeti_web.yml
                 fi
 		
 		#remove old init scripts

@@ -13,9 +13,9 @@ Feature: Change styles
   @javascript
   Scenario: change logo src
     Given A new admin user with username "admin1"
-    When I create active_admin yml file and add site title "site_title: 'Yeti Admin'"
+    When I create yeti_web yml file and add site title "site_title: 'Yeti Admin'"
     And I add site image src "site_title_image: '/images/logo.png'"
-    And Reinitialize ActiveAdmin
+    And Reinitialize YetiWeb
     And I signed in as admin user with username "admin1"
     And I open the dashboard page
     Then The title image src should be "/images/logo.png"

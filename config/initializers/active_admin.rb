@@ -1,5 +1,4 @@
 ActiveAdmin.setup do |config|
-  active_admin_config = YAML.load_file(File.join(Rails.root, '/config/active_admin.yml')) rescue {}
 
   config.namespace :root do |admin|
 #        admin.build_menu :utility_navigation do |menu|
@@ -37,7 +36,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = active_admin_config['site_title']
+  config.site_title = Rails.configuration.yeti_web['site_title']
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
@@ -48,7 +47,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Recommended image height is 21px to properly fit in the header
   #
-  config.site_title_image = active_admin_config['site_title_image']
+  config.site_title_image = Rails.configuration.yeti_web['site_title_image']
 
   # == Default Namespace
   #
@@ -56,7 +55,7 @@ ActiveAdmin.setup do |config|
   # will be added to.
   #
   # eg:
-  #   config.default_namespace = :hello_world
+  #   config.DEFAULT_NAMESPACE = :hello_world
   #
   # This will create resources in the HelloWorld module and
   # will namespace routes to /hello_world/*
