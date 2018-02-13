@@ -3,4 +3,3 @@ Rails.configuration.yeti_web = begin
 rescue StandardError => e
    raise StandardError.new("Can't load /config/yeti_web.yml, message: #{e.message}")
 end
-
