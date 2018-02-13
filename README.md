@@ -21,7 +21,7 @@ Then fork and clone yeti-web repository and run:
 $ bundle install
 ```
 
-Then create `config/datagbase.yml`, example is `database.yml.example`. Notice this project uses two databases main "yeti" and second database "cdr"
+Then create `config/database.yml`, example is `database.yml.example`. Notice this project uses two databases main "yeti" and second database "cdr"
 
 And run command to create development database:
 
