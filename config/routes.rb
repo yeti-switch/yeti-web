@@ -51,7 +51,9 @@ Yeti::Application.routes.draw do
         end
 
         namespace :admin do
-          jsonapi_resources :accounts
+          jsonapi_resources :accounts do
+            jsonapi_resource :balance, only: [:update]
+          end
           jsonapi_resources :contractors
           jsonapi_resources :api_accesses
           jsonapi_resources :customers_auths
