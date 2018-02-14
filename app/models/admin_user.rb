@@ -29,7 +29,7 @@ class AdminUser < ActiveRecord::Base
 
   has_one :billing_contact, class_name: 'Billing::Contact', dependent: :destroy, autosave: true
 
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, unless:  proc { self.persisted? && email.blank? }
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email?
 
   after_save do
     contact = billing_contact || build_billing_contact
@@ -60,8 +60,6 @@ class AdminUser < ActiveRecord::Base
   else
     include AdminUserDatabaseHandler
   end
-
-  alias_method :authenticate, :valid_password?
 
   def email
     @email ||= billing_contact.try!(:email)
@@ -105,6 +103,9 @@ class AdminUser < ActiveRecord::Base
     super && self.enabled?
   end
 
+  def validate_email?
+    self.new_record? || @email.present?
+  end
 
 ##### devise ####
   def email_required?
@@ -118,7 +119,7 @@ class AdminUser < ActiveRecord::Base
   protected
 
   def check_if_last
-    if self.class.count <= 1
+    if self.class.count.zero?
       errors.add(:base, "Last admin user can't  be deleted")
       false
     end
