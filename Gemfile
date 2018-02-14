@@ -9,9 +9,9 @@ gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'devise', '~> 3.5.10'
-gem 'devise_ldap_authenticatable', '~> 0.8', git: 'https://github.com/yeti-switch/devise_ldap_authenticatable.git'
+gem 'devise_ldap_authenticatable', git: 'https://github.com/cschiewek/devise_ldap_authenticatable'
 gem 'activeldap'
-gem 'net-ldap', '~> 0.3.1'
+gem 'net-ldap', '~> 0.16.0'
 gem 'd3-rails'
 
 # Seamless JWT authentication for Rails API

@@ -237,7 +237,7 @@ Devise.setup do |config|
     config.ldap_create_user = true
     config.ldap_use_admin_to_bind = false
     config.ldap_check_group_membership = true
-    config.ldap_use_admin_for_groups = false
+    config.ldap_check_group_membership_without_admin = true
   end
   config.authentication_keys = [ :username ]
   config.case_insensitive_keys = []
