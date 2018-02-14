@@ -56,7 +56,7 @@ gem 'coffee-rails', '~> 4.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', '~> 0.12.1'
 gem 'uglifier', '>= 1.3'
-gem 'jquery-rails', '3.1.2'
+gem 'jquery-rails', '3.1.3'
 gem 'jquery-ui-rails', '5.0.3'
 gem 'chosen-rails', '1.3.0'
 gem 'jquery-tablesorter'
