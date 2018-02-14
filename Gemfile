@@ -9,9 +9,9 @@ gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'devise', '~> 3.5.10'
-gem 'devise_ldap_authenticatable', '~> 0.8', git: 'https://github.com/yeti-switch/devise_ldap_authenticatable.git'
+gem 'devise_ldap_authenticatable', git: 'https://github.com/cschiewek/devise_ldap_authenticatable'
 gem 'activeldap'
-gem 'net-ldap', '~> 0.3.1'
+gem 'net-ldap', '~> 0.16.0'
 gem 'd3-rails'
 
 # Seamless JWT authentication for Rails API
@@ -51,12 +51,12 @@ gem 'parallel'
 
 # Assets
 gem 'sass-rails', '~> 4.0.0'
-gem 'sprockets', '2.11.0'
+gem 'sprockets', '2.11.3'
 gem 'coffee-rails', '~> 4.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', '~> 0.12.1'
 gem 'uglifier', '>= 1.3'
-gem 'jquery-rails', '3.1.2'
+gem 'jquery-rails', '3.1.3'
 gem 'jquery-ui-rails', '5.0.3'
 gem 'chosen-rails', '1.3.0'
 gem 'jquery-tablesorter'
