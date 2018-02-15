@@ -23,7 +23,8 @@
 #  balance_high_threshold        :decimal(, )
 #  balance_low_threshold         :decimal(, )
 #  send_balance_notifications_to :integer          is an Array
-#  uuid                          :uuid
+#  uuid                          :uuid             not null
+#  external_id                   :integer
 #
 
 class Account < Yeti::ActiveRecord
@@ -62,6 +63,8 @@ class Account < Yeti::ActiveRecord
   validates_numericality_of :max_balance, greater_than_or_equal_to: ->(account) { account.min_balance }
 
   validates_numericality_of :termination_capacity, :origination_capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+
+  validates_uniqueness_of :external_id, allow_blank: true
 
   after_initialize do
     if self.new_record?

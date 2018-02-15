@@ -3,6 +3,7 @@ class Api::Rest::Admin::BalanceResource < ::BaseResource
 
   model_name 'Account'
   self._type = :balances
+  primary_key :external_id
 
   def self.updatable_fields(_context)
     [:balance]

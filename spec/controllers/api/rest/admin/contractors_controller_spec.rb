@@ -53,7 +53,7 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', vendor: true } }
+      let(:attributes) { { name: 'name', vendor: true, 'external-id': 100 } }
 
       let(:relationships) do
         { 'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id ) }
@@ -88,6 +88,13 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
 
       it { expect(response.status).to eq(422) }
       it { expect(contractor.reload.vendor).to_not eq(false) }
+    end
+
+    context 'when attributes are not updatable' do
+      let(:attributes) { { 'external-id': 200 } }
+
+      it { expect(response.status).to eq(400) }
+      it { expect(contractor.reload.external_id).to_not eq(200) }
     end
   end
 

@@ -11,7 +11,7 @@ resource 'Contractors' do
   let(:type) { 'contractors' }
 
   required_params = %i(name vendor customer)
-  optional_params = %i(enabled description address phones)
+  optional_params = %i(enabled description address phones external-id)
   optional_relationships = %i(smtp-connection)
 
   get '/api/rest/admin/contractors' do

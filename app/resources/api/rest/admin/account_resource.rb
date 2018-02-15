@@ -1,5 +1,5 @@
 class Api::Rest::Admin::AccountResource < ::BaseResource
-  attributes :name, :min_balance, :max_balance,
+  attributes :name, :min_balance, :max_balance, :external_id,
              :origination_capacity, :termination_capacity, :send_invoices_to
 
   has_one :contractor
@@ -12,7 +12,7 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
 
   filter :name
 
-  def self.updatable_fields(context)
+  def self.updatable_fields(_context)
     [
       :name,
       :min_balance,
@@ -31,6 +31,6 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   end
 
   def self.creatable_fields(context)
-    self.updatable_fields(context)
+    self.updatable_fields(context) + [:external_id]
   end
 end

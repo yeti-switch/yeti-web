@@ -11,7 +11,7 @@ resource 'Accounts' do
   let(:type) { 'accounts' }
 
   required_params = %i(name min-balance max-balance)
-  optional_params = %i(origination-capacity termination-capacity send-invoices-to)
+  optional_params = %i(origination-capacity termination-capacity send-invoices-to, external-id)
 
   required_relationships = %i(contractor timezone)
   optional_relationships = %i(

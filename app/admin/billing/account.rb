@@ -110,7 +110,9 @@ ActiveAdmin.register Account do
     column :send_balance_notifications_to do |c|
       c.send_balance_notifications_to_emails
     end
+    column :external_id
     column :uuid
+
   end
 
   filter :id
@@ -118,6 +120,7 @@ ActiveAdmin.register Account do
   filter :contractor, input_html: {class: 'chosen'}
   filter :name
   filter :balance
+  filter :external_id
 
   show do |s|
     tabs do
@@ -125,6 +128,7 @@ ActiveAdmin.register Account do
         attributes_table_for s do
           row :id
           row :uuid
+          row :external_id
           row :contractor
           row :balance do
             s.decorated_balance
@@ -215,6 +219,7 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :uuid, as: :string
+      f.input :external_id
       f.input :name
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance

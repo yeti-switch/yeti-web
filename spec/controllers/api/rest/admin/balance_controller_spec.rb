@@ -11,13 +11,16 @@ describe Api::Rest::Admin::BalanceController, type: :controller do
   end
 
   describe 'PUT update', versioning: true do
+    let(:external_id) do
+      100
+    end
     let(:balance) do
       10
     end
-    let!(:account) { create(:account, balance: balance) }
+    let!(:account) { create(:account, balance: balance, external_id: external_id) }
 
     subject do
-      put :update, account_id: account.to_param, data: { type: 'balances', id: account.to_param , attributes: attributes }
+      put :update, account_id: external_id, data: { type: 'balances', id: external_id , attributes: attributes }
     end
 
     context 'when attributes are valid' do
