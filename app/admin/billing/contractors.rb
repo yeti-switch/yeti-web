@@ -52,6 +52,7 @@ ActiveAdmin.register Contractor do
     column :name
     column :vendor
     column :customer
+    column :external_id
     column :description
     column :address
     column :phones
@@ -64,6 +65,7 @@ ActiveAdmin.register Contractor do
         attributes_table do
           row :id
           row :name
+          row :external_id
           row :enabled
           row :vendor
           row :customer
@@ -95,6 +97,7 @@ ActiveAdmin.register Contractor do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
+      f.input :external_id
       f.input :enabled
       f.input :vendor
       f.input :customer
@@ -112,7 +115,7 @@ ActiveAdmin.register Contractor do
   filter :enabled,as: :select, collection: [["Yes", true], ["No", false]]
   filter :vendor,as: :select, collection: [["Yes", true], ["No", false]]
   filter :customer,as: :select, collection: [["Yes", true], ["No", false]]
-  
+  filter :external_id
 
   sidebar :links, only: [:show, :edit] do
 

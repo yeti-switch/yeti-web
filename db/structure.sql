@@ -2956,7 +2956,8 @@ CREATE TABLE accounts (
     balance_high_threshold numeric,
     balance_low_threshold numeric,
     send_balance_notifications_to integer[],
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    external_id bigint
 );
 
 
@@ -16423,7 +16424,8 @@ CREATE TABLE contractors (
     description character varying,
     address character varying,
     phones character varying,
-    smtp_connection_id integer
+    smtp_connection_id integer,
+    external_id bigint
 );
 
 
@@ -19709,6 +19711,15 @@ ALTER TABLE ONLY timezones
     ADD CONSTRAINT timezones_pkey PRIMARY KEY (id);
 
 
+SET search_path = billing, pg_catalog;
+
+--
+-- Name: accounts_external_id_idx; Type: INDEX; Schema: billing; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX accounts_external_id_idx ON accounts USING btree (external_id);
+
+
 SET search_path = class4, pg_catalog;
 
 --
@@ -19877,6 +19888,13 @@ CREATE INDEX api_requests_created_at_idx ON api_requests USING btree (created_at
 
 
 SET search_path = public, pg_catalog;
+
+--
+-- Name: contractors_external_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX contractors_external_id_idx ON contractors USING btree (external_id);
+
 
 --
 -- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
@@ -20737,4 +20755,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180101202120');
 INSERT INTO public.schema_migrations (version) VALUES ('20180119133842');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180215113538');
 

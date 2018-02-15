@@ -11,6 +11,7 @@
 #  address            :string
 #  phones             :string
 #  smtp_connection_id :integer
+#  external_id        :integer
 #
 
 class Contractor < ActiveRecord::Base
@@ -35,6 +36,7 @@ class Contractor < ActiveRecord::Base
   validate :vendor_or_customer?
   validates_presence_of :name
   validates_uniqueness_of :name
+  validates_uniqueness_of :external_id, allow_blank: true
 
   def display_name
     "#{self.name} | #{self.id}"

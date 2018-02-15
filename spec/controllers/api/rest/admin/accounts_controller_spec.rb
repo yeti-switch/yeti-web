@@ -56,6 +56,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
       let(:attributes) do
         { name: 'name',
           'min-balance': 1,
+          'external-id': 100,
           'max-balance': 10 }
       end
 
@@ -97,6 +98,13 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
 
       it { expect(response.status).to eq(422) }
       it { expect(account.reload.name).to_not eq('name') }
+    end
+
+    context 'when attributes are not updatable' do
+      let(:attributes) { { 'external-id': 200 } }
+
+      it { expect(response.status).to eq(400) }
+      it { expect(account.reload.external_id).to_not eq(200) }
     end
   end
 
