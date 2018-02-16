@@ -121,6 +121,7 @@ ActiveAdmin.register CustomersAuth do
     column :ip do |row|
       row.raw_ip
     end
+    column :external_id
     column :pop
     column :src_prefix
     column :dst_prefix
@@ -186,6 +187,7 @@ ActiveAdmin.register CustomersAuth do
   end
 
   filter :id
+  filter :external_id
   filter :name
   filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
   filter :customer, input_html: {class: 'chosen'}
@@ -306,6 +308,7 @@ ActiveAdmin.register CustomersAuth do
       tab :general do
         attributes_table do
           row :name
+          row :external_id
           row :enabled
           row :customer
           row :account
