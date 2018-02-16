@@ -1,4 +1,7 @@
 ## Welcome to YETI
+[![Build Status](https://api.travis-ci.org/yeti-switch/yeti-web.svg?branch=master)](https://travis-ci.org/yeti-switch/yeti-web)
+
+
 
 # Contributing, Development setup
 
