@@ -44,6 +44,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
           name: 'name',
           enabled: true,
           ip: '0.0.0.0',
+          'external-id': 100
         }
       end
 
@@ -59,7 +60,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       end
 
       it { expect(response.status).to eq(201) }
-      it { expect(CustomersAuth.count).to eq(1) }
+      it { expect(CustomersAuth.where(external_id: attributes[:'external-id']).count).to eq(1) }
     end
 
     context 'when attributes are invalid' do
@@ -91,6 +92,13 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
 
       it { expect(response.status).to eq(422) }
       it { expect(customers_auth.reload.name).to_not eq('name') }
+    end
+
+    context 'when attributes are not allowed' do
+      let(:attributes) { {'external-id': 101 } }
+
+      it { expect(response.status).to eq(400) }
+      it { expect(customers_auth.reload.external_id).to_not eq(101) }
     end
   end
 

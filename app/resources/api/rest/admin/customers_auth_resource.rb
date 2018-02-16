@@ -4,7 +4,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
              :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_rewrite_rule, :diversion_rewrite_result,
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
-             :from_domain, :to_domain, :tag_action_value
+             :from_domain, :to_domain, :tag_action_value, :external_id
 
   has_one :customer
   has_one :rateplan
@@ -23,7 +23,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
 
   filter :name
 
-  def self.updatable_fields(context)
+  def self.updatable_fields(_context)
     [
       :name,
       :customer,
@@ -69,6 +69,6 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
   end
 
   def self.creatable_fields(context)
-    self.updatable_fields(context)
+    self.updatable_fields(context) + [:external_id]
   end
 end

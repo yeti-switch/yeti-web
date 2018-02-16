@@ -82,6 +82,7 @@ class CustomersAuth < Yeti::ActiveRecord
   validates_format_of :dst_prefix, without: /\s/
   validates_uniqueness_of :name, allow_blank: :false
   validates_presence_of :name
+  validates_uniqueness_of :external_id, allow_blank: true
 
   validates_presence_of :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy
 
