@@ -13,7 +13,8 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
       stub_const('AsyncBatchDestroyJob::BATCH_SIZE', 2)
     end
 
-    let(:who_is) { create :admin_user }
+    let(:admin) { create :admin_user }
+    let(:who_is) { { whodunnit: admin.id, controller_info: {} } }
 
     context 'incorrect class_name' do
       let(:model_class) { 'Fake' }
