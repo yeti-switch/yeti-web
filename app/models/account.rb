@@ -25,8 +25,8 @@
 #  send_balance_notifications_to :integer          is an Array
 #  uuid                          :uuid             not null
 #  external_id                   :integer
+#  vat                           :decimal(, )      default(0.0), not null
 #
-
 class Account < Yeti::ActiveRecord
 
   belongs_to :contractor
@@ -65,6 +65,8 @@ class Account < Yeti::ActiveRecord
   validates_numericality_of :termination_capacity, :origination_capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   validates_uniqueness_of :external_id, allow_blank: true
+
+  validates_numericality_of :vat, greater_than_or_equal_to: 0
 
   after_initialize do
     if self.new_record?

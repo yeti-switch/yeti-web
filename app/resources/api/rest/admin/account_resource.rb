@@ -17,6 +17,7 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
       :name,
       :min_balance,
       :max_balance,
+      :vat,
       :origination_capacity,
       :termination_capacity,
       :send_invoices_to,
