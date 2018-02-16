@@ -2957,7 +2957,8 @@ CREATE TABLE accounts (
     balance_low_threshold numeric,
     send_balance_notifications_to integer[],
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
-    external_id bigint
+    external_id bigint,
+    vat numeric DEFAULT 0 NOT NULL
 );
 
 
@@ -20757,4 +20758,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180119133842');
 INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180215113538');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180215172609');
 

@@ -94,6 +94,7 @@ ActiveAdmin.register Account do
 
     column :balance_low_threshold
     column :balance_high_threshold
+    сolumn :vat
 
     column :origination_capacity
     column :termination_capacity
@@ -142,6 +143,7 @@ ActiveAdmin.register Account do
             s.decorated_max_balance
           end
 
+          row :vat
           row :balance_low_threshold
           row :balance_high_threshold
 
