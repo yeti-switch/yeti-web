@@ -4,7 +4,7 @@ ActiveAdmin.register AuditLogItem do
   config.batch_actions = false
   actions :index, :show
 
-  filter :item_type, input_html: { class: 'chosen' }
+  filter :item_type, input_html: {class: 'chosen'}
   filter :item_id_eq
   filter :event, as: :select, collection: [['create', 'create'], ['destroy', 'destroy'], ['update', 'update']]
   filter :whodunnit
@@ -32,18 +32,19 @@ ActiveAdmin.register AuditLogItem do
       end
       row :txid
       row :ip
-
-      # panel "Values before event" do
-      #   obj = version.reify
-      #   attributes_table_for obj do
-      #     row :id
-      #     obj.class.content_columns.each do |col|
-      #       row col.name.to_sym
-      #     end
-      #
-      #   end
-      # end unless version.reify.nil?
     end
+
+
+    panel "Values before event" do
+      obj = version.reify
+      attributes_table_for obj do
+        row :id
+        obj.class.content_columns.each do |col|
+          row col.name.to_sym
+        end
+
+      end
+    end unless version.reify.nil?
 
 
     panel "Changes" do
@@ -53,13 +54,11 @@ ActiveAdmin.register AuditLogItem do
             text_node version.changeset[key][0]
             text_node " -> "
             text_node version.changeset[key][1]
-          end if  version.changeset[key].reject{|e| e.blank? }.any?
+          end if version.changeset[key].reject {|e| e.blank?}.any?
         end
       end
     end if version.changeset.any?
 
-
-    active_admin_comments
   end
 
   index do
@@ -72,7 +71,7 @@ ActiveAdmin.register AuditLogItem do
       url = smart_url_for(v.item, version: v.id)
       if v.item.present? && v.item.respond_to?(:display_name) && url
         text << link_to(v.item.display_name, url)
-      elsif  v.item.present? && v.item.respond_to?(:display_name)
+      elsif v.item.present? && v.item.respond_to?(:display_name)
         text << v.item.display_name
       end
       raw text.join(" ")

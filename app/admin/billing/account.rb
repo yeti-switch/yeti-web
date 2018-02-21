@@ -94,7 +94,7 @@ ActiveAdmin.register Account do
 
     column :balance_low_threshold
     column :balance_high_threshold
-    сolumn :vat
+    column :vat
 
     column :origination_capacity
     column :termination_capacity
