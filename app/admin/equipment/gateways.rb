@@ -297,7 +297,6 @@ ActiveAdmin.register Gateway do
       tab :general do
         f.inputs "General" do
           f.input :name
-          f.input :external_id
           f.input :enabled
           f.input :contractor,
                   input_html: {
