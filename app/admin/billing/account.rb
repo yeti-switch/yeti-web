@@ -221,7 +221,6 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :uuid, as: :string
-      f.input :external_id
       f.input :name
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance

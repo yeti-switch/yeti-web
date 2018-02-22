@@ -97,7 +97,6 @@ ActiveAdmin.register Contractor do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
-      f.input :external_id
       f.input :enabled
       f.input :vendor
       f.input :customer
