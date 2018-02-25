@@ -2,6 +2,8 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  hint_array_of_strings:
+    "array of strings, devided by comma(,)"
   date:
     formats:
       long: "%Y-%m-%d"
@@ -34,6 +36,7 @@ en:
         hep_capture_id: "Leave it empty to use YETI Node ID as HEP_CAPTURE_ID"
       customers_auth:
         check_account_balance: "Reject calls if originator hasn't enough funds"
+        ip: 'array of IP, devided by comma(,)'
       destinaion:
         reverse_billing: "If enabled, customer account balance is raised"
       dialpeers:
@@ -41,8 +44,16 @@ en:
       equipment_registration:
         contact: "Must be in URI format (sip:user@domain or sip:domain)"
 
-
   activerecord:
+    attributes:
+      customers_auth:
+        ip: 'IP'
+        src_prefix: 'SRC Prefix'
+        dst_prefix: 'DST Prefix'
+        uri_domain: 'URI Domain'
+        from_domain: 'From Domain'
+        to_domain: 'To Domain'
+        x_yeti_auth: 'X-Yeti-Auth'
     errors:
       models:
         gateway:
@@ -62,7 +73,7 @@ en:
               cant_be_cleared: "Can't be cleared when gateway used at Customer auth with require_incoming_auth"
             incoming_auth_password:
               cant_be_cleared: "Can't be cleared when gateway used at Customer auth with require_incoming_auth"
-        customer_auth:
+        customers_auth:
           attributes:
             gateway:
               incoming_auth_required: "Should support SIP incoming auth"

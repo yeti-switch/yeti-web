@@ -14191,6 +14191,82 @@ CREATE TABLE customers_auth (
     customer_id integer NOT NULL,
     rateplan_id integer NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
+    account_id integer,
+    gateway_id integer NOT NULL,
+    src_rewrite_rule character varying,
+    src_rewrite_result character varying,
+    dst_rewrite_rule character varying,
+    dst_rewrite_result character varying,
+    name character varying NOT NULL,
+    dump_level_id integer DEFAULT 0 NOT NULL,
+    capacity smallint,
+    pop_id integer,
+    src_name_rewrite_rule character varying,
+    src_name_rewrite_result character varying,
+    diversion_policy_id integer DEFAULT 1 NOT NULL,
+    diversion_rewrite_rule character varying,
+    diversion_rewrite_result character varying,
+    dst_numberlist_id smallint,
+    src_numberlist_id smallint,
+    routing_plan_id integer NOT NULL,
+    allow_receive_rate_limit boolean DEFAULT false NOT NULL,
+    send_billing_information boolean DEFAULT false NOT NULL,
+    radius_auth_profile_id smallint,
+    enable_audio_recording boolean DEFAULT false NOT NULL,
+    src_number_radius_rewrite_rule character varying,
+    src_number_radius_rewrite_result character varying,
+    dst_number_radius_rewrite_rule character varying,
+    dst_number_radius_rewrite_result character varying,
+    radius_accounting_profile_id smallint,
+    transport_protocol_id smallint,
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
+    dst_number_max_length smallint DEFAULT 100 NOT NULL,
+    check_account_balance boolean DEFAULT true NOT NULL,
+    require_incoming_auth boolean DEFAULT false NOT NULL,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    ip inet[] DEFAULT '{}'::inet[],
+    src_prefix character varying[] DEFAULT '{""}'::character varying[],
+    dst_prefix character varying[] DEFAULT '{""}'::character varying[],
+    uri_domain character varying[] DEFAULT '{}'::character varying[],
+    from_domain character varying[] DEFAULT '{}'::character varying[],
+    to_domain character varying[] DEFAULT '{}'::character varying[],
+    x_yeti_auth character varying[] DEFAULT '{}'::character varying[],
+    external_id bigint,
+    CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
+    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
+);
+
+
+--
+-- Name: customers_auth_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE customers_auth_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customers_auth_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE customers_auth_id_seq OWNED BY customers_auth.id;
+
+
+--
+-- Name: customers_auth_normalized; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE customers_auth_normalized (
+    id integer NOT NULL,
+    customers_auth_id integer NOT NULL,
+    customer_id integer NOT NULL,
+    rateplan_id integer NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
     ip inet,
     account_id integer,
     gateway_id integer NOT NULL,
@@ -14232,17 +14308,16 @@ CREATE TABLE customers_auth (
     require_incoming_auth boolean DEFAULT false NOT NULL,
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    external_id bigint,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
 );
 
 
 --
--- Name: customers_auth_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+-- Name: customers_auth_normalized_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE customers_auth_id_seq
+CREATE SEQUENCE customers_auth_normalized_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -14251,10 +14326,10 @@ CREATE SEQUENCE customers_auth_id_seq
 
 
 --
--- Name: customers_auth_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+-- Name: customers_auth_normalized_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE customers_auth_id_seq OWNED BY customers_auth.id;
+ALTER SEQUENCE customers_auth_normalized_id_seq OWNED BY customers_auth_normalized.id;
 
 
 --
@@ -17584,6 +17659,13 @@ ALTER TABLE ONLY customers_auth ALTER COLUMN id SET DEFAULT nextval('customers_a
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
+ALTER TABLE ONLY customers_auth_normalized ALTER COLUMN id SET DEFAULT nextval('customers_auth_normalized_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
 ALTER TABLE ONLY destinations ALTER COLUMN id SET DEFAULT nextval('destinations_id_seq'::regclass);
 
 
@@ -18389,6 +18471,14 @@ ALTER TABLE ONLY codecs
 
 ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_name_key UNIQUE (name);
+
+
+--
+-- Name: customers_auth_normalized_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY customers_auth_normalized
+    ADD CONSTRAINT customers_auth_normalized_pkey PRIMARY KEY (id);
 
 
 --
@@ -19746,17 +19836,17 @@ CREATE UNIQUE INDEX customers_auth_external_id_idx ON customers_auth USING btree
 
 
 --
--- Name: customers_auth_ip_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth_normalized_ip_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE INDEX customers_auth_ip_prefix_range_prefix_range1_idx ON customers_auth USING gist (ip, ((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range));
+CREATE INDEX customers_auth_normalized_ip_prefix_range_prefix_range1_idx ON customers_auth_normalized USING gist (ip, ((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range));
 
 
 --
--- Name: customers_auth_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth_normalized_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE INDEX customers_auth_prefix_range_prefix_range1_idx ON customers_auth USING gist (((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range)) WHERE enabled;
+CREATE INDEX customers_auth_normalized_prefix_range_prefix_range1_idx ON customers_auth_normalized USING gist (((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range)) WHERE enabled;
 
 
 --
@@ -20072,6 +20162,14 @@ ALTER TABLE ONLY customers_auth
 
 ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_gateway_id_fkey FOREIGN KEY (gateway_id) REFERENCES gateways(id);
+
+
+--
+-- Name: customers_auth_normalized_customers_auth_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY customers_auth_normalized
+    ADD CONSTRAINT customers_auth_normalized_customers_auth_id_fkey FOREIGN KEY (customers_auth_id) REFERENCES customers_auth(id);
 
 
 --
@@ -20764,6 +20862,10 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180101202120');
 INSERT INTO public.schema_migrations (version) VALUES ('20180119133842');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180212105355');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180215113538');
 

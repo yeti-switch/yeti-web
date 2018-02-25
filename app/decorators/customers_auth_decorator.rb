@@ -18,4 +18,13 @@ class CustomersAuthDecorator < BillingDecorator
     end
   end
 
+  CustomersAuth::CONST::MATCH_CONDITION_ATTRIBUTES.each do |attribute_name|
+    define_method attribute_name do
+      model.public_send(attribute_name).map(&:strip).join(', ')
+    end
+  end
+
+  # TODO: when AA fixe probjec with decorated objec on create use this:
+  # https://github.com/activeadmin/activeadmin/blob/15eb4a05b2ee759b7d03ceaaa92d070986a1c282/spec/support/templates/post_decorator.rb
+
 end
