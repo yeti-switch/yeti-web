@@ -54,6 +54,10 @@ RSpec.shared_examples :test_model_with_tag_action do
       expect(model).not_to allow_value([]).for(:tag_action_value)
     end
 
+    it 'does not allow NULL for tag_action_value' do
+      expect(model).not_to allow_value(nil).for(:tag_action_value)
+    end
+
     it 'does not allow tag_action_value to contain duplicate values' do
       tag_values = random_tags.dup.push(random_tags.first) # => [1, 2, 1]
       expect(model).not_to allow_value(tag_values).for(:tag_action_value)
