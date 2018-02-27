@@ -58,7 +58,7 @@ ActiveAdmin.register System::SmtpConnection do
       row :port
       row :from_address
       row :auth_user
-      row :auth_password
+      row :auth_password, class: 'password-mask'
       row :global
     end
   end
@@ -71,7 +71,7 @@ ActiveAdmin.register System::SmtpConnection do
       f.input :port
       f.input :from_address
       f.input :auth_user
-      f.input :auth_password, :as => :string
+      f.input :auth_password, as: :string, wrapper_html: { class: 'password-mask' }
       f.input :global
     end
     f.actions

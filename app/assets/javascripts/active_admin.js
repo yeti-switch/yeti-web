@@ -31,6 +31,7 @@
 //= require jquery-chosen-sortable
 //= require modal_confirm_fix
 //= require d3_charts.coffee
+//= require password-toggle
 
 //= require vendor/highlight.pack
 //= require highlightjs
