@@ -2,11 +2,11 @@ class TagActionValueValidator < ActiveModel::Validator
   def validate(record)
 
     tag_action_id = record.tag_action_id
-    tag_action_value = record.tag_action_value.dup
+    tag_action_value = record.tag_action_value
 
     is_clear = tag_action_id.nil? || tag_action_id == Routing::TagAction::CONST::CLEAR_ID
 
-    if !is_clear && tag_action_value.empty?
+    if !is_clear && tag_action_value.blank?
       record.errors.add(
         :tag_action_value,
         I18n.t('activerecord.errors.models.customer_auth.attributes.tag_action_value.empty_when_not_clear')
