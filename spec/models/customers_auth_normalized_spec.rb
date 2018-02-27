@@ -378,4 +378,19 @@ RSpec.describe CustomersAuthNormalized, type: :model do
 
   end
 
+
+  describe '.column_names' do
+    subject do
+      described_class.column_names - ['customers_auth_id']
+    end
+
+    let(:customers_auth_column_names) do
+      CustomersAuth.column_names
+    end
+
+    it 'columns should match with original CustomersAuth model' do
+      expect(subject).to match_array(customers_auth_column_names)
+    end
+  end
+
 end
