@@ -202,7 +202,8 @@ CREATE TYPE cdr_v2 AS (
 
 CREATE TYPE interval_billing_data AS (
 	duration numeric,
-	amount numeric
+	amount numeric,
+	amount_no_vat numeric
 );
 
 
@@ -479,7 +480,10 @@ CREATE TABLE cdr (
     orig_gw_external_id bigint,
     term_gw_external_id bigint,
     failed_resource_type_id smallint,
-    failed_resource_id bigint
+    failed_resource_id bigint,
+    customer_price_no_vat numeric,
+    customer_duration integer,
+    vendor_duration integer
 );
 
 
@@ -503,8 +507,10 @@ BEGIN
             i_cdr.destination_next_rate,
             i_cdr.destination_initial_interval,
             i_cdr.destination_next_interval,
-            0);
+            i_cdr.customer_account_vat);
          i_cdr.customer_price=_v.amount;
+         i_cdr.customer_price_no_vat=_v.amount_no_vat;
+         i_cdr.customer_duration=_v.duration;
 
          _v=billing.interval_billing(
             i_cdr.duration,
@@ -515,6 +521,7 @@ BEGIN
             i_cdr.dialpeer_next_interval,
             0);
          i_cdr.vendor_price=_v.amount;
+         i_cdr.vendor_duration=_v.duration;
          i_cdr.profit=i_cdr.customer_price-i_cdr.vendor_price;
     else
         i_cdr.customer_price=0;
@@ -537,12 +544,14 @@ DECLARE
     _v billing.interval_billing_data%rowtype;
 BEGIN
     i_vat=COALESCE(i_vat,0);
-    _v.amount=i_connection_fee+
+    _v.amount_no_vat=i_connection_fee+
             i_initial_interval*i_initial_rate::numeric/60 + -- initial interval billing
             (i_duration>i_initial_interval)::boolean::integer * -- next interval billing enabled
             CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *-- next interval count
             i_next_interval * --interval len
             i_next_rate::numeric/60; -- next interval rate per second
+
+    _v.amount=_v.amount_no_vat*(1+vat/100);
 
     _v.duration=i_initial_interval+(i_duration>i_initial_interval)::boolean::integer * CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *i_next_interval;
 
@@ -760,6 +769,9 @@ ELSIF ( NEW.time_start >= '2017-09-01 00:00:00+00' AND NEW.time_start < '2017-10
 ELSIF ( NEW.time_start >= '2017-10-01 00:00:00+00' AND NEW.time_start < '2017-11-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201710 VALUES (NEW.*);
 ELSIF ( NEW.time_start >= '2017-12-01 00:00:00+00' AND NEW.time_start < '2018-01-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201712 VALUES (NEW.*);
 ELSIF ( NEW.time_start >= '2018-01-01 00:00:00+00' AND NEW.time_start < '2018-02-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201801 VALUES (NEW.*);
+ELSIF ( NEW.time_start >= '2018-02-01 00:00:00+00' AND NEW.time_start < '2018-03-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201802 VALUES (NEW.*);
+ELSIF ( NEW.time_start >= '2018-03-01 00:00:00+00' AND NEW.time_start < '2018-04-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201803 VALUES (NEW.*);
+ELSIF ( NEW.time_start >= '2018-04-01 00:00:00+00' AND NEW.time_start < '2018-05-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201804 VALUES (NEW.*);
  ELSE 
  RAISE EXCEPTION 'cdr.cdr_i_tg: time_start out of range.'; 
  END IF;
@@ -3871,6 +3883,36 @@ INHERITS (cdr);
 
 
 --
+-- Name: cdr_201802; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cdr_201802 (
+    CONSTRAINT cdr_201802_time_start_check CHECK (((time_start >= '2018-02-01 02:00:00+02'::timestamp with time zone) AND (time_start < '2018-03-01 02:00:00+02'::timestamp with time zone)))
+)
+INHERITS (cdr);
+
+
+--
+-- Name: cdr_201803; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cdr_201803 (
+    CONSTRAINT cdr_201803_time_start_check CHECK (((time_start >= '2018-03-01 02:00:00+02'::timestamp with time zone) AND (time_start < '2018-04-01 03:00:00+03'::timestamp with time zone)))
+)
+INHERITS (cdr);
+
+
+--
+-- Name: cdr_201804; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cdr_201804 (
+    CONSTRAINT cdr_201804_time_start_check CHECK (((time_start >= '2018-04-01 03:00:00+03'::timestamp with time zone) AND (time_start < '2018-05-01 03:00:00+03'::timestamp with time zone)))
+)
+INHERITS (cdr);
+
+
+--
 -- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
@@ -4009,7 +4051,10 @@ CREATE TABLE cdr_archive (
     orig_gw_external_id bigint,
     term_gw_external_id bigint,
     failed_resource_type_id smallint,
-    failed_resource_id bigint
+    failed_resource_id bigint,
+    customer_price_no_vat numeric,
+    customer_duration integer,
+    vendor_duration integer
 );
 
 
@@ -5431,6 +5476,48 @@ ALTER TABLE ONLY cdr_201801 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::re
 ALTER TABLE ONLY cdr_201801 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
+--
+-- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr_201802 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+
+
+--
+-- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr_201802 ALTER COLUMN dump_level_id SET DEFAULT 0;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr_201803 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+
+
+--
+-- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr_201803 ALTER COLUMN dump_level_id SET DEFAULT 0;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr_201804 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+
+
+--
+-- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr_201804 ALTER COLUMN dump_level_id SET DEFAULT 0;
+
+
 SET search_path = reports, pg_catalog;
 
 --
@@ -5785,6 +5872,30 @@ ALTER TABLE ONLY cdr_201712
 
 ALTER TABLE ONLY cdr_201801
     ADD CONSTRAINT cdr_201801_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cdr_201802_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cdr_201802
+    ADD CONSTRAINT cdr_201802_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cdr_201803_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cdr_201803
+    ADD CONSTRAINT cdr_201803_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cdr_201804_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cdr_201804
+    ADD CONSTRAINT cdr_201804_pkey PRIMARY KEY (id);
 
 
 --
@@ -6176,6 +6287,27 @@ CREATE INDEX cdr_201712_time_start_idx ON cdr_201712 USING btree (time_start);
 --
 
 CREATE INDEX cdr_201801_time_start_idx ON cdr_201801 USING btree (time_start);
+
+
+--
+-- Name: cdr_201802_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE INDEX cdr_201802_time_start_idx ON cdr_201802 USING btree (time_start);
+
+
+--
+-- Name: cdr_201803_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE INDEX cdr_201803_time_start_idx ON cdr_201803 USING btree (time_start);
+
+
+--
+-- Name: cdr_201804_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE INDEX cdr_201804_time_start_idx ON cdr_201804 USING btree (time_start);
 
 
 --

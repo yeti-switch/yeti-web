@@ -14,7 +14,10 @@ alter table cdr.cdr
   add orig_gw_external_id bigint,
   add term_gw_external_id bigint,
   add failed_resource_type_id smallint,
-  add failed_resource_id bigint;
+  add failed_resource_id bigint,
+  add customer_price_no_vat numeric,
+  add customer_duration integer,
+  add vendor_duration integer;
 
 alter table cdr.cdr_archive
   add column customer_external_id bigint,
@@ -27,8 +30,10 @@ alter table cdr.cdr_archive
   add orig_gw_external_id bigint,
   add term_gw_external_id bigint,
   add failed_resource_type_id smallint,
-  add failed_resource_id bigint;
-
+  add failed_resource_id bigint,
+  add customer_price_no_vat numeric,
+  add customer_duration integer,
+  add vendor_duration integer;
 
 create type switch.dynamic_cdr_data_ty as (
     customer_id integer,
@@ -408,12 +413,156 @@ $BODY$
   COST 10;
 
 
+alter type billing.interval_billing_data add attribute amount_no_vat numeric;
+
+CREATE OR REPLACE FUNCTION billing.interval_billing(
+    i_duration numeric,
+    i_connection_fee numeric,
+    i_initial_rate numeric,
+    i_next_rate numeric,
+    i_initial_interval numeric,
+    i_next_interval numeric,
+    i_vat numeric DEFAULT 0)
+  RETURNS billing.interval_billing_data AS
+$BODY$
+DECLARE
+    _v billing.interval_billing_data%rowtype;
+BEGIN
+    i_vat=COALESCE(i_vat,0);
+    _v.amount_no_vat=i_connection_fee+
+            i_initial_interval*i_initial_rate::numeric/60 + -- initial interval billing
+            (i_duration>i_initial_interval)::boolean::integer * -- next interval billing enabled
+            CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *-- next interval count
+            i_next_interval * --interval len
+            i_next_rate::numeric/60; -- next interval rate per second
+
+    _v.amount=_v.amount_no_vat*(1+vat/100);
+
+    _v.duration=i_initial_interval+(i_duration>i_initial_interval)::boolean::integer * CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *i_next_interval;
+
+    RETURN _v;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 10;
+
+
+CREATE OR REPLACE FUNCTION billing.bill_cdr(i_cdr cdr.cdr)
+  RETURNS cdr.cdr AS
+$BODY$
+DECLARE
+    _v billing.interval_billing_data%rowtype;
+BEGIN
+    if i_cdr.duration>0 and i_cdr.success then  -- run billing.
+        _v=billing.interval_billing(
+            i_cdr.duration,
+            i_cdr.destination_fee,
+            i_cdr.destination_initial_rate,
+            i_cdr.destination_next_rate,
+            i_cdr.destination_initial_interval,
+            i_cdr.destination_next_interval,
+            i_cdr.customer_account_vat);
+         i_cdr.customer_price=_v.amount;
+         i_cdr.customer_price_no_vat=_v.amount_no_vat;
+         i_cdr.customer_duration=_v.duration;
+
+         _v=billing.interval_billing(
+            i_cdr.duration,
+            i_cdr.dialpeer_fee,
+            i_cdr.dialpeer_initial_rate,
+            i_cdr.dialpeer_next_rate,
+            i_cdr.dialpeer_initial_interval,
+            i_cdr.dialpeer_next_interval,
+            0);
+         i_cdr.vendor_price=_v.amount;
+         i_cdr.vendor_duration=_v.duration;
+         i_cdr.profit=i_cdr.customer_price-i_cdr.vendor_price;
+    else
+        i_cdr.customer_price=0;
+        i_cdr.vendor_price=0;
+        i_cdr.profit=0;
+    end if;
+    RETURN i_cdr;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 10;
+
+
 
     }
   end
 
   def down
     execute %q{
+
+CREATE OR REPLACE FUNCTION billing.interval_billing(
+    i_duration numeric,
+    i_connection_fee numeric,
+    i_initial_rate numeric,
+    i_next_rate numeric,
+    i_initial_interval numeric,
+    i_next_interval numeric,
+    i_vat numeric DEFAULT 0)
+  RETURNS billing.interval_billing_data AS
+$BODY$
+DECLARE
+    _v billing.interval_billing_data%rowtype;
+BEGIN
+    i_vat=COALESCE(i_vat,0);
+    _v.amount=i_connection_fee+
+            i_initial_interval*i_initial_rate::numeric/60 + -- initial interval billing
+            (i_duration>i_initial_interval)::boolean::integer * -- next interval billing enabled
+            CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *-- next interval count
+            i_next_interval * --interval len
+            i_next_rate::numeric/60; -- next interval rate per second
+
+    _v.duration=i_initial_interval+(i_duration>i_initial_interval)::boolean::integer * CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *i_next_interval;
+
+    RETURN _v;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 10;
+
+CREATE OR REPLACE FUNCTION billing.bill_cdr(i_cdr cdr.cdr)
+  RETURNS cdr.cdr AS
+$BODY$
+DECLARE
+    _v billing.interval_billing_data%rowtype;
+BEGIN
+    if i_cdr.duration>0 and i_cdr.success then  -- run billing.
+        _v=billing.interval_billing(
+            i_cdr.duration,
+            i_cdr.destination_fee,
+            i_cdr.destination_initial_rate,
+            i_cdr.destination_next_rate,
+            i_cdr.destination_initial_interval,
+            i_cdr.destination_next_interval,
+            0);
+         i_cdr.customer_price=_v.amount;
+
+         _v=billing.interval_billing(
+            i_cdr.duration,
+            i_cdr.dialpeer_fee,
+            i_cdr.dialpeer_initial_rate,
+            i_cdr.dialpeer_next_rate,
+            i_cdr.dialpeer_initial_interval,
+            i_cdr.dialpeer_next_interval,
+            0);
+         i_cdr.vendor_price=_v.amount;
+         i_cdr.profit=i_cdr.customer_price-i_cdr.vendor_price;
+    else
+        i_cdr.customer_price=0;
+        i_cdr.vendor_price=0;
+        i_cdr.profit=0;
+    end if;
+    RETURN i_cdr;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 10;
+
       drop type switch.dynamic_cdr_data_ty;
       drop FUNCTION switch.writecdr(
     i_is_master boolean,
@@ -458,6 +607,8 @@ $BODY$
     i_dynamic json );
 
 
+  alter type billing.interval_billing_data drop attribute amount_no_vat;
+
   alter table cdr.cdr drop column customer_external_id;
   alter table cdr.cdr drop column customer_auth_external_id;
   alter table cdr.cdr drop column customer_account_vat;
@@ -465,10 +616,13 @@ $BODY$
   alter table cdr.cdr drop column routing_tag_ids;
   alter table cdr.cdr drop column vendor_external_id;
   alter table cdr.cdr drop column vendor_account_external_id;
-  alter table cdr.cdr drop orig_gw_external_id;
-  alter table cdr.cdr drop term_gw_external_id;
-  alter table cdr.cdr drop failed_resource_type_id;
-  alter table cdr.cdr drop failed_resource_id;
+  alter table cdr.cdr drop column orig_gw_external_id;
+  alter table cdr.cdr drop column term_gw_external_id;
+  alter table cdr.cdr drop column failed_resource_type_id;
+  alter table cdr.cdr drop column failed_resource_id;
+  alter table cdr.cdr drop column customer_price_no_vat;
+  alter table cdr.cdr drop column customer_duration;
+  alter table cdr.cdr drop column vendor_duration;
 
   alter table cdr.cdr_archive drop column customer_external_id;
   alter table cdr.cdr_archive drop column customer_auth_external_id;
@@ -477,10 +631,13 @@ $BODY$
   alter table cdr.cdr_archive drop column routing_tag_ids;
   alter table cdr.cdr_archive drop column vendor_external_id;
   alter table cdr.cdr_archive drop column vendor_account_external_id;
-  alter table cdr.cdr_archive drop orig_gw_external_id;
-  alter table cdr.cdr_archive drop term_gw_external_id;
-  alter table cdr.cdr_archive drop failed_resource_type_id;
-  alter table cdr.cdr_archive drop failed_resource_id;
+  alter table cdr.cdr_archive drop column orig_gw_external_id;
+  alter table cdr.cdr_archive drop column term_gw_external_id;
+  alter table cdr.cdr_archive drop column failed_resource_type_id;
+  alter table cdr.cdr_archive drop column failed_resource_id;
+  alter table cdr.cdr_archive drop column customer_price_no_vat;
+  alter table cdr.cdr_archive drop column customer_duration;
+  alter table cdr.cdr_archive drop column vendor_duration;
 
     }
   end
