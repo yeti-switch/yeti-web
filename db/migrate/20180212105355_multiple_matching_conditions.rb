@@ -3869,7 +3869,7 @@ ALTER TABLE ONLY resource_type
     }
   end
 
-#  def stop_step
-#    true
-#  end
+  def stop_step
+    true
+  end
 end
