@@ -25,6 +25,8 @@ class CustomersAuthRenameMatchConditionsColumns < ActiveRecord::Migration
   def down
     execute %q{
       -- rename '-s' columns
+
+
       ALTER TABLE class4.customers_auth RENAME ip TO ips;
       ALTER TABLE class4.customers_auth RENAME src_prefix TO src_prefixes;
       ALTER TABLE class4.customers_auth RENAME dst_prefix TO dst_prefixes;

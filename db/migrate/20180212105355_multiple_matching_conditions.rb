@@ -170,6 +170,18 @@ class MultipleMatchingConditions < ActiveRecord::Migration
         tag_action_value
       FROM class4.customers_auth;
 
+
+
+  alter table public.contractors add external_id bigint unique;
+  alter table billing.accounts
+    add external_id bigint unique,
+    add vat numeric not null default 0;
+
+
+  alter table class4.customers_auth add external_id bigint unique;
+  alter table class4.customers_auth_normalized add external_id bigint;
+
+
 --
 -- PostgreSQL database dump
 --
@@ -774,30 +786,30 @@ CREATE TYPE callprofile58_ty AS (
 	bleg_max_30x_redirects smallint,
 	bleg_max_transfers smallint,
 	aleg_auth_required boolean,
-	customer_id character varying,
-	vendor_id character varying,
-	customer_acc_id character varying,
-	vendor_acc_id character varying,
-	customer_auth_id character varying,
-	destination_id character varying,
+	customer_id integer,
+	vendor_id integer,
+	customer_acc_id integer,
+	vendor_acc_id integer,
+	customer_auth_id integer,
+	destination_id bigint,
 	destination_prefix character varying,
-	dialpeer_id character varying,
+	dialpeer_id bigint,
 	dialpeer_prefix character varying,
-	orig_gw_id character varying,
-	term_gw_id character varying,
-	routing_group_id character varying,
-	rateplan_id character varying,
-	destination_initial_rate character varying,
-	destination_next_rate character varying,
+	orig_gw_id integer,
+	term_gw_id integer,
+	routing_group_id integer,
+	rateplan_id integer,
+	destination_initial_rate numeric,
+	destination_next_rate numeric,
 	destination_initial_interval integer,
 	destination_next_interval integer,
-	destination_rate_policy_id integer,
+	destination_rate_policy_id smallint,
 	dialpeer_initial_interval integer,
 	dialpeer_next_interval integer,
-	dialpeer_next_rate character varying,
-	destination_fee character varying,
-	dialpeer_initial_rate character varying,
-	dialpeer_fee character varying,
+	dialpeer_next_rate numeric,
+	destination_fee numeric,
+	dialpeer_initial_rate numeric,
+	dialpeer_fee numeric,
 	dst_prefix_in character varying,
 	dst_prefix_out character varying,
 	src_prefix_in character varying,
@@ -841,7 +853,8 @@ CREATE TYPE callprofile58_ty AS (
 	customer_acc_external_id bigint,
 	vendor_acc_external_id bigint,
 	orig_gw_external_id bigint,
-	term_gw_external_id bigint
+	term_gw_external_id bigint,
+  customer_acc_vat numeric
 );
 
 
@@ -1445,24 +1458,42 @@ end;
 $$;
 
 
---
--- TOC entry 942 (class 1255 OID 203335)
--- Name: lua_int_array_set_operation(integer, integer[], integer[]); Type: FUNCTION; Schema: switch15; Owner: -
---
 
-CREATE FUNCTION lua_int_array_set_operation(op integer, a integer[], b integer[]) RETURNS integer[]
-    LANGUAGE pllua
-    AS $$
+create extension pllua;
+
+CREATE OR REPLACE FUNCTION switch15.lua_tag_action(
+    op int,
+    a int[],b int[])
+RETURNS
+    int[]
+LANGUAGE 'pllua'
+COST 100
+VOLATILE
+AS $BODY$
     local t = {}
 
-    if op==0 then -- union
+    if op==1 then -- clear
+        -- nothing to do. return empty array
+    elseif op==2 then -- relative complement
+        local aset = {}
+        local bset = {}
+
+        for _,v in pairs(a) do aset[v] = true end
+        for _,v in pairs(b) do bset[v] = true end
+
+        for v in pairs(aset) do
+            if bset[v] == nil then
+                table.insert(t,v)
+            end
+        end
+    elseif op==3 then -- union
         local s = {}
 
         for _,v in pairs(a) do s[v] = true end
         for _,v in pairs(b) do s[v] = true end
 
         for v in pairs(s) do table.insert(t,v) end
-    elseif op==1 then -- intersection
+    elseif op==4 then -- intersection
         local aset = {}
         local bset = {}
 
@@ -1474,95 +1505,75 @@ CREATE FUNCTION lua_int_array_set_operation(op integer, a integer[], b integer[]
                 table.insert(t,v)
             end
         end
-    elseif op==2 then -- relative_complement
-        local aset = {}
-        local bset = {}
-
-        for _,v in pairs(a) do aset[v] = true end
-        for _,v in pairs(b) do bset[v] = true end
-
-        for v in pairs(bset) do
-            if aset[v] == nil then
-                table.insert(t,v)
-            end
-        end
+    else
+        -- unknown op
+        error("uknown operation: "..op)
     end
 
     return t
-$$;
+$BODY$;
 
 
---
--- TOC entry 943 (class 1255 OID 203336)
--- Name: lua_int_tags_cmp(integer[], integer[]); Type: FUNCTION; Schema: switch15; Owner: -
---
+CREATE OR REPLACE FUNCTION switch15.lua_array_compare(
+    a int[],b int[])
+RETURNS
+    int
+LANGUAGE 'pllua'
+COST 100
+VOLATILE
+AS $BODY$
 
-CREATE FUNCTION lua_int_tags_cmp(a integer[], b integer[]) RETURNS boolean
-    LANGUAGE pllua
-    AS $$
-    if a==nil then
-        -- if a is NULL then a contains b only if b is also NULL
-        return b==nil
-    end
+-- return values:
+-- 0 - не матчится
+-- 1 - матчится по 0
+-- 2 - матчится  нормальными тегами
+-- 3 - полное совпадение
 
-    if a[ nil ] ~= nil then
-        print('a contains nil')
-    end
-
-    for _,v in pairs(b) do
-        print(v)
-    end
-
-    print('-----')
-    return true;
-$$;
-
-
---
--- TOC entry 940 (class 1255 OID 203341)
--- Name: lua_tag_action(integer, integer[], integer[]); Type: FUNCTION; Schema: switch15; Owner: -
---
-
-CREATE FUNCTION lua_tag_action(op integer, a integer[], b integer[]) RETURNS integer[]
-    LANGUAGE pllua
-    AS $$
-    local t = {}
-
-    if op==0 then -- union
-        local s = {}
-
-        for _,v in pairs(a) do s[v] = true end
-        for _,v in pairs(b) do s[v] = true end
-
-        for v in pairs(s) do table.insert(t,v) end
-    elseif op==1 then -- intersection
-        local aset = {}
-        local bset = {}
-
-        for _,v in pairs(a) do aset[v] = true end
-        for _,v in pairs(b) do bset[v] = true end
-
-        for v in pairs(aset) do
-            if bset[v] ~= nil then
-                table.insert(t,v)
-            end
+    local a_has_value = function (_v)
+        for _,v in ipairs(a) do
+            if _v==v then return true end
         end
-    elseif op==2 then -- relative_complement
-        local aset = {}
-        local bset = {}
+        return false
+    end
 
-        for _,v in pairs(a) do aset[v] = true end
-        for _,v in pairs(b) do bset[v] = true end
+    if #a == 0 then
+        -- a is empty. matches only empty b
+        if #b==0 then
+            return 3
+        end
+        return 0
+    end
 
-        for v in pairs(bset) do
-            if aset[v] == nil then
-                table.insert(t,v)
+    if #b == 0 then
+        --  b is empty. matches only empty a
+        if #a==0 then
+            return 3
+        end
+        return 0
+    end
+
+    local a_contains_zero = a_has_value(0)
+    if a_contains_zero and #b==0 then
+        -- a contains 0. matches any b tag except of empty
+        return 0
+    end
+
+    for _,v in ipairs(b) do
+        if not a_has_value(v) then
+            -- tag from b not in a
+            if a_contains_zero then
+                return 1
             end
+            return 0
         end
     end
 
-    return t
-$$;
+    if #b==#a and not a_contains_zero then
+        -- exact matching if a has no 0 and lengths are equal
+        return 3
+    end
+    return 2
+$BODY$;
 
 
 --
@@ -1628,36 +1639,6 @@ BEGIN
   v_ret.outbound_interface:='';
   v_ret.dtmf_transcoding:='';
   v_ret.lowfi_codecs:='';
-  /*
-      v_ret.customer_id:=0;
-      v_ret.vendor_id:=0;
-      v_ret.customer_acc_id:=0;
-      v_ret.vendor_acc_id:=0;
-      v_ret.customer_auth_id:=0;
-      v_ret.destination_id:=0;
-      v_ret.dialpeer_id:=0;
-      v_ret.orig_gw_id:=0;
-      v_ret.term_gw_id:=0;
-      v_ret.routing_group_id:=0;
-      v_ret.rateplan_id:=0;
-      v_ret.destination_next_rate:=0;
-      v_ret.destination_initial_rate:=0;
-      v_ret.destination_fee:=0;
-      v_ret.destination_initial_interval:=60;
-      v_ret.destination_next_interval:=60;
-      v_ret.destination_rate_policy_id:=1; -- FIXED rate policy
-      v_ret.dialpeer_next_rate:=0;
-      v_ret.dialpeer_initial_rate:=0;
-      v_ret.dialpeer_fee:=0;
-      v_ret.dialpeer_initial_interval:=60;
-      v_ret.dialpeer_next_interval:=60;
-      v_ret.time_limit:=0;
-      v_ret.resources:='';
-      v_ret.dump_level_id=0;
-      v_ret.aleg_policy_id:=0;
-      v_ret.bleg_policy_id:=0;
-  */
-  --newly added fields. got from RS database
 
   v_ret.try_avoid_transcoding:=FALSE;
 
@@ -2332,7 +2313,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
-        v_call_tags smallint[]:=array[];
+        v_call_tags smallint[]:='{}'::smallint[];
         v_area_direction class4.routing_tag_detection_rules%rowtype;
 
       BEGIN
@@ -2499,6 +2480,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         end if;
 
         v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
         select into strict v_ret.customer_external_id external_id from public.contractors where id=v_c_acc.contractor_id;
 
 
@@ -2883,7 +2865,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2900,7 +2882,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -2926,7 +2908,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2946,7 +2928,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -2970,7 +2952,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2992,7 +2974,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3017,7 +2999,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3038,7 +3020,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3063,7 +3045,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3085,7 +3067,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
                   and t_dp.vendor_id=v_test_vendor_id
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3110,7 +3092,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc,  switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3139,7 +3121,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3166,7 +3148,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_array_length(t_dp.routing_tag_ids)
+                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3194,7 +3176,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)
+                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3559,7 +3541,7 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (839, 'diversion_in', 'varchar', true, 1900, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (840, 'diversion_out', 'varchar', true, 1910, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (846, 'auth_orig_ip', 'inet', true, 1920, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (713, 'customer_auth_id', 'varchar', true, 1700, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (713, 'customer_auth_id', 'integer', true, 1700, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (845, 'aleg_single_codec_in_200ok', 'boolean', false, 911, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (756, 'message_filter_type_id', 'integer', false, 180, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (758, 'sdp_filter_type_id', 'integer', false, 200, false);
@@ -3573,17 +3555,17 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (843, 'aleg_codecs_group_id', 'integer', false, 900, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (844, 'bleg_codecs_group_id', 'integer', false, 910, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (848, 'bleg_single_codec_in_200ok', 'boolean', false, 912, false);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (709, 'customer_id', 'varchar', true, 1650, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (710, 'vendor_id', 'varchar', true, 1660, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (711, 'customer_acc_id', 'varchar', true, 1670, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (712, 'vendor_acc_id', 'varchar', true, 1690, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (827, 'destination_next_rate', 'varchar', true, 1771, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (709, 'customer_id', 'integer', true, 1650, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (710, 'vendor_id', 'integer', true, 1660, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (711, 'customer_acc_id', 'integer', true, 1670, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (712, 'vendor_acc_id', 'integer', true, 1690, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (827, 'destination_next_rate', 'numeric', true, 1771, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (831, 'destination_next_interval', 'integer', true, 1773, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (830, 'destination_initial_interval', 'integer', true, 1772, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (832, 'destination_rate_policy_id', 'integer', true, 1774, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (832, 'destination_rate_policy_id', 'smallint', true, 1774, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (833, 'dialpeer_initial_interval', 'integer', true, 1775, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (834, 'dialpeer_next_interval', 'integer', true, 1776, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (835, 'dialpeer_next_rate', 'varchar', true, 1777, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (835, 'dialpeer_next_rate', 'numeric', true, 1777, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (821, 'cache_time', 'integer', false, 810, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (849, 'ringing_timeout', 'integer', false, 913, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (924, 'try_avoid_transcoding', 'boolean', false, 620, false);
@@ -3608,20 +3590,20 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (959, 'aleg_append_headers_reply', 'varchar', false, 999, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (961, 'bleg_sdp_alines_filter_list', 'varchar', false, 1000, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (963, 'bleg_sdp_alines_filter_type_id', 'integer', false, 1001, false);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (715, 'dialpeer_id', 'varchar', true, 1720, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (716, 'orig_gw_id', 'varchar', true, 1730, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (717, 'term_gw_id', 'varchar', true, 1740, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (718, 'routing_group_id', 'varchar', true, 1750, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (719, 'rateplan_id', 'varchar', true, 1760, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (721, 'destination_fee', 'varchar', true, 1780, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (723, 'dialpeer_fee', 'varchar', true, 1800, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (715, 'dialpeer_id', 'bigint', true, 1720, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (716, 'orig_gw_id', 'integer', true, 1730, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (717, 'term_gw_id', 'integer', true, 1740, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (718, 'routing_group_id', 'integer', true, 1750, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (719, 'rateplan_id', 'integer', true, 1760, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (721, 'destination_fee', 'numeric', true, 1780, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (723, 'dialpeer_fee', 'numeric', true, 1800, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (726, 'dst_prefix_in', 'varchar', true, 1840, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (727, 'dst_prefix_out', 'varchar', true, 1850, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (728, 'src_prefix_in', 'varchar', true, 1860, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (729, 'src_prefix_out', 'varchar', true, 1870, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (824, 'reply_translations', 'varchar', false, 820, false);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (720, 'destination_initial_rate', 'varchar', true, 1770, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (722, 'dialpeer_initial_rate', 'varchar', true, 1790, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (720, 'destination_initial_rate', 'numeric', true, 1770, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (722, 'dialpeer_initial_rate', 'numeric', true, 1790, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (850, 'global_tag', 'varchar', false, 914, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (852, 'dead_rtp_time', 'integer', false, 1003, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (854, 'rtp_relay_timestamp_aligning', 'boolean', false, 1005, false);
@@ -3660,7 +3642,7 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (904, 'term_gw_name', 'varchar', false, 1057, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (909, 'transit_headers_b2a', 'varchar', false, 1027, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (907, 'transit_headers_a2b', 'varchar', false, 1026, false);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (714, 'destination_id', 'varchar', true, 1710, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (714, 'destination_id', 'bigint', true, 1710, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (910, 'from_domain', 'varchar', true, 1938, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (911, 'to_domain', 'varchar', true, 1939, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (912, 'ruri_domain', 'varchar', true, 1940, true);
@@ -3697,6 +3679,7 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1022, 'vendor_acc_external_id', 'bigint', true, 1970, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (905, 'orig_gw_external_id', 'bigint', true, 1971, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (906, 'term_gw_external_id', 'bigint', true, 1972, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1023, 'customer_acc_vat', 'numeric', true, 1973, true);
 
 
 --
@@ -3740,7 +3723,7 @@ SELECT pg_catalog.setval('switch_in_interface_id_seq', 10, true);
 -- Name: switch_interface_id_seq; Type: SEQUENCE SET; Schema: switch15; Owner: -
 --
 
-SELECT pg_catalog.setval('switch_interface_id_seq', 1022, true);
+SELECT pg_catalog.setval('switch_interface_id_seq', 1023, true);
 
 
 --
@@ -3860,6 +3843,8 @@ ALTER TABLE ONLY resource_type
 
       drop schema switch15 cascade;
 
+      drop extension pllua;
+
       delete from  class4.disconnect_code  where id in (1506, 1507, 1508, 1509, 1510, 1511, 1600, 1601);
 
       -- shadow copy of customers_auth
@@ -3873,10 +3858,18 @@ ALTER TABLE ONLY resource_type
       ALTER TABLE class4.customers_auth DROP from_domains;
       ALTER TABLE class4.customers_auth DROP to_domains;
       ALTER TABLE class4.customers_auth DROP x_yeti_auths;
+
+
+      alter table public.contractors drop column external_id;
+      alter table billing.accounts drop column external_id;
+      alter table billing.accounts drop column vat;
+
+      alter table class4.customers_auth drop column external_id;
+
     }
   end
 
-  def stop_step
-    true
-  end
+#  def stop_step
+#    true
+#  end
 end
