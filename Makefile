@@ -33,10 +33,12 @@ git_version = $(shell git --version | awk '{print $$3}')
 ifeq "$(call compare_versions,$(git_version),ge,2.15.0)" "true"
 	tag_list = $(shell git \
 		   -c versionsort.suffix="-rc" \
+		   -c versionsort.suffix="-master" \
 		   tag --list "[0-9].*" --sort="v:refname" --merged)
 else ifeq "$(call compare_versions,$(git_version),ge,2.7.0)" "true"
 	tag_list = $(shell git \
 		   -c versionsort.prereleaseSuffix="-rc" \
+		   -c versionsort.prereleaseSuffix="-master" \
 		   tag --list "[0-9].*" --sort="v:refname" --merged)
 else
 	tag_list != git log \
@@ -190,7 +192,7 @@ else
 		[ "$$tag" != "HEAD" ] && ver="$$NEXT"; \
 		[ "$$tag" = "HEAD" ] && ver="$$PREV+$(commit_number_since_release)"; \
 		[ "$$tag" = "HEAD" ] && [ $(commit_number_since_release) -eq 0 ] && continue; \
-		ver="$$(echo $$ver | sed 's/-rc/~rc/')"; \
+		ver="$$(echo $$ver | sed 's/-rc/~rc/') | sed 's/-master/~master/')"; \
 		echo "Appending version $${ver} from $${PREV} to $${NEXT}"; \
 		changelog-git \
 			-q \
