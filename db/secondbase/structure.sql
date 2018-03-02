@@ -219,20 +219,20 @@ CREATE TYPE dynamic_cdr_data_ty AS (
 	vendor_id integer,
 	vendor_external_id bigint,
 	customer_acc_id integer,
-	customer_acc_external_id integer,
+	customer_acc_external_id bigint,
 	customer_acc_vat numeric,
 	vendor_acc_id integer,
-	vendor_acc_external_id integer,
+	vendor_acc_external_id bigint,
 	customer_auth_id integer,
-	customer_auth_external_id integer,
+	customer_auth_external_id bigint,
 	destination_id bigint,
 	destination_prefix character varying,
 	dialpeer_id bigint,
 	dialpeer_prefix character varying,
 	orig_gw_id integer,
-	orig_gw_external_id integer,
+	orig_gw_external_id bigint,
 	term_gw_id integer,
-	term_gw_external_id integer,
+	term_gw_external_id bigint,
 	routing_group_id integer,
 	rateplan_id integer,
 	destination_initial_rate numeric,
@@ -472,11 +472,11 @@ CREATE TABLE cdr (
     customer_account_check_balance boolean,
     customer_external_id bigint,
     customer_auth_external_id bigint,
-    customer_account_vat numeric,
-    customer_account_external_id bigint,
+    customer_acc_vat numeric,
+    customer_acc_external_id bigint,
     routing_tag_ids smallint[],
     vendor_external_id bigint,
-    vendor_account_external_id bigint,
+    vendor_acc_external_id bigint,
     orig_gw_external_id bigint,
     term_gw_external_id bigint,
     failed_resource_type_id smallint,
@@ -507,7 +507,7 @@ BEGIN
             i_cdr.destination_next_rate,
             i_cdr.destination_initial_interval,
             i_cdr.destination_next_interval,
-            i_cdr.customer_account_vat);
+            i_cdr.customer_acc_vat);
          i_cdr.customer_price=_v.amount;
          i_cdr.customer_price_no_vat=_v.amount_no_vat;
          i_cdr.customer_duration=_v.duration;
@@ -1039,8 +1039,8 @@ BEGIN
 
   v_cdr.customer_acc_id:=v_dynamic.customer_acc_id;
   v_cdr.customer_account_check_balance=v_dynamic.customer_acc_check_balance;
-  v_cdr.customer_account_external_id=v_dynamic.customer_acc_external_id;
-  v_cdr.customer_account_vat:=v_dynamic.customer_acc_vat;
+  v_cdr.customer_acc_external_id=v_dynamic.customer_acc_external_id;
+  v_cdr.customer_acc_vat:=v_dynamic.customer_acc_vat;
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
@@ -1048,7 +1048,7 @@ BEGIN
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
   v_cdr.vendor_id:=v_dynamic.vendor_acc_id;
-  v_cdr.vendor_account_external_id:=v_dynamic.vendor_acc_external_id;
+  v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
 
   v_cdr.destination_id:=v_dynamic.destination_id;
   v_cdr.destination_prefix:=v_dynamic.destination_prefix;
@@ -4043,11 +4043,11 @@ CREATE TABLE cdr_archive (
     customer_account_check_balance boolean,
     customer_external_id bigint,
     customer_auth_external_id bigint,
-    customer_account_vat numeric,
-    customer_account_external_id bigint,
+    customer_acc_vat numeric,
+    customer_acc_external_id bigint,
     routing_tag_ids smallint[],
     vendor_external_id bigint,
-    vendor_account_external_id bigint,
+    vendor_acc_external_id bigint,
     orig_gw_external_id bigint,
     term_gw_external_id bigint,
     failed_resource_type_id smallint,

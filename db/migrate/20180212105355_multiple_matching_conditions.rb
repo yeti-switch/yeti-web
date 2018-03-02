@@ -1457,125 +1457,6 @@ BEGIN
 end;
 $$;
 
-
-
-create extension pllua;
-
-CREATE OR REPLACE FUNCTION switch15.lua_tag_action(
-    op int,
-    a int[],b int[])
-RETURNS
-    int[]
-LANGUAGE 'pllua'
-COST 100
-VOLATILE
-AS $BODY$
-    local t = {}
-
-    if op==1 then -- clear
-        -- nothing to do. return empty array
-    elseif op==2 then -- relative complement
-        local aset = {}
-        local bset = {}
-
-        for _,v in pairs(a) do aset[v] = true end
-        for _,v in pairs(b) do bset[v] = true end
-
-        for v in pairs(aset) do
-            if bset[v] == nil then
-                table.insert(t,v)
-            end
-        end
-    elseif op==3 then -- union
-        local s = {}
-
-        for _,v in pairs(a) do s[v] = true end
-        for _,v in pairs(b) do s[v] = true end
-
-        for v in pairs(s) do table.insert(t,v) end
-    elseif op==4 then -- intersection
-        local aset = {}
-        local bset = {}
-
-        for _,v in pairs(a) do aset[v] = true end
-        for _,v in pairs(b) do bset[v] = true end
-
-        for v in pairs(aset) do
-            if bset[v] ~= nil then
-                table.insert(t,v)
-            end
-        end
-    else
-        -- unknown op
-        error("uknown operation: "..op)
-    end
-
-    return t
-$BODY$;
-
-
-CREATE OR REPLACE FUNCTION switch15.lua_array_compare(
-    a int[],b int[])
-RETURNS
-    int
-LANGUAGE 'pllua'
-COST 100
-VOLATILE
-AS $BODY$
-
--- return values:
--- 0 - не матчится
--- 1 - матчится по 0
--- 2 - матчится  нормальными тегами
--- 3 - полное совпадение
-
-    local a_has_value = function (_v)
-        for _,v in ipairs(a) do
-            if _v==v then return true end
-        end
-        return false
-    end
-
-    if #a == 0 then
-        -- a is empty. matches only empty b
-        if #b==0 then
-            return 3
-        end
-        return 0
-    end
-
-    if #b == 0 then
-        --  b is empty. matches only empty a
-        if #a==0 then
-            return 3
-        end
-        return 0
-    end
-
-    local a_contains_zero = a_has_value(0)
-    if a_contains_zero and #b==0 then
-        -- a contains 0. matches any b tag except of empty
-        return 0
-    end
-
-    for _,v in ipairs(b) do
-        if not a_has_value(v) then
-            -- tag from b not in a
-            if a_contains_zero then
-                return 1
-            end
-            return 0
-        end
-    end
-
-    if #b==#a and not a_contains_zero then
-        -- exact matching if a has no 0 and lengths are equal
-        return 3
-    end
-    return 2
-$BODY$;
-
-
 --
 -- TOC entry 944 (class 1255 OID 203386)
 -- Name: new_profile(); Type: FUNCTION; Schema: switch15; Owner: -
@@ -2497,7 +2378,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         end if;
 
         -- Tag processing CA
-        v_call_tags=switch15.lua_tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
+        v_call_tags=yeti_ext.tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
 
         /*
             number rewriting _Before_ routing
@@ -2577,7 +2458,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                 v_numberlist_item.dst_rewrite_rule,
                 v_numberlist_item.dst_rewrite_result
             );
-            v_call_tags=switch15.lua_tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -2599,7 +2480,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                 v_numberlist.default_dst_rewrite_rule,
                 v_numberlist.default_dst_rewrite_result
             );
-            v_call_tags=switch15.lua_tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
         end if;
@@ -2642,7 +2523,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                 v_numberlist_item.dst_rewrite_rule,
                 v_numberlist_item.dst_rewrite_result
             );
-            v_call_tags=switch15.lua_tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -2663,7 +2544,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                 v_numberlist.default_dst_rewrite_rule,
                 v_numberlist.default_dst_rewrite_result
             );
-            v_call_tags=switch15.lua_tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
         end if;
@@ -2700,14 +2581,14 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
             order by src_area_id is null, dst_area_id is null
             limit 1;
         if found then
-            v_call_tags=switch15.lua_tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
+            v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
 
         v_ret.routing_tag_ids:=v_call_tags;
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> Routing tag detected: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_id;
+        RAISE NOTICE '% ms -> Routing tag detected: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
         /*}dbg*/
         ----------------------------------------------------------------------
 
@@ -2795,7 +2676,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_id;
+        RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids;
         /*}dbg*/
         v_network:=switch15.detect_network(v_ret.dst_prefix_routing);
         v_ret.dst_network_id=v_network.network_id;
@@ -2809,8 +2690,8 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
-          AND switch15.lua_tag_compare(d.routing_tag_ids,v_call_tags)
-        ORDER BY length(prefix_range(prefix)) DESC, switch15.lua_tag_array_length(routing_tag_ids)
+          AND yeti_ext.tag_compare(d.routing_tag_ids,v_call_tags)>0
+        ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
         limit 1;
         IF NOT FOUND THEN
           /*dbg{*/
@@ -2849,7 +2730,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         */
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_id;
+        RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
         CASE v_rp.sorting_id
           WHEN'1' THEN -- LCR,Prio, ACD&ASR control
@@ -2865,7 +2746,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2882,7 +2763,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -2908,7 +2789,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2928,7 +2809,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -2952,7 +2833,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2974,7 +2855,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -2999,7 +2880,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3020,7 +2901,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3045,7 +2926,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3067,7 +2948,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
                   and t_dp.vendor_id=v_test_vendor_id
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3092,7 +2973,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3121,7 +3002,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3148,7 +3029,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, switch15.lua_tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3176,7 +3057,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND switch15.lua_tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -3842,8 +3723,6 @@ ALTER TABLE ONLY resource_type
     execute %q{
 
       drop schema switch15 cascade;
-
-      drop extension pllua;
 
       delete from  class4.disconnect_code  where id in (1506, 1507, 1508, 1509, 1510, 1511, 1600, 1601);
 

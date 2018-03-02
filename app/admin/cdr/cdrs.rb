@@ -76,7 +76,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :term_gw, collection: proc { Gateway.select([:id, :name]).reorder(:name) }, input_html: {class: 'chosen'}
   filter :routing_plan, collection: proc { Routing::RoutingPlan.select([:id, :name]) }, input_html: {class: 'chosen'}
   filter :routing_group, collection: proc { RoutingGroup.select([:id, :name]) }, input_html: {class: 'chosen'}
-  filter :routing_tag, collection: proc { Routing::RoutingTag.select([:id, :name]) }, input_html: {class: 'chosen'}
+#  filter :routing_tag, collection: proc { Routing::RoutingTag.select([:id, :name]) }, input_html: {class: 'chosen'}
   filter :rateplan, collection: proc { Rateplan.select([:id, :name]) }, input_html: {class: 'chosen'}
 
   filter :internal_disconnect_code, as: :string_eq
@@ -311,9 +311,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :destination_next_interval
         column :destination_next_rate
         column :customer_price
+        column :customer_price_no_vat
+        column :customer_duration
         column :routing_plan
         column :routing_group
-        column :routing_tag
+        column :routing_tag_ids
         column :dialpeer
         column :dialpeer_fee
         column :dialpeer_initial_interval
@@ -321,6 +323,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :dialpeer_next_interval
         column :dialpeer_next_rate
         column :vendor_price
+        column :vendor_duration
         column :time_limit
         column :profit
         column('Orig call') do |cdr|
@@ -365,6 +368,20 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :lega_user_agent
         column :legb_user_agent
         column :uuid
+
+        column :failed_resource_type_id
+        column :failed_resource_id
+
+        column :customer_external_id
+        column :customer_auth_external_id
+        column :customer_acc_vat
+        column :customer_acc_external_id
+
+        column :vendor_external_id
+        column :vendor_acc_external_id
+        column :orig_gw_external_id
+        column :term_gw_external_id
+
       end if cdr.attempts.length > 0
     end
 
@@ -419,12 +436,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :pop
 
           row :customer
+          row :customer_external_id
           row :vendor
+          row :vendor_external_id
           row :customer_acc
+          row :customer_acc_external_id
           row :vendor_acc
+          row :vendor_acc_external_id
           row :customer_auth
           row :orig_gw
+          row :orig_gw_external_id
           row :term_gw
+          row :term_gw_external_id
 
         end
 
@@ -493,7 +516,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       tab 'Routing&Billing information' do
         attributes_table do
           row :customer_price
+          row :customer_price_no_vat
+          row :customer_duration
           row :vendor_price
+          row :vendor_duration
           row :profit
 
           row :rateplan
@@ -507,7 +533,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           row :routing_plan
           row :routing_group
-          row :routing_tag
+          row :routing_tag_ids
           row :dialpeer
 
           row :dialpeer_fee
@@ -662,9 +688,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :destination_next_interval
     column :destination_next_rate
     column :customer_price
+    column :customer_acc_vat
+    column :customer_price_no_vat
+    column :customer_duration
     column :routing_plan
     column :routing_group
-    column :routing_tag
+    column :routing_tag_ids
     column :dialpeer
 
     column :dialpeer_fee
@@ -673,6 +702,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :dialpeer_next_interval
     column :dialpeer_next_rate
     column :vendor_price
+    column :vendor_duration
     column :time_limit
     column :profit
     column :orig_call_id
@@ -714,7 +744,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :lega_user_agent
     column :legb_user_agent
     column :uuid
-
+    column :failed_resource_id
+    column :failed_resource_type_id
   end
 
 

@@ -6,11 +6,11 @@ class JsonSerialization < ActiveRecord::Migration
 alter table cdr.cdr
   add column customer_external_id bigint,
   add column customer_auth_external_id bigint,
-  add column customer_account_vat numeric,
-  add column customer_account_external_id bigint,
+  add column customer_acc_vat numeric,
+  add column customer_acc_external_id bigint,
   add column routing_tag_ids smallint[],
   add column vendor_external_id bigint,
-  add column vendor_account_external_id bigint,
+  add column vendor_acc_external_id bigint,
   add orig_gw_external_id bigint,
   add term_gw_external_id bigint,
   add failed_resource_type_id smallint,
@@ -22,11 +22,11 @@ alter table cdr.cdr
 alter table cdr.cdr_archive
   add column customer_external_id bigint,
   add column customer_auth_external_id bigint,
-  add column customer_account_vat numeric,
-  add column customer_account_external_id bigint,
+  add column customer_acc_vat numeric,
+  add column customer_acc_external_id bigint,
   add column routing_tag_ids smallint[],
   add column vendor_external_id bigint,
-  add column vendor_account_external_id bigint,
+  add column vendor_acc_external_id bigint,
   add orig_gw_external_id bigint,
   add term_gw_external_id bigint,
   add failed_resource_type_id smallint,
@@ -41,20 +41,20 @@ create type switch.dynamic_cdr_data_ty as (
     vendor_id integer,
     vendor_external_id bigint,
     customer_acc_id integer,
-    customer_acc_external_id integer,
+    customer_acc_external_id bigint,
     customer_acc_vat numeric,
     vendor_acc_id integer,
-    vendor_acc_external_id integer,
+    vendor_acc_external_id bigint,
     customer_auth_id integer,
-    customer_auth_external_id integer,
+    customer_auth_external_id bigint,
     destination_id bigint,
     destination_prefix character varying,
     dialpeer_id bigint,
     dialpeer_prefix character varying,
     orig_gw_id integer,
-    orig_gw_external_id integer,
+    orig_gw_external_id bigint,
     term_gw_id integer,
-    term_gw_external_id integer,
+    term_gw_external_id bigint,
     routing_group_id integer,
     rateplan_id integer,
     destination_initial_rate numeric,
@@ -188,8 +188,8 @@ BEGIN
 
   v_cdr.customer_acc_id:=v_dynamic.customer_acc_id;
   v_cdr.customer_account_check_balance=v_dynamic.customer_acc_check_balance;
-  v_cdr.customer_account_external_id=v_dynamic.customer_acc_external_id;
-  v_cdr.customer_account_vat:=v_dynamic.customer_acc_vat;
+  v_cdr.customer_acc_external_id=v_dynamic.customer_acc_external_id;
+  v_cdr.customer_acc_vat:=v_dynamic.customer_acc_vat;
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
@@ -197,7 +197,7 @@ BEGIN
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
   v_cdr.vendor_id:=v_dynamic.vendor_acc_id;
-  v_cdr.vendor_account_external_id:=v_dynamic.vendor_acc_external_id;
+  v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
 
   v_cdr.destination_id:=v_dynamic.destination_id;
   v_cdr.destination_prefix:=v_dynamic.destination_prefix;
@@ -461,7 +461,7 @@ BEGIN
             i_cdr.destination_next_rate,
             i_cdr.destination_initial_interval,
             i_cdr.destination_next_interval,
-            i_cdr.customer_account_vat);
+            i_cdr.customer_acc_vat);
          i_cdr.customer_price=_v.amount;
          i_cdr.customer_price_no_vat=_v.amount_no_vat;
          i_cdr.customer_duration=_v.duration;
@@ -611,11 +611,11 @@ $BODY$
 
   alter table cdr.cdr drop column customer_external_id;
   alter table cdr.cdr drop column customer_auth_external_id;
-  alter table cdr.cdr drop column customer_account_vat;
-  alter table cdr.cdr drop column customer_account_external_id;
+  alter table cdr.cdr drop column customer_acc_vat;
+  alter table cdr.cdr drop column customer_acc_external_id;
   alter table cdr.cdr drop column routing_tag_ids;
   alter table cdr.cdr drop column vendor_external_id;
-  alter table cdr.cdr drop column vendor_account_external_id;
+  alter table cdr.cdr drop column vendor_acc_external_id;
   alter table cdr.cdr drop column orig_gw_external_id;
   alter table cdr.cdr drop column term_gw_external_id;
   alter table cdr.cdr drop column failed_resource_type_id;
@@ -626,11 +626,11 @@ $BODY$
 
   alter table cdr.cdr_archive drop column customer_external_id;
   alter table cdr.cdr_archive drop column customer_auth_external_id;
-  alter table cdr.cdr_archive drop column customer_account_vat;
-  alter table cdr.cdr_archive drop column customer_account_external_id;
+  alter table cdr.cdr_archive drop column customer_acc_vat;
+  alter table cdr.cdr_archive drop column customer_acc_external_id;
   alter table cdr.cdr_archive drop column routing_tag_ids;
   alter table cdr.cdr_archive drop column vendor_external_id;
-  alter table cdr.cdr_archive drop column vendor_account_external_id;
+  alter table cdr.cdr_archive drop column vendor_acc_external_id;
   alter table cdr.cdr_archive drop column orig_gw_external_id;
   alter table cdr.cdr_archive drop column term_gw_external_id;
   alter table cdr.cdr_archive drop column failed_resource_type_id;
