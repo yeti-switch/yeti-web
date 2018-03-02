@@ -77,6 +77,11 @@ Yeti::Application.routes.draw do
           jsonapi_resources :session_refresh_methods
           jsonapi_resources :sortings
 
+          namespace :cdr do
+            jsonapi_resources :cdrs, only: [:index, :show] do
+            end
+          end
+
           namespace :billing do
             jsonapi_resources :invoice_period
             jsonapi_resources :invoice_template
@@ -120,7 +125,7 @@ Yeti::Application.routes.draw do
             jsonapi_resources :rateplans
             jsonapi_resources :rates
             jsonapi_resource :check_rate, only: [:create]
-            jsonapi_resources :cdrs
+            jsonapi_resources :cdrs, only: [:index, :show]
            end
         end
       end
