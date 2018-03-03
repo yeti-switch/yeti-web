@@ -80,13 +80,6 @@ COMMENT ON EXTENSION pgq_ext IS 'Target-side batch tracking infrastructure';
 
 
 --
--- Name: pllua; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA pllua;
-
-
---
 -- Name: runtime_stats; Type: SCHEMA; Schema: -; Owner: -
 --
 
