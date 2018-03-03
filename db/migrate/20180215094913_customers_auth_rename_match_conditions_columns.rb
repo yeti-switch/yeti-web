@@ -25,6 +25,8 @@ class CustomersAuthRenameMatchConditionsColumns < ActiveRecord::Migration
   def down
     execute %q{
       -- rename '-s' columns
+
+
       ALTER TABLE class4.customers_auth RENAME ip TO ips;
       ALTER TABLE class4.customers_auth RENAME src_prefix TO src_prefixes;
       ALTER TABLE class4.customers_auth RENAME dst_prefix TO dst_prefixes;
@@ -34,21 +36,25 @@ class CustomersAuthRenameMatchConditionsColumns < ActiveRecord::Migration
       ALTER TABLE class4.customers_auth RENAME x_yeti_auth TO x_yeti_auths;
 
       -- deprecated columns
-      ALTER TABLE class4.customers_auth ADD ip inet;
-      ALTER TABLE class4.customers_auth ADD src_prefix character varying NOT NULL DEFAULT '';
-      ALTER TABLE class4.customers_auth ADD dst_prefix character varying NOT NULL DEFAULT '';
-      ALTER TABLE class4.customers_auth ADD uri_domain character varying;
-      ALTER TABLE class4.customers_auth ADD from_domain character varying;
-      ALTER TABLE class4.customers_auth ADD to_domain character varying;
-      ALTER TABLE class4.customers_auth ADD x_yeti_auth character varying;
+      ALTER TABLE class4.customers_auth
+        ADD ip inet,
+        ADD src_prefix character varying NOT NULL DEFAULT '',
+        ADD dst_prefix character varying NOT NULL DEFAULT '',
+        ADD uri_domain character varying,
+        ADD from_domain character varying,
+        ADD to_domain character varying,
+        ADD x_yeti_auth character varying;
 
-      UPDATE class4.customers_auth SET ip = ips[1];
+      UPDATE class4.customers_auth SET
+        ip = ips[1],
+        uri_domain = uri_domains[1],
+        from_domain = from_domains[1],
+        to_domain = to_domains[1],
+        x_yeti_auth = x_yeti_auths[1];
+
       UPDATE class4.customers_auth SET src_prefix = src_prefixes[1] WHERE src_prefixes[1] != '';
       UPDATE class4.customers_auth SET dst_prefix = dst_prefixes[1] WHERE dst_prefixes[1] != '';
-      UPDATE class4.customers_auth SET uri_domain = uri_domains[1];
-      UPDATE class4.customers_auth SET from_domain = from_domains[1];
-      UPDATE class4.customers_auth SET to_domain = to_domains[1];
-      UPDATE class4.customers_auth SET x_yeti_auth = x_yeti_auths[1];
+
     }
   end
 end

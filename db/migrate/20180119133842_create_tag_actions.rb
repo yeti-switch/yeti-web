@@ -30,7 +30,7 @@ class CreateTagActions < ActiveRecord::Migration
       ALTER TABLE class4.dialpeers ADD routing_tag_ids smallint[] NOT NULL DEFAULT '{}'::smallint[];
 
       -- Migrate data RoutingTagDetectionRule, Dialpeer, Destination
-      UPDATE class4.routing_tag_detection_rules SET tag_action_value=array_append('{}', routing_tag_id) WHERE routing_tag_id IS NOT NULL;
+      UPDATE class4.routing_tag_detection_rules SET tag_action_id=3, tag_action_value=array_append('{}', routing_tag_id) WHERE routing_tag_id IS NOT NULL;
       UPDATE class4.dialpeers SET routing_tag_ids=array_append('{}', routing_tag_id) WHERE routing_tag_id IS NOT NULL;
       UPDATE class4.destinations SET routing_tag_ids=array_append('{}', routing_tag_id) WHERE routing_tag_id IS NOT NULL;
 

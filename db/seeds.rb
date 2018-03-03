@@ -17,6 +17,7 @@ end
   'notifications', # depends on gui.admin_users
   'switch13',
   'switch14',
+  'switch15',
   'sys'
 ].each do |filename|
   execute_sql_file("db/seeds/main/#{filename}.sql");
