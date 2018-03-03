@@ -17,6 +17,8 @@
 #  invoice_period_name            :string
 #  autogenerate_vendor_invoices   :boolean          default(FALSE), not null
 #  autogenerate_customer_invoices :boolean          default(FALSE), not null
+#  balance_high_threshold         :decimal(, )
+#  balance_low_threshold          :decimal(, )
 #
 
 class Importing::Account < Importing::Base

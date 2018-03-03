@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  dialpeer_id      :integer          not null
-#  rate             :decimal(, )      not null
+#  next_rate        :decimal(, )      not null
 #  initial_interval :integer          not null
 #  next_interval    :integer          not null
 #  connect_fee      :decimal(, )      not null
@@ -13,6 +13,7 @@
 #  updated_at       :datetime
 #  applied          :boolean          default(FALSE), not null
 #  external_id      :integer
+#  initial_rate     :decimal(, )      not null
 #
 
 class DialpeerNextRate < Yeti::ActiveRecord

@@ -13,7 +13,7 @@
 #  dst_rewrite_rule   :string
 #  dst_rewrite_result :string
 #  tag_action_id      :integer
-#  tag_action_value   :integer          default("{}"), not null, is an Array
+#  tag_action_value   :integer          default([]), not null, is an Array
 #
 
 class Routing::NumberlistItem < Yeti::ActiveRecord

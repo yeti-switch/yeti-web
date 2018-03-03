@@ -10,6 +10,8 @@
 #  use_routing      :boolean          not null
 #  target_ip        :inet
 #  source_ip        :inet
+#  target_port      :integer
+#  hep_capture_id   :integer
 #
 
 require 'spec_helper'

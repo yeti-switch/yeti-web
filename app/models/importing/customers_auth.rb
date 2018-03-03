@@ -41,8 +41,8 @@
 #  dst_numberlist_name              :string
 #  src_numberlist_id                :integer
 #  src_numberlist_name              :string
-#  allow_receive_rate_limit         :boolean          default("false"), not null
-#  send_billing_information         :boolean          default("false"), not null
+#  allow_receive_rate_limit         :boolean          default(FALSE), not null
+#  send_billing_information         :boolean          default(FALSE), not null
 #  routing_plan_id                  :integer
 #  routing_plan_name                :string
 #  radius_auth_profile_id           :integer
@@ -63,7 +63,7 @@
 #  check_account_balance            :boolean
 #  require_incoming_auth            :boolean
 #  tag_action_id                    :integer
-#  tag_action_value                 :integer          default("{}"), not null, is an Array
+#  tag_action_value                 :integer          default([]), not null, is an Array
 #
 
 class Importing::CustomersAuth < Importing::Base

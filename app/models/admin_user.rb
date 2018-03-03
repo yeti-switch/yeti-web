@@ -19,9 +19,9 @@
 #  username               :string           not null
 #  ssh_key                :text
 #  stateful_filters       :boolean          default(FALSE), not null
-#  visible_columns        :json             default({}), not null
-#  per_page               :json             default({}), not null
-#  saved_filters          :json             default({}), not null
+#  visible_columns        :json             not null
+#  per_page               :json             not null
+#  saved_filters          :json             not null
 #
 
 class AdminUser < ActiveRecord::Base

@@ -7,40 +7,40 @@
 #  prefix                  :string           not null
 #  src_rewrite_rule        :string
 #  dst_rewrite_rule        :string
-#  acd_limit               :float            default("0"), not null
-#  asr_limit               :float            default("0.0"), not null
+#  acd_limit               :float            default(0.0), not null
+#  asr_limit               :float            default(0.0), not null
 #  gateway_id              :integer
 #  routing_group_id        :integer          not null
 #  next_rate               :decimal(, )      not null
-#  connect_fee             :decimal(, )      default("0.0"), not null
+#  connect_fee             :decimal(, )      default(0.0), not null
 #  vendor_id               :integer          not null
 #  account_id              :integer          not null
 #  src_rewrite_result      :string
 #  dst_rewrite_result      :string
-#  locked                  :boolean          default("false"), not null
-#  priority                :integer          default("100"), not null
+#  locked                  :boolean          default(FALSE), not null
+#  priority                :integer          default(100), not null
 #  capacity                :integer
-#  lcr_rate_multiplier     :decimal(, )      default("1"), not null
+#  lcr_rate_multiplier     :decimal(, )      default(1.0), not null
 #  initial_rate            :decimal(, )      not null
-#  initial_interval        :integer          default("1"), not null
-#  next_interval           :integer          default("1"), not null
+#  initial_interval        :integer          default(1), not null
+#  next_interval           :integer          default(1), not null
 #  valid_from              :datetime         not null
 #  valid_till              :datetime         not null
 #  gateway_group_id        :integer
 #  force_hit_rate          :float
 #  network_prefix_id       :integer
 #  created_at              :datetime         not null
-#  short_calls_limit       :float            default("1"), not null
+#  short_calls_limit       :float            default(1.0), not null
 #  current_rate_id         :integer
 #  external_id             :integer
 #  src_name_rewrite_rule   :string
 #  src_name_rewrite_result :string
-#  exclusive_route         :boolean          default("false"), not null
+#  exclusive_route         :boolean          default(FALSE), not null
 #  routing_tag_id          :integer
-#  dst_number_min_length   :integer          default("0"), not null
-#  dst_number_max_length   :integer          default("100"), not null
-#  reverse_billing         :boolean          default("false"), not null
-#  routing_tag_ids         :integer          default("{}"), not null, is an Array
+#  dst_number_min_length   :integer          default(0), not null
+#  dst_number_max_length   :integer          default(100), not null
+#  reverse_billing         :boolean          default(FALSE), not null
+#  routing_tag_ids         :integer          default([]), not null, is an Array
 #
 
 class Dialpeer < Yeti::ActiveRecord

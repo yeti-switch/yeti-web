@@ -6,14 +6,14 @@
 #  name                       :string           not null
 #  created_at                 :datetime
 #  updated_at                 :datetime
-#  mode_id                    :integer          default("1"), not null
-#  default_action_id          :integer          default("1"), not null
+#  mode_id                    :integer          default(1), not null
+#  default_action_id          :integer          default(1), not null
 #  default_src_rewrite_rule   :string
 #  default_src_rewrite_result :string
 #  default_dst_rewrite_rule   :string
 #  default_dst_rewrite_result :string
 #  tag_action_id              :integer
-#  tag_action_value           :integer          default("{}"), not null, is an Array
+#  tag_action_value           :integer          default([]), not null, is an Array
 #
 
 class Routing::Numberlist < Yeti::ActiveRecord

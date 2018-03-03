@@ -4,7 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  routing_plan_id        :integer          not null
-#  dst_prefix             :string           not null
+#  dst_prefix             :string           default(""), not null
 #  database_id            :integer          not null
 #  created_at             :datetime
 #  lrn_rewrite_rule       :string

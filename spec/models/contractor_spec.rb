@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: contractors
+#
+#  id                 :integer          not null, primary key
+#  name               :string
+#  enabled            :boolean
+#  vendor             :boolean
+#  customer           :boolean
+#  description        :string
+#  address            :string
+#  phones             :string
+#  smtp_connection_id :integer
+#  external_id        :integer
+#
+
 require 'spec_helper'
 
 describe Contractor, type: :model do
