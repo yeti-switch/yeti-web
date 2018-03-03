@@ -84,8 +84,8 @@
 #  rtp_force_relay_cn               :boolean          default(TRUE), not null
 #  sensor_id                        :integer
 #  sensor_level_id                  :integer          default(1), not null
-#  dtmf_receive_mode_id             :integer          default(1), not null
 #  dtmf_send_mode_id                :integer          default(1), not null
+#  dtmf_receive_mode_id             :integer          default(1), not null
 #  relay_update                     :boolean          default(FALSE), not null
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  send_lnp_information             :boolean          default(FALSE), not null
@@ -103,6 +103,11 @@
 #  term_proxy_transport_protocol_id :integer          default(1), not null
 #  orig_proxy_transport_protocol_id :integer          default(1), not null
 #  rel100_mode_id                   :integer          default(4), not null
+#  is_shared                        :boolean          default(FALSE), not null
+#  max_30x_redirects                :integer          default(0), not null
+#  max_transfers                    :integer          default(0), not null
+#  incoming_auth_username           :string
+#  incoming_auth_password           :string
 #
 
 require 'resolv'

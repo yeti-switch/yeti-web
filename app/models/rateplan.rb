@@ -4,7 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string
-#  profit_control_mode_id :integer          default("1"), not null
+#  profit_control_mode_id :integer          default(1), not null
 #  send_quality_alarms_to :integer          is an Array
 #  uuid                   :uuid             not null
 #

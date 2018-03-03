@@ -17,7 +17,7 @@
 #  next_vendor_invoice_at        :datetime
 #  vendor_invoice_period_id      :integer
 #  send_invoices_to              :integer          is an Array
-#  timezone_id                   :integer          default("1"), not null
+#  timezone_id                   :integer          default(1), not null
 #  next_customer_invoice_type_id :integer
 #  next_vendor_invoice_type_id   :integer
 #  balance_high_threshold        :decimal(, )
@@ -27,6 +27,7 @@
 #  external_id                   :integer
 #  vat                           :decimal(, )      default(0.0), not null
 #
+
 class Account < Yeti::ActiveRecord
 
   belongs_to :contractor

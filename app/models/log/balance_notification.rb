@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: balance_notifications
+#
+#  id           :integer          not null, primary key
+#  created_at   :datetime         not null
+#  is_processed :boolean          default(FALSE), not null
+#  processed_at :datetime
+#  direction    :string
+#  action       :string
+#  data         :json
+#
+
 class Log::BalanceNotification < ActiveRecord::Base
   self.table_name = 'balance_notifications'
   scope :processed, -> {where('is_processed')}

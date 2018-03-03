@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: class4.routing_tag_detection_rules
+#
+#  id               :integer          not null, primary key
+#  dst_area_id      :integer
+#  src_area_id      :integer
+#  routing_tag_id   :integer          not null
+#  tag_action_id    :integer
+#  tag_action_value :integer          default([]), not null, is an Array
+#
+
 require 'spec_helper'
 
 RSpec.describe Routing::RoutingTagDetectionRule, type: :model do

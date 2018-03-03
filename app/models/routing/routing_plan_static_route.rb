@@ -8,7 +8,6 @@
 #  vendor_id         :integer          not null
 #  priority          :integer          default(100), not null
 #  network_prefix_id :integer
-#  weight            :float            default(100.0), not null
 #
 
 class Routing::RoutingPlanStaticRoute < ActiveRecord::Base

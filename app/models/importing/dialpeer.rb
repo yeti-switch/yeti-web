@@ -35,12 +35,12 @@
 #  gateway_group_id    :integer
 #  error_string        :string
 #  force_hit_rate      :float
-#  short_calls_limit   :float            default("1"), not null
+#  short_calls_limit   :float            default(1.0), not null
 #  exclusive_route     :boolean
 #  routing_tag_id      :integer
 #  routing_tag_name    :string
 #  reverse_billing     :boolean
-#  routing_tag_ids     :integer          default("{}"), not null, is an Array
+#  routing_tag_ids     :integer          default([]), not null, is an Array
 #
 
 class Importing::Dialpeer < Importing::Base

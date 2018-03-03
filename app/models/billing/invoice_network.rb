@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: invoice_networks
+#
+#  id                       :integer          not null, primary key
+#  country_id               :integer
+#  network_id               :integer
+#  rate                     :decimal(, )
+#  calls_count              :integer
+#  calls_duration           :integer
+#  amount                   :decimal(, )
+#  invoice_id               :integer          not null
+#  first_call_at            :datetime
+#  last_call_at             :datetime
+#  successful_calls_count   :integer
+#  first_successful_call_at :datetime
+#  last_successful_call_at  :datetime
+#
+
 
 class Billing::InvoiceNetwork < Cdr::Base
 

@@ -31,7 +31,7 @@
 #  acd_limit                :float
 #  short_calls_limit        :float
 #  reverse_billing          :boolean
-#  routing_tag_ids          :integer          default("{}"), not null, is an Array
+#  routing_tag_ids          :integer          default([]), not null, is an Array
 #
 
 class Importing::Destination < Importing::Base

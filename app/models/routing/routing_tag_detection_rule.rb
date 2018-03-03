@@ -7,7 +7,7 @@
 #  src_area_id      :integer
 #  routing_tag_id   :integer          not null
 #  tag_action_id    :integer
-#  tag_action_value :integer          default("{}"), not null, is an Array
+#  tag_action_value :integer          default([]), not null, is an Array
 #
 
 class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord

@@ -107,6 +107,39 @@
 #  auth_orig_transport_protocol_id :integer
 #  sign_orig_transport_protocol_id :integer
 #  sign_term_transport_protocol_id :integer
+#  core_version                    :string
+#  yeti_version                    :string
+#  lega_user_agent                 :string
+#  legb_user_agent                 :string
+#  uuid                            :uuid
+#  pai_in                          :string
+#  ppi_in                          :string
+#  privacy_in                      :string
+#  rpid_in                         :string
+#  rpid_privacy_in                 :string
+#  pai_out                         :string
+#  ppi_out                         :string
+#  privacy_out                     :string
+#  rpid_out                        :string
+#  rpid_privacy_out                :string
+#  destination_reverse_billing     :boolean
+#  dialpeer_reverse_billing        :boolean
+#  is_redirected                   :boolean
+#  customer_account_check_balance  :boolean
+#  customer_external_id            :integer
+#  customer_auth_external_id       :integer
+#  customer_acc_vat                :decimal(, )
+#  customer_acc_external_id        :integer
+#  routing_tag_ids                 :integer          is an Array
+#  vendor_external_id              :integer
+#  vendor_acc_external_id          :integer
+#  orig_gw_external_id             :integer
+#  term_gw_external_id             :integer
+#  failed_resource_type_id         :integer
+#  failed_resource_id              :integer
+#  customer_price_no_vat           :decimal(, )
+#  customer_duration               :integer
+#  vendor_duration                 :integer
 #
 
 class Report::Realtime::TerminationDistribution < Report::Realtime::Base
