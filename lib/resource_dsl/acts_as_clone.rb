@@ -16,7 +16,7 @@ module ResourceDSL
 
         def copy_resource(dup_methods)
           from =  active_admin_config.resource_class.find(params[:from])
-          attributes = from.dup.attributes_before_type_cast rescue {}
+          attributes = from.dup.attributes rescue {}
           resource = scoped_collection.new
           dup_methods.each do |m|
             res = from.send(m).dup
