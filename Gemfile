@@ -25,9 +25,10 @@ gem 'draper', '~>  2.1.0'
 gem 'activeadmin', git: 'https://github.com/yeti-switch/active_admin.git'
 gem 'novus-nvd3-rails', git: 'https://github.com/yeti-switch/nvd3-community-rails.git'
 gem 'active_admin_theme'
-gem 'active_admin_import' , '3.0.0.pre'
+gem 'active_admin_import', '3.0.0.pre'
 gem 'active_admin_scoped_collection_actions'
-gem 'active_admin_datetimepicker', git: 'https://github.com/activeadmin-plugins/activeadmin_datetimepicker.git', ref: '16f2d40484172a5fdb0a4a7c0a12add51a762bd0'
+# latest version compatible with current(old) ActiveAdmin
+gem 'active_admin_datetimepicker', '0.5.0'
 gem 'active_admin_date_range_preset', git: 'https://github.com/workgena/active_admin_date_range_preset.git'
 
 gem 'yetis_node', git: 'https://github.com/yeti-switch/yetis_node.git'
