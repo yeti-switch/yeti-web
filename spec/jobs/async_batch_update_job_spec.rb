@@ -7,11 +7,14 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
     include_context :init_destination, id: 2, initial_rate: 0.5
     include_context :init_destination, id: 3, initial_rate: 0.7
 
-    subject { described_class.new(model_class, sql_query, changes).perform}
+    subject { described_class.new(model_class, sql_query, changes, who_is).perform }
 
     before :each do
       stub_const('AsyncBatchUpdateJob::BATCH_SIZE', 2)
     end
+
+    let(:admin) { create :admin_user }
+    let(:who_is) { { whodunnit: admin.id, controller_info: {} } }
 
     context 'incorrect class_name' do
       let(:model_class) { 'Fake' }
@@ -33,7 +36,7 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
         let(:changes) { {prefix: '300', reject_calls: false} }
 
         context 'no filter/selection' do
-          let (:sql_query) { Destination.all.to_sql }
+          let(:sql_query) { Destination.all.to_sql }
 
           it { expect {subject}.to change(Destination.where(prefix: '300', reject_calls: false), :count).by(3) }
         end
