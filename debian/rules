@@ -9,5 +9,10 @@ override_dh_installinit:
 	for s in ${extra_services}; do dh_installinit --name=$$s; done
 	dh_installinit
 
-.PHONY: override_dh_strip
+# avoid building debug symbols from so files in gems
 override_dh_strip:
+override_dh_strip_nondeterminism:
+
+# we do not want to generate shlibs file
+override_dh_makeshlibs:
+
