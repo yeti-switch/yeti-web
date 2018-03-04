@@ -2,6 +2,8 @@ class MultipleMatchingConditions < ActiveRecord::Migration
   def up
     execute %q{
 
+      ALTER EXTENSION yeti UPDATE TO "1.3.0";
+
       CREATE TABLE class4.customers_auth_normalized (
           id serial PRIMARY KEY,
           customers_auth_id integer NOT NULL REFERENCES class4.customers_auth(id),
@@ -2746,7 +2748,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2789,7 +2791,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2833,7 +2835,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2880,7 +2882,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2926,7 +2928,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -2973,7 +2975,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -3029,7 +3031,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
