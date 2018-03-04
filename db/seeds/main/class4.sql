@@ -346,6 +346,15 @@ INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_orig
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (2006, 3, true, false, 503, 'Radius unsupported', NULL, NULL, false, false, true, false);
 
 
+insert into disconnect_code (id,namespace_id,code,reason) values (1506, 1, 480,  'Customer account $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1507, 1, 480,  'Customer auth $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1508, 1, 480,  'Customer gateway $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1509, 1, 480,  'Vendor account $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1510, 1, 480,  'Vendor gateway $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1511, 1, 480,  'Dialpeer $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1600, 1, 503,  'Resource cache error');
+insert into disconnect_code (id,namespace_id,code,reason) values (1601, 1, 503,  'Unknown resource overload');
+
 --
 -- TOC entry 4439 (class 0 OID 0)
 -- Dependencies: 314
