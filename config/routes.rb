@@ -90,6 +90,7 @@ Yeti::Application.routes.draw do
             jsonapi_resources :sensors
             jsonapi_resources :smtp_connections
             jsonapi_resources :countries
+            jsonapi_resources :networks
           end
 
           namespace :equipment do
