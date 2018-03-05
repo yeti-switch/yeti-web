@@ -6,6 +6,7 @@ SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
@@ -56,20 +57,6 @@ CREATE EXTENSION IF NOT EXISTS pgq_coop WITH SCHEMA pg_catalog;
 --
 
 COMMENT ON EXTENSION pgq_coop IS 'Cooperative queue consuming for PgQ';
-
-
---
--- Name: pgq_ext; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pgq_ext WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION pgq_ext; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pgq_ext IS 'Target-side batch tracking infrastructure';
 
 
 --
@@ -142,13 +129,11 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
-SET search_path = billing, pg_catalog;
-
 --
 -- Name: cdr_v2; Type: TYPE; Schema: billing; Owner: -
 --
 
-CREATE TYPE cdr_v2 AS (
+CREATE TYPE billing.cdr_v2 AS (
 	id bigint,
 	customer_id integer,
 	vendor_id integer,
@@ -200,20 +185,18 @@ CREATE TYPE cdr_v2 AS (
 -- Name: interval_billing_data; Type: TYPE; Schema: billing; Owner: -
 --
 
-CREATE TYPE interval_billing_data AS (
+CREATE TYPE billing.interval_billing_data AS (
 	duration numeric,
 	amount numeric,
 	amount_no_vat numeric
 );
 
 
-SET search_path = switch, pg_catalog;
-
 --
 -- Name: dynamic_cdr_data_ty; Type: TYPE; Schema: switch; Owner: -
 --
 
-CREATE TYPE dynamic_cdr_data_ty AS (
+CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	customer_id integer,
 	customer_external_id bigint,
 	vendor_id integer,
@@ -290,7 +273,7 @@ CREATE TYPE dynamic_cdr_data_ty AS (
 -- Name: rtp_stats_data_ty; Type: TYPE; Schema: switch; Owner: -
 --
 
-CREATE TYPE rtp_stats_data_ty AS (
+CREATE TYPE switch.rtp_stats_data_ty AS (
 	lega_rx_payloads character varying,
 	lega_tx_payloads character varying,
 	legb_rx_payloads character varying,
@@ -312,7 +295,7 @@ CREATE TYPE rtp_stats_data_ty AS (
 -- Name: time_data_ty; Type: TYPE; Schema: switch; Owner: -
 --
 
-CREATE TYPE time_data_ty AS (
+CREATE TYPE switch.time_data_ty AS (
 	time_start double precision,
 	leg_b_time double precision,
 	time_connect double precision,
@@ -327,15 +310,13 @@ CREATE TYPE time_data_ty AS (
 -- Name: versions_ty; Type: TYPE; Schema: switch; Owner: -
 --
 
-CREATE TYPE versions_ty AS (
+CREATE TYPE switch.versions_ty AS (
 	core character varying,
 	yeti character varying,
 	aleg character varying,
 	bleg character varying
 );
 
-
-SET search_path = cdr, pg_catalog;
 
 SET default_tablespace = '';
 
@@ -345,7 +326,7 @@ SET default_with_oids = false;
 -- Name: cdr; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr (
+CREATE TABLE cdr.cdr (
     id bigint NOT NULL,
     customer_id integer,
     vendor_id integer,
@@ -487,13 +468,11 @@ CREATE TABLE cdr (
 );
 
 
-SET search_path = billing, pg_catalog;
-
 --
 -- Name: bill_cdr(cdr.cdr); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION bill_cdr(i_cdr cdr.cdr) RETURNS cdr.cdr
+CREATE FUNCTION billing.bill_cdr(i_cdr cdr.cdr) RETURNS cdr.cdr
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -537,7 +516,7 @@ $$;
 -- Name: interval_billing(numeric, numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION interval_billing(i_duration numeric, i_connection_fee numeric, i_initial_rate numeric, i_next_rate numeric, i_initial_interval numeric, i_next_interval numeric, i_vat numeric DEFAULT 0) RETURNS interval_billing_data
+CREATE FUNCTION billing.interval_billing(i_duration numeric, i_connection_fee numeric, i_initial_rate numeric, i_next_rate numeric, i_initial_interval numeric, i_next_interval numeric, i_vat numeric DEFAULT 0) RETURNS billing.interval_billing_data
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -564,7 +543,7 @@ $$;
 -- Name: invoice_generate(integer); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION invoice_generate(i_id integer) RETURNS void
+CREATE FUNCTION billing.invoice_generate(i_id integer) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -680,7 +659,7 @@ $$;
 -- Name: invoice_generate(integer, integer, boolean, timestamp without time zone, timestamp without time zone); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION invoice_generate(i_contractor_id integer, i_account_id integer, i_vendor_flag boolean, i_startdate timestamp without time zone, i_enddate timestamp without time zone) RETURNS integer
+CREATE FUNCTION billing.invoice_generate(i_contractor_id integer, i_account_id integer, i_vendor_flag boolean, i_startdate timestamp without time zone, i_enddate timestamp without time zone) RETURNS integer
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -751,13 +730,11 @@ END;
 $$;
 
 
-SET search_path = cdr, pg_catalog;
-
 --
 -- Name: cdr_i_tgf(); Type: FUNCTION; Schema: cdr; Owner: -
 --
 
-CREATE FUNCTION cdr_i_tgf() RETURNS trigger
+CREATE FUNCTION cdr.cdr_i_tgf() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN  IF ( NEW.time_start >= '2014-08-01 00:00:00+00' AND NEW.time_start < '2014-09-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201408 VALUES (NEW.*);
@@ -779,13 +756,11 @@ RETURN NULL;
 END; $$;
 
 
-SET search_path = event, pg_catalog;
-
 --
 -- Name: billing_insert_event(text, anyelement); Type: FUNCTION; Schema: event; Owner: -
 --
 
-CREATE FUNCTION billing_insert_event(ev_type text, ev_data anyelement) RETURNS bigint
+CREATE FUNCTION event.billing_insert_event(ev_type text, ev_data anyelement) RETURNS bigint
     LANGUAGE plpgsql
     AS $$
 begin
@@ -798,7 +773,7 @@ $$;
 -- Name: serialize(anyelement); Type: FUNCTION; Schema: event; Owner: -
 --
 
-CREATE FUNCTION serialize(i_data anyelement) RETURNS text
+CREATE FUNCTION event.serialize(i_data anyelement) RETURNS text
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -810,13 +785,11 @@ END;
 $$;
 
 
-SET search_path = reports, pg_catalog;
-
 --
 -- Name: cdr_interval_report(integer); Type: FUNCTION; Schema: reports; Owner: -
 --
 
-CREATE FUNCTION cdr_interval_report(i_id integer) RETURNS integer
+CREATE FUNCTION reports.cdr_interval_report(i_id integer) RETURNS integer
     LANGUAGE plpgsql COST 3000
     AS $$
 DECLARE
@@ -889,13 +862,11 @@ END;
 $$;
 
 
-SET search_path = stats, pg_catalog;
-
 --
 -- Name: update_rt_stats(cdr.cdr); Type: FUNCTION; Schema: stats; Owner: -
 --
 
-CREATE FUNCTION update_rt_stats(i_cdr cdr.cdr) RETURNS void
+CREATE FUNCTION stats.update_rt_stats(i_cdr cdr.cdr) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -966,13 +937,11 @@ END;
 $$;
 
 
-SET search_path = switch, pg_catalog;
-
 --
 -- Name: round(double precision); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION round(i_duration double precision) RETURNS integer
+CREATE FUNCTION switch.round(i_duration double precision) RETURNS integer
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -999,7 +968,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1266,7 +1235,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, character varying, integer, character varying, integer, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_rtp_stats_data json, i_global_tag character varying, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_rtp_stats_data json, i_global_tag character varying, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1464,7 +1433,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, character varying, integer, character varying, integer, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1663,7 +1632,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, character varying, integer, character varying, integer, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1863,7 +1832,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, character varying, integer, character varying, integer, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -2063,7 +2032,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, character varying, integer, character varying, integer, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint, character varying, character varying, character varying); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -2269,7 +2238,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, character varying, integer, character varying, integer, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint, character varying, character varying, character varying, integer, integer, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -2479,7 +2448,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, smallint, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint, character varying, character varying, character varying, integer, integer, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -2694,7 +2663,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, smallint, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint, character varying, character varying, character varying, integer, integer, smallint); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -2926,7 +2895,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, json, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, smallint, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint, character varying, character varying, character varying, integer, integer, smallint, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint, i_pai_in character varying, i_ppi_in character varying, i_privacy_in character varying, i_rpid_in character varying, i_rpid_privacy_in character varying, i_pai_out character varying, i_ppi_out character varying, i_privacy_out character varying, i_rpid_out character varying, i_rpid_privacy_out character varying) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint, i_pai_in character varying, i_ppi_in character varying, i_privacy_in character varying, i_rpid_in character varying, i_rpid_privacy_in character varying, i_pai_out character varying, i_ppi_out character varying, i_privacy_out character varying, i_rpid_out character varying, i_rpid_privacy_out character varying) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -3171,7 +3140,7 @@ $$;
 -- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, integer, boolean, json, character varying, character varying, json, smallint, bigint, json, json, boolean, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, integer, integer, integer, integer, integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, smallint, inet, integer, integer, integer, character varying, character varying, integer, character varying, smallint, character varying, character varying, character varying, integer, integer, smallint, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, boolean, boolean, boolean); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint, i_pai_in character varying, i_ppi_in character varying, i_privacy_in character varying, i_rpid_in character varying, i_rpid_privacy_in character varying, i_pai_out character varying, i_ppi_out character varying, i_privacy_out character varying, i_rpid_out character varying, i_rpid_privacy_out character varying, i_customer_acc_check_balance boolean, i_destination_reverse_billing boolean, i_dialpeer_reverse_billing boolean) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id integer, i_audio_recorded boolean, i_rtp_stats_data json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_customer_id character varying, i_vendor_id character varying, i_customer_acc_id character varying, i_vendor_acc_id character varying, i_customer_auth_id character varying, i_destination_id character varying, i_destination_prefix character varying, i_dialpeer_id character varying, i_dialpeer_prefix character varying, i_orig_gw_id character varying, i_term_gw_id character varying, i_routing_group_id character varying, i_rateplan_id character varying, i_destination_initial_rate character varying, i_destination_next_rate character varying, i_destination_initial_interval integer, i_destination_next_interval integer, i_destination_rate_policy_id integer, i_dialpeer_initial_interval integer, i_dialpeer_next_interval integer, i_dialpeer_next_rate character varying, i_destination_fee character varying, i_dialpeer_initial_rate character varying, i_dialpeer_fee character varying, i_dst_prefix_in character varying, i_dst_prefix_out character varying, i_src_prefix_in character varying, i_src_prefix_out character varying, i_src_name_in character varying, i_src_name_out character varying, i_diversion_in character varying, i_diversion_out character varying, i_auth_orig_protocol_id smallint, i_auth_orig_ip inet, i_auth_orig_port integer, i_dst_country_id integer, i_dst_network_id integer, i_dst_prefix_routing character varying, i_src_prefix_routing character varying, i_routing_plan_id integer, i_lrn character varying, i_lnp_database_id smallint, i_from_domain character varying, i_to_domain character varying, i_ruri_domain character varying, i_src_area_id integer, i_dst_area_id integer, i_routing_tag_id smallint, i_pai_in character varying, i_ppi_in character varying, i_privacy_in character varying, i_rpid_in character varying, i_rpid_privacy_in character varying, i_pai_out character varying, i_ppi_out character varying, i_privacy_out character varying, i_rpid_out character varying, i_rpid_privacy_out character varying, i_customer_acc_check_balance boolean, i_destination_reverse_billing boolean, i_dialpeer_reverse_billing boolean) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -3422,13 +3391,11 @@ END;
 $$;
 
 
-SET search_path = sys, pg_catalog;
-
 --
 -- Name: cdr_createtable(integer); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION cdr_createtable(i_offset integer) RETURNS void
+CREATE FUNCTION sys.cdr_createtable(i_offset integer) RETURNS void
     LANGUAGE plpgsql COST 10000
     AS $$
 DECLARE
@@ -3478,7 +3445,7 @@ $$;
 -- Name: cdr_export_data(character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION cdr_export_data(i_tbname character varying) RETURNS void
+CREATE FUNCTION sys.cdr_export_data(i_tbname character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -3494,7 +3461,7 @@ $$;
 -- Name: cdr_export_data(character varying, character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION cdr_export_data(i_tbname character varying, i_dir character varying) RETURNS void
+CREATE FUNCTION sys.cdr_export_data(i_tbname character varying, i_dir character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -3510,7 +3477,7 @@ $$;
 -- Name: cdr_reindex(character varying, character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION cdr_reindex(i_schema character varying, i_tbname character varying) RETURNS void
+CREATE FUNCTION sys.cdr_reindex(i_schema character varying, i_tbname character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -3568,7 +3535,7 @@ $$;
 -- Name: cdrtable_tgr_reload(); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION cdrtable_tgr_reload() RETURNS void
+CREATE FUNCTION sys.cdrtable_tgr_reload() RETURNS void
     LANGUAGE plpgsql
     AS $_$
 DECLARE
@@ -3609,13 +3576,11 @@ END;
 $_$;
 
 
-SET search_path = billing, pg_catalog;
-
 --
 -- Name: invoice_destinations; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE invoice_destinations (
+CREATE TABLE billing.invoice_destinations (
     id bigint NOT NULL,
     dst_prefix character varying,
     country_id integer,
@@ -3637,7 +3602,7 @@ CREATE TABLE invoice_destinations (
 -- Name: invoice_destinations_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE invoice_destinations_id_seq
+CREATE SEQUENCE billing.invoice_destinations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3649,14 +3614,14 @@ CREATE SEQUENCE invoice_destinations_id_seq
 -- Name: invoice_destinations_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE invoice_destinations_id_seq OWNED BY invoice_destinations.id;
+ALTER SEQUENCE billing.invoice_destinations_id_seq OWNED BY billing.invoice_destinations.id;
 
 
 --
 -- Name: invoice_documents; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE invoice_documents (
+CREATE TABLE billing.invoice_documents (
     id integer NOT NULL,
     invoice_id integer NOT NULL,
     data bytea,
@@ -3671,7 +3636,7 @@ CREATE TABLE invoice_documents (
 -- Name: invoice_documents_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE invoice_documents_id_seq
+CREATE SEQUENCE billing.invoice_documents_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3683,14 +3648,14 @@ CREATE SEQUENCE invoice_documents_id_seq
 -- Name: invoice_documents_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE invoice_documents_id_seq OWNED BY invoice_documents.id;
+ALTER SEQUENCE billing.invoice_documents_id_seq OWNED BY billing.invoice_documents.id;
 
 
 --
 -- Name: invoice_networks; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE invoice_networks (
+CREATE TABLE billing.invoice_networks (
     id bigint NOT NULL,
     country_id integer,
     network_id integer,
@@ -3711,7 +3676,7 @@ CREATE TABLE invoice_networks (
 -- Name: invoice_networks_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE invoice_networks_id_seq
+CREATE SEQUENCE billing.invoice_networks_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3723,14 +3688,14 @@ CREATE SEQUENCE invoice_networks_id_seq
 -- Name: invoice_networks_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE invoice_networks_id_seq OWNED BY invoice_networks.id;
+ALTER SEQUENCE billing.invoice_networks_id_seq OWNED BY billing.invoice_networks.id;
 
 
 --
 -- Name: invoice_states; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE invoice_states (
+CREATE TABLE billing.invoice_states (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -3740,7 +3705,7 @@ CREATE TABLE invoice_states (
 -- Name: invoice_types; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE invoice_types (
+CREATE TABLE billing.invoice_types (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -3750,7 +3715,7 @@ CREATE TABLE invoice_types (
 -- Name: invoices; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE invoices (
+CREATE TABLE billing.invoices (
     id integer NOT NULL,
     account_id integer NOT NULL,
     start_date timestamp with time zone NOT NULL,
@@ -3775,7 +3740,7 @@ CREATE TABLE invoices (
 -- Name: invoices_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE invoices_id_seq
+CREATE SEQUENCE billing.invoices_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3787,136 +3752,134 @@ CREATE SEQUENCE invoices_id_seq
 -- Name: invoices_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE invoices_id_seq OWNED BY invoices.id;
+ALTER SEQUENCE billing.invoices_id_seq OWNED BY billing.invoices.id;
 
-
-SET search_path = cdr, pg_catalog;
 
 --
 -- Name: cdr_201408; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201408 (
+CREATE TABLE cdr.cdr_201408 (
     CONSTRAINT cdr_201408_time_start_check CHECK (((time_start >= '2014-08-01'::date) AND (time_start < '2014-09-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201409; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201409 (
+CREATE TABLE cdr.cdr_201409 (
     CONSTRAINT cdr_201409_time_start_check CHECK (((time_start >= '2014-09-01'::date) AND (time_start < '2014-10-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201410; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201410 (
+CREATE TABLE cdr.cdr_201410 (
     CONSTRAINT cdr_201410_time_start_check CHECK (((time_start >= '2014-10-01'::date) AND (time_start < '2014-11-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201411; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201411 (
+CREATE TABLE cdr.cdr_201411 (
     CONSTRAINT cdr_201411_time_start_check CHECK (((time_start >= '2014-11-01'::date) AND (time_start < '2014-12-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201708; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201708 (
+CREATE TABLE cdr.cdr_201708 (
     CONSTRAINT cdr_201708_time_start_check CHECK (((time_start >= '2017-08-01'::date) AND (time_start < '2017-09-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201709; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201709 (
+CREATE TABLE cdr.cdr_201709 (
     CONSTRAINT cdr_201709_time_start_check CHECK (((time_start >= '2017-09-01'::date) AND (time_start < '2017-10-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201710; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201710 (
+CREATE TABLE cdr.cdr_201710 (
     CONSTRAINT cdr_201710_time_start_check CHECK (((time_start >= '2017-10-01'::date) AND (time_start < '2017-11-01'::date)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201712; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201712 (
+CREATE TABLE cdr.cdr_201712 (
     CONSTRAINT cdr_201712_time_start_check CHECK (((time_start >= '2017-12-01 02:00:00+02'::timestamp with time zone) AND (time_start < '2018-01-01 02:00:00+02'::timestamp with time zone)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201801; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201801 (
+CREATE TABLE cdr.cdr_201801 (
     CONSTRAINT cdr_201801_time_start_check CHECK (((time_start >= '2018-01-01 02:00:00+02'::timestamp with time zone) AND (time_start < '2018-02-01 02:00:00+02'::timestamp with time zone)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201802; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201802 (
+CREATE TABLE cdr.cdr_201802 (
     CONSTRAINT cdr_201802_time_start_check CHECK (((time_start >= '2018-02-01 02:00:00+02'::timestamp with time zone) AND (time_start < '2018-03-01 02:00:00+02'::timestamp with time zone)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201803; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201803 (
+CREATE TABLE cdr.cdr_201803 (
     CONSTRAINT cdr_201803_time_start_check CHECK (((time_start >= '2018-03-01 02:00:00+02'::timestamp with time zone) AND (time_start < '2018-04-01 03:00:00+03'::timestamp with time zone)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_201804; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_201804 (
+CREATE TABLE cdr.cdr_201804 (
     CONSTRAINT cdr_201804_time_start_check CHECK (((time_start >= '2018-04-01 03:00:00+03'::timestamp with time zone) AND (time_start < '2018-05-01 03:00:00+03'::timestamp with time zone)))
 )
-INHERITS (cdr);
+INHERITS (cdr.cdr);
 
 
 --
 -- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_archive (
+CREATE TABLE cdr.cdr_archive (
     id bigint,
     customer_id integer,
     vendor_id integer,
@@ -4062,7 +4025,7 @@ CREATE TABLE cdr_archive (
 -- Name: cdr_id_seq; Type: SEQUENCE; Schema: cdr; Owner: -
 --
 
-CREATE SEQUENCE cdr_id_seq
+CREATE SEQUENCE cdr.cdr_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4074,27 +4037,23 @@ CREATE SEQUENCE cdr_id_seq
 -- Name: cdr_id_seq; Type: SEQUENCE OWNED BY; Schema: cdr; Owner: -
 --
 
-ALTER SEQUENCE cdr_id_seq OWNED BY cdr.id;
+ALTER SEQUENCE cdr.cdr_id_seq OWNED BY cdr.cdr.id;
 
-
-SET search_path = public, pg_catalog;
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
 
-
-SET search_path = reports, pg_catalog;
 
 --
 -- Name: cdr_custom_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_custom_report (
+CREATE TABLE reports.cdr_custom_report (
     id integer NOT NULL,
     date_start timestamp with time zone,
     date_end timestamp with time zone,
@@ -4109,7 +4068,7 @@ CREATE TABLE cdr_custom_report (
 -- Name: cdr_custom_report_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_custom_report_data (
+CREATE TABLE reports.cdr_custom_report_data (
     customer_id integer,
     vendor_id integer,
     customer_acc_id integer,
@@ -4197,7 +4156,7 @@ CREATE TABLE cdr_custom_report_data (
 -- Name: cdr_custom_report_data_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE cdr_custom_report_data_id_seq
+CREATE SEQUENCE reports.cdr_custom_report_data_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4209,14 +4168,14 @@ CREATE SEQUENCE cdr_custom_report_data_id_seq
 -- Name: cdr_custom_report_data_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE cdr_custom_report_data_id_seq OWNED BY cdr_custom_report_data.id;
+ALTER SEQUENCE reports.cdr_custom_report_data_id_seq OWNED BY reports.cdr_custom_report_data.id;
 
 
 --
 -- Name: cdr_custom_report_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE cdr_custom_report_id_seq
+CREATE SEQUENCE reports.cdr_custom_report_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4228,14 +4187,14 @@ CREATE SEQUENCE cdr_custom_report_id_seq
 -- Name: cdr_custom_report_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE cdr_custom_report_id_seq OWNED BY cdr_custom_report.id;
+ALTER SEQUENCE reports.cdr_custom_report_id_seq OWNED BY reports.cdr_custom_report.id;
 
 
 --
 -- Name: cdr_custom_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_custom_report_schedulers (
+CREATE TABLE reports.cdr_custom_report_schedulers (
     id integer NOT NULL,
     created_at timestamp with time zone,
     period_id integer NOT NULL,
@@ -4252,7 +4211,7 @@ CREATE TABLE cdr_custom_report_schedulers (
 -- Name: cdr_custom_report_schedulers_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE cdr_custom_report_schedulers_id_seq
+CREATE SEQUENCE reports.cdr_custom_report_schedulers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4264,14 +4223,14 @@ CREATE SEQUENCE cdr_custom_report_schedulers_id_seq
 -- Name: cdr_custom_report_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE cdr_custom_report_schedulers_id_seq OWNED BY cdr_custom_report_schedulers.id;
+ALTER SEQUENCE reports.cdr_custom_report_schedulers_id_seq OWNED BY reports.cdr_custom_report_schedulers.id;
 
 
 --
 -- Name: cdr_interval_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_interval_report (
+CREATE TABLE reports.cdr_interval_report (
     id integer NOT NULL,
     date_start timestamp with time zone NOT NULL,
     date_end timestamp with time zone NOT NULL,
@@ -4288,7 +4247,7 @@ CREATE TABLE cdr_interval_report (
 -- Name: cdr_interval_report_aggrerator; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_interval_report_aggrerator (
+CREATE TABLE reports.cdr_interval_report_aggrerator (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -4298,7 +4257,7 @@ CREATE TABLE cdr_interval_report_aggrerator (
 -- Name: cdr_interval_report_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_interval_report_data (
+CREATE TABLE reports.cdr_interval_report_data (
     customer_id integer,
     vendor_id integer,
     customer_acc_id integer,
@@ -4380,7 +4339,7 @@ CREATE TABLE cdr_interval_report_data (
 -- Name: cdr_interval_report_data_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE cdr_interval_report_data_id_seq
+CREATE SEQUENCE reports.cdr_interval_report_data_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4392,14 +4351,14 @@ CREATE SEQUENCE cdr_interval_report_data_id_seq
 -- Name: cdr_interval_report_data_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE cdr_interval_report_data_id_seq OWNED BY cdr_interval_report_data.id;
+ALTER SEQUENCE reports.cdr_interval_report_data_id_seq OWNED BY reports.cdr_interval_report_data.id;
 
 
 --
 -- Name: cdr_interval_report_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE cdr_interval_report_id_seq
+CREATE SEQUENCE reports.cdr_interval_report_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4411,14 +4370,14 @@ CREATE SEQUENCE cdr_interval_report_id_seq
 -- Name: cdr_interval_report_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE cdr_interval_report_id_seq OWNED BY cdr_interval_report.id;
+ALTER SEQUENCE reports.cdr_interval_report_id_seq OWNED BY reports.cdr_interval_report.id;
 
 
 --
 -- Name: cdr_interval_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_interval_report_schedulers (
+CREATE TABLE reports.cdr_interval_report_schedulers (
     id integer NOT NULL,
     created_at timestamp with time zone,
     period_id integer NOT NULL,
@@ -4437,7 +4396,7 @@ CREATE TABLE cdr_interval_report_schedulers (
 -- Name: cdr_interval_report_schedulers_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE cdr_interval_report_schedulers_id_seq
+CREATE SEQUENCE reports.cdr_interval_report_schedulers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4449,14 +4408,14 @@ CREATE SEQUENCE cdr_interval_report_schedulers_id_seq
 -- Name: cdr_interval_report_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE cdr_interval_report_schedulers_id_seq OWNED BY cdr_interval_report_schedulers.id;
+ALTER SEQUENCE reports.cdr_interval_report_schedulers_id_seq OWNED BY reports.cdr_interval_report_schedulers.id;
 
 
 --
 -- Name: customer_traffic_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE customer_traffic_report (
+CREATE TABLE reports.customer_traffic_report (
     id bigint NOT NULL,
     created_at timestamp with time zone,
     date_start timestamp with time zone,
@@ -4469,7 +4428,7 @@ CREATE TABLE customer_traffic_report (
 -- Name: customer_traffic_report_data_by_destination; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE customer_traffic_report_data_by_destination (
+CREATE TABLE reports.customer_traffic_report_data_by_destination (
     id bigint NOT NULL,
     report_id integer NOT NULL,
     destination_prefix character varying,
@@ -4493,7 +4452,7 @@ CREATE TABLE customer_traffic_report_data_by_destination (
 -- Name: customer_traffic_report_data_by_destination_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE customer_traffic_report_data_by_destination_id_seq
+CREATE SEQUENCE reports.customer_traffic_report_data_by_destination_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4505,14 +4464,14 @@ CREATE SEQUENCE customer_traffic_report_data_by_destination_id_seq
 -- Name: customer_traffic_report_data_by_destination_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE customer_traffic_report_data_by_destination_id_seq OWNED BY customer_traffic_report_data_by_destination.id;
+ALTER SEQUENCE reports.customer_traffic_report_data_by_destination_id_seq OWNED BY reports.customer_traffic_report_data_by_destination.id;
 
 
 --
 -- Name: customer_traffic_report_data_by_vendor; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE customer_traffic_report_data_by_vendor (
+CREATE TABLE reports.customer_traffic_report_data_by_vendor (
     id bigint NOT NULL,
     report_id integer NOT NULL,
     vendor_id integer,
@@ -4534,7 +4493,7 @@ CREATE TABLE customer_traffic_report_data_by_vendor (
 -- Name: customer_traffic_report_data_full; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE customer_traffic_report_data_full (
+CREATE TABLE reports.customer_traffic_report_data_full (
     id bigint NOT NULL,
     report_id integer NOT NULL,
     vendor_id integer,
@@ -4559,7 +4518,7 @@ CREATE TABLE customer_traffic_report_data_full (
 -- Name: customer_traffic_report_data_full_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE customer_traffic_report_data_full_id_seq
+CREATE SEQUENCE reports.customer_traffic_report_data_full_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4571,14 +4530,14 @@ CREATE SEQUENCE customer_traffic_report_data_full_id_seq
 -- Name: customer_traffic_report_data_full_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE customer_traffic_report_data_full_id_seq OWNED BY customer_traffic_report_data_full.id;
+ALTER SEQUENCE reports.customer_traffic_report_data_full_id_seq OWNED BY reports.customer_traffic_report_data_full.id;
 
 
 --
 -- Name: customer_traffic_report_data_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE customer_traffic_report_data_id_seq
+CREATE SEQUENCE reports.customer_traffic_report_data_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4590,14 +4549,14 @@ CREATE SEQUENCE customer_traffic_report_data_id_seq
 -- Name: customer_traffic_report_data_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE customer_traffic_report_data_id_seq OWNED BY customer_traffic_report_data_by_vendor.id;
+ALTER SEQUENCE reports.customer_traffic_report_data_id_seq OWNED BY reports.customer_traffic_report_data_by_vendor.id;
 
 
 --
 -- Name: customer_traffic_report_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE customer_traffic_report_id_seq
+CREATE SEQUENCE reports.customer_traffic_report_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4609,14 +4568,14 @@ CREATE SEQUENCE customer_traffic_report_id_seq
 -- Name: customer_traffic_report_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE customer_traffic_report_id_seq OWNED BY customer_traffic_report.id;
+ALTER SEQUENCE reports.customer_traffic_report_id_seq OWNED BY reports.customer_traffic_report.id;
 
 
 --
 -- Name: customer_traffic_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE customer_traffic_report_schedulers (
+CREATE TABLE reports.customer_traffic_report_schedulers (
     id integer NOT NULL,
     created_at timestamp with time zone,
     period_id integer NOT NULL,
@@ -4631,7 +4590,7 @@ CREATE TABLE customer_traffic_report_schedulers (
 -- Name: customer_traffic_report_schedulers_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE customer_traffic_report_schedulers_id_seq
+CREATE SEQUENCE reports.customer_traffic_report_schedulers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4643,14 +4602,14 @@ CREATE SEQUENCE customer_traffic_report_schedulers_id_seq
 -- Name: customer_traffic_report_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE customer_traffic_report_schedulers_id_seq OWNED BY customer_traffic_report_schedulers.id;
+ALTER SEQUENCE reports.customer_traffic_report_schedulers_id_seq OWNED BY reports.customer_traffic_report_schedulers.id;
 
 
 --
 -- Name: report_vendors; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE report_vendors (
+CREATE TABLE reports.report_vendors (
     id integer NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     start_date timestamp with time zone NOT NULL,
@@ -4662,7 +4621,7 @@ CREATE TABLE report_vendors (
 -- Name: report_vendors_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE report_vendors_data (
+CREATE TABLE reports.report_vendors_data (
     id bigint NOT NULL,
     report_id integer NOT NULL,
     calls_count bigint
@@ -4673,7 +4632,7 @@ CREATE TABLE report_vendors_data (
 -- Name: report_vendors_data_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE report_vendors_data_id_seq
+CREATE SEQUENCE reports.report_vendors_data_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4685,14 +4644,14 @@ CREATE SEQUENCE report_vendors_data_id_seq
 -- Name: report_vendors_data_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE report_vendors_data_id_seq OWNED BY report_vendors_data.id;
+ALTER SEQUENCE reports.report_vendors_data_id_seq OWNED BY reports.report_vendors_data.id;
 
 
 --
 -- Name: report_vendors_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE report_vendors_id_seq
+CREATE SEQUENCE reports.report_vendors_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4704,14 +4663,14 @@ CREATE SEQUENCE report_vendors_id_seq
 -- Name: report_vendors_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE report_vendors_id_seq OWNED BY report_vendors.id;
+ALTER SEQUENCE reports.report_vendors_id_seq OWNED BY reports.report_vendors.id;
 
 
 --
 -- Name: scheduler_periods; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE scheduler_periods (
+CREATE TABLE reports.scheduler_periods (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -4721,7 +4680,7 @@ CREATE TABLE scheduler_periods (
 -- Name: vendor_traffic_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE vendor_traffic_report (
+CREATE TABLE reports.vendor_traffic_report (
     id bigint NOT NULL,
     created_at timestamp with time zone,
     date_start timestamp with time zone,
@@ -4734,7 +4693,7 @@ CREATE TABLE vendor_traffic_report (
 -- Name: vendor_traffic_report_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE vendor_traffic_report_data (
+CREATE TABLE reports.vendor_traffic_report_data (
     id bigint NOT NULL,
     report_id integer NOT NULL,
     customer_id integer,
@@ -4756,7 +4715,7 @@ CREATE TABLE vendor_traffic_report_data (
 -- Name: vendor_traffic_report_data_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE vendor_traffic_report_data_id_seq
+CREATE SEQUENCE reports.vendor_traffic_report_data_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4768,14 +4727,14 @@ CREATE SEQUENCE vendor_traffic_report_data_id_seq
 -- Name: vendor_traffic_report_data_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE vendor_traffic_report_data_id_seq OWNED BY vendor_traffic_report_data.id;
+ALTER SEQUENCE reports.vendor_traffic_report_data_id_seq OWNED BY reports.vendor_traffic_report_data.id;
 
 
 --
 -- Name: vendor_traffic_report_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE vendor_traffic_report_id_seq
+CREATE SEQUENCE reports.vendor_traffic_report_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4787,14 +4746,14 @@ CREATE SEQUENCE vendor_traffic_report_id_seq
 -- Name: vendor_traffic_report_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE vendor_traffic_report_id_seq OWNED BY vendor_traffic_report.id;
+ALTER SEQUENCE reports.vendor_traffic_report_id_seq OWNED BY reports.vendor_traffic_report.id;
 
 
 --
 -- Name: vendor_traffic_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE TABLE vendor_traffic_report_schedulers (
+CREATE TABLE reports.vendor_traffic_report_schedulers (
     id integer NOT NULL,
     created_at timestamp with time zone,
     period_id integer NOT NULL,
@@ -4809,7 +4768,7 @@ CREATE TABLE vendor_traffic_report_schedulers (
 -- Name: vendor_traffic_report_schedulers_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
 --
 
-CREATE SEQUENCE vendor_traffic_report_schedulers_id_seq
+CREATE SEQUENCE reports.vendor_traffic_report_schedulers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4821,16 +4780,14 @@ CREATE SEQUENCE vendor_traffic_report_schedulers_id_seq
 -- Name: vendor_traffic_report_schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
 --
 
-ALTER SEQUENCE vendor_traffic_report_schedulers_id_seq OWNED BY vendor_traffic_report_schedulers.id;
+ALTER SEQUENCE reports.vendor_traffic_report_schedulers_id_seq OWNED BY reports.vendor_traffic_report_schedulers.id;
 
-
-SET search_path = stats, pg_catalog;
 
 --
 -- Name: active_call_customer_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_customer_accounts (
+CREATE TABLE stats.active_call_customer_accounts (
     id bigint NOT NULL,
     account_id integer NOT NULL,
     count integer NOT NULL,
@@ -4842,7 +4799,7 @@ CREATE TABLE active_call_customer_accounts (
 -- Name: active_call_customer_accounts_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_customer_accounts_hourly (
+CREATE TABLE stats.active_call_customer_accounts_hourly (
     id bigint NOT NULL,
     account_id integer NOT NULL,
     max_count integer NOT NULL,
@@ -4857,7 +4814,7 @@ CREATE TABLE active_call_customer_accounts_hourly (
 -- Name: active_call_customer_accounts_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_customer_accounts_hourly_id_seq
+CREATE SEQUENCE stats.active_call_customer_accounts_hourly_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4869,14 +4826,14 @@ CREATE SEQUENCE active_call_customer_accounts_hourly_id_seq
 -- Name: active_call_customer_accounts_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_customer_accounts_hourly_id_seq OWNED BY active_call_customer_accounts_hourly.id;
+ALTER SEQUENCE stats.active_call_customer_accounts_hourly_id_seq OWNED BY stats.active_call_customer_accounts_hourly.id;
 
 
 --
 -- Name: active_call_customer_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_customer_accounts_id_seq
+CREATE SEQUENCE stats.active_call_customer_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4888,14 +4845,14 @@ CREATE SEQUENCE active_call_customer_accounts_id_seq
 -- Name: active_call_customer_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_customer_accounts_id_seq OWNED BY active_call_customer_accounts.id;
+ALTER SEQUENCE stats.active_call_customer_accounts_id_seq OWNED BY stats.active_call_customer_accounts.id;
 
 
 --
 -- Name: active_call_orig_gateways; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_orig_gateways (
+CREATE TABLE stats.active_call_orig_gateways (
     id bigint NOT NULL,
     gateway_id integer NOT NULL,
     count integer NOT NULL,
@@ -4907,7 +4864,7 @@ CREATE TABLE active_call_orig_gateways (
 -- Name: active_call_orig_gateways_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_orig_gateways_hourly (
+CREATE TABLE stats.active_call_orig_gateways_hourly (
     id bigint NOT NULL,
     gateway_id integer NOT NULL,
     max_count integer NOT NULL,
@@ -4922,7 +4879,7 @@ CREATE TABLE active_call_orig_gateways_hourly (
 -- Name: active_call_orig_gateways_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_orig_gateways_hourly_id_seq
+CREATE SEQUENCE stats.active_call_orig_gateways_hourly_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4934,14 +4891,14 @@ CREATE SEQUENCE active_call_orig_gateways_hourly_id_seq
 -- Name: active_call_orig_gateways_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_orig_gateways_hourly_id_seq OWNED BY active_call_orig_gateways_hourly.id;
+ALTER SEQUENCE stats.active_call_orig_gateways_hourly_id_seq OWNED BY stats.active_call_orig_gateways_hourly.id;
 
 
 --
 -- Name: active_call_orig_gateways_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_orig_gateways_id_seq
+CREATE SEQUENCE stats.active_call_orig_gateways_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4953,14 +4910,14 @@ CREATE SEQUENCE active_call_orig_gateways_id_seq
 -- Name: active_call_orig_gateways_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_orig_gateways_id_seq OWNED BY active_call_orig_gateways.id;
+ALTER SEQUENCE stats.active_call_orig_gateways_id_seq OWNED BY stats.active_call_orig_gateways.id;
 
 
 --
 -- Name: active_call_term_gateways; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_term_gateways (
+CREATE TABLE stats.active_call_term_gateways (
     id bigint NOT NULL,
     gateway_id integer NOT NULL,
     count integer NOT NULL,
@@ -4972,7 +4929,7 @@ CREATE TABLE active_call_term_gateways (
 -- Name: active_call_term_gateways_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_term_gateways_hourly (
+CREATE TABLE stats.active_call_term_gateways_hourly (
     id bigint NOT NULL,
     gateway_id integer NOT NULL,
     max_count integer NOT NULL,
@@ -4987,7 +4944,7 @@ CREATE TABLE active_call_term_gateways_hourly (
 -- Name: active_call_term_gateways_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_term_gateways_hourly_id_seq
+CREATE SEQUENCE stats.active_call_term_gateways_hourly_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -4999,14 +4956,14 @@ CREATE SEQUENCE active_call_term_gateways_hourly_id_seq
 -- Name: active_call_term_gateways_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_term_gateways_hourly_id_seq OWNED BY active_call_term_gateways_hourly.id;
+ALTER SEQUENCE stats.active_call_term_gateways_hourly_id_seq OWNED BY stats.active_call_term_gateways_hourly.id;
 
 
 --
 -- Name: active_call_term_gateways_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_term_gateways_id_seq
+CREATE SEQUENCE stats.active_call_term_gateways_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5018,14 +4975,14 @@ CREATE SEQUENCE active_call_term_gateways_id_seq
 -- Name: active_call_term_gateways_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_term_gateways_id_seq OWNED BY active_call_term_gateways.id;
+ALTER SEQUENCE stats.active_call_term_gateways_id_seq OWNED BY stats.active_call_term_gateways.id;
 
 
 --
 -- Name: active_call_vendor_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_vendor_accounts (
+CREATE TABLE stats.active_call_vendor_accounts (
     id bigint NOT NULL,
     account_id integer NOT NULL,
     count integer NOT NULL,
@@ -5037,7 +4994,7 @@ CREATE TABLE active_call_vendor_accounts (
 -- Name: active_call_vendor_accounts_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_call_vendor_accounts_hourly (
+CREATE TABLE stats.active_call_vendor_accounts_hourly (
     id bigint NOT NULL,
     account_id integer NOT NULL,
     max_count integer NOT NULL,
@@ -5052,7 +5009,7 @@ CREATE TABLE active_call_vendor_accounts_hourly (
 -- Name: active_call_vendor_accounts_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_vendor_accounts_hourly_id_seq
+CREATE SEQUENCE stats.active_call_vendor_accounts_hourly_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5064,14 +5021,14 @@ CREATE SEQUENCE active_call_vendor_accounts_hourly_id_seq
 -- Name: active_call_vendor_accounts_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_vendor_accounts_hourly_id_seq OWNED BY active_call_vendor_accounts_hourly.id;
+ALTER SEQUENCE stats.active_call_vendor_accounts_hourly_id_seq OWNED BY stats.active_call_vendor_accounts_hourly.id;
 
 
 --
 -- Name: active_call_vendor_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_call_vendor_accounts_id_seq
+CREATE SEQUENCE stats.active_call_vendor_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5083,14 +5040,14 @@ CREATE SEQUENCE active_call_vendor_accounts_id_seq
 -- Name: active_call_vendor_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_call_vendor_accounts_id_seq OWNED BY active_call_vendor_accounts.id;
+ALTER SEQUENCE stats.active_call_vendor_accounts_id_seq OWNED BY stats.active_call_vendor_accounts.id;
 
 
 --
 -- Name: active_calls; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_calls (
+CREATE TABLE stats.active_calls (
     id bigint NOT NULL,
     node_id integer NOT NULL,
     count integer NOT NULL,
@@ -5102,7 +5059,7 @@ CREATE TABLE active_calls (
 -- Name: active_calls_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE active_calls_hourly (
+CREATE TABLE stats.active_calls_hourly (
     id bigint NOT NULL,
     node_id integer NOT NULL,
     max_count integer NOT NULL,
@@ -5117,7 +5074,7 @@ CREATE TABLE active_calls_hourly (
 -- Name: active_calls_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_calls_hourly_id_seq
+CREATE SEQUENCE stats.active_calls_hourly_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5129,14 +5086,14 @@ CREATE SEQUENCE active_calls_hourly_id_seq
 -- Name: active_calls_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_calls_hourly_id_seq OWNED BY active_calls_hourly.id;
+ALTER SEQUENCE stats.active_calls_hourly_id_seq OWNED BY stats.active_calls_hourly.id;
 
 
 --
 -- Name: active_calls_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE active_calls_id_seq
+CREATE SEQUENCE stats.active_calls_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5148,14 +5105,14 @@ CREATE SEQUENCE active_calls_id_seq
 -- Name: active_calls_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE active_calls_id_seq OWNED BY active_calls.id;
+ALTER SEQUENCE stats.active_calls_id_seq OWNED BY stats.active_calls.id;
 
 
 --
 -- Name: termination_quality_stats; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE termination_quality_stats (
+CREATE TABLE stats.termination_quality_stats (
     id bigint NOT NULL,
     dialpeer_id bigint,
     gateway_id integer,
@@ -5172,7 +5129,7 @@ CREATE TABLE termination_quality_stats (
 -- Name: termination_quality_stats_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE termination_quality_stats_id_seq
+CREATE SEQUENCE stats.termination_quality_stats_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5184,14 +5141,14 @@ CREATE SEQUENCE termination_quality_stats_id_seq
 -- Name: termination_quality_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE termination_quality_stats_id_seq OWNED BY termination_quality_stats.id;
+ALTER SEQUENCE stats.termination_quality_stats_id_seq OWNED BY stats.termination_quality_stats.id;
 
 
 --
 -- Name: traffic_customer_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE traffic_customer_accounts (
+CREATE TABLE stats.traffic_customer_accounts (
     id bigint NOT NULL,
     account_id integer NOT NULL,
     "timestamp" timestamp with time zone NOT NULL,
@@ -5206,7 +5163,7 @@ CREATE TABLE traffic_customer_accounts (
 -- Name: traffic_customer_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE traffic_customer_accounts_id_seq
+CREATE SEQUENCE stats.traffic_customer_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5218,14 +5175,14 @@ CREATE SEQUENCE traffic_customer_accounts_id_seq
 -- Name: traffic_customer_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE traffic_customer_accounts_id_seq OWNED BY traffic_customer_accounts.id;
+ALTER SEQUENCE stats.traffic_customer_accounts_id_seq OWNED BY stats.traffic_customer_accounts.id;
 
 
 --
 -- Name: traffic_vendor_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE TABLE traffic_vendor_accounts (
+CREATE TABLE stats.traffic_vendor_accounts (
     id bigint NOT NULL,
     account_id integer NOT NULL,
     "timestamp" timestamp with time zone NOT NULL,
@@ -5240,7 +5197,7 @@ CREATE TABLE traffic_vendor_accounts (
 -- Name: traffic_vendor_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE traffic_vendor_accounts_id_seq
+CREATE SEQUENCE stats.traffic_vendor_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5252,16 +5209,14 @@ CREATE SEQUENCE traffic_vendor_accounts_id_seq
 -- Name: traffic_vendor_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE traffic_vendor_accounts_id_seq OWNED BY traffic_vendor_accounts.id;
+ALTER SEQUENCE stats.traffic_vendor_accounts_id_seq OWNED BY stats.traffic_vendor_accounts.id;
 
-
-SET search_path = sys, pg_catalog;
 
 --
 -- Name: call_duration_round_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE call_duration_round_modes (
+CREATE TABLE sys.call_duration_round_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -5271,7 +5226,7 @@ CREATE TABLE call_duration_round_modes (
 -- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE cdr_tables (
+CREATE TABLE sys.cdr_tables (
     id integer NOT NULL,
     name character varying NOT NULL,
     readable boolean DEFAULT true NOT NULL,
@@ -5286,7 +5241,7 @@ CREATE TABLE cdr_tables (
 -- Name: cdr_tables_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE cdr_tables_id_seq
+CREATE SEQUENCE sys.cdr_tables_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5298,449 +5253,437 @@ CREATE SEQUENCE cdr_tables_id_seq
 -- Name: cdr_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE cdr_tables_id_seq OWNED BY cdr_tables.id;
+ALTER SEQUENCE sys.cdr_tables_id_seq OWNED BY sys.cdr_tables.id;
 
 
 --
 -- Name: config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE config (
+CREATE TABLE sys.config (
     id smallint NOT NULL,
     call_duration_round_mode_id smallint DEFAULT 1 NOT NULL
 );
 
 
-SET search_path = billing, pg_catalog;
-
 --
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoice_destinations ALTER COLUMN id SET DEFAULT nextval('invoice_destinations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY invoice_documents ALTER COLUMN id SET DEFAULT nextval('invoice_documents_id_seq'::regclass);
+ALTER TABLE ONLY billing.invoice_destinations ALTER COLUMN id SET DEFAULT nextval('billing.invoice_destinations_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoice_networks ALTER COLUMN id SET DEFAULT nextval('invoice_networks_id_seq'::regclass);
+ALTER TABLE ONLY billing.invoice_documents ALTER COLUMN id SET DEFAULT nextval('billing.invoice_documents_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoices ALTER COLUMN id SET DEFAULT nextval('invoices_id_seq'::regclass);
+ALTER TABLE ONLY billing.invoice_networks ALTER COLUMN id SET DEFAULT nextval('billing.invoice_networks_id_seq'::regclass);
 
 
-SET search_path = cdr, pg_catalog;
+--
+-- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoices ALTER COLUMN id SET DEFAULT nextval('billing.invoices_id_seq'::regclass);
+
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201408 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201408 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201408 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201408 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201409 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201409 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201409 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201409 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201410 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201410 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201410 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201410 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201411 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201411 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201411 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201411 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201708 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201708 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201708 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201708 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201709 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201709 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201709 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201709 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201710 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201710 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201710 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201710 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201712 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201712 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201712 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201712 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201801 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201801 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201801 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201801 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201802 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201802 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201802 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201802 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201803 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201803 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201803 ALTER COLUMN dump_level_id SET DEFAULT 0;
+ALTER TABLE ONLY cdr.cdr_201803 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201804 ALTER COLUMN id SET DEFAULT nextval('cdr_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201804 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
 -- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
-ALTER TABLE ONLY cdr_201804 ALTER COLUMN dump_level_id SET DEFAULT 0;
-
-
-SET search_path = reports, pg_catalog;
-
---
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
---
-
-ALTER TABLE ONLY cdr_custom_report ALTER COLUMN id SET DEFAULT nextval('cdr_custom_report_id_seq'::regclass);
+ALTER TABLE ONLY cdr.cdr_201804 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_custom_report_data ALTER COLUMN id SET DEFAULT nextval('cdr_custom_report_data_id_seq'::regclass);
+ALTER TABLE ONLY reports.cdr_custom_report ALTER COLUMN id SET DEFAULT nextval('reports.cdr_custom_report_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_custom_report_schedulers ALTER COLUMN id SET DEFAULT nextval('cdr_custom_report_schedulers_id_seq'::regclass);
+ALTER TABLE ONLY reports.cdr_custom_report_data ALTER COLUMN id SET DEFAULT nextval('reports.cdr_custom_report_data_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_interval_report ALTER COLUMN id SET DEFAULT nextval('cdr_interval_report_id_seq'::regclass);
+ALTER TABLE ONLY reports.cdr_custom_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.cdr_custom_report_schedulers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_interval_report_data ALTER COLUMN id SET DEFAULT nextval('cdr_interval_report_data_id_seq'::regclass);
+ALTER TABLE ONLY reports.cdr_interval_report ALTER COLUMN id SET DEFAULT nextval('reports.cdr_interval_report_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_interval_report_schedulers ALTER COLUMN id SET DEFAULT nextval('cdr_interval_report_schedulers_id_seq'::regclass);
+ALTER TABLE ONLY reports.cdr_interval_report_data ALTER COLUMN id SET DEFAULT nextval('reports.cdr_interval_report_data_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report ALTER COLUMN id SET DEFAULT nextval('customer_traffic_report_id_seq'::regclass);
+ALTER TABLE ONLY reports.cdr_interval_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.cdr_interval_report_schedulers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_by_destination ALTER COLUMN id SET DEFAULT nextval('customer_traffic_report_data_by_destination_id_seq'::regclass);
+ALTER TABLE ONLY reports.customer_traffic_report ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_by_vendor ALTER COLUMN id SET DEFAULT nextval('customer_traffic_report_data_id_seq'::regclass);
+ALTER TABLE ONLY reports.customer_traffic_report_data_by_destination ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_data_by_destination_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_full ALTER COLUMN id SET DEFAULT nextval('customer_traffic_report_data_full_id_seq'::regclass);
+ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_data_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report_schedulers ALTER COLUMN id SET DEFAULT nextval('customer_traffic_report_schedulers_id_seq'::regclass);
+ALTER TABLE ONLY reports.customer_traffic_report_data_full ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_data_full_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY report_vendors ALTER COLUMN id SET DEFAULT nextval('report_vendors_id_seq'::regclass);
+ALTER TABLE ONLY reports.customer_traffic_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_schedulers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY report_vendors_data ALTER COLUMN id SET DEFAULT nextval('report_vendors_data_id_seq'::regclass);
+ALTER TABLE ONLY reports.report_vendors ALTER COLUMN id SET DEFAULT nextval('reports.report_vendors_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY vendor_traffic_report ALTER COLUMN id SET DEFAULT nextval('vendor_traffic_report_id_seq'::regclass);
+ALTER TABLE ONLY reports.report_vendors_data ALTER COLUMN id SET DEFAULT nextval('reports.report_vendors_data_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY vendor_traffic_report_data ALTER COLUMN id SET DEFAULT nextval('vendor_traffic_report_data_id_seq'::regclass);
+ALTER TABLE ONLY reports.vendor_traffic_report ALTER COLUMN id SET DEFAULT nextval('reports.vendor_traffic_report_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY vendor_traffic_report_schedulers ALTER COLUMN id SET DEFAULT nextval('vendor_traffic_report_schedulers_id_seq'::regclass);
+ALTER TABLE ONLY reports.vendor_traffic_report_data ALTER COLUMN id SET DEFAULT nextval('reports.vendor_traffic_report_data_id_seq'::regclass);
 
-
-SET search_path = stats, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY active_call_customer_accounts ALTER COLUMN id SET DEFAULT nextval('active_call_customer_accounts_id_seq'::regclass);
+ALTER TABLE ONLY reports.vendor_traffic_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.vendor_traffic_report_schedulers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_customer_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('active_call_customer_accounts_hourly_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_customer_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_customer_accounts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_orig_gateways ALTER COLUMN id SET DEFAULT nextval('active_call_orig_gateways_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_customer_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_customer_accounts_hourly_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_orig_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('active_call_orig_gateways_hourly_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_orig_gateways ALTER COLUMN id SET DEFAULT nextval('stats.active_call_orig_gateways_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_term_gateways ALTER COLUMN id SET DEFAULT nextval('active_call_term_gateways_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_orig_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_orig_gateways_hourly_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_term_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('active_call_term_gateways_hourly_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_term_gateways ALTER COLUMN id SET DEFAULT nextval('stats.active_call_term_gateways_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('active_call_vendor_accounts_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_term_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_term_gateways_hourly_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_call_vendor_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('active_call_vendor_accounts_hourly_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_vendor_accounts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_calls ALTER COLUMN id SET DEFAULT nextval('active_calls_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_vendor_accounts_hourly_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY active_calls_hourly ALTER COLUMN id SET DEFAULT nextval('active_calls_hourly_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_calls ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY termination_quality_stats ALTER COLUMN id SET DEFAULT nextval('termination_quality_stats_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_calls_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_hourly_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY traffic_customer_accounts ALTER COLUMN id SET DEFAULT nextval('traffic_customer_accounts_id_seq'::regclass);
+ALTER TABLE ONLY stats.termination_quality_stats ALTER COLUMN id SET DEFAULT nextval('stats.termination_quality_stats_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('traffic_vendor_accounts_id_seq'::regclass);
+ALTER TABLE ONLY stats.traffic_customer_accounts ALTER COLUMN id SET DEFAULT nextval('stats.traffic_customer_accounts_id_seq'::regclass);
 
 
-SET search_path = sys, pg_catalog;
+--
+-- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+--
+
+ALTER TABLE ONLY stats.traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('stats.traffic_vendor_accounts_id_seq'::regclass);
+
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY cdr_tables ALTER COLUMN id SET DEFAULT nextval('cdr_tables_id_seq'::regclass);
+ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdr_tables_id_seq'::regclass);
 
-
-SET search_path = billing, pg_catalog;
 
 --
 -- Name: invoice_destinations_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_destinations
+ALTER TABLE ONLY billing.invoice_destinations
     ADD CONSTRAINT invoice_destinations_pkey PRIMARY KEY (id);
 
 
@@ -5748,7 +5691,7 @@ ALTER TABLE ONLY invoice_destinations
 -- Name: invoice_documents_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_documents
+ALTER TABLE ONLY billing.invoice_documents
     ADD CONSTRAINT invoice_documents_pkey PRIMARY KEY (id);
 
 
@@ -5756,7 +5699,7 @@ ALTER TABLE ONLY invoice_documents
 -- Name: invoice_networks_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_networks
+ALTER TABLE ONLY billing.invoice_networks
     ADD CONSTRAINT invoice_networks_pkey PRIMARY KEY (id);
 
 
@@ -5764,7 +5707,7 @@ ALTER TABLE ONLY invoice_networks
 -- Name: invoice_states_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_states
+ALTER TABLE ONLY billing.invoice_states
     ADD CONSTRAINT invoice_states_name_key UNIQUE (name);
 
 
@@ -5772,7 +5715,7 @@ ALTER TABLE ONLY invoice_states
 -- Name: invoice_states_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_states
+ALTER TABLE ONLY billing.invoice_states
     ADD CONSTRAINT invoice_states_pkey PRIMARY KEY (id);
 
 
@@ -5780,7 +5723,7 @@ ALTER TABLE ONLY invoice_states
 -- Name: invoice_types_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_types
+ALTER TABLE ONLY billing.invoice_types
     ADD CONSTRAINT invoice_types_name_key UNIQUE (name);
 
 
@@ -5788,7 +5731,7 @@ ALTER TABLE ONLY invoice_types
 -- Name: invoice_types_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoice_types
+ALTER TABLE ONLY billing.invoice_types
     ADD CONSTRAINT invoice_types_pkey PRIMARY KEY (id);
 
 
@@ -5796,17 +5739,15 @@ ALTER TABLE ONLY invoice_types
 -- Name: invoices_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY invoices
+ALTER TABLE ONLY billing.invoices
     ADD CONSTRAINT invoices_pkey PRIMARY KEY (id);
 
-
-SET search_path = cdr, pg_catalog;
 
 --
 -- Name: cdr_201408_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201408
+ALTER TABLE ONLY cdr.cdr_201408
     ADD CONSTRAINT cdr_201408_pkey PRIMARY KEY (id);
 
 
@@ -5814,7 +5755,7 @@ ALTER TABLE ONLY cdr_201408
 -- Name: cdr_201409_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201409
+ALTER TABLE ONLY cdr.cdr_201409
     ADD CONSTRAINT cdr_201409_pkey PRIMARY KEY (id);
 
 
@@ -5822,7 +5763,7 @@ ALTER TABLE ONLY cdr_201409
 -- Name: cdr_201410_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201410
+ALTER TABLE ONLY cdr.cdr_201410
     ADD CONSTRAINT cdr_201410_pkey PRIMARY KEY (id);
 
 
@@ -5830,7 +5771,7 @@ ALTER TABLE ONLY cdr_201410
 -- Name: cdr_201411_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201411
+ALTER TABLE ONLY cdr.cdr_201411
     ADD CONSTRAINT cdr_201411_pkey PRIMARY KEY (id);
 
 
@@ -5838,7 +5779,7 @@ ALTER TABLE ONLY cdr_201411
 -- Name: cdr_201708_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201708
+ALTER TABLE ONLY cdr.cdr_201708
     ADD CONSTRAINT cdr_201708_pkey PRIMARY KEY (id);
 
 
@@ -5846,7 +5787,7 @@ ALTER TABLE ONLY cdr_201708
 -- Name: cdr_201709_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201709
+ALTER TABLE ONLY cdr.cdr_201709
     ADD CONSTRAINT cdr_201709_pkey PRIMARY KEY (id);
 
 
@@ -5854,7 +5795,7 @@ ALTER TABLE ONLY cdr_201709
 -- Name: cdr_201710_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201710
+ALTER TABLE ONLY cdr.cdr_201710
     ADD CONSTRAINT cdr_201710_pkey PRIMARY KEY (id);
 
 
@@ -5862,7 +5803,7 @@ ALTER TABLE ONLY cdr_201710
 -- Name: cdr_201712_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201712
+ALTER TABLE ONLY cdr.cdr_201712
     ADD CONSTRAINT cdr_201712_pkey PRIMARY KEY (id);
 
 
@@ -5870,7 +5811,7 @@ ALTER TABLE ONLY cdr_201712
 -- Name: cdr_201801_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201801
+ALTER TABLE ONLY cdr.cdr_201801
     ADD CONSTRAINT cdr_201801_pkey PRIMARY KEY (id);
 
 
@@ -5878,7 +5819,7 @@ ALTER TABLE ONLY cdr_201801
 -- Name: cdr_201802_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201802
+ALTER TABLE ONLY cdr.cdr_201802
     ADD CONSTRAINT cdr_201802_pkey PRIMARY KEY (id);
 
 
@@ -5886,7 +5827,7 @@ ALTER TABLE ONLY cdr_201802
 -- Name: cdr_201803_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201803
+ALTER TABLE ONLY cdr.cdr_201803
     ADD CONSTRAINT cdr_201803_pkey PRIMARY KEY (id);
 
 
@@ -5894,7 +5835,7 @@ ALTER TABLE ONLY cdr_201803
 -- Name: cdr_201804_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_201804
+ALTER TABLE ONLY cdr.cdr_201804
     ADD CONSTRAINT cdr_201804_pkey PRIMARY KEY (id);
 
 
@@ -5902,17 +5843,15 @@ ALTER TABLE ONLY cdr_201804
 -- Name: cdr_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr
+ALTER TABLE ONLY cdr.cdr
     ADD CONSTRAINT cdr_pkey PRIMARY KEY (id);
 
-
-SET search_path = reports, pg_catalog;
 
 --
 -- Name: cdr_custom_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_custom_report_data
+ALTER TABLE ONLY reports.cdr_custom_report_data
     ADD CONSTRAINT cdr_custom_report_data_pkey PRIMARY KEY (id);
 
 
@@ -5920,7 +5859,7 @@ ALTER TABLE ONLY cdr_custom_report_data
 -- Name: cdr_custom_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_custom_report
+ALTER TABLE ONLY reports.cdr_custom_report
     ADD CONSTRAINT cdr_custom_report_pkey PRIMARY KEY (id);
 
 
@@ -5928,7 +5867,7 @@ ALTER TABLE ONLY cdr_custom_report
 -- Name: cdr_custom_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_custom_report_schedulers
+ALTER TABLE ONLY reports.cdr_custom_report_schedulers
     ADD CONSTRAINT cdr_custom_report_schedulers_pkey PRIMARY KEY (id);
 
 
@@ -5936,7 +5875,7 @@ ALTER TABLE ONLY cdr_custom_report_schedulers
 -- Name: cdr_interval_report_aggrerator_name_key; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_interval_report_aggrerator
+ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
     ADD CONSTRAINT cdr_interval_report_aggrerator_name_key UNIQUE (name);
 
 
@@ -5944,7 +5883,7 @@ ALTER TABLE ONLY cdr_interval_report_aggrerator
 -- Name: cdr_interval_report_aggrerator_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_interval_report_aggrerator
+ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
     ADD CONSTRAINT cdr_interval_report_aggrerator_pkey PRIMARY KEY (id);
 
 
@@ -5952,7 +5891,7 @@ ALTER TABLE ONLY cdr_interval_report_aggrerator
 -- Name: cdr_interval_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_interval_report_data
+ALTER TABLE ONLY reports.cdr_interval_report_data
     ADD CONSTRAINT cdr_interval_report_data_pkey PRIMARY KEY (id);
 
 
@@ -5960,7 +5899,7 @@ ALTER TABLE ONLY cdr_interval_report_data
 -- Name: cdr_interval_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_interval_report
+ALTER TABLE ONLY reports.cdr_interval_report
     ADD CONSTRAINT cdr_interval_report_pkey PRIMARY KEY (id);
 
 
@@ -5968,7 +5907,7 @@ ALTER TABLE ONLY cdr_interval_report
 -- Name: cdr_interval_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_interval_report_schedulers
+ALTER TABLE ONLY reports.cdr_interval_report_schedulers
     ADD CONSTRAINT cdr_interval_report_schedulers_pkey PRIMARY KEY (id);
 
 
@@ -5976,7 +5915,7 @@ ALTER TABLE ONLY cdr_interval_report_schedulers
 -- Name: customer_traffic_report_data_by_destination_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_by_destination
+ALTER TABLE ONLY reports.customer_traffic_report_data_by_destination
     ADD CONSTRAINT customer_traffic_report_data_by_destination_pkey PRIMARY KEY (id);
 
 
@@ -5984,7 +5923,7 @@ ALTER TABLE ONLY customer_traffic_report_data_by_destination
 -- Name: customer_traffic_report_data_full_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_full
+ALTER TABLE ONLY reports.customer_traffic_report_data_full
     ADD CONSTRAINT customer_traffic_report_data_full_pkey PRIMARY KEY (id);
 
 
@@ -5992,7 +5931,7 @@ ALTER TABLE ONLY customer_traffic_report_data_full
 -- Name: customer_traffic_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_by_vendor
+ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor
     ADD CONSTRAINT customer_traffic_report_data_pkey PRIMARY KEY (id);
 
 
@@ -6000,7 +5939,7 @@ ALTER TABLE ONLY customer_traffic_report_data_by_vendor
 -- Name: customer_traffic_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY customer_traffic_report
+ALTER TABLE ONLY reports.customer_traffic_report
     ADD CONSTRAINT customer_traffic_report_pkey PRIMARY KEY (id);
 
 
@@ -6008,7 +5947,7 @@ ALTER TABLE ONLY customer_traffic_report
 -- Name: customer_traffic_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY customer_traffic_report_schedulers
+ALTER TABLE ONLY reports.customer_traffic_report_schedulers
     ADD CONSTRAINT customer_traffic_report_schedulers_pkey PRIMARY KEY (id);
 
 
@@ -6016,7 +5955,7 @@ ALTER TABLE ONLY customer_traffic_report_schedulers
 -- Name: report_vendors_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_vendors_data
+ALTER TABLE ONLY reports.report_vendors_data
     ADD CONSTRAINT report_vendors_data_pkey PRIMARY KEY (id);
 
 
@@ -6024,7 +5963,7 @@ ALTER TABLE ONLY report_vendors_data
 -- Name: report_vendors_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY report_vendors
+ALTER TABLE ONLY reports.report_vendors
     ADD CONSTRAINT report_vendors_pkey PRIMARY KEY (id);
 
 
@@ -6032,7 +5971,7 @@ ALTER TABLE ONLY report_vendors
 -- Name: scheduler_periods_name_key; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY scheduler_periods
+ALTER TABLE ONLY reports.scheduler_periods
     ADD CONSTRAINT scheduler_periods_name_key UNIQUE (name);
 
 
@@ -6040,7 +5979,7 @@ ALTER TABLE ONLY scheduler_periods
 -- Name: scheduler_periods_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY scheduler_periods
+ALTER TABLE ONLY reports.scheduler_periods
     ADD CONSTRAINT scheduler_periods_pkey PRIMARY KEY (id);
 
 
@@ -6048,7 +5987,7 @@ ALTER TABLE ONLY scheduler_periods
 -- Name: vendor_traffic_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY vendor_traffic_report_data
+ALTER TABLE ONLY reports.vendor_traffic_report_data
     ADD CONSTRAINT vendor_traffic_report_data_pkey PRIMARY KEY (id);
 
 
@@ -6056,7 +5995,7 @@ ALTER TABLE ONLY vendor_traffic_report_data
 -- Name: vendor_traffic_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY vendor_traffic_report
+ALTER TABLE ONLY reports.vendor_traffic_report
     ADD CONSTRAINT vendor_traffic_report_pkey PRIMARY KEY (id);
 
 
@@ -6064,17 +6003,15 @@ ALTER TABLE ONLY vendor_traffic_report
 -- Name: vendor_traffic_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY vendor_traffic_report_schedulers
+ALTER TABLE ONLY reports.vendor_traffic_report_schedulers
     ADD CONSTRAINT vendor_traffic_report_schedulers_pkey PRIMARY KEY (id);
 
-
-SET search_path = stats, pg_catalog;
 
 --
 -- Name: active_call_customer_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_customer_accounts_hourly
+ALTER TABLE ONLY stats.active_call_customer_accounts_hourly
     ADD CONSTRAINT active_call_customer_accounts_hourly_pkey PRIMARY KEY (id);
 
 
@@ -6082,7 +6019,7 @@ ALTER TABLE ONLY active_call_customer_accounts_hourly
 -- Name: active_call_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_customer_accounts
+ALTER TABLE ONLY stats.active_call_customer_accounts
     ADD CONSTRAINT active_call_customer_accounts_pkey PRIMARY KEY (id);
 
 
@@ -6090,7 +6027,7 @@ ALTER TABLE ONLY active_call_customer_accounts
 -- Name: active_call_orig_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_orig_gateways_hourly
+ALTER TABLE ONLY stats.active_call_orig_gateways_hourly
     ADD CONSTRAINT active_call_orig_gateways_hourly_pkey PRIMARY KEY (id);
 
 
@@ -6098,7 +6035,7 @@ ALTER TABLE ONLY active_call_orig_gateways_hourly
 -- Name: active_call_orig_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_orig_gateways
+ALTER TABLE ONLY stats.active_call_orig_gateways
     ADD CONSTRAINT active_call_orig_gateways_pkey PRIMARY KEY (id);
 
 
@@ -6106,7 +6043,7 @@ ALTER TABLE ONLY active_call_orig_gateways
 -- Name: active_call_term_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_term_gateways_hourly
+ALTER TABLE ONLY stats.active_call_term_gateways_hourly
     ADD CONSTRAINT active_call_term_gateways_hourly_pkey PRIMARY KEY (id);
 
 
@@ -6114,7 +6051,7 @@ ALTER TABLE ONLY active_call_term_gateways_hourly
 -- Name: active_call_term_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_term_gateways
+ALTER TABLE ONLY stats.active_call_term_gateways
     ADD CONSTRAINT active_call_term_gateways_pkey PRIMARY KEY (id);
 
 
@@ -6122,7 +6059,7 @@ ALTER TABLE ONLY active_call_term_gateways
 -- Name: active_call_vendor_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_vendor_accounts_hourly
+ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly
     ADD CONSTRAINT active_call_vendor_accounts_hourly_pkey PRIMARY KEY (id);
 
 
@@ -6130,7 +6067,7 @@ ALTER TABLE ONLY active_call_vendor_accounts_hourly
 -- Name: active_call_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_call_vendor_accounts
+ALTER TABLE ONLY stats.active_call_vendor_accounts
     ADD CONSTRAINT active_call_vendor_accounts_pkey PRIMARY KEY (id);
 
 
@@ -6138,7 +6075,7 @@ ALTER TABLE ONLY active_call_vendor_accounts
 -- Name: active_calls_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_calls_hourly
+ALTER TABLE ONLY stats.active_calls_hourly
     ADD CONSTRAINT active_calls_hourly_pkey PRIMARY KEY (id);
 
 
@@ -6146,7 +6083,7 @@ ALTER TABLE ONLY active_calls_hourly
 -- Name: active_calls_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY active_calls
+ALTER TABLE ONLY stats.active_calls
     ADD CONSTRAINT active_calls_pkey PRIMARY KEY (id);
 
 
@@ -6154,7 +6091,7 @@ ALTER TABLE ONLY active_calls
 -- Name: termination_quality_stats_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY termination_quality_stats
+ALTER TABLE ONLY stats.termination_quality_stats
     ADD CONSTRAINT termination_quality_stats_pkey PRIMARY KEY (id);
 
 
@@ -6162,7 +6099,7 @@ ALTER TABLE ONLY termination_quality_stats
 -- Name: traffic_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY traffic_customer_accounts
+ALTER TABLE ONLY stats.traffic_customer_accounts
     ADD CONSTRAINT traffic_customer_accounts_pkey PRIMARY KEY (id);
 
 
@@ -6170,17 +6107,15 @@ ALTER TABLE ONLY traffic_customer_accounts
 -- Name: traffic_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY traffic_vendor_accounts
+ALTER TABLE ONLY stats.traffic_vendor_accounts
     ADD CONSTRAINT traffic_vendor_accounts_pkey PRIMARY KEY (id);
 
-
-SET search_path = sys, pg_catalog;
 
 --
 -- Name: call_duration_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY call_duration_round_modes
+ALTER TABLE ONLY sys.call_duration_round_modes
     ADD CONSTRAINT call_duration_round_modes_name_key UNIQUE (name);
 
 
@@ -6188,7 +6123,7 @@ ALTER TABLE ONLY call_duration_round_modes
 -- Name: call_duration_round_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY call_duration_round_modes
+ALTER TABLE ONLY sys.call_duration_round_modes
     ADD CONSTRAINT call_duration_round_modes_pkey PRIMARY KEY (id);
 
 
@@ -6196,7 +6131,7 @@ ALTER TABLE ONLY call_duration_round_modes
 -- Name: cdr_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY cdr_tables
+ALTER TABLE ONLY sys.cdr_tables
     ADD CONSTRAINT cdr_tables_pkey PRIMARY KEY (id);
 
 
@@ -6204,329 +6139,311 @@ ALTER TABLE ONLY cdr_tables
 -- Name: config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY config
+ALTER TABLE ONLY sys.config
     ADD CONSTRAINT config_pkey PRIMARY KEY (id);
 
-
-SET search_path = billing, pg_catalog;
 
 --
 -- Name: invoice_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE INDEX invoice_destinations_invoice_id_idx ON invoice_destinations USING btree (invoice_id);
+CREATE INDEX invoice_destinations_invoice_id_idx ON billing.invoice_destinations USING btree (invoice_id);
 
 
 --
 -- Name: invoice_documents_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON invoice_documents USING btree (invoice_id);
+CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON billing.invoice_documents USING btree (invoice_id);
 
-
-SET search_path = cdr, pg_catalog;
 
 --
 -- Name: cdr_201408_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201408_time_start_idx ON cdr_201408 USING btree (time_start);
+CREATE INDEX cdr_201408_time_start_idx ON cdr.cdr_201408 USING btree (time_start);
 
 
 --
 -- Name: cdr_201409_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201409_time_start_idx ON cdr_201409 USING btree (time_start);
+CREATE INDEX cdr_201409_time_start_idx ON cdr.cdr_201409 USING btree (time_start);
 
 
 --
 -- Name: cdr_201410_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201410_time_start_idx ON cdr_201410 USING btree (time_start);
+CREATE INDEX cdr_201410_time_start_idx ON cdr.cdr_201410 USING btree (time_start);
 
 
 --
 -- Name: cdr_201411_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201411_time_start_idx ON cdr_201411 USING btree (time_start);
+CREATE INDEX cdr_201411_time_start_idx ON cdr.cdr_201411 USING btree (time_start);
 
 
 --
 -- Name: cdr_201708_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201708_time_start_idx ON cdr_201708 USING btree (time_start);
+CREATE INDEX cdr_201708_time_start_idx ON cdr.cdr_201708 USING btree (time_start);
 
 
 --
 -- Name: cdr_201709_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201709_time_start_idx ON cdr_201709 USING btree (time_start);
+CREATE INDEX cdr_201709_time_start_idx ON cdr.cdr_201709 USING btree (time_start);
 
 
 --
 -- Name: cdr_201710_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201710_time_start_idx ON cdr_201710 USING btree (time_start);
+CREATE INDEX cdr_201710_time_start_idx ON cdr.cdr_201710 USING btree (time_start);
 
 
 --
 -- Name: cdr_201712_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201712_time_start_idx ON cdr_201712 USING btree (time_start);
+CREATE INDEX cdr_201712_time_start_idx ON cdr.cdr_201712 USING btree (time_start);
 
 
 --
 -- Name: cdr_201801_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201801_time_start_idx ON cdr_201801 USING btree (time_start);
+CREATE INDEX cdr_201801_time_start_idx ON cdr.cdr_201801 USING btree (time_start);
 
 
 --
 -- Name: cdr_201802_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201802_time_start_idx ON cdr_201802 USING btree (time_start);
+CREATE INDEX cdr_201802_time_start_idx ON cdr.cdr_201802 USING btree (time_start);
 
 
 --
 -- Name: cdr_201803_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201803_time_start_idx ON cdr_201803 USING btree (time_start);
+CREATE INDEX cdr_201803_time_start_idx ON cdr.cdr_201803 USING btree (time_start);
 
 
 --
 -- Name: cdr_201804_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_201804_time_start_idx ON cdr_201804 USING btree (time_start);
+CREATE INDEX cdr_201804_time_start_idx ON cdr.cdr_201804 USING btree (time_start);
 
 
 --
 -- Name: cdr_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_time_start_idx ON cdr USING btree (time_start);
+CREATE INDEX cdr_time_start_idx ON cdr.cdr USING btree (time_start);
 
 
 --
 -- Name: cdr_vendor_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
 --
 
-CREATE INDEX cdr_vendor_invoice_id_idx ON cdr USING btree (vendor_invoice_id);
+CREATE INDEX cdr_vendor_invoice_id_idx ON cdr.cdr USING btree (vendor_invoice_id);
 
-
-SET search_path = public, pg_catalog;
 
 --
 -- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX "unique_public.schema_migrations" ON schema_migrations USING btree (version);
+CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migrations USING btree (version);
 
-
-SET search_path = reports, pg_catalog;
 
 --
 -- Name: cdr_custom_report_id_idx; Type: INDEX; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX cdr_custom_report_id_idx ON cdr_custom_report USING btree (id) WHERE (id IS NOT NULL);
+CREATE UNIQUE INDEX cdr_custom_report_id_idx ON reports.cdr_custom_report USING btree (id) WHERE (id IS NOT NULL);
 
 
 --
 -- Name: customer_traffic_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE INDEX customer_traffic_report_data_report_id_idx ON customer_traffic_report_data_by_vendor USING btree (report_id);
+CREATE INDEX customer_traffic_report_data_report_id_idx ON reports.customer_traffic_report_data_by_vendor USING btree (report_id);
 
 
 --
 -- Name: vendor_traffic_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -; Tablespace: 
 --
 
-CREATE INDEX vendor_traffic_report_data_report_id_idx ON vendor_traffic_report_data USING btree (report_id);
+CREATE INDEX vendor_traffic_report_data_report_id_idx ON reports.vendor_traffic_report_data USING btree (report_id);
 
-
-SET search_path = stats, pg_catalog;
 
 --
 -- Name: termination_quality_stats_dialpeer_id_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE INDEX termination_quality_stats_dialpeer_id_idx ON termination_quality_stats USING btree (dialpeer_id);
+CREATE INDEX termination_quality_stats_dialpeer_id_idx ON stats.termination_quality_stats USING btree (dialpeer_id);
 
 
 --
 -- Name: termination_quality_stats_gateway_id_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE INDEX termination_quality_stats_gateway_id_idx ON termination_quality_stats USING btree (gateway_id);
+CREATE INDEX termination_quality_stats_gateway_id_idx ON stats.termination_quality_stats USING btree (gateway_id);
 
 
 --
 -- Name: traffic_customer_accounts_account_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX traffic_customer_accounts_account_id_timestamp_idx ON traffic_customer_accounts USING btree (account_id, "timestamp");
+CREATE UNIQUE INDEX traffic_customer_accounts_account_id_timestamp_idx ON stats.traffic_customer_accounts USING btree (account_id, "timestamp");
 
 
 --
 -- Name: traffic_vendor_accounts_account_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON traffic_vendor_accounts USING btree (account_id, "timestamp");
+CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.traffic_vendor_accounts USING btree (account_id, "timestamp");
 
-
-SET search_path = cdr, pg_catalog;
 
 --
 -- Name: cdr_i; Type: TRIGGER; Schema: cdr; Owner: -
 --
 
-CREATE TRIGGER cdr_i BEFORE INSERT ON cdr FOR EACH ROW EXECUTE PROCEDURE cdr_i_tgf();
+CREATE TRIGGER cdr_i BEFORE INSERT ON cdr.cdr FOR EACH ROW EXECUTE PROCEDURE cdr.cdr_i_tgf();
 
-
-SET search_path = billing, pg_catalog;
 
 --
 -- Name: invoice_destinations_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoice_destinations
-    ADD CONSTRAINT invoice_destinations_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES invoices(id);
+ALTER TABLE ONLY billing.invoice_destinations
+    ADD CONSTRAINT invoice_destinations_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
 
 
 --
 -- Name: invoice_documents_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoice_documents
-    ADD CONSTRAINT invoice_documents_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES invoices(id);
+ALTER TABLE ONLY billing.invoice_documents
+    ADD CONSTRAINT invoice_documents_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
 
 
 --
 -- Name: invoice_networks_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoice_networks
-    ADD CONSTRAINT invoice_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES invoices(id);
+ALTER TABLE ONLY billing.invoice_networks
+    ADD CONSTRAINT invoice_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
 
 
 --
 -- Name: invoices_state_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoices
-    ADD CONSTRAINT invoices_state_id_fkey FOREIGN KEY (state_id) REFERENCES invoice_states(id);
+ALTER TABLE ONLY billing.invoices
+    ADD CONSTRAINT invoices_state_id_fkey FOREIGN KEY (state_id) REFERENCES billing.invoice_states(id);
 
 
 --
 -- Name: invoices_type_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY invoices
-    ADD CONSTRAINT invoices_type_id_fkey FOREIGN KEY (type_id) REFERENCES invoice_types(id);
+ALTER TABLE ONLY billing.invoices
+    ADD CONSTRAINT invoices_type_id_fkey FOREIGN KEY (type_id) REFERENCES billing.invoice_types(id);
 
-
-SET search_path = reports, pg_catalog;
 
 --
 -- Name: cdr_custom_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_custom_report_data
-    ADD CONSTRAINT cdr_custom_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES cdr_custom_report(id);
+ALTER TABLE ONLY reports.cdr_custom_report_data
+    ADD CONSTRAINT cdr_custom_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES reports.cdr_custom_report(id);
 
 
 --
 -- Name: cdr_custom_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_custom_report_schedulers
-    ADD CONSTRAINT cdr_custom_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES scheduler_periods(id);
+ALTER TABLE ONLY reports.cdr_custom_report_schedulers
+    ADD CONSTRAINT cdr_custom_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES reports.scheduler_periods(id);
 
 
 --
 -- Name: cdr_interval_report_aggregator_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_interval_report
-    ADD CONSTRAINT cdr_interval_report_aggregator_id_fkey FOREIGN KEY (aggregator_id) REFERENCES cdr_interval_report_aggrerator(id);
+ALTER TABLE ONLY reports.cdr_interval_report
+    ADD CONSTRAINT cdr_interval_report_aggregator_id_fkey FOREIGN KEY (aggregator_id) REFERENCES reports.cdr_interval_report_aggrerator(id);
 
 
 --
 -- Name: cdr_interval_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_interval_report_data
-    ADD CONSTRAINT cdr_interval_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES cdr_interval_report(id);
+ALTER TABLE ONLY reports.cdr_interval_report_data
+    ADD CONSTRAINT cdr_interval_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES reports.cdr_interval_report(id);
 
 
 --
 -- Name: cdr_interval_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY cdr_interval_report_schedulers
-    ADD CONSTRAINT cdr_interval_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES scheduler_periods(id);
+ALTER TABLE ONLY reports.cdr_interval_report_schedulers
+    ADD CONSTRAINT cdr_interval_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES reports.scheduler_periods(id);
 
 
 --
 -- Name: customer_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report_data_by_vendor
-    ADD CONSTRAINT customer_traffic_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES customer_traffic_report(id);
+ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor
+    ADD CONSTRAINT customer_traffic_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES reports.customer_traffic_report(id);
 
 
 --
 -- Name: customer_traffic_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY customer_traffic_report_schedulers
-    ADD CONSTRAINT customer_traffic_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES scheduler_periods(id);
+ALTER TABLE ONLY reports.customer_traffic_report_schedulers
+    ADD CONSTRAINT customer_traffic_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES reports.scheduler_periods(id);
 
 
 --
 -- Name: report_vendors_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY report_vendors_data
-    ADD CONSTRAINT report_vendors_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES report_vendors(id);
+ALTER TABLE ONLY reports.report_vendors_data
+    ADD CONSTRAINT report_vendors_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES reports.report_vendors(id);
 
 
 --
 -- Name: vendor_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY vendor_traffic_report_data
-    ADD CONSTRAINT vendor_traffic_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES vendor_traffic_report(id);
+ALTER TABLE ONLY reports.vendor_traffic_report_data
+    ADD CONSTRAINT vendor_traffic_report_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES reports.vendor_traffic_report(id);
 
 
 --
 -- Name: vendor_traffic_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY vendor_traffic_report_schedulers
-    ADD CONSTRAINT vendor_traffic_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES scheduler_periods(id);
+ALTER TABLE ONLY reports.vendor_traffic_report_schedulers
+    ADD CONSTRAINT vendor_traffic_report_schedulers_period_id_fkey FOREIGN KEY (period_id) REFERENCES reports.scheduler_periods(id);
 
-
-SET search_path = sys, pg_catalog;
 
 --
 -- Name: config_call_duration_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY config
-    ADD CONSTRAINT config_call_duration_round_mode_id_fkey FOREIGN KEY (call_duration_round_mode_id) REFERENCES call_duration_round_modes(id);
+ALTER TABLE ONLY sys.config
+    ADD CONSTRAINT config_call_duration_round_mode_id_fkey FOREIGN KEY (call_duration_round_mode_id) REFERENCES sys.call_duration_round_modes(id);
 
 
 --
@@ -6542,4 +6459,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20170911172650');
 INSERT INTO public.schema_migrations (version) VALUES ('20171104162958');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180228200703');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180305131137');
 

@@ -67,20 +67,6 @@ COMMENT ON EXTENSION pgq IS 'Generic queue for PostgreSQL';
 
 
 --
--- Name: pgq_ext; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pgq_ext WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION pgq_ext; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pgq_ext IS 'Target-side batch tracking infrastructure';
-
-
---
 -- Name: runtime_stats; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -26537,4 +26523,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
 INSERT INTO public.schema_migrations (version) VALUES ('20180212105355');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180305131137');
 
