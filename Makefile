@@ -12,7 +12,7 @@ bundle_bin=vendor/bundler/bin/bundle
 
 app_files = bin app .bundle config config.ru db doc Gemfile Gemfile.lock lib public Rakefile vendor pgq-processors $(version_file)
 
-exclude_files = config/database.yml
+exclude_files = config/database.yml *.o *.a
 
 env_mode = production
 database_yml_exists := $(shell test -f config/database.yml && echo "true" || echo "false")
