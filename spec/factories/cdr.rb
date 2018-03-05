@@ -48,5 +48,8 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_id do
+      id { Cdr::Cdr.connection.select_value("SELECT nextval('cdr.cdr_id_seq')").to_i }
+    end
   end
 end
