@@ -76,7 +76,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :term_gw, collection: proc { Gateway.select([:id, :name]).reorder(:name) }, input_html: {class: 'chosen'}
   filter :routing_plan, collection: proc { Routing::RoutingPlan.select([:id, :name]) }, input_html: {class: 'chosen'}
   filter :routing_group, collection: proc { RoutingGroup.select([:id, :name]) }, input_html: {class: 'chosen'}
-#  filter :routing_tag, collection: proc { Routing::RoutingTag.select([:id, :name]) }, input_html: {class: 'chosen'}
   filter :rateplan, collection: proc { Rateplan.select([:id, :name]) }, input_html: {class: 'chosen'}
 
   filter :internal_disconnect_code, as: :string_eq
@@ -608,7 +607,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       status_tag(cdr.routing_attempt.to_s, class: cdr.is_last_cdr? ? :ok : nil)
     end
 
-    #column :routing_attempt 
+    #column :routing_attempt
     #column :is_last_cdr
 
     column :src_name_in
@@ -959,7 +958,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :customer_price
         column :routing_plan
         column :routing_group
-        column :routing_tag
         column :dialpeer do |row|
           "Dialpeer ##{row.dialpeer.id}" if row.dialpeer.present?
         end

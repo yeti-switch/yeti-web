@@ -8,10 +8,10 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   acts_as_clone
   acts_as_safe_destroy
 
-  permit_params :src_area_id, :dst_area_id, :routing_tag_id,
+  permit_params :src_area_id, :dst_area_id,
                 :tag_action_id, tag_action_value: []
 
-  includes :routing_tag, :src_area, :dst_area
+  includes :src_area, :dst_area
 
   controller do
     def update
@@ -28,7 +28,6 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     actions
     column :src_area
     column :dst_area
-    column :routing_tag
     column :tag_action
     column :routing_tags
   end
@@ -38,7 +37,6 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
       row :id
       row :src_area
       row :dst_area
-      row :routing_tag
       row :tag_action
       row :routing_tags
     end
@@ -49,7 +47,6 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     f.inputs do
       f.input :src_area
       f.input :dst_area
-      f.input :routing_tag
       f.input :tag_action
       f.input :tag_action_value, as: :select,
         collection: Routing::RoutingTag.all,
@@ -61,7 +58,6 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   end
 
   filter :id
-  filter :routing_tag, input_html: {class: 'chosen'}
   filter :src_area, input_html: {class: 'chosen'}
   filter :dst_area, input_html: {class: 'chosen'}
 

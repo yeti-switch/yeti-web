@@ -25,7 +25,6 @@
 #  acd_limit              :float            default(0.0), not null
 #  short_calls_limit      :float            default(0.0), not null
 #  quality_alarm          :boolean          default(FALSE), not null
-#  routing_tag_id         :integer
 #  uuid                   :uuid             not null
 #  dst_number_min_length  :integer          default(0), not null
 #  dst_number_max_length  :integer          default(100), not null
@@ -40,10 +39,11 @@ class Destination < ActiveRecord::Base
   has_many :customers_auths, through: :rateplan
   belongs_to :rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :rate_policy_id
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
-  belongs_to :routing_tag, class_name: Routing::RoutingTag, foreign_key: :routing_tag_id
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :destination_id, dependent: :nullify
 
-
+  def routing_tags
+    @routing_tags ||= Routing::RoutingTag.where(id: routing_tag_ids)
+  end
 
   has_paper_trail class_name: 'AuditLogItem'
 

@@ -17,7 +17,6 @@ ActiveAdmin.register Destination do
                            reject_calls: boolean_select,
                            quality_alarm: boolean_select,
                            rateplan_id: Rateplan.pluck(:name, :id),
-                           routing_tag_id: Routing::RoutingTag.pluck(:name, :id),
                            valid_from: 'datepicker',
                            valid_till: 'datepicker',
                            rate_policy_id: DestinationRatePolicy.pluck(:name, :id),
@@ -42,7 +41,6 @@ ActiveAdmin.register Destination do
 
   acts_as_export :id, :enabled, :prefix, :dst_number_min_length, :dst_number_max_length,
                  [:rateplan_name, proc { |row| row.rateplan.try(:name) }],
-                 [:routing_tag_name, proc { |row| row.routing_tag.try(:name) }],
                  :reject_calls,
                  [:rate_policy_name, proc { |row| row.rate_policy.try(:name) }],
                  :initial_interval, :next_interval,
@@ -63,7 +61,6 @@ ActiveAdmin.register Destination do
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: {class: 'search_filter_string'}
   filter :rateplan, input_html: { class: 'chosen'}
-  filter :routing_tag, input_html: { class: 'chosen'}
   filter :reject_calls, as: :select , collection: [ ["Yes", true], ["No", false]]
   filter :initial_rate
   filter :next_rate
@@ -94,10 +91,10 @@ ActiveAdmin.register Destination do
                 :initial_interval, :next_interval, :dp_margin_fixed,
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
-                :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix, :routing_tag_id,
+                :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
                 :reverse_billing, routing_tag_ids: []
 
-  includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag, network_prefix: [:country, :network]
+  includes :rateplan, :rate_policy, :profit_control_mode, network_prefix: [:country, :network]
 
   controller do
     def update
@@ -144,7 +141,6 @@ ActiveAdmin.register Destination do
     column :reject_calls
     column :quality_alarm
     column :rateplan, sortable: 'rateplans.name'
-    column :routing_tag, sortable: 'routing_tags.name'
     column :routing_tags
     column :valid_from do |c|
       c.decorated_valid_from
@@ -192,7 +188,6 @@ ActiveAdmin.register Destination do
       f.input :enabled
       f.input :reject_calls
       f.input :rateplan, input_html: { class: 'chosen'}
-      f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
 
       f.input :routing_tag_ids, as: :select,
         collection:  DestinationDecorator.decorate(f.object).routing_tag_options,
@@ -241,7 +236,6 @@ ActiveAdmin.register Destination do
       row :reject_calls
       row :quality_alarm
       row :rateplan
-      row :routing_tag
       row :routing_tags
       row :valid_from do |c|
         c.decorated_valid_from

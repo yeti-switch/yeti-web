@@ -6,14 +6,14 @@ resource 'Routing RoutingTagDetectionRules' do
 
   include_context :init_routing_tag_collection
 
-  let(:collection) { create_list :routing_tag_detection_rule, 2, routing_tag: @tag_ua }
+  let(:collection) { create_list :routing_tag_detection_rule, 2 }
   let(:record) { collection.first }
 
   required_params = %i()
 
   optional_params = %i(tag_action_value)
 
-  required_relationships = %i(routing-tag)
+  required_relationships = %i()
   optional_relationships = %i(src-area dst-area tag-action)
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tag-detection-rules'
@@ -25,7 +25,6 @@ resource 'Routing RoutingTagDetectionRules' do
     jsonapi_attributes(required_params, optional_params)
     jsonapi_relationships(required_relationships, optional_relationships)
 
-    let(:'routing-tag') { wrap_relationship(:'routing-tags', @tag_ua.id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -40,7 +39,6 @@ resource 'Routing RoutingTagDetectionRules' do
     jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:id) { record.id }
-    let(:'routing-tag') { wrap_relationship(:'routing-tags', @tag_us.id) }
 
     example_request 'update values' do
       expect(status).to eq(200)

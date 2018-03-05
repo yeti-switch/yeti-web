@@ -18,7 +18,6 @@ ActiveAdmin.register Dialpeer do
                            enabled: boolean_select,
                            prefix: 'text',
                            routing_group_id: RoutingGroup.pluck(:name, :id),
-                           routing_tag_id: Routing::RoutingTag.pluck(:name, :id),
                            priority: 'text',
                            force_hit_rate: 'text',
                            exclusive_route: boolean_select,
@@ -85,7 +84,7 @@ ActiveAdmin.register Dialpeer do
 
   end
 
-  includes :gateway, :gateway_group, :routing_group, :vendor, :account, :statistic, :routing_tag, network_prefix: [:country, :network]
+  includes :gateway, :gateway_group, :routing_group, :vendor, :account, :statistic, network_prefix: [:country, :network]
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', dialpeer_dialpeer_next_rates_path(resource.id)
@@ -114,7 +113,6 @@ ActiveAdmin.register Dialpeer do
       auto_link row.network_prefix.try!(:network)
     end
     column :routing_group, sortable: 'routing_groups.name'
-    column :routing_tag, sortable: 'routing_tags.name'
     column :routing_tags
     column :priority
     column :force_hit_rate
@@ -180,7 +178,6 @@ ActiveAdmin.register Dialpeer do
   filter :gateway, input_html: {class: 'chosen'}
   filter :gateway_group, input_html: {class: 'chosen'}
   filter :routing_group, input_html: {class: 'chosen'}
-  filter :routing_tag, input_html: {class: 'chosen'}
   filter :routing_group_routing_plans_id_eq, as: :select, input_html: {class: 'chosen'}, label: "Routing Plan", collection: -> { Routing::RoutingPlan.all }
 
   filter :locked, as: :select, collection: [["Yes", true], ["No", false]]
@@ -227,7 +224,6 @@ ActiveAdmin.register Dialpeer do
       f.input :dst_number_max_length
       f.input :enabled
       f.input :routing_group, input_html: {class: 'chosen'}
-      f.input :routing_tag, input_html: {class: 'chosen'}, include_blank: "None"
 
       f.input :routing_tag_ids, as: :select,
         collection: DialpeerDecorator.decorate(f.object).routing_tag_options,
@@ -294,7 +290,6 @@ ActiveAdmin.register Dialpeer do
           row :locked
           row :routing_group
           row :routing_tags
-          row :routing_tag
           row :vendor do
             auto_link(s.vendor, s.vendor.decorated_vendor_display_name)
           end

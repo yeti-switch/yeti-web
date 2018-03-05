@@ -69,7 +69,6 @@ RSpec.describe Routing::RoutingTag, type: :model do
     context 'when Tag has RoutingTagDetectionRule' do
       before do
         create(:routing_tag_detection_rule,
-               routing_tag_id: tag_values.first,
                tag_action_value: tag_values)
       end
 

@@ -5,7 +5,6 @@
 #  id               :integer          not null, primary key
 #  dst_area_id      :integer
 #  src_area_id      :integer
-#  routing_tag_id   :integer          not null
 #  tag_action_id    :integer
 #  tag_action_value :integer          default([]), not null, is an Array
 #

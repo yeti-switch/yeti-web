@@ -12,12 +12,12 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
   let(:area_2) { create :area }
 
   let(:record) do
-    create :routing_tag_detection_rule, routing_tag: @tag_ua
+    create :routing_tag_detection_rule
   end
 
   describe 'GET index' do
     let!(:records) do
-      create_list :routing_tag_detection_rule, 2, routing_tag: @tag_ua
+      create_list :routing_tag_detection_rule, 2
     end
 
     before { get :index }
@@ -42,8 +42,7 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
     let(:relationships) do
       {
         'src-area': wrap_relationship(:'areas', area_1.id),
-        'dst-area': wrap_relationship(:'areas', area_2.id),
-        'routing-tag': wrap_relationship(:'routing-tags', @tag_ua.id)
+        'dst-area': wrap_relationship(:'areas', area_2.id)
       }
     end
 
@@ -58,13 +57,11 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
     let(:relationships) do
       {
         'src-area': wrap_relationship(:'areas', area_1.id),
-        'dst-area': wrap_relationship(:'areas', area_2.id),
-        'routing-tag': wrap_relationship(:'routing-tags', @tag_us.id)
+        'dst-area': wrap_relationship(:'areas', area_2.id)
       }
     end
 
     it { expect(response.status).to eq(200) }
-    it { expect(record.reload.routing_tag_id).to eq(@tag_us.id) }
   end
 
   describe 'DELETE destroy' do
@@ -78,7 +75,6 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
     include_examples :jsonapi_resource_with_multiple_tags do
       let(:record) do
         create(:routing_tag_detection_rule,
-               routing_tag: @tag_ua,
                tag_action: tag_action_3,
                tag_action_value: tag_ids)
       end
