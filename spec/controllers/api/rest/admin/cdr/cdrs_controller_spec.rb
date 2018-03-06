@@ -14,12 +14,14 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
   describe 'GET index' do
     let!(:cdrs) do
-      create_list :cdr, 2, :with_id, time_start: 1.month.ago.utc
+      create_list :cdr, 12, :with_id, time_start: 1.month.ago.utc
     end
-
-    subject { get :index, filter: filters }
+    subject { get :index, filter: filters, page: { number: page_number, size: 10 } }
     let(:filters) do
       {}
+    end
+    let(:page_number) do
+      1
     end
 
     it 'http status should eq 200' do
@@ -27,9 +29,30 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it 'response should contain valid count of items' do
+    it 'response should contain valid count of items respects pagination' do
       subject
-      expect(response_data.size).to eq(cdrs.size)
+      expect(response_data.size).to eq(10)
+    end
+
+    it 'total-count should be present in meta info' do
+      subject
+      expect(JSON.parse(response.body)['meta']).to eq(
+        {
+          'total-count' => cdrs.size
+        }
+      )
+    end
+
+    context 'get second page' do
+      let(:page_number) do
+        2
+      end
+
+      it 'response should contain valid count of items respects pagination' do
+        subject
+        expect(response_data.size).to eq(2)
+        expect(response_data.map { |cdr| cdr['id'].to_i }).to match_array(cdrs[-2..-1].map(&:id))
+      end
     end
 
     context 'filtering' do

@@ -1,6 +1,7 @@
 class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
   immutable
   model_name 'Cdr::Cdr'
+  paginator :paged
 
   module CONST
     ROOT_NAMESPACE_RELATIONS = %w(
