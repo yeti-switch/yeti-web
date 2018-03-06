@@ -51,12 +51,21 @@ else
 endif
 
 ifneq "$(auto_chlog)" "no"
+
 ifeq "$(words $(tag_list))" "0"
 $(error "There are no tags in git to generate changelog from!")
 endif
-version = $(word $(words $(tag_list)), $(tag_list))
-commit_number_since_release := $(shell git rev-list HEAD "^$(version)" | wc -l)
-tag_list += HEAD
+
+
+last_tag = $(word $(words $(tag_list)), $(tag_list))
+commit_number_since_release := $(shell git rev-list HEAD "^$(last_tag)" | wc -l)
+
+ifeq "$(commit_number_since_release)" "0"
+version = $(last_tag)
+else
+version = $(last_tag)+$(commit_number_since_release)
+endif
+
 endif
 
 #
@@ -110,7 +119,7 @@ docs: bundler
 
 
 .PHONY: all_env
-all_env: bundler pgq-processors swagger
+all_env: bundler pgq_processors swagger
 	@$(info:msg=install gems for production mode)
 	@$(bundle_bin) install --jobs=4 --frozen --deployment --binstubs --without development test
 	
@@ -122,7 +131,7 @@ all_env: bundler pgq-processors swagger
 
 
 .PHONY: version.yml
-version.yml: debian/changelog
+version.yml:
 	@$(info:msg=create version file (version: $(version), commit: $(commit)))
 	@echo "version:" $(version) "\ncommit:" $(commit) > $(version_file)
 
@@ -133,8 +142,8 @@ bundler:
 	@gem install --no-document --install-dir vendor/bundler bundler
 
 
-.PHONY: pgq_preprocessors
-pgq_preprocessors:
+.PHONY: pgq_processors
+pgq_processors:
 	@$(info:msg=call pgq-processors processing)
 	$(MAKE) -C pgq-processors
 
@@ -187,10 +196,10 @@ ifeq "$(auto_chlog)" "no"
 else
 	@$(info:msg=Generating changelog Supply auto_chlog=no to skip.)
 	@which changelog-git || { $(err:msg=Failed to generate changelog. Did you install git-changelog package?) && false; }
-	PREV="$(git_first_commmit)"; for tag in $(tag_list); do \
+	PREV="$(git_first_commmit)"; for tag in $(tag_list) HEAD; do \
 		NEXT="$$tag"; \
 		[ "$$tag" != "HEAD" ] && ver="$$NEXT"; \
-		[ "$$tag" = "HEAD" ] && ver="$$PREV+$(commit_number_since_release)"; \
+		[ "$$tag" = "HEAD" ] && ver="$(version)"; \
 		[ "$$tag" = "HEAD" ] && [ $(commit_number_since_release) -eq 0 ] && continue; \
 		ver="$$(echo $$ver | sed 's/-rc/~rc/' | sed 's/-master/~master/')"; \
 		echo "Appending version $${ver} from $${PREV} to $${NEXT}"; \
