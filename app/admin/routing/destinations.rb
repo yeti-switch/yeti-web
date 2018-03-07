@@ -181,7 +181,9 @@ ActiveAdmin.register Destination do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       if f.object.new_record? # allow multiple prefixes delimited by comma in NEW form.
-        f.input :batch_prefix, label: "Prefix", input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
+        f.input :batch_prefix, label: "Prefix",
+          input_html: { class: :prefix_detector, value: f.object.batch_prefix || f.object.prefix },
+          hint: f.object.network_details_hint
       else
         f.input :prefix, label: "Prefix", input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
       end
