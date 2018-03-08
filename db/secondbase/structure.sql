@@ -426,7 +426,6 @@ CREATE TABLE cdr.cdr (
     ruri_domain character varying,
     to_domain character varying,
     from_domain character varying,
-    routing_tag_id smallint,
     src_area_id integer,
     dst_area_id integer,
     auth_orig_transport_protocol_id smallint,
@@ -3979,7 +3978,6 @@ CREATE TABLE cdr.cdr_archive (
     ruri_domain character varying,
     to_domain character varying,
     from_domain character varying,
-    routing_tag_id smallint,
     src_area_id integer,
     dst_area_id integer,
     auth_orig_transport_protocol_id smallint,
@@ -6461,4 +6459,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171104162958');
 INSERT INTO public.schema_migrations (version) VALUES ('20180228200703');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180305131137');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180307142909');
 

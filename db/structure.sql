@@ -5082,7 +5082,6 @@ CREATE TABLE class4.destinations (
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_id smallint,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -5133,7 +5132,6 @@ CREATE TABLE class4.dialpeers (
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_id smallint,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -20703,8 +20701,7 @@ CREATE TABLE class4.routing_tag_detection_rules (
     dst_area_id integer,
     src_area_id integer,
     tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_id smallint
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -21113,8 +21110,6 @@ CREATE TABLE data_import.import_destinations (
     profit_control_mode_id smallint,
     profit_control_mode_name character varying,
     network_prefix_id integer,
-    routing_tag_id smallint,
-    routing_tag_name character varying,
     asr_limit real,
     acd_limit real,
     short_calls_limit real,
@@ -21182,8 +21177,6 @@ CREATE TABLE data_import.import_dialpeers (
     force_hit_rate double precision,
     short_calls_limit real DEFAULT 1 NOT NULL,
     exclusive_route boolean,
-    routing_tag_id smallint,
-    routing_tag_name character varying,
     reverse_billing boolean,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
@@ -26525,4 +26518,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180212105355');
 INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180305131137');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180305132729');
 
