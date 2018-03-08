@@ -36,7 +36,6 @@
 #  src_name_rewrite_rule   :string
 #  src_name_rewrite_result :string
 #  exclusive_route         :boolean          default(FALSE), not null
-#  routing_tag_id          :integer
 #  dst_number_min_length   :integer          default(0), not null
 #  dst_number_max_length   :integer          default(100), not null
 #  reverse_billing         :boolean          default(FALSE), not null

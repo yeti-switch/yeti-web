@@ -25,8 +25,6 @@
 #  profit_control_mode_id   :integer
 #  profit_control_mode_name :string
 #  network_prefix_id        :integer
-#  routing_tag_id           :integer
-#  routing_tag_name         :string
 #  asr_limit                :float
 #  acd_limit                :float
 #  short_calls_limit        :float
@@ -40,13 +38,12 @@ class Importing::Destination < Importing::Base
   belongs_to :rateplan, class_name: '::Rateplan'
   belongs_to :rate_policy, class_name: '::DestinationRatePolicy'
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
-  belongs_to :routing_tag, class_name: Routing::RoutingTag, foreign_key: :routing_tag_id
 
 
   self.import_attributes =['enabled', 'prefix', 'reject_calls', 'rateplan_id',
                            'initial_interval', 'next_interval', 'initial_rate', 'next_rate',
                            'connect_fee', 'rate_policy_id', 'reverse_billing', 'dp_margin_fixed', 'dp_margin_percent', 'use_dp_intervals',
-                           'valid_from', 'valid_till', 'profit_control_mode_id', 'routing_tag_id',
+                           'valid_from', 'valid_till', 'profit_control_mode_id',
                            'asr_limit', 'acd_limit', 'short_calls_limit', 'routing_tag_ids']
 
   self.import_class = ::Destination

@@ -18,7 +18,7 @@ resource 'CheckRate', document: :customer_v1 do
   let!(:rateplan) { customers_auth.rateplan.reload }
 
   before do
-    create :destination, rateplan: rateplan, prefix: '444', routing_tag: create(:routing_tag)
+    create :destination, rateplan: rateplan, prefix: '444', routing_tag_ids: [create(:routing_tag, :ua).id, create(:routing_tag, :us).id]
   end
 
   post '/api/rest/customer/v1/check-rate' do

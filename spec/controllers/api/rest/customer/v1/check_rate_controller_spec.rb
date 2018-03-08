@@ -15,8 +15,8 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
   end
 
   before do
-    @r1 = create :destination, rateplan: rateplan, prefix: '444', routing_tag: create(:routing_tag)
-    @r2 = create :destination, rateplan: rateplan, prefix: '4444', routing_tag: create(:routing_tag)
+    @r1 = create :destination, rateplan: rateplan, prefix: '444', routing_tag_ids: [create(:routing_tag, :ua).id, create(:routing_tag, :us).id]
+    @r2 = create :destination, rateplan: rateplan, prefix: '4444', routing_tag_ids: [create(:routing_tag, :emergency).id]
     create :destination, rateplan: rateplan, prefix: '3333' # out of range
   end
 
@@ -54,7 +54,7 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
                 'valid_from' => @r1.valid_from.to_s,
                 'valid_till' => @r1.valid_till.to_s,
                 'network_prefix_id' => @r1.network_prefix_id,
-                'routing_tag_name' => @r1.routing_tag.name
+                'routing_tag_names' => @r1.routing_tags.map(&:name)
               ),
               a_hash_including('id' => @r2.reload.uuid)
             ]

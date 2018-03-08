@@ -57,7 +57,7 @@ module JsonapiModel
                  'valid_from',
                  'valid_till',
                  'network_prefix_id',
-                 'routing_tag_name')
+                 'routing_tag_names')
         el['id'] = el.delete('uuid')
         el
       }

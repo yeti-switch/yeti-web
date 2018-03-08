@@ -95,7 +95,6 @@ class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
     :ruri_domain,
     :to_domain,
     :from_domain,
-    :routing_tag_id,
     :src_area_id,
     :dst_area_id,
     :auth_orig_transport_protocol_id,

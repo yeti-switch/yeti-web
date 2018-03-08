@@ -325,7 +325,6 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'ruri-domain' => cdr.ruri_domain,
             'to-domain' => cdr.to_domain,
             'from-domain' => cdr.from_domain,
-            'routing-tag-id' => cdr.routing_tag_id,
             'src-area-id' => cdr.src_area_id,
             'dst-area-id' => cdr.dst_area_id,
             'auth-orig-transport-protocol-id' => cdr.auth_orig_transport_protocol_id,

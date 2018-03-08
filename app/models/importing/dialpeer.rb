@@ -37,8 +37,6 @@
 #  force_hit_rate      :float
 #  short_calls_limit   :float            default(1.0), not null
 #  exclusive_route     :boolean
-#  routing_tag_id      :integer
-#  routing_tag_name    :string
 #  reverse_billing     :boolean
 #  routing_tag_ids     :integer          default([]), not null, is an Array
 #
@@ -50,7 +48,6 @@ class Importing::Dialpeer < Importing::Base
   belongs_to :gateway, class_name: '::Gateway'
   belongs_to :gateway_group, class_name: '::GatewayGroup'
   belongs_to :routing_group, class_name: '::RoutingGroup'
-  belongs_to :routing_tag, class_name: Routing::RoutingTag, foreign_key: :routing_tag_id
   belongs_to :account, class_name: '::Account'
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor'
   has_many :dialpeer_next_rates, dependent: :destroy

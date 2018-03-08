@@ -25,7 +25,6 @@
 #  acd_limit              :float            default(0.0), not null
 #  short_calls_limit      :float            default(0.0), not null
 #  quality_alarm          :boolean          default(FALSE), not null
-#  routing_tag_id         :integer
 #  uuid                   :uuid             not null
 #  dst_number_min_length  :integer          default(0), not null
 #  dst_number_max_length  :integer          default(100), not null

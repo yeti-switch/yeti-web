@@ -61,15 +61,11 @@ class Rateplan < ActiveRecord::Base
       FROM (
         SELECT
         d.*,
-        class4.routing_tags.name AS routing_tag_name,
         rank() OVER (
-          PARTITION BY d.routing_tag_id
+          PARTITION BY d.routing_tag_ids
           ORDER BY length(prefix_range(prefix)) DESC
         ) AS rank
         FROM class4.destinations d
-
-        LEFT JOIN class4.routing_tags ON d.routing_tag_id = class4.routing_tags.id
-
         WHERE
           prefix_range(prefix)@>prefix_range('#{number}')
             AND rateplan_id=#{self.id}
@@ -82,7 +78,19 @@ class Rateplan < ActiveRecord::Base
     result = self.class.connection.exec_query(sql_query)
     return [] if result.empty?
     # fix boolean columns: 't' => true, 'f' => false
-    result.cast_values.map { |values| Hash[[result.columns, values].transpose] }
+    res = result.cast_values.map { |values| Hash[[result.columns, values].transpose] }
+    # routing_tag_ids => routing_tag_names
+    res.map { |el|
+      names = el['routing_tag_ids'].map { |id| routing_tag_collection[id] }
+      el['routing_tag_names'] = names
+      el
+    }
+  end
+
+  private
+
+  def routing_tag_collection
+    @routing_tag_collection ||= Routing::RoutingTag.pluck(:id, :name).to_h
   end
 
 end

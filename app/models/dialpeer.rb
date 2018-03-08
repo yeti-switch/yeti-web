@@ -36,7 +36,6 @@
 #  src_name_rewrite_rule   :string
 #  src_name_rewrite_result :string
 #  exclusive_route         :boolean          default(FALSE), not null
-#  routing_tag_id          :integer
 #  dst_number_min_length   :integer          default(0), not null
 #  dst_number_max_length   :integer          default(100), not null
 #  reverse_billing         :boolean          default(FALSE), not null
@@ -50,7 +49,6 @@ class Dialpeer < Yeti::ActiveRecord
   belongs_to :routing_group
   belongs_to :account
   belongs_to :vendor,  class_name: 'Contractor'
-  belongs_to :routing_tag, class_name: Routing::RoutingTag, foreign_key: :routing_tag_id
   has_one :statistic, class_name: 'DialpeersStat', dependent: :delete
   has_paper_trail class_name: 'AuditLogItem'
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :dialpeer_id, dependent: :nullify

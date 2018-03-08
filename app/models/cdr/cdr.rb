@@ -101,7 +101,6 @@
 #  ruri_domain                     :string
 #  to_domain                       :string
 #  from_domain                     :string
-#  routing_tag_id                  :integer
 #  src_area_id                     :integer
 #  dst_area_id                     :integer
 #  auth_orig_transport_protocol_id :integer
@@ -148,7 +147,6 @@ class Cdr::Cdr < Cdr::Base
 
   belongs_to :rateplan
   belongs_to :routing_group
-  belongs_to :routing_tag, class_name: Routing::RoutingTag, foreign_key: :routing_tag_id
   belongs_to :src_area, class_name: Routing::Area, foreign_key: :src_area_id
   belongs_to :dst_area, class_name: Routing::Area, foreign_key: :dst_area_id
   belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id

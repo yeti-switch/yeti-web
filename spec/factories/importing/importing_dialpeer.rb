@@ -9,8 +9,6 @@ FactoryGirl.define do
     asr_limit 0
     gateway_name nil
     gateway_id nil
-    routing_group_name nil
-    routing_group_id nil
     next_rate nil
     connect_fee nil
     vendor_name nil

@@ -5,13 +5,8 @@ describe 'Edit RoutingTagDetectionRule', type: :feature do
 
   context 'unset "Tag action value"' do
     include_examples :test_unset_tag_action_value,
-                      controller_name: :routing_routing_tag_detection_rules do
-
-      let(:record) do
-        create(:routing_tag_detection_rule, routing_tag: tag)
-      end
-    end
-
+                      controller_name: :routing_routing_tag_detection_rules,
+                      factory: :routing_tag_detection_rule
   end
 
 end
