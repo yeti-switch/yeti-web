@@ -1128,7 +1128,7 @@ END;
 $$;
 
 
-CREATE FUNCTION load_disconnect_code_refuse_override() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -1206,25 +1206,6 @@ BEGIN
 END;
 $$;
 
-
---
--- TOC entry 928 (class 1255 OID 203223)
--- Name: load_disconnect_code_rewrite_override(); Type: FUNCTION; Schema: switch15; Owner: -
---
-
-CREATE FUNCTION load_disconnect_code_rewrite_override() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
-    LANGUAGE plpgsql COST 10
-    AS $$
-BEGIN
-  RETURN
-  QUERY SELECT dpc.policy_id,dc.code,dc.reason,dpc.pass_reason_to_originator,dpc.rewrited_code,dpc.rewrited_reason
-        from class4.disconnect_policy_code dpc
-          JOIN class4.disconnect_code dc
-            ON dc.id=dpc.code_id
-        where dc.namespace_id=2 -- ONLY SIP
-        order by dpc.id;
-END;
-$$;
 
 
 --
