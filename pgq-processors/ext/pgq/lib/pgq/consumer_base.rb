@@ -94,7 +94,26 @@ class Pgq::ConsumerBase
   end
 
   def perform_event(event)
-    raise 'realize me'
+
+    logger.info "performing event: Event: #{event.id}, Batch: #{@batch_id.to_s}"
+
+    Pgq::Worker.check_interrupted(__FILE__, __LINE__)
+
+    type = event.type
+    data = event.data
+
+    if event.done?
+      self.log_info("An event #{type} has done")
+      return
+    end
+
+    perform(type, data)
+
+    event.done!
+    self.log_info("Set an event #{type} to done")
+  rescue Exception => ex
+    self.log_error(event.exception_message(ex))
+    raise ex
   end
 
   def perform(type, *data)
