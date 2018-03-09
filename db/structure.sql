@@ -67,6 +67,20 @@ COMMENT ON EXTENSION pgq IS 'Generic queue for PostgreSQL';
 
 
 --
+-- Name: pgq_ext; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgq_ext WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION pgq_ext; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgq_ext IS 'Target-side batch tracking infrastructure';
+
+
+--
 -- Name: runtime_stats; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -26477,7 +26491,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26516,8 +26531,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
 INSERT INTO public.schema_migrations (version) VALUES ('20180212105355');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180305131137');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180305132729');
 
