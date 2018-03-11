@@ -5,7 +5,7 @@ class RoutingTagIdsValidator < ActiveModel::Validator
     if record.routing_tag_ids.dup.uniq!.present?
       record.errors.add(
         :routing_tag_ids,
-        I18n.t('activerecord.errors.models.customer_auth.attributes.tag_action_value.duplicate')
+        I18n.t('activerecord.errors.models.customers_auth.attributes.tag_action_value.duplicate')
       )
     end
   end
