@@ -9,7 +9,7 @@ class TagActionValueValidator < ActiveModel::Validator
     if !is_clear && tag_action_value.blank?
       record.errors.add(
         :tag_action_value,
-        I18n.t('activerecord.errors.models.customer_auth.attributes.tag_action_value.empty_when_not_clear')
+        I18n.t('activerecord.errors.models.customers_auth.attributes.tag_action_value.empty_when_not_clear')
       )
     end
 
@@ -17,14 +17,14 @@ class TagActionValueValidator < ActiveModel::Validator
       if tag_action_value.include?(nil)
         record.errors.add(
           :tag_action_value,
-          I18n.t('activerecord.errors.models.customer_auth.attributes.tag_action_value.empty_element')
+          I18n.t('activerecord.errors.models.customers_auth.attributes.tag_action_value.empty_element')
         )
       end
 
       if tag_action_value.dup.uniq!.present?
         record.errors.add(
           :tag_action_value,
-          I18n.t('activerecord.errors.models.customer_auth.attributes.tag_action_value.duplicate')
+          I18n.t('activerecord.errors.models.customers_auth.attributes.tag_action_value.duplicate')
         )
       end
     end
