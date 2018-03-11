@@ -35,10 +35,10 @@ ActiveAdmin.register CustomersAuth do
 
   acts_as_export :id, :enabled, :name,
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
-                 [:ip, proc {|row| row.raw_ip}],
+                 :ip,
                  [:pop_name, proc { |row| row.pop.try(:name) || "" }],
                  :src_prefix, :dst_prefix,
-                 :min_dst_number_length, :max_dst_number_length,
+                 :dst_number_min_length, :dst_number_max_length,
                  :uri_domain, :from_domain, :to_domain,
                  :x_yeti_auth,
                  [:customer_name, proc { |row| row.customer.try(:name) }],
@@ -63,7 +63,9 @@ ActiveAdmin.register CustomersAuth do
                  [:radius_auth_profile_name, proc { |row| row.radius_auth_profile.try(:name) || "" }],
                  :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
                  :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
-                 [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || "" }]
+                 [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || "" }],
+                 [:tag_action_name, proc { |row| row.tag_action.try(:name) || "" }],
+                 [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
 
   acts_as_import resource_class: Importing::CustomersAuth
 

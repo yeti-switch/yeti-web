@@ -49,7 +49,8 @@ ActiveAdmin.register Destination do
                  :dp_margin_fixed, :dp_margin_percent,
                  [:profit_control_mode_name, proc { |row| row.profit_control_mode.try(:name) }],
                  :valid_from, :valid_till,
-                 :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing
+                 :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing,
+                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }]
 
   acts_as_import resource_class: Importing::Destination
 

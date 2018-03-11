@@ -10,6 +10,18 @@ ActiveAdmin.register Routing::NumberlistItem do
   acts_as_clone
   acts_as_safe_destroy
 
+  acts_as_export :id,
+                 :key,
+                 [:numberlist_name, proc { |row| row.numberlist.name }],
+                 [:action_name, proc { |row| row.action.try(:name) }],
+                 :src_rewrite_rule,
+                 :src_rewrite_result,
+                 :dst_rewrite_rule,
+                 :dst_rewrite_result,
+                 [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
+                 [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
+                 :created_at, :updated_at
+
   includes :numberlist, :action
 
   permit_params :numberlist_id, :key, :action_id,
@@ -59,7 +71,7 @@ ActiveAdmin.register Routing::NumberlistItem do
       row :src_rewrite_result
       row :dst_rewrite_rule
       row :dst_rewrite_result
-      row :createa_at
+      row :created_at
       row :updated_at
       row :tag_action
       row :display_tag_action_value

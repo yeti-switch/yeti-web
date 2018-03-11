@@ -2,6 +2,12 @@ class Yeti::ActiveRecord < ActiveRecord::Base
 
   self.abstract_class = true
 
+  def self.array_belongs_to(name, class_name:, foreign_key:)
+    define_method(name) do
+      relation = class_name.is_a?(String) ? class_name.constantize : class_name
+      relation.where(id: self.public_send(foreign_key))
+    end
+  end
 
   def self.db_version
     self.fetch_sp_val("select max(version) from public.schema_migrations")

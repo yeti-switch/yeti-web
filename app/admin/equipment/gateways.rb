@@ -85,7 +85,7 @@ ActiveAdmin.register Gateway do
                  [:dtmf_receive_mode_name, proc { |row| row.dtmf_receive_mode.try(:name) }],
                  :suppress_early_media,
                  :send_lnp_information,
-                 :force_one_way_early_media, :process_30x_redirect, :term_process_refer
+                 :force_one_way_early_media, :max_30x_redirects
 
   acts_as_import resource_class: Importing::Gateway
 
