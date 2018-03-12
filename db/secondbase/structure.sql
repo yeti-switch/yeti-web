@@ -799,6 +799,19 @@ $$;
 
 
 --
+-- Name: streaming_insert_event(anyelement); Type: FUNCTION; Schema: event; Owner: -
+--
+
+CREATE FUNCTION event.streaming_insert_event(ev_data anyelement) RETURNS bigint
+    LANGUAGE plpgsql
+    AS $$
+begin
+    return pgq.insert_event('cdr_streaming', 'cdr', event.serialize(ev_data), null, null, null, null);
+end;
+$$;
+
+
+--
 -- Name: cdr_interval_report(integer); Type: FUNCTION; Schema: reports; Owner: -
 --
 
@@ -1238,6 +1251,7 @@ BEGIN
 
   -- generate event to routing engine
   perform event.billing_insert_event('cdr_full',v_billing_event);
+  perform event.streaming_insert_event(v_cdr);
   INSERT INTO cdr.cdr VALUES( v_cdr.*);
   RETURN 0;
 END;
@@ -6473,4 +6487,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20171104162958');
 INSERT INTO public.schema_migrations (version) VALUES ('20180228200703');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180307142909');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180312211714');
 
