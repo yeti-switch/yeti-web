@@ -201,7 +201,7 @@ else
 		[ "$$tag" != "HEAD" ] && ver="$$NEXT"; \
 		[ "$$tag" = "HEAD" ] && ver="$(version)"; \
 		[ "$$tag" = "HEAD" ] && [ $(commit_number_since_release) -eq 0 ] && continue; \
-		ver="$$(echo $$ver | sed 's/-rc/~rc/' | sed 's/-master/~master/')"; \
+		ver="$$(echo $$ver | sed 's/_/~/g')"; \
 		echo "Appending version $${ver} from $${PREV} to $${NEXT}"; \
 		changelog-git \
 			-q \
