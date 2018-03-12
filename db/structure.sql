@@ -26514,3 +26514,5 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180305132729');
 
+INSERT INTO public.schema_migrations (version) VALUES ('20180312205051');
+

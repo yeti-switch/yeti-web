@@ -355,6 +355,20 @@ insert into disconnect_code (id,namespace_id,code,reason) values (1511, 1, 480, 
 insert into disconnect_code (id,namespace_id,code,reason) values (1600, 1, 503,  'Resource cache error');
 insert into disconnect_code (id,namespace_id,code,reason) values (1601, 1, 503,  'Unknown resource overload');
 
+
+insert into class4.disconnect_code(
+  id,
+  namespace_id,
+  stop_hunting,
+  pass_reason_to_originator,
+  code,
+  reason,
+  success,
+  successnozerolen,
+  store_cdr,
+  silently_drop
+) values( 50, 2, false,false, 478, 'Unresolvable destination', false, false, true, false);
+
 --
 -- TOC entry 4439 (class 0 OID 0)
 -- Dependencies: 314
