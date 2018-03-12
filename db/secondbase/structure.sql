@@ -46,20 +46,6 @@ COMMENT ON EXTENSION pgq IS 'Generic queue for PostgreSQL';
 
 
 --
--- Name: pgq_coop; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pgq_coop WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION pgq_coop; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pgq_coop IS 'Cooperative queue consuming for PgQ';
-
-
---
 -- Name: pgq_ext; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -71,20 +57,6 @@ CREATE EXTENSION IF NOT EXISTS pgq_ext WITH SCHEMA pg_catalog;
 --
 
 COMMENT ON EXTENSION pgq_ext IS 'Target-side batch tracking infrastructure';
-
-
---
--- Name: pgq_node; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pgq_node WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION pgq_node; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pgq_node IS 'Cascaded queue infrastructure';
 
 
 --
@@ -6489,4 +6461,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180228200703');
 INSERT INTO public.schema_migrations (version) VALUES ('20180307142909');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180312211714');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180312215122');
 
