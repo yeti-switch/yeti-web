@@ -8,13 +8,13 @@ describe Api::Rest::System::IpAccessController, type: :controller  do
 
     context 'when CustomersAuth records exist' do
       before do
-        create(:customers_auth) # default ip='0.0.0.0/32'
+        create(:customers_auth) # default ip='127.0.0.0/8'
         create(:customers_auth, ip: '192.168.0.0/16')
         create(:customers_auth, ip: '2001:67c:1324:111::1/64')
       end
 
       let(:expected_response) do
-        ['0.0.0.0/32', '192.168.0.0/16', '2001:67c:1324:111::/64']
+        ['127.0.0.0/8', '192.168.0.0/16', '2001:67c:1324:111::/64']
       end
 
       it 'returns array of all CustomersAuth IPs' do

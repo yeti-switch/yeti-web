@@ -7,7 +7,7 @@
 #  customer_id                      :integer          not null
 #  rateplan_id                      :integer          not null
 #  enabled                          :boolean          default(TRUE), not null
-#  ip                               :inet
+#  ip                               :inet             not null
 #  account_id                       :integer
 #  gateway_id                       :integer          not null
 #  src_rewrite_rule                 :string
@@ -79,7 +79,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
     context 'when all attributes are ampty (default DB values)' do
       let(:attributes) do
         {
-          ip: [],
+          # ip: [], default 127.0.0.0/8
           src_prefix: [],
           dst_prefix: [],
           uri_domain: [],
@@ -94,7 +94,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       it 'create copy with empty match-conditions attributes' do
         subject
         expect(described_class.take).to have_attributes(
-          ip: nil,
+          ip: '127.0.0.0/8',
           src_prefix: '',
           dst_prefix: '',
           uri_domain: nil,
@@ -160,7 +160,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
     context 'when only SRC_PREFIXES is filled with several values' do
       let(:attributes) do
         {
-          ip: [],
+          # ip: [], default
           src_prefix: ['src-1', 'src-2'],
           dst_prefix: [],
           uri_domain: [],
@@ -247,7 +247,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
     context 'when error happens with first and only denormalized copy' do
       let(:attributes) do
         {
-          ip: [],
+          # ip: [], default
           src_prefix: [],
           dst_prefix: [],
           uri_domain: [],

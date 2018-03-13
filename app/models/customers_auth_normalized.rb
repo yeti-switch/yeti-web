@@ -7,7 +7,7 @@
 #  customer_id                      :integer          not null
 #  rateplan_id                      :integer          not null
 #  enabled                          :boolean          default(TRUE), not null
-#  ip                               :inet
+#  ip                               :inet             not null
 #  account_id                       :integer
 #  gateway_id                       :integer          not null
 #  src_rewrite_rule                 :string
