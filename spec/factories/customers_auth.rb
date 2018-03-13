@@ -10,7 +10,7 @@ FactoryGirl.define do
     association :gateway
     association :account
 
-    ip { ['0.0.0.0'] }
+    #ip { ['127.0.0.0/8'] } # default
     src_rewrite_rule nil
     src_rewrite_result nil
     dst_rewrite_rule nil

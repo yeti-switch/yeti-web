@@ -34,13 +34,13 @@
 #  dst_number_radius_rewrite_result :string
 #  radius_accounting_profile_id     :integer
 #  transport_protocol_id            :integer
-#  dst_number_min_length            :integer          default(0), not null
 #  dst_number_max_length            :integer          default(100), not null
 #  check_account_balance            :boolean          default(TRUE), not null
 #  require_incoming_auth            :boolean          default(FALSE), not null
 #  tag_action_id                    :integer
 #  tag_action_value                 :integer          default([]), not null, is an Array
-#  ip                               :inet             default([]), is an Array
+#  dst_number_min_length            :integer          default(0), not null
+#  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  src_prefix                       :string           default(["\"\""]), is an Array
 #  dst_prefix                       :string           default(["\"\""]), is an Array
 #  uri_domain                       :string           default([]), is an Array
@@ -79,6 +79,10 @@ RSpec.describe CustomersAuth, type: :model do
         :dst_prefix, :src_prefix,
         :uri_domain, :from_domain, :to_domain,
         :x_yeti_auth
+    end
+
+    context 'ip' do
+      it { is_expected.not_to allow_value([]).for(:ip) }
     end
   end
 

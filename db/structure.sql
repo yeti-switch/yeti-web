@@ -19711,14 +19711,15 @@ CREATE TABLE class4.customers_auth (
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     dst_number_min_length smallint DEFAULT 0 NOT NULL,
-    ip inet[] DEFAULT '{}'::inet[],
+    ip inet[] DEFAULT '{127.0.0.0/8}'::inet[],
     src_prefix character varying[] DEFAULT '{""}'::character varying[],
     dst_prefix character varying[] DEFAULT '{""}'::character varying[],
     uri_domain character varying[] DEFAULT '{}'::character varying[],
     from_domain character varying[] DEFAULT '{}'::character varying[],
     to_domain character varying[] DEFAULT '{}'::character varying[],
     x_yeti_auth character varying[] DEFAULT '{}'::character varying[],
-    external_id bigint
+    external_id bigint,
+    CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
 
@@ -19751,7 +19752,7 @@ CREATE TABLE class4.customers_auth_normalized (
     customer_id integer NOT NULL,
     rateplan_id integer NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
-    ip inet,
+    ip inet NOT NULL,
     account_id integer,
     gateway_id integer NOT NULL,
     src_rewrite_rule character varying,
@@ -26472,7 +26473,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26515,4 +26517,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
 INSERT INTO public.schema_migrations (version) VALUES ('20180305132729');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180312205051');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180313135314');
 
