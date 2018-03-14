@@ -151,27 +151,40 @@ class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
   has_one :country, relation_name: :dst_country, foreign_key_on: :dst_country_id
   has_one :network, relation_name: :dst_network, foreign_key_on: :dst_network_id
 
-  filter :customer_auth_external_id
-  filter :failed_resource_type_id
-  filter :success
-  filter :src_prefix_in, apply: ->(records, values, _options) do
+  filter :customer_auth_external_id_eq, apply: ->(records, values, _options) do
+    records.where(customer_auth_external_id: values)
+  end
+  filter :failed_resource_type_id_eq, apply: ->(records, values, _options) do
+    records.where(failed_resource_type_id: values)
+  end
+  filter :success_eq, apply: ->(records, values, _options) do
+    records.where(success: values[0])
+  end
+  filter :src_prefix_in_contains, apply: ->(records, values, _options) do
     _scope = records
     values.each do |v|
       _scope = _scope.where("src_prefix_in LIKE ?", "%#{v}%")
     end
     _scope
   end
-  filter :dst_prefix_in, apply: ->(records, values, _options) do
+  filter :dst_prefix_in_contains, apply: ->(records, values, _options) do
     _scope = records
     values.each do |v|
       _scope = _scope.where("dst_prefix_in LIKE ?", "%#{v}%")
     end
     _scope
   end
-  filter :src_prefix_routing, apply: ->(records, values, _options) do
+  filter :src_prefix_routing_contains, apply: ->(records, values, _options) do
     _scope = records
     values.each do |v|
       _scope = _scope.where("src_prefix_routing LIKE ?", "%#{v}%")
+    end
+    _scope
+  end
+  filter :dst_prefix_routing_contains, apply: ->(records, values, _options) do
+    _scope = records
+    values.each do |v|
+      _scope = _scope.where("dst_prefix_routing LIKE ?", "%#{v}%")
     end
     _scope
   end
@@ -181,7 +194,13 @@ class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
   filter :time_start_less_or_eq, apply: ->(records, values, _options) do
     records.where('time_start <= ?', values[0])
   end
-  filter :customer_acc_external_id
+  filter :customer_acc_external_id_eq, apply: ->(records, values, _options) do
+    records.where(customer_acc_external_id: values)
+  end
+
+  filter :is_last_cdr_eq, apply: ->(records, values, _options) do
+    records.where(is_last_cdr: values[0])
+  end
 
   # add supporting associations from non cdr namespaces
   def self.resource_for(type)

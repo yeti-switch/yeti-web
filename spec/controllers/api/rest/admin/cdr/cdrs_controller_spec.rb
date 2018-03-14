@@ -56,12 +56,12 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     end
 
     context 'filtering' do
-      context 'by customer_auth_external_id' do
+      context 'by customer_auth_external_id_eq' do
         let(:filters) do
-          { 'customer-auth-external-id' => customer_auth.external_id }
+          { 'customer-auth-external-id-eq' => customer_auth.external_id }
         end
         let(:customer_auth) do
-          create(:customers_auth, external_id: 123)
+          create(:customers_auth, ip: '127.0.0.1/32', external_id: 123)
         end
         let!(:cdr) do
           create :cdr, :with_id, customer_auth_external_id: customer_auth.external_id
@@ -76,9 +76,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by customer_acc_external_id' do
+      context 'by customer_acc_external_id_eq' do
         let(:filters) do
-          { 'customer-acc-external-id' => cdr.customer_acc_external_id }
+          { 'customer-acc-external-id-eq' => cdr.customer_acc_external_id }
         end
         let!(:cdr) do
           create :cdr, :with_id, customer_acc_external_id: 123123
@@ -93,9 +93,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by failed_resource_type_id' do
+      context 'by failed_resource_type_id_eq' do
         let(:filters) do
-          { 'failed-resource-type-id' => cdr.failed_resource_type_id }
+          { 'failed-resource-type-id-eq' => cdr.failed_resource_type_id }
         end
         let!(:cdr) do
           create :cdr, :with_id, failed_resource_type_id: 3
@@ -110,9 +110,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by success' do
+      context 'by success_eq' do
         let(:filters) do
-          { 'success' => true }
+          { 'success-eq' => true }
         end
         before do
           Cdr::Cdr.where(id: cdrs.map(&:id)).update_all(success: false)
@@ -130,9 +130,29 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by src_prefix_in' do
+      context 'by is_last_cdr_eq' do
         let(:filters) do
-          { 'src-prefix-in' => '12345' }
+          { 'is-last-cdr-eq' => true }
+        end
+        before do
+          Cdr::Cdr.where(id: cdrs.map(&:id)).update_all(is_last_cdr: false)
+        end
+        let!(:cdr) do
+          create :cdr, :with_id, is_last_cdr: true
+        end
+        it 'only desired cdrs should be present' do
+          subject
+          expect(response_data).to match_array(
+            hash_including(
+              'id' => cdr.id.to_s
+            )
+          )
+        end
+      end
+
+      context 'by src_prefix_in_contains' do
+        let(:filters) do
+          { 'src-prefix-in-contains' => '12345' }
         end
         let!(:cdr) do
           create :cdr, :with_id, src_prefix_in: '0123456789'
@@ -147,9 +167,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by dst_prefix_in' do
+      context 'by dst_prefix_in_contains' do
         let(:filters) do
-          { 'dst-prefix-in' => '12345' }
+          { 'dst-prefix-in-contains' => '12345' }
         end
         let!(:cdr) do
           create :cdr, :with_id, dst_prefix_in: '0123456789'
@@ -164,12 +184,29 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by src_prefix_routing' do
+      context 'by src_prefix_routing_contains' do
         let(:filters) do
-          { 'src-prefix-routing' => '12345' }
+          { 'src-prefix-routing-contains' => '12345' }
         end
         let!(:cdr) do
           create :cdr, :with_id, src_prefix_routing: '0123456789'
+        end
+        it 'only desired cdrs should be present' do
+          subject
+          expect(response_data).to match_array(
+            hash_including(
+              'id' => cdr.id.to_s
+            )
+          )
+        end
+      end
+
+      context 'by dst_prefix_routing_contains' do
+        let(:filters) do
+          { 'dst-prefix-routing-contains' => '12345' }
+        end
+        let!(:cdr) do
+          create :cdr, :with_id, dst_prefix_routing: '0123456789'
         end
         it 'only desired cdrs should be present' do
           subject
