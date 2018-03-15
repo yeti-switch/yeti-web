@@ -2,7 +2,7 @@ class MultipleMatchingConditions < ActiveRecord::Migration
   def up
     execute %q{
 
-      ALTER EXTENSION yeti UPDATE TO "1.3.0";
+      ALTER EXTENSION yeti UPDATE TO "1.3.1";
 
       CREATE TABLE class4.customers_auth_normalized (
           id serial PRIMARY KEY,
@@ -2323,7 +2323,7 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
-        --v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;

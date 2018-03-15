@@ -436,7 +436,7 @@ BEGIN
             i_next_interval * --interval len
             i_next_rate::numeric/60; -- next interval rate per second
 
-    _v.amount=_v.amount_no_vat*(1+vat/100);
+    _v.amount=_v.amount_no_vat*(1+i_vat/100);
 
     _v.duration=i_initial_interval+(i_duration>i_initial_interval)::boolean::integer * CEIL((i_duration-i_initial_interval)::numeric/i_next_interval) *i_next_interval;
 
