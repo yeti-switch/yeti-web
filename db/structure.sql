@@ -16275,7 +16275,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
-        --v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
@@ -17222,7 +17222,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
-        --v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
@@ -18150,7 +18150,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
-        --v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
@@ -26473,8 +26473,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
