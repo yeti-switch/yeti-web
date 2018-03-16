@@ -11,7 +11,7 @@ resource 'Routing RoutingTagDetectionRules' do
 
   required_params = %i()
 
-  optional_params = %i(tag_action_value)
+  optional_params = %i(tag-action-value routing-tag-ids)
 
   required_relationships = %i()
   optional_relationships = %i(src-area dst-area tag-action)

@@ -81,4 +81,12 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
     end
   end
 
+  describe 'editable routing_tag_ids' do
+    include_examples :jsonapi_resource_with_routing_tag_ids do
+      let(:record) do
+        create(:routing_tag_detection_rule,
+               routing_tag_ids: tag_ids)
+      end
+    end
+  end
 end

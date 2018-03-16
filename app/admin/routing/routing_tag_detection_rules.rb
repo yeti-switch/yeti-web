@@ -9,14 +9,18 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   acts_as_safe_destroy
 
   permit_params :src_area_id, :dst_area_id,
-                :tag_action_id, tag_action_value: []
+                :tag_action_id, tag_action_value: [],
+                routing_tag_ids: []
 
-  includes :src_area, :dst_area
+  includes :src_area, :dst_area, :tag_action
 
   controller do
     def update
       if params['routing_routing_tag_detection_rule']['tag_action_value'].nil?
         params['routing_routing_tag_detection_rule']['tag_action_value'] = []
+      end
+      if params['routing_routing_tag_detection_rule']['routing_tag_ids'].nil?
+        params['routing_routing_tag_detection_rule']['routing_tag_ids'] = []
       end
       super
     end
@@ -26,25 +30,32 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     selectable_column
     id_column
     actions
+    column :routing_tags
     column :src_area
     column :dst_area
     column :tag_action
-    column :routing_tags
+    column :display_tag_action_value
   end
 
   show do |s|
     attributes_table do
       row :id
+      row :routing_tags
       row :src_area
       row :dst_area
       row :tag_action
-      row :routing_tags
+      row :display_tag_action_value
     end
   end
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
+      f.input :routing_tag_ids, as: :select,
+        collection: RoutingTagDetectionRuleDecorator.decorate(f.object).routing_tag_options,
+        multiple: true,
+        include_hidden: false,
+        input_html: { class: 'chosen' }
       f.input :src_area
       f.input :dst_area
       f.input :tag_action
