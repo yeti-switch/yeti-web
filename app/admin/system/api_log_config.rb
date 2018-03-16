@@ -5,6 +5,8 @@ ActiveAdmin.register System::ApiLogConfig, as: 'Api Log Config' do
 
   permit_params :debug
 
+  filter :controller
+
   index do
     column :controller
     boolean_edit_column :debug
