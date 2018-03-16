@@ -186,7 +186,7 @@ ActiveAdmin.register CustomersAuth do
     column :radius_accounting_profile, sortable: 'radius_accounting_profiles.name'
 
     column :tag_action
-    column :routing_tags
+    column :display_tag_action_value
   end
 
   filter :id
@@ -384,7 +384,7 @@ ActiveAdmin.register CustomersAuth do
       tab :routing_tags do
         attributes_table do
           row :tag_action
-          row :routing_tags
+          row :display_tag_action_value
         end
       end
     end

@@ -51,7 +51,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :created_at
     column :updated_at
     column :tag_action
-    column :routing_tags
+    column :display_tag_action_value
   end
 
   show do |s|
@@ -67,7 +67,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :created_at
       row :updated_at
       row :tag_action
-      row :routing_tags
+      row :display_tag_action_value
     end
   end
 

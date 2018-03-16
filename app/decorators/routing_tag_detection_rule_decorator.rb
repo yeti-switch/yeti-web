@@ -5,5 +5,6 @@ class RoutingTagDetectionRuleDecorator < Draper::Decorator
 
   # TODO: must be another way to share decorated methods
   include RoutingTagActionDecorator
+  include RoutingTagIdsDecorator
 
 end

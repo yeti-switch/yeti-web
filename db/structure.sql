@@ -20697,7 +20697,8 @@ CREATE TABLE class4.routing_tag_detection_rules (
     dst_area_id integer,
     src_area_id integer,
     tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -26473,7 +26474,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26518,4 +26520,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180305132729');
 INSERT INTO public.schema_migrations (version) VALUES ('20180312205051');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180313135314');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180316061214');
 
