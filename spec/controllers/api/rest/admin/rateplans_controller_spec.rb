@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Api::Rest::Admin::RateplansController, type: :controller do
-  let(:rpcm) { create :rate_profit_control_mode }
+  let(:rpcm) { Routing::RateProfitControlMode.last }
 
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }

@@ -20966,8 +20966,8 @@ CREATE TABLE data_import.import_contractors (
     description character varying,
     address character varying,
     phones character varying,
-    tech_contact character varying,
-    fin_contact character varying
+    smtp_connection_id integer,
+    smtp_connection_name character varying
 );
 
 
@@ -21056,7 +21056,11 @@ CREATE TABLE data_import.import_customers_auth (
     check_account_balance boolean,
     require_incoming_auth boolean,
     tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    tag_action_name character varying,
+    tag_action_value_names character varying DEFAULT ''::character varying NOT NULL,
+    dst_number_min_length integer,
+    dst_number_max_length integer
 );
 
 
@@ -21111,7 +21115,10 @@ CREATE TABLE data_import.import_destinations (
     acd_limit real,
     short_calls_limit real,
     reverse_billing boolean,
-    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    routing_tag_names character varying DEFAULT ''::character varying NOT NULL,
+    dst_number_min_length integer,
+    dst_number_max_length integer
 );
 
 
@@ -21175,7 +21182,10 @@ CREATE TABLE data_import.import_dialpeers (
     short_calls_limit real DEFAULT 1 NOT NULL,
     exclusive_route boolean,
     reverse_billing boolean,
-    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    routing_tag_names character varying DEFAULT ''::character varying NOT NULL,
+    dst_number_min_length integer,
+    dst_number_max_length integer
 );
 
 
@@ -21380,7 +21390,12 @@ CREATE TABLE data_import.import_gateways (
     rel100_mode_name character varying,
     is_shared boolean,
     incoming_auth_username character varying,
-    incoming_auth_password character varying
+    incoming_auth_password character varying,
+    relay_update boolean,
+    suppress_early_media boolean,
+    send_lnp_information boolean,
+    force_one_way_early_media boolean,
+    max_30x_redirects integer
 );
 
 
@@ -21423,7 +21438,9 @@ CREATE TABLE data_import.import_rateplans (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
-    error_string character varying
+    error_string character varying,
+    profit_control_mode_id integer,
+    profit_control_mode_name character varying
 );
 
 
@@ -26522,4 +26539,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180312205051');
 INSERT INTO public.schema_migrations (version) VALUES ('20180313135314');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180316061214');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180318143341');
 

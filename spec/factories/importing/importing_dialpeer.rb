@@ -1,6 +1,12 @@
 FactoryGirl.define do
   factory :importing_dialpeer, class: Importing::Dialpeer do
+    transient do
+      _tags { create_list(:routing_tag, 2) }
+    end
+
     o_id nil
+    error_string nil
+
     enabled true
     prefix nil
     src_rewrite_rule nil
@@ -27,7 +33,12 @@ FactoryGirl.define do
     valid_from '1970-01-01 00:00:00'
     valid_till '2020-01-01 00:00:00'
     gateway_group_id nil
-    error_string nil
     reverse_billing false
+
+    dst_number_min_length 1
+    dst_number_max_length 7
+
+    routing_tag_ids { _tags.map(&:id) }
+    routing_tag_names { _tags.map(&:name).join(', ')  }
   end
 end

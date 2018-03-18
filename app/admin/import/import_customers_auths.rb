@@ -46,6 +46,9 @@ ActiveAdmin.register Importing::CustomersAuth do
 
     column :src_prefix
     column :dst_prefix
+    column :dst_number_length do |c|
+      c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
+    end
     column :uri_domain
     column :from_domain
     column :to_domain
@@ -158,6 +161,14 @@ ActiveAdmin.register Importing::CustomersAuth do
       end
     end
 
+    column :tag_action
+    column :tag_action_value do |row|
+      if row.tag_action_value.present?
+        Routing::RoutingTag.where(id: row.tag_action_value).pluck(:name).join(', ')
+      else
+        row.tag_action_value_names
+      end
+    end
   end
 
 end

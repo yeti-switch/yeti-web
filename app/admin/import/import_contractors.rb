@@ -5,7 +5,7 @@ ActiveAdmin.register Importing::Contractor do
   filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
   filter :vendor, as: :select, collection: [["Yes", true], ["No", false]]
   filter :customer, as: :select, collection: [["Yes", true], ["No", false]]
-  
+
   acts_as_import_preview
 
   controller do
@@ -24,7 +24,14 @@ ActiveAdmin.register Importing::Contractor do
     column :name
     column :enabled
     column :vendor
-    column :customer    
+    column :customer
+    column :smtp_connection, sortable: :smtp_connection_name do |row|
+      if row.smtp_connection.blank?
+        row.smtp_connection_name
+      else
+        auto_link(row.smtp_connection, row.smtp_connection_name)
+      end
+    end
   end
-  
+
 end

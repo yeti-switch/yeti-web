@@ -21,8 +21,11 @@ ActiveAdmin.register Contractor do
                        end)
 
   acts_as_delayed_job_lock
-  
-  acts_as_export :id, :enabled, :name, :vendor,:customer
+
+  acts_as_export :id, :name,
+                 :enabled, :vendor, :customer,
+                 [:smtp_connection_name, proc { |row| row.smtp_connection.try(:name) }]
+
   acts_as_import resource_class: Importing::Contractor
 
   scope :vendors
@@ -37,7 +40,7 @@ ActiveAdmin.register Contractor do
      @contractors = Contractor.where(vendor: params[:vendor_flag])
      render text:                 view_context.options_from_collection_for_select(@contractors, :id, :display_name)
    end
-   
+
    collection_action :get_accounts do
      contractor =  Contractor.find(params[:contractor_id])
      @accounts = contractor.accounts

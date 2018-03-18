@@ -19,7 +19,8 @@ describe 'Export Rateplan', type: :feature do
     expect(subject).to match_array(
       [
         ['Id', item.id.to_s],
-        ['Name', item.name]
+        ['Name', item.name],
+        ['Profit control mode name', item.profit_control_mode.name]
       ]
     )
   end

@@ -11,15 +11,13 @@ resource 'Rate profit control modes' do
   let(:type) { 'rate-profit-control-modes' }
 
   get '/api/rest/admin/routing/rate-profit-control-modes' do
-    before { create_list(:rate_profit_control_mode, 2) }
-
     example_request 'get listing' do
       expect(status).to eq(200)
     end
   end
 
   get '/api/rest/admin/routing/rate-profit-control-modes/:id' do
-    let(:id) { create(:rate_profit_control_mode).id }
+    let(:id) { Routing::RateProfitControlMode.take.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)

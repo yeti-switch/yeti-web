@@ -25,12 +25,18 @@ shared_examples 'Jobs for importing data' do
       end
     end
 
-
+    # Array.wrap(v).join(', ') is needed for column with type "varchar[]"
+    # In importing table they are plain varchar devided by comma
+    # Array.wrap(v).join(', ') makes such fields identical in real and importing records
     it 'imported item has the same import_attributes values as preview item' do
       columns = preview_class.import_attributes.join(',')
-      preview_attr = preview_class.select(columns).last.as_json
+      preview_attr = preview_class.select(columns).last.as_json.map { |k, v| [k, Array.wrap(v).join(', ')]  }.to_h
       expect{ run_jobs }.to change{
-                              preview_attr == import_class.select(columns).last.as_json
+                              real_attr = import_class.select(columns).last
+                              if real_attr
+                                real_attr = real_attr.as_json.map { |k, v| [k, Array.wrap(v).join(', ')]  }.to_h
+                              end
+                              preview_attr == real_attr
                             }.from(false).to(true)
     end
   end

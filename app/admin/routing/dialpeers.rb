@@ -65,7 +65,7 @@ ActiveAdmin.register Dialpeer do
                  :acd_limit, :asr_limit, :short_calls_limit, :capacity,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
-                 :created_at, :reverse_billing,
+                 :reverse_billing,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }]
 
   acts_as_import resource_class: Importing::Dialpeer

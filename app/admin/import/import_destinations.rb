@@ -1,7 +1,6 @@
 ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
 
   filter :rateplan, input_html: { class: 'chosen'}
-  filter :routing_tag, input_html: { class: 'chosen'}
   filter :prefix
   filter :rate
   filter :connect_fee
@@ -16,7 +15,7 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
     end
   end
 
-  includes :rateplan, :routing_tag, :rate_policy
+  includes :rateplan, :rate_policy
 
   index do
     selectable_column
@@ -35,14 +34,15 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
        end
     end
 
-    column :routing_tag, sortable: :routing_tag_name do |row|
-      if row.routing_tag.blank?
-        row.routing_tag_name
+    column :routing_tag_ids do |row|
+      if row.routing_tag_ids.present?
+        Routing::RoutingTag.where(id: row.routing_tag_ids).pluck(:name).join(', ')
       else
-        auto_link(row.routing_tag, row.routing_tag_name)
+        row.routing_tag_names
       end
     end
-    
+
+
     column :rate_policy , sortable: :rate_policy_name do |row|
        if row.rate_policy.blank?
           row.rate_policy_name
@@ -51,7 +51,7 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
        end
     end
     column :reverse_billing
-    
+
     column :initial_interval
     column :initial_rate
     column :next_interval

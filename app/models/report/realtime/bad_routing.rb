@@ -101,7 +101,6 @@
 #  ruri_domain                     :string
 #  to_domain                       :string
 #  from_domain                     :string
-#  routing_tag_id                  :integer
 #  src_area_id                     :integer
 #  dst_area_id                     :integer
 #  auth_orig_transport_protocol_id :integer

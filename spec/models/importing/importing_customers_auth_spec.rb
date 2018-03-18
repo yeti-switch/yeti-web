@@ -31,8 +31,22 @@ describe Importing::CustomersAuth do
                         rateplan_id: nil,
                         account_id: nil,
                         gateway_id: nil,
-                        diversion_policy_id: nil
+                        diversion_policy_id: nil,
+                        tag_action_id: nil,
+                        tag_action_value: []
                     }
+
+    it 'convert tag_action_value to array of IDs' do
+      tag_action = Routing::TagAction.find_by(name: preview_item.tag_action_name)
+      tags = Routing::RoutingTag.where(name: preview_item.tag_action_value_names.split(', '))
+
+      subject
+
+      expect(preview_item.reload).to have_attributes(
+        tag_action_id: tag_action.id,
+        tag_action_value: tags.map(&:id)
+      )
+    end
   end
 
   it_behaves_like 'after_import_hook when real items match' do
