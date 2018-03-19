@@ -6,7 +6,7 @@ version = $(shell dpkg-parsechangelog --help | grep -q '\--show-field' \
 	&& dpkg-parsechangelog --show-field version \
 	|| dpkg-parsechangelog | grep Version | awk '{ print $$2; }')
 commit = $(shell git rev-parse HEAD)
-version_file = version.yml
+version_file := version.yml
 
 bundle_bin=vendor/bundler/bin/bundle
 
@@ -18,55 +18,8 @@ env_mode = production
 database_yml_exists := $(shell test -f config/database.yml && echo "true" || echo "false")
 lintian_flag := $(if $(lintian),--lintian,--no-lintian)
 debian_host_release != lsb_release -sc
-
-#
-# chlog target vars
-#
-compare_versions = $(shell dpkg --compare-versions "$(1)" "$(2)" "$(3)" && echo true || echo false)
-
-DEBFULLNAME ?= YETI team
-DEBMAIL ?= dev@yeti-switch.org
-git_first_commmit = $(shell git rev-list --max-parents=0 HEAD)
-git_last_commit = $(shell git rev-parse HEAD)
-
-git_version = $(shell git --version | awk '{print $$3}')
-ifeq "$(call compare_versions,$(git_version),ge,2.15.0)" "true"
-	tag_list = $(shell git \
-		   -c versionsort.suffix="-rc" \
-		   -c versionsort.suffix="-master" \
-		   tag --list "[0-9].*" --sort="v:refname" --merged)
-else ifeq "$(call compare_versions,$(git_version),ge,2.7.0)" "true"
-	tag_list = $(shell git \
-		   -c versionsort.prereleaseSuffix="-rc" \
-		   -c versionsort.prereleaseSuffix="-master" \
-		   tag --list "[0-9].*" --sort="v:refname" --merged)
-else
-	tag_list != git log \
-		--simplify-by-decoration \
-		--decorate \
-		--pretty=oneline \
-		--reverse | \
-		grep -oP 'tag: .+?[,)]' | \
-		sed 's/tag: \(.*\)[),]/\1/'
-endif
-
-ifneq "$(auto_chlog)" "no"
-
-ifeq "$(words $(tag_list))" "0"
-$(error "There are no tags in git to generate changelog from!")
-endif
-
-
-last_tag = $(word $(words $(tag_list)), $(tag_list))
-commit_number_since_release := $(shell git rev-list HEAD "^$(last_tag)" | wc -l)
-
-ifeq "$(commit_number_since_release)" "0"
-version = $(last_tag)
-else
-version = $(last_tag)+$(commit_number_since_release)
-endif
-
-endif
+export DEBFULLNAME ?= YETI team
+export DEBEMAIL ?= dev@yeti-switch.org
 
 #
 # funcs
@@ -131,7 +84,7 @@ all_env: bundler pgq_processors swagger
 
 
 .PHONY: version.yml
-version.yml:
+version.yml: chlog
 	@$(info:msg=create version file (version: $(version), commit: $(commit)))
 	@echo "version:" $(version) "\ncommit:" $(commit) > $(version_file)
 
@@ -185,7 +138,7 @@ clean:
 
 
 .PHONY: package
-package: chlog
+package: version.yml
 	debuild $(lintian_flag) -e http_proxy -e https_proxy -uc -us -b
 
 
@@ -195,25 +148,8 @@ ifeq "$(auto_chlog)" "no"
 	@$(info:msg=Skipping changelog generation)
 else
 	@$(info:msg=Generating changelog Supply auto_chlog=no to skip.)
-	@which changelog-git || { $(err:msg=Failed to generate changelog. Did you install git-changelog package?) && false; }
-	PREV="$(git_first_commmit)"; for tag in $(tag_list) HEAD; do \
-		NEXT="$$tag"; \
-		[ "$$tag" != "HEAD" ] && ver="$$NEXT"; \
-		[ "$$tag" = "HEAD" ] && ver="$(version)"; \
-		[ "$$tag" = "HEAD" ] && [ $(commit_number_since_release) -eq 0 ] && continue; \
-		ver="$$(echo $$ver | sed 's/_/~/g')"; \
-		echo "Appending version $${ver} from $${PREV} to $${NEXT}"; \
-		changelog-git \
-			-q \
-			--from-commit="$$PREV" \
-			--to-commit="$$NEXT" \
-			--next-version="$$ver" \
-			--debian-branch="$(debian_host_release)" \
-			--package-name="$(pkg_name)" \
-			--user-name="$(DEBFULLNAME)" \
-			--user-email="$(DEBMAIL)"; \
-		PREV="$$NEXT"; \
-	done
+	@which changelog-gen || { $(err:msg=Failed to generate changelog. Did you install git-changelog package?) && false; }
+	changelog-gen -p "$(pkg_name)" -d "$(debian_host_release)" -A "s/_/~/g" "s/-master/~master/" "s/-rc/~rc/"
 endif
 
 
