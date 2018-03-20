@@ -1,0 +1,45 @@
+module Worker
+  class CdrExportJob < ActiveJob::Base
+    queue_as 'cdr_export'
+
+    attr_reader :cdr_export
+
+    def perform(cdr_export_id)
+      @cdr_export = find_cdr_export(cdr_export_id)
+
+      Cdr::Cdr.connection.execute("COPY (#{cdr_export.export_sql}) TO '#{file_path}' WITH CSV HEADER;")
+
+      # update cdr_export status
+      cdr_export.update!(status: CdrExport::STATUS_COMPLETED)
+    rescue => e
+      logger.error { e.message }
+      logger.error { e.backtrace.join("\n") }
+      cdr_export.update!(status: CdrExport::STATUS_FAILED)
+    ensure
+      # ping callback_url
+      if cdr_export.callback_url
+        params = { export_id: cdr_export.id, status: cdr_export.status }
+        PingCallbackUrlJob.perform_later(cdr_export.callback_url, params)
+      end
+    end
+
+    private
+
+    def file_path
+      "#{dir_path}/#{filename}.csv"
+    end
+
+    def dir_path
+      Rails.configuration.yeti_web.fetch('cdr_export').fetch('dir_path').chomp('/')
+    end
+
+    def filename
+      cdr_export.id
+    end
+
+    def find_cdr_export(id)
+      @cdr_export = CdrExport.find(id)
+    end
+
+  end
+end

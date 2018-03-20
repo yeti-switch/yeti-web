@@ -188,10 +188,10 @@ class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
     end
     _scope
   end
-  filter :time_start_greater_or_eq, apply: ->(records, values, _options) do
+  filter :time_start_gteq, apply: ->(records, values, _options) do
     records.where('time_start >= ?', values[0])
   end
-  filter :time_start_less_or_eq, apply: ->(records, values, _options) do
+  filter :time_start_lteq, apply: ->(records, values, _options) do
     records.where('time_start <= ?', values[0])
   end
   filter :customer_acc_external_id_eq, apply: ->(records, values, _options) do
