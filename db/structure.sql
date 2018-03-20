@@ -22621,6 +22621,41 @@ ALTER SEQUENCE sys.api_log_config_id_seq OWNED BY sys.api_log_config.id;
 
 
 --
+-- Name: cdr_exports; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sys.cdr_exports (
+    id integer NOT NULL,
+    status character varying NOT NULL,
+    fields character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    filters json DEFAULT '{}'::json NOT NULL,
+    callback_url character varying,
+    type character varying NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: cdr_exports_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.cdr_exports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cdr_exports_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.cdr_exports_id_seq OWNED BY sys.cdr_exports.id;
+
+
+--
 -- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -23786,6 +23821,13 @@ ALTER TABLE ONLY sys.api_access ALTER COLUMN id SET DEFAULT nextval('sys.api_acc
 --
 
 ALTER TABLE ONLY sys.api_log_config ALTER COLUMN id SET DEFAULT nextval('sys.api_log_config_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.cdr_exports ALTER COLUMN id SET DEFAULT nextval('sys.cdr_exports_id_seq'::regclass);
 
 
 --
@@ -25236,6 +25278,14 @@ ALTER TABLE ONLY sys.api_log_config
 
 
 --
+-- Name: cdr_exports_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.cdr_exports
+    ADD CONSTRAINT cdr_exports_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cdrtables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -26541,4 +26591,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180313135314');
 INSERT INTO public.schema_migrations (version) VALUES ('20180316061214');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180318143341');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180320120746');
 

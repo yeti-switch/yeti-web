@@ -61,7 +61,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           { 'customer-auth-external-id-eq' => customer_auth.external_id }
         end
         let(:customer_auth) do
-          create(:customers_auth, ip: '127.0.0.1/32', external_id: 123)
+          create(:customers_auth, external_id: 123)
         end
         let!(:cdr) do
           create :cdr, :with_id, customer_auth_external_id: customer_auth.external_id
@@ -218,9 +218,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by time_start_greater_or_eq' do
+      context 'by time_start_gteq' do
         let(:filters) do
-          { 'time-start-greater-or-eq' => Time.now.utc.beginning_of_month }
+          { 'time-start-gteq' => Time.now.utc.beginning_of_month }
         end
         let!(:cdr) do
           create :cdr, :with_id, time_start: Time.now.utc
@@ -235,9 +235,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by time_start_less_or_eq' do
+      context 'by time_start_lteq' do
         let(:filters) do
-          { 'time-start-less-or-eq' => 45.days.ago.utc }
+          { 'time-start-lteq' => 45.days.ago.utc }
         end
         let!(:cdr) do
           create :cdr, :with_id, time_start: 2.months.ago.utc
