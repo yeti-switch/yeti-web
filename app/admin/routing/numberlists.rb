@@ -22,6 +22,15 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   acts_as_delayed_job_lock
 
+  acts_as_export :id, :name,
+                 [:mode_name, proc { |row| row.mode.name }],
+                 [:default_action_name, proc { |row| row.default_action.name }],
+                 :default_src_rewrite_rule, :default_src_rewrite_result,
+                 :default_dst_rewrite_rule, :default_dst_rewrite_result,
+                 [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
+                 [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
+                 :created_at, :updated_at
+
   includes :mode, :default_action
 
   permit_params :name, :mode_id, :default_action_id,

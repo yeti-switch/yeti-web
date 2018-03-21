@@ -82,6 +82,8 @@ class CustomersAuth < Yeti::ActiveRecord
 
   belongs_to :tag_action, class_name: 'Routing::TagAction'
 
+  array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
+
   has_many :destinations, through: :rateplan
   has_many :normalized_copies, class_name: 'CustomersAuthNormalized', foreign_key: :customers_auth_id, dependent: :delete_all
 

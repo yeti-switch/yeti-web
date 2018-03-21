@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-xdescribe Importing::Contractor do
+describe Importing::Contractor do
 
   let(:preview_item) { described_class.last }
 

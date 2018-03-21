@@ -6,7 +6,9 @@ ActiveAdmin.register Rateplan do
   acts_as_clone_with_helper helper: Routing::RateplanDuplicator, name: "Copy with destinations"
   acts_as_safe_destroy
 
-  acts_as_export :id, :name
+  acts_as_export :id, :name,
+                 [:profit_control_mode_name, proc { |row| row.profit_control_mode.name }]
+
   acts_as_import resource_class: Importing::Rateplan
 
   permit_params :name, :profit_control_mode_id, send_quality_alarms_to: []

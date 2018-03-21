@@ -32,7 +32,7 @@
 #  routing_tag_ids        :integer          default([]), not null, is an Array
 #
 
-class Destination < ActiveRecord::Base
+class Destination < Yeti::ActiveRecord
   self.table_name = 'class4.destinations'
 
   belongs_to :rateplan
@@ -41,9 +41,7 @@ class Destination < ActiveRecord::Base
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :destination_id, dependent: :nullify
 
-  def routing_tags
-    @routing_tags ||= Routing::RoutingTag.where(id: routing_tag_ids)
-  end
+  array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
   has_paper_trail class_name: 'AuditLogItem'
 

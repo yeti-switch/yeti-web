@@ -8,6 +8,13 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   acts_as_clone
   acts_as_safe_destroy
 
+  acts_as_export :id,
+                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
+                 [:src_area_name, proc { |row| row.src_area.try(:name) } ],
+                 [:dst_area_name, proc { |row| row.dst_area.try(:name) } ],
+                 [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
+                 [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
+
   permit_params :src_area_id, :dst_area_id,
                 :tag_action_id, tag_action_value: [],
                 routing_tag_ids: []

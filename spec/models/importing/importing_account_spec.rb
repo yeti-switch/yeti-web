@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-xdescribe Importing::Account do
+describe Importing::Account do
 
   include_context :init_contractor, name: 'PBXww', vendor: false, customer: true
 

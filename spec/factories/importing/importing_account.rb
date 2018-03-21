@@ -7,8 +7,8 @@ FactoryGirl.define do
     balance 0
     min_balance 0
     max_balance 0
-    origination_capacity 0
-    termination_capacity 0
+    origination_capacity 1
+    termination_capacity 1
     error_string nil
   end
 end

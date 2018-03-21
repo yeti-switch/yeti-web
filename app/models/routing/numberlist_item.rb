@@ -24,6 +24,7 @@ class Routing::NumberlistItem < Yeti::ActiveRecord
   belongs_to :numberlist, class_name: Routing::Numberlist, foreign_key: :numberlist_id
   belongs_to :action, class_name: Routing::NumberlistAction, foreign_key: :action_id
   belongs_to :tag_action, class_name: 'Routing::TagAction'
+  array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
   validates_uniqueness_of :key, scope: [ :numberlist_id ]
 

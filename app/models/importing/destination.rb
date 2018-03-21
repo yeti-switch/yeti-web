@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: import_destinations
+# Table name: data_import.import_destinations
 #
 #  id                       :integer          not null, primary key
 #  o_id                     :integer
@@ -30,10 +30,13 @@
 #  short_calls_limit        :float
 #  reverse_billing          :boolean
 #  routing_tag_ids          :integer          default([]), not null, is an Array
+#  routing_tag_names        :string           default(""), not null
+#  dst_number_min_length    :integer
+#  dst_number_max_length    :integer
 #
 
 class Importing::Destination < Importing::Base
-  self.table_name = 'import_destinations'
+  self.table_name = 'data_import.import_destinations'
 
   belongs_to :rateplan, class_name: '::Rateplan'
   belongs_to :rate_policy, class_name: '::DestinationRatePolicy'
@@ -44,8 +47,15 @@ class Importing::Destination < Importing::Base
                            'initial_interval', 'next_interval', 'initial_rate', 'next_rate',
                            'connect_fee', 'rate_policy_id', 'reverse_billing', 'dp_margin_fixed', 'dp_margin_percent', 'use_dp_intervals',
                            'valid_from', 'valid_till', 'profit_control_mode_id',
-                           'asr_limit', 'acd_limit', 'short_calls_limit', 'routing_tag_ids']
+                           'asr_limit', 'acd_limit', 'short_calls_limit',
+                           'dst_number_min_length', 'dst_number_max_length',
+                           'routing_tag_ids']
 
   self.import_class = ::Destination
+
+  def self.after_import_hook(unique_columns = [])
+    self.resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
+    super
+  end
 
 end

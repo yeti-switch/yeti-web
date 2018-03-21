@@ -47,6 +47,7 @@ RSpec.configure do |config|
       'class4.numberlist_modes',
       'class4.numberlist_actions',
       'class4.tag_actions',
+      'class4.rate_profit_control_modes',
       'sys.timezones'
   ]
 

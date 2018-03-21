@@ -64,6 +64,10 @@
 #  require_incoming_auth            :boolean
 #  tag_action_id                    :integer
 #  tag_action_value                 :integer          default([]), not null, is an Array
+#  tag_action_name                  :string
+#  tag_action_value_names           :string           default(""), not null
+#  dst_number_min_length            :integer
+#  dst_number_max_length            :integer
 #
 
 class Importing::CustomersAuth < Importing::Base
@@ -84,6 +88,7 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id
   belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
   belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+  belongs_to :tag_action, class_name: 'Routing::TagAction'
 
 
   self.import_attributes = [
@@ -134,14 +139,10 @@ class Importing::CustomersAuth < Importing::Base
 
   self.import_class = ::CustomersAuth
 
-  # "customers_auth.ip [inte]" equal this:
-  def ip
-    self[:ip].present? ? IPAddr.new(self[:ip]) : self[:ip]
-  end
-
   def self.after_import_hook(unique_columns = [])
-    self.where(src_prefix: nil).update_all(src_prefix: '')
-    self.where(dst_prefix: nil).update_all(dst_prefix: '')
+    self.where(src_prefix: nil).update_all(src_prefix: [''])
+    self.where(dst_prefix: nil).update_all(dst_prefix: [''])
+    self.resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
   end
 

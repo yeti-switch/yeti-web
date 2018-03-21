@@ -100,4 +100,20 @@ class Importing::Base < Yeti::ActiveRecord
     Yeti::ActiveRecord.connection.execute(sql)
   end
 
+  # Use this method for resolving:
+  #   routing_tag_names => routing_tag_ids
+  #   tag_action_value_names => tag_action_value
+  def self.resolve_array_of_tags(ids_column, names_column)
+    sql = "
+      UPDATE #{self.table_name}
+      SET #{ids_column} = ARRAY(
+            SELECT id::smallint
+            FROM #{Routing::RoutingTag.table_name}
+            WHERE name = ANY ( string_to_array(replace(ta.#{names_column}, ', ', ',')::varchar, ',')::varchar[] )
+          )
+      FROM #{self.table_name} AS ta
+      WHERE ta.#{ids_column} = '{}' AND ta.#{names_column} <> '';
+    "
+    Yeti::ActiveRecord.connection.execute(sql)
+  end
 end

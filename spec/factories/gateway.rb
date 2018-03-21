@@ -15,10 +15,6 @@ FactoryGirl.define do
     transport_protocol_id 1
     term_proxy_transport_protocol_id 1
     orig_proxy_transport_protocol_id 1
-
-    association :contractor, factory: :contractor, vendor: true
-    association :codec_group
-
     host "test.example.com"
     port nil
     src_rewrite_rule nil
@@ -88,5 +84,9 @@ FactoryGirl.define do
     rtp_force_relay_cn true
     sensor_id nil
     filter_noaudio_streams false
+
+    association :contractor, factory: :contractor, vendor: true
+    codec_group { CodecGroup.take || association(:codec_group) }
+
   end
 end

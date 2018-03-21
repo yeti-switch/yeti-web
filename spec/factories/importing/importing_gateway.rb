@@ -99,5 +99,10 @@ FactoryGirl.define do
     dtmf_send_mode_name 'RFC 2833'
     dtmf_receive_mode_id 1
     dtmf_receive_mode_name 'RFC 2833'
+    relay_update true
+    suppress_early_media true
+    send_lnp_information true
+    force_one_way_early_media true
+    max_30x_redirects 1
   end
 end

@@ -115,6 +115,11 @@
 #  is_shared                          :boolean
 #  incoming_auth_username             :string
 #  incoming_auth_password             :string
+#  relay_update                       :boolean
+#  suppress_early_media               :boolean
+#  send_lnp_information               :boolean
+#  force_one_way_early_media          :boolean
+#  max_30x_redirects                  :integer
 #
 
 class Importing::Gateway  < Importing::Base

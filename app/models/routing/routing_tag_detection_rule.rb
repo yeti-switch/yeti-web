@@ -21,6 +21,9 @@ class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   belongs_to :dst_area, class_name: Routing::Area, foreign_key: :dst_area_id
   belongs_to :tag_action, class_name: 'Routing::TagAction'
 
+  array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
+  array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
+
   def display_name
     "#{self.id}"
   end
