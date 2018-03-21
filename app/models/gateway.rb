@@ -222,6 +222,18 @@ class Gateway < Yeti::ActiveRecord
   scope :originations, -> { where(allow_origination: true) }
   scope :terminations, -> { where(allow_termination: true) }
 
+
+  scope :disabled_for_origination, -> {
+      where(
+        Gateway.arel_table[:allow_origination].eq(false).or(Gateway.arel_table[:enabled].eq(false))
+      )
+  }
+  scope :disabled_for_termination, -> {
+    where(
+      Gateway.arel_table[:allow_termination].eq(false).or(Gateway.arel_table[:enabled].eq(false))
+    )
+  }
+
   def fire_lock(stat)
     transaction do
       self.locked = true

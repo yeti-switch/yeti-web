@@ -96,8 +96,8 @@ module Jobs
     attr_reader :now
 
     MONITORED_COLUMNS = [
-        :orig_gw_id,
-        :term_gw_id,
+        :orig_gw_id, # link to gateway, drop call if not enabled or if not allow_origination
+        :term_gw_id, # link to gateway, drop call if not enabled or if not allow_termination
         :dialpeer_id,
         :node_id,
         :local_tag,
@@ -133,6 +133,7 @@ module Jobs
       detect_customers_calls_to_reject
       detect_vendors_calls_to_reject
       detect_random_calls_to_reject
+      detect_gateway_calls_to_reject
     end
 
     # random_disconnect_enable        | f
@@ -199,6 +200,16 @@ module Jobs
       end
     end
 
+    # detect gateway is disabled by orig_gw_id and term_gw_id
+    def detect_gateway_calls_to_reject
+      flatten_calls.each do |call|
+        if disabled_orig_gw_active_calls.key?(call['orig_gw_id']) || disabled_term_gw_active_calls.key?(call['term_gw_id'])
+            @terminate_calls.merge!({call['local_tag'] => call})
+        end
+      end
+    end
+
+
     def flatten_calls
       @flatten_calls ||= active_calls.values.flatten
     end
@@ -209,6 +220,22 @@ module Jobs
 
     def vendors_active_calls
       @vendors_active_calls ||= flatten_calls.group_by { |c| c["vendor_acc_id"] }
+    end
+
+
+    #returns hash with keys as ids of disabled gateways for origination
+    def disabled_orig_gw_active_calls
+      @disabled_orig_gw_active_calls ||= begin
+        gw_ids = flatten_calls.collect { |c| c["orig_gw_id"] }.uniq
+        Hash[Gateway.disabled_for_origination.where(id: gw_ids).pluck(:id).zip]
+      end
+    end
+    #returns hash with keys as ids of disabled gateways for termination
+    def disabled_term_gw_active_calls
+      @disabled_term_gw_active_calls ||= begin
+        gw_ids = flatten_calls.collect { |c| c["term_gw_id"] }.uniq
+        Hash[Gateway.disabled_for_termination.where(id: gw_ids).pluck(:id).zip]
+      end
     end
 
     #
