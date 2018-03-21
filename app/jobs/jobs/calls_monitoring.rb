@@ -133,6 +133,7 @@ module Jobs
       detect_customers_calls_to_reject
       detect_vendors_calls_to_reject
       detect_random_calls_to_reject
+      detect_gateway_calls_to_reject
     end
 
     # random_disconnect_enable        | f
@@ -199,6 +200,16 @@ module Jobs
       end
     end
 
+    # detect gateway is disabled by orig_gw_id and term_gw_id
+    def detect_gateway_calls_to_reject
+      flatten_calls.each do |call|
+        if disabled_gw_active_calls.key?(call['orig_gw_id']) || disabled_gw_active_calls.key?(call['term_gw_id'])
+            @terminate_calls.merge!({call['local_tag'] => call})
+        end
+      end
+    end
+
+
     def flatten_calls
       @flatten_calls ||= active_calls.values.flatten
     end
@@ -209,6 +220,14 @@ module Jobs
 
     def vendors_active_calls
       @vendors_active_calls ||= flatten_calls.group_by { |c| c["vendor_acc_id"] }
+    end
+
+    #returns hash with keys as ids of disabled gateways
+    def disabled_gw_active_calls
+      @disabled_gw_active_calls ||= begin
+        active_gw_ids = flatten_calls.collect { |c| [ c["orig_gw_id"], c["term_gw_id"] ]}.flatten.uniq
+        Hash[Gateway.where(enabled: false).where(id: active_gw_ids).pluck(:id).zip]
+      end
     end
 
     #
