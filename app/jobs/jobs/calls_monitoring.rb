@@ -84,10 +84,10 @@ module Jobs
         initial_interval = attrs.fetch("#{key}_initial_interval").to_i #TODO: check if needed cast to int
         next_interval = attrs.fetch("#{key}_next_interval").to_i #TODO: check if needed cast to int
         connect_fee = attrs.fetch("#{key}_fee").to_f
-
+        vat =  key == 'destination' ? attrs.fetch("customer_acc_vat", 0) : 0
         initial_interval_billing = connect_fee + initial_interval * i_per_second_rate
         next_interval_billing = (duration > initial_interval ? 1 : 0) * ((duration - initial_interval).to_f / next_interval).ceil * next_interval * n_per_second_rate
-        initial_interval_billing + next_interval_billing
+        (initial_interval_billing + next_interval_billing) * (1 + vat / 100.0)
       end
 
     end #END CallCollection
@@ -108,6 +108,7 @@ module Jobs
         :destination_next_interval,
         :destination_next_rate,
         :destination_fee,
+        :customer_acc_vat,
 
         :vendor_acc_id,
         :dialpeer_fee,
@@ -132,6 +133,7 @@ module Jobs
       detect_customers_calls_to_reject
       detect_vendors_calls_to_reject
       detect_random_calls_to_reject
+      detect_gateway_calls_to_reject
     end
 
     # random_disconnect_enable        | f
@@ -198,6 +200,16 @@ module Jobs
       end
     end
 
+    # detect gateway is disabled by orig_gw_id and term_gw_id
+    def detect_gateway_calls_to_reject
+      flatten_calls.each do |call|
+        if disabled_gw_active_calls.key?(call['orig_gw_id']) || disabled_gw_active_calls.key?(call['term_gw_id'])
+            @terminate_calls.merge!({call['local_tag'] => call})
+        end
+      end
+    end
+
+
     def flatten_calls
       @flatten_calls ||= active_calls.values.flatten
     end
@@ -208,6 +220,14 @@ module Jobs
 
     def vendors_active_calls
       @vendors_active_calls ||= flatten_calls.group_by { |c| c["vendor_acc_id"] }
+    end
+
+    #returns hash with keys as ids of disabled gateways
+    def disabled_gw_active_calls
+      @disabled_gw_active_calls ||= begin
+        active_gw_ids = flatten_calls.collect { |c| [ c["orig_gw_id"], c["term_gw_id"] ]}.flatten.uniq
+        Hash[Gateway.where(enabled: false).where(id: active_gw_ids).pluck(:id).zip]
+      end
     end
 
     #
