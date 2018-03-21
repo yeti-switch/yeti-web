@@ -80,6 +80,7 @@ Yeti::Application.routes.draw do
           namespace :cdr do
             jsonapi_resources :cdrs, only: [:index, :show] do
             end
+            jsonapi_resources :cdr_exports, only: [:create]
           end
 
           namespace :billing do
