@@ -84,10 +84,10 @@ module Jobs
         initial_interval = attrs.fetch("#{key}_initial_interval").to_i #TODO: check if needed cast to int
         next_interval = attrs.fetch("#{key}_next_interval").to_i #TODO: check if needed cast to int
         connect_fee = attrs.fetch("#{key}_fee").to_f
-
+        vat =  key == 'destination' ? attrs.fetch("customer_acc_vat", 0) : 0
         initial_interval_billing = connect_fee + initial_interval * i_per_second_rate
         next_interval_billing = (duration > initial_interval ? 1 : 0) * ((duration - initial_interval).to_f / next_interval).ceil * next_interval * n_per_second_rate
-        initial_interval_billing + next_interval_billing
+        (initial_interval_billing + next_interval_billing) * (1 + vat / 100.0)
       end
 
     end #END CallCollection
@@ -108,6 +108,7 @@ module Jobs
         :destination_next_interval,
         :destination_next_rate,
         :destination_fee,
+        :customer_acc_vat,
 
         :vendor_acc_id,
         :dialpeer_fee,

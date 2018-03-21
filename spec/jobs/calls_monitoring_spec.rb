@@ -2,12 +2,13 @@ require 'spec_helper'
 
 describe Jobs::CallsMonitoring do
 
-  shared_context :customer_acc do |balance: 1_000, max_balance: nil|
+  shared_context :customer_acc do |balance: 1_000, max_balance: nil, vat: 0, min_balance: 0|
     let(:account) do
       create(:account,
              balance: balance,
-             min_balance: 0,
+             min_balance: min_balance,
              max_balance: max_balance || (balance * 2),
+             vat: vat,
              contractor: create(:customer))
     end
   end
@@ -61,22 +62,25 @@ describe Jobs::CallsMonitoring do
 
     let(:cdr_list_unsorted) do
       [
+        #first call_price is equal to 1.02 without vat
         {
           'local_tag' => 'normal-call',
           'node_id' => node.id,
           # Customer
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
+          'customer_acc_vat' => account.vat,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
-          'duration' => 36,
+          'duration' => 61,
           # destination
-          'destination_fee' => '10.0000',        # $10
+          'destination_fee' => '1.0000',
           'destination_initial_interval' => 60,
-          'destination_initial_rate' => '0.0000',
+          'destination_initial_rate' => '0.0100',
+
           'destination_next_interval' => 30,
-          'destination_next_rate' => '0.0000',
+          'destination_next_rate' => '0.0200',
           # dialpeer
           'dialpeer_fee' => '9.0000',
           'dialpeer_initial_interval' => 60,
@@ -93,12 +97,13 @@ describe Jobs::CallsMonitoring do
           # Customer
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
+          'customer_acc_vat' => account.vat,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
           'duration' => 36,
           # destination
-          'destination_fee' => '5.0000',              # $5
+          'destination_fee' => '5.0000',
           'destination_initial_interval' => 60,
           'destination_initial_rate' => '0.0000',
           'destination_next_interval' => 30,
@@ -130,11 +135,33 @@ describe Jobs::CallsMonitoring do
       include_examples :keep_calls
     end
 
-    context 'when Customer has no money for the call' do
+    context 'when Customer' do
       include_context :customer_acc, balance: 0
       include_context :vendor_acc
 
       include_examples :drop_calls
+    end
+
+    context 'when Customer has money for the call' do
+      let(:cdr_list_unsorted) do
+        super().select{|c| c['local_tag'] == 'normal-call'}
+      end
+      include_context :customer_acc, balance: 1.02
+      include_context :vendor_acc
+
+      include_examples :keep_calls
+
+    end
+
+    context 'when Customer has no money for the call after vat apply' do
+      let(:cdr_list_unsorted) do
+        super().select{|c| c['local_tag'] == 'normal-call'}
+      end
+      include_context :customer_acc, balance: 1.02, vat: 30
+      include_context :vendor_acc
+
+      include_examples :drop_calls
+
     end
 
     context 'when Vendor has no money for the call' do
@@ -143,7 +170,6 @@ describe Jobs::CallsMonitoring do
 
       include_examples :drop_calls
     end
-
 
     context 'Customer calls' do
 
@@ -155,15 +181,23 @@ describe Jobs::CallsMonitoring do
       end
 
       context 'when calls cost is below min_balance' do
-        include_context :customer_acc, balance: 4
+        include_context :customer_acc, balance: 1.15, min_balance: 1.14, max_balance: 10000
         include_context :vendor_acc
-
-        it 'total calls cost exceeds min_balance. Drop normal calls' do
-          expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
-          subject
+        context 'when reserved call exits' do
+          include_examples :keep_calls
         end
 
-        it_behaves_like :keep_emergency_calls
+        context 'when reserved does not exit' do
+          let(:cdr_list_unsorted) do
+            super().select{|c| c['local_tag'] == 'normal-call'}
+          end
+          it 'total calls cost exceeds min_balance. Drop normal calls' do
+            expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
+            subject
+          end
+          it_behaves_like :keep_emergency_calls
+        end
+        
       end
 
       context 'when calls cost is above max_balance' do
