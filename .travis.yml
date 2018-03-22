@@ -55,7 +55,7 @@ jobs:
         - cd pgq-processors && BUNDLE_GEMFILE=./Gemfile ./bin/bundle exec rspec && cd ..
 
     - stage: stable package
-      if: branch != master
+      if: branch != master OR tag =~ ^.*$
       script: &build_jessie
         - rm -vf config/database.yml
         - docker build -t yeti-web -f ./ci/build_jessie.Dockerfile .
@@ -63,13 +63,14 @@ jobs:
       deploy:
         skip_cleanup: true
         provider: script
-        script: docker run --name yeti-web-deploy yeti-web:built ci/deploy.sh "$API_ENDPOINT" jessie unstable main /build/*.deb
+        script: docker run --name yeti-web-deploy yeti-web:built ci/deploy.sh "$API_ENDPOINT" jessie "${TRAVIS_TAG:0:3}" main /build/*.deb
         on:
-          all_branches: true
+          tags: true
+          condition: "$TRAVIS_TAG != *-master*"
           repo: yeti-switch/yeti-web
 
     - stage: stable package
-      if: branch != master
+      if: branch != master OR tag =~ ^.*$
       script: &build_stretch
         - rm -vf config/database.yml
         - docker build -t yeti-web -f ./ci/build_stretch.Dockerfile .
@@ -77,9 +78,10 @@ jobs:
       deploy:
         skip_cleanup: true
         provider: script
-        script: docker run --name yeti-web-deploy yeti-web:built ci/deploy.sh "$API_ENDPOINT" stretch unstable main /build/*.deb
+        script: docker run --name yeti-web-deploy yeti-web:built ci/deploy.sh "$API_ENDPOINT" stretch "${TRAVIS_TAG:0:3}" main /build/*.deb
         on:
-          all_branches: true
+          tags: true
+          condition: "$TRAVIS_TAG != *-master*"
           repo: yeti-switch/yeti-web
 
     - stage: nightly package
