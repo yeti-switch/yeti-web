@@ -2,25 +2,51 @@ require 'spec_helper'
 
 describe Jobs::CallsMonitoring do
 
-  shared_context :customer_acc do |balance: 1_000, max_balance: nil|
-    let(:account) do
-      create(:account,
-             balance: balance,
-             min_balance: 0,
-             max_balance: max_balance || (balance * 2),
-             contractor: create(:customer))
-    end
+  let(:account_balance) do
+    1_000
   end
 
-  shared_context :vendor_acc do |balance: 1_000, max_balance: nil|
-    let(:vendor_acc) do
-        create(:account,
-             balance: balance,
-             min_balance: 0,
-             max_balance: max_balance || (balance * 2),
-             contractor: create(:vendor))
-    end
+  let(:vendor_balance) do
+    1_000
   end
+
+  let!(:codec_group) do
+    create(:codec_group)
+  end
+
+  let!(:origin_gateway) do
+    create(:gateway,
+           enabled: true,
+           allow_origination: true,
+           codec_group: codec_group,
+           contractor: account.contractor)
+  end
+
+  let!(:term_gateway) do
+    create(:gateway,
+           enabled: true,
+           allow_termination: true,
+           codec_group: codec_group,
+           contractor: vendor_acc.contractor)
+  end
+
+  let!(:account) do
+    create(:account,
+           balance: account_balance,
+           min_balance: 0,
+           max_balance: account_balance * 2,
+           vat: 0,
+           contractor: create(:customer))
+  end
+
+  let!(:vendor_acc) do
+    create(:account,
+           balance: vendor_balance,
+           min_balance: 0,
+           max_balance: vendor_balance * 2,
+           contractor: create(:vendor))
+  end
+
 
   shared_examples :keep_emergency_calls do
     let(:customer_acc_check_balance) { false }
@@ -61,22 +87,25 @@ describe Jobs::CallsMonitoring do
 
     let(:cdr_list_unsorted) do
       [
+        #first call_price is equal to 1.02 without vat
         {
           'local_tag' => 'normal-call',
           'node_id' => node.id,
           # Customer
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
+          'customer_acc_vat' => account.vat,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
-          'duration' => 36,
+          'duration' => 61,
           # destination
-          'destination_fee' => '10.0000',        # $10
+          'destination_fee' => '1.0000',
           'destination_initial_interval' => 60,
-          'destination_initial_rate' => '0.0000',
+          'destination_initial_rate' => '0.0100',
+
           'destination_next_interval' => 30,
-          'destination_next_rate' => '0.0000',
+          'destination_next_rate' => '0.0200',
           # dialpeer
           'dialpeer_fee' => '9.0000',
           'dialpeer_initial_interval' => 60,
@@ -85,7 +114,11 @@ describe Jobs::CallsMonitoring do
           'dialpeer_next_rate' => '0.0000',
           'customer_acc_check_balance' => customer_acc_check_balance,
           'destination_reverse_billing' => false,
-          'dialpeer_reverse_billing' => false
+          'dialpeer_reverse_billing' => false,
+
+          'orig_gw_id' =>  origin_gateway.id,
+          'term_gw_id' =>  term_gateway.id
+
         },
         {
           'local_tag' => 'reverse-call',
@@ -93,12 +126,13 @@ describe Jobs::CallsMonitoring do
           # Customer
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
+          'customer_acc_vat' => account.vat,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
           'duration' => 36,
           # destination
-          'destination_fee' => '5.0000',              # $5
+          'destination_fee' => '5.0000',
           'destination_initial_interval' => 60,
           'destination_initial_rate' => '0.0000',
           'destination_next_interval' => 30,
@@ -111,8 +145,12 @@ describe Jobs::CallsMonitoring do
           'dialpeer_next_rate' => '0.0000',
           'customer_acc_check_balance' => customer_acc_check_balance,
           'destination_reverse_billing' => true,
-          'dialpeer_reverse_billing' => true
-        }
+          'dialpeer_reverse_billing' => true,
+
+          'orig_gw_id' =>  origin_gateway.id,
+          'term_gw_id' =>  term_gateway.id
+
+      }
       ]
     end
 
@@ -124,52 +162,146 @@ describe Jobs::CallsMonitoring do
     end
 
     context 'when Customer and Vendor have enough money' do
-      include_context :customer_acc
-      include_context :vendor_acc
-
       include_examples :keep_calls
     end
 
-    context 'when Customer has no money for the call' do
-      include_context :customer_acc, balance: 0
-      include_context :vendor_acc
+    context 'when origin gw disabled for origination' do
+      before do
+        origin_gateway.update!(allow_origination: false)
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when term gw disabled' do
+      before do
+        term_gateway.disable!
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when term gw disabled for termination' do
+      before do
+        term_gateway.update!(allow_termination: false)
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when origin gw disabled' do
+      before do
+        origin_gateway.disable!
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when Customer has zero balance' do
+      let(:account_balance) do
+        0
+      end
+      include_examples :drop_calls
+     end
+
+    context 'when Customer has money for the call' do
+      let(:cdr_list_unsorted) do
+        super().select{|c| c['local_tag'] == 'normal-call'}
+      end
+      let(:account_balance) do
+        1.02
+      end
+
+      include_examples :keep_calls
+
+    end
+
+    context 'when vendor contractor disabled' do
+      before do
+        vendor_acc.contractor.disable!
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when vendor contractor is customer' do
+      before do
+        vendor_acc.contractor.update!(vendor: false, customer: true)
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when account contractor disabled' do
+      before do
+        account.contractor.disable!
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when account contractor is vendor' do
+      before do
+        account.contractor.update!(customer: false, vendor: true)
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when Customer has no money for the call after vat apply' do
+      let(:cdr_list_unsorted) do
+        super().select{|c| c['local_tag'] == 'normal-call'}
+      end
+      let(:account_balance) do
+        1.02
+      end
+
+      before do
+        account.update!(vat: 30)
+      end
 
       include_examples :drop_calls
+
     end
 
     context 'when Vendor has no money for the call' do
-      include_context :customer_acc
-      include_context :vendor_acc, balance: 0
+      let(:vendor_balance) do
+        0
+      end
 
       include_examples :drop_calls
     end
-
 
     context 'Customer calls' do
 
       context 'when calls cost is within mim-max balance' do
-        include_context :customer_acc, balance: 6
-        include_context :vendor_acc
+        let(:account_balance) do
+          50
+        end
 
         include_examples :keep_calls
       end
 
       context 'when calls cost is below min_balance' do
-        include_context :customer_acc, balance: 4
-        include_context :vendor_acc
 
-        it 'total calls cost exceeds min_balance. Drop normal calls' do
-          expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
-          subject
+        before do
+          account.update!(balance: 1.15, min_balance: 1.14, max_balance: 10000)
         end
 
-        it_behaves_like :keep_emergency_calls
+        context 'when reserved call exits' do
+          include_examples :keep_calls
+        end
+
+        context 'when reserved does not exit' do
+          let(:cdr_list_unsorted) do
+            super().select{|c| c['local_tag'] == 'normal-call'}
+          end
+          it 'total calls cost exceeds min_balance. Drop normal calls' do
+            expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
+            subject
+          end
+
+          it_behaves_like :keep_emergency_calls
+        end
+        
       end
 
       context 'when calls cost is above max_balance' do
-        include_context :customer_acc, balance: 10, max_balance: 4
-        include_context :vendor_acc
-
+        before do
+          account.update!(balance: 10, max_balance: 4, min_balance: 1)
+        end
         it 'total calls cost exceeds max_balance. Drop reverse calls' do
           expect_any_instance_of(Node).to receive(:drop_call).with('reverse-call')
           subject
@@ -184,15 +316,13 @@ describe Jobs::CallsMonitoring do
     context 'Vendor calls' do
 
       context 'when calls cost is within mim-max balance' do
-        include_context :customer_acc
-        include_context :vendor_acc
-
         include_examples :keep_calls
       end
 
       context 'when calls cost is below min_balance' do
-        include_context :customer_acc
-        include_context :vendor_acc, balance: -6, max_balance: 100
+        before do
+          vendor_acc.update!( balance: -6, max_balance: 100)
+        end
 
         it 'total calls cost exceeds min_balance. Drop reverse calls' do
           expect_any_instance_of(Node).to receive(:drop_call).with('reverse-call')
@@ -203,8 +333,9 @@ describe Jobs::CallsMonitoring do
       end
 
       context 'when calls cost is above max_balance' do
-        include_context :customer_acc
-        include_context :vendor_acc, balance: 0, max_balance: 4
+        before do
+          vendor_acc.update!(balance: 0, max_balance: 4)
+        end
 
         it 'total calls cost exceeds max_balance. Drop normal calls' do
           expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
