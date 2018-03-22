@@ -203,7 +203,10 @@ ActiveAdmin.register CustomersAuth do
   filter :dump_level, as: :select, collection: DumpLevel.select([:id, :name]).reorder(:id)
   filter :enable_audio_recording, as: :select, collection: [["Yes", true], ["No", false]]
   filter :transport_protocol
-  filter :ip_array_contains, label: I18n.t('activerecord.attributes.customers_auth.ip')
+  filter :ip_covers,
+         as: :string,
+         input_html: { class: 'search_filter_string' },
+         label: I18n.t('activerecord.attributes.customers_auth.ip')
   filter :pop, input_html: {class: 'chosen'}
   filter :src_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.src_prefix')
   filter :dst_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.dst_prefix')

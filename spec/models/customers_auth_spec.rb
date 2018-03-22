@@ -86,4 +86,45 @@ RSpec.describe CustomersAuth, type: :model do
     end
   end
 
+  context 'scope :ip_covers' do
+    before do
+      @record = create(:customers_auth, ip: ['127.0.0.1', '127.0.0.2'])
+      @record_2 = create(:customers_auth, ip: ['127.0.0.2', '127.0.0.3'])
+      create(:customers_auth, ip: ['127.0.0.4'])
+    end
+
+    let(:expected_found_records) do
+      [@record_2.id, @record.id]
+    end
+
+    subject do
+      described_class.ip_covers(ip)
+    end
+
+    context 'IP found' do
+      let(:ip) { '127.0.0.2' }
+
+      it 'finds expected records' do
+        expect(subject.pluck(:id)).to match_array(expected_found_records)
+      end
+    end
+
+    context 'IP not found' do
+      let(:ip) { '127.0.0.9' }
+
+      it 'finds nothing' do
+        expect(subject.pluck(:id)).to match_array([])
+      end
+    end
+
+    context 'invalid IP' do
+      let(:ip) { 'asdkjhasdkl jhasd ' }
+
+      it 'should no fail and finds nothing' do
+        expect(subject.pluck(:id)).to match_array([])
+      end
+    end
+
+  end
+
 end

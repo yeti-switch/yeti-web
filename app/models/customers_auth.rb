@@ -122,6 +122,14 @@ class CustomersAuth < Yeti::ActiveRecord
 
   scope :with_radius, -> { where("radius_auth_profile_id is not null") }
   scope :with_dump, -> { where("dump_level_id > 0") }
+  scope :ip_covers, ->(ip) do
+    IPAddr.new(ip) rescue return none
+    where(
+      "#{self.table_name}.id IN (
+        SELECT customers_auth_id FROM #{CustomersAuthNormalized.table_name} WHERE ip>>='#{ip}'::inet
+      )"
+    )
+  end
 
   include Yeti::ResourceStatus
 
@@ -187,6 +195,10 @@ class CustomersAuth < Yeti::ActiveRecord
   end
 
   private
+
+  def self.ransackable_scopes(auth_object = nil)
+    [:ip_covers]
+  end
 
   protected
   def ip_is_valid
