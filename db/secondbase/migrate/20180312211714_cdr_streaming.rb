@@ -98,6 +98,7 @@ BEGIN
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
+  v_cdr.customer_auth_name:=v_dynamic.customer_auth_name;
 
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
@@ -411,6 +412,7 @@ BEGIN
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
+  v_cdr.customer_auth_name=v_dynamic.customer_auth_name;
 
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;

@@ -194,6 +194,7 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	vendor_acc_external_id bigint,
 	customer_auth_id integer,
 	customer_auth_external_id bigint,
+	customer_auth_name character varying,
 	destination_id bigint,
 	destination_prefix character varying,
 	dialpeer_id bigint,
@@ -449,7 +450,8 @@ CREATE TABLE cdr.cdr (
     failed_resource_id bigint,
     customer_price_no_vat numeric,
     customer_duration integer,
-    vendor_duration integer
+    vendor_duration integer,
+    customer_auth_name character varying
 );
 
 
@@ -1011,6 +1013,7 @@ BEGIN
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
+  v_cdr.customer_auth_name:=v_dynamic.customer_auth_name;
 
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
@@ -4015,7 +4018,8 @@ CREATE TABLE cdr.cdr_archive (
     failed_resource_id bigint,
     customer_price_no_vat numeric,
     customer_duration integer,
-    vendor_duration integer
+    vendor_duration integer,
+    customer_auth_name character varying
 );
 
 

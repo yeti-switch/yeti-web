@@ -12,6 +12,7 @@ class CreateTagActions < ActiveRecord::Migration
       INSERT INTO class4.tag_actions(id,name) VALUES(2, 'Remove selected tags');
       INSERT INTO class4.tag_actions(id,name) VALUES(3, 'Append selected tags');
       INSERT INTO class4.tag_actions(id,name) VALUES(4, 'Intersection with selected tags');
+      INSERT INTO class4.tag_actions(id,name) VALUES(5, 'Replace with selected tags');
 
       -- References
       ALTER TABLE class4.customers_auth ADD tag_action_id smallint REFERENCES class4.tag_actions(id);
