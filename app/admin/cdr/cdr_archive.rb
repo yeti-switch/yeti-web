@@ -5,6 +5,8 @@ ActiveAdmin.register Cdr::CdrArchive do
   config.batch_actions = false
   acts_as_cdr_stat
 
+  decorate_with CdrDecorator
+
   before_filter do
     if params['q'].blank?
       params['q'] = {time_start_gteq: 3.days.ago} # only 3 last days by default
@@ -199,6 +201,7 @@ ActiveAdmin.register Cdr::CdrArchive do
         column :customer_price
         column :routing_plan
         column :routing_group
+        column :routing_tags
         column :dialpeer
         column :dialpeer_fee
         column :dialpeer_initial_interval
@@ -374,6 +377,7 @@ ActiveAdmin.register Cdr::CdrArchive do
 
           row :routing_plan
           row :routing_group
+          row :routing_tags
           row :dialpeer
 
           row :dialpeer_fee
@@ -505,6 +509,7 @@ ActiveAdmin.register Cdr::CdrArchive do
     column :destination_next_rate
     column :customer_price
     column :routing_group
+    column :routing_tags
     column :dialpeer
 
     column :dialpeer_fee

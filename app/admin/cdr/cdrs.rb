@@ -5,6 +5,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   config.batch_actions = false
   acts_as_cdr_stat
 
+  decorate_with CdrDecorator
+
   before_filter do
     if params['q'].blank?
       from_date = 0.days.ago.beginning_of_day
@@ -314,7 +316,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :customer_duration
         column :routing_plan
         column :routing_group
-        column :routing_tag_ids
+        column :routing_tags
         column :dialpeer
         column :dialpeer_fee
         column :dialpeer_initial_interval
@@ -532,7 +534,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           row :routing_plan
           row :routing_group
-          row :routing_tag_ids
+          row :routing_tags
           row :dialpeer
 
           row :dialpeer_fee
@@ -692,7 +694,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :customer_duration
     column :routing_plan
     column :routing_group
-    column :routing_tag_ids
+    column :routing_tags
     column :dialpeer
 
     column :dialpeer_fee
