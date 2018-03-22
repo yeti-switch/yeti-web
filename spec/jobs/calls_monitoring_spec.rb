@@ -212,6 +212,34 @@ describe Jobs::CallsMonitoring do
 
     end
 
+    context 'when vendor contractor disabled' do
+      before do
+        vendor_acc.contractor.disable!
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when vendor contractor is customer' do
+      before do
+        vendor_acc.contractor.update!(vendor: false, customer: true)
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when account contractor disabled' do
+      before do
+        account.contractor.disable!
+      end
+      include_examples :drop_calls
+    end
+
+    context 'when account contractor is vendor' do
+      before do
+        account.contractor.update!(customer: false, vendor: true)
+      end
+      include_examples :drop_calls
+    end
+
     context 'when Customer has no money for the call after vat apply' do
       let(:cdr_list_unsorted) do
         super().select{|c| c['local_tag'] == 'normal-call'}

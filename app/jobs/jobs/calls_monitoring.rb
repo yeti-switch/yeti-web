@@ -121,7 +121,10 @@ module Jobs
         :destination_reverse_billing,
         :dialpeer_reverse_billing,
 
-        :duration
+        :duration,
+
+        :customer_id, #link to contractor, drop call if contractor is not enabled or not customer
+        :vendor_id #link to contractor, drop call if contractor is not enabled or not vendor
     ].freeze
 
     def after_start
@@ -132,8 +135,8 @@ module Jobs
     def execute
       detect_customers_calls_to_reject
       detect_vendors_calls_to_reject
-      detect_random_calls_to_reject
       detect_gateway_calls_to_reject
+      detect_random_calls_to_reject
     end
 
     # random_disconnect_enable        | f
@@ -153,50 +156,73 @@ module Jobs
 
     def detect_customers_calls_to_reject
       customers_active_calls.each do |acc_id, calls|
-        call_collection = CallCollection.new(calls,
-                                             key: 'destination',
-                                             account: active_customers_balances()[acc_id])
 
-        if call_collection.exceed_min_balance?
-          @terminate_calls.merge!(
-            call_collection
-              .normal_calls
-              .index_by { |c| c["local_tag"] }
-          )
-        end
+        account = active_customers_balances()[acc_id]
 
-        if call_collection.exceed_max_balance?
-          @terminate_calls.merge!(
-            call_collection
-              .reverse_calls
-              .index_by { |c| c["local_tag"] }
-          )
+        if account
+          call_collection = CallCollection.new(calls,
+                                               key: 'destination',
+                                               account: account)
+
+
+
+
+
+          if call_collection.exceed_min_balance?
+            @terminate_calls.merge!(
+              call_collection
+                .normal_calls
+                .index_by { |c| c["local_tag"] }
+            )
+          end
+
+          if call_collection.exceed_max_balance?
+            @terminate_calls.merge!(
+              call_collection
+                .reverse_calls
+                .index_by { |c| c["local_tag"] }
+            )
+          end
+        else
+           #account not found so drop all calls
+          @terminate_calls.merge!(calls.index_by{ |c| c["local_tag"] } )
+
         end
       end
     end
 
     def detect_vendors_calls_to_reject
       vendors_active_calls.each do |acc_id, calls|
-        call_collection = CallCollection.new(calls,
-                                             key: 'dialpeer',
-                                             account: active_vendors_balances()[acc_id])
-        # drop reverse-billing calls when balance reaches minimum
-        if call_collection.exceed_min_balance?
-          @terminate_calls.merge!(
-            call_collection
-              .reverse_calls
-              .index_by { |c| c["local_tag"] }
-          )
+
+
+        vendor = active_vendors_balances()[acc_id]
+
+        if vendor
+          call_collection = CallCollection.new(calls,
+                                               key: 'dialpeer',
+                                               account: vendor)
+          # drop reverse-billing calls when balance reaches minimum
+          if call_collection.exceed_min_balance?
+            @terminate_calls.merge!(
+              call_collection
+                .reverse_calls
+                .index_by { |c| c["local_tag"] }
+            )
+          end
+
+          # drop normal calls when balance reaches maximum
+          if call_collection.exceed_max_balance?
+            @terminate_calls.merge!(
+              call_collection
+                .normal_calls
+                .index_by { |c| c["local_tag"] }
+            )
+          end
+        else
+          #account not found so drop all calls
+          @terminate_calls.merge!(calls.index_by{ |c| c["local_tag"] } )
         end
 
-        # drop normal calls when balance reaches maximum
-        if call_collection.exceed_max_balance?
-          @terminate_calls.merge!(
-            call_collection
-              .normal_calls
-              .index_by { |c| c["local_tag"] }
-          )
-        end
       end
     end
 
@@ -208,7 +234,6 @@ module Jobs
         end
       end
     end
-
 
     def flatten_calls
       @flatten_calls ||= active_calls.values.flatten
@@ -243,7 +268,9 @@ module Jobs
     #  [ {account_id => [balance, min_balance, max_balance, account_id]}]
     #
     def active_customers_balances
-      @active_customers_balances ||= Account.customers_accounts.where(:id => active_customers_ids).
+      @active_customers_balances ||= Account.customers_accounts.
+                                     merge(Contractor.enabled).
+                                     where(id: active_customers_ids).
           pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
@@ -252,7 +279,9 @@ module Jobs
     #  [ {vendor_id => [balance,  min_balance, max_balance, vendor_id]}]
     #
     def active_vendors_balances
-      @active_vendors_balances ||= Account.vendors_accounts.where(:id => active_vendors_ids).
+      @active_vendors_balances ||= Account.vendors_accounts.
+                                merge(Contractor.enabled).
+                                where(id: active_vendors_ids).
           pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
