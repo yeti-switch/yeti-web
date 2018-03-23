@@ -2560,9 +2560,15 @@ CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallin
 
 
         select into v_area_direction * from class4.routing_tag_detection_rules
-            where (src_area_id is null OR src_area_id = v_ret.src_area_id) AND (dst_area_id is null OR dst_area_id=v_ret.dst_area_id)
-            order by src_area_id is null, dst_area_id is null
-            limit 1;
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
         if found then
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
@@ -3336,7 +3342,7 @@ INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALU
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (891, 'dst_number_radius', 'varchar', false, 1051, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (892, 'orig_gw_name', 'varchar', false, 1052, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (895, 'customer_name', 'varchar', false, 1055, true);
-INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (894, 'customer_auth_name', 'varchar', false, 1054, true);
+INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (894, 'customer_auth_name', 'varchar', true, 1054, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (896, 'customer_account_name', 'varchar', false, 1056, true);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (900, 'aleg_radius_acc_profile_id', 'smallint', false, 1024, false);
 INSERT INTO switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (901, 'bleg_radius_acc_profile_id', 'smallint', false, 1025, false);

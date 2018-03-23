@@ -17,7 +17,8 @@ alter table cdr.cdr
   add failed_resource_id bigint,
   add customer_price_no_vat numeric,
   add customer_duration integer,
-  add vendor_duration integer;
+  add vendor_duration integer,
+  add customer_auth_name varchar;
 
 alter table cdr.cdr_archive
   add column customer_external_id bigint,
@@ -33,7 +34,8 @@ alter table cdr.cdr_archive
   add failed_resource_id bigint,
   add customer_price_no_vat numeric,
   add customer_duration integer,
-  add vendor_duration integer;
+  add vendor_duration integer,
+  add customer_auth_name varchar;
 
 create type switch.dynamic_cdr_data_ty as (
     customer_id integer,
@@ -47,6 +49,7 @@ create type switch.dynamic_cdr_data_ty as (
     vendor_acc_external_id bigint,
     customer_auth_id integer,
     customer_auth_external_id bigint,
+    customer_auth_name varchar,
     destination_id bigint,
     destination_prefix character varying,
     dialpeer_id bigint,
@@ -193,6 +196,7 @@ BEGIN
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
+  v_cdr.customer_auth_name:=v_dynamic.customer_auth_name;
 
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
@@ -233,15 +237,18 @@ BEGIN
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id=i_lega_transport_protocol_id;
   v_cdr.sign_orig_ip:=i_legA_remote_ip;
-  v_cdr.sign_orig_port=i_legA_remote_port;
+  v_cdr.sign_orig_port:=NULLIF(i_legA_remote_port,0);
+
   v_cdr.sign_orig_local_ip:=i_legA_local_ip;
-  v_cdr.sign_orig_local_port=i_legA_local_port;
+  v_cdr.sign_orig_local_port=NULLIF(i_legA_local_port,0);
 
   v_cdr.sign_term_transport_protocol_id=i_legb_transport_protocol_id;
   v_cdr.sign_term_ip:=i_legB_remote_ip;
-  v_cdr.sign_term_port:=i_legB_remote_port;
+  v_cdr.sign_term_port:=NULLIF(i_legB_remote_port,0);
+
   v_cdr.sign_term_local_ip:=i_legB_local_ip;
-  v_cdr.sign_term_local_port:=i_legB_local_port;
+  v_cdr.sign_term_local_port:=NULLIF(i_legB_remote_port,0);
+
 
   v_cdr.local_tag=i_local_tag;
 

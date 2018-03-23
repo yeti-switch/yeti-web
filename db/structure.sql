@@ -16512,9 +16512,15 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
 
         select into v_area_direction * from class4.routing_tag_detection_rules
-            where (src_area_id is null OR src_area_id = v_ret.src_area_id) AND (dst_area_id is null OR dst_area_id=v_ret.dst_area_id)
-            order by src_area_id is null, dst_area_id is null
-            limit 1;
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
         if found then
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
@@ -17459,9 +17465,15 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
 
         select into v_area_direction * from class4.routing_tag_detection_rules
-            where (src_area_id is null OR src_area_id = v_ret.src_area_id) AND (dst_area_id is null OR dst_area_id=v_ret.dst_area_id)
-            order by src_area_id is null, dst_area_id is null
-            limit 1;
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
         if found then
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
@@ -18351,9 +18363,15 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
 
 
         select into v_area_direction * from class4.routing_tag_detection_rules
-            where (src_area_id is null OR src_area_id = v_ret.src_area_id) AND (dst_area_id is null OR dst_area_id=v_ret.dst_area_id)
-            order by src_area_id is null, dst_area_id is null
-            limit 1;
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
         if found then
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
@@ -19708,9 +19726,9 @@ CREATE TABLE class4.customers_auth (
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     check_account_balance boolean DEFAULT true NOT NULL,
     require_incoming_auth boolean DEFAULT false NOT NULL,
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    dst_number_min_length smallint DEFAULT 0 NOT NULL,
     ip inet[] DEFAULT '{127.0.0.0/8}'::inet[],
     src_prefix character varying[] DEFAULT '{""}'::character varying[],
     dst_prefix character varying[] DEFAULT '{""}'::character varying[],
@@ -26541,8 +26559,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
