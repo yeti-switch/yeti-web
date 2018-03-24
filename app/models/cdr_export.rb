@@ -19,10 +19,19 @@ class CdrExport < Yeti::ActiveRecord
   STATUS_PENDING = 'Pending'.freeze
   STATUS_COMPLETED = 'Completed'.freeze
   STATUS_FAILED = 'Failed'.freeze
+  STATUSES = [
+    STATUS_PENDING,
+    STATUS_COMPLETED,
+    STATUS_FAILED
+  ].freeze
+
+  #need for activeadmin form
+  attr_accessor :customer_acc_id_eq,
+    :is_last_cdr_eq, :time_start_gteq, :time_start_lteq
 
   validates_presence_of :status, :fields, :filters
   validate do
-    if filters.keys.exclude?('time_start_lteq') || filters.keys.exclude?('time_start_gteq')
+    if filters['time_start_gteq'].empty? || filters['time_start_lteq'].empty?
       errors.add(:filters, 'requires time_start_lteq & time_start_gteq')
     end
   end
@@ -53,6 +62,10 @@ class CdrExport < Yeti::ActiveRecord
     Cdr::Cdr.select(fields.join(', ')).order('time_start desc').ransack(filters).result.to_sql
   end
 
+  def completed?
+    status == STATUS_COMPLETED
+  end
+
   def self.allowed_filters
     [
       'time_start_lteq',
@@ -65,7 +78,8 @@ class CdrExport < Yeti::ActiveRecord
       'src_prefix_routing_contains',
       'dst_prefix_routing_contains',
       'customer_acc_external_id_eq',
-      'is_last_cdr_eq'
+      'is_last_cdr_eq',
+      'customer_acc_id_eq'
     ]
   end
 

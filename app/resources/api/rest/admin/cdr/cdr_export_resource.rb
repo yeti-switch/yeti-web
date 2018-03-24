@@ -9,6 +9,6 @@ class Api::Rest::Admin::Cdr::CdrExportResource < ::BaseResource
     :export_type
 
   def self.creatable_fields(_context)
-    [:fields, :filters, :callback_url, :type]
+    [:fields, :filters, :callback_url, :export_type]
   end
 end
