@@ -114,6 +114,14 @@ require 'spec_helper'
 
 describe Gateway, type: :model do
 
+  it do
+    should validate_numericality_of(:max_30x_redirects).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    should validate_numericality_of(:max_transfers).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    should validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    should validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    should validate_numericality_of(:fake_180_timer).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+  end
+
   shared_examples :validation_error_on_is_shared_change do
     let(:expected_error_message) {}
 
