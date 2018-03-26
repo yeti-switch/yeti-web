@@ -66,7 +66,7 @@ class Dialpeer < Yeti::ActiveRecord
   validates_numericality_of :short_calls_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
 
   validates_numericality_of :force_hit_rate, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00, allow_blank: true
-  validates_numericality_of :capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   validates_presence_of :dst_number_min_length, :dst_number_max_length
   validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
