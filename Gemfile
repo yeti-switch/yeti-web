@@ -77,12 +77,10 @@ group :development do
   gem 'quiet_assets'
 end
 
-#group :development do
+group :development do
   gem 'sourcify'
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'annotate'
-#end
+end
 
 group :development, :test do
   gem 'byebug'
