@@ -39,7 +39,11 @@ INSERT INTO cdr_tables VALUES (5, 'cdr.cdr_201411', true, true, '2014-11-01', '2
 INSERT INTO cdr_tables VALUES (6, 'cdr.cdr_201710', true, true, '2017-10-01', '2017-11-01', true);
 INSERT INTO cdr_tables VALUES (7, 'cdr.cdr_201709', true, true, '2017-09-01', '2017-10-01', true);
 INSERT INTO cdr_tables VALUES (8, 'cdr.cdr_201708', true, true, '2017-08-01', '2017-09-01', true);
-
+INSERT INTO cdr_tables VALUES (9, 'cdr.cdr_201712', true, true, '2017-12-01', '2018-01-01', true);
+INSERT INTO cdr_tables VALUES (10, 'cdr.cdr_201801', true, true, '2018-01-01', '2018-02-01', true);
+INSERT INTO cdr_tables VALUES (11, 'cdr.cdr_201802', true, true, '2018-02-01', '2018-03-01', true);
+INSERT INTO cdr_tables VALUES (12, 'cdr.cdr_201803', true, true, '2018-03-01', '2018-04-01', true);
+INSERT INTO cdr_tables VALUES (13, 'cdr.cdr_201804', true, true, '2018-04-01', '2018-05-01', true);
 
 --
 -- TOC entry 2514 (class 0 OID 0)
@@ -47,7 +51,7 @@ INSERT INTO cdr_tables VALUES (8, 'cdr.cdr_201708', true, true, '2017-08-01', '2
 -- Name: cdr_tables_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: yeti
 --
 
-SELECT pg_catalog.setval('cdr_tables_id_seq', 8, true);
+SELECT pg_catalog.setval('cdr_tables_id_seq', 13, true);
 
 
 --
