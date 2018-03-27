@@ -63,7 +63,7 @@ class Account < Yeti::ActiveRecord
   validates_presence_of :name, :contractor, :timezone
   validates_numericality_of :max_balance, greater_than_or_equal_to: ->(account) { account.min_balance }
 
-  validates_numericality_of :termination_capacity, :origination_capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :termination_capacity, :origination_capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   validates_uniqueness_of :external_id, allow_blank: true
 

@@ -14,14 +14,14 @@
 #  csv_file       :string
 #
 
-class Lnp::Database< Yeti::ActiveRecord
+class Lnp::Database < Yeti::ActiveRecord
   self.table_name = 'class4.lnp_databases'
 
   belongs_to :driver, class_name: Lnp::DatabaseDriver, foreign_key: :driver_id
   validates_presence_of :driver, :name, :host
   validates_uniqueness_of :name
 
-  validates_numericality_of :timeout, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :timeout, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
 
   def display_name

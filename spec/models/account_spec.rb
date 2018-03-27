@@ -32,17 +32,21 @@ require 'spec_helper'
 
 describe Account, type: :model do
 
-  let!(:account) {}
-
-  subject do
-    account.destroy!
+  it do
+    should validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    should validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
   end
-
+  
   context '#destroy' do
+    let!(:account) { create(:account) }
+
+    subject do
+      account.destroy!
+    end
 
     context 'wihtout linked ApiAccess records' do
       let!(:api_access) { create(:api_access) }
-      let(:account) { create(:account) }
+
 
       it 'removes Account successfully' do
         expect { subject }.to change { described_class.count }.by(-1)
@@ -73,17 +77,17 @@ describe Account, type: :model do
     end
 
     context 'when Account has Payments' do
-      let(:account) { create(:account) }
-
-      before do
-        $p1 = create(:payment, account: account)
-        $p2 = create(:payment) # for another account
+      let!(:p1) do
+        create(:payment, account: account)
+      end
+      let!(:p2) do
+        create(:payment) # for another account
       end
 
       it 'removes all related Payments' do
         expect { subject }.to change {
           Payment.pluck(:id)
-        }.from([$p1.id, $p2.id]).to([$p2.id])
+        }.from([p1.id, p2.id]).to([p2.id])
       end
     end
 

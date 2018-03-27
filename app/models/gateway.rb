@@ -153,12 +153,12 @@ class Gateway < Yeti::ActiveRecord
   validates_numericality_of :asr_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
   validates_numericality_of :short_calls_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
 
-  validates_numericality_of :max_30x_redirects, :max_transfers, greater_than_or_equal_to: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :max_30x_redirects, :max_transfers, greater_than_or_equal_to: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
-  validates_numericality_of :origination_capacity, :termination_capacity, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :origination_capacity, :termination_capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
   validates_numericality_of :port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
 
-  validates_numericality_of :fake_180_timer, greater_than: 0, less_than: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :fake_180_timer, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
   validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol
   validates_presence_of :incoming_auth_username, :incoming_auth_password,
                         if: Proc.new { |gw|
