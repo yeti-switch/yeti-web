@@ -1017,7 +1017,7 @@ BEGIN
 
   v_cdr.vendor_id:=v_dynamic.vendor_id;
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
-  v_cdr.vendor_id:=v_dynamic.vendor_acc_id;
+  v_cdr.vendor_acc_id:=v_dynamic.vendor_acc_id;
   v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
 
   v_cdr.destination_id:=v_dynamic.destination_id;
@@ -6467,4 +6467,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180307142909');
 INSERT INTO public.schema_migrations (version) VALUES ('20180312211714');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180312215122');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180328123622');
 
