@@ -25,6 +25,10 @@ INSERT INTO call_duration_round_modes VALUES (3, 'Always UP');
 INSERT INTO call_duration_round_modes VALUES (2, 'Always DOWN');
 INSERT INTO call_duration_round_modes VALUES (1, 'Math rules(up if >=0.5)');
 
+insert into sys.amount_round_modes(id,name) values(1, 'Disable rounding');
+insert into sys.amount_round_modes(id,name) values(2, 'Always UP');
+insert into sys.amount_round_modes(id,name) values(3, 'Always DOWN');
+insert into sys.amount_round_modes(id,name) values(4, 'Math rules');
 
 --
 -- TOC entry 2503 (class 0 OID 22325)

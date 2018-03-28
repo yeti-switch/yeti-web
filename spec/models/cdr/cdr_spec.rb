@@ -11,6 +11,14 @@ RSpec.describe Cdr::Cdr, type: :model do
 
   describe 'Function "switch.writecdr()"' do
 
+    before do
+      #disable rounding
+      System::CdrConfig.take!.update!(
+          customer_amount_round_mode_id: 1,
+          vendor_amount_round_mode_id: 1
+      )
+    end
+
     subject do
       db_connection.execute("SELECT switch.writecdr(#{writecdr_parameters});")
     end
@@ -71,8 +79,8 @@ RSpec.describe Cdr::Cdr, type: :model do
         '',
         '',
         '[]',
-        NULL,
-        NULL,
+        3::smallint,
+        1551231112::bigint,
         NULL,
         '{"core":"1.7.60-4","yeti":"1.7.30-1","aleg":"Twinkle/1.10.1","bleg":"Localhost Media Gateway"}',
         'f',
@@ -220,14 +228,68 @@ RSpec.describe Cdr::Cdr, type: :model do
           vendor_acc_external_id: 2222,
           orig_gw_external_id: 1,
           term_gw_external_id: 4444,
-          failed_resource_type_id: nil,
-          failed_resource_id: nil,
+          failed_resource_type_id: 3,
+          failed_resource_id: 1551231112,
           customer_price_no_vat: be_within(0.00001).of(0.00094),
           customer_duration: 566,
           vendor_duration: 571,
           customer_auth_name: "Customer Auth for trunk 1"
         }
       )
+    end
+
+    context "When customer round mode=2" do
+      before do
+        #always UP, precision 4
+        System::CdrConfig.take!.update!(
+              customer_amount_round_mode_id: 2,
+              customer_amount_round_precision: 4,
+              vendor_amount_round_mode_id: 2,
+              vendor_amount_round_precision: 4
+        )
+      end
+
+      it "customer amount" do
+        expect { subject }.to change {described_class.count}.by(1)
+        expect(described_class.last.customer_price).to eq(0.001)
+        expect(described_class.last.vendor_price).to eq(9.5167)
+      end
+    end
+
+    context "When customer round mode=3" do
+      before do
+        #always DOWN, precision 4
+        System::CdrConfig.take!.update!(
+            customer_amount_round_mode_id: 3,
+            customer_amount_round_precision: 4,
+            vendor_amount_round_mode_id: 3,
+            vendor_amount_round_precision: 4
+        )
+      end
+
+      it "customer amount" do
+        expect { subject }.to change {described_class.count}.by(1)
+        expect(described_class.last.customer_price).to eq(0.0009)
+        expect(described_class.last.vendor_price).to eq(9.5166)
+      end
+    end
+
+    context "When customer round mode=4" do
+      before do
+        #MATH rules, precision 4
+        System::CdrConfig.take!.update!(
+            customer_amount_round_mode_id: 3,
+            customer_amount_round_precision: 4,
+            vendor_amount_round_mode_id: 3,
+            vendor_amount_round_precision: 4
+        )
+      end
+
+      it "customer amount" do
+        expect { subject }.to change {described_class.count}.by(1)
+        expect(described_class.last.customer_price).to eq(0.0009)
+        expect(described_class.last.vendor_price).to eq(9.5166)
+      end
     end
 
   end

@@ -20,7 +20,7 @@ describe 'CDR exports', type: :feature do
         expect(page).to have_selector('.col-fields', text: cdr_export.fields.join(', '))
         expect(page).to have_selector('.col-filters', text: cdr_export.filters)
         expect(page).to have_selector('.col-callback_url', text: cdr_export.callback_url)
-        expect(page).to have_selector('.col-created_at', text: cdr_export.created_at.to_s(:db))
+        expect(page).to have_selector('.col-created_at', text: cdr_export.created_at.strftime("%Y-%m-%d %H:%M:%S"))
       end
     end
   end
@@ -41,11 +41,11 @@ describe 'CDR exports', type: :feature do
       within '#new_cdr_export' do
         chosen_select('#cdr_export_fields_input .search-field input', search: 'success', multiple: true)
         chosen_select('#cdr_export_fields_input .search-field input', search: 'id', multiple: true)
-        page.find('#cdr_export_time_start_gteq').set('2018-01-01')
-        page.find('#cdr_export_time_start_lteq').set('2018-03-01')
         within '#cdr_export_customer_acc_id_eq_input' do
           chosen_select('.chosen-single', search: "#{account.name} | #{account.id}")
         end
+        page.find('#cdr_export_time_start_gteq').set('2018-01-01')
+        page.find('#cdr_export_time_start_lteq').set('2018-03-01')
         page.click_button 'Create Cdr export'
       end
     end
