@@ -10,5 +10,9 @@ FactoryGirl.define do
     end
     fields [:success, :id]
     status nil
+
+    trait :completed do
+      status CdrExport::STATUS_COMPLETED
+    end
   end
 end
