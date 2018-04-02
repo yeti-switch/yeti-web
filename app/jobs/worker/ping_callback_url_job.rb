@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Worker
   class PingCallbackUrlJob < ActiveJob::Base
     class TryAgainError < RuntimeError
