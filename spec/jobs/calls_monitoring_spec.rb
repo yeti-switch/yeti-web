@@ -94,7 +94,7 @@ describe Jobs::CallsMonitoring do
           # Customer
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
-          'customer_acc_vat' => account.vat,
+          'customer_acc_vat' => account.vat.to_s,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
@@ -126,7 +126,7 @@ describe Jobs::CallsMonitoring do
           # Customer
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
-          'customer_acc_vat' => account.vat,
+          'customer_acc_vat' => account.vat.to_s,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
