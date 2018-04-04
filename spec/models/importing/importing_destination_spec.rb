@@ -31,6 +31,21 @@ describe Importing::Destination do
     end
   end
 
+  context 'when routing_tag_names is NULL' do
+    include_context :init_importing_destination, {
+      routing_tag_names: nil,
+      routing_tag_ids: []
+    }
+
+    it 'routing_tag_ids is empty array' do
+      subject
+      expect(preview_item.reload).to have_attributes(
+        routing_tag_names: nil,
+        routing_tag_ids: []
+      )
+    end
+  end
+
   it_behaves_like 'after_import_hook when real items match' do
     include_context :init_importing_destination, prefix: '373900'
     include_context :init_destination, prefix: '373900'
