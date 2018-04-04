@@ -32,7 +32,7 @@ module ResourceDSL
 
       options[:template_object] = Importing::Model.new(
           # "proc" prevents error on `rake db:structure:dump`
-          unique_columns_proc: proc { config.resource_class.column_names - ["id"] },
+          unique_columns_proc: proc { options[:resource_class].import_attributes },
           csv_options: {col_sep: ",", row_sep: nil, quote_char: nil}
       )
 
