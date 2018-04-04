@@ -736,6 +736,7 @@ ELSIF ( NEW.time_start >= '2018-01-01 00:00:00+00' AND NEW.time_start < '2018-02
 ELSIF ( NEW.time_start >= '2018-02-01 00:00:00+00' AND NEW.time_start < '2018-03-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201802 VALUES (NEW.*);
 ELSIF ( NEW.time_start >= '2018-03-01 00:00:00+00' AND NEW.time_start < '2018-04-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201803 VALUES (NEW.*);
 ELSIF ( NEW.time_start >= '2018-04-01 00:00:00+00' AND NEW.time_start < '2018-05-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201804 VALUES (NEW.*);
+ELSIF ( NEW.time_start >= '2018-05-01 00:00:00+00' AND NEW.time_start < '2018-06-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201805 VALUES (NEW.*);
  ELSE 
  RAISE EXCEPTION 'cdr.cdr_i_tg: time_start out of range.'; 
  END IF;
@@ -938,18 +939,59 @@ $$;
 
 
 --
--- Name: round(double precision); Type: FUNCTION; Schema: switch; Owner: -
+-- Name: config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE FUNCTION switch.round(i_duration double precision) RETURNS integer
+CREATE TABLE sys.config (
+    id smallint NOT NULL,
+    call_duration_round_mode_id smallint DEFAULT 1 NOT NULL,
+    customer_amount_round_mode_id smallint DEFAULT 1 NOT NULL,
+    customer_amount_round_precision smallint DEFAULT 5 NOT NULL,
+    vendor_amount_round_mode_id smallint DEFAULT 1 NOT NULL,
+    vendor_amount_round_precision smallint DEFAULT 5 NOT NULL,
+    CONSTRAINT config_customer_amount_round_precision_check CHECK (((customer_amount_round_precision >= 0) AND (customer_amount_round_precision <= 10))),
+    CONSTRAINT config_vendor_amount_round_precision_check CHECK (((vendor_amount_round_precision >= 0) AND (vendor_amount_round_precision <= 10)))
+);
+
+
+--
+-- Name: customer_price_round(sys.config, numeric); Type: FUNCTION; Schema: switch; Owner: -
+--
+
+CREATE FUNCTION switch.customer_price_round(i_config sys.config, i_amount numeric) RETURNS numeric
     LANGUAGE plpgsql COST 10
     AS $$
-DECLARE
-    v_mode_id smallint;
-BEGIN
-    select into v_mode_id call_duration_round_mode_id from sys.config;
+  DECLARE
+  BEGIN
 
-    case v_mode_id
+    case i_config.customer_amount_round_mode_id
+        when 1 then -- disable rounding
+            return i_amount;
+        when 2 then --always up
+            return trunc(i_amount, i_config.customer_amount_round_precision) + power(10 , - i_config.customer_amount_round_precision);
+        when 3 then --always down
+            return trunc(i_amount, i_config.customer_amount_round_precision);
+        when 4 then -- math
+            return round(i_amount, i_config.customer_amount_round_precision);
+        else -- fallback to math rules
+            return round(i_amount, i_config.customer_amount_round_precision);
+    end case;
+  END;
+  $$;
+
+
+--
+-- Name: duration_round(sys.config, double precision); Type: FUNCTION; Schema: switch; Owner: -
+--
+
+CREATE FUNCTION switch.duration_round(i_config sys.config, i_duration double precision) RETURNS integer
+    LANGUAGE plpgsql COST 10
+    AS $$
+  DECLARE
+
+  BEGIN
+
+    case i_config.call_duration_round_mode_id
         when 1 then -- math rules
             return i_duration::integer;
         when 2 then --always down
@@ -960,8 +1002,35 @@ BEGIN
             return i_duration::integer;
     end case;
 
-END;
-$$;
+  END;
+  $$;
+
+
+--
+-- Name: vendor_price_round(sys.config, numeric); Type: FUNCTION; Schema: switch; Owner: -
+--
+
+CREATE FUNCTION switch.vendor_price_round(i_config sys.config, i_amount numeric) RETURNS numeric
+    LANGUAGE plpgsql COST 10
+    AS $$
+  DECLARE
+
+  BEGIN
+
+    case i_config.vendor_amount_round_mode_id
+        when 1 then -- disable rounding
+            return i_amount;
+        when 2 then --always up
+            return trunc(i_amount, i_config.vendor_amount_round_precision) + power(10 , - i_config.vendor_amount_round_precision);
+        when 3 then --always down
+            return trunc(i_amount, i_config.vendor_amount_round_precision);
+        when 4 then -- math
+            return round(i_amount, i_config.vendor_amount_round_precision);
+        else -- fallback to math rules
+            return round(i_amount, i_config.vendor_amount_round_precision);
+    end case;
+  END;
+  $$;
 
 
 --
@@ -981,6 +1050,8 @@ DECLARE
   v_dynamic switch.dynamic_cdr_data_ty;
 
   v_nozerolen boolean;
+  v_config sys.config%rowtype;
+
 BEGIN
   --  raise warning 'type: % id: %', i_failed_resource_type_id, i_failed_resource_id;
   --  RAISE warning 'DTMF: %', i_dtmf_events;
@@ -1072,9 +1143,11 @@ BEGIN
   v_cdr.time_start:=to_timestamp(v_time_data.time_start);
   v_cdr.time_limit:=v_time_data.time_limit;
 
+  select into strict v_config * from sys.config;
+
   if v_time_data.time_connect is not null then
     v_cdr.time_connect:=to_timestamp(v_time_data.time_connect);
-    v_cdr.duration:=switch.round(v_time_data.time_end-v_time_data.time_connect); -- rounding
+    v_cdr.duration:=switch.duration_round(v_config, v_time_data.time_end-v_time_data.time_connect); -- rounding
     v_nozerolen:=true;
     v_cdr.success=true;
   else
@@ -1171,10 +1244,15 @@ BEGIN
   v_cdr.rpid_out=v_dynamic.rpid_out;
   v_cdr.rpid_privacy_out=v_dynamic.rpid_privacy_out;
 
+  v_cdr.failed_resource_type_id = i_failed_resource_type_id;
+  v_cdr.failed_resource_id = i_failed_resource_id;
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
   perform stats.update_rt_stats(v_cdr);
+
+  v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
+  v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
 
   v_billing_event.id=v_cdr.id;
   v_billing_event.customer_id=v_cdr.customer_id;
@@ -3878,6 +3956,16 @@ INHERITS (cdr.cdr);
 
 
 --
+-- Name: cdr_201805; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cdr.cdr_201805 (
+    CONSTRAINT cdr_201805_time_start_check CHECK (((time_start >= '2018-05-01 03:00:00+03'::timestamp with time zone) AND (time_start < '2018-06-01 03:00:00+03'::timestamp with time zone)))
+)
+INHERITS (cdr.cdr);
+
+
+--
 -- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
@@ -5215,6 +5303,16 @@ ALTER SEQUENCE stats.traffic_vendor_accounts_id_seq OWNED BY stats.traffic_vendo
 
 
 --
+-- Name: amount_round_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sys.amount_round_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: call_duration_round_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -5256,16 +5354,6 @@ CREATE SEQUENCE sys.cdr_tables_id_seq
 --
 
 ALTER SEQUENCE sys.cdr_tables_id_seq OWNED BY sys.cdr_tables.id;
-
-
---
--- Name: config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
---
-
-CREATE TABLE sys.config (
-    id smallint NOT NULL,
-    call_duration_round_mode_id smallint DEFAULT 1 NOT NULL
-);
 
 
 --
@@ -5469,6 +5557,20 @@ ALTER TABLE ONLY cdr.cdr_201804 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_
 --
 
 ALTER TABLE ONLY cdr.cdr_201804 ALTER COLUMN dump_level_id SET DEFAULT 0;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr.cdr_201805 ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
+
+
+--
+-- Name: dump_level_id; Type: DEFAULT; Schema: cdr; Owner: -
+--
+
+ALTER TABLE ONLY cdr.cdr_201805 ALTER COLUMN dump_level_id SET DEFAULT 0;
 
 
 --
@@ -5842,6 +5944,14 @@ ALTER TABLE ONLY cdr.cdr_201804
 
 
 --
+-- Name: cdr_201805_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cdr.cdr_201805
+    ADD CONSTRAINT cdr_201805_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cdr_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
 --
 
@@ -6114,6 +6224,22 @@ ALTER TABLE ONLY stats.traffic_vendor_accounts
 
 
 --
+-- Name: amount_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.amount_round_modes
+    ADD CONSTRAINT amount_round_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: amount_round_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.amount_round_modes
+    ADD CONSTRAINT amount_round_modes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: call_duration_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -6241,6 +6367,13 @@ CREATE INDEX cdr_201803_time_start_idx ON cdr.cdr_201803 USING btree (time_start
 --
 
 CREATE INDEX cdr_201804_time_start_idx ON cdr.cdr_201804 USING btree (time_start);
+
+
+--
+-- Name: cdr_201805_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE INDEX cdr_201805_time_start_idx ON cdr.cdr_201805 USING btree (time_start);
 
 
 --
@@ -6449,6 +6582,22 @@ ALTER TABLE ONLY sys.config
 
 
 --
+-- Name: config_customer_amount_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.config
+    ADD CONSTRAINT config_customer_amount_round_mode_id_fkey FOREIGN KEY (customer_amount_round_mode_id) REFERENCES sys.amount_round_modes(id);
+
+
+--
+-- Name: config_vendor_amount_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.config
+    ADD CONSTRAINT config_vendor_amount_round_mode_id_fkey FOREIGN KEY (vendor_amount_round_mode_id) REFERENCES sys.amount_round_modes(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -6469,4 +6618,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180312211714');
 INSERT INTO public.schema_migrations (version) VALUES ('20180312215122');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180328123622');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180328170352');
 
