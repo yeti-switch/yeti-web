@@ -21076,7 +21076,7 @@ CREATE TABLE data_import.import_customers_auth (
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     tag_action_name character varying,
-    tag_action_value_names character varying DEFAULT ''::character varying NOT NULL,
+    tag_action_value_names character varying,
     dst_number_min_length integer,
     dst_number_max_length integer
 );
@@ -21134,7 +21134,7 @@ CREATE TABLE data_import.import_destinations (
     short_calls_limit real,
     reverse_billing boolean,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_names character varying DEFAULT ''::character varying NOT NULL,
+    routing_tag_names character varying,
     dst_number_min_length integer,
     dst_number_max_length integer
 );
@@ -21201,7 +21201,7 @@ CREATE TABLE data_import.import_dialpeers (
     exclusive_route boolean,
     reverse_billing boolean,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_names character varying DEFAULT ''::character varying NOT NULL,
+    routing_tag_names character varying,
     dst_number_min_length integer,
     dst_number_max_length integer
 );
@@ -26559,7 +26559,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26612,4 +26613,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180318143341');
 INSERT INTO public.schema_migrations (version) VALUES ('20180320120746');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180403104223');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180404135210');
 
