@@ -10,8 +10,7 @@ class Routing::RoutingTag < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
   self.table_name='class4.routing_tags'
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  ANY_TAG = 'any tag'.freeze
 
   has_many :customers_auths, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.tag_action_value)", tag.id) }, class_name: 'CustomersAuth', autosave: false
   has_many :numberlists, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.tag_action_value)", tag.id) }, class_name: 'Routing::Numberlist', autosave: false
@@ -20,6 +19,12 @@ class Routing::RoutingTag < Yeti::ActiveRecord
   has_many :detection_rules, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.tag_action_value)", tag.id) }, class_name: 'Routing::RoutingTagDetectionRule', autosave: false
   has_many :dialpeers, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) }, class_name: 'Dialpeer', autosave: false
   has_many :destinations, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) }, class_name: 'Destination', autosave: false
+
+  validates :name,
+            presence: true,
+            uniqueness: true,
+            exclusion: { in: [ANY_TAG] },
+            format: { with: /\A[^\s][^,]+?[^\s]\z/ } # not allow: ',' and start/end spaces
 
   before_destroy :prevent_destroy_if_have_assosiations
 

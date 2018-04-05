@@ -115,4 +115,15 @@ class Importing::Base < Yeti::ActiveRecord
     "
     Yeti::ActiveRecord.connection.execute(sql)
   end
+
+  def self.resolve_null_tag(ids_column, names_column)
+    sql = "
+      UPDATE #{self.table_name} ta
+      SET #{ids_column} = array_append(#{ids_column}, NULL)
+      WHERE '#{Routing::RoutingTag::ANY_TAG}' = ANY(
+              string_to_array(replace(ta.#{names_column}, ', ', ',')::varchar, ',')::varchar[]
+            );
+    "
+    Yeti::ActiveRecord.connection.execute(sql)
+  end
 end

@@ -13,7 +13,7 @@ RSpec.shared_examples :test_unset_routing_tag_ids do |factory: nil, controller_n
 
     within 'li', text: 'Routing tag ids' do
       page.unselect tag.name
-      page.unselect 'any tags'
+      page.unselect Routing::RoutingTag::ANY_TAG
     end
     find('input[type=submit]').click
   end

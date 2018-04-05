@@ -68,6 +68,7 @@ class Importing::Dialpeer < Importing::Base
   def self.after_import_hook(unique_columns = [])
     self.where(asr_limit: nil).update_all(asr_limit: 0)
     self.resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
+    self.resolve_null_tag('routing_tag_ids', 'routing_tag_names')
     super
   end
 end

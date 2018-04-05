@@ -5,7 +5,12 @@ class Yeti::ActiveRecord < ActiveRecord::Base
   def self.array_belongs_to(name, class_name:, foreign_key:)
     define_method(name) do
       relation = class_name.is_a?(String) ? class_name.constantize : class_name
-      relation.where(id: self.public_send(foreign_key))
+      ids = self.public_send(foreign_key)
+      relation_collection = relation.where(id: ids).to_a
+      if ids.include?(nil)
+        relation_collection.push(relation.new(name: Routing::RoutingTag::ANY_TAG))
+      end
+      relation_collection
     end
   end
 
