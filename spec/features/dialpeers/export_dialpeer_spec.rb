@@ -19,7 +19,7 @@ describe 'Export Dialpeer', type: :feature do
            account: account,
            gateway: gateway,
            gateway_group: gateway_group,
-           routing_tag_ids: [@tag_ua.id, @tag_us.id])
+           routing_tag_ids: [@tag_ua.id, @tag_us.id, nil])
   end
 
   before do
@@ -60,7 +60,7 @@ describe 'Export Dialpeer', type: :feature do
         ['Dst rewrite rule', item.dst_rewrite_rule.to_s, anything],
         ['Dst rewrite result', item.dst_rewrite_result.to_s, anything],
         ['Reverse billing', item.reverse_billing.to_s, anything],
-        ['Routing tag names', item.routing_tags.map(&:name).join(', '), anything]
+        ['Routing tag names', [@tag_ua.name, @tag_us.name, Routing::RoutingTag::ANY_TAG].join(', '), anything]
       ]
     )
   end

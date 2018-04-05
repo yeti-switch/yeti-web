@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
+require 'shared_examples/shared_examples_for_importing_with_routing_tags'
 
 describe Importing::Dialpeer do
 
@@ -39,20 +40,9 @@ describe Importing::Dialpeer do
     end
   end
 
-  context 'when tag_action_value_names is NULL' do
-    include_context :init_importing_dialpeer, {
-      routing_tag_names: nil,
-      routing_tag_ids: []
-    }
+  it_behaves_like 'resolve routing_tag_names=NULL as empty array', :init_importing_dialpeer
 
-    it 'routing_tag_ids is empty array' do
-      subject
-      expect(preview_item.reload).to have_attributes(
-        routing_tag_names: nil,
-        routing_tag_ids: []
-      )
-    end
-  end
+  it_behaves_like 'resolve "any tag" as NULL', :init_importing_dialpeer
 
   it_behaves_like 'after_import_hook when real items match' do
     include_context :init_importing_dialpeer, prefix: '111'

@@ -22,7 +22,7 @@ describe 'Create new Destinations', type: :feature do
         initial_rate: 60,
         next_rate: 30,
         profit_control_mode_id: rateplan.profit_control_mode.name,
-        routing_tag_ids: [tag.name, 'any tags']
+        routing_tag_ids: [tag.name, Routing::RoutingTag::ANY_TAG]
       }
     end
 

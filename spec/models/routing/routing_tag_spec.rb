@@ -10,6 +10,18 @@ require 'spec_helper'
 
 RSpec.describe Routing::RoutingTag, type: :model do
 
+  context 'validators' do
+    context 'name' do
+      it { is_expected.not_to allow_value(Routing::RoutingTag::ANY_TAG).for(:name) }
+      it { is_expected.not_to allow_value('UA_CLI ').for(:name) }
+      it { is_expected.not_to allow_value(' UA_CLI').for(:name) }
+      it { is_expected.not_to allow_value('UA,CLI').for(:name) }
+
+      it { is_expected.to allow_value('UA_CLI').for(:name) }
+      it { is_expected.to allow_value('UA_C LI').for(:name) }
+    end
+  end
+
   context '#destroy' do
     let(:tag) do
       create(:routing_tag)
