@@ -4,7 +4,7 @@ RSpec.describe Worker::CdrExportJob, type: :job do
   subject do
     described_class.perform_now(cdr_export.id)
   end
-  let(:cdr_export) do
+  let!(:cdr_export) do
     FactoryGirl.create(:cdr_export, callback_url: callback_url)
   end
   let(:callback_url) { nil }
@@ -22,6 +22,11 @@ RSpec.describe Worker::CdrExportJob, type: :job do
 
   it 'cdr_export status should be completed' do
     expect { subject }.to change { cdr_export.reload.status }.from(CdrExport::STATUS_PENDING).to(CdrExport::STATUS_COMPLETED)
+  end
+
+  it 'rows_count should be saved to cdr_export' do
+    allow_any_instance_of(PG::Result).to receive(:cmd_tuples).and_return(5)
+    expect { subject }.to change { cdr_export.reload.rows_count }.from(nil).to(5)
   end
 
   context 'when failure' do

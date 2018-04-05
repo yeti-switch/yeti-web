@@ -5,10 +5,13 @@ module Worker
     def perform(cdr_export_id)
       cdr_export = CdrExport.find(cdr_export_id)
 
-      Cdr::Cdr.connection.execute("COPY (#{cdr_export.export_sql}) TO '#{file_path_for(cdr_export)}' WITH CSV HEADER;")
+      rows_count = Cdr::Cdr.connection.execute("COPY (#{cdr_export.export_sql}) TO '#{file_path_for(cdr_export)}' WITH CSV HEADER;").cmd_tuples
 
       # update cdr_export status
-      cdr_export.update!(status: CdrExport::STATUS_COMPLETED)
+      cdr_export.update!(
+        status: CdrExport::STATUS_COMPLETED,
+        rows_count: rows_count
+      )
     rescue => e
       logger.error { e.message }
       logger.error { e.backtrace.join("\n") }

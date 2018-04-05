@@ -17,6 +17,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       link_to 'download', { action: :download, id: row.id } if row.completed?
     end
     column :status
+    column :rows_count
     column :fields
     column :filters
     column :callback_url
