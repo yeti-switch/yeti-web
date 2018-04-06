@@ -60,7 +60,6 @@ describe 'CDR exports', type: :feature do
         filters: {
           'time_start_gteq' => '2018-01-01',
           'time_start_lteq' => '2018-03-01',
-          'is_last_cdr_eq' => false,
           'customer_acc_id_eq' => account.id.to_s
         },
         status: 'Pending'

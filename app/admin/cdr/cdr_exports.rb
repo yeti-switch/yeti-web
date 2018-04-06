@@ -44,7 +44,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       filters['time_start_gteq'] = build_params['time_start_gteq']
       filters['time_start_lteq'] = build_params['time_start_lteq']
       filters['customer_acc_id_eq'] = build_params['customer_acc_id_eq'] if build_params['customer_acc_id_eq'].present?
-      filters['is_last_cdr_eq'] = build_params['is_last_cdr_eq'] == '1'
+      filters['is_last_cdr_eq'] = build_params['is_last_cdr_eq'] == 'true' if build_params['is_last_cdr_eq'].present?
       scoped_collection.send method_for_build, build_params.merge(filters: filters)
     end
   end
@@ -60,7 +60,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       f.input 'time_start_gteq', as: :date_time_picker
       f.input :time_start_lteq, as: :date_time_picker
       f.input :customer_acc_id_eq, as: :select, collection: Account.order(:name), input_html: { class: 'chosen' }
-      f.input :is_last_cdr_eq, as: :boolean
+      f.input :is_last_cdr_eq, as: :select, collection: [['Any', nil], ['Yes', true], ['No', false]], input_html: { class: 'chosen' }
     end
     f.actions
   end
