@@ -22650,7 +22650,8 @@ CREATE TABLE sys.cdr_exports (
     callback_url character varying,
     type character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    rows_count integer
 );
 
 
@@ -26615,4 +26616,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180320120746');
 INSERT INTO public.schema_migrations (version) VALUES ('20180403104223');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180404135210');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180405132225');
 
