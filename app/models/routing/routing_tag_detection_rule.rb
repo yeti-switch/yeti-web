@@ -24,8 +24,18 @@ class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
+  include RoutingTagIdsScopeable
+
   def display_name
     "#{self.id}"
   end
 
+  private
+
+  def self.ransackable_scopes(auth_object = nil)
+    [
+        :routing_tag_ids_covers,
+        :tagged
+    ]
+  end
 end

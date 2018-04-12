@@ -88,6 +88,7 @@ class Dialpeer < Yeti::ActiveRecord
 
   include Yeti::ResourceStatus
   include Yeti::NetworkDetector
+  include RoutingTagIdsScopeable
 
   scope :locked, -> { where locked: true }
 
@@ -197,7 +198,9 @@ class Dialpeer < Yeti::ActiveRecord
 
   def self.ransackable_scopes(auth_object = nil)
     [
-        :routing_for_contains
+        :routing_for_contains,
+        :routing_tag_ids_covers,
+        :tagged
     ]
   end
 

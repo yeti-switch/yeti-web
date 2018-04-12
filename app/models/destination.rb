@@ -49,6 +49,8 @@ class Destination < Yeti::ActiveRecord
 
   include Yeti::NetworkDetector
 
+  include RoutingTagIdsScopeable
+
   scope :low_quality, -> { where quality_alarm: true }
 
   scope :where_customer, -> (id) do
@@ -152,7 +154,9 @@ class Destination < Yeti::ActiveRecord
 
   def self.ransackable_scopes(auth_object = nil)
     [
-        :routing_for_contains
+        :routing_for_contains,
+        :routing_tag_ids_covers,
+        :tagged
     ]
   end
 
