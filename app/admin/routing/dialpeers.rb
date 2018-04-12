@@ -210,6 +210,8 @@ ActiveAdmin.register Dialpeer do
   filter :external_id
   filter :exclusive_route, as: :select, collection: [["Yes", true], ["No", false]]
 
+  acts_as_filter_by_routing_tag_ids
+
 
   form do |f|
     f.semantic_errors *f.object.errors.keys

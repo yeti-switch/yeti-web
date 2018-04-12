@@ -86,6 +86,7 @@ ActiveAdmin.register Destination do
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
 
+  acts_as_filter_by_routing_tag_ids
 
 
   permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rateplan_id, :next_rate, :connect_fee,
