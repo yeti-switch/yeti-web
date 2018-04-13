@@ -59,7 +59,7 @@ class CdrExport < Yeti::ActiveRecord
   alias_attribute :export_type, :type
 
   def export_sql
-    Cdr::Cdr.select(fields.join(', ')).order('time_start desc').ransack(filters).result.to_sql
+    Cdr::Cdr.select(fields.join(', ')).ransack(filters).result.to_sql
   end
 
   def completed?

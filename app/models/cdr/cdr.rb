@@ -174,6 +174,8 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :sign_orig_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :sign_orig_transport_protocol_id
   belongs_to :sign_term_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :sign_term_transport_protocol_id
 
+  default_scope { order('time_start desc') }
+
   scope :success, -> { where success: true }
   scope :failure, -> { where success: false }
 
