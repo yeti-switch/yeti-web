@@ -9,6 +9,14 @@ RSpec.describe Cdr::Cdr, type: :model do
 
   it { expect(described_class.count).to eq(0) }
 
+  describe 'default ORDER BY' do
+    subject { described_class.all.to_sql }
+
+    it 'default ORDER is time_start DESC' do
+      expect(subject).to end_with('ORDER BY time_start desc')
+    end
+  end
+
   describe 'Function "switch.writecdr()"' do
 
     before do
