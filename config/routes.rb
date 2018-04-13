@@ -110,6 +110,7 @@ Yeti::Application.routes.draw do
 
           namespace :routing do
             jsonapi_resources :areas
+            jsonapi_resources :area_prefixes
             jsonapi_resources :numberlists
             jsonapi_resources :numberlist_items
             jsonapi_resources :numberlist_actions
