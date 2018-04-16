@@ -14771,7 +14771,7 @@ BEGIN
       /*}rel*/
       /*dbg{*/
       FOr v_gw in  select * from class4.gateways cg where cg.gateway_group_id=i_dp.gateway_group_id and cg.enabled ORDER BY cg.priority desc, random() LOOP
-        IF v_gw.contractor_id!=i_dp.vendor_id THEN
+        IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
           continue;
         end if;
@@ -14783,7 +14783,7 @@ BEGIN
   else
     select into v_gw * from class4.gateways cg where cg.id=i_dp.gateway_id and cg.enabled;
     if FOUND THEN
-      IF v_gw.contractor_id!=i_dp.vendor_id THEN
+      IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
         RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Stop processing';
         return;
       end if;
@@ -14844,7 +14844,7 @@ BEGIN
       
       /*dbg{*/
       FOr v_gw in  select * from class4.gateways cg where cg.gateway_group_id=i_dp.gateway_group_id and cg.enabled ORDER BY cg.priority desc, random() LOOP
-        IF v_gw.contractor_id!=i_dp.vendor_id THEN
+        IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
           continue;
         end if;
@@ -14856,7 +14856,7 @@ BEGIN
   else
     select into v_gw * from class4.gateways cg where cg.id=i_dp.gateway_id and cg.enabled;
     if FOUND THEN
-      IF v_gw.contractor_id!=i_dp.vendor_id THEN
+      IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
         RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Stop processing';
         return;
       end if;
@@ -14910,7 +14910,7 @@ BEGIN
   else
     select into v_gw * from class4.gateways cg where cg.id=i_dp.gateway_id and cg.enabled;
     if FOUND THEN
-      IF v_gw.contractor_id!=i_dp.vendor_id THEN
+      IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
         RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Stop processing';
         return;
       end if;
@@ -26610,4 +26610,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180316061214');
 INSERT INTO public.schema_migrations (version) VALUES ('20180318143341');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180320120746');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180403104223');
 
