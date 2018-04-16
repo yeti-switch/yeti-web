@@ -49,6 +49,7 @@
 #  tag_action_id                    :integer
 #  tag_action_value                 :integer          default([]), not null, is an Array
 #  external_id                      :integer
+#  reject_calls                     :boolean          default(FALSE), not null
 #
 
 class CustomersAuthNormalized < Yeti::ActiveRecord

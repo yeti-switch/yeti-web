@@ -65,9 +65,10 @@
 #  tag_action_id                    :integer
 #  tag_action_value                 :integer          default([]), not null, is an Array
 #  tag_action_name                  :string
-#  tag_action_value_names           :string           default(""), not null
+#  tag_action_value_names           :string
 #  dst_number_min_length            :integer
 #  dst_number_max_length            :integer
+#  reject_calls                     :boolean
 #
 
 class Importing::CustomersAuth < Importing::Base

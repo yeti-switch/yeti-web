@@ -30,9 +30,11 @@
 #  short_calls_limit        :float
 #  reverse_billing          :boolean
 #  routing_tag_ids          :integer          default([]), not null, is an Array
-#  routing_tag_names        :string           default(""), not null
+#  routing_tag_names        :string
 #  dst_number_min_length    :integer
 #  dst_number_max_length    :integer
+#  routing_tag_mode_id      :integer
+#  routing_tag_mode_name    :string
 #
 
 class Importing::Destination < Importing::Base

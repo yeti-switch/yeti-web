@@ -1,11 +1,3 @@
-# == Schema Information
-#
-# Table name: invoice_periods
-#
-#  id   :integer          not null, primary key
-#  name :string           not null
-#
-
 require 'spec_helper'
 
 describe Billing::InvoicePeriod do

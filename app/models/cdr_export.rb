@@ -10,6 +10,7 @@
 #  type         :string           not null
 #  created_at   :datetime
 #  updated_at   :datetime
+#  rows_count   :integer
 #
 
 class CdrExport < Yeti::ActiveRecord

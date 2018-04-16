@@ -37,9 +37,9 @@
 #  dst_number_max_length            :integer          default(100), not null
 #  check_account_balance            :boolean          default(TRUE), not null
 #  require_incoming_auth            :boolean          default(FALSE), not null
+#  dst_number_min_length            :integer          default(0), not null
 #  tag_action_id                    :integer
 #  tag_action_value                 :integer          default([]), not null, is an Array
-#  dst_number_min_length            :integer          default(0), not null
 #  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  src_prefix                       :string           default(["\"\""]), is an Array
 #  dst_prefix                       :string           default(["\"\""]), is an Array
@@ -48,6 +48,7 @@
 #  to_domain                        :string           default([]), is an Array
 #  x_yeti_auth                      :string           default([]), is an Array
 #  external_id                      :integer
+#  reject_calls                     :boolean          default(FALSE), not null
 #
 
 class CustomersAuth < Yeti::ActiveRecord
