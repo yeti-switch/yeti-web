@@ -19,6 +19,8 @@ module ResourceDSL
     ]
 
     def acts_as_import(options)
+      skip_columns = options.delete(:skip_columns) || []
+
       options= {
           resource_class: config.resource_class,
           resource_label: config.resource_label,
@@ -37,6 +39,14 @@ module ResourceDSL
       )
 
       options[:back] = proc { config.namespace.resource_for(options[:resource_class]).route_collection_path }
+
+      options[:before_batch_import] = lambda do |importer|
+        columns = options[:resource_class].column_names
+        # all foreign_key should be skipped, import uses "[foregin_key]_name" columns
+        belongs_to_columns = options[:resource_class].reflect_on_all_associations(:belongs_to).map(&:foreign_key)
+        columns = columns - belongs_to_columns - skip_columns.map(&:to_s)
+        importer.batch_slice_columns(columns)
+      end
 
       options[:after_import] = proc { |importer|
         unique_columns = []

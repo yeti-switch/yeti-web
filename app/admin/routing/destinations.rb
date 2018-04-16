@@ -52,7 +52,8 @@ ActiveAdmin.register Destination do
                  :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }]
 
-  acts_as_import resource_class: Importing::Destination
+  acts_as_import resource_class: Importing::Destination,
+                 skip_columns: [:routing_tag_ids]
 
   scope :low_quality
 

@@ -67,7 +67,8 @@ ActiveAdmin.register CustomersAuth do
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) || "" }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
 
-  acts_as_import resource_class: Importing::CustomersAuth
+  acts_as_import resource_class: Importing::CustomersAuth,
+                 skip_columns: [:tag_action_value]
 
   permit_params :name, :enabled, :customer_id, :rateplan_id, :routing_plan_id,
                 :gateway_id, :require_incoming_auth, :account_id, :check_account_balance, :diversion_policy_id,

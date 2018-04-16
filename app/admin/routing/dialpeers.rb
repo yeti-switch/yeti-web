@@ -68,7 +68,8 @@ ActiveAdmin.register Dialpeer do
                  :reverse_billing,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }]
 
-  acts_as_import resource_class: Importing::Dialpeer
+  acts_as_import resource_class: Importing::Dialpeer,
+                 skip_columns: [:routing_tag_ids]
 
   controller do
     def resource_params
