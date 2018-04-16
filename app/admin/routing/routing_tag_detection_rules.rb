@@ -10,13 +10,14 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
 
   acts_as_export :id,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
+                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }],
                  [:src_area_name, proc { |row| row.src_area.try(:name) } ],
                  [:dst_area_name, proc { |row| row.dst_area.try(:name) } ],
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
 
   permit_params :src_area_id, :dst_area_id,
-                :tag_action_id, tag_action_value: [],
+                :tag_action_id, :routing_tag_mode_id, tag_action_value: [],
                 routing_tag_ids: []
 
   includes :src_area, :dst_area, :tag_action
@@ -38,6 +39,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     id_column
     actions
     column :routing_tags
+    column :routing_tag_mode
     column :src_area
     column :dst_area
     column :tag_action
@@ -48,6 +50,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     attributes_table do
       row :id
       row :routing_tags
+      row :routing_tag_mode
       row :src_area
       row :dst_area
       row :tag_action
@@ -63,6 +66,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
         multiple: true,
         include_hidden: false,
         input_html: { class: 'chosen' }
+      f.input :routing_tag_mode
       f.input :src_area
       f.input :dst_area
       f.input :tag_action

@@ -5096,6 +5096,7 @@ CREATE TABLE class4.destinations (
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -5146,6 +5147,7 @@ CREATE TABLE class4.dialpeers (
     dst_number_max_length smallint DEFAULT 100 NOT NULL,
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -19737,6 +19739,7 @@ CREATE TABLE class4.customers_auth (
     to_domain character varying[] DEFAULT '{}'::character varying[],
     x_yeti_auth character varying[] DEFAULT '{}'::character varying[],
     external_id bigint,
+    reject_calls boolean DEFAULT false NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -19812,6 +19815,7 @@ CREATE TABLE class4.customers_auth_normalized (
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     external_id bigint,
+    reject_calls boolean DEFAULT false NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
 );
@@ -20716,7 +20720,8 @@ CREATE TABLE class4.routing_tag_detection_rules (
     src_area_id integer,
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    routing_tag_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -20737,6 +20742,16 @@ CREATE SEQUENCE class4.routing_tag_detection_rules_id_seq
 --
 
 ALTER SEQUENCE class4.routing_tag_detection_rules_id_seq OWNED BY class4.routing_tag_detection_rules.id;
+
+
+--
+-- Name: routing_tag_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.routing_tag_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
 
 
 --
@@ -21078,7 +21093,8 @@ CREATE TABLE data_import.import_customers_auth (
     tag_action_name character varying,
     tag_action_value_names character varying,
     dst_number_min_length integer,
-    dst_number_max_length integer
+    dst_number_max_length integer,
+    reject_calls boolean
 );
 
 
@@ -21136,7 +21152,9 @@ CREATE TABLE data_import.import_destinations (
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_names character varying,
     dst_number_min_length integer,
-    dst_number_max_length integer
+    dst_number_max_length integer,
+    routing_tag_mode_id smallint,
+    routing_tag_mode_name character varying
 );
 
 
@@ -21203,7 +21221,9 @@ CREATE TABLE data_import.import_dialpeers (
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_names character varying,
     dst_number_min_length integer,
-    dst_number_max_length integer
+    dst_number_max_length integer,
+    routing_tag_mode_id smallint,
+    routing_tag_mode_name character varying
 );
 
 
@@ -22650,7 +22670,7 @@ CREATE TABLE sys.cdr_exports (
     callback_url character varying,
     type character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    updated_at timestamp with time zone,
     rows_count integer
 );
 
@@ -24665,6 +24685,22 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
+-- Name: routing_tag_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.routing_tag_modes
+    ADD CONSTRAINT routing_tag_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: routing_tag_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.routing_tag_modes
+    ADD CONSTRAINT routing_tag_modes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: routing_tags_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -26021,6 +26057,14 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
+-- Name: destinations_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.destinations
+    ADD CONSTRAINT destinations_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+
+
+--
 -- Name: dialpeer_next_rates_dialpeer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -26058,6 +26102,14 @@ ALTER TABLE ONLY class4.dialpeers
 
 ALTER TABLE ONLY class4.dialpeers
     ADD CONSTRAINT dialpeers_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
+
+
+--
+-- Name: dialpeers_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.dialpeers
+    ADD CONSTRAINT dialpeers_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
 
 
 --
@@ -26429,6 +26481,14 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
+-- Name: routing_tag_detection_rules_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.routing_tag_detection_rules
+    ADD CONSTRAINT routing_tag_detection_rules_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+
+
+--
 -- Name: routing_tag_detection_rules_src_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -26560,8 +26620,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26618,4 +26677,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180403104223');
 INSERT INTO public.schema_migrations (version) VALUES ('20180404135210');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180405132225');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180416121932');
 

@@ -43,6 +43,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
         {
           name: 'name',
           enabled: true,
+          'reject-calls': true,
           ip: '0.0.0.0',
           'external-id': 100
         }

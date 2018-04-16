@@ -14,7 +14,7 @@ resource 'Routing RoutingTagDetectionRules' do
   optional_params = %i(tag-action-value routing-tag-ids)
 
   required_relationships = %i()
-  optional_relationships = %i(src-area dst-area tag-action)
+  optional_relationships = %i(src-area dst-area tag-action routing-tag-modes)
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tag-detection-rules'
   include_context :acceptance_delete, namespace: 'routing', type: 'routing-tag-detection-rules'

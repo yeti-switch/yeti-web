@@ -139,6 +139,7 @@
 #  customer_price_no_vat           :decimal(, )
 #  customer_duration               :integer
 #  vendor_duration                 :integer
+#  customer_auth_name              :string
 #
 
 class Cdr::Cdr < Cdr::Base
@@ -217,6 +218,9 @@ class Cdr::Cdr < Cdr::Base
     self.success ? :success : :failure
   end
 
+  def display_name
+    "#{self.id}"
+  end
 
   # TODO: use DisconnectInitiator#display_name instead
   # Why in was cached this way? `DISCONNECTORS = DisconnectInitiator.all.index_by(&:id)`

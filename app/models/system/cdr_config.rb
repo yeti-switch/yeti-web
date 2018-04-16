@@ -2,8 +2,12 @@
 #
 # Table name: sys.config
 #
-#  id                          :integer          not null, primary key
-#  call_duration_round_mode_id :integer          default(1), not null
+#  id                              :integer          not null, primary key
+#  call_duration_round_mode_id     :integer          default(1), not null
+#  customer_amount_round_mode_id   :integer          default(1), not null
+#  customer_amount_round_precision :integer          default(5), not null
+#  vendor_amount_round_mode_id     :integer          default(1), not null
+#  vendor_amount_round_precision   :integer          default(5), not null
 #
 
 class System::CdrConfig < Cdr::Base

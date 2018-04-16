@@ -27,6 +27,7 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :o_id
     column :name
     column :enabled
+    column :reject_calls
     column :transport_protocol, sortable: :transport_protocol_name do |row|
       if row.transport_protocol.blank?
         row.transport_protocol_name

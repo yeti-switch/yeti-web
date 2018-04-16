@@ -118,6 +118,7 @@ Yeti::Application.routes.draw do
             jsonapi_resources :routing_tag_detection_rules
             jsonapi_resources :tag_actions
             jsonapi_resources :routing_tags
+            jsonapi_resources :routing_tag_modes
           end
         end
 

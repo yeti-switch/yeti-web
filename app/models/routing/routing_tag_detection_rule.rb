@@ -21,8 +21,11 @@ class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   belongs_to :dst_area, class_name: Routing::Area, foreign_key: :dst_area_id
   belongs_to :tag_action, class_name: 'Routing::TagAction'
 
+  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
+
+  validates_presence_of :routing_tag_mode
 
   include RoutingTagIdsScopeable
 

@@ -17,6 +17,7 @@ ActiveAdmin.register Dialpeer do
                          {
                            enabled: boolean_select,
                            prefix: 'text',
+                           routing_tag_mode: Routing::RoutingTag.pluck(:name, :id),
                            routing_group_id: RoutingGroup.pluck(:name, :id),
                            priority: 'text',
                            force_hit_rate: 'text',
@@ -66,7 +67,8 @@ ActiveAdmin.register Dialpeer do
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :reverse_billing,
-                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }]
+                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
+                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }]
 
   acts_as_import resource_class: Importing::Dialpeer,
                  skip_columns: [:routing_tag_ids]
@@ -86,7 +88,8 @@ ActiveAdmin.register Dialpeer do
 
   end
 
-  includes :gateway, :gateway_group, :routing_group, :vendor, :account, :statistic, network_prefix: [:country, :network]
+  includes :gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic,
+           network_prefix: [:country, :network]
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', dialpeer_dialpeer_next_rates_path(resource.id)
@@ -116,6 +119,7 @@ ActiveAdmin.register Dialpeer do
     end
     column :routing_group, sortable: 'routing_groups.name'
     column :routing_tags
+    column :routing_tag_mode
     column :priority
     column :force_hit_rate
     column :exclusive_route
@@ -234,6 +238,7 @@ ActiveAdmin.register Dialpeer do
         multiple: true,
         include_hidden: false,
         input_html: { class: 'chosen' }
+      f.input :routing_tag_mode
 
       f.input :vendor,  collection: Contractor.vendors,
               input_html: {
@@ -294,6 +299,7 @@ ActiveAdmin.register Dialpeer do
           row :locked
           row :routing_group
           row :routing_tags
+          row :routing_tag_mode
           row :vendor do
             auto_link(s.vendor, s.vendor.decorated_vendor_display_name)
           end

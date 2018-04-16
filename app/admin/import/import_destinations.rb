@@ -15,7 +15,7 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
     end
   end
 
-  includes :rateplan, :rate_policy
+  includes :rateplan, :rate_policy, :routing_tag_mode
 
   index do
     selectable_column
@@ -39,6 +39,14 @@ ActiveAdmin.register Importing::Destination , as: "Destination Imports"  do
         Routing::RoutingTag.where(id: row.routing_tag_ids).pluck(:name).join(', ')
       else
         row.routing_tag_names
+      end
+    end
+
+    column :routing_tag_mode, sortable: :routing_tag_mode_name do |row|
+      if row.routing_tag_mode_name.blank?
+        row.routing_tag_mode_name
+      else
+        auto_link(row.routing_tag_mode, row.routing_tag_mode_name)
       end
     end
 

@@ -26,6 +26,7 @@ describe Importing::Dialpeer do
                         routing_group_id: nil,
                         vendor_id: nil,
                         account_id: nil,
+                        routing_tag_mode_id: nil,
                         routing_tag_ids: []
                     }
 
@@ -35,6 +36,7 @@ describe Importing::Dialpeer do
       subject
 
       expect(preview_item.reload).to have_attributes(
+        routing_tag_mode_id: Routing::RoutingTagMode.find_by(name: preview_item.routing_tag_mode_name).id,
         routing_tag_ids: tags.map(&:id)
       )
     end

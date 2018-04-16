@@ -17,7 +17,7 @@ resource 'Destinations' do
   optional_params = %i(prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids)
 
   required_relationships = %i(rateplan rate-policy)
-  optional_relationships = %i(profit-control-mode)
+  optional_relationships = %i(profit-control-mode routing-tag-modes)
 
   get '/api/rest/admin/destinations' do
     before { create_list(:destination, 2) }

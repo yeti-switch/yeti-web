@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Api::Rest::Admin::DialpeersController, type: :controller do
   include_context :jsonapi_admin_headers
 
+  let(:rtm_and) { Routing::RoutingTagMode.last }
+
   describe 'GET index' do
     let!(:dialpeers) { create_list :dialpeer, 2 }
 
@@ -77,7 +79,8 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
         { vendor: wrap_relationship(:contractors, vendor.id),
           account: wrap_relationship(:accounts, account.id),
           'gateway-group': wrap_relationship(:'gateway-groups', gateway_group.id),
-          'routing-group': wrap_relationship(:'routing-groups', routing_group.id) }
+          'routing-group': wrap_relationship(:'routing-groups', routing_group.id),
+          'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id) }
       end
 
       it { expect(response.status).to eq(201) }

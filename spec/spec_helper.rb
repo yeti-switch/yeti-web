@@ -50,6 +50,7 @@ RSpec.configure do |config|
       'class4.numberlist_actions',
       'class4.tag_actions',
       'class4.rate_profit_control_modes',
+      'class4.routing_tag_modes',
       'sys.timezones'
   ]
 
