@@ -6,12 +6,17 @@ resource 'Routing RoutingTagDetectionRules' do
 
   include_context :init_routing_tag_collection
 
-  let(:collection) { create_list :routing_tag_detection_rule, 2 }
+  let(:collection) do
+    create_list :routing_tag_detection_rule, 2,
+                 src_prefix: '111',
+                 dst_prefix: '222'
+  end
+
   let(:record) { collection.first }
 
   required_params = %i()
 
-  optional_params = %i(tag-action-value routing-tag-ids)
+  optional_params = %i(src-prefix dst-prefix tag-action-value routing-tag-ids)
 
   required_relationships = %i()
   optional_relationships = %i(src-area dst-area tag-action routing-tag-modes)

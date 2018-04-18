@@ -11,6 +11,8 @@ describe 'Export RoutingTagDetectionRule', type: :feature do
            routing_tag_ids: [@tag_emergency.id, @tag_us.id],
            src_area: create(:area),
            dst_area: create(:area),
+           src_prefix: '111',
+           dst_prefix: '222',
            routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
            tag_action: Routing::TagAction.take,
            tag_action_value: [@tag_ua.id, @tag_us.id])
@@ -29,6 +31,8 @@ describe 'Export RoutingTagDetectionRule', type: :feature do
         ['Routing tag names', item.routing_tags.map(&:name).join(', ')],
         ['Src area name', item.src_area.name],
         ['Dst area name', item.dst_area.name],
+        ['Src prefix', item.src_prefix],
+        ['Dst prefix', item.dst_prefix],
         ["Routing tag mode name", "AND"],
         ['Tag action name', item.tag_action.name],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', ')]

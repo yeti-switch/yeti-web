@@ -20721,7 +20721,9 @@ CREATE TABLE class4.routing_tag_detection_rules (
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    routing_tag_mode_id smallint DEFAULT 0 NOT NULL
+    routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
+    src_prefix character varying DEFAULT ''::character varying NOT NULL,
+    dst_prefix character varying DEFAULT ''::character varying NOT NULL
 );
 
 
@@ -22670,7 +22672,7 @@ CREATE TABLE sys.cdr_exports (
     callback_url character varying,
     type character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp with time zone,
+    updated_at timestamp without time zone,
     rows_count integer
 );
 
@@ -26620,7 +26622,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26679,4 +26682,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180404135210');
 INSERT INTO public.schema_migrations (version) VALUES ('20180405132225');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180416121932');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180418101559');
 

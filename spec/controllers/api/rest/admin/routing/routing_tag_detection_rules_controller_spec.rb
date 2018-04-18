@@ -37,7 +37,17 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
   describe 'POST create' do
     before do
       post :create, data: { type: resource_type,
+                            attributes: attributes,
                             relationships: relationships }
+    end
+
+    let(:attributes) do
+      {
+        'src-prefix': '111',
+        'dst-prefix': '222',
+        'tag-action-value': Routing::RoutingTag.all.pluck(:id),
+        'routing-tag-ids': Routing::RoutingTag.all.pluck(:id)
+      }
     end
 
     let(:relationships) do
