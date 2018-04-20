@@ -8,7 +8,7 @@ RSpec.shared_examples :jsonapi_request_with_filter do
   end
 
   subject do
-    get :index, filter: request_filters
+    get :index, params: { filter: request_filters }
   end
 
   it 'response contains only one fitting record' do

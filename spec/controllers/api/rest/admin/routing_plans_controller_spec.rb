@@ -31,14 +31,14 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     let!(:routing_plan) { create :routing_plan }
 
     context 'when routing_plan exists' do
-      before { get :show, id: routing_plan.to_param }
+      before { get :show, params: { id: routing_plan.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(routing_plan.id.to_s) }
     end
 
     context 'when routing_plan does not exist' do
-      before { get :show, id: routing_plan.id + 10 }
+      before { get :show, params: { id: routing_plan.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -46,7 +46,7 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, data: { type: 'routing-plans', attributes: attributes } }
+    before { post :create, params: { data: { type: 'routing-plans', attributes: attributes } } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name', 'use-lnp': true } }
@@ -65,9 +65,11 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
 
   describe 'PUT update' do
     let!(:routing_plan) { create :routing_plan }
-    before { put :update, id: routing_plan.to_param, data: { type: 'routing-plans',
-                                                             id: routing_plan.to_param,
-                                                             attributes: attributes } }
+    before { put :update, params: {
+      id: routing_plan.to_param, data: { type: 'routing-plans',
+                                         id: routing_plan.to_param,
+                                         attributes: attributes }
+    } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name', 'use-lnp': true } }
@@ -87,7 +89,7 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
   describe 'DELETE destroy' do
     let!(:routing_plan) { create :routing_plan }
 
-    before { delete :destroy, id: routing_plan.to_param }
+    before { delete :destroy, params: { id: routing_plan.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Routing::RoutingPlan.count).to eq(0) }

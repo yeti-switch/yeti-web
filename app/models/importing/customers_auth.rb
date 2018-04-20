@@ -142,8 +142,8 @@ class Importing::CustomersAuth < Importing::Base
   self.import_class = ::CustomersAuth
 
   def self.after_import_hook(unique_columns = [])
-    self.where(src_prefix: nil).update_all(src_prefix: [''])
-    self.where(dst_prefix: nil).update_all(dst_prefix: [''])
+    self.where(src_prefix: nil).update_all(src_prefix: '')
+    self.where(dst_prefix: nil).update_all(dst_prefix: '')
     self.resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
   end

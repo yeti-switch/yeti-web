@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
 # Core
+gem 'activemodel-serializers-xml'
 gem 'pg'
-gem 'postgres_ext'
-gem 'rails', '~> 4.2.9'
+gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails-5'
+gem 'rails', '~> 5.0.0'
 gem 'responders', '~> 2.2.0'
-gem 'activerecord-postgres-dump-schemas' # TODO: deprecated for Rails 5
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
-gem 'devise', '~> 3.5.10'
+gem 'devise'
 gem 'devise_ldap_authenticatable', git: 'https://github.com/cschiewek/devise_ldap_authenticatable'
 gem 'activeldap'
 gem 'net-ldap', '~> 0.16.0'
@@ -20,9 +20,9 @@ gem 'd3-rails'
 gem 'knock', git: 'https://github.com/nsarno/knock.git', ref: '66b60437a5acc28e4863f011ab59324dc1b5d0ae'
 
 # ActiveAdmin
-gem 'ransack', '~> 1.4.0'
-gem 'draper', '~>  2.1.0'
-gem 'activeadmin', git: 'https://github.com/yeti-switch/active_admin.git'
+gem 'ransack'
+gem 'draper'
+gem 'activeadmin', '~> 1.0.0'
 gem 'novus-nvd3-rails', git: 'https://github.com/yeti-switch/nvd3-community-rails.git'
 gem 'active_admin_theme'
 gem 'active_admin_import', '3.1.0'
@@ -47,20 +47,21 @@ gem 'jsonapi-resources', '~> 0.9.1.beta1'
 # Ext
 
 gem 'cancan', '1.6.10'
-gem 'paper_trail', '~> 3.0.6'
+gem 'paper_trail'
 gem 'parallel'
 
 
 # Assets
-gem 'sass-rails', '~> 4.0.0'
-gem 'sprockets', '2.11.3'
+gem 'compass-rails', '~> 3.0.2'
+gem 'sass-rails'
+gem 'sprockets'
 gem 'coffee-rails', '~> 4.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', '~> 0.12.1'
 gem 'uglifier', '>= 1.3'
-gem 'jquery-rails', '3.1.3'
+gem 'jquery-rails'
 gem 'jquery-ui-rails', '5.0.3'
-gem 'chosen-rails', '1.3.0'
+gem 'chosen-rails'
 gem 'jquery-tablesorter'
 gem 'font-awesome-rails'
 gem 'sass-globbing'
@@ -74,10 +75,6 @@ gem 'odf-report', git: 'https://github.com/yeti-switch/odf-report.git', branch: 
 gem 'zip-zip'
 
 group :development do
-  gem 'quiet_assets'
-end
-
-group :development do
   gem 'sourcify'
   gem 'annotate'
 end
@@ -87,8 +84,8 @@ group :development, :test do
   gem 'awesome_print'
   gem 'thin'
 
-  gem 'rspec-rails', '~> 3.4.2'
-  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '4.8.0'
   gem 'database_cleaner'
   gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec_api_documentation', '~> 5.0.0'

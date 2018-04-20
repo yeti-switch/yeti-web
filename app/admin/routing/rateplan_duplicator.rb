@@ -24,8 +24,10 @@ ActiveAdmin.register Routing::RateplanDuplicator do
     end
   end
 
+  permit_params :id, :name, :profit_control_mode_id, send_quality_alarms_to: []
+
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
     f.inputs "Copy rateplan" do
       f.input :id, as: :hidden
       f.input :name

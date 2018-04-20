@@ -81,6 +81,8 @@ class Rateplan < ActiveRecord::Base
     res = result.cast_values.map { |values| Hash[[result.columns, values].transpose] }
     # routing_tag_ids => routing_tag_names
     res.map { |el|
+      el['valid_from'] = el['valid_from'].in_time_zone.iso8601(3)
+      el['valid_till'] = el['valid_till'].in_time_zone.iso8601(3)
       names = el['routing_tag_ids'].map { |id| routing_tag_collection[id] }
       el['routing_tag_names'] = names
       el

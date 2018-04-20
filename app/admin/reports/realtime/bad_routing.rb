@@ -20,7 +20,7 @@ ActiveAdmin.register Report::Realtime::BadRouting do
   filter :internal_disconnect_code
   filter :internal_disconnect_reason
 
-  before_filter only: [:index] do
+  before_action only: [:index] do
     params[:q] ||= {}
     if params[:q][:time_interval_eq].blank?
       params[:q][:time_interval_eq] = Report::Realtime::Base::DEFAULT_INTERVAL

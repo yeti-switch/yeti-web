@@ -76,7 +76,7 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
     let(:rateplan) { customers_auth.rateplan.reload }
 
     context 'when record exists' do
-      before { get :show, id: rateplan.uuid }
+      before { get :show, params: { id: rateplan.uuid } }
 
       it 'returnds record with expected attributes' do
         expect(response_data).to include({
@@ -97,7 +97,7 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
 
       before { api_access.update!(account_ids: [allowed_account.id]) }
 
-      before { get :show, id: rateplan.uuid }
+      before { get :show, params: { id: rateplan.uuid } }
 
       it { expect(response.status).to eq(404) }
     end

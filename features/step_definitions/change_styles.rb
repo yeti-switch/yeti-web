@@ -8,11 +8,11 @@ end
 
 # change color scenario
 
-When (/^I open variables.css.scss file and override variable "(.*?)"$/) do |variable|
+When (/^I open variables.scss file and override variable "(.*?)"$/) do |variable|
   File.rename("#{Rails.root}/app/assets/stylesheets/themes", "#{Rails.root}/app/assets/stylesheets/hidden_themes")
   FileUtils.mkdir("#{Rails.root}/app/assets/stylesheets/themes")
   FileUtils.cd("#{Rails.root}/app/assets/stylesheets/themes")
-  new_file = File.new("#{Rails.root}/app/assets/stylesheets/themes/variables.css.scss", "w")
+  new_file = File.new("#{Rails.root}/app/assets/stylesheets/themes/variables.scss", "w")
   new_file.puts variable
   new_file.close
 end

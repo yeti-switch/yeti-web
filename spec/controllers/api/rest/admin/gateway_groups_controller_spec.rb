@@ -25,14 +25,14 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
     let!(:gateway_group) { create :gateway_group }
 
     context 'when gateway_group exists' do
-      before { get :show, id: gateway_group.to_param }
+      before { get :show, params: { id: gateway_group.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(gateway_group.id.to_s) }
     end
 
     context 'when gateway_group does not exist' do
-      before { get :show, id: gateway_group.id + 10 }
+      before { get :show, params: { id: gateway_group.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -49,9 +49,11 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'gateway-groups',
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: 'gateway-groups',
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     context 'when attributes are valid' do
@@ -75,10 +77,12 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
 
   describe 'PUT update' do
     let!(:gateway_group) { create :gateway_group }
-    before { put :update, id: gateway_group.to_param, data: { type: 'gateway-groups',
-                                                              id: gateway_group.to_param,
-                                                              attributes: attributes,
-                                                              relationships: relationships} }
+    before { put :update, params: {
+      id: gateway_group.to_param, data: { type: 'gateway-groups',
+                                          id: gateway_group.to_param,
+                                          attributes: attributes,
+                                          relationships: relationships}
+    } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
@@ -100,7 +104,7 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:gateway_group) { create :gateway_group }
 
-    before { delete :destroy, id: gateway_group.to_param }
+    before { delete :destroy, params: { id: gateway_group.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(GatewayGroup.count).to eq(0) }

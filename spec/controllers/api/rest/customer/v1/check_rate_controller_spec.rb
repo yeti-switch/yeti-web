@@ -21,8 +21,9 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
   end
 
   before do
-    post :create, data: { type: 'check-rates',
-                          attributes: attributes }
+    post :create, params: {
+      data: { type: 'check-rates', attributes: attributes }
+    }
   end
 
   let(:attributes) do
@@ -51,8 +52,8 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
                 'next_interval' => @r1.next_interval,
                 'connect_fee' => @r1.connect_fee.as_json,
                 'reject_calls' => @r1.reject_calls,
-                'valid_from' => @r1.valid_from.to_s,
-                'valid_till' => @r1.valid_till.to_s,
+                'valid_from' => @r1.valid_from.iso8601(3),
+                'valid_till' => @r1.valid_till.iso8601(3),
                 'network_prefix_id' => @r1.network_prefix_id,
                 'routing_tag_names' => @r1.routing_tags.map(&:name)
               ),

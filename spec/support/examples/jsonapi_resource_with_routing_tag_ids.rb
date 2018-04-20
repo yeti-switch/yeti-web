@@ -13,7 +13,7 @@ RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
   end
 
   context 'GET show' do
-    before { get :show, id: record.to_param }
+    before { get :show, params: { id: record.to_param } }
 
     it 'has `routing_tag_ids` array' do
       expect(response_data['attributes'])
@@ -23,15 +23,16 @@ RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
 
   context 'PUT update' do
     before do
-      put :update,
+      put :update, params: {
+        id: record.to_param,
+        data: {
+          type: resource_type,
           id: record.to_param,
-          data: {
-            type: resource_type,
-            id: record.to_param,
-            attributes: {
-              'routing-tag-ids': [@tag_emergency.id]
-            }
+          attributes: {
+            'routing-tag-ids': [@tag_emergency.id]
           }
+        }
+      }
     end
 
     it 'updates `routing_tag_ids` array' do

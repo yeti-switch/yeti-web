@@ -17,7 +17,7 @@ module ActiveAdmin
           @per_page = GuiConfig.per_page
         end
 
-        unless collection.respond_to?(:num_pages)
+        unless collection.respond_to?(:total_pages)
           raise(StandardError, "Collection is not a paginated scope. Set collection.page(params[:page]).per(10) before calling :paginated_collection.")
         end
 

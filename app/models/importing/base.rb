@@ -34,8 +34,8 @@ class Importing::Base < Yeti::ActiveRecord
 
   def self.move_batch(options)
     options.assert_valid_keys(ALLOWED_OPTIONS_KEYS)
-    PaperTrail.whodunnit = options[:controller_info][:whodunnit]
-    PaperTrail.controller_info = options[:controller_info][:controller_info]
+    PaperTrail.request.whodunnit = options[:controller_info][:whodunnit]
+    PaperTrail.request.controller_info = options[:controller_info][:controller_info]
     query = self.where('id % ? = ?', options[:max_jobs_count], options[:job_number])
     query = query.send(options[:action]) if (options[:action])
     Yeti::ActiveRecord.transaction do

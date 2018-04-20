@@ -19,7 +19,7 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
       ]
     end
 
-    subject { get :index, filter: filters }
+    subject { get :index, params: { filter: filters } }
     let(:filters) do
       {}
     end
@@ -60,7 +60,7 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
     end
 
     subject do
-      get :show, id: network.id
+      get :show, params: { id: network.id }
     end
 
     it 'http status should eq 200' do
@@ -84,7 +84,7 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
 
   describe 'POST create' do
     subject do
-      post :create, payload
+      post :create, params: payload
     end
     let(:payload) do
       {
@@ -104,7 +104,7 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
 
   describe 'PATCH update' do
     subject do
-      patch :update, id: network.id, **payload
+      patch :update, params: { id: network.id, **payload }
     end
     let(:payload) do
       {
@@ -127,7 +127,7 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
 
   describe 'DELETE delete' do
     subject do
-      delete :destroy, id: network.id
+      delete :destroy, params: { id: network.id }
     end
     let!(:network) do
       create :network

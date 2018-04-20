@@ -60,7 +60,7 @@ module ResourceDSL
       active_admin_import options
 
       # we don't want to create new import session if it already exists
-      # before_filter only: [:import] do
+      # before_action only: [:import] do
       #   flash[:notice] = 'Import in progress'
       #   if Importing::ImportingDelayedJob.jobs?
       #     redirect_to :back and return
@@ -71,7 +71,7 @@ module ResourceDSL
       #   end
       # end
 
-      before_filter only: [:import] do
+      before_action only: [:import] do
         # if Importing::ImportingDelayedJob.jobs?
         #   raise ApplicationController::ImportDisabled.new('Import in progress')
         # end

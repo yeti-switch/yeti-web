@@ -3,7 +3,6 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
   menu false
   actions :index
   belongs_to :custom_cdr, parent_class: Report::CustomCdr
-  navigation_menu :default
   config.batch_actions = false
 
   decorate_with ReportCustomDataDecorator

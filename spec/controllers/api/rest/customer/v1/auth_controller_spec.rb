@@ -15,7 +15,7 @@ describe Api::Rest::Customer::V1::AuthController, type: :controller do
   before { request.remote_addr = remote_ip }
 
   describe 'POST create' do
-    before { post :create, auth: attributes }
+    before { post :create, params: { auth: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) { { login: user.login, password: user.password } }

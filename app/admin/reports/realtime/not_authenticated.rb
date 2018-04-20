@@ -11,7 +11,7 @@ ActiveAdmin.register Report::Realtime::NotAuthenticated do
          input_html: {class: 'chosen'}, include_blank: false
 
 
-  before_filter only: [:index] do
+  before_action only: [:index] do
     params[:q] ||= {}
     if params[:q][:time_interval_eq].blank?
       params[:q][:time_interval_eq] = Report::Realtime::Base::DEFAULT_INTERVAL

@@ -121,7 +121,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   end
 
 
-  before_filter only: [:index] do
+  before_action only: [:index] do
     params.delete(:q) if params[:q] && clean_search_params(params[:q]).blank? && GuiConfig.active_calls_require_filter
   end
 

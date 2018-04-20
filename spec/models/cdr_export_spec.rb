@@ -41,16 +41,16 @@ describe CdrExport, type: :model do
         "SELECT success, id",
         'FROM "cdr"."cdr"',
         "WHERE",
-        "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00.000000'",
+        "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
         "AND",
-        "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00.000000'",
+        "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
         "AND",
         "\"cdr\".\"cdr\".\"success\" = 't'",
         "AND",
         "\"cdr\".\"cdr\".\"failed_resource_type_id\" = 3",
         "AND",
         "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%')",
-        " ORDER BY time_start desc"#to_sql makes before ORDER BY 2 spaces
+        "ORDER BY time_start desc"
       ]
       expect(subject).to eq(sql.join(' '))
     end

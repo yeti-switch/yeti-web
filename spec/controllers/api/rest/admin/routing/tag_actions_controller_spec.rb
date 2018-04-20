@@ -14,7 +14,7 @@ describe Api::Rest::Admin::Routing::TagActionsController, type: :controller do
   describe 'GET show' do
     let(:tag_action) { Routing::TagAction.take }
 
-    before { get :show, id: tag_action.id }
+    before { get :show, params: { id: tag_action.id } }
 
     it 'receive expected fields' do
       expect(response_data.deep_symbolize_keys).to a_hash_including(
@@ -29,8 +29,10 @@ describe Api::Rest::Admin::Routing::TagActionsController, type: :controller do
 
   describe 'POST create' do
     subject do
-      post :create, data: { type: 'tag-actions',
-                            attributes: { name: 'Name_1' } }
+      post :create, params: {
+        data: { type: 'tag-actions',
+                attributes: { name: 'Name_1' } }
+      }
     end
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
@@ -40,9 +42,11 @@ describe Api::Rest::Admin::Routing::TagActionsController, type: :controller do
     let(:tag_action) { Routing::TagAction.take }
 
     subject do
-      put :update, id: tag_action.to_param, data: { type: 'routing-tags',
-                                            id: tag_action.id.to_i,
-                                            attributes: { name: 'Update name_1' } }
+      put :update, params: {
+        id: tag_action.to_param, data: { type: 'routing-tags',
+                                         id: tag_action.id.to_i,
+                                         attributes: { name: 'Update name_1' } }
+      }
     end
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
@@ -51,7 +55,7 @@ describe Api::Rest::Admin::Routing::TagActionsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:tag_action) { Routing::TagAction.take }
 
-    subject { delete :destroy, id: tag_action.to_param }
+    subject { delete :destroy, params: { id: tag_action.to_param } }
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
   end

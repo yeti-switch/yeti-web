@@ -17,7 +17,7 @@ describe Api::Rest::Admin::Routing::AreasController, type: :controller do
   end
 
   describe 'GET show' do
-    before { get :show, id: record.id }
+    before { get :show, params: { id: record.id } }
 
     it 'receive expected fields' do
       expect(response_data.deep_symbolize_keys).to a_hash_including(
@@ -31,8 +31,10 @@ describe Api::Rest::Admin::Routing::AreasController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: resource_type,
-                            attributes: attributes }
+      post :create, params: {
+        data: { type: resource_type,
+                attributes: attributes }
+      }
     end
 
     let(:attributes) do
@@ -47,9 +49,11 @@ describe Api::Rest::Admin::Routing::AreasController, type: :controller do
 
   describe 'PUT update' do
     before do
-      put :update, id: record.to_param, data: { type: resource_type,
-                                                id: record.to_param,
-                                                attributes: attributes }
+      put :update, params: {
+        id: record.to_param, data: { type: resource_type,
+                                     id: record.to_param,
+                                     attributes: attributes }
+      }
     end
 
     let(:attributes) do
@@ -61,7 +65,7 @@ describe Api::Rest::Admin::Routing::AreasController, type: :controller do
   end
 
   describe 'DELETE destroy' do
-    before { delete :destroy, id: record.to_param }
+    before { delete :destroy, params: { id: record.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Routing::Area.count).to eq(0) }

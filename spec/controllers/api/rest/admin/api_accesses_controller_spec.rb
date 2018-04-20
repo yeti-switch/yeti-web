@@ -21,7 +21,7 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
 
   describe 'GET show' do
     let!(:api_access) { create :api_access }
-    before { get :show, id: api_access.id }
+    before { get :show, params: { id: api_access.id } }
 
     it 'all fields except password ' do
       expect(response_data).to include({
@@ -40,8 +40,10 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'api-accesses',
-                            attributes: attributes }
+      post :create, params: {
+        data: { type: 'api-accesses',
+                attributes: attributes }
+      }
     end
 
     let(:customer) { create(:customer) }
@@ -63,10 +65,12 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
     let!(:api_access) { create :api_access }
 
     before do
-      put :update, id: api_access.id,
-                   data: { type: 'api-accesses',
-                           id: api_access.id,
-                           attributes: attributes }
+      put :update, params: {
+        id: api_access.id,
+        data: { type: 'api-accesses',
+                id: api_access.id,
+                attributes: attributes }
+      }
     end
 
     let(:attributes) do
@@ -90,7 +94,7 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
   describe 'DELETE destroy' do
     let!(:api_access) { create :api_access }
 
-    before { delete :destroy, id: api_access.id }
+    before { delete :destroy, params: { id: api_access.id } }
 
     it { expect(response.status).to eq(204) }
     it { expect(System::ApiAccess.count).to eq(0) }

@@ -165,7 +165,7 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
     end
 
     it 'returnds record with expected attributes' do
-      get :show, id: cdr.uuid
+      get :show, params: { id: cdr.uuid }
 
       expect(response_data).to include({
         'id' => cdr.uuid,
@@ -211,7 +211,7 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
     end
 
     it 'has_one auth-orig-transport-protocol' do
-      get :show, id: cdr.uuid, include: 'auth-orig-transport-protocol'
+      get :show, params: { id: cdr.uuid, include: 'auth-orig-transport-protocol' }
 
       expect(JSON.parse(response.body)["included"]).to match_array([
         hash_including({

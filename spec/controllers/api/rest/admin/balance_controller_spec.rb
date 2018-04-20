@@ -20,7 +20,9 @@ describe Api::Rest::Admin::BalanceController, type: :controller do
     let!(:account) { create(:account, balance: balance, external_id: external_id) }
 
     subject do
-      put :update, account_id: external_id, data: { type: 'balances', id: external_id , attributes: attributes }
+      put :update, params: {
+        account_id: external_id, data: { type: 'balances', id: external_id , attributes: attributes }
+      }
     end
 
     context 'when attributes are valid' do

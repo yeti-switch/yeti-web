@@ -3,7 +3,7 @@ require 'spec_helper'
 xdescribe Api::Rest::Admin::DialpeerNextRatesController do
 
   describe 'GET index' do
-    subject { get :index, {dialpeer_id: 1, format: :json}  }
+    subject { get :index, params: {dialpeer_id: 1, format: :json}  }
 
     it 'should return status 200' do
       subject

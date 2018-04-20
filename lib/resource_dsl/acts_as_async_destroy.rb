@@ -16,7 +16,7 @@ module ResourceDSL
         head :ok
       end
 
-      before_filter do
+      before_action do
         @paper_trail_info = { whodunnit: current_admin_user.id, controller_info: info_for_paper_trail }
       end
     end

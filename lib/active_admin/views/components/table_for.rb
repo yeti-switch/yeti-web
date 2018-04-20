@@ -161,14 +161,13 @@ module ActiveAdmin
       #   current_sort[1] #=> asc | desc
       def current_sort
         @current_sort ||= begin
-          order_clause = OrderClause.new params[:order]
-
-          if order_clause.valid?
-            [order_clause.field, order_clause.order]
-          else
-            []
-          end
-        end
+                            order_clause = active_admin_config.order_clause.new(active_admin_config, params[:order])
+                            if order_clause.valid?
+                              [order_clause.field, order_clause.order]
+                            else
+                              []
+                            end
+                          end
       end
 
       # Returns the order to use for a given sort key
@@ -199,7 +198,7 @@ module ActiveAdmin
           if @options.has_key?(:class)
             html_classes << @options.delete(:class)
           elsif @title.present?
-            html_classes << "col-#{@title.to_s.parameterize('_')}"
+            html_classes << "col-#{@title.to_s.parameterize(separator: '_')}"
           end
           @html_class = html_classes.join(' ')
           @data = args[1] || args[0]

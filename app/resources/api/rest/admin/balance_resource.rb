@@ -14,9 +14,10 @@ class Api::Rest::Admin::BalanceResource < ::BaseResource
   end
 
   def _save
-    _model.without_versioning do
-      super
-    end
+    PaperTrail.request.disable_model(Account)
+    res = super
+    PaperTrail.request.enable_model(Account)
+    res
   end
 
 end

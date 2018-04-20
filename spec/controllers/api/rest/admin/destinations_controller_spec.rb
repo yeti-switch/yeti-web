@@ -36,14 +36,14 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     let!(:destination) { create :destination }
 
     context 'when destination exists' do
-      before { get :show, id: destination.to_param }
+      before { get :show, params: { id: destination.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(destination.id.to_s) }
     end
 
     context 'when destination does not exist' do
-      before { get :show, id: destination.id + 10 }
+      before { get :show, params: { id: destination.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -52,9 +52,11 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'destinations',
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: 'destinations',
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     context 'when attributes are valid' do
@@ -92,10 +94,12 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
 
   describe 'PUT update' do
     let!(:destination) { create :destination, rateplan: rateplan }
-    before { put :update, id: destination.to_param, data: { type: 'destinations',
-                                                            id: destination.to_param,
-                                                            attributes: attributes,
-                                                            relationships: relationships} }
+    before { put :update, params: {
+      id: destination.to_param, data: { type: 'destinations',
+                                        id: destination.to_param,
+                                        attributes: attributes,
+                                        relationships: relationships}
+    } }
 
     context 'when attributes are valid' do
       let(:attributes) { { prefix: 'test' } }
@@ -119,7 +123,7 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:destination) { create :destination, rateplan: rateplan }
 
-    before { delete :destroy, id: destination.to_param }
+    before { delete :destroy, params: { id: destination.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Destination.count).to eq(0) }

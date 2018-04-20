@@ -16,7 +16,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     let!(:cdrs) do
       create_list :cdr, 12, :with_id, time_start: 1.month.ago.utc
     end
-    subject { get :index, filter: filters, page: { number: page_number, size: 10 } }
+    subject { get :index, params: { filter: filters, page: { number: page_number, size: 10 } } }
     let(:filters) do
       {}
     end
@@ -260,7 +260,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     end
 
     subject do
-      get :show, id: cdr.id, include: includes.join(',')
+      get :show, params: {
+        id: cdr.id, include: includes.join(',')
+      }
     end
     let(:includes) do
       %w(rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw destination-rate-policy routing-plan country network)

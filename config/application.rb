@@ -1,13 +1,10 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups)
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module Yeti
   class Application < Rails::Application
@@ -51,9 +48,6 @@ module Yeti
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
-
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
@@ -61,12 +55,7 @@ module Yeti
 
     config.active_record.schema_migrations_table_name = 'public.schema_migrations'
 
-    # TODO: Use this in Rails 5
     # Controls which database schemas will be dumped when calling db:structure:dump.
-    # The options are
-    #   :schema_search_path (the default) which dumps any schemas listed in schema_search_path,
-    #   :all which always dumps all schemas regardless of the schema_search_path,
-    #   or a string of comma separated schemas.
     config.active_record.dump_schemas = :all
 
     # SecondBase aims to work seamlessly within your Rails application.
@@ -74,11 +63,6 @@ module Yeti
     # for matching ActiveRecord base database task.
     # These can all be deactivated by set to "false"
     config.second_base.run_with_db_tasks = false
-
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
-    config.assets.precompile += ['yeti/*']
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 
     config.action_mailer.delivery_method = :smtp
 

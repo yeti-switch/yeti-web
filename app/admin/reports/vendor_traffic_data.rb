@@ -5,8 +5,6 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
 
   decorate_with ReportVendorTrafficDataDecorator
 
-
-  navigation_menu :default
   config.batch_actions = false
 
   filter :calls_count

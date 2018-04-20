@@ -31,14 +31,14 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
     let!(:contractor) { create :contractor, vendor: true }
 
     context 'when contractor exists' do
-      before { get :show, id: contractor.to_param }
+      before { get :show, params: { id: contractor.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(contractor.id.to_s) }
     end
 
     context 'when contractor does not exist' do
-      before { get :show, id: contractor.id + 10 }
+      before { get :show, params: { id: contractor.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -47,9 +47,11 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'contractors',
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: 'contractors',
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     context 'when attributes are valid' do
@@ -74,7 +76,9 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
 
   describe 'PUT update' do
     let!(:contractor) { create :contractor, vendor: true }
-    before { put :update, id: contractor.to_param, data: { type: 'contractors', id: contractor.to_param, attributes: attributes } }
+    before { put :update, params: {
+      id: contractor.to_param, data: { type: 'contractors', id: contractor.to_param, attributes: attributes }
+    } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
@@ -101,7 +105,7 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:contractor) { create :contractor, vendor: true }
 
-    before { delete :destroy, id: contractor.to_param }
+    before { delete :destroy, params: { id: contractor.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Contractor.count).to eq(0) }

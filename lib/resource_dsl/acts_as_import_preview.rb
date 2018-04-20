@@ -58,7 +58,7 @@ module ResourceDSL
         redirect_to :back
       end
 
-      before_filter do
+      before_action do
         if Importing::ImportingDelayedJob.jobs?
           flash.now[:warning] = 'Background process is already running, wait until they finish'
         end
