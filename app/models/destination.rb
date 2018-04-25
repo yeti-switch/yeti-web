@@ -30,6 +30,7 @@
 #  dst_number_max_length  :integer          default(100), not null
 #  reverse_billing        :boolean          default(FALSE), not null
 #  routing_tag_ids        :integer          default([]), not null, is an Array
+#  routing_tag_mode_id    :integer          default(0), not null
 #
 
 class Destination < Yeti::ActiveRecord

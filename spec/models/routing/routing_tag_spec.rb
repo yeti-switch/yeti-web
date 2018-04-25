@@ -1,11 +1,3 @@
-# == Schema Information
-#
-# Table name: class4.routing_tags
-#
-#  id   :integer          not null, primary key
-#  name :string           not null
-#
-
 require 'spec_helper'
 
 RSpec.describe Routing::RoutingTag, type: :model do
