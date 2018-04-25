@@ -945,6 +945,8 @@ INSERT INTO tag_actions VALUES (3, 'Append selected tags');
 INSERT INTO tag_actions VALUES (4, 'Intersection with selected tags');
 INSERT INTO tag_actions VALUES (5, 'Replace with selected tags');
 
+insert into class4.routing_tag_modes(id,name) values( 0, 'OR');
+insert into class4.routing_tag_modes(id,name) values( 1, 'AND');
 
 -- Completed on 2018-01-19 16:08:50 EET
 

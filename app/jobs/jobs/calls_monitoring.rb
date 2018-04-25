@@ -123,6 +123,7 @@ module Jobs
 
         :duration,
 
+        :customer_auth_id, #link to CustomersAuth, drop calls when CustomersAuth#reject_calls=true
         :customer_id, #link to contractor, drop call if contractor is not enabled or not customer
         :vendor_id #link to contractor, drop call if contractor is not enabled or not vendor
     ].freeze
@@ -134,6 +135,7 @@ module Jobs
 
     def execute
       detect_customers_calls_to_reject
+      detect_customers_auth_calls_to_reject
       detect_vendors_calls_to_reject
       detect_gateway_calls_to_reject
       detect_random_calls_to_reject
@@ -226,6 +228,19 @@ module Jobs
       end
     end
 
+    # drop calls where `customer_auth_id`
+    # is linked to `CustoemrsAuth#reject_calls = true`
+    def detect_customers_auth_calls_to_reject
+      flatten_calls.each do |call|
+        customers_auth_id = call['customer_auth_id']
+        customers_auth = active_customers_auths_reject_calls()[customers_auth_id]
+
+        if customers_auth && customers_auth[1]
+          @terminate_calls.merge!({call['local_tag'] => call})
+        end
+      end
+    end
+
     # detect gateway is disabled by orig_gw_id and term_gw_id
     def detect_gateway_calls_to_reject
       flatten_calls.each do |call|
@@ -285,6 +300,16 @@ module Jobs
           pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
+    # returns array of hashes
+    # [ { customer_auth_id => [reject_calls] }, ... ]
+    def active_customers_auths_reject_calls
+      @active_customers_auths_reject_calls ||= begin
+        CustomersAuth.
+          where(id: active_customers_auth_ids).
+          pluck(:id, :reject_calls).index_by { |c| c[0] }
+      end
+    end
+
     #unique list of all customer_acc_id from all current calls
     def active_customers_ids
       @active_customers_ids ||= flatten_calls.collect { |c| c["customer_acc_id"] }.uniq
@@ -293,6 +318,10 @@ module Jobs
     #unique list of all vendor_acc_id from all current calls
     def active_vendors_ids
       @active_vendors_ids ||= flatten_calls.collect { |c| c["vendor_acc_id"] }.uniq
+    end
+
+    def active_customers_auth_ids
+      @active_customers_auth_ids ||= flatten_calls.collect { |c| c["customer_auth_id"] }.uniq
     end
 
     def active_calls

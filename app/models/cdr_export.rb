@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  status       :string           not null
-#  fields       :string           default([]), is an Array
+#  fields       :string           default([]), not null, is an Array
 #  filters      :json             not null
 #  callback_url :string
 #  type         :string           not null

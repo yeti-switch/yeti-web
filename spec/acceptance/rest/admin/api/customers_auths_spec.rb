@@ -12,7 +12,7 @@ resource 'Customer Auths' do
 
   required_params = %i(name ip)
   optional_params = %i(
-    enabled src-rewrite-rule src-rewrite-result dst-rewrite-rule dst-rewrite-result src-prefix dst-prefix x-yeti-auth
+    enabled reject-calls src-rewrite-rule src-rewrite-result dst-rewrite-rule dst-rewrite-result src-prefix dst-prefix x-yeti-auth
     capacity uri-domain src-name-rewrite-rule src-name-rewrite-result diversion-rewrite-rule
     diversion-rewrite-result allow-receive-rate-limit send-billing-information
     enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
@@ -50,6 +50,7 @@ resource 'Customer Auths' do
 
     let(:name) { 'name' }
     let(:enabled) { true }
+    let(:'reject-calls') { false }
     let(:ip) { '0.0.0.0' }
     let(:'dump-level') { wrap_relationship(:'dump_levels', 1) }
     let(:'diversion-policy') { wrap_relationship(:'diversion-policies', 1) }

@@ -10,6 +10,7 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
 
   let(:area_1) { create :area }
   let(:area_2) { create :area }
+  let(:rtm_and) { Routing::RoutingTagMode.last }
 
   let(:record) do
     create :routing_tag_detection_rule
@@ -41,6 +42,7 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
 
     let(:relationships) do
       {
+        'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
         'src-area': wrap_relationship(:'areas', area_1.id),
         'dst-area': wrap_relationship(:'areas', area_2.id)
       }
@@ -56,6 +58,7 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
                                                        relationships: relationships} }
     let(:relationships) do
       {
+        'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
         'src-area': wrap_relationship(:'areas', area_1.id),
         'dst-area': wrap_relationship(:'areas', area_2.id)
       }

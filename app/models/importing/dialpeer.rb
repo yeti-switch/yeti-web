@@ -53,6 +53,7 @@ class Importing::Dialpeer < Importing::Base
   belongs_to :routing_group, class_name: '::RoutingGroup'
   belongs_to :account, class_name: '::Account'
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor'
+  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   has_many :dialpeer_next_rates, dependent: :destroy
 
   self.import_attributes = ['prefix', 'enabled', 'lcr_rate_multiplier',
@@ -62,7 +63,7 @@ class Importing::Dialpeer < Importing::Base
                             'dst_rewrite_rule', 'dst_rewrite_result', 'asr_limit', 'acd_limit', 'short_calls_limit', 'priority', 'capacity',
                             'valid_from', 'valid_till', 'force_hit_rate',
                             'dst_number_min_length', 'dst_number_max_length',
-                            'routing_tag_ids']
+                            'routing_tag_ids', 'routing_tag_mode_id']
   self.import_class = ::Dialpeer
 
   def self.after_import_hook(unique_columns = [])

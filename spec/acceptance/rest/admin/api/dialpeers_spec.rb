@@ -21,7 +21,7 @@ resource 'Dialpeers' do
   )
 
   required_relationships = %i(routing-group vendor account)
-  optional_relationships = %i(gateway gateway-group)
+  optional_relationships = %i(gateway gateway-group routing-tag-modes)
 
   get '/api/rest/admin/dialpeers' do
     before { create_list(:dialpeer, 2) }

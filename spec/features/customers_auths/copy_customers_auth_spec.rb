@@ -18,6 +18,7 @@ describe 'Copy Customers Auth', type: :feature do
       name: 'Copy this name please',
       capacity: 10,
       enabled: true,
+      reject_calls: true,
       check_account_balance: false,
       src_prefix: %w( foo bar ),
       dst_prefix: %w(),
@@ -40,6 +41,7 @@ describe 'Copy Customers Auth', type: :feature do
       expect(page).to have_field('Capacity', with: attrs[:capacity])
       # Boolean
       expect(page).to have_field('Enabled', checked: true)
+      expect(page).to have_field('Reject calls', checked: true)
       expect(page).to have_field('Check account balance', checked: false)
       # Relationship (belongs_to)
       expect(page).to have_select('Customer', selected: record.customer.display_name)

@@ -4,10 +4,11 @@ shared_context :init_customers_auth do |args|
 
   before do
     fields = {
-        name: 'routeserver-me-pbx-TRN',
+        name: 'Test Customer auth record',
         customer_id: @contractor.id,
         rateplan_id: @rateplan.id,
         enabled: true,
+        reject_calls: false,
         account_id: @account.id,
         gateway_id: @gateway.id,
         routing_plan_id: @routing_plan.id,

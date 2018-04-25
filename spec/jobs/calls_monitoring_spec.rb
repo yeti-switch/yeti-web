@@ -47,6 +47,21 @@ describe Jobs::CallsMonitoring do
            contractor: create(:vendor))
   end
 
+  let(:customers_auth) do
+    create(:customers_auth,
+           reject_calls: customers_auth_reject_calls,
+           customer: account.contractor,
+           gateway: origin_gateway)
+  end
+
+  let(:customer_auth_id) do
+    customers_auth.id
+  end
+
+  let(:customers_auth_reject_calls) do
+    false
+  end
+
 
   shared_examples :keep_emergency_calls do
     let(:customer_acc_check_balance) { false }
@@ -98,6 +113,7 @@ describe Jobs::CallsMonitoring do
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
+          'customer_auth_id' => customer_auth_id,
           'duration' => 61,
           # destination
           'destination_fee' => '1.0000',
@@ -149,8 +165,7 @@ describe Jobs::CallsMonitoring do
 
           'orig_gw_id' =>  origin_gateway.id,
           'term_gw_id' =>  term_gateway.id
-
-      }
+        }
       ]
     end
 
@@ -295,7 +310,7 @@ describe Jobs::CallsMonitoring do
 
           it_behaves_like :keep_emergency_calls
         end
-        
+
       end
 
       context 'when calls cost is above max_balance' do
@@ -346,6 +361,34 @@ describe Jobs::CallsMonitoring do
       end
 
     end # vendor
+
+    context 'CustomersAuth#reject_calls' do
+      context 'when CDR#customer_auth_id is NULL' do
+        let(:customer_auth_id) { '' }
+        include_examples :keep_calls
+      end
+
+      context 'when not linked to real CustomersAuth' do
+        let(:customer_auth_id) { customers_auth.id + 11122 }
+        include_examples :keep_calls
+      end
+
+      context 'when CustomersAuth#reject_calls = FALSE' do
+        let(:customers_auth_reject_calls) { false }
+        include_examples :keep_calls
+      end
+
+      context 'when CustomersAuth#reject_calls = TRUE' do
+        let(:customers_auth_reject_calls) { true }
+
+        it 'drop first call(with customer_auth_id)' do
+          expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
+          expect_any_instance_of(Node).not_to receive(:drop_call).with('reverse-call')
+          subject
+        end
+      end
+
+    end # CustomersAuth#reject_calls
 
   end
 

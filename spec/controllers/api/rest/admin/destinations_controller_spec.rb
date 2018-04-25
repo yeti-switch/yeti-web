@@ -73,7 +73,8 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
 
       let(:relationships) do
         { rateplan:  wrap_relationship(:rateplans, create(:rateplan).id),
-          'rate-policy': wrap_relationship(:'destination-rate-policies', 1) }
+          'rate-policy': wrap_relationship(:'destination-rate-policies', 1),
+          'routing-tag-mode': wrap_relationship(:'routing-tag-modes', 1) }
       end
 
       it { expect(response.status).to eq(201) }

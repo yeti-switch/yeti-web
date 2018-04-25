@@ -12,6 +12,7 @@ ActiveAdmin.register CustomersAuth do
                        lambda do
                          {
                            enabled: boolean_select,
+                           reject_calls: boolean_select,
                            transport_protocol_id: Equipment::TransportProtocol.pluck(:name, :id),
                            ip: 'text',
                            src_prefix: 'text',
@@ -33,7 +34,7 @@ ActiveAdmin.register CustomersAuth do
 
   decorate_with CustomersAuthDecorator
 
-  acts_as_export :id, :enabled, :name,
+  acts_as_export :id, :enabled, :reject_calls, :name,
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
                  :ip,
                  [:pop_name, proc { |row| row.pop.try(:name) || "" }],
@@ -70,7 +71,7 @@ ActiveAdmin.register CustomersAuth do
   acts_as_import resource_class: Importing::CustomersAuth,
                  skip_columns: [:tag_action_value]
 
-  permit_params :name, :enabled, :customer_id, :rateplan_id, :routing_plan_id,
+  permit_params :name, :enabled, :reject_calls, :customer_id, :rateplan_id, :routing_plan_id,
                 :gateway_id, :require_incoming_auth, :account_id, :check_account_balance, :diversion_policy_id,
                 :diversion_rewrite_rule, :diversion_rewrite_result,
                 :src_name_rewrite_rule, :src_name_rewrite_result,
@@ -127,6 +128,7 @@ ActiveAdmin.register CustomersAuth do
     actions
     column :name
     column :enabled
+    column :reject_calls
     column :transport_protocol
     column :ip
     column :external_id
@@ -196,6 +198,7 @@ ActiveAdmin.register CustomersAuth do
   filter :external_id
   filter :name
   filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :reject_calls, as: :select, collection: [["Yes", true], ["No", false]]
   filter :customer, input_html: {class: 'chosen'}
   filter :account, input_html: {class: 'chosen'}
   filter :gateway, input_html: {class: 'chosen'}
@@ -223,6 +226,7 @@ ActiveAdmin.register CustomersAuth do
         f.inputs do
           f.input :name
           f.input :enabled
+          f.input :reject_calls
           f.input :customer,
                   input_html: {
                       class: 'chosen',
@@ -319,6 +323,7 @@ ActiveAdmin.register CustomersAuth do
           row :name
           row :external_id
           row :enabled
+          row :reject_calls
           row :customer
           row :account
           row :check_account_balance

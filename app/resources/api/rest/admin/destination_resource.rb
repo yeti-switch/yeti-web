@@ -7,6 +7,7 @@ class Api::Rest::Admin::DestinationResource < JSONAPI::Resource
   has_one :rateplan
   has_one :rate_policy, class_name: 'DestinationRatePolicy'
   has_one :profit_control_mode, class_name: 'Routing::RateProfitControlMode'
+  has_one :routing_tag_mode, class_name: 'Routing::RoutingTagMode'
 
   filters :external_id, :prefix, :rateplan_id
 
@@ -28,6 +29,7 @@ class Api::Rest::Admin::DestinationResource < JSONAPI::Resource
       :valid_from,
       :valid_till,
       :profit_control_mode,
+      :routing_tag_mode,
       :external_id,
       :asr_limit,
       :acd_limit,

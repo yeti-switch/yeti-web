@@ -1,5 +1,5 @@
 class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
-  attributes :name, :ip, :enabled, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
+  attributes :name, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
              :src_prefix, :dst_prefix, :x_yeti_auth, :capacity, :uri_domain,
              :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_rewrite_rule, :diversion_rewrite_result,
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
@@ -29,6 +29,7 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
       :customer,
       :rateplan,
       :enabled,
+      :reject_calls,
       :ip,
       :account,
       :gateway,

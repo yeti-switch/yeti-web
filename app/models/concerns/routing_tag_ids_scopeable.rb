@@ -4,7 +4,7 @@ module RoutingTagIdsScopeable
   included do
 
     scope :routing_tag_ids_covers, ->(*id) do
-      where("yeti_ext.tag_compare(routing_tag_ids, ARRAY[#{id.join(',')}])>0")
+      where("yeti_ext.tag_compare(routing_tag_ids, ARRAY[#{id.join(',')}], routing_tag_mode_id)>0")
     end
 
     scope :tagged, ->(value) do

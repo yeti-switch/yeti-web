@@ -41,6 +41,7 @@ class Destination < Yeti::ActiveRecord
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
   has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :destination_id, dependent: :nullify
 
+  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
   has_paper_trail class_name: 'AuditLogItem'
@@ -63,7 +64,7 @@ class Destination < Yeti::ActiveRecord
 
   validates_presence_of :rateplan, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
-                        :asr_limit, :acd_limit, :short_calls_limit
+                        :asr_limit, :acd_limit, :short_calls_limit, :routing_tag_mode
   validates_numericality_of :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee
   validates_format_of :prefix, without: /\s/
 

@@ -17,7 +17,7 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
     end
 
     def scoped_collection
-      super.includes(:gateway, :gateway_group, :routing_group, :vendor, :account)
+      super.includes(:gateway, :gateway_group, :routing_group, :vendor, :account, :routing_tag_mode)
     end
   end
 
@@ -68,6 +68,14 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
         Routing::RoutingTag.where(id: row.routing_tag_ids).pluck(:name).join(', ')
       else
         row.routing_tag_names
+      end
+    end
+
+    column :routing_tag_mode, sortable: :routing_tag_mode_name do |row|
+      if row.routing_tag_mode_name.blank?
+        row.routing_tag_mode_name
+      else
+        auto_link(row.routing_tag_mode, row.routing_tag_mode_name)
       end
     end
 

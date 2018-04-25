@@ -11,6 +11,7 @@ describe 'Export Destination', type: :feature do
   let!(:item) do
     create :destination,
            profit_control_mode: Routing::RateProfitControlMode.take,
+           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
            routing_tag_ids: [@tag_ua.id, @tag_us.id, nil]
   end
 
@@ -46,6 +47,7 @@ describe 'Export Destination', type: :feature do
         ['Acd limit', item.acd_limit.to_s, anything],
         ['Short calls limit', item.short_calls_limit.to_s, anything],
         ['Reverse billing', item.reverse_billing.to_s, anything],
+        ["Routing tag mode name", "AND", "OR"],
         ['Routing tag names', [@tag_ua.name, @tag_us.name, Routing::RoutingTag::ANY_TAG].join(', '), anything]
       ]
     )

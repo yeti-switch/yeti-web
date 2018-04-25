@@ -39,6 +39,7 @@ describe 'Export Customers Auth', type: :feature do
       [
         ['Id', item.id.to_s, anything],
         ['Enabled', item.enabled.to_s, anything],
+        ['Reject calls', item.reject_calls.to_s, anything],
         ['Name', item.name, anything],
         ['Transport protocol name', item.transport_protocol.name, anything],
         ['IP', item.ip.join(', '), anything],

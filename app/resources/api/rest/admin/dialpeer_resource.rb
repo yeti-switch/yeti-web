@@ -11,6 +11,8 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
   has_one :routing_group
   has_one :vendor, class_name: 'Contractor'
   has_one :account
+  has_one :routing_tag_mode, class_name: 'Routing::RoutingTagMode'
+
   has_many :dialpeer_next_rates
 
   filters :external_id, :prefix, :routing_group_id
@@ -29,6 +31,7 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
       :connect_fee,
       :vendor,
       :account,
+      :routing_tag_mode,
       :src_rewrite_result,
       :dst_rewrite_result,
       :locked,

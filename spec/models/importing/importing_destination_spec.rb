@@ -18,6 +18,7 @@ describe Importing::Destination do
       prefix: '373900',
       rateplan_id: nil,
       rate_policy_id: nil,
+      routing_tag_mode_id: nil,
       routing_tag_ids: []
     }
 
@@ -27,6 +28,7 @@ describe Importing::Destination do
       subject
 
       expect(preview_item.reload).to have_attributes(
+        routing_tag_mode_id: Routing::RoutingTagMode.find_by(name: preview_item.routing_tag_mode_name).id,
         routing_tag_ids: tags.map(&:id)
       )
     end

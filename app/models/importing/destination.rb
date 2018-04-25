@@ -41,6 +41,7 @@ class Importing::Destination < Importing::Base
   belongs_to :rateplan, class_name: '::Rateplan'
   belongs_to :rate_policy, class_name: '::DestinationRatePolicy'
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
+  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
 
 
   self.import_attributes =['enabled', 'prefix', 'reject_calls', 'rateplan_id',
@@ -49,7 +50,8 @@ class Importing::Destination < Importing::Base
                            'valid_from', 'valid_till', 'profit_control_mode_id',
                            'asr_limit', 'acd_limit', 'short_calls_limit',
                            'dst_number_min_length', 'dst_number_max_length',
-                           'routing_tag_ids']
+                           'routing_tag_ids', 'routing_tag_mode_id'
+  ]
 
   self.import_class = ::Destination
 

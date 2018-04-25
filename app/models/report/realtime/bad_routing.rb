@@ -139,6 +139,7 @@
 #  customer_price_no_vat           :decimal(, )
 #  customer_duration               :integer
 #  vendor_duration                 :integer
+#  customer_auth_name              :string
 #
 
 class Report::Realtime::BadRouting < Report::Realtime::Base

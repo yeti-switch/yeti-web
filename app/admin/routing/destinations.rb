@@ -14,6 +14,7 @@ ActiveAdmin.register Destination do
                          {
                            enabled: boolean_select,
                            prefix: 'text',
+                           routing_tag_mode: Routing::RoutingTag.pluck(:name, :id),
                            reject_calls: boolean_select,
                            quality_alarm: boolean_select,
                            rateplan_id: Rateplan.pluck(:name, :id),
@@ -50,7 +51,8 @@ ActiveAdmin.register Destination do
                  [:profit_control_mode_name, proc { |row| row.profit_control_mode.try(:name) }],
                  :valid_from, :valid_till,
                  :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing,
-                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }]
+                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
+                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }]
 
   acts_as_import resource_class: Importing::Destination,
                  skip_columns: [:routing_tag_ids]
@@ -95,9 +97,9 @@ ActiveAdmin.register Destination do
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
-                :reverse_billing, routing_tag_ids: []
+                :reverse_billing, :routing_tag_mode_id, routing_tag_ids: []
 
-  includes :rateplan, :rate_policy, :profit_control_mode, network_prefix: [:country, :network]
+  includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: [:country, :network]
 
   controller do
     def update
@@ -145,6 +147,7 @@ ActiveAdmin.register Destination do
     column :quality_alarm
     column :rateplan, sortable: 'rateplans.name'
     column :routing_tags
+    column :routing_tag_mode
     column :valid_from do |c|
       c.decorated_valid_from
     end
@@ -196,6 +199,7 @@ ActiveAdmin.register Destination do
         collection:  DestinationDecorator.decorate(f.object).routing_tag_options,
         include_hidden: false,
         input_html: { class: 'chosen', multiple: true }
+      f.input :routing_tag_mode
 
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
@@ -240,6 +244,7 @@ ActiveAdmin.register Destination do
       row :quality_alarm
       row :rateplan
       row :routing_tags
+      row :routing_tag_mode
       row :valid_from do |c|
         c.decorated_valid_from
       end

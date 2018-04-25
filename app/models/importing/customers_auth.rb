@@ -93,6 +93,7 @@ class Importing::CustomersAuth < Importing::Base
 
   self.import_attributes = [
       'enabled',
+      'reject_calls',
       'name',
       'ip',
       'pop_id',
