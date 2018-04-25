@@ -491,6 +491,7 @@ BEGIN
          i_cdr.profit=i_cdr.customer_price-i_cdr.vendor_price;
     else
         i_cdr.customer_price=0;
+        i_cdr.customer_price_no_vat=0;
         i_cdr.vendor_price=0;
         i_cdr.profit=0;
     end if;
@@ -6620,4 +6621,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180312215122');
 INSERT INTO public.schema_migrations (version) VALUES ('20180328123622');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180328170352');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180425200716');
 
