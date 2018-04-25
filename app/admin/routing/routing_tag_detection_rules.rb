@@ -13,10 +13,12 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
                  [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }],
                  [:src_area_name, proc { |row| row.src_area.try(:name) } ],
                  [:dst_area_name, proc { |row| row.dst_area.try(:name) } ],
+                 :src_prefix, :dst_prefix,
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
 
   permit_params :src_area_id, :dst_area_id,
+                :src_prefix, :dst_prefix,
                 :tag_action_id, :routing_tag_mode_id, tag_action_value: [],
                 routing_tag_ids: []
 
@@ -42,6 +44,8 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     column :routing_tag_mode
     column :src_area
     column :dst_area
+    column :src_prefix
+    column :dst_prefix
     column :tag_action
     column :display_tag_action_value
   end
@@ -53,6 +57,8 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
       row :routing_tag_mode
       row :src_area
       row :dst_area
+      row :src_prefix
+      row :dst_prefix
       row :tag_action
       row :display_tag_action_value
     end
@@ -69,6 +75,8 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
       f.input :routing_tag_mode
       f.input :src_area
       f.input :dst_area
+      f.input :src_prefix
+      f.input :dst_prefix
       f.input :tag_action
       f.input :tag_action_value, as: :select,
         collection: Routing::RoutingTag.all,
@@ -80,6 +88,8 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   end
 
   filter :id
+  filter :src_prefix
+  filter :dst_prefix
   filter :src_area, input_html: {class: 'chosen'}
   filter :dst_area, input_html: {class: 'chosen'}
 
