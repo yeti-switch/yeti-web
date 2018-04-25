@@ -16226,7 +16226,20 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
             if v_customer_auth_normalized.require_incoming_auth then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
                 v_ret.aleg_auth_required=true;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -16267,6 +16280,15 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
         end IF;
 
         /*dbg{*/
@@ -16516,10 +16538,14 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
         select into v_area_direction * from class4.routing_tag_detection_rules
         where
           (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
-          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
-          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+          (dst_area_id is null OR dst_area_id = v_ret.dst_area_id) AND
+          prefix_range(src_prefix) @> prefix_range(v_ret.src_prefix_routing) AND
+          prefix_range(dst_prefix) @> prefix_range(v_ret.dst_prefix_routing) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
-          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
+          length(prefix_range(v_ret.src_prefix_routing)) desc,
+          length(prefix_range(v_ret.dst_prefix_routing)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -16633,7 +16659,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
-          AND yeti_ext.tag_compare(d.routing_tag_ids,v_call_tags)>0
+          AND yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags, d.routing_tag_mode_id)>0
         ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
         limit 1;
         IF NOT FOUND THEN
@@ -16689,7 +16715,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -16706,7 +16732,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -16732,7 +16758,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -16752,7 +16778,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -16776,7 +16802,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -16798,7 +16824,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -16823,7 +16849,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -16844,7 +16870,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -16869,7 +16895,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -16891,7 +16917,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
                   and t_dp.vendor_id=v_test_vendor_id
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -16916,7 +16942,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -16945,7 +16971,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -16972,7 +16998,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17000,7 +17026,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17179,7 +17205,20 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
             if v_customer_auth_normalized.require_incoming_auth then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
                 v_ret.aleg_auth_required=true;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -17220,6 +17259,15 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
         end IF;
 
         /*dbg{*/
@@ -17469,10 +17517,14 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
         select into v_area_direction * from class4.routing_tag_detection_rules
         where
           (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
-          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
-          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+          (dst_area_id is null OR dst_area_id = v_ret.dst_area_id) AND
+          prefix_range(src_prefix) @> prefix_range(v_ret.src_prefix_routing) AND
+          prefix_range(dst_prefix) @> prefix_range(v_ret.dst_prefix_routing) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
-          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
+          length(prefix_range(v_ret.src_prefix_routing)) desc,
+          length(prefix_range(v_ret.dst_prefix_routing)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -17586,7 +17638,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
-          AND yeti_ext.tag_compare(d.routing_tag_ids,v_call_tags)>0
+          AND yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags, d.routing_tag_mode_id)>0
         ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
         limit 1;
         IF NOT FOUND THEN
@@ -17642,7 +17694,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17659,7 +17711,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17685,7 +17737,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17705,7 +17757,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17729,7 +17781,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17751,7 +17803,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17776,7 +17828,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17797,7 +17849,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17822,7 +17874,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17844,7 +17896,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
                   and t_dp.vendor_id=v_test_vendor_id
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17869,7 +17921,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17898,7 +17950,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -17925,7 +17977,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -17953,7 +18005,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18119,7 +18171,14 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
+            if v_customer_auth_normalized.reject_calls then
+            
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
             if v_customer_auth_normalized.require_incoming_auth then
+            
                 v_ret.aleg_auth_required=true;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -18157,6 +18216,12 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
+            if v_customer_auth_normalized.reject_calls then
+            
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
         end IF;
 
         
@@ -18367,10 +18432,14 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
         select into v_area_direction * from class4.routing_tag_detection_rules
         where
           (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
-          (dst_area_id is null OR dst_area_id=v_ret.dst_area_id) AND
-          yeti_ext.tag_compare(routing_tag_ids, v_call_tags)>0
+          (dst_area_id is null OR dst_area_id = v_ret.dst_area_id) AND
+          prefix_range(src_prefix) @> prefix_range(v_ret.src_prefix_routing) AND
+          prefix_range(dst_prefix) @> prefix_range(v_ret.dst_prefix_routing) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
-          yeti_ext.tag_compare(routing_tag_ids, v_call_tags) desc,
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
+          length(prefix_range(v_ret.src_prefix_routing)) desc,
+          length(prefix_range(v_ret.dst_prefix_routing)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -18451,7 +18520,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
-          AND yeti_ext.tag_compare(d.routing_tag_ids,v_call_tags)>0
+          AND yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags, d.routing_tag_mode_id)>0
         ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
         limit 1;
         IF NOT FOUND THEN
@@ -18498,7 +18567,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18515,7 +18584,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18541,7 +18610,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18561,7 +18630,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18585,7 +18654,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18607,7 +18676,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18632,7 +18701,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18653,7 +18722,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags)>0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18678,7 +18747,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18700,7 +18769,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
                   and t_dp.vendor_id=v_test_vendor_id
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18725,7 +18794,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18754,7 +18823,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -18781,7 +18850,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags) desc
+                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -18809,7 +18878,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
                   and t_vendor.enabled and t_vendor.vendor
-                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags) > 0
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
             SELECT s1_dialpeer as s2_dialpeer,
                   s1_vendor_account as s2_vendor_account
@@ -25744,6 +25813,13 @@ CREATE INDEX routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx ON 
 
 
 --
+-- Name: routing_tag_detection_rules_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE INDEX routing_tag_detection_rules_prefix_range_idx ON class4.routing_tag_detection_rules USING gist (((src_prefix)::public.prefix_range), ((dst_prefix)::public.prefix_range));
+
+
+--
 -- Name: admin_users_username_idx; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
 --
 
@@ -26622,8 +26698,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26684,4 +26759,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180405132225');
 INSERT INTO public.schema_migrations (version) VALUES ('20180416121932');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180418101559');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180425203717');
 
