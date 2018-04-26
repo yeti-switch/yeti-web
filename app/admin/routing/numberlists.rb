@@ -31,6 +31,9 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
                  :created_at, :updated_at
 
+  acts_as_import resource_class: Importing::Numberlist,
+                 skip_columns: [:tag_action_value]
+
   includes :mode, :default_action
 
   permit_params :name, :mode_id, :default_action_id,
