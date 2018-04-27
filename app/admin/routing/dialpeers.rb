@@ -119,7 +119,6 @@ ActiveAdmin.register Dialpeer do
     end
     column :routing_group, sortable: 'routing_groups.name'
     column :routing_tags
-    column :routing_tag_mode
     column :priority
     column :force_hit_rate
     column :exclusive_route
