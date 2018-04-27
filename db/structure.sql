@@ -21540,6 +21540,92 @@ ALTER SEQUENCE data_import.import_gateways_id_seq1 OWNED BY data_import.import_g
 
 
 --
+-- Name: import_numberlist_items; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+--
+
+CREATE TABLE data_import.import_numberlist_items (
+    id integer NOT NULL,
+    o_id integer,
+    error_string character varying,
+    numberlist_id smallint,
+    numberlist_name character varying,
+    key character varying,
+    action_id integer,
+    action_name character varying,
+    src_rewrite_rule character varying,
+    src_rewrite_result character varying,
+    dst_rewrite_rule character varying,
+    dst_rewrite_result character varying,
+    tag_action_id integer,
+    tag_action_name character varying,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    tag_action_value_names character varying
+);
+
+
+--
+-- Name: import_numberlist_items_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
+--
+
+CREATE SEQUENCE data_import.import_numberlist_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: import_numberlist_items_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
+--
+
+ALTER SEQUENCE data_import.import_numberlist_items_id_seq OWNED BY data_import.import_numberlist_items.id;
+
+
+--
+-- Name: import_numberlists; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+--
+
+CREATE TABLE data_import.import_numberlists (
+    id integer NOT NULL,
+    o_id smallint,
+    error_string character varying,
+    name character varying,
+    mode_id integer,
+    mode_name character varying,
+    default_action_id integer,
+    default_action_name character varying,
+    default_src_rewrite_rule character varying,
+    default_src_rewrite_result character varying,
+    default_dst_rewrite_rule character varying,
+    default_dst_rewrite_result character varying,
+    tag_action_id integer,
+    tag_action_name character varying,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    tag_action_value_names character varying
+);
+
+
+--
+-- Name: import_numberlists_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
+--
+
+CREATE SEQUENCE data_import.import_numberlists_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: import_numberlists_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
+--
+
+ALTER SEQUENCE data_import.import_numberlists_id_seq OWNED BY data_import.import_numberlists.id;
+
+
+--
 -- Name: import_rateplans; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
@@ -23720,6 +23806,20 @@ ALTER TABLE ONLY data_import.import_gateways ALTER COLUMN id SET DEFAULT nextval
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
+ALTER TABLE ONLY data_import.import_numberlist_items ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlist_items_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_numberlists ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlists_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+--
+
 ALTER TABLE ONLY data_import.import_rateplans ALTER COLUMN id SET DEFAULT nextval('data_import.import_rateplans_id_seq'::regclass);
 
 
@@ -24929,6 +25029,22 @@ ALTER TABLE ONLY data_import.import_gateway_groups
 
 ALTER TABLE ONLY data_import.import_gateways
     ADD CONSTRAINT import_gateways_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: import_numberlist_items_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY data_import.import_numberlist_items
+    ADD CONSTRAINT import_numberlist_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: import_numberlists_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY data_import.import_numberlists
+    ADD CONSTRAINT import_numberlists_pkey PRIMARY KEY (id);
 
 
 --
@@ -26698,7 +26814,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
 
@@ -26761,4 +26878,6 @@ INSERT INTO public.schema_migrations (version) VALUES ('20180416121932');
 INSERT INTO public.schema_migrations (version) VALUES ('20180418101559');
 
 INSERT INTO public.schema_migrations (version) VALUES ('20180425203717');
+
+INSERT INTO public.schema_migrations (version) VALUES ('20180426090808');
 
