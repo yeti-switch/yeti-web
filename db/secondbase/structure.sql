@@ -4132,6 +4132,18 @@ ALTER SEQUENCE cdr.cdr_id_seq OWNED BY cdr.cdr.id;
 
 
 --
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5961,6 +5973,14 @@ ALTER TABLE ONLY cdr.cdr
 
 
 --
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
 -- Name: cdr_custom_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
 --
 
@@ -6604,23 +6624,17 @@ ALTER TABLE ONLY sys.config
 
 SET search_path TO cdr, reports, billing;
 
-INSERT INTO public.schema_migrations (version) VALUES ('20170907204350');
+INSERT INTO "public"."schema_migrations" (version) VALUES
+('20170907204350'),
+('20170911172650'),
+('20171104162958'),
+('20180228200703'),
+('20180307142909'),
+('20180312211714'),
+('20180312215122'),
+('20180328123622'),
+('20180328170352'),
+('20180425200716'),
+('20180427194936');
 
-INSERT INTO public.schema_migrations (version) VALUES ('20170911172650');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171104162958');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180228200703');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180307142909');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180312211714');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180312215122');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180328123622');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180328170352');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180425200716');
 
