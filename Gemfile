@@ -40,7 +40,7 @@ gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_
 gem 'excelinator', git: 'https://github.com/livingsocial/excelinator.git'
 
 # REST API
-gem 'jsonapi-resources', '~> 0.9.1.beta1'
+gem 'jsonapi-resources', '0.9.1.beta1'
 
 # gem 'activeadmin_async_export'
 
