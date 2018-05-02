@@ -6622,7 +6622,7 @@ ALTER TABLE ONLY sys.config
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO cdr, reports, billing;
+SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170907204350'),
