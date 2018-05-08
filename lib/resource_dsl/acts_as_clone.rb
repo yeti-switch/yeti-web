@@ -4,7 +4,7 @@ module ResourceDSL
 
     def acts_as_clone(*dup_methods)
 
-      before_filter only: [:new] do
+      before_action only: [:new] do
         if params[:from].present?
           copy_resource(dup_methods)
         end
@@ -72,7 +72,7 @@ module ResourceDSL
 
       end
 
-      before_filter only: [:new, :create] do
+      before_action only: [:new, :create] do
         if params[:from].present?
           fill_resource(klass)
         end

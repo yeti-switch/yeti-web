@@ -1,7 +1,6 @@
 ActiveAdmin.register Routing::NumberlistItem do
   menu parent: "Routing", priority: 125, label: 'Numberlist items'
 
-  navigation_menu :default
   config.batch_actions = true
 
   decorate_with NumberlistItemDecorator

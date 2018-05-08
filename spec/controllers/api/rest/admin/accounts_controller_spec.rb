@@ -31,14 +31,14 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     let!(:account) { create :account }
 
     context 'when account exists' do
-      before { get :show, id: account.to_param }
+      before { get :show, params: { id: account.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(account.id.to_s) }
     end
 
     context 'when account does not exist' do
-      before { get :show, id: account.id + 10 }
+      before { get :show, params: { id: account.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -47,9 +47,11 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'accounts',
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: 'accounts',
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     context 'when attributes are valid' do
@@ -81,9 +83,12 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
   describe 'PUT update' do
     let!(:account) { create :account }
     before do
-      put :update, id: account.to_param, data: { type: 'accounts',
-                                                 id: account.to_param,
-                                                 attributes: attributes }
+      put :update, params: {
+        id: account.to_param,
+        data: { type: 'accounts',
+                id: account.to_param,
+                attributes: attributes }
+      }
     end
 
     context 'when attributes are valid' do
@@ -111,7 +116,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:account) { create :account }
 
-    before { delete :destroy, id: account.to_param }
+    before { delete :destroy, params: { id: account.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Account.count).to eq(0) }

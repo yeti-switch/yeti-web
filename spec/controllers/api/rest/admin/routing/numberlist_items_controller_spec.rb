@@ -20,7 +20,7 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
   describe 'GET show' do
     let!(:record) { create :numberlist_item }
 
-    before { get :show, id: record.to_param }
+    before { get :show, params: { id: record.to_param } }
 
     it { expect(response.status).to eq(200) }
     it { expect(response_data['id']).to eq(record.id.to_s) }
@@ -28,9 +28,11 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
 
   describe 'POST create' do
     before do
-      post :create, data: { type: resource_type,
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: resource_type,
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     let(:attributes) do
@@ -58,9 +60,11 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
     let!(:record) { create :numberlist_item }
 
     before do
-      put :update, id: record.to_param, data: { type: resource_type,
-                                                id: record.to_param,
-                                                attributes: attributes }
+      put :update, params: {
+        id: record.to_param, data: { type: resource_type,
+                                     id: record.to_param,
+                                     attributes: attributes }
+      }
     end
 
     let(:attributes) do
@@ -74,7 +78,7 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
   describe 'DELETE destroy' do
     let!(:record) { create :numberlist_item }
 
-    before { delete :destroy, id: record.to_param }
+    before { delete :destroy, params: { id: record.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Routing::NumberlistItem.count).to eq(0) }

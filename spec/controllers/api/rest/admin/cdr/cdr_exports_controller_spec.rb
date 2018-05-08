@@ -12,7 +12,7 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
   end
 
   describe 'POST create' do
-    subject { post :create, payload }
+    subject { post :create, params: payload }
     let(:payload) do
       {
         data: {
@@ -86,7 +86,7 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['errors']).to match_array(
           hash_including(
-            'detail' => 'filters - unknown_filter not allowed'
+            'detail' => 'filters - unknown-filter not allowed'
           )
         )
       end

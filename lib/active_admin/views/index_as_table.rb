@@ -38,7 +38,7 @@ module ActiveAdmin
       def column(*args, &block)
         return super unless assigns.has_key?(:visible_columns) || args[0].nil?
 
-        column_js_code = args[0].to_s.parameterize('_')
+        column_js_code = args[0].to_s.parameterize(separator: '_')
         assigns[:all_available_columns] = [] if assigns[:all_available_columns].blank?
         assigns[:all_available_columns] << column_js_code
 

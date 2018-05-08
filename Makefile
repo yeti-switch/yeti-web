@@ -59,7 +59,7 @@ docs: bundler
 
 	@$(info:msg=Preparing test database)
 	RAILS_ENV=test $(bundle_bin) exec rake db:drop db:create db:structure:load db:migrate
-	RAILS_ENV=test $(bundle_bin) exec rake db:second_base:drop db:second_base:create db:second_base:structure:load db:second_base:migrate
+	RAILS_ENV=test $(bundle_bin) exec rake db:second_base:drop:_unsafe db:second_base:create db:second_base:structure:load db:second_base:migrate
 	RAILS_ENV=test $(bundle_bin) exec rake db:seed
 
 	git checkout db/structure.sql db/secondbase/structure.sql

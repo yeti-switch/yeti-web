@@ -7,7 +7,7 @@ RSpec.shared_examples :jsonapi_filter_by do |attr_name|
   end
 
   it 'returns only one expected record' do
-    get :index, filter: { attr_name => attr_value }
+    get :index, params: { filter: { attr_name => attr_value } }
 
     expect(response_data).to match_array(
       [

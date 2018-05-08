@@ -19,7 +19,7 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
 
   context 'GET show' do
 
-    before { get :show, id: record.to_param, include: 'tag-action' }
+    before { get :show, params: { id: record.to_param, include: 'tag-action' } }
 
     it 'has `tag_action_velue` array' do
       expect(response_data['attributes']).to include('tag-action-value' => tag_ids)
@@ -45,14 +45,16 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
     let(:new_tag_action) { Routing::TagAction.find(1) }
 
     before do
-      put :update, id: record.to_param, data: {
-        type: resource_type,
-        id: record.to_param,
-        attributes: {
-          'tag-action-value': [@tag_emergency.id]
-        },
-        relationships: {
-          'tag-action': wrap_relationship(:'tag-actions', new_tag_action.to_param)
+      put :update, params: {
+        id: record.to_param, data: {
+          type: resource_type,
+          id: record.to_param,
+          attributes: {
+            'tag-action-value': [@tag_emergency.id]
+          },
+          relationships: {
+            'tag-action': wrap_relationship(:'tag-actions', new_tag_action.to_param)
+          }
         }
       }
     end

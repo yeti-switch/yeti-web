@@ -33,14 +33,14 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
     let!(:rateplan) { create :rateplan }
 
     context 'when rateplan exists' do
-      before { get :show, id: rateplan.to_param }
+      before { get :show, params: { id: rateplan.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(rateplan.id.to_s) }
     end
 
     context 'when rateplan does not exist' do
-      before { get :show, id: rateplan.id + 10 }
+      before { get :show, params: { id: rateplan.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -49,9 +49,11 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'rateplans',
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: 'rateplans',
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     context 'when attributes are valid' do
@@ -75,10 +77,12 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
 
   describe 'PUT update' do
     let!(:rateplan) { create :rateplan }
-    before { put :update, id: rateplan.to_param, data: { type: 'rateplans',
-                                                         id: rateplan.to_param,
-                                                         attributes: attributes,
-                                                         relationships: relationships} }
+    before { put :update, params: {
+      id: rateplan.to_param, data: { type: 'rateplans',
+                                     id: rateplan.to_param,
+                                     attributes: attributes,
+                                     relationships: relationships}
+    } }
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
@@ -102,7 +106,7 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
   describe 'DELETE destroy' do
     let!(:rateplan) { create :rateplan }
 
-    before { delete :destroy, id: rateplan.to_param }
+    before { delete :destroy, params: { id: rateplan.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Rateplan.count).to eq(0) }

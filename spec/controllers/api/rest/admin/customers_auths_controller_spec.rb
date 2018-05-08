@@ -17,14 +17,14 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     let!(:customers_auth) { create :customers_auth }
 
     context 'when customers auth exists' do
-      before { get :show, id: customers_auth.to_param }
+      before { get :show, params: { id: customers_auth.to_param } }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(customers_auth.id.to_s) }
     end
 
     context 'when customers auth does not exist' do
-      before { get :show, id: customers_auth.id + 10 }
+      before { get :show, params: { id: customers_auth.id + 10 } }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -33,9 +33,11 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'customers-auths',
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: 'customers-auths',
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     context 'when attributes are valid' do
@@ -76,9 +78,11 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
   describe 'PUT update' do
     let!(:customers_auth) { create :customers_auth }
     before do
-      put :update, id: customers_auth.to_param, data: { type: 'customers-auths',
-                                                        id: customers_auth.to_param,
-                                                        attributes: attributes }
+      put :update, params: {
+        id: customers_auth.to_param, data: { type: 'customers-auths',
+                                             id: customers_auth.to_param,
+                                             attributes: attributes }
+      }
     end
 
     context 'when attributes are valid' do
@@ -106,7 +110,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:customers_auth) { create :customers_auth }
 
-    before { delete :destroy, id: customers_auth.to_param }
+    before { delete :destroy, params: { id: customers_auth.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(CustomersAuth.count).to eq(0) }

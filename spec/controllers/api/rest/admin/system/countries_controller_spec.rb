@@ -19,7 +19,7 @@ describe Api::Rest::Admin::System::CountriesController, type: :controller do
       ]
     end
 
-    subject { get :index, filter: filters }
+    subject { get :index, params: { filter: filters } }
     let(:filters) do
       {}
     end
@@ -77,7 +77,7 @@ describe Api::Rest::Admin::System::CountriesController, type: :controller do
     end
 
     subject do
-      get :show, id: country.id
+      get :show, params: { id: country.id }
     end
 
     it 'http status should eq 200' do
@@ -102,7 +102,7 @@ describe Api::Rest::Admin::System::CountriesController, type: :controller do
 
   describe 'POST create' do
     subject do
-      post :create, payload
+      post :create, params: payload
     end
     let(:payload) do
       {
@@ -123,7 +123,7 @@ describe Api::Rest::Admin::System::CountriesController, type: :controller do
 
   describe 'PATCH update' do
     subject do
-      patch :update, id: country.id, **payload
+      patch :update, params: { id: country.id, **payload }
     end
     let(:payload) do
       {
@@ -146,7 +146,7 @@ describe Api::Rest::Admin::System::CountriesController, type: :controller do
 
   describe 'DELETE delete' do
     subject do
-      delete :destroy, id: country.id
+      delete :destroy, params: { id: country.id }
     end
     let!(:country) do
       create :country

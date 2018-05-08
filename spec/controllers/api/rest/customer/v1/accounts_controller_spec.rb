@@ -60,7 +60,7 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
     let!(:account) { create(:account, contractor: customer) }
 
     context 'when record exists' do
-      before { get :show, id: account.reload.uuid }
+      before { get :show, params: { id: account.reload.uuid } }
 
       it 'returnds record with expected attributes' do
         expect(response_data).to include({
@@ -81,7 +81,7 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
     context 'request accout not listed in allowed_ids' do
       let(:allowed_account) { create(:account, contractor: customer) }
       before { api_access.update!(account_ids: [allowed_account.id]) }
-      before { get :show, id: account.reload.uuid }
+      before { get :show, params: { id: account.reload.uuid } }
 
       it { expect(response.status).to eq(404) }
     end

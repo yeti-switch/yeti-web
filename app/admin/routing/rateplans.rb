@@ -37,7 +37,7 @@ ActiveAdmin.register Rateplan do
   filter :uuid_equals, label: 'UUID'
   filter :name
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
     f.inputs do
       f.input :name
       f.input :profit_control_mode

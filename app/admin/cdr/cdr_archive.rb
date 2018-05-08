@@ -7,7 +7,7 @@ ActiveAdmin.register Cdr::CdrArchive do
 
   decorate_with CdrDecorator
 
-  before_filter do
+  before_action do
     if params['q'].blank?
       params['q'] = {time_start_gteq: 3.days.ago} # only 3 last days by default
       flash.now[:notice] = "Only CDRs for last 3 days showed by default"

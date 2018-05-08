@@ -1,6 +1,5 @@
 ActiveAdmin.register DialpeerNextRate do
   belongs_to :dialpeer, parent_class: Dialpeer
-  navigation_menu :default
   menu false
   actions :index, :new, :create, :edit, :update, :destroy
   config.batch_actions = false

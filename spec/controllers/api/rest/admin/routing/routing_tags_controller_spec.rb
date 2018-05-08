@@ -16,7 +16,7 @@ describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controller do
     include_context :init_routing_tag_collection
     let(:tag) { Routing::RoutingTag.take }
 
-    before { get :show, id: tag.id }
+    before { get :show, params: { id: tag.id } }
 
     it 'receive expected fields' do
       expect(response_data.deep_symbolize_keys).to a_hash_including(
@@ -30,8 +30,10 @@ describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, data: { type: 'routing-tags',
-                            attributes: attributes }
+      post :create, params: {
+        data: { type: 'routing-tags',
+                attributes: attributes }
+      }
     end
 
     let(:attributes) do
@@ -48,9 +50,11 @@ describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controller do
     let!(:tag) { create(:routing_tag) }
 
     before do
-      put :update, id: tag.id.to_s, data: { type: 'routing-tags',
-                                            id: tag.id.to_i,
-                                            attributes: attributes }
+      put :update, params: {
+        id: tag.id.to_s, data: { type: 'routing-tags',
+                                 id: tag.id.to_i,
+                                 attributes: attributes }
+      }
     end
 
     let(:attributes) do
@@ -64,7 +68,7 @@ describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:tag) { create :routing_tag }
 
-    before { delete :destroy, id: tag.to_param }
+    before { delete :destroy, params: { id: tag.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Routing::RoutingTag.count).to eq(0) }

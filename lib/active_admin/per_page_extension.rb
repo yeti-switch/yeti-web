@@ -4,7 +4,7 @@ module ActiveAdmin
     extend ActiveSupport::Concern
 
     included do
-      before_filter only: [:index] do
+      before_action only: [:index] do
         setup_pagination_dropdown
       end
     end

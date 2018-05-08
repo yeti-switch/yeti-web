@@ -7,7 +7,7 @@ describe Api::Rest::Admin::AuthController, type: :controller do
 
   describe 'POST create' do
 
-    before { post :create, auth: attributes }
+    before { post :create, params: { auth: attributes } }
 
     context 'when attributes are valid' do
       let(:attributes) { { username: 'admin', password: 'password' } }

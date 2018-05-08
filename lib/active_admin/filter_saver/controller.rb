@@ -13,7 +13,7 @@ module ActiveAdmin
 
       included do
 
-        before_filter only: [:index] do
+        before_action only: [:index] do
           if request.xhr? && params.has_key?(:search_filter_switch)
             set_persistent_filters
           end
@@ -24,7 +24,7 @@ module ActiveAdmin
           true
         end
 
-        after_filter only: [:index] do
+        after_action only: [:index] do
           save_search_filters if respond_to?(:save_filters?) and save_filters?
           true
         end

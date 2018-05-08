@@ -131,7 +131,7 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   # config.comments = true
-  config.show_comments_in_menu = false
+  config.comments_menu = false
 
   config.current_filters = false
 
@@ -157,16 +157,16 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources from here.
   #
-  config.before_filter do
+  config.before_action do
     left_sidebar!(collapsed: true) if respond_to?(:left_sidebar!)
   end
 
-  config.before_filter only: [:index] do
+  config.before_action only: [:index] do
     fix_max_records
     restore_search_filters if respond_to?(:save_filters?) and save_filters?
   end
 
-  config.after_filter do
+  config.after_action do
     save_search_filters if respond_to?(:save_filters?) and save_filters?
   end
 

@@ -1,6 +1,6 @@
 class ApiController < ActionController::Base
 
-  around_filter :db_logging
+  around_action :db_logging
 
 
   def db_logging

@@ -28,7 +28,7 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
   end
 
   describe 'GET show' do
-    before { get :show, id: record.to_param }
+    before { get :show, params: { id: record.to_param } }
 
     it { expect(response.status).to eq(200) }
     it { expect(response_data['id']).to eq(record.id.to_s) }
@@ -36,9 +36,11 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
 
   describe 'POST create' do
     before do
-      post :create, data: { type: resource_type,
-                            attributes: attributes,
-                            relationships: relationships }
+      post :create, params: {
+        data: { type: resource_type,
+                attributes: attributes,
+                relationships: relationships }
+      }
     end
 
     let(:attributes) do
@@ -63,9 +65,11 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
   end
 
   describe 'PUT update' do
-    before { put :update, id: record.to_param, data: { type: resource_type,
-                                                       id: record.to_param,
-                                                       relationships: relationships} }
+    before { put :update, params: {
+      id: record.to_param, data: { type: resource_type,
+                                   id: record.to_param,
+                                   relationships: relationships}
+    } }
     let(:relationships) do
       {
         'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
@@ -78,7 +82,7 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
   end
 
   describe 'DELETE destroy' do
-    before { delete :destroy, id: record.to_param }
+    before { delete :destroy, params: { id: record.to_param } }
 
     it { expect(response.status).to eq(204) }
     it { expect(Routing::RoutingTagDetectionRule.count).to eq(0) }

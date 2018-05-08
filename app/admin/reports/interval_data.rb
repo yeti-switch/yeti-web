@@ -5,7 +5,6 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
 
   belongs_to :report_interval_cdr, parent_class: Report::IntervalCdr
 
-  navigation_menu :default
   config.batch_actions = false
 
   csv do

@@ -6,7 +6,7 @@ module ActiveAdmin
 
       included do
 
-        before_filter only: :index do
+        before_action only: :index do
           if columns_visibility?
             set_visible_columns
             @visible_columns = []

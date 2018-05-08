@@ -14,7 +14,7 @@ describe Api::Rest::Admin::Routing::NumberlistActionsController, type: :controll
   end
 
   describe 'GET show' do
-    before { get :show, id: record.id }
+    before { get :show, params: { id: record.id } }
 
     it 'receive expected fields' do
       expect(response_data.deep_symbolize_keys).to a_hash_including(
@@ -29,8 +29,10 @@ describe Api::Rest::Admin::Routing::NumberlistActionsController, type: :controll
 
   describe 'POST create' do
     subject do
-      post :create, data: { type: 'numberlist-actions',
-                            attributes: { name: 'Name_1' } }
+      post :create, params: {
+        data: { type: 'numberlist-actions',
+                attributes: { name: 'Name_1' } }
+      }
     end
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
@@ -38,16 +40,18 @@ describe Api::Rest::Admin::Routing::NumberlistActionsController, type: :controll
 
   describe 'PUT update' do
     subject do
-      put :update, id: record.to_param, data: { type: 'numberlist-actions',
-                                            id: record.id.to_i,
-                                            attributes: { name: 'Update name_1' } }
+      put :update, params: {
+        id: record.to_param, data: { type: 'numberlist-actions',
+                                     id: record.id.to_i,
+                                     attributes: { name: 'Update name_1' } }
+      }
     end
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
   end
 
   describe 'DELETE destroy' do
-    subject { delete :destroy, id: record.to_param }
+    subject { delete :destroy, params: { id: record.to_param } }
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
   end

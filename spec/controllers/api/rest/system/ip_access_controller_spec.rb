@@ -4,7 +4,7 @@ describe Api::Rest::System::IpAccessController, type: :controller  do
 
   describe '#index' do
 
-    subject { get :index, format: :json }
+    subject { get :index, params: { format: :json } }
 
     context 'when CustomersAuth records exist' do
       before do

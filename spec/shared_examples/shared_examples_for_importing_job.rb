@@ -18,7 +18,7 @@ shared_examples 'Jobs for importing data' do
     end
 
     it 'creates paper_tail for imported data' do
-      if import_class.respond_to?(:paper_trail_enabled_for_model)
+      if import_class.respond_to?(:paper_trail)
         expect{ run_jobs }.to change{ PaperTrail::Version.where(item_type: import_class.to_s).count }.by(importing_items_count)
       else
         expect{ run_jobs }.not_to change{ PaperTrail::Version.where(item_type: import_class.to_s).count }

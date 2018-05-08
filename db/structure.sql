@@ -22173,6 +22173,18 @@ ALTER SEQUENCE notifications.email_log_id_seq OWNED BY notifications.email_logs.
 
 
 --
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: contractors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -25192,6 +25204,14 @@ ALTER TABLE ONLY notifications.email_logs
 
 
 --
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
 -- Name: contractors_external_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -26817,67 +26837,39 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
 ;
 
-INSERT INTO public.schema_migrations (version) VALUES ('20170822151410');
+INSERT INTO "public"."schema_migrations" (version) VALUES
+('20170822151410'),
+('20170822151442'),
+('20170825100629'),
+('20170907201109'),
+('20170907203538'),
+('20170907203628'),
+('20170907203638'),
+('20170919200403'),
+('20171020164700'),
+('20171031211812'),
+('20171102183313'),
+('20171209201956'),
+('20171226210121'),
+('20171231175152'),
+('20180101202120'),
+('20180119133842'),
+('20180209140554'),
+('20180212105355'),
+('20180215094913'),
+('20180305132729'),
+('20180312205051'),
+('20180313135314'),
+('20180316061214'),
+('20180318143341'),
+('20180320120746'),
+('20180403104223'),
+('20180404135210'),
+('20180405132225'),
+('20180416121932'),
+('20180418101559'),
+('20180425203717'),
+('20180426090808'),
+('20180427194327');
 
-INSERT INTO public.schema_migrations (version) VALUES ('20170822151442');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20170825100629');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20170907201109');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20170907203538');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20170907203628');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20170907203638');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20170919200403');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171020164700');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171031211812');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171102183313');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171209201956');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171226210121');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20171231175152');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180101202120');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180119133842');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180209140554');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180212105355');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180215094913');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180305132729');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180312205051');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180313135314');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180316061214');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180318143341');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180320120746');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180403104223');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180404135210');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180405132225');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180416121932');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180418101559');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180425203717');
-
-INSERT INTO public.schema_migrations (version) VALUES ('20180426090808');
 

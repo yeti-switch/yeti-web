@@ -3,7 +3,6 @@ ActiveAdmin.register Report::CustomerTrafficDataByDestination, as: 'CustomerTraf
   actions :index
   belongs_to :customer_traffic, parent_class: Report::CustomerTraffic
 
-  navigation_menu :default
   config.batch_actions = false
 
   filter :calls_count

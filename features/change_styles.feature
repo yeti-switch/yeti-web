@@ -4,7 +4,7 @@ Feature: Change styles
   @javascript
   Scenario: change_color
     Given A new admin user with username "admin1"
-    When I open variables.css.scss file and override variable "$text-color: blue !default;"
+    When I open variables.scss file and override variable "$text-color: blue !default;"
     And I signed in as admin user with username "admin1"
     And I open the dashboard page
     Then The page text should be blue
