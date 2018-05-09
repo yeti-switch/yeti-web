@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 # Core
 gem 'activemodel-serializers-xml'
 gem 'pg'
-gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails-5'
-gem 'rails', '~> 5.0.0'
-gem 'responders', '~> 2.2.0'
+gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails51'
+gem 'rails', '~> 5.1.0'
+gem 'responders'
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
