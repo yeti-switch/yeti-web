@@ -147,7 +147,6 @@ ActiveAdmin.register Destination do
     column :quality_alarm
     column :rateplan, sortable: 'rateplans.name'
     column :routing_tags
-    column :routing_tag_mode
     column :valid_from do |c|
       c.decorated_valid_from
     end

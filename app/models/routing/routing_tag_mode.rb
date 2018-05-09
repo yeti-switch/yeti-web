@@ -17,4 +17,8 @@ class Routing::RoutingTagMode < Yeti::ActiveRecord
   end
 
   after_initialize { readonly! }
+
+  def and?
+    id == CONST::AND
+  end
 end

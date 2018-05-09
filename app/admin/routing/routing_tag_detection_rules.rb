@@ -41,7 +41,6 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     id_column
     actions
     column :routing_tags
-    column :routing_tag_mode
     column :src_area
     column :dst_area
     column :src_prefix
