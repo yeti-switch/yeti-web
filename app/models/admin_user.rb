@@ -116,6 +116,11 @@ class AdminUser < ActiveRecord::Base
     false
   end
 
+  # https://github.com/plataformatec/devise/issues/4542
+  def will_save_change_to_email?
+    false
+  end
+
   protected
 
   def check_if_last
