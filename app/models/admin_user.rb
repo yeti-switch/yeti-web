@@ -121,7 +121,7 @@ class AdminUser < ActiveRecord::Base
   def check_if_last
     if self.class.count.zero?
       errors.add(:base, "Last admin user can't  be deleted")
-      false
+      throw(:abort)
     end
   end
 end

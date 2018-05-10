@@ -22,7 +22,9 @@ class Payment  < Yeti::ActiveRecord
   before_create do
     account.lock!  # will generate SELECT FOR UPDATE SQL statement
     account.balance+=self.amount
-    account.save
+    unless account.save
+      throw(:abort)
+    end
   end
 
   scope :today, -> { where("created_at >= ? ", Time.now.at_beginning_of_day) }
