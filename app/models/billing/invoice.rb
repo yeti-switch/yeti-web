@@ -28,14 +28,14 @@ class Billing::Invoice < Cdr::Base
 
   belongs_to :account, class_name: 'Account', foreign_key: 'account_id'
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id #, :conditions => {:customer => true}act
-  belongs_to :state, class_name: Billing::InvoiceState, foreign_key: :state_id
-  belongs_to :type, class_name: Billing::InvoiceType, foreign_key: :type_id
+  belongs_to :state, class_name: 'Billing::InvoiceState', foreign_key: :state_id
+  belongs_to :type, class_name: 'Billing::InvoiceType', foreign_key: :type_id
 
   has_one :invoice_document, dependent: :destroy
-  has_many :full_destinations, class_name: Billing::InvoiceDestination, foreign_key: :invoice_id, dependent: :delete_all
-  has_many :full_networks, class_name: Billing::InvoiceNetwork, foreign_key: :invoice_id, dependent: :delete_all
-  has_many :destinations, -> {where("successful_calls_count>0") }, class_name: Billing::InvoiceDestination, foreign_key: :invoice_id
-  has_many :networks, -> {where("successful_calls_count>0") }, class_name: Billing::InvoiceNetwork, foreign_key: :invoice_id
+  has_many :full_destinations, class_name: 'Billing::InvoiceDestination', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :full_networks, class_name: 'Billing::InvoiceNetwork', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :destinations, -> {where("successful_calls_count>0") }, class_name: 'Billing::InvoiceDestination', foreign_key: :invoice_id
+  has_many :networks, -> {where("successful_calls_count>0") }, class_name: 'Billing::InvoiceNetwork', foreign_key: :invoice_id
 
 
   before_destroy do

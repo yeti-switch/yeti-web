@@ -16,7 +16,7 @@ class Rateplan < ActiveRecord::Base
 
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
   has_many :customers_auths, dependent: :restrict_with_error
-  has_many :destinations, class_name: Destination, foreign_key: :rateplan_id, dependent: :destroy
+  has_many :destinations, class_name: 'Destination', foreign_key: :rateplan_id, dependent: :destroy
 
   scope :where_customer, -> (id) do
     joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })

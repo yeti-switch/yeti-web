@@ -123,20 +123,20 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :diversion_policy
   belongs_to :pop
   belongs_to :codec_group
-  belongs_to :sdp_c_location, class_name: SdpCLocation
+  belongs_to :sdp_c_location, class_name: 'SdpCLocation'
   belongs_to :sensor, class_name: 'System::Sensor',foreign_key: :sensor_id
   belongs_to :sensor_level, class_name: 'System::SensorLevel',foreign_key: :sensor_level_id
   belongs_to :dtmf_receive_mode, class_name: 'System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: 'System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
-  belongs_to :radius_accounting_profile, class_name: Equipment::Radius::AccountingProfile, foreign_key: :radius_accounting_profile_id
-  belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
-  belongs_to :term_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :term_proxy_transport_protocol_id
-  belongs_to :orig_proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
-  belongs_to :rel100_mode, class_name: Equipment::GatewayRel100Mode, foreign_key: :rel100_mode_id
+  belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
+  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
+  belongs_to :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
+  belongs_to :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
+  belongs_to :rel100_mode, class_name: 'Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
-  has_many :dialpeers, class_name: Dialpeer, dependent: :restrict_with_error
-  has_many :quality_stats, class_name: Stats::TerminationQualityStat, foreign_key: :gateway_id, dependent: :nullify
+  has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
+  has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :gateway_id, dependent: :nullify
   has_one :statistic, class_name: 'GatewaysStat', dependent: :delete
 
   has_paper_trail class_name: 'AuditLogItem'

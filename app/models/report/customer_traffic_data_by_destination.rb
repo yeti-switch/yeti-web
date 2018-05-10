@@ -24,8 +24,8 @@ class Report::CustomerTrafficDataByDestination < Cdr::Base
   self.table_name = 'reports.customer_traffic_report_data_by_destination'
 
   belongs_to :report, class_name: 'Report::CustomerTraffic', foreign_key: :report_id
-  belongs_to :country, class_name: System::Country, foreign_key: :dst_country_id
-  belongs_to :network, class_name: System::Network, foreign_key: :dst_network_id
+  belongs_to :country, class_name: 'System::Country', foreign_key: :dst_country_id
+  belongs_to :network, class_name: 'System::Network', foreign_key: :dst_network_id
 
 
   def display_name

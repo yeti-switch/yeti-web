@@ -24,8 +24,8 @@
 
 class Equipment::Registration < Yeti::ActiveRecord
 
-  belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
-  belongs_to :proxy_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :proxy_transport_protocol_id
+  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
+  belongs_to :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
   belongs_to :pop
   belongs_to :node
 
