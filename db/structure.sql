@@ -1,7 +1,3 @@
---
--- PostgreSQL database dump
---
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -19910,6 +19906,45 @@ ALTER SEQUENCE class4.customers_auth_normalized_id_seq OWNED BY class4.customers
 
 
 --
+-- Name: destination_next_rates; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.destination_next_rates (
+    id bigint NOT NULL,
+    destination_id bigint NOT NULL,
+    initial_rate numeric NOT NULL,
+    next_rate numeric NOT NULL,
+    initial_interval smallint NOT NULL,
+    next_interval smallint NOT NULL,
+    connect_fee numeric NOT NULL,
+    apply_time timestamp with time zone,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone,
+    applied boolean DEFAULT false NOT NULL,
+    external_id bigint
+);
+
+
+--
+-- Name: destination_next_rates_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.destination_next_rates_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: destination_next_rates_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.destination_next_rates_id_seq OWNED BY class4.destination_next_rates.id;
+
+
+--
 -- Name: destination_rate_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -23545,6 +23580,13 @@ ALTER TABLE ONLY class4.customers_auth_normalized ALTER COLUMN id SET DEFAULT ne
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
+ALTER TABLE ONLY class4.destination_next_rates ALTER COLUMN id SET DEFAULT nextval('class4.destination_next_rates_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
 ALTER TABLE ONLY class4.destinations ALTER COLUMN id SET DEFAULT nextval('class4.destinations_id_seq'::regclass);
 
 
@@ -24409,6 +24451,14 @@ ALTER TABLE ONLY class4.customers_auth_normalized
 
 ALTER TABLE ONLY class4.customers_auth
     ADD CONSTRAINT customers_auth_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: destination_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.destination_next_rates
+    ADD CONSTRAINT destination_next_rates_pkey PRIMARY KEY (id);
 
 
 --
@@ -26247,6 +26297,14 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
+-- Name: destination_next_rates_destination_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.destination_next_rates
+    ADD CONSTRAINT destination_next_rates_destination_id_fkey FOREIGN KEY (destination_id) REFERENCES class4.destinations(id);
+
+
+--
 -- Name: destinations_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -26834,8 +26892,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -26870,6 +26927,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180418101559'),
 ('20180425203717'),
 ('20180426090808'),
-('20180427194327');
+('20180427194327'),
+('20180512225402');
 
 
