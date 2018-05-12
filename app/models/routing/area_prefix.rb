@@ -12,7 +12,7 @@ class Routing::AreaPrefix < Yeti::ActiveRecord
 
   self.table_name='class4.area_prefixes'
 
-  belongs_to :area, class_name: Routing::Area, foreign_key: :area_id
+  belongs_to :area, class_name: 'Routing::Area', foreign_key: :area_id
 
   validates_uniqueness_of :prefix
   validates_format_of :prefix, without: /\s/

@@ -75,11 +75,11 @@ class CustomersAuth < Yeti::ActiveRecord
   belongs_to :dump_level
   belongs_to :pop
   belongs_to :diversion_policy
-  belongs_to :dst_numberlist, class_name: Routing::Numberlist, foreign_key: :dst_numberlist_id
-  belongs_to :src_numberlist, class_name: Routing::Numberlist, foreign_key: :src_numberlist_id
-  belongs_to :radius_auth_profile, class_name: Equipment::Radius::AuthProfile, foreign_key: :radius_auth_profile_id
-  belongs_to :radius_accounting_profile, class_name: Equipment::Radius::AccountingProfile, foreign_key: :radius_accounting_profile_id
-  belongs_to :transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :transport_protocol_id
+  belongs_to :dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :dst_numberlist_id
+  belongs_to :src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :src_numberlist_id
+  belongs_to :radius_auth_profile, class_name: 'Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id
+  belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
+  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
 
   belongs_to :tag_action, class_name: 'Routing::TagAction'
 

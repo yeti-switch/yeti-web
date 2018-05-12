@@ -31,9 +31,8 @@ class RoutingGroup < ActiveRecord::Base
   def check_deps
     if routing_plans.count>0
       errors.add(:base, "Routing Group used in Routing Plan configuration. You must unlink it first")
-      return false
+      throw(:abort)
     end
   end
 
 end
-  

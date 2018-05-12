@@ -16,8 +16,8 @@
 class Stats::TerminationQualityStat < Cdr::Base
   self.table_name = "stats.termination_quality_stats"
 
-  belongs_to :dialpeer, class_name: Dialpeer, foreign_key: :dialpeer_id
-  belongs_to :gateway, class_name: Gateway, foreign_key: :gateway_id
+  belongs_to :dialpeer, class_name: 'Dialpeer', foreign_key: :dialpeer_id
+  belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id
 
   def self.total
     self.select("

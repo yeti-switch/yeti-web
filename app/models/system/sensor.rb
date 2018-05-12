@@ -55,7 +55,6 @@ class System::Sensor < Yeti::ActiveRecord
     end
     # Temporary disable "use_routing". Dima.s requested this 19.11.2014
     self.use_routing = false
-    return true
   end
 
   include Yeti::SensorReloader

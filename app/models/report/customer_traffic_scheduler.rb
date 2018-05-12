@@ -14,8 +14,8 @@
 class Report::CustomerTrafficScheduler < Cdr::Base
   self.table_name='reports.customer_traffic_report_schedulers'
 
-  belongs_to :customer, -> { where(customer: true) }, class_name: Contractor, foreign_key: :customer_id
-  belongs_to :period, class_name: Report::SchedulerPeriod, foreign_key: :period_id
+  belongs_to :customer, -> { where(customer: true) }, class_name: 'Contractor', foreign_key: :customer_id
+  belongs_to :period, class_name: 'Report::SchedulerPeriod', foreign_key: :period_id
   validates_presence_of :customer, :period
 
   include Hints

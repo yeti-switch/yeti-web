@@ -9,8 +9,7 @@
 #
 
 class GatewayGroup < ActiveRecord::Base
-  
-  belongs_to :vendor, class_name: Contractor
+  belongs_to :vendor, class_name: 'Contractor'
   has_many :gateways, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
 

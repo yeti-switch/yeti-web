@@ -187,18 +187,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   action_item :download_csv, only: :index do
     dropdown_menu 'Download CSV' do
-
+      _cdrs_params = params.to_unsafe_h.deep_symbolize_keys.slice(:q, :order, :scope).
+        merge(format: :csv)
       item(
-          'Full CSV',
-          cdrs_path({format: :csv, q: params[:q], order: params[:order], scope: params[:scope], csv_policy: 'all'})
+        'Full CSV', cdrs_path(csv_policy: 'all', **_cdrs_params)
       )
       item(
-          'CSV for Customer leg',
-          cdrs_path({format: :csv, q: params[:q].merge(is_last_cdr_eq: true), order: params[:order], scope: params[:scope], csv_policy: 'customer'})
+        'CSV for Customer leg',
+        cdrs_path(csv_policy: 'customer', **_cdrs_params.deep_merge(q: { is_last_cdr_eq: true }))
       )
       item(
-          'CSV for Vendor leg',
-          cdrs_path({format: :csv, q: params[:q], order: params[:order], scope: params[:scope], csv_policy: 'vendor'})
+        'CSV for Vendor leg',
+        cdrs_path(csv_policy: 'vendor', **_cdrs_params)
       )
 
     end

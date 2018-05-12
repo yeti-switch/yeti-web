@@ -11,11 +11,11 @@
 
 class Routing::RoutingPlan < ActiveRecord::Base
   has_and_belongs_to_many :routing_groups, join_table: "class4.routing_plan_groups", class_name: 'RoutingGroup'
-  has_many :customers_auths, class_name: CustomersAuth, foreign_key: :routing_plan_id, dependent: :restrict_with_error
-  has_many :static_routes, class_name: Routing::RoutingPlanStaticRoute,
+  has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :routing_plan_id, dependent: :restrict_with_error
+  has_many :static_routes, class_name: 'Routing::RoutingPlanStaticRoute',
            foreign_key: :routing_plan_id, dependent: :delete_all
 
-  has_many :lnp_rules, class_name: Lnp::RoutingPlanLnpRule, foreign_key: :routing_plan_id, dependent: :delete_all
+  has_many :lnp_rules, class_name: 'Lnp::RoutingPlanLnpRule', foreign_key: :routing_plan_id, dependent: :delete_all
   belongs_to :sorting
 
   has_paper_trail class_name: 'AuditLogItem'

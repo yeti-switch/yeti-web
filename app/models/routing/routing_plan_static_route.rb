@@ -14,7 +14,7 @@ class Routing::RoutingPlanStaticRoute < ActiveRecord::Base
   self.table_name='class4.routing_plan_static_routes'
 
   belongs_to :routing_plan
-  belongs_to :vendor, -> { where vendor: true }, class_name: Contractor, foreign_key: :vendor_id
+  belongs_to :vendor, -> { where vendor: true }, class_name: 'Contractor', foreign_key: :vendor_id
 
   has_paper_trail class_name: 'AuditLogItem'
 

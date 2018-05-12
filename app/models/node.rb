@@ -20,7 +20,7 @@ class Node < ActiveRecord::Base
   validates_uniqueness_of :rpc_endpoint
 
   has_many :events, dependent: :destroy
-  has_many :registrations, class_name: Equipment::Registration, dependent: :restrict_with_error
+  has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error
 
   has_paper_trail class_name: 'AuditLogItem'
 

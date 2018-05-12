@@ -148,8 +148,8 @@ class Cdr::Cdr < Cdr::Base
 
   belongs_to :rateplan
   belongs_to :routing_group
-  belongs_to :src_area, class_name: Routing::Area, foreign_key: :src_area_id
-  belongs_to :dst_area, class_name: Routing::Area, foreign_key: :dst_area_id
+  belongs_to :src_area, class_name: 'Routing::Area', foreign_key: :src_area_id
+  belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id
   belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
@@ -170,10 +170,10 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :dump_level
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
-  belongs_to :lnp_database, class_name: Lnp::Database, foreign_key: :lnp_database_id
-  belongs_to :auth_orig_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :auth_orig_transport_protocol_id
-  belongs_to :sign_orig_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :sign_orig_transport_protocol_id
-  belongs_to :sign_term_transport_protocol, class_name: Equipment::TransportProtocol, foreign_key: :sign_term_transport_protocol_id
+  belongs_to :lnp_database, class_name: 'Lnp::Database', foreign_key: :lnp_database_id
+  belongs_to :auth_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :auth_orig_transport_protocol_id
+  belongs_to :sign_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_orig_transport_protocol_id
+  belongs_to :sign_term_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_term_transport_protocol_id
 
   default_scope { order('time_start desc') }
 

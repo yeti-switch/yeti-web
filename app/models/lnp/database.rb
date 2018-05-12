@@ -17,7 +17,7 @@
 class Lnp::Database < Yeti::ActiveRecord
   self.table_name = 'class4.lnp_databases'
 
-  belongs_to :driver, class_name: Lnp::DatabaseDriver, foreign_key: :driver_id
+  belongs_to :driver, class_name: 'Lnp::DatabaseDriver', foreign_key: :driver_id
   validates_presence_of :driver, :name, :host
   validates_uniqueness_of :name
 

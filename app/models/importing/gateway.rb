@@ -140,10 +140,10 @@ class Importing::Gateway  < Importing::Base
   belongs_to :sensor_level, class_name: '::System::SensorLevel',foreign_key: :sensor_level_id
   belongs_to :dtmf_receive_mode, class_name: '::System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: '::System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
-  belongs_to :transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :transport_protocol_id
-  belongs_to :term_proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :term_proxy_transport_protocol_id
-  belongs_to :orig_proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :orig_proxy_transport_protocol_id
-  belongs_to :rel100_mode, class_name: ::Equipment::GatewayRel100Mode, foreign_key: :rel100_mode_id
+  belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id
+  belongs_to :term_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
+  belongs_to :orig_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
+  belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
 
   self.import_attributes = [
       'name','enabled',

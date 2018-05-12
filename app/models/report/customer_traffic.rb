@@ -12,9 +12,9 @@
 class Report::CustomerTraffic < Cdr::Base
   self.table_name = 'reports.customer_traffic_report'
 
-  has_many :customer_traffic_data_by_vendor, class_name: Report::CustomerTrafficDataByVendor, foreign_key: :report_id, dependent: :delete_all
-  has_many :customer_traffic_data_by_destination, class_name: Report::CustomerTrafficDataByDestination, foreign_key: :report_id, dependent: :delete_all
-  has_many :customer_traffic_data_full, class_name: Report::CustomerTrafficDataFull, foreign_key: :report_id, dependent: :delete_all
+  has_many :customer_traffic_data_by_vendor, class_name: 'Report::CustomerTrafficDataByVendor', foreign_key: :report_id, dependent: :delete_all
+  has_many :customer_traffic_data_by_destination, class_name: 'Report::CustomerTrafficDataByDestination', foreign_key: :report_id, dependent: :delete_all
+  has_many :customer_traffic_data_full, class_name: 'Report::CustomerTrafficDataFull', foreign_key: :report_id, dependent: :delete_all
 
   belongs_to :customer, -> { where customer: true }, class_name: 'Contractor', foreign_key: :customer_id
 

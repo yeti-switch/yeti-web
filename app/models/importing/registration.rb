@@ -32,10 +32,10 @@ class Importing::Registration < Importing::Base
   self.table_name = 'data_import.import_registrations'
   attr_accessor :file
 
-  belongs_to :pop, class_name: ::Pop
-  belongs_to :node, class_name: ::Node
-  belongs_to :transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :transport_protocol_id
-  belongs_to :proxy_transport_protocol, class_name: ::Equipment::TransportProtocol, foreign_key: :proxy_transport_protocol_id
+  belongs_to :pop, class_name: '::Pop'
+  belongs_to :node, class_name: '::Node'
+  belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id
+  belongs_to :proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
 
   self.import_attributes = ['name', 'enabled',
                             'pop_id', 'node_id', 'domain',
