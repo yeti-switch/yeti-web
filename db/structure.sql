@@ -2,7 +2,6 @@ SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
@@ -209,11 +208,13 @@ CREATE EXTENSION IF NOT EXISTS yeti WITH SCHEMA yeti_ext;
 COMMENT ON EXTENSION yeti IS 'helper functions for YETI project';
 
 
+SET search_path = billing, pg_catalog;
+
 --
 -- Name: cdr_v1; Type: TYPE; Schema: billing; Owner: -
 --
 
-CREATE TYPE billing.cdr_v1 AS (
+CREATE TYPE cdr_v1 AS (
 	id bigint,
 	customer_id integer,
 	vendor_id integer,
@@ -300,7 +301,7 @@ CREATE TYPE billing.cdr_v1 AS (
 -- Name: cdr_v2; Type: TYPE; Schema: billing; Owner: -
 --
 
-CREATE TYPE billing.cdr_v2 AS (
+CREATE TYPE cdr_v2 AS (
 	id bigint,
 	customer_id integer,
 	vendor_id integer,
@@ -348,11 +349,13 @@ CREATE TYPE billing.cdr_v2 AS (
 );
 
 
+SET search_path = switch13, pg_catalog;
+
 --
 -- Name: callprofile45_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile45_ty AS (
+CREATE TYPE callprofile45_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -526,7 +529,7 @@ CREATE TYPE switch13.callprofile45_ty AS (
 -- Name: callprofile46_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile46_ty AS (
+CREATE TYPE callprofile46_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -706,7 +709,7 @@ CREATE TYPE switch13.callprofile46_ty AS (
 -- Name: callprofile47_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile47_ty AS (
+CREATE TYPE callprofile47_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -887,7 +890,7 @@ CREATE TYPE switch13.callprofile47_ty AS (
 -- Name: callprofile48_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile48_ty AS (
+CREATE TYPE callprofile48_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -1070,7 +1073,7 @@ CREATE TYPE switch13.callprofile48_ty AS (
 -- Name: callprofile49_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile49_ty AS (
+CREATE TYPE callprofile49_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -1256,7 +1259,7 @@ CREATE TYPE switch13.callprofile49_ty AS (
 -- Name: callprofile50_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile50_ty AS (
+CREATE TYPE callprofile50_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -1445,7 +1448,7 @@ CREATE TYPE switch13.callprofile50_ty AS (
 -- Name: callprofile51_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile51_ty AS (
+CREATE TYPE callprofile51_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	"from" character varying,
@@ -1638,7 +1641,7 @@ CREATE TYPE switch13.callprofile51_ty AS (
 -- Name: callprofile52_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile52_ty AS (
+CREATE TYPE callprofile52_ty AS (
 	ruri character varying,
 	ruri_host character varying,
 	bleg_transport_protocol_id smallint,
@@ -1834,7 +1837,7 @@ CREATE TYPE switch13.callprofile52_ty AS (
 -- Name: callprofile53_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile53_ty AS (
+CREATE TYPE callprofile53_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -2030,7 +2033,7 @@ CREATE TYPE switch13.callprofile53_ty AS (
 -- Name: callprofile54_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile54_ty AS (
+CREATE TYPE callprofile54_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -2228,7 +2231,7 @@ CREATE TYPE switch13.callprofile54_ty AS (
 -- Name: callprofile55_ty; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.callprofile55_ty AS (
+CREATE TYPE callprofile55_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -2436,17 +2439,19 @@ CREATE TYPE switch13.callprofile55_ty AS (
 -- Name: lnp_resolve; Type: TYPE; Schema: switch13; Owner: -
 --
 
-CREATE TYPE switch13.lnp_resolve AS (
+CREATE TYPE lnp_resolve AS (
 	lrn text,
 	tag text
 );
 
 
+SET search_path = switch14, pg_catalog;
+
 --
 -- Name: callprofile56_ty; Type: TYPE; Schema: switch14; Owner: -
 --
 
-CREATE TYPE switch14.callprofile56_ty AS (
+CREATE TYPE callprofile56_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -2659,7 +2664,7 @@ CREATE TYPE switch14.callprofile56_ty AS (
 -- Name: callprofile57_ty; Type: TYPE; Schema: switch14; Owner: -
 --
 
-CREATE TYPE switch14.callprofile57_ty AS (
+CREATE TYPE callprofile57_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -2873,17 +2878,19 @@ CREATE TYPE switch14.callprofile57_ty AS (
 -- Name: lnp_resolve; Type: TYPE; Schema: switch14; Owner: -
 --
 
-CREATE TYPE switch14.lnp_resolve AS (
+CREATE TYPE lnp_resolve AS (
 	lrn text,
 	tag text
 );
 
 
+SET search_path = switch15, pg_catalog;
+
 --
 -- Name: callprofile56_ty; Type: TYPE; Schema: switch15; Owner: -
 --
 
-CREATE TYPE switch15.callprofile56_ty AS (
+CREATE TYPE callprofile56_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -3096,7 +3103,7 @@ CREATE TYPE switch15.callprofile56_ty AS (
 -- Name: callprofile57_ty; Type: TYPE; Schema: switch15; Owner: -
 --
 
-CREATE TYPE switch15.callprofile57_ty AS (
+CREATE TYPE callprofile57_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -3310,7 +3317,7 @@ CREATE TYPE switch15.callprofile57_ty AS (
 -- Name: callprofile58_ty; Type: TYPE; Schema: switch15; Owner: -
 --
 
-CREATE TYPE switch15.callprofile58_ty AS (
+CREATE TYPE callprofile58_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -3530,17 +3537,19 @@ CREATE TYPE switch15.callprofile58_ty AS (
 -- Name: lnp_resolve; Type: TYPE; Schema: switch15; Owner: -
 --
 
-CREATE TYPE switch15.lnp_resolve AS (
+CREATE TYPE lnp_resolve AS (
 	lrn text,
 	tag text
 );
 
 
+SET search_path = switch16, pg_catalog;
+
 --
 -- Name: callprofile56_ty; Type: TYPE; Schema: switch16; Owner: -
 --
 
-CREATE TYPE switch16.callprofile56_ty AS (
+CREATE TYPE callprofile56_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -3753,7 +3762,7 @@ CREATE TYPE switch16.callprofile56_ty AS (
 -- Name: callprofile57_ty; Type: TYPE; Schema: switch16; Owner: -
 --
 
-CREATE TYPE switch16.callprofile57_ty AS (
+CREATE TYPE callprofile57_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -3967,7 +3976,7 @@ CREATE TYPE switch16.callprofile57_ty AS (
 -- Name: callprofile58_ty; Type: TYPE; Schema: switch16; Owner: -
 --
 
-CREATE TYPE switch16.callprofile58_ty AS (
+CREATE TYPE callprofile58_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -4187,7 +4196,7 @@ CREATE TYPE switch16.callprofile58_ty AS (
 -- Name: callprofile59_ty; Type: TYPE; Schema: switch16; Owner: -
 --
 
-CREATE TYPE switch16.callprofile59_ty AS (
+CREATE TYPE callprofile59_ty AS (
 	ruri character varying,
 	bleg_transport_protocol_id smallint,
 	"from" character varying,
@@ -4409,17 +4418,19 @@ CREATE TYPE switch16.callprofile59_ty AS (
 -- Name: lnp_resolve; Type: TYPE; Schema: switch16; Owner: -
 --
 
-CREATE TYPE switch16.lnp_resolve AS (
+CREATE TYPE lnp_resolve AS (
 	lrn text,
 	tag text
 );
 
 
+SET search_path = billing, pg_catalog;
+
 --
 -- Name: account_change_iu_tgf(); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.account_change_iu_tgf() RETURNS trigger
+CREATE FUNCTION account_change_iu_tgf() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -4473,7 +4484,7 @@ SET default_with_oids = false;
 -- Name: accounts; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE billing.accounts (
+CREATE TABLE accounts (
     id integer NOT NULL,
     contractor_id integer NOT NULL,
     balance numeric NOT NULL,
@@ -4502,10 +4513,10 @@ CREATE TABLE billing.accounts (
 
 
 --
--- Name: balance_notify(character varying, character varying, billing.accounts); Type: FUNCTION; Schema: billing; Owner: -
+-- Name: balance_notify(character varying, character varying, accounts); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.balance_notify(i_type character varying, i_action character varying, i_account billing.accounts) RETURNS void
+CREATE FUNCTION balance_notify(i_type character varying, i_action character varying, i_account accounts) RETURNS void
     LANGUAGE plpgsql
     AS $$
 begin
@@ -4519,7 +4530,7 @@ $$;
 -- Name: bill_account(integer, numeric); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.bill_account(i_account_id integer, i_amount numeric) RETURNS boolean
+CREATE FUNCTION bill_account(i_account_id integer, i_amount numeric) RETURNS boolean
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -4534,10 +4545,10 @@ $$;
 
 
 --
--- Name: bill_cdr(billing.cdr_v2); Type: FUNCTION; Schema: billing; Owner: -
+-- Name: bill_cdr(cdr_v2); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.bill_cdr(i_cdr billing.cdr_v2) RETURNS void
+CREATE FUNCTION bill_cdr(i_cdr cdr_v2) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -4563,7 +4574,7 @@ $$;
 -- Name: bill_cdr_batch(bigint, text, integer); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.bill_cdr_batch(i_batch_id bigint, i_data text, i_data_version integer DEFAULT 2) RETURNS void
+CREATE FUNCTION bill_cdr_batch(i_batch_id bigint, i_data text, i_data_version integer DEFAULT 2) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -4616,7 +4627,7 @@ $$;
 -- Name: clean_cdr_batch(); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.clean_cdr_batch() RETURNS void
+CREATE FUNCTION clean_cdr_batch() RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -4631,7 +4642,7 @@ $$;
 -- Name: unbill_cdr(bigint); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.unbill_cdr(i_cdr_id bigint) RETURNS void
+CREATE FUNCTION unbill_cdr(i_cdr_id bigint) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -4645,11 +4656,13 @@ END;
 $$;
 
 
+SET search_path = class4, pg_catalog;
+
 --
 -- Name: cdrs_i_tgf(); Type: FUNCTION; Schema: class4; Owner: -
 --
 
-CREATE FUNCTION class4.cdrs_i_tgf() RETURNS trigger
+CREATE FUNCTION cdrs_i_tgf() RETURNS trigger
     LANGUAGE plpgsql
     AS $$ 
 BEGIN  IF ( NEW.time_start >= DATE '2013-01-01' AND NEW.time_start < DATE '2013-02-01' ) THEN INSERT INTO class4.cdrs_201301 VALUES (NEW.*);
@@ -4677,11 +4690,13 @@ RETURN NULL;
 END; $$;
 
 
+SET search_path = data_import, pg_catalog;
+
 --
 -- Name: accounts_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.accounts_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION accounts_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4700,7 +4715,7 @@ $$;
 -- Name: contractors_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.contractors_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION contractors_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4714,7 +4729,7 @@ $$;
 -- Name: customers_auth_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.customers_auth_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION customers_auth_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4769,7 +4784,7 @@ $$;
 -- Name: destinations_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.destinations_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION destinations_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4793,7 +4808,7 @@ $$;
 -- Name: dialpeers_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.dialpeers_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION dialpeers_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4828,7 +4843,7 @@ $$;
 -- Name: disconnect_policies_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.disconnect_policies_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION disconnect_policies_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4842,7 +4857,7 @@ $$;
 -- Name: gateway_groups_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.gateway_groups_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION gateway_groups_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4861,7 +4876,7 @@ $$;
 -- Name: gateways_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.gateways_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION gateways_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4899,7 +4914,7 @@ $$;
 -- Name: rateplans_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.rateplans_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION rateplans_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4913,7 +4928,7 @@ $$;
 -- Name: registrations_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.registrations_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION registrations_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4939,7 +4954,7 @@ $$;
 -- Name: resolve_object_id(character varying, character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.resolve_object_id(i_table_name character varying, i_unique_fields character varying[]) RETURNS void
+CREATE FUNCTION resolve_object_id(i_table_name character varying, i_unique_fields character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -4980,7 +4995,7 @@ $$;
 -- Name: resolve_object_id(character varying, character varying, character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.resolve_object_id(i_from_table character varying, i_to_table character varying, i_unique_fields character varying[]) RETURNS void
+CREATE FUNCTION resolve_object_id(i_from_table character varying, i_to_table character varying, i_unique_fields character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -5021,7 +5036,7 @@ $$;
 -- Name: routing_groups_handler(character varying[]); Type: FUNCTION; Schema: data_import; Owner: -
 --
 
-CREATE FUNCTION data_import.routing_groups_handler(i_uf character varying[]) RETURNS void
+CREATE FUNCTION routing_groups_handler(i_uf character varying[]) RETURNS void
     LANGUAGE plpgsql COST 6000
     AS $$
 DECLARE
@@ -5036,11 +5051,13 @@ END;
 $$;
 
 
+SET search_path = public, pg_catalog;
+
 --
 -- Name: rewrite_dst(character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.rewrite_dst(i_dst character varying) RETURNS character varying
+CREATE FUNCTION rewrite_dst(i_dst character varying) RETURNS character varying
     LANGUAGE sql
     AS $_$
         SELECT CASE
@@ -5065,7 +5082,7 @@ $_$;
 -- Name: rtest(); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.rtest() RETURNS SETOF integer
+CREATE FUNCTION rtest() RETURNS SETOF integer
     LANGUAGE plpgsql
     AS $$
 declare
@@ -5080,11 +5097,13 @@ end
 $$;
 
 
+SET search_path = runtime_stats, pg_catalog;
+
 --
 -- Name: update_dp(bigint, bigint, boolean, integer); Type: FUNCTION; Schema: runtime_stats; Owner: -
 --
 
-CREATE FUNCTION runtime_stats.update_dp(i_destination_id bigint, i_dialpeer_id bigint, i_success boolean, i_duration integer) RETURNS void
+CREATE FUNCTION update_dp(i_destination_id bigint, i_dialpeer_id bigint, i_success boolean, i_duration integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -5133,7 +5152,7 @@ $$;
 -- Name: update_gw(integer, integer, boolean, integer); Type: FUNCTION; Schema: runtime_stats; Owner: -
 --
 
-CREATE FUNCTION runtime_stats.update_gw(i_orig_gw_id integer, i_term_gw_id integer, i_success boolean, i_duration integer) RETURNS void
+CREATE FUNCTION update_gw(i_orig_gw_id integer, i_term_gw_id integer, i_success boolean, i_duration integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -5178,11 +5197,13 @@ END;
 $$;
 
 
+SET search_path = switch13, pg_catalog;
+
 --
 -- Name: cache_lnp_data(smallint, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
+CREATE FUNCTION cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -5205,7 +5226,7 @@ $$;
 -- Name: check_event(integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.check_event(i_event_id integer) RETURNS boolean
+CREATE FUNCTION check_event(i_event_id integer) RETURNS boolean
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5219,7 +5240,7 @@ $$;
 -- Name: debug(smallint, inet, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, boolean, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
 DECLARE
@@ -5300,11 +5321,13 @@ END;
 $$;
 
 
+SET search_path = sys, pg_catalog;
+
 --
 -- Name: network_prefixes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.network_prefixes (
+CREATE TABLE network_prefixes (
     id integer NOT NULL,
     prefix character varying NOT NULL,
     network_id integer NOT NULL,
@@ -5312,11 +5335,13 @@ CREATE TABLE sys.network_prefixes (
 );
 
 
+SET search_path = switch13, pg_catalog;
+
 --
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+CREATE FUNCTION detect_network(i_dst character varying) RETURNS sys.network_prefixes
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -5338,7 +5363,7 @@ $$;
 -- Name: init(integer, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.init(i_node_id integer, i_pop_id integer) RETURNS void
+CREATE FUNCTION init(i_node_id integer, i_pop_id integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -5359,7 +5384,7 @@ $$;
 -- Name: lnp_resolve(smallint, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
+CREATE FUNCTION lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5372,7 +5397,7 @@ $$;
 -- Name: lnp_resolve_tagged(smallint, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS switch13.lnp_resolve
+CREATE FUNCTION lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS lnp_resolve
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5385,7 +5410,7 @@ $$;
 -- Name: load_codecs(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
+CREATE FUNCTION load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5404,21 +5429,25 @@ END;
 $$;
 
 
+SET search_path = class4, pg_catalog;
+
 --
 -- Name: disconnect_code_namespace; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.disconnect_code_namespace (
+CREATE TABLE disconnect_code_namespace (
     id integer NOT NULL,
     name character varying NOT NULL
 );
 
 
+SET search_path = switch13, pg_catalog;
+
 --
 -- Name: load_disconnect_code_namespace(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
+CREATE FUNCTION load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -5432,7 +5461,7 @@ $$;
 -- Name: load_disconnect_code_refuse(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5449,7 +5478,7 @@ $$;
 -- Name: load_disconnect_code_rerouting(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -5466,7 +5495,7 @@ $$;
 -- Name: load_disconnect_code_rerouting_overrides(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -5485,7 +5514,7 @@ $$;
 -- Name: load_disconnect_code_rewrite(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5502,7 +5531,7 @@ $$;
 -- Name: load_disconnect_code_rewrite_override(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_rewrite_override() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite_override() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5521,7 +5550,7 @@ $$;
 -- Name: load_disconnect_code_rewrite_overrides(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5540,7 +5569,7 @@ $$;
 -- Name: load_interface_in(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
+CREATE FUNCTION load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5553,7 +5582,7 @@ $$;
 -- Name: load_interface_out(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
+CREATE FUNCTION load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5566,7 +5595,7 @@ $$;
 -- Name: load_lnp_databases(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
+CREATE FUNCTION load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5580,7 +5609,7 @@ $$;
 -- Name: load_radius_accounting_profiles(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
+CREATE FUNCTION load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5610,7 +5639,7 @@ $$;
 -- Name: load_radius_profiles(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
+CREATE FUNCTION load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5627,7 +5656,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
+CREATE FUNCTION load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -5662,7 +5691,7 @@ $$;
 -- Name: resource_type; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch13.resource_type (
+CREATE TABLE resource_type (
     id integer NOT NULL,
     name character varying NOT NULL,
     reject_code integer,
@@ -5675,7 +5704,7 @@ CREATE TABLE switch13.resource_type (
 -- Name: load_resource_types(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_resource_types() RETURNS SETOF switch13.resource_type
+CREATE FUNCTION load_resource_types() RETURNS SETOF resource_type
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 
@@ -5689,7 +5718,7 @@ $$;
 -- Name: load_sensor(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
+CREATE FUNCTION load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -5713,7 +5742,7 @@ $$;
 -- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
+CREATE FUNCTION load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -5726,7 +5755,7 @@ $$;
 -- Name: new_profile(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.new_profile() RETURNS switch13.callprofile55_ty
+CREATE FUNCTION new_profile() RETURNS callprofile55_ty
     LANGUAGE plpgsql COST 10
     AS $_$
 DECLARE
@@ -5871,7 +5900,7 @@ $_$;
 -- Name: preprocess(character varying, character varying, boolean); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
+CREATE FUNCTION preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -5928,7 +5957,7 @@ $$;
 -- Name: preprocess_all(); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.preprocess_all() RETURNS void
+CREATE FUNCTION preprocess_all() RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -5945,11 +5974,13 @@ END;
 $$;
 
 
+SET search_path = class4, pg_catalog;
+
 --
 -- Name: destinations; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.destinations (
+CREATE TABLE destinations (
     id bigint NOT NULL,
     enabled boolean NOT NULL,
     prefix character varying NOT NULL,
@@ -5990,7 +6021,7 @@ CREATE TABLE class4.destinations (
 -- Name: dialpeers; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.dialpeers (
+CREATE TABLE dialpeers (
     id bigint NOT NULL,
     enabled boolean NOT NULL,
     prefix character varying NOT NULL,
@@ -6041,7 +6072,7 @@ CREATE TABLE class4.dialpeers (
 -- Name: gateways; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.gateways (
+CREATE TABLE gateways (
     id integer NOT NULL,
     host character varying,
     port integer,
@@ -6154,11 +6185,13 @@ CREATE TABLE class4.gateways (
 );
 
 
+SET search_path = switch13, pg_catalog;
+
 --
--- Name: process_dp(switch13.callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
+-- Name: process_dp(callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.process_dp(i_profile switch13.callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION process_dp(i_profile callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -6238,10 +6271,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch13.callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
+-- Name: process_dp_debug(callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.process_dp_debug(i_profile switch13.callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION process_dp_debug(i_profile callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -6308,10 +6341,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch13.callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
+-- Name: process_dp_release(callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.process_dp_release(i_profile switch13.callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION process_dp_release(i_profile callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -6362,10 +6395,10 @@ $$;
 
 
 --
--- Name: process_gw(switch13.callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
+-- Name: process_gw(callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.process_gw(i_profile switch13.callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch13.callprofile55_ty
+CREATE FUNCTION process_gw(i_profile callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile55_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -6744,10 +6777,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch13.callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
+-- Name: process_gw_debug(callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.process_gw_debug(i_profile switch13.callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch13.callprofile55_ty
+CREATE FUNCTION process_gw_debug(i_profile callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile55_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -7126,10 +7159,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch13.callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
+-- Name: process_gw_release(callprofile55_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.process_gw_release(i_profile switch13.callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch13.callprofile55_ty
+CREATE FUNCTION process_gw_release(i_profile callprofile55_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile55_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -7488,7 +7521,7 @@ $_$;
 -- Name: recompile_interface(integer); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.recompile_interface(i_version integer) RETURNS void
+CREATE FUNCTION recompile_interface(i_version integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -7509,7 +7542,7 @@ $$;
 -- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -8385,7 +8418,7 @@ CREATE FUNCTION switch13.route(i_node_id integer, i_pop_id integer, i_protocol_i
 -- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -9261,7 +9294,7 @@ CREATE FUNCTION switch13.route_debug(i_node_id integer, i_pop_id integer, i_prot
 -- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch13.callprofile55_ty
+CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile55_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -10037,7 +10070,7 @@ CREATE FUNCTION switch13.route_release(i_node_id integer, i_pop_id integer, i_pr
 -- Name: tracelog(class4.destinations); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.tracelog(i_in class4.destinations) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.destinations) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10050,7 +10083,7 @@ $$;
 -- Name: tracelog(class4.dialpeers); Type: FUNCTION; Schema: switch13; Owner: -
 --
 
-CREATE FUNCTION switch13.tracelog(i_in class4.dialpeers) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.dialpeers) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10059,11 +10092,13 @@ END;
 $$;
 
 
+SET search_path = switch14, pg_catalog;
+
 --
 -- Name: cache_lnp_data(smallint, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
+CREATE FUNCTION cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -10086,7 +10121,7 @@ $$;
 -- Name: check_event(integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.check_event(i_event_id integer) RETURNS boolean
+CREATE FUNCTION check_event(i_event_id integer) RETURNS boolean
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10100,7 +10135,7 @@ $$;
 -- Name: debug(smallint, inet, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, boolean, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
 DECLARE
@@ -10187,7 +10222,7 @@ $$;
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+CREATE FUNCTION detect_network(i_dst character varying) RETURNS sys.network_prefixes
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -10209,7 +10244,7 @@ $$;
 -- Name: init(integer, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.init(i_node_id integer, i_pop_id integer) RETURNS void
+CREATE FUNCTION init(i_node_id integer, i_pop_id integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -10230,7 +10265,7 @@ $$;
 -- Name: lnp_resolve(smallint, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
+CREATE FUNCTION lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10243,7 +10278,7 @@ $$;
 -- Name: lnp_resolve_tagged(smallint, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS switch14.lnp_resolve
+CREATE FUNCTION lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS lnp_resolve
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10256,7 +10291,7 @@ $$;
 -- Name: load_codecs(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
+CREATE FUNCTION load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10279,7 +10314,7 @@ $$;
 -- Name: load_disconnect_code_namespace(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
+CREATE FUNCTION load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -10293,7 +10328,7 @@ $$;
 -- Name: load_disconnect_code_refuse(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10310,7 +10345,7 @@ $$;
 -- Name: load_disconnect_code_rerouting(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -10327,7 +10362,7 @@ $$;
 -- Name: load_disconnect_code_rerouting_overrides(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -10346,7 +10381,7 @@ $$;
 -- Name: load_disconnect_code_rewrite(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10363,7 +10398,7 @@ $$;
 -- Name: load_disconnect_code_rewrite_override(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_rewrite_override() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite_override() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10382,7 +10417,7 @@ $$;
 -- Name: load_disconnect_code_rewrite_overrides(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10401,7 +10436,7 @@ $$;
 -- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+CREATE FUNCTION load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 BEGIN
@@ -10414,7 +10449,7 @@ $$;
 -- Name: load_interface_in(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
+CREATE FUNCTION load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10427,7 +10462,7 @@ $$;
 -- Name: load_interface_out(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
+CREATE FUNCTION load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10440,7 +10475,7 @@ $$;
 -- Name: load_lnp_databases(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
+CREATE FUNCTION load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10454,7 +10489,7 @@ $$;
 -- Name: load_radius_accounting_profiles(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
+CREATE FUNCTION load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10484,7 +10519,7 @@ $$;
 -- Name: load_radius_profiles(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
+CREATE FUNCTION load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10501,7 +10536,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
+CREATE FUNCTION load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -10536,7 +10571,7 @@ $$;
 -- Name: resource_type; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch14.resource_type (
+CREATE TABLE resource_type (
     id integer NOT NULL,
     name character varying NOT NULL,
     reject_code integer,
@@ -10549,7 +10584,7 @@ CREATE TABLE switch14.resource_type (
 -- Name: load_resource_types(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_resource_types() RETURNS SETOF switch14.resource_type
+CREATE FUNCTION load_resource_types() RETURNS SETOF resource_type
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 
@@ -10563,7 +10598,7 @@ $$;
 -- Name: load_sensor(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
+CREATE FUNCTION load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -10587,7 +10622,7 @@ $$;
 -- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
+CREATE FUNCTION load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -10600,7 +10635,7 @@ $$;
 -- Name: new_profile(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.new_profile() RETURNS switch14.callprofile56_ty
+CREATE FUNCTION new_profile() RETURNS callprofile56_ty
     LANGUAGE plpgsql COST 10
     AS $_$
 DECLARE
@@ -10745,7 +10780,7 @@ $_$;
 -- Name: preprocess(character varying, character varying, boolean); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
+CREATE FUNCTION preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -10802,7 +10837,7 @@ $$;
 -- Name: preprocess_all(); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.preprocess_all() RETURNS void
+CREATE FUNCTION preprocess_all() RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -10820,10 +10855,10 @@ $$;
 
 
 --
--- Name: process_dp(switch14.callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_dp(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.process_dp(i_profile switch14.callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION process_dp(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -10903,10 +10938,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch14.callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_dp_debug(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.process_dp_debug(i_profile switch14.callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION process_dp_debug(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -10973,10 +11008,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch14.callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_dp_release(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.process_dp_release(i_profile switch14.callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION process_dp_release(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -11027,10 +11062,10 @@ $$;
 
 
 --
--- Name: process_gw(switch14.callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_gw(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.process_gw(i_profile switch14.callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch14.callprofile57_ty
+CREATE FUNCTION process_gw(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -11412,10 +11447,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch14.callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_gw_debug(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.process_gw_debug(i_profile switch14.callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch14.callprofile57_ty
+CREATE FUNCTION process_gw_debug(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -11797,10 +11832,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch14.callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
+-- Name: process_gw_release(callprofile57_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.process_gw_release(i_profile switch14.callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch14.callprofile57_ty
+CREATE FUNCTION process_gw_release(i_profile callprofile57_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile57_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -12162,7 +12197,7 @@ $_$;
 -- Name: recompile_interface(integer); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.recompile_interface(i_version integer) RETURNS void
+CREATE FUNCTION recompile_interface(i_version integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -12183,7 +12218,7 @@ $$;
 -- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -13106,7 +13141,7 @@ CREATE FUNCTION switch14.route(i_node_id integer, i_pop_id integer, i_protocol_i
 -- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -14029,7 +14064,7 @@ CREATE FUNCTION switch14.route_debug(i_node_id integer, i_pop_id integer, i_prot
 -- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch14.callprofile57_ty
+CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile57_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -14849,7 +14884,7 @@ CREATE FUNCTION switch14.route_release(i_node_id integer, i_pop_id integer, i_pr
 -- Name: tracelog(class4.destinations); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.tracelog(i_in class4.destinations) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.destinations) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -14862,7 +14897,7 @@ $$;
 -- Name: tracelog(class4.dialpeers); Type: FUNCTION; Schema: switch14; Owner: -
 --
 
-CREATE FUNCTION switch14.tracelog(i_in class4.dialpeers) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.dialpeers) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -14871,11 +14906,13 @@ END;
 $$;
 
 
+SET search_path = switch15, pg_catalog;
+
 --
 -- Name: cache_lnp_data(smallint, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
+CREATE FUNCTION cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -14898,7 +14935,7 @@ $$;
 -- Name: check_event(integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.check_event(i_event_id integer) RETURNS boolean
+CREATE FUNCTION check_event(i_event_id integer) RETURNS boolean
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -14912,7 +14949,7 @@ $$;
 -- Name: debug(smallint, inet, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, boolean, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
 DECLARE
@@ -14999,7 +15036,7 @@ $$;
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+CREATE FUNCTION detect_network(i_dst character varying) RETURNS sys.network_prefixes
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -15021,7 +15058,7 @@ $$;
 -- Name: init(integer, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.init(i_node_id integer, i_pop_id integer) RETURNS void
+CREATE FUNCTION init(i_node_id integer, i_pop_id integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -15042,7 +15079,7 @@ $$;
 -- Name: lnp_resolve(smallint, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
+CREATE FUNCTION lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15055,7 +15092,7 @@ $$;
 -- Name: lnp_resolve_tagged(smallint, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS switch15.lnp_resolve
+CREATE FUNCTION lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS lnp_resolve
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15068,7 +15105,7 @@ $$;
 -- Name: load_codecs(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
+CREATE FUNCTION load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15091,7 +15128,7 @@ $$;
 -- Name: load_disconnect_code_namespace(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
+CREATE FUNCTION load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -15105,7 +15142,7 @@ $$;
 -- Name: load_disconnect_code_refuse(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15122,7 +15159,7 @@ $$;
 -- Name: load_disconnect_code_refuse_overrides(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15149,7 +15186,7 @@ $$;
 -- Name: load_disconnect_code_rerouting(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -15166,7 +15203,7 @@ $$;
 -- Name: load_disconnect_code_rerouting_overrides(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -15185,7 +15222,7 @@ $$;
 -- Name: load_disconnect_code_rewrite(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15202,7 +15239,7 @@ $$;
 -- Name: load_disconnect_code_rewrite_overrides(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15221,7 +15258,7 @@ $$;
 -- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+CREATE FUNCTION load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 BEGIN
@@ -15234,7 +15271,7 @@ $$;
 -- Name: load_interface_in(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
+CREATE FUNCTION load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15247,7 +15284,7 @@ $$;
 -- Name: load_interface_out(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
+CREATE FUNCTION load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15260,7 +15297,7 @@ $$;
 -- Name: load_lnp_databases(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
+CREATE FUNCTION load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15274,7 +15311,7 @@ $$;
 -- Name: load_radius_accounting_profiles(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
+CREATE FUNCTION load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15304,7 +15341,7 @@ $$;
 -- Name: load_radius_profiles(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
+CREATE FUNCTION load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15321,7 +15358,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
+CREATE FUNCTION load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -15356,7 +15393,7 @@ $$;
 -- Name: resource_type; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch15.resource_type (
+CREATE TABLE resource_type (
     id integer NOT NULL,
     name character varying NOT NULL,
     internal_code_id integer NOT NULL,
@@ -15368,7 +15405,7 @@ CREATE TABLE switch15.resource_type (
 -- Name: load_resource_types(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_resource_types() RETURNS SETOF switch15.resource_type
+CREATE FUNCTION load_resource_types() RETURNS SETOF resource_type
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 
@@ -15382,7 +15419,7 @@ $$;
 -- Name: load_sensor(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
+CREATE FUNCTION load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15406,7 +15443,7 @@ $$;
 -- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
+CREATE FUNCTION load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -15419,7 +15456,7 @@ $$;
 -- Name: new_profile(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.new_profile() RETURNS switch15.callprofile58_ty
+CREATE FUNCTION new_profile() RETURNS callprofile58_ty
     LANGUAGE plpgsql COST 10
     AS $_$
 DECLARE
@@ -15534,7 +15571,7 @@ $_$;
 -- Name: preprocess(character varying, character varying, boolean); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
+CREATE FUNCTION preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -15591,7 +15628,7 @@ $$;
 -- Name: preprocess_all(); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.preprocess_all() RETURNS void
+CREATE FUNCTION preprocess_all() RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -15609,10 +15646,10 @@ $$;
 
 
 --
--- Name: process_dp(switch15.callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
+-- Name: process_dp(callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.process_dp(i_profile switch15.callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION process_dp(i_profile callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15692,10 +15729,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch15.callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
+-- Name: process_dp_debug(callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.process_dp_debug(i_profile switch15.callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION process_dp_debug(i_profile callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15762,10 +15799,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch15.callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
+-- Name: process_dp_release(callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.process_dp_release(i_profile switch15.callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION process_dp_release(i_profile callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15816,10 +15853,10 @@ $$;
 
 
 --
--- Name: process_gw(switch15.callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
+-- Name: process_gw(callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.process_gw(i_profile switch15.callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch15.callprofile58_ty
+CREATE FUNCTION process_gw(i_profile callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile58_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -16201,10 +16238,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch15.callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
+-- Name: process_gw_debug(callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.process_gw_debug(i_profile switch15.callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch15.callprofile58_ty
+CREATE FUNCTION process_gw_debug(i_profile callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile58_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -16586,10 +16623,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch15.callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
+-- Name: process_gw_release(callprofile58_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.process_gw_release(i_profile switch15.callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch15.callprofile58_ty
+CREATE FUNCTION process_gw_release(i_profile callprofile58_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile58_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -16951,7 +16988,7 @@ $_$;
 -- Name: recompile_interface(integer); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.recompile_interface(i_version integer) RETURNS void
+CREATE FUNCTION recompile_interface(i_version integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -16972,7 +17009,7 @@ $$;
 -- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -17959,7 +17996,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
 -- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -18946,7 +18983,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
 -- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch15.callprofile58_ty
+CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile58_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -19821,7 +19858,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
 -- Name: tracelog(class4.destinations); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.tracelog(i_in class4.destinations) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.destinations) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -19834,7 +19871,7 @@ $$;
 -- Name: tracelog(class4.dialpeers); Type: FUNCTION; Schema: switch15; Owner: -
 --
 
-CREATE FUNCTION switch15.tracelog(i_in class4.dialpeers) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.dialpeers) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -19843,11 +19880,13 @@ END;
 $$;
 
 
+SET search_path = switch16, pg_catalog;
+
 --
 -- Name: cache_lnp_data(smallint, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
+CREATE FUNCTION cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -19870,7 +19909,7 @@ $$;
 -- Name: check_event(integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.check_event(i_event_id integer) RETURNS boolean
+CREATE FUNCTION check_event(i_event_id integer) RETURNS boolean
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -19884,7 +19923,7 @@ $$;
 -- Name: debug(smallint, inet, integer, character varying, character varying, integer, character varying, character varying, character varying, character varying, boolean, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION debug(i_transport_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_src_prefix character varying, i_dst_prefix character varying, i_pop_id integer, i_uri_domain character varying, i_from_domain character varying, i_to_domain character varying, i_x_yeti_auth character varying, i_release_mode boolean DEFAULT false, i_pai character varying DEFAULT NULL::character varying, i_ppi character varying DEFAULT NULL::character varying, i_privacy character varying DEFAULT NULL::character varying, i_rpid character varying DEFAULT NULL::character varying, i_rpid_privacy character varying DEFAULT NULL::character varying) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
 DECLARE
@@ -19971,7 +20010,7 @@ $$;
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+CREATE FUNCTION detect_network(i_dst character varying) RETURNS sys.network_prefixes
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -19993,7 +20032,7 @@ $$;
 -- Name: init(integer, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.init(i_node_id integer, i_pop_id integer) RETURNS void
+CREATE FUNCTION init(i_node_id integer, i_pop_id integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 declare
@@ -20014,7 +20053,7 @@ $$;
 -- Name: lnp_resolve(smallint, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
+CREATE FUNCTION lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20027,7 +20066,7 @@ $$;
 -- Name: lnp_resolve_tagged(smallint, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS switch16.lnp_resolve
+CREATE FUNCTION lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS lnp_resolve
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20040,7 +20079,7 @@ $$;
 -- Name: load_codecs(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
+CREATE FUNCTION load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20063,7 +20102,7 @@ $$;
 -- Name: load_disconnect_code_namespace(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
+CREATE FUNCTION load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -20077,7 +20116,7 @@ $$;
 -- Name: load_disconnect_code_refuse(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20094,7 +20133,7 @@ $$;
 -- Name: load_disconnect_code_refuse_overrides(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20121,7 +20160,7 @@ $$;
 -- Name: load_disconnect_code_rerouting(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -20138,7 +20177,7 @@ $$;
 -- Name: load_disconnect_code_rerouting_overrides(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
+CREATE FUNCTION load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 
@@ -20157,7 +20196,7 @@ $$;
 -- Name: load_disconnect_code_rewrite(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20174,7 +20213,7 @@ $$;
 -- Name: load_disconnect_code_rewrite_overrides(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+CREATE FUNCTION load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20193,7 +20232,7 @@ $$;
 -- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+CREATE FUNCTION load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 BEGIN
@@ -20206,7 +20245,7 @@ $$;
 -- Name: load_interface_in(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
+CREATE FUNCTION load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20219,7 +20258,7 @@ $$;
 -- Name: load_interface_out(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
+CREATE FUNCTION load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20232,7 +20271,7 @@ $$;
 -- Name: load_lnp_databases(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
+CREATE FUNCTION load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20246,7 +20285,7 @@ $$;
 -- Name: load_radius_accounting_profiles(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
+CREATE FUNCTION load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20276,7 +20315,7 @@ $$;
 -- Name: load_radius_profiles(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
+CREATE FUNCTION load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20293,7 +20332,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
+CREATE FUNCTION load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -20328,7 +20367,7 @@ $$;
 -- Name: resource_type; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch16.resource_type (
+CREATE TABLE resource_type (
     id integer NOT NULL,
     name character varying NOT NULL,
     internal_code_id integer NOT NULL,
@@ -20340,7 +20379,7 @@ CREATE TABLE switch16.resource_type (
 -- Name: load_resource_types(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_resource_types() RETURNS SETOF switch16.resource_type
+CREATE FUNCTION load_resource_types() RETURNS SETOF resource_type
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 
@@ -20354,7 +20393,7 @@ $$;
 -- Name: load_sensor(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
+CREATE FUNCTION load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -20378,7 +20417,7 @@ $$;
 -- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
+CREATE FUNCTION load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -20391,7 +20430,7 @@ $$;
 -- Name: new_profile(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.new_profile() RETURNS switch16.callprofile59_ty
+CREATE FUNCTION new_profile() RETURNS callprofile59_ty
     LANGUAGE plpgsql COST 10
     AS $_$
 DECLARE
@@ -20506,7 +20545,7 @@ $_$;
 -- Name: preprocess(character varying, character varying, boolean); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
+CREATE FUNCTION preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -20563,7 +20602,7 @@ $$;
 -- Name: preprocess_all(); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.preprocess_all() RETURNS void
+CREATE FUNCTION preprocess_all() RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -20581,10 +20620,10 @@ $$;
 
 
 --
--- Name: process_dp(switch16.callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
+-- Name: process_dp(callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.process_dp(i_profile switch16.callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION process_dp(i_profile callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -20696,10 +20735,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch16.callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
+-- Name: process_dp_debug(callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.process_dp_debug(i_profile switch16.callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION process_dp_debug(i_profile callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -20781,10 +20820,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch16.callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
+-- Name: process_dp_release(callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.process_dp_release(i_profile switch16.callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION process_dp_release(i_profile callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -20852,10 +20891,10 @@ $$;
 
 
 --
--- Name: process_gw(switch16.callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
+-- Name: process_gw(callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.process_gw(i_profile switch16.callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch16.callprofile59_ty
+CREATE FUNCTION process_gw(i_profile callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile59_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -21262,10 +21301,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch16.callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
+-- Name: process_gw_debug(callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.process_gw_debug(i_profile switch16.callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch16.callprofile59_ty
+CREATE FUNCTION process_gw_debug(i_profile callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile59_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -21672,10 +21711,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch16.callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
+-- Name: process_gw_release(callprofile59_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.process_gw_release(i_profile switch16.callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch16.callprofile59_ty
+CREATE FUNCTION process_gw_release(i_profile callprofile59_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS callprofile59_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -22062,7 +22101,7 @@ $_$;
 -- Name: recompile_interface(integer); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.recompile_interface(i_version integer) RETURNS void
+CREATE FUNCTION recompile_interface(i_version integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -22083,7 +22122,7 @@ $$;
 -- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -23079,7 +23118,7 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
 -- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -24075,7 +24114,7 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
 -- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch16.callprofile59_ty
+CREATE FUNCTION route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF callprofile59_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
       DECLARE
@@ -24959,7 +24998,7 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
 -- Name: tracelog(class4.destinations); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.tracelog(i_in class4.destinations) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.destinations) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -24972,7 +25011,7 @@ $$;
 -- Name: tracelog(class4.dialpeers); Type: FUNCTION; Schema: switch16; Owner: -
 --
 
-CREATE FUNCTION switch16.tracelog(i_in class4.dialpeers) RETURNS void
+CREATE FUNCTION tracelog(i_in class4.dialpeers) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -24981,11 +25020,13 @@ END;
 $$;
 
 
+SET search_path = sys, pg_catalog;
+
 --
 -- Name: cdr_createtable(integer); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.cdr_createtable(i_offset integer) RETURNS void
+CREATE FUNCTION cdr_createtable(i_offset integer) RETURNS void
     LANGUAGE plpgsql COST 10000
     AS $$
 DECLARE
@@ -25035,7 +25076,7 @@ $$;
 -- Name: cdr_drop_table(character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.cdr_drop_table(i_tbname character varying) RETURNS void
+CREATE FUNCTION cdr_drop_table(i_tbname character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -25059,7 +25100,7 @@ $$;
 -- Name: cdr_export_data(character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.cdr_export_data(i_tbname character varying) RETURNS void
+CREATE FUNCTION cdr_export_data(i_tbname character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -25075,7 +25116,7 @@ $$;
 -- Name: cdr_export_data(character varying, character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.cdr_export_data(i_tbname character varying, i_dir character varying) RETURNS void
+CREATE FUNCTION cdr_export_data(i_tbname character varying, i_dir character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -25091,7 +25132,7 @@ $$;
 -- Name: cdr_reindex(character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.cdr_reindex(i_tbname character varying) RETURNS void
+CREATE FUNCTION cdr_reindex(i_tbname character varying) RETURNS void
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -25150,7 +25191,7 @@ $$;
 -- Name: cdrtable_tgr_reload(); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.cdrtable_tgr_reload() RETURNS void
+CREATE FUNCTION cdrtable_tgr_reload() RETURNS void
     LANGUAGE plpgsql
     AS $_$
 DECLARE
@@ -25195,7 +25236,7 @@ $_$;
 -- Name: checkcode(); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.checkcode() RETURNS TABLE(o_schema character varying, o_name character varying, o_hash character varying)
+CREATE FUNCTION checkcode() RETURNS TABLE(o_schema character varying, o_name character varying, o_hash character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25219,7 +25260,7 @@ $$;
 -- Name: checkstat(); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.checkstat() RETURNS void
+CREATE FUNCTION checkstat() RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25288,7 +25329,7 @@ $$;
 -- Name: codecheck(); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.codecheck() RETURNS TABLE(o_schema character varying, o_name character varying, o_hash character varying)
+CREATE FUNCTION codecheck() RETURNS TABLE(o_schema character varying, o_name character varying, o_hash character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25312,7 +25353,7 @@ $$;
 -- Name: codediff(character varying, smallint, character varying, character varying, character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.codediff(i_host character varying, i_port smallint, i_dbname character varying, i_username character varying, i_password character varying) RETURNS TABLE(o_schema character varying, o_name character varying, o_local_hash character varying, o_remote_hash character varying, o_need_update boolean)
+CREATE FUNCTION codediff(i_host character varying, i_port smallint, i_dbname character varying, i_username character varying, i_password character varying) RETURNS TABLE(o_schema character varying, o_name character varying, o_local_hash character varying, o_remote_hash character varying, o_need_update boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25359,7 +25400,7 @@ $$;
 -- Name: hex_to_int(text); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.hex_to_int(i_hex text, OUT o_dec integer) RETURNS integer
+CREATE FUNCTION hex_to_int(i_hex text, OUT o_dec integer) RETURNS integer
     LANGUAGE plpgsql IMMUTABLE STRICT
     AS $$ 
 BEGIN 
@@ -25372,7 +25413,7 @@ END $$;
 -- Name: logic_log(character varying, integer, character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.logic_log(i_source character varying, i_level integer, i_msg character varying) RETURNS void
+CREATE FUNCTION logic_log(i_source character varying, i_level integer, i_msg character varying) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25387,7 +25428,7 @@ $$;
 -- Name: system_clean(); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.system_clean() RETURNS void
+CREATE FUNCTION system_clean() RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25413,7 +25454,7 @@ $$;
 -- Name: version_check(integer); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.version_check(i_ver integer) RETURNS void
+CREATE FUNCTION version_check(i_ver integer) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25432,7 +25473,7 @@ $$;
 -- Name: version_up(integer, character varying); Type: FUNCTION; Schema: sys; Owner: -
 --
 
-CREATE FUNCTION sys.version_up(i_ver integer, i_comment character varying) RETURNS void
+CREATE FUNCTION version_up(i_ver integer, i_comment character varying) RETURNS void
     LANGUAGE plpgsql COST 10
     AS $$
 DECLARE
@@ -25451,11 +25492,13 @@ END;
 $$;
 
 
+SET search_path = billing, pg_catalog;
+
 --
 -- Name: accounts_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE billing.accounts_id_seq
+CREATE SEQUENCE accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25467,14 +25510,14 @@ CREATE SEQUENCE billing.accounts_id_seq
 -- Name: accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE billing.accounts_id_seq OWNED BY billing.accounts.id;
+ALTER SEQUENCE accounts_id_seq OWNED BY accounts.id;
 
 
 --
 -- Name: cdr_batches; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE billing.cdr_batches (
+CREATE TABLE cdr_batches (
     id bigint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     size integer NOT NULL,
@@ -25486,7 +25529,7 @@ CREATE TABLE billing.cdr_batches (
 -- Name: invoice_periods; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE billing.invoice_periods (
+CREATE TABLE invoice_periods (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -25496,7 +25539,7 @@ CREATE TABLE billing.invoice_periods (
 -- Name: invoice_periods_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE billing.invoice_periods_id_seq
+CREATE SEQUENCE invoice_periods_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25508,14 +25551,14 @@ CREATE SEQUENCE billing.invoice_periods_id_seq
 -- Name: invoice_periods_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE billing.invoice_periods_id_seq OWNED BY billing.invoice_periods.id;
+ALTER SEQUENCE invoice_periods_id_seq OWNED BY invoice_periods.id;
 
 
 --
 -- Name: invoice_templates; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE billing.invoice_templates (
+CREATE TABLE invoice_templates (
     id integer NOT NULL,
     name character varying NOT NULL,
     filename character varying NOT NULL,
@@ -25529,7 +25572,7 @@ CREATE TABLE billing.invoice_templates (
 -- Name: invoices_templates_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE billing.invoices_templates_id_seq
+CREATE SEQUENCE invoices_templates_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25541,14 +25584,14 @@ CREATE SEQUENCE billing.invoices_templates_id_seq
 -- Name: invoices_templates_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE billing.invoices_templates_id_seq OWNED BY billing.invoice_templates.id;
+ALTER SEQUENCE invoices_templates_id_seq OWNED BY invoice_templates.id;
 
 
 --
 -- Name: payments; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
-CREATE TABLE billing.payments (
+CREATE TABLE payments (
     account_id integer NOT NULL,
     amount numeric NOT NULL,
     notes character varying,
@@ -25561,7 +25604,7 @@ CREATE TABLE billing.payments (
 -- Name: payments_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE billing.payments_id_seq
+CREATE SEQUENCE payments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25573,14 +25616,16 @@ CREATE SEQUENCE billing.payments_id_seq
 -- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE billing.payments_id_seq OWNED BY billing.payments.id;
+ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
 
+
+SET search_path = class4, pg_catalog;
 
 --
 -- Name: area_prefixes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.area_prefixes (
+CREATE TABLE area_prefixes (
     id bigint NOT NULL,
     area_id integer NOT NULL,
     prefix character varying NOT NULL
@@ -25591,7 +25636,7 @@ CREATE TABLE class4.area_prefixes (
 -- Name: area_prefixes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.area_prefixes_id_seq
+CREATE SEQUENCE area_prefixes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25603,14 +25648,14 @@ CREATE SEQUENCE class4.area_prefixes_id_seq
 -- Name: area_prefixes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.area_prefixes_id_seq OWNED BY class4.area_prefixes.id;
+ALTER SEQUENCE area_prefixes_id_seq OWNED BY area_prefixes.id;
 
 
 --
 -- Name: areas; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.areas (
+CREATE TABLE areas (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -25620,7 +25665,7 @@ CREATE TABLE class4.areas (
 -- Name: areas_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.areas_id_seq
+CREATE SEQUENCE areas_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25632,14 +25677,14 @@ CREATE SEQUENCE class4.areas_id_seq
 -- Name: areas_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.areas_id_seq OWNED BY class4.areas.id;
+ALTER SEQUENCE areas_id_seq OWNED BY areas.id;
 
 
 --
 -- Name: numberlist_items; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.numberlist_items (
+CREATE TABLE numberlist_items (
     id integer NOT NULL,
     numberlist_id smallint NOT NULL,
     key character varying NOT NULL,
@@ -25663,7 +25708,7 @@ CREATE TABLE class4.numberlist_items (
 -- Name: blacklist_items_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.blacklist_items_id_seq
+CREATE SEQUENCE blacklist_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25675,14 +25720,14 @@ CREATE SEQUENCE class4.blacklist_items_id_seq
 -- Name: blacklist_items_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.blacklist_items_id_seq OWNED BY class4.numberlist_items.id;
+ALTER SEQUENCE blacklist_items_id_seq OWNED BY numberlist_items.id;
 
 
 --
 -- Name: numberlists; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.numberlists (
+CREATE TABLE numberlists (
     id smallint NOT NULL,
     name character varying NOT NULL,
     created_at timestamp with time zone,
@@ -25702,7 +25747,7 @@ CREATE TABLE class4.numberlists (
 -- Name: blacklists_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.blacklists_id_seq
+CREATE SEQUENCE blacklists_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25714,14 +25759,14 @@ CREATE SEQUENCE class4.blacklists_id_seq
 -- Name: blacklists_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.blacklists_id_seq OWNED BY class4.numberlists.id;
+ALTER SEQUENCE blacklists_id_seq OWNED BY numberlists.id;
 
 
 --
 -- Name: codec_group_codecs; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.codec_group_codecs (
+CREATE TABLE codec_group_codecs (
     id integer NOT NULL,
     codec_group_id integer NOT NULL,
     codec_id integer NOT NULL,
@@ -25735,7 +25780,7 @@ CREATE TABLE class4.codec_group_codecs (
 -- Name: codec_group_codecs_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.codec_group_codecs_id_seq
+CREATE SEQUENCE codec_group_codecs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25747,14 +25792,14 @@ CREATE SEQUENCE class4.codec_group_codecs_id_seq
 -- Name: codec_group_codecs_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.codec_group_codecs_id_seq OWNED BY class4.codec_group_codecs.id;
+ALTER SEQUENCE codec_group_codecs_id_seq OWNED BY codec_group_codecs.id;
 
 
 --
 -- Name: codec_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.codec_groups (
+CREATE TABLE codec_groups (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -25764,7 +25809,7 @@ CREATE TABLE class4.codec_groups (
 -- Name: codec_groups_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.codec_groups_id_seq
+CREATE SEQUENCE codec_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25776,14 +25821,14 @@ CREATE SEQUENCE class4.codec_groups_id_seq
 -- Name: codec_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.codec_groups_id_seq OWNED BY class4.codec_groups.id;
+ALTER SEQUENCE codec_groups_id_seq OWNED BY codec_groups.id;
 
 
 --
 -- Name: codecs; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.codecs (
+CREATE TABLE codecs (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -25793,7 +25838,7 @@ CREATE TABLE class4.codecs (
 -- Name: codecs_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.codecs_id_seq
+CREATE SEQUENCE codecs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25805,14 +25850,14 @@ CREATE SEQUENCE class4.codecs_id_seq
 -- Name: codecs_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.codecs_id_seq OWNED BY class4.codecs.id;
+ALTER SEQUENCE codecs_id_seq OWNED BY codecs.id;
 
 
 --
 -- Name: customers_auth; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.customers_auth (
+CREATE TABLE customers_auth (
     id integer NOT NULL,
     customer_id integer NOT NULL,
     rateplan_id integer NOT NULL,
@@ -25870,7 +25915,7 @@ CREATE TABLE class4.customers_auth (
 -- Name: customers_auth_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.customers_auth_id_seq
+CREATE SEQUENCE customers_auth_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25882,14 +25927,14 @@ CREATE SEQUENCE class4.customers_auth_id_seq
 -- Name: customers_auth_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.customers_auth_id_seq OWNED BY class4.customers_auth.id;
+ALTER SEQUENCE customers_auth_id_seq OWNED BY customers_auth.id;
 
 
 --
 -- Name: customers_auth_normalized; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.customers_auth_normalized (
+CREATE TABLE customers_auth_normalized (
     id integer NOT NULL,
     customers_auth_id integer NOT NULL,
     customer_id integer NOT NULL,
@@ -25951,7 +25996,7 @@ CREATE TABLE class4.customers_auth_normalized (
 -- Name: customers_auth_normalized_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.customers_auth_normalized_id_seq
+CREATE SEQUENCE customers_auth_normalized_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25963,14 +26008,53 @@ CREATE SEQUENCE class4.customers_auth_normalized_id_seq
 -- Name: customers_auth_normalized_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.customers_auth_normalized_id_seq OWNED BY class4.customers_auth_normalized.id;
+ALTER SEQUENCE customers_auth_normalized_id_seq OWNED BY customers_auth_normalized.id;
+
+
+--
+-- Name: destination_next_rates; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE destination_next_rates (
+    id bigint NOT NULL,
+    destination_id bigint NOT NULL,
+    initial_rate numeric NOT NULL,
+    next_rate numeric NOT NULL,
+    initial_interval smallint NOT NULL,
+    next_interval smallint NOT NULL,
+    connect_fee numeric NOT NULL,
+    apply_time timestamp with time zone,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone,
+    applied boolean DEFAULT false NOT NULL,
+    external_id bigint
+);
+
+
+--
+-- Name: destination_next_rates_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE destination_next_rates_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: destination_next_rates_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE destination_next_rates_id_seq OWNED BY destination_next_rates.id;
 
 
 --
 -- Name: destination_rate_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.destination_rate_policy (
+CREATE TABLE destination_rate_policy (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -25980,7 +26064,7 @@ CREATE TABLE class4.destination_rate_policy (
 -- Name: destinations_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.destinations_id_seq
+CREATE SEQUENCE destinations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -25992,14 +26076,14 @@ CREATE SEQUENCE class4.destinations_id_seq
 -- Name: destinations_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.destinations_id_seq OWNED BY class4.destinations.id;
+ALTER SEQUENCE destinations_id_seq OWNED BY destinations.id;
 
 
 --
 -- Name: dialpeer_next_rates; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.dialpeer_next_rates (
+CREATE TABLE dialpeer_next_rates (
     id bigint NOT NULL,
     dialpeer_id bigint NOT NULL,
     next_rate numeric NOT NULL,
@@ -26021,7 +26105,7 @@ CREATE TABLE class4.dialpeer_next_rates (
 -- Name: dialpeer_next_rates_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.dialpeer_next_rates_id_seq
+CREATE SEQUENCE dialpeer_next_rates_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26033,14 +26117,14 @@ CREATE SEQUENCE class4.dialpeer_next_rates_id_seq
 -- Name: dialpeer_next_rates_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.dialpeer_next_rates_id_seq OWNED BY class4.dialpeer_next_rates.id;
+ALTER SEQUENCE dialpeer_next_rates_id_seq OWNED BY dialpeer_next_rates.id;
 
 
 --
 -- Name: dialpeers_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.dialpeers_id_seq
+CREATE SEQUENCE dialpeers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26052,14 +26136,14 @@ CREATE SEQUENCE class4.dialpeers_id_seq
 -- Name: dialpeers_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.dialpeers_id_seq OWNED BY class4.dialpeers.id;
+ALTER SEQUENCE dialpeers_id_seq OWNED BY dialpeers.id;
 
 
 --
 -- Name: disconnect_code; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.disconnect_code (
+CREATE TABLE disconnect_code (
     id integer NOT NULL,
     namespace_id integer NOT NULL,
     stop_hunting boolean DEFAULT true NOT NULL,
@@ -26079,7 +26163,7 @@ CREATE TABLE class4.disconnect_code (
 -- Name: disconnect_code_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.disconnect_code_id_seq
+CREATE SEQUENCE disconnect_code_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26091,14 +26175,14 @@ CREATE SEQUENCE class4.disconnect_code_id_seq
 -- Name: disconnect_code_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.disconnect_code_id_seq OWNED BY class4.disconnect_code.id;
+ALTER SEQUENCE disconnect_code_id_seq OWNED BY disconnect_code.id;
 
 
 --
 -- Name: disconnect_policy_code; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.disconnect_policy_code (
+CREATE TABLE disconnect_policy_code (
     id integer NOT NULL,
     policy_id integer NOT NULL,
     code_id integer NOT NULL,
@@ -26113,7 +26197,7 @@ CREATE TABLE class4.disconnect_policy_code (
 -- Name: disconnect_code_policy_codes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.disconnect_code_policy_codes_id_seq
+CREATE SEQUENCE disconnect_code_policy_codes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26125,14 +26209,14 @@ CREATE SEQUENCE class4.disconnect_code_policy_codes_id_seq
 -- Name: disconnect_code_policy_codes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.disconnect_code_policy_codes_id_seq OWNED BY class4.disconnect_policy_code.id;
+ALTER SEQUENCE disconnect_code_policy_codes_id_seq OWNED BY disconnect_policy_code.id;
 
 
 --
 -- Name: disconnect_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.disconnect_policy (
+CREATE TABLE disconnect_policy (
     id integer NOT NULL,
     name character varying
 );
@@ -26142,7 +26226,7 @@ CREATE TABLE class4.disconnect_policy (
 -- Name: disconnect_code_policy_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.disconnect_code_policy_id_seq
+CREATE SEQUENCE disconnect_code_policy_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26154,14 +26238,14 @@ CREATE SEQUENCE class4.disconnect_code_policy_id_seq
 -- Name: disconnect_code_policy_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.disconnect_code_policy_id_seq OWNED BY class4.disconnect_policy.id;
+ALTER SEQUENCE disconnect_code_policy_id_seq OWNED BY disconnect_policy.id;
 
 
 --
 -- Name: disconnect_initiators; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.disconnect_initiators (
+CREATE TABLE disconnect_initiators (
     id integer NOT NULL,
     name character varying
 );
@@ -26171,7 +26255,7 @@ CREATE TABLE class4.disconnect_initiators (
 -- Name: diversion_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.diversion_policy (
+CREATE TABLE diversion_policy (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -26181,7 +26265,7 @@ CREATE TABLE class4.diversion_policy (
 -- Name: dtmf_receive_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.dtmf_receive_modes (
+CREATE TABLE dtmf_receive_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26191,7 +26275,7 @@ CREATE TABLE class4.dtmf_receive_modes (
 -- Name: dtmf_send_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.dtmf_send_modes (
+CREATE TABLE dtmf_send_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26201,7 +26285,7 @@ CREATE TABLE class4.dtmf_send_modes (
 -- Name: dump_level; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.dump_level (
+CREATE TABLE dump_level (
     id integer NOT NULL,
     name character varying NOT NULL,
     log_sip boolean DEFAULT false NOT NULL,
@@ -26213,7 +26297,7 @@ CREATE TABLE class4.dump_level (
 -- Name: filter_types; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.filter_types (
+CREATE TABLE filter_types (
     id integer NOT NULL,
     name character varying
 );
@@ -26223,7 +26307,7 @@ CREATE TABLE class4.filter_types (
 -- Name: gateway_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.gateway_groups (
+CREATE TABLE gateway_groups (
     id integer NOT NULL,
     vendor_id integer NOT NULL,
     name character varying NOT NULL,
@@ -26235,7 +26319,7 @@ CREATE TABLE class4.gateway_groups (
 -- Name: gateway_groups_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.gateway_groups_id_seq
+CREATE SEQUENCE gateway_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26247,14 +26331,14 @@ CREATE SEQUENCE class4.gateway_groups_id_seq
 -- Name: gateway_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.gateway_groups_id_seq OWNED BY class4.gateway_groups.id;
+ALTER SEQUENCE gateway_groups_id_seq OWNED BY gateway_groups.id;
 
 
 --
 -- Name: gateway_inband_dtmf_filtering_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
+CREATE TABLE gateway_inband_dtmf_filtering_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26264,7 +26348,7 @@ CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
 -- Name: gateway_rel100_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.gateway_rel100_modes (
+CREATE TABLE gateway_rel100_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26274,7 +26358,7 @@ CREATE TABLE class4.gateway_rel100_modes (
 -- Name: gateways_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.gateways_id_seq
+CREATE SEQUENCE gateways_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26286,14 +26370,14 @@ CREATE SEQUENCE class4.gateways_id_seq
 -- Name: gateways_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.gateways_id_seq OWNED BY class4.gateways.id;
+ALTER SEQUENCE gateways_id_seq OWNED BY gateways.id;
 
 
 --
 -- Name: lnp_cache; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.lnp_cache (
+CREATE TABLE lnp_cache (
     id integer NOT NULL,
     dst character varying NOT NULL,
     lrn character varying NOT NULL,
@@ -26310,7 +26394,7 @@ CREATE TABLE class4.lnp_cache (
 -- Name: lnp_cache_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.lnp_cache_id_seq
+CREATE SEQUENCE lnp_cache_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26322,14 +26406,14 @@ CREATE SEQUENCE class4.lnp_cache_id_seq
 -- Name: lnp_cache_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.lnp_cache_id_seq OWNED BY class4.lnp_cache.id;
+ALTER SEQUENCE lnp_cache_id_seq OWNED BY lnp_cache.id;
 
 
 --
 -- Name: lnp_databases; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.lnp_databases (
+CREATE TABLE lnp_databases (
     id smallint NOT NULL,
     name character varying NOT NULL,
     host character varying NOT NULL,
@@ -26347,7 +26431,7 @@ CREATE TABLE class4.lnp_databases (
 -- Name: lnp_databases_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.lnp_databases_id_seq
+CREATE SEQUENCE lnp_databases_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26359,14 +26443,14 @@ CREATE SEQUENCE class4.lnp_databases_id_seq
 -- Name: lnp_databases_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.lnp_databases_id_seq OWNED BY class4.lnp_databases.id;
+ALTER SEQUENCE lnp_databases_id_seq OWNED BY lnp_databases.id;
 
 
 --
 -- Name: numberlist_actions; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.numberlist_actions (
+CREATE TABLE numberlist_actions (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26376,7 +26460,7 @@ CREATE TABLE class4.numberlist_actions (
 -- Name: numberlist_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.numberlist_modes (
+CREATE TABLE numberlist_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26386,7 +26470,7 @@ CREATE TABLE class4.numberlist_modes (
 -- Name: radius_accounting_profile_interim_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.radius_accounting_profile_interim_attributes (
+CREATE TABLE radius_accounting_profile_interim_attributes (
     id smallint NOT NULL,
     profile_id smallint NOT NULL,
     type_id smallint NOT NULL,
@@ -26403,7 +26487,7 @@ CREATE TABLE class4.radius_accounting_profile_interim_attributes (
 -- Name: radius_accounting_profile_interim_attributes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.radius_accounting_profile_interim_attributes_id_seq
+CREATE SEQUENCE radius_accounting_profile_interim_attributes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26415,14 +26499,14 @@ CREATE SEQUENCE class4.radius_accounting_profile_interim_attributes_id_seq
 -- Name: radius_accounting_profile_interim_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.radius_accounting_profile_interim_attributes_id_seq OWNED BY class4.radius_accounting_profile_interim_attributes.id;
+ALTER SEQUENCE radius_accounting_profile_interim_attributes_id_seq OWNED BY radius_accounting_profile_interim_attributes.id;
 
 
 --
 -- Name: radius_accounting_profile_start_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.radius_accounting_profile_start_attributes (
+CREATE TABLE radius_accounting_profile_start_attributes (
     id smallint NOT NULL,
     profile_id smallint NOT NULL,
     type_id smallint NOT NULL,
@@ -26439,7 +26523,7 @@ CREATE TABLE class4.radius_accounting_profile_start_attributes (
 -- Name: radius_accounting_profile_start_attributes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.radius_accounting_profile_start_attributes_id_seq
+CREATE SEQUENCE radius_accounting_profile_start_attributes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26451,14 +26535,14 @@ CREATE SEQUENCE class4.radius_accounting_profile_start_attributes_id_seq
 -- Name: radius_accounting_profile_start_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.radius_accounting_profile_start_attributes_id_seq OWNED BY class4.radius_accounting_profile_start_attributes.id;
+ALTER SEQUENCE radius_accounting_profile_start_attributes_id_seq OWNED BY radius_accounting_profile_start_attributes.id;
 
 
 --
 -- Name: radius_accounting_profile_stop_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.radius_accounting_profile_stop_attributes (
+CREATE TABLE radius_accounting_profile_stop_attributes (
     id smallint NOT NULL,
     profile_id smallint NOT NULL,
     type_id smallint NOT NULL,
@@ -26475,7 +26559,7 @@ CREATE TABLE class4.radius_accounting_profile_stop_attributes (
 -- Name: radius_accounting_profile_stop_attributes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.radius_accounting_profile_stop_attributes_id_seq
+CREATE SEQUENCE radius_accounting_profile_stop_attributes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26487,14 +26571,14 @@ CREATE SEQUENCE class4.radius_accounting_profile_stop_attributes_id_seq
 -- Name: radius_accounting_profile_stop_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.radius_accounting_profile_stop_attributes_id_seq OWNED BY class4.radius_accounting_profile_stop_attributes.id;
+ALTER SEQUENCE radius_accounting_profile_stop_attributes_id_seq OWNED BY radius_accounting_profile_stop_attributes.id;
 
 
 --
 -- Name: radius_accounting_profiles; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.radius_accounting_profiles (
+CREATE TABLE radius_accounting_profiles (
     id smallint NOT NULL,
     name character varying NOT NULL,
     server character varying NOT NULL,
@@ -26513,7 +26597,7 @@ CREATE TABLE class4.radius_accounting_profiles (
 -- Name: radius_accounting_profiles_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.radius_accounting_profiles_id_seq
+CREATE SEQUENCE radius_accounting_profiles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26525,14 +26609,14 @@ CREATE SEQUENCE class4.radius_accounting_profiles_id_seq
 -- Name: radius_accounting_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.radius_accounting_profiles_id_seq OWNED BY class4.radius_accounting_profiles.id;
+ALTER SEQUENCE radius_accounting_profiles_id_seq OWNED BY radius_accounting_profiles.id;
 
 
 --
 -- Name: radius_auth_profile_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.radius_auth_profile_attributes (
+CREATE TABLE radius_auth_profile_attributes (
     id smallint NOT NULL,
     profile_id smallint NOT NULL,
     type_id smallint NOT NULL,
@@ -26549,7 +26633,7 @@ CREATE TABLE class4.radius_auth_profile_attributes (
 -- Name: radius_auth_profile_attributes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.radius_auth_profile_attributes_id_seq
+CREATE SEQUENCE radius_auth_profile_attributes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26561,14 +26645,14 @@ CREATE SEQUENCE class4.radius_auth_profile_attributes_id_seq
 -- Name: radius_auth_profile_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.radius_auth_profile_attributes_id_seq OWNED BY class4.radius_auth_profile_attributes.id;
+ALTER SEQUENCE radius_auth_profile_attributes_id_seq OWNED BY radius_auth_profile_attributes.id;
 
 
 --
 -- Name: radius_auth_profiles; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.radius_auth_profiles (
+CREATE TABLE radius_auth_profiles (
     id smallint NOT NULL,
     name character varying NOT NULL,
     server character varying NOT NULL,
@@ -26584,7 +26668,7 @@ CREATE TABLE class4.radius_auth_profiles (
 -- Name: radius_auth_profiles_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.radius_auth_profiles_id_seq
+CREATE SEQUENCE radius_auth_profiles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26596,14 +26680,14 @@ CREATE SEQUENCE class4.radius_auth_profiles_id_seq
 -- Name: radius_auth_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.radius_auth_profiles_id_seq OWNED BY class4.radius_auth_profiles.id;
+ALTER SEQUENCE radius_auth_profiles_id_seq OWNED BY radius_auth_profiles.id;
 
 
 --
 -- Name: rate_profit_control_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.rate_profit_control_modes (
+CREATE TABLE rate_profit_control_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26613,7 +26697,7 @@ CREATE TABLE class4.rate_profit_control_modes (
 -- Name: rateplans; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.rateplans (
+CREATE TABLE rateplans (
     id integer NOT NULL,
     name character varying,
     profit_control_mode_id smallint DEFAULT 1 NOT NULL,
@@ -26626,7 +26710,7 @@ CREATE TABLE class4.rateplans (
 -- Name: rateplans_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.rateplans_id_seq
+CREATE SEQUENCE rateplans_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26638,14 +26722,14 @@ CREATE SEQUENCE class4.rateplans_id_seq
 -- Name: rateplans_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.rateplans_id_seq OWNED BY class4.rateplans.id;
+ALTER SEQUENCE rateplans_id_seq OWNED BY rateplans.id;
 
 
 --
 -- Name: registrations; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.registrations (
+CREATE TABLE registrations (
     id integer NOT NULL,
     name character varying NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
@@ -26671,7 +26755,7 @@ CREATE TABLE class4.registrations (
 -- Name: registrations_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.registrations_id_seq
+CREATE SEQUENCE registrations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26683,14 +26767,14 @@ CREATE SEQUENCE class4.registrations_id_seq
 -- Name: registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.registrations_id_seq OWNED BY class4.registrations.id;
+ALTER SEQUENCE registrations_id_seq OWNED BY registrations.id;
 
 
 --
 -- Name: routing_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_groups (
+CREATE TABLE routing_groups (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -26700,7 +26784,7 @@ CREATE TABLE class4.routing_groups (
 -- Name: routing_groups_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_groups_id_seq
+CREATE SEQUENCE routing_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26712,14 +26796,14 @@ CREATE SEQUENCE class4.routing_groups_id_seq
 -- Name: routing_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_groups_id_seq OWNED BY class4.routing_groups.id;
+ALTER SEQUENCE routing_groups_id_seq OWNED BY routing_groups.id;
 
 
 --
 -- Name: routing_plan_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_plan_groups (
+CREATE TABLE routing_plan_groups (
     id integer NOT NULL,
     routing_plan_id integer NOT NULL,
     routing_group_id integer NOT NULL
@@ -26730,7 +26814,7 @@ CREATE TABLE class4.routing_plan_groups (
 -- Name: routing_plan_groups_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_plan_groups_id_seq
+CREATE SEQUENCE routing_plan_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26742,14 +26826,14 @@ CREATE SEQUENCE class4.routing_plan_groups_id_seq
 -- Name: routing_plan_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_plan_groups_id_seq OWNED BY class4.routing_plan_groups.id;
+ALTER SEQUENCE routing_plan_groups_id_seq OWNED BY routing_plan_groups.id;
 
 
 --
 -- Name: routing_plan_lnp_rules; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_plan_lnp_rules (
+CREATE TABLE routing_plan_lnp_rules (
     id integer NOT NULL,
     routing_plan_id integer NOT NULL,
     dst_prefix character varying DEFAULT ''::character varying NOT NULL,
@@ -26766,7 +26850,7 @@ CREATE TABLE class4.routing_plan_lnp_rules (
 -- Name: routing_plan_lnp_rules_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_plan_lnp_rules_id_seq
+CREATE SEQUENCE routing_plan_lnp_rules_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26778,14 +26862,14 @@ CREATE SEQUENCE class4.routing_plan_lnp_rules_id_seq
 -- Name: routing_plan_lnp_rules_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_plan_lnp_rules_id_seq OWNED BY class4.routing_plan_lnp_rules.id;
+ALTER SEQUENCE routing_plan_lnp_rules_id_seq OWNED BY routing_plan_lnp_rules.id;
 
 
 --
 -- Name: routing_plan_static_routes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_plan_static_routes (
+CREATE TABLE routing_plan_static_routes (
     id integer NOT NULL,
     routing_plan_id integer NOT NULL,
     prefix character varying DEFAULT ''::character varying NOT NULL,
@@ -26800,7 +26884,7 @@ CREATE TABLE class4.routing_plan_static_routes (
 -- Name: routing_plan_static_routes_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_plan_static_routes_id_seq
+CREATE SEQUENCE routing_plan_static_routes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26812,14 +26896,14 @@ CREATE SEQUENCE class4.routing_plan_static_routes_id_seq
 -- Name: routing_plan_static_routes_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_plan_static_routes_id_seq OWNED BY class4.routing_plan_static_routes.id;
+ALTER SEQUENCE routing_plan_static_routes_id_seq OWNED BY routing_plan_static_routes.id;
 
 
 --
 -- Name: routing_plans; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_plans (
+CREATE TABLE routing_plans (
     id integer NOT NULL,
     name character varying NOT NULL,
     sorting_id integer DEFAULT 1 NOT NULL,
@@ -26832,7 +26916,7 @@ CREATE TABLE class4.routing_plans (
 -- Name: routing_plans_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_plans_id_seq
+CREATE SEQUENCE routing_plans_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26844,14 +26928,14 @@ CREATE SEQUENCE class4.routing_plans_id_seq
 -- Name: routing_plans_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_plans_id_seq OWNED BY class4.routing_plans.id;
+ALTER SEQUENCE routing_plans_id_seq OWNED BY routing_plans.id;
 
 
 --
 -- Name: routing_tag_detection_rules; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_tag_detection_rules (
+CREATE TABLE routing_tag_detection_rules (
     id smallint NOT NULL,
     dst_area_id integer,
     src_area_id integer,
@@ -26868,7 +26952,7 @@ CREATE TABLE class4.routing_tag_detection_rules (
 -- Name: routing_tag_detection_rules_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_tag_detection_rules_id_seq
+CREATE SEQUENCE routing_tag_detection_rules_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26880,14 +26964,14 @@ CREATE SEQUENCE class4.routing_tag_detection_rules_id_seq
 -- Name: routing_tag_detection_rules_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_tag_detection_rules_id_seq OWNED BY class4.routing_tag_detection_rules.id;
+ALTER SEQUENCE routing_tag_detection_rules_id_seq OWNED BY routing_tag_detection_rules.id;
 
 
 --
 -- Name: routing_tag_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_tag_modes (
+CREATE TABLE routing_tag_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26897,7 +26981,7 @@ CREATE TABLE class4.routing_tag_modes (
 -- Name: routing_tags; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.routing_tags (
+CREATE TABLE routing_tags (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -26907,7 +26991,7 @@ CREATE TABLE class4.routing_tags (
 -- Name: routing_tags_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.routing_tags_id_seq
+CREATE SEQUENCE routing_tags_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26919,14 +27003,14 @@ CREATE SEQUENCE class4.routing_tags_id_seq
 -- Name: routing_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.routing_tags_id_seq OWNED BY class4.routing_tags.id;
+ALTER SEQUENCE routing_tags_id_seq OWNED BY routing_tags.id;
 
 
 --
 -- Name: sdp_c_location; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.sdp_c_location (
+CREATE TABLE sdp_c_location (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -26936,7 +27020,7 @@ CREATE TABLE class4.sdp_c_location (
 -- Name: session_refresh_methods; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.session_refresh_methods (
+CREATE TABLE session_refresh_methods (
     id integer NOT NULL,
     value character varying NOT NULL,
     name character varying
@@ -26947,7 +27031,7 @@ CREATE TABLE class4.session_refresh_methods (
 -- Name: session_refresh_methods_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.session_refresh_methods_id_seq
+CREATE SEQUENCE session_refresh_methods_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26959,14 +27043,14 @@ CREATE SEQUENCE class4.session_refresh_methods_id_seq
 -- Name: session_refresh_methods_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.session_refresh_methods_id_seq OWNED BY class4.session_refresh_methods.id;
+ALTER SEQUENCE session_refresh_methods_id_seq OWNED BY session_refresh_methods.id;
 
 
 --
 -- Name: sortings; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.sortings (
+CREATE TABLE sortings (
     id integer NOT NULL,
     name character varying,
     description character varying,
@@ -26978,7 +27062,7 @@ CREATE TABLE class4.sortings (
 -- Name: sortings_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
-CREATE SEQUENCE class4.sortings_id_seq
+CREATE SEQUENCE sortings_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -26990,14 +27074,14 @@ CREATE SEQUENCE class4.sortings_id_seq
 -- Name: sortings_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
 --
 
-ALTER SEQUENCE class4.sortings_id_seq OWNED BY class4.sortings.id;
+ALTER SEQUENCE sortings_id_seq OWNED BY sortings.id;
 
 
 --
 -- Name: tag_actions; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.tag_actions (
+CREATE TABLE tag_actions (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -27007,17 +27091,19 @@ CREATE TABLE class4.tag_actions (
 -- Name: transport_protocols; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.transport_protocols (
+CREATE TABLE transport_protocols (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
 
 
+SET search_path = data_import, pg_catalog;
+
 --
 -- Name: import_accounts; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_accounts (
+CREATE TABLE import_accounts (
     id bigint NOT NULL,
     o_id integer,
     contractor_name character varying,
@@ -27042,7 +27128,7 @@ CREATE TABLE data_import.import_accounts (
 -- Name: import_accounts_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_accounts_id_seq
+CREATE SEQUENCE import_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27054,14 +27140,14 @@ CREATE SEQUENCE data_import.import_accounts_id_seq
 -- Name: import_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_accounts_id_seq OWNED BY data_import.import_accounts.id;
+ALTER SEQUENCE import_accounts_id_seq OWNED BY import_accounts.id;
 
 
 --
 -- Name: import_codec_group_codecs; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_codec_group_codecs (
+CREATE TABLE import_codec_group_codecs (
     id bigint NOT NULL,
     o_id integer,
     codec_group_name character varying,
@@ -27077,7 +27163,7 @@ CREATE TABLE data_import.import_codec_group_codecs (
 -- Name: import_codec_group_codecs_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_codec_group_codecs_id_seq
+CREATE SEQUENCE import_codec_group_codecs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27089,14 +27175,14 @@ CREATE SEQUENCE data_import.import_codec_group_codecs_id_seq
 -- Name: import_codec_group_codecs_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_codec_group_codecs_id_seq OWNED BY data_import.import_codec_group_codecs.id;
+ALTER SEQUENCE import_codec_group_codecs_id_seq OWNED BY import_codec_group_codecs.id;
 
 
 --
 -- Name: import_codec_groups; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_codec_groups (
+CREATE TABLE import_codec_groups (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27108,7 +27194,7 @@ CREATE TABLE data_import.import_codec_groups (
 -- Name: import_codec_groups_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_codec_groups_id_seq
+CREATE SEQUENCE import_codec_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27120,14 +27206,14 @@ CREATE SEQUENCE data_import.import_codec_groups_id_seq
 -- Name: import_codec_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_codec_groups_id_seq OWNED BY data_import.import_codec_groups.id;
+ALTER SEQUENCE import_codec_groups_id_seq OWNED BY import_codec_groups.id;
 
 
 --
 -- Name: import_contractors; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_contractors (
+CREATE TABLE import_contractors (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27147,7 +27233,7 @@ CREATE TABLE data_import.import_contractors (
 -- Name: import_contractors_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_contractors_id_seq
+CREATE SEQUENCE import_contractors_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27159,14 +27245,14 @@ CREATE SEQUENCE data_import.import_contractors_id_seq
 -- Name: import_contractors_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_contractors_id_seq OWNED BY data_import.import_contractors.id;
+ALTER SEQUENCE import_contractors_id_seq OWNED BY import_contractors.id;
 
 
 --
 -- Name: import_customers_auth; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_customers_auth (
+CREATE TABLE import_customers_auth (
     id bigint NOT NULL,
     o_id bigint,
     customer_name character varying,
@@ -27243,7 +27329,7 @@ CREATE TABLE data_import.import_customers_auth (
 -- Name: import_customers_auth_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_customers_auth_id_seq
+CREATE SEQUENCE import_customers_auth_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27255,14 +27341,14 @@ CREATE SEQUENCE data_import.import_customers_auth_id_seq
 -- Name: import_customers_auth_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_customers_auth_id_seq OWNED BY data_import.import_customers_auth.id;
+ALTER SEQUENCE import_customers_auth_id_seq OWNED BY import_customers_auth.id;
 
 
 --
 -- Name: import_destinations; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_destinations (
+CREATE TABLE import_destinations (
     id bigint NOT NULL,
     o_id bigint,
     prefix character varying,
@@ -27303,7 +27389,7 @@ CREATE TABLE data_import.import_destinations (
 -- Name: import_destinations_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_destinations_id_seq
+CREATE SEQUENCE import_destinations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27315,14 +27401,14 @@ CREATE SEQUENCE data_import.import_destinations_id_seq
 -- Name: import_destinations_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_destinations_id_seq OWNED BY data_import.import_destinations.id;
+ALTER SEQUENCE import_destinations_id_seq OWNED BY import_destinations.id;
 
 
 --
 -- Name: import_dialpeers; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_dialpeers (
+CREATE TABLE import_dialpeers (
     id bigint NOT NULL,
     o_id bigint,
     enabled boolean,
@@ -27372,7 +27458,7 @@ CREATE TABLE data_import.import_dialpeers (
 -- Name: import_dialpeers_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_dialpeers_id_seq
+CREATE SEQUENCE import_dialpeers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27384,14 +27470,14 @@ CREATE SEQUENCE data_import.import_dialpeers_id_seq
 -- Name: import_dialpeers_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_dialpeers_id_seq OWNED BY data_import.import_dialpeers.id;
+ALTER SEQUENCE import_dialpeers_id_seq OWNED BY import_dialpeers.id;
 
 
 --
 -- Name: import_disconnect_policies; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_disconnect_policies (
+CREATE TABLE import_disconnect_policies (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27403,7 +27489,7 @@ CREATE TABLE data_import.import_disconnect_policies (
 -- Name: import_disconnect_policies_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_disconnect_policies_id_seq
+CREATE SEQUENCE import_disconnect_policies_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27415,14 +27501,14 @@ CREATE SEQUENCE data_import.import_disconnect_policies_id_seq
 -- Name: import_disconnect_policies_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_disconnect_policies_id_seq OWNED BY data_import.import_disconnect_policies.id;
+ALTER SEQUENCE import_disconnect_policies_id_seq OWNED BY import_disconnect_policies.id;
 
 
 --
 -- Name: import_gateway_groups; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_gateway_groups (
+CREATE TABLE import_gateway_groups (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27437,7 +27523,7 @@ CREATE TABLE data_import.import_gateway_groups (
 -- Name: import_gateway_groups_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_gateway_groups_id_seq
+CREATE SEQUENCE import_gateway_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27449,14 +27535,14 @@ CREATE SEQUENCE data_import.import_gateway_groups_id_seq
 -- Name: import_gateway_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_gateway_groups_id_seq OWNED BY data_import.import_gateway_groups.id;
+ALTER SEQUENCE import_gateway_groups_id_seq OWNED BY import_gateway_groups.id;
 
 
 --
 -- Name: import_gateways; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_gateways (
+CREATE TABLE import_gateways (
     host character varying,
     port integer,
     src_rewrite_rule character varying,
@@ -27587,7 +27673,7 @@ CREATE TABLE data_import.import_gateways (
 -- Name: import_gateways_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_gateways_id_seq
+CREATE SEQUENCE import_gateways_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27599,7 +27685,7 @@ CREATE SEQUENCE data_import.import_gateways_id_seq
 -- Name: import_gateways_id_seq1; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_gateways_id_seq1
+CREATE SEQUENCE import_gateways_id_seq1
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27611,14 +27697,14 @@ CREATE SEQUENCE data_import.import_gateways_id_seq1
 -- Name: import_gateways_id_seq1; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_gateways_id_seq1 OWNED BY data_import.import_gateways.id;
+ALTER SEQUENCE import_gateways_id_seq1 OWNED BY import_gateways.id;
 
 
 --
 -- Name: import_numberlist_items; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_numberlist_items (
+CREATE TABLE import_numberlist_items (
     id integer NOT NULL,
     o_id integer,
     error_string character varying,
@@ -27644,7 +27730,7 @@ CREATE TABLE data_import.import_numberlist_items (
 -- Name: import_numberlist_items_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_numberlist_items_id_seq
+CREATE SEQUENCE import_numberlist_items_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27656,14 +27742,14 @@ CREATE SEQUENCE data_import.import_numberlist_items_id_seq
 -- Name: import_numberlist_items_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_numberlist_items_id_seq OWNED BY data_import.import_numberlist_items.id;
+ALTER SEQUENCE import_numberlist_items_id_seq OWNED BY import_numberlist_items.id;
 
 
 --
 -- Name: import_numberlists; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_numberlists (
+CREATE TABLE import_numberlists (
     id integer NOT NULL,
     o_id smallint,
     error_string character varying,
@@ -27687,7 +27773,7 @@ CREATE TABLE data_import.import_numberlists (
 -- Name: import_numberlists_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_numberlists_id_seq
+CREATE SEQUENCE import_numberlists_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27699,14 +27785,14 @@ CREATE SEQUENCE data_import.import_numberlists_id_seq
 -- Name: import_numberlists_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_numberlists_id_seq OWNED BY data_import.import_numberlists.id;
+ALTER SEQUENCE import_numberlists_id_seq OWNED BY import_numberlists.id;
 
 
 --
 -- Name: import_rateplans; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_rateplans (
+CREATE TABLE import_rateplans (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27720,7 +27806,7 @@ CREATE TABLE data_import.import_rateplans (
 -- Name: import_rateplans_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_rateplans_id_seq
+CREATE SEQUENCE import_rateplans_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27732,14 +27818,14 @@ CREATE SEQUENCE data_import.import_rateplans_id_seq
 -- Name: import_rateplans_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_rateplans_id_seq OWNED BY data_import.import_rateplans.id;
+ALTER SEQUENCE import_rateplans_id_seq OWNED BY import_rateplans.id;
 
 
 --
 -- Name: import_registrations; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_registrations (
+CREATE TABLE import_registrations (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27771,7 +27857,7 @@ CREATE TABLE data_import.import_registrations (
 -- Name: import_registrations_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_registrations_id_seq
+CREATE SEQUENCE import_registrations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27783,14 +27869,14 @@ CREATE SEQUENCE data_import.import_registrations_id_seq
 -- Name: import_registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_registrations_id_seq OWNED BY data_import.import_registrations.id;
+ALTER SEQUENCE import_registrations_id_seq OWNED BY import_registrations.id;
 
 
 --
 -- Name: import_routing_groups; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
 --
 
-CREATE TABLE data_import.import_routing_groups (
+CREATE TABLE import_routing_groups (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
@@ -27806,7 +27892,7 @@ CREATE TABLE data_import.import_routing_groups (
 -- Name: import_routing_groups_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
 --
 
-CREATE SEQUENCE data_import.import_routing_groups_id_seq
+CREATE SEQUENCE import_routing_groups_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27818,14 +27904,16 @@ CREATE SEQUENCE data_import.import_routing_groups_id_seq
 -- Name: import_routing_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
 --
 
-ALTER SEQUENCE data_import.import_routing_groups_id_seq OWNED BY data_import.import_routing_groups.id;
+ALTER SEQUENCE import_routing_groups_id_seq OWNED BY import_routing_groups.id;
 
+
+SET search_path = gui, pg_catalog;
 
 --
 -- Name: active_admin_comments; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
 --
 
-CREATE TABLE gui.active_admin_comments (
+CREATE TABLE active_admin_comments (
     id integer NOT NULL,
     resource_id character varying(255) NOT NULL,
     resource_type character varying(255) NOT NULL,
@@ -27842,7 +27930,7 @@ CREATE TABLE gui.active_admin_comments (
 -- Name: admin_notes_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
 --
 
-CREATE SEQUENCE gui.admin_notes_id_seq
+CREATE SEQUENCE admin_notes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27854,14 +27942,14 @@ CREATE SEQUENCE gui.admin_notes_id_seq
 -- Name: admin_notes_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
 --
 
-ALTER SEQUENCE gui.admin_notes_id_seq OWNED BY gui.active_admin_comments.id;
+ALTER SEQUENCE admin_notes_id_seq OWNED BY active_admin_comments.id;
 
 
 --
 -- Name: admin_users; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
 --
 
-CREATE TABLE gui.admin_users (
+CREATE TABLE admin_users (
     id integer NOT NULL,
     encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying(255),
@@ -27889,7 +27977,7 @@ CREATE TABLE gui.admin_users (
 -- Name: admin_users_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
 --
 
-CREATE SEQUENCE gui.admin_users_id_seq
+CREATE SEQUENCE admin_users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27901,14 +27989,14 @@ CREATE SEQUENCE gui.admin_users_id_seq
 -- Name: admin_users_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
 --
 
-ALTER SEQUENCE gui.admin_users_id_seq OWNED BY gui.admin_users.id;
+ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 
 --
 -- Name: background_threads; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
 --
 
-CREATE TABLE gui.background_threads (
+CREATE TABLE background_threads (
     id integer NOT NULL,
     name character varying,
     num integer,
@@ -27924,7 +28012,7 @@ CREATE TABLE gui.background_threads (
 -- Name: background_threads_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
 --
 
-CREATE SEQUENCE gui.background_threads_id_seq
+CREATE SEQUENCE background_threads_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27936,14 +28024,14 @@ CREATE SEQUENCE gui.background_threads_id_seq
 -- Name: background_threads_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
 --
 
-ALTER SEQUENCE gui.background_threads_id_seq OWNED BY gui.background_threads.id;
+ALTER SEQUENCE background_threads_id_seq OWNED BY background_threads.id;
 
 
 --
 -- Name: sessions; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
 --
 
-CREATE TABLE gui.sessions (
+CREATE TABLE sessions (
     id integer NOT NULL,
     session_id character varying(255) NOT NULL,
     data text,
@@ -27956,7 +28044,7 @@ CREATE TABLE gui.sessions (
 -- Name: sessions_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
 --
 
-CREATE SEQUENCE gui.sessions_id_seq
+CREATE SEQUENCE sessions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -27968,14 +28056,14 @@ CREATE SEQUENCE gui.sessions_id_seq
 -- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
 --
 
-ALTER SEQUENCE gui.sessions_id_seq OWNED BY gui.sessions.id;
+ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 
 --
 -- Name: versions; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
 --
 
-CREATE TABLE gui.versions (
+CREATE TABLE versions (
     id integer NOT NULL,
     item_type character varying(255) NOT NULL,
     item_id integer NOT NULL,
@@ -27993,7 +28081,7 @@ CREATE TABLE gui.versions (
 -- Name: versions_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
 --
 
-CREATE SEQUENCE gui.versions_id_seq
+CREATE SEQUENCE versions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28005,14 +28093,16 @@ CREATE SEQUENCE gui.versions_id_seq
 -- Name: versions_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
 --
 
-ALTER SEQUENCE gui.versions_id_seq OWNED BY gui.versions.id;
+ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 
+
+SET search_path = logs, pg_catalog;
 
 --
 -- Name: api_requests; Type: TABLE; Schema: logs; Owner: -; Tablespace: 
 --
 
-CREATE TABLE logs.api_requests (
+CREATE TABLE api_requests (
     id bigint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     path character varying,
@@ -28034,7 +28124,7 @@ CREATE TABLE logs.api_requests (
 -- Name: api_requests_id_seq; Type: SEQUENCE; Schema: logs; Owner: -
 --
 
-CREATE SEQUENCE logs.api_requests_id_seq
+CREATE SEQUENCE api_requests_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28046,14 +28136,14 @@ CREATE SEQUENCE logs.api_requests_id_seq
 -- Name: api_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: logs; Owner: -
 --
 
-ALTER SEQUENCE logs.api_requests_id_seq OWNED BY logs.api_requests.id;
+ALTER SEQUENCE api_requests_id_seq OWNED BY api_requests.id;
 
 
 --
 -- Name: balance_notifications; Type: TABLE; Schema: logs; Owner: -; Tablespace: 
 --
 
-CREATE TABLE logs.balance_notifications (
+CREATE TABLE balance_notifications (
     id bigint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     is_processed boolean DEFAULT false NOT NULL,
@@ -28068,7 +28158,7 @@ CREATE TABLE logs.balance_notifications (
 -- Name: balance_notifications_id_seq; Type: SEQUENCE; Schema: logs; Owner: -
 --
 
-CREATE SEQUENCE logs.balance_notifications_id_seq
+CREATE SEQUENCE balance_notifications_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28080,14 +28170,14 @@ CREATE SEQUENCE logs.balance_notifications_id_seq
 -- Name: balance_notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: logs; Owner: -
 --
 
-ALTER SEQUENCE logs.balance_notifications_id_seq OWNED BY logs.balance_notifications.id;
+ALTER SEQUENCE balance_notifications_id_seq OWNED BY balance_notifications.id;
 
 
 --
 -- Name: logic_log; Type: TABLE; Schema: logs; Owner: -; Tablespace: 
 --
 
-CREATE TABLE logs.logic_log (
+CREATE TABLE logic_log (
     id bigint NOT NULL,
     source character varying NOT NULL,
     level integer NOT NULL,
@@ -28101,7 +28191,7 @@ CREATE TABLE logs.logic_log (
 -- Name: logic_log_id_seq; Type: SEQUENCE; Schema: logs; Owner: -
 --
 
-CREATE SEQUENCE logs.logic_log_id_seq
+CREATE SEQUENCE logic_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28113,14 +28203,16 @@ CREATE SEQUENCE logs.logic_log_id_seq
 -- Name: logic_log_id_seq; Type: SEQUENCE OWNED BY; Schema: logs; Owner: -
 --
 
-ALTER SEQUENCE logs.logic_log_id_seq OWNED BY logs.logic_log.id;
+ALTER SEQUENCE logic_log_id_seq OWNED BY logic_log.id;
 
+
+SET search_path = notifications, pg_catalog;
 
 --
 -- Name: alerts; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
 --
 
-CREATE TABLE notifications.alerts (
+CREATE TABLE alerts (
     id integer NOT NULL,
     event character varying NOT NULL,
     send_to integer[]
@@ -28131,7 +28223,7 @@ CREATE TABLE notifications.alerts (
 -- Name: alerts_id_seq; Type: SEQUENCE; Schema: notifications; Owner: -
 --
 
-CREATE SEQUENCE notifications.alerts_id_seq
+CREATE SEQUENCE alerts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28143,14 +28235,14 @@ CREATE SEQUENCE notifications.alerts_id_seq
 -- Name: alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: notifications; Owner: -
 --
 
-ALTER SEQUENCE notifications.alerts_id_seq OWNED BY notifications.alerts.id;
+ALTER SEQUENCE alerts_id_seq OWNED BY alerts.id;
 
 
 --
 -- Name: attachments; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
 --
 
-CREATE TABLE notifications.attachments (
+CREATE TABLE attachments (
     id integer NOT NULL,
     filename character varying NOT NULL,
     data bytea
@@ -28161,7 +28253,7 @@ CREATE TABLE notifications.attachments (
 -- Name: attachments_id_seq; Type: SEQUENCE; Schema: notifications; Owner: -
 --
 
-CREATE SEQUENCE notifications.attachments_id_seq
+CREATE SEQUENCE attachments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28173,14 +28265,14 @@ CREATE SEQUENCE notifications.attachments_id_seq
 -- Name: attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: notifications; Owner: -
 --
 
-ALTER SEQUENCE notifications.attachments_id_seq OWNED BY notifications.attachments.id;
+ALTER SEQUENCE attachments_id_seq OWNED BY attachments.id;
 
 
 --
 -- Name: contacts; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
 --
 
-CREATE TABLE notifications.contacts (
+CREATE TABLE contacts (
     id integer NOT NULL,
     contractor_id integer,
     admin_user_id integer,
@@ -28195,7 +28287,7 @@ CREATE TABLE notifications.contacts (
 -- Name: contacts_id_seq; Type: SEQUENCE; Schema: notifications; Owner: -
 --
 
-CREATE SEQUENCE notifications.contacts_id_seq
+CREATE SEQUENCE contacts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28207,14 +28299,14 @@ CREATE SEQUENCE notifications.contacts_id_seq
 -- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: notifications; Owner: -
 --
 
-ALTER SEQUENCE notifications.contacts_id_seq OWNED BY notifications.contacts.id;
+ALTER SEQUENCE contacts_id_seq OWNED BY contacts.id;
 
 
 --
 -- Name: email_logs; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
 --
 
-CREATE TABLE notifications.email_logs (
+CREATE TABLE email_logs (
     id bigint NOT NULL,
     batch_id bigint,
     created_at timestamp with time zone,
@@ -28234,7 +28326,7 @@ CREATE TABLE notifications.email_logs (
 -- Name: email_log_id_seq; Type: SEQUENCE; Schema: notifications; Owner: -
 --
 
-CREATE SEQUENCE notifications.email_log_id_seq
+CREATE SEQUENCE email_log_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28246,14 +28338,16 @@ CREATE SEQUENCE notifications.email_log_id_seq
 -- Name: email_log_id_seq; Type: SEQUENCE OWNED BY; Schema: notifications; Owner: -
 --
 
-ALTER SEQUENCE notifications.email_log_id_seq OWNED BY notifications.email_logs.id;
+ALTER SEQUENCE email_log_id_seq OWNED BY email_logs.id;
 
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE public.ar_internal_metadata (
+CREATE TABLE ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
     created_at timestamp without time zone NOT NULL,
@@ -28265,7 +28359,7 @@ CREATE TABLE public.ar_internal_metadata (
 -- Name: contractors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE public.contractors (
+CREATE TABLE contractors (
     id integer NOT NULL,
     name character varying,
     enabled boolean,
@@ -28283,7 +28377,7 @@ CREATE TABLE public.contractors (
 -- Name: contractors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.contractors_id_seq
+CREATE SEQUENCE contractors_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28295,14 +28389,14 @@ CREATE SEQUENCE public.contractors_id_seq
 -- Name: contractors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.contractors_id_seq OWNED BY public.contractors.id;
+ALTER SEQUENCE contractors_id_seq OWNED BY contractors.id;
 
 
 --
 -- Name: new_table_0; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE public.new_table_0 (
+CREATE TABLE new_table_0 (
     id integer NOT NULL
 );
 
@@ -28311,7 +28405,7 @@ CREATE TABLE public.new_table_0 (
 -- Name: new_table_0_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.new_table_0_id_seq
+CREATE SEQUENCE new_table_0_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28323,23 +28417,25 @@ CREATE SEQUENCE public.new_table_0_id_seq
 -- Name: new_table_0_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.new_table_0_id_seq OWNED BY public.new_table_0.id;
+ALTER SEQUENCE new_table_0_id_seq OWNED BY new_table_0.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE public.schema_migrations (
+CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
 
+
+SET search_path = runtime_stats, pg_catalog;
 
 --
 -- Name: dialpeers_stats; Type: TABLE; Schema: runtime_stats; Owner: -; Tablespace: 
 --
 
-CREATE UNLOGGED TABLE runtime_stats.dialpeers_stats (
+CREATE UNLOGGED TABLE dialpeers_stats (
     dialpeer_id bigint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -28359,7 +28455,7 @@ CREATE UNLOGGED TABLE runtime_stats.dialpeers_stats (
 -- Name: dialpeers_stats_id_seq; Type: SEQUENCE; Schema: runtime_stats; Owner: -
 --
 
-CREATE SEQUENCE runtime_stats.dialpeers_stats_id_seq
+CREATE SEQUENCE dialpeers_stats_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28371,14 +28467,14 @@ CREATE SEQUENCE runtime_stats.dialpeers_stats_id_seq
 -- Name: dialpeers_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: runtime_stats; Owner: -
 --
 
-ALTER SEQUENCE runtime_stats.dialpeers_stats_id_seq OWNED BY runtime_stats.dialpeers_stats.id;
+ALTER SEQUENCE dialpeers_stats_id_seq OWNED BY dialpeers_stats.id;
 
 
 --
 -- Name: gateways_stats; Type: TABLE; Schema: runtime_stats; Owner: -; Tablespace: 
 --
 
-CREATE UNLOGGED TABLE runtime_stats.gateways_stats (
+CREATE UNLOGGED TABLE gateways_stats (
     id integer NOT NULL,
     gateway_id integer NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -28398,7 +28494,7 @@ CREATE UNLOGGED TABLE runtime_stats.gateways_stats (
 -- Name: gateways_stats_id_seq; Type: SEQUENCE; Schema: runtime_stats; Owner: -
 --
 
-CREATE SEQUENCE runtime_stats.gateways_stats_id_seq
+CREATE SEQUENCE gateways_stats_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28410,14 +28506,16 @@ CREATE SEQUENCE runtime_stats.gateways_stats_id_seq
 -- Name: gateways_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: runtime_stats; Owner: -
 --
 
-ALTER SEQUENCE runtime_stats.gateways_stats_id_seq OWNED BY runtime_stats.gateways_stats.id;
+ALTER SEQUENCE gateways_stats_id_seq OWNED BY gateways_stats.id;
 
+
+SET search_path = switch13, pg_catalog;
 
 --
 -- Name: events_id_seq; Type: SEQUENCE; Schema: switch13; Owner: -
 --
 
-CREATE SEQUENCE switch13.events_id_seq
+CREATE SEQUENCE events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28429,7 +28527,7 @@ CREATE SEQUENCE switch13.events_id_seq
 -- Name: resource_action; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch13.resource_action (
+CREATE TABLE resource_action (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -28439,7 +28537,7 @@ CREATE TABLE switch13.resource_action (
 -- Name: resource_type_id_seq; Type: SEQUENCE; Schema: switch13; Owner: -
 --
 
-CREATE SEQUENCE switch13.resource_type_id_seq
+CREATE SEQUENCE resource_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28451,14 +28549,14 @@ CREATE SEQUENCE switch13.resource_type_id_seq
 -- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: switch13; Owner: -
 --
 
-ALTER SEQUENCE switch13.resource_type_id_seq OWNED BY switch13.resource_type.id;
+ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
 -- Name: switch_in_interface_id_seq; Type: SEQUENCE; Schema: switch13; Owner: -
 --
 
-CREATE SEQUENCE switch13.switch_in_interface_id_seq
+CREATE SEQUENCE switch_in_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28470,7 +28568,7 @@ CREATE SEQUENCE switch13.switch_in_interface_id_seq
 -- Name: switch_interface_out; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch13.switch_interface_out (
+CREATE TABLE switch_interface_out (
     id integer NOT NULL,
     name character varying,
     type character varying,
@@ -28484,7 +28582,7 @@ CREATE TABLE switch13.switch_interface_out (
 -- Name: switch_interface_id_seq; Type: SEQUENCE; Schema: switch13; Owner: -
 --
 
-CREATE SEQUENCE switch13.switch_interface_id_seq
+CREATE SEQUENCE switch_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28496,15 +28594,15 @@ CREATE SEQUENCE switch13.switch_interface_id_seq
 -- Name: switch_interface_id_seq; Type: SEQUENCE OWNED BY; Schema: switch13; Owner: -
 --
 
-ALTER SEQUENCE switch13.switch_interface_id_seq OWNED BY switch13.switch_interface_out.id;
+ALTER SEQUENCE switch_interface_id_seq OWNED BY switch_interface_out.id;
 
 
 --
 -- Name: switch_interface_in; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch13.switch_interface_in (
-    id integer DEFAULT nextval('switch13.switch_in_interface_id_seq'::regclass) NOT NULL,
+CREATE TABLE switch_interface_in (
+    id integer DEFAULT nextval('switch_in_interface_id_seq'::regclass) NOT NULL,
     name character varying,
     type character varying,
     rank integer NOT NULL,
@@ -28518,7 +28616,7 @@ CREATE TABLE switch13.switch_interface_in (
 -- Name: trusted_headers; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch13.trusted_headers (
+CREATE TABLE trusted_headers (
     id integer NOT NULL,
     name character varying,
     rank integer NOT NULL
@@ -28529,7 +28627,7 @@ CREATE TABLE switch13.trusted_headers (
 -- Name: trusted_headers_id_seq; Type: SEQUENCE; Schema: switch13; Owner: -
 --
 
-CREATE SEQUENCE switch13.trusted_headers_id_seq
+CREATE SEQUENCE trusted_headers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28541,14 +28639,16 @@ CREATE SEQUENCE switch13.trusted_headers_id_seq
 -- Name: trusted_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: switch13; Owner: -
 --
 
-ALTER SEQUENCE switch13.trusted_headers_id_seq OWNED BY switch13.trusted_headers.id;
+ALTER SEQUENCE trusted_headers_id_seq OWNED BY trusted_headers.id;
 
+
+SET search_path = switch14, pg_catalog;
 
 --
 -- Name: events_id_seq; Type: SEQUENCE; Schema: switch14; Owner: -
 --
 
-CREATE SEQUENCE switch14.events_id_seq
+CREATE SEQUENCE events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28560,7 +28660,7 @@ CREATE SEQUENCE switch14.events_id_seq
 -- Name: resource_action; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch14.resource_action (
+CREATE TABLE resource_action (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -28570,7 +28670,7 @@ CREATE TABLE switch14.resource_action (
 -- Name: resource_type_id_seq; Type: SEQUENCE; Schema: switch14; Owner: -
 --
 
-CREATE SEQUENCE switch14.resource_type_id_seq
+CREATE SEQUENCE resource_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28582,14 +28682,14 @@ CREATE SEQUENCE switch14.resource_type_id_seq
 -- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: switch14; Owner: -
 --
 
-ALTER SEQUENCE switch14.resource_type_id_seq OWNED BY switch14.resource_type.id;
+ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
 -- Name: switch_in_interface_id_seq; Type: SEQUENCE; Schema: switch14; Owner: -
 --
 
-CREATE SEQUENCE switch14.switch_in_interface_id_seq
+CREATE SEQUENCE switch_in_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28601,7 +28701,7 @@ CREATE SEQUENCE switch14.switch_in_interface_id_seq
 -- Name: switch_interface_out; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch14.switch_interface_out (
+CREATE TABLE switch_interface_out (
     id integer NOT NULL,
     name character varying,
     type character varying,
@@ -28615,7 +28715,7 @@ CREATE TABLE switch14.switch_interface_out (
 -- Name: switch_interface_id_seq; Type: SEQUENCE; Schema: switch14; Owner: -
 --
 
-CREATE SEQUENCE switch14.switch_interface_id_seq
+CREATE SEQUENCE switch_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28627,15 +28727,15 @@ CREATE SEQUENCE switch14.switch_interface_id_seq
 -- Name: switch_interface_id_seq; Type: SEQUENCE OWNED BY; Schema: switch14; Owner: -
 --
 
-ALTER SEQUENCE switch14.switch_interface_id_seq OWNED BY switch14.switch_interface_out.id;
+ALTER SEQUENCE switch_interface_id_seq OWNED BY switch_interface_out.id;
 
 
 --
 -- Name: switch_interface_in; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch14.switch_interface_in (
-    id integer DEFAULT nextval('switch14.switch_in_interface_id_seq'::regclass) NOT NULL,
+CREATE TABLE switch_interface_in (
+    id integer DEFAULT nextval('switch_in_interface_id_seq'::regclass) NOT NULL,
     name character varying,
     type character varying,
     rank integer NOT NULL,
@@ -28649,7 +28749,7 @@ CREATE TABLE switch14.switch_interface_in (
 -- Name: trusted_headers; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch14.trusted_headers (
+CREATE TABLE trusted_headers (
     id integer NOT NULL,
     name character varying,
     rank integer NOT NULL
@@ -28660,7 +28760,7 @@ CREATE TABLE switch14.trusted_headers (
 -- Name: trusted_headers_id_seq; Type: SEQUENCE; Schema: switch14; Owner: -
 --
 
-CREATE SEQUENCE switch14.trusted_headers_id_seq
+CREATE SEQUENCE trusted_headers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28672,14 +28772,16 @@ CREATE SEQUENCE switch14.trusted_headers_id_seq
 -- Name: trusted_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: switch14; Owner: -
 --
 
-ALTER SEQUENCE switch14.trusted_headers_id_seq OWNED BY switch14.trusted_headers.id;
+ALTER SEQUENCE trusted_headers_id_seq OWNED BY trusted_headers.id;
 
+
+SET search_path = switch15, pg_catalog;
 
 --
 -- Name: events_id_seq; Type: SEQUENCE; Schema: switch15; Owner: -
 --
 
-CREATE SEQUENCE switch15.events_id_seq
+CREATE SEQUENCE events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28691,7 +28793,7 @@ CREATE SEQUENCE switch15.events_id_seq
 -- Name: resource_action; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch15.resource_action (
+CREATE TABLE resource_action (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -28701,7 +28803,7 @@ CREATE TABLE switch15.resource_action (
 -- Name: resource_type_id_seq; Type: SEQUENCE; Schema: switch15; Owner: -
 --
 
-CREATE SEQUENCE switch15.resource_type_id_seq
+CREATE SEQUENCE resource_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28713,14 +28815,14 @@ CREATE SEQUENCE switch15.resource_type_id_seq
 -- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: switch15; Owner: -
 --
 
-ALTER SEQUENCE switch15.resource_type_id_seq OWNED BY switch15.resource_type.id;
+ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
 -- Name: switch_in_interface_id_seq; Type: SEQUENCE; Schema: switch15; Owner: -
 --
 
-CREATE SEQUENCE switch15.switch_in_interface_id_seq
+CREATE SEQUENCE switch_in_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28732,7 +28834,7 @@ CREATE SEQUENCE switch15.switch_in_interface_id_seq
 -- Name: switch_interface_out; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch15.switch_interface_out (
+CREATE TABLE switch_interface_out (
     id integer NOT NULL,
     name character varying,
     type character varying,
@@ -28746,7 +28848,7 @@ CREATE TABLE switch15.switch_interface_out (
 -- Name: switch_interface_id_seq; Type: SEQUENCE; Schema: switch15; Owner: -
 --
 
-CREATE SEQUENCE switch15.switch_interface_id_seq
+CREATE SEQUENCE switch_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28758,15 +28860,15 @@ CREATE SEQUENCE switch15.switch_interface_id_seq
 -- Name: switch_interface_id_seq; Type: SEQUENCE OWNED BY; Schema: switch15; Owner: -
 --
 
-ALTER SEQUENCE switch15.switch_interface_id_seq OWNED BY switch15.switch_interface_out.id;
+ALTER SEQUENCE switch_interface_id_seq OWNED BY switch_interface_out.id;
 
 
 --
 -- Name: switch_interface_in; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch15.switch_interface_in (
-    id integer DEFAULT nextval('switch15.switch_in_interface_id_seq'::regclass) NOT NULL,
+CREATE TABLE switch_interface_in (
+    id integer DEFAULT nextval('switch_in_interface_id_seq'::regclass) NOT NULL,
     name character varying,
     type character varying,
     rank integer NOT NULL,
@@ -28780,7 +28882,7 @@ CREATE TABLE switch15.switch_interface_in (
 -- Name: trusted_headers; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch15.trusted_headers (
+CREATE TABLE trusted_headers (
     id integer NOT NULL,
     name character varying,
     rank integer NOT NULL
@@ -28791,7 +28893,7 @@ CREATE TABLE switch15.trusted_headers (
 -- Name: trusted_headers_id_seq; Type: SEQUENCE; Schema: switch15; Owner: -
 --
 
-CREATE SEQUENCE switch15.trusted_headers_id_seq
+CREATE SEQUENCE trusted_headers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28803,14 +28905,16 @@ CREATE SEQUENCE switch15.trusted_headers_id_seq
 -- Name: trusted_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: switch15; Owner: -
 --
 
-ALTER SEQUENCE switch15.trusted_headers_id_seq OWNED BY switch15.trusted_headers.id;
+ALTER SEQUENCE trusted_headers_id_seq OWNED BY trusted_headers.id;
 
+
+SET search_path = switch16, pg_catalog;
 
 --
 -- Name: events_id_seq; Type: SEQUENCE; Schema: switch16; Owner: -
 --
 
-CREATE SEQUENCE switch16.events_id_seq
+CREATE SEQUENCE events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28822,7 +28926,7 @@ CREATE SEQUENCE switch16.events_id_seq
 -- Name: resource_action; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch16.resource_action (
+CREATE TABLE resource_action (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -28832,7 +28936,7 @@ CREATE TABLE switch16.resource_action (
 -- Name: resource_type_id_seq; Type: SEQUENCE; Schema: switch16; Owner: -
 --
 
-CREATE SEQUENCE switch16.resource_type_id_seq
+CREATE SEQUENCE resource_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28844,14 +28948,14 @@ CREATE SEQUENCE switch16.resource_type_id_seq
 -- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: switch16; Owner: -
 --
 
-ALTER SEQUENCE switch16.resource_type_id_seq OWNED BY switch16.resource_type.id;
+ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
 -- Name: switch_in_interface_id_seq; Type: SEQUENCE; Schema: switch16; Owner: -
 --
 
-CREATE SEQUENCE switch16.switch_in_interface_id_seq
+CREATE SEQUENCE switch_in_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28863,7 +28967,7 @@ CREATE SEQUENCE switch16.switch_in_interface_id_seq
 -- Name: switch_interface_out; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch16.switch_interface_out (
+CREATE TABLE switch_interface_out (
     id integer NOT NULL,
     name character varying,
     type character varying,
@@ -28877,7 +28981,7 @@ CREATE TABLE switch16.switch_interface_out (
 -- Name: switch_interface_id_seq; Type: SEQUENCE; Schema: switch16; Owner: -
 --
 
-CREATE SEQUENCE switch16.switch_interface_id_seq
+CREATE SEQUENCE switch_interface_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28889,15 +28993,15 @@ CREATE SEQUENCE switch16.switch_interface_id_seq
 -- Name: switch_interface_id_seq; Type: SEQUENCE OWNED BY; Schema: switch16; Owner: -
 --
 
-ALTER SEQUENCE switch16.switch_interface_id_seq OWNED BY switch16.switch_interface_out.id;
+ALTER SEQUENCE switch_interface_id_seq OWNED BY switch_interface_out.id;
 
 
 --
 -- Name: switch_interface_in; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch16.switch_interface_in (
-    id integer DEFAULT nextval('switch16.switch_in_interface_id_seq'::regclass) NOT NULL,
+CREATE TABLE switch_interface_in (
+    id integer DEFAULT nextval('switch_in_interface_id_seq'::regclass) NOT NULL,
     name character varying,
     type character varying,
     rank integer NOT NULL,
@@ -28911,7 +29015,7 @@ CREATE TABLE switch16.switch_interface_in (
 -- Name: trusted_headers; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
 --
 
-CREATE TABLE switch16.trusted_headers (
+CREATE TABLE trusted_headers (
     id integer NOT NULL,
     name character varying,
     rank integer NOT NULL
@@ -28922,7 +29026,7 @@ CREATE TABLE switch16.trusted_headers (
 -- Name: trusted_headers_id_seq; Type: SEQUENCE; Schema: switch16; Owner: -
 --
 
-CREATE SEQUENCE switch16.trusted_headers_id_seq
+CREATE SEQUENCE trusted_headers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28934,14 +29038,16 @@ CREATE SEQUENCE switch16.trusted_headers_id_seq
 -- Name: trusted_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: switch16; Owner: -
 --
 
-ALTER SEQUENCE switch16.trusted_headers_id_seq OWNED BY switch16.trusted_headers.id;
+ALTER SEQUENCE trusted_headers_id_seq OWNED BY trusted_headers.id;
 
+
+SET search_path = sys, pg_catalog;
 
 --
 -- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.active_currencies (
+CREATE TABLE active_currencies (
     id integer NOT NULL,
     currency_id smallint NOT NULL,
     is_base boolean DEFAULT false NOT NULL,
@@ -28957,7 +29063,7 @@ CREATE TABLE sys.active_currencies (
 -- Name: active_currencies_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.active_currencies_id_seq
+CREATE SEQUENCE active_currencies_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -28969,14 +29075,14 @@ CREATE SEQUENCE sys.active_currencies_id_seq
 -- Name: active_currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.active_currencies_id_seq OWNED BY sys.active_currencies.id;
+ALTER SEQUENCE active_currencies_id_seq OWNED BY active_currencies.id;
 
 
 --
 -- Name: api_access; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.api_access (
+CREATE TABLE api_access (
     id integer NOT NULL,
     customer_id integer NOT NULL,
     login character varying NOT NULL,
@@ -28990,7 +29096,7 @@ CREATE TABLE sys.api_access (
 -- Name: api_access_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.api_access_id_seq
+CREATE SEQUENCE api_access_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29002,14 +29108,14 @@ CREATE SEQUENCE sys.api_access_id_seq
 -- Name: api_access_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.api_access_id_seq OWNED BY sys.api_access.id;
+ALTER SEQUENCE api_access_id_seq OWNED BY api_access.id;
 
 
 --
 -- Name: api_log_config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.api_log_config (
+CREATE TABLE api_log_config (
     id integer NOT NULL,
     controller character varying NOT NULL,
     debug boolean DEFAULT false NOT NULL
@@ -29020,7 +29126,7 @@ CREATE TABLE sys.api_log_config (
 -- Name: api_log_config_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.api_log_config_id_seq
+CREATE SEQUENCE api_log_config_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29032,14 +29138,14 @@ CREATE SEQUENCE sys.api_log_config_id_seq
 -- Name: api_log_config_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.api_log_config_id_seq OWNED BY sys.api_log_config.id;
+ALTER SEQUENCE api_log_config_id_seq OWNED BY api_log_config.id;
 
 
 --
 -- Name: cdr_exports; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.cdr_exports (
+CREATE TABLE cdr_exports (
     id integer NOT NULL,
     status character varying NOT NULL,
     fields character varying[] DEFAULT '{}'::character varying[] NOT NULL,
@@ -29056,7 +29162,7 @@ CREATE TABLE sys.cdr_exports (
 -- Name: cdr_exports_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.cdr_exports_id_seq
+CREATE SEQUENCE cdr_exports_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29068,14 +29174,14 @@ CREATE SEQUENCE sys.cdr_exports_id_seq
 -- Name: cdr_exports_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.cdr_exports_id_seq OWNED BY sys.cdr_exports.id;
+ALTER SEQUENCE cdr_exports_id_seq OWNED BY cdr_exports.id;
 
 
 --
 -- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.cdr_tables (
+CREATE TABLE cdr_tables (
     id integer NOT NULL,
     name character varying NOT NULL,
     readable boolean DEFAULT true NOT NULL,
@@ -29089,7 +29195,7 @@ CREATE TABLE sys.cdr_tables (
 -- Name: cdrtables_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.cdrtables_id_seq
+CREATE SEQUENCE cdrtables_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29101,14 +29207,14 @@ CREATE SEQUENCE sys.cdrtables_id_seq
 -- Name: cdrtables_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.cdrtables_id_seq OWNED BY sys.cdr_tables.id;
+ALTER SEQUENCE cdrtables_id_seq OWNED BY cdr_tables.id;
 
 
 --
 -- Name: countries; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.countries (
+CREATE TABLE countries (
     id integer NOT NULL,
     name character varying NOT NULL,
     iso2 character varying(2) NOT NULL
@@ -29119,7 +29225,7 @@ CREATE TABLE sys.countries (
 -- Name: countries_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.countries_id_seq
+CREATE SEQUENCE countries_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29131,14 +29237,14 @@ CREATE SEQUENCE sys.countries_id_seq
 -- Name: countries_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.countries_id_seq OWNED BY sys.countries.id;
+ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
 
 
 --
 -- Name: currencies; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.currencies (
+CREATE TABLE currencies (
     id smallint NOT NULL,
     name character varying NOT NULL,
     country_id integer,
@@ -29151,7 +29257,7 @@ CREATE TABLE sys.currencies (
 -- Name: currencies_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.currencies_id_seq
+CREATE SEQUENCE currencies_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29163,14 +29269,14 @@ CREATE SEQUENCE sys.currencies_id_seq
 -- Name: currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.currencies_id_seq OWNED BY sys.currencies.id;
+ALTER SEQUENCE currencies_id_seq OWNED BY currencies.id;
 
 
 --
 -- Name: delayed_jobs; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.delayed_jobs (
+CREATE TABLE delayed_jobs (
     id integer NOT NULL,
     priority integer DEFAULT 0 NOT NULL,
     attempts integer DEFAULT 0 NOT NULL,
@@ -29190,7 +29296,7 @@ CREATE TABLE sys.delayed_jobs (
 -- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.delayed_jobs_id_seq
+CREATE SEQUENCE delayed_jobs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29202,14 +29308,14 @@ CREATE SEQUENCE sys.delayed_jobs_id_seq
 -- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.delayed_jobs_id_seq OWNED BY sys.delayed_jobs.id;
+ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
 -- Name: events_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.events_id_seq
+CREATE SEQUENCE events_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29221,8 +29327,8 @@ CREATE SEQUENCE sys.events_id_seq
 -- Name: events; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.events (
-    id integer DEFAULT nextval('sys.events_id_seq'::regclass) NOT NULL,
+CREATE TABLE events (
+    id integer DEFAULT nextval('events_id_seq'::regclass) NOT NULL,
     command character varying NOT NULL,
     retries integer DEFAULT 0 NOT NULL,
     node_id integer NOT NULL,
@@ -29236,7 +29342,7 @@ CREATE TABLE sys.events (
 -- Name: guiconfig; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.guiconfig (
+CREATE TABLE guiconfig (
     rows_per_page character varying DEFAULT '50,100'::character varying NOT NULL,
     id integer NOT NULL,
     cdr_unload_dir character varying,
@@ -29268,7 +29374,7 @@ CREATE TABLE sys.guiconfig (
 -- Name: guiconfig_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.guiconfig_id_seq
+CREATE SEQUENCE guiconfig_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29280,14 +29386,14 @@ CREATE SEQUENCE sys.guiconfig_id_seq
 -- Name: guiconfig_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.guiconfig_id_seq OWNED BY sys.guiconfig.id;
+ALTER SEQUENCE guiconfig_id_seq OWNED BY guiconfig.id;
 
 
 --
 -- Name: jobs; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.jobs (
+CREATE TABLE jobs (
     id integer NOT NULL,
     type character varying NOT NULL,
     description character varying,
@@ -29300,7 +29406,7 @@ CREATE TABLE sys.jobs (
 -- Name: jobs_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.jobs_id_seq
+CREATE SEQUENCE jobs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29312,14 +29418,14 @@ CREATE SEQUENCE sys.jobs_id_seq
 -- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.jobs_id_seq OWNED BY sys.jobs.id;
+ALTER SEQUENCE jobs_id_seq OWNED BY jobs.id;
 
 
 --
 -- Name: lnp_database_drivers; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.lnp_database_drivers (
+CREATE TABLE lnp_database_drivers (
     id smallint NOT NULL,
     name character varying NOT NULL,
     description text
@@ -29330,7 +29436,7 @@ CREATE TABLE sys.lnp_database_drivers (
 -- Name: lnp_database_drivers_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.lnp_database_drivers_id_seq
+CREATE SEQUENCE lnp_database_drivers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29342,14 +29448,14 @@ CREATE SEQUENCE sys.lnp_database_drivers_id_seq
 -- Name: lnp_database_drivers_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.lnp_database_drivers_id_seq OWNED BY sys.lnp_database_drivers.id;
+ALTER SEQUENCE lnp_database_drivers_id_seq OWNED BY lnp_database_drivers.id;
 
 
 --
 -- Name: lnp_resolvers; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.lnp_resolvers (
+CREATE TABLE lnp_resolvers (
     id integer NOT NULL,
     name character varying NOT NULL,
     address character varying NOT NULL,
@@ -29361,7 +29467,7 @@ CREATE TABLE sys.lnp_resolvers (
 -- Name: lnp_resolvers_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.lnp_resolvers_id_seq
+CREATE SEQUENCE lnp_resolvers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29373,14 +29479,14 @@ CREATE SEQUENCE sys.lnp_resolvers_id_seq
 -- Name: lnp_resolvers_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.lnp_resolvers_id_seq OWNED BY sys.lnp_resolvers.id;
+ALTER SEQUENCE lnp_resolvers_id_seq OWNED BY lnp_resolvers.id;
 
 
 --
 -- Name: load_balancers; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.load_balancers (
+CREATE TABLE load_balancers (
     id smallint NOT NULL,
     name character varying NOT NULL,
     signalling_ip character varying NOT NULL
@@ -29391,7 +29497,7 @@ CREATE TABLE sys.load_balancers (
 -- Name: load_balancers_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.load_balancers_id_seq
+CREATE SEQUENCE load_balancers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29403,14 +29509,14 @@ CREATE SEQUENCE sys.load_balancers_id_seq
 -- Name: load_balancers_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.load_balancers_id_seq OWNED BY sys.load_balancers.id;
+ALTER SEQUENCE load_balancers_id_seq OWNED BY load_balancers.id;
 
 
 --
 -- Name: lua_scripts; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.lua_scripts (
+CREATE TABLE lua_scripts (
     id integer NOT NULL,
     name character varying NOT NULL,
     source character varying NOT NULL,
@@ -29423,7 +29529,7 @@ CREATE TABLE sys.lua_scripts (
 -- Name: lua_scripts_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.lua_scripts_id_seq
+CREATE SEQUENCE lua_scripts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29435,14 +29541,14 @@ CREATE SEQUENCE sys.lua_scripts_id_seq
 -- Name: lua_scripts_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.lua_scripts_id_seq OWNED BY sys.lua_scripts.id;
+ALTER SEQUENCE lua_scripts_id_seq OWNED BY lua_scripts.id;
 
 
 --
 -- Name: network_prefixes_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.network_prefixes_id_seq
+CREATE SEQUENCE network_prefixes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29454,14 +29560,14 @@ CREATE SEQUENCE sys.network_prefixes_id_seq
 -- Name: network_prefixes_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.network_prefixes_id_seq OWNED BY sys.network_prefixes.id;
+ALTER SEQUENCE network_prefixes_id_seq OWNED BY network_prefixes.id;
 
 
 --
 -- Name: networks; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.networks (
+CREATE TABLE networks (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -29471,7 +29577,7 @@ CREATE TABLE sys.networks (
 -- Name: networks_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.networks_id_seq
+CREATE SEQUENCE networks_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29483,14 +29589,14 @@ CREATE SEQUENCE sys.networks_id_seq
 -- Name: networks_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.networks_id_seq OWNED BY sys.networks.id;
+ALTER SEQUENCE networks_id_seq OWNED BY networks.id;
 
 
 --
 -- Name: nodes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.nodes (
+CREATE TABLE nodes (
     id integer NOT NULL,
     signalling_ip character varying,
     signalling_port integer,
@@ -29504,7 +29610,7 @@ CREATE TABLE sys.nodes (
 -- Name: node_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.node_id_seq
+CREATE SEQUENCE node_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29516,14 +29622,14 @@ CREATE SEQUENCE sys.node_id_seq
 -- Name: node_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.node_id_seq OWNED BY sys.nodes.id;
+ALTER SEQUENCE node_id_seq OWNED BY nodes.id;
 
 
 --
 -- Name: pops; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.pops (
+CREATE TABLE pops (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -29533,7 +29639,7 @@ CREATE TABLE sys.pops (
 -- Name: pop_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.pop_id_seq
+CREATE SEQUENCE pop_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29545,14 +29651,14 @@ CREATE SEQUENCE sys.pop_id_seq
 -- Name: pop_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.pop_id_seq OWNED BY sys.pops.id;
+ALTER SEQUENCE pop_id_seq OWNED BY pops.id;
 
 
 --
 -- Name: sensor_levels; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.sensor_levels (
+CREATE TABLE sensor_levels (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -29562,7 +29668,7 @@ CREATE TABLE sys.sensor_levels (
 -- Name: sensor_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.sensor_modes (
+CREATE TABLE sensor_modes (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -29572,7 +29678,7 @@ CREATE TABLE sys.sensor_modes (
 -- Name: sensors; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.sensors (
+CREATE TABLE sensors (
     id smallint NOT NULL,
     name character varying NOT NULL,
     mode_id integer NOT NULL,
@@ -29590,7 +29696,7 @@ CREATE TABLE sys.sensors (
 -- Name: sensors_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.sensors_id_seq
+CREATE SEQUENCE sensors_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29602,14 +29708,14 @@ CREATE SEQUENCE sys.sensors_id_seq
 -- Name: sensors_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.sensors_id_seq OWNED BY sys.sensors.id;
+ALTER SEQUENCE sensors_id_seq OWNED BY sensors.id;
 
 
 --
 -- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.smtp_connections (
+CREATE TABLE smtp_connections (
     id integer NOT NULL,
     name character varying NOT NULL,
     host character varying NOT NULL,
@@ -29625,7 +29731,7 @@ CREATE TABLE sys.smtp_connections (
 -- Name: smtp_connections_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.smtp_connections_id_seq
+CREATE SEQUENCE smtp_connections_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29637,14 +29743,14 @@ CREATE SEQUENCE sys.smtp_connections_id_seq
 -- Name: smtp_connections_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.smtp_connections_id_seq OWNED BY sys.smtp_connections.id;
+ALTER SEQUENCE smtp_connections_id_seq OWNED BY smtp_connections.id;
 
 
 --
 -- Name: timezones; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sys.timezones (
+CREATE TABLE timezones (
     id integer NOT NULL,
     name character varying NOT NULL,
     abbrev character varying,
@@ -29657,7 +29763,7 @@ CREATE TABLE sys.timezones (
 -- Name: timezones_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
 --
 
-CREATE SEQUENCE sys.timezones_id_seq
+CREATE SEQUENCE timezones_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -29669,742 +29775,777 @@ CREATE SEQUENCE sys.timezones_id_seq
 -- Name: timezones_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
 --
 
-ALTER SEQUENCE sys.timezones_id_seq OWNED BY sys.timezones.id;
+ALTER SEQUENCE timezones_id_seq OWNED BY timezones.id;
+
+
+SET search_path = billing, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY accounts ALTER COLUMN id SET DEFAULT nextval('accounts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.accounts ALTER COLUMN id SET DEFAULT nextval('billing.accounts_id_seq'::regclass);
+ALTER TABLE ONLY invoice_periods ALTER COLUMN id SET DEFAULT nextval('invoice_periods_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_periods ALTER COLUMN id SET DEFAULT nextval('billing.invoice_periods_id_seq'::regclass);
+ALTER TABLE ONLY invoice_templates ALTER COLUMN id SET DEFAULT nextval('invoices_templates_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_templates ALTER COLUMN id SET DEFAULT nextval('billing.invoices_templates_id_seq'::regclass);
+ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
 
+
+SET search_path = class4, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY billing.payments ALTER COLUMN id SET DEFAULT nextval('billing.payments_id_seq'::regclass);
+ALTER TABLE ONLY area_prefixes ALTER COLUMN id SET DEFAULT nextval('area_prefixes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.area_prefixes ALTER COLUMN id SET DEFAULT nextval('class4.area_prefixes_id_seq'::regclass);
+ALTER TABLE ONLY areas ALTER COLUMN id SET DEFAULT nextval('areas_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.areas ALTER COLUMN id SET DEFAULT nextval('class4.areas_id_seq'::regclass);
+ALTER TABLE ONLY codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('codec_group_codecs_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('class4.codec_group_codecs_id_seq'::regclass);
+ALTER TABLE ONLY codec_groups ALTER COLUMN id SET DEFAULT nextval('codec_groups_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.codec_groups ALTER COLUMN id SET DEFAULT nextval('class4.codec_groups_id_seq'::regclass);
+ALTER TABLE ONLY codecs ALTER COLUMN id SET DEFAULT nextval('codecs_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.codecs ALTER COLUMN id SET DEFAULT nextval('class4.codecs_id_seq'::regclass);
+ALTER TABLE ONLY customers_auth ALTER COLUMN id SET DEFAULT nextval('customers_auth_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth ALTER COLUMN id SET DEFAULT nextval('class4.customers_auth_id_seq'::regclass);
+ALTER TABLE ONLY customers_auth_normalized ALTER COLUMN id SET DEFAULT nextval('customers_auth_normalized_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth_normalized ALTER COLUMN id SET DEFAULT nextval('class4.customers_auth_normalized_id_seq'::regclass);
+ALTER TABLE ONLY destination_next_rates ALTER COLUMN id SET DEFAULT nextval('destination_next_rates_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.destinations ALTER COLUMN id SET DEFAULT nextval('class4.destinations_id_seq'::regclass);
+ALTER TABLE ONLY destinations ALTER COLUMN id SET DEFAULT nextval('destinations_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeer_next_rates ALTER COLUMN id SET DEFAULT nextval('class4.dialpeer_next_rates_id_seq'::regclass);
+ALTER TABLE ONLY dialpeer_next_rates ALTER COLUMN id SET DEFAULT nextval('dialpeer_next_rates_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers ALTER COLUMN id SET DEFAULT nextval('class4.dialpeers_id_seq'::regclass);
+ALTER TABLE ONLY dialpeers ALTER COLUMN id SET DEFAULT nextval('dialpeers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.disconnect_code ALTER COLUMN id SET DEFAULT nextval('class4.disconnect_code_id_seq'::regclass);
+ALTER TABLE ONLY disconnect_code ALTER COLUMN id SET DEFAULT nextval('disconnect_code_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.disconnect_policy ALTER COLUMN id SET DEFAULT nextval('class4.disconnect_code_policy_id_seq'::regclass);
+ALTER TABLE ONLY disconnect_policy ALTER COLUMN id SET DEFAULT nextval('disconnect_code_policy_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.disconnect_policy_code ALTER COLUMN id SET DEFAULT nextval('class4.disconnect_code_policy_codes_id_seq'::regclass);
+ALTER TABLE ONLY disconnect_policy_code ALTER COLUMN id SET DEFAULT nextval('disconnect_code_policy_codes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateway_groups ALTER COLUMN id SET DEFAULT nextval('class4.gateway_groups_id_seq'::regclass);
+ALTER TABLE ONLY gateway_groups ALTER COLUMN id SET DEFAULT nextval('gateway_groups_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways ALTER COLUMN id SET DEFAULT nextval('class4.gateways_id_seq'::regclass);
+ALTER TABLE ONLY gateways ALTER COLUMN id SET DEFAULT nextval('gateways_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.lnp_cache ALTER COLUMN id SET DEFAULT nextval('class4.lnp_cache_id_seq'::regclass);
+ALTER TABLE ONLY lnp_cache ALTER COLUMN id SET DEFAULT nextval('lnp_cache_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.lnp_databases ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_id_seq'::regclass);
+ALTER TABLE ONLY lnp_databases ALTER COLUMN id SET DEFAULT nextval('lnp_databases_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlist_items ALTER COLUMN id SET DEFAULT nextval('class4.blacklist_items_id_seq'::regclass);
+ALTER TABLE ONLY numberlist_items ALTER COLUMN id SET DEFAULT nextval('blacklist_items_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlists ALTER COLUMN id SET DEFAULT nextval('class4.blacklists_id_seq'::regclass);
+ALTER TABLE ONLY numberlists ALTER COLUMN id SET DEFAULT nextval('blacklists_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profile_interim_attributes_id_seq'::regclass);
+ALTER TABLE ONLY radius_accounting_profile_interim_attributes ALTER COLUMN id SET DEFAULT nextval('radius_accounting_profile_interim_attributes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profile_start_attributes_id_seq'::regclass);
+ALTER TABLE ONLY radius_accounting_profile_start_attributes ALTER COLUMN id SET DEFAULT nextval('radius_accounting_profile_start_attributes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profile_stop_attributes_id_seq'::regclass);
+ALTER TABLE ONLY radius_accounting_profile_stop_attributes ALTER COLUMN id SET DEFAULT nextval('radius_accounting_profile_stop_attributes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profiles ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profiles_id_seq'::regclass);
+ALTER TABLE ONLY radius_accounting_profiles ALTER COLUMN id SET DEFAULT nextval('radius_accounting_profiles_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_auth_profile_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_auth_profile_attributes_id_seq'::regclass);
+ALTER TABLE ONLY radius_auth_profile_attributes ALTER COLUMN id SET DEFAULT nextval('radius_auth_profile_attributes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_auth_profiles ALTER COLUMN id SET DEFAULT nextval('class4.radius_auth_profiles_id_seq'::regclass);
+ALTER TABLE ONLY radius_auth_profiles ALTER COLUMN id SET DEFAULT nextval('radius_auth_profiles_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.rateplans ALTER COLUMN id SET DEFAULT nextval('class4.rateplans_id_seq'::regclass);
+ALTER TABLE ONLY rateplans ALTER COLUMN id SET DEFAULT nextval('rateplans_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.registrations ALTER COLUMN id SET DEFAULT nextval('class4.registrations_id_seq'::regclass);
+ALTER TABLE ONLY registrations ALTER COLUMN id SET DEFAULT nextval('registrations_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_groups ALTER COLUMN id SET DEFAULT nextval('class4.routing_groups_id_seq'::regclass);
+ALTER TABLE ONLY routing_groups ALTER COLUMN id SET DEFAULT nextval('routing_groups_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_groups ALTER COLUMN id SET DEFAULT nextval('class4.routing_plan_groups_id_seq'::regclass);
+ALTER TABLE ONLY routing_plan_groups ALTER COLUMN id SET DEFAULT nextval('routing_plan_groups_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_lnp_rules ALTER COLUMN id SET DEFAULT nextval('class4.routing_plan_lnp_rules_id_seq'::regclass);
+ALTER TABLE ONLY routing_plan_lnp_rules ALTER COLUMN id SET DEFAULT nextval('routing_plan_lnp_rules_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_static_routes ALTER COLUMN id SET DEFAULT nextval('class4.routing_plan_static_routes_id_seq'::regclass);
+ALTER TABLE ONLY routing_plan_static_routes ALTER COLUMN id SET DEFAULT nextval('routing_plan_static_routes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plans ALTER COLUMN id SET DEFAULT nextval('class4.routing_plans_id_seq'::regclass);
+ALTER TABLE ONLY routing_plans ALTER COLUMN id SET DEFAULT nextval('routing_plans_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_tag_detection_rules ALTER COLUMN id SET DEFAULT nextval('class4.routing_tag_detection_rules_id_seq'::regclass);
+ALTER TABLE ONLY routing_tag_detection_rules ALTER COLUMN id SET DEFAULT nextval('routing_tag_detection_rules_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_tags ALTER COLUMN id SET DEFAULT nextval('class4.routing_tags_id_seq'::regclass);
+ALTER TABLE ONLY routing_tags ALTER COLUMN id SET DEFAULT nextval('routing_tags_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.session_refresh_methods ALTER COLUMN id SET DEFAULT nextval('class4.session_refresh_methods_id_seq'::regclass);
+ALTER TABLE ONLY session_refresh_methods ALTER COLUMN id SET DEFAULT nextval('session_refresh_methods_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.sortings ALTER COLUMN id SET DEFAULT nextval('class4.sortings_id_seq'::regclass);
+ALTER TABLE ONLY sortings ALTER COLUMN id SET DEFAULT nextval('sortings_id_seq'::regclass);
+
+
+SET search_path = data_import, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY import_accounts ALTER COLUMN id SET DEFAULT nextval('import_accounts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_accounts ALTER COLUMN id SET DEFAULT nextval('data_import.import_accounts_id_seq'::regclass);
+ALTER TABLE ONLY import_codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('import_codec_group_codecs_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('data_import.import_codec_group_codecs_id_seq'::regclass);
+ALTER TABLE ONLY import_codec_groups ALTER COLUMN id SET DEFAULT nextval('import_codec_groups_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_codec_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_codec_groups_id_seq'::regclass);
+ALTER TABLE ONLY import_contractors ALTER COLUMN id SET DEFAULT nextval('import_contractors_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_contractors ALTER COLUMN id SET DEFAULT nextval('data_import.import_contractors_id_seq'::regclass);
+ALTER TABLE ONLY import_customers_auth ALTER COLUMN id SET DEFAULT nextval('import_customers_auth_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_customers_auth ALTER COLUMN id SET DEFAULT nextval('data_import.import_customers_auth_id_seq'::regclass);
+ALTER TABLE ONLY import_destinations ALTER COLUMN id SET DEFAULT nextval('import_destinations_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_destinations ALTER COLUMN id SET DEFAULT nextval('data_import.import_destinations_id_seq'::regclass);
+ALTER TABLE ONLY import_dialpeers ALTER COLUMN id SET DEFAULT nextval('import_dialpeers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_dialpeers ALTER COLUMN id SET DEFAULT nextval('data_import.import_dialpeers_id_seq'::regclass);
+ALTER TABLE ONLY import_disconnect_policies ALTER COLUMN id SET DEFAULT nextval('import_disconnect_policies_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_disconnect_policies ALTER COLUMN id SET DEFAULT nextval('data_import.import_disconnect_policies_id_seq'::regclass);
+ALTER TABLE ONLY import_gateway_groups ALTER COLUMN id SET DEFAULT nextval('import_gateway_groups_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_gateway_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_gateway_groups_id_seq'::regclass);
+ALTER TABLE ONLY import_gateways ALTER COLUMN id SET DEFAULT nextval('import_gateways_id_seq1'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_gateways ALTER COLUMN id SET DEFAULT nextval('data_import.import_gateways_id_seq1'::regclass);
+ALTER TABLE ONLY import_numberlist_items ALTER COLUMN id SET DEFAULT nextval('import_numberlist_items_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_numberlist_items ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlist_items_id_seq'::regclass);
+ALTER TABLE ONLY import_numberlists ALTER COLUMN id SET DEFAULT nextval('import_numberlists_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_numberlists ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlists_id_seq'::regclass);
+ALTER TABLE ONLY import_rateplans ALTER COLUMN id SET DEFAULT nextval('import_rateplans_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_rateplans ALTER COLUMN id SET DEFAULT nextval('data_import.import_rateplans_id_seq'::regclass);
+ALTER TABLE ONLY import_registrations ALTER COLUMN id SET DEFAULT nextval('import_registrations_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_registrations ALTER COLUMN id SET DEFAULT nextval('data_import.import_registrations_id_seq'::regclass);
+ALTER TABLE ONLY import_routing_groups ALTER COLUMN id SET DEFAULT nextval('import_routing_groups_id_seq'::regclass);
 
+
+SET search_path = gui, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
-ALTER TABLE ONLY data_import.import_routing_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_routing_groups_id_seq'::regclass);
+ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('admin_notes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
-ALTER TABLE ONLY gui.active_admin_comments ALTER COLUMN id SET DEFAULT nextval('gui.admin_notes_id_seq'::regclass);
+ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
-ALTER TABLE ONLY gui.admin_users ALTER COLUMN id SET DEFAULT nextval('gui.admin_users_id_seq'::regclass);
+ALTER TABLE ONLY background_threads ALTER COLUMN id SET DEFAULT nextval('background_threads_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
-ALTER TABLE ONLY gui.background_threads ALTER COLUMN id SET DEFAULT nextval('gui.background_threads_id_seq'::regclass);
+ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
-ALTER TABLE ONLY gui.sessions ALTER COLUMN id SET DEFAULT nextval('gui.sessions_id_seq'::regclass);
+ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
 
+
+SET search_path = logs, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+-- Name: id; Type: DEFAULT; Schema: logs; Owner: -
 --
 
-ALTER TABLE ONLY gui.versions ALTER COLUMN id SET DEFAULT nextval('gui.versions_id_seq'::regclass);
+ALTER TABLE ONLY api_requests ALTER COLUMN id SET DEFAULT nextval('api_requests_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: logs; Owner: -
 --
 
-ALTER TABLE ONLY logs.api_requests ALTER COLUMN id SET DEFAULT nextval('logs.api_requests_id_seq'::regclass);
+ALTER TABLE ONLY balance_notifications ALTER COLUMN id SET DEFAULT nextval('balance_notifications_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: logs; Owner: -
 --
 
-ALTER TABLE ONLY logs.balance_notifications ALTER COLUMN id SET DEFAULT nextval('logs.balance_notifications_id_seq'::regclass);
+ALTER TABLE ONLY logic_log ALTER COLUMN id SET DEFAULT nextval('logic_log_id_seq'::regclass);
 
+
+SET search_path = notifications, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: logs; Owner: -
+-- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY logs.logic_log ALTER COLUMN id SET DEFAULT nextval('logs.logic_log_id_seq'::regclass);
+ALTER TABLE ONLY alerts ALTER COLUMN id SET DEFAULT nextval('alerts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.alerts ALTER COLUMN id SET DEFAULT nextval('notifications.alerts_id_seq'::regclass);
+ALTER TABLE ONLY attachments ALTER COLUMN id SET DEFAULT nextval('attachments_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.attachments ALTER COLUMN id SET DEFAULT nextval('notifications.attachments_id_seq'::regclass);
+ALTER TABLE ONLY contacts ALTER COLUMN id SET DEFAULT nextval('contacts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.contacts ALTER COLUMN id SET DEFAULT nextval('notifications.contacts_id_seq'::regclass);
+ALTER TABLE ONLY email_logs ALTER COLUMN id SET DEFAULT nextval('email_log_id_seq'::regclass);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY notifications.email_logs ALTER COLUMN id SET DEFAULT nextval('notifications.email_log_id_seq'::regclass);
+ALTER TABLE ONLY contractors ALTER COLUMN id SET DEFAULT nextval('contractors_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.contractors ALTER COLUMN id SET DEFAULT nextval('public.contractors_id_seq'::regclass);
+ALTER TABLE ONLY new_table_0 ALTER COLUMN id SET DEFAULT nextval('new_table_0_id_seq'::regclass);
 
+
+SET search_path = runtime_stats, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: runtime_stats; Owner: -
 --
 
-ALTER TABLE ONLY public.new_table_0 ALTER COLUMN id SET DEFAULT nextval('public.new_table_0_id_seq'::regclass);
+ALTER TABLE ONLY dialpeers_stats ALTER COLUMN id SET DEFAULT nextval('dialpeers_stats_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: runtime_stats; Owner: -
 --
 
-ALTER TABLE ONLY runtime_stats.dialpeers_stats ALTER COLUMN id SET DEFAULT nextval('runtime_stats.dialpeers_stats_id_seq'::regclass);
+ALTER TABLE ONLY gateways_stats ALTER COLUMN id SET DEFAULT nextval('gateways_stats_id_seq'::regclass);
 
+
+SET search_path = switch13, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: runtime_stats; Owner: -
+-- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
 --
 
-ALTER TABLE ONLY runtime_stats.gateways_stats ALTER COLUMN id SET DEFAULT nextval('runtime_stats.gateways_stats_id_seq'::regclass);
+ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
 --
 
-ALTER TABLE ONLY switch13.resource_type ALTER COLUMN id SET DEFAULT nextval('switch13.resource_type_id_seq'::regclass);
+ALTER TABLE ONLY switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch_interface_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
 --
 
-ALTER TABLE ONLY switch13.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch13.switch_interface_id_seq'::regclass);
+ALTER TABLE ONLY trusted_headers ALTER COLUMN id SET DEFAULT nextval('trusted_headers_id_seq'::regclass);
 
+
+SET search_path = switch14, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
+-- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
 --
 
-ALTER TABLE ONLY switch13.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch13.trusted_headers_id_seq'::regclass);
+ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
 --
 
-ALTER TABLE ONLY switch14.resource_type ALTER COLUMN id SET DEFAULT nextval('switch14.resource_type_id_seq'::regclass);
+ALTER TABLE ONLY switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch_interface_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
 --
 
-ALTER TABLE ONLY switch14.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch14.switch_interface_id_seq'::regclass);
+ALTER TABLE ONLY trusted_headers ALTER COLUMN id SET DEFAULT nextval('trusted_headers_id_seq'::regclass);
 
+
+SET search_path = switch15, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
+-- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
 --
 
-ALTER TABLE ONLY switch14.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch14.trusted_headers_id_seq'::regclass);
+ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
 --
 
-ALTER TABLE ONLY switch15.resource_type ALTER COLUMN id SET DEFAULT nextval('switch15.resource_type_id_seq'::regclass);
+ALTER TABLE ONLY switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch_interface_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
 --
 
-ALTER TABLE ONLY switch15.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch15.switch_interface_id_seq'::regclass);
+ALTER TABLE ONLY trusted_headers ALTER COLUMN id SET DEFAULT nextval('trusted_headers_id_seq'::regclass);
 
+
+SET search_path = switch16, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
+-- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
 --
 
-ALTER TABLE ONLY switch15.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch15.trusted_headers_id_seq'::regclass);
+ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
 --
 
-ALTER TABLE ONLY switch16.resource_type ALTER COLUMN id SET DEFAULT nextval('switch16.resource_type_id_seq'::regclass);
+ALTER TABLE ONLY switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch_interface_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
 --
 
-ALTER TABLE ONLY switch16.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch16.switch_interface_id_seq'::regclass);
+ALTER TABLE ONLY trusted_headers ALTER COLUMN id SET DEFAULT nextval('trusted_headers_id_seq'::regclass);
 
+
+SET search_path = sys, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
+-- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY switch16.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch16.trusted_headers_id_seq'::regclass);
+ALTER TABLE ONLY active_currencies ALTER COLUMN id SET DEFAULT nextval('active_currencies_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.active_currencies ALTER COLUMN id SET DEFAULT nextval('sys.active_currencies_id_seq'::regclass);
+ALTER TABLE ONLY api_access ALTER COLUMN id SET DEFAULT nextval('api_access_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.api_access ALTER COLUMN id SET DEFAULT nextval('sys.api_access_id_seq'::regclass);
+ALTER TABLE ONLY api_log_config ALTER COLUMN id SET DEFAULT nextval('api_log_config_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.api_log_config ALTER COLUMN id SET DEFAULT nextval('sys.api_log_config_id_seq'::regclass);
+ALTER TABLE ONLY cdr_exports ALTER COLUMN id SET DEFAULT nextval('cdr_exports_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.cdr_exports ALTER COLUMN id SET DEFAULT nextval('sys.cdr_exports_id_seq'::regclass);
+ALTER TABLE ONLY cdr_tables ALTER COLUMN id SET DEFAULT nextval('cdrtables_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdrtables_id_seq'::regclass);
+ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.countries ALTER COLUMN id SET DEFAULT nextval('sys.countries_id_seq'::regclass);
+ALTER TABLE ONLY currencies ALTER COLUMN id SET DEFAULT nextval('currencies_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.currencies ALTER COLUMN id SET DEFAULT nextval('sys.currencies_id_seq'::regclass);
+ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.delayed_jobs ALTER COLUMN id SET DEFAULT nextval('sys.delayed_jobs_id_seq'::regclass);
+ALTER TABLE ONLY guiconfig ALTER COLUMN id SET DEFAULT nextval('guiconfig_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.guiconfig ALTER COLUMN id SET DEFAULT nextval('sys.guiconfig_id_seq'::regclass);
+ALTER TABLE ONLY jobs ALTER COLUMN id SET DEFAULT nextval('jobs_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.jobs ALTER COLUMN id SET DEFAULT nextval('sys.jobs_id_seq'::regclass);
+ALTER TABLE ONLY lnp_database_drivers ALTER COLUMN id SET DEFAULT nextval('lnp_database_drivers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.lnp_database_drivers ALTER COLUMN id SET DEFAULT nextval('sys.lnp_database_drivers_id_seq'::regclass);
+ALTER TABLE ONLY lnp_resolvers ALTER COLUMN id SET DEFAULT nextval('lnp_resolvers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.lnp_resolvers ALTER COLUMN id SET DEFAULT nextval('sys.lnp_resolvers_id_seq'::regclass);
+ALTER TABLE ONLY load_balancers ALTER COLUMN id SET DEFAULT nextval('load_balancers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.load_balancers ALTER COLUMN id SET DEFAULT nextval('sys.load_balancers_id_seq'::regclass);
+ALTER TABLE ONLY lua_scripts ALTER COLUMN id SET DEFAULT nextval('lua_scripts_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.lua_scripts ALTER COLUMN id SET DEFAULT nextval('sys.lua_scripts_id_seq'::regclass);
+ALTER TABLE ONLY network_prefixes ALTER COLUMN id SET DEFAULT nextval('network_prefixes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.network_prefixes ALTER COLUMN id SET DEFAULT nextval('sys.network_prefixes_id_seq'::regclass);
+ALTER TABLE ONLY networks ALTER COLUMN id SET DEFAULT nextval('networks_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.networks ALTER COLUMN id SET DEFAULT nextval('sys.networks_id_seq'::regclass);
+ALTER TABLE ONLY nodes ALTER COLUMN id SET DEFAULT nextval('node_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.nodes ALTER COLUMN id SET DEFAULT nextval('sys.node_id_seq'::regclass);
+ALTER TABLE ONLY pops ALTER COLUMN id SET DEFAULT nextval('pop_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.pops ALTER COLUMN id SET DEFAULT nextval('sys.pop_id_seq'::regclass);
+ALTER TABLE ONLY sensors ALTER COLUMN id SET DEFAULT nextval('sensors_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.sensors ALTER COLUMN id SET DEFAULT nextval('sys.sensors_id_seq'::regclass);
+ALTER TABLE ONLY smtp_connections ALTER COLUMN id SET DEFAULT nextval('smtp_connections_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.smtp_connections ALTER COLUMN id SET DEFAULT nextval('sys.smtp_connections_id_seq'::regclass);
+ALTER TABLE ONLY timezones ALTER COLUMN id SET DEFAULT nextval('timezones_id_seq'::regclass);
 
 
---
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones ALTER COLUMN id SET DEFAULT nextval('sys.timezones_id_seq'::regclass);
-
+SET search_path = billing, pg_catalog;
 
 --
 -- Name: accounts_external_id_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.accounts
+ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_external_id_key UNIQUE (external_id);
 
 
@@ -30412,7 +30553,7 @@ ALTER TABLE ONLY billing.accounts
 -- Name: accounts_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.accounts
+ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_name_key UNIQUE (name);
 
 
@@ -30420,7 +30561,7 @@ ALTER TABLE ONLY billing.accounts
 -- Name: accounts_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.accounts
+ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
 
 
@@ -30428,7 +30569,7 @@ ALTER TABLE ONLY billing.accounts
 -- Name: accounts_uuid_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.accounts
+ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_uuid_key UNIQUE (uuid);
 
 
@@ -30436,7 +30577,7 @@ ALTER TABLE ONLY billing.accounts
 -- Name: cdr_batches_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.cdr_batches
+ALTER TABLE ONLY cdr_batches
     ADD CONSTRAINT cdr_batches_pkey PRIMARY KEY (id);
 
 
@@ -30444,7 +30585,7 @@ ALTER TABLE ONLY billing.cdr_batches
 -- Name: invoice_periods_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.invoice_periods
+ALTER TABLE ONLY invoice_periods
     ADD CONSTRAINT invoice_periods_name_key UNIQUE (name);
 
 
@@ -30452,7 +30593,7 @@ ALTER TABLE ONLY billing.invoice_periods
 -- Name: invoice_periods_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.invoice_periods
+ALTER TABLE ONLY invoice_periods
     ADD CONSTRAINT invoice_periods_pkey PRIMARY KEY (id);
 
 
@@ -30460,7 +30601,7 @@ ALTER TABLE ONLY billing.invoice_periods
 -- Name: invoices_templates_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.invoice_templates
+ALTER TABLE ONLY invoice_templates
     ADD CONSTRAINT invoices_templates_name_key UNIQUE (name);
 
 
@@ -30468,7 +30609,7 @@ ALTER TABLE ONLY billing.invoice_templates
 -- Name: invoices_templates_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.invoice_templates
+ALTER TABLE ONLY invoice_templates
     ADD CONSTRAINT invoices_templates_pkey PRIMARY KEY (id);
 
 
@@ -30476,15 +30617,17 @@ ALTER TABLE ONLY billing.invoice_templates
 -- Name: payments_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY billing.payments
+ALTER TABLE ONLY payments
     ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
 
+
+SET search_path = class4, pg_catalog;
 
 --
 -- Name: area_prefixes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.area_prefixes
+ALTER TABLE ONLY area_prefixes
     ADD CONSTRAINT area_prefixes_pkey PRIMARY KEY (id);
 
 
@@ -30492,7 +30635,7 @@ ALTER TABLE ONLY class4.area_prefixes
 -- Name: area_prefixes_prefix_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.area_prefixes
+ALTER TABLE ONLY area_prefixes
     ADD CONSTRAINT area_prefixes_prefix_key UNIQUE (prefix);
 
 
@@ -30500,7 +30643,7 @@ ALTER TABLE ONLY class4.area_prefixes
 -- Name: areas_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.areas
+ALTER TABLE ONLY areas
     ADD CONSTRAINT areas_name_key UNIQUE (name);
 
 
@@ -30508,7 +30651,7 @@ ALTER TABLE ONLY class4.areas
 -- Name: areas_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.areas
+ALTER TABLE ONLY areas
     ADD CONSTRAINT areas_pkey PRIMARY KEY (id);
 
 
@@ -30516,7 +30659,7 @@ ALTER TABLE ONLY class4.areas
 -- Name: blacklist_items_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlist_items
+ALTER TABLE ONLY numberlist_items
     ADD CONSTRAINT blacklist_items_pkey PRIMARY KEY (id);
 
 
@@ -30524,7 +30667,7 @@ ALTER TABLE ONLY class4.numberlist_items
 -- Name: blacklist_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlist_modes
+ALTER TABLE ONLY numberlist_modes
     ADD CONSTRAINT blacklist_modes_name_key UNIQUE (name);
 
 
@@ -30532,7 +30675,7 @@ ALTER TABLE ONLY class4.numberlist_modes
 -- Name: blacklist_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlist_modes
+ALTER TABLE ONLY numberlist_modes
     ADD CONSTRAINT blacklist_modes_pkey PRIMARY KEY (id);
 
 
@@ -30540,7 +30683,7 @@ ALTER TABLE ONLY class4.numberlist_modes
 -- Name: blacklists_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlists
+ALTER TABLE ONLY numberlists
     ADD CONSTRAINT blacklists_name_key UNIQUE (name);
 
 
@@ -30548,7 +30691,7 @@ ALTER TABLE ONLY class4.numberlists
 -- Name: blacklists_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlists
+ALTER TABLE ONLY numberlists
     ADD CONSTRAINT blacklists_pkey PRIMARY KEY (id);
 
 
@@ -30556,7 +30699,7 @@ ALTER TABLE ONLY class4.numberlists
 -- Name: codec_group_codecs_codec_group_id_codec_id_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codec_group_codecs
+ALTER TABLE ONLY codec_group_codecs
     ADD CONSTRAINT codec_group_codecs_codec_group_id_codec_id_key UNIQUE (codec_group_id, codec_id);
 
 
@@ -30564,7 +30707,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 -- Name: codec_group_codecs_codec_group_id_priority_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codec_group_codecs
+ALTER TABLE ONLY codec_group_codecs
     ADD CONSTRAINT codec_group_codecs_codec_group_id_priority_key UNIQUE (codec_group_id, priority);
 
 
@@ -30572,7 +30715,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 -- Name: codec_group_codecs_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codec_group_codecs
+ALTER TABLE ONLY codec_group_codecs
     ADD CONSTRAINT codec_group_codecs_pkey PRIMARY KEY (id);
 
 
@@ -30580,7 +30723,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 -- Name: codec_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codec_groups
+ALTER TABLE ONLY codec_groups
     ADD CONSTRAINT codec_groups_name_key UNIQUE (name);
 
 
@@ -30588,7 +30731,7 @@ ALTER TABLE ONLY class4.codec_groups
 -- Name: codec_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codec_groups
+ALTER TABLE ONLY codec_groups
     ADD CONSTRAINT codec_groups_pkey PRIMARY KEY (id);
 
 
@@ -30596,7 +30739,7 @@ ALTER TABLE ONLY class4.codec_groups
 -- Name: codecs_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codecs
+ALTER TABLE ONLY codecs
     ADD CONSTRAINT codecs_name_key UNIQUE (name);
 
 
@@ -30604,7 +30747,7 @@ ALTER TABLE ONLY class4.codecs
 -- Name: codecs_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.codecs
+ALTER TABLE ONLY codecs
     ADD CONSTRAINT codecs_pkey PRIMARY KEY (id);
 
 
@@ -30612,7 +30755,7 @@ ALTER TABLE ONLY class4.codecs
 -- Name: customers_auth_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.customers_auth
+ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_external_id_key UNIQUE (external_id);
 
 
@@ -30620,7 +30763,7 @@ ALTER TABLE ONLY class4.customers_auth
 -- Name: customers_auth_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.customers_auth
+ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_name_key UNIQUE (name);
 
 
@@ -30628,7 +30771,7 @@ ALTER TABLE ONLY class4.customers_auth
 -- Name: customers_auth_normalized_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.customers_auth_normalized
+ALTER TABLE ONLY customers_auth_normalized
     ADD CONSTRAINT customers_auth_normalized_pkey PRIMARY KEY (id);
 
 
@@ -30636,15 +30779,23 @@ ALTER TABLE ONLY class4.customers_auth_normalized
 -- Name: customers_auth_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.customers_auth
+ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: destination_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY destination_next_rates
+    ADD CONSTRAINT destination_next_rates_pkey PRIMARY KEY (id);
 
 
 --
 -- Name: destination_rate_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.destination_rate_policy
+ALTER TABLE ONLY destination_rate_policy
     ADD CONSTRAINT destination_rate_policy_name_key UNIQUE (name);
 
 
@@ -30652,7 +30803,7 @@ ALTER TABLE ONLY class4.destination_rate_policy
 -- Name: destination_rate_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.destination_rate_policy
+ALTER TABLE ONLY destination_rate_policy
     ADD CONSTRAINT destination_rate_policy_pkey PRIMARY KEY (id);
 
 
@@ -30660,7 +30811,7 @@ ALTER TABLE ONLY class4.destination_rate_policy
 -- Name: destinations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.destinations
+ALTER TABLE ONLY destinations
     ADD CONSTRAINT destinations_pkey PRIMARY KEY (id);
 
 
@@ -30668,7 +30819,7 @@ ALTER TABLE ONLY class4.destinations
 -- Name: destinations_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.destinations
+ALTER TABLE ONLY destinations
     ADD CONSTRAINT destinations_uuid_key UNIQUE (uuid);
 
 
@@ -30676,7 +30827,7 @@ ALTER TABLE ONLY class4.destinations
 -- Name: dialpeer_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dialpeer_next_rates
+ALTER TABLE ONLY dialpeer_next_rates
     ADD CONSTRAINT dialpeer_next_rates_pkey PRIMARY KEY (id);
 
 
@@ -30684,7 +30835,7 @@ ALTER TABLE ONLY class4.dialpeer_next_rates
 -- Name: dialpeers_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dialpeers
+ALTER TABLE ONLY dialpeers
     ADD CONSTRAINT dialpeers_pkey PRIMARY KEY (id);
 
 
@@ -30692,7 +30843,7 @@ ALTER TABLE ONLY class4.dialpeers
 -- Name: disconnect_code_namespace_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_code_namespace
+ALTER TABLE ONLY disconnect_code_namespace
     ADD CONSTRAINT disconnect_code_namespace_name_key UNIQUE (name);
 
 
@@ -30700,7 +30851,7 @@ ALTER TABLE ONLY class4.disconnect_code_namespace
 -- Name: disconnect_code_namespace_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_code_namespace
+ALTER TABLE ONLY disconnect_code_namespace
     ADD CONSTRAINT disconnect_code_namespace_pkey PRIMARY KEY (id);
 
 
@@ -30708,7 +30859,7 @@ ALTER TABLE ONLY class4.disconnect_code_namespace
 -- Name: disconnect_code_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_code
+ALTER TABLE ONLY disconnect_code
     ADD CONSTRAINT disconnect_code_pkey PRIMARY KEY (id);
 
 
@@ -30716,7 +30867,7 @@ ALTER TABLE ONLY class4.disconnect_code
 -- Name: disconnect_code_policy_codes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_policy_code
+ALTER TABLE ONLY disconnect_policy_code
     ADD CONSTRAINT disconnect_code_policy_codes_pkey PRIMARY KEY (id);
 
 
@@ -30724,7 +30875,7 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 -- Name: disconnect_code_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_policy
+ALTER TABLE ONLY disconnect_policy
     ADD CONSTRAINT disconnect_code_policy_name_key UNIQUE (name);
 
 
@@ -30732,7 +30883,7 @@ ALTER TABLE ONLY class4.disconnect_policy
 -- Name: disconnect_code_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_policy
+ALTER TABLE ONLY disconnect_policy
     ADD CONSTRAINT disconnect_code_policy_pkey PRIMARY KEY (id);
 
 
@@ -30740,7 +30891,7 @@ ALTER TABLE ONLY class4.disconnect_policy
 -- Name: disconnect_initiators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.disconnect_initiators
+ALTER TABLE ONLY disconnect_initiators
     ADD CONSTRAINT disconnect_initiators_pkey PRIMARY KEY (id);
 
 
@@ -30748,7 +30899,7 @@ ALTER TABLE ONLY class4.disconnect_initiators
 -- Name: diversion_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.diversion_policy
+ALTER TABLE ONLY diversion_policy
     ADD CONSTRAINT diversion_policy_name_key UNIQUE (name);
 
 
@@ -30756,7 +30907,7 @@ ALTER TABLE ONLY class4.diversion_policy
 -- Name: diversion_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.diversion_policy
+ALTER TABLE ONLY diversion_policy
     ADD CONSTRAINT diversion_policy_pkey PRIMARY KEY (id);
 
 
@@ -30764,7 +30915,7 @@ ALTER TABLE ONLY class4.diversion_policy
 -- Name: dtmf_receive_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dtmf_receive_modes
+ALTER TABLE ONLY dtmf_receive_modes
     ADD CONSTRAINT dtmf_receive_modes_name_key UNIQUE (name);
 
 
@@ -30772,7 +30923,7 @@ ALTER TABLE ONLY class4.dtmf_receive_modes
 -- Name: dtmf_receive_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dtmf_receive_modes
+ALTER TABLE ONLY dtmf_receive_modes
     ADD CONSTRAINT dtmf_receive_modes_pkey PRIMARY KEY (id);
 
 
@@ -30780,7 +30931,7 @@ ALTER TABLE ONLY class4.dtmf_receive_modes
 -- Name: dtmf_send_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dtmf_send_modes
+ALTER TABLE ONLY dtmf_send_modes
     ADD CONSTRAINT dtmf_send_modes_name_key UNIQUE (name);
 
 
@@ -30788,7 +30939,7 @@ ALTER TABLE ONLY class4.dtmf_send_modes
 -- Name: dtmf_send_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dtmf_send_modes
+ALTER TABLE ONLY dtmf_send_modes
     ADD CONSTRAINT dtmf_send_modes_pkey PRIMARY KEY (id);
 
 
@@ -30796,7 +30947,7 @@ ALTER TABLE ONLY class4.dtmf_send_modes
 -- Name: dump_level_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dump_level
+ALTER TABLE ONLY dump_level
     ADD CONSTRAINT dump_level_name_key UNIQUE (name);
 
 
@@ -30804,7 +30955,7 @@ ALTER TABLE ONLY class4.dump_level
 -- Name: dump_level_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.dump_level
+ALTER TABLE ONLY dump_level
     ADD CONSTRAINT dump_level_pkey PRIMARY KEY (id);
 
 
@@ -30812,7 +30963,7 @@ ALTER TABLE ONLY class4.dump_level
 -- Name: filter_types_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.filter_types
+ALTER TABLE ONLY filter_types
     ADD CONSTRAINT filter_types_pkey PRIMARY KEY (id);
 
 
@@ -30820,7 +30971,7 @@ ALTER TABLE ONLY class4.filter_types
 -- Name: gateway_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_groups
+ALTER TABLE ONLY gateway_groups
     ADD CONSTRAINT gateway_groups_name_key UNIQUE (name);
 
 
@@ -30828,7 +30979,7 @@ ALTER TABLE ONLY class4.gateway_groups
 -- Name: gateway_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_groups
+ALTER TABLE ONLY gateway_groups
     ADD CONSTRAINT gateway_groups_pkey PRIMARY KEY (id);
 
 
@@ -30836,7 +30987,7 @@ ALTER TABLE ONLY class4.gateway_groups
 -- Name: gateway_inband_dtmf_filtering_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
+ALTER TABLE ONLY gateway_inband_dtmf_filtering_modes
     ADD CONSTRAINT gateway_inband_dtmf_filtering_modes_name_key UNIQUE (name);
 
 
@@ -30844,7 +30995,7 @@ ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
 -- Name: gateway_inband_dtmf_filtering_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
+ALTER TABLE ONLY gateway_inband_dtmf_filtering_modes
     ADD CONSTRAINT gateway_inband_dtmf_filtering_modes_pkey PRIMARY KEY (id);
 
 
@@ -30852,7 +31003,7 @@ ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
 -- Name: gateway_rel100_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_rel100_modes
+ALTER TABLE ONLY gateway_rel100_modes
     ADD CONSTRAINT gateway_rel100_modes_name_key UNIQUE (name);
 
 
@@ -30860,7 +31011,7 @@ ALTER TABLE ONLY class4.gateway_rel100_modes
 -- Name: gateway_rel100_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_rel100_modes
+ALTER TABLE ONLY gateway_rel100_modes
     ADD CONSTRAINT gateway_rel100_modes_pkey PRIMARY KEY (id);
 
 
@@ -30868,7 +31019,7 @@ ALTER TABLE ONLY class4.gateway_rel100_modes
 -- Name: gateways_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateways
+ALTER TABLE ONLY gateways
     ADD CONSTRAINT gateways_name_unique UNIQUE (name);
 
 
@@ -30876,7 +31027,7 @@ ALTER TABLE ONLY class4.gateways
 -- Name: gateways_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateways
+ALTER TABLE ONLY gateways
     ADD CONSTRAINT gateways_pkey PRIMARY KEY (id);
 
 
@@ -30884,7 +31035,7 @@ ALTER TABLE ONLY class4.gateways
 -- Name: lnp_cache_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.lnp_cache
+ALTER TABLE ONLY lnp_cache
     ADD CONSTRAINT lnp_cache_pkey PRIMARY KEY (id);
 
 
@@ -30892,7 +31043,7 @@ ALTER TABLE ONLY class4.lnp_cache
 -- Name: lnp_databases_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.lnp_databases
+ALTER TABLE ONLY lnp_databases
     ADD CONSTRAINT lnp_databases_name_key UNIQUE (name);
 
 
@@ -30900,7 +31051,7 @@ ALTER TABLE ONLY class4.lnp_databases
 -- Name: lnp_databases_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.lnp_databases
+ALTER TABLE ONLY lnp_databases
     ADD CONSTRAINT lnp_databases_pkey PRIMARY KEY (id);
 
 
@@ -30908,7 +31059,7 @@ ALTER TABLE ONLY class4.lnp_databases
 -- Name: numberlist_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlist_actions
+ALTER TABLE ONLY numberlist_actions
     ADD CONSTRAINT numberlist_actions_name_key UNIQUE (name);
 
 
@@ -30916,7 +31067,7 @@ ALTER TABLE ONLY class4.numberlist_actions
 -- Name: numberlist_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.numberlist_actions
+ALTER TABLE ONLY numberlist_actions
     ADD CONSTRAINT numberlist_actions_pkey PRIMARY KEY (id);
 
 
@@ -30924,7 +31075,7 @@ ALTER TABLE ONLY class4.numberlist_actions
 -- Name: radius_accounting_profile_interim_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
+ALTER TABLE ONLY radius_accounting_profile_interim_attributes
     ADD CONSTRAINT radius_accounting_profile_interim_attributes_pkey PRIMARY KEY (id);
 
 
@@ -30932,7 +31083,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
 -- Name: radius_accounting_profile_start_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
+ALTER TABLE ONLY radius_accounting_profile_start_attributes
     ADD CONSTRAINT radius_accounting_profile_start_attributes_pkey PRIMARY KEY (id);
 
 
@@ -30940,7 +31091,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
 -- Name: radius_accounting_profile_stop_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
+ALTER TABLE ONLY radius_accounting_profile_stop_attributes
     ADD CONSTRAINT radius_accounting_profile_stop_attributes_pkey PRIMARY KEY (id);
 
 
@@ -30948,7 +31099,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
 -- Name: radius_accounting_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profiles
+ALTER TABLE ONLY radius_accounting_profiles
     ADD CONSTRAINT radius_accounting_profiles_name_key UNIQUE (name);
 
 
@@ -30956,7 +31107,7 @@ ALTER TABLE ONLY class4.radius_accounting_profiles
 -- Name: radius_accounting_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profiles
+ALTER TABLE ONLY radius_accounting_profiles
     ADD CONSTRAINT radius_accounting_profiles_pkey PRIMARY KEY (id);
 
 
@@ -30964,7 +31115,7 @@ ALTER TABLE ONLY class4.radius_accounting_profiles
 -- Name: radius_auth_profile_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_auth_profile_attributes
+ALTER TABLE ONLY radius_auth_profile_attributes
     ADD CONSTRAINT radius_auth_profile_attributes_pkey PRIMARY KEY (id);
 
 
@@ -30972,7 +31123,7 @@ ALTER TABLE ONLY class4.radius_auth_profile_attributes
 -- Name: radius_auth_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_auth_profiles
+ALTER TABLE ONLY radius_auth_profiles
     ADD CONSTRAINT radius_auth_profiles_name_key UNIQUE (name);
 
 
@@ -30980,7 +31131,7 @@ ALTER TABLE ONLY class4.radius_auth_profiles
 -- Name: radius_auth_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.radius_auth_profiles
+ALTER TABLE ONLY radius_auth_profiles
     ADD CONSTRAINT radius_auth_profiles_pkey PRIMARY KEY (id);
 
 
@@ -30988,7 +31139,7 @@ ALTER TABLE ONLY class4.radius_auth_profiles
 -- Name: rate_profit_control_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.rate_profit_control_modes
+ALTER TABLE ONLY rate_profit_control_modes
     ADD CONSTRAINT rate_profit_control_modes_name_key UNIQUE (name);
 
 
@@ -30996,7 +31147,7 @@ ALTER TABLE ONLY class4.rate_profit_control_modes
 -- Name: rate_profit_control_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.rate_profit_control_modes
+ALTER TABLE ONLY rate_profit_control_modes
     ADD CONSTRAINT rate_profit_control_modes_pkey PRIMARY KEY (id);
 
 
@@ -31004,7 +31155,7 @@ ALTER TABLE ONLY class4.rate_profit_control_modes
 -- Name: rateplans_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.rateplans
+ALTER TABLE ONLY rateplans
     ADD CONSTRAINT rateplans_name_unique UNIQUE (name);
 
 
@@ -31012,7 +31163,7 @@ ALTER TABLE ONLY class4.rateplans
 -- Name: rateplans_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.rateplans
+ALTER TABLE ONLY rateplans
     ADD CONSTRAINT rateplans_pkey PRIMARY KEY (id);
 
 
@@ -31020,7 +31171,7 @@ ALTER TABLE ONLY class4.rateplans
 -- Name: rateplans_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.rateplans
+ALTER TABLE ONLY rateplans
     ADD CONSTRAINT rateplans_uuid_key UNIQUE (uuid);
 
 
@@ -31028,7 +31179,7 @@ ALTER TABLE ONLY class4.rateplans
 -- Name: registrations_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.registrations
+ALTER TABLE ONLY registrations
     ADD CONSTRAINT registrations_name_key UNIQUE (name);
 
 
@@ -31036,7 +31187,7 @@ ALTER TABLE ONLY class4.registrations
 -- Name: registrations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.registrations
+ALTER TABLE ONLY registrations
     ADD CONSTRAINT registrations_pkey PRIMARY KEY (id);
 
 
@@ -31044,7 +31195,7 @@ ALTER TABLE ONLY class4.registrations
 -- Name: routing_groups_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_groups
+ALTER TABLE ONLY routing_groups
     ADD CONSTRAINT routing_groups_name_unique UNIQUE (name);
 
 
@@ -31052,7 +31203,7 @@ ALTER TABLE ONLY class4.routing_groups
 -- Name: routing_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_groups
+ALTER TABLE ONLY routing_groups
     ADD CONSTRAINT routing_groups_pkey PRIMARY KEY (id);
 
 
@@ -31060,7 +31211,7 @@ ALTER TABLE ONLY class4.routing_groups
 -- Name: routing_plan_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_plan_groups
+ALTER TABLE ONLY routing_plan_groups
     ADD CONSTRAINT routing_plan_groups_pkey PRIMARY KEY (id);
 
 
@@ -31068,7 +31219,7 @@ ALTER TABLE ONLY class4.routing_plan_groups
 -- Name: routing_plan_groups_routing_plan_id_routing_group_id_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_plan_groups
+ALTER TABLE ONLY routing_plan_groups
     ADD CONSTRAINT routing_plan_groups_routing_plan_id_routing_group_id_key UNIQUE (routing_plan_id, routing_group_id);
 
 
@@ -31076,7 +31227,7 @@ ALTER TABLE ONLY class4.routing_plan_groups
 -- Name: routing_plan_lnp_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_plan_lnp_rules
+ALTER TABLE ONLY routing_plan_lnp_rules
     ADD CONSTRAINT routing_plan_lnp_rules_pkey PRIMARY KEY (id);
 
 
@@ -31084,7 +31235,7 @@ ALTER TABLE ONLY class4.routing_plan_lnp_rules
 -- Name: routing_plan_static_routes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_plan_static_routes
+ALTER TABLE ONLY routing_plan_static_routes
     ADD CONSTRAINT routing_plan_static_routes_pkey PRIMARY KEY (id);
 
 
@@ -31092,7 +31243,7 @@ ALTER TABLE ONLY class4.routing_plan_static_routes
 -- Name: routing_plans_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_plans
+ALTER TABLE ONLY routing_plans
     ADD CONSTRAINT routing_plans_name_key UNIQUE (name);
 
 
@@ -31100,7 +31251,7 @@ ALTER TABLE ONLY class4.routing_plans
 -- Name: routing_plans_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_plans
+ALTER TABLE ONLY routing_plans
     ADD CONSTRAINT routing_plans_pkey PRIMARY KEY (id);
 
 
@@ -31108,7 +31259,7 @@ ALTER TABLE ONLY class4.routing_plans
 -- Name: routing_tag_detection_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_tag_detection_rules
+ALTER TABLE ONLY routing_tag_detection_rules
     ADD CONSTRAINT routing_tag_detection_rules_pkey PRIMARY KEY (id);
 
 
@@ -31116,7 +31267,7 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 -- Name: routing_tag_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_tag_modes
+ALTER TABLE ONLY routing_tag_modes
     ADD CONSTRAINT routing_tag_modes_name_key UNIQUE (name);
 
 
@@ -31124,7 +31275,7 @@ ALTER TABLE ONLY class4.routing_tag_modes
 -- Name: routing_tag_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_tag_modes
+ALTER TABLE ONLY routing_tag_modes
     ADD CONSTRAINT routing_tag_modes_pkey PRIMARY KEY (id);
 
 
@@ -31132,7 +31283,7 @@ ALTER TABLE ONLY class4.routing_tag_modes
 -- Name: routing_tags_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_tags
+ALTER TABLE ONLY routing_tags
     ADD CONSTRAINT routing_tags_name_key UNIQUE (name);
 
 
@@ -31140,7 +31291,7 @@ ALTER TABLE ONLY class4.routing_tags
 -- Name: routing_tags_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.routing_tags
+ALTER TABLE ONLY routing_tags
     ADD CONSTRAINT routing_tags_pkey PRIMARY KEY (id);
 
 
@@ -31148,7 +31299,7 @@ ALTER TABLE ONLY class4.routing_tags
 -- Name: sdp_c_location_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.sdp_c_location
+ALTER TABLE ONLY sdp_c_location
     ADD CONSTRAINT sdp_c_location_name_key UNIQUE (name);
 
 
@@ -31156,7 +31307,7 @@ ALTER TABLE ONLY class4.sdp_c_location
 -- Name: sdp_c_location_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.sdp_c_location
+ALTER TABLE ONLY sdp_c_location
     ADD CONSTRAINT sdp_c_location_pkey PRIMARY KEY (id);
 
 
@@ -31164,7 +31315,7 @@ ALTER TABLE ONLY class4.sdp_c_location
 -- Name: session_refresh_methods_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.session_refresh_methods
+ALTER TABLE ONLY session_refresh_methods
     ADD CONSTRAINT session_refresh_methods_pkey PRIMARY KEY (id);
 
 
@@ -31172,7 +31323,7 @@ ALTER TABLE ONLY class4.session_refresh_methods
 -- Name: sortings_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.sortings
+ALTER TABLE ONLY sortings
     ADD CONSTRAINT sortings_pkey PRIMARY KEY (id);
 
 
@@ -31180,7 +31331,7 @@ ALTER TABLE ONLY class4.sortings
 -- Name: tag_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.tag_actions
+ALTER TABLE ONLY tag_actions
     ADD CONSTRAINT tag_actions_name_key UNIQUE (name);
 
 
@@ -31188,7 +31339,7 @@ ALTER TABLE ONLY class4.tag_actions
 -- Name: tag_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.tag_actions
+ALTER TABLE ONLY tag_actions
     ADD CONSTRAINT tag_actions_pkey PRIMARY KEY (id);
 
 
@@ -31196,7 +31347,7 @@ ALTER TABLE ONLY class4.tag_actions
 -- Name: transport_protocols_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.transport_protocols
+ALTER TABLE ONLY transport_protocols
     ADD CONSTRAINT transport_protocols_name_key UNIQUE (name);
 
 
@@ -31204,15 +31355,17 @@ ALTER TABLE ONLY class4.transport_protocols
 -- Name: transport_protocols_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.transport_protocols
+ALTER TABLE ONLY transport_protocols
     ADD CONSTRAINT transport_protocols_pkey PRIMARY KEY (id);
 
+
+SET search_path = data_import, pg_catalog;
 
 --
 -- Name: import_accounts_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_accounts
+ALTER TABLE ONLY import_accounts
     ADD CONSTRAINT import_accounts_pkey PRIMARY KEY (id);
 
 
@@ -31220,7 +31373,7 @@ ALTER TABLE ONLY data_import.import_accounts
 -- Name: import_codec_group_codecs_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_codec_group_codecs
+ALTER TABLE ONLY import_codec_group_codecs
     ADD CONSTRAINT import_codec_group_codecs_pkey PRIMARY KEY (id);
 
 
@@ -31228,7 +31381,7 @@ ALTER TABLE ONLY data_import.import_codec_group_codecs
 -- Name: import_codec_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_codec_groups
+ALTER TABLE ONLY import_codec_groups
     ADD CONSTRAINT import_codec_groups_pkey PRIMARY KEY (id);
 
 
@@ -31236,7 +31389,7 @@ ALTER TABLE ONLY data_import.import_codec_groups
 -- Name: import_contractors_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_contractors
+ALTER TABLE ONLY import_contractors
     ADD CONSTRAINT import_contractors_pkey PRIMARY KEY (id);
 
 
@@ -31244,7 +31397,7 @@ ALTER TABLE ONLY data_import.import_contractors
 -- Name: import_customers_auth_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_customers_auth
+ALTER TABLE ONLY import_customers_auth
     ADD CONSTRAINT import_customers_auth_pkey PRIMARY KEY (id);
 
 
@@ -31252,7 +31405,7 @@ ALTER TABLE ONLY data_import.import_customers_auth
 -- Name: import_destinations_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_destinations
+ALTER TABLE ONLY import_destinations
     ADD CONSTRAINT import_destinations_pkey PRIMARY KEY (id);
 
 
@@ -31260,7 +31413,7 @@ ALTER TABLE ONLY data_import.import_destinations
 -- Name: import_dialpeers_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_dialpeers
+ALTER TABLE ONLY import_dialpeers
     ADD CONSTRAINT import_dialpeers_pkey PRIMARY KEY (id);
 
 
@@ -31268,7 +31421,7 @@ ALTER TABLE ONLY data_import.import_dialpeers
 -- Name: import_disconnect_policies_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_disconnect_policies
+ALTER TABLE ONLY import_disconnect_policies
     ADD CONSTRAINT import_disconnect_policies_pkey PRIMARY KEY (id);
 
 
@@ -31276,7 +31429,7 @@ ALTER TABLE ONLY data_import.import_disconnect_policies
 -- Name: import_gateway_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_gateway_groups
+ALTER TABLE ONLY import_gateway_groups
     ADD CONSTRAINT import_gateway_groups_pkey PRIMARY KEY (id);
 
 
@@ -31284,7 +31437,7 @@ ALTER TABLE ONLY data_import.import_gateway_groups
 -- Name: import_gateways_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_gateways
+ALTER TABLE ONLY import_gateways
     ADD CONSTRAINT import_gateways_pkey PRIMARY KEY (id);
 
 
@@ -31292,7 +31445,7 @@ ALTER TABLE ONLY data_import.import_gateways
 -- Name: import_numberlist_items_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_numberlist_items
+ALTER TABLE ONLY import_numberlist_items
     ADD CONSTRAINT import_numberlist_items_pkey PRIMARY KEY (id);
 
 
@@ -31300,7 +31453,7 @@ ALTER TABLE ONLY data_import.import_numberlist_items
 -- Name: import_numberlists_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_numberlists
+ALTER TABLE ONLY import_numberlists
     ADD CONSTRAINT import_numberlists_pkey PRIMARY KEY (id);
 
 
@@ -31308,7 +31461,7 @@ ALTER TABLE ONLY data_import.import_numberlists
 -- Name: import_rateplans_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_rateplans
+ALTER TABLE ONLY import_rateplans
     ADD CONSTRAINT import_rateplans_pkey PRIMARY KEY (id);
 
 
@@ -31316,7 +31469,7 @@ ALTER TABLE ONLY data_import.import_rateplans
 -- Name: import_registrations_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_registrations
+ALTER TABLE ONLY import_registrations
     ADD CONSTRAINT import_registrations_pkey PRIMARY KEY (id);
 
 
@@ -31324,15 +31477,17 @@ ALTER TABLE ONLY data_import.import_registrations
 -- Name: import_routing_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY data_import.import_routing_groups
+ALTER TABLE ONLY import_routing_groups
     ADD CONSTRAINT import_routing_groups_pkey PRIMARY KEY (id);
 
+
+SET search_path = gui, pg_catalog;
 
 --
 -- Name: admin_notes_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.active_admin_comments
+ALTER TABLE ONLY active_admin_comments
     ADD CONSTRAINT admin_notes_pkey PRIMARY KEY (id);
 
 
@@ -31340,7 +31495,7 @@ ALTER TABLE ONLY gui.active_admin_comments
 -- Name: admin_users_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.admin_users
+ALTER TABLE ONLY admin_users
     ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
 
 
@@ -31348,7 +31503,7 @@ ALTER TABLE ONLY gui.admin_users
 -- Name: admin_users_username_key; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.admin_users
+ALTER TABLE ONLY admin_users
     ADD CONSTRAINT admin_users_username_key UNIQUE (username);
 
 
@@ -31356,7 +31511,7 @@ ALTER TABLE ONLY gui.admin_users
 -- Name: background_threads_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.background_threads
+ALTER TABLE ONLY background_threads
     ADD CONSTRAINT background_threads_pkey PRIMARY KEY (id);
 
 
@@ -31364,7 +31519,7 @@ ALTER TABLE ONLY gui.background_threads
 -- Name: sessions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.sessions
+ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
 
 
@@ -31372,7 +31527,7 @@ ALTER TABLE ONLY gui.sessions
 -- Name: sessions_session_id_key; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.sessions
+ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_session_id_key UNIQUE (session_id);
 
 
@@ -31380,15 +31535,17 @@ ALTER TABLE ONLY gui.sessions
 -- Name: versions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY gui.versions
+ALTER TABLE ONLY versions
     ADD CONSTRAINT versions_pkey PRIMARY KEY (id);
 
+
+SET search_path = logs, pg_catalog;
 
 --
 -- Name: api_requests_pkey; Type: CONSTRAINT; Schema: logs; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY logs.api_requests
+ALTER TABLE ONLY api_requests
     ADD CONSTRAINT api_requests_pkey PRIMARY KEY (id);
 
 
@@ -31396,7 +31553,7 @@ ALTER TABLE ONLY logs.api_requests
 -- Name: balance_notifications_pkey; Type: CONSTRAINT; Schema: logs; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY logs.balance_notifications
+ALTER TABLE ONLY balance_notifications
     ADD CONSTRAINT balance_notifications_pkey PRIMARY KEY (id);
 
 
@@ -31404,15 +31561,17 @@ ALTER TABLE ONLY logs.balance_notifications
 -- Name: logic_log_pkey; Type: CONSTRAINT; Schema: logs; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY logs.logic_log
+ALTER TABLE ONLY logic_log
     ADD CONSTRAINT logic_log_pkey PRIMARY KEY (id);
 
+
+SET search_path = notifications, pg_catalog;
 
 --
 -- Name: alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY notifications.alerts
+ALTER TABLE ONLY alerts
     ADD CONSTRAINT alerts_event_key UNIQUE (event);
 
 
@@ -31420,7 +31579,7 @@ ALTER TABLE ONLY notifications.alerts
 -- Name: alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY notifications.alerts
+ALTER TABLE ONLY alerts
     ADD CONSTRAINT alerts_pkey PRIMARY KEY (id);
 
 
@@ -31428,7 +31587,7 @@ ALTER TABLE ONLY notifications.alerts
 -- Name: attachments_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY notifications.attachments
+ALTER TABLE ONLY attachments
     ADD CONSTRAINT attachments_pkey PRIMARY KEY (id);
 
 
@@ -31436,7 +31595,7 @@ ALTER TABLE ONLY notifications.attachments
 -- Name: contacts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY notifications.contacts
+ALTER TABLE ONLY contacts
     ADD CONSTRAINT contacts_pkey PRIMARY KEY (id);
 
 
@@ -31444,15 +31603,17 @@ ALTER TABLE ONLY notifications.contacts
 -- Name: email_log_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY notifications.email_logs
+ALTER TABLE ONLY email_logs
     ADD CONSTRAINT email_log_pkey PRIMARY KEY (id);
 
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY public.ar_internal_metadata
+ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
@@ -31460,7 +31621,7 @@ ALTER TABLE ONLY public.ar_internal_metadata
 -- Name: contractors_external_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY public.contractors
+ALTER TABLE ONLY contractors
     ADD CONSTRAINT contractors_external_id_key UNIQUE (external_id);
 
 
@@ -31468,7 +31629,7 @@ ALTER TABLE ONLY public.contractors
 -- Name: contractors_name_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY public.contractors
+ALTER TABLE ONLY contractors
     ADD CONSTRAINT contractors_name_unique UNIQUE (name);
 
 
@@ -31476,7 +31637,7 @@ ALTER TABLE ONLY public.contractors
 -- Name: contractors_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY public.contractors
+ALTER TABLE ONLY contractors
     ADD CONSTRAINT contractors_pkey PRIMARY KEY (id);
 
 
@@ -31484,15 +31645,17 @@ ALTER TABLE ONLY public.contractors
 -- Name: new_table_0_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY public.new_table_0
+ALTER TABLE ONLY new_table_0
     ADD CONSTRAINT new_table_0_pkey PRIMARY KEY (id);
 
+
+SET search_path = runtime_stats, pg_catalog;
 
 --
 -- Name: dialpeers_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY runtime_stats.dialpeers_stats
+ALTER TABLE ONLY dialpeers_stats
     ADD CONSTRAINT dialpeers_stats_pkey PRIMARY KEY (id);
 
 
@@ -31500,7 +31663,7 @@ ALTER TABLE ONLY runtime_stats.dialpeers_stats
 -- Name: gateways_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY runtime_stats.gateways_stats
+ALTER TABLE ONLY gateways_stats
     ADD CONSTRAINT gateways_stats_pkey PRIMARY KEY (id);
 
 
@@ -31508,7 +31671,7 @@ ALTER TABLE ONLY runtime_stats.gateways_stats
 -- Name: unique_dp; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY runtime_stats.dialpeers_stats
+ALTER TABLE ONLY dialpeers_stats
     ADD CONSTRAINT unique_dp UNIQUE (dialpeer_id);
 
 
@@ -31516,15 +31679,17 @@ ALTER TABLE ONLY runtime_stats.dialpeers_stats
 -- Name: unique_gw; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY runtime_stats.gateways_stats
+ALTER TABLE ONLY gateways_stats
     ADD CONSTRAINT unique_gw UNIQUE (gateway_id);
 
+
+SET search_path = switch13, pg_catalog;
 
 --
 -- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_name_key UNIQUE (name);
 
 
@@ -31532,7 +31697,7 @@ ALTER TABLE ONLY switch13.resource_action
 -- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_pkey PRIMARY KEY (id);
 
 
@@ -31540,7 +31705,7 @@ ALTER TABLE ONLY switch13.resource_action
 -- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_name_key UNIQUE (name);
 
 
@@ -31548,7 +31713,7 @@ ALTER TABLE ONLY switch13.resource_type
 -- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
 
 
@@ -31556,7 +31721,7 @@ ALTER TABLE ONLY switch13.resource_type
 -- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
 
 
@@ -31564,7 +31729,7 @@ ALTER TABLE ONLY switch13.switch_interface_in
 -- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
 
 
@@ -31572,7 +31737,7 @@ ALTER TABLE ONLY switch13.switch_interface_in
 -- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_pkey PRIMARY KEY (id);
 
 
@@ -31580,7 +31745,7 @@ ALTER TABLE ONLY switch13.switch_interface_out
 -- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
 
 
@@ -31588,15 +31753,17 @@ ALTER TABLE ONLY switch13.switch_interface_out
 -- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch13.trusted_headers
+ALTER TABLE ONLY trusted_headers
     ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
 
+
+SET search_path = switch14, pg_catalog;
 
 --
 -- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_name_key UNIQUE (name);
 
 
@@ -31604,7 +31771,7 @@ ALTER TABLE ONLY switch14.resource_action
 -- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_pkey PRIMARY KEY (id);
 
 
@@ -31612,7 +31779,7 @@ ALTER TABLE ONLY switch14.resource_action
 -- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_name_key UNIQUE (name);
 
 
@@ -31620,7 +31787,7 @@ ALTER TABLE ONLY switch14.resource_type
 -- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
 
 
@@ -31628,7 +31795,7 @@ ALTER TABLE ONLY switch14.resource_type
 -- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
 
 
@@ -31636,7 +31803,7 @@ ALTER TABLE ONLY switch14.switch_interface_in
 -- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
 
 
@@ -31644,7 +31811,7 @@ ALTER TABLE ONLY switch14.switch_interface_in
 -- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_pkey PRIMARY KEY (id);
 
 
@@ -31652,7 +31819,7 @@ ALTER TABLE ONLY switch14.switch_interface_out
 -- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
 
 
@@ -31660,15 +31827,17 @@ ALTER TABLE ONLY switch14.switch_interface_out
 -- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch14.trusted_headers
+ALTER TABLE ONLY trusted_headers
     ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
 
+
+SET search_path = switch15, pg_catalog;
 
 --
 -- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_name_key UNIQUE (name);
 
 
@@ -31676,7 +31845,7 @@ ALTER TABLE ONLY switch15.resource_action
 -- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_pkey PRIMARY KEY (id);
 
 
@@ -31684,7 +31853,7 @@ ALTER TABLE ONLY switch15.resource_action
 -- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_name_key UNIQUE (name);
 
 
@@ -31692,7 +31861,7 @@ ALTER TABLE ONLY switch15.resource_type
 -- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
 
 
@@ -31700,7 +31869,7 @@ ALTER TABLE ONLY switch15.resource_type
 -- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
 
 
@@ -31708,7 +31877,7 @@ ALTER TABLE ONLY switch15.switch_interface_in
 -- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
 
 
@@ -31716,7 +31885,7 @@ ALTER TABLE ONLY switch15.switch_interface_in
 -- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_pkey PRIMARY KEY (id);
 
 
@@ -31724,7 +31893,7 @@ ALTER TABLE ONLY switch15.switch_interface_out
 -- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
 
 
@@ -31732,15 +31901,17 @@ ALTER TABLE ONLY switch15.switch_interface_out
 -- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch15.trusted_headers
+ALTER TABLE ONLY trusted_headers
     ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
 
+
+SET search_path = switch16, pg_catalog;
 
 --
 -- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_name_key UNIQUE (name);
 
 
@@ -31748,7 +31919,7 @@ ALTER TABLE ONLY switch16.resource_action
 -- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.resource_action
+ALTER TABLE ONLY resource_action
     ADD CONSTRAINT resource_action_pkey PRIMARY KEY (id);
 
 
@@ -31756,7 +31927,7 @@ ALTER TABLE ONLY switch16.resource_action
 -- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_name_key UNIQUE (name);
 
 
@@ -31764,7 +31935,7 @@ ALTER TABLE ONLY switch16.resource_type
 -- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.resource_type
+ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
 
 
@@ -31772,7 +31943,7 @@ ALTER TABLE ONLY switch16.resource_type
 -- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
 
 
@@ -31780,7 +31951,7 @@ ALTER TABLE ONLY switch16.switch_interface_in
 -- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.switch_interface_in
+ALTER TABLE ONLY switch_interface_in
     ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
 
 
@@ -31788,7 +31959,7 @@ ALTER TABLE ONLY switch16.switch_interface_in
 -- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_pkey PRIMARY KEY (id);
 
 
@@ -31796,7 +31967,7 @@ ALTER TABLE ONLY switch16.switch_interface_out
 -- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.switch_interface_out
+ALTER TABLE ONLY switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
 
 
@@ -31804,15 +31975,17 @@ ALTER TABLE ONLY switch16.switch_interface_out
 -- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY switch16.trusted_headers
+ALTER TABLE ONLY trusted_headers
     ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
 
+
+SET search_path = sys, pg_catalog;
 
 --
 -- Name: active_currencies_currency_id_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.active_currencies
+ALTER TABLE ONLY active_currencies
     ADD CONSTRAINT active_currencies_currency_id_key UNIQUE (currency_id);
 
 
@@ -31820,7 +31993,7 @@ ALTER TABLE ONLY sys.active_currencies
 -- Name: active_currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.active_currencies
+ALTER TABLE ONLY active_currencies
     ADD CONSTRAINT active_currencies_pkey PRIMARY KEY (id);
 
 
@@ -31828,7 +32001,7 @@ ALTER TABLE ONLY sys.active_currencies
 -- Name: api_access_login_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.api_access
+ALTER TABLE ONLY api_access
     ADD CONSTRAINT api_access_login_key UNIQUE (login);
 
 
@@ -31836,7 +32009,7 @@ ALTER TABLE ONLY sys.api_access
 -- Name: api_access_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.api_access
+ALTER TABLE ONLY api_access
     ADD CONSTRAINT api_access_pkey PRIMARY KEY (id);
 
 
@@ -31844,7 +32017,7 @@ ALTER TABLE ONLY sys.api_access
 -- Name: api_log_config_controller_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.api_log_config
+ALTER TABLE ONLY api_log_config
     ADD CONSTRAINT api_log_config_controller_key UNIQUE (controller);
 
 
@@ -31852,7 +32025,7 @@ ALTER TABLE ONLY sys.api_log_config
 -- Name: api_log_config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.api_log_config
+ALTER TABLE ONLY api_log_config
     ADD CONSTRAINT api_log_config_pkey PRIMARY KEY (id);
 
 
@@ -31860,7 +32033,7 @@ ALTER TABLE ONLY sys.api_log_config
 -- Name: cdr_exports_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.cdr_exports
+ALTER TABLE ONLY cdr_exports
     ADD CONSTRAINT cdr_exports_pkey PRIMARY KEY (id);
 
 
@@ -31868,7 +32041,7 @@ ALTER TABLE ONLY sys.cdr_exports
 -- Name: cdrtables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.cdr_tables
+ALTER TABLE ONLY cdr_tables
     ADD CONSTRAINT cdrtables_pkey PRIMARY KEY (id);
 
 
@@ -31876,7 +32049,7 @@ ALTER TABLE ONLY sys.cdr_tables
 -- Name: countries_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.countries
+ALTER TABLE ONLY countries
     ADD CONSTRAINT countries_name_key UNIQUE (name);
 
 
@@ -31884,7 +32057,7 @@ ALTER TABLE ONLY sys.countries
 -- Name: countries_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.countries
+ALTER TABLE ONLY countries
     ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
 
 
@@ -31892,7 +32065,7 @@ ALTER TABLE ONLY sys.countries
 -- Name: currencies_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.currencies
+ALTER TABLE ONLY currencies
     ADD CONSTRAINT currencies_name_key UNIQUE (name);
 
 
@@ -31900,7 +32073,7 @@ ALTER TABLE ONLY sys.currencies
 -- Name: currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.currencies
+ALTER TABLE ONLY currencies
     ADD CONSTRAINT currencies_pkey PRIMARY KEY (id);
 
 
@@ -31908,7 +32081,7 @@ ALTER TABLE ONLY sys.currencies
 -- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.delayed_jobs
+ALTER TABLE ONLY delayed_jobs
     ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
 
 
@@ -31916,7 +32089,7 @@ ALTER TABLE ONLY sys.delayed_jobs
 -- Name: events_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.events
+ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
@@ -31924,7 +32097,7 @@ ALTER TABLE ONLY sys.events
 -- Name: guiconfig_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.guiconfig
+ALTER TABLE ONLY guiconfig
     ADD CONSTRAINT guiconfig_pkey PRIMARY KEY (id);
 
 
@@ -31932,7 +32105,7 @@ ALTER TABLE ONLY sys.guiconfig
 -- Name: jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.jobs
+ALTER TABLE ONLY jobs
     ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
 
 
@@ -31940,7 +32113,7 @@ ALTER TABLE ONLY sys.jobs
 -- Name: jobs_type_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.jobs
+ALTER TABLE ONLY jobs
     ADD CONSTRAINT jobs_type_key UNIQUE (type);
 
 
@@ -31948,7 +32121,7 @@ ALTER TABLE ONLY sys.jobs
 -- Name: lnp_database_drivers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.lnp_database_drivers
+ALTER TABLE ONLY lnp_database_drivers
     ADD CONSTRAINT lnp_database_drivers_name_key UNIQUE (name);
 
 
@@ -31956,7 +32129,7 @@ ALTER TABLE ONLY sys.lnp_database_drivers
 -- Name: lnp_database_drivers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.lnp_database_drivers
+ALTER TABLE ONLY lnp_database_drivers
     ADD CONSTRAINT lnp_database_drivers_pkey PRIMARY KEY (id);
 
 
@@ -31964,7 +32137,7 @@ ALTER TABLE ONLY sys.lnp_database_drivers
 -- Name: lnp_resolvers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.lnp_resolvers
+ALTER TABLE ONLY lnp_resolvers
     ADD CONSTRAINT lnp_resolvers_name_key UNIQUE (name);
 
 
@@ -31972,7 +32145,7 @@ ALTER TABLE ONLY sys.lnp_resolvers
 -- Name: lnp_resolvers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.lnp_resolvers
+ALTER TABLE ONLY lnp_resolvers
     ADD CONSTRAINT lnp_resolvers_pkey PRIMARY KEY (id);
 
 
@@ -31980,7 +32153,7 @@ ALTER TABLE ONLY sys.lnp_resolvers
 -- Name: load_balancers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.load_balancers
+ALTER TABLE ONLY load_balancers
     ADD CONSTRAINT load_balancers_name_key UNIQUE (name);
 
 
@@ -31988,7 +32161,7 @@ ALTER TABLE ONLY sys.load_balancers
 -- Name: load_balancers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.load_balancers
+ALTER TABLE ONLY load_balancers
     ADD CONSTRAINT load_balancers_pkey PRIMARY KEY (id);
 
 
@@ -31996,7 +32169,7 @@ ALTER TABLE ONLY sys.load_balancers
 -- Name: load_balancers_signalling_ip_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.load_balancers
+ALTER TABLE ONLY load_balancers
     ADD CONSTRAINT load_balancers_signalling_ip_key UNIQUE (signalling_ip);
 
 
@@ -32004,7 +32177,7 @@ ALTER TABLE ONLY sys.load_balancers
 -- Name: lua_scripts_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.lua_scripts
+ALTER TABLE ONLY lua_scripts
     ADD CONSTRAINT lua_scripts_name_key UNIQUE (name);
 
 
@@ -32012,7 +32185,7 @@ ALTER TABLE ONLY sys.lua_scripts
 -- Name: lua_scripts_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.lua_scripts
+ALTER TABLE ONLY lua_scripts
     ADD CONSTRAINT lua_scripts_pkey PRIMARY KEY (id);
 
 
@@ -32020,7 +32193,7 @@ ALTER TABLE ONLY sys.lua_scripts
 -- Name: network_prefixes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.network_prefixes
+ALTER TABLE ONLY network_prefixes
     ADD CONSTRAINT network_prefixes_pkey PRIMARY KEY (id);
 
 
@@ -32028,7 +32201,7 @@ ALTER TABLE ONLY sys.network_prefixes
 -- Name: network_prefixes_prefix_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.network_prefixes
+ALTER TABLE ONLY network_prefixes
     ADD CONSTRAINT network_prefixes_prefix_key UNIQUE (prefix);
 
 
@@ -32036,7 +32209,7 @@ ALTER TABLE ONLY sys.network_prefixes
 -- Name: networks_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.networks
+ALTER TABLE ONLY networks
     ADD CONSTRAINT networks_name_key UNIQUE (name);
 
 
@@ -32044,7 +32217,7 @@ ALTER TABLE ONLY sys.networks
 -- Name: networks_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.networks
+ALTER TABLE ONLY networks
     ADD CONSTRAINT networks_pkey PRIMARY KEY (id);
 
 
@@ -32052,7 +32225,7 @@ ALTER TABLE ONLY sys.networks
 -- Name: node_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.nodes
+ALTER TABLE ONLY nodes
     ADD CONSTRAINT node_name_key UNIQUE (name);
 
 
@@ -32060,7 +32233,7 @@ ALTER TABLE ONLY sys.nodes
 -- Name: node_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.nodes
+ALTER TABLE ONLY nodes
     ADD CONSTRAINT node_pkey PRIMARY KEY (id);
 
 
@@ -32068,7 +32241,7 @@ ALTER TABLE ONLY sys.nodes
 -- Name: nodes_rpc_endpoint_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.nodes
+ALTER TABLE ONLY nodes
     ADD CONSTRAINT nodes_rpc_endpoint_key UNIQUE (rpc_endpoint);
 
 
@@ -32076,7 +32249,7 @@ ALTER TABLE ONLY sys.nodes
 -- Name: pop_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.pops
+ALTER TABLE ONLY pops
     ADD CONSTRAINT pop_name_key UNIQUE (name);
 
 
@@ -32084,7 +32257,7 @@ ALTER TABLE ONLY sys.pops
 -- Name: pop_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.pops
+ALTER TABLE ONLY pops
     ADD CONSTRAINT pop_pkey PRIMARY KEY (id);
 
 
@@ -32092,7 +32265,7 @@ ALTER TABLE ONLY sys.pops
 -- Name: sensor_levels_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.sensor_levels
+ALTER TABLE ONLY sensor_levels
     ADD CONSTRAINT sensor_levels_name_key UNIQUE (name);
 
 
@@ -32100,7 +32273,7 @@ ALTER TABLE ONLY sys.sensor_levels
 -- Name: sensor_levels_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.sensor_levels
+ALTER TABLE ONLY sensor_levels
     ADD CONSTRAINT sensor_levels_pkey PRIMARY KEY (id);
 
 
@@ -32108,7 +32281,7 @@ ALTER TABLE ONLY sys.sensor_levels
 -- Name: sensor_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.sensor_modes
+ALTER TABLE ONLY sensor_modes
     ADD CONSTRAINT sensor_modes_pkey PRIMARY KEY (id);
 
 
@@ -32116,7 +32289,7 @@ ALTER TABLE ONLY sys.sensor_modes
 -- Name: sensors_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.sensors
+ALTER TABLE ONLY sensors
     ADD CONSTRAINT sensors_name_key UNIQUE (name);
 
 
@@ -32124,7 +32297,7 @@ ALTER TABLE ONLY sys.sensors
 -- Name: sensors_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.sensors
+ALTER TABLE ONLY sensors
     ADD CONSTRAINT sensors_pkey PRIMARY KEY (id);
 
 
@@ -32132,7 +32305,7 @@ ALTER TABLE ONLY sys.sensors
 -- Name: smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.smtp_connections
+ALTER TABLE ONLY smtp_connections
     ADD CONSTRAINT smtp_connections_name_key UNIQUE (name);
 
 
@@ -32140,7 +32313,7 @@ ALTER TABLE ONLY sys.smtp_connections
 -- Name: smtp_connections_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.smtp_connections
+ALTER TABLE ONLY smtp_connections
     ADD CONSTRAINT smtp_connections_pkey PRIMARY KEY (id);
 
 
@@ -32148,7 +32321,7 @@ ALTER TABLE ONLY sys.smtp_connections
 -- Name: timezones_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.timezones
+ALTER TABLE ONLY timezones
     ADD CONSTRAINT timezones_name_key UNIQUE (name);
 
 
@@ -32156,9 +32329,11 @@ ALTER TABLE ONLY sys.timezones
 -- Name: timezones_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sys.timezones
+ALTER TABLE ONLY timezones
     ADD CONSTRAINT timezones_pkey PRIMARY KEY (id);
 
+
+SET search_path = class4, pg_catalog;
 
 --
 -- Name: blacklist_items_blacklist_id_key_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
@@ -32272,6 +32447,8 @@ CREATE INDEX routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx ON 
 CREATE INDEX routing_tag_detection_rules_prefix_range_idx ON class4.routing_tag_detection_rules USING gist (((src_prefix)::public.prefix_range), ((dst_prefix)::public.prefix_range));
 
 
+SET search_path = gui, pg_catalog;
+
 --
 -- Name: admin_users_username_idx; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
 --
@@ -32321,6 +32498,8 @@ CREATE INDEX index_versions_on_item_type_and_item_id ON gui.versions USING btree
 CREATE INDEX sessions_updated_at_idx ON gui.sessions USING btree (updated_at);
 
 
+SET search_path = logs, pg_catalog;
+
 --
 -- Name: api_requests_created_at_idx; Type: INDEX; Schema: logs; Owner: -; Tablespace: 
 --
@@ -32328,12 +32507,16 @@ CREATE INDEX sessions_updated_at_idx ON gui.sessions USING btree (updated_at);
 CREATE INDEX api_requests_created_at_idx ON logs.api_requests USING btree (created_at);
 
 
+SET search_path = public, pg_catalog;
+
 --
 -- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migrations USING btree (version);
 
+
+SET search_path = sys, pg_catalog;
 
 --
 -- Name: cdr_tables_name_idx; Type: INDEX; Schema: sys; Owner: -; Tablespace: 
@@ -32356,18 +32539,20 @@ CREATE INDEX delayed_jobs_priority ON sys.delayed_jobs USING btree (priority, ru
 CREATE INDEX network_prefixes_prefix_range_idx ON sys.network_prefixes USING gist (((prefix)::public.prefix_range));
 
 
+SET search_path = billing, pg_catalog;
+
 --
 -- Name: account_notification_tgf; Type: TRIGGER; Schema: billing; Owner: -
 --
 
-CREATE TRIGGER account_notification_tgf AFTER INSERT OR UPDATE ON billing.accounts FOR EACH ROW EXECUTE PROCEDURE billing.account_change_iu_tgf();
+CREATE TRIGGER account_notification_tgf AFTER INSERT OR UPDATE ON billing.accounts FOR EACH ROW EXECUTE PROCEDURE account_change_iu_tgf();
 
 
 --
 -- Name: accounts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.accounts
+ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id);
 
 
@@ -32375,15 +32560,15 @@ ALTER TABLE ONLY billing.accounts
 -- Name: accounts_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.accounts
-    ADD CONSTRAINT accounts_invoice_period_id_fkey FOREIGN KEY (customer_invoice_period_id) REFERENCES billing.invoice_periods(id);
+ALTER TABLE ONLY accounts
+    ADD CONSTRAINT accounts_invoice_period_id_fkey FOREIGN KEY (customer_invoice_period_id) REFERENCES invoice_periods(id);
 
 
 --
 -- Name: accounts_timezone_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.accounts
+ALTER TABLE ONLY accounts
     ADD CONSTRAINT accounts_timezone_id_fkey FOREIGN KEY (timezone_id) REFERENCES sys.timezones(id);
 
 
@@ -32391,63 +32576,65 @@ ALTER TABLE ONLY billing.accounts
 -- Name: accounts_vendor_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.accounts
-    ADD CONSTRAINT accounts_vendor_invoice_period_id_fkey FOREIGN KEY (vendor_invoice_period_id) REFERENCES billing.invoice_periods(id);
+ALTER TABLE ONLY accounts
+    ADD CONSTRAINT accounts_vendor_invoice_period_id_fkey FOREIGN KEY (vendor_invoice_period_id) REFERENCES invoice_periods(id);
 
 
 --
 -- Name: payments_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.payments
-    ADD CONSTRAINT payments_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+ALTER TABLE ONLY payments
+    ADD CONSTRAINT payments_account_id_fkey FOREIGN KEY (account_id) REFERENCES accounts(id);
 
+
+SET search_path = class4, pg_catalog;
 
 --
 -- Name: area_prefixes_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.area_prefixes
-    ADD CONSTRAINT area_prefixes_area_id_fkey FOREIGN KEY (area_id) REFERENCES class4.areas(id);
+ALTER TABLE ONLY area_prefixes
+    ADD CONSTRAINT area_prefixes_area_id_fkey FOREIGN KEY (area_id) REFERENCES areas(id);
 
 
 --
 -- Name: blacklist_items_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlist_items
-    ADD CONSTRAINT blacklist_items_blacklist_id_fkey FOREIGN KEY (numberlist_id) REFERENCES class4.numberlists(id);
+ALTER TABLE ONLY numberlist_items
+    ADD CONSTRAINT blacklist_items_blacklist_id_fkey FOREIGN KEY (numberlist_id) REFERENCES numberlists(id);
 
 
 --
 -- Name: blacklists_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlists
-    ADD CONSTRAINT blacklists_mode_id_fkey FOREIGN KEY (mode_id) REFERENCES class4.numberlist_modes(id);
+ALTER TABLE ONLY numberlists
+    ADD CONSTRAINT blacklists_mode_id_fkey FOREIGN KEY (mode_id) REFERENCES numberlist_modes(id);
 
 
 --
 -- Name: codec_group_codecs_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.codec_group_codecs
-    ADD CONSTRAINT codec_group_codecs_codec_group_id_fkey FOREIGN KEY (codec_group_id) REFERENCES class4.codec_groups(id);
+ALTER TABLE ONLY codec_group_codecs
+    ADD CONSTRAINT codec_group_codecs_codec_group_id_fkey FOREIGN KEY (codec_group_id) REFERENCES codec_groups(id);
 
 
 --
 -- Name: codec_group_codecs_codec_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.codec_group_codecs
-    ADD CONSTRAINT codec_group_codecs_codec_id_fkey FOREIGN KEY (codec_id) REFERENCES class4.codecs(id);
+ALTER TABLE ONLY codec_group_codecs
+    ADD CONSTRAINT codec_group_codecs_codec_id_fkey FOREIGN KEY (codec_id) REFERENCES codecs(id);
 
 
 --
 -- Name: customers_auth_account_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
+ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
 
 
@@ -32455,7 +32642,7 @@ ALTER TABLE ONLY class4.customers_auth
 -- Name: customers_auth_customer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
+ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.contractors(id);
 
 
@@ -32463,47 +32650,47 @@ ALTER TABLE ONLY class4.customers_auth
 -- Name: customers_auth_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_diversion_policy_id_fkey FOREIGN KEY (diversion_policy_id) REFERENCES class4.diversion_policy(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_diversion_policy_id_fkey FOREIGN KEY (diversion_policy_id) REFERENCES diversion_policy(id);
 
 
 --
 -- Name: customers_auth_dst_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_dst_blacklist_id_fkey FOREIGN KEY (dst_numberlist_id) REFERENCES class4.numberlists(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_dst_blacklist_id_fkey FOREIGN KEY (dst_numberlist_id) REFERENCES numberlists(id);
 
 
 --
 -- Name: customers_auth_dump_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_dump_level_id_fkey FOREIGN KEY (dump_level_id) REFERENCES class4.dump_level(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_dump_level_id_fkey FOREIGN KEY (dump_level_id) REFERENCES dump_level(id);
 
 
 --
 -- Name: customers_auth_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_gateway_id_fkey FOREIGN KEY (gateway_id) REFERENCES class4.gateways(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_gateway_id_fkey FOREIGN KEY (gateway_id) REFERENCES gateways(id);
 
 
 --
 -- Name: customers_auth_normalized_customers_auth_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth_normalized
-    ADD CONSTRAINT customers_auth_normalized_customers_auth_id_fkey FOREIGN KEY (customers_auth_id) REFERENCES class4.customers_auth(id);
+ALTER TABLE ONLY customers_auth_normalized
+    ADD CONSTRAINT customers_auth_normalized_customers_auth_id_fkey FOREIGN KEY (customers_auth_id) REFERENCES customers_auth(id);
 
 
 --
 -- Name: customers_auth_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
+ALTER TABLE ONLY customers_auth
     ADD CONSTRAINT customers_auth_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES sys.pops(id);
 
 
@@ -32511,103 +32698,111 @@ ALTER TABLE ONLY class4.customers_auth
 -- Name: customers_auth_radius_accounting_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_radius_accounting_profile_id_fkey FOREIGN KEY (radius_accounting_profile_id) REFERENCES class4.radius_accounting_profiles(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_radius_accounting_profile_id_fkey FOREIGN KEY (radius_accounting_profile_id) REFERENCES radius_accounting_profiles(id);
 
 
 --
 -- Name: customers_auth_radius_auth_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_radius_auth_profile_id_fkey FOREIGN KEY (radius_auth_profile_id) REFERENCES class4.radius_auth_profiles(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_radius_auth_profile_id_fkey FOREIGN KEY (radius_auth_profile_id) REFERENCES radius_auth_profiles(id);
 
 
 --
 -- Name: customers_auth_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_rateplan_id_fkey FOREIGN KEY (rateplan_id) REFERENCES class4.rateplans(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_rateplan_id_fkey FOREIGN KEY (rateplan_id) REFERENCES rateplans(id);
 
 
 --
 -- Name: customers_auth_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES class4.routing_plans(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES routing_plans(id);
 
 
 --
 -- Name: customers_auth_src_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_src_blacklist_id_fkey FOREIGN KEY (src_numberlist_id) REFERENCES class4.numberlists(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_src_blacklist_id_fkey FOREIGN KEY (src_numberlist_id) REFERENCES numberlists(id);
 
 
 --
 -- Name: customers_auth_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES class4.tag_actions(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
 
 
 --
 -- Name: customers_auth_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES class4.transport_protocols(id);
+ALTER TABLE ONLY customers_auth
+    ADD CONSTRAINT customers_auth_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES transport_protocols(id);
+
+
+--
+-- Name: destination_next_rates_destination_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY destination_next_rates
+    ADD CONSTRAINT destination_next_rates_destination_id_fkey FOREIGN KEY (destination_id) REFERENCES destinations(id);
 
 
 --
 -- Name: destinations_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_profit_control_mode_id_fkey FOREIGN KEY (profit_control_mode_id) REFERENCES class4.rate_profit_control_modes(id);
+ALTER TABLE ONLY destinations
+    ADD CONSTRAINT destinations_profit_control_mode_id_fkey FOREIGN KEY (profit_control_mode_id) REFERENCES rate_profit_control_modes(id);
 
 
 --
 -- Name: destinations_rate_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_rate_policy_id_fkey FOREIGN KEY (rate_policy_id) REFERENCES class4.destination_rate_policy(id);
+ALTER TABLE ONLY destinations
+    ADD CONSTRAINT destinations_rate_policy_id_fkey FOREIGN KEY (rate_policy_id) REFERENCES destination_rate_policy(id);
 
 
 --
 -- Name: destinations_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_rateplan_id_fkey FOREIGN KEY (rateplan_id) REFERENCES class4.rateplans(id);
+ALTER TABLE ONLY destinations
+    ADD CONSTRAINT destinations_rateplan_id_fkey FOREIGN KEY (rateplan_id) REFERENCES rateplans(id);
 
 
 --
 -- Name: destinations_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+ALTER TABLE ONLY destinations
+    ADD CONSTRAINT destinations_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES routing_tag_modes(id);
 
 
 --
 -- Name: dialpeer_next_rates_dialpeer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeer_next_rates
-    ADD CONSTRAINT dialpeer_next_rates_dialpeer_id_fkey FOREIGN KEY (dialpeer_id) REFERENCES class4.dialpeers(id);
+ALTER TABLE ONLY dialpeer_next_rates
+    ADD CONSTRAINT dialpeer_next_rates_dialpeer_id_fkey FOREIGN KEY (dialpeer_id) REFERENCES dialpeers(id);
 
 
 --
 -- Name: dialpeers_account_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers
+ALTER TABLE ONLY dialpeers
     ADD CONSTRAINT dialpeers_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
 
 
@@ -32615,39 +32810,39 @@ ALTER TABLE ONLY class4.dialpeers
 -- Name: dialpeers_gateway_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers
-    ADD CONSTRAINT dialpeers_gateway_group_id_fkey FOREIGN KEY (gateway_group_id) REFERENCES class4.gateway_groups(id);
+ALTER TABLE ONLY dialpeers
+    ADD CONSTRAINT dialpeers_gateway_group_id_fkey FOREIGN KEY (gateway_group_id) REFERENCES gateway_groups(id);
 
 
 --
 -- Name: dialpeers_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers
-    ADD CONSTRAINT dialpeers_gateway_id_fkey FOREIGN KEY (gateway_id) REFERENCES class4.gateways(id);
+ALTER TABLE ONLY dialpeers
+    ADD CONSTRAINT dialpeers_gateway_id_fkey FOREIGN KEY (gateway_id) REFERENCES gateways(id);
 
 
 --
 -- Name: dialpeers_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers
-    ADD CONSTRAINT dialpeers_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
+ALTER TABLE ONLY dialpeers
+    ADD CONSTRAINT dialpeers_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES routing_groups(id);
 
 
 --
 -- Name: dialpeers_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers
-    ADD CONSTRAINT dialpeers_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+ALTER TABLE ONLY dialpeers
+    ADD CONSTRAINT dialpeers_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES routing_tag_modes(id);
 
 
 --
 -- Name: dialpeers_vendor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.dialpeers
+ALTER TABLE ONLY dialpeers
     ADD CONSTRAINT dialpeers_vendor_id_fkey FOREIGN KEY (vendor_id) REFERENCES public.contractors(id);
 
 
@@ -32655,31 +32850,31 @@ ALTER TABLE ONLY class4.dialpeers
 -- Name: disconnect_code_namespace_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.disconnect_code
-    ADD CONSTRAINT disconnect_code_namespace_id_fkey FOREIGN KEY (namespace_id) REFERENCES class4.disconnect_code_namespace(id);
+ALTER TABLE ONLY disconnect_code
+    ADD CONSTRAINT disconnect_code_namespace_id_fkey FOREIGN KEY (namespace_id) REFERENCES disconnect_code_namespace(id);
 
 
 --
 -- Name: disconnect_code_policy_codes_code_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.disconnect_policy_code
-    ADD CONSTRAINT disconnect_code_policy_codes_code_id_fkey FOREIGN KEY (code_id) REFERENCES class4.disconnect_code(id);
+ALTER TABLE ONLY disconnect_policy_code
+    ADD CONSTRAINT disconnect_code_policy_codes_code_id_fkey FOREIGN KEY (code_id) REFERENCES disconnect_code(id);
 
 
 --
 -- Name: disconnect_code_policy_codes_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.disconnect_policy_code
-    ADD CONSTRAINT disconnect_code_policy_codes_policy_id_fkey FOREIGN KEY (policy_id) REFERENCES class4.disconnect_policy(id);
+ALTER TABLE ONLY disconnect_policy_code
+    ADD CONSTRAINT disconnect_code_policy_codes_policy_id_fkey FOREIGN KEY (policy_id) REFERENCES disconnect_policy(id);
 
 
 --
 -- Name: gateway_groups_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateway_groups
+ALTER TABLE ONLY gateway_groups
     ADD CONSTRAINT gateway_groups_contractor_id_fkey FOREIGN KEY (vendor_id) REFERENCES public.contractors(id);
 
 
@@ -32687,15 +32882,15 @@ ALTER TABLE ONLY class4.gateway_groups
 -- Name: gateways_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_codec_group_id_fkey FOREIGN KEY (codec_group_id) REFERENCES class4.codec_groups(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_codec_group_id_fkey FOREIGN KEY (codec_group_id) REFERENCES codec_groups(id);
 
 
 --
 -- Name: gateways_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
+ALTER TABLE ONLY gateways
     ADD CONSTRAINT gateways_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id);
 
 
@@ -32703,55 +32898,55 @@ ALTER TABLE ONLY class4.gateways
 -- Name: gateways_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_diversion_policy_id_fkey FOREIGN KEY (diversion_policy_id) REFERENCES class4.diversion_policy(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_diversion_policy_id_fkey FOREIGN KEY (diversion_policy_id) REFERENCES diversion_policy(id);
 
 
 --
 -- Name: gateways_dtmf_receive_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_dtmf_receive_mode_id_fkey FOREIGN KEY (dtmf_receive_mode_id) REFERENCES class4.dtmf_receive_modes(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_dtmf_receive_mode_id_fkey FOREIGN KEY (dtmf_receive_mode_id) REFERENCES dtmf_receive_modes(id);
 
 
 --
 -- Name: gateways_dtmf_send_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_dtmf_send_mode_id_fkey FOREIGN KEY (dtmf_send_mode_id) REFERENCES class4.dtmf_send_modes(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_dtmf_send_mode_id_fkey FOREIGN KEY (dtmf_send_mode_id) REFERENCES dtmf_send_modes(id);
 
 
 --
 -- Name: gateways_gateway_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_gateway_group_id_fkey FOREIGN KEY (gateway_group_id) REFERENCES class4.gateway_groups(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_gateway_group_id_fkey FOREIGN KEY (gateway_group_id) REFERENCES gateway_groups(id);
 
 
 --
 -- Name: gateways_orig_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_orig_disconnect_policy_id_fkey FOREIGN KEY (orig_disconnect_policy_id) REFERENCES class4.disconnect_policy(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_orig_disconnect_policy_id_fkey FOREIGN KEY (orig_disconnect_policy_id) REFERENCES disconnect_policy(id);
 
 
 --
 -- Name: gateways_orig_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_orig_proxy_transport_protocol_id_fkey FOREIGN KEY (orig_proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_orig_proxy_transport_protocol_id_fkey FOREIGN KEY (orig_proxy_transport_protocol_id) REFERENCES transport_protocols(id);
 
 
 --
 -- Name: gateways_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
+ALTER TABLE ONLY gateways
     ADD CONSTRAINT gateways_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES sys.pops(id);
 
 
@@ -32759,47 +32954,47 @@ ALTER TABLE ONLY class4.gateways
 -- Name: gateways_radius_accounting_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_radius_accounting_profile_id_fkey FOREIGN KEY (radius_accounting_profile_id) REFERENCES class4.radius_accounting_profiles(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_radius_accounting_profile_id_fkey FOREIGN KEY (radius_accounting_profile_id) REFERENCES radius_accounting_profiles(id);
 
 
 --
 -- Name: gateways_rel100_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_rel100_mode_id_fkey FOREIGN KEY (rel100_mode_id) REFERENCES class4.gateway_rel100_modes(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_rel100_mode_id_fkey FOREIGN KEY (rel100_mode_id) REFERENCES gateway_rel100_modes(id);
 
 
 --
 -- Name: gateways_rx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_rx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (rx_inband_dtmf_filtering_mode_id) REFERENCES class4.gateway_inband_dtmf_filtering_modes(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_rx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (rx_inband_dtmf_filtering_mode_id) REFERENCES gateway_inband_dtmf_filtering_modes(id);
 
 
 --
 -- Name: gateways_sdp_alines_filter_type_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_sdp_alines_filter_type_id_fkey FOREIGN KEY (sdp_alines_filter_type_id) REFERENCES class4.filter_types(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_sdp_alines_filter_type_id_fkey FOREIGN KEY (sdp_alines_filter_type_id) REFERENCES filter_types(id);
 
 
 --
 -- Name: gateways_sdp_c_location_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_sdp_c_location_id_fkey FOREIGN KEY (sdp_c_location_id) REFERENCES class4.sdp_c_location(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_sdp_c_location_id_fkey FOREIGN KEY (sdp_c_location_id) REFERENCES sdp_c_location(id);
 
 
 --
 -- Name: gateways_sensor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
+ALTER TABLE ONLY gateways
     ADD CONSTRAINT gateways_sensor_id_fkey FOREIGN KEY (sensor_id) REFERENCES sys.sensors(id);
 
 
@@ -32807,7 +33002,7 @@ ALTER TABLE ONLY class4.gateways
 -- Name: gateways_sensor_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
+ALTER TABLE ONLY gateways
     ADD CONSTRAINT gateways_sensor_level_id_fkey FOREIGN KEY (sensor_level_id) REFERENCES sys.sensor_levels(id);
 
 
@@ -32815,55 +33010,55 @@ ALTER TABLE ONLY class4.gateways
 -- Name: gateways_session_refresh_method_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_session_refresh_method_id_fkey FOREIGN KEY (session_refresh_method_id) REFERENCES class4.session_refresh_methods(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_session_refresh_method_id_fkey FOREIGN KEY (session_refresh_method_id) REFERENCES session_refresh_methods(id);
 
 
 --
 -- Name: gateways_term_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_term_disconnect_policy_id_fkey FOREIGN KEY (term_disconnect_policy_id) REFERENCES class4.disconnect_policy(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_term_disconnect_policy_id_fkey FOREIGN KEY (term_disconnect_policy_id) REFERENCES disconnect_policy(id);
 
 
 --
 -- Name: gateways_term_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_term_proxy_transport_protocol_id_fkey FOREIGN KEY (term_proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_term_proxy_transport_protocol_id_fkey FOREIGN KEY (term_proxy_transport_protocol_id) REFERENCES transport_protocols(id);
 
 
 --
 -- Name: gateways_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES class4.transport_protocols(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES transport_protocols(id);
 
 
 --
 -- Name: gateways_tx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_tx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (tx_inband_dtmf_filtering_mode_id) REFERENCES class4.gateway_inband_dtmf_filtering_modes(id);
+ALTER TABLE ONLY gateways
+    ADD CONSTRAINT gateways_tx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (tx_inband_dtmf_filtering_mode_id) REFERENCES gateway_inband_dtmf_filtering_modes(id);
 
 
 --
 -- Name: lnp_cache_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.lnp_cache
-    ADD CONSTRAINT lnp_cache_database_id_fkey FOREIGN KEY (database_id) REFERENCES class4.lnp_databases(id);
+ALTER TABLE ONLY lnp_cache
+    ADD CONSTRAINT lnp_cache_database_id_fkey FOREIGN KEY (database_id) REFERENCES lnp_databases(id);
 
 
 --
 -- Name: lnp_databases_driver_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.lnp_databases
+ALTER TABLE ONLY lnp_databases
     ADD CONSTRAINT lnp_databases_driver_id_fkey FOREIGN KEY (driver_id) REFERENCES sys.lnp_database_drivers(id);
 
 
@@ -32871,79 +33066,79 @@ ALTER TABLE ONLY class4.lnp_databases
 -- Name: numberlist_items_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlist_items
-    ADD CONSTRAINT numberlist_items_action_id_fkey FOREIGN KEY (action_id) REFERENCES class4.numberlist_actions(id);
+ALTER TABLE ONLY numberlist_items
+    ADD CONSTRAINT numberlist_items_action_id_fkey FOREIGN KEY (action_id) REFERENCES numberlist_actions(id);
 
 
 --
 -- Name: numberlist_items_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlist_items
-    ADD CONSTRAINT numberlist_items_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES class4.tag_actions(id);
+ALTER TABLE ONLY numberlist_items
+    ADD CONSTRAINT numberlist_items_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
 
 
 --
 -- Name: numberlists_default_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlists
-    ADD CONSTRAINT numberlists_default_action_id_fkey FOREIGN KEY (default_action_id) REFERENCES class4.numberlist_actions(id);
+ALTER TABLE ONLY numberlists
+    ADD CONSTRAINT numberlists_default_action_id_fkey FOREIGN KEY (default_action_id) REFERENCES numberlist_actions(id);
 
 
 --
 -- Name: numberlists_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.numberlists
-    ADD CONSTRAINT numberlists_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES class4.tag_actions(id);
+ALTER TABLE ONLY numberlists
+    ADD CONSTRAINT numberlists_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
 
 
 --
 -- Name: radius_accounting_profile_interim_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
-    ADD CONSTRAINT radius_accounting_profile_interim_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES class4.radius_accounting_profiles(id);
+ALTER TABLE ONLY radius_accounting_profile_interim_attributes
+    ADD CONSTRAINT radius_accounting_profile_interim_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES radius_accounting_profiles(id);
 
 
 --
 -- Name: radius_accounting_profile_start_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
-    ADD CONSTRAINT radius_accounting_profile_start_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES class4.radius_accounting_profiles(id);
+ALTER TABLE ONLY radius_accounting_profile_start_attributes
+    ADD CONSTRAINT radius_accounting_profile_start_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES radius_accounting_profiles(id);
 
 
 --
 -- Name: radius_accounting_profile_stop_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
-    ADD CONSTRAINT radius_accounting_profile_stop_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES class4.radius_accounting_profiles(id);
+ALTER TABLE ONLY radius_accounting_profile_stop_attributes
+    ADD CONSTRAINT radius_accounting_profile_stop_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES radius_accounting_profiles(id);
 
 
 --
 -- Name: radius_auth_profile_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.radius_auth_profile_attributes
-    ADD CONSTRAINT radius_auth_profile_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES class4.radius_auth_profiles(id);
+ALTER TABLE ONLY radius_auth_profile_attributes
+    ADD CONSTRAINT radius_auth_profile_attributes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES radius_auth_profiles(id);
 
 
 --
 -- Name: rateplans_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.rateplans
-    ADD CONSTRAINT rateplans_profit_control_mode_id_fkey FOREIGN KEY (profit_control_mode_id) REFERENCES class4.rate_profit_control_modes(id);
+ALTER TABLE ONLY rateplans
+    ADD CONSTRAINT rateplans_profit_control_mode_id_fkey FOREIGN KEY (profit_control_mode_id) REFERENCES rate_profit_control_modes(id);
 
 
 --
 -- Name: registrations_node_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.registrations
+ALTER TABLE ONLY registrations
     ADD CONSTRAINT registrations_node_id_fkey FOREIGN KEY (node_id) REFERENCES sys.nodes(id);
 
 
@@ -32951,7 +33146,7 @@ ALTER TABLE ONLY class4.registrations
 -- Name: registrations_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.registrations
+ALTER TABLE ONLY registrations
     ADD CONSTRAINT registrations_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES sys.pops(id);
 
 
@@ -32959,55 +33154,55 @@ ALTER TABLE ONLY class4.registrations
 -- Name: registrations_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.registrations
-    ADD CONSTRAINT registrations_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
+ALTER TABLE ONLY registrations
+    ADD CONSTRAINT registrations_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES transport_protocols(id);
 
 
 --
 -- Name: registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.registrations
-    ADD CONSTRAINT registrations_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES class4.transport_protocols(id);
+ALTER TABLE ONLY registrations
+    ADD CONSTRAINT registrations_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES transport_protocols(id);
 
 
 --
 -- Name: routing_plan_groups_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_groups
-    ADD CONSTRAINT routing_plan_groups_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
+ALTER TABLE ONLY routing_plan_groups
+    ADD CONSTRAINT routing_plan_groups_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES routing_groups(id);
 
 
 --
 -- Name: routing_plan_groups_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_groups
-    ADD CONSTRAINT routing_plan_groups_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES class4.routing_plans(id);
+ALTER TABLE ONLY routing_plan_groups
+    ADD CONSTRAINT routing_plan_groups_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES routing_plans(id);
 
 
 --
 -- Name: routing_plan_lnp_rules_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_lnp_rules
-    ADD CONSTRAINT routing_plan_lnp_rules_database_id_fkey FOREIGN KEY (database_id) REFERENCES class4.lnp_databases(id);
+ALTER TABLE ONLY routing_plan_lnp_rules
+    ADD CONSTRAINT routing_plan_lnp_rules_database_id_fkey FOREIGN KEY (database_id) REFERENCES lnp_databases(id);
 
 
 --
 -- Name: routing_plan_static_routes_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_static_routes
-    ADD CONSTRAINT routing_plan_static_routes_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES class4.routing_plans(id);
+ALTER TABLE ONLY routing_plan_static_routes
+    ADD CONSTRAINT routing_plan_static_routes_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES routing_plans(id);
 
 
 --
 -- Name: routing_plan_static_routes_vendor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plan_static_routes
+ALTER TABLE ONLY routing_plan_static_routes
     ADD CONSTRAINT routing_plan_static_routes_vendor_id_fkey FOREIGN KEY (vendor_id) REFERENCES public.contractors(id);
 
 
@@ -33015,47 +33210,49 @@ ALTER TABLE ONLY class4.routing_plan_static_routes
 -- Name: routing_plans_sorting_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_plans
-    ADD CONSTRAINT routing_plans_sorting_id_fkey FOREIGN KEY (sorting_id) REFERENCES class4.sortings(id);
+ALTER TABLE ONLY routing_plans
+    ADD CONSTRAINT routing_plans_sorting_id_fkey FOREIGN KEY (sorting_id) REFERENCES sortings(id);
 
 
 --
 -- Name: routing_tag_detection_rules_dst_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_tag_detection_rules
-    ADD CONSTRAINT routing_tag_detection_rules_dst_area_id_fkey FOREIGN KEY (dst_area_id) REFERENCES class4.areas(id);
+ALTER TABLE ONLY routing_tag_detection_rules
+    ADD CONSTRAINT routing_tag_detection_rules_dst_area_id_fkey FOREIGN KEY (dst_area_id) REFERENCES areas(id);
 
 
 --
 -- Name: routing_tag_detection_rules_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_tag_detection_rules
-    ADD CONSTRAINT routing_tag_detection_rules_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+ALTER TABLE ONLY routing_tag_detection_rules
+    ADD CONSTRAINT routing_tag_detection_rules_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES routing_tag_modes(id);
 
 
 --
 -- Name: routing_tag_detection_rules_src_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_tag_detection_rules
-    ADD CONSTRAINT routing_tag_detection_rules_src_area_id_fkey FOREIGN KEY (src_area_id) REFERENCES class4.areas(id);
+ALTER TABLE ONLY routing_tag_detection_rules
+    ADD CONSTRAINT routing_tag_detection_rules_src_area_id_fkey FOREIGN KEY (src_area_id) REFERENCES areas(id);
 
 
 --
 -- Name: routing_tag_detection_rules_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
-ALTER TABLE ONLY class4.routing_tag_detection_rules
-    ADD CONSTRAINT routing_tag_detection_rules_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES class4.tag_actions(id);
+ALTER TABLE ONLY routing_tag_detection_rules
+    ADD CONSTRAINT routing_tag_detection_rules_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES tag_actions(id);
 
+
+SET search_path = notifications, pg_catalog;
 
 --
 -- Name: contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.contacts
+ALTER TABLE ONLY contacts
     ADD CONSTRAINT contacts_admin_user_id_fkey FOREIGN KEY (admin_user_id) REFERENCES gui.admin_users(id);
 
 
@@ -33063,63 +33260,75 @@ ALTER TABLE ONLY notifications.contacts
 -- Name: contacts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.contacts
+ALTER TABLE ONLY contacts
     ADD CONSTRAINT contacts_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id);
 
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: contractors_smtp_connection_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.contractors
+ALTER TABLE ONLY contractors
     ADD CONSTRAINT contractors_smtp_connection_id_fkey FOREIGN KEY (smtp_connection_id) REFERENCES sys.smtp_connections(id);
 
+
+SET search_path = switch13, pg_catalog;
 
 --
 -- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch13; Owner: -
 --
 
-ALTER TABLE ONLY switch13.resource_type
-    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES switch13.resource_action(id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES resource_action(id);
 
+
+SET search_path = switch14, pg_catalog;
 
 --
 -- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch14; Owner: -
 --
 
-ALTER TABLE ONLY switch14.resource_type
-    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES switch14.resource_action(id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES resource_action(id);
 
+
+SET search_path = switch15, pg_catalog;
 
 --
 -- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch15; Owner: -
 --
 
-ALTER TABLE ONLY switch15.resource_type
-    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES switch15.resource_action(id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES resource_action(id);
 
+
+SET search_path = switch16, pg_catalog;
 
 --
 -- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch16; Owner: -
 --
 
-ALTER TABLE ONLY switch16.resource_type
-    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES switch16.resource_action(id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES resource_action(id);
 
+
+SET search_path = sys, pg_catalog;
 
 --
 -- Name: active_currencies_currency_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES sys.currencies(id);
+ALTER TABLE ONLY active_currencies
+    ADD CONSTRAINT active_currencies_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES currencies(id);
 
 
 --
 -- Name: api_access_customer_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.api_access
+ALTER TABLE ONLY api_access
     ADD CONSTRAINT api_access_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.contractors(id);
 
 
@@ -33127,55 +33336,56 @@ ALTER TABLE ONLY sys.api_access
 -- Name: currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_country_id_fkey FOREIGN KEY (country_id) REFERENCES sys.countries(id);
+ALTER TABLE ONLY currencies
+    ADD CONSTRAINT currencies_country_id_fkey FOREIGN KEY (country_id) REFERENCES countries(id);
 
 
 --
 -- Name: events_node_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.events
-    ADD CONSTRAINT events_node_id_fkey FOREIGN KEY (node_id) REFERENCES sys.nodes(id);
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_node_id_fkey FOREIGN KEY (node_id) REFERENCES nodes(id);
 
 
 --
 -- Name: network_prefixes_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.network_prefixes
-    ADD CONSTRAINT network_prefixes_country_id_fkey FOREIGN KEY (country_id) REFERENCES sys.countries(id);
+ALTER TABLE ONLY network_prefixes
+    ADD CONSTRAINT network_prefixes_country_id_fkey FOREIGN KEY (country_id) REFERENCES countries(id);
 
 
 --
 -- Name: network_prefixes_network_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.network_prefixes
-    ADD CONSTRAINT network_prefixes_network_id_fkey FOREIGN KEY (network_id) REFERENCES sys.networks(id);
+ALTER TABLE ONLY network_prefixes
+    ADD CONSTRAINT network_prefixes_network_id_fkey FOREIGN KEY (network_id) REFERENCES networks(id);
 
 
 --
 -- Name: node_pop_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.nodes
-    ADD CONSTRAINT node_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES sys.pops(id);
+ALTER TABLE ONLY nodes
+    ADD CONSTRAINT node_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES pops(id);
 
 
 --
 -- Name: sensors_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
-ALTER TABLE ONLY sys.sensors
-    ADD CONSTRAINT sensors_mode_id_fkey FOREIGN KEY (mode_id) REFERENCES sys.sensor_modes(id);
+ALTER TABLE ONLY sensors
+    ADD CONSTRAINT sensors_mode_id_fkey FOREIGN KEY (mode_id) REFERENCES sensor_modes(id);
 
 
 --
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -33211,6 +33421,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180425203717'),
 ('20180426090808'),
 ('20180427194327'),
+('20180512225402'),
 ('20180516095652'),
 ('20180620093010');
 

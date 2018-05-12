@@ -101,6 +101,18 @@ ActiveAdmin.register Destination do
 
   includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: [:country, :network]
 
+  action_item :show_rates, only: [:show] do
+    link_to 'Show Rates', destination_destination_next_rates_path(resource.id)
+  end
+
+  action_item :new_rate, only: [:show] do
+    link_to 'New Rate', new_destination_destination_next_rate_path(resource.id)
+  end
+
+  action_item :next_rates, only: [:index] do
+    link_to "Future rate changes", destination_next_rates_path
+  end
+
   controller do
     def update
       if params['destination']['routing_tag_ids'].nil?
