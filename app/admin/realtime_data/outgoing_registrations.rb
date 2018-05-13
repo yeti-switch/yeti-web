@@ -24,11 +24,11 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
 
     def find_collection
       @search = OpenStruct.new(params[:q])
-      return [] if clean_search_params(params[:q]).blank?  and GuiConfig.registrations_require_filter
+      return [] if params.to_unsafe_h[:q].delete_if { |_, v| v.blank? }.blank? && GuiConfig.registrations_require_filter
       registrations = []
 
       begin
-        searcher = Yeti::OutgoingRegistrations.new(Node.all, params[:q])
+        searcher = Yeti::OutgoingRegistrations.new(Node.all, params.to_unsafe_h[:q])
         registrations = searcher.search(empty_on_error: true)
         registrations = Kaminari.paginate_array(registrations).page(1).per(registrations.count)
         flash.now[:warning] = searcher.errors if searcher.errors.any?
