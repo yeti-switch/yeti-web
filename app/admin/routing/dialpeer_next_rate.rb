@@ -1,5 +1,5 @@
 ActiveAdmin.register DialpeerNextRate do
-  belongs_to :dialpeer, parent_class: Dialpeer
+  belongs_to :dialpeer, parent_class: Dialpeer, optional: true
   menu false
   actions :index, :new, :create, :edit, :update, :destroy
   config.batch_actions = false
@@ -30,7 +30,11 @@ ActiveAdmin.register DialpeerNextRate do
     end
   end
 
+  includes :dialpeer
 
+  action_item :dialpeers, only: [:index] do
+    link_to "Dialpeers", dialpeers_path
+  end
 
   sidebar :dialpeer, priority: 1, only: [:new, :update], if: proc { assigns[:dialpeer].present? } do
 

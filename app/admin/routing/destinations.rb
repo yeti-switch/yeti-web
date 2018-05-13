@@ -110,7 +110,7 @@ ActiveAdmin.register Destination do
   end
 
   action_item :next_rates, only: [:index] do
-    link_to "Future rate changes", destination_next_rates_path
+    link_to "Next rates", destination_next_rates_path
   end
 
   controller do
