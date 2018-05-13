@@ -13,7 +13,7 @@ gem 'devise'
 gem 'devise_ldap_authenticatable', git: 'https://github.com/cschiewek/devise_ldap_authenticatable'
 gem 'activeldap'
 gem 'net-ldap', '~> 0.16.0'
-gem 'd3-rails'
+gem 'd3-rails', '3.5.2'
 
 # Seamless JWT authentication for Rails API
 # need this fix https://github.com/nsarno/knock/pull/126
