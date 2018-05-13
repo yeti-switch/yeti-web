@@ -99,6 +99,9 @@ ActiveAdmin.register Dialpeer do
     link_to 'New Rate', new_dialpeer_dialpeer_next_rate_path(resource.id)
   end
 
+  action_item :next_rates, only: [:index] do
+    link_to "Next rates", dialpeer_next_rates_path
+  end
 
   index do
     selectable_column
