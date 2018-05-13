@@ -122,7 +122,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
 
   before_action only: [:index] do
-    params.delete(:q) if params[:q] && clean_search_params(params[:q]).blank? && GuiConfig.active_calls_require_filter
+    params.delete(:q) if params[:q] && params.to_unsafe_h[:q].delete_if { |_, v| v.blank? }.blank? && GuiConfig.active_calls_require_filter
   end
 
   controller do
@@ -154,7 +154,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
         is_list = active_admin_config.get_page_presenter(:index, params[:as]).options[:as] == :list_with_content # WTF?? .
         is_list = false #  dirty fix for https://bt.yeti-switch.org/issues/253
         only = is_list ? (RealtimeData::ActiveCall::LIST_ATTRIBUTES + RealtimeData::ActiveCall::SYSTEM_ATTRIBUTES ) : nil #I don't understand what is only.
-        active_calls = RealtimeData::ActiveCall.collection(Yeti::CdrsFilter.new(Node.all, params[:q]).search(only: only, empty_on_error: true))
+        active_calls = RealtimeData::ActiveCall.collection(Yeti::CdrsFilter.new(Node.all, params.to_unsafe_h[:q]).search(only: only, empty_on_error: true))
         active_calls = Kaminari.paginate_array(active_calls).page(1).per(active_calls.count)
         active_calls = RealtimeData::ActiveCall.assign_foreign_resources(active_calls)
 

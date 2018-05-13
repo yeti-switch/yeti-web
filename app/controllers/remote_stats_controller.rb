@@ -50,7 +50,7 @@ class RemoteStatsController < ApplicationController
 
   def cdrs_summary
     #TODO rewrite this SHIT
-    @data=CdrSummaryDecorator.new(Cdr::Cdr.ransack(clean_search_params params[:q]).result.scoped_stat)
+    @data=CdrSummaryDecorator.new(Cdr::Cdr.ransack(clean_search_params params[:q].to_unsafe_h).result.scoped_stat)
     respond_with(
         originated_calls_count: @data.originated_calls_count,
         rerouted_calls_count: @data.rerouted_calls_count,
@@ -68,7 +68,7 @@ class RemoteStatsController < ApplicationController
 
   def cdrs_summary_archive
     #TODO rewrite this SHIT
-    @data=CdrSummaryDecorator.new(Cdr::CdrArchive.ransack(clean_search_params params[:q]).result.scoped_stat)
+    @data=CdrSummaryDecorator.new(Cdr::CdrArchive.ransack(clean_search_params params[:q].to_unsafe_h).result.scoped_stat)
     respond_with(
         originated_calls_count: @data.originated_calls_count,
         rerouted_calls_count: @data.rerouted_calls_count,
