@@ -356,9 +356,10 @@ ActiveAdmin.register Dialpeer do
       tab :upcoming_price_changes do
         table_for s.dialpeer_next_rates.not_applied.order(apply_time: :asc).limit(10) do
           column :apply_time
+          column :initial_rate
+          column :next_rate
           column :initial_interval
           column :next_interval
-          column :rate
           column :connect_fee
           column :external_id
           column :actions do |r|
