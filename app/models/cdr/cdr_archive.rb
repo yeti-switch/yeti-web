@@ -144,6 +144,4 @@
 
 class Cdr::CdrArchive < Cdr::Cdr
   self.table_name = 'cdr.cdr_archive'
-
-  default_scope { order('time_start desc') }
 end

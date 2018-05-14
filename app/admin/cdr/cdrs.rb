@@ -3,6 +3,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   actions :index, :show
   config.batch_actions = false
+  config.sort_order = 'time_start_desc'
   acts_as_cdr_stat
 
   decorate_with CdrDecorator
