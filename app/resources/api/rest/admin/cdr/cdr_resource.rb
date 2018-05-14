@@ -11,6 +11,10 @@ class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
     freeze
   end
 
+  def self.default_sort
+    [{field: 'time_start', direction: :desc}]
+  end
+
   attributes :time_start,
     :destination_next_rate,
     :destination_fee,
