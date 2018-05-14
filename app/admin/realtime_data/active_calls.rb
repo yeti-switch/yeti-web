@@ -122,7 +122,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
 
   before_action only: [:index] do
-    params.delete(:q) if params[:q] && params.to_unsafe_h[:q].delete_if { |_, v| v.blank? }.blank? && GuiConfig.active_calls_require_filter
+    params.delete(:q) if params[:q] && (params.to_unsafe_h[:q] || {}).delete_if { |_, v| v.blank? }.blank? && GuiConfig.active_calls_require_filter
   end
 
   controller do
