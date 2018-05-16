@@ -14,7 +14,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
   describe 'GET index' do
     let!(:cdrs) do
-      create_list :cdr, 12, :with_id, time_start: 1.month.ago.utc
+      create_list :cdr, 12, :with_id, time_start: 2.days.ago.utc
     end
     subject { get :index, params: { filter: filters, page: { number: page_number, size: 10 } } }
     let(:filters) do
@@ -220,7 +220,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
       context 'by time_start_gteq' do
         let(:filters) do
-          { 'time-start-gteq' => Time.now.utc.beginning_of_month }
+          { 'time-start-gteq' => Time.now.utc.beginning_of_day }
         end
         let!(:cdr) do
           create :cdr, :with_id, time_start: Time.now.utc
@@ -237,10 +237,10 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
       context 'by time_start_lteq' do
         let(:filters) do
-          { 'time-start-lteq' => 45.days.ago.utc }
+          { 'time-start-lteq' => 15.days.ago.utc }
         end
         let!(:cdr) do
-          create :cdr, :with_id, time_start: 2.months.ago.utc
+          create :cdr, :with_id, time_start: 20.days.ago.utc
         end
         it 'only desired cdrs should be present' do
           subject

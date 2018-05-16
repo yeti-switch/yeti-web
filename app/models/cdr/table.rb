@@ -53,6 +53,7 @@ class Cdr::Table < Cdr::Base
 
   def self.add_partition
     transaction do
+      self.execute_sp("SELECT * FROM sys.cdr_createtable(2)")  ##try to create table for previous month
       self.execute_sp("SELECT * FROM sys.cdr_createtable(1)")  ##try to create table for current month
       self.execute_sp("SELECT * FROM sys.cdr_createtable(0)") ##for next month
     end
