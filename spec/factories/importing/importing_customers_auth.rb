@@ -47,7 +47,11 @@ FactoryGirl.define do
 
     ip '196.168.0.1, 127.0.0.0/8'
     src_prefix 'src-1, src-2'
+    src_number_min_length 5
+    src_number_max_length 10
     dst_prefix 'dst-1, dst-2'
+    dst_number_min_length 6
+    dst_number_max_length 10
     x_yeti_auth 'x-1, x-2'
     uri_domain 'uri-1, uri-2'
     from_domain 'from-1, from-2'

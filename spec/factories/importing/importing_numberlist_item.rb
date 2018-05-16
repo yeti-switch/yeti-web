@@ -19,6 +19,8 @@ FactoryGirl.define do
     action_id { _action.id }
     action_name { _action.name }
 
+    number_min_length 5
+    number_max_length 10
     src_rewrite_rule '111'
     src_rewrite_result '222'
     dst_rewrite_rule '333'

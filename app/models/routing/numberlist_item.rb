@@ -14,6 +14,8 @@
 #  dst_rewrite_result :string
 #  tag_action_id      :integer
 #  tag_action_value   :integer          default([]), not null, is an Array
+#  number_min_length  :integer          default(0), not null
+#  number_max_length  :integer          default(100), not null
 #
 
 class Routing::NumberlistItem < Yeti::ActiveRecord
@@ -27,6 +29,10 @@ class Routing::NumberlistItem < Yeti::ActiveRecord
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
   validates_uniqueness_of :key, scope: [ :numberlist_id ]
+
+  validates_presence_of :number_min_length, :number_max_length
+  validates_numericality_of :number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates_numericality_of :number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
 
   validates_presence_of :numberlist
 

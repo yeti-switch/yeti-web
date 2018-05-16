@@ -69,6 +69,8 @@
 #  dst_number_min_length            :integer
 #  dst_number_max_length            :integer
 #  reject_calls                     :boolean
+#  src_number_max_length            :integer
+#  src_number_min_length            :integer
 #
 
 class Importing::CustomersAuth < Importing::Base
@@ -98,8 +100,8 @@ class Importing::CustomersAuth < Importing::Base
       'name',
       'ip',
       'pop_id',
-      'src_prefix',
-      'dst_prefix',
+      'src_prefix', 'src_number_min_length','src_number_max_length',
+      'dst_prefix', 'dst_number_min_length','dst_number_max_length',
       'uri_domain',
       'from_domain',
       'to_domain',

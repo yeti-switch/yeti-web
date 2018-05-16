@@ -50,6 +50,8 @@
 #  tag_action_value                 :integer          default([]), not null, is an Array
 #  external_id                      :integer
 #  reject_calls                     :boolean          default(FALSE), not null
+#  src_number_max_length            :integer          default(100), not null
+#  src_number_min_length            :integer          default(0), not null
 #
 
 class CustomersAuthNormalized < Yeti::ActiveRecord

@@ -45,6 +45,8 @@ describe 'Export Customers Auth', type: :feature do
         ['IP', item.ip.join(', '), anything],
         ['Pop name', item.pop.name, anything],
         ['SRC Prefix', item.src_prefix.join(', '), anything],
+        ['Src number min length', item.src_number_min_length.to_s, anything],
+        ['Src number max length', item.src_number_max_length.to_s, anything],
         ['DST Prefix', item.dst_prefix.join(', '), anything],
         ['Dst number min length', item.dst_number_min_length.to_s, anything],
         ['Dst number max length', item.dst_number_max_length.to_s, anything],

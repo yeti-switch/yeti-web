@@ -11,6 +11,8 @@ ActiveAdmin.register Routing::NumberlistItem do
 
   acts_as_export :id,
                  :key,
+                 :number_min_length,
+                 :number_max_length,
                  [:numberlist_name, proc { |row| row.numberlist.name }],
                  [:action_name, proc { |row| row.action.try(:name) }],
                  :src_rewrite_rule,
@@ -26,7 +28,9 @@ ActiveAdmin.register Routing::NumberlistItem do
 
   includes :numberlist, :action
 
-  permit_params :numberlist_id, :key, :action_id,
+  permit_params :numberlist_id,
+                :key,:number_min_length, :number_max_length,
+                :action_id,
                 :src_rewrite_rule, :src_rewrite_result,
                 :dst_rewrite_rule, :dst_rewrite_result,
                 :tag_action_id, tag_action_value: []
@@ -50,6 +54,9 @@ ActiveAdmin.register Routing::NumberlistItem do
     actions
     column :numberlist
     column :key
+    column :number_length do |c|
+      c.number_min_length==c.number_max_length ? "#{c.number_min_length}" : "#{c.number_min_length}..#{c.number_max_length}"
+    end
     column :action do |c|
       c.action.blank? ? 'Default action' : c.action.name
     end
@@ -68,6 +75,8 @@ ActiveAdmin.register Routing::NumberlistItem do
       row :id
       row :numberlist
       row :key
+      row :number_min_length
+      row :number_max_length
       row :action
       row :src_rewrite_rule
       row :src_rewrite_result
@@ -84,6 +93,8 @@ ActiveAdmin.register Routing::NumberlistItem do
     f.inputs do
       f.input :numberlist, input_html: {class: 'chosen'}
       f.input :key
+      f.input :number_min_length
+      f.input :number_max_length
       f.input :action, as: :select, include_blank: 'Default action'
       f.input :src_rewrite_rule
       f.input :src_rewrite_result

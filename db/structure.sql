@@ -1,7 +1,3 @@
---
--- PostgreSQL database dump
---
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -19604,7 +19600,11 @@ CREATE TABLE class4.numberlist_items (
     dst_rewrite_rule character varying,
     dst_rewrite_result character varying,
     tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    number_min_length smallint DEFAULT 0 NOT NULL,
+    number_max_length smallint DEFAULT 100 NOT NULL,
+    CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
+    CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
 
 
@@ -19809,6 +19809,8 @@ CREATE TABLE class4.customers_auth (
     x_yeti_auth character varying[] DEFAULT '{}'::character varying[],
     external_id bigint,
     reject_calls boolean DEFAULT false NOT NULL,
+    src_number_max_length smallint DEFAULT 100 NOT NULL,
+    src_number_min_length smallint DEFAULT 0 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -19885,8 +19887,12 @@ CREATE TABLE class4.customers_auth_normalized (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     external_id bigint,
     reject_calls boolean DEFAULT false NOT NULL,
+    src_number_max_length smallint DEFAULT 100 NOT NULL,
+    src_number_min_length smallint DEFAULT 0 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
-    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
+    CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
+    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
+    CONSTRAINT customers_auth_min_src_number_length CHECK ((src_number_min_length >= 0))
 );
 
 
@@ -21165,7 +21171,9 @@ CREATE TABLE data_import.import_customers_auth (
     tag_action_value_names character varying,
     dst_number_min_length integer,
     dst_number_max_length integer,
-    reject_calls boolean
+    reject_calls boolean,
+    src_number_max_length smallint,
+    src_number_min_length smallint
 );
 
 
@@ -21559,7 +21567,9 @@ CREATE TABLE data_import.import_numberlist_items (
     tag_action_id integer,
     tag_action_name character varying,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    tag_action_value_names character varying
+    tag_action_value_names character varying,
+    number_min_length smallint,
+    number_max_length smallint
 );
 
 
@@ -26834,8 +26844,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -26870,6 +26879,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180418101559'),
 ('20180425203717'),
 ('20180426090808'),
-('20180427194327');
+('20180427194327'),
+('20180516095652');
 
 
