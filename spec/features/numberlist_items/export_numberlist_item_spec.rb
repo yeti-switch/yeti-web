@@ -24,6 +24,8 @@ describe 'Export Numberlist Item', type: :feature do
       [
         ['Id', item.id.to_s],
         ['Key', item.key],
+        ['Number min length', item.number_min_length],
+        ['Number max length', item.number_max_length],
         ['Numberlist name', item.numberlist.name],
         ['Action name', item.action.name],
         ['Src rewrite rule', item.src_rewrite_rule.to_s],
