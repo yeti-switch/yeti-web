@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  name       :string           not null
 #  abbrev     :string
-#  utc_offset :string
+#  utc_offset :interval
 #  is_dst     :boolean
 #
 
