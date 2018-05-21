@@ -46,6 +46,9 @@ ActiveAdmin.register Importing::CustomersAuth do
     end
 
     column :src_prefix
+    column :src_number_length do |c|
+      c.src_number_min_length==c.src_number_max_length ? "#{c.src_number_min_length}" : "#{c.src_number_min_length}..#{c.src_number_max_length}"
+    end
     column :dst_prefix
     column :dst_number_length do |c|
       c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"

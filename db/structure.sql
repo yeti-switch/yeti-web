@@ -1,7 +1,3 @@
---
--- PostgreSQL database dump
---
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -16205,6 +16201,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer
             ORDER BY
                 masklen(ca.ip) DESC,
@@ -16259,6 +16256,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer and
               ca.require_incoming_auth and gateway_id = i_auth_id
             ORDER BY
@@ -16389,7 +16387,10 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
             when 2 then -- prefix match
                 select into v_numberlist_item *
                 from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out)
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(ni.key)
                 desc limit 1;
 
@@ -16456,7 +16457,10 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
             where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
             select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out)
+            where
+              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
             order by length(ni.key) desc limit 1;
           end case;
           /*dbg{*/
@@ -17184,6 +17188,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer
             ORDER BY
                 masklen(ca.ip) DESC,
@@ -17238,6 +17243,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer and
               ca.require_incoming_auth and gateway_id = i_auth_id
             ORDER BY
@@ -17368,7 +17374,10 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
             when 2 then -- prefix match
                 select into v_numberlist_item *
                 from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out)
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(ni.key)
                 desc limit 1;
 
@@ -17435,7 +17444,10 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
             where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
             select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out)
+            where
+              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
             order by length(ni.key) desc limit 1;
           end case;
           /*dbg{*/
@@ -18153,6 +18165,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer
             ORDER BY
                 masklen(ca.ip) DESC,
@@ -18198,6 +18211,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer and
               ca.require_incoming_auth and gateway_id = i_auth_id
             ORDER BY
@@ -18310,7 +18324,10 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
             when 2 then -- prefix match
                 select into v_numberlist_item *
                 from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out)
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(ni.key)
                 desc limit 1;
 
@@ -18365,7 +18382,10 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
             where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
             select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out)
+            where
+              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
             order by length(ni.key) desc limit 1;
           end case;
           
@@ -19604,7 +19624,11 @@ CREATE TABLE class4.numberlist_items (
     dst_rewrite_rule character varying,
     dst_rewrite_result character varying,
     tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    number_min_length smallint DEFAULT 0 NOT NULL,
+    number_max_length smallint DEFAULT 100 NOT NULL,
+    CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
+    CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
 
 
@@ -19809,6 +19833,8 @@ CREATE TABLE class4.customers_auth (
     x_yeti_auth character varying[] DEFAULT '{}'::character varying[],
     external_id bigint,
     reject_calls boolean DEFAULT false NOT NULL,
+    src_number_max_length smallint DEFAULT 100 NOT NULL,
+    src_number_min_length smallint DEFAULT 0 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -19885,8 +19911,12 @@ CREATE TABLE class4.customers_auth_normalized (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     external_id bigint,
     reject_calls boolean DEFAULT false NOT NULL,
+    src_number_max_length smallint DEFAULT 100 NOT NULL,
+    src_number_min_length smallint DEFAULT 0 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
-    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0))
+    CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
+    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
+    CONSTRAINT customers_auth_min_src_number_length CHECK ((src_number_min_length >= 0))
 );
 
 
@@ -21165,7 +21195,9 @@ CREATE TABLE data_import.import_customers_auth (
     tag_action_value_names character varying,
     dst_number_min_length integer,
     dst_number_max_length integer,
-    reject_calls boolean
+    reject_calls boolean,
+    src_number_max_length smallint,
+    src_number_min_length smallint
 );
 
 
@@ -21559,7 +21591,9 @@ CREATE TABLE data_import.import_numberlist_items (
     tag_action_id integer,
     tag_action_name character varying,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    tag_action_value_names character varying
+    tag_action_value_names character varying,
+    number_min_length smallint,
+    number_max_length smallint
 );
 
 
@@ -26834,8 +26868,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -26870,6 +26903,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180418101559'),
 ('20180425203717'),
 ('20180426090808'),
-('20180427194327');
+('20180427194327'),
+('20180516095652');
 
 

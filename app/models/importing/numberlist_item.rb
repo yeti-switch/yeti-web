@@ -18,6 +18,8 @@
 #  tag_action_name        :string
 #  tag_action_value       :integer          default([]), not null, is an Array
 #  tag_action_value_names :string
+#  number_min_length      :integer
+#  number_max_length      :integer
 #
 
 class Importing::NumberlistItem < Importing::Base
@@ -30,7 +32,9 @@ class Importing::NumberlistItem < Importing::Base
 
   self.import_class = ::Routing::NumberlistItem
 
-  self.import_attributes = ['numberlist_id', 'key', 'action_id',
+  self.import_attributes = ['numberlist_id',
+                            'key', 'number_min_length', 'number_max_length',
+                            'action_id',
                             'src_rewrite_rule', 'src_rewrite_result',
                             'dst_rewrite_rule', 'dst_rewrite_result',
                             'tag_action_id', 'tag_action_value']

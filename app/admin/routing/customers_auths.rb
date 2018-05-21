@@ -16,6 +16,8 @@ ActiveAdmin.register CustomersAuth do
                            transport_protocol_id: Equipment::TransportProtocol.pluck(:name, :id),
                            ip: 'text',
                            src_prefix: 'text',
+                           min_src_number_length: 'text',
+                           max_src_number_length: 'text',
                            dst_prefix: 'text',
                            min_dst_number_length: 'text',
                            max_dst_number_length: 'text',
@@ -38,7 +40,9 @@ ActiveAdmin.register CustomersAuth do
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
                  :ip,
                  [:pop_name, proc { |row| row.pop.try(:name) || "" }],
-                 :src_prefix, :dst_prefix,
+                 :src_prefix,
+                 :src_number_min_length, :src_number_max_length,
+                 :dst_prefix,
                  :dst_number_min_length, :dst_number_max_length,
                  :uri_domain, :from_domain, :to_domain,
                  :x_yeti_auth,
@@ -81,8 +85,8 @@ ActiveAdmin.register CustomersAuth do
                 :dump_level_id, :capacity, :allow_receive_rate_limit,
                 :send_billing_information,
                 :ip, :pop_id,
-                :src_prefix, :dst_prefix,
-                :dst_number_min_length, :dst_number_max_length,
+                :src_prefix, :src_number_min_length, :src_number_max_length,
+                :dst_prefix, :dst_number_min_length, :dst_number_max_length,
                 :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
                 :radius_auth_profile_id,
                 :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
@@ -134,6 +138,9 @@ ActiveAdmin.register CustomersAuth do
     column :external_id
     column :pop
     column :src_prefix
+    column :src_number_length do |c|
+      c.src_number_min_length==c.src_number_max_length ? "#{c.src_number_min_length}" : "#{c.src_number_min_length}..#{c.src_number_max_length}"
+    end
     column :dst_prefix
     column :dst_number_length do |c|
       c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
@@ -262,6 +269,8 @@ ActiveAdmin.register CustomersAuth do
           f.input :ip, as: :array_of_strings
           f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
           f.input :src_prefix, as: :array_of_strings
+          f.input :src_number_min_length
+          f.input :src_number_max_length
           f.input :dst_prefix, as: :array_of_strings
           f.input :dst_number_min_length
           f.input :dst_number_max_length
@@ -355,6 +364,8 @@ ActiveAdmin.register CustomersAuth do
             row :ip
             row :pop
             row :src_prefix
+            row :src_number_min_length
+            row :src_number_max_length
             row :dst_prefix
             row :dst_number_min_length
             row :dst_number_max_length

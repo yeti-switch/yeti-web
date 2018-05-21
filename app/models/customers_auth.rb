@@ -49,6 +49,8 @@
 #  x_yeti_auth                      :string           default([]), is an Array
 #  external_id                      :integer
 #  reject_calls                     :boolean          default(FALSE), not null
+#  src_number_max_length            :integer          default(100), not null
+#  src_number_min_length            :integer          default(0), not null
 #
 
 class CustomersAuth < Yeti::ActiveRecord
@@ -110,7 +112,9 @@ class CustomersAuth < Yeti::ActiveRecord
 
   validates_presence_of :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy
 
-  validates_presence_of :dst_number_min_length, :dst_number_max_length
+  validates_presence_of :dst_number_min_length, :dst_number_max_length, :src_number_min_length, :src_number_max_length
+  validates_numericality_of :src_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates_numericality_of :src_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
   validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
   validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
 
