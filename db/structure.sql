@@ -16201,6 +16201,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer
             ORDER BY
                 masklen(ca.ip) DESC,
@@ -16255,6 +16256,7 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer and
               ca.require_incoming_auth and gateway_id = i_auth_id
             ORDER BY
@@ -16385,7 +16387,10 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
             when 2 then -- prefix match
                 select into v_numberlist_item *
                 from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out)
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(ni.key)
                 desc limit 1;
 
@@ -16452,7 +16457,10 @@ CREATE FUNCTION switch15.route(i_node_id integer, i_pop_id integer, i_protocol_i
             where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
             select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out)
+            where
+              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
             order by length(ni.key) desc limit 1;
           end case;
           /*dbg{*/
@@ -17180,6 +17188,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer
             ORDER BY
                 masklen(ca.ip) DESC,
@@ -17234,6 +17243,7 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer and
               ca.require_incoming_auth and gateway_id = i_auth_id
             ORDER BY
@@ -17364,7 +17374,10 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
             when 2 then -- prefix match
                 select into v_numberlist_item *
                 from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out)
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(ni.key)
                 desc limit 1;
 
@@ -17431,7 +17444,10 @@ CREATE FUNCTION switch15.route_debug(i_node_id integer, i_pop_id integer, i_prot
             where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
             select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out)
+            where
+              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
             order by length(ni.key) desc limit 1;
           end case;
           /*dbg{*/
@@ -18149,6 +18165,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer
             ORDER BY
                 masklen(ca.ip) DESC,
@@ -18194,6 +18211,7 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
               COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
               (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
               length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
               c.enabled and c.customer and
               ca.require_incoming_auth and gateway_id = i_auth_id
             ORDER BY
@@ -18306,7 +18324,10 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
             when 2 then -- prefix match
                 select into v_numberlist_item *
                 from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out)
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(ni.key)
                 desc limit 1;
 
@@ -18361,7 +18382,10 @@ CREATE FUNCTION switch15.route_release(i_node_id integer, i_pop_id integer, i_pr
             where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
             select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out)
+            where
+              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
             order by length(ni.key) desc limit 1;
           end case;
           
