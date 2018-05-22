@@ -68,3 +68,24 @@ end
 ActiveAdminDatetimepicker::Base.default_datetime_picker_options = {
     defaultDate: proc { Time.current.strftime("%Y-%m-%d 00:00") }
 }
+
+#fix filtering by array contains
+module Arel
+  module Visitors
+    class PostgreSQL
+      private
+
+      def visit_Arel_Nodes_Contains o, collector
+        left_column = o.left.relation.send(:type_caster).send(:types).columns.find do |col|
+          col.name == o.left.name.to_s || col.name == o.left.relation.name.to_s
+        end
+
+        if left_column && (left_column.type == :hstore || (left_column.respond_to?(:array) && left_column.array))
+          infix_value o, collector, " @> "
+        else
+          infix_value o, collector, " >> "
+        end
+      end
+    end
+  end
+end
