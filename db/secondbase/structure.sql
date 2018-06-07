@@ -7,6 +7,13 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
+-- Name: auth_log; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA auth_log;
+
+
+--
 -- Name: billing; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -721,19 +728,9 @@ $$;
 CREATE FUNCTION cdr.cdr_i_tgf() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-BEGIN  IF ( NEW.time_start >= '2014-08-01 00:00:00+00' AND NEW.time_start < '2014-09-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201408 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2014-09-01 00:00:00+00' AND NEW.time_start < '2014-10-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201409 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2014-10-01 00:00:00+00' AND NEW.time_start < '2014-11-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201410 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2014-11-01 00:00:00+00' AND NEW.time_start < '2014-12-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201411 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2017-08-01 00:00:00+00' AND NEW.time_start < '2017-09-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201708 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2017-09-01 00:00:00+00' AND NEW.time_start < '2017-10-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201709 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2017-10-01 00:00:00+00' AND NEW.time_start < '2017-11-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201710 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2017-12-01 00:00:00+00' AND NEW.time_start < '2018-01-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201712 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2018-01-01 00:00:00+00' AND NEW.time_start < '2018-02-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201801 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2018-02-01 00:00:00+00' AND NEW.time_start < '2018-03-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201802 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2018-03-01 00:00:00+00' AND NEW.time_start < '2018-04-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201803 VALUES (NEW.*);
-ELSIF ( NEW.time_start >= '2018-04-01 00:00:00+00' AND NEW.time_start < '2018-05-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201804 VALUES (NEW.*);
+BEGIN  IF ( NEW.time_start >= '2018-04-01 00:00:00+00' AND NEW.time_start < '2018-05-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201804 VALUES (NEW.*);
 ELSIF ( NEW.time_start >= '2018-05-01 00:00:00+00' AND NEW.time_start < '2018-06-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201805 VALUES (NEW.*);
+ELSIF ( NEW.time_start >= '2018-06-01 00:00:00+00' AND NEW.time_start < '2018-07-01 00:00:00+00' ) THEN INSERT INTO cdr.cdr_201806 VALUES (NEW.*);
  ELSE 
  RAISE EXCEPTION 'cdr.cdr_i_tg: time_start out of range.'; 
  END IF;
@@ -1028,6 +1025,63 @@ CREATE FUNCTION switch.vendor_price_round(i_config sys.config, i_amount numeric)
     end case;
   END;
   $$;
+
+
+--
+-- Name: write_auth_log(boolean, integer, integer, double precision, character varying, integer, character varying, integer, character varying, character varying, character varying, character varying, boolean, smallint, character varying, character varying, character varying, character varying, integer); Type: FUNCTION; Schema: switch; Owner: -
+--
+
+CREATE FUNCTION switch.write_auth_log(i_is_master boolean, i_node_id integer, i_pop_id integer, i_request_time double precision, i_sign_orig_ip character varying, i_sign_orig_port integer, i_sign_orig_local_ip character varying, i_sign_orig_local_port integer, i_ruri character varying, i_from_uri character varying, i_to_uri character varying, i_orig_call_id character varying, i_success boolean, i_code smallint, i_reason character varying, i_internal_reason character varying, i_nonce character varying, i_response character varying, i_gateway_id integer) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER COST 10
+    AS $$
+DECLARE
+BEGIN
+  INSERT INTO auth_log.auth_log (
+        node_id,
+        pop_id,
+        request_time,
+        sign_orig_ip,
+        sign_orig_port,
+        sign_orig_local_ip,
+        sign_orig_local_port,
+        auth_orig_ip,
+        auth_orig_port,
+        ruri,
+        from_uri,
+        to_uri,
+        orig_call_id,
+        success,
+        code,
+        reason,
+        internal_reason,
+        nonce,
+        response,
+        gateway_id
+      ) VALUES(
+        i_node_id,
+        i_pop_id,
+        to_timestamp(i_request_time),
+        i_sign_orig_ip,
+        i_sign_orig_port,
+        i_sign_orig_local_ip,
+        i_sign_orig_local_port,
+        null,
+        null,
+        i_ruri,
+        i_from_uri,
+        i_to_uri,
+        i_orig_call_id,
+        i_success,
+        i_code,
+        i_reason,
+        i_internal_reason,
+        i_nonce,
+        i_response,
+        i_gateway_id
+    );
+  RETURN 0;
+END;
+$$;
 
 
 --
@@ -3654,6 +3708,54 @@ $_$;
 
 
 --
+-- Name: auth_log; Type: TABLE; Schema: auth_log; Owner: -; Tablespace: 
+--
+
+CREATE TABLE auth_log.auth_log (
+    id bigint NOT NULL,
+    node_id smallint,
+    pop_id smallint,
+    request_time timestamp with time zone DEFAULT now() NOT NULL,
+    sign_orig_ip character varying,
+    sign_orig_port integer,
+    sign_orig_local_ip character varying,
+    sign_orig_local_port integer,
+    auth_orig_ip character varying,
+    auth_orig_port integer,
+    ruri character varying,
+    from_uri character varying,
+    to_uri character varying,
+    orig_call_id character varying,
+    success boolean DEFAULT false NOT NULL,
+    code smallint,
+    reason character varying,
+    internal_reason character varying,
+    nonce character varying,
+    response character varying,
+    gateway_id integer
+);
+
+
+--
+-- Name: auth_log_id_seq; Type: SEQUENCE; Schema: auth_log; Owner: -
+--
+
+CREATE SEQUENCE auth_log.auth_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_log_id_seq; Type: SEQUENCE OWNED BY; Schema: auth_log; Owner: -
+--
+
+ALTER SEQUENCE auth_log.auth_log_id_seq OWNED BY auth_log.auth_log.id;
+
+
+--
 -- Name: invoice_destinations; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
 --
 
@@ -5236,6 +5338,13 @@ ALTER SEQUENCE sys.cdr_tables_id_seq OWNED BY sys.cdr_tables.id;
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: auth_log; Owner: -
+--
+
+ALTER TABLE ONLY auth_log.auth_log ALTER COLUMN id SET DEFAULT nextval('auth_log.auth_log_id_seq'::regclass);
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -5478,6 +5587,14 @@ ALTER TABLE ONLY stats.traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextv
 --
 
 ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdr_tables_id_seq'::regclass);
+
+
+--
+-- Name: auth_log_pkey; Type: CONSTRAINT; Schema: auth_log; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_log.auth_log
+    ADD CONSTRAINT auth_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -6124,6 +6241,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180328123622'),
 ('20180328170352'),
 ('20180425200716'),
-('20180427194936');
+('20180427194936'),
+('20180607135226');
 
 
