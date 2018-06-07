@@ -20,17 +20,19 @@ RSpec.describe Cdr::AuthLog, type: :model do
     let(:auth_log_parameters) do
       %Q{
 
-    true::boolean,
-    10::integer,
-    1::integer,
+    true::boolean, -- master
+    10::integer, -- node_id
+    1::integer, -- pop_id
     '#{request_time.to_f}'::double precision,
+    2::smallint, -- transport protocol
     '1.1.1.1'::varchar,
     5060::integer,
     '2.2.2.2'::varchar,
     6050::integer,
-    'sip:test@localhost.com'::varchar,
-    'sip:test@localhost.com'::varchar,
-    'sip:test@localhost.com'::varchar,
+    'INVITE', --method
+    'sip:ruri@localhost.com'::varchar,
+    'sip:from@localhost.com'::varchar,
+    'sip:to@localhost.com'::varchar,
     'wqewqewq'::varchar,
     true::boolean,
     200::smallint,
@@ -38,8 +40,17 @@ RSpec.describe Cdr::AuthLog, type: :model do
     'OK'::varchar,
     '11231es221'::varchar,
     '11231es221'::varchar,
-    11::integer
-
+    11::integer,
+    'X-YETI-AUTH value',
+    'Diversion value',
+    '8.8.8.8',
+    '6767',
+    1::smallint,
+    'PAI value',
+    'PPI value',
+    'privacy value',
+    'rpid value',
+    'rpid privacy value'
       }
     end
 
@@ -52,26 +63,43 @@ RSpec.describe Cdr::AuthLog, type: :model do
       expect(described_class.last.attributes.symbolize_keys).to match(
                                                                     {
                                                                         id: kind_of(Integer),
-                                                                        auth_orig_ip: nil,
-                                                                        auth_orig_port: nil,
+                                                                        request_time: be_within(2.second).of(request_time),
+
+                                                                        transport_proto_id: 2,
+                                                                        transport_remote_ip: "1.1.1.1",
+                                                                        transport_remote_port: 5060,
+                                                                        transport_local_ip: "2.2.2.2",
+                                                                        transport_local_port: 6050,
+                                                                        origination_ip: "8.8.8.8",
+                                                                        origination_port: 6767,
+                                                                        origination_proto_id: 1,
+
+
+                                                                        method: "INVITE",
+                                                                        ruri: "sip:ruri@localhost.com",
+                                                                        from_uri: "sip:from@localhost.com",
+                                                                        to_uri: "sip:to@localhost.com",
                                                                         code: 200,
-                                                                        from_uri: "sip:test@localhost.com",
+
                                                                         gateway_id: 11,
                                                                         internal_reason: "OK",
                                                                         node_id: 10,
                                                                         nonce: "11231es221",
-                                                                        orig_call_id: "wqewqewq",
+                                                                        call_id: "wqewqewq",
                                                                         pop_id: 1,
                                                                         reason: "OK",
-                                                                        request_time: be_within(2.second).of(request_time),
+
                                                                         response: "11231es221",
-                                                                        ruri: "sip:test@localhost.com",
-                                                                        sign_orig_ip: "1.1.1.1",
-                                                                        sign_orig_local_ip: "2.2.2.2",
-                                                                        sign_orig_local_port: 6050,
-                                                                        sign_orig_port: 5060,
                                                                         success: true,
-                                                                        to_uri: "sip:test@localhost.com"
+                                                                        x_yeti_auth: "X-YETI-AUTH value",
+                                                                        diversion: "Diversion value",
+                                                                        pai: "PAI value",
+                                                                        ppi: "PPI value",
+                                                                        privacy: "privacy value",
+                                                                        rpid: "rpid value",
+                                                                        rpid_privacy: "rpid privacy value"
+
+
                                                                     }
                                                                 )
     end
