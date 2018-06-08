@@ -22,11 +22,11 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
     column :internal_reason
 
     column :originator do |c|
-      "#{c.origination_protocol.display_name}://#{c.origination_ip}:#{c.origination_port}"
+      "#{c.origination_protocol.try(:display_name)}://#{c.origination_ip}:#{c.origination_port}"
     end
 
     column :remote_socket do |c|
-      "#{c.transport_protocol.display_name}://#{c.transport_remote_ip}:#{c.transport_remote_port}"
+      "#{c.transport_protocol.try(:display_name)}://#{c.transport_remote_ip}:#{c.transport_remote_port}"
     end
 
     column :local_socket do |c|
