@@ -16,6 +16,7 @@ class AuthLog < ActiveRecord::Migration[5.1]
         origination_ip varchar,
         origination_port integer,
         origination_proto_id smallint,
+        username varchar,
         method varchar,
         ruri varchar,
         from_uri varchar,
@@ -50,6 +51,7 @@ class AuthLog < ActiveRecord::Migration[5.1]
     i_transport_remote_port integer,
     i_transport_local_ip varchar,
     i_transport_local_port integer,
+    i_username varchar,
     i_method varchar,
     i_ruri varchar,
     i_from_uri varchar,
@@ -91,6 +93,7 @@ BEGIN
   v_log.origination_ip = i_origination_ip;
   v_log.origination_port = i_origination_port;
   v_log.origination_proto_id = i_origination_proto_id;
+  v_log.username = i_username;
   v_log.method = i_method;
   v_log.ruri = i_ruri;
   v_log.from_uri = i_from_uri;
@@ -139,6 +142,7 @@ $BODY$
     i_transport_remote_port integer,
     i_transport_local_ip varchar,
     i_transport_local_port integer,
+    i_username varchar,
     i_method varchar,
     i_ruri varchar,
     i_from_uri varchar,

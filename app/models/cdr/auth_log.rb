@@ -14,6 +14,7 @@
 #  origination_ip        :string
 #  origination_port      :integer
 #  origination_proto_id  :integer
+#  username              :string
 #  method                :string
 #  ruri                  :string
 #  from_uri              :string

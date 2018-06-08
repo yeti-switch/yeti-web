@@ -36,6 +36,8 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
     column :pop
     column :node
 
+    column :username
+
     column :method
     column :ruri
     column :from_uri
@@ -58,5 +60,6 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :gateway
   filter :pop
   filter :node
+  filter :username
 
 end

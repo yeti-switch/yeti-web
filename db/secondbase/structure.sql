@@ -1028,10 +1028,10 @@ CREATE FUNCTION switch.vendor_price_round(i_config sys.config, i_amount numeric)
 
 
 --
--- Name: write_auth_log(boolean, integer, integer, double precision, smallint, character varying, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, boolean, smallint, character varying, character varying, character varying, character varying, integer, character varying, character varying, character varying, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch; Owner: -
+-- Name: write_auth_log(boolean, integer, integer, double precision, smallint, character varying, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, boolean, smallint, character varying, character varying, character varying, character varying, integer, character varying, character varying, character varying, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION switch.write_auth_log(i_is_master boolean, i_node_id integer, i_pop_id integer, i_request_time double precision, i_transport_proto_id smallint, i_transport_remote_ip character varying, i_transport_remote_port integer, i_transport_local_ip character varying, i_transport_local_port integer, i_method character varying, i_ruri character varying, i_from_uri character varying, i_to_uri character varying, i_call_id character varying, i_success boolean, i_code smallint, i_reason character varying, i_internal_reason character varying, i_nonce character varying, i_response character varying, i_gateway_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_origination_ip character varying, i_origination_port integer, i_origination_proto_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS integer
+CREATE FUNCTION switch.write_auth_log(i_is_master boolean, i_node_id integer, i_pop_id integer, i_request_time double precision, i_transport_proto_id smallint, i_transport_remote_ip character varying, i_transport_remote_port integer, i_transport_local_ip character varying, i_transport_local_port integer, i_username character varying, i_method character varying, i_ruri character varying, i_from_uri character varying, i_to_uri character varying, i_call_id character varying, i_success boolean, i_code smallint, i_reason character varying, i_internal_reason character varying, i_nonce character varying, i_response character varying, i_gateway_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_origination_ip character varying, i_origination_port integer, i_origination_proto_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1050,6 +1050,7 @@ BEGIN
   v_log.origination_ip = i_origination_ip;
   v_log.origination_port = i_origination_port;
   v_log.origination_proto_id = i_origination_proto_id;
+  v_log.username = i_username;
   v_log.method = i_method;
   v_log.ruri = i_ruri;
   v_log.from_uri = i_from_uri;
@@ -3719,6 +3720,7 @@ CREATE TABLE auth_log.auth_log (
     origination_ip character varying,
     origination_port integer,
     origination_proto_id smallint,
+    username character varying,
     method character varying,
     ruri character varying,
     from_uri character varying,
