@@ -30,6 +30,7 @@ RSpec.describe Cdr::AuthLog, type: :model do
     '2.2.2.2'::varchar,
     6050::integer,
     'vasya pupkin',
+    'realm value',
     'INVITE', --method
     'sip:ruri@localhost.com'::varchar,
     'sip:from@localhost.com'::varchar,
@@ -76,6 +77,7 @@ RSpec.describe Cdr::AuthLog, type: :model do
                                                                         origination_proto_id: 1,
 
                                                                         username: "vasya pupkin",
+                                                                        realm: "realm value",
                                                                         method: "INVITE",
                                                                         ruri: "sip:ruri@localhost.com",
                                                                         from_uri: "sip:from@localhost.com",

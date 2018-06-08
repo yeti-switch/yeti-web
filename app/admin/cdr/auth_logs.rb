@@ -37,6 +37,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
     column :node
 
     column :username
+    column :realm
 
     column :method
     column :ruri
