@@ -85,7 +85,7 @@ class Routing::Simulation
   end
 
   def has_attributes?
-    @attrs.present? and @attrs.any?
+    @attrs.present? and @attrs.to_unsafe_h.any?
   end
 
   def persisted?
