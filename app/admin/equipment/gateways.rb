@@ -113,17 +113,17 @@ ActiveAdmin.register Gateway do
 
   collection_action :with_contractor do
     @gateways = Contractor.find(params[:contractor_id]).gateways
-    render text: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
+    render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
   end
 
   collection_action :for_origination do
     @gateways = Gateway.for_origination(params[:contractor_id].to_i)
-    render text: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
+    render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
   end
 
   collection_action :for_termination do
     @gateways = Gateway.for_termination(params[:contractor_id].to_i)
-    render text: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
+    render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
   end
 
   index do

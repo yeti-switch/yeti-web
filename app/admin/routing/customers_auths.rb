@@ -113,7 +113,7 @@ ActiveAdmin.register CustomersAuth do
     src_prefix=params[:src_prefix].to_s
     dst_prefix=params[:dst_prefix].to_s
     @ca = CustomersAuth.search_for_debug(src_prefix, dst_prefix)
-    render text: view_context.options_from_collection_for_select(@ca, :id, :display_name_for_debug)
+    render plain: view_context.options_from_collection_for_select(@ca, :id, :display_name_for_debug)
   end
 
   scope :with_radius

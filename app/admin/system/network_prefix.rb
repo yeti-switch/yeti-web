@@ -13,11 +13,11 @@ ActiveAdmin.register System::NetworkPrefix do
 
 
   collection_action :search do
-    render text: System::NetworkPrefix.prefix_hint(params[:prefix])
+    render plain: System::NetworkPrefix.prefix_hint(params[:prefix])
   end
 
   collection_action :with_network do
-    render text: System::NetworkPrefix.prefix_list_by_network(params[:network_id].to_i)
+    render plain: System::NetworkPrefix.prefix_list_by_network(params[:network_id].to_i)
   end
 
 

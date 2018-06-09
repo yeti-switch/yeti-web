@@ -31,7 +31,7 @@ ActiveAdmin.register GatewayGroup do
 
   collection_action :with_contractor do
     @gr = Contractor.find(params[:contractor_id]).gateway_groups
-    render text: view_context.options_from_collection_for_select(@gr, :id, :display_name)
+    render plain: view_context.options_from_collection_for_select(@gr, :id, :display_name)
   end
 
 
