@@ -38,13 +38,13 @@ ActiveAdmin.register Contractor do
    #todo: check this endpoint is need
    collection_action :is_vendor do
      @contractors = Contractor.where(vendor: params[:vendor_flag])
-     render text:                 view_context.options_from_collection_for_select(@contractors, :id, :display_name)
+     render plain: view_context.options_from_collection_for_select(@contractors, :id, :display_name)
    end
 
    collection_action :get_accounts do
      contractor =  Contractor.find(params[:contractor_id])
      @accounts = contractor.accounts
-     render text:                 view_context.options_from_collection_for_select(@accounts, :id, :display_name)
+     render plain: view_context.options_from_collection_for_select(@accounts, :id, :display_name)
    end
 
   index do
