@@ -12,12 +12,14 @@
 #
 
 class Cdr::Table < Cdr::Base
+  extend PgCdrPartitioning
 
   self.table_name = 'sys.cdr_tables'
 
-
   has_paper_trail class_name: 'AuditLogItem'
-  
+
+  scope :active, -> { where(active: true) }
+
   def display_name
     "#{self.name}"
   end
@@ -32,13 +34,13 @@ class Cdr::Table < Cdr::Base
       _reload_trigger
     end
   end
-  
+
   def unload
     self.execute_sp("SELECT sys.cdr_export_data(?,?)" , self.name, GuiConfig.cdr_unload_dir)
   end
 
   def _reload_trigger
-    self.execute_sp("SELECT sys.cdrtable_tgr_reload()")
+    self.reload_cdr_i_tgf
   end
 
   def archive
@@ -52,11 +54,21 @@ class Cdr::Table < Cdr::Base
   end
 
   def self.add_partition
+    today = Date.today
     transaction do
-      self.execute_sp("SELECT * FROM sys.cdr_createtable(2)")  ##try to create table for previous month
-      self.execute_sp("SELECT * FROM sys.cdr_createtable(1)")  ##try to create table for current month
-      self.execute_sp("SELECT * FROM sys.cdr_createtable(0)") ##for next month
+      create_partition(today.prev_month)
+      create_partition(today)
+      create_partition(today.next_month)
     end
+  end
+
+  def self.partitions
+    res = connection.execute %q{
+      SELECT tablename
+      FROM pg_tables
+      WHERE schemaname = 'cdr' AND tablename SIMILAR TO 'cdr_\d{6}'
+    }
+    res.values.flatten
   end
 
   def remove
@@ -64,4 +76,3 @@ class Cdr::Table < Cdr::Base
   end
 
 end
-  
