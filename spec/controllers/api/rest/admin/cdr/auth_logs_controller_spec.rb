@@ -14,7 +14,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
 
   describe 'GET index' do
     let!(:auth_logs) do
-      create_list :auth_log, 12, :with_id, request_time: 2.days.ago.utc
+      create_list :auth_log, 12, :with_id, request_time: 20.minutes.ago.utc
     end
     subject {get :index, params: {filter: filters, page: {number: page_number, size: 10}}}
     let(:filters) do
@@ -59,11 +59,13 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
 
       context 'by request_time_gteq' do
         let(:filters) do
-          {'request-time-gteq' => Time.now.utc.beginning_of_day}
+          {'request-time-gteq' => Time.now.utc.beginning_of_minute}
         end
+
         let!(:auth_log) do
           create :auth_log, :with_id, request_time: Time.now.utc
         end
+
         it 'only desired logs should be present' do
           subject
           expect(response_data).to match_array(
@@ -76,11 +78,13 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
 
       context 'by request_time_lteq' do
         let(:filters) do
-          {'request-time-lteq' => 15.days.ago.utc}
+          {'request-time-lteq' => 21.minute.ago.utc}
         end
+
         let!(:auth_log) do
-          create :auth_log, :with_id, request_time: 20.days.ago.utc
+          create :auth_log, :with_id, request_time: 22.minutes.ago.utc
         end
+
         it 'only desired logs should be present' do
           subject
           expect(response_data).to match_array(
