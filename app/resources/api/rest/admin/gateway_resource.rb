@@ -1,5 +1,5 @@
 class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
-  attributes :name, :enabled, :priority, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
+  attributes :name, :enabled, :priority, :weight, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
              :host, :port, :resolve_ruri, :diversion_rewrite_rule, :diversion_rewrite_result,
              :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule, :src_rewrite_result,
              :dst_rewrite_rule, :dst_rewrite_result, :auth_enabled, :auth_user, :auth_password, :auth_from_user,
@@ -30,6 +30,9 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
   has_one :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :rel100_mode, class_name: 'Equipment::GatewayRel100Mode'
+  has_one :rx_inbound_dtmf_filtering_mode, class_name: 'Equipment::GatewayInboundDtmfFilteringMode'
+  has_one :tx_inbound_dtmf_filtering_mode, class_name: 'Equipment::GatewayInboundDtmfFilteringMode'
+
 
   filter :name
 
@@ -47,6 +50,8 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
       :sensor_level,
       :dtmf_receive_mode,
       :dtmf_send_mode,
+      :rx_inbound_dtmf_filtering_mode,
+      :tx_inbound_dtmf_filtering_mode,
       :rel100_mode,
       :session_refresh_method,
       :transport_protocol,

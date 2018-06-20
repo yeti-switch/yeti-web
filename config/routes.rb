@@ -101,6 +101,7 @@ Rails.application.routes.draw do
 
           namespace :equipment do
             jsonapi_resources :gateway_rel100_modes
+            jsonapi_resources :gateway_inbound_dtmf_filtering_modes
             jsonapi_resources :transport_protocols
             namespace :radius do
               jsonapi_resources :accounting_profiles
