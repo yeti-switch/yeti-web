@@ -32,6 +32,7 @@ ActiveAdmin.register Gateway do
   acts_as_export :id, :name, :enabled,
                  [:gateway_group_name, proc { |row| row.gateway_group.try(:name) }],
                  :priority,
+                 :weight,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:contractor_name, proc { |row| row.contractor.try(:name) }],
                  :is_shared,
@@ -83,6 +84,8 @@ ActiveAdmin.register Gateway do
                  :rtp_force_relay_cn,
                  [:dtmf_send_mode_name, proc { |row| row.dtmf_send_mode.try(:name) }],
                  [:dtmf_receive_mode_name, proc { |row| row.dtmf_receive_mode.try(:name) }],
+                 [:rx_inbound_dtmf_filtering_mode, proc { |row| row.rx_inbound_dtmf_filtering_mode.try(:name) }],
+                 [:tx_inbound_dtmf_filtering_mode, proc { |row| row.tx_inbound_dtmf_filtering_mode.try(:name) }],
                  :suppress_early_media,
                  :send_lnp_information,
                  :force_one_way_early_media, :max_30x_redirects
@@ -101,7 +104,7 @@ ActiveAdmin.register Gateway do
            :dtmf_send_mode, :dtmf_receive_mode,
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-           :rel100_mode
+           :rel100_mode, :rx_inbound_dtmf_filtering_mode, :tx_inbound_dtmf_filtering_mode
 
   controller do
     def resource_params
@@ -140,6 +143,7 @@ ActiveAdmin.register Gateway do
     column :is_shared
     column :gateway_group
     column :priority
+    column :weigth
     column :pop
 
     column :transport_protocol
@@ -266,6 +270,8 @@ ActiveAdmin.register Gateway do
     column :force_dtmf_relay
     column :dtmf_send_mode
     column :dtmf_receive_mode
+    column :rx_inbound_dtmf_filtering_mode
+    column :tx_inbound_dtmf_filtering_mode
     ##RADIUS
     column :radius_accounting_profile
     column :external_id
@@ -306,6 +312,7 @@ ActiveAdmin.register Gateway do
           f.input :is_shared
           f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
           f.input :priority
+          f.input :weigth
           f.input :pop, input_html: {class: 'chosen'}
 
           f.input :allow_origination
@@ -346,6 +353,7 @@ ActiveAdmin.register Gateway do
           f.input :transit_headers_from_origination, hint: "Use comma as delimiter"
           f.input :transit_headers_from_termination, hint: "Use comma as delimiter"
           f.input :sip_interface_name
+
         end
         f.inputs "Origination" do
           f.input :orig_next_hop
@@ -357,6 +365,9 @@ ActiveAdmin.register Gateway do
           f.input :transparent_dialog_id
           f.input :dialog_nat_handling
           f.input :orig_disconnect_policy
+
+          f.input :incoming_auth_username
+          f.input :incoming_auth_password, as: :string, input_html: {autocomplete: 'off'}
         end
         f.inputs "Termination" do
           f.input :transport_protocol, as: :select, include_blank: false
@@ -364,14 +375,12 @@ ActiveAdmin.register Gateway do
           f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
           f.input :resolve_ruri
 
-          f.input :incoming_auth_username
-          f.input :incoming_auth_password, as: :string, input_html: {autocomplete: 'off'}
-
           f.input :auth_enabled
           f.input :auth_user
           f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}
           f.input :auth_from_user
           f.input :auth_from_domain
+
           f.input :term_use_outbound_proxy
           f.input :term_force_outbound_proxy
           f.input :term_proxy_transport_protocol, as: :select, include_blank: false
@@ -428,15 +437,17 @@ ActiveAdmin.register Gateway do
         end
       end
       tab :dtmf do
-        f.inputs :dtmf do
+        f.inputs "DTMF" do
           f.input :force_dtmf_relay
-          f.input :dtmf_send_mode
-          f.input :dtmf_receive_mode
+          f.input :dtmf_send_mode, as: :select, include_blank: false
+          f.input :dtmf_receive_mode, as: :select, include_blank: false
+          f.input :rx_inbound_dtmf_filtering_mode, as: :select, include_blank: false
+          f.input :tx_inbound_dtmf_filtering_mode, as: :select, include_blank: false
         end
 
       end
       tab :radius do
-        f.inputs :radius do
+        f.inputs "RADIUS" do
           f.input :radius_accounting_profile, hint: "RADIUS accounting profile for LegB(Termination)"
         end
 
@@ -462,6 +473,7 @@ ActiveAdmin.register Gateway do
           end
           row :gateway_group
           row :priority
+          row :weight
           row :pop
           row :allow_origination
           row :allow_termination
@@ -594,6 +606,8 @@ ActiveAdmin.register Gateway do
           row :force_dtmf_relay
           row :dtmf_send_mode
           row :dtmf_receive_mode
+          row :tx_inbound_dtmf_filtering_mode
+          row :rx_inbound_dtmf_filtering_mode
         end
       end
       tab :radius do

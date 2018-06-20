@@ -2,7 +2,8 @@ FactoryGirl.define do
   factory :gateway, class: Gateway do
     sequence(:name) { |n| "gateway#{n}" }
     enabled true
-    priority 100
+    priority 122
+    weight 220
     acd_limit 0.0
     asr_limit 0.0
     sdp_alines_filter_type_id 0

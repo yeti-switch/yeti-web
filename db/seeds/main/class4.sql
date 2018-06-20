@@ -950,6 +950,11 @@ INSERT INTO tag_actions VALUES (5, 'Replace with selected tags');
 insert into class4.routing_tag_modes(id,name) values( 0, 'OR');
 insert into class4.routing_tag_modes(id,name) values( 1, 'AND');
 
+
+insert into class4.gateway_inbound_dtmf_filtering_modes(id,name) values('1','Inherit configuration from other call leg');
+insert into class4.gateway_inbound_dtmf_filtering_modes(id,name) values('2','Disable');
+insert into class4.gateway_inbound_dtmf_filtering_modes(id,name) values('3','Remove DTMF');
+
 -- Completed on 2018-01-19 16:08:50 EET
 
 --
