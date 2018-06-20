@@ -41,7 +41,7 @@ class Cdr::AuthLog < Cdr::Base
 
   self.table_name = 'auth_log.auth_log'
 
-  belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateaway_id
+  belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
 
