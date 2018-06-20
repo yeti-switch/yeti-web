@@ -15,8 +15,8 @@ ActiveAdmin.register Gateway do
                        lambda do
                          {
                            enabled: boolean_select,
-                           locked: boolean_select,
                            priority: 'text',
+                           weight: 'text',
                            is_shared: boolean_select,
                            acd_limit: 'text',
                            asr_limit: 'text',
