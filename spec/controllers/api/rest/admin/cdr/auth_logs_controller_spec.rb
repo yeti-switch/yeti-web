@@ -61,7 +61,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
         let(:filters) do
           {'request-time-gteq' => Time.now.utc.beginning_of_day}
         end
-        let!(:auth_logs) do
+        let!(:auth_log) do
           create :auth_log, :with_id, request_time: Time.now.utc
         end
         it 'only desired logs should be present' do
@@ -78,7 +78,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
         let(:filters) do
           {'request-time-lteq' => 15.days.ago.utc}
         end
-        let!(:auth_logs) do
+        let!(:auth_log) do
           create :auth_log, :with_id, request_time: 20.days.ago.utc
         end
         it 'only desired logs should be present' do
@@ -94,7 +94,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
   end
 
   describe 'GET show' do
-    let!(:auth_logs) do
+    let!(:auth_log) do
       create :auth_log, :with_id
     end
 
@@ -124,13 +124,25 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
                                        'relationships' => hash_including(
 
                                            'pop' => hash_including(
-                                               'data' => nil
+                                               'data' => {
+                                                   'type' => 'pops',
+                                                   'id' => auth_log.pop.id.to_s
+
+                                               }
                                            ),
                                            'gateway' => hash_including(
-                                               'data' => nil
+                                               'data' => {
+                                                   'type' => 'gateways',
+                                                   'id' => auth_log.gateway.id.to_s
+
+                                               }
                                            ),
                                            'node' => hash_including(
-                                               'data' => nil
+                                               'data' => {
+                                                   'type' => 'nodes',
+                                                   'id' => auth_log.node.id.to_s
+
+                                               }
                                            ),
                                        ),
                                    )
