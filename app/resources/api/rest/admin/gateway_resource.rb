@@ -41,6 +41,7 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
       :name,
       :enabled,
       :priority,
+      :weight,
       :acd_limit,
       :asr_limit,
       :contractor,
