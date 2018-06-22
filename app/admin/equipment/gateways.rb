@@ -84,8 +84,8 @@ ActiveAdmin.register Gateway do
                  :rtp_force_relay_cn,
                  [:dtmf_send_mode_name, proc { |row| row.dtmf_send_mode.try(:name) }],
                  [:dtmf_receive_mode_name, proc { |row| row.dtmf_receive_mode.try(:name) }],
-                 [:rx_inbound_dtmf_filtering_mode, proc { |row| row.rx_inbound_dtmf_filtering_mode.try(:name) }],
-                 [:tx_inbound_dtmf_filtering_mode, proc { |row| row.tx_inbound_dtmf_filtering_mode.try(:name) }],
+                 [:rx_inband_dtmf_filtering_mode, proc { |row| row.rx_inband_dtmf_filtering_mode.try(:name) }],
+                 [:tx_inband_dtmf_filtering_mode, proc { |row| row.tx_inband_dtmf_filtering_mode.try(:name) }],
                  :suppress_early_media,
                  :send_lnp_information,
                  :force_one_way_early_media, :max_30x_redirects
@@ -104,7 +104,7 @@ ActiveAdmin.register Gateway do
            :dtmf_send_mode, :dtmf_receive_mode,
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-           :rel100_mode, :rx_inbound_dtmf_filtering_mode, :tx_inbound_dtmf_filtering_mode
+           :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode
 
   controller do
     def resource_params
@@ -270,8 +270,8 @@ ActiveAdmin.register Gateway do
     column :force_dtmf_relay
     column :dtmf_send_mode
     column :dtmf_receive_mode
-    column :rx_inbound_dtmf_filtering_mode
-    column :tx_inbound_dtmf_filtering_mode
+    column :rx_inband_dtmf_filtering_mode
+    column :tx_inband_dtmf_filtering_mode
     ##RADIUS
     column :radius_accounting_profile
     column :external_id
@@ -441,8 +441,8 @@ ActiveAdmin.register Gateway do
           f.input :force_dtmf_relay
           f.input :dtmf_send_mode, as: :select, include_blank: false
           f.input :dtmf_receive_mode, as: :select, include_blank: false
-          f.input :rx_inbound_dtmf_filtering_mode, as: :select, include_blank: false
-          f.input :tx_inbound_dtmf_filtering_mode, as: :select, include_blank: false
+          f.input :rx_inband_dtmf_filtering_mode, as: :select, include_blank: false
+          f.input :tx_inband_dtmf_filtering_mode, as: :select, include_blank: false
         end
 
       end
@@ -606,8 +606,8 @@ ActiveAdmin.register Gateway do
           row :force_dtmf_relay
           row :dtmf_send_mode
           row :dtmf_receive_mode
-          row :tx_inbound_dtmf_filtering_mode
-          row :rx_inbound_dtmf_filtering_mode
+          row :tx_inband_dtmf_filtering_mode
+          row :rx_inband_dtmf_filtering_mode
         end
       end
       tab :radius do

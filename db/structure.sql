@@ -5262,8 +5262,8 @@ CREATE TABLE class4.gateways (
     max_transfers smallint DEFAULT 0 NOT NULL,
     incoming_auth_username character varying,
     incoming_auth_password character varying,
-    rx_inbound_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
-    tx_inbound_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
+    rx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
+    tx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
     weight smallint DEFAULT 100 NOT NULL
 );
 
@@ -20227,10 +20227,10 @@ ALTER SEQUENCE class4.gateway_groups_id_seq OWNED BY class4.gateway_groups.id;
 
 
 --
--- Name: gateway_inbound_dtmf_filtering_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_inband_dtmf_filtering_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
-CREATE TABLE class4.gateway_inbound_dtmf_filtering_modes (
+CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
 );
@@ -21550,10 +21550,10 @@ CREATE TABLE data_import.import_gateways (
     send_lnp_information boolean,
     force_one_way_early_media boolean,
     max_30x_redirects integer,
-    rx_inbound_dtmf_filtering_mode_id smallint,
-    rx_inbound_dtmf_filtering_mode_name character varying,
-    tx_inbound_dtmf_filtering_mode_id smallint,
-    tx_inbound_dtmf_filtering_mode_name character varying,
+    rx_inband_dtmf_filtering_mode_id smallint,
+    rx_inband_dtmf_filtering_mode_name character varying,
+    tx_inband_dtmf_filtering_mode_id smallint,
+    tx_inband_dtmf_filtering_mode_name character varying,
     weight smallint
 );
 
@@ -24656,19 +24656,19 @@ ALTER TABLE ONLY class4.gateway_groups
 
 
 --
--- Name: gateway_inbound_dtmf_filtering_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_inband_dtmf_filtering_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_inbound_dtmf_filtering_modes
-    ADD CONSTRAINT gateway_inbound_dtmf_filtering_modes_name_key UNIQUE (name);
+ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
+    ADD CONSTRAINT gateway_inband_dtmf_filtering_modes_name_key UNIQUE (name);
 
 
 --
--- Name: gateway_inbound_dtmf_filtering_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_inband_dtmf_filtering_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY class4.gateway_inbound_dtmf_filtering_modes
-    ADD CONSTRAINT gateway_inbound_dtmf_filtering_modes_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
+    ADD CONSTRAINT gateway_inband_dtmf_filtering_modes_pkey PRIMARY KEY (id);
 
 
 --
@@ -26523,11 +26523,11 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_rx_inbound_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways_rx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_rx_inbound_dtmf_filtering_mode_id_fkey FOREIGN KEY (rx_inbound_dtmf_filtering_mode_id) REFERENCES class4.gateway_inbound_dtmf_filtering_modes(id);
+    ADD CONSTRAINT gateways_rx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (rx_inband_dtmf_filtering_mode_id) REFERENCES class4.gateway_inband_dtmf_filtering_modes(id);
 
 
 --
@@ -26595,11 +26595,11 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_tx_inbound_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways_tx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_tx_inbound_dtmf_filtering_mode_id_fkey FOREIGN KEY (tx_inbound_dtmf_filtering_mode_id) REFERENCES class4.gateway_inbound_dtmf_filtering_modes(id);
+    ADD CONSTRAINT gateways_tx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (tx_inband_dtmf_filtering_mode_id) REFERENCES class4.gateway_inband_dtmf_filtering_modes(id);
 
 
 --

@@ -194,19 +194,19 @@ ActiveAdmin.register Importing::Gateway do
     end
 
     #DTMF
-    column :rx_inbound_dtmf_filtering_mode, sortable: :rx_inbound_dtmf_filtering_mode_name do |row|
-      if row.rx_inbound_dtmf_filtering_mode.blank?
-        row.rx_inbound_dtmf_filtering_mode_name
+    column :rx_inband_dtmf_filtering_mode, sortable: :rx_inband_dtmf_filtering_mode_name do |row|
+      if row.rx_inband_dtmf_filtering_mode.blank?
+        row.rx_inband_dtmf_filtering_mode_name
       else
-        auto_link(row.rx_inbound_dtmf_filtering_mode, row.rx_inbound_dtmf_filtering_mode_name)
+        auto_link(row.rx_inband_dtmf_filtering_mode, row.rx_inband_dtmf_filtering_mode_name)
       end
     end
 
-    column :tx_inbound_dtmf_filtering_mode, sortable: :tx_inbound_dtmf_filtering_mode_name do |row|
-      if row.tx_inbound_dtmf_filtering_mode.blank?
-        row.tx_inbound_dtmf_filtering_mode_name
+    column :tx_inband_dtmf_filtering_mode, sortable: :tx_inband_dtmf_filtering_mode_name do |row|
+      if row.tx_inband_dtmf_filtering_mode.blank?
+        row.tx_inband_dtmf_filtering_mode_name
       else
-        auto_link(row.tx_inbound_dtmf_filtering_mode, row.tx_inbound_dtmf_filtering_mode_name)
+        auto_link(row.tx_inband_dtmf_filtering_mode, row.tx_inband_dtmf_filtering_mode_name)
       end
     end
 

@@ -30,8 +30,8 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
   has_one :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :rel100_mode, class_name: 'Equipment::GatewayRel100Mode'
-  has_one :rx_inbound_dtmf_filtering_mode, class_name: 'Equipment::GatewayInboundDtmfFilteringMode'
-  has_one :tx_inbound_dtmf_filtering_mode, class_name: 'Equipment::GatewayInboundDtmfFilteringMode'
+  has_one :rx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode'
+  has_one :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode'
 
 
   filter :name
@@ -51,8 +51,8 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
       :sensor_level,
       :dtmf_receive_mode,
       :dtmf_send_mode,
-      :rx_inbound_dtmf_filtering_mode,
-      :tx_inbound_dtmf_filtering_mode,
+      :rx_inband_dtmf_filtering_mode,
+      :tx_inband_dtmf_filtering_mode,
       :rel100_mode,
       :session_refresh_method,
       :transport_protocol,

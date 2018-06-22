@@ -25,7 +25,7 @@ resource 'Gateways' do
   
   required_relationships = %i(
     contractor codec-group sdp-c-location sensor-level
-    dtmf-receive-mode dtmf-send-mode rx-inbound-dtmf-filtering-mode tx-inbound-dtmf-filtering-mode
+    dtmf-receive-mode dtmf-send-mode rx-inband-dtmf-filtering-mode tx-inband-dtmf-filtering-mode
     rel100-mode
     session-refresh-method
     transport-protocol sdp-alines-filter-type
@@ -73,8 +73,8 @@ resource 'Gateways' do
     let(:'dtmf-receive-mode') { wrap_relationship(:'dtmf-receive-modes', 1) }
     let(:'dtmf-send-mode') { wrap_relationship(:'dtmf-send-modes', 1) }
     let(:'rel100-mode') { wrap_relationship(:'gateway-rel100-modes', 1) }
-    let(:'tx-inbound-dtmf-filtering-mode') { wrap_relationship(:'gateway-inbound-dtmf-filtering-modes', 2) }
-    let(:'rx-inbound-dtmf-filtering-mode') { wrap_relationship(:'gateway-inbound-dtmf-filtering-modes', 3) }
+    let(:'tx-inband-dtmf-filtering-mode') { wrap_relationship(:'gateway-inband-dtmf-filtering-modes', 2) }
+    let(:'rx-inband-dtmf-filtering-mode') { wrap_relationship(:'gateway-inband-dtmf-filtering-modes', 3) }
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'term-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'orig-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
