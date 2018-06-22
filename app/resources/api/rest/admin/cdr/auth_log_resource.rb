@@ -7,6 +7,7 @@ class Api::Rest::Admin::Cdr::AuthLogResource < ::BaseResource
     ROOT_NAMESPACE_RELATIONS = %w(
       Gateway Pop Node
     ).freeze
+    EQUIPMENT_NAMESPACE_RELATIONS = %w(TransportProtocol).freeze
 
     freeze
   end
@@ -39,8 +40,8 @@ class Api::Rest::Admin::Cdr::AuthLogResource < ::BaseResource
   has_one :gateway, class_name: 'Gateway'
   has_one :pop, class_name: 'Pop'
   has_one :node, class_name: 'Node'
-  has_one :origination_protocol, class_name: 'Equipment::TransportProtocol'
-  has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
+  has_one :origination_protocol, class_name: 'TransportProtocol', foreign_key: :origination_proto_id
+  has_one :transport_protocol, class_name: 'TransportProtocol', foreign_key: :transport_proto_id
 
   filter :request_time_gteq, apply: ->(records, values, _options) do
     records.where('request_time >= ?', values[0])
@@ -49,12 +50,15 @@ class Api::Rest::Admin::Cdr::AuthLogResource < ::BaseResource
     records.where('request_time <= ?', values[0])
   end
 
-  # add supporting associations from non cdr namespaces
+
   def self.resource_for(type)
     if type.in?(CONST::ROOT_NAMESPACE_RELATIONS)
       "Api::Rest::Admin::#{type}Resource".safe_constantize
+    elsif type.in?(CONST::EQUIPMENT_NAMESPACE_RELATIONS)
+      "Api::Rest::Admin::Equipment::#{type}Resource".safe_constantize
     else
       super
     end
   end
+
 end

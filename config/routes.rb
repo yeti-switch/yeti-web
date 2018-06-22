@@ -73,6 +73,7 @@ Rails.application.routes.draw do
           jsonapi_resources :dump_levels
           jsonapi_resources :filter_types
           jsonapi_resources :pops
+          jsonapi_resources :nodes
           jsonapi_resources :sdp_c_locations
           jsonapi_resources :session_refresh_methods
           jsonapi_resources :sortings

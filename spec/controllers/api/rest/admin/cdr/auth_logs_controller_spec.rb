@@ -104,7 +104,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
       }
     end
     let(:includes) do
-      %w(pop gateway node)
+      %w(pop gateway node origination-protocol transport-protocol)
     end
 
     it 'http status should eq 200' do
@@ -117,9 +117,43 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
       expect(response_data).to match(
                                    hash_including(
                                        'id' => auth_log.id.to_s,
-                                       'type' => 'auth_logs',
+                                       'type' => 'auth-logs',
                                        'attributes' => {
-                                           'request-time' => auth_log.request_time.iso8601(3)
+                                           'request-time' => auth_log.request_time.iso8601(3),
+                                           'success' => auth_log.success,
+                                           'code' => auth_log.code,
+                                           'reason' => auth_log.reason,
+                                           'internal-reason' => auth_log.internal_reason,
+                                           'origination-ip' => auth_log.origination_ip,
+
+                                           'origination-port'=>auth_log.origination_port,
+                                           'origination-proto-id'=>auth_log.origination_proto_id,
+
+                                           'transport-proto-id'=>auth_log.transport_proto_id,
+                                           'transport-remote-ip'=>auth_log.transport_remote_ip,
+                                           'transport-remote-port'=>auth_log.transport_remote_port,
+                                           'transport-local-ip'=>auth_log.transport_local_ip,
+                                           'transport-local-port'=>auth_log.transport_local_port,
+                                           'pop-id'=>auth_log.pop_id,
+                                           'node-id'=>auth_log.node_id,
+                                           'gateway-id'=>auth_log.gateway_id,
+                                           'username'=>auth_log.username,
+                                           'realm'=>auth_log.realm,
+                                           'request-method'=>auth_log.request_method,
+                                           'ruri'=>auth_log.ruri,
+                                           'from-uri'=>auth_log.from_uri,
+                                           'to-uri'=>auth_log.to_uri,
+                                           'call-id'=>auth_log.call_id,
+                                           'nonce'=>auth_log.nonce,
+                                           'response'=>auth_log.response,
+                                           'x-yeti-auth'=>auth_log.x_yeti_auth,
+                                           'diversion'=>auth_log.diversion,
+                                           'pai'=>auth_log.pai,
+                                           'ppi'=>auth_log.ppi,
+                                           'privacy'=>auth_log.privacy,
+                                           'rpid'=>auth_log.rpid,
+                                           'rpid-privacy'=>auth_log.rpid_privacy
+
                                        },
                                        'relationships' => hash_including(
 
@@ -135,6 +169,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
                                                    'type' => 'gateways',
                                                    'id' => auth_log.gateway.id.to_s
 
+
                                                }
                                            ),
                                            'node' => hash_including(
@@ -143,6 +178,12 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
                                                    'id' => auth_log.node.id.to_s
 
                                                }
+                                           ),
+                                           'origination-protocol' => hash_including(
+                                               'data' => nil
+                                           ),
+                                           'transport-protocol' => hash_including(
+                                               'data' => nil
                                            ),
                                        ),
                                    )
