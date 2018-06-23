@@ -1,10 +1,10 @@
 class Routing::RoutingPlanStaticRouteBatchCreator
   include ActiveModel::Model
 
-  attr_accessor :routing_plan, :prefixes, :vendors, :priority, :country, :network
+  attr_accessor :routing_plan, :prefixes, :vendors, :priority, :weight, :country, :network
 
-  validates_presence_of :routing_plan, :priority, :prefixes, :vendors
-  validates_numericality_of :priority, only_integer: true, greater_than: 0
+  validates_presence_of :routing_plan, :priority, :weight, :prefixes, :vendors
+  validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT, allow_nil: false, only_integer: true
 
   def vendors=(s)
     @vendors = s.reject { |i| i.blank? }

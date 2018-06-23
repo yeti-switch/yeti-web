@@ -151,6 +151,8 @@ class Gateway < Yeti::ActiveRecord
   validates_presence_of :name, :priority, :weight
   validates_uniqueness_of :name
 
+  validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
+
   validates_presence_of :session_refresh_method
   validates_uniqueness_of :name, allow_blank: false
 
