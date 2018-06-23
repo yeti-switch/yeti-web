@@ -44,7 +44,7 @@ ActiveAdmin.register Importing::Gateway do
     column :is_shared
 
     column :priority
-    column :weigth
+    column :weight
 
     column :pop, sortable: :pop_name do |row|
       if row.pop.blank?

@@ -143,7 +143,7 @@ ActiveAdmin.register Gateway do
     column :is_shared
     column :gateway_group
     column :priority
-    column :weigth
+    column :weight
     column :pop
 
     column :transport_protocol
@@ -312,7 +312,7 @@ ActiveAdmin.register Gateway do
           f.input :is_shared
           f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
           f.input :priority
-          f.input :weigth
+          f.input :weight
           f.input :pop, input_html: {class: 'chosen'}
 
           f.input :allow_origination
