@@ -15,7 +15,7 @@ ActiveAdmin.register Importing::Gateway do
 
   includes :contractor, :gateway_group, :rel100_mode,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-           :sensor, :sensor_level
+           :sensor, :sensor_level, :rx_inbound_dtmf_filtering_mode, :rx_inbound_dtmf_filtering_mode
 
   index do
     selectable_column
@@ -44,6 +44,7 @@ ActiveAdmin.register Importing::Gateway do
     column :is_shared
 
     column :priority
+    column :weigth
 
     column :pop, sortable: :pop_name do |row|
       if row.pop.blank?
@@ -189,6 +190,23 @@ ActiveAdmin.register Importing::Gateway do
         row.rel100_mode_name
       else
         auto_link(row.rel100_mode, row.rel100_mode_name)
+      end
+    end
+
+    #DTMF
+    column :rx_inband_dtmf_filtering_mode, sortable: :rx_inband_dtmf_filtering_mode_name do |row|
+      if row.rx_inband_dtmf_filtering_mode.blank?
+        row.rx_inband_dtmf_filtering_mode_name
+      else
+        auto_link(row.rx_inband_dtmf_filtering_mode, row.rx_inband_dtmf_filtering_mode_name)
+      end
+    end
+
+    column :tx_inband_dtmf_filtering_mode, sortable: :tx_inband_dtmf_filtering_mode_name do |row|
+      if row.tx_inband_dtmf_filtering_mode.blank?
+        row.tx_inband_dtmf_filtering_mode_name
+      else
+        auto_link(row.tx_inband_dtmf_filtering_mode, row.tx_inband_dtmf_filtering_mode_name)
       end
     end
 

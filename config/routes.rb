@@ -73,12 +73,15 @@ Rails.application.routes.draw do
           jsonapi_resources :dump_levels
           jsonapi_resources :filter_types
           jsonapi_resources :pops
+          jsonapi_resources :nodes
           jsonapi_resources :sdp_c_locations
           jsonapi_resources :session_refresh_methods
           jsonapi_resources :sortings
 
           namespace :cdr do
             jsonapi_resources :cdrs, only: [:index, :show] do
+            end
+            jsonapi_resources :auth_logs, only: [:index, :show] do
             end
             jsonapi_resources :cdr_exports, only: [:create]
           end
@@ -101,6 +104,7 @@ Rails.application.routes.draw do
 
           namespace :equipment do
             jsonapi_resources :gateway_rel100_modes
+            jsonapi_resources :gateway_inband_dtmf_filtering_modes
             jsonapi_resources :transport_protocols
             namespace :radius do
               jsonapi_resources :accounting_profiles

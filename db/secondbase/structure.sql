@@ -1056,7 +1056,7 @@ BEGIN
   v_log.origination_proto_id = i_origination_proto_id;
   v_log.username = i_username;
   v_log.realm = i_realm;
-  v_log.method = i_method;
+  v_log.request_method = i_method;
   v_log.ruri = i_ruri;
   v_log.from_uri = i_from_uri;
   v_log.to_uri = i_to_uri;
@@ -3574,7 +3574,7 @@ CREATE TABLE auth_log.auth_log (
     origination_proto_id smallint,
     username character varying,
     realm character varying,
-    method character varying,
+    request_method character varying,
     ruri character varying,
     from_uri character varying,
     to_uri character varying,
@@ -6103,6 +6103,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180425200716'),
 ('20180427194936'),
 ('20180607135226'),
-('20180611140540');
+('20180611140540'),
+('20180621130107');
 
 

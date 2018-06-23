@@ -108,6 +108,9 @@
 #  max_transfers                    :integer          default(0), not null
 #  incoming_auth_username           :string
 #  incoming_auth_password           :string
+#  rx_inband_dtmf_filtering_mode_id :integer          default(1), not null
+#  tx_inband_dtmf_filtering_mode_id :integer          default(1), not null
+#  weight                           :integer          default(100), not null
 #
 
 require 'resolv'
@@ -133,6 +136,8 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
   belongs_to :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
   belongs_to :rel100_mode, class_name: 'Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
+  belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
+  belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
@@ -143,8 +148,10 @@ class Gateway < Yeti::ActiveRecord
 
   validates_presence_of :contractor, :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id
   validates_presence_of :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode
-  validates_presence_of :name, :priority
+  validates_presence_of :name, :priority, :weight
   validates_uniqueness_of :name
+
+  validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
 
   validates_presence_of :session_refresh_method
   validates_uniqueness_of :name, allow_blank: false

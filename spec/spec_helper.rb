@@ -45,6 +45,7 @@ RSpec.configure do |config|
       'class4.dtmf_send_modes',
       'class4.dtmf_receive_modes',
       'class4.gateway_rel100_modes',
+      'class4.gateway_inband_dtmf_filtering_modes',
       'class4.transport_protocols',
       'class4.numberlist_modes',
       'class4.numberlist_actions',

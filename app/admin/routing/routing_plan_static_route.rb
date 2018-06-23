@@ -12,6 +12,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
                            routing_plan_id: Routing::RoutingPlan.pluck(:name, :id),
                            prefix: 'text',
                            priority: 'text',
+                           weight: 'text',
                            vendor_id: Contractor.vendors.pluck(:name, :id)
                          }
                        end)
@@ -21,7 +22,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
 
   includes :vendor, :routing_plan, network_prefix: [:country, :network]
 
-  permit_params :routing_plan_id, :prefix, :priority, :vendor_id
+  permit_params :routing_plan_id, :prefix, :priority, :weight, :vendor_id
 
   filter :id
   filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: {class: 'chosen'}
@@ -58,6 +59,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
       auto_link row.network_prefix.try!(:network)
     end
     column :priority
+    column :weight
     column :vendor
     column :updated_at do |row|
       row.versions.last.created_at
@@ -76,6 +78,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
       row :country
       row :network
       row :priority
+      row :weight
       row :vendor
     end
     active_admin_comments
@@ -87,6 +90,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
       f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: {class: 'chosen'}
       f.input :prefix, input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
       f.input :priority
+      f.input :weight
       f.input :vendor, collection:  Contractor.vendors , input_html: {class: 'chosen', multiple: false}
     end
     f.actions

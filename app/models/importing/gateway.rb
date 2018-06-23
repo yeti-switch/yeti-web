@@ -120,6 +120,11 @@
 #  send_lnp_information               :boolean
 #  force_one_way_early_media          :boolean
 #  max_30x_redirects                  :integer
+#  rx_inband_dtmf_filtering_mode_id   :integer
+#  rx_inband_dtmf_filtering_mode_name :string
+#  tx_inband_dtmf_filtering_mode_id   :integer
+#  tx_inband_dtmf_filtering_mode_name :string
+#  weight                             :integer
 #
 
 class Importing::Gateway  < Importing::Base
@@ -144,6 +149,9 @@ class Importing::Gateway  < Importing::Base
   belongs_to :term_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
   belongs_to :orig_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
   belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
+  belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
+  belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
+
 
   self.import_attributes = [
       'name','enabled',
@@ -151,6 +159,7 @@ class Importing::Gateway  < Importing::Base
       'contractor_id',
       'is_shared',
       'priority',
+      'weight',
       'pop_id',
       'host','port',
       'origination_capacity',
@@ -190,6 +199,7 @@ class Importing::Gateway  < Importing::Base
       'rtp_timeout', 'filter_noaudio_streams', 'rtp_relay_timestamp_aligning',
       'rtp_force_relay_cn',
       'dtmf_receive_mode_id', 'dtmf_send_mode_id',
+      'tx_inband_dtmf_filtering_mode_id', 'rx_inband_dtmf_filtering_mode_id',
       'transport_protocol_id',
       'term_proxy_transport_protocol_id',
       'orig_proxy_transport_protocol_id',

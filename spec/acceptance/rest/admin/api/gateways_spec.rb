@@ -10,7 +10,7 @@ resource 'Gateways' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'gateways' }
 
-  required_params = %i(name enabled priority acd-limit asr-limit)
+  required_params = %i(name enabled priority weight acd-limit asr-limit)
   optional_params = %i(
     allow-origination allow-termination sst-enabled host port resolve-ruri diversion-rewrite-rule
     diversion-rewrite-result src-name-rewrite-rule src-name-rewrite-result src-rewrite-rule src-rewrite-result 
@@ -24,8 +24,12 @@ resource 'Gateways' do
   )
   
   required_relationships = %i(
-    contractor codec-group sdp-c-location sensor-level dtmf-receive-mode dtmf-send-mode rel100-mode
-    session-refresh-method transport-protocol sdp-alines-filter-type term-proxy-transport-protocol orig-proxy-transport-protocol
+    contractor codec-group sdp-c-location sensor-level
+    dtmf-receive-mode dtmf-send-mode rx-inband-dtmf-filtering-mode tx-inband-dtmf-filtering-mode
+    rel100-mode
+    session-refresh-method
+    transport-protocol sdp-alines-filter-type
+    term-proxy-transport-protocol orig-proxy-transport-protocol
   )
   optional_relationships = %i(
     gateway-group pop sensor diversion-policy term-disconnect-policy 
@@ -59,6 +63,7 @@ resource 'Gateways' do
     let(:allow_termination) { true }
     let(:host) { 'test.example.com' }
     let(:priority) { 1 }
+    let(:weight) { 900 }
     let(:'acd-limit') { 0.0 }
     let(:'asr-limit') { 0.0 }
     let(:'sdp-alines-filter-type') { wrap_relationship(:'filter-types', 0) }
@@ -68,6 +73,8 @@ resource 'Gateways' do
     let(:'dtmf-receive-mode') { wrap_relationship(:'dtmf-receive-modes', 1) }
     let(:'dtmf-send-mode') { wrap_relationship(:'dtmf-send-modes', 1) }
     let(:'rel100-mode') { wrap_relationship(:'gateway-rel100-modes', 1) }
+    let(:'tx-inband-dtmf-filtering-mode') { wrap_relationship(:'gateway-inband-dtmf-filtering-modes', 2) }
+    let(:'rx-inband-dtmf-filtering-mode') { wrap_relationship(:'gateway-inband-dtmf-filtering-modes', 3) }
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'term-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'orig-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }

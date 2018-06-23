@@ -78,7 +78,7 @@ RSpec.describe Cdr::AuthLog, type: :model do
 
                                                                         username: "vasya pupkin",
                                                                         realm: "realm value",
-                                                                        method: "INVITE",
+                                                                        request_method: "INVITE",
                                                                         ruri: "sip:ruri@localhost.com",
                                                                         from_uri: "sip:from@localhost.com",
                                                                         to_uri: "sip:to@localhost.com",
