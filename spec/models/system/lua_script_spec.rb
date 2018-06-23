@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe System::LuaScript, type: :model do
+RSpec.describe System::LuaScript, type: :model do
 
   describe 'validations' do
     subject do

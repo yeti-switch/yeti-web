@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Billing::InvoicePeriod do
+RSpec.describe Billing::InvoicePeriod do
   let(:id) { Billing::InvoicePeriod::NAMES.key(name.upcase) }
   before { @invoice_period = Billing::InvoicePeriod.create(id: id, name: name) }
   subject { @invoice_period }

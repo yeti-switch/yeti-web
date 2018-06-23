@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Admin::DestinationsController, type: :controller do
+RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
   let(:rateplan) { create :rateplan }
 
   include_context :jsonapi_admin_headers

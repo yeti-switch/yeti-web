@@ -1,4 +1,4 @@
-shared_context :init_gateway_group do |args|
+RSpec.shared_context :init_gateway_group do |args|
 
   args ||= {}
 

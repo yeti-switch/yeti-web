@@ -1,4 +1,4 @@
-shared_examples 'after_import_hook when real items do not match' do
+RSpec.shared_examples 'after_import_hook when real items do not match' do
 
   # Before running this test, all "belongs_to"-fields should be set to nil
   it 'resolve relations' do
@@ -19,7 +19,7 @@ shared_examples 'after_import_hook when real items do not match' do
   end
 end
 
-shared_examples 'after_import_hook when real items match' do
+RSpec.shared_examples 'after_import_hook when real items match' do
 
   it 'resolves o_id - match real item id' do
     expect{ subject }.to change{ preview_item.reload.o_id }.to(real_item.id)

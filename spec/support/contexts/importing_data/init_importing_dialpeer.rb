@@ -1,4 +1,4 @@
-shared_context :init_importing_dialpeer do |args|
+RSpec.shared_context :init_importing_dialpeer do |args|
 
   include_context :init_routing_tag_collection
 

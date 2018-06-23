@@ -142,8 +142,6 @@
 #  customer_auth_name              :string
 #
 
-require 'spec_helper'
-
 RSpec.describe Cdr::Cdr, type: :model do
 
   before { described_class.destroy_all }

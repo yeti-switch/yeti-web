@@ -1,4 +1,4 @@
-shared_context :init_importing_disconnect_policy do |args|
+RSpec.shared_context :init_importing_disconnect_policy do |args|
 
   args ||= {}
 

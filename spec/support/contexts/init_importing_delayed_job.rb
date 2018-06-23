@@ -1,4 +1,4 @@
-shared_context :init_importing_delayed_job do
+RSpec.shared_context :init_importing_delayed_job do
 
   let(:import_class) { preview_class.import_class }
   let(:importing_items_count) { preview_class.count }

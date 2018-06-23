@@ -1,4 +1,4 @@
-shared_context :init_codec_group do |args|
+RSpec.shared_context :init_codec_group do |args|
 
   before do
     codec_group = CodecGroup.new(

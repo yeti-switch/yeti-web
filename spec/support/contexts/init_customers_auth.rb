@@ -1,4 +1,4 @@
-shared_context :init_customers_auth do |args|
+RSpec.shared_context :init_customers_auth do |args|
 
   args ||= {}
 

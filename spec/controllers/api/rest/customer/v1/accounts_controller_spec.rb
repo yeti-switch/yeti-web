@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::AccountsController, type: :controller do
+RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :controller do
   let!(:api_access) { create :api_access }
   let(:customer) { api_access.customer }
 

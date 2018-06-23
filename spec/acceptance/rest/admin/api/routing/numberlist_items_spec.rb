@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Routing NumberlistItems' do
+RSpec.resource 'Routing NumberlistItems' do
   include_context :acceptance_admin_user
 
   let(:collection) { create_list(:numberlist_item, 2) }

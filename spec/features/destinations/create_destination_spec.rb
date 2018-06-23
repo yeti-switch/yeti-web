@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Create new Destinations', type: :feature do
+RSpec.describe 'Create new Destinations', type: :feature do
   include_context :login_as_admin
 
   context 'success' do

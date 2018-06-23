@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Routing::Numberlist, type: :model do
 
   context '#validations' do

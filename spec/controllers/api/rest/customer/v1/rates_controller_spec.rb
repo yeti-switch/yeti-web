@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::RatesController, type: :controller do
+RSpec.describe Api::Rest::Customer::V1::RatesController, type: :controller do
 
   # Rates for the other customer
   before { create_list(:customers_auth, 2) }

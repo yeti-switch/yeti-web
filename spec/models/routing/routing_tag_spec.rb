@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Routing::RoutingTag, type: :model do
 
   context 'validators' do

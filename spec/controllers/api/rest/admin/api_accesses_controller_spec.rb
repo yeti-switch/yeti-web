@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Admin::ApiAccessesController, type: :controller do
+RSpec.describe Api::Rest::Admin::ApiAccessesController, type: :controller do
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 

@@ -1,4 +1,4 @@
-shared_examples 'Jobs for importing data' do
+RSpec.shared_examples 'Jobs for importing data' do
 
   context 'on create job' do
     it 'creates proper jobs in queue' do

@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Numberlist' do
+RSpec.resource 'Numberlist' do
   include_context :acceptance_admin_user
 
   let(:collection) { create_list(:numberlist, 2) }

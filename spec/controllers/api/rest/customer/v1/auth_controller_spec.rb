@@ -1,12 +1,10 @@
-require 'spec_helper'
-
 RSpec::Matchers.define :return_404_with_empty_body do
   match do |actual|
     actual.status == 404 && actual.body.blank?
   end
 end
 
-describe Api::Rest::Customer::V1::AuthController, type: :controller do
+RSpec.describe Api::Rest::Customer::V1::AuthController, type: :controller do
 
   let!(:user) { create :api_access }
   let(:remote_ip) { '127.0.0.1' }

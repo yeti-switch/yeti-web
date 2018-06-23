@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Routing TagAction' do
+RSpec.resource 'Routing TagAction' do
   include_context :acceptance_admin_user
 
   let(:collection) { Routing::TagAction.all }

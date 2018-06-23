@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Routing::RoutingTagDetectionRule, type: :model do
 
   context '#validations' do

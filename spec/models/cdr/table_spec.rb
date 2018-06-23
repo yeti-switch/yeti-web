@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Cdr::Table, type: :model do
 
   def destroy_partitions

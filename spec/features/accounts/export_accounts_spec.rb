@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Export Accounts', type: :feature do
+RSpec.describe 'Export Accounts', type: :feature do
   include_context :login_as_admin
 
   before { create(:account) }

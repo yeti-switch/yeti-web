@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'CDRs index', type: :feature do
+RSpec.describe 'CDRs index', type: :feature do
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 

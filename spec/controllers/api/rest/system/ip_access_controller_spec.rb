@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::System::IpAccessController, type: :controller  do
+RSpec.describe Api::Rest::System::IpAccessController, type: :controller  do
 
   describe '#index' do
 

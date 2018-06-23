@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Routing::RoutingTagMode, type: :model do
 
   describe '#and?' do

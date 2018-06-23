@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Copy Dialpeer', type: :feature do
+RSpec.describe 'Copy Dialpeer', type: :feature do
   include_context :login_as_admin
 
   let(:record) { create(:dialpeer, attrs) }

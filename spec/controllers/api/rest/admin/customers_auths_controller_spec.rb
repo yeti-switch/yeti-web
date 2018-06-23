@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
+RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
 
   include_context :jsonapi_admin_headers
 

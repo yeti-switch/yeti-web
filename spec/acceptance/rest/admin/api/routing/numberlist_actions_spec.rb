@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Routin NumberlistActions' do
+RSpec.resource 'Routin NumberlistActions' do
   include_context :acceptance_admin_user
 
   let(:collection) { Routing::NumberlistAction.all }
