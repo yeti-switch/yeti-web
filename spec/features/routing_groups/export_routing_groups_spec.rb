@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Export Routing Groups', type: :feature do
+RSpec.describe 'Export Routing Groups', type: :feature do
   include_context :login_as_admin
 
   before { create(:routing_group) }

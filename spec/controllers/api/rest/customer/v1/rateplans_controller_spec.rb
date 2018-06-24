@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::RateplansController, type: :controller do
+RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :controller do
 
   # RatePlans for the other customer
   before { create_list(:rateplan, 2) }

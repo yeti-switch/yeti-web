@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Jobs::CallsMonitoring do
+RSpec.describe Jobs::CallsMonitoring do
 
   let(:account_balance) do
     1_000

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe CustomersAuth, type: :model do
 
   shared_examples :it_validates_array_elements do |*columns|
@@ -17,7 +15,7 @@ RSpec.describe CustomersAuth, type: :model do
   context '#validations' do
 
     it do
-      should validate_numericality_of(:capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     end
 
 

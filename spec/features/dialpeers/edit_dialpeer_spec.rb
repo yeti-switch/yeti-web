@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Create new Dialpeer', type: :feature do
+RSpec.describe 'Create new Dialpeer', type: :feature do
   include_context :login_as_admin
 
   context 'unset "Tag action value"' do

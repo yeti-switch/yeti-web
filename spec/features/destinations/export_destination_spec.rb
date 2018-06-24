@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Export Destination', type: :feature do
+RSpec.describe 'Export Destination', type: :feature do
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 

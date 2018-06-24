@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Edit RoutingTagDetectionRule', type: :feature do
+RSpec.describe 'Edit RoutingTagDetectionRule', type: :feature do
   include_context :login_as_admin
 
   context 'unset "Tag action value"' do

@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Contractor, type: :model do
+RSpec.describe Contractor, type: :model do
 
   let!(:contractor) {}
 

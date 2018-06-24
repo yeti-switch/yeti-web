@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Export Disconnect Policies', type: :feature do
+RSpec.describe 'Export Disconnect Policies', type: :feature do
   include_context :login_as_admin
 
   before { create(:disconnect_policy) }

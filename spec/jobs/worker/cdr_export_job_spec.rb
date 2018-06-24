@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Worker::CdrExportJob, type: :job do
   subject do
     described_class.perform_now(cdr_export.id)

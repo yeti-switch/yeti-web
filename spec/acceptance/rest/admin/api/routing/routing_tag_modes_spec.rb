@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Routing RoutingTagMode' do
+RSpec.resource 'Routing RoutingTagMode' do
   include_context :acceptance_admin_user
 
   let(:collection) { Routing::RoutingTagMode.all }

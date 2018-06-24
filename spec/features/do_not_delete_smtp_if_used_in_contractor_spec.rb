@@ -1,3 +1,1 @@
-require 'spec_helper'
-
-describe ''
+RSpec.describe ''

@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Contractors' do
+RSpec.resource 'Contractors' do
   header 'Accept', 'application/vnd.api+json'
   header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token

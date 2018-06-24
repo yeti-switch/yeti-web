@@ -1,4 +1,4 @@
-shared_context :init_dialpeer do |args|
+RSpec.shared_context :init_dialpeer do |args|
 
   args ||= {}
 

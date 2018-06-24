@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe CustomersAuthNormalized, type: :model do
 
   shared_examples :test_normalized_copy_count do |copy_count|

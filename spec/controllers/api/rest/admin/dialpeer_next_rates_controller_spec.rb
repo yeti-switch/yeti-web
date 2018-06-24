@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-xdescribe Api::Rest::Admin::DialpeerNextRatesController do
+RSpec.xdescribe Api::Rest::Admin::DialpeerNextRatesController do
 
   describe 'GET index' do
     subject { get :index, params: {dialpeer_id: 1, format: :json}  }

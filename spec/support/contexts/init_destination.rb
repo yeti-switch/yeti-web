@@ -1,4 +1,4 @@
-shared_context :init_destination do |args|
+RSpec.shared_context :init_destination do |args|
 
   args ||= {}
 

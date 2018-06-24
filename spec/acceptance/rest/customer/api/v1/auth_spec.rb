@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Authentication', document: :customer_v1 do
+RSpec.resource 'Authentication', document: :customer_v1 do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 

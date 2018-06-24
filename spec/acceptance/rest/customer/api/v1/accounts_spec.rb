@@ -1,7 +1,4 @@
-require 'spec_helper'
-require 'rspec_api_documentation/dsl'
-
-resource 'Accounts', document: :customer_v1 do
+RSpec.resource 'Accounts', document: :customer_v1 do
   header 'Accept', 'application/vnd.api+json'
   header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token

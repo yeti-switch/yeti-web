@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe 'Copy Rateplan action', type: :feature do
+RSpec.describe 'Copy Rateplan action', type: :feature do
 
   # TODO: move login admin to `shared_context :login_as_admin`
   let(:admin_user) { create :admin_user }

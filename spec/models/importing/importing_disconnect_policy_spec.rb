@@ -1,7 +1,6 @@
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-describe Importing::DisconnectPolicy do
+RSpec.describe Importing::DisconnectPolicy do
 
   let(:preview_item) { described_class.last }
 

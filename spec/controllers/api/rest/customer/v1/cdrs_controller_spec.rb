@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::CdrsController, type: :controller do
+RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :controller do
 
   after { Cdr::Cdr.destroy_all }
 

@@ -12,9 +12,7 @@
 #  updated_at   :datetime
 #
 
-require 'spec_helper'
-
-describe CdrExport, type: :model do
+RSpec.describe CdrExport, type: :model do
 
   describe '#export_sql' do
     subject do

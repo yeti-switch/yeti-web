@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe AsyncBatchDestroyJob, type: :job do
   describe '#perform' do
     include_context :init_rateplan

@@ -1,4 +1,4 @@
-shared_context :init_importing_rateplan do |args|
+RSpec.shared_context :init_importing_rateplan do |args|
 
   args ||= {}
 

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Cdr::AuthLog, type: :model do
 
   before {described_class.destroy_all}

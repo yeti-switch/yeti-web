@@ -1,4 +1,4 @@
-shared_context :init_registration do |args|
+RSpec.shared_context :init_registration do |args|
 
   args ||= {}
 

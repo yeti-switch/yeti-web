@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Admin::PaymentsController, type: :controller do
+RSpec.describe Api::Rest::Admin::PaymentsController, type: :controller do
   let(:account) { create(:account) }
 
   let(:user) { create :admin_user }

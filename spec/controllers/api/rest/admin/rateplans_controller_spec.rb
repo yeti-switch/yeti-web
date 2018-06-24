@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Api::Rest::Admin::RateplansController, type: :controller do
+RSpec.describe Api::Rest::Admin::RateplansController, type: :controller do
   let(:rpcm) { Routing::RateProfitControlMode.last }
 
   let(:user) { create :admin_user }
