@@ -83,7 +83,7 @@ describe Jobs::CallsMonitoring do
   end
 
   let(:job) do
-    described_class.create!
+    described_class.take!
   end
 
   subject do

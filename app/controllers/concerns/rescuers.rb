@@ -36,7 +36,7 @@ module Concerns::Rescuers
   end
 
 
-  def render_404
+  def render_404(e = nil)
     if /(jpe?g|png|gif)/i === request.path
       render text: "404 Yeti Not Found", status: 404
     elsif request.xhr?

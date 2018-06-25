@@ -15,9 +15,9 @@ module Jobs
           rate.update!(applied: true)
         end
 
-        DestinationNextRate.ready_for_apply.find_each do |rate|
+        Routing::DestinationNextRate.ready_for_apply.find_each do |rate|
           rate.destination.update!(
-              current_rate_id: rate.id,
+              # current_rate_id: rate.id,
               initial_interval: rate.initial_interval,
               next_interval: rate.next_interval,
               initial_rate: rate.initial_rate,

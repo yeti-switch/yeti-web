@@ -143,7 +143,7 @@ class Api::Rest::Admin::Cdr::CdrResource < ::BaseResource
   has_one :pop
   has_one :routing_group
   has_one :routing_plan, class_name: 'RoutingPlan'
-  has_one :destination
+  has_one :destination, class_name: 'Destination'
   has_one :customer_auth
   has_one :destination_rate_policy
   has_one :vendor, class_name: 'Contractor'

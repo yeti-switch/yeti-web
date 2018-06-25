@@ -7,6 +7,6 @@
 #
 
 class DestinationRatePolicy < ActiveRecord::Base
-  has_many :destination
+  has_many :destination, class_name: 'Routing::Destination'
   self.table_name='destination_rate_policy'
 end

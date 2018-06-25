@@ -80,7 +80,7 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
       end
 
       it { expect(response.status).to eq(201) }
-      it { expect(Destination.count).to eq(1) }
+      it { expect(Routing::Destination.count).to eq(1) }
     end
 
     context 'when attributes are invalid' do
@@ -88,7 +88,7 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
       let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
-      it { expect(Destination.count).to eq(0) }
+      it { expect(Routing::Destination.count).to eq(0) }
     end
   end
 
@@ -126,7 +126,7 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     before { delete :destroy, params: { id: destination.to_param } }
 
     it { expect(response.status).to eq(204) }
-    it { expect(Destination.count).to eq(0) }
+    it { expect(Routing::Destination.count).to eq(0) }
   end
 
   describe 'editable routing_tag_ids' do

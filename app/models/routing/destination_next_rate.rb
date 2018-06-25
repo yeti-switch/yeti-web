@@ -16,7 +16,7 @@
 #  external_id      :integer
 #
 
-class DestinationNextRate < Yeti::ActiveRecord
+class Routing::DestinationNextRate < Yeti::ActiveRecord
 
   self.table_name='class4.destination_next_rates'
 
@@ -32,7 +32,7 @@ class DestinationNextRate < Yeti::ActiveRecord
   validates_numericality_of :next_rate, :initial_rate, :connect_fee
 
 
-  belongs_to :destination
+  belongs_to :destination, class_name: 'Routing::Destination'
 
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }

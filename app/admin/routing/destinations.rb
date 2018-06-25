@@ -1,4 +1,4 @@
-ActiveAdmin.register Destination do
+ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   menu parent: "Routing", priority: 41
 
@@ -8,8 +8,8 @@ ActiveAdmin.register Destination do
   acts_as_status
   acts_as_quality_stat
   acts_as_stats_actions
-  acts_as_async_destroy('Destination')
-  acts_as_async_update('Destination',
+  acts_as_async_destroy('Routing::Destination')
+  acts_as_async_update('Routing::Destination',
                        lambda do
                          {
                              enabled: boolean_select,
@@ -115,8 +115,8 @@ ActiveAdmin.register Destination do
 
   controller do
     def update
-      if params['destination']['routing_tag_ids'].nil?
-        params['destination']['routing_tag_ids'] = []
+      if params[:routing_destination][:routing_tag_ids].nil?
+        params[:routing_destination][:routing_tag_ids] = []
       end
       super
     end
@@ -125,7 +125,7 @@ ActiveAdmin.register Destination do
   member_action :clear_quality_alarm do
     #todo  cancan support   ?
     if can? :manage, resource
-      resource = Destination.find(params[:id])
+      resource = Routing::Destination.find(params[:id])
       resource.clear_quality_alarm
       flash[:notice] = "#{active_admin_config.resource_label} Alarm cleared"
     end

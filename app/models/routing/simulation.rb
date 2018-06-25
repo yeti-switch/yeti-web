@@ -27,7 +27,7 @@ class Routing::Simulation
     end
 
     def destination
-      Destination.find_by(id: self.destination_id)
+      Routing::Destination.find_by(id: self.destination_id)
     end
 
     def dialpeer
@@ -144,4 +144,4 @@ class Routing::Simulation
   end
 
 
-end  
+end

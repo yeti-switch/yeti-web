@@ -153,7 +153,7 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
-  belongs_to :destination
+  belongs_to :destination, class_name: 'Routing::Destination'
   belongs_to :dialpeer
   belongs_to :destination_rate_policy
   belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id

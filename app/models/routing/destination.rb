@@ -33,7 +33,7 @@
 #  routing_tag_mode_id    :integer          default(0), not null
 #
 
-class Destination < Yeti::ActiveRecord
+class Routing::Destination < Yeti::ActiveRecord
   self.table_name = 'class4.destinations'
 
   belongs_to :rateplan
@@ -41,7 +41,7 @@ class Destination < Yeti::ActiveRecord
   belongs_to :rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :rate_policy_id
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :destination_id, dependent: :nullify
-  has_many :destination_next_rates, class_name:'DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
+  has_many :destination_next_rates, class_name:'Routing::DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
 
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids

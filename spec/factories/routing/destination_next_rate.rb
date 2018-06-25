@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :destination_next_rate do
+  factory :destination_next_rate, class: Routing::DestinationNextRate do
     initial_rate     0
     next_rate        0
     initial_interval 5

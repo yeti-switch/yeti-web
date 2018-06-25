@@ -1,22 +1,21 @@
-ActiveAdmin.register DestinationNextRate do
-  belongs_to :destination, parent_class: Destination, optional: true
+ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' do
+  acts_as_belongs_to :destination,
+                     parent_class: Routing::Destination,
+                     collection_name: :destination_next_rates,
+                     route_name: :destination_next_rates,
+                     optional: true
   menu false
   actions :index, :new, :create, :edit, :update, :destroy
   config.batch_actions = false
 
-  controller do
-    def permitted_params
-      params.permit *active_admin_namespace.permitted_params, :destination_id,
-                    active_admin_config.param_key => [
-                        :initial_interval,
-                        :next_interval,
-                        :initial_rate,
-                        :next_rate,
-                        :connect_fee,
-                        :apply_time
-                    ]
-    end
+  permit_params :initial_interval,
+                :next_interval,
+                :initial_rate,
+                :next_rate,
+                :connect_fee,
+                :apply_time
 
+  controller do
     def create
       super do |success,_|
         success.html { redirect_to destination_path(params[:destination_id], anchor: 'upcoming-price-changes') }

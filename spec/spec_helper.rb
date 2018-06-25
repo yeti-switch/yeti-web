@@ -52,7 +52,8 @@ RSpec.configure do |config|
       'class4.tag_actions',
       'class4.rate_profit_control_modes',
       'class4.routing_tag_modes',
-      'sys.timezones'
+      'sys.timezones',
+      'sys.jobs'
   ]
 
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -71,6 +72,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include FactoryGirl::Syntax::Methods
+  config.include RspecRequestHelper, type: :request
 
   config.before(:suite) do
     DatabaseCleaner.clean_with :truncation
@@ -116,5 +118,17 @@ Shoulda::Matchers.configure do |config|
 
     with.library :active_record
     with.library :active_model
+  end
+end
+
+RSpec::Matchers.define :eq_time_string do |expected|
+  expected_time = (expected.is_a?(String) ? Time.parse(expected) : expected).change(usec: 0)
+
+  match do |actual|
+    actual_time = Time.parse(actual).change(usec: 0)
+    actual_time == expected_time
+  end
+  description do
+    "eq time string to #{expected_time}"
   end
 end
