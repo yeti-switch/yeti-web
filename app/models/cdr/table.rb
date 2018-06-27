@@ -12,11 +12,18 @@
 #
 
 class Cdr::Table < Cdr::Base
-  extend PgCdrPartitioning
-
   self.table_name = 'sys.cdr_tables'
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include PgPartitioningMixin
+
+  self.partitioned_model = Cdr::Cdr
+  self.partition_schema = 'cdr'.freeze
+  self.partition_key = :time_start
+  self.trigger_function_name = 'cdr.cdr_i_tgf'.freeze
+  self.trigger_name = 'cdr.cdr_i_tg'.freeze
+
+
+  has_paper_trail class_name: 'AuditLogItem', on: [:destroy, :touch, :update]
 
   scope :active, -> { where(active: true) }
 
@@ -39,10 +46,6 @@ class Cdr::Table < Cdr::Base
     self.execute_sp("SELECT sys.cdr_export_data(?,?)" , self.name, GuiConfig.cdr_unload_dir)
   end
 
-  def _reload_trigger
-    self.reload_cdr_i_tgf
-  end
-
   def archive
     transaction do
       self.active=false
@@ -53,26 +56,12 @@ class Cdr::Table < Cdr::Base
     end
   end
 
-  def self.add_partition
-    today = Date.today
-    transaction do
-      create_partition(today.prev_month)
-      create_partition(today)
-      create_partition(today.next_month)
-    end
-  end
-
-  def self.partitions
-    res = connection.execute %q{
-      SELECT tablename
-      FROM pg_tables
-      WHERE schemaname = 'cdr' AND tablename SIMILAR TO 'cdr_\d{6}'
-    }
-    res.values.flatten
-  end
-
   def remove
     self.destroy!
+  end
+
+  def _reload_trigger
+    self.class.reload_insertion_trigger
   end
 
 end
