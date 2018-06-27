@@ -27,7 +27,7 @@ module Jobs
 
       # check quality for destination
       Stats::TerminationQualityStat.dst_measurement.each do |stat|
-        dst=Destination.find_by(id: stat.destination_id)
+        dst = Routing::Destination.find_by(id: stat.destination_id)
         if dst.nil?
           logger.warn { "Statistic for removed destination id #{stat.destination_id}" }
         elsif !dst.quality_alarm? && (stat.acd<dst.acd_limit or stat.asr<dst.asr_limit)

@@ -10,7 +10,7 @@ describe 'Create new Destinations', type: :feature do
 
     before { visit new_destination_path }
 
-    include_context :fill_form, 'new_destination'
+    include_context :fill_form, 'new_routing_destination'
 
     let(:attributes) do
       {
@@ -30,7 +30,7 @@ describe 'Create new Destinations', type: :feature do
       page.find('input[type=submit]').click
       expect(page).to have_css('body.show.destinations')
 
-      expect(Destination.last).to have_attributes(
+      expect(Routing::Destination.last).to have_attributes(
         prefix: attributes[:batch_prefix],
         enabled: attributes[:enabled],
         reject_calls: attributes[:reject_calls],

@@ -17,7 +17,7 @@ describe 'Copy Destination', type: :feature do
   end
 
   it 'check only not standart attribute **batch_prefix**' do
-    within 'form#new_destination' do
+    within 'form#new_routing_destination' do
       expect(page).to have_field('Prefix', with: attrs[:prefix])
     end
   end

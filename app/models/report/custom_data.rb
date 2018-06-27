@@ -94,7 +94,7 @@ class Report::CustomData < Cdr::Base
 
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
-  belongs_to :destination, class_name: 'Destination', foreign_key: :destination_id
+  belongs_to :destination, class_name: 'Routing::Destination', foreign_key: :destination_id
   belongs_to :dialpeer, class_name: 'Dialpeer', foreign_key: :dialpeer_id
   belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id
   belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id

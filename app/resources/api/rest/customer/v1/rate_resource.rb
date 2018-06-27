@@ -1,5 +1,5 @@
 class Api::Rest::Customer::V1::RateResource < BaseResource
-  model_name 'Destination'
+  model_name 'Routing::Destination'
 
   key_type :uuid
   primary_key :uuid

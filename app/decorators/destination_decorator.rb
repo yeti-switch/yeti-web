@@ -1,7 +1,7 @@
 class DestinationDecorator < BillingDecorator
 
   delegate_all
-  decorates Destination
+  decorates Routing::Destination
 
   include RoutingTagIdsDecorator
 

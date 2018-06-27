@@ -7,11 +7,11 @@ class Api::RestController < ApiController
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from AbstractController::ActionNotFound, with: :render_404
 
-  protected
-
-  def render_404
+  def render_404(e = nil)
     render status: 404, nothing: true
   end
+
+  protected
 
   def apply_search(chain)
     if params[:q] && params[:q].any?

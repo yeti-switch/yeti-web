@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :destination, aliases: [:rate], class: Destination do
+  factory :destination, aliases: [:rate], class: Routing::Destination do
     sequence(:external_id)
     prefix nil
     connect_fee 0

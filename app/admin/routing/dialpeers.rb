@@ -99,6 +99,9 @@ ActiveAdmin.register Dialpeer do
     link_to 'New Rate', new_dialpeer_dialpeer_next_rate_path(resource.id)
   end
 
+  action_item :next_rates, only: [:index] do
+    link_to "Next rates", dialpeer_next_rates_path
+  end
 
   index do
     selectable_column
@@ -353,9 +356,10 @@ ActiveAdmin.register Dialpeer do
       tab :upcoming_price_changes do
         table_for s.dialpeer_next_rates.not_applied.order(apply_time: :asc).limit(10) do
           column :apply_time
+          column :initial_rate
+          column :next_rate
           column :initial_interval
           column :next_interval
-          column :rate
           column :connect_fee
           column :external_id
           column :actions do |r|

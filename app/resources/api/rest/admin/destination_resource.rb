@@ -1,4 +1,5 @@
 class Api::Rest::Admin::DestinationResource < JSONAPI::Resource
+  model_name 'Routing::Destination'
   attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,

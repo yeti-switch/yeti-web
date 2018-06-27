@@ -55,7 +55,7 @@ class Importing::Destination < Importing::Base
                            'routing_tag_ids', 'routing_tag_mode_id'
   ]
 
-  self.import_class = ::Destination
+  self.import_class = ::Routing::Destination
 
   def self.after_import_hook(unique_columns = [])
     self.resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')

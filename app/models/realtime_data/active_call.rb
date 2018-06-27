@@ -83,7 +83,7 @@ class RealtimeData::ActiveCall < YetiResource
       customer_auth_id: CustomersAuth,
       dst_country_id: System::Country,
       dst_network_id: System::Network,
-      destination_id: Destination,
+      destination_id: Routing::Destination,
       dialpeer_id: Dialpeer,
       orig_gw_id: Gateway,
       term_gw_id: Gateway,
