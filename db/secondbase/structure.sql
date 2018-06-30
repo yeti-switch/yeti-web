@@ -308,6 +308,19 @@ CREATE TYPE switch.versions_ty AS (
 );
 
 
+--
+-- Name: auth_log_i_tgf(); Type: FUNCTION; Schema: auth_log; Owner: -
+--
+
+CREATE FUNCTION auth_log.auth_log_i_tgf() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+      BEGIN
+        RAISE EXCEPTION 'auth_log.auth_log_i_tg: request_time out of range.';
+        RETURN NULL;
+      END; $$;
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -3795,6 +3808,18 @@ ALTER SEQUENCE billing.invoices_id_seq OWNED BY billing.invoices.id;
 
 
 --
+-- Name: ar_internal_metadata; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cdr.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
 --
 
@@ -5154,6 +5179,40 @@ CREATE TABLE sys.amount_round_modes (
 
 
 --
+-- Name: auth_log_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sys.auth_log_tables (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    date_start character varying NOT NULL,
+    date_stop character varying NOT NULL,
+    readable boolean DEFAULT true NOT NULL,
+    writable boolean DEFAULT false NOT NULL,
+    active boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- Name: auth_log_tables_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.auth_log_tables_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_log_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.auth_log_tables_id_seq OWNED BY sys.auth_log_tables.id;
+
+
+--
 -- Name: call_duration_round_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -5446,6 +5505,13 @@ ALTER TABLE ONLY stats.traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextv
 -- Name: id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
+ALTER TABLE ONLY sys.auth_log_tables ALTER COLUMN id SET DEFAULT nextval('sys.auth_log_tables_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
 ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdr_tables_id_seq'::regclass);
 
 
@@ -5519,6 +5585,14 @@ ALTER TABLE ONLY billing.invoice_types
 
 ALTER TABLE ONLY billing.invoices
     ADD CONSTRAINT invoices_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cdr.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
 --
@@ -5818,6 +5892,14 @@ ALTER TABLE ONLY sys.amount_round_modes
 
 
 --
+-- Name: auth_log_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.auth_log_tables
+    ADD CONSTRAINT auth_log_tables_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: call_duration_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -5931,6 +6013,13 @@ CREATE UNIQUE INDEX traffic_customer_accounts_account_id_timestamp_idx ON stats.
 --
 
 CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.traffic_vendor_accounts USING btree (account_id, "timestamp");
+
+
+--
+-- Name: auth_log_i; Type: TRIGGER; Schema: auth_log; Owner: -
+--
+
+CREATE TRIGGER auth_log_i BEFORE INSERT ON auth_log.auth_log FOR EACH ROW EXECUTE PROCEDURE auth_log.auth_log_i_tgf();
 
 
 --
@@ -6088,7 +6177,7 @@ ALTER TABLE ONLY sys.config
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO cdr, reports, billing, public;
+SET search_path TO cdr, reports, billing;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170907204350'),
@@ -6104,6 +6193,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180427194936'),
 ('20180607135226'),
 ('20180611140540'),
+('20180619091111'),
 ('20180621130107');
 
 
