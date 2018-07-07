@@ -23,12 +23,16 @@ class Switch16DtmfFiltering < ActiveRecord::Migration[5.1]
 
       drop schema switch16 cascade;
 
+      delete from class4.disconnect_code where id=8005;
+
     }
 
   end
 
   def up
     execute %q{
+
+      INSERT INTO class4.disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8005,0,true,true,403,'Origination gateway is disabled',false,false,true,false);
 
       create table class4.gateway_inband_dtmf_filtering_modes(
         id smallint primary key,
@@ -2211,28 +2215,28 @@ BEGIN
 
 
   i_profile.aleg_rtp_filter_inband_dtmf=false;
-  i_profile.false_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
 
   if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.aleg_rtp_filter_inband_dtmf=true;
   elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=false
-    elsif  i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=true
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.bleg_rtp_filter_inband_dtmf=true;
   elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=false
-    elsif  i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=true
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
@@ -2524,6 +2528,12 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
         v_ret.resources:='';
         if v_c_acc.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';

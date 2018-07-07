@@ -21215,28 +21215,28 @@ BEGIN
 
 
   i_profile.aleg_rtp_filter_inband_dtmf=false;
-  i_profile.false_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
 
   if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.aleg_rtp_filter_inband_dtmf=true;
   elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=false
-    elsif  i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=true
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.bleg_rtp_filter_inband_dtmf=true;
   elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=false
-    elsif  i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=true
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
@@ -21625,28 +21625,28 @@ BEGIN
 
 
   i_profile.aleg_rtp_filter_inband_dtmf=false;
-  i_profile.false_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
 
   if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.aleg_rtp_filter_inband_dtmf=true;
   elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=false
-    elsif  i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=true
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.bleg_rtp_filter_inband_dtmf=true;
   elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=false
-    elsif  i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=true
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
@@ -22015,28 +22015,28 @@ BEGIN
 
 
   i_profile.aleg_rtp_filter_inband_dtmf=false;
-  i_profile.false_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
 
   if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.aleg_rtp_filter_inband_dtmf=true;
   elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=false
-    elsif  i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.aleg_rtp_filter_inband_dtmf=true
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
     i_profile.bleg_rtp_filter_inband_dtmf=true;
   elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
     if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=false
-    elsif  i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
-      i_profile.bleg_rtp_filter_inband_dtmf=true
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
     end if;
-  endif;
+  end if;
 
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
@@ -22323,6 +22323,12 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
         v_ret.resources:='';
         if v_c_acc.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
@@ -23319,6 +23325,12 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
         v_ret.resources:='';
         if v_c_acc.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
@@ -24287,6 +24299,12 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
 
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
         v_ret.resources:='';
         if v_c_acc.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
@@ -33237,8 +33255,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
