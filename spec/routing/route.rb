@@ -3,9 +3,7 @@ require 'spec_helper'
 RSpec.describe '#routing logic' do
   subject do
     CallSql::Yeti.select_all_serialized(
-        '
-
-SELECT * from switch16.route(
+        "SELECT * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.route_debug(
           ?::integer,
           ?::integer,
           ?::smallint,
@@ -36,7 +34,7 @@ SELECT * from switch16.route(
           ?::varchar,
           ?::varchar,
           ?::varchar
-        )',
+        )",
         node_id,
         pop_id,
         protocol_id,
@@ -68,9 +66,8 @@ SELECT * from switch16.route(
         rpid,
         rpid_privacy
     )
-  end
 
-  before {FactoryGirl.create(:customers_auth)}
+  end
 
   let(:node_id) {1}
   let(:pop_id) {12}
@@ -97,14 +94,111 @@ SELECT * from switch16.route(
   let(:x_orig_ip) {'3.3.3.3'}
   let(:x_orig_port) {6050}
   let(:x_orig_protocol_id) {2}
-  let(:pai) {'pAI'}
+  let(:pai) {'pai'}
   let(:ppi) {'ppi'}
   let(:privacy) {'privacy'}
   let(:rpid) {'rpid'}
   let(:rpid_privacy) {'rpid-privacy'}
 
-  it ' return 404 ' do
-    response=subject
+
+  context 'Use X-SRC-IP if originator is trusted load balancer' do
+    before do
+      FactoryGirl.create(:system_load_balancer, {
+          signalling_ip: '1.1.1.1'
+      }
+      )
+
+      FactoryGirl.create(:customers_auth, {
+          ip: '3.3.3.3'
+      }
+      )
+    end
+
+    let(:remote_ip) {'1.1.1.1'}
+    let(:x_orig_ip) {'3.3.3.3'}
+
+    it 'return 404 ' do
+      p subject
+      expect(subject.size).to eq(1)
+      expect(subject.first[:customer_auth_id]).to be
+    end
+
   end
+
+  context 'Use remote IP if originator is not trusted load balancer' do
+    before do
+      FactoryGirl.create(:system_load_balancer, {
+          signalling_ip: '5.5.5.5'
+      }
+      )
+
+      FactoryGirl.create(:customers_auth, {
+          ip: '3.3.3.3'
+      }
+      )
+    end
+
+    let(:remote_ip) {'1.1.1.1'}
+    let(:x_orig_ip) {'3.3.3.3'}
+
+    it 'return 404 ' do
+      p subject
+      expect(subject.size).to eq(1)
+      expect(subject.first[:customer_auth_id]).to be_nil
+      expect(subject.first[:disconnect_code_id]).to eq(110) ##Cant find customer or customer locked
+    end
+  end
+
+  context 'Auhtorized but customer has no enouht balance' do
+    before do
+      FactoryGirl.create(:system_load_balancer, {
+          signalling_ip: '1.1.1.1'
+      }
+      )
+
+      FactoryGirl.create(:customers_auth, {
+          ip: '3.3.3.3'
+      }
+      )
+    end
+
+    let(:remote_ip) {'1.1.1.1'}
+    let(:x_orig_ip) {'3.3.3.3'}
+
+    it 'reject ' do
+      p subject
+      expect(subject.size).to eq(1)
+      expect(subject.first[:customer_auth_id]).to be
+      expect(subject.first[:customer_id]).to be
+      expect(subject.first[:disconnect_code_id]).to eq(8000) #No enough customer balance
+    end
+  end
+
+  context 'Auhtorized, Balance checking disabled' do
+    before do
+      FactoryGirl.create(:system_load_balancer, {
+          signalling_ip: '1.1.1.1'
+      }
+      )
+
+      FactoryGirl.create(:customers_auth, {
+          ip: '3.3.3.3',
+          check_account_balance: false
+      }
+      )
+    end
+
+    let(:remote_ip) {'1.1.1.1'}
+    let(:x_orig_ip) {'3.3.3.3'}
+
+    it 'reject ' do
+      p subject
+      expect(subject.size).to eq(1)
+      expect(subject.first[:customer_auth_id]).to be
+      expect(subject.first[:customer_id]).to be
+      expect(subject.first[:disconnect_code_id]).to eq(111) #Can't find destination prefix
+    end
+  end
+
 
 end
