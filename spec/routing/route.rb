@@ -149,17 +149,77 @@ RSpec.describe '#routing logic' do
     end
   end
 
+  context 'Use X-SRC-IP, originator is trusted load balancer, authentification required' do
+    before do
+      FactoryGirl.create(:system_load_balancer, {
+          signalling_ip: '1.1.1.1'
+      })
+      FactoryGirl.create(:customers_auth, {
+          ip: '3.3.3.3'
+      })
+      Gateway.take!.update!(
+          incoming_auth_username: 'test user',
+          incoming_auth_password: 'test password'
+      )
+      CustomersAuth.take!.update!(
+          require_incoming_auth: true
+      )
+    end
+
+    let(:remote_ip) {'1.1.1.1'}
+    let(:x_orig_ip) {'3.3.3.3'}
+
+    it 'return 404 ' do
+      p subject
+      expect(subject.size).to eq(1)
+      expect(subject.first[:customer_auth_id]).to be_nil
+      expect(subject.first[:aleg_auth_required]).to eq(true)
+    end
+
+  end
+
+
+  context 'Use X-SRC-IP, originator is trusted load balancer, authentification OK' do
+    before do
+      FactoryGirl.create(:system_load_balancer, {
+          signalling_ip: '1.1.1.1'
+      })
+      FactoryGirl.create(:customers_auth, {
+          ip: '3.3.3.3'
+      })
+      Gateway.take!.update!(
+          incoming_auth_username: 'test user',
+          incoming_auth_password: 'test password'
+      )
+      CustomersAuth.take!.update!(
+          require_incoming_auth: true
+      )
+    end
+
+    let(:remote_ip) {'1.1.1.1'}
+    let(:x_orig_ip) {'3.3.3.3'}
+    let(:auth_id) { CustomersAuth.take!.gateway_id }
+
+    it 'return 404 ' do
+      p subject
+      expect(subject.size).to eq(1)
+      expect(subject.first[:customer_auth_id]).to be
+      expect(subject.first[:aleg_auth_required]).to be_nil
+      expect(subject.first[:disconnect_code_id]).to eq(8000) #No enough customer balance
+    end
+
+  end
+
+
   context 'Auhtorized but customer has no enouht balance' do
     before do
       FactoryGirl.create(:system_load_balancer, {
           signalling_ip: '1.1.1.1'
-      }
-      )
+      })
 
       FactoryGirl.create(:customers_auth, {
           ip: '3.3.3.3'
-      }
-      )
+      })
     end
 
     let(:remote_ip) {'1.1.1.1'}
@@ -178,14 +238,12 @@ RSpec.describe '#routing logic' do
     before do
       FactoryGirl.create(:system_load_balancer, {
           signalling_ip: '1.1.1.1'
-      }
-      )
+      })
 
       FactoryGirl.create(:customers_auth, {
           ip: '3.3.3.3',
           check_account_balance: false
-      }
-      )
+      })
     end
 
     let(:remote_ip) {'1.1.1.1'}
