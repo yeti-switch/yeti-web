@@ -40,7 +40,7 @@ class ApplicationPolicy
   alias_rule :new?, to: :create?
   alias_rule :edit?, to: :update?
   alias_rule :remove?, :destroy_all?, to: :destroy?
-  alias_rule :manage?, :change_state?, to: :perform?
+  alias_rule :history?, to: :perform? # DSL acts_as_audit
 
   def read?
     true

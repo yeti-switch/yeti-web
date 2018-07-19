@@ -264,6 +264,7 @@ ActiveAdmin.register Account do
   end
 
   member_action :payment, method: :post do
+    authorize!
     payment_params = params.require(:payment).permit(:account_id, :amount, :notes)
     payment = Payment.new(payment_params)
     if payment.save

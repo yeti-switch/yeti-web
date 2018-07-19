@@ -1,6 +1,9 @@
 module ResourceDSL
   module ActsAsStat
 
+    def has_member_action?(name)
+      active_admin_config.member_actions.detect { |element| element.name == name.to_sym }.present?
+    end
 
     def acts_as_stats_actions
       # must be used as last DSL for resource
@@ -8,11 +11,11 @@ module ResourceDSL
       action_item :truncate_stats, only: [:show, :edit] do
         dropdown_menu 'Statistics' do
 
-          if authorized?(:manage, resource) && active_admin_config.member_actions.detect{|element|  element.name ==  :truncate_long_time_stats  }.present?
+          if authorized?(:truncate_long_time_stats) && has_member_action?(:truncate_long_time_stats)
             item 'Truncate long time stats', action: :truncate_long_time_stats, id: resource.id
           end
 
-          if authorized?(:manage, resource) && active_admin_config.member_actions.detect{|element|  element.name ==  :truncate_short_window_stats  }.present?
+          if authorized?(:truncate_short_window_stats) && has_member_action?(:truncate_short_window_stats)
             item 'Truncate short window stats', action: :truncate_short_window_stats, id: resource.id
           end
 
@@ -48,11 +51,8 @@ module ResourceDSL
       end
 
       member_action :truncate_long_time_stats do
-        if authorized? :manage, resource
-          resource = active_admin_config.resource_class.find(params[:id])
-          resource.statistic.destroy if resource.statistic
-          flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
-        end
+        resource.statistic.try!(:destroy)
+        flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         redirect_back fallback_location: root_path
       end
 
@@ -61,11 +61,8 @@ module ResourceDSL
     def acts_as_quality_stat
 
       member_action :truncate_short_window_stats do
-        if authorized? :manage, resource
-          resource = active_admin_config.resource_class.find(params[:id])
-          resource.quality_stats.delete_all if resource.quality_stats
-          flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
-        end
+        resource.quality_stats.delete_all
+        flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         redirect_back fallback_location: root_path
       end
 

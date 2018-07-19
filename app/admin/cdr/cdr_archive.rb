@@ -1,5 +1,5 @@
 ActiveAdmin.register Cdr::CdrArchive do
-  menu parent: "CDR", priority: 99, label: "CDR Archive", if: proc { authorized?(:read, Cdr) }
+  menu parent: "CDR", priority: 99, label: "CDR Archive"
 
   actions :index, :show
   config.batch_actions = false
@@ -568,11 +568,10 @@ ActiveAdmin.register Cdr::CdrArchive do
   #  root   /some/path;
   #}
   member_action :dump, method: :get do
-    file  = Cdr::CdrArchive.where(id: params[:id]).pluck(:dump_file).first
-    if file.blank?
+    if resource.dump_file.blank?
       raise ActiveRecord::RecordNotFound
     end
-    response.headers['X-Accel-Redirect'] = "/dump/#{file.split("/").last}"
+    response.headers['X-Accel-Redirect'] = "/dump/#{resource.dump_file.split("/").last}"
     head :ok
   end
 
@@ -582,14 +581,12 @@ ActiveAdmin.register Cdr::CdrArchive do
 
 
   member_action :debug, method: :get do
-
-    @cdr = Cdr::CdrArchive.find(params[:id])
-    redirect_to debug_call_path({routing_simulation: {
-                                    remote_ip: @cdr.sign_orig_ip,
-                                    remote_port: @cdr.sign_orig_port,
-                                    src_prefix: @cdr.src_prefix_in,
-                                    dst_prefix: @cdr.dst_prefix_in ,
-                                    pop_id: @cdr.pop_id
-                                }})
+    redirect_to debug_call_path(routing_simulation: {
+        remote_ip: resource.sign_orig_ip,
+        remote_port: resource.sign_orig_port,
+        src_prefix: resource.src_prefix_in,
+        dst_prefix: resource.dst_prefix_in,
+        pop_id: resource.pop_id
+    })
   end
 end

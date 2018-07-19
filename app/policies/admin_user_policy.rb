@@ -23,6 +23,8 @@ class AdminUserPolicy < RolePolicy
   #   end
   # end
 
+  alias_rule :enabled?, :disabled?, to: :perform? # DSL acts_as_status
+
   private
 
   def section_name

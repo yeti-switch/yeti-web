@@ -123,16 +123,13 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   end
 
   member_action :clear_quality_alarm do
-    if authorized? :manage, resource
-      resource = Routing::Destination.find(params[:id])
-      resource.clear_quality_alarm
-      flash[:notice] = "#{active_admin_config.resource_label} Alarm cleared"
-    end
+    resource.clear_quality_alarm
+    flash[:notice] = "#{active_admin_config.resource_label} Alarm cleared"
     redirect_back fallback_location: root_path
   end
 
   action_item :clear_quality_alarm, only: [:show, :edit] do
-    if resource.quality_alarm? && authorized?(:manage, resource)
+    if resource.quality_alarm? && authorized?(:clear_quality_alarm)
       link_to 'Clear quality alarm', action: :clear_quality_alarm, id: resource.id
     end
   end

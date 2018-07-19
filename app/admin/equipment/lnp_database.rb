@@ -12,11 +12,10 @@ ActiveAdmin.register Lnp::Database do
 
   includes :driver
 
-  member_action :test, method: :post do
+  member_action :test_resolve, method: :post do
     begin
-      lrn=Lnp::Database.find(resource.id)
-      r=lrn.test_db(params['dst']['dst']) if lrn.present?
-      flash[:notice] = "Database: #{lrn.name} Destination: #{params['dst']['dst']} LRN: #{r.lrn}, TAG: #{r.tag}"
+      resolved = resource.test_db(params['dst']['dst'])
+      flash[:notice] = "Database: #{resource.name} Destination: #{params['dst']['dst']} LRN: #{resolved.lrn}, TAG: #{resolved.tag}"
     rescue StandardError => e
       Rails.logger.warn { e.message }
       Rails.logger.warn { e.backtrace.join("\n") }
@@ -43,7 +42,7 @@ ActiveAdmin.register Lnp::Database do
   sidebar :test, only: [:show] do
     active_admin_form_for(OpenStruct.new(dst: ''),
                           as: :dst,
-                          url: test_lnp_database_path
+                          url: test_resolve_lnp_database_path
 
     ) do |f|
       f.inputs do
