@@ -46,7 +46,9 @@ gem 'jsonapi-resources', '0.9.1.beta1'
 
 # Ext
 
-gem 'cancan', '1.6.10'
+# Object oriented authorization for Rails applications
+gem 'pundit'
+
 gem 'paper_trail'
 gem 'parallel'
 

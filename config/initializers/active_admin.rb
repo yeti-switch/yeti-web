@@ -199,26 +199,44 @@ ActiveAdmin.setup do |config|
   #
   # Set the CSV builder separator (default is ",")
   # config.csv_column_separator = ','
-  config.authorization_adapter = ActiveAdmin::CanCanAdapter
-  config.cancan_ability_class = "Ability"
   config.csv_options = { col_sep: ',', force_quotes: true }
-
   config.download_links = [:csv]
 
+  config.authorization_adapter = ActiveAdmin::PunditAdapter
+  config.pundit_default_policy = 'NonePolicy'
 
-  #https://github.com/activeadmin/activeadmin/issues/3335
-  class ActiveAdmin::BaseController
+  ActiveAdmin::BaseController.class_eval do
+    include Pundit
+
+    def pundit_user
+      current_admin_user
+    end
+
+    protected
+
+    # syntax sugar - skip action argument if it is equal to `params[:action].to_sym`
+    # authorized? => authorized?(params[:action].to_sym, resource)
+    # authorized?(record) => authorized?(params[:action].to_sym, record)
+    def authorized?(action = nil, subject = nil)
+      if subject.nil? && (!action.is_a?(Symbol) && !action.is_a?(String) && !action.is_a?(NilClass))
+        action, subject = nil, action
+      end
+      action = params[:action].to_sym if action.nil?
+      active_admin_authorization.authorized?(action, subject)
+    end
+
     private
 
+    #https://github.com/activeadmin/activeadmin/issues/3335
     def interpolation_options
       options = {}
 
       options[:resource_errors] =
-        if resource && resource.errors.any?
-          "#{resource.errors.full_messages.to_sentence}."
-        else
-          ""
-        end
+          if resource && resource.errors.any?
+            "#{resource.errors.full_messages.to_sentence}."
+          else
+            ""
+          end
       options
     end
   end

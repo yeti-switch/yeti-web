@@ -1,5 +1,5 @@
 ActiveAdmin.register Cdr::CdrArchive do
-  menu parent: "CDR", priority: 99, label: "CDR Archive", if: proc { can?(:read, Cdr) }
+  menu parent: "CDR", priority: 99, label: "CDR Archive", if: proc { authorized?(:read, Cdr) }
 
   actions :index, :show
   config.batch_actions = false

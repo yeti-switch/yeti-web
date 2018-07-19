@@ -5,3 +5,7 @@ api:
 cdr_export:
   dir_path: "/tmp"
   delete_url: http://localhost/cdrs_export/
+
+role_policy:
+  when_no_config: allow # allow, disallow, raise
+  when_no_policy_class: allow # allow, disallow, raise

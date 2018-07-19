@@ -95,6 +95,10 @@ class AdminUser < ActiveRecord::Base
     clean_up_passwords
   end
 
+  def roles
+    root? ? [:root] : [:user]
+  end
+
   def root?
     self.group == 1
   end

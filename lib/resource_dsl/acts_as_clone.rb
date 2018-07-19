@@ -37,7 +37,7 @@ module ResourceDSL
 
 
       action_item :copy, only: [:show, :edit] do
-        if can? :create, resource and (!resource.respond_to?(:live?) or resource.live?)
+        if authorized? :create, resource and (!resource.respond_to?(:live?) or resource.live?)
           link_to "Copy", action: :new, from: resource.id
         end
       end
@@ -48,7 +48,7 @@ module ResourceDSL
       acts_as_clone
 
       action_item :copy_with_relations, only: [:show, :edit] do
-        if can? :create, resource and (!resource.respond_to?(:live?) or resource.live?)
+        if authorized? :create, resource and (!resource.respond_to?(:live?) or resource.live?)
           link_to(opts[:name],  url_for(controller: active_admin_resource_for(opts[:helper]).route_collection_path, action: "new", from: resource.id))
         end
       end

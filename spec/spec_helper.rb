@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'webmock/rspec'
+require 'pundit/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 # require 'capybara/rspec'
 
@@ -130,5 +131,14 @@ RSpec::Matchers.define :eq_time_string do |expected|
   end
   description do
     "eq time string to #{expected_time}"
+  end
+end
+
+RSpec::Matchers.define :be_one_of do |choices|
+  match do |actual|
+    choices.include?(actual)
+  end
+  description do
+    "be one of #{choices.map(&:inspect).join(', ')}"
   end
 end

@@ -123,8 +123,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   end
 
   member_action :clear_quality_alarm do
-    #todo  cancan support   ?
-    if can? :manage, resource
+    if authorized? :manage, resource
       resource = Routing::Destination.find(params[:id])
       resource.clear_quality_alarm
       flash[:notice] = "#{active_admin_config.resource_label} Alarm cleared"
@@ -133,7 +132,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   end
 
   action_item :clear_quality_alarm, only: [:show, :edit] do
-    if resource.quality_alarm? && can?(:manage, resource)
+    if resource.quality_alarm? && authorized?(:manage, resource)
       link_to 'Clear quality alarm', action: :clear_quality_alarm, id: resource.id
     end
   end
