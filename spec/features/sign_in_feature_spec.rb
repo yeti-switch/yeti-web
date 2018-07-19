@@ -1,10 +1,14 @@
 require 'spec_helper'
 
 describe 'the signin process', :type => :feature do
-  it 'signs me in' do
-    admin_user = FactoryGirl.create(:admin_user)
+  subject do
     login_as(admin_user, :scope => :admin_user)
-    visit root_path
-    puts page.body
+  end
+
+  let!(:admin_user) { FactoryGirl.create(:admin_user) }
+
+  it 'signs me in' do
+    subject
+    expect { visit root_path }.to_not raise_error
   end
 end

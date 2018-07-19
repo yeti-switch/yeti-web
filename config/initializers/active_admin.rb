@@ -228,7 +228,8 @@ ActiveAdmin.setup do |config|
     private
 
     #https://github.com/activeadmin/activeadmin/issues/3335
-    def interpolation_options
+    # def interpolation_options
+    def flash_interpolation_options
       options = {}
 
       options[:resource_errors] =

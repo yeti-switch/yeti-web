@@ -1,6 +1,8 @@
 ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
-  menu parent: "Realtime Data", priority: 10, if: proc { authorized?(:index, resource_class) && Node.any? }
+  menu parent: "Realtime Data", priority: 10, if: proc {
+    authorized?(:index, RealtimeData::ActiveCall) && Node.any?
+  }
   config.batch_actions = true
   batch_action :destroy, false
 

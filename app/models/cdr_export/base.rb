@@ -14,4 +14,7 @@
 #
 
 class CdrExport::Base < ::CdrExport
+  def self.policy_class
+    CdrExportPolicy
+  end
 end
