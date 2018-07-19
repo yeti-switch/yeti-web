@@ -4,7 +4,7 @@ module ResourceDSL
 
     def acts_as_safe_destroy
 
-      batch_action :destroy, confirm: 'Are you sure?' do |selected_ids|
+      batch_action :destroy, confirm: 'Are you sure?', if: proc { authorized?(:destroy_all?) } do |selected_ids|
         begin
           batch_action_collection.find(selected_ids).each do |record|
             authorize! ActiveAdmin::Auth::DESTROY, record

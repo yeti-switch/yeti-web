@@ -7,7 +7,8 @@ module ResourceDSL
       batch_action :destroy, false #disable common batch delete
 
       scoped_collection_action :async_destroy,
-                               title: 'Delete batch' do
+                               title: 'Delete batch',
+                               if: proc { authorized?(:batch_destroy, resource_klass) } do
         Delayed::Job.enqueue AsyncBatchDestroyJob.new(model_class,
                                                       scoped_collection_records.except(:eager_load).to_sql,
                                                       @paper_trail_info),
