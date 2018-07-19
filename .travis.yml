@@ -21,6 +21,7 @@ install:
   - docker run -d --network yeti-net -p 5432:5432 --name db pgsql_yeti
   - cp config/database.example.yml config/database.yml
   - cp config/yeti_web.yml.distr config/yeti_web.yml
+  - cp config/policy_roles.yml.distr config/policy_roles.yml
 
 stages:
   - test

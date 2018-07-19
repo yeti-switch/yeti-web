@@ -134,7 +134,7 @@ RSpec::Matchers.define :eq_time_string do |expected|
   end
 end
 
-RSpec::Matchers.define :be_one_of do |choices|
+RSpec::Matchers.define :be_one_of do |*choices|
   match do |actual|
     choices.include?(actual)
   end

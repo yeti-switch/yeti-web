@@ -41,6 +41,22 @@ And (/^I add site image src "(.*?)"$/) do |image_src|
   end
 end
 
+And (/^I add role_policy$/) do
+  FileUtils.cd("#{Rails.root}/config")
+  File.open("yeti_web.yml", "a") do |file|
+    file << 'role_policy:'
+    file.close
+  end
+end
+
+And (/^I add role_policy nested "(.*?)"$/) do |role_policy_nested|
+  FileUtils.cd("#{Rails.root}/config")
+  File.open("yeti_web.yml", "a") do |file|
+    file << "  #{role_policy_nested}"
+    file.close
+  end
+end
+
 And ("Reinitialize YetiWeb") do
   load "#{Rails.root}/config/initializers/_config.rb"
   load "#{Rails.root}/config/initializers/active_admin.rb"
