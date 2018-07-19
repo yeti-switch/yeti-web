@@ -203,7 +203,7 @@ ActiveAdmin.setup do |config|
   config.download_links = [:csv]
 
   config.authorization_adapter = ActiveAdmin::PunditAdapter
-  config.pundit_default_policy = 'NonePolicy'
+  config.pundit_default_policy = 'DefaultApplicationPolicy'
 
   ActiveAdmin::BaseController.class_eval do
     include Pundit

@@ -1,4 +1,4 @@
-class NonePolicy < ApplicationPolicy
+class DefaultApplicationPolicy < ApplicationPolicy
 
   def read?
     default_policy!
