@@ -1,0 +1,20 @@
+[Unit]
+Description=YETI system document converter
+Documentation=https://yeti-switch.org/docs/
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=yeti-web
+Group=yeti-web
+LimitNOFILE=65536
+LimitCORE=infinity
+RuntimeDirectory=yeti-libreoffice-headless
+
+ExecStart=/usr/lib/libreoffice/program/soffice.bin --headless --invisible --nocrashreport --nodefault --nologo --nofirststartwizard --norestore --accept=socket,host=localhost,port=2002;urp;StarOffice.ComponentContext --pidfile=/run/yeti-libreoffice-headless/yeti-libreoffice-headless.pid
+
+PIDFile=/run/yeti-libreoffice-headless/yeti-libreoffice-headless.pid
+Type=simple
+Restart=on-abnormal
+
