@@ -440,9 +440,12 @@ INSERT INTO diversion_policy (id, name) VALUES (1, 'Clear header');
 -- Data for Name: dtmf_receive_modes; Type: TABLE DATA; Schema: class4; Owner: yeti
 --
 
-INSERT INTO dtmf_receive_modes (id, name) VALUES (1, 'RFC 2833');
-INSERT INTO dtmf_receive_modes (id, name) VALUES (2, 'SIP INFO application/dtmf-relay OR application/dtmf');
-INSERT INTO dtmf_receive_modes (id, name) VALUES (3, 'RFC 2833 OR SIP INFO');
+INSERT INTO class4.dtmf_receive_modes (id, name) VALUES (1, 'RFC 2833');
+INSERT INTO class4.dtmf_receive_modes (id, name) VALUES (2, 'SIP INFO application/dtmf-relay OR application/dtmf');
+INSERT INTO class4.dtmf_receive_modes (id, name) VALUES (3, 'RFC 2833 OR SIP INFO');
+INSERT INTO class4.dtmf_receive_modes (id, name) values (4, 'Inband');
+INSERT INTO class4.dtmf_receive_modes (id, name) values (5, 'Inband OR RFC 2833');
+
 
 
 --
