@@ -27931,14 +27931,14 @@ CREATE TABLE gui.admin_users (
     last_sign_in_ip character varying(255),
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
-    "group" integer DEFAULT 0,
     enabled boolean DEFAULT true,
     username character varying NOT NULL,
     ssh_key text,
     stateful_filters boolean DEFAULT false NOT NULL,
     visible_columns json DEFAULT '{}'::json NOT NULL,
     per_page json DEFAULT '{}'::json NOT NULL,
-    saved_filters json DEFAULT '{}'::json NOT NULL
+    saved_filters json DEFAULT '{}'::json NOT NULL,
+    roles character varying[] NOT NULL
 );
 
 
@@ -33294,6 +33294,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180512225402'),
 ('20180516095652'),
 ('20180620093010'),
-('20180805100536');
+('20180805100536'),
+('20181011105642');
 
 

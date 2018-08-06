@@ -40,17 +40,12 @@ class RolePolicy < ApplicationPolicy
     if RolePolicy::ALLOWED_ACTIONS.exclude?(action)
       raise ArgumentError, "#{action} is not one of #{RolePolicy::ALLOWED_ACTIONS}"
     end
-    return true if root?
     return rule_when_no_config if roles_config.nil?
     user_roles.any? { |role| roles_config.dig(role, section_name, action) }
   end
 
   def user_roles
     user.roles.reject(&:blank?).map(&:to_sym)
-  end
-
-  def root?
-    user_roles.include?(:root)
   end
 
   def roles_config

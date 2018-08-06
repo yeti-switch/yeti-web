@@ -3,15 +3,17 @@ module AdminUserLdapHandler
 
   included do
     devise :ldap_authenticatable, :trackable
-    before_save :get_ldap_email, unless: proc{|me| me.new_record? }
-    before_validation :get_ldap_email, if: proc{|me| me.new_record? }
+    before_update :get_ldap_attributes
+    before_validation :get_ldap_attributes, on: :create
     include LdapPasswordHelper
   end
 
-  def get_ldap_email
+  def get_ldap_attributes
     begin
-      new_email =  Devise::LDAP::Adapter.get_ldap_param(self.username, 'mail').try(:first)
+      new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail').try!(:first)
       self.email = new_email if new_email
+      new_roles =  Devise::LDAP::Adapter.get_ldap_param(username, 'roles')
+      self.roles = new_roles if new_roles
     rescue Net::LDAP::LdapError => e
       Rails.logger.error{ e.message }
       #nothing

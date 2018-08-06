@@ -14,7 +14,6 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  group                  :integer          default(0)
 #  enabled                :boolean          default(TRUE)
 #  username               :string           not null
 #  ssh_key                :text
@@ -22,6 +21,7 @@
 #  visible_columns        :json             not null
 #  per_page               :json             not null
 #  saved_filters          :json             not null
+#  roles                  :string           not null, is an Array
 #
 
 class AdminUser < ActiveRecord::Base
@@ -53,6 +53,10 @@ class AdminUser < ActiveRecord::Base
 
   def self.ldap_config_exists?
     File.exists?(self.ldap_config)
+  end
+
+  def self.available_roles
+    (Rails.configuration.policy_roles.try!(:keys) || []).map(&:to_sym)
   end
 
   if ldap_config_exists?
@@ -93,14 +97,6 @@ class AdminUser < ActiveRecord::Base
     end
     update_attributes(params, *options)
     clean_up_passwords
-  end
-
-  def roles
-    root? ? [:root] : [:user]
-  end
-
-  def root?
-    self.group == 1
   end
 
   def active_for_authentication?

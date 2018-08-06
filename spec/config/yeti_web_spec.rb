@@ -13,7 +13,8 @@ RSpec.describe 'config/yeti_web.yml' do
             token_lifetime: be_kind_of(Integer)
         },
         cdr_export: {
-            dir_path: be_kind_of(String)
+            dir_path: be_kind_of(String),
+            delete_url: be_kind_of(String)
         },
         role_policy: {
             when_no_config: be_one_of('allow', 'disallow', 'raise'),

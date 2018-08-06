@@ -2,38 +2,27 @@ ActiveAdmin.register AdminUser do
 
   menu parent: "System",  priority: 2
 
-  controller do
-    def update_resource(object, attributes)
-      if object.root?
-        object.update(*attributes)
-      else
-        object.customized_update(*attributes)
-      end
-
-    end
-  end
-
   acts_as_status
   acts_as_export
   action_list = [:index, :show, :edit, :update]
   action_list = action_list + [:create, :new ] unless AdminUser.ldap?
   actions *action_list
 
-  permit_params :username, :email,
-                :password, :password_confirmation, :ssh_key, :stateful_filters
+  permit_params do
+    attrs = [:ssh_key, :stateful_filters]
+    unless AdminUser.ldap?
+      attrs.concat [:username, :email, :password, :password_confirmation]
+      attrs.push(roles: [])
+    end
+    attrs
+  end
+
   includes :billing_contact
 
   index do
     id_column
     actions
-    column :username  do |user|
-      text = "".html_safe
-      text <<  user.username
-      text << " "
-      text << fa_icon(:bolt)  if user.root?
-      text
-    end
-
+    column :username
     column :enabled
     column :current_sign_in_at
     column :email
@@ -58,8 +47,8 @@ ActiveAdmin.register AdminUser do
        row :current_sign_in_ip
        row :last_sign_in_ip
        row :enabled
-       row :group do
-         user.root? ? 'ROOT' : 'ADMIN'
+       row :roles do
+         user.roles.join(', ')
        end
        row :updated_at
        row :created_at
@@ -86,6 +75,10 @@ ActiveAdmin.register AdminUser do
         f.input :username
         f.input :password
         f.input :password_confirmation
+        f.input :roles,
+                as: :select,
+                collection: AdminUser.available_roles,
+                input_html: { multiple: true }
       end
       f.input :ssh_key
       f.input :stateful_filters
