@@ -26,7 +26,7 @@ class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord
   validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
 
   validate do
-    self.errors.add(:routing_plan, :invalid) unless routing_plan.use_static_routes?
+    self.errors.add(:routing_plan, :invalid) if (!routing_plan_id.nil? and !routing_plan.use_static_routes?)
   end
 
   def display_name
