@@ -313,7 +313,7 @@ ActiveAdmin.register Gateway do
           f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
           f.input :priority
           f.input :weight
-          f.input :pop, input_html: {class: 'chosen'}
+          f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
 
           f.input :allow_origination
           f.input :allow_termination
