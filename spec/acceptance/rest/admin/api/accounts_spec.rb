@@ -11,7 +11,7 @@ resource 'Accounts' do
   let(:type) { 'accounts' }
 
   required_params = %i(name min-balance max-balance)
-  optional_params = %i(origination-capacity termination-capacity send-invoices-to, external-id)
+  optional_params = %i(origination-capacity termination-capacity send-invoices-to external-id balance-low-threshold balance-high-threshold send-balance-notifications-to)
 
   required_relationships = %i(contractor timezone)
   optional_relationships = %i(
@@ -43,6 +43,10 @@ resource 'Accounts' do
     let(:name) { 'name' }
     let(:'min-balance') { 1 }
     let(:'max-balance') { 10 }
+    let(:'balance-low-threshold') { 90 }
+    let(:'balance-high-threshold') { 95 }
+    let(:'send-balance-notifications-to') { Billing::Contact.collection.map(&:id) }
+
     let(:timezone) { wrap_relationship(:'timezones', 1) }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
