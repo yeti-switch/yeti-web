@@ -53,7 +53,7 @@ class System::ApiAccess < ActiveRecord::Base
   # Auth
 
   def authenticate_ip(remote_ip)
-    allowed_ips.any? { |ip| ip.include?(remote_ip) }
+    allowed_ips.any? { |ip| IPAddr.new(ip).include?(remote_ip) }
   end
 
   def self.from_token_request(request)
