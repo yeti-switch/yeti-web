@@ -16,7 +16,7 @@
 #  origination_proto_id  :integer
 #  username              :string
 #  realm                 :string
-#  method                :string
+#  request_method        :string
 #  ruri                  :string
 #  from_uri              :string
 #  to_uri                :string
