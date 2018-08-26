@@ -1,4 +1,4 @@
-class CdrAmountRounding < ActiveRecord::Migration
+class CdrAmountRounding < ActiveRecord::Migration[5.0]
   def up
     execute %q{
       create table sys.amount_round_modes(
