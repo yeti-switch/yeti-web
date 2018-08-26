@@ -17,7 +17,7 @@ module ResourceDSL
                                      plural_model: active_admin_config.plural_resource_label(count: selected_ids.count).downcase)
         rescue StandardError => e
           flash[:error] = e.message
-          redirect_to :back
+          redirect_back fallback_location: root_path
         end
       end
 

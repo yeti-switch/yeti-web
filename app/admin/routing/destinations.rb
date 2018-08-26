@@ -129,7 +129,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       resource.clear_quality_alarm
       flash[:notice] = "#{active_admin_config.resource_label} Alarm cleared"
     end
-    redirect_to(:back)
+    redirect_back fallback_location: root_path
   end
 
   action_item :clear_quality_alarm, only: [:show, :edit] do

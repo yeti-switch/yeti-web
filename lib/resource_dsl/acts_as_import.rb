@@ -63,11 +63,11 @@ module ResourceDSL
       # before_action only: [:import] do
       #   flash[:notice] = 'Import in progress'
       #   if Importing::ImportingDelayedJob.jobs?
-      #     redirect_to :back and return
+      #     redirect_back(fallback_location: root_path) and return
       #   end
       #   if options[:resource_class].any?
       #     flash[:notice] = 'Now your preview data is ready to be imported. Choose one of the actions above'
-      #     redirect_to :back
+      #     redirect_back fallback_location: root_path
       #   end
       # end
 
