@@ -1,4 +1,4 @@
-class RejectCallsAtCustomerAuth < ActiveRecord::Migration
+class RejectCallsAtCustomerAuth < ActiveRecord::Migration[5.0]
 
   def up
     execute %q{
