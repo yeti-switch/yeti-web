@@ -1,4 +1,4 @@
-class CustomerPriceNoVatFixNull < ActiveRecord::Migration
+class CustomerPriceNoVatFixNull < ActiveRecord::Migration[5.0]
   def up
     execute %q{
     CREATE or replace FUNCTION billing.bill_cdr(i_cdr cdr.cdr) RETURNS cdr.cdr

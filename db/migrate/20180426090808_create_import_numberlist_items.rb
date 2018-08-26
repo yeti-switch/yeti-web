@@ -1,4 +1,4 @@
-class CreateImportNumberlistItems < ActiveRecord::Migration
+class CreateImportNumberlistItems < ActiveRecord::Migration[5.0]
   def change
     create_table 'data_import.import_numberlists' do |t|
       t.integer :o_id, limit: 2

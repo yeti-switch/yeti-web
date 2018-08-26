@@ -1,4 +1,4 @@
-class RoutingTagAndOperation < ActiveRecord::Migration
+class RoutingTagAndOperation < ActiveRecord::Migration[5.0]
   def up
     execute %q{
 
