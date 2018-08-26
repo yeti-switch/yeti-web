@@ -10,12 +10,12 @@ module Concerns::Rescuers
 
     # rescue_from ImportDisabled do |e|
     #   flash[:notice] = e.message
-    #   redirect_to :back
+    #   redirect_back fallback_location: root_path
     # end
 
     rescue_from ApplicationController::ImportDisabled do |e|
       flash[:notice] = e.message
-      redirect_to :back
+      redirect_back fallback_location: root_path
     end
 
 

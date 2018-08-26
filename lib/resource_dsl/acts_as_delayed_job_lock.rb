@@ -16,7 +16,7 @@ module ResourceDSL
         def destroy
           if Delayed::Job.where(queue: :batch_actions, failed_at: nil).any?
             flash[:error] = I18n.t('flash.actions.batch_actions.destroying_prohibited')
-            redirect_to :back
+            redirect_back fallback_location: root_path
           else
             super
           end

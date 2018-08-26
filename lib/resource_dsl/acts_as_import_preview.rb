@@ -40,7 +40,7 @@ module ResourceDSL
       collection_action :batch_update do
         acts_as_import_resource_class.run_in_background(@paper_trail_info, :for_update)
         flash[:notice] = 'You have just run importing "Only update" in the background process, wait until it finishes'
-        redirect_to :back
+        redirect_back fallback_location: root_path
 #        redirect_to redirect_proc
       end
 
@@ -48,14 +48,14 @@ module ResourceDSL
         acts_as_import_resource_class.run_in_background(@paper_trail_info)
         flash[:notice] = 'You have just run importing "Create an update" in the background process, wait until it finishes'
 #        redirect_to redirect_proc
-        redirect_to :back
+        redirect_back fallback_location: root_path
       end
 
       collection_action :batch_insert do
         acts_as_import_resource_class.run_in_background(@paper_trail_info, :for_create)
         flash[:notice] = 'You have just run importing "Create new once" in the background process, wait until it finishes'
 #        redirect_to redirect_proc
-        redirect_to :back
+        redirect_back fallback_location: root_path
       end
 
       before_action do

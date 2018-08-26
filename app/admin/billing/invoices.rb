@@ -49,7 +49,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         logger.warn { e.message }
         logger.warn { e.backtrace.join("\n") }
         flash[:error] = e.message
-        redirect_to :back
+        redirect_back fallback_location: root_path
       end
     end
 
@@ -67,10 +67,10 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     if resource.approvable?
       resource.approve
       flash[:notice] = 'Invoice approved'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     else
       flash[:notice] = 'Invoice can' 't be approved'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -79,10 +79,10 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     if resource.regenerate_document_allowed?
       resource.regenerate_document
       flash[:notice] = 'Documents regenerated'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     else
       flash[:notice] = 'Documents can''t be regenerated'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -93,7 +93,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       send_data doc.data, type: 'application/vnd.oasis.opendocument.text', filename: "#{doc.filename}.odt"
     else
       flash[:notice] = 'File not found'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -103,7 +103,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       send_data doc.csv_data, type: 'text/csv', filename: "#{doc.filename}.csv"
     else
       flash[:notice] = 'File not found'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -113,7 +113,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       send_data doc.xls_data, type: 'text/csv', filename: "#{doc.filename}.xls"
     else
       flash[:notice] = 'File not found'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -123,7 +123,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       send_data doc.pdf_data, type: 'application/pdf', filename: "#{doc.filename}.pdf"
     else
       flash[:notice] = 'File not found'
-      redirect_to(:back)
+      redirect_back fallback_location: root_path
     end
   end
 
