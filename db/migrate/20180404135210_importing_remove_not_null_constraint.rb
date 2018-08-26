@@ -1,4 +1,4 @@
-class ImportingRemoveNotNullConstraint < ActiveRecord::Migration
+class ImportingRemoveNotNullConstraint < ActiveRecord::Migration[5.0]
   def up
     execute %q{
       ALTER TABLE data_import.import_customers_auth

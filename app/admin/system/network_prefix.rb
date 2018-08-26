@@ -40,14 +40,8 @@ ActiveAdmin.register System::NetworkPrefix do
   #        }
   filter :id
   filter :prefix
-  filter :country, input_html: {
-                     class: 'chosen',
-          onchange: remote_chosen_request(:get, 'system_countries/get_networks', {country_id: "$(this).val()"}, :q_network_id)
-                 }
-
-  filter :network, input_html: {class: 'chosen'}, collection: -> {
-                   System::Country.find(assigns["search"].country_id_eq).networks rescue []
-                 }
+  filter :country, input_html: {class: 'chosen'}
+  filter :network, input_html: {class: 'chosen'}
   filter :number_contains
 
   index do
