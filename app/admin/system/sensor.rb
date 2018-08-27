@@ -16,7 +16,7 @@ ActiveAdmin.register System::Sensor do
         destroy!
       rescue ActiveRecord::ActiveRecordError => e
         flash[:error] = e.message
-        redirect_to :back
+        redirect_back fallback_location: root_path
       end
     end
   end

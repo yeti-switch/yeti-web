@@ -44,7 +44,7 @@ module ResourceDSL
             flash[:notice] = "#{params[:attribute].humanize} was successfully changed"
           end
         end
-        redirect_to :back
+        redirect_back fallback_location: root_path
       end
     end
   end

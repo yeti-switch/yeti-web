@@ -17,7 +17,7 @@ module ResourceDSL
           flash[:error] = e.message
           Rails.logger.warn "UCS#batch_assign_to_group raise exception: #{e.message}\n#{e.backtrace.join("\n")}"
         end
-        redirect_to :back
+        redirect_back fallback_location: root_path
       end
 
     end

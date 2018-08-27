@@ -22,7 +22,7 @@ ActiveAdmin.register Lnp::Database do
       Rails.logger.warn { e.backtrace.join("\n") }
       flash[:warning] = e.message
     end
-    redirect_to :back
+    redirect_back fallback_location: root_path
   end
 
   index do
