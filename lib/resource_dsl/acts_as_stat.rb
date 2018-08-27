@@ -54,7 +54,7 @@ module ResourceDSL
           resource.statistic.destroy if resource.statistic
           flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         end
-        redirect_to(:back)
+        redirect_back fallback_location: root_path
       end
 
     end
@@ -68,7 +68,7 @@ module ResourceDSL
           resource.quality_stats.delete_all if resource.quality_stats
           flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         end
-        redirect_to(:back)
+        redirect_back fallback_location: root_path
       end
 
       sidebar 'Short window stats', only: [:show, :edit] do

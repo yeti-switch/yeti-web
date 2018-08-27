@@ -9,7 +9,7 @@ module ResourceDSL
           resource.unlock
           flash[:notice] = "#{active_admin_config.resource_label} unlocked"
         end
-        redirect_to(:back)
+        redirect_back fallback_location: root_path
       end
 
       action_item :unlock, only: [:show, :edit] do
