@@ -38,8 +38,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   controller do
 
     def create_resource(object)
-      object.model.type_id=Billing::InvoiceType::MANUAL #TODO fix this. We need separate method for manual creation
-      InvoiceGenerator.new(object.model).save!
+      object.type_id=Billing::InvoiceType::MANUAL #TODO fix this. We need separate method for manual creation
+      InvoiceGenerator.new(object).save!
     end
 
     def create
