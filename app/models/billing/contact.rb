@@ -19,6 +19,8 @@ class Billing::Contact < Yeti::ActiveRecord
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id
   belongs_to :admin_user, class_name: 'AdminUser', foreign_key: :admin_user_id
 
+  scope :contractors, -> { where.not(contractor_id: nil) }
+
   before_destroy do
     Report::CustomerTrafficScheduler.where("? = ANY(send_to)", self.id).each do |c|
       c.send_to = c.send_to.reject { |el| el == self.id }

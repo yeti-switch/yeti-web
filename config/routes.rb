@@ -55,6 +55,7 @@ Rails.application.routes.draw do
             jsonapi_resource :balance, only: [:update]
           end
           jsonapi_resources :contractors
+          jsonapi_resources :contacts
           jsonapi_resources :api_accesses
           jsonapi_resources :customers_auths
           jsonapi_resources :destinations
