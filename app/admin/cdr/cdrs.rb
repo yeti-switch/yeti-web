@@ -569,7 +569,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
 
-  index download_links: false do
+  index do
     column :id do |cdr|
       if cdr.dump_level_id>0
         link_to( cdr.id, resource_path(cdr), class: "resource_id_link", title: 'Details') + " " + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
@@ -847,7 +847,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :early_media_present
 
 
-      when 'all'
+      else #all or not defined policy
         column :id
         column :time_start
         column :time_connect
@@ -986,10 +986,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         column :legb_rx_bytes
         column :legb_tx_bytes
 
-
-      else
-        logger.error "unknown csv_policy '#{policy}'"
-        raise "unknown csv_policy '#{policy}'"
     end
 
 
