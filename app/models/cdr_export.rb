@@ -20,10 +20,12 @@ class CdrExport < Yeti::ActiveRecord
   STATUS_PENDING = 'Pending'.freeze
   STATUS_COMPLETED = 'Completed'.freeze
   STATUS_FAILED = 'Failed'.freeze
+  STATUS_DELETED = 'Deleted'.freeze
   STATUSES = [
     STATUS_PENDING,
     STATUS_COMPLETED,
-    STATUS_FAILED
+    STATUS_FAILED,
+    STATUS_DELETED
   ].freeze
 
   #need for activeadmin form
@@ -57,6 +59,10 @@ class CdrExport < Yeti::ActiveRecord
     Worker::CdrExportJob.perform_later(self.id)
   end
 
+  after_update if: proc { saved_change_to_attribute?(:status) && deleted? } do
+    Worker::RemoveCdrExportFileJob.perform_later(self.id)
+  end
+
   alias_attribute :export_type, :type
 
   def export_sql
@@ -65,6 +71,10 @@ class CdrExport < Yeti::ActiveRecord
 
   def completed?
     status == STATUS_COMPLETED
+  end
+
+  def deleted?
+    status == STATUS_DELETED
   end
 
   def self.allowed_filters
