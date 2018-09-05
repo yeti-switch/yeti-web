@@ -11,6 +11,26 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
     request.headers['Authorization'] = auth_token
   end
 
+  describe 'DELETE destroy' do
+    subject { delete :destroy, params: { id: cdr_export.id } }
+    let(:cdr_export) do
+      FactoryGirl.create(:cdr_export, :completed)
+    end
+
+    it 'http code should be 204' do
+      subject
+      expect(response).to have_http_status(204)
+    end
+
+    it 'status should be changed to removed' do
+      expect { subject }.to change { cdr_export.reload.status }.from(CdrExport::STATUS_COMPLETED).to(CdrExport::STATUS_DELETED)
+    end
+
+    it 'remove file job should be enqueued' do
+      expect { subject }.to have_enqueued_job(Worker::RemoveCdrExportFileJob).with(cdr_export.id)
+    end
+  end
+
   describe 'POST create' do
     subject { post :create, params: payload }
     let(:payload) do
