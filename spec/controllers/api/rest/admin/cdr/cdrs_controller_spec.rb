@@ -470,13 +470,13 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     end
   end
 
-  describe 'PATCH create' do
+  describe 'PATCH update' do
     it 'PATCH should not be routable', type: :routing do
       expect(patch: '/api/rest/admin/cdr/cdrs/123').to_not be_routable
     end
   end
 
-  describe 'DELETE create' do
+  describe 'DELETE destroy' do
     it 'DELETE should not be routable', type: :routing do
       expect(delete: '/api/rest/admin/cdr/cdrs/123').to_not be_routable
     end

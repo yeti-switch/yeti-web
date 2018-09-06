@@ -10,6 +10,10 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     link_to 'Download', { action: :download } if resource.completed?
   end
 
+  action_item(:delete_file, only: [:show]) do
+    link_to('Delete File', { action: :delete_file }, method: :delete) if resource.completed?
+  end
+
   index do
     selectable_column
     id_column
@@ -32,6 +36,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     response.headers['Content-Disposition'] = "attachment; filename=\"#{resource.id}.csv\""
 
     render body: nil
+  end
+
+  member_action :delete_file, method: :delete do
+    resource.update!(status: CdrExport::STATUS_DELETED)
+    flash[:notice] = 'The file will be deleted in background!'
+    redirect_back fallback_location: root_path
   end
 
   controller do
