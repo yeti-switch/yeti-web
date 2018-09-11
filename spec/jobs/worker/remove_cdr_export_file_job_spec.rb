@@ -31,6 +31,14 @@ RSpec.describe Worker::RemoveCdrExportFileJob, type: :job do
     end
   end
 
+  context 'when http code 204' do
+    let(:http_code) do
+      204
+    end
+
+    include_examples :valid_deleting
+  end
+
   context 'when http code 200' do
     let(:http_code) do
       200
