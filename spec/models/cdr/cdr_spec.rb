@@ -382,6 +382,82 @@ RSpec.describe Cdr::Cdr, type: :model do
       )
     end
 
+
+    context "When call duration =0 and  price already rounded" do
+      before do
+        #always UP, precision 4
+        System::CdrConfig.take!.update!(
+            customer_amount_round_mode_id: 2,
+            customer_amount_round_precision: 4,
+            vendor_amount_round_mode_id: 2,
+            vendor_amount_round_precision: 4
+        )
+      end
+
+      let(:i_time_data) do
+        {
+          "time_start": time_start.to_f,
+          "leg_b_time": leg_b_time.to_f,
+          "time_connect": nil,
+          "time_end": time_end.to_f,
+          "time_1xx": time_1xx.to_f,
+          "time_18x": time_18x.to_f,
+          "time_limit": 7200,
+          "isup_propagation_delay": 0
+        }.to_json
+      end
+
+      let(:writecdr_parameters) do
+      %Q{
+        't',
+        '10',
+        '3',
+        '4',
+        't',
+        '1',
+        '127.0.0.3',
+        '1015',
+        '127.0.0.2',
+        '1926',
+        '1',
+        '127.0.0.5',
+        '1036',
+        '127.0.0.4',
+        '5065',
+        '#{i_time_data}',
+        'f',
+        '200',
+        'Bye',
+        '3',
+        '200',
+        'Bye',
+        '200',
+        'Bye',
+        'dhgxlgaifhhmovy@elo',
+        '08889A81-5ABE27EE000480C0-EE666700',
+        '73F4856A-5ABE27EE00047ECE-CD83B700',
+        '/var/spool/sems/dump/73F4856A-5ABE27EE00047ECE-CD83B700_10.pcap',
+        '0',
+        'f',
+        '{"lega_rx_payloads":"/pcmu","lega_tx_payloads":"/pcmu","legb_rx_payloads":"/pcmu","legb_tx_payloads":"/pcmu","lega_rx_bytes":153596,"lega_tx_bytes":152736,"legb_rx_bytes":152736,"legb_tx_bytes":153596,"lega_rx_decode_errs":1763,"lega_rx_no_buf_errs":1025,"lega_rx_parse_errs":1710,"legb_rx_decode_errs":1777,"legb_rx_no_buf_errs":1000,"legb_rx_parse_errs":1482}',
+        '',
+        '',
+        '[]',
+        3::smallint,
+        1551231112::bigint,
+        NULL,
+        '{"core":"1.7.60-4","yeti":"1.7.30-1","aleg":"Twinkle/1.10.1","bleg":"Localhost Media Gateway"}',
+        'f',
+        '{"customer_auth_name":"Customer Auth for trunk 1","customer_id":1105,"vendor_id":1755,"customer_acc_id":1886,"vendor_acc_id":32,"customer_auth_id":20084,"destination_id":4201534,"destination_prefix":"","dialpeer_id":1376789,"dialpeer_prefix":"","orig_gw_id":17,"term_gw_id":39,"routing_group_id":22,"rateplan_id":14,"destination_initial_rate":"0.0001","destination_next_rate":"0.0001","destination_initial_interval":60,"destination_next_interval":11,"destination_rate_policy_id":1442,"dialpeer_initial_interval":12,"dialpeer_next_interval":13,"dialpeer_next_rate":"1.0","destination_fee":"0.0","dialpeer_initial_rate":"1.0","dialpeer_fee":"0.0","dst_prefix_in":"380947100008","dst_prefix_out":"echotest","src_prefix_in":"h","src_prefix_out":"380947111223","src_name_in":"","src_name_out":"","diversion_in":"rspec-diversion-in","diversion_out":"rspec-diversion-out","auth_orig_protocol_id":1567,"auth_orig_ip":"127.0.0.1","auth_orig_port":1947,"dst_country_id":222,"dst_network_id":1533,"dst_prefix_routing":"380947100008","src_prefix_routing":"380947111223","routing_plan_id":1,"lrn":"rspec-lrn","lnp_database_id":111,"from_domain":"node-10.yeti-sandbox.localhost","to_domain":"node-10.yeti-sandbox.localhost","ruri_domain":"node-10.yeti-sandbox.localhost","src_area_id":222,"dst_area_id":333,"routing_tag_ids":"{9}","pai_in":"rspec-pai-in","ppi_in":"rspec-ppi-in","privacy_in":"rspec-privacy-in","rpid_in":"rspec-rpid-in","rpid_privacy_in":"rspec-rpid-privacy-in","pai_out":"rspec-pai-out","ppi_out":"rspec-ppi-out","privacy_out":"rspec-privacy-out","rpid_out":"rspec-rpid-out","rpid_privacy_out":"rspec-rpid-privacy-out","customer_acc_check_balance":true,"destination_reverse_billing":false,"dialpeer_reverse_billing":false,"customer_auth_external_id":1504,"customer_external_id":156998,"vendor_external_id":1111,"customer_acc_external_id":156998,"vendor_acc_external_id":2222,"orig_gw_external_id":1,"term_gw_external_id":4444,"customer_acc_vat":"0.0"}'
+      }
+      end
+      it "customer amount" do
+        expect { subject }.to change {described_class.count}.by(1)
+        expect(described_class.last.customer_price).to eq(0)
+        expect(described_class.last.vendor_price).to eq(0)
+      end
+    end
+
     context "When customer round mode=2" do
       before do
         #always UP, precision 4
