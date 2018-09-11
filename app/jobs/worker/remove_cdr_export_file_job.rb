@@ -13,7 +13,7 @@ module Worker
     end
 
     queue_as 'cdr_export'
-    ALLOWED_HTTP_CODES = [200, 404].freeze
+    ALLOWED_HTTP_CODES = [200, 204, 404].freeze
 
     def perform(cdr_export_id)
       url = URI.parse(delete_url(cdr_export_id))
