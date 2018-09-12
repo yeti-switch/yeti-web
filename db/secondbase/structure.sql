@@ -972,23 +972,24 @@ CREATE TABLE sys.config (
 CREATE FUNCTION switch.customer_price_round(i_config sys.config, i_amount numeric) RETURNS numeric
     LANGUAGE plpgsql COST 10
     AS $$
-  DECLARE
-  BEGIN
+      DECLARE
+      BEGIN
 
-    case i_config.customer_amount_round_mode_id
+        case i_config.customer_amount_round_mode_id
         when 1 then -- disable rounding
-            return i_amount;
+        return i_amount;
         when 2 then --always up
-            return trunc(i_amount, i_config.customer_amount_round_precision) + power(10 , - i_config.customer_amount_round_precision);
+        return trunc(i_amount, i_config.customer_amount_round_precision) +
+          (mod(i_amount::numeric, power(10,-i_config.customer_amount_round_precision)::numeric)>0)::int*power(10,-i_config.customer_amount_round_precision);
         when 3 then --always down
-            return trunc(i_amount, i_config.customer_amount_round_precision);
+        return trunc(i_amount, i_config.customer_amount_round_precision);
         when 4 then -- math
-            return round(i_amount, i_config.customer_amount_round_precision);
+        return round(i_amount, i_config.customer_amount_round_precision);
         else -- fallback to math rules
-            return round(i_amount, i_config.customer_amount_round_precision);
-    end case;
-  END;
-  $$;
+        return round(i_amount, i_config.customer_amount_round_precision);
+        end case;
+        END;
+        $$;
 
 
 --
@@ -1024,24 +1025,25 @@ CREATE FUNCTION switch.duration_round(i_config sys.config, i_duration double pre
 CREATE FUNCTION switch.vendor_price_round(i_config sys.config, i_amount numeric) RETURNS numeric
     LANGUAGE plpgsql COST 10
     AS $$
-  DECLARE
+    DECLARE
 
-  BEGIN
+    BEGIN
 
-    case i_config.vendor_amount_round_mode_id
-        when 1 then -- disable rounding
-            return i_amount;
-        when 2 then --always up
-            return trunc(i_amount, i_config.vendor_amount_round_precision) + power(10 , - i_config.vendor_amount_round_precision);
-        when 3 then --always down
-            return trunc(i_amount, i_config.vendor_amount_round_precision);
-        when 4 then -- math
-            return round(i_amount, i_config.vendor_amount_round_precision);
-        else -- fallback to math rules
-            return round(i_amount, i_config.vendor_amount_round_precision);
-    end case;
-  END;
-  $$;
+      case i_config.vendor_amount_round_mode_id
+      when 1 then -- disable rounding
+      return i_amount;
+      when 2 then --always up
+      return trunc(i_amount, i_config.vendor_amount_round_precision) +
+        (mod(i_amount::numeric, power(10,-i_config.vendor_amount_round_precision)::numeric)>0)::int*power(10,-i_config.vendor_amount_round_precision);
+      when 3 then --always down
+      return trunc(i_amount, i_config.vendor_amount_round_precision);
+      when 4 then -- math
+      return round(i_amount, i_config.vendor_amount_round_precision);
+      else -- fallback to math rules
+      return round(i_amount, i_config.vendor_amount_round_precision);
+      end case;
+      END;
+      $$;
 
 
 --
@@ -6177,7 +6179,7 @@ ALTER TABLE ONLY sys.config
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO cdr, reports, billing;
+SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170907204350'),
@@ -6194,6 +6196,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180607135226'),
 ('20180611140540'),
 ('20180619091111'),
-('20180621130107');
+('20180621130107'),
+('20180911180345');
 
 
