@@ -640,6 +640,8 @@ ActiveAdmin.register Gateway do
       end if s.allow_termination?
 
     end
+    
+    active_admin_comments
   end
 
   sidebar :links, only: [:show, :edit] do
