@@ -17,7 +17,7 @@ ActiveAdmin.register Dialpeer do
                          {
                            enabled: boolean_select,
                            prefix: 'text',
-                           routing_tag_mode: Routing::RoutingTag.pluck(:name, :id),
+                           routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name,:id),
                            routing_group_id: RoutingGroup.pluck(:name, :id),
                            priority: 'text',
                            force_hit_rate: 'text',
