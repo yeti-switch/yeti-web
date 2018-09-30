@@ -41,7 +41,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
           'balance','min-balance', 'max-balance',
           'uuid',
           'external-id',
-          'origination_capacity', 'termination_capacity', 'send_invoices_to',
+          'origination-capacity', 'termination-capacity', 'send-invoices-to',
           'balance-low-threshold',
           'balance-high-threshold',
           'send-balance-notifications-to'
