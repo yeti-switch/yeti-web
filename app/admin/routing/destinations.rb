@@ -14,7 +14,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                          {
                              enabled: boolean_select,
                              prefix: 'text',
-                             routing_tag_mode: Routing::RoutingTag.pluck(:name, :id),
+                             routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name,:id),
                              reject_calls: boolean_select,
                              quality_alarm: boolean_select,
                              rateplan_id: Rateplan.pluck(:name, :id),

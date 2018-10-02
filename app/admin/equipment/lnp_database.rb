@@ -14,7 +14,7 @@ ActiveAdmin.register Lnp::Database do
 
   member_action :test, method: :post do
     begin
-      lrn=Lnp::Database.find(resource)
+      lrn=Lnp::Database.find(resource.id)
       r=lrn.test_db(params['dst']['dst']) if lrn.present?
       flash[:notice] = "Database: #{lrn.name} Destination: #{params['dst']['dst']} LRN: #{r.lrn}, TAG: #{r.tag}"
     rescue StandardError => e

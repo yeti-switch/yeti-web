@@ -1,6 +1,8 @@
 class Api::Rest::Admin::AccountResource < ::BaseResource
-  attributes :name, :min_balance, :max_balance, :external_id,
+  attributes :name,
+             :balance, :min_balance, :max_balance,
              :balance_low_threshold, :balance_high_threshold, :send_balance_notifications_to,
+             :external_id, :uuid,
              :origination_capacity, :termination_capacity, :send_invoices_to
 
   has_one :contractor
@@ -24,6 +26,8 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   def self.updatable_fields(_context)
     [
       :name,
+      :uuid,
+      :external_id,
       :min_balance,
       :max_balance,
       :balance_low_threshold,
