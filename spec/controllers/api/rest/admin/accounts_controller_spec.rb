@@ -37,9 +37,15 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
       it { expect(response_data['id']).to eq(account.id.to_s) }
       it 'has balance threshold attributes' do
         expect(response_data['attributes']).to include(
+          'name',
+          'balance','min-balance', 'max-balance',
+          'uuid',
+          'external-id',
+          'origination-capacity', 'termination-capacity', 'send-invoices-to',
           'balance-low-threshold',
           'balance-high-threshold',
-          'send-balance-notifications-to')
+          'send-balance-notifications-to'
+        )
       end
     end
 
@@ -63,13 +69,17 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     context 'when attributes are valid' do
       let(:attributes) do
         {
-          name: 'name',
+           name: 'name',
           'min-balance': 1,
           'external-id': 100,
+          'uuid': '29161666-c29c-11e8-a11d-a088b4454590',
           'max-balance': 10,
           'balance-low-threshold': 90,
           'balance-high-threshold': 95,
-          'send-balance-notifications-to': Array.wrap(Billing::Contact.collection.first.id)
+          'send-balance-notifications-to': Array.wrap(Billing::Contact.collection.first.id),
+          'send-invoices-to': Billing::Contact.collection.first.id,
+          'origination-capacity': 10,
+          'termination-capacity': 3
         }
       end
 
@@ -106,10 +116,16 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
       let(:attributes) do
         {
           name: 'name',
+          'external-id': 110,
+          'uuid': '5d24297a-c29c-11e8-a11d-a088b4454590',
+          'min-balance': -100,
+          'max-balance': 100,
           'balance-low-threshold': 90,
           'balance-high-threshold': 95,
           'send-balance-notifications-to': Billing::Contact.collection.first.id,
-          'send-invoices-to': Billing::Contact.collection.first.id
+          'send-invoices-to': Billing::Contact.collection.first.id,
+          'origination-capacity': 10,
+          'termination-capacity': 3
         }
       end
 
@@ -125,10 +141,10 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     end
 
     context 'when attributes are not updatable' do
-      let(:attributes) { { 'external-id': 200 } }
+      let(:attributes) { { 'balance': 2100.2 } }
 
       it { expect(response.status).to eq(400) }
-      it { expect(account.reload.external_id).to_not eq(200) }
+      it { expect(account.reload.external_id).to_not eq(2100.2) }
     end
   end
 
