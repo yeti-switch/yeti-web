@@ -56,7 +56,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
 
-  batch_action :approve, confirm: "Are you sure?" do |selection|
+  batch_action :approve, confirm: "Are you sure?", if: proc { authorized?(:approve) } do |selection|
     active_admin_config.resource_class.find(selection).each do |resource|
       resource.approve
     end

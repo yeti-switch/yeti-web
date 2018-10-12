@@ -1,6 +1,8 @@
 ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
-  menu parent: "Realtime Data", priority: 10, if: proc { Node.any? }
+  menu parent: "Realtime Data", priority: 10, if: proc {
+    authorized?(:index, RealtimeData::ActiveCall) && Node.any?
+  }
   config.batch_actions = true
   batch_action :destroy, false
 
@@ -83,7 +85,8 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   filter :duration, as: :numeric
 
 
-  batch_action :terminate,  confirm: "Are you sure?" do |ids|
+  batch_action :terminate, confirm: "Are you sure?", if: proc { authorized?(:batch_perform) } do |ids|
+    authorize!
     ids.each do |node_id_with_local_tag|
       begin
         node_id, local_tag = node_id_with_local_tag.split("*")

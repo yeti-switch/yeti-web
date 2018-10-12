@@ -15,14 +15,14 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
 
   includes :avps
 
-  batch_action :set_reject_on_error, confirm: "Are you sure?" do |selection|
+  batch_action :set_reject_on_error, confirm: "Are you sure?", if: proc { authorized?(:batch_update) } do |selection|
     active_admin_config.resource_class.find(selection).each do |resource|
       resource.set_reject_on_error
     end
     redirect_to collection_path, notice: "#{active_admin_config.resource_label.pluralize} are updated!"
   end
 
-  batch_action :unset_reject_on_error, confirm: "Are you sure?" do |selection|
+  batch_action :unset_reject_on_error, confirm: "Are you sure?", if: proc { authorized?(:batch_update) } do |selection|
     active_admin_config.resource_class.find(selection).each do |resource|
       resource.unset_reject_on_error
     end

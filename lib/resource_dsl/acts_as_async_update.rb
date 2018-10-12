@@ -7,7 +7,8 @@ module ResourceDSL
       scoped_collection_action :async_update,
                                title: 'Update batch',
                                class: 'scoped_collection_action_button ui',
-                               form: attrs_to_update do
+                               form: attrs_to_update,
+                               if: proc { authorized?(:batch_destroy, resource_klass) } do
         Delayed::Job.enqueue AsyncBatchUpdateJob.new(model_class,
                                                      scoped_collection_records.except(:eager_load).to_sql,
                                                      params[:changes].permit!,

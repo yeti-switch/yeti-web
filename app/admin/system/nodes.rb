@@ -11,8 +11,7 @@ ActiveAdmin.register Node do
   filter :name
 
   member_action :clear_cache, method: :post do
-    @node = Node.find(params[:id])
-    @node.clear_cache
+    resource.clear_cache
     flash[:notice] = 'Cleared!'
     redirect_to action: :index
   end

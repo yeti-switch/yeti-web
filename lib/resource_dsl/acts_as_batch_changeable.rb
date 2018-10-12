@@ -1,7 +1,7 @@
 module ResourceDSL
 
   module ActsAsBatchChangeable
-    def acts_as_batch_changeable columns_changeable
+    def acts_as_batch_changeabl(columns_changeable)
       section = ActiveAdmin::SidebarSection.new 'Update Filtered', class: 'toggle', only: :index do
 
         text_node form_tag(action: :batch_operation, id: "batch_operation_form")
@@ -32,6 +32,7 @@ module ResourceDSL
       config.sidebar_sections.unshift section
 
       collection_action :batch_operation, method: :post do
+        authorize!
         collection = scoped_collection
         collection = apply_authorization_scope(collection)
         collection = apply_filtering(collection)

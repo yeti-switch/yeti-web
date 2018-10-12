@@ -28,39 +28,29 @@ module ResourceDSL
 
 
       member_action :enable do
-        resource = active_admin_config.resource_class.find(params[:id])
-        if can? :change_state, resource
-          resource.enabled = true
-          resource.save!
-          flash[:notice] = "#{active_admin_config.resource_label} was successfully enabled"
-        end
+        resource.update!(enabled: true)
+        flash[:notice] = "#{active_admin_config.resource_label} was successfully enabled"
         redirect_back fallback_location: root_path
       end
 
 
       member_action :disable do
-        resource = active_admin_config.resource_class.find(params[:id])
-        if can? :change_state, resource
-          resource.enabled = false
-          resource.save!
-          flash[:notice] = "#{active_admin_config.resource_label} was successfully disabled"
-        end
+        resource.update!(enabled: false)
+        flash[:notice] = "#{active_admin_config.resource_label} was successfully disabled"
         redirect_back fallback_location: root_path
       end
 
 
       action_item :enable, only: [:show, :edit] do
-        if resource.disabled? and can? :change_state, resource and (!resource.respond_to?(:live?) or resource.live?)
+        if resource.disabled? and authorized?(:enable) && (!resource.respond_to?(:live?) || resource.live?)
           link_to "Enable", action: :enable, id: resource.id
         end
       end
 
       action_item :disable, only: [:show, :edit] do
-        if resource.enabled? and can? :change_state, resource and (!resource.respond_to?(:live?) or resource.live?)
+        if resource.enabled? and authorized?(:disable) && (!resource.respond_to?(:live?) || resource.live?)
           link_to "Disable ", action: :disable, id: resource.id
         end
-
-
       end
 
 

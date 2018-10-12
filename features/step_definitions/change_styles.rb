@@ -36,8 +36,21 @@ end
 And (/^I add site image src "(.*?)"$/) do |image_src|
   FileUtils.cd("#{Rails.root}/config")
   File.open("yeti_web.yml", "a") do |file|
-    file << image_src
-    file.close
+    file.puts image_src
+  end
+end
+
+And (/^I add role_policy$/) do
+  FileUtils.cd("#{Rails.root}/config")
+  File.open("yeti_web.yml", "a") do |file|
+    file.puts 'role_policy:'
+  end
+end
+
+And (/^I add role_policy nested "(.*?)"$/) do |role_policy_nested|
+  FileUtils.cd("#{Rails.root}/config")
+  File.open("yeti_web.yml", "a") do |file|
+    file.puts "  #{role_policy_nested}"
   end
 end
 

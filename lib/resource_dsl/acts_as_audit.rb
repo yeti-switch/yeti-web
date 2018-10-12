@@ -38,13 +38,12 @@ module ResourceDSL
 
 
       action_item :history, only: [:show, :edit] do
-
-        link_to "History", action: :history, id: resource.id
-
+        if authorized?(:history)
+          link_to "History", action: :history, id: resource.id
+        end
       end
 
       member_action :history do
-        resource = active_admin_config.resource_class.find(params[:id])
         #todo: add paginations
         #@versions = resource.versions.includes(:admin).reorder('id desc').limit(500)
         @versions = resource.versions.reorder('id desc').limit(500)

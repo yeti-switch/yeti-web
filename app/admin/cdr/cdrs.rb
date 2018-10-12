@@ -147,26 +147,28 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
 
   member_action :routing_simulation, method: :get do
-
-    @cdr = Cdr::Cdr.find(params[:id])
-    @proto =  @cdr.auth_orig_transport_protocol_id.nil? ? 1 : @cdr.auth_orig_transport_protocol_id #proto = UDP if no info in DB
-    redirect_to routing_simulation_path({routing_simulation: {
-                                    transport_protocol_id: @proto,
-                                    remote_ip: @cdr.auth_orig_ip,
-                                    remote_port: @cdr.auth_orig_port,
-                                    src_number: @cdr.src_prefix_in,
-                                    dst_number: @cdr.dst_prefix_in,
-                                    pop_id: @cdr.pop_id,
-                                    x_yeti_auth: @cdr.customer_auth.try!(:x_yeti_auth),
-                                    uri_domain: @cdr.ruri_domain,
-                                    from_domain: @cdr.from_domain,
-                                    to_domain: @cdr.to_domain,
-                                    pai: @cdr.pai_in,
-                                    ppi: @cdr.ppi_in,
-                                    privacy: @cdr.privacy_in,
-                                    rpid: @cdr.rpid_in,
-                                    rpid_privacy: @cdr.rpid_privacy_in
-                                }, anchor: 'detailed'})
+    #proto = UDP if no info in DB
+    proto =  resource.auth_orig_transport_protocol_id.nil? ? 1 : resource.auth_orig_transport_protocol_id
+    redirect_to routing_simulation_path(
+                    anchor: 'detailed',
+                    routing_simulation: {
+                        transport_protocol_id: proto,
+                        remote_ip: resource.auth_orig_ip,
+                        remote_port: resource.auth_orig_port,
+                        src_number: resource.src_prefix_in,
+                        dst_number: resource.dst_prefix_in,
+                        pop_id: resource.pop_id,
+                        x_yeti_auth: resource.customer_auth.try!(:x_yeti_auth),
+                        uri_domain: resource.ruri_domain,
+                        from_domain: resource.from_domain,
+                        to_domain: resource.to_domain,
+                        pai: resource.pai_in,
+                        ppi: resource.ppi_in,
+                        privacy: resource.privacy_in,
+                        rpid: resource.rpid_in,
+                        rpid_privacy: resource.rpid_privacy_in
+                    }
+                )
   end
 
 
