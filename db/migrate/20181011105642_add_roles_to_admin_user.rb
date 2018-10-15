@@ -1,11 +1,16 @@
 class AddRolesToAdminUser < ActiveRecord::Migration[5.1]
   def up
-    add_column :admin_users, :roles, :string, array: true, null: false
-    remove_column :admin_users, :group
+    execute %q{
+      alter table gui.admin_users add  roles varchar[] not null default array['root']::varchar[];
+      alter table gui.admin_users alter column roles drop default;
+      alter table gui.admin_users drop column "group";
+    }
   end
 
   def down
-    remove_column :admin_users, :roles
-    add_column :admin_users, :group, :integer, default: 0
+    execute %q{
+      alter table gui.admin_users drop column roles;
+      alter table gui.admin_users add "group" integer not null default 0;
+    }
   end
 end
