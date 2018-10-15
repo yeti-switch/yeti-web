@@ -27938,7 +27938,7 @@ CREATE TABLE gui.admin_users (
     visible_columns json DEFAULT '{}'::json NOT NULL,
     per_page json DEFAULT '{}'::json NOT NULL,
     saved_filters json DEFAULT '{}'::json NOT NULL,
-    roles character varying[] NOT NULL
+    roles character varying[] DEFAULT ARRAY['root'::character varying] NOT NULL
 );
 
 
