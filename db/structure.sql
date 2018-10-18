@@ -22223,15 +22223,6 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
-            if v_customer_auth_normalized.reject_calls then
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.disconnect_code_id=8004; -- call rejected by authorization
-                RETURN NEXT v_ret;
-                RETURN;
-            end if;
             if v_customer_auth_normalized.require_incoming_auth then
             /*dbg{*/
                 v_end:=clock_timestamp();
@@ -22241,6 +22232,28 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN NEXT v_ret;
                 RETURN;
             end IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
         else
             SELECT into v_customer_auth_normalized ca.*
             from class4.customers_auth_normalized ca
@@ -22284,6 +22297,19 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
             /*}dbg*/
                 v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
                 RETURN NEXT v_ret;
                 RETURN;
             end if;
@@ -22300,6 +22326,8 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
+
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
@@ -22310,17 +22338,19 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
 
         v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
+
         SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+
         if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
-          v_ret.disconnect_code_id=8000; --No enought customer balance
+          v_ret.disconnect_code_id=8000; --No enough customer balance
           RETURN NEXT v_ret;
           RETURN;
         end if;
 
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
-        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_c_acc.contractor_id;
-
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
         if not v_orig_gw.enabled then
@@ -23225,15 +23255,6 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
-            if v_customer_auth_normalized.reject_calls then
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.disconnect_code_id=8004; -- call rejected by authorization
-                RETURN NEXT v_ret;
-                RETURN;
-            end if;
             if v_customer_auth_normalized.require_incoming_auth then
             /*dbg{*/
                 v_end:=clock_timestamp();
@@ -23243,6 +23264,28 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN NEXT v_ret;
                 RETURN;
             end IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
         else
             SELECT into v_customer_auth_normalized ca.*
             from class4.customers_auth_normalized ca
@@ -23286,6 +23329,19 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
             /*}dbg*/
                 v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
                 RETURN NEXT v_ret;
                 RETURN;
             end if;
@@ -23302,6 +23358,8 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
+
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
@@ -23312,17 +23370,19 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
 
         v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
+
         SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+
         if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
-          v_ret.disconnect_code_id=8000; --No enought customer balance
+          v_ret.disconnect_code_id=8000; --No enough customer balance
           RETURN NEXT v_ret;
           RETURN;
         end if;
 
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
-        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_c_acc.contractor_id;
-
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
         if not v_orig_gw.enabled then
@@ -24214,18 +24274,31 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN NEXT v_ret;
                 RETURN;
             END IF;
-            if v_customer_auth_normalized.reject_calls then
-            
-                v_ret.disconnect_code_id=8004; -- call rejected by authorization
-                RETURN NEXT v_ret;
-                RETURN;
-            end if;
             if v_customer_auth_normalized.require_incoming_auth then
             
                 v_ret.aleg_auth_required=true;
                 RETURN NEXT v_ret;
                 RETURN;
             end IF;
+            if v_customer_auth_normalized.reject_calls then
+            
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
         else
             SELECT into v_customer_auth_normalized ca.*
             from class4.customers_auth_normalized ca
@@ -24263,6 +24336,19 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
             if v_customer_auth_normalized.reject_calls then
             
                 v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
                 RETURN NEXT v_ret;
                 RETURN;
             end if;
@@ -24276,6 +24362,8 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
+
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
@@ -24286,17 +24374,19 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
 
         v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
+
         SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+
         if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
-          v_ret.disconnect_code_id=8000; --No enought customer balance
+          v_ret.disconnect_code_id=8000; --No enough customer balance
           RETURN NEXT v_ret;
           RETURN;
         end if;
 
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
-        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_c_acc.contractor_id;
-
 
         SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
         if not v_orig_gw.enabled then
@@ -33295,6 +33385,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180516095652'),
 ('20180620093010'),
 ('20180805100536'),
-('20181011105642');
+('20181011105642'),
+('20181018164004');
 
 
