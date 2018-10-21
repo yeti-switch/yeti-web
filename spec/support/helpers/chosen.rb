@@ -10,6 +10,11 @@ module Helpers
       end
       find('.active-result', text: search, exact_text: true).click
     end
+
+    def chosen_pick(css_selector, text:)
+      find(css_selector).click
+      find('ul.chosen-results li.active-result', text: text).click
+    end
   end
 end
 

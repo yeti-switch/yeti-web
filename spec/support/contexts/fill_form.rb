@@ -16,6 +16,8 @@ RSpec.shared_context :fill_form do |form_id|
     tag_name = field.tag_name
 
     case
+    when value.is_a?(Proc)
+      value.call
     when value.is_a?(Array) && tag_name == 'select'
       value.each { |v| select(v, from: id) }
     when tag_name == 'input' && field['type'] == 'checkbox'
@@ -25,6 +27,10 @@ RSpec.shared_context :fill_form do |form_id|
     else
       field.set(value)
     end
+  end
+
+  def click_on_submit
+    page.find('input[type=submit]').click
   end
 
 end
