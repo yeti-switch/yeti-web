@@ -27,7 +27,7 @@ describe 'Create new Destinations', type: :feature do
     end
 
     it 'creates new Dialpeers and show it' do
-      page.find('input[type=submit]').click
+      click_on_submit
       expect(page).to have_css('body.show.destinations')
 
       expect(Routing::Destination.last).to have_attributes(
