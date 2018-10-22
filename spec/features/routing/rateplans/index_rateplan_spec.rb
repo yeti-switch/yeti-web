@@ -6,7 +6,7 @@ describe 'Index Rateplans', type: :feature do
   include_examples :test_index_table_exist do
     before do
       @item = create(:rateplan)
-      visit invoices_path
+      visit rateplans_path
     end
   end
 end
