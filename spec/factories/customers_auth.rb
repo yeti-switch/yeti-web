@@ -24,5 +24,16 @@ FactoryGirl.define do
     src_numberlist_id nil
     allow_receive_rate_limit false
     send_billing_information false
+
+    trait :with_incoming_auth do
+      association :gateway, factory: [:gateway, :with_incoming_auth]
+      require_incoming_auth true
+    end
+
+    trait :with_reject do
+      reject_calls true
+    end
+
+
   end
 end

@@ -6,6 +6,11 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
 
   permit_params :name, :template_file
 
+  acts_as_export :id, :name,
+                 [:file_name, proc { |row| row.filename}],
+                 :created_at,
+                 :sha1
+
   member_action :download, method: :get do
     send_data resource.get_file(resource.id), type: 'application/vnd.oasis.opendocument.text', filename: resource.filename
   end

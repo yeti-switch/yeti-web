@@ -264,6 +264,9 @@ class Billing::Invoice < Cdr::Base
     "Invoice #{self.id}"
   end
 
+  def direction
+    self.vendor_invoice? ? "Vendor" : "Customer"
+  end
 
   def approve
     self.state_id=Billing::InvoiceState::APPROVED

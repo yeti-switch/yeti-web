@@ -174,7 +174,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
     column :type
     column :direction, sorting: "vendor_invoice" do |c|
-      c.vendor_invoice? ? "Vendor" : "Customer"
+      c.direction
     end
 
     column :calls_count, footer: -> do
@@ -229,7 +229,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
           end
           row :type
           row :direction do
-            s.vendor_invoice? ? "Vendor" : "Customer"
+            s.direction
           end
           row :created_at
           row :first_call_at

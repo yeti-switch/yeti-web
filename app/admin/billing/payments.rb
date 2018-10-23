@@ -21,7 +21,10 @@ ActiveAdmin.register Payment do
   scope :today
   scope :yesterday
 
-  acts_as_export
+  acts_as_export :id,
+                 [:account_name, proc { |row| row.account.try(:name) }],
+                 :amount, :notes, :created_at
+
 
   controller do
     def scoped_collection

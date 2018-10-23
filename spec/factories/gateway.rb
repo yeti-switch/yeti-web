@@ -89,5 +89,16 @@ FactoryGirl.define do
     association :contractor, factory: :contractor, vendor: true
     codec_group { CodecGroup.take || association(:codec_group) }
 
+
+    trait :with_incoming_auth do
+      incoming_auth_username "incoming_username"
+      incoming_auth_password "incoming_password"
+    end
+
+    trait :without_incoming_auth do
+      incoming_auth_username  nil
+      incoming_auth_password  nil
+    end
+
   end
 end
