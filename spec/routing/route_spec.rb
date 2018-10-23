@@ -152,7 +152,7 @@ RSpec.describe '#routing logic' do
       FactoryGirl.create(:system_load_balancer, {
           signalling_ip: '1.1.1.1'
       })
-      FactoryGirl.create(:customers_auth, :with_incoming_auth, {
+      @ca=FactoryGirl.create(:customers_auth, :with_incoming_auth, {
           ip: '3.3.3.3'
       })
     end
@@ -169,11 +169,13 @@ RSpec.describe '#routing logic' do
     end
 
     context 'Authorized' do
-      let(:auth_id) { CustomersAuth.take!.gateway_id }
+      let(:auth_id) { @ca.gateway_id }
 
       it 'Pass auth ' do
+        p subject
+        p @ca
         expect(subject.size).to eq(1)
-        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_auth_id]).to eq(@ca.id)
         expect(subject.first[:aleg_auth_required]).to be_nil
         expect(subject.first[:disconnect_code_id]).to eq(8000) #No enough customer balance
       end
