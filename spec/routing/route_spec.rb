@@ -172,8 +172,6 @@ RSpec.describe '#routing logic' do
       let(:auth_id) { @ca.gateway_id }
 
       it 'Pass auth ' do
-        p subject
-        p @ca
         expect(subject.size).to eq(1)
         expect(subject.first[:customer_auth_id]).to eq(@ca.id)
         expect(subject.first[:aleg_auth_required]).to be_nil

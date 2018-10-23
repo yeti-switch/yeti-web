@@ -37,7 +37,7 @@ module CallSql
     end
 
     def connection
-      @connection ||= model_klass.connection
+      model_klass.connection
     end
 
     def sanitize_sql_array(sql, *bindings)
