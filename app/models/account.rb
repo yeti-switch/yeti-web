@@ -29,6 +29,7 @@
 #  total_capacity                :integer
 #  destination_rate_limit        :decimal(, )
 #  max_call_duration             :integer
+#  package_id                    :integer
 #
 
 class Account < Yeti::ActiveRecord
@@ -45,6 +46,8 @@ class Account < Yeti::ActiveRecord
   belongs_to :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'vendor_invoice_template_id'
   belongs_to :customer_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'customer_invoice_template_id'
   belongs_to :timezone, class_name: 'System::Timezone', foreign_key: :timezone_id
+
+  belongs_to :package, class_name: 'Billing::Package', foreign_key: :package_id
 
   has_many :payments, dependent: :destroy
   has_many :invoices, class_name: 'Billing::Invoice'

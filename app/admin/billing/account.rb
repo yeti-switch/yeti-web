@@ -19,6 +19,7 @@ ActiveAdmin.register Account do
                            termination_capacity: 'text',
                            total_capacity: 'text',
                            max_call_duration: 'text',
+                           package_id: Billing::Package.pluck(:name, :id),
                            vendor_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
                            customer_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
                            vendor_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
@@ -45,6 +46,7 @@ ActiveAdmin.register Account do
                  :origination_capacity,
                  :termination_capacity,
                  :total_capacity,
+                 [:package_name, proc { |row| row.package.try(:name) }],
                  :customer_invoice_period,
                  :vendor_invoice_period
 
@@ -63,10 +65,11 @@ ActiveAdmin.register Account do
                 :customer_invoice_period_id, :vendor_invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
+                :package_id,
                 send_invoices_to: [], send_balance_notifications_to: []
 
 
-  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone
+  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone, :package
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals)} do
     selectable_column
@@ -109,6 +112,7 @@ ActiveAdmin.register Account do
     column :origination_capacity
     column :termination_capacity
     column :total_capacity
+    column :package
 
     column :vendor_invoice_period
     column :customer_invoice_period
@@ -141,6 +145,7 @@ ActiveAdmin.register Account do
       tab :details do
         attributes_table_for s do
           row :id
+          row :name
           row :uuid
           row :external_id
           row :contractor
@@ -162,11 +167,10 @@ ActiveAdmin.register Account do
           row :destination_rate_limit
           row :max_call_duration
 
-          row :name
           row :origination_capacity
           row :termination_capacity
           row :total_capacity
-
+          row :package
           row :vendor_invoice_template
           row :customer_invoice_template
           row :send_invoices_to do |row|
@@ -238,6 +242,7 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
+      f.input :uuid, as: :string
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance
       f.input :max_balance
@@ -251,6 +256,7 @@ ActiveAdmin.register Account do
       f.input :origination_capacity
       f.input :termination_capacity
       f.input :total_capacity
+      f.input :package
 
       f.input :vendor_invoice_period
       f.input :customer_invoice_period
