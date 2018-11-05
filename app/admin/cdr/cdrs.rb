@@ -100,6 +100,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :node, input_html: { class: 'chosen' }
   filter :pop, input_html: { class: 'chosen' }
   filter :local_tag
+  filter :legb_local_tag
   filter :orig_call_id, as: :string
   filter :term_call_id, as: :string
   filter :routing_attempt
@@ -318,6 +319,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :profit
           column('Orig call', &:orig_call_id)
           column :local_tag
+          column :legb_local_tag
           column('Term call', &:term_call_id)
           column :customer_invoice_id
           column :vendor_invoice_id
@@ -469,6 +471,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :is_redirected
 
           row :local_tag
+          row :legb_local_tag
           row :routing_delay
           row :pdd
           row :rtt
@@ -681,6 +684,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :profit
     column :orig_call_id
     column :local_tag
+    column :legb_local_tag
     column :term_call_id
     column :customer_invoice_id
     column :vendor_invoice_id
@@ -749,6 +753,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :ruri_domain
       column :diversion_in
       column :local_tag
+      column :legb_local_tag
       column('LegA DC', sortable: 'lega_disconnect_code') do |cdr|
         cdr.lega_disconnect_code.to_s unless (cdr.lega_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
       end
@@ -933,6 +938,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :profit
       column :orig_call_id
       column :local_tag
+      column :legb_local_tag
       column :term_call_id
       column :customer_invoice_id
       column :vendor_invoice_id
