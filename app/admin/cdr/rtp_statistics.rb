@@ -5,11 +5,15 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   config.batch_actions = false
   config.sort_order = 'id_desc'
 
-  includes :gateway
+  def scoped_collection
+      super.preload( :pop, :node, :gateway)
+  end
 
   index do
     id_column
     column :local_tag
+    column :pop
+    column :node
     column :gateway
     column :gateway_external_id
     column :remote_jitter_var
@@ -36,6 +40,8 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
 
   filter :id
   filter :local_tag
+  filter :pop
+  filter :node
   filter :gateway
   filter :gateway_external_id
   filter :remote_jitter_var

@@ -7,6 +7,8 @@ class AddRtpStatistics < ActiveRecord::Migration[5.1]
       create table rtp_statistics.streams(
         id bigserial primary key,
         local_tag varchar not null,
+        pop_id integer not null,
+        node_id integer not null,
         gateway_id bigint not null,
         gateway_external_id bigint,
         remote_jitter_var double precision,
@@ -272,8 +274,10 @@ BEGIN
       v_rtp_stream.gateway_id = v_dynamic.term_gw_id;
       v_rtp_stream.gateway_external_id = v_dynamic.term_gw_external_id;
     end if;
-
+    v_rtp_stream.pop_id=i_pop_id;
+    v_rtp_stream.node_id=i_node_id;
     v_rtp_stream.id=nextval('rtp_statistics.streams_id_seq'::regclass);
+
     INSERT INTO rtp_statistics.streams VALUES( v_rtp_stream.*);
     perform event.rtp_statistics_insert_event(v_rtp_stream);
   end loop;
