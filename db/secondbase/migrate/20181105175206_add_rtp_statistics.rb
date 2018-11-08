@@ -4,33 +4,112 @@ class AddRtpStatistics < ActiveRecord::Migration[5.1]
       alter table cdr.cdr add legb_local_tag varchar;
 
       create schema rtp_statistics;
+      create type rtp_statistics.stream_ty as (
+        local_tag varchar,
+        time_start double precision,
+        time_end double precision,
+        rtcp_rtt_min float,
+        rtcp_rtt_max float,
+        rtcp_rtt_mean float,
+        rtcp_rtt_std float,
+        rx_rtcp_rr_count double precision,
+        rx_rtcp_sr_count double precision,
+        tx_rtcp_rr_count double precision,
+        tx_rtcp_sr_count double precision,
+        local_host varchar,
+        local_port integer,
+        remote_host varchar,
+        remote_port integer,
+
+        rx_ssrc double precision,
+        rx_packets double precision,
+        rx_bytes double precision,
+        rx_total_lost double precision,
+
+        rx_payloads_transcoded varchar,
+        rx_payloads_relayed varchar,
+
+        rx_decode_errors double precision,
+        rx_out_of_buffer_errors double precision,
+        rx_rtp_parse_errors double precision,
+
+        rx_packet_delta_min float,
+        rx_packet_delta_max float,
+        rx_packet_delta_mean float,
+        rx_packet_delta_std float,
+        rx_packet_jitter_min float,
+        rx_packet_jitter_max float,
+        rx_packet_jitter_mean float,
+        rx_packet_jitter_std float,
+        rx_rtcp_jitter_min float,
+        rx_rtcp_jitter_max float,
+        rx_rtcp_jitter_mean float,
+        rx_rtcp_jitter_std float,
+
+        tx_ssrc double precision,
+        tx_packets double precision,
+        tx_bytes double precision,
+        tx_total_lost double precision,
+
+        tx_payloads_transcoded varchar,
+        tx_payloads_relayed varchar,
+        tx_rtcp_jitter_min float,
+        tx_rtcp_jitter_max float,
+        tx_rtcp_jitter_mean float,
+        tx_rtcp_jitter_std float
+    );
       create table rtp_statistics.streams(
         id bigserial primary key,
-        local_tag varchar not null,
+        time_start timestamptz,
+        time_end timestamptz,
         pop_id integer not null,
         node_id integer not null,
         gateway_id bigint not null,
         gateway_external_id bigint,
-        remote_jitter_var double precision,
-        remote_jitter_max double precision,
-        remote_jitter_mean double precision,
-        remote_jitter_min double precision,
-        local_jitter_var double precision,
-        local_jitter_max double precision,
-        local_jitter_mean double precision,
-        local_jitter_min double precision,
-        rtcp_jitter_var double precision,
-        rtcp_jitter_max double precision,
-        rtcp_jitter_mean double precision,
-        rtcp_jitter_min double precision,
-        local_rtt_var double precision,
-        local_rtt_max double precision,
-        local_rtt_mean double precision,
-        local_rtt_min double precision,
-        local_delta_var double precision,
-        local_delta_max double precision,
-        local_delta_mean double precision,
-        local_delta_min double precision
+        local_tag varchar,
+        rtcp_rtt_min float,
+        rtcp_rtt_max float,
+        rtcp_rtt_mean float,
+        rtcp_rtt_std float,
+        rx_rtcp_rr_count bigint,
+        rx_rtcp_sr_count bigint,
+        tx_rtcp_rr_count bigint,
+        tx_rtcp_sr_count bigint,
+        local_host varchar,
+        local_port integer,
+        remote_host varchar,
+        remote_port integer,
+        rx_ssrc bigint,
+        rx_packets bigint,
+        rx_bytes bigint,
+        rx_total_lost bigint,
+        rx_payloads_transcoded varchar,
+        rx_payloads_relayed varchar,
+        rx_decode_errors bigint,
+        rx_out_of_buffer_errors bigint,
+        rx_rtp_parse_errors bigint,
+        rx_packet_delta_min float,
+        rx_packet_delta_max float,
+        rx_packet_delta_mean float,
+        rx_packet_delta_std float,
+        rx_packet_jitter_min float,
+        rx_packet_jitter_max float,
+        rx_packet_jitter_mean float,
+        rx_packet_jitter_std float,
+        rx_rtcp_jitter_min float,
+        rx_rtcp_jitter_max float,
+        rx_rtcp_jitter_mean float,
+        rx_rtcp_jitter_std float,
+        tx_ssrc bigint,
+        tx_packets bigint,
+        tx_bytes bigint,
+        tx_total_lost bigint,
+        tx_payloads_transcoded varchar,
+        tx_payloads_relayed varchar,
+        tx_rtcp_jitter_min float,
+        tx_rtcp_jitter_max float,
+        tx_rtcp_jitter_mean float,
+        tx_rtcp_jitter_std float
     );
     create index on rtp_statistics.streams using btree (local_tag);
 
@@ -102,7 +181,8 @@ DECLARE
 
   v_nozerolen boolean;
   v_config sys.config%rowtype;
-  v_rtp_stream rtp_statistics.streams%rowtype;
+  v_rtp_stream rtp_statistics.stream_ty;
+  v_rtp_stream_data rtp_statistics.streams%rowtype;
 
 BEGIN
   --  raise warning 'type: % id: %', i_failed_resource_type_id, i_failed_resource_id;
@@ -265,21 +345,82 @@ BEGIN
   v_cdr.legb_rx_parse_errs:=v_rtp_stats_data.legb_rx_parse_errs;
 
 
-  for v_rtp_stream IN select * from json_populate_recordset(null::rtp_statistics.streams,i_rtp_statistics) LOOP
+  for v_rtp_stream IN select * from json_populate_recordset(null::rtp_statistics.stream_ty,i_rtp_statistics) LOOP
 
-   if v_rtp_stream.local_tag = i_local_tag then
-      v_rtp_stream.gateway_id = v_dynamic.orig_gw_id;
-      v_rtp_stream.gateway_external_id = v_dynamic.orig_gw_external_id;
-    else
-      v_rtp_stream.gateway_id = v_dynamic.term_gw_id;
-      v_rtp_stream.gateway_external_id = v_dynamic.term_gw_external_id;
-    end if;
-    v_rtp_stream.pop_id=i_pop_id;
-    v_rtp_stream.node_id=i_node_id;
-    v_rtp_stream.id=nextval('rtp_statistics.streams_id_seq'::regclass);
+        v_rtp_stream_data.id=nextval('rtp_statistics.streams_id_seq'::regclass);
 
-    INSERT INTO rtp_statistics.streams VALUES( v_rtp_stream.*);
-    perform event.rtp_statistics_insert_event(v_rtp_stream);
+        v_rtp_stream_data.pop_id=i_pop_id;
+        v_rtp_stream_data.node_id=i_node_id;
+        v_rtp_stream_data.local_tag=v_rtp_stream.local_tag;
+
+        if v_rtp_stream.local_tag = i_local_tag then
+          v_rtp_stream_data.gateway_id = v_dynamic.orig_gw_id;
+          v_rtp_stream_data.gateway_external_id = v_dynamic.orig_gw_external_id;
+        else
+          v_rtp_stream_data.gateway_id = v_dynamic.term_gw_id;
+          v_rtp_stream_data.gateway_external_id = v_dynamic.term_gw_external_id;
+        end if;
+
+        v_rtp_stream_data.time_start=to_timestamp(v_rtp_stream.time_start);
+        v_rtp_stream_data.time_end=to_timestamp(v_rtp_stream.time_end);
+
+        v_rtp_stream_data.rtcp_rtt_min=v_rtp_stream.rtcp_rtt_min;
+        v_rtp_stream_data.rtcp_rtt_max=v_rtp_stream.rtcp_rtt_max;
+        v_rtp_stream_data.rtcp_rtt_mean=v_rtp_stream.rtcp_rtt_mean;
+        v_rtp_stream_data.rtcp_rtt_std=v_rtp_stream.rtcp_rtt_std;
+        v_rtp_stream_data.rx_rtcp_rr_count=v_rtp_stream.rx_rtcp_rr_count::bigint;
+        v_rtp_stream_data.rx_rtcp_sr_count=v_rtp_stream.rx_rtcp_sr_count::bigint;
+        v_rtp_stream_data.tx_rtcp_rr_count=v_rtp_stream.tx_rtcp_rr_count::bigint;
+        v_rtp_stream_data.tx_rtcp_sr_count=v_rtp_stream.tx_rtcp_sr_count::bigint;
+
+        v_rtp_stream_data.local_host=v_rtp_stream.local_host;
+        v_rtp_stream_data.local_port=v_rtp_stream.local_port;
+        v_rtp_stream_data.remote_host=v_rtp_stream.remote_host;
+        v_rtp_stream_data.remote_port=v_rtp_stream.remote_port;
+
+        v_rtp_stream_data.rx_ssrc=v_rtp_stream.rx_ssrc::bigint;
+        v_rtp_stream_data.rx_packets=v_rtp_stream.rx_packets::bigint;
+        v_rtp_stream_data.rx_bytes=v_rtp_stream.rx_bytes::bigint;
+        v_rtp_stream_data.rx_total_lost=v_rtp_stream.rx_total_lost::bigint;
+
+        v_rtp_stream_data.rx_payloads_transcoded=v_rtp_stream.rx_payloads_transcoded;
+        v_rtp_stream_data.rx_payloads_relayed=v_rtp_stream.rx_payloads_relayed;
+
+        v_rtp_stream_data.rx_decode_errors=v_rtp_stream.rx_decode_errors::bigint;
+        v_rtp_stream_data.rx_out_of_buffer_errors=v_rtp_stream.rx_out_of_buffer_errors::bigint;
+        v_rtp_stream_data.rx_rtp_parse_errors=v_rtp_stream.rx_rtp_parse_errors::bigint;
+
+        v_rtp_stream_data.rx_packet_delta_min=v_rtp_stream.rx_packet_delta_min;
+        v_rtp_stream_data.rx_packet_delta_max=v_rtp_stream.rx_packet_delta_max;
+        v_rtp_stream_data.rx_packet_delta_mean=v_rtp_stream.rx_packet_delta_mean;
+        v_rtp_stream_data.rx_packet_delta_std=v_rtp_stream.rx_packet_delta_std;
+
+        v_rtp_stream_data.rx_packet_jitter_min=v_rtp_stream.rx_packet_jitter_min;
+        v_rtp_stream_data.rx_packet_jitter_max=v_rtp_stream.rx_packet_jitter_max;
+        v_rtp_stream_data.rx_packet_jitter_mean=v_rtp_stream.rx_packet_jitter_mean;
+        v_rtp_stream_data.rx_packet_jitter_std=v_rtp_stream.rx_packet_jitter_std;
+
+        v_rtp_stream_data.rx_rtcp_jitter_min=v_rtp_stream.rx_rtcp_jitter_min;
+        v_rtp_stream_data.rx_rtcp_jitter_max=v_rtp_stream.rx_rtcp_jitter_max;
+        v_rtp_stream_data.rx_rtcp_jitter_mean=v_rtp_stream.rx_rtcp_jitter_mean;
+        v_rtp_stream_data.rx_rtcp_jitter_std=v_rtp_stream.rx_rtcp_jitter_std;
+
+        v_rtp_stream_data.tx_ssrc=v_rtp_stream.tx_ssrc::bigint;
+
+        v_rtp_stream_data.tx_packets=v_rtp_stream.tx_packets::bigint;
+        v_rtp_stream_data.tx_bytes=v_rtp_stream.tx_bytes::bigint;
+        v_rtp_stream_data.tx_total_lost=v_rtp_stream.tx_total_lost::bigint;
+
+        v_rtp_stream_data.tx_payloads_transcoded=v_rtp_stream.tx_payloads_transcoded;
+        v_rtp_stream_data.tx_payloads_relayed=v_rtp_stream.tx_payloads_relayed;
+
+        v_rtp_stream_data.tx_rtcp_jitter_min=v_rtp_stream.tx_rtcp_jitter_min;
+        v_rtp_stream_data.tx_rtcp_jitter_max=v_rtp_stream.tx_rtcp_jitter_max;
+        v_rtp_stream_data.tx_rtcp_jitter_mean=v_rtp_stream.tx_rtcp_jitter_mean;
+        v_rtp_stream_data.tx_rtcp_jitter_std=v_rtp_stream.tx_rtcp_jitter_std;
+
+        INSERT INTO rtp_statistics.streams VALUES( v_rtp_stream_data.*);
+        perform event.rtp_statistics_insert_event(v_rtp_stream_data);
   end loop;
 
   v_cdr.global_tag=i_global_tag;
@@ -437,6 +578,6 @@ $BODY$
       drop FUNCTION event.rtp_statistics_insert_event(ev_data anyelement);
       select pgq.drop_queue('rtp_statistics');
 
-            }
+    }
   end
 end
