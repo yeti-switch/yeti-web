@@ -19981,7 +19981,7 @@ BEGIN
   select into v_ret *
   from sys.network_prefixes
   where prefix_range(prefix)@>prefix_range(i_dst)
-  order by length(prefix) desc
+  order by length(prefix_range(prefix)) desc
   limit 1;
 
   return v_ret;

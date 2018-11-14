@@ -3,6 +3,23 @@ class FixExclusiveRoutingAndPrefixLengthComparation < ActiveRecord::Migration[5.
 
     execute %q{
 
+CREATE or replace FUNCTION switch16.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+    LANGUAGE plpgsql COST 10
+    AS $$
+declare
+  v_ret sys.network_prefixes%rowtype;
+BEGIN
+
+  select into v_ret *
+  from sys.network_prefixes
+  where prefix_range(prefix)@>prefix_range(i_dst)
+  order by length(prefix) desc
+  limit 1;
+
+  return v_ret;
+END;
+$$;
+
 CREATE or replace FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch16.callprofile59_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
@@ -1044,6 +1061,24 @@ CREATE or replace FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i
 
   def up
     execute %q{
+
+CREATE or replace FUNCTION switch16.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+    LANGUAGE plpgsql COST 10
+    AS $$
+declare
+  v_ret sys.network_prefixes%rowtype;
+BEGIN
+
+  select into v_ret *
+  from sys.network_prefixes
+  where prefix_range(prefix)@>prefix_range(i_dst)
+  order by length(prefix_range(prefix)) desc
+  limit 1;
+
+  return v_ret;
+END;
+$$;
+
     CREATE or replace FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch16.callprofile59_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $$
