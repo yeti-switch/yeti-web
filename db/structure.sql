@@ -28099,14 +28099,14 @@ CREATE TABLE gui.admin_users (
     last_sign_in_ip character varying(255),
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
+    "group" integer DEFAULT 0 NOT NULL,
     enabled boolean DEFAULT true,
     username character varying NOT NULL,
     ssh_key text,
     stateful_filters boolean DEFAULT false NOT NULL,
     visible_columns json DEFAULT '{}'::json NOT NULL,
     per_page json DEFAULT '{}'::json NOT NULL,
-    saved_filters json DEFAULT '{}'::json NOT NULL,
-    "group" integer DEFAULT 0 NOT NULL
+    saved_filters json DEFAULT '{}'::json NOT NULL
 );
 
 
