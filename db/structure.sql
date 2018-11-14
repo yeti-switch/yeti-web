@@ -28099,7 +28099,7 @@ CREATE TABLE gui.admin_users (
     last_sign_in_ip character varying(255),
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
-    "group" integer DEFAULT 0 NOT NULL,
+    "group" integer DEFAULT 0,
     enabled boolean DEFAULT true,
     username character varying NOT NULL,
     ssh_key text,
