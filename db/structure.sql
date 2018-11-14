@@ -19981,7 +19981,7 @@ BEGIN
   select into v_ret *
   from sys.network_prefixes
   where prefix_range(prefix)@>prefix_range(i_dst)
-  order by length(prefix) desc
+  order by length(prefix_range(prefix)) desc
   limit 1;
 
   return v_ret;
@@ -22427,7 +22427,7 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
                   prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
                   length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-                order by length(ni.key)
+                order by length(prefix_range(ni.key))
                 desc limit 1;
 
           end case;
@@ -22497,7 +22497,7 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
               ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
               prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
               length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-            order by length(ni.key) desc limit 1;
+            order by length(prefix_range(ni.key)) desc limit 1;
           end case;
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -22556,7 +22556,7 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
         -- Areas and Tag detection-------------------------------------------
         v_ret.src_area_id:=(
           select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.src_prefix_routing)
-          order by length(prefix) desc limit 1
+          order by length(prefix_range(prefix)) desc limit 1
         );
 
         /*dbg{*/
@@ -22566,7 +22566,7 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         v_ret.dst_area_id:=(
           select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.dst_prefix_routing)
-          order by length(prefix) desc limit 1
+          order by length(prefix_range(prefix)) desc limit 1
         );
 
         /*dbg{*/
@@ -22621,7 +22621,7 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(rules.dst_prefix) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -22755,7 +22755,10 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -22798,7 +22801,10 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -22842,7 +22848,10 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -22889,11 +22898,14 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
+                  ) as exclusive_rank,
                   ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
                   t_dp.next_rate as dp_next_rate,
                   t_dp.locked as dp_locked,
@@ -22935,11 +22947,14 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
+                  ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -22982,12 +22997,18 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
-                  rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(coalesce(rpsr.prefix,'')) desc) as r2,
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -23043,12 +23064,17 @@ CREATE FUNCTION switch16.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
-                  rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(coalesce(rpsr.prefix,'')) desc) as r2,
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -23459,7 +23485,7 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
                   prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
                   length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-                order by length(ni.key)
+                order by length(prefix_range(ni.key))
                 desc limit 1;
 
           end case;
@@ -23529,7 +23555,7 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
               ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
               prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
               length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-            order by length(ni.key) desc limit 1;
+            order by length(prefix_range(ni.key)) desc limit 1;
           end case;
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -23588,7 +23614,7 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
         -- Areas and Tag detection-------------------------------------------
         v_ret.src_area_id:=(
           select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.src_prefix_routing)
-          order by length(prefix) desc limit 1
+          order by length(prefix_range(prefix)) desc limit 1
         );
 
         /*dbg{*/
@@ -23598,7 +23624,7 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         v_ret.dst_area_id:=(
           select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.dst_prefix_routing)
-          order by length(prefix) desc limit 1
+          order by length(prefix_range(prefix)) desc limit 1
         );
 
         /*dbg{*/
@@ -23653,7 +23679,7 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(rules.dst_prefix) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -23787,7 +23813,10 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -23830,7 +23859,10 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -23874,7 +23906,10 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -23921,11 +23956,14 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
+                  ) as exclusive_rank,
                   ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
                   t_dp.next_rate as dp_next_rate,
                   t_dp.locked as dp_locked,
@@ -23967,11 +24005,14 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
+                  ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -24014,12 +24055,18 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
-                  rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(coalesce(rpsr.prefix,'')) desc) as r2,
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -24075,12 +24122,17 @@ CREATE FUNCTION switch16.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
-                  rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(coalesce(rpsr.prefix,'')) desc) as r2,
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -24454,7 +24506,7 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
                   prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
                   length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-                order by length(ni.key)
+                order by length(prefix_range(ni.key))
                 desc limit 1;
 
           end case;
@@ -24512,7 +24564,7 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
               ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
               prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
               length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-            order by length(ni.key) desc limit 1;
+            order by length(prefix_range(ni.key)) desc limit 1;
           end case;
           
           IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
@@ -24562,14 +24614,14 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
         -- Areas and Tag detection-------------------------------------------
         v_ret.src_area_id:=(
           select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.src_prefix_routing)
-          order by length(prefix) desc limit 1
+          order by length(prefix_range(prefix)) desc limit 1
         );
 
         
 
         v_ret.dst_area_id:=(
           select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.dst_prefix_routing)
-          order by length(prefix) desc limit 1
+          order by length(prefix_range(prefix)) desc limit 1
         );
 
         
@@ -24615,7 +24667,7 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(rules.dst_prefix) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -24713,7 +24765,10 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.enabled as dp_enabled,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -24756,7 +24811,10 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -24800,7 +24858,10 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
                     ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
@@ -24847,11 +24908,14 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
+                  ) as exclusive_rank,
                   ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
                   t_dp.next_rate as dp_next_rate,
                   t_dp.locked as dp_locked,
@@ -24893,11 +24957,14 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
+                  ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -24940,12 +25007,18 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc,  yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
-                  rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(coalesce(rpsr.prefix,'')) desc) as r2,
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -25001,12 +25074,17 @@ CREATE FUNCTION switch16.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_vendor_account.*)::billing.accounts as s1_vendor_account,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id
-                    ORDER BY length(t_dp.prefix) desc, yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc
-                    ) as r,
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
-                    ) as exclusive_rank,
-                  rank() OVER (PARTITION BY t_dp.vendor_id ORDER BY length(coalesce(rpsr.prefix,'')) desc) as r2,
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
                   t_dp.priority as dp_metric_priority,
                   t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
                   t_dp.next_rate as dp_next_rate,
@@ -28446,34 +28524,6 @@ ALTER SEQUENCE public.contractors_id_seq OWNED BY public.contractors.id;
 
 
 --
--- Name: new_table_0; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE public.new_table_0 (
-    id integer NOT NULL
-);
-
-
---
--- Name: new_table_0_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.new_table_0_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: new_table_0_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.new_table_0_id_seq OWNED BY public.new_table_0.id;
-
-
---
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -30303,13 +30353,6 @@ ALTER TABLE ONLY public.contractors ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.new_table_0 ALTER COLUMN id SET DEFAULT nextval('public.new_table_0_id_seq'::regclass);
-
-
---
 -- Name: id; Type: DEFAULT; Schema: runtime_stats; Owner: -
 --
 
@@ -31640,14 +31683,6 @@ ALTER TABLE ONLY public.contractors
 
 ALTER TABLE ONLY public.contractors
     ADD CONSTRAINT contractors_pkey PRIMARY KEY (id);
-
-
---
--- Name: new_table_0_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY public.new_table_0
-    ADD CONSTRAINT new_table_0_pkey PRIMARY KEY (id);
 
 
 --
@@ -33386,6 +33421,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180620093010'),
 ('20180805100536'),
 ('20181011105642'),
-('20181018164004');
+('20181018164004'),
+('20181114213545');
 
 
