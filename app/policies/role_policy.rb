@@ -2,6 +2,8 @@ class RolePolicy < ApplicationPolicy
   ALLOWED_ACTIONS = [:read, :change, :remove, :perform].freeze
 
   class_attribute :_section_name, instance_writer: false
+  class_attribute :root_role, instance_writer: false
+  self.root_role = :root
 
   class << self
     def inherited(subclass)
@@ -37,11 +39,16 @@ class RolePolicy < ApplicationPolicy
 
   # action could be one of [:read, :change, :remove, :perform]
   def allowed_for_role?(action)
+    return true if user_root?
     if RolePolicy::ALLOWED_ACTIONS.exclude?(action)
       raise ArgumentError, "#{action} is not one of #{RolePolicy::ALLOWED_ACTIONS}"
     end
     return rule_when_no_config if roles_config.nil?
     user_roles.any? { |role| roles_config.dig(role, section_name, action) }
+  end
+
+  def user_root?
+    user && user.roles.reject(&:blank?).map(&:to_sym).include?(root_role)
   end
 
   def user_roles
