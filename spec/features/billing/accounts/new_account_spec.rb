@@ -10,6 +10,8 @@ describe 'Create new Account', type: :feature, js: true do
   end
 
   include_context :fill_form, 'new_account' do
+
+
     let(:attributes) do
       {
           name: "Account",
@@ -23,13 +25,18 @@ describe 'Create new Account', type: :feature, js: true do
           origination_capacity: 100,
           termination_capacity: 50,
           timezone_id: -> {
-            chosen_pick('#account_timezone_id+div', text: @tz.name)
+            chosen_pick('#account_timezone_id+div', text: @tz.display_name)
           }
       }
     end
 
     it 'creates new account succesfully' do
       click_on_submit
+
+      p System::Timezone.all.inspect
+      p Contractor.all.inspect
+
+
       expect(page).to have_css('.flash_notice', text: 'Account was successfully created.')
 
       expect(Account.last).to have_attributes(

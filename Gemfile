@@ -89,7 +89,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '4.8.0'
   gem 'database_cleaner'
-  gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec_api_documentation', '~> 5.0.0'
 end
 
@@ -100,8 +99,8 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'cucumber-rails', require: false
-  gem 'poltergeist'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'webmock'
 end
