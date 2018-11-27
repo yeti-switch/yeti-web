@@ -5,6 +5,41 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   config.batch_actions = false
   config.sort_order = 'request_time_desc'
 
+  acts_as_export :id,
+                 :request_time,
+                 [:gateway_name, proc {|row| row.gateway.try(:name)}],
+                 [:node_name, proc {|row| row.node.try(:name)}],
+                 [:pop_name, proc {|row| row.pop.try(:name)}],
+                 [:transport_protocol, proc {|row| row.transport_protocol.try(:name)}],
+                 :transport_remote_ip,
+                 :transport_remote_port,
+                 :transport_local_ip,
+                 :transport_local_port,
+                 [:origination_protocol, proc {|row| row.origination_protocol.try(:name)}],
+                 :origination_ip,
+                 :origination_port,
+                 :username,
+                 :realm,
+                 :request_method,
+                 :ruri,
+                 :from_uri,
+                 :to_uri,
+                 :call_id,
+                 :success,
+                 :code,
+                 :reason,
+                 :internal_reason,
+                 :nonce,
+                 :response,
+                 :x_yeti_auth,
+                 :diversion,
+                 :pai,
+                 :ppi,
+                 :privacy,
+                 :rpid,
+                 :rpid_privacy
+
+
   scope :all, show_count: false
   scope :successful, show_count: false
   scope :failed, show_count: false
