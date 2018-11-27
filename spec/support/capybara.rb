@@ -1,16 +1,18 @@
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
+require 'selenium-webdriver'
 
-Capybara.register_driver :poltergeist do |app|
-  driver_options = {
-    js_errors: true,
-    timeout: 40,
-    phantomjs: Phantomjs.path,
-    phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
-  }
-  Capybara::Poltergeist::Driver.new(app, driver_options)
+Capybara.register_driver(:headless_chrome) do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    args: %w[headless disable-gpu no-sandbox]
+  )
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara::Screenshot.register_driver(:headless_chrome) do |driver, path|
+  driver.browser.save_screenshot(path)
 end
 
 Capybara::Screenshot.prune_strategy = :keep_last_run
 Capybara.default_driver = :rack_test
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :headless_chrome
