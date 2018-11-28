@@ -1,15 +1,8 @@
 require 'spec_helper'
 
 describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
+  include_context :jsonapi_admin_headers
 
-  let(:admin_user) {create :admin_user}
-  let(:auth_token) {::Knock::AuthToken.new(payload: {sub: admin_user.id}).token}
-
-  before do
-    request.accept = 'application/vnd.api+json'
-    request.headers['Content-Type'] = 'application/vnd.api+json'
-    request.headers['Authorization'] = auth_token
-  end
   after {Cdr::AuthLog.destroy_all}
 
   describe 'GET index' do
@@ -129,7 +122,6 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
                                            'reason' => auth_log.reason,
                                            'internal-reason' => auth_log.internal_reason,
                                            'origination-ip' => auth_log.origination_ip,
-
                                            'origination-port'=>auth_log.origination_port,
                                            'origination-proto-id'=>auth_log.origination_proto_id,
 
@@ -138,6 +130,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
                                            'transport-remote-port'=>auth_log.transport_remote_port,
                                            'transport-local-ip'=>auth_log.transport_local_ip,
                                            'transport-local-port'=>auth_log.transport_local_port,
+
                                            'pop-id'=>auth_log.pop_id,
                                            'node-id'=>auth_log.node_id,
                                            'gateway-id'=>auth_log.gateway_id,
@@ -157,37 +150,37 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
                                            'privacy'=>auth_log.privacy,
                                            'rpid'=>auth_log.rpid,
                                            'rpid-privacy'=>auth_log.rpid_privacy
-
                                        },
                                        'relationships' => hash_including(
-
                                            'pop' => hash_including(
                                                'data' => {
                                                    'type' => 'pops',
                                                    'id' => auth_log.pop.id.to_s
-
                                                }
                                            ),
                                            'gateway' => hash_including(
                                                'data' => {
                                                    'type' => 'gateways',
                                                    'id' => auth_log.gateway.id.to_s
-
-
                                                }
                                            ),
                                            'node' => hash_including(
                                                'data' => {
                                                    'type' => 'nodes',
                                                    'id' => auth_log.node.id.to_s
-
                                                }
                                            ),
                                            'origination-protocol' => hash_including(
-                                               'data' => nil
+                                               'data' => {
+                                                   'type' => 'transport-protocols',
+                                                   'id' => auth_log.origination_protocol.id.to_s
+                                               }
                                            ),
                                            'transport-protocol' => hash_including(
-                                               'data' => nil
+                                               'data' => {
+                                                   'type' => 'transport-protocols',
+                                                   'id' => auth_log.transport_protocol.id.to_s
+                                               }
                                            ),
                                        ),
                                    )
