@@ -9,9 +9,9 @@ ActiveAdmin.register Account do
                        lambda do
                          {
                            contractor_id: Contractor.pluck(:name, :id),
-                           balance: 'text',
                            min_balance: 'text',
                            max_balance: 'text',
+                           vat: 'text',
                            balance_low_threshold: 'text',
                            balance_high_threshold: 'text',
                            origination_capacity: 'text',
@@ -34,6 +34,7 @@ ActiveAdmin.register Account do
                  :balance,
                  :min_balance,
                  :max_balance,
+                 :vat,
                  :balance_low_threshold,
                  :balance_high_threshold,
                  :origination_capacity,
@@ -49,7 +50,7 @@ ActiveAdmin.register Account do
   scope :insufficient_balance
 
   permit_params :uuid, :contractor_id, :balance,
-                :min_balance, :max_balance,
+                :min_balance, :max_balance, :vat,
                 :balance_low_threshold, :balance_high_threshold,
                 :name, :origination_capacity,
                 :termination_capacity, :customer_invoice_period_id, :vendor_invoice_period_id,
@@ -121,7 +122,9 @@ ActiveAdmin.register Account do
   filter :contractor, input_html: {class: 'chosen'}
   filter :name
   filter :balance
+  filter :vat
   filter :external_id
+
 
   show do |s|
     tabs do
@@ -220,11 +223,11 @@ ActiveAdmin.register Account do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :uuid, as: :string
       f.input :name
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance
       f.input :max_balance
+      f.input :vat
       f.input :balance_low_threshold
       f.input :balance_high_threshold
       f.input :origination_capacity
@@ -239,6 +242,7 @@ ActiveAdmin.register Account do
       f.input :send_invoices_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
       f.input :send_balance_notifications_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
       f.input :timezone, as: :select, input_html: {class: 'chosen'}
+      f.input :uuid, as: :string
     end
     f.actions
   end

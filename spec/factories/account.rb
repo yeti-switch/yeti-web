@@ -3,6 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "account#{n}" }
     association :contractor, vendor: true
     balance 0
+    vat 23.1
     min_balance 0
     max_balance 0
     origination_capacity 1

@@ -22,6 +22,7 @@ describe 'Export Accounts', type: :feature do
         ['Name',                    item.name],
         ['Contractor name',         item.contractor.name],
         ['Balance',                 item.balance.to_s],
+        ['Vat',                     item.vat.to_s],
         ['Min balance',             item.min_balance.to_s],
         ['Max balance',             item.max_balance.to_s],
         ['Balance low threshold',   item.balance_low_threshold.to_s],

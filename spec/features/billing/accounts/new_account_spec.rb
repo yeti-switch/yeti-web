@@ -19,6 +19,7 @@ describe 'Create new Account', type: :feature, js: true do
         },
         min_balance: -100,
         max_balance: 100,
+        vat: 44.1,
         balance_low_threshold: -90,
         balance_high_threshold: 90,
         origination_capacity: 100,
