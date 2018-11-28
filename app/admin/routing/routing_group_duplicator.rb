@@ -5,6 +5,8 @@ ActiveAdmin.register Routing::RoutingGroupDuplicator do
 
   act_as_clone_helper_for RoutingGroup
 
+  permit_params :id, :name
+
   controller do
     # Redirects to index page instead of rendering updated resource
     def create
