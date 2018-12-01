@@ -5,6 +5,8 @@ ActiveAdmin.register Routing::RateplanDuplicator do
 
   act_as_clone_helper_for Rateplan
 
+  permit_params :id, :name, :profit_control_mode_id, send_quality_alarms_to: []
+
   controller do
     # Redirects to index page instead of rendering updated resource
     def create
@@ -23,8 +25,6 @@ ActiveAdmin.register Routing::RateplanDuplicator do
       end
     end
   end
-
-  permit_params :id, :name, :profit_control_mode_id, send_quality_alarms_to: []
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
