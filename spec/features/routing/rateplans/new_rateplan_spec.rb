@@ -15,7 +15,7 @@ describe 'Create new Rateplan', type: :feature, js: true do
       }
     end
 
-    it 'creates new payment succesfully' do
+    it 'creates new rateplan succesfully' do
       click_on_submit
       expect(page).to have_css('.flash_notice', text: 'Rateplan was successfully created.')
 

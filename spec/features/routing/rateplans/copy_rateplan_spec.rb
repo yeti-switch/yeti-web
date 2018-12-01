@@ -1,10 +1,7 @@
 require 'spec_helper'
 
 describe 'Copy Rateplan action', type: :feature do
-
-  # TODO: move login admin to `shared_context :login_as_admin`
-  let(:admin_user) { create :admin_user }
-  before { login_as(admin_user, scope: :admin_user) }
+  include_context :login_as_admin
 
   shared_examples :cloned_rateplan_is_valid do
 
