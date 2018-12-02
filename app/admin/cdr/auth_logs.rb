@@ -97,5 +97,12 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :pop
   filter :node
   filter :username
+  filter :origination_ip
+  filter :transport_remote_ip
+  filter :transport_local_ip
+  filter :ruri
+  filter :from_uri
+  filter :to_uri
+  filter :call_id
 
 end
