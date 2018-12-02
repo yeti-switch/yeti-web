@@ -2,8 +2,10 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   attributes :name,
              :balance, :min_balance, :max_balance,
              :balance_low_threshold, :balance_high_threshold, :send_balance_notifications_to,
+             :destination_rate_limit,
              :external_id, :uuid,
-             :origination_capacity, :termination_capacity, :send_invoices_to
+             :origination_capacity, :termination_capacity, :total_capacity,
+             :send_invoices_to
 
   has_one :contractor
   has_one :timezone, class_name: 'System::Timezone'
@@ -33,9 +35,11 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
       :balance_low_threshold,
       :balance_high_threshold,
       :send_balance_notifications_to,
+      :destination_rate_limit,
       :vat,
       :origination_capacity,
       :termination_capacity,
+      :total_capacity,
       :send_invoices_to,
 
       :contractor,

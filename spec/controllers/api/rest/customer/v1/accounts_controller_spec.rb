@@ -72,7 +72,10 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
             'balance' => account.balance.to_s,
             'min-balance' => account.min_balance.to_s,
             'max-balance' => account.max_balance.to_s,
-            'origination-capacity' => account.origination_capacity
+            'destination-rate-limit' => account.destination_rate_limit.to_s,
+            'origination-capacity' => account.origination_capacity,
+            'termination-capacity' => account.termination_capacity,
+            'total-capacity' => account.total_capacity,
           }
         })
       end

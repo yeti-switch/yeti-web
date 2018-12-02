@@ -19,6 +19,9 @@
 #  autogenerate_customer_invoices :boolean          default(FALSE), not null
 #  balance_high_threshold         :decimal(, )
 #  balance_low_threshold          :decimal(, )
+#  total_capacity                 :integer
+#  destination_rate_limit         :decimal(, )
+#  vat                            :decimal(, )
 #
 
 class Importing::Account < Importing::Base
@@ -26,9 +29,20 @@ class Importing::Account < Importing::Base
   attr_accessor :file
   belongs_to :contractor, class_name: '::Contractor'
 
-  self.import_attributes = ['contractor_id', 'name', 'balance',
-                            'min_balance', 'max_balance', 'origination_capacity', 'termination_capacity',
-                            'balance_high_threshold', 'balance_low_threshold']
+  self.import_attributes = [
+      'contractor_id',
+      'name',
+      'balance',
+      'vat',
+      'min_balance',
+      'max_balance',
+      'origination_capacity',
+      'termination_capacity',
+      'total_capacity',
+      'balance_high_threshold',
+      'balance_low_threshold',
+      'destination_rate_limit'
+  ]
 
   self.import_class = ::Account
 

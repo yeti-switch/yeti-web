@@ -5,10 +5,13 @@ FactoryGirl.define do
     contractor_name nil
     contractor_id nil
     balance 0
+    vat 18.2
     min_balance 0
     max_balance 0
+    destination_rate_limit 0.332
     origination_capacity 1
     termination_capacity 1
+    total_capacity 3
     error_string nil
   end
 end

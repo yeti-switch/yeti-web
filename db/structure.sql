@@ -4497,7 +4497,9 @@ CREATE TABLE billing.accounts (
     send_balance_notifications_to integer[],
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     external_id bigint,
-    vat numeric DEFAULT 0 NOT NULL
+    vat numeric DEFAULT 0 NOT NULL,
+    total_capacity smallint,
+    destination_rate_limit numeric
 );
 
 
@@ -27259,7 +27261,10 @@ CREATE TABLE data_import.import_accounts (
     autogenerate_vendor_invoices boolean DEFAULT false NOT NULL,
     autogenerate_customer_invoices boolean DEFAULT false NOT NULL,
     balance_high_threshold numeric,
-    balance_low_threshold numeric
+    balance_low_threshold numeric,
+    total_capacity smallint,
+    destination_rate_limit numeric,
+    vat numeric
 );
 
 
@@ -33422,6 +33427,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180805100536'),
 ('20181011105642'),
 ('20181018164004'),
-('20181114213545');
+('20181114213545'),
+('20181202175700');
 
 
