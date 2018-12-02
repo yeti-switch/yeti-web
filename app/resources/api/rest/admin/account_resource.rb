@@ -2,7 +2,7 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   attributes :name,
              :balance, :min_balance, :max_balance,
              :balance_low_threshold, :balance_high_threshold, :send_balance_notifications_to,
-             :destination_rate_limit,
+             :destination_rate_limit, :max_call_duration,
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
              :send_invoices_to
@@ -36,6 +36,7 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
       :balance_high_threshold,
       :send_balance_notifications_to,
       :destination_rate_limit,
+      :max_call_duration,
       :vat,
       :origination_capacity,
       :termination_capacity,

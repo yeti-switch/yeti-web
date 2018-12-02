@@ -28,6 +28,7 @@
 #  vat                           :decimal(, )      default(0.0), not null
 #  total_capacity                :integer
 #  destination_rate_limit        :decimal(, )
+#  max_call_duration             :integer
 #
 
 class Account < Yeti::ActiveRecord
@@ -72,6 +73,7 @@ class Account < Yeti::ActiveRecord
 
   validates_numericality_of :vat, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false #this is percents
   validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
+  validates_numericality_of :max_call_duration, greater_than_or_equal_to: 0, allow_nil: true
 
   after_initialize do
     if self.new_record?

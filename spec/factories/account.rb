@@ -5,6 +5,7 @@ FactoryGirl.define do
     balance 0
     vat 23.1
     destination_rate_limit 0.3444
+    max_call_duration 36000
     min_balance 0
     max_balance 0
     origination_capacity 1

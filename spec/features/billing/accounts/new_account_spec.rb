@@ -21,6 +21,7 @@ describe 'Create new Account', type: :feature, js: true do
         max_balance: 100,
         vat: 44.1,
         destination_rate_limit: 0.11,
+        max_call_duration: 100500,
         balance_low_threshold: -90,
         balance_high_threshold: 90,
         origination_capacity: 100,
@@ -46,6 +47,7 @@ describe 'Create new Account', type: :feature, js: true do
         balance_low_threshold: attributes[:balance_low_threshold],
         balance_high_threshold: attributes[:balance_high_threshold],
         destination_rate_limit: attributes[:destination_rate_limit],
+        max_call_duration: attributes[:max_call_duration],
         origination_capacity: attributes[:origination_capacity],
         termination_capacity: attributes[:termination_capacity],
         total_capacity: attributes[:total_capacity],
@@ -55,3 +57,4 @@ describe 'Create new Account', type: :feature, js: true do
   end
 
 end
+

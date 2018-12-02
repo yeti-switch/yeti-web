@@ -4499,7 +4499,8 @@ CREATE TABLE billing.accounts (
     external_id bigint,
     vat numeric DEFAULT 0 NOT NULL,
     total_capacity smallint,
-    destination_rate_limit numeric
+    destination_rate_limit numeric,
+    max_call_duration integer
 );
 
 
@@ -27264,7 +27265,8 @@ CREATE TABLE data_import.import_accounts (
     balance_low_threshold numeric,
     total_capacity smallint,
     destination_rate_limit numeric,
-    vat numeric
+    vat numeric,
+    max_call_duration integer
 );
 
 

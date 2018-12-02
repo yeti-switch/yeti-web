@@ -22,6 +22,7 @@
 #  total_capacity                 :integer
 #  destination_rate_limit         :decimal(, )
 #  vat                            :decimal(, )
+#  max_call_duration              :integer
 #
 
 class Importing::Account < Importing::Base
@@ -41,7 +42,8 @@ class Importing::Account < Importing::Base
       'total_capacity',
       'balance_high_threshold',
       'balance_low_threshold',
-      'destination_rate_limit'
+      'destination_rate_limit',
+      'max_call_duration'
   ]
 
   self.import_class = ::Account

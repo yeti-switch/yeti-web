@@ -18,6 +18,7 @@ ActiveAdmin.register Account do
                            origination_capacity: 'text',
                            termination_capacity: 'text',
                            total_capacity: 'text',
+                           max_call_duration: 'text',
                            vendor_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
                            customer_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
                            vendor_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
@@ -40,6 +41,7 @@ ActiveAdmin.register Account do
                  :balance_low_threshold,
                  :balance_high_threshold,
                  :destination_rate_limit,
+                 :max_call_duration,
                  :origination_capacity,
                  :termination_capacity,
                  :total_capacity,
@@ -57,7 +59,7 @@ ActiveAdmin.register Account do
                 :min_balance, :max_balance, :vat,
                 :balance_low_threshold, :balance_high_threshold,
                 :name, :origination_capacity, :termination_capacity, :total_capacity,
-                :destination_rate_limit,
+                :destination_rate_limit, :max_call_duration,
                 :customer_invoice_period_id, :vendor_invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
@@ -102,6 +104,7 @@ ActiveAdmin.register Account do
     column :balance_high_threshold
     column :vat
     column :destination_rate_limit
+    column :max_call_duration
 
     column :origination_capacity
     column :termination_capacity
@@ -157,6 +160,7 @@ ActiveAdmin.register Account do
           row :balance_low_threshold
           row :balance_high_threshold
           row :destination_rate_limit
+          row :max_call_duration
 
           row :name
           row :origination_capacity
@@ -240,7 +244,9 @@ ActiveAdmin.register Account do
       f.input :vat
       f.input :balance_low_threshold
       f.input :balance_high_threshold
+
       f.input :destination_rate_limit
+      f.input :max_call_duration
 
       f.input :origination_capacity
       f.input :termination_capacity
