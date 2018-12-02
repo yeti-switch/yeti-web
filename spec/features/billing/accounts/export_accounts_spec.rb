@@ -27,8 +27,11 @@ describe 'Export Accounts', type: :feature do
         ['Max balance',             item.max_balance.to_s],
         ['Balance low threshold',   item.balance_low_threshold.to_s],
         ['Balance high threshold',  item.balance_high_threshold.to_s],
+        ['Destination rate limit',  item.destination_rate_limit.to_s],
+        ['Max call duration',       item.max_call_duration.to_s],
         ['Origination capacity',    item.origination_capacity.to_s],
         ['Termination capacity',    item.termination_capacity.to_s],
+        ['Total capacity',          item.total_capacity.to_s],
         ['Customer invoice period', item.customer_invoice_template.to_s],
         ['Vendor invoice period',   item.vendor_invoice_period.to_s]
       ]

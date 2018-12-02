@@ -26,6 +26,9 @@
 #  uuid                          :uuid             not null
 #  external_id                   :integer
 #  vat                           :decimal(, )      default(0.0), not null
+#  total_capacity                :integer
+#  destination_rate_limit        :decimal(, )
+#  max_call_duration             :integer
 #
 
 class Account < Yeti::ActiveRecord
@@ -63,11 +66,14 @@ class Account < Yeti::ActiveRecord
   validates_presence_of :name, :contractor, :timezone, :vat
   validates_numericality_of :max_balance, greater_than_or_equal_to: ->(account) { account.min_balance }
 
-  validates_numericality_of :termination_capacity, :origination_capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates_numericality_of :termination_capacity, :origination_capacity, :total_capacity,
+                            greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
   validates_uniqueness_of :external_id, allow_blank: true
 
   validates_numericality_of :vat, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false #this is percents
+  validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
+  validates_numericality_of :max_call_duration, greater_than_or_equal_to: 0, allow_nil: true
 
   after_initialize do
     if self.new_record?

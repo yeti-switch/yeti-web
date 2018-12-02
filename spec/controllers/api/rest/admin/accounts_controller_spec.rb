@@ -41,9 +41,12 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
           'balance','min-balance', 'max-balance',
           'uuid',
           'external-id',
-          'origination-capacity', 'termination-capacity', 'send-invoices-to',
+          'origination-capacity', 'termination-capacity', 'total-capacity',
+          'send-invoices-to',
           'balance-low-threshold',
           'balance-high-threshold',
+          'destination-rate-limit',
+          'max-call-duration',
           'send-balance-notifications-to'
         )
       end
@@ -76,10 +79,13 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
           'max-balance': 10,
           'balance-low-threshold': 90,
           'balance-high-threshold': 95,
+          'destination-rate-limit': 0.333,
+          'max-call-duration': 24000,
           'send-balance-notifications-to': Array.wrap(Billing::Contact.collection.first.id),
           'send-invoices-to': Billing::Contact.collection.first.id,
           'origination-capacity': 10,
-          'termination-capacity': 3
+          'termination-capacity': 3,
+          'total-capacity': 11
         }
       end
 
@@ -122,10 +128,13 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
           'max-balance': 100,
           'balance-low-threshold': 90,
           'balance-high-threshold': 95,
+          'destination-rate-limit': 0.333,
+          'max-call-duration': 24001,
           'send-balance-notifications-to': Billing::Contact.collection.first.id,
           'send-invoices-to': Billing::Contact.collection.first.id,
           'origination-capacity': 10,
-          'termination-capacity': 3
+          'termination-capacity': 3,
+          'total-capacity': 11
         }
       end
 

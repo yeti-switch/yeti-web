@@ -20,10 +20,13 @@ describe 'Create new Account', type: :feature, js: true do
         min_balance: -100,
         max_balance: 100,
         vat: 44.1,
+        destination_rate_limit: 0.11,
+        max_call_duration: 100500,
         balance_low_threshold: -90,
         balance_high_threshold: 90,
         origination_capacity: 100,
         termination_capacity: 50,
+        total_capacity: 101,
         timezone_id: -> {
           find('label[for="account_timezone_id"]').click # focus-out from "Send balance notifications to"
           chosen_pick('#account_timezone_id_chosen', text: @tz.display_name)
@@ -43,11 +46,15 @@ describe 'Create new Account', type: :feature, js: true do
         min_balance: attributes[:min_balance],
         balance_low_threshold: attributes[:balance_low_threshold],
         balance_high_threshold: attributes[:balance_high_threshold],
+        destination_rate_limit: attributes[:destination_rate_limit],
+        max_call_duration: attributes[:max_call_duration],
         origination_capacity: attributes[:origination_capacity],
         termination_capacity: attributes[:termination_capacity],
+        total_capacity: attributes[:total_capacity],
         timezone_id: @tz.id
       )
     end
   end
 
 end
+
