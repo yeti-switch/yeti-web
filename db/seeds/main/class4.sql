@@ -959,6 +959,10 @@ insert into class4.gateway_inband_dtmf_filtering_modes(id,name) values('1','Inhe
 insert into class4.gateway_inband_dtmf_filtering_modes(id,name) values('2','Disable');
 insert into class4.gateway_inband_dtmf_filtering_modes(id,name) values('3','Remove DTMF');
 
+insert into class4.routeset_discriminators(name) values('default');
+select setval('class4.routeset_discriminators_id_seq'::regclass, 1, true);
+
+
 -- Completed on 2018-01-19 16:08:50 EET
 
 --

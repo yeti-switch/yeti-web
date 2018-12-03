@@ -1,5 +1,5 @@
 ActiveAdmin.register Routing::RoutingPlan do
-  menu parent: "Routing", label: "Routing plans", priority: 52
+  menu parent: "Routing", label: "Routing plans", priority: 50
 
   acts_as_audit
   acts_as_clone

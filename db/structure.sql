@@ -6033,6 +6033,7 @@ CREATE TABLE class4.dialpeers (
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
+    routeset_discriminator_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -26915,6 +26916,35 @@ ALTER SEQUENCE class4.registrations_id_seq OWNED BY class4.registrations.id;
 
 
 --
+-- Name: routeset_discriminators; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.routeset_discriminators (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: routeset_discriminators_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.routeset_discriminators_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: routeset_discriminators_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.routeset_discriminators_id_seq OWNED BY class4.routeset_discriminators.id;
+
+
+--
 -- Name: routing_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -30104,6 +30134,13 @@ ALTER TABLE ONLY class4.registrations ALTER COLUMN id SET DEFAULT nextval('class
 -- Name: id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
+ALTER TABLE ONLY class4.routeset_discriminators ALTER COLUMN id SET DEFAULT nextval('class4.routeset_discriminators_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
 ALTER TABLE ONLY class4.routing_groups ALTER COLUMN id SET DEFAULT nextval('class4.routing_groups_id_seq'::regclass);
 
 
@@ -31250,6 +31287,22 @@ ALTER TABLE ONLY class4.registrations
 
 ALTER TABLE ONLY class4.registrations
     ADD CONSTRAINT registrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: routeset_discriminators_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.routeset_discriminators
+    ADD CONSTRAINT routeset_discriminators_name_key UNIQUE (name);
+
+
+--
+-- Name: routeset_discriminators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.routeset_discriminators
+    ADD CONSTRAINT routeset_discriminators_pkey PRIMARY KEY (id);
 
 
 --
@@ -32840,6 +32893,14 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
+-- Name: dialpeers_routeset_discriminator_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.dialpeers
+    ADD CONSTRAINT dialpeers_routeset_discriminator_id_fkey FOREIGN KEY (routeset_discriminator_id) REFERENCES class4.routeset_discriminators(id);
+
+
+--
 -- Name: dialpeers_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -33430,6 +33491,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20181011105642'),
 ('20181018164004'),
 ('20181114213545'),
-('20181202175700');
+('20181202175700'),
+('20181203204823');
 
 

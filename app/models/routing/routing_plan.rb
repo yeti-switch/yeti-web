@@ -9,7 +9,7 @@
 #  use_lnp        :boolean          default(FALSE), not null
 #
 
-class Routing::RoutingPlan < ActiveRecord::Base
+class Routing::RoutingPlan < Yeti::ActiveRecord
   has_and_belongs_to_many :routing_groups, join_table: "class4.routing_plan_groups", class_name: 'RoutingGroup'
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :routing_plan_id, dependent: :restrict_with_error
   has_many :static_routes, class_name: 'Routing::RoutingPlanStaticRoute',

@@ -2,45 +2,46 @@
 #
 # Table name: dialpeers
 #
-#  id                      :integer          not null, primary key
-#  enabled                 :boolean          not null
-#  prefix                  :string           not null
-#  src_rewrite_rule        :string
-#  dst_rewrite_rule        :string
-#  acd_limit               :float            default(0.0), not null
-#  asr_limit               :float            default(0.0), not null
-#  gateway_id              :integer
-#  routing_group_id        :integer          not null
-#  next_rate               :decimal(, )      not null
-#  connect_fee             :decimal(, )      default(0.0), not null
-#  vendor_id               :integer          not null
-#  account_id              :integer          not null
-#  src_rewrite_result      :string
-#  dst_rewrite_result      :string
-#  locked                  :boolean          default(FALSE), not null
-#  priority                :integer          default(100), not null
-#  capacity                :integer
-#  lcr_rate_multiplier     :decimal(, )      default(1.0), not null
-#  initial_rate            :decimal(, )      not null
-#  initial_interval        :integer          default(1), not null
-#  next_interval           :integer          default(1), not null
-#  valid_from              :datetime         not null
-#  valid_till              :datetime         not null
-#  gateway_group_id        :integer
-#  force_hit_rate          :float
-#  network_prefix_id       :integer
-#  created_at              :datetime         not null
-#  short_calls_limit       :float            default(1.0), not null
-#  current_rate_id         :integer
-#  external_id             :integer
-#  src_name_rewrite_rule   :string
-#  src_name_rewrite_result :string
-#  exclusive_route         :boolean          default(FALSE), not null
-#  dst_number_min_length   :integer          default(0), not null
-#  dst_number_max_length   :integer          default(100), not null
-#  reverse_billing         :boolean          default(FALSE), not null
-#  routing_tag_ids         :integer          default([]), not null, is an Array
-#  routing_tag_mode_id     :integer          default(0), not null
+#  id                        :integer          not null, primary key
+#  enabled                   :boolean          not null
+#  prefix                    :string           not null
+#  src_rewrite_rule          :string
+#  dst_rewrite_rule          :string
+#  acd_limit                 :float            default(0.0), not null
+#  asr_limit                 :float            default(0.0), not null
+#  gateway_id                :integer
+#  routing_group_id          :integer          not null
+#  next_rate                 :decimal(, )      not null
+#  connect_fee               :decimal(, )      default(0.0), not null
+#  vendor_id                 :integer          not null
+#  account_id                :integer          not null
+#  src_rewrite_result        :string
+#  dst_rewrite_result        :string
+#  locked                    :boolean          default(FALSE), not null
+#  priority                  :integer          default(100), not null
+#  capacity                  :integer
+#  lcr_rate_multiplier       :decimal(, )      default(1.0), not null
+#  initial_rate              :decimal(, )      not null
+#  initial_interval          :integer          default(1), not null
+#  next_interval             :integer          default(1), not null
+#  valid_from                :datetime         not null
+#  valid_till                :datetime         not null
+#  gateway_group_id          :integer
+#  force_hit_rate            :float
+#  network_prefix_id         :integer
+#  created_at                :datetime         not null
+#  short_calls_limit         :float            default(1.0), not null
+#  current_rate_id           :integer
+#  external_id               :integer
+#  src_name_rewrite_rule     :string
+#  src_name_rewrite_result   :string
+#  exclusive_route           :boolean          default(FALSE), not null
+#  dst_number_min_length     :integer          default(0), not null
+#  dst_number_max_length     :integer          default(100), not null
+#  reverse_billing           :boolean          default(FALSE), not null
+#  routing_tag_ids           :integer          default([]), not null, is an Array
+#  routing_tag_mode_id       :integer          default(0), not null
+#  routeset_discriminator_id :integer          default(1), not null
 #
 
 class Dialpeer < Yeti::ActiveRecord
@@ -56,6 +57,8 @@ class Dialpeer < Yeti::ActiveRecord
   has_many :dialpeer_next_rates, class_name: 'DialpeerNextRate', foreign_key: :dialpeer_id, dependent: :delete_all
   belongs_to :current_rate, class_name: 'DialpeerNextRate', foreign_key: :current_rate_id
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
+  belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id
+
  # has_many :routing_plans, class_name: 'Routing::RoutingPlan', foreign_key: :routing_group_id
   #has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan', join_table: "class4.routing_plan_groups", association_foreign_key: :routing_group_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
@@ -63,7 +66,7 @@ class Dialpeer < Yeti::ActiveRecord
   validates_presence_of :account, :routing_group, :vendor, :valid_from, :valid_till,
                         :initial_rate, :next_rate,
                         :initial_interval, :next_interval, :connect_fee,
-                        :routing_tag_mode
+                        :routing_tag_mode, :routeset_discriminator
   validates_numericality_of :initial_rate, :next_rate, :connect_fee
   validates_numericality_of :initial_interval, :next_interval, greater_than: 0 # we have DB constraints for this
   validates_numericality_of :acd_limit, greater_than_or_equal_to: 0.00
