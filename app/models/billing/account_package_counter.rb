@@ -14,4 +14,6 @@ class Billing::AccountPackageCounter < Yeti::ActiveRecord
 
   belongs_to :account, class_name: 'Account', foreign_key: :account_id
 
+  validates :account_id, presence: true
+  validates :prefix, uniqueness: { scope: :account_id }
 end

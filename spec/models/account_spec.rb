@@ -6,7 +6,7 @@ describe Account, type: :model do
     should validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     should validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
   end
-  
+
   context '#destroy' do
     let!(:account) { create(:account) }
 
@@ -79,6 +79,45 @@ describe Account, type: :model do
       end
     end
 
+  end
+
+  # Billing packages
+  #
+  describe 'assign Package' do
+    let!(:account) { create(:account, package_id: nil) }
+
+    subject do
+      account.package = package
+      account.save
+    end
+
+    context 'when package configurations exists' do
+      let(:package) { create(:package, :with_two_configurations) }
+      let(:new_counters) { Billing::AccountPackageCounter.all }
+
+      # account_package_counters will store counter of a minutes by directions
+      it 'copies package_configs into account_package_counters' do
+        expect { subject }.to change { Billing::AccountPackageCounter.count }.by(2)
+
+        expect(new_counters.pluck(:account_id).uniq).to eq [account.id]
+        expect(new_counters.pluck(:prefix)).to eq(Billing::PackageConfig.pluck(:prefix))
+        expect(new_counters.pluck(:amount)).to eq(Billing::PackageConfig.pluck(:amount))
+        expect(new_counters.pluck(:expired_at).uniq).to eq([nil])
+      end
+
+      # charge account, regardless of number of configurations copied(even zero)
+      xit 'creates new Payment' do
+        # pending
+      end
+    end
+
+    context 'when none configurations exists' do
+      # it 'creates new Payment' do
+    end
+
+    context 'when account has another package assigned' do
+      # TODO: what to do?
+    end
   end
 
 end

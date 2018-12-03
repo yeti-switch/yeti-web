@@ -132,6 +132,8 @@ class Account < Yeti::ActiveRecord
 
   end
 
+  after_save :copy_package_configurations
+
   before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
@@ -202,6 +204,16 @@ class Account < Yeti::ActiveRecord
     api_access.each do |record|
       record.account_ids.delete(id)
       record.save!
+    end
+  end
+
+  def copy_package_configurations
+    return true if package.nil?
+
+    package.configurations.each do |config|
+      Billing::AccountPackageCounter.create account_id: id,
+                                            prefix: config.prefix,
+                                            amount: config.amount
     end
   end
 end
