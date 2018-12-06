@@ -24,6 +24,7 @@ FactoryGirl.define do
     valid_till '2020-01-01 00:00:00'
 
     association :routing_group
+    association :routeset_discriminator
 
     after :build do |dialpeer|
       dialpeer.vendor ||= create(:contractor, vendor: true)
