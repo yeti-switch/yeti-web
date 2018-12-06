@@ -12,6 +12,7 @@ describe Importing::Dialpeer do
   include_context :init_gateway_group, name: 'iBasis Gateway Group'
   include_context :init_codec_group
   include_context :init_gateway, name: 'iBasis UA'
+  include_context :init_routeset_discriminator
 
   let(:preview_item) { described_class.last }
 

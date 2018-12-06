@@ -11,6 +11,7 @@ describe 'Importing::Dialpeer => Dialpeer delayed_job' do
       include_context :init_gateway_group, name: 'iBasis Gateway Group'
       include_context :init_codec_group
       include_context :init_gateway, name: 'iBasis UA'
+      include_context :init_routeset_discriminator
       include_context :init_importing_dialpeer
       let(:preview_class) { Importing::Dialpeer }
     end

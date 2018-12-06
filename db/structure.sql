@@ -27626,7 +27626,9 @@ CREATE TABLE data_import.import_dialpeers (
     dst_number_min_length integer,
     dst_number_max_length integer,
     routing_tag_mode_id smallint,
-    routing_tag_mode_name character varying
+    routing_tag_mode_name character varying,
+    routeset_discriminator_id smallint,
+    routeset_discriminator_name character varying
 );
 
 

@@ -29,5 +29,11 @@ FactoryGirl.define do
     trait :with_id do
       id { Cdr::AuthLog.connection.select_value("SELECT nextval('auth_log.auth_log_id_seq')").to_i }
     end
+
+    before(:create) do |record, evaluator|
+      # Create partition for current+next monthes if not exists
+      Cdr::AuthLogTable.add_partition
+    end
+
   end
 end
