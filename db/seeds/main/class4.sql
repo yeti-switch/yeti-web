@@ -928,8 +928,9 @@ SELECT pg_catalog.setval('sortings_id_seq', 3, true);
 -- Data for Name: transport_protocols; Type: TABLE DATA; Schema: class4; Owner: yeti
 --
 
-INSERT INTO transport_protocols (id, name) VALUES (1, 'UDP');
-INSERT INTO transport_protocols (id, name) VALUES (2, 'TCP');
+INSERT INTO class4.transport_protocols (id, name) VALUES (1, 'UDP');
+INSERT INTO class4.transport_protocols (id, name) VALUES (2, 'TCP');
+INSERT INTO class4.transport_protocols (id, name) VALUES (3, 'TLS');
 
 
 -- Completed on 2017-08-20 19:12:27 EEST

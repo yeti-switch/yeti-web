@@ -104,7 +104,8 @@ ActiveAdmin.register Gateway do
            :dtmf_send_mode, :dtmf_receive_mode,
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-           :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode
+           :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
+           :network_protocol_priority, :media_encryption_mode
 
   controller do
     def resource_params
@@ -150,6 +151,7 @@ ActiveAdmin.register Gateway do
     column :host, sortable: 'host' do |gw|
       "#{gw.host}:#{gw.port}".chomp(":")
     end
+    column :network_protocol_priority
 
     column :allow_termination
     column :allow_origination
@@ -266,6 +268,7 @@ ActiveAdmin.register Gateway do
     column :rtp_force_relay_cn
     column :force_one_way_early_media
     column :rtp_interface_name
+    column :media_encryption_mode
     ## DTMF
     column :force_dtmf_relay
     column :dtmf_send_mode
@@ -331,7 +334,7 @@ ActiveAdmin.register Gateway do
           f.input :sst_session_expires
           f.input :sst_minimum_timer
           f.input :sst_maximum_timer
-          f.input :session_refresh_method
+          f.input :session_refresh_method, as: :select, include_blank: false
           f.input :sst_accept501
         end
       end
@@ -371,8 +374,10 @@ ActiveAdmin.register Gateway do
         end
         f.inputs "Termination" do
           f.input :transport_protocol, as: :select, include_blank: false
+          f.input :use_sips_schema
           f.input :host
           f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
+          f.input :network_protocol_priority, as: :select, include_blank: false
           f.input :resolve_ruri
 
           f.input :auth_enabled
@@ -389,7 +394,7 @@ ActiveAdmin.register Gateway do
           f.input :term_next_hop
           f.input :term_disconnect_policy
           f.input :term_append_headers_req
-          f.input :sdp_alines_filter_type
+          f.input :sdp_alines_filter_type, as: :select, include_blank: false
           f.input :sdp_alines_filter_list
           f.input :ringing_timeout
           f.input :allow_1xx_without_to_tag
@@ -417,8 +422,8 @@ ActiveAdmin.register Gateway do
       end
       tab :media do
         f.inputs "Media settings" do
-          f.input :sdp_c_location
-          f.input :codec_group
+          f.input :sdp_c_location, as: :select, include_blank: false
+          f.input :codec_group, as: :select, include_blank: false
           f.input :anonymize_sdp
           f.input :proxy_media
           f.input :single_codec_in_200ok
@@ -434,6 +439,7 @@ ActiveAdmin.register Gateway do
           f.input :rtp_force_relay_cn
           f.input :force_one_way_early_media
           f.input :rtp_interface_name
+          f.input :media_encryption_mode, as: :select, include_blank: false
         end
       end
       tab :dtmf do
@@ -537,6 +543,7 @@ ActiveAdmin.register Gateway do
             row :transport_protocol
             row :host
             row :port
+            row :network_protocol_priority
             row :resolve_ruri
             row :auth_enabled
             row :auth_user
@@ -599,6 +606,7 @@ ActiveAdmin.register Gateway do
           row :rtp_force_relay_cn
           row :force_one_way_early_media
           row :rtp_interface_name
+          row :media_encryption_mode
         end
       end
       tab :dtmf do

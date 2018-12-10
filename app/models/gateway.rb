@@ -138,6 +138,8 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :rel100_mode, class_name: 'Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
   belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
+  belongs_to :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority', foreign_key: :network_protocol_priority_id
+  belongs_to :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode', foreign_key: :media_encryption_mode_id
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
@@ -166,7 +168,9 @@ class Gateway < Yeti::ActiveRecord
   validates_numericality_of :port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
 
   validates_numericality_of :fake_180_timer, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
-  validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol
+  validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
+                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location
+
   validates_presence_of :incoming_auth_username, :incoming_auth_password,
                         if: Proc.new { |gw|
                           !gw.incoming_auth_username.blank? or !gw.incoming_auth_password.blank?
