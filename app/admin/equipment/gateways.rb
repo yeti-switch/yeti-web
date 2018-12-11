@@ -52,6 +52,7 @@ ActiveAdmin.register Gateway do
                  :dialog_nat_handling, # :transparent_dialog_id,
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
+                 [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
                  :host, :port, :resolve_ruri,
                  [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) }],
                  :diversion_rewrite_rule, :diversion_rewrite_result,
@@ -105,7 +106,7 @@ ActiveAdmin.register Gateway do
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
-           :network_protocol_priority, :media_encryption_mode
+           :network_protocol_priority, :media_encryption_mode, :sip_schema
 
   controller do
     def resource_params
@@ -374,7 +375,7 @@ ActiveAdmin.register Gateway do
         end
         f.inputs "Termination" do
           f.input :transport_protocol, as: :select, include_blank: false
-          f.input :use_sips_schema
+          f.input :sip_schema, as: :select, include_blank: false
           f.input :host
           f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
           f.input :network_protocol_priority, as: :select, include_blank: false

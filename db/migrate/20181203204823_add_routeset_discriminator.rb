@@ -33,13 +33,21 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
       insert into class4.gateway_media_encryption_modes(id, name) values(2, 'SRTP SDES');
       insert into class4.gateway_media_encryption_modes(id, name) values(3, 'SRTP DTLS');
 
+      create table sys.sip_schemas (
+        id smallint primary key,
+        name varchar not null unique
+      );
+      insert into sys.sip_schemas(id,name) values(1,'sip');
+      insert into sys.sip_schemas(id,name) values(2,'sips');
+
       alter table class4.gateways
-        add use_sips_schema boolean not null default false,
+        add sip_schema_id smallint not null default 1 references sys.sip_schemas(id),
         add network_protocol_priority_id smallint not null default 1 references class4.gateway_network_protocol_priorities(id),
         add media_encryption_mode_id smallint not null default 1 references class4.gateway_media_encryption_modes(id);
 
       alter table data_import.import_gateways
-        add use_sips_schema boolean,
+        add sip_schema_id smallint,
+        add sip_schema_name varchar,
         add network_protocol_priority_id smallint,
         add network_protocol_priority_name varchar,
         add media_encryption_mode_id smallint,
@@ -58,12 +66,13 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
 
       delete from class4.transport_protocols where id=3;
       alter table class4.gateways
-        drop column use_sips_schema,
+        drop column sip_schema_id,
         drop column network_protocol_priority_id,
         drop column media_encryption_mode_id;
 
       alter table data_import.import_gateways
-        drop column use_sips_schema,
+        drop column sip_schema_id,
+        drop column sip_schema_name,
         drop column network_protocol_priority_id,
         drop column network_protocol_priority_name,
         drop column media_encryption_mode_id,
@@ -71,6 +80,7 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
 
       drop table class4.gateway_network_protocol_priorities;
       drop table class4.gateway_media_encryption_modes;
+      drop table sys.sip_schemas;
 
 }
   end
