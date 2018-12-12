@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  account_id :integer          not null
 #  prefix     :string           default(""), not null
-#  amount     :integer          default(0), not null
+#  duration   :integer          default(0), not null
 #  expired_at :datetime
 #
 

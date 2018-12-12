@@ -22,7 +22,7 @@ class BillingPackages < ActiveRecord::Migration[5.1]
         id bigserial primary key,
         account_id integer not null references billing.accounts(id),
         prefix varchar not null default '',
-        amount integer not null default 0,
+        duration integer not null default 0,
         expired_at timestamptz
       );
 

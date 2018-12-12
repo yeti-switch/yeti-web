@@ -101,7 +101,7 @@ describe Account, type: :model do
 
         expect(new_counters.pluck(:account_id).uniq).to eq [account.id]
         expect(new_counters.pluck(:prefix)).to eq(Billing::PackageConfig.pluck(:prefix))
-        expect(new_counters.pluck(:amount)).to eq(Billing::PackageConfig.pluck(:amount))
+        expect(new_counters.pluck(:duration)).to eq([0,0])
         expect(new_counters.pluck(:expired_at).uniq).to eq([nil])
       end
 

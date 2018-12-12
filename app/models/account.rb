@@ -212,8 +212,7 @@ class Account < Yeti::ActiveRecord
 
     package.configurations.each do |config|
       Billing::AccountPackageCounter.create account_id: id,
-                                            prefix: config.prefix,
-                                            amount: config.amount
+                                            prefix: config.prefix
     end
   end
 end
