@@ -111,6 +111,9 @@
 #  rx_inband_dtmf_filtering_mode_id :integer          default(1), not null
 #  tx_inband_dtmf_filtering_mode_id :integer          default(1), not null
 #  weight                           :integer          default(100), not null
+#  sip_schema_id                    :integer          default(1), not null
+#  network_protocol_priority_id     :integer          default(1), not null
+#  media_encryption_mode_id         :integer          default(1), not null
 #
 
 require 'resolv'

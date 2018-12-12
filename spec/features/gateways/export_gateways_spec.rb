@@ -122,7 +122,10 @@ describe 'Export Gateways', type: :feature do
         ['Suppress early media',               item.suppress_early_media.to_s],
         ['Send lnp information',               item.send_lnp_information.to_s],
         ['Force one way early media',          item.force_one_way_early_media.to_s],
-        ['Max 30x redirects',                  item.max_30x_redirects.to_s]
+        ['Max 30x redirects',                  item.max_30x_redirects.to_s],
+        ['Media encryption mode',              item.media_encryption_mode.name],
+        ['Network protocol priority name',     item.network_protocol_priority.name],
+        ['Sip schema name',                    item.sip_schema.name]
       ]
     )
   end

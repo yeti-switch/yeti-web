@@ -38200,10 +38200,6 @@ INSERT INTO timezones VALUES (1214, 'Zulu', 'UTC', '00:00:00', false);
 
 SELECT pg_catalog.setval('timezones_id_seq', 1214, true);
 
-
--- Completed on 2017-08-20 19:31:46 EEST
-
---
--- PostgreSQL database dump complete
---
+insert into sys.sip_schemas(id,name) values(1,'sip');
+insert into sys.sip_schemas(id,name) values(2,'sips');
 

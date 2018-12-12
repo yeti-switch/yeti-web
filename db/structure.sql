@@ -6154,7 +6154,10 @@ CREATE TABLE class4.gateways (
     incoming_auth_password character varying,
     rx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
     tx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
-    weight smallint DEFAULT 100 NOT NULL
+    weight smallint DEFAULT 100 NOT NULL,
+    sip_schema_id smallint DEFAULT 1 NOT NULL,
+    network_protocol_priority_id smallint DEFAULT 1 NOT NULL,
+    media_encryption_mode_id smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -26490,6 +26493,26 @@ CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
 
 
 --
+-- Name: gateway_media_encryption_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.gateway_media_encryption_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: gateway_network_protocol_priorities; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.gateway_network_protocol_priorities (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: gateway_rel100_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -27843,7 +27866,13 @@ CREATE TABLE data_import.import_gateways (
     rx_inband_dtmf_filtering_mode_name character varying,
     tx_inband_dtmf_filtering_mode_id smallint,
     tx_inband_dtmf_filtering_mode_name character varying,
-    weight smallint
+    weight smallint,
+    sip_schema_id smallint,
+    sip_schema_name character varying,
+    network_protocol_priority_id smallint,
+    network_protocol_priority_name character varying,
+    media_encryption_mode_id smallint,
+    media_encryption_mode_name character varying
 );
 
 
@@ -29842,6 +29871,16 @@ ALTER SEQUENCE sys.sensors_id_seq OWNED BY sys.sensors.id;
 
 
 --
+-- Name: sip_schemas; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sys.sip_schemas (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -31097,6 +31136,38 @@ ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
 
 ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
     ADD CONSTRAINT gateway_inband_dtmf_filtering_modes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gateway_media_encryption_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_media_encryption_modes
+    ADD CONSTRAINT gateway_media_encryption_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_media_encryption_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_media_encryption_modes
+    ADD CONSTRAINT gateway_media_encryption_modes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gateway_network_protocol_priorities_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_network_protocol_priorities
+    ADD CONSTRAINT gateway_network_protocol_priorities_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_network_protocol_priorities_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_network_protocol_priorities
+    ADD CONSTRAINT gateway_network_protocol_priorities_pkey PRIMARY KEY (id);
 
 
 --
@@ -32388,6 +32459,22 @@ ALTER TABLE ONLY sys.sensors
 
 
 --
+-- Name: sip_schemas_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.sip_schemas
+    ADD CONSTRAINT sip_schemas_name_key UNIQUE (name);
+
+
+--
+-- Name: sip_schemas_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.sip_schemas
+    ADD CONSTRAINT sip_schemas_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -33007,6 +33094,22 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways_media_encryption_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_media_encryption_mode_id_fkey FOREIGN KEY (media_encryption_mode_id) REFERENCES class4.gateway_media_encryption_modes(id);
+
+
+--
+-- Name: gateways_network_protocol_priority_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_network_protocol_priority_id_fkey FOREIGN KEY (network_protocol_priority_id) REFERENCES class4.gateway_network_protocol_priorities(id);
+
+
+--
 -- Name: gateways_orig_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -33092,6 +33195,14 @@ ALTER TABLE ONLY class4.gateways
 
 ALTER TABLE ONLY class4.gateways
     ADD CONSTRAINT gateways_session_refresh_method_id_fkey FOREIGN KEY (session_refresh_method_id) REFERENCES class4.session_refresh_methods(id);
+
+
+--
+-- Name: gateways_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
 
 
 --

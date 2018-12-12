@@ -53,7 +53,10 @@ ActiveAdmin.register Gateway do
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
-                 :host, :port, :resolve_ruri,
+                 :host,
+                 :port,
+                 [:network_protocol_priority_name, proc { |row| row.network_protocol_priority.try(:name) }],
+                 :resolve_ruri,
                  [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) }],
                  :diversion_rewrite_rule, :diversion_rewrite_result,
                  :src_name_rewrite_rule, :src_name_rewrite_result,
@@ -87,6 +90,7 @@ ActiveAdmin.register Gateway do
                  [:dtmf_receive_mode_name, proc { |row| row.dtmf_receive_mode.try(:name) }],
                  [:rx_inband_dtmf_filtering_mode, proc { |row| row.rx_inband_dtmf_filtering_mode.try(:name) }],
                  [:tx_inband_dtmf_filtering_mode, proc { |row| row.tx_inband_dtmf_filtering_mode.try(:name) }],
+                 [:media_encryption_mode, proc { |row| row.media_encryption_mode.try(:name) }],
                  :suppress_early_media,
                  :send_lnp_information,
                  :force_one_way_early_media, :max_30x_redirects
@@ -347,66 +351,78 @@ ActiveAdmin.register Gateway do
         end
       end
       tab :signaling do
-        f.inputs "General" do
-          f.input :relay_options
-          f.input :relay_reinvite
-          f.input :relay_hold
-          f.input :relay_prack
-          f.input :rel100_mode, as: :select, include_blank: false
-          f.input :relay_update
-          f.input :transit_headers_from_origination, hint: "Use comma as delimiter"
-          f.input :transit_headers_from_termination, hint: "Use comma as delimiter"
-          f.input :sip_interface_name
+        columns do
+          column do
+            f.inputs "General" do
+              f.input :relay_options
+              f.input :relay_reinvite
+              f.input :relay_hold
+              f.input :relay_prack
+              f.input :rel100_mode, as: :select, include_blank: false
+              f.input :relay_update
+              f.input :transit_headers_from_origination, hint: "Use comma as delimiter"
+              f.input :transit_headers_from_termination, hint: "Use comma as delimiter"
+              f.input :sip_interface_name
+
+            end
+
+            f.inputs "Origination" do
+              f.input :orig_next_hop
+              f.input :orig_append_headers_req
+              f.input :orig_use_outbound_proxy
+              f.input :orig_force_outbound_proxy
+              f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
+              f.input :orig_outbound_proxy
+              f.input :transparent_dialog_id
+              f.input :dialog_nat_handling
+              f.input :orig_disconnect_policy
+
+              f.input :incoming_auth_username
+              f.input :incoming_auth_password, as: :string, input_html: {autocomplete: 'off'}
+            end
+
+          end
+          column  do
+
+            f.inputs "Termination" do
+              f.input :transport_protocol, as: :select, include_blank: false
+              f.input :sip_schema, as: :select, include_blank: false
+              f.input :host
+              f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
+              f.input :network_protocol_priority, as: :select, include_blank: false
+              f.input :resolve_ruri
+
+              f.input :auth_enabled
+              f.input :auth_user
+              f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}
+              f.input :auth_from_user
+              f.input :auth_from_domain
+
+              f.input :term_use_outbound_proxy
+              f.input :term_force_outbound_proxy
+              f.input :term_proxy_transport_protocol, as: :select, include_blank: false
+              f.input :term_outbound_proxy
+              f.input :term_next_hop_for_replies
+              f.input :term_next_hop
+              f.input :term_disconnect_policy
+              f.input :term_append_headers_req
+              f.input :sdp_alines_filter_type, as: :select, include_blank: false
+              f.input :sdp_alines_filter_list
+              f.input :ringing_timeout
+              f.input :allow_1xx_without_to_tag
+              f.input :max_30x_redirects
+              f.input :max_transfers
+              f.input :sip_timer_b
+              f.input :dns_srv_failover_timer
+              f.input :suppress_early_media
+              f.input :fake_180_timer, hint: "Timeout in ms."
+              f.input :send_lnp_information
+            end
+          end
 
         end
-        f.inputs "Origination" do
-          f.input :orig_next_hop
-          f.input :orig_append_headers_req
-          f.input :orig_use_outbound_proxy
-          f.input :orig_force_outbound_proxy
-          f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
-          f.input :orig_outbound_proxy
-          f.input :transparent_dialog_id
-          f.input :dialog_nat_handling
-          f.input :orig_disconnect_policy
 
-          f.input :incoming_auth_username
-          f.input :incoming_auth_password, as: :string, input_html: {autocomplete: 'off'}
-        end
-        f.inputs "Termination" do
-          f.input :transport_protocol, as: :select, include_blank: false
-          f.input :sip_schema, as: :select, include_blank: false
-          f.input :host
-          f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
-          f.input :network_protocol_priority, as: :select, include_blank: false
-          f.input :resolve_ruri
 
-          f.input :auth_enabled
-          f.input :auth_user
-          f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}
-          f.input :auth_from_user
-          f.input :auth_from_domain
-
-          f.input :term_use_outbound_proxy
-          f.input :term_force_outbound_proxy
-          f.input :term_proxy_transport_protocol, as: :select, include_blank: false
-          f.input :term_outbound_proxy
-          f.input :term_next_hop_for_replies
-          f.input :term_next_hop
-          f.input :term_disconnect_policy
-          f.input :term_append_headers_req
-          f.input :sdp_alines_filter_type, as: :select, include_blank: false
-          f.input :sdp_alines_filter_list
-          f.input :ringing_timeout
-          f.input :allow_1xx_without_to_tag
-          f.input :max_30x_redirects
-          f.input :max_transfers
-          f.input :sip_timer_b
-          f.input :dns_srv_failover_timer
-          f.input :suppress_early_media
-          f.input :fake_180_timer, hint: "Timeout in ms."
-          f.input :send_lnp_information
-        end
       end
       tab "Translations" do
         f.inputs "Translations" do
@@ -542,6 +558,7 @@ ActiveAdmin.register Gateway do
         panel "Termination" do
           attributes_table_for s do
             row :transport_protocol
+            row :sip_schema
             row :host
             row :port
             row :network_protocol_priority
