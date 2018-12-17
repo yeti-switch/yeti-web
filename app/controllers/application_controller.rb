@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  # https://github.com/paper-trail-gem/paper_trail/blob/v9.0.0/README.md#1b-installation
+  before_action :set_paper_trail_whodunnit
+
   class Custom404 < StandardError
 
   end
@@ -39,7 +42,7 @@ class ApplicationController < ActionController::Base
 
 
   def user_for_paper_trail
-    admin_user_signed_in? ? current_admin_user.try(:id) : 'Unknown user'
+    admin_user_signed_in? ? current_admin_user.try!(:id) : 'Unknown user'
   end
 
   def current_ability
