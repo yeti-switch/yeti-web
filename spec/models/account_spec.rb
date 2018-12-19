@@ -84,7 +84,9 @@ describe Account, type: :model do
   # Billing packages
   #
   describe 'assign Package' do
-    let!(:account) { create(:account, package_id: nil) }
+    let!(:account) do
+      create(:account, balance: 1000, package_id: nil)
+    end
 
     subject do
       account.package = package
@@ -92,22 +94,49 @@ describe Account, type: :model do
     end
 
     context 'when package configurations exists' do
-      let(:package) { create(:package, :with_two_configurations) }
+      let(:package) do
+        create(:package, :with_two_configurations, price: 110.00)
+      end
+
       let(:new_counters) { Billing::AccountPackageCounter.all }
 
       # account_package_counters will store counter of a minutes by directions
       it 'copies package_configs into account_package_counters' do
         expect { subject }.to change { Billing::AccountPackageCounter.count }.by(2)
 
-        expect(new_counters.pluck(:account_id).uniq).to eq [account.id]
-        expect(new_counters.pluck(:prefix)).to eq(Billing::PackageConfig.pluck(:prefix))
-        expect(new_counters.pluck(:duration)).to eq([0,0])
-        expect(new_counters.pluck(:expired_at).uniq).to eq([nil])
+        expect(new_counters.to_a).to match (
+          [
+            have_attributes(account_id: account.id,
+                            prefix: Billing::PackageConfig.first.prefix,
+                            duration: 0,
+                            expired_at: nil),
+            have_attributes(account_id: account.id,
+                            prefix: Billing::PackageConfig.second.prefix,
+                            duration: 0,
+                            expired_at: nil)
+          ]
+        )
       end
 
-      # charge account, regardless of number of configurations copied(even zero)
-      xit 'creates new Payment' do
-        # pending
+      # charge account for a `package.price`
+      it 'creates new Payment' do
+        subject
+        expect(Payment.last).to have_attributes(
+          account_id: account.id,
+          amount: -package.price,
+          notes: nil
+        )
+      end
+
+      it 'raise error when not enough money and do nothing' do
+        account.update(balance: 109.99)
+
+        expect {
+          expect(subject).to be_falsey
+          expect(account.errors[:package_id][0]).to eq('Not enough money for package configuration')
+        }.not_to change {
+          [Payment.count, Billing::AccountPackageCounter.count]
+        }
       end
     end
 

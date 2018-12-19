@@ -78,6 +78,8 @@ class Account < Yeti::ActiveRecord
   validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
   validates_numericality_of :max_call_duration, greater_than_or_equal_to: 0, allow_nil: true
 
+  validate :check_possibility_of_package_configuration_handling
+
   after_initialize do
     if self.new_record?
       self.balance ||= 0
@@ -132,7 +134,7 @@ class Account < Yeti::ActiveRecord
 
   end
 
-  after_save :copy_package_configurations
+  after_commit :copy_package_configurations, on: [:create, :update]
 
   before_destroy :remove_self_from_related_api_access!
 
@@ -207,12 +209,27 @@ class Account < Yeti::ActiveRecord
     end
   end
 
+  before_save do
+    @old_package_id = package_id_was
+  end
+
+  def check_possibility_of_package_configuration_handling
+    if package_id_changed? && package_id.present?
+      unless (balance - package.price).positive?
+        errors.add(:package_id, 'Not enough money for package configuration')
+      end
+    end
+  end
+
   def copy_package_configurations
-    return true if package.nil?
+    return true unless package_id
+    return true if package_id == @old_package_id
 
     package.configurations.each do |config|
       Billing::AccountPackageCounter.create account_id: id,
                                             prefix: config.prefix
     end
+
+    payments.create(amount: -package.price)
   end
 end
