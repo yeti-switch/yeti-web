@@ -49,14 +49,14 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     before { post :create, params: { data: { type: 'routing-plans', attributes: attributes } } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', 'use-lnp': true } }
+      let(:attributes) { { name: 'name', 'use-lnp': true, 'max-rerouting-attempts': 9 } }
 
       it { expect(response.status).to eq(201) }
       it { expect(Routing::RoutingPlan.count).to eq(1) }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { name: nil, 'use-lnp': true } }
+      let(:attributes) { { name: nil, 'use-lnp': true, 'max-rerouting-attempts': 11 } }
 
       it { expect(response.status).to eq(422) }
       it { expect(Routing::RoutingPlan.count).to eq(0) }
@@ -72,14 +72,14 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     } }
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', 'use-lnp': true } }
+      let(:attributes) { { name: 'name', 'use-lnp': true, 'max-rerouting-attempts': 7 } }
 
       it { expect(response.status).to eq(200) }
       it { expect(routing_plan.reload.name).to eq('name') }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { name: nil, 'use-lnp': true } }
+      let(:attributes) { { name: nil, 'use-lnp': true, 'max-rerouting-attempts': 12 } }
 
       it { expect(response.status).to eq(422) }
       it { expect(routing_plan.reload.name).to_not eq(nil) }

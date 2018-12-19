@@ -30,6 +30,7 @@ resource 'Gateways' do
     session-refresh-method
     transport-protocol sdp-alines-filter-type
     term-proxy-transport-protocol orig-proxy-transport-protocol
+    network-protocol-priority media-encryption-mode sip-schema
   )
   optional_relationships = %i(
     gateway-group pop sensor diversion-policy term-disconnect-policy 
@@ -78,10 +79,15 @@ resource 'Gateways' do
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'term-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'orig-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
+    let(:'sip-schema') { wrap_relationship(:'sip-schemas', 1)}
+    let(:'media-encryption-mode') { wrap_relationship(:'gateway-media-encryption-modes', 2)}
+    let(:'network-protocol-priority') { wrap_relationship(:'gateway-network-protocol-priorities', 3)}
     let(:'contractor') { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
     let(:'codec-group') { wrap_relationship(:'codec-groups', create(:codec_group).id) }
 
+
     example_request 'create new entry' do
+#      p response_body
       expect(status).to eq(201)
     end
   end

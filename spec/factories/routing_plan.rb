@@ -3,5 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "routing_plan_#{n}" }
     sorting_id 1
     rate_delta_max 0
+    max_rerouting_attempts 9
+    use_lnp false
   end
 end

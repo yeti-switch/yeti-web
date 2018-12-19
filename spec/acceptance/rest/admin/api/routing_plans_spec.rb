@@ -29,7 +29,7 @@ resource 'Routing plans' do
   post '/api/rest/admin/routing-plans' do
     parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
 
-    jsonapi_attributes([:name], [:rate_delta_max, :use_lnp])
+    jsonapi_attributes([:name], [:rate_delta_max, :use_lnp, :max_rerouting_attempts])
     jsonapi_relationships([], [:sorting])
 
     let(:name) { 'name' }
@@ -43,7 +43,7 @@ resource 'Routing plans' do
     parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
     parameter :id, 'Routing plan ID', scope: :data, required: true
 
-    jsonapi_attributes([:name], [:rate_delta_max, :use_lnp])
+    jsonapi_attributes([:name], [:rate_delta_max, :use_lnp, :max_rerouting_attempts])
 
     let(:id) { create(:routing_plan).id }
     let(:name) { 'name' }

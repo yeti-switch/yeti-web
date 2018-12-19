@@ -27105,7 +27105,8 @@ CREATE TABLE class4.routing_plans (
     name character varying NOT NULL,
     sorting_id integer DEFAULT 1 NOT NULL,
     rate_delta_max numeric DEFAULT 0 NOT NULL,
-    use_lnp boolean DEFAULT false NOT NULL
+    use_lnp boolean DEFAULT false NOT NULL,
+    max_rerouting_attempts smallint DEFAULT 10 NOT NULL
 );
 
 

@@ -99,6 +99,7 @@ Rails.application.routes.draw do
             jsonapi_resources :dtmf_send_modes
             jsonapi_resources :sensor_levels
             jsonapi_resources :sensors
+            jsonapi_resources :sip_schemas
             jsonapi_resources :smtp_connections
             jsonapi_resources :countries
             jsonapi_resources :networks
@@ -107,6 +108,8 @@ Rails.application.routes.draw do
           namespace :equipment do
             jsonapi_resources :gateway_rel100_modes
             jsonapi_resources :gateway_inband_dtmf_filtering_modes
+            jsonapi_resources :gateway_network_protocol_priorities
+            jsonapi_resources :gateway_media_encryption_modes
             jsonapi_resources :transport_protocols
             namespace :radius do
               jsonapi_resources :accounting_profiles

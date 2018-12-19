@@ -1,7 +1,7 @@
 class Api::Rest::Admin::RoutingPlanResource < JSONAPI::Resource
   model_name 'Routing::RoutingPlan'
 
-  attributes :name, :rate_delta_max, :use_lnp
+  attributes :name, :rate_delta_max, :use_lnp, :max_rerouting_attempts
 
   has_one :sorting
 
@@ -12,7 +12,8 @@ class Api::Rest::Admin::RoutingPlanResource < JSONAPI::Resource
       :name,
       :rate_delta_max,
       :use_lnp,
-      :sorting
+      :sorting,
+      :max_rerouting_attempts
     ]
   end
 

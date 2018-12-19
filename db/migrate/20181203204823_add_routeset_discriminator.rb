@@ -52,6 +52,8 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
         add network_protocol_priority_name varchar,
         add media_encryption_mode_id smallint,
         add media_encryption_mode_name varchar;
+
+      alter table class4.routing_plans add max_rerouting_attempts smallint not null default 10;
     }
   end
 
@@ -81,6 +83,8 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
       drop table class4.gateway_network_protocol_priorities;
       drop table class4.gateway_media_encryption_modes;
       drop table sys.sip_schemas;
+
+      alter table class4.routing_plans drop column max_rerouting_attempts;
 
 }
   end

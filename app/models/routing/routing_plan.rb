@@ -2,11 +2,12 @@
 #
 # Table name: routing_plans
 #
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  sorting_id     :integer          default(1), not null
-#  rate_delta_max :decimal(, )      default(0.0), not null
-#  use_lnp        :boolean          default(FALSE), not null
+#  id                     :integer          not null, primary key
+#  name                   :string           not null
+#  sorting_id             :integer          default(1), not null
+#  rate_delta_max         :decimal(, )      default(0.0), not null
+#  use_lnp                :boolean          default(FALSE), not null
+#  max_rerouting_attempts :integer          default(10), not null
 #
 
 class Routing::RoutingPlan < Yeti::ActiveRecord
@@ -20,9 +21,9 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-
-  validates_presence_of :name
-  validates_uniqueness_of  :name , allow_blank: false
+  validates_presence_of :name, :max_rerouting_attempts
+  validates_uniqueness_of  :name, allow_blank: false
+  validates_numericality_of :max_rerouting_attempts, greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true
 
   scope :having_static_routes, -> { joins(:sorting).merge( Sorting.with_static_routes ) }
 
