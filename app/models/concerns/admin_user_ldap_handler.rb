@@ -6,6 +6,8 @@ module AdminUserLdapHandler
     before_update :get_ldap_attributes
     before_validation :get_ldap_attributes, on: :create
     include LdapPasswordHelper
+    class_attribute :default_ldap_roles, instance_writer: false
+    self.default_ldap_roles = [RolePolicy.root_role]
   end
 
   def get_ldap_attributes
@@ -13,11 +15,15 @@ module AdminUserLdapHandler
       new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail').try!(:first)
       self.email = new_email if new_email
       new_roles =  Devise::LDAP::Adapter.get_ldap_param(username, 'roles')
-      self.roles = new_roles if new_roles
+      self.roles = new_roles ? Array.wrap(new_roles) : default_ldap_roles
     rescue Net::LDAP::LdapError => e
       Rails.logger.error{ e.message }
       #nothing
     end
+  end
+
+  def default_ldap_roles
+    [root_role]
   end
 
   class_methods do

@@ -48,7 +48,7 @@ class RolePolicy < ApplicationPolicy
   end
 
   def user_root?
-    user && user.roles.reject(&:blank?).map(&:to_sym).include?(root_role)
+    user && root_role && user.roles.reject(&:blank?).map(&:to_sym).include?(root_role)
   end
 
   def user_roles
