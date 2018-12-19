@@ -29,7 +29,12 @@ class AdminUser < ActiveRecord::Base
 
   has_one :billing_contact, class_name: 'Billing::Contact', dependent: :destroy, autosave: true
 
+  before_validation do
+    self.roles = roles.reject(&:blank?) unless roles.nil?
+  end
+
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email?
+  validates :roles, presence: true
 
   after_save do
     contact = billing_contact || build_billing_contact
@@ -56,7 +61,9 @@ class AdminUser < ActiveRecord::Base
   end
 
   def self.available_roles
-    (Rails.configuration.policy_roles.try!(:keys) || []).map(&:to_sym)
+    list = (Rails.configuration.policy_roles.try!(:keys) || []).map(&:to_sym)
+    list.push(RolePolicy.root_role) if RolePolicy.root_role.present?
+    list
   end
 
   if ldap_config_exists?
