@@ -76,11 +76,12 @@ class Pgq::ConsumerBase
       finish_batch
 
     rescue SystemExit
-       log_error("System Exit")
-    rescue StandardError =>e
-       log_error(e.message)
-       Pony.mail(body: e.backtrace, subject: e.message)
-       Pgq::Worker.shutdown!(e.message) unless Pgq::Worker.interrupted?
+      log_error("System Exit")
+    rescue StandardError => e
+      error_message = "<#{e.class}> #{e.message}"
+      log_error(error_message)
+      Pony.mail(body: e.backtrace.join("\n"), subject: error_message)
+      Pgq::Worker.shutdown!(e) unless Pgq::Worker.interrupted?
     end
 
 
