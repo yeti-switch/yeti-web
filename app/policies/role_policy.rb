@@ -35,6 +35,9 @@ class RolePolicy < ApplicationPolicy
     allowed_for_role?(:perform)
   end
 
+  alias_rule :import?, to: :perform? # ActiveAdminImport::Auth::IMPORT
+  alias_rule :do_import?, to: :import? # active_admin_import
+
   private
 
   # action could be one of [:read, :change, :remove, :perform]
