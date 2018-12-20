@@ -20,5 +20,4 @@ class Billing::Package < Yeti::ActiveRecord
   validates_presence_of :name, :price, :billing_interval
   validates_uniqueness_of :name
 
-
 end

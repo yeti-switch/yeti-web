@@ -16,6 +16,4 @@ class Billing::PackageConfig < Yeti::ActiveRecord
   belongs_to :package, class_name: 'Billing::Package', foreign_key: :package_id
 
   validates_presence_of :prefix, :package, :amount
-
-
 end

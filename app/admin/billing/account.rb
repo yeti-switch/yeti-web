@@ -19,7 +19,6 @@ ActiveAdmin.register Account do
                            termination_capacity: 'text',
                            total_capacity: 'text',
                            max_call_duration: 'text',
-                           package_id: Billing::Package.pluck(:name, :id),
                            vendor_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
                            customer_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
                            vendor_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
@@ -65,7 +64,6 @@ ActiveAdmin.register Account do
                 :customer_invoice_period_id, :vendor_invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
-                :package_id,
                 send_invoices_to: [], send_balance_notifications_to: []
 
 
@@ -208,6 +206,7 @@ ActiveAdmin.register Account do
         end
 
       end
+
       tab "Comments" do
         active_admin_comments
       end
@@ -234,6 +233,28 @@ ActiveAdmin.register Account do
         end
       end
 
+      tab :packages do
+        panel 'Package' do
+          div do
+            span 'Package for current billing period: '
+            span resource.package || status_tag('empty', class: :no, lable: 'empty')
+          end
+          div do
+            span 'Future package(next billing period): '
+            span status_tag('disabled', class: :no, lable: 'disabled')
+          end
+        end
+
+        panel 'Package Counters' do
+          table_for s.package_counters do
+            column :id
+            column :prefix
+            column :duration
+            column :expired_at
+          end
+        end
+      end
+
     end
 
   end
@@ -256,7 +277,6 @@ ActiveAdmin.register Account do
       f.input :origination_capacity
       f.input :termination_capacity
       f.input :total_capacity
-      f.input :package
 
       f.input :vendor_invoice_period
       f.input :customer_invoice_period
@@ -305,20 +325,10 @@ ActiveAdmin.register Account do
     redirect_to action: :show
   end
 
-  sidebar :links, only: [:show, :edit] do
-
+  sidebar :links, only: %i[show edit] do
     ul do
-      li do
-        link_to "Payments", payments_path(q: {account_id_eq: params[:id]})
-
-      end
-      li do
-        link_to "CDR list", cdrs_path(q: {account_id_eq: params[:id]})
-
-      end
-
+      li link_to 'Payments', payments_path(q: { account_id_eq: params[:id] })
+      li link_to 'CDR list', cdrs_path(q: { account_id_eq: params[:id] })
     end
   end
-
-
 end

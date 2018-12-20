@@ -88,16 +88,16 @@ describe Account, type: :model do
       create(:account, balance: 1000, package_id: nil)
     end
 
+    let(:package) do
+      create(:package, :with_two_configurations, price: 110.00)
+    end
+
     subject do
       account.package = package
       account.save
     end
 
     context 'when package configurations exists' do
-      let(:package) do
-        create(:package, :with_two_configurations, price: 110.00)
-      end
-
       let(:new_counters) { Billing::AccountPackageCounter.all }
 
       # account_package_counters will store counter of a minutes by directions
@@ -129,6 +129,7 @@ describe Account, type: :model do
       end
 
       it 'raise error when not enough money and do nothing' do
+        account.update(min_balance: 0)
         account.update(balance: 109.99)
 
         expect {
@@ -138,14 +139,35 @@ describe Account, type: :model do
           [Payment.count, Billing::AccountPackageCounter.count]
         }
       end
+
+      it 'raise error when not exceeds min_balance' do
+        account.update(min_balance: -0.02) # (109.99 - 110.00) > -0.02
+        account.update(balance: 109.99)
+
+        expect(subject).to be_truthy
+      end
+    end
+
+    context 'when account has another package assigned' do
+      before do
+        subject
+      end
+
+      let(:another_package) do
+        create(:package, :with_two_configurations, price: 5)
+      end
+
+      it 'forbid change of package_id directly' do
+        account.package_id = another_package.id
+        expect {
+          account.save!
+        }.to raise_error(ActiveRecord::RecordInvalid,
+                         "Validation failed: Package can't be changed during billing period")
+      end
     end
 
     context 'when none configurations exists' do
       # it 'creates new Payment' do
-    end
-
-    context 'when account has another package assigned' do
-      # TODO: what to do?
     end
   end
 
