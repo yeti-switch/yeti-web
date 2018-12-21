@@ -54,7 +54,7 @@ class Account < Yeti::ActiveRecord
   has_many :api_access, ->(record) { unscope(:where).where("? = ANY(#{table_name}.account_ids)", record.id) }, class_name: 'System::ApiAccess', autosave: false
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
-  has_many :package_counters, class_name: 'Billing::AccountPackageCounter'
+  has_many :prepaid_packages, class_name: 'Billing::AccountPackageCounter'
 
 
   has_paper_trail class_name: 'AuditLogItem'
@@ -79,8 +79,6 @@ class Account < Yeti::ActiveRecord
   validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
   validates_numericality_of :max_call_duration, greater_than_or_equal_to: 0, allow_nil: true
 
-  validate :check_possibility_of_package_configuration_handling
-  validate :check_package_id
 
   after_initialize do
     if self.new_record?
@@ -135,8 +133,6 @@ class Account < Yeti::ActiveRecord
     end
 
   end
-
-  after_commit :copy_package_configurations, on: [:create, :update]
 
   before_destroy :remove_self_from_related_api_access!
 
@@ -209,38 +205,5 @@ class Account < Yeti::ActiveRecord
       record.account_ids.delete(id)
       record.save!
     end
-  end
-
-  before_save do
-    @old_package_id = package_id_was
-  end
-
-  def check_package_id
-    if package_id_was != package_id && !package_id_was.nil?
-      # TODO: Add nested condition:
-      #   if next_package_id_changed? && package_id != next_package_id
-      #     --> only then add following error
-      errors.add(:package_id, "can't be changed during billing period")
-    end
-  end
-
-  def check_possibility_of_package_configuration_handling
-    if package_id_changed? && package_id.present?
-      unless (balance - package.price) > min_balance
-        errors.add(:package_id, 'Not enough money for package configuration')
-      end
-    end
-  end
-
-  def copy_package_configurations
-    return true unless package_id
-    return true if package_id == @old_package_id
-
-    package.configurations.each do |config|
-      Billing::AccountPackageCounter.create account_id: id,
-                                            prefix: config.prefix
-    end
-
-    payments.create(amount: -package.price)
   end
 end

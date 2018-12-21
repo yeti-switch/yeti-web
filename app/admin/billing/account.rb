@@ -239,6 +239,7 @@ ActiveAdmin.register Account do
             span 'Package for current billing period: '
             span resource.package || status_tag('empty', class: :no, lable: 'empty')
           end
+
           div do
             span 'Future package(next billing period): '
             span status_tag('disabled', class: :no, lable: 'disabled')
@@ -246,18 +247,18 @@ ActiveAdmin.register Account do
         end
 
         panel 'Package Counters' do
-          table_for s.package_counters do
+          table_for s.prepaid_packages do
             column :id
             column :prefix
             column :duration
             column :expired_at
           end
         end
-      end
+      end # /tab :packages
 
     end
 
-  end
+  end # /show
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -313,6 +314,13 @@ ActiveAdmin.register Account do
     end
   end
 
+  member_action :set_package, form: {
+    type: %w[Offensive Spam Other]
+  } do |id, inputs|
+    flash[:notice] = 'Hello'
+    redirect_to resource_path
+  end
+
   member_action :payment, method: :post do
     authorize!
     payment_params = params.require(:payment).permit(:account_id, :amount, :notes)
@@ -329,6 +337,7 @@ ActiveAdmin.register Account do
     ul do
       li link_to 'Payments', payments_path(q: { account_id_eq: params[:id] })
       li link_to 'CDR list', cdrs_path(q: { account_id_eq: params[:id] })
+      li link_to 'Packages', account_prepaid_packages_path(account_id: params[:id])
     end
   end
 end
