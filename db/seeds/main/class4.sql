@@ -952,13 +952,12 @@ insert into class4.routeset_discriminators(name) values('default');
 select setval('class4.routeset_discriminators_id_seq'::regclass, 1, true);
 
 
-insert into class4.gateway_media_encryption_modes(id, name) values(1, 'Disable');
-insert into class4.gateway_media_encryption_modes(id, name) values(2, 'SRTP SDES');
-insert into class4.gateway_media_encryption_modes(id, name) values(3, 'SRTP DTLS');
+insert into class4.gateway_media_encryption_modes(id, name) values(0, 'Disable');
+insert into class4.gateway_media_encryption_modes(id, name) values(1, 'SRTP SDES');
+insert into class4.gateway_media_encryption_modes(id, name) values(2, 'SRTP DTLS');
 
-insert into class4.gateway_network_protocol_priorities(id, name) values(1, 'force IPv4');
-insert into class4.gateway_network_protocol_priorities(id, name) values(2, 'force IPv6');
+insert into class4.gateway_network_protocol_priorities(id, name) values(0, 'force IPv4');
+insert into class4.gateway_network_protocol_priorities(id, name) values(1, 'force IPv6');
+insert into class4.gateway_network_protocol_priorities(id, name) values(2, 'Any');
 insert into class4.gateway_network_protocol_priorities(id, name) values(3, 'prefer IPv4');
 insert into class4.gateway_network_protocol_priorities(id, name) values(4, 'prefer IPv6');
-insert into class4.gateway_network_protocol_priorities(id, name) values(5, 'any');
-

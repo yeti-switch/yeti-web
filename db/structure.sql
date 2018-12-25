@@ -6156,8 +6156,8 @@ CREATE TABLE class4.gateways (
     tx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
     weight smallint DEFAULT 100 NOT NULL,
     sip_schema_id smallint DEFAULT 1 NOT NULL,
-    network_protocol_priority_id smallint DEFAULT 1 NOT NULL,
-    media_encryption_mode_id smallint DEFAULT 1 NOT NULL
+    network_protocol_priority_id smallint DEFAULT 0 NOT NULL,
+    media_encryption_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 

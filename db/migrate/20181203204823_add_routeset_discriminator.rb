@@ -19,19 +19,20 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
         id smallint primary key,
         name varchar not null unique
       );
-      insert into class4.gateway_network_protocol_priorities(id, name) values(1, 'force IPv4');
-      insert into class4.gateway_network_protocol_priorities(id, name) values(2, 'force IPv6');
+      insert into class4.gateway_network_protocol_priorities(id, name) values(0, 'force IPv4');
+      insert into class4.gateway_network_protocol_priorities(id, name) values(1, 'force IPv6');
+      insert into class4.gateway_network_protocol_priorities(id, name) values(2, 'Any');
       insert into class4.gateway_network_protocol_priorities(id, name) values(3, 'prefer IPv4');
       insert into class4.gateway_network_protocol_priorities(id, name) values(4, 'prefer IPv6');
-      insert into class4.gateway_network_protocol_priorities(id, name) values(5, 'any');
+
 
       create table class4.gateway_media_encryption_modes(
         id smallint primary key,
         name varchar not null unique
       );
-      insert into class4.gateway_media_encryption_modes(id, name) values(1, 'Disable');
-      insert into class4.gateway_media_encryption_modes(id, name) values(2, 'SRTP SDES');
-      insert into class4.gateway_media_encryption_modes(id, name) values(3, 'SRTP DTLS');
+      insert into class4.gateway_media_encryption_modes(id, name) values(0, 'Disable');
+      insert into class4.gateway_media_encryption_modes(id, name) values(1, 'SRTP SDES');
+      insert into class4.gateway_media_encryption_modes(id, name) values(2, 'SRTP DTLS');
 
       create table sys.sip_schemas (
         id smallint primary key,
@@ -42,8 +43,8 @@ class AddRoutesetDiscriminator < ActiveRecord::Migration[5.1]
 
       alter table class4.gateways
         add sip_schema_id smallint not null default 1 references sys.sip_schemas(id),
-        add network_protocol_priority_id smallint not null default 1 references class4.gateway_network_protocol_priorities(id),
-        add media_encryption_mode_id smallint not null default 1 references class4.gateway_media_encryption_modes(id);
+        add network_protocol_priority_id smallint not null default 0 references class4.gateway_network_protocol_priorities(id),
+        add media_encryption_mode_id smallint not null default 0 references class4.gateway_media_encryption_modes(id);
 
       alter table data_import.import_gateways
         add sip_schema_id smallint,
