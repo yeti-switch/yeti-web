@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
         namespace :admin do
           jsonapi_resources :accounts do
+            jsonapi_relationships
             jsonapi_resource :balance, only: [:update]
           end
           jsonapi_resources :contractors
