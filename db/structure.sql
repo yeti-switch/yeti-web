@@ -6033,6 +6033,7 @@ CREATE TABLE class4.dialpeers (
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
+    routeset_discriminator_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -6153,7 +6154,10 @@ CREATE TABLE class4.gateways (
     incoming_auth_password character varying,
     rx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
     tx_inband_dtmf_filtering_mode_id smallint DEFAULT 1 NOT NULL,
-    weight smallint DEFAULT 100 NOT NULL
+    weight smallint DEFAULT 100 NOT NULL,
+    sip_schema_id smallint DEFAULT 1 NOT NULL,
+    network_protocol_priority_id smallint DEFAULT 0 NOT NULL,
+    media_encryption_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -26489,6 +26493,26 @@ CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
 
 
 --
+-- Name: gateway_media_encryption_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.gateway_media_encryption_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: gateway_network_protocol_priorities; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.gateway_network_protocol_priorities (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: gateway_rel100_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -26915,6 +26939,35 @@ ALTER SEQUENCE class4.registrations_id_seq OWNED BY class4.registrations.id;
 
 
 --
+-- Name: routeset_discriminators; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+--
+
+CREATE TABLE class4.routeset_discriminators (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: routeset_discriminators_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.routeset_discriminators_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: routeset_discriminators_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.routeset_discriminators_id_seq OWNED BY class4.routeset_discriminators.id;
+
+
+--
 -- Name: routing_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -27052,7 +27105,8 @@ CREATE TABLE class4.routing_plans (
     name character varying NOT NULL,
     sorting_id integer DEFAULT 1 NOT NULL,
     rate_delta_max numeric DEFAULT 0 NOT NULL,
-    use_lnp boolean DEFAULT false NOT NULL
+    use_lnp boolean DEFAULT false NOT NULL,
+    max_rerouting_attempts smallint DEFAULT 10 NOT NULL
 );
 
 
@@ -27596,7 +27650,9 @@ CREATE TABLE data_import.import_dialpeers (
     dst_number_min_length integer,
     dst_number_max_length integer,
     routing_tag_mode_id smallint,
-    routing_tag_mode_name character varying
+    routing_tag_mode_name character varying,
+    routeset_discriminator_id smallint,
+    routeset_discriminator_name character varying
 );
 
 
@@ -27811,7 +27867,13 @@ CREATE TABLE data_import.import_gateways (
     rx_inband_dtmf_filtering_mode_name character varying,
     tx_inband_dtmf_filtering_mode_id smallint,
     tx_inband_dtmf_filtering_mode_name character varying,
-    weight smallint
+    weight smallint,
+    sip_schema_id smallint,
+    sip_schema_name character varying,
+    network_protocol_priority_id smallint,
+    network_protocol_priority_name character varying,
+    media_encryption_mode_id smallint,
+    media_encryption_mode_name character varying
 );
 
 
@@ -29810,6 +29872,16 @@ ALTER SEQUENCE sys.sensors_id_seq OWNED BY sys.sensors.id;
 
 
 --
+-- Name: sip_schemas; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sys.sip_schemas (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -30098,6 +30170,13 @@ ALTER TABLE ONLY class4.rateplans ALTER COLUMN id SET DEFAULT nextval('class4.ra
 --
 
 ALTER TABLE ONLY class4.registrations ALTER COLUMN id SET DEFAULT nextval('class4.registrations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.routeset_discriminators ALTER COLUMN id SET DEFAULT nextval('class4.routeset_discriminators_id_seq'::regclass);
 
 
 --
@@ -31061,6 +31140,38 @@ ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
 
 
 --
+-- Name: gateway_media_encryption_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_media_encryption_modes
+    ADD CONSTRAINT gateway_media_encryption_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_media_encryption_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_media_encryption_modes
+    ADD CONSTRAINT gateway_media_encryption_modes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gateway_network_protocol_priorities_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_network_protocol_priorities
+    ADD CONSTRAINT gateway_network_protocol_priorities_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_network_protocol_priorities_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.gateway_network_protocol_priorities
+    ADD CONSTRAINT gateway_network_protocol_priorities_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: gateway_rel100_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
 --
 
@@ -31250,6 +31361,22 @@ ALTER TABLE ONLY class4.registrations
 
 ALTER TABLE ONLY class4.registrations
     ADD CONSTRAINT registrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: routeset_discriminators_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.routeset_discriminators
+    ADD CONSTRAINT routeset_discriminators_name_key UNIQUE (name);
+
+
+--
+-- Name: routeset_discriminators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY class4.routeset_discriminators
+    ADD CONSTRAINT routeset_discriminators_pkey PRIMARY KEY (id);
 
 
 --
@@ -32333,6 +32460,22 @@ ALTER TABLE ONLY sys.sensors
 
 
 --
+-- Name: sip_schemas_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.sip_schemas
+    ADD CONSTRAINT sip_schemas_name_key UNIQUE (name);
+
+
+--
+-- Name: sip_schemas_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sys.sip_schemas
+    ADD CONSTRAINT sip_schemas_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
 --
 
@@ -32840,6 +32983,14 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
+-- Name: dialpeers_routeset_discriminator_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.dialpeers
+    ADD CONSTRAINT dialpeers_routeset_discriminator_id_fkey FOREIGN KEY (routeset_discriminator_id) REFERENCES class4.routeset_discriminators(id);
+
+
+--
 -- Name: dialpeers_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -32944,6 +33095,22 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways_media_encryption_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_media_encryption_mode_id_fkey FOREIGN KEY (media_encryption_mode_id) REFERENCES class4.gateway_media_encryption_modes(id);
+
+
+--
+-- Name: gateways_network_protocol_priority_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_network_protocol_priority_id_fkey FOREIGN KEY (network_protocol_priority_id) REFERENCES class4.gateway_network_protocol_priorities(id);
+
+
+--
 -- Name: gateways_orig_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -33029,6 +33196,14 @@ ALTER TABLE ONLY class4.gateways
 
 ALTER TABLE ONLY class4.gateways
     ADD CONSTRAINT gateways_session_refresh_method_id_fkey FOREIGN KEY (session_refresh_method_id) REFERENCES class4.session_refresh_methods(id);
+
+
+--
+-- Name: gateways_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
 
 
 --
@@ -33430,6 +33605,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20181011105642'),
 ('20181018164004'),
 ('20181114213545'),
-('20181202175700');
+('20181202175700'),
+('20181203204823');
 
 

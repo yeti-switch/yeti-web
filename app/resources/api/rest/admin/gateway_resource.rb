@@ -32,6 +32,9 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
   has_one :rel100_mode, class_name: 'Equipment::GatewayRel100Mode'
   has_one :rx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode'
   has_one :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode'
+  has_one :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority'
+  has_one :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode'
+  has_one :sip_schema, class_name: 'System::SipSchema'
 
 
   filter :name
@@ -116,7 +119,10 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
       :rtp_timeout,
       :filter_noaudio_streams,
       :rtp_relay_timestamp_aligning,
-      :rtp_force_relay_cn
+      :rtp_force_relay_cn,
+      :network_protocol_priority,
+      :media_encryption_mode,
+      :sip_schema
     ]
   end
 

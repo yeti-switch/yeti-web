@@ -47,6 +47,8 @@ RSpec.configure do |config|
       'class4.dtmf_receive_modes',
       'class4.gateway_rel100_modes',
       'class4.gateway_inband_dtmf_filtering_modes',
+      'class4.gateway_media_encryption_modes',
+      'class4.gateway_network_protocol_priorities',
       'class4.transport_protocols',
       'class4.numberlist_modes',
       'class4.numberlist_actions',
@@ -54,7 +56,8 @@ RSpec.configure do |config|
       'class4.rate_profit_control_modes',
       'class4.routing_tag_modes',
       'sys.timezones',
-      'sys.jobs'
+      'sys.jobs',
+      'sys.sip_schemas'
   ]
 
   # RSpec Rails can automatically mix in different behaviours to your tests

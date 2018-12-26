@@ -50,6 +50,7 @@ describe 'Export Dialpeer', type: :feature do
         ['Routing group name', item.routing_group.name, anything],
         ['Vendor name', item.vendor.name, anything],
         ['Account name', item.account.name, anything],
+        ['Routeset discriminator name', item.routeset_discriminator.name, anything],
         ['Valid from', item.valid_from.to_s, anything],
         ['Valid till', item.valid_till.to_s, anything],
         ['Acd limit', item.acd_limit.to_s, anything],

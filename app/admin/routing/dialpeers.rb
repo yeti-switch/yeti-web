@@ -32,6 +32,7 @@ ActiveAdmin.register Dialpeer do
                            gateway_group_id: GatewayGroup.pluck(:name, :id),
                            vendor_id: Contractor.vendors.pluck(:name, :id),
                            account_id: Account.pluck(:name, :id),
+                           routeset_discriminator_id: Routing::RoutesetDiscriminator.pluck(:name, :id),
                            valid_from: 'datepicker',
                            valid_till: 'datepicker',
                            asr_limit: 'text',
@@ -62,6 +63,7 @@ ActiveAdmin.register Dialpeer do
                  [:routing_group_name, proc { |row| row.routing_group.try(:name) }],
                  [:vendor_name, proc { |row| row.vendor.try(:name) }],
                  [:account_name, proc { |row| row.account.try(:name) }],
+                 [:routeset_discriminator_name, proc { |row| row.routeset_discriminator.try(:name) }],
                  :valid_from, :valid_till,
                  :acd_limit, :asr_limit, :short_calls_limit, :capacity,
                  :src_rewrite_rule, :src_rewrite_result,
@@ -88,7 +90,7 @@ ActiveAdmin.register Dialpeer do
 
   end
 
-  includes :gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic,
+  includes :gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic, :routeset_discriminator,
            network_prefix: [:country, :network]
 
   action_item :show_rates, only: [:show] do
@@ -144,6 +146,7 @@ ActiveAdmin.register Dialpeer do
     column :account, sortable: 'accounts.id' do |c|
       auto_link(c.account, c.account.decorated_vendor_display_name)
     end
+    column :routeset_discriminator
     column :valid_from do |c|
       c.decorated_valid_from
     end
@@ -183,6 +186,7 @@ ActiveAdmin.register Dialpeer do
   filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
   filter :vendor, input_html: {class: 'chosen'}
   filter :account, input_html: {class: 'chosen'}
+  filter :routeset_discriminator, input_html: {class: 'chosen'}
   filter :gateway, input_html: {class: 'chosen'}
   filter :gateway_group, input_html: {class: 'chosen'}
   filter :routing_group, input_html: {class: 'chosen'}
@@ -252,6 +256,7 @@ ActiveAdmin.register Dialpeer do
       f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),
                         include_blank: false ,
                         input_html: {class: 'chosen'}
+      f.input :routeset_discriminator, include_blank: false, input_html: {class: 'chosen'}
       f.input :priority
       f.input :force_hit_rate
       f.input :exclusive_route
@@ -308,6 +313,7 @@ ActiveAdmin.register Dialpeer do
           row :account do
             auto_link(s.account, s.account.decorated_vendor_display_name)
           end
+          row :routeset_discriminator
           row :priority
           row :force_hit_rate
           row :exclusive_route

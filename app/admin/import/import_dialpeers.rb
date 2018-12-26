@@ -7,6 +7,7 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
   filter :account, input_html: {class: 'chosen'}
   filter :gateway, input_html: {class: 'chosen'}
   filter :routing_group, input_html: {class: 'chosen'}
+  filter :routeset_discriminator, input_html: {class: 'chosen'}
 
   acts_as_import_preview
 
@@ -17,7 +18,7 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
     end
 
     def scoped_collection
-      super.includes(:gateway, :gateway_group, :routing_group, :vendor, :account, :routing_tag_mode)
+      super.includes(:gateway, :gateway_group, :routing_group, :vendor, :account, :routing_tag_mode, :routeset_discriminator)
     end
   end
 
@@ -72,7 +73,7 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
     end
 
     column :routing_tag_mode, sortable: :routing_tag_mode_name do |row|
-      if row.routing_tag_mode_name.blank?
+      if row.routing_tag_mode.blank?
         row.routing_tag_mode_name
       else
         auto_link(row.routing_tag_mode, row.routing_tag_mode_name)
@@ -80,7 +81,7 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
     end
 
     column :vendor, sortable: :vendor_name do |row|
-      if row.vendor_name.blank?
+      if row.vendor.blank?
         row.vendor_name
       else
         auto_link(row.vendor, row.vendor_name)
@@ -88,12 +89,20 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
     end
 
     column :account, sortable: :account_name do |row|
-      if row.account_name.blank?
+      if row.account.blank?
         row.account_name
       else
         auto_link(row.account, row.account_name)
       end
     end
+    column :routeset_discriminator, sortable: :routeset_discriminator_name do |row|
+      if row.routeset_discriminator.blank?
+        row.routeset_discriminator_name
+      else
+        auto_link(row.routeset_discriminator, row.routeset_discriminator_name)
+      end
+    end
+
     column :valid_from
     column :valid_till
     column :acd_limit

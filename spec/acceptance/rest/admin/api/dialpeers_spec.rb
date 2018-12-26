@@ -20,7 +20,7 @@ resource 'Dialpeers' do
     force-hit-rate network-prefix-id created-at short-calls-limit external-id routing-tag-ids
   )
 
-  required_relationships = %i(routing-group vendor account)
+  required_relationships = %i(routing-group vendor account routeset-discriminator)
   optional_relationships = %i(gateway gateway-group routing-tag-modes)
 
   get '/api/rest/admin/dialpeers' do
@@ -52,6 +52,7 @@ resource 'Dialpeers' do
     let(:account) { wrap_relationship(:accounts, create(:account, contractor: new_vendor).id) }
     let(:'gateway-group') { wrap_relationship(:'gateway-groups', create(:gateway_group, vendor: new_vendor).id) }
     let(:'routing-group') { wrap_relationship(:'routing-groups', create(:routing_group).id) }
+    let(:'routeset-discriminator') { wrap_relationship(:'routeset-discriminators', create(:routeset_discriminator).id) }
     let(:'valid-from') { DateTime.now }
     let(:'valid-till') { 1.year.from_now }
     let(:'initial-interval') { 60 }

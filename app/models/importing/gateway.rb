@@ -125,6 +125,12 @@
 #  tx_inband_dtmf_filtering_mode_id   :integer
 #  tx_inband_dtmf_filtering_mode_name :string
 #  weight                             :integer
+#  sip_schema_id                      :integer
+#  sip_schema_name                    :string
+#  network_protocol_priority_id       :integer
+#  network_protocol_priority_name     :string
+#  media_encryption_mode_id           :integer
+#  media_encryption_mode_name         :string
 #
 
 class Importing::Gateway  < Importing::Base

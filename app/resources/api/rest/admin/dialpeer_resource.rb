@@ -12,6 +12,7 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
   has_one :vendor, class_name: 'Contractor'
   has_one :account
   has_one :routing_tag_mode, class_name: 'Routing::RoutingTagMode'
+  has_one :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator'
 
   has_many :dialpeer_next_rates
 
@@ -27,6 +28,7 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
       :asr_limit,
       :gateway,
       :routing_group,
+      :routeset_discriminator,
       :next_rate,
       :connect_fee,
       :vendor,

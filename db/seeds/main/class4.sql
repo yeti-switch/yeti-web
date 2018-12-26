@@ -928,22 +928,11 @@ SELECT pg_catalog.setval('sortings_id_seq', 3, true);
 -- Data for Name: transport_protocols; Type: TABLE DATA; Schema: class4; Owner: yeti
 --
 
-INSERT INTO transport_protocols (id, name) VALUES (1, 'UDP');
-INSERT INTO transport_protocols (id, name) VALUES (2, 'TCP');
+INSERT INTO class4.transport_protocols (id, name) VALUES (1, 'UDP');
+INSERT INTO class4.transport_protocols (id, name) VALUES (2, 'TCP');
+INSERT INTO class4.transport_protocols (id, name) VALUES (3, 'TLS');
 
 
--- Completed on 2017-08-20 19:12:27 EEST
-
---
--- PostgreSQL database dump complete
---
-
-
---
--- TOC entry 3286 (class 0 OID 695650)
--- Dependencies: 443
--- Data for Name: tag_actions; Type: TABLE DATA; Schema: class4; Owner: yeti
---
 
 INSERT INTO tag_actions VALUES (1, 'Clear tags');
 INSERT INTO tag_actions VALUES (2, 'Remove selected tags');
@@ -959,8 +948,16 @@ insert into class4.gateway_inband_dtmf_filtering_modes(id,name) values('1','Inhe
 insert into class4.gateway_inband_dtmf_filtering_modes(id,name) values('2','Disable');
 insert into class4.gateway_inband_dtmf_filtering_modes(id,name) values('3','Remove DTMF');
 
--- Completed on 2018-01-19 16:08:50 EET
+insert into class4.routeset_discriminators(name) values('default');
+select setval('class4.routeset_discriminators_id_seq'::regclass, 1, true);
 
---
--- PostgreSQL database dump complete
---
+
+insert into class4.gateway_media_encryption_modes(id, name) values(0, 'Disable');
+insert into class4.gateway_media_encryption_modes(id, name) values(1, 'SRTP SDES');
+insert into class4.gateway_media_encryption_modes(id, name) values(2, 'SRTP DTLS');
+
+insert into class4.gateway_network_protocol_priorities(id, name) values(0, 'force IPv4');
+insert into class4.gateway_network_protocol_priorities(id, name) values(1, 'force IPv6');
+insert into class4.gateway_network_protocol_priorities(id, name) values(2, 'Any');
+insert into class4.gateway_network_protocol_priorities(id, name) values(3, 'prefer IPv4');
+insert into class4.gateway_network_protocol_priorities(id, name) values(4, 'prefer IPv6');

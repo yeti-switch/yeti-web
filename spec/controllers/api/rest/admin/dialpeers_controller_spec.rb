@@ -55,6 +55,7 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     let(:account) { create :account, contractor: vendor }
     let(:gateway_group) { create :gateway_group, vendor: vendor }
     let(:routing_group) { create :routing_group }
+    let(:routeset_discriminator) { create :routeset_discriminator }
 
     before do
       post :create, params: {
@@ -82,7 +83,9 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
           account: wrap_relationship(:accounts, account.id),
           'gateway-group': wrap_relationship(:'gateway-groups', gateway_group.id),
           'routing-group': wrap_relationship(:'routing-groups', routing_group.id),
-          'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id) }
+          'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
+          'routeset-discriminator': wrap_relationship(:'routeset-discriminators', routeset_discriminator.id)
+        }
       end
 
       it { expect(response.status).to eq(201) }

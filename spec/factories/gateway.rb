@@ -13,9 +13,13 @@ FactoryGirl.define do
     dtmf_receive_mode_id 1
     dtmf_send_mode_id 1
     rel100_mode_id 1
+
+    network_protocol_priority_id 1
+
     transport_protocol_id 1
     term_proxy_transport_protocol_id 1
     orig_proxy_transport_protocol_id 1
+    sip_schema_id 1
     host "test.example.com"
     port nil
     src_rewrite_rule nil
@@ -85,6 +89,7 @@ FactoryGirl.define do
     rtp_force_relay_cn true
     sensor_id nil
     filter_noaudio_streams false
+    media_encryption_mode_id 1
 
     association :contractor, factory: :contractor, vendor: true
     codec_group { CodecGroup.take || association(:codec_group) }

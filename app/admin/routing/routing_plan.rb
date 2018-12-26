@@ -1,5 +1,5 @@
 ActiveAdmin.register Routing::RoutingPlan do
-  menu parent: "Routing", label: "Routing plans", priority: 52
+  menu parent: "Routing", label: "Routing plans", priority: 50
 
   acts_as_audit
   acts_as_clone
@@ -15,8 +15,16 @@ ActiveAdmin.register Routing::RoutingPlan do
                        end)
 
   acts_as_delayed_job_lock
+  acts_as_export :id,
+                 :name,
+                 [:sorting_name, proc { |row| row.sorting.try(:name) || "" }],
+                 :use_lnp,
+                 :rate_delta_max,
+                 :max_rerouting_attempts
 
-  permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, {routing_group_ids: []}
+  permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts, {routing_group_ids: []}
+
+  includes :sorting
 
   filter :id
   filter :name
@@ -33,6 +41,7 @@ ActiveAdmin.register Routing::RoutingPlan do
     column :sorting, sortable: 'sortings.name'
     column "Use LNP", :use_lnp
     column :rate_delta_max
+    column :max_rerouting_attempts
     column "Routing groups" do |r|
       raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: {routing_group_id_eq: rg.id}) }.sort.join(', '))
     end
@@ -48,6 +57,7 @@ ActiveAdmin.register Routing::RoutingPlan do
       row :sorting
       row :use_lnp
       row :rate_delta_max
+      row :max_rerouting_attempts
       row "Routing groups" do |r|
         raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: {routing_group_id_eq: rg.id}) }.sort.join(', '))
       end
@@ -62,17 +72,13 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :sorting
       f.input :use_lnp
       f.input :rate_delta_max
+      f.input :max_rerouting_attempts
       f.input :routing_groups, input_html: {class: 'chosen-sortable', multiple: true}
     end
     f.actions
   end
 
 
-  controller do
-    def scoped_collection
-      super.eager_load(:sorting)
-    end
-  end
 
 
   sidebar :links, only: [:show, :edit] do

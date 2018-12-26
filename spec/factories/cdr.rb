@@ -42,6 +42,9 @@ FactoryGirl.define do
     association :customer_acc, factory: :account # customer_acc_id
 
     before(:create) do |record, evaluator|
+      # Create partition for current+next monthes if not exists
+      Cdr::Table.add_partition
+
       # link Customer from associated Account
       unless record.customer_id
         record.customer_id = record.customer_acc.contractor_id
