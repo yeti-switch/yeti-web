@@ -56,8 +56,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
       f.input :account_ids, as: :select, label: 'Accounts',
               input_html: { class: 'chosen', multiple: true, 'data-placeholder': "Choose an Account..." },
               collection: (f.object.customer.nil? ? [] : f.object.customer.accounts.collection)
-      f.input :formtastic_allowed_ips, label: 'Allowd IPs',
-              hint: 'Array of IP devided by comma'
+      f.input :formtastic_allowed_ips, label: 'Allowed IPs',
+              hint: 'Array of IP separated by comma'
     end
     f.actions
   end
