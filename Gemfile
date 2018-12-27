@@ -90,6 +90,8 @@ group :development, :test do
   gem 'factory_girl_rails', '4.8.0'
   gem 'database_cleaner'
   gem 'rspec_api_documentation', '~> 5.0.0'
+  gem 'simplecov', require: false, group: :test
+
 end
 
 gem 'unicorn-worker-killer'
