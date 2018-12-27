@@ -31,6 +31,7 @@
 #  reverse_billing        :boolean          default(FALSE), not null
 #  routing_tag_ids        :integer          default([]), not null, is an Array
 #  routing_tag_mode_id    :integer          default(0), not null
+#  allow_package_billing  :boolean          default(FALSE), not null
 #
 
 class Routing::Destination < Yeti::ActiveRecord

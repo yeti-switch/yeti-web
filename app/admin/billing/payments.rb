@@ -61,7 +61,7 @@ ActiveAdmin.register Payment do
   end
 
   filter :id
-  filter :accoun, input_html: {class: 'chosen'}
+  filter :account, input_html: {class: 'chosen'}
   filter :amount
   filter :notes
   filter :created_at, as: :date_time_range

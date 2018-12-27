@@ -29,6 +29,7 @@
 #  total_capacity                :integer
 #  destination_rate_limit        :decimal(, )
 #  max_call_duration             :integer
+#  package_id                    :integer
 #
 
 class Account < Yeti::ActiveRecord
@@ -46,11 +47,14 @@ class Account < Yeti::ActiveRecord
   belongs_to :customer_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'customer_invoice_template_id'
   belongs_to :timezone, class_name: 'System::Timezone', foreign_key: :timezone_id
 
+  belongs_to :package, class_name: 'Billing::Package', foreign_key: :package_id
+
   has_many :payments, dependent: :destroy
   has_many :invoices, class_name: 'Billing::Invoice'
   has_many :api_access, ->(record) { unscope(:where).where("? = ANY(#{table_name}.account_ids)", record.id) }, class_name: 'System::ApiAccess', autosave: false
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
+  has_many :prepaid_packages, class_name: 'Billing::AccountPackageCounter'
 
 
   has_paper_trail class_name: 'AuditLogItem'
@@ -74,6 +78,7 @@ class Account < Yeti::ActiveRecord
   validates_numericality_of :vat, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false #this is percents
   validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
   validates_numericality_of :max_call_duration, greater_than_or_equal_to: 0, allow_nil: true
+
 
   after_initialize do
     if self.new_record?

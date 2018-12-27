@@ -45,6 +45,7 @@ ActiveAdmin.register Account do
                  :origination_capacity,
                  :termination_capacity,
                  :total_capacity,
+                 [:package_name, proc { |row| row.package.try(:name) }],
                  :customer_invoice_period,
                  :vendor_invoice_period
 
@@ -66,7 +67,7 @@ ActiveAdmin.register Account do
                 send_invoices_to: [], send_balance_notifications_to: []
 
 
-  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone
+  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone, :package
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals)} do
     selectable_column
@@ -109,6 +110,7 @@ ActiveAdmin.register Account do
     column :origination_capacity
     column :termination_capacity
     column :total_capacity
+    column :package
 
     column :vendor_invoice_period
     column :customer_invoice_period
@@ -141,6 +143,7 @@ ActiveAdmin.register Account do
       tab :details do
         attributes_table_for s do
           row :id
+          row :name
           row :uuid
           row :external_id
           row :contractor
@@ -162,11 +165,10 @@ ActiveAdmin.register Account do
           row :destination_rate_limit
           row :max_call_duration
 
-          row :name
           row :origination_capacity
           row :termination_capacity
           row :total_capacity
-
+          row :package
           row :vendor_invoice_template
           row :customer_invoice_template
           row :send_invoices_to do |row|
@@ -204,6 +206,7 @@ ActiveAdmin.register Account do
         end
 
       end
+
       tab "Comments" do
         active_admin_comments
       end
@@ -230,14 +233,38 @@ ActiveAdmin.register Account do
         end
       end
 
+      tab :packages do
+        panel 'Package' do
+          div do
+            span 'Package for current billing period: '
+            span resource.package || status_tag('empty', class: :no, lable: 'empty')
+          end
+
+          div do
+            span 'Future package(next billing period): '
+            span status_tag('disabled', class: :no, lable: 'disabled')
+          end
+        end
+
+        panel 'Package Counters' do
+          table_for s.prepaid_packages do
+            column :id
+            column :prefix
+            column :duration
+            column :expired_at
+          end
+        end
+      end # /tab :packages
+
     end
 
-  end
+  end # /show
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
+      f.input :uuid, as: :string
       f.input :contractor, input_html: {class: 'chosen'}
       f.input :min_balance
       f.input :max_balance
@@ -287,6 +314,13 @@ ActiveAdmin.register Account do
     end
   end
 
+  member_action :set_package, form: {
+    type: %w[Offensive Spam Other]
+  } do |id, inputs|
+    flash[:notice] = 'Hello'
+    redirect_to resource_path
+  end
+
   member_action :payment, method: :post do
     authorize!
     payment_params = params.require(:payment).permit(:account_id, :amount, :notes)
@@ -299,20 +333,11 @@ ActiveAdmin.register Account do
     redirect_to action: :show
   end
 
-  sidebar :links, only: [:show, :edit] do
-
+  sidebar :links, only: %i[show edit] do
     ul do
-      li do
-        link_to "Payments", payments_path(q: {account_id_eq: params[:id]})
-
-      end
-      li do
-        link_to "CDR list", cdrs_path(q: {account_id_eq: params[:id]})
-
-      end
-
+      li link_to 'Payments', payments_path(q: { account_id_eq: params[:id] })
+      li link_to 'CDR list', cdrs_path(q: { account_id_eq: params[:id] })
+      li link_to 'Packages', account_prepaid_packages_path(account_id: params[:id])
     end
   end
-
-
 end
