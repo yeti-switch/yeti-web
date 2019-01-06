@@ -129,6 +129,7 @@ Rails.application.routes.draw do
             jsonapi_resources :tag_actions
             jsonapi_resources :routing_tags
             jsonapi_resources :routing_tag_modes
+            jsonapi_resources :routeset_discriminators
           end
         end
 
