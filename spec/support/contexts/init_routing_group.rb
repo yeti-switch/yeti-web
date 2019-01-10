@@ -4,7 +4,7 @@ shared_context :init_routing_group do |args|
 
   before do
     fields = {
-        name: 'DIDWW Default routing'
+        name: 'TDefault routing'
     }.merge(args)
 
     @routing_group = FactoryGirl.create(:routing_group, fields)

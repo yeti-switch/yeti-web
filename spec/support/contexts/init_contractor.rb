@@ -4,7 +4,7 @@ shared_context :init_contractor do |args|
 
   before do
     fields = {
-        name: 'FreeTelecom',
+        name: 'TestTelecom',
         vendor: true
     }.merge(args)
 

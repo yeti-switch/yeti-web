@@ -4,7 +4,7 @@ shared_context :init_importing_account do |args|
 
   before do
     fields = {
-        name: 'Telefonica-vendor',
+        name: 'T-vendor',
         contractor_id: @contractor.id,
         contractor_name: @contractor.name
     }.merge(args)
