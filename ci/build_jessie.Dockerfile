@@ -9,7 +9,7 @@ RUN echo "Package: *\nPin: release n=buster\nPin-Priority: 50\n\nPackage: python
 
 RUN apt-get update && apt-get -y --no-install-recommends install build-essential devscripts \
     ca-certificates apt-transport-https debhelper fakeroot lintian python-jinja2 \
-    ruby2.3 ruby2.3-dev zlib1g-dev libpq-dev python-yaml postgresql-client \
+    ruby2.6 ruby2.6-dev zlib1g-dev libpq-dev python-yaml postgresql-client \
     git-changelog python-setuptools lsb-release curl
 
 ADD . /build/yeti-web/
