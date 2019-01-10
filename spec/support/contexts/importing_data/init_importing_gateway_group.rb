@@ -4,7 +4,7 @@ shared_context :init_importing_gateway_group do |args|
 
   before do
     fields = {
-        name: 'iBasis',
+        name: 'GWGroup',
         vendor_id: @contractor.id,
         vendor_name: @contractor.name
     }.merge(args)

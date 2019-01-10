@@ -4,16 +4,16 @@ shared_context :init_registration do |args|
 
   before do
     fields = {
-        name: 'HOT-Free-Telecom-REG',
+        name: 'Com-REG',
         enabled: false,
         pop_id: 3,
         node_id: 10,
-        domain: '172.18.177.15',
-        username: '773186999',
+        domain: '172.12.11.1',
+        username: '78978986555',
         display_username: '',
-        auth_user: '773186999',
-        contact: 'sip:773186999@10.9.0.82:5060',
-        auth_password: 'a1SwnCYB',
+        auth_user: '68768987876786',
+        contact: 'sip:8789789798@10.9.0.82:5060',
+        auth_password: 'hjkhjhkl',
         force_expire: false
     }.merge(args)
 

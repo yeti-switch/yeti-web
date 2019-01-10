@@ -5,14 +5,14 @@ shared_context :init_gateway do |args|
   before do
 
     fields = {
-        host: '209.58.101.249',
+        host: '1.2.3.4',
         port: 5060,
         src_rewrite_rule: '.*?0*(\\d*)$',
         dst_rewrite_rule: '.*?0*(\\d*)$',
         acd_limit: 0.0,
         asr_limit: 0.0,
         enabled: true,
-        name: 'Iristel-GW-primary',
+        name: 'GW-primary',
         auth_enabled: false,
         auth_user: '',
         auth_password: '',

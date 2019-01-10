@@ -5,7 +5,7 @@ shared_context :init_importing_gateway do |args|
   before do
 
     fields = {
-        host: '209.58.101.249',
+        host: '1.2.3.4',
         port: 5060,
         src_rewrite_rule: '.*?0*(\\d*)$',
         dst_rewrite_rule: '.*?0*(\\d*)$',

@@ -4,7 +4,7 @@ shared_context :init_rateplan do |args|
 
   before do
     fields = {
-        name: 'PBXww-Canada-RP'
+        name: 'TEST-RP'
     }.merge(args)
 
     @rateplan = FactoryGirl.create(:rateplan, fields)
