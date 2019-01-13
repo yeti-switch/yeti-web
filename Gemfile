@@ -98,6 +98,7 @@ gem 'apitome', '~> 0.1.0'
 gem 'unicorn-worker-killer'
 
 group :test do
+  # gem 'puma'
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'chromedriver-helper'
