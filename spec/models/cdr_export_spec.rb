@@ -45,7 +45,7 @@ describe CdrExport, type: :model do
         "AND",
         "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
         "AND",
-        "\"cdr\".\"cdr\".\"success\" = 't'",
+        "\"cdr\".\"cdr\".\"success\" = TRUE",
         "AND",
         "\"cdr\".\"cdr\".\"failed_resource_type_id\" = 3",
         "AND",

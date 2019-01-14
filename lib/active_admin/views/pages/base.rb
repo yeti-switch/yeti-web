@@ -1,9 +1,8 @@
 class ActiveAdmin::Views::Pages::Base
-  def build
-    super
-    add_classes_to_body
+  def build(*args)
+    set_attribute :lang, I18n.locale
     build_active_admin_head
     build_page
-    @body.set_attribute "data-servertime", Time.current.strftime("%Y %m %d %H %M %S %Z")
+    set_attribute "data-servertime", Time.current.strftime("%Y %m %d %H %M %S %Z")
   end
 end

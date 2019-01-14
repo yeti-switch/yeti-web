@@ -35,7 +35,7 @@ class Api::RestController < ApiController
       table_column = (column =~ /\./) ? column :
           [table, klass.connection.quote_column_name(column)].compact.join(".")
 
-      chain.reorder("#{table_column} #{order}")
+      chain.reorder(Arel.sql("#{table_column} #{order}"))
     else
       chain # just return the chain
     end

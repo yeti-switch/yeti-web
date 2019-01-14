@@ -44,7 +44,11 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   scope :successful, show_count: false
   scope :failed, show_count: false
 
-  includes :gateway, :pop, :node, :transport_protocol, :origination_protocol
+  controller do
+    def scoped_collection
+      super.preload(:gateway, :pop, :node, :transport_protocol, :origination_protocol)
+    end
+  end
 
   index do
     id_column

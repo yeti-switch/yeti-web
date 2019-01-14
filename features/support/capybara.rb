@@ -21,6 +21,7 @@ end
 Capybara.default_driver = :headless_chrome
 Capybara.javascript_driver = :headless_chrome
 
+Capybara.server = :webrick
 Capybara.server_port = 9797
 Capybara.always_include_port = true
 Capybara.run_server = true

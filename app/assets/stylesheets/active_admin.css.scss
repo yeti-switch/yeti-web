@@ -1,9 +1,9 @@
 // To change Active Admin styles override the variables in
-// `app/assets/stylesheets/themes/variables.css.scss`
+// `app/assets/stylesheets/themes/variables.scss`
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
 // Active Admin source.
 //
 // For example, to change the sidebar width:
@@ -29,12 +29,11 @@ fieldset.inputs {
   }
 }
 
-
-
-
-//
-
-
+.panel {
+  > h3 {
+    margin-top: 0;
+  }
+}
 
 // Sizes
 //$horizontal-page-margin: 15px;
@@ -129,9 +128,6 @@ body.active_admin.index #active_admin_content {
   }
 }
 
-
-//hueta
-
 #active_admin_content {
   margin: 0;
   padding: 15px;
@@ -143,7 +139,7 @@ body.active_admin.index #active_admin_content {
   clear: both;
 }
 
-#main_content_wrapper! {
+#main_content_wrapper:has() {
   float: inherit;
   margin-left: 288px;
   width: auto;

@@ -30,4 +30,8 @@ class Routing::RateplanDuplicator
     end
   end
 
+  # Required by activeadmin https://github.com/activeadmin/activeadmin/pull/5253#discussion_r155525109
+  def self.inheritance_column
+    nil
+  end
 end

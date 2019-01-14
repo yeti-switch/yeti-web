@@ -20,7 +20,7 @@ class System::NetworkPrefix < Yeti::ActiveRecord
   validates_presence_of :prefix, :network
   scope :number_contains, ->(prefix) {  where('prefix_range(sys.network_prefixes.prefix)@>prefix_range(?)', "#{prefix}") } do
     def longest_match_network
-      order("length(prefix) desc").limit(1).take
+      order(Arel.sql("length(prefix) desc")).limit(1).take
     end
   end
 
