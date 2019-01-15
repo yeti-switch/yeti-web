@@ -1,8 +1,8 @@
-class ReportCustomDataDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class ReportCustomDataDecorator < BillingDecorator
   delegate_all
   decorates Report::CustomData
-
 
   def decorated_agg_calls_duration
     time_format_min :agg_calls_duration
@@ -31,5 +31,4 @@ class ReportCustomDataDecorator < BillingDecorator
   def decorated_agg_profit
     money_format :agg_profit
   end
-
 end

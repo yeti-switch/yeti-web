@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 
 SimpleCov.start 'rails'
 
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'webmock/rspec'
 require 'pundit/rspec'
@@ -18,7 +20,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 # run twice. It is recommended that you do not name files matching this glob to
 # end with _spec.rb. You can configure this pattern with the --pattern
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 include Warden::Test::Helpers
 Warden.test_mode!
@@ -33,35 +35,35 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.global_fixtures = [
-      :pops,
-      :nodes,
-      'sys.sensor_modes',
-      :guiconfig,
-      :sortings,
-      :destination_rate_policy,
-      :session_refresh_methods,
-      'sys.sensor_levels',
-      :disconnect_policy,
-      :diversion_policy,
-      :filter_types,
-      :sdp_c_location,
-      :codecs,
-      :dump_level,
-      'class4.dtmf_send_modes',
-      'class4.dtmf_receive_modes',
-      'class4.gateway_rel100_modes',
-      'class4.gateway_inband_dtmf_filtering_modes',
-      'class4.gateway_media_encryption_modes',
-      'class4.gateway_network_protocol_priorities',
-      'class4.transport_protocols',
-      'class4.numberlist_modes',
-      'class4.numberlist_actions',
-      'class4.tag_actions',
-      'class4.rate_profit_control_modes',
-      'class4.routing_tag_modes',
-      'sys.timezones',
-      'sys.jobs',
-      'sys.sip_schemas'
+    :pops,
+    :nodes,
+    'sys.sensor_modes',
+    :guiconfig,
+    :sortings,
+    :destination_rate_policy,
+    :session_refresh_methods,
+    'sys.sensor_levels',
+    :disconnect_policy,
+    :diversion_policy,
+    :filter_types,
+    :sdp_c_location,
+    :codecs,
+    :dump_level,
+    'class4.dtmf_send_modes',
+    'class4.dtmf_receive_modes',
+    'class4.gateway_rel100_modes',
+    'class4.gateway_inband_dtmf_filtering_modes',
+    'class4.gateway_media_encryption_modes',
+    'class4.gateway_network_protocol_priorities',
+    'class4.transport_protocols',
+    'class4.numberlist_modes',
+    'class4.numberlist_actions',
+    'class4.tag_actions',
+    'class4.rate_profit_control_modes',
+    'class4.routing_tag_modes',
+    'sys.timezones',
+    'sys.jobs',
+    'sys.sip_schemas'
   ]
 
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -104,21 +106,20 @@ RSpec.configure do |config|
 end
 
 RspecApiDocumentation.configure do |config|
-  config.format = [:json, :html]
+  config.format = %i[json html]
   config.request_body_formatter = :json
 
   config.exclusion_filter = :customer_v1 # important
-  config.docs_dir = Rails.root.join("doc", "api", "admin")
-  config.api_name = "Admin API"
+  config.docs_dir = Rails.root.join('doc', 'api', 'admin')
+  config.api_name = 'Admin API'
 
   config.define_group :customer_v1 do |c|
     c.exclusion_filter = :admin # must be overriden to anything
     c.filter = :customer_v1
-    c.docs_dir = Rails.root.join("doc", "api", "customer", 'v1')
-    c.api_name = "Customer API V2"
+    c.docs_dir = Rails.root.join('doc', 'api', 'customer', 'v1')
+    c.api_name = 'Customer API V2'
   end
 end
-
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

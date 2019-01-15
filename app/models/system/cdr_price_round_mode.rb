@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.amount_round_modes
@@ -6,7 +8,6 @@
 #  name :string           not null
 #
 
-class System::CdrPriceRoundMode< Cdr::Base
+class System::CdrPriceRoundMode < Cdr::Base
   self.table_name = 'sys.amount_round_modes'
-
 end

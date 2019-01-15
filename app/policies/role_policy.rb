@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class RolePolicy < ApplicationPolicy
-  ALLOWED_ACTIONS = [:read, :change, :remove, :perform].freeze
+  ALLOWED_ACTIONS = %i[read change remove perform].freeze
 
   class_attribute :_section_name, instance_writer: false
   class_attribute :root_role, instance_writer: false
@@ -47,6 +49,7 @@ class RolePolicy < ApplicationPolicy
       raise ArgumentError, "#{action} is not one of #{RolePolicy::ALLOWED_ACTIONS}"
     end
     return rule_when_no_config if roles_config.nil?
+
     user_roles.any? { |role| roles_config.dig(role, section_name, action) }
   end
 
@@ -69,5 +72,4 @@ class RolePolicy < ApplicationPolicy
   def section_name
     _section_name || self.class.to_s[0...-6].gsub('::', '/').to_sym
   end
-
 end

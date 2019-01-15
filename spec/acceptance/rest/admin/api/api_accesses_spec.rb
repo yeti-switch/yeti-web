@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,8 +12,8 @@ resource 'ApiAccesses' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'api-accesses' }
 
-  required_params = %i(customer-id login password)
-  optional_params = %i(account-ids allowed-ips)
+  required_params = %i[customer-id login password]
+  optional_params = %i[account-ids allowed-ips]
 
   get '/api/rest/admin/api-accesses' do
     before { create_list(:api_access, 2) }

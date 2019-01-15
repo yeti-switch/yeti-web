@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request do
@@ -34,14 +36,14 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
     let(:next_rate_attrs) { { destination: destination } }
     let(:next_rate_response_attributes) do
       {
-          'next-rate': next_rate.next_rate.to_s,
-          'initial-rate': next_rate.initial_rate.to_s,
-          'initial-interval': next_rate.initial_interval,
-          'next-interval': next_rate.next_interval,
-          'connect-fee': next_rate.connect_fee.to_s,
-          'apply-time': eq_time_string(next_rate.apply_time),
-          'applied': next_rate.applied,
-          'external-id': next_rate.external_id
+        'next-rate': next_rate.next_rate.to_s,
+        'initial-rate': next_rate.initial_rate.to_s,
+        'initial-interval': next_rate.initial_interval,
+        'next-interval': next_rate.next_interval,
+        'connect-fee': next_rate.connect_fee.to_s,
+        'apply-time': eq_time_string(next_rate.apply_time),
+        'applied': next_rate.applied,
+        'external-id': next_rate.external_id
       }
     end
 
@@ -67,7 +69,6 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
         let(:json_api_include_attributes) { hash_including(prefix: destination.prefix) }
       end
     end
-
   end
 
   describe 'POST /api/rest/admin/destination-next-rates' do
@@ -77,26 +78,26 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
 
     let(:json_api_request_body) do
       {
-          data: {
-              type: json_api_resource_type,
-              attributes: json_api_request_attributes,
-              relationships: json_api_request_relationships
-          }
+        data: {
+          type: json_api_resource_type,
+          attributes: json_api_request_attributes,
+          relationships: json_api_request_relationships
+        }
       }
     end
     let(:json_api_request_attributes) do
       {
-          'next-rate': '0.01',
-          'initial-rate': '0.01',
-          'initial-interval': 60,
-          'next-interval': 60,
-          'connect-fee': '0.01',
-          'apply-time': 1.month.from_now.to_s
+        'next-rate': '0.01',
+        'initial-rate': '0.01',
+        'initial-interval': 60,
+        'next-interval': 60,
+        'connect-fee': '0.01',
+        'apply-time': 1.month.from_now.to_s
       }
     end
     let(:json_api_request_relationships) do
       {
-          destination: { data: { id: destination.id.to_s, type: 'destinations' } }
+        destination: { data: { id: destination.id.to_s, type: 'destinations' } }
       }
     end
     let(:last_next_rate) { Routing::DestinationNextRate.last! }
@@ -105,14 +106,14 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
       let(:json_api_record_id) { last_next_rate.id.to_s }
       let(:json_api_record_attributes) do
         {
-            'next-rate': json_api_request_attributes[:'next-rate'],
-            'initial-rate': json_api_request_attributes[:'initial-rate'],
-            'initial-interval': json_api_request_attributes[:'initial-interval'],
-            'next-interval': json_api_request_attributes[:'next-interval'],
-            'connect-fee': json_api_request_attributes[:'connect-fee'],
-            'apply-time': eq_time_string(json_api_request_attributes[:'apply-time']),
-            'applied': false,
-            'external-id': nil
+          'next-rate': json_api_request_attributes[:'next-rate'],
+          'initial-rate': json_api_request_attributes[:'initial-rate'],
+          'initial-interval': json_api_request_attributes[:'initial-interval'],
+          'next-interval': json_api_request_attributes[:'next-interval'],
+          'connect-fee': json_api_request_attributes[:'connect-fee'],
+          'apply-time': eq_time_string(json_api_request_attributes[:'apply-time']),
+          'applied': false,
+          'external-id': nil
         }
       end
     end
@@ -158,5 +159,4 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
     include_examples :responds_with_status, 204
     include_examples :changes_records_qty_of, Routing::DestinationNextRate, by: -1
   end
-
 end

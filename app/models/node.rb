@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: nodes
@@ -15,7 +17,7 @@ class Node < ActiveRecord::Base
 
   validates_presence_of :pop, :signalling_ip, :signalling_port, :rpc_endpoint, :name
   validates :name, uniqueness: true
-#  validates :rpc_uri, format: URI::regexp(%w(http https))
+  #  validates :rpc_uri, format: URI::regexp(%w(http https))
 
   validates_uniqueness_of :rpc_endpoint
 
@@ -24,22 +26,20 @@ class Node < ActiveRecord::Base
 
   has_paper_trail class_name: 'AuditLogItem'
 
-
-
   def self.random_node
-    ids = self.pluck(:id)
-    self.find(ids.sample)
+    ids = pluck(:id)
+    find(ids.sample)
   end
 
   def api
-    @api ||= YetisNode::Client.new(self.rpc_endpoint, transport: :json_rpc, logger: logger)
+    @api ||= YetisNode::Client.new(rpc_endpoint, transport: :json_rpc, logger: logger)
   end
 
   def total_calls_count
     api.calls_count
   end
 
-  #todo
+  # todo
   # add empty_on_error option handling (same as ActiveCalls)
   def registration(id)
     RealtimeData::OutgoingRegistration.new(api.registrations(id))
@@ -69,7 +69,7 @@ class Node < ActiveRecord::Base
     api.call_disconnect(id)
   end
 
-  #def calls(only = nil, empty_on_error = true)
+  # def calls(only = nil, empty_on_error = true)
   def calls(options = {})
     empty_on_error = !!options[:empty_on_error]
     args = []
@@ -86,13 +86,13 @@ class Node < ActiveRecord::Base
     begin
       api.invoke_show_command(method_name, args.flatten)
     rescue StandardError => e
-       if empty_on_error
-         logger.warn { e.message }
-         logger.warn { e.backtrace.join ('\n')}
-         return []
-       else
+      if empty_on_error
+        logger.warn { e.message }
+        logger.warn { e.backtrace.join '\n' }
+        return []
+      else
         raise e
-       end
+      end
     end
   end
 
@@ -104,14 +104,11 @@ class Node < ActiveRecord::Base
     RealtimeData::ActiveCall.new(api.calls(id))
   end
 
-  def active_calls(only=nil)
+  def active_calls(only = nil)
     if only
       RealtimeData::ActiveCall.collection(api.calls_filtered(only))
     else
       RealtimeData::ActiveCall.collection(api.calls)
     end
   end
-
-
-
 end

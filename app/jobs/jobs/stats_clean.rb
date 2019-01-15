@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Jobs
   class StatsClean < ::BaseJob
-
     def execute
       Stats::AggActiveCall.where('created_at < ?', ago).delete_all
       Stats::AggActiveCallCustomerAccount.where('created_at < ?', ago).delete_all
@@ -14,7 +15,6 @@ module Jobs
       Lnp::Cache.where('expires_at<now()').delete_all
     end
 
-
     def ago
       @ago ||= 1.month.ago
     end
@@ -22,6 +22,5 @@ module Jobs
     def quality_stats_period
       @quality_stats_period ||= 1.week.ago
     end
-
   end
 end

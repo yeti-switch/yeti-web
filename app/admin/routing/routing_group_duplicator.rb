@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Routing::RoutingGroupDuplicator do
   menu false
 
@@ -12,14 +14,13 @@ ActiveAdmin.register Routing::RoutingGroupDuplicator do
     def create
       create! { routing_groups_path }
     end
-
   end
 
-  sidebar 'Original routing group', only: [:new, :create] do
+  sidebar 'Original routing group', only: %i[new create] do
     attributes_table_for RoutingGroup.find(resource.id) do
       row :id
       row :name
-      row "Destinations count" do |r|
+      row 'Destinations count' do |r|
         r.dialpeers.count
       end
     end
@@ -27,15 +28,13 @@ ActiveAdmin.register Routing::RoutingGroupDuplicator do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs "Copy Routing Group" do
+    f.inputs 'Copy Routing Group' do
       f.input :id, as: :hidden
       f.input :name
     end
     f.actions do
       action(:submit)
-      #link_to("cancel",static_routes_path)
+      # link_to("cancel",static_routes_path)
     end
-
   end
-
 end

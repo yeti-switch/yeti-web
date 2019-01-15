@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: accounts
@@ -32,7 +34,6 @@
 #
 
 class Account < Yeti::ActiveRecord
-
   belongs_to :contractor
 
   # belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'customer_invoice_period_id'
@@ -40,7 +41,6 @@ class Account < Yeti::ActiveRecord
 
   belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod'
   belongs_to :vendor_invoice_period, class_name: 'Billing::InvoicePeriod'
-
 
   belongs_to :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'vendor_invoice_template_id'
   belongs_to :customer_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'customer_invoice_template_id'
@@ -52,9 +52,7 @@ class Account < Yeti::ActiveRecord
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
 
-
   has_paper_trail class_name: 'AuditLogItem'
-
 
   default_scope { includes(:contractor) }
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }
@@ -71,12 +69,12 @@ class Account < Yeti::ActiveRecord
 
   validates_uniqueness_of :external_id, allow_blank: true
 
-  validates_numericality_of :vat, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false #this is percents
+  validates_numericality_of :vat, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false # this is percents
   validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
   validates_numericality_of :max_call_duration, greater_than_or_equal_to: 0, allow_nil: true
 
   after_initialize do
-    if self.new_record?
+    if new_record?
       self.balance ||= 0
       self.max_balance ||= 0
       self.min_balance ||= 0
@@ -84,15 +82,15 @@ class Account < Yeti::ActiveRecord
   end
 
   def send_invoices_to_emails
-    contacts_for_invoices.map(&:email).join(",")
+    contacts_for_invoices.map(&:email).join(',')
   end
 
   def send_balance_notifications_to_emails
-    contacts_for_balance_notifications.map(&:email).join(",")
+    contacts_for_balance_notifications.map(&:email).join(',')
   end
 
   def self.totals
-     except(:eager_load).select("sum(balance) as total_balance").take
+    except(:eager_load).select('sum(balance) as total_balance').take
   end
 
   def contacts_for_invoices
@@ -104,12 +102,11 @@ class Account < Yeti::ActiveRecord
   end
 
   before_save do
-
-    if  customer_invoice_period_id_changed?
+    if customer_invoice_period_id_changed?
 
       if customer_invoice_period
-        self.next_customer_invoice_at = self.customer_invoice_period.next_date_from_now
-        self.next_customer_invoice_type_id = self.customer_invoice_period.invoice_type(last_customer_invoice_date, next_customer_invoice_at)
+        self.next_customer_invoice_at = customer_invoice_period.next_date_from_now
+        self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_customer_invoice_date, next_customer_invoice_at)
       else
         self.next_customer_invoice_at = nil
         self.next_customer_invoice_type_id = nil
@@ -119,64 +116,61 @@ class Account < Yeti::ActiveRecord
     if vendor_invoice_period_id_changed?
 
       if vendor_invoice_period
-        self.next_vendor_invoice_at = self.vendor_invoice_period.next_date_from_now
-        self.next_vendor_invoice_type_id = self.vendor_invoice_period.invoice_type(last_vendor_invoice_date, next_vendor_invoice_at)
+        self.next_vendor_invoice_at = vendor_invoice_period.next_date_from_now
+        self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_vendor_invoice_date, next_vendor_invoice_at)
       else
         self.next_vendor_invoice_at = nil
         self.next_vendor_invoice_type_id = nil
       end
     end
-
   end
 
   before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
-    invoices.for_customer.order("end_date desc").limit(1).take.try!(:end_date) || customer_invoice_period.initial_date
+    invoices.for_customer.order('end_date desc').limit(1).take.try!(:end_date) || customer_invoice_period.initial_date
   end
 
   def last_vendor_invoice_date
-    invoices.for_vendor.order("end_date desc").limit(1).take.try!(:end_date) || vendor_invoice_period.initial_date
+    invoices.for_vendor.order('end_date desc').limit(1).take.try!(:end_date) || vendor_invoice_period.initial_date
   end
 
-
-
   def schedule_next_customer_invoice!
-    last_date = self.next_customer_invoice_at
-    self.next_customer_invoice_at = self.customer_invoice_period.next_date(last_date)
-    self.next_customer_invoice_type_id = self.customer_invoice_period.invoice_type(last_date, next_customer_invoice_at)
-    self.save!
+    last_date = next_customer_invoice_at
+    self.next_customer_invoice_at = customer_invoice_period.next_date(last_date)
+    self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_date, next_customer_invoice_at)
+    save!
   end
 
   def schedule_next_vendor_invoice!
-    last_date = self.next_vendor_invoice_at
-    self.next_vendor_invoice_at = self.vendor_invoice_period.next_date(last_date)
-    self.next_vendor_invoice_type_id = self.vendor_invoice_period.invoice_type(last_date, self.next_vendor_invoice_at)
-    self.save!
+    last_date = next_vendor_invoice_at
+    self.next_vendor_invoice_at = vendor_invoice_period.next_date(last_date)
+    self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_date, next_vendor_invoice_at)
+    save!
   end
 
-  #after_update :, if: proc {|obj| obj.vendor_invoice_period_id_changed? }
+  # after_update :, if: proc {|obj| obj.vendor_invoice_period_id_changed? }
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
-  scope :insufficient_balance, -> { where("balance<=min_balance OR balance>=max_balance")}
+  scope :insufficient_balance, -> { where('balance<=min_balance OR balance>=max_balance') }
 
   def min_balance_reached?
-    balance<=min_balance
+    balance <= min_balance
   end
 
   def max_balance_reached?
-    self.balance>=self.max_balance
+    self.balance >= self.max_balance
   end
 
   def min_balance_close?
-    balance<=min_balance*1.1
+    balance <= min_balance * 1.1
   end
 
   def max_balance_close?
-    balance*1.1>=max_balance
+    balance * 1.1 >= max_balance
   end
 
   def fire_low_balance_alarm(data)

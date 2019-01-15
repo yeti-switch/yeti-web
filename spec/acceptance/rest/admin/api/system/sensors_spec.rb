@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,8 +12,8 @@ resource 'Sensors' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'sensors' }
 
-  required_params = %i(name mode-id target-ip source-ip)
-  optional_params = %i(source-interface target-mac use-routing)
+  required_params = %i[name mode-id target-ip source-ip]
+  optional_params = %i[source-interface target-mac use-routing]
 
   get '/api/rest/admin/system/sensors' do
     before { create_list(:sensor, 2) }

@@ -1,5 +1,6 @@
-class Api::Rest::Customer::V1::AuthController < Knock::AuthTokenController
+# frozen_string_literal: true
 
+class Api::Rest::Customer::V1::AuthController < Knock::AuthTokenController
   private
 
   def entity_name

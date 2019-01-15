@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class TagActionValueValidator < ActiveModel::Validator
   def validate(record)
-
     tag_action_id = record.tag_action_id
     tag_action_value = record.tag_action_value
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -24,7 +26,7 @@ resource 'CheckRate', document: :customer_v1 do
   post '/api/rest/customer/v1/check-rate' do
     parameter :type, 'Resource type (check-rates)', scope: :data, required: true
 
-    required_params = %i(rateplan-id number)
+    required_params = %i[rateplan-id number]
 
     jsonapi_attributes(required_params, [])
 
@@ -35,5 +37,4 @@ resource 'CheckRate', document: :customer_v1 do
       expect(status).to eq(201)
     end
   end
-
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
-  menu parent: "System",  priority: 3
+  menu parent: 'System', priority: 3
   config.batch_actions = false
 
   decorate_with ApiAccessDecorator
@@ -11,7 +13,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
                 account_ids: []
 
   filter :id
-  filter :customer, collection: proc { Contractor.select([:id, :name]).reorder(:name) }, input_html: { class: 'chosen' }
+  filter :customer, collection: proc { Contractor.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
   filter :login
 
   index do
@@ -49,15 +51,15 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
       f.input :login
       f.input :password
       f.input :customer, as: :select,
-              input_html: {
-                  class: 'chosen',
-                  onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: "$(this).val()" }, :system_api_access_account_ids, '')
-              }
+                         input_html: {
+                           class: 'chosen',
+                           onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :system_api_access_account_ids, '')
+                         }
       f.input :account_ids, as: :select, label: 'Accounts',
-              input_html: { class: 'chosen', multiple: true, 'data-placeholder': "Choose an Account..." },
-              collection: (f.object.customer.nil? ? [] : f.object.customer.accounts.collection)
+                            input_html: { class: 'chosen', multiple: true, 'data-placeholder': 'Choose an Account...' },
+                            collection: (f.object.customer.nil? ? [] : f.object.customer.accounts.collection)
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
-              hint: 'Array of IP separated by comma'
+                                       hint: 'Array of IP separated by comma'
     end
     f.actions
   end

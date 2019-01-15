@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::AuthController, type: :controller do
@@ -6,7 +8,6 @@ describe Api::Rest::Admin::AuthController, type: :controller do
   before { request.accept = 'application/json' }
 
   describe 'POST create' do
-
     before { post :create, params: { auth: attributes } }
 
     context 'when attributes are valid' do
@@ -14,22 +15,21 @@ describe Api::Rest::Admin::AuthController, type: :controller do
 
       context 'ldap' do
         before do
-          allow(AdminUser).to receive(:ldap_config_exists?){ true }
+          allow(AdminUser).to receive(:ldap_config_exists?) { true }
         end
 
         it { expect(response.status).to eq(201) }
-        it { expect(JSON.parse(response.body).has_key?('jwt')).to be_truthy }
+        it { expect(JSON.parse(response.body).key?('jwt')).to be_truthy }
       end
 
       context 'no ldap' do
         before do
-          allow(AdminUser).to receive(:ldap_config_exists?){ false }
+          allow(AdminUser).to receive(:ldap_config_exists?) { false }
         end
 
         it { expect(response.status).to eq(201) }
-        it { expect(JSON.parse(response.body).has_key?('jwt')).to be_truthy }
+        it { expect(JSON.parse(response.body).key?('jwt')).to be_truthy }
       end
-
     end
 
     context 'when attributes are invalid' do
@@ -40,4 +40,3 @@ describe Api::Rest::Admin::AuthController, type: :controller do
     end
   end
 end
-

@@ -1,6 +1,7 @@
-ActiveAdmin.register Gateway do
+# frozen_string_literal: true
 
-  menu parent: "Equipment", priority: 75
+ActiveAdmin.register Gateway do
+  menu parent: 'Equipment', priority: 75
 
   acts_as_audit
   acts_as_clone
@@ -27,7 +28,6 @@ ActiveAdmin.register Gateway do
   acts_as_delayed_job_lock
 
   decorate_with GatewayDecorator
-
 
   acts_as_export :id, :name, :enabled,
                  [:gateway_group_name, proc { |row| row.gateway_group.try(:name) }],
@@ -115,10 +115,10 @@ ActiveAdmin.register Gateway do
   controller do
     def resource_params
       return [{}] if request.get?
+
       [params[active_admin_config.resource_class.name.underscore.to_sym].permit!]
     end
   end
-
 
   collection_action :with_contractor do
     @gateways = Contractor.find(params[:contractor_id]).gateways
@@ -154,7 +154,7 @@ ActiveAdmin.register Gateway do
 
     column :transport_protocol
     column :host, sortable: 'host' do |gw|
-      "#{gw.host}:#{gw.port}".chomp(":")
+      "#{gw.host}:#{gw.port}".chomp(':')
     end
     column :network_protocol_priority
 
@@ -182,7 +182,7 @@ ActiveAdmin.register Gateway do
     column :acd_limit
     column :short_calls_limit
 
-    #SST
+    # SST
     column :sst_enabled
     column :sst_session_expires
     column :sst_minimum_timer
@@ -190,11 +190,11 @@ ActiveAdmin.register Gateway do
     column :session_refresh_method
     column :sst_accept501
 
-    #SENSOR
+    # SENSOR
     column :sensor
     column :sensor_level
 
-    #SIGNALING
+    # SIGNALING
     column :relay_options
     column :relay_reinvite
     column :relay_prack
@@ -245,7 +245,7 @@ ActiveAdmin.register Gateway do
     column :fake_180_timer
     column :send_lnp_information
 
-    #TRANSLATIONS
+    # TRANSLATIONS
     column :diversion_policy
     column :diversion_rewrite_rule
     column :diversion_rewrite_result
@@ -255,7 +255,7 @@ ActiveAdmin.register Gateway do
     column :src_rewrite_result
     column :dst_rewrite_rule
     column :dst_rewrite_result
-    #MEDIA
+    # MEDIA
     column :sdp_c_location
     column :codec_group
     column :anonymize_sdp
@@ -280,48 +280,48 @@ ActiveAdmin.register Gateway do
     column :dtmf_receive_mode
     column :rx_inband_dtmf_filtering_mode
     column :tx_inband_dtmf_filtering_mode
-    ##RADIUS
+    # #RADIUS
     column :radius_accounting_profile
     column :external_id
   end
 
   filter :id
   filter :name
-  filter :gateway_group, input_html: {class: 'chosen'}
-  filter :pop, input_html: {class: 'chosen'}
-  filter :contractor, input_html: {class: 'chosen'}
+  filter :gateway_group, input_html: { class: 'chosen' }
+  filter :pop, input_html: { class: 'chosen' }
+  filter :contractor, input_html: { class: 'chosen' }
   filter :transport_protocol
   filter :host
-  filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :allow_origination, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :allow_termination, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :proxy_media, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :allow_origination, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :allow_termination, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :proxy_media, as: :select, collection: [['Yes', true], ['No', false]]
 
   filter :statistic_calls, as: :numeric
   filter :statistic_total_duration, as: :numeric
   filter :statistic_asr, as: :numeric
   filter :statistic_acd, as: :numeric
   filter :external_id
-  filter :radius_accounting_profile, input_html: {class: 'chosen'}
+  filter :radius_accounting_profile, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
     tabs do
       tab :general do
-        f.inputs "General" do
+        f.inputs 'General' do
           f.input :name
           f.input :enabled
           f.input :contractor,
                   input_html: {
-                      class: 'chosen',
-                      onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, {contractor_id: "$(this).val()"}, :gateway_gateway_group_id)
+                    class: 'chosen',
+                    onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :gateway_gateway_group_id)
                   }
           f.input :is_shared
-          f.input :gateway_group, as: :select, include_blank: 'None', input_html: {class: 'chosen'}
+          f.input :gateway_group, as: :select, include_blank: 'None', input_html: { class: 'chosen' }
           f.input :priority
           f.input :weight
-          f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
+          f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
 
           f.input :allow_origination
           f.input :allow_termination
@@ -334,7 +334,7 @@ ActiveAdmin.register Gateway do
         end
       end
       tab :sst do
-        f.inputs "Session timers" do
+        f.inputs 'Session timers' do
           f.input :sst_enabled
           f.input :sst_session_expires
           f.input :sst_minimum_timer
@@ -345,7 +345,7 @@ ActiveAdmin.register Gateway do
       end
 
       tab :sensor do
-        f.inputs "Sensor" do
+        f.inputs 'Sensor' do
           f.input :sensor_level
           f.input :sensor
         end
@@ -353,20 +353,19 @@ ActiveAdmin.register Gateway do
       tab :signaling do
         columns do
           column do
-            f.inputs "General" do
+            f.inputs 'General' do
               f.input :relay_options
               f.input :relay_reinvite
               f.input :relay_hold
               f.input :relay_prack
               f.input :rel100_mode, as: :select, include_blank: false
               f.input :relay_update
-              f.input :transit_headers_from_origination, hint: "Use comma as delimiter"
-              f.input :transit_headers_from_termination, hint: "Use comma as delimiter"
+              f.input :transit_headers_from_origination, hint: 'Use comma as delimiter'
+              f.input :transit_headers_from_termination, hint: 'Use comma as delimiter'
               f.input :sip_interface_name
-
             end
 
-            f.inputs "Origination" do
+            f.inputs 'Origination' do
               f.input :orig_next_hop
               f.input :orig_append_headers_req
               f.input :orig_use_outbound_proxy
@@ -378,13 +377,11 @@ ActiveAdmin.register Gateway do
               f.input :orig_disconnect_policy
 
               f.input :incoming_auth_username
-              f.input :incoming_auth_password, as: :string, input_html: {autocomplete: 'off'}
+              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }
             end
-
           end
-          column  do
-
-            f.inputs "Termination" do
+          column do
+            f.inputs 'Termination' do
               f.input :transport_protocol, as: :select, include_blank: false
               f.input :sip_schema, as: :select, include_blank: false
               f.input :host
@@ -394,7 +391,7 @@ ActiveAdmin.register Gateway do
 
               f.input :auth_enabled
               f.input :auth_user
-              f.input :auth_password, as: :string, input_html: {autocomplete: 'off'}
+              f.input :auth_password, as: :string, input_html: { autocomplete: 'off' }
               f.input :auth_from_user
               f.input :auth_from_domain
 
@@ -415,17 +412,14 @@ ActiveAdmin.register Gateway do
               f.input :sip_timer_b
               f.input :dns_srv_failover_timer
               f.input :suppress_early_media
-              f.input :fake_180_timer, hint: "Timeout in ms."
+              f.input :fake_180_timer, hint: 'Timeout in ms.'
               f.input :send_lnp_information
             end
           end
-
         end
-
-
       end
-      tab "Translations" do
-        f.inputs "Translations" do
+      tab 'Translations' do
+        f.inputs 'Translations' do
           f.input :diversion_policy
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
@@ -438,7 +432,7 @@ ActiveAdmin.register Gateway do
         end
       end
       tab :media do
-        f.inputs "Media settings" do
+        f.inputs 'Media settings' do
           f.input :sdp_c_location, as: :select, include_blank: false
           f.input :codec_group, as: :select, include_blank: false
           f.input :anonymize_sdp
@@ -460,27 +454,23 @@ ActiveAdmin.register Gateway do
         end
       end
       tab :dtmf do
-        f.inputs "DTMF" do
+        f.inputs 'DTMF' do
           f.input :force_dtmf_relay
           f.input :dtmf_send_mode, as: :select, include_blank: false
           f.input :dtmf_receive_mode, as: :select, include_blank: false
           f.input :rx_inband_dtmf_filtering_mode, as: :select, include_blank: false
           f.input :tx_inband_dtmf_filtering_mode, as: :select, include_blank: false
         end
-
       end
       tab :radius do
-        f.inputs "RADIUS" do
-          f.input :radius_accounting_profile, hint: "RADIUS accounting profile for LegB(Termination)"
+        f.inputs 'RADIUS' do
+          f.input :radius_accounting_profile, hint: 'RADIUS accounting profile for LegB(Termination)'
         end
-
       end
     end
 
-
     f.actions
   end
-
 
   show do |s|
     tabs do
@@ -526,7 +516,7 @@ ActiveAdmin.register Gateway do
       end
 
       tab :signaling do
-        panel "General" do
+        panel 'General' do
           attributes_table_for s do
             row :relay_options
             row :relay_reinvite
@@ -539,7 +529,7 @@ ActiveAdmin.register Gateway do
             row :sip_interface_name
           end
         end
-        panel "Origination" do
+        panel 'Origination' do
           attributes_table_for s do
             row :orig_next_hop
             row :orig_append_headers_req
@@ -555,7 +545,7 @@ ActiveAdmin.register Gateway do
             row :incoming_auth_password
           end
         end
-        panel "Termination" do
+        panel 'Termination' do
           attributes_table_for s do
             row :transport_protocol
             row :sip_schema
@@ -590,7 +580,7 @@ ActiveAdmin.register Gateway do
           end
         end
       end
-      tab "Translations" do
+      tab 'Translations' do
         attributes_table_for s do
           row :diversion_policy
           row :diversion_rewrite_rule
@@ -604,11 +594,10 @@ ActiveAdmin.register Gateway do
         end
       end
 
-
       tab :media do
         attributes_table_for s do
           row :sdp_c_location
-          row :codec_group, input_html: {class: 'chosen'}
+          row :codec_group, input_html: { class: 'chosen' }
           row :anonymize_sdp
           row :proxy_media
           row :single_codec_in_200ok
@@ -642,41 +631,40 @@ ActiveAdmin.register Gateway do
         end
       end
 
+      if s.allow_origination?
+        tab :origination_chart do
+          panel '24h' do
+            render partial: 'charts/orig_gateway'
+          end
+          panel 'History' do
+            render partial: 'charts/orig_gateway_agg'
+          end
+        end
+      end
 
-      tab :origination_chart do
-        panel '24h' do
-          render partial: 'charts/orig_gateway'
+      if s.allow_termination?
+        tab :termination_chart do
+          panel '24h' do
+            render partial: 'charts/term_gateway'
+          end
+          panel 'History' do
+            render partial: 'charts/term_gateway_agg'
+          end
+          panel 'PDD Distribution' do
+            render partial: 'charts/gateway_pdd_distribution'
+          end
         end
-        panel 'History' do
-          render partial: 'charts/orig_gateway_agg'
-        end
-      end if s.allow_origination?
-
-      tab :termination_chart do
-        panel '24h' do
-          render partial: 'charts/term_gateway'
-        end
-        panel 'History' do
-          render partial: 'charts/term_gateway_agg'
-        end
-        panel 'PDD Distribution' do
-          render partial: 'charts/gateway_pdd_distribution'
-        end
-
-      end if s.allow_termination?
-
+      end
     end
-    
+
     active_admin_comments
   end
 
-  sidebar :links, only: [:show, :edit] do
+  sidebar :links, only: %i[show edit] do
     ul do
       li do
-        link_to "Dialpeers", dialpeers_path(q: {gateway_id_eq: params[:id]})
+        link_to 'Dialpeers', dialpeers_path(q: { gateway_id_eq: params[:id] })
       end
     end
   end
-
-
 end

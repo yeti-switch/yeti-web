@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CdrExportPolicy < ::RolePolicy
   section 'CdrExport'
 
@@ -5,6 +7,4 @@ class CdrExportPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

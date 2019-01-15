@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AsyncBatchUpdateJob
   include BatchJobsLog
   BATCH_SIZE = 1000
@@ -38,12 +40,11 @@ class AsyncBatchUpdateJob
     result_sql
   end
 
-  def reschedule_at(time, attempts)
+  def reschedule_at(_time, _attempts)
     10.seconds.from_now
   end
 
   def max_attempts
     3
   end
-
 end

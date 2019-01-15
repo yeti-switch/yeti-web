@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.routing_tag_modes
@@ -7,11 +9,11 @@
 #
 
 class Routing::RoutingTagMode < Yeti::ActiveRecord
-  self.table_name='class4.routing_tag_modes'
+  self.table_name = 'class4.routing_tag_modes'
 
   module CONST
-    OR = 0.freeze
-    AND = 1.freeze
+    OR = 0
+    AND = 1
 
     freeze
   end

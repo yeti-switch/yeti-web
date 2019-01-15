@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,8 +12,8 @@ resource 'Smtp connections' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'smtp-connections' }
 
-  required_params = %i(name host port from-address)
-  optional_params = %i(auth-user auth-password global)
+  required_params = %i[name host port from-address]
+  optional_params = %i[auth-user auth-password global]
 
   get '/api/rest/admin/system/smtp-connections' do
     before { create_list(:smtp_connection, 2) }

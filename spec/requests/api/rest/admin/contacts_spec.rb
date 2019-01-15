@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'contacts'
+  include_context :json_api_admin_helpers, type: :contacts
 
   describe 'GET /api/rest/admin/contacts' do
     subject do
@@ -20,7 +22,6 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     end
   end
 
-
   describe 'GET /api/rest/admin/contacts/{id}' do
     subject do
       get json_api_request_path, params: request_query, headers: json_api_request_headers
@@ -35,8 +36,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:contact_attrs) { { email: 'some@mail.com', notes: 'Text here...' } }
     let(:contact_response_attributes) do
       {
-          'email': contact.email,
-          'notes': contact.notes
+        'email': contact.email,
+        'notes': contact.notes
       }
     end
 
@@ -59,7 +60,6 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     end
   end
 
-
   describe 'POST /api/rest/admin/contacts' do
     subject do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
@@ -69,11 +69,11 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
 
     let(:json_api_request_body) do
       {
-          data: {
-              type: json_api_resource_type,
-              attributes: json_api_request_attributes,
-              relationships: json_api_request_relationships
-          }
+        data: {
+          type: json_api_resource_type,
+          attributes: json_api_request_attributes,
+          relationships: json_api_request_relationships
+        }
       }
     end
     let(:json_api_request_attributes) do
@@ -84,7 +84,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     end
     let(:json_api_request_relationships) do
       {
-          contractor: { data: { id: contractor.id.to_s, type: 'contractors' } }
+        contractor: { data: { id: contractor.id.to_s, type: 'contractors' } }
       }
     end
     let(:last_contact) { Billing::Contact.last! }
@@ -93,16 +93,14 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       let(:json_api_record_id) { last_contact.id.to_s }
       let(:json_api_record_attributes) do
         {
-            'email': json_api_request_attributes[:'email'],
-            'notes': json_api_request_attributes[:'notes']
+          'email': json_api_request_attributes[:email],
+          'notes': json_api_request_attributes[:notes]
         }
       end
     end
 
     include_examples :changes_records_qty_of, Billing::Contact, by: 1
   end
-
-
 
   describe 'PATCH /api/rest/admin/contacts/{id}' do
     subject do
@@ -125,7 +123,6 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       end
     end
   end
-
 
   describe 'DELETE /api/rest/admin/contacts/{id}' do
     subject do

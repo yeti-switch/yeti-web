@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Account, type: :model do
-
   it do
     should validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     should validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
   end
-  
+
   context '#destroy' do
     let!(:account) { create(:account) }
 
@@ -16,7 +17,6 @@ describe Account, type: :model do
 
     context 'wihtout linked ApiAccess records' do
       let!(:api_access) { create(:api_access) }
-
 
       it 'removes Account successfully' do
         expect { subject }.to change { described_class.count }.by(-1)
@@ -42,7 +42,7 @@ describe Account, type: :model do
       it 'update relaated ApiAccess#account_ids (removes second element from array)' do
         expect { subject }.to change {
           api_access.reload.account_ids
-        }.from(accounts.map(&:id)).to(accounts.map(&:id).values_at(0,2))
+        }.from(accounts.map(&:id)).to(accounts.map(&:id).values_at(0, 2))
       end
     end
 
@@ -78,7 +78,5 @@ describe Account, type: :model do
         expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
       end
     end
-
   end
-
 end

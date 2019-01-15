@@ -1,41 +1,42 @@
+# frozen_string_literal: true
+
 module ResourceDSL
   module ActsAsImport
-
     REGISTERED_IMPORTS = [
-        Importing::Dialpeer,
-        Importing::Account,
-        Importing::CodecGroup,
-        Importing::CodecGroupCodec,
-        Importing::Contractor,
-        Importing::CustomersAuth,
-        Importing::Destination,
-        Importing::Dialpeer,
-        Importing::DisconnectPolicy,
-        Importing::Gateway,
-        Importing::GatewayGroup,
-        Importing::Rateplan,
-        Importing::Registration,
-        Importing::RoutingGroup
-    ]
+      Importing::Dialpeer,
+      Importing::Account,
+      Importing::CodecGroup,
+      Importing::CodecGroupCodec,
+      Importing::Contractor,
+      Importing::CustomersAuth,
+      Importing::Destination,
+      Importing::Dialpeer,
+      Importing::DisconnectPolicy,
+      Importing::Gateway,
+      Importing::GatewayGroup,
+      Importing::Rateplan,
+      Importing::Registration,
+      Importing::RoutingGroup
+    ].freeze
 
     def acts_as_import(options)
       skip_columns = options.delete(:skip_columns) || []
 
-      options= {
-          resource_class: config.resource_class,
-          resource_label: config.resource_label,
-          template: "shared/import",
-          validate: false,
-          batch_size: 1000,
-          headers_rewrites: {
-              'Id' => 'o_id'
-          }
+      options = {
+        resource_class: config.resource_class,
+        resource_label: config.resource_label,
+        template: 'shared/import',
+        validate: false,
+        batch_size: 1000,
+        headers_rewrites: {
+          'Id' => 'o_id'
+        }
       }.merge(options)
 
       options[:template_object] = Importing::Model.new(
-          # "proc" prevents error on `rake db:structure:dump`
-          unique_columns_proc: proc { options[:resource_class].import_attributes },
-          csv_options: {col_sep: ",", row_sep: nil, quote_char: nil}
+        # "proc" prevents error on `rake db:structure:dump`
+        unique_columns_proc: proc { options[:resource_class].import_attributes },
+        csv_options: { col_sep: ',', row_sep: nil, quote_char: nil }
       )
 
       options[:back] = proc { config.namespace.resource_for(options[:resource_class]).route_collection_path }
@@ -48,14 +49,15 @@ module ResourceDSL
         importer.batch_slice_columns(columns)
       end
 
-      options[:after_import] = proc { |importer|
-        unique_columns = []
-        if importer.model.respond_to?(:unique_columns_values)
-          unique_columns = importer.model.unique_columns_values.reject(&:blank?).map(&:to_sym)
-        end
-        options[:resource_class].after_import_hook(unique_columns)
-
-      } if options[:resource_class].respond_to?(:after_import_hook)
+      if options[:resource_class].respond_to?(:after_import_hook)
+        options[:after_import] = proc { |importer|
+          unique_columns = []
+          if importer.model.respond_to?(:unique_columns_values)
+            unique_columns = importer.model.unique_columns_values.reject(&:blank?).map(&:to_sym)
+          end
+          options[:resource_class].after_import_hook(unique_columns)
+        }
+      end
 
       active_admin_import options
 
@@ -75,17 +77,14 @@ module ResourceDSL
         # if Importing::ImportingDelayedJob.jobs?
         #   raise ApplicationController::ImportDisabled.new('Import in progress')
         # end
-        pending_import = REGISTERED_IMPORTS.detect {|r| r.any? }
+        pending_import = REGISTERED_IMPORTS.detect(&:any?)
         if pending_import
           raise ApplicationController::ImportPending.new(
-              active_admin_config.namespace.resource_for(pending_import).route_collection_path,
-              I18n.t('flash.importing.pending')
+            active_admin_config.namespace.resource_for(pending_import).route_collection_path,
+            I18n.t('flash.importing.pending')
           )
         end
       end
-
-
     end
   end
 end
-

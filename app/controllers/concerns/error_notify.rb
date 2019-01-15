@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Concerns::ErrorNotify
   extend ActiveSupport::Concern
 
@@ -9,7 +11,7 @@ module Concerns::ErrorNotify
     Rails.logger.error e.message
     Rails.logger.warn e.backtrace.join("\n")
     ActionMailer::Base.mail(subject: e.message,
-                            body: [e.backtrace.join("\n"), self.request.inspect].join("\n\n\n")).deliver
-    raise e  if re_raise
+                            body: [e.backtrace.join("\n"), request.inspect].join("\n\n\n")).deliver
+    raise e if re_raise
   end
 end

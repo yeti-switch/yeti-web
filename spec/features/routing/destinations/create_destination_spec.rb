@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Destinations', type: :feature do
   include_context :login_as_admin
 
   context 'success' do
-
     let!(:tag) { create(:routing_tag, :ua) }
     let!(:rateplan) { create(:rateplan) }
 
@@ -43,5 +44,4 @@ describe 'Create new Destinations', type: :feature do
       )
     end
   end
-
 end

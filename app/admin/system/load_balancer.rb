@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::LoadBalancer do
   actions :all
-  menu parent: "System", label: "Load balancers", priority: 124
+  menu parent: 'System', label: 'Load balancers', priority: 124
   config.batch_actions = false
 
   permit_params :name, :signalling_ip
@@ -31,5 +33,4 @@ ActiveAdmin.register System::LoadBalancer do
       row :signalling_ip
     end
   end
-
 end

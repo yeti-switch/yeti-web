@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::AccountResource < ::BaseResource
   attributes :name,
              :balance, :min_balance, :max_balance,
@@ -26,33 +28,33 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   end
 
   def self.updatable_fields(_context)
-    [
-      :name,
-      :uuid,
-      :external_id,
-      :min_balance,
-      :max_balance,
-      :balance_low_threshold,
-      :balance_high_threshold,
-      :send_balance_notifications_to,
-      :destination_rate_limit,
-      :max_call_duration,
-      :vat,
-      :origination_capacity,
-      :termination_capacity,
-      :total_capacity,
-      :send_invoices_to,
+    %i[
+      name
+      uuid
+      external_id
+      min_balance
+      max_balance
+      balance_low_threshold
+      balance_high_threshold
+      send_balance_notifications_to
+      destination_rate_limit
+      max_call_duration
+      vat
+      origination_capacity
+      termination_capacity
+      total_capacity
+      send_invoices_to
 
-      :contractor,
-      :timezone,
-      :customer_invoice_period,
-      :vendor_invoice_period,
-      :customer_invoice_template,
-      :vendor_invoice_template
+      contractor
+      timezone
+      customer_invoice_period
+      vendor_invoice_period
+      customer_invoice_template
+      vendor_invoice_template
     ]
   end
 
   def self.creatable_fields(context)
-    self.updatable_fields(context) + [:external_id]
+    updatable_fields(context) + [:external_id]
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.lnp_resolvers
@@ -12,11 +14,10 @@ class System::LnpResolver < Yeti::ActiveRecord
   self.table_name = 'sys.lnp_resolvers'
   validates_uniqueness_of :name
   validates_presence_of :name, :address, :port
-  
+
   has_paper_trail class_name: 'AuditLogItem'
 
   def display_name
-    "#{self.name}"
+    name.to_s
   end
-
 end

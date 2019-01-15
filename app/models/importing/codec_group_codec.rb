@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_codec_group_codecs
@@ -12,15 +14,14 @@
 #  error_string     :string
 #
 
-class Importing::CodecGroupCodec  < Importing::Base
+class Importing::CodecGroupCodec < Importing::Base
   self.table_name = 'data_import.import_codec_group_codecs'
   attr_accessor :file
 
   belongs_to :codec_group, class_name: '::CodecGroup'
   belongs_to :codec, class_name: '::Codec'
 
-  self.import_attributes = ['codec_group_id','codec_id','priority']
+  self.import_attributes = %w[codec_group_id codec_id priority]
 
   self.import_class = ::CodecGroupCodec
-
 end

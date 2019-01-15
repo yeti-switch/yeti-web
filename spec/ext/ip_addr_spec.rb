@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe IPAddr do
-
   describe '#cidr_mask' do
-    
     subject do
       described_class.new(ip).cidr_mask
     end
@@ -19,10 +19,10 @@ describe IPAddr do
 
       it { is_expected.to eq(64) }
     end
-    
+
     context 'with invalid IPv4' do
       let(:ip) { '1.1.1.1/34' }
-      
+
       it { expect { subject }.to raise_error(IPAddr::InvalidPrefixError) }
     end
 
@@ -32,6 +32,4 @@ describe IPAddr do
       it { expect { subject }.to raise_error(IPAddr::InvalidPrefixError) }
     end
   end
-
 end
-

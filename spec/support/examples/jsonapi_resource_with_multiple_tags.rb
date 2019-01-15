@@ -1,7 +1,8 @@
-RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
+# frozen_string_literal: true
 
-  #let(:resource_type) { 'customers-auths' }
-  #let(:factory_name) { :customers_auth }
+RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
+  # let(:resource_type) { 'customers-auths' }
+  # let(:factory_name) { :customers_auth }
 
   include_context :init_routing_tag_collection
 
@@ -18,7 +19,6 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
   end
 
   context 'GET show' do
-
     before { get :show, params: { id: record.to_param, include: 'tag-action' } }
 
     it 'has `tag_action_velue` array' do
@@ -38,7 +38,6 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
         )
       )
     end
-
   end
 
   context 'PUT update' do
@@ -66,5 +65,4 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
       )
     end
   end
-
 end

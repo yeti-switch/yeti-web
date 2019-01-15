@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.rate_profit_control_modes
@@ -7,10 +9,8 @@
 #
 
 class Routing::RateProfitControlMode < ActiveRecord::Base
-
-  self.table_name='class4.rate_profit_control_modes'
+  self.table_name = 'class4.rate_profit_control_modes'
   def display_name
-    "#{self.name}"
+    name.to_s
   end
-
 end

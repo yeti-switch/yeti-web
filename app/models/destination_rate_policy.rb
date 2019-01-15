@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: destination_rate_policy
@@ -8,5 +10,5 @@
 
 class DestinationRatePolicy < ActiveRecord::Base
   has_many :destination, class_name: 'Routing::Destination'
-  self.table_name='destination_rate_policy'
+  self.table_name = 'destination_rate_policy'
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DialpeerPolicy < ::RolePolicy
   section 'Dialpeer'
 
@@ -8,6 +10,4 @@ class DialpeerPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

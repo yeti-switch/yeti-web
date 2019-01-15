@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gateway_groups
@@ -23,24 +25,23 @@ class GatewayGroup < ActiveRecord::Base
   validate :vendor_can_be_changed
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
   def have_valid_gateways?
-    gateways.where("enabled and allow_termination").count>0
+    gateways.where('enabled and allow_termination').count > 0
   end
 
   protected
 
   def contractor_is_vendor
-     self.errors.add(:vendor, "Is not vendor") unless self.vendor && self.vendor.vendor
+    errors.add(:vendor, 'Is not vendor') unless vendor&.vendor
   end
 
   def vendor_can_be_changed
     if vendor_id_changed?
-      self.errors.add(:vendor, "can't be changed because Gateway Group contain gateways") if gateways.any?
-      self.errors.add(:vendor, "can't be changed because Gateway Group belongs to dialpeers") if dialpeers.any?
+      errors.add(:vendor, "can't be changed because Gateway Group contain gateways") if gateways.any?
+      errors.add(:vendor, "can't be changed because Gateway Group belongs to dialpeers") if dialpeers.any?
     end
   end
-
 end

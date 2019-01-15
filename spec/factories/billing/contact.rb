@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :contact, class: Billing::Contact do
     sequence(:email) { |n| "rspec_mail_#{n}@example.com" }

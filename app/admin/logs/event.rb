@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Event do
-  menu parent: "Logs", priority: 140
+  menu parent: 'Logs', priority: 140
   actions :index, :show
   config.batch_actions = false
 
@@ -14,8 +16,7 @@ ActiveAdmin.register Event do
   end
 
   filter :id
-  filter :node, input_html: {class: 'chosen'}
+  filter :node, input_html: { class: 'chosen' }
   filter :retries
   filter :command
-
 end

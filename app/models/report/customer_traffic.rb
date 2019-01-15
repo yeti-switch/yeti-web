@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.customer_traffic_report
@@ -23,7 +25,7 @@ class Report::CustomerTraffic < Cdr::Base
   end
 
   def report_records_by_destination
-    #customer_traffic_data_by_destination.includes(:country, :network)
+    # customer_traffic_data_by_destination.includes(:country, :network)
     customer_traffic_data_by_destination.report_records
   end
 
@@ -33,13 +35,13 @@ class Report::CustomerTraffic < Cdr::Base
 
   validates_presence_of :date_start, :date_end, :customer_id
 
-  GROUP_COLUMNS = [
-      :vendor,
-      :destination_prefix
-  ]
+  GROUP_COLUMNS = %i[
+    vendor
+    destination_prefix
+  ].freeze
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   after_create do
@@ -70,12 +72,11 @@ class Report::CustomerTraffic < Cdr::Base
                 AND time_start<?
                 AND customer_id=?
               GROUP BY vendor_id, destination_prefix, dst_country_id, dst_network_id",
-               self.id,
+               id,
                GuiConfig.short_call_length,
-               self.date_start,
-               self.date_end,
-               self.customer_id
-    )
+               date_start,
+               date_end,
+               customer_id)
     execute_sp("INSERT INTO reports.customer_traffic_report_data_by_vendor(
                   report_id,
                   vendor_id,
@@ -101,9 +102,8 @@ class Report::CustomerTraffic < Cdr::Base
               WHERE
                 report_id=?
               GROUP BY vendor_id",
-               self.id,
-               self.id
-    )
+               id,
+               id)
 
     execute_sp("INSERT INTO reports.customer_traffic_report_data_by_destination(
                   report_id,
@@ -130,9 +130,8 @@ class Report::CustomerTraffic < Cdr::Base
               WHERE
                 report_id=?
               GROUP BY destination_prefix, dst_country_id, dst_network_id",
-               self.id,
-               self.id
-    )
+               id,
+               id)
   end
 
   include Hints
@@ -142,59 +141,56 @@ class Report::CustomerTraffic < Cdr::Base
   end
 
   def csv_columns
-    [:vendor,
-     :calls_count,
-     :success_calls_count,
-     :short_calls_count,
-     :calls_duration,
-     :acd,
-     :asr,
-     :origination_cost,
-     :termination_cost,
-     :profit,
-     :first_call_at,
-     :last_call_at
-    ]
+    %i[vendor
+       calls_count
+       success_calls_count
+       short_calls_count
+       calls_duration
+       acd
+       asr
+       origination_cost
+       termination_cost
+       profit
+       first_call_at
+       last_call_at]
   end
 
   def csv_columns_by_destination
-    [
-        :destination_prefix,
-        :country,
-        :network,
-        :calls_count,
-        :success_calls_count,
-        :short_calls_count,
-        :calls_duration,
-        :acd,
-        :asr,
-        :origination_cost,
-        :termination_cost,
-        :profit,
-        :first_call_at,
-        :last_call_at
+    %i[
+      destination_prefix
+      country
+      network
+      calls_count
+      success_calls_count
+      short_calls_count
+      calls_duration
+      acd
+      asr
+      origination_cost
+      termination_cost
+      profit
+      first_call_at
+      last_call_at
     ]
   end
 
   def csv_columns_full
-    [
-        :vendor,
-        :destination_prefix,
-        :country,
-        :network,
-        :calls_count,
-        :success_calls_count,
-        :short_calls_count,
-        :calls_duration,
-        :acd,
-        :asr,
-        :origination_cost,
-        :termination_cost,
-        :profit,
-        :first_call_at,
-        :last_call_at
+    %i[
+      vendor
+      destination_prefix
+      country
+      network
+      calls_count
+      success_calls_count
+      short_calls_count
+      calls_duration
+      acd
+      asr
+      origination_cost
+      termination_cost
+      profit
+      first_call_at
+      last_call_at
     ]
   end
-
-
 end

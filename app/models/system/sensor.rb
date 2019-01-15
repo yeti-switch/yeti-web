@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.sensors
@@ -18,7 +20,7 @@ class System::Sensor < Yeti::ActiveRecord
   self.table_name = 'sys.sensors'
 
   has_paper_trail class_name: 'AuditLogItem'
-  belongs_to :mode,class_name: 'System::SensorMode', foreign_key: :mode_id
+  belongs_to :mode, class_name: 'System::SensorMode', foreign_key: :mode_id
 
   has_many :gateways, dependent: :restrict_with_error
 
@@ -26,23 +28,23 @@ class System::Sensor < Yeti::ActiveRecord
   validates :mode, presence: true
 
   validates :source_ip,
-            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_IP } },
+            presence: { if: proc { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_IP } },
             format: { with: /\A\z|\A((0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\.){3}(0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\z/ }
 
   validates :target_ip,
-            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_IP or sensor.mode_id.to_i == System::SensorMode::HEPv3 } },
+            presence: { if: proc { |sensor| (sensor.mode_id.to_i == System::SensorMode::IP_IP) || (sensor.mode_id.to_i == System::SensorMode::HEPv3) } },
             format: { with: /\A\z|\A((0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\.){3}(0|1[0-9]{0,2}|2[0-9]{0,1}|2[0-4][0-9]|25[0-5]|[3-9][0-9]{0,1})\z/ }
 
   validates :source_interface,
-            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_ETHERNET } }
+            presence: { if: proc { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_ETHERNET } }
 
   validates :target_mac,
-            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_ETHERNET } },
+            presence: { if: proc { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_ETHERNET } },
             format: { with: /\A\z|\A(([0-9A-Fa-f]{2})\-){5}(([0-9A-Fa-f]{2}))$|^(([0-9A-Fa-f]{2})\:){5}(([0-9A-Fa-f]{2}))\z/ }
 
   validates_numericality_of :target_port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
   validates :target_port,
-            presence: { if: Proc.new { |sensor| sensor.mode_id.to_i == System::SensorMode::HEPv3 } }
+            presence: { if: proc { |sensor| sensor.mode_id.to_i == System::SensorMode::HEPv3 } }
 
   validates_numericality_of :hep_capture_id, greater_than_or_equal_to: 0, less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_INT, allow_nil: true, only_integer: true
 
@@ -50,7 +52,7 @@ class System::Sensor < Yeti::ActiveRecord
 
   def on_save_change_empty_to_null
     # Convert empty string to NULL for nullable fields with non string type
-    ['source_interface', 'target_mac', 'target_ip', 'source_ip'].map do |el|
+    %w[source_interface target_mac target_ip source_ip].map do |el|
       self[el] = nil if self[el].blank?
     end
     # Temporary disable "use_routing". Dima.s requested this 19.11.2014
@@ -59,9 +61,7 @@ class System::Sensor < Yeti::ActiveRecord
 
   include Yeti::SensorReloader
 
-
   def display_name
-    "#{self.name}"
+    name.to_s
   end
-
 end

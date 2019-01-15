@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Api::Rest::System::JobsController do
@@ -15,8 +17,8 @@ RSpec.describe Api::Rest::System::JobsController do
         before do
           Event.reload_translations
 
-          allow_any_instance_of(YetisNode::JsonRpcTransport).to receive(:rpc_send).
-              with('request.router.translations.reload', []).and_return(nil)
+          allow_any_instance_of(YetisNode::JsonRpcTransport).to receive(:rpc_send)
+            .with('request.router.translations.reload', []).and_return(nil)
         end
 
         it 'expects to delete success events' do
@@ -27,8 +29,8 @@ RSpec.describe Api::Rest::System::JobsController do
 
         context 'when one event failed' do
           before do
-            expect_any_instance_of(Jobs::EventProcessor).to receive(:process_event).
-                exactly(Node.count).times.and_raise(StandardError.new('some error'))
+            expect_any_instance_of(Jobs::EventProcessor).to receive(:process_event)
+              .exactly(Node.count).times.and_raise(StandardError.new('some error'))
           end
 
           it 'expects to not delete events' do
@@ -37,10 +39,7 @@ RSpec.describe Api::Rest::System::JobsController do
 
           include_examples :responds_with_status, 204
         end
-
       end
-
     end
-
   end
 end

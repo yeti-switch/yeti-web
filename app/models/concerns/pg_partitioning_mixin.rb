@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Module mixis in ActiveRecord class
 # to add "Postgres Table Partitioning" behaviour
 #
@@ -61,9 +63,7 @@ module PgPartitioningMixin
     self.partition_range = :month # :month | :day
   end
 
-
   class_methods do
-
     def add_partition
       today = Date.today
       transaction do
@@ -79,17 +79,19 @@ module PgPartitioningMixin
             INSERT INTO #{t.name} VALUES (NEW.*);"
       end
 
-      connection.execute %Q{
-        CREATE OR REPLACE FUNCTION #{trigger_function_name}() RETURNS trigger AS $trg$
-        BEGIN
-          IF #{ cases.join("\n          ELSIF ")  }
-          ELSE
-            RAISE EXCEPTION '#{trigger_name}: #{partition_key} out of range.';
-          END IF;
-          RETURN NULL;
-        END; $trg$
-        LANGUAGE plpgsql VOLATILE COST 100;
-      } if cases.any?
+      if cases.any?
+        connection.execute %{
+          CREATE OR REPLACE FUNCTION #{trigger_function_name}() RETURNS trigger AS $trg$
+          BEGIN
+            IF #{cases.join("\n          ELSIF ")}
+            ELSE
+              RAISE EXCEPTION '#{trigger_name}: #{partition_key} out of range.';
+            END IF;
+            RETURN NULL;
+          END; $trg$
+          LANGUAGE plpgsql VOLATILE COST 100;
+        }
+      end
     end
 
     def partitions
@@ -124,10 +126,10 @@ module PgPartitioningMixin
     #
     def time_slices(max_slices = 3)
       today = Date.today
-      starting_point = (partition_range == :day) ?
+      starting_point = partition_range == :day ?
         today - 1.day : today.beginning_of_month - 1.month
       (1..max_slices).map do |i|
-        [starting_point + (i-1).send(partition_range),
+        [starting_point + (i - 1).send(partition_range),
          starting_point + i.send(partition_range)]
       end
     end
@@ -141,7 +143,5 @@ module PgPartitioningMixin
         reload_insertion_trigger
       end
     end
-
   end
-
 end

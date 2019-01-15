@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notifications.email_logs
@@ -20,18 +22,16 @@ class Log::EmailLog < Yeti::ActiveRecord
   self.table_name = 'notifications.email_logs'
   belongs_to :contact, class_name: 'Billing::Contact', foreign_key: :contact_id
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', foreign_key: :smtp_connection_id
-  #belongs_to :attachment, class_name: Notification::Attachment
-  #belongs_to :attachment_no_data, -> { select [:id, :filename ] },
+  # belongs_to :attachment, class_name: Notification::Attachment
+  # belongs_to :attachment_no_data, -> { select [:id, :filename ] },
   #           class_name: Notification::Attachment, foreign_key: :attachment_id
-
-
 
   def attachments
     @attachments ||= Notification::Attachment.where(id: attachment_id)
   end
 
   def getfile(id)
-    attachments.where("id=?", id).take
+    attachments.where('id=?', id).take
   end
 
   def attachments_no_data
@@ -39,21 +39,16 @@ class Log::EmailLog < Yeti::ActiveRecord
   end
 
   after_create do
-    self.class.delay.send_email(self.id)
+    self.class.delay.send_email(id)
   end
 
   def self.send_email(id)
-    begin
-      YetiMail.email_message(id).deliver!
-      Log::EmailLog.where(id: id).update_all(sent_at: Time.now)
-    rescue StandardError => e
-      Rails.logger.warn { e.message }
-      Rails.logger.warn { e.backtrace.join("\n") }
+    YetiMail.email_message(id).deliver!
+    Log::EmailLog.where(id: id).update_all(sent_at: Time.now)
+  rescue StandardError => e
+    Rails.logger.warn { e.message }
+    Rails.logger.warn { e.backtrace.join("\n") }
 
-      Log::EmailLog.where(id: id).update_all(error: e.message)
-    end
+    Log::EmailLog.where(id: id).update_all(error: e.message)
   end
-
-
 end
-

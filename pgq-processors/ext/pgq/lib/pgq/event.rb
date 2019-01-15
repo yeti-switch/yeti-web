@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Pgq::Event
-  attr_reader :type, :data, :id, :consumer , :time
+  attr_reader :type, :data, :id, :consumer, :time
 
   def initialize(consumer, event)
     @id = event['ev_id']
@@ -10,7 +12,7 @@ class Pgq::Event
   end
 
   def done?
-     @consumer.event_done?(@id)
+    @consumer.event_done?(@id)
   end
 
   def done!
@@ -22,22 +24,29 @@ class Pgq::Event
   end
 
   def self.exception_message(e)
-    <<-EXCEPTION
-Exception happend
-Error occurs: #{e.class.inspect}(#{e.message})
-Backtrace: #{e.backtrace.join("\n") rescue ''}
+    <<~EXCEPTION
+      Exception happend
+      Error occurs: #{e.class.inspect}(#{e.message})
+      Backtrace: #{begin
+                     e.backtrace.join("\n")
+                   rescue StandardError
+                     ''
+                   end}
     EXCEPTION
   end
 
   # Prepare string with exception details
   def exception_message(e)
-    <<-EXCEPTION
-Exception happend
-Type: #{@type.inspect}
-Data: #{@data.inspect}
-Error occurs: #{e.class.inspect}(#{e.message})
-Backtrace: #{e.backtrace.join("\n") rescue ''}
+    <<~EXCEPTION
+      Exception happend
+      Type: #{@type.inspect}
+      Data: #{@data.inspect}
+      Error occurs: #{e.class.inspect}(#{e.message})
+      Backtrace: #{begin
+                     e.backtrace.join("\n")
+                   rescue StandardError
+                     ''
+                   end}
     EXCEPTION
   end
-
 end

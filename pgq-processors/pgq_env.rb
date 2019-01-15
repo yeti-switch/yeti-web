@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_record'
 require 'http_logger'
 require 'pgq'
@@ -12,20 +14,15 @@ require_relative 'lib/amqp_factory'
 
 ENV['ROOT_PATH'] ||= Dir.getwd
 
-if ENV['processor'].blank?
-  raise "processor is mandatory option!"
-end
+raise 'processor is mandatory option!' if ENV['processor'].blank?
 
-if ENV['config_file'].blank?
-  raise "config_file is mandatory option!"
-end
+raise 'config_file is mandatory option!' if ENV['config_file'].blank?
 
 unless File.exist?(ENV['config_file'])
   raise "Configuration file #{ENV['config_file']} does not exist."
 end
 
 class PgqEnv
-
   attr_reader :config, :logger
 
   def initialize
@@ -40,13 +37,9 @@ class PgqEnv
 
     # set up pony options
     Pony.options = {
-        to: @config['mail_to'],
-        from: @config['mail_from'],
-        subject: @config['mail_subject']
+      to: @config['mail_to'],
+      from: @config['mail_from'],
+      subject: @config['mail_subject']
     }
   end
-
 end
-
-
-

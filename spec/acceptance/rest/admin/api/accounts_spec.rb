@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,13 +12,13 @@ resource 'Accounts' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'accounts' }
 
-  required_params = %i(name min-balance max-balance)
-  optional_params = %i(origination-capacity termination-capacity send-invoices-to external-id balance-low-threshold balance-high-threshold send-balance-notifications-to)
+  required_params = %i[name min-balance max-balance]
+  optional_params = %i[origination-capacity termination-capacity send-invoices-to external-id balance-low-threshold balance-high-threshold send-balance-notifications-to]
 
-  required_relationships = %i(contractor timezone)
-  optional_relationships = %i(
+  required_relationships = %i[contractor timezone]
+  optional_relationships = %i[
     customer-invoice-period vendor-invoice-period customer-invoice-template vendor-invoice-template
-  )
+  ]
 
   get '/api/rest/admin/accounts' do
     before { create_list(:account, 2) }
@@ -47,7 +49,7 @@ resource 'Accounts' do
     let(:'balance-high-threshold') { 95 }
     let(:'send-balance-notifications-to') { Billing::Contact.collection.map(&:id) }
 
-    let(:timezone) { wrap_relationship(:'timezones', 1) }
+    let(:timezone) { wrap_relationship(:timezones, 1) }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'create new entry' do

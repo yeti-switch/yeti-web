@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register LogicLog do
-  menu parent: "Logs", priority: 30, label: "Logic log"
+  menu parent: 'Logs', priority: 30, label: 'Logic log'
 
   actions :index, :show
   config.batch_actions = false
   show do |log|
     attributes_table do
-
       row :id
       row :timestamp
       row :txid
@@ -16,7 +17,6 @@ ActiveAdmin.register LogicLog do
           log.msg
         end
       end
-
     end
   end
 
@@ -27,20 +27,17 @@ ActiveAdmin.register LogicLog do
     column :level
     column :source
     column :msg do |row|
-
       if row.msg.present?
         if row.msg.length > 100
           div class: :has_tooltip, title: row.msg do
-            row.msg[0...100] << "..."
+            row.msg[0...100] << '...'
           end
         else
           row.msg
         end
 
       end
-
     end
-
   end
 
   filter :id
@@ -49,5 +46,4 @@ ActiveAdmin.register LogicLog do
   filter :level
   filter :source
   filter :msg
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://github.com/activerecord-hackery/ransack/issues/321
 Ransack.configure do |config|
   { array_contains: :contains }.each do |rp, ap|

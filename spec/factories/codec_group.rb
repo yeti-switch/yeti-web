@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :codec_group do
     sequence(:name) { |n| "codec_group#{n}" }

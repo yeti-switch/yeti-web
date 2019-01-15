@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Account', type: :feature, js: true do
@@ -14,20 +16,20 @@ describe 'Create new Account', type: :feature, js: true do
     let(:attributes) do
       {
         name: 'Account',
-        contractor_id: -> {
+        contractor_id: lambda {
           chosen_pick('#account_contractor_id+div', text: @customer.name)
         },
         min_balance: -100,
         max_balance: 100,
         vat: 44.1,
         destination_rate_limit: 0.11,
-        max_call_duration: 100500,
+        max_call_duration: 100_500,
         balance_low_threshold: -90,
         balance_high_threshold: 90,
         origination_capacity: 100,
         termination_capacity: 50,
         total_capacity: 101,
-        timezone_id: -> {
+        timezone_id: lambda {
           find('label[for="account_timezone_id"]').click # focus-out from "Send balance notifications to"
           chosen_pick('#account_timezone_id_chosen', text: @tz.display_name)
         }
@@ -55,6 +57,4 @@ describe 'Create new Account', type: :feature, js: true do
       )
     end
   end
-
 end
-

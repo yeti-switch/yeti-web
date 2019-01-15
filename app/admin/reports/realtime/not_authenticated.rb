@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Report::Realtime::NotAuthenticated do
   menu parent: 'Reports', label: 'Not authenticated attempts', priority: 104
   config.batch_actions = false
@@ -6,10 +8,9 @@ ActiveAdmin.register Report::Realtime::NotAuthenticated do
   actions :index
 
   filter :time_interval_eq, label: 'Time Interval',
-         as: :select,
-         collection: Report::Realtime::Base::INTERVALS,
-         input_html: {class: 'chosen'}, include_blank: false
-
+                            as: :select,
+                            collection: Report::Realtime::Base::INTERVALS,
+                            input_html: { class: 'chosen' }, include_blank: false
 
   before_action only: [:index] do
     params[:q] ||= {}
@@ -21,7 +22,7 @@ ActiveAdmin.register Report::Realtime::NotAuthenticated do
 
   controller do
     def scoped_collection
-      lenght=params[:q][:time_interval_eq].to_i
+      lenght = params[:q][:time_interval_eq].to_i
       super.detailed_scope(lenght)
     end
   end
@@ -33,6 +34,4 @@ ActiveAdmin.register Report::Realtime::NotAuthenticated do
     column :internal_disconnect_code
     column :internal_disconnect_reason
   end
-
-
 end

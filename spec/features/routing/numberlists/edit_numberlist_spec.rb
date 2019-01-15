@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Edit Numberlist', type: :feature do
@@ -5,9 +7,7 @@ describe 'Edit Numberlist', type: :feature do
 
   context 'unset "Tag action value"' do
     include_examples :test_unset_tag_action_value,
-                      controller_name: :numberlists,
-                      factory: :numberlist
-
+                     controller_name: :numberlists,
+                     factory: :numberlist
   end
-
 end

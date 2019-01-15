@@ -1,6 +1,7 @@
-ActiveAdmin.register Importing::CodecGroupCodec do
+# frozen_string_literal: true
 
-  filter :codec_group, input_html: {class: 'chosen'}
+ActiveAdmin.register Importing::CodecGroupCodec do
+  filter :codec_group, input_html: { class: 'chosen' }
   filter :codec
 
   acts_as_import_preview
@@ -35,5 +36,4 @@ ActiveAdmin.register Importing::CodecGroupCodec do
 
     column :priority
   end
-
 end

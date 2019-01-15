@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -7,15 +9,15 @@ resource 'Routing RoutingTag' do
   include_context :init_routing_tag_collection
 
   let(:collection) { Routing::RoutingTag.all }
-  let(:record) { Routing::RoutingTag.take  }
+  let(:record) { Routing::RoutingTag.take }
 
-  required_params = %i(name)
+  required_params = %i[name]
 
-  optional_params = %i()
+  optional_params = %i[]
 
-  required_relationships = %i()
+  required_relationships = %i[]
 
-  optional_relationships = %i()
+  optional_relationships = %i[]
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tags'
   include_context :acceptance_delete, namespace: 'routing', type: 'routing-tags'

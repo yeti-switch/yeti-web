@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.customer_traffic_report_data_full
@@ -30,7 +32,7 @@ class Report::CustomerTrafficDataFull < Cdr::Base
   belongs_to :network, class_name: 'System::Network', foreign_key: :dst_network_id
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   def self.totals
@@ -43,8 +45,6 @@ class Report::CustomerTrafficDataFull < Cdr::Base
             sum(profit) as profit,
             min(first_call_at) as first_call_at,
             max(last_call_at) as last_call_at,
-            coalesce(sum(calls_duration)::float/nullif(sum(success_calls_count),0),0) as agg_acd"
-    ).take
+            coalesce(sum(calls_duration)::float/nullif(sum(success_calls_count),0),0) as agg_acd").take
   end
-
 end

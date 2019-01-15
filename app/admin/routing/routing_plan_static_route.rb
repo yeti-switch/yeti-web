@@ -1,5 +1,7 @@
-ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
-  menu parent: "Routing", label: "Routing plan static routes", priority: 53
+# frozen_string_literal: true
+
+ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
+  menu parent: 'Routing', label: 'Routing plan static routes', priority: 53
   config.sort_order = 'priority_desc'
 
   acts_as_audit
@@ -19,19 +21,16 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
 
   acts_as_delayed_job_lock
 
-
-  includes :vendor, :routing_plan, network_prefix: [:country, :network]
+  includes :vendor, :routing_plan, network_prefix: %i[country network]
 
   permit_params :routing_plan_id, :prefix, :priority, :weight, :vendor_id
 
   filter :id
-  filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: {class: 'chosen'}
+  filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: { class: 'chosen' }
   filter :prefix
-  filter :country, input_html: {class: 'chosen'}
-  filter :network, input_html: {class: 'chosen'}
-  filter :vendor, collection: -> { Contractor.vendors }, input_html: {class: 'chosen'}
-
-
+  filter :country, input_html: { class: 'chosen' }
+  filter :network, input_html: { class: 'chosen' }
+  filter :vendor, collection: -> { Contractor.vendors }, input_html: { class: 'chosen' }
 
   # after_build do |resource|
   #   from = begin
@@ -43,7 +42,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   # end
 
   action_item :batch_create do
-    link_to("Batch create",new_routing_routing_plan_static_route_batch_creator_path())
+    link_to('Batch create', new_routing_routing_plan_static_route_batch_creator_path)
   end
 
   index do
@@ -69,8 +68,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
     end
   end
 
-
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :routing_plan
@@ -87,13 +85,12 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: "Static Route" do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: {class: 'chosen'}
-      f.input :prefix, input_html: {class: :prefix_detector} , hint: f.object.network_details_hint
+      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: { class: 'chosen' }
+      f.input :prefix, input_html: { class: :prefix_detector }, hint: f.object.network_details_hint
       f.input :priority
       f.input :weight
-      f.input :vendor, collection:  Contractor.vendors , input_html: {class: 'chosen', multiple: false}
+      f.input :vendor, collection: Contractor.vendors, input_html: { class: 'chosen', multiple: false }
     end
     f.actions
   end
-
 end

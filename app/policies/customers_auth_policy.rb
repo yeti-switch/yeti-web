@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomersAuthPolicy < ::RolePolicy
   section 'CustomersAuth'
 
@@ -5,6 +7,4 @@ class CustomersAuthPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

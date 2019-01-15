@@ -1,35 +1,33 @@
+# frozen_string_literal: true
+
 ActiveAdmin.setup do |config|
-
   config.namespace :root do |admin|
-#        admin.build_menu :utility_navigation do |menu|
+    #        admin.build_menu :utility_navigation do |menu|
     admin.build_menu do |menu|
-      menu.add label: "Billing", priority: 20
-      menu.add label: "Equipment", priority: 30
-      menu.add label: "Routing", priority: 40
-      menu.add label: "CDR", priority: 50
-      menu.add label: "Reports", priority: 60
-#      menu.add label: "Rate Tools", priority: 65
-      menu.add label: "Realtime Data", priority: 70
-      menu.add label: "Logs", priority: 80
-      menu.add label: "System", priority: 90
+      menu.add label: 'Billing', priority: 20
+      menu.add label: 'Equipment', priority: 30
+      menu.add label: 'Routing', priority: 40
+      menu.add label: 'CDR', priority: 50
+      menu.add label: 'Reports', priority: 60
+      #      menu.add label: "Rate Tools", priority: 65
+      menu.add label: 'Realtime Data', priority: 70
+      menu.add label: 'Logs', priority: 80
+      menu.add label: 'System', priority: 90
 
-      #http://127.0.0.1:3000/admin/admin_users/1
+      # http://127.0.0.1:3000/admin/admin_users/1
       menu.add label: proc { display_name current_active_admin_user },
                url: proc { admin_user_path(current_active_admin_user) },
                id: 'current_user',
                if: proc { current_active_admin_user? },
-               priority: 9999998
+               priority: 9_999_998
 
-      admin.add_logout_button_to_menu menu, 9999999
+      admin.add_logout_button_to_menu menu, 9_999_999
       # can also pass priority & html_options for link_to to use
     end
     admin.build_menu :utility_navigation do
-
     end
-
   end
-  config.load_paths = [File.join(Rails.root, "app", "admin")] #+ Dir.glob(File.join(Rails.root, "app", "admin", "/**/*/"))).uniq
-
+  config.load_paths = [File.join(Rails.root, 'app', 'admin')] #+ Dir.glob(File.join(Rails.root, "app", "admin", "/**/*/"))).uniq
 
   # == Site Title
   #
@@ -87,7 +85,6 @@ ActiveAdmin.setup do |config|
   # within the controller.
   config.authentication_method = :authenticate_admin_user!
 
-
   # == Current User
   #
   # Active Admin will associate actions with the current
@@ -96,7 +93,6 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # to return the currently logged in user.
   config.current_user_method = :current_admin_user
-
 
   # == Logging Out
   #
@@ -144,13 +140,11 @@ ActiveAdmin.setup do |config|
   #     without_comments.allow_comments = false
   #   end
 
-
   # == Batch Actions
   #
   # Enable and disable Batch Actions
   #
   config.batch_actions = true
-
 
   # == Controller Filters
   #
@@ -163,21 +157,19 @@ ActiveAdmin.setup do |config|
 
   config.before_action only: [:index] do
     fix_max_records
-    restore_search_filters if respond_to?(:save_filters?) and save_filters?
+    restore_search_filters if respond_to?(:save_filters?) && save_filters?
   end
 
   config.after_action do
-    save_search_filters if respond_to?(:save_filters?) and save_filters?
+    save_search_filters if respond_to?(:save_filters?) && save_filters?
   end
-
-
 
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  #config.default_per_page = [50, 100, 200, 500]
+  # config.default_per_page = [50, 100, 200, 500]
 
   # == Register Stylesheets & Javascripts
   #
@@ -194,7 +186,6 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
-
 
   # == CSV options
   #
@@ -220,7 +211,8 @@ ActiveAdmin.setup do |config|
     # authorized?(record) => authorized?(params[:action].to_sym, record)
     def authorized?(action = nil, subject = nil)
       if subject.nil? && (!action.is_a?(Symbol) && !action.is_a?(String) && !action.is_a?(NilClass))
-        action, subject = nil, action
+        subject = action
+        action = nil
       end
       action = params[:action].to_sym if action.nil?
       active_admin_authorization.authorized?(action, subject)
@@ -228,20 +220,18 @@ ActiveAdmin.setup do |config|
 
     private
 
-    #https://github.com/activeadmin/activeadmin/issues/3335
+    # https://github.com/activeadmin/activeadmin/issues/3335
     # def interpolation_options
     def flash_interpolation_options
       options = {}
 
       options[:resource_errors] =
-          if resource && resource.errors.any?
-            "#{resource.errors.full_messages.to_sentence}."
-          else
-            ""
-          end
+        if resource&.errors&.any?
+          "#{resource.errors.full_messages.to_sentence}."
+        else
+          ''
+        end
       options
     end
   end
-
 end
-

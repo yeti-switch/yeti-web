@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: nodes
@@ -11,10 +13,9 @@
 #
 
 class RealtimeData::ActiveNode < Node
-
   def self.random_node
-    ids = self.pluck(:id)
-    self.find(ids.sample)
+    ids = pluck(:id)
+    find(ids.sample)
   end
 
   def api
@@ -64,5 +65,4 @@ class RealtimeData::ActiveNode < Node
       end
     end
   end
-
 end

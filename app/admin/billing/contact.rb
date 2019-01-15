@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Billing::Contact do
-  menu parent: "Billing", priority: 3, label: "Contacts"
+  menu parent: 'Billing', priority: 3, label: 'Contacts'
 
   acts_as_safe_destroy
   acts_as_audit
@@ -40,13 +42,12 @@ ActiveAdmin.register Billing::Contact do
   end
 
   filter :id
-  filter :contractor, input_html: {class: 'chosen'}
-  filter :admin_user, input_html: {class: 'chosen'}
+  filter :contractor, input_html: { class: 'chosen' }
+  filter :admin_user, input_html: { class: 'chosen' }
   filter :email
   filter :notes
 
-
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :contractor
@@ -58,16 +59,14 @@ ActiveAdmin.register Billing::Contact do
     end
   end
 
-
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :contractor, input_html: {class: 'chosen'}
-      f.input :admin_user, input_html: {class: 'chosen'}
+      f.input :contractor, input_html: { class: 'chosen' }
+      f.input :admin_user, input_html: { class: 'chosen' }
       f.input :email
       f.input :notes
     end
     f.actions
   end
-
 end

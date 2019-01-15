@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: import_dialpeers
@@ -51,7 +53,6 @@
 class Importing::Dialpeer < Importing::Base
   self.table_name = 'import_dialpeers'
 
-
   belongs_to :gateway, class_name: '::Gateway'
   belongs_to :gateway_group, class_name: '::GatewayGroup'
   belongs_to :routing_group, class_name: '::RoutingGroup'
@@ -61,20 +62,20 @@ class Importing::Dialpeer < Importing::Base
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id
   has_many :dialpeer_next_rates, dependent: :destroy
 
-  self.import_attributes = ['prefix', 'enabled', 'lcr_rate_multiplier',
-                            'initial_interval', 'next_interval', 'initial_rate', 'next_rate', 'connect_fee', 'reverse_billing',
-                            'gateway_id', 'gateway_group_id', 'routing_group_id',
-                            'vendor_id', 'account_id', 'src_rewrite_rule', 'src_rewrite_result',
-                            'dst_rewrite_rule', 'dst_rewrite_result', 'asr_limit', 'acd_limit', 'short_calls_limit', 'priority', 'capacity',
-                            'valid_from', 'valid_till', 'force_hit_rate',
-                            'dst_number_min_length', 'dst_number_max_length',
-                            'routing_tag_ids', 'routing_tag_mode_id', 'routeset_discriminator_id']
+  self.import_attributes = %w[prefix enabled lcr_rate_multiplier
+                              initial_interval next_interval initial_rate next_rate connect_fee reverse_billing
+                              gateway_id gateway_group_id routing_group_id
+                              vendor_id account_id src_rewrite_rule src_rewrite_result
+                              dst_rewrite_rule dst_rewrite_result asr_limit acd_limit short_calls_limit priority capacity
+                              valid_from valid_till force_hit_rate
+                              dst_number_min_length dst_number_max_length
+                              routing_tag_ids routing_tag_mode_id routeset_discriminator_id]
   self.import_class = ::Dialpeer
 
   def self.after_import_hook(unique_columns = [])
-    self.where(asr_limit: nil).update_all(asr_limit: 0)
-    self.resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
-    self.resolve_null_tag('routing_tag_ids', 'routing_tag_names')
+    where(asr_limit: nil).update_all(asr_limit: 0)
+    resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
+    resolve_null_tag('routing_tag_ids', 'routing_tag_names')
     super
   end
 end

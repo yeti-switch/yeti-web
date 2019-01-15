@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :cdr_export, class: CdrExport do
     type 'Base'
@@ -8,7 +10,7 @@ FactoryGirl.define do
         time_start_lteq: '2018-03-01'
       }
     end
-    fields [:success, :id]
+    fields %i[success id]
     status nil
 
     trait :completed do

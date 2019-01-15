@@ -1,5 +1,6 @@
-class InvoiceDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class InvoiceDecorator < BillingDecorator
   delegate_all
   decorates Billing::Invoice
 
@@ -21,5 +22,4 @@ class InvoiceDecorator < BillingDecorator
   def decorated_calls_duration_dec
     time_format_min_dec :calls_duration
   end
-
 end

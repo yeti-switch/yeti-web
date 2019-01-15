@@ -1,5 +1,6 @@
-class ReportVendorTrafficDataDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class ReportVendorTrafficDataDecorator < BillingDecorator
   delegate_all
   decorates Report::VendorTrafficData
 
@@ -30,5 +31,4 @@ class ReportVendorTrafficDataDecorator < BillingDecorator
   def decorated_profit
     money_format :profit
   end
-
 end

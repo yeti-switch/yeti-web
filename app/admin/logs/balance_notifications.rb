@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Log::BalanceNotification do
-  menu parent: "Logs", priority: 160, label: "Balance notifications"
+  menu parent: 'Logs', priority: 160, label: 'Balance notifications'
 
   actions :index, :show
   config.batch_actions = false
@@ -15,5 +17,4 @@ ActiveAdmin.register Log::BalanceNotification do
   end
 
   filter :id
-
 end

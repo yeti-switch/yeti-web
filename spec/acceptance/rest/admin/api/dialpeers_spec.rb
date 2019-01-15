@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,18 +12,18 @@ resource 'Dialpeers' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'dialpeers' }
 
-  required_params = %i(
+  required_params = %i[
     enabled next-rate connect-fee initial-rate initial-interval next-interval valid-from valid-till
-  )
+  ]
 
-  optional_params = %i(
+  optional_params = %i[
     prefix src-rewrite-rule dst-rewrite-rule acd-limit asr-limit src-rewrite-result
     dst-rewrite-result locked priority exclusive-route capacity lcr-rate-multiplier
     force-hit-rate network-prefix-id created-at short-calls-limit external-id routing-tag-ids
-  )
+  ]
 
-  required_relationships = %i(routing-group vendor account routeset-discriminator)
-  optional_relationships = %i(gateway gateway-group routing-tag-modes)
+  required_relationships = %i[routing-group vendor account routeset-discriminator]
+  optional_relationships = %i[gateway gateway-group routing-tag-modes]
 
   get '/api/rest/admin/dialpeers' do
     before { create_list(:dialpeer, 2) }

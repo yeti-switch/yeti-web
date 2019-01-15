@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
@@ -46,9 +48,11 @@ describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'POST create' do
-    before { post :create, params: {
-      data: { type: 'routing-groups', attributes: attributes }
-    } }
+    before do
+      post :create, params: {
+        data: { type: 'routing-groups', attributes: attributes }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
@@ -67,11 +71,13 @@ describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
 
   describe 'PUT update' do
     let!(:routing_group) { create :routing_group }
-    before { put :update, params: {
-      id: routing_group.to_param, data: { type: 'routing-groups',
-                                          id: routing_group.to_param,
-                                          attributes: attributes }
-    } }
+    before do
+      put :update, params: {
+        id: routing_group.to_param, data: { type: 'routing-groups',
+                                            id: routing_group.to_param,
+                                            attributes: attributes }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }

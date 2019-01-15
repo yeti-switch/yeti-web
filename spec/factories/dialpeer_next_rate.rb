@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :dialpeer_next_rate do
     initial_rate     0

@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Jobs
   class AccountBalanceNotify < ::BaseJob
-
     def execute
       notifications.each do |ev|
-#        begin
-          Log::BalanceNotification.transaction do
-            ev.process!
-          end
+        #        begin
+        Log::BalanceNotification.transaction do
+          ev.process!
+        end
       end
       notifications.count
     end
@@ -16,8 +17,5 @@ module Jobs
     def notifications
       @notifications ||= Log::BalanceNotification.order('created_at').where('not is_processed')
     end
-
   end
-
 end
-

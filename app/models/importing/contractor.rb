@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_contractors
@@ -16,14 +18,13 @@
 #  smtp_connection_name :string
 #
 
-class Importing::Contractor  < Importing::Base
+class Importing::Contractor < Importing::Base
   self.table_name = 'data_import.import_contractors'
   attr_accessor :file
 
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection'
 
-  self.import_attributes = ['enabled', 'name', 'vendor', 'customer', 'smtp_connection_id']
+  self.import_attributes = %w[enabled name vendor customer smtp_connection_id]
 
   self.import_class = ::Contractor
-
 end

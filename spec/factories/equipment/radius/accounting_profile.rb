@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :accounting_profile, class: Equipment::Radius::AccountingProfile do
     sequence(:name) { |n| "profile#{n}" }

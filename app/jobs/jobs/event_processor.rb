@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 module Jobs
   class EventProcessor < ::BaseJob
-
-
     def execute
       processed_count = 0
       events_count = events.count
@@ -38,6 +38,5 @@ module Jobs
       ev.save!
       false
     end
-
   end
 end

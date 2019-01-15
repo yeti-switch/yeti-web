@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Dialpeer, type: :model do
-
   describe 'validations' do
-
     it do
       should validate_numericality_of(:capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     end
@@ -50,15 +50,11 @@ describe Dialpeer, type: :model do
 
           include_examples :validation_no_error_on_field, :gateway
         end
-
       end
-
     end
   end
 
   context 'validate routing_tag_ids' do
     include_examples :test_model_with_routing_tag_ids
   end
-
 end
-

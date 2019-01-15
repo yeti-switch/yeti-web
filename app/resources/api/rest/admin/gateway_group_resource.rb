@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::GatewayGroupResource < JSONAPI::Resource
   attributes :name
 
@@ -5,14 +7,14 @@ class Api::Rest::Admin::GatewayGroupResource < JSONAPI::Resource
 
   filter :name
 
-  def self.updatable_fields(context)
-    [
-      :name,
-      :vendor
+  def self.updatable_fields(_context)
+    %i[
+      name
+      vendor
     ]
   end
 
   def self.creatable_fields(context)
-    self.updatable_fields(context)
+    updatable_fields(context)
   end
 end

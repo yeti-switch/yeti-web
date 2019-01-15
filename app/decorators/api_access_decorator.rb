@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApiAccessDecorator < Draper::Decorator
   decorates System::ApiAccess
   delegate_all

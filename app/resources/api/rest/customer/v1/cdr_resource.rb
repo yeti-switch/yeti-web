@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
 
@@ -5,7 +7,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   primary_key :uuid
 
   def self.default_sort
-    [{field: 'time_start', direction: :desc}]
+    [{ field: 'time_start', direction: :desc }]
   end
 
   attributes :time_start,

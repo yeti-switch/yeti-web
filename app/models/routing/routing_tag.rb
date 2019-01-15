@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.routing_tags
@@ -8,9 +10,9 @@
 
 class Routing::RoutingTag < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
-  self.table_name='class4.routing_tags'
+  self.table_name = 'class4.routing_tags'
 
-  ANY_TAG = 'any tag'.freeze
+  ANY_TAG = 'any tag'
 
   has_many :customers_auths, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.tag_action_value)", tag.id) }, class_name: 'CustomersAuth', autosave: false
   has_many :numberlists, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.tag_action_value)", tag.id) }, class_name: 'Routing::Numberlist', autosave: false
@@ -29,13 +31,13 @@ class Routing::RoutingTag < Yeti::ActiveRecord
   before_destroy :prevent_destroy_if_have_assosiations
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
   private
 
   def prevent_destroy_if_have_assosiations
-    if  has_active_assosiations?
+    if has_active_assosiations?
       raise ActiveRecord::RecordNotDestroyed,
             'Can not be deleted. Has related Customers Auth'
     end

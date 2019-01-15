@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: billing.invoice_types
@@ -7,11 +9,9 @@
 #
 
 class Billing::InvoiceType < Cdr::Base
+  self.table_name = 'billing.invoice_types'
 
-  self.table_name='billing.invoice_types'
-
-  MANUAL=1
-  AUTO_FULL=2
-  AUTO_PARTIAL=3
-
+  MANUAL = 1
+  AUTO_FULL = 2
+  AUTO_PARTIAL = 3
 end

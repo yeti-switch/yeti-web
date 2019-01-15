@@ -1,5 +1,6 @@
-ActiveAdmin.register Importing::CodecGroup do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::CodecGroup do
   filter :name
 
   acts_as_import_preview
@@ -12,5 +13,4 @@ ActiveAdmin.register Importing::CodecGroup do
     column :o_id
     column :name
   end
-
 end

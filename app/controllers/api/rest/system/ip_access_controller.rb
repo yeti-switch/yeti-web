@@ -1,5 +1,6 @@
-class Api::Rest::System::IpAccessController < Api::RestController
+# frozen_string_literal: true
 
+class Api::Rest::System::IpAccessController < Api::RestController
   def index
     respond_with addresses
   end
@@ -11,7 +12,7 @@ class Api::Rest::System::IpAccessController < Api::RestController
       .pluck(:ip)
       .uniq
       .map { |ip| IPAddr.new(ip) }
-      .map { |ip| "#{ip.to_s}/#{ip.cidr_mask}" }
+      .map { |ip| "#{ip}/#{ip.cidr_mask}" }
       .uniq
   end
 end

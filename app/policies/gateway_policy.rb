@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GatewayPolicy < ::RolePolicy
   section 'Gateway'
 
@@ -8,6 +10,4 @@ class GatewayPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

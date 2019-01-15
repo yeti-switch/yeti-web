@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::Sensor do
-  #actions :index, :show
-  menu parent: "System", label: "Sensors", priority: 140
+  # actions :index, :show
+  menu parent: 'System', label: 'Sensors', priority: 140
   config.batch_actions = false
 
   permit_params :name, :mode_id, :source_interface, :target_mac, :source_ip,
@@ -12,12 +14,10 @@ ActiveAdmin.register System::Sensor do
     end
 
     def destroy
-      begin
-        destroy!
-      rescue ActiveRecord::ActiveRecordError => e
-        flash[:error] = e.message
-        redirect_back fallback_location: root_path
-      end
+      destroy!
+    rescue ActiveRecord::ActiveRecordError => e
+      flash[:error] = e.message
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -41,7 +41,7 @@ ActiveAdmin.register System::Sensor do
     column :hep_capture_id
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :name
@@ -61,17 +61,15 @@ ActiveAdmin.register System::Sensor do
     f.inputs form_title do
       f.input :name
       f.input :mode
-      f.input :source_interface, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET}
-      f.input :target_mac, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET}
+      f.input :source_interface, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET }
+      f.input :target_mac, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_ETHERNET }
       # f.input :use_routing
-      f.input :source_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP}
-      f.input :target_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP}
-      f.input :target_ip, as: :string, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3}
-      f.input :target_port, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3}
-      f.input :hep_capture_id, input_html: {'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3}
+      f.input :source_ip, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP }
+      f.input :target_ip, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP }
+      f.input :target_ip, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
+      f.input :target_port, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
+      f.input :hep_capture_id, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
     end
     f.actions
   end
-
-
 end

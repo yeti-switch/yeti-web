@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::ApiAccessesController, type: :controller do
@@ -24,7 +26,7 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
     before { get :show, params: { id: api_access.id } }
 
     it 'all fields except password ' do
-      expect(response_data).to include({
+      expect(response_data).to include(
         'id' => api_access.id.to_s,
         'type' => 'api-accesses',
         'links' => anything,
@@ -34,7 +36,7 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
           'account-ids' => api_access.account_ids,
           'allowed-ips' => api_access.allowed_ips.map(&:to_s)
         }
-      })
+      )
     end
   end
 
@@ -99,5 +101,4 @@ describe Api::Rest::Admin::ApiAccessesController, type: :controller do
     it { expect(response.status).to eq(204) }
     it { expect(System::ApiAccess.count).to eq(0) }
   end
-
 end

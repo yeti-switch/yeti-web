@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   describe 'GET index' do
@@ -73,5 +74,4 @@ describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controller do
     it { expect(response.status).to eq(204) }
     it { expect(Routing::RoutingTag.count).to eq(0) }
   end
-
 end

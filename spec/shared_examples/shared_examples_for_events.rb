@@ -1,5 +1,6 @@
-RSpec.shared_examples 'Event originator for all Nodes' do
+# frozen_string_literal: true
 
+RSpec.shared_examples 'Event originator for all Nodes' do
   shared_examples 'test events sender' do
     it 'sends proper Events' do
       expect { action }.to change { Event.where(command: request_command).count }.by(Node.count)

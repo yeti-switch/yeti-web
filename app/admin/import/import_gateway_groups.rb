@@ -1,16 +1,19 @@
-ActiveAdmin.register Importing::GatewayGroup do
+# frozen_string_literal: true
 
-  filter :vendor, input_html: {class: 'chosen'}
+ActiveAdmin.register Importing::GatewayGroup do
+  filter :vendor, input_html: { class: 'chosen' }
   filter :name
-  filter :prefer_same_pop, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :prefer_same_pop, as: :select, collection: [['Yes', true], ['No', false]]
 
   acts_as_import_preview
 
   controller do
     def resource_params
       return [{}] if request.get?
-      [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
+
+      [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
+
     def scoped_collection
       super.includes(:vendor)
     end

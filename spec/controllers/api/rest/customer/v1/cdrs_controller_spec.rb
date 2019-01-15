@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Customer::V1::CdrsController, type: :controller do
-
   after { Cdr::Cdr.destroy_all }
 
   let(:api_access) { create(:api_access) }
@@ -21,7 +22,6 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
   before { create_list(:cdr, 2, customer_acc: account, is_last_cdr: false) }
 
   describe 'GET index' do
-
     context 'account_ids is empty' do
       let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
 
@@ -63,7 +63,6 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
         )
       end
     end
-
   end
 
   describe 'GET index with filters' do
@@ -71,7 +70,7 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
 
     before { create_list(:cdr, 2, customer_acc: account) }
     let(:expected_record) do
-      create(:cdr, { customer_acc: account, attr_name => attr_value })
+      create(:cdr, customer_acc: account, attr_name => attr_value)
     end
 
     context 'time_start_gteq and time_start_lteq' do
@@ -155,7 +154,6 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
   end
 
   describe 'GET show' do
-
     before do
       create(:cdr, customer_acc: account)
     end
@@ -167,7 +165,7 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
     it 'returnds record with expected attributes' do
       get :show, params: { id: cdr.uuid }
 
-      expect(response_data).to include({
+      expect(response_data).to include(
         'id' => cdr.uuid,
         'type' => 'cdrs',
         'links' => anything,
@@ -207,23 +205,22 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
           'dst-prefix-routing' => cdr.dst_prefix_routing,
           'destination-prefix' => cdr.destination_prefix
         }
-      })
+      )
     end
 
     it 'has_one auth-orig-transport-protocol' do
       get :show, params: { id: cdr.uuid, include: 'auth-orig-transport-protocol' }
 
-      expect(JSON.parse(response.body)["included"]).to match_array([
-        hash_including({
-          'id' => cdr.auth_orig_transport_protocol_id.to_s,
-          'type' => 'transport-protocols',
-          'links' => anything,
-          'attributes' => {
-            'name' => cdr.auth_orig_transport_protocol.name
-          }
-        })
-      ])
+      expect(JSON.parse(response.body)['included']).to match_array([
+                                                                     hash_including(
+                                                                       'id' => cdr.auth_orig_transport_protocol_id.to_s,
+                                                                       'type' => 'transport-protocols',
+                                                                       'links' => anything,
+                                                                       'attributes' => {
+                                                                         'name' => cdr.auth_orig_transport_protocol.name
+                                                                       }
+                                                                     )
+                                                                   ])
     end
   end
-
 end

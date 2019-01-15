@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples :does_not_update_record do |errors: {}|
   let(:expected_record_errors) { errors }
 

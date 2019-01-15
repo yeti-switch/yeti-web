@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.gateway_rel100_modes
@@ -7,6 +9,5 @@
 #
 
 class Equipment::GatewayRel100Mode < Yeti::ActiveRecord
-  self.table_name='class4.gateway_rel100_modes'
-
+  self.table_name = 'class4.gateway_rel100_modes'
 end

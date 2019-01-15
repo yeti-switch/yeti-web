@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :api_access, class: System::ApiAccess do
     sequence(:login) { |n| "api_access-#{n}" }

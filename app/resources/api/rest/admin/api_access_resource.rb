@@ -1,5 +1,6 @@
-class Api::Rest::Admin::ApiAccessResource < ::BaseResource
+# frozen_string_literal: true
 
+class Api::Rest::Admin::ApiAccessResource < ::BaseResource
   model_name 'System::ApiAccess'
 
   attributes :customer_id,

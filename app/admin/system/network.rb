@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::Network do
   actions :all
-  menu parent: "System", label: "Networks", priority: 130
+  menu parent: 'System', label: 'Networks', priority: 130
   config.batch_actions = false
   permit_params :name
-
 
   filter :id
   filter :name
@@ -13,7 +14,6 @@ ActiveAdmin.register System::Network do
     column :name
   end
 
-
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
@@ -21,6 +21,4 @@ ActiveAdmin.register System::Network do
     end
     f.actions
   end
-
-
 end

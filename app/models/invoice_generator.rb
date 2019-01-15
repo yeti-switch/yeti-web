@@ -1,5 +1,6 @@
-class InvoiceGenerator
+# frozen_string_literal: true
 
+class InvoiceGenerator
   attr_reader :billing_invoice
 
   def initialize(invoice)
@@ -13,10 +14,9 @@ class InvoiceGenerator
       begin
         InvoiceDocs.new(@billing_invoice).save!
       rescue InvoiceDocs::TemplateUndefined => e
-         Rails.logger.info { e.message }
+        Rails.logger.info { e.message }
       end
     end
     @billing_invoice
   end
-
 end

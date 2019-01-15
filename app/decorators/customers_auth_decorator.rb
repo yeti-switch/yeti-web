@@ -1,5 +1,6 @@
-class CustomersAuthDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class CustomersAuthDecorator < BillingDecorator
   delegate_all
   decorates CustomersAuth
 
@@ -12,7 +13,7 @@ class CustomersAuthDecorator < BillingDecorator
 
   def decorated_display_name
     if !enabled?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     else
       display_name
     end
@@ -26,5 +27,4 @@ class CustomersAuthDecorator < BillingDecorator
 
   # TODO: when AA fixe probjec with decorated objec on create use this:
   # https://github.com/activeadmin/activeadmin/blob/15eb4a05b2ee759b7d03ceaaa92d070986a1c282/spec/support/templates/post_decorator.rb
-
 end

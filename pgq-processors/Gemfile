@@ -1,20 +1,22 @@
-source "http://rubygems.org"
+# frozen_string_literal: true
 
-gem 'rake'
-gem 'pgq', path: 'ext/pgq'
-gem 'pg'
-gem 'bundler'
+source 'http://rubygems.org'
+
 gem 'activeresource'
 gem 'activeresource-persistent', require: 'active_resource/persistent'
-gem 'http_logger'
-gem 'syslog-logger'
-gem 'pony'
-gem 'rest-client'
+gem 'bundler'
 gem 'bunny'
+gem 'http_logger'
+gem 'pg'
+gem 'pgq', path: 'ext/pgq'
+gem 'pony'
+gem 'rake'
+gem 'rest-client'
+gem 'syslog-logger'
 
 group :test, :development do
-  gem 'rspec'
-  gem 'webmock'
   gem 'bunny-mock'
   gem 'byebug'
+  gem 'rspec'
+  gem 'webmock'
 end

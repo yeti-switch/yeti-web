@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,12 +12,12 @@ resource 'Contacts' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'contacts' }
 
-  required_params = %i(email)
+  required_params = %i[email]
 
-  optional_params = %i(notes)
+  optional_params = %i[notes]
 
-  required_relationships = %i()
-  optional_relationships = %i(contractor)
+  required_relationships = %i[]
+  optional_relationships = %i[contractor]
 
   get '/api/rest/admin/contacts' do
     before { create_list(:contact, 2) }

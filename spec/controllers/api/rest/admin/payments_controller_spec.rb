@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::PaymentsController, type: :controller do
@@ -65,4 +67,3 @@ describe Api::Rest::Admin::PaymentsController, type: :controller do
     end
   end
 end
-

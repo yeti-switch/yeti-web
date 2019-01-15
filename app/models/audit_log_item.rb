@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: versions
@@ -15,7 +17,7 @@
 #
 
 class AuditLogItem < PaperTrail::Version
-    scope :destroyed, -> { where event: 'destroy' }
-    scope :updated,   -> { where event: 'update'  }
-    scope :created,   -> { where event: 'create'  }
+  scope :destroyed, -> { where event: 'destroy' }
+  scope :updated,   -> { where event: 'update'  }
+  scope :created,   -> { where event: 'create'  }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_numberlist_items
@@ -32,15 +34,15 @@ class Importing::NumberlistItem < Importing::Base
 
   self.import_class = ::Routing::NumberlistItem
 
-  self.import_attributes = ['numberlist_id',
-                            'key', 'number_min_length', 'number_max_length',
-                            'action_id',
-                            'src_rewrite_rule', 'src_rewrite_result',
-                            'dst_rewrite_rule', 'dst_rewrite_result',
-                            'tag_action_id', 'tag_action_value']
+  self.import_attributes = %w[numberlist_id
+                              key number_min_length number_max_length
+                              action_id
+                              src_rewrite_rule src_rewrite_result
+                              dst_rewrite_rule dst_rewrite_result
+                              tag_action_id tag_action_value]
 
   def self.after_import_hook(unique_columns = [])
-    self.resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
   end
 end

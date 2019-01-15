@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stats.traffic_customer_accounts
@@ -12,9 +14,7 @@
 #
 
 class Stats::TrafficCustomerAccount < Stats::Traffic
-  self.table_name = "stats.traffic_customer_accounts"
+  self.table_name = 'stats.traffic_customer_accounts'
 
-  #select sum(profit),date_trunc('hour',timestamp) as ts from traffic_customer_accounts where timestamp>=now()-'2 day'::interval group by date_trunc('hour',timestamp)order by ts;
-
-
+  # select sum(profit),date_trunc('hour',timestamp) as ts from traffic_customer_accounts where timestamp>=now()-'2 day'::interval group by date_trunc('hour',timestamp)order by ts;
 end

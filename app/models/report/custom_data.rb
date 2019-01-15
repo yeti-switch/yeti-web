@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.cdr_custom_report_data
@@ -110,15 +112,12 @@ class Report::CustomData < Cdr::Base
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
 
-
-
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
-
   def self.report_columns
-    self.column_names.select{|column| column.start_with?('agg_') }
+    column_names.select { |column| column.start_with?('agg_') }
   end
 
   def self.totals
@@ -127,8 +126,6 @@ class Report::CustomData < Cdr::Base
             coalesce(sum(agg_calls_duration)::float/nullif(sum(agg_calls_count),0),0) as agg_acd,
             sum(agg_customer_price) as agg_customer_price,
             sum(agg_vendor_price) as agg_vendor_price,
-            sum(agg_profit) as agg_profit"
-    ).take
+            sum(agg_profit) as agg_profit").take
   end
-
 end

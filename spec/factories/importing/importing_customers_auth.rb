@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_customers_auth, class: Importing::CustomersAuth do
     transient do
@@ -62,6 +64,5 @@ FactoryGirl.define do
 
     tag_action_value_names { _routing_tags.map(&:name).join(', ') }
     tag_action_value { _routing_tags.map(&:id) }
-
   end
 end

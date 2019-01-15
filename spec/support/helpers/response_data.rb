@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Helpers
   module ResponseData
-
     def response_data
       JSON.parse(response.body)['data']
     end

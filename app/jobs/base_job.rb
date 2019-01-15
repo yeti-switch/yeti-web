@@ -1,9 +1,10 @@
-class BaseJob < ActiveRecord::Base
+# frozen_string_literal: true
 
+class BaseJob < ActiveRecord::Base
   self.table_name = 'sys.jobs'
   self.store_full_sti_class = false
 
-#  attr_protected :type, :id
+  #  attr_protected :type, :id
 
   scope :available, -> { where(running: false) }
   scope :running, -> { where(running: true) }
@@ -13,32 +14,29 @@ class BaseJob < ActiveRecord::Base
   end
 
   def start!
-    self.update_column(:running, true)
+    update_column(:running, true)
     after_start
   end
 
   def run!
     transaction do
-      begin
-        execute
-      ensure
-        finish!
-      end
+      execute
+    ensure
+      finish!
     end
   end
 
   def finish!
     before_finish
-#    release_lock!
+    #    release_lock!
   end
 
   def self.launch!(type_name_or_id)
-
     scheduled_job = transaction do
       begin
-        job = self.available.lock('FOR UPDATE NOWAIT').
-            where(BaseJob.arel_table[:id].eq(type_name_or_id).
-                      or(BaseJob.arel_table[:type].eq(type_name_or_id.to_s))).first!
+        job = available.lock('FOR UPDATE NOWAIT')
+                       .where(BaseJob.arel_table[:id].eq(type_name_or_id)
+                      .or(BaseJob.arel_table[:type].eq(type_name_or_id.to_s))).first!
         logger.info { "Starting scheduler #{job.type}" }
         job.start!
       rescue StandardError => e
@@ -53,11 +51,10 @@ class BaseJob < ActiveRecord::Base
     ensure
       scheduled_job.release_lock!
     end
-
   end
 
   def release_lock!
-     self.update_columns({running: false, updated_at: Time.now})
+    update_columns(running: false, updated_at: Time.now)
   end
 
   protected
@@ -66,16 +63,11 @@ class BaseJob < ActiveRecord::Base
     ActiveSupport::Dependencies.constantize "Jobs::#{type_name}"
   end
 
-  def before_finish
-    #
-  end
+  def before_finish; end
 
-  def after_start
-    #
-  end
-
+  def after_start; end
 
   def execute
-    raise StandardError.new("Not Implemented")
+    raise StandardError, 'Not Implemented'
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :destination, aliases: [:rate], class: Routing::Destination do
     sequence(:external_id)

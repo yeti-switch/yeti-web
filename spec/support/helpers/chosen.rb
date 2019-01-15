@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helpers
   module Chosen
     def chosen_select(chosen_selector, search:, multiple: false)

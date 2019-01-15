@@ -1,5 +1,6 @@
-RSpec.shared_examples :test_model_with_tag_action do
+# frozen_string_literal: true
 
+RSpec.shared_examples :test_model_with_tag_action do
   include_context :init_routing_tag_collection
 
   let(:random_tags) do
@@ -63,5 +64,4 @@ RSpec.shared_examples :test_model_with_tag_action do
       expect(model).not_to allow_value(tag_values).for(:tag_action_value)
     end
   end
-
 end

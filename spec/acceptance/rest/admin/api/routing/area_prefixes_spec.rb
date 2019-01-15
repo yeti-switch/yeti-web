@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -7,11 +9,11 @@ resource 'Routing AreaPrefix' do
   let(:collection) { create_list(:area_prefix, 2) }
   let(:record) { collection.first }
 
-  required_params = %i(prefix)
-  optional_params = %i()
+  required_params = %i[prefix]
+  optional_params = %i[]
 
-  required_relationships = %i(area)
-  optional_relationships = %i()
+  required_relationships = %i[area]
+  optional_relationships = %i[]
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'area-prefixes'
   include_context :acceptance_delete, namespace: 'routing', type: 'area-prefixes'

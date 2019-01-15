@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.routing_tag_detection_rules
@@ -15,7 +17,7 @@
 
 class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
-  self.table_name='class4.routing_tag_detection_rules'
+  self.table_name = 'class4.routing_tag_detection_rules'
 
   validates_with TagActionValueValidator
   validates_with RoutingTagIdsValidator
@@ -33,15 +35,15 @@ class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   include RoutingTagIdsScopeable
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
-    [
-        :routing_tag_ids_covers,
-        :tagged
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      routing_tag_ids_covers
+      tagged
     ]
   end
 end

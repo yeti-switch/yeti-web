@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Pop', type: :feature do
@@ -10,7 +12,7 @@ describe 'Create new Pop', type: :feature do
   include_context :fill_form, 'new_pop' do
     let(:attributes) do
       {
-          name: "test POP"
+        name: 'test POP'
       }
     end
 
@@ -20,11 +22,8 @@ describe 'Create new Pop', type: :feature do
       expect(page).to have_css('.flash_notice', text: 'Pop was successfully created.')
 
       expect(Pop.last).to have_attributes(
-                               name: attributes[:name]
-                           )
+        name: attributes[:name]
+      )
     end
   end
-
 end
-
-

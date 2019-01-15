@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,14 +12,14 @@ resource 'Destinations' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'destinations' }
 
-  required_params = %i(
+  required_params = %i[
     enabled next-rate connect-fee initial-interval next-interval dp-margin-fixed dp-margin-percent
     initial-rate asr-limit acd-limit short-calls-limit
-  )
-  optional_params = %i(prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids)
+  ]
+  optional_params = %i[prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids]
 
-  required_relationships = %i(rateplan rate-policy)
-  optional_relationships = %i(profit-control-mode routing-tag-modes)
+  required_relationships = %i[rateplan rate-policy]
+  optional_relationships = %i[profit-control-mode routing-tag-modes]
 
   get '/api/rest/admin/destinations' do
     before { create_list(:destination, 2) }

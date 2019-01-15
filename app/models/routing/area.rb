@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.areas
@@ -8,7 +10,7 @@
 
 class Routing::Area < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
-  self.table_name='class4.areas'
+  self.table_name = 'class4.areas'
 
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -18,7 +20,6 @@ class Routing::Area < Yeti::ActiveRecord
   has_many :dst_detection_rules, class_name: 'Routing::RoutingTagDetectionRule', foreign_key: :dst_area_id, dependent: :restrict_with_error
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
-
 end

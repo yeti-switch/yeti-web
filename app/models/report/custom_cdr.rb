@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.cdr_custom_report
@@ -16,79 +18,78 @@ class Report::CustomCdr < Cdr::Base
 
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id
 
-  CDR_COLUMNS = [
-      :customer_id,
-      :vendor_id,
-      :rateplan_id,
-      :routing_group_id,
-      :orig_gw_id,
-      :term_gw_id,
-      :destination_id,
-      :dialpeer_id,
-      :customer_auth_id,
-      :vendor_acc_id,
-      :customer_acc_id,
-      :disconnect_initiator_id,
-      :vendor_invoice_id,
-      :customer_invoice_id,
-      :destination_rate_policy_id,
-      :node_id,
-      :pop_id,
-      :destination_next_rate,
-      :destination_fee,
-      :dialpeer_next_rate,
-      :dialpeer_fee,
-      :time_limit,
-      :customer_price,
-      :vendor_price,
-      :duration,
-      :success,
-      :vendor_billed,
-      :customer_billed,
-      :profit,
-      :dst_prefix_in,
-      :dst_prefix_out,
-      :src_prefix_in,
-      :src_prefix_out,
-      :time_start,
-      :time_connect,
-      :time_end,
-      :sign_orig_ip,
-      :sign_orig_port,
-      :sign_orig_local_ip,
-      :sign_orig_local_port,
-      :sign_term_ip,
-      :sign_term_port,
-      :sign_term_local_ip,
-      :sign_term_local_port,
-      :orig_call_id,
-      :term_call_id,
-      :local_tag,
-      :log_sip,
-      :log_rtp,
-      :dump_file,
-      :destination_initial_rate,
-      :dialpeer_initial_rate,
-      :destination_initial_interval,
-      :destination_next_interval,
-      :dialpeer_initial_interval,
-      :dialpeer_next_interval,
-      :routing_attempt,
-      :is_last_cdr,
-      :lega_disconnect_code,
-      :lega_disconnect_reason,
-      :legb_disconnect_code,
-      :legb_disconnect_reason,
-      :internal_disconnect_code,
-      :internal_disconnect_reason,
-      :src_name_in,
-      :src_name_out,
-      :diversion_in,
-      :diversion_out,
-      :dst_country_id,
-      :dst_network_id
-  ]
-
+  CDR_COLUMNS = %i[
+    customer_id
+    vendor_id
+    rateplan_id
+    routing_group_id
+    orig_gw_id
+    term_gw_id
+    destination_id
+    dialpeer_id
+    customer_auth_id
+    vendor_acc_id
+    customer_acc_id
+    disconnect_initiator_id
+    vendor_invoice_id
+    customer_invoice_id
+    destination_rate_policy_id
+    node_id
+    pop_id
+    destination_next_rate
+    destination_fee
+    dialpeer_next_rate
+    dialpeer_fee
+    time_limit
+    customer_price
+    vendor_price
+    duration
+    success
+    vendor_billed
+    customer_billed
+    profit
+    dst_prefix_in
+    dst_prefix_out
+    src_prefix_in
+    src_prefix_out
+    time_start
+    time_connect
+    time_end
+    sign_orig_ip
+    sign_orig_port
+    sign_orig_local_ip
+    sign_orig_local_port
+    sign_term_ip
+    sign_term_port
+    sign_term_local_ip
+    sign_term_local_port
+    orig_call_id
+    term_call_id
+    local_tag
+    log_sip
+    log_rtp
+    dump_file
+    destination_initial_rate
+    dialpeer_initial_rate
+    destination_initial_interval
+    destination_next_interval
+    dialpeer_initial_interval
+    dialpeer_next_interval
+    routing_attempt
+    is_last_cdr
+    lega_disconnect_code
+    lega_disconnect_reason
+    legb_disconnect_code
+    legb_disconnect_reason
+    internal_disconnect_code
+    internal_disconnect_reason
+    src_name_in
+    src_name_out
+    diversion_in
+    diversion_out
+    dst_country_id
+    dst_network_id
+  ].freeze
 
   validates_presence_of :group_by_fields, :date_start, :date_end
   # validates do
@@ -98,16 +99,14 @@ class Report::CustomCdr < Cdr::Base
   #   ends
   # end
 
-
   include GroupReportTools
   setup_report_with(Report::CustomData)
 
-
   after_create do
-    #execute_sp("SELECT * FROM reports.cdr_custom_report(?)", self.id)
+    # execute_sp("SELECT * FROM reports.cdr_custom_report(?)", self.id)
     execute_sp("INSERT INTO cdr_custom_report_data(
                   report_id,
-                  #{self.group_by},
+                  #{group_by},
                   agg_calls_count,
                   agg_calls_duration,
                   agg_customer_price,
@@ -119,7 +118,7 @@ class Report::CustomCdr < Cdr::Base
                 )
                 SELECT
                   ?,
-                  #{self.group_by},
+                  #{group_by},
                   count(id),
                   sum(duration),
                   sum(customer_price),
@@ -132,13 +131,12 @@ class Report::CustomCdr < Cdr::Base
                 WHERE
                   time_start>=?
                   AND time_start<?
-                  #{self.customer_sql_condition}
-                  #{self.build_sql_filter}
-                GROUP BY #{self.group_by}",
-                self.id,
-                self.date_start,
-                self.date_end
-    )
+                  #{customer_sql_condition}
+                  #{build_sql_filter}
+                GROUP BY #{group_by}",
+               id,
+               date_start,
+               date_end)
   end
 
   def build_sql_filter
@@ -160,7 +158,7 @@ class Report::CustomCdr < Cdr::Base
   end
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   include Hints
@@ -168,5 +166,4 @@ class Report::CustomCdr < Cdr::Base
   after_create do
     Reporter::CustomCdr.new(self).save!
   end
-
 end

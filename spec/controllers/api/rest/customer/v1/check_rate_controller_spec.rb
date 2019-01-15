@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
-
   let(:api_access) { create(:api_access) }
   let(:customer) { api_access.customer }
   let(:account) { create(:account, contractor: customer) }
@@ -72,7 +73,7 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
 
     it 'return error Rateplan not found' do
       expect(response_body).to include(
-        errors: match_array([include(detail: "rateplan-id - Rateplan not found")])
+        errors: match_array([include(detail: 'rateplan-id - Rateplan not found')])
       )
     end
   end
@@ -92,5 +93,4 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :controller do
       )
     end
   end
-
 end

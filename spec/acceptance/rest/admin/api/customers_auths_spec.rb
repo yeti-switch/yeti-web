@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,21 +12,21 @@ resource 'Customer Auths' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'customers-auths' }
 
-  required_params = %i(name ip)
-  optional_params = %i(
+  required_params = %i[name ip]
+  optional_params = %i[
     enabled reject-calls src-rewrite-rule src-rewrite-result dst-rewrite-rule dst-rewrite-result src-prefix dst-prefix x-yeti-auth
     capacity uri-domain src-name-rewrite-rule src-name-rewrite-result diversion-rewrite-rule
     diversion-rewrite-result allow-receive-rate-limit send-billing-information
     enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
     dst-number-radius-rewrite-rule dst-number-radius-rewrite-result from-domain to-domain
     tag-action-value
-  )
+  ]
 
-  required_relationships = %i(customer rateplan routing-plan gateway account dump-level diversion-policy)
-  optional_relationships = %i(
+  required_relationships = %i[customer rateplan routing-plan gateway account dump-level diversion-policy]
+  optional_relationships = %i[
     pop dst-numberlist src-numberlist radius-auth-profile radius-accounting-profile transport-protocol
     tag-action
-  )
+  ]
 
   get '/api/rest/admin/customers-auths' do
     before { create_list(:customers_auth, 2) }
@@ -52,7 +54,7 @@ resource 'Customer Auths' do
     let(:enabled) { true }
     let(:'reject-calls') { false }
     let(:ip) { '0.0.0.0' }
-    let(:'dump-level') { wrap_relationship(:'dump_levels', 1) }
+    let(:'dump-level') { wrap_relationship(:dump_levels, 1) }
     let(:'diversion-policy') { wrap_relationship(:'diversion-policies', 1) }
     let(:customer) { wrap_relationship(:contractors, create(:contractor, customer: true).id) }
     let(:rateplan) { wrap_relationship(:rateplans, create(:rateplan).id) }

@@ -1,15 +1,17 @@
-ActiveAdmin.register Importing::Gateway do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::Gateway do
   filter :name
-  filter :contractor, input_html: {class: 'chosen'}
-  filter :gateway_group, input_html: {class: 'chosen'}
+  filter :contractor, input_html: { class: 'chosen' }
+  filter :gateway_group, input_html: { class: 'chosen' }
 
   acts_as_import_preview
 
   controller do
     def resource_params
       return [{}] if request.get?
-      [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
+
+      [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
   end
 
@@ -56,7 +58,7 @@ ActiveAdmin.register Importing::Gateway do
 
     column :transport_protocol_name
     column :host, sortable: 'host' do |gw|
-      "#{gw.host}:#{gw.port}".chomp(":")
+      "#{gw.host}:#{gw.port}".chomp(':')
     end
 
     column :origination_capacity
@@ -150,7 +152,7 @@ ActiveAdmin.register Importing::Gateway do
     column :single_codec_in_200ok
     column :term_next_hop_for_replies
 
-    #SST
+    # SST
     column :sst_enabled
     column :sst_session_expires
     column :sst_minimum_timer
@@ -164,7 +166,7 @@ ActiveAdmin.register Importing::Gateway do
     end
     column :sst_accept501
 
-    #SENSOR
+    # SENSOR
     column :sensor, sortable: :sensor_name do |row|
       if row.sensor.blank?
         row.sensor_name
@@ -181,7 +183,7 @@ ActiveAdmin.register Importing::Gateway do
       end
     end
 
-    #SIGNALING
+    # SIGNALING
     column :relay_options
     column :relay_reinvite
     column :relay_prack
@@ -193,7 +195,7 @@ ActiveAdmin.register Importing::Gateway do
       end
     end
 
-    #DTMF
+    # DTMF
     column :rx_inband_dtmf_filtering_mode, sortable: :rx_inband_dtmf_filtering_mode_name do |row|
       if row.rx_inband_dtmf_filtering_mode.blank?
         row.rx_inband_dtmf_filtering_mode_name
@@ -214,6 +216,5 @@ ActiveAdmin.register Importing::Gateway do
     column :transit_headers_from_origination
     column :transit_headers_from_termination
     column :sip_interface_name
-
   end
 end

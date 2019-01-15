@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :destination_next_rate, class: Routing::DestinationNextRate do
     initial_rate     0

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 module JsonCoder
@@ -7,12 +9,11 @@ module JsonCoder
     def dump(obj)
       JSON.dump obj
     end
-    alias :encode :dump
+    alias encode dump
 
     def load(str)
       JSON.parse str
     end
-    alias :decode :load
+    alias decode load
   end
-
 end

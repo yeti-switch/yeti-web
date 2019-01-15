@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -29,7 +31,7 @@ resource 'Invoice template' do
   post '/api/rest/admin/billing/invoice-template' do
     parameter :type, 'Resource type (invoice-templates)', scope: :data, required: true
 
-    jsonapi_attributes([:name, :filename], [])
+    jsonapi_attributes(%i[name filename], [])
 
     let(:name) { 'Daily' }
     let(:filename) { 'filename.odt' }

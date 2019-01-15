@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.dtmf_send_modes
@@ -6,7 +8,6 @@
 #  name :string           not null
 #
 
-class System::DtmfSendMode< Yeti::ActiveRecord
+class System::DtmfSendMode < Yeti::ActiveRecord
   self.table_name = 'class4.dtmf_send_modes'
-
 end

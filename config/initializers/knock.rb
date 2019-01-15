@@ -1,6 +1,7 @@
-require 'rails/generators' 
-Knock.setup do |config|
+# frozen_string_literal: true
 
+require 'rails/generators'
+Knock.setup do |config|
   ## Expiration claim
   ## ----------------
   ##

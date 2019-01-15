@@ -1,5 +1,6 @@
-ActiveAdmin.register Importing::Registration do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::Registration do
   filter :customer_name
   filter :rateplan_name
   filter :routing_group_name
@@ -11,7 +12,8 @@ ActiveAdmin.register Importing::Registration do
   controller do
     def resource_params
       return [{}] if request.get?
-      [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
+
+      [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
   end
 
@@ -69,5 +71,4 @@ ActiveAdmin.register Importing::Registration do
     column :retry_delay
     column :max_attempts
   end
-
 end

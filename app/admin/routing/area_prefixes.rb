@@ -1,6 +1,7 @@
-ActiveAdmin.register Routing::AreaPrefix do
+# frozen_string_literal: true
 
-  menu parent: "Routing", priority: 252, label: "Area Prefixes"
+ActiveAdmin.register Routing::AreaPrefix do
+  menu parent: 'Routing', priority: 252, label: 'Area Prefixes'
 
   acts_as_audit
   acts_as_clone
@@ -9,7 +10,7 @@ ActiveAdmin.register Routing::AreaPrefix do
   acts_as_async_update('Routing::AreaPrefix',
                        lambda do
                          {
-                          area_id: Routing::Area.pluck(:name, :id)
+                           area_id: Routing::Area.pluck(:name, :id)
                          }
                        end)
 
@@ -27,7 +28,7 @@ ActiveAdmin.register Routing::AreaPrefix do
     column :area
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :prefix
@@ -46,6 +47,5 @@ ActiveAdmin.register Routing::AreaPrefix do
 
   filter :id
   filter :prefix
-  filter :area, input_html: {class: 'chosen'}
-
+  filter :area, input_html: { class: 'chosen' }
 end

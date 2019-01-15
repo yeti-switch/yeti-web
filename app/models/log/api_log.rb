@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: api_requests
@@ -20,9 +22,9 @@
 
 class Log::ApiLog < ActiveRecord::Base
   self.table_name = 'api_requests'
-  scope :failed, ->{ where('status >= ?', 400)  }
+  scope :failed, -> { where('status >= ?', 400) }
 
   def display_name
-    self.id.to_s
+    id.to_s
   end
 end

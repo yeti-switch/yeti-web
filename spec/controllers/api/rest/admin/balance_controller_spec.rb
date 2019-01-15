@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::BalanceController, type: :controller do
@@ -21,17 +23,17 @@ describe Api::Rest::Admin::BalanceController, type: :controller do
 
     subject do
       put :update, params: {
-        account_id: external_id, data: { type: 'balances', id: external_id , attributes: attributes }
+        account_id: external_id, data: { type: 'balances', id: external_id, attributes: attributes }
       }
     end
 
     context 'when attributes are valid' do
       let(:attributes) { { balance: 9.85 } }
       it 'should change balance' do
-        expect {subject}.to change{ account.reload.balance }.from(balance).to(attributes[:balance])
+        expect { subject }.to change { account.reload.balance }.from(balance).to(attributes[:balance])
       end
       it 'should skip audit log' do
-        expect {subject}.not_to change{ AuditLogItem.count }
+        expect { subject }.not_to change { AuditLogItem.count }
       end
 
       context 'response' do
@@ -39,10 +41,6 @@ describe Api::Rest::Admin::BalanceController, type: :controller do
 
         it { expect(response.status).to eq(200) }
       end
-
     end
-
-
   end
-
 end

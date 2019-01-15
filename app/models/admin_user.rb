@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: admin_users
@@ -38,13 +40,13 @@ class AdminUser < ActiveRecord::Base
 
   after_save do
     contact = billing_contact || build_billing_contact
-    contact.update!(email: self.email) if @email
+    contact.update!(email: email) if @email
   end
 
   before_destroy :check_if_last
 
   def self.from_token_request(request)
-    name = request.params[:auth].kind_of?(Hash) && request.params[:auth][:username]
+    name = request.params[:auth].is_a?(Hash) && request.params[:auth][:username]
     name.present? ? find_by(username: name) : nil
   end
 
@@ -53,11 +55,11 @@ class AdminUser < ActiveRecord::Base
   end
 
   def self.ldap_config
-    File.join(Rails.root, "config", "ldap.yml")
+    File.join(Rails.root, 'config', 'ldap.yml')
   end
 
   def self.ldap_config_exists?
-    File.exists?(self.ldap_config)
+    File.exist?(ldap_config)
   end
 
   def self.available_roles
@@ -76,23 +78,21 @@ class AdminUser < ActiveRecord::Base
     @email ||= billing_contact.try!(:email)
   end
 
-  def email=(mail)
-    @email = mail
-  end
+  attr_writer :email
 
   def display_name
-    self.username
+    username
   end
 
   def customized_update(params)
-    if params[:password].present? or params[:password_confirmation].present?
+    if params[:password].present? || params[:password_confirmation].present?
       update_with_password params
     else
       attrs = params.except(:password, :password_confirmation)
       if respond_to?(:update_without_password)
-        update_without_password attrs #db auth
+        update_without_password attrs # db auth
       else
-        update(attrs) #ldap
+        update(attrs) # ldap
       end
     end
   end
@@ -107,14 +107,14 @@ class AdminUser < ActiveRecord::Base
   end
 
   def active_for_authentication?
-    super && self.enabled?
+    super && enabled?
   end
 
   def validate_email?
-    self.new_record? || @email.present?
+    new_record? || @email.present?
   end
 
-##### devise ####
+  ##### devise ####
   def email_required?
     false
   end

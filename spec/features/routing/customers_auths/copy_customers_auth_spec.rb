@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 # acts_as_clone is a shared functionality
@@ -20,9 +22,9 @@ describe 'Copy Customers Auth', type: :feature do
       enabled: true,
       reject_calls: true,
       check_account_balance: false,
-      src_prefix: %w( foo bar ),
-      dst_prefix: %w(),
-      ip: %w( 127.0.0.1 216.3.128.0/26 0.0.0.0/0 ),
+      src_prefix: %w[foo bar],
+      dst_prefix: %w[],
+      ip: %w[127.0.0.1 216.3.128.0/26 0.0.0.0/0],
       tag_action_value: [@tag_ua.id, @tag_us.id]
     }
   end
@@ -54,5 +56,4 @@ describe 'Copy Customers Auth', type: :feature do
       expect(page).to have_select('Tag action value', selected: [@tag_ua.display_name, @tag_us.display_name])
     end
   end
-
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::ApiLogConfig, as: 'Api Log Config' do
-  menu parent: "System",  priority: 3
+  menu parent: 'System', priority: 3
   config.batch_actions = false
   actions :index, :update
 

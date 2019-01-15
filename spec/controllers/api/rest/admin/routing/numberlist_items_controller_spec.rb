@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   let(:resource_type) { 'numberlist-items' }
@@ -47,7 +48,7 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
 
     let(:relationships) do
       {
-        'numberlist': wrap_relationship(:'numberlists', numberlist.to_param),
+        'numberlist': wrap_relationship(:numberlists, numberlist.to_param),
         'action': wrap_relationship(:'numberlist-actions', Routing::NumberlistAction.take.to_param)
       }
     end
@@ -85,7 +86,6 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
   end
 
   describe 'editable tag_action and tag_action_value' do
-
     include_examples :jsonapi_resource_with_multiple_tags do
       let(:factory_name) { :numberlist_item }
     end

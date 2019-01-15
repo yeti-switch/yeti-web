@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::BalanceResource < ::BaseResource
   attributes :balance
 
@@ -19,5 +21,4 @@ class Api::Rest::Admin::BalanceResource < ::BaseResource
     PaperTrail.request.enable_model(Account)
     res
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::Equipment::Radius::AuthProfileResource < ::BaseResource
   model_name 'Equipment::Radius::AuthProfile'
 

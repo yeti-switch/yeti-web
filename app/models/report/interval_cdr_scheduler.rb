@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.cdr_interval_report_schedulers
@@ -16,7 +18,7 @@
 #
 
 class Report::IntervalCdrScheduler < Cdr::Base
-  self.table_name='reports.cdr_interval_report_schedulers'
+  self.table_name = 'reports.cdr_interval_report_schedulers'
 
   belongs_to :period, class_name: 'Report::SchedulerPeriod', foreign_key: :period_id
   belongs_to :aggregation_function, class_name: 'Report::IntervalAggregator', foreign_key: :aggregator_id
@@ -38,22 +40,21 @@ class Report::IntervalCdrScheduler < Cdr::Base
   end
 
   validate do
-    if self.send_to.present?  and self.send_to.any?
-      self.errors.add(:send_to, :invalid) if contacts.count != self.send_to.count
+    if send_to.present? && send_to.any?
+      errors.add(:send_to, :invalid) if contacts.count != send_to.count
     end
-    # TODO validation for group by
+    # TODO: validation for group by
   end
 
   def send_to=(send_to_ids)
-    self[:send_to] = send_to_ids.reject {|i| i.blank? }
+    self[:send_to] = send_to_ids.reject(&:blank?)
   end
 
   def group_by=(group_by_fields)
-    self[:group_by] = group_by_fields.reject {|i| i.blank? }
+    self[:group_by] = group_by_fields.reject(&:blank?)
   end
 
   def aggregation
-    "#{self.aggregation_function.name}(#{self.aggregate_by})"
+    "#{aggregation_function.name}(#{aggregate_by})"
   end
-
 end

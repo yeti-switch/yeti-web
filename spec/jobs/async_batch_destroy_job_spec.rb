@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe AsyncBatchDestroyJob, type: :job do
@@ -19,7 +21,7 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
     context 'incorrect class_name' do
       let(:model_class) { 'Fake' }
 
-      it { expect {subject}.to raise_error(NameError) }
+      it { expect { subject }.to raise_error(NameError) }
     end
 
     context 'correct class_name' do
@@ -28,23 +30,22 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
       context 'no filter/selection' do
         let(:sql_query) { Routing::Destination.all.to_sql }
 
-        it { expect {subject}.to change(Routing::Destination, :count).by(-3) }
+        it { expect { subject }.to change(Routing::Destination, :count).by(-3) }
       end
 
       context 'records selected' do
         let(:sql_query) { Routing::Destination.where(id: [1, 3]).to_sql }
 
-        it { expect {subject}.to change(Routing::Destination, :count).by(-2) }
-        it { expect {subject}.to change(Routing::Destination.where(id: 2), :count).by(0) }
+        it { expect { subject }.to change(Routing::Destination, :count).by(-2) }
+        it { expect { subject }.to change(Routing::Destination.where(id: 2), :count).by(0) }
       end
 
       context 'records filtered' do
         let(:sql_query) { Routing::Destination.where('initial_rate < ?', 0.5).to_sql }
 
-        it { expect {subject}.to change(Routing::Destination, :count).by(-1) }
-        it { expect {subject}.to change(Routing::Destination.where(id: 1), :count).by(-1) }
+        it { expect { subject }.to change(Routing::Destination, :count).by(-1) }
+        it { expect { subject }.to change(Routing::Destination.where(id: 1), :count).by(-1) }
       end
-
     end
   end
 end

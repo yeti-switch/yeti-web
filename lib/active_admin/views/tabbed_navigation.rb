@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ::ActiveAdmin::Views::TabbedNavigation
   def priority_for(item)
     child_item = item.children.detect { |child| display_item?(child) }

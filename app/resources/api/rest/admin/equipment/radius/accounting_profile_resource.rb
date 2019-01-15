@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::Equipment::Radius::AccountingProfileResource < ::BaseResource
   model_name 'Equipment::Radius::AccountingProfile'
 

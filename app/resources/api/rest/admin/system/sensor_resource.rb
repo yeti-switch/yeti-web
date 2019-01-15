@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::System::SensorResource < ::BaseResource
   model_name 'System::Sensor'
 

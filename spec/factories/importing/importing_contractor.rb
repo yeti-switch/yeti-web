@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_contractor, class: Importing::Contractor do
     o_id nil
@@ -8,9 +10,8 @@ FactoryGirl.define do
     vendor false
     customer false
 
-    smtp_connection_name {
+    smtp_connection_name do
       System::SmtpConnection.take.try(:name) || create(:smtp_connection).name
-    }
-
+    end
   end
 end

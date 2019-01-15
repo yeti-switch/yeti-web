@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AsyncBatchDestroyJob
   include BatchJobsLog
   BATCH_SIZE = 1000
@@ -15,17 +17,16 @@ class AsyncBatchDestroyJob
     model_class.constantize.transaction do
       begin
         scoped_records = model_class.constantize.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
-        scoped_records.each { |record| record.destroy! }
+        scoped_records.each(&:destroy!)
       end until scoped_records.empty?
     end
   end
 
-  def reschedule_at(time, attempts)
+  def reschedule_at(_time, _attempts)
     10.seconds.from_now
   end
 
   def max_attempts
     3
   end
-
 end

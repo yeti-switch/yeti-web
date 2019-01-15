@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gateways
@@ -118,7 +120,6 @@
 
 require 'resolv'
 class Gateway < Yeti::ActiveRecord
-
   belongs_to :contractor
   belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id
   belongs_to :session_refresh_method
@@ -130,8 +131,8 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :pop
   belongs_to :codec_group
   belongs_to :sdp_c_location, class_name: 'SdpCLocation'
-  belongs_to :sensor, class_name: 'System::Sensor',foreign_key: :sensor_id
-  belongs_to :sensor_level, class_name: 'System::SensorLevel',foreign_key: :sensor_level_id
+  belongs_to :sensor, class_name: 'System::Sensor', foreign_key: :sensor_id
+  belongs_to :sensor_level, class_name: 'System::SensorLevel', foreign_key: :sensor_level_id
   belongs_to :dtmf_receive_mode, class_name: 'System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: 'System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
   belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
@@ -176,12 +177,12 @@ class Gateway < Yeti::ActiveRecord
                         :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema
 
   validates_presence_of :incoming_auth_username, :incoming_auth_password,
-                        if: Proc.new { |gw|
-                          !gw.incoming_auth_username.blank? or !gw.incoming_auth_password.blank?
+                        if: proc { |gw|
+                          !gw.incoming_auth_username.blank? || !gw.incoming_auth_password.blank?
                         }
 
   validates :transit_headers_from_origination, :transit_headers_from_termination,
-            format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: "Enter headers separated by comma. Header name can contain letters, * and -" }
+            format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: 'Enter headers separated by comma. Header name can contain letters, * and -' }
 
   validate :vendor_owners_the_gateway_group
   validate :vendor_can_be_changed
@@ -191,33 +192,31 @@ class Gateway < Yeti::ActiveRecord
 
   include Yeti::ResourceStatus
 
-
   scope :locked, -> { where locked: true }
-  scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null'}
+  scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null' }
   scope :shared, -> { where is_shared: true }
-  scope :for_origination,->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
+  scope :for_origination, ->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
 
-  scope :for_termination, ->(contractor_id) do
+  scope :for_termination, lambda { |contractor_id|
     where("#{table_name}.allow_termination AND (#{table_name}.contractor_id=? OR #{table_name}.is_shared)", contractor_id)
       .joins(:vendor)
       .order(:name)
-  end
+  }
 
   before_validation do
-    self.term_next_hop = nil if self.term_next_hop.blank?
-    self.auth_from_user = nil if self.auth_from_user.blank?
-    self.auth_from_domain = nil if self.auth_from_domain.blank?
+    self.term_next_hop = nil if term_next_hop.blank?
+    self.auth_from_user = nil if auth_from_user.blank?
+    self.auth_from_domain = nil if auth_from_domain.blank?
   end
 
   include PgEvent
   has_pg_queue 'gateway-sync'
 
-
   def transit_headers_from_origination=(s)
     if s.nil?
-      self[:transit_headers_from_origination]=nil
+      self[:transit_headers_from_origination] = nil
     else
-      self[:transit_headers_from_origination] = s.split(',').uniq.reject { |i| i.blank? }.join(',')
+      self[:transit_headers_from_origination] = s.split(',').uniq.reject(&:blank?).join(',')
     end
   end
 
@@ -225,25 +224,23 @@ class Gateway < Yeti::ActiveRecord
     if s.nil?
       self[:transit_headers_from_termination]
     else
-      self[:transit_headers_from_termination] = s.split(',').uniq.reject { |i| i.blank? }.join(',')
+      self[:transit_headers_from_termination] = s.split(',').uniq.reject(&:blank?).join(',')
     end
   end
 
-
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
   scope :originations, -> { where(allow_origination: true) }
   scope :terminations, -> { where(allow_termination: true) }
 
-
-  scope :disabled_for_origination, -> {
-      where(
-        Gateway.arel_table[:allow_origination].eq(false).or(Gateway.arel_table[:enabled].eq(false))
-      )
+  scope :disabled_for_origination, lambda {
+    where(
+      Gateway.arel_table[:allow_origination].eq(false).or(Gateway.arel_table[:enabled].eq(false))
+    )
   }
-  scope :disabled_for_termination, -> {
+  scope :disabled_for_termination, lambda {
     where(
       Gateway.arel_table[:allow_termination].eq(false).or(Gateway.arel_table[:enabled].eq(false))
     )
@@ -252,15 +249,15 @@ class Gateway < Yeti::ActiveRecord
   def fire_lock(stat)
     transaction do
       self.locked = true
-      self.save
+      save
       Notification::Alert.fire_lock(self, stat)
     end
   end
 
   def unlock
     transaction do
-      self.locked=false
-      self.save
+      self.locked = false
+      save
       Notification::Alert.fire_unlock(self)
     end
   end
@@ -268,22 +265,21 @@ class Gateway < Yeti::ActiveRecord
   protected
 
   def allow_termination_can_be_enabled
-    if self.host.blank? and self.allow_termination==true
-      self.errors.add(:allow_termination, I18n.t('activerecord.errors.models.gateway.attributes.allow_termination.empty_host_for_termination'))
-      self.errors.add(:host, I18n.t('activerecord.errors.models.gateway.attributes.host.empty_host_for_termination'))
+    if host.blank? && (allow_termination == true)
+      errors.add(:allow_termination, I18n.t('activerecord.errors.models.gateway.attributes.allow_termination.empty_host_for_termination'))
+      errors.add(:host, I18n.t('activerecord.errors.models.gateway.attributes.host.empty_host_for_termination'))
     end
   end
 
   def vendor_owners_the_gateway_group
-    self.errors.add(:gateway_group, I18n.t('activerecord.errors.models.gateway.attributes.gateway_group.wrong_owner')) unless self.gateway_group_id.nil? || (self.contractor_id && self.contractor_id == self.gateway_group.vendor_id)
+    errors.add(:gateway_group, I18n.t('activerecord.errors.models.gateway.attributes.gateway_group.wrong_owner')) unless gateway_group_id.nil? || (contractor_id && contractor_id == gateway_group.vendor_id)
   end
 
   def vendor_can_be_changed
     if contractor_id_changed?
-      self.errors.add(:contractor, I18n.t('activerecord.errors.models.gateway.attributes.contractor.vendor_cant_be_changed')) if dialpeers.any?
+      errors.add(:contractor, I18n.t('activerecord.errors.models.gateway.attributes.contractor.vendor_cant_be_changed')) if dialpeers.any?
     end
   end
-
 
   def is_shared_can_be_changed
     return true unless is_shared_changed?(from: true, to: false)
@@ -297,12 +293,11 @@ class Gateway < Yeti::ActiveRecord
   end
 
   def incoming_auth_can_be_disabled
-    if incoming_auth_username_changed?(to: nil) or incoming_auth_username_changed?(to: '') and customers_auths.where(require_incoming_auth: true).any?
-      self.errors.add(:incoming_auth_username, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_username.cant_be_cleared'))
-      self.errors.add(:incoming_auth_password, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_password.cant_be_cleared'))
+    if incoming_auth_username_changed?(to: nil) || incoming_auth_username_changed?(to: '') && customers_auths.where(require_incoming_auth: true).any?
+      errors.add(:incoming_auth_username, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_username.cant_be_cleared'))
+      errors.add(:incoming_auth_password, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_password.cant_be_cleared'))
     end
   end
 
   include Yeti::IncomingAuthReloader
-
 end

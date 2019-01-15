@@ -1,10 +1,12 @@
-ActiveAdmin.register_page "Routing simulation" do
-  menu parent: "Routing", priority: 999, label: "Routing Simulation"
+# frozen_string_literal: true
+
+ActiveAdmin.register_page 'Routing simulation' do
+  menu parent: 'Routing', priority: 999, label: 'Routing Simulation'
 
   content do
     begin
       @dc = Routing::Simulation.new(params[:routing_simulation])
-      if !params[:routing_simulation].nil? and @dc.valid? #force object validation before form rendering
+      if !params[:routing_simulation].nil? && @dc.valid? # force object validation before form rendering
         @dc.save!
         p @dc.errors
       end
@@ -14,10 +16,10 @@ ActiveAdmin.register_page "Routing simulation" do
       end
     end
     panel 'Call simulation' do
-      render("routing_simulation/form", {dc: @dc}) # Calls a partial
+      render('routing_simulation/form', dc: @dc) # Calls a partial
     end
 
-    if !params[:routing_simulation].nil? and @dc.valid? and !@dc.debug.nil?
+    if !params[:routing_simulation].nil? && @dc.valid? && !@dc.debug.nil?
 
       panel 'results' do
         table_for @dc.debug do
@@ -75,7 +77,6 @@ ActiveAdmin.register_page "Routing simulation" do
           column :src_prefix_out
           column :dst_prefix_out
           column :time_limit
-
         end
       end
 
@@ -88,7 +89,6 @@ ActiveAdmin.register_page "Routing simulation" do
           end
         end
       end
-
 
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :gateway, class: Gateway do
     sequence(:name) { |n| "gateway#{n}" }
@@ -20,7 +22,7 @@ FactoryGirl.define do
     term_proxy_transport_protocol_id 1
     orig_proxy_transport_protocol_id 1
     sip_schema_id 1
-    host "test.example.com"
+    host 'test.example.com'
     port nil
     src_rewrite_rule nil
     dst_rewrite_rule nil
@@ -94,16 +96,14 @@ FactoryGirl.define do
     association :contractor, factory: :contractor, vendor: true
     codec_group { CodecGroup.take || association(:codec_group) }
 
-
     trait :with_incoming_auth do
-      incoming_auth_username "incoming_username"
-      incoming_auth_password "incoming_password"
+      incoming_auth_username 'incoming_username'
+      incoming_auth_password 'incoming_password'
     end
 
     trait :without_incoming_auth do
       incoming_auth_username  nil
       incoming_auth_password  nil
     end
-
   end
 end

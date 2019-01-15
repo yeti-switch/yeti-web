@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::DialpeersController, type: :controller do
@@ -84,8 +86,7 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
           'gateway-group': wrap_relationship(:'gateway-groups', gateway_group.id),
           'routing-group': wrap_relationship(:'routing-groups', routing_group.id),
           'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
-          'routeset-discriminator': wrap_relationship(:'routeset-discriminators', routeset_discriminator.id)
-        }
+          'routeset-discriminator': wrap_relationship(:'routeset-discriminators', routeset_discriminator.id) }
       end
 
       it { expect(response.status).to eq(201) }
@@ -93,7 +94,7 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { enabled: true} }
+      let(:attributes) { { enabled: true } }
       let(:relationships) { { vendor: wrap_relationship(:contractors, nil) } }
 
       it { expect(response.status).to eq(422) }
@@ -103,12 +104,14 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
 
   describe 'PUT update' do
     let!(:dialpeer) { create :dialpeer }
-    before { put :update, params: {
-      id: dialpeer.to_param, data: { type: 'dialpeers',
-                                     id: dialpeer.to_param,
-                                     attributes: attributes,
-                                     relationships: relationships}
-    } }
+    before do
+      put :update, params: {
+        id: dialpeer.to_param, data: { type: 'dialpeers',
+                                       id: dialpeer.to_param,
+                                       attributes: attributes,
+                                       relationships: relationships }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { 'next-interval': 90 } }
@@ -142,5 +145,4 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
       let(:factory_name) { :dialpeer }
     end
   end
-
 end

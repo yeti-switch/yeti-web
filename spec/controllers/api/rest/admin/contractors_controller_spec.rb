@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::ContractorsController, type: :controller do
@@ -58,7 +60,7 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
       let(:attributes) { { name: 'name', vendor: true, 'external-id': 100 } }
 
       let(:relationships) do
-        { 'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id ) }
+        { 'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id) }
       end
 
       it { expect(response.status).to eq(201) }
@@ -76,9 +78,11 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
 
   describe 'PUT update' do
     let!(:contractor) { create :contractor, vendor: true }
-    before { put :update, params: {
-      id: contractor.to_param, data: { type: 'contractors', id: contractor.to_param, attributes: attributes }
-    } }
+    before do
+      put :update, params: {
+        id: contractor.to_param, data: { type: 'contractors', id: contractor.to_param, attributes: attributes }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }

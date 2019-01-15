@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: invoice_templates
@@ -11,9 +13,8 @@
 #
 
 class Billing::InvoiceTemplate < Yeti::ActiveRecord
-
   self.table_name = 'invoice_templates'
-  #attr_accessible :template_file,:data,:name
+  # attr_accessible :template_file,:data,:name
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -21,22 +22,17 @@ class Billing::InvoiceTemplate < Yeti::ActiveRecord
 
   def template_file=(uploaded_file)
     self.filename = uploaded_file.original_filename
-    self.data=uploaded_file.read
-    self.sha1=Digest::SHA1.hexdigest(self.data)
-    #self.upload_date=Time.now
+    self.data = uploaded_file.read
+    self.sha1 = Digest::SHA1.hexdigest(data)
+    # self.upload_date=Time.now
   end
 
-
-
-  #todo: remove
+  # TODO: remove
   def get_file(id)
     Billing::InvoiceTemplate.find(id).data
   end
 
-
   def display_name
-    self.name
+    name
   end
-
-
 end

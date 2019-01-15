@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails/generators'
 
 class RolePolicyGenerator < Rails::Generators::Base
@@ -11,10 +13,10 @@ class RolePolicyGenerator < Rails::Generators::Base
   def create_or_update_policy_file
     step = '  '
     if class_modules.any?
-      modules_shift = step*class_modules.size
-      modules_start = class_modules.map.with_index { |mod, idx| step*idx + "module #{mod}" }.join("\n")
+      modules_shift = step * class_modules.size
+      modules_start = class_modules.map.with_index { |mod, idx| step * idx + "module #{mod}" }.join("\n")
       modules_start += "\n#{modules_shift}"
-      modules_end = class_modules.map.with_index { |_, idx| step*idx + 'end' }.reverse.join("\n")
+      modules_end = class_modules.map.with_index { |_, idx| step * idx + 'end' }.reverse.join("\n")
       modules_end += "\n#{modules_shift}"
     else
       modules_shift = ''
@@ -22,15 +24,15 @@ class RolePolicyGenerator < Rails::Generators::Base
       modules_end = ''
     end
     create_file file_path do
-      <<-RUBY
-#{modules_start}class #{class_name}Policy < ::RolePolicy
-#{modules_shift + step}section '#{section}'
+      <<~RUBY
+        #{modules_start}class #{class_name}Policy < ::RolePolicy
+        #{modules_shift + step}section '#{section}'
 
-#{modules_shift + step}class Scope < ::RolePolicy::Scope
-#{modules_shift + step}end
+        #{modules_shift + step}class Scope < ::RolePolicy::Scope
+        #{modules_shift + step}end
 
-#{modules_shift}end
-#{modules_end}
+        #{modules_shift}end
+        #{modules_end}
       RUBY
     end
   end
@@ -76,5 +78,4 @@ class RolePolicyGenerator < Rails::Generators::Base
   def section
     section_name.presence || resource_class_name.gsub('::', '/')
   end
-
 end

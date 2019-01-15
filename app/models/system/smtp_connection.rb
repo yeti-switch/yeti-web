@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.smtp_connections
@@ -20,27 +22,27 @@ class System::SmtpConnection < Yeti::ActiveRecord
   has_many :contractors, dependent: :restrict_with_error
 
   validates_presence_of :name, :host, :port, :from_address
-  validates_format_of :from_address, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates_format_of :from_address, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   validates_uniqueness_of :name
 
   def display_name
-    "#{self.name}"
+    name.to_s
   end
 
   def delivery_options
     {
-      user_name: self.auth_user,
-      password: self.auth_password,
-      address: self.host,
-      port: self.port
-    }.reject {|_, v| v.blank? }
+      user_name: auth_user,
+      password: auth_password,
+      address: host,
+      port: port
+    }.reject { |_, v| v.blank? }
   end
+
   def from
-    self.from_address
+    from_address
   end
 
   def self.global
-    self.where(global: true).take
+    where(global: true).take
   end
-
 end

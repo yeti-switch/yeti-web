@@ -1,5 +1,6 @@
-class DestinationDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class DestinationDecorator < BillingDecorator
   delegate_all
   decorates Routing::Destination
 
@@ -7,9 +8,9 @@ class DestinationDecorator < BillingDecorator
 
   def decorated_display_name
     if reject_calls?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     elsif enabled?
-      h.content_tag(:font,display_name, color: :orange)
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
@@ -22,5 +23,4 @@ class DestinationDecorator < BillingDecorator
   def decorated_valid_till
     is_valid_till? ? valid_till : h.content_tag(:font, valid_till, color: :red)
   end
-
 end

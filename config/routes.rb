@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
@@ -5,7 +7,7 @@ Rails.application.routes.draw do
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
-  resources :active_calls, constraints: { id: /[^\/]+/ }, only: [:show, :index, :destroy]
+  resources :active_calls, constraints: { id: %r{[^/]+} }, only: %i[show index destroy]
 
   resources :remote_stats do
     collection do
@@ -37,7 +39,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :rest do
-      with_options defaults: {format: :json} do |api|
+      with_options defaults: { format: :json } do |api|
         namespace :system do
           api.resources :jobs, only: [:index] do
             member do
@@ -65,7 +67,7 @@ Rails.application.routes.draw do
           jsonapi_resources :dialpeer_next_rates
           jsonapi_resources :gateways
           jsonapi_resources :gateway_groups
-          jsonapi_resources :payments, except: [:update, :destroy]
+          jsonapi_resources :payments, except: %i[update destroy]
           jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_plans
@@ -82,11 +84,11 @@ Rails.application.routes.draw do
           jsonapi_resources :sortings
 
           namespace :cdr do
-            jsonapi_resources :cdrs, only: [:index, :show] do
+            jsonapi_resources :cdrs, only: %i[index show] do
             end
-            jsonapi_resources :auth_logs, only: [:index, :show] do
+            jsonapi_resources :auth_logs, only: %i[index show] do
             end
-            jsonapi_resources :cdr_exports, only: [:create, :destroy]
+            jsonapi_resources :cdr_exports, only: %i[create destroy]
           end
 
           namespace :billing do
@@ -139,13 +141,13 @@ Rails.application.routes.draw do
             jsonapi_resources :rateplans
             jsonapi_resources :rates
             jsonapi_resource :check_rate, only: [:create]
-            jsonapi_resources :cdrs, only: [:index, :show]
-           end
+            jsonapi_resources :cdrs, only: %i[index show]
+          end
         end
       end
     end
   end
 
-  #404
+  # 404
   match '*a' => 'application#render_404', via: :get
 end

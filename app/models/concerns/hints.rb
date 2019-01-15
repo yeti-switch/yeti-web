@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Hints
   extend ActiveSupport::Concern
 
-    def send_to_hint
-      System::SmtpConnection.exists? ? :nil : 'No available SMTP connection. Report will not be sent.'
-    end
-
+  def send_to_hint
+    System::SmtpConnection.exists? ? :nil : 'No available SMTP connection. Report will not be sent.'
+  end
 end

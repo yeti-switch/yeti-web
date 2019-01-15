@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module System
   class SmtpConnectionPolicy < ::RolePolicy
     section 'System/SmtpConnection'
@@ -6,7 +8,5 @@ module System
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

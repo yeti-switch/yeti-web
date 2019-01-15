@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -12,11 +14,11 @@ resource 'Dialpeer next rates' do
   let(:dialpeer) { create(:dialpeer) }
   let(:dialpeer_id) { dialpeer.id }
 
-  required_params = %i(
+  required_params = %i[
     next-rate initial-rate initial-interval next-interval connect-fee apply-time applied
-  )
-  optional_params = %i(external-id)
-  required_relationships = %i(dialpeer)
+  ]
+  optional_params = %i[external-id]
+  required_relationships = %i[dialpeer]
 
   get '/api/rest/admin/dialpeer-next-rates' do
     before { create_list(:dialpeer_next_rate, 2, dialpeer: dialpeer) }

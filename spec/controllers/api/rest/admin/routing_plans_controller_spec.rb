@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::RoutingPlansController, type: :controller do
@@ -65,11 +67,13 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
 
   describe 'PUT update' do
     let!(:routing_plan) { create :routing_plan }
-    before { put :update, params: {
-      id: routing_plan.to_param, data: { type: 'routing-plans',
-                                         id: routing_plan.to_param,
-                                         attributes: attributes }
-    } }
+    before do
+      put :update, params: {
+        id: routing_plan.to_param, data: { type: 'routing-plans',
+                                           id: routing_plan.to_param,
+                                           attributes: attributes }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name', 'use-lnp': true, 'max-rerouting-attempts': 7 } }

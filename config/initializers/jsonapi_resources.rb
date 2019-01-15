@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 JSONAPI.configure do |config|
-  #can be paged, offset, none (default)
+  # can be paged, offset, none (default)
   config.default_paginator = :none
   config.default_page_size = 50
   config.maximum_page_size = 1_000

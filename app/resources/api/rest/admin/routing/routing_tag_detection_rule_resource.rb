@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::Routing::RoutingTagDetectionRuleResource < ::BaseResource
   model_name 'Routing::RoutingTagDetectionRule'
 
@@ -8,5 +10,4 @@ class Api::Rest::Admin::Routing::RoutingTagDetectionRuleResource < ::BaseResourc
   has_one :routing_tag, class_name: 'RoutingTag'
   has_one :tag_action, class_name: 'TagAction'
   has_one :routing_tag_mode, class_name: 'RoutingTagMode'
-
 end

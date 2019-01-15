@@ -1,11 +1,12 @@
-context.instance_eval do
+# frozen_string_literal: true
 
+context.instance_eval do
   selectable_column
   column :actions do |resource|
     links = ''.html_safe
     path =   active_call_path(id: resource.id)
-    links << link_to(I18n.t('active_admin.view'), path , class: "member_link view_link")
-    links << link_to('Terminate', drop_active_call_path(id: resource.id), method: :post, data: {confirm: I18n.t('active_admin.delete_confirmation')}, class: "member_link delete_link")
+    links << link_to(I18n.t('active_admin.view'), path, class: 'member_link view_link')
+    links << link_to('Terminate', drop_active_call_path(id: resource.id), method: :post, data: { confirm: I18n.t('active_admin.delete_confirmation') }, class: 'member_link delete_link')
     links
   end
 

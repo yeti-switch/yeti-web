@@ -1,5 +1,6 @@
-RSpec.shared_examples :test_model_with_routing_tag_ids do
+# frozen_string_literal: true
 
+RSpec.shared_examples :test_model_with_routing_tag_ids do
   include_context :init_routing_tag_collection
 
   let(:random_tags) do
@@ -24,5 +25,4 @@ RSpec.shared_examples :test_model_with_routing_tag_ids do
     values = random_tags + [nil, nil] # => [1, 2, nil, nil]
     expect(subject).not_to allow_value(values).for(:routing_tag_ids)
   end
-
 end

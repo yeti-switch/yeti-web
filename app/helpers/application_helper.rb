@@ -1,13 +1,14 @@
-module ApplicationHelper
+# frozen_string_literal: true
 
-  def form_title(title=nil)
+module ApplicationHelper
+  def form_title(title = nil)
     verb = case params[:action]
-             when "create"
-               "new"
-             when "update"
-               "edit"
-             else
-               params[:action]
+           when 'create'
+             'new'
+           when 'update'
+             'edit'
+           else
+             params[:action]
            end
     I18n.t("active_admin.#{verb}_model", model: (title || active_admin_config.resource_label))
   end
@@ -20,7 +21,6 @@ module ApplicationHelper
     else
       who || 'Unknown!'
     end
-
   end
 
   def whodunit(who)
@@ -28,7 +28,7 @@ module ApplicationHelper
     if id > 0
       begin
         AdminUser.find(id)
-      rescue
+      rescue StandardError
         who
       end
     else
@@ -36,8 +36,7 @@ module ApplicationHelper
     end
   end
 
-
-  def remote_chosen_request(type, path, params, target_selector, prompt = "Select an Option")
+  def remote_chosen_request(type, path, params, target_selector, prompt = 'Select an Option')
     target_selector = "$('##{target_selector}')" if target_selector.is_a?(Symbol)
 
     "
@@ -64,7 +63,7 @@ module ApplicationHelper
       "
   end
 
-  def delayed_remote_chosen_request(delay_ms, type, path, params, target_selector, prompt = "Select an Option")
+  def delayed_remote_chosen_request(delay_ms, type, path, params, target_selector, prompt = 'Select an Option')
     target_selector = "$('##{target_selector}')" if target_selector.is_a?(Symbol)
 
     "

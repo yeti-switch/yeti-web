@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -29,7 +31,7 @@ resource 'Routing plans' do
   post '/api/rest/admin/routing-plans' do
     parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
 
-    jsonapi_attributes([:name], [:rate_delta_max, :use_lnp, :max_rerouting_attempts])
+    jsonapi_attributes([:name], %i[rate_delta_max use_lnp max_rerouting_attempts])
     jsonapi_relationships([], [:sorting])
 
     let(:name) { 'name' }
@@ -43,7 +45,7 @@ resource 'Routing plans' do
     parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
     parameter :id, 'Routing plan ID', scope: :data, required: true
 
-    jsonapi_attributes([:name], [:rate_delta_max, :use_lnp, :max_rerouting_attempts])
+    jsonapi_attributes([:name], %i[rate_delta_max use_lnp max_rerouting_attempts])
 
     let(:id) { create(:routing_plan).id }
     let(:name) { 'name' }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CdrDecorator < Draper::Decorator
   delegate_all
   decorates Cdr::Cdr

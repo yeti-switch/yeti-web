@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stats.traffic_vendor_accounts
@@ -12,5 +14,5 @@
 #
 
 class Stats::TrafficVendorAccount < Stats::Traffic
-  self.table_name = "stats.traffic_vendor_accounts"
+  self.table_name = 'stats.traffic_vendor_accounts'
 end

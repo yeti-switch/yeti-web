@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: import_rateplans
@@ -15,8 +17,7 @@ class Importing::Rateplan < Importing::Base
 
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode'
 
-  self.import_attributes = ['name', 'profit_control_mode_id']
+  self.import_attributes = %w[name profit_control_mode_id]
 
   self.import_class = ::Rateplan
-
 end

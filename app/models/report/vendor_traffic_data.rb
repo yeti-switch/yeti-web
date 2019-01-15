@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.vendor_traffic_report_data
@@ -25,7 +27,7 @@ class Report::VendorTrafficData < Cdr::Base
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id # ,:conditions => {:vendor => true}
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   def self.totals
@@ -37,8 +39,6 @@ class Report::VendorTrafficData < Cdr::Base
                             sum(termination_cost) as termination_cost,
                             sum(profit) as profit,
                             min(first_call_at) as first_call_at,
-                            max(last_call_at) as last_call_at"
-    ).to_a.first
+                            max(last_call_at) as last_call_at").to_a.first
   end
-
 end

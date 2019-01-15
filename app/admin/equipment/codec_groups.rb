@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register CodecGroup do
-  menu parent: "Equipment", priority: 90
+  menu parent: 'Equipment', priority: 90
 
   acts_as_audit
   acts_as_clone :codec_group_codecs
@@ -8,8 +10,8 @@ ActiveAdmin.register CodecGroup do
   acts_as_export :id, :name
 
   permit_params :name,
-                codec_group_codecs_attributes: [
-                   :id, :codec_id, :priority, :dynamic_payload_type, :format_parameters, :_destroy
+                codec_group_codecs_attributes: %i[
+                  id codec_id priority dynamic_payload_type format_parameters _destroy
                 ]
 
   controller do
@@ -24,17 +26,15 @@ ActiveAdmin.register CodecGroup do
     actions
     column :name
     column :codecs do |row|
-      codec_names =  row.codec_names
+      codec_names = row.codec_names
 
-      div  class: :has_tooltip , title: codec_names.join(",") do
-         if  codec_names.size > 3
-           row.codec_names.take(3).join(" ") << '...'
-         else
-            row.codec_names.join(' ')
-         end
-
+      div class: :has_tooltip, title: codec_names.join(',') do
+        if codec_names.size > 3
+          row.codec_names.take(3).join(' ') << '...'
+        else
+          row.codec_names.join(' ')
+        end
       end
-
     end
   end
 
@@ -47,17 +47,15 @@ ActiveAdmin.register CodecGroup do
       f.input :name
     end
 
-    f.inputs "Codecs" do
-        f.has_many :codec_group_codecs do |t|
-
-            t.input :codec_id, as: :select, collection: Codec.all ,  input_html: { class: 'chosen'}
-            t.input :priority
-            t.input :dynamic_payload_type, hint: "Payload type must be between 96 and 127"
-            t.input :format_parameters
-            t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless  t.object.new_record?
-
-        end
+    f.inputs 'Codecs' do
+      f.has_many :codec_group_codecs do |t|
+        t.input :codec_id, as: :select, collection: Codec.all, input_html: { class: 'chosen' }
+        t.input :priority
+        t.input :dynamic_payload_type, hint: 'Payload type must be between 96 and 127'
+        t.input :format_parameters
+        t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless t.object.new_record?
       end
+    end
     f.actions
   end
 
@@ -67,15 +65,13 @@ ActiveAdmin.register CodecGroup do
       row :name
     end
 
-    panel "Codecs" do
-      table_for s.codec_group_codecs.includes(:codec).order("priority desc") do
+    panel 'Codecs' do
+      table_for s.codec_group_codecs.includes(:codec).order('priority desc') do
         column :priority
         column :codec
         column :dynamic_payload_type
         column :format_parameters
       end
     end
-
   end
-
 end

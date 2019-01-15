@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.customer_traffic_report_data_by_destination
@@ -27,9 +29,8 @@ class Report::CustomerTrafficDataByDestination < Cdr::Base
   belongs_to :country, class_name: 'System::Country', foreign_key: :dst_country_id
   belongs_to :network, class_name: 'System::Network', foreign_key: :dst_network_id
 
-
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   def self.totals
@@ -42,8 +43,7 @@ class Report::CustomerTrafficDataByDestination < Cdr::Base
             sum(profit) as profit,
             min(first_call_at) as first_call_at,
             max(last_call_at) as last_call_at,
-            coalesce(sum(calls_duration)::float/nullif(sum(success_calls_count),0),0) as agg_acd"
-    ).take
+            coalesce(sum(calls_duration)::float/nullif(sum(success_calls_count),0),0) as agg_acd").take
   end
 
   def self.report_records
@@ -51,22 +51,21 @@ class Report::CustomerTrafficDataByDestination < Cdr::Base
   end
 
   def self.csv_columns
-    [
-        :destination_prefix,
-        :country,
-        :network,
-        :calls_count,
-        :calls_duration,
-        :acd,
-        :asr,
-        :origination_cost,
-        :termination_cost,
-        :profit,
-        :success_calls_count,
-        :first_call_at,
-        :last_call_at,
-        :short_calls_count
+    %i[
+      destination_prefix
+      country
+      network
+      calls_count
+      calls_duration
+      acd
+      asr
+      origination_cost
+      termination_cost
+      profit
+      success_calls_count
+      first_call_at
+      last_call_at
+      short_calls_count
     ]
   end
-
 end

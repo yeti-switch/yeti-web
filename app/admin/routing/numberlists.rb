@@ -1,6 +1,7 @@
-ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
+# frozen_string_literal: true
 
-  menu parent: "Routing", priority: 110
+ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
+  menu parent: 'Routing', priority: 110
 
   decorate_with NumberlistDecorator
 
@@ -66,7 +67,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :display_tag_action_value
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :name
@@ -95,10 +96,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
       f.input :tag_action
       f.input :tag_action_value, as: :select,
-        collection: Routing::RoutingTag.all,
-        multiple: true,
-        include_hidden: false,
-        input_html: { class: 'chosen' }
+                                 collection: Routing::RoutingTag.all,
+                                 multiple: true,
+                                 include_hidden: false,
+                                 input_html: { class: 'chosen' }
     end
     f.actions
   end
@@ -107,5 +108,4 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :name
   filter :mode
   filter :default_action
-
 end

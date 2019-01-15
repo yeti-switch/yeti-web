@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Report::Realtime::TerminationDistribution do
   menu parent: 'Reports', label: 'Termination distribution', priority: 100
   config.batch_actions = false
@@ -8,13 +10,13 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
   decorate_with ReportRealtimeTerminationDistributionDecorator
 
   filter :time_interval_eq, label: 'Time Interval',
-         as: :select,
-         collection: Report::Realtime::Base::INTERVALS,
-         input_html: {class: 'chosen'}, include_blank: false
+                            as: :select,
+                            collection: Report::Realtime::Base::INTERVALS,
+                            input_html: { class: 'chosen' }, include_blank: false
 
   filter :customer_id, label: 'Customer',
-         as: :select, collection: proc { Contractor.select(:id, :name).reorder(:name) },
-         input_html: {class: 'chosen'}
+                       as: :select, collection: proc { Contractor.select(:id, :name).reorder(:name) },
+                       input_html: { class: 'chosen' }
 
   before_action only: [:index] do
     params[:q] ||= {}
@@ -44,32 +46,19 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
     column :rerouted_calls_percent, sortable: :rerouted_calls_percent
     column :termination_attempts_count, sortable: :termination_attempts_count
     column :calls_duration, sortable: :calls_duration
-    column :acd, sortable: :acd do |c|
-      c.decorated_acd
-    end
-    column :origination_asr, sortable: :origination_asr do |c|
-      c.decorated_origination_asr
-    end
-    column :termination_asr, sortable: :termination_asr do |c|
-      c.decorated_termination_asr
-    end
-    column :profit, sortable: :profit do |c|
-      c.decorated_profit
-    end
-    column :customer_price, sortable: :customer_price do |c|
-      c.decorated_customer_price
-    end
-    column :vendor_price, sortable: :vendor_price do |c|
-      c.decorated_vendor_price
-    end
+    column :acd, sortable: :acd, &:decorated_acd
+    column :origination_asr, sortable: :origination_asr, &:decorated_origination_asr
+    column :termination_asr, sortable: :termination_asr, &:decorated_termination_asr
+    column :profit, sortable: :profit, &:decorated_profit
+    column :customer_price, sortable: :customer_price, &:decorated_customer_price
+    column :vendor_price, sortable: :vendor_price, &:decorated_vendor_price
   end
 
   index as: :data, skip_drop_down_pagination: true do
-
     data = collection.map do |x|
       {
-          label: x.vendor.try!(:display_name) || "Vendor | #{x.vendor_id}",
-          value: x.originated_calls_count
+        label: x.vendor.try!(:display_name) || "Vendor | #{x.vendor_id}",
+        value: x.originated_calls_count
       }
     end
 
@@ -77,6 +66,4 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
         'data-series': data.to_json,
         style: 'height: 600px;'
   end
-
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CallSql
   class Yeti < Base
     _delegate_to_instance :table_full_size, :table_data_size
@@ -15,6 +17,5 @@ module CallSql
     def model_klass
       ::Yeti::ActiveRecord
     end
-
   end
 end

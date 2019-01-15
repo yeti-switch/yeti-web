@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::LuaScript do
-  menu parent: "System", label: "Lua Scripts", priority: 10
+  menu parent: 'System', label: 'Lua Scripts', priority: 10
 
   acts_as_clone
   acts_as_audit
@@ -18,7 +20,7 @@ ActiveAdmin.register System::LuaScript do
     column :updated_at
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :name
@@ -39,5 +41,4 @@ ActiveAdmin.register System::LuaScript do
     end
     f.actions
   end
-
 end

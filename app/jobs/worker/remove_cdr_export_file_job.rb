@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 
 module Worker
@@ -28,7 +30,7 @@ module Worker
       end
       http_code = res.code.to_i
       unless ALLOWED_HTTP_CODES.include?(http_code)
-        raise FileNotDeletedError.new(http_code)
+        raise FileNotDeletedError, http_code
       end
     end
 

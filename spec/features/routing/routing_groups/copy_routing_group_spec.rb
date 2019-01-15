@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Copy Routing group action', type: :feature do
   include_context :login_as_admin
 
   context 'success' do
-
     let!(:routing_group) do
       create(:routing_group).reload # after_save
     end
@@ -30,11 +31,8 @@ describe 'Copy Routing group action', type: :feature do
       expect(routing_group.dialpeers.count).to eq(0)
       expect(RoutingGroup.count).to eq(2)
       expect(RoutingGroup.last).to have_attributes(
-                                       name: new_name
-                                   )
+        name: new_name
+      )
     end
-
-
   end
-
 end

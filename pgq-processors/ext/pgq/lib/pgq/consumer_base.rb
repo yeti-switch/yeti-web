@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pony'
 require 'pgq/api'
 require 'active_support/inflector' unless ''.respond_to?(:underscore)
@@ -24,12 +26,12 @@ class Pgq::ConsumerBase
     self.class.connection
   end
 
-  def self.consumer_name
-    @consumer_name
+  class << self
+    attr_reader :consumer_name
   end
 
-  def self.queue_name
-    @queue_name
+  class << self
+    attr_reader :queue_name
   end
 
   # == coder
@@ -51,15 +53,12 @@ class Pgq::ConsumerBase
     @batch_id = nil
   end
 
-
   def perform_batch
     events = []
     begin
       pgq_events = get_batch_events
 
-      if pgq_events.nil? # if no batch
-        return 0
-      end
+      return 0 if pgq_events.nil? # if no batch
 
       if pgq_events.blank? # if batch is empty
         log_info 'Empty batch'
@@ -74,16 +73,14 @@ class Pgq::ConsumerBase
       perform_events(events)
 
       finish_batch
-
     rescue SystemExit
-      log_error("System Exit")
+      log_error('System Exit')
     rescue StandardError => e
       error_message = "<#{e.class}> #{e.message}"
       log_error(error_message)
       Pony.mail(body: e.backtrace.join("\n"), subject: error_message)
       Pgq::Worker.shutdown!(e) unless Pgq::Worker.interrupted?
     end
-
 
     events.size
   end
@@ -95,8 +92,7 @@ class Pgq::ConsumerBase
   end
 
   def perform_event(event)
-
-    logger.info "performing event: Event: #{event.id}, Batch: #{@batch_id.to_s}"
+    logger.info "performing event: Event: #{event.id}, Batch: #{@batch_id}"
 
     Pgq::Worker.check_interrupted(__FILE__, __LINE__)
 
@@ -104,26 +100,27 @@ class Pgq::ConsumerBase
     data = event.data
 
     if event.done?
-      self.log_info("An event #{type} has done")
+      log_info("An event #{type} has done")
       return
     end
 
     perform(type, data)
 
     event.done!
-    self.log_info("Set an event #{type} to done")
+    log_info("Set an event #{type} to done")
   rescue Exception => ex
-    self.log_error(event.exception_message(ex))
+    log_error(event.exception_message(ex))
     raise ex
   end
 
-  def perform(type, *data)
+  def perform(_type, *_data)
     raise 'realize me'
   end
 
   def get_batch_events
     @batch_id = database.pgq_next_batch(queue_name, consumer_name)
     return nil unless @batch_id
+
     database.pgq_get_batch_events(consumer_name, @batch_id)
   end
 
@@ -151,12 +148,10 @@ class Pgq::ConsumerBase
   # == log methods
 
   def log_info(mes)
-    @logger.info(mes) if @logger
+    @logger&.info(mes)
   end
 
   def log_error(mes)
-    @logger.error(mes) if @logger
+    @logger&.error(mes)
   end
-
-
 end

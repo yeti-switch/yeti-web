@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Routing::RoutingPlan do
-  menu parent: "Routing", label: "Routing plans", priority: 50
+  menu parent: 'Routing', label: 'Routing plans', priority: 50
 
   acts_as_audit
   acts_as_clone
@@ -17,21 +19,20 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_delayed_job_lock
   acts_as_export :id,
                  :name,
-                 [:sorting_name, proc { |row| row.sorting.try(:name) || "" }],
+                 [:sorting_name, proc { |row| row.sorting.try(:name) || '' }],
                  :use_lnp,
                  :rate_delta_max,
                  :max_rerouting_attempts
 
-  permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts, {routing_group_ids: []}
+  permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts, routing_group_ids: []
 
   includes :sorting
 
   filter :id
   filter :name
   filter :sorting
-  filter :use_lnp, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :customers_auths_account_id_eq, as: :select, label: "Assigned to account", collection: -> { Account.customers_accounts }
-
+  filter :use_lnp, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :customers_auths_account_id_eq, as: :select, label: 'Assigned to account', collection: -> { Account.customers_accounts }
 
   index do
     selectable_column
@@ -39,16 +40,15 @@ ActiveAdmin.register Routing::RoutingPlan do
     actions
     column :name
     column :sorting, sortable: 'sortings.name'
-    column "Use LNP", :use_lnp
+    column 'Use LNP', :use_lnp
     column :rate_delta_max
     column :max_rerouting_attempts
-    column "Routing groups" do |r|
-      raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: {routing_group_id_eq: rg.id}) }.sort.join(', '))
+    column 'Routing groups' do |r|
+      raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: { routing_group_id_eq: rg.id }) }.sort.join(', '))
     end
-
   end
 
-  show do |s|
+  show do |_s|
     # tabs do
     #   tab "Details" do
     attributes_table do
@@ -58,8 +58,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       row :use_lnp
       row :rate_delta_max
       row :max_rerouting_attempts
-      row "Routing groups" do |r|
-        raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: {routing_group_id_eq: rg.id}) }.sort.join(', '))
+      row 'Routing groups' do |r|
+        raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: { routing_group_id_eq: rg.id }) }.sort.join(', '))
       end
     end
     active_admin_comments
@@ -73,30 +73,24 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :use_lnp
       f.input :rate_delta_max
       f.input :max_rerouting_attempts
-      f.input :routing_groups, input_html: {class: 'chosen-sortable', multiple: true}
+      f.input :routing_groups, input_html: { class: 'chosen-sortable', multiple: true }
     end
     f.actions
   end
 
-
-
-
-  sidebar :links, only: [:show, :edit] do
-
+  sidebar :links, only: %i[show edit] do
     ul do
       li do
-        link_to "Customer Auths", customers_auths_path(q: {routing_plan_id_eq: params[:id]})
+        link_to 'Customer Auths', customers_auths_path(q: { routing_plan_id_eq: params[:id] })
       end
       li do
-        link_to "CDR list", cdrs_path(q: {routing_plan_id_eq: params[:id]})
+        link_to 'CDR list', cdrs_path(q: { routing_plan_id_eq: params[:id] })
       end
-      li do
-        link_to "Static routes(#{resource.static_routes.count})" ,static_routes_path(q: {routing_plan_id_eq: params[:id] })
-      end  if resource.use_static_routes?
-
-
-
+      if resource.use_static_routes?
+        li do
+          link_to "Static routes(#{resource.static_routes.count})", static_routes_path(q: { routing_plan_id_eq: params[:id] })
+        end
+      end
     end
   end
-
 end

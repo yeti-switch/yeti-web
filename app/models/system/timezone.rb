@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.timezones
@@ -13,7 +15,6 @@ class System::Timezone < Yeti::ActiveRecord
   self.table_name = 'sys.timezones'
 
   def display_name
-    "#{self.name} | #{self.abbrev} | #{self.utc_offset}"
+    "#{name} | #{abbrev} | #{utc_offset}"
   end
-
 end

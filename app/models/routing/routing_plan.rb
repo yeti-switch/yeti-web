@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: routing_plans
@@ -11,10 +13,10 @@
 #
 
 class Routing::RoutingPlan < Yeti::ActiveRecord
-  has_and_belongs_to_many :routing_groups, join_table: "class4.routing_plan_groups", class_name: 'RoutingGroup'
+  has_and_belongs_to_many :routing_groups, join_table: 'class4.routing_plan_groups', class_name: 'RoutingGroup'
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :routing_plan_id, dependent: :restrict_with_error
   has_many :static_routes, class_name: 'Routing::RoutingPlanStaticRoute',
-           foreign_key: :routing_plan_id, dependent: :delete_all
+                           foreign_key: :routing_plan_id, dependent: :delete_all
 
   has_many :lnp_rules, class_name: 'Lnp::RoutingPlanLnpRule', foreign_key: :routing_plan_id, dependent: :delete_all
   belongs_to :sorting
@@ -22,13 +24,13 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
 
   validates_presence_of :name, :max_rerouting_attempts
-  validates_uniqueness_of  :name, allow_blank: false
+  validates_uniqueness_of :name, allow_blank: false
   validates_numericality_of :max_rerouting_attempts, greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true
 
-  scope :having_static_routes, -> { joins(:sorting).merge( Sorting.with_static_routes ) }
+  scope :having_static_routes, -> { joins(:sorting).merge(Sorting.with_static_routes) }
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
   # #todo: remove this
@@ -37,20 +39,18 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
   # end
 
   def use_static_routes?
-    self.sorting.use_static_routes?
+    sorting.use_static_routes?
   end
 
   def have_routing_groups?
-    routing_groups.count>0
+    routing_groups.count > 0
   end
 
-#  after_update :delete_static_routes, if: proc {|obj| obj.sorting_id_changed? }
+  #  after_update :delete_static_routes, if: proc {|obj| obj.sorting_id_changed? }
 
   private
 
   def delete_static_routes
-    self.static_routes.delete_all
+    static_routes.delete_all
   end
-
 end
-

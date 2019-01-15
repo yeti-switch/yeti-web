@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
-  menu parent: "Billing", label: "Invoice templates", priority: 40
+  menu parent: 'Billing', label: 'Invoice templates', priority: 40
   config.batch_actions = false
   actions :all #:index,:create, :new, :destroy, :delete, :edit, :update
   before_action :left_sidebar!
@@ -7,7 +9,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
   permit_params :name, :template_file
 
   acts_as_export :id, :name,
-                 [:file_name, proc { |row| row.filename}],
+                 [:file_name, proc { |row| row.filename }],
                  :created_at,
                  :sha1
 
@@ -23,7 +25,6 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     def find_resource
       scoped_collection.except(:select).find(params[:id])
     end
-
   end
 
   index do
@@ -35,7 +36,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
 
     column :name
 
-    column "File" do |filelink|
+    column 'File' do |filelink|
       link_to filelink.filename, download_invoice_template_path(filelink), method: :get
     end
     column :created_at
@@ -52,26 +53,24 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
       f.input :name
       f.input :template_file, as: :file
     end
-    panel "test" do
-      "You can use next placeholders:"
-      table_for InvoiceDocs.replaces_list.each do |x|
+    panel 'test' do
+      'You can use next placeholders:'
+      table_for InvoiceDocs.replaces_list.each do |_x|
         column :placeholder do |c|
           strong do
-          "[#{c.to_s.upcase}]"
+            "[#{c.to_s.upcase}]"
           end
-
         end
         column :description do |c|
-          I18n.t('invoice_template.placeholders.'+c.to_s)
+          I18n.t('invoice_template.placeholders.' + c.to_s)
         end
       end
     end
 
     f.actions
-end
+  end
 
-
-  show do |t|
+  show do |_t|
     attributes_table do
       row :id
       row :name
@@ -81,5 +80,4 @@ end
 
     active_admin_comments
   end
-
 end

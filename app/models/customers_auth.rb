@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.customers_auth
@@ -57,13 +59,13 @@ class CustomersAuth < Yeti::ActiveRecord
   self.table_name = 'class4.customers_auth'
 
   module CONST
-    MATCH_CONDITION_ATTRIBUTES = [:ip,
-                                  :src_prefix,
-                                  :dst_prefix,
-                                  :uri_domain,
-                                  :from_domain,
-                                  :to_domain,
-                                  :x_yeti_auth].freeze
+    MATCH_CONDITION_ATTRIBUTES = %i[ip
+                                    src_prefix
+                                    dst_prefix
+                                    uri_domain
+                                    from_domain
+                                    to_domain
+                                    x_yeti_auth].freeze
 
     freeze
   end
@@ -105,7 +107,6 @@ class CustomersAuth < Yeti::ActiveRecord
 
   validates_presence_of :ip
 
-
   validates_uniqueness_of :name, allow_blank: :false
   validates_presence_of :name
   validates_uniqueness_of :external_id, allow_blank: true
@@ -125,28 +126,31 @@ class CustomersAuth < Yeti::ActiveRecord
 
   validates_with TagActionValueValidator
 
-  scope :with_radius, -> { where("radius_auth_profile_id is not null") }
-  scope :with_dump, -> { where("dump_level_id > 0") }
-  scope :ip_covers, ->(ip) do
-    IPAddr.new(ip) rescue return none
+  scope :with_radius, -> { where('radius_auth_profile_id is not null') }
+  scope :with_dump, -> { where('dump_level_id > 0') }
+  scope :ip_covers, lambda { |ip|
+    begin
+      IPAddr.new(ip)
+    rescue StandardError
+      return none
+    end
     where(
-      "#{self.table_name}.id IN (
+      "#{table_name}.id IN (
         SELECT customers_auth_id FROM #{CustomersAuthNormalized.table_name} WHERE ip>>='#{ip}'::inet
       )"
     )
-  end
+  }
 
   include Yeti::ResourceStatus
 
   include PgEvent
   has_pg_queue 'gateway-sync'
 
-
   after_create :create_shadow_copy
   after_update :update_shadow_copy
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
   # TODO: move to decorator when ActiveAdmin fix problem
@@ -162,18 +166,11 @@ class CustomersAuth < Yeti::ActiveRecord
     end
   end
 
-
   def display_name_for_debug
-    b="#{self.customer.display_name} -> #{self.name} | #{self.id} IP: #{self.raw_ip}"
-    if !self.uri_domain.blank?
-      b=b+", Domain: #{self.uri_domain}"
-    end
-    if !self.pop_id.nil?
-      b=b+", POP: #{self.pop.try(:name)}"
-    end
-    if !self.x_yeti_auth.blank?
-      b=b+", X-Yeti-Auth: #{self.x_yeti_auth}"
-    end
+    b = "#{customer.display_name} -> #{name} | #{id} IP: #{raw_ip}"
+    b += ", Domain: #{uri_domain}" unless uri_domain.blank?
+    b += ", POP: #{pop.try(:name)}" unless pop_id.nil?
+    b += ", X-Yeti-Auth: #{x_yeti_auth}" unless x_yeti_auth.blank?
     b
   end
 
@@ -182,44 +179,45 @@ class CustomersAuth < Yeti::ActiveRecord
   # end
 
   def self.search_for_debug(src, dst)
-    if src.blank?&&dst.blank?
+    if src.blank? && dst.blank?
       CustomersAuth.all.reorder(:name)
     elsif src.blank?
-      CustomersAuth.where("prefix_range(customers_auth.dst_prefix)@>prefix_range(?)", dst).reorder(:name)
+      CustomersAuth.where('prefix_range(customers_auth.dst_prefix)@>prefix_range(?)', dst).reorder(:name)
     elsif dst.blank?
-      CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?)", src).reorder(:name)
+      CustomersAuth.where('prefix_range(customers_auth.src_prefix)@>prefix_range(?)', src).reorder(:name)
     else
       CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?) AND
   prefix_range(customers_auth.dst_prefix)@>prefix_range(?)", src, dst).reorder(:name)
     end
   end
 
-  #force update IP
+  # force update IP
   def keys_for_partial_write
     (changed + ['ip']).uniq
   end
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
+  def self.ransackable_scopes(_auth_object = nil)
     [:ip_covers]
   end
 
   protected
+
   def ip_is_valid
-    begin
+    if ip.is_a? Array
       ip.each do |raw_ip|
         _tmp = IPAddr.new(raw_ip)
-      end if ip.is_a? Array
-    rescue IPAddr::Error => error
-      self.errors.add(:ip, "is not valid")
+      end
     end
+  rescue IPAddr::Error => error
+    errors.add(:ip, 'is not valid')
   end
 
   def gateway_supports_incoming_auth
-    if self.gateway.try(:incoming_auth_username).blank? and self.require_incoming_auth
-      self.errors.add(:gateway, I18n.t('activerecord.errors.models.customers_auth.attributes.gateway.incoming_auth_required'))
-      self.errors.add(:require_incoming_auth, I18n.t('activerecord.errors.models.customers_auth.attributes.require_incoming_auth.gateway_with_auth_reqired'))
+    if gateway.try(:incoming_auth_username).blank? && require_incoming_auth
+      errors.add(:gateway, I18n.t('activerecord.errors.models.customers_auth.attributes.gateway.incoming_auth_required'))
+      errors.add(:require_incoming_auth, I18n.t('activerecord.errors.models.customers_auth.attributes.require_incoming_auth.gateway_with_auth_reqired'))
     end
   end
 
@@ -228,7 +226,7 @@ class CustomersAuth < Yeti::ActiveRecord
 
     # all other attributes
     CustomersAuthNormalized.shadow_column_names.each do |key|
-      copy_attributes[key] = self.public_send(key)
+      copy_attributes[key] = public_send(key)
     end
 
     if match_conditions_values.empty?
@@ -254,12 +252,12 @@ class CustomersAuth < Yeti::ActiveRecord
   def match_conditions_values
     @_mcv = begin
               ar_values = CONST::MATCH_CONDITION_ATTRIBUTES.map do |mc_name|
-                self.public_send(mc_name).map { |v| { mc_name => v } }
+                public_send(mc_name).map { |v| { mc_name => v } }
               end.reject(&:empty?)
               return [] if ar_values.empty?
+
               first_arr = ar_values.shift
               first_arr.product(*ar_values)
             end
   end
 end
-

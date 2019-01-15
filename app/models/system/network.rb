@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.networks
@@ -14,7 +16,6 @@ class System::Network < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-
   def display_name
     "#{id} | #{name}"
   end
@@ -22,5 +23,4 @@ class System::Network < Yeti::ActiveRecord
   def self.collection
     order(:name)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: disconnect_code_namespace
@@ -7,10 +9,9 @@
 #
 
 class DisconnectCodeNamespace < ActiveRecord::Base
-  self.table_name='disconnect_code_namespace'
-  
-  def display_name
-    self.name
-  end
+  self.table_name = 'disconnect_code_namespace'
 
+  def display_name
+    name
+  end
 end

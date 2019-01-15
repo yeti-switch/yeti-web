@@ -1,21 +1,23 @@
-worker_processes 4
-user "yeti-web", "yeti-web"
-working_directory "/home/yeti-web" # available in 0.94.0+
+# frozen_string_literal: true
 
-listen "/run/yeti/yeti-unicorn.sock", backlog: 1024
+worker_processes 4
+user 'yeti-web', 'yeti-web'
+working_directory '/home/yeti-web' # available in 0.94.0+
+
+listen '/run/yeti/yeti-unicorn.sock', backlog: 1024
 
 timeout 1800
 
-pid "/run/yeti/yeti-web-unicorn.pid"
+pid '/run/yeti/yeti-web-unicorn.pid'
 
-stderr_path "/home/yeti-web/log/unicorn.stderr.log"
-stdout_path "/home/yeti-web/log/unicorn.stdout.log"
+stderr_path '/home/yeti-web/log/unicorn.stderr.log'
+stdout_path '/home/yeti-web/log/unicorn.stdout.log'
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 preload_app true
-GC.respond_to?(:copy_on_write_friendly=) and
-  GC.copy_on_write_friendly = true
+GC.respond_to?(:copy_on_write_friendly=) &&
+  (GC.copy_on_write_friendly = true)
 
 # Enable this flag to have unicorn test client connections by writing the
 # beginning of the HTTP headers before calling the application.  This
@@ -23,9 +25,9 @@ GC.respond_to?(:copy_on_write_friendly=) and
 # while queued.  This is only guaranteed to detect clients on the same
 # host unicorn runs on, and unlikely to detect disconnects even on a
 # fast LAN.
-#check_client_connection false
+# check_client_connection false
 
-before_fork do |server, worker|
+before_fork do |_server, _worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
   ActiveRecord::Base.connection.disconnect!
@@ -56,7 +58,7 @@ before_fork do |server, worker|
   # sleep 1
 end
 
-after_fork do |server, worker|
+after_fork do |_server, _worker|
   # per-process listener ports for debugging/admin/migrations
   # addr = "127.0.0.1:#{9293 + worker.nr}"
   # server.listen(addr, :tries => -1, :delay => 5, :tcp_nopush => true)

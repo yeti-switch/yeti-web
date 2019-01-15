@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Equipment
   module Radius
     class AccountingProfilePolicy < ::RolePolicy
@@ -5,8 +7,6 @@ module Equipment
 
       class Scope < ::RolePolicy::Scope
       end
-
     end
   end
 end
-    

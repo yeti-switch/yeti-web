@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Routing
   class DestinationPolicy < ::RolePolicy
     section 'Routing/Destination'
@@ -8,7 +10,5 @@ module Routing
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

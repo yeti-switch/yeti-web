@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseJobPolicy < ::RolePolicy
   section 'BaseJob'
 
@@ -5,6 +7,4 @@ class BaseJobPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

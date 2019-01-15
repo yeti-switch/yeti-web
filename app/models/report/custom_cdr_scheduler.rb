@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.cdr_custom_report_schedulers
@@ -34,20 +36,19 @@ class Report::CustomCdrScheduler < Cdr::Base
   end
 
   validate do
-    if self.send_to.present?  and self.send_to.any?
-      self.errors.add(:send_to, :invalid) if contacts.count != self.send_to.count
+    if send_to.present? && send_to.any?
+      errors.add(:send_to, :invalid) if contacts.count != send_to.count
     end
-    if self.group_by.present?  and self.group_by.any?
-      #TODO validation for group by
+    if group_by.present? && group_by.any?
+      # TODO: validation for group by
     end
   end
 
   def send_to=(send_to_ids)
-    self[:send_to] = send_to_ids.reject {|i| i.blank? }
+    self[:send_to] = send_to_ids.reject(&:blank?)
   end
 
- def group_by=(group_by_fields)
-   self[:group_by] = group_by_fields.reject {|i| i.blank? }
- end
-
+  def group_by=(group_by_fields)
+    self[:group_by] = group_by_fields.reject(&:blank?)
+  end
 end

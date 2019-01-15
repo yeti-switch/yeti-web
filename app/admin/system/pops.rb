@@ -1,6 +1,7 @@
-ActiveAdmin.register Pop do
+# frozen_string_literal: true
 
-  menu parent: "System",  priority: 119
+ActiveAdmin.register Pop do
+  menu parent: 'System', priority: 119
   config.batch_actions = false
 
   permit_params :name
@@ -12,5 +13,4 @@ ActiveAdmin.register Pop do
     actions
     column :name
   end
-
 end

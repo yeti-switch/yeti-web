@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples :jsonapi_filter_by do |attr_name|
   let(:subject_record) { raise 'Define' }
   let(:attr_value) { raise 'Define' }

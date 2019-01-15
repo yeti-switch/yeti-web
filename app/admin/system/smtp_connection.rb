@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::SmtpConnection do
-  menu parent: "System", label: "SMTP connections", priority: 150
+  menu parent: 'System', label: 'SMTP connections', priority: 150
   config.batch_actions = false
 
   permit_params :name, :host, :port, :from_address, :auth_user, :auth_password, :global
@@ -7,11 +9,10 @@ ActiveAdmin.register System::SmtpConnection do
   filter :id
   filter :name
 
-
   member_action :send_email, method: :post do
     begin
       SmtpConnectionMail.test_message(resource, params[:email]).deliver!
-      flash[:notice] = "Mail was sent successfully"
+      flash[:notice] = 'Mail was sent successfully'
     rescue StandardError => e
       Rails.logger.warn { e.message }
       Rails.logger.warn { e.backtrace.join("\n") }
@@ -30,27 +31,21 @@ ActiveAdmin.register System::SmtpConnection do
     column :global
   end
 
-
   sidebar :test, only: [:show] do
-
     active_admin_form_for(OpenStruct.new(to: '', subject: '', body: ''),
                           as: :email,
-                          url: send_email_system_smtp_connection_path
-
-    ) do |f|
+                          url: send_email_system_smtp_connection_path) do |f|
 
       f.inputs do
-
-        f.input :to, as: :string, input_html: {style: 'width: 200px'}
-        f.input :subject, input_html: {style: 'width: 200px'}
-        f.input :body, input_html: {style: 'width: 200px'}
+        f.input :to, as: :string, input_html: { style: 'width: 200px' }
+        f.input :subject, input_html: { style: 'width: 200px' }
+        f.input :body, input_html: { style: 'width: 200px' }
       end
       f.actions
     end
-
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :name
@@ -76,6 +71,4 @@ ActiveAdmin.register System::SmtpConnection do
     end
     f.actions
   end
-
-
 end

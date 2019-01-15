@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_gateways
@@ -133,10 +135,10 @@
 #  media_encryption_mode_name         :string
 #
 
-class Importing::Gateway  < Importing::Base
+class Importing::Gateway < Importing::Base
   self.table_name = 'data_import.import_gateways'
   attr_accessor :file
- 
+
   belongs_to :contractor, class_name: '::Contractor'
   belongs_to :session_refresh_method, class_name: '::SessionRefreshMethod'
   belongs_to :sdp_alines_filter_type, class_name: '::FilterType', foreign_key: :sdp_alines_filter_type_id
@@ -148,7 +150,7 @@ class Importing::Gateway  < Importing::Base
   belongs_to :codec_group, class_name: '::CodecGroup'
   belongs_to :sdp_c_location, class_name: '::SdpCLocation'
   belongs_to :sensor, class_name: '::System::Sensor', foreign_key: :sensor_id
-  belongs_to :sensor_level, class_name: '::System::SensorLevel',foreign_key: :sensor_level_id
+  belongs_to :sensor_level, class_name: '::System::SensorLevel', foreign_key: :sensor_level_id
   belongs_to :dtmf_receive_mode, class_name: '::System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: '::System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
   belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id
@@ -158,61 +160,60 @@ class Importing::Gateway  < Importing::Base
   belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
 
-
-  self.import_attributes = [
-      'name','enabled',
-      'gateway_group_id',
-      'contractor_id',
-      'is_shared',
-      'priority',
-      'weight',
-      'pop_id',
-      'host','port',
-      'origination_capacity',
-      'termination_capacity',
-      'diversion_policy_id',
-      'diversion_rewrite_rule', 'diversion_rewrite_result',
-      'src_name_rewrite_rule', 'src_name_rewrite_result',
-      'src_rewrite_rule', 'src_rewrite_result',
-      'dst_rewrite_rule', 'dst_rewrite_result',
-      'acd_limit', 'asr_limit', 'short_calls_limit',
-      'allow_termination', 'allow_origination',
-      'anonymize_sdp', 'proxy_media',
-      'transparent_seqno', 'transparent_ssrc',
-      'auth_enabled', 'auth_user', 'auth_password',
-      'term_use_outbound_proxy', 'term_outbound_proxy', 'term_force_outbound_proxy',
-      'term_next_hop', 'orig_next_hop',
-      'term_append_headers_req', 'orig_append_headers_req',
-      'sdp_alines_filter_type_id',
-      'sdp_alines_filter_list',
-      'term_next_hop_for_replies',
-      'session_refresh_method_id',
-      'sst_enabled', 'sst_accept501',
-      'sst_session_expires', 'sst_minimum_timer', 'sst_maximum_timer',
-      'orig_disconnect_policy_id',
-      'term_disconnect_policy_id',
-      'sensor_level_id', 'sensor_id',
-      'orig_use_outbound_proxy', 'orig_force_outbound_proxy', 'orig_outbound_proxy',
-      'dialog_nat_handling',
-      'resolve_ruri',
-      'auth_from_user', 'auth_from_domain',
-      'ringing_timeout',
-      'relay_options', 'relay_reinvite', 'relay_hold', 'relay_prack', 'allow_1xx_without_to_tag',
-      'sip_timer_b', 'dns_srv_failover_timer',
-      'sdp_c_location_id', 'codec_group_id',
-      'single_codec_in_200ok', 'force_symmetric_rtp', 'symmetric_rtp_nonstop',
-      'symmetric_rtp_ignore_rtcp', 'force_dtmf_relay', 'rtp_ping',
-      'rtp_timeout', 'filter_noaudio_streams', 'rtp_relay_timestamp_aligning',
-      'rtp_force_relay_cn',
-      'dtmf_receive_mode_id', 'dtmf_send_mode_id',
-      'tx_inband_dtmf_filtering_mode_id', 'rx_inband_dtmf_filtering_mode_id',
-      'transport_protocol_id',
-      'term_proxy_transport_protocol_id',
-      'orig_proxy_transport_protocol_id',
-      'rel_100_mode_id',
-      'incoming_auth_username',
-      'incoming_auth_password'
+  self.import_attributes = %w[
+    name enabled
+    gateway_group_id
+    contractor_id
+    is_shared
+    priority
+    weight
+    pop_id
+    host port
+    origination_capacity
+    termination_capacity
+    diversion_policy_id
+    diversion_rewrite_rule diversion_rewrite_result
+    src_name_rewrite_rule src_name_rewrite_result
+    src_rewrite_rule src_rewrite_result
+    dst_rewrite_rule dst_rewrite_result
+    acd_limit asr_limit short_calls_limit
+    allow_termination allow_origination
+    anonymize_sdp proxy_media
+    transparent_seqno transparent_ssrc
+    auth_enabled auth_user auth_password
+    term_use_outbound_proxy term_outbound_proxy term_force_outbound_proxy
+    term_next_hop orig_next_hop
+    term_append_headers_req orig_append_headers_req
+    sdp_alines_filter_type_id
+    sdp_alines_filter_list
+    term_next_hop_for_replies
+    session_refresh_method_id
+    sst_enabled sst_accept501
+    sst_session_expires sst_minimum_timer sst_maximum_timer
+    orig_disconnect_policy_id
+    term_disconnect_policy_id
+    sensor_level_id sensor_id
+    orig_use_outbound_proxy orig_force_outbound_proxy orig_outbound_proxy
+    dialog_nat_handling
+    resolve_ruri
+    auth_from_user auth_from_domain
+    ringing_timeout
+    relay_options relay_reinvite relay_hold relay_prack allow_1xx_without_to_tag
+    sip_timer_b dns_srv_failover_timer
+    sdp_c_location_id codec_group_id
+    single_codec_in_200ok force_symmetric_rtp symmetric_rtp_nonstop
+    symmetric_rtp_ignore_rtcp force_dtmf_relay rtp_ping
+    rtp_timeout filter_noaudio_streams rtp_relay_timestamp_aligning
+    rtp_force_relay_cn
+    dtmf_receive_mode_id dtmf_send_mode_id
+    tx_inband_dtmf_filtering_mode_id rx_inband_dtmf_filtering_mode_id
+    transport_protocol_id
+    term_proxy_transport_protocol_id
+    orig_proxy_transport_protocol_id
+    rel_100_mode_id
+    incoming_auth_username
+    incoming_auth_password
   ]
-  
+
   self.import_class = ::Gateway
 end

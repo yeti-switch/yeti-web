@@ -1,14 +1,16 @@
-ActiveAdmin.register Importing::Rateplan , as: "Rateplan Imports"  do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::Rateplan, as: 'Rateplan Imports' do
   filter :o_id
   filter :name
-  
+
   acts_as_import_preview
 
   controller do
     def resource_params
       return [{}] if request.get?
-      [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
+
+      [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,9 +12,9 @@ resource 'Contractors' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'contractors' }
 
-  required_params = %i(name vendor customer)
-  optional_params = %i(enabled description address phones external-id)
-  optional_relationships = %i(smtp-connection)
+  required_params = %i[name vendor customer]
+  optional_params = %i[enabled description address phones external-id]
+  optional_relationships = %i[smtp-connection]
 
   get '/api/rest/admin/contractors' do
     before { create_list(:contractor, 2, vendor: true) }
@@ -43,7 +45,7 @@ resource 'Contractors' do
     let(:description) { 'Description' }
     let(:address) { 'Address' }
     let(:phones) { 'Phones' }
-    let(:'smtp-сonnection') { wrap_relationship(:'smtp-connections', create(:smtp_connection).id ) }
+    let(:'smtp-сonnection') { wrap_relationship(:'smtp-connections', create(:smtp_connection).id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

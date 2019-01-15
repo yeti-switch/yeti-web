@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :sensor, class: System::Sensor do
-    sequence(:name) {|n| "sensor#{n}"}
+    sequence(:name) { |n| "sensor#{n}" }
     mode_id 1
     source_interface nil
     target_mac nil

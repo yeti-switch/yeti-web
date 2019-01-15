@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -21,7 +23,7 @@ resource 'Pops' do
 
   get '/api/rest/admin/pops/:id' do
     let(:id) { Pop.create(name: 'first').id }
-    
+
     example_request 'get specific entry' do
       expect(status).to eq(200)
     end

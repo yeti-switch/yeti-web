@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_accounts
@@ -30,22 +32,21 @@ class Importing::Account < Importing::Base
   attr_accessor :file
   belongs_to :contractor, class_name: '::Contractor'
 
-  self.import_attributes = [
-      'contractor_id',
-      'name',
-      'balance',
-      'vat',
-      'min_balance',
-      'max_balance',
-      'origination_capacity',
-      'termination_capacity',
-      'total_capacity',
-      'balance_high_threshold',
-      'balance_low_threshold',
-      'destination_rate_limit',
-      'max_call_duration'
+  self.import_attributes = %w[
+    contractor_id
+    name
+    balance
+    vat
+    min_balance
+    max_balance
+    origination_capacity
+    termination_capacity
+    total_capacity
+    balance_high_threshold
+    balance_low_threshold
+    destination_rate_limit
+    max_call_duration
   ]
 
   self.import_class = ::Account
-
 end

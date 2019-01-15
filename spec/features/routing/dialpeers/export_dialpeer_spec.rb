@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Dialpeer', type: :feature do
@@ -62,7 +64,7 @@ describe 'Export Dialpeer', type: :feature do
         ['Dst rewrite rule', item.dst_rewrite_rule.to_s, anything],
         ['Dst rewrite result', item.dst_rewrite_result.to_s, anything],
         ['Reverse billing', item.reverse_billing.to_s, anything],
-        ["Routing tag mode name", "AND", "OR"],
+        ['Routing tag mode name', 'AND', 'OR'],
         ['Routing tag names', [@tag_ua.name, @tag_us.name, Routing::RoutingTag::ANY_TAG].join(', '), anything]
       ]
     )

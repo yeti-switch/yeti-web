@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rest-client'
 
 class CdrHttp < Pgq::ConsumerGroup
-  AVAILABLE_HTTP_METHODS = [:post, :put, :get, :patch].freeze
+  AVAILABLE_HTTP_METHODS = %i[post put get patch].freeze
 
   @consumer_name = 'cdr_http'
 
   def perform_events(events)
-    perform_group(events.map &:data)
+    perform_group(events.map(&:data))
   end
 
   def perform_group(group)
@@ -14,6 +16,7 @@ class CdrHttp < Pgq::ConsumerGroup
   end
 
   private
+
   def log_response(response)
     if response.code.to_i >= 400
       logger.error "Request failed #{response.code} #{response.body}"
@@ -28,7 +31,7 @@ class CdrHttp < Pgq::ConsumerGroup
     if http_method == :get
       [{ params: data }]
     else
-      [data.to_json, {content_type: :json, accept: :json}]
+      [data.to_json, { content_type: :json, accept: :json }]
     end
   end
 
@@ -42,7 +45,7 @@ class CdrHttp < Pgq::ConsumerGroup
     if permitted_field == 'all' || permitted_field.nil?
       event.dup
     else
-      event.select { |key, value| permitted_field.include? key.to_s }
+      event.select { |key, _value| permitted_field.include? key.to_s }
     end
   end
 
@@ -50,7 +53,7 @@ class CdrHttp < Pgq::ConsumerGroup
     method = http_method
 
     unless AVAILABLE_HTTP_METHODS.include? method
-      raise ArgumentError.new 'external_crd_endpoint.method should be one of post, put, get patch'
+      raise ArgumentError, 'external_crd_endpoint.method should be one of post, put, get patch'
     end
 
     logger.info "Sending cdr #{event.try :id}"
@@ -58,8 +61,7 @@ class CdrHttp < Pgq::ConsumerGroup
     response = RestClient.try(method, @params['url'], *make_request_params(permit_field_for(event)))
 
     log_response response
-
-  rescue => e
+  rescue StandardError => e
     logger.error e.message
     logger.error e.backtrace.join "\n"
   end
@@ -67,5 +69,4 @@ class CdrHttp < Pgq::ConsumerGroup
   def send_events_to_external(group)
     group.map { |event| send_event_to_external event }
   end
-
 end

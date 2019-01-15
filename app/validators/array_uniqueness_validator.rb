@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 class ArrayUniquenessValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, values)
-    if values.dup.uniq!.present?
-      record_error(record, attribute)
-    end
+    record_error(record, attribute) if values.dup.uniq!.present?
   end
 
   private

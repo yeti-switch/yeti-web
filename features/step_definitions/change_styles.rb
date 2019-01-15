@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 
-
 And (/^I open the dashboard page$/) do
-  visit "/dashboard"
+  visit '/dashboard'
   sleep 2
 end
 
@@ -12,7 +13,7 @@ When (/^I open variables.scss file and override variable "(.*?)"$/) do |variable
   File.rename("#{Rails.root}/app/assets/stylesheets/themes", "#{Rails.root}/app/assets/stylesheets/hidden_themes")
   FileUtils.mkdir("#{Rails.root}/app/assets/stylesheets/themes")
   FileUtils.cd("#{Rails.root}/app/assets/stylesheets/themes")
-  new_file = File.new("#{Rails.root}/app/assets/stylesheets/themes/variables.scss", "w")
+  new_file = File.new("#{Rails.root}/app/assets/stylesheets/themes/variables.scss", 'w')
   new_file.puts variable
   new_file.close
 end
@@ -25,36 +26,34 @@ end
 
 When (/^I create yeti_web yml file and add site title "(.*?)"$/) do |title|
   FileUtils.cd("#{Rails.root}/config")
-  if File.exist?("yeti_web.yml")
-    File.rename("yeti_web.yml", "old_yeti_web.yml")
-  end
-  new_yml = File.new("yeti_web.yml", "w")
+  File.rename('yeti_web.yml', 'old_yeti_web.yml') if File.exist?('yeti_web.yml')
+  new_yml = File.new('yeti_web.yml', 'w')
   new_yml.puts title
   new_yml.close
 end
 
 And (/^I add site image src "(.*?)"$/) do |image_src|
   FileUtils.cd("#{Rails.root}/config")
-  File.open("yeti_web.yml", "a") do |file|
+  File.open('yeti_web.yml', 'a') do |file|
     file.puts image_src
   end
 end
 
 And (/^I add role_policy$/) do
   FileUtils.cd("#{Rails.root}/config")
-  File.open("yeti_web.yml", "a") do |file|
+  File.open('yeti_web.yml', 'a') do |file|
     file.puts 'role_policy:'
   end
 end
 
 And (/^I add role_policy nested "(.*?)"$/) do |role_policy_nested|
   FileUtils.cd("#{Rails.root}/config")
-  File.open("yeti_web.yml", "a") do |file|
+  File.open('yeti_web.yml', 'a') do |file|
     file.puts "  #{role_policy_nested}"
   end
 end
 
-And ("Reinitialize YetiWeb") do
+And ('Reinitialize YetiWeb') do
   load "#{Rails.root}/config/initializers/_config.rb"
   load "#{Rails.root}/config/initializers/active_admin.rb"
 end

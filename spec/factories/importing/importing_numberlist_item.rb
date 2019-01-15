@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_numberlist_item, class: Importing::NumberlistItem do
-
     transient do
       _numberlist { Routing::Numberlist.take || create(:numberlist) }
       _action { Routing::NumberlistAction.take }

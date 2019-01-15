@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.config
@@ -11,7 +13,7 @@
 #
 
 class System::CdrConfig < Cdr::Base
-  self.table_name ='sys.config'
+  self.table_name = 'sys.config'
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -25,9 +27,7 @@ class System::CdrConfig < Cdr::Base
   validates_numericality_of :customer_amount_round_precision, :vendor_amount_round_precision,
                             greater_than_or_equal_to: 0, less_than_or_equal_to: 10, only_integer: true, allow_nil: false
 
-
   def display_name
-    "#{self.id}"
+    id.to_s
   end
-
 end

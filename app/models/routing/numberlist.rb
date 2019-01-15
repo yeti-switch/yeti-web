@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.numberlists
@@ -18,7 +20,7 @@
 
 class Routing::Numberlist < Yeti::ActiveRecord
   has_paper_trail class_name: 'AuditLogItem'
-  self.table_name='class4.numberlists'
+  self.table_name = 'class4.numberlists'
 
   belongs_to :mode, class_name: 'Routing::NumberlistMode', foreign_key: :mode_id
   belongs_to :default_action, class_name: 'Routing::NumberlistAction', foreign_key: :default_action_id
@@ -34,7 +36,6 @@ class Routing::Numberlist < Yeti::ActiveRecord
   validates_with TagActionValueValidator
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
-
 end

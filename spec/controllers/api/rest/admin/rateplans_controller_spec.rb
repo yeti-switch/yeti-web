@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::RateplansController, type: :controller do
@@ -59,7 +61,7 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
       let(:relationships) do
-        { 'profit-control-mode': wrap_relationship(:'rate_profit_control_modes', rpcm.id) }
+        { 'profit-control-mode': wrap_relationship(:rate_profit_control_modes, rpcm.id) }
       end
 
       it { expect(response.status).to eq(201) }
@@ -77,17 +79,19 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
 
   describe 'PUT update' do
     let!(:rateplan) { create :rateplan }
-    before { put :update, params: {
-      id: rateplan.to_param, data: { type: 'rateplans',
-                                     id: rateplan.to_param,
-                                     attributes: attributes,
-                                     relationships: relationships}
-    } }
+    before do
+      put :update, params: {
+        id: rateplan.to_param, data: { type: 'rateplans',
+                                       id: rateplan.to_param,
+                                       attributes: attributes,
+                                       relationships: relationships }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }
       let(:relationships) do
-        { 'profit-control-mode': wrap_relationship(:'rate_profit_control_modes', rpcm.id) }
+        { 'profit-control-mode': wrap_relationship(:rate_profit_control_modes, rpcm.id) }
       end
 
       it { expect(response.status).to eq(200) }

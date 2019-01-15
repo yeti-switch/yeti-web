@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
-
   let(:admin_user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: admin_user.id }).token }
 
@@ -126,7 +127,5 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
         )
       end
     end
-
   end
-
 end

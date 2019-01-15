@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 Delayed::Worker.destroy_failed_jobs = false
 
-Dir[File.join(Rails.root, "lib", "ext", "**", "*.rb")].each { |s| require s }
-Dir[File.join(Rails.root, "lib", "active_record", "**", "*.rb")].each { |s| require s }
-Dir[File.join(Rails.root, "lib", "active_admin", "**", "*.rb")].each { |s| require s }
-Dir[File.join(Rails.root, "lib", "resource_dsl", "**", "*.rb")].each { |s| require s }
+Dir[File.join(Rails.root, 'lib', 'ext', '**', '*.rb')].each { |s| require s }
+Dir[File.join(Rails.root, 'lib', 'active_record', '**', '*.rb')].each { |s| require s }
+Dir[File.join(Rails.root, 'lib', 'active_admin', '**', '*.rb')].each { |s| require s }
+Dir[File.join(Rails.root, 'lib', 'resource_dsl', '**', '*.rb')].each { |s| require s }
 
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsClone
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsStatus
@@ -29,7 +31,6 @@ ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBelongsTo
 
 module ActiveAdmin
   class CSVBuilder
-
     def build_row(resource, columns, options)
       columns.map do |column|
         ceil = call_method_or_proc_on(resource, column.data)
@@ -40,11 +41,10 @@ module ActiveAdmin
   end
 end
 
-
 ActiveAdmin::ResourceDSL.send :include, Rails.application.routes.url_helpers
 ActiveAdmin::ResourceDSL.send :include, ApplicationHelper
 
-###patches for filters form for non AR objects
+# ##patches for filters form for non AR objects
 module ActiveAdmin
   module Filters
     module FormtasticAddons
@@ -57,34 +57,36 @@ module ActiveAdmin
       end
 
       def scope?
-        context = Ransack::Context.for klass rescue nil
+        context = begin
+                    Ransack::Context.for klass
+                  rescue StandardError
+                    nil
+                  end
         context.respond_to?(:ransackable_scope?) && context.ransackable_scope?(method.to_s, klass)
       end
-
     end
   end
 end
 
-#
 ActiveAdminDatetimepicker::Base.default_datetime_picker_options = {
-    defaultDate: proc { Time.current.strftime("%Y-%m-%d 00:00") }
+  defaultDate: proc { Time.current.strftime('%Y-%m-%d 00:00') }
 }
 
-#fix filtering by array contains
+# fix filtering by array contains
 module Arel
   module Visitors
     class PostgreSQL
       private
 
-      def visit_Arel_Nodes_Contains o, collector
+      def visit_Arel_Nodes_Contains(o, collector)
         left_column = o.left.relation.send(:type_caster).send(:types).columns.find do |col|
           col.name == o.left.name.to_s || col.name == o.left.relation.name.to_s
         end
 
         if left_column && (left_column.type == :hstore || (left_column.respond_to?(:array) && left_column.array))
-          infix_value o, collector, " @> "
+          infix_value o, collector, ' @> '
         else
-          infix_value o, collector, " >> "
+          infix_value o, collector, ' >> '
         end
       end
     end

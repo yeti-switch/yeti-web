@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Routing::DestinationNextRate, type: :model do
@@ -12,13 +14,13 @@ RSpec.describe Routing::DestinationNextRate, type: :model do
 
     let(:create_params) do
       {
-          destination_id: destination.id,
-          initial_rate: 0.01,
-          next_rate: 0.01,
-          initial_interval: 60,
-          next_interval: 60,
-          connect_fee: 0,
-          apply_time: 1.hour.from_now
+        destination_id: destination.id,
+        initial_rate: 0.01,
+        next_rate: 0.01,
+        initial_interval: 60,
+        next_interval: 60,
+        connect_fee: 0,
+        apply_time: 1.hour.from_now
       }
     end
     let(:default_params) do
@@ -45,7 +47,6 @@ RSpec.describe Routing::DestinationNextRate, type: :model do
 
       include_examples :updates_record
     end
-
   end
 
   describe '#destroy' do
@@ -59,5 +60,4 @@ RSpec.describe Routing::DestinationNextRate, type: :model do
     include_examples :changes_records_qty_of, Routing::DestinationNextRate, by: -1
     include_examples :destroys_record
   end
-
 end

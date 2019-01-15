@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::Country do
-  actions :index,:show
-  menu parent: "System", label: "Countries", priority: 120
+  actions :index, :show
+  menu parent: 'System', label: 'Countries', priority: 120
   config.batch_actions = false
 
   filter :id
@@ -8,9 +10,9 @@ ActiveAdmin.register System::Country do
   filter :iso2
 
   collection_action :get_networks do
-    country =  System::Country.find(params[:country_id])
+    country = System::Country.find(params[:country_id])
     @networks = country.networks
-    render plain:  view_context.options_from_collection_for_select(@networks, :id, :name)
+    render plain: view_context.options_from_collection_for_select(@networks, :id, :name)
   end
 
   index do
@@ -18,5 +20,4 @@ ActiveAdmin.register System::Country do
     column :name
     column :iso2
   end
-
 end

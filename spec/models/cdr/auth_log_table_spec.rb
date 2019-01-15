@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Cdr::AuthLogTable, type: :model do
-
   include_examples :test_table_partitioning do
     let(:factory_name) { :auth_log }
 
@@ -20,5 +21,4 @@ RSpec.describe Cdr::AuthLogTable, type: :model do
   it 'divides partitions by days' do
     expect(described_class.partition_range).to eq(:day)
   end
-
 end

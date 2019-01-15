@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'CDR exports', type: :feature do
@@ -20,7 +22,7 @@ describe 'CDR exports', type: :feature do
         expect(page).to have_selector('.col-fields', text: cdr_export.fields.join(', '))
         expect(page).to have_selector('.col-filters', text: cdr_export.filters)
         expect(page).to have_selector('.col-callback_url', text: cdr_export.callback_url)
-        expect(page).to have_selector('.col-created_at', text: cdr_export.created_at.strftime("%Y-%m-%d %H:%M:%S"))
+        expect(page).to have_selector('.col-created_at', text: cdr_export.created_at.strftime('%Y-%m-%d %H:%M:%S'))
       end
     end
   end
@@ -52,7 +54,7 @@ describe 'CDR exports', type: :feature do
       expect(page).to have_text('Cdr export was successfully created.')
       expect(cdr_export).to have_attributes(
         callback_url: nil,
-        fields: ['id', 'success'],
+        fields: %w[id success],
         filters: {
           'time_start_gteq' => '2018-01-01',
           'time_start_lteq' => '2018-03-01',

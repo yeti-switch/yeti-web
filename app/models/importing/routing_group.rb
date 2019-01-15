@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: import_routing_groups
@@ -12,12 +14,11 @@
 #  error_string             :string
 #
 
-class Importing::RoutingGroup  < Importing::Base
-    self.table_name = 'import_routing_groups'
-    
-    belongs_to :sorting, class_name: '::Sorting'
-    
-    self.import_attributes = ['name']
-    self.import_class = ::RoutingGroup
+class Importing::RoutingGroup < Importing::Base
+  self.table_name = 'import_routing_groups'
 
+  belongs_to :sorting, class_name: '::Sorting'
+
+  self.import_attributes = ['name']
+  self.import_class = ::RoutingGroup
 end

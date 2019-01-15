@@ -1,10 +1,10 @@
-class AccountDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class AccountDecorator < BillingDecorator
   delegate_all
   decorates Account
 
   decorates_association :contractor, with: ContractorDecorator
-
 
   def decorated_balance
     money_format :balance
@@ -19,10 +19,10 @@ class AccountDecorator < BillingDecorator
   end
 
   def decorated_display_name
-    if min_balance_reached?||max_balance_reached?
-      h.content_tag(:font,display_name, color: :red)
-    elsif min_balance_close?||max_balance_close?
-      h.content_tag(:font,display_name, color: :orange)
+    if min_balance_reached? || max_balance_reached?
+      h.content_tag(:font, display_name, color: :red)
+    elsif min_balance_close? || max_balance_close?
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
@@ -30,9 +30,9 @@ class AccountDecorator < BillingDecorator
 
   def decorated_vendor_display_name
     if max_balance_reached?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     elsif max_balance_close?
-      h.content_tag(:font,display_name, color: :orange)
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
@@ -40,12 +40,11 @@ class AccountDecorator < BillingDecorator
 
   def decorated_customer_display_name
     if min_balance_reached?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     elsif min_balance_close?
-      h.content_tag(:font,display_name, color: :orange)
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
   end
-
 end

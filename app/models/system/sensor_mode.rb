@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.sensor_modes
@@ -13,5 +15,4 @@ class System::SensorMode < Yeti::ActiveRecord
   IP_IP       = 1  # IP-IP encapsulation
   IP_ETHERNET = 2  # IP-Ethernet encapsulation
   HEPv3 = 3
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Customer::V1::AccountsController, type: :controller do
@@ -63,7 +65,7 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
       before { get :show, params: { id: account.reload.uuid } }
 
       it 'returnds record with expected attributes' do
-        expect(response_data).to include({
+        expect(response_data).to include(
           'id' => account.reload.uuid,
           'type' => 'accounts',
           'links' => anything,
@@ -75,9 +77,9 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
             'destination-rate-limit' => account.destination_rate_limit.to_s,
             'origination-capacity' => account.origination_capacity,
             'termination-capacity' => account.termination_capacity,
-            'total-capacity' => account.total_capacity,
+            'total-capacity' => account.total_capacity
           }
-        })
+        )
       end
     end
 
@@ -88,7 +90,5 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
 
       it { expect(response.status).to eq(404) }
     end
-
   end
-
 end
