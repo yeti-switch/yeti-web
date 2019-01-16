@@ -1,5 +1,5 @@
 $(document).ready(function (){
-    var server_time_string = $("body").data('servertime');
+    var server_time_string = $("#servertime").data('servertime');
     if (typeof(server_time_string) == 'undefined')  {
         return false;
     }
