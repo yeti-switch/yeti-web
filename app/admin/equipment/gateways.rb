@@ -114,7 +114,7 @@ ActiveAdmin.register Gateway do
 
   controller do
     def resource_params
-      return [] if request.get?
+      return [{}] if request.get?
       [params[active_admin_config.resource_class.name.underscore.to_sym].permit!]
     end
   end
