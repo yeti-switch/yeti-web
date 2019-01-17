@@ -11,11 +11,15 @@ module ResourceDSL
 
       action_item :truncate_stats, only: %i[show edit] do
         dropdown_menu 'Statistics' do
-          if authorized?(:truncate_long_time_stats) && has_member_action?(:truncate_long_time_stats)
+          has_member_action = lambda do |name|
+            active_admin_config.member_actions.detect { |element| element.name == name.to_sym }.present?
+          end
+
+          if authorized?(:truncate_long_time_stats) && has_member_action.call(:truncate_long_time_stats)
             item 'Truncate long time stats', action: :truncate_long_time_stats, id: resource.id
           end
 
-          if authorized?(:truncate_short_window_stats) && has_member_action?(:truncate_short_window_stats)
+          if authorized?(:truncate_short_window_stats) && has_member_action.call(:truncate_short_window_stats)
             item 'Truncate short window stats', action: :truncate_short_window_stats, id: resource.id
           end
         end
