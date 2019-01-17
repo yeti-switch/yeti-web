@@ -5,7 +5,6 @@ ActiveAdmin.register RoutingGroup do
   acts_as_clone_with_helper helper: Routing::RoutingGroupDuplicator, name: "Copy with dialpeers"
   acts_as_safe_destroy
   acts_as_export :id, :name
-  
   acts_as_import resource_class: Importing::RoutingGroup
 
   filter :id

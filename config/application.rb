@@ -1,6 +1,17 @@
 require_relative 'boot'
 
-require 'rails/all'
+require 'rails'
+# Pick the frameworks you want:
+require 'active_model/railtie'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_view/railtie'
+require 'action_mailer/railtie'
+require 'active_job/railtie'
+# require 'action_cable/engine' # rails 5.0
+# require 'active_storage/engine' # rails 5.2
+# require 'rails/test_unit/railtie' # rails 4.2
+require 'sprockets/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

@@ -15,7 +15,7 @@ describe 'CDR exports', type: :feature do
     it 'cdr export should be displayed' do
       within "#cdr_export_base_#{cdr_export.id}" do
         expect(page).to have_selector('.col-id a', text: cdr_export.id)
-        expect(page).to have_selector('.col-download a', 'Download')
+        expect(page).to have_selector('.col-download a', text: 'download')
         expect(page).to have_selector('.col-status', text: cdr_export.status)
         expect(page).to have_selector('.col-fields', text: cdr_export.fields.join(', '))
         expect(page).to have_selector('.col-filters', text: cdr_export.filters)
@@ -30,11 +30,7 @@ describe 'CDR exports', type: :feature do
       create(:account, name: 'rspec')
     end
     before do
-      Capybara.default_driver = :poltergeist
       visit new_cdr_export_path
-    end
-    after do
-      Capybara.default_driver = :rack_test
     end
 
     before do

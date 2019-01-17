@@ -48,8 +48,6 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     def build_new_resource
       build_params = resource_params[0].to_h
       return super unless build_params.any?
-      #clean up empty character
-      build_params['fields'].delete('')
       #build filters
       filters = {}
       filters['time_start_gteq'] = build_params['time_start_gteq']

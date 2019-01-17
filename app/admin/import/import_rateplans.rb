@@ -7,7 +7,7 @@ ActiveAdmin.register Importing::Rateplan , as: "Rateplan Imports"  do
 
   controller do
     def resource_params
-      return [] if request.get?
+      return [{}] if request.get?
       [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
     end
   end

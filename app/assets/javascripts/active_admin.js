@@ -1,7 +1,10 @@
-//= require active_admin/base
-//= require chosen-jquery
-//= require jquery-ui/tooltip
+//= require jquery3
+//= require jquery-ui/widgets/tooltip
+//= require jquery-tablesorter
 //= require jquery.dependent.fields
+//= require chosen-jquery
+//= require jquery-chosen-sortable
+//= require active_admin/base
 //= require gateway_form
 //= require table_highlights
 //= require import_form
@@ -15,7 +18,6 @@
 //= require nv.d3
 //= require sticky_headers
 //= require cdr_stats
-//= require jquery-tablesorter
 //= require active_calls
 //= require active_admin_sidebar
 
@@ -28,7 +30,6 @@
 //= require delay
 //= require index_as_table_visible_columns
 //= require sidebar_filter_actions
-//= require jquery-chosen-sortable
 //= require modal_confirm_fix
 //= require d3_charts.coffee
 //= require password-toggle

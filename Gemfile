@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Core
 gem 'activemodel-serializers-xml'
 gem 'pg'
-gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails51'
-gem 'rails', '~> 5.1.0'
+gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails-5-2'
+gem 'rails', '~> 5.2'
 gem 'responders'
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
@@ -22,19 +22,18 @@ gem 'knock', git: 'https://github.com/nsarno/knock.git', ref: '66b60437a5acc28e4
 # ActiveAdmin
 gem 'ransack'
 gem 'draper'
-gem 'activeadmin', '~> 1.0.0'
+gem 'activeadmin'
 gem 'novus-nvd3-rails', git: 'https://github.com/yeti-switch/nvd3-community-rails.git'
 gem 'active_admin_theme'
 gem 'active_admin_import', '3.1.0'
 gem 'active_admin_scoped_collection_actions'
-# latest version compatible with current(old) ActiveAdmin
-gem 'active_admin_datetimepicker', '0.5.0'
+gem 'active_admin_datetimepicker'
 gem 'active_admin_date_range_preset', git: 'https://github.com/workgena/active_admin_date_range_preset.git'
 
 gem 'yetis_node', git: 'https://github.com/yeti-switch/yetis_node.git'
 gem 'jrpc', git: 'https://github.com/yeti-switch/jrpc.git', ref: 'ddb9bf3'
 
-gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
+gem 'active_admin_sidebar', '1.1.0'
 
 # XLS generation
 gem 'excelinator', git: 'https://github.com/livingsocial/excelinator.git'
@@ -62,7 +61,7 @@ gem 'coffee-rails', '~> 4.0'
 gem 'therubyracer', '~> 0.12.1'
 gem 'uglifier', '>= 1.3'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '5.0.3'
+gem 'jquery-ui-rails'
 gem 'chosen-rails', '1.5.2'
 gem 'jquery-tablesorter'
 gem 'font-awesome-rails'
@@ -106,3 +105,4 @@ group :test do
   gem 'shoulda-matchers'
   gem 'webmock'
 end
+gem 'bootsnap', require: false

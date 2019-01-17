@@ -49,6 +49,10 @@ class CdrExport < Yeti::ActiveRecord
     end
   end
 
+  def fields=(f)
+    self[:fields] = f.map(&:presence).compact
+  end
+
   before_validation(on: :create) do
     self.status ||= STATUS_PENDING
     self.type ||= 'Base'
