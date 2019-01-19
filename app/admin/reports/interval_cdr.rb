@@ -9,11 +9,7 @@ ActiveAdmin.register Report::IntervalCdr, as: 'ReportIntervalCdr' do
   permit_params :date_start, :date_end, :interval_length, :filter, :aggregator_id, :aggregate_by,
                 :group_by, group_by_fields: [], send_to: []
 
-  controller do
-    def scoped_collection
-      super.includes(:aggregation_function)
-    end
-  end
+  includes :aggregation_function
 
   report_scheduler Report::IntervalCdrScheduler
 

@@ -7,7 +7,11 @@ ActiveAdmin.register Report::VendorTrafficScheduler, as: 'VendorTrafficScheduler
 
   permit_params :vendor_id, :period_id, send_to: []
 
-  includes :vendor, :period
+  controller do
+    def scoped_collection
+      super.preload(:vendor, :period)
+    end
+  end
 
   for_report Report::VendorTraffic
 

@@ -10,7 +10,7 @@ ActiveAdmin.register Report::CustomerTraffic, as: 'CustomerTraffic' do
 
   controller do
     def scoped_collection
-      super.includes(:customer)
+      super.preload(:customer)
     end
   end
 

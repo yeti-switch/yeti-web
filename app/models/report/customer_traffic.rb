@@ -21,7 +21,7 @@ class Report::CustomerTraffic < Cdr::Base
   belongs_to :customer, -> { where customer: true }, class_name: 'Contractor', foreign_key: :customer_id
 
   def report_records_by_vendor
-    customer_traffic_data_by_vendor.includes(:vendor)
+    customer_traffic_data_by_vendor.preload(:vendor)
   end
 
   def report_records_by_destination
@@ -30,7 +30,7 @@ class Report::CustomerTraffic < Cdr::Base
   end
 
   def report_records_full
-    customer_traffic_data_full.includes(:vendor, :country, :network)
+    customer_traffic_data_full.preload(:vendor, :country, :network)
   end
 
   validates_presence_of :date_start, :date_end, :customer_id

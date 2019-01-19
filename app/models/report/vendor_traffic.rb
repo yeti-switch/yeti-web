@@ -19,7 +19,7 @@ class Report::VendorTraffic < Cdr::Base
   belongs_to :vendor, -> { where vendor: true }, class_name: 'Contractor', foreign_key: :vendor_id
 
   def report_records
-    vendor_traffic_data.includes(:customer)
+    vendor_traffic_data.preload(:customer)
   end
 
   validates_presence_of :date_start, :date_end, :vendor_id

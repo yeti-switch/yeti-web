@@ -9,7 +9,7 @@ ActiveAdmin.register Report::CustomerTrafficScheduler, as: 'CustomerTrafficSched
 
   controller do
     def scoped_collection
-      super.includes(:customer, :period)
+      super.preload(:customer, :period)
     end
   end
 
