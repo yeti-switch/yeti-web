@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe 'Change styles', type: :feature, js: true do
+RSpec.describe 'Change styles', js: true do
   let!(:admin_user) do
     FactoryGirl.create :admin_user, username: 'admin1',
       email: 'admin1@example.com',

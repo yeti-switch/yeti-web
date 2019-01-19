@@ -85,10 +85,8 @@ group :development, :test do
   gem 'awesome_print'
   gem 'byebug'
   gem 'thin'
-
-  gem 'database_cleaner'
-  gem 'factory_girl_rails', '4.8.0'
   gem 'rspec-rails'
+  gem 'factory_girl_rails', '4.8.0'
   gem 'rspec_api_documentation', '~> 5.0.0'
   gem 'rubocop', require: false
   gem 'simplecov', require: false, group: :test
@@ -102,7 +100,6 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'chromedriver-helper'
-  gem 'cucumber-rails', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'webmock'
