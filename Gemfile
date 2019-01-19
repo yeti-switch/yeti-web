@@ -99,7 +99,6 @@ gem 'apitome', '~> 0.1.0'
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'cucumber-rails', require: false
   gem 'chromedriver-helper'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
