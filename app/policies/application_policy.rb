@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationPolicy
   class_attribute :logger, instance_writer: false
   self.logger = Rails.logger
@@ -8,6 +10,7 @@ class ApplicationPolicy
       options.assert_valid_keys(:to)
       raise ArgumentError, 'provide at least one rule name' if rule_names.empty?
       raise ArgumentError, 'to key is required' if options[:to].nil?
+
       rule_names.each do |rule_name|
         define_method(rule_name) do
           public_send(options[:to])

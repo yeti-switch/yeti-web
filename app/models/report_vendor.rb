@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: report_vendors
@@ -9,5 +11,4 @@
 #
 
 class ReportVendor < ActiveRecord::Base
-
 end

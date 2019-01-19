@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Routing Plan', type: :feature, js: true do
@@ -7,14 +9,14 @@ describe 'Create new Routing Plan', type: :feature, js: true do
     visit new_routing_routing_plan_path
   end
 
-  #TODO: add array of routing groups
+  # TODO: add array of routing groups
   include_context :fill_form, 'new_routing_routing_plan' do
     let(:attributes) do
       {
-          name: "test routing plan",
-          use_lnp: true,
-          rate_delta_max: 0.11,
-          max_rerouting_attempts: 8
+        name: 'test routing plan',
+        use_lnp: true,
+        rate_delta_max: 0.11,
+        max_rerouting_attempts: 8
       }
     end
 
@@ -24,9 +26,8 @@ describe 'Create new Routing Plan', type: :feature, js: true do
       expect(page).to have_css('.flash_notice', text: 'Routing plan was successfully created.')
 
       expect(Routing::RoutingPlan.last).to have_attributes(
-                                       name: attributes[:name]
-                                   )
+        name: attributes[:name]
+      )
     end
   end
-
 end

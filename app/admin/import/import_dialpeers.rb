@@ -1,19 +1,21 @@
-ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   filter :o_id
   filter :prefix
-  filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :vendor, input_html: {class: 'chosen'}
-  filter :account, input_html: {class: 'chosen'}
-  filter :gateway, input_html: {class: 'chosen'}
-  filter :routing_group, input_html: {class: 'chosen'}
-  filter :routeset_discriminator, input_html: {class: 'chosen'}
+  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :vendor, input_html: { class: 'chosen' }
+  filter :account, input_html: { class: 'chosen' }
+  filter :gateway, input_html: { class: 'chosen' }
+  filter :routing_group, input_html: { class: 'chosen' }
+  filter :routeset_discriminator, input_html: { class: 'chosen' }
 
   acts_as_import_preview
 
   controller do
     def resource_params
       return [{}] if request.get?
+
       [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
 
@@ -21,7 +23,6 @@ ActiveAdmin.register Importing::Dialpeer, as: "Dialpeer Imports" do
       super.includes(:gateway, :gateway_group, :routing_group, :vendor, :account, :routing_tag_mode, :routeset_discriminator)
     end
   end
-
 
   index do
     selectable_column

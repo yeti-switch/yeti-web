@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Equipment
   class RegistrationPolicy < ::RolePolicy
     section 'Equipment/Registration'
@@ -6,7 +8,5 @@ module Equipment
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

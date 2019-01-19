@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Customer::V1::RatesController, type: :controller do
-
   # Rates for the other customer
   before { create_list(:customers_auth, 2) }
 
@@ -27,7 +28,6 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
   end
 
   describe 'GET index' do
-
     context 'account_ids is empty', :with_rateplan_with_customer do
       before { create_list(:rate, 2) }
       let!(:rates) { create_list(:rate, 2, rateplan: customer.rateplans.first) }
@@ -68,7 +68,6 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
         )
       end
     end
-
   end
 
   describe 'GET show' do
@@ -84,7 +83,7 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
       before { get :show, params: { id: rate.reload.uuid } }
 
       it 'returnds record with expected attributes' do
-        expect(response_data).to include({
+        expect(response_data).to include(
           'id' => rate.reload.uuid,
           'type' => 'rates',
           'links' => anything,
@@ -100,7 +99,7 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
             'valid-till' => rate.valid_till.iso8601(3),
             'network-prefix-id' => rate.network_prefix_id
           }
-        })
+        )
       end
     end
 
@@ -115,7 +114,5 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
 
       it { expect(response.status).to eq(404) }
     end
-
   end
-
 end

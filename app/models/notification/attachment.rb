@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notifications.attachments
@@ -13,5 +15,4 @@ class Notification::Attachment < ActiveRecord::Base
   def basename
     Pathname.new(filename).basename
   end
-
 end

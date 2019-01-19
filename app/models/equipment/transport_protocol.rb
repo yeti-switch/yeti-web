@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.transport_protocols
@@ -7,10 +9,9 @@
 #
 
 class Equipment::TransportProtocol < Yeti::ActiveRecord
-  self.table_name='class4.transport_protocols'
+  self.table_name = 'class4.transport_protocols'
 
   def display_name
-    self.name
+    name
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::DestinationsController, type: :controller do
@@ -69,12 +71,11 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
           'next-rate': 0,
           'connect-fee': 0,
           'dp-margin-fixed': 0,
-          'dp-margin-percent': 0,
-        }
+          'dp-margin-percent': 0 }
       end
 
       let(:relationships) do
-        { rateplan:  wrap_relationship(:rateplans, create(:rateplan).id),
+        { rateplan: wrap_relationship(:rateplans, create(:rateplan).id),
           'rate-policy': wrap_relationship(:'destination-rate-policies', 1),
           'routing-tag-mode': wrap_relationship(:'routing-tag-modes', 1) }
       end
@@ -94,12 +95,14 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
 
   describe 'PUT update' do
     let!(:destination) { create :destination, rateplan: rateplan }
-    before { put :update, params: {
-      id: destination.to_param, data: { type: 'destinations',
-                                        id: destination.to_param,
-                                        attributes: attributes,
-                                        relationships: relationships}
-    } }
+    before do
+      put :update, params: {
+        id: destination.to_param, data: { type: 'destinations',
+                                          id: destination.to_param,
+                                          attributes: attributes,
+                                          relationships: relationships }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { prefix: 'test' } }
@@ -112,7 +115,7 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     context 'when attributes are invalid' do
       let(:attributes) { { prefix: 'test' } }
       let(:relationships) do
-        { rateplan: wrap_relationship(:'rateplans', nil) }
+        { rateplan: wrap_relationship(:rateplans, nil) }
       end
 
       it { expect(response.status).to eq(422) }
@@ -135,5 +138,4 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
       let(:factory_name) { :destination }
     end
   end
-
 end

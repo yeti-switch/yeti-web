@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples :creates_record do
   let(:expected_record_attrs) { create_params }
 

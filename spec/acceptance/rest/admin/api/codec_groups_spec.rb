@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -48,7 +50,6 @@ resource 'Codec groups' do
     parameter :id, 'Codec group ID', scope: :data, required: true
 
     jsonapi_attributes([:name], [])
-
 
     let(:id) { create(:codec_group).id }
     let(:name) { 'name' }

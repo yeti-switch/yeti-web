@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register GuiConfig do
-  menu parent: "System",  priority: 120, label: "Global configuration"
-  actions :index,:show,:edit,:update
+  menu parent: 'System', priority: 120, label: 'Global configuration'
+  actions :index, :show, :edit, :update
   config.batch_actions = false
   config.filters = false
 
   acts_as_audit
-  
+
   controller do
     def index
       redirect_to gui_config_path(1)
@@ -14,7 +16,7 @@ ActiveAdmin.register GuiConfig do
 
   permit_params *GuiConfig::SETTINGS_NAMES
 
-  show do |config|
+  show do |_config|
     attributes_table do
       GuiConfig::SETTINGS_NAMES.each do |name|
         row name
@@ -31,5 +33,4 @@ ActiveAdmin.register GuiConfig do
     end
     f.actions
   end
-
 end

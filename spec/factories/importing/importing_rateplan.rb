@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_rateplan, class: Importing::Rateplan do
     transient do

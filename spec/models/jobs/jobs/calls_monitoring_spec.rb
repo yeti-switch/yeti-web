@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Jobs::CallsMonitoring do
-
   let(:account_balance) do
     1_000
   end
@@ -62,7 +63,6 @@ describe Jobs::CallsMonitoring do
     false
   end
 
-
   shared_examples :keep_emergency_calls do
     let(:customer_acc_check_balance) { false }
     include_examples :keep_calls
@@ -95,14 +95,14 @@ describe Jobs::CallsMonitoring do
     let(:node) { Node.take }
 
     let(:cdr_filter_mock) do
-      double('Yeti::CdrsFilter', raw_cdrs: [ {'node_id' => 1}, {'node_id' => 2} ])
+      double('Yeti::CdrsFilter', raw_cdrs: [{ 'node_id' => 1 }, { 'node_id' => 2 }])
     end
 
     let(:customer_acc_check_balance) { true }
 
     let(:cdr_list_unsorted) do
       [
-        #first call_price is equal to 1.02 without vat
+        # first call_price is equal to 1.02 without vat
         {
           'local_tag' => 'normal-call',
           'node_id' => node.id,
@@ -132,8 +132,8 @@ describe Jobs::CallsMonitoring do
           'destination_reverse_billing' => false,
           'dialpeer_reverse_billing' => false,
 
-          'orig_gw_id' =>  origin_gateway.id,
-          'term_gw_id' =>  term_gateway.id
+          'orig_gw_id' => origin_gateway.id,
+          'term_gw_id' => term_gateway.id
 
         },
         {
@@ -163,8 +163,8 @@ describe Jobs::CallsMonitoring do
           'destination_reverse_billing' => true,
           'dialpeer_reverse_billing' => true,
 
-          'orig_gw_id' =>  origin_gateway.id,
-          'term_gw_id' =>  term_gateway.id
+          'orig_gw_id' => origin_gateway.id,
+          'term_gw_id' => term_gateway.id
         }
       ]
     end
@@ -213,18 +213,17 @@ describe Jobs::CallsMonitoring do
         0
       end
       include_examples :drop_calls
-     end
+    end
 
     context 'when Customer has money for the call' do
       let(:cdr_list_unsorted) do
-        super().select{|c| c['local_tag'] == 'normal-call'}
+        super().select { |c| c['local_tag'] == 'normal-call' }
       end
       let(:account_balance) do
         1.02
       end
 
       include_examples :keep_calls
-
     end
 
     context 'when vendor contractor disabled' do
@@ -257,7 +256,7 @@ describe Jobs::CallsMonitoring do
 
     context 'when Customer has no money for the call after vat apply' do
       let(:cdr_list_unsorted) do
-        super().select{|c| c['local_tag'] == 'normal-call'}
+        super().select { |c| c['local_tag'] == 'normal-call' }
       end
       let(:account_balance) do
         1.02
@@ -268,7 +267,6 @@ describe Jobs::CallsMonitoring do
       end
 
       include_examples :drop_calls
-
     end
 
     context 'when Vendor has no money for the call' do
@@ -280,7 +278,6 @@ describe Jobs::CallsMonitoring do
     end
 
     context 'Customer calls' do
-
       context 'when calls cost is within mim-max balance' do
         let(:account_balance) do
           50
@@ -290,9 +287,8 @@ describe Jobs::CallsMonitoring do
       end
 
       context 'when calls cost is below min_balance' do
-
         before do
-          account.update!(balance: 1.15, min_balance: 1.14, max_balance: 10000)
+          account.update!(balance: 1.15, min_balance: 1.14, max_balance: 10_000)
         end
 
         context 'when reserved call exits' do
@@ -301,7 +297,7 @@ describe Jobs::CallsMonitoring do
 
         context 'when reserved does not exit' do
           let(:cdr_list_unsorted) do
-            super().select{|c| c['local_tag'] == 'normal-call'}
+            super().select { |c| c['local_tag'] == 'normal-call' }
           end
           it 'total calls cost exceeds min_balance. Drop normal calls' do
             expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
@@ -310,7 +306,6 @@ describe Jobs::CallsMonitoring do
 
           it_behaves_like :keep_emergency_calls
         end
-
       end
 
       context 'when calls cost is above max_balance' do
@@ -324,19 +319,16 @@ describe Jobs::CallsMonitoring do
 
         it_behaves_like :keep_emergency_calls
       end
-
     end # Customer
 
-
     context 'Vendor calls' do
-
       context 'when calls cost is within mim-max balance' do
         include_examples :keep_calls
       end
 
       context 'when calls cost is below min_balance' do
         before do
-          vendor_acc.update!( balance: -6, max_balance: 100)
+          vendor_acc.update!(balance: -6, max_balance: 100)
         end
 
         it 'total calls cost exceeds min_balance. Drop reverse calls' do
@@ -359,7 +351,6 @@ describe Jobs::CallsMonitoring do
 
         it_behaves_like :keep_emergency_calls
       end
-
     end # vendor
 
     context 'CustomersAuth#reject_calls' do
@@ -369,7 +360,7 @@ describe Jobs::CallsMonitoring do
       end
 
       context 'when not linked to real CustomersAuth' do
-        let(:customer_auth_id) { customers_auth.id + 11122 }
+        let(:customer_auth_id) { customers_auth.id + 11_122 }
         include_examples :keep_calls
       end
 
@@ -387,9 +378,6 @@ describe Jobs::CallsMonitoring do
           subject
         end
       end
-
     end # CustomersAuth#reject_calls
-
   end
-
 end

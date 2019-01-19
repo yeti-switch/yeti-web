@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -11,7 +13,6 @@ resource 'Transport protocol' do
   let(:type) { 'transport-protocols' }
 
   get '/api/rest/admin/equipment/transport-protocols' do
-
     example_request 'get listing' do
       expect(status).to eq(200)
     end
@@ -24,5 +25,4 @@ resource 'Transport protocol' do
       expect(status).to eq(200)
     end
   end
-
 end

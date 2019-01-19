@@ -1,5 +1,6 @@
-class DialpeerDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class DialpeerDecorator < BillingDecorator
   delegate_all
   decorates Dialpeer
 
@@ -10,12 +11,11 @@ class DialpeerDecorator < BillingDecorator
   decorates_association :vendor, with: ContractorDecorator
   decorates_association :account, with: AccountDecorator
 
-
   def decorated_display_name
     if !enabled?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     elsif locked?
-      h.content_tag(:font,display_name, color: :orange)
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
@@ -28,5 +28,4 @@ class DialpeerDecorator < BillingDecorator
   def decorated_valid_till
     is_valid_till? ? valid_till : h.content_tag(:font, valid_till, color: :red)
   end
-
 end

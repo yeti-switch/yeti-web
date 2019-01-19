@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Customers Auth', type: :feature do
@@ -16,12 +18,12 @@ describe 'Export Customers Auth', type: :feature do
            radius_auth_profile: create(:auth_profile),
            radius_accounting_profile: create(:accounting_profile),
            ip: ['127.0.0.1', '0.0.0.0/0'],
-           src_prefix: ['111', '222'],
-           dst_prefix: ['333', '444'],
+           src_prefix: %w[111 222],
+           dst_prefix: %w[333 444],
            uri_domain: ['localhost', 'example.com'],
            from_domain: ['from.com', 'from.net'],
            to_domain: ['to.com', 'to.net'],
-           x_yeti_auth: ['qwe', 'asd'],
+           x_yeti_auth: %w[qwe asd],
            tag_action: Routing::TagAction.take,
            tag_action_value: [@tag_us.id, @tag_emergency.id])
   end
@@ -84,9 +86,8 @@ describe 'Export Customers Auth', type: :feature do
         ['Dst number radius rewrite result', item.dst_number_radius_rewrite_result.to_s, anything],
         ['Radius accounting profile name', item.radius_accounting_profile.name, anything],
         ['Tag action name', item.tag_action.name, anything],
-        ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything],
+        ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything]
       ]
     )
   end
-
 end

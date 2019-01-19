@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.gateway_inband_dtmf_filtering_modes
@@ -7,6 +9,5 @@
 #
 
 class Equipment::GatewayInbandDtmfFilteringMode < Yeti::ActiveRecord
-  self.table_name='class4.gateway_inband_dtmf_filtering_modes'
-
+  self.table_name = 'class4.gateway_inband_dtmf_filtering_modes'
 end

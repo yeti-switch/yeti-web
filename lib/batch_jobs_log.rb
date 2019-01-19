@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BatchJobsLog
   def success(job)
     LogicLog.create!(
@@ -19,5 +21,4 @@ module BatchJobsLog
     ::PaperTrail.request.whodunnit = who_is[:whodunnit]
     ::PaperTrail.request.controller_info = who_is[:controller_info]
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::AccountsController, type: :controller do
@@ -38,7 +40,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
       it 'has balance threshold attributes' do
         expect(response_data['attributes']).to include(
           'name',
-          'balance','min-balance', 'max-balance',
+          'balance', 'min-balance', 'max-balance',
           'uuid',
           'external-id',
           'origination-capacity', 'termination-capacity', 'total-capacity',
@@ -72,7 +74,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     context 'when attributes are valid' do
       let(:attributes) do
         {
-           name: 'name',
+          name: 'name',
           'min-balance': 1,
           'external-id': 100,
           'uuid': '29161666-c29c-11e8-a11d-a088b4454590',
@@ -80,7 +82,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
           'balance-low-threshold': 90,
           'balance-high-threshold': 95,
           'destination-rate-limit': 0.333,
-          'max-call-duration': 24000,
+          'max-call-duration': 24_000,
           'send-balance-notifications-to': Array.wrap(Billing::Contact.collection.first.id),
           'send-invoices-to': Billing::Contact.collection.first.id,
           'origination-capacity': 10,
@@ -90,7 +92,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
       end
 
       let(:relationships) do
-        { timezone: wrap_relationship(:'timezones', 1),
+        { timezone: wrap_relationship(:timezones, 1),
           contractor: wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
       end
 
@@ -129,7 +131,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
           'balance-low-threshold': 90,
           'balance-high-threshold': 95,
           'destination-rate-limit': 0.333,
-          'max-call-duration': 24001,
+          'max-call-duration': 24_001,
           'send-balance-notifications-to': Billing::Contact.collection.first.id,
           'send-invoices-to': Billing::Contact.collection.first.id,
           'origination-capacity': 10,

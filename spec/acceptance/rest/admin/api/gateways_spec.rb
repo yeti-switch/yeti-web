@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,20 +12,20 @@ resource 'Gateways' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'gateways' }
 
-  required_params = %i(name enabled priority weight acd-limit asr-limit)
-  optional_params = %i(
+  required_params = %i[name enabled priority weight acd-limit asr-limit]
+  optional_params = %i[
     allow-origination allow-termination sst-enabled host port resolve-ruri diversion-rewrite-rule
-    diversion-rewrite-result src-name-rewrite-rule src-name-rewrite-result src-rewrite-rule src-rewrite-result 
-    dst-rewrite-rule dst-rewrite-result auth-enabled auth-user auth-password auth-from-user auth-from-domain 
-    term-use-outbound-proxy term-force-outbound-proxy term-outbound-proxy term-next-hop-for-replies term-next-hop 
+    diversion-rewrite-result src-name-rewrite-rule src-name-rewrite-result src-rewrite-rule src-rewrite-result
+    dst-rewrite-rule dst-rewrite-result auth-enabled auth-user auth-password auth-from-user auth-from-domain
+    term-use-outbound-proxy term-force-outbound-proxy term-outbound-proxy term-next-hop-for-replies term-next-hop
     term-append-headers-req sdp-alines-filter-list ringing-timeout relay-options relay-reinvite relay-hold relay-prack
-    relay-update suppress-early-media fake-180-timer transit-headers-from-origination transit-headers-from-termination  
-    sip-interface-name allow-1xx-without-to-tag sip-timer-b dns-srv-failover-timer anonymize-sdp proxy-media 
-    single-codec-in-200ok transparent-seqno transparent-ssrc force-symmetric-rtp symmetric-rtp-nonstop symmetric-rtp-ignore-rtcp 
+    relay-update suppress-early-media fake-180-timer transit-headers-from-origination transit-headers-from-termination
+    sip-interface-name allow-1xx-without-to-tag sip-timer-b dns-srv-failover-timer anonymize-sdp proxy-media
+    single-codec-in-200ok transparent-seqno transparent-ssrc force-symmetric-rtp symmetric-rtp-nonstop symmetric-rtp-ignore-rtcp
     force-dtmf-relay rtp-ping rtp-timeout filter-noaudio-streams rtp-relay-timestamp-aligning rtp-force-relay-cn
-  )
-  
-  required_relationships = %i(
+  ]
+
+  required_relationships = %i[
     contractor codec-group sdp-c-location sensor-level
     dtmf-receive-mode dtmf-send-mode rx-inband-dtmf-filtering-mode tx-inband-dtmf-filtering-mode
     rel100-mode
@@ -31,10 +33,10 @@ resource 'Gateways' do
     transport-protocol sdp-alines-filter-type
     term-proxy-transport-protocol orig-proxy-transport-protocol
     network-protocol-priority media-encryption-mode sip-schema
-  )
-  optional_relationships = %i(
-    gateway-group pop sensor diversion-policy term-disconnect-policy 
-  )
+  ]
+  optional_relationships = %i[
+    gateway-group pop sensor diversion-policy term-disconnect-policy
+  ]
 
   get '/api/rest/admin/gateways' do
     before { create_list(:gateway, 2) }
@@ -79,15 +81,14 @@ resource 'Gateways' do
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'term-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'orig-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
-    let(:'sip-schema') { wrap_relationship(:'sip-schemas', 1)}
-    let(:'media-encryption-mode') { wrap_relationship(:'gateway-media-encryption-modes', 2)}
-    let(:'network-protocol-priority') { wrap_relationship(:'gateway-network-protocol-priorities', 3)}
-    let(:'contractor') { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
+    let(:'sip-schema') { wrap_relationship(:'sip-schemas', 1) }
+    let(:'media-encryption-mode') { wrap_relationship(:'gateway-media-encryption-modes', 2) }
+    let(:'network-protocol-priority') { wrap_relationship(:'gateway-network-protocol-priorities', 3) }
+    let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
     let(:'codec-group') { wrap_relationship(:'codec-groups', create(:codec_group).id) }
 
-
     example_request 'create new entry' do
-#      p response_body
+      #      p response_body
       expect(status).to eq(201)
     end
   end

@@ -1,5 +1,6 @@
-ActiveAdmin.register Importing::CustomersAuth do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::CustomersAuth do
   filter :customer_name
   filter :rateplan_name
   filter :routing_plan_name
@@ -11,13 +12,14 @@ ActiveAdmin.register Importing::CustomersAuth do
   controller do
     def resource_params
       return [{}] if request.get?
-      [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
+
+      [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
+
     def scoped_collection
       super.includes(:rateplan, :routing_plan, :gateway, :account, :customer, :diversion_policy, :dump_level)
     end
   end
-
 
   index do
     selectable_column
@@ -47,11 +49,11 @@ ActiveAdmin.register Importing::CustomersAuth do
 
     column :src_prefix
     column :src_number_length do |c|
-      c.src_number_min_length==c.src_number_max_length ? "#{c.src_number_min_length}" : "#{c.src_number_min_length}..#{c.src_number_max_length}"
+      c.src_number_min_length == c.src_number_max_length ? c.src_number_min_length.to_s : "#{c.src_number_min_length}..#{c.src_number_max_length}"
     end
     column :dst_prefix
     column :dst_number_length do |c|
-      c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
+      c.dst_number_min_length == c.dst_number_max_length ? c.dst_number_min_length.to_s : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
     column :uri_domain
     column :from_domain
@@ -174,5 +176,4 @@ ActiveAdmin.register Importing::CustomersAuth do
       end
     end
   end
-
 end

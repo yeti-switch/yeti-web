@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Report::Realtime::BadRouting do
   menu parent: 'Reports', label: 'Bad routing', priority: 103
   config.batch_actions = false
@@ -6,17 +8,17 @@ ActiveAdmin.register Report::Realtime::BadRouting do
   actions :index
 
   filter :time_interval_eq, label: 'Time Interval',
-         as: :select,
-         collection: Report::Realtime::Base::INTERVALS,
-         input_html: {class: 'chosen'}, include_blank: false
+                            as: :select,
+                            collection: Report::Realtime::Base::INTERVALS,
+                            input_html: { class: 'chosen' }, include_blank: false
 
   filter :customer_id, label: 'Customer',
-         as: :select,
-         collection: proc { Contractor.select(:id, :name).reorder(:name) },
-         input_html: {class: 'chosen'}
+                       as: :select,
+                       collection: proc { Contractor.select(:id, :name).reorder(:name) },
+                       input_html: { class: 'chosen' }
 
-  filter :rateplan, input_html: {class: 'chosen'}
-  filter :routing_plan, input_html: {class: 'chosen'}
+  filter :rateplan, input_html: { class: 'chosen' }
+  filter :routing_plan, input_html: { class: 'chosen' }
   filter :internal_disconnect_code
   filter :internal_disconnect_reason
 
@@ -30,7 +32,7 @@ ActiveAdmin.register Report::Realtime::BadRouting do
 
   controller do
     def scoped_collection
-      length=params[:q][:time_interval_eq].to_i
+      length = params[:q][:time_interval_eq].to_i
       super.detailed_scope(length)
     end
   end
@@ -53,6 +55,4 @@ ActiveAdmin.register Report::Realtime::BadRouting do
 
     column :calls_count, sortable: :calls_count
   end
-
-
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module CallSql
   class Base
     include Singleton
     extend SingleForwardable
 
-    AVAILABLE_METHODS = [:select_value, :select_values, :execute, :select_all, :select_rows].freeze
+    AVAILABLE_METHODS = %i[select_value select_values execute select_all select_rows].freeze
 
     def self._define_sql_method(name)
       define_method(name) do |sql, *args|
@@ -45,11 +47,8 @@ module CallSql
     end
 
     def perform_sp(method, sql, *bindings)
-      if bindings.any?
-        sql = sanitize_sql_array(sql, *bindings)
-      end
+      sql = sanitize_sql_array(sql, *bindings) if bindings.any?
       connection.send(method, sql)
     end
-
   end
 end

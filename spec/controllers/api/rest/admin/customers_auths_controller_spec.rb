@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   describe 'GET index' do
@@ -58,8 +59,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
           rateplan: wrap_relationship(:rateplans, create(:rateplan).id),
           'routing-plan': wrap_relationship(:'routing-plans', create(:routing_plan).id),
           gateway: wrap_relationship(:gateways, create(:gateway).id),
-          account: wrap_relationship(:accounts, create(:account).id)
-        }
+          account: wrap_relationship(:accounts, create(:account).id) }
       end
 
       it { expect(response.status).to eq(201) }
@@ -100,7 +100,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     end
 
     context 'when attributes are not allowed' do
-      let(:attributes) { {'external-id': 101 } }
+      let(:attributes) { { 'external-id': 101 } }
 
       it { expect(response.status).to eq(400) }
       it { expect(customers_auth.reload.external_id).to_not eq(101) }
@@ -117,7 +117,6 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
   end
 
   describe 'editable tag_action and tag_action_value' do
-
     include_examples :jsonapi_resource_with_multiple_tags do
       let(:resource_type) { 'customers-auths' }
       let(:factory_name) { :customers_auth }

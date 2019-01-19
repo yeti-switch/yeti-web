@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
-  menu parent: "CDR", label: "Auth Logs", priority: 10
+  menu parent: 'CDR', label: 'Auth Logs', priority: 10
 
   actions :index, :show
   config.batch_actions = false
@@ -7,15 +9,15 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
 
   acts_as_export :id,
                  :request_time,
-                 [:gateway_name, proc {|row| row.gateway.try(:name)}],
-                 [:node_name, proc {|row| row.node.try(:name)}],
-                 [:pop_name, proc {|row| row.pop.try(:name)}],
-                 [:transport_protocol, proc {|row| row.transport_protocol.try(:name)}],
+                 [:gateway_name, proc { |row| row.gateway.try(:name) }],
+                 [:node_name, proc { |row| row.node.try(:name) }],
+                 [:pop_name, proc { |row| row.pop.try(:name) }],
+                 [:transport_protocol, proc { |row| row.transport_protocol.try(:name) }],
                  :transport_remote_ip,
                  :transport_remote_port,
                  :transport_local_ip,
                  :transport_local_port,
-                 [:origination_protocol, proc {|row| row.origination_protocol.try(:name)}],
+                 [:origination_protocol, proc { |row| row.origination_protocol.try(:name) }],
                  :origination_ip,
                  :origination_port,
                  :username,
@@ -38,7 +40,6 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
                  :privacy,
                  :rpid,
                  :rpid_privacy
-
 
   scope :all, show_count: false
   scope :successful, show_count: false
@@ -108,5 +109,4 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :from_uri
   filter :to_uri
   filter :call_id
-
 end

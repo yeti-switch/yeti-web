@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminUserLdapHandler
   extend ActiveSupport::Concern
 
@@ -11,15 +13,13 @@ module AdminUserLdapHandler
   end
 
   def get_ldap_attributes
-    begin
-      new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail').try!(:first)
-      self.email = new_email if new_email
-      new_roles =  Devise::LDAP::Adapter.get_ldap_param(username, 'roles')
-      self.roles = new_roles ? Array.wrap(new_roles) : default_ldap_roles
-    rescue Net::LDAP::LdapError => e
-      Rails.logger.error{ e.message }
-      #nothing
-    end
+    new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail').try!(:first)
+    self.email = new_email if new_email
+    new_roles =  Devise::LDAP::Adapter.get_ldap_param(username, 'roles')
+    self.roles = new_roles ? Array.wrap(new_roles) : default_ldap_roles
+  rescue Net::LDAP::LdapError => e
+    Rails.logger.error { e.message }
+    # nothing
   end
 
   def default_ldap_roles
@@ -32,10 +32,10 @@ module AdminUserLdapHandler
     end
   end
 
-  #should be included last
+  # should be included last
   module LdapPasswordHelper
     def authenticate(password)
-      Devise::Encryptor.compare(AdminUser, self.encrypted_password, password)
+      Devise::Encryptor.compare(AdminUser, encrypted_password, password)
     end
 
     def encrypt_password(password)
@@ -44,7 +44,7 @@ module AdminUserLdapHandler
 
     def valid_ldap_authentication?(password)
       if super(password)
-        #update encrypted_password for API needs
+        # update encrypted_password for API needs
         self.encrypted_password = encrypt_password(password)
         true
       else
@@ -52,6 +52,4 @@ module AdminUserLdapHandler
       end
     end
   end
-
-
 end

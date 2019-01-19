@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -23,5 +25,4 @@ resource 'Rate profit control modes' do
       expect(status).to eq(200)
     end
   end
-
 end

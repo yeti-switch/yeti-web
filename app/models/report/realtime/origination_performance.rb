@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cdr.cdr
@@ -143,11 +145,10 @@
 #
 
 class Report::Realtime::OriginationPerformance < Report::Realtime::Base
-
   attr_accessor :l
 
-  scope :detailed_scope, ->(length) do
-    l=length.to_i
+  scope :detailed_scope, lambda { |length|
+    l = length.to_i
     select("
       customer_auth_id,
       min(routing_delay) as min_routing_delay,
@@ -161,18 +162,17 @@ class Report::Realtime::OriginationPerformance < Report::Realtime::Base
       sum(duration)::float/nullif(count(nullif(success,false)),0)::float as acd,
       count(nullif(success,false))::float/nullif(count(nullif(is_last_cdr,false)),0)::float as asr
     ").group(:customer_auth_id).preload(:customer_auth)
-  end
+  }
 
-  scope :time_interval_eq, ->(value) do
-    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2*value.to_i, value.to_i)
-  end
+  scope :time_interval_eq, lambda { |value|
+    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2 * value.to_i, value.to_i)
+  }
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
+  def self.ransackable_scopes(_auth_object = nil)
     [
-        :time_interval_eq
+      :time_interval_eq
     ]
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Invoice', type: :feature, js: true do
@@ -14,10 +16,10 @@ describe 'Create new Invoice', type: :feature, js: true do
     let(:attributes) do
       {
         vendor_invoice: true,
-        contractor_id: -> {
+        contractor_id: lambda {
           chosen_pick('#billing_invoice_contractor_id+div', text: @contractor.name)
         },
-        account_id: -> {
+        account_id: lambda {
           chosen_pick('#billing_invoice_account_id+div', text: @account.name)
         },
         start_date: 1.day.ago.utc,
@@ -38,5 +40,4 @@ describe 'Create new Invoice', type: :feature, js: true do
       )
     end
   end
-
 end

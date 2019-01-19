@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Contractor', type: :feature, js: false do
@@ -11,14 +13,14 @@ describe 'Create new Contractor', type: :feature, js: false do
   include_context :fill_form, 'new_contractor' do
     let(:attributes) do
       {
-          name: "Contractor",
-          enabled: true,
-          vendor: true,
-          customer: true,
-          description: "test description",
-          address: "test address",
-          phones: "32432432,32432432,3242",
-          smtp_connection_id: @smtp.name
+        name: 'Contractor',
+        enabled: true,
+        vendor: true,
+        customer: true,
+        description: 'test description',
+        address: 'test address',
+        phones: '32432432,32432432,3242',
+        smtp_connection_id: @smtp.name
 
       }
     end
@@ -28,16 +30,15 @@ describe 'Create new Contractor', type: :feature, js: false do
       expect(page).to have_css('.flash_notice', text: 'Contractor was successfully created.')
 
       expect(Contractor.last).to have_attributes(
-                                     name: attributes[:name],
-                                     enabled: attributes[:enabled],
-                                     vendor: attributes[:vendor],
-                                     customer: attributes[:customer],
-                                     description: attributes[:description],
-                                     address: attributes[:address],
-                                     phones: attributes[:phones],
-                                     smtp_connection_id: @smtp.id
-                                 )
+        name: attributes[:name],
+        enabled: attributes[:enabled],
+        vendor: attributes[:vendor],
+        customer: attributes[:customer],
+        description: attributes[:description],
+        address: attributes[:address],
+        phones: attributes[:phones],
+        smtp_connection_id: @smtp.id
+      )
     end
   end
-
 end

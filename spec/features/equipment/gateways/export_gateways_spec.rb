@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Gateways', type: :feature do
@@ -9,11 +11,11 @@ describe 'Export Gateways', type: :feature do
 
   let!(:item) do
     create :gateway,
-           contractor:             contractor,
-           gateway_group:          create(:gateway_group, vendor: contractor),
-           pop:                    Pop.take,
+           contractor: contractor,
+           gateway_group: create(:gateway_group, vendor: contractor),
+           pop: Pop.take,
            session_refresh_method: SessionRefreshMethod.take,
-           sensor:                 create(:sensor),
+           sensor: create(:sensor),
            orig_disconnect_policy: create(:disconnect_policy),
            term_disconnect_policy: create(:disconnect_policy)
   end

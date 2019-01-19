@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Routing::NumberlistItem do
-  menu parent: "Routing", priority: 125, label: 'Numberlist items'
+  menu parent: 'Routing', priority: 125, label: 'Numberlist items'
 
   config.batch_actions = true
 
@@ -29,14 +31,14 @@ ActiveAdmin.register Routing::NumberlistItem do
   includes :numberlist, :action
 
   permit_params :numberlist_id,
-                :key,:number_min_length, :number_max_length,
+                :key, :number_min_length, :number_max_length,
                 :action_id,
                 :src_rewrite_rule, :src_rewrite_result,
                 :dst_rewrite_rule, :dst_rewrite_result,
                 :tag_action_id, tag_action_value: []
 
   filter :id
-  filter :numberlist, input_html: {class: 'chosen'}
+  filter :numberlist, input_html: { class: 'chosen' }
   filter :key
 
   controller do
@@ -55,7 +57,7 @@ ActiveAdmin.register Routing::NumberlistItem do
     column :numberlist
     column :key
     column :number_length do |c|
-      c.number_min_length==c.number_max_length ? "#{c.number_min_length}" : "#{c.number_min_length}..#{c.number_max_length}"
+      c.number_min_length == c.number_max_length ? c.number_min_length.to_s : "#{c.number_min_length}..#{c.number_max_length}"
     end
     column :action do |c|
       c.action.blank? ? 'Default action' : c.action.name
@@ -70,7 +72,7 @@ ActiveAdmin.register Routing::NumberlistItem do
     column :display_tag_action_value
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :numberlist
@@ -91,7 +93,7 @@ ActiveAdmin.register Routing::NumberlistItem do
 
   form do |f|
     f.inputs do
-      f.input :numberlist, input_html: {class: 'chosen'}
+      f.input :numberlist, input_html: { class: 'chosen' }
       f.input :key
       f.input :number_min_length
       f.input :number_max_length
@@ -103,13 +105,11 @@ ActiveAdmin.register Routing::NumberlistItem do
 
       f.input :tag_action
       f.input :tag_action_value, as: :select,
-        collection: Routing::RoutingTag.all,
-        multiple: true,
-        include_hidden: false,
-        input_html: { class: 'chosen' }
+                                 collection: Routing::RoutingTag.all,
+                                 multiple: true,
+                                 include_hidden: false,
+                                 input_html: { class: 'chosen' }
     end
     f.actions
   end
-
-
 end

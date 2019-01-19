@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_gateway_group, class: Importing::GatewayGroup do
     o_id nil

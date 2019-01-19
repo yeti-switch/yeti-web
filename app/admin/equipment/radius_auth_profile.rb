@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Equipment::Radius::AuthProfile do
-  menu parent: "Equipment", priority: 110, label: 'RADIUS Auth profile'
+  menu parent: 'Equipment', priority: 110, label: 'RADIUS Auth profile'
   config.batch_actions = true
 
   acts_as_audit
@@ -9,23 +11,19 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
   acts_as_export :id, :name
 
   permit_params :name, :server, :port, :secret, :reject_on_error, :timeout, :attempts,
-                avps_attributes: [
-                    :id, :type_id, :name, :value, :format, :is_vsa, :vsa_vendor_id, :vsa_vendor_type, :_destroy
+                avps_attributes: %i[
+                  id type_id name value format is_vsa vsa_vendor_id vsa_vendor_type _destroy
                 ]
 
   includes :avps
 
-  batch_action :set_reject_on_error, confirm: "Are you sure?", if: proc { authorized?(:batch_update) } do |selection|
-    active_admin_config.resource_class.find(selection).each do |resource|
-      resource.set_reject_on_error
-    end
+  batch_action :set_reject_on_error, confirm: 'Are you sure?', if: proc { authorized?(:batch_update) } do |selection|
+    active_admin_config.resource_class.find(selection).each(&:set_reject_on_error)
     redirect_to collection_path, notice: "#{active_admin_config.resource_label.pluralize} are updated!"
   end
 
-  batch_action :unset_reject_on_error, confirm: "Are you sure?", if: proc { authorized?(:batch_update) } do |selection|
-    active_admin_config.resource_class.find(selection).each do |resource|
-      resource.unset_reject_on_error
-    end
+  batch_action :unset_reject_on_error, confirm: 'Are you sure?', if: proc { authorized?(:batch_update) } do |selection|
+    active_admin_config.resource_class.find(selection).each(&:unset_reject_on_error)
     redirect_to collection_path, notice: "#{active_admin_config.resource_label.pluralize} are updated!"
   end
 
@@ -43,7 +41,7 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
 
   filter :id
   filter :name
-  filter :reject_on_error, as: :select, collection: [ ["Yes", true], ["No", false]]
+  filter :reject_on_error, as: :select, collection: [['Yes', true], ['No', false]]
 
   form do |f|
     f.semantic_errors *f.object.errors.keys.uniq
@@ -57,10 +55,10 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
       f.input :attempts, hint: "Max request attempts. Allowed values #{Equipment::Radius::AuthProfile::ATTEMPTS_MIN}..#{Equipment::Radius::AuthProfile::ATTEMPTS_MAX}"
     end
 
-    f.inputs "Attributes" do
+    f.inputs 'Attributes' do
       f.has_many :avps do |t|
-        t.input :type_id, hint: "Attribute type, see rfc2865"
-        t.input :name, hint: "Informational only"
+        t.input :type_id, hint: 'Attribute type, see rfc2865'
+        t.input :name, hint: 'Informational only'
         t.input :is_vsa
         t.input :vsa_vendor_id
         t.input :vsa_vendor_type
@@ -72,7 +70,7 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
     f.actions
   end
 
-  sidebar :allowed_variables, only: [:new, :edit] do
+  sidebar :allowed_variables, only: %i[new edit] do
     ul do
       Equipment::Radius::AuthProfileAttribute.variables.each do |x|
         li do
@@ -83,7 +81,6 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
       end
     end
   end
-
 
   show do |s|
     attributes_table do
@@ -97,8 +94,8 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
       row :attempts
     end
 
-    panel "Attributes" do
-      table_for s.avps.order("id") do
+    panel 'Attributes' do
+      table_for s.avps.order('id') do
         column :type_id
         column :name
         column :is_vsa
@@ -109,6 +106,4 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
       end
     end
   end
-
-
 end

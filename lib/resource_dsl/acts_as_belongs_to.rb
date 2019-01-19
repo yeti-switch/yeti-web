@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module ResourceDSL
   module ActsAsBelongsTo
     def acts_as_belongs_to(parent_name, options = {})
       options.assert_valid_keys(
-          :route_name, :collection_name, :param,
-          :parent_class, :class_name,
-          :instance_name, :finder,
-          :polymorphic, :singleton,
-          :optional
+        :route_name, :collection_name, :param,
+        :parent_class, :class_name,
+        :instance_name, :finder,
+        :polymorphic, :singleton,
+        :optional
       )
       config_opts = options.merge parent_name: parent_name
       config_opts[:param] ||= :"#{parent_name}_id"
@@ -14,17 +16,15 @@ module ResourceDSL
       belongs_to parent_name, options
 
       controller do
-
         define_method(:belongs_to_opts) do
           return @belongs_to_options if defined?(@belongs_to_options)
+
           @belongs_to_options = OpenStruct.new(config_opts)
         end
 
         def resource_parent
           if instance_variable_defined?("@#{belongs_to_opts.parent_name}")
             instance_variable_get("@#{belongs_to_opts.parent_name}")
-          else
-            nil
           end
         end
 
@@ -38,14 +38,10 @@ module ResourceDSL
           route_name = belongs_to_opts.route_name.to_s
           route_name = route_name.singularize unless opts.fetch(:collection, false)
           # namespace = opts[:namespace] || :admin
-          if ActiveAdmin.application.default_namespace
-            namespace = ActiveAdmin.application.default_namespace.to_s.sub(/^\//, '')
-          else
-            namespace = nil
-          end
+          namespace = ActiveAdmin.application.default_namespace&.to_s&.sub(%r{^/}, '')
           parent_name = resource_parent.present? ? belongs_to_opts.parent_name : nil
           [
-              opts[:action], namespace, parent_name, route_name, :path
+            opts[:action], namespace, parent_name, route_name, :path
           ].reject(&:blank?).map(&:to_s).join('_')
         end
 
@@ -88,26 +84,30 @@ module ResourceDSL
           [res_params]
         end
 
-        def create
-          super do |success, _|
-            success.html { redirect_to resource_path(resource.id) }
+        if method_defined? :create
+          def create
+            super do |success, _|
+              success.html { redirect_to resource_path(resource.id) }
+            end
           end
-        end if method_defined? :create
+        end
 
-        def update
-          super do |success, _|
-            success.html { redirect_to resource_path(resource.id) }
+        if method_defined? :update
+          def update
+            super do |success, _|
+              success.html { redirect_to resource_path(resource.id) }
+            end
           end
-        end if method_defined? :update
+        end
 
-        def destroy
-          super do |success, _|
-            success.html { redirect_to collection_path }
+        if method_defined? :destroy
+          def destroy
+            super do |success, _|
+              success.html { redirect_to collection_path }
+            end
           end
-        end if method_defined? :destroy
-
+        end
       end
-
     end
   end
 end

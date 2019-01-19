@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-describe Api::Rest::System::IpAccessController, type: :controller  do
-
+describe Api::Rest::System::IpAccessController, type: :controller do
   describe '#index' do
-
     subject { get :index, params: { format: :json } }
 
     context 'when CustomersAuth records exist' do
@@ -29,8 +29,5 @@ describe Api::Rest::System::IpAccessController, type: :controller  do
         expect(JSON.parse(response.body)).to match_array([])
       end
     end
-
   end
-
 end
-

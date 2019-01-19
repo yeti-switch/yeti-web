@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 RSpec.shared_context :acceptance_index_show do |namespace: nil, type:|
-  #let(:collection) { ModelClass.all }
-  #let(:record) { ModelClass.take  }
+  # let(:collection) { ModelClass.all }
+  # let(:record) { ModelClass.take  }
 
   let(:type) { type }
 
   resource_path = begin
-                    str = "/api/rest/admin"
+                    str = '/api/rest/admin'
                     str += "/#{namespace}" if namespace
                     str + "/#{type}"
                   end
@@ -25,5 +27,4 @@ RSpec.shared_context :acceptance_index_show do |namespace: nil, type:|
       expect(status).to eq(200)
     end
   end
-
 end

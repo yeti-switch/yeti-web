@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sortings
@@ -9,8 +11,5 @@
 #
 
 class Sorting < ActiveRecord::Base
-
   scope :with_static_routes, -> { where(use_static_routes: true) }
-
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: billing.invoice_documents
@@ -12,11 +14,10 @@
 #
 
 class Billing::InvoiceDocument < Cdr::Base
-
   self.table_name = 'billing.invoice_documents'
   belongs_to :invoice
 
-  #todo: remove
+  # TODO: remove
   def self.get_file(invoice_id)
     Billing::InvoiceDocument.find(invoice_id).data
   end
@@ -27,10 +28,10 @@ class Billing::InvoiceDocument < Cdr::Base
 
   def attachments
     [
-        # Notification::Attachment.new(filename: "#{filename}.csv", data: self.csv_data),
-        Notification::Attachment.new(filename: "#{filename}.xls", data: self.xls_data),
-        Notification::Attachment.new(filename: "#{filename}.pdf", data: self.pdf_data) #,
-        # Notification::Attachment.new(filename: "#{filename}.odt", data: self.data)
+      # Notification::Attachment.new(filename: "#{filename}.csv", data: self.csv_data),
+      Notification::Attachment.new(filename: "#{filename}.xls", data: xls_data),
+      Notification::Attachment.new(filename: "#{filename}.pdf", data: pdf_data) # ,
+      # Notification::Attachment.new(filename: "#{filename}.odt", data: self.data)
     ].reject { |a| a.data.blank? }
   end
 
@@ -49,21 +50,20 @@ class Billing::InvoiceDocument < Cdr::Base
   def send_invoice
     contacts = contacts_for_invoices
     if contacts.any?
-      #create attachments
+      # create attachments
       files = attachments
-      files.map { |a| a.save! }
+      files.map(&:save!)
       attachment_ids = files.map(&:id)
       contacts.each do |contact|
         Log::EmailLog.create!(
-            contact_id: contact.id,
-            smtp_connection_id: contact.smtp_connection.id,
-            mail_to: contact.email,
-            mail_from: contact.smtp_connection.from_address,
-            subject: self.subject,
-            attachment_id: attachment_ids
+          contact_id: contact.id,
+          smtp_connection_id: contact.smtp_connection.id,
+          mail_to: contact.email,
+          mail_from: contact.smtp_connection.from_address,
+          subject: subject,
+          attachment_id: attachment_ids
         )
       end
     end
   end
-
 end

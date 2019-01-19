@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::Routing::RoutesetDiscriminatorResource < ::BaseResource
   model_name 'Routing::RoutesetDiscriminator'
 
   attributes :name
   filter :name
 
-  def self.updatable_fields(context)
+  def self.updatable_fields(_context)
     [:name]
   end
 
   def self.creatable_fields(context)
-    self.updatable_fields(context)
+    updatable_fields(context)
   end
-
 end

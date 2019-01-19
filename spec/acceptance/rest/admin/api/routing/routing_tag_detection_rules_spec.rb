@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -8,18 +10,18 @@ resource 'Routing RoutingTagDetectionRules' do
 
   let(:collection) do
     create_list :routing_tag_detection_rule, 2,
-                 src_prefix: '111',
-                 dst_prefix: '222'
+                src_prefix: '111',
+                dst_prefix: '222'
   end
 
   let(:record) { collection.first }
 
-  required_params = %i()
+  required_params = %i[]
 
-  optional_params = %i(src-prefix dst-prefix tag-action-value routing-tag-ids)
+  optional_params = %i[src-prefix dst-prefix tag-action-value routing-tag-ids]
 
-  required_relationships = %i()
-  optional_relationships = %i(src-area dst-area tag-action routing-tag-modes)
+  required_relationships = %i[]
+  optional_relationships = %i[src-area dst-area tag-action routing-tag-modes]
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tag-detection-rules'
   include_context :acceptance_delete, namespace: 'routing', type: 'routing-tag-detection-rules'
@@ -29,7 +31,6 @@ resource 'Routing RoutingTagDetectionRules' do
 
     jsonapi_attributes(required_params, optional_params)
     jsonapi_relationships(required_relationships, optional_relationships)
-
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -49,5 +50,4 @@ resource 'Routing RoutingTagDetectionRules' do
       expect(status).to eq(200)
     end
   end
-
 end

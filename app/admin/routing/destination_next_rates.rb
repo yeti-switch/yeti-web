@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' do
   acts_as_belongs_to :destination,
                      parent_class: Routing::Destination,
@@ -17,13 +19,13 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
 
   controller do
     def create
-      super do |success,_|
+      super do |success, _|
         success.html { redirect_to destination_path(params[:destination_id], anchor: 'upcoming-price-changes') }
       end
     end
 
     def update
-      super do |success,_|
+      super do |success, _|
         success.html { redirect_to destination_path(params[:destination_id], anchor: 'upcoming-price-changes') }
       end
     end
@@ -32,11 +34,10 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
   includes :destination
 
   action_item :destinations, only: [:index] do
-    link_to "Destinations", destinations_path
+    link_to 'Destinations', destinations_path
   end
 
-  sidebar :destination, priority: 1, only: [:new, :update], if: proc { assigns[:destination].present? } do
-
+  sidebar :destination, priority: 1, only: %i[new update], if: proc { assigns[:destination].present? } do
     attributes_table_for assigns[:destination] do
       row :id do
         auto_link(assigns[:destination], assigns[:destination].id)
@@ -47,11 +48,8 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
       row :next_rate
       row :connect_fee
       row :current_rate_id
-
     end
   end
-
-
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -61,18 +59,16 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
-      f.input :apply_time, as: :date_time_picker,  datepicker_options: {defaultTime: '00:00'}
+      f.input :apply_time, as: :date_time_picker, datepicker_options: { defaultTime: '00:00' }
     end
     f.actions
   end
 
-
-
   filter :id_eq, label: 'ID'
 
   filter :applied, as: :select,
-         input_html: {class: :chosen},
-         collection: [['Yes', true], ['No', false]]
+                   input_html: { class: :chosen },
+                   collection: [['Yes', true], ['No', false]]
 
   filter :apply_time
   filter :initial_rate
@@ -83,8 +79,6 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
   filter :created_at, as: :date_time_range
   filter :updated_at, as: :date_time_range
   filter :external_id
-
-
 
   index do
     column :id
@@ -101,7 +95,4 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
     column :updated_at
     column :external_id
   end
-
-
-
 end

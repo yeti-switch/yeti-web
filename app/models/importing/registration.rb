@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_registrations
@@ -37,14 +39,12 @@ class Importing::Registration < Importing::Base
   belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
 
-  self.import_attributes = ['name', 'enabled',
-                            'pop_id', 'node_id', 'domain',
-                            'username', 'display_username',
-                            'auth_user', 'auth_password', 'proxy', 'contact',
-                            'expire', 'force_expire', 'retry_delay', 'max_attempts',
-                            'transport_protocol_id', 'proxy_transport_protocol_id'
-  ]
+  self.import_attributes = %w[name enabled
+                              pop_id node_id domain
+                              username display_username
+                              auth_user auth_password proxy contact
+                              expire force_expire retry_delay max_attempts
+                              transport_protocol_id proxy_transport_protocol_id]
 
   self.import_class = ::Equipment::Registration
-
 end

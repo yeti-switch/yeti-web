@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 policy_roles_path = Rails.root.join('config', 'policy_roles.yml')
 if File.file?(policy_roles_path)
   policy_roles = YAML.load_file(policy_roles_path).deep_symbolize_keys

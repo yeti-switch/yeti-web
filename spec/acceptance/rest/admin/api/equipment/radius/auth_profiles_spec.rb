@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -10,8 +12,8 @@ resource 'Auth profiles' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'auth-profiles' }
 
-  required_params = %i(name server port secret timeout attempts)
-  optional_params = %i(enable-start-accounting enable-interim-accounting interim-accounting-interval enable-stop-accounting)
+  required_params = %i[name server port secret timeout attempts]
+  optional_params = %i[enable-start-accounting enable-interim-accounting interim-accounting-interval enable-stop-accounting]
 
   get '/api/rest/admin/equipment/radius/auth-profiles' do
     before { create_list(:auth_profile, 2) }

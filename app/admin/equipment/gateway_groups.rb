@@ -1,6 +1,7 @@
-ActiveAdmin.register GatewayGroup do
+# frozen_string_literal: true
 
-  menu parent: "Equipment", priority: 70
+ActiveAdmin.register GatewayGroup do
+  menu parent: 'Equipment', priority: 70
 
   acts_as_audit
   acts_as_clone
@@ -34,7 +35,6 @@ ActiveAdmin.register GatewayGroup do
     render plain: view_context.options_from_collection_for_select(@gr, :id, :display_name)
   end
 
-
   index do
     selectable_column
     id_column
@@ -48,8 +48,8 @@ ActiveAdmin.register GatewayGroup do
 
   filter :id
   filter :name
-  filter :vendor, input_html: {class: 'chosen'}
-  filter :prefer_same_pop, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :vendor, input_html: { class: 'chosen' }
+  filter :prefer_same_pop, as: :select, collection: [['Yes', true], ['No', false]]
 
   show do |s|
     attributes_table do
@@ -60,8 +60,8 @@ ActiveAdmin.register GatewayGroup do
       end
       row :prefer_same_pop
     end
-    panel("Gateways in group") do
-      table_for resource.gateways do |g|
+    panel('Gateways in group') do
+      table_for resource.gateways do |_g|
         column :id
         column :name
         column :host
@@ -74,11 +74,9 @@ ActiveAdmin.register GatewayGroup do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
-      f.input :vendor, input_html: {class: 'chosen'}, collection: Contractor.vendors
+      f.input :vendor, input_html: { class: 'chosen' }, collection: Contractor.vendors
       f.input :prefer_same_pop
     end
     f.actions
   end
-
-
 end

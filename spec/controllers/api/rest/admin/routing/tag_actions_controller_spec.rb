@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Routing::TagActionsController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   describe 'GET index' do
@@ -59,5 +60,4 @@ describe Api::Rest::Admin::Routing::TagActionsController, type: :controller do
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
   end
-
 end

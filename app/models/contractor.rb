@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: contractors
@@ -26,12 +28,10 @@ class Contractor < ActiveRecord::Base
 
   has_paper_trail class_name: 'AuditLogItem'
 
-
   scope :customers, -> { where customer: true }
   scope :vendors, -> { where vendor: true }
 
   include Yeti::ResourceStatus
-
 
   validate :vendor_or_customer?
   validates_presence_of :name
@@ -39,11 +39,11 @@ class Contractor < ActiveRecord::Base
   validates_uniqueness_of :external_id, allow_blank: true
 
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
 
   def is_enabled?
-    self.enabled
+    enabled
   end
 
   def for_origination_gateways
@@ -57,11 +57,9 @@ class Contractor < ActiveRecord::Base
   private
 
   def vendor_or_customer?
-    unless customer? or vendor?
-      errors.add :vendor, "Must be customer and/or vendor"
-      errors.add :customer, "Must be customer and/or vendor"
+    unless customer? || vendor?
+      errors.add :vendor, 'Must be customer and/or vendor'
+      errors.add :customer, 'Must be customer and/or vendor'
     end
   end
-
 end
-

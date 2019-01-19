@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :customers_auth, class: CustomersAuth do
-    sequence(:name) { |n| "customers_auth_#{n}"}
+    sequence(:name) { |n| "customers_auth_#{n}" }
     diversion_policy_id 1
     dump_level_id 1
 
@@ -10,7 +12,7 @@ FactoryGirl.define do
     association :gateway
     association :account
 
-    #ip { ['127.0.0.0/8'] } # default
+    # ip { ['127.0.0.0/8'] } # default
     src_rewrite_rule nil
     src_rewrite_result nil
     dst_rewrite_rule nil
@@ -26,14 +28,12 @@ FactoryGirl.define do
     send_billing_information false
 
     trait :with_incoming_auth do
-      association :gateway, factory: [:gateway, :with_incoming_auth]
+      association :gateway, factory: %i[gateway with_incoming_auth]
       require_incoming_auth true
     end
 
     trait :with_reject do
       reject_calls true
     end
-
-
   end
 end

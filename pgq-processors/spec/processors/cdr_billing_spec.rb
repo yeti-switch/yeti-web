@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 require File.join(File.dirname(__FILE__), '../../processors/cdr_billing')
 require File.join(File.dirname(__FILE__), '../../models/routing_base')
 
 RSpec.describe CdrBilling do
-
   CONFIG = begin
     f = YAML.load_file('../config/database.yml')
     {
@@ -26,15 +27,15 @@ RSpec.describe CdrBilling do
 
   let(:cdrs) do
     [
-        {
-          id: 1,
-          dialpeer_reverse_billing: vendor_reverse,
-          vendor_price: 5.0,
-          vendor_acc_id: vendor_acc.id,
-          destination_reverse_billing: customer_reverse,
-          customer_price: 10.0,
-          customer_acc_id: customer_acc.id
-        }
+      {
+        id: 1,
+        dialpeer_reverse_billing: vendor_reverse,
+        vendor_price: 5.0,
+        vendor_acc_id: vendor_acc.id,
+        destination_reverse_billing: customer_reverse,
+        customer_price: 10.0,
+        customer_acc_id: customer_acc.id
+      }
     ]
   end
 
@@ -53,7 +54,6 @@ RSpec.describe CdrBilling do
   end
 
   let(:contractor) do
-
   end
 
   let(:vendor_acc) do
@@ -120,5 +120,4 @@ RSpec.describe CdrBilling do
       expect(customer_acc.reload.balance).to eq(90)
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccountPolicy < ::RolePolicy
   section 'Account'
 
@@ -5,6 +7,4 @@ class AccountPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

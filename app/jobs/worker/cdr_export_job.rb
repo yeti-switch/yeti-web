@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Worker
   class CdrExportJob < ActiveJob::Base
     queue_as 'cdr_export'
@@ -12,7 +14,7 @@ module Worker
         status: CdrExport::STATUS_COMPLETED,
         rows_count: rows_count
       )
-    rescue => e
+    rescue StandardError => e
       logger.error { e.message }
       logger.error { e.backtrace.join("\n") }
       cdr_export.update!(status: CdrExport::STATUS_FAILED)

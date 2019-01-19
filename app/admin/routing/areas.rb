@@ -1,6 +1,7 @@
-ActiveAdmin.register Routing::Area do
+# frozen_string_literal: true
 
-  menu parent: "Routing", priority: 251, label: "Areas"
+ActiveAdmin.register Routing::Area do
+  menu parent: 'Routing', priority: 251, label: 'Areas'
 
   acts_as_audit
   acts_as_clone
@@ -15,7 +16,7 @@ ActiveAdmin.register Routing::Area do
     column :name
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :name
@@ -32,5 +33,4 @@ ActiveAdmin.register Routing::Area do
 
   filter :id
   filter :name
-
 end

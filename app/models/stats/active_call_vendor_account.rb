@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stats.active_call_vendor_accounts
@@ -9,9 +11,8 @@
 #
 
 class Stats::ActiveCallVendorAccount < Stats::Base
-  self.table_name = "stats.active_call_vendor_accounts"
+  self.table_name = 'stats.active_call_vendor_accounts'
   belongs_to :account
-
 
   include ::Chart
   self.chart_entity_column = :account_id

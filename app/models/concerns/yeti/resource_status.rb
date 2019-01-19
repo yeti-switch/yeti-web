@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Yeti
   module ResourceStatus
     extend ActiveSupport::Concern
@@ -6,7 +8,7 @@ module Yeti
       scope :enabled, -> { where enabled: true }
 
       def status_sym
-        self.enabled? ? :enabled : :disabled
+        enabled? ? :enabled : :disabled
       end
 
       def enable!
@@ -20,9 +22,8 @@ module Yeti
       end
 
       def disabled?
-        !self.enabled
+        !enabled
       end
-
     end
   end
 end

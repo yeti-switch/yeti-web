@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'uri'
 
 require File.join(File.dirname(__FILE__), '../../processors/cdr_http')
 
 RSpec.describe CdrHttp do
-
   let(:cdrs) do
     [
-        { id: 1, duration: 2 },
-        { id: 2, duration: 2 }
+      { id: 1, duration: 2 },
+      { id: 2, duration: 2 }
     ]
   end
 
@@ -18,9 +19,9 @@ RSpec.describe CdrHttp do
   let(:cdr_fields) { 'all' }
   let(:config) do
     {
-        'url'        => 'https://external-endpoint/api/cdr',
-        'method'     => method,
-        'cdr_fields' => cdr_fields
+      'url' => 'https://external-endpoint/api/cdr',
+      'method' => method,
+      'cdr_fields' => cdr_fields
     }
   end
 
@@ -48,8 +49,6 @@ RSpec.describe CdrHttp do
 
   context 'GET method' do
     let(:method) { 'GET' }
-
-
 
     it { expect(WebMock).to have_requested(:get, "#{config['url']}?#{URI.encode_www_form cdrs[0]}") }
     it { expect(WebMock).to have_requested(:get, "#{config['url']}?#{URI.encode_www_form cdrs[1]}") }

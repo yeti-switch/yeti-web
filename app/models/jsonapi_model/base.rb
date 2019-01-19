@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 
 module JsonapiModel
@@ -6,8 +8,7 @@ module JsonapiModel
     attr_reader :id
 
     class << self
-      def inherited(_subclass)
-      end
+      def inherited(_subclass); end
 
       def call(args = {})
         new(args).call
@@ -19,7 +20,7 @@ module JsonapiModel
     end
 
     def call
-      fail NotImplementedError.new('call needs to be implemented in subclasses and return self')
+      raise NotImplementedError, 'call needs to be implemented in subclasses and return self'
     end
 
     def self.all

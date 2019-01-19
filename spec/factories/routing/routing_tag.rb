@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :routing_tag, class: Routing::RoutingTag do
     sequence(:name) { |n| "TAG_#{n}" }

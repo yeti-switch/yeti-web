@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.radius_accounting_profile_start_attributes
@@ -14,9 +16,8 @@
 #
 
 class Equipment::Radius::AccountingProfileStartAttribute < Equipment::Radius::Attribute
-  self.table_name='class4.radius_accounting_profile_start_attributes'
+  self.table_name = 'class4.radius_accounting_profile_start_attributes'
   has_paper_trail class_name: 'AuditLogItem'
 
   belongs_to :profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :profile_id
-
 end

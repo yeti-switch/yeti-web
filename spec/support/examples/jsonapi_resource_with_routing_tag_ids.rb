@@ -1,11 +1,12 @@
-RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
+# frozen_string_literal: true
 
+RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
   include_context :init_routing_tag_collection
 
   let(:tag_ids) { [@tag_ua.id, @tag_us.id] }
 
-  #let(:resource_type) { 'customers-auths' }
-  #let(:factory_name) { :destination }
+  # let(:resource_type) { 'customers-auths' }
+  # let(:factory_name) { :destination }
 
   let(:record) do
     create(factory_name,
@@ -39,6 +40,5 @@ RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
       expect(record.reload)
         .to have_attributes(routing_tag_ids: [@tag_emergency.id])
     end
-
   end
 end

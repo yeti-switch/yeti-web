@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # @see https://github.com/activeadmin/activeadmin/issues/3797 for details
 #
@@ -19,7 +21,7 @@ module ActiveAdmin
 
         footer_data_proc = options.delete(:footer_data)
         if footer_data_proc.is_a?(Proc)
-          @footer_data = instance_exec @collection.except(:limit, :offset, :includes).reorder(""), &footer_data_proc
+          @footer_data = instance_exec @collection.except(:limit, :offset, :includes).reorder(''), &footer_data_proc
         end
 
         @columns = []
@@ -45,9 +47,11 @@ module ActiveAdmin
           build_table_header(col)
         end
         # Build our footer item
-        within @footer_row do
-          build_table_footer(col)
-        end if @footer_data
+        if @footer_data
+          within @footer_row do
+            build_table_footer(col)
+          end
+        end
 
         # Add a table cell for each item
         @collection.each_with_index do |item, i|
@@ -55,8 +59,6 @@ module ActiveAdmin
             build_table_cell col, item
           end
         end
-
-
       end
 
       def sortable?
@@ -120,9 +122,7 @@ module ActiveAdmin
           @collection.each do |elem|
             classes = [cycle('odd', 'even')]
 
-            if @row_class
-              classes << @row_class.call(elem)
-            end
+            classes << @row_class.call(elem) if @row_class
 
             tr(class: classes.flatten.join(' '), id: dom_id_for(elem))
           end
@@ -146,7 +146,7 @@ module ActiveAdmin
         if helpers.is_boolean_val?(value)
           value = helpers.boolean_status_tag(value)
         elsif data.is_a?(Symbol)
-           value = helpers.pretty_format(value)
+          value = helpers.pretty_format(value)
         end
 
         value
@@ -173,17 +173,17 @@ module ActiveAdmin
       def order_for_sort_key(sort_key)
         current_key, current_order = current_sort
         return 'desc' unless current_key == sort_key
+
         current_order == 'desc' ? 'asc' : 'desc'
       end
 
       def default_options
         {
-            i18n: @resource_class
+          i18n: @resource_class
         }
       end
 
       class Column
-
         attr_accessor :title, :data, :html_class, :options
 
         def initialize(*args, &block)
@@ -191,7 +191,7 @@ module ActiveAdmin
 
           @title = args[0]
           html_classes = [:col]
-          if @options.has_key?(:class)
+          if @options.key?(:class)
             html_classes << @options.delete(:class)
           elsif @title.present?
             html_classes << "col-#{@title.to_s.parameterize(separator: '_')}"
@@ -203,7 +203,7 @@ module ActiveAdmin
         end
 
         def sortable?
-          if @options.has_key?(:sortable)
+          if @options.key?(:sortable)
             !!@options[:sortable]
           elsif @resource_class
             @resource_class.column_names.include?(sort_column_name)
@@ -211,7 +211,6 @@ module ActiveAdmin
             @title.present?
           end
         end
-
 
         #
         # Returns the key to be used for sorting this column

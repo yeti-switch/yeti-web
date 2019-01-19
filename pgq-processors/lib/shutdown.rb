@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 trap('HUP') do
   Pgq::Worker.shutdown!('HUP')

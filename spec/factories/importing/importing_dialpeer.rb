@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_dialpeer, class: Importing::Dialpeer do
     transient do
@@ -39,6 +41,6 @@ FactoryGirl.define do
     dst_number_max_length 7
 
     routing_tag_ids { _tags.map(&:id) }
-    routing_tag_names { _tags.map(&:name).join(', ')  }
+    routing_tag_names { _tags.map(&:name).join(', ') }
   end
 end

@@ -1,5 +1,6 @@
-class GatewayGroupDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class GatewayGroupDecorator < BillingDecorator
   delegate_all
   decorates GatewayGroup
 
@@ -7,10 +8,9 @@ class GatewayGroupDecorator < BillingDecorator
 
   def decorated_display_name
     if !have_valid_gateways?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     else
       display_name
     end
   end
-
 end

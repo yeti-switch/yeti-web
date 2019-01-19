@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_events'
 
 describe System::Sensor do
-
   let(:mode_id) { 1 }
-  let(:source_ip) {'192.168.0.1'}
-  let(:target_ip) {'192.168.0.2'}
+  let(:source_ip) { '192.168.0.1' }
+  let(:target_ip) { '192.168.0.2' }
   let(:source_interface) { nil }
   let(:target_mac) { nil }
 
@@ -26,14 +27,13 @@ describe System::Sensor do
 
   describe '#create' do
     subject do
-      FactoryGirl.create(:sensor, {
-                                    name: 'Experimental sensor',
-                                    mode_id: mode_id,
-                                    source_ip: source_ip,
-                                    target_ip: target_ip,
-                                    source_interface: source_interface,
-                                    target_mac: target_mac
-                                })
+      FactoryGirl.create(:sensor,
+                         name: 'Experimental sensor',
+                         mode_id: mode_id,
+                         source_ip: source_ip,
+                         target_ip: target_ip,
+                         source_interface: source_interface,
+                         target_mac: target_mac)
     end
 
     context 'with valid input data' do
@@ -57,8 +57,8 @@ describe System::Sensor do
 
       context 'when mode IP-Ethernet encapsulation' do
         let(:mode_id) { 2 }
-        let(:source_ip) {'192.168.0.1'}
-        let(:target_ip) {'192.168.0.2'}
+        let(:source_ip) { '192.168.0.1' }
+        let(:target_ip) { '192.168.0.2' }
         let(:source_interface) { nil }
         let(:target_mac) { 'some arbitrary value' }
 
@@ -69,7 +69,7 @@ describe System::Sensor do
 
       context 'when mode HEPv3 encapsulation' do
         let(:mode_id) { 3 }
-        let(:target_ip) {'192.168.0.2'}
+        let(:target_ip) { '192.168.0.2' }
         let(:target_port) { nil }
         let(:hep_capture_id) { nil }
 
@@ -80,19 +80,18 @@ describe System::Sensor do
 
       context 'when sensor-name duplicates' do
         let(:mode_id) { 1 }
-        let(:source_ip) {'192.168.0.1'}
-        let(:target_ip) {'192.168.0.2'}
+        let(:source_ip) { '192.168.0.1' }
+        let(:target_ip) { '192.168.0.2' }
         let(:source_interface) { nil }
         let(:target_mac) { nil }
         before do
-          FactoryGirl.create(:sensor, {
-                                        name: 'Experimental sensor',
-                                        mode_id: mode_id,
-                                        source_ip: source_ip,
-                                        target_ip: target_ip,
-                                        source_interface: source_interface,
-                                        target_mac: target_mac
-                                    })
+          FactoryGirl.create(:sensor,
+                             name: 'Experimental sensor',
+                             mode_id: mode_id,
+                             source_ip: source_ip,
+                             target_ip: target_ip,
+                             source_interface: source_interface,
+                             target_mac: target_mac)
         end
 
         it 'rise error' do
@@ -100,7 +99,5 @@ describe System::Sensor do
         end
       end
     end
-
   end
-
 end

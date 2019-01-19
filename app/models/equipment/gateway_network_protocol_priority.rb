@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.gateway_network_protocol_priorities
@@ -7,6 +9,5 @@
 #
 
 class Equipment::GatewayNetworkProtocolPriority < Yeti::ActiveRecord
-  self.table_name='class4.gateway_network_protocol_priorities'
-
+  self.table_name = 'class4.gateway_network_protocol_priorities'
 end

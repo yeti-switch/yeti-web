@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RealtimeData
   class ActiveCallPolicy < ::RolePolicy
     section 'RealtimeData/ActiveCall'
@@ -6,7 +8,5 @@ module RealtimeData
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

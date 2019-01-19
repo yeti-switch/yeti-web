@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "yeti@example.com"
-
+  config.mailer_sender = 'yeti@example.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -126,7 +127,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
 
@@ -232,17 +233,16 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = "/my_engine/users/auth"
   config.secret_key = '649ebc96aad6b55506254450d9ec26e08075cd2fffffffd09e3ed554b790c4b6cbff44f5b67cc'
 
-  if (File.exists?(File.join(Rails.root, "config", "ldap.yml")))
+  if File.exist?(File.join(Rails.root, 'config', 'ldap.yml'))
     config.ldap_logger = false
     config.ldap_create_user = true
     config.ldap_use_admin_to_bind = false
     config.ldap_check_group_membership = true
     config.ldap_check_group_membership_without_admin = true
   end
-  config.authentication_keys = [ :username ]
+  config.authentication_keys = [:username]
   config.case_insensitive_keys = []
   config.strip_whitespace_keys = []
   config.confirmation_keys = []
   config.password_length = 6..128
-
 end

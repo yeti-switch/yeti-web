@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.destination_next_rates
@@ -17,8 +19,7 @@
 #
 
 class Routing::DestinationNextRate < Yeti::ActiveRecord
-
-  self.table_name='class4.destination_next_rates'
+  self.table_name = 'class4.destination_next_rates'
 
   validates_presence_of :destination
   validates_presence_of :next_rate,
@@ -31,7 +32,6 @@ class Routing::DestinationNextRate < Yeti::ActiveRecord
   validates_numericality_of :initial_interval, :next_interval, greater_than: 0 # we have DB constraints for this
   validates_numericality_of :next_rate, :initial_rate, :connect_fee
 
-
   belongs_to :destination, class_name: 'Routing::Destination'
 
   scope :not_applied, -> { where(applied: false) }
@@ -39,10 +39,7 @@ class Routing::DestinationNextRate < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  scope :ready_for_apply, -> {
+  scope :ready_for_apply, lambda {
     not_applied.where('apply_time < ?', Time.now.utc).preload(:destination)
   }
-
-
 end
-

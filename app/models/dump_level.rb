@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: dump_level
@@ -10,5 +12,4 @@
 
 class DumpLevel < ActiveRecord::Base
   self.table_name = 'dump_level'
-
 end

@@ -1,5 +1,6 @@
-class ReportRealtimeTerminationDistributionDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class ReportRealtimeTerminationDistributionDecorator < BillingDecorator
   delegate_all
   decorates Report::Realtime::TerminationDistribution
 
@@ -42,5 +43,4 @@ class ReportRealtimeTerminationDistributionDecorator < BillingDecorator
   def decorated_routing_delay
     avg_routing_delay.nil? ? nil : "#{avg_routing_delay.round(4)} (#{min_routing_delay.round(4)}..#{max_routing_delay.round(4)})"
   end
-
 end

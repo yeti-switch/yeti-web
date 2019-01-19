@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :admin_user do
     sequence(:username) { |n| "admin#{n}" }
@@ -10,5 +12,4 @@ FactoryGirl.define do
       end
     end
   end
-
 end

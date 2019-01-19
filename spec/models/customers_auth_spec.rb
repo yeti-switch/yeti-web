@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe CustomersAuth, type: :model do
-
   shared_examples :it_validates_array_elements do |*columns|
     columns.each do |column_name|
       # uniquness
@@ -13,25 +14,21 @@ RSpec.describe CustomersAuth, type: :model do
     end
   end
 
-
   context '#validations' do
-
     it do
       should validate_numericality_of(:capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     end
-
 
     context 'validate Routing Tag' do
       include_examples :test_model_with_tag_action
     end
 
     context 'validate match condition attributes' do
-
       include_examples :it_validates_array_elements,
-        :ip,
-        :dst_prefix, :src_prefix,
-        :uri_domain, :from_domain, :to_domain,
-        :x_yeti_auth
+                       :ip,
+                       :dst_prefix, :src_prefix,
+                       :uri_domain, :from_domain, :to_domain,
+                       :x_yeti_auth
     end
 
     context 'ip' do
@@ -77,7 +74,5 @@ RSpec.describe CustomersAuth, type: :model do
         expect(subject.pluck(:id)).to match_array([])
       end
     end
-
   end
-
 end

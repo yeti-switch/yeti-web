@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register System::LnpResolver do
   actions :all
-  menu parent: "System", label: "LNP resolvers", priority: 130
+  menu parent: 'System', label: 'LNP resolvers', priority: 130
   config.batch_actions = false
   permit_params :name, :address, :port
 
@@ -23,5 +25,4 @@ ActiveAdmin.register System::LnpResolver do
     end
     f.actions
   end
-
 end

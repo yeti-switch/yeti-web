@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :auth_log, class: Cdr::AuthLog do
     request_time                { 1.minute.ago }
-    code                        {200}
+    code                        { 200 }
     reason 'OK'
     internal_reason 'Response matched'
     origination_ip '1.1.1.1'
@@ -14,7 +16,7 @@ FactoryGirl.define do
     realm 'Realm1'
     request_method 'INVITE'
     call_id '2b8a45f5730c1b3459a00b9c322a79da'
-    success                     true
+    success true
 
     transport_protocol { Equipment::TransportProtocol.take }
     origination_protocol { Equipment::TransportProtocol.take }
@@ -30,10 +32,9 @@ FactoryGirl.define do
       id { Cdr::AuthLog.connection.select_value("SELECT nextval('auth_log.auth_log_id_seq')").to_i }
     end
 
-    before(:create) do |record, evaluator|
+    before(:create) do |_record, _evaluator|
       # Create partition for current+next monthes if not exists
       Cdr::AuthLogTable.add_partition
     end
-
   end
 end

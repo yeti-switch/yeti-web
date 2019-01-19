@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register DisconnectPolicyCode do
-  menu parent: "Equipment",  priority: 81
+  menu parent: 'Equipment', priority: 81
 
   config.batch_actions = false
 
@@ -18,10 +20,10 @@ ActiveAdmin.register DisconnectPolicyCode do
     column :policy
     column :code
 
-    column("Stop hunting", sortable: 'stop_hunting') do |r|
+    column('Stop hunting', sortable: 'stop_hunting') do |r|
       status_tag(r.stop_hunting.to_s, r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
     end
-    column("Pass reason to originator", sortable: 'pass_reason_to_originator') do |r|
+    column('Pass reason to originator', sortable: 'pass_reason_to_originator') do |r|
       status_tag(r.pass_reason_to_originator.to_s, r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
     end
     column :rewrited_code
@@ -29,20 +31,20 @@ ActiveAdmin.register DisconnectPolicyCode do
   end
 
   filter :id
-  filter :policy, input_html: {class: 'chosen'}
-  filter :code, input_html: {class: 'chosen'}
-  filter :stop_hunting, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :pass_reason_to_originator, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :policy, input_html: { class: 'chosen' }
+  filter :code, input_html: { class: 'chosen' }
+  filter :stop_hunting, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :pass_reason_to_originator, as: :select, collection: [['Yes', true], ['No', false]]
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :policy
       row :code
-      row("Stop hunting") do |r|
+      row('Stop hunting') do |r|
         status_tag(r.stop_hunting.to_s, r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
       end
-      row("Pass reason to originator") do |r|
+      row('Pass reason to originator') do |r|
         status_tag(r.pass_reason_to_originator.to_s, r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
       end
       row :rewrited_code
@@ -53,10 +55,10 @@ ActiveAdmin.register DisconnectPolicyCode do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
-      f.input :policy, input_html: {class: 'chosen'}
+      f.input :policy, input_html: { class: 'chosen' }
       f.input :code, as: :select,
-              collection: DisconnectCode.where(namespace_id: DisconnectCode::NS_SIP).order(:code),
-              input_html: {class: 'chosen'}
+                     collection: DisconnectCode.where(namespace_id: DisconnectCode::NS_SIP).order(:code),
+                     input_html: { class: 'chosen' }
       f.input :stop_hunting
       f.input :pass_reason_to_originator
       f.input :rewrited_code
@@ -64,5 +66,4 @@ ActiveAdmin.register DisconnectPolicyCode do
     end
     f.actions
   end
-
 end

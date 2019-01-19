@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Lnp::Cache do
   menu parent: 'Routing', priority: 55, label: 'LNP Cache'
   actions :index, :show, :destroy
@@ -30,7 +32,7 @@ ActiveAdmin.register Lnp::Cache do
   filter :data
   filter :database
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :dst
@@ -42,5 +44,4 @@ ActiveAdmin.register Lnp::Cache do
       row :expires_at
     end
   end
-
 end

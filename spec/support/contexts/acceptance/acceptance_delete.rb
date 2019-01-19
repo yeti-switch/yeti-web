@@ -1,7 +1,8 @@
-RSpec.shared_context :acceptance_delete do |namespace: nil, type:|
+# frozen_string_literal: true
 
+RSpec.shared_context :acceptance_delete do |namespace: nil, type:|
   resource_path = begin
-                    str = "/api/rest/admin"
+                    str = '/api/rest/admin'
                     str += "/#{namespace}" if namespace
                     str + "/#{type}"
                   end
@@ -13,5 +14,4 @@ RSpec.shared_context :acceptance_delete do |namespace: nil, type:|
       expect(status).to eq(204)
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Routeset discriminators', type: :feature do
@@ -10,7 +12,7 @@ describe 'Create new Routeset discriminators', type: :feature do
   include_context :fill_form, 'new_routing_routeset_discriminator' do
     let(:attributes) do
       {
-          name: "test discriminator"
+        name: 'test discriminator'
       }
     end
 
@@ -19,9 +21,8 @@ describe 'Create new Routeset discriminators', type: :feature do
       expect(page).to have_css('.flash_notice', text: 'Routeset discriminator was successfully created.')
 
       expect(Routing::RoutesetDiscriminator.last).to have_attributes(
-                                   name: attributes[:name]
-                               )
+        name: attributes[:name]
+      )
     end
   end
-
 end

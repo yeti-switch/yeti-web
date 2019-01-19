@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Report::Realtime::OriginationPerformance do
   menu parent: 'Reports', label: 'Origination performance', priority: 102
   config.batch_actions = false
@@ -5,18 +7,17 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
   config.sort_order = 'customer_auth_id'
   actions :index
 
-
   decorate_with ReportRealtimeOriginationPerformanceDecorator
 
   filter :time_interval_eq, label: 'Time Interval',
-         as: :select,
-         collection: Report::Realtime::Base::INTERVALS,
-         input_html: {class: 'chosen'}, include_blank: false
+                            as: :select,
+                            collection: Report::Realtime::Base::INTERVALS,
+                            input_html: { class: 'chosen' }, include_blank: false
 
   filter :customer_id, label: 'Customer',
-         as: :select,
-         collection: proc { Contractor.select(:id, :name).reorder(:name) },
-         input_html: {class: 'chosen'}
+                       as: :select,
+                       collection: proc { Contractor.select(:id, :name).reorder(:name) },
+                       input_html: { class: 'chosen' }
 
   before_action only: [:index] do
     params[:q] ||= {}
@@ -28,7 +29,7 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
 
   controller do
     def scoped_collection
-      lenght=params[:q][:time_interval_eq].to_i
+      lenght = params[:q][:time_interval_eq].to_i
       super.detailed_scope(lenght)
     end
   end
@@ -42,29 +43,14 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
       end
     end
 
-    column :cps, sortable: :cps do |c|
-      c.decorated_cps
-    end
-    column 'Offered load(Erlang)', :offered_load, sortable: :offered_load do |c|
-      c.decorated_offered_load
-    end
-    column :routing_delay, sortable: :avg_routing_delay do |c|
-      c.decorated_routing_delay
-
-    end
-    column :calls_duration, sortable: :calls_duration do |c|
-      c.decorated_calls_duration
-    end
+    column :cps, sortable: :cps, &:decorated_cps
+    column 'Offered load(Erlang)', :offered_load, sortable: :offered_load, &:decorated_offered_load
+    column :routing_delay, sortable: :avg_routing_delay, &:decorated_routing_delay
+    column :calls_duration, sortable: :calls_duration, &:decorated_calls_duration
 
     column :calls_count, sortable: :calls_count
     column :termination_attempts_count, sortable: :termination_attempts_count
-    column :acd, sortable: :acd do |c|
-      c.decorated_acd
-    end
-    column :asr, sortable: :asr do |c|
-      c.decorated_asr
-    end
+    column :acd, sortable: :acd, &:decorated_acd
+    column :asr, sortable: :asr, &:decorated_asr
   end
-
-
 end

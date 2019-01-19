@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::ContactResource < ::BaseResource
   model_name 'Billing::Contact'
 

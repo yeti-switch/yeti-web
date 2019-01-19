@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 module ResourceDSL
   module BatchActionUpdate
-
-    def batch_update_attributes attributes_names
-
-      batch_action :change_attributes, form: -> {
+    def batch_update_attributes(attributes_names)
+      batch_action :change_attributes, form: lambda {
         {
-            attribute: attributes_names,
-            value: :text
+          attribute: attributes_names,
+          value: :text
         }
       } do |ids, inputs|
         begin
@@ -19,7 +19,6 @@ module ResourceDSL
         end
         redirect_back fallback_location: root_path
       end
-
     end
   end
 end

@@ -1,5 +1,6 @@
-RSpec.shared_context :login_as_admin do
+# frozen_string_literal: true
 
+RSpec.shared_context :login_as_admin do
   let(:admin_user) { create :admin_user }
 
   before do

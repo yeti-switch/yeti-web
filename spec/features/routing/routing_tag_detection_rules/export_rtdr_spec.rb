@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export RoutingTagDetectionRule', type: :feature do
@@ -33,7 +35,7 @@ describe 'Export RoutingTagDetectionRule', type: :feature do
         ['Dst area name', item.dst_area.name],
         ['Src prefix', item.src_prefix],
         ['Dst prefix', item.dst_prefix],
-        ["Routing tag mode name", "AND"],
+        ['Routing tag mode name', 'AND'],
         ['Tag action name', item.tag_action.name],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', ')]
       ]

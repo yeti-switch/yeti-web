@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.customers_auth_normalized
@@ -61,8 +63,8 @@ class CustomersAuthNormalized < Yeti::ActiveRecord
 
   # attributes which are copyed "as is" without convertation
   def self.shadow_column_names
-    skip_columns = [:id, :customers_auth_id] +
-                    CustomersAuth::CONST::MATCH_CONDITION_ATTRIBUTES
+    skip_columns = %i[id customers_auth_id] +
+                   CustomersAuth::CONST::MATCH_CONDITION_ATTRIBUTES
     column_names.map(&:to_sym) - skip_columns
   end
 
@@ -72,5 +74,4 @@ class CustomersAuthNormalized < Yeti::ActiveRecord
     #   each...
     # end
   end
-
 end

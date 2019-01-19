@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Routing Group', type: :feature do
@@ -10,7 +12,7 @@ describe 'Create new Routing Group', type: :feature do
   include_context :fill_form, 'new_routing_group' do
     let(:attributes) do
       {
-          name: "test routing group",
+        name: 'test routing group'
       }
     end
 
@@ -19,9 +21,8 @@ describe 'Create new Routing Group', type: :feature do
       expect(page).to have_css('.flash_notice', text: 'Routing group was successfully created.')
 
       expect(RoutingGroup.last).to have_attributes(
-                                       name: attributes[:name]
-                                   )
+        name: attributes[:name]
+      )
     end
   end
-
 end

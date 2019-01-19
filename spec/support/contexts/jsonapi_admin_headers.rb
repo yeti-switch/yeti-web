@@ -1,5 +1,6 @@
-RSpec.shared_context :jsonapi_admin_headers do
+# frozen_string_literal: true
 
+RSpec.shared_context :jsonapi_admin_headers do
   let(:user) { create :admin_user }
 
   let(:auth_token) do

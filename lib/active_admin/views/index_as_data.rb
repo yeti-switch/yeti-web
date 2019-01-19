@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module ActiveAdmin
   module Views
     class IndexAsData < ActiveAdmin::Component
-
       def self.index_name
-         "data"
+        'data'
       end
 
       def build(page_presenter, collection)
@@ -12,7 +13,6 @@ module ActiveAdmin
 
         instance_exec(@collection, &@page_presenter.block)
       end
-
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -7,20 +9,20 @@ resource 'Routing NumberlistItems' do
   let(:collection) { create_list(:numberlist_item, 2) }
   let(:record) { create(:numberlist_item) }
 
-  required_params = %i(key)
+  required_params = %i[key]
 
-  optional_params = %i(
+  optional_params = %i[
     src_rewrite_rule src_rewrite_result
     dst_rewrite_rule dst_rewrite_result
     tag_action_value
-  )
+  ]
 
-  required_relationships = %i(numberlist)
+  required_relationships = %i[numberlist]
 
-  optional_relationships = %i(
+  optional_relationships = %i[
     action
     tag-action
-  )
+  ]
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'numberlist-items'
   include_context :acceptance_delete, namespace: 'routing', type: 'numberlist-items'
@@ -53,5 +55,4 @@ resource 'Routing NumberlistItems' do
       expect(status).to eq(200)
     end
   end
-
 end

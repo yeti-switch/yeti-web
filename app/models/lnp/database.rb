@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.lnp_databases
@@ -23,20 +25,17 @@ class Lnp::Database < Yeti::ActiveRecord
 
   validates_numericality_of :timeout, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
 
-
   def display_name
-    "#{self.name} | #{self.id}"
+    "#{name} | #{id}"
   end
-  
+
   def test_db(destination)
     transaction do
-      self.fetch_sp_val("select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(0,0)") #loading configuration
-      d=self.fetch_sp("select lrn, tag from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.lnp_resolve_tagged(?::smallint,?::varchar)",
-                                      self.id,
-                                      destination
-      )[0]
+      fetch_sp_val("select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(0,0)") # loading configuration
+      d = fetch_sp("select lrn, tag from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.lnp_resolve_tagged(?::smallint,?::varchar)",
+                   id,
+                   destination)[0]
       OpenStruct.new(d)
     end
   end
-
 end

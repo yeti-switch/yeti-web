@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
-
   let(:admin_user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: admin_user.id }).token }
 
@@ -37,9 +38,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it 'total-count should be present in meta info' do
       subject
       expect(JSON.parse(response.body)['meta']).to eq(
-        {
-          'total-count' => cdrs.size
-        }
+        'total-count' => cdrs.size
       )
     end
 
@@ -81,7 +80,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           { 'customer-acc-external-id-eq' => cdr.customer_acc_external_id }
         end
         let!(:cdr) do
-          create :cdr, :with_id, customer_acc_external_id: 123123
+          create :cdr, :with_id, customer_acc_external_id: 123_123
         end
         it 'only desired cdrs should be present' do
           subject
@@ -265,7 +264,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
       }
     end
     let(:includes) do
-      %w(rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw destination-rate-policy routing-plan country network)
+      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw destination-rate-policy routing-plan country network]
     end
 
     it 'http status should eq 200' do
@@ -458,7 +457,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'network' => hash_including(
               'data' => nil
             )
-          ),
+          )
         )
       )
     end

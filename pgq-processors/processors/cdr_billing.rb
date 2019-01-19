@@ -1,14 +1,16 @@
-class  CdrBilling < Pgq::ConsumerGroup
+# frozen_string_literal: true
+
+class CdrBilling < Pgq::ConsumerGroup
   @consumer_name = 'cdr_billing'
 
   def initialize(logger, queue, consumer, options)
     super
-    Dir['models/*.rb'].each { |file| require_relative File.join("../", file) }
+    Dir['models/*.rb'].each { |file| require_relative File.join('../', file) }
     p options
-    key=options['mode']
+    key = options['mode']
     ::RoutingBase.establish_connection options['databases'][key]
 
-    #dbkey = @config['mode'] || 'development'
+    # dbkey = @config['mode'] || 'development'
   end
 
   def perform_events(events)
@@ -19,9 +21,8 @@ class  CdrBilling < Pgq::ConsumerGroup
     perform_group(group)
   end
 
-    # {'type' => [events]}
+  # {'type' => [events]}
   def perform_group(group)
-    ::RoutingBase.execute_sp('SELECT * FROM billing.bill_cdr_batch(?, ?)', @batch_id, self.coder.dump(group))
+    ::RoutingBase.execute_sp('SELECT * FROM billing.bill_cdr_batch(?, ?)', @batch_id, coder.dump(group))
   end
-
 end

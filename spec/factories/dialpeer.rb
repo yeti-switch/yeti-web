@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :dialpeer, class: Dialpeer do
     sequence(:external_id)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -11,7 +13,7 @@ resource 'Rates', document: :customer_v1 do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
   let(:type) { 'rates' }
 
-  required_params = %i(name)
+  required_params = %i[name]
 
   let(:customers_auth) do
     create(:customers_auth, customer_id: customer.id)
@@ -33,5 +35,4 @@ resource 'Rates', document: :customer_v1 do
       expect(status).to eq(200)
     end
   end
-
 end

@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register CustomersAuth do
-
-
-  menu parent: "Routing", priority: 10
+  menu parent: 'Routing', priority: 10
 
   acts_as_audit
   acts_as_clone
@@ -37,9 +37,9 @@ ActiveAdmin.register CustomersAuth do
   decorate_with CustomersAuthDecorator
 
   acts_as_export :id, :enabled, :reject_calls, :name,
-                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || "" }],
+                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || '' }],
                  :ip,
-                 [:pop_name, proc { |row| row.pop.try(:name) || "" }],
+                 [:pop_name, proc { |row| row.pop.try(:name) || '' }],
                  :src_prefix,
                  :src_number_min_length, :src_number_max_length,
                  :dst_prefix,
@@ -47,29 +47,29 @@ ActiveAdmin.register CustomersAuth do
                  :uri_domain, :from_domain, :to_domain,
                  :x_yeti_auth,
                  [:customer_name, proc { |row| row.customer.try(:name) }],
-                 [:account_name, proc { |row| row.account.try(:name) || "" }],
+                 [:account_name, proc { |row| row.account.try(:name) || '' }],
                  :check_account_balance,
-                 [:gateway_name, proc { |row| row.gateway.try(:name) || "" }],
+                 [:gateway_name, proc { |row| row.gateway.try(:name) || '' }],
                  :require_incoming_auth,
-                 [:rateplan_name, proc { |row| row.rateplan.try(:name) || "" }],
-                 [:routing_plan_name, proc { |row| row.routing_plan.try(:name) || "" }],
-                 [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) || "" }],
-                 [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) || "" }],
-                 [:dump_level_name, proc { |row| row.dump_level.try(:name) || "" }],
+                 [:rateplan_name, proc { |row| row.rateplan.try(:name) || '' }],
+                 [:routing_plan_name, proc { |row| row.routing_plan.try(:name) || '' }],
+                 [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) || '' }],
+                 [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) || '' }],
+                 [:dump_level_name, proc { |row| row.dump_level.try(:name) || '' }],
                  :enable_audio_recording,
                  :capacity,
                  :allow_receive_rate_limit,
                  :send_billing_information,
-                 [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) || "" }],
+                 [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) || '' }],
                  :diversion_rewrite_rule, :diversion_rewrite_result,
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
-                 [:radius_auth_profile_name, proc { |row| row.radius_auth_profile.try(:name) || "" }],
+                 [:radius_auth_profile_name, proc { |row| row.radius_auth_profile.try(:name) || '' }],
                  :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
                  :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
-                 [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || "" }],
-                 [:tag_action_name, proc { |row| row.tag_action.try(:name) || "" }],
+                 [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || '' }],
+                 [:tag_action_name, proc { |row| row.tag_action.try(:name) || '' }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
 
   acts_as_import resource_class: Importing::CustomersAuth,
@@ -95,7 +95,7 @@ ActiveAdmin.register CustomersAuth do
                 :enable_audio_recording,
                 :transport_protocol_id,
                 :tag_action_id, tag_action_value: []
-                #, :enable_redirect, :redirect_method, :redirect_to
+  # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
@@ -110,8 +110,8 @@ ActiveAdmin.register CustomersAuth do
   end
 
   collection_action :search_for_debug do
-    src_prefix=params[:src_prefix].to_s
-    dst_prefix=params[:dst_prefix].to_s
+    src_prefix = params[:src_prefix].to_s
+    dst_prefix = params[:dst_prefix].to_s
     @ca = CustomersAuth.search_for_debug(src_prefix, dst_prefix)
     render plain: view_context.options_from_collection_for_select(@ca, :id, :display_name_for_debug)
   end
@@ -123,7 +123,7 @@ ActiveAdmin.register CustomersAuth do
     ul do
       li "#{resource.normalized_copies.count} copies"
     end
-    link_to "View copies", customers_auth_normalized_copies_path(resource)
+    link_to 'View copies', customers_auth_normalized_copies_path(resource)
   end
 
   index do
@@ -139,11 +139,11 @@ ActiveAdmin.register CustomersAuth do
     column :pop
     column :src_prefix
     column :src_number_length do |c|
-      c.src_number_min_length==c.src_number_max_length ? "#{c.src_number_min_length}" : "#{c.src_number_min_length}..#{c.src_number_max_length}"
+      c.src_number_min_length == c.src_number_max_length ? c.src_number_min_length.to_s : "#{c.src_number_min_length}..#{c.src_number_max_length}"
     end
     column :dst_prefix
     column :dst_number_length do |c|
-      c.dst_number_min_length==c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
+      c.dst_number_min_length == c.dst_number_max_length ? c.dst_number_min_length.to_s : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
     column :uri_domain
     column :from_domain
@@ -204,21 +204,21 @@ ActiveAdmin.register CustomersAuth do
   filter :id
   filter :external_id
   filter :name
-  filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :reject_calls, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :customer, input_html: {class: 'chosen'}
-  filter :account, input_html: {class: 'chosen'}
-  filter :gateway, input_html: {class: 'chosen'}
-  filter :rateplan, input_html: {class: 'chosen'}
-  filter :routing_plan, input_html: {class: 'chosen'}
-  filter :dump_level, as: :select, collection: DumpLevel.select([:id, :name]).reorder(:id)
-  filter :enable_audio_recording, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :customer, input_html: { class: 'chosen' }
+  filter :account, input_html: { class: 'chosen' }
+  filter :gateway, input_html: { class: 'chosen' }
+  filter :rateplan, input_html: { class: 'chosen' }
+  filter :routing_plan, input_html: { class: 'chosen' }
+  filter :dump_level, as: :select, collection: DumpLevel.select(%i[id name]).reorder(:id)
+  filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
   filter :transport_protocol
   filter :ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
          label: I18n.t('activerecord.attributes.customers_auth.ip')
-  filter :pop, input_html: {class: 'chosen'}
+  filter :pop, input_html: { class: 'chosen' }
   filter :src_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.src_prefix')
   filter :dst_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.dst_prefix')
   filter :uri_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.uri_domain')
@@ -236,38 +236,37 @@ ActiveAdmin.register CustomersAuth do
           f.input :reject_calls
           f.input :customer,
                   input_html: {
-                      class: 'chosen',
-                      onchange: remote_chosen_request(:get, with_contractor_accounts_path, {contractor_id: "$(this).val()"}, :customers_auth_account_id) +
-                          remote_chosen_request(:get, for_origination_gateways_path, {contractor_id: "$(this).val()"}, :customers_auth_gateway_id)
+                    class: 'chosen',
+                    onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :customers_auth_account_id) +
+                              remote_chosen_request(:get, for_origination_gateways_path, { contractor_id: '$(this).val()' }, :customers_auth_gateway_id)
                   }
           f.input :account, collection: (f.object.customer.nil? ? [] : f.object.customer.accounts),
-                  include_blank: true,
-                  input_html: {class: 'chosen'}
+                            include_blank: true,
+                            input_html: { class: 'chosen' }
           f.input :check_account_balance
 
           f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.for_origination_gateways),
-                  include_blank: true,
-                  input_html: {class: 'chosen'}
+                            include_blank: true,
+                            input_html: { class: 'chosen' }
 
           f.input :require_incoming_auth
 
-          f.input :rateplan, input_html: {class: 'chosen'}
-          f.input :routing_plan, input_html: {class: 'chosen'}
+          f.input :rateplan, input_html: { class: 'chosen' }
+          f.input :routing_plan, input_html: { class: 'chosen' }
 
-
-          f.input :dst_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
-          f.input :src_numberlist, input_html: {class: 'chosen'}, include_blank: "None"
-          f.input :dump_level, as: :select, include_blank: false, collection: DumpLevel.select([:id, :name]).reorder(:id)
+          f.input :dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :dump_level, as: :select, include_blank: false, collection: DumpLevel.select(%i[id name]).reorder(:id)
           f.input :enable_audio_recording
           f.input :capacity
           f.input :allow_receive_rate_limit
           f.input :send_billing_information
         end
 
-        f.inputs "Match conditions" do
-          f.input :transport_protocol, as: :select, include_blank: "Any"
+        f.inputs 'Match conditions' do
+          f.input :transport_protocol, as: :select, include_blank: 'Any'
           f.input :ip, as: :array_of_strings
-          f.input :pop, as: :select, include_blank: "Any", input_html: {class: 'chosen'}
+          f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
           f.input :src_prefix, as: :array_of_strings
           f.input :src_number_min_length
           f.input :src_number_max_length
@@ -313,16 +312,14 @@ ActiveAdmin.register CustomersAuth do
         f.inputs do
           f.input :tag_action
           f.input :tag_action_value, as: :select,
-            collection: Routing::RoutingTag.all,
-            multiple: true,
-            include_hidden: false,
-            input_html: { class: 'chosen' }
+                                     collection: Routing::RoutingTag.all,
+                                     multiple: true,
+                                     include_hidden: false,
+                                     input_html: { class: 'chosen' }
         end
       end
-
     end
     f.actions
-
   end
 
   show do |s|
@@ -356,9 +353,8 @@ ActiveAdmin.register CustomersAuth do
           row :capacity
           row :allow_receive_rate_limit
           row :send_billing_information
-
         end
-        panel "Match conditions" do
+        panel 'Match conditions' do
           attributes_table_for s do
             row :transport_protocol
             row :ip
@@ -400,7 +396,6 @@ ActiveAdmin.register CustomersAuth do
           row :dst_number_radius_rewrite_result
           row :radius_accounting_profile
         end
-
       end
 
       tab :routing_tags do
@@ -410,9 +405,5 @@ ActiveAdmin.register CustomersAuth do
         end
       end
     end
-
-
   end
-
-
 end

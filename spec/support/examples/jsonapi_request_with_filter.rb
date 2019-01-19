@@ -1,5 +1,6 @@
-RSpec.shared_examples :jsonapi_request_with_filter do
+# frozen_string_literal: true
 
+RSpec.shared_examples :jsonapi_request_with_filter do
   let(:attr_value) { 'Default String value to make testing easier' }
   let(:request_filters) { { attr_name => attr_value.to_s } }
 

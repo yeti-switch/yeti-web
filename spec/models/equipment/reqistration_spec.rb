@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: registrations
@@ -21,7 +23,6 @@
 #  transport_protocol_id       :integer          default(1), not null
 #  proxy_transport_protocol_id :integer          default(1), not null
 #
-
 
 require 'spec_helper'
 

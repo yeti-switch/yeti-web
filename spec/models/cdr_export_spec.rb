@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cdr_exports
@@ -15,7 +17,6 @@
 require 'spec_helper'
 
 describe CdrExport, type: :model do
-
   describe '#export_sql' do
     subject do
       cdr_export.export_sql
@@ -24,7 +25,7 @@ describe CdrExport, type: :model do
       FactoryGirl.create(:cdr_export, fields: fields, filters: filters)
     end
     let(:fields) do
-      ['success', 'id']
+      %w[success id]
     end
     let(:filters) do
       {
@@ -38,22 +39,21 @@ describe CdrExport, type: :model do
 
     it 'SQL should be valid' do
       sql = [
-        "SELECT success, id",
+        'SELECT success, id',
         'FROM "cdr"."cdr"',
-        "WHERE",
+        'WHERE',
         "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
-        "AND",
+        'AND',
         "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
-        "AND",
-        "\"cdr\".\"cdr\".\"success\" = TRUE",
-        "AND",
-        "\"cdr\".\"cdr\".\"failed_resource_type_id\" = 3",
-        "AND",
+        'AND',
+        '"cdr"."cdr"."success" = TRUE',
+        'AND',
+        '"cdr"."cdr"."failed_resource_type_id" = 3',
+        'AND',
         "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%')",
-        "ORDER BY time_start desc"
+        'ORDER BY time_start desc'
       ]
       expect(subject).to eq(sql.join(' '))
     end
   end
-
 end

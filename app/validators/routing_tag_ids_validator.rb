@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # NOTICE: can be rewritten as `ActiveModel::Validator`
 # http://guides.rubyonrails.org/active_record_validations.html#custom-validators
 class RoutingTagIdsValidator < ActiveModel::Validator

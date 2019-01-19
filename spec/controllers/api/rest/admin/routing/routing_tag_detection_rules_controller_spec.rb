@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   let(:resource_type) { 'routing-tag-detection-rules' }
@@ -55,8 +56,8 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
     let(:relationships) do
       {
         'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
-        'src-area': wrap_relationship(:'areas', area_1.id),
-        'dst-area': wrap_relationship(:'areas', area_2.id)
+        'src-area': wrap_relationship(:areas, area_1.id),
+        'dst-area': wrap_relationship(:areas, area_2.id)
       }
     end
 
@@ -65,16 +66,18 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
   end
 
   describe 'PUT update' do
-    before { put :update, params: {
-      id: record.to_param, data: { type: resource_type,
-                                   id: record.to_param,
-                                   relationships: relationships}
-    } }
+    before do
+      put :update, params: {
+        id: record.to_param, data: { type: resource_type,
+                                     id: record.to_param,
+                                     relationships: relationships }
+      }
+    end
     let(:relationships) do
       {
         'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
-        'src-area': wrap_relationship(:'areas', area_1.id),
-        'dst-area': wrap_relationship(:'areas', area_2.id)
+        'src-area': wrap_relationship(:areas, area_1.id),
+        'dst-area': wrap_relationship(:areas, area_2.id)
       }
     end
 

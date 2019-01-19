@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Routing::RoutingTagModesController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   let(:resource_type) { 'routing-tag-modes' }
@@ -32,7 +33,7 @@ describe Api::Rest::Admin::Routing::RoutingTagModesController, type: :controller
   describe 'POST create' do
     subject do
       post :create, params: { data: { type: resource_type,
-                            attributes: { name: 'Name_1' } } }
+                                      attributes: { name: 'Name_1' } } }
     end
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
@@ -41,8 +42,8 @@ describe Api::Rest::Admin::Routing::RoutingTagModesController, type: :controller
   describe 'PUT update' do
     subject do
       put :update, params: { id: record.to_param, data: { type: resource_type,
-                                                id: record.id.to_i,
-                                                attributes: { name: 'Update name_1' } } }
+                                                          id: record.id.to_i,
+                                                          attributes: { name: 'Update name_1' } } }
     end
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
@@ -55,5 +56,4 @@ describe Api::Rest::Admin::Routing::RoutingTagModesController, type: :controller
 
     it { expect { subject }.to raise_error(ActionController::UrlGenerationError) }
   end
-
 end

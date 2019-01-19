@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stats.active_call_orig_gateways_hourly
@@ -12,8 +14,8 @@
 #
 
 class Stats::AggActiveCallOrigGateway < Stats::Base
-  self.table_name = "stats.active_call_orig_gateways_hourly"
+  self.table_name = 'stats.active_call_orig_gateways_hourly'
 
   include ::AggChart
-   self.chart_entity_column = :gateway_id
+  self.chart_entity_column = :gateway_id
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: dialpeers_stats
@@ -18,5 +20,4 @@
 
 class DialpeersStat < ActiveRecord::Base
   belongs_to :dialpeer
-
 end

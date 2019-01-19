@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cdr_exports
@@ -17,10 +19,10 @@ class CdrExport < Yeti::ActiveRecord
   self.table_name = 'cdr_exports'
   self.store_full_sti_class = false
 
-  STATUS_PENDING = 'Pending'.freeze
-  STATUS_COMPLETED = 'Completed'.freeze
-  STATUS_FAILED = 'Failed'.freeze
-  STATUS_DELETED = 'Deleted'.freeze
+  STATUS_PENDING = 'Pending'
+  STATUS_COMPLETED = 'Completed'
+  STATUS_FAILED = 'Failed'
+  STATUS_DELETED = 'Deleted'
   STATUSES = [
     STATUS_PENDING,
     STATUS_COMPLETED,
@@ -28,9 +30,9 @@ class CdrExport < Yeti::ActiveRecord
     STATUS_DELETED
   ].freeze
 
-  #need for activeadmin form
+  # need for activeadmin form
   attr_accessor :customer_acc_id_eq,
-    :is_last_cdr_eq, :time_start_gteq, :time_start_lteq
+                :is_last_cdr_eq, :time_start_gteq, :time_start_lteq
 
   validates_presence_of :status, :fields, :filters
   validate do
@@ -59,12 +61,12 @@ class CdrExport < Yeti::ActiveRecord
   end
 
   after_create do
-    #dj which exports CDRs into CSV
-    Worker::CdrExportJob.perform_later(self.id)
+    # dj which exports CDRs into CSV
+    Worker::CdrExportJob.perform_later(id)
   end
 
   after_update if: proc { saved_change_to_attribute?(:status) && deleted? } do
-    Worker::RemoveCdrExportFileJob.perform_later(self.id)
+    Worker::RemoveCdrExportFileJob.perform_later(id)
   end
 
   alias_attribute :export_type, :type
@@ -82,23 +84,23 @@ class CdrExport < Yeti::ActiveRecord
   end
 
   def self.allowed_filters
-    [
-      'time_start_lteq',
-      'time_start_gteq',
-      'success_eq',
-      'customer_auth_external_id_eq',
-      'failed_resource_type_id_eq',
-      'src_prefix_in_contains',
-      'dst_prefix_in_contains',
-      'src_prefix_routing_contains',
-      'dst_prefix_routing_contains',
-      'customer_acc_external_id_eq',
-      'is_last_cdr_eq',
-      'customer_acc_id_eq'
+    %w[
+      time_start_lteq
+      time_start_gteq
+      success_eq
+      customer_auth_external_id_eq
+      failed_resource_type_id_eq
+      src_prefix_in_contains
+      dst_prefix_in_contains
+      src_prefix_routing_contains
+      dst_prefix_routing_contains
+      customer_acc_external_id_eq
+      is_last_cdr_eq
+      customer_acc_id_eq
     ]
   end
 
-  #any cdr columns
+  # any cdr columns
   def self.allowed_fields
     Cdr::Cdr.column_names
   end

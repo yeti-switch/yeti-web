@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.gateway_media_encryption_modes
@@ -7,6 +9,5 @@
 #
 
 class Equipment::GatewayMediaEncryptionMode < Yeti::ActiveRecord
-  self.table_name='class4.gateway_media_encryption_modes'
-
+  self.table_name = 'class4.gateway_media_encryption_modes'
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Numberlist Item', type: :feature do
@@ -40,4 +42,3 @@ describe 'Export Numberlist Item', type: :feature do
     )
   end
 end
-

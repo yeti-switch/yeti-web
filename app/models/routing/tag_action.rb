@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.tag_actions
@@ -10,10 +12,10 @@ class Routing::TagAction < ActiveRecord::Base
   self.table_name = 'class4.tag_actions'
 
   module CONST
-    CLEAR_ID = 1.freeze
-    REMOVE_ID = 2.freeze
-    APPEND_ID = 3.freeze
-    INTERSECTION_ID = 4.freeze
+    CLEAR_ID = 1
+    REMOVE_ID = 2
+    APPEND_ID = 3
+    INTERSECTION_ID = 4
 
     freeze
   end

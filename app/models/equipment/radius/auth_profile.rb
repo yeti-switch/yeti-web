@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.radius_auth_profiles
@@ -13,21 +15,19 @@
 #
 
 class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
-  self.table_name='class4.radius_auth_profiles'
+  self.table_name = 'class4.radius_auth_profiles'
   has_paper_trail class_name: 'AuditLogItem'
 
-
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :radius_auth_profile_id, dependent: :restrict_with_error
-  has_many :avps, class_name: 'Equipment::Radius::AuthProfileAttribute', foreign_key: :profile_id,  inverse_of: :profile , dependent: :destroy
-
+  has_many :avps, class_name: 'Equipment::Radius::AuthProfileAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy
 
   accepts_nested_attributes_for :avps, allow_destroy: true
 
-  TIMEOUT_MIN=1
-  TIMEOUT_MAX=2000
+  TIMEOUT_MIN = 1
+  TIMEOUT_MAX = 2000
 
-  ATTEMPTS_MIN=1
-  ATTEMPTS_MAX=10
+  ATTEMPTS_MIN = 1
+  ATTEMPTS_MAX = 10
 
   validates_uniqueness_of :name
   validates_presence_of :name, :server, :port, :secret, :timeout, :attempts
@@ -35,7 +35,6 @@ class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
   validates_numericality_of :timeout, greater_than_or_equal_to: TIMEOUT_MIN, less_than_or_equal_to: TIMEOUT_MAX, allow_nil: true, only_integer: true
   validates_numericality_of :attempts, greater_than_or_equal_to: ATTEMPTS_MIN, less_than_or_equal_to: ATTEMPTS_MAX, allow_nil: true, only_integer: true
   validates_numericality_of :port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
-
 
   before_save do
     Event.reload_radius_auth_profiles
@@ -46,17 +45,16 @@ class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
   end
 
   def set_reject_on_error
-    self.reject_on_error=true
+    self.reject_on_error = true
     save!
   end
 
   def unset_reject_on_error
-    self.reject_on_error=false
+    self.reject_on_error = false
     save!
   end
 
   def display_name
     "#{id} | #{name}"
   end
-
 end

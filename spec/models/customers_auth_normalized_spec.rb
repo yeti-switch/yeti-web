@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe CustomersAuthNormalized, type: :model do
-
   shared_examples :test_normalized_copy_count do |copy_count|
     it 'creates only one CustomersAuth' do
       expect { subject }.to change { CustomersAuth.count }.by(1)
@@ -18,9 +19,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
     end
   end
 
-
   describe '#create' do
-
     subject { create(:customers_auth, attributes) }
 
     context 'when all attributes are ampty (default DB values)' do
@@ -103,7 +102,6 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       end
     end
 
-
     context 'when only SRC_PREFIXES is filled with several values' do
       let(:attributes) do
         {
@@ -185,7 +183,11 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       end
 
       it 'rollback all' do
-        subject rescue nil
+        begin
+          subject
+        rescue StandardError
+          nil
+        end
         expect(described_class.count).to eq(0)
         expect(CustomersAuth.count).to eq(0)
       end
@@ -209,13 +211,16 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       end
 
       it 'rollback all' do
-        subject rescue nil
+        begin
+          subject
+        rescue StandardError
+          nil
+        end
         expect(described_class.count).to eq(0)
         expect(CustomersAuth.count).to eq(0)
       end
     end
   end
-
 
   describe '#update' do
     let!(:record) do
@@ -230,7 +235,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
              x_yeti_auth: ['x-1', 'x-2'])
     end
 
-    let(:old_src_rewrite_rule) { 'old-value'  }
+    let(:old_src_rewrite_rule) { 'old-value' }
 
     subject { record.update!(attributes) }
 
@@ -280,22 +285,23 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       before do
         expect_any_instance_of(CustomersAuth)
           .to receive(:create_shadow_copy)
-                .and_raise(ActiveRecord::StatementInvalid, 'null value in column "customers_auth_id" violates not-null constraint')
+          .and_raise(ActiveRecord::StatementInvalid, 'null value in column "customers_auth_id" violates not-null constraint')
       end
 
       it 'rollback all' do
-        subject rescue nil
+        begin
+          subject
+        rescue StandardError
+          nil
+        end
         expect(described_class.where(src_rewrite_rule: old_src_rewrite_rule).count).to eq(128)
         expect(described_class.count).to eq(128)
         expect(record.reload).to have_attributes(src_rewrite_rule: old_src_rewrite_rule)
       end
     end
-
   end
 
-
   describe '#destroy' do
-
     before do
       @other_record = create(:customers_auth)
       @record = create(:customers_auth,
@@ -322,9 +328,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
         customers_auth_id: @other_record.id
       )
     end
-
   end
-
 
   describe '.column_names' do
     subject do
@@ -339,5 +343,4 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       expect(subject).to match_array(customers_auth_column_names)
     end
   end
-
 end

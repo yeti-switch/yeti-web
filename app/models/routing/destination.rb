@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.destinations
@@ -41,7 +43,7 @@ class Routing::Destination < Yeti::ActiveRecord
   belongs_to :rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :rate_policy_id
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :destination_id, dependent: :nullify
-  has_many :destination_next_rates, class_name:'Routing::DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
+  has_many :destination_next_rates, class_name: 'Routing::DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
 
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
@@ -56,13 +58,13 @@ class Routing::Destination < Yeti::ActiveRecord
 
   scope :low_quality, -> { where quality_alarm: true }
 
-  scope :where_customer, -> (id) do
+  scope :where_customer, lambda { |id|
     joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
-  end
+  }
 
-  scope :where_account, -> (id) do
+  scope :where_account, lambda { |id|
     joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
-  end
+  }
 
   validates_presence_of :rateplan, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
@@ -76,12 +78,11 @@ class Routing::Destination < Yeti::ActiveRecord
 
   validates_with RoutingTagIdsValidator
 
-
-#  validates_uniqueness_of :prefix, scope: [:rateplan_id]
+  #  validates_uniqueness_of :prefix, scope: [:rateplan_id]
   attr_accessor :batch_prefix
 
   after_initialize do
-    if self.new_record?
+    if new_record?
       self.connect_fee ||= 0
       self.initial_interval ||= 1
       self.next_interval ||= 1
@@ -94,38 +95,37 @@ class Routing::Destination < Yeti::ActiveRecord
 
   before_create do
     if batch_prefix.present?
-      prefixes = batch_prefix.gsub(' ', '').split(',').uniq
+      prefixes = batch_prefix.delete(' ').split(',').uniq
       while prefixes.length > 1
-        new_instance = self.dup
+        new_instance = dup
         new_instance.batch_prefix = nil
         new_instance.prefix = prefixes.pop
         new_instance.save!
       end
       self.prefix = prefixes.pop
-      self.detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
+      detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
     else
-      self.prefix = '' if self.prefix.nil?
-      self.detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
+      self.prefix = '' if prefix.nil?
+      detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
     end
   end
 
-   def display_name
-    "#{self.prefix} | #{self.id}"
-   end
-
+  def display_name
+    "#{prefix} | #{id}"
+  end
 
   def fire_alarm(stat)
     transaction do
       self.quality_alarm = true
-      self.save
+      save
       Notification::Alert.fire_quality_alarm(self, stat)
     end
   end
 
   def clear_quality_alarm
     transaction do
-      self.quality_alarm=false
-      self.save
+      self.quality_alarm = false
+      save
       Notification::Alert.clear_quality_alarm(self)
     end
   end
@@ -138,9 +138,8 @@ class Routing::Destination < Yeti::ActiveRecord
     valid_till > Time.now
   end
 
-  scope :routing_for_contains, lambda {
-                               #NEW logic, same as in routing procedures
-  |prx| where('destinations.id in (
+  scope :routing_for_contains, lambda { |prx|
+    where('destinations.id in (
       select id from
       (
         SELECT t_dst.id as id,
@@ -155,13 +154,11 @@ class Routing::Destination < Yeti::ActiveRecord
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
-    [
-        :routing_for_contains,
-        :routing_tag_ids_covers,
-        :tagged
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      routing_for_contains
+      routing_tag_ids_covers
+      tagged
     ]
   end
-
 end
-

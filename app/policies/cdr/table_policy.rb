@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cdr
   class TablePolicy < ::RolePolicy
     section 'Cdr/Table'
@@ -6,7 +8,5 @@ module Cdr
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

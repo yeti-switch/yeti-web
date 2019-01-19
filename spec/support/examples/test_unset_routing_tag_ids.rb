@@ -1,5 +1,6 @@
-RSpec.shared_examples :test_unset_routing_tag_ids do |factory: nil, controller_name:|
+# frozen_string_literal: true
 
+RSpec.shared_examples :test_unset_routing_tag_ids do |factory: nil, controller_name:|
   let(:tag) do
     create(:routing_tag, :ua)
   end
@@ -22,5 +23,4 @@ RSpec.shared_examples :test_unset_routing_tag_ids do |factory: nil, controller_n
     find('body.show') # wait page load
     expect(record.reload.routing_tag_ids).to be_empty
   end
-
 end

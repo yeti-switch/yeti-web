@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Reporter
   class Base < ::BaseService
     attr_reader :report, :options
@@ -10,9 +12,10 @@ module Reporter
       end
 
       def footer(column)
-        return unless self.footers
+        return unless footers
+
         column = column.is_a?(Array) ? column.first : column
-        self.footers[column]
+        footers[column]
       end
 
       def column_title(column)
@@ -34,18 +37,20 @@ module Reporter
 
     def save!
       return unless contacts.any?
-        contacts.each do |contact|
-          ::Log::EmailLog.create!(
-              contact_id: contact.id,
-              smtp_connection_id: contact.smtp_connection.id,
-              mail_to: contact.email,
-              mail_from: contact.smtp_connection.from_address,
-              subject: email_subject,
-              attachment_id: generate_attachments(csv_data),
-              msg: generate_mail_body(email_data)
-          ) if contact.smtp_connection
-        end
 
+      contacts.each do |contact|
+        next unless contact.smtp_connection
+
+        ::Log::EmailLog.create!(
+          contact_id: contact.id,
+          smtp_connection_id: contact.smtp_connection.id,
+          mail_to: contact.email,
+          mail_from: contact.smtp_connection.from_address,
+          subject: email_subject,
+          attachment_id: generate_attachments(csv_data),
+          msg: generate_mail_body(email_data)
+        )
+      end
     end
 
     def email_subject
@@ -71,10 +76,11 @@ module Reporter
 
     def generate_attachments(data)
       return [] if options[:skip_attachments]
+
       data.map do |data_item|
         file_name = generate_csv_file(data_item)
         attachment = ::Notification::Attachment.create!(
-            filename: file_name
+          filename: file_name
         )
         ::Notification::Attachment.where(id: attachment.id).update_all(data: File.read(file_name))
         attachment.id
@@ -85,8 +91,8 @@ module Reporter
       columns = data_item.columns
       data = data_item.collection
       file_name = csv_file_name
-      CSV.open(file_name, "w") do |csv|
-        csv << columns.map{|c| c.to_s.humanize }
+      CSV.open(file_name, 'w') do |csv|
+        csv << columns.map { |c| c.to_s.humanize }
         data.each do |row|
           line = []
           columns.each do |column|
@@ -113,16 +119,14 @@ module Reporter
 
       view = ActionView::Base.new("#{Rails.root}/app/views/mail_reports", {})
       view.render(
-          file: html_template_name,
-          layout: false,
-          locals: {
-              data: data,
-              report: report,
-              service: self
-          }
+        file: html_template_name,
+        layout: false,
+        locals: {
+          data: data,
+          report: report,
+          service: self
+        }
       )
     end
-
   end
-
 end

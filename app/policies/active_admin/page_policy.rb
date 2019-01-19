@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module ActiveAdmin
   class PagePolicy < ::RolePolicy
     class Scope < RolePolicy::Scope
     end
 
     SECTION_NAMES = {
-        'Info'.freeze => 'System/Info'.freeze,
-        'Dashboard'.freeze => 'Dashboard'.freeze,
-        'Routing simulation' => 'Routing/RoutingSimulation'.freeze
+      'Info' => 'System/Info',
+      'Dashboard' => 'Dashboard',
+      'Routing simulation' => 'Routing/RoutingSimulation'
     }.freeze
 
     # def read?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::System::NetworkResource < ::BaseResource
   model_name 'System::Network'
   attributes :name

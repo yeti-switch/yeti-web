@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -8,5 +10,4 @@ resource 'Routin NumberlistActions' do
   let(:record) { Routing::NumberlistAction.take }
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'numberlist-actions'
-
 end

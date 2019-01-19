@@ -1,5 +1,6 @@
-class DefaultApplicationPolicy < ApplicationPolicy
+# frozen_string_literal: true
 
+class DefaultApplicationPolicy < ApplicationPolicy
   def read?
     default_policy!
   end
@@ -36,5 +37,4 @@ class DefaultApplicationPolicy < ApplicationPolicy
       raise StandardError, "missing policy class for #{record_class}."
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -35,7 +37,7 @@ resource 'Rateplans' do
     jsonapi_relationships([:'profit-control-mode'], [])
 
     let(:name) { 'name' }
-    let(:'profit-control-mode') { wrap_relationship(:'rate_profit_control_modes', profit_control_mode.id) }
+    let(:'profit-control-mode') { wrap_relationship(:rate_profit_control_modes, profit_control_mode.id) }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -51,7 +53,7 @@ resource 'Rateplans' do
 
     let(:id) { create(:rateplan).id }
     let(:name) { 'name' }
-    let(:'profit-control-mode') { wrap_relationship(:'rate_profit_control_modes', profit_control_mode.id) }
+    let(:'profit-control-mode') { wrap_relationship(:rate_profit_control_modes, profit_control_mode.id) }
 
     example_request 'update values' do
       expect(status).to eq(200)

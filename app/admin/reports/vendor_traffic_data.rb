@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
   menu false
   actions :index
@@ -9,7 +11,7 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
 
   filter :calls_count
   filter :calls_duration
-  filter :customer, as: :select, input_html: {class: 'chosen'}, collection: proc{ Contractor.where(customer: true) }
+  filter :customer, as: :select, input_html: { class: 'chosen' }, collection: proc { Contractor.where(customer: true) }
 
   controller do
     def scoped_collection
@@ -18,7 +20,7 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
   end
 
   csv do
-    parent.csv_columns.map{|c| column c }
+    parent.csv_columns.map { |c| column c }
   end
 
   sidebar 'Vendor traffic report', priority: 0, only: :index do
@@ -33,79 +35,64 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
     end
   end
 
-  index footer_data: ->(collection){ BillingDecorator.new(collection.totals) } do
+  index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
+    column :customer, footer: lambda {
+                                strong do
+                                  'Total:'
+                                end
+                              }
 
-    column :customer, footer: -> {
-                    strong do
-                      "Total:"
-                    end
-                  }
+    column :calls_count, footer: lambda {
+                                   strong do
+                                     text_node @footer_data[:calls_count]
+                                     text_node ' calls'
+                                   end
+                                 }
+    column :success_calls_count, footer: lambda {
+                                           strong do
+                                             text_node @footer_data[:success_calls_count]
+                                             text_node ' calls'
+                                           end
+                                         }
 
-    column :calls_count, footer: -> do
-                         strong do
-                           text_node @footer_data[:calls_count]
-                           text_node " calls"
-                         end
-                       end
-    column :success_calls_count, footer: -> do
-                                 strong do
-                                   text_node @footer_data[:success_calls_count]
-                                   text_node " calls"
-                                 end
-                               end
+    column :short_calls_count, footer: lambda {
+                                         strong do
+                                           text_node @footer_data[:short_calls_count]
+                                           text_node ' calls'
+                                         end
+                                       }
 
-    column :short_calls_count, footer: -> do
-                               strong do
-                                 text_node @footer_data[:short_calls_count]
-                                 text_node " calls"
-                               end
-                             end
-
-    column :calls_duration, footer: -> do
-                            strong do
-                              @footer_data.time_format_min :calls_duration
-                            end
-                          end do |r|
-      r.decorated_calls_duration
-    end
-    column :asr do |r|
-      r.decorated_asr
-    end
-    column :acd do |r|
-      r.decorated_acd
-    end
-    column :origination_cost, footer: -> do
+    column :calls_duration, footer: lambda {
+                                      strong do
+                                        @footer_data.time_format_min :calls_duration
+                                      end
+                                    }, &:decorated_calls_duration
+    column :asr, &:decorated_asr
+    column :acd, &:decorated_acd
+    column :origination_cost, footer: lambda {
+                                        strong do
+                                          @footer_data.money_format :origination_cost
+                                        end
+                                      }, &:decorated_origination_cost
+    column :termination_cost, footer: lambda {
+                                        strong do
+                                          @footer_data.money_format :termination_cost
+                                        end
+                                      }, &:decorated_termination_cost
+    column :profit, footer: lambda {
                               strong do
-                                @footer_data.money_format :origination_cost
+                                @footer_data.money_format :profit
                               end
-                            end do |r|
-      r.decorated_origination_cost
-    end
-    column :termination_cost, footer: -> do
-                              strong do
-                                @footer_data.money_format :termination_cost
-                              end
-                            end do |r|
-      r.decorated_termination_cost
-    end
-    column :profit, footer: -> do
-                    strong do
-                      @footer_data.money_format :profit
-                    end
-                  end do |r|
-      r.decorated_profit
-    end
-    column :first_call_at, footer: -> do
-                           strong do
-                             text_node @footer_data[:first_call_at]
-                           end
-                         end
-    column :last_call_at, footer: -> do
-                          strong do
-                            text_node @footer_data[:last_call_at]
-                          end
-                        end
-
+                            }, &:decorated_profit
+    column :first_call_at, footer: lambda {
+                                     strong do
+                                       text_node @footer_data[:first_call_at]
+                                     end
+                                   }
+    column :last_call_at, footer: lambda {
+                                    strong do
+                                      text_node @footer_data[:last_call_at]
+                                    end
+                                  }
   end
-
 end

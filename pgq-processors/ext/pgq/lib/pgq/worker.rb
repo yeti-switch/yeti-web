@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Pgq::Worker
   attr_reader :logger, :class, :sleep_time
 
@@ -16,7 +18,7 @@ class Pgq::Worker
   end
 
   def self.interrupted?
-    !!self.interrupted
+    !!interrupted
   end
 
   def interrupted?
@@ -25,14 +27,14 @@ class Pgq::Worker
 
   def initialize(env)
     @logger = env.logger
-    @class_name = env.config["class"]
+    @class_name = env.config['class']
 
     require "#{ENV['ROOT_PATH']}/processors/#{@class_name}.rb"
     @class = @class_name.camelize.constantize.new(
-        @logger,
-        env.config['queue'],
-        env.config['consumer'],
-        env.config.config
+      @logger,
+      env.config['queue'],
+      env.config['consumer'],
+      env.config.config
     )
     @sleep_time = 0.5
   end
@@ -51,7 +53,6 @@ class Pgq::Worker
     end
   end
 
-
   def self.check_interrupted(file, line)
     if interrupted?
       exit_code = graceful_exit ? 0 : 1
@@ -59,5 +60,4 @@ class Pgq::Worker
       exit(exit_code)
     end
   end
-
 end

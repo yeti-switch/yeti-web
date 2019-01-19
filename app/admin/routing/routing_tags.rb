@@ -1,6 +1,7 @@
-ActiveAdmin.register Routing::RoutingTag do
+# frozen_string_literal: true
 
-  menu parent: "Routing", priority: 250, label: "Routing Tags"
+ActiveAdmin.register Routing::RoutingTag do
+  menu parent: 'Routing', priority: 250, label: 'Routing Tags'
 
   acts_as_audit
   acts_as_clone
@@ -15,7 +16,7 @@ ActiveAdmin.register Routing::RoutingTag do
     column :name
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :name
@@ -26,11 +27,10 @@ ActiveAdmin.register Routing::RoutingTag do
     f.semantic_errors *f.object.errors.keys
     f.inputs do
       f.input :name
-      end
+    end
     f.actions
   end
 
   filter :id
   filter :name
-
 end

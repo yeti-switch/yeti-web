@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: billing.cdr_batches
@@ -9,6 +11,5 @@
 #
 
 class Billing::CdrBatch < Yeti::ActiveRecord
-  self.table_name='billing.cdr_batches'
-
+  self.table_name = 'billing.cdr_batches'
 end

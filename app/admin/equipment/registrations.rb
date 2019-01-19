@@ -1,6 +1,7 @@
-ActiveAdmin.register Equipment::Registration do
+# frozen_string_literal: true
 
-  menu parent: "Equipment", priority: 81, label: "Registrations"
+ActiveAdmin.register Equipment::Registration do
+  menu parent: 'Equipment', priority: 81, label: 'Registrations'
   config.batch_actions = true
 
   includes :pop, :node, :transport_protocol, :proxy_transport_protocol
@@ -58,9 +59,9 @@ ActiveAdmin.register Equipment::Registration do
 
   filter :id
   filter :name
-  filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
-  filter :pop, input_html: {class: 'chosen'}
-  filter :node, input_html: {class: 'chosen'}
+  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :pop, input_html: { class: 'chosen' }
+  filter :node, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -68,11 +69,11 @@ ActiveAdmin.register Equipment::Registration do
       f.input :name
       f.input :enabled
       f.input :pop, as: :select,
-              include_blank: "Any",
-              input_html: {class: 'chosen'}
+                    include_blank: 'Any',
+                    input_html: { class: 'chosen' }
       f.input :node, as: :select,
-              include_blank: "Any",
-              input_html: {class: 'chosen'}
+                     include_blank: 'Any',
+                     input_html: { class: 'chosen' }
       f.input :transport_protocol
       f.input :domain
       f.input :username
@@ -90,7 +91,7 @@ ActiveAdmin.register Equipment::Registration do
     f.actions
   end
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :name
       row :enabled
@@ -111,5 +112,4 @@ ActiveAdmin.register Equipment::Registration do
       row :max_attempts
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gateways_stats
@@ -17,6 +19,5 @@
 #
 
 class GatewaysStat < ActiveRecord::Base
-   belongs_to :gateway
-
+  belongs_to :gateway
 end

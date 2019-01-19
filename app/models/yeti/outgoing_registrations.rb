@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Yeti
   class OutgoingRegistrations
-
     attr_reader :errors
 
     def initialize(nodes, params = {})
@@ -21,6 +22,7 @@ module Yeti
           registrations = node.registrations
         rescue StandardError => e
           raise e unless options[:empty_on_error]
+
           @errors << e.message
         end
         Rails.logger.info { " loading  #{registrations.count} registrations" }
@@ -30,11 +32,11 @@ module Yeti
     end
 
     def set_nodes(nodes)
-      if @params[:node_id_eq].present?
-        @nodes = nodes.where(id: @params.delete(:node_id_eq))
-      else
-        @nodes = nodes
-      end
+      @nodes = if @params[:node_id_eq].present?
+                 nodes.where(id: @params.delete(:node_id_eq))
+               else
+                 nodes
+               end
     end
 
     def clean_search_params(params)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: session_refresh_methods
@@ -9,5 +11,4 @@
 
 class SessionRefreshMethod < ActiveRecord::Base
   has_many :gateways
-
 end

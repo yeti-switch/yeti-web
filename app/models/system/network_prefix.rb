@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.network_prefixes
@@ -15,18 +17,16 @@ class System::NetworkPrefix < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-
   validates_uniqueness_of :prefix
   validates_presence_of :prefix, :network
-  scope :number_contains, ->(prefix) {  where('prefix_range(sys.network_prefixes.prefix)@>prefix_range(?)', "#{prefix}") } do
+  scope :number_contains, ->(prefix) { where('prefix_range(sys.network_prefixes.prefix)@>prefix_range(?)', prefix.to_s) } do
     def longest_match_network
-      order(Arel.sql("length(prefix) desc")).limit(1).take
+      order(Arel.sql('length(prefix) desc')).limit(1).take
     end
   end
 
-
   def self.prefix_hint(prefix)
-    self.longest_match(prefix).try(:hint) || Yeti::NetworkDetector::EMPTY_NETWORK_HINT
+    longest_match(prefix).try(:hint) || Yeti::NetworkDetector::EMPTY_NETWORK_HINT
   end
 
   def self.longest_match(prefix)
@@ -34,21 +34,18 @@ class System::NetworkPrefix < Yeti::ActiveRecord
   end
 
   def self.prefix_list_by_network(net)
-    self.select("string_agg(prefix,', ') as prefix_list").where(network_id: net).to_a[0][:prefix_list]
+    select("string_agg(prefix,', ') as prefix_list").where(network_id: net).to_a[0][:prefix_list]
   end
 
   def hint
-    [self.country.try!(:name), self.network.try!(:name)].compact.join(",")
+    [country.try!(:name), network.try!(:name)].compact.join(',')
   end
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
+  def self.ransackable_scopes(_auth_object = nil)
     [
-        :number_contains
+      :number_contains
     ]
   end
-
-
-
 end

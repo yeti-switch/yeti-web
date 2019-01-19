@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Routing::RoutingPlanStaticRouteBatchCreator
   include ActiveModel::Model
 
@@ -7,30 +9,27 @@ class Routing::RoutingPlanStaticRouteBatchCreator
   validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT, allow_nil: false, only_integer: true
 
   def vendors=(s)
-    @vendors = s.reject { |i| i.blank? }
-    #@vendors.reverse!
+    @vendors = s.reject(&:blank?)
+    # @vendors.reverse!
   end
 
   def save
-    if self.valid?
+    if valid?
       prio = priority.to_i
-      prefix_arr = prefixes.gsub(' ', '').split(',').uniq
+      prefix_arr = prefixes.delete(' ').split(',').uniq
       Routing::RoutingPlanStaticRoute.transaction do
         vendors.each do |vendor|
           prefix_arr.each do |prefix|
             Routing::RoutingPlanStaticRoute.create!(
-                routing_plan_id: routing_plan,
-                prefix: prefix,
-                priority: prio,
-                vendor_id: vendor
+              routing_plan_id: routing_plan,
+              prefix: prefix,
+              priority: prio,
+              vendor_id: vendor
             )
           end
-          prio = prio-5
+          prio -= 5
         end
       end
     end
-
   end
-
-
 end

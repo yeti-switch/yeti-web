@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :routing_plan, class: Routing::RoutingPlan do
     sequence(:name) { |n| "routing_plan_#{n}" }

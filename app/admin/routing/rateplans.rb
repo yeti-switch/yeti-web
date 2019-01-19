@@ -1,9 +1,10 @@
-ActiveAdmin.register Rateplan do
+# frozen_string_literal: true
 
+ActiveAdmin.register Rateplan do
   menu parent: 'Routing', priority: 40
 
   acts_as_audit
-  acts_as_clone_with_helper helper: Routing::RateplanDuplicator, name: "Copy with destinations"
+  acts_as_clone_with_helper helper: Routing::RateplanDuplicator, name: 'Copy with destinations'
   acts_as_safe_destroy
 
   acts_as_export :id, :name,
@@ -26,12 +27,10 @@ ActiveAdmin.register Rateplan do
     column :name
     column :profit_control_mode
     column :send_quality_alarms_to do |r|
-      r.contacts.map { |p| p.email }.sort.join(", ")
+      r.contacts.map(&:email).sort.join(', ')
     end
     column :uuid
   end
-
-
 
   filter :id
   filter :uuid_equals, label: 'UUID'
@@ -41,7 +40,7 @@ ActiveAdmin.register Rateplan do
     f.inputs do
       f.input :name
       f.input :profit_control_mode
-      f.input :send_quality_alarms_to, as: :select, input_html: {class: 'chosen-sortable', multiple: true}, collection: Billing::Contact.collection
+      f.input :send_quality_alarms_to, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Billing::Contact.collection
     end
     f.actions
   end
@@ -53,24 +52,22 @@ ActiveAdmin.register Rateplan do
       row :name
       row :profit_control_mode
       row :send_quality_alarms_to do
-        s.contacts.map { |p| p.email }.sort.join(", ")
+        s.contacts.map(&:email).sort.join(', ')
       end
     end
-
   end
 
-  sidebar :links, only: [:show, :edit] do
+  sidebar :links, only: %i[show edit] do
     ul do
       li do
-        link_to 'Destinations', destinations_path(q: {rateplan_id_eq: params[:id]})
+        link_to 'Destinations', destinations_path(q: { rateplan_id_eq: params[:id] })
       end
       li do
-        link_to 'Customer Auths', customers_auths_path(q: {rateplan_id_eq: params[:id]})
+        link_to 'Customer Auths', customers_auths_path(q: { rateplan_id_eq: params[:id] })
       end
       li do
-        link_to 'CDR list', cdrs_path(q: {rateplan_id_eq: params[:id]})
+        link_to 'CDR list', cdrs_path(q: { rateplan_id_eq: params[:id] })
       end
     end
   end
-
 end

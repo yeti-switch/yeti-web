@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Jobs::DialpeerRatesApply, type: :cron_job do
@@ -55,24 +57,24 @@ RSpec.describe Jobs::DialpeerRatesApply, type: :cron_job do
       subject
       expect(next_rate.reload).to be_applied
       expect(destination.reload).to have_attributes(
-                                        initial_rate: 0.04.to_d,
-                                        next_rate: 0.05.to_d,
-                                        connect_fee: 0.06.to_d,
-                                        initial_interval: 90,
-                                        next_interval: 120
-                                    )
+        initial_rate: 0.04.to_d,
+        next_rate: 0.05.to_d,
+        connect_fee: 0.06.to_d,
+        initial_interval: 90,
+        next_interval: 120
+      )
     end
 
     it 'applies another_next_rate to another_destination' do
       subject
       expect(another_next_rate.reload).to be_applied
       expect(another_destination.reload).to have_attributes(
-                                        initial_rate: 0.07.to_d,
-                                        next_rate: 0.08.to_d,
-                                        connect_fee: 0.09.to_d,
-                                        initial_interval: 5,
-                                        next_interval: 10
-                                    )
+        initial_rate: 0.07.to_d,
+        next_rate: 0.08.to_d,
+        connect_fee: 0.09.to_d,
+        initial_interval: 5,
+        next_interval: 10
+      )
     end
 
     it 'does not change skipped_destination' do

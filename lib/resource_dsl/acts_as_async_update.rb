@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceDSL
   # When including this module without acts_as_async_destroy, add following strings to resource register file:
   # config.batch_actions = true
@@ -24,7 +26,7 @@ module ResourceDSL
     end
 
     def boolean_select
-      [ ['Yes', 't'], ['No', 'f'] ]
+      [%w[Yes t], %w[No f]]
     end
   end
 end

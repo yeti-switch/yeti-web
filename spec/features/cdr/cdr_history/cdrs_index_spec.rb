@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'CDRs index', type: :feature do
@@ -39,5 +41,4 @@ describe 'CDRs index', type: :feature do
       expect(tr.text).to be_empty
     end
   end
-
 end

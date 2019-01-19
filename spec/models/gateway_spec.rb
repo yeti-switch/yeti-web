@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Gateway, type: :model do
-
   it do
     should validate_numericality_of(:max_30x_redirects).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     should validate_numericality_of(:max_transfers).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
@@ -22,14 +23,13 @@ describe Gateway, type: :model do
     end
 
     it 'raise error' do
-      expect {
+      expect do
         subject
-      }.to raise_error(ActiveRecord::RecordInvalid, full_expected_error_message)
+      end.to raise_error(ActiveRecord::RecordInvalid, full_expected_error_message)
     end
   end
 
   context 'uncheck is_shared' do
-
     let(:record) { create(:gateway, is_shared: true) }
 
     context 'when has linked CustomersAuth' do
@@ -50,11 +50,9 @@ describe Gateway, type: :model do
         end
       end
     end
-
   end
 
   context 'scope :for_termination' do
-
     before do
       # in scope
       @record = create(:gateway, is_shared: false, allow_termination: true, name: 'b-gateway')
@@ -80,6 +78,5 @@ describe Gateway, type: :model do
     it 'allow_termination is mandatory, then look for shared or vendors gateways, order by name' do
       expect(subject.pluck(:id)).to match_array([@record_2.id, @record.id])
     end
-
   end
 end

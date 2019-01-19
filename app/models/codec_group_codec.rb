@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: codec_group_codecs
@@ -11,7 +13,6 @@
 #
 
 class CodecGroupCodec < ActiveRecord::Base
-
   belongs_to :codec_group
   belongs_to :codec
 
@@ -23,13 +24,9 @@ class CodecGroupCodec < ActiveRecord::Base
   validates_presence_of :codec, :codec_group
   validates_numericality_of :dynamic_payload_type, greater_than: 95, less_than: 128, allow_nil: true, only_integer: true
 
-
-
   def display_name
-    "#{self.id} #{self.codec.name}"
+    "#{id} #{codec.name}"
   end
 
   include Yeti::CodecReloader
-
-
 end

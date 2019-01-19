@@ -1,8 +1,8 @@
-class ReportCustomerTrafficByVendorDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class ReportCustomerTrafficByVendorDecorator < BillingDecorator
   delegate_all
   decorates Report::CustomerTrafficDataByVendor
-
 
   def decorated_calls_duration
     time_format_min :calls_duration
@@ -27,6 +27,4 @@ class ReportCustomerTrafficByVendorDecorator < BillingDecorator
   def decorated_profit
     money_format :profit
   end
-
-
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrations' do
-  menu parent: "Realtime Data", priority: 30,
+  menu parent: 'Realtime Data', priority: 30,
        if: proc { authorized?(:index, RealtimeData::OutgoingRegistration) && Node.any? }
 
   actions :index
@@ -10,22 +12,20 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
          as: :select,
          collection: proc { Node.all.pluck(:name, :id) },
          label: 'Node',
-         input_html: {class: 'chosen'}
+         input_html: { class: 'chosen' }
 
   controller do
-
     def show
-      begin
-        show!
-      rescue YetisNode::Error => e
-        flash[:warning] = e.message
-        redirect_to_back
-      end
+      show!
+    rescue YetisNode::Error => e
+      flash[:warning] = e.message
+      redirect_to_back
     end
 
     def find_collection
       @search = OpenStruct.new(params[:q])
       return [] if (params.to_unsafe_h[:q] || {}).delete_if { |_, v| v.blank? }.blank? && GuiConfig.registrations_require_filter
+
       registrations = []
 
       begin
@@ -39,21 +39,15 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
       @skip_drop_down_pagination = true
       registrations
     end
-
   end
 
-
-  index blank_slate_content: -> {
-        if GuiConfig.registrations_require_filter
-          GuiConfig::FILTER_MISSED_TEXT
-        else
-          nil
-        end
-    }, download_links: false do
+  index blank_slate_content: lambda {
+                               if GuiConfig.registrations_require_filter
+                                 GuiConfig::FILTER_MISSED_TEXT
+                               end
+                             }, download_links: false do
     RealtimeData::OutgoingRegistration.human_attributes.each do |attr|
       column attr, sortable: false
     end
   end
-
-
 end

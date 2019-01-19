@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.routing_plan_static_routes
@@ -12,7 +14,7 @@
 #
 
 class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord
-  self.table_name='class4.routing_plan_static_routes'
+  self.table_name = 'class4.routing_plan_static_routes'
 
   belongs_to :routing_plan
   belongs_to :vendor, -> { where vendor: true }, class_name: 'Contractor', foreign_key: :vendor_id
@@ -26,10 +28,10 @@ class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord
   validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
 
   validate do
-    self.errors.add(:routing_plan, :invalid) if (!routing_plan_id.nil? and !routing_plan.use_static_routes?)
+    errors.add(:routing_plan, :invalid) if !routing_plan_id.nil? && !routing_plan.use_static_routes?
   end
 
   def display_name
-    "#{self.prefix} | #{self.id}"
+    "#{prefix} | #{id}"
   end
 end

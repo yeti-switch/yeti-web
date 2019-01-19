@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: disconnect_code
@@ -20,9 +22,9 @@ class DisconnectCode < ActiveRecord::Base
   self.table_name = 'disconnect_code'
   belongs_to :namespace, class_name: 'DisconnectCodeNamespace', foreign_key: 'namespace_id'
 
-   def display_name
-    "#{self.namespace_id}.#{self.code} - #{self.reason}"
-   end
+  def display_name
+    "#{namespace_id}.#{code} - #{reason}"
+  end
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -32,5 +34,4 @@ class DisconnectCode < ActiveRecord::Base
   NS_TS  = 1
   NS_SIP = 2
   NS_RADIUS = 3
-
 end

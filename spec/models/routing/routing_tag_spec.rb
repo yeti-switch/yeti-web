@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Routing::RoutingTag, type: :model do
-
   context 'validators' do
     context 'name' do
       it { is_expected.not_to allow_value(Routing::RoutingTag::ANY_TAG).for(:name) }
@@ -34,9 +35,11 @@ RSpec.describe Routing::RoutingTag, type: :model do
       end
 
       it 'tag is not destoryed' do
-        expect {
-          subject rescue true
-        }.not_to change { described_class.count }
+        expect do
+          subject
+        rescue StandardError
+          true
+        end.not_to change { described_class.count }
       end
     end
 
@@ -95,5 +98,4 @@ RSpec.describe Routing::RoutingTag, type: :model do
       include_examples :tag_can_not_be_destoryed
     end
   end
-
 end

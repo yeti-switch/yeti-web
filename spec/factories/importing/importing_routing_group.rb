@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :importing_routing_group, class: Importing::RoutingGroup do
     o_id nil

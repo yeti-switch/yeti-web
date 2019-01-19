@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -11,7 +13,7 @@ resource 'Accounts', document: :customer_v1 do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
   let(:type) { 'accounts' }
 
-  required_params = %i(name balance origination-capacity min-balance max-balance)
+  required_params = %i[name balance origination-capacity min-balance max-balance]
 
   get '/api/rest/customer/v1/accounts' do
     before { create_list(:account, 2, contractor: customer) }
@@ -28,5 +30,4 @@ resource 'Accounts', document: :customer_v1 do
       expect(status).to eq(200)
     end
   end
-
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Log::EmailLog do
-  menu parent: "Logs", priority: 140, label: "Email Log"
+  menu parent: 'Logs', priority: 140, label: 'Email Log'
   actions :index, :show
   config.batch_actions = false
 
@@ -8,7 +10,7 @@ ActiveAdmin.register Log::EmailLog do
   member_action :export, method: :get do
     att = resource.getfile(params[:attachment])
     if att.present?
-      send_data att.data, :type => 'text/csv', filename: att.filename
+      send_data att.data, type: 'text/csv', filename: att.filename
     else
       flash[:warning] = 'Attachment not found'
       redirect_to log_email_logs_path
@@ -24,19 +26,18 @@ ActiveAdmin.register Log::EmailLog do
     column :mail_from
     column :mail_to
     column :subject
-    #column :msg
-    column "Attachments" do |r|
-      raw(r.attachments_no_data.map { |rg| link_to rg.basename, export_log_email_log_path(r,{:attachment=>rg.id})}.sort.join(', '))
+    # column :msg
+    column 'Attachments' do |r|
+      raw(r.attachments_no_data.map { |rg| link_to rg.basename, export_log_email_log_path(r, attachment: rg.id) }.sort.join(', '))
     end
     column :error
   end
 
   filter :id
   filter :batch_id
-  filter :contact, input_html: {class: 'chosen'}
-  filter :smtp_connection, input_html: {class: 'chosen'}
+  filter :contact, input_html: { class: 'chosen' }
+  filter :smtp_connection, input_html: { class: 'chosen' }
   filter :mail_to
-
 
   show do
     attributes_table do
@@ -51,12 +52,10 @@ ActiveAdmin.register Log::EmailLog do
       row :msg do |r|
         raw(r.msg)
       end
-      row "Attachments" do |r|
-        raw(r.attachments_no_data.map { |rg| link_to rg.basename, export_log_email_log_path(r,{:attachment=>rg.id})}.sort.join(', '))
+      row 'Attachments' do |r|
+        raw(r.attachments_no_data.map { |rg| link_to rg.basename, export_log_email_log_path(r, attachment: rg.id) }.sort.join(', '))
       end
       row :error
     end
-
   end
-
 end

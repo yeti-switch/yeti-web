@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :rateplan, class: Rateplan do
     sequence(:name) { |n| "rateplan#{n}" }

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module ResourceDSL
   module ActsAsStat
-
     def has_member_action?(name)
       active_admin_config.member_actions.detect { |element| element.name == name.to_sym }.present?
     end
@@ -8,9 +9,8 @@ module ResourceDSL
     def acts_as_stats_actions
       # must be used as last DSL for resource
 
-      action_item :truncate_stats, only: [:show, :edit] do
+      action_item :truncate_stats, only: %i[show edit] do
         dropdown_menu 'Statistics' do
-
           if authorized?(:truncate_long_time_stats) && has_member_action?(:truncate_long_time_stats)
             item 'Truncate long time stats', action: :truncate_long_time_stats, id: resource.id
           end
@@ -18,16 +18,12 @@ module ResourceDSL
           if authorized?(:truncate_short_window_stats) && has_member_action?(:truncate_short_window_stats)
             item 'Truncate short window stats', action: :truncate_short_window_stats, id: resource.id
           end
-
         end
       end
-
     end
 
-
     def acts_as_stat
-
-      sidebar 'Long time stats', only: [:show, :edit] do
+      sidebar 'Long time stats', only: %i[show edit] do
         if resource.statistic.nil?
           div do
             'No data'
@@ -55,20 +51,18 @@ module ResourceDSL
         flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         redirect_back fallback_location: root_path
       end
-
     end
 
     def acts_as_quality_stat
-
       member_action :truncate_short_window_stats do
         resource.quality_stats.delete_all
         flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         redirect_back fallback_location: root_path
       end
 
-      sidebar 'Short window stats', only: [:show, :edit] do
+      sidebar 'Short window stats', only: %i[show edit] do
         data = resource.quality_stats.total
-        if data.count==0
+        if data.count == 0
           div do
             'No data'
           end
@@ -124,10 +118,6 @@ module ResourceDSL
           end
         end
       end
-
-
-
     end
-
   end
 end

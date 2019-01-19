@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Destination', type: :feature do
@@ -47,7 +49,7 @@ describe 'Export Destination', type: :feature do
         ['Acd limit', item.acd_limit.to_s, anything],
         ['Short calls limit', item.short_calls_limit.to_s, anything],
         ['Reverse billing', item.reverse_billing.to_s, anything],
-        ["Routing tag mode name", "AND", "OR"],
+        ['Routing tag mode name', 'AND', 'OR'],
         ['Routing tag names', [@tag_ua.name, @tag_us.name, Routing::RoutingTag::ANY_TAG].join(', '), anything]
       ]
     )

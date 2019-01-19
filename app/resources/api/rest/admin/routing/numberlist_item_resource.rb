@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
   model_name 'Routing::NumberlistItem'
 
@@ -11,5 +13,4 @@ class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
   has_one :tag_action, class_name: 'TagAction'
 
   filter :key
-
 end

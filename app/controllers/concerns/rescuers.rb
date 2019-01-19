@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 module Concerns::Rescuers
   extend ActiveSupport::Concern
 
   included do
-
     rescue_from SystemCallError, ActiveAdmin::AccessDenied do |e|
       flash[:warning] = e.message
-      redirect_to self.root_path
+      redirect_to root_path
     end
 
     # rescue_from ImportDisabled do |e|
@@ -17,7 +18,6 @@ module Concerns::Rescuers
       flash[:notice] = e.message
       redirect_back fallback_location: root_path
     end
-
 
     rescue_from ApplicationController::ImportPending do |e|
       flash[:notice] = e.message
@@ -32,19 +32,15 @@ module Concerns::Rescuers
       end
 
     end
-
   end
 
-
-  def render_404(e = nil)
-    if /(jpe?g|png|gif)/i === request.path
-      render text: "404 Yeti Not Found", status: 404
+  def render_404(_e = nil)
+    if /(jpe?g|png|gif)/i.match?(request.path)
+      render text: '404 Yeti Not Found', status: 404
     elsif request.xhr?
       render status: 404, nothing: true
     else
-      render template: "404", layout: 'application', status: 404, formats: [:html]
+      render template: '404', layout: 'application', status: 404, formats: [:html]
     end
   end
-
-
 end

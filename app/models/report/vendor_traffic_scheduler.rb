@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.vendor_traffic_report_schedulers
@@ -12,7 +14,7 @@
 #
 
 class Report::VendorTrafficScheduler < Cdr::Base
-  self.table_name='reports.vendor_traffic_report_schedulers'
+  self.table_name = 'reports.vendor_traffic_report_schedulers'
 
   belongs_to :vendor, -> { where(vendor: true) }, class_name: 'Contractor', foreign_key: :vendor_id
   belongs_to :period, class_name: 'Report::SchedulerPeriod', foreign_key: :period_id
@@ -33,13 +35,12 @@ class Report::VendorTrafficScheduler < Cdr::Base
   end
 
   validate do
-    if self.send_to.present?  and self.send_to.any?
-      self.errors.add(:send_to, :invalid) if contacts.count != self.send_to.count
+    if send_to.present? && send_to.any?
+      errors.add(:send_to, :invalid) if contacts.count != send_to.count
     end
   end
 
   def send_to=(send_to_ids)
-    self[:send_to] = send_to_ids.reject {|i| i.blank? }
+    self[:send_to] = send_to_ids.reject(&:blank?)
   end
-
 end

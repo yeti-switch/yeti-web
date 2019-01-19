@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -11,7 +13,6 @@ resource 'Dtmf receive modes' do
   let(:type) { 'dtmf-receive-modes' }
 
   get '/api/rest/admin/system/dtmf-receive-modes' do
-
     example_request 'get listing' do
       expect(status).to eq(200)
     end
@@ -24,5 +25,4 @@ resource 'Dtmf receive modes' do
       expect(status).to eq(200)
     end
   end
-
 end

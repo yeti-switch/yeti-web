@@ -1,11 +1,12 @@
-class Yeti::ActiveRecord < ActiveRecord::Base
+# frozen_string_literal: true
 
+class Yeti::ActiveRecord < ActiveRecord::Base
   self.abstract_class = true
 
   def self.array_belongs_to(name, class_name:, foreign_key:)
     define_method(name) do
       relation = class_name.is_a?(String) ? class_name.constantize : class_name
-      ids = self.public_send(foreign_key)
+      ids = public_send(foreign_key)
       relation_collection = relation.where(id: ids).to_a
       if ids.include?(nil)
         relation_collection.push(relation.new(name: Routing::RoutingTag::ANY_TAG))
@@ -15,16 +16,15 @@ class Yeti::ActiveRecord < ActiveRecord::Base
   end
 
   def self.db_version
-    self.fetch_sp_val("select max(version) from public.schema_migrations")
+    fetch_sp_val('select max(version) from public.schema_migrations')
   end
 
-
   def table_full_size
-    fetch_sp_val("SELECT pg_total_relation_size(?)", self.name)
+    fetch_sp_val('SELECT pg_total_relation_size(?)', name)
   end
 
   def table_data_size
-    fetch_sp_val("SELECT pg_relation_size(?)", self.name)
+    fetch_sp_val('SELECT pg_relation_size(?)', name)
   end
 
   def self.execute_sp(sql, *bindings)
@@ -39,21 +39,17 @@ class Yeti::ActiveRecord < ActiveRecord::Base
     perform_sp(:select_value, sql, *bindings)
   end
 
-  #clone methods for isntance objects
-  [:execute_sp, :fetch_sp, :fetch_sp_val].each do |method|
+  # clone methods for isntance objects
+  %i[execute_sp fetch_sp fetch_sp_val].each do |method|
     define_method method   do |*args|
       self.class.send(method, *args)
     end
   end
 
-
   def self.perform_sp(method, sql, *bindings)
-    if bindings.any?
-      sql = self.send(:sanitize_sql_array, bindings.unshift(sql))
-    end
-    self.connection.send(method, sql)
+    sql = send(:sanitize_sql_array, bindings.unshift(sql)) if bindings.any?
+    connection.send(method, sql)
   end
-
 
   def self.top_tables
     fetch_sp("
@@ -76,19 +72,18 @@ class Yeti::ActiveRecord < ActiveRecord::Base
   end
 
   def self.db_size
-    fetch_sp_val("SELECT pg_size_pretty(pg_database_size(current_database()))")
+    fetch_sp_val('SELECT pg_size_pretty(pg_database_size(current_database()))')
   end
 
   DB_VER = LazyObject.new { db_version }
-  ROUTING_SCHEMA="switch16"
+  ROUTING_SCHEMA = 'switch16'
 
-  PG_MAX_INT = 2147483647
-  PG_MIN_INT = 2147483647
+  PG_MAX_INT = 2_147_483_647
+  PG_MIN_INT = 2_147_483_647
 
-  PG_MAX_SMALLINT = 32767
-  PG_MIN_SMALLINT = -32768
+  PG_MAX_SMALLINT = 32_767
+  PG_MIN_SMALLINT = -32_768
 
   L4_PORT_MIN = 1
-  L4_PORT_MAX = 65535
-
+  L4_PORT_MAX = 65_535
 end

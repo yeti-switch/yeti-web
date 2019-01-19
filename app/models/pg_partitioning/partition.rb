@@ -1,5 +1,6 @@
-module PgPartitioning
+# frozen_string_literal: true
 
+module PgPartitioning
   class Partition
     attr_accessor :parent, :date_from, :date_to
 
@@ -11,10 +12,9 @@ module PgPartitioning
       self.parent = parent
     end
 
-
     def name
-      date_format = (parent.partition_range == :day) ? '%Y%m%d' : '%Y%m'
-      "#{ parent.partition_prefix }_#{ date_from.strftime(date_format) }"
+      date_format = parent.partition_range == :day ? '%Y%m%d' : '%Y%m'
+      "#{parent.partition_prefix}_#{date_from.strftime(date_format)}"
     end
 
     def table_name
@@ -24,7 +24,7 @@ module PgPartitioning
     # Only creates partition table
     # Example: `cdr.cdr_201807`
     def create
-      connection.execute %Q{
+      connection.execute %{
         CREATE TABLE IF NOT EXISTS #{table_name} (
           CONSTRAINT #{name}_#{partition_key}_check CHECK (
             #{partition_key} >= '#{date_from.to_s(:db)} 00:00:00+00'
@@ -68,28 +68,27 @@ module PgPartitioning
 
     private
 
-      def primary_key?
-        res = connection.exec_query %Q{
-          SELECT constraint_name
-          FROM information_schema.table_constraints
-          WHERE table_name = '#{name}'
-            AND table_schema='#{parent.partition_schema}'
-            AND constraint_type = 'PRIMARY KEY'
-        }
-        res.count
-      end
+    def primary_key?
+      res = connection.exec_query %(
+        SELECT constraint_name
+        FROM information_schema.table_constraints
+        WHERE table_name = '#{name}'
+          AND table_schema='#{parent.partition_schema}'
+          AND constraint_type = 'PRIMARY KEY'
+      )
+      res.count
+    end
 
-      def column_index(column_name)
-        connection.indexes(table_name).detect do |ind|
-          ind.columns.include?(column_name.to_s)
-        end
+    def column_index(column_name)
+      connection.indexes(table_name).detect do |ind|
+        ind.columns.include?(column_name.to_s)
       end
+    end
 
-      def add_primary_key
-        connection.execute %Q{
-          ALTER TABLE #{table_name} ADD PRIMARY KEY (id);
-        }
-      end
+    def add_primary_key
+      connection.execute %{
+        ALTER TABLE #{table_name} ADD PRIMARY KEY (id);
+      }
+    end
   end
-
 end

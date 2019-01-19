@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.auth_log_tables
@@ -23,12 +25,11 @@ class Cdr::AuthLogTable < Cdr::Base
   self.trigger_function_name = 'auth_log.auth_log_i_tgf'
   self.trigger_name = 'auth_log.auth_log_i_tg'
 
-  has_paper_trail class_name: 'AuditLogItem', on: [:destroy, :touch, :update]
+  has_paper_trail class_name: 'AuditLogItem', on: %i[destroy touch update]
 
   scope :active, -> { where active: true }
 
   def display_name
-    "#{self.name}"
+    name.to_s
   end
-
 end

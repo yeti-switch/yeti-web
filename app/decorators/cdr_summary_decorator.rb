@@ -1,7 +1,8 @@
-class CdrSummaryDecorator < BillingDecorator
+# frozen_string_literal: true
 
-  #delegate_all
-  #decorates Report::CustomerTrafficDataByDestination
+class CdrSummaryDecorator < BillingDecorator
+  # delegate_all
+  # decorates Report::CustomerTrafficDataByDestination
 
   def decorated_calls_duration
     time_format_min :calls_duration
@@ -34,6 +35,4 @@ class CdrSummaryDecorator < BillingDecorator
   def decorated_profit
     money_format :profit
   end
-
-
 end

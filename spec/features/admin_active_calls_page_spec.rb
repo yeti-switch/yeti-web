@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Active Calls page', type: :feature do
-
   let(:admin_user) { create :admin_user }
   before { login_as(admin_user, scope: :admin_user) }
 
@@ -12,5 +13,4 @@ describe 'Active Calls page', type: :feature do
       expect(page).to have_content('Please, specify at least 1 filter')
     end
   end
-
 end

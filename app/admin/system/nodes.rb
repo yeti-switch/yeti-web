@@ -1,5 +1,6 @@
-ActiveAdmin.register Node do
+# frozen_string_literal: true
 
+ActiveAdmin.register Node do
   menu parent: 'System', priority: 125
   config.batch_actions = false
 
@@ -7,7 +8,7 @@ ActiveAdmin.register Node do
 
   permit_params :pop_id, :signalling_ip, :signalling_port, :rpc_endpoint, :name
 
-  filter :pop, input_html: {class: 'chosen'}
+  filter :pop, input_html: { class: 'chosen' }
   filter :name
 
   member_action :clear_cache, method: :post do
@@ -22,12 +23,10 @@ ActiveAdmin.register Node do
 
   controller do
     def destroy
-      begin
-        destroy!
-      rescue ActiveRecord::ActiveRecordError => e
-        flash[:error] = e.message
-        redirect_back fallback_location: root_path
-      end
+      destroy!
+    rescue ActiveRecord::ActiveRecordError => e
+      flash[:error] = e.message
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -42,7 +41,6 @@ ActiveAdmin.register Node do
     column :rpc_endpoint
   end
 
-
   form do |f|
     f.inputs do
       f.input :name
@@ -54,7 +52,7 @@ ActiveAdmin.register Node do
     f.actions
   end
 
-  show do |node|
+  show do |_node|
     tabs do
       tab :details do
         attributes_table do
@@ -67,7 +65,6 @@ ActiveAdmin.register Node do
         end
       end
       tab :active_calls_chart do
-
         panel '24 hours' do
           render partial: 'charts/node'
         end
@@ -76,12 +73,9 @@ ActiveAdmin.register Node do
         end
       end
 
-
       tab :comments do
         active_admin_comments
       end
     end
   end
-
-
 end

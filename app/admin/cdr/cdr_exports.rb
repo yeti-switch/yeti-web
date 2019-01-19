@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register CdrExport, as: 'CDR Export' do
   menu parent: 'CDR', priority: 96
   actions :index, :show, :create, :new
@@ -7,7 +9,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   filter :created_at
 
   action_item(:download, only: [:show]) do
-    link_to 'Download', { action: :download } if resource.completed?
+    link_to 'Download', action: :download if resource.completed?
   end
 
   action_item(:delete_file, only: [:show]) do
@@ -18,7 +20,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     selectable_column
     id_column
     column :download do |row|
-      link_to 'download', { action: :download, id: row.id } if row.completed?
+      link_to 'download', action: :download, id: row.id if row.completed?
     end
     column :status
     column :rows_count
@@ -48,7 +50,8 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     def build_new_resource
       build_params = resource_params[0].to_h
       return super unless build_params.any?
-      #build filters
+
+      # build filters
       filters = {}
       filters['time_start_gteq'] = build_params['time_start_gteq']
       filters['time_start_lteq'] = build_params['time_start_lteq']
@@ -59,7 +62,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   end
 
   permit_params :time_start_gteq, :time_start_lteq,
-    :customer_acc_id_eq, :is_last_cdr_eq, fields: []
+                :customer_acc_id_eq, :is_last_cdr_eq, fields: []
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: codecs
@@ -7,8 +9,6 @@
 #
 
 class Codec < ActiveRecord::Base
-
-   has_many :codec_group_codecs
-   has_many :codec_groups
-
+  has_many :codec_group_codecs
+  has_many :codec_groups
 end

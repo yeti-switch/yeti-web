@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register RealtimeData::ActiveNode do
-  menu parent: "Realtime Data", label:"Nodes", priority: 10
+  menu parent: 'Realtime Data', label: 'Nodes', priority: 10
   config.batch_actions = false
   config.sort_order = nil
   config.batch_actions = false
@@ -8,15 +10,13 @@ ActiveAdmin.register RealtimeData::ActiveNode do
 
   decorate_with ActiveNodeDecorator
 
-
-  filter :name #, as: :select,  collection: proc { SbcNode.pluck(:name)}
+  filter :name # , as: :select,  collection: proc { SbcNode.pluck(:name)}
   filter :pop
 
   # before_action do
   #   @index_partial = 'shared/active_calls_chart'
   #   @index_partial_title = 'Active Calls Chart'
-  #end
-
+  # end
 
   # index as: :table_with_partial do
   index do
@@ -28,5 +28,4 @@ ActiveAdmin.register RealtimeData::ActiveNode do
     column :sessions_num
     column :uptime
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.cdr_interval_report_data
@@ -92,7 +94,7 @@ class Report::IntervalData < Cdr::Base
   belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id
   belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id
   belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id
-  belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id #, :conditions => {:vendor => true}
+  belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id # , :conditions => {:vendor => true}
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id # ,  :conditions => {:customer => true}
   belongs_to :disconnect_initiator
   belongs_to :vendor_invoice, class_name: 'Invoice', foreign_key: :vendor_invoice_id
@@ -104,10 +106,10 @@ class Report::IntervalData < Cdr::Base
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
 
   def self.report_columns
-    [:timestamp, :aggregated_value]
+    %i[timestamp aggregated_value]
   end
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 end

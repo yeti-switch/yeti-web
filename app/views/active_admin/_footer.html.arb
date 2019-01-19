@@ -1,4 +1,5 @@
+# frozen_string_literal: true
+
 div 'data-servertime' => Time.current.strftime('%Y %m %d %H %M %S %Z'), 'id' => 'servertime' do
   "Copyright #{Date.today.year} Yeti Admin ver: #{Yeti::Application.config.app_build_info.fetch('version', 'unknown')}. Routing ver #{Yeti::ActiveRecord::DB_VER}. CDR ver #{Cdr::Base::DB_VER}."
 end
-

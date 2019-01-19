@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.routing_plan_lnp_rules
@@ -13,7 +15,7 @@
 #  req_dst_rewrite_result :string
 #
 
-class Lnp::RoutingPlanLnpRule< Yeti::ActiveRecord
+class Lnp::RoutingPlanLnpRule < Yeti::ActiveRecord
   self.table_name = 'class4.routing_plan_lnp_rules'
 
   belongs_to :database, class_name: 'Lnp::Database', foreign_key: :database_id
@@ -21,8 +23,5 @@ class Lnp::RoutingPlanLnpRule< Yeti::ActiveRecord
 
   validates_presence_of :routing_plan, :database
   validates_format_of :dst_prefix, without: /\s/
-  validates_uniqueness_of :dst_prefix, scope: [:routing_plan_id, :database_id]
-
-
-
+  validates_uniqueness_of :dst_prefix, scope: %i[routing_plan_id database_id]
 end

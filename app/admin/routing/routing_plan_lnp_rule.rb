@@ -1,8 +1,9 @@
-ActiveAdmin.register Lnp::RoutingPlanLnpRule do
+# frozen_string_literal: true
 
+ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   menu parent: 'Routing', priority: 54, label: 'Routing plan LNP rules'
 
-  #acts_as_audit
+  # acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
   acts_as_async_destroy('Lnp::RoutingPlanLnpRule')
@@ -45,7 +46,7 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   filter :id
   filter :name
 
-  show do |s|
+  show do |_s|
     attributes_table do
       row :id
       row :routing_plan

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :cdr, class: Cdr::Cdr do
     uuid                         { SecureRandom.uuid }
@@ -41,7 +43,7 @@ FactoryGirl.define do
     # association :customer # customer_id
     association :customer_acc, factory: :account # customer_acc_id
 
-    before(:create) do |record, evaluator|
+    before(:create) do |record, _evaluator|
       # Create partition for current+next monthes if not exists
       Cdr::Table.add_partition
 

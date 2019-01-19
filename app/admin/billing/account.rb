@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Account do
-  menu parent: "Billing", priority: 10
+  menu parent: 'Billing', priority: 10
 
   acts_as_safe_destroy
   acts_as_audit
@@ -65,40 +67,35 @@ ActiveAdmin.register Account do
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
                 send_invoices_to: [], send_balance_notifications_to: []
 
-
   includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone
 
-  index footer_data: ->(collection) { BillingDecorator.new(collection.totals)} do
+  index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
     actions
     id_column
     column :contractor do |c|
       auto_link(c.contractor, c.contractor.decorated_display_name)
     end
-    column :name, footer: -> do
-                  strong do
-                    "Total:"
-                  end
-                end
+    column :name, footer: lambda {
+                            strong do
+                              'Total:'
+                            end
+                          }
 
-    column :balance, footer: -> do
-                     strong do
-                       @footer_data.money_format :total_balance
-                     #  number_to_currency(@footer_data[:total_balance], delimiter:" ", separator: ".", precision: 4, unit: "")
-                     end
-                   end do |c|
+    column :balance, footer: lambda {
+                               strong do
+                                 @footer_data.money_format :total_balance
+                                 #  number_to_currency(@footer_data[:total_balance], delimiter:" ", separator: ".", precision: 4, unit: "")
+                               end
+                             } do |c|
       strong do
         c.decorated_balance
       end
     end
 
-    column :min_balance do |c|
-      c.decorated_min_balance
-    end
+    column :min_balance, &:decorated_min_balance
 
-    column :max_balance do |c|
-      c.decorated_max_balance
-    end
+    column :max_balance, &:decorated_max_balance
 
     column :balance_low_threshold
     column :balance_high_threshold
@@ -116,25 +113,19 @@ ActiveAdmin.register Account do
     column :vendor_invoice_template
     column :customer_invoice_template
     column :timezone
-    column :send_invoices_to do |c|
-      c.send_invoices_to_emails
-    end
-    column :send_balance_notifications_to do |c|
-      c.send_balance_notifications_to_emails
-    end
+    column :send_invoices_to, &:send_invoices_to_emails
+    column :send_balance_notifications_to, &:send_balance_notifications_to_emails
     column :external_id
     column :uuid
-
   end
 
   filter :id
   filter :uuid_equals, label: 'UUID'
-  filter :contractor, input_html: {class: 'chosen'}
+  filter :contractor, input_html: { class: 'chosen' }
   filter :name
   filter :balance
   filter :vat
   filter :external_id
-
 
   show do |s|
     tabs do
@@ -169,16 +160,12 @@ ActiveAdmin.register Account do
 
           row :vendor_invoice_template
           row :customer_invoice_template
-          row :send_invoices_to do |row|
-             row.send_invoices_to_emails
-          end
-          row :send_balance_notifications_to do |row|
-            row.send_balance_notifications_to_emails
-          end
+          row :send_invoices_to, &:send_invoices_to_emails
+          row :send_balance_notifications_to, &:send_balance_notifications_to_emails
           row :vendor_invoice_period do
             if s.vendor_invoice_period
               text_node s.vendor_invoice_period.name
-              text_node " - "
+              text_node ' - '
               text_node s.next_vendor_invoice_at.to_date if s.next_vendor_invoice_at.present?
             end
           end
@@ -186,15 +173,14 @@ ActiveAdmin.register Account do
           row :customer_invoice_period do
             if s.customer_invoice_period
               text_node s.customer_invoice_period.name
-              text_node " - "
+              text_node ' - '
               text_node s.next_customer_invoice_at.to_date if s.next_customer_invoice_at.present?
             end
           end
           row :timezone
-
         end
 
-        panel "Last Payments" do
+        panel 'Last Payments' do
           table_for s.payments.last(10).reverse do
             column :id
             column :created_at
@@ -202,26 +188,24 @@ ActiveAdmin.register Account do
             column :notes
           end
         end
-
       end
-      tab "Comments" do
+      tab 'Comments' do
         active_admin_comments
       end
 
       tab :active_calls_charts do
-        panel "Active Calls 24 h" do
+        panel 'Active Calls 24 h' do
           render partial: 'charts/account_active_calls'
         end
-        panel "Customer Calls 1 month" do
+        panel 'Customer Calls 1 month' do
           render partial: 'charts/customer_account_agg'
         end
-        panel "Vendor Calls 1 month" do
+        panel 'Vendor Calls 1 month' do
           render partial: 'charts/vendor_account_agg'
         end
       end
 
-
-      tab "Profitability" do
+      tab 'Profitability' do
         panel 'Customer' do
           render partial: 'charts/customer_profit'
         end
@@ -229,16 +213,14 @@ ActiveAdmin.register Account do
           render partial: 'charts/vendor_profit'
         end
       end
-
     end
-
   end
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
-      f.input :contractor, input_html: {class: 'chosen'}
+      f.input :contractor, input_html: { class: 'chosen' }
       f.input :min_balance
       f.input :max_balance
       f.input :vat
@@ -255,13 +237,12 @@ ActiveAdmin.register Account do
       f.input :vendor_invoice_period
       f.input :customer_invoice_period
 
-
       f.input :vendor_invoice_template
       f.input :customer_invoice_template
 
-      f.input :send_invoices_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
-      f.input :send_balance_notifications_to, as: :select, input_html: {class: 'chosen', multiple: true}, collection: Billing::Contact.collection
-      f.input :timezone, as: :select, input_html: {class: 'chosen'}
+      f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
+      f.input :send_balance_notifications_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
+      f.input :timezone, as: :select, input_html: { class: 'chosen' }
       f.input :uuid, as: :string
     end
     f.actions
@@ -273,15 +254,14 @@ ActiveAdmin.register Account do
   end
 
   sidebar 'Create Payment', only: [:show] do
-
     active_admin_form_for(Payment.new(account_id: params[:id]),
                           url: payment_account_path(params[:id]),
                           as: :payment,
                           method: :post) do |f|
       f.inputs do
         f.input :account_id, as: :hidden
-        f.input :amount, input_html: {style: 'width: 200px'}
-        f.input :notes, input_html: {style: 'width: 200px'}
+        f.input :amount, input_html: { style: 'width: 200px' }
+        f.input :notes, input_html: { style: 'width: 200px' }
       end
       f.actions
     end
@@ -299,20 +279,14 @@ ActiveAdmin.register Account do
     redirect_to action: :show
   end
 
-  sidebar :links, only: [:show, :edit] do
-
+  sidebar :links, only: %i[show edit] do
     ul do
       li do
-        link_to "Payments", payments_path(q: {account_id_eq: params[:id]})
-
+        link_to 'Payments', payments_path(q: { account_id_eq: params[:id] })
       end
       li do
-        link_to "CDR list", cdrs_path(q: {account_id_eq: params[:id]})
-
+        link_to 'CDR list', cdrs_path(q: { account_id_eq: params[:id] })
       end
-
     end
   end
-
-
 end

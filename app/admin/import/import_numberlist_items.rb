@@ -1,5 +1,6 @@
-ActiveAdmin.register Importing::NumberlistItem, as: "Numberlist Item Imports" do
+# frozen_string_literal: true
 
+ActiveAdmin.register Importing::NumberlistItem, as: 'Numberlist Item Imports' do
   filter :key
   filter :numberlist, input_html: { class: 'chosen' }
   filter :action
@@ -9,7 +10,8 @@ ActiveAdmin.register Importing::NumberlistItem, as: "Numberlist Item Imports" do
   controller do
     def resource_params
       return [{}] if request.get?
-      [ params[active_admin_config.resource_class.model_name.param_key.to_sym].permit! ]
+
+      [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
   end
 
@@ -39,5 +41,4 @@ ActiveAdmin.register Importing::NumberlistItem, as: "Numberlist Item Imports" do
       end
     end
   end
-
 end

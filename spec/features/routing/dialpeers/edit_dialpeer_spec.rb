@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Create new Dialpeer', type: :feature do
@@ -5,9 +7,7 @@ describe 'Create new Dialpeer', type: :feature do
 
   context 'unset "Tag action value"' do
     include_examples :test_unset_routing_tag_ids,
-                      controller_name: :dialpeers,
-                      factory: :dialpeer
-
+                     controller_name: :dialpeers,
+                     factory: :dialpeer
   end
-
 end

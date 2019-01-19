@@ -1,8 +1,9 @@
-class Importing::ImportingDelayedJob
+# frozen_string_literal: true
 
+class Importing::ImportingDelayedJob
   QUEUE_NAME = 'import'
 
-  JOB_STATE = { start: 'started', finish: 'finished', fail: 'FAILURE' }
+  JOB_STATE = { start: 'started', finish: 'finished', fail: 'FAILURE' }.freeze
 
   def initialize(klass, options)
     @klass = klass
@@ -33,33 +34,34 @@ class Importing::ImportingDelayedJob
     1
   end
 
-  def  destroy_failed_jobs
+  def destroy_failed_jobs
     false
   end
 
-  def before(job)
+  def before(_job)
     write_log(JOB_STATE[:start])
   end
 
-  def success(job)
+  def success(_job)
     write_log(JOB_STATE[:finish])
   end
 
-  def error(job, e)
+  def error(_job, e)
     Rails.logger.error e.message
     Rails.logger.error e.backtrace.join("\n")
     write_log(e.message)
   end
 
-  def failure(job)
+  def failure(_job)
     write_log(JOB_STATE[:fail])
   end
 
   def write_log(status)
-    #todo: use AR
+    # TODO: use AR
     Yeti::ActiveRecord.execute_sp(
-        'select sys.logic_log(?, ?, ?)',
-        "#{@klass.import_class.to_s} (#{@options[:job_number]})",
-        0, status)
+      'select sys.logic_log(?, ?, ?)',
+      "#{@klass.import_class} (#{@options[:job_number]})",
+      0, status
+    )
   end
 end

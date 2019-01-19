@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Jobs
   class CallsMonitoring < ::BaseJob
-
     class CallCollection
       attr_reader :collection,
                   :key,
@@ -16,13 +17,13 @@ module Jobs
 
       def normal_calls
         collection.select do |c|
-         c[call_reverse_billing_key] == false && c['customer_acc_check_balance']
+          c[call_reverse_billing_key] == false && c['customer_acc_check_balance']
         end
       end
 
       def reverse_calls
         collection.select do |c|
-         c[call_reverse_billing_key] == true && c['customer_acc_check_balance']
+          c[call_reverse_billing_key] == true && c['customer_acc_check_balance']
         end
       end
 
@@ -80,52 +81,50 @@ module Jobs
       def call_price(attrs)
         i_per_second_rate = attrs.fetch("#{key}_initial_rate").to_f / 60.0
         n_per_second_rate = attrs.fetch("#{key}_next_rate").to_f / 60.0
-        duration = attrs.fetch('duration').to_i #TODO: check if needed cast to int
-        initial_interval = attrs.fetch("#{key}_initial_interval").to_i #TODO: check if needed cast to int
-        next_interval = attrs.fetch("#{key}_next_interval").to_i #TODO: check if needed cast to int
+        duration = attrs.fetch('duration').to_i # TODO: check if needed cast to int
+        initial_interval = attrs.fetch("#{key}_initial_interval").to_i # TODO: check if needed cast to int
+        next_interval = attrs.fetch("#{key}_next_interval").to_i # TODO: check if needed cast to int
         connect_fee = attrs.fetch("#{key}_fee").to_f
-        vat =  key == 'destination' ? attrs.fetch("customer_acc_vat", 0).to_f : 0
+        vat = key == 'destination' ? attrs.fetch('customer_acc_vat', 0).to_f : 0
         initial_interval_billing = connect_fee + initial_interval * i_per_second_rate
         next_interval_billing = (duration > initial_interval ? 1 : 0) * ((duration - initial_interval).to_f / next_interval).ceil * next_interval * n_per_second_rate
         (initial_interval_billing + next_interval_billing) * (1 + vat / 100.0)
       end
-
-    end #END CallCollection
-
+    end # END CallCollection
 
     attr_reader :now
 
     MONITORED_COLUMNS = [
-        :orig_gw_id, # link to gateway, drop call if not enabled or if not allow_origination
-        :term_gw_id, # link to gateway, drop call if not enabled or if not allow_termination
-        :dialpeer_id,
-        :node_id,
-        :local_tag,
+      :orig_gw_id, # link to gateway, drop call if not enabled or if not allow_origination
+      :term_gw_id, # link to gateway, drop call if not enabled or if not allow_termination
+      :dialpeer_id,
+      :node_id,
+      :local_tag,
 
-        :customer_acc_id,
-        :destination_initial_interval,
-        :destination_initial_rate,
-        :destination_next_interval,
-        :destination_next_rate,
-        :destination_fee,
-        :customer_acc_vat,
+      :customer_acc_id,
+      :destination_initial_interval,
+      :destination_initial_rate,
+      :destination_next_interval,
+      :destination_next_rate,
+      :destination_fee,
+      :customer_acc_vat,
 
-        :vendor_acc_id,
-        :dialpeer_fee,
-        :dialpeer_initial_interval,
-        :dialpeer_initial_rate,
-        :dialpeer_next_interval,
-        :dialpeer_next_rate,
+      :vendor_acc_id,
+      :dialpeer_fee,
+      :dialpeer_initial_interval,
+      :dialpeer_initial_rate,
+      :dialpeer_next_interval,
+      :dialpeer_next_rate,
 
-        :customer_acc_check_balance,
-        :destination_reverse_billing,
-        :dialpeer_reverse_billing,
+      :customer_acc_check_balance,
+      :destination_reverse_billing,
+      :dialpeer_reverse_billing,
 
-        :duration,
+      :duration,
 
-        :customer_auth_id, #link to CustomersAuth, drop calls when CustomersAuth#reject_calls=true
-        :customer_id, #link to contractor, drop call if contractor is not enabled or not customer
-        :vendor_id #link to contractor, drop call if contractor is not enabled or not vendor
+      :customer_auth_id, # link to CustomersAuth, drop calls when CustomersAuth#reject_calls=true
+      :customer_id, # link to contractor, drop call if contractor is not enabled or not customer
+      :vendor_id # link to contractor, drop call if contractor is not enabled or not vendor
     ].freeze
 
     def after_start
@@ -147,34 +146,27 @@ module Jobs
       if GuiConfig.random_disconnect_enable
         max_length = GuiConfig.random_disconnect_length
         flatten_calls.each do |call|
-          if call['duration'] > max_length
-            if rand(100) < 10
-              @terminate_calls.merge!({call['local_tag'] => call})
-            end
-          end
+          next unless call['duration'] > max_length
+
+          @terminate_calls.merge!(call['local_tag'] => call) if rand(100) < 10
         end
       end
     end
 
     def detect_customers_calls_to_reject
       customers_active_calls.each do |acc_id, calls|
-
-        account = active_customers_balances()[acc_id]
+        account = active_customers_balances[acc_id]
 
         if account
           call_collection = CallCollection.new(calls,
                                                key: 'destination',
                                                account: account)
 
-
-
-
-
           if call_collection.exceed_min_balance?
             @terminate_calls.merge!(
               call_collection
                 .normal_calls
-                .index_by { |c| c["local_tag"] }
+                .index_by { |c| c['local_tag'] }
             )
           end
 
@@ -182,12 +174,12 @@ module Jobs
             @terminate_calls.merge!(
               call_collection
                 .reverse_calls
-                .index_by { |c| c["local_tag"] }
+                .index_by { |c| c['local_tag'] }
             )
           end
         else
-           #account not found so drop all calls
-          @terminate_calls.merge!(calls.index_by{ |c| c["local_tag"] } )
+          # account not found so drop all calls
+          @terminate_calls.merge!(calls.index_by { |c| c['local_tag'] })
 
         end
       end
@@ -195,9 +187,7 @@ module Jobs
 
     def detect_vendors_calls_to_reject
       vendors_active_calls.each do |acc_id, calls|
-
-
-        vendor = active_vendors_balances()[acc_id]
+        vendor = active_vendors_balances[acc_id]
 
         if vendor
           call_collection = CallCollection.new(calls,
@@ -208,7 +198,7 @@ module Jobs
             @terminate_calls.merge!(
               call_collection
                 .reverse_calls
-                .index_by { |c| c["local_tag"] }
+                .index_by { |c| c['local_tag'] }
             )
           end
 
@@ -217,14 +207,13 @@ module Jobs
             @terminate_calls.merge!(
               call_collection
                 .normal_calls
-                .index_by { |c| c["local_tag"] }
+                .index_by { |c| c['local_tag'] }
             )
           end
         else
-          #account not found so drop all calls
-          @terminate_calls.merge!(calls.index_by{ |c| c["local_tag"] } )
+          # account not found so drop all calls
+          @terminate_calls.merge!(calls.index_by { |c| c['local_tag'] })
         end
-
       end
     end
 
@@ -233,10 +222,10 @@ module Jobs
     def detect_customers_auth_calls_to_reject
       flatten_calls.each do |call|
         customers_auth_id = call['customer_auth_id']
-        customers_auth = active_customers_auths_reject_calls()[customers_auth_id]
+        customers_auth = active_customers_auths_reject_calls[customers_auth_id]
 
         if customers_auth && customers_auth[1]
-          @terminate_calls.merge!({call['local_tag'] => call})
+          @terminate_calls.merge!(call['local_tag'] => call)
         end
       end
     end
@@ -245,7 +234,7 @@ module Jobs
     def detect_gateway_calls_to_reject
       flatten_calls.each do |call|
         if disabled_orig_gw_active_calls.key?(call['orig_gw_id']) || disabled_term_gw_active_calls.key?(call['term_gw_id'])
-            @terminate_calls.merge!({call['local_tag'] => call})
+          @terminate_calls.merge!(call['local_tag'] => call)
         end
       end
     end
@@ -255,25 +244,25 @@ module Jobs
     end
 
     def customers_active_calls
-      @customers_active_calls ||= flatten_calls.group_by { |c| c["customer_acc_id"] }
+      @customers_active_calls ||= flatten_calls.group_by { |c| c['customer_acc_id'] }
     end
 
     def vendors_active_calls
-      @vendors_active_calls ||= flatten_calls.group_by { |c| c["vendor_acc_id"] }
+      @vendors_active_calls ||= flatten_calls.group_by { |c| c['vendor_acc_id'] }
     end
 
-
-    #returns hash with keys as ids of disabled gateways for origination
+    # returns hash with keys as ids of disabled gateways for origination
     def disabled_orig_gw_active_calls
       @disabled_orig_gw_active_calls ||= begin
-        gw_ids = flatten_calls.collect { |c| c["orig_gw_id"] }.uniq
+        gw_ids = flatten_calls.collect { |c| c['orig_gw_id'] }.uniq
         Hash[Gateway.disabled_for_origination.where(id: gw_ids).pluck(:id).zip]
       end
     end
-    #returns hash with keys as ids of disabled gateways for termination
+
+    # returns hash with keys as ids of disabled gateways for termination
     def disabled_term_gw_active_calls
       @disabled_term_gw_active_calls ||= begin
-        gw_ids = flatten_calls.collect { |c| c["term_gw_id"] }.uniq
+        gw_ids = flatten_calls.collect { |c| c['term_gw_id'] }.uniq
         Hash[Gateway.disabled_for_termination.where(id: gw_ids).pluck(:id).zip]
       end
     end
@@ -283,10 +272,10 @@ module Jobs
     #  [ {account_id => [balance, min_balance, max_balance, account_id]}]
     #
     def active_customers_balances
-      @active_customers_balances ||= Account.customers_accounts.
-                                     merge(Contractor.enabled).
-                                     where(id: active_customers_ids).
-          pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
+      @active_customers_balances ||= Account.customers_accounts
+                                            .merge(Contractor.enabled)
+                                            .where(id: active_customers_ids)
+                                            .pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
     #
@@ -294,34 +283,34 @@ module Jobs
     #  [ {vendor_id => [balance,  min_balance, max_balance, vendor_id]}]
     #
     def active_vendors_balances
-      @active_vendors_balances ||= Account.vendors_accounts.
-                                merge(Contractor.enabled).
-                                where(id: active_vendors_ids).
-          pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
+      @active_vendors_balances ||= Account.vendors_accounts
+                                          .merge(Contractor.enabled)
+                                          .where(id: active_vendors_ids)
+                                          .pluck(:balance, :min_balance, :max_balance, :id).index_by { |c| c[3] }
     end
 
     # returns array of hashes
     # [ { customer_auth_id => [reject_calls] }, ... ]
     def active_customers_auths_reject_calls
       @active_customers_auths_reject_calls ||= begin
-        CustomersAuth.
-          where(id: active_customers_auth_ids).
-          pluck(:id, :reject_calls).index_by { |c| c[0] }
+        CustomersAuth
+          .where(id: active_customers_auth_ids)
+          .pluck(:id, :reject_calls).index_by { |c| c[0] }
       end
     end
 
-    #unique list of all customer_acc_id from all current calls
+    # unique list of all customer_acc_id from all current calls
     def active_customers_ids
-      @active_customers_ids ||= flatten_calls.collect { |c| c["customer_acc_id"] }.uniq
+      @active_customers_ids ||= flatten_calls.collect { |c| c['customer_acc_id'] }.uniq
     end
 
-    #unique list of all vendor_acc_id from all current calls
+    # unique list of all vendor_acc_id from all current calls
     def active_vendors_ids
-      @active_vendors_ids ||= flatten_calls.collect { |c| c["vendor_acc_id"] }.uniq
+      @active_vendors_ids ||= flatten_calls.collect { |c| c['vendor_acc_id'] }.uniq
     end
 
     def active_customers_auth_ids
-      @active_customers_auth_ids ||= flatten_calls.collect { |c| c["customer_auth_id"] }.uniq
+      @active_customers_auth_ids ||= flatten_calls.collect { |c| c['customer_auth_id'] }.uniq
     end
 
     def active_calls
@@ -335,7 +324,6 @@ module Jobs
     def before_finish
       save_stats
       terminate_calls!
-
     end
 
     private
@@ -346,9 +334,9 @@ module Jobs
         Stats::ActiveCallCustomerAccount.create_stats(customers_active_calls, now)
 
         Stats::ActiveCallVendorAccount.create_stats(vendors_active_calls, now)
-        orig_gw_grouped_calls = flatten_calls.group_by { |c| c["orig_gw_id"] }
+        orig_gw_grouped_calls = flatten_calls.group_by { |c| c['orig_gw_id'] }
         Stats::ActiveCallOrigGateway.create_stats(orig_gw_grouped_calls, now)
-        term_gw_grouped_calls = flatten_calls.group_by { |c| c["term_gw_id"] }
+        term_gw_grouped_calls = flatten_calls.group_by { |c| c['term_gw_id'] }
         Stats::ActiveCallTermGateway.create_stats(term_gw_grouped_calls, now)
       end
     end
@@ -364,6 +352,5 @@ module Jobs
         end
       end
     end
-
   end
 end

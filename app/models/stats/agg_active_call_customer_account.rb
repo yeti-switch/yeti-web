@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stats.active_call_customer_accounts_hourly
@@ -12,9 +14,8 @@
 #
 
 class Stats::AggActiveCallCustomerAccount < Stats::Base
-  self.table_name = "stats.active_call_customer_accounts_hourly"
+  self.table_name = 'stats.active_call_customer_accounts_hourly'
 
   include ::AggChart
   self.chart_entity_column = :account_id
-
 end

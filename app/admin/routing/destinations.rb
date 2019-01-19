@@ -1,6 +1,7 @@
-ActiveAdmin.register Routing::Destination, as: 'Destination' do
+# frozen_string_literal: true
 
-  menu parent: "Routing", priority: 41
+ActiveAdmin.register Routing::Destination, as: 'Destination' do
+  menu parent: 'Routing', priority: 41
 
   acts_as_audit
   acts_as_clone
@@ -12,27 +13,27 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_async_update('Routing::Destination',
                        lambda do
                          {
-                             enabled: boolean_select,
-                             prefix: 'text',
-                             routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name,:id),
-                             reject_calls: boolean_select,
-                             quality_alarm: boolean_select,
-                             rateplan_id: Rateplan.pluck(:name, :id),
-                             valid_from: 'datepicker',
-                             valid_till: 'datepicker',
-                             rate_policy_id: DestinationRatePolicy.pluck(:name, :id),
-                             initial_interval: 'text',
-                             initial_rate: 'text',
-                             next_interval: 'text',
-                             next_rate: 'text',
-                             use_dp_intervals: boolean_select,
-                             connect_fee: 'text',
-                             profit_control_mode_id: Routing::RateProfitControlMode.pluck(:name, :id),
-                             dp_margin_fixed: 'text',
-                             dp_margin_percent: 'text',
-                             asr_limit: 'text',
-                             acd_limit: 'text',
-                             short_calls_limit: 'text'
+                           enabled: boolean_select,
+                           prefix: 'text',
+                           routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name, :id),
+                           reject_calls: boolean_select,
+                           quality_alarm: boolean_select,
+                           rateplan_id: Rateplan.pluck(:name, :id),
+                           valid_from: 'datepicker',
+                           valid_till: 'datepicker',
+                           rate_policy_id: DestinationRatePolicy.pluck(:name, :id),
+                           initial_interval: 'text',
+                           initial_rate: 'text',
+                           next_interval: 'text',
+                           next_rate: 'text',
+                           use_dp_intervals: boolean_select,
+                           connect_fee: 'text',
+                           profit_control_mode_id: Routing::RateProfitControlMode.pluck(:name, :id),
+                           dp_margin_fixed: 'text',
+                           dp_margin_percent: 'text',
+                           asr_limit: 'text',
+                           acd_limit: 'text',
+                           short_calls_limit: 'text'
                          }
                        end)
 
@@ -41,18 +42,18 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   decorate_with DestinationDecorator
 
   acts_as_export :id, :enabled, :prefix, :dst_number_min_length, :dst_number_max_length,
-                 [:rateplan_name, proc {|row| row.rateplan.try(:name)}],
+                 [:rateplan_name, proc { |row| row.rateplan.try(:name) }],
                  :reject_calls,
-                 [:rate_policy_name, proc {|row| row.rate_policy.try(:name)}],
+                 [:rate_policy_name, proc { |row| row.rate_policy.try(:name) }],
                  :initial_interval, :next_interval,
                  :use_dp_intervals,
                  :initial_rate, :next_rate, :connect_fee,
                  :dp_margin_fixed, :dp_margin_percent,
-                 [:profit_control_mode_name, proc {|row| row.profit_control_mode.try(:name)}],
+                 [:profit_control_mode_name, proc { |row| row.profit_control_mode.try(:name) }],
                  :valid_from, :valid_till,
                  :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing,
-                 [:routing_tag_names, proc {|row| row.model.routing_tags.map(&:name).join(', ')}],
-                 [:routing_tag_mode_name, proc {|row| row.routing_tag_mode.try(:name)}]
+                 [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
+                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }]
 
   acts_as_import resource_class: Importing::Destination,
                  skip_columns: [:routing_tag_ids]
@@ -61,36 +62,35 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   filter :id
   filter :uuid_equals, label: 'UUID'
-  filter :enabled, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :prefix
-  filter :routing_for_contains, as: :string, input_html: {class: 'search_filter_string'}
-  filter :rateplan, input_html: {class: 'chosen'}
-  filter :reject_calls, as: :select, collection: [["Yes", true], ["No", false]]
+  filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
+  filter :rateplan, input_html: { class: 'chosen' }
+  filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
   filter :network_prefix_country_id_eq,
          label: 'Country',
-         input_html: {class: 'chosen',
-                      onchange: remote_chosen_request(:get, 'system_countries/get_networks', {country_id: "$(this).val()"}, :q_network_prefix_network_id_eq)
-
-         },
-         as: :select, collection: -> {System::Country.all}
-
+         input_html: { class: 'chosen',
+                       onchange: remote_chosen_request(:get, 'system_countries/get_networks', { country_id: '$(this).val()' }, :q_network_prefix_network_id_eq) },
+         as: :select, collection: -> { System::Country.all }
 
   filter :network_prefix_network_id_eq,
          label: 'Network',
-         input_html: {class: 'chosen'},
+         input_html: { class: 'chosen' },
          as: :select,
-         collection: -> {
-           System::Country.find(assigns["search"].network_prefix_country_id_eq).networks rescue []
-
+         collection: lambda {
+           begin
+             System::Country.find(assigns['search'].network_prefix_country_id_eq).networks
+           rescue StandardError
+             []
+           end
          }
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
 
   acts_as_filter_by_routing_tag_ids
-
 
   permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rateplan_id, :next_rate, :connect_fee,
                 :initial_interval, :next_interval, :dp_margin_fixed,
@@ -99,7 +99,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
                 :reverse_billing, :routing_tag_mode_id, routing_tag_ids: []
 
-  includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: [:country, :network]
+  includes :rateplan, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: %i[country network]
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', destination_destination_next_rates_path(resource.id)
@@ -110,7 +110,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   end
 
   action_item :next_rates, only: [:index] do
-    link_to "Next rates", destination_next_rates_path
+    link_to 'Next rates', destination_next_rates_path
   end
 
   controller do
@@ -128,12 +128,11 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     redirect_back fallback_location: root_path
   end
 
-  action_item :clear_quality_alarm, only: [:show, :edit] do
+  action_item :clear_quality_alarm, only: %i[show edit] do
     if resource.quality_alarm? && authorized?(:clear_quality_alarm)
       link_to 'Clear quality alarm', action: :clear_quality_alarm, id: resource.id
     end
   end
-
 
   index do
     selectable_column
@@ -142,7 +141,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :enabled
     column :prefix
     column :dst_number_length do |c|
-      c.dst_number_min_length == c.dst_number_max_length ? "#{c.dst_number_min_length}" : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
+      c.dst_number_min_length == c.dst_number_max_length ? c.dst_number_min_length.to_s : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
     column :country, sortable: 'countries.name' do |row|
       auto_link row.network_prefix.try!(:country)
@@ -155,12 +154,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :quality_alarm
     column :rateplan, sortable: 'rateplans.name'
     column :routing_tags
-    column :valid_from do |c|
-      c.decorated_valid_from
-    end
-    column :valid_till do |c|
-      c.decorated_valid_till
-    end
+    column :valid_from, &:decorated_valid_from
+    column :valid_till, &:decorated_valid_till
 
     column :rate_policy
     column :reverse_billing
@@ -173,7 +168,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :connect_fee
     column :use_dp_intervals
 
-    #cost + X ( $ or % )
+    # cost + X ( $ or % )
     column :dp_margin_fixed
     column :dp_margin_percent
     column :profit_control_mode
@@ -190,22 +185,22 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       if f.object.new_record? # allow multiple prefixes delimited by comma in NEW form.
-        f.input :batch_prefix, label: "Prefix",
-                input_html: {class: :prefix_detector, value: f.object.batch_prefix || f.object.prefix},
-                hint: f.object.network_details_hint
+        f.input :batch_prefix, label: 'Prefix',
+                               input_html: { class: :prefix_detector, value: f.object.batch_prefix || f.object.prefix },
+                               hint: f.object.network_details_hint
       else
-        f.input :prefix, label: "Prefix", input_html: {class: :prefix_detector}, hint: f.object.network_details_hint
+        f.input :prefix, label: 'Prefix', input_html: { class: :prefix_detector }, hint: f.object.network_details_hint
       end
       f.input :dst_number_min_length
       f.input :dst_number_max_length
       f.input :enabled
       f.input :reject_calls
-      f.input :rateplan, input_html: {class: 'chosen'}
+      f.input :rateplan, input_html: { class: 'chosen' }
 
       f.input :routing_tag_ids, as: :select,
-              collection: DestinationDecorator.decorate(f.object).routing_tag_options,
-              include_hidden: false,
-              input_html: {class: 'chosen', multiple: true}
+                                collection: DestinationDecorator.decorate(f.object).routing_tag_options,
+                                include_hidden: false,
+                                input_html: { class: 'chosen', multiple: true }
       f.input :routing_tag_mode
 
       f.input :valid_from, as: :date_time_picker
@@ -216,19 +211,19 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :next_interval
       f.input :use_dp_intervals
     end
-    f.inputs "Fixed rating configuration" do
+    f.inputs 'Fixed rating configuration' do
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
-      f.input :profit_control_mode, hint: "Leave it empty to inherit Profit control mode from Rateplan"
+      f.input :profit_control_mode, hint: 'Leave it empty to inherit Profit control mode from Rateplan'
     end
 
-    f.inputs "Dialpeer based rating configuration" do
+    f.inputs 'Dialpeer based rating configuration' do
       f.input :dp_margin_fixed
       f.input :dp_margin_percent
     end
 
-    f.inputs "Quality notifications configuration" do
+    f.inputs 'Quality notifications configuration' do
       f.input :asr_limit
       f.input :acd_limit
       f.input :short_calls_limit
@@ -254,22 +249,16 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           row :rateplan
           row :routing_tags
           row :routing_tag_mode
-          row :valid_from do |c|
-            c.decorated_valid_from
-          end
-          row :valid_till do |c|
-            c.decorated_valid_till
-          end
+          row :valid_from, &:decorated_valid_from
+          row :valid_till, &:decorated_valid_till
           row :rate_policy
           row :reverse_billing
           row :initial_interval
           row :next_interval
           row :use_dp_intervals
-          row "external id" do |c|
-            c.external_id
-          end
+          row 'external id', &:external_id
         end
-        panel "Fixed rating configuration" do
+        panel 'Fixed rating configuration' do
           attributes_table_for s do
             row :initial_rate
             row :next_rate
@@ -277,13 +266,13 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
             row :profit_control_mode
           end
         end
-        panel "Dialpeer based rating configuration" do
+        panel 'Dialpeer based rating configuration' do
           attributes_table_for s do
             row :dp_margin_fixed
             row :dp_margin_percent
           end
         end
-        panel "Quality notifications configuration" do
+        panel 'Quality notifications configuration' do
           attributes_table_for s do
             row :asr_limit
             row :acd_limit
@@ -306,7 +295,6 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           end
         end
       end
-
     end
 
     active_admin_comments

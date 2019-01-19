@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Copy Rateplan action', type: :feature do
   include_context :login_as_admin
 
   shared_examples :cloned_rateplan_is_valid do
-
     it 'creates new Rateplan with identical fields, except UUID' do
       subject
       expect(rateplan.send_quality_alarms_to).to eq(send_to_ids)
@@ -16,19 +17,16 @@ describe 'Copy Rateplan action', type: :feature do
         send_quality_alarms_to: send_to_ids
       )
     end
-
   end
 
   context 'success' do
-
     before do
       create :admin_user, username: 'test send_to_ids'
     end
 
     let!(:rateplan) do
       create(:rateplan,
-             send_quality_alarms_to: send_to_ids
-            ).reload # after_save
+             send_quality_alarms_to: send_to_ids).reload # after_save
     end
 
     let(:new_name) { rateplan.name + '_copy' }
@@ -48,20 +46,16 @@ describe 'Copy Rateplan action', type: :feature do
     end
 
     context 'when "Send quality alarms to" is empty' do
-
       let(:send_to_ids) { [] }
 
       include_examples :cloned_rateplan_is_valid
     end
 
     context 'when "Send quality alarms to" has values' do
-
       # assign two Admins to "Send quality alarms to"
       let(:send_to_ids) { AdminUser.all.pluck(:id) }
 
       include_examples :cloned_rateplan_is_valid
     end
-
   end
-
 end

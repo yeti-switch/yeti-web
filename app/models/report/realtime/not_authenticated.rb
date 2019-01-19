@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cdr.cdr
@@ -143,11 +145,10 @@
 #
 
 class Report::Realtime::NotAuthenticated < Report::Realtime::Base
-
   attr_accessor :l
 
-  scope :detailed_scope, ->(length) do
-    l=length.to_i
+  scope :detailed_scope, lambda { |length|
+    l = length.to_i
     select("
       auth_orig_ip,
       auth_orig_port,
@@ -155,25 +156,24 @@ class Report::Realtime::NotAuthenticated < Report::Realtime::Base
       internal_disconnect_reason,
       count(id) as attempts_count
     ").where(
-        'customer_auth_id is null'
+      'customer_auth_id is null'
     ).group(
-        :auth_orig_ip,
-        :auth_orig_port,
-        :internal_disconnect_code,
-        :internal_disconnect_reason
+      :auth_orig_ip,
+      :auth_orig_port,
+      :internal_disconnect_code,
+      :internal_disconnect_reason
     )
-  end
+  }
 
-  scope :time_interval_eq, ->(value) do
-    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2*value.to_i, value.to_i)
-  end
+  scope :time_interval_eq, lambda { |value|
+    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2 * value.to_i, value.to_i)
+  }
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
+  def self.ransackable_scopes(_auth_object = nil)
     [
-        :time_interval_eq
+      :time_interval_eq
     ]
   end
-
 end

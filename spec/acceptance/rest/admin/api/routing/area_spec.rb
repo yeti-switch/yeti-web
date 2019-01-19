@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -8,5 +10,4 @@ resource 'Routing Area' do
   let(:record) { collection.first }
 
   include_context :acceptance_index_show, namespace: 'routing', type: 'areas'
-
 end

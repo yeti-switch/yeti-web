@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module ResourceDSL
   module ActsAsAsyncDestroy
-
     def acts_as_async_destroy(model_class)
       config.batch_actions = true
       config.scoped_collection_actions_if = -> { true }
-      batch_action :destroy, false #disable common batch delete
+      batch_action :destroy, false # disable common batch delete
 
       scoped_collection_action :async_destroy,
                                title: 'Delete batch',
@@ -21,6 +22,5 @@ module ResourceDSL
         @paper_trail_info = { whodunnit: current_admin_user.id, controller_info: info_for_paper_trail }
       end
     end
-
   end
 end

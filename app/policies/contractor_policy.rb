@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContractorPolicy < ::RolePolicy
   section 'Contractor'
 
@@ -5,6 +7,4 @@ class ContractorPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

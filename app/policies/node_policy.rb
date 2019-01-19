@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NodePolicy < ::RolePolicy
   section 'Node'
 
@@ -5,6 +7,4 @@ class NodePolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
-
 end
-

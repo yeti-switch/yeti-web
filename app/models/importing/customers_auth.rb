@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_customers_auth
@@ -82,7 +84,7 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :routing_plan, class_name: '::Routing::RoutingPlan', foreign_key: :routing_plan_id
   belongs_to :rateplan, class_name: '::Rateplan'
   belongs_to :pop, class_name: '::Pop'
-  belongs_to :customer, -> {where customer: true}, class_name: '::Contractor', foreign_key: :customer_id
+  belongs_to :customer, -> { where customer: true }, class_name: '::Contractor', foreign_key: :customer_id
   belongs_to :diversion_policy, class_name: '::DiversionPolicy'
   belongs_to :dump_level, class_name: '::DumpLevel'
 
@@ -93,61 +95,58 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :tag_action, class_name: 'Routing::TagAction'
 
-
-  self.import_attributes = [
-      'enabled',
-      'reject_calls',
-      'name',
-      'ip',
-      'pop_id',
-      'src_prefix', 'src_number_min_length','src_number_max_length',
-      'dst_prefix', 'dst_number_min_length','dst_number_max_length',
-      'uri_domain',
-      'from_domain',
-      'to_domain',
-      'x_yeti_auth',
-      'customer_id',
-      'account_id',
-      'check_account_balance',
-      'gateway_id',
-      'rateplan_id',
-      'routing_plan_id',
-      'dst_numberlist_id',
-      'src_numberlist_id',
-      'dump_level_id',
-      'enable_audio_recording',
-      'capacity',
-      'allow_receive_rate_limit',
-      'send_billing_information',
-      'diversion_policy_id',
-      'diversion_rewrite_rule',
-      'diversion_rewrite_result',
-      'src_name_rewrite_rule',
-      'src_name_rewrite_result',
-      'src_rewrite_rule',
-      'src_rewrite_result',
-      'dst_rewrite_rule',
-      'dst_rewrite_result',
-      'radius_auth_profile_id',
-      'src_number_radius_rewrite_rule',
-      'src_number_radius_rewrite_result',
-      'dst_number_radius_rewrite_rule',
-      'dst_number_radius_rewrite_result',
-      'radius_accounting_profile_id',
-      'transport_protocol_id',
-      'require_incoming_auth',
-      'tag_action_id',
-      'tag_action_value'
+  self.import_attributes = %w[
+    enabled
+    reject_calls
+    name
+    ip
+    pop_id
+    src_prefix src_number_min_length src_number_max_length
+    dst_prefix dst_number_min_length dst_number_max_length
+    uri_domain
+    from_domain
+    to_domain
+    x_yeti_auth
+    customer_id
+    account_id
+    check_account_balance
+    gateway_id
+    rateplan_id
+    routing_plan_id
+    dst_numberlist_id
+    src_numberlist_id
+    dump_level_id
+    enable_audio_recording
+    capacity
+    allow_receive_rate_limit
+    send_billing_information
+    diversion_policy_id
+    diversion_rewrite_rule
+    diversion_rewrite_result
+    src_name_rewrite_rule
+    src_name_rewrite_result
+    src_rewrite_rule
+    src_rewrite_result
+    dst_rewrite_rule
+    dst_rewrite_result
+    radius_auth_profile_id
+    src_number_radius_rewrite_rule
+    src_number_radius_rewrite_result
+    dst_number_radius_rewrite_rule
+    dst_number_radius_rewrite_result
+    radius_accounting_profile_id
+    transport_protocol_id
+    require_incoming_auth
+    tag_action_id
+    tag_action_value
   ]
-
 
   self.import_class = ::CustomersAuth
 
   def self.after_import_hook(unique_columns = [])
-    self.where(src_prefix: nil).update_all(src_prefix: '')
-    self.where(dst_prefix: nil).update_all(dst_prefix: '')
-    self.resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    where(src_prefix: nil).update_all(src_prefix: '')
+    where(dst_prefix: nil).update_all(dst_prefix: '')
+    resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
   end
-
 end

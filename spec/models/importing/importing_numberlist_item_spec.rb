@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
 describe Importing::NumberlistItem do
-
   let(:preview_item) { described_class.last }
 
   subject do
@@ -11,13 +12,11 @@ describe Importing::NumberlistItem do
 
   it_behaves_like 'after_import_hook when real items do not match' do
     include_context :init_importing_numberlist_item,
-                    {
-                        o_id: 8,
-                        numberlist_id: nil,
-                        action_id: nil,
-                        tag_action_id: nil,
-                        tag_action_value: []
-                    }
+                    o_id: 8,
+                    numberlist_id: nil,
+                    action_id: nil,
+                    tag_action_id: nil,
+                    tag_action_value: []
 
     it 'convert tag_action_value to array of IDs' do
       tag_action = Routing::TagAction.find_by(name: preview_item.tag_action_name)
@@ -33,10 +32,9 @@ describe Importing::NumberlistItem do
   end
 
   context 'when tag_action_value_names is NULL' do
-    include_context :init_importing_numberlist_item, {
-      tag_action_value_names: nil,
-      tag_action_value: []
-    }
+    include_context :init_importing_numberlist_item,
+                    tag_action_value_names: nil,
+                    tag_action_value: []
 
     it 'tag_action_value is empty array' do
       subject
@@ -53,5 +51,4 @@ describe Importing::NumberlistItem do
 
     let(:real_item) { described_class.import_class.last }
   end
-
 end

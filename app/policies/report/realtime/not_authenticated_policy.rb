@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Report
   module Realtime
     class NotAuthenticatedPolicy < ::RolePolicy
@@ -5,8 +7,6 @@ module Report
 
       class Scope < ::RolePolicy::Scope
       end
-
     end
   end
 end
-    

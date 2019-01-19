@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cdr.cdr
@@ -143,7 +145,6 @@
 #
 
 class Cdr::Cdr < Cdr::Base
-
   self.table_name = 'cdr.cdr'
 
   belongs_to :rateplan
@@ -180,26 +181,30 @@ class Cdr::Cdr < Cdr::Base
 
   ##### metasearch override filters ##########
 
-  scope :disconnect_code_eq, lambda { |code| where('disconnect_code = ?', code) }
-  #scope :vendor_acc_id_contains, lambda {|vendor_acc_id|where('vendor_acc_id = ?',vendor_acc_id )  }
-  #scope :customer_acc_id_contains, lambda {|customer_acc_id|where('customer_acc_id = ?',customer_acc_id )  }
+  scope :disconnect_code_eq, ->(code) { where('disconnect_code = ?', code) }
+  # scope :vendor_acc_id_contains, lambda {|vendor_acc_id|where('vendor_acc_id = ?',vendor_acc_id )  }
+  # scope :customer_acc_id_contains, lambda {|customer_acc_id|where('customer_acc_id = ?',customer_acc_id )  }
 
-  scope :short_calls, -> { where('success AND duration<=?',GuiConfig.short_call_length) }
+  scope :short_calls, -> { where('success AND duration<=?', GuiConfig.short_call_length) }
   scope :successful_calls, -> { where('success') }
   scope :rerouted_calls, -> { where('(NOT is_last_cdr) OR routing_attempt>1') }
   scope :no_rtp, -> { where('success AND (lega_tx_bytes=0 OR lega_rx_bytes=0 OR legb_tx_bytes=0 OR legb_rx_bytes=0)') }
-  scope :not_authorized,  -> { where('customer_auth_id is null') }
+  scope :not_authorized, -> { where('customer_auth_id is null') }
   scope :bad_routing, -> { where('customer_auth_id is not null AND disconnect_initiator_id=0') }
   scope :with_trace, -> { where('dump_level_id > 0') }
 
-  scope :account_id_eq, lambda { |account_id| where('vendor_acc_id =? OR customer_acc_id =?', account_id, account_id) }
+  scope :account_id_eq, ->(account_id) { where('vendor_acc_id =? OR customer_acc_id =?', account_id, account_id) }
 
-  scope :where_customer, -> (id) { where(customer_id: id) }
-  scope :where_account, -> (id) { where(customer_acc_id: id) } # OR vendor_acc_id ???
+  scope :where_customer, ->(id) { where(customer_id: id) }
+  scope :where_account, ->(id) { where(customer_acc_id: id) } # OR vendor_acc_id ???
 
   scope :status_eq, lambda { |success|
     if success.is_a?(String)
-      success = success.to_bool rescue nil
+      success = begin
+                  success.to_bool
+                rescue StandardError
+                  nil
+                end
     end
 
     where('success = ?', success) if [true, false].include? success
@@ -208,11 +213,11 @@ class Cdr::Cdr < Cdr::Base
   #### end override filters ##############
 
   def status_sym
-    self.success ? :success : :failure
+    success ? :success : :failure
   end
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   # TODO: use DisconnectInitiator#display_name instead
@@ -232,10 +237,7 @@ class Cdr::Cdr < Cdr::Base
       :RTP
     elsif log_sip?
       :SIP
-    else
-      nil
     end
-
   end
 
   def log_full?
@@ -243,11 +245,11 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def log_rtp?
-    self.dump_level.log_rtp?
+    dump_level.log_rtp?
   end
 
   def log_sip?
-    self.dump_level.log_sip?
+    dump_level.log_sip?
   end
 
   def dump_filename
@@ -257,27 +259,23 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def call_record_filename_lega
-    if local_tag.present? && node_id.present?
-      "/record/#{local_tag}_legA.mp3"
-    end
+    "/record/#{local_tag}_legA.mp3" if local_tag.present? && node_id.present?
   end
 
   def call_record_filename_legb
-    if local_tag.present? && node_id.present?
-      "/record/#{local_tag}_legB.mp3"
-    end
+    "/record/#{local_tag}_legB.mp3" if local_tag.present? && node_id.present?
   end
 
   def attempts
-    if self.local_tag.empty?
-      self.class.where("cdr.id=?", self.id)
+    if local_tag.empty?
+      self.class.where('cdr.id=?', id)
     else
-      self.class.where(time_start: self.time_start).where(local_tag: self.local_tag).order('routing_attempt desc')
+      self.class.where(time_start: time_start).where(local_tag: local_tag).order('routing_attempt desc')
     end
   end
 
   def self.scoped_stat
-    self.select("
+    select("
     count(nullif(is_last_cdr,false)) as originated_calls_count,
     count(nullif(routing_attempt=2,false)) as rerouted_calls_count,
     100*count(nullif(routing_attempt=2,false))::real/nullif(count(nullif(is_last_cdr,false)),0)::real as rerouted_calls_percent,
@@ -289,31 +287,30 @@ class Cdr::Cdr < Cdr::Base
     sum(profit) as profit,
     sum(customer_price) as customer_price,
     sum(vendor_price) as vendor_price").to_a[0]
-
   end
 
   def self.provisioning_info
     OpenStruct.new(
-        new_events: new_events,
-        pending_events: pending_events
+      new_events: new_events,
+      pending_events: pending_events
     )
   end
 
   def self.new_events
-    self.fetch_sp_val("select ev_new from pgq.get_queue_info('cdr_billing')")
+    fetch_sp_val("select ev_new from pgq.get_queue_info('cdr_billing')")
   end
 
   def self.pending_events
-    self.fetch_sp_val("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
+    fetch_sp_val("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
   end
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
-    [
-        :disconnect_code_eq,
-        :status_eq,
-        :account_id_eq
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      disconnect_code_eq
+      status_eq
+      account_id_eq
     ]
   end
 end

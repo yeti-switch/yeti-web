@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoutingBase < ActiveRecord::Base
   self.abstract_class = true
 
@@ -14,11 +16,9 @@ class RoutingBase < ActiveRecord::Base
   end
 
   protected
-  def self.perform_sp(method, sql, *bindings)
-    if bindings.any?
-      sql = self.send(:sanitize_sql_array, bindings.unshift(sql))
-    end
-    self.connection.send(method, sql)
-  end
 
+  def self.perform_sp(method, sql, *bindings)
+    sql = send(:sanitize_sql_array, bindings.unshift(sql)) if bindings.any?
+    connection.send(method, sql)
+  end
 end

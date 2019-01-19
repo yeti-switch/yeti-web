@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: stats.active_call_term_gateways
@@ -8,13 +10,11 @@
 #  created_at :datetime
 #
 
-class Stats::ActiveCallTermGateway   < Stats::Base
-  self.table_name = "stats.active_call_term_gateways"
+class Stats::ActiveCallTermGateway < Stats::Base
+  self.table_name = 'stats.active_call_term_gateways'
   belongs_to :gateway
-
 
   include ::Chart
   self.chart_entity_column = :gateway_id
   self.chart_entity_klass = Gateway
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Log
   class EmailLogPolicy < ::RolePolicy
     section 'Log/EmailLog'
@@ -6,7 +8,5 @@ module Log
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

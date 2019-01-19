@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Worker::PingCallbackUrlJob, type: :job do
@@ -15,18 +17,18 @@ RSpec.describe Worker::PingCallbackUrlJob, type: :job do
   end
 
   it 'GET request to callback url with specified params should be performed' do
-    mock = stub_request(:get, callback_url).
-      with(body: params).
-      to_return(status: 200)
+    mock = stub_request(:get, callback_url)
+           .with(body: params)
+           .to_return(status: 200)
     expect { subject }.not_to raise_error
     expect(mock).to have_been_requested.once
   end
 
   context 'when callback url is unreachable' do
     before do
-      @mock = stub_request(:get, callback_url).
-        with(body: params).
-        to_return(status: 400)
+      @mock = stub_request(:get, callback_url)
+              .with(body: params)
+              .to_return(status: 400)
     end
 
     it 'TryAgainError should be raised' do
@@ -34,5 +36,4 @@ RSpec.describe Worker::PingCallbackUrlJob, type: :job do
       expect(@mock).to have_been_requested.once
     end
   end
-
 end

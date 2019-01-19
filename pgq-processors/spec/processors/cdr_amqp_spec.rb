@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'uri'
 require 'bunny-mock'
@@ -5,7 +7,6 @@ require 'bunny-mock'
 require File.join(File.dirname(__FILE__), '../../processors/cdr_amqp')
 
 RSpec.describe CdrAmqp do
-
   let(:cdrs) do
     [
       { id: 1, duration: 2 },
@@ -19,15 +20,15 @@ RSpec.describe CdrAmqp do
     {
       connect:
         {
-          host: "127.0.0.1",
+          host: '127.0.0.1',
           port: 5672,
           ssl: false,
-          vhost: "/",
-          user: "guest",
-          pass: "guest",
+          vhost: '/',
+          user: 'guest',
+          pass: 'guest',
           heartbeat: :server,
-          frame_max: 131072,
-          auth_mechanism: "PLAIN"
+          frame_max: 131_072,
+          auth_mechanism: 'PLAIN'
         }
     }
   end
@@ -48,12 +49,11 @@ RSpec.describe CdrAmqp do
 
   it 'publish events to queue' do
     allow(consumer).to receive(:event_done?).and_return false
-    expect{subject}.to change{queue.message_count}.by 2
+    expect { subject }.to change { queue.message_count }.by 2
   end
 
   it 'do not publish events that are consumed already' do
     allow(consumer).to receive(:event_done?).and_return true
-    expect{subject}.to change{queue.message_count}.by 0
+    expect { subject }.to change { queue.message_count }.by 0
   end
-
 end

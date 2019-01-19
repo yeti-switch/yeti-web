@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Customer::V1::RateplansController, type: :controller do
-
   # RatePlans for the other customer
   before { create_list(:rateplan, 2) }
 
@@ -17,7 +18,6 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
   end
 
   describe 'GET index' do
-
     context 'account_ids is empty' do
       before do
         create(:customers_auth, customer_id: customer.id)
@@ -36,7 +36,6 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
     end
 
     context 'with account_ids' do
-
       before do
         create_list(:rateplan, 1)
       end
@@ -65,7 +64,6 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
         )
       end
     end
-
   end
 
   describe 'GET show' do
@@ -79,14 +77,14 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
       before { get :show, params: { id: rateplan.uuid } }
 
       it 'returnds record with expected attributes' do
-        expect(response_data).to include({
+        expect(response_data).to include(
           'id' => rateplan.uuid,
           'type' => 'rateplans',
           'links' => anything,
           'attributes' => {
             'name' => rateplan.name
           }
-        })
+        )
       end
     end
 
@@ -101,7 +99,5 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
 
       it { expect(response.status).to eq(404) }
     end
-
   end
-
 end

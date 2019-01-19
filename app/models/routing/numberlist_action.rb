@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.numberlist_actions
@@ -7,5 +9,5 @@
 #
 
 class Routing::NumberlistAction < Yeti::ActiveRecord
-  self.table_name='class4.numberlist_actions'
+  self.table_name = 'class4.numberlist_actions'
 end

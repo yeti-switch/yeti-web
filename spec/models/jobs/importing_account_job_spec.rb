@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_job'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec::Matchers.define :return_404_with_empty_body do
@@ -7,7 +9,6 @@ RSpec::Matchers.define :return_404_with_empty_body do
 end
 
 describe Api::Rest::Customer::V1::AuthController, type: :controller do
-
   let!(:user) { create :api_access }
   let(:remote_ip) { '127.0.0.1' }
 
@@ -56,5 +57,4 @@ describe Api::Rest::Customer::V1::AuthController, type: :controller do
       it { expect(response).to return_404_with_empty_body }
     end
   end
-
 end

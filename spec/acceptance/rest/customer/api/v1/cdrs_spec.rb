@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -35,5 +37,4 @@ resource 'Cdrs', document: :customer_v1 do
       expect(status).to eq(200)
     end
   end
-
 end

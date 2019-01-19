@@ -1,6 +1,7 @@
-ActiveAdmin.register Importing::Account do
+# frozen_string_literal: true
 
-  filter :contractor, input_html: {class: 'chosen'}
+ActiveAdmin.register Importing::Account do
+  filter :contractor, input_html: { class: 'chosen' }
   filter :name
   filter :balance
 
@@ -9,6 +10,7 @@ ActiveAdmin.register Importing::Account do
   controller do
     def resource_params
       return [{}] if request.get?
+
       [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
 
@@ -44,5 +46,4 @@ ActiveAdmin.register Importing::Account do
     column :termination_capacity
     column :total_capacity
   end
-
 end

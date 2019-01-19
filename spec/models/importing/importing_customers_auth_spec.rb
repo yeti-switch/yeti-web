@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
 describe Importing::CustomersAuth do
-
   include_context :init_contractor, name: 'iBasis', vendor: true, customer: true
 
   include_context :init_rateplan
@@ -15,7 +16,6 @@ describe Importing::CustomersAuth do
 
   include_context :init_gateway, name: 'SameName'
 
-
   let(:preview_item) { described_class.last }
 
   subject do
@@ -24,17 +24,15 @@ describe Importing::CustomersAuth do
 
   it_behaves_like 'after_import_hook when real items do not match' do
     include_context :init_importing_customers_auth,
-                    {
-                        o_id: 8,
-                        customer_id: nil,
-                        routing_plan_id: nil,
-                        rateplan_id: nil,
-                        account_id: nil,
-                        gateway_id: nil,
-                        diversion_policy_id: nil,
-                        tag_action_id: nil,
-                        tag_action_value: []
-                    }
+                    o_id: 8,
+                    customer_id: nil,
+                    routing_plan_id: nil,
+                    rateplan_id: nil,
+                    account_id: nil,
+                    gateway_id: nil,
+                    diversion_policy_id: nil,
+                    tag_action_id: nil,
+                    tag_action_value: []
 
     it 'convert tag_action_value to array of IDs' do
       tag_action = Routing::TagAction.find_by(name: preview_item.tag_action_name)
@@ -50,10 +48,9 @@ describe Importing::CustomersAuth do
   end
 
   context 'when tag_action_value_names is NULL' do
-    include_context :init_importing_customers_auth, {
-      tag_action_value_names: nil,
-      tag_action_value: []
-    }
+    include_context :init_importing_customers_auth,
+                    tag_action_value_names: nil,
+                    tag_action_value: []
 
     it 'tag_action_value is empty array' do
       subject
@@ -70,5 +67,4 @@ describe Importing::CustomersAuth do
 
     let(:real_item) { described_class.import_class.last }
   end
-
 end

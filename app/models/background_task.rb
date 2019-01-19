@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: delayed_jobs
@@ -17,7 +19,5 @@
 #
 
 class BackgroundTask < ActiveRecord::Base
-  self.table_name = "delayed_jobs"
-
-
+  self.table_name = 'delayed_jobs'
 end

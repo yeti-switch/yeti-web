@@ -1,5 +1,6 @@
-shared_context :init_importing_numberlist do |args|
+# frozen_string_literal: true
 
+shared_context :init_importing_numberlist do |args|
   args ||= {}
 
   before do

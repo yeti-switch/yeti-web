@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Yeti
   module TranslationReloader
     extend ActiveSupport::Concern
     included do
-
       before_save do
         Event.reload_translations
       end

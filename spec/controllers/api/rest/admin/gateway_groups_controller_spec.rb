@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
@@ -77,12 +79,14 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
 
   describe 'PUT update' do
     let!(:gateway_group) { create :gateway_group }
-    before { put :update, params: {
-      id: gateway_group.to_param, data: { type: 'gateway-groups',
-                                          id: gateway_group.to_param,
-                                          attributes: attributes,
-                                          relationships: relationships}
-    } }
+    before do
+      put :update, params: {
+        id: gateway_group.to_param, data: { type: 'gateway-groups',
+                                            id: gateway_group.to_param,
+                                            attributes: attributes,
+                                            relationships: relationships }
+      }
+    end
 
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name' } }

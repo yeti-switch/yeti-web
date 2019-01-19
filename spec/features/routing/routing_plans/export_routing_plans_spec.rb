@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Routing Plans', type: :feature do
@@ -17,14 +19,14 @@ describe 'Export Routing Plans', type: :feature do
 
   it 'has expected header and values' do
     expect(subject).to match_array(
-                           [
-                               ['Id', item.id.to_s],
-                               ['Name', item.name],
-                               ['Sorting name', item.sorting.name],
-                               ['Use lnp', item.use_lnp.to_s],
-                               ['Rate delta max', item.rate_delta_max.to_s],
-                               ['Max rerouting attempts', item.max_rerouting_attempts.to_s]
-                           ]
-                       )
+      [
+        ['Id', item.id.to_s],
+        ['Name', item.name],
+        ['Sorting name', item.sorting.name],
+        ['Use lnp', item.use_lnp.to_s],
+        ['Rate delta max', item.rate_delta_max.to_s],
+        ['Max rerouting attempts', item.max_rerouting_attempts.to_s]
+      ]
+    )
   end
 end

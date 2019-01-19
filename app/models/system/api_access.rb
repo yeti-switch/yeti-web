@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sys.api_access
@@ -43,10 +45,10 @@ class System::ApiAccess < ActiveRecord::Base
   end
 
   def accounts
-    unless account_ids.empty?
-      Account.where(id: account_ids)
-    else
+    if account_ids.empty?
       []
+    else
+      Account.where(id: account_ids)
     end
   end
 
@@ -57,10 +59,10 @@ class System::ApiAccess < ActiveRecord::Base
   end
 
   def self.from_token_request(request)
-    self.where(login: request.params[:auth][:login]).take
+    where(login: request.params[:auth][:login]).take
   end
 
-  #force update Allowed IPs
+  # force update Allowed IPs
   def keys_for_partial_write
     (changed + ['allowed_ips']).uniq
   end
@@ -72,13 +74,12 @@ class System::ApiAccess < ActiveRecord::Base
   private
 
   def allowed_ips_is_valid
-    begin
+    if read_attribute_before_type_cast('allowed_ips').is_a?(Array)
       read_attribute_before_type_cast('allowed_ips').each do |raw_ip|
         _tmp = IPAddr.new(raw_ip)
-      end if read_attribute_before_type_cast('allowed_ips').is_a?(Array)
-    rescue IPAddr::Error => error
-      self.errors.add(:allowed_ips, "Allowed IP is not valid")
+      end
     end
+  rescue IPAddr::Error => error
+    errors.add(:allowed_ips, 'Allowed IP is not valid')
   end
-
 end

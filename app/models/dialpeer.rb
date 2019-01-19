@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: dialpeers
@@ -45,12 +47,11 @@
 #
 
 class Dialpeer < Yeti::ActiveRecord
-
   belongs_to :gateway
   belongs_to :gateway_group
   belongs_to :routing_group
   belongs_to :account
-  belongs_to :vendor,  class_name: 'Contractor'
+  belongs_to :vendor, class_name: 'Contractor'
   has_one :statistic, class_name: 'DialpeersStat', dependent: :delete
   has_paper_trail class_name: 'AuditLogItem'
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :dialpeer_id, dependent: :nullify
@@ -59,8 +60,8 @@ class Dialpeer < Yeti::ActiveRecord
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id
 
- # has_many :routing_plans, class_name: 'Routing::RoutingPlan', foreign_key: :routing_group_id
-  #has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan', join_table: "class4.routing_plan_groups", association_foreign_key: :routing_group_id
+  # has_many :routing_plans, class_name: 'Routing::RoutingPlan', foreign_key: :routing_group_id
+  # has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan', join_table: "class4.routing_plan_groups", association_foreign_key: :routing_group_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
   validates_presence_of :account, :routing_group, :vendor, :valid_from, :valid_till,
@@ -93,7 +94,6 @@ class Dialpeer < Yeti::ActiveRecord
 
   attr_accessor :batch_prefix
 
-
   include Yeti::ResourceStatus
   include Yeti::NetworkDetector
   include RoutingTagIdsScopeable
@@ -101,7 +101,7 @@ class Dialpeer < Yeti::ActiveRecord
   scope :locked, -> { where locked: true }
 
   after_initialize do
-    if self.new_record?
+    if new_record?
       self.connect_fee ||= 0
       self.initial_interval ||= 1
       self.next_interval ||= 1
@@ -112,23 +112,23 @@ class Dialpeer < Yeti::ActiveRecord
 
   before_create do
     if batch_prefix.present?
-      prefixes = batch_prefix.gsub(' ', '').split(',').uniq
+      prefixes = batch_prefix.delete(' ').split(',').uniq
       while prefixes.length > 1
-        new_instance = self.dup
+        new_instance = dup
         new_instance.batch_prefix = nil
         new_instance.prefix = prefixes.pop
         new_instance.save!
       end
       self.prefix = prefixes.pop
-      self.detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
+      detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
     else
-      self.prefix = '' if self.prefix.nil?
-      self.detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
+      self.prefix = '' if prefix.nil?
+      detect_network_prefix! # we need redetect network prefix. TODO: fix this shit
     end
   end
 
   def display_name
-      "#{self.prefix} | #{self.id}"
+    "#{prefix} | #{id}"
   end
 
   def is_valid_from?
@@ -141,24 +141,22 @@ class Dialpeer < Yeti::ActiveRecord
 
   def fire_lock(stat)
     transaction do
-      self.locked=true
-      self.save
+      self.locked = true
+      save
       Notification::Alert.fire_lock(self, stat)
     end
   end
 
   def unlock
     transaction do
-      self.locked=false
-      self.save
+      self.locked = false
+      save
       Notification::Alert.fire_unlock(self)
     end
   end
 
-  scope :routing_for_contains, lambda {
-          #NEW logic, same as in routing procedures
-   # |prx| where('prefix_range(dialpeers.prefix)@>prefix_range(?)', "#{prx}")
-   |prx| where('dialpeers.id in (
+  scope :routing_for_contains, lambda { |prx|
+    where('dialpeers.id in (
       select id from
       (
         SELECT t_dp.id as id,
@@ -175,41 +173,40 @@ class Dialpeer < Yeti::ActiveRecord
   protected
 
   def gateway_presence
-    errors.add(:base, "Specify a gateway_group or a gateway") if gateway.blank? && gateway_group.blank?
+    errors.add(:base, 'Specify a gateway_group or a gateway') if gateway.blank? && gateway_group.blank?
   end
 
   def contractor_is_vendor
-     self.errors.add(:vendor, "Is not vendor") unless self.vendor && self.vendor.vendor
+    errors.add(:vendor, 'Is not vendor') unless vendor&.vendor
   end
 
   def vendor_owners_the_account
-    self.errors.add(:account, "must be owned by selected vendor") unless self.account_id.nil? || (self.vendor_id && self.vendor_id == self.account.contractor_id)
+    errors.add(:account, 'must be owned by selected vendor') unless account_id.nil? || (vendor_id && vendor_id == account.contractor_id)
   end
 
   def vendor_owners_the_gateway
-    return true if self.gateway_id.nil? || self.gateway.is_shared?
+    return true if gateway_id.nil? || gateway.is_shared?
 
-    unless self.vendor_id && self.vendor_id == self.gateway.contractor_id
-      self.errors.add(:gateway, "must be owned by selected vendor or be shared")
+    unless vendor_id && vendor_id == gateway.contractor_id
+      errors.add(:gateway, 'must be owned by selected vendor or be shared')
     end
 
-    unless self.gateway.allow_termination
-      self.errors.add(:gateway, 'must be allowed for termination')
+    unless gateway.allow_termination
+      errors.add(:gateway, 'must be allowed for termination')
     end
   end
 
   def vendor_owners_the_gateway_group
-    self.errors.add(:gateway_group, "must be owned by selected vendor") unless self.gateway_group_id.nil? || (self.vendor_id && self.gateway_group_id && self.vendor_id == self.gateway_group.vendor_id)
+    errors.add(:gateway_group, 'must be owned by selected vendor') unless gateway_group_id.nil? || (vendor_id && gateway_group_id && vendor_id == gateway_group.vendor_id)
   end
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
-    [
-        :routing_for_contains,
-        :routing_tag_ids_covers,
-        :tagged
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      routing_for_contains
+      routing_tag_ids_covers
+      tagged
     ]
   end
-
 end

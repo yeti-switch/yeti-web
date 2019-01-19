@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reports.vendor_traffic_report
@@ -23,11 +25,11 @@ class Report::VendorTraffic < Cdr::Base
   validates_presence_of :date_start, :date_end, :vendor_id
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
 
   after_create do
-    #execute_sp("SELECT * FROM reports.vendor_traffic_report(?)", self.id)
+    # execute_sp("SELECT * FROM reports.vendor_traffic_report(?)", self.id)
     execute_sp("INSERT INTO reports.vendor_traffic_report_data(
                   report_id, customer_id,
                   calls_count,
@@ -53,12 +55,11 @@ class Report::VendorTraffic < Cdr::Base
                   AND time_start<?
                   AND vendor_id=?
             GROUP BY customer_id",
-               self.id,
+               id,
                GuiConfig.short_call_length,
-               self.date_start,
-               self.date_end,
-               self.vendor_id
-    )
+               date_start,
+               date_end,
+               vendor_id)
   end
 
   include Hints
@@ -68,21 +69,17 @@ class Report::VendorTraffic < Cdr::Base
   end
 
   def csv_columns
-    [:customer,
-     :calls_count,
-     :calls_duration,
-     :acd,
-     :asr,
-     :origination_cost,
-     :termination_cost,
-     :profit,
-     :success_calls_count,
-     :first_call_at,
-     :last_call_at,
-     :short_calls_count]
+    %i[customer
+       calls_count
+       calls_duration
+       acd
+       asr
+       origination_cost
+       termination_cost
+       profit
+       success_calls_count
+       first_call_at
+       last_call_at
+       short_calls_count]
   end
-
-
 end
-
-

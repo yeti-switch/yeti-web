@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bunny'
 require 'byebug'
 
@@ -12,7 +14,7 @@ class CdrAmqp < Pgq::ConsumerGroup
   end
 
   def perform_events(events)
-    perform_group(events.map &:data)
+    perform_group(events.map(&:data))
   end
 
   def perform_group(group)
@@ -32,10 +34,11 @@ class CdrAmqp < Pgq::ConsumerGroup
   end
 
   private
+
   def set_exchange_and_queue(conn)
     ch = conn.create_channel
-    @queue  = ch.queue 'cdr_streaming', durable: true
-    @exchange  = ch.fanout 'cdr_amqp', durable: true
+    @queue = ch.queue 'cdr_streaming', durable: true
+    @exchange = ch.fanout 'cdr_amqp', durable: true
     @queue.bind @exchange
   end
 end

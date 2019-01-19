@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :controller do
-
   include_context :jsonapi_admin_headers
 
   let(:resource_type) { 'area-prefixes' }
@@ -42,7 +43,7 @@ describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :controller do
 
     let(:relationships) do
       {
-        'area': wrap_relationship(:'areas', create(:area).to_param)
+        'area': wrap_relationship(:areas, create(:area).to_param)
       }
     end
 
@@ -76,5 +77,4 @@ describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :controller do
     it { expect(response.status).to eq(204) }
     it { expect(Routing::AreaPrefix.count).to eq(0) }
   end
-
 end

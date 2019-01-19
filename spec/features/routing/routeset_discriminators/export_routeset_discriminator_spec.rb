@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Export Routeset discriminator', type: :feature do
@@ -17,10 +19,10 @@ describe 'Export Routeset discriminator', type: :feature do
 
   it 'has expected header and values' do
     expect(subject).to match_array(
-                           [
-                               ['Id', item.id.to_s],
-                               ['Name', item.name]
-                           ]
-                       )
+      [
+        ['Id', item.id.to_s],
+        ['Name', item.name]
+      ]
+    )
   end
 end

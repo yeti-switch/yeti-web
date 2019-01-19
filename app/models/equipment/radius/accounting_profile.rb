@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.radius_accounting_profiles
@@ -16,26 +18,25 @@
 #
 
 class Equipment::Radius::AccountingProfile < Yeti::ActiveRecord
-  self.table_name='class4.radius_accounting_profiles'
+  self.table_name = 'class4.radius_accounting_profiles'
   has_paper_trail class_name: 'AuditLogItem'
 
-  has_many :stop_avps, class_name: 'Equipment::Radius::AccountingProfileStopAttribute', foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
-  has_many :start_avps, class_name: 'Equipment::Radius::AccountingProfileStartAttribute', foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
-  has_many :interim_avps, class_name: 'Equipment::Radius::AccountingProfileInterimAttribute', foreign_key: :profile_id, inverse_of: :profile , dependent: :destroy
+  has_many :stop_avps, class_name: 'Equipment::Radius::AccountingProfileStopAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy
+  has_many :start_avps, class_name: 'Equipment::Radius::AccountingProfileStartAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy
+  has_many :interim_avps, class_name: 'Equipment::Radius::AccountingProfileInterimAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy
 
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :radius_accounting_profile_id, dependent: :restrict_with_error
   has_many :gateways, class_name: 'Gateway', foreign_key: :radius_accounting_profile_id, dependent: :restrict_with_error
-
 
   accepts_nested_attributes_for :stop_avps, allow_destroy: true
   accepts_nested_attributes_for :interim_avps, allow_destroy: true
   accepts_nested_attributes_for :start_avps, allow_destroy: true
 
-  TIMEOUT_MIN=1
-  TIMEOUT_MAX=2000
+  TIMEOUT_MIN = 1
+  TIMEOUT_MAX = 2000
 
-  ATTEMPTS_MIN=1
-  ATTEMPTS_MAX=10
+  ATTEMPTS_MIN = 1
+  ATTEMPTS_MAX = 10
 
   validates_uniqueness_of :name
   validates_presence_of :name, :server, :port, :secret, :timeout, :attempts
@@ -55,5 +56,4 @@ class Equipment::Radius::AccountingProfile < Yeti::ActiveRecord
   def display_name
     "#{id} | #{name}"
   end
-
 end

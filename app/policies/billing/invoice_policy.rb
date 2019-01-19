@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Billing
   class InvoicePolicy < ::RolePolicy
     section 'Billing/Invoice'
@@ -7,7 +9,5 @@ module Billing
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

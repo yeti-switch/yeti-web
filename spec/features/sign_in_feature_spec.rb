@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-describe 'the signin process', :type => :feature do
+describe 'the signin process', type: :feature do
   subject do
-    login_as(admin_user, :scope => :admin_user)
+    login_as(admin_user, scope: :admin_user)
   end
 
   let!(:admin_user) { FactoryGirl.create(:admin_user) }

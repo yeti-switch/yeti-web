@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module ActiveAdmin
   module ViewHelpers
     module DisplayHelper
       STATUS_TAG_CACHE = [
-          '<span class="status_tag yes">Yes</span>'.html_safe.freeze,
-          '<span class="status_tag no">No</span>'.html_safe.freeze
+        '<span class="status_tag yes">Yes</span>'.html_safe.freeze,
+        '<span class="status_tag no">No</span>'.html_safe.freeze
       ].freeze
       BOOLEAN_VALUES = [true, false].freeze
 
-      alias_method :original_pretty_format, :pretty_format
+      alias original_pretty_format pretty_format
 
       def pretty_format(object)
         # Array of Strings
@@ -26,7 +28,6 @@ module ActiveAdmin
         BOOLEAN_VALUES.include?(value)
         # value.is_a?(TrueClass) || value.is_a?(FalseClass)
       end
-
     end
   end
 end

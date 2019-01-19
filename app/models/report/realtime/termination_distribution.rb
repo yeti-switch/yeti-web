@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cdr.cdr
@@ -143,8 +145,7 @@
 #
 
 class Report::Realtime::TerminationDistribution < Report::Realtime::Base
-
-  scope :detailed_scope, -> do
+  scope :detailed_scope, lambda {
     select('
       vendor_id,
       count(nullif(is_last_cdr,false)) as originated_calls_count,
@@ -159,18 +160,17 @@ class Report::Realtime::TerminationDistribution < Report::Realtime::Base
       sum(customer_price) as customer_price,
       sum(vendor_price) as vendor_price
     ').group(:vendor_id).preload(:vendor)
-  end
+  }
 
-  scope :time_interval_eq, ->(value) do
+  scope :time_interval_eq, lambda { |value|
     where('time_start >=? and time_start <?', value.to_i.seconds.ago, Time.now)
-  end
+  }
 
   private
 
-  def self.ransackable_scopes(auth_object = nil)
+  def self.ransackable_scopes(_auth_object = nil)
     [
-        :time_interval_eq
+      :time_interval_eq
     ]
   end
-
 end

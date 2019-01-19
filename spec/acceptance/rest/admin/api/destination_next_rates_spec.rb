@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
@@ -12,11 +14,11 @@ resource 'Destination next rates' do
   let(:destination) { create(:destination) }
   let(:destination_id) { destination.id }
 
-  required_params = %i(
+  required_params = %i[
     next-rate initial-rate initial-interval next-interval connect-fee apply-time applied
-  )
-  optional_params = %i(external-id)
-  required_relationships = %i(destination)
+  ]
+  optional_params = %i[external-id]
+  required_relationships = %i[destination]
 
   get '/api/rest/admin/destination-next-rates' do
     before { create_list(:destination_next_rate, 2, destination: destination) }

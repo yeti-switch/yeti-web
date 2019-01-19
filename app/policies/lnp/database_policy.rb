@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Lnp
   class DatabasePolicy < ::RolePolicy
     section 'Lnp/Database'
@@ -6,7 +8,5 @@ module Lnp
 
     class Scope < ::RolePolicy::Scope
     end
-
   end
 end
-  

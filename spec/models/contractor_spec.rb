@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Contractor, type: :model do
-
   let!(:contractor) {}
 
   context '#destroy' do
-
     subject do
       contractor.destroy!
     end
@@ -18,7 +18,5 @@ describe Contractor, type: :model do
         expect { subject }.to change { System::ApiAccess.count }.by(-1)
       end
     end
-
   end
-
 end

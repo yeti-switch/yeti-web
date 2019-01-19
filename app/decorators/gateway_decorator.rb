@@ -1,5 +1,6 @@
-class GatewayDecorator < BillingDecorator
+# frozen_string_literal: true
 
+class GatewayDecorator < BillingDecorator
   delegate_all
   decorates Gateway
 
@@ -7,30 +8,29 @@ class GatewayDecorator < BillingDecorator
 
   def decorated_display_name
     if !enabled?
-      h.content_tag(:font,display_name, color: :red)
+      h.content_tag(:font, display_name, color: :red)
     elsif locked?
-      h.content_tag(:font,display_name, color: :orange)
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
   end
 
   def decorated_termination_display_name
-    if !enabled?||!allow_termination
-      h.content_tag(:font,display_name, color: :red)
+    if !enabled? || !allow_termination
+      h.content_tag(:font, display_name, color: :red)
     elsif locked?
-      h.content_tag(:font,display_name, color: :orange)
+      h.content_tag(:font, display_name, color: :orange)
     else
       display_name
     end
   end
 
   def decorated_origination_display_name
-    if !enabled?||!allow_origination
-      h.content_tag(:font,display_name, color: :red)
+    if !enabled? || !allow_origination
+      h.content_tag(:font, display_name, color: :red)
     else
       display_name
     end
   end
-
 end
