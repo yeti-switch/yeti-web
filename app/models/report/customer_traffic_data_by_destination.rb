@@ -47,7 +47,7 @@ class Report::CustomerTrafficDataByDestination < Cdr::Base
   end
 
   def self.report_records
-    includes(:country, :network)
+    preload(:country, :network)
   end
 
   def self.csv_columns

@@ -52,7 +52,7 @@ module GroupReportTools
       self.report_items_class = child_class
       has_many :custom_items, class_name: child_class.to_s, foreign_key: :report_id, dependent: :delete_all do
         def with_includes
-          includes(proxy_association.owner.auto_includes)
+          preload(proxy_association.owner.auto_includes)
         end
       end
     end

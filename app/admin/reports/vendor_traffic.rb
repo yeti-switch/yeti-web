@@ -10,7 +10,7 @@ ActiveAdmin.register Report::VendorTraffic, as: 'VendorTraffic' do
 
   controller do
     def scoped_collection
-      super.includes(:vendor)
+      super.preload(:vendor)
     end
   end
 

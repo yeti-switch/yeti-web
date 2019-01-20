@@ -13,9 +13,11 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
                 send_to: [],
                 group_by_fields: []
 
-  includes :customer
-
   controller do
+    def scoped_collection
+      super.preload(:customer)
+    end
+
     def create
       create!
     end
