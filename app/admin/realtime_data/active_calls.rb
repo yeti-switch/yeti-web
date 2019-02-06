@@ -83,7 +83,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   filter :duration, as: :numeric
 
   batch_action :terminate, confirm: 'Are you sure?', if: proc { authorized?(:batch_perform) } do |ids|
-    authorize!
+    authorize!(:batch_perform)
     ids.each do |node_id_with_local_tag|
       node_id, local_tag = node_id_with_local_tag.split('*')
       Node.find(node_id).drop_call(local_tag)
