@@ -1,10 +1,12 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: auth_log; Type: SCHEMA; Schema: -; Owner: -
@@ -88,20 +90,6 @@ CREATE SCHEMA switch;
 --
 
 CREATE SCHEMA sys;
-
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
@@ -326,7 +314,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: cdr; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+-- Name: cdr; Type: TABLE; Schema: cdr; Owner: -
 --
 
 CREATE TABLE cdr.cdr (
@@ -950,7 +938,7 @@ $$;
 
 
 --
--- Name: config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: config; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.config (
@@ -3571,7 +3559,7 @@ $$;
 
 
 --
--- Name: auth_log; Type: TABLE; Schema: auth_log; Owner: -; Tablespace: 
+-- Name: auth_log; Type: TABLE; Schema: auth_log; Owner: -
 --
 
 CREATE TABLE auth_log.auth_log (
@@ -3631,7 +3619,7 @@ ALTER SEQUENCE auth_log.auth_log_id_seq OWNED BY auth_log.auth_log.id;
 
 
 --
--- Name: invoice_destinations; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_destinations; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_destinations (
@@ -3672,7 +3660,7 @@ ALTER SEQUENCE billing.invoice_destinations_id_seq OWNED BY billing.invoice_dest
 
 
 --
--- Name: invoice_documents; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_documents; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_documents (
@@ -3706,7 +3694,7 @@ ALTER SEQUENCE billing.invoice_documents_id_seq OWNED BY billing.invoice_documen
 
 
 --
--- Name: invoice_networks; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_networks; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_networks (
@@ -3746,7 +3734,7 @@ ALTER SEQUENCE billing.invoice_networks_id_seq OWNED BY billing.invoice_networks
 
 
 --
--- Name: invoice_states; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_states; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_states (
@@ -3756,7 +3744,7 @@ CREATE TABLE billing.invoice_states (
 
 
 --
--- Name: invoice_types; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_types; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_types (
@@ -3766,7 +3754,7 @@ CREATE TABLE billing.invoice_types (
 
 
 --
--- Name: invoices; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoices; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoices (
@@ -3810,7 +3798,7 @@ ALTER SEQUENCE billing.invoices_id_seq OWNED BY billing.invoices.id;
 
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata; Type: TABLE; Schema: cdr; Owner: -
 --
 
 CREATE TABLE cdr.ar_internal_metadata (
@@ -3822,7 +3810,7 @@ CREATE TABLE cdr.ar_internal_metadata (
 
 
 --
--- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -; Tablespace: 
+-- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -
 --
 
 CREATE TABLE cdr.cdr_archive (
@@ -3987,7 +3975,7 @@ ALTER SEQUENCE cdr.cdr_id_seq OWNED BY cdr.cdr.id;
 
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.ar_internal_metadata (
@@ -3999,7 +3987,7 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.schema_migrations (
@@ -4008,7 +3996,7 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: cdr_custom_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_custom_report (
@@ -4023,7 +4011,7 @@ CREATE TABLE reports.cdr_custom_report (
 
 
 --
--- Name: cdr_custom_report_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report_data; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_custom_report_data (
@@ -4149,7 +4137,7 @@ ALTER SEQUENCE reports.cdr_custom_report_id_seq OWNED BY reports.cdr_custom_repo
 
 
 --
--- Name: cdr_custom_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report_schedulers; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_custom_report_schedulers (
@@ -4185,7 +4173,7 @@ ALTER SEQUENCE reports.cdr_custom_report_schedulers_id_seq OWNED BY reports.cdr_
 
 
 --
--- Name: cdr_interval_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_interval_report (
@@ -4202,7 +4190,7 @@ CREATE TABLE reports.cdr_interval_report (
 
 
 --
--- Name: cdr_interval_report_aggrerator; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_aggrerator; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_interval_report_aggrerator (
@@ -4212,7 +4200,7 @@ CREATE TABLE reports.cdr_interval_report_aggrerator (
 
 
 --
--- Name: cdr_interval_report_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_data; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_interval_report_data (
@@ -4332,7 +4320,7 @@ ALTER SEQUENCE reports.cdr_interval_report_id_seq OWNED BY reports.cdr_interval_
 
 
 --
--- Name: cdr_interval_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_schedulers; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.cdr_interval_report_schedulers (
@@ -4370,7 +4358,7 @@ ALTER SEQUENCE reports.cdr_interval_report_schedulers_id_seq OWNED BY reports.cd
 
 
 --
--- Name: customer_traffic_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.customer_traffic_report (
@@ -4383,7 +4371,7 @@ CREATE TABLE reports.customer_traffic_report (
 
 
 --
--- Name: customer_traffic_report_data_by_destination; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_by_destination; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.customer_traffic_report_data_by_destination (
@@ -4426,7 +4414,7 @@ ALTER SEQUENCE reports.customer_traffic_report_data_by_destination_id_seq OWNED 
 
 
 --
--- Name: customer_traffic_report_data_by_vendor; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_by_vendor; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.customer_traffic_report_data_by_vendor (
@@ -4448,7 +4436,7 @@ CREATE TABLE reports.customer_traffic_report_data_by_vendor (
 
 
 --
--- Name: customer_traffic_report_data_full; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_full; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.customer_traffic_report_data_full (
@@ -4530,7 +4518,7 @@ ALTER SEQUENCE reports.customer_traffic_report_id_seq OWNED BY reports.customer_
 
 
 --
--- Name: customer_traffic_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_schedulers; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.customer_traffic_report_schedulers (
@@ -4564,7 +4552,7 @@ ALTER SEQUENCE reports.customer_traffic_report_schedulers_id_seq OWNED BY report
 
 
 --
--- Name: report_vendors; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: report_vendors; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.report_vendors (
@@ -4576,7 +4564,7 @@ CREATE TABLE reports.report_vendors (
 
 
 --
--- Name: report_vendors_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: report_vendors_data; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.report_vendors_data (
@@ -4625,7 +4613,7 @@ ALTER SEQUENCE reports.report_vendors_id_seq OWNED BY reports.report_vendors.id;
 
 
 --
--- Name: scheduler_periods; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: scheduler_periods; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.scheduler_periods (
@@ -4635,7 +4623,7 @@ CREATE TABLE reports.scheduler_periods (
 
 
 --
--- Name: vendor_traffic_report; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.vendor_traffic_report (
@@ -4648,7 +4636,7 @@ CREATE TABLE reports.vendor_traffic_report (
 
 
 --
--- Name: vendor_traffic_report_data; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report_data; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.vendor_traffic_report_data (
@@ -4708,7 +4696,7 @@ ALTER SEQUENCE reports.vendor_traffic_report_id_seq OWNED BY reports.vendor_traf
 
 
 --
--- Name: vendor_traffic_report_schedulers; Type: TABLE; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report_schedulers; Type: TABLE; Schema: reports; Owner: -
 --
 
 CREATE TABLE reports.vendor_traffic_report_schedulers (
@@ -4742,7 +4730,7 @@ ALTER SEQUENCE reports.vendor_traffic_report_schedulers_id_seq OWNED BY reports.
 
 
 --
--- Name: active_call_customer_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_customer_accounts; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_customer_accounts (
@@ -4754,7 +4742,7 @@ CREATE TABLE stats.active_call_customer_accounts (
 
 
 --
--- Name: active_call_customer_accounts_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_customer_accounts_hourly; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_customer_accounts_hourly (
@@ -4807,7 +4795,7 @@ ALTER SEQUENCE stats.active_call_customer_accounts_id_seq OWNED BY stats.active_
 
 
 --
--- Name: active_call_orig_gateways; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_orig_gateways; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_orig_gateways (
@@ -4819,7 +4807,7 @@ CREATE TABLE stats.active_call_orig_gateways (
 
 
 --
--- Name: active_call_orig_gateways_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_orig_gateways_hourly; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_orig_gateways_hourly (
@@ -4872,7 +4860,7 @@ ALTER SEQUENCE stats.active_call_orig_gateways_id_seq OWNED BY stats.active_call
 
 
 --
--- Name: active_call_term_gateways; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_term_gateways; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_term_gateways (
@@ -4884,7 +4872,7 @@ CREATE TABLE stats.active_call_term_gateways (
 
 
 --
--- Name: active_call_term_gateways_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_term_gateways_hourly; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_term_gateways_hourly (
@@ -4937,7 +4925,7 @@ ALTER SEQUENCE stats.active_call_term_gateways_id_seq OWNED BY stats.active_call
 
 
 --
--- Name: active_call_vendor_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_vendor_accounts; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_vendor_accounts (
@@ -4949,7 +4937,7 @@ CREATE TABLE stats.active_call_vendor_accounts (
 
 
 --
--- Name: active_call_vendor_accounts_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_vendor_accounts_hourly; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_call_vendor_accounts_hourly (
@@ -5002,7 +4990,7 @@ ALTER SEQUENCE stats.active_call_vendor_accounts_id_seq OWNED BY stats.active_ca
 
 
 --
--- Name: active_calls; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_calls; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_calls (
@@ -5014,7 +5002,7 @@ CREATE TABLE stats.active_calls (
 
 
 --
--- Name: active_calls_hourly; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_calls_hourly; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.active_calls_hourly (
@@ -5067,7 +5055,7 @@ ALTER SEQUENCE stats.active_calls_id_seq OWNED BY stats.active_calls.id;
 
 
 --
--- Name: termination_quality_stats; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: termination_quality_stats; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.termination_quality_stats (
@@ -5103,7 +5091,7 @@ ALTER SEQUENCE stats.termination_quality_stats_id_seq OWNED BY stats.termination
 
 
 --
--- Name: traffic_customer_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: traffic_customer_accounts; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.traffic_customer_accounts (
@@ -5137,7 +5125,7 @@ ALTER SEQUENCE stats.traffic_customer_accounts_id_seq OWNED BY stats.traffic_cus
 
 
 --
--- Name: traffic_vendor_accounts; Type: TABLE; Schema: stats; Owner: -; Tablespace: 
+-- Name: traffic_vendor_accounts; Type: TABLE; Schema: stats; Owner: -
 --
 
 CREATE TABLE stats.traffic_vendor_accounts (
@@ -5171,7 +5159,7 @@ ALTER SEQUENCE stats.traffic_vendor_accounts_id_seq OWNED BY stats.traffic_vendo
 
 
 --
--- Name: amount_round_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: amount_round_modes; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.amount_round_modes (
@@ -5181,7 +5169,7 @@ CREATE TABLE sys.amount_round_modes (
 
 
 --
--- Name: auth_log_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: auth_log_tables; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.auth_log_tables (
@@ -5215,7 +5203,7 @@ ALTER SEQUENCE sys.auth_log_tables_id_seq OWNED BY sys.auth_log_tables.id;
 
 
 --
--- Name: call_duration_round_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: call_duration_round_modes; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.call_duration_round_modes (
@@ -5225,7 +5213,7 @@ CREATE TABLE sys.call_duration_round_modes (
 
 
 --
--- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.cdr_tables (
@@ -5259,266 +5247,266 @@ ALTER SEQUENCE sys.cdr_tables_id_seq OWNED BY sys.cdr_tables.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: auth_log; Owner: -
+-- Name: auth_log id; Type: DEFAULT; Schema: auth_log; Owner: -
 --
 
 ALTER TABLE ONLY auth_log.auth_log ALTER COLUMN id SET DEFAULT nextval('auth_log.auth_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoice_destinations id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_destinations ALTER COLUMN id SET DEFAULT nextval('billing.invoice_destinations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoice_documents id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_documents ALTER COLUMN id SET DEFAULT nextval('billing.invoice_documents_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoice_networks id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_networks ALTER COLUMN id SET DEFAULT nextval('billing.invoice_networks_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoices id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoices ALTER COLUMN id SET DEFAULT nextval('billing.invoices_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: cdr; Owner: -
+-- Name: cdr id; Type: DEFAULT; Schema: cdr; Owner: -
 --
 
 ALTER TABLE ONLY cdr.cdr ALTER COLUMN id SET DEFAULT nextval('cdr.cdr_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: cdr_custom_report id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report ALTER COLUMN id SET DEFAULT nextval('reports.cdr_custom_report_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: cdr_custom_report_data id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report_data ALTER COLUMN id SET DEFAULT nextval('reports.cdr_custom_report_data_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: cdr_custom_report_schedulers id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.cdr_custom_report_schedulers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: cdr_interval_report id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report ALTER COLUMN id SET DEFAULT nextval('reports.cdr_interval_report_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: cdr_interval_report_data id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_data ALTER COLUMN id SET DEFAULT nextval('reports.cdr_interval_report_data_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: cdr_interval_report_schedulers id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.cdr_interval_report_schedulers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: customer_traffic_report id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: customer_traffic_report_data_by_destination id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_by_destination ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_data_by_destination_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: customer_traffic_report_data_by_vendor id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_data_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: customer_traffic_report_data_full id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_full ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_data_full_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: customer_traffic_report_schedulers id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.customer_traffic_report_schedulers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: report_vendors id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.report_vendors ALTER COLUMN id SET DEFAULT nextval('reports.report_vendors_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: report_vendors_data id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.report_vendors_data ALTER COLUMN id SET DEFAULT nextval('reports.report_vendors_data_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: vendor_traffic_report id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report ALTER COLUMN id SET DEFAULT nextval('reports.vendor_traffic_report_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: vendor_traffic_report_data id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report_data ALTER COLUMN id SET DEFAULT nextval('reports.vendor_traffic_report_data_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: reports; Owner: -
+-- Name: vendor_traffic_report_schedulers id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report_schedulers ALTER COLUMN id SET DEFAULT nextval('reports.vendor_traffic_report_schedulers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_customer_accounts id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_customer_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_customer_accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_customer_accounts_hourly id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_customer_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_customer_accounts_hourly_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_orig_gateways id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_orig_gateways ALTER COLUMN id SET DEFAULT nextval('stats.active_call_orig_gateways_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_orig_gateways_hourly id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_orig_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_orig_gateways_hourly_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_term_gateways id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_term_gateways ALTER COLUMN id SET DEFAULT nextval('stats.active_call_term_gateways_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_term_gateways_hourly id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_term_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_term_gateways_hourly_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_vendor_accounts id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_vendor_accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_vendor_accounts_hourly id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_vendor_accounts_hourly_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_calls id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_calls ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_calls_hourly id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_calls_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_hourly_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: termination_quality_stats id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.termination_quality_stats ALTER COLUMN id SET DEFAULT nextval('stats.termination_quality_stats_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: traffic_customer_accounts id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.traffic_customer_accounts ALTER COLUMN id SET DEFAULT nextval('stats.traffic_customer_accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: traffic_vendor_accounts id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('stats.traffic_vendor_accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: auth_log_tables id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.auth_log_tables ALTER COLUMN id SET DEFAULT nextval('sys.auth_log_tables_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: cdr_tables id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdr_tables_id_seq'::regclass);
 
 
 --
--- Name: auth_log_pkey; Type: CONSTRAINT; Schema: auth_log; Owner: -; Tablespace: 
+-- Name: auth_log auth_log_pkey; Type: CONSTRAINT; Schema: auth_log; Owner: -
 --
 
 ALTER TABLE ONLY auth_log.auth_log
@@ -5526,7 +5514,7 @@ ALTER TABLE ONLY auth_log.auth_log
 
 
 --
--- Name: invoice_destinations_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_destinations invoice_destinations_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_destinations
@@ -5534,7 +5522,7 @@ ALTER TABLE ONLY billing.invoice_destinations
 
 
 --
--- Name: invoice_documents_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_documents invoice_documents_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_documents
@@ -5542,7 +5530,7 @@ ALTER TABLE ONLY billing.invoice_documents
 
 
 --
--- Name: invoice_networks_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_networks invoice_networks_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_networks
@@ -5550,7 +5538,7 @@ ALTER TABLE ONLY billing.invoice_networks
 
 
 --
--- Name: invoice_states_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_states invoice_states_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_states
@@ -5558,7 +5546,7 @@ ALTER TABLE ONLY billing.invoice_states
 
 
 --
--- Name: invoice_states_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_states invoice_states_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_states
@@ -5566,7 +5554,7 @@ ALTER TABLE ONLY billing.invoice_states
 
 
 --
--- Name: invoice_types_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_types invoice_types_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_types
@@ -5574,7 +5562,7 @@ ALTER TABLE ONLY billing.invoice_types
 
 
 --
--- Name: invoice_types_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_types invoice_types_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_types
@@ -5582,7 +5570,7 @@ ALTER TABLE ONLY billing.invoice_types
 
 
 --
--- Name: invoices_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoices invoices_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoices
@@ -5590,7 +5578,7 @@ ALTER TABLE ONLY billing.invoices
 
 
 --
--- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -
 --
 
 ALTER TABLE ONLY cdr.ar_internal_metadata
@@ -5598,7 +5586,7 @@ ALTER TABLE ONLY cdr.ar_internal_metadata
 
 
 --
--- Name: cdr_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -; Tablespace: 
+-- Name: cdr cdr_pkey; Type: CONSTRAINT; Schema: cdr; Owner: -
 --
 
 ALTER TABLE ONLY cdr.cdr
@@ -5606,7 +5594,7 @@ ALTER TABLE ONLY cdr.cdr
 
 
 --
--- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.ar_internal_metadata
@@ -5614,7 +5602,7 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: cdr_custom_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report_data cdr_custom_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report_data
@@ -5622,7 +5610,7 @@ ALTER TABLE ONLY reports.cdr_custom_report_data
 
 
 --
--- Name: cdr_custom_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report cdr_custom_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report
@@ -5630,7 +5618,7 @@ ALTER TABLE ONLY reports.cdr_custom_report
 
 
 --
--- Name: cdr_custom_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report_schedulers cdr_custom_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report_schedulers
@@ -5638,7 +5626,7 @@ ALTER TABLE ONLY reports.cdr_custom_report_schedulers
 
 
 --
--- Name: cdr_interval_report_aggrerator_name_key; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_aggrerator cdr_interval_report_aggrerator_name_key; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
@@ -5646,7 +5634,7 @@ ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
 
 
 --
--- Name: cdr_interval_report_aggrerator_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_aggrerator cdr_interval_report_aggrerator_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
@@ -5654,7 +5642,7 @@ ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
 
 
 --
--- Name: cdr_interval_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_data cdr_interval_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_data
@@ -5662,7 +5650,7 @@ ALTER TABLE ONLY reports.cdr_interval_report_data
 
 
 --
--- Name: cdr_interval_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report cdr_interval_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report
@@ -5670,7 +5658,7 @@ ALTER TABLE ONLY reports.cdr_interval_report
 
 
 --
--- Name: cdr_interval_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_interval_report_schedulers cdr_interval_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_schedulers
@@ -5678,7 +5666,7 @@ ALTER TABLE ONLY reports.cdr_interval_report_schedulers
 
 
 --
--- Name: customer_traffic_report_data_by_destination_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_by_destination customer_traffic_report_data_by_destination_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_by_destination
@@ -5686,7 +5674,7 @@ ALTER TABLE ONLY reports.customer_traffic_report_data_by_destination
 
 
 --
--- Name: customer_traffic_report_data_full_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_full customer_traffic_report_data_full_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_full
@@ -5694,7 +5682,7 @@ ALTER TABLE ONLY reports.customer_traffic_report_data_full
 
 
 --
--- Name: customer_traffic_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_by_vendor customer_traffic_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor
@@ -5702,7 +5690,7 @@ ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor
 
 
 --
--- Name: customer_traffic_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report customer_traffic_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report
@@ -5710,7 +5698,7 @@ ALTER TABLE ONLY reports.customer_traffic_report
 
 
 --
--- Name: customer_traffic_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_schedulers customer_traffic_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_schedulers
@@ -5718,7 +5706,7 @@ ALTER TABLE ONLY reports.customer_traffic_report_schedulers
 
 
 --
--- Name: report_vendors_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: report_vendors_data report_vendors_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.report_vendors_data
@@ -5726,7 +5714,7 @@ ALTER TABLE ONLY reports.report_vendors_data
 
 
 --
--- Name: report_vendors_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: report_vendors report_vendors_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.report_vendors
@@ -5734,7 +5722,7 @@ ALTER TABLE ONLY reports.report_vendors
 
 
 --
--- Name: scheduler_periods_name_key; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: scheduler_periods scheduler_periods_name_key; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.scheduler_periods
@@ -5742,7 +5730,7 @@ ALTER TABLE ONLY reports.scheduler_periods
 
 
 --
--- Name: scheduler_periods_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: scheduler_periods scheduler_periods_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.scheduler_periods
@@ -5750,7 +5738,7 @@ ALTER TABLE ONLY reports.scheduler_periods
 
 
 --
--- Name: vendor_traffic_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report_data vendor_traffic_report_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report_data
@@ -5758,7 +5746,7 @@ ALTER TABLE ONLY reports.vendor_traffic_report_data
 
 
 --
--- Name: vendor_traffic_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report vendor_traffic_report_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report
@@ -5766,7 +5754,7 @@ ALTER TABLE ONLY reports.vendor_traffic_report
 
 
 --
--- Name: vendor_traffic_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report_schedulers vendor_traffic_report_schedulers_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report_schedulers
@@ -5774,7 +5762,7 @@ ALTER TABLE ONLY reports.vendor_traffic_report_schedulers
 
 
 --
--- Name: active_call_customer_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_customer_accounts_hourly active_call_customer_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_customer_accounts_hourly
@@ -5782,7 +5770,7 @@ ALTER TABLE ONLY stats.active_call_customer_accounts_hourly
 
 
 --
--- Name: active_call_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_customer_accounts active_call_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_customer_accounts
@@ -5790,7 +5778,7 @@ ALTER TABLE ONLY stats.active_call_customer_accounts
 
 
 --
--- Name: active_call_orig_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_orig_gateways_hourly active_call_orig_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_orig_gateways_hourly
@@ -5798,7 +5786,7 @@ ALTER TABLE ONLY stats.active_call_orig_gateways_hourly
 
 
 --
--- Name: active_call_orig_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_orig_gateways active_call_orig_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_orig_gateways
@@ -5806,7 +5794,7 @@ ALTER TABLE ONLY stats.active_call_orig_gateways
 
 
 --
--- Name: active_call_term_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_term_gateways_hourly active_call_term_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_term_gateways_hourly
@@ -5814,7 +5802,7 @@ ALTER TABLE ONLY stats.active_call_term_gateways_hourly
 
 
 --
--- Name: active_call_term_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_term_gateways active_call_term_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_term_gateways
@@ -5822,7 +5810,7 @@ ALTER TABLE ONLY stats.active_call_term_gateways
 
 
 --
--- Name: active_call_vendor_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_vendor_accounts_hourly active_call_vendor_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly
@@ -5830,7 +5818,7 @@ ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly
 
 
 --
--- Name: active_call_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_call_vendor_accounts active_call_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_vendor_accounts
@@ -5838,7 +5826,7 @@ ALTER TABLE ONLY stats.active_call_vendor_accounts
 
 
 --
--- Name: active_calls_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_calls_hourly active_calls_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_calls_hourly
@@ -5846,7 +5834,7 @@ ALTER TABLE ONLY stats.active_calls_hourly
 
 
 --
--- Name: active_calls_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: active_calls active_calls_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_calls
@@ -5854,7 +5842,7 @@ ALTER TABLE ONLY stats.active_calls
 
 
 --
--- Name: termination_quality_stats_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: termination_quality_stats termination_quality_stats_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.termination_quality_stats
@@ -5862,7 +5850,7 @@ ALTER TABLE ONLY stats.termination_quality_stats
 
 
 --
--- Name: traffic_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: traffic_customer_accounts traffic_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.traffic_customer_accounts
@@ -5870,7 +5858,7 @@ ALTER TABLE ONLY stats.traffic_customer_accounts
 
 
 --
--- Name: traffic_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -; Tablespace: 
+-- Name: traffic_vendor_accounts traffic_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.traffic_vendor_accounts
@@ -5878,7 +5866,7 @@ ALTER TABLE ONLY stats.traffic_vendor_accounts
 
 
 --
--- Name: amount_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: amount_round_modes amount_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.amount_round_modes
@@ -5886,7 +5874,7 @@ ALTER TABLE ONLY sys.amount_round_modes
 
 
 --
--- Name: amount_round_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: amount_round_modes amount_round_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.amount_round_modes
@@ -5894,7 +5882,7 @@ ALTER TABLE ONLY sys.amount_round_modes
 
 
 --
--- Name: auth_log_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: auth_log_tables auth_log_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.auth_log_tables
@@ -5902,7 +5890,7 @@ ALTER TABLE ONLY sys.auth_log_tables
 
 
 --
--- Name: call_duration_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: call_duration_round_modes call_duration_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.call_duration_round_modes
@@ -5910,7 +5898,7 @@ ALTER TABLE ONLY sys.call_duration_round_modes
 
 
 --
--- Name: call_duration_round_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: call_duration_round_modes call_duration_round_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.call_duration_round_modes
@@ -5918,7 +5906,7 @@ ALTER TABLE ONLY sys.call_duration_round_modes
 
 
 --
--- Name: cdr_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_tables cdr_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.cdr_tables
@@ -5926,7 +5914,7 @@ ALTER TABLE ONLY sys.cdr_tables
 
 
 --
--- Name: config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: config config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.config
@@ -5934,105 +5922,105 @@ ALTER TABLE ONLY sys.config
 
 
 --
--- Name: invoice_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
 CREATE INDEX invoice_destinations_invoice_id_idx ON billing.invoice_destinations USING btree (invoice_id);
 
 
 --
--- Name: invoice_documents_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_documents_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
 CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON billing.invoice_documents USING btree (invoice_id);
 
 
 --
--- Name: cdr_time_start_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
+-- Name: cdr_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
 CREATE INDEX cdr_time_start_idx ON cdr.cdr USING btree (time_start);
 
 
 --
--- Name: cdr_vendor_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -; Tablespace: 
+-- Name: cdr_vendor_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
 CREATE INDEX cdr_vendor_invoice_id_idx ON cdr.cdr USING btree (vendor_invoice_id);
 
 
 --
--- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migrations USING btree (version);
 
 
 --
--- Name: cdr_custom_report_id_idx; Type: INDEX; Schema: reports; Owner: -; Tablespace: 
+-- Name: cdr_custom_report_id_idx; Type: INDEX; Schema: reports; Owner: -
 --
 
 CREATE UNIQUE INDEX cdr_custom_report_id_idx ON reports.cdr_custom_report USING btree (id) WHERE (id IS NOT NULL);
 
 
 --
--- Name: customer_traffic_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -; Tablespace: 
+-- Name: customer_traffic_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -
 --
 
 CREATE INDEX customer_traffic_report_data_report_id_idx ON reports.customer_traffic_report_data_by_vendor USING btree (report_id);
 
 
 --
--- Name: vendor_traffic_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -; Tablespace: 
+-- Name: vendor_traffic_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -
 --
 
 CREATE INDEX vendor_traffic_report_data_report_id_idx ON reports.vendor_traffic_report_data USING btree (report_id);
 
 
 --
--- Name: termination_quality_stats_dialpeer_id_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
+-- Name: termination_quality_stats_dialpeer_id_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
 CREATE INDEX termination_quality_stats_dialpeer_id_idx ON stats.termination_quality_stats USING btree (dialpeer_id);
 
 
 --
--- Name: termination_quality_stats_gateway_id_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
+-- Name: termination_quality_stats_gateway_id_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
 CREATE INDEX termination_quality_stats_gateway_id_idx ON stats.termination_quality_stats USING btree (gateway_id);
 
 
 --
--- Name: traffic_customer_accounts_account_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
+-- Name: traffic_customer_accounts_account_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
 CREATE UNIQUE INDEX traffic_customer_accounts_account_id_timestamp_idx ON stats.traffic_customer_accounts USING btree (account_id, "timestamp");
 
 
 --
--- Name: traffic_vendor_accounts_account_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -; Tablespace: 
+-- Name: traffic_vendor_accounts_account_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
 CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.traffic_vendor_accounts USING btree (account_id, "timestamp");
 
 
 --
--- Name: auth_log_i; Type: TRIGGER; Schema: auth_log; Owner: -
+-- Name: auth_log auth_log_i; Type: TRIGGER; Schema: auth_log; Owner: -
 --
 
 CREATE TRIGGER auth_log_i BEFORE INSERT ON auth_log.auth_log FOR EACH ROW EXECUTE PROCEDURE auth_log.auth_log_i_tgf();
 
 
 --
--- Name: cdr_i; Type: TRIGGER; Schema: cdr; Owner: -
+-- Name: cdr cdr_i; Type: TRIGGER; Schema: cdr; Owner: -
 --
 
 CREATE TRIGGER cdr_i BEFORE INSERT ON cdr.cdr FOR EACH ROW EXECUTE PROCEDURE cdr.cdr_i_tgf();
 
 
 --
--- Name: invoice_destinations_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_destinations invoice_destinations_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_destinations
@@ -6040,7 +6028,7 @@ ALTER TABLE ONLY billing.invoice_destinations
 
 
 --
--- Name: invoice_documents_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_documents invoice_documents_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_documents
@@ -6048,7 +6036,7 @@ ALTER TABLE ONLY billing.invoice_documents
 
 
 --
--- Name: invoice_networks_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_networks invoice_networks_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_networks
@@ -6056,7 +6044,7 @@ ALTER TABLE ONLY billing.invoice_networks
 
 
 --
--- Name: invoices_state_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoices invoices_state_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoices
@@ -6064,7 +6052,7 @@ ALTER TABLE ONLY billing.invoices
 
 
 --
--- Name: invoices_type_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoices invoices_type_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoices
@@ -6072,7 +6060,7 @@ ALTER TABLE ONLY billing.invoices
 
 
 --
--- Name: cdr_custom_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_custom_report_data cdr_custom_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report_data
@@ -6080,7 +6068,7 @@ ALTER TABLE ONLY reports.cdr_custom_report_data
 
 
 --
--- Name: cdr_custom_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_custom_report_schedulers cdr_custom_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_custom_report_schedulers
@@ -6088,7 +6076,7 @@ ALTER TABLE ONLY reports.cdr_custom_report_schedulers
 
 
 --
--- Name: cdr_interval_report_aggregator_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_interval_report cdr_interval_report_aggregator_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report
@@ -6096,7 +6084,7 @@ ALTER TABLE ONLY reports.cdr_interval_report
 
 
 --
--- Name: cdr_interval_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_interval_report_data cdr_interval_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_data
@@ -6104,7 +6092,7 @@ ALTER TABLE ONLY reports.cdr_interval_report_data
 
 
 --
--- Name: cdr_interval_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_interval_report_schedulers cdr_interval_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report_schedulers
@@ -6112,7 +6100,7 @@ ALTER TABLE ONLY reports.cdr_interval_report_schedulers
 
 
 --
--- Name: customer_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: customer_traffic_report_data_by_vendor customer_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor
@@ -6120,7 +6108,7 @@ ALTER TABLE ONLY reports.customer_traffic_report_data_by_vendor
 
 
 --
--- Name: customer_traffic_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: customer_traffic_report_schedulers customer_traffic_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.customer_traffic_report_schedulers
@@ -6128,7 +6116,7 @@ ALTER TABLE ONLY reports.customer_traffic_report_schedulers
 
 
 --
--- Name: report_vendors_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: report_vendors_data report_vendors_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.report_vendors_data
@@ -6136,7 +6124,7 @@ ALTER TABLE ONLY reports.report_vendors_data
 
 
 --
--- Name: vendor_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: vendor_traffic_report_data vendor_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report_data
@@ -6144,7 +6132,7 @@ ALTER TABLE ONLY reports.vendor_traffic_report_data
 
 
 --
--- Name: vendor_traffic_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
+-- Name: vendor_traffic_report_schedulers vendor_traffic_report_schedulers_period_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
 ALTER TABLE ONLY reports.vendor_traffic_report_schedulers
@@ -6152,7 +6140,7 @@ ALTER TABLE ONLY reports.vendor_traffic_report_schedulers
 
 
 --
--- Name: config_call_duration_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: config config_call_duration_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.config
@@ -6160,7 +6148,7 @@ ALTER TABLE ONLY sys.config
 
 
 --
--- Name: config_customer_amount_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: config config_customer_amount_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.config
@@ -6168,7 +6156,7 @@ ALTER TABLE ONLY sys.config
 
 
 --
--- Name: config_vendor_amount_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: config config_vendor_amount_round_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.config

@@ -6,14 +6,14 @@
 # Contributing, Development setup
 
 
-It is strongly recommended to use PostgreSQL version 9.4.
+It is strongly recommended to use PostgreSQL version 11.
 The easiest way to install it - is to use Debian Linux and follow official PostgreSQL instruction
 https://www.postgresql.org/download/linux/debian/
 
 You need to install:
 
 ```sh
-sudo apt-get install postgresql-9.4 postgresql-contrib-9.4 postgresql-9.4-prefix postgresql-9.4-pgq3 skytools3 skytools3-ticker
+sudo apt-get install postgresql-11 postgresql-contrib-11 postgresql-11-prefix postgresql-11-pgq3
 sudo apt-get install -t stretch-pgdg libpq-dev
 ```
 In addition you need to compile or install from .deb package Yeti PostgreSQL extension https://github.com/yeti-switch/yeti-pg-ext
@@ -29,9 +29,9 @@ Then create `config/database.yml`, example is `database.yml.example`. Notice thi
 And run command to create development database:
 
 ```sh
-bundle exec rake db:create db:structure:load db:migrate
-bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
-bundle exec rake db:seed
+RAILS_ENV=development bundle exec rake db:create db:structure:load db:migrate
+RAILS_ENV=development bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
+RAILS_ENV=development bundle exec rake db:seed
 ```
 
 Then start rails server `bundle exec rails s` and login to http://localhost:3000/ with
