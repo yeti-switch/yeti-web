@@ -1,10 +1,12 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: billing; Type: SCHEMA; Schema: -; Owner: -
@@ -123,20 +125,6 @@ CREATE SCHEMA sys;
 --
 
 CREATE SCHEMA yeti_ext;
-
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
@@ -4470,7 +4458,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: accounts; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: accounts; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.accounts (
@@ -5304,7 +5292,7 @@ $$;
 
 
 --
--- Name: network_prefixes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: network_prefixes; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.network_prefixes (
@@ -5408,7 +5396,7 @@ $$;
 
 
 --
--- Name: disconnect_code_namespace; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_code_namespace; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.disconnect_code_namespace (
@@ -5662,7 +5650,7 @@ $$;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: switch13; Owner: -
 --
 
 CREATE TABLE switch13.resource_type (
@@ -5949,7 +5937,7 @@ $$;
 
 
 --
--- Name: destinations; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: destinations; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.destinations (
@@ -5990,7 +5978,7 @@ CREATE TABLE class4.destinations (
 
 
 --
--- Name: dialpeers; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeers; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.dialpeers (
@@ -6042,7 +6030,7 @@ CREATE TABLE class4.dialpeers (
 
 
 --
--- Name: gateways; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateways; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.gateways (
@@ -10540,7 +10528,7 @@ $$;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: switch14; Owner: -
 --
 
 CREATE TABLE switch14.resource_type (
@@ -15360,7 +15348,7 @@ $$;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: switch15; Owner: -
 --
 
 CREATE TABLE switch15.resource_type (
@@ -20332,7 +20320,7 @@ $$;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: switch16; Owner: -
 --
 
 CREATE TABLE switch16.resource_type (
@@ -25664,7 +25652,7 @@ ALTER SEQUENCE billing.accounts_id_seq OWNED BY billing.accounts.id;
 
 
 --
--- Name: cdr_batches; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: cdr_batches; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.cdr_batches (
@@ -25676,7 +25664,7 @@ CREATE TABLE billing.cdr_batches (
 
 
 --
--- Name: invoice_periods; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_periods; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_periods (
@@ -25705,7 +25693,7 @@ ALTER SEQUENCE billing.invoice_periods_id_seq OWNED BY billing.invoice_periods.i
 
 
 --
--- Name: invoice_templates; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_templates; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.invoice_templates (
@@ -25738,7 +25726,7 @@ ALTER SEQUENCE billing.invoices_templates_id_seq OWNED BY billing.invoice_templa
 
 
 --
--- Name: payments; Type: TABLE; Schema: billing; Owner: -; Tablespace: 
+-- Name: payments; Type: TABLE; Schema: billing; Owner: -
 --
 
 CREATE TABLE billing.payments (
@@ -25770,7 +25758,7 @@ ALTER SEQUENCE billing.payments_id_seq OWNED BY billing.payments.id;
 
 
 --
--- Name: area_prefixes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: area_prefixes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.area_prefixes (
@@ -25800,7 +25788,7 @@ ALTER SEQUENCE class4.area_prefixes_id_seq OWNED BY class4.area_prefixes.id;
 
 
 --
--- Name: areas; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: areas; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.areas (
@@ -25829,7 +25817,7 @@ ALTER SEQUENCE class4.areas_id_seq OWNED BY class4.areas.id;
 
 
 --
--- Name: numberlist_items; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_items; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.numberlist_items (
@@ -25872,7 +25860,7 @@ ALTER SEQUENCE class4.blacklist_items_id_seq OWNED BY class4.numberlist_items.id
 
 
 --
--- Name: numberlists; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlists; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.numberlists (
@@ -25911,7 +25899,7 @@ ALTER SEQUENCE class4.blacklists_id_seq OWNED BY class4.numberlists.id;
 
 
 --
--- Name: codec_group_codecs; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_group_codecs; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.codec_group_codecs (
@@ -25944,7 +25932,7 @@ ALTER SEQUENCE class4.codec_group_codecs_id_seq OWNED BY class4.codec_group_code
 
 
 --
--- Name: codec_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.codec_groups (
@@ -25973,7 +25961,7 @@ ALTER SEQUENCE class4.codec_groups_id_seq OWNED BY class4.codec_groups.id;
 
 
 --
--- Name: codecs; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: codecs; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.codecs (
@@ -26002,7 +25990,7 @@ ALTER SEQUENCE class4.codecs_id_seq OWNED BY class4.codecs.id;
 
 
 --
--- Name: customers_auth; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.customers_auth (
@@ -26079,7 +26067,7 @@ ALTER SEQUENCE class4.customers_auth_id_seq OWNED BY class4.customers_auth.id;
 
 
 --
--- Name: customers_auth_normalized; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth_normalized; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.customers_auth_normalized (
@@ -26160,7 +26148,7 @@ ALTER SEQUENCE class4.customers_auth_normalized_id_seq OWNED BY class4.customers
 
 
 --
--- Name: destination_next_rates; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: destination_next_rates; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.destination_next_rates (
@@ -26199,7 +26187,7 @@ ALTER SEQUENCE class4.destination_next_rates_id_seq OWNED BY class4.destination_
 
 
 --
--- Name: destination_rate_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: destination_rate_policy; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.destination_rate_policy (
@@ -26228,7 +26216,7 @@ ALTER SEQUENCE class4.destinations_id_seq OWNED BY class4.destinations.id;
 
 
 --
--- Name: dialpeer_next_rates; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeer_next_rates; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.dialpeer_next_rates (
@@ -26288,7 +26276,7 @@ ALTER SEQUENCE class4.dialpeers_id_seq OWNED BY class4.dialpeers.id;
 
 
 --
--- Name: disconnect_code; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_code; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.disconnect_code (
@@ -26327,7 +26315,7 @@ ALTER SEQUENCE class4.disconnect_code_id_seq OWNED BY class4.disconnect_code.id;
 
 
 --
--- Name: disconnect_policy_code; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_policy_code; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.disconnect_policy_code (
@@ -26361,7 +26349,7 @@ ALTER SEQUENCE class4.disconnect_code_policy_codes_id_seq OWNED BY class4.discon
 
 
 --
--- Name: disconnect_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_policy; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.disconnect_policy (
@@ -26390,7 +26378,7 @@ ALTER SEQUENCE class4.disconnect_code_policy_id_seq OWNED BY class4.disconnect_p
 
 
 --
--- Name: disconnect_initiators; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_initiators; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.disconnect_initiators (
@@ -26400,7 +26388,7 @@ CREATE TABLE class4.disconnect_initiators (
 
 
 --
--- Name: diversion_policy; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: diversion_policy; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.diversion_policy (
@@ -26410,7 +26398,7 @@ CREATE TABLE class4.diversion_policy (
 
 
 --
--- Name: dtmf_receive_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: dtmf_receive_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.dtmf_receive_modes (
@@ -26420,7 +26408,7 @@ CREATE TABLE class4.dtmf_receive_modes (
 
 
 --
--- Name: dtmf_send_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: dtmf_send_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.dtmf_send_modes (
@@ -26430,7 +26418,7 @@ CREATE TABLE class4.dtmf_send_modes (
 
 
 --
--- Name: dump_level; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: dump_level; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.dump_level (
@@ -26442,7 +26430,7 @@ CREATE TABLE class4.dump_level (
 
 
 --
--- Name: filter_types; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: filter_types; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.filter_types (
@@ -26452,7 +26440,7 @@ CREATE TABLE class4.filter_types (
 
 
 --
--- Name: gateway_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.gateway_groups (
@@ -26483,7 +26471,7 @@ ALTER SEQUENCE class4.gateway_groups_id_seq OWNED BY class4.gateway_groups.id;
 
 
 --
--- Name: gateway_inband_dtmf_filtering_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_inband_dtmf_filtering_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
@@ -26493,7 +26481,7 @@ CREATE TABLE class4.gateway_inband_dtmf_filtering_modes (
 
 
 --
--- Name: gateway_media_encryption_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_media_encryption_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.gateway_media_encryption_modes (
@@ -26503,7 +26491,7 @@ CREATE TABLE class4.gateway_media_encryption_modes (
 
 
 --
--- Name: gateway_network_protocol_priorities; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_network_protocol_priorities; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.gateway_network_protocol_priorities (
@@ -26513,7 +26501,7 @@ CREATE TABLE class4.gateway_network_protocol_priorities (
 
 
 --
--- Name: gateway_rel100_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_rel100_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.gateway_rel100_modes (
@@ -26542,7 +26530,7 @@ ALTER SEQUENCE class4.gateways_id_seq OWNED BY class4.gateways.id;
 
 
 --
--- Name: lnp_cache; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_cache; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.lnp_cache (
@@ -26578,7 +26566,7 @@ ALTER SEQUENCE class4.lnp_cache_id_seq OWNED BY class4.lnp_cache.id;
 
 
 --
--- Name: lnp_databases; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_databases; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.lnp_databases (
@@ -26615,7 +26603,7 @@ ALTER SEQUENCE class4.lnp_databases_id_seq OWNED BY class4.lnp_databases.id;
 
 
 --
--- Name: numberlist_actions; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_actions; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.numberlist_actions (
@@ -26625,7 +26613,7 @@ CREATE TABLE class4.numberlist_actions (
 
 
 --
--- Name: numberlist_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.numberlist_modes (
@@ -26635,7 +26623,7 @@ CREATE TABLE class4.numberlist_modes (
 
 
 --
--- Name: radius_accounting_profile_interim_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profile_interim_attributes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.radius_accounting_profile_interim_attributes (
@@ -26671,7 +26659,7 @@ ALTER SEQUENCE class4.radius_accounting_profile_interim_attributes_id_seq OWNED 
 
 
 --
--- Name: radius_accounting_profile_start_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profile_start_attributes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.radius_accounting_profile_start_attributes (
@@ -26707,7 +26695,7 @@ ALTER SEQUENCE class4.radius_accounting_profile_start_attributes_id_seq OWNED BY
 
 
 --
--- Name: radius_accounting_profile_stop_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profile_stop_attributes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.radius_accounting_profile_stop_attributes (
@@ -26743,7 +26731,7 @@ ALTER SEQUENCE class4.radius_accounting_profile_stop_attributes_id_seq OWNED BY 
 
 
 --
--- Name: radius_accounting_profiles; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profiles; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.radius_accounting_profiles (
@@ -26781,7 +26769,7 @@ ALTER SEQUENCE class4.radius_accounting_profiles_id_seq OWNED BY class4.radius_a
 
 
 --
--- Name: radius_auth_profile_attributes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_auth_profile_attributes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.radius_auth_profile_attributes (
@@ -26817,7 +26805,7 @@ ALTER SEQUENCE class4.radius_auth_profile_attributes_id_seq OWNED BY class4.radi
 
 
 --
--- Name: radius_auth_profiles; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_auth_profiles; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.radius_auth_profiles (
@@ -26852,7 +26840,7 @@ ALTER SEQUENCE class4.radius_auth_profiles_id_seq OWNED BY class4.radius_auth_pr
 
 
 --
--- Name: rate_profit_control_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: rate_profit_control_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.rate_profit_control_modes (
@@ -26862,7 +26850,7 @@ CREATE TABLE class4.rate_profit_control_modes (
 
 
 --
--- Name: rateplans; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: rateplans; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.rateplans (
@@ -26894,7 +26882,7 @@ ALTER SEQUENCE class4.rateplans_id_seq OWNED BY class4.rateplans.id;
 
 
 --
--- Name: registrations; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: registrations; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.registrations (
@@ -26939,7 +26927,7 @@ ALTER SEQUENCE class4.registrations_id_seq OWNED BY class4.registrations.id;
 
 
 --
--- Name: routeset_discriminators; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routeset_discriminators; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routeset_discriminators (
@@ -26968,7 +26956,7 @@ ALTER SEQUENCE class4.routeset_discriminators_id_seq OWNED BY class4.routeset_di
 
 
 --
--- Name: routing_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_groups (
@@ -26997,7 +26985,7 @@ ALTER SEQUENCE class4.routing_groups_id_seq OWNED BY class4.routing_groups.id;
 
 
 --
--- Name: routing_plan_groups; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_plan_groups (
@@ -27027,7 +27015,7 @@ ALTER SEQUENCE class4.routing_plan_groups_id_seq OWNED BY class4.routing_plan_gr
 
 
 --
--- Name: routing_plan_lnp_rules; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_lnp_rules; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_plan_lnp_rules (
@@ -27063,7 +27051,7 @@ ALTER SEQUENCE class4.routing_plan_lnp_rules_id_seq OWNED BY class4.routing_plan
 
 
 --
--- Name: routing_plan_static_routes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_static_routes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_plan_static_routes (
@@ -27097,7 +27085,7 @@ ALTER SEQUENCE class4.routing_plan_static_routes_id_seq OWNED BY class4.routing_
 
 
 --
--- Name: routing_plans; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plans; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_plans (
@@ -27130,7 +27118,7 @@ ALTER SEQUENCE class4.routing_plans_id_seq OWNED BY class4.routing_plans.id;
 
 
 --
--- Name: routing_tag_detection_rules; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tag_detection_rules; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_tag_detection_rules (
@@ -27166,7 +27154,7 @@ ALTER SEQUENCE class4.routing_tag_detection_rules_id_seq OWNED BY class4.routing
 
 
 --
--- Name: routing_tag_modes; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tag_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_tag_modes (
@@ -27176,7 +27164,7 @@ CREATE TABLE class4.routing_tag_modes (
 
 
 --
--- Name: routing_tags; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tags; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.routing_tags (
@@ -27205,7 +27193,7 @@ ALTER SEQUENCE class4.routing_tags_id_seq OWNED BY class4.routing_tags.id;
 
 
 --
--- Name: sdp_c_location; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: sdp_c_location; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.sdp_c_location (
@@ -27215,7 +27203,7 @@ CREATE TABLE class4.sdp_c_location (
 
 
 --
--- Name: session_refresh_methods; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: session_refresh_methods; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.session_refresh_methods (
@@ -27245,7 +27233,7 @@ ALTER SEQUENCE class4.session_refresh_methods_id_seq OWNED BY class4.session_ref
 
 
 --
--- Name: sortings; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: sortings; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.sortings (
@@ -27276,7 +27264,7 @@ ALTER SEQUENCE class4.sortings_id_seq OWNED BY class4.sortings.id;
 
 
 --
--- Name: tag_actions; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: tag_actions; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.tag_actions (
@@ -27286,7 +27274,7 @@ CREATE TABLE class4.tag_actions (
 
 
 --
--- Name: transport_protocols; Type: TABLE; Schema: class4; Owner: -; Tablespace: 
+-- Name: transport_protocols; Type: TABLE; Schema: class4; Owner: -
 --
 
 CREATE TABLE class4.transport_protocols (
@@ -27296,7 +27284,7 @@ CREATE TABLE class4.transport_protocols (
 
 
 --
--- Name: import_accounts; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_accounts; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_accounts (
@@ -27344,7 +27332,7 @@ ALTER SEQUENCE data_import.import_accounts_id_seq OWNED BY data_import.import_ac
 
 
 --
--- Name: import_codec_group_codecs; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_codec_group_codecs; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_codec_group_codecs (
@@ -27379,7 +27367,7 @@ ALTER SEQUENCE data_import.import_codec_group_codecs_id_seq OWNED BY data_import
 
 
 --
--- Name: import_codec_groups; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_codec_groups; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_codec_groups (
@@ -27410,7 +27398,7 @@ ALTER SEQUENCE data_import.import_codec_groups_id_seq OWNED BY data_import.impor
 
 
 --
--- Name: import_contractors; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_contractors; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_contractors (
@@ -27449,7 +27437,7 @@ ALTER SEQUENCE data_import.import_contractors_id_seq OWNED BY data_import.import
 
 
 --
--- Name: import_customers_auth; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_customers_auth; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_customers_auth (
@@ -27545,7 +27533,7 @@ ALTER SEQUENCE data_import.import_customers_auth_id_seq OWNED BY data_import.imp
 
 
 --
--- Name: import_destinations; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_destinations; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_destinations (
@@ -27605,7 +27593,7 @@ ALTER SEQUENCE data_import.import_destinations_id_seq OWNED BY data_import.impor
 
 
 --
--- Name: import_dialpeers; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_dialpeers; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_dialpeers (
@@ -27676,7 +27664,7 @@ ALTER SEQUENCE data_import.import_dialpeers_id_seq OWNED BY data_import.import_d
 
 
 --
--- Name: import_disconnect_policies; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_disconnect_policies; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_disconnect_policies (
@@ -27707,7 +27695,7 @@ ALTER SEQUENCE data_import.import_disconnect_policies_id_seq OWNED BY data_impor
 
 
 --
--- Name: import_gateway_groups; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_gateway_groups; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_gateway_groups (
@@ -27741,7 +27729,7 @@ ALTER SEQUENCE data_import.import_gateway_groups_id_seq OWNED BY data_import.imp
 
 
 --
--- Name: import_gateways; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_gateways; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_gateways (
@@ -27909,7 +27897,7 @@ ALTER SEQUENCE data_import.import_gateways_id_seq1 OWNED BY data_import.import_g
 
 
 --
--- Name: import_numberlist_items; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_numberlist_items; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_numberlist_items (
@@ -27954,7 +27942,7 @@ ALTER SEQUENCE data_import.import_numberlist_items_id_seq OWNED BY data_import.i
 
 
 --
--- Name: import_numberlists; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_numberlists; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_numberlists (
@@ -27997,7 +27985,7 @@ ALTER SEQUENCE data_import.import_numberlists_id_seq OWNED BY data_import.import
 
 
 --
--- Name: import_rateplans; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_rateplans; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_rateplans (
@@ -28030,7 +28018,7 @@ ALTER SEQUENCE data_import.import_rateplans_id_seq OWNED BY data_import.import_r
 
 
 --
--- Name: import_registrations; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_registrations; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_registrations (
@@ -28081,7 +28069,7 @@ ALTER SEQUENCE data_import.import_registrations_id_seq OWNED BY data_import.impo
 
 
 --
--- Name: import_routing_groups; Type: TABLE; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_routing_groups; Type: TABLE; Schema: data_import; Owner: -
 --
 
 CREATE TABLE data_import.import_routing_groups (
@@ -28116,7 +28104,7 @@ ALTER SEQUENCE data_import.import_routing_groups_id_seq OWNED BY data_import.imp
 
 
 --
--- Name: active_admin_comments; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+-- Name: active_admin_comments; Type: TABLE; Schema: gui; Owner: -
 --
 
 CREATE TABLE gui.active_admin_comments (
@@ -28152,7 +28140,7 @@ ALTER SEQUENCE gui.admin_notes_id_seq OWNED BY gui.active_admin_comments.id;
 
 
 --
--- Name: admin_users; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+-- Name: admin_users; Type: TABLE; Schema: gui; Owner: -
 --
 
 CREATE TABLE gui.admin_users (
@@ -28199,7 +28187,7 @@ ALTER SEQUENCE gui.admin_users_id_seq OWNED BY gui.admin_users.id;
 
 
 --
--- Name: background_threads; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+-- Name: background_threads; Type: TABLE; Schema: gui; Owner: -
 --
 
 CREATE TABLE gui.background_threads (
@@ -28234,7 +28222,7 @@ ALTER SEQUENCE gui.background_threads_id_seq OWNED BY gui.background_threads.id;
 
 
 --
--- Name: sessions; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+-- Name: sessions; Type: TABLE; Schema: gui; Owner: -
 --
 
 CREATE TABLE gui.sessions (
@@ -28266,7 +28254,7 @@ ALTER SEQUENCE gui.sessions_id_seq OWNED BY gui.sessions.id;
 
 
 --
--- Name: versions; Type: TABLE; Schema: gui; Owner: -; Tablespace: 
+-- Name: versions; Type: TABLE; Schema: gui; Owner: -
 --
 
 CREATE TABLE gui.versions (
@@ -28303,7 +28291,7 @@ ALTER SEQUENCE gui.versions_id_seq OWNED BY gui.versions.id;
 
 
 --
--- Name: api_requests; Type: TABLE; Schema: logs; Owner: -; Tablespace: 
+-- Name: api_requests; Type: TABLE; Schema: logs; Owner: -
 --
 
 CREATE TABLE logs.api_requests (
@@ -28344,7 +28332,7 @@ ALTER SEQUENCE logs.api_requests_id_seq OWNED BY logs.api_requests.id;
 
 
 --
--- Name: balance_notifications; Type: TABLE; Schema: logs; Owner: -; Tablespace: 
+-- Name: balance_notifications; Type: TABLE; Schema: logs; Owner: -
 --
 
 CREATE TABLE logs.balance_notifications (
@@ -28378,7 +28366,7 @@ ALTER SEQUENCE logs.balance_notifications_id_seq OWNED BY logs.balance_notificat
 
 
 --
--- Name: logic_log; Type: TABLE; Schema: logs; Owner: -; Tablespace: 
+-- Name: logic_log; Type: TABLE; Schema: logs; Owner: -
 --
 
 CREATE TABLE logs.logic_log (
@@ -28411,7 +28399,7 @@ ALTER SEQUENCE logs.logic_log_id_seq OWNED BY logs.logic_log.id;
 
 
 --
--- Name: alerts; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
+-- Name: alerts; Type: TABLE; Schema: notifications; Owner: -
 --
 
 CREATE TABLE notifications.alerts (
@@ -28441,7 +28429,7 @@ ALTER SEQUENCE notifications.alerts_id_seq OWNED BY notifications.alerts.id;
 
 
 --
--- Name: attachments; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
+-- Name: attachments; Type: TABLE; Schema: notifications; Owner: -
 --
 
 CREATE TABLE notifications.attachments (
@@ -28471,7 +28459,7 @@ ALTER SEQUENCE notifications.attachments_id_seq OWNED BY notifications.attachmen
 
 
 --
--- Name: contacts; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
+-- Name: contacts; Type: TABLE; Schema: notifications; Owner: -
 --
 
 CREATE TABLE notifications.contacts (
@@ -28505,7 +28493,7 @@ ALTER SEQUENCE notifications.contacts_id_seq OWNED BY notifications.contacts.id;
 
 
 --
--- Name: email_logs; Type: TABLE; Schema: notifications; Owner: -; Tablespace: 
+-- Name: email_logs; Type: TABLE; Schema: notifications; Owner: -
 --
 
 CREATE TABLE notifications.email_logs (
@@ -28544,7 +28532,7 @@ ALTER SEQUENCE notifications.email_log_id_seq OWNED BY notifications.email_logs.
 
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.ar_internal_metadata (
@@ -28556,7 +28544,7 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: contractors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: contractors; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.contractors (
@@ -28593,7 +28581,7 @@ ALTER SEQUENCE public.contractors_id_seq OWNED BY public.contractors.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.schema_migrations (
@@ -28602,7 +28590,7 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: dialpeers_stats; Type: TABLE; Schema: runtime_stats; Owner: -; Tablespace: 
+-- Name: dialpeers_stats; Type: TABLE; Schema: runtime_stats; Owner: -
 --
 
 CREATE UNLOGGED TABLE runtime_stats.dialpeers_stats (
@@ -28641,7 +28629,7 @@ ALTER SEQUENCE runtime_stats.dialpeers_stats_id_seq OWNED BY runtime_stats.dialp
 
 
 --
--- Name: gateways_stats; Type: TABLE; Schema: runtime_stats; Owner: -; Tablespace: 
+-- Name: gateways_stats; Type: TABLE; Schema: runtime_stats; Owner: -
 --
 
 CREATE UNLOGGED TABLE runtime_stats.gateways_stats (
@@ -28692,7 +28680,7 @@ CREATE SEQUENCE switch13.events_id_seq
 
 
 --
--- Name: resource_action; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
+-- Name: resource_action; Type: TABLE; Schema: switch13; Owner: -
 --
 
 CREATE TABLE switch13.resource_action (
@@ -28733,7 +28721,7 @@ CREATE SEQUENCE switch13.switch_in_interface_id_seq
 
 
 --
--- Name: switch_interface_out; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
+-- Name: switch_interface_out; Type: TABLE; Schema: switch13; Owner: -
 --
 
 CREATE TABLE switch13.switch_interface_out (
@@ -28766,7 +28754,7 @@ ALTER SEQUENCE switch13.switch_interface_id_seq OWNED BY switch13.switch_interfa
 
 
 --
--- Name: switch_interface_in; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
+-- Name: switch_interface_in; Type: TABLE; Schema: switch13; Owner: -
 --
 
 CREATE TABLE switch13.switch_interface_in (
@@ -28781,7 +28769,7 @@ CREATE TABLE switch13.switch_interface_in (
 
 
 --
--- Name: trusted_headers; Type: TABLE; Schema: switch13; Owner: -; Tablespace: 
+-- Name: trusted_headers; Type: TABLE; Schema: switch13; Owner: -
 --
 
 CREATE TABLE switch13.trusted_headers (
@@ -28823,7 +28811,7 @@ CREATE SEQUENCE switch14.events_id_seq
 
 
 --
--- Name: resource_action; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
+-- Name: resource_action; Type: TABLE; Schema: switch14; Owner: -
 --
 
 CREATE TABLE switch14.resource_action (
@@ -28864,7 +28852,7 @@ CREATE SEQUENCE switch14.switch_in_interface_id_seq
 
 
 --
--- Name: switch_interface_out; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
+-- Name: switch_interface_out; Type: TABLE; Schema: switch14; Owner: -
 --
 
 CREATE TABLE switch14.switch_interface_out (
@@ -28897,7 +28885,7 @@ ALTER SEQUENCE switch14.switch_interface_id_seq OWNED BY switch14.switch_interfa
 
 
 --
--- Name: switch_interface_in; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
+-- Name: switch_interface_in; Type: TABLE; Schema: switch14; Owner: -
 --
 
 CREATE TABLE switch14.switch_interface_in (
@@ -28912,7 +28900,7 @@ CREATE TABLE switch14.switch_interface_in (
 
 
 --
--- Name: trusted_headers; Type: TABLE; Schema: switch14; Owner: -; Tablespace: 
+-- Name: trusted_headers; Type: TABLE; Schema: switch14; Owner: -
 --
 
 CREATE TABLE switch14.trusted_headers (
@@ -28954,7 +28942,7 @@ CREATE SEQUENCE switch15.events_id_seq
 
 
 --
--- Name: resource_action; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
+-- Name: resource_action; Type: TABLE; Schema: switch15; Owner: -
 --
 
 CREATE TABLE switch15.resource_action (
@@ -28995,7 +28983,7 @@ CREATE SEQUENCE switch15.switch_in_interface_id_seq
 
 
 --
--- Name: switch_interface_out; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
+-- Name: switch_interface_out; Type: TABLE; Schema: switch15; Owner: -
 --
 
 CREATE TABLE switch15.switch_interface_out (
@@ -29028,7 +29016,7 @@ ALTER SEQUENCE switch15.switch_interface_id_seq OWNED BY switch15.switch_interfa
 
 
 --
--- Name: switch_interface_in; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
+-- Name: switch_interface_in; Type: TABLE; Schema: switch15; Owner: -
 --
 
 CREATE TABLE switch15.switch_interface_in (
@@ -29043,7 +29031,7 @@ CREATE TABLE switch15.switch_interface_in (
 
 
 --
--- Name: trusted_headers; Type: TABLE; Schema: switch15; Owner: -; Tablespace: 
+-- Name: trusted_headers; Type: TABLE; Schema: switch15; Owner: -
 --
 
 CREATE TABLE switch15.trusted_headers (
@@ -29085,7 +29073,7 @@ CREATE SEQUENCE switch16.events_id_seq
 
 
 --
--- Name: resource_action; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
+-- Name: resource_action; Type: TABLE; Schema: switch16; Owner: -
 --
 
 CREATE TABLE switch16.resource_action (
@@ -29126,7 +29114,7 @@ CREATE SEQUENCE switch16.switch_in_interface_id_seq
 
 
 --
--- Name: switch_interface_out; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
+-- Name: switch_interface_out; Type: TABLE; Schema: switch16; Owner: -
 --
 
 CREATE TABLE switch16.switch_interface_out (
@@ -29159,7 +29147,7 @@ ALTER SEQUENCE switch16.switch_interface_id_seq OWNED BY switch16.switch_interfa
 
 
 --
--- Name: switch_interface_in; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
+-- Name: switch_interface_in; Type: TABLE; Schema: switch16; Owner: -
 --
 
 CREATE TABLE switch16.switch_interface_in (
@@ -29174,7 +29162,7 @@ CREATE TABLE switch16.switch_interface_in (
 
 
 --
--- Name: trusted_headers; Type: TABLE; Schema: switch16; Owner: -; Tablespace: 
+-- Name: trusted_headers; Type: TABLE; Schema: switch16; Owner: -
 --
 
 CREATE TABLE switch16.trusted_headers (
@@ -29204,7 +29192,7 @@ ALTER SEQUENCE switch16.trusted_headers_id_seq OWNED BY switch16.trusted_headers
 
 
 --
--- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.active_currencies (
@@ -29239,7 +29227,7 @@ ALTER SEQUENCE sys.active_currencies_id_seq OWNED BY sys.active_currencies.id;
 
 
 --
--- Name: api_access; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: api_access; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.api_access (
@@ -29272,7 +29260,7 @@ ALTER SEQUENCE sys.api_access_id_seq OWNED BY sys.api_access.id;
 
 
 --
--- Name: api_log_config; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: api_log_config; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.api_log_config (
@@ -29302,7 +29290,7 @@ ALTER SEQUENCE sys.api_log_config_id_seq OWNED BY sys.api_log_config.id;
 
 
 --
--- Name: cdr_exports; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_exports; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.cdr_exports (
@@ -29338,7 +29326,7 @@ ALTER SEQUENCE sys.cdr_exports_id_seq OWNED BY sys.cdr_exports.id;
 
 
 --
--- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.cdr_tables (
@@ -29371,7 +29359,7 @@ ALTER SEQUENCE sys.cdrtables_id_seq OWNED BY sys.cdr_tables.id;
 
 
 --
--- Name: countries; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: countries; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.countries (
@@ -29401,7 +29389,7 @@ ALTER SEQUENCE sys.countries_id_seq OWNED BY sys.countries.id;
 
 
 --
--- Name: currencies; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: currencies; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.currencies (
@@ -29433,7 +29421,7 @@ ALTER SEQUENCE sys.currencies_id_seq OWNED BY sys.currencies.id;
 
 
 --
--- Name: delayed_jobs; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: delayed_jobs; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.delayed_jobs (
@@ -29484,7 +29472,7 @@ CREATE SEQUENCE sys.events_id_seq
 
 
 --
--- Name: events; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: events; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.events (
@@ -29499,7 +29487,7 @@ CREATE TABLE sys.events (
 
 
 --
--- Name: guiconfig; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: guiconfig; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.guiconfig (
@@ -29550,7 +29538,7 @@ ALTER SEQUENCE sys.guiconfig_id_seq OWNED BY sys.guiconfig.id;
 
 
 --
--- Name: jobs; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: jobs; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.jobs (
@@ -29582,7 +29570,7 @@ ALTER SEQUENCE sys.jobs_id_seq OWNED BY sys.jobs.id;
 
 
 --
--- Name: lnp_database_drivers; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: lnp_database_drivers; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.lnp_database_drivers (
@@ -29612,7 +29600,7 @@ ALTER SEQUENCE sys.lnp_database_drivers_id_seq OWNED BY sys.lnp_database_drivers
 
 
 --
--- Name: lnp_resolvers; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: lnp_resolvers; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.lnp_resolvers (
@@ -29643,7 +29631,7 @@ ALTER SEQUENCE sys.lnp_resolvers_id_seq OWNED BY sys.lnp_resolvers.id;
 
 
 --
--- Name: load_balancers; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: load_balancers; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.load_balancers (
@@ -29673,7 +29661,7 @@ ALTER SEQUENCE sys.load_balancers_id_seq OWNED BY sys.load_balancers.id;
 
 
 --
--- Name: lua_scripts; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: lua_scripts; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.lua_scripts (
@@ -29724,7 +29712,7 @@ ALTER SEQUENCE sys.network_prefixes_id_seq OWNED BY sys.network_prefixes.id;
 
 
 --
--- Name: networks; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: networks; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.networks (
@@ -29753,7 +29741,7 @@ ALTER SEQUENCE sys.networks_id_seq OWNED BY sys.networks.id;
 
 
 --
--- Name: nodes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: nodes; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.nodes (
@@ -29786,7 +29774,7 @@ ALTER SEQUENCE sys.node_id_seq OWNED BY sys.nodes.id;
 
 
 --
--- Name: pops; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: pops; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.pops (
@@ -29815,7 +29803,7 @@ ALTER SEQUENCE sys.pop_id_seq OWNED BY sys.pops.id;
 
 
 --
--- Name: sensor_levels; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensor_levels; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.sensor_levels (
@@ -29825,7 +29813,7 @@ CREATE TABLE sys.sensor_levels (
 
 
 --
--- Name: sensor_modes; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensor_modes; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.sensor_modes (
@@ -29835,7 +29823,7 @@ CREATE TABLE sys.sensor_modes (
 
 
 --
--- Name: sensors; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensors; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.sensors (
@@ -29872,7 +29860,7 @@ ALTER SEQUENCE sys.sensors_id_seq OWNED BY sys.sensors.id;
 
 
 --
--- Name: sip_schemas; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: sip_schemas; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.sip_schemas (
@@ -29882,7 +29870,7 @@ CREATE TABLE sys.sip_schemas (
 
 
 --
--- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.smtp_connections (
@@ -29917,7 +29905,7 @@ ALTER SEQUENCE sys.smtp_connections_id_seq OWNED BY sys.smtp_connections.id;
 
 
 --
--- Name: timezones; Type: TABLE; Schema: sys; Owner: -; Tablespace: 
+-- Name: timezones; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.timezones (
@@ -29949,742 +29937,742 @@ ALTER SEQUENCE sys.timezones_id_seq OWNED BY sys.timezones.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: accounts id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts ALTER COLUMN id SET DEFAULT nextval('billing.accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoice_periods id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_periods ALTER COLUMN id SET DEFAULT nextval('billing.invoice_periods_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoice_templates id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_templates ALTER COLUMN id SET DEFAULT nextval('billing.invoices_templates_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: payments id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.payments ALTER COLUMN id SET DEFAULT nextval('billing.payments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: area_prefixes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.area_prefixes ALTER COLUMN id SET DEFAULT nextval('class4.area_prefixes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: areas id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.areas ALTER COLUMN id SET DEFAULT nextval('class4.areas_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: codec_group_codecs id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('class4.codec_group_codecs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: codec_groups id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_groups ALTER COLUMN id SET DEFAULT nextval('class4.codec_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: codecs id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codecs ALTER COLUMN id SET DEFAULT nextval('class4.codecs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: customers_auth id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth ALTER COLUMN id SET DEFAULT nextval('class4.customers_auth_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: customers_auth_normalized id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth_normalized ALTER COLUMN id SET DEFAULT nextval('class4.customers_auth_normalized_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: destination_next_rates id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destination_next_rates ALTER COLUMN id SET DEFAULT nextval('class4.destination_next_rates_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: destinations id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations ALTER COLUMN id SET DEFAULT nextval('class4.destinations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: dialpeer_next_rates id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeer_next_rates ALTER COLUMN id SET DEFAULT nextval('class4.dialpeer_next_rates_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: dialpeers id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers ALTER COLUMN id SET DEFAULT nextval('class4.dialpeers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: disconnect_code id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_code ALTER COLUMN id SET DEFAULT nextval('class4.disconnect_code_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: disconnect_policy id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy ALTER COLUMN id SET DEFAULT nextval('class4.disconnect_code_policy_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: disconnect_policy_code id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy_code ALTER COLUMN id SET DEFAULT nextval('class4.disconnect_code_policy_codes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: gateway_groups id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_groups ALTER COLUMN id SET DEFAULT nextval('class4.gateway_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: gateways id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways ALTER COLUMN id SET DEFAULT nextval('class4.gateways_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: lnp_cache id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_cache ALTER COLUMN id SET DEFAULT nextval('class4.lnp_cache_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: lnp_databases id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_databases ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: numberlist_items id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_items ALTER COLUMN id SET DEFAULT nextval('class4.blacklist_items_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: numberlists id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlists ALTER COLUMN id SET DEFAULT nextval('class4.blacklists_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: radius_accounting_profile_interim_attributes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profile_interim_attributes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: radius_accounting_profile_start_attributes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profile_start_attributes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: radius_accounting_profile_stop_attributes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profile_stop_attributes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: radius_accounting_profiles id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profiles ALTER COLUMN id SET DEFAULT nextval('class4.radius_accounting_profiles_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: radius_auth_profile_attributes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_auth_profile_attributes ALTER COLUMN id SET DEFAULT nextval('class4.radius_auth_profile_attributes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: radius_auth_profiles id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_auth_profiles ALTER COLUMN id SET DEFAULT nextval('class4.radius_auth_profiles_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: rateplans id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rateplans ALTER COLUMN id SET DEFAULT nextval('class4.rateplans_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: registrations id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations ALTER COLUMN id SET DEFAULT nextval('class4.registrations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routeset_discriminators id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routeset_discriminators ALTER COLUMN id SET DEFAULT nextval('class4.routeset_discriminators_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_groups id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_groups ALTER COLUMN id SET DEFAULT nextval('class4.routing_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_plan_groups id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_groups ALTER COLUMN id SET DEFAULT nextval('class4.routing_plan_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_plan_lnp_rules id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_lnp_rules ALTER COLUMN id SET DEFAULT nextval('class4.routing_plan_lnp_rules_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_plan_static_routes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_static_routes ALTER COLUMN id SET DEFAULT nextval('class4.routing_plan_static_routes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_plans id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plans ALTER COLUMN id SET DEFAULT nextval('class4.routing_plans_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_tag_detection_rules id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules ALTER COLUMN id SET DEFAULT nextval('class4.routing_tag_detection_rules_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: routing_tags id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tags ALTER COLUMN id SET DEFAULT nextval('class4.routing_tags_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: session_refresh_methods id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.session_refresh_methods ALTER COLUMN id SET DEFAULT nextval('class4.session_refresh_methods_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: class4; Owner: -
+-- Name: sortings id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.sortings ALTER COLUMN id SET DEFAULT nextval('class4.sortings_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_accounts id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_accounts ALTER COLUMN id SET DEFAULT nextval('data_import.import_accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_codec_group_codecs id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('data_import.import_codec_group_codecs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_codec_groups id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_codec_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_codec_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_contractors id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_contractors ALTER COLUMN id SET DEFAULT nextval('data_import.import_contractors_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_customers_auth id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_customers_auth ALTER COLUMN id SET DEFAULT nextval('data_import.import_customers_auth_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_destinations id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_destinations ALTER COLUMN id SET DEFAULT nextval('data_import.import_destinations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_dialpeers id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_dialpeers ALTER COLUMN id SET DEFAULT nextval('data_import.import_dialpeers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_disconnect_policies id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_disconnect_policies ALTER COLUMN id SET DEFAULT nextval('data_import.import_disconnect_policies_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_gateway_groups id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_gateway_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_gateway_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_gateways id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_gateways ALTER COLUMN id SET DEFAULT nextval('data_import.import_gateways_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_numberlist_items id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_numberlist_items ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlist_items_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_numberlists id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_numberlists ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlists_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_rateplans id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_rateplans ALTER COLUMN id SET DEFAULT nextval('data_import.import_rateplans_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_registrations id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_registrations ALTER COLUMN id SET DEFAULT nextval('data_import.import_registrations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: data_import; Owner: -
+-- Name: import_routing_groups id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_routing_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_routing_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+-- Name: active_admin_comments id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.active_admin_comments ALTER COLUMN id SET DEFAULT nextval('gui.admin_notes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+-- Name: admin_users id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.admin_users ALTER COLUMN id SET DEFAULT nextval('gui.admin_users_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+-- Name: background_threads id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.background_threads ALTER COLUMN id SET DEFAULT nextval('gui.background_threads_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+-- Name: sessions id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.sessions ALTER COLUMN id SET DEFAULT nextval('gui.sessions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: gui; Owner: -
+-- Name: versions id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.versions ALTER COLUMN id SET DEFAULT nextval('gui.versions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: logs; Owner: -
+-- Name: api_requests id; Type: DEFAULT; Schema: logs; Owner: -
 --
 
 ALTER TABLE ONLY logs.api_requests ALTER COLUMN id SET DEFAULT nextval('logs.api_requests_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: logs; Owner: -
+-- Name: balance_notifications id; Type: DEFAULT; Schema: logs; Owner: -
 --
 
 ALTER TABLE ONLY logs.balance_notifications ALTER COLUMN id SET DEFAULT nextval('logs.balance_notifications_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: logs; Owner: -
+-- Name: logic_log id; Type: DEFAULT; Schema: logs; Owner: -
 --
 
 ALTER TABLE ONLY logs.logic_log ALTER COLUMN id SET DEFAULT nextval('logs.logic_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
+-- Name: alerts id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.alerts ALTER COLUMN id SET DEFAULT nextval('notifications.alerts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
+-- Name: attachments id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.attachments ALTER COLUMN id SET DEFAULT nextval('notifications.attachments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
+-- Name: contacts id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.contacts ALTER COLUMN id SET DEFAULT nextval('notifications.contacts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: notifications; Owner: -
+-- Name: email_logs id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.email_logs ALTER COLUMN id SET DEFAULT nextval('notifications.email_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: contractors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.contractors ALTER COLUMN id SET DEFAULT nextval('public.contractors_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: runtime_stats; Owner: -
+-- Name: dialpeers_stats id; Type: DEFAULT; Schema: runtime_stats; Owner: -
 --
 
 ALTER TABLE ONLY runtime_stats.dialpeers_stats ALTER COLUMN id SET DEFAULT nextval('runtime_stats.dialpeers_stats_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: runtime_stats; Owner: -
+-- Name: gateways_stats id; Type: DEFAULT; Schema: runtime_stats; Owner: -
 --
 
 ALTER TABLE ONLY runtime_stats.gateways_stats ALTER COLUMN id SET DEFAULT nextval('runtime_stats.gateways_stats_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
+-- Name: resource_type id; Type: DEFAULT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.resource_type ALTER COLUMN id SET DEFAULT nextval('switch13.resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
+-- Name: switch_interface_out id; Type: DEFAULT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch13.switch_interface_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch13; Owner: -
+-- Name: trusted_headers id; Type: DEFAULT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch13.trusted_headers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
+-- Name: resource_type id; Type: DEFAULT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.resource_type ALTER COLUMN id SET DEFAULT nextval('switch14.resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
+-- Name: switch_interface_out id; Type: DEFAULT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch14.switch_interface_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch14; Owner: -
+-- Name: trusted_headers id; Type: DEFAULT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch14.trusted_headers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
+-- Name: resource_type id; Type: DEFAULT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.resource_type ALTER COLUMN id SET DEFAULT nextval('switch15.resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
+-- Name: switch_interface_out id; Type: DEFAULT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch15.switch_interface_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch15; Owner: -
+-- Name: trusted_headers id; Type: DEFAULT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch15.trusted_headers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
+-- Name: resource_type id; Type: DEFAULT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.resource_type ALTER COLUMN id SET DEFAULT nextval('switch16.resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
+-- Name: switch_interface_out id; Type: DEFAULT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch16.switch_interface_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: switch16; Owner: -
+-- Name: trusted_headers id; Type: DEFAULT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch16.trusted_headers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: active_currencies id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.active_currencies ALTER COLUMN id SET DEFAULT nextval('sys.active_currencies_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: api_access id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_access ALTER COLUMN id SET DEFAULT nextval('sys.api_access_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: api_log_config id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_log_config ALTER COLUMN id SET DEFAULT nextval('sys.api_log_config_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: cdr_exports id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.cdr_exports ALTER COLUMN id SET DEFAULT nextval('sys.cdr_exports_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: cdr_tables id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdrtables_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: countries id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.countries ALTER COLUMN id SET DEFAULT nextval('sys.countries_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: currencies id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.currencies ALTER COLUMN id SET DEFAULT nextval('sys.currencies_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: delayed_jobs id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.delayed_jobs ALTER COLUMN id SET DEFAULT nextval('sys.delayed_jobs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: guiconfig id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.guiconfig ALTER COLUMN id SET DEFAULT nextval('sys.guiconfig_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: jobs id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.jobs ALTER COLUMN id SET DEFAULT nextval('sys.jobs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: lnp_database_drivers id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lnp_database_drivers ALTER COLUMN id SET DEFAULT nextval('sys.lnp_database_drivers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: lnp_resolvers id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lnp_resolvers ALTER COLUMN id SET DEFAULT nextval('sys.lnp_resolvers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: load_balancers id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.load_balancers ALTER COLUMN id SET DEFAULT nextval('sys.load_balancers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: lua_scripts id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lua_scripts ALTER COLUMN id SET DEFAULT nextval('sys.lua_scripts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: network_prefixes id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.network_prefixes ALTER COLUMN id SET DEFAULT nextval('sys.network_prefixes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: networks id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.networks ALTER COLUMN id SET DEFAULT nextval('sys.networks_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: nodes id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.nodes ALTER COLUMN id SET DEFAULT nextval('sys.node_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: pops id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.pops ALTER COLUMN id SET DEFAULT nextval('sys.pop_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: sensors id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensors ALTER COLUMN id SET DEFAULT nextval('sys.sensors_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: smtp_connections id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.smtp_connections ALTER COLUMN id SET DEFAULT nextval('sys.smtp_connections_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: sys; Owner: -
+-- Name: timezones id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.timezones ALTER COLUMN id SET DEFAULT nextval('sys.timezones_id_seq'::regclass);
 
 
 --
--- Name: accounts_external_id_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: accounts accounts_external_id_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -30692,7 +30680,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: accounts accounts_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -30700,7 +30688,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -30708,7 +30696,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts_uuid_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: accounts accounts_uuid_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -30716,7 +30704,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: cdr_batches_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: cdr_batches cdr_batches_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.cdr_batches
@@ -30724,7 +30712,7 @@ ALTER TABLE ONLY billing.cdr_batches
 
 
 --
--- Name: invoice_periods_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_periods invoice_periods_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_periods
@@ -30732,7 +30720,7 @@ ALTER TABLE ONLY billing.invoice_periods
 
 
 --
--- Name: invoice_periods_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_periods invoice_periods_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_periods
@@ -30740,7 +30728,7 @@ ALTER TABLE ONLY billing.invoice_periods
 
 
 --
--- Name: invoices_templates_name_key; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_templates invoices_templates_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_templates
@@ -30748,7 +30736,7 @@ ALTER TABLE ONLY billing.invoice_templates
 
 
 --
--- Name: invoices_templates_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: invoice_templates invoices_templates_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.invoice_templates
@@ -30756,7 +30744,7 @@ ALTER TABLE ONLY billing.invoice_templates
 
 
 --
--- Name: payments_pkey; Type: CONSTRAINT; Schema: billing; Owner: -; Tablespace: 
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.payments
@@ -30764,7 +30752,7 @@ ALTER TABLE ONLY billing.payments
 
 
 --
--- Name: area_prefixes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: area_prefixes area_prefixes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.area_prefixes
@@ -30772,7 +30760,7 @@ ALTER TABLE ONLY class4.area_prefixes
 
 
 --
--- Name: area_prefixes_prefix_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: area_prefixes area_prefixes_prefix_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.area_prefixes
@@ -30780,7 +30768,7 @@ ALTER TABLE ONLY class4.area_prefixes
 
 
 --
--- Name: areas_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: areas areas_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.areas
@@ -30788,7 +30776,7 @@ ALTER TABLE ONLY class4.areas
 
 
 --
--- Name: areas_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: areas areas_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.areas
@@ -30796,7 +30784,7 @@ ALTER TABLE ONLY class4.areas
 
 
 --
--- Name: blacklist_items_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_items blacklist_items_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_items
@@ -30804,7 +30792,7 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
--- Name: blacklist_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_modes blacklist_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_modes
@@ -30812,7 +30800,7 @@ ALTER TABLE ONLY class4.numberlist_modes
 
 
 --
--- Name: blacklist_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_modes blacklist_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_modes
@@ -30820,7 +30808,7 @@ ALTER TABLE ONLY class4.numberlist_modes
 
 
 --
--- Name: blacklists_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlists blacklists_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlists
@@ -30828,7 +30816,7 @@ ALTER TABLE ONLY class4.numberlists
 
 
 --
--- Name: blacklists_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlists blacklists_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlists
@@ -30836,7 +30824,7 @@ ALTER TABLE ONLY class4.numberlists
 
 
 --
--- Name: codec_group_codecs_codec_group_id_codec_id_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_group_codecs codec_group_codecs_codec_group_id_codec_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_group_codecs
@@ -30844,7 +30832,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 
 
 --
--- Name: codec_group_codecs_codec_group_id_priority_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_group_codecs codec_group_codecs_codec_group_id_priority_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_group_codecs
@@ -30852,7 +30840,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 
 
 --
--- Name: codec_group_codecs_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_group_codecs codec_group_codecs_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_group_codecs
@@ -30860,7 +30848,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 
 
 --
--- Name: codec_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_groups codec_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_groups
@@ -30868,7 +30856,7 @@ ALTER TABLE ONLY class4.codec_groups
 
 
 --
--- Name: codec_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codec_groups codec_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_groups
@@ -30876,7 +30864,7 @@ ALTER TABLE ONLY class4.codec_groups
 
 
 --
--- Name: codecs_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codecs codecs_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codecs
@@ -30884,7 +30872,7 @@ ALTER TABLE ONLY class4.codecs
 
 
 --
--- Name: codecs_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: codecs codecs_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codecs
@@ -30892,7 +30880,7 @@ ALTER TABLE ONLY class4.codecs
 
 
 --
--- Name: customers_auth_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth customers_auth_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -30900,7 +30888,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth customers_auth_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -30908,7 +30896,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_normalized_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth_normalized customers_auth_normalized_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth_normalized
@@ -30916,7 +30904,7 @@ ALTER TABLE ONLY class4.customers_auth_normalized
 
 
 --
--- Name: customers_auth_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth customers_auth_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -30924,7 +30912,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: destination_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: destination_next_rates destination_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destination_next_rates
@@ -30932,7 +30920,7 @@ ALTER TABLE ONLY class4.destination_next_rates
 
 
 --
--- Name: destination_rate_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: destination_rate_policy destination_rate_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destination_rate_policy
@@ -30940,7 +30928,7 @@ ALTER TABLE ONLY class4.destination_rate_policy
 
 
 --
--- Name: destination_rate_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: destination_rate_policy destination_rate_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destination_rate_policy
@@ -30948,7 +30936,7 @@ ALTER TABLE ONLY class4.destination_rate_policy
 
 
 --
--- Name: destinations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: destinations destinations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
@@ -30956,7 +30944,7 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: destinations_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: destinations destinations_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
@@ -30964,7 +30952,7 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: dialpeer_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeer_next_rates dialpeer_next_rates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeer_next_rates
@@ -30972,7 +30960,7 @@ ALTER TABLE ONLY class4.dialpeer_next_rates
 
 
 --
--- Name: dialpeers_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeers dialpeers_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -30980,7 +30968,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: disconnect_code_namespace_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_code_namespace disconnect_code_namespace_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_code_namespace
@@ -30988,7 +30976,7 @@ ALTER TABLE ONLY class4.disconnect_code_namespace
 
 
 --
--- Name: disconnect_code_namespace_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_code_namespace disconnect_code_namespace_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_code_namespace
@@ -30996,7 +30984,7 @@ ALTER TABLE ONLY class4.disconnect_code_namespace
 
 
 --
--- Name: disconnect_code_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_code disconnect_code_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_code
@@ -31004,7 +30992,7 @@ ALTER TABLE ONLY class4.disconnect_code
 
 
 --
--- Name: disconnect_code_policy_codes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_policy_code disconnect_code_policy_codes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy_code
@@ -31012,7 +31000,7 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 
 
 --
--- Name: disconnect_code_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_policy disconnect_code_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy
@@ -31020,7 +31008,7 @@ ALTER TABLE ONLY class4.disconnect_policy
 
 
 --
--- Name: disconnect_code_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_policy disconnect_code_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy
@@ -31028,7 +31016,7 @@ ALTER TABLE ONLY class4.disconnect_policy
 
 
 --
--- Name: disconnect_initiators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_initiators disconnect_initiators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_initiators
@@ -31036,7 +31024,7 @@ ALTER TABLE ONLY class4.disconnect_initiators
 
 
 --
--- Name: diversion_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: diversion_policy diversion_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.diversion_policy
@@ -31044,7 +31032,7 @@ ALTER TABLE ONLY class4.diversion_policy
 
 
 --
--- Name: diversion_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: diversion_policy diversion_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.diversion_policy
@@ -31052,7 +31040,7 @@ ALTER TABLE ONLY class4.diversion_policy
 
 
 --
--- Name: dtmf_receive_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dtmf_receive_modes dtmf_receive_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dtmf_receive_modes
@@ -31060,7 +31048,7 @@ ALTER TABLE ONLY class4.dtmf_receive_modes
 
 
 --
--- Name: dtmf_receive_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dtmf_receive_modes dtmf_receive_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dtmf_receive_modes
@@ -31068,7 +31056,7 @@ ALTER TABLE ONLY class4.dtmf_receive_modes
 
 
 --
--- Name: dtmf_send_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dtmf_send_modes dtmf_send_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dtmf_send_modes
@@ -31076,7 +31064,7 @@ ALTER TABLE ONLY class4.dtmf_send_modes
 
 
 --
--- Name: dtmf_send_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dtmf_send_modes dtmf_send_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dtmf_send_modes
@@ -31084,7 +31072,7 @@ ALTER TABLE ONLY class4.dtmf_send_modes
 
 
 --
--- Name: dump_level_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dump_level dump_level_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dump_level
@@ -31092,7 +31080,7 @@ ALTER TABLE ONLY class4.dump_level
 
 
 --
--- Name: dump_level_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: dump_level dump_level_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dump_level
@@ -31100,7 +31088,7 @@ ALTER TABLE ONLY class4.dump_level
 
 
 --
--- Name: filter_types_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: filter_types filter_types_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.filter_types
@@ -31108,7 +31096,7 @@ ALTER TABLE ONLY class4.filter_types
 
 
 --
--- Name: gateway_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_groups gateway_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_groups
@@ -31116,7 +31104,7 @@ ALTER TABLE ONLY class4.gateway_groups
 
 
 --
--- Name: gateway_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_groups gateway_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_groups
@@ -31124,7 +31112,7 @@ ALTER TABLE ONLY class4.gateway_groups
 
 
 --
--- Name: gateway_inband_dtmf_filtering_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_inband_dtmf_filtering_modes gateway_inband_dtmf_filtering_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
@@ -31132,7 +31120,7 @@ ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
 
 
 --
--- Name: gateway_inband_dtmf_filtering_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_inband_dtmf_filtering_modes gateway_inband_dtmf_filtering_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
@@ -31140,7 +31128,7 @@ ALTER TABLE ONLY class4.gateway_inband_dtmf_filtering_modes
 
 
 --
--- Name: gateway_media_encryption_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_media_encryption_modes gateway_media_encryption_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_media_encryption_modes
@@ -31148,7 +31136,7 @@ ALTER TABLE ONLY class4.gateway_media_encryption_modes
 
 
 --
--- Name: gateway_media_encryption_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_media_encryption_modes gateway_media_encryption_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_media_encryption_modes
@@ -31156,7 +31144,7 @@ ALTER TABLE ONLY class4.gateway_media_encryption_modes
 
 
 --
--- Name: gateway_network_protocol_priorities_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_network_protocol_priorities gateway_network_protocol_priorities_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_network_protocol_priorities
@@ -31164,7 +31152,7 @@ ALTER TABLE ONLY class4.gateway_network_protocol_priorities
 
 
 --
--- Name: gateway_network_protocol_priorities_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_network_protocol_priorities gateway_network_protocol_priorities_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_network_protocol_priorities
@@ -31172,7 +31160,7 @@ ALTER TABLE ONLY class4.gateway_network_protocol_priorities
 
 
 --
--- Name: gateway_rel100_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_rel100_modes gateway_rel100_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_rel100_modes
@@ -31180,7 +31168,7 @@ ALTER TABLE ONLY class4.gateway_rel100_modes
 
 
 --
--- Name: gateway_rel100_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateway_rel100_modes gateway_rel100_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_rel100_modes
@@ -31188,7 +31176,7 @@ ALTER TABLE ONLY class4.gateway_rel100_modes
 
 
 --
--- Name: gateways_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateways gateways_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -31196,7 +31184,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: gateways gateways_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -31204,7 +31192,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: lnp_cache_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_cache lnp_cache_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_cache
@@ -31212,7 +31200,7 @@ ALTER TABLE ONLY class4.lnp_cache
 
 
 --
--- Name: lnp_databases_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_databases lnp_databases_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_databases
@@ -31220,7 +31208,7 @@ ALTER TABLE ONLY class4.lnp_databases
 
 
 --
--- Name: lnp_databases_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_databases lnp_databases_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_databases
@@ -31228,7 +31216,7 @@ ALTER TABLE ONLY class4.lnp_databases
 
 
 --
--- Name: numberlist_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_actions numberlist_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_actions
@@ -31236,7 +31224,7 @@ ALTER TABLE ONLY class4.numberlist_actions
 
 
 --
--- Name: numberlist_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: numberlist_actions numberlist_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_actions
@@ -31244,7 +31232,7 @@ ALTER TABLE ONLY class4.numberlist_actions
 
 
 --
--- Name: radius_accounting_profile_interim_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profile_interim_attributes radius_accounting_profile_interim_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
@@ -31252,7 +31240,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
 
 
 --
--- Name: radius_accounting_profile_start_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profile_start_attributes radius_accounting_profile_start_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
@@ -31260,7 +31248,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
 
 
 --
--- Name: radius_accounting_profile_stop_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profile_stop_attributes radius_accounting_profile_stop_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
@@ -31268,7 +31256,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
 
 
 --
--- Name: radius_accounting_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profiles radius_accounting_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profiles
@@ -31276,7 +31264,7 @@ ALTER TABLE ONLY class4.radius_accounting_profiles
 
 
 --
--- Name: radius_accounting_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_accounting_profiles radius_accounting_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profiles
@@ -31284,7 +31272,7 @@ ALTER TABLE ONLY class4.radius_accounting_profiles
 
 
 --
--- Name: radius_auth_profile_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_auth_profile_attributes radius_auth_profile_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_auth_profile_attributes
@@ -31292,7 +31280,7 @@ ALTER TABLE ONLY class4.radius_auth_profile_attributes
 
 
 --
--- Name: radius_auth_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_auth_profiles radius_auth_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_auth_profiles
@@ -31300,7 +31288,7 @@ ALTER TABLE ONLY class4.radius_auth_profiles
 
 
 --
--- Name: radius_auth_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: radius_auth_profiles radius_auth_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_auth_profiles
@@ -31308,7 +31296,7 @@ ALTER TABLE ONLY class4.radius_auth_profiles
 
 
 --
--- Name: rate_profit_control_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: rate_profit_control_modes rate_profit_control_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rate_profit_control_modes
@@ -31316,7 +31304,7 @@ ALTER TABLE ONLY class4.rate_profit_control_modes
 
 
 --
--- Name: rate_profit_control_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: rate_profit_control_modes rate_profit_control_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rate_profit_control_modes
@@ -31324,7 +31312,7 @@ ALTER TABLE ONLY class4.rate_profit_control_modes
 
 
 --
--- Name: rateplans_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: rateplans rateplans_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rateplans
@@ -31332,7 +31320,7 @@ ALTER TABLE ONLY class4.rateplans
 
 
 --
--- Name: rateplans_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: rateplans rateplans_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rateplans
@@ -31340,7 +31328,7 @@ ALTER TABLE ONLY class4.rateplans
 
 
 --
--- Name: rateplans_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: rateplans rateplans_uuid_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rateplans
@@ -31348,7 +31336,7 @@ ALTER TABLE ONLY class4.rateplans
 
 
 --
--- Name: registrations_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: registrations registrations_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations
@@ -31356,7 +31344,7 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: registrations registrations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations
@@ -31364,7 +31352,7 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: routeset_discriminators_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routeset_discriminators routeset_discriminators_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routeset_discriminators
@@ -31372,7 +31360,7 @@ ALTER TABLE ONLY class4.routeset_discriminators
 
 
 --
--- Name: routeset_discriminators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routeset_discriminators routeset_discriminators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routeset_discriminators
@@ -31380,7 +31368,7 @@ ALTER TABLE ONLY class4.routeset_discriminators
 
 
 --
--- Name: routing_groups_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_groups routing_groups_name_unique; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_groups
@@ -31388,7 +31376,7 @@ ALTER TABLE ONLY class4.routing_groups
 
 
 --
--- Name: routing_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_groups routing_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_groups
@@ -31396,7 +31384,7 @@ ALTER TABLE ONLY class4.routing_groups
 
 
 --
--- Name: routing_plan_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_groups routing_plan_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_groups
@@ -31404,7 +31392,7 @@ ALTER TABLE ONLY class4.routing_plan_groups
 
 
 --
--- Name: routing_plan_groups_routing_plan_id_routing_group_id_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_groups routing_plan_groups_routing_plan_id_routing_group_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_groups
@@ -31412,7 +31400,7 @@ ALTER TABLE ONLY class4.routing_plan_groups
 
 
 --
--- Name: routing_plan_lnp_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_lnp_rules routing_plan_lnp_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_lnp_rules
@@ -31420,7 +31408,7 @@ ALTER TABLE ONLY class4.routing_plan_lnp_rules
 
 
 --
--- Name: routing_plan_static_routes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_static_routes routing_plan_static_routes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_static_routes
@@ -31428,7 +31416,7 @@ ALTER TABLE ONLY class4.routing_plan_static_routes
 
 
 --
--- Name: routing_plans_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plans routing_plans_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plans
@@ -31436,7 +31424,7 @@ ALTER TABLE ONLY class4.routing_plans
 
 
 --
--- Name: routing_plans_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plans routing_plans_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plans
@@ -31444,7 +31432,7 @@ ALTER TABLE ONLY class4.routing_plans
 
 
 --
--- Name: routing_tag_detection_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tag_detection_rules routing_tag_detection_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules
@@ -31452,7 +31440,7 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tag_modes routing_tag_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_modes
@@ -31460,7 +31448,7 @@ ALTER TABLE ONLY class4.routing_tag_modes
 
 
 --
--- Name: routing_tag_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tag_modes routing_tag_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_modes
@@ -31468,7 +31456,7 @@ ALTER TABLE ONLY class4.routing_tag_modes
 
 
 --
--- Name: routing_tags_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tags routing_tags_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tags
@@ -31476,7 +31464,7 @@ ALTER TABLE ONLY class4.routing_tags
 
 
 --
--- Name: routing_tags_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tags routing_tags_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tags
@@ -31484,7 +31472,7 @@ ALTER TABLE ONLY class4.routing_tags
 
 
 --
--- Name: sdp_c_location_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: sdp_c_location sdp_c_location_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.sdp_c_location
@@ -31492,7 +31480,7 @@ ALTER TABLE ONLY class4.sdp_c_location
 
 
 --
--- Name: sdp_c_location_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: sdp_c_location sdp_c_location_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.sdp_c_location
@@ -31500,7 +31488,7 @@ ALTER TABLE ONLY class4.sdp_c_location
 
 
 --
--- Name: session_refresh_methods_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: session_refresh_methods session_refresh_methods_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.session_refresh_methods
@@ -31508,7 +31496,7 @@ ALTER TABLE ONLY class4.session_refresh_methods
 
 
 --
--- Name: sortings_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: sortings sortings_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.sortings
@@ -31516,7 +31504,7 @@ ALTER TABLE ONLY class4.sortings
 
 
 --
--- Name: tag_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: tag_actions tag_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.tag_actions
@@ -31524,7 +31512,7 @@ ALTER TABLE ONLY class4.tag_actions
 
 
 --
--- Name: tag_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: tag_actions tag_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.tag_actions
@@ -31532,7 +31520,7 @@ ALTER TABLE ONLY class4.tag_actions
 
 
 --
--- Name: transport_protocols_name_key; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: transport_protocols transport_protocols_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.transport_protocols
@@ -31540,7 +31528,7 @@ ALTER TABLE ONLY class4.transport_protocols
 
 
 --
--- Name: transport_protocols_pkey; Type: CONSTRAINT; Schema: class4; Owner: -; Tablespace: 
+-- Name: transport_protocols transport_protocols_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.transport_protocols
@@ -31548,7 +31536,7 @@ ALTER TABLE ONLY class4.transport_protocols
 
 
 --
--- Name: import_accounts_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_accounts import_accounts_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_accounts
@@ -31556,7 +31544,7 @@ ALTER TABLE ONLY data_import.import_accounts
 
 
 --
--- Name: import_codec_group_codecs_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_codec_group_codecs import_codec_group_codecs_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_codec_group_codecs
@@ -31564,7 +31552,7 @@ ALTER TABLE ONLY data_import.import_codec_group_codecs
 
 
 --
--- Name: import_codec_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_codec_groups import_codec_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_codec_groups
@@ -31572,7 +31560,7 @@ ALTER TABLE ONLY data_import.import_codec_groups
 
 
 --
--- Name: import_contractors_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_contractors import_contractors_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_contractors
@@ -31580,7 +31568,7 @@ ALTER TABLE ONLY data_import.import_contractors
 
 
 --
--- Name: import_customers_auth_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_customers_auth import_customers_auth_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_customers_auth
@@ -31588,7 +31576,7 @@ ALTER TABLE ONLY data_import.import_customers_auth
 
 
 --
--- Name: import_destinations_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_destinations import_destinations_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_destinations
@@ -31596,7 +31584,7 @@ ALTER TABLE ONLY data_import.import_destinations
 
 
 --
--- Name: import_dialpeers_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_dialpeers import_dialpeers_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_dialpeers
@@ -31604,7 +31592,7 @@ ALTER TABLE ONLY data_import.import_dialpeers
 
 
 --
--- Name: import_disconnect_policies_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_disconnect_policies import_disconnect_policies_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_disconnect_policies
@@ -31612,7 +31600,7 @@ ALTER TABLE ONLY data_import.import_disconnect_policies
 
 
 --
--- Name: import_gateway_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_gateway_groups import_gateway_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_gateway_groups
@@ -31620,7 +31608,7 @@ ALTER TABLE ONLY data_import.import_gateway_groups
 
 
 --
--- Name: import_gateways_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_gateways import_gateways_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_gateways
@@ -31628,7 +31616,7 @@ ALTER TABLE ONLY data_import.import_gateways
 
 
 --
--- Name: import_numberlist_items_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_numberlist_items import_numberlist_items_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_numberlist_items
@@ -31636,7 +31624,7 @@ ALTER TABLE ONLY data_import.import_numberlist_items
 
 
 --
--- Name: import_numberlists_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_numberlists import_numberlists_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_numberlists
@@ -31644,7 +31632,7 @@ ALTER TABLE ONLY data_import.import_numberlists
 
 
 --
--- Name: import_rateplans_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_rateplans import_rateplans_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_rateplans
@@ -31652,7 +31640,7 @@ ALTER TABLE ONLY data_import.import_rateplans
 
 
 --
--- Name: import_registrations_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_registrations import_registrations_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_registrations
@@ -31660,7 +31648,7 @@ ALTER TABLE ONLY data_import.import_registrations
 
 
 --
--- Name: import_routing_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -; Tablespace: 
+-- Name: import_routing_groups import_routing_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
 --
 
 ALTER TABLE ONLY data_import.import_routing_groups
@@ -31668,7 +31656,7 @@ ALTER TABLE ONLY data_import.import_routing_groups
 
 
 --
--- Name: admin_notes_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: active_admin_comments admin_notes_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.active_admin_comments
@@ -31676,7 +31664,7 @@ ALTER TABLE ONLY gui.active_admin_comments
 
 
 --
--- Name: admin_users_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.admin_users
@@ -31684,7 +31672,7 @@ ALTER TABLE ONLY gui.admin_users
 
 
 --
--- Name: admin_users_username_key; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: admin_users admin_users_username_key; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.admin_users
@@ -31692,7 +31680,7 @@ ALTER TABLE ONLY gui.admin_users
 
 
 --
--- Name: background_threads_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: background_threads background_threads_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.background_threads
@@ -31700,7 +31688,7 @@ ALTER TABLE ONLY gui.background_threads
 
 
 --
--- Name: sessions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.sessions
@@ -31708,7 +31696,7 @@ ALTER TABLE ONLY gui.sessions
 
 
 --
--- Name: sessions_session_id_key; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: sessions sessions_session_id_key; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.sessions
@@ -31716,7 +31704,7 @@ ALTER TABLE ONLY gui.sessions
 
 
 --
--- Name: versions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -; Tablespace: 
+-- Name: versions versions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
 ALTER TABLE ONLY gui.versions
@@ -31724,7 +31712,7 @@ ALTER TABLE ONLY gui.versions
 
 
 --
--- Name: api_requests_pkey; Type: CONSTRAINT; Schema: logs; Owner: -; Tablespace: 
+-- Name: api_requests api_requests_pkey; Type: CONSTRAINT; Schema: logs; Owner: -
 --
 
 ALTER TABLE ONLY logs.api_requests
@@ -31732,7 +31720,7 @@ ALTER TABLE ONLY logs.api_requests
 
 
 --
--- Name: balance_notifications_pkey; Type: CONSTRAINT; Schema: logs; Owner: -; Tablespace: 
+-- Name: balance_notifications balance_notifications_pkey; Type: CONSTRAINT; Schema: logs; Owner: -
 --
 
 ALTER TABLE ONLY logs.balance_notifications
@@ -31740,7 +31728,7 @@ ALTER TABLE ONLY logs.balance_notifications
 
 
 --
--- Name: logic_log_pkey; Type: CONSTRAINT; Schema: logs; Owner: -; Tablespace: 
+-- Name: logic_log logic_log_pkey; Type: CONSTRAINT; Schema: logs; Owner: -
 --
 
 ALTER TABLE ONLY logs.logic_log
@@ -31748,7 +31736,7 @@ ALTER TABLE ONLY logs.logic_log
 
 
 --
--- Name: alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
+-- Name: alerts alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.alerts
@@ -31756,7 +31744,7 @@ ALTER TABLE ONLY notifications.alerts
 
 
 --
--- Name: alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
+-- Name: alerts alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.alerts
@@ -31764,7 +31752,7 @@ ALTER TABLE ONLY notifications.alerts
 
 
 --
--- Name: attachments_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
+-- Name: attachments attachments_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.attachments
@@ -31772,7 +31760,7 @@ ALTER TABLE ONLY notifications.attachments
 
 
 --
--- Name: contacts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
+-- Name: contacts contacts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.contacts
@@ -31780,7 +31768,7 @@ ALTER TABLE ONLY notifications.contacts
 
 
 --
--- Name: email_log_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -; Tablespace: 
+-- Name: email_logs email_log_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.email_logs
@@ -31788,7 +31776,7 @@ ALTER TABLE ONLY notifications.email_logs
 
 
 --
--- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.ar_internal_metadata
@@ -31796,7 +31784,7 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: contractors_external_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: contractors contractors_external_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.contractors
@@ -31804,7 +31792,7 @@ ALTER TABLE ONLY public.contractors
 
 
 --
--- Name: contractors_name_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: contractors contractors_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.contractors
@@ -31812,7 +31800,7 @@ ALTER TABLE ONLY public.contractors
 
 
 --
--- Name: contractors_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: contractors contractors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.contractors
@@ -31820,7 +31808,7 @@ ALTER TABLE ONLY public.contractors
 
 
 --
--- Name: dialpeers_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
+-- Name: dialpeers_stats dialpeers_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -
 --
 
 ALTER TABLE ONLY runtime_stats.dialpeers_stats
@@ -31828,7 +31816,7 @@ ALTER TABLE ONLY runtime_stats.dialpeers_stats
 
 
 --
--- Name: gateways_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
+-- Name: gateways_stats gateways_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -
 --
 
 ALTER TABLE ONLY runtime_stats.gateways_stats
@@ -31836,7 +31824,7 @@ ALTER TABLE ONLY runtime_stats.gateways_stats
 
 
 --
--- Name: unique_dp; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
+-- Name: dialpeers_stats unique_dp; Type: CONSTRAINT; Schema: runtime_stats; Owner: -
 --
 
 ALTER TABLE ONLY runtime_stats.dialpeers_stats
@@ -31844,7 +31832,7 @@ ALTER TABLE ONLY runtime_stats.dialpeers_stats
 
 
 --
--- Name: unique_gw; Type: CONSTRAINT; Schema: runtime_stats; Owner: -; Tablespace: 
+-- Name: gateways_stats unique_gw; Type: CONSTRAINT; Schema: runtime_stats; Owner: -
 --
 
 ALTER TABLE ONLY runtime_stats.gateways_stats
@@ -31852,7 +31840,7 @@ ALTER TABLE ONLY runtime_stats.gateways_stats
 
 
 --
--- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_name_key; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.resource_action
@@ -31860,7 +31848,7 @@ ALTER TABLE ONLY switch13.resource_action
 
 
 --
--- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.resource_action
@@ -31868,7 +31856,7 @@ ALTER TABLE ONLY switch13.resource_action
 
 
 --
--- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_name_key; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.resource_type
@@ -31876,7 +31864,7 @@ ALTER TABLE ONLY switch13.resource_type
 
 
 --
--- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.resource_type
@@ -31884,7 +31872,7 @@ ALTER TABLE ONLY switch13.resource_type
 
 
 --
--- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.switch_interface_in
@@ -31892,7 +31880,7 @@ ALTER TABLE ONLY switch13.switch_interface_in
 
 
 --
--- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.switch_interface_in
@@ -31900,7 +31888,7 @@ ALTER TABLE ONLY switch13.switch_interface_in
 
 
 --
--- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.switch_interface_out
@@ -31908,7 +31896,7 @@ ALTER TABLE ONLY switch13.switch_interface_out
 
 
 --
--- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_rank_key; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.switch_interface_out
@@ -31916,7 +31904,7 @@ ALTER TABLE ONLY switch13.switch_interface_out
 
 
 --
--- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -; Tablespace: 
+-- Name: trusted_headers trusted_headers_pkey; Type: CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.trusted_headers
@@ -31924,7 +31912,7 @@ ALTER TABLE ONLY switch13.trusted_headers
 
 
 --
--- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_name_key; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.resource_action
@@ -31932,7 +31920,7 @@ ALTER TABLE ONLY switch14.resource_action
 
 
 --
--- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.resource_action
@@ -31940,7 +31928,7 @@ ALTER TABLE ONLY switch14.resource_action
 
 
 --
--- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_name_key; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.resource_type
@@ -31948,7 +31936,7 @@ ALTER TABLE ONLY switch14.resource_type
 
 
 --
--- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.resource_type
@@ -31956,7 +31944,7 @@ ALTER TABLE ONLY switch14.resource_type
 
 
 --
--- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.switch_interface_in
@@ -31964,7 +31952,7 @@ ALTER TABLE ONLY switch14.switch_interface_in
 
 
 --
--- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.switch_interface_in
@@ -31972,7 +31960,7 @@ ALTER TABLE ONLY switch14.switch_interface_in
 
 
 --
--- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.switch_interface_out
@@ -31980,7 +31968,7 @@ ALTER TABLE ONLY switch14.switch_interface_out
 
 
 --
--- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_rank_key; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.switch_interface_out
@@ -31988,7 +31976,7 @@ ALTER TABLE ONLY switch14.switch_interface_out
 
 
 --
--- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -; Tablespace: 
+-- Name: trusted_headers trusted_headers_pkey; Type: CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.trusted_headers
@@ -31996,7 +31984,7 @@ ALTER TABLE ONLY switch14.trusted_headers
 
 
 --
--- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_name_key; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.resource_action
@@ -32004,7 +31992,7 @@ ALTER TABLE ONLY switch15.resource_action
 
 
 --
--- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.resource_action
@@ -32012,7 +32000,7 @@ ALTER TABLE ONLY switch15.resource_action
 
 
 --
--- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_name_key; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.resource_type
@@ -32020,7 +32008,7 @@ ALTER TABLE ONLY switch15.resource_type
 
 
 --
--- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.resource_type
@@ -32028,7 +32016,7 @@ ALTER TABLE ONLY switch15.resource_type
 
 
 --
--- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.switch_interface_in
@@ -32036,7 +32024,7 @@ ALTER TABLE ONLY switch15.switch_interface_in
 
 
 --
--- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.switch_interface_in
@@ -32044,7 +32032,7 @@ ALTER TABLE ONLY switch15.switch_interface_in
 
 
 --
--- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.switch_interface_out
@@ -32052,7 +32040,7 @@ ALTER TABLE ONLY switch15.switch_interface_out
 
 
 --
--- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_rank_key; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.switch_interface_out
@@ -32060,7 +32048,7 @@ ALTER TABLE ONLY switch15.switch_interface_out
 
 
 --
--- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -; Tablespace: 
+-- Name: trusted_headers trusted_headers_pkey; Type: CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.trusted_headers
@@ -32068,7 +32056,7 @@ ALTER TABLE ONLY switch15.trusted_headers
 
 
 --
--- Name: resource_action_name_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_name_key; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.resource_action
@@ -32076,7 +32064,7 @@ ALTER TABLE ONLY switch16.resource_action
 
 
 --
--- Name: resource_action_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: resource_action resource_action_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.resource_action
@@ -32084,7 +32072,7 @@ ALTER TABLE ONLY switch16.resource_action
 
 
 --
--- Name: resource_type_name_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_name_key; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.resource_type
@@ -32092,7 +32080,7 @@ ALTER TABLE ONLY switch16.resource_type
 
 
 --
--- Name: resource_type_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: resource_type resource_type_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.resource_type
@@ -32100,7 +32088,7 @@ ALTER TABLE ONLY switch16.resource_type
 
 
 --
--- Name: switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.switch_interface_in
@@ -32108,7 +32096,7 @@ ALTER TABLE ONLY switch16.switch_interface_in
 
 
 --
--- Name: switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: switch_interface_in switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.switch_interface_in
@@ -32116,7 +32104,7 @@ ALTER TABLE ONLY switch16.switch_interface_in
 
 
 --
--- Name: switch_interface_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.switch_interface_out
@@ -32124,7 +32112,7 @@ ALTER TABLE ONLY switch16.switch_interface_out
 
 
 --
--- Name: switch_interface_rank_key; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: switch_interface_out switch_interface_rank_key; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.switch_interface_out
@@ -32132,7 +32120,7 @@ ALTER TABLE ONLY switch16.switch_interface_out
 
 
 --
--- Name: trusted_headers_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -; Tablespace: 
+-- Name: trusted_headers trusted_headers_pkey; Type: CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.trusted_headers
@@ -32140,7 +32128,7 @@ ALTER TABLE ONLY switch16.trusted_headers
 
 
 --
--- Name: active_currencies_currency_id_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: active_currencies active_currencies_currency_id_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.active_currencies
@@ -32148,7 +32136,7 @@ ALTER TABLE ONLY sys.active_currencies
 
 
 --
--- Name: active_currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: active_currencies active_currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.active_currencies
@@ -32156,7 +32144,7 @@ ALTER TABLE ONLY sys.active_currencies
 
 
 --
--- Name: api_access_login_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: api_access api_access_login_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_access
@@ -32164,7 +32152,7 @@ ALTER TABLE ONLY sys.api_access
 
 
 --
--- Name: api_access_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: api_access api_access_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_access
@@ -32172,7 +32160,7 @@ ALTER TABLE ONLY sys.api_access
 
 
 --
--- Name: api_log_config_controller_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: api_log_config api_log_config_controller_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_log_config
@@ -32180,7 +32168,7 @@ ALTER TABLE ONLY sys.api_log_config
 
 
 --
--- Name: api_log_config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: api_log_config api_log_config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_log_config
@@ -32188,7 +32176,7 @@ ALTER TABLE ONLY sys.api_log_config
 
 
 --
--- Name: cdr_exports_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_exports cdr_exports_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.cdr_exports
@@ -32196,7 +32184,7 @@ ALTER TABLE ONLY sys.cdr_exports
 
 
 --
--- Name: cdrtables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_tables cdrtables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.cdr_tables
@@ -32204,7 +32192,7 @@ ALTER TABLE ONLY sys.cdr_tables
 
 
 --
--- Name: countries_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: countries countries_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.countries
@@ -32212,7 +32200,7 @@ ALTER TABLE ONLY sys.countries
 
 
 --
--- Name: countries_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: countries countries_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.countries
@@ -32220,7 +32208,7 @@ ALTER TABLE ONLY sys.countries
 
 
 --
--- Name: currencies_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: currencies currencies_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.currencies
@@ -32228,7 +32216,7 @@ ALTER TABLE ONLY sys.currencies
 
 
 --
--- Name: currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: currencies currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.currencies
@@ -32236,7 +32224,7 @@ ALTER TABLE ONLY sys.currencies
 
 
 --
--- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: delayed_jobs delayed_jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.delayed_jobs
@@ -32244,7 +32232,7 @@ ALTER TABLE ONLY sys.delayed_jobs
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.events
@@ -32252,7 +32240,7 @@ ALTER TABLE ONLY sys.events
 
 
 --
--- Name: guiconfig_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: guiconfig guiconfig_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.guiconfig
@@ -32260,7 +32248,7 @@ ALTER TABLE ONLY sys.guiconfig
 
 
 --
--- Name: jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.jobs
@@ -32268,7 +32256,7 @@ ALTER TABLE ONLY sys.jobs
 
 
 --
--- Name: jobs_type_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: jobs jobs_type_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.jobs
@@ -32276,7 +32264,7 @@ ALTER TABLE ONLY sys.jobs
 
 
 --
--- Name: lnp_database_drivers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: lnp_database_drivers lnp_database_drivers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lnp_database_drivers
@@ -32284,7 +32272,7 @@ ALTER TABLE ONLY sys.lnp_database_drivers
 
 
 --
--- Name: lnp_database_drivers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: lnp_database_drivers lnp_database_drivers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lnp_database_drivers
@@ -32292,7 +32280,7 @@ ALTER TABLE ONLY sys.lnp_database_drivers
 
 
 --
--- Name: lnp_resolvers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: lnp_resolvers lnp_resolvers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lnp_resolvers
@@ -32300,7 +32288,7 @@ ALTER TABLE ONLY sys.lnp_resolvers
 
 
 --
--- Name: lnp_resolvers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: lnp_resolvers lnp_resolvers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lnp_resolvers
@@ -32308,7 +32296,7 @@ ALTER TABLE ONLY sys.lnp_resolvers
 
 
 --
--- Name: load_balancers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: load_balancers load_balancers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.load_balancers
@@ -32316,7 +32304,7 @@ ALTER TABLE ONLY sys.load_balancers
 
 
 --
--- Name: load_balancers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: load_balancers load_balancers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.load_balancers
@@ -32324,7 +32312,7 @@ ALTER TABLE ONLY sys.load_balancers
 
 
 --
--- Name: load_balancers_signalling_ip_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: load_balancers load_balancers_signalling_ip_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.load_balancers
@@ -32332,7 +32320,7 @@ ALTER TABLE ONLY sys.load_balancers
 
 
 --
--- Name: lua_scripts_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: lua_scripts lua_scripts_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lua_scripts
@@ -32340,7 +32328,7 @@ ALTER TABLE ONLY sys.lua_scripts
 
 
 --
--- Name: lua_scripts_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: lua_scripts lua_scripts_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.lua_scripts
@@ -32348,7 +32336,7 @@ ALTER TABLE ONLY sys.lua_scripts
 
 
 --
--- Name: network_prefixes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: network_prefixes network_prefixes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.network_prefixes
@@ -32356,7 +32344,7 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
--- Name: network_prefixes_prefix_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: network_prefixes network_prefixes_prefix_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.network_prefixes
@@ -32364,7 +32352,7 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
--- Name: networks_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: networks networks_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.networks
@@ -32372,7 +32360,7 @@ ALTER TABLE ONLY sys.networks
 
 
 --
--- Name: networks_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: networks networks_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.networks
@@ -32380,7 +32368,7 @@ ALTER TABLE ONLY sys.networks
 
 
 --
--- Name: node_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: nodes node_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.nodes
@@ -32388,7 +32376,7 @@ ALTER TABLE ONLY sys.nodes
 
 
 --
--- Name: node_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: nodes node_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.nodes
@@ -32396,7 +32384,7 @@ ALTER TABLE ONLY sys.nodes
 
 
 --
--- Name: nodes_rpc_endpoint_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: nodes nodes_rpc_endpoint_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.nodes
@@ -32404,7 +32392,7 @@ ALTER TABLE ONLY sys.nodes
 
 
 --
--- Name: pop_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: pops pop_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.pops
@@ -32412,7 +32400,7 @@ ALTER TABLE ONLY sys.pops
 
 
 --
--- Name: pop_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: pops pop_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.pops
@@ -32420,7 +32408,7 @@ ALTER TABLE ONLY sys.pops
 
 
 --
--- Name: sensor_levels_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensor_levels sensor_levels_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensor_levels
@@ -32428,7 +32416,7 @@ ALTER TABLE ONLY sys.sensor_levels
 
 
 --
--- Name: sensor_levels_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensor_levels sensor_levels_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensor_levels
@@ -32436,7 +32424,7 @@ ALTER TABLE ONLY sys.sensor_levels
 
 
 --
--- Name: sensor_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensor_modes sensor_modes_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensor_modes
@@ -32444,7 +32432,7 @@ ALTER TABLE ONLY sys.sensor_modes
 
 
 --
--- Name: sensors_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensors sensors_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensors
@@ -32452,7 +32440,7 @@ ALTER TABLE ONLY sys.sensors
 
 
 --
--- Name: sensors_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sensors sensors_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensors
@@ -32460,7 +32448,7 @@ ALTER TABLE ONLY sys.sensors
 
 
 --
--- Name: sip_schemas_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sip_schemas sip_schemas_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sip_schemas
@@ -32468,7 +32456,7 @@ ALTER TABLE ONLY sys.sip_schemas
 
 
 --
--- Name: sip_schemas_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: sip_schemas sip_schemas_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sip_schemas
@@ -32476,7 +32464,7 @@ ALTER TABLE ONLY sys.sip_schemas
 
 
 --
--- Name: smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: smtp_connections smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.smtp_connections
@@ -32484,7 +32472,7 @@ ALTER TABLE ONLY sys.smtp_connections
 
 
 --
--- Name: smtp_connections_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: smtp_connections smtp_connections_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.smtp_connections
@@ -32492,7 +32480,7 @@ ALTER TABLE ONLY sys.smtp_connections
 
 
 --
--- Name: timezones_name_key; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: timezones timezones_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.timezones
@@ -32500,7 +32488,7 @@ ALTER TABLE ONLY sys.timezones
 
 
 --
--- Name: timezones_pkey; Type: CONSTRAINT; Schema: sys; Owner: -; Tablespace: 
+-- Name: timezones timezones_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.timezones
@@ -32508,210 +32496,210 @@ ALTER TABLE ONLY sys.timezones
 
 
 --
--- Name: blacklist_items_blacklist_id_key_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: blacklist_items_blacklist_id_key_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE UNIQUE INDEX blacklist_items_blacklist_id_key_idx ON class4.numberlist_items USING btree (numberlist_id, key);
 
 
 --
--- Name: blacklist_items_blacklist_id_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: blacklist_items_blacklist_id_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX blacklist_items_blacklist_id_prefix_range_idx ON class4.numberlist_items USING gist (numberlist_id, ((key)::public.prefix_range));
 
 
 --
--- Name: customers_auth_normalized_ip_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth_normalized_ip_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX customers_auth_normalized_ip_prefix_range_prefix_range1_idx ON class4.customers_auth_normalized USING gist (ip, ((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range));
 
 
 --
--- Name: customers_auth_normalized_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: customers_auth_normalized_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX customers_auth_normalized_prefix_range_prefix_range1_idx ON class4.customers_auth_normalized USING gist (((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range)) WHERE enabled;
 
 
 --
--- Name: destinations_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: destinations_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX destinations_prefix_range_idx ON class4.destinations USING gist (((prefix)::public.prefix_range));
 
 
 --
--- Name: dialpeers_external_id_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeers_external_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX dialpeers_external_id_idx ON class4.dialpeers USING btree (external_id);
 
 
 --
--- Name: dialpeers_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeers_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX dialpeers_prefix_range_idx ON class4.dialpeers USING gist (((prefix)::public.prefix_range));
 
 
 --
--- Name: dialpeers_prefix_range_valid_from_valid_till_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeers_prefix_range_valid_from_valid_till_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX dialpeers_prefix_range_valid_from_valid_till_idx ON class4.dialpeers USING gist (((prefix)::public.prefix_range), valid_from, valid_till) WHERE enabled;
 
 
 --
--- Name: dialpeers_prefix_range_valid_from_valid_till_idx1; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: dialpeers_prefix_range_valid_from_valid_till_idx1; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX dialpeers_prefix_range_valid_from_valid_till_idx1 ON class4.dialpeers USING gist (((prefix)::public.prefix_range), valid_from, valid_till) WHERE (enabled AND (NOT locked));
 
 
 --
--- Name: disconnect_code_code_success_successnozerolen_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: disconnect_code_code_success_successnozerolen_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX disconnect_code_code_success_successnozerolen_idx ON class4.disconnect_code USING btree (code, success, successnozerolen);
 
 
 --
--- Name: lnp_cache_dst_database_id_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_cache_dst_database_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE UNIQUE INDEX lnp_cache_dst_database_id_idx ON class4.lnp_cache USING btree (dst, database_id);
 
 
 --
--- Name: lnp_cache_expires_at_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: lnp_cache_expires_at_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX lnp_cache_expires_at_idx ON class4.lnp_cache USING btree (expires_at);
 
 
 --
--- Name: routing_plan_lnp_rules_prefix_range_routing_plan_id_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_lnp_rules_prefix_range_routing_plan_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX routing_plan_lnp_rules_prefix_range_routing_plan_id_idx ON class4.routing_plan_lnp_rules USING gist (((dst_prefix)::public.prefix_range), routing_plan_id);
 
 
 --
--- Name: routing_plan_lnp_rules_routing_plan_id_dst_prefix_database__idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_lnp_rules_routing_plan_id_dst_prefix_database__idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE UNIQUE INDEX routing_plan_lnp_rules_routing_plan_id_dst_prefix_database__idx ON class4.routing_plan_lnp_rules USING btree (routing_plan_id, dst_prefix, database_id);
 
 
 --
--- Name: routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx ON class4.routing_plan_static_routes USING gist (((prefix)::public.prefix_range), vendor_id, routing_plan_id);
 
 
 --
--- Name: routing_tag_detection_rules_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -; Tablespace: 
+-- Name: routing_tag_detection_rules_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX routing_tag_detection_rules_prefix_range_idx ON class4.routing_tag_detection_rules USING gist (((src_prefix)::public.prefix_range), ((dst_prefix)::public.prefix_range));
 
 
 --
--- Name: admin_users_username_idx; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: admin_users_username_idx; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE UNIQUE INDEX admin_users_username_idx ON gui.admin_users USING btree (username);
 
 
 --
--- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON gui.active_admin_comments USING btree (author_type, author_id);
 
 
 --
--- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE INDEX index_active_admin_comments_on_namespace ON gui.active_admin_comments USING btree (namespace);
 
 
 --
--- Name: index_admin_notes_on_resource_type_and_resource_id; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: index_admin_notes_on_resource_type_and_resource_id; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE INDEX index_admin_notes_on_resource_type_and_resource_id ON gui.active_admin_comments USING btree (resource_type, resource_id);
 
 
 --
--- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON gui.admin_users USING btree (reset_password_token);
 
 
 --
--- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE INDEX index_versions_on_item_type_and_item_id ON gui.versions USING btree (item_type, item_id);
 
 
 --
--- Name: sessions_updated_at_idx; Type: INDEX; Schema: gui; Owner: -; Tablespace: 
+-- Name: sessions_updated_at_idx; Type: INDEX; Schema: gui; Owner: -
 --
 
 CREATE INDEX sessions_updated_at_idx ON gui.sessions USING btree (updated_at);
 
 
 --
--- Name: api_requests_created_at_idx; Type: INDEX; Schema: logs; Owner: -; Tablespace: 
+-- Name: api_requests_created_at_idx; Type: INDEX; Schema: logs; Owner: -
 --
 
 CREATE INDEX api_requests_created_at_idx ON logs.api_requests USING btree (created_at);
 
 
 --
--- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migrations USING btree (version);
 
 
 --
--- Name: cdr_tables_name_idx; Type: INDEX; Schema: sys; Owner: -; Tablespace: 
+-- Name: cdr_tables_name_idx; Type: INDEX; Schema: sys; Owner: -
 --
 
 CREATE UNIQUE INDEX cdr_tables_name_idx ON sys.cdr_tables USING btree (name);
 
 
 --
--- Name: delayed_jobs_priority; Type: INDEX; Schema: sys; Owner: -; Tablespace: 
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: sys; Owner: -
 --
 
 CREATE INDEX delayed_jobs_priority ON sys.delayed_jobs USING btree (priority, run_at);
 
 
 --
--- Name: network_prefixes_prefix_range_idx; Type: INDEX; Schema: sys; Owner: -; Tablespace: 
+-- Name: network_prefixes_prefix_range_idx; Type: INDEX; Schema: sys; Owner: -
 --
 
 CREATE INDEX network_prefixes_prefix_range_idx ON sys.network_prefixes USING gist (((prefix)::public.prefix_range));
 
 
 --
--- Name: account_notification_tgf; Type: TRIGGER; Schema: billing; Owner: -
+-- Name: accounts account_notification_tgf; Type: TRIGGER; Schema: billing; Owner: -
 --
 
 CREATE TRIGGER account_notification_tgf AFTER INSERT OR UPDATE ON billing.accounts FOR EACH ROW EXECUTE PROCEDURE billing.account_change_iu_tgf();
 
 
 --
--- Name: accounts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: accounts accounts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -32719,7 +32707,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: accounts accounts_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -32727,7 +32715,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts_timezone_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: accounts accounts_timezone_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -32735,7 +32723,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts_vendor_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: accounts accounts_vendor_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
@@ -32743,7 +32731,7 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: payments_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: payments payments_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.payments
@@ -32751,7 +32739,7 @@ ALTER TABLE ONLY billing.payments
 
 
 --
--- Name: area_prefixes_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: area_prefixes area_prefixes_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.area_prefixes
@@ -32759,7 +32747,7 @@ ALTER TABLE ONLY class4.area_prefixes
 
 
 --
--- Name: blacklist_items_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: numberlist_items blacklist_items_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_items
@@ -32767,7 +32755,7 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
--- Name: blacklists_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: numberlists blacklists_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlists
@@ -32775,7 +32763,7 @@ ALTER TABLE ONLY class4.numberlists
 
 
 --
--- Name: codec_group_codecs_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: codec_group_codecs codec_group_codecs_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_group_codecs
@@ -32783,7 +32771,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 
 
 --
--- Name: codec_group_codecs_codec_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: codec_group_codecs codec_group_codecs_codec_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.codec_group_codecs
@@ -32791,7 +32779,7 @@ ALTER TABLE ONLY class4.codec_group_codecs
 
 
 --
--- Name: customers_auth_account_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_account_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32799,7 +32787,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_customer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_customer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32807,7 +32795,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32815,7 +32803,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_dst_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_dst_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32823,7 +32811,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_dump_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_dump_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32831,7 +32819,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32839,7 +32827,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_normalized_customers_auth_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth_normalized customers_auth_normalized_customers_auth_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth_normalized
@@ -32847,7 +32835,7 @@ ALTER TABLE ONLY class4.customers_auth_normalized
 
 
 --
--- Name: customers_auth_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32855,7 +32843,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_radius_accounting_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_radius_accounting_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32863,7 +32851,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_radius_auth_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_radius_auth_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32871,7 +32859,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32879,7 +32867,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32887,7 +32875,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_src_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_src_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32895,7 +32883,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32903,7 +32891,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: customers_auth customers_auth_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.customers_auth
@@ -32911,7 +32899,7 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: destination_next_rates_destination_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: destination_next_rates destination_next_rates_destination_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destination_next_rates
@@ -32919,7 +32907,7 @@ ALTER TABLE ONLY class4.destination_next_rates
 
 
 --
--- Name: destinations_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: destinations destinations_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
@@ -32927,7 +32915,7 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: destinations_rate_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: destinations destinations_rate_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
@@ -32935,7 +32923,7 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: destinations_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: destinations destinations_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
@@ -32943,7 +32931,7 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: destinations_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: destinations destinations_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
@@ -32951,7 +32939,7 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: dialpeer_next_rates_dialpeer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeer_next_rates dialpeer_next_rates_dialpeer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeer_next_rates
@@ -32959,7 +32947,7 @@ ALTER TABLE ONLY class4.dialpeer_next_rates
 
 
 --
--- Name: dialpeers_account_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_account_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -32967,7 +32955,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: dialpeers_gateway_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_gateway_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -32975,7 +32963,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: dialpeers_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -32983,7 +32971,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: dialpeers_routeset_discriminator_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_routeset_discriminator_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -32991,7 +32979,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: dialpeers_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -32999,7 +32987,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: dialpeers_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -33007,7 +32995,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: dialpeers_vendor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: dialpeers dialpeers_vendor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.dialpeers
@@ -33015,7 +33003,7 @@ ALTER TABLE ONLY class4.dialpeers
 
 
 --
--- Name: disconnect_code_namespace_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: disconnect_code disconnect_code_namespace_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_code
@@ -33023,7 +33011,7 @@ ALTER TABLE ONLY class4.disconnect_code
 
 
 --
--- Name: disconnect_code_policy_codes_code_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: disconnect_policy_code disconnect_code_policy_codes_code_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy_code
@@ -33031,7 +33019,7 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 
 
 --
--- Name: disconnect_code_policy_codes_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: disconnect_policy_code disconnect_code_policy_codes_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.disconnect_policy_code
@@ -33039,7 +33027,7 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 
 
 --
--- Name: gateway_groups_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateway_groups gateway_groups_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateway_groups
@@ -33047,7 +33035,7 @@ ALTER TABLE ONLY class4.gateway_groups
 
 
 --
--- Name: gateways_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33055,7 +33043,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33063,7 +33051,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33071,7 +33059,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_dtmf_receive_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_dtmf_receive_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33079,7 +33067,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_dtmf_send_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_dtmf_send_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33087,7 +33075,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_gateway_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_gateway_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33095,7 +33083,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_media_encryption_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_media_encryption_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33103,7 +33091,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_network_protocol_priority_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_network_protocol_priority_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33111,7 +33099,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_orig_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_orig_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33119,7 +33107,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_orig_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_orig_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33127,7 +33115,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33135,7 +33123,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_radius_accounting_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_radius_accounting_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33143,7 +33131,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_rel100_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_rel100_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33151,7 +33139,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_rx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_rx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33159,7 +33147,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_sdp_alines_filter_type_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_sdp_alines_filter_type_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33167,7 +33155,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_sdp_c_location_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_sdp_c_location_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33175,7 +33163,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_sensor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_sensor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33183,7 +33171,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_sensor_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_sensor_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33191,7 +33179,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_session_refresh_method_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_session_refresh_method_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33199,7 +33187,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33207,7 +33195,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_term_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_term_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33215,7 +33203,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_term_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_term_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33223,7 +33211,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33231,7 +33219,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways_tx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_tx_inband_dtmf_filtering_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
@@ -33239,7 +33227,7 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: lnp_cache_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: lnp_cache lnp_cache_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_cache
@@ -33247,7 +33235,7 @@ ALTER TABLE ONLY class4.lnp_cache
 
 
 --
--- Name: lnp_databases_driver_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: lnp_databases lnp_databases_driver_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.lnp_databases
@@ -33255,7 +33243,7 @@ ALTER TABLE ONLY class4.lnp_databases
 
 
 --
--- Name: numberlist_items_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: numberlist_items numberlist_items_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_items
@@ -33263,7 +33251,7 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
--- Name: numberlist_items_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: numberlist_items numberlist_items_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlist_items
@@ -33271,7 +33259,7 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
--- Name: numberlists_default_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: numberlists numberlists_default_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlists
@@ -33279,7 +33267,7 @@ ALTER TABLE ONLY class4.numberlists
 
 
 --
--- Name: numberlists_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: numberlists numberlists_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.numberlists
@@ -33287,7 +33275,7 @@ ALTER TABLE ONLY class4.numberlists
 
 
 --
--- Name: radius_accounting_profile_interim_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: radius_accounting_profile_interim_attributes radius_accounting_profile_interim_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
@@ -33295,7 +33283,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_interim_attributes
 
 
 --
--- Name: radius_accounting_profile_start_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: radius_accounting_profile_start_attributes radius_accounting_profile_start_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
@@ -33303,7 +33291,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_start_attributes
 
 
 --
--- Name: radius_accounting_profile_stop_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: radius_accounting_profile_stop_attributes radius_accounting_profile_stop_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
@@ -33311,7 +33299,7 @@ ALTER TABLE ONLY class4.radius_accounting_profile_stop_attributes
 
 
 --
--- Name: radius_auth_profile_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: radius_auth_profile_attributes radius_auth_profile_attributes_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.radius_auth_profile_attributes
@@ -33319,7 +33307,7 @@ ALTER TABLE ONLY class4.radius_auth_profile_attributes
 
 
 --
--- Name: rateplans_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: rateplans rateplans_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.rateplans
@@ -33327,7 +33315,7 @@ ALTER TABLE ONLY class4.rateplans
 
 
 --
--- Name: registrations_node_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: registrations registrations_node_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations
@@ -33335,7 +33323,7 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: registrations registrations_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations
@@ -33343,7 +33331,7 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: registrations registrations_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations
@@ -33351,7 +33339,7 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: registrations registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.registrations
@@ -33359,7 +33347,7 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: routing_plan_groups_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_plan_groups routing_plan_groups_routing_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_groups
@@ -33367,7 +33355,7 @@ ALTER TABLE ONLY class4.routing_plan_groups
 
 
 --
--- Name: routing_plan_groups_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_plan_groups routing_plan_groups_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_groups
@@ -33375,7 +33363,7 @@ ALTER TABLE ONLY class4.routing_plan_groups
 
 
 --
--- Name: routing_plan_lnp_rules_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_plan_lnp_rules routing_plan_lnp_rules_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_lnp_rules
@@ -33383,7 +33371,7 @@ ALTER TABLE ONLY class4.routing_plan_lnp_rules
 
 
 --
--- Name: routing_plan_static_routes_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_plan_static_routes routing_plan_static_routes_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_static_routes
@@ -33391,7 +33379,7 @@ ALTER TABLE ONLY class4.routing_plan_static_routes
 
 
 --
--- Name: routing_plan_static_routes_vendor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_plan_static_routes routing_plan_static_routes_vendor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plan_static_routes
@@ -33399,7 +33387,7 @@ ALTER TABLE ONLY class4.routing_plan_static_routes
 
 
 --
--- Name: routing_plans_sorting_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_plans routing_plans_sorting_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_plans
@@ -33407,7 +33395,7 @@ ALTER TABLE ONLY class4.routing_plans
 
 
 --
--- Name: routing_tag_detection_rules_dst_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_tag_detection_rules routing_tag_detection_rules_dst_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules
@@ -33415,7 +33403,7 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_detection_rules_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_tag_detection_rules routing_tag_detection_rules_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules
@@ -33423,7 +33411,7 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_detection_rules_src_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_tag_detection_rules routing_tag_detection_rules_src_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules
@@ -33431,7 +33419,7 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_detection_rules_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: routing_tag_detection_rules routing_tag_detection_rules_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules
@@ -33439,7 +33427,7 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
+-- Name: contacts contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.contacts
@@ -33447,7 +33435,7 @@ ALTER TABLE ONLY notifications.contacts
 
 
 --
--- Name: contacts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
+-- Name: contacts contacts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
 ALTER TABLE ONLY notifications.contacts
@@ -33455,7 +33443,7 @@ ALTER TABLE ONLY notifications.contacts
 
 
 --
--- Name: contractors_smtp_connection_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: contractors contractors_smtp_connection_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.contractors
@@ -33463,7 +33451,7 @@ ALTER TABLE ONLY public.contractors
 
 
 --
--- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch13; Owner: -
+-- Name: resource_type resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch13; Owner: -
 --
 
 ALTER TABLE ONLY switch13.resource_type
@@ -33471,7 +33459,7 @@ ALTER TABLE ONLY switch13.resource_type
 
 
 --
--- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch14; Owner: -
+-- Name: resource_type resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch14; Owner: -
 --
 
 ALTER TABLE ONLY switch14.resource_type
@@ -33479,7 +33467,7 @@ ALTER TABLE ONLY switch14.resource_type
 
 
 --
--- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch15; Owner: -
+-- Name: resource_type resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch15; Owner: -
 --
 
 ALTER TABLE ONLY switch15.resource_type
@@ -33487,7 +33475,7 @@ ALTER TABLE ONLY switch15.resource_type
 
 
 --
--- Name: resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch16; Owner: -
+-- Name: resource_type resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch16; Owner: -
 --
 
 ALTER TABLE ONLY switch16.resource_type
@@ -33495,7 +33483,7 @@ ALTER TABLE ONLY switch16.resource_type
 
 
 --
--- Name: active_currencies_currency_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: active_currencies active_currencies_currency_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.active_currencies
@@ -33503,7 +33491,7 @@ ALTER TABLE ONLY sys.active_currencies
 
 
 --
--- Name: api_access_customer_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: api_access api_access_customer_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.api_access
@@ -33511,7 +33499,7 @@ ALTER TABLE ONLY sys.api_access
 
 
 --
--- Name: currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: currencies currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.currencies
@@ -33519,7 +33507,7 @@ ALTER TABLE ONLY sys.currencies
 
 
 --
--- Name: events_node_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: events events_node_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.events
@@ -33527,7 +33515,7 @@ ALTER TABLE ONLY sys.events
 
 
 --
--- Name: network_prefixes_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: network_prefixes network_prefixes_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.network_prefixes
@@ -33535,7 +33523,7 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
--- Name: network_prefixes_network_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: network_prefixes network_prefixes_network_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.network_prefixes
@@ -33543,7 +33531,7 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
--- Name: node_pop_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: nodes node_pop_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.nodes
@@ -33551,7 +33539,7 @@ ALTER TABLE ONLY sys.nodes
 
 
 --
--- Name: sensors_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+-- Name: sensors sensors_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
 ALTER TABLE ONLY sys.sensors

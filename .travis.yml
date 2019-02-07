@@ -1,6 +1,10 @@
 sudo: required
 addons:
   chrome: stable
+  apt:
+    packages:
+      - postgresql-client-11
+
 language: ruby
 rvm:
   - 2.6
