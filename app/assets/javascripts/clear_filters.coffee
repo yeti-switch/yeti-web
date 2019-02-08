@@ -10,6 +10,9 @@ $ ->
     $.ajax this.href, {
       async: false,
       data: { clear_filters: true },
-      type: 'GET'
+      type: 'GET',
+      # without this ajax sends empty content type and active_admin rejects such request
+      # in controller method #restrict_format_access! by raising ActiveAdmin::AccessDenied
+      dataType: 'html'
     }
 
