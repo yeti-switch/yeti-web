@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
-  menu parent: "CDR", label: "RTP Statistics", priority: 96
+  menu parent: 'CDR', label: 'RTP Statistics', priority: 96
 
   actions :index, :show
   config.batch_actions = false
   config.sort_order = 'id_desc'
 
   def scoped_collection
-      super.preload( :pop, :node, :gateway)
+    super.preload(:pop, :node, :gateway)
   end
 
   index do
@@ -29,7 +31,7 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
     column :tx_rtcp_rr_count
     column :tx_rtcp_sr_count
     column :rx_ssrc do |c|
-      "0x#{c.rx_ssrc.to_s(16).upcase}" ## to HEX
+      c.rx_ssrc.nil? ? '' : "0x#{c.rx_ssrc.to_s(16).upcase}" ## to HEX
     end
     column :local_host
     column :local_port
@@ -58,7 +60,7 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
     column :rx_rtcp_jitter_std
 
     column :tx_ssrc do |c|
-      "0x#{c.tx_ssrc.to_s(16).upcase}" ## to HEX
+      c.tx_ssrc.nil? ? '' : "0x#{c.tx_ssrc.to_s(16).upcase}" ## to HEX
     end
     column :tx_packets
     column :tx_bytes
@@ -77,7 +79,7 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   filter :node
   filter :gateway
   filter :gateway_external_id
-  
+
   show do
     attributes_table do
       row :id
@@ -99,7 +101,7 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
       row :tx_rtcp_rr_count
       row :tx_rtcp_sr_count
       row :rx_ssrc do |c|
-        "0x#{c.rx_ssrc.to_s(16).upcase}" ## to HEX
+        c.rx_ssrc.nil? ? '' : "0x#{c.rx_ssrc.to_s(16).upcase}" ## to HEX
       end
       row :local_host
       row :local_port
@@ -128,7 +130,7 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
       row :rx_rtcp_jitter_std
 
       row :tx_ssrc do |c|
-        "0x#{c.tx_ssrc.to_s(16).upcase}" ## to HEX
+        c.tx_ssrc.nil? ? '' : "0x#{c.tx_ssrc.to_s(16).upcase}" ## to HEX
       end
       row :tx_packets
       row :tx_bytes
@@ -139,8 +141,6 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
       row :tx_rtcp_jitter_max
       row :tx_rtcp_jitter_mean
       row :tx_rtcp_jitter_std
-      
     end
   end
-
 end

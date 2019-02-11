@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: rtp_statistics.streams
 #
 #  id                      :integer          not null, primary key
-#  time_start              :datetime
+#  time_start              :datetime         not null
 #  time_end                :datetime
 #  pop_id                  :integer          not null
 #  node_id                 :integer          not null
-#  gateway_id              :integer          not null
+#  gateway_id              :integer
 #  gateway_external_id     :integer
 #  local_tag               :string
 #  rtcp_rtt_min            :float
@@ -56,15 +58,14 @@
 #
 
 class Cdr::RtpStatistic < Cdr::Base
-
   self.table_name = 'rtp_statistics.streams'
+  self.primary_key = :id
 
   belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
 
   def display_name
-    "#{self.id}"
+    id.to_s
   end
-
 end
