@@ -59,12 +59,12 @@ class AddRtpStatistics < ActiveRecord::Migration[5.1]
         tx_rtcp_jitter_std float
     );
       create table rtp_statistics.streams(
-        id bigserial primary key,
-        time_start timestamptz,
+        id bigserial not null,
+        time_start timestamptz not null,
         time_end timestamptz,
         pop_id integer not null,
         node_id integer not null,
-        gateway_id bigint not null,
+        gateway_id bigint,
         gateway_external_id bigint,
         local_tag varchar,
         rtcp_rtt_min float,
@@ -109,9 +109,12 @@ class AddRtpStatistics < ActiveRecord::Migration[5.1]
         tx_rtcp_jitter_min float,
         tx_rtcp_jitter_max float,
         tx_rtcp_jitter_mean float,
-        tx_rtcp_jitter_std float
-    );
+        tx_rtcp_jitter_std float,
+        PRIMARY KEY(id, time_start)
+    ) PARTITION BY RANGE ( time_start );
+
     create index on rtp_statistics.streams using btree (local_tag);
+    create index on rtp_statistics.streams using btree (id);
 
 
 select pgq.create_queue('rtp_statistics');
@@ -344,8 +347,8 @@ BEGIN
   v_cdr.legb_rx_no_buf_errs:=v_rtp_stats_data.legb_rx_no_buf_errs;
   v_cdr.legb_rx_parse_errs:=v_rtp_stats_data.legb_rx_parse_errs;
 
-
-  for v_rtp_stream IN select * from json_populate_recordset(null::rtp_statistics.stream_ty,i_rtp_statistics) LOOP
+  if i_rtp_statistics is not null and json_array_length(i_rtp_statistics)>0 then
+    for v_rtp_stream IN select * from json_populate_recordset(null::rtp_statistics.stream_ty,i_rtp_statistics) LOOP
 
         v_rtp_stream_data.id=nextval('rtp_statistics.streams_id_seq'::regclass);
 
@@ -421,7 +424,8 @@ BEGIN
 
         INSERT INTO rtp_statistics.streams VALUES( v_rtp_stream_data.*);
         perform event.rtp_statistics_insert_event(v_rtp_stream_data);
-  end loop;
+    end loop;
+  end if;
 
   v_cdr.global_tag=i_global_tag;
 
