@@ -73,7 +73,7 @@ class Node < ActiveRecord::Base
   def calls(options = {})
     empty_on_error = !!options[:empty_on_error]
     args = []
-    method_name = 'calls'.dup
+    method_name = +'calls'
     if options[:only]
       method_name << '.filtered'
       args << options[:only]
