@@ -4,7 +4,7 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
              :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
              :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id,
-             :routing_tag_ids
+             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length
 
   has_one :gateway
   has_one :gateway_group
@@ -17,40 +17,43 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
 
   filters :external_id, :prefix, :routing_group_id
 
-  def self.updatable_fields(context)
-    [
-      :enabled,
-      :prefix,
-      :src_rewrite_rule,
-      :dst_rewrite_rule,
-      :acd_limit,
-      :asr_limit,
-      :gateway,
-      :routing_group,
-      :next_rate,
-      :connect_fee,
-      :vendor,
-      :account,
-      :routing_tag_mode,
-      :src_rewrite_result,
-      :dst_rewrite_result,
-      :locked,
-      :priority,
-      :exclusive_route,
-      :capacity,
-      :lcr_rate_multiplier,
-      :initial_rate,
-      :initial_interval,
-      :next_interval,
-      :valid_from,
-      :valid_till,
-      :gateway_group,
-      :force_hit_rate,
-      :network_prefix_id,
-      :created_at,
-      :short_calls_limit,
-      :external_id,
-      :routing_tag_ids
+  def self.updatable_fields(_context)
+    %i[
+      enabled
+      prefix
+      src_rewrite_rule
+      dst_rewrite_rule
+      acd_limit
+      asr_limit
+      gateway
+      routing_group
+      routeset_discriminator
+      next_rate
+      connect_fee
+      vendor
+      account
+      routing_tag_mode
+      src_rewrite_result
+      dst_rewrite_result
+      locked
+      priority
+      exclusive_route
+      capacity
+      lcr_rate_multiplier
+      initial_rate
+      initial_interval
+      next_interval
+      valid_from
+      valid_till
+      gateway_group
+      force_hit_rate
+      network_prefix_id
+      created_at
+      short_calls_limit
+      external_id
+      routing_tag_ids
+      dst_number_min_length
+      dst_number_max_length
     ]
   end
 
