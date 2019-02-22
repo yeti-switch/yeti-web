@@ -5,7 +5,7 @@ class Api::Rest::Admin::DestinationResource < JSONAPI::Resource
   attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
-             :routing_tag_ids
+             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length
 
   has_one :rateplan
   has_one :rate_policy, class_name: 'DestinationRatePolicy'
@@ -38,6 +38,8 @@ class Api::Rest::Admin::DestinationResource < JSONAPI::Resource
       acd_limit
       short_calls_limit
       routing_tag_ids
+      dst_number_min_length
+      dst_number_max_length
     ]
   end
 

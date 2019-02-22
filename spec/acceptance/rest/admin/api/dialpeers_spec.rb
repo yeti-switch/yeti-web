@@ -20,6 +20,7 @@ resource 'Dialpeers' do
     prefix src-rewrite-rule dst-rewrite-rule acd-limit asr-limit src-rewrite-result
     dst-rewrite-result locked priority exclusive-route capacity lcr-rate-multiplier
     force-hit-rate network-prefix-id created-at short-calls-limit external-id routing-tag-ids
+    dst_number-min-length dst-number-max-length
   ]
 
   required_relationships = %i[routing-group vendor account routeset-discriminator]
@@ -61,6 +62,8 @@ resource 'Dialpeers' do
     let(:'next-interval') { 60 }
     let(:'initial-rate') { 0.0 }
     let(:'next-rate') { 0.0 }
+    let(:'dst-number-min-length') { 0 }
+    let(:'dst-number-max-length') { 100 }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
