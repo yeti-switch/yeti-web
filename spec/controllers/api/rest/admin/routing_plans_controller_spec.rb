@@ -29,7 +29,7 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     end
   end
 
-  describe 'GET index with ransack filrers' do
+  describe 'GET index with ransack filters' do
     let(:factory) { :routing_plan }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
