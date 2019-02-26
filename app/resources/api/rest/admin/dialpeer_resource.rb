@@ -27,7 +27,6 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
       asr_limit
       gateway
       routing_group
-      routeset_discriminator
       next_rate
       connect_fee
       vendor
