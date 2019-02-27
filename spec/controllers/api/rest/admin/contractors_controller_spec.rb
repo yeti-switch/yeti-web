@@ -29,6 +29,19 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :contractor }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :name
+    it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
+    it_behaves_like :jsonapi_filters_by_boolean_field, :vendor
+    it_behaves_like :jsonapi_filters_by_boolean_field, :customer
+    it_behaves_like :jsonapi_filters_by_string_field, :description
+    it_behaves_like :jsonapi_filters_by_string_field, :address
+    it_behaves_like :jsonapi_filters_by_string_field, :phones
+    it_behaves_like :jsonapi_filters_by_number_field, :external_id
+  end
+  
   describe 'GET show' do
     let!(:contractor) { create :contractor, vendor: true }
 
