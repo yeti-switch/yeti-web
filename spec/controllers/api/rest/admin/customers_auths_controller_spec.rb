@@ -14,6 +14,43 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     it { expect(response_data.size).to eq(customers_auths.size) }
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :customers_auth }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :name
+    #it_behaves_like :ip, type: :inet
+    it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
+    it_behaves_like :jsonapi_filters_by_boolean_field, :reject_calls
+    it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :src_prefix
+    it_behaves_like :jsonapi_filters_by_number_field, :src_number_min_length
+    it_behaves_like :jsonapi_filters_by_number_field, :src_number_max_length
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix
+    it_behaves_like :jsonapi_filters_by_number_field, :dst_number_min_length
+    it_behaves_like :jsonapi_filters_by_number_field, :dst_number_max_length
+    it_behaves_like :jsonapi_filters_by_string_field, :x_yeti_auth
+    it_behaves_like :jsonapi_filters_by_number_field, :capacity
+    it_behaves_like :jsonapi_filters_by_string_field, :uri_domain
+    it_behaves_like :jsonapi_filters_by_string_field, :src_name_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :src_name_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :diversion_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :diversion_rewrite_result
+    it_behaves_like :jsonapi_filters_by_boolean_field, :allow_receive_rate_limit
+    it_behaves_like :jsonapi_filters_by_boolean_field, :send_billing_information
+    it_behaves_like :jsonapi_filters_by_boolean_field, :enable_audio_recording
+    it_behaves_like :jsonapi_filters_by_string_field, :src_number_radius_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :src_number_radius_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :from_domain
+    it_behaves_like :jsonapi_filters_by_string_field, :to_domain
+    it_behaves_like :jsonapi_filters_by_number_field, :tag_action_value
+    it_behaves_like :jsonapi_filters_by_number_field, :external_id
+  end
+  
   describe 'GET show' do
     let!(:customers_auth) { create :customers_auth }
 

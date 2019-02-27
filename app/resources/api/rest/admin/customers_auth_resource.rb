@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
+class Api::Rest::Admin::CustomersAuthResource < BaseResource
   attributes :name, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
              :src_prefix, :src_number_min_length, :src_number_max_length,
              :dst_prefix, :dst_number_min_length, :dst_number_max_length,
@@ -26,6 +26,39 @@ class Api::Rest::Admin::CustomersAuthResource < JSONAPI::Resource
   has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
 
   filter :name
+
+  ransack_filter :name, type: :string
+ #ransack_filter :ip, type: :inet
+  ransack_filter :enabled, type: :boolean
+  ransack_filter :reject_calls, type: :boolean
+  ransack_filter :src_rewrite_rule, type: :string
+  ransack_filter :src_rewrite_result, type: :string
+  ransack_filter :dst_rewrite_rule, type: :string
+  ransack_filter :dst_rewrite_result, type: :string
+  ransack_filter :src_prefix, type: :string
+  ransack_filter :src_number_min_length, type: :number
+  ransack_filter :src_number_max_length, type: :number
+  ransack_filter :dst_prefix, type: :string
+  ransack_filter :dst_number_min_length, type: :number
+  ransack_filter :dst_number_max_length, type: :number
+  ransack_filter :x_yeti_auth, type: :string
+  ransack_filter :capacity, type: :number
+  ransack_filter :uri_domain, type: :string
+  ransack_filter :src_name_rewrite_rule, type: :string
+  ransack_filter :src_name_rewrite_result, type: :string
+  ransack_filter :diversion_rewrite_rule, type: :string
+  ransack_filter :diversion_rewrite_result, type: :string
+  ransack_filter :allow_receive_rate_limit, type: :boolean
+  ransack_filter :send_billing_information, type: :boolean
+  ransack_filter :enable_audio_recording, type: :boolean
+  ransack_filter :src_number_radius_rewrite_rule, type: :string
+  ransack_filter :src_number_radius_rewrite_result, type: :string
+  ransack_filter :dst_number_radius_rewrite_rule, type: :string
+  ransack_filter :dst_number_radius_rewrite_result, type: :string
+  ransack_filter :from_domain, type: :string
+  ransack_filter :to_domain, type: :string
+  ransack_filter :tag_action_value, type: :number
+  ransack_filter :external_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
