@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::PaymentResource < JSONAPI::Resource
+class Api::Rest::Admin::PaymentResource < BaseResource
   attributes :amount, :notes
 
   has_one :account
+
+  ransack_filter :amount, type: :number
+  ransack_filter :notes, type: :string
 
   def self.updatable_fields(_context)
     %i[
