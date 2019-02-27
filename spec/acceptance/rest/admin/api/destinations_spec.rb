@@ -10,11 +10,14 @@ resource 'Destinations' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'destinations' }
 
-  required_params = %i(
+  required_params = %i[
     enabled next-rate connect-fee initial-interval next-interval dp-margin-fixed dp-margin-percent
     initial-rate asr-limit acd-limit short-calls-limit
-  )
-  optional_params = %i(prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids)
+  ]
+  optional_params = %i[
+    prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids
+    dst_number-min-length dst-number-max-length
+  ]
 
   required_relationships = %i(rateplan rate-policy)
   optional_relationships = %i(profit-control-mode routing-tag-modes)
@@ -51,6 +54,8 @@ resource 'Destinations' do
     let(:'dp-margin-fixed') { 0 }
     let(:'dp-margin-percent') { 0 }
     let(:'rate-policy') { wrap_relationship(:'destination-rate-policies', 1) }
+    let(:'dst-number-min-length') { 0 }
+    let(:'dst-number-max-length') { 100 }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

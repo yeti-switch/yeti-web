@@ -51,6 +51,7 @@ jobs:
         - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
         - RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
         - RAILS_ENV=test bundle exec rake db:seed
+        - cd pgq-processors && gem install bundler -v '< 2' && cd ..
         - cd pgq-processors && bundle install --gemfile="./Gemfile" && cd ..
         - cd pgq-processors && BUNDLE_GEMFILE=./Gemfile ./bin/bundle exec rspec && cd ..
 

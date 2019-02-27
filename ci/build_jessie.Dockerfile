@@ -3,7 +3,7 @@ FROM debian:jessie
 
 RUN apt-get update && apt-get -y dist-upgrade && apt-get -y --no-install-recommends install wget
 RUN wget http://pkg.yeti-switch.org/key.gpg -O - | apt-key add -
-RUN echo "deb http://pkg.yeti-switch.org/debian/jessie unstable main ext" >> /etc/apt/sources.list
+RUN echo "deb http://pkg.yeti-switch.org/debian/jessie 1.7 main" >> /etc/apt/sources.list
 RUN echo "deb http://deb.debian.org/debian buster main contrib non-free" >> /etc/apt/sources.list
 RUN echo "Package: *\nPin: release n=buster\nPin-Priority: 50\n\nPackage: python-git python-gitdb python-smmap python-tzlocal\nPin: release n=buster\nPin-Priority: 500\n\n" | tee /etc/apt/preferences
 
