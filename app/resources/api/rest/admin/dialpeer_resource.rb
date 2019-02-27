@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
+class Api::Rest::Admin::DialpeerResource < BaseResource
   attributes :enabled, :next_rate, :connect_fee, :initial_rate,
              :initial_interval, :next_interval, :valid_from, :valid_till,
              :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
@@ -19,6 +19,33 @@ class Api::Rest::Admin::DialpeerResource < JSONAPI::Resource
   has_many :dialpeer_next_rates
 
   filters :external_id, :prefix, :routing_group_id
+
+  ransack_filter :enabled, type: :boolean
+  ransack_filter :next_rate, type: :number
+  ransack_filter :connect_fee, type: :number
+  ransack_filter :initial_rate, type: :number
+  ransack_filter :initial_interval, type: :number
+  ransack_filter :next_interval, type: :number
+  #ransack_filter :valid_from, type: :datetime
+  #ransack_filter :valid_till, type: :datetime
+  ransack_filter :prefix, type: :string
+  ransack_filter :src_rewrite_rule, type: :string
+  ransack_filter :dst_rewrite_rule, type: :string
+  ransack_filter :acd_limit, type: :number
+  ransack_filter :asr_limit, type: :number
+  ransack_filter :src_rewrite_result, type: :string
+  ransack_filter :dst_rewrite_result, type: :string
+  ransack_filter :locked, type: :boolean
+  ransack_filter :priority, type: :number
+  ransack_filter :exclusive_route, type: :boolean
+  ransack_filter :capacity, type: :number
+  ransack_filter :lcr_rate_multiplier, type: :number
+  ransack_filter :force_hit_rate, type: :number
+  ransack_filter :network_prefix_id, type: :number
+  #ransack_filter :created_at, type: :datetime
+  ransack_filter :short_calls_limit, type: :number
+  ransack_filter :external_id, type: :number
+  #ransack_filter :routing_tag_ids, type: :number           ARRAY
 
   def self.updatable_fields(_context)
     %i[

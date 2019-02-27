@@ -34,6 +34,38 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :dialpeer }
+
+    it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
+    it_behaves_like :jsonapi_filters_by_number_field, :next_rate
+    it_behaves_like :jsonapi_filters_by_number_field, :connect_fee
+    it_behaves_like :jsonapi_filters_by_number_field, :initial_rate
+    it_behaves_like :jsonapi_filters_by_number_field, :initial_interval
+    it_behaves_like :jsonapi_filters_by_number_field, :next_interval
+    #it_behaves_like jsonapi_filters_by_datetime_field, :valid_from
+    #it_behaves_like jsonapi_filters_by_datetime_field, :valid_till
+    it_behaves_like :jsonapi_filters_by_string_field, :prefix
+    it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_number_field, :acd_limit
+    it_behaves_like :jsonapi_filters_by_number_field, :asr_limit
+    it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_result
+    it_behaves_like :jsonapi_filters_by_boolean_field, :locked
+    it_behaves_like :jsonapi_filters_by_number_field, :priority
+    it_behaves_like :jsonapi_filters_by_boolean_field, :exclusive_route
+    it_behaves_like :jsonapi_filters_by_number_field, :capacity
+    it_behaves_like :jsonapi_filters_by_number_field, :lcr_rate_multiplier
+    it_behaves_like :jsonapi_filters_by_number_field, :force_hit_rate
+    it_behaves_like :jsonapi_filters_by_number_field, :network_prefix_id
+    #it_behaves_like jsonapi_filters_by_datetime, :created_at
+    it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit
+    it_behaves_like :jsonapi_filters_by_number_field, :external_id
+    #it_behaves_like :jsonapi_filters_by_number_field, :routing_tag_ids       ARRAY
+    
+  end
+  
   describe 'GET show' do
     let!(:dialpeer) { create :dialpeer }
 
