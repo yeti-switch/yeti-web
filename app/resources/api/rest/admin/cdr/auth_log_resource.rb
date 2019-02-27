@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::Cdr::AuthLogResource < ::BaseResource
+class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
   immutable
   model_name 'Cdr::AuthLog'
   paginator :paged
@@ -50,6 +50,39 @@ class Api::Rest::Admin::Cdr::AuthLogResource < ::BaseResource
   filter :request_time_lteq, apply: lambda { |records, values, _options|
     records.where('request_time <= ?', values[0])
   }
+
+  #ransack_filter :request_time, type: :datetime
+  ransack_filter :success, type: :boolean
+  ransack_filter :code, type: :number
+  ransack_filter :reason, type: :string
+  ransack_filter :internal_reason, type: :string
+  ransack_filter :origination_ip, type: :string
+  ransack_filter :origination_port, type: :number
+  ransack_filter :origination_proto_id, type: :number
+  ransack_filter :transport_proto_id, type: :number
+  ransack_filter :transport_remote_ip, type: :string
+  ransack_filter :transport_remote_port, type: :number
+  ransack_filter :transport_local_ip, type: :string
+  ransack_filter :transport_local_port, type: :number
+  ransack_filter :pop_id, type: :number
+  ransack_filter :node_id, type: :number
+  ransack_filter :gateway_id, type: :number
+  ransack_filter :username, type: :string
+  ransack_filter :realm, type: :string
+  ransack_filter :request_method, type: :string
+  ransack_filter :ruri, type: :string
+  ransack_filter :from_uri, type: :string
+  ransack_filter :to_uri, type: :string
+  ransack_filter :call_id, type: :string
+  ransack_filter :nonce, type: :string
+  ransack_filter :response, type: :string
+  ransack_filter :x_yeti_auth, type: :string
+  ransack_filter :diversion, type: :string
+  ransack_filter :pai, type: :string
+  ransack_filter :ppi, type: :string
+  ransack_filter :privacy, type: :string
+  ransack_filter :rpid, type: :string
+  ransack_filter :rpid_privacy, type: :string
 
   def self.resource_for(type)
     if type.in?(CONST::ROOT_NAMESPACE_RELATIONS)
