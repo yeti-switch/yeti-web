@@ -15,10 +15,13 @@ RSpec.describe 'Role Policy classes' do
   let(:yeti_model_resources) do
     active_admin_model_resources.reject { |res| res.resource_class_name =~ /ActiveAdmin::/ }
   end
+  let(:extra_model_resources) do
+    ['ActiveAdmin::Comment']
+  end
 
   describe 'check all resource classes has policies' do
     subject do
-      yeti_model_resources.map(&:resource_class_name)
+      yeti_model_resources.map(&:resource_class_name) + extra_model_resources
     end
 
     it 'has all corresponding model policies', :aggregate_failures do
