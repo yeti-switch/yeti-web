@@ -128,4 +128,14 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
       end
     end
   end
+
+  describe 'GET index with ransack filters' do
+    let(:factory) { :cdr_export }
+
+    #it_behaves_like :jsonapi_filters_by_string_field, :fields   ARRAY
+    #it_behaves_like :jsonapi_filters_by_json_field, :filters
+    it_behaves_like :jsonapi_filters_by_string_field, :status
+    #it_behaves_like :jsonapi_filters_by_datetime_field, :created_at
+    it_behaves_like :jsonapi_filters_by_string_field, :callback_url
+  end
 end
