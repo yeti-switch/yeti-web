@@ -15,6 +15,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                          {
                            enabled: boolean_select,
                            prefix: 'text',
+                           dst_number_min_length: 'text',
+                           dst_number_max_length: 'text',
                            routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name, :id),
                            reject_calls: boolean_select,
                            quality_alarm: boolean_select,
