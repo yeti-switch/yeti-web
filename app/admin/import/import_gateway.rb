@@ -17,7 +17,9 @@ ActiveAdmin.register Importing::Gateway do
 
   includes :contractor, :gateway_group, :rel100_mode,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-           :sensor, :sensor_level, :rx_inband_dtmf_filtering_mode, :rx_inband_dtmf_filtering_mode
+           :sensor, :sensor_level, :rx_inband_dtmf_filtering_mode, :rx_inband_dtmf_filtering_mode,
+           :preserve_anonymous_from_domain,
+           :termination_dst_numberlist, :termination_src_numberlist
 
   index do
     selectable_column
@@ -63,6 +65,22 @@ ActiveAdmin.register Importing::Gateway do
 
     column :origination_capacity
     column :termination_capacity
+
+    column :termination_src_numberlist, sortable: :termination_src_numberlist_name do |row|
+      if row.termination_src_numberlist.blank?
+        row.termination_src_numberlist_name
+      else
+        auto_link(row.termination_src_numberlist, row.termination_src_numberlist_name)
+      end
+    end
+
+    column :termination_dst_numberlist, sortable: :termination_dst_numberlist_name do |row|
+      if row.termination_dst_numberlist.blank?
+        row.termination_dst_numberlist_name
+      else
+        auto_link(row.termination_dst_numberlist, row.termination_dst_numberlist_name)
+      end
+    end
 
     column :diversion_policy, sortable: :diversion_policy_name do |row|
       if row.diversion_policy.blank?
@@ -184,6 +202,7 @@ ActiveAdmin.register Importing::Gateway do
     end
 
     # SIGNALING
+    column :preserve_anonymous_from_domain
     column :relay_options
     column :relay_reinvite
     column :relay_prack

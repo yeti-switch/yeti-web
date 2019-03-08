@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: gateways
@@ -116,6 +115,9 @@
 #  sip_schema_id                    :integer          default(1), not null
 #  network_protocol_priority_id     :integer          default(0), not null
 #  media_encryption_mode_id         :integer          default(0), not null
+#  preserve_anonymous_from_domain   :boolean          default(FALSE), not null
+#  termination_src_numberlist_id    :integer
+#  termination_dst_numberlist_id    :integer
 #
 
 require 'resolv'
@@ -145,6 +147,9 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority', foreign_key: :network_protocol_priority_id
   belongs_to :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode', foreign_key: :media_encryption_mode_id
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
+  belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
+  belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
+
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error

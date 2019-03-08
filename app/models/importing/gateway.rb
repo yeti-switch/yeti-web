@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: data_import.import_gateways
@@ -133,6 +132,11 @@
 #  network_protocol_priority_name     :string
 #  media_encryption_mode_id           :integer
 #  media_encryption_mode_name         :string
+#  preserve_anonymous_from_domain     :boolean
+#  termination_src_numberlist_id      :integer
+#  termination_src_numberlist_name    :string
+#  termination_dst_numberlist_id      :integer
+#  termination_dst_numberlist_name    :string
 #
 
 class Importing::Gateway < Importing::Base
@@ -159,6 +163,9 @@ class Importing::Gateway < Importing::Base
   belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
   belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
+  belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
+  belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
+
 
   self.import_attributes = %w[
     name enabled
@@ -213,6 +220,9 @@ class Importing::Gateway < Importing::Base
     rel_100_mode_id
     incoming_auth_username
     incoming_auth_password
+    preserve_anonymous_from_domain
+    termination_dst_numberlist_id
+    termination_src_numberlist_id
   ]
 
   self.import_class = ::Gateway
