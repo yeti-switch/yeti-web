@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_import.import_gateways
@@ -165,7 +166,6 @@ class Importing::Gateway < Importing::Base
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
-
 
   self.import_attributes = %w[
     name enabled

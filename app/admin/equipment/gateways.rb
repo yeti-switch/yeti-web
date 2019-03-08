@@ -116,8 +116,7 @@ ActiveAdmin.register Gateway do
            :network_protocol_priority, :media_encryption_mode, :sip_schema,
            :termination_src_numberlist, :termination_dst_numberlist
 
-
-           controller do
+  controller do
     def resource_params
       return [{}] if request.get?
 

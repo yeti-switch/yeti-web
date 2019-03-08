@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gateways
@@ -149,7 +150,6 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
-
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Importing::GatewayGroup do
-
   filter :name
   filter :vendor, input_html: { class: 'chosen' }
   filter :balancing_mode, as: :select
@@ -44,6 +43,5 @@ ActiveAdmin.register Importing::GatewayGroup do
         auto_link(row.balancing_mode, row.balancing_mode_name)
       end
     end
-
   end
 end
