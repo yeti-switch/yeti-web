@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Importing::GatewayGroup do
-  filter :vendor, input_html: { class: 'chosen' }
+
   filter :name
-  filter :prefer_same_pop, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :vendor, input_html: { class: 'chosen' }
+  filter :balancing_mode, as: :select
 
   acts_as_import_preview
 
@@ -15,7 +16,7 @@ ActiveAdmin.register Importing::GatewayGroup do
     end
 
     def scoped_collection
-      super.includes(:vendor)
+      super.includes(:vendor, :balancing_mode)
     end
   end
 
@@ -35,6 +36,14 @@ ActiveAdmin.register Importing::GatewayGroup do
     end
 
     column :name
-    column :prefer_same_pop
+
+    column :balancing_mode, sortable: :balancing_mode_name do |row|
+      if row.balancing_mode.blank?
+        row.balancing_mode_name
+      else
+        auto_link(row.balancing_mode, row.balancing_mode_name)
+      end
+    end
+
   end
 end
