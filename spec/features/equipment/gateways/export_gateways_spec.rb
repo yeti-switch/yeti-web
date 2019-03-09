@@ -17,7 +17,9 @@ describe 'Export Gateways', type: :feature do
            session_refresh_method: SessionRefreshMethod.take,
            sensor: create(:sensor),
            orig_disconnect_policy: create(:disconnect_policy),
-           term_disconnect_policy: create(:disconnect_policy)
+           term_disconnect_policy: create(:disconnect_policy),
+           termination_dst_numberlist: create(:numberlist),
+           termination_src_numberlist: create(:numberlist)
   end
 
   before do
@@ -127,7 +129,10 @@ describe 'Export Gateways', type: :feature do
         ['Max 30x redirects',                  item.max_30x_redirects.to_s],
         ['Media encryption mode',              item.media_encryption_mode.name],
         ['Network protocol priority name',     item.network_protocol_priority.name],
-        ['Sip schema name',                    item.sip_schema.name]
+        ['Sip schema name',                    item.sip_schema.name],
+        ['Preserve anonymous from domain',     item.preserve_anonymous_from_domain.to_s],
+        ['Termination dst numberlist name',    item.termination_dst_numberlist.name],
+        ['Termination src numberlist name',    item.termination_src_numberlist.name]
       ]
     )
   end

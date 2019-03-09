@@ -27,7 +27,6 @@ class AddNumberlistToGateway < ActiveRecord::Migration[5.2]
 
       update class4.gateway_groups set balancing_mode_id=2 where prefer_same_pop;
 
-      alter table data_import.import_gateway_groups drop column prefer_same_pop;
       alter table data_import.import_gateway_groups
         add balancing_mode_id smallint,
         add balancing_mode_name varchar;
@@ -53,8 +52,6 @@ class AddNumberlistToGateway < ActiveRecord::Migration[5.2]
       alter table class4.gateway_groups drop column balancing_mode_id;
       drop table class4.gateway_group_balancing_modes;
 
-
-      alter table data_import.import_gateway_groups add prefer_same_pop boolean;
       alter table data_import.import_gateway_groups
         drop column balancing_mode_id,
         drop column balancing_mode_name;

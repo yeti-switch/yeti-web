@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: data_import.import_gateway_groups
@@ -10,6 +9,7 @@
 #  vendor_name         :string
 #  vendor_id           :integer
 #  error_string        :string
+#  prefer_same_pop     :boolean
 #  balancing_mode_id   :integer
 #  balancing_mode_name :string
 #
