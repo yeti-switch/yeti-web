@@ -11,11 +11,11 @@ module Jobs
     private
 
     def rtp_statistic_add_partition
-      from = Date.today
+      day = Date.today
       3.times do
-        prefix = from.to_s(:db).gsub('-', '_')
-        Cdr::RtpStatistic.add_partition(prefix, from, from + 1)
-        from += 1
+        prefix = day.to_s(:db).gsub('-', '_')
+        Cdr::RtpStatistic.add_partition(prefix, day.beginning_of_day, day.end_of_day)
+        day += 1
       end
     end
   end
