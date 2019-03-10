@@ -38,6 +38,9 @@ ActiveAdmin.register Gateway do
                  :is_shared,
                  :allow_origination, :allow_termination, :sst_enabled,
                  :origination_capacity, :termination_capacity,
+                 :preserve_anonymous_from_domain,
+                 [:termination_src_numberlist_name, proc { |row| row.termination_src_numberlist.try(:name) }],
+                 [:termination_dst_numberlist_name, proc { |row| row.termination_dst_numberlist.try(:name) }],
                  :acd_limit, :asr_limit, :short_calls_limit,
                  :sst_session_expires, :sst_minimum_timer, :sst_maximum_timer,
                  [:session_refresh_method_name, proc { |row| row.session_refresh_method.try(:name) }],
@@ -110,7 +113,8 @@ ActiveAdmin.register Gateway do
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
-           :network_protocol_priority, :media_encryption_mode, :sip_schema
+           :network_protocol_priority, :media_encryption_mode, :sip_schema,
+           :termination_src_numberlist, :termination_dst_numberlist
 
   controller do
     def resource_params
@@ -181,6 +185,10 @@ ActiveAdmin.register Gateway do
     end
     column :acd_limit
     column :short_calls_limit
+
+    column :preserve_anonymous_from_domain
+    column :termination_src_numberlist
+    column :termination_dst_numberlist
 
     # SST
     column :sst_enabled
@@ -360,8 +368,8 @@ ActiveAdmin.register Gateway do
               f.input :relay_prack
               f.input :rel100_mode, as: :select, include_blank: false
               f.input :relay_update
-              f.input :transit_headers_from_origination, hint: 'Use comma as delimiter'
-              f.input :transit_headers_from_termination, hint: 'Use comma as delimiter'
+              f.input :transit_headers_from_origination
+              f.input :transit_headers_from_termination
               f.input :sip_interface_name
             end
 
@@ -385,9 +393,10 @@ ActiveAdmin.register Gateway do
               f.input :transport_protocol, as: :select, include_blank: false
               f.input :sip_schema, as: :select, include_blank: false
               f.input :host
-              f.input :port, hint: 'Leave it empty for enable DNS SRV resolving'
+              f.input :port
               f.input :network_protocol_priority, as: :select, include_blank: false
               f.input :resolve_ruri
+              f.input :preserve_anonymous_from_domain
 
               f.input :auth_enabled
               f.input :auth_user
@@ -420,6 +429,8 @@ ActiveAdmin.register Gateway do
       end
       tab 'Translations' do
         f.inputs 'Translations' do
+          f.input :termination_src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :termination_dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :diversion_policy
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
@@ -434,7 +445,7 @@ ActiveAdmin.register Gateway do
       tab :media do
         f.inputs 'Media settings' do
           f.input :sdp_c_location, as: :select, include_blank: false
-          f.input :codec_group, as: :select, include_blank: false
+          f.input :codec_group, input_html: { class: 'chosen' }
           f.input :anonymize_sdp
           f.input :proxy_media
           f.input :single_codec_in_200ok
@@ -464,7 +475,7 @@ ActiveAdmin.register Gateway do
       end
       tab :radius do
         f.inputs 'RADIUS' do
-          f.input :radius_accounting_profile, hint: 'RADIUS accounting profile for LegB(Termination)'
+          f.input :radius_accounting_profile, input_html: { class: 'chosen' }
         end
       end
     end
@@ -553,11 +564,14 @@ ActiveAdmin.register Gateway do
             row :port
             row :network_protocol_priority
             row :resolve_ruri
+            row :preserve_anonymous_from_domain
+
             row :auth_enabled
             row :auth_user
             row :auth_password
             row :auth_from_user
             row :auth_from_domain
+
             row :term_use_outbound_proxy
             row :term_force_outbound_proxy
             row :orig_proxy_transport_protocol
@@ -582,6 +596,8 @@ ActiveAdmin.register Gateway do
       end
       tab 'Translations' do
         attributes_table_for s do
+          row :termination_src_numberlist
+          row :termination_dst_numberlist
           row :diversion_policy
           row :diversion_rewrite_rule
           row :diversion_rewrite_result

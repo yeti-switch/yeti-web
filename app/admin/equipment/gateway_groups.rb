@@ -10,23 +10,26 @@ ActiveAdmin.register GatewayGroup do
   acts_as_async_update('GatewayGroup',
                        lambda do
                          {
-                           vendor_id: Contractor.vendors.pluck(:name, :id),
-                           prefer_same_pop: boolean_select
+                           vendor_id: Contractor.vendors.pluck(:name, :id)
                          }
                        end)
 
   acts_as_delayed_job_lock
 
-  acts_as_export :id, :name, [:vendor_name, proc { |row| row.vendor.try(:name) }], :prefer_same_pop
+  acts_as_export  :id,
+                  :name,
+                  [:vendor_name, proc { |row| row.vendor.try(:name) }],
+                  [:balancing_mode_name, proc { |row| row.balancing_mode.try(:name) }]
+
   acts_as_import resource_class: Importing::GatewayGroup
 
   decorate_with GatewayGroupDecorator
 
-  permit_params :vendor_id, :name, :prefer_same_pop
+  permit_params :vendor_id, :name, :balancing_mode_id
 
   controller do
     def scoped_collection
-      super.eager_load(:vendor)
+      super.eager_load(:vendor, :balancing_mode)
     end
   end
 
@@ -43,13 +46,13 @@ ActiveAdmin.register GatewayGroup do
     column :vendor do |c|
       auto_link(c.vendor, c.vendor.decorated_display_name)
     end
-    column :prefer_same_pop
+    column :balancing_mode
   end
 
   filter :id
   filter :name
   filter :vendor, input_html: { class: 'chosen' }
-  filter :prefer_same_pop, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :balancing_mode
 
   show do |s|
     attributes_table do
@@ -58,7 +61,7 @@ ActiveAdmin.register GatewayGroup do
       row :vendor do
         auto_link(s.vendor, s.vendor.decorated_display_name)
       end
-      row :prefer_same_pop
+      row :balancing_mode
     end
     panel('Gateways in group') do
       table_for resource.gateways do |_g|
@@ -75,7 +78,7 @@ ActiveAdmin.register GatewayGroup do
     f.inputs form_title do
       f.input :name
       f.input :vendor, input_html: { class: 'chosen' }, collection: Contractor.vendors
-      f.input :prefer_same_pop
+      f.input :balancing_mode, as: :select, include_blank: false
     end
     f.actions
   end

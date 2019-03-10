@@ -6,7 +6,7 @@ FactoryGirl.define do
     name nil
     vendor_name nil
     vendor_id nil
-    prefer_same_pop true
+    balancing_mode_id 1
     error_string nil
   end
 end

@@ -6145,7 +6145,10 @@ CREATE TABLE class4.gateways (
     weight smallint DEFAULT 100 NOT NULL,
     sip_schema_id smallint DEFAULT 1 NOT NULL,
     network_protocol_priority_id smallint DEFAULT 0 NOT NULL,
-    media_encryption_mode_id smallint DEFAULT 0 NOT NULL
+    media_encryption_mode_id smallint DEFAULT 0 NOT NULL,
+    preserve_anonymous_from_domain boolean DEFAULT false NOT NULL,
+    termination_src_numberlist_id smallint,
+    termination_dst_numberlist_id smallint
 );
 
 
@@ -26440,6 +26443,16 @@ CREATE TABLE class4.filter_types (
 
 
 --
+-- Name: gateway_group_balancing_modes; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.gateway_group_balancing_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: gateway_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -26447,7 +26460,8 @@ CREATE TABLE class4.gateway_groups (
     id integer NOT NULL,
     vendor_id integer NOT NULL,
     name character varying NOT NULL,
-    prefer_same_pop boolean DEFAULT true NOT NULL
+    prefer_same_pop boolean DEFAULT true NOT NULL,
+    balancing_mode_id smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -27705,7 +27719,9 @@ CREATE TABLE data_import.import_gateway_groups (
     vendor_name character varying,
     vendor_id integer,
     prefer_same_pop boolean,
-    error_string character varying
+    error_string character varying,
+    balancing_mode_id smallint,
+    balancing_mode_name character varying
 );
 
 
@@ -27861,7 +27877,12 @@ CREATE TABLE data_import.import_gateways (
     network_protocol_priority_id smallint,
     network_protocol_priority_name character varying,
     media_encryption_mode_id smallint,
-    media_encryption_mode_name character varying
+    media_encryption_mode_name character varying,
+    preserve_anonymous_from_domain boolean,
+    termination_src_numberlist_id smallint,
+    termination_src_numberlist_name character varying,
+    termination_dst_numberlist_id smallint,
+    termination_dst_numberlist_name character varying
 );
 
 
@@ -31096,6 +31117,22 @@ ALTER TABLE ONLY class4.filter_types
 
 
 --
+-- Name: gateway_group_balancing_modes gateway_group_balancing_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_group_balancing_modes
+    ADD CONSTRAINT gateway_group_balancing_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_group_balancing_modes gateway_group_balancing_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_group_balancing_modes
+    ADD CONSTRAINT gateway_group_balancing_modes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: gateway_groups gateway_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -33027,6 +33064,14 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 
 
 --
+-- Name: gateway_groups gateway_groups_balancing_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_groups
+    ADD CONSTRAINT gateway_groups_balancing_mode_id_fkey FOREIGN KEY (balancing_mode_id) REFERENCES class4.gateway_group_balancing_modes(id);
+
+
+--
 -- Name: gateway_groups gateway_groups_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -33594,6 +33639,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20181018164004'),
 ('20181114213545'),
 ('20181202175700'),
-('20181203204823');
+('20181203204823'),
+('20190308190806');
 
 

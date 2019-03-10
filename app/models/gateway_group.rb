@@ -4,14 +4,17 @@
 #
 # Table name: gateway_groups
 #
-#  id              :integer          not null, primary key
-#  vendor_id       :integer          not null
-#  name            :string           not null
-#  prefer_same_pop :boolean          default(TRUE), not null
+#  id                :integer          not null, primary key
+#  vendor_id         :integer          not null
+#  name              :string           not null
+#  prefer_same_pop   :boolean          default(FALSE), not null
+#  balancing_mode_id :integer          default(1), not null
 #
 
 class GatewayGroup < ActiveRecord::Base
   belongs_to :vendor, class_name: 'Contractor'
+  belongs_to :balancing_mode, class_name: 'Equipment::GatewayGroupBalancingMode', foreign_key: :balancing_mode_id
+
   has_many :gateways, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
 
@@ -19,7 +22,7 @@ class GatewayGroup < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name, allow_blank: false
-  validates_presence_of :vendor
+  validates_presence_of :vendor, :balancing_mode
 
   validate :contractor_is_vendor
   validate :vendor_can_be_changed

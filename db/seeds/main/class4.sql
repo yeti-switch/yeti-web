@@ -961,3 +961,9 @@ insert into class4.gateway_network_protocol_priorities(id, name) values(1, 'forc
 insert into class4.gateway_network_protocol_priorities(id, name) values(2, 'Any');
 insert into class4.gateway_network_protocol_priorities(id, name) values(3, 'prefer IPv4');
 insert into class4.gateway_network_protocol_priorities(id, name) values(4, 'prefer IPv6');
+
+insert into class4.gateway_group_balancing_modes(id,name) values(1,'Priority/Weigth balancing');
+insert into class4.gateway_group_balancing_modes(id,name) values(2,'Priority/Weigth balancing. Prefer gateways from same POP');
+insert into class4.gateway_group_balancing_modes(id,name) values(3,'Priority/Weigth balancing. Exclude gateways from other POPs');
+
+

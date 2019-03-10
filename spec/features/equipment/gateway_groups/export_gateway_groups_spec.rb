@@ -23,7 +23,7 @@ describe 'Export Gateway Groups', type: :feature do
         ['Id', item.id.to_s],
         ['Name', item.name],
         ['Vendor name', item.vendor.name],
-        ['Prefer same pop', item.prefer_same_pop.to_s]
+        ['Balancing mode name', item.balancing_mode.name]
       ]
     )
   end
