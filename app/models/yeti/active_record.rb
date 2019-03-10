@@ -87,7 +87,9 @@ class Yeti::ActiveRecord < ActiveRecord::Base
 
   def self.add_partition(prefix, from, to)
     fetch_sp(
-      "CREATE TABLE  #{table_name}_#{prefix} PARTITION OF #{table_name} FOR VALUES FROM ( ?) to (?)",
+      "CREATE TABLE IF NOT EXISTS #{table_name}_#{prefix}
+       PARTITION OF #{table_name}
+       FOR VALUES FROM (?) to (?)",
       from, to
     )
   end
