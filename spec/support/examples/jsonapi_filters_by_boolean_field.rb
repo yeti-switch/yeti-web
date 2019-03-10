@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples :jsonapi_filters_by_boolean_field do |attr_name|
-  let(:subject_request) do
-    get :index, params: { filter: { filter_key => filter_value } }
-  end
-
-  subject { response_data.map { |r| r['id'] } }
+  include_context :ransack_filter_setup
 
   context 'equal operator' do
     let(:filter_key) { "#{attr_name}_eq" }
     let(:filter_value) { true }
-    let!(:suitable_record) { create factory, attr_name => true }
-    let!(:other_record) { create factory, attr_name => false }
+    let!(:suitable_record) { create_record attr_name => true }
+    let!(:other_record) { create_record attr_name => false }
 
     before { subject_request }
 
@@ -22,8 +18,8 @@ RSpec.shared_examples :jsonapi_filters_by_boolean_field do |attr_name|
   context 'not equal operator' do
     let(:filter_key) { "#{attr_name}_not_eq" }
     let(:filter_value) { true }
-    let!(:suitable_record) { create factory, attr_name => false }
-    let!(:other_record) { create factory, attr_name => true }
+    let!(:suitable_record) { create_record attr_name => false }
+    let!(:other_record) { create_record attr_name => true }
 
     before { subject_request }
 
