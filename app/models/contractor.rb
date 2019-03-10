@@ -34,6 +34,7 @@ class Contractor < ActiveRecord::Base
   include Yeti::ResourceStatus
 
   validate :vendor_or_customer?
+  validate :customer_can_be_disabled
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_uniqueness_of :external_id, allow_blank: true
@@ -60,6 +61,12 @@ class Contractor < ActiveRecord::Base
     unless customer? || vendor?
       errors.add :vendor, 'Must be customer and/or vendor'
       errors.add :customer, 'Must be customer and/or vendor'
+    end
+  end
+
+  def customer_can_be_disabled
+    if customer_changed?(from: true, to: false) && customers_auths.any?
+      errors.add(:customer, I18n.t('activerecord.errors.models.contractor.attributes.customer'))
     end
   end
 end
