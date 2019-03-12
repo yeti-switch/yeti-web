@@ -17,7 +17,7 @@ describe 'Create new Gateway group', type: :feature, js: true do
           vendor_id: lambda {
             chosen_pick('#gateway_group_vendor_id+div', text: @vendor.name)
           },
-          prefer_same_pop: true
+          balancing_mode_id: 'Priority/Weigth balancing'
       }
     end
 
@@ -29,7 +29,7 @@ describe 'Create new Gateway group', type: :feature, js: true do
       expect(GatewayGroup.last).to have_attributes(
                                   name: attributes[:name],
                                   vendor_id: @vendor.id,
-                                  prefer_same_pop: attributes[:prefer_same_pop]
+                                  balancing_mode_id: 1
                               )
     end
   end
