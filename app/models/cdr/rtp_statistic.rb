@@ -65,6 +65,17 @@ class Cdr::RtpStatistic < Cdr::Base
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
 
+
+  def self.add_partitions
+    from = (Time.now-3.days).utc.beginning_of_day
+    7.times do
+      prefix = from.to_date.to_s.gsub('-', '_')
+      to = from + 1.day
+      add_partition_for_range(prefix, from.to_s, to.to_s)
+      from = to
+    end
+  end
+
   def display_name
     id.to_s
   end

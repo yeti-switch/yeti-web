@@ -85,7 +85,7 @@ class Yeti::ActiveRecord < ActiveRecord::Base
     ", table_name.split('.')[0], table_name.split('.')[1]).to_a
   end
 
-  def self.add_partition(prefix, from, to)
+  def self.add_partition_for_range(prefix, from, to)
     fetch_sp(
       "CREATE TABLE IF NOT EXISTS #{table_name}_#{prefix}
        PARTITION OF #{table_name}
