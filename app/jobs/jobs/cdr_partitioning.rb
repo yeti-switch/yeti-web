@@ -7,6 +7,5 @@ module Jobs
       Cdr::AuthLogTable.add_partition
       Cdr::RtpStatistic.add_partitions
     end
-
   end
 end
