@@ -34,6 +34,7 @@ class Contractor < ActiveRecord::Base
 
 
   validate :vendor_or_customer?
+  validate :customer_can_be_disabled
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_uniqueness_of :external_id, allow_blank: true
@@ -63,5 +64,10 @@ class Contractor < ActiveRecord::Base
     end
   end
 
+  def customer_can_be_disabled
+    if customer_changed?(from: true, to: false) && customers_auths.any?
+      errors.add(:customer, I18n.t('activerecord.errors.models.contractor.attributes.customer'))
+    end
+  end
 end
 
