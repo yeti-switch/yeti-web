@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register CdrExport, as: 'CDR Export' do
-  menu parent: 'CDR', priority: 96
+  menu parent: 'CDR', priority: 97
   actions :index, :show, :create, :new
 
   filter :status, as: :select, collection: CdrExport::STATUSES

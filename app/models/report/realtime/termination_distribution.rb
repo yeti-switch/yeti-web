@@ -142,6 +142,7 @@
 #  customer_duration               :integer
 #  vendor_duration                 :integer
 #  customer_auth_name              :string
+#  legb_local_tag                  :string
 #
 
 class Report::Realtime::TerminationDistribution < Report::Realtime::Base

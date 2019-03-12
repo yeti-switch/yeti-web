@@ -71,6 +71,29 @@ class Yeti::ActiveRecord < ActiveRecord::Base
       limit 10").to_hash
   end
 
+  def self.partitions
+    fetch_sp("
+      SELECT
+        nmsp_child.nspname||'.'||child.relname  AS partition
+      FROM pg_inherits
+      JOIN pg_class parent            ON pg_inherits.inhparent = parent.oid
+      JOIN pg_class child             ON pg_inherits.inhrelid   = child.oid
+      JOIN pg_namespace nmsp_parent   ON nmsp_parent.oid  = parent.relnamespace
+      JOIN pg_namespace nmsp_child    ON nmsp_child.oid   = child.relnamespace
+      WHERE
+         nmsp_parent.nspname=? and parent.relname=?
+    ", table_name.split('.')[0], table_name.split('.')[1]).to_a
+  end
+
+  def self.add_partition_for_range(prefix, from, to)
+    fetch_sp(
+      "CREATE TABLE IF NOT EXISTS #{table_name}_#{prefix}
+       PARTITION OF #{table_name}
+       FOR VALUES FROM (?) to (?)",
+      from, to
+    )
+  end
+
   def self.db_size
     fetch_sp_val('SELECT pg_size_pretty(pg_database_size(current_database()))')
   end
