@@ -26,8 +26,8 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :initial_rate, type: :number
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
-  #ransack_filter :valid_from, type: :datetime
-  #ransack_filter :valid_till, type: :datetime
+  ransack_filter :valid_from, type: :datetime
+  ransack_filter :valid_till, type: :datetime
   ransack_filter :prefix, type: :string
   ransack_filter :src_rewrite_rule, type: :string
   ransack_filter :dst_rewrite_rule, type: :string
@@ -42,7 +42,6 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :lcr_rate_multiplier, type: :number
   ransack_filter :force_hit_rate, type: :number
   ransack_filter :network_prefix_id, type: :number
-  #ransack_filter :created_at, type: :datetime
   ransack_filter :short_calls_limit, type: :number
   ransack_filter :external_id, type: :number
   #ransack_filter :routing_tag_ids, type: :number           ARRAY

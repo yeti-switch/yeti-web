@@ -91,8 +91,9 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :auth_log }
+    let(:trait) { :with_id }
 
-    #it_behaves_like :jsonapi_filters_by_datetime_field, :request_time, type: :datetime
+    it_behaves_like :jsonapi_filters_by_datetime_field, :request_time
     it_behaves_like :jsonapi_filters_by_boolean_field, :success, type: :boolean
     it_behaves_like :jsonapi_filters_by_number_field, :code, type: :number
     it_behaves_like :jsonapi_filters_by_string_field, :reason
@@ -124,9 +125,8 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :privacy
     it_behaves_like :jsonapi_filters_by_string_field, :rpid
     it_behaves_like :jsonapi_filters_by_string_field, :rpid_privacy
-    
   end
-  
+
   describe 'GET show' do
     let!(:auth_log) do
       create :auth_log, :with_id

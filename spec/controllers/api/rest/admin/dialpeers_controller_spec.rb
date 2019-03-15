@@ -43,8 +43,8 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :initial_rate
     it_behaves_like :jsonapi_filters_by_number_field, :initial_interval
     it_behaves_like :jsonapi_filters_by_number_field, :next_interval
-    #it_behaves_like jsonapi_filters_by_datetime_field, :valid_from
-    #it_behaves_like jsonapi_filters_by_datetime_field, :valid_till
+    it_behaves_like :jsonapi_filters_by_datetime_field, :valid_from
+    it_behaves_like :jsonapi_filters_by_datetime_field, :valid_till
     it_behaves_like :jsonapi_filters_by_string_field, :prefix
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
@@ -59,7 +59,6 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :lcr_rate_multiplier
     it_behaves_like :jsonapi_filters_by_number_field, :force_hit_rate
     it_behaves_like :jsonapi_filters_by_number_field, :network_prefix_id
-    #it_behaves_like jsonapi_filters_by_datetime, :created_at
     it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
     #it_behaves_like :jsonapi_filters_by_number_field, :routing_tag_ids       ARRAY

@@ -51,7 +51,7 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
     records.where('request_time <= ?', values[0])
   }
 
-  #ransack_filter :request_time, type: :datetime
+  ransack_filter :request_time, type: :datetime
   ransack_filter :success, type: :boolean
   ransack_filter :code, type: :number
   ransack_filter :reason, type: :string

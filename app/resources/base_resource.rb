@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class BaseResource < JSONAPI::Resource
-  AVAILABLE_FILTERS_TYPES = %i[string number boolean].freeze
   RANSACK_TYPE_SUFIXES_DIC = {
-    string: %w[eq not_eq matches],
     boolean: %w[eq not_eq],
-    number: %w[eq not_eq gt gteq lt lteq]
+    datetime: %w[eq not_eq gt gteq lt lteq],
+    number: %w[eq not_eq gt gteq lt lteq],
+    string: %w[eq not_eq matches]
   }.freeze
 
   abstract
@@ -16,7 +16,7 @@ class BaseResource < JSONAPI::Resource
 
   def self.ransack_filter(attr, options)
     type = options[:type]
-    raise ArgumentError, "type #{type} is not supported" unless AVAILABLE_FILTERS_TYPES.include?(type)
+    raise ArgumentError, "type #{type} is not supported" unless RANSACK_TYPE_SUFIXES_DIC.key?(type)
 
     RANSACK_TYPE_SUFIXES_DIC[type].each do |suf|
       ransack_operator = "#{attr}_#{suf}"
