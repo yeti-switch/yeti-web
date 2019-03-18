@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_context :ransack_filter_setup do
-  def create_record(attrs)
+  def create_record(attrs = {})
     if defined?(trait)
       create factory, trait, attrs
     else

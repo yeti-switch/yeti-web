@@ -31,7 +31,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :account }
-    let(:max_balance) { 10 }
+    let(:trait) { :with_max_balance }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
     it_behaves_like :jsonapi_filters_by_number_field, :balance
@@ -43,7 +43,7 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :destination_rate_limit
     it_behaves_like :jsonapi_filters_by_number_field, :max_call_duration
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
-    #it_behaves_like :jsonapi_filters_by_number_field, :uuid
+    it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
     it_behaves_like :jsonapi_filters_by_number_field, :origination_capacity
     it_behaves_like :jsonapi_filters_by_number_field, :termination_capacity
     it_behaves_like :jsonapi_filters_by_number_field, :total_capacity
