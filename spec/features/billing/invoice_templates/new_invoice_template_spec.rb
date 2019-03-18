@@ -14,8 +14,8 @@ describe 'Create new Invoice Template', type: :feature do
   include_context :fill_form, 'new_billing_invoice_template' do
     let(:attributes) do
       {
-          name: "new template",
-          template_file: file_path
+        name: 'new template',
+        template_file: file_path
       }
     end
 
@@ -24,11 +24,11 @@ describe 'Create new Invoice Template', type: :feature do
       expect(page).to have_css('.flash_notice', text: 'Invoice template was successfully created.')
 
       expect(Billing::InvoiceTemplate.last).to have_attributes(
-                                           name: attributes[:name],
-                                           filename: File.basename(file_path),
-                                           data: File.read(file_path).b,
-                                           sha1: Digest::SHA1.file(file_path).to_s
-                                       )
+        name: attributes[:name],
+        filename: File.basename(file_path),
+        data: File.read(file_path).b,
+        sha1: Digest::SHA1.file(file_path).to_s
+      )
     end
   end
 end

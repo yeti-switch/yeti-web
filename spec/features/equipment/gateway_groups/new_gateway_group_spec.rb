@@ -13,11 +13,11 @@ describe 'Create new Gateway group', type: :feature, js: true do
   include_context :fill_form, 'new_gateway_group' do
     let(:attributes) do
       {
-          name: 'GW group',
-          vendor_id: lambda {
-            chosen_pick('#gateway_group_vendor_id+div', text: @vendor.name)
-          },
-          balancing_mode_id: 'Priority/Weigth balancing'
+        name: 'GW group',
+        vendor_id: lambda {
+                     chosen_pick('#gateway_group_vendor_id+div', text: @vendor.name)
+                   },
+        balancing_mode_id: 'Priority/Weigth balancing'
       }
     end
 
@@ -27,10 +27,10 @@ describe 'Create new Gateway group', type: :feature, js: true do
       expect(page).to have_css('.flash_notice', text: 'Gateway group was successfully created.')
 
       expect(GatewayGroup.last).to have_attributes(
-                                  name: attributes[:name],
-                                  vendor_id: @vendor.id,
-                                  balancing_mode_id: 1
-                              )
+        name: attributes[:name],
+        vendor_id: @vendor.id,
+        balancing_mode_id: 1
+      )
     end
   end
 end
