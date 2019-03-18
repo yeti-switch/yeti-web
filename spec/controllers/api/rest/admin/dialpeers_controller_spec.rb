@@ -49,7 +49,7 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
     it_behaves_like :jsonapi_filters_by_number_field, :acd_limit
-    it_behaves_like :jsonapi_filters_by_number_field, :asr_limit
+    it_behaves_like :jsonapi_filters_by_number_field, :asr_limit, max_value: 1
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_result
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_result
     it_behaves_like :jsonapi_filters_by_boolean_field, :locked
@@ -57,14 +57,12 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :exclusive_route
     it_behaves_like :jsonapi_filters_by_number_field, :capacity
     it_behaves_like :jsonapi_filters_by_number_field, :lcr_rate_multiplier
-    it_behaves_like :jsonapi_filters_by_number_field, :force_hit_rate
-    it_behaves_like :jsonapi_filters_by_number_field, :network_prefix_id
-    it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit
+    it_behaves_like :jsonapi_filters_by_number_field, :force_hit_rate, max_value: 1
+    it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit, max_value: 1
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
     #it_behaves_like :jsonapi_filters_by_number_field, :routing_tag_ids       ARRAY
-    
   end
-  
+
   describe 'GET show' do
     let!(:dialpeer) { create :dialpeer }
 

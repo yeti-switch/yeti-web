@@ -41,7 +41,6 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :capacity, type: :number
   ransack_filter :lcr_rate_multiplier, type: :number
   ransack_filter :force_hit_rate, type: :number
-  ransack_filter :network_prefix_id, type: :number
   ransack_filter :short_calls_limit, type: :number
   ransack_filter :external_id, type: :number
   #ransack_filter :routing_tag_ids, type: :number           ARRAY
