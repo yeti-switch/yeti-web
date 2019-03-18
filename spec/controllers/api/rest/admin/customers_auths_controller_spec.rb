@@ -18,22 +18,17 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     let(:factory) { :customers_auth }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
-    #it_behaves_like :ip, type: :inet
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
     it_behaves_like :jsonapi_filters_by_boolean_field, :reject_calls
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_result
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_result
-    it_behaves_like :jsonapi_filters_by_string_field, :src_prefix
     it_behaves_like :jsonapi_filters_by_number_field, :src_number_min_length
     it_behaves_like :jsonapi_filters_by_number_field, :src_number_max_length
-    it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix
     it_behaves_like :jsonapi_filters_by_number_field, :dst_number_min_length
     it_behaves_like :jsonapi_filters_by_number_field, :dst_number_max_length
-    it_behaves_like :jsonapi_filters_by_string_field, :x_yeti_auth
     it_behaves_like :jsonapi_filters_by_number_field, :capacity
-    it_behaves_like :jsonapi_filters_by_string_field, :uri_domain
     it_behaves_like :jsonapi_filters_by_string_field, :src_name_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :src_name_rewrite_result
     it_behaves_like :jsonapi_filters_by_string_field, :diversion_rewrite_rule
@@ -45,9 +40,6 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :src_number_radius_rewrite_result
     it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_result
-    it_behaves_like :jsonapi_filters_by_string_field, :from_domain
-    it_behaves_like :jsonapi_filters_by_string_field, :to_domain
-    it_behaves_like :jsonapi_filters_by_number_field, :tag_action_value
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
   end
   

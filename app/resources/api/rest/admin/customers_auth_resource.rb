@@ -28,7 +28,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   filter :name
 
   ransack_filter :name, type: :string
- #ransack_filter :ip, type: :inet
   ransack_filter :enabled, type: :boolean
   ransack_filter :reject_calls, type: :boolean
   ransack_filter :src_rewrite_rule, type: :string
