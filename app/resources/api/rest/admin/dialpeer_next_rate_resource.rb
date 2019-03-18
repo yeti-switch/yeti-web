@@ -13,7 +13,6 @@ class Api::Rest::Admin::DialpeerNextRateResource < BaseResource
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
   ransack_filter :connect_fee, type: :number
-  #ransack_filter :apply_time, type: :datetime
   ransack_filter :applied, type: :boolean
   ransack_filter :external_id, type: :number
 
