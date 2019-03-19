@@ -25,7 +25,6 @@ class Api::Rest::Admin::AccountResource < BaseResource
   ransack_filter :max_balance, type: :number
   ransack_filter :balance_low_threshold, type: :number
   ransack_filter :balance_high_threshold, type: :number
-  # ransack_filter :send_balance_notifications_to, type: :number is an Array
   ransack_filter :destination_rate_limit, type: :number
   ransack_filter :max_call_duration, type: :number
   ransack_filter :external_id, type: :number
@@ -33,7 +32,6 @@ class Api::Rest::Admin::AccountResource < BaseResource
   ransack_filter :origination_capacity, type: :number
   ransack_filter :termination_capacity, type: :number
   ransack_filter :total_capacity, type: :number
-  # ransack_filter :send_invoices_to, type: :number is an Array
 
   def send_invoices_to=(value)
     _model.send_invoices_to = Array.wrap(value)

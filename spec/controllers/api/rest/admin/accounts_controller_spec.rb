@@ -39,7 +39,6 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :max_balance
     it_behaves_like :jsonapi_filters_by_number_field, :balance_low_threshold
     it_behaves_like :jsonapi_filters_by_number_field, :balance_high_threshold
-    #it_behaves_like :jsonapi_filters_by_number_field, :send_balance_notifications_to is an Array
     it_behaves_like :jsonapi_filters_by_number_field, :destination_rate_limit
     it_behaves_like :jsonapi_filters_by_number_field, :max_call_duration
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
@@ -47,7 +46,6 @@ describe Api::Rest::Admin::AccountsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :origination_capacity
     it_behaves_like :jsonapi_filters_by_number_field, :termination_capacity
     it_behaves_like :jsonapi_filters_by_number_field, :total_capacity
-    #it_behaves_like :send_invoices_to is an Array
   end
 
   describe 'GET show' do

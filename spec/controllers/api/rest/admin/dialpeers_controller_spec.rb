@@ -60,7 +60,6 @@ describe Api::Rest::Admin::DialpeersController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :force_hit_rate, max_value: 1
     it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit, max_value: 1
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
-    #it_behaves_like :jsonapi_filters_by_number_field, :routing_tag_ids       ARRAY
   end
 
   describe 'GET show' do

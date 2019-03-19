@@ -43,7 +43,6 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :force_hit_rate, type: :number
   ransack_filter :short_calls_limit, type: :number
   ransack_filter :external_id, type: :number
-  #ransack_filter :routing_tag_ids, type: :number           ARRAY
 
   def self.updatable_fields(_context)
     %i[

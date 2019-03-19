@@ -255,9 +255,9 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :cdr }
-    let(:trait) { :with_id }
+    let(:trait) { :with_id_and_uuid }
 
-    #it_behaves_like :time_start, type: :datetime
+    it_behaves_like :jsonapi_filters_by_datetime_field, :time_start
     it_behaves_like :jsonapi_filters_by_number_field, :destination_next_rate
     it_behaves_like :jsonapi_filters_by_number_field, :destination_fee
     it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_next_rate
@@ -275,8 +275,8 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_out
     it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_in
     it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_out
-    #it_behaves_like :time_connect, type: :datetime
-    #it_behaves_like :time_end, type: :datetime
+    it_behaves_like :jsonapi_filters_by_datetime_field, :time_connect
+    it_behaves_like :jsonapi_filters_by_datetime_field, :time_end
     it_behaves_like :jsonapi_filters_by_string_field, :sign_orig_ip
     it_behaves_like :jsonapi_filters_by_number_field, :sign_orig_port
     it_behaves_like :jsonapi_filters_by_string_field, :sign_orig_local_ip
@@ -350,7 +350,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :yeti_version
     it_behaves_like :jsonapi_filters_by_string_field, :lega_user_agent
     it_behaves_like :jsonapi_filters_by_string_field, :legb_user_agent
-    #it_behaves_like :uuid, type: :uuid
+    it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
     it_behaves_like :jsonapi_filters_by_string_field, :pai_in
     it_behaves_like :jsonapi_filters_by_string_field, :ppi_in
     it_behaves_like :jsonapi_filters_by_string_field, :privacy_in
@@ -369,7 +369,6 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :customer_auth_external_id
     it_behaves_like :jsonapi_filters_by_number_field, :customer_acc_vat
     it_behaves_like :jsonapi_filters_by_number_field, :customer_acc_external_id
-    #it_behaves_like :routing_tag_ids         ARRAY
     it_behaves_like :jsonapi_filters_by_number_field, :vendor_external_id
     it_behaves_like :jsonapi_filters_by_number_field, :vendor_acc_external_id
     it_behaves_like :jsonapi_filters_by_number_field, :orig_gw_external_id
@@ -380,7 +379,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :customer_duration
     it_behaves_like :jsonapi_filters_by_number_field, :vendor_duration
   end
-  
+
   describe 'GET show' do
     let!(:cdr) do
       create :cdr, :with_id

@@ -208,7 +208,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.where(is_last_cdr: values[0])
   }
 
-  #ransack_filter :time_start, type: :datetime
+  ransack_filter :time_start, type: :datetime
   ransack_filter :destination_next_rate, type: :number
   ransack_filter :destination_fee, type: :number
   ransack_filter :dialpeer_next_rate, type: :number
@@ -226,8 +226,8 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :dst_prefix_out, type: :string
   ransack_filter :src_prefix_in, type: :string
   ransack_filter :src_prefix_out, type: :string
-  #ransack_filter :time_connect, type: :datetime
-  #ransack_filter :time_end, type: :datetime
+  ransack_filter :time_connect, type: :datetime
+  ransack_filter :time_end, type: :datetime
   ransack_filter :sign_orig_ip, type: :string
   ransack_filter :sign_orig_port, type: :number
   ransack_filter :sign_orig_local_ip, type: :string
@@ -301,7 +301,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :yeti_version, type: :string
   ransack_filter :lega_user_agent, type: :string
   ransack_filter :legb_user_agent, type: :string
-  #ransack_filter :uuid, type: :uuid
+  ransack_filter :uuid, type: :uuid
   ransack_filter :pai_in, type: :string
   ransack_filter :ppi_in, type: :string
   ransack_filter :privacy_in, type: :string
@@ -320,7 +320,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :customer_auth_external_id, type: :number
   ransack_filter :customer_acc_vat, type: :number
   ransack_filter :customer_acc_external_id, type: :number
-  #ransack_filter :routing_tag_ids, type: :number         ARRAY
   ransack_filter :vendor_external_id, type: :number
   ransack_filter :vendor_acc_external_id, type: :number
   ransack_filter :orig_gw_external_id, type: :number

@@ -56,5 +56,10 @@ FactoryGirl.define do
     trait :with_id do
       id { Cdr::Cdr.connection.select_value("SELECT nextval('cdr.cdr_id_seq')").to_i }
     end
+
+    trait :with_id_and_uuid do
+      id { Cdr::Cdr.connection.select_value("SELECT nextval('cdr.cdr_id_seq')").to_i }
+      uuid { SecureRandom.uuid }
+    end
   end
 end
