@@ -5,7 +5,7 @@ class BaseResource < JSONAPI::Resource
     boolean: %w[eq not_eq],
     datetime: %w[eq not_eq gt gteq lt lteq],
     number: %w[eq not_eq gt gteq lt lteq],
-    string: %w[eq not_eq matches],
+    string: %w[eq not_eq cont start end],
     uuid: %w[eq not_eq]
   }.freeze
 

@@ -28,9 +28,8 @@ describe Api::Rest::Admin::PaymentsController, type: :controller do
 
     it_behaves_like :jsonapi_filters_by_number_field, :amount
     it_behaves_like :jsonapi_filters_by_string_field, :notes
-    
   end
-  
+
   describe 'GET show' do
     let!(:payment) { create :payment }
 
