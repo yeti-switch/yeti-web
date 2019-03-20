@@ -5,7 +5,7 @@ class Api::Rest::Admin::RateplanResource < BaseResource
 
   has_one :profit_control_mode, class_name: 'Routing::RateProfitControlMode'
 
-  filter :name
+  filter :name # DEPRECATED
 
   ransack_filter :name, type: :string
 

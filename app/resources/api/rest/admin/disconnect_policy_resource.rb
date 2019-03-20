@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::DisconnectPolicyResource < JSONAPI::Resource
+class Api::Rest::Admin::DisconnectPolicyResource < ::BaseResource
   attributes :name
 
-  filter :name
+  filter :name # DEPRECATED
+
+  ransack_filter :name, type: :string
 end
