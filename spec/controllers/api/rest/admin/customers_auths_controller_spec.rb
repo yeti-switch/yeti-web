@@ -42,7 +42,7 @@ describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_result
     it_behaves_like :jsonapi_filters_by_number_field, :external_id
   end
-  
+
   describe 'GET show' do
     let!(:customers_auth) { create :customers_auth }
 
