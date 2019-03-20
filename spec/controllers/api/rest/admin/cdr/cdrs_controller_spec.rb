@@ -312,7 +312,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :legb_disconnect_code
     it_behaves_like :jsonapi_filters_by_string_field, :legb_disconnect_reason
     it_behaves_like :jsonapi_filters_by_number_field, :dump_level_id
-    #it_behaves_like :auth_orig_ip, type: :inet
+    it_behaves_like :jsonapi_filters_by_inet_field, :auth_orig_ip
     it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_port
     it_behaves_like :jsonapi_filters_by_number_field, :lega_rx_bytes
     it_behaves_like :jsonapi_filters_by_number_field, :lega_tx_bytes

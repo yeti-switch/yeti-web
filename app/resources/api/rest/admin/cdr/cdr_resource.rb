@@ -263,7 +263,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :legb_disconnect_code, type: :number
   ransack_filter :legb_disconnect_reason, type: :string
   ransack_filter :dump_level_id, type: :number
-  #ransack_filter :auth_orig_ip, type: :inet
+  ransack_filter :auth_orig_ip, type: :inet
   ransack_filter :auth_orig_port, type: :number
   ransack_filter :lega_rx_bytes, type: :number
   ransack_filter :lega_tx_bytes, type: :number

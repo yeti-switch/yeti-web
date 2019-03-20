@@ -4,6 +4,7 @@ class BaseResource < JSONAPI::Resource
   RANSACK_TYPE_SUFIXES_DIC = {
     boolean: %w[eq not_eq],
     datetime: %w[eq not_eq gt gteq lt lteq],
+    inet: %w[eq not_eq cont start end],
     number: %w[eq not_eq gt gteq lt lteq],
     string: %w[eq not_eq cont start end],
     uuid: %w[eq not_eq]
