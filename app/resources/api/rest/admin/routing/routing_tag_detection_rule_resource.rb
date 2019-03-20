@@ -10,4 +10,7 @@ class Api::Rest::Admin::Routing::RoutingTagDetectionRuleResource < ::BaseResourc
   has_one :routing_tag, class_name: 'RoutingTag'
   has_one :tag_action, class_name: 'TagAction'
   has_one :routing_tag_mode, class_name: 'RoutingTagMode'
+
+  ransack_filter :src_prefix, type: :string
+  ransack_filter :dst_prefix, type: :string
 end

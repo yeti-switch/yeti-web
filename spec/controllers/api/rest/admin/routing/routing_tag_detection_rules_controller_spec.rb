@@ -28,6 +28,13 @@ describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, type: :c
     it { expect(response_data.size).to eq(records.size) }
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :routing_tag_detection_rule }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :src_prefix
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix
+  end
+
   describe 'GET show' do
     before { get :show, params: { id: record.to_param } }
 

@@ -6,6 +6,8 @@ class Api::Rest::Admin::Routing::RoutesetDiscriminatorResource < ::BaseResource
   attributes :name
   filter :name
 
+  ransack_filter :name, type: :string
+
   def self.updatable_fields(_context)
     [:name]
   end

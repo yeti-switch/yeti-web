@@ -18,6 +18,20 @@ describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :controller
     it { expect(response_data.size).to eq(records.size) }
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :numberlist_item }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :key
+    it_behaves_like :jsonapi_filters_by_datetime_field, :created_at
+    it_behaves_like :jsonapi_filters_by_datetime_field, :updated_at
+    it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_result
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
+    it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_result
+    it_behaves_like :jsonapi_filters_by_number_field, :number_min_length
+    it_behaves_like :jsonapi_filters_by_number_field, :number_max_length
+  end
+
   describe 'GET show' do
     let!(:record) { create :numberlist_item }
 

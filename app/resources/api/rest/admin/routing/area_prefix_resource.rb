@@ -6,4 +6,6 @@ class Api::Rest::Admin::Routing::AreaPrefixResource < ::BaseResource
   attributes :prefix
 
   has_one :area, class_name: 'Area'
+
+  ransack_filter :prefix, type: :string
 end

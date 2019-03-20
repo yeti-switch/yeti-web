@@ -5,4 +5,6 @@ class Api::Rest::Admin::Routing::RoutingTagModeResource < ::BaseResource
   immutable
   attributes :name
   filter :name
+
+  ransack_filter :name, type: :string
 end
