@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
+class Api::Rest::Admin::GatewayResource < ::BaseResource
   attributes :name, :enabled, :priority, :weight, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
              :host, :port, :resolve_ruri, :diversion_rewrite_rule, :diversion_rewrite_result,
              :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule, :src_rewrite_result,
@@ -38,7 +38,94 @@ class Api::Rest::Admin::GatewayResource < JSONAPI::Resource
   has_one :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode'
   has_one :sip_schema, class_name: 'System::SipSchema'
 
-  filter :name
+  filter :name  # DEPRECATED
+
+  ransack_filter :host, type: :string
+  ransack_filter :port, type: :number
+  ransack_filter :src_rewrite_rule, type: :string
+  ransack_filter :dst_rewrite_rule, type: :string
+  ransack_filter :acd_limit, type: :number
+  ransack_filter :asr_limit, type: :number
+  ransack_filter :enabled, type: :boolean
+  ransack_filter :name, type: :string
+  ransack_filter :auth_enabled, type: :boolean
+  ransack_filter :auth_user, type: :string
+  ransack_filter :auth_password, type: :string
+  ransack_filter :term_outbound_proxy, type: :string
+  ransack_filter :term_next_hop_for_replies, type: :boolean
+  ransack_filter :term_use_outbound_proxy, type: :boolean
+  ransack_filter :allow_termination, type: :boolean
+  ransack_filter :allow_origination, type: :boolean
+  ransack_filter :anonymize_sdp, type: :boolean
+  ransack_filter :proxy_media, type: :boolean
+  ransack_filter :transparent_seqno, type: :boolean
+  ransack_filter :transparent_ssrc, type: :boolean
+  ransack_filter :sst_enabled, type: :boolean
+  ransack_filter :sst_minimum_timer, type: :number
+  ransack_filter :sst_maximum_timer, type: :number
+  ransack_filter :sst_accept501, type: :boolean
+  ransack_filter :sst_session_expires, type: :number
+  ransack_filter :term_force_outbound_proxy, type: :boolean
+  ransack_filter :locked, type: :boolean
+  ransack_filter :codecs_payload_order, type: :string
+  ransack_filter :codecs_prefer_transcoding_for, type: :string
+  ransack_filter :src_rewrite_result, type: :string
+  ransack_filter :dst_rewrite_result, type: :string
+  ransack_filter :termination_capacity, type: :number
+  ransack_filter :term_next_hop, type: :string
+  ransack_filter :orig_next_hop, type: :string
+  ransack_filter :orig_append_headers_req, type: :string
+  ransack_filter :term_append_headers_req, type: :string
+  ransack_filter :dialog_nat_handling, type: :boolean
+  ransack_filter :orig_force_outbound_proxy, type: :boolean
+  ransack_filter :orig_use_outbound_proxy, type: :boolean
+  ransack_filter :orig_outbound_proxy, type: :string
+  ransack_filter :prefer_existing_codecs, type: :boolean
+  ransack_filter :force_symmetric_rtp, type: :boolean
+  ransack_filter :sdp_alines_filter_list, type: :string
+  ransack_filter :diversion_rewrite_rule, type: :string
+  ransack_filter :diversion_rewrite_result, type: :string
+  ransack_filter :src_name_rewrite_rule, type: :string
+  ransack_filter :src_name_rewrite_result, type: :string
+  ransack_filter :priority, type: :number
+  ransack_filter :single_codec_in_200ok, type: :boolean
+  ransack_filter :ringing_timeout, type: :number
+  ransack_filter :symmetric_rtp_nonstop, type: :boolean
+  ransack_filter :symmetric_rtp_ignore_rtcp, type: :boolean
+  ransack_filter :resolve_ruri, type: :boolean
+  ransack_filter :force_dtmf_relay, type: :boolean
+  ransack_filter :relay_options, type: :boolean
+  ransack_filter :rtp_ping, type: :boolean
+  ransack_filter :filter_noaudio_streams, type: :boolean
+  ransack_filter :relay_reinvite, type: :boolean
+  ransack_filter :auth_from_user, type: :string
+  ransack_filter :auth_from_domain, type: :string
+  ransack_filter :relay_hold, type: :boolean
+  ransack_filter :rtp_timeout, type: :number
+  ransack_filter :relay_prack, type: :boolean
+  ransack_filter :rtp_relay_timestamp_aligning, type: :boolean
+  ransack_filter :allow_1xx_without_to_tag, type: :boolean
+  ransack_filter :dns_srv_failover_timer, type: :number
+  ransack_filter :rtp_force_relay_cn, type: :boolean
+  ransack_filter :relay_update, type: :boolean
+  ransack_filter :suppress_early_media, type: :boolean
+  ransack_filter :send_lnp_information, type: :boolean
+  ransack_filter :short_calls_limit, type: :number
+  ransack_filter :origination_capacity, type: :number
+  ransack_filter :force_one_way_early_media, type: :boolean
+  ransack_filter :transit_headers_from_origination, type: :string
+  ransack_filter :transit_headers_from_termination, type: :string
+  ransack_filter :external_id, type: :number
+  ransack_filter :fake_180_timer, type: :number
+  ransack_filter :sip_interface_name, type: :string
+  ransack_filter :rtp_interface_name, type: :string
+  ransack_filter :rel100_mode_id, type: :number
+  ransack_filter :is_shared, type: :boolean
+  ransack_filter :max_30x_redirects, type: :number
+  ransack_filter :max_transfers, type: :number
+  ransack_filter :incoming_auth_username, type: :string
+  ransack_filter :incoming_auth_password, type: :string
+  ransack_filter :weight, type: :number
 
   def self.updatable_fields(_context)
     %i[
