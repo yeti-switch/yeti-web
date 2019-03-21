@@ -8,7 +8,7 @@ class Api::Rest::Admin::ContactResource < ::BaseResource
   has_one :contractor
 
   ransack_filter :email, type: :string
-  ransack_filter :notices, type: :string
+  ransack_filter :notes, type: :string
 
   def self.records(options = {})
     super(options).contractors
