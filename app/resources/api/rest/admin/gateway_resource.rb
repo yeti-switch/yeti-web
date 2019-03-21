@@ -38,7 +38,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   has_one :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode'
   has_one :sip_schema, class_name: 'System::SipSchema'
 
-  filter :name  # DEPRECATED
+  filter :name # DEPRECATED
 
   ransack_filter :host, type: :string
   ransack_filter :port, type: :number
