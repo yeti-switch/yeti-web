@@ -339,6 +339,7 @@ INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_orig
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8003, 0, true, true, 503, 'No response from LNP DB', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8004,0,true,true,403,'Rejected by Auth record',false,false,true,false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8005,0,true,true,403,'Origination gateway is disabled',false,false,true,false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8006,0,true,true,403,'No destination with appropriate price found',false,false,true,false);
 
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1505, 1, false, false, 487, 'Ringing timeout', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (2001, 3, true, false, 503, 'Radius response timeout', NULL, NULL, false, false, true, false);
@@ -355,6 +356,7 @@ insert into disconnect_code (id,namespace_id,code,reason) values (1508, 1, 480, 
 insert into disconnect_code (id,namespace_id,code,reason) values (1509, 1, 480,  'Vendor account $id overloaded');
 insert into disconnect_code (id,namespace_id,code,reason) values (1510, 1, 480,  'Vendor gateway $id overloaded');
 insert into disconnect_code (id,namespace_id,code,reason) values (1511, 1, 480,  'Dialpeer $id overloaded');
+insert into disconnect_code (id,namespace_id,code,reason) values (1512, 1, 480,  'Account $id total capacity reached');
 insert into disconnect_code (id,namespace_id,code,reason) values (1600, 1, 503,  'Resource cache error');
 insert into disconnect_code (id,namespace_id,code,reason) values (1601, 1, 503,  'Unknown resource overload');
 
