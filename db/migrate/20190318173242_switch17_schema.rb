@@ -1775,8 +1775,8 @@ CREATE FUNCTION switch17.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_now timestamp;
         v_x_yeti_auth varchar;
         --  v_uri_domain varchar;
-        v_rate_limit float:=Infinity;
-        v_destination_rate_limit float:=Infinity;
+        v_rate_limit float:='Infinity'::float;
+        v_destination_rate_limit float:='Infinity'::float;
         v_test_vendor_id integer;
         v_random float;
         v_max_call_length integer;
@@ -2001,7 +2001,7 @@ CREATE FUNCTION switch17.route(i_node_id integer, i_pop_id integer, i_protocol_i
         SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
-        v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,Infinity);
+        v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
         if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
           v_ret.disconnect_code_id=8000; --No enough customer balance
