@@ -421,26 +421,6 @@ SELECT pg_catalog.setval('jobs_id_seq', 12, true);
 
 
 --
--- TOC entry 3987 (class 0 OID 20141)
--- Dependencies: 529
--- Data for Name: lnp_database_drivers; Type: TABLE DATA; Schema: sys; Owner: yeti
---
-
-INSERT INTO lnp_database_drivers VALUES (1, 'UDP SIP 301/302 redirect', NULL);
-INSERT INTO lnp_database_drivers VALUES (2, 'thinQ REST LRN Driver', NULL);
-INSERT INTO lnp_database_drivers VALUES (3, 'In-memory hash', NULL);
-
-
---
--- TOC entry 4039 (class 0 OID 0)
--- Dependencies: 530
--- Name: lnp_database_drivers_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: yeti
---
-
-SELECT pg_catalog.setval('lnp_database_drivers_id_seq', 1, true);
-
-
---
 -- TOC entry 3989 (class 0 OID 20149)
 -- Dependencies: 531
 -- Data for Name: lnp_resolvers; Type: TABLE DATA; Schema: sys; Owner: yeti

@@ -7,7 +7,7 @@
 #  id                :integer          not null, primary key
 #  vendor_id         :integer          not null
 #  name              :string           not null
-#  prefer_same_pop   :boolean          default(FALSE), not null
+#  prefer_same_pop   :boolean          default(TRUE), not null
 #  balancing_mode_id :integer          default(1), not null
 #
 

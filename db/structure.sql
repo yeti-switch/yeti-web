@@ -26586,15 +26586,99 @@ ALTER SEQUENCE class4.lnp_cache_id_seq OWNED BY class4.lnp_cache.id;
 CREATE TABLE class4.lnp_databases (
     id smallint NOT NULL,
     name character varying NOT NULL,
+    created_at timestamp with time zone,
+    database_type character varying,
+    database_id smallint NOT NULL
+);
+
+
+--
+-- Name: COLUMN lnp_databases.database_type; Type: COMMENT; Schema: class4; Owner: -
+--
+
+COMMENT ON COLUMN class4.lnp_databases.database_type IS 'One of Lnp::DatabaseThinq, Lnp::DatabaseSipRedirect, Lnp::DatabaseCsv';
+
+
+--
+-- Name: lnp_databases_30x_redirect; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases_30x_redirect (
+    id smallint NOT NULL,
     host character varying NOT NULL,
     port integer,
-    driver_id smallint NOT NULL,
-    created_at timestamp with time zone,
-    thinq_token character varying,
-    thinq_username character varying,
-    timeout smallint DEFAULT 300 NOT NULL,
-    csv_file character varying
+    timeout smallint DEFAULT 300 NOT NULL
 );
+
+
+--
+-- Name: lnp_databases_30x_redirect_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_30x_redirect_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_30x_redirect_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_30x_redirect_id_seq OWNED BY class4.lnp_databases_30x_redirect.id;
+
+
+--
+-- Name: lnp_databases_csv; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases_csv (
+    id smallint NOT NULL,
+    csv_file_path character varying
+);
+
+
+--
+-- Name: lnp_databases_csv_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_csv_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_csv_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_csv_id_seq OWNED BY class4.lnp_databases_csv.id;
+
+
+--
+-- Name: lnp_databases_database_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_database_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_database_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_database_id_seq OWNED BY class4.lnp_databases.database_id;
 
 
 --
@@ -26614,6 +26698,40 @@ CREATE SEQUENCE class4.lnp_databases_id_seq
 --
 
 ALTER SEQUENCE class4.lnp_databases_id_seq OWNED BY class4.lnp_databases.id;
+
+
+--
+-- Name: lnp_databases_thinq; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases_thinq (
+    id smallint NOT NULL,
+    host character varying NOT NULL,
+    port integer,
+    timeout smallint DEFAULT 300 NOT NULL,
+    username character varying,
+    token character varying
+);
+
+
+--
+-- Name: lnp_databases_thinq_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_thinq_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_thinq_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_thinq_id_seq OWNED BY class4.lnp_databases_thinq.id;
 
 
 --
@@ -29591,36 +29709,6 @@ ALTER SEQUENCE sys.jobs_id_seq OWNED BY sys.jobs.id;
 
 
 --
--- Name: lnp_database_drivers; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.lnp_database_drivers (
-    id smallint NOT NULL,
-    name character varying NOT NULL,
-    description text
-);
-
-
---
--- Name: lnp_database_drivers_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.lnp_database_drivers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: lnp_database_drivers_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.lnp_database_drivers_id_seq OWNED BY sys.lnp_database_drivers.id;
-
-
---
 -- Name: lnp_resolvers; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -30109,6 +30197,34 @@ ALTER TABLE ONLY class4.lnp_cache ALTER COLUMN id SET DEFAULT nextval('class4.ln
 --
 
 ALTER TABLE ONLY class4.lnp_databases ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_id_seq'::regclass);
+
+
+--
+-- Name: lnp_databases database_id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases ALTER COLUMN database_id SET DEFAULT nextval('class4.lnp_databases_database_id_seq'::regclass);
+
+
+--
+-- Name: lnp_databases_30x_redirect id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_30x_redirect ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_30x_redirect_id_seq'::regclass);
+
+
+--
+-- Name: lnp_databases_csv id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_csv ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_csv_id_seq'::regclass);
+
+
+--
+-- Name: lnp_databases_thinq id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_thinq ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_thinq_id_seq'::regclass);
 
 
 --
@@ -30613,13 +30729,6 @@ ALTER TABLE ONLY sys.guiconfig ALTER COLUMN id SET DEFAULT nextval('sys.guiconfi
 --
 
 ALTER TABLE ONLY sys.jobs ALTER COLUMN id SET DEFAULT nextval('sys.jobs_id_seq'::regclass);
-
-
---
--- Name: lnp_database_drivers id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.lnp_database_drivers ALTER COLUMN id SET DEFAULT nextval('sys.lnp_database_drivers_id_seq'::regclass);
 
 
 --
@@ -31237,6 +31346,22 @@ ALTER TABLE ONLY class4.lnp_cache
 
 
 --
+-- Name: lnp_databases_30x_redirect lnp_databases_30x_redirect_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_30x_redirect
+    ADD CONSTRAINT lnp_databases_30x_redirect_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lnp_databases_csv lnp_databases_csv_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_csv
+    ADD CONSTRAINT lnp_databases_csv_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lnp_databases lnp_databases_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -31250,6 +31375,14 @@ ALTER TABLE ONLY class4.lnp_databases
 
 ALTER TABLE ONLY class4.lnp_databases
     ADD CONSTRAINT lnp_databases_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lnp_databases_thinq lnp_databases_thinq_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_thinq
+    ADD CONSTRAINT lnp_databases_thinq_pkey PRIMARY KEY (id);
 
 
 --
@@ -32301,22 +32434,6 @@ ALTER TABLE ONLY sys.jobs
 
 
 --
--- Name: lnp_database_drivers lnp_database_drivers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.lnp_database_drivers
-    ADD CONSTRAINT lnp_database_drivers_name_key UNIQUE (name);
-
-
---
--- Name: lnp_database_drivers lnp_database_drivers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.lnp_database_drivers
-    ADD CONSTRAINT lnp_database_drivers_pkey PRIMARY KEY (id);
-
-
---
 -- Name: lnp_resolvers lnp_resolvers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -32600,6 +32717,13 @@ CREATE INDEX dialpeers_prefix_range_valid_from_valid_till_idx1 ON class4.dialpee
 --
 
 CREATE INDEX disconnect_code_code_success_successnozerolen_idx ON class4.disconnect_code USING btree (code, success, successnozerolen);
+
+
+--
+-- Name: index_class4.lnp_databases_on_database_id_and_database_type; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX "index_class4.lnp_databases_on_database_id_and_database_type" ON class4.lnp_databases USING btree (database_id, database_type);
 
 
 --
@@ -33280,14 +33404,6 @@ ALTER TABLE ONLY class4.lnp_cache
 
 
 --
--- Name: lnp_databases lnp_databases_driver_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.lnp_databases
-    ADD CONSTRAINT lnp_databases_driver_id_fkey FOREIGN KEY (driver_id) REFERENCES sys.lnp_database_drivers(id);
-
-
---
 -- Name: numberlist_items numberlist_items_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -33595,7 +33711,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -33640,6 +33757,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20181114213545'),
 ('20181202175700'),
 ('20181203204823'),
-('20190308190806');
+('20190308190806'),
+('20190324161035'),
+('20190326070548');
 
 

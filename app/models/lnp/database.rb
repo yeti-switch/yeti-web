@@ -4,29 +4,68 @@
 #
 # Table name: class4.lnp_databases
 #
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  host           :string           not null
-#  port           :integer
-#  driver_id      :integer          not null
-#  created_at     :datetime
-#  thinq_token    :string
-#  thinq_username :string
-#  timeout        :integer          default(300), not null
-#  csv_file       :string
+#  id            :integer          not null, primary key
+#  name          :string           not null
+#  created_at    :datetime
+#  database_type :string
+#  database_id   :integer          not null
 #
 
 class Lnp::Database < Yeti::ActiveRecord
   self.table_name = 'class4.lnp_databases'
 
-  belongs_to :driver, class_name: 'Lnp::DatabaseDriver', foreign_key: :driver_id
-  validates_presence_of :driver, :name, :host
-  validates_uniqueness_of :name
+  module CONST
+    TYPE_NAME_THINQ = 'ThinQ'
+    TYPE_NAME_SIP_REDIRECT = 'SIP 301/302 redirect'
+    TYPE_NAME_CSV = 'CSV'
+    TYPE_THINQ = 'Lnp::DatabaseThinq'
+    TYPE_SIP_REDIRECT = 'Lnp::DatabaseSipRedirect'
+    TYPE_CSV = 'Lnp::DatabaseCsv'
+    TYPES = {
+      TYPE_THINQ => TYPE_NAME_THINQ,
+      TYPE_SIP_REDIRECT => TYPE_NAME_SIP_REDIRECT,
+      TYPE_CSV => TYPE_NAME_CSV
+    }.freeze
 
-  validates_numericality_of :timeout, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+    freeze
+  end
+
+  belongs_to :database, polymorphic: true, dependent: :delete
+  accepts_nested_attributes_for :database
+
+  # fix accepts_nested_attributes_for for polymorphic association
+  def build_database(attrs = {})
+    attributes = attrs.symbolize_keys
+    klass = attributes[:type].safe_constantize
+    raise ArgumentError, 'wrong type for database association' if klass.nil?
+
+    self.database = klass.new attributes.except(:type)
+  end
+
+  # fix accepts_nested_attributes_for for polymorphic association
+  def database_attributes=(attrs)
+    # :id is excluded because we doesn't support replacing polymorphic association on update.
+    attributes = attrs.symbolize_keys.except(:id)
+    if new_record?
+      build_database(attrs)
+    else
+      database.assign_attributes attributes.except(:type)
+    end
+  end
+
+  validates :database, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :database_id, uniqueness: { scope: :database_type }
+
+  # we don't allow to replace database on update
+  attr_readonly :database_id, :database_type
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def database_type_name
+    CONST::TYPES[database_type]
   end
 
   def test_db(destination)
