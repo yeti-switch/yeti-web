@@ -9,8 +9,8 @@
 #  name                :string
 #  vendor_name         :string
 #  vendor_id           :integer
-#  error_string        :string
 #  prefer_same_pop     :boolean
+#  error_string        :string
 #  balancing_mode_id   :integer
 #  balancing_mode_name :string
 #
