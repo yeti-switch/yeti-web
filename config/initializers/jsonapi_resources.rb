@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'jsonapi/exceptions/authorization_failed'
+
 JSONAPI.configure do |config|
   # can be paged, offset, none (default)
   config.default_paginator = :none
