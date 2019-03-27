@@ -5298,13 +5298,28 @@ CREATE FUNCTION lnp.cache_lnp_data(i_database_id smallint, i_dst character varyi
 -- Name: load_lnp_databases(); Type: FUNCTION; Schema: lnp; Owner: -
 --
 
-CREATE FUNCTION lnp.load_lnp_databases() RETURNS TABLE(o_id smallint, o_name character varying, o_driver_id smallint, o_host character varying, o_port integer, o_thinq_username character varying, o_thinq_token character varying, o_timeout smallint, o_csv_file character varying)
+CREATE FUNCTION lnp.load_lnp_databases() RETURNS TABLE(id smallint, name character varying, database_type character varying, parameters json)
     LANGUAGE plpgsql COST 10
     AS $$
-    BEGIN
-      RETURN QUERY SELECT id, name, driver_id, host, port, thinq_username, thinq_token, timeout, csv_file from class4.lnp_databases;
-    END;
-    $$;
+      BEGIN
+        RETURN QUERY
+          SELECT
+            db.id,
+            db.name,
+            db.database_type,
+            params.data
+          from class4.lnp_databases db
+          join (
+            SELECT t.id, 'Lnp::DatabaseThinq' as type, row_to_json(t.*) as data from class4.lnp_databases_thinq t
+            UNION ALL
+            SELECT t.id, 'Lnp::DatabaseSipRedirect' as type, row_to_json(t.*) as data from class4.lnp_databases_30x_redirect t
+            UNION ALL
+            SELECT t.id, 'Lnp::DatabaseCsv' as type, row_to_json(t.*) as data from class4.lnp_databases_csv t
+            UNION ALL
+            SELECT t.id, 'Lnp::DatabaseAlcazar' as type, row_to_json(t.*) as data from class4.lnp_databases_alcazar t
+            ) params ON db.database_id=params.id AND db.database_type=params.type;
+      END;
+      $$;
 
 
 --
@@ -32808,6 +32823,40 @@ ALTER SEQUENCE class4.lnp_databases_30x_redirect_id_seq OWNED BY class4.lnp_data
 
 
 --
+-- Name: lnp_databases_alcazar; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases_alcazar (
+    id smallint NOT NULL,
+    host character varying NOT NULL,
+    port integer,
+    timeout smallint DEFAULT 300 NOT NULL,
+    key character varying NOT NULL,
+    database_id integer
+);
+
+
+--
+-- Name: lnp_databases_alcazar_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_alcazar_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_alcazar_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_alcazar_id_seq OWNED BY class4.lnp_databases_alcazar.id;
+
+
+--
 -- Name: lnp_databases_csv; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -36521,6 +36570,13 @@ ALTER TABLE ONLY class4.lnp_databases_30x_redirect ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: lnp_databases_alcazar id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_alcazar ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_alcazar_id_seq'::regclass);
+
+
+--
 -- Name: lnp_databases_csv id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -37679,6 +37735,14 @@ ALTER TABLE ONLY class4.lnp_cache
 
 ALTER TABLE ONLY class4.lnp_databases_30x_redirect
     ADD CONSTRAINT lnp_databases_30x_redirect_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lnp_databases_alcazar lnp_databases_alcazar_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_alcazar
+    ADD CONSTRAINT lnp_databases_alcazar_pkey PRIMARY KEY (id);
 
 
 --
@@ -40167,6 +40231,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190308190806'),
 ('20190318173242'),
 ('20190324161035'),
-('20190326070548');
+('20190326070548'),
+('20190327134613');
 
 
