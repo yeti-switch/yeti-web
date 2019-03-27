@@ -103,9 +103,9 @@ class Routing::Simulation
     begin
       t = ActiveRecord::Base.connection.raw_connection.set_notice_processor { |result| @notices << result.to_s.chomp }
       Yeti::ActiveRecord.fetch_sp(
-          "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(?::integer, ?::integer)",
-          1,
-          1
+        "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(?::integer, ?::integer)",
+        1,
+        1
       )
       @debug = Yeti::ActiveRecord.fetch_sp(
         "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.debug(?::smallint,?::inet,?::integer,?,?,?,?,?,?,?,?,?,?,?,?,?)",
