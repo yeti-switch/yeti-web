@@ -19,15 +19,18 @@ class Lnp::Database < Yeti::ActiveRecord
     TYPE_NAME_SIP_REDIRECT = 'SIP 301/302 redirect'
     TYPE_NAME_CSV = 'CSV'
     TYPE_NAME_ALCAZAR = 'Alcazar REST API'
+    TYPE_NAME_COURE_ANQ = 'Coure ANQ REST API'
     TYPE_THINQ = 'Lnp::DatabaseThinq'
     TYPE_SIP_REDIRECT = 'Lnp::DatabaseSipRedirect'
     TYPE_CSV = 'Lnp::DatabaseCsv'
     TYPE_ALCAZAR = 'Lnp::DatabaseAlcazar'
+    TYPE_COURE_ANQ = 'Lnp::DatabaseCoureAnq'
     TYPES = {
       TYPE_THINQ => TYPE_NAME_THINQ,
       TYPE_SIP_REDIRECT => TYPE_NAME_SIP_REDIRECT,
       TYPE_CSV => TYPE_NAME_CSV,
-      TYPE_ALCAZAR => TYPE_NAME_ALCAZAR
+      TYPE_ALCAZAR => TYPE_NAME_ALCAZAR,
+      TYPE_COURE_ANQ => TYPE_NAME_COURE_ANQ
     }.freeze
 
     freeze

@@ -5317,6 +5317,8 @@ CREATE FUNCTION lnp.load_lnp_databases() RETURNS TABLE(id smallint, name charact
             SELECT t.id, 'Lnp::DatabaseCsv' as type, row_to_json(t.*) as data from class4.lnp_databases_csv t
             UNION ALL
             SELECT t.id, 'Lnp::DatabaseAlcazar' as type, row_to_json(t.*) as data from class4.lnp_databases_alcazar t
+            UNION ALL
+            SELECT t.id, 'Lnp::DatabaseCoureAnq' as type, row_to_json(t.*) as data from class4.lnp_databases_coure_anq t
             ) params ON db.database_id=params.id AND db.database_type=params.type;
       END;
       $$;
@@ -32857,6 +32859,42 @@ ALTER SEQUENCE class4.lnp_databases_alcazar_id_seq OWNED BY class4.lnp_databases
 
 
 --
+-- Name: lnp_databases_coure_anq; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases_coure_anq (
+    id smallint NOT NULL,
+    database_id integer,
+    base_url character varying NOT NULL,
+    timeout smallint DEFAULT 300 NOT NULL,
+    username character varying NOT NULL,
+    password character varying NOT NULL,
+    country_code character varying NOT NULL,
+    operators_map character varying
+);
+
+
+--
+-- Name: lnp_databases_coure_anq_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_coure_anq_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_coure_anq_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_coure_anq_id_seq OWNED BY class4.lnp_databases_coure_anq.id;
+
+
+--
 -- Name: lnp_databases_csv; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -36577,6 +36615,13 @@ ALTER TABLE ONLY class4.lnp_databases_alcazar ALTER COLUMN id SET DEFAULT nextva
 
 
 --
+-- Name: lnp_databases_coure_anq id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_coure_anq ALTER COLUMN id SET DEFAULT nextval('class4.lnp_databases_coure_anq_id_seq'::regclass);
+
+
+--
 -- Name: lnp_databases_csv id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -37743,6 +37788,14 @@ ALTER TABLE ONLY class4.lnp_databases_30x_redirect
 
 ALTER TABLE ONLY class4.lnp_databases_alcazar
     ADD CONSTRAINT lnp_databases_alcazar_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lnp_databases_coure_anq lnp_databases_coure_anq_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_coure_anq
+    ADD CONSTRAINT lnp_databases_coure_anq_pkey PRIMARY KEY (id);
 
 
 --

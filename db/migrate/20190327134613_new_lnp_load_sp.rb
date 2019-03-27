@@ -10,6 +10,16 @@ class NewLnpLoadSp < ActiveRecord::Migration[5.2]
         database_id integer
       );
 
+      CREATE TABLE class4.lnp_databases_coure_anq (
+        id smallserial primary key,
+        database_id integer,
+        base_url varchar not null,
+        timeout smallint not null default 300,
+        username varchar not null,
+        password varchar not null,
+        country_code varchar not null,
+        operators_map varchar
+      );
       drop function lnp.load_lnp_databases;
 
       CREATE FUNCTION lnp.load_lnp_databases()
@@ -32,6 +42,8 @@ class NewLnpLoadSp < ActiveRecord::Migration[5.2]
             SELECT t.id, 'Lnp::DatabaseCsv' as type, row_to_json(t.*) as data from class4.lnp_databases_csv t
             UNION ALL
             SELECT t.id, 'Lnp::DatabaseAlcazar' as type, row_to_json(t.*) as data from class4.lnp_databases_alcazar t
+            UNION ALL
+            SELECT t.id, 'Lnp::DatabaseCoureAnq' as type, row_to_json(t.*) as data from class4.lnp_databases_coure_anq t
             ) params ON db.database_id=params.id AND db.database_type=params.type;
       END;
       $$;
@@ -41,7 +53,10 @@ class NewLnpLoadSp < ActiveRecord::Migration[5.2]
   def down
     execute %q{
       delete from class4.lnp_databases where database_type ='Lnp::DatabaseAlcazar';
+      delete from class4.lnp_databases where database_type ='Lnp::DatabaseCoureAnq';
       drop table class4.lnp_databases_alcazar;
+
+      drop table class4.lnp_databases_coure_anq;
 
       drop function lnp.load_lnp_databases;
 
