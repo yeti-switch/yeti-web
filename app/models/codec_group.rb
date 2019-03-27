@@ -21,7 +21,7 @@ class CodecGroup < ActiveRecord::Base
   validate :check_uniqueness_of_codecs
 
   def codec_names
-    codec_group_codecs.sort(&:priority).map { |c| c.codec.name }
+    codec_group_codecs.sort_by(&:priority).map { |c| c.codec.name }
   end
   # define_attribute_methods :codec_names
   # def codec_group_codecs_attributes=(attributes)
