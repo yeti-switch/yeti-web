@@ -7,7 +7,6 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
 
   describe 'GET /api/rest/admin/contacts' do
     subject do
-      puts json_api_request_path
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 

@@ -3,6 +3,7 @@
 class Api::Rest::Customer::V1::BaseController < Api::RestController
   include JSONAPI::ActsAsResourceController
   include Knock::Authenticable
+  rescue_from JSONAPI::Exceptions::AuthorizationFailed, with: :handle_exceptions
 
   undef :current_admin_user
 
@@ -24,5 +25,6 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
 
   def authenticate_api_access!
     authenticate_for(System::ApiAccess)
+    raise JSONAPI::Exceptions::AuthorizationFailed if current_customer.nil?
   end
 end
