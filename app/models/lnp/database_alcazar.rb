@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.lnp_databases_alcazar
@@ -24,9 +26,8 @@ class Lnp::DatabaseAlcazar < Yeti::ActiveRecord
 
   validates :host, :key, presence: true
   validates :timeout, allow_nil: true, numericality: {
-      greater_than: 0,
-      less_than_or_equal_to: PG_MAX_SMALLINT,
-      only_integer: true
+    greater_than: 0,
+    less_than_or_equal_to: PG_MAX_SMALLINT,
+    only_integer: true
   }
-
 end
