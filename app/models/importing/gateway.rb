@@ -162,10 +162,10 @@ class Importing::Gateway < Importing::Base
   belongs_to :term_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
   belongs_to :orig_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
   belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
-  belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
-  belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
-  belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
-  belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
+  belongs_to :rx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
+  belongs_to :tx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
+  belongs_to :termination_dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
+  belongs_to :termination_src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_src_numberlist_id
 
   self.import_attributes = %w[
     name enabled
