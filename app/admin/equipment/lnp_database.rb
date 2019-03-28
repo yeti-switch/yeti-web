@@ -15,13 +15,18 @@ ActiveAdmin.register Lnp::Database do
       item Lnp::Database::CONST::TYPE_NAME_THINQ,
            action: :new,
            lnp_database: { database_type: Lnp::Database::CONST::TYPE_THINQ }
-
       item Lnp::Database::CONST::TYPE_NAME_SIP_REDIRECT,
            action: :new,
            lnp_database: { database_type: Lnp::Database::CONST::TYPE_SIP_REDIRECT }
       item Lnp::Database::CONST::TYPE_NAME_CSV,
            action: :new,
            lnp_database: { database_type: Lnp::Database::CONST::TYPE_CSV }
+      item Lnp::Database::CONST::TYPE_NAME_ALCAZAR,
+           action: :new,
+           lnp_database: { database_type: Lnp::Database::CONST::TYPE_ALCAZAR }
+      item Lnp::Database::CONST::TYPE_NAME_COURE_ANQ,
+           action: :new,
+           lnp_database: { database_type: Lnp::Database::CONST::TYPE_COURE_ANQ }
     end
   end
 
@@ -93,6 +98,18 @@ ActiveAdmin.register Lnp::Database do
               row :timeout
             when Lnp::Database::CONST::TYPE_CSV
               row :csv_file_path
+            when Lnp::Database::CONST::TYPE_ALCAZAR
+              row :host
+              row :port
+              row :key
+              row :timeout
+            when Lnp::Database::CONST::TYPE_COURE_ANQ
+              row :base_url
+              row :username
+              row :password
+              row :country_code
+              row :operators_map
+              row :timeout
             end
           end
         end
@@ -113,6 +130,10 @@ ActiveAdmin.register Lnp::Database do
       database_attrs += %i[host port timeout]
     when Lnp::Database::CONST::TYPE_CSV
       database_attrs += [:csv_file_path]
+    when Lnp::Database::CONST::TYPE_ALCAZAR
+      database_attrs += %i[host port key timeout]
+    when Lnp::Database::CONST::TYPE_COURE_ANQ
+      database_attrs += %i[base_url username password country_code operators_map timeout]
     end
 
     # get_resource_ivar&.persisted? # if persisted
@@ -143,6 +164,18 @@ ActiveAdmin.register Lnp::Database do
         o.input :timeout
       when Lnp::Database::CONST::TYPE_CSV
         o.input :csv_file_path
+      when Lnp::Database::CONST::TYPE_ALCAZAR
+        o.input :host
+        o.input :port
+        o.input :key
+        o.input :timeout
+      when Lnp::Database::CONST::TYPE_COURE_ANQ
+        o.input :base_url
+        o.input :username
+        o.input :password, as: :string
+        o.input :country_code
+        o.input :operators_map
+        o.input :timeout
       end
     end
 
