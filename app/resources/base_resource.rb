@@ -3,11 +3,11 @@
 class BaseResource < JSONAPI::Resource
   RANSACK_TYPE_SUFIXES_DIC = {
     boolean: %w[eq not_eq],
-    datetime: %w[eq not_eq gt gteq lt lteq],
-    inet: %w[eq not_eq],
-    number: %w[eq not_eq gt gteq lt lteq],
-    string: %w[eq not_eq cont start end],
-    uuid: %w[eq not_eq]
+    datetime: %w[eq not_eq gt gteq lt lteq in not_in],
+    inet: %w[eq not_eq in not_in],
+    number: %w[eq not_eq gt gteq lt lteq in not_in],
+    string: %w[eq not_eq cont start end in not_in cont_any],
+    uuid: %w[eq not_eq in not_in]
   }.freeze
 
   abstract
@@ -21,11 +21,10 @@ class BaseResource < JSONAPI::Resource
     raise ArgumentError, "type #{type} is not supported" unless RANSACK_TYPE_SUFIXES_DIC.key?(type)
 
     RANSACK_TYPE_SUFIXES_DIC[type].each do |suf|
-      ransack_operator = "#{attr}_#{suf}"
-
-      filter ransack_operator, apply: (lambda do |records, value, _options|
-        records.ransack(ransack_operator => value.first).result
-      end)
+      builder = RansackFilterBuilder.new(attr: attr, operator: suf)
+      filter builder.filter_name,
+             verify: ->(values, _ctx) { builder.verify(values) },
+             apply: ->(records, values, _opts) { builder.apply(records, values) }
     end
   end
 end

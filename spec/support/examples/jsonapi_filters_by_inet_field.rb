@@ -26,5 +26,25 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
       it { is_expected.to include suitable_record.id.to_s }
       it { is_expected.not_to include other_record.id.to_s }
     end
+
+    context 'in operator' do
+      let(:filter_key) { "#{attr_name}_in" }
+      let(:filter_value) { '1.1.1.1,2.2.2.2' }
+
+      before { subject_request }
+
+      it { is_expected.to include suitable_record.id.to_s }
+      it { is_expected.not_to include other_record.id.to_s }
+    end
+
+    context 'not_in operator' do
+      let(:filter_key) { "#{attr_name}_not_in" }
+      let(:filter_value) { '0.0.0.0,2.2.2.2' }
+
+      before { subject_request }
+
+      it { is_expected.to include suitable_record.id.to_s }
+      it { is_expected.not_to include other_record.id.to_s }
+    end
   end
 end

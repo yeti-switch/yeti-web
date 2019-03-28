@@ -41,7 +41,7 @@ RSpec.describe RansackFilterBuilder do
     let(:value) { 'str' }
 
     before do
-      allow(ransack_result).to receive(:results)
+      allow(ransack_result).to receive(:result)
       expect(records).to receive(:ransack).with('name_eq' => value).and_return(ransack_result)
     end
 

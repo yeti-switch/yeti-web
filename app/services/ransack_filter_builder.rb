@@ -9,7 +9,7 @@ class RansackFilterBuilder
   end
 
   def apply(records, value)
-    records.ransack(filter_name => value)
+    records.ransack(filter_name => value).result
   end
 
   def filter_name
