@@ -29,7 +29,7 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
 
     context 'in operator' do
       let(:filter_key) { "#{attr_name}_in" }
-      let(:filter_value) { '1.1.1.1,2.2.2.2' }
+      let(:filter_value) { '0.0.0.0,2.2.2.2' }
 
       before { subject_request }
 
@@ -39,7 +39,7 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
 
     context 'not_in operator' do
       let(:filter_key) { "#{attr_name}_not_in" }
-      let(:filter_value) { '0.0.0.0,2.2.2.2' }
+      let(:filter_value) { '1.1.1.1,2.2.2.2' }
 
       before { subject_request }
 
