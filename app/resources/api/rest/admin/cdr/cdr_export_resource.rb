@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::Cdr::CdrExportResource < ::BaseResource
+class Api::Rest::Admin::Cdr::CdrExportResource < BaseResource
   model_name 'CdrExport'
   model_hint model: CdrExport::Base, resource: self
 

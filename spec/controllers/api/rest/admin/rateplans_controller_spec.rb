@@ -31,6 +31,12 @@ describe Api::Rest::Admin::RateplansController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :rateplan }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :name
+  end
+
   describe 'GET show' do
     let!(:rateplan) { create :rateplan }
 

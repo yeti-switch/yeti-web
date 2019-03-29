@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::DumpLevelResource < JSONAPI::Resource
+class Api::Rest::Admin::DumpLevelResource < ::BaseResource
   immutable
   attributes :name, :log_sip, :log_rtp
-  filter :name
+  filter :name # DEPRECATED
+
+  ransack_filter :name, type: :string
 end

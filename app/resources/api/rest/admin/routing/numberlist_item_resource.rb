@@ -12,5 +12,15 @@ class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
   has_one :numberlist, class_name: 'Numberlist'
   has_one :tag_action, class_name: 'TagAction'
 
-  filter :key
+  filter :key # DEPRECATED
+
+  ransack_filter :key, type: :string
+  ransack_filter :created_at, type: :datetime
+  ransack_filter :updated_at, type: :datetime
+  ransack_filter :src_rewrite_rule, type: :string
+  ransack_filter :src_rewrite_result, type: :string
+  ransack_filter :dst_rewrite_rule, type: :string
+  ransack_filter :dst_rewrite_result, type: :string
+  ransack_filter :number_min_length, type: :number
+  ransack_filter :number_max_length, type: :number
 end

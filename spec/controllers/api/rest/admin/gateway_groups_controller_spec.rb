@@ -23,6 +23,12 @@ describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
     it { expect(response_data.size).to eq(gateway_groups.size) }
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :gateway_group }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :name
+  end
+
   describe 'GET show' do
     let!(:gateway_group) { create :gateway_group }
 

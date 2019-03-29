@@ -8,6 +8,8 @@ class Api::Rest::Customer::V1::RateplanResource < BaseResource
 
   attributes :name
 
+  ransack_filter :name, type: :string
+
   def self.records(options = {})
     apply_allowed_accounts(super(options), options)
   end

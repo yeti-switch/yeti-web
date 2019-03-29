@@ -14,5 +14,9 @@ FactoryGirl.define do
     termination_capacity 2
     total_capacity 5
     timezone_id 1
+
+    trait :with_max_balance do
+      max_balance 1_000
+    end
   end
 end

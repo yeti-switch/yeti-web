@@ -29,6 +29,15 @@ describe Api::Rest::Admin::RoutingPlansController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :routing_plan }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :name
+    it_behaves_like :jsonapi_filters_by_number_field, :rate_delta_max
+    it_behaves_like :jsonapi_filters_by_boolean_field, :use_lnp
+    it_behaves_like :jsonapi_filters_by_number_field, :max_rerouting_attempts
+  end
+
   describe 'GET show' do
     let!(:routing_plan) { create :routing_plan }
 

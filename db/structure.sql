@@ -40236,7 +40236,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),

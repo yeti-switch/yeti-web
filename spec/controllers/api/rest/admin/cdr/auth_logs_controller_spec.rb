@@ -89,6 +89,44 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :auth_log }
+    let(:trait) { :with_id }
+
+    it_behaves_like :jsonapi_filters_by_datetime_field, :request_time
+    it_behaves_like :jsonapi_filters_by_boolean_field, :success, type: :boolean
+    it_behaves_like :jsonapi_filters_by_number_field, :code, type: :number
+    it_behaves_like :jsonapi_filters_by_string_field, :reason
+    it_behaves_like :jsonapi_filters_by_string_field, :internal_reason
+    it_behaves_like :jsonapi_filters_by_string_field, :origination_ip
+    it_behaves_like :jsonapi_filters_by_number_field, :origination_port, type: :number
+    it_behaves_like :jsonapi_filters_by_number_field, :origination_proto_id, type: :number
+    it_behaves_like :jsonapi_filters_by_number_field, :transport_proto_id, type: :number
+    it_behaves_like :jsonapi_filters_by_string_field, :transport_remote_ip
+    it_behaves_like :jsonapi_filters_by_number_field, :transport_remote_port, type: :number
+    it_behaves_like :jsonapi_filters_by_string_field, :transport_local_ip
+    it_behaves_like :jsonapi_filters_by_number_field, :transport_local_port, type: :number
+    it_behaves_like :jsonapi_filters_by_number_field, :pop_id, type: :number
+    it_behaves_like :jsonapi_filters_by_number_field, :node_id, type: :number
+    it_behaves_like :jsonapi_filters_by_number_field, :gateway_id, type: :number
+    it_behaves_like :jsonapi_filters_by_string_field, :username
+    it_behaves_like :jsonapi_filters_by_string_field, :realm
+    it_behaves_like :jsonapi_filters_by_string_field, :request_method
+    it_behaves_like :jsonapi_filters_by_string_field, :ruri
+    it_behaves_like :jsonapi_filters_by_string_field, :from_uri
+    it_behaves_like :jsonapi_filters_by_string_field, :to_uri
+    it_behaves_like :jsonapi_filters_by_string_field, :call_id
+    it_behaves_like :jsonapi_filters_by_string_field, :nonce
+    it_behaves_like :jsonapi_filters_by_string_field, :response
+    it_behaves_like :jsonapi_filters_by_string_field, :x_yeti_auth
+    it_behaves_like :jsonapi_filters_by_string_field, :diversion
+    it_behaves_like :jsonapi_filters_by_string_field, :pai
+    it_behaves_like :jsonapi_filters_by_string_field, :ppi
+    it_behaves_like :jsonapi_filters_by_string_field, :privacy
+    it_behaves_like :jsonapi_filters_by_string_field, :rpid
+    it_behaves_like :jsonapi_filters_by_string_field, :rpid_privacy
+  end
+
   describe 'GET show' do
     let!(:auth_log) do
       create :auth_log, :with_id

@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::RoutingPlanResource < JSONAPI::Resource
+class Api::Rest::Admin::RoutingPlanResource < BaseResource
   model_name 'Routing::RoutingPlan'
 
   attributes :name, :rate_delta_max, :use_lnp, :max_rerouting_attempts
 
   has_one :sorting
 
-  filter :name
+  filter :name # DEPRECATED in favor of name_eq
+
+  ransack_filter :name, type: :string
+  ransack_filter :rate_delta_max, type: :number
+  ransack_filter :use_lnp, type: :boolean
+  ransack_filter :max_rerouting_attempts, type: :number
 
   def self.updatable_fields(_context)
     %i[

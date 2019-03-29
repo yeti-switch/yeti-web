@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::AccountResource < ::BaseResource
+class Api::Rest::Admin::AccountResource < BaseResource
   attributes :name,
              :balance, :min_balance, :max_balance,
              :balance_low_threshold, :balance_high_threshold, :send_balance_notifications_to,
@@ -18,6 +18,20 @@ class Api::Rest::Admin::AccountResource < ::BaseResource
   has_one :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate'
 
   filter :name
+
+  ransack_filter :name, type: :string
+  ransack_filter :balance, type: :number
+  ransack_filter :min_balance, type: :number
+  ransack_filter :max_balance, type: :number
+  ransack_filter :balance_low_threshold, type: :number
+  ransack_filter :balance_high_threshold, type: :number
+  ransack_filter :destination_rate_limit, type: :number
+  ransack_filter :max_call_duration, type: :number
+  ransack_filter :external_id, type: :number
+  ransack_filter :uuid, type: :uuid
+  ransack_filter :origination_capacity, type: :number
+  ransack_filter :termination_capacity, type: :number
+  ransack_filter :total_capacity, type: :number
 
   def send_invoices_to=(value)
     _model.send_invoices_to = Array.wrap(value)

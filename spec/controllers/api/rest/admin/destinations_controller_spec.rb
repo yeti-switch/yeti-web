@@ -34,6 +34,33 @@ describe Api::Rest::Admin::DestinationsController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :destination }
+
+    it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
+    it_behaves_like :jsonapi_filters_by_string_field, :prefix
+    it_behaves_like :jsonapi_filters_by_number_field, :next_rate
+    it_behaves_like :jsonapi_filters_by_number_field, :connect_fee
+    it_behaves_like :jsonapi_filters_by_number_field, :initial_interval
+    it_behaves_like :jsonapi_filters_by_number_field, :next_interval
+    it_behaves_like :jsonapi_filters_by_number_field, :dp_margin_fixed
+    it_behaves_like :jsonapi_filters_by_number_field, :dp_margin_percent
+    it_behaves_like :jsonapi_filters_by_number_field, :initial_rate
+    it_behaves_like :jsonapi_filters_by_boolean_field, :reject_calls
+    it_behaves_like :jsonapi_filters_by_boolean_field, :use_dp_intervals
+    it_behaves_like :jsonapi_filters_by_datetime_field, :valid_from
+    it_behaves_like :jsonapi_filters_by_datetime_field, :valid_till
+    it_behaves_like :jsonapi_filters_by_number_field, :external_id
+    it_behaves_like :jsonapi_filters_by_number_field, :asr_limit
+    it_behaves_like :jsonapi_filters_by_number_field, :acd_limit
+    it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit
+    it_behaves_like :jsonapi_filters_by_boolean_field, :quality_alarm
+    it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
+    it_behaves_like :jsonapi_filters_by_number_field, :dst_number_min_length
+    it_behaves_like :jsonapi_filters_by_number_field, :dst_number_max_length
+    it_behaves_like :jsonapi_filters_by_boolean_field, :reverse_billing
+  end
+
   describe 'GET show' do
     let!(:destination) { create :destination }
 

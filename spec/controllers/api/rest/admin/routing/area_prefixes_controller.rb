@@ -17,6 +17,12 @@ describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :controller do
     it { expect(response_data.size).to eq(Routing::AreaPrefix.count) }
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :area_prefix }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :prefix
+  end
+
   describe 'GET show' do
     before { get :show, id: record.id }
 

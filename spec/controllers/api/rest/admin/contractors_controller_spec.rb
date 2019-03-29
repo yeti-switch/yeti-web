@@ -29,6 +29,71 @@ describe Api::Rest::Admin::ContractorsController, type: :controller do
     end
   end
 
+  describe 'GET index with ransack filters' do
+    let(:factory) { :vendor }
+
+    it_behaves_like :jsonapi_filters_by_string_field, :name
+    it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
+    it_behaves_like :jsonapi_filters_by_string_field, :description
+    it_behaves_like :jsonapi_filters_by_string_field, :address
+    it_behaves_like :jsonapi_filters_by_string_field, :phones
+    it_behaves_like :jsonapi_filters_by_number_field, :external_id
+
+    describe 'filter by "customer" field' do
+      include_context :ransack_filter_setup
+      context 'equal operator' do
+        let(:filter_key) { 'customer_eq' }
+        let(:filter_value) { true }
+        let!(:suitable_record) { create :customer }
+        let!(:other_record) { create :vendor }
+
+        before { subject_request }
+
+        it { is_expected.to include suitable_record.id.to_s }
+        it { is_expected.not_to include other_record.id.to_s }
+      end
+
+      context 'not equal operator' do
+        let(:filter_key) { 'customer_not_eq' }
+        let(:filter_value) { true }
+        let!(:suitable_record) { create :vendor }
+        let!(:other_record) { create :customer }
+
+        before { subject_request }
+
+        it { is_expected.to include suitable_record.id.to_s }
+        it { is_expected.not_to include other_record.id.to_s }
+      end
+    end
+
+    describe 'filter by "vendor" field' do
+      include_context :ransack_filter_setup
+      context 'equal operator' do
+        let(:filter_key) { 'vendor_eq' }
+        let(:filter_value) { false }
+        let!(:suitable_record) { create :customer }
+        let!(:other_record) { create :vendor }
+
+        before { subject_request }
+
+        it { is_expected.to include suitable_record.id.to_s }
+        it { is_expected.not_to include other_record.id.to_s }
+      end
+
+      context 'not equal operator' do
+        let(:filter_key) { 'vendor_not_eq' }
+        let(:filter_value) { false }
+        let!(:suitable_record) { create :vendor }
+        let!(:other_record) { create :customer }
+
+        before { subject_request }
+
+        it { is_expected.to include suitable_record.id.to_s }
+        it { is_expected.not_to include other_record.id.to_s }
+      end
+    end
+  end
+
   describe 'GET show' do
     let!(:contractor) { create :contractor, vendor: true }
 
