@@ -55,4 +55,32 @@ RSpec.describe RansackFilterBuilder do
     subject { builder.filter_name }
     it { is_expected.to eq "#{attr}_eq" }
   end
+
+  describe '#suffixes_for_type' do
+    subject { described_class.suffixes_for_type(type) }
+
+    context 'supprted type' do
+      let(:type) { :string }
+      it { is_expected.to eq %w[eq not_eq cont start end in not_in cont_any] }
+    end
+
+    context 'not supported type' do
+      let(:type) { :other }
+      it { is_expected.to be_nil }
+    end
+  end
+
+  describe '#type_supported?' do
+    subject { described_class.type_supported?(type) }
+
+    context 'supprted type' do
+      let(:type) { :string }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'not supported type' do
+      let(:type) { :other }
+      it { is_expected.to be_falsy }
+    end
+  end
 end
