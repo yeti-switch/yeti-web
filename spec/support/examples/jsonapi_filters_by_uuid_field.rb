@@ -30,7 +30,7 @@ RSpec.shared_examples :jsonapi_filters_by_uuid_field do |attr_name|
 
     context 'in operator' do
       let(:filter_key) { "#{attr_name}_in" }
-      let(:filter_value) { [suitable_record.reload.try(attr_name), SecureRandom.uuid].join(',')}
+      let(:filter_value) { [suitable_record.reload.try(attr_name), SecureRandom.uuid].join(',') }
       let!(:suitable_record) { create_record }
       let!(:other_record) { create_record }
 
@@ -42,7 +42,7 @@ RSpec.shared_examples :jsonapi_filters_by_uuid_field do |attr_name|
 
     context 'not_in operator' do
       let(:filter_key) { "#{attr_name}_not_in" }
-      let(:filter_value) { [other_record.reload.try(attr_name), SecureRandom.uuid].join(',')}
+      let(:filter_value) { [other_record.reload.try(attr_name), SecureRandom.uuid].join(',') }
       let!(:suitable_record) { create_record }
       let!(:other_record) { create_record }
 
