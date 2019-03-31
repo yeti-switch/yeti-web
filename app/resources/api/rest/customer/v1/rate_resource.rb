@@ -5,6 +5,7 @@ class Api::Rest::Customer::V1::RateResource < BaseResource
 
   key_type :uuid
   primary_key :uuid
+  paginator :paged
 
   attributes :prefix,
              :initial_rate,

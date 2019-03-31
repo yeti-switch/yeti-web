@@ -22,8 +22,9 @@ describe Api::Rest::Customer::V1::CdrsController, type: :request do
 
     context 'account_ids is empty' do
       let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
+      let(:records_qty) { 2 }
 
-      before { create_list(:cdr, 2, customer_acc: account) }
+      before { create_list(:cdr, records_qty, customer_acc: account) }
 
       it 'returns records of this customer' do
         subject
@@ -34,6 +35,10 @@ describe Api::Rest::Customer::V1::CdrsController, type: :request do
             hash_including(id: cdrs[1].uuid)
           ]
         )
+      end
+
+      it_behaves_like :json_api_check_pagination do
+        let(:records_ids) { cdrs.order(time_start: :desc).map(&:uuid) }
       end
     end
 
