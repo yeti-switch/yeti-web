@@ -39,7 +39,9 @@ module ResourceDSL
         csv_options: { col_sep: ',', row_sep: nil, quote_char: nil }
       )
 
-      options[:back] = proc { config.namespace.resource_for(options[:resource_class]).route_collection_path }
+      options[:back] = proc do
+        active_admin_config.namespace.resource_for(options[:resource_class]).route_collection_path
+      end
 
       options[:before_batch_import] = lambda do |importer|
         columns = options[:resource_class].column_names
