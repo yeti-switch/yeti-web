@@ -14,7 +14,9 @@ module ResourceDSL
       scope :for_create
       scope :for_update
 
-      redirect_proc = proc { config.namespace.resource_for(config.resource_class.import_class).route_collection_path }
+      redirect_proc = proc do
+        active_admin_config.namespace.resource_for(config.resource_class.import_class).route_collection_path
+      end
 
       acts_as_import_resource_class = config.resource_class
 
