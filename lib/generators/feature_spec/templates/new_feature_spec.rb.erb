@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+require 'spec_helper'
+
+describe 'Create new <%= resource_name_singular_cap %>', type: :feature, js: true do
+  include_context :login_as_admin
+
+  before do
+    visit new_<%= resource_name_singular %>_path
+  end
+end
