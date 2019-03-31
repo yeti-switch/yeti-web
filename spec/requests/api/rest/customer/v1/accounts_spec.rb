@@ -12,12 +12,18 @@ describe Api::Rest::Customer::V1::AccountsController, type: :request do
 
   describe 'GET /api/rest/customer/v1/accounts' do
     subject do
-      get json_api_request_path, params: nil, headers: json_api_request_headers
+      get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers
     end
 
-    let!(:accounts) { create_list :account, 2, contractor: customer }
+    let(:json_api_request_query) { nil }
+    let(:records_qty) { 2 }
+    let!(:accounts) { create_list :account, records_qty, contractor: customer }
 
     it_behaves_like :json_api_check_authorization
+
+    it_behaves_like :json_api_check_pagination do
+      let(:records_ids) { accounts.map { |r| r.reload.uuid } }
+    end
 
     context 'account_ids is empty' do
       it 'returns records of this customer' do

@@ -9,8 +9,10 @@ describe Api::Rest::Customer::V1::RateplansController, type: :request do
 
   describe 'GET /api/rest/customer/v1/rateplans' do
     subject do
-      get json_api_request_path, params: nil, headers: json_api_request_headers
+      get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers
     end
+
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :json_api_check_authorization
 
@@ -35,16 +37,17 @@ describe Api::Rest::Customer::V1::RateplansController, type: :request do
         create_list(:rateplan, 1)
       end
 
-      let(:rateplans) { create_list(:rateplan, 2) }
+      before { create_list(:rateplan, 2) }
 
-      let(:customers_auths) { create_list(:customers_auth, 2, customer_id: customer.id) }
-
-      let(:accounts) { create_list :account, 4, contractor: customer }
-      let(:allowed_accounts) { accounts.slice(0, 2) }
+      let(:records_qty) { 2 }
+      let!(:customers_auths) { create_list(:customers_auth, records_qty, customer_id: customer.id) }
+      let!(:accounts) { create_list :account, records_qty + 2, contractor: customer }
+      let(:allowed_accounts) { accounts.slice(0, records_qty) }
 
       before do
-        customers_auths.first.update!(account_id: accounts.first.id)
-        customers_auths.second.update!(account_id: accounts.second.id)
+        customers_auths.map.with_index do |customer_auth, index|
+          customer_auth.update!(account_id: accounts[index].id)
+        end
         api_access.update!(account_ids: allowed_accounts.map(&:id))
       end
 
@@ -56,6 +59,11 @@ describe Api::Rest::Customer::V1::RateplansController, type: :request do
             hash_including(id: CustomersAuth.find_by(account_id: allowed_accounts.second).rateplan.uuid)
           ]
         )
+      end
+
+      it_behaves_like :json_api_check_pagination do
+        let(:json_api_request_query) { { sort: 'name' } }
+        let(:records_ids) { customers_auths.map { |r| r.rateplan.reload }.sort_by(&:name).map(&:uuid) }
       end
     end
   end

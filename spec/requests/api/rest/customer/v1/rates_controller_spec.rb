@@ -19,14 +19,21 @@ describe Api::Rest::Customer::V1::RatesController, type: :request do
 
   describe 'GET /api/rest/customer/v1/rates' do
     subject do
-      get json_api_request_path, params: nil, headers: json_api_request_headers
+      get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers
     end
+
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :json_api_check_authorization
 
     context 'account_ids is empty', :with_rateplan_with_customer do
       before { create_list(:rate, 2) }
-      let!(:rates) { create_list(:rate, 2, rateplan: customer.rateplans.first) }
+      let(:records_qty) { 2 }
+      let!(:rates) { create_list(:rate, records_qty, rateplan: customer.rateplans.first) }
+
+      it_behaves_like :json_api_check_pagination do
+        let(:records_ids) { rates.map { |r| r.reload.uuid } }
+      end
 
       it 'returns records of this customer' do
         subject

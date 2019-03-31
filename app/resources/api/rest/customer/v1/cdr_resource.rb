@@ -5,6 +5,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
 
   key_type :uuid
   primary_key :uuid
+  paginator :paged
 
   def self.default_sort
     [{ field: 'time_start', direction: :desc }]

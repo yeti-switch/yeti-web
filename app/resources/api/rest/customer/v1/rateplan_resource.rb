@@ -5,6 +5,7 @@ class Api::Rest::Customer::V1::RateplanResource < BaseResource
 
   key_type :uuid
   primary_key :uuid
+  paginator :paged
 
   attributes :name
 
