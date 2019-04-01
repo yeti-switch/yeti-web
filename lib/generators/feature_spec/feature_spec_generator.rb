@@ -4,6 +4,21 @@ require 'rails/generators'
 require_relative '../concerns/with_create_template'
 
 class FeatureSpecGenerator < Rails::Generators::Base
+  # Generates feature specs for active admin forms.
+  # Currently only create form test.
+  # Usage:
+  #
+  #   $ rails g feature_spec equipment/registration
+  #
+  # will create spec/features/equipment/registrations/new_registration_spec.rb
+  # with initial template for testing form for Equipment::Registration
+  #
+  #   $ rails g feature_spec equipment/radius_auth_profile Equipment::Radius::AuthProfile
+  #
+  # will create spec/features/equipment/radius_auth_profiles/new_radius_auth_profile_spec.rb
+  # with initial template for testing form for Equipment::Radius::AuthProfile
+  #
+
   include WithCreateTemplate
 
   ALLOWED_ONLY = [
@@ -14,6 +29,7 @@ class FeatureSpecGenerator < Rails::Generators::Base
 
   source_root File.expand_path('templates', __dir__)
   argument :full_resource_name, type: :string, desc: 'section_name/resource_name'
+  argument :resource_class_name, type: :string, desc: 'resource_class', optional: true
   class_option :only, type: :string, default: 'create', desc: "only actions (#{ALLOWED_ONLY.join(',')}), all by default."
 
   def validate
@@ -56,5 +72,13 @@ class FeatureSpecGenerator < Rails::Generators::Base
 
   def resource_name_singular_cap
     resource_name.singularize.humanize.split(' ').map(&:capitalize).join(' ')
+  end
+
+  def model_class_name
+    resource_class_name || full_resource_name.classify
+  end
+
+  def model_name_human
+    model_class_name.split('::').last.underscore.humanize
   end
 end

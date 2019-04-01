@@ -84,6 +84,9 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include RspecRequestHelper, type: :request
+  config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
+  config.include Helpers::ActiveAdminForms::Examples, type: :feature
+  config.include FeatureTestHelper, type: :feature
 
   config.before(:suite) do
     DatabaseCleaner.clean_with :truncation
