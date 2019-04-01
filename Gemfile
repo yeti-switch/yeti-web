@@ -6,14 +6,14 @@ source 'https://rubygems.org'
 gem 'activemodel-serializers-xml'
 gem 'pg'
 gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails-5-2'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 5.2.3'
 gem 'responders'
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'activeldap'
 gem 'd3-rails', '3.5.2'
-gem 'devise'
+gem 'devise', '>= 4.6.0'
 gem 'devise_ldap_authenticatable', git: 'https://github.com/cschiewek/devise_ldap_authenticatable'
 gem 'net-ldap', '~> 0.16.0'
 
@@ -86,6 +86,7 @@ group :development, :test do
   gem 'byebug'
   gem 'thin'
 
+  gem 'bundler-audit', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails', '4.8.0'
   gem 'rspec-rails'

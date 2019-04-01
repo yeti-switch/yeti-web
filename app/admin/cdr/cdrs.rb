@@ -73,7 +73,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :status, as: :select, collection: proc { [['FAILURE', false], ['SUCCESS', true]] }
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
-  filter :dump_level, as: :select, collection: DumpLevel.select(%i[id name]).reorder(:id)
+  filter :dump_level, as: :select, collection: proc { DumpLevel.select(%i[id name]).reorder(:id) }
 
   filter :orig_gw, collection: proc { Gateway.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
   filter :term_gw, collection: proc { Gateway.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }

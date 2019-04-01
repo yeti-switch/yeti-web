@@ -211,7 +211,7 @@ ActiveAdmin.register CustomersAuth do
   filter :gateway, input_html: { class: 'chosen' }
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }
-  filter :dump_level, as: :select, collection: DumpLevel.select(%i[id name]).reorder(:id)
+  filter :dump_level, as: :select, collection: proc { DumpLevel.select(%i[id name]).reorder(:id) }
   filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
   filter :transport_protocol
   filter :ip_covers,
