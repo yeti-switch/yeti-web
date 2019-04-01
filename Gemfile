@@ -13,7 +13,7 @@ gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 # Authentication
 gem 'activeldap'
 gem 'd3-rails', '3.5.2'
-gem 'devise'
+gem 'devise', '>= 4.6.0'
 gem 'devise_ldap_authenticatable', git: 'https://github.com/cschiewek/devise_ldap_authenticatable'
 gem 'net-ldap', '~> 0.16.0'
 
