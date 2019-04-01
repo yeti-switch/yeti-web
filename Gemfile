@@ -86,6 +86,7 @@ group :development, :test do
   gem 'byebug'
   gem 'thin'
 
+  gem 'bundler-audit', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails', '4.8.0'
   gem 'rspec-rails'
