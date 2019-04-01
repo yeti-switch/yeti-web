@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gem 'activemodel-serializers-xml'
 gem 'pg'
 gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails-5-2'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 5.2.3'
 gem 'responders'
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
