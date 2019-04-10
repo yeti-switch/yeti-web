@@ -116,18 +116,22 @@ module PgPartitioningMixin
     #   [2018-05-01, 2018-05-06],
     #   [2018-06-01, 2018-07-06],
     #   [2018-07-01, 2018-08-06],
+    #   [2018-08-01, 2018-09-06],
+    #   [2018-09-01, 2018-10-06]
     # ]
     # # OR
     # [
     #   [2018-06-24, 2018-06-25],
     #   [2018-06-25, 2018-06-26],
     #   [2018-06-26, 2018-06-27],
+    #   [2018-06-27, 2018-06-28],
+    #   [2018-06-28, 2018-06-29]
     # ]
     #
-    def time_slices(max_slices = 3)
+    def time_slices(max_slices = 5)
       today = Date.today
       starting_point = partition_range == :day ?
-        today - 1.day : today.beginning_of_month - 1.month
+        today - 2.day : today.beginning_of_month - 2.month
       (1..max_slices).map do |i|
         [starting_point + (i - 1).send(partition_range),
          starting_point + i.send(partition_range)]
