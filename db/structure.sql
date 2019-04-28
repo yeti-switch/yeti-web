@@ -28572,7 +28572,7 @@ CREATE FUNCTION switch17.route(i_node_id integer, i_pop_id integer, i_protocol_i
         end if;
 
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.id::varchar||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
@@ -29651,7 +29651,7 @@ CREATE FUNCTION switch17.route_debug(i_node_id integer, i_pop_id integer, i_prot
         end if;
 
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.id::varchar||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
@@ -30702,7 +30702,7 @@ CREATE FUNCTION switch17.route_release(i_node_id integer, i_pop_id integer, i_pr
         end if;
 
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.id::varchar||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
@@ -40236,8 +40236,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -40286,6 +40285,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190318173242'),
 ('20190324161035'),
 ('20190326070548'),
-('20190327134613');
+('20190327134613'),
+('20190428191918');
 
 
