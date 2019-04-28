@@ -36,6 +36,7 @@
 
 //= require vendor/highlight.pack
 //= require highlightjs
+//= require index_js_table
 
 
 $(document).ready(function () {

@@ -551,39 +551,26 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
   end
 
-  index do
-    column :id do |cdr|
-      if cdr.dump_level_id > 0
-        link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
-      else
-        link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details')
-      end
-    end
-
+  index as: :js_table do
+    column :id, type: :html_string, &:id_link
     column :time_start
     column :time_connect
     column :time_end
 
-    column(:duration, sortable: 'duration', class: 'seconds') do |cdr|
+    column :duration, sortable: 'duration', class: 'seconds' do |cdr|
       "#{cdr.duration} sec."
     end
-    column('LegA DC', sortable: 'lega_disconnect_code') do |cdr|
-      status_tag(cdr.lega_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.lega_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
-    end
-    column('LegA Reason', sortable: 'lega_disconnect_reason', &:lega_disconnect_reason)
-    column('DC', sortable: 'internal_disconnect_code') do |cdr|
-      status_tag(cdr.internal_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.internal_disconnect_code == 0) || cdr.internal_disconnect_code.nil?
-    end
-    column('Reason', sortable: 'internal_disconnect_reason', &:internal_disconnect_reason)
-    column('LegB DC', sortable: 'legb_disconnect_code') do |cdr|
-      status_tag(cdr.legb_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
-    end
-    column('LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason)
+    column 'LegA DC', sortable: 'lega_disconnect_code', type: :badge, &:lega_disconnect_code_badge
+    column 'LegA Reason', sortable: 'lega_disconnect_reason', &:lega_disconnect_reason
+    column 'DC', sortable: 'internal_disconnect_code', type: :badge, &:internal_disconnect_code_badge
+    column 'Reason', sortable: 'internal_disconnect_reason', &:internal_disconnect_reason
+    column 'LegB DC', sortable: 'legb_disconnect_code', type: :badge, &:legb_disconnect_code
+    column 'LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason
     column :disconnect_initiator do |cdr|
       "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
     end
-    column :routing_attempt do |cdr|
-      status_tag(cdr.routing_attempt.to_s, class: cdr.is_last_cdr? ? :ok : nil)
+    column :routing_attempt, type: :badge do |cdr|
+      { label: cdr.routing_attempt.to_s, class: (cdr.is_last_cdr? ? :ok : nil) }
     end
 
     # column :routing_attempt
@@ -620,17 +607,17 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :customer_auth
     column :orig_gw
 
-    column('LegA remote socket', sortable: 'sign_orig_ip') do |cdr|
+    column 'LegA remote socket', sortable: 'sign_orig_ip' do |cdr|
       if cdr.sign_orig_transport_protocol_id.nil?
         "#{cdr.sign_orig_ip}:#{cdr.sign_orig_port}".chomp(':')
       else
         "#{cdr.sign_orig_transport_protocol.name}://#{cdr.sign_orig_ip}:#{cdr.sign_orig_port}".chomp(':')
       end
     end
-    column('LegA local socket', sortable: 'sign_orig_local_ip') do |cdr|
+    column 'LegA local socket', sortable: 'sign_orig_local_ip' do |cdr|
       "#{cdr.sign_orig_local_ip}:#{cdr.sign_orig_local_port}".chomp(':')
     end
-    column('LegA originator address', sotrable: 'auth_orig_ip') do |cdr|
+    column 'LegA originator address', sotrable: 'auth_orig_ip' do |cdr|
       if cdr.auth_orig_transport_protocol_id.nil?
         "#{cdr.auth_orig_ip}:#{cdr.auth_orig_port}".chomp(':')
       else
@@ -638,14 +625,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       end
     end
     column :term_gw
-    column('LegB remote socket', sortable: :sign_term_ip) do |cdr|
+    column 'LegB remote socket', sortable: :sign_term_ip do |cdr|
       if cdr.sign_term_transport_protocol_id.nil?
         "#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(':')
       else
         "#{cdr.sign_term_transport_protocol.name}://#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(':')
       end
     end
-    column('LegB local socket', sortable: 'sign_term_local_ip') do |cdr|
+    column 'LegB local socket', sortable: 'sign_term_local_ip' do |cdr|
       "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(':')
     end
     column :is_redirected
@@ -653,8 +640,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :pdd
     column :rtt
     column :early_media_present
-    column('Status', sortable: 'success') do |cdr|
-      status_tag(cdr.status_sym.to_s, cdr.status_sym, class: cdr.success? ? :ok : nil)
+    column 'Status', sortable: 'success', type: :badge do |cdr|
+      { label: cdr.status_sym, class: (cdr.success? ? :ok : nil) }
     end
     column :rateplan
     column :destination
