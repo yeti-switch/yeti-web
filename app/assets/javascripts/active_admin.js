@@ -46,6 +46,7 @@ $(document).ready(function () {
 
 
     $('.index_as_table .index_table').stickyTableHeaders();
+    $('.index_as_js_table .index_table').stickyTableHeaders();
     $(document).on('has_many_add:after', function (e, fieldset) {
         fieldset.find('select.chosen').chosen({no_results_text: "No results matched", width: '240px', search_contains: true});
     });
