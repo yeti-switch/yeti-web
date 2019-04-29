@@ -114,9 +114,9 @@ module ActiveAdmin
 
       def js_table_for
         yield(self)
-        payload = table_data_payload
-        schema = table_schema_payload
-        config = table_config_payload
+        payload = Oj.dump(table_data_payload, mode: :compat)
+        schema = Oj.dump(table_schema_payload, mode: :compat)
+        config = Oj.dump(table_config_payload, mode: :compat)
         opts = { 'data-payload': payload, 'data-schema': schema, 'data-config': config, **@table_html_options }
         table(opts) do
           thead do
@@ -208,11 +208,11 @@ module ActiveAdmin
           showTitle: I18n.t('active_admin.view'),
           editTitle: I18n.t('active_admin.edit'),
           destroyTitle: I18n.t('active_admin.delete')
-        }.to_json
+        }
       end
 
       def table_schema_payload
-        @columns_data.map(&:schema).to_json
+        @columns_data.map(&:schema)
       end
 
       def table_data_payload
@@ -221,7 +221,7 @@ module ActiveAdmin
             id: record.id,
             columns: @columns_data.map { |col| col.value_for(record) }
           }
-        end.to_json
+        end
       end
 
       def build_table_header(col)
