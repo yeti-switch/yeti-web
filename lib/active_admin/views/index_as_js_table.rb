@@ -45,11 +45,18 @@ module ActiveAdmin
         end
 
         def value_for(record)
-          value = column_proc ? h.execute_block(record, &column_proc) : record.public_send(meth)
-          value = value.strftime('%F %T') if value.is_a?(Time)
-          value = value.strftime('%F') if value.is_a?(Date)
-          value = resource_link(value) if value.is_a?(ActiveRecord::Base)
-          value
+          return h.execute_block(record, &column_proc) if column_proc
+
+          value = record.public_send(meth)
+          if value.is_a?(Time)
+            value.strftime('%F %T')
+          elsif value.is_a?(Date)
+            value.strftime('%F')
+          elsif value.is_a?(ActiveRecord::Base)
+            resource_link(value)
+          else
+            value
+          end
         end
 
         def schema
