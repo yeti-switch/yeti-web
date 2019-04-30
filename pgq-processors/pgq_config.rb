@@ -14,7 +14,7 @@ class PgqConfig
   end
 
   def config
-    @config ||= YAML.safe_load(File.read(config_file))[section]
+    @config ||= YAML.safe_load(File.read(config_file), [Symbol])[section]
     if @config.blank?
       raise "Invalid configuration file #{config_file} or section #{section} is not exists."
     end
