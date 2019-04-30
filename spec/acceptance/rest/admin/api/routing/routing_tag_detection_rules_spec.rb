@@ -23,7 +23,9 @@ resource 'Routing RoutingTagDetectionRules' do
   required_relationships = %i[]
   optional_relationships = %i[src-area dst-area tag-action routing-tag-modes]
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tag-detection-rules'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'routing-tag-detection-rules',
+                                          resource: Api::Rest::Admin::Routing::RoutingTagDetectionRuleResource
   include_context :acceptance_delete, namespace: 'routing', type: 'routing-tag-detection-rules'
 
   post '/api/rest/admin/routing/routing-tag-detection-rules' do

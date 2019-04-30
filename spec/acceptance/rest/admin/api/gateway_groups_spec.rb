@@ -15,6 +15,8 @@ resource 'Gateway groups' do
   get '/api/rest/admin/gateway-groups' do
     before { create_list(:gateway_group, 2) }
 
+    jsonapi_filters Api::Rest::Admin::GatewayGroupResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

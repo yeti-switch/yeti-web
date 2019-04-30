@@ -114,6 +114,8 @@ RspecApiDocumentation.configure do |config|
   config.docs_dir = Rails.root.join('doc', 'api', 'admin')
   config.api_name = 'Admin API'
 
+  config.format = %i[slate open_api]
+
   config.define_group :customer_v1 do |c|
     c.exclusion_filter = :admin # must be overriden to anything
     c.filter = :customer_v1

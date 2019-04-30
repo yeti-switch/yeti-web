@@ -13,9 +13,10 @@ resource 'Sortings' do
   let(:type) { 'sortings' }
 
   get '/api/rest/admin/sortings' do
-    before do
-      Sorting.create(name: 'name')
-    end
+    before { Sorting.create(name: 'name') }
+
+    jsonapi_filters Api::Rest::Admin::SortingResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

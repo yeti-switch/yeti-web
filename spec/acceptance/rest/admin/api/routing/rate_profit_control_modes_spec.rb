@@ -13,6 +13,7 @@ resource 'Rate profit control modes' do
   let(:type) { 'rate-profit-control-modes' }
 
   get '/api/rest/admin/routing/rate-profit-control-modes' do
+    jsonapi_filters Api::Rest::Admin::Routing::RateProfitControlModeResource
     example_request 'get listing' do
       expect(status).to eq(200)
     end

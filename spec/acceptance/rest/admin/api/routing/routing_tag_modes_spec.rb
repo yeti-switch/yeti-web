@@ -9,5 +9,7 @@ resource 'Routing RoutingTagMode' do
   let(:collection) { Routing::RoutingTagMode.all }
   let(:record) { Routing::RoutingTagMode.take }
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tag-modes'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'routing-tag-modes',
+                                          resource: Api::Rest::Admin::Routing::RoutingTagModeResource
 end

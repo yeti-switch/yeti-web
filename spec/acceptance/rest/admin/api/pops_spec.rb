@@ -13,9 +13,10 @@ resource 'Pops' do
   let(:type) { 'pops' }
 
   get '/api/rest/admin/pops' do
-    before do
-      Pop.create(name: 'first')
-    end
+    before { Pop.create(name: 'first') }
+
+    jsonapi_filters Api::Rest::Admin::PopResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

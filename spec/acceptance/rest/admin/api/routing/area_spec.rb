@@ -9,5 +9,7 @@ resource 'Routing Area' do
   let(:collection) { create_list(:area, 2) }
   let(:record) { collection.first }
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'areas'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'areas',
+                                          resource: Api::Rest::Admin::Routing::AreaResource
 end

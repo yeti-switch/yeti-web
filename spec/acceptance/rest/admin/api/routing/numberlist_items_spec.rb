@@ -24,7 +24,9 @@ resource 'Routing NumberlistItems' do
     tag-action
   ]
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'numberlist-items'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'numberlist-items',
+                                          resource: Api::Rest::Admin::Routing::NumberlistItemResource
   include_context :acceptance_delete, namespace: 'routing', type: 'numberlist-items'
 
   post '/api/rest/admin/routing/numberlist-items' do

@@ -13,6 +13,8 @@ resource 'Sdp c locations' do
   let(:type) { 'sdp-c-locations' }
 
   get '/api/rest/admin/sdp-c-locations' do
+    jsonapi_filters Api::Rest::Admin::SdpCLocationResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

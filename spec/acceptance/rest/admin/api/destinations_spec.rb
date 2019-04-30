@@ -27,6 +27,8 @@ resource 'Destinations' do
   get '/api/rest/admin/destinations' do
     before { create_list(:destination, 2) }
 
+    jsonapi_filters Api::Rest::Admin::CodecGroupResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

@@ -15,6 +15,8 @@ resource 'Payments' do
   get '/api/rest/admin/payments' do
     before { create_list(:payment, 2) }
 
+    jsonapi_filters Api::Rest::Admin::PaymentResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

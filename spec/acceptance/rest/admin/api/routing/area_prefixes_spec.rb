@@ -15,7 +15,9 @@ resource 'Routing AreaPrefix' do
   required_relationships = %i[area]
   optional_relationships = %i[]
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'area-prefixes'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'area-prefixes',
+                                          resource: Api::Rest::Admin::Routing::AreaPrefixResource
   include_context :acceptance_delete, namespace: 'routing', type: 'area-prefixes'
 
   post '/api/rest/admin/routing/area-prefixes' do

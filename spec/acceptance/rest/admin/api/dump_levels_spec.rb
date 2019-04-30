@@ -13,6 +13,8 @@ resource 'Dump levels' do
   let(:type) { 'dump-levels' }
 
   get '/api/rest/admin/dump-levels' do
+    jsonapi_filters Api::Rest::Admin::DumpLevelResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

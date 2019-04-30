@@ -9,5 +9,7 @@ resource 'Routing TagAction' do
   let(:collection) { Routing::TagAction.all }
   let(:record) { Routing::TagAction.take  }
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'tag-actions'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'tag-actions',
+                                          resource: Api::Rest::Admin::Routing::TagActionResource
 end

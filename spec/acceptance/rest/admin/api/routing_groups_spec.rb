@@ -15,6 +15,8 @@ resource 'Routing groups' do
   get '/api/rest/admin/routing-groups' do
     before { create_list(:routing_group, 2) }
 
+    jsonapi_filters Api::Rest::Admin::RoutingGroupResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

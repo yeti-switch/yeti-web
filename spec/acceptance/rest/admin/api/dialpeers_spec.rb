@@ -29,6 +29,8 @@ resource 'Dialpeers' do
   get '/api/rest/admin/dialpeers' do
     before { create_list(:dialpeer, 2) }
 
+    jsonapi_filters Api::Rest::Admin::DialpeerResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end
