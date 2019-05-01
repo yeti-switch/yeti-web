@@ -291,7 +291,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :rtt
           column :early_media_present
           column('Status') do |cdr|
-            status_tag(cdr.status_sym.to_s, cdr.status_sym, class: cdr.success? ? :ok : nil)
+            status_tag(cdr.status_sym, class: cdr.success? ? :ok : nil)
           end
           column :rateplan
           column :destination
@@ -383,7 +383,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :time_end
           row :duration
           row :status do
-            status_tag(cdr.status_sym.to_s, cdr.status_sym, class: cdr.success? ? :ok : nil)
+            status_tag(cdr.status_sym, class: cdr.success? ? :ok : nil)
           end
           row :disconnect_initiator do
             "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"

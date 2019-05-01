@@ -48,7 +48,7 @@ jobs:
         - RAILS_ENV=test bundle exec rake db:seed
         - bundle exec rubocop -P
         - bundle exec rake bundle:audit
-        - bundle exec rspec
+        - bundle exec rspec --format doc
 
     - stage: test
       script:

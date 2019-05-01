@@ -94,8 +94,11 @@ describe System::Sensor do
                              target_mac: target_mac)
         end
 
-        it 'rise error' do
-          expect { subject }.to raise_error
+        it 'raise error' do
+          expect { subject }.to raise_error(
+            ActiveRecord::RecordInvalid,
+            'Validation failed: Name has already been taken'
+          )
         end
       end
     end
