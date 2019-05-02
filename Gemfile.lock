@@ -39,16 +39,6 @@ GIT
     active_admin_date_range_preset (0.3.1)
 
 GIT
-  remote: https://github.com/yeti-switch/jrpc.git
-  revision: ddb9bf39395b6be2ca14cab461cb9f5f9d715221
-  ref: ddb9bf3
-  specs:
-    jrpc (1.0.1)
-      net_tcp_client (~> 2.0)
-      netstring (~> 0)
-      oj (~> 2.0)
-
-GIT
   remote: https://github.com/yeti-switch/nvd3-community-rails.git
   revision: 34afaba76846debbfcb7b17528d02834c2723cc2
   specs:
@@ -322,6 +312,9 @@ GEM
       railties (>= 3.2, < 6)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jrpc (1.1.6)
+      netstring (~> 0)
+      oj (~> 3.0)
     json (2.1.0)
     jsonapi-resources (0.9.1.beta1)
       activerecord (>= 4.1)
@@ -366,12 +359,11 @@ GEM
     multi_test (0.1.2)
     mustache (1.0.5)
     net-ldap (0.16.1)
-    net_tcp_client (2.0.1)
     netstring (0.0.3)
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
-    oj (2.18.5)
+    oj (3.7.12)
     orm_adapter (0.5.0)
     paper_trail (9.0.0)
       activerecord (>= 4.2, < 5.3)
@@ -586,12 +578,13 @@ DEPENDENCIES
   jquery-rails
   jquery-tablesorter
   jquery-ui-rails
-  jrpc!
+  jrpc (= 1.1.6)
   jsonapi-resources (= 0.9.1.beta1)
   knock!
   net-ldap (~> 0.16.0)
   novus-nvd3-rails!
   odf-report!
+  oj (~> 3.0)
   paper_trail
   parallel
   pg

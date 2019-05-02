@@ -139,7 +139,7 @@ ActiveAdmin.register Gateway do
     render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
   end
 
-  index do
+  index as: :js_table do
     selectable_column
     id_column
     actions
@@ -147,7 +147,7 @@ ActiveAdmin.register Gateway do
     column :enabled
     column :locked
 
-    column :contractor do |c|
+    column :contractor, type: :html do |c|
       auto_link(c.contractor, c.contractor.decorated_display_name)
     end
     column :is_shared

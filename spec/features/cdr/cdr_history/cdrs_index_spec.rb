@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'CDRs index', type: :feature do
+describe 'CDRs index', type: :feature, js: true do
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 
@@ -25,6 +25,7 @@ describe 'CDRs index', type: :feature do
 
   before do
     visit cdrs_path
+    wait_index_js_table_render
   end
 
   it_behaves_like :test_page_has_routing_tag_names do
