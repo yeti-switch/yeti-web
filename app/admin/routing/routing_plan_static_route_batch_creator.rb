@@ -12,6 +12,8 @@ ActiveAdmin.register Routing::RoutingPlanStaticRouteBatchCreator do
     end
   end
 
+  permit_params :routing_plan, :network, :prefixes, :priority, :weight, vendors: []
+
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Create batch' do

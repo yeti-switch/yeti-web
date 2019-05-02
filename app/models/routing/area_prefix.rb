@@ -18,6 +18,7 @@ class Routing::AreaPrefix < Yeti::ActiveRecord
 
   validates_uniqueness_of :prefix
   validates_format_of :prefix, without: /\s/
+  validates :area, presence: true
 
   def display_name
     "#{prefix} | #{id}"

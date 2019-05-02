@@ -6,7 +6,7 @@ ActiveAdmin.register System::Sensor do
   config.batch_actions = false
 
   permit_params :name, :mode_id, :source_interface, :target_mac, :source_ip,
-                :target_ip, :target_port, :hep_capture_id
+                :target_ip, :target_port, :hep_capture_id, :hep_target_ip
 
   controller do
     def scoped_collection
@@ -18,6 +18,14 @@ ActiveAdmin.register System::Sensor do
     rescue ActiveRecord::ActiveRecordError => e
       flash[:error] = e.message
       redirect_back fallback_location: root_path
+    end
+
+    def build_resource_params
+      result = super
+      attrs = result.first
+      attrs.delete('hep_target_ip') if attrs['target_ip'].present? && attrs['hep_target_ip'].blank?
+      attrs['target_ip'] = attrs.delete('hep_target_ip') if attrs['hep_target_ip'].present? && attrs['target_ip'].blank?
+      [attrs]
     end
   end
 
@@ -66,7 +74,7 @@ ActiveAdmin.register System::Sensor do
       # f.input :use_routing
       f.input :source_ip, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP }
       f.input :target_ip, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::IP_IP }
-      f.input :target_ip, as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
+      f.input :hep_target_ip, label: 'Target ip', as: :string, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
       f.input :target_port, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
       f.input :hep_capture_id, input_html: { 'data-depend_selector' => '#system_sensor_mode_id', 'data-depend_value' => System::SensorMode::HEPv3 }
     end
