@@ -21,8 +21,8 @@ Capybara.default_driver = :rack_test
 Capybara.javascript_driver = :headless_chrome
 
 RSpec.configure do |config|
-  config.after(type: :feature) do
-    if Capybara.javascript_driver == :headless_chrome
+  config.after(type: :feature, js: true) do
+    if Capybara.current_driver == :headless_chrome
       STDERR.puts page.driver.browser.manage.logs.get(:browser)
     end
   end
