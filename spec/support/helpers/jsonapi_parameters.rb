@@ -15,7 +15,7 @@ module Helpers
       'start' => 'start',
       'end' => 'end',
       'cont any' => 'contain any'
-    }
+    }.freeze
     def jsonapi_attributes(required, optional)
       required.each { |e| jsonapi_attribute(e, required: true) }
       optional.each { |e| jsonapi_attribute(e) }
