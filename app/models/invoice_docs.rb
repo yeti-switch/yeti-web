@@ -154,7 +154,7 @@ class InvoiceDocs
     end.generate(odf_path) # New ODFReport constructor return data, not a file name
 
     # generate pdf
-    Open3.popen3("HOME=/home/yeti-web /usr/bin/unoconv -f pdf #{Shellwords.escape(odf_path)}") do |_stdin, _stdout, _stderr, wait_thr|
+    Open3.popen3("HOME=/opt/yeti-web /usr/bin/unoconv -f pdf #{Shellwords.escape(odf_path)}") do |_stdin, _stdout, _stderr, wait_thr|
       wait_thr.value # Process::Status object returned.
     end
 

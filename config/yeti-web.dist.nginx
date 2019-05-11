@@ -12,7 +12,7 @@ upstream yeti-unicorn {
 #server {
 #        listen 80;
 #        server_name localhost;
-#        root /home/yeti-web;
+#        root /opt/yeti-web;
 #        access_log /var/log/nginx/yeti-web.access.log;
 #        location / {
 #                rewrite ^/(.*) https://localhost$request_uri? permanent;
@@ -131,7 +131,7 @@ server {
                 deny all;
         }
         location /assets {
-                root /home/yeti-web/public;
+                root /opt/yeti-web/public;
                 expires 5h;
         }
 	location /swagger {
@@ -139,15 +139,15 @@ server {
 	}
 
         location /doc {
-                root /home/yeti-web;
+                root /opt/yeti-web;
         	try_files $uri $uri/index.html /doc/index.html;
 	}
 
         location /images {
-                root /home/yeti-web/public;
+                root /opt/yeti-web/public;
                 expires 5h;
         }
-        root /home/yeti-web/public;
+        root /opt/yeti-web/public;
 	
 	location /api/ {
 		        deny all;

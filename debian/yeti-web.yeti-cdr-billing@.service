@@ -2,7 +2,7 @@
 Description=YETI CDR billing: %i
 Documentation=https://yeti-switch.org/docs/
 
-ConditionPathExists=/home/yeti-web/config/pgq_processors.yml
+ConditionPathExists=/opt/yeti-web/config/pgq_processors.yml
 
 [Install]
 WantedBy=multi-user.target
@@ -16,12 +16,12 @@ LimitCORE=infinity
 Environment=RAILS_ENV=production
 Environment=RACK_ENV=production
 Environment=RAKE_ENV=production
-Environment=BUNDLE_GEMFILE=/home/yeti-web/pgq-processors/Gemfile
-Environment=GEM_PATH=/home/yeti-web/pgq-processors/vendor/bundler
+Environment=BUNDLE_GEMFILE=/opt/yeti-web/pgq-processors/Gemfile
+Environment=GEM_PATH=/opt/yeti-web/pgq-processors/vendor/bundler
 
-WorkingDirectory=/home/yeti-web/pgq-processors
+WorkingDirectory=/opt/yeti-web/pgq-processors
 RuntimeDirectory=yeti-cdr-billing
-ExecStart=/usr/bin/ruby /home/yeti-web/pgq-processors/vendor/bundler/bin/bundle exec rake pgq:worker processor=%i pid_file=/run/yeti-cdr-billing/%i.pid config_file=/home/yeti-web/config/pgq_processors.yml
+ExecStart=/usr/bin/ruby /opt/yeti-web/pgq-processors/vendor/bundler/bin/bundle exec rake pgq:worker processor=%i pid_file=/run/yeti-cdr-billing/%i.pid config_file=/opt/yeti-web/config/pgq_processors.yml
 PIDFile=/run/yeti-cdr-billing/%i.pid
 
 Type=simple
