@@ -3,17 +3,17 @@
 workers 2
 threads 2, 8
 
-# directory '/opt/yeti-web'
-# daemonize
+directory '/opt/yeti-web'
+daemonize
 
-# bind '/run/yeti/yeti-unicorn.sock'
+bind '/run/yeti/yeti-unicorn.sock'
 
 worker_timeout 1200
 
-# pidfile '/run/yeti/yeti-web-puma.pid'
-# state_path '/run/yeti/yeti-web-puma.state'
+pidfile '/run/yeti/yeti-web-puma.pid'
+state_path '/run/yeti/yeti-web-puma.state'
 
-# stdout_redirect '/opt/yeti-web/log/puma.stdout.log', '/opt/yeti-web/log/puma.stderr.log', true
+stdout_redirect '/opt/yeti-web/log/puma.stdout.log', '/opt/yeti-web/log/puma.stderr.log', true
 
 preload_app!
 

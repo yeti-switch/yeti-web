@@ -72,10 +72,10 @@ gem 'uglifier', '>= 1.3'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'odf-report', git: 'https://github.com/yeti-switch/odf-report.git', branch: 'master-2018'
-gem 'syslog-logger'
-gem 'zip-zip'
 gem 'puma'
 gem 'puma_worker_killer'
+gem 'syslog-logger'
+gem 'zip-zip'
 
 group :development do
   gem 'annotate'
