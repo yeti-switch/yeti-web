@@ -12,7 +12,7 @@ ENV LANG en_US.UTF-8
 RUN wget http://pkg.yeti-switch.org/key.gpg -O - | apt-key add - && echo "deb http://pkg.yeti-switch.org/debian/stretch unstable main ext" >> /etc/apt/sources.list
 RUN wget --no-check-certificate https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add - && echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" >> /etc/apt/sources.list
 
-RUN apt-get update && apt-get -y install --no-install-recommends postgresql-11 postgresql-contrib-11 postgresql-11-prefix postgresql-11-pgq3 postgresql-11-pgq-ext postgresql-11-yeti
+RUN apt-get update && apt-get -y install --no-install-recommends postgresql-11 postgresql-contrib-11 postgresql-11-prefix postgresql-11-pgq3 postgresql-11-pgq-ext postgresql-11-pllua postgresql-11-yeti
 
 RUN echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/11/main/pg_hba.conf
 
