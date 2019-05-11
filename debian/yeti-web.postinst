@@ -6,7 +6,7 @@ services="yeti-web.service yeti-delayed-job.service"
 case "$1" in 
 	configure)
 		#apply files permissions for new user
-		chown -R $user:$user /home/$user
+		chown -R $user:$user /opt/$user
 
 		if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
 			deb-systemd-invoke restart rsyslog.service >/dev/null || true
@@ -30,12 +30,12 @@ case "$1" in
 			systemctl enable yeti-cdr-billing@cdr_billing
 		fi
 
-		if [ ! -f /home/yeti-web/config/pgq_processors.yml ]; then
-			cp -p /home/yeti-web/config/pgq_processors.yml.distr /home/yeti-web/config/pgq_processors.yml
+		if [ ! -f /opt/yeti-web/config/pgq_processors.yml ]; then
+			cp -p /opt/yeti-web/config/pgq_processors.yml.distr /opt/yeti-web/config/pgq_processors.yml
 		fi
 
-                if [ ! -f /home/yeti-web/config/yeti_web.yml ]; then
-                        cp -p /home/yeti-web/config/yeti_web.yml.distr /home/yeti-web/config/yeti_web.yml
+                if [ ! -f /opt/yeti-web/config/yeti_web.yml ]; then
+                        cp -p /opt/yeti-web/config/yeti_web.yml.distr /opt/yeti-web/config/yeti_web.yml
                 fi
 		
 		#remove old init scripts

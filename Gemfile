@@ -73,8 +73,9 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'odf-report', git: 'https://github.com/yeti-switch/odf-report.git', branch: 'master-2018'
 gem 'syslog-logger'
-gem 'unicorn'
 gem 'zip-zip'
+gem 'puma'
+gem 'puma_worker_killer'
 
 group :development do
   gem 'annotate'
@@ -96,7 +97,6 @@ group :development, :test do
 end
 
 gem 'apitome', '~> 0.1.0'
-gem 'unicorn-worker-killer'
 
 group :test do
   gem 'capybara'
