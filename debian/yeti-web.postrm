@@ -14,7 +14,8 @@ case "$1" in
 			deluser --quiet --remove-home $user &>/dev/null || true
 		fi
 
-		rm -rf /home/$user || true
+		rm -rf /home/$user || true  ##rm old version home
+		rm -rf /opt/$user || true
 
 		if [ -x /usr/bin/deb-systemd-helper ]; then
 			deb-systemd-helper purge ${services} >/dev/null
