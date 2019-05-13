@@ -9,6 +9,7 @@ RSpec.describe Jobs::Invoice do
     end
 
     let(:monthly_invoice_period) { Billing::InvoicePeriod.find(Billing::InvoicePeriod::MONTHLY_ID) }
+    let!(:vendor) { FactoryGirl.create(:vendor) }
     let(:job_execution_time) { Time.parse('2019-05-01 05:30:06') }
 
     context 'account was created at 2019-04-03' do
@@ -16,26 +17,25 @@ RSpec.describe Jobs::Invoice do
 
       let!(:account) do
         travel_to(account_creation_time) do
-          vendor = FactoryGirl.create(:vendor)
           FactoryGirl.create(:account, contractor: vendor, vendor_invoice_period: monthly_invoice_period)
         end
       end
       # before { expect(account).to have_attributes(next_vendor_invoice_at: Time.parse('2019-05-01 00:00:00')) }
 
-      it 'creates invoice with correct attributes', :sync_delayed_jobs do
-        expect { subject }.to change { Billing::Invoice.count }.by(1)
-        invoice = Billing::Invoice.last!
-        expect(invoice).to have_attributes(
-          start_date: Time.parse('2019-04-01 00:00:00'),
-          end_date: Time.parse('2019-05-01 00:00:00'),
-          type_id: Billing::InvoiceType::AUTO_FULL
-        )
+      it 'enqueues Worker::GenerateInvoiceJob' do
+        expect { subject }.to have_enqueued_job(Worker::GenerateInvoiceJob).with(
+          account_id: account.id,
+          start_date: '2019-04-01 00:00:00 UTC',
+          end_date: '2019-05-01 00:00:00 UTC',
+          invoice_type_id: Billing::InvoiceType::AUTO_FULL,
+          is_vendor: true
+        ).once
       end
 
       it 'moves account.next_customer_invoice_at to correct datetime' do
         subject
         expect(account.reload).to have_attributes(
-          next_vendor_invoice_at: Time.parse('2019-06-01 00:00:00')
+          next_vendor_invoice_at: Time.parse('2019-06-01 00:00:00 UTC')
         )
       end
     end

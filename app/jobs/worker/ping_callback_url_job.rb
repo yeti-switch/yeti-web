@@ -3,7 +3,7 @@
 require 'net/http'
 
 module Worker
-  class PingCallbackUrlJob < ActiveJob::Base
+  class PingCallbackUrlJob < ::ApplicationJob
     class TryAgainError < RuntimeError
     end
 
