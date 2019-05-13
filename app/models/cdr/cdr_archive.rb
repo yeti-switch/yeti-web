@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 # == Schema Information
 #
-# Table name: cdr.cdr
+# Table name: cdr.cdr_archive
 #
-#  id                              :integer          not null
+#  id                              :integer          primary key
 #  customer_id                     :integer
 #  vendor_id                       :integer
 #  customer_acc_id                 :integer
@@ -32,7 +32,7 @@
 #  dst_prefix_out                  :string
 #  src_prefix_in                   :string
 #  src_prefix_out                  :string
-#  time_start                      :datetime         not null
+#  time_start                      :datetime
 #  time_connect                    :datetime
 #  time_end                        :datetime
 #  sign_orig_ip                    :string
@@ -71,7 +71,7 @@
 #  legb_tx_payloads                :string
 #  legb_disconnect_code            :integer
 #  legb_disconnect_reason          :string
-#  dump_level_id                   :integer          default(0), not null
+#  dump_level_id                   :integer
 #  auth_orig_ip                    :inet
 #  auth_orig_port                  :integer
 #  lega_rx_bytes                   :integer
@@ -141,49 +141,9 @@
 #  customer_duration               :integer
 #  vendor_duration                 :integer
 #  customer_auth_name              :string
-#  legb_local_tag                  :string
 #  legb_ruri                       :string
 #
 
-class Report::Realtime::BadRouting < Report::Realtime::Base
-  attr_accessor :l
-
-  scope :detailed_scope, lambda { |length|
-    l = length.to_i
-    select("
-      customer_id,
-      customer_auth_id,
-      rateplan_id,
-      routing_plan_id,
-      internal_disconnect_code,
-      internal_disconnect_reason,
-      count(id) as calls_count
-    ").where(
-      'customer_auth_id is not null AND disconnect_initiator_id=0'
-    ).group(
-      :customer_id,
-      :customer_auth_id,
-      :rateplan_id,
-      :routing_plan_id,
-      :internal_disconnect_code,
-      :internal_disconnect_reason
-    ).preload(
-      :customer,
-      :customer_auth,
-      :rateplan,
-      :routing_plan
-    )
-  }
-
-  scope :time_interval_eq, lambda { |value|
-    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2 * value.to_i, value.to_i)
-  }
-
-  private
-
-  def self.ransackable_scopes(_auth_object = nil)
-    [
-      :time_interval_eq
-    ]
-  end
+class Cdr::CdrArchive < Cdr::Cdr
+  self.table_name = 'cdr.cdr_archive'
 end

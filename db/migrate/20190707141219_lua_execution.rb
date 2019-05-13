@@ -12,6 +12,8 @@ class LuaExecution < ActiveRecord::Migration[5.2]
       alter table class4.numberlists add lua_script_id smallint references sys.lua_scripts(id);
       alter table class4.gateways add lua_script_id smallint references sys.lua_scripts(id);
 
+      alter table class4.gateways add use_registered_aor boolean not null default false;
+
       CREATE EXTENSION pllua;
 
       CREATE TYPE switch17.lua_call_context as (
@@ -111,7 +113,9 @@ class LuaExecution < ActiveRecord::Migration[5.2]
       alter table class4.customers_auth drop column lua_script_id;
       alter table class4.numberlist_items drop column lua_script_id;
       alter table class4.numberlists drop column lua_script_id;
-      alter table class4.gateways drop column lua_script_id;
+      alter table class4.gateways
+        drop column lua_script_id,
+        drop column use_registered_aor;
 
     }
   end

@@ -6447,7 +6447,8 @@ CREATE TABLE class4.gateways (
     preserve_anonymous_from_domain boolean DEFAULT false NOT NULL,
     termination_src_numberlist_id smallint,
     termination_dst_numberlist_id smallint,
-    lua_script_id smallint
+    lua_script_id smallint,
+    use_registered_aor boolean DEFAULT false NOT NULL
 );
 
 

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: cdr.cdr
@@ -143,6 +142,7 @@
 #  vendor_duration                 :integer
 #  customer_auth_name              :string
 #  legb_local_tag                  :string
+#  legb_ruri                       :string
 #
 
 class Report::Realtime::OriginationPerformance < Report::Realtime::Base

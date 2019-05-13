@@ -58,6 +58,7 @@ ActiveAdmin.register Gateway do
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
                  :host,
                  :port,
+                 :use_registered_aor,
                  [:network_protocol_priority_name, proc { |row| row.network_protocol_priority.try(:name) }],
                  :resolve_ruri,
                  [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) }],
@@ -159,7 +160,7 @@ ActiveAdmin.register Gateway do
 
     column :transport_protocol
     column :host, sortable: 'host' do |gw|
-      "#{gw.host}:#{gw.port}".chomp(':')
+      gw.use_registered_aor? ? status_tag("Dynamic AOR",class: :ok) : "#{gw.host}:#{gw.port}".chomp(':')
     end
     column :network_protocol_priority
 
@@ -375,6 +376,8 @@ ActiveAdmin.register Gateway do
               f.input :transit_headers_from_origination
               f.input :transit_headers_from_termination
               f.input :sip_interface_name
+              f.input :incoming_auth_username
+              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }
             end
 
             f.inputs 'Origination' do
@@ -387,9 +390,6 @@ ActiveAdmin.register Gateway do
               f.input :transparent_dialog_id
               f.input :dialog_nat_handling
               f.input :orig_disconnect_policy
-
-              f.input :incoming_auth_username
-              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }
             end
           end
           column do
@@ -398,6 +398,7 @@ ActiveAdmin.register Gateway do
               f.input :sip_schema, as: :select, include_blank: false
               f.input :host
               f.input :port
+              f.input :use_registered_aor
               f.input :network_protocol_priority, as: :select, include_blank: false
               f.input :resolve_ruri
               f.input :preserve_anonymous_from_domain
@@ -567,6 +568,7 @@ ActiveAdmin.register Gateway do
             row :sip_schema
             row :host
             row :port
+            row :use_registered_aor
             row :network_protocol_priority
             row :resolve_ruri
             row :preserve_anonymous_from_domain
