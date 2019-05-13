@@ -6446,7 +6446,8 @@ CREATE TABLE class4.gateways (
     media_encryption_mode_id smallint DEFAULT 0 NOT NULL,
     preserve_anonymous_from_domain boolean DEFAULT false NOT NULL,
     termination_src_numberlist_id smallint,
-    termination_dst_numberlist_id smallint
+    termination_dst_numberlist_id smallint,
+    lua_script_id smallint
 );
 
 
@@ -32089,6 +32090,7 @@ CREATE TABLE class4.numberlist_items (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     number_min_length smallint DEFAULT 0 NOT NULL,
     number_max_length smallint DEFAULT 100 NOT NULL,
+    lua_script_id smallint,
     CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
     CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
@@ -32129,7 +32131,8 @@ CREATE TABLE class4.numberlists (
     default_dst_rewrite_rule character varying,
     default_dst_rewrite_result character varying,
     tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    lua_script_id smallint
 );
 
 
@@ -32297,6 +32300,7 @@ CREATE TABLE class4.customers_auth (
     reject_calls boolean DEFAULT false NOT NULL,
     src_number_max_length smallint DEFAULT 100 NOT NULL,
     src_number_min_length smallint DEFAULT 0 NOT NULL,
+    lua_script_id smallint,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -36224,7 +36228,7 @@ ALTER SEQUENCE sys.load_balancers_id_seq OWNED BY sys.load_balancers.id;
 --
 
 CREATE TABLE sys.lua_scripts (
-    id integer NOT NULL,
+    id smallint NOT NULL,
     name character varying NOT NULL,
     source character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -39561,6 +39565,14 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
+-- Name: customers_auth customers_auth_lua_script_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth
+    ADD CONSTRAINT customers_auth_lua_script_id_fkey FOREIGN KEY (lua_script_id) REFERENCES sys.lua_scripts(id);
+
+
+--
 -- Name: customers_auth_normalized customers_auth_normalized_customers_auth_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -39825,6 +39837,14 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways gateways_lua_script_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_lua_script_id_fkey FOREIGN KEY (lua_script_id) REFERENCES sys.lua_scripts(id);
+
+
+--
 -- Name: gateways gateways_media_encryption_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -39985,6 +40005,14 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
+-- Name: numberlist_items numberlist_items_lua_script_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.numberlist_items
+    ADD CONSTRAINT numberlist_items_lua_script_id_fkey FOREIGN KEY (lua_script_id) REFERENCES sys.lua_scripts(id);
+
+
+--
 -- Name: numberlist_items numberlist_items_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -39998,6 +40026,14 @@ ALTER TABLE ONLY class4.numberlist_items
 
 ALTER TABLE ONLY class4.numberlists
     ADD CONSTRAINT numberlists_default_action_id_fkey FOREIGN KEY (default_action_id) REFERENCES class4.numberlist_actions(id);
+
+
+--
+-- Name: numberlists numberlists_lua_script_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.numberlists
+    ADD CONSTRAINT numberlists_lua_script_id_fkey FOREIGN KEY (lua_script_id) REFERENCES sys.lua_scripts(id);
 
 
 --

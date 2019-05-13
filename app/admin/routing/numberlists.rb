@@ -17,7 +17,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                            default_src_rewrite_rule: 'text',
                            default_src_rewrite_result: 'text',
                            default_dst_rewrite_rule: 'text',
-                           default_dst_rewrite_result: 'text'
+                           default_dst_rewrite_result: 'text',
+                           lua_script_id: System::LuaScript.pluck(:name, :id)
                          }
                        end)
 
@@ -30,17 +31,18 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                  :default_dst_rewrite_rule, :default_dst_rewrite_result,
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
+                 [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  :created_at, :updated_at
 
   acts_as_import resource_class: Importing::Numberlist,
                  skip_columns: [:tag_action_value]
 
-  includes :mode, :default_action
+  includes :mode, :default_action, :lua_script
 
   permit_params :name, :mode_id, :default_action_id,
                 :default_src_rewrite_rule, :default_src_rewrite_result,
                 :default_dst_rewrite_rule, :default_dst_rewrite_result,
-                :tag_action_id, tag_action_value: []
+                :tag_action_id,:lua_script_id, tag_action_value: []
   controller do
     def update
       if params['routing_numberlist']['tag_action_value'].nil?
@@ -61,10 +63,11 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :default_src_rewrite_result
     column :default_dst_rewrite_rule
     column :default_dst_rewrite_result
-    column :created_at
-    column :updated_at
+    column :lua_script
     column :tag_action
     column :display_tag_action_value
+    column :created_at
+    column :updated_at
   end
 
   show do |_s|
@@ -77,10 +80,11 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :default_src_rewrite_result
       row :default_dst_rewrite_rule
       row :default_dst_rewrite_result
-      row :created_at
-      row :updated_at
+      row :lua_script
       row :tag_action
       row :display_tag_action_value
+      row :created_at
+      row :updated_at
     end
   end
 
@@ -93,7 +97,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       f.input :default_src_rewrite_result
       f.input :default_dst_rewrite_rule
       f.input :default_dst_rewrite_result
-
+      f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
       f.input :tag_action
       f.input :tag_action_value, as: :select,
                                  collection: Routing::RoutingTag.all,
@@ -108,4 +112,6 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :name
   filter :mode
   filter :default_action
+  filter :lua_script, input_html: { class: 'chosen' }
+
 end

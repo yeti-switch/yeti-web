@@ -23,23 +23,26 @@ ActiveAdmin.register Routing::NumberlistItem do
                  :dst_rewrite_result,
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
-                 :created_at, :updated_at
+                 [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
+                 :created_at,
+                 :updated_at
 
   acts_as_import resource_class: Importing::NumberlistItem,
                  skip_columns: [:tag_action_value]
 
-  includes :numberlist, :action
+  includes :numberlist, :action, :lua_script
 
   permit_params :numberlist_id,
                 :key, :number_min_length, :number_max_length,
                 :action_id,
                 :src_rewrite_rule, :src_rewrite_result,
                 :dst_rewrite_rule, :dst_rewrite_result,
-                :tag_action_id, tag_action_value: []
+                :tag_action_id, :lua_script_id, tag_action_value: []
 
   filter :id
   filter :numberlist, input_html: { class: 'chosen' }
   filter :key
+  filter :lua_script, input_html: { class: 'chosen' }
 
   controller do
     def update
@@ -66,10 +69,11 @@ ActiveAdmin.register Routing::NumberlistItem do
     column :src_rewrite_result
     column :dst_rewrite_rule
     column :dst_rewrite_result
-    column :created_at
-    column :updated_at
     column :tag_action
     column :display_tag_action_value
+    column :lua_script
+    column :created_at
+    column :updated_at
   end
 
   show do |_s|
@@ -84,10 +88,11 @@ ActiveAdmin.register Routing::NumberlistItem do
       row :src_rewrite_result
       row :dst_rewrite_rule
       row :dst_rewrite_result
-      row :created_at
-      row :updated_at
       row :tag_action
       row :display_tag_action_value
+      row :lua_script
+      row :created_at
+      row :updated_at
     end
   end
 
@@ -109,6 +114,7 @@ ActiveAdmin.register Routing::NumberlistItem do
                                  multiple: true,
                                  include_hidden: false,
                                  input_html: { class: 'chosen' }
+      f.input :lua_script, as: :select, input_html: { class: 'chosen' }, include_blank: 'None'
     end
     f.actions
   end

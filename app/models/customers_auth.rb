@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: class4.customers_auth
@@ -53,6 +52,7 @@
 #  reject_calls                     :boolean          default(FALSE), not null
 #  src_number_max_length            :integer          default(100), not null
 #  src_number_min_length            :integer          default(0), not null
+#  lua_script_id                    :integer
 #
 
 class CustomersAuth < Yeti::ActiveRecord
@@ -86,6 +86,7 @@ class CustomersAuth < Yeti::ActiveRecord
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
 
   belongs_to :tag_action, class_name: 'Routing::TagAction'
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 

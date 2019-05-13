@@ -65,6 +65,7 @@ ActiveAdmin.register Gateway do
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
+                 [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  :auth_enabled, :auth_user, :auth_password, :auth_from_user, :auth_from_domain,
                  :incoming_auth_username, :incoming_auth_password,
                  :term_use_outbound_proxy, :term_force_outbound_proxy,
@@ -114,7 +115,7 @@ ActiveAdmin.register Gateway do
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode, :sip_schema,
-           :termination_src_numberlist, :termination_dst_numberlist
+           :termination_src_numberlist, :termination_dst_numberlist, :lua_script
 
   controller do
     def resource_params
@@ -263,6 +264,8 @@ ActiveAdmin.register Gateway do
     column :src_rewrite_result
     column :dst_rewrite_rule
     column :dst_rewrite_result
+    column :lua_script
+
     # MEDIA
     column :sdp_c_location
     column :codec_group
@@ -311,6 +314,7 @@ ActiveAdmin.register Gateway do
   filter :statistic_acd, as: :numeric
   filter :external_id
   filter :radius_accounting_profile, input_html: { class: 'chosen' }
+  filter :lua_script, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -440,6 +444,7 @@ ActiveAdmin.register Gateway do
           f.input :src_rewrite_result
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
+          f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
         end
       end
       tab :media do
@@ -607,6 +612,7 @@ ActiveAdmin.register Gateway do
           row :src_rewrite_result
           row :dst_rewrite_rule
           row :dst_rewrite_result
+          row :lua_script
         end
       end
 

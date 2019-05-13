@@ -28,7 +28,8 @@ ActiveAdmin.register CustomersAuth do
                            src_numberlist_id: Routing::Numberlist.pluck(:name, :id),
                            dump_level_id: DumpLevel.pluck(:name, :id),
                            rateplan_id: Rateplan.pluck(:name, :id),
-                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id)
+                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id),
+                           lua_script_id: System::LuaScript.pluck(:name, :id)
                          }
                        end)
 
@@ -65,6 +66,7 @@ ActiveAdmin.register CustomersAuth do
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
+                 [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  [:radius_auth_profile_name, proc { |row| row.radius_auth_profile.try(:name) || '' }],
                  :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
                  :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
@@ -94,11 +96,12 @@ ActiveAdmin.register CustomersAuth do
                 :radius_accounting_profile_id,
                 :enable_audio_recording,
                 :transport_protocol_id,
-                :tag_action_id, tag_action_value: []
+                :tag_action_id, :lua_script_id, tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
-           :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol, account: :contractor
+           :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
+           :lua_script, account: :contractor
 
   controller do
     def update
@@ -189,6 +192,7 @@ ActiveAdmin.register CustomersAuth do
 
     column :dst_rewrite_rule
     column :dst_rewrite_result
+    column :lua_script
 
     column :radius_auth_profile, sortable: 'radius_auth_profiles.name'
     column :src_number_radius_rewrite_rule
@@ -225,6 +229,7 @@ ActiveAdmin.register CustomersAuth do
   filter :from_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.from_domain')
   filter :to_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.to_domain')
   filter :x_yeti_auth_array_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
+  filter :lua_script, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -294,6 +299,7 @@ ActiveAdmin.register CustomersAuth do
 
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
+          f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
         end
       end
 
@@ -385,6 +391,7 @@ ActiveAdmin.register CustomersAuth do
           row :src_rewrite_result
           row :dst_rewrite_rule
           row :dst_rewrite_result
+          row :lua_script
         end
       end
       tab :radius do
