@@ -32380,6 +32380,7 @@ CREATE TABLE class4.customers_auth_normalized (
     reject_calls boolean DEFAULT false NOT NULL,
     src_number_max_length smallint DEFAULT 100 NOT NULL,
     src_number_min_length smallint DEFAULT 0 NOT NULL,
+    lua_script_id smallint,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -33967,7 +33968,9 @@ CREATE TABLE data_import.import_customers_auth (
     dst_number_max_length integer,
     reject_calls boolean,
     src_number_max_length smallint,
-    src_number_min_length smallint
+    src_number_min_length smallint,
+    lua_script_id smallint,
+    lua_script_name character varying
 );
 
 
@@ -34326,7 +34329,10 @@ CREATE TABLE data_import.import_gateways (
     termination_src_numberlist_id smallint,
     termination_src_numberlist_name character varying,
     termination_dst_numberlist_id smallint,
-    termination_dst_numberlist_name character varying
+    termination_dst_numberlist_name character varying,
+    lua_script_id smallint,
+    lua_script_name character varying,
+    use_registered_aor boolean
 );
 
 
@@ -34383,7 +34389,9 @@ CREATE TABLE data_import.import_numberlist_items (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     tag_action_value_names character varying,
     number_min_length smallint,
-    number_max_length smallint
+    number_max_length smallint,
+    lua_script_id smallint,
+    lua_script_name character varying
 );
 
 
@@ -34426,7 +34434,9 @@ CREATE TABLE data_import.import_numberlists (
     tag_action_id integer,
     tag_action_name character varying,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    tag_action_value_names character varying
+    tag_action_value_names character varying,
+    lua_script_id smallint,
+    lua_script_name character varying
 );
 
 

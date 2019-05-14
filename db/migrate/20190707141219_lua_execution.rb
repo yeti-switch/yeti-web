@@ -8,11 +8,29 @@ class LuaExecution < ActiveRecord::Migration[5.2]
       ALTER TABLE sys.lua_scripts ALTER COLUMN id TYPE smallint;
 
       alter table class4.customers_auth add lua_script_id smallint references sys.lua_scripts(id);
-      alter table class4.numberlist_items add lua_script_id smallint references sys.lua_scripts(id);
-      alter table class4.numberlists add lua_script_id smallint references sys.lua_scripts(id);
-      alter table class4.gateways add lua_script_id smallint references sys.lua_scripts(id);
+      alter table class4.customers_auth_normalized add lua_script_id smallint;
+      alter table data_import.import_customers_auth
+        add lua_script_id smallint,
+        add lua_script_name varchar;
 
-      alter table class4.gateways add use_registered_aor boolean not null default false;
+      alter table class4.numberlist_items add lua_script_id smallint references sys.lua_scripts(id);
+      alter table data_import.import_numberlist_items
+        add lua_script_id smallint,
+        add lua_script_name varchar;
+
+      alter table class4.numberlists add lua_script_id smallint references sys.lua_scripts(id);
+      alter table data_import.import_numberlists
+        add lua_script_id smallint,
+        add lua_script_name varchar;
+
+      alter table class4.gateways
+        add lua_script_id smallint references sys.lua_scripts(id),
+        add use_registered_aor boolean not null default false;
+
+      alter table data_import.import_gateways
+        add lua_script_id smallint,
+        add lua_script_name varchar,
+        add use_registered_aor boolean;
 
       CREATE EXTENSION pllua;
 
@@ -111,12 +129,28 @@ class LuaExecution < ActiveRecord::Migration[5.2]
       ALTER TABLE sys.lua_scripts ALTER COLUMN id TYPE integer;
 
       alter table class4.customers_auth drop column lua_script_id;
+      alter table class4.customers_auth_normalized drop column lua_script_id;
+      alter table data_import.import_customers_auth
+        drop column lua_script_id,
+        drop column lua_script_name;
+
       alter table class4.numberlist_items drop column lua_script_id;
+      alter table data_import.import_numberlist_items
+        drop column lua_script_id,
+        drop column lua_script_name;
+
       alter table class4.numberlists drop column lua_script_id;
+      alter table data_import.import_numberlists
+        drop column lua_script_id,
+        drop column lua_script_name;
+
       alter table class4.gateways
         drop column lua_script_id,
         drop column use_registered_aor;
-
+      alter table data_import.import_gateways
+        drop column lua_script_id,
+        drop column lua_script_name,
+        drop column use_registered_aor;
     }
   end
 

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: class4.customers_auth_normalized
@@ -54,6 +53,7 @@
 #  reject_calls                     :boolean          default(FALSE), not null
 #  src_number_max_length            :integer          default(100), not null
 #  src_number_min_length            :integer          default(0), not null
+#  lua_script_id                    :integer
 #
 
 class CustomersAuthNormalized < Yeti::ActiveRecord

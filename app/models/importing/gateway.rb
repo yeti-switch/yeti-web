@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: data_import.import_gateways
@@ -138,6 +137,9 @@
 #  termination_src_numberlist_name    :string
 #  termination_dst_numberlist_id      :integer
 #  termination_dst_numberlist_name    :string
+#  lua_script_id                      :integer
+#  lua_script_name                    :string
+#  use_registered_aor                 :boolean
 #
 
 class Importing::Gateway < Importing::Base
@@ -166,6 +168,7 @@ class Importing::Gateway < Importing::Base
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
   belongs_to :termination_dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
   belongs_to :termination_src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_src_numberlist_id
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
   self.import_attributes = %w[
     name enabled
@@ -223,6 +226,8 @@ class Importing::Gateway < Importing::Base
     preserve_anonymous_from_domain
     termination_dst_numberlist_id
     termination_src_numberlist_id
+    lua_script_id
+    use_registered_aor
   ]
 
   self.import_class = ::Gateway

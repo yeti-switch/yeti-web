@@ -17,7 +17,7 @@ ActiveAdmin.register Importing::CustomersAuth do
     end
 
     def scoped_collection
-      super.includes(:rateplan, :routing_plan, :gateway, :account, :customer, :diversion_policy, :dump_level)
+      super.includes(:rateplan, :routing_plan, :gateway, :account, :customer, :diversion_policy, :dump_level, :lua_script)
     end
   end
 
@@ -147,6 +147,7 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :src_rewrite_result
     column :dst_rewrite_rule
     column :dst_rewrite_result
+    column :lua_script
 
     column :radius_auth_profile, sortable: :radius_auth_profile_name do |row|
       if row.radius_auth_profile.blank?

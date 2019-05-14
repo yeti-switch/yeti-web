@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: data_import.import_customers_auth
@@ -73,6 +72,8 @@
 #  reject_calls                     :boolean
 #  src_number_max_length            :integer
 #  src_number_min_length            :integer
+#  lua_script_id                    :integer
+#  lua_script_name                  :string
 #
 
 class Importing::CustomersAuth < Importing::Base
@@ -94,6 +95,7 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :tag_action, class_name: 'Routing::TagAction'
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
   self.import_attributes = %w[
     enabled
@@ -139,6 +141,7 @@ class Importing::CustomersAuth < Importing::Base
     require_incoming_auth
     tag_action_id
     tag_action_value
+    lua_script_id
   ]
 
   self.import_class = ::CustomersAuth
