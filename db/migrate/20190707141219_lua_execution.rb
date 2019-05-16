@@ -5,6 +5,23 @@ class LuaExecution < ActiveRecord::Migration[5.2]
 
   execute %q{
 
+CREATE or replace FUNCTION switch17.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+    LANGUAGE plpgsql COST 10 ROWS 10
+    AS $$
+BEGIN
+  RETURN QUERY
+    SELECT
+      gw.id,
+      gw.incoming_auth_username,
+      gw.incoming_auth_password
+    from class4.gateways gw
+    where
+      gw.enabled and
+      gw.incoming_auth_username is not null and gw.incoming_auth_password is not null and
+      gw.incoming_auth_username !='' and gw.incoming_auth_password !='';
+END;
+$$;
+
       ALTER TABLE sys.lua_scripts ALTER COLUMN id TYPE smallint;
 
       alter table class4.customers_auth add lua_script_id smallint references sys.lua_scripts(id);
@@ -113,6 +130,15 @@ class LuaExecution < ActiveRecord::Migration[5.2]
 
   def down
     execute %q{
+
+
+CREATE or replace FUNCTION switch17.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+    LANGUAGE plpgsql COST 10 ROWS 10
+    AS $$
+BEGIN
+  RETURN QUERY SELECT gw.id, gw.incoming_auth_username, gw.incoming_auth_password from class4.gateways gw where gw.enabled and gw.incoming_auth_username is not null and gw.incoming_auth_password is not null;
+END;
+$$;
 
       drop FUNCTION switch17.lua_clear_cache();
 
