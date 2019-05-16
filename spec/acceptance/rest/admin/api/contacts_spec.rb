@@ -22,6 +22,8 @@ resource 'Contacts' do
   get '/api/rest/admin/contacts' do
     before { create_list(:contact, 2) }
 
+    jsonapi_filters Api::Rest::Admin::ContactResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

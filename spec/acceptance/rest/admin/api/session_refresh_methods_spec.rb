@@ -13,6 +13,8 @@ resource 'Session refresh methods' do
   let(:type) { 'session-refresh-methods' }
 
   get '/api/rest/admin/session-refresh-methods' do
+    jsonapi_filters Api::Rest::Admin::SessionRefreshMethodResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

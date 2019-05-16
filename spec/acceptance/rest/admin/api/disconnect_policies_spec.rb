@@ -15,6 +15,8 @@ resource 'Disconnect policies' do
   get '/api/rest/admin/disconnect-policies' do
     before { create_list(:disconnect_policy, 2) }
 
+    jsonapi_filters Api::Rest::Admin::DisconnectPolicyResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

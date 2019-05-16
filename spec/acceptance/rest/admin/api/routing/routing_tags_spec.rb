@@ -19,7 +19,9 @@ resource 'Routing RoutingTag' do
 
   optional_relationships = %i[]
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'routing-tags'
+  include_context :acceptance_index_show, namespace: 'routing',
+                                          type: 'routing-tags',
+                                          resource: Api::Rest::Admin::Routing::RoutingTagResource
   include_context :acceptance_delete, namespace: 'routing', type: 'routing-tags'
 
   post '/api/rest/admin/routing/routing-tags' do

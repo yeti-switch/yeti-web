@@ -19,6 +19,8 @@ resource 'Contractors' do
   get '/api/rest/admin/contractors' do
     before { create_list(:contractor, 2, vendor: true) }
 
+    jsonapi_filters Api::Rest::Admin::ContractorResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

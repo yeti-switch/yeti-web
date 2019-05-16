@@ -15,6 +15,8 @@ resource 'Codec groups' do
   get '/api/rest/admin/codec-groups' do
     before { create_list(:codec_group, 2) }
 
+    jsonapi_filters Api::Rest::Admin::CodecGroupResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

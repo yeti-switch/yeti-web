@@ -13,6 +13,8 @@ resource 'Destination rate policies' do
   let(:type) { 'destination-rate-policies' }
 
   get '/api/rest/admin/destination-rate-policies' do
+    jsonapi_filters Api::Rest::Admin::DestinationRatePolicyResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

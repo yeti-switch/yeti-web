@@ -15,6 +15,8 @@ resource 'Routing plans' do
   get '/api/rest/admin/routing-plans' do
     before { create_list(:routing_plan, 2) }
 
+    jsonapi_filters Api::Rest::Admin::RoutingPlanResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

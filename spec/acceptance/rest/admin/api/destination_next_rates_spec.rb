@@ -23,6 +23,8 @@ resource 'Destination next rates' do
   get '/api/rest/admin/destination-next-rates' do
     before { create_list(:destination_next_rate, 2, destination: destination) }
 
+    jsonapi_filters Api::Rest::Admin::DestinationNextRateResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

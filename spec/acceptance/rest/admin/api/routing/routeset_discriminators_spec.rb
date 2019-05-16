@@ -15,6 +15,8 @@ resource 'Routeset discriminators' do
   get '/api/rest/admin/routing/routeset-discriminators' do
     before { create_list(:routeset_discriminator, 2) }
 
+    jsonapi_filters Api::Rest::Admin::Routing::RoutesetDiscriminatorResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

@@ -23,6 +23,8 @@ resource 'Dialpeer next rates' do
   get '/api/rest/admin/dialpeer-next-rates' do
     before { create_list(:dialpeer_next_rate, 2, dialpeer: dialpeer) }
 
+    jsonapi_filters Api::Rest::Admin::DialpeerNextRateResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

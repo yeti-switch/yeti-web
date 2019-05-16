@@ -13,6 +13,8 @@ resource 'Filter types' do
   let(:type) { 'filter-types' }
 
   get '/api/rest/admin/filter-types' do
+    jsonapi_filters Api::Rest::Admin::FilterTypeResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

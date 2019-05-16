@@ -17,6 +17,8 @@ resource 'Rateplans' do
   get '/api/rest/admin/rateplans' do
     before { create_list(:rateplan, 2) }
 
+    jsonapi_filters Api::Rest::Admin::RateplanResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

@@ -41,6 +41,8 @@ resource 'Gateways' do
   get '/api/rest/admin/gateways' do
     before { create_list(:gateway, 2) }
 
+    jsonapi_filters Api::Rest::Admin::GatewayResource
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

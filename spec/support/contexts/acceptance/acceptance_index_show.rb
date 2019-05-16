@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_context :acceptance_index_show do |namespace: nil, type:|
+RSpec.shared_context :acceptance_index_show do |namespace: nil, type:, resource: nil|
   # let(:collection) { ModelClass.all }
   # let(:record) { ModelClass.take  }
 
@@ -14,6 +14,10 @@ RSpec.shared_context :acceptance_index_show do |namespace: nil, type:|
 
   get resource_path do
     before { collection }
+
+    if resource.present?
+      jsonapi_filters resource
+    end
 
     example_request 'get listing' do
       expect(status).to eq(200)
