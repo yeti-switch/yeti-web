@@ -50,9 +50,10 @@ module Yeti
         config.time_zone = 'UTC'
       end
     end
-    p "Timezone #{config.time_zone}"
 
-    config.active_record.default_timezone = :local
+    active_record_tz = ENV.fetch('YETI_PG_TZ', :utc).to_sym
+    config.active_record.default_timezone = active_record_tz
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
