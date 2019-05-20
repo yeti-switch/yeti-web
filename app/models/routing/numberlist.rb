@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.numberlists
@@ -30,7 +31,6 @@ class Routing::Numberlist < Yeti::ActiveRecord
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
   has_many :routing_numberlist_items, class_name: 'Routing::NumberlistItem', foreign_key: :numberlist_id, dependent: :delete_all
-
 
   validates_presence_of :mode, :name, :default_action
   validates_uniqueness_of :name

@@ -66,6 +66,7 @@ describe 'Export Gateways', type: :feature do
         ['Transport protocol name',            item.transport_protocol.name],
         ['Host',                               item.host],
         ['Port',                               item.port.to_s],
+        ['Use registered aor',                 item.use_registered_aor.to_s],
         ['Resolve ruri',                       item.resolve_ruri.to_s],
         ['Diversion policy name',              item.diversion_policy.name],
         ['Diversion rewrite rule',             item.diversion_rewrite_rule.to_s],

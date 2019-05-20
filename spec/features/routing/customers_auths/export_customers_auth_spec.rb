@@ -79,6 +79,7 @@ describe 'Export Customers Auth', type: :feature do
         ['Src rewrite result', item.src_rewrite_result.to_s, anything],
         ['Dst rewrite rule', item.dst_rewrite_rule.to_s, anything],
         ['Dst rewrite result', item.dst_rewrite_result.to_s, anything],
+        ['Lua script name', item.lua_script.name, anything],
         ['Radius auth profile name', item.radius_auth_profile.name, anything],
         ['Src number radius rewrite rule', item.src_number_radius_rewrite_rule.to_s, anything],
         ['Src number radius rewrite result', item.src_number_radius_rewrite_result.to_s, anything],

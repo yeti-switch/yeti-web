@@ -11,6 +11,7 @@ FactoryGirl.define do
     association :routing_plan
     association :gateway
     association :account
+    association :lua_script
 
     # ip { ['127.0.0.0/8'] } # default
     src_rewrite_rule nil

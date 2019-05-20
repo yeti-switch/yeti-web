@@ -160,7 +160,7 @@ ActiveAdmin.register Gateway do
 
     column :transport_protocol
     column :host, sortable: 'host' do |gw|
-      gw.use_registered_aor? ? status_tag("Dynamic AOR",class: :ok) : "#{gw.host}:#{gw.port}".chomp(':')
+      gw.use_registered_aor? ? status_tag('Dynamic AOR', class: :ok) : "#{gw.host}:#{gw.port}".chomp(':')
     end
     column :network_protocol_priority
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gateways
@@ -272,7 +273,7 @@ class Gateway < Yeti::ActiveRecord
   protected
 
   def allow_termination_can_be_enabled
-    if host.blank? && use_registered_aor==false && (allow_termination == true)
+    if host.blank? && use_registered_aor == false && (allow_termination == true)
       errors.add(:allow_termination, I18n.t('activerecord.errors.models.gateway.attributes.allow_termination.empty_host_for_termination'))
       errors.add(:host, I18n.t('activerecord.errors.models.gateway.attributes.host.empty_host_for_termination'))
       errors.add(:use_registered_aor, I18n.t('activerecord.errors.models.gateway.attributes.use_registered_aor.empty_host_for_termination'))

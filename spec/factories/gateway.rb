@@ -24,6 +24,7 @@ FactoryGirl.define do
     sip_schema_id 1
     host 'test.example.com'
     port nil
+    use_registered_aor true
     src_rewrite_rule nil
     dst_rewrite_rule nil
     auth_enabled false

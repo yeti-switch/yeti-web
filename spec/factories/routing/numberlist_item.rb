@@ -5,5 +5,6 @@ FactoryGirl.define do
     sequence(:key) { |n| "numberlist_item_#{n}" }
 
     association :numberlist
+    association :lua_script
   end
 end

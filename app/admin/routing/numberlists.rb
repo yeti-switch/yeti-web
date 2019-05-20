@@ -42,7 +42,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   permit_params :name, :mode_id, :default_action_id,
                 :default_src_rewrite_rule, :default_src_rewrite_result,
                 :default_dst_rewrite_rule, :default_dst_rewrite_result,
-                :tag_action_id,:lua_script_id, tag_action_value: []
+                :tag_action_id, :lua_script_id, tag_action_value: []
   controller do
     def update
       if params['routing_numberlist']['tag_action_value'].nil?
@@ -113,5 +113,4 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :mode
   filter :default_action
   filter :lua_script, input_html: { class: 'chosen' }
-
 end
