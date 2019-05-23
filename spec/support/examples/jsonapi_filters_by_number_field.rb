@@ -2,7 +2,7 @@
 
 RSpec.shared_examples :jsonapi_filters_by_number_field do |attr_name, options|
   describe "by #{attr_name}" do
-    include_context :ransack_filter_setup, options
+    include_context :ransack_filter_setup
 
     let(:greater_value) { options.try(:[], :max_value) || 2 }
     let(:smaller_value) { greater_value - 1 }

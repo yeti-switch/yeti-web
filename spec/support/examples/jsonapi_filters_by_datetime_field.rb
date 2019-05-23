@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name, opts|
+RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
   describe "by #{attr_name}" do
-    include_context :ransack_filter_setup, opts
+    include_context :ransack_filter_setup
 
     let(:greater_value) { Date.today }
     let(:smaller_value) { Date.yesterday }
