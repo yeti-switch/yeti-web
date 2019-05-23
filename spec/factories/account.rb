@@ -14,6 +14,7 @@ FactoryGirl.define do
     termination_capacity 2
     total_capacity 5
     timezone_id 1
+    uuid { SecureRandom.uuid }
 
     trait :with_max_balance do
       max_balance 1_000

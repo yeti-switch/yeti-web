@@ -54,8 +54,8 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
           :lega_disconnect_code, :lega_disconnect_reason, :src_prefix_in,
           :dst_prefix_in, :diversion_in, :src_name_in, :local_tag
 
-  ransack_filter :time_start_gteq
-  ransack_filter :time_start_lteq
+  # ransack_filter :time_start_gteq
+  # ransack_filter :time_start_lteq
 
   # TODO: move to BaseResource
   def self.records(options = {})
