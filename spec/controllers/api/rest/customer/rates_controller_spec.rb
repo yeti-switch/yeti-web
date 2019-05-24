@@ -6,7 +6,7 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
   let(:api_access) { create :api_access }
   let(:customer) { api_access.customer }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
-  let(:customers_auth) { create :customers_auth, { customer: customer } }
+  let(:customers_auth) { create :customers_auth, customer: customer }
 
   before do
     request.accept = 'application/vnd.api+json'

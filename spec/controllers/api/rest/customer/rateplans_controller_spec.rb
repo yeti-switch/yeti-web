@@ -13,9 +13,8 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
     request.headers['Authorization'] = auth_token
   end
 
-
   describe 'GET index' do
-    let!(:rateplans) { create_list :rateplan, 2, { contractor: customer } }
+    let!(:rateplans) { create_list :rateplan, 2, contractor: customer }
 
     before { get :index }
 

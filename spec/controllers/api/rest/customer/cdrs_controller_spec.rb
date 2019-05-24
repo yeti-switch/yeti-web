@@ -149,6 +149,4 @@ describe Api::Rest::Customer::V1::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :customer_duration
     it_behaves_like :jsonapi_filters_by_number_field, :vendor_duration
   end
-
-
 end
