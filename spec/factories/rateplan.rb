@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :rateplan, class: Rateplan do
     sequence(:name) { |n| "rateplan#{n}" }
+    uuid { SecureRandom.uuid }
 
     factory :rateplan_with_customer do
       after(:create) do |record|

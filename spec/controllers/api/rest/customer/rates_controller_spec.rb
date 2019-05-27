@@ -12,20 +12,21 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
     request.accept = 'application/vnd.api+json'
     request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
+
+    allow(Routing::Destination).to receive(:where_customer) { Routing::Destination.all }
   end
 
   describe 'GET index' do
-    let!(:cdrs) { create_list :destination, 2, contractor: customer, customers_auths: [customers_auth] }
+    let!(:rates) { create_list :destination, 2 }
 
     before { get :index }
 
     it { expect(response.status).to eq(200) }
-    it { expect(response_data.size).to eq(cdrs.size) }
+    it { expect(response_data.size).to eq(rates.size) }
   end
 
   describe 'GET index with ransack filters' do
     let(:factory) { :destination }
-    let(:factory_attrs) { { customers_auths: [customers_auth] } }
     let(:pk) { :uuid }
 
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
