@@ -15,7 +15,7 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
   end
 
   describe 'GET index' do
-    let!(:cdrs) { create_list :destination, 2, contractor: customer }
+    let!(:cdrs) { create_list :destination, 2, contractor: customer, customers_auths: [customers_auth] }
 
     before { get :index }
 
@@ -25,7 +25,7 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :destination }
-    let(:factory_attrs) { { customers_auth: customers_auth } }
+    let(:factory_attrs) { { customers_auths: [customers_auth] } }
     let(:pk) { :uuid }
 
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
