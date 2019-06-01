@@ -83,6 +83,12 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.filter_run :focus
+  config.run_all_when_everything_filtered = true
+  config.profile_examples = 10
+  config.order = :random
+  Kernel.srand config.seed
+
   config.include FactoryGirl::Syntax::Methods
   config.include RspecRequestHelper, type: :request
   config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
