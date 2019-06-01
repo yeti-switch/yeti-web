@@ -50,7 +50,7 @@ stages:
 jobs:
   include:
     - stage: test
-      env: ""
+      env: TEST_GROUP=""
       script:
         - bundle install --jobs=3 --retry=3 --deployment
         - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
@@ -70,7 +70,7 @@ jobs:
         - bundle exec parallel_test spec/ -n 8 --only-group $TEST_GROUP --group-by filesize --type rspec
 
     - stage: test
-      env: ""
+      env: TEST_GROUP=""
       script:
         - bundle install --jobs=3 --retry=3 --deployment
         - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
@@ -79,7 +79,7 @@ jobs:
         - bundle exec cucumber
 
     - stage: test
-      env: ""
+      env: TEST_GROUP=""
       script:
         - bundle install --jobs=3 --retry=3 --deployment
         - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
@@ -90,7 +90,7 @@ jobs:
 
     - stage: stable package
       if: branch != master OR tag =~ ^.*$
-      env: ""
+      env: TEST_GROUP=""
       script: &build_jessie
         - rm -vf config/database.yml
         - docker build -t yeti-web -f ./ci/build_jessie.Dockerfile .
@@ -106,7 +106,7 @@ jobs:
 
     - stage: stable package
       if: branch != master OR tag =~ ^.*$
-      env: ""
+      env: TEST_GROUP=""
       script: &build_stretch
         - rm -vf config/database.yml
         - docker build -t yeti-web -f ./ci/build_stretch.Dockerfile .
@@ -122,7 +122,7 @@ jobs:
 
     - stage: nightly package
       if: branch = master
-      env: ""
+      env: TEST_GROUP=""
       script: *build_jessie
       deploy:
         skip_cleanup: true
@@ -134,7 +134,7 @@ jobs:
 
     - stage: nightly package
       if: branch = master
-      env: ""
+      env: TEST_GROUP=""
       script: *build_stretch
       deploy:
         skip_cleanup: true
