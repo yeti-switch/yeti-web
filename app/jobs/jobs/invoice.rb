@@ -35,11 +35,11 @@ module Jobs
     end
 
     def customers_accounts
-      Account.where('customer_invoice_period_id is not null and next_customer_invoice_at < NOW()').pluck(:id)
+      Account.where('customer_invoice_period_id is not null and next_customer_invoice_at < ?', Time.now.utc).pluck(:id)
     end
 
     def vendors_accounts
-      Account.where('vendor_invoice_period_id is not null and next_vendor_invoice_at < NOW()').pluck(:id)
+      Account.where('vendor_invoice_period_id is not null and next_vendor_invoice_at < ?', Time.now.utc).pluck(:id)
     end
 
     def serialize_time(time)

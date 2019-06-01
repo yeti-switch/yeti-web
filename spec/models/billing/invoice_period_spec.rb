@@ -3,9 +3,11 @@
 require 'spec_helper'
 
 describe Billing::InvoicePeriod do
+  subject do
+    Billing::InvoicePeriod.find(id)
+  end
+
   let(:id) { Billing::InvoicePeriod::NAMES.key(name.upcase) }
-  before { @invoice_period = Billing::InvoicePeriod.create(id: id, name: name) }
-  subject { @invoice_period }
 
   shared_examples :should_set_correct_dates do
     let(:dt) { nil }
@@ -20,7 +22,8 @@ describe Billing::InvoicePeriod do
       expect(subject.next_date_from_now.to_time.to_s(:db)).to eq expected_next_from_now_dt.to_time.to_s(:db)
     end
     it 'should return correct initial_date' do
-      expect(subject.initial_date.to_time.to_time.to_s(:db)).to eq expected_initial_dt.to_time.to_s(:db)
+      end_date = Time.now.to_date
+      expect(subject.initial_date(end_date).to_time.to_time.to_s(:db)).to eq expected_initial_dt.to_time.to_s(:db)
     end
   end
 
