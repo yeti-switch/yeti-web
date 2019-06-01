@@ -15,7 +15,7 @@ development: &default
 
 test:
   <<: *default
-  database: yeti_test
+  database: yeti_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 secondbase:
   development: &default_cdr
@@ -32,4 +32,4 @@ secondbase:
 
   test:
     <<: *default_cdr
-    database: yeti_cdr_test
+    database: yeti_cdr_test<%= ENV['TEST_ENV_NUMBER'] %>

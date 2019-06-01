@@ -3,6 +3,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
+puts "rspec env var TEST_ENV_NUMBER=#{ENV['TEST_ENV_NUMBER']}"
 
 SimpleCov.start 'rails'
 
@@ -91,6 +92,16 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.clean_with :truncation
+  end
+
+  config.after(:suite) do
+    runtime_log_path = Rails.root.join('log/parallel_runtime_rspec.log')
+    if File.exist?(runtime_log_path)
+      puts '>>>>>>>> RUNTIME LOG <<<<<<<<'
+      puts File.read(runtime_log_path)
+    else
+      puts ">>> RUNTIME LOG NOT FOUND AT #{runtime_log_path}"
+    end
   end
 
   config.before(:each) do
