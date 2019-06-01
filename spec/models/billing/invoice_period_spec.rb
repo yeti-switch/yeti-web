@@ -37,22 +37,25 @@ describe Billing::InvoicePeriod do
       include_examples :responds_with_correct_times,
                        today_dt: Time.parse('2015-07-06 00:00:00'),
                        next_dt: Time.parse('2015-07-13 00:00:00'),
-                       initial_dt: Time.parse('2015-07-06 00:00:00')
+                       # start of previous week
+                       initial_dt: Time.parse('2015-06-29 00:00:00')
     end
 
     context 'when invoice breaks month' do
       include_examples :responds_with_correct_times,
                        today_dt: Time.parse('2015-07-27 00:00:00'),
                        next_dt: Time.parse('2015-08-03 00:00:00'),
-                       initial_dt: Time.parse('2015-07-27 00:00:00')
+                       # start of previous week
+                       initial_dt: Time.parse('2015-07-20 00:00:00')
     end
 
     context 'when invoice on last week of the year' do
       include_examples :responds_with_correct_times,
                        today_dt: Time.parse('2017-12-27 00:00:00'),
                        next_dt: Time.parse('2018-01-03 00:00:00'),
-                       initial_dt: Time.parse('2017-12-25 00:00:00'),
-                       next_from_now_dt: Time.parse('2018-01-01 00:00:00')
+                       next_from_now_dt: Time.parse('2018-01-01 00:00:00'),
+                       # start of previous week
+                       initial_dt: Time.parse('2017-12-18 00:00:00')
     end
   end # WEEKLY
 
@@ -63,7 +66,8 @@ describe Billing::InvoicePeriod do
       include_examples :responds_with_correct_times,
                        today_dt: Time.parse('2015-07-06 00:00:00'),
                        next_dt: Time.parse('2015-07-13 00:00:00'),
-                       initial_dt: Time.parse('2015-07-06 00:00:00')
+                       # begin of month
+                       initial_dt: Time.parse('2015-07-01 00:00:00')
     end
 
     context 'when invoice breaks month' do
@@ -71,14 +75,16 @@ describe Billing::InvoicePeriod do
         include_examples :responds_with_correct_times,
                          today_dt: Time.parse('2015-07-27 00:00:00'),
                          next_dt: Time.parse('2015-08-01 00:00:00'),
-                         initial_dt: Time.parse('2015-07-27 00:00:00')
+                         # start of previous week
+                         initial_dt: Time.parse('2015-07-20 00:00:00')
       end
 
       context 'second part' do
         include_examples :responds_with_correct_times,
                          today_dt: Time.parse('2015-08-01 00:00:00'),
                          next_dt: Time.parse('2015-08-03 00:00:00'),
-                         initial_dt: Time.parse('2015-08-01 00:00:00')
+                         # start_date of first part period
+                         initial_dt: Time.parse('2015-07-27 00:00:00')
       end
     end
   end # WEEKLY_SPLIT
@@ -91,7 +97,7 @@ describe Billing::InvoicePeriod do
         include_examples :responds_with_correct_times,
                          today_dt: Time.parse('2015-07-06 00:00:00'), # week 28
                          next_dt: Time.parse('2015-07-20 00:00:00'),
-                         initial_dt: Time.parse('2015-07-06 00:00:00')
+                         initial_dt: Time.parse('2015-06-22 00:00:00')
       end
 
       context 'when invoice breaks month' do
@@ -99,14 +105,14 @@ describe Billing::InvoicePeriod do
           include_examples :responds_with_correct_times,
                            today_dt: Time.parse('2015-04-27 00:00:00'), # week 18
                            next_dt: Time.parse('2015-05-11 00:00:00'),
-                           initial_dt: Time.parse('2015-04-27 00:00:00')
+                           initial_dt: Time.parse('2015-04-13 00:00:00')
         end
 
         context 'when breaks second week' do
           include_examples :responds_with_correct_times,
                            today_dt: Time.parse('2015-06-22 00:00:00'), # week 26
                            next_dt: Time.parse('2015-07-06 00:00:00'),
-                           initial_dt: Time.parse('2015-06-22 00:00:00')
+                           initial_dt: Time.parse('2015-06-08 00:00:00')
         end
       end
     end # even week
@@ -116,7 +122,7 @@ describe Billing::InvoicePeriod do
         include_examples :responds_with_correct_times,
                          today_dt: Time.parse('2015-07-13 00:00:00'), # week 29
                          next_dt: Time.parse('2015-07-27 00:00:00'),
-                         initial_dt: Time.parse('2015-07-06 00:00:00'),
+                         initial_dt: Time.parse('2015-06-29 00:00:00'),
                          next_from_now_dt: Time.parse('2015-07-20 00:00:00')
       end
 
@@ -125,7 +131,7 @@ describe Billing::InvoicePeriod do
           include_examples :responds_with_correct_times,
                            today_dt: Time.parse('2015-06-29 00:00:00'), # week 27
                            next_dt: Time.parse('2015-07-13 00:00:00'),
-                           initial_dt: Time.parse('2015-06-22 00:00:00'),
+                           initial_dt: Time.parse('2015-06-15 00:00:00'),
                            next_from_now_dt: Time.parse('2015-07-06 00:00:00')
         end
 
@@ -133,7 +139,7 @@ describe Billing::InvoicePeriod do
           include_examples :responds_with_correct_times,
                            today_dt: Time.parse('2015-04-20 00:00:00'), # week 17
                            next_dt: Time.parse('2015-05-04 00:00:00'),
-                           initial_dt: Time.parse('2015-04-13 00:00:00'),
+                           initial_dt: Time.parse('2015-04-06 00:00:00'),
                            next_from_now_dt: Time.parse('2015-04-27 00:00:00')
         end
       end
@@ -148,7 +154,7 @@ describe Billing::InvoicePeriod do
         include_examples :responds_with_correct_times,
                          today_dt: Time.parse('2015-07-06 00:00:00'), # week 28
                          next_dt: Time.parse('2015-07-20 00:00:00'),
-                         initial_dt: Time.parse('2015-07-06 00:00:00')
+                         initial_dt: Time.parse('2015-07-01 00:00:00')
       end
 
       context 'when invoice breaks month' do
@@ -157,30 +163,30 @@ describe Billing::InvoicePeriod do
             include_examples :responds_with_correct_times,
                              today_dt: Time.parse('2015-04-27 00:00:00'), # week 18
                              next_dt: Time.parse('2015-05-01 00:00:00'), # week 18
-                             initial_dt: Time.parse('2015-04-27 00:00:00')
+                             initial_dt: Time.parse('2015-04-13 00:00:00')
           end
 
           context 'second part' do
             include_examples :responds_with_correct_times,
                              today_dt: Time.parse('2015-05-01 00:00:00'), # week 18
                              next_dt: Time.parse('2015-05-11 00:00:00'), # week 20
-                             initial_dt: Time.parse('2015-05-01 00:00:00')
+                             initial_dt: Time.parse('2015-04-27 00:00:00')
           end
         end
 
         context 'when breaks second week' do
-          context 'second part' do
+          context 'first part' do
             include_examples :responds_with_correct_times,
                              today_dt: Time.parse('2015-06-22 00:00:00'), # week 26
                              next_dt: Time.parse('2015-07-01 00:00:00'), # week 27
-                             initial_dt: Time.parse('2015-06-22 00:00:00')
+                             initial_dt: Time.parse('2015-06-08 00:00:00')
           end
 
           context 'second part' do
             include_examples :responds_with_correct_times,
                              today_dt: Time.parse('2015-07-01 00:00:00'), # week 27
                              next_dt: Time.parse('2015-07-06 00:00:00'), # week 28
-                             initial_dt: Time.parse('2015-07-01 00:00:00')
+                             initial_dt: Time.parse('2015-06-22 00:00:00')
           end
         end
       end
@@ -202,7 +208,7 @@ describe Billing::InvoicePeriod do
                              today_dt: Time.parse('2015-06-29 00:00:00'), # week 27
                              next_dt: Time.parse('2015-07-01 00:00:00'), # week 27
                              # cause it will move to the even week
-                             initial_dt: Time.parse('2015-06-22 00:00:00') # week 26
+                             initial_dt: Time.parse('2015-07-01 00:00:00') # week 26
           end
 
           context 'second part' do
@@ -210,7 +216,7 @@ describe Billing::InvoicePeriod do
                              today_dt: Time.parse('2015-07-01 00:00:00'), # week 27
                              # cause it will move to the even week
                              next_dt: Time.parse('2015-07-06 00:00:00'), # week 28
-                             initial_dt: Time.parse('2015-07-01 00:00:00')
+                             initial_dt: Time.parse('2015-06-22 00:00:00')
           end
         end
 
