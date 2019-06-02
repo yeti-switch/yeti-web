@@ -16,8 +16,8 @@ module SqlCaller
     ].freeze
 
     class << self
-      def model_name(value)
-        self._model_name = value
+      def model_name(class_name)
+        self._model_name = class_name.to_s
       end
 
       def delegate_connection_methods(*names)
@@ -66,7 +66,7 @@ module SqlCaller
 
     def model_class
       return @model_class if defined?(@model_class)
-      raise NotImplementedError, 'method #model_name must be defined' if _model_name.nil?
+      raise NotImplementedError, 'define model_class via #model_name class method' if _model_name.nil?
 
       @model_class = _model_name.constantize
     end
