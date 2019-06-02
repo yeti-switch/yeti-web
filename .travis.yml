@@ -56,12 +56,12 @@ stages:
 # by default stage=test
 # matrix only works for top level script
 script:
-  - echo "Running parallel spec $TEST_GROUP/$TEST_GROUPS_QTY"
   - bundle install --jobs=3 --retry=3 --deployment
   - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
   - RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
   - RAILS_ENV=test bundle exec rake db:seed
   - bundle exec parallel_test spec/ -n $TEST_GROUPS_QTY --only-group $TEST_GROUP --group-by filesize --type rspec
+  - echo "Slowest spec files for TEST_GROUP $TEST_GROUP from $TEST_GROUPS_QTY"
   - script/format_runtime_log log/parallel_runtime_rspec.log
 
 jobs:
