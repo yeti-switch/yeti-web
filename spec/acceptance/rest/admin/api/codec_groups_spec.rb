@@ -37,7 +37,7 @@ resource 'Codec groups' do
     let(:group) { create :codec_group }
     let(:codec) { create :codec_group_codec, codec_group: group }
 
-    let(:name) { 'name' }
+    let(:name) { 'create-name' }
     let(:codecs) { wrap_has_many_relationship(:'codec-group-codecs', [codec.id]) }
 
     example_request 'create new entry' do
