@@ -102,7 +102,6 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'chromedriver-helper'
-  gem 'cucumber-rails', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
