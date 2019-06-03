@@ -39,16 +39,6 @@ class Log::EmailLog < Yeti::ActiveRecord
   end
 
   after_create do
-    self.class.delay.send_email(id)
-  end
-
-  def self.send_email(id)
-    YetiMail.email_message(id).deliver!
-    Log::EmailLog.where(id: id).update_all(sent_at: Time.now)
-  rescue StandardError => e
-    Rails.logger.warn { e.message }
-    Rails.logger.warn { e.backtrace.join("\n") }
-
-    Log::EmailLog.where(id: id).update_all(error: e.message)
+    Worker::SendEmailLogJob.perform_later(id)
   end
 end

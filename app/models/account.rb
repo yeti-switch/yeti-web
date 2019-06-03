@@ -128,11 +128,13 @@ class Account < Yeti::ActiveRecord
   before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
-    invoices.for_customer.order('end_date desc').limit(1).take.try!(:end_date) || customer_invoice_period.initial_date
+    invoices.for_customer.order('end_date desc').limit(1).take
+            .try!(:end_date) || customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time
   end
 
   def last_vendor_invoice_date
-    invoices.for_vendor.order('end_date desc').limit(1).take.try!(:end_date) || vendor_invoice_period.initial_date
+    invoices.for_vendor.order('end_date desc').limit(1).take
+            .try!(:end_date) || vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time
   end
 
   def schedule_next_customer_invoice!

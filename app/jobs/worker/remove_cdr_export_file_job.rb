@@ -3,7 +3,7 @@
 require 'net/http'
 
 module Worker
-  class RemoveCdrExportFileJob < ActiveJob::Base
+  class RemoveCdrExportFileJob < ::ApplicationJob
     class FileNotDeletedError < RuntimeError
       def initialize(http_code)
         @http_code = http_code

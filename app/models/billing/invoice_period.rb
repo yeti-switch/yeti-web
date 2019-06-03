@@ -27,73 +27,90 @@ class Billing::InvoicePeriod < Yeti::ActiveRecord
 
   SPLIT_PERIOD_IDS = [BIWEEKLY_SPLIT_ID, WEEKLY_SPLIT_ID].freeze
 
-  DAILY_FROM_NOW = -> { today + 1.day }
-  DAILY_AGO = -> { today - 1.day }
+  DAILY_FROM_NOW = lambda {
+    today + 1.day
+  }
+
+  DAILY_AGO = lambda { |end_date|
+    end_date - 1.day
+  }
 
   WEEKLY_FROM_NOW = lambda {
     Date.commercial(today.year, today.cweek) + 1.week
   }
 
-  WEEKLY_AGO = lambda {
-    WEEKLY_FROM_NOW.call - 1.week
+  WEEKLY_AGO = lambda { |end_date|
+    Date.commercial(end_date.year, end_date.cweek) - 1.week
   }
 
   WEEKLY_SPLIT_FROM_NOW = lambda {
-    last_date = WEEKLY_SPLIT_AGO.call.to_time
-    next_date = last_date.end_of_week + 1.second
-    last_date.month == next_date.month ? next_date : next_date.beginning_of_month
+    today_week_end = Date.commercial(today.year, today.cweek).end_of_week
+    today.month == today_week_end.month ? today_week_end + 1.day : today.end_of_month + 1.day
   }
 
-  WEEKLY_SPLIT_AGO = lambda {
-    last_date = Date.commercial(today.year, today.cweek)
-    last_date.month == today.month ? last_date : today.beginning_of_month
+  WEEKLY_SPLIT_AGO = lambda { |end_date|
+    end_date_week_start = Date.commercial(end_date.year, end_date.cweek)
+    if end_date == end_date_week_start
+      prev_week_start = end_date - 1.week
+      prev_week_end = prev_week_start.end_of_week
+      prev_week_start.month == prev_week_end.month ? prev_week_start : prev_week_start.end_of_month + 1.day
+    else
+      end_date_week_start
+    end
   }
 
   BIWEEKLY_FROM_NOW = lambda {
-    [Date.commercial(today.year, today.cweek) + 2.week,
-     Date.commercial(today.year, today.cweek) + 1.week]
-      .select { |d| d.cweek.even? }.first
+    today_week_start = Date.commercial(today.year, today.cweek)
+    [today_week_start + 2.week, today_week_start + 1.week].detect { |d| d.cweek.even? }
   }
 
-  BIWEEKLY_AGO = lambda {
-    BIWEEKLY_FROM_NOW.call - 2.weeks
+  BIWEEKLY_AGO = lambda { |end_date|
+    end_date - 2.week
   }
 
   BIWEEKLY_SPLIT_FROM_NOW = lambda {
-    last_date = BIWEEKLY_SPLIT_AGO.call.to_time
-    next_date = last_date.end_of_week + 1.second
-    next_date += 1.week unless next_date.to_date.cweek.even?
-    last_date.month == next_date.month ? next_date : next_date.beginning_of_month
+    today_week_start = Date.commercial(today.year, today.cweek)
+    next_biweekly_start = [today_week_start + 2.week, today_week_start + 1.week].detect { |d| d.cweek.even? }
+    today.month == next_biweekly_start.month ? next_biweekly_start : today.end_of_month + 1.day
   }
 
-  BIWEEKLY_SPLIT_AGO = lambda {
-    last_date = [
-      Date.commercial(today.year, today.cweek),
-      Date.commercial(today.year, today.cweek) - 1.week
-
-    ].select { |d| d.cweek.even? }.first
-    last_date.month == today.month ? last_date : today.beginning_of_month
+  BIWEEKLY_SPLIT_AGO = lambda { |end_date|
+    end_date_week_start = Date.commercial(end_date.year, end_date.cweek)
+    if end_date == end_date_week_start
+      prev_biweekly_start = [end_date - 1.week, end_date - 2.week].detect { |d| d.cweek.even? }
+      prev_biweekly_end = prev_biweekly_start.end_of_week + 1.week
+      prev_biweekly_start.month == prev_biweekly_end.month ?
+          prev_biweekly_start :
+          prev_biweekly_start.end_of_month + 1.day
+    else
+      [end_date_week_start, end_date_week_start - 1.week].detect { |d| d.cweek.even? }
+    end
   }
 
   MONTHLY_FROM_NOW = lambda {
-    # Time.now.months_since(1).beginning_of_month
-    today.at_beginning_of_month.next_month
+    today.end_of_month + 1.day
   }
 
-  MONTHLY_AGO = lambda {
-    MONTHLY_FROM_NOW.call.prev_month
+  MONTHLY_AGO = lambda { |end_date|
+    end_date - 1.month
   }
 
-  DAILY_INC = ->(dt) { dt + 1.day }
+  DAILY_INC = lambda { |dt|
+    dt + 1.day
+  }
 
-  WEEKLY_INC = ->(dt) { dt + 1.week }
+  WEEKLY_INC = lambda { |dt|
+    dt + 1.week
+  }
 
   WEEKLY_SPLIT_INC = lambda { |dt|
     next_date = dt.end_of_week + 1.second
     dt.month == next_date.month ? next_date : next_date.beginning_of_month
   }
 
-  BIWEEKLY_INC = ->(dt) { dt + 2.weeks }
+  BIWEEKLY_INC = lambda { |dt|
+    dt + 2.weeks
+  }
 
   BIWEEKLY_SPLIT_INC = lambda { |dt|
     next_date = dt.to_time.end_of_week + 1.second # + 1.week
@@ -109,8 +126,8 @@ class Billing::InvoicePeriod < Yeti::ActiveRecord
     self.class.const_get("#{NAMES[id]}_FROM_NOW").call
   end
 
-  def initial_date
-    self.class.const_get("#{NAMES[id]}_AGO").call
+  def initial_date(end_date)
+    self.class.const_get("#{NAMES[id]}_AGO").call(end_date)
   end
 
   def next_date(dt)
@@ -132,10 +149,14 @@ class Billing::InvoicePeriod < Yeti::ActiveRecord
 
   def days_in_period
     case id
-    when DAILY_ID then 1
-    when WEEKLY_ID, WEEKLY_SPLIT_ID then 7
-    when BIWEEKLY_ID, BIWEEKLY_SPLIT_ID then 14
-    when MONTHLY_ID then 30
+    when DAILY_ID then
+      1
+    when WEEKLY_ID, WEEKLY_SPLIT_ID then
+      7
+    when BIWEEKLY_ID, BIWEEKLY_SPLIT_ID then
+      14
+    when MONTHLY_ID then
+      30
     end
   end
 
