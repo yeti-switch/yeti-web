@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Worker
-  class CdrExportJob < ActiveJob::Base
+  class CdrExportJob < ::ApplicationJob
     queue_as 'cdr_export'
 
     def perform(cdr_export_id)

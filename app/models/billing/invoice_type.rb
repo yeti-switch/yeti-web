@@ -14,4 +14,10 @@ class Billing::InvoiceType < Cdr::Base
   MANUAL = 1
   AUTO_FULL = 2
   AUTO_PARTIAL = 3
+
+  NAMES = {
+    MANUAL => 'Manual',
+    AUTO_FULL => 'Auto Full',
+    AUTO_PARTIAL => 'Auto Partial'
+  }.freeze
 end

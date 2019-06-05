@@ -3,6 +3,10 @@
 class Routing::RoutingPlanStaticRouteBatchCreator
   include ActiveModel::Model
 
+  def self.inheritance_column
+    :_type
+  end
+
   attr_accessor :routing_plan, :prefixes, :vendors, :priority, :weight, :country, :network
 
   validates_presence_of :routing_plan, :priority, :weight, :prefixes, :vendors

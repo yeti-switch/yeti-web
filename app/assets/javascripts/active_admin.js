@@ -74,4 +74,8 @@ $(document).ready(function () {
         show_time: true
     });
 
+    $('form.formtastic li.datetime_preset_pair').date_range_ext_preset({
+        show_time: true
+    });
+
 });

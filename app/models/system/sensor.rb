@@ -59,6 +59,11 @@ class System::Sensor < Yeti::ActiveRecord
     self.use_routing = false
   end
 
+  # for active admin creation form
+  def hep_target_ip
+    self[:target_ip]
+  end
+
   include Yeti::SensorReloader
 
   def display_name

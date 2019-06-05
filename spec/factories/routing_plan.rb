@@ -7,5 +7,9 @@ FactoryGirl.define do
     rate_delta_max 0
     max_rerouting_attempts 9
     use_lnp false
+
+    trait :with_static_routes do
+      sorting_id { FactoryGirl.create(:sorting, use_static_routes: true).id }
+    end
   end
 end

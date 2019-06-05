@@ -1,6 +1,6 @@
 pkg_name = yeti-web
 user = yeti-web
-app_dir = /home/$(user)
+app_dir = /opt/$(user)
 
 version = $(shell dpkg-parsechangelog --help | grep -q '\--show-field' \
 	&& dpkg-parsechangelog --show-field version \

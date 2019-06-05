@@ -9,7 +9,11 @@ module Jobs
           start_date = account.last_customer_invoice_date
           end_date = account.next_customer_invoice_at
           invoice_type = account.next_customer_invoice_type_id
-          generate_invoice(account.id, start_date, end_date, invoice_type, false)
+          Worker::GenerateInvoiceJob.perform_later account_id: account.id,
+                                                   start_date: serialize_time(start_date),
+                                                   end_date: serialize_time(end_date),
+                                                   invoice_type_id: invoice_type,
+                                                   is_vendor: false
           account.schedule_next_customer_invoice!
         end
       end
@@ -20,44 +24,26 @@ module Jobs
           start_date = account.last_vendor_invoice_date
           end_date = account.next_vendor_invoice_at
           invoice_type = account.next_vendor_invoice_type_id
-          generate_invoice(account.id, start_date, end_date, invoice_type, true)
+          Worker::GenerateInvoiceJob.perform_later account_id: account.id,
+                                                   start_date: serialize_time(start_date),
+                                                   end_date: serialize_time(end_date),
+                                                   invoice_type_id: invoice_type,
+                                                   is_vendor: true
           account.schedule_next_vendor_invoice!
         end
       end
     end
 
     def customers_accounts
-      Account.where('customer_invoice_period_id is not null and next_customer_invoice_at < NOW()').pluck(:id)
+      Account.where('customer_invoice_period_id is not null and next_customer_invoice_at < ?', Time.now.utc).pluck(:id)
     end
 
     def vendors_accounts
-      Account.where('vendor_invoice_period_id is not null and next_vendor_invoice_at < NOW()').pluck(:id)
+      Account.where('vendor_invoice_period_id is not null and next_vendor_invoice_at < ?', Time.now.utc).pluck(:id)
     end
 
-    def generate_invoice(acc_id, start_dt, end_dt, invoice_type, is_vendor)
-      account = begin
-                  Account.find(acc_id)
-                rescue StandardError
-                  nil
-                end
-      if account
-
-        inv = Billing::Invoice.new(
-          contractor_id: account.contractor_id,
-          account_id: account.id,
-          start_date: start_dt,
-          vendor_invoice: is_vendor,
-          end_date: end_dt,
-          type_id: invoice_type
-        )
-        account.transaction do
-          InvoiceGenerator.new(inv).save!
-        end
-      else
-        # log
-      end
+    def serialize_time(time)
+      time.utc.to_s
     end
-
-    handle_asynchronously :generate_invoice
   end
 end

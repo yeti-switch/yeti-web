@@ -38,7 +38,11 @@ module ResourceDSL
           route_name = belongs_to_opts.route_name.to_s
           route_name = route_name.singularize unless opts.fetch(:collection, false)
           # namespace = opts[:namespace] || :admin
-          namespace = ActiveAdmin.application.default_namespace&.to_s&.sub(%r{^/}, '')
+          if ActiveAdmin.application.default_namespace
+            namespace = ActiveAdmin.application.default_namespace&.to_s&.sub(%r{^/}, '')
+          else
+            namespace = ''
+          end
           parent_name = resource_parent.present? ? belongs_to_opts.parent_name : nil
           [
             opts[:action], namespace, parent_name, route_name, :path

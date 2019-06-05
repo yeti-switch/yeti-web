@@ -44,11 +44,13 @@ RSpec.configure do |config|
     :session_refresh_methods,
     'sys.sensor_levels',
     :disconnect_policy,
+    :disconnect_code_namespace,
     :diversion_policy,
     :filter_types,
     :sdp_c_location,
     :codecs,
     :dump_level,
+    :invoice_periods,
     'class4.dtmf_send_modes',
     'class4.dtmf_receive_modes',
     'class4.gateway_rel100_modes',
@@ -82,8 +84,34 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.filter_run :focus
+  config.run_all_when_everything_filtered = true
+  config.profile_examples = 10
+  config.order = :random
+  Kernel.srand config.seed
+
   config.include FactoryGirl::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include RspecRequestHelper, type: :request
+  config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
+  config.include Helpers::ActiveAdminForms::Examples, type: :feature
+  config.include FeatureTestHelper, type: :feature
+
+  config.around(:each, freeze_time: proc { |val| val == true || val.is_a?(Time) }) do |example|
+    val = example.metadata[:freeze_time]
+    time = val == true ? Time.now : val
+    travel_to(time) { example.run }
+  end
+
+  config.around(:each, :sync_delayed_jobs) do |example|
+    old_delayed_jobs = Delayed::Worker.delay_jobs
+    begin
+      Delayed::Worker.delay_jobs = false
+      example.run
+    ensure
+      Delayed::Worker.delay_jobs = old_delayed_jobs
+    end
+  end
 
   config.before(:suite) do
     DatabaseCleaner.clean_with :truncation
