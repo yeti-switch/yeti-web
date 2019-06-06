@@ -26,6 +26,7 @@ describe Api::Rest::Customer::V1::RateplansController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :rateplan }
+    let(:trait) { :with_uuid }
     let(:pk) { :uuid }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name

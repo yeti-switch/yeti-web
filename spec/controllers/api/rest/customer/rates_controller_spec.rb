@@ -27,6 +27,7 @@ describe Api::Rest::Customer::V1::RatesController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :destination }
+    let(:trait) { :with_uuid }
     let(:pk) { :uuid }
 
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled

@@ -24,7 +24,7 @@ describe Api::Rest::Customer::V1::AccountsController, type: :controller do
 
   describe 'GET index with ransack filters' do
     let(:factory) { :account }
-    let(:trait) { :with_max_balance }
+    let(:trait) { %i[with_max_balance with_uuid] }
     let(:factory_attrs) { { contractor: customer } }
     let(:pk) { :uuid }
 
