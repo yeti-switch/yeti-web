@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples :returns_json_api_record_relationship do |name, status: 200|
+  let(:json_api_record_data) { response_json[:data] }
   let(:json_api_relationship_data) { nil }
 
   it "returns json api record with correct #{name} relationship data" do
@@ -10,7 +11,7 @@ RSpec.shared_examples :returns_json_api_record_relationship do |name, status: 20
       "expect response.status to eq #{status}, but got #{response.status}\n#{pretty_response_json}"
     )
     name = name.to_sym
-    actual_relationships = response_json[:data][:relationships]
+    actual_relationships = json_api_record_data[:relationships]
     expect(actual_relationships.key?(name)).to(
       eq(true),
       "expect relationships to have key #{name}, but not found in\n#{actual_relationships}"
