@@ -6,6 +6,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   }
   config.batch_actions = true
   batch_action :destroy, false
+  decorate_with ActiveCallDecorator
 
   actions :index, :show
 
@@ -116,6 +117,13 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   end
 
   controller do
+    def index
+      index!
+    rescue StandardError => e
+      flash.now[:warning] = e.message
+      raise e
+    end
+
     def show
       show!
     rescue YetisNode::Error => e
@@ -123,50 +131,175 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
       redirect_to_back
     end
 
-    def find_resource
-      node_id, local_tag = params[:id].split('*')
-      active_calls = [Node.find(node_id).active_call(local_tag)]
-      active_calls = RealtimeData::ActiveCall.assign_foreign_resources(active_calls)
-      active_calls.first
+    def scoped_collection
+      # is_list = active_admin_config.get_page_presenter(:index, params[:as]).options[:as] == :list_with_content
+      # # I don't understand what is only.
+      # only = is_list ? (LIST_ATTRIBUTES + SYSTEM_ATTRIBUTES) : nil
+      # only = nil #  dirty fix for https://bt.yeti-switch.org/issues/253
+      # # Customer, Vendor, Duration, dst_prefix_routing, Start time, connect time,dst country,
+      #   # Dst network, Destination next rate, Dialpeer next rate
+      #   LIST_ATTRIBUTES = [
+      #     :customer_id,
+      #     :vendor_id,
+      #     :duration,
+      #     :dst_prefix_routing,
+      #     :lrn,
+      #     :start_time,
+      #     :connect_time,
+      #     # :dst_country_id,
+      #     :dst_network_id,
+      #     :destination_next_rate,
+      #     :dialpeer_next_rate
+      #   ].freeze
+      #
+      #   SYSTEM_ATTRIBUTES = %i[
+      #     node_id
+      #     local_tag
+      #   ].freeze
+      RealtimeData::ActiveCall.includes(*RealtimeData::ActiveCall.association_types.keys)
     end
 
-    def find_collection(_options = {})
-      @search = OpenStruct.new(params[:q])
+    def apply_sorting(chain)
+      chain
+    end
 
-      return [] if params[:q].blank? && GuiConfig.active_calls_require_filter
+    def apply_filtering(chain)
+      query_params = (params.to_unsafe_h[:q] || {}).delete_if { |_, v| v.blank? }
+      @search = OpenStruct.new(query_params)
+      chain = chain.none if query_params.blank? && GuiConfig.active_calls_require_filter
+      chain.where(query_params)
+    end
 
-      active_calls = []
-      begin
-        is_list = active_admin_config.get_page_presenter(:index, params[:as]).options[:as] == :list_with_content # WTF?? .
-        is_list = false #  dirty fix for https://bt.yeti-switch.org/issues/253
-        only = is_list ? (RealtimeData::ActiveCall::LIST_ATTRIBUTES + RealtimeData::ActiveCall::SYSTEM_ATTRIBUTES) : nil # I don't understand what is only.
-        active_calls = RealtimeData::ActiveCall.collection(Yeti::CdrsFilter.new(Node.all, params.to_unsafe_h[:q]).search(only: only, empty_on_error: true))
-        active_calls = Kaminari.paginate_array(active_calls).page(1).per(active_calls.count)
-        active_calls = RealtimeData::ActiveCall.assign_foreign_resources(active_calls)
-      rescue StandardError => e
-        flash.now[:warning] = e.message
-        raise e
-      end
+    def apply_pagination(chain)
       @skip_drop_down_pagination = true
-      active_calls
+      records = chain.to_a
+      Kaminari.paginate_array(records).page(1).per(records.size)
     end
   end
 
   show do
     attributes_table do
-      RealtimeData::ActiveCall.human_attributes.each do |attr|
-        row attr
+      row :start_time
+      row :connect_time
+      row :duration
+      row :time_limit
+      row :dst_prefix_in
+      row :dst_prefix_routing
+      row :lrn
+      row :dst_prefix_out
+      row :src_prefix_in
+      row :src_prefix_routing
+      row :src_prefix_out
+      row :diversion_in
+      row :diversion_out
+      row :dst_country, &:dst_country_link
+      row :dst_network, &:dst_network_link
+      row :customer, &:customer_link
+      row :vendor, &:vendor_link
+      row :customer_acc, &:customer_acc_link
+      row :vendor_acc, &:vendor_acc_link
+      row :customer_auth, &:customer_auth_link
+      row :destination, &:destination_link
+      row :dialpeer, &:dialpeer_link
+      row :orig_gw, &:orig_gw_link
+      row :term_gw, &:term_gw_link
+      row :routing_group, &:routing_group_link
+      row :rateplan, &:rateplan_link
+      row :destination_initial_rate
+      row :destination_next_rate
+      row :destination_initial_interval
+      row :destination_next_interval
+      row :destination_fee
+      row :destination_rate_policy_id
+      row :dialpeer_initial_rate
+      row :dialpeer_next_rate
+      row :dialpeer_initial_interval
+      row :dialpeer_next_interval
+      row :dialpeer_fee
+      row :legA_remote_ip
+      row :legA_remote_port
+      row :orig_call_id
+      row :legA_local_ip
+      row :legA_local_port
+      row :local_tag
+      row :legB_local_ip
+      row :legB_local_port
+      row :term_call_id
+      row :legB_remote_ip
+      row :legB_remote_port
+      row :node, &:node_link
+      row :pop, &:pop_link
+    end
+    if resource._rest_attributes
+      panel 'Extra Attributes' do
+        attributes_table_for resource do
+          resource._rest_attributes.each do |key, value|
+            row(key) { value }
+          end
+        end
       end
     end
   end
 
-  # collection_action :items_list do
-  #   @active_calls = find_collection
-  #   render "active_calls_collection", layout: false
-  # end
-
   index do
-    render 'active_calls_table', context: self
+    selectable_column
+    actions do |resource|
+      item 'Terminate',
+           url_for(action: :drop, id: resource.id),
+           method: :post,
+           class: 'member_link delete_link',
+           data: { confirm: I18n.t('active_admin.delete_confirmation') }
+    end
+    column :start_time
+    column :connect_time
+    column :duration
+    column :time_limit
+    column :dst_prefix_in
+    column :dst_prefix_routing
+    column :lrn
+    column :dst_prefix_out
+    column :src_prefix_in
+    column :src_prefix_routing
+    column :src_prefix_out
+    column :diversion_in
+    column :diversion_out
+    column :dst_country, :dst_country_link
+    column :dst_network, :dst_network_link
+    column :customer, :customer_link
+    column :vendor, :vendor_link
+    column :customer_acc, :customer_acc_link
+    column :vendor_acc, :vendor_acc_link
+    column :customer_auth, :customer_auth_link
+    column :destination, :destination_link
+    column :dialpeer, :dialpeer_link
+    column :orig_gw, :orig_gw_link
+    column :term_gw, :term_gw_link
+    column :routing_group, :routing_group_link
+    column :rateplan, :rateplan_link
+    column :destination_initial_rate
+    column :destination_next_rate
+    column :destination_initial_interval
+    column :destination_next_interval
+    column :destination_fee
+    column :destination_rate_policy_id
+    column :dialpeer_initial_rate
+    column :dialpeer_next_rate
+    column :dialpeer_initial_interval
+    column :dialpeer_next_interval
+    column :dialpeer_fee
+    column :legA_remote_ip
+    column :legA_remote_port
+    column :orig_call_id
+    column :legA_local_ip
+    column :legA_local_port
+    column :local_tag
+    column :legB_local_ip
+    column :legB_local_port
+    column :term_call_id
+    column :legB_remote_ip
+    column :legB_remote_port
+    column :node, :node_link
+    column :pop, :pop_link
   end
 
   index as: :list_with_content, default: true, download_links: false, partial: 'shared/active_calls_top_chart',
@@ -174,6 +307,21 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
           GuiConfig::FILTER_MISSED_TEXT if GuiConfig.active_calls_require_filter
         } do
 
-    render 'active_calls_list', context: self
+    selectable_column
+    actions do |resource|
+      item 'Terminate',
+           url_for(action: :drop, id: resource.id),
+           method: :post,
+           class: 'member_link delete_link',
+           data: { confirm: I18n.t('active_admin.delete_confirmation') }
+    end
+
+    column :customer, :customer_link
+    column :vendor, :vendor_link
+    column :duration
+    column :dst_number, :dst_prefix_routing
+    column :dst_network, :dst_network_link
+    column :origination_rate, :destination_next_rate
+    column :termination_rate, :dialpeer_next_rate
   end
 end
