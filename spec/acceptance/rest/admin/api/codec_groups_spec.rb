@@ -34,11 +34,12 @@ resource 'Codec groups' do
     jsonapi_attributes([:name], [])
     jsonapi_relationships([:codecs], [])
 
-    let(:group) { create :codec_group }
-    let(:codec) { create :codec_group_codec, codec_group: group }
+    let(:codec) { Codec.find(10) } # PCMA/8000
+    let!(:group) { create :codec_group }
+    let!(:codec_group_codec) { create :codec_group_codec, codec_id: codec.id, codec_group: group }
 
-    let(:name) { 'name' }
-    let(:codecs) { wrap_has_many_relationship(:'codec-group-codecs', [codec.id]) }
+    let(:name) { 'create-name' }
+    let(:codecs) { wrap_has_many_relationship(:'codec-group-codecs', [codec_group_codec.id]) }
 
     example_request 'create new entry' do
       expect(status).to(
