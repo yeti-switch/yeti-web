@@ -41,7 +41,10 @@ resource 'Codec groups' do
     let(:codecs) { wrap_has_many_relationship(:'codec-group-codecs', [codec.id]) }
 
     example_request 'create new entry' do
-      expect(status).to eq(201)
+      expect(status).to(
+        eq(201),
+        "expected: 201\ngot: #{status}\nresponse_body: #{response_body}"
+      )
     end
   end
 
