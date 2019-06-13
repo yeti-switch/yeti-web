@@ -92,7 +92,7 @@ version.yml: chlog
 .PHONY: bundler
 bundler:
 	@$(info:msg=install bundler)
-	@gem install --no-document --install-dir vendor/bundler bundler
+	@gem install --no-document --install-dir vendor/bundler bundler -v 2.0.2
 
 
 .PHONY: pgq_processors
