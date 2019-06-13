@@ -7,7 +7,7 @@ all:
 
 all_env:
 	@$(info:msg=PGQ: install bundler)
-	@gem install --install-dir vendor/bundler bundler
+	@gem install --install-dir vendor/bundler bundler -v 2.0.2
 
 	@$(info:msg=PGQ: install gems)
 	@vendor/bundler/bin/bundle install --jobs=4 --frozen --deployment --binstubs
