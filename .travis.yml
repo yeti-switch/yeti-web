@@ -75,16 +75,6 @@ jobs:
         - bundle exec rake bundle:audit
 
     - stage: test
-      env: CACHE_NAME=test
-      name: Cucumber
-      script:
-        - bundle install --jobs=3 --retry=3 --deployment
-        - RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
-        - RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
-        - RAILS_ENV=test bundle exec rake db:seed
-        - bundle exec cucumber
-
-    - stage: test
       env: CACHE_NAME=pgq_test
       name: PGQ Processors rspec
       script:
