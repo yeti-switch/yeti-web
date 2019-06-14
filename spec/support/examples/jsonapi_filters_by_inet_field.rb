@@ -13,8 +13,8 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
 
       before { subject_request }
 
-      it { is_expected.to include suitable_record.id.to_s }
-      it { is_expected.not_to include other_record.id.to_s }
+      it { is_expected.to include primary_key_for(suitable_record) }
+      it { is_expected.not_to include primary_key_for(other_record) }
     end
 
     context 'not equal operator' do
@@ -23,8 +23,8 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
 
       before { subject_request }
 
-      it { is_expected.to include suitable_record.id.to_s }
-      it { is_expected.not_to include other_record.id.to_s }
+      it { is_expected.to include primary_key_for(suitable_record) }
+      it { is_expected.not_to include primary_key_for(other_record) }
     end
 
     context 'in operator' do
@@ -33,8 +33,8 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
 
       before { subject_request }
 
-      it { is_expected.to include suitable_record.id.to_s }
-      it { is_expected.not_to include other_record.id.to_s }
+      it { is_expected.to include primary_key_for(suitable_record) }
+      it { is_expected.not_to include primary_key_for(other_record) }
     end
 
     context 'not_in operator' do
@@ -43,8 +43,8 @@ RSpec.shared_examples :jsonapi_filters_by_inet_field do |attr_name|
 
       before { subject_request }
 
-      it { is_expected.to include suitable_record.id.to_s }
-      it { is_expected.not_to include other_record.id.to_s }
+      it { is_expected.to include primary_key_for(suitable_record) }
+      it { is_expected.not_to include primary_key_for(other_record) }
     end
   end
 end

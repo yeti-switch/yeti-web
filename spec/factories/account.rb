@@ -18,5 +18,9 @@ FactoryGirl.define do
     trait :with_max_balance do
       max_balance 1_000
     end
+
+    trait :with_uuid do
+      uuid { SecureRandom.uuid }
+    end
   end
 end

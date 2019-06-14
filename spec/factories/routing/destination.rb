@@ -17,6 +17,11 @@ FactoryGirl.define do
     use_dp_intervals false
     valid_from { 1.day.ago.utc }
     valid_till { 1.day.from_now.utc }
+
     association :rateplan
+
+    trait :with_uuid do
+      uuid { SecureRandom.uuid }
+    end
   end
 end
