@@ -7,6 +7,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: admin_user.id }).token }
 
   before do
+    Cdr::Cdr.destroy_all
     request.accept = 'application/vnd.api+json'
     request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
