@@ -5,6 +5,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -26535,6 +26536,7 @@ DECLARE
   v_schema varchar;
   v_termination_numberlist class4.numberlists%rowtype;
   v_termination_numberlist_item class4.numberlist_items%rowtype;
+  v_termination_numberlist_size integer;
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -26736,6 +26738,10 @@ BEGIN
           length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
         order by length(prefix_range(ni.key)) desc
         limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
     END CASE;
 
     /*dbg{*/
@@ -26802,11 +26808,15 @@ BEGIN
       when 2 then -- prefix match
         select into v_termination_numberlist_item * from class4.numberlist_items ni
         where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
           prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
           length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
         order by length(prefix_range(ni.key)) desc
         limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
     END CASE;
 
     /*dbg{*/
@@ -27132,6 +27142,7 @@ DECLARE
   v_schema varchar;
   v_termination_numberlist class4.numberlists%rowtype;
   v_termination_numberlist_item class4.numberlist_items%rowtype;
+  v_termination_numberlist_size integer;
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -27333,6 +27344,10 @@ BEGIN
           length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
         order by length(prefix_range(ni.key)) desc
         limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
     END CASE;
 
     /*dbg{*/
@@ -27399,11 +27414,15 @@ BEGIN
       when 2 then -- prefix match
         select into v_termination_numberlist_item * from class4.numberlist_items ni
         where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
           prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
           length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
         order by length(prefix_range(ni.key)) desc
         limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
     END CASE;
 
     /*dbg{*/
@@ -27729,6 +27748,7 @@ DECLARE
   v_schema varchar;
   v_termination_numberlist class4.numberlists%rowtype;
   v_termination_numberlist_item class4.numberlist_items%rowtype;
+  v_termination_numberlist_size integer;
   
 BEGIN
   
@@ -27910,6 +27930,10 @@ BEGIN
           length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
         order by length(prefix_range(ni.key)) desc
         limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
     END CASE;
 
     
@@ -27964,11 +27988,15 @@ BEGIN
       when 2 then -- prefix match
         select into v_termination_numberlist_item * from class4.numberlist_items ni
         where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
           prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
           length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
         order by length(prefix_range(ni.key)) desc
         limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
     END CASE;
 
     
@@ -28331,6 +28359,7 @@ CREATE FUNCTION switch17.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_numberlist_item record;
         v_call_tags smallint[]:='{}'::smallint[];
         v_area_direction class4.routing_tag_detection_rules%rowtype;
+        v_numberlist_size integer;
 
       BEGIN
         /*dbg{*/
@@ -28637,7 +28666,11 @@ CREATE FUNCTION switch17.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(prefix_range(ni.key))
                 desc limit 1;
-
+            when 3 then -- random
+                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
           end case;
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -28697,15 +28730,20 @@ CREATE FUNCTION switch17.route(i_node_id integer, i_pop_id integer, i_protocol_i
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
           CASE v_numberlist.mode_id
             when 1 then -- strict match
-            select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
-            select into v_numberlist_item * from class4.numberlist_items ni
-            where
-              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
-              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
-              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-            order by length(prefix_range(ni.key)) desc limit 1;
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where
+                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
+              order by length(prefix_range(ni.key)) desc limit 1;
+            when 3 then -- random
+              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
+              select into v_numberlist_item *
+              from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
           end case;
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -29410,6 +29448,7 @@ CREATE FUNCTION switch17.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_numberlist_item record;
         v_call_tags smallint[]:='{}'::smallint[];
         v_area_direction class4.routing_tag_detection_rules%rowtype;
+        v_numberlist_size integer;
 
       BEGIN
         /*dbg{*/
@@ -29716,7 +29755,11 @@ CREATE FUNCTION switch17.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(prefix_range(ni.key))
                 desc limit 1;
-
+            when 3 then -- random
+                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
           end case;
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -29776,15 +29819,20 @@ CREATE FUNCTION switch17.route_debug(i_node_id integer, i_pop_id integer, i_prot
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
           CASE v_numberlist.mode_id
             when 1 then -- strict match
-            select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
-            select into v_numberlist_item * from class4.numberlist_items ni
-            where
-              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
-              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
-              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-            order by length(prefix_range(ni.key)) desc limit 1;
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where
+                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
+              order by length(prefix_range(ni.key)) desc limit 1;
+            when 3 then -- random
+              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
+              select into v_numberlist_item *
+              from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
           end case;
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -30486,6 +30534,7 @@ CREATE FUNCTION switch17.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_numberlist_item record;
         v_call_tags smallint[]:='{}'::smallint[];
         v_area_direction class4.routing_tag_detection_rules%rowtype;
+        v_numberlist_size integer;
 
       BEGIN
         
@@ -30758,7 +30807,11 @@ CREATE FUNCTION switch17.route_release(i_node_id integer, i_pop_id integer, i_pr
                   length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
                 order by length(prefix_range(ni.key))
                 desc limit 1;
-
+            when 3 then -- random
+                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
           end case;
           
           IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
@@ -30806,15 +30859,20 @@ CREATE FUNCTION switch17.route_release(i_node_id integer, i_pop_id integer, i_pr
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
           CASE v_numberlist.mode_id
             when 1 then -- strict match
-            select into v_numberlist_item * from class4.numberlist_items ni
-            where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
             when 2 then -- prefix match
-            select into v_numberlist_item * from class4.numberlist_items ni
-            where
-              ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
-              prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
-              length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-            order by length(prefix_range(ni.key)) desc limit 1;
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where
+                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
+              order by length(prefix_range(ni.key)) desc limit 1;
+            when 3 then -- random
+              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
+              select into v_numberlist_item *
+              from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
           end case;
           
           IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
@@ -40286,6 +40344,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190324161035'),
 ('20190326070548'),
 ('20190327134613'),
-('20190428191918');
+('20190428191918'),
+('20190622131912');
 
 
