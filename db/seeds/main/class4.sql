@@ -590,9 +590,9 @@ INSERT INTO numberlist_actions (id, name) VALUES (2, 'Allow call');
 -- Data for Name: numberlist_modes; Type: TABLE DATA; Schema: class4; Owner: yeti
 --
 
-INSERT INTO numberlist_modes (id, name) VALUES (1, 'Strict number match');
-INSERT INTO numberlist_modes (id, name) VALUES (2, 'Prefix match');
-
+INSERT INTO class4.numberlist_modes (id, name) VALUES (1, 'Strict number match');
+INSERT INTO class4.numberlist_modes (id, name) VALUES (2, 'Prefix match');
+INSERT INTO class4.numberlist_modes (id, name) VALUES (3, 'Random');
 
 --
 -- TOC entry 4315 (class 0 OID 19099)
