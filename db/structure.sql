@@ -36089,8 +36089,6 @@ CREATE TABLE sys.guiconfig (
     max_records integer DEFAULT 100500 NOT NULL,
     import_max_threads integer DEFAULT 4 NOT NULL,
     import_helpers_dir character varying DEFAULT '/tmp'::character varying,
-    cdr_archive_delay integer DEFAULT 4 NOT NULL,
-    cdr_remove_delay integer DEFAULT 120 NOT NULL,
     active_calls_require_filter boolean DEFAULT true NOT NULL,
     registrations_require_filter boolean DEFAULT true NOT NULL,
     active_calls_show_chart boolean DEFAULT false NOT NULL,
@@ -40345,6 +40343,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190326070548'),
 ('20190327134613'),
 ('20190428191918'),
-('20190622131912');
+('20190622131912'),
+('20190629193852');
 
 

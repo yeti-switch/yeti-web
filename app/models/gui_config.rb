@@ -11,8 +11,6 @@
 #  max_records                     :integer          default(100500), not null
 #  import_max_threads              :integer          default(4), not null
 #  import_helpers_dir              :string           default("/tmp")
-#  cdr_archive_delay               :integer          default(4), not null
-#  cdr_remove_delay                :integer          default(120), not null
 #  active_calls_require_filter     :boolean          default(TRUE), not null
 #  registrations_require_filter    :boolean          default(TRUE), not null
 #  active_calls_show_chart         :boolean          default(FALSE), not null
@@ -38,8 +36,6 @@ class GuiConfig < ActiveRecord::Base
   SETTINGS_NAMES = %i[rows_per_page
                       cdr_unload_dir
                       cdr_unload_uri
-                      cdr_archive_delay
-                      cdr_remove_delay
                       max_records
                       import_max_threads
                       import_helpers_dir
