@@ -8,10 +8,10 @@ module Concerns::ErrorNotify
   end
 
   def notify_error(e, re_raise = true)
-    Rails.logger.error e.message
-    Rails.logger.warn e.backtrace.join("\n")
-    ActionMailer::Base.mail(subject: e.message,
-                            body: [e.backtrace.join("\n"), request.inspect].join("\n\n\n")).deliver
+    Rails.logger.error { e.message }
+    Rails.logger.warn { e.backtrace.join("\n") }
+    body = Rails.env.test? ? e.to_s : [e.backtrace.join("\n"), request.inspect].join("\n\n\n")
+    ActionMailer::Base.mail(subject: e.message, body: body).deliver
     raise e if re_raise
   end
 end
