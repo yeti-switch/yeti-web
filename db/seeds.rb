@@ -39,5 +39,5 @@ end
 
 # Create partition for current+next monthes if not exists
 Cdr::Cdr.add_partitions
-Cdr::AuthLogTable.add_partition
+Cdr::AuthLog.add_partitions
 Cdr::RtpStatistic.add_partitions

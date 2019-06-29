@@ -41,6 +41,13 @@
 
 class Cdr::AuthLog < Cdr::Base
   self.table_name = 'auth_log.auth_log'
+  self.primary_key = :id
+
+  include Partitionable
+  self.pg_partition_name = 'PgPartition::Cdr'
+  self.pg_partition_interval_type = PgPartition::INTERVAL_DAY
+  self.pg_partition_depth_past = 3
+  self.pg_partition_depth_future = 3
 
   belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id

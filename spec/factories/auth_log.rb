@@ -32,9 +32,9 @@ FactoryGirl.define do
       id { Cdr::AuthLog.connection.select_value("SELECT nextval('auth_log.auth_log_id_seq')").to_i }
     end
 
-    before(:create) do |_record, _evaluator|
-      # Create partition for current+next monthes if not exists
-      Cdr::AuthLogTable.add_partition
+    before(:create) do |record, _evaluator|
+      # Create partition for current record
+      Cdr::AuthLog.add_partition_for(record.request_time) if record.request_time
     end
   end
 end

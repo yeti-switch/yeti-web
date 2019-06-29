@@ -357,19 +357,6 @@ CREATE TYPE switch.versions_ty AS (
 );
 
 
---
--- Name: auth_log_i_tgf(); Type: FUNCTION; Schema: auth_log; Owner: -
---
-
-CREATE FUNCTION auth_log.auth_log_i_tgf() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-      BEGIN
-        RAISE EXCEPTION 'auth_log.auth_log_i_tg: request_time out of range.';
-        RETURN NULL;
-      END; $$;
-
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -4012,7 +3999,8 @@ CREATE TABLE auth_log.auth_log (
     privacy character varying,
     rpid character varying,
     rpid_privacy character varying
-);
+)
+PARTITION BY RANGE (request_time);
 
 
 --
@@ -5518,40 +5506,6 @@ CREATE TABLE sys.amount_round_modes (
 
 
 --
--- Name: auth_log_tables; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.auth_log_tables (
-    id bigint NOT NULL,
-    name character varying NOT NULL,
-    date_start character varying NOT NULL,
-    date_stop character varying NOT NULL,
-    readable boolean DEFAULT true NOT NULL,
-    writable boolean DEFAULT false NOT NULL,
-    active boolean DEFAULT true NOT NULL
-);
-
-
---
--- Name: auth_log_tables_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.auth_log_tables_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: auth_log_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.auth_log_tables_id_seq OWNED BY sys.auth_log_tables.id;
-
-
---
 -- Name: call_duration_round_modes; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -5814,18 +5768,11 @@ ALTER TABLE ONLY stats.traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextv
 
 
 --
--- Name: auth_log_tables id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.auth_log_tables ALTER COLUMN id SET DEFAULT nextval('sys.auth_log_tables_id_seq'::regclass);
-
-
---
 -- Name: auth_log auth_log_pkey; Type: CONSTRAINT; Schema: auth_log; Owner: -
 --
 
 ALTER TABLE ONLY auth_log.auth_log
-    ADD CONSTRAINT auth_log_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT auth_log_pkey PRIMARY KEY (id, request_time);
 
 
 --
@@ -6205,14 +6152,6 @@ ALTER TABLE ONLY sys.amount_round_modes
 
 
 --
--- Name: auth_log_tables auth_log_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.auth_log_tables
-    ADD CONSTRAINT auth_log_tables_pkey PRIMARY KEY (id);
-
-
---
 -- Name: call_duration_round_modes call_duration_round_modes_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -6234,6 +6173,20 @@ ALTER TABLE ONLY sys.call_duration_round_modes
 
 ALTER TABLE ONLY sys.config
     ADD CONSTRAINT config_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_log_id_idx; Type: INDEX; Schema: auth_log; Owner: -
+--
+
+CREATE INDEX auth_log_id_idx ON ONLY auth_log.auth_log USING btree (id);
+
+
+--
+-- Name: auth_log_request_time_idx; Type: INDEX; Schema: auth_log; Owner: -
+--
+
+CREATE INDEX auth_log_request_time_idx ON ONLY auth_log.auth_log USING btree (request_time);
 
 
 --
@@ -6339,13 +6292,6 @@ CREATE UNIQUE INDEX traffic_customer_accounts_account_id_timestamp_idx ON stats.
 --
 
 CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.traffic_vendor_accounts USING btree (account_id, "timestamp");
-
-
---
--- Name: auth_log auth_log_i; Type: TRIGGER; Schema: auth_log; Owner: -
---
-
-CREATE TRIGGER auth_log_i BEFORE INSERT ON auth_log.auth_log FOR EACH ROW EXECUTE PROCEDURE auth_log.auth_log_i_tgf();
 
 
 --
@@ -6516,6 +6462,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180621130107'),
 ('20180911180345'),
 ('20181105175206'),
-('20190604064015');
+('20190604064015'),
+('20190629185813');
 
 
