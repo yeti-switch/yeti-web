@@ -408,7 +408,7 @@ CREATE TABLE cdr.cdr (
     dst_prefix_out character varying,
     src_prefix_in character varying,
     src_prefix_out character varying,
-    time_start timestamp with time zone,
+    time_start timestamp with time zone NOT NULL,
     time_connect timestamp with time zone,
     time_end timestamp with time zone,
     sign_orig_ip character varying,
@@ -518,7 +518,8 @@ CREATE TABLE cdr.cdr (
     vendor_duration integer,
     customer_auth_name character varying,
     legb_local_tag character varying
-);
+)
+PARTITION BY RANGE (time_start);
 
 
 --
@@ -782,27 +783,6 @@ BEGIN
 RETURN v_id;
 END;
 $$;
-
-
---
--- Name: cdr_i_tgf(); Type: FUNCTION; Schema: cdr; Owner: -
---
-
-CREATE FUNCTION cdr.cdr_i_tgf() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-      BEGIN
-        IF (NEW.time_start >= '2018-05-01 00:00:00+00' AND NEW.time_start < '2018-06-01 00:00:00+00') THEN
-          INSERT INTO cdr.cdr_201805 VALUES (NEW.*);
-        ELSIF (NEW.time_start >= '2018-06-01 00:00:00+00' AND NEW.time_start < '2018-07-01 00:00:00+00') THEN
-          INSERT INTO cdr.cdr_201806 VALUES (NEW.*);
-        ELSIF (NEW.time_start >= '2018-07-01 00:00:00+00' AND NEW.time_start < '2018-08-01 00:00:00+00') THEN
-          INSERT INTO cdr.cdr_201807 VALUES (NEW.*);
-        ELSE
-          RAISE EXCEPTION 'cdr.cdr_i_tg: time_start out of range.';
-        END IF;
-      RETURN NULL;
-      END; $$;
 
 
 --
@@ -4246,152 +4226,6 @@ CREATE TABLE cdr.ar_internal_metadata (
 
 
 --
--- Name: cdr_archive; Type: TABLE; Schema: cdr; Owner: -
---
-
-CREATE TABLE cdr.cdr_archive (
-    id bigint,
-    customer_id integer,
-    vendor_id integer,
-    customer_acc_id integer,
-    vendor_acc_id integer,
-    customer_auth_id integer,
-    destination_id integer,
-    dialpeer_id integer,
-    orig_gw_id integer,
-    term_gw_id integer,
-    routing_group_id integer,
-    rateplan_id integer,
-    destination_next_rate numeric,
-    destination_fee numeric,
-    dialpeer_next_rate numeric,
-    dialpeer_fee numeric,
-    time_limit character varying,
-    internal_disconnect_code integer,
-    internal_disconnect_reason character varying,
-    disconnect_initiator_id integer,
-    customer_price numeric,
-    vendor_price numeric,
-    duration integer,
-    success boolean,
-    profit numeric,
-    dst_prefix_in character varying,
-    dst_prefix_out character varying,
-    src_prefix_in character varying,
-    src_prefix_out character varying,
-    time_start timestamp with time zone,
-    time_connect timestamp with time zone,
-    time_end timestamp with time zone,
-    sign_orig_ip character varying,
-    sign_orig_port integer,
-    sign_orig_local_ip character varying,
-    sign_orig_local_port integer,
-    sign_term_ip character varying,
-    sign_term_port integer,
-    sign_term_local_ip character varying,
-    sign_term_local_port integer,
-    orig_call_id character varying,
-    term_call_id character varying,
-    vendor_invoice_id integer,
-    customer_invoice_id integer,
-    local_tag character varying,
-    destination_initial_rate numeric,
-    dialpeer_initial_rate numeric,
-    destination_initial_interval integer,
-    destination_next_interval integer,
-    dialpeer_initial_interval integer,
-    dialpeer_next_interval integer,
-    destination_rate_policy_id integer,
-    routing_attempt integer,
-    is_last_cdr boolean,
-    lega_disconnect_code integer,
-    lega_disconnect_reason character varying,
-    pop_id integer,
-    node_id integer,
-    src_name_in character varying,
-    src_name_out character varying,
-    diversion_in character varying,
-    diversion_out character varying,
-    lega_rx_payloads character varying,
-    lega_tx_payloads character varying,
-    legb_rx_payloads character varying,
-    legb_tx_payloads character varying,
-    legb_disconnect_code integer,
-    legb_disconnect_reason character varying,
-    dump_level_id integer,
-    auth_orig_ip inet,
-    auth_orig_port integer,
-    lega_rx_bytes integer,
-    lega_tx_bytes integer,
-    legb_rx_bytes integer,
-    legb_tx_bytes integer,
-    global_tag character varying,
-    dst_country_id integer,
-    dst_network_id integer,
-    lega_rx_decode_errs integer,
-    lega_rx_no_buf_errs integer,
-    lega_rx_parse_errs integer,
-    legb_rx_decode_errs integer,
-    legb_rx_no_buf_errs integer,
-    legb_rx_parse_errs integer,
-    src_prefix_routing character varying,
-    dst_prefix_routing character varying,
-    routing_plan_id integer,
-    routing_delay double precision,
-    pdd double precision,
-    rtt double precision,
-    early_media_present boolean,
-    lnp_database_id smallint,
-    lrn character varying,
-    destination_prefix character varying,
-    dialpeer_prefix character varying,
-    audio_recorded boolean,
-    ruri_domain character varying,
-    to_domain character varying,
-    from_domain character varying,
-    src_area_id integer,
-    dst_area_id integer,
-    auth_orig_transport_protocol_id smallint,
-    sign_orig_transport_protocol_id smallint,
-    sign_term_transport_protocol_id smallint,
-    core_version character varying,
-    yeti_version character varying,
-    lega_user_agent character varying,
-    legb_user_agent character varying,
-    uuid uuid,
-    pai_in character varying,
-    ppi_in character varying,
-    privacy_in character varying,
-    rpid_in character varying,
-    rpid_privacy_in character varying,
-    pai_out character varying,
-    ppi_out character varying,
-    privacy_out character varying,
-    rpid_out character varying,
-    rpid_privacy_out character varying,
-    destination_reverse_billing boolean,
-    dialpeer_reverse_billing boolean,
-    is_redirected boolean,
-    customer_account_check_balance boolean,
-    customer_external_id bigint,
-    customer_auth_external_id bigint,
-    customer_acc_vat numeric,
-    customer_acc_external_id bigint,
-    routing_tag_ids smallint[],
-    vendor_external_id bigint,
-    vendor_acc_external_id bigint,
-    orig_gw_external_id bigint,
-    term_gw_external_id bigint,
-    failed_resource_type_id smallint,
-    failed_resource_id bigint,
-    customer_price_no_vat numeric,
-    customer_duration integer,
-    vendor_duration integer,
-    customer_auth_name character varying
-);
-
-
---
 -- Name: cdr_id_seq; Type: SEQUENCE; Schema: cdr; Owner: -
 --
 
@@ -5728,40 +5562,6 @@ CREATE TABLE sys.call_duration_round_modes (
 
 
 --
--- Name: cdr_tables; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.cdr_tables (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    readable boolean DEFAULT true NOT NULL,
-    writable boolean DEFAULT false NOT NULL,
-    date_start character varying NOT NULL,
-    date_stop character varying NOT NULL,
-    active boolean DEFAULT true NOT NULL
-);
-
-
---
--- Name: cdr_tables_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.cdr_tables_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: cdr_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.cdr_tables_id_seq OWNED BY sys.cdr_tables.id;
-
-
---
 -- Name: auth_log id; Type: DEFAULT; Schema: auth_log; Owner: -
 --
 
@@ -6021,13 +5821,6 @@ ALTER TABLE ONLY sys.auth_log_tables ALTER COLUMN id SET DEFAULT nextval('sys.au
 
 
 --
--- Name: cdr_tables id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdr_tables_id_seq'::regclass);
-
-
---
 -- Name: auth_log auth_log_pkey; Type: CONSTRAINT; Schema: auth_log; Owner: -
 --
 
@@ -6112,7 +5905,7 @@ ALTER TABLE ONLY cdr.ar_internal_metadata
 --
 
 ALTER TABLE ONLY cdr.cdr
-    ADD CONSTRAINT cdr_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT cdr_pkey PRIMARY KEY (id, time_start);
 
 
 --
@@ -6436,14 +6229,6 @@ ALTER TABLE ONLY sys.call_duration_round_modes
 
 
 --
--- Name: cdr_tables cdr_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.cdr_tables
-    ADD CONSTRAINT cdr_tables_pkey PRIMARY KEY (id);
-
-
---
 -- Name: config config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -6466,17 +6251,24 @@ CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON billing.invoice_document
 
 
 --
+-- Name: cdr_id_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_id_idx ON ONLY cdr.cdr USING btree (id);
+
+
+--
 -- Name: cdr_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
-CREATE INDEX cdr_time_start_idx ON cdr.cdr USING btree (time_start);
+CREATE INDEX cdr_time_start_idx ON ONLY cdr.cdr USING btree (time_start);
 
 
 --
 -- Name: cdr_vendor_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
-CREATE INDEX cdr_vendor_invoice_id_idx ON cdr.cdr USING btree (vendor_invoice_id);
+CREATE INDEX cdr_vendor_invoice_id_idx ON ONLY cdr.cdr USING btree (vendor_invoice_id);
 
 
 --
@@ -6554,13 +6346,6 @@ CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.tr
 --
 
 CREATE TRIGGER auth_log_i BEFORE INSERT ON auth_log.auth_log FOR EACH ROW EXECUTE PROCEDURE auth_log.auth_log_i_tgf();
-
-
---
--- Name: cdr cdr_i; Type: TRIGGER; Schema: cdr; Owner: -
---
-
-CREATE TRIGGER cdr_i BEFORE INSERT ON cdr.cdr FOR EACH ROW EXECUTE PROCEDURE cdr.cdr_i_tgf();
 
 
 --
@@ -6730,6 +6515,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20180619091111'),
 ('20180621130107'),
 ('20180911180345'),
-('20181105175206');
+('20181105175206'),
+('20190604064015');
 
 

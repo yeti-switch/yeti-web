@@ -14,7 +14,6 @@ Rails.application.routes.draw do
       get :nodes
       get :hour_nodes
       get :cdrs_summary
-      get :cdrs_summary_archive
       get :profit
       get :duration
     end

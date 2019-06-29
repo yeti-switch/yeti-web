@@ -4,7 +4,7 @@
 #
 # Table name: cdr.cdr
 #
-#  id                              :integer          not null, primary key
+#  id                              :integer          not null
 #  customer_id                     :integer
 #  vendor_id                       :integer
 #  customer_acc_id                 :integer
@@ -33,7 +33,7 @@
 #  dst_prefix_out                  :string
 #  src_prefix_in                   :string
 #  src_prefix_out                  :string
-#  time_start                      :datetime
+#  time_start                      :datetime         not null
 #  time_connect                    :datetime
 #  time_end                        :datetime
 #  sign_orig_ip                    :string

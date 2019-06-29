@@ -3,7 +3,7 @@
 module Jobs
   class CdrPartitioning < ::BaseJob
     def execute
-      Cdr::Table.add_partition
+      Cdr::Cdr.add_partitions
       Cdr::AuthLogTable.add_partition
       Cdr::RtpStatistic.add_partitions
     end
