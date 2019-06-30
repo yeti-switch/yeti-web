@@ -16,8 +16,8 @@ module SqlCaller
     ].freeze
 
     class << self
-      def model_name(value)
-        self._model_name = value
+      def model_name(class_name)
+        self._model_name = class_name.to_s
       end
 
       def delegate_connection_methods(*names)
@@ -54,6 +54,38 @@ module SqlCaller
       select_value("SELECT current_setting('TIMEZONE');")
     end
 
+    define_custom_method(:select_line_serialized) do |sql, *bindings|
+      select_all_serialized(sql, *bindings).first
+    end
+
+    define_custom_method(:table_size) do |table_names|
+      query = <<-SQL
+        SELECT
+          table_schema||'.'||table_name AS name,
+          pg_size_pretty(
+            pg_relation_size(quote_ident(table_schema)||'.'||quote_ident(table_name))
+          ) AS size,
+          pg_size_pretty(
+            pg_total_relation_size(quote_ident(table_schema)||'.'||quote_ident(table_name))
+          ) AS total_size
+        FROM information_schema.tables
+        WHERE table_schema||'.'||table_name IN (?)
+      SQL
+      select_all_serialized(query, table_names)
+    end
+
+    define_custom_method(:approximate_row_count) do |table_names|
+      query = <<-SQL
+        SELECT
+          sch.nspname||'.'||tbl.relname AS name,
+          tbl.reltuples AS approximate_row_count
+        FROM pg_class tbl
+        JOIN pg_namespace sch ON sch.oid = tbl.relnamespace
+        WHERE sch.nspname||'.'||tbl.relname IN (?)
+      SQL
+      select_all_serialized(query, table_names)
+    end
+
     private
 
     def quote(value)
@@ -66,7 +98,7 @@ module SqlCaller
 
     def model_class
       return @model_class if defined?(@model_class)
-      raise NotImplementedError, 'method #model_name must be defined' if _model_name.nil?
+      raise NotImplementedError, 'define model_class via #model_name class method' if _model_name.nil?
 
       @model_class = _model_name.constantize
     end

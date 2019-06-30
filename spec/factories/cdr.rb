@@ -45,7 +45,7 @@ FactoryGirl.define do
 
     before(:create) do |record, _evaluator|
       # Create partition for current+next monthes if not exists
-      Cdr::Table.add_partition
+      Cdr::Cdr.add_partition_for(record.time_start)
 
       # link Customer from associated Account
       unless record.customer_id

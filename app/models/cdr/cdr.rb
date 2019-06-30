@@ -33,7 +33,7 @@
 #  dst_prefix_out                  :string
 #  src_prefix_in                   :string
 #  src_prefix_out                  :string
-#  time_start                      :datetime
+#  time_start                      :datetime         not null
 #  time_connect                    :datetime
 #  time_end                        :datetime
 #  sign_orig_ip                    :string
@@ -147,6 +147,10 @@
 
 class Cdr::Cdr < Cdr::Base
   self.table_name = 'cdr.cdr'
+  self.primary_key = :id
+
+  include Partitionable
+  self.pg_partition_name = 'PgPartition::Cdr'
 
   belongs_to :rateplan
   belongs_to :routing_group
@@ -298,11 +302,11 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def self.new_events
-    fetch_sp_val("select ev_new from pgq.get_queue_info('cdr_billing')")
+    SqlCaller::Yeti.select_value("select ev_new from pgq.get_queue_info('cdr_billing')")
   end
 
   def self.pending_events
-    fetch_sp_val("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
+    SqlCaller::Yeti.select_value("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
   end
 
   private

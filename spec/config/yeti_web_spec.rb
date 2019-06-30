@@ -21,6 +21,11 @@ RSpec.describe 'config/yeti_web.yml' do
       role_policy: {
         when_no_config: be_one_of('allow', 'disallow', 'raise'),
         when_no_policy_class: be_one_of('allow', 'disallow', 'raise')
+      },
+      partition_remove_delay: {
+        'cdr.cdr': anything,
+        'auth_log.auth_log': anything,
+        'rtp_statistics.streams': anything
       }
     }
   end

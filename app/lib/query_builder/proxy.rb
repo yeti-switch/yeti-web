@@ -2,18 +2,17 @@
 
 module QueryBuilder
   class Proxy < ::QueryBuilder::Base
-    def initialize(find_proc, collection_proc)
-      @find_proc = find_proc
-      @collection_proc = collection_proc
+    def initialize(model_class)
+      @model_class = model_class
       super()
     end
 
     private
 
-    attr_reader :find_proc, :collection_proc
+    attr_reader :model_class
 
     def dup_params
-      [find_proc, collection_proc]
+      [model_class]
     end
 
     def query_values
@@ -21,13 +20,13 @@ module QueryBuilder
     end
 
     def find_record(id)
-      find_proc.call(id, query_values)
+      model_class.query_builder_find(id, query_values)
     end
 
     def find_collection
       return [] if is_none
 
-      collection_proc.call(query_values)
+      model_class.query_builder_collection(query_values)
     end
   end
 end

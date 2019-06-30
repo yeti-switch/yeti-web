@@ -30,14 +30,6 @@ insert into sys.amount_round_modes(id,name) values(2, 'Always UP');
 insert into sys.amount_round_modes(id,name) values(3, 'Always DOWN');
 insert into sys.amount_round_modes(id,name) values(4, 'Math rules');
 
--- TOC entry 2514 (class 0 OID 0)
--- Dependencies: 295
--- Name: cdr_tables_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: yeti
---
-
-SELECT pg_catalog.setval('cdr_tables_id_seq', 1, true);
-
-
 --
 -- TOC entry 2505 (class 0 OID 22336)
 -- Dependencies: 296

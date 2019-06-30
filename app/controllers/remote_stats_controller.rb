@@ -66,24 +66,6 @@ class RemoteStatsController < ApplicationController
     )
   end
 
-  def cdrs_summary_archive
-    # TODO: rewrite this SHIT
-    @data = CdrSummaryDecorator.new(Cdr::CdrArchive.ransack(clean_search_params(params[:q].to_unsafe_h)).result.scoped_stat)
-    respond_with(
-      originated_calls_count: @data.originated_calls_count,
-      rerouted_calls_count: @data.rerouted_calls_count,
-      rerouted_calls_percent: @data.rerouted_calls_percent,
-      termination_attempts_count: @data.termination_attempts_count,
-      calls_duration: @data.decorated_calls_duration,
-      acd: @data.decorated_acd,
-      origination_asr: @data.decorated_origination_asr,
-      termination_asr: @data.decorated_termination_asr,
-      profit: @data.decorated_profit,
-      origination_cost: @data.decorated_customer_price,
-      termination_cost: @data.decorated_vendor_price
-    )
-  end
-
   def term_gateway
     expires_in 2.minutes, public: true
     render json: Stats::ActiveCallTermGateway.to_chart(params[:id]).to_json(root: false)

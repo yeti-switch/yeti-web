@@ -379,7 +379,7 @@ SELECT pg_catalog.setval('currencies_id_seq', 1, false);
 -- Data for Name: guiconfig; Type: TABLE DATA; Schema: sys; Owner: yeti
 --
 
-INSERT INTO guiconfig VALUES ('30,50,100', 1, '/tmp', 'https://127.0.0.1/tmexport', 100500, 4, '/tmp/yeti-xml2rates', 4, 120, true, true, false, false, 7200, false, 7000, false, 15, 24, 10800, 100, 3600, 1000, 'http://127.0.0.1');
+INSERT INTO guiconfig VALUES ('30,50,100', 1, '/tmp', 'https://127.0.0.1/tmexport', 100500, 4, '/tmp/yeti-xml2rates', true, true, false, false, 7200, false, 7000, false, 15, 24, 10800, 100, 3600, 1000, 'http://127.0.0.1');
 
 
 --
@@ -400,7 +400,7 @@ SELECT pg_catalog.setval('guiconfig_id_seq', 1, true);
 INSERT INTO jobs VALUES (1, 'CdrPartitioning', NULL, '2014-08-30 21:42:51.904755+03', false);
 INSERT INTO jobs VALUES (2, 'EventProcessor', NULL, '2014-08-30 22:16:02.393718+03', false);
 INSERT INTO jobs VALUES (3, 'CdrBatchCleaner', NULL, '2014-08-30 22:34:21.645614+03', false);
-INSERT INTO jobs VALUES (4, 'CdrArchiving', NULL, '2017-08-14 12:56:28.619626+03', false);
+INSERT INTO jobs VALUES (4, 'PartitionRemoving', NULL, '2017-08-14 12:56:28.619626+03', false);
 INSERT INTO jobs VALUES (5, 'CallsMonitoring', NULL, '2017-08-14 12:56:32.076616+03', false);
 INSERT INTO jobs VALUES (6, 'StatsClean', NULL, '2017-08-14 12:56:32.687261+03', false);
 INSERT INTO jobs VALUES (7, 'StatsAggregation', NULL, '2017-08-14 12:56:32.687261+03', false);

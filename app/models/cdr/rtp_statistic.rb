@@ -61,19 +61,15 @@ class Cdr::RtpStatistic < Cdr::Base
   self.table_name = 'rtp_statistics.streams'
   self.primary_key = :id
 
+  include Partitionable
+  self.pg_partition_name = 'PgPartition::Cdr'
+  self.pg_partition_interval_type = PgPartition::INTERVAL_DAY
+  self.pg_partition_depth_past = 3
+  self.pg_partition_depth_future = 3
+
   belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
-
-  def self.add_partitions
-    from = (Time.now - 3.days).utc.beginning_of_day
-    7.times do
-      prefix = from.to_date.to_s.tr('-', '_')
-      to = from + 1.day
-      add_partition_for_range(prefix, from.to_s, to.to_s)
-      from = to
-    end
-  end
 
   def display_name
     id.to_s
