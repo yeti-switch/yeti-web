@@ -34,8 +34,13 @@ module PgPartition
     end
 
     def add_partition_for_range(table_name, prefix:, from:, to:)
+      existed_partition = partitions(table_name).detect do |r|
+        r[:date_from].to_date == from.to_date && r[:date_to].to_date == to.to_date
+      end
+      return if existed_partition.present?
+
       execute(
-        "CREATE TABLE IF NOT EXISTS #{table_name}_#{prefix}
+        "CREATE TABLE #{table_name}_#{prefix}
         PARTITION OF #{table_name}
         FOR VALUES FROM (?) TO (?)",
         from, to
