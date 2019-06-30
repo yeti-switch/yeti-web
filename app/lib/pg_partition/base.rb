@@ -14,6 +14,7 @@ module PgPartition
       partition_options
       partition_intervals
       partitions
+      sql_caller
     ] => :instance
 
     instance_delegate %i[
@@ -75,25 +76,34 @@ module PgPartition
       steps.map { |opts| opts[:from] }
     end
 
-    def partitions(table_names)
-      table_names = Array.wrap(table_names).map { |t_name| t_name.split('.') }
-      select_all_serialized(
-        "SELECT
-          nmsp_child.nspname||'.'||child.relname AS partition
-          nmsp_parent.nspname||'.'||parent.relname AS parent
+    def partitions(table_names, id: nil)
+      bindings = [Array.wrap(table_names), id].reject(&:nil?)
+      query = <<-SQL
+        SELECT
+            child.oid AS id,
+            nmsp_child.nspname||'.'||child.relname AS name,
+            nmsp_parent.nspname||'.'||parent.relname AS parent_table,
+            pg_get_expr(child.relpartbound, child.oid, true) AS partition_range,
+            SPLIT_PART(pg_get_expr(child.relpartbound, child.oid, true), '''', 2)::timestamp with time zone AS date_from,
+            SPLIT_PART(pg_get_expr(child.relpartbound, child.oid, true), '''', 4)::timestamp with time zone AS date_to
         FROM pg_inherits
-        JOIN pg_class parent            ON pg_inherits.inhparent = parent.oid
-        JOIN pg_class child             ON pg_inherits.inhrelid  = child.oid
-        JOIN pg_namespace nmsp_parent   ON nmsp_parent.oid       = parent.relnamespace
-        JOIN pg_namespace nmsp_child    ON nmsp_child.oid        = child.relnamespace
+        JOIN pg_class parent ON pg_inherits.inhparent = parent.oid
+        JOIN pg_class child ON pg_inherits.inhrelid  = child.oid
+        JOIN pg_namespace nmsp_parent ON nmsp_parent.oid = parent.relnamespace
+        JOIN pg_namespace nmsp_child ON nmsp_child.oid = child.relnamespace
         WHERE
-          #{table_names.map { '(nmsp_parent.nspname = ? AND parent.relname = ?)' }.join(" OR\n")}
-        ORDER BY 2, 1",
-        *table_names.flatten
-      )
+          nmsp_parent.nspname||'.'||parent.relname IN (?)
+          #{'AND child.oid = ?' unless id.nil?}
+        ORDER BY 2, 1
+      SQL
+      select_all_serialized(query, *bindings)
     end
 
-    private
+    def remove_partition(partition_name)
+      execute <<-SQL
+        DROP TABLE #{partition_name};
+      SQL
+    end
 
     def sql_caller
       return @sql_caller if defined?(@sql_caller)

@@ -4,18 +4,20 @@ class RealtimeData::ActiveCall < YetiResource
   include ActiveModel::Validations
   include WithQueryBuilder
 
-  query_builder_find do |id, includes:, **_|
-    node_id, local_tag = id.split('*')
-    record = Node.find(node_id).active_call(local_tag)
-    RealtimeData::ActiveCall.load_associations([record], *includes)
-    record
-  end
+  class << self
+    def query_builder_find(id, includes:, **_)
+      node_id, local_tag = id.split('*')
+      record = Node.find(node_id).active_call(local_tag)
+      RealtimeData::ActiveCall.load_associations([record], *includes)
+      record
+    end
 
-  query_builder_collection do |includes:, filters:, **_|
-    result = Yeti::CdrsFilter.new(Node.all, filters).search(only: nil, empty_on_error: true)
-    records = result.map { |item| RealtimeData::ActiveCall.new(item) }
-    RealtimeData::ActiveCall.load_associations(records, *includes)
-    records
+    def query_builder_collection(includes:, filters:, **_)
+      result = Yeti::CdrsFilter.new(Node.all, filters).search(only: nil, empty_on_error: true)
+      records = result.map { |item| RealtimeData::ActiveCall.new(item) }
+      RealtimeData::ActiveCall.load_associations(records, *includes)
+      records
+    end
   end
 
   attribute :start_time, :yeti_date_time
