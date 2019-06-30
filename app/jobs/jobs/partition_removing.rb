@@ -5,6 +5,7 @@ module Jobs
     def execute
       remove_partition! PartitionModel::Cdr, Cdr::Cdr
       remove_partition! PartitionModel::Cdr, Cdr::AuthLog
+      remove_partition! PartitionModel::Cdr, Cdr::RtpStatistic
     end
 
     private
