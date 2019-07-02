@@ -302,11 +302,11 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def self.new_events
-    SqlCaller::Yeti.select_value("select ev_new from pgq.get_queue_info('cdr_billing')")
+    SqlCaller::Cdr.select_value("select ev_new from pgq.get_queue_info('cdr_billing')")
   end
 
   def self.pending_events
-    SqlCaller::Yeti.select_value("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
+    SqlCaller::Cdr.select_value("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
   end
 
   private

@@ -2,6 +2,10 @@
 
 class MoveCdrsToNewPartitioning < ActiveRecord::Migration[5.2]
   def up
+    execute <<-SQL
+      ALTER TABLE cdr.cdr_archive add legb_local_tag varchar;
+    SQL
+
     parent_table = 'cdr.cdr'
     archive_table = 'cdr.cdr_archive'
     trigger_name = 'cdr_i'
