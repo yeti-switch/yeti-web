@@ -16,9 +16,19 @@ module PartitionModel
 
     class << self
       def query_builder_find(id, params)
+        raise ArgumentError, 'id must be present' if id.blank?
+
         logger.debug { "[#{name}] FIND ONE id=#{id} with params=#{params}" }
-        rows = pg_partition_class.partitions(partitioned_tables, id: id)
-        row = rows.detect { |row| row[:id].to_s == id.to_s }
+
+        filters = params[:filters]
+        filters.assert_valid_keys(:parent_table_eq)
+
+        # filter by parent_table
+        parent_table_eq = filters[:parent_table_eq]
+        table_names = partitioned_tables.include?(parent_table_eq) ?
+                          [parent_table_eq] : partitioned_tables
+
+        row = pg_partition_class.partitions(table_names, id: id).first
         if row.nil?
           raise ActiveRecord::RecordNotFound.new(
             "Couldn't find #{name} with '#{primary_key}'=#{id}",
@@ -37,8 +47,11 @@ module PartitionModel
       def query_builder_collection(params)
         logger.debug { "[#{self}] FIND COLLECTION with params=#{params}" }
 
+        filters = params[:filters]
+        filters.assert_valid_keys(:parent_table_eq)
+
         # filter by parent_table
-        parent_table_eq = params[:filters][:parent_table_eq]
+        parent_table_eq = filters[:parent_table_eq]
         table_names = partitioned_tables.include?(parent_table_eq) ?
                           [parent_table_eq] : partitioned_tables
 
@@ -91,6 +104,10 @@ module PartitionModel
       def base_class
         self
       end
+
+      def find_by_name(name)
+        find Digest::MD5.hexdigest(name)
+      end
     end
 
     attribute :id, :integer
@@ -108,7 +125,7 @@ module PartitionModel
     end
 
     def destroy
-      self.class.pg_partition_class.remove_partition(partition)
+      self.class.pg_partition_class.remove_partition(name)
       true
     rescue ActiveRecord::StatementInvalid => e
       errors.add(:base, e.message)

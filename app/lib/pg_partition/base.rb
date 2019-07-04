@@ -15,6 +15,7 @@ module PgPartition
       partition_intervals
       partitions
       sql_caller
+      remove_partition
     ] => :instance
 
     instance_delegate %i[
@@ -85,7 +86,7 @@ module PgPartition
       bindings = [Array.wrap(table_names), id].reject(&:nil?)
       query = <<-SQL
         SELECT
-            child.oid AS id,
+            MD5(nmsp_child.nspname||'.'||child.relname) AS id,
             nmsp_child.nspname||'.'||child.relname AS name,
             nmsp_parent.nspname||'.'||parent.relname AS parent_table,
             pg_get_expr(child.relpartbound, child.oid, true) AS partition_range,
@@ -98,7 +99,7 @@ module PgPartition
         JOIN pg_namespace nmsp_child ON nmsp_child.oid = child.relnamespace
         WHERE
           nmsp_parent.nspname||'.'||parent.relname IN (?)
-          #{'AND child.oid = ?' unless id.nil?}
+          #{"AND MD5(nmsp_child.nspname||'.'||child.relname) = ?" unless id.nil?}
         ORDER BY 2, 1
       SQL
       select_all_serialized(query, *bindings)

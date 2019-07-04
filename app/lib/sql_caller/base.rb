@@ -58,6 +58,16 @@ module SqlCaller
       select_all_serialized(sql, *bindings).first
     end
 
+    define_custom_method(:table_exist?) do |table_name|
+      query = <<-SQL
+        SELECT COUNT(*)
+        FROM information_schema.tables
+        WHERE table_schema||'.'||table_name = ?
+      SQL
+      count = select_value(query, table_name)
+      count > 0
+    end
+
     define_custom_method(:table_size) do |table_names|
       query = <<-SQL
         SELECT
