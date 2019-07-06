@@ -6,6 +6,7 @@ module Jobs
       Cdr::Cdr.add_partitions
       Cdr::AuthLog.add_partitions
       Cdr::RtpStatistic.add_partitions
+      Log::ApiLog.add_partitions
     end
   end
 end
