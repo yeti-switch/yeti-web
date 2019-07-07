@@ -30,6 +30,8 @@ class LuaExecution < ActiveRecord::Migration[5.2]
         drop column lua_script_id,
         drop column lua_script_name,
         drop column use_registered_aor;
+
+      delete from  class4.disconnect_code where id=131;
     }
   end
 
@@ -49,6 +51,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 
+      INSERT INTO class4.disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (131, 1, true, false, 480, 'Gateway not registered', NULL, NULL, false, true, true, false);
 
       ALTER TABLE sys.lua_scripts ALTER COLUMN id TYPE smallint;
 
