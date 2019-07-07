@@ -1,7 +1,9 @@
 class AddLegbRuri < ActiveRecord::Migration[5.2]
   def up
     execute %q{
-        alter table cdr.cdr add legb_ruri varchar;
+        alter table cdr.cdr
+          add legb_ruri varchar,
+          add legb_outbound_proxy varchar;
 
 CREATE OR REPLACE FUNCTION switch.writecdr(
     i_is_master boolean,
@@ -20,6 +22,7 @@ CREATE OR REPLACE FUNCTION switch.writecdr(
     i_legb_remote_ip character varying,
     i_legb_remote_port integer,
     i_legb_ruri varchar,
+    i_legb_outbound_proxy varchar,
     i_time_data json,
     i_early_media_present boolean,
     i_legb_disconnect_code integer,
@@ -150,6 +153,7 @@ BEGIN
   v_cdr.local_tag=i_local_tag;
   v_cdr.legb_local_tag=i_legb_local_tag;
   v_cdr.legb_ruri=i_legb_ruri;
+  v_cdr.legb_outbound_proxy=i_legb_outbound_proxy;
 
   v_cdr.is_redirected=i_is_redirected;
 
@@ -430,6 +434,7 @@ $BODY$
     i_legb_remote_ip character varying,
     i_legb_remote_port integer,
     i_legb_ruri varchar,
+    i_legb_outbound_proxy varchar,
     i_time_data json,
     i_early_media_present boolean,
     i_legb_disconnect_code integer,
@@ -459,7 +464,9 @@ $BODY$
     i_dynamic json
 );
 
-        alter table cdr.cdr drop column legb_ruri;
+        alter table cdr.cdr
+          drop column legb_ruri,
+          drop column legb_outbound_proxy;
 
     }
   end

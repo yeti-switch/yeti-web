@@ -279,6 +279,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           column :term_gw
           column :legb_ruri
+          column :legb_outbound_proxy
           column :sign_term_transport_protocol
           column(:sign_term_ip) do |cdr|
             "#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(':')
@@ -462,6 +463,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
 
           row :legb_ruri
+          row :legb_outbound_proxy
           row :sign_term_transport_protocol
           row :sign_term_ip do
             "#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(':')
@@ -641,6 +643,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
     column :term_gw
     column :legb_ruri
+    column :legb_outbound_proxy
     column('LegB remote socket', sortable: :sign_term_ip) do |cdr|
       if cdr.sign_term_transport_protocol_id.nil?
         "#{cdr.sign_term_ip}:#{cdr.sign_term_port}".chomp(':')

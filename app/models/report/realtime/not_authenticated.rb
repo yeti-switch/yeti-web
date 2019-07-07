@@ -144,6 +144,7 @@
 #  customer_auth_name              :string
 #  legb_local_tag                  :string
 #  legb_ruri                       :string
+#  legb_outbound_proxy             :string
 #
 
 class Report::Realtime::NotAuthenticated < Report::Realtime::Base

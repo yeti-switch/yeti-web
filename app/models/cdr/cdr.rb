@@ -144,6 +144,7 @@
 #  customer_auth_name              :string
 #  legb_local_tag                  :string
 #  legb_ruri                       :string
+#  legb_outbound_proxy             :string
 #
 
 class Cdr::Cdr < Cdr::Base
