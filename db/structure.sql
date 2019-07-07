@@ -33298,7 +33298,7 @@ BEGIN
   end if;
 
   if i_vendor_gw.use_registered_aor then
-    i_profile.registered_aor_id=i_vendor_gw.id
+    i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
@@ -33893,7 +33893,7 @@ BEGIN
   end if;
 
   if i_vendor_gw.use_registered_aor then
-    i_profile.registered_aor_id=i_vendor_gw.id
+    i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
@@ -34441,7 +34441,7 @@ BEGIN
   end if;
 
   if i_vendor_gw.use_registered_aor then
-    i_profile.registered_aor_id=i_vendor_gw.id
+    i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
