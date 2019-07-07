@@ -34,6 +34,7 @@ describe 'Export Numberlist Item', type: :feature do
         ['Src rewrite result', item.src_rewrite_result.to_s],
         ['Dst rewrite rule', item.dst_rewrite_rule.to_s],
         ['Dst rewrite result', item.dst_rewrite_result.to_s],
+        ['Lua script name', item.lua_script.name],
         ['Tag action name', item.tag_action.name],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', ')],
         ['Created at', item.created_at.to_s],

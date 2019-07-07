@@ -2,9 +2,9 @@
 
 # == Schema Information
 #
-# Table name: cdr.cdr
+# Table name: cdr.cdr_archive
 #
-#  id                              :integer          not null
+#  id                              :integer          primary key
 #  customer_id                     :integer
 #  vendor_id                       :integer
 #  customer_acc_id                 :integer
@@ -33,7 +33,7 @@
 #  dst_prefix_out                  :string
 #  src_prefix_in                   :string
 #  src_prefix_out                  :string
-#  time_start                      :datetime         not null
+#  time_start                      :datetime
 #  time_connect                    :datetime
 #  time_end                        :datetime
 #  sign_orig_ip                    :string
@@ -72,7 +72,7 @@
 #  legb_tx_payloads                :string
 #  legb_disconnect_code            :integer
 #  legb_disconnect_reason          :string
-#  dump_level_id                   :integer          default(0), not null
+#  dump_level_id                   :integer
 #  auth_orig_ip                    :inet
 #  auth_orig_port                  :integer
 #  lega_rx_bytes                   :integer
@@ -142,40 +142,9 @@
 #  customer_duration               :integer
 #  vendor_duration                 :integer
 #  customer_auth_name              :string
-#  legb_local_tag                  :string
 #  legb_ruri                       :string
-#  legb_outbound_proxy             :string
 #
 
-class Report::Realtime::OriginationPerformance < Report::Realtime::Base
-  attr_accessor :l
-
-  scope :detailed_scope, lambda { |length|
-    l = length.to_i
-    select("
-      customer_auth_id,
-      min(routing_delay) as min_routing_delay,
-      max(routing_delay) as max_routing_delay,
-      avg(routing_delay) as avg_routing_delay,
-      count(nullif(is_last_cdr,false))::float/#{l} as cps,
-      coalesce(sum(duration)::float/nullif(count(nullif(success,false)),0)::float/#{l},0) as offered_load,
-      count(nullif(is_last_cdr,false)) as calls_count,
-      count(id) as termination_attempts_count,
-      coalesce(sum(duration),0) as calls_duration,
-      sum(duration)::float/nullif(count(nullif(success,false)),0)::float as acd,
-      count(nullif(success,false))::float/nullif(count(nullif(is_last_cdr,false)),0)::float as asr
-    ").group(:customer_auth_id).preload(:customer_auth)
-  }
-
-  scope :time_interval_eq, lambda { |value|
-    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2 * value.to_i, value.to_i)
-  }
-
-  private
-
-  def self.ransackable_scopes(_auth_object = nil)
-    [
-      :time_interval_eq
-    ]
-  end
+class Cdr::CdrArchive < Cdr::Cdr
+  self.table_name = 'cdr.cdr_archive'
 end

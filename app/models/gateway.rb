@@ -119,6 +119,8 @@
 #  preserve_anonymous_from_domain   :boolean          default(FALSE), not null
 #  termination_src_numberlist_id    :integer
 #  termination_dst_numberlist_id    :integer
+#  lua_script_id                    :integer
+#  use_registered_aor               :boolean          default(FALSE), not null
 #
 
 require 'resolv'
@@ -150,6 +152,7 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
@@ -270,9 +273,10 @@ class Gateway < Yeti::ActiveRecord
   protected
 
   def allow_termination_can_be_enabled
-    if host.blank? && (allow_termination == true)
+    if host.blank? && use_registered_aor == false && (allow_termination == true)
       errors.add(:allow_termination, I18n.t('activerecord.errors.models.gateway.attributes.allow_termination.empty_host_for_termination'))
       errors.add(:host, I18n.t('activerecord.errors.models.gateway.attributes.host.empty_host_for_termination'))
+      errors.add(:use_registered_aor, I18n.t('activerecord.errors.models.gateway.attributes.use_registered_aor.empty_host_for_termination'))
     end
   end
 

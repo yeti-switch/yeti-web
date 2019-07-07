@@ -19,7 +19,7 @@ ActiveAdmin.register Importing::Gateway do
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :sensor, :sensor_level, :rx_inband_dtmf_filtering_mode, :rx_inband_dtmf_filtering_mode,
            :preserve_anonymous_from_domain,
-           :termination_dst_numberlist, :termination_src_numberlist
+           :termination_dst_numberlist, :termination_src_numberlist, :lua_script
 
   index do
     selectable_column
@@ -62,6 +62,7 @@ ActiveAdmin.register Importing::Gateway do
     column :host, sortable: 'host' do |gw|
       "#{gw.host}:#{gw.port}".chomp(':')
     end
+    column :use_registered_aor
 
     column :origination_capacity
     column :termination_capacity
@@ -101,6 +102,7 @@ ActiveAdmin.register Importing::Gateway do
 
     column :dst_rewrite_rule
     column :dst_rewrite_result
+    column :lua_script
 
     column :acd_limit
     column :asr_limit

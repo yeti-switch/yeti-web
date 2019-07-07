@@ -22,6 +22,8 @@
 #  tag_action_value_names :string
 #  number_min_length      :integer
 #  number_max_length      :integer
+#  lua_script_id          :integer
+#  lua_script_name        :string
 #
 
 class Importing::NumberlistItem < Importing::Base
@@ -31,6 +33,7 @@ class Importing::NumberlistItem < Importing::Base
   belongs_to :numberlist, class_name: 'Routing::Numberlist'
   belongs_to :action, class_name: 'Routing::NumberlistAction'
   belongs_to :tag_action, class_name: 'Routing::TagAction'
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
   self.import_class = ::Routing::NumberlistItem
 
@@ -39,7 +42,7 @@ class Importing::NumberlistItem < Importing::Base
                               action_id
                               src_rewrite_rule src_rewrite_result
                               dst_rewrite_rule dst_rewrite_result
-                              tag_action_id tag_action_value]
+                              tag_action_id tag_action_value lua_script_id]
 
   def self.after_import_hook(unique_columns = [])
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')

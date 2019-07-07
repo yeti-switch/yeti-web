@@ -19,7 +19,8 @@ describe 'Export Gateways', type: :feature do
            orig_disconnect_policy: create(:disconnect_policy),
            term_disconnect_policy: create(:disconnect_policy),
            termination_dst_numberlist: create(:numberlist),
-           termination_src_numberlist: create(:numberlist)
+           termination_src_numberlist: create(:numberlist),
+           lua_script: create(:lua_script)
   end
 
   before do
@@ -66,6 +67,7 @@ describe 'Export Gateways', type: :feature do
         ['Transport protocol name',            item.transport_protocol.name],
         ['Host',                               item.host],
         ['Port',                               item.port.to_s],
+        ['Use registered aor',                 item.use_registered_aor.to_s],
         ['Resolve ruri',                       item.resolve_ruri.to_s],
         ['Diversion policy name',              item.diversion_policy.name],
         ['Diversion rewrite rule',             item.diversion_rewrite_rule.to_s],
@@ -132,7 +134,8 @@ describe 'Export Gateways', type: :feature do
         ['Sip schema name',                    item.sip_schema.name],
         ['Preserve anonymous from domain',     item.preserve_anonymous_from_domain.to_s],
         ['Termination dst numberlist name',    item.termination_dst_numberlist.name],
-        ['Termination src numberlist name',    item.termination_src_numberlist.name]
+        ['Termination src numberlist name',    item.termination_src_numberlist.name],
+        ['Lua script name',                    item.lua_script.name]
       ]
     )
   end
