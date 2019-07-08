@@ -41105,7 +41105,8 @@ CREATE TABLE logs.api_requests (
     response_body text,
     request_headers text,
     response_headers text
-);
+)
+PARTITION BY RANGE (created_at);
 
 
 --
@@ -44875,7 +44876,7 @@ ALTER TABLE ONLY gui.versions
 --
 
 ALTER TABLE ONLY logs.api_requests
-    ADD CONSTRAINT api_requests_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT api_requests_pkey PRIMARY KEY (id, created_at);
 
 
 --
@@ -45954,7 +45955,14 @@ CREATE INDEX sessions_updated_at_idx ON gui.sessions USING btree (updated_at);
 -- Name: api_requests_created_at_idx; Type: INDEX; Schema: logs; Owner: -
 --
 
-CREATE INDEX api_requests_created_at_idx ON logs.api_requests USING btree (created_at);
+CREATE INDEX api_requests_created_at_idx ON ONLY logs.api_requests USING btree (created_at);
+
+
+--
+-- Name: api_requests_id_idx; Type: INDEX; Schema: logs; Owner: -
+--
+
+CREATE INDEX api_requests_id_idx ON ONLY logs.api_requests USING btree (id);
 
 
 --
@@ -46945,6 +46953,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190428191918'),
 ('20190622131912'),
 ('20190629193852'),
+('20190706114700'),
 ('20190707141219');
 
 

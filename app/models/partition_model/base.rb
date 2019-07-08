@@ -66,7 +66,7 @@ module PartitionModel
         names = records.map(&:name)
         result = sql_caller.table_size(names).group_by { |r| r[:name] }
         records.each do |record|
-          table_size = result[record.name].first
+          table_size = result[record.name]&.first || {}
           record.size = table_size[:size]
           record.total_size = table_size[:total_size]
         end
@@ -76,7 +76,7 @@ module PartitionModel
         names = records.map(&:name)
         result = sql_caller.approximate_row_count(names).group_by { |r| r[:name] }
         records.each do |record|
-          table_size = result[record.name].first
+          table_size = result[record.name]&.first || {}
           record.approximate_row_count = table_size[:approximate_row_count]
         end
       end
@@ -110,7 +110,7 @@ module PartitionModel
       end
     end
 
-    attribute :id, :integer
+    attribute :id
     attribute :name
     attribute :parent_table
     attribute :partition_range

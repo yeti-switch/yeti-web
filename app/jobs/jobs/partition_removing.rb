@@ -18,7 +18,7 @@ module Jobs
       table_name = model_class.table_name
       remove_delay = partition_remove_delay[table_name]
       if remove_delay.blank?
-        logger.error { "#{self.class}: blank remove delay for #{table_name}" }
+        logger.info { "#{self.class}: blank remove delay for #{table_name}" }
         return
       end
 
@@ -30,7 +30,7 @@ module Jobs
                        .sort_by(&:date_to)
 
       if cdr_collection.size <= remove_delay
-        logger.error { "#{self.class}: does not enough partitions for #{table_name}" }
+        logger.info { "#{self.class}: does not enough partitions for #{table_name}" }
         return
       end
 

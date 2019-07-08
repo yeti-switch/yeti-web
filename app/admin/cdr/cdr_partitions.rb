@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register PartitionModel::Cdr, as: 'CDR Partition' do
-  menu parent: 'System', label: 'CDR Partitions'
+  menu parent: 'CDR', label: 'CDR Partitions'
 
-  actions :index, :show
+  actions :index
 
   filter :parent_table_eq,
          as: :select,
@@ -30,7 +30,6 @@ ActiveAdmin.register PartitionModel::Cdr, as: 'CDR Partition' do
   end
 
   index do
-    id_column
     column :name
     column :parent_table
     column :date_from
@@ -38,27 +37,5 @@ ActiveAdmin.register PartitionModel::Cdr, as: 'CDR Partition' do
     column :size
     column :total_size
     column :approximate_row_count
-  end
-
-  show do
-    columns do
-      column do
-        attributes_table do
-          row :id
-          row :name
-          row :parent_table
-          row :date_from
-          row :date_to
-          row :partition_range
-        end
-      end
-      column do
-        attributes_table title: 'Table Details' do
-          row :size
-          row :total_size
-          row :approximate_row_count
-        end
-      end
-    end
   end
 end

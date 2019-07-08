@@ -20,19 +20,23 @@
 #  response_headers :text
 #
 
-class Log::ApiLog < ActiveRecord::Base
-  self.table_name = 'logs.api_requests'
-  self.primary_key = :id
+FactoryGirl.define do
+  factory :api_log, class: Log::ApiLog do
+    path '/api/rest/qweasd'
+    add_attribute :method, 'GET'
+    status 204
+    controller 'QweAsdController'
+    action 'index'
+    page_duration 0
+    db_duration 0
+    params nil
+    request_body nil
+    response_body nil
+    request_headers nil
+    response_headers nil
 
-  include Partitionable
-  self.pg_partition_name = 'PgPartition::Yeti'
-  self.pg_partition_interval_type = PgPartition::INTERVAL_DAY
-  self.pg_partition_depth_past = 3
-  self.pg_partition_depth_future = 3
-
-  scope :failed, -> { where('status >= ?', 400) }
-
-  def display_name
-    id.to_s
+    before(:create) do |record, _evaluator|
+      Log::ApiLog.add_partition_for(record.created_at || Time.now.utc)
+    end
   end
 end

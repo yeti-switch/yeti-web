@@ -90,8 +90,14 @@ module PgPartition
             nmsp_child.nspname||'.'||child.relname AS name,
             nmsp_parent.nspname||'.'||parent.relname AS parent_table,
             pg_get_expr(child.relpartbound, child.oid, true) AS partition_range,
-            SPLIT_PART(pg_get_expr(child.relpartbound, child.oid, true), '''', 2)::timestamp with time zone AS date_from,
-            SPLIT_PART(pg_get_expr(child.relpartbound, child.oid, true), '''', 4)::timestamp with time zone AS date_to
+            NULLIF(
+              SPLIT_PART(pg_get_expr(child.relpartbound, child.oid, true), '''', 2),
+              ''
+            )::timestamp with time zone AS date_from,
+            NULLIF(
+              SPLIT_PART(pg_get_expr(child.relpartbound, child.oid, true), '''', 4),
+              ''
+            )::timestamp with time zone AS date_to
         FROM pg_inherits
         JOIN pg_class parent ON pg_inherits.inhparent = parent.oid
         JOIN pg_class child ON pg_inherits.inhrelid  = child.oid
