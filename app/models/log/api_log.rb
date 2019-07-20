@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: api_requests
+# Table name: logs.api_requests
 #
 #  id               :integer          not null, primary key
 #  created_at       :datetime         not null
