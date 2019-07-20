@@ -69,6 +69,22 @@ class Node < ActiveRecord::Base
     api.call_disconnect(id)
   end
 
+  # jsonrpc call 'yeti.show.aors'
+  # @param auth_id [Integer] - filter by gateway.id (nil to show all data)
+  def incoming_registrations(auth_id: nil, empty_on_error: false)
+    params = auth_id.nil? ? [] : [auth_id]
+    api.invoke_show_command('aors', params)
+  rescue StandardError => e
+    if empty_on_error
+      logger.error { "Failed to fetch incoming_registrations with auth_id=#{auth_id.inspect}" }
+      logger.error { "<#{e.class}>: #{e.message}" }
+      logger.error { e.backtrace.join("\n") }
+      []
+    else
+      raise e
+    end
+  end
+
   # def calls(only = nil, empty_on_error = true)
   def calls(options = {})
     empty_on_error = !!options[:empty_on_error]

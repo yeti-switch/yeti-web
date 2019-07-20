@@ -10,6 +10,16 @@ describe 'Create new Gateway', type: :feature, js: true do
   include_context :login_as_admin
   active_admin_form_for Gateway, 'new'
 
+  include_context :incoming_registrations_stub_helpers do
+    let(:stub_incoming_registrations_collection_query) do
+      { auth_id: a_kind_of(Integer), empty_on_error: false }
+    end
+    before do
+      FactoryGirl.create(:node)
+      stub_incoming_registrations_collection
+    end
+  end
+
   let!(:contractor) { FactoryGirl.create(:customer) }
   let!(:codec_group) { FactoryGirl.create(:codec_group) }
 

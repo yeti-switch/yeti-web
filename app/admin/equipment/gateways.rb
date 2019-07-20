@@ -126,6 +126,12 @@ ActiveAdmin.register Gateway do
     end
   end
 
+  before_action only: [:show] do
+    @registrations = Yeti::RpcCalls::IncomingRegistrations.call Node.all, auth_id: resource.id
+    @registrations.data.map! { |row| RealtimeData::IncomingRegistration.new(row) }
+    flash.now[:warning] = @registrations.errors if @registrations.errors.any?
+  end
+
   collection_action :with_contractor do
     @gateways = Contractor.find(params[:contractor_id]).gateways
     render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
@@ -679,9 +685,22 @@ ActiveAdmin.register Gateway do
           end
         end
       end
-    end
 
-    active_admin_comments
+      tab :incoming_registrations do
+        if assigns[:registrations].data.any?
+          table_for assigns[:registrations].data, class: 'index_table' do
+            column :contact
+            column :expires
+            column :path
+            column :user_agent
+          end
+        end
+      end
+
+      tab :comments do
+        active_admin_comments
+      end
+    end
   end
 
   sidebar :links, only: %i[show edit] do
