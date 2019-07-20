@@ -87,23 +87,6 @@ jobs:
 
     - stage: stable package
       if: branch != master OR tag =~ ^.*$
-      env: CACHE_NAME=jessie_package
-      name: Stable Jessie Package
-      script: &build_jessie
-        - rm -vf config/database.yml
-        - docker build -t yeti-web -f ./ci/build_jessie.Dockerfile .
-        - docker run --network yeti-net --name yeti-web yeti-web && docker commit yeti-web yeti-web:built
-      deploy:
-        skip_cleanup: true
-        provider: script
-        script: docker run --name yeti-web-deploy yeti-web:built ci/deploy.sh "$API_ENDPOINT" jessie "${TRAVIS_TAG:0:3}" main /build/*.deb
-        on:
-          tags: true
-          condition: "$TRAVIS_TAG != *-master*"
-          repo: yeti-switch/yeti-web
-
-    - stage: stable package
-      if: branch != master OR tag =~ ^.*$
       env: CACHE_NAME=stretch_package
       name: Stable Stretch Package
       script: &build_stretch
@@ -117,19 +100,6 @@ jobs:
         on:
           tags: true
           condition: "$TRAVIS_TAG != *-master*"
-          repo: yeti-switch/yeti-web
-
-    - stage: nightly package
-      if: branch = master
-      env: CACHE_NAME=jessie_package
-      name: Nightly Jessie Package
-      script: *build_jessie
-      deploy:
-        skip_cleanup: true
-        provider: script
-        script: docker run --name yeti-web-deploy yeti-web:built ci/deploy.sh "$API_ENDPOINT" jessie nightly main /build/*.deb
-        on:
-          all_branches: true
           repo: yeti-switch/yeti-web
 
     - stage: nightly package
