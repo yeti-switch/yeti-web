@@ -82,6 +82,7 @@ Rails.application.routes.draw do
           jsonapi_resources :session_refresh_methods
           jsonapi_resources :sortings
           jsonapi_resources :active_calls, only: %i[index show destroy]
+          jsonapi_resources :incoming_registrations, only: %i[index]
 
           namespace :cdr do
             jsonapi_resources :cdrs, only: %i[index show] do
