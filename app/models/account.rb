@@ -89,8 +89,11 @@ class Account < Yeti::ActiveRecord
     contacts_for_balance_notifications.map(&:email).join(',')
   end
 
+  Totals = Struct.new(:total_balance)
+
   def self.totals
-    except(:eager_load).select('sum(balance) as total_balance').take
+    row = extending(ActsAsTotalsRelation).totals_row_by('sum(balance) as total_balance')
+    Totals.new(*row)
   end
 
   def contacts_for_invoices

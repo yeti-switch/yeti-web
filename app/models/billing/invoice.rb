@@ -302,8 +302,15 @@ class Billing::Invoice < Cdr::Base
     "#{id}_#{start_date}_#{end_date}"
   end
 
+  Totals = Struct.new(:total_amount, :total_calls_count, :total_calls_duration)
+
   def self.totals
-    except(:eager_load).select('sum(amount) as total_amount, sum(calls_count) as total_calls_count, sum(calls_duration) as total_calls_duration').take
+    row = extending(ActsAsTotalsRelation).totals_row_by(
+      'sum(amount) as total_amount',
+      'sum(calls_count) as total_calls_count',
+      'sum(calls_duration) as total_calls_duration'
+    )
+    Totals.new(*row)
   end
 
   def contacts_for_invoices
