@@ -33,17 +33,25 @@ class Report::CustomerTrafficDataByDestination < Cdr::Base
     id.to_s
   end
 
+  Totals = Struct.new(
+    :calls_count, :success_calls_count, :short_calls_count, :calls_duration, :origination_cost,
+    :termination_cost, :profit, :first_call_at, :last_call_at, :agg_acd
+  )
+
   def self.totals
-    select("sum(calls_count)::int as calls_count,
-            sum(success_calls_count)::int as success_calls_count,
-            sum(short_calls_count)::int as short_calls_count,
-            sum(calls_duration) as calls_duration,
-            sum(origination_cost) as origination_cost,
-            sum(termination_cost) as termination_cost,
-            sum(profit) as profit,
-            min(first_call_at) as first_call_at,
-            max(last_call_at) as last_call_at,
-            coalesce(sum(calls_duration)::float/nullif(sum(success_calls_count),0),0) as agg_acd").take
+    row = extending(ActsAsTotalsRelation).totals_row_by(
+      'sum(calls_count)::int as calls_count',
+      'sum(success_calls_count)::int as success_calls_count',
+      'sum(short_calls_count)::int as short_calls_count',
+      'sum(calls_duration) as calls_duration',
+      'sum(origination_cost) as origination_cost',
+      'sum(termination_cost) as termination_cost',
+      'sum(profit) as profit',
+      'min(first_call_at) as first_call_at',
+      'max(last_call_at) as last_call_at',
+      'coalesce(sum(calls_duration)::float/nullif(sum(success_calls_count),0),0) as agg_acd'
+    )
+    Totals.new(*row)
   end
 
   def self.report_records
