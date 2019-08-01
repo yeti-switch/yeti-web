@@ -7,6 +7,11 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   config.batch_actions = false
   config.sort_order = 'request_time_desc'
 
+  with_default_params do
+    params[:q] = { request_time_gteq_datetime: 1.days.ago.to_date.strftime('%F') }
+    'Only records from yesterday are displayed by default'
+  end
+
   acts_as_export :id,
                  :request_time,
                  [:gateway_name, proc { |row| row.gateway.try(:name) }],

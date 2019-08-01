@@ -64,7 +64,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
 
     column :calls_count, sortable: :agg_calls_count, footer: lambda {
                                                                strong do
-                                                                 text_node @footer_data[:agg_calls_count].to_s
+                                                                 text_node @footer_data.agg_calls_count.to_s
                                                                  text_node ' calls'
                                                                end
                                                              }, &:agg_calls_count
