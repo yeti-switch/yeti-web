@@ -22,13 +22,7 @@ ActiveAdmin.register Report::Realtime::BadRouting do
   filter :internal_disconnect_code
   filter :internal_disconnect_reason
 
-  before_action only: [:index] do
-    params[:q] ||= {}
-    if params[:q][:time_interval_eq].blank?
-      params[:q][:time_interval_eq] = Report::Realtime::Base::DEFAULT_INTERVAL
-      flash.now[:notice_message] = "Records for time interval #{Report::Realtime::Base::DEFAULT_INTERVAL} seconds are displayed by default"
-    end
-  end
+  with_default_realtime_interval
 
   controller do
     def scoped_collection
