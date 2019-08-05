@@ -10,7 +10,7 @@ ActiveAdmin.register Lnp::Cache do
 
   acts_as_export :id, :dst, :lrn, :tag, :created_at, :expires_at
 
-  includes :database
+  includes :database, :routing_tag
 
   index do
     selectable_column
@@ -18,7 +18,7 @@ ActiveAdmin.register Lnp::Cache do
     actions
     column :dst
     column :lrn
-    column :tag
+    column :routing_tag
     column :data
     column :database
     column :created_at
@@ -28,7 +28,7 @@ ActiveAdmin.register Lnp::Cache do
   filter :id
   filter :dst
   filter :lrn
-  filter :tag
+  filter :routing_tag
   filter :data
   filter :database
 
@@ -37,7 +37,7 @@ ActiveAdmin.register Lnp::Cache do
       row :id
       row :dst
       row :lrn
-      row :tag
+      row :routing_tag
       row :data
       row :database
       row :created_at

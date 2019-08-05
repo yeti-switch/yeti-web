@@ -52,7 +52,7 @@ ActiveAdmin.register Gateway do
                  :orig_use_outbound_proxy, :orig_force_outbound_proxy,
                  [:orig_proxy_transport_protocol_name, proc { |row| row.orig_proxy_transport_protocol.try(:name) }],
                  :orig_outbound_proxy,
-                 :dialog_nat_handling, # :transparent_dialog_id,
+                 [:nat_handling_mode_name, proc { |row| row.nat_handling_mode.try(:name) }],
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
@@ -86,7 +86,7 @@ ActiveAdmin.register Gateway do
                  :sip_timer_b, :dns_srv_failover_timer,
                  [:sdp_c_location_name, proc { |row| row.sdp_c_location.try(:name) }],
                  [:codec_group_name, proc { |row| row.codec_group.try(:name) }],
-                 :anonymize_sdp, :proxy_media, :single_codec_in_200ok, :transparent_seqno, :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay, :rtp_ping,
+                 :proxy_media, :single_codec_in_200ok, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay, :rtp_ping,
                  :rtp_timeout,
                  :filter_noaudio_streams,
                  :rtp_relay_timestamp_aligning,
@@ -116,7 +116,7 @@ ActiveAdmin.register Gateway do
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode, :sip_schema,
-           :termination_src_numberlist, :termination_dst_numberlist, :lua_script
+           :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :nat_handling_mode
 
   controller do
     def resource_params
@@ -226,8 +226,8 @@ ActiveAdmin.register Gateway do
     column :orig_force_outbound_proxy
     column :orig_proxy_transport_protocol
     column :orig_outbound_proxy
-    column :transparent_dialog_id
-    column :dialog_nat_handling
+
+    column :nat_handling_mode
     column :orig_disconnect_policy
 
     column :resolve_ruri
@@ -279,8 +279,6 @@ ActiveAdmin.register Gateway do
     column :anonymize_sdp
     column :proxy_media
     column :single_codec_in_200ok
-    column :transparent_seqno
-    column :transparent_ssrc
     column :force_symmetric_rtp
     column :symmetric_rtp_nonstop
     column :symmetric_rtp_ignore_rtcp
@@ -384,6 +382,7 @@ ActiveAdmin.register Gateway do
               f.input :sip_interface_name
               f.input :incoming_auth_username
               f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }
+              f.input :nat_handling_mode
             end
 
             f.inputs 'Origination' do
@@ -393,8 +392,6 @@ ActiveAdmin.register Gateway do
               f.input :orig_force_outbound_proxy
               f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
               f.input :orig_outbound_proxy
-              f.input :transparent_dialog_id
-              f.input :dialog_nat_handling
               f.input :orig_disconnect_policy
             end
           end
@@ -458,11 +455,8 @@ ActiveAdmin.register Gateway do
         f.inputs 'Media settings' do
           f.input :sdp_c_location, as: :select, include_blank: false
           f.input :codec_group, input_html: { class: 'chosen' }
-          f.input :anonymize_sdp
           f.input :proxy_media
           f.input :single_codec_in_200ok
-          f.input :transparent_seqno
-          f.input :transparent_ssrc
           f.input :force_symmetric_rtp
           f.input :symmetric_rtp_nonstop
           f.input :symmetric_rtp_ignore_rtcp
@@ -550,6 +544,7 @@ ActiveAdmin.register Gateway do
             row :transit_headers_from_origination
             row :transit_headers_from_termination
             row :sip_interface_name
+            row :nat_handling_mode
           end
         end
         panel 'Origination' do
@@ -560,8 +555,6 @@ ActiveAdmin.register Gateway do
             row :orig_force_outbound_proxy
             row :orig_proxy_transport_protocol
             row :orig_outbound_proxy
-            row :transparent_dialog_id
-            row :dialog_nat_handling
             row :orig_disconnect_policy
 
             row :incoming_auth_username
@@ -628,11 +621,8 @@ ActiveAdmin.register Gateway do
         attributes_table_for s do
           row :sdp_c_location
           row :codec_group, input_html: { class: 'chosen' }
-          row :anonymize_sdp
           row :proxy_media
           row :single_codec_in_200ok
-          row :transparent_seqno
-          row :transparent_ssrc
           row :force_symmetric_rtp
           row :symmetric_rtp_nonstop
           row :symmetric_rtp_ignore_rtcp

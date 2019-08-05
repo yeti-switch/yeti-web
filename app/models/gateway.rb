@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: gateways
@@ -121,6 +120,7 @@
 #  termination_dst_numberlist_id    :integer
 #  lua_script_id                    :integer
 #  use_registered_aor               :boolean          default(FALSE), not null
+#  nat_handling_mode_id             :integer          default(1), not null
 #
 
 require 'resolv'
@@ -153,6 +153,7 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :nat_handling_mode, class_name: 'Equipment::GatewayNatHandlingMode', foreign_key: :nat_handling_mode
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
@@ -182,7 +183,7 @@ class Gateway < Yeti::ActiveRecord
 
   validates_numericality_of :fake_180_timer, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
   validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema
+                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema, :nat_handling_mode
 
   validates_presence_of :incoming_auth_username, :incoming_auth_password,
                         if: proc { |gw|

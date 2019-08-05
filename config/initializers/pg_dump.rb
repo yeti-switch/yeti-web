@@ -5,5 +5,6 @@ ActiveRecord::Tasks::DatabaseTasks.structure_dump_flags = [
   '-T', 'auth_log.auth_log_2*',
   '-T', 'rtp_statistics.streams_*',
   '-T', 'pgq.*',
-  '-T', 'pgq_ext.*'
+  '-T', 'pgq_ext.*',
+  '-T', 'logs.api_requests_2*'
 ]
