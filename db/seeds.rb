@@ -22,6 +22,7 @@ end
   'switch15',
   'switch16',
   'switch17',
+  'switch18',
   'sys'
 ].each do |filename|
   execute_sql_file("db/seeds/main/#{filename}.sql")
