@@ -62,7 +62,7 @@ describe 'Export Gateways', type: :feature do
         ['Orig force outbound proxy',          item.orig_force_outbound_proxy.to_s],
         ['Orig proxy transport protocol name', item.orig_proxy_transport_protocol.name],
         ['Orig outbound proxy',                item.orig_outbound_proxy.to_s],
-        ['Dialog nat handling',                item.dialog_nat_handling.to_s],
+        ['Nat handling mode name',             item.nat_handling_mode.name],
         ['Orig disconnect policy name',        item.orig_disconnect_policy.name],
         ['Transport protocol name',            item.transport_protocol.name],
         ['Host',                               item.host],

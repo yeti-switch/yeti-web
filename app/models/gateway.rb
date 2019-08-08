@@ -153,7 +153,7 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
-  belongs_to :nat_handling_mode, class_name: 'Equipment::GatewayNatHandlingMode', foreign_key: :nat_handling_mode
+  belongs_to :nat_handling_mode, class_name: 'Equipment::GatewayNatHandlingMode', foreign_key: :nat_handling_mode_id
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error

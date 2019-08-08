@@ -320,6 +320,7 @@ ActiveAdmin.register Gateway do
   filter :external_id
   filter :radius_accounting_profile, input_html: { class: 'chosen' }
   filter :lua_script, input_html: { class: 'chosen' }
+  filter :nat_handling_mode
 
   form do |f|
     f.semantic_errors *f.object.errors.keys

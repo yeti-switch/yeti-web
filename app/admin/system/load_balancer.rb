@@ -13,6 +13,7 @@ ActiveAdmin.register System::LoadBalancer do
 
   index do
     id_column
+    actions
     column :name
     column :signalling_ip
   end

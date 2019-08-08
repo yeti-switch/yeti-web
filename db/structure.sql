@@ -6715,7 +6715,8 @@ CREATE TABLE class4.gateways (
     termination_src_numberlist_id smallint,
     termination_dst_numberlist_id smallint,
     lua_script_id smallint,
-    use_registered_aor boolean DEFAULT false NOT NULL
+    use_registered_aor boolean DEFAULT false NOT NULL,
+    nat_handling_mode_id smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -39083,6 +39084,16 @@ CREATE TABLE class4.gateway_media_encryption_modes (
 
 
 --
+-- Name: gateway_nat_handling_modes; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.gateway_nat_handling_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
 -- Name: gateway_network_protocol_priorities; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -39134,7 +39145,8 @@ CREATE TABLE class4.lnp_cache (
     expires_at timestamp with time zone,
     database_id smallint,
     data character varying,
-    tag character varying
+    tag character varying,
+    routing_tag_id smallint
 );
 
 
@@ -44264,6 +44276,22 @@ ALTER TABLE ONLY class4.gateway_media_encryption_modes
 
 
 --
+-- Name: gateway_nat_handling_modes gateway_nat_handling_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_nat_handling_modes
+    ADD CONSTRAINT gateway_nat_handling_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_nat_handling_modes gateway_nat_handling_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_nat_handling_modes
+    ADD CONSTRAINT gateway_nat_handling_modes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: gateway_network_protocol_priorities gateway_network_protocol_priorities_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -46417,6 +46445,14 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways gateways_nat_handling_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_nat_handling_mode_id_fkey FOREIGN KEY (nat_handling_mode_id) REFERENCES class4.gateway_nat_handling_modes(id);
+
+
+--
 -- Name: gateways gateways_network_protocol_priority_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -46954,6 +46990,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190622131912'),
 ('20190629193852'),
 ('20190706114700'),
-('20190707141219');
+('20190707141219'),
+('20190805174853');
 
 

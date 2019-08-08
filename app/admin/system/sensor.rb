@@ -38,6 +38,7 @@ ActiveAdmin.register System::Sensor do
 
   index do
     id_column
+    actions
     column :name
     column :mode
     column :source_interface

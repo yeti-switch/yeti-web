@@ -93,6 +93,7 @@ FactoryGirl.define do
     sensor_id nil
     filter_noaudio_streams false
     media_encryption_mode_id 1
+    nat_handling_mode_id 2
 
     association :contractor, factory: :contractor, vendor: true
     codec_group { CodecGroup.take || association(:codec_group) }

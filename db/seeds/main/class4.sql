@@ -970,3 +970,7 @@ insert into class4.gateway_group_balancing_modes(id,name) values(2,'Priority/Wei
 insert into class4.gateway_group_balancing_modes(id,name) values(3,'Priority/Weigth balancing. Exclude gateways from other POPs');
 
 
+insert into class4.gateway_nat_handling_modes( id,name) values (0, 'Disabled');
+insert into class4.gateway_nat_handling_modes( id,name) values (1, 'Learn next-hop from incoming requests');
+insert into class4.gateway_nat_handling_modes( id,name) values (2, 'Use R-Uri as next-hop(Ignore incoming contact)');
+

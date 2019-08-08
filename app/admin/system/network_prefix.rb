@@ -46,6 +46,7 @@ ActiveAdmin.register System::NetworkPrefix do
 
   index do
     id_column
+    actions
     column :prefix
     column :country, sortable: 'countries.name'
     column :network, sortable: 'networks.name'
