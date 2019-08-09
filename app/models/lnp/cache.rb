@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.lnp_cache
@@ -20,5 +21,4 @@ class Lnp::Cache < Yeti::ActiveRecord
 
   belongs_to :database, class_name: 'Lnp::Database', foreign_key: :database_id
   belongs_to :routing_tag, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_id
-
 end
