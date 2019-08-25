@@ -34,6 +34,7 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
         registrations = Kaminari.paginate_array(registrations).page(1).per(registrations.count)
         flash.now[:warning] = searcher.errors if searcher.errors.any?
       rescue StandardError => e
+        Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
         flash.now[:warning] = e.message
       end
       @skip_drop_down_pagination = true

@@ -104,6 +104,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     flash[:notice] = "#{params[:id]} was terminated"
     redirect_to action: :index
   rescue StandardError => e
+    Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
     flash[:warning] = e.message
     redirect_to action: :index
   end
