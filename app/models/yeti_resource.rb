@@ -27,6 +27,10 @@ class YetiResource
     def human_attribute_name(attribute_key_name, _options = {})
       attribute_key_name
     end
+
+    def collection(rows)
+      rows.map(&method(:new))
+    end
   end
 
   def to_param
