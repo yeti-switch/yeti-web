@@ -23,6 +23,7 @@ module Yeti
         rescue StandardError => e
           raise e unless options[:empty_on_error]
 
+          Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
           @errors << e.message
         end
         Rails.logger.info { " loading  #{registrations.count} registrations" }
