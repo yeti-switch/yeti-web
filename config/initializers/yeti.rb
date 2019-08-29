@@ -27,6 +27,7 @@ ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsDelayedJobLock
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsFilterByRoutingTagIds
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBelongsTo
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithDefaultParams
+ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithGlobalDSL
 
 # ActiveAdmin::CSVBuilder.send(:include, Yeti::CSVBuilder)
 
