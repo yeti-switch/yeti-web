@@ -165,6 +165,7 @@ class Gateway < Yeti::ActiveRecord
   validates_presence_of :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode
   validates_presence_of :name, :priority, :weight
   validates_uniqueness_of :name
+  validates :enabled, :auth_enabled, inclusion: { in: [true, false] }
 
   validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
 
@@ -184,10 +185,8 @@ class Gateway < Yeti::ActiveRecord
   validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
                         :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema
 
-  validates_presence_of :incoming_auth_username, :incoming_auth_password,
-                        if: proc { |gw|
-                          !gw.incoming_auth_username.blank? || !gw.incoming_auth_password.blank?
-                        }
+  validates :incoming_auth_username, presence: true, if: proc { incoming_auth_password.present? }
+  validates :incoming_auth_password, presence: true, if: proc { incoming_auth_username.present? }
 
   validates :transit_headers_from_origination, :transit_headers_from_termination,
             format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: 'Enter headers separated by comma. Header name can contain letters, * and -' }
@@ -302,11 +301,32 @@ class Gateway < Yeti::ActiveRecord
   end
 
   def incoming_auth_can_be_disabled
-    if incoming_auth_username_changed?(to: nil) || incoming_auth_username_changed?(to: '') && customers_auths.where(require_incoming_auth: true).any?
+    if (incoming_auth_username_changed?(to: nil) || incoming_auth_username_changed?(to: '')) && customers_auths.where(require_incoming_auth: true).any?
       errors.add(:incoming_auth_username, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_username.cant_be_cleared'))
       errors.add(:incoming_auth_password, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_password.cant_be_cleared'))
     end
   end
 
   include Yeti::IncomingAuthReloader
+
+  private
+
+  # @see Yeti::IncomingAuthReloader
+  def reload_incoming_auth_on_create?
+    incoming_auth_username.present?
+  end
+
+  # @see Yeti::IncomingAuthReloader
+  def reload_incoming_auth_on_update?
+    (incoming_auth_username.present? && enabled_changed?) || incoming_auth_changed?
+  end
+
+  # @see Yeti::IncomingAuthReloader
+  def reload_incoming_auth_on_destroy?
+    incoming_auth_username.present?
+  end
+
+  def incoming_auth_changed?
+    incoming_auth_username_changed? || incoming_auth_password_changed?
+  end
 end
