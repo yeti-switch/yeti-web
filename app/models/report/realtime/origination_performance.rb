@@ -152,7 +152,10 @@ class Report::Realtime::OriginationPerformance < Report::Realtime::Base
 
   scope :detailed_scope, lambda { |length|
     l = length.to_i
+    # We need 'customer_auth_id AS id' here because ActiveAdmin fails to render table
+    # for records without id when it's model class has id in schema.
     select("
+      customer_auth_id AS id,
       customer_auth_id,
       min(routing_delay) as min_routing_delay,
       max(routing_delay) as max_routing_delay,
