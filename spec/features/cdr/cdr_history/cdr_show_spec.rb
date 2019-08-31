@@ -20,6 +20,12 @@ describe 'CDR show', type: :feature do
     visit cdr_path(id: cdrs.last.id)
   end
 
+  it 'does not have link to create new cdr' do
+    subject
+    expect(page).to have_selector('tr.row-routing_tags')
+    expect(page).to_not have_selector('.title_bar .action_items .action_item a[href="/cdrs/new"]')
+  end
+
   it_behaves_like :test_page_has_routing_tag_names do
     subject do
       page.find('tr.row-routing_tags td')

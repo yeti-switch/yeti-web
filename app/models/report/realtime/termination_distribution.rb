@@ -149,7 +149,10 @@
 
 class Report::Realtime::TerminationDistribution < Report::Realtime::Base
   scope :detailed_scope, lambda {
+    # We need 'vendor_id AS id' here because ActiveAdmin fails to render table
+    # for records without id when it's model class has id in schema.
     select('
+      vendor_id AS id,
       vendor_id,
       count(nullif(is_last_cdr,false)) as originated_calls_count,
       count(nullif(routing_attempt=2,false)) as rerouted_calls_count,

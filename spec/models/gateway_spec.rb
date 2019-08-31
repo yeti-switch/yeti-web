@@ -79,4 +79,145 @@ describe Gateway, type: :model do
       expect(subject.pluck(:id)).to match_array([@record_2.id, @record.id])
     end
   end
+
+  describe '.create' do
+    subject do
+      described_class.create(create_params)
+    end
+
+    let!(:vendor) { FactoryGirl.create(:vendor) }
+    let!(:codec_group) { FactoryGirl.create(:codec_group) }
+
+    let(:create_params) do
+      {
+        contractor: vendor,
+        codec_group: codec_group,
+        name: 'test',
+        allow_termination: false,
+        enabled: false
+      }
+    end
+
+    include_examples :does_not_call_event_with, :reload_incoming_auth
+    include_examples :creates_record
+    include_examples :changes_records_qty_of, described_class, by: 1
+
+    context 'with auth credentials' do
+      let(:create_params) { super().merge(incoming_auth_username: 'qwe', incoming_auth_password: 'asd') }
+
+      include_examples :calls_event_with, :reload_incoming_auth
+      include_examples :creates_record
+      include_examples :changes_records_qty_of, described_class, by: 1
+    end
+  end
+
+  describe '#update' do
+    subject do
+      record.update(update_params)
+    end
+
+    let!(:record) { FactoryGirl.create(:gateway, record_attrs) }
+    let(:record_attrs) { { enabled: false } }
+
+    context 'without incoming_auth' do
+      context 'when change enable false->true' do
+        let(:record_attrs) { super().merge(enabled: false) }
+        let(:update_params) { { enabled: true } }
+
+        include_examples :updates_record
+        include_examples :does_not_call_event_with, :reload_incoming_auth
+      end
+
+      context 'when change enable true->false' do
+        let(:record_attrs) { super().merge(enabled: true) }
+        let(:update_params) { { enabled: false } }
+
+        include_examples :updates_record
+        include_examples :does_not_call_event_with, :reload_incoming_auth
+      end
+
+      context 'when change incoming_auth_username to something' do
+        let(:update_params) { { incoming_auth_username: 'qwe' } }
+
+        include_examples :does_not_update_record, errors: {
+          incoming_auth_password: "can't be blank"
+        }
+        include_examples :does_not_call_event_with, :reload_incoming_auth
+      end
+
+      context 'when change incoming_auth_password to something' do
+        let(:update_params) { { incoming_auth_password: 'qwe' } }
+
+        include_examples :does_not_update_record, errors: {
+          incoming_auth_username: "can't be blank"
+        }
+        include_examples :does_not_call_event_with, :reload_incoming_auth
+      end
+
+      context 'when change incoming_auth_username and incoming_auth_password to something' do
+        let(:update_params) { { incoming_auth_username: 'qwe', incoming_auth_password: 'asd' } }
+
+        include_examples :updates_record
+        include_examples :calls_event_with, :reload_incoming_auth
+      end
+    end
+
+    context 'with incoming_auth' do
+      let(:record_attrs) { super().merge(incoming_auth_username: 'qwe', incoming_auth_password: 'asd') }
+
+      context 'when change enable false->true' do
+        let(:record_attrs) { super().merge(enabled: false) }
+        let(:update_params) { { enabled: true } }
+
+        include_examples :updates_record
+        include_examples :calls_event_with, :reload_incoming_auth
+      end
+
+      context 'when change enable true->false' do
+        let(:record_attrs) { super().merge(enabled: true) }
+        let(:update_params) { { enabled: false } }
+
+        include_examples :updates_record
+        include_examples :calls_event_with, :reload_incoming_auth
+      end
+
+      context 'when clear incoming_auth_username and incoming_auth_password' do
+        let(:update_params) { { incoming_auth_username: nil, incoming_auth_password: nil } }
+        before { record.customers_auths.where(require_incoming_auth: true).delete_all }
+
+        include_examples :updates_record
+        include_examples :calls_event_with, :reload_incoming_auth
+
+        context 'when was enabled' do
+          let(:record_attrs) { super().merge(enabled: true) }
+
+          include_examples :updates_record
+          include_examples :calls_event_with, :reload_incoming_auth
+        end
+      end
+    end
+  end
+
+  describe '#destroy' do
+    subject do
+      record.destroy
+    end
+
+    let!(:record) { FactoryGirl.create(:gateway, record_attrs) }
+    let(:record_attrs) { { enabled: false } }
+
+    context 'without incoming_auth' do
+      include_examples :changes_records_qty_of, described_class, by: -1
+      include_examples :destroys_record
+      include_examples :does_not_call_event_with, :reload_incoming_auth
+    end
+
+    context 'with incoming_auth' do
+      let(:record_attrs) { super().merge(incoming_auth_username: 'qwe', incoming_auth_password: 'asd') }
+
+      include_examples :changes_records_qty_of, described_class, by: -1
+      include_examples :destroys_record
+      include_examples :calls_event_with, :reload_incoming_auth
+    end
+  end
 end
