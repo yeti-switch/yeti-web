@@ -64,6 +64,7 @@ RSpec.configure do |config|
     'class4.rate_profit_control_modes',
     'class4.routing_tag_modes',
     'class4.gateway_group_balancing_modes',
+    'class4.gateway_nat_handling_modes',
     'sys.timezones',
     'sys.jobs',
     'sys.sip_schemas'

@@ -23,6 +23,7 @@ ActiveAdmin.register System::SmtpConnection do
 
   index do
     id_column
+    actions
     column :name
     column :host
     column :port

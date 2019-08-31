@@ -11,6 +11,7 @@ ActiveAdmin.register System::Network do
 
   index do
     id_column
+    actions
     column :name
   end
 

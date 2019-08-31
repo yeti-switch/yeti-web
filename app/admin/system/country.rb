@@ -17,6 +17,7 @@ ActiveAdmin.register System::Country do
 
   index do
     id_column
+    actions
     column :name
     column :iso2
   end

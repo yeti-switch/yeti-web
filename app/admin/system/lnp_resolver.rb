@@ -11,6 +11,7 @@ ActiveAdmin.register System::LnpResolver do
 
   index do
     id_column
+    actions
     column :name
     column :address
     column :port
