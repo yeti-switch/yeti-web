@@ -8,6 +8,15 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
 
   decorate_with ReportCustomDataDecorator
 
+  # Fix ordering for columns that can be null.
+  # Null values will be considered as the lowest.
+  %i[agg_customer_price agg_calls_acd agg_profit].each do |col|
+    order_by(col) do |order_clause|
+      is_desc = order_clause.order == 'desc'
+      "#{order_clause.table_column} #{order_clause.order} NULLS #{is_desc ? 'LAST' : 'FIRST'}"
+    end
+  end
+
   action_item :reports, only: :index do
     link_to 'Delete report', custom_cdr_path(assigns[:custom_cdr].id), method: :delete,
                                                                        data: { confirm: I18n.t('active_admin.delete_confirmation') }, class: 'member_link delete_link'
@@ -93,7 +102,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
                                                                      end
                                                                    }, &:decorated_agg_vendor_price
 
-    column :profit, footer: lambda {
+    column :profit, sortable: :agg_profit, footer: lambda {
       strong do
         @footer_data.money_format :agg_profit
       end
