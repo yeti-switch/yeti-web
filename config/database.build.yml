@@ -1,36 +1,40 @@
 production: &build
   adapter: postgresql
   encoding: unicode
-  database: yeti_build
+  # PGQ_PROCESSORS_TEST is set to true for pgq-processors tests to create separate db
+  # to not interfere with main test suite when running make tasks in parallel e.g. make -j 4
+  database: yeti_build<%= '-pgq-processors' if ENV['PGQ_PROCESSORS_TEST'] %><%= ENV['TEST_ENV_NUMBER'] %>
   pool: 5
   username: postgres
   password:
-  host: 127.0.0.1
+  host: <%= (ENV['YETI_DB_HOST'] || 'localhost') %>
   schema_search_path: >
     gui, public, switch,
     billing, class4, runtime_stats,
     sys, logs, data_import
-  port: 5432
+  port: <%= (ENV['YETI_DB_PORT'] || '5432' ) %>
   #min_messages: warning
 
 test:
   <<: *build
-  database: yeti_test
+  database: yeti_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 secondbase:
   production: &build_cdr
     adapter: postgresql
     encoding: unicode
-    database: yeti_cdr_build
+    # PGQ_PROCESSORS_TEST is set to true for pgq-processors tests to create separate db
+    # to not interfere with main test suite when running make tasks in parallel e.g. make -j 4
+    database: yeti_cdr_build<%= '-pgq-processors' if ENV['PGQ_PROCESSORS_TEST'] %><%= ENV['TEST_ENV_NUMBER'] %>
     pool: 5
     username: postgres
     password:
-    host: 127.0.0.1
-    schema_search_path: 'cdr, reports, billing'
-    port: 5432
+    host: <%= (ENV['CDR_DB_HOST'] || 'localhost') %>
+    schema_search_path: 'cdr, reports, billing, public'
+    port: <%= (ENV['CDR_DB_PORT'] || '5432') %>
     #min_messages: warning
 
   test:
     <<: *build_cdr
-    database: yeti_cdr_test
+    database: yeti_cdr_test<%= ENV['TEST_ENV_NUMBER'] %>
 

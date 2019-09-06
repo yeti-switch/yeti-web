@@ -7,7 +7,7 @@
 	notifempty
 	missingok
 	postrotate
-		invoke-rc.d rsyslog rotate > /dev/null
+		pkill rsyslogd -SIGHUP
 	endscript
 }
 
@@ -20,6 +20,6 @@
 	notifempty
 	missingok
 	postrotate
-		invoke-rc.d rsyslog rotate > /dev/null
+		pkill rsyslogd -SIGHUP
 	endscript
 }
