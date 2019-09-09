@@ -20,7 +20,7 @@ class PgqConfig
     end
 
     dbkey = @config['mode'] || 'development'
-    @dbconfig = YAML.safe_load(File.read('../config/database.yml'))
+    @dbconfig = YAML.safe_load(ERB.new(File.read('../config/database.yml')).result, aliases: true)
     raise 'Invalid db configuration file' if @dbconfig.blank?
 
     @config['source_database'] = @dbconfig['secondbase'][dbkey.to_s]
