@@ -38454,7 +38454,8 @@ CREATE TABLE class4.numberlists (
     default_dst_rewrite_result character varying,
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    lua_script_id smallint
+    lua_script_id smallint,
+    external_id bigint
 );
 
 
@@ -44392,6 +44393,14 @@ ALTER TABLE ONLY class4.numberlist_actions
 
 
 --
+-- Name: numberlists numberlists_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.numberlists
+    ADD CONSTRAINT numberlists_external_id_key UNIQUE (external_id);
+
+
+--
 -- Name: radius_accounting_profile_interim_attributes radius_accounting_profile_interim_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -46954,6 +46963,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190622131912'),
 ('20190629193852'),
 ('20190706114700'),
-('20190707141219');
+('20190707141219'),
+('20190919080917');
 
 

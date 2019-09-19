@@ -17,6 +17,7 @@
 #  tag_action_id              :integer
 #  tag_action_value           :integer          default([]), not null, is an Array
 #  lua_script_id              :integer
+#  external_id                :integer
 #
 
 class Routing::Numberlist < Yeti::ActiveRecord
