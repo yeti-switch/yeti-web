@@ -5,7 +5,7 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
 
   attributes :name, :created_at, :updated_at, :default_src_rewrite_rule, :default_src_rewrite_result,
              :default_dst_rewrite_rule, :default_dst_rewrite_result,
-             :tag_action_value
+             :tag_action_value, :external_id
 
   has_one :tag_action, class_name: 'TagAction'
 
@@ -18,4 +18,5 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
   ransack_filter :default_src_rewrite_result, type: :string
   ransack_filter :default_dst_rewrite_rule, type: :string
   ransack_filter :default_dst_rewrite_result, type: :string
+  ransack_filter :external_id, type: :number
 end

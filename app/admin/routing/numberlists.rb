@@ -68,6 +68,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :display_tag_action_value
     column :created_at
     column :updated_at
+    column 'External ID', :external_id, sortable: :external_id
   end
 
   show do |_s|
@@ -85,6 +86,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :display_tag_action_value
       row :created_at
       row :updated_at
+      row 'External ID', &:external_id
     end
   end
 
@@ -113,4 +115,5 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :mode
   filter :default_action
   filter :lua_script, input_html: { class: 'chosen' }
+  filter :external_id, label: 'External ID'
 end
