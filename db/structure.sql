@@ -42909,7 +42909,8 @@ CREATE TABLE sys.smtp_connections (
     from_address character varying NOT NULL,
     auth_user character varying,
     auth_password character varying,
-    global boolean DEFAULT true NOT NULL
+    global boolean DEFAULT true NOT NULL,
+    auth_type character varying DEFAULT 'plain'::character varying NOT NULL
 );
 
 
@@ -46964,6 +46965,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190629193852'),
 ('20190706114700'),
 ('20190707141219'),
+('20190904174903'),
 ('20190919080917');
 
 

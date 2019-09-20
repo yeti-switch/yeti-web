@@ -4,10 +4,11 @@ ActiveAdmin.register System::SmtpConnection do
   menu parent: 'System', label: 'SMTP connections', priority: 150
   config.batch_actions = false
 
-  permit_params :name, :host, :port, :from_address, :auth_user, :auth_password, :global
+  permit_params :name, :host, :port, :from_address, :auth_user, :auth_password, :global, :auth_type
 
   filter :id
   filter :name
+  filter :auth_type, as: :select, collection: System::SmtpConnection::CONST::AUTH_TYPES
 
   member_action :send_email, method: :post do
     begin
@@ -28,6 +29,7 @@ ActiveAdmin.register System::SmtpConnection do
     column :port
     column :from_address
     column :auth_user
+    column :auth_type
     column :global
   end
 
@@ -54,6 +56,7 @@ ActiveAdmin.register System::SmtpConnection do
       row :from_address
       row :auth_user
       row :auth_password, class: 'password-mask'
+      row :auth_type
       row :global
     end
   end
@@ -67,6 +70,7 @@ ActiveAdmin.register System::SmtpConnection do
       f.input :from_address
       f.input :auth_user
       f.input :auth_password, as: :string, wrapper_html: { class: 'password-mask' }
+      f.input :auth_type, as: :select, collection: System::SmtpConnection::CONST::AUTH_TYPES
       f.input :global
     end
     f.actions

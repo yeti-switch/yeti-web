@@ -12,10 +12,17 @@
 #  auth_user     :string
 #  auth_password :string
 #  global        :boolean          default(TRUE), not null
+#  auth_type     :string           default("plain"), not null
 #
 
 class System::SmtpConnection < Yeti::ActiveRecord
   self.table_name = 'sys.smtp_connections'
+
+  module CONST
+    AUTH_TYPES = %w[plain login cram_md5].freeze
+
+    freeze
+  end
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -24,6 +31,7 @@ class System::SmtpConnection < Yeti::ActiveRecord
   validates_presence_of :name, :host, :port, :from_address
   validates_format_of :from_address, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   validates_uniqueness_of :name
+  validates :auth_type, inclusion: { in: CONST::AUTH_TYPES }
 
   def display_name
     name.to_s
@@ -33,6 +41,7 @@ class System::SmtpConnection < Yeti::ActiveRecord
     {
       user_name: auth_user,
       password: auth_password,
+      authentication: auth_type.to_sym,
       address: host,
       port: port
     }.reject { |_, v| v.blank? }
