@@ -107,7 +107,7 @@ module Reporter
     end
 
     def csv_file_name
-      '/tmp/' + Dir::Tmpname.make_tmpname(["#{report.id}_#{report.class.to_s.parameterize}", '.csv'], nil)
+      '/tmp/' + make_tmpname(["#{report.id}_#{report.class.to_s.parameterize}", '.csv'], nil)
     end
 
     def html_template_name
@@ -127,6 +127,21 @@ module Reporter
           service: self
         }
       )
+    end
+
+    # Copy implementation of Dir::Tmpname.make_tmpname from ruby 2.3
+    # Was removed in ruby 2.5
+    def make_tmpname((prefix, suffix), n)
+      prefix = (String.try_convert(prefix) ||
+          raise(ArgumentError, "unexpected prefix: #{prefix.inspect}"))
+      suffix &&= (String.try_convert(suffix) ||
+          raise(ArgumentError, "unexpected suffix: #{suffix.inspect}"))
+      t = Time.now.strftime('%Y%m%d')
+      # $$ - Process ID
+      path = "#{prefix}#{t}-#{$PROCESS_ID}-#{rand(0x100000000).to_s(36)}"
+      path += "-#{n}" if n
+      path += suffix if suffix
+      path
     end
   end
 end
