@@ -25,7 +25,8 @@ RSpec.describe 'config/yeti_web.yml' do
       partition_remove_delay: {
         'cdr.cdr': anything,
         'auth_log.auth_log': anything,
-        'rtp_statistics.streams': anything
+        'rtp_statistics.streams': anything,
+        'logs.api_requests': anything
       }
     }
   end
