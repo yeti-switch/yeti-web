@@ -1,18 +1,37 @@
+SHELL := /bin/sh
+
+gems := $(CURDIR)/vendor/bundler
+bundle_bin := $(gems)/bin/bundle
+bundler_gems := $(CURDIR)/vendor/bundle
+export GEM_PATH := $(gems):$(bundler_gems)
+
 define info
-	echo -e '\n\e[33m> msg \e[39m\n'
+	@printf '\n\e[33m> msg \e[39m\n\n'
 endef
 
-all:
-	GEM_PATH=vendor/bundler make all_env
+###### Rules ######
+.PHONY: all
+all: gems
 
-all_env:
-	@$(info:msg=PGQ: install bundler)
-	@gem install --install-dir vendor/bundler bundler -v 2.0.2
 
-	@$(info:msg=PGQ: install gems)
-	@vendor/bundler/bin/bundle install --jobs=4 --frozen --deployment --binstubs
+.PHONY: bundler
+bundler:
+	$(info:msg=Install bundler)
+	gem install --no-document --install-dir $(gems) bundler -v 2.0.2
 
+
+.PHONY: gems
+gems: bundler
+	$(info:msg=Install/Update gems)
+	$(bundle_bin) install --jobs=4 --deployment --binstubs
+
+.PHONY: test
+test: gems
+	RAILS_ENV=test PGQ_PROCESSORS_TEST=true $(bundle_bin) exec rspec
+
+
+.PHONY: clean
 clean:
 	@$(info:msg=PGQ. removing bundler and gems)
-	rm -rf vendor/bundler vendor/bundle
-
+	rm -rf $(gems)
+	rm -rf $(bundler_gems)

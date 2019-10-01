@@ -7,7 +7,7 @@ require File.join(File.dirname(__FILE__), '../../models/routing_base')
 
 RSpec.describe CdrBilling do
   CONFIG = begin
-    f = YAML.load_file('../config/database.yml')
+    f = YAML.safe_load(ERB.new(File.read('../config/database.yml')).result, aliases: true)
     {
       'mode' => 'test',
       'databases' => f.to_h

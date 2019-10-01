@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  app:
+    build: .
+    image: yeti-web:build
+    container_name: yeti-web-build
+    hostname: yeti-web-build
+    depends_on:
+      - db
+    environment:
+      YETI_DB_HOST: db
+      CDR_DB_HOST: db
+  db:
+    image: switchyeti/yeti-web:pg11
+    container_name: yeti-web-db
+    hostname: yeti-web-db
