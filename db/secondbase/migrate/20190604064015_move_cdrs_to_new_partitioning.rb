@@ -226,15 +226,33 @@ class MoveCdrsToNewPartitioning < ActiveRecord::Migration[5.2]
         ALTER TABLE #{table_name}
           ALTER COLUMN time_start SET NOT NULL;
 
+        -- drop primary keys cdr_YYYYMM_pkey on partitions
+        ALTER TABLE #{table_name}
+          DROP CONSTRAINT IF EXISTS #{t_name}_pkey;
+
+        -- drop constraint from old partitioning
+        ALTER TABLE #{table_name}
+          DROP CONSTRAINT #{t_name}_time_start_check;
+
+        -- remove dump_file column from old partitions
+        ALTER TABLE #{table_name}
+          DROP COLUMN IF EXISTS dump_file;
+
+        -- remove routing_tag_id column from old partitions
+        ALTER TABLE #{table_name}
+          DROP COLUMN IF EXISTS routing_tag_id;
+
+        -- rename old indexes "cdr_YYYYMM_time_start_idx" to new name
+        ALTER INDEX IF EXISTS cdr.#{t_name}_time_start_idx 
+          RENAME TO "index_cdr.#{t_name}_on_time_start";
+
         -- attach partitions to new parent table
         ALTER TABLE #{parent_table} ATTACH PARTITION #{table_name}
           FOR VALUES FROM ('#{date_start}') TO ('#{date_stop}');
 
-        -- drop constraint from old partitioning
-        ALTER TABLE #{table_name} DROP CONSTRAINT #{t_name}_time_start_check;
-
         -- attach index for time_start column
-        ALTER INDEX cdr.cdr_time_start_idx ATTACH PARTITION cdr."index_cdr.#{t_name}_on_time_start";
+        ALTER INDEX cdr.cdr_time_start_idx
+          ATTACH PARTITION cdr."index_cdr.#{t_name}_on_time_start";
       SQL
     end
 
