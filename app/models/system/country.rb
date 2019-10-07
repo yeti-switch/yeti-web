@@ -12,7 +12,7 @@
 class System::Country < Yeti::ActiveRecord
   self.table_name = 'sys.countries'
   has_many :prefixes, class_name: 'System::NetworkPrefix'
-  has_many :networks, -> { uniq }, through: :prefixes
+  has_many :networks, -> { distinct }, through: :prefixes
 
   def display_name
     "#{id} | #{name}"
