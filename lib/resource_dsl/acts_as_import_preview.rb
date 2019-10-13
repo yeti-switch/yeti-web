@@ -39,7 +39,7 @@ module ResourceDSL
       end
 
       action_item :cancel_import_session, only: [:index] do
-        if authorized?(:delete_all)
+        if authorized?(:destroy_all)
           link_to 'Cancel import session', action: :delete_all unless Importing::ImportingDelayedJob.jobs?
         end
       end
