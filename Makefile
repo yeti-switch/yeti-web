@@ -3,6 +3,7 @@ SHELL := /bin/sh
 pkg_name := yeti-web
 user := yeti-web
 app_dir := /opt/$(user)
+version_file := version.yml
 app_files :=	bin \
 		app \
 		.bundle \
@@ -23,7 +24,6 @@ exclude_files := config/database.yml \
 		*.o \
 		*.a
 
-version_file := version.yml
 version = $(shell dpkg-parsechangelog --help | grep -q '\--show-field' \
 	&& dpkg-parsechangelog --show-field version \
 	|| dpkg-parsechangelog | grep Version | awk '{ print $$2; }')
