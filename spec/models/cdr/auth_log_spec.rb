@@ -1,5 +1,44 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: auth_log.auth_log
+#
+#  id                    :integer          not null, primary key
+#  node_id               :integer
+#  pop_id                :integer
+#  request_time          :datetime         not null
+#  transport_proto_id    :integer
+#  transport_remote_ip   :string
+#  transport_remote_port :integer
+#  transport_local_ip    :string
+#  transport_local_port  :integer
+#  origination_ip        :string
+#  origination_port      :integer
+#  origination_proto_id  :integer
+#  username              :string
+#  realm                 :string
+#  request_method        :string
+#  ruri                  :string
+#  from_uri              :string
+#  to_uri                :string
+#  call_id               :string
+#  success               :boolean
+#  code                  :integer
+#  reason                :string
+#  internal_reason       :string
+#  nonce                 :string
+#  response              :string
+#  gateway_id            :integer
+#  x_yeti_auth           :string
+#  diversion             :string
+#  pai                   :string
+#  ppi                   :string
+#  privacy               :string
+#  rpid                  :string
+#  rpid_privacy          :string
+#
+
 require 'spec_helper'
 
 RSpec.describe Cdr::AuthLog, type: :model do

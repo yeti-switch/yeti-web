@@ -1,5 +1,23 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: class4.destination_next_rates
+#
+#  id               :integer          not null, primary key
+#  destination_id   :integer          not null
+#  initial_rate     :decimal(, )      not null
+#  next_rate        :decimal(, )      not null
+#  initial_interval :integer          not null
+#  next_interval    :integer          not null
+#  connect_fee      :decimal(, )      not null
+#  apply_time       :datetime
+#  created_at       :datetime
+#  updated_at       :datetime
+#  applied          :boolean          default(FALSE), not null
+#  external_id      :integer
+#
+
 require 'spec_helper'
 
 RSpec.describe Routing::DestinationNextRate, type: :model do
