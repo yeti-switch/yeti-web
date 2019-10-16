@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  def dasherized_namespace(name, options = {}, &block)
+    options[:path] = name.to_s.dasherize
+    namespace(name.to_s.underscore.to_sym, options, &block)
+  end
+
+  def dasherized_resources(name, options = {}, &block)
+    options[:controller] ||= name.to_s.underscore.to_sym
+    options[:as] ||= name.to_s.underscore.to_sym
+    resources(name.to_s.dasherize.to_sym, options, &block)
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
   post 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#create'
@@ -143,6 +154,21 @@ Rails.application.routes.draw do
             jsonapi_resources :rates
             jsonapi_resource :check_rate, only: [:create]
             jsonapi_resources :cdrs, only: %i[index show]
+          end
+        end
+
+        dasherized_namespace :clickhouse_dictionaries do
+          with_options only: [:index] do
+            dasherized_resources :accounts
+            dasherized_resources :areas
+            dasherized_resources :contractors
+            dasherized_resources :countries
+            dasherized_resources :customer_auths
+            dasherized_resources :gateways
+            dasherized_resources :network_prefixes
+            dasherized_resources :networks
+            dasherized_resources :rateplans
+            dasherized_resources :routing_plans
           end
         end
       end
