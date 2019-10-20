@@ -61,8 +61,10 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
     end
 
     subject do
-      get :show, params: { id: network.id }
+      get :show, params: json_api_query_params
     end
+
+    let(:json_api_query_params) { { id: network.id } }
 
     it 'http status should eq 200' do
       subject
@@ -77,9 +79,42 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
           'type' => 'networks',
           'attributes' => {
             'name' => network.name
+          },
+          'relationships' => {
+            'network-type' => hash_including
           }
         )
       )
+    end
+
+    context 'when include network-type' do
+      let(:json_api_query_params) { super().merge include: 'network-type' }
+
+      it 'http status should eq 200' do
+        subject
+        expect(response.status).to eq(200)
+      end
+
+      it 'response body should be valid' do
+        subject
+        expect(response_data).to match(
+          hash_including(
+            'id' => network.id.to_s,
+            'type' => 'networks',
+            'attributes' => {
+              'name' => network.name
+            },
+            'relationships' => {
+              'network-type' => hash_including(
+                'data' => {
+                  'id' => network.type_id.to_s,
+                  'type' => 'network-types'
+                }
+              )
+            }
+          )
+        )
+      end
     end
   end
 
@@ -93,10 +128,17 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
           type: 'networks',
           attributes: {
             name: 'US Eagle Mobile'
+          },
+          relationships: {
+            'network-type': {
+              data: { id: network_type.id, type: 'network_types' }
+            }
           }
         }
       }
     end
+
+    let!(:network_type) { FactoryGirl.create(:network_type) }
 
     it 'network should be created' do
       expect { subject }.to change { System::Network.count }.by(1)
@@ -114,15 +156,25 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
           id: network.id.to_s,
           attributes: {
             name: 'US AMC Mobile'
+          },
+          relationships: {
+            'network-type': {
+              data: { id: network_type.id, type: 'network_types' }
+            }
           }
         }
       }
     end
-    let(:network) do
-      create :network
-    end
+
+    let!(:network) { create(:network) }
+    let!(:network_type) { create(:network_type) }
+
     it 'network name should be changed' do
       expect { subject }.to change { network.reload.name }.from('US Eagle Mobile').to('US AMC Mobile')
+    end
+
+    it 'network network_type should be changed' do
+      expect { subject }.to change { network.reload.type_id }.to(network_type.id)
     end
   end
 

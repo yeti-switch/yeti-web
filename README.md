@@ -80,6 +80,18 @@ If you do not want to migrate with stops, use env-variable IGNORE_STOPS=true
 IGNORE_STOPS=true bundle exec rake db:migrate
 ```
 
+## Migrations that insert rows into yeti database
+
+```bash
+RAILS_ENV=test bundle exec rake db:create db:structure:load
+RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load
+RAILS_ENV=test bundle exec rake db:seed
+# create migration inside db/migrations
+RAILS_ENV=test bundle exec rake db:migrate
+# SCHEMA_NAME - schema of table into which you've inserted row(s)
+# YETI_TEST_DB_NAME - yeti test database name on local machine
+pg_dump --column-inserts --data-only --schema=sys --file=db/seeds/main/SCHEMA_NAME.sql YETI_TEST_DB_NAME
+```
 
 ## Use Docker Postgres for development
 

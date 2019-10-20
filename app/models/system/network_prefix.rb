@@ -4,22 +4,48 @@
 #
 # Table name: sys.network_prefixes
 #
-#  id         :integer          not null, primary key
-#  prefix     :string           not null
-#  network_id :integer          not null
-#  country_id :integer
+#  id                :integer          not null, primary key
+#  prefix            :string           not null
+#  network_id        :integer          not null
+#  country_id        :integer
+#  number_min_length :integer          default(0), not null
+#  number_max_length :integer          default(100), not null
+#  uuid              :uuid             not null
 #
 
 class System::NetworkPrefix < Yeti::ActiveRecord
   self.table_name = 'sys.network_prefixes'
+
   belongs_to :country, class_name: 'System::Country', foreign_key: :country_id
   belongs_to :network, class_name: 'System::Network', foreign_key: :network_id
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_uniqueness_of :prefix
-  validates_presence_of :prefix, :network
-  scope :number_contains, ->(prefix) { where('prefix_range(sys.network_prefixes.prefix)@>prefix_range(?)', prefix.to_s) } do
+  validates :number_max_length,
+            presence: true,
+            numericality: {
+              allow_blank: true,
+              only_integer: true,
+              greater_than_or_equal_to: 0,
+              less_than_or_equal_to: PgConst::SMALLINT_MAX
+            }
+
+  validates :number_min_length,
+            presence: true,
+            numericality: {
+              allow_blank: true,
+              only_integer: true,
+              greater_than_or_equal_to: 0,
+              less_than_or_equal_to: :number_max_length,
+              if: :number_max_length
+            }
+
+  validates :prefix, uniqueness: { allow_blank: true }, presence: true
+  validates :network, presence: true
+
+  scope :number_contains, lambda { |prefix|
+    where('prefix_range(sys.network_prefixes.prefix)@>prefix_range(?)', prefix.to_s)
+  } do
     def longest_match_network
       order(Arel.sql('length(prefix) desc')).limit(1).take
     end
@@ -40,8 +66,6 @@ class System::NetworkPrefix < Yeti::ActiveRecord
   def hint
     [country.try!(:name), network.try!(:name)].compact.join(',')
   end
-
-  private
 
   def self.ransackable_scopes(_auth_object = nil)
     [
