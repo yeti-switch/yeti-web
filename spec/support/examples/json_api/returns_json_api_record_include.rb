@@ -30,7 +30,7 @@ RSpec.shared_examples :returns_json_api_record_include do |type: nil, relationsh
     expect(actual_data[:attributes]).to match(json_api_include_attributes)
 
     unless json_api_include_relationships_names.nil?
-      actual_relationships = actual_data[:relationships].keys
+      actual_relationships = actual_data[:relationships]&.keys || []
       expected_rel_names = json_api_include_relationships_names.is_a?(Array) ?
                                match_array(json_api_include_relationships_names) :
                                json_api_include_relationships_names
