@@ -5,7 +5,7 @@ ActiveAdmin.register System::NetworkPrefix do
   menu parent: 'System', label: 'Network Prefixes', priority: 131
   config.batch_actions = false
 
-  permit_params :prefix, :country_id, :network_id
+  permit_params :prefix, :country_id, :network_id, :number_min_length, :number_max_length
 
   controller do
     def scoped_collection
@@ -39,16 +39,34 @@ ActiveAdmin.register System::NetworkPrefix do
   #
   #        }
   filter :id
+  filter :uuid_equals, label: 'UUID'
   filter :prefix
   filter :country, input_html: { class: 'chosen' }
   filter :network, input_html: { class: 'chosen' }
   filter :number_contains
+  filter :number_min_length
+  filter :number_max_length
 
   index do
     id_column
     column :prefix
     column :country, sortable: 'countries.name'
     column :network, sortable: 'networks.name'
+    column :number_min_length
+    column :number_max_length
+    column :uuid
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :prefix
+      row :country
+      row :network
+      row :number_min_length
+      row :number_max_length
+      row :uuid
+    end
   end
 
   form do |f|
@@ -57,6 +75,8 @@ ActiveAdmin.register System::NetworkPrefix do
       f.input :prefix
       f.input :country, input_html: { class: 'chosen' }
       f.input :network, input_html: { class: 'chosen' }
+      f.input :number_min_length
+      f.input :number_max_length
     end
     f.actions
   end

@@ -5864,7 +5864,10 @@ CREATE TABLE sys.network_prefixes (
     id integer NOT NULL,
     prefix character varying NOT NULL,
     network_id integer NOT NULL,
-    country_id integer
+    country_id integer,
+    number_min_length smallint DEFAULT 0 NOT NULL,
+    number_max_length smallint DEFAULT 100 NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -42740,12 +42743,45 @@ ALTER SEQUENCE sys.network_prefixes_id_seq OWNED BY sys.network_prefixes.id;
 
 
 --
+-- Name: network_types; Type: TABLE; Schema: sys; Owner: -
+--
+
+CREATE TABLE sys.network_types (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+);
+
+
+--
+-- Name: network_types_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.network_types_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: network_types_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.network_types_id_seq OWNED BY sys.network_types.id;
+
+
+--
 -- Name: networks; Type: TABLE; Schema: sys; Owner: -
 --
 
 CREATE TABLE sys.networks (
     id integer NOT NULL,
-    name character varying NOT NULL
+    name character varying NOT NULL,
+    type_id smallint NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -43733,6 +43769,13 @@ ALTER TABLE ONLY sys.lua_scripts ALTER COLUMN id SET DEFAULT nextval('sys.lua_sc
 --
 
 ALTER TABLE ONLY sys.network_prefixes ALTER COLUMN id SET DEFAULT nextval('sys.network_prefixes_id_seq'::regclass);
+
+
+--
+-- Name: network_types id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.network_types ALTER COLUMN id SET DEFAULT nextval('sys.network_types_id_seq'::regclass);
 
 
 --
@@ -45650,6 +45693,38 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
+-- Name: network_prefixes network_prefixes_uuid_key; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.network_prefixes
+    ADD CONSTRAINT network_prefixes_uuid_key UNIQUE (uuid);
+
+
+--
+-- Name: network_types network_types_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.network_types
+    ADD CONSTRAINT network_types_name_key UNIQUE (name);
+
+
+--
+-- Name: network_types network_types_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.network_types
+    ADD CONSTRAINT network_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: network_types network_types_uuid_key; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.network_types
+    ADD CONSTRAINT network_types_uuid_key UNIQUE (uuid);
+
+
+--
 -- Name: networks networks_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -45663,6 +45738,14 @@ ALTER TABLE ONLY sys.networks
 
 ALTER TABLE ONLY sys.networks
     ADD CONSTRAINT networks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: networks networks_uuid_key; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.networks
+    ADD CONSTRAINT networks_uuid_key UNIQUE (uuid);
 
 
 --
@@ -46891,6 +46974,14 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
+-- Name: networks networks_type_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.networks
+    ADD CONSTRAINT networks_type_id_fkey FOREIGN KEY (type_id) REFERENCES sys.network_types(id);
+
+
+--
 -- Name: nodes node_pop_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -46966,6 +47057,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190706114700'),
 ('20190707141219'),
 ('20190904174903'),
-('20190919080917');
+('20190919080917'),
+('20191016183312');
 
 
