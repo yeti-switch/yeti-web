@@ -33,7 +33,7 @@
 #  dst_prefix_out                  :string
 #  src_prefix_in                   :string
 #  src_prefix_out                  :string
-#  time_start                      :datetime
+#  time_start                      :datetime         not null
 #  time_connect                    :datetime
 #  time_end                        :datetime
 #  sign_orig_ip                    :string
@@ -142,6 +142,9 @@
 #  customer_duration               :integer
 #  vendor_duration                 :integer
 #  customer_auth_name              :string
+#  legb_local_tag                  :string
+#  legb_ruri                       :string
+#  legb_outbound_proxy             :string
 #
 
 require 'spec_helper'

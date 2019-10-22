@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: class4.lnp_databases_coure_anq
+#
+#  id            :integer          not null, primary key
+#  database_id   :integer
+#  base_url      :string           not null
+#  timeout       :integer          default(300), not null
+#  username      :string           not null
+#  password      :string           not null
+#  country_code  :string           not null
+#  operators_map :string
+#
+
 require 'spec_helper'
 
 describe Lnp::DatabaseCoureAnq, type: :model do

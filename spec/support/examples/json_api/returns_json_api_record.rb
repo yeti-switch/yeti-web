@@ -15,7 +15,7 @@ RSpec.shared_examples :returns_json_api_record do |relationships: [], type: nil,
     expect(json_api_record_data[:id]).to eq(json_api_record_id)
     expect(json_api_record_data[:type]).to eq(json_api_record_type)
     expect(json_api_record_data[:attributes]).to match(json_api_record_attributes)
-    actual_relationships = json_api_record_data[:relationships].keys
+    actual_relationships = json_api_record_data[:relationships]&.keys || []
     expect(actual_relationships).to match_array(relationships)
   end
 end
