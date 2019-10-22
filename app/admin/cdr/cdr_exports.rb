@@ -25,11 +25,50 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     column :status
     column :rows_count
     column :fields
-    column :filters
+    column :filters do |r|
+      r.filters.as_json
+    end
     column :callback_url
     column :created_at
     column :updated_at
     actions
+  end
+
+  #  id           :integer          not null, primary key
+  #  status       :string           not null
+  #  fields       :string           default([]), not null, is an Array
+  #  filters      :json             not null
+  #  callback_url :string
+  #  type         :string           not null
+  #  created_at   :datetime
+  #  updated_at   :datetime
+  #  rows_count   :integer
+  show do
+    columns do
+      column do
+        attributes_table do
+          row :id
+          row :status
+          row :callback_url
+          row :type
+          row :created_at
+          row :updated_at
+          row :rows_count
+        end
+        active_admin_comments
+      end
+
+      column do
+        panel 'Fields' do
+          ul do
+            resource.fields.each { |field| li field }
+          end
+        end
+        panel 'Filters' do
+          attributes_table_for(resource.filters, *CdrExport::FiltersModel.attribute_types.keys)
+        end
+      end
+    end
   end
 
   member_action :download do
@@ -48,31 +87,39 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
 
   controller do
     def build_new_resource
-      build_params = resource_params[0].to_h
-      return super unless build_params.any?
-
-      # build filters
-      filters = {}
-      filters['time_start_gteq'] = build_params['time_start_gteq']
-      filters['time_start_lteq'] = build_params['time_start_lteq']
-      filters['customer_acc_id_eq'] = build_params['customer_acc_id_eq'] if build_params['customer_acc_id_eq'].present?
-      filters['is_last_cdr_eq'] = build_params['is_last_cdr_eq'] == 'true' if build_params['is_last_cdr_eq'].present?
-      scoped_collection.send method_for_build, build_params.merge(filters: filters)
+      record = super
+      if params[:action] == 'new'
+        record.fields = CdrExport.last&.fields || []
+      end
+      record
     end
   end
 
-  permit_params :time_start_gteq, :time_start_lteq,
-                :customer_acc_id_eq, :is_last_cdr_eq, fields: []
+  permit_params filters: %i[time_start_gteq time_start_lteq customer_acc_id_eq is_last_cdr_eq],
+                fields: []
+
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do
-      f.input :fields, as: :select, multiple: true, collection: CdrExport.allowed_fields, input_html: { class: 'chosen' }
+      f.input :fields,
+              as: :select,
+              multiple: true,
+              collection: CdrExport.allowed_fields,
+              input_html: { class: 'chosen' }
     end
-    f.inputs('Filters') do
-      f.input 'time_start_gteq', as: :date_time_picker
-      f.input :time_start_lteq, as: :date_time_picker
-      f.input :customer_acc_id_eq, as: :select, collection: Account.order(:name), input_html: { class: 'chosen' }
-      f.input :is_last_cdr_eq, as: :select, collection: [['Any', nil], ['Yes', true], ['No', false]], input_html: { class: 'chosen' }
+    f.inputs 'Filters', for: [:filters, f.object.filters] do |ff|
+      ff.input :time_start_gteq, as: :date_time_picker
+      ff.input :time_start_lteq, as: :date_time_picker
+
+      ff.input :customer_acc_id_eq,
+               as: :select,
+               collection: Account.order(:name),
+               input_html: { class: 'chosen' }
+
+      ff.input :is_last_cdr_eq,
+               as: :select,
+               collection: [['Any', nil], ['Yes', true], ['No', false]],
+               input_html: { class: 'chosen' }
     end
     f.actions
   end
