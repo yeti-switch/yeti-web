@@ -32546,7 +32546,7 @@ BEGIN
 
   --RAISE NOTICE 'process_dp dst: %',i_destination;
   if i_dp.gateway_id is null then /* termination to gw group */
-    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id and prefer_same_pop;
+    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
     IF v_gateway_group.balancing_mode_id=2 THEN
       /*rel{*/
       FOR v_gw in
@@ -32701,7 +32701,7 @@ BEGIN
 
   --RAISE NOTICE 'process_dp dst: %',i_destination;
   if i_dp.gateway_id is null then /* termination to gw group */
-    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id and prefer_same_pop;
+    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
     IF v_gateway_group.balancing_mode_id=2 THEN
       
       /*dbg{*/
@@ -32804,7 +32804,7 @@ BEGIN
 
   --RAISE NOTICE 'process_dp dst: %',i_destination;
   if i_dp.gateway_id is null then /* termination to gw group */
-    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id and prefer_same_pop;
+    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
     IF v_gateway_group.balancing_mode_id=2 THEN
       /*rel{*/
       FOR v_gw in
@@ -47058,6 +47058,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190707141219'),
 ('20190904174903'),
 ('20190919080917'),
-('20191016183312');
+('20191016183312'),
+('20191018180427');
 
 
