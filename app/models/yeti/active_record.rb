@@ -3,6 +3,8 @@
 class Yeti::ActiveRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  include WithJsonAttributes
+
   def self.array_belongs_to(name, class_name:, foreign_key:)
     define_method(name) do
       relation = class_name.is_a?(String) ? class_name.constantize : class_name

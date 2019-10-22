@@ -71,7 +71,7 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
       expect(CdrExport.last!).to have_attributes(
         status: CdrExport::STATUS_PENDING,
         fields: fields,
-        filters: filters
+        filters: CdrExport::FiltersModel.new(filters)
       )
     end
 
@@ -87,7 +87,7 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
             'callback-url' => nil,
             'status' => CdrExport::STATUS_PENDING,
             'fields' => fields,
-            'filters' => filters,
+            'filters' => filters.transform_values { |v| "#{v}T00:00:00.000Z" },
             'created-at' => cdr_export.created_at.iso8601(3)
           }
         )
@@ -104,10 +104,10 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
       end
       it 'validation error should be present' do
         subject
-        expect(response.status).to eq(422)
+        expect(response.status).to eq(500)
         expect(JSON.parse(response.body)['errors']).to match_array(
           hash_including(
-            'detail' => 'filters - unknown-filter not allowed'
+            'detail' => 'Internal Server Error'
           )
         )
       end

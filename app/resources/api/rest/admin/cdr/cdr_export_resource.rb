@@ -11,6 +11,10 @@ class Api::Rest::Admin::Cdr::CdrExportResource < BaseResource
              :callback_url,
              :export_type
 
+  def filters
+    _model.filters.as_json
+  end
+
   def self.creatable_fields(_context)
     %i[fields filters callback_url export_type]
   end
