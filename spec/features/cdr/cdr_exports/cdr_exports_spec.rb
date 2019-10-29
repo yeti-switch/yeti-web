@@ -20,7 +20,7 @@ describe 'CDR exports', type: :feature do
         expect(page).to have_selector('.col-download a', text: 'download')
         expect(page).to have_selector('.col-status', text: cdr_export.status)
         expect(page).to have_selector('.col-fields', text: cdr_export.fields.join(', '))
-        expect(page).to have_selector('.col-filters', text: cdr_export.filters)
+        expect(page).to have_selector('.col-filters', text: cdr_export.filters.as_json)
         expect(page).to have_selector('.col-callback_url', text: cdr_export.callback_url)
         expect(page).to have_selector('.col-created_at', text: cdr_export.created_at.strftime('%Y-%m-%d %H:%M:%S'))
       end
