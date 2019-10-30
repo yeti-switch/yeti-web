@@ -1,0 +1,23 @@
+[Unit]
+Description=YETI system web interface daemon for Prometheus
+Documentation=https://yeti-switch.org/docs/
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=yeti-web
+Group=yeti-web
+LimitNOFILE=65536
+LimitCORE=infinity
+
+Environment=RAILS_ENV=production
+Environment=RACK_ENV=production
+Environment=RAKE_ENV=production
+Environment=BUNDLE_GEMFILE=/opt/yeti-web/Gemfile
+Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
+
+RuntimeDirectory=yeti-delayed-job
+ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec /opt/yeti-web/bin/prometheus_exporter
+Type=simple
+Restart=on-abnormal
