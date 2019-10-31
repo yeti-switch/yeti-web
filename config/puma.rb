@@ -32,11 +32,25 @@ before_fork do
     config.pre_term = ->(worker) { puts "Worker #{worker.inspect} being killed" }
   end
   PumaWorkerKiller.start
+
+  if Rails.configuration.yeti_web['prometheus']['enabled']
+    require 'prometheus_exporter/client'
+    require 'prometheus_exporter/instrumentation'
+    PrometheusExporter::Instrumentation::Puma.start
+  end
 end
 
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do
     ActiveRecord::Base.establish_connection
     SecondBase::Base.establish_connection
+  end
+
+  if Rails.configuration.yeti_web['prometheus']['enabled']
+    require 'prometheus_exporter/instrumentation'
+    PrometheusExporter::Instrumentation::Process.start(
+      type: 'web',
+      labels: Rails.configuration.yeti_web['prometheus']['default_labels']
+    )
   end
 end
