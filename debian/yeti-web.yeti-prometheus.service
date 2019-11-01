@@ -17,7 +17,7 @@ Environment=RAKE_ENV=production
 Environment=BUNDLE_GEMFILE=/opt/yeti-web/Gemfile
 Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
 
-RuntimeDirectory=yeti-delayed-job
+RuntimeDirectory=yeti-prometheus
 ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec /opt/yeti-web/bin/prometheus_exporter
 Type=simple
 Restart=on-abnormal
