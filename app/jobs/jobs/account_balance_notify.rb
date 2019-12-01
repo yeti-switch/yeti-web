@@ -6,7 +6,9 @@ module Jobs
       notifications.each do |ev|
         #        begin
         Log::BalanceNotification.transaction do
-          ev.process!
+          capture_job_extra(id: ev.id) do
+            ev.process!
+          end
         end
       end
       notifications.count

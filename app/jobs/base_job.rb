@@ -57,6 +57,10 @@ class BaseJob < ActiveRecord::Base
     update_columns(running: false, updated_at: Time.now)
   end
 
+  def capture_job_extra(extra)
+    CaptureError.with_extra(type => extra) { yield }
+  end
+
   protected
 
   def self.find_sti_class(type_name)
