@@ -21,6 +21,22 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
     current_system_apiaccess
   end
 
+  def capture_user
+    return if current_system_apiaccess.nil?
+
+    {
+      id: current_system_apiaccess.id,
+      customer_id: current_system_apiaccess.customer_id,
+      login: current_system_apiaccess.login,
+      class: 'System::ApiAccess'
+    }
+  end
+
+  def handle_exceptions(e)
+    capture_error(e) unless e.is_a?(JSONAPI::Exceptions::Error)
+    super
+  end
+
   private
 
   def authenticate_api_access!

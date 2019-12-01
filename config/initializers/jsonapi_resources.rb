@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'jsonapi/exceptions/authorization_failed'
+require 'jsonapi/operation_dispatcher_patch'
 
 JSONAPI.configure do |config|
   # can be paged, offset, none (default)

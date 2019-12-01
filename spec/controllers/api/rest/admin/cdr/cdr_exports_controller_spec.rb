@@ -99,17 +99,26 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
     end
 
     context 'with non supporting filters' do
-      let(:filters) do
-        super().merge('unknown-filter' => '123')
-      end
-      it 'validation error should be present' do
-        subject
-        expect(response.status).to eq(422)
-        expect(JSON.parse(response.body)['errors']).to match_array(
-          hash_including(
-            'detail' => 'filters - unknown-filter not allowed'
-          )
-        )
+      let(:filters) { super().merge('unknown-filter' => '123') }
+
+      include_examples :jsonapi_server_error
+      include_examples :captures_error do
+        let(:capture_error_context) do
+          {
+            user: {
+              id: admin_user.id,
+              username: admin_user.username,
+              class: admin_user.class.name
+            },
+            tags: {
+              action_name: 'create',
+              controller_name: 'api/rest/admin/cdr/cdr_exports',
+              request_id: nil
+            },
+            extra: {},
+            request_env: be_present
+          }
+        end
       end
     end
 

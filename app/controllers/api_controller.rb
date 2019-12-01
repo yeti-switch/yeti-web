@@ -31,7 +31,9 @@ class ApiController < ActionController::Base
   end
 
   include Concerns::WithPayloads
-  include Concerns::ErrorNotify
+  include CaptureError::ControllerMethods
+
+  rescue_from StandardError, with: :capture_error!
 
   protected
 
