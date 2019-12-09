@@ -33,6 +33,8 @@ module Jobs
       logger.warn { "Processing event ##{ev.id} was failed" }
       logger.warn { "<#{e.class}>: #{e.message}" }
       logger.warn { e.backtrace.join("\n") }
+      extra = { job_class: self.class.name, event_id: ev.id, command: ev.command, node_id: ev.node_id }
+      CaptureError.capture(e, extra: extra)
       ev.retries += 1
       ev.last_error = e.message
       ev.save!

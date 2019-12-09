@@ -93,6 +93,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
   config.include RspecRequestHelper, type: :request
+  config.include RspecRequestHelper, type: :controller
   config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
   config.include Helpers::ActiveAdminForms::Examples, type: :feature
   config.include FeatureTestHelper, type: :feature
@@ -120,6 +121,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
+    allow(Raven).to receive(:send_event).with(a_kind_of(Hash))
   end
 
   config.before(:each, js: true) do

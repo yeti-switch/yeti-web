@@ -57,6 +57,34 @@ describe Api::Rest::Customer::V1::AccountsController, type: :request do
       end
     end
 
+    context 'when raises exception' do
+      before do
+        expect(Api::Rest::Customer::V1::AccountResource).to receive(:records).once
+                                                                             .and_raise(StandardError, 'test error')
+      end
+
+      include_examples :jsonapi_server_error
+      include_examples :captures_error do
+        let(:capture_error_context) do
+          {
+            user: {
+              id: api_access.id,
+              customer_id: api_access.customer_id,
+              login: api_access.login,
+              class: api_access.class.name
+            },
+            tags: {
+              action_name: 'index',
+              controller_name: 'api/rest/customer/v1/accounts',
+              request_id: be_present
+            },
+            extra: {},
+            request_env: be_present
+          }
+        end
+      end
+    end
+
     # TODO: context when no entity found fin index-action
   end
 
@@ -93,7 +121,7 @@ describe Api::Rest::Customer::V1::AccountsController, type: :request do
       end
     end
 
-    context 'request accout not listed in allowed_ids' do
+    context 'request account not listed in allowed_ids' do
       let(:allowed_account) { create(:account, contractor: customer) }
       before { api_access.update!(account_ids: [allowed_account.id]) }
 

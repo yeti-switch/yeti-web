@@ -41,5 +41,29 @@ RSpec.describe Api::Rest::System::JobsController do
         end
       end
     end
+
+    context 'when raise exception' do
+      let(:job_type) { 'RspecInvalidType' }
+      before do
+        expect(BaseJob).to receive(:launch!).with(job_type).and_raise(StandardError, 'test error')
+      end
+
+      include_examples :raises_exception, StandardError, 'test error'
+      include_examples :captures_error, safe: true do
+        let(:capture_error_context) do
+          {
+            user: nil,
+            tags: {
+              action_name: 'run',
+              controller_name: 'api/rest/system/jobs',
+              job_class: job_type,
+              request_id: be_present
+            },
+            extra: {},
+            request_env: be_present
+          }
+        end
+      end
+    end
   end
 end

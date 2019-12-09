@@ -78,6 +78,7 @@ gem 'syslog-logger'
 gem 'zip-zip'
 
 gem 'prometheus_exporter', require: false
+gem 'sentry-raven', require: false
 
 group :development do
   gem 'annotate'
