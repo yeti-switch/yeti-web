@@ -40,6 +40,9 @@ class RolePolicy < ApplicationPolicy
   alias_rule :import?, to: :perform? # ActiveAdminImport::Auth::IMPORT
   alias_rule :do_import?, to: :import? # active_admin_import
 
+  alias_rule :batch_insert?, :batch_replace?, :batch_update?, :delete_all?,
+             to: :perform?
+
   private
 
   # action could be one of [:read, :change, :remove, :perform]
