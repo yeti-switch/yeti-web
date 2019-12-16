@@ -3,7 +3,7 @@
 class CustomersAuthPolicy < ::RolePolicy
   section 'CustomersAuth'
 
-  alias_rule :enabled?, :disabled?, to: :perform? # DSL acts_as_status
+  alias_rule :enable?, :disable?, to: :perform? # DSL acts_as_status
 
   class Scope < ::RolePolicy::Scope
   end
