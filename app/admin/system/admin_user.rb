@@ -2,25 +2,26 @@
 
 ActiveAdmin.register AdminUser do
   menu parent: 'System', priority: 2
+  decorate_with AdminUserDecorator
 
   acts_as_status
   acts_as_export
-  action_list = %i[index show edit update]
+  acts_as_safe_destroy
+  action_list = %i[index show edit update destroy]
   action_list += %i[create new] unless AdminUser.ldap?
-  actions *action_list
+  actions(*action_list)
 
-  permit_params do
-    attrs = %i[ssh_key stateful_filters]
-    unless AdminUser.ldap?
-      attrs.concat %i[username email password password_confirmation]
-      attrs.push(roles: [])
+  filter :billing_contact_email, as: :string
+  filter :username
+
+  controller do
+    def scoped_collection
+      super.preload(:billing_contact)
     end
-    attrs
   end
 
-  includes :billing_contact
-
   index do
+    selectable_column
     id_column
     actions
     column :username
@@ -29,15 +30,10 @@ ActiveAdmin.register AdminUser do
     column :email
     column :last_sign_in_at
     column :sign_in_count
-    column :ssh_key do |row|
-      status_tag(row.ssh_key.present?.to_s, class: row.ssh_key.present? ? :ok : nil)
-    end
+    column :ssh_key, :ssh_key_tag
   end
 
-  filter :billing_contact_email, as: :string
-  filter :username
-
-  show do |user|
+  show do
     attributes_table do
       row :id
       row :username
@@ -48,22 +44,23 @@ ActiveAdmin.register AdminUser do
       row :current_sign_in_ip
       row :last_sign_in_ip
       row :enabled
-      row :roles do
-        user.roles.join(', ')
-      end
+      row :roles, &:roles_list
       row :updated_at
       row :created_at
       row :ssh_key
-      row :visible_columns do
-        content_tag :pre, JSON.pretty_generate(user.visible_columns), style: 'white-space: pre-wrap; word-wrap: break-word;'
-      end
-      row :per_page do
-        content_tag :pre, JSON.pretty_generate(user.per_page), style: 'white-space: pre-wrap; word-wrap: break-word;'
-      end
-      row :saved_filters do
-        content_tag :pre, JSON.pretty_generate(user.saved_filters), style: 'white-space: pre-wrap; word-wrap: break-word;'
-      end
+      row :visible_columns, &:pretty_visible_columns
+      row :per_page, &:pretty_per_page
+      row :saved_filters, &:pretty_saved_filters
     end
+  end
+
+  permit_params do
+    attrs = %i[ssh_key stateful_filters]
+    unless AdminUser.ldap?
+      attrs.concat %i[username email password password_confirmation]
+      attrs.push(roles: [])
+    end
+    attrs
   end
 
   # unless AdminUser.ldap?
