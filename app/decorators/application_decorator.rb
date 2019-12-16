@@ -15,4 +15,12 @@ class ApplicationDecorator < Draper::Decorator
   def self.object_class_namespace
     nil
   end
+
+  def arbre(assigns = {}, &block)
+    Arbre::Context.new(assigns, self, &block).to_s
+  end
+
+  def status_tag(title, options = {})
+    arbre { status_tag(title, options) }
+  end
 end
