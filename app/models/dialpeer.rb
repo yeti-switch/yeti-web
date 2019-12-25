@@ -54,7 +54,7 @@ class Dialpeer < Yeti::ActiveRecord
   belongs_to :vendor, class_name: 'Contractor'
   has_one :statistic, class_name: 'DialpeersStat', dependent: :delete
   has_paper_trail class_name: 'AuditLogItem'
-  has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :dialpeer_id, dependent: :nullify
+  has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :dialpeer_id
   has_many :dialpeer_next_rates, class_name: 'DialpeerNextRate', foreign_key: :dialpeer_id, dependent: :delete_all
   belongs_to :current_rate, class_name: 'DialpeerNextRate', foreign_key: :current_rate_id
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id

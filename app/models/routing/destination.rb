@@ -42,7 +42,7 @@ class Routing::Destination < Yeti::ActiveRecord
   has_many :customers_auths, through: :rateplan
   belongs_to :rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :rate_policy_id
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
-  has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :destination_id, dependent: :nullify
+  has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :destination_id
   has_many :destination_next_rates, class_name: 'Routing::DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
 
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
