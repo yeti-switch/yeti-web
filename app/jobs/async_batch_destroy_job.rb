@@ -14,12 +14,12 @@ class AsyncBatchDestroyJob
 
   def perform
     set_audit_log_data
-    model_class.constantize.transaction do
-      begin
-        scoped_records = model_class.constantize.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
+    begin
+      scoped_records = model_class.constantize.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
+      model_class.constantize.transaction do
         scoped_records.each(&:destroy!)
-      end until scoped_records.empty?
-    end
+      end
+    end until scoped_records.empty?
   end
 
   def reschedule_at(_time, _attempts)
