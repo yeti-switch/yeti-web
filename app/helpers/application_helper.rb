@@ -80,4 +80,14 @@ module ApplicationHelper
       }, #{delay_ms});
     "
   end
+
+  def pre_wrap(value, options = {})
+    options[:style] = [options[:style], 'white-space: pre-wrap; word-wrap: break-word;'].compact.join(' ')
+    content_tag :pre, value, options
+  end
+
+  def pre_wrap_json(json, options = {})
+    html_options = options.delete(:html) || {}
+    pre_wrap JSON.pretty_generate(json, options), html_options
+  end
 end
