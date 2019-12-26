@@ -18,7 +18,6 @@ ActiveAdmin.register Importing::Gateway do
   includes :contractor, :gateway_group, :rel100_mode,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :sensor, :sensor_level, :rx_inband_dtmf_filtering_mode, :rx_inband_dtmf_filtering_mode,
-           :preserve_anonymous_from_domain,
            :termination_dst_numberlist, :termination_src_numberlist, :lua_script
 
   index do

@@ -24,7 +24,7 @@ gem 'knock', git: 'https://github.com/nsarno/knock.git', ref: '66b60437a5acc28e4
 # ActiveAdmin
 gem 'active_admin_date_range_preset', git: 'https://github.com/workgena/active_admin_date_range_preset.git'
 gem 'active_admin_datetimepicker'
-gem 'active_admin_import', '3.1.0'
+gem 'active_admin_import'
 gem 'active_admin_scoped_collection_actions'
 gem 'active_admin_theme'
 gem 'activeadmin'
