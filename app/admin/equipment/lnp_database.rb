@@ -3,6 +3,7 @@
 ActiveAdmin.register Lnp::Database do
   menu parent: 'Equipment', priority: 95, label: 'LNP Databases'
   config.remove_action_item(:new)
+  #actions :index, :show, :new
 
   # acts_as_audit
   acts_as_clone
@@ -42,7 +43,7 @@ ActiveAdmin.register Lnp::Database do
     redirect_back fallback_location: root_path
   end
 
-  index do
+  index disable_blank_slate_link: true do
     selectable_column
     id_column
     actions
@@ -50,6 +51,7 @@ ActiveAdmin.register Lnp::Database do
     column :type, :database_type_name, sortable: :database_type
     column :created_at
   end
+
 
   filter :id
   filter :name
