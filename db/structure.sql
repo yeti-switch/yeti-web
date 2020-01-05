@@ -41060,7 +41060,7 @@ ALTER SEQUENCE gui.sessions_id_seq OWNED BY gui.sessions.id;
 CREATE TABLE gui.versions (
     id integer NOT NULL,
     item_type character varying(255) NOT NULL,
-    item_id integer NOT NULL,
+    item_id bigint NOT NULL,
     event character varying(255) NOT NULL,
     whodunnit character varying(255),
     object text,
@@ -47059,6 +47059,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190904174903'),
 ('20190919080917'),
 ('20191016183312'),
-('20191018180427');
+('20191018180427'),
+('20200105131431');
 
 
