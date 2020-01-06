@@ -21,6 +21,8 @@
 #  last_successful_call_at  :datetime
 #  successful_calls_count   :integer
 #  type_id                  :integer          not null
+#  customer_calls_duration  :integer          not null
+#  vendor_calls_duration    :integer          not null
 #
 
 class Billing::Invoice < Cdr::Base
@@ -99,6 +101,8 @@ class Billing::Invoice < Cdr::Base
           calls_count,
           successful_calls_count,
           calls_duration,
+          customer_calls_duration,
+          vendor_calls_duration,
           amount,
           invoice_id,
           first_call_at,
@@ -110,6 +114,8 @@ class Billing::Invoice < Cdr::Base
           count(id),  -- calls count
           count(nullif(success,false)),  -- succesful_calls_count
           sum(duration),
+          sum(customer_duration),
+          sum(vendor_duration),
           sum(vendor_price),
           ?,
           min(time_start),
@@ -126,6 +132,8 @@ class Billing::Invoice < Cdr::Base
           calls_count,
           successful_calls_count,
           calls_duration,
+          customer_calls_duration,
+          vendor_calls_duration,
           amount,
           invoice_id,
           first_call_at,
@@ -137,6 +145,8 @@ class Billing::Invoice < Cdr::Base
           sum(calls_count),
           sum(successful_calls_count),
           sum(calls_duration),
+          sum(customer_calls_duration),
+          sum(vendor_calls_duration),
           sum(amount),
           ?,
           min(first_call_at),
@@ -171,6 +181,8 @@ class Billing::Invoice < Cdr::Base
           calls_count,
           successful_calls_count,
           calls_duration,
+          customer_calls_duration,
+          vendor_calls_duration,
           amount,
           invoice_id,
           first_call_at,
@@ -182,6 +194,8 @@ class Billing::Invoice < Cdr::Base
           count(nullif(is_last_cdr,false)),
           count(nullif((success AND is_last_cdr),false)),  -- succesful_calls_count
           sum(duration),
+          sum(customer_duration),
+          sum(vendor_duration),
           sum(customer_price),
           ?,
           min(time_start),
@@ -198,6 +212,8 @@ class Billing::Invoice < Cdr::Base
           calls_count,
           successful_calls_count,
           calls_duration,
+          customer_calls_duration,
+          vendor_calls_duration,
           amount,
           invoice_id,
           first_call_at,
@@ -209,6 +225,8 @@ class Billing::Invoice < Cdr::Base
           sum(calls_count),
           sum(successful_calls_count),
           sum(calls_duration),
+          sum(customer_calls_duration),
+          sum(vendor_calls_duration),
           sum(amount),
           ?,
           min(first_call_at),
@@ -238,6 +256,8 @@ class Billing::Invoice < Cdr::Base
     self.calls_count = data.calls_count
     self.successful_calls_count = data.successful_calls_count
     self.calls_duration = data.calls_duration
+    self.customer_calls_duration = data.customer_calls_duration
+    self.vendor_calls_duration = data.vendor_calls_duration
     self.first_call_at = data.first_call_at
     self.first_successful_call_at = data.first_successful_call_at
     self.last_call_at = data.last_call_at
@@ -308,7 +328,9 @@ class Billing::Invoice < Cdr::Base
     row = extending(ActsAsTotalsRelation).totals_row_by(
       'sum(amount) as total_amount',
       'sum(calls_count) as total_calls_count',
-      'sum(calls_duration) as total_calls_duration'
+      'sum(calls_duration) as total_calls_duration',
+      'sum(customer_calls_duration) as total_customer_calls_duration',
+      'sum(vendor_calls_duration) as total_vendor_calls_duration'
     )
     Totals.new(*row)
   end

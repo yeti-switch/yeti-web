@@ -8,6 +8,14 @@ class ReportCustomDataDecorator < BillingDecorator
     time_format_min :agg_calls_duration
   end
 
+  def decorated_agg_customer_calls_duration
+    time_format_min :agg_customer_calls_duration
+  end
+
+  def decorated_agg_vendor_calls_duration
+    time_format_min :agg_vendor_calls_duration
+  end
+
   def decorated_agg_calls_acd
     time_format_min :agg_calls_acd
   end
@@ -22,6 +30,10 @@ class ReportCustomDataDecorator < BillingDecorator
 
   def decorated_agg_customer_price
     money_format :agg_customer_price
+  end
+
+  def decorated_agg_customer_price_no_vat
+    money_format :agg_customer_price_no_vat
   end
 
   def decorated_agg_vendor_price

@@ -17,6 +17,8 @@
 #  successful_calls_count   :integer
 #  first_successful_call_at :datetime
 #  last_successful_call_at  :datetime
+#  customer_calls_duration  :integer
+#  vendor_calls_duration    :integer
 #
 
 class Billing::InvoiceNetwork < Cdr::Base

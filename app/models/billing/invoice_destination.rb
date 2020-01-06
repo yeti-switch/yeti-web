@@ -18,6 +18,8 @@
 #  successful_calls_count   :integer
 #  first_successful_call_at :datetime
 #  last_successful_call_at  :datetime
+#  customer_calls_duration  :integer
+#  vendor_calls_duration    :integer
 #
 
 class Billing::InvoiceDestination < Cdr::Base
@@ -46,6 +48,8 @@ class Billing::InvoiceDestination < Cdr::Base
       coalesce(sum(calls_count),0) as calls_count,
       coalesce(sum(successful_calls_count),0) as successful_calls_count,
       coalesce(sum(calls_duration),0) as calls_duration,
+      coalesce(sum(customer_calls_duration),0) as customer_calls_duration,
+      coalesce(sum(vendor_calls_duration),0) as vendor_calls_duration,
       COALESCE(sum(amount),0) as amount,
       min(first_call_at) as first_call_at,
       min(first_successful_call_at) as first_successful_call_at,

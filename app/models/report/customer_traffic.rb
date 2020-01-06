@@ -48,8 +48,8 @@ class Report::CustomerTraffic < Cdr::Base
     execute_sp("INSERT INTO reports.customer_traffic_report_data_full(
                   report_id,
                   vendor_id, destination_prefix, dst_country_id, dst_network_id,
-                  calls_count, short_calls_count,  success_calls_count,
-                  calls_duration,
+                  calls_count, short_calls_count, success_calls_count,
+                  calls_duration, customer_calls_duration, vendor_calls_duration,
                   acd,
                   asr,
                   origination_cost ,termination_cost,
@@ -60,7 +60,7 @@ class Report::CustomerTraffic < Cdr::Base
                 ?,
                 vendor_id, destination_prefix, dst_country_id, dst_network_id,
                 count(id), count(nullif((duration<=? AND success),false)), count(nullif(success,false)),
-                sum(duration),
+                sum(duration), sum(customer_duration), sum(vendor_duration),
                 sum(duration)::float/nullif(count(nullif(success,false)),0)::float, /* ACD */
                 count(nullif(success,false))::float/nullif(count(id),0)::float,  /* ASR */
                 sum(customer_price), sum(vendor_price),
@@ -81,7 +81,7 @@ class Report::CustomerTraffic < Cdr::Base
                   report_id,
                   vendor_id,
                   calls_count,  short_calls_count,  success_calls_count,
-                  calls_duration,
+                  calls_duration, customer_calls_duration, vendor_calls_duration,
                   acd,
                   asr,
                   origination_cost ,termination_cost,
@@ -92,7 +92,7 @@ class Report::CustomerTraffic < Cdr::Base
                 ?,
                 vendor_id,
                 sum(calls_count), sum(short_calls_count), sum(success_calls_count),
-                sum(calls_duration),
+                sum(calls_duration), sum(customer_calls_duration), sum(vendor_calls_duration),
                 sum(calls_duration)::float/sum(nullif(success_calls_count,0))::float,
                 sum(success_calls_count)::float/sum(nullif(calls_count,0))::float,
                 sum(origination_cost), sum(termination_cost),
@@ -109,7 +109,7 @@ class Report::CustomerTraffic < Cdr::Base
                   report_id,
                   destination_prefix, dst_country_id, dst_network_id,
                   calls_count,  short_calls_count,  success_calls_count,
-                  calls_duration,
+                  calls_duration, customer_calls_duration, vendor_calls_duration,
                   acd,
                   asr,
                   origination_cost ,termination_cost,
@@ -120,7 +120,7 @@ class Report::CustomerTraffic < Cdr::Base
                 ?,
                 destination_prefix, dst_country_id, dst_network_id,
                 sum(calls_count), sum(short_calls_count), sum(success_calls_count),
-                sum(calls_duration),
+                sum(calls_duration), sum(customer_calls_duration), sum(vendor_calls_duration),
                 sum(calls_duration)::float/sum(nullif(success_calls_count,0))::float,
                 sum(success_calls_count)::float/sum(nullif(calls_count,0))::float,
                 sum(origination_cost), sum(termination_cost),
@@ -146,6 +146,8 @@ class Report::CustomerTraffic < Cdr::Base
        success_calls_count
        short_calls_count
        calls_duration
+       customer_calls_duration
+       vendor_calls_duration
        acd
        asr
        origination_cost
@@ -164,6 +166,8 @@ class Report::CustomerTraffic < Cdr::Base
       success_calls_count
       short_calls_count
       calls_duration
+      customer_calls_duration
+      vendor_calls_duration
       acd
       asr
       origination_cost
@@ -184,6 +188,8 @@ class Report::CustomerTraffic < Cdr::Base
       success_calls_count
       short_calls_count
       calls_duration
+      customer_calls_duration
+      vendor_calls_duration
       acd
       asr
       origination_cost

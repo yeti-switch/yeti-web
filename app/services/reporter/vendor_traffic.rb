@@ -13,6 +13,8 @@ module Reporter
         :success_calls_count,
         :short_calls_count,
         [:decorated_calls_duration, 'Calls duration'],
+        [:decorated_customer_calls_duration, 'Customer calls duration'],
+        [:decorated_vendor_calls_duration, 'Vendor calls duration'],
         [:decorated_asr, 'ASR'],
         [:decorated_acd, 'ACD'],
         [:decorated_origination_cost, 'Origination cost'],
