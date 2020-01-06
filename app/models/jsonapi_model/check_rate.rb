@@ -4,17 +4,9 @@ module JsonapiModel
   class CheckRate < Base
     attr_accessor :rateplan_id, :number, :rates
 
-    validates_presence_of :rateplan_id, :number
+    validates :rateplan_id, :number, presence: true
     validate do
       errors.add(:rateplan_id, 'Rateplan not found') unless rateplan
-    end
-
-    def initialize(**params)
-      super
-
-      @errors = ActiveModel::Errors.new(self)
-      @rateplan_id = params[:rateplan_id]
-      @number = params[:number]
     end
 
     def call
@@ -22,18 +14,17 @@ module JsonapiModel
       self
     end
 
-    def save(*_args)
-      begin
-        get_rates
-      rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
-        Rails.logger.error(e.record.errors)
-        return false
-      end
-      true
+    def _save
+      get_rates
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
+      Rails.logger.error(e.record.errors)
+      errors.add(:base, 'save failed')
     end
 
     def rateplan
-      Rateplan.find_by(uuid: @rateplan_id) if Rateplan.where(uuid: @rateplan_id).exists?
+      return @rateplan if defined?(@rateplan)
+
+      @rateplan = rateplan_id ? Rateplan.find_by(uuid: rateplan_id) : nil
     end
 
     def self.all

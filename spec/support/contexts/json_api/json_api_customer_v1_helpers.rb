@@ -18,7 +18,12 @@ RSpec.shared_context :json_api_customer_v1_helpers do |type: nil|
   let(:customer) { api_access.customer }
 
   let(:json_api_request_body) { { data: json_api_request_data } }
-  let(:json_api_request_data) { { type: json_api_resource_type, attributes: json_api_request_attributes } }
+  let(:json_api_request_data) do
+    data = { type: json_api_resource_type, attributes: json_api_request_attributes }
+    data[:relationships] = json_api_relationships unless json_api_relationships.nil?
+    data
+  end
+  let(:json_api_relationships) { nil }
   let(:json_api_request_attributes) do
     raise 'override let(:json_api_request_attributes) for shared_context :json_api_customer_v1_helpers'
   end
