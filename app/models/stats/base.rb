@@ -22,5 +22,5 @@ class Stats::Base < Cdr::Base
         )
       end
     end
- end
+  end
 end
