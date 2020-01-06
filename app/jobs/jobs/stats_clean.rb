@@ -4,8 +4,7 @@ module Jobs
   class StatsClean < ::BaseJob
     def execute
       Stats::AggActiveCall.where('created_at < ?', ago).delete_all
-      Stats::AggActiveCallCustomerAccount.where('created_at < ?', ago).delete_all
-      Stats::AggActiveCallVendorAccount.where('created_at < ?', ago).delete_all
+      Stats::AggActiveCallAccount.where('created_at < ?', ago).delete_all
       Stats::AggActiveCallOrigGateway.where('created_at < ?', ago).delete_all
       Stats::AggActiveCallTermGateway.where('created_at < ?', ago).delete_all
       Stats::TrafficCustomerAccount.where('timestamp < ?', ago).delete_all
