@@ -154,6 +154,7 @@ Rails.application.routes.draw do
             jsonapi_resources :rates
             jsonapi_resource :check_rate, only: [:create]
             jsonapi_resources :cdrs, only: %i[index show]
+            jsonapi_resources :active_calls, only: %i[create]
           end
         end
 
