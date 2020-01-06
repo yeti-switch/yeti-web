@@ -2,15 +2,17 @@
 
 panel 'History' do
   table_for assigns[:versions] do
-    column 'Item' do |v|
+    column :id do |v|
+      link_to v.id, audit_log_item_path(v.id)
+    end
+    column :item do |v|
       link_to v.item.display_name, smart_url_for(v.item, version: v.id)
     end
-
-    column 'Event', &:event
+    column :event
     column :created_at
     column :txid
     column 'Who ID', &:whodunnit
-    column 'Who' do |v|
+    column :who do |v|
       whodunit_link(v.whodunnit)
     end
     column :ip
