@@ -177,17 +177,11 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       end
     }, &:decorated_calls_duration
 
-    column :customer_calls_duration, footer: lambda {
+    column :billing_duration, footer: lambda {
       strong do
-        @footer_data.time_format_min :total_customer_calls_duration
+        @footer_data.time_format_min :total_billing_duration
       end
-    }, &:decorated_customer_calls_duration
-
-    column :vendor_calls_duration, footer: lambda {
-      strong do
-        @footer_data.time_format_min :total_vendor_calls_duration
-      end
-    }, &:decorated_vendor_calls_duration
+    }, &:decorated_billing_duration
 
     column :created_at
     column :first_call_at
@@ -225,11 +219,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
           row :calls_duration do
             s.decorated_calls_duration
           end
-          row :customer_calls_duration do
-            s.decorated_customer_calls_duration
-          end
-          row :vendor_calls_duration do
-            s.decorated_vendor_calls_duration
+          row :billing_duration do
+            s.decorated_billing_duration
           end
           row :type
           row :direction do
@@ -252,8 +243,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             column :calls_count
             column :successful_calls_count
             column :calls_duration, &:decorated_calls_duration
-            column :customer_calls_duration, &:decorated_customer_calls_duration
-            column :vendor_calls_duration, &:decorated_vendor_calls_duration
+            column :billing_duration, &:decorated_billing_duration
             column :amount do |r|
               strong do
                 r.decorated_amount
@@ -276,8 +266,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             column :calls_count
             column :successful_calls_count
             column :calls_duration, &:decorated_calls_duration
-            column :customer_calls_duration, &:decorated_customer_calls_duration
-            column :vendor_calls_duration, &:decorated_vendor_calls_duration
+            column :billing_duration, &:decorated_billing_duration
             column :amount do |r|
               strong do
                 r.decorated_amount

@@ -18,8 +18,7 @@
 #  successful_calls_count   :integer
 #  first_successful_call_at :datetime
 #  last_successful_call_at  :datetime
-#  customer_calls_duration  :integer
-#  vendor_calls_duration    :integer
+#  billing_duration         :integer
 #
 
 class Billing::InvoiceDestination < Cdr::Base
@@ -33,11 +32,11 @@ class Billing::InvoiceDestination < Cdr::Base
 
   def self.to_csv
     csv_string = CSV.generate do |csv|
-      csv << ['DST PREFIX',	'COUNTRY',	'NETWORK', 'RATE',	'CALLS COUNT', 'SUCCESSFUL CALLS COUNT', 'DURATION',	'AMOUNT']
+      csv << ['DST PREFIX',	'COUNTRY',	'NETWORK', 'RATE',	'CALLS COUNT', 'SUCCESSFUL CALLS COUNT', 'DURATION', 'BILLING DURATION', 'AMOUNT']
 
       for_invoice.each do |record|
         csv << [record.dst_prefix, record.country.try!(:name), record.network.try!(:name), record.rate,
-                record.calls_count, record.successful_calls_count, record.calls_duration, record.amount]
+                record.calls_count, record.successful_calls_count, record.calls_duration, record.billing_duration, record.amount]
       end
     end
     csv_string
@@ -48,8 +47,7 @@ class Billing::InvoiceDestination < Cdr::Base
       coalesce(sum(calls_count),0) as calls_count,
       coalesce(sum(successful_calls_count),0) as successful_calls_count,
       coalesce(sum(calls_duration),0) as calls_duration,
-      coalesce(sum(customer_calls_duration),0) as customer_calls_duration,
-      coalesce(sum(vendor_calls_duration),0) as vendor_calls_duration,
+      coalesce(sum(billing_duration),0) as billing_duration,
       COALESCE(sum(amount),0) as amount,
       min(first_call_at) as first_call_at,
       min(first_successful_call_at) as first_successful_call_at,

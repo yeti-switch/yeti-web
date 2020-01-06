@@ -4407,8 +4407,7 @@ CREATE TABLE billing.invoice_destinations (
     successful_calls_count bigint,
     first_successful_call_at timestamp with time zone,
     last_successful_call_at timestamp with time zone,
-    customer_calls_duration bigint,
-    vendor_calls_duration bigint
+    billing_duration bigint
 );
 
 
@@ -4483,8 +4482,7 @@ CREATE TABLE billing.invoice_networks (
     successful_calls_count bigint,
     first_successful_call_at timestamp with time zone,
     last_successful_call_at timestamp with time zone,
-    customer_calls_duration bigint,
-    vendor_calls_duration bigint
+    billing_duration bigint
 );
 
 
@@ -4549,8 +4547,7 @@ CREATE TABLE billing.invoices (
     last_successful_call_at timestamp with time zone,
     successful_calls_count bigint,
     type_id smallint NOT NULL,
-    customer_calls_duration bigint NOT NULL,
-    vendor_calls_duration bigint NOT NULL
+    billing_duration bigint NOT NULL
 );
 
 
