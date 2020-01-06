@@ -5433,37 +5433,41 @@ ALTER SEQUENCE rtp_statistics.streams_id_seq OWNED BY rtp_statistics.streams.id;
 
 
 --
--- Name: active_call_customer_accounts; Type: TABLE; Schema: stats; Owner: -
+-- Name: active_call_accounts; Type: TABLE; Schema: stats; Owner: -
 --
 
-CREATE TABLE stats.active_call_customer_accounts (
+CREATE TABLE stats.active_call_accounts (
     id bigint NOT NULL,
     account_id integer NOT NULL,
-    count integer NOT NULL,
+    originated_count integer NOT NULL,
+    terminated_count integer NOT NULL,
     created_at timestamp with time zone
 );
 
 
 --
--- Name: active_call_customer_accounts_hourly; Type: TABLE; Schema: stats; Owner: -
+-- Name: active_call_accounts_hourly; Type: TABLE; Schema: stats; Owner: -
 --
 
-CREATE TABLE stats.active_call_customer_accounts_hourly (
+CREATE TABLE stats.active_call_accounts_hourly (
     id bigint NOT NULL,
     account_id integer NOT NULL,
-    max_count integer NOT NULL,
-    avg_count real NOT NULL,
-    min_count integer NOT NULL,
+    max_originated_count integer NOT NULL,
+    avg_originated_count integer NOT NULL,
+    min_originated_count integer NOT NULL,
+    max_terminated_count integer NOT NULL,
+    avg_terminated_count integer NOT NULL,
+    min_terminated_count integer NOT NULL,
     created_at timestamp with time zone NOT NULL,
     calls_time timestamp with time zone NOT NULL
 );
 
 
 --
--- Name: active_call_customer_accounts_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
+-- Name: active_call_accounts_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE stats.active_call_customer_accounts_hourly_id_seq
+CREATE SEQUENCE stats.active_call_accounts_hourly_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5472,17 +5476,17 @@ CREATE SEQUENCE stats.active_call_customer_accounts_hourly_id_seq
 
 
 --
--- Name: active_call_customer_accounts_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
+-- Name: active_call_accounts_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE stats.active_call_customer_accounts_hourly_id_seq OWNED BY stats.active_call_customer_accounts_hourly.id;
+ALTER SEQUENCE stats.active_call_accounts_hourly_id_seq OWNED BY stats.active_call_accounts_hourly.id;
 
 
 --
--- Name: active_call_customer_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
+-- Name: active_call_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
-CREATE SEQUENCE stats.active_call_customer_accounts_id_seq
+CREATE SEQUENCE stats.active_call_accounts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -5491,10 +5495,10 @@ CREATE SEQUENCE stats.active_call_customer_accounts_id_seq
 
 
 --
--- Name: active_call_customer_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
+-- Name: active_call_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
 --
 
-ALTER SEQUENCE stats.active_call_customer_accounts_id_seq OWNED BY stats.active_call_customer_accounts.id;
+ALTER SEQUENCE stats.active_call_accounts_id_seq OWNED BY stats.active_call_accounts.id;
 
 
 --
@@ -5625,71 +5629,6 @@ CREATE SEQUENCE stats.active_call_term_gateways_id_seq
 --
 
 ALTER SEQUENCE stats.active_call_term_gateways_id_seq OWNED BY stats.active_call_term_gateways.id;
-
-
---
--- Name: active_call_vendor_accounts; Type: TABLE; Schema: stats; Owner: -
---
-
-CREATE TABLE stats.active_call_vendor_accounts (
-    id bigint NOT NULL,
-    account_id integer NOT NULL,
-    count integer NOT NULL,
-    created_at timestamp with time zone
-);
-
-
---
--- Name: active_call_vendor_accounts_hourly; Type: TABLE; Schema: stats; Owner: -
---
-
-CREATE TABLE stats.active_call_vendor_accounts_hourly (
-    id bigint NOT NULL,
-    account_id integer NOT NULL,
-    max_count integer NOT NULL,
-    avg_count real NOT NULL,
-    min_count integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    calls_time timestamp with time zone NOT NULL
-);
-
-
---
--- Name: active_call_vendor_accounts_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
---
-
-CREATE SEQUENCE stats.active_call_vendor_accounts_hourly_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_call_vendor_accounts_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
---
-
-ALTER SEQUENCE stats.active_call_vendor_accounts_hourly_id_seq OWNED BY stats.active_call_vendor_accounts_hourly.id;
-
-
---
--- Name: active_call_vendor_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
---
-
-CREATE SEQUENCE stats.active_call_vendor_accounts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_call_vendor_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
---
-
-ALTER SEQUENCE stats.active_call_vendor_accounts_id_seq OWNED BY stats.active_call_vendor_accounts.id;
 
 
 --
@@ -6043,17 +5982,17 @@ ALTER TABLE ONLY rtp_statistics.streams ALTER COLUMN id SET DEFAULT nextval('rtp
 
 
 --
--- Name: active_call_customer_accounts id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_accounts id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY stats.active_call_customer_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_customer_accounts_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_accounts_id_seq'::regclass);
 
 
 --
--- Name: active_call_customer_accounts_hourly id; Type: DEFAULT; Schema: stats; Owner: -
+-- Name: active_call_accounts_hourly id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY stats.active_call_customer_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_customer_accounts_hourly_id_seq'::regclass);
+ALTER TABLE ONLY stats.active_call_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_accounts_hourly_id_seq'::regclass);
 
 
 --
@@ -6082,20 +6021,6 @@ ALTER TABLE ONLY stats.active_call_term_gateways ALTER COLUMN id SET DEFAULT nex
 --
 
 ALTER TABLE ONLY stats.active_call_term_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_term_gateways_hourly_id_seq'::regclass);
-
-
---
--- Name: active_call_vendor_accounts id; Type: DEFAULT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('stats.active_call_vendor_accounts_id_seq'::regclass);
-
-
---
--- Name: active_call_vendor_accounts_hourly id; Type: DEFAULT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_vendor_accounts_hourly_id_seq'::regclass);
 
 
 --
@@ -6398,19 +6323,19 @@ ALTER TABLE ONLY rtp_statistics.streams
 
 
 --
--- Name: active_call_customer_accounts_hourly active_call_customer_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
+-- Name: active_call_accounts_hourly active_call_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY stats.active_call_customer_accounts_hourly
-    ADD CONSTRAINT active_call_customer_accounts_hourly_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY stats.active_call_accounts_hourly
+    ADD CONSTRAINT active_call_accounts_hourly_pkey PRIMARY KEY (id);
 
 
 --
--- Name: active_call_customer_accounts active_call_customer_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
+-- Name: active_call_accounts active_call_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
-ALTER TABLE ONLY stats.active_call_customer_accounts
-    ADD CONSTRAINT active_call_customer_accounts_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY stats.active_call_accounts
+    ADD CONSTRAINT active_call_accounts_pkey PRIMARY KEY (id);
 
 
 --
@@ -6443,22 +6368,6 @@ ALTER TABLE ONLY stats.active_call_term_gateways_hourly
 
 ALTER TABLE ONLY stats.active_call_term_gateways
     ADD CONSTRAINT active_call_term_gateways_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_call_vendor_accounts_hourly active_call_vendor_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_vendor_accounts_hourly
-    ADD CONSTRAINT active_call_vendor_accounts_hourly_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_call_vendor_accounts active_call_vendor_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_vendor_accounts
-    ADD CONSTRAINT active_call_vendor_accounts_pkey PRIMARY KEY (id);
 
 
 --
@@ -6830,6 +6739,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20181105175206'),
 ('20190604064015'),
 ('20190629185813'),
-('20190707214813');
+('20190707214813'),
+('20200106104136');
 
 

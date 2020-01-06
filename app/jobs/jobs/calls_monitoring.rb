@@ -331,9 +331,7 @@ module Jobs
     def save_stats
       Stats::ActiveCall.transaction do
         Stats::ActiveCall.create_stats(active_calls, now)
-        Stats::ActiveCallCustomerAccount.create_stats(customers_active_calls, now)
-
-        Stats::ActiveCallVendorAccount.create_stats(vendors_active_calls, now)
+        Stats::ActiveCallAccount.create_stats(customers_active_calls, vendors_active_calls, now)
         orig_gw_grouped_calls = flatten_calls.group_by { |c| c['orig_gw_id'] }
         Stats::ActiveCallOrigGateway.create_stats(orig_gw_grouped_calls, now)
         term_gw_grouped_calls = flatten_calls.group_by { |c| c['term_gw_id'] }
