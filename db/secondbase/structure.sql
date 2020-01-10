@@ -4406,7 +4406,8 @@ CREATE TABLE billing.invoice_destinations (
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
     first_successful_call_at timestamp with time zone,
-    last_successful_call_at timestamp with time zone
+    last_successful_call_at timestamp with time zone,
+    billing_duration bigint
 );
 
 
@@ -4480,7 +4481,8 @@ CREATE TABLE billing.invoice_networks (
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
     first_successful_call_at timestamp with time zone,
-    last_successful_call_at timestamp with time zone
+    last_successful_call_at timestamp with time zone,
+    billing_duration bigint
 );
 
 
@@ -4544,7 +4546,8 @@ CREATE TABLE billing.invoices (
     first_successful_call_at timestamp with time zone,
     last_successful_call_at timestamp with time zone,
     successful_calls_count bigint,
-    type_id smallint NOT NULL
+    type_id smallint NOT NULL,
+    billing_duration bigint NOT NULL
 );
 
 
@@ -4718,7 +4721,10 @@ CREATE TABLE reports.cdr_custom_report_data (
     agg_customer_price numeric,
     agg_profit numeric,
     legb_disconnect_code integer,
-    legb_disconnect_reason character varying
+    legb_disconnect_reason character varying,
+    agg_customer_calls_duration bigint,
+    agg_vendor_calls_duration bigint,
+    agg_customer_price_no_vat numeric
 );
 
 
@@ -5014,7 +5020,9 @@ CREATE TABLE reports.customer_traffic_report_data_by_destination (
     success_calls_count bigint,
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
-    short_calls_count bigint NOT NULL
+    short_calls_count bigint NOT NULL,
+    customer_calls_duration bigint NOT NULL,
+    vendor_calls_duration bigint NOT NULL
 );
 
 
@@ -5055,7 +5063,9 @@ CREATE TABLE reports.customer_traffic_report_data_by_vendor (
     success_calls_count bigint,
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
-    short_calls_count bigint
+    short_calls_count bigint,
+    customer_calls_duration bigint,
+    vendor_calls_duration bigint
 );
 
 
@@ -5080,7 +5090,9 @@ CREATE TABLE reports.customer_traffic_report_data_full (
     success_calls_count bigint,
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
-    short_calls_count bigint NOT NULL
+    short_calls_count bigint NOT NULL,
+    customer_calls_duration bigint NOT NULL,
+    vendor_calls_duration bigint NOT NULL
 );
 
 
@@ -5277,7 +5289,9 @@ CREATE TABLE reports.vendor_traffic_report_data (
     success_calls_count bigint,
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
-    short_calls_count bigint
+    short_calls_count bigint,
+    customer_calls_duration bigint,
+    vendor_calls_duration bigint
 );
 
 
@@ -6740,6 +6754,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190604064015'),
 ('20190629185813'),
 ('20190707214813'),
+('20200105230734'),
 ('20200106104136');
 
 

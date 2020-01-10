@@ -35,7 +35,10 @@ class Report::VendorTraffic < Cdr::Base
                   calls_count,
                   short_calls_count,
                   success_calls_count,
-                  calls_duration,acd,asr,
+                  calls_duration,
+                  customer_calls_duration,
+                  vendor_calls_duration,
+                  acd,asr,
                   origination_cost, termination_cost, profit,
                   first_call_at,last_call_at
                )
@@ -45,6 +48,8 @@ class Report::VendorTraffic < Cdr::Base
                   count(nullif(duration>?,false)),
                   count(nullif(success,false)),
                   sum(duration),
+                  sum(customer_duration),
+                  sum(vendor_duration),
                   sum(duration)::float/nullif(count(nullif(success,false)),0)::float,
                   count(nullif(success,false))::float/nullif(count(id),0)::float,
                   sum(customer_price),sum(vendor_price),sum(profit),
@@ -72,6 +77,8 @@ class Report::VendorTraffic < Cdr::Base
     %i[customer
        calls_count
        calls_duration
+       customer_calls_duration
+       vendor_calls_duration
        acd
        asr
        origination_cost

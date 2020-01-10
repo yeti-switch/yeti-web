@@ -2,15 +2,15 @@
 
 # == Schema Information
 #
-# Table name: stats.active_call_customer_accounts_hourly
+# Table name: stats.active_call_accounts_hourly
 #
 #  id                   :integer          not null, primary key
 #  account_id           :integer          not null
 #  max_originated_count :integer          not null
-#  avg_originated_count :float            not null
+#  avg_originated_count :integer          not null
 #  min_originated_count :integer          not null
 #  max_terminated_count :integer          not null
-#  avg_terminated_count :float            not null
+#  avg_terminated_count :integer          not null
 #  min_terminated_count :integer          not null
 #  created_at           :datetime         not null
 #  calls_time           :datetime         not null
