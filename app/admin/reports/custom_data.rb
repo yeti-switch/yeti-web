@@ -74,6 +74,19 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
         @footer_data.time_format_min :agg_calls_duration
       end
     }, &:decorated_agg_calls_duration
+
+    column :customer_calls_duration, sortable: :agg_customer_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :agg_customer_calls_duration
+      end
+    }, &:decorated_agg_customer_calls_duration
+
+    column :vendor_calls_duration, sortable: :agg_vendor_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :agg_vendor_calls_duration
+      end
+    }, &:decorated_agg_vendor_calls_duration
+
     column :acd, sortable: :agg_calls_acd, footer: lambda {
       strong do
         @footer_data.time_format_min :agg_acd
@@ -87,6 +100,13 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
         @footer_data.money_format :agg_customer_price
       end
     }, &:decorated_agg_customer_price
+
+    column :origination_cost_no_vat, sortable: :agg_customer_price_no_vat, footer: lambda {
+      strong do
+        @footer_data.money_format :agg_customer_price_no_vat
+      end
+    }, &:decorated_agg_customer_price_no_vat
+
     column :termination_cost, sortable: :agg_vendor_price, footer: lambda {
                                                                      strong do
                                                                        @footer_data.money_format :agg_vendor_price

@@ -15,6 +15,10 @@ class InvoiceDecorator < BillingDecorator
     time_format_min :calls_duration
   end
 
+  def decorated_billing_duration
+    time_format_min :billing_duration
+  end
+
   def decorated_calls_duration_kolon
     time_format_min_kolon :calls_duration
   end

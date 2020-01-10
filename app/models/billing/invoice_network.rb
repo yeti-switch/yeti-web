@@ -17,6 +17,7 @@
 #  successful_calls_count   :integer
 #  first_successful_call_at :datetime
 #  last_successful_call_at  :datetime
+#  billing_duration         :integer
 #
 
 class Billing::InvoiceNetwork < Cdr::Base
@@ -30,11 +31,11 @@ class Billing::InvoiceNetwork < Cdr::Base
 
   def self.to_csv
     csv_string = CSV.generate do |csv|
-      csv << ['COUNTRY',	'NETWORK', 'RATE',	'CALLS COUNT', 'SUCCESSFUL CALLS COUNT', 'DURATION',	'AMOUNT']
+      csv << ['COUNTRY',	'NETWORK', 'RATE',	'CALLS COUNT', 'SUCCESSFUL CALLS COUNT', 'DURATION', 'BILLING DURATION', 'AMOUNT']
 
       for_invoice.each do |record|
         csv << [record.country.try!(:name), record.network.try!(:name), record.rate,
-                record.calls_count, record.successful_calls_count, record.calls_duration, record.amount]
+                record.calls_count, record.successful_calls_count, record.calls_duration, record.billing_duration, record.amount]
       end
     end
     csv_string
