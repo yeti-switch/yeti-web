@@ -319,12 +319,8 @@ class Billing::Invoice < Cdr::Base
     row = extending(ActsAsTotalsRelation).totals_row_by(
       'sum(amount) as total_amount',
       'sum(calls_count) as total_calls_count',
-<<<<<<< HEAD
-      'sum(calls_duration) as total_calls_duration'
-=======
       'sum(calls_duration) as total_calls_duration',
       'sum(billing_duration) as total_billing_duration'
->>>>>>> master
     )
     Totals.new(*row)
   end
