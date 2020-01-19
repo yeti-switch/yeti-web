@@ -31,7 +31,7 @@ script:
     docker-compose run
     -e "PARALLEL_TEST_PROCESSORS=$PARALLEL_TEST_PROCESSORS"
     -e "TEST_GROUP=$TEST_GROUP"
-    app make rspec
+    app-buster make rspec
 
 jobs:
   include:
