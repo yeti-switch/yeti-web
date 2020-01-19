@@ -38,12 +38,12 @@ jobs:
     - stage: test
       name: Rubocop and Bundle Audit
       script:
-        - docker-compose run app make lint
+        - docker-compose run app-buster make lint
 
     - stage: test
       name: PGQ Processors rspec
       script:
-        - docker-compose run app make test-pgq-processors
+        - docker-compose run app-buster make test-pgq-processors
 
     - stage: stable package debian 9
       if: branch != master OR tag =~ ^.*$
