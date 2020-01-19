@@ -94,7 +94,7 @@ jobs:
     - stage: nightly package debian 10
       if: branch = master
       name: Nightly Debian buster package
-      script: *build_stretch
+      script: *build_buster
       deploy:
         skip_cleanup: true
         provider: script
