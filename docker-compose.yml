@@ -1,10 +1,24 @@
 version: '3.4'
 services:
-  app:
-    build: .
-    image: yeti-web:build
-    container_name: yeti-web-build
-    hostname: yeti-web-build
+  app-stretch:
+    build:
+      context: .
+      dockerfile: stretch.Dockerfile
+    image: yeti-web:build-stretch
+    container_name: yeti-web-build-stretch
+    hostname: yeti-web-build-stretch
+    depends_on:
+      - db
+    environment:
+      YETI_DB_HOST: db
+      CDR_DB_HOST: db
+  app-buster:
+    build:
+      context: .
+      dockerfile: buster.Dockerfile
+    image: yeti-web:build-buster
+    container_name: yeti-web-build-buster
+    hostname: yeti-web-build-buster
     depends_on:
       - db
     environment:
