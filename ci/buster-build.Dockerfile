@@ -17,7 +17,7 @@ RUN	echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
 	echo "deb http://pkg.yeti-switch.org/debian/buster unstable main ext"	>> /etc/apt/sources.list && \
 	echo "deb http://deb.debian.org/debian buster main contrib non-free"	>> /etc/apt/sources.list && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list && \
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list 
 
 RUN 	apt-get update && \
 	apt-get -y --no-install-recommends install \
