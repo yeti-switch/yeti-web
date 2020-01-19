@@ -19,10 +19,8 @@ install: skip
 
 stages:
   - test
-  - stable package debian 9
-  - stable package debian 10
-  - nightly package debian 9
-  - nightly package debian 10
+  - stable package
+  - nightly package
 
 # by default stage=test
 # matrix only works for top level script
@@ -45,9 +43,9 @@ jobs:
       script:
         - docker-compose run app-buster make test-pgq-processors
 
-    - stage: stable package debian 9
+    - stage: stable package
       if: branch != master OR tag =~ ^.*$
-      name: Stable Debian stretch package
+      name: Stable Debian 9(stretch) package
       script: &build_stretch
         - >
           docker-compose run --name yeti-web-build-stretch app-stretch make package &&
@@ -61,9 +59,9 @@ jobs:
           condition: "$TRAVIS_TAG != *-master*"
           repo: yeti-switch/yeti-web
 
-    - stage: stable package debian 10
+    - stage: stable package 
       if: branch != master OR tag =~ ^.*$
-      name: Stable Debian buster package
+      name: Stable Debian 10(buster) package
       script: &build_buster
         - >
           docker-compose run --name yeti-web-build-buster app-buster make package &&
@@ -78,9 +76,9 @@ jobs:
           repo: yeti-switch/yeti-web
 
 
-    - stage: nightly package debian 9
+    - stage: nightly package
       if: branch = master
-      name: Nightly Debian stretch package
+      name: Nightly Debian 9(stretch) package
       script: *build_stretch
       deploy:
         skip_cleanup: true
@@ -91,10 +89,10 @@ jobs:
           repo: yeti-switch/yeti-web
 
 
-    - stage: nightly package debian 10
+    - stage: nightly package
       if: branch = master
-      name: Nightly Debian buster package
-      script: *build_stretch
+      name: Nightly Debian 10(buster) package
+      script: *build_buster
       deploy:
         skip_cleanup: true
         provider: script
