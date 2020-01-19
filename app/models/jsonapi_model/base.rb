@@ -15,8 +15,18 @@ module JsonapiModel
       end
     end
 
-    def initialize(**_args)
+    def initialize(attributes = {})
       @id = SecureRandom.uuid
+      assign_attributes(attributes)
+    end
+
+    def save(validate: true)
+      if !validate || valid?
+        _save
+        errors.empty?
+      else
+        false
+      end
     end
 
     def call

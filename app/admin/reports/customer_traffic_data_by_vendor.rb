@@ -79,6 +79,19 @@ ActiveAdmin.register Report::CustomerTrafficDataByVendor, as: 'CustomerTrafficDa
                                         @footer_data.time_format_min :calls_duration
                                       end
                                     }, &:decorated_calls_duration
+
+    column :customer_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :customer_calls_duration
+      end
+    }, &:decorated_customer_calls_duration
+
+    column :vendor_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :vendor_calls_duration
+      end
+    }, &:decorated_vendor_calls_duration
+
     column :asr, &:decorated_asr
     column :acd, footer: lambda {
                            strong do

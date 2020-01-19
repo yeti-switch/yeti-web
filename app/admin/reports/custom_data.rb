@@ -8,6 +8,15 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
 
   decorate_with ReportCustomDataDecorator
 
+  # Fix ordering for columns that can be null.
+  # Null values will be considered as the lowest.
+  %i[agg_customer_price agg_calls_acd agg_profit].each do |col|
+    order_by(col) do |order_clause|
+      is_desc = order_clause.order == 'desc'
+      "#{order_clause.table_column} #{order_clause.order} NULLS #{is_desc ? 'LAST' : 'FIRST'}"
+    end
+  end
+
   action_item :reports, only: :index do
     link_to 'Delete report', custom_cdr_path(assigns[:custom_cdr].id), method: :delete,
                                                                        data: { confirm: I18n.t('active_admin.delete_confirmation') }, class: 'member_link delete_link'
@@ -74,6 +83,19 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
         @footer_data.time_format_min :agg_calls_duration
       end
     }, &:decorated_agg_calls_duration
+
+    column :customer_calls_duration, sortable: :agg_customer_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :agg_customer_calls_duration
+      end
+    }, &:decorated_agg_customer_calls_duration
+
+    column :vendor_calls_duration, sortable: :agg_vendor_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :agg_vendor_calls_duration
+      end
+    }, &:decorated_agg_vendor_calls_duration
+
     column :acd, sortable: :agg_calls_acd, footer: lambda {
       strong do
         @footer_data.time_format_min :agg_acd
@@ -87,13 +109,20 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
         @footer_data.money_format :agg_customer_price
       end
     }, &:decorated_agg_customer_price
+
+    column :origination_cost_no_vat, sortable: :agg_customer_price_no_vat, footer: lambda {
+      strong do
+        @footer_data.money_format :agg_customer_price_no_vat
+      end
+    }, &:decorated_agg_customer_price_no_vat
+
     column :termination_cost, sortable: :agg_vendor_price, footer: lambda {
                                                                      strong do
                                                                        @footer_data.money_format :agg_vendor_price
                                                                      end
                                                                    }, &:decorated_agg_vendor_price
 
-    column :profit, footer: lambda {
+    column :profit, sortable: :agg_profit, footer: lambda {
       strong do
         @footer_data.money_format :agg_profit
       end

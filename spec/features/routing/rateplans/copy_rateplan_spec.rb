@@ -14,7 +14,7 @@ describe 'Copy Rateplan action', type: :feature do
       expect(Rateplan.last).to have_attributes(
         name: new_name,
         profit_control_mode_id: rateplan.profit_control_mode_id,
-        send_quality_alarms_to: send_to_ids
+        send_quality_alarms_to: match_array(send_to_ids)
       )
     end
   end

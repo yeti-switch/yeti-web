@@ -4,11 +4,12 @@ module AggChart
   extend ActiveSupport::Concern
 
   included do
-    class_attribute :chart_entity_column
+    class_attribute :chart_entity_column, instance_accessor: false
   end
 
   module ClassMethods
-    def to_chart(id)
+    def to_chart(id, options = {})
+      count_column = options.delete(:count_column) || :count
       res = {
         max: [],
         min: [],
@@ -16,7 +17,8 @@ module AggChart
       }
       where(chart_entity_column => id)
         .where('created_at > ? AND created_at < NOW() ', 1.week.ago)
-        .order('calls_time').pluck(:calls_time, :max_count, :min_count, :avg_count)
+        .order('calls_time')
+        .pluck(:calls_time, :"max_#{count_column}", :"min_#{count_column}", :"avg_#{count_column}")
         .map do |d|
         x = d[0].to_datetime.to_s(:db)
         res[:max] << { x: x, y: d[1] }

@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: sys.sensors
+#
+#  id               :integer          not null, primary key
+#  name             :string           not null
+#  mode_id          :integer          not null
+#  source_interface :string
+#  target_mac       :macaddr
+#  use_routing      :boolean          not null
+#  target_ip        :inet
+#  source_ip        :inet
+#  target_port      :integer
+#  hep_capture_id   :integer
+#
+
 require 'spec_helper'
 require 'shared_examples/shared_examples_for_events'
 

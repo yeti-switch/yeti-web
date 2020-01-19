@@ -1,16 +1,69 @@
 # frozen_string_literal: true
 
-class Stats::ActiveCallAccount
-  attr_accessor :account_id
+# == Schema Information
+#
+# Table name: stats.active_call_accounts
+#
+#  id               :integer          not null, primary key
+#  account_id       :integer          not null
+#  originated_count :integer          not null
+#  terminated_count :integer          not null
+#  created_at       :datetime
+#
 
-  def initialize(account_id)
-    @account_id = account_id
-  end
+class Stats::ActiveCallAccount < Stats::Base
+  self.table_name = 'stats.active_call_accounts'
+  belongs_to :account
 
-  def to_chart
-    lines = []
-    lines << Stats::ActiveCallVendorAccount.to_chart(account_id, area: false, key: 'Vendor')
-    lines << Stats::ActiveCallCustomerAccount.to_chart(account_id, area: false, key: 'Account')
-    lines.flatten
+  include ::Chart
+  self.chart_entity_column = :account_id
+  self.chart_entity_klass = Account
+
+  class << self
+    def create_stats(customer_calls = {}, vendor_calls = {}, now_time)
+      calls = Hash.new { |h, k| h[k] = { terminated_count: 0, originated_count: 0 } }
+      customer_calls.each do |account_id, sub_calls|
+        calls[account_id.to_i][:terminated_count] = sub_calls.count
+      end
+      vendor_calls.each do |account_id, sub_calls|
+        calls[account_id.to_i][:originated_count] = sub_calls.count
+      end
+      missing_foreign_ids = Account.pluck(:id) - calls.keys
+
+      transaction do
+        calls.each do |account_id, opts|
+          create!(
+            created_at: now_time,
+            originated_count: opts[:originated_count],
+            terminated_count: opts[:terminated_count],
+            account_id: account_id
+          )
+        end
+        missing_foreign_ids.each do |foreign_id|
+          create!(
+            created_at: now_time,
+            originated_count: 0,
+            terminated_count: 0,
+            account_id: foreign_id
+          )
+        end
+      end
+    end
+
+    def to_chart_all(account_id)
+      lines = to_chart_vendor(account_id, area: false, key: 'Vendor')
+      lines.concat to_chart_customer(account_id, area: false, key: 'Account')
+      lines
+    end
+
+    def to_chart_customer(account_id, options = {})
+      options = options.merge(count_column: :terminated_count)
+      to_chart(account_id, options)
+    end
+
+    def to_chart_vendor(account_id, options = {})
+      options = options.merge(count_column: :originated_count)
+      to_chart(account_id, options)
+    end
   end
 end

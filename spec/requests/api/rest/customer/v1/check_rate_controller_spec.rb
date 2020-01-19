@@ -18,8 +18,7 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :request do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
     end
 
-    let(:json_api_request_body) { { data: { type: json_api_resource_type, attributes: attributes } } }
-    let(:attributes) do
+    let(:json_api_request_attributes) do
       { 'rateplan-id': rateplan.uuid, number: '444444444' }
     end
 
@@ -36,7 +35,7 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :request do
           'type': json_api_resource_type,
           'attributes': a_hash_including(
             'rateplan-id': rateplan.uuid,
-            'number': attributes[:number],
+            'number': json_api_request_attributes[:number],
             'rates': match_array(
               [
                 a_hash_including(
@@ -62,20 +61,15 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :request do
     end
 
     context 'when Rateplan not exists' do
-      let(:attributes) { super().merge 'rateplan-id': '12123123' }
+      let(:json_api_request_attributes) { super().merge 'rateplan-id': '12123123' }
 
-      it 'return error Rateplan not found' do
-        subject
-        expect(response_json).to a_hash_including(
-          errors: match_array([
-                                a_hash_including(detail: 'rateplan-id - Rateplan not found')
-                              ])
-        )
-      end
+      include_examples :returns_json_api_errors, errors: {
+        detail: 'rateplan-id - Rateplan not found'
+      }
     end
 
     context 'when proper rate not found for this number' do
-      let(:attributes) { super().merge number: '8888888888' }
+      let(:json_api_request_attributes) { super().merge number: '8888888888' }
 
       it 'return empty rates array' do
         subject
@@ -85,7 +79,7 @@ describe Api::Rest::Customer::V1::CheckRateController, type: :request do
           'type': json_api_resource_type,
           'attributes': a_hash_including(
             'rateplan-id': rateplan.uuid,
-            'number': attributes[:number],
+            'number': json_api_request_attributes[:number],
             'rates': []
           )
         )

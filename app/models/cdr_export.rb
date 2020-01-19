@@ -19,6 +19,27 @@ class CdrExport < Yeti::ActiveRecord
   self.table_name = 'cdr_exports'
   self.store_full_sti_class = false
 
+  class FiltersModel < JsonAttributeModel
+    attribute :time_start_gteq, :db_datetime
+    attribute :time_start_lteq, :db_datetime
+    attribute :customer_acc_id_eq, :integer
+    attribute :is_last_cdr_eq, :boolean
+    attribute :success_eq, :boolean
+    attribute :customer_auth_external_id_eq, :integer
+    attribute :failed_resource_type_id_eq, :integer
+    attribute :src_prefix_in_contains, :string
+    attribute :dst_prefix_in_contains, :string
+    attribute :src_prefix_routing_contains, :string
+    attribute :dst_prefix_routing_contains, :string
+    attribute :customer_acc_external_id_eq, :integer
+
+    private
+
+    def write_attribute(attr_name, value)
+      super
+    end
+  end
+
   STATUS_PENDING = 'Pending'
   STATUS_COMPLETED = 'Completed'
   STATUS_FAILED = 'Failed'
@@ -34,9 +55,11 @@ class CdrExport < Yeti::ActiveRecord
   attr_accessor :customer_acc_id_eq,
                 :is_last_cdr_eq, :time_start_gteq, :time_start_lteq
 
+  json_attribute :filters, class_name: 'CdrExport::FiltersModel'
+
   validates_presence_of :status, :fields, :filters
   validate do
-    if filters['time_start_gteq'].empty? || filters['time_start_lteq'].empty?
+    if filters.time_start_gteq.nil? || filters.time_start_lteq.nil?
       errors.add(:filters, 'requires time_start_lteq & time_start_gteq')
     end
   end
@@ -44,10 +67,6 @@ class CdrExport < Yeti::ActiveRecord
     extra_fields = fields - self.class.allowed_fields
     if extra_fields.any?
       errors.add(:fields, "#{extra_fields.join(', ')} not allowed")
-    end
-    extra_filters = filters.keys - self.class.allowed_filters
-    if extra_filters.any?
-      errors.add(:filters, "#{extra_filters.join(', ')} not allowed")
     end
   end
 
@@ -72,7 +91,7 @@ class CdrExport < Yeti::ActiveRecord
   alias_attribute :export_type, :type
 
   def export_sql
-    Cdr::Cdr.select(fields.join(', ')).order('time_start desc').ransack(filters).result.to_sql
+    Cdr::Cdr.select(fields.join(', ')).order('time_start desc').ransack(filters.as_json).result.to_sql
   end
 
   def completed?
@@ -84,20 +103,7 @@ class CdrExport < Yeti::ActiveRecord
   end
 
   def self.allowed_filters
-    %w[
-      time_start_lteq
-      time_start_gteq
-      success_eq
-      customer_auth_external_id_eq
-      failed_resource_type_id_eq
-      src_prefix_in_contains
-      dst_prefix_in_contains
-      src_prefix_routing_contains
-      dst_prefix_routing_contains
-      customer_acc_external_id_eq
-      is_last_cdr_eq
-      customer_acc_id_eq
-    ]
+    FiltersModel.attribute_types.keys.map(&:to_s)
   end
 
   # any cdr columns

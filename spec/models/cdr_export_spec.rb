@@ -12,6 +12,7 @@
 #  type         :string           not null
 #  created_at   :datetime
 #  updated_at   :datetime
+#  rows_count   :integer
 #
 
 require 'spec_helper'

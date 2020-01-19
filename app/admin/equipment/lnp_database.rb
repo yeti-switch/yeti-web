@@ -42,7 +42,7 @@ ActiveAdmin.register Lnp::Database do
     redirect_back fallback_location: root_path
   end
 
-  index do
+  index disable_blank_slate_link: true do
     selectable_column
     id_column
     actions

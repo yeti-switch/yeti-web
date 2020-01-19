@@ -27,4 +27,14 @@ RSpec.describe '/api/rest/clickhouse-dictionaries/accounts' do
       end
     end
   end
+
+  context 'when raises exception' do
+    before do
+      expect(ClickhouseDictionary::Account).to receive(:call).once
+                                                             .and_raise(StandardError, 'test error')
+    end
+
+    include_examples :raises_exception, StandardError, 'test error'
+    include_examples :captures_error, safe: true
+  end
 end

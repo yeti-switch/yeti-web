@@ -27,6 +27,18 @@ RSpec.describe 'config/yeti_web.yml' do
         'auth_log.auth_log': anything,
         'rtp_statistics.streams': anything,
         'logs.api_requests': anything
+      },
+      prometheus: {
+        enabled: anything,
+        host: a_kind_of(String),
+        port: a_kind_of(Integer),
+        default_labels: a_kind_of(Hash)
+      },
+      sentry: {
+        enabled: boolean,
+        dsn: a_kind_of(String),
+        environment: a_kind_of(String),
+        node_name: a_kind_of(String)
       }
     }
   end

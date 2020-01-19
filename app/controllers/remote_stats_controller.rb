@@ -88,29 +88,29 @@ class RemoteStatsController < ApplicationController
 
   def aggregated_customer_account
     expires_in 10.minutes, public: true
-    render json: Stats::AggActiveCallCustomerAccount.to_chart(params[:id]).to_json(root: false)
+    render json: Stats::AggActiveCallAccount.to_chart_customer(params[:id]).to_json(root: false)
   end
 
   def aggregated_vendor_account
     expires_in 10.minutes, public: true
-    render json: Stats::AggActiveCallVendorAccount.to_chart(params[:id]).to_json(root: false)
+    render json: Stats::AggActiveCallAccount.to_chart_vendor(params[:id]).to_json(root: false)
   end
 
   ######
 
   def account_active_calls
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallAccount.new(params[:id]).to_chart.to_json(root: false)
+    render json: Stats::ActiveCallAccount.to_chart_all(params[:id]).to_json(root: false)
   end
 
   def customer_account
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallCustomerAccount.to_chart(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallAccount.to_chart_customer(params[:id]).to_json(root: false)
   end
 
   def vendor_account
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallVendorAccount.to_chart(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallAccount.to_chart_vendor(params[:id]).to_json(root: false)
   end
 
   def gateway_pdd_distribution

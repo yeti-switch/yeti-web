@@ -84,6 +84,9 @@
 #  agg_profit                   :decimal(, )
 #  legb_disconnect_code         :integer
 #  legb_disconnect_reason       :string
+#  agg_customer_calls_duration  :integer
+#  agg_vendor_calls_duration    :integer
+#  agg_customer_price_no_vat    :decimal(, )
 #
 
 class Report::CustomData < Cdr::Base
@@ -120,14 +123,32 @@ class Report::CustomData < Cdr::Base
     column_names.select { |column| column.start_with?('agg_') }
   end
 
-  Totals = Struct.new(:agg_calls_count, :agg_calls_duration, :agg_acd, :agg_customer_price, :agg_vendor_price, :agg_profit)
+  Totals = Struct.new(
+    :agg_calls_count,
+    :agg_calls_duration,
+    :agg_customer_calls_duration,
+    :agg_vendor_calls_duration,
+    :agg_acd,
+    :agg_customer_price,
+    :agg_customer_price_no_vat,
+    :agg_vendor_price,
+    :agg_profit
+  )
 
   def self.totals
     row = extending(ActsAsTotalsRelation).totals_row_by(
       'sum(agg_calls_count)::integer as agg_calls_count',
       'sum(agg_calls_duration) as agg_calls_duration',
+<<<<<<< HEAD
       'coalesce(sum(agg_calls_duration)::float/nullif(sum(agg_calls_count),0),0) as agg_acd',
       'sum(agg_customer_price) as agg_customer_price',
+=======
+      'sum(agg_customer_calls_duration) as agg_customer_calls_duration',
+      'sum(agg_vendor_calls_duration) as agg_vendor_calls_duration',
+      'coalesce(sum(agg_calls_duration)::float/nullif(sum(agg_calls_count),0),0) as agg_acd',
+      'sum(agg_customer_price) as agg_customer_price',
+      'sum(agg_customer_price_no_vat) as agg_customer_price_no_vat',
+>>>>>>> master
       'sum(agg_vendor_price) as agg_vendor_price',
       'sum(agg_profit) as agg_profit'
     )

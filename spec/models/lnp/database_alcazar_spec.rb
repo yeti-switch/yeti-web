@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: class4.lnp_databases_alcazar
+#
+#  id          :integer          not null, primary key
+#  host        :string           not null
+#  port        :integer
+#  timeout     :integer          default(300), not null
+#  key         :string           not null
+#  database_id :integer
+#
+
 require 'spec_helper'
 
 describe Lnp::DatabaseAlcazar, type: :model do

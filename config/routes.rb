@@ -118,6 +118,7 @@ Rails.application.routes.draw do
             jsonapi_resources :smtp_connections
             jsonapi_resources :countries
             jsonapi_resources :networks
+            jsonapi_resources :network_types
           end
 
           namespace :equipment do
@@ -152,8 +153,27 @@ Rails.application.routes.draw do
             jsonapi_resources :accounts
             jsonapi_resources :rateplans
             jsonapi_resources :rates
-            jsonapi_resource :check_rate, only: [:create]
+            jsonapi_resource :check_rate, only: %i[create]
             jsonapi_resources :cdrs, only: %i[index show]
+            jsonapi_resources :networks, only: %i[index show]
+            jsonapi_resources :network_types, only: %i[index show]
+            jsonapi_resources :network_prefixes, only: %i[index show]
+            jsonapi_resources :active_calls, only: %i[create]
+          end
+        end
+
+        dasherized_namespace :clickhouse_dictionaries do
+          with_options only: [:index] do
+            dasherized_resources :accounts
+            dasherized_resources :areas
+            dasherized_resources :contractors
+            dasherized_resources :countries
+            dasherized_resources :customer_auths
+            dasherized_resources :gateways
+            dasherized_resources :network_prefixes
+            dasherized_resources :networks
+            dasherized_resources :rateplans
+            dasherized_resources :routing_plans
           end
         end
 
