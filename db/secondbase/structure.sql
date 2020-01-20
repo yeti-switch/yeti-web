@@ -6563,6 +6563,13 @@ CREATE INDEX streams_local_tag_idx ON ONLY rtp_statistics.streams USING btree (l
 
 
 --
+-- Name: active_call_accounts_account_id_created_at_idx; Type: INDEX; Schema: stats; Owner: -
+--
+
+CREATE INDEX active_call_accounts_account_id_created_at_idx ON stats.active_call_accounts USING btree (account_id, created_at);
+
+
+--
 -- Name: termination_quality_stats_dialpeer_id_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
@@ -6763,6 +6770,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190707214813'),
 ('20200105230734'),
 ('20200106104136'),
-('20200120195529');
+('20200120195529'),
+('20200120200605');
 
 
