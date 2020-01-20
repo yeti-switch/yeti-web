@@ -6493,6 +6493,13 @@ CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON billing.invoice_document
 
 
 --
+-- Name: cdr_customer_acc_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_customer_acc_id_time_start_idx ON ONLY cdr.cdr USING btree (customer_acc_id, time_start) WHERE (routing_attempt = 1);
+
+
+--
 -- Name: cdr_id_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
@@ -6553,6 +6560,13 @@ CREATE INDEX streams_id_idx ON ONLY rtp_statistics.streams USING btree (id);
 --
 
 CREATE INDEX streams_local_tag_idx ON ONLY rtp_statistics.streams USING btree (local_tag);
+
+
+--
+-- Name: active_call_accounts_account_id_created_at_idx; Type: INDEX; Schema: stats; Owner: -
+--
+
+CREATE INDEX active_call_accounts_account_id_created_at_idx ON stats.active_call_accounts USING btree (account_id, created_at);
 
 
 --
@@ -6755,6 +6769,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190629185813'),
 ('20190707214813'),
 ('20200105230734'),
-('20200106104136');
+('20200106104136'),
+('20200120195529'),
+('20200120200605');
 
 
