@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::ActiveCallResource < Api::Rest::Customer::V1::BaseResource
+class Api::Rest::Customer::V1::ChartActiveCallResource < Api::Rest::Customer::V1::BaseResource
   model_name 'JsonapiModel::ActiveCallAccount'
   key_type :uuid
 
