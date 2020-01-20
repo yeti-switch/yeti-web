@@ -158,7 +158,7 @@ Rails.application.routes.draw do
             jsonapi_resources :networks, only: %i[index show]
             jsonapi_resources :network_types, only: %i[index show]
             jsonapi_resources :network_prefixes, only: %i[index show]
-            jsonapi_resources :active_calls, only: %i[create]
+            jsonapi_resources :chart_active_calls, only: %i[create]
           end
         end
 

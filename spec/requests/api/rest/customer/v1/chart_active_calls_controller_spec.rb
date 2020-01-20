@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe Api::Rest::Customer::V1::ActiveCallsController, type: :request do
-  include_context :json_api_customer_v1_helpers, type: :active_calls
+describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :request do
+  include_context :json_api_customer_v1_helpers, type: :chart_active_calls
 
   let!(:account) { create(:account, contractor: customer).reload }
   let!(:another_account) { create(:account, contractor: customer).reload }
@@ -37,7 +37,7 @@ describe Api::Rest::Customer::V1::ActiveCallsController, type: :request do
            created_at: '2019-01-01 00:00:01'
   end
 
-  describe 'POST /api/rest/customer/v1/active-calls' do
+  describe 'POST /api/rest/customer/v1/chart-active-calls' do
     subject do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
     end
