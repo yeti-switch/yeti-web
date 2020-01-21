@@ -4,6 +4,9 @@ module JsonapiModel
   class OriginatedCps < Base
     include ActiveModel::Validations::Callbacks
 
+    TIME_START_SQL = Arel.sql("date_trunc('minute',time_start)").freeze
+    CPS_SQL = Arel.sql('round((count(*)::float/60)::decimal,3)').freeze
+
     attr_accessor :account_id, :customer
     attr_reader :from_time, :to_time, :cps
 
@@ -22,10 +25,10 @@ module JsonapiModel
       scope = Cdr::Cdr
               .where(customer_acc_id: account.id, routing_attempt: 1)
               .where('time_start BETWEEN ? AND ?', from_time, to_time)
-              .group("date_trunc('minute',time_start)")
-              .order("date_trunc('minute',time_start)")
+              .group(TIME_START_SQL)
+              .order(TIME_START_SQL)
 
-      values = scope.pluck("date_trunc('minute',time_start)", 'round((count(*)::float/60)::decimal,3)')
+      values = scope.pluck(TIME_START_SQL, CPS_SQL)
 
       @cps = values.map do |(time_start, cps)|
         { x: cps, y: time_start.to_s(:db) }
