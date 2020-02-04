@@ -23,10 +23,10 @@ class Stats::ActiveCallAccount < Stats::Base
     def create_stats(customer_calls = {}, vendor_calls = {}, now_time)
       calls = Hash.new { |h, k| h[k] = { terminated_count: 0, originated_count: 0 } }
       customer_calls.each do |account_id, sub_calls|
-        calls[account_id.to_i][:terminated_count] = sub_calls.count
+        calls[account_id.to_i][:originated_count] = sub_calls.count
       end
       vendor_calls.each do |account_id, sub_calls|
-        calls[account_id.to_i][:originated_count] = sub_calls.count
+        calls[account_id.to_i][:terminated_count] = sub_calls.count
       end
       missing_foreign_ids = Account.pluck(:id) - calls.keys
 
@@ -57,12 +57,12 @@ class Stats::ActiveCallAccount < Stats::Base
     end
 
     def to_chart_customer(account_id, options = {})
-      options = options.merge(count_column: :terminated_count)
+      options = options.merge(count_column: :originated_count)
       to_chart(account_id, options)
     end
 
     def to_chart_vendor(account_id, options = {})
-      options = options.merge(count_column: :originated_count)
+      options = options.merge(count_column: :terminated_count)
       to_chart(account_id, options)
     end
   end

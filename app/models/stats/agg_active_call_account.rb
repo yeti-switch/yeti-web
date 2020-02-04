@@ -24,12 +24,12 @@ class Stats::AggActiveCallAccount < Stats::Base
 
   class << self
     def to_chart_customer(account_id, options = {})
-      options = options.merge(count_column: :terminated_count)
+      options = options.merge(count_column: :originated_count)
       to_chart(account_id, options)
     end
 
     def to_chart_vendor(account_id, options = {})
-      options = options.merge(count_column: :originated_count)
+      options = options.merge(count_column: :terminated_count)
       to_chart(account_id, options)
     end
   end
