@@ -13,6 +13,8 @@ resource 'Routeset discriminators' do
   let(:type) { 'routeset-discriminators' }
 
   get '/api/rest/admin/routing/routeset-discriminators' do
+    jsonapi_filters Api::Rest::Admin::Routing::RoutesetDiscriminatorResource._allowed_filters
+
     before { create_list(:routeset_discriminator, 2) }
 
     example_request 'get listing' do

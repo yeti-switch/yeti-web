@@ -16,6 +16,8 @@ resource 'Smtp connections' do
   optional_params = %i[auth-user auth-password global]
 
   get '/api/rest/admin/system/smtp-connections' do
+    jsonapi_filters Api::Rest::Admin::System::SmtpConnectionResource._allowed_filters
+
     before { create_list(:smtp_connection, 2) }
 
     example_request 'get listing' do

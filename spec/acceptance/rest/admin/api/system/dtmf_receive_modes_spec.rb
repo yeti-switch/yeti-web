@@ -13,6 +13,8 @@ resource 'Dtmf receive modes' do
   let(:type) { 'dtmf-receive-modes' }
 
   get '/api/rest/admin/system/dtmf-receive-modes' do
+    jsonapi_filters Api::Rest::Admin::System::DtmfReceiveModeResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

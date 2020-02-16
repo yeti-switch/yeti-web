@@ -21,6 +21,8 @@ resource 'Dialpeer next rates' do
   required_relationships = %i[dialpeer]
 
   get '/api/rest/admin/dialpeer-next-rates' do
+    jsonapi_filters Api::Rest::Admin::DialpeerNextRateResource._allowed_filters
+
     before { create_list(:dialpeer_next_rate, 2, dialpeer: dialpeer) }
 
     example_request 'get listing' do

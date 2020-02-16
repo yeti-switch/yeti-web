@@ -13,6 +13,8 @@ resource 'Payments' do
   let(:type) { 'payments' }
 
   get '/api/rest/admin/payments' do
+    jsonapi_filters Api::Rest::Admin::PaymentResource._allowed_filters
+
     before { create_list(:payment, 2) }
 
     example_request 'get listing' do

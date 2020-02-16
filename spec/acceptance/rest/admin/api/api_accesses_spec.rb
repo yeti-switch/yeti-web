@@ -16,6 +16,8 @@ resource 'ApiAccesses' do
   optional_params = %i[account-ids allowed-ips]
 
   get '/api/rest/admin/api-accesses' do
+    jsonapi_filters Api::Rest::Admin::ApiAccessResource._allowed_filters
+
     before { create_list(:api_access, 2) }
 
     example_request 'get listing' do

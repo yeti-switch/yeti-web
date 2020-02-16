@@ -16,6 +16,8 @@ resource 'NetworkTypes', document: :customer_v1 do
   let!(:network_type) { FactoryGirl.create(:network_type).reload }
 
   get '/api/rest/customer/v1/network-types' do
+    jsonapi_filters Api::Rest::Customer::V1::NetworkTypeResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

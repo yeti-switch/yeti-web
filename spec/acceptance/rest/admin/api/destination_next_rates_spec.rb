@@ -21,6 +21,8 @@ resource 'Destination next rates' do
   required_relationships = %i[destination]
 
   get '/api/rest/admin/destination-next-rates' do
+    jsonapi_filters Api::Rest::Admin::DestinationNextRateResource._allowed_filters
+
     before { create_list(:destination_next_rate, 2, destination: destination) }
 
     example_request 'get listing' do

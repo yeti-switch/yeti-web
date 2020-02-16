@@ -17,6 +17,8 @@ resource 'Contractors' do
   optional_relationships = %i[smtp-connection]
 
   get '/api/rest/admin/contractors' do
+    jsonapi_filters Api::Rest::Admin::ContractorResource._allowed_filters
+
     before { create_list(:contractor, 2, vendor: true) }
 
     example_request 'get listing' do

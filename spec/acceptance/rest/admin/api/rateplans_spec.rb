@@ -15,6 +15,8 @@ resource 'Rateplans' do
   let(:profit_control_mode) { Routing::RateProfitControlMode.last }
 
   get '/api/rest/admin/rateplans' do
+    jsonapi_filters Api::Rest::Admin::RateplanResource._allowed_filters
+
     before { create_list(:rateplan, 2) }
 
     example_request 'get listing' do

@@ -16,6 +16,8 @@ resource 'Sensors' do
   optional_params = %i[source-interface target-mac use-routing]
 
   get '/api/rest/admin/system/sensors' do
+    jsonapi_filters Api::Rest::Admin::System::SensorResource._allowed_filters
+
     before { create_list(:sensor, 2) }
 
     example_request 'get listing' do

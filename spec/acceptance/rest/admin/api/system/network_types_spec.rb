@@ -15,6 +15,8 @@ resource 'NetworkTypes' do
   required_params = %i[name]
 
   get '/api/rest/admin/system/network-types' do
+    jsonapi_filters Api::Rest::Admin::System::NetworkTypeResource._allowed_filters
+
     before do
       FactoryGirl.create_list(:network_type, 2)
     end

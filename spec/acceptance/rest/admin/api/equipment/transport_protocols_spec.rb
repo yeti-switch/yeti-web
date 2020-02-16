@@ -13,6 +13,8 @@ resource 'Transport protocol' do
   let(:type) { 'transport-protocols' }
 
   get '/api/rest/admin/equipment/transport-protocols' do
+    jsonapi_filters Api::Rest::Admin::Equipment::TransportProtocolResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end
