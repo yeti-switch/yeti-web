@@ -13,6 +13,8 @@ resource 'Routing groups' do
   let(:type) { 'routing-groups' }
 
   get '/api/rest/admin/routing-groups' do
+    jsonapi_filters Api::Rest::Admin::RoutingGroupResource._allowed_filters
+
     before { create_list(:routing_group, 2) }
 
     example_request 'get listing' do

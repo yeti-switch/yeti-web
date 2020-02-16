@@ -13,6 +13,8 @@ resource 'Gateway Media encryption modes' do
   let(:type) { 'gateway-media-encryption-modes' }
 
   get '/api/rest/admin/equipment/gateway-media-encryption-modes' do
+    jsonapi_filters Api::Rest::Admin::Equipment::GatewayMediaEncryptionModeResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

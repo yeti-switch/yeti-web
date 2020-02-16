@@ -22,6 +22,8 @@ resource 'Rateplans', document: :customer_v1 do
   let!(:rateplan) { customers_auth.rateplan.reload }
 
   get '/api/rest/customer/v1/rateplans' do
+    jsonapi_filters Api::Rest::Customer::V1::RateplanResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

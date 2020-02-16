@@ -13,6 +13,8 @@ resource 'Invoice template' do
   let(:type) { 'invoice-templates' }
 
   get '/api/rest/admin/billing/invoice-template' do
+    jsonapi_filters Api::Rest::Admin::Billing::InvoiceTemplateResource._allowed_filters
+
     before { create_list(:invoice_template, 2) }
 
     example_request 'get listing' do

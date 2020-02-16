@@ -23,6 +23,8 @@ resource 'Rates', document: :customer_v1 do
   let!(:rate) { create(:rate, rateplan: rateplan) }
 
   get '/api/rest/customer/v1/rates' do
+    jsonapi_filters Api::Rest::Customer::V1::RateResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

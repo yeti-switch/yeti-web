@@ -20,6 +20,8 @@ resource 'Contacts' do
   optional_relationships = %i[contractor]
 
   get '/api/rest/admin/contacts' do
+    jsonapi_filters Api::Rest::Admin::ContactResource._allowed_filters
+
     before { create_list(:contact, 2) }
 
     example_request 'get listing' do

@@ -16,6 +16,8 @@ resource 'Networks' do
   required_relationships = %i[network-type]
 
   get '/api/rest/admin/system/networks' do
+    jsonapi_filters Api::Rest::Admin::System::NetworkResource._allowed_filters
+
     before do
       FactoryGirl.create(:network, name: 'US')
       FactoryGirl.create(:network, name: 'CA')

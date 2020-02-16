@@ -39,6 +39,8 @@ resource 'Gateways' do
   ]
 
   get '/api/rest/admin/gateways' do
+    jsonapi_filters Api::Rest::Admin::GatewayResource._allowed_filters
+
     before { create_list(:gateway, 2) }
 
     example_request 'get listing' do
