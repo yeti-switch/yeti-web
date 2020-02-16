@@ -12,23 +12,46 @@ class RansackFilterBuilder
 
   RANSACK_ARRAY_SUFFIXES = %w[in not_in cont_any].freeze
 
-  def initialize(attr:, operator:)
+  # @param attr [Symbol] name of filter
+  # @param operator [Symbol] ransack filter predicate
+  # @param column [Symbol] column name
+  def initialize(attr:, operator:, column: nil, verify: nil)
     @attr = attr
     @operator = operator
+    @column = column
+    @verify = verify
   end
 
+  # Applies ransack filter to records
+  # @param records [ActiveRecord::Relation]
+  # @param value [Array<String>, String]
+  # @return [ActiveRecord::Relation]
   def apply(records, value)
-    records.ransack(filter_name => value).result
+    records.ransack(ransack_filter_name => value).result
   end
 
+  # Ransack filter name
+  # @return [String]
+  def ransack_filter_name
+    "#{@column || @attr}_#{@operator}"
+  end
+
+  # Public filter name
+  # @return [String]
   def filter_name
     "#{@attr}_#{@operator}"
   end
 
+  # @param values [Array<String>]
   def verify(values)
-    return values if RANSACK_ARRAY_SUFFIXES.include?(@operator)
+    if RANSACK_ARRAY_SUFFIXES.include?(@operator)
+      values = @verify.call(values) if @verify
+      return values
+    end
+
     raise JSONAPI::Exceptions::InvalidFilterValue.new(filter_name, values.join(',')) if values.size != 1
 
+    values = @verify.call(values) if @verify
     values.first
   end
 
