@@ -47,6 +47,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :destination_prefix
 
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
+  has_one :account, class_name: 'Account'
 
   filter :is_last_cdr, default: true
 
@@ -175,6 +176,8 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   ransack_filter :customer_price_no_vat, type: :number
   ransack_filter :customer_duration, type: :number
   ransack_filter :vendor_duration, type: :number
+
+  association_uuid_filter :account_id, column: :customer_acc_id, class_name: 'Account'
 
   # TODO: move to BaseResource
   def self.records(options = {})

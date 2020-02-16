@@ -76,6 +76,52 @@ describe Api::Rest::Customer::V1::CdrsController, type: :request do
         create(:cdr, customer_acc: account, attr_name => attr_value)
       end
 
+      context 'account_id_eq' do
+        let(:request_filters) { { account_id_eq: another_account.reload.uuid } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
+      context 'account_id_not_eq' do
+        let(:request_filters) { { account_id_not_eq: account.reload.uuid } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
+      context 'account_id_in' do
+        let(:request_filters) { { account_id_in: "#{another_account.reload.uuid},#{another_account2.reload.uuid}" } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:another_account2) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
+      context 'account_id_not_in' do
+        let(:request_filters) { { account_id_not_in: "#{account.reload.uuid},#{another_account2.reload.uuid}" } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:another_account2) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
       context 'time_start_gteq and time_start_lteq' do
         include_examples :jsonapi_request_with_filter do
           let(:attr_name) { :time_start }
@@ -184,6 +230,9 @@ describe Api::Rest::Customer::V1::CdrsController, type: :request do
         'links': anything,
         'relationships': {
           'auth-orig-transport-protocol': {
+            'links': anything
+          },
+          account: {
             'links': anything
           }
         },
