@@ -25,7 +25,8 @@ module CaptureError
     end
 
     def capture_message(message, options = {})
-      CaptureError.capture_message(message, options)
+      context = capture_context.deep_merge(options)
+      CaptureError.capture_message(message, context)
     end
 
     def capture_error!(exception, options = {})
