@@ -194,7 +194,7 @@ ActiveAdmin.setup do |config|
   config.csv_options = { col_sep: ',', force_quotes: true }
   config.download_links = [:csv]
 
-  config.authorization_adapter = ActiveAdmin::PunditAdapter
+  config.authorization_adapter = PolicyAdapter
   config.pundit_default_policy = 'DefaultApplicationPolicy'
 
   ActiveAdmin::BaseController.class_eval do
@@ -211,12 +211,16 @@ ActiveAdmin.setup do |config|
     # authorized?(record) => authorized?(params[:action].to_sym, record)
     def authorized?(action = nil, subject = nil)
       action, subject = normalize_authorized_params(action, subject)
-      active_admin_authorization.authorized?(action, subject)
+      invalid_action = ->(msg) { capture_message(msg) }
+      active_admin_authorization.authorized?(action, subject, invalid_action: invalid_action)
     end
 
     def authorize!(action = nil, subject = nil)
       action, subject = normalize_authorized_params(action, subject)
       unless authorized?(action, subject)
+        subj = active_admin_authorization.pretty_subject(subject)
+        user = active_admin_authorization.pretty_user(current_active_admin_user)
+        logger.warn { "[POLICY] #{subj} not authorized to perform #{action} for #{user}" }
         raise ActiveAdmin::AccessDenied.new(current_active_admin_user, action, subject)
       end
     end
