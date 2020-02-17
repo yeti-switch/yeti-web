@@ -7,12 +7,16 @@ class BaseResource < JSONAPI::Resource
     self._type = custom_type
   end
 
-  def self.ransack_filter(attr, options)
-    type = options[:type]
+  # @param attr [Symbol] filter prefix
+  # @param type [Symbol] filter type
+  #   @see RansackFilterBuilder::RANSACK_TYPE_SUFIXES_DIC
+  # @param column [Symbol]
+  # @param verify [Proc, nil] custom validate/change values (receives [Array<String>] values)
+  def self.ransack_filter(attr, type:, column: nil, verify: nil)
     raise ArgumentError, "type #{type} is not supported" unless RansackFilterBuilder.type_supported?(type)
 
     RansackFilterBuilder.suffixes_for_type(type).each do |suf|
-      builder = RansackFilterBuilder.new(attr: attr, operator: suf)
+      builder = RansackFilterBuilder.new(attr: attr, operator: suf, column: column, verify: verify)
       filter builder.filter_name,
              verify: ->(values, _ctx) { builder.verify(values) },
              apply: ->(records, values, _opts) { builder.apply(records, values) }
