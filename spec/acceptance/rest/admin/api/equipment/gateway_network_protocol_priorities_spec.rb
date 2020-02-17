@@ -13,6 +13,8 @@ resource 'Gateway Network protocol priorities' do
   let(:type) { 'gateway-network-protocol-priorities' }
 
   get '/api/rest/admin/equipment/gateway-network-protocol-priorities' do
+    jsonapi_filters Api::Rest::Admin::Equipment::GatewayNetworkProtocolPriorityResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

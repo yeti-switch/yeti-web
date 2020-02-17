@@ -16,6 +16,8 @@ resource 'Networks', document: :customer_v1 do
   let!(:network) { FactoryGirl.create(:network, name: 'US').reload }
 
   get '/api/rest/customer/v1/networks' do
+    jsonapi_filters Api::Rest::Customer::V1::NetworkResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

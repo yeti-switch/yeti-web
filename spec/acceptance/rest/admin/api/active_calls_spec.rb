@@ -18,6 +18,8 @@ resource 'ActiveCalls' do
   end
 
   get '/api/rest/admin/active-calls' do
+    jsonapi_filters Api::Rest::Admin::ActiveCallResource._allowed_filters
+
     before { stub_active_calls_collection }
 
     example_request 'get listing' do

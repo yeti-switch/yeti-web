@@ -13,6 +13,8 @@ resource 'Sortings' do
   let(:type) { 'sortings' }
 
   get '/api/rest/admin/sortings' do
+    jsonapi_filters Api::Rest::Admin::SortingResource._allowed_filters
+
     before do
       Sorting.create(name: 'name')
     end

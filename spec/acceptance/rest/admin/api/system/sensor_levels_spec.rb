@@ -13,6 +13,8 @@ resource 'Sensor levels' do
   let(:type) { 'sensor-levels' }
 
   get '/api/rest/admin/system/sensor-levels' do
+    jsonapi_filters Api::Rest::Admin::System::SensorLevelResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

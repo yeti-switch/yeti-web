@@ -21,6 +21,8 @@ resource 'Accounts' do
   ]
 
   get '/api/rest/admin/accounts' do
+    jsonapi_filters Api::Rest::Admin::AccountResource._allowed_filters
+
     before { create_list(:account, 2) }
 
     example_request 'get listing' do

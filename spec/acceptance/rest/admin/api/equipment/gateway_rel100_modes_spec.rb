@@ -13,6 +13,8 @@ resource 'Gateway rel100 modes' do
   let(:type) { 'gateway-rel100-modes' }
 
   get '/api/rest/admin/equipment/gateway-rel100-modes' do
+    jsonapi_filters Api::Rest::Admin::Equipment::GatewayRel100ModeResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

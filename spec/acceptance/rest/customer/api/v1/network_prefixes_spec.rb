@@ -16,6 +16,8 @@ resource 'NetworkPrefixes', document: :customer_v1 do
   let!(:network_prefix) { FactoryGirl.create(:network_prefix).reload }
 
   get '/api/rest/customer/v1/network-prefixes' do
+    jsonapi_filters Api::Rest::Customer::V1::NetworkPrefixResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

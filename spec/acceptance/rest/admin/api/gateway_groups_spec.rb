@@ -13,6 +13,8 @@ resource 'Gateway groups' do
   let(:type) { 'gateway-groups' }
 
   get '/api/rest/admin/gateway-groups' do
+    jsonapi_filters Api::Rest::Admin::GatewayGroupResource._allowed_filters
+
     before { create_list(:gateway_group, 2) }
 
     example_request 'get listing' do

@@ -13,6 +13,8 @@ resource 'Pops' do
   let(:type) { 'pops' }
 
   get '/api/rest/admin/pops' do
+    jsonapi_filters Api::Rest::Admin::PopResource._allowed_filters
+
     before do
       Pop.create(name: 'first')
     end

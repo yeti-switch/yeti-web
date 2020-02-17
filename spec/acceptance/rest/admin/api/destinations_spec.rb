@@ -25,6 +25,8 @@ resource 'Destinations' do
   optional_relationships = %i[profit-control-mode routing-tag-modes]
 
   get '/api/rest/admin/destinations' do
+    jsonapi_filters Api::Rest::Admin::DestinationResource._allowed_filters
+
     before { create_list(:destination, 2) }
 
     example_request 'get listing' do

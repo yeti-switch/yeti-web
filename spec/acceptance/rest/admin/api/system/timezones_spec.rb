@@ -13,6 +13,8 @@ resource 'Timezones' do
   let(:type) { 'timezones' }
 
   get '/api/rest/admin/system/timezones' do
+    jsonapi_filters Api::Rest::Admin::System::TimezoneResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

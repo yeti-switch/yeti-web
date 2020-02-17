@@ -13,6 +13,8 @@ resource 'Disconnect policies' do
   let(:type) { 'disconnect-policies' }
 
   get '/api/rest/admin/disconnect-policies' do
+    jsonapi_filters Api::Rest::Admin::DisconnectPolicyResource._allowed_filters
+
     before { create_list(:disconnect_policy, 2) }
 
     example_request 'get listing' do

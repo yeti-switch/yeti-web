@@ -13,6 +13,8 @@ resource 'Gateway inband dtmf filtering mode' do
   let(:type) { 'gateway-inband-dtmf-filtering-modes' }
 
   get '/api/rest/admin/equipment/gateway-inband-dtmf-filtering-modes' do
+    jsonapi_filters Api::Rest::Admin::Equipment::GatewayInbandDtmfFilteringModeResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

@@ -13,6 +13,8 @@ resource 'Dtmf send modes' do
   let(:type) { 'dtmf-send-modes' }
 
   get '/api/rest/admin/system/dtmf-send-modes' do
+    jsonapi_filters Api::Rest::Admin::System::DtmfSendModeResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end
