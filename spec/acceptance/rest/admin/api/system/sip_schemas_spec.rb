@@ -13,6 +13,8 @@ resource 'SIP Schemas' do
   let(:type) { 'sip-schemas' }
 
   get '/api/rest/admin/system/sip-schemas' do
+    jsonapi_filters Api::Rest::Admin::System::SipSchemaResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

@@ -23,6 +23,8 @@ resource 'Cdrs', document: :customer_v1 do
   end
 
   get '/api/rest/customer/v1/cdrs' do
+    jsonapi_filters Api::Rest::Customer::V1::CdrResource._allowed_filters
+
     before { create_list(:cdr, 2, customer_acc: customers_auth.account) }
 
     example_request 'get listing' do

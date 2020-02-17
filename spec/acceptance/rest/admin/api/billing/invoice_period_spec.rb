@@ -13,6 +13,8 @@ resource 'Invoice period' do
   let(:type) { 'invoice-periods' }
 
   get '/api/rest/admin/billing/invoice-period' do
+    jsonapi_filters Api::Rest::Admin::Billing::InvoicePeriodResource._allowed_filters
+
     before do
       Billing::InvoicePeriod.create(name: 'Weekly')
     end

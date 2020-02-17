@@ -27,6 +27,8 @@ resource 'Dialpeers' do
   optional_relationships = %i[gateway gateway-group routing-tag-modes]
 
   get '/api/rest/admin/dialpeers' do
+    jsonapi_filters Api::Rest::Admin::DialpeerResource._allowed_filters
+
     before { create_list(:dialpeer, 2) }
 
     example_request 'get listing' do

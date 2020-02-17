@@ -13,6 +13,8 @@ resource 'Routing plans' do
   let(:type) { 'routing-plans' }
 
   get '/api/rest/admin/routing-plans' do
+    jsonapi_filters Api::Rest::Admin::RoutingPlanResource._allowed_filters
+
     before { create_list(:routing_plan, 2) }
 
     example_request 'get listing' do

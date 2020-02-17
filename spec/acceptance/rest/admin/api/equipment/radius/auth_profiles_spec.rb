@@ -16,6 +16,8 @@ resource 'Auth profiles' do
   optional_params = %i[enable-start-accounting enable-interim-accounting interim-accounting-interval enable-stop-accounting]
 
   get '/api/rest/admin/equipment/radius/auth-profiles' do
+    jsonapi_filters Api::Rest::Admin::Equipment::Radius::AuthProfileResource._allowed_filters
+
     before { create_list(:auth_profile, 2) }
 
     example_request 'get listing' do

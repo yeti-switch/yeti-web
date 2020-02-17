@@ -16,6 +16,8 @@ resource 'Accounts', document: :customer_v1 do
   required_params = %i[name balance origination-capacity min-balance max-balance]
 
   get '/api/rest/customer/v1/accounts' do
+    jsonapi_filters Api::Rest::Customer::V1::AccountResource._allowed_filters
+
     before { create_list(:account, 2, contractor: customer) }
 
     example_request 'get listing' do

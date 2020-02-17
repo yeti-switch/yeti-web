@@ -29,6 +29,8 @@ resource 'Customer Auths' do
   ]
 
   get '/api/rest/admin/customers-auths' do
+    jsonapi_filters Api::Rest::Admin::CustomersAuthResource._allowed_filters
+
     before { create_list(:customers_auth, 2) }
 
     example_request 'get listing' do

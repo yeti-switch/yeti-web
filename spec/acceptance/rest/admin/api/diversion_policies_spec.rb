@@ -13,6 +13,8 @@ resource 'Diversion policies' do
   let(:type) { 'diversion-policies' }
 
   get '/api/rest/admin/diversion-policies' do
+    jsonapi_filters Api::Rest::Admin::DiversionPolicyResource._allowed_filters
+
     example_request 'get listing' do
       expect(status).to eq(200)
     end

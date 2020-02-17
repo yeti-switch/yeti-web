@@ -16,6 +16,8 @@ resource 'IncomingRegistrations' do
   include_context :incoming_registrations_stub_helpers
 
   get '/api/rest/admin/incoming-registrations' do
+    jsonapi_filters Api::Rest::Admin::IncomingRegistrationResource._allowed_filters
+
     before { stub_incoming_registrations_collection }
 
     example_request 'get listing' do

@@ -13,6 +13,8 @@ resource 'Codec groups' do
   let(:type) { 'codec-groups' }
 
   get '/api/rest/admin/codec-groups' do
+    jsonapi_filters Api::Rest::Admin::CodecGroupResource._allowed_filters
+
     before { create_list(:codec_group, 2) }
 
     example_request 'get listing' do
