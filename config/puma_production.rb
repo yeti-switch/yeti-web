@@ -16,6 +16,14 @@ stdout_redirect '/opt/yeti-web/log/puma.stdout.log', '/opt/yeti-web/log/puma.std
 
 preload_app!
 
+# Set the timeout for worker shutdown
+worker_shutdown_timeout(120)
+
+# Set Timestamp
+log_formatter do |str|
+  "[#{Process.pid}] #{Time.now}: #{str}"
+end
+
 before_fork do
   ActiveRecord::Base.connection.disconnect!
   Cdr::Base.connection.disconnect!
