@@ -17,7 +17,7 @@ all: gems
 .PHONY: bundler
 bundler:
 	$(info:msg=Install bundler)
-	gem install --no-document --install-dir $(gems) bundler -v 2.0.2
+	gem install --no-document --install-dir $(gems) bundler -v 2.1.4
 
 
 .PHONY: gems
