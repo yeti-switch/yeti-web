@@ -23,7 +23,7 @@ module JsonapiModel
 
     def _save
       scope = Cdr::Cdr
-              .where(customer_acc_id: account.id, routing_attempt: 1)
+              .where(customer_acc_id: account.id, is_last_cdr: true)
               .where('time_start BETWEEN ? AND ?', from_time, to_time)
               .group(TIME_START_SQL)
               .order(TIME_START_SQL)
