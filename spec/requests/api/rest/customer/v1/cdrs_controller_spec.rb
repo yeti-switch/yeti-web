@@ -200,6 +200,20 @@ describe Api::Rest::Customer::V1::CdrsController, type: :request do
           let(:attr_name) { :local_tag }
         end
       end
+
+      context 'is_last_cdr false' do
+        let(:request_filters) { { is_last_cdr: false } }
+        let!(:expected_record) { create(:cdr, customer_acc: account, is_last_cdr: false) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array(
+            Cdr::Cdr.where(is_last_cdr: false).map do |r|
+              hash_including(id: r.uuid)
+            end
+          )
+        end
+      end
     end
   end
 

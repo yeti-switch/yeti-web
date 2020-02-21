@@ -95,7 +95,6 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   ransack_filter :dialpeer_initial_interval, type: :number
   ransack_filter :dialpeer_next_interval, type: :number
   ransack_filter :routing_attempt, type: :number
-  ransack_filter :is_last_cdr, type: :boolean
   ransack_filter :lega_disconnect_code, type: :number
   ransack_filter :lega_disconnect_reason, type: :string
   ransack_filter :node_id, type: :number
