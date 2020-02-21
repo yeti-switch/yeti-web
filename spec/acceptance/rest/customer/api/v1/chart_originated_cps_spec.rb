@@ -18,7 +18,7 @@ resource 'OriginatedCPS', document: :customer_v1 do
   before do
     create_list :cdr, 12,
                 customer_acc_id: customer_acc.id,
-                routing_attempt: 1,
+                is_last_cdr: true,
                 time_start: '2019-01-01 23:59:59'
   end
 
