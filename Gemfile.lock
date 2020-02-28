@@ -16,6 +16,13 @@ GIT
       arel (>= 4.0.1)
 
 GIT
+  remote: https://github.com/didww/prometheus_exporter.git
+  revision: 7542943695b742a4884fd3ee9aa4e4c4afd17d43
+  branch: didww
+  specs:
+    prometheus_exporter (0.5.1)
+
+GIT
   remote: https://github.com/livingsocial/excelinator.git
   revision: 51cd9dbdbcc0e610ff5bd31b85e4744ac379e8c5
   specs:
@@ -357,8 +364,9 @@ GEM
     parser (2.5.3.0)
       ast (~> 2.4.0)
     pg (1.0.0)
+    pgq_prometheus (0.1.0)
+      prometheus_exporter
     powerpack (0.1.2)
-    prometheus_exporter (0.4.14)
     public_suffix (3.0.3)
     puma (4.3.1)
       nio4r (~> 2.0)
@@ -573,8 +581,9 @@ DEPENDENCIES
   parallel
   parallel_tests
   pg
+  pgq_prometheus
   postgres_ext!
-  prometheus_exporter
+  prometheus_exporter!
   puma (~> 4.3)
   puma_worker_killer
   pundit

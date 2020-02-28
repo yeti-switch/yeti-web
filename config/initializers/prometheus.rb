@@ -36,4 +36,21 @@ if !Rails.env.test? && Rails.configuration.yeti_web['prometheus']['enabled'] && 
     type: 'master',
     labels: Rails.configuration.yeti_web['prometheus']['default_labels']
   )
+
+  require 'pgq_prometheus'
+  require 'pgq_prometheus/processor'
+  require 'pgq_prometheus/sql_caller/active_record'
+  require 'prometheus/pgq_prometheus_config'
+  PgqPrometheus::Processor.tap do |processor|
+    processor.sql_caller = PgqPrometheus::SqlCaller::ActiveRecord.new('Cdr::Base')
+    processor.logger = Rails.logger
+    processor.on_error = proc do |e|
+      CaptureError.capture(e, tags: { component: 'Prometheus', processor_class: processor })
+    end
+  end
+
+  PgqPrometheus::Processor.start
+
+  require 'prometheus/yeti_processor'
+  YetiProcessor.start(frequency: 60)
 end
