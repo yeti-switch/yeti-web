@@ -77,7 +77,8 @@ gem 'puma_worker_killer'
 gem 'syslog-logger'
 gem 'zip-zip'
 
-gem 'prometheus_exporter', require: false
+gem 'pgq_prometheus', require: false
+gem 'prometheus_exporter', git: 'https://github.com/didww/prometheus_exporter.git', branch: 'didww', require: false
 gem 'sentry-raven', require: false
 
 group :development do
