@@ -100,7 +100,7 @@ group :development, :test do
   gem 'rubocop', require: false
 end
 
-gem 'apitome', '~> 0.1.0'
+gem 'apitome', '~> 0.3.0'
 
 group :test do
   gem 'capybara'
