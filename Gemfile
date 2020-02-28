@@ -96,7 +96,7 @@ group :development, :test do
   gem 'factory_girl_rails', '4.8.0'
   gem 'parallel_tests'
   gem 'rspec-rails'
-  gem 'rspec_api_documentation', '~> 5.0.0'
+  gem 'rspec_api_documentation', '~> 6.1.0'
   gem 'rubocop', require: false
 end
 
