@@ -13,35 +13,42 @@ describe Api::Rest::Customer::V1::ChartOriginatedCpsController, type: :request d
     create_list :cdr, 4,
                 customer_acc_id: account.id,
                 routing_attempt: 1,
+                is_last_cdr: true,
                 time_start: '2019-01-01 00:00:00'
 
     create_list :cdr, 2,
                 customer_acc_id: account.id,
-                routing_attempt: 1,
+                routing_attempt: 2,
+                is_last_cdr: true,
                 time_start: '2019-01-01 00:00:59'
 
     create_list :cdr, 12,
                 customer_acc_id: account.id,
-                routing_attempt: 1,
+                routing_attempt: 3,
+                is_last_cdr: true,
                 time_start: '2019-01-01 23:59:59'
 
-    # not first routing attempt
+    # not last cdr
     create :cdr,
            customer_acc_id: account.id,
-           routing_attempt: 2,
+           routing_attempt: 1,
+           is_last_cdr: false,
            time_start: '2019-01-01 15:34:00'
 
     # created_at out of scope
     create :cdr,
+           is_last_cdr: true,
            customer_acc_id: account.id,
-           time_start: '2019-01-02 00:00:00'
+           time_start: '2019-01-02 02:15:00'
 
     create :cdr,
+           is_last_cdr: true,
            customer_acc_id: account.id,
            time_start: '2018-12-31 23:59:59'
 
     # different account
     create :cdr,
+           is_last_cdr: true,
            customer_acc_id: another_account.id,
            time_start: '2019-01-01 12:00:01'
   end

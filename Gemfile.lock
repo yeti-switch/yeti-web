@@ -16,6 +16,13 @@ GIT
       arel (>= 4.0.1)
 
 GIT
+  remote: https://github.com/didww/prometheus_exporter.git
+  revision: 7542943695b742a4884fd3ee9aa4e4c4afd17d43
+  branch: didww
+  specs:
+    prometheus_exporter (0.5.1)
+
+GIT
   remote: https://github.com/livingsocial/excelinator.git
   revision: 51cd9dbdbcc0e610ff5bd31b85e4744ac379e8c5
   specs:
@@ -343,8 +350,8 @@ GEM
     net-ldap (0.16.1)
     net_tcp_client (2.0.1)
     netstring (0.0.3)
-    nio4r (2.3.1)
-    nokogiri (1.10.5)
+    nio4r (2.5.2)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     oj (2.18.5)
     orm_adapter (0.5.0)
@@ -357,10 +364,11 @@ GEM
     parser (2.5.3.0)
       ast (~> 2.4.0)
     pg (1.0.0)
+    pgq_prometheus (0.1.0)
+      prometheus_exporter
     powerpack (0.1.2)
-    prometheus_exporter (0.4.14)
     public_suffix (3.0.3)
-    puma (4.3.1)
+    puma (4.3.3)
       nio4r (~> 2.0)
     puma_worker_killer (0.1.1)
       get_process_mem (~> 0.2)
@@ -395,7 +403,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
-    rake (12.3.2)
+    rake (12.3.3)
     ransack (2.1.1)
       actionpack (>= 5.0)
       activerecord (>= 5.0)
@@ -573,8 +581,9 @@ DEPENDENCIES
   parallel
   parallel_tests
   pg
+  pgq_prometheus
   postgres_ext!
-  prometheus_exporter
+  prometheus_exporter!
   puma (~> 4.3)
   puma_worker_killer
   pundit
