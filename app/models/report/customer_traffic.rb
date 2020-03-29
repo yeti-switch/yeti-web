@@ -60,7 +60,9 @@ class Report::CustomerTraffic < Cdr::Base
                 ?,
                 vendor_id, destination_prefix, dst_country_id, dst_network_id,
                 count(id), count(nullif((duration<=? AND success),false)), count(nullif(success,false)),
-                sum(duration), sum(customer_duration), sum(vendor_duration),
+                coalesce(sum(duration),0),
+                coalesce(sum(customer_duration),0),
+                coalesce(sum(vendor_duration),0),
                 sum(duration)::float/nullif(count(nullif(success,false)),0)::float, /* ACD */
                 count(nullif(success,false))::float/nullif(count(id),0)::float,  /* ASR */
                 sum(customer_price), sum(vendor_price),
