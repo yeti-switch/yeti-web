@@ -141,6 +141,7 @@
 #  lua_script_id                      :integer
 #  lua_script_name                    :string
 #  use_registered_aor                 :boolean
+#  is_changed                         :boolean
 #
 
 class Importing::Gateway < Importing::Base

@@ -3,6 +3,7 @@
 ActiveAdmin.register Importing::CodecGroupCodec do
   filter :codec_group, input_html: { class: 'chosen' }
   filter :codec
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -18,6 +19,7 @@ ActiveAdmin.register Importing::CodecGroupCodec do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :codec_group, sortable: :codec_group_name do |row|
       if row.codec_group.blank?
         row.codec_group_name

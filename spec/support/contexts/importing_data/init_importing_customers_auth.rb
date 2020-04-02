@@ -29,7 +29,8 @@ shared_context :init_importing_customers_auth do |args|
       diversion_policy_name: DiversionPolicy.find(1).name,
       diversion_policy_id: DiversionPolicy.find(1).id,
       diversion_rewrite_rule: '',
-      diversion_rewrite_result: ''
+      diversion_rewrite_result: '',
+      is_changed: true
     }.merge(args)
 
     @importing_customers_auth = FactoryGirl.create(:importing_customers_auth, fields)

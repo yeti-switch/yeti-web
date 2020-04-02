@@ -5,6 +5,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
   filter :prefix
   filter :rate
   filter :connect_fee
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -24,6 +25,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :enabled
     column :prefix
     column :reject_calls

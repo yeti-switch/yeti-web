@@ -44,32 +44,70 @@ module ResourceDSL
         end
       end
 
+      action_item :apply_unique_columns, only: [:index] do
+        if authorized?(:batch_update)
+          link_to 'Apply unique columns',
+                  url_for(action: :apply_unique_columns),
+                  class: 'modal-link',
+                  data: {
+                    method: :put,
+                    inputs: {
+                      unique_columns: [''] + acts_as_import_resource_class.import_attributes
+                    }.to_json
+                  }
+        end
+      end
+
       collection_action :delete_all do
         authorize!
         acts_as_import_resource_class.delete_all
         redirect_to redirect_proc
       end
 
+      collection_action :apply_unique_columns, method: :put do
+        authorize!(:batch_update)
+        unique_columns = params.require(:changes).permit(unique_columns: [])[:unique_columns].reject(&:blank?)
+        begin
+          acts_as_import_resource_class.resolve_object_id(unique_columns)
+          flash[:notice] = 'Unique columns applied!'
+        rescue Importing::Base::Error => e
+          flash[:error] = e.message
+        end
+        redirect_back fallback_location: root_path
+      end
+
       collection_action :batch_update do
         authorize!
-        acts_as_import_resource_class.run_in_background(@paper_trail_info, :for_update)
-        flash[:notice] = 'You have just run importing "Only update" in the background process, wait until it finishes'
+        begin
+          acts_as_import_resource_class.run_in_background(@paper_trail_info, :for_update)
+          flash[:notice] = 'You have just run importing "Only update" in the background process, wait until it finishes'
+        rescue Importing::Base::Error => e
+          flash[:error] = e.message
+        end
         redirect_back fallback_location: root_path
         #        redirect_to redirect_proc
       end
 
       collection_action :batch_replace do
         authorize!
-        acts_as_import_resource_class.run_in_background(@paper_trail_info)
-        flash[:notice] = 'You have just run importing "Create an update" in the background process, wait until it finishes'
+        begin
+          acts_as_import_resource_class.run_in_background(@paper_trail_info)
+          flash[:notice] = 'You have just run importing "Create an update" in the background process, wait until it finishes'
+        rescue Importing::Base::Error => e
+          flash[:error] = e.message
+        end
         #        redirect_to redirect_proc
         redirect_back fallback_location: root_path
       end
 
       collection_action :batch_insert do
         authorize!
-        acts_as_import_resource_class.run_in_background(@paper_trail_info, :for_create)
-        flash[:notice] = 'You have just run importing "Create new once" in the background process, wait until it finishes'
+        begin
+          acts_as_import_resource_class.run_in_background(@paper_trail_info, :for_create)
+          flash[:notice] = 'You have just run importing "Create new ones" in the background process, wait until it finishes'
+        rescue Importing::Base::Error => e
+          flash[:error] = e.message
+        end
         #        redirect_to redirect_proc
         redirect_back fallback_location: root_path
       end

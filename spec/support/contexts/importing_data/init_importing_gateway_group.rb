@@ -7,7 +7,8 @@ shared_context :init_importing_gateway_group do |args|
     fields = {
       name: 'GWGroup',
       vendor_id: @contractor.id,
-      vendor_name: @contractor.name
+      vendor_name: @contractor.name,
+      is_changed: true
     }.merge(args)
 
     @importing_gateway_group = FactoryGirl.create(:importing_gateway_group, fields)

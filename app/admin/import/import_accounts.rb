@@ -4,6 +4,7 @@ ActiveAdmin.register Importing::Account do
   filter :contractor, input_html: { class: 'chosen' }
   filter :name
   filter :balance
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -25,6 +26,7 @@ ActiveAdmin.register Importing::Account do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :contractor, sortable: :contractor_name do |row|
       if row.contractor.blank?
         row.contractor_name

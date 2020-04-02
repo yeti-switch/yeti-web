@@ -3,12 +3,13 @@
 ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   filter :o_id
   filter :prefix
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :enabled
   filter :vendor, input_html: { class: 'chosen' }
   filter :account, input_html: { class: 'chosen' }
   filter :gateway, input_html: { class: 'chosen' }
   filter :routing_group, input_html: { class: 'chosen' }
   filter :routeset_discriminator, input_html: { class: 'chosen' }
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -30,6 +31,7 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :prefix
     column :enabled
     column :priority

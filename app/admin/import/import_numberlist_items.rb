@@ -4,6 +4,7 @@ ActiveAdmin.register Importing::NumberlistItem, as: 'Numberlist Item Imports' do
   filter :key
   filter :numberlist, input_html: { class: 'chosen' }
   filter :action
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -24,6 +25,7 @@ ActiveAdmin.register Importing::NumberlistItem, as: 'Numberlist Item Imports' do
 
     column :error_string
     column :o_id
+    column :is_changed
 
     column :numberlist
     column :key

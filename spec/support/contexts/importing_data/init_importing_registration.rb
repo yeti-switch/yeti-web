@@ -21,7 +21,8 @@ shared_context :init_importing_registration do |args|
       retry_delay: 123,
       max_attempts: 123,
       transport_protocol_id: 1,
-      proxy_transport_protocol_id: 1
+      proxy_transport_protocol_id: 1,
+      is_changed: true
     }.merge(args)
 
     @importing_registration = FactoryGirl.create(:importing_registration, fields)

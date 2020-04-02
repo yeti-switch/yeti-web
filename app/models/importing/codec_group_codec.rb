@@ -12,6 +12,7 @@
 #  codec_id         :integer
 #  priority         :integer
 #  error_string     :string
+#  is_changed       :boolean
 #
 
 class Importing::CodecGroupCodec < Importing::Base

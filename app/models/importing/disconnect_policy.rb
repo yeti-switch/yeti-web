@@ -8,6 +8,7 @@
 #  o_id         :integer
 #  name         :string
 #  error_string :string
+#  is_changed   :boolean
 #
 
 class Importing::DisconnectPolicy < Importing::Base

@@ -37,6 +37,7 @@
 #  dst_number_max_length    :integer
 #  routing_tag_mode_id      :integer
 #  routing_tag_mode_name    :string
+#  is_changed               :boolean
 #
 
 class Importing::Destination < Importing::Base
@@ -57,7 +58,7 @@ class Importing::Destination < Importing::Base
 
   self.import_class = ::Routing::Destination
 
-  def self.after_import_hook(unique_columns = [])
+  def self.after_import_hook
     resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
     resolve_null_tag('routing_tag_ids', 'routing_tag_names')
     super
