@@ -40092,7 +40092,8 @@ CREATE TABLE data_import.import_accounts (
     total_capacity smallint,
     destination_rate_limit numeric,
     vat numeric,
-    max_call_duration integer
+    max_call_duration integer,
+    is_changed boolean
 );
 
 
@@ -40127,7 +40128,8 @@ CREATE TABLE data_import.import_codec_group_codecs (
     codec_name character varying,
     codec_id integer,
     priority integer,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -40158,7 +40160,8 @@ CREATE TABLE data_import.import_codec_groups (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -40197,7 +40200,8 @@ CREATE TABLE data_import.import_contractors (
     address character varying,
     phones character varying,
     smtp_connection_id integer,
-    smtp_connection_name character varying
+    smtp_connection_name character varying,
+    is_changed boolean
 );
 
 
@@ -40295,7 +40299,8 @@ CREATE TABLE data_import.import_customers_auth (
     src_number_max_length smallint,
     src_number_min_length smallint,
     lua_script_id smallint,
-    lua_script_name character varying
+    lua_script_name character varying,
+    is_changed boolean
 );
 
 
@@ -40355,7 +40360,8 @@ CREATE TABLE data_import.import_destinations (
     dst_number_min_length integer,
     dst_number_max_length integer,
     routing_tag_mode_id smallint,
-    routing_tag_mode_name character varying
+    routing_tag_mode_name character varying,
+    is_changed boolean
 );
 
 
@@ -40426,7 +40432,8 @@ CREATE TABLE data_import.import_dialpeers (
     routing_tag_mode_id smallint,
     routing_tag_mode_name character varying,
     routeset_discriminator_id smallint,
-    routeset_discriminator_name character varying
+    routeset_discriminator_name character varying,
+    is_changed boolean
 );
 
 
@@ -40457,7 +40464,8 @@ CREATE TABLE data_import.import_disconnect_policies (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -40493,7 +40501,8 @@ CREATE TABLE data_import.import_gateway_groups (
     prefer_same_pop boolean,
     error_string character varying,
     balancing_mode_id smallint,
-    balancing_mode_name character varying
+    balancing_mode_name character varying,
+    is_changed boolean
 );
 
 
@@ -40657,7 +40666,8 @@ CREATE TABLE data_import.import_gateways (
     termination_dst_numberlist_name character varying,
     lua_script_id smallint,
     lua_script_name character varying,
-    use_registered_aor boolean
+    use_registered_aor boolean,
+    is_changed boolean
 );
 
 
@@ -40716,7 +40726,8 @@ CREATE TABLE data_import.import_numberlist_items (
     number_min_length smallint,
     number_max_length smallint,
     lua_script_id smallint,
-    lua_script_name character varying
+    lua_script_name character varying,
+    is_changed boolean
 );
 
 
@@ -40761,7 +40772,8 @@ CREATE TABLE data_import.import_numberlists (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     tag_action_value_names character varying,
     lua_script_id smallint,
-    lua_script_name character varying
+    lua_script_name character varying,
+    is_changed boolean
 );
 
 
@@ -40794,7 +40806,8 @@ CREATE TABLE data_import.import_rateplans (
     name character varying,
     error_string character varying,
     profit_control_mode_id integer,
-    profit_control_mode_name character varying
+    profit_control_mode_name character varying,
+    is_changed boolean
 );
 
 
@@ -40845,7 +40858,8 @@ CREATE TABLE data_import.import_registrations (
     transport_protocol_id smallint,
     proxy_transport_protocol_id smallint,
     transport_protocol_name character varying,
-    proxy_transport_protocol_name character varying
+    proxy_transport_protocol_name character varying,
+    is_changed boolean
 );
 
 
@@ -40880,7 +40894,8 @@ CREATE TABLE data_import.import_routing_groups (
     sorting_id integer,
     more_specific_per_vendor boolean,
     rate_delta_max numeric DEFAULT 0 NOT NULL,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -47060,6 +47075,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190919080917'),
 ('20191016183312'),
 ('20191018180427'),
-('20200105131431');
+('20200105131431'),
+('20200202154005');
 
 

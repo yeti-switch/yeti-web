@@ -4,6 +4,7 @@ ActiveAdmin.register Importing::Numberlist, as: 'Numberlist Imports' do
   filter :name
   filter :mode
   filter :default_action
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -24,6 +25,7 @@ ActiveAdmin.register Importing::Numberlist, as: 'Numberlist Imports' do
 
     column :error_string
     column :o_id
+    column :is_changed
 
     column :name
     column :mode

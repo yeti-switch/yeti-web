@@ -19,8 +19,6 @@
         <%= f.input :file, as: :file %>
         <%= f.input :script, as: :select, collection: GuiConfig.import_scripts('r2c_') %>
         <%= f.input :select_all, as: :boolean %>
-        <%= f.input :unique_columns_values, as: :check_boxes,
-                    collection: @active_admin_import_model.unique_columns.sort %>
 
     <% end %>
 

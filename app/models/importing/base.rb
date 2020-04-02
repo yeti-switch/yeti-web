@@ -3,34 +3,46 @@
 class Importing::Base < Yeti::ActiveRecord
   self.abstract_class = true
 
+  class Error < StandardError
+  end
+
   # NOTE: can't use "scope", ref: https://github.com/rails/rails/issues/10658
   def self.success
-    where error_string: nil
+    where(error_string: nil)
   end
 
   def self.with_errors
-    where.not error_string: nil
+    where.not(error_string: nil)
   end
 
   def self.for_update
-    where.not o_id: nil
+    where.not(o_id: nil)
   end
 
   def self.for_create
-    where o_id: nil
+    where(o_id: nil)
+  end
+
+  def self.not_ready_to_process
+    where(is_changed: nil)
+  end
+
+  def self.ready_to_process
+    where.not(is_changed: nil)
   end
 
   class_attribute :import_attributes, :import_class
 
   ALLOWED_OPTIONS_KEYS = %i[controller_info max_jobs_count job_number action].freeze
 
-  # Resolve foreign_keys and existing items relation(by unique names)
-  def self.after_import_hook(unique_columns = [])
+  # Resolve foreign_keys
+  def self.after_import_hook
     resolve_belongs_to
-    resolve_object_id(unique_columns)
   end
 
   def self.run_in_background(controller_info, action = nil)
+    raise Error, 'Apply Unique Columns must be executed before this action' if not_ready_to_process.any?
+
     Importing::ImportingDelayedJob.create_jobs(self, controller_info: controller_info, action: action)
   end
 
@@ -39,6 +51,7 @@ class Importing::Base < Yeti::ActiveRecord
     PaperTrail.request.whodunnit = options[:controller_info][:whodunnit]
     PaperTrail.request.controller_info = options[:controller_info][:controller_info]
     query = where('id % ? = ?', options[:max_jobs_count], options[:job_number])
+    query = query.where(is_changed: true)
     query = query.send(options[:action]) if options[:action]
     Yeti::ActiveRecord.transaction do
       query.find_in_batches do |batch|
@@ -70,11 +83,35 @@ class Importing::Base < Yeti::ActiveRecord
     end
   end
 
+  # Resolve existing items relation(by unique names)
   def self.resolve_object_id(unique_columns)
     for_update.update_all(o_id: nil)
+    ready_to_process.update_all(is_changed: nil)
     if unique_columns.any?
       update_relations_for_each!(import_class.table_name, :o, unique_columns)
     end
+    apply_is_changed!
+  end
+
+  def self.apply_is_changed!
+    changed_condition = calc_changed_conditions('orig_t', 'import_t')
+
+    sql_matched = [
+      "UPDATE #{table_name} import_t",
+      "SET is_changed = (#{changed_condition})",
+      "FROM #{import_class.table_name} orig_t",
+      'WHERE import_t.o_id IS NOT NULL AND import_t.o_id = orig_t.id'
+    ].join(' ')
+    Yeti::ActiveRecord.connection.execute(sql_matched)
+
+    sql_non_matched = "UPDATE #{table_name} SET is_changed = true WHERE is_changed IS NULL"
+    Yeti::ActiveRecord.connection.execute(sql_non_matched)
+  end
+
+  def self.calc_changed_conditions(orig_table, import_table)
+    # We use "IS DISTINCT FROM" instead of "<>" because "NULL <> NULL" is "NULL".
+    diffs = import_attributes.map { |col| "#{orig_table}.#{col} IS DISTINCT FROM #{import_table}.#{col}" }
+    diffs.join(' OR ')
   end
 
   #

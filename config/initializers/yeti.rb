@@ -28,6 +28,7 @@ ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsFilterByRoutingTagIds
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBelongsTo
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithDefaultParams
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithGlobalDSL
+ActiveAdmin::ResourceDSL.send :include, ResourceDSL::BooleanFilter
 
 # ActiveAdmin::CSVBuilder.send(:include, Yeti::CSVBuilder)
 

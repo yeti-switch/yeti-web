@@ -12,6 +12,7 @@
 #  more_specific_per_vendor :boolean
 #  rate_delta_max           :decimal(, )      default(0.0), not null
 #  error_string             :string
+#  is_changed               :boolean
 #
 
 class Importing::RoutingGroup < Importing::Base
