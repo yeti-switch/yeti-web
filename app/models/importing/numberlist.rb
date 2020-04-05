@@ -22,6 +22,7 @@
 #  tag_action_value_names     :string
 #  lua_script_id              :integer
 #  lua_script_name            :string
+#  is_changed                 :boolean
 #
 
 class Importing::Numberlist < Importing::Base
@@ -40,7 +41,7 @@ class Importing::Numberlist < Importing::Base
                               default_dst_rewrite_rule default_dst_rewrite_result
                               tag_action_id tag_action_value lua_script_id]
 
-  def self.after_import_hook(unique_columns = [])
+  def self.after_import_hook
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
   end

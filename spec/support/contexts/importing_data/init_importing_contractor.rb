@@ -6,7 +6,8 @@ shared_context :init_importing_contractor do |args|
   before do
     fields = {
       name: 'TF-EU-RG',
-      vendor: true
+      vendor: true,
+      is_changed: true
     }.merge(args)
 
     @importing_contractor = FactoryGirl.create(:importing_contractor, fields)

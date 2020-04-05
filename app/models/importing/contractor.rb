@@ -16,6 +16,7 @@
 #  phones               :string
 #  smtp_connection_id   :integer
 #  smtp_connection_name :string
+#  is_changed           :boolean
 #
 
 class Importing::Contractor < Importing::Base

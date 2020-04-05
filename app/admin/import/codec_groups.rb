@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Importing::CodecGroup do
   filter :name
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -11,6 +12,7 @@ ActiveAdmin.register Importing::CodecGroup do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :name
   end
 end

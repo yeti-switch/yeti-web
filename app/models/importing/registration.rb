@@ -28,6 +28,7 @@
 #  proxy_transport_protocol_id   :integer
 #  transport_protocol_name       :string
 #  proxy_transport_protocol_name :string
+#  is_changed                    :boolean
 #
 
 class Importing::Registration < Importing::Base

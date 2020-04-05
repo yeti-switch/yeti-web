@@ -48,6 +48,7 @@
 #  routing_tag_mode_name       :string
 #  routeset_discriminator_id   :integer
 #  routeset_discriminator_name :string
+#  is_changed                  :boolean
 #
 
 class Importing::Dialpeer < Importing::Base
@@ -72,7 +73,7 @@ class Importing::Dialpeer < Importing::Base
                               routing_tag_ids routing_tag_mode_id routeset_discriminator_id]
   self.import_class = ::Dialpeer
 
-  def self.after_import_hook(unique_columns = [])
+  def self.after_import_hook
     where(asr_limit: nil).update_all(asr_limit: 0)
     resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
     resolve_null_tag('routing_tag_ids', 'routing_tag_names')

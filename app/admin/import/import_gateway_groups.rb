@@ -4,6 +4,7 @@ ActiveAdmin.register Importing::GatewayGroup do
   filter :name
   filter :vendor, input_html: { class: 'chosen' }
   filter :balancing_mode, as: :select
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -25,6 +26,7 @@ ActiveAdmin.register Importing::GatewayGroup do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
 
     column :vendor, sortable: :vendor_name do |row|
       if row.vendor.blank?

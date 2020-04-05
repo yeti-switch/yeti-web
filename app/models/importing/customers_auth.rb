@@ -75,6 +75,7 @@
 #  src_number_min_length            :integer
 #  lua_script_id                    :integer
 #  lua_script_name                  :string
+#  is_changed                       :boolean
 #
 
 class Importing::CustomersAuth < Importing::Base
@@ -147,10 +148,23 @@ class Importing::CustomersAuth < Importing::Base
 
   self.import_class = ::CustomersAuth
 
-  def self.after_import_hook(unique_columns = [])
+  def self.after_import_hook
     where(src_prefix: nil).update_all(src_prefix: '')
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
+  end
+
+  def self.calc_changed_conditions(orig_table, import_table)
+    conditions = import_attributes.map do |col|
+      if col == 'ip'
+        "#{orig_table}.#{col}::varchar[] <> string_to_array(#{import_table}.#{col}, ',')::varchar[]"
+      elsif col.in? %w[src_prefix dst_prefix uri_domain from_domain to_domain x_yeti_auth]
+        "#{orig_table}.#{col} <> string_to_array(#{import_table}.#{col}, ',')::varchar[]"
+      else
+        "#{orig_table}.#{col} <> #{import_table}.#{col}"
+      end
+    end
+    conditions.join(' OR ')
   end
 end

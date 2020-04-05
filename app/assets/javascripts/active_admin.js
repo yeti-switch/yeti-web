@@ -36,6 +36,8 @@
 
 //= require vendor/highlight.pack
 //= require highlightjs
+//= require modal_link
+//= require import_apply_unique_fields
 
 
 $(document).ready(function () {

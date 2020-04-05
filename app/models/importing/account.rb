@@ -25,6 +25,7 @@
 #  destination_rate_limit         :decimal(, )
 #  vat                            :decimal(, )
 #  max_call_duration              :integer
+#  is_changed                     :boolean
 #
 
 class Importing::Account < Importing::Base

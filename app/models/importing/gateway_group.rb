@@ -13,6 +13,7 @@
 #  error_string        :string
 #  balancing_mode_id   :integer
 #  balancing_mode_name :string
+#  is_changed          :boolean
 #
 
 class Importing::GatewayGroup < Importing::Base

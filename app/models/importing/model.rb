@@ -16,13 +16,8 @@ class Importing::Model < ActiveAdminImport::Model
   def default_attributes
     super.merge(
       select_all: false,
-      script: nil,
-      unique_columns_values: []
+      script: nil
     )
-  end
-
-  def unique_columns
-    @unique_columns ||= unique_columns_proc.call
   end
 
   def run_script

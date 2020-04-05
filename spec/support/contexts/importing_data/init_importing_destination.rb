@@ -15,7 +15,8 @@ shared_context :init_importing_destination do |args|
       initial_rate: 0.033,
       next_rate: 0.033,
       routing_tag_mode_name: Routing::RoutingTagMode.last.name,
-      routing_tag_mode_id: Routing::RoutingTagMode.last.id
+      routing_tag_mode_id: Routing::RoutingTagMode.last.id,
+      is_changed: true
     }.merge(args)
 
     @importing_destination = FactoryGirl.create(:importing_destination, fields)

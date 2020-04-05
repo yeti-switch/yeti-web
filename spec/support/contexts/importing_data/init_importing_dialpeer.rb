@@ -36,7 +36,8 @@ shared_context :init_importing_dialpeer do |args|
       routing_tag_mode_name: Routing::RoutingTagMode.last.name,
       routing_tag_mode_id: Routing::RoutingTagMode.last.id,
       routeset_discriminator_id: @routeset_discriminator.id,
-      routeset_discriminator_name: @routeset_discriminator.name
+      routeset_discriminator_name: @routeset_discriminator.name,
+      is_changed: true
     }.merge(args)
 
     @importing_dialpeer = FactoryGirl.create(:importing_dialpeer, fields)
