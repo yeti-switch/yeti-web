@@ -110,7 +110,6 @@ group :test do
   gem 'coveralls', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'simplecov', require: false
   gem 'webmock'
 end
 gem 'bootsnap', require: false
