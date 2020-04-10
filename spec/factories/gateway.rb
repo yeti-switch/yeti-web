@@ -106,5 +106,31 @@ FactoryGirl.define do
       incoming_auth_username  nil
       incoming_auth_password  nil
     end
+
+    trait :filled do
+      session_refresh_method { SessionRefreshMethod.take }
+      sdp_alines_filter_type { FilterType.take }
+      orig_disconnect_policy { DisconnectPolicy.take || build(:disconnect_policy) }
+      term_disconnect_policy { DisconnectPolicy.take || build(:disconnect_policy) }
+      diversion_policy { DiversionPolicy.take }
+      sdp_c_location { SdpCLocation.take }
+      sensor
+      sensor_level { System::SensorLevel.take }
+      dtmf_receive_mode { System::DtmfReceiveMode.take }
+      dtmf_send_mode { System::DtmfSendMode.take }
+      radius_accounting_profile { build :accounting_profile }
+      transport_protocol { Equipment::TransportProtocol.take }
+      term_proxy_transport_protocol { Equipment::TransportProtocol.take }
+      rel100_mode { Equipment::GatewayRel100Mode.take }
+      rx_inband_dtmf_filtering_mode { Equipment::GatewayInbandDtmfFilteringMode.take }
+      network_protocol_priority { Equipment::GatewayNetworkProtocolPriority.take }
+      media_encryption_mode { Equipment::GatewayMediaEncryptionMode.take }
+      sip_schema { System::SipSchema.take }
+      termination_dst_numberlist { build :numberlist }
+      lua_script
+      customers_auths { build_list :customers_auth, 2 }
+      quality_stats { build_list :quality_stat, 2 }
+      statistic { build :gateways_stat }
+    end
   end
 end

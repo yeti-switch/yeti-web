@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Nodes', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:node)
-      visit nodes_path
+  it 'n+1 checks' do
+    nodes = create_list(:node, 2, :filled)
+    visit nodes_path
+    nodes.each do |node|
+      expect(page).to have_css('.resource_id_link', text: node.id)
     end
   end
 end

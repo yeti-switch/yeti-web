@@ -37,16 +37,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           :lb_node
         )
       else
-        super.preload(
-          :pop, :node, :customer_auth,
-          :customer, :vendor, :dump_level,
-          :disconnect_initiator, :customer_acc, :vendor_acc,
-          :orig_gw, :term_gw,
-          :rateplan, :routing_plan, :routing_group,
-          :destination, :dialpeer, :destination_rate_policy,
-          :dst_country, :dst_network,
-          :sign_orig_transport_protocol, :auth_orig_transport_protocol, :sign_term_transport_protocol
-        )
+        super.preload(Cdr::Cdr::ADMIN_PRELOAD_LIST)
       end
     end
   end
@@ -212,7 +203,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   show do |cdr|
     panel 'Attempts' do
       unless cdr.attempts.empty?
-        table_for cdr.attempts do
+        table_for cdr.attempts.preload(Cdr::Cdr::ADMIN_PRELOAD_LIST) do
           column(:id) do |cdr|
             link_to cdr.id, resource_path(cdr), class: 'resource_id_link'
           end

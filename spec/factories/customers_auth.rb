@@ -36,5 +36,11 @@ FactoryGirl.define do
     trait :with_reject do
       reject_calls true
     end
+
+    trait :filled do
+      with_incoming_auth
+      with_reject
+      tag_action { Routing::TagAction.take || FactoryGirl.create(:tag_action) }
+    end
   end
 end

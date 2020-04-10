@@ -22,5 +22,9 @@ FactoryGirl.define do
       max_attempts 5
       retry_delay 2
     end
+
+    trait :with_node do
+      association :node
+    end
   end
 end

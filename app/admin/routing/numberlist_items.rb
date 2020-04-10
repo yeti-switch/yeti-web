@@ -30,7 +30,7 @@ ActiveAdmin.register Routing::NumberlistItem do
   acts_as_import resource_class: Importing::NumberlistItem,
                  skip_columns: [:tag_action_value]
 
-  includes :numberlist, :action, :lua_script
+  includes :numberlist, :action, :lua_script, :tag_action
 
   permit_params :numberlist_id,
                 :key, :number_min_length, :number_max_length,

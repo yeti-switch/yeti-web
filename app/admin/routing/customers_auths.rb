@@ -99,7 +99,7 @@ ActiveAdmin.register CustomersAuth do
                 :tag_action_id, :lua_script_id, tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
-  includes :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
+  includes :tag_action, :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
            :lua_script, account: :contractor
 

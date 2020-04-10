@@ -67,7 +67,8 @@ ActiveAdmin.register Account do
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
                 send_invoices_to: [], send_balance_notifications_to: []
 
-  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone
+  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone,
+           :vendor_invoice_template, :customer_invoice_template
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column

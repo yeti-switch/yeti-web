@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register System::Network do
+  includes :network_type
   actions :all
   menu parent: 'System', label: 'Networks', priority: 130
   config.batch_actions = false

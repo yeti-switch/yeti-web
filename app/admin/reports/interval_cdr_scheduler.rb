@@ -8,7 +8,7 @@ ActiveAdmin.register Report::IntervalCdrScheduler, as: 'IntervalCdrScheduler' do
 
   permit_params :period_id, :interval_length, :filter, :aggregator_id, :aggregate_by, group_by: [], send_to: []
 
-  includes :aggregation_function
+  includes :aggregation_function, :period
 
   for_report Report::IntervalCdr
 

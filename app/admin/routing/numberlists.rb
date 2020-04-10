@@ -37,7 +37,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_import resource_class: Importing::Numberlist,
                  skip_columns: [:tag_action_value]
 
-  includes :mode, :default_action, :lua_script
+  includes :mode, :default_action, :lua_script, :tag_action
 
   permit_params :name, :mode_id, :default_action_id,
                 :default_src_rewrite_rule, :default_src_rewrite_result,

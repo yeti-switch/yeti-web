@@ -23,5 +23,10 @@ FactoryGirl.define do
     trait :with_uuid do
       uuid { SecureRandom.uuid }
     end
+
+    trait :filled do
+      with_uuid
+      association :profit_control_mode, factory: :rate_profit_control_mode
+    end
   end
 end

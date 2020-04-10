@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Rateplans', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:rateplan)
-      visit rateplans_path
+  it 'n+1 checks' do
+    reteplans = create_list(:rateplan, 2, :filled)
+    visit rateplans_path
+    reteplans.each do |reteplan|
+      expect(page).to have_css('.resource_id_link', text: reteplan.id)
     end
   end
 end

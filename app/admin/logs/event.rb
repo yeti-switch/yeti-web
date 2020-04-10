@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Event do
+  includes :node
   menu parent: 'Logs', priority: 140
   actions :index, :show
   config.batch_actions = false

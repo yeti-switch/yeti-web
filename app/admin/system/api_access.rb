@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
+  includes :customer
   menu parent: 'System', priority: 3
   config.batch_actions = false
 

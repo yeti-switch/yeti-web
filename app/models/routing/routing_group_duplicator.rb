@@ -19,7 +19,7 @@ class Routing::RoutingGroupDuplicator
           name: name
         )
         src = RoutingGroup.find(id)
-        src.dialpeers.each do |n|
+        src.dialpeers.includes(:dialpeer_next_rates).each do |n|
           x = n.dup
           x.routing_group_id = dst.id
           x.save!

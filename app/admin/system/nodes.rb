@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Node do
+  includes :pop
   menu parent: 'System', priority: 125
   config.batch_actions = false
 

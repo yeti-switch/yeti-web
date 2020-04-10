@@ -14,5 +14,9 @@ FactoryGirl.define do
       account        { _acc }
       contractor     { _acc.contractor }
     end
+
+    trait :filled do
+      state { Billing::InvoiceState.take }
+    end
   end
 end

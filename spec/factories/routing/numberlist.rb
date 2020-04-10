@@ -10,5 +10,9 @@ FactoryGirl.define do
       numberlist.mode ||= Routing::NumberlistMode.create(id: 1, name: 'Strict number match')
       numberlist.default_action ||= Routing::NumberlistAction.create(id: 1, name: 'Reject call')
     end
+
+    trait :filled do
+      tag_action { Routing::TagAction.take }
+    end
   end
 end

@@ -13,5 +13,12 @@ FactoryGirl.define do
         create :customers_auth, rateplan: record
       end
     end
+
+    trait :filled do
+      association :profit_control_mode, factory: :rate_profit_control_mode
+      customers_auths { build_list :customers_auth, 2 }
+      destinations { build_list :destination, 2 }
+      with_uuid
+    end
   end
 end

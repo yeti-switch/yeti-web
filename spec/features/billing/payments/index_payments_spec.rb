@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Payments', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:payment)
-      visit payments_path
+  it 'n+1 checks' do
+    payments = create_list(:payment, 2)
+    visit payments_path
+    payments.each do |payment|
+      expect(page).to have_css('.resource_id_link', text: payment.id)
     end
   end
 end

@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Contractors', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:vendor)
-      visit contractors_path
+  it 'n+1 checks' do
+    vendors = create_list(:vendor, 2)
+    visit contractors_path
+    vendors.each do |vendor|
+      expect(page).to have_css('.resource_id_link', text: vendor.id)
     end
   end
 end

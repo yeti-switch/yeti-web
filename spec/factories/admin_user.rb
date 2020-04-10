@@ -11,5 +11,9 @@ FactoryGirl.define do
         admin.encrypted_password = admin.encrypt_password(admin.password)
       end
     end
+
+    trait :filled do
+      association :billing_contact, factory: :contact
+    end
   end
 end

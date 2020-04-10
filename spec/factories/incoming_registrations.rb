@@ -9,5 +9,9 @@ FactoryGirl.define do
       sequence(:path) { |n| "sip:test.#{n}@domain" }
       user_agent 'Twinkle'
     end
+
+    trait :with_gateway do
+      gateway
+    end
   end
 end
