@@ -29,6 +29,8 @@ script:
     docker-compose run
     -e "PARALLEL_TEST_PROCESSORS=$PARALLEL_TEST_PROCESSORS"
     -e "TEST_GROUP=$TEST_GROUP"
+    -e "TRAVIS_JOB_ID=$TRAVIS_JOB_ID" 
+    -e "TRAVIS_BRANCH=$TRAVIS_BRANCH"
     app-buster make rspec
 
 jobs:
