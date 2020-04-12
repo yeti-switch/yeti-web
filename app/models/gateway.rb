@@ -23,7 +23,7 @@
 #  allow_termination                :boolean          default(TRUE), not null
 #  allow_origination                :boolean          default(TRUE), not null
 #  anonymize_sdp                    :boolean          default(TRUE), not null
-#  proxy_media                      :boolean          default(FALSE), not null
+#  proxy_media                      :boolean          default(TRUE), not null
 #  transparent_seqno                :boolean          default(FALSE), not null
 #  transparent_ssrc                 :boolean          default(FALSE), not null
 #  sst_enabled                      :boolean          default(FALSE)

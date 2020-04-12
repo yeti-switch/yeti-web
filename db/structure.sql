@@ -6621,7 +6621,7 @@ CREATE TABLE class4.gateways (
     allow_termination boolean DEFAULT true NOT NULL,
     allow_origination boolean DEFAULT true NOT NULL,
     anonymize_sdp boolean DEFAULT true NOT NULL,
-    proxy_media boolean DEFAULT false NOT NULL,
+    proxy_media boolean DEFAULT true NOT NULL,
     transparent_seqno boolean DEFAULT false NOT NULL,
     transparent_ssrc boolean DEFAULT false NOT NULL,
     sst_enabled boolean DEFAULT false,
@@ -33011,33 +33011,30 @@ BEGIN
     v_customer_allowtime:=i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE
-    v_customer_allowtime:=i_max_call_length;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
   end IF;
 
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
-  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
-  ELSE
-    v_vendor_allowtime:=i_max_call_length;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration,i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration,i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
     v_vendor_allowtime,
-    v_customer_allowtime,
-    i_max_call_length
+    v_customer_allowtime
   )::integer;
-
-  /* time limiting END */
 
 
   /* number rewriting _After_ routing */
@@ -33606,33 +33603,30 @@ BEGIN
     v_customer_allowtime:=i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE
-    v_customer_allowtime:=i_max_call_length;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
   end IF;
 
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
-  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
-  ELSE
-    v_vendor_allowtime:=i_max_call_length;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration,i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration,i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
     v_vendor_allowtime,
-    v_customer_allowtime,
-    i_max_call_length
+    v_customer_allowtime
   )::integer;
-
-  /* time limiting END */
 
 
   /* number rewriting _After_ routing */
@@ -34193,33 +34187,30 @@ BEGIN
     v_customer_allowtime:=i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE
-    v_customer_allowtime:=i_max_call_length;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
   end IF;
 
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
-  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
-  ELSE
-    v_vendor_allowtime:=i_max_call_length;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration,i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration,i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
     v_vendor_allowtime,
-    v_customer_allowtime,
-    i_max_call_length
+    v_customer_allowtime
   )::integer;
-
-  /* time limiting END */
 
 
   /* number rewriting _After_ routing */
@@ -47076,6 +47067,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20191016183312'),
 ('20191018180427'),
 ('20200105131431'),
-('20200202154005');
+('20200202154005'),
+('20200412135211');
 
 
