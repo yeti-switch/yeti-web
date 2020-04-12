@@ -10,7 +10,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   decorate_with CdrDecorator
 
-  before_action do
+  before_action only: [index] do
     if params['q'].blank?
       from_date = 0.days.ago.beginning_of_day
       params['q'] = { time_start_gteq: from_date } # only 1 last days by default
@@ -165,6 +165,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         rpid_privacy: resource.rpid_privacy_in
       }
     )
+  end
+
+  action_item :lega_rtp_streams, only: :show do
+    link_to('Leg A RTP Streams', rtp_statistics_path(q: { local_tag_equals: resource.local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+  end
+
+  action_item :legb_rtp_streams, only: :show do
+    link_to('Leg B RTP Streams', rtp_statistics_path(q: { local_tag_equals: resource.legb_local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
   end
 
   action_item :routing_simulation, only: :show do
