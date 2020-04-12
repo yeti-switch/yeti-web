@@ -56,7 +56,7 @@ class Importing::Destination < Importing::Base
                               dst_number_min_length dst_number_max_length
                               routing_tag_ids routing_tag_mode_id]
 
-  self.import_class = ::Routing::Destination
+  import_for ::Routing::Destination
 
   def self.after_import_hook
     resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')

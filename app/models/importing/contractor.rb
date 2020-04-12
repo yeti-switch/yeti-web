@@ -27,5 +27,5 @@ class Importing::Contractor < Importing::Base
 
   self.import_attributes = %w[enabled name vendor customer smtp_connection_id]
 
-  self.import_class = ::Contractor
+  import_for ::Contractor
 end

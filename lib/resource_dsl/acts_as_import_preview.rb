@@ -8,6 +8,18 @@ module ResourceDSL
       # actions :all, except: :new
       actions :index, :destroy, :delete
 
+      # All importing models must have decorator inherited from Importing::BaseDecorator.
+      decorate_with "#{config.resource_class}Decorator"
+
+      controller do
+        def scoped_collection
+          # Preload import_object and all associations from import_attributes
+          # because we will have auto_link for all of them.
+          assoc_names = resource_class.import_assoc_keys.map { |key| key.gsub(/_id\z/, '').to_sym }
+          super.preload(:import_object, *assoc_names)
+        end
+      end
+
       scope :all
       scope :success
       scope :with_errors

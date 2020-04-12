@@ -18,8 +18,6 @@ ActiveAdmin.register Importing::Registration do
     end
   end
 
-  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
-
   index do
     selectable_column
     actions
@@ -27,46 +25,19 @@ ActiveAdmin.register Importing::Registration do
     column :error_string
     column :o_id
     column :is_changed
+
     column :name
     column :enabled
-
-    column :pop, sortable: :pop_name do |row|
-      if row.pop.blank?
-        row.pop_name
-      else
-        auto_link(row.pop, row.pop_name)
-      end
-    end
-
-    column :node, sortable: :node_name do |row|
-      if row.node.blank?
-        row.node_name
-      else
-        auto_link(row.node, row.node_name)
-      end
-    end
-
-    column :transport_protocol, sortable: :transport_protocol_name do |row|
-      if row.transport_protocol.blank?
-        row.transport_protocol_name
-      else
-        auto_link(row.transport_protocol, row.transport_protocol_name)
-      end
-    end
-
+    column :pop, sortable: :pop_name
+    column :node, sortable: :node_name
+    column :transport_protocol, sortable: :transport_protocol_name
     column :domain
     column :username
     column :display_username
     column :auth_user
     column :auth_password
     column :proxy
-    column :proxy_transport_protocol, sortable: :proxy_transport_protocol_name do |row|
-      if row.proxy_transport_protocol.blank?
-        row.proxy_transport_protocol_name
-      else
-        auto_link(row.proxy_transport_protocol, row.proxy_transport_protocol_name)
-      end
-    end
+    column :proxy_transport_protocol, sortable: :proxy_transport_protocol_name
     column :contact
     column :expire
     column :force_expire

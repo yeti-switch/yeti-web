@@ -16,8 +16,6 @@ ActiveAdmin.register Importing::Numberlist, as: 'Numberlist Imports' do
     end
   end
 
-  includes :mode, :default_action, :lua_script
-
   index do
     selectable_column
     actions
@@ -35,11 +33,7 @@ ActiveAdmin.register Importing::Numberlist, as: 'Numberlist Imports' do
     column :default_dst_rewrite_rule
     column :default_dst_rewrite_result
     column :tag_action
-    column :tag_action_value do |row|
-      if row.tag_action_value.present?
-        Routing::RoutingTag.where(id: row.tag_action_value).pluck(:name).join(', ')
-      end
-    end
+    column :tag_action_value
     column :lua_script
   end
 end

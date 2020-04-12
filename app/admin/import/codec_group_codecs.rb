@@ -7,12 +7,6 @@ ActiveAdmin.register Importing::CodecGroupCodec do
 
   acts_as_import_preview
 
-  controller do
-    def scoped_collection
-      super.includes(:codec_group, :codec)
-    end
-  end
-
   index do
     selectable_column
     actions
@@ -20,22 +14,9 @@ ActiveAdmin.register Importing::CodecGroupCodec do
     column :error_string
     column :o_id
     column :is_changed
-    column :codec_group, sortable: :codec_group_name do |row|
-      if row.codec_group.blank?
-        row.codec_group_name
-      else
-        auto_link(row.codec_group, row.codec_group_name)
-      end
-    end
 
-    column :codec, sortable: :codec_name do |row|
-      if row.codec.blank?
-        row.codec_name
-      else
-        auto_link(row.codec, row.codec_name)
-      end
-    end
-
+    column :codec_group, sortable: :codec_group_name
+    column :codec, sortable: :codec_name
     column :priority
   end
 end

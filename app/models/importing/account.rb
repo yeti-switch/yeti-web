@@ -49,5 +49,5 @@ class Importing::Account < Importing::Base
     max_call_duration
   ]
 
-  self.import_class = ::Account
+  import_for ::Account
 end

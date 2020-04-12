@@ -22,6 +22,7 @@ ActiveAdmin.register Importing::DisconnectPolicy do
     column :error_string
     column :o_id
     column :is_changed
+
     column :name
   end
 end

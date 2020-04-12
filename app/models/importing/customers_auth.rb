@@ -146,7 +146,7 @@ class Importing::CustomersAuth < Importing::Base
     lua_script_id
   ]
 
-  self.import_class = ::CustomersAuth
+  import_for ::CustomersAuth
 
   def self.after_import_hook
     where(src_prefix: nil).update_all(src_prefix: '')

@@ -71,7 +71,7 @@ class Importing::Dialpeer < Importing::Base
                               valid_from valid_till force_hit_rate
                               dst_number_min_length dst_number_max_length
                               routing_tag_ids routing_tag_mode_id routeset_discriminator_id]
-  self.import_class = ::Dialpeer
+  import_for ::Dialpeer
 
   def self.after_import_hook
     where(asr_limit: nil).update_all(asr_limit: 0)

@@ -24,16 +24,11 @@ ActiveAdmin.register Importing::Contractor do
     column :error_string
     column :o_id
     column :is_changed
+
     column :name
     column :enabled
     column :vendor
     column :customer
-    column :smtp_connection, sortable: :smtp_connection_name do |row|
-      if row.smtp_connection.blank?
-        row.smtp_connection_name
-      else
-        auto_link(row.smtp_connection, row.smtp_connection_name)
-      end
-    end
+    column :smtp_connection, sortable: :smtp_connection_name
   end
 end

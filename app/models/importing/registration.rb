@@ -47,5 +47,5 @@ class Importing::Registration < Importing::Base
                               expire force_expire retry_delay max_attempts
                               transport_protocol_id proxy_transport_protocol_id]
 
-  self.import_class = ::Equipment::Registration
+  import_for ::Equipment::Registration
 end

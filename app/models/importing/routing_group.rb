@@ -21,5 +21,5 @@ class Importing::RoutingGroup < Importing::Base
   belongs_to :sorting, class_name: '::Sorting'
 
   self.import_attributes = ['name']
-  self.import_class = ::RoutingGroup
+  import_for ::RoutingGroup
 end
