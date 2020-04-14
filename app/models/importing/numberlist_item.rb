@@ -36,7 +36,7 @@ class Importing::NumberlistItem < Importing::Base
   belongs_to :tag_action, class_name: 'Routing::TagAction'
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
-  self.import_class = ::Routing::NumberlistItem
+  import_for ::Routing::NumberlistItem
 
   self.import_attributes = %w[numberlist_id
                               key number_min_length number_max_length

@@ -34,7 +34,7 @@ class Importing::Numberlist < Importing::Base
   belongs_to :tag_action, class_name: 'Routing::TagAction'
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
-  self.import_class = ::Routing::Numberlist
+  import_for ::Routing::Numberlist
 
   self.import_attributes = %w[name mode_id default_action_id
                               default_src_rewrite_rule default_src_rewrite_result

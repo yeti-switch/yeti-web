@@ -24,5 +24,5 @@ class Importing::CodecGroupCodec < Importing::Base
 
   self.import_attributes = %w[codec_group_id codec_id priority]
 
-  self.import_class = ::CodecGroupCodec
+  import_for ::CodecGroupCodec
 end

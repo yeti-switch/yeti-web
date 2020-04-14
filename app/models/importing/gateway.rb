@@ -232,5 +232,5 @@ class Importing::Gateway < Importing::Base
     use_registered_aor
   ]
 
-  self.import_class = ::Gateway
+  import_for ::Gateway
 end

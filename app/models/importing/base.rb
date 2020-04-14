@@ -31,6 +31,22 @@ class Importing::Base < Yeti::ActiveRecord
     where.not(is_changed: nil)
   end
 
+  # @param klass [Class<ActiveRecord::Base>]
+  def self.import_for(klass)
+    self.import_class = klass
+
+    # Association will represent record that will be replaced by importing record.
+    belongs_to :import_object, class_name: "::#{klass.name}", foreign_key: :o_id, optional: true
+  end
+
+  def self.import_assoc_keys
+    attrs = import_attributes || []
+    attrs.select do |attr|
+      attr = attr.to_s
+      attr.end_with?('_id') && reflect_on_association(attr.gsub(/_id\z/, ''))
+    end
+  end
+
   class_attribute :import_attributes, :import_class
 
   ALLOWED_OPTIONS_KEYS = %i[controller_info max_jobs_count job_number action].freeze

@@ -29,5 +29,5 @@ class Importing::GatewayGroup < Importing::Base
     balancing_mode_id
   ]
 
-  self.import_class = ::GatewayGroup
+  import_for ::GatewayGroup
 end

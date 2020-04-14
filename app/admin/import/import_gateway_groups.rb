@@ -14,10 +14,6 @@ ActiveAdmin.register Importing::GatewayGroup do
 
       [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
-
-    def scoped_collection
-      super.includes(:vendor, :balancing_mode)
-    end
   end
 
   index do
@@ -27,23 +23,8 @@ ActiveAdmin.register Importing::GatewayGroup do
     column :error_string
     column :o_id
     column :is_changed
-
-    column :vendor, sortable: :vendor_name do |row|
-      if row.vendor.blank?
-        row.vendor_name
-      else
-        auto_link(row.vendor, row.vendor_name)
-      end
-    end
-
+    column :vendor, sortable: :vendor_name
     column :name
-
-    column :balancing_mode, sortable: :balancing_mode_name do |row|
-      if row.balancing_mode.blank?
-        row.balancing_mode_name
-      else
-        auto_link(row.balancing_mode, row.balancing_mode_name)
-      end
-    end
+    column :balancing_mode, sortable: :balancing_mode_name
   end
 end

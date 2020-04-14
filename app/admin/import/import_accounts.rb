@@ -14,10 +14,6 @@ ActiveAdmin.register Importing::Account do
 
       [params[active_admin_config.resource_class.model_name.param_key.to_sym].permit!]
     end
-
-    def scoped_collection
-      super.includes(:contractor)
-    end
   end
 
   index do
@@ -27,14 +23,8 @@ ActiveAdmin.register Importing::Account do
     column :error_string
     column :o_id
     column :is_changed
-    column :contractor, sortable: :contractor_name do |row|
-      if row.contractor.blank?
-        row.contractor_name
-      else
-        auto_link(row.contractor, row.contractor_name)
-      end
-    end
 
+    column :contractor, sortable: :contractor_name
     column :name
     column :balance
     column :vat
@@ -43,7 +33,6 @@ ActiveAdmin.register Importing::Account do
     column :balance_low_threshold
     column :balance_high_threshold
     column :destination_rate_limit
-
     column :origination_capacity
     column :termination_capacity
     column :total_capacity

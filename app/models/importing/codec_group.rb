@@ -17,5 +17,5 @@ class Importing::CodecGroup < Importing::Base
 
   self.import_attributes = ['name']
 
-  self.import_class = ::CodecGroup
+  import_for ::CodecGroup
 end
