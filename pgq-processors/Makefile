@@ -23,7 +23,8 @@ bundler:
 .PHONY: gems
 gems: bundler
 	$(info:msg=Install/Update gems)
-	$(bundle_bin) install --jobs=4 --deployment --binstubs
+	$(bundle_bin) config set deployment 'true'
+	$(bundle_bin) install --jobs=4 --binstubs
 
 .PHONY: test
 test: gems
