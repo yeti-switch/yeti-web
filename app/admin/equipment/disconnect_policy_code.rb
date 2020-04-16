@@ -21,10 +21,10 @@ ActiveAdmin.register DisconnectPolicyCode do
     column :code
 
     column('Stop hunting', sortable: 'stop_hunting') do |r|
-      status_tag(r.stop_hunting.to_s, r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
+      status_tag(r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
     end
     column('Pass reason to originator', sortable: 'pass_reason_to_originator') do |r|
-      status_tag(r.pass_reason_to_originator.to_s, r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
+      status_tag(r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
     end
     column :rewrited_code
     column :rewrited_reason
@@ -42,10 +42,10 @@ ActiveAdmin.register DisconnectPolicyCode do
       row :policy
       row :code
       row('Stop hunting') do |r|
-        status_tag(r.stop_hunting.to_s, r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
+        status_tag(r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
       end
       row('Pass reason to originator') do |r|
-        status_tag(r.pass_reason_to_originator.to_s, r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
+        status_tag(r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
       end
       row :rewrited_code
       row :rewrited_reason
