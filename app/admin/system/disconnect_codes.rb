@@ -22,26 +22,26 @@ ActiveAdmin.register DisconnectCode do
     column :reason
 
     column('Success', sortable: 'success') do |r|
-      status_tag(r.success.to_s, r.success.to_s, class: r.success? ? :ok : :red)
+      status_tag(r.success.to_s, class: r.success? ? :ok : :red)
     end
 
     column('Success when non-zero length', sortable: 'successnozerolen') do |r|
-      status_tag(r.successnozerolen.to_s, r.successnozerolen.to_s, class: r.successnozerolen? ? :ok : :red)
+      status_tag(r.successnozerolen.to_s, class: r.successnozerolen? ? :ok : :red)
     end
 
     column('Stop hunting', sortable: 'stop_hunting') do |r|
-      status_tag(r.stop_hunting.to_s, r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
+      status_tag(r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
     end
     column('Pass reason to originator', sortable: 'pass_reason_to_originator') do |r|
-      status_tag(r.pass_reason_to_originator.to_s, r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
+      status_tag(r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
     end
     column :rewrited_code
     column :rewrited_reason
     column('Store CDR', sortable: 'store_cdr') do |r|
-      status_tag(r.store_cdr.to_s, r.store_cdr.to_s, class: r.store_cdr? ? :ok : :red)
+      status_tag(r.store_cdr.to_s, class: r.store_cdr? ? :ok : :red)
     end
     column('Silenly drop', sortable: 'silently_drop') do |r|
-      status_tag(r.silently_drop.to_s, r.silently_drop.to_s, class: r.silently_drop? ? :ok : :red)
+      status_tag(r.silently_drop.to_s, class: r.silently_drop? ? :ok : :red)
     end
   end
 
@@ -59,25 +59,25 @@ ActiveAdmin.register DisconnectCode do
       row :code
       row :reason
       row('Success') do |r|
-        status_tag(r.success.to_s, r.success.to_s, class: r.success? ? :ok : :red)
+        status_tag(r.success.to_s, class: r.success? ? :ok : :red)
       end
       row('Success when non-zero length') do |r|
-        status_tag(r.successnozerolen.to_s, r.successnozerolen.to_s, class: r.successnozerolen? ? :ok : :red)
+        status_tag(r.successnozerolen.to_s, class: r.successnozerolen? ? :ok : :red)
       end
 
       row('Stop hunting') do |r|
-        status_tag(r.stop_hunting.to_s, r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
+        status_tag(r.stop_hunting.to_s, class: r.stop_hunting? ? :ok : :red)
       end
       row('Pass reason to originator') do |r|
-        status_tag(r.pass_reason_to_originator.to_s, r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
+        status_tag(r.pass_reason_to_originator.to_s, class: r.pass_reason_to_originator? ? :ok : :red)
       end
       row :rewrited_code
       row :rewrited_reason
       row('Store CDR') do |r|
-        status_tag(r.store_cdr.to_s, r.store_cdr.to_s, class: r.store_cdr? ? :ok : :red)
+        status_tag(r.store_cdr.to_s, class: r.store_cdr? ? :ok : :red)
       end
       row('Silenly drop') do |r|
-        status_tag(r.silently_drop.to_s, r.silently_drop.to_s, class: r.silently_drop? ? :ok : :red)
+        status_tag(r.silently_drop.to_s, class: r.silently_drop? ? :ok : :red)
       end
     end
   end
