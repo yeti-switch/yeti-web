@@ -71,6 +71,9 @@ class Cdr::RtpStatistic < Cdr::Base
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
 
+  scope :no_rx, -> { where rx_packets: 0 }
+  scope :no_tx, -> { where tx_packets: 0 }
+
   def display_name
     id.to_s
   end

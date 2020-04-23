@@ -7,9 +7,21 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   config.batch_actions = false
   config.sort_order = 'id_desc'
 
+  before_action only: [:index] do
+    if params['q'].blank?
+      from_date = 0.days.ago.beginning_of_day
+      params['q'] = { time_start_gteq: from_date } # only 1 last days by default
+      flash.now[:notice] = "Only RTP streams started from #{from_date}  showed by default"
+    end
+  end
+
   def scoped_collection
     super.preload(:pop, :node, :gateway)
   end
+
+  scope :all, show_count: false
+  scope :no_rx, show_count: false
+  scope :no_tx, show_count: false
 
   index do
     id_column
@@ -74,11 +86,21 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   end
 
   filter :id
+  filter :time_start, as: :date_time_range
+  filter :time_end, as: :date_time_range
   filter :local_tag
   filter :pop
   filter :node
   filter :gateway
   filter :gateway_external_id
+  filter :remote_host
+  filter :remote_port
+  filter :local_host
+  filter :local_port
+  filter :rx_packets
+  filter :rx_bytes
+  filter :tx_packets
+  filter :rx_bytes
 
   show do
     attributes_table do
