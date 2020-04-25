@@ -34909,17 +34909,18 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         end if;
 
         v_ret.resources:='';
-        if v_c_acc.origination_capacity is not null then
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-        end if;
-
-        if v_c_acc.total_capacity is not null then
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-        end if;
-
         if v_customer_auth_normalized.capacity is not null then
           v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
@@ -35998,17 +35999,18 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         end if;
 
         v_ret.resources:='';
-        if v_c_acc.origination_capacity is not null then
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-        end if;
-
-        if v_c_acc.total_capacity is not null then
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-        end if;
-
         if v_customer_auth_normalized.capacity is not null then
           v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
@@ -37059,17 +37061,18 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         end if;
 
         v_ret.resources:='';
-        if v_c_acc.origination_capacity is not null then
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-        end if;
-
-        if v_c_acc.total_capacity is not null then
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-        end if;
-
         if v_customer_auth_normalized.capacity is not null then
           v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
@@ -47068,6 +47071,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20191018180427'),
 ('20200105131431'),
 ('20200202154005'),
-('20200412135211');
+('20200412135211'),
+('20200425110642');
 
 

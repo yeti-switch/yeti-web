@@ -10,7 +10,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   decorate_with CdrDecorator
 
-  before_action do
+  before_action only: [:index] do
     if params['q'].blank?
       from_date = 0.days.ago.beginning_of_day
       params['q'] = { time_start_gteq: from_date } # only 1 last days by default
