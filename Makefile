@@ -105,14 +105,19 @@ bundler:
 .PHONY: gems
 gems: bundler
 	$(info:msg=Install/Update gems)
-	$(bundle_bin) install --jobs=4 --deployment --without development test
+	$(bundle_bin) config --delete with
+	$(bundle_bin) config set without 'development test'
+	$(bundle_bin) config set deployment 'true'
+	$(bundle_bin) install --jobs=4
 	$(bundle_bin) clean
 
 
 .PHONY: gems-test
 gems-test: bundler
 	$(info:msg=Install/Update gems for tests)
-	$(bundle_bin) install --jobs=4 --deployment --with development test
+	$(bundle_bin) config set with 'development test'
+	$(bundle_bin) config set deployment 'true'
+	$(bundle_bin) install --jobs=4
 	$(bundle_bin) clean
 	$(bundle_bin) binstubs rspec-core
 
