@@ -59,12 +59,12 @@ describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :request do
             'from-time': Time.parse('2019-01-01 00:00:00').iso8601(3),
             'to-time': Time.parse('2019-01-02 00:00:00').iso8601(3),
             'originated-calls': [
-              { x: 10, y: Time.parse('2019-01-01 00:00:01').utc.to_s(:db) },
-              { x: 17, y: Time.parse('2019-01-01 15:15:00').utc.to_s(:db) }
+              { y: 10, x: Time.parse('2019-01-01 00:00:01').utc.to_s(:db) },
+              { y: 17, x: Time.parse('2019-01-01 15:15:00').utc.to_s(:db) }
             ],
             'terminated-calls': [
-              { x: 15, y: Time.parse('2019-01-01 00:00:01').utc.to_s(:db) },
-              { x: 13, y: Time.parse('2019-01-01 15:15:00').utc.to_s(:db) }
+              { y: 15, x: Time.parse('2019-01-01 00:00:01').utc.to_s(:db) },
+              { y: 13, x: Time.parse('2019-01-01 15:15:00').utc.to_s(:db) }
             ]
           }
         end

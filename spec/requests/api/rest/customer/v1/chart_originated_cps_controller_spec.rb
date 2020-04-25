@@ -75,8 +75,8 @@ describe Api::Rest::Customer::V1::ChartOriginatedCpsController, type: :request d
             'from-time': Time.parse('2019-01-01 00:00:00').iso8601(3),
             'to-time': Time.parse('2019-01-02 00:00:00').iso8601(3),
             'cps': [
-              { x: '0.1', y: Time.parse('2019-01-01 00:00:00').utc.to_s(:db) },
-              { x: '0.2', y: Time.parse('2019-01-01 23:59:00').utc.to_s(:db) }
+              { y: '0.1', x: Time.parse('2019-01-01 00:00:00').utc.to_s(:db) },
+              { y: '0.2', x: Time.parse('2019-01-01 23:59:00').utc.to_s(:db) }
             ]
           }
         end
