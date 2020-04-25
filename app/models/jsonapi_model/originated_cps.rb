@@ -31,7 +31,7 @@ module JsonapiModel
       values = scope.pluck(TIME_START_SQL, CPS_SQL)
 
       @cps = values.map do |(time_start, cps)|
-        { x: cps, y: time_start.to_s(:db) }
+        { y: cps, x: time_start.to_s(:db) }
       end
     end
 

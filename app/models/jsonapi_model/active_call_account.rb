@@ -22,6 +22,7 @@ module JsonapiModel
       scope = Stats::ActiveCallAccount
               .where(account_id: account.id)
               .where('created_at BETWEEN ? AND ?', from_time, to_time)
+              .order('created_at')
 
       values = scope.pluck(:created_at, :terminated_count, :originated_count)
 
@@ -30,8 +31,8 @@ module JsonapiModel
 
       values.each do |(created_at, terminated_count, originated_count)|
         created_at_formatted = created_at.to_s(:db)
-        originated_calls.push(x: originated_count, y: created_at_formatted)
-        terminated_calls.push(x: terminated_count, y: created_at_formatted)
+        originated_calls.push(y: originated_count, x: created_at_formatted)
+        terminated_calls.push(y: terminated_count, x: created_at_formatted)
       end
     end
 
