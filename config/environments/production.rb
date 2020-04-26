@@ -82,7 +82,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Use a different logger for distributed setups.
-  config.logger = Logger::Syslog.new('YETI-admin', Syslog::LOG_LOCAL7)
+  config.logger = ActiveSupport::TaggedLogging.new(Logger::Syslog.new('yeti-web', Syslog::LOG_LOCAL7))
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

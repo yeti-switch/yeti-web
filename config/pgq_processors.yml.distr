@@ -3,7 +3,7 @@ cdr_billing:
   class: cdr_billing
   queue: cdr_billing
   consumer: cdr_billing
-  syslog_program_name: "YETI-cdr-billing"
+  syslog_program_name: "yeti-cdr-billing"
   mail_to: "bug-report@yeti-switch.org"
   mail_from: "yeti-cdr-billing@example.com"
   mail_subject: "Exception happened in CDR billing"
@@ -13,7 +13,7 @@ cdr_http:
   class: cdr_http
   queue: cdr_billing
   consumer: cdr_billing
-  syslog_program_name: "YETI-cdr-billing"
+  syslog_program_name: "yeti-cdr-billing"
   mail_to: "bug-report@yeti-switch.org"
   mail_from: "yeti-cdr-billing@example.com"
   mail_subject: "Exception happened in CDR http"
@@ -33,7 +33,7 @@ cdr_amqp:
   class: cdr_amqp
   queue: cdr_streaming
   consumer: cdr_amqp
-  syslog_program_name: "YETI-cdr-billing"
+  syslog_program_name: "yeti-cdr-billing"
   mail_to: "bug-report@yeti-switch.org"
   mail_from: "yeti-cdr-billing@example.com"
   mail_subject: "Exception happened in CDR AMQP"
