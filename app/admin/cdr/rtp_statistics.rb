@@ -10,10 +10,10 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   acts_as_export :id,
                  :time_start,
                  :time_end,
-                 [:gateway_name, proc {|row| row.gateway.try(:name)}],
+                 [:gateway_name, proc { |row| row.gateway.try(:name) }],
                  :gateway_external_id,
-                 [:node_name, proc {|row| row.node.try(:name)}],
-                 [:pop_name, proc {|row| row.pop.try(:name)}],
+                 [:node_name, proc { |row| row.node.try(:name) }],
+                 [:pop_name, proc { |row| row.pop.try(:name) }],
                  :local_tag,
                  :rtcp_rtt_min,
                  :rtcp_rtt_max,
@@ -58,7 +58,6 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
                  :tx_rtcp_jitter_max,
                  :tx_rtcp_jitter_mean,
                  :tx_rtcp_jitter_std
-
 
   before_action only: [:index] do
     if params['q'].blank?

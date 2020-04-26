@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 describe 'CDR Partitions index', type: :feature do
-
   include_context :login_as_admin
 
   before do
@@ -12,10 +11,7 @@ describe 'CDR Partitions index', type: :feature do
     Cdr::AuthLog.add_partition_for(1.minute.ago)
   end
 
-  #after { Cdr::Cdr.destroy_all }
-
   it 'CDR Partitions is not crashing' do
     visit cdr_partitions_path
   end
-
 end
