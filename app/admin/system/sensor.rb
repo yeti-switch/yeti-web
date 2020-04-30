@@ -2,7 +2,7 @@
 
 ActiveAdmin.register System::Sensor do
   # actions :index, :show
-  menu parent: 'System', label: 'Sensors', priority: 140
+  menu parent: %w[System Components], label: 'Sensors', priority: 50
   config.batch_actions = false
 
   permit_params :name, :mode_id, :source_interface, :target_mac, :source_ip,

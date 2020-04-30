@@ -2,7 +2,7 @@
 
 ActiveAdmin.register System::LnpResolver do
   actions :all
-  menu parent: 'System', label: 'LNP resolvers', priority: 130
+  menu parent: %w[System Components], label: 'LNP resolvers', priority: 40
   config.batch_actions = false
   permit_params :name, :address, :port
 

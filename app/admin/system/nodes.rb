@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Node do
   includes :pop
-  menu parent: 'System', priority: 125
+  menu parent: %w[System Components], priotity: 30
   config.batch_actions = false
 
   acts_as_clone
