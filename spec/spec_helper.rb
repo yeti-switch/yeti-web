@@ -120,6 +120,14 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with :truncation
   end
 
+  config.before(:suite) do
+    # Create partition for current+next monthes if not exists
+    Cdr::Cdr.add_partitions
+    Cdr::AuthLog.add_partitions
+    Cdr::RtpStatistic.add_partitions
+    Log::ApiLog.add_partitions
+  end
+
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
     allow(Raven).to receive(:send_event).with(a_kind_of(Hash))
