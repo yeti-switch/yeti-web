@@ -111,7 +111,7 @@ describe System::Sensor do
         end
 
         it 'rise error' do
-          expect { subject }.to raise_error
+          expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
         end
       end
     end
