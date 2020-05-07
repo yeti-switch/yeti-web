@@ -7,5 +7,9 @@ FactoryGirl.define do
     port '25'
     from_address 'address@email.com'
     global true
+
+    trait :filled do
+      contractors { build_list :customer, 2 }
+    end
   end
 end

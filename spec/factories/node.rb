@@ -8,5 +8,9 @@ FactoryGirl.define do
     sequence(:rpc_endpoint) { |n| "127.0.0.1:#{1 + n}" }
 
     association :pop, factory: :pop
+
+    trait :filled do
+      registrations { build_list :registration, 2 }
+    end
   end
 end

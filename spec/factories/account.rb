@@ -22,5 +22,18 @@ FactoryGirl.define do
     trait :with_uuid do
       uuid { SecureRandom.uuid }
     end
+
+    trait :filled do
+      association :vendor_invoice_template, factory: :invoice_template
+      association :customer_invoice_template, factory: :invoice_template
+      customer_invoice_period { Billing::InvoicePeriod.find(Billing::InvoicePeriod::DAILY_ID) }
+      contractor { build(:contractor, vendor: true) }
+      timezone { System::Timezone.take || build(:timezone) }
+      payments { build_list :payment, 2 }
+      invoices { build_list :invoice, 2, :manual, :filled }
+      api_access { build_list :api_access, 2 }
+      customers_auths { build_list :customers_auth, 2 }
+      dialpeers { build_list :dialpeer, 2 }
+    end
   end
 end

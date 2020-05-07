@@ -26,7 +26,7 @@ ActiveAdmin.register Routing::RoutingPlan do
 
   permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts, routing_group_ids: []
 
-  includes :sorting
+  includes :sorting, :routing_groups
 
   filter :id
   filter :name

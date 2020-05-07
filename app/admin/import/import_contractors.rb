@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Importing::Contractor do
+  includes :smtp_connection
   filter :name
   boolean_filter :enabled
   boolean_filter :vendor

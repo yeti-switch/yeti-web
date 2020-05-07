@@ -8,5 +8,9 @@ FactoryGirl.define do
     secret 'secret'
     timeout 100
     attempts 2
+
+    trait :filled do
+      customers_auths { build_list :customers_auth, 2 }
+    end
   end
 end

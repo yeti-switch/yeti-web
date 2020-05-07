@@ -8,5 +8,9 @@ FactoryGirl.define do
     target_mac nil
     source_ip '192.168.0.1'
     target_ip '192.168.0.2'
+
+    trait :filled do
+      gateways { build_list :gateway, 2 }
+    end
   end
 end

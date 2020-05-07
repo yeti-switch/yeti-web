@@ -67,8 +67,10 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
     end
   end
 
-  def scoped_collection
-    super.preload(:pop, :node, :gateway)
+  controller do
+    def scoped_collection
+      super.preload(:pop, :node, :gateway)
+    end
   end
 
   scope :all, show_count: false

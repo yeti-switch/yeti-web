@@ -6,5 +6,12 @@ FactoryGirl.define do
     domain 'localhost'
     username 'user name'
     contact 'sip:user@domain'
+
+    trait :filled do
+      node
+      pop
+      transport_protocol { Equipment::TransportProtocol.take }
+      proxy_transport_protocol { Equipment::TransportProtocol.take }
+    end
   end
 end

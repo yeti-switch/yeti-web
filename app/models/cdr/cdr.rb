@@ -151,6 +151,15 @@ class Cdr::Cdr < Cdr::Base
   self.table_name = 'cdr.cdr'
   self.primary_key = :id
 
+  ADMIN_PRELOAD_LIST = %i[
+    dialpeer routing_group destination disconnect_initiator
+    auth_orig_transport_protocol sign_orig_transport_protocol
+    dst_network destination_rate_policy routing_plan vendor
+    term_gw orig_gw customer_auth vendor_acc customer_acc
+    dst_area customer rateplan pop src_area lnp_database
+    dump_level dst_country node sign_term_transport_protocol
+  ].freeze
+
   include Partitionable
   self.pg_partition_name = 'PgPartition::Cdr'
 

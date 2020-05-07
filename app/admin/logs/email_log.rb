@@ -5,7 +5,11 @@ ActiveAdmin.register Log::EmailLog do
   actions :index, :show
   config.batch_actions = false
 
-  includes :contact, :smtp_connection
+  controller do
+    def scoped_collection
+      super.preload(:smtp_connection, contact: %i[contractor admin_user])
+    end
+  end
 
   member_action :export, method: :get do
     att = resource.getfile(params[:attachment])
@@ -35,7 +39,7 @@ ActiveAdmin.register Log::EmailLog do
 
   filter :id
   filter :batch_id
-  filter :contact, input_html: { class: 'chosen' }
+  filter :contact, collection: proc { Billing::Contact.includes(:contractor, :admin_user) }, input_html: { class: 'chosen' }
   filter :smtp_connection, input_html: { class: 'chosen' }
   filter :mail_to
 

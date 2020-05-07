@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Invoice templates', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:invoice_template)
-      visit invoice_templates_path
+  it 'n+1 checks' do
+    invoice_templates = create_list(:invoice_template, 2)
+    visit invoice_templates_path
+    invoice_templates.each do |itp|
+      expect(page).to have_css('.resource_id_link', text: itp.id)
     end
   end
 end

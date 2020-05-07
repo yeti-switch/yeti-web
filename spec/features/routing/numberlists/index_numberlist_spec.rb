@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Numberlists', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:numberlist)
-      visit numberlists_path
+  it 'n+1 checks' do
+    numberlists = create_list(:numberlist, 2, :filled)
+    visit numberlists_path
+    numberlists.each do |numberlist|
+      expect(page).to have_css('.resource_id_link', text: numberlist.id)
     end
   end
 end

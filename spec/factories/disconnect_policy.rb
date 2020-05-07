@@ -11,5 +11,9 @@
 FactoryGirl.define do
   factory :disconnect_policy, class: DisconnectPolicy do
     sequence(:name) { |n| "disconnect_policy#{n}" }
+
+    trait :filled do
+      gateways { build_list :gateway, 2 }
+    end
   end
 end

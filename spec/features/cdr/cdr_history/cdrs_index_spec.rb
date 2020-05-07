@@ -6,7 +6,10 @@ describe 'CDRs index', type: :feature do
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 
-  before { Cdr::Cdr.destroy_all }
+  before do
+    Cdr::Cdr.destroy_all
+    create(:lnp_database, :thinq)
+  end
   after { Cdr::Cdr.destroy_all }
 
   let!(:cdr_no_tags) do

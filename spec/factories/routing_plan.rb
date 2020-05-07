@@ -11,5 +11,10 @@ FactoryGirl.define do
     trait :with_static_routes do
       sorting_id { FactoryGirl.create(:sorting, use_static_routes: true).id }
     end
+
+    trait :filled do
+      customers_auths { build_list :customers_auth, 2 }
+      routing_groups { build_list :routing_group, 2 }
+    end
   end
 end

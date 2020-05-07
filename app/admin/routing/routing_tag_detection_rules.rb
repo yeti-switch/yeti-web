@@ -23,7 +23,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
                 :tag_action_id, :routing_tag_mode_id, tag_action_value: [],
                                                       routing_tag_ids: []
 
-  includes :src_area, :dst_area, :tag_action
+  includes :src_area, :dst_area, :tag_action, :routing_tag_mode
 
   controller do
     def update

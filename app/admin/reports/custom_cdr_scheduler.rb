@@ -12,7 +12,11 @@ ActiveAdmin.register Report::CustomCdrScheduler, as: 'CustomCdrScheduler' do
                 send_to: [],
                 group_by: []
 
-  includes :period
+  controller do
+    def scoped_collection
+      super.preload(:period, :customer)
+    end
+  end
 
   for_report Report::CustomCdr
 

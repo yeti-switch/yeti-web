@@ -35,6 +35,19 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
 
+  if Bullet.enable?
+    # bullet false positive with HABTM association
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: 'Routing::RoutingPlan::HABTM_RoutingGroups', association: :routing_group
+    config.before(:each, type: :feature) do
+      Bullet.start_request
+    end
+
+    config.after(:each, type: :feature) do
+      Bullet.perform_out_of_channel_notifications if Bullet.notification?
+      Bullet.end_request
+    end
+  end
+
   config.global_fixtures = [
     :pops,
     :nodes,

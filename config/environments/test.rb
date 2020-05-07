@@ -47,4 +47,16 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.active_job.queue_adapter = :test
+
+  config.after_initialize do
+    Bullet.enable = true
+    # Detect unnecessary COUNT queries which could be avoided
+    # with a counter_cache
+    Bullet.counter_cache_enable = false
+    # Detect eager-loaded associations which are not used
+    Bullet.unused_eager_loading_enable = false
+    Bullet.n_plus_one_query_enable = true
+    Bullet.bullet_logger = true
+    Bullet.raise = true
+  end
 end

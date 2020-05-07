@@ -5,10 +5,11 @@ require 'spec_helper'
 describe 'Index Routing Groups', type: :feature do
   include_context :login_as_admin
 
-  include_examples :test_index_table_exist do
-    before do
-      @item = create(:routing_group)
-      visit routing_groups_path
+  it 'n+1 checks' do
+    routing_groups = create_list(:routing_group, 2, :with_dialpeers)
+    visit routing_groups_path
+    routing_groups.each do |routing_group|
+      expect(page).to have_css('.resource_id_link', text: routing_group.id)
     end
   end
 end

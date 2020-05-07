@@ -8,11 +8,13 @@ describe 'Index Destinations', type: :feature, js: true do
   end
 
   include_context :login_as_admin
-  let!(:records) { create_list(:destination, 2) }
+  let!(:destinations) { create_list(:destination, 2, :filled) }
 
-  it 'has record' do
+  it 'n+1 checks' do
     subject
-    expect(page).to have_css('.resource_id_link', text: records.first.id)
+    destinations.each do |destination|
+      expect(page).to have_css('.resource_id_link', text: destination.id)
+    end
   end
 
   context 'when filter by country and network' do

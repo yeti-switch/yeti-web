@@ -6,5 +6,9 @@ FactoryGirl.define do
 
     association :numberlist
     association :lua_script
+
+    trait :filled do
+      tag_action { Routing::TagAction.take }
+    end
   end
 end

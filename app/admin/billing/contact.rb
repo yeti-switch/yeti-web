@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Billing::Contact do
+  includes :contractor, :admin_user
   menu parent: 'Billing', priority: 3, label: 'Contacts'
 
   acts_as_safe_destroy
