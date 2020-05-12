@@ -52,6 +52,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :bad_routing, show_count: false
 
   filter :id
+  filter :routing_tag_ids_include, as: :select, collection: proc { Routing::RoutingTag.all }, label: 'With routing tag'
   filter :time_start, as: :date_time_range
   filter :customer, collection: proc { Contractor.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
   filter :vendor, collection: proc { Contractor.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }

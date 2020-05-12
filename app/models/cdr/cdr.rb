@@ -194,6 +194,9 @@ class Cdr::Cdr < Cdr::Base
 
   scope :success, -> { where success: true }
   scope :failure, -> { where success: false }
+  scope :routing_tag_ids_include, lambda { |id|
+    where('? = ANY(routing_tag_ids)', id)
+  }
 
   ##### metasearch override filters ##########
 
@@ -327,6 +330,7 @@ class Cdr::Cdr < Cdr::Base
       disconnect_code_eq
       status_eq
       account_id_eq
+      routing_tag_ids_include
     ]
   end
 end
