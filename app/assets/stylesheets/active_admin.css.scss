@@ -23,6 +23,13 @@
 @import "active_admin/components/active_admin_scoped_collection_actions";
 @import "vendor/highlightjs/default";
 
+// Override style from active_admin_theme gem (app/assets/stylesheets/wigu/active_admin_theme.scss:99)
+#wrapper #header ul.tabs li.has_nested ul {
+  li.current > a::before, li:hover > a::before {
+    background: transparent url($menu-arrow-dark-icon-url) no-repeat 0 0;
+  }
+}
+
 fieldset.inputs {
   input.date-time-picker {
     width: 286px;
