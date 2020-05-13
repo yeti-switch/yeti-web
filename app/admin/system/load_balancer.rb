@@ -2,7 +2,7 @@
 
 ActiveAdmin.register System::LoadBalancer do
   actions :all
-  menu parent: 'System', label: 'Load balancers', priority: 124
+  menu parent: %w[System Components], label: 'Load balancers', priority: 20
   config.batch_actions = false
 
   permit_params :name, :signalling_ip
