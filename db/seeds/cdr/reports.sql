@@ -77,14 +77,14 @@ SELECT pg_catalog.setval('cdr_custom_report_schedulers_id_seq', 1, false);
 --
 -- TOC entry 2573 (class 0 OID 22149)
 -- Dependencies: 240
--- Data for Name: cdr_interval_report_aggrerator; Type: TABLE DATA; Schema: reports; Owner: yeti
+-- Data for Name: cdr_interval_report_aggregator; Type: TABLE DATA; Schema: reports; Owner: yeti
 --
 
-INSERT INTO cdr_interval_report_aggrerator VALUES (1, 'Sum');
-INSERT INTO cdr_interval_report_aggrerator VALUES (2, 'Count');
-INSERT INTO cdr_interval_report_aggrerator VALUES (3, 'Avg');
-INSERT INTO cdr_interval_report_aggrerator VALUES (4, 'Max');
-INSERT INTO cdr_interval_report_aggrerator VALUES (5, 'Min');
+INSERT INTO cdr_interval_report_aggregator VALUES (1, 'Sum');
+INSERT INTO cdr_interval_report_aggregator VALUES (2, 'Count');
+INSERT INTO cdr_interval_report_aggregator VALUES (3, 'Avg');
+INSERT INTO cdr_interval_report_aggregator VALUES (4, 'Max');
+INSERT INTO cdr_interval_report_aggregator VALUES (5, 'Min');
 
 
 --

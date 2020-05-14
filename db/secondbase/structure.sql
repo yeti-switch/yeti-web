@@ -867,7 +867,7 @@ BEGIN
         from reports.cdr_interval_report where id=i_id;
 
     /* build aggregation function */
-    select into v_agg "name"||'('||i_agg_by||')' from reports.cdr_interval_report_aggrerator where id=i_agg_id;
+    select into v_agg "name"||'('||i_agg_by||')' from reports.cdr_interval_report_aggregator where id=i_agg_id;
     IF NOT FOUND or v_agg is null THEN
         RAISE exception 'reports.cdr_interval_report: can`t build aggregate function';
     end if;
@@ -4820,10 +4820,10 @@ CREATE TABLE reports.cdr_interval_report (
 
 
 --
--- Name: cdr_interval_report_aggrerator; Type: TABLE; Schema: reports; Owner: -
+-- Name: cdr_interval_report_aggregator; Type: TABLE; Schema: reports; Owner: -
 --
 
-CREATE TABLE reports.cdr_interval_report_aggrerator (
+CREATE TABLE reports.cdr_interval_report_aggregator (
     id integer NOT NULL,
     name character varying NOT NULL
 );
@@ -6193,19 +6193,19 @@ ALTER TABLE ONLY reports.cdr_custom_report_schedulers
 
 
 --
--- Name: cdr_interval_report_aggrerator cdr_interval_report_aggrerator_name_key; Type: CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_interval_report_aggregator cdr_interval_report_aggregator_name_key; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
-    ADD CONSTRAINT cdr_interval_report_aggrerator_name_key UNIQUE (name);
+ALTER TABLE ONLY reports.cdr_interval_report_aggregator
+    ADD CONSTRAINT cdr_interval_report_aggregator_name_key UNIQUE (name);
 
 
 --
--- Name: cdr_interval_report_aggrerator cdr_interval_report_aggrerator_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
+-- Name: cdr_interval_report_aggregator cdr_interval_report_aggregator_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
-ALTER TABLE ONLY reports.cdr_interval_report_aggrerator
-    ADD CONSTRAINT cdr_interval_report_aggrerator_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY reports.cdr_interval_report_aggregator
+    ADD CONSTRAINT cdr_interval_report_aggregator_pkey PRIMARY KEY (id);
 
 
 --
@@ -6665,7 +6665,7 @@ ALTER TABLE ONLY reports.cdr_custom_report_schedulers
 --
 
 ALTER TABLE ONLY reports.cdr_interval_report
-    ADD CONSTRAINT cdr_interval_report_aggregator_id_fkey FOREIGN KEY (aggregator_id) REFERENCES reports.cdr_interval_report_aggrerator(id);
+    ADD CONSTRAINT cdr_interval_report_aggregator_id_fkey FOREIGN KEY (aggregator_id) REFERENCES reports.cdr_interval_report_aggregator(id);
 
 
 --
@@ -6780,6 +6780,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200120195529'),
 ('20200120200605'),
 ('20200220113109'),
-('20200221080918');
+('20200221080918'),
+('20200514153523');
 
 
