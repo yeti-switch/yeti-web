@@ -77,22 +77,29 @@ ActiveAdmin.register Routing::NumberlistItem do
   end
 
   show do |_s|
-    attributes_table do
-      row :id
-      row :numberlist
-      row :key
-      row :number_min_length
-      row :number_max_length
-      row :action
-      row :src_rewrite_rule
-      row :src_rewrite_result
-      row :dst_rewrite_rule
-      row :dst_rewrite_result
-      row :tag_action
-      row :display_tag_action_value
-      row :lua_script
-      row :created_at
-      row :updated_at
+    tabs do
+      tab :general do
+        attributes_table do
+          row :id
+          row :numberlist
+          row :key
+          row :number_min_length
+          row :number_max_length
+          row :action
+          row :src_rewrite_rule
+          row :src_rewrite_result
+          row :dst_rewrite_rule
+          row :dst_rewrite_result
+          row :tag_action
+          row :display_tag_action_value
+          row :lua_script
+          row :created_at
+          row :updated_at
+        end
+      end
+      tab :comments do
+        active_admin_comments
+      end
     end
   end
 
