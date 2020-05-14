@@ -12,16 +12,20 @@ class RealtimeData::OutgoingRegistration < YetiResource
   attribute :expires
   attribute :expires_left
   attribute :node_id, :integer
+  attribute :pop_id, :integer
   attribute :last_error_code
   attribute :last_error_initiator
   attribute :last_error_reason
   attribute :last_request_time
   attribute :last_succ_reg_time
+  attribute :last_reply_contacts
+  attribute :last_request_contact
   attribute :attempt
   attribute :max_attempts
   attribute :retry_delay
 
   has_one :node, class_name: 'Node', foreign_key: :node_id
+  has_one :pop, class_name: 'Pop', foreign_key: :pop_id
 
   class << self
     def human_attributes(only = nil)
