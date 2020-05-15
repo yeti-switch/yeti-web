@@ -17,7 +17,7 @@ ActiveAdmin.register_page 'Info' do
         end
         panel 'Build info' do
           data = {
-            ui_version: Yeti::Application.config.app_build_info.fetch('version', 'unknown'),
+            ui_version: Rails.application.config.app_build_info.fetch('version', 'unknown'),
             routing_version: Yeti::ActiveRecord::DB_VER,
             cdr_version: Cdr::Base::DB_VER,
             ruby: "#{RUBY_VERSION}/#{RUBY_PLATFORM}/#{RUBY_RELEASE_DATE}",
