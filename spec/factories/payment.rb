@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment, class: Payment do
-    amount 10
+    amount { 10 }
     association :account
-    notes 'notes text'
+    notes { 'notes text' }
   end
 end

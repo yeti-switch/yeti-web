@@ -8,23 +8,23 @@
 #  name :string           not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :invoice_type, class: Billing::InvoiceType do
     uniq_name
 
     trait :manual do
-      id Billing::InvoiceType::MANUAL
-      name Billing::InvoiceType::NAMES[Billing::InvoiceType::MANUAL]
+      id { Billing::InvoiceType::MANUAL }
+      name { Billing::InvoiceType::NAMES[Billing::InvoiceType::MANUAL] }
     end
 
     trait :auto_full do
-      id Billing::InvoiceType::AUTO_FULL
-      name Billing::InvoiceType::NAMES[Billing::InvoiceType::AUTO_FULL]
+      id { Billing::InvoiceType::AUTO_FULL }
+      name { Billing::InvoiceType::NAMES[Billing::InvoiceType::AUTO_FULL] }
     end
 
     trait :auto_partial do
-      id Billing::InvoiceType::AUTO_PARTIAL
-      name Billing::InvoiceType::NAMES[Billing::InvoiceType::AUTO_PARTIAL]
+      id { Billing::InvoiceType::AUTO_PARTIAL }
+      name { Billing::InvoiceType::NAMES[Billing::InvoiceType::AUTO_PARTIAL] }
     end
 
     trait :uniq_name do

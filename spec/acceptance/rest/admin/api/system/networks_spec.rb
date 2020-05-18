@@ -19,8 +19,8 @@ resource 'Networks' do
     jsonapi_filters Api::Rest::Admin::System::NetworkResource._allowed_filters
 
     before do
-      FactoryGirl.create(:network, name: 'US')
-      FactoryGirl.create(:network, name: 'CA')
+      FactoryBot.create(:network, name: 'US')
+      FactoryBot.create(:network, name: 'CA')
     end
 
     example_request 'get listing' do
@@ -29,7 +29,7 @@ resource 'Networks' do
   end
 
   get '/api/rest/admin/system/networks/:id' do
-    let(:id) { FactoryGirl.create(:network, name: 'US').id }
+    let(:id) { FactoryBot.create(:network, name: 'US').id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
@@ -71,7 +71,7 @@ resource 'Networks' do
   end
 
   delete '/api/rest/admin/system/networks/:id' do
-    let(:id) { FactoryGirl.create(:network, name: 'US').id }
+    let(:id) { FactoryBot.create(:network, name: 'US').id }
 
     example_request 'delete entry' do
       expect(status).to eq(204)

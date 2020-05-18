@@ -9,13 +9,13 @@ RSpec.shared_examples 'Event originator for all Nodes' do
 
   context '#create' do
     include_examples 'test events sender' do
-      let(:action) { FactoryGirl.create(object_name, object_fields) }
+      let(:action) { FactoryBot.create(object_name, object_fields) }
     end
   end
 
   context 'when record exists' do
     let!(:obj_originator) do
-      FactoryGirl.create(object_name, object_fields)
+      FactoryBot.create(object_name, object_fields)
     end
 
     context '#update' do

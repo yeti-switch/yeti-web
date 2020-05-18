@@ -8,19 +8,19 @@
 #  name :string           not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :invoice_state, class: Billing::InvoiceState do
-    id 1
-    name 'Pending'
+    id { 1 }
+    name { 'Pending' }
 
     trait :pending do
-      id Billing::InvoiceState::PENDING
-      name 'Pending'
+      id { Billing::InvoiceState::PENDING }
+      name { 'Pending' }
     end
 
     trait :approved do
-      id Billing::InvoiceState::APPROVED
-      name 'Approved'
+      id { Billing::InvoiceState::APPROVED }
+      name { 'Approved' }
     end
   end
 end

@@ -40,6 +40,6 @@ shared_context :init_importing_dialpeer do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_dialpeer = FactoryGirl.create(:importing_dialpeer, fields)
+    @importing_dialpeer = FactoryBot.create(:importing_dialpeer, fields)
   end
 end

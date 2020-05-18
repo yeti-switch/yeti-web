@@ -11,6 +11,6 @@ shared_context :init_importing_account do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_account = FactoryGirl.create(:importing_account, fields)
+    @importing_account = FactoryBot.create(:importing_account, fields)
   end
 end

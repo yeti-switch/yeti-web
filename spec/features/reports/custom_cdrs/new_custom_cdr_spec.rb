@@ -9,9 +9,9 @@ describe 'Create new Custom Cdr', type: :feature, js: true do
 
   active_admin_form_for Report::CustomCdr, 'new'
   include_context :login_as_admin
-  let!(:smtp_connection) { FactoryGirl.create(:smtp_connection) }
-  let!(:customer) { FactoryGirl.create(:customer) }
-  let!(:contact) { FactoryGirl.create(:contact, contractor: customer) }
+  let!(:smtp_connection) { FactoryBot.create(:smtp_connection) }
+  let!(:customer) { FactoryBot.create(:customer) }
+  let!(:contact) { FactoryBot.create(:contact, contractor: customer) }
 
   before do
     visit new_custom_cdr_path

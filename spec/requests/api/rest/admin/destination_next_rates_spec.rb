@@ -4,8 +4,8 @@ require 'spec_helper'
 
 RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request do
   include_context :json_api_admin_helpers, type: :'destination-next-rates'
-  let!(:rate_plan) { FactoryGirl.create(:rateplan) }
-  let!(:destination) { FactoryGirl.create(:destination, rateplan: rate_plan) }
+  let!(:rate_plan) { FactoryBot.create(:rateplan) }
+  let!(:destination) { FactoryBot.create(:destination, rateplan: rate_plan) }
 
   describe 'GET /api/rest/admin/destination-next-rates' do
     subject do
@@ -13,7 +13,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
     end
 
     let!(:next_rates) do
-      FactoryGirl.create_list(:destination_next_rate, 3, destination: destination)
+      FactoryBot.create_list(:destination_next_rate, 3, destination: destination)
     end
 
     include_examples :returns_json_api_collection do
@@ -32,7 +32,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
     let(:request_query) { nil }
     let(:record_id) { next_rate.id.to_s }
 
-    let!(:next_rate) { FactoryGirl.create(:destination_next_rate, next_rate_attrs) }
+    let!(:next_rate) { FactoryBot.create(:destination_next_rate, next_rate_attrs) }
     let(:next_rate_attrs) { { destination: destination } }
     let(:next_rate_response_attributes) do
       {
@@ -133,7 +133,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
     end
     let(:json_api_request_attributes) { { 'next-rate': '15.22' } }
 
-    let!(:next_rate) { FactoryGirl.create(:destination_next_rate, next_rate_attrs) }
+    let!(:next_rate) { FactoryBot.create(:destination_next_rate, next_rate_attrs) }
     let(:next_rate_attrs) { { destination: destination } }
 
     include_examples :returns_json_api_record, relationships: [:destination] do
@@ -153,7 +153,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
     let(:request_query) { nil }
     let(:record_id) { next_rate.id.to_s }
 
-    let!(:next_rate) { FactoryGirl.create(:destination_next_rate, next_rate_attrs) }
+    let!(:next_rate) { FactoryBot.create(:destination_next_rate, next_rate_attrs) }
     let(:next_rate_attrs) { { destination: destination } }
 
     include_examples :responds_with_status, 204

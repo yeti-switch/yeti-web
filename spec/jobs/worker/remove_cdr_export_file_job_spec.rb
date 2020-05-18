@@ -8,7 +8,7 @@ RSpec.describe Worker::RemoveCdrExportFileJob, type: :job do
   end
 
   let(:cdr_export) do
-    FactoryGirl.create(:cdr_export, :completed)
+    FactoryBot.create(:cdr_export, :completed)
   end
 
   let(:delete_url) do

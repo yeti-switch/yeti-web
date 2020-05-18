@@ -13,5 +13,5 @@ RSpec.shared_context :json_api_admin_helpers do |type: nil|
     }
   end
 
-  let!(:admin_user) { FactoryGirl.create(:admin_user) }
+  let!(:admin_user) { FactoryBot.create(:admin_user) }
 end

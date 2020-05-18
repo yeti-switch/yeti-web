@@ -56,10 +56,10 @@ RSpec.describe PartitionModel::Log do
     let(:logs_qty) { 5 }
 
     before do
-      FactoryGirl.create_list :api_log, logs_qty, created_at: Time.parse('2018-12-02 12:00:00')
+      FactoryBot.create_list :api_log, logs_qty, created_at: Time.parse('2018-12-02 12:00:00')
     end
     let!(:another_logs) do
-      FactoryGirl.create_list :api_log, 3, created_at: Time.parse('2019-01-15 12:00:00')
+      FactoryBot.create_list :api_log, 3, created_at: Time.parse('2019-01-15 12:00:00')
     end
     let!(:record) do
       record_id = Digest::MD5.hexdigest('logs.api_requests_2018_12_02')

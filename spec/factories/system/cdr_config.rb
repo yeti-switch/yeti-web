@@ -12,7 +12,7 @@
 #  vendor_amount_round_precision   :integer          default(5), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :cdr_config, class: System::CdrConfig do
     sequence(:id) { |n| n }
 

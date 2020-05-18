@@ -26,6 +26,6 @@ shared_context :init_customers_auth do |args|
       diversion_rewrite_result: ''
     }.merge(args)
 
-    @customers_auth = FactoryGirl.create(:customers_auth, fields)
+    @customers_auth = FactoryBot.create(:customers_auth, fields)
   end
 end

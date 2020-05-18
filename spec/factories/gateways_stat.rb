@@ -18,14 +18,14 @@
 #  unlocked_at    :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :gateways_stat, class: GatewaysStat do
     gateway
-    created_at Time.now.utc
-    updated_at 1.hour.ago.utc
-    calls 6
-    calls_success 5
-    calls_fail 1
-    total_duration 200
+    created_at { Time.now.utc }
+    updated_at { 1.hour.ago.utc }
+    calls { 6 }
+    calls_success { 5 }
+    calls_fail { 1 }
+    total_duration { 200 }
   end
 end

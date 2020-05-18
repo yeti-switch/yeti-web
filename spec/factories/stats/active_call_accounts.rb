@@ -11,9 +11,9 @@
 #  created_at       :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :active_call_account, class: Stats::ActiveCallAccount do
-    terminated_count 0
-    originated_count 0
+    terminated_count { 0 }
+    originated_count { 0 }
   end
 end

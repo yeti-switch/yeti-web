@@ -6,6 +6,6 @@ shared_context :init_importing_numberlist do |args|
   before do
     fields = { is_changed: true }.merge(args)
 
-    @importing_numberlist = FactoryGirl.create(:importing_numberlist, fields)
+    @importing_numberlist = FactoryBot.create(:importing_numberlist, fields)
   end
 end

@@ -18,6 +18,6 @@ shared_context :init_registration do |args|
       force_expire: false
     }.merge(args)
 
-    @registration = FactoryGirl.create(:registration, fields)
+    @registration = FactoryBot.create(:registration, fields)
   end
 end

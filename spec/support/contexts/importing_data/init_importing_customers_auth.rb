@@ -33,6 +33,6 @@ shared_context :init_importing_customers_auth do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_customers_auth = FactoryGirl.create(:importing_customers_auth, fields)
+    @importing_customers_auth = FactoryBot.create(:importing_customers_auth, fields)
   end
 end

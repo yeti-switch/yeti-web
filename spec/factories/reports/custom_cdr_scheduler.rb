@@ -15,10 +15,10 @@
 #  customer_id :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :custom_cdr_scheduler, class: Report::CustomCdrScheduler do
     period { Report::SchedulerPeriod.take || build(:period_scheduler) }
-    group_by %w[customer_id rateplan_id]
+    group_by { %w[customer_id rateplan_id] }
 
     trait :filled do
       customer

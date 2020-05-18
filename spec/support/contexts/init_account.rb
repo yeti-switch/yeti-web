@@ -9,6 +9,6 @@ shared_context :init_account do |args|
       contractor_id: @contractor.id
     }.merge(args)
 
-    @account = FactoryGirl.create(:account, fields)
+    @account = FactoryBot.create(:account, fields)
   end
 end

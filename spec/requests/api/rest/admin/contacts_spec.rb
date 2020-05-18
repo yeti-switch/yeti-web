@@ -11,7 +11,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     end
 
     let!(:contacts) do
-      FactoryGirl.create_list(:contact, 2) # only Contact with contractor
+      FactoryBot.create_list(:contact, 2) # only Contact with contractor
     end
 
     include_examples :returns_json_api_collection do
@@ -30,7 +30,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:request_query) { nil }
     let(:record_id) { contact.id.to_s }
 
-    let!(:contact) { FactoryGirl.create(:contact, contact_attrs) }
+    let!(:contact) { FactoryBot.create(:contact, contact_attrs) }
     let(:contractor) { contact.contractor }
     let(:contact_attrs) { { email: 'some@mail.com', notes: 'Text here...' } }
     let(:contact_response_attributes) do
@@ -64,7 +64,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
     end
 
-    let(:contractor) { FactoryGirl.create(:customer) }
+    let(:contractor) { FactoryBot.create(:customer) }
 
     let(:json_api_request_body) do
       {
@@ -113,7 +113,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     end
     let(:json_api_request_attributes) { { 'email': 'another@mail,com' } }
 
-    let!(:contact) { FactoryGirl.create(:contact) }
+    let!(:contact) { FactoryBot.create(:contact) }
 
     include_examples :returns_json_api_record, relationships: [:contractor] do
       let(:json_api_record_id) { contact.id.to_s }
@@ -132,7 +132,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:request_query) { nil }
     let(:record_id) { contact.id.to_s }
 
-    let!(:contact) { FactoryGirl.create(:contact) }
+    let!(:contact) { FactoryBot.create(:contact) }
 
     include_examples :responds_with_status, 204
     include_examples :changes_records_qty_of, Billing::Contact, by: -1

@@ -11,10 +11,10 @@
 #  running              :boolean           default(TRUE), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :job, class: BaseJob do
     sequence(:type) { |n| "CdrPartitioning #{n}" }
-    description nil
-    running false
+    description { nil }
+    running { false }
   end
 end

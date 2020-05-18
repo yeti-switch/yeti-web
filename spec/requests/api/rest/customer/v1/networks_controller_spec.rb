@@ -14,8 +14,8 @@ describe Api::Rest::Customer::V1::NetworksController, type: :request do
 
     let!(:networks) do
       [
-        FactoryGirl.create(:network, name: 'US').reload,
-        FactoryGirl.create(:network, name: 'Canada').reload
+        FactoryBot.create(:network, name: 'US').reload,
+        FactoryBot.create(:network, name: 'Canada').reload
       ]
     end
 
@@ -34,7 +34,7 @@ describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network.uuid }
 
-    let!(:network) { FactoryGirl.create(:network, name: 'US').reload }
+    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
 
     it_behaves_like :json_api_check_authorization
 
@@ -68,7 +68,7 @@ describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network) { FactoryGirl.create(:network, name: 'US').reload }
+    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -83,7 +83,7 @@ describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network) { FactoryGirl.create(:network, name: 'US').reload }
+    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -96,7 +96,7 @@ describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network.uuid }
 
-    let!(:network) { FactoryGirl.create(:network, name: 'US').reload }
+    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end

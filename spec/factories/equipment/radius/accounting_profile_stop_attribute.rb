@@ -15,13 +15,13 @@
 #  vsa_vendor_type :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :accounting_profile_stop_attribute, class: Equipment::Radius::AccountingProfileStopAttribute do
     association :profile, factory: :accounting_profile
-    type_id 1
+    type_id { 1 }
     sequence(:name) { |n| "accounting_profile_stop_#{n}" }
-    value 'value'
-    format 'string'
-    is_vsa false
+    value { 'value' }
+    format { 'string' }
+    is_vsa { false }
   end
 end

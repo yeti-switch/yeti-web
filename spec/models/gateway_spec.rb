@@ -208,8 +208,8 @@ describe Gateway, type: :model do
       described_class.create(create_params)
     end
 
-    let!(:vendor) { FactoryGirl.create(:vendor) }
-    let!(:codec_group) { FactoryGirl.create(:codec_group) }
+    let!(:vendor) { FactoryBot.create(:vendor) }
+    let!(:codec_group) { FactoryBot.create(:codec_group) }
 
     let(:create_params) do
       {
@@ -239,7 +239,7 @@ describe Gateway, type: :model do
       record.update(update_params)
     end
 
-    let!(:record) { FactoryGirl.create(:gateway, record_attrs) }
+    let!(:record) { FactoryBot.create(:gateway, record_attrs) }
     let(:record_attrs) { { enabled: false } }
 
     context 'without incoming_auth' do
@@ -326,7 +326,7 @@ describe Gateway, type: :model do
       record.destroy
     end
 
-    let!(:record) { FactoryGirl.create(:gateway, record_attrs) }
+    let!(:record) { FactoryBot.create(:gateway, record_attrs) }
     let(:record_attrs) { { enabled: false } }
 
     context 'without incoming_auth' do

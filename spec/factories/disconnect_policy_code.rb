@@ -13,7 +13,7 @@
 #  rewrited_reason           :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :disconnect_policy_code, class: DisconnectPolicyCode do
     policy { DisconnectPolicy.take || create(:disconnect_policy) }
     code { DisconnectCode.take || create(:disconnect_code, namespace_id: DisconnectCode::NS_SIP) }

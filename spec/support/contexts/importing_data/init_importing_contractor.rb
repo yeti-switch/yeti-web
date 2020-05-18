@@ -10,6 +10,6 @@ shared_context :init_importing_contractor do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_contractor = FactoryGirl.create(:importing_contractor, fields)
+    @importing_contractor = FactoryBot.create(:importing_contractor, fields)
   end
 end

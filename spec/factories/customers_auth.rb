@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :customers_auth, class: CustomersAuth do
     sequence(:name) { |n| "customers_auth_#{n}" }
-    diversion_policy_id 1
-    dump_level_id 1
+    diversion_policy_id { 1 }
+    dump_level_id { 1 }
 
     association :customer, factory: :contractor, customer: true
     association :rateplan
@@ -14,33 +14,33 @@ FactoryGirl.define do
     association :lua_script
 
     # ip { ['127.0.0.0/8'] } # default
-    src_rewrite_rule nil
-    src_rewrite_result nil
-    dst_rewrite_rule nil
-    dst_rewrite_result nil
-    pop_id nil
-    src_name_rewrite_rule nil
-    src_name_rewrite_result nil
-    diversion_rewrite_rule nil
-    diversion_rewrite_result nil
-    dst_numberlist_id nil
-    src_numberlist_id nil
-    allow_receive_rate_limit false
-    send_billing_information false
+    src_rewrite_rule { nil }
+    src_rewrite_result { nil }
+    dst_rewrite_rule { nil }
+    dst_rewrite_result { nil }
+    pop_id { nil }
+    src_name_rewrite_rule { nil }
+    src_name_rewrite_result { nil }
+    diversion_rewrite_rule { nil }
+    diversion_rewrite_result { nil }
+    dst_numberlist_id { nil }
+    src_numberlist_id { nil }
+    allow_receive_rate_limit { false }
+    send_billing_information { false }
 
     trait :with_incoming_auth do
       association :gateway, factory: %i[gateway with_incoming_auth]
-      require_incoming_auth true
+      require_incoming_auth { true }
     end
 
     trait :with_reject do
-      reject_calls true
+      reject_calls { true }
     end
 
     trait :filled do
       with_incoming_auth
       with_reject
-      tag_action { Routing::TagAction.take || FactoryGirl.create(:tag_action) }
+      tag_action { Routing::TagAction.take || FactoryBot.create(:tag_action) }
     end
   end
 end

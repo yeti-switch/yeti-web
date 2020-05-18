@@ -10,7 +10,7 @@ describe 'Create new Billing Contact', type: :feature, js: true do
   include_context :login_as_admin
   active_admin_form_for Billing::Contact, 'new'
 
-  let!(:contractor) { FactoryGirl.create(:customer) }
+  let!(:contractor) { FactoryBot.create(:customer) }
 
   before do
     visit new_billing_contact_path

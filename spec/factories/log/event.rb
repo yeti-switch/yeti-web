@@ -13,12 +13,12 @@
 #  last_error :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event, class: Event do
-    command 'reload_registrations'
-    retries 5
+    command { 'reload_registrations' }
+    retries { 5 }
     node
-    created_at Time.now.utc
+    created_at { Time.now.utc }
 
     trait :uniq_command do
       sequence(:command) { |n| "reload_registrations_#{n}" }

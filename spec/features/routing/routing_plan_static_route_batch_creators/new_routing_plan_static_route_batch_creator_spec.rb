@@ -10,13 +10,13 @@ describe 'Create new Routing Plan Static Route Batch Creator', type: :feature, j
   active_admin_form_for Routing::RoutingPlanStaticRouteBatchCreator, 'new'
   include_context :login_as_admin
 
-  let!(:vendor_1) { FactoryGirl.create(:vendor) }
-  let!(:vendor_2) { FactoryGirl.create(:vendor) }
-  let!(:routing_plan) { FactoryGirl.create(:routing_plan, :with_static_routes) }
+  let!(:vendor_1) { FactoryBot.create(:vendor) }
+  let!(:vendor_2) { FactoryBot.create(:vendor) }
+  let!(:routing_plan) { FactoryBot.create(:routing_plan, :with_static_routes) }
   before do
-    FactoryGirl.create(:routing_plan)
-    FactoryGirl.create(:routing_plan, :with_static_routes)
-    FactoryGirl.create(:vendor)
+    FactoryBot.create(:routing_plan)
+    FactoryBot.create(:routing_plan, :with_static_routes)
+    FactoryBot.create(:vendor)
 
     visit new_routing_routing_plan_static_route_batch_creator_path
 

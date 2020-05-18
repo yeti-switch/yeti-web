@@ -11,6 +11,6 @@ shared_context :init_importing_gateway_group do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_gateway_group = FactoryGirl.create(:importing_gateway_group, fields)
+    @importing_gateway_group = FactoryBot.create(:importing_gateway_group, fields)
   end
 end

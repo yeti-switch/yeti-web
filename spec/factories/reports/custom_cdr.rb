@@ -13,12 +13,12 @@
 #  customer_id :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :custom_cdr, class: Report::CustomCdr do
-    date_start Time.now.utc
-    date_end Time.now.utc + 1.week
-    filter ''
-    group_by_fields %w[customer_id rateplan_id]
+    date_start { Time.now.utc }
+    date_end { Time.now.utc + 1.week }
+    filter { '' }
+    group_by_fields { %w[customer_id rateplan_id] }
     association :customer, factory: :customer
   end
 end

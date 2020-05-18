@@ -9,6 +9,6 @@ shared_context :init_importing_disconnect_policy do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_disconnect_policy = FactoryGirl.create(:importing_disconnect_policy, fields)
+    @importing_disconnect_policy = FactoryBot.create(:importing_disconnect_policy, fields)
   end
 end

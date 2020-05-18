@@ -9,6 +9,6 @@ shared_context :init_importing_rateplan do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_rateplan = FactoryGirl.create(:importing_rateplan, fields)
+    @importing_rateplan = FactoryBot.create(:importing_rateplan, fields)
   end
 end

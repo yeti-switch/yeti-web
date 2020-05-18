@@ -10,7 +10,7 @@ describe 'Create new Numberlist Item', type: :feature, js: true do
   active_admin_form_for Routing::NumberlistItem, 'new'
   include_context :login_as_admin
 
-  let!(:numberlist) { FactoryGirl.create(:numberlist) }
+  let!(:numberlist) { FactoryBot.create(:numberlist) }
   before do
     visit new_routing_numberlist_item_path
 

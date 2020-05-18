@@ -10,7 +10,7 @@ describe 'Create new Routing Group Duplicator', type: :feature, js: true do
   active_admin_form_for Routing::RoutingGroupDuplicator, 'new'
   include_context :login_as_admin
 
-  let!(:routing_group) { FactoryGirl.create(:routing_group) }
+  let!(:routing_group) { FactoryBot.create(:routing_group) }
   before do
     visit new_routing_routing_group_duplicator_path(from: routing_group.id)
 

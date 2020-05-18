@@ -10,9 +10,9 @@ describe 'Create new Area Prefix', type: :feature, js: true do
   active_admin_form_for Routing::AreaPrefix, 'new'
   include_context :login_as_admin
 
-  let!(:area) { FactoryGirl.create(:area) }
+  let!(:area) { FactoryBot.create(:area) }
   before do
-    FactoryGirl.create(:area)
+    FactoryBot.create(:area)
     visit new_routing_area_prefix_path
 
     aa_form.select_value 'Area', area.name

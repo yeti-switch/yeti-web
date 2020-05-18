@@ -10,11 +10,11 @@ describe 'Create new Routing Plan Lnp Rule', type: :feature, js: true do
   active_admin_form_for Lnp::RoutingPlanLnpRule, 'new'
   include_context :login_as_admin
 
-  let!(:routing_plan) { FactoryGirl.create(:routing_plan) }
-  let!(:lnp_database) { FactoryGirl.create(:lnp_database, :thinq) }
+  let!(:routing_plan) { FactoryBot.create(:routing_plan) }
+  let!(:lnp_database) { FactoryBot.create(:lnp_database, :thinq) }
   before do
-    FactoryGirl.create(:routing_plan)
-    FactoryGirl.create(:lnp_database, :thinq)
+    FactoryBot.create(:routing_plan)
+    FactoryBot.create(:lnp_database, :thinq)
     visit new_lnp_routing_plan_lnp_rule_path
 
     aa_form.select_value 'Routing plan', routing_plan.name

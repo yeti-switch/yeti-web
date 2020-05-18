@@ -18,13 +18,13 @@
 #  attachment_id      :integer          is an Array
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :email_log, class: Log::EmailLog do
-    sent_at Time.now.utc
+    sent_at { Time.now.utc }
     contact
     smtp_connection
-    mail_to 'demo@demo.ua'
-    mail_from 'demo@admin.ua'
-    subject 'Check email'
+    mail_to { 'demo@demo.ua' }
+    mail_from { 'demo@admin.ua' }
+    subject { 'Check email' }
   end
 end

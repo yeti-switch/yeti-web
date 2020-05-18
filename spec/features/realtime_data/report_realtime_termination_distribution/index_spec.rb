@@ -5,10 +5,10 @@ require 'spec_helper'
 describe 'Report Realtime Termination Distribution', type: :feature do
   include_context :login_as_admin
 
-  let!(:vendor) { FactoryGirl.create(:vendor) }
+  let!(:vendor) { FactoryBot.create(:vendor) }
   before do
     Cdr::Cdr.destroy_all
-    FactoryGirl.create_list(:cdr, 5, vendor: vendor)
+    FactoryBot.create_list(:cdr, 5, vendor: vendor)
     visit report_realtime_termination_distributions_path(q: { time_interval_eq: 1.day })
   end
 

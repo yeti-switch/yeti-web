@@ -5,8 +5,8 @@ require 'spec_helper'
 describe 'Index Incoming Registrations', type: :feature do
   include_context :login_as_admin
 
-  let!(:node) { FactoryGirl.create(:node) }
-  let(:record_attributes) { FactoryGirl.attributes_for(:incoming_registration, :filled) }
+  let!(:node) { FactoryBot.create(:node) }
+  let(:record_attributes) { FactoryBot.attributes_for(:incoming_registration, :filled) }
   before do
     stub_jrpc_request('show.aors', node.rpc_endpoint).and_return([record_attributes.stringify_keys])
     allow(Node).to receive(:all).and_return([node])

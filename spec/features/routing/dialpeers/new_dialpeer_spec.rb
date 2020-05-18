@@ -10,19 +10,19 @@ describe 'Create new Dialpeer', type: :feature, js: true do
   active_admin_form_for Dialpeer, 'new'
   include_context :login_as_admin
 
-  let!(:vendor) { FactoryGirl.create(:vendor, name: 'John Doe') }
-  let!(:account) { FactoryGirl.create(:account, contractor: vendor) }
-  let!(:routing_group) { FactoryGirl.create(:routing_group) }
-  let!(:routeset_discriminator) { FactoryGirl.create(:routeset_discriminator) }
-  let!(:gateway) { FactoryGirl.create(:gateway, contractor: vendor) }
+  let!(:vendor) { FactoryBot.create(:vendor, name: 'John Doe') }
+  let!(:account) { FactoryBot.create(:account, contractor: vendor) }
+  let!(:routing_group) { FactoryBot.create(:routing_group) }
+  let!(:routeset_discriminator) { FactoryBot.create(:routeset_discriminator) }
+  let!(:gateway) { FactoryBot.create(:gateway, contractor: vendor) }
   before do
-    FactoryGirl.create(:routing_group)
-    FactoryGirl.create(:routeset_discriminator)
-    vendor_2 = FactoryGirl.create(:vendor)
-    FactoryGirl.create(:account, contractor: vendor_2)
-    FactoryGirl.create(:gateway, contractor: vendor_2)
-    FactoryGirl.create(:account, contractor: vendor)
-    FactoryGirl.create(:gateway, contractor: vendor)
+    FactoryBot.create(:routing_group)
+    FactoryBot.create(:routeset_discriminator)
+    vendor_2 = FactoryBot.create(:vendor)
+    FactoryBot.create(:account, contractor: vendor_2)
+    FactoryBot.create(:gateway, contractor: vendor_2)
+    FactoryBot.create(:account, contractor: vendor)
+    FactoryBot.create(:gateway, contractor: vendor)
 
     visit new_dialpeer_path
 

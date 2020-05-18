@@ -8,6 +8,6 @@ shared_context :init_rateplan do |args|
       name: 'TEST-RP'
     }.merge(args)
 
-    @rateplan = FactoryGirl.create(:rateplan, fields)
+    @rateplan = FactoryBot.create(:rateplan, fields)
   end
 end

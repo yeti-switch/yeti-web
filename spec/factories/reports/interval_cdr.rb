@@ -15,12 +15,12 @@
 #  aggregate_by    :string           not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :interval_cdr, class: Report::IntervalCdr do
-    date_start Time.now.utc
-    date_end Time.now.utc + 1.week
-    interval_length 10
+    date_start { Time.now.utc }
+    date_end { Time.now.utc + 1.week }
+    interval_length { 10 }
     aggregator_id { Report::IntervalAggregator.take.id }
-    aggregate_by 'destination_fee'
+    aggregate_by { 'destination_fee' }
   end
 end

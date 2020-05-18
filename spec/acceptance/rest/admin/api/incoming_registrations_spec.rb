@@ -12,7 +12,7 @@ resource 'IncomingRegistrations' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'incoming-registrations' }
 
-  before { FactoryGirl.create(:node) }
+  before { FactoryBot.create(:node) }
   include_context :incoming_registrations_stub_helpers
 
   get '/api/rest/admin/incoming-registrations' do

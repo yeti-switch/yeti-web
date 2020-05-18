@@ -9,7 +9,7 @@ describe 'Create new Admin User', type: :feature, js: true do
 
   active_admin_form_for AdminUser, 'new'
   include_context :login_as_admin do
-    let(:admin_user) { FactoryGirl.create(:admin_user, roles: ['root']) }
+    let(:admin_user) { FactoryBot.create(:admin_user, roles: ['root']) }
   end
 
   before do

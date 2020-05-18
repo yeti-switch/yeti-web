@@ -8,7 +8,7 @@
 #  name :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :disconnect_policy, class: DisconnectPolicy do
     sequence(:name) { |n| "disconnect_policy#{n}" }
 

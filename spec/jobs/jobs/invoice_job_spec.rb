@@ -42,10 +42,10 @@ RSpec.describe Jobs::Invoice do
     end
 
     context 'vendor invoice' do
-      let!(:vendor) { FactoryGirl.create(:vendor) }
+      let!(:vendor) { FactoryBot.create(:vendor) }
       let!(:account) do
         travel_to(account_creation_time) do
-          FactoryGirl.create(:account, contractor: vendor, vendor_invoice_period: invoice_period)
+          FactoryBot.create(:account, contractor: vendor, vendor_invoice_period: invoice_period)
         end
       end
 
@@ -382,10 +382,10 @@ RSpec.describe Jobs::Invoice do
     end
 
     context 'customer invoice' do
-      let!(:customer) { FactoryGirl.create(:customer) }
+      let!(:customer) { FactoryBot.create(:customer) }
       let!(:account) do
         travel_to(account_creation_time) do
-          FactoryGirl.create(:account, contractor: customer, customer_invoice_period: invoice_period)
+          FactoryBot.create(:account, contractor: customer, customer_invoice_period: invoice_period)
         end
       end
 

@@ -15,7 +15,7 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
   describe 'DELETE destroy' do
     subject { delete :destroy, params: { id: cdr_export.id } }
     let(:cdr_export) do
-      FactoryGirl.create(:cdr_export, :completed)
+      FactoryBot.create(:cdr_export, :completed)
     end
 
     it 'http code should be 204' do

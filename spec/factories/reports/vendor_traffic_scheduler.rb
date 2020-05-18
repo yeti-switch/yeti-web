@@ -13,7 +13,7 @@
 #  next_run_at :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :vendor_traffic_scheduler, class: Report::VendorTrafficScheduler do
     period { Report::SchedulerPeriod.take }
     vendor

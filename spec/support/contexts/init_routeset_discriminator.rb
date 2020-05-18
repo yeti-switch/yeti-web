@@ -8,6 +8,6 @@ shared_context :init_routeset_discriminator do |args|
       name: 'Premium'
     }.merge(args)
 
-    @routeset_discriminator = FactoryGirl.create(:routeset_discriminator, fields)
+    @routeset_discriminator = FactoryBot.create(:routeset_discriminator, fields)
   end
 end

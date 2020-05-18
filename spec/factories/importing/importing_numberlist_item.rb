@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :importing_numberlist_item, class: Importing::NumberlistItem do
     transient do
       _numberlist { Routing::Numberlist.take || create(:numberlist) }
@@ -9,8 +9,8 @@ FactoryGirl.define do
       _routing_tags { create_list(:routing_tag, 2) }
     end
 
-    o_id nil
-    error_string nil
+    o_id { nil }
+    error_string { nil }
 
     sequence(:key) { |n| "RSpec Import Numberlist Item n-#{n}" }
 
@@ -20,12 +20,12 @@ FactoryGirl.define do
     action_id { _action.id }
     action_name { _action.name }
 
-    number_min_length 5
-    number_max_length 10
-    src_rewrite_rule '111'
-    src_rewrite_result '222'
-    dst_rewrite_rule '333'
-    dst_rewrite_result '444'
+    number_min_length { 5 }
+    number_max_length { 10 }
+    src_rewrite_rule { '111' }
+    src_rewrite_result { '222' }
+    dst_rewrite_rule { '333' }
+    dst_rewrite_result { '444' }
 
     tag_action_id { _tag_action.id }
     tag_action_name { _tag_action.name }

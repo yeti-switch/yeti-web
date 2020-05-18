@@ -95,7 +95,7 @@ group :development, :test do
 
   gem 'bundler-audit', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '4.8.0'
+  gem 'factory_bot_rails'
   gem 'parallel_tests'
   gem 'rspec-rails'
   gem 'rspec_api_documentation', '~> 5.0.0'

@@ -10,10 +10,10 @@ describe 'Create new Destination Next Rate', type: :feature, js: true do
   active_admin_form_for Routing::DestinationNextRate, 'new'
   include_context :login_as_admin
 
-  let!(:rate_plan) { FactoryGirl.create(:rateplan) }
-  let!(:destination) { FactoryGirl.create(:destination, rateplan: rate_plan) }
+  let!(:rate_plan) { FactoryBot.create(:rateplan) }
+  let!(:destination) { FactoryBot.create(:destination, rateplan: rate_plan) }
   before do
-    FactoryGirl.create(:destination, rateplan: rate_plan)
+    FactoryBot.create(:destination, rateplan: rate_plan)
     visit new_destination_destination_next_rate_path(destination.id)
 
     aa_form.set_date_time 'Apply time', '2019-01-01 01:00'

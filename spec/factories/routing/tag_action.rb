@@ -8,7 +8,7 @@
 #  name :string           not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :tag_action, class: Routing::TagAction do
     sequence(:id) { |n| n }
     sequence(:name) { |n| "Clear tags #{n}" }

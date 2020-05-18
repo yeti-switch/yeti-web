@@ -7,7 +7,7 @@ RSpec.describe Worker::CdrExportJob, type: :job do
     described_class.perform_now(cdr_export.id)
   end
   let!(:cdr_export) do
-    FactoryGirl.create(:cdr_export, callback_url: callback_url)
+    FactoryBot.create(:cdr_export, callback_url: callback_url)
   end
   let(:callback_url) { nil }
 

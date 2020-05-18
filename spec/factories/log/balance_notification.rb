@@ -13,10 +13,10 @@
 #  data         :json
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :balance_notification, class: Log::BalanceNotification do
-    created_at Time.now.utc
-    is_processed false
-    action 'clear'
+    created_at { Time.now.utc }
+    is_processed { false }
+    action { 'clear' }
   end
 end

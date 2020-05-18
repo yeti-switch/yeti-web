@@ -4,7 +4,7 @@ module JRPCMockHelper
   # DSL allows stub JRPC in test environment.
   # Example:
   #
-  #   let!(:node) { FactoryGirl.create(:node) }
+  #   let!(:node) { FactoryBot.create(:node) }
   #   before do
   #     stub_jrpc_request(:registrations, node.rpc_endpoint).with(123).and_return({ bar: 'baz' })
   #   end
