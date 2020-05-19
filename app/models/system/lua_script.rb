@@ -22,5 +22,5 @@ class System::LuaScript < ActiveRecord::Base
   has_many :numberlist_items, class_name: 'Routing::NumberlistItem', foreign_key: :lua_script_id, dependent: :restrict_with_error
 
   validates :name, uniqueness: true, presence: true
-  validates_presence_of :source
+  validates :source, presence: true
 end

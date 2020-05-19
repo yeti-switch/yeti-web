@@ -5,7 +5,7 @@ FactoryBot.define do
     trait :filled do
       duration { (rand(60) + rand).round(7) }
       start_time { rand(120..179).seconds.ago.to_f }
-      connect_time { 2.minute.ago.to_f }
+      connect_time { 2.minutes.ago.to_f }
       end_time { nil }
       local_tag { [1, 2, 16, 8].map { |n| SecureRandom.hex(n).upcase }.join('-') }
       local_time { Time.now.to_f }

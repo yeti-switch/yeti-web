@@ -22,8 +22,8 @@ RSpec.describe Jobs::PartitionRemoving do
 
       Log::ApiLog.add_partition_for Date.parse('2019-01-02')
       Log::ApiLog.add_partition_for Time.now.utc
-      Log::ApiLog.add_partition_for 1.days.from_now.utc
-      Log::ApiLog.add_partition_for 1.days.ago.utc
+      Log::ApiLog.add_partition_for 1.day.from_now.utc
+      Log::ApiLog.add_partition_for 1.day.ago.utc
       Log::ApiLog.add_partition_for 2.days.ago.utc
       Log::ApiLog.add_partition_for 3.days.ago.utc
       Log::ApiLog.add_partition_for 4.days.ago.utc

@@ -117,7 +117,7 @@ module Reporter
     def generate_mail_body(data)
       return if options[:skip_mail_body]
 
-      view = ActionView::Base.new("#{Rails.root}/app/views/mail_reports", {})
+      view = ActionView::Base.new(Rails.root.join('app/views/mail_reports'), {})
       view.render(
         file: html_template_name,
         layout: false,

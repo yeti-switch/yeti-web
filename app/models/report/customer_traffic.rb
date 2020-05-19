@@ -33,7 +33,7 @@ class Report::CustomerTraffic < Cdr::Base
     customer_traffic_data_full.preload(:vendor, :country, :network)
   end
 
-  validates_presence_of :date_start, :date_end, :customer_id
+  validates :date_start, :date_end, :customer_id, presence: true
 
   GROUP_COLUMNS = %i[
     vendor

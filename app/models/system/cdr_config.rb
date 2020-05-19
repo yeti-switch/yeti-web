@@ -21,11 +21,11 @@ class System::CdrConfig < Cdr::Base
   belongs_to :customer_price_round_mode, class_name: 'System::CdrPriceRoundMode', foreign_key: :customer_amount_round_mode_id
   belongs_to :vendor_price_round_mode, class_name: 'System::CdrPriceRoundMode', foreign_key: :vendor_amount_round_mode_id
 
-  validates_presence_of :call_duration_round_mode, :customer_price_round_mode, :vendor_price_round_mode
-  validates_presence_of :customer_amount_round_precision, :vendor_amount_round_precision
+  validates :call_duration_round_mode, :customer_price_round_mode, :vendor_price_round_mode, presence: true
+  validates :customer_amount_round_precision, :vendor_amount_round_precision, presence: true
 
-  validates_numericality_of :customer_amount_round_precision, :vendor_amount_round_precision,
-                            greater_than_or_equal_to: 0, less_than_or_equal_to: 10, only_integer: true, allow_nil: false
+  validates :customer_amount_round_precision, :vendor_amount_round_precision,
+                            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10, only_integer: true, allow_nil: false }
 
   def display_name
     id.to_s

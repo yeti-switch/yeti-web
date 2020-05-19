@@ -36,7 +36,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.fire_account_low_balance(account, data)
     event_name = 'AccountLowThesholdReached'
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -48,7 +48,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.fire_account_high_balance(account, data)
     event_name = 'AccountHighThesholdReached'
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -60,7 +60,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.clear_account_low_balance(account, data)
     event_name = 'AccountLowThesholdCleared'
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -72,7 +72,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.clear_account_high_balance(account, data)
     event_name = 'AccountHighThesholdCleader'
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -84,7 +84,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.fire_quality_alarm(dst, stats)
     event_name = "#{dst.class}QualityAlarmFired"
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -97,7 +97,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.clear_quality_alarm(dst)
     event_name = "#{dst.class}QualityAlarmCleared"
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -109,7 +109,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.fire_lock(dp_or_gw, stats)
     event_name = "#{dp_or_gw.class}Locked"
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(
@@ -121,7 +121,7 @@ class Notification::Alert < Yeti::ActiveRecord
 
   def self.fire_unlock(dp_or_gw)
     event_name = "#{dp_or_gw.class}Unlocked"
-    a = Notification::Alert.where('event=?', event_name).take
+    a = Notification::Alert.find_by(event: event_name)
     return if a.nil?
 
     a.fire_event(

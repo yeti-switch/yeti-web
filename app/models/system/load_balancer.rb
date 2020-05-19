@@ -14,6 +14,6 @@ class System::LoadBalancer < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_presence_of :name, :signalling_ip
-  validates_uniqueness_of :name, :signalling_ip
+  validates :name, :signalling_ip, presence: true
+  validates :name, :signalling_ip, uniqueness: true
 end

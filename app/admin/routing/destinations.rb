@@ -146,10 +146,10 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       c.dst_number_min_length == c.dst_number_max_length ? c.dst_number_min_length.to_s : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
     column :country, sortable: 'countries.name' do |row|
-      auto_link row.network_prefix.try!(:country)
+      auto_link row.network_prefix&.country
     end
     column :network, sortable: 'networks.name' do |row|
-      auto_link row.network_prefix.try!(:network)
+      auto_link row.network_prefix&.network
     end
 
     column :reject_calls

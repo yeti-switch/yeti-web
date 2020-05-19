@@ -29,7 +29,7 @@ ActiveAdmin.setup do |config|
     admin.build_menu :utility_navigation do
     end
   end
-  config.load_paths = [File.join(Rails.root, 'app', 'admin')] #+ Dir.glob(File.join(Rails.root, "app", "admin", "/**/*/"))).uniq
+  config.load_paths = [Rails.root.join('app/admin').to_s] #+ Dir.glob(File.join(Rails.root, "app", "admin", "/**/*/"))).uniq
 
   # == Site Title
   #

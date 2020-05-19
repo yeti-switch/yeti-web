@@ -31,7 +31,7 @@ class Log::EmailLog < Yeti::ActiveRecord
   end
 
   def getfile(id)
-    attachments.where('id=?', id).take
+    attachments.find_by(id: id)
   end
 
   def attachments_no_data

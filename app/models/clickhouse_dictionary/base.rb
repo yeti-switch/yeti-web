@@ -19,9 +19,7 @@ module ClickhouseDictionary
         names.each { |name| attribute(name, **options.dup) }
       end
 
-      def call
-        new.call
-      end
+      delegate :call, to: :new
     end
 
     def call

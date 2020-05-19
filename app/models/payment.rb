@@ -16,8 +16,8 @@ class Payment < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_numericality_of :amount
-  validates_presence_of :account
+  validates :amount, numericality: true
+  validates :account, presence: true
 
   before_create do
     account.lock! # will generate SELECT FOR UPDATE SQL statement

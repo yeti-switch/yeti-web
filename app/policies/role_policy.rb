@@ -13,7 +13,7 @@ class RolePolicy < ApplicationPolicy
     end
 
     def section(section_name)
-      self._section_name = section_name.try!(:to_sym)
+      self._section_name = section_name&.to_sym
     end
   end
 

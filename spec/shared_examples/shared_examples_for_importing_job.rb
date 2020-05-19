@@ -30,11 +30,11 @@ shared_examples 'Jobs for importing data' do
     # Array.wrap(v).join(', ') makes such fields identical in real and importing records
     it 'imported item has the same import_attributes values as preview item' do
       columns = preview_class.import_attributes.join(',')
-      preview_attr = preview_class.select(columns).last.as_json.map { |k, v| [k, Array.wrap(v).join(', ')] }.to_h
+      preview_attr = preview_class.select(columns).last.as_json.transform_values { |v| Array.wrap(v).join(', ') }
       expect { run_jobs }.to change {
                                real_attr = import_class.select(columns).last
                                if real_attr
-                                 real_attr = real_attr.as_json.map { |k, v| [k, Array.wrap(v).join(', ')] }.to_h
+                                 real_attr = real_attr.as_json.transform_values { |v| Array.wrap(v).join(', ') }
                                end
                                preview_attr == real_attr
                              }.from(false).to(true)
@@ -68,7 +68,7 @@ shared_examples 'Jobs for importing data' do
         expect { run_jobs }.to change { import_class.count }
       end
       it 'deletes preview items' do
-        expect { run_jobs }.to change { preview_class .count }
+        expect { run_jobs }.to change { preview_class.count }
       end
     end
   end

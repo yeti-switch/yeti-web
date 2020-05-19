@@ -57,7 +57,7 @@ class CdrExport < Yeti::ActiveRecord
 
   json_attribute :filters, class_name: 'CdrExport::FiltersModel'
 
-  validates_presence_of :status, :fields, :filters
+  validates :status, :fields, :filters, presence: true
   validate do
     if filters.time_start_gteq.nil? || filters.time_start_lteq.nil?
       errors.add(:filters, 'requires time_start_lteq & time_start_gteq')

@@ -19,7 +19,7 @@ class RemoteStatsController < ApplicationController
   end
 
   def nodes
-    expires_in 1.minutes, public: true
+    expires_in 1.minute, public: true
     render json: Stats::ActiveCall.to_stacked_chart.to_json(root: false)
   end
 
@@ -39,7 +39,7 @@ class RemoteStatsController < ApplicationController
   end
 
   def node
-    expires_in 1.minutes, public: true
+    expires_in 1.minute, public: true
     render json: Stats::ActiveCall.to_chart(params[:id]).to_json(root: false)
   end
 

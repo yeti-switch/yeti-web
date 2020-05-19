@@ -66,15 +66,15 @@ class Routing::Destination < Yeti::ActiveRecord
     joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
   }
 
-  validates_presence_of :rateplan, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
+  validates :rateplan, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
-                        :asr_limit, :acd_limit, :short_calls_limit, :routing_tag_mode
-  validates_numericality_of :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee
-  validates_format_of :prefix, without: /\s/
+                        :asr_limit, :acd_limit, :short_calls_limit, :routing_tag_mode, presence: true
+  validates :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, numericality: true
+  validates :prefix, format: { without: /\s/ }
 
-  validates_presence_of :dst_number_min_length, :dst_number_max_length
-  validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates :dst_number_min_length, :dst_number_max_length, presence: true
+  validates :dst_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
+  validates :dst_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
   validates_with RoutingTagIdsValidator
 

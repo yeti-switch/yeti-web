@@ -15,8 +15,8 @@ class Routing::RoutesetDiscriminator < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_presence_of :name
-  validates_uniqueness_of :name, allow_blank: false
+  validates :name, presence: true
+  validates :name, uniqueness: { allow_blank: false }
 
   def display_name
     "#{name} | #{id}"

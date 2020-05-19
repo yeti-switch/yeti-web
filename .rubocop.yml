@@ -1,4 +1,11 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
+  DisplayCopNames: true
+  DisabledByDefault: true
   TargetRubyVersion: 2.6
   Exclude:
     - 'db/migrate/**/*'
@@ -38,13 +45,15 @@ Layout/FirstMethodArgumentLineBreak:
   Enabled: false
 Layout/MultilineAssignmentLayout:
   Enabled: false
+Layout/LineLength:
+  Enabled: false
 Layout/AccessModifierIndentation:
   Enabled: true
-Layout/AlignArray:
+Layout/ArrayAlignment:
   Enabled: true
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: true
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   Enabled: true
 Layout/BlockAlignment:
   Enabled: true
@@ -100,13 +109,13 @@ Layout/FirstMethodParameterLineBreak:
   Enabled: true
 Layout/FirstParameterIndentation:
   Enabled: true
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   Enabled: true
-Layout/IndentAssignment:
+Layout/AssignmentIndentation:
   Enabled: true
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   Enabled: true
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: true
 Layout/IndentationConsistency:
   Enabled: true
@@ -114,7 +123,7 @@ Layout/IndentationWidth:
   Enabled: true
 Layout/InitialIndentation:
   Enabled: true
-Layout/LeadingBlankLines:
+Layout/LeadingEmptyLines:
   Enabled: true
 Layout/LeadingCommentSpace:
   Enabled: true
@@ -182,11 +191,13 @@ Layout/SpaceInsideReferenceBrackets:
   Enabled: true
 Layout/SpaceInsideStringInterpolation:
   Enabled: true
-Layout/Tab:
+Layout/IndentationStyle:
   Enabled: true
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: true
 Layout/TrailingWhitespace:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
 Lint/AmbiguousBlockAssociation:
@@ -235,7 +246,7 @@ Lint/DeprecatedClassMethods:
   Enabled: true
 Lint/DuplicateCaseCondition:
   Enabled: true
-Lint/DuplicatedKey:
+Lint/DuplicateHashKey:
   Enabled: true
 Lint/EachWithObjectArgument:
   Enabled: true
@@ -249,7 +260,7 @@ Lint/EmptyInterpolation:
   Enabled: true
 Lint/EmptyWhen:
   Enabled: true
-Lint/EndInMethod:
+Style/EndBlock:
   Enabled: true
 Lint/EnsureReturn:
   Enabled: true
@@ -259,7 +270,7 @@ Lint/FloatOutOfRange:
   Enabled: true
 Lint/FormatParameterMismatch:
   Enabled: true
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: true
 Lint/InheritException:
   Enabled: true
@@ -271,7 +282,7 @@ Lint/LiteralInInterpolation:
   Enabled: true
 Lint/MissingCopEnableDirective:
   Enabled: true
-Lint/MultipleCompare:
+Lint/MultipleComparison:
   Enabled: true
 Lint/NestedPercentLiteral:
   Enabled: true
@@ -309,19 +320,19 @@ Lint/ShadowedArgument:
   Enabled: true
 Lint/ShadowedException:
   Enabled: true
-Lint/StringConversionInInterpolation:
+Lint/RedundantStringCoercion:
   Enabled: true
 Lint/Syntax:
   Enabled: true
 Lint/UnifiedInteger:
   Enabled: true
-Lint/UnneededCopDisableDirective:
+Lint/RedundantCopDisableDirective:
   Enabled: true
-Lint/UnneededCopEnableDirective:
+Lint/RedundantCopEnableDirective:
   Enabled: true
-Lint/UnneededRequireStatement:
+Lint/RedundantRequireStatement:
   Enabled: true
-Lint/UnneededSplatExpansion:
+Lint/RedundantSplatExpansion:
   Enabled: true
 Lint/UnreachableCode:
   Enabled: true
@@ -339,6 +350,12 @@ Lint/UselessElseWithoutRescue:
   Enabled: true
 Lint/UselessSetterCall:
   Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Lint/FlipFlop:
+  Enabled: true
 
 Metrics/AbcSize:
   Enabled: false
@@ -347,8 +364,6 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/LineLength:
   Enabled: false
 Metrics/MethodLength:
   Enabled: false
@@ -371,7 +386,7 @@ Naming/MethodName:
   Enabled: false
 Naming/PredicateName:
   Enabled: false
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Enabled: false
 Naming/VariableName:
   Enabled: false
@@ -389,7 +404,7 @@ Naming/HeredocDelimiterCase:
   Enabled: true
 Naming/HeredocDelimiterNaming:
   Enabled: true
-Naming/UncommunicativeBlockParamName:
+Naming/BlockParameterName:
   Enabled: true
 
 Performance/ChainArrayAllocation:
@@ -418,8 +433,6 @@ Performance/FlatMap:
   Enabled: true
 Performance/InefficientHashSearch:
   Enabled: true
-Performance/LstripRstrip:
-  Enabled: true
 Performance/RangeInclude:
   Enabled: true
 Performance/RedundantBlockCall:
@@ -428,13 +441,9 @@ Performance/RedundantMatch:
   Enabled: true
 Performance/RedundantMerge:
   Enabled: true
-Performance/RedundantSortBy:
-  Enabled: true
 Performance/RegexpMatch:
   Enabled: true
 Performance/ReverseEach:
-  Enabled: true
-Performance/Sample:
   Enabled: true
 Performance/Size:
   Enabled: true
@@ -445,8 +454,6 @@ Performance/StringReplacement:
 Performance/TimesMap:
   Enabled: true
 Performance/UnfreezeString:
-  Enabled: true
-Performance/UnneededSort:
   Enabled: true
 Performance/UriDefaultParser:
   Enabled: true
@@ -460,7 +467,7 @@ Rails/ActiveSupportAliases:
 Rails/ApplicationJob:
   Enabled: true
 Rails/ApplicationRecord:
-  Enabled: true
+  Enabled: false
 Rails/AssertNot:
   Enabled: true
 Rails/Blank:
@@ -470,13 +477,13 @@ Rails/BulkChangeTable:
 Rails/CreateTableWithTimestamps:
   Enabled: true
 Rails/Date:
-  Enabled: true
+  Enabled: false
 Rails/Delegate:
   Enabled: true
 Rails/DelegateAllowBlank:
   Enabled: true
 Rails/DynamicFindBy:
-  Enabled: true
+  Enabled: false
 Rails/EnumUniqueness:
   Enabled: true
 Rails/EnvironmentComparison:
@@ -490,25 +497,25 @@ Rails/FindBy:
 Rails/FindEach:
   Enabled: true
 Rails/HasAndBelongsToMany:
-  Enabled: true
+  Enabled: false
 Rails/HasManyOrHasOneDependent:
-  Enabled: true
+  Enabled: false
 Rails/HttpPositionalArguments:
   Enabled: true
 Rails/HttpStatus:
   Enabled: true
 Rails/InverseOf:
-  Enabled: true
+  Enabled: false
 Rails/LexicallyScopedActionFilter:
   Enabled: true
 Rails/LinkToBlank:
-  Enabled: true
+  Enabled: false
 Rails/NotNullColumn:
   Enabled: true
 Rails/Output:
   Enabled: true
 Rails/OutputSafety:
-  Enabled: true
+  Enabled: false
 Rails/PluralizationGrammar:
   Enabled: true
 Rails/Presence:
@@ -530,15 +537,15 @@ Rails/ReversibleMigration:
 Rails/SafeNavigation:
   Enabled: true
 Rails/SaveBang:
-  Enabled: true
+  Enabled: false
 Rails/ScopeArgs:
   Enabled: true
 Rails/SkipsModelValidations:
-  Enabled: true
+  Enabled: false
 Rails/TimeZone:
-  Enabled: true
+  Enabled: false
 Rails/UniqBeforePluck:
-  Enabled: true
+  Enabled: false
 Rails/UnknownEnv:
   Enabled: true
 Rails/Validation:
@@ -629,8 +636,6 @@ Style/StringHashKeys:
   Enabled: false
 Style/StructInheritance:
   Enabled: false
-Style/FlipFlop:
-  Enabled: true
 Style/Alias:
   Enabled: true
 Style/AndOr:
@@ -644,8 +649,6 @@ Style/BarePercentLiterals:
 Style/BeginBlock:
   Enabled: true
 Style/BlockComments:
-  Enabled: true
-Style/BracesAroundHashParameters:
   Enabled: true
 Style/CharacterLiteral:
   Enabled: true
@@ -680,8 +683,6 @@ Style/EmptyLiteral:
 Style/EmptyMethod:
   Enabled: true
 Style/Encoding:
-  Enabled: true
-Style/EndBlock:
   Enabled: true
 Style/EvalWithLocation:
   Enabled: true
@@ -803,8 +804,6 @@ Style/RescueModifier:
   Enabled: true
 Style/RescueStandardError:
   Enabled: true
-Style/SafeNavigation:
-  Enabled: true
 Style/SelfAssignment:
   Enabled: true
 Style/Semicolon:
@@ -855,13 +854,13 @@ Style/TrivialAccessors:
   Enabled: true
 Style/UnlessElse:
   Enabled: true
-Style/UnneededCapitalW:
+Style/RedundantCapitalW:
   Enabled: true
-Style/UnneededCondition:
+Style/RedundantCondition:
   Enabled: true
-Style/UnneededInterpolation:
+Style/RedundantInterpolation:
   Enabled: true
-Style/UnneededPercentQ:
+Style/RedundantPercentQ:
   Enabled: true
 Style/UnpackFirst:
   Enabled: true
@@ -879,3 +878,18 @@ Style/YodaCondition:
   Enabled: true
 Style/ZeroLengthPredicate:
   Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/Sample:
+  Enabled: true
+Style/SafeNavigation:
+  Enabled: true
+Style/RedundantSortBy:
+  Enabled: true
+

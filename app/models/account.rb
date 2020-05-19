@@ -61,19 +61,19 @@ class Account < Yeti::ActiveRecord
   scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
-  validates_numericality_of :min_balance, :balance
-  validates_uniqueness_of :uuid, :name
-  validates_presence_of :name, :contractor, :timezone, :vat
-  validates_numericality_of :max_balance, greater_than_or_equal_to: ->(account) { account.min_balance }
+  validates :min_balance, :balance, numericality: true
+  validates :uuid, :name, uniqueness: true
+  validates :name, :contractor, :timezone, :vat, presence: true
+  validates :max_balance, numericality: { greater_than_or_equal_to: ->(account) { account.min_balance } }
 
-  validates_numericality_of :termination_capacity, :origination_capacity, :total_capacity,
-                            greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates :termination_capacity, :origination_capacity, :total_capacity,
+                            numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
-  validates_uniqueness_of :external_id, allow_blank: true
+  validates :external_id, uniqueness: { allow_blank: true }
 
-  validates_numericality_of :vat, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false # this is percents
-  validates_numericality_of :destination_rate_limit, greater_than_or_equal_to: 0, allow_nil: true
-  validates_numericality_of :max_call_duration, greater_than: 0, allow_nil: true
+  validates :vat, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false } # this is percents
+  validates :destination_rate_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validates :max_call_duration, numericality: { greater_than: 0, allow_nil: true }
 
   after_initialize do
     if new_record?
@@ -133,13 +133,13 @@ class Account < Yeti::ActiveRecord
   before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
-    invoices.for_customer.order('end_date desc').limit(1).take
-            .try!(:end_date) || customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time
+    invoices.for_customer.order('end_date desc').limit(1)
+            .take&.end_date || customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time
   end
 
   def last_vendor_invoice_date
-    invoices.for_vendor.order('end_date desc').limit(1).take
-            .try!(:end_date) || vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time
+    invoices.for_vendor.order('end_date desc').limit(1)
+            .take&.end_date || vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time
   end
 
   def schedule_next_customer_invoice!

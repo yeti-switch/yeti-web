@@ -37,9 +37,9 @@ class Contractor < ActiveRecord::Base
 
   validate :vendor_or_customer?
   validate :customer_can_be_disabled
-  validates_presence_of :name
-  validates_uniqueness_of :name
-  validates_uniqueness_of :external_id, allow_blank: true
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :external_id, uniqueness: { allow_blank: true }
 
   def display_name
     "#{name} | #{id}"

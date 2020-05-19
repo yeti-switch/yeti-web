@@ -8,7 +8,7 @@ ActiveAdmin.register_page 'Routing simulation' do
       @dc = Routing::Simulation.new(params[:routing_simulation])
       if !params[:routing_simulation].nil? && @dc.valid? # force object validation before form rendering
         @dc.save!
-        p @dc.errors
+        Rails.logger.info @dc.errors
       end
     rescue Exception => e
       pre do

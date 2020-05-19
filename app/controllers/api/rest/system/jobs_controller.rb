@@ -20,6 +20,6 @@ class Api::Rest::System::JobsController < Api::RestController
   protected
 
   def user_for_paper_trail
-    @job.try!(:type) || 'Unknown Job'
+    @job&.type || 'Unknown Job'
   end
 end

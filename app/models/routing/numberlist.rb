@@ -33,8 +33,8 @@ class Routing::Numberlist < Yeti::ActiveRecord
 
   has_many :routing_numberlist_items, class_name: 'Routing::NumberlistItem', foreign_key: :numberlist_id, dependent: :delete_all
 
-  validates_presence_of :mode, :name, :default_action
-  validates_uniqueness_of :name
+  validates :mode, :name, :default_action, presence: true
+  validates :name, uniqueness: true
 
   validates_with TagActionValueValidator
 

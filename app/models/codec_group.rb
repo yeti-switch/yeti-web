@@ -16,8 +16,8 @@ class CodecGroup < ActiveRecord::Base
 
   accepts_nested_attributes_for :codec_group_codecs, allow_destroy: true
 
-  validates_uniqueness_of :name, allow_blank: false
-  validates_presence_of :name
+  validates :name, uniqueness: { allow_blank: false }
+  validates :name, presence: true
   validate :check_uniqueness_of_codecs
 
   def codec_names

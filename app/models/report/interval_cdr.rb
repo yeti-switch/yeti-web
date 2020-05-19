@@ -106,7 +106,7 @@ class Report::IntervalCdr < Cdr::Base
   belongs_to :aggregation_function, class_name: 'Report::IntervalAggregator', foreign_key: :aggregator_id
   # has_many :data, class_name: 'Report::IntervalData', foreign_key: :report_id, dependent: :delete_all
 
-  validates_presence_of :date_start, :date_end, :interval_length, :aggregation_function, :aggregate_by
+  validates :date_start, :date_end, :interval_length, :aggregation_function, :aggregate_by, presence: true
 
   def display_name
     id.to_s

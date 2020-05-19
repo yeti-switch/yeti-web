@@ -29,7 +29,7 @@ before_fork do
     config.percent_usage = 0.98
     config.rolling_restart_frequency = 3 * 3600 # 12 hours in seconds, or 12.hours if using Rails
     config.reaper_status_logs = true # setting this to false will not log lines like:
-    config.pre_term = ->(worker) { puts "Worker #{worker.inspect} being killed" }
+    config.pre_term = ->(worker) { warn "Worker #{worker.inspect} being killed" }
   end
   PumaWorkerKiller.start
 

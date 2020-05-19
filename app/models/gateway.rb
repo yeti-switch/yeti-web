@@ -161,29 +161,29 @@ class Gateway < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_presence_of :contractor, :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id
-  validates_presence_of :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode
-  validates_presence_of :name, :priority, :weight
-  validates_uniqueness_of :name
+  validates :contractor, :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id, presence: true
+  validates :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode, presence: true
+  validates :name, :priority, :weight, presence: true
+  validates :name, uniqueness: true
   validates :enabled, :auth_enabled, inclusion: { in: [true, false] }
 
-  validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
+  validates :weight, :priority, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
 
-  validates_presence_of :session_refresh_method
-  validates_uniqueness_of :name, allow_blank: false
+  validates :session_refresh_method, presence: true
+  validates :name, uniqueness: { allow_blank: false }
 
-  validates_numericality_of :acd_limit, greater_than_or_equal_to: 0.00
-  validates_numericality_of :asr_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
-  validates_numericality_of :short_calls_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
+  validates :acd_limit, numericality: { greater_than_or_equal_to: 0.00 }
+  validates :asr_limit, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00 }
+  validates :short_calls_limit, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00 }
 
-  validates_numericality_of :max_30x_redirects, :max_transfers, greater_than_or_equal_to: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates :max_30x_redirects, :max_transfers, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
-  validates_numericality_of :origination_capacity, :termination_capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
-  validates_numericality_of :port, greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true
+  validates :origination_capacity, :termination_capacity, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
+  validates :port, numericality: { greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
-  validates_numericality_of :fake_180_timer, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
-  validates_presence_of :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema
+  validates :fake_180_timer, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
+  validates :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
+                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema, presence: true
 
   validates :incoming_auth_username, presence: true, if: proc { incoming_auth_password.present? }
   validates :incoming_auth_password, presence: true, if: proc { incoming_auth_username.present? }

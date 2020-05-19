@@ -16,8 +16,8 @@ class Routing::AreaPrefix < Yeti::ActiveRecord
 
   belongs_to :area, class_name: 'Routing::Area', foreign_key: :area_id
 
-  validates_uniqueness_of :prefix
-  validates_format_of :prefix, without: /\s/
+  validates :prefix, uniqueness: true
+  validates :prefix, format: { without: /\s/ }
   validates :area, presence: true
 
   def display_name
