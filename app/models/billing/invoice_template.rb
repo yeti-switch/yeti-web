@@ -15,10 +15,10 @@
 class Billing::InvoiceTemplate < Yeti::ActiveRecord
   self.table_name = 'invoice_templates'
   # attr_accessible :template_file,:data,:name
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
-  validates_format_of :filename, with: /\A(.*\.odt)\z/
+  validates :filename, format: { with: /\A(.*\.odt)\z/ }
 
   def template_file=(uploaded_file)
     self.filename = uploaded_file.original_filename

@@ -31,7 +31,7 @@ Warden.test_mode!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = Rails.root.join 'spec/fixtures'
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -167,13 +167,13 @@ RspecApiDocumentation.configure do |config|
   config.request_body_formatter = :json
 
   config.exclusion_filter = :customer_v1 # important
-  config.docs_dir = Rails.root.join('doc', 'api', 'admin')
+  config.docs_dir = Rails.root.join 'doc/api/admin'
   config.api_name = 'Admin API'
 
   config.define_group :customer_v1 do |c|
     c.exclusion_filter = :admin # must be overriden to anything
     c.filter = :customer_v1
-    c.docs_dir = Rails.root.join('doc', 'api', 'customer', 'v1')
+    c.docs_dir = Rails.root.join 'doc/api/customer/v1'
     c.api_name = 'Customer API V2'
   end
 end

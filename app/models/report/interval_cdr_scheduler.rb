@@ -23,7 +23,7 @@ class Report::IntervalCdrScheduler < Cdr::Base
   belongs_to :period, class_name: 'Report::SchedulerPeriod', foreign_key: :period_id
   belongs_to :aggregation_function, class_name: 'Report::IntervalAggregator', foreign_key: :aggregator_id
 
-  validates_presence_of :period, :interval_length, :aggregation_function, :aggregate_by
+  validates :period, :interval_length, :aggregation_function, :aggregate_by, presence: true
 
   include Hints
 

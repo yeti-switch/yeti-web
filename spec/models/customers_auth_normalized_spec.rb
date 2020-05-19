@@ -163,7 +163,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       let(:attributes) do
         {
           # ip: [], default
-          src_prefix: ['src-1', 'src-2'],
+          src_prefix: %w[src-1 src-2],
           dst_prefix: [],
           uri_domain: [],
           from_domain: [],
@@ -185,12 +185,12 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       let(:attributes) do
         {
           ip: ['127.0.0.1', '192.168.0.1'],
-          src_prefix: ['src-1', 'src-2'],
-          dst_prefix: ['dst-1', 'dst-2'],
-          uri_domain: ['uri-1', 'uri-2'],
-          from_domain: ['from-1', 'from-2'],
-          to_domain: ['to-1', 'to-2'],
-          x_yeti_auth: ['x-1', 'x-2']
+          src_prefix: %w[src-1 src-2],
+          dst_prefix: %w[dst-1 dst-2],
+          uri_domain: %w[uri-1 uri-2],
+          from_domain: %w[from-1 from-2],
+          to_domain: %w[to-1 to-2],
+          x_yeti_auth: %w[x-1 x-2]
         }
       end
 
@@ -225,7 +225,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       let(:attributes) do
         {
           ip: ['127.0.0.1'],
-          src_prefix: ['src-1', 'src-2'],
+          src_prefix: %w[src-1 src-2],
           dst_prefix: ['dst-1'],
           uri_domain: ['uri-1'],
           from_domain: ['from-1'],
@@ -284,12 +284,12 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       create(:customers_auth,
              src_rewrite_rule: old_src_rewrite_rule,
              ip: ['127.0.0.1', '192.168.0.1'],
-             src_prefix: ['src-1', 'src-2'],
-             dst_prefix: ['dst-1', 'dst-2'],
-             uri_domain: ['uri-1', 'uri-2'],
-             from_domain: ['from-1', 'from-2'],
-             to_domain: ['to-1', 'to-2'],
-             x_yeti_auth: ['x-1', 'x-2'])
+             src_prefix: %w[src-1 src-2],
+             dst_prefix: %w[dst-1 dst-2],
+             uri_domain: %w[uri-1 uri-2],
+             from_domain: %w[from-1 from-2],
+             to_domain: %w[to-1 to-2],
+             x_yeti_auth: %w[x-1 x-2])
     end
 
     let(:old_src_rewrite_rule) { 'old-value' }
@@ -299,7 +299,7 @@ RSpec.describe CustomersAuthNormalized, type: :model do
     context 'when update a matching-condition attribute' do
       let(:attributes) do
         {
-          src_prefix: ['src-3', 'src-4']
+          src_prefix: %w[src-3 src-4]
         }
       end
 
@@ -363,12 +363,12 @@ RSpec.describe CustomersAuthNormalized, type: :model do
       @other_record = create(:customers_auth)
       @record = create(:customers_auth,
                        ip: ['127.0.0.1', '192.168.0.1'],
-                       src_prefix: ['src-1', 'src-2'],
-                       dst_prefix: ['dst-1', 'dst-2'],
-                       uri_domain: ['uri-1', 'uri-2'],
-                       from_domain: ['from-1', 'from-2'],
-                       to_domain: ['to-1', 'to-2'],
-                       x_yeti_auth: ['x-1', 'x-2'])
+                       src_prefix: %w[src-1 src-2],
+                       dst_prefix: %w[dst-1 dst-2],
+                       uri_domain: %w[uri-1 uri-2],
+                       from_domain: %w[from-1 from-2],
+                       to_domain: %w[to-1 to-2],
+                       x_yeti_auth: %w[x-1 x-2])
     end
 
     subject do

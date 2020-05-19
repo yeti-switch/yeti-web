@@ -37,7 +37,6 @@ ActiveAdmin.register System::SmtpConnection do
     active_admin_form_for(OpenStruct.new(to: '', subject: '', body: ''),
                           as: :email,
                           url: send_email_system_smtp_connection_path) do |f|
-
       f.inputs do
         f.input :to, as: :string, input_html: { style: 'width: 200px' }
         f.input :subject, input_html: { style: 'width: 200px' }

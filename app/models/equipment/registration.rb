@@ -30,14 +30,14 @@ class Equipment::Registration < Yeti::ActiveRecord
   belongs_to :pop
   belongs_to :node
 
-  validates_uniqueness_of :name, allow_blank: false
-  validates_presence_of :name, :domain, :username, :retry_delay, :transport_protocol, :proxy_transport_protocol
+  validates :name, uniqueness: { allow_blank: false }
+  validates :name, :domain, :username, :retry_delay, :transport_protocol, :proxy_transport_protocol, presence: true
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
-  validates :contact, format: URI.regexp(%w[sip])
+  validates :contact, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
 
-  validates_numericality_of :retry_delay, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
-  validates_numericality_of :max_attempts, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates :retry_delay, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
+  validates :max_attempts, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
   has_paper_trail class_name: 'AuditLogItem'
 

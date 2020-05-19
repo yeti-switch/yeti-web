@@ -23,42 +23,42 @@ class Billing::Contact < Yeti::ActiveRecord
   scope :contractors, -> { where.not(contractor_id: nil) }
 
   before_destroy do
-    Report::CustomerTrafficScheduler.where('? = ANY(send_to)', id).each do |c|
+    Report::CustomerTrafficScheduler.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
-    Report::VendorTrafficScheduler.where('? = ANY(send_to)', id).each do |c|
+    Report::VendorTrafficScheduler.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
-    Report::CustomCdrScheduler.where('? = ANY(send_to)', id).each do |c|
+    Report::CustomCdrScheduler.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
-    Report::IntervalCdrScheduler.where('? = ANY(send_to)', id).each do |c|
+    Report::IntervalCdrScheduler.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
-    Notification::Alert.where('? = ANY(send_to)', id).each do |c|
+    Notification::Alert.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
-    Account.where('? = ANY(send_invoices_to)', id).each do |c|
+    Account.where('? = ANY(send_invoices_to)', id).find_each do |c|
       c.send_invoices_to = c.send_invoices_to.reject { |el| el == id }
       c.save!
     end
-    Account.where('? = ANY(send_balance_notifications_to)', id).each do |c|
+    Account.where('? = ANY(send_balance_notifications_to)', id).find_each do |c|
       c.send_balance_notifications_to = c.send_balance_notifications_to.reject { |el| el == id }
       c.save!
     end
-    Rateplan.where('? = ANY(send_quality_alarms_to)', id).each do |c|
+    Rateplan.where('? = ANY(send_quality_alarms_to)', id).find_each do |c|
       c.send_quality_alarms_to = c.send_quality_alarms_to.reject { |el| el == id }
       c.save!
     end
   end
 
   def smtp_connection
-    contractor.try!(:smtp_connection) || System::SmtpConnection.global
+    contractor&.smtp_connection || System::SmtpConnection.global
   end
 
   def display_name

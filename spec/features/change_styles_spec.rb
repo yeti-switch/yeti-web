@@ -39,8 +39,8 @@ xdescribe 'Change styles', js: true do
 
     before do
       # I open variables.scss file and override variable "$text-color: blue !default;"
-      old_themes_path = "#{Rails.root}/app/assets/stylesheets/hidden_themes"
-      themes_path = "#{Rails.root}/app/assets/stylesheets/themes"
+      old_themes_path = Rails.root.join 'app/assets/stylesheets/hidden_themes'
+      themes_path = Rails.root.join 'app/assets/stylesheets/themes'
       File.rename(themes_path, old_themes_path)
       FileUtils.mkdir(themes_path)
       File.open("#{themes_path}/variables.scss", 'w') do |f|
@@ -54,8 +54,8 @@ xdescribe 'Change styles', js: true do
 
     after do
       # Restore app/assets/stylesheets/themes/*
-      old_themes_path = "#{Rails.root}/app/assets/stylesheets/hidden_themes"
-      themes_path = "#{Rails.root}/app/assets/stylesheets/themes"
+      old_themes_path = Rails.root.join 'app/assets/stylesheets/hidden_themes'
+      themes_path = Rails.root.join 'app/assets/stylesheets/themes'
       if File.exist?(old_themes_path)
         FileUtils.rm_r(themes_path)
         File.rename(old_themes_path, themes_path)
@@ -72,8 +72,8 @@ xdescribe 'Change styles', js: true do
 
   describe 'change logo src' do
     def reload_initializers!
-      load "#{Rails.root}/config/initializers/_config.rb"
-      load "#{Rails.root}/config/initializers/active_admin.rb"
+      load Rails.root.join 'config/initializers/_config.rb'
+      load Rails.root.join 'config/initializers/active_admin.rb'
     end
 
     before do
@@ -82,8 +82,8 @@ xdescribe 'Change styles', js: true do
       # And I add role_policy
       # And I add role_policy nested "when_no_config: allow"
       # And I add role_policy nested "when_no_policy_class: raise"
-      old_config_path = "#{Rails.root}/config/old_yeti_web.yml"
-      config_path = "#{Rails.root}/config/yeti_web.yml"
+      old_config_path = Rails.root.join 'config/old_yeti_web.yml'
+      config_path = Rails.root.join 'config/yeti_web.yml'
       File.rename(config_path, old_config_path) if File.exist?(config_path)
       File.open(config_path, 'w') do |file|
         file.puts "site_title: 'Yeti Admin'"
@@ -102,8 +102,8 @@ xdescribe 'Change styles', js: true do
 
     after do
       # Restore config/yeti_web.yml
-      old_config_path = "#{Rails.root}/config/old_yeti_web.yml"
-      config_path = "#{Rails.root}/config/yeti_web.yml"
+      old_config_path = Rails.root.join 'config/old_yeti_web.yml'
+      config_path = Rails.root.join 'config/yeti_web.yml'
       if File.exist?(old_config_path)
         File.delete(config_path)
         File.rename(old_config_path, config_path)

@@ -52,8 +52,8 @@ module ActiveAdmin
           end
         elsif filter_storage.present? && params[:action].to_sym == :index && params[:q].blank? && params[:commit].blank?
           saved_filters = filter_storage[filter_saver_key]['search']
-          unless saved_filters.blank?
-            flash.now[:notice_message] = 'Filters were restored to previous values' unless params[:commit].present?
+          if saved_filters.present?
+            flash.now[:notice_message] = 'Filters were restored to previous values' if params[:commit].blank?
             @default_filters_present = true
             params[:q] = saved_filters
           end

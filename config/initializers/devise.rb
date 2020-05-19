@@ -233,7 +233,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = "/my_engine/users/auth"
   config.secret_key = '649ebc96aad6b55506254450d9ec26e08075cd2fffffffd09e3ed554b790c4b6cbff44f5b67cc'
 
-  if File.exist?(File.join(Rails.root, 'config', 'ldap.yml'))
+  if File.exist?(Rails.root.join('config/ldap.yml'))
     config.ldap_logger = false
     config.ldap_create_user = true
     config.ldap_use_admin_to_bind = false

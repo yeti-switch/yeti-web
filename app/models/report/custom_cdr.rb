@@ -91,7 +91,7 @@ class Report::CustomCdr < Cdr::Base
     dst_network_id
   ].freeze
 
-  validates_presence_of :group_by_fields, :date_start, :date_end
+  validates :group_by_fields, :date_start, :date_end, presence: true
   # validates do
   #   #TODO validation of GROUP BY input and filters input to prevent SQL injection
   #   group_by_fields.each do |x|

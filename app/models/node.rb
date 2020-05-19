@@ -15,11 +15,11 @@
 class Node < ActiveRecord::Base
   belongs_to :pop
 
-  validates_presence_of :pop, :signalling_ip, :signalling_port, :rpc_endpoint, :name
+  validates :pop, :signalling_ip, :signalling_port, :rpc_endpoint, :name, presence: true
   validates :name, uniqueness: true
   #  validates :rpc_uri, format: URI::regexp(%w(http https))
 
-  validates_uniqueness_of :rpc_endpoint
+  validates :rpc_endpoint, uniqueness: true
 
   has_many :events, dependent: :destroy
   has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error
@@ -53,13 +53,9 @@ class Node < ActiveRecord::Base
     api.registrations_count
   end
 
-  def stats
-    api.stats
-  end
+  delegate :stats, to: :api
 
-  def system_status
-    api.system_status
-  end
+  delegate :system_status, to: :api
 
   def clear_cache
     api.router_cache_clear
@@ -105,7 +101,7 @@ class Node < ActiveRecord::Base
       if empty_on_error
         logger.warn { e.message }
         logger.warn { e.backtrace.join '\n' }
-        return []
+        []
       else
         raise e
       end

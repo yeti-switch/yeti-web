@@ -60,14 +60,12 @@ class Routing::Simulation
                 :x_yeti_auth, :release_mode,
                 :pai, :ppi, :privacy, :rpid, :rpid_privacy
 
-  validates_presence_of :remote_ip, :remote_port, :src_number, :dst_number, :pop_id
-  validates_numericality_of :pop_id, :transport_protocol_id
+  validates pop_id, transport_protocol_id, :remote_port, allow_nil: true,
+                                                         greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN,
+                                                         less_than: Yeti::ActiveRecord::L4_PORT_MAX,
+                                                         only_integer: true, numericality: true
 
-  validates_numericality_of :remote_port,
-                            greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN,
-                            less_than: Yeti::ActiveRecord::L4_PORT_MAX,
-                            allow_nil: true,
-                            only_integer: true
+  validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, transport_protocol_id, presence: true
 
   validate :ip_is_valid
 
@@ -75,7 +73,7 @@ class Routing::Simulation
 
   def initialize(attrs = {})
     @attrs = attrs
-    unless attrs.blank?
+    if attrs.present?
       attrs.each do |k, v|
         send("#{k}=", v) if respond_to?("#{k}=")
       end
@@ -127,7 +125,7 @@ class Routing::Simulation
         rpid_privacy
       )
     rescue Exception => e
-      p 'EXCEPTION'
+      Rails.logger.info 'EXCEPTION'
       raise e
     ensure
       ActiveRecord::Base.connection.raw_connection.set_notice_processor(&t)

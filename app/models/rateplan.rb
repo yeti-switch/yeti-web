@@ -28,8 +28,8 @@ class Rateplan < ActiveRecord::Base
     joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
   }
 
-  validates_presence_of :name, :profit_control_mode
-  validates_uniqueness_of :name, allow_blank: false
+  validates :name, :profit_control_mode, presence: true
+  validates :name, uniqueness: { allow_blank: false }
 
   validate do
     if send_quality_alarms_to.present? && send_quality_alarms_to.any?

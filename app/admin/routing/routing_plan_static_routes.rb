@@ -57,10 +57,10 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
     column :routing_plan
     column :prefix
     column :country, sortable: 'countries.name' do |row|
-      auto_link row.network_prefix.try!(:country)
+      auto_link row.network_prefix&.country
     end
     column :network, sortable: 'networks.name' do |row|
-      auto_link row.network_prefix.try!(:network)
+      auto_link row.network_prefix&.network
     end
     column :priority
     column :weight

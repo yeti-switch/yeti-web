@@ -30,9 +30,7 @@ class RealtimeData::ActiveNode < Node
     api.calls_count
   end
 
-  def stats
-    api.stats
-  end
+  delegate :stats, to: :api
 
   def system_status
     @system_status ||= api.system_status
@@ -59,7 +57,7 @@ class RealtimeData::ActiveNode < Node
       if empty_on_error
         logger.warn { e.message }
         logger.warn { e.backtrace.join("\n") }
-        return []
+        []
       else
         raise e
       end

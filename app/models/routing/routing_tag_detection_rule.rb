@@ -30,7 +30,7 @@ class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
-  validates_presence_of :routing_tag_mode
+  validates :routing_tag_mode, presence: true
 
   include RoutingTagIdsScopeable
 

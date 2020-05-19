@@ -64,7 +64,7 @@ class System::NetworkPrefix < Yeti::ActiveRecord
   end
 
   def hint
-    [country.try!(:name), network.try!(:name)].compact.join(',')
+    [country&.name, network&.name].compact.join(',')
   end
 
   def self.ransackable_scopes(_auth_object = nil)

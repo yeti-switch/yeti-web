@@ -18,7 +18,7 @@ class Report::VendorTrafficScheduler < Cdr::Base
 
   belongs_to :vendor, -> { where(vendor: true) }, class_name: 'Contractor', foreign_key: :vendor_id
   belongs_to :period, class_name: 'Report::SchedulerPeriod', foreign_key: :period_id
-  validates_presence_of :vendor, :period
+  validates :vendor, :period, presence: true
 
   include Hints
 

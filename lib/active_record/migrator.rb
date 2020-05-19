@@ -18,7 +18,7 @@ module ActiveRecord
         end
 
         if @direction == :up && !ENV['IGNORE_STOPS'] && migration.send(:migration).try(:stop_step)
-          puts 'IMPORTANT: Now update and restart your servers. And after that run `rake db:migrate` again.'
+          warn 'IMPORTANT: Now update and restart your servers. And after that run `rake db:migrate` again.'
           break
         end
       end

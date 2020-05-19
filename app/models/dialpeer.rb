@@ -64,25 +64,25 @@ class Dialpeer < Yeti::ActiveRecord
   # has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan', join_table: "class4.routing_plan_groups", association_foreign_key: :routing_group_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
-  validates_presence_of :account, :routing_group, :vendor, :valid_from, :valid_till,
+  validates :account, :routing_group, :vendor, :valid_from, :valid_till,
                         :initial_rate, :next_rate,
                         :initial_interval, :next_interval, :connect_fee,
-                        :routing_tag_mode, :routeset_discriminator
-  validates_numericality_of :initial_rate, :next_rate, :connect_fee
-  validates_numericality_of :initial_interval, :next_interval, greater_than: 0 # we have DB constraints for this
-  validates_numericality_of :acd_limit, greater_than_or_equal_to: 0.00
-  validates_numericality_of :asr_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
-  validates_numericality_of :short_calls_limit, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00
+                        :routing_tag_mode, :routeset_discriminator, presence: true
+  validates :initial_rate, :next_rate, :connect_fee, numericality: true
+  validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
+  validates :acd_limit, numericality: { greater_than_or_equal_to: 0.00 }
+  validates :asr_limit, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00 }
+  validates :short_calls_limit, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00 }
 
-  validates_numericality_of :force_hit_rate, greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00, allow_blank: true
-  validates_numericality_of :capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates :force_hit_rate, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00, allow_blank: true }
+  validates :capacity, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
-  validates_presence_of :dst_number_min_length, :dst_number_max_length
-  validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates :dst_number_min_length, :dst_number_max_length, presence: true
+  validates :dst_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
+  validates :dst_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
-  validates_format_of :prefix, without: /\s/
-  validates_format_of :batch_prefix, without: /\s/
+  validates :prefix, format: { without: /\s/ }
+  validates :batch_prefix, format: { without: /\s/ }
 
   validate :contractor_is_vendor
   validate :vendor_owners_the_account

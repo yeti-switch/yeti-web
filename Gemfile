@@ -100,6 +100,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec_api_documentation', '~> 5.0.0'
   gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 gem 'apitome', '~> 0.1.0'

@@ -107,21 +107,21 @@ class CustomersAuth < Yeti::ActiveRecord
   validates :ip, :src_prefix, :dst_prefix, :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
             array_uniqueness: true
 
-  validates_presence_of :ip
+  validates :ip, presence: true
 
-  validates_uniqueness_of :name, allow_blank: :false
-  validates_presence_of :name
-  validates_uniqueness_of :external_id, allow_blank: true
+  validates :name, uniqueness: { allow_blank: :false }
+  validates :name, presence: true
+  validates :external_id, uniqueness: { allow_blank: true }
 
-  validates_presence_of :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy
+  validates :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy, presence: true
 
-  validates_presence_of :dst_number_min_length, :dst_number_max_length, :src_number_min_length, :src_number_max_length
-  validates_numericality_of :src_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :src_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :dst_number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :dst_number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates :dst_number_min_length, :dst_number_max_length, :src_number_min_length, :src_number_max_length, presence: true
+  validates :src_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
+  validates :src_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
+  validates :dst_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
+  validates :dst_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
-  validates_numericality_of :capacity, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true
+  validates :capacity, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
   validate :ip_is_valid
   validate :gateway_supports_incoming_auth
@@ -170,9 +170,9 @@ class CustomersAuth < Yeti::ActiveRecord
 
   def display_name_for_debug
     b = "#{customer.display_name} -> #{name} | #{id} IP: #{raw_ip}"
-    b += ", Domain: #{uri_domain}" unless uri_domain.blank?
+    b += ", Domain: #{uri_domain}" if uri_domain.present?
     b += ", POP: #{pop.try(:name)}" unless pop_id.nil?
-    b += ", X-Yeti-Auth: #{x_yeti_auth}" unless x_yeti_auth.blank?
+    b += ", X-Yeti-Auth: #{x_yeti_auth}" if x_yeti_auth.present?
     b
   end
 

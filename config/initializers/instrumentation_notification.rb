@@ -39,7 +39,7 @@ module ActionController
 end
 
 ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_name, start, finish, _id, payload|
-  if %r{^/api/}.match?(payload[:path])
+  if payload[:path].start_with? '/api/'
 
     Log::ApiLog.create do |api_request|
       debug_mode = payload[:debug_mode]

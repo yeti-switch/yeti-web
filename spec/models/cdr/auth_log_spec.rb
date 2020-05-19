@@ -103,7 +103,7 @@ RSpec.describe Cdr::AuthLog, type: :model do
       subject
       expect(described_class.last.attributes.symbolize_keys).to match(
         id: kind_of(Integer),
-        request_time: be_within(2.second).of(request_time),
+        request_time: be_within(2.seconds).of(request_time),
 
         transport_proto_id: 2,
         transport_remote_ip: '1.1.1.1',

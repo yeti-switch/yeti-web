@@ -21,7 +21,7 @@ module Yeti
     end
 
     def network_details_hint
-      network_prefix.try!(:hint) || EMPTY_NETWORK_HINT
+      network_prefix&.hint || EMPTY_NETWORK_HINT
     end
   end
 end

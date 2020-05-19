@@ -70,7 +70,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
 
       context 'by request_time_lteq' do
         let(:filters) do
-          { 'request-time-lteq' => 21.minute.ago.utc }
+          { 'request-time-lteq' => 21.minutes.ago.utc }
         end
 
         let!(:auth_log) do

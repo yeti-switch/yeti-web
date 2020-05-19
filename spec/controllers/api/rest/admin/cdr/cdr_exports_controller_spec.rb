@@ -20,7 +20,7 @@ describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
 
     it 'http code should be 204' do
       subject
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(:no_content)
     end
 
     it 'status should be changed to removed' do

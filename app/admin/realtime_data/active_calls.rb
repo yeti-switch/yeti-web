@@ -320,7 +320,6 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
         blank_slate_content: lambda {
           GuiConfig::FILTER_MISSED_TEXT if GuiConfig.active_calls_require_filter
         } do
-
     selectable_column
     actions do |resource|
       item 'Terminate',

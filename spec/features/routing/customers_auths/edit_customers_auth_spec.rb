@@ -9,7 +9,6 @@ describe 'Edit Customers Auth', type: :feature do
     include_examples :test_unset_tag_action_value,
                      controller_name: :customers_auths,
                      factory: :customers_auth do
-
       let(:contractor) { create(:customer) }
       let(:account) { create(:account, contractor: contractor) }
       let(:gateway) { create(:gateway, contractor: contractor) }

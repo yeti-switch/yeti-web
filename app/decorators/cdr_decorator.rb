@@ -5,7 +5,7 @@ class CdrDecorator < Draper::Decorator
   decorates Cdr::Cdr
 
   def routing_tags
-    return nil unless model.routing_tag_ids.present?
+    return nil if model.routing_tag_ids.blank?
 
     model.routing_tag_ids.map do |id|
       tag = Routing::RoutingTag.where(id: id).first

@@ -34,7 +34,7 @@ class Billing::InvoiceNetwork < Cdr::Base
       csv << ['COUNTRY',	'NETWORK', 'RATE',	'CALLS COUNT', 'SUCCESSFUL CALLS COUNT', 'DURATION', 'BILLING DURATION', 'AMOUNT']
 
       for_invoice.each do |record|
-        csv << [record.country.try!(:name), record.network.try!(:name), record.rate,
+        csv << [record.country&.name, record.network&.name, record.rate,
                 record.calls_count, record.successful_calls_count, record.calls_duration, record.billing_duration, record.amount]
       end
     end

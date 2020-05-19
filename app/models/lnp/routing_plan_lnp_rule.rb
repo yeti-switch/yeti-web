@@ -21,7 +21,7 @@ class Lnp::RoutingPlanLnpRule < Yeti::ActiveRecord
   belongs_to :database, class_name: 'Lnp::Database', foreign_key: :database_id
   belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id
 
-  validates_presence_of :routing_plan, :database
-  validates_format_of :dst_prefix, without: /\s/
-  validates_uniqueness_of :dst_prefix, scope: %i[routing_plan_id database_id]
+  validates :routing_plan, :database, presence: true
+  validates :dst_prefix, format: { without: /\s/ }
+  validates :dst_prefix, uniqueness: { scope: %i[routing_plan_id database_id] }
 end

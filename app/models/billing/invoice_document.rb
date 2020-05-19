@@ -22,9 +22,7 @@ class Billing::InvoiceDocument < Cdr::Base
     Billing::InvoiceDocument.find(invoice_id).data
   end
 
-  def contacts_for_invoices
-    account.contacts_for_invoices
-  end
+  delegate :contacts_for_invoices, to: :account
 
   def attachments
     [
@@ -39,9 +37,7 @@ class Billing::InvoiceDocument < Cdr::Base
     invoice.display_name
   end
 
-  def account
-    invoice.account
-  end
+  delegate :account, to: :invoice
 
   # after_create do
   #   send_invoice

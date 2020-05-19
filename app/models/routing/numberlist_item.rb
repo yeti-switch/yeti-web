@@ -32,13 +32,13 @@ class Routing::NumberlistItem < Yeti::ActiveRecord
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
-  validates_uniqueness_of :key, scope: [:numberlist_id]
+  validates :key, uniqueness: { scope: [:numberlist_id] }
 
-  validates_presence_of :number_min_length, :number_max_length
-  validates_numericality_of :number_min_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
-  validates_numericality_of :number_max_length, greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true
+  validates :number_min_length, :number_max_length, presence: true
+  validates :number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
+  validates :number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
-  validates_presence_of :numberlist
+  validates :numberlist, presence: true
 
   validates_with TagActionValueValidator
 
