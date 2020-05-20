@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Gateway do
   menu parent: 'Equipment', priority: 75
-
+  search_support!
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
@@ -307,7 +307,13 @@ ActiveAdmin.register Gateway do
   filter :name
   filter :gateway_group, input_html: { class: 'chosen' }
   filter :pop, input_html: { class: 'chosen' }
-  filter :contractor, input_html: { class: 'chosen' }
+  filter :contractor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:contractor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
   filter :transport_protocol
   filter :host
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]

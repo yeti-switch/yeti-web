@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Contractor do
   menu parent: 'Billing', priority: 2
-
+  search_support!
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy

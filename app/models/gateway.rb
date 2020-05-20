@@ -203,7 +203,8 @@ class Gateway < Yeti::ActiveRecord
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null' }
   scope :shared, -> { where is_shared: true }
   scope :for_origination, ->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
-
+  scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
+  scope :ordered_by, ->(term) { order(term) }
   scope :for_termination, lambda { |contractor_id|
     where("#{table_name}.allow_termination AND (#{table_name}.contractor_id=? OR #{table_name}.is_shared)", contractor_id)
       .joins(:vendor)
@@ -328,5 +329,11 @@ class Gateway < Yeti::ActiveRecord
 
   def incoming_auth_changed?
     incoming_auth_username_changed? || incoming_auth_password_changed?
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      search_for ordered_by
+    ]
   end
 end

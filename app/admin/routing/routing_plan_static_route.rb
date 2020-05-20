@@ -30,7 +30,12 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   filter :prefix
   filter :country, input_html: { class: 'chosen' }
   filter :network, input_html: { class: 'chosen' }
-  filter :vendor, collection: -> { Contractor.vendors }, input_html: { class: 'chosen' }
+  filter :vendor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:vendor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
 
   # after_build do |resource|
   #   from = begin

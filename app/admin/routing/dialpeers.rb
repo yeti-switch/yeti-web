@@ -182,10 +182,26 @@ ActiveAdmin.register Dialpeer do
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :vendor, input_html: { class: 'chosen' }
-  filter :account, input_html: { class: 'chosen' }
+  filter :vendor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:vendor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+  filter :account,
+         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:account_id_eq]
+           resource_id ? Account.where(id: resource_id) : []
+         }
   filter :routeset_discriminator, input_html: { class: 'chosen' }
-  filter :gateway, input_html: { class: 'chosen' }
+  filter :gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
+
   filter :gateway_group, input_html: { class: 'chosen' }
   filter :routing_group, input_html: { class: 'chosen' }
   filter :routing_group_routing_plans_id_eq, as: :select, input_html: { class: 'chosen' }, label: 'Routing Plan', collection: -> { Routing::RoutingPlan.all }

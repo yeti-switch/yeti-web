@@ -44,5 +44,10 @@ ActiveAdmin.register Report::CustomerTraffic, as: 'CustomerTraffic' do
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at, as: :date_time_range
-  filter :customer, as: :select, input_html: { class: 'chosen' }, collection: proc { Contractor.where(customer: true) }
+  filter :customer,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
 end
