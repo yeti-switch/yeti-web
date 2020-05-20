@@ -191,8 +191,20 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   filter :id
-  filter :contractor, input_html: { class: 'chosen' }
-  filter :account, input_html: { class: 'chosen' }
+  filter :contractor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:contractor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
+  filter :account,
+         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:account_id_eq]
+           resource_id ? Account.where(id: resource_id) : []
+         }
+
   filter :state
   filter :start_date, as: :date_time_range
   filter :end_date, as: :date_time_range

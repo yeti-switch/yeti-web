@@ -58,6 +58,8 @@ class Account < Yeti::ActiveRecord
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }
   scope :customers_accounts, -> { joins(:contractor).where('contractors.customer' => true) }
   scope :collection, -> { order(:name) }
+  scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
+  scope :ordered_by, ->(term) { order(term) }
 
   validates_numericality_of :min_balance, :balance
   validates_uniqueness_of :uuid, :name
@@ -199,5 +201,11 @@ class Account < Yeti::ActiveRecord
       record.account_ids.delete(id)
       record.save!
     end
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      search_for ordered_by
+    ]
   end
 end

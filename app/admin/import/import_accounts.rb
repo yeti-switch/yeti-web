@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Importing::Account do
-  filter :contractor, input_html: { class: 'chosen' }
+  filter :contractor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:contractor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
   filter :name
   filter :balance
   boolean_filter :is_changed

@@ -145,7 +145,13 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   filter :local_tag
   filter :pop
   filter :node
-  filter :gateway
+  filter :gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
+
   filter :gateway_external_id
   filter :remote_host
   filter :remote_port

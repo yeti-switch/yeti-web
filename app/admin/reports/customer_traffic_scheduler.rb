@@ -40,7 +40,12 @@ ActiveAdmin.register Report::CustomerTrafficScheduler, as: 'CustomerTrafficSched
 
   filter :id
   filter :created_at, as: :date_time_range
-  filter :customer, as: :select, input_html: { class: 'chosen' }
+  filter :customer,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
 
   show do |_s|
     attributes_table do

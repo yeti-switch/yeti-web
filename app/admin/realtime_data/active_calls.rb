@@ -37,23 +37,29 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
   filter :vendor_id_eq,
          as: :select,
-         collection: proc { Contractor.vendors },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:vendor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         },
          label: 'Vendor',
          input_html: {
-           class: 'chosen',
+           class: 'chosen-ajax',
+           'data-path': '/contractors/search?q[vendor_eq]=true',
            onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :q_vendor_acc_id_eq)
-         },
-         if: proc { !request.xhr? }
+         }
 
   filter :customer_id_eq,
          as: :select,
-         collection: proc { Contractor.customers },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         },
          label: 'Customer',
          input_html: {
-           class: 'chosen',
+           class: 'chosen-ajax',
+           'data-path': '/contractors/search?q[customer_eq]=true',
            onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :q_customer_acc_id_eq)
-         },
-         if: proc { !request.xhr? }
+         }
 
   filter :vendor_acc_id_eq,
          as: :select,
@@ -69,17 +75,24 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
   filter :orig_gw_id_eq,
          as: :select,
-         collection: proc { Gateway.originations },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:orig_gw_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         },
          label: 'Orig GW',
-         input_html: { class: 'chosen' },
-         if: proc { !request.xhr? }
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search?q[allow_origination_eq]=true' }
 
   filter :term_gw_id_eq,
          as: :select,
-         collection: proc { Gateway.terminations },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:term_gw_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         },
          label: 'Term GW',
-         input_html: { class: 'chosen' },
-         if: proc { !request.xhr? }
+         input_html: {
+           class: 'chosen-ajax',
+           'data-path': '/gateways/search?q[allow_termination_eq]=true'
+         }
 
   filter :duration, as: :numeric
 

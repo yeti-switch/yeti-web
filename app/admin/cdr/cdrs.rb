@@ -54,8 +54,20 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :id
   filter :routing_tag_ids_include, as: :select, collection: proc { Routing::RoutingTag.all }, label: 'With routing tag'
   filter :time_start, as: :date_time_range
-  filter :customer, collection: proc { Contractor.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
-  filter :vendor, collection: proc { Contractor.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
+  filter :customer,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
+  filter :vendor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true&q[ordered_by]=name' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:vendor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
   filter :customer_auth, collection: proc { CustomersAuth.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
   filter :src_prefix_routing
   filter :src_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'chosen' }
@@ -67,8 +79,30 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
   filter :dump_level, as: :select, collection: proc { DumpLevel.select(%i[id name]).reorder(:id) }
 
-  filter :orig_gw, collection: proc { Gateway.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
-  filter :term_gw, collection: proc { Gateway.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
+  filter :orig_gw_id_eq,
+         as: :select,
+         label: 'Orig GW',
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:orig_gw_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         },
+         input_html: {
+           class: 'chosen-ajax',
+           'data-path': '/gateways/search?q[allow_origination_eq]=true&q[ordered_by]=name'
+         }
+
+  filter :term_gw_id_eq,
+         as: :select,
+         label: 'Term GW',
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:term_gw_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         },
+         input_html: {
+           class: 'chosen-ajax',
+           'data-path': '/gateways/search?q[allow_termination_eq]=true&q[ordered_by]=name'
+         }
+
   filter :routing_plan, collection: proc { Routing::RoutingPlan.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :routing_group, collection: proc { RoutingGroup.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :rateplan, collection: proc { Rateplan.select(%i[id name]) }, input_html: { class: 'chosen' }

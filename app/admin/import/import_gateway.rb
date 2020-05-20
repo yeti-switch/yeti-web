@@ -2,7 +2,13 @@
 
 ActiveAdmin.register Importing::Gateway do
   filter :name
-  filter :contractor, input_html: { class: 'chosen' }
+  filter :contractor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:contractor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
   filter :gateway_group, input_html: { class: 'chosen' }
   boolean_filter :is_changed
 

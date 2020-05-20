@@ -29,6 +29,7 @@ ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBelongsTo
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithDefaultParams
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithGlobalDSL
 ActiveAdmin::ResourceDSL.send :include, ResourceDSL::BooleanFilter
+ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActiveSearch
 
 # ActiveAdmin::CSVBuilder.send(:include, Yeti::CSVBuilder)
 

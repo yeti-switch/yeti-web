@@ -14,7 +14,13 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
                 account_ids: []
 
   filter :id
-  filter :customer, collection: proc { Contractor.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
+  filter :customer,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
   filter :login
 
   index do

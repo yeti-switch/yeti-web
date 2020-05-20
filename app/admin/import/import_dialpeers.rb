@@ -4,9 +4,27 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   filter :o_id
   filter :prefix
   boolean_filter :enabled
-  filter :vendor, input_html: { class: 'chosen' }
-  filter :account, input_html: { class: 'chosen' }
-  filter :gateway, input_html: { class: 'chosen' }
+  filter :vendor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:vendor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
+  filter :account,
+         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:account_id_eq]
+           resource_id ? Account.where(id: resource_id) : []
+         }
+
+  filter :gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
+
   filter :routing_group, input_html: { class: 'chosen' }
   filter :routeset_discriminator, input_html: { class: 'chosen' }
   boolean_filter :is_changed

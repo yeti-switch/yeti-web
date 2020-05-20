@@ -11,7 +11,12 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
 
   filter :calls_count
   filter :calls_duration
-  filter :customer, as: :select, input_html: { class: 'chosen' }, collection: proc { Contractor.where(customer: true) }
+  filter :customer,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
 
   controller do
     def scoped_collection
