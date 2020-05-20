@@ -138,7 +138,7 @@ describe Api::Rest::Admin::System::NetworksController, type: :controller do
       }
     end
 
-    let!(:network_type) { FactoryGirl.create(:network_type) }
+    let!(:network_type) { FactoryBot.create(:network_type) }
 
     it 'network should be created' do
       expect { subject }.to change { System::Network.count }.by(1)

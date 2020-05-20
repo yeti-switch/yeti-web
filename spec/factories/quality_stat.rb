@@ -15,11 +15,11 @@
 #  destination_id      :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :quality_stat, class: Stats::TerminationQualityStat do
-    time_start Time.now.utc
-    success true
-    duration 2
+    time_start { Time.now.utc }
+    success { true }
+    duration { 2 }
 
     trait :filled do
       dialpeer

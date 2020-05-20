@@ -15,13 +15,13 @@
 #  vsa_vendor_type :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :accounting_profile_start_attribute, class: Equipment::Radius::AccountingProfileStartAttribute do
     association :profile, factory: :accounting_profile
-    type_id 1
+    type_id { 1 }
     sequence(:name) { |n| "accounting_profile_start_#{n}" }
-    value 'value'
-    format 'string'
-    is_vsa false
+    value { 'value' }
+    format { 'string' }
+    is_vsa { false }
   end
 end

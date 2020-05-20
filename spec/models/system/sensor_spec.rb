@@ -43,13 +43,13 @@ describe System::Sensor do
 
   describe '#create' do
     subject do
-      FactoryGirl.create(:sensor,
-                         name: 'Experimental sensor',
-                         mode_id: mode_id,
-                         source_ip: source_ip,
-                         target_ip: target_ip,
-                         source_interface: source_interface,
-                         target_mac: target_mac)
+      FactoryBot.create(:sensor,
+                        name: 'Experimental sensor',
+                        mode_id: mode_id,
+                        source_ip: source_ip,
+                        target_ip: target_ip,
+                        source_interface: source_interface,
+                        target_mac: target_mac)
     end
 
     context 'with valid input data' do
@@ -101,13 +101,13 @@ describe System::Sensor do
         let(:source_interface) { nil }
         let(:target_mac) { nil }
         before do
-          FactoryGirl.create(:sensor,
-                             name: 'Experimental sensor',
-                             mode_id: mode_id,
-                             source_ip: source_ip,
-                             target_ip: target_ip,
-                             source_interface: source_interface,
-                             target_mac: target_mac)
+          FactoryBot.create(:sensor,
+                            name: 'Experimental sensor',
+                            mode_id: mode_id,
+                            source_ip: source_ip,
+                            target_ip: target_ip,
+                            source_interface: source_interface,
+                            target_mac: target_mac)
         end
 
         it 'rise error' do

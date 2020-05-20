@@ -12,11 +12,11 @@
 #  timestamp :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :logic_log, class: LogicLog do
-    source 'Dialpeer (3)'
-    level 0
-    msg 'finished'
-    txid 70_196_395
+    source { 'Dialpeer (3)' }
+    level { 0 }
+    msg { 'finished' }
+    txid { 70_196_395 }
   end
 end

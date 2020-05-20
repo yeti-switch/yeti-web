@@ -13,7 +13,7 @@ RSpec.shared_context :incoming_registrations_stub_helpers do
 
   let(:incoming_registrations_collection_qty) { 2 }
   let(:incoming_registrations_collection) do
-    FactoryGirl.attributes_for_list(:incoming_registration, incoming_registrations_collection_qty, *incoming_registration_attrs)
+    FactoryBot.attributes_for_list(:incoming_registration, incoming_registrations_collection_qty, *incoming_registration_attrs)
   end
   let(:incoming_registration_attrs) { [:filled] }
 end

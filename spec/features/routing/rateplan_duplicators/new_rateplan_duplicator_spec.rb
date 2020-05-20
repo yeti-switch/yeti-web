@@ -10,7 +10,7 @@ describe 'Create new Rateplan Duplicator', type: :feature, js: true do
   active_admin_form_for Routing::RateplanDuplicator, 'new'
   include_context :login_as_admin
 
-  let!(:rateplan) { FactoryGirl.create(:rateplan) }
+  let!(:rateplan) { FactoryBot.create(:rateplan) }
   before do
     visit new_routing_rateplan_duplicator_path(from: rateplan.id)
 

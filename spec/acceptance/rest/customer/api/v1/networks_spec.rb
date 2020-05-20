@@ -13,7 +13,7 @@ resource 'Networks', document: :customer_v1 do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
   let(:type) { 'networks' }
 
-  let!(:network) { FactoryGirl.create(:network, name: 'US').reload }
+  let!(:network) { FactoryBot.create(:network, name: 'US').reload }
 
   get '/api/rest/customer/v1/networks' do
     jsonapi_filters Api::Rest::Customer::V1::NetworkResource._allowed_filters

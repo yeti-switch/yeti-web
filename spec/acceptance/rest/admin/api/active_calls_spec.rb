@@ -13,7 +13,7 @@ resource 'ActiveCalls' do
   let(:type) { 'active-calls' }
 
   include_context :active_calls_stub_helpers do
-    let!(:node) { FactoryGirl.create(:node) }
+    let!(:node) { FactoryBot.create(:node) }
     let(:active_call_attrs) { [:filled, node_id: node.id] }
   end
 

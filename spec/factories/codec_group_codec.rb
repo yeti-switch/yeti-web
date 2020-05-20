@@ -12,9 +12,9 @@
 #  format_parameters    :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :codec_group_codec do
     sequence(:priority, 10)
-    dynamic_payload_type 100
+    dynamic_payload_type { 100 }
   end
 end

@@ -14,8 +14,8 @@ describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :request do
 
     let!(:network_prefixes) do
       [
-        FactoryGirl.create(:network_prefix).reload,
-        FactoryGirl.create(:network_prefix).reload
+        FactoryBot.create(:network_prefix).reload,
+        FactoryBot.create(:network_prefix).reload
       ]
     end
 
@@ -34,7 +34,7 @@ describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network_prefix.uuid }
 
-    let!(:network_prefix) { FactoryGirl.create(:network_prefix).reload }
+    let!(:network_prefix) { FactoryBot.create(:network_prefix).reload }
 
     it_behaves_like :json_api_check_authorization
 
@@ -74,7 +74,7 @@ describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network_prefix) { FactoryGirl.create(:network_prefix).reload }
+    let!(:network_prefix) { FactoryBot.create(:network_prefix).reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -89,7 +89,7 @@ describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network_prefix) { FactoryGirl.create(:network_prefix).reload }
+    let!(:network_prefix) { FactoryBot.create(:network_prefix).reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -102,7 +102,7 @@ describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network_prefix.uuid }
 
-    let!(:network_prefix) { FactoryGirl.create(:network_prefix).reload }
+    let!(:network_prefix) { FactoryBot.create(:network_prefix).reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end

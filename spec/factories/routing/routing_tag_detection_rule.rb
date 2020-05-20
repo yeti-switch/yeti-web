@@ -15,7 +15,7 @@
 #  dst_prefix          :string           default(""), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :routing_tag_detection_rule, class: Routing::RoutingTagDetectionRule do
     tag_action { Routing::TagAction.clear_action }
 

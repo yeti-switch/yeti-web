@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :admin_user do
     sequence(:username) { |n| "admin#{n}" }
     sequence(:email) { |n| "admin#{n}@example.com" }
-    password '111111'
+    password { '111111' }
     roles { ['user'] }
     after(:build) do |admin|
       if admin.class.ldap?

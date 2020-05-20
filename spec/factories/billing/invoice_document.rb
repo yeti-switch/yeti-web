@@ -13,9 +13,9 @@
 #  xls_data   :binary
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :invoice_document, class: Billing::InvoiceDocument do
     invoice
-    filename 'fine.example'
+    filename { 'fine.example' }
   end
 end

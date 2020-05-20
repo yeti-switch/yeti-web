@@ -9,7 +9,7 @@
 #  debug      :boolean          default(FALSE), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :api_log_config, class: System::ApiLogConfig do
     sequence(:controller) { |n| "Api::Rest::Private::RateplansController_#{n}" }
   end

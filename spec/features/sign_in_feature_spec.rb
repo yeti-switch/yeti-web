@@ -7,7 +7,7 @@ describe 'the signin process', type: :feature do
     login_as(admin_user, scope: :admin_user)
   end
 
-  let!(:admin_user) { FactoryGirl.create(:admin_user) }
+  let!(:admin_user) { FactoryBot.create(:admin_user) }
 
   it 'signs me in' do
     subject

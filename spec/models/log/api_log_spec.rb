@@ -23,7 +23,7 @@
 RSpec.describe Log::ApiLog do
   describe '.create' do
     subject do
-      FactoryGirl.create(:api_log)
+      FactoryBot.create(:api_log)
     end
 
     it 'creates api_log' do

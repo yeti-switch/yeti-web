@@ -9,6 +9,6 @@ shared_context :init_gateway_group do |args|
       vendor_id: @contractor.id
     }.merge(args)
 
-    @gateway_group = FactoryGirl.create(:gateway_group, fields)
+    @gateway_group = FactoryBot.create(:gateway_group, fields)
   end
 end

@@ -5,8 +5,8 @@ require 'spec_helper'
 describe 'Index Outgoing Registrations', type: :feature do
   include_context :login_as_admin
 
-  let!(:node) { FactoryGirl.create(:node) }
-  let(:record_attributes) { FactoryGirl.attributes_for(:outgoing_registration, :filled) }
+  let!(:node) { FactoryBot.create(:node) }
+  let(:record_attributes) { FactoryBot.attributes_for(:outgoing_registration, :filled) }
   before do
     stub_jrpc_request('show.registrations', node.rpc_endpoint).and_return([record_attributes.stringify_keys])
     visit outgoing_registrations_path(q: { node_id_eq: node.id })

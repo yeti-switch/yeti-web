@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :auth_log, class: Cdr::AuthLog do
     request_time                { 1.minute.ago }
     code                        { 200 }
-    reason 'OK'
-    internal_reason 'Response matched'
-    origination_ip '1.1.1.1'
-    origination_port 5060
-    transport_remote_ip '2.2.2.2'
-    transport_remote_port 6050
-    transport_local_ip '2.2.2.2'
-    transport_local_port 6050
-    username 'User1'
-    realm 'Realm1'
-    request_method 'INVITE'
-    call_id '2b8a45f5730c1b3459a00b9c322a79da'
-    success true
+    reason { 'OK' }
+    internal_reason { 'Response matched' }
+    origination_ip { '1.1.1.1' }
+    origination_port { 5060 }
+    transport_remote_ip { '2.2.2.2' }
+    transport_remote_port { 6050 }
+    transport_local_ip { '2.2.2.2' }
+    transport_local_port { 6050 }
+    username { 'User1' }
+    realm { 'Realm1' }
+    request_method { 'INVITE' }
+    call_id { '2b8a45f5730c1b3459a00b9c322a79da' }
+    success { true }
 
     transport_protocol { Equipment::TransportProtocol.take }
     origination_protocol { Equipment::TransportProtocol.take }

@@ -10,10 +10,10 @@ describe 'Create new Vendor Traffic', type: :feature, js: true do
   active_admin_form_for Report::VendorTraffic, 'new'
   include_context :login_as_admin
 
-  let!(:vendor) { FactoryGirl.create(:vendor, name: 'John Doe') }
+  let!(:vendor) { FactoryBot.create(:vendor, name: 'John Doe') }
   before do
-    FactoryGirl.create(:customer)
-    FactoryGirl.create(:vendor)
+    FactoryBot.create(:customer)
+    FactoryBot.create(:vendor)
     visit new_vendor_traffic_path
 
     aa_form.select_chosen 'Vendor', vendor.name

@@ -8,6 +8,6 @@ shared_context :init_routing_group do |args|
       name: 'TDefault routing'
     }.merge(args)
 
-    @routing_group = FactoryGirl.create(:routing_group, fields)
+    @routing_group = FactoryBot.create(:routing_group, fields)
   end
 end

@@ -9,6 +9,6 @@ shared_context :init_importing_routing_group do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_routing_group = FactoryGirl.create(:importing_routing_group, fields)
+    @importing_routing_group = FactoryBot.create(:importing_routing_group, fields)
   end
 end

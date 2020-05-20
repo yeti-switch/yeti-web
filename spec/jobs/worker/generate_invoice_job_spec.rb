@@ -17,9 +17,9 @@ RSpec.describe Worker::GenerateInvoiceJob do
     end
 
     let(:monthly_invoice_period) { Billing::InvoicePeriod.find(Billing::InvoicePeriod::MONTHLY_ID) }
-    let!(:vendor) { FactoryGirl.create(:vendor) }
+    let!(:vendor) { FactoryBot.create(:vendor) }
     let!(:account) do
-      FactoryGirl.create(:account, contractor: vendor, vendor_invoice_period: monthly_invoice_period)
+      FactoryBot.create(:account, contractor: vendor, vendor_invoice_period: monthly_invoice_period)
     end
 
     it 'creates invoice with correct attributes' do

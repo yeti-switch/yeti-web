@@ -21,7 +21,7 @@
 #  billing_duration         :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :invoice_destination, class: Billing::InvoiceDestination do
     invoice
 

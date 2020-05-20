@@ -10,10 +10,10 @@
 #  uuid    :uuid             not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :network, class: System::Network do
-    name 'US Eagle Mobile'
-    network_type { System::NetworkType.take || FactoryGirl.create(:network_type) }
+    name { 'US Eagle Mobile' }
+    network_type { System::NetworkType.take || FactoryBot.create(:network_type) }
     uuid { SecureRandom.uuid }
 
     trait :filled do

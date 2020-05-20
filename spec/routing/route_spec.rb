@@ -103,11 +103,11 @@ RSpec.describe '#routing logic' do
 
   context 'Use X-SRC-IP if originator is trusted load balancer' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '1.1.1.1')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
 
-      FactoryGirl.create(:customers_auth,
-                         ip: '3.3.3.3')
+      FactoryBot.create(:customers_auth,
+                        ip: '3.3.3.3')
     end
 
     let(:remote_ip) { '1.1.1.1' }
@@ -121,11 +121,11 @@ RSpec.describe '#routing logic' do
 
   context 'Use remote IP if originator is not trusted load balancer' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '5.5.5.5')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '5.5.5.5')
 
-      FactoryGirl.create(:customers_auth,
-                         ip: '3.3.3.3')
+      FactoryBot.create(:customers_auth,
+                        ip: '3.3.3.3')
     end
 
     let(:remote_ip) { '1.1.1.1' }
@@ -140,10 +140,10 @@ RSpec.describe '#routing logic' do
 
   context 'Authentification' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '1.1.1.1')
-      @ca = FactoryGirl.create(:customers_auth, :with_incoming_auth,
-                               ip: '3.3.3.3')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
+      @ca = FactoryBot.create(:customers_auth, :with_incoming_auth,
+                              ip: '3.3.3.3')
     end
 
     let(:remote_ip) { '1.1.1.1' }
@@ -171,10 +171,10 @@ RSpec.describe '#routing logic' do
 
   context 'Authentification+Reject' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '1.1.1.1')
-      @ca = FactoryGirl.create(:customers_auth, :with_incoming_auth, :with_reject,
-                               ip: '3.3.3.3')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
+      @ca = FactoryBot.create(:customers_auth, :with_incoming_auth, :with_reject,
+                              ip: '3.3.3.3')
     end
 
     let(:remote_ip) { '1.1.1.1' }
@@ -210,10 +210,10 @@ RSpec.describe '#routing logic' do
 
   context 'Reject calls without Authentification' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '1.1.1.1')
-      @ca = FactoryGirl.create(:customers_auth, :with_reject,
-                               ip: '3.3.3.3')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
+      @ca = FactoryBot.create(:customers_auth, :with_reject,
+                              ip: '3.3.3.3')
     end
 
     let(:remote_ip) { '1.1.1.1' }
@@ -237,11 +237,11 @@ RSpec.describe '#routing logic' do
 
   context 'Auhtorized but customer has no enough balance' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '1.1.1.1')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
 
-      @ca = FactoryGirl.create(:customers_auth,
-                               ip: '3.3.3.3')
+      @ca = FactoryBot.create(:customers_auth,
+                              ip: '3.3.3.3')
     end
 
     let(:remote_ip) { '1.1.1.1' }
@@ -265,12 +265,12 @@ RSpec.describe '#routing logic' do
 
   context 'Auhtorized, Balance checking disabled' do
     before do
-      FactoryGirl.create(:system_load_balancer,
-                         signalling_ip: '1.1.1.1')
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
 
-      FactoryGirl.create(:customers_auth,
-                         ip: '3.3.3.3',
-                         check_account_balance: false)
+      FactoryBot.create(:customers_auth,
+                        ip: '3.3.3.3',
+                        check_account_balance: false)
     end
 
     let(:remote_ip) { '1.1.1.1' }

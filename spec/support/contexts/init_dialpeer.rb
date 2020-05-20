@@ -28,6 +28,6 @@ shared_context :init_dialpeer do |args|
       next_interval: 1
     }.merge(args)
 
-    @dialpeer = FactoryGirl.create(:dialpeer, fields)
+    @dialpeer = FactoryBot.create(:dialpeer, fields)
   end
 end

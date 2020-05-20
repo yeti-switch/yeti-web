@@ -25,6 +25,6 @@ shared_context :init_importing_registration do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_registration = FactoryGirl.create(:importing_registration, fields)
+    @importing_registration = FactoryBot.create(:importing_registration, fields)
   end
 end

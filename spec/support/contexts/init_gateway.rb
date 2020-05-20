@@ -88,6 +88,6 @@ shared_context :init_gateway do |args|
       sensor_level_id: 1
     }.merge(args)
 
-    @gateway = FactoryGirl.create(:gateway, fields)
+    @gateway = FactoryBot.create(:gateway, fields)
   end
 end

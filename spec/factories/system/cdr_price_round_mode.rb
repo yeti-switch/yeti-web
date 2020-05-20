@@ -8,14 +8,14 @@
 #  name :string           not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :cdr_price_round_mode, class: System::CdrPriceRoundMode do
     sequence(:id, &:n)
     sequence(:name) { |n| "Always UP #{n}" }
 
     trait :always_up do
-      id 2
-      name 'Always UP'
+      id { 2 }
+      name { 'Always UP' }
     end
   end
 end

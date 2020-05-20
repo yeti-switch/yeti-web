@@ -9,7 +9,7 @@
 #  send_to :integer          is an Array
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :notification_alert, class: Notification::Alert do
     sequence(:event) { |n| "DialpeerLocked #{n}" }
   end

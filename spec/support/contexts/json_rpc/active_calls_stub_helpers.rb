@@ -20,8 +20,8 @@ RSpec.shared_context :active_calls_stub_helpers do
 
   let(:active_calls_collection_qty) { 2 }
   let(:active_calls_collection) do
-    FactoryGirl.attributes_for_list(:active_call, active_calls_collection_qty, *active_call_attrs)
+    FactoryBot.attributes_for_list(:active_call, active_calls_collection_qty, *active_call_attrs)
   end
-  let(:active_call_single) { FactoryGirl.attributes_for(:active_call, *active_call_attrs) }
+  let(:active_call_single) { FactoryBot.attributes_for(:active_call, *active_call_attrs) }
   let(:active_call_attrs) { [:filled] }
 end

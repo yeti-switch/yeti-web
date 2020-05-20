@@ -15,9 +15,9 @@
 #  tag         :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lnp_cache, class: Lnp::Cache do
-    dst 'dst'
-    lrn 'lrn'
+    dst { 'dst' }
+    lrn { 'lrn' }
   end
 end

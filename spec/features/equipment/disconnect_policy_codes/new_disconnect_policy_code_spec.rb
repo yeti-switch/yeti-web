@@ -9,8 +9,8 @@ describe 'Create new Disconnect Policy Code', type: :feature, js: true do
 
   active_admin_form_for DisconnectPolicyCode, 'new'
   include_context :login_as_admin
-  let!(:disconnect_policy) { FactoryGirl.create(:disconnect_policy) }
-  let!(:disconnect_code) { FactoryGirl.create(:disconnect_code, :sip) }
+  let!(:disconnect_policy) { FactoryBot.create(:disconnect_policy) }
+  let!(:disconnect_code) { FactoryBot.create(:disconnect_code, :sip) }
 
   before do
     visit new_disconnect_policy_code_path

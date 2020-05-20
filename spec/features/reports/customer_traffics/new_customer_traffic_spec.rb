@@ -10,10 +10,10 @@ describe 'Create new Customer Traffic', type: :feature, js: true do
   active_admin_form_for Report::CustomerTraffic, 'new'
   include_context :login_as_admin
 
-  let!(:customer) { FactoryGirl.create(:customer, name: 'John Doe') }
+  let!(:customer) { FactoryBot.create(:customer, name: 'John Doe') }
   before do
-    FactoryGirl.create(:customer)
-    FactoryGirl.create(:vendor)
+    FactoryBot.create(:customer)
+    FactoryBot.create(:vendor)
     visit new_customer_traffic_path
 
     aa_form.select_chosen 'Customer', customer.name

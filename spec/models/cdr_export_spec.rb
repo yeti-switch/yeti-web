@@ -23,7 +23,7 @@ describe CdrExport, type: :model do
       cdr_export.export_sql
     end
     let(:cdr_export) do
-      FactoryGirl.create(:cdr_export, fields: fields, filters: filters)
+      FactoryBot.create(:cdr_export, fields: fields, filters: filters)
     end
     let(:fields) do
       %w[success id]

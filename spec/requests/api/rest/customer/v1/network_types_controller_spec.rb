@@ -14,8 +14,8 @@ describe Api::Rest::Customer::V1::NetworkTypesController, type: :request do
 
     let!(:network_types) do
       [
-        FactoryGirl.create(:network_type).reload,
-        FactoryGirl.create(:network_type).reload
+        FactoryBot.create(:network_type).reload,
+        FactoryBot.create(:network_type).reload
       ]
     end
 
@@ -34,7 +34,7 @@ describe Api::Rest::Customer::V1::NetworkTypesController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network_type.uuid }
 
-    let!(:network_type) { FactoryGirl.create(:network_type).reload }
+    let!(:network_type) { FactoryBot.create(:network_type).reload }
 
     it_behaves_like :json_api_check_authorization
 
@@ -54,7 +54,7 @@ describe Api::Rest::Customer::V1::NetworkTypesController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network_type) { FactoryGirl.create(:network_type).reload }
+    let!(:network_type) { FactoryBot.create(:network_type).reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -69,7 +69,7 @@ describe Api::Rest::Customer::V1::NetworkTypesController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network_type) { FactoryGirl.create(:network_type).reload }
+    let!(:network_type) { FactoryBot.create(:network_type).reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -82,7 +82,7 @@ describe Api::Rest::Customer::V1::NetworkTypesController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network_type.uuid }
 
-    let!(:network_type) { FactoryGirl.create(:network_type).reload }
+    let!(:network_type) { FactoryBot.create(:network_type).reload }
 
     include_examples :raises_exception, ActionController::RoutingError
   end

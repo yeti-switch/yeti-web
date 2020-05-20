@@ -17,12 +17,12 @@
 #  next_run_at     :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :interval_cdr_scheduler, class: Report::IntervalCdrScheduler do
     period { Report::SchedulerPeriod.take || build(:period_scheduler) }
-    group_by %w[customer_acc_id]
-    interval_length 5
+    group_by { %w[customer_acc_id] }
+    interval_length { 5 }
     aggregation_function { Report::IntervalAggregator.take }
-    aggregate_by 'duration'
+    aggregate_by { 'duration' }
   end
 end

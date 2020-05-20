@@ -8,25 +8,25 @@
 #  name :string           not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :cdr_round_mode, class: System::CdrRoundMode do
-    id 3
+    id { 3 }
     # sequence(:id) { |n| n }
     sequence(:name) { |n| "Always UP #{n}" }
 
     trait :always_up do
-      id 3
-      name 'Always UP'
+      id { 3 }
+      name { 'Always UP' }
     end
 
     trait :always_down do
-      id 2
-      name 'Always DOWN'
+      id { 2 }
+      name { 'Always DOWN' }
     end
 
     trait :if_0_5 do
-      id 1
-      name 'Math rules(up if >=0.5)'
+      id { 1 }
+      name { 'Math rules(up if >=0.5)' }
     end
   end
 end

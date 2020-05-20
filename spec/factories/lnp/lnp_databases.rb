@@ -11,7 +11,7 @@
 #  database_id   :integer          not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lnp_database, class: Lnp::Database do
     sequence(:name) { |n| "LNP Database #{n}" }
 

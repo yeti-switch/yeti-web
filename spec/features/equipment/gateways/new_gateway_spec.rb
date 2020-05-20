@@ -15,18 +15,18 @@ describe 'Create new Gateway', type: :feature, js: true do
       { auth_id: a_kind_of(Integer), empty_on_error: false }
     end
     before do
-      FactoryGirl.create(:node)
+      FactoryBot.create(:node)
       stub_incoming_registrations_collection
     end
   end
 
-  let!(:contractor) { FactoryGirl.create(:customer) }
-  let!(:codec_group) { FactoryGirl.create(:codec_group) }
+  let!(:contractor) { FactoryBot.create(:customer) }
+  let!(:codec_group) { FactoryBot.create(:codec_group) }
 
   before do
-    FactoryGirl.create(:customer)
-    FactoryGirl.create(:vendor)
-    FactoryGirl.create(:codec_group)
+    FactoryBot.create(:customer)
+    FactoryBot.create(:vendor)
+    FactoryBot.create(:codec_group)
 
     visit new_gateway_path
 

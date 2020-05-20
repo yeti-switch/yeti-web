@@ -13,7 +13,7 @@ xdescribe 'Change styles', js: true do
   end
 
   let!(:admin_user) do
-    FactoryGirl.create(:admin_user, username: username, email: "#{username}@example.com", password: password)
+    FactoryBot.create(:admin_user, username: username, email: "#{username}@example.com", password: password)
   end
 
   let(:username) { 'admin1' }

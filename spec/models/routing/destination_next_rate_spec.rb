@@ -21,8 +21,8 @@
 require 'spec_helper'
 
 RSpec.describe Routing::DestinationNextRate, type: :model do
-  let!(:rate_plan) { FactoryGirl.create(:rateplan) }
-  let!(:destination) { FactoryGirl.create(:destination, destination_attrs) }
+  let!(:rate_plan) { FactoryBot.create(:rateplan) }
+  let!(:destination) { FactoryBot.create(:destination, destination_attrs) }
   let(:destination_attrs) { { rateplan: rate_plan } }
 
   describe '.create' do
@@ -57,7 +57,7 @@ RSpec.describe Routing::DestinationNextRate, type: :model do
       record.update(update_params)
     end
 
-    let!(:record) { FactoryGirl.create(:destination_next_rate, record_attrs) }
+    let!(:record) { FactoryBot.create(:destination_next_rate, record_attrs) }
     let(:record_attrs) { { destination: destination } }
 
     context 'change initial_rate' do
@@ -72,7 +72,7 @@ RSpec.describe Routing::DestinationNextRate, type: :model do
       record.destroy
     end
 
-    let!(:record) { FactoryGirl.create(:destination_next_rate, record_attrs) }
+    let!(:record) { FactoryBot.create(:destination_next_rate, record_attrs) }
     let(:record_attrs) { { destination: destination } }
 
     include_examples :changes_records_qty_of, Routing::DestinationNextRate, by: -1

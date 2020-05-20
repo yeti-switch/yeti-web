@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :contractor, class: Contractor do
     sequence(:name) { |n| "contractor#{n}" }
-    enabled true
-    vendor false
-    customer false
+    enabled { true }
+    vendor { false }
+    customer { false }
 
     factory :customer do
-      vendor false
-      customer true
+      vendor { false }
+      customer { true }
     end
 
     factory :vendor do
-      vendor true
-      customer false
+      vendor { true }
+      customer { false }
     end
   end
 end

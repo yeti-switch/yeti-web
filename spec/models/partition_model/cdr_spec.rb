@@ -58,10 +58,10 @@ RSpec.describe PartitionModel::Cdr do
     before do
       # Cdr::Cdr.add_partition_for Date.parse('2018-12-02')
       # Cdr::Cdr.add_partition_for Date.parse('2019-01-15')
-      FactoryGirl.create_list :cdr, cdrs_qty, time_start: Date.parse('2018-12-02')
+      FactoryBot.create_list :cdr, cdrs_qty, time_start: Date.parse('2018-12-02')
     end
     let!(:another_cdrs) do
-      FactoryGirl.create_list :cdr, 3, time_start: Date.parse('2019-01-15')
+      FactoryBot.create_list :cdr, 3, time_start: Date.parse('2019-01-15')
     end
     let!(:record) do
       record_id = Digest::MD5.hexdigest('cdr.cdr_2018_12')

@@ -10,9 +10,9 @@ describe 'Create new Dialpeer Next Rate', type: :feature, js: true do
   active_admin_form_for DialpeerNextRate, 'new'
   include_context :login_as_admin
 
-  let!(:dialpeer) { FactoryGirl.create(:dialpeer) }
+  let!(:dialpeer) { FactoryBot.create(:dialpeer) }
   before do
-    FactoryGirl.create(:dialpeer)
+    FactoryBot.create(:dialpeer)
     visit new_dialpeer_dialpeer_next_rate_path(dialpeer.id)
 
     aa_form.set_date_time 'Apply time', '2019-01-01 01:00'

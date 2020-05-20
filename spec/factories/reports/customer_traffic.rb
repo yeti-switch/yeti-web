@@ -11,10 +11,10 @@
 #  customer_id :integer          not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :customer_traffic, class: Report::CustomerTraffic do
-    date_start Time.now.utc
-    date_end Time.now.utc + 1.week
+    date_start { Time.now.utc }
+    date_end { Time.now.utc + 1.week }
 
     association :customer, factory: :customer, customer: true
   end

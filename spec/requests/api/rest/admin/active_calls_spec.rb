@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
   include_context :json_api_admin_helpers, type: :'active-calls'
-  let!(:node) { FactoryGirl.create(:node) }
+  let!(:node) { FactoryBot.create(:node) }
 
   describe 'GET /api/rest/admin/active-calls' do
     subject do
@@ -23,8 +23,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     context 'with 2 calls' do
       let(:active_calls) do
         [
-          FactoryGirl.attributes_for(:active_call, :filled, node_id: node.id),
-          FactoryGirl.attributes_for(:active_call, :filled, node_id: node.id)
+          FactoryBot.attributes_for(:active_call, :filled, node_id: node.id),
+          FactoryBot.attributes_for(:active_call, :filled, node_id: node.id)
         ]
       end
       let(:active_calls_ids) { active_calls.map { |r| "#{node.id}*#{r[:local_tag]}" } }
@@ -63,8 +63,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
           result
         end
 
-        let!(:smtp_connection) { FactoryGirl.create(:smtp_connection) }
-        let!(:customer) { FactoryGirl.create(:customer, smtp_connection: smtp_connection) }
+        let!(:smtp_connection) { FactoryBot.create(:smtp_connection) }
+        let!(:customer) { FactoryBot.create(:customer, smtp_connection: smtp_connection) }
 
         include_examples :responds_with_status, 200
         include_examples :returns_json_api_collection do
@@ -134,7 +134,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       expect_any_instance_of(YetisNode::Client).to receive(:calls).with(local_tag).once.and_return(active_call)
     end
 
-    let(:active_call) { FactoryGirl.attributes_for(:active_call, :filled, node_id: node.id) }
+    let(:active_call) { FactoryBot.attributes_for(:active_call, :filled, node_id: node.id) }
 
     rels = %i[
       customer vendor customer-acc vendor-acc customer-auth destination dialpeer
@@ -181,8 +181,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       let(:json_api_request_params) { { include: 'node,customer.smtp-connection' } }
       let(:active_call) { super().merge(customer_id: customer.id) }
 
-      let!(:smtp_connection) { FactoryGirl.create(:smtp_connection) }
-      let!(:customer) { FactoryGirl.create(:customer, smtp_connection: smtp_connection) }
+      let!(:smtp_connection) { FactoryBot.create(:smtp_connection) }
+      let!(:customer) { FactoryBot.create(:customer, smtp_connection: smtp_connection) }
 
       include_examples :responds_with_status, 200
       include_examples :returns_json_api_record, relationships: rels do
@@ -235,7 +235,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:json_api_request_params) { nil }
     let(:record_id) { "#{node.id}*#{local_tag}" }
     let(:local_tag) { active_call[:local_tag] }
-    let(:active_call) { FactoryGirl.attributes_for(:active_call, :filled, node_id: node.id) }
+    let(:active_call) { FactoryBot.attributes_for(:active_call, :filled, node_id: node.id) }
 
     before do
       expect_any_instance_of(YetisNode::Client).to receive(:calls).with(local_tag).once.and_return(active_call)

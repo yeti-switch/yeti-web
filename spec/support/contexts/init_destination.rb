@@ -14,6 +14,6 @@ shared_context :init_destination do |args|
       next_rate: 0.033
     }.merge(args)
 
-    @destination = FactoryGirl.create(:destination, fields)
+    @destination = FactoryBot.create(:destination, fields)
   end
 end

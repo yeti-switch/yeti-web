@@ -19,6 +19,6 @@ shared_context :init_importing_destination do |args|
       is_changed: true
     }.merge(args)
 
-    @importing_destination = FactoryGirl.create(:importing_destination, fields)
+    @importing_destination = FactoryBot.create(:importing_destination, fields)
   end
 end

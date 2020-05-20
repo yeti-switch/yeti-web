@@ -15,7 +15,7 @@
 #  req_dst_rewrite_result :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lnp_routing_plan_lnp_rule, class: Lnp::RoutingPlanLnpRule do
     association :routing_plan, factory: :routing_plan
     database { create(:lnp_database, :thinq) }

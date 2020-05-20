@@ -13,11 +13,11 @@
 #  uuid              :uuid             not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :network_prefix, class: System::NetworkPrefix do
     sequence(:prefix, 1_000, &:to_s)
-    network { System::Network.take || FactoryGirl.create(:network) }
-    country { System::Country.take || FactoryGirl.create(:country) }
+    network { System::Network.take || FactoryBot.create(:network) }
+    country { System::Country.take || FactoryBot.create(:country) }
     uuid { SecureRandom.uuid }
   end
 end
