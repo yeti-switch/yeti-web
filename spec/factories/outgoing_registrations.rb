@@ -21,10 +21,10 @@ FactoryBot.define do
       attempt { 1 }
       max_attempts { 5 }
       retry_delay { 2 }
-    end
-
-    trait :with_node do
-      association :node
+      pop_id { Pop.last&.id || FactoryBot.create(:pop).id }
+      node_id { Node.last&.id || FactoryBot.create(:node).id }
+      last_reply_contacts { 'reply_contact' }
+      last_request_contact { 'request_contact' }
     end
   end
 end
