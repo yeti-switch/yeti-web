@@ -6621,7 +6621,7 @@ CREATE TABLE class4.gateways (
     allow_termination boolean DEFAULT true NOT NULL,
     allow_origination boolean DEFAULT true NOT NULL,
     anonymize_sdp boolean DEFAULT true NOT NULL,
-    proxy_media boolean DEFAULT false NOT NULL,
+    proxy_media boolean DEFAULT true NOT NULL,
     transparent_seqno boolean DEFAULT false NOT NULL,
     transparent_ssrc boolean DEFAULT false NOT NULL,
     sst_enabled boolean DEFAULT false,
@@ -33011,33 +33011,30 @@ BEGIN
     v_customer_allowtime:=i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE
-    v_customer_allowtime:=i_max_call_length;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
   end IF;
 
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
-  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
-  ELSE
-    v_vendor_allowtime:=i_max_call_length;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration,i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration,i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
     v_vendor_allowtime,
-    v_customer_allowtime,
-    i_max_call_length
+    v_customer_allowtime
   )::integer;
-
-  /* time limiting END */
 
 
   /* number rewriting _After_ routing */
@@ -33606,33 +33603,30 @@ BEGIN
     v_customer_allowtime:=i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE
-    v_customer_allowtime:=i_max_call_length;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
   end IF;
 
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
-  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
-  ELSE
-    v_vendor_allowtime:=i_max_call_length;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration,i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration,i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
     v_vendor_allowtime,
-    v_customer_allowtime,
-    i_max_call_length
+    v_customer_allowtime
   )::integer;
-
-  /* time limiting END */
 
 
   /* number rewriting _After_ routing */
@@ -34193,33 +34187,30 @@ BEGIN
     v_customer_allowtime:=i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE
-    v_customer_allowtime:=i_max_call_length;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
   end IF;
 
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
-  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
-  ELSE
-    v_vendor_allowtime:=i_max_call_length;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration,i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration,i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
     v_vendor_allowtime,
-    v_customer_allowtime,
-    i_max_call_length
+    v_customer_allowtime
   )::integer;
-
-  /* time limiting END */
 
 
   /* number rewriting _After_ routing */
@@ -34918,17 +34909,18 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         end if;
 
         v_ret.resources:='';
-        if v_c_acc.origination_capacity is not null then
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-        end if;
-
-        if v_c_acc.total_capacity is not null then
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-        end if;
-
         if v_customer_auth_normalized.capacity is not null then
           v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
@@ -36007,17 +35999,18 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         end if;
 
         v_ret.resources:='';
-        if v_c_acc.origination_capacity is not null then
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-        end if;
-
-        if v_c_acc.total_capacity is not null then
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-        end if;
-
         if v_customer_auth_normalized.capacity is not null then
           v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
@@ -37068,17 +37061,18 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         end if;
 
         v_ret.resources:='';
-        if v_c_acc.origination_capacity is not null then
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-        end if;
-
-        if v_c_acc.total_capacity is not null then
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-        end if;
-
         if v_customer_auth_normalized.capacity is not null then
           v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
@@ -40092,7 +40086,8 @@ CREATE TABLE data_import.import_accounts (
     total_capacity smallint,
     destination_rate_limit numeric,
     vat numeric,
-    max_call_duration integer
+    max_call_duration integer,
+    is_changed boolean
 );
 
 
@@ -40127,7 +40122,8 @@ CREATE TABLE data_import.import_codec_group_codecs (
     codec_name character varying,
     codec_id integer,
     priority integer,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -40158,7 +40154,8 @@ CREATE TABLE data_import.import_codec_groups (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -40197,7 +40194,8 @@ CREATE TABLE data_import.import_contractors (
     address character varying,
     phones character varying,
     smtp_connection_id integer,
-    smtp_connection_name character varying
+    smtp_connection_name character varying,
+    is_changed boolean
 );
 
 
@@ -40295,7 +40293,8 @@ CREATE TABLE data_import.import_customers_auth (
     src_number_max_length smallint,
     src_number_min_length smallint,
     lua_script_id smallint,
-    lua_script_name character varying
+    lua_script_name character varying,
+    is_changed boolean
 );
 
 
@@ -40355,7 +40354,8 @@ CREATE TABLE data_import.import_destinations (
     dst_number_min_length integer,
     dst_number_max_length integer,
     routing_tag_mode_id smallint,
-    routing_tag_mode_name character varying
+    routing_tag_mode_name character varying,
+    is_changed boolean
 );
 
 
@@ -40426,7 +40426,8 @@ CREATE TABLE data_import.import_dialpeers (
     routing_tag_mode_id smallint,
     routing_tag_mode_name character varying,
     routeset_discriminator_id smallint,
-    routeset_discriminator_name character varying
+    routeset_discriminator_name character varying,
+    is_changed boolean
 );
 
 
@@ -40457,7 +40458,8 @@ CREATE TABLE data_import.import_disconnect_policies (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -40493,7 +40495,8 @@ CREATE TABLE data_import.import_gateway_groups (
     prefer_same_pop boolean,
     error_string character varying,
     balancing_mode_id smallint,
-    balancing_mode_name character varying
+    balancing_mode_name character varying,
+    is_changed boolean
 );
 
 
@@ -40657,7 +40660,8 @@ CREATE TABLE data_import.import_gateways (
     termination_dst_numberlist_name character varying,
     lua_script_id smallint,
     lua_script_name character varying,
-    use_registered_aor boolean
+    use_registered_aor boolean,
+    is_changed boolean
 );
 
 
@@ -40716,7 +40720,8 @@ CREATE TABLE data_import.import_numberlist_items (
     number_min_length smallint,
     number_max_length smallint,
     lua_script_id smallint,
-    lua_script_name character varying
+    lua_script_name character varying,
+    is_changed boolean
 );
 
 
@@ -40761,7 +40766,8 @@ CREATE TABLE data_import.import_numberlists (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     tag_action_value_names character varying,
     lua_script_id smallint,
-    lua_script_name character varying
+    lua_script_name character varying,
+    is_changed boolean
 );
 
 
@@ -40794,7 +40800,8 @@ CREATE TABLE data_import.import_rateplans (
     name character varying,
     error_string character varying,
     profit_control_mode_id integer,
-    profit_control_mode_name character varying
+    profit_control_mode_name character varying,
+    is_changed boolean
 );
 
 
@@ -40845,7 +40852,8 @@ CREATE TABLE data_import.import_registrations (
     transport_protocol_id smallint,
     proxy_transport_protocol_id smallint,
     transport_protocol_name character varying,
-    proxy_transport_protocol_name character varying
+    proxy_transport_protocol_name character varying,
+    is_changed boolean
 );
 
 
@@ -40880,7 +40888,8 @@ CREATE TABLE data_import.import_routing_groups (
     sorting_id integer,
     more_specific_per_vendor boolean,
     rate_delta_max numeric DEFAULT 0 NOT NULL,
-    error_string character varying
+    error_string character varying,
+    is_changed boolean
 );
 
 
@@ -47060,6 +47069,10 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20190919080917'),
 ('20191016183312'),
 ('20191018180427'),
-('20200105131431');
+('20200105131431'),
+('20200202154005'),
+('20200412135211'),
+('20200425110642'),
+('20200504210442');
 
 

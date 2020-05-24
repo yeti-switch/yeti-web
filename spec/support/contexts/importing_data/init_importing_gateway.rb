@@ -96,7 +96,8 @@ shared_context :init_importing_gateway do |args|
       sensor_name: nil,
       sensor_id: nil,
       sensor_level_name: 'Signaling',
-      sensor_level_id: 1
+      sensor_level_id: 1,
+      is_changed: true
     }.merge(args)
 
     @importing_gateway = FactoryGirl.create(:importing_gateway, fields)

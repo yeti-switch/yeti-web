@@ -10,6 +10,7 @@
 #  error_string             :string
 #  profit_control_mode_id   :integer
 #  profit_control_mode_name :string
+#  is_changed               :boolean
 #
 
 class Importing::Rateplan < Importing::Base

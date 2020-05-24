@@ -2,9 +2,10 @@
 
 ActiveAdmin.register Importing::Contractor do
   filter :name
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :vendor, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :customer, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :enabled
+  boolean_filter :vendor
+  boolean_filter :customer
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -22,6 +23,7 @@ ActiveAdmin.register Importing::Contractor do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :name
     column :enabled
     column :vendor

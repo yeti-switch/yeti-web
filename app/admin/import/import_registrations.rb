@@ -6,6 +6,7 @@ ActiveAdmin.register Importing::Registration do
   filter :routing_group_name
   filter :gateway_name
   filter :account_name
+  boolean_filter :is_changed
 
   acts_as_import_preview
 
@@ -25,6 +26,7 @@ ActiveAdmin.register Importing::Registration do
     id_column
     column :error_string
     column :o_id
+    column :is_changed
     column :name
     column :enabled
 

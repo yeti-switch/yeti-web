@@ -35,7 +35,6 @@ module ResourceDSL
 
       options[:template_object] = Importing::Model.new(
         # "proc" prevents error on `rake db:structure:dump`
-        unique_columns_proc: proc { options[:resource_class].import_attributes },
         csv_options: { col_sep: ',', row_sep: nil, quote_char: nil }
       )
 
@@ -52,12 +51,8 @@ module ResourceDSL
       end
 
       if options[:resource_class].respond_to?(:after_import_hook)
-        options[:after_import] = proc { |importer|
-          unique_columns = []
-          if importer.model.respond_to?(:unique_columns_values)
-            unique_columns = importer.model.unique_columns_values.reject(&:blank?).map(&:to_sym)
-          end
-          options[:resource_class].after_import_hook(unique_columns)
+        options[:after_import] = proc { |_importer|
+          options[:resource_class].after_import_hook
         }
       end
 

@@ -4,7 +4,7 @@ shared_context :init_importing_numberlist_item do |args|
   args ||= {}
 
   before do
-    fields = {}.merge(args)
+    fields = { is_changed: true }.merge(args)
 
     @importing_numberlist_item = FactoryGirl.create(:importing_numberlist_item, fields)
   end

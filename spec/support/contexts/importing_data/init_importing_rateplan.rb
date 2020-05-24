@@ -5,7 +5,8 @@ shared_context :init_importing_rateplan do |args|
 
   before do
     fields = {
-      name: 'a-RP'
+      name: 'a-RP',
+      is_changed: true
     }.merge(args)
 
     @importing_rateplan = FactoryGirl.create(:importing_rateplan, fields)
