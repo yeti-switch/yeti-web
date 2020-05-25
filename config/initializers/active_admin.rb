@@ -129,7 +129,7 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   # config.comments = true
-  config.comments_menu = false
+  config.comments_menu = { parent: 'Logs', priority: 300, label: 'Comments' }
 
   config.current_filters = false
 
