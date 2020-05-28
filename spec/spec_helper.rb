@@ -11,7 +11,10 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'webmock/rspec'
 require 'pundit/rspec'
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(
+  allow_localhost: true,
+  allow: 'chromedriver.storage.googleapis.com'
+)
 # require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
