@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Account do
   menu parent: 'Billing', priority: 10
-
+  search_support!
   acts_as_safe_destroy
   acts_as_audit
   acts_as_clone
@@ -122,7 +122,13 @@ ActiveAdmin.register Account do
 
   filter :id
   filter :uuid_equals, label: 'UUID'
-  filter :contractor, input_html: { class: 'chosen' }
+  filter :contractor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:contractor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
   filter :name
   filter :balance
   filter :vat

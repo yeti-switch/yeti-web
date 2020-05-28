@@ -210,9 +210,27 @@ ActiveAdmin.register CustomersAuth do
   filter :name
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :customer, input_html: { class: 'chosen' }
-  filter :account, input_html: { class: 'chosen' }
-  filter :gateway, input_html: { class: 'chosen' }
+  filter :customer,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
+
+  filter :account,
+         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:account_id_eq]
+           resource_id ? Account.where(id: resource_id) : []
+         }
+
+  filter :gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
+
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }
   filter :dump_level, as: :select, collection: proc { DumpLevel.select(%i[id name]).reorder(:id) }

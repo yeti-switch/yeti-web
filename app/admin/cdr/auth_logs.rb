@@ -103,7 +103,13 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
 
   filter :id
   filter :request_time
-  filter :gateway
+  filter :gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
+
   filter :pop
   filter :node
   filter :username

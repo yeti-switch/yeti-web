@@ -12,10 +12,12 @@ ActiveAdmin.register Report::Realtime::BadRouting do
                             collection: Report::Realtime::Base::INTERVALS,
                             input_html: { class: 'chosen' }, include_blank: false
 
-  filter :customer_id, label: 'Customer',
-                       as: :select,
-                       collection: proc { Contractor.select(:id, :name).reorder(:name) },
-                       input_html: { class: 'chosen' }
+  filter :customer,
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:customer_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         },
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' }
 
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }

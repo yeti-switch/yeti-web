@@ -30,6 +30,8 @@ class Contractor < ActiveRecord::Base
 
   scope :customers, -> { where customer: true }
   scope :vendors, -> { where vendor: true }
+  scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
+  scope :ordered_by, ->(term) { order(term) }
 
   include Yeti::ResourceStatus
 
@@ -68,5 +70,11 @@ class Contractor < ActiveRecord::Base
     if customer_changed?(from: true, to: false) && customers_auths.any?
       errors.add(:customer, I18n.t('activerecord.errors.models.contractor.attributes.customer'))
     end
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      search_for ordered_by
+    ]
   end
 end

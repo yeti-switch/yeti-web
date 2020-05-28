@@ -38,6 +38,7 @@
 //= require highlightjs
 //= require modal_link
 //= require import_apply_unique_fields
+//= require ajax-chosen
 
 
 $(document).ready(function () {
@@ -45,6 +46,7 @@ $(document).ready(function () {
     $("select.chosen-wide").chosen({no_results_text: "No results matched", width: '80%', search_contains: true});
     $("select.chosen-sortable").chosen({no_results_text: "No results matched", width: '80%', search_contains: true}).chosenSortable();
 
+    $("select.chosen-ajax").chosen_ajax({ajax_method: "GET", ajax_min_chars: 3, no_results_text: "No results matched"})
 
     $('.index_as_table .index_table').stickyTableHeaders();
     $(document).on('has_many_add:after', function (e, fieldset) {

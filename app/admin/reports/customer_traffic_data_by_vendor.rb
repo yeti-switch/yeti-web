@@ -9,7 +9,12 @@ ActiveAdmin.register Report::CustomerTrafficDataByVendor, as: 'CustomerTrafficDa
 
   filter :calls_count
   filter :calls_duration
-  filter :vendor, as: :select, input_html: { class: 'chosen' }, collection: proc { Contractor.where(vendor: true) }
+  filter :vendor,
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:vendor_id_eq]
+           resource_id ? Contractor.where(id: resource_id) : []
+         }
 
   decorate_with ReportCustomerTrafficByVendorDecorator
 
