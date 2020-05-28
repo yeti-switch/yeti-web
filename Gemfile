@@ -107,10 +107,10 @@ gem 'apitome', '~> 0.1.0'
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'chromedriver-helper'
   gem 'coveralls', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'webdrivers', '~> 4.0'
   gem 'webmock'
 end
 gem 'bootsnap', require: false
