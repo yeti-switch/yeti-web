@@ -175,8 +175,6 @@ GEM
       rspec_api_documentation
     arbre (1.2.1)
       activesupport (>= 3.0.0)
-    archive-zip (0.11.0)
-      io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
     awesome_print (1.8.0)
@@ -208,9 +206,6 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chromedriver-helper (2.1.0)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     chunky_png (1.3.10)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -307,7 +302,6 @@ GEM
       has_scope (~> 0.6)
       railties (>= 5.0, < 6.1)
       responders (>= 2, < 4)
-    io-like (0.3.0)
     jaro_winkler (1.5.2)
     jquery-rails (4.3.4)
       rails-dom-testing (>= 1, < 3)
@@ -538,6 +532,10 @@ GEM
     uniform_notifier (1.13.0)
     warden (1.2.8)
       rack (>= 2.0.6)
+    webdrivers (4.1.3)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
     webmock (3.5.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -576,7 +574,6 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   chosen-rails (= 1.5.2)
-  chromedriver-helper
   coffee-rails (~> 4.0)
   compass-rails (~> 3.0.2)
   coveralls
@@ -628,6 +625,7 @@ DEPENDENCIES
   therubyracer (~> 0.12.1)
   thin
   uglifier (>= 1.3)
+  webdrivers (~> 4.0)
   webmock
   yetis_node!
   zip-zip
