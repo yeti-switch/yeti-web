@@ -145,6 +145,7 @@
 #  legb_local_tag                  :string
 #  legb_ruri                       :string
 #  legb_outbound_proxy             :string
+#  p_charge_info_in                :string
 #
 
 class Report::Realtime::BadRouting < Report::Realtime::Base
