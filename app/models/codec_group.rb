@@ -44,5 +44,6 @@ class CodecGroup < ActiveRecord::Base
     codecs_tmp =  codec_group_codecs.to_a.reject(&:marked_for_destruction?)
     errors[:base] << 'Empty Codecs' if codecs_tmp.empty?
     errors[:base] << "Codec Group can't contain duplicated codecs" unless codecs_tmp.length == codecs_tmp.uniq(&:codec_id).length
+    errors[:base] << "Codec Group can't contain codecs with the same priority" unless codecs_tmp.length == codecs_tmp.uniq(&:priority).length
   end
 end

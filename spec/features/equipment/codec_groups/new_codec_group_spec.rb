@@ -39,4 +39,25 @@ describe 'Create new Codec Group', type: :feature, js: true do
   include_examples :changes_records_qty_of, CodecGroup, by: 1
   include_examples :changes_records_qty_of, CodecGroupCodec, by: 1
   include_examples :shows_flash_message, :notice, 'Codec group was successfully created.'
+
+  context 'two codecs with same priority' do
+    let(:gsm_codec) { Codec.find_by!(name: 'GSM/8000') }
+    it 'should have validations error and reload page' do
+      aa_form.set_text 'Name', 'c_group_with_two_codecs'
+
+      aa_form.within_has_many('Codec group codec', 0) do
+        aa_form.select_chosen 'Codec', codec.name
+        aa_form.set_text 'Priority', '50'
+      end
+      aa_form.add_has_many('Codec group codec')
+
+      aa_form.within_has_many('Codec group codec', 1) do
+        find('#codec_group_codec_group_codecs_attributes_1_codec_id_chosen').click
+        aa_form.select_chosen 'Codec', gsm_codec.name
+        aa_form.set_text 'Priority', '50'
+      end
+      subject
+      expect(page).to have_content("Codec Group can't contain codecs with the same priority")
+    end
+  end
 end
