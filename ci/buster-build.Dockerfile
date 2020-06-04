@@ -32,7 +32,7 @@ RUN 	apt-get update && \
 		zlib1g-dev \
 		libpq-dev \
 		python-yaml \
-		postgresql-client-11 \
+		postgresql-client-12 \
 		git-changelog \
 		python-setuptools \
 		lsb-release \
