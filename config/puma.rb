@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
-workers 2
-threads 2, 8
+workers ENV.fetch('WEB_CONCURRENCY') { 2 }
+
+max_threads_count = ENV.fetch('RAILS_MAX_THREADS') { 8 }
+min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { 2 }
+threads min_threads_count, max_threads_count
+
+port ENV.fetch('PORT') { 3000 }
+
+environment ENV.fetch('RAILS_ENV') { 'development' }
 
 # directory '/opt/yeti-web'
 # daemonize
@@ -33,10 +40,32 @@ before_fork do
   end
   PumaWorkerKiller.start
 
-  if Rails.configuration.yeti_web['prometheus']['enabled']
+  if PrometheusConfig.enabled?
     require 'prometheus_exporter/client'
     require 'prometheus_exporter/instrumentation'
+    require 'pgq_prometheus'
+    require 'pgq_prometheus/processor'
+    require 'pgq_prometheus/sql_caller/active_record'
+    require 'prometheus/pgq_prometheus_config'
+    require 'prometheus/yeti_processor'
+    PgqPrometheus::Processor.tap do |processor|
+      processor.sql_caller = PgqPrometheus::SqlCaller::ActiveRecord.new('Cdr::Base')
+      processor.logger = Rails.logger
+      processor.on_error = proc do |e|
+        CaptureError.capture(e, tags: { component: 'Prometheus', processor_class: processor })
+      end
+      processor.before_collect = proc do
+        processor.logger.info { "Collection metrics for #{processor}..." }
+      end
+      processor.after_collect = proc do
+        processor.logger.info { "Metrics collected for #{processor}." }
+      end
+    end
+
     PrometheusExporter::Instrumentation::Puma.start
+    PrometheusExporter::Instrumentation::Process.start(type: 'master')
+    PgqPrometheus::Processor.start
+    YetiProcessor.start
   end
 end
 
@@ -46,11 +75,8 @@ on_worker_boot do
     SecondBase::Base.establish_connection
   end
 
-  if Rails.configuration.yeti_web['prometheus']['enabled']
+  if PrometheusConfig.enabled?
     require 'prometheus_exporter/instrumentation'
-    PrometheusExporter::Instrumentation::Process.start(
-      type: 'web',
-      labels: Rails.configuration.yeti_web['prometheus']['default_labels']
-    )
+    PrometheusExporter::Instrumentation::Process.start(type: 'web')
   end
 end
