@@ -12,25 +12,32 @@ class YetiProcessor
   end
 
   def self.start(client: nil, frequency: 30, labels: nil)
+    stop
+
     client ||= PrometheusExporter::Client.default
     metric_labels = labels&.dup || {}
     process_collector = new(metric_labels)
 
-    stop if running?
-
     @thread = Thread.new do
-      loop do
-        begin
-          metrics = process_collector.collect
-          metrics.each do |metric|
-            client.send_json metric
+      logger.tagged(name) do
+        ActiveRecord::Base.connection_pool.release_connection
+        logger&.info { "#{name} thread started." }
+
+        loop do
+          begin
+            logger&.info { "Collecting metrics for #{name}..." }
+            metrics = process_collector.collect
+            metrics.each do |metric|
+              client.send_json metric
+            end
+            logger&.info { "Metrics collected for #{name}." }
+          rescue StandardError => e
+            warn "#{name} Failed To Collect Stats #{e.class} #{e.message}"
+            logger&.error { "#{e.class} #{e.message} #{e.backtrace.join("\n")}" }
+            on_error(e)
           end
-        rescue StandardError => e
-          warn "#{name} Failed To Collect Stats #{e.class} #{e.message}"
-          logger&.error { "#{e.class} #{e.message} #{e.backtrace.join("\n")}" }
-          on_error(e)
+          sleep frequency
         end
-        sleep frequency
       end
     end
 
@@ -38,14 +45,10 @@ class YetiProcessor
   end
 
   def self.stop
-    return unless running?
+    return unless defined?(@thread)
 
-    @thread.kill
+    @thread&.kill
     @thread = nil
-  end
-
-  def self.running?
-    defined?(@thread) && @thread
   end
 
   def initialize(labels = {})
@@ -53,24 +56,20 @@ class YetiProcessor
   end
 
   def collect
-    within_logger_tags(self.class.name) do
-      collect_metrics
+    ActiveRecord::Base.connection_pool.with_connection do
+      now = Time.now.utc
+      metrics = []
+
+      jobs_scope = BaseJob.all
+      jobs_scope.pluck(:type, :updated_at).each do |(type, updated_at)|
+        metrics << format_metric(job_delay: now - updated_at, labels: { job: type })
+      end
+
+      metrics
     end
   end
 
   private
-
-  def collect_metrics
-    now = Time.now.utc
-    metrics = []
-
-    jobs_scope = BaseJob.all
-    jobs_scope.pluck(:type, :updated_at).each do |(type, updated_at)|
-      metrics << format_metric(job_delay: now - updated_at, labels: { job: type })
-    end
-
-    metrics
-  end
 
   def format_metric(data)
     labels = (data.delete(:labels) || {}).merge(@metric_labels)
@@ -79,13 +78,5 @@ class YetiProcessor
       metric_labels: labels,
       **data
     }
-  end
-
-  def within_logger_tags(*tags)
-    if logger.nil? || !logger.respond_to?(:tagged)
-      yield
-    else
-      logger.tagged(*tags) { yield }
-    end
   end
 end

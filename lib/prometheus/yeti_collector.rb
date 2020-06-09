@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class YetiCollector < PrometheusExporter::Server::TypeCollector
+  MAX_METRIC_AGE = 30
   GAUGES = {
     job_delay: 'cron job delay in seconds'
   }.freeze
@@ -43,6 +44,10 @@ class YetiCollector < PrometheusExporter::Server::TypeCollector
   end
 
   def collect(obj)
+    now = ::Process.clock_gettime(::Process::CLOCK_MONOTONIC)
+
+    obj['created_at'] = now
+    @data.delete_if { |m| m['created_at'] + MAX_METRIC_AGE < now }
     @data << obj
   end
 end
