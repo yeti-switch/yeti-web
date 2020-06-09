@@ -8,30 +8,7 @@ ActiveAdmin.register CustomersAuth do
   acts_as_safe_destroy
   acts_as_status
   acts_as_async_destroy('CustomersAuth')
-  acts_as_async_update('CustomersAuth',
-                       lambda do
-                         {
-                           enabled: boolean_select,
-                           reject_calls: boolean_select,
-                           transport_protocol_id: Equipment::TransportProtocol.pluck(:name, :id),
-                           ip: 'text',
-                           src_prefix: 'text',
-                           min_src_number_length: 'text',
-                           max_src_number_length: 'text',
-                           dst_prefix: 'text',
-                           min_dst_number_length: 'text',
-                           max_dst_number_length: 'text',
-                           from_domain: 'text',
-                           to_domain: 'text',
-                           x_yeti_auth: 'text',
-                           dst_numberlist_id: Routing::Numberlist.pluck(:name, :id),
-                           src_numberlist_id: Routing::Numberlist.pluck(:name, :id),
-                           dump_level_id: DumpLevel.pluck(:name, :id),
-                           rateplan_id: Rateplan.pluck(:name, :id),
-                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id),
-                           lua_script_id: System::LuaScript.pluck(:name, :id)
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::CustomersAuth
 
   acts_as_delayed_job_lock
 

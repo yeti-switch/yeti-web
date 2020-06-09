@@ -10,34 +10,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_quality_stat
   acts_as_stats_actions
   acts_as_async_destroy('Routing::Destination')
-  acts_as_async_update('Routing::Destination',
-                       lambda do
-                         {
-                           enabled: boolean_select,
-                           prefix: 'text',
-                           dst_number_min_length: 'text',
-                           dst_number_max_length: 'text',
-                           routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name, :id),
-                           reject_calls: boolean_select,
-                           quality_alarm: boolean_select,
-                           rateplan_id: Rateplan.pluck(:name, :id),
-                           valid_from: 'datepicker',
-                           valid_till: 'datepicker',
-                           rate_policy_id: DestinationRatePolicy.pluck(:name, :id),
-                           initial_interval: 'text',
-                           initial_rate: 'text',
-                           next_interval: 'text',
-                           next_rate: 'text',
-                           use_dp_intervals: boolean_select,
-                           connect_fee: 'text',
-                           profit_control_mode_id: Routing::RateProfitControlMode.pluck(:name, :id),
-                           dp_margin_fixed: 'text',
-                           dp_margin_percent: 'text',
-                           asr_limit: 'text',
-                           acd_limit: 'text',
-                           short_calls_limit: 'text'
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::Destination
 
   acts_as_delayed_job_lock
 

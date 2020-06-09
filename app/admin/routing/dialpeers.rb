@@ -12,43 +12,7 @@ ActiveAdmin.register Dialpeer do
   acts_as_lock
   acts_as_stats_actions
   acts_as_async_destroy('Dialpeer')
-  acts_as_async_update('Dialpeer',
-                       lambda do
-                         {
-                           enabled: boolean_select,
-                           prefix: 'text',
-                           dst_number_min_length: 'text',
-                           dst_number_max_length: 'text',
-                           routing_tag_mode_id: Routing::RoutingTagMode.pluck(:name, :id),
-                           routing_group_id: RoutingGroup.pluck(:name, :id),
-                           priority: 'text',
-                           force_hit_rate: 'text',
-                           exclusive_route: boolean_select,
-                           initial_interval: 'text',
-                           initial_rate: 'text',
-                           next_interval: 'text',
-                           next_rate: 'text',
-                           connect_fee: 'text',
-                           lcr_rate_multiplier: 'text',
-                           gateway_id: Gateway.pluck(:name, :id),
-                           gateway_group_id: GatewayGroup.pluck(:name, :id),
-                           vendor_id: Contractor.vendors.pluck(:name, :id),
-                           account_id: Account.pluck(:name, :id),
-                           routeset_discriminator_id: Routing::RoutesetDiscriminator.pluck(:name, :id),
-                           valid_from: 'datepicker',
-                           valid_till: 'datepicker',
-                           asr_limit: 'text',
-                           acd_limit: 'text',
-                           short_calls_limit: 'text',
-                           capacity: 'text',
-                           src_name_rewrite_rule: 'text',
-                           src_name_rewrite_result: 'text',
-                           src_rewrite_rule: 'text',
-                           src_rewrite_result: 'text',
-                           dst_rewrite_rule: 'text',
-                           dst_rewrite_result: 'text'
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::Dialpeer
 
   acts_as_delayed_job_lock
 

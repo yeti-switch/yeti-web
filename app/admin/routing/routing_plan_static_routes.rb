@@ -8,16 +8,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_async_destroy('Routing::RoutingPlanStaticRoute')
-  acts_as_async_update('Routing::RoutingPlanStaticRoute',
-                       lambda do
-                         {
-                           routing_plan_id: Routing::RoutingPlan.pluck(:name, :id),
-                           prefix: 'text',
-                           priority: 'text',
-                           weight: 'text',
-                           vendor_id: Contractor.vendors.pluck(:name, :id)
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::RoutingPlanStaticRoute
 
   acts_as_delayed_job_lock
 
