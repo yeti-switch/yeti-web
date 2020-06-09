@@ -7,27 +7,7 @@ ActiveAdmin.register Account do
   acts_as_audit
   acts_as_clone
   acts_as_async_destroy('Account')
-  acts_as_async_update('Account',
-                       lambda do
-                         {
-                           contractor_id: Contractor.pluck(:name, :id),
-                           min_balance: 'text',
-                           max_balance: 'text',
-                           vat: 'text',
-                           balance_low_threshold: 'text',
-                           balance_high_threshold: 'text',
-                           destination_rate_limit: 'text',
-                           origination_capacity: 'text',
-                           termination_capacity: 'text',
-                           total_capacity: 'text',
-                           max_call_duration: 'text',
-                           vendor_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
-                           customer_invoice_period_id: Billing::InvoicePeriod.pluck(:name, :id),
-                           vendor_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
-                           customer_invoice_template_id: Billing::InvoiceTemplate.pluck(:name, :id),
-                           timezone: 'datepicker'
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::Account
 
   acts_as_delayed_job_lock
 

@@ -103,8 +103,9 @@ en:
     errors:
       models:
         contractor:
+          vendor_and_customer: "Contractor must be customer or vendor"
           attributes:
-            customer: "Can't be disabled when contractor used at Customer auth"
+            customer: "can't be disabled when contractor used at Customer auth"
         gateway:
           attributes:
             allow_termination:
@@ -163,3 +164,13 @@ en:
       inv_first_successful_call_at: "test"
       inv_last_call_at: "test"
       inv_last_successful_call_at: "test"
+  errors:
+    messages:
+      invalid_date: "is not a valid date"
+      invalid_time: "is not a valid time"
+      invalid_datetime: "is not a valid datetime"
+      is_at: "must be at %{restriction}"
+      before: "must be before %{restriction}"
+      on_or_before: "must be before or equal to %{restriction}"
+      after: "must be after %{restriction}"
+      on_or_after: "must be after or equal to %{restriction}"

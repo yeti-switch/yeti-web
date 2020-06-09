@@ -7,12 +7,7 @@ ActiveAdmin.register GatewayGroup do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_async_destroy('GatewayGroup')
-  acts_as_async_update('GatewayGroup',
-                       lambda do
-                         {
-                           vendor_id: Contractor.vendors.pluck(:name, :id)
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::GatewayGroup
 
   acts_as_delayed_job_lock
 

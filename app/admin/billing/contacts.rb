@@ -8,15 +8,7 @@ ActiveAdmin.register Billing::Contact do
   acts_as_audit
   acts_as_clone
   acts_as_async_destroy('Billing::Contact')
-  acts_as_async_update('Billing::Contact',
-                       lambda do
-                         {
-                           contractor_id: Contractor.pluck(:name, :id),
-                           admin_user_id: AdminUser.pluck(:username, :id),
-                           email: 'text',
-                           notes: 'text'
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::Contact
 
   acts_as_delayed_job_lock
 
