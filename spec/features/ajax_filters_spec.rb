@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe 'Load filter options', type: :feature, js: true do
   include_context :login_as_admin
   before { visit cdrs_path }

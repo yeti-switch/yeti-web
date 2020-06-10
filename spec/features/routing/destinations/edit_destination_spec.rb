@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Edit Destination', type: :feature do
+RSpec.describe 'Edit Destination', type: :feature do
   include_context :login_as_admin
 
   context 'unset "Tag action value"' do

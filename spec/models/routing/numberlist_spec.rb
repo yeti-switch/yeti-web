@@ -20,8 +20,6 @@
 #  external_id                :integer
 #
 
-require 'spec_helper'
-
 RSpec.describe Routing::Numberlist, type: :model do
   context '#validations' do
     include_examples :test_model_with_tag_action

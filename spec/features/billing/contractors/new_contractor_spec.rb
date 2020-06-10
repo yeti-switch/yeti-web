@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Create new Contractor', type: :feature, js: false do
+RSpec.describe 'Create new Contractor', type: :feature, js: false do
   include_context :login_as_admin
 
   before do

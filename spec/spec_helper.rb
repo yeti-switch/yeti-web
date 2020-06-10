@@ -37,6 +37,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = false
+  config.disable_monkey_patching!
 
   if Bullet.enable?
     # bullet false positive with HABTM association

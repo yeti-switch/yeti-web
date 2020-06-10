@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Auth Logs Index', type: :feature do
+RSpec.describe 'Auth Logs Index', type: :feature do
   include_context :login_as_admin
 
   it 'n+1 checks' do

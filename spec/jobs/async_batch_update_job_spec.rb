@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe AsyncBatchUpdateJob, type: :job do
   describe '#perform' do
     include_context :init_rateplan

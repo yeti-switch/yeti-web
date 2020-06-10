@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Report Realtime Termination Distribution', type: :feature do
+RSpec.describe 'Report Realtime Termination Distribution', type: :feature do
   include_context :login_as_admin
 
   let!(:vendor) { FactoryBot.create(:vendor) }

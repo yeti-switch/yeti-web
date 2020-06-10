@@ -11,9 +11,7 @@
 #  database_id   :integer          not null
 #
 
-require 'spec_helper'
-
-describe Lnp::Database, type: :model do
+RSpec.describe Lnp::Database, type: :model do
   it 'validates correctly' do
     is_expected.to validate_presence_of(:name)
   end

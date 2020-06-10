@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-describe Importing::RoutingGroup do
+RSpec.describe Importing::RoutingGroup do
   let(:preview_item) { described_class.last }
 
   subject do

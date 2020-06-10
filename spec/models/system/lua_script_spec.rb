@@ -11,9 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-require 'spec_helper'
-
-describe System::LuaScript, type: :model do
+RSpec.describe System::LuaScript, type: :model do
   describe 'validations' do
     subject do
       described_class.create(name: 'lua script', source: '...')

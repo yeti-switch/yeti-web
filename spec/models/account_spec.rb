@@ -33,9 +33,7 @@
 #  max_call_duration             :integer
 #
 
-require 'spec_helper'
-
-describe Account, type: :model do
+RSpec.describe Account, type: :model do
   it do
     should validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     should validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)

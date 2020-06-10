@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::RateplansController, type: :request do
+RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :request do
   include_context :json_api_customer_v1_helpers, type: :rateplans
   # RatePlans for the other customer
   before { create_list(:rateplan, 2) }

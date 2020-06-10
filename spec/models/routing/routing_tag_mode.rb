@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Routing::RoutingTagMode, type: :model do
   describe '#and?' do
     subject { described_class.new(id: id).and? }

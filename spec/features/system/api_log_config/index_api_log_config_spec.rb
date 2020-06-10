@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Index System Api Log Configs', type: :feature do
+RSpec.describe 'Index System Api Log Configs', type: :feature do
   include_context :login_as_admin
   it 'n+1 checks' do
     api_log_configs = create_list(:api_log_config, 2)

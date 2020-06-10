@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::RateplansController, type: :controller do
+RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :controller do
   let(:api_access) { create :api_access }
   let(:customer) { api_access.customer }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Create new CDR export', js: true do
+RSpec.describe 'Create new CDR export', js: true do
   include_context :login_as_admin
 
   let!(:account) do

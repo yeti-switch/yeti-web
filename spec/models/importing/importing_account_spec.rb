@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-describe Importing::Account do
+RSpec.describe Importing::Account do
   include_context :init_contractor, name: 'PBXww', vendor: false, customer: true
 
   let(:preview_item) { described_class.last }

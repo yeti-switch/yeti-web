@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Create new Routing Tag', type: :feature, js: true do
+RSpec.describe 'Create new Routing Tag', type: :feature, js: true do
   subject do
     aa_form.submit
   end

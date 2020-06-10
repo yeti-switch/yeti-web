@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 # acts_as_clone is a shared functionality
 # so we do not need to test every page
 # we need to test every attribute type:
@@ -9,7 +7,7 @@ require 'spec_helper'
 # CustomersAuth has all types of attributes
 # Thats why it is perfect for testing "Copy"-action
 
-describe 'Copy Customers Auth', type: :feature do
+RSpec.describe 'Copy Customers Auth', type: :feature do
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Index Radius Auth Profiles', type: :feature do
+RSpec.describe 'Index Radius Auth Profiles', type: :feature do
   include_context :login_as_admin
   let!(:customers_auth) { create(:customers_auth) }
   it 'n+1 checks' do
