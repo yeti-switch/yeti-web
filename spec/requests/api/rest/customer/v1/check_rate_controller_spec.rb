@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::CheckRateController, type: :request do
+RSpec.describe Api::Rest::Customer::V1::CheckRateController, type: :request do
   include_context :json_api_customer_v1_helpers, type: :check_rates
   let(:json_api_request_path) { "#{json_api_request_path_prefix}/check-rate" }
   let(:account) { create(:account, contractor: customer) }

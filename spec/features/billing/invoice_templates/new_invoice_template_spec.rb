@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 file_path = Rails.root.join 'spec/features/billing/invoice_templates/template.odt'
 
-describe 'Create new Invoice Template', type: :feature do
+RSpec.describe 'Create new Invoice Template', type: :feature do
   include_context :login_as_admin
 
   before do

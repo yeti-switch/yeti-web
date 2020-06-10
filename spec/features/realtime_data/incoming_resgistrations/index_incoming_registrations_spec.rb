@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Index Incoming Registrations', type: :feature do
+RSpec.describe 'Index Incoming Registrations', type: :feature do
   include_context :login_as_admin
 
   let!(:node) { FactoryBot.create(:node) }

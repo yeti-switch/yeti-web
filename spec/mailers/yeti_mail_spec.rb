@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe YetiMail do
   describe '.email_message' do
     subject do

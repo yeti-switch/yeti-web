@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Customer::V1::AuthController, type: :request do
+RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
   let(:json_request_path) { '/api/rest/customer/v1/auth' }
   let(:json_request_headers) do
     {

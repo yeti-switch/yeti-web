@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Api::Rest::System::JobsController do
   describe 'PUT /api/rest/system/jobs/:type/run' do
     subject do

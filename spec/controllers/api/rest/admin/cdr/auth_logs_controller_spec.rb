@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
+RSpec.describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
   include_context :jsonapi_admin_headers
 
   after { Cdr::AuthLog.destroy_all }

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'CDR Partitions index', type: :feature do
+RSpec.describe 'CDR Partitions index', type: :feature do
   include_context :login_as_admin
 
   before do

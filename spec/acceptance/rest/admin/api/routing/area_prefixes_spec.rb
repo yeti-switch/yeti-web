@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
-resource 'Routing AreaPrefix' do
+RSpec.resource 'Routing AreaPrefix' do
   include_context :acceptance_admin_user
 
   let(:collection) { create_list(:area_prefix, 2) }

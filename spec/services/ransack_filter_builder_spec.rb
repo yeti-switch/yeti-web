@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe RansackFilterBuilder do
   let(:builder) { RansackFilterBuilder.new(attr: attr, operator: operator) }
   let(:attr) { 'name' }

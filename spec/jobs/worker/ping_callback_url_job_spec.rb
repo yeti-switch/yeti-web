@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Worker::PingCallbackUrlJob, type: :job do
   subject do
     described_class.perform_now(callback_url, params)

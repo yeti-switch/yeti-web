@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Admin::AuthController, type: :controller do
+RSpec.describe Api::Rest::Admin::AuthController, type: :controller do
   let!(:admin) { create :admin_user, username: 'admin', password: 'password' }
 
   before { request.accept = 'application/json' }

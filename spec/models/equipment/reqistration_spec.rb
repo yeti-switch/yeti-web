@@ -24,9 +24,7 @@
 #  proxy_transport_protocol_id :integer          default(1), not null
 #
 
-require 'spec_helper'
-
-describe Equipment::Registration, type: :model do
+RSpec.describe Equipment::Registration, type: :model do
   it do
     should validate_numericality_of(:retry_delay).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     should validate_numericality_of(:max_attempts).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Apply Unique Columns Import Contractors', type: :feature, js: true do
+RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: true do
   subject do
     within('#titlebar_right') { click_link 'Apply unique columns' }
     within('.ui-dialog') do

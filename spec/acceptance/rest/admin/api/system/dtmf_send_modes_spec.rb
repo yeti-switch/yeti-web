@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
-resource 'Dtmf send modes' do
+RSpec.resource 'Dtmf send modes' do
   header 'Accept', 'application/vnd.api+json'
   header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token

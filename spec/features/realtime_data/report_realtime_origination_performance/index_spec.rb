@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Report Realtime Origination Performance', type: :feature do
+RSpec.describe 'Report Realtime Origination Performance', type: :feature do
   include_context :login_as_admin
 
   let!(:customers_auth) { FactoryBot.create(:customers_auth) }

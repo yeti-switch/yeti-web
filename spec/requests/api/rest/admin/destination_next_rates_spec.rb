@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request do
   include_context :json_api_admin_helpers, type: :'destination-next-rates'
   let!(:rate_plan) { FactoryBot.create(:rateplan) }

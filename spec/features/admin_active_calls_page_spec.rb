@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Active Calls page', type: :feature do
+RSpec.describe 'Active Calls page', type: :feature do
   let(:admin_user) { create :admin_user }
   before { login_as(admin_user, scope: :admin_user) }
 

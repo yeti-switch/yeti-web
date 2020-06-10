@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Worker::RemoveCdrExportFileJob, type: :job do
   subject do
     described_class.perform_now(cdr_export.id)

@@ -18,8 +18,6 @@
 #  external_id      :integer
 #
 
-require 'spec_helper'
-
 RSpec.describe Routing::DestinationNextRate, type: :model do
   let!(:rate_plan) { FactoryBot.create(:rateplan) }
   let!(:destination) { FactoryBot.create(:destination, destination_attrs) }

@@ -147,8 +147,6 @@
 #  legb_outbound_proxy             :string
 #
 
-require 'spec_helper'
-
 RSpec.describe Cdr::Cdr, type: :model do
   before { described_class.destroy_all }
   after { described_class.destroy_all }

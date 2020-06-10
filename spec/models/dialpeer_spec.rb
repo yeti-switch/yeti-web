@@ -46,9 +46,7 @@
 #  routeset_discriminator_id :integer          default(1), not null
 #
 
-require 'spec_helper'
-
-describe Dialpeer, type: :model do
+RSpec.describe Dialpeer, type: :model do
   describe 'validations' do
     it do
       should validate_numericality_of(:capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)

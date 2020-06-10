@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Copy Rateplan action', type: :feature do
+RSpec.describe 'Copy Rateplan action', type: :feature do
   include_context :login_as_admin
 
   shared_examples :cloned_rateplan_is_valid do

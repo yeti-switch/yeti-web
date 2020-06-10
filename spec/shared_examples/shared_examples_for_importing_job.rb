@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples 'Jobs for importing data' do
+RSpec.shared_examples 'Jobs for importing data' do
   context 'on create job' do
     it 'creates proper jobs in queue' do
       expect { preview_class.run_in_background(paper_trail_info) }.to change { Delayed::Job.where(queue: queue_label).count }.by(jobs_count)

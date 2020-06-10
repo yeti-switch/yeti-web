@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Api::Rest::Admin::CodecGroupsController, type: :controller do
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }

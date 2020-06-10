@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Index System Cdr Configs', type: :feature do
+RSpec.describe 'Index System Cdr Configs', type: :feature do
   include_context :login_as_admin
 
   let(:cdr_config) { System::CdrConfig.take || create(:cdr_config) }

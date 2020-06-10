@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'CDR exports', type: :feature do
+RSpec.describe 'CDR exports', type: :feature do
   include_context :login_as_admin
 
   describe 'index' do

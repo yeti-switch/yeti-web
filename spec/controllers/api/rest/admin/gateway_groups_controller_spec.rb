@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
+RSpec.describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
   let(:vendor) { create :contractor, vendor: true }
 
   let(:user) { create :admin_user }
