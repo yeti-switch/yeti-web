@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 
 # Core
+gem 'active_record_extended'
 gem 'activemodel-serializers-xml'
 gem 'pg'
-gem 'postgres_ext', git: 'https://github.com/didww/postgres_ext.git', branch: 'rails-5-2'
 gem 'rack', '2.1.3' # https://github.com/rack/rack/issues/1628
 gem 'rails', '~> 5.2.4'
 gem 'responders'
