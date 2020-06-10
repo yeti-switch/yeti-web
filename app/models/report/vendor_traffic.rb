@@ -22,7 +22,7 @@ class Report::VendorTraffic < Cdr::Base
     vendor_traffic_data.preload(:customer)
   end
 
-  validates_presence_of :date_start, :date_end, :vendor_id
+  validates :date_start, :date_end, :vendor_id, presence: true
 
   def display_name
     id.to_s

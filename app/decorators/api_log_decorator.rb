@@ -10,9 +10,7 @@ class ApiLogDecorator < Draper::Decorator
     end.to_s
   end
 
-  def method
-    model.method
-  end
+  delegate :method, to: :model
 
   def request_body
     if model.request_body.present?

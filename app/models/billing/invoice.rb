@@ -48,7 +48,7 @@ class Billing::Invoice < Cdr::Base
     end
   end
 
-  validates_presence_of :contractor, :account, :end_date, :start_date
+  validates :contractor, :account, :end_date, :start_date, presence: true
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -325,9 +325,7 @@ class Billing::Invoice < Cdr::Base
     Totals.new(*row)
   end
 
-  def contacts_for_invoices
-    account.contacts_for_invoices
-  end
+  delegate :contacts_for_invoices, to: :account
 
   def subject
     display_name

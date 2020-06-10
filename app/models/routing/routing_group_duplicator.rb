@@ -5,7 +5,7 @@ class Routing::RoutingGroupDuplicator
 
   attr_accessor :name, :id
 
-  validates_presence_of :name, :id
+  validates :name, :id, presence: true
 
   validate do
     errors.add(:name, :invalid) unless RoutingGroup.exists?(id)
@@ -19,7 +19,7 @@ class Routing::RoutingGroupDuplicator
           name: name
         )
         src = RoutingGroup.find(id)
-        src.dialpeers.includes(:dialpeer_next_rates).each do |n|
+        src.dialpeers.includes(:dialpeer_next_rates).find_each do |n|
           x = n.dup
           x.routing_group_id = dst.id
           x.save!

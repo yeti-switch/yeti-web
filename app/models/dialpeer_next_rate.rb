@@ -19,16 +19,16 @@
 #
 
 class DialpeerNextRate < Yeti::ActiveRecord
-  validates_presence_of :dialpeer
-  validates_presence_of :next_rate,
+  validates :dialpeer, presence: true
+  validates :next_rate,
                         :initial_rate,
                         :initial_interval,
                         :next_interval,
                         :connect_fee,
-                        :apply_time
+                        :apply_time, presence: true
 
-  validates_numericality_of :initial_interval, :next_interval, greater_than: 0 # we have DB constraints for this
-  validates_numericality_of :next_rate, :initial_rate, :connect_fee
+  validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
+  validates :next_rate, :initial_rate, :connect_fee, numericality: true
 
   belongs_to :dialpeer
 

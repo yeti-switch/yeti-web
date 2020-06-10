@@ -21,7 +21,7 @@ class DisconnectPolicyCode < ActiveRecord::Base
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_presence_of :policy_id, :code_id
+  validates :policy_id, :code_id, presence: true
 
   def display_name
     id.to_s

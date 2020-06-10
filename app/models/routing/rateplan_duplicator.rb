@@ -5,7 +5,7 @@ class Routing::RateplanDuplicator
 
   attr_accessor :profit_control_mode_id, :name, :id, :send_quality_alarms_to
 
-  validates_presence_of :name, :profit_control_mode_id, :id
+  validates :name, :profit_control_mode_id, :id, presence: true
 
   validate do
     errors.add(:id, :invalid) unless Rateplan.exists?(id)

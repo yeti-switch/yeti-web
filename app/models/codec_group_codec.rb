@@ -18,11 +18,11 @@ class CodecGroupCodec < ActiveRecord::Base
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_uniqueness_of :priority, scope: [:codec_group_id]
-  validates_numericality_of :priority
-  validates_uniqueness_of :codec_id, scope: [:codec_group_id]
-  validates_presence_of :codec, :codec_group
-  validates_numericality_of :dynamic_payload_type, greater_than: 95, less_than: 128, allow_nil: true, only_integer: true
+  validates :priority, uniqueness: { scope: [:codec_group_id] }
+  validates :priority, numericality: true
+  validates :codec_id, uniqueness: { scope: [:codec_group_id] }
+  validates :codec, :codec_group, presence: true
+  validates :dynamic_payload_type, numericality: { greater_than: 95, less_than: 128, allow_nil: true, only_integer: true }
 
   def display_name
     "#{id} #{codec.name}"

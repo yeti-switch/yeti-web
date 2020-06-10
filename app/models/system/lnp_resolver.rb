@@ -12,8 +12,8 @@
 
 class System::LnpResolver < Yeti::ActiveRecord
   self.table_name = 'sys.lnp_resolvers'
-  validates_uniqueness_of :name
-  validates_presence_of :name, :address, :port
+  validates :name, uniqueness: true
+  validates :name, :address, :port, presence: true
 
   has_paper_trail class_name: 'AuditLogItem'
 

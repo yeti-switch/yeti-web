@@ -28,9 +28,9 @@ class System::SmtpConnection < Yeti::ActiveRecord
 
   has_many :contractors, dependent: :restrict_with_error
 
-  validates_presence_of :name, :host, :port, :from_address
-  validates_format_of :from_address, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  validates_uniqueness_of :name
+  validates :name, :host, :port, :from_address, presence: true
+  validates :from_address, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :name, uniqueness: true
   validates :auth_type, inclusion: { in: CONST::AUTH_TYPES }
 
   def display_name
@@ -52,6 +52,6 @@ class System::SmtpConnection < Yeti::ActiveRecord
   end
 
   def self.global
-    where(global: true).take
+    find_by(global: true)
   end
 end

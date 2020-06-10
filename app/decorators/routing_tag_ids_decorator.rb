@@ -5,7 +5,7 @@ module RoutingTagIdsDecorator
   # replace with has_many :routing_tags
   def routing_tags
     separator_character = routing_tag_mode.and? ? ' & ' : ' <b>|</b> '
-    unless model.routing_tag_ids.present?
+    if model.routing_tag_ids.blank?
       return h.content_tag(:span, 'NOT TAGGED', class: 'status_tag')
     end
 

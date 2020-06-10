@@ -7,7 +7,7 @@ class YetiProcessor
   def self.on_error(e)
     CaptureError.capture(e, tags: { component: 'Prometheus', processor_class: name })
   rescue StandardError => e
-    STDERR.puts "#{name} Failed To Capture Exception due to #{e.class} #{e.message}"
+    warn "#{name} Failed To Capture Exception due to #{e.class} #{e.message}"
     logger&.error { "#{e.class} #{e.message} #{e.backtrace.join("\n")}" }
   end
 
@@ -26,7 +26,7 @@ class YetiProcessor
             client.send_json metric
           end
         rescue StandardError => e
-          STDERR.puts "#{name} Failed To Collect Stats #{e.class} #{e.message}"
+          warn "#{name} Failed To Collect Stats #{e.class} #{e.message}"
           logger&.error { "#{e.class} #{e.message} #{e.backtrace.join("\n")}" }
           on_error(e)
         end

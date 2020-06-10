@@ -10,7 +10,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   scope :failed, show_count: false
 
   with_default_params do
-    params[:q] = { created_at_gteq: 1.days.ago } # only 1 last days by default
+    params[:q] = { created_at_gteq: 1.day.ago } # only 1 last days by default
     'Only records for last day are displayed by default'
   end
 

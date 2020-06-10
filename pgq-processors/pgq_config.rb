@@ -28,7 +28,5 @@ class PgqConfig
     @config
   end
 
-  def [](k)
-    config[k]
-  end
+  delegate :[], to: :config
 end

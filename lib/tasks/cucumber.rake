@@ -6,9 +6,9 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-unless ARGV.any? { |a| a =~ /^gems/ } # Don't load anything when running the gems:* tasks
+unless ARGV.any? { |a| a.start_with? 'gems' } # Don't load anything when running the gems:* tasks
 
-  vendored_cucumber_bin = Dir["#{Rails.root}/vendor/{gems,plugins}/cucumber*/bin/cucumber"].first
+  vendored_cucumber_bin = Dir[Rails.root.join('vendor/{gems,plugins}/cucumber*/bin/cucumber')].first
   $LOAD_PATH.unshift(File.dirname(vendored_cucumber_bin) + '/../lib') unless vendored_cucumber_bin.nil?
 
   begin
@@ -57,7 +57,7 @@ unless ARGV.any? { |a| a =~ /^gems/ } # Don't load anything when running the gem
     task default: :cucumber
 
     task features: :cucumber do
-      STDERR.puts "*** The 'features' task is deprecated. See rake -T cucumber ***"
+      warn "*** The 'features' task is deprecated. See rake -T cucumber ***"
     end
 
     # In case we don't have the generic Rails test:prepare hook, append a no-op task that we can depend upon.

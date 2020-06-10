@@ -13,7 +13,7 @@ class YetiMail < ActionMailer::Base
          subject: log.subject,
          from: log.mail_from,
          delivery_method_options: log.smtp_connection.delivery_options) do |format|
-      format.html { render html: log.msg.try!(:html_safe) || '  ' }
+      format.html { render html: log.msg&.html_safe || '  ' }
     end
   end
 end

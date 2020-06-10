@@ -23,9 +23,9 @@ class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord
 
   include Yeti::NetworkDetector
 
-  validates_format_of :prefix, without: /\s/
-  validates_presence_of :vendor, :routing_plan, :priority, :weight
-  validates_numericality_of :weight, :priority, greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true
+  validates :prefix, format: { without: /\s/ }
+  validates :vendor, :routing_plan, :priority, :weight, presence: true
+  validates :weight, :priority, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
 
   validate do
     errors.add(:routing_plan, :invalid) if !routing_plan_id.nil? && !routing_plan.use_static_routes?

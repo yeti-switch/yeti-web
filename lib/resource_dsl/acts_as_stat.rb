@@ -51,7 +51,7 @@ module ResourceDSL
       end
 
       member_action :truncate_long_time_stats do
-        resource.statistic.try!(:destroy)
+        resource.statistic&.destroy
         flash[:notice] = "#{active_admin_config.resource_label}'s statistic was successfully truncated"
         redirect_back fallback_location: root_path
       end

@@ -42,7 +42,7 @@ class Importing::Model < ActiveAdminImport::Model
   end
 
   def std_err_empty
-    errors.add(:base, script_std_err) unless script_std_err.blank?
+    errors.add(:base, script_std_err) if script_std_err.present?
   end
 
   def script_path

@@ -35,7 +35,7 @@ class AdminUser < ActiveRecord::Base
     self.roles = roles.reject(&:blank?) unless roles.nil?
   end
 
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email?
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email? }
   validates :roles, presence: true
 
   after_save do
@@ -55,7 +55,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   def self.ldap_config
-    File.join(Rails.root, 'config', 'ldap.yml')
+    Rails.root.join 'config/ldap.yml'
   end
 
   def self.ldap_config_exists?
@@ -63,7 +63,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   def self.available_roles
-    list = (Rails.configuration.policy_roles.try!(:keys) || []).map(&:to_sym)
+    list = (Rails.configuration.policy_roles&.keys || []).map(&:to_sym)
     list.push(RolePolicy.root_role) if RolePolicy.root_role.present?
     list
   end
@@ -75,7 +75,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   def email
-    @email ||= billing_contact.try!(:email)
+    @email ||= billing_contact&.email
   end
 
   attr_writer :email
@@ -102,7 +102,7 @@ class AdminUser < ActiveRecord::Base
       params.delete(:password)
       params.delete(:password_confirmation) if params[:password_confirmation].blank?
     end
-    update_attributes(params, *options)
+    update(params, *options)
     clean_up_passwords
   end
 

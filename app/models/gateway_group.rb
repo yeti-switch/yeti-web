@@ -20,9 +20,9 @@ class GatewayGroup < ActiveRecord::Base
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_presence_of :name
-  validates_uniqueness_of :name, allow_blank: false
-  validates_presence_of :vendor, :balancing_mode
+  validates :name, presence: true
+  validates :name, uniqueness: { allow_blank: false }
+  validates :vendor, :balancing_mode, presence: true
 
   validate :contractor_is_vendor
   validate :vendor_can_be_changed

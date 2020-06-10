@@ -54,7 +54,7 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
   index as: :data, skip_drop_down_pagination: true do
     data = collection.map do |x|
       {
-        label: x.vendor.try!(:display_name) || "Vendor | #{x.vendor_id}",
+        label: x.vendor&.display_name || "Vendor | #{x.vendor_id}",
         value: x.originated_calls_count
       }
     end

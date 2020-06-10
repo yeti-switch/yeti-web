@@ -19,8 +19,8 @@ class System::ApiAccess < ActiveRecord::Base
 
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id
 
-  validates_uniqueness_of :login
-  validates_presence_of :login, :customer
+  validates :login, uniqueness: true
+  validates :login, :customer, presence: true
 
   validate :allowed_ips_is_valid
 
@@ -59,7 +59,7 @@ class System::ApiAccess < ActiveRecord::Base
   end
 
   def self.from_token_request(request)
-    where(login: request.params[:auth][:login]).take
+    find_by(login: request.params[:auth][:login])
   end
 
   # force update Allowed IPs

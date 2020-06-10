@@ -48,7 +48,7 @@ ActiveAdmin.register AuditLogItem do
     if version.changeset.any?
       panel 'Changes' do
         attributes_table_for version.changeset do
-          version.changeset.keys.each do |key|
+          version.changeset.each_key do |key|
             next unless version.changeset[key].reject(&:blank?).any?
 
             row key do

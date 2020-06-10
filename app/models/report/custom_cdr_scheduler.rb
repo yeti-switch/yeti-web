@@ -19,7 +19,7 @@ class Report::CustomCdrScheduler < Cdr::Base
   self.table_name = 'reports.cdr_custom_report_schedulers'
   belongs_to :period, class_name: 'Report::SchedulerPeriod', foreign_key: :period_id
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id
-  validates_presence_of :group_by, :period
+  validates :group_by, :period, presence: true
 
   include Hints
 

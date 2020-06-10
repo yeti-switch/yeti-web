@@ -13,7 +13,7 @@ module AdminUserLdapHandler
   end
 
   def get_ldap_attributes
-    new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail').try!(:first)
+    new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail')&.first
     self.email = new_email if new_email
     new_roles =  Devise::LDAP::Adapter.get_ldap_param(username, 'roles')
     self.roles = new_roles ? Array.wrap(new_roles) : default_ldap_roles

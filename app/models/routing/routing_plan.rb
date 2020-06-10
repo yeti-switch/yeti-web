@@ -23,9 +23,9 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates_presence_of :name, :max_rerouting_attempts
-  validates_uniqueness_of :name, allow_blank: false
-  validates_numericality_of :max_rerouting_attempts, greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true
+  validates :name, :max_rerouting_attempts, presence: true
+  validates :name, uniqueness: { allow_blank: false }
+  validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true }
 
   scope :having_static_routes, -> { joins(:sorting).merge(Sorting.with_static_routes) }
 
@@ -38,9 +38,7 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
   #   self.use_lnp ?  :true : :false
   # end
 
-  def use_static_routes?
-    sorting.use_static_routes?
-  end
+  delegate :use_static_routes?, to: :sorting
 
   def have_routing_groups?
     routing_groups.count > 0

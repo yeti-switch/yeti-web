@@ -264,13 +264,9 @@ class Cdr::Cdr < Cdr::Base
     log_rtp? && log_sip?
   end
 
-  def log_rtp?
-    dump_level.log_rtp?
-  end
+  delegate :log_rtp?, to: :dump_level
 
-  def log_sip?
-    dump_level.log_sip?
-  end
+  delegate :log_sip?, to: :dump_level
 
   def dump_filename
     if local_tag.present? && node_id.present?
