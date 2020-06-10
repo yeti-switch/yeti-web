@@ -11,7 +11,7 @@ describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
     let!(:auth_logs) do
       create_list :auth_log, 12, :with_id, request_time: 20.minutes.ago.utc
     end
-    subject { get :index, params: { filter: filters, page: { number: page_number, size: 10 } } }
+    subject { get :index, params: { filter: filters, page: { number: page_number, size: 10 }, sort: 'id' } }
     let(:filters) do
       {}
     end

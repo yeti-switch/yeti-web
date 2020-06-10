@@ -18,7 +18,7 @@ describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     let!(:cdrs) do
       create_list :cdr, 12, :with_id, time_start: 2.days.ago.utc
     end
-    subject { get :index, params: { filter: filters, page: { number: page_number, size: 10 } } }
+    subject { get :index, params: { filter: filters, page: { number: page_number, size: 10 }, sort: 'id' } }
     let(:filters) do
       {}
     end
