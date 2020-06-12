@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-describe Importing::CustomersAuth do
+RSpec.describe Importing::CustomersAuth do
   include_context :init_contractor, name: 'iBasis', vendor: true, customer: true
 
   include_context :init_rateplan

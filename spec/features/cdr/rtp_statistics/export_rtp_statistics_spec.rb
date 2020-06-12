@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Export RTP statistics', type: :feature do
+RSpec.describe 'Export RTP statistics', type: :feature do
   include_context :login_as_admin
 
   let!(:item) do

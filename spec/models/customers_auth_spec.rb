@@ -56,8 +56,6 @@
 #  lua_script_id                    :integer
 #
 
-require 'spec_helper'
-
 RSpec.describe CustomersAuth, type: :model do
   shared_examples :it_validates_array_elements do |*columns|
     columns.each do |column_name|

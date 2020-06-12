@@ -15,8 +15,6 @@
 #  dst_prefix          :string           default(""), not null
 #
 
-require 'spec_helper'
-
 RSpec.describe Routing::RoutingTagDetectionRule, type: :model do
   context '#validations' do
     context 'validate routing_tag_ids' do

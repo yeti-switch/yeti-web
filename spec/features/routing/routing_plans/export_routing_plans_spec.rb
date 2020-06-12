@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Export Routing Plans', type: :feature do
+RSpec.describe 'Export Routing Plans', type: :feature do
   include_context :login_as_admin
 
   before { create(:routing_plan) }

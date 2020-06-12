@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Apply Create new ones Import Contractor', type: :feature, js: true do
+RSpec.describe 'Apply Create new ones Import Contractor', type: :feature, js: true do
   subject do
     within('#titlebar_right') { click_link 'Create new ones' }
     expect(page).to have_current_path(importing_contractors_path)

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 # test stub for determining n + 1
-describe 'Index Billing contacts', type: :feature, js: true do
+RSpec.describe 'Index Billing contacts', type: :feature, js: true do
   include_context :login_as_admin
 
   it 'visit all contacts' do

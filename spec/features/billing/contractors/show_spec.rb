@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Show Contractors', type: :feature do
+RSpec.describe 'Show Contractors', type: :feature do
   subject do
     visit contractor_path(record.id)
   end

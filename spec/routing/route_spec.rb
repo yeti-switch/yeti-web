@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe '#routing logic' do
   subject do
     CallSql::Yeti.select_all_serialized(

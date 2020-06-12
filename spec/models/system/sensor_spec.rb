@@ -16,10 +16,9 @@
 #  hep_capture_id   :integer
 #
 
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_events'
 
-describe System::Sensor do
+RSpec.describe System::Sensor do
   let(:mode_id) { 1 }
   let(:source_ip) { '192.168.0.1' }
   let(:target_ip) { '192.168.0.2' }

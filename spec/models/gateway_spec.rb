@@ -123,9 +123,7 @@
 #  use_registered_aor               :boolean          default(FALSE), not null
 #
 
-require 'spec_helper'
-
-describe Gateway, type: :model do
+RSpec.describe Gateway, type: :model do
   it do
     should validate_numericality_of(:max_30x_redirects).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
     should validate_numericality_of(:max_transfers).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)

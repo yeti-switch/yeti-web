@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe IPAddr do
+RSpec.describe IPAddr do
   describe '#cidr_mask' do
     subject do
       described_class.new(ip).cidr_mask

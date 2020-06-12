@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Index Destinations', type: :feature, js: true do
+RSpec.describe 'Index Destinations', type: :feature, js: true do
   subject do
     visit destinations_path
   end

@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-describe Importing::Contractor do
+RSpec.describe Importing::Contractor do
   let(:preview_item) { described_class.last }
 
   subject do

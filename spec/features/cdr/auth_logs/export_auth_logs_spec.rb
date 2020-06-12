@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Export Auth Logs', type: :feature do
+RSpec.describe 'Export Auth Logs', type: :feature do
   include_context :login_as_admin
 
   before { create(:gateway) }

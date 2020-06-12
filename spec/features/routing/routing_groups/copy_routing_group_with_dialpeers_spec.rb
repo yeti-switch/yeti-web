@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Copy Routing group with dialpeers action', type: :feature do
+RSpec.describe 'Copy Routing group with dialpeers action', type: :feature do
   include_context :login_as_admin
 
   let!(:routing_group) do

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'the signin process', type: :feature do
+RSpec.describe 'the signin process', type: :feature do
   subject do
     login_as(admin_user, scope: :admin_user)
   end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
   include_context :json_api_admin_helpers, type: :contacts
 

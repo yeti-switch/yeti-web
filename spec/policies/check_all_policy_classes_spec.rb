@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe 'Role Policy classes' do
   let(:active_admin_resources) do
     ActiveAdmin.application.namespaces[:root].resources

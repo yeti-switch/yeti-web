@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'rspec_api_documentation/dsl'
 
-resource 'Routing RoutingTagDetectionRules' do
+RSpec.resource 'Routing RoutingTagDetectionRules' do
   include_context :acceptance_admin_user
 
   include_context :init_routing_tag_collection

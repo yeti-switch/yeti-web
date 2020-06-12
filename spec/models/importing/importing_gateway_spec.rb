@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'shared_examples/shared_examples_for_importing_hook'
 
-xdescribe Importing::Gateway do
+RSpec.xdescribe Importing::Gateway do
   include_context :init_contractor, name: 'iBasis', vendor: true
 
   include_context :init_gateway_group, name: 'iBasis Gateway Group'

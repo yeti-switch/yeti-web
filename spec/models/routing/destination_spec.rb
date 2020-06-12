@@ -35,9 +35,7 @@
 #  routing_tag_mode_id    :integer          default(0), not null
 #
 
-require 'spec_helper'
-
-describe Routing::Destination, type: :model do
+RSpec.describe Routing::Destination, type: :model do
   context 'validate routing_tag_ids' do
     include_examples :test_model_with_routing_tag_ids
   end

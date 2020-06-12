@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :controller do
+RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :controller do
   include_context :jsonapi_admin_headers
 
   let(:resource_type) { 'area-prefixes' }

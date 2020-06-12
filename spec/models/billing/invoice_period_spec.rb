@@ -8,9 +8,7 @@
 #  name :string           not null
 #
 
-require 'spec_helper'
-
-describe Billing::InvoicePeriod do
+RSpec.describe Billing::InvoicePeriod do
   subject do
     Billing::InvoicePeriod.find(id)
   end

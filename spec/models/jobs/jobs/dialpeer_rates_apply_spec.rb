@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Jobs::DialpeerRatesApply, type: :cron_job do
   describe '#start!' do
     subject do

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe 'config/yeti_web.yml' do
   subject do
     Rails.configuration.yeti_web.deep_symbolize_keys

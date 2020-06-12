@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe 'Create Import Contractors', type: :feature, js: true do
+RSpec.describe 'Create Import Contractors', type: :feature, js: true do
   subject do
     within('form') { click_button 'Import' }
     expect(page).to have_current_path(importing_contractors_path)

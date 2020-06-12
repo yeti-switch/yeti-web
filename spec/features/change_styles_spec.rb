@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 # TODO: fix or remove this spec
 # chrome starts failing on this test.
 # We move it to feature spec and do some tricks but it didn't help.
 # So we temporary disable it
-xdescribe 'Change styles', js: true do
+RSpec.xdescribe 'Change styles', js: true do
   subject do
     # I open the dashboard page
     visit dashboard_path
