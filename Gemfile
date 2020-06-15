@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gem 'active_record_extended'
 gem 'activemodel-serializers-xml'
 gem 'pg'
-gem 'rack', '2.1.3' # https://github.com/rack/rack/issues/1628
+gem 'rack', '2.1.4' # https://github.com/rack/rack/issues/1628
 gem 'rails', '~> 5.2.4'
 gem 'responders'
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
