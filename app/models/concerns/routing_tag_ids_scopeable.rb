@@ -8,7 +8,7 @@ module RoutingTagIdsScopeable
       where("yeti_ext.tag_compare(routing_tag_ids, ARRAY[#{id.join(',')}], routing_tag_mode_id)>0")
     }
 
-    scope :tagged, lambda { |*value|
+    scope :tagged, lambda { |value|
       if ActiveModel::Type::Boolean.new.cast(value)
         where("routing_tag_ids <> '{}'") # has tags
       else
