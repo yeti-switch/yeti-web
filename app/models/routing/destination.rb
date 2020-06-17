@@ -152,10 +152,13 @@ class Routing::Destination < Yeti::ActiveRecord
     )', prx, prx, prx)
   }
 
+  scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
+
   private
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[
+      routing_tag_ids_array_contains
       routing_for_contains
       routing_tag_ids_covers
       tagged
