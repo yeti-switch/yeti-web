@@ -142,6 +142,12 @@ class CustomersAuth < Yeti::ActiveRecord
       )"
     )
   }
+  scope :src_prefix_array_contains, ->(src) { where.contains src_prefix: Array(src) }
+  scope :dst_prefix_array_contains, ->(dst) { where.contains dst_prefix: Array(dst) }
+  scope :uri_domain_array_contains, ->(uri) { where.contains uri_domain: Array(uri) }
+  scope :from_domain_array_contains, ->(f_dom) { where.contains from_domain: Array(f_dom) }
+  scope :to_domain_array_contains, ->(to_dom) { where.contains to_domain: Array(to_dom) }
+  scope :x_yeti_auth_array_contains, ->(auth) { where.contains x_yeti_auth: Array(auth) }
 
   include Yeti::ResourceStatus
 
@@ -201,7 +207,15 @@ class CustomersAuth < Yeti::ActiveRecord
   private
 
   def self.ransackable_scopes(_auth_object = nil)
-    [:ip_covers]
+    %i[
+      src_prefix_array_contains
+      dst_prefix_array_contains
+      uri_domain_array_contains
+      from_domain_array_contains
+      to_domain_array_contains
+      x_yeti_auth_array_contains
+      ip_covers
+    ]
   end
 
   protected
