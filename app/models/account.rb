@@ -74,10 +74,11 @@ class Account < Yeti::ActiveRecord
   scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
-  validates :min_balance, :balance, numericality: true
+  validates :min_balance, numericality: true, if: -> { min_balance.present? }
+  validates :balance, numericality: true
   validates :uuid, :name, uniqueness: true
-  validates :name, :contractor, :timezone, :vat, presence: true
-  validates :max_balance, numericality: { greater_than_or_equal_to: ->(account) { account.min_balance } }
+  validates :name, :contractor, :timezone, :vat, :max_balance, :min_balance, presence: true
+  validates :max_balance, numericality: { greater_than_or_equal_to: :min_balance }, if: -> { min_balance.present? }
 
   validates :termination_capacity, :origination_capacity, :total_capacity,
                             numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
