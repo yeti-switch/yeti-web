@@ -67,8 +67,8 @@ class Dialpeer < Yeti::ActiveRecord
   validates :account, :routing_group, :vendor, :valid_from, :valid_till,
                         :initial_rate, :next_rate,
                         :initial_interval, :next_interval, :connect_fee,
-                        :routing_tag_mode, :routeset_discriminator, presence: true
-  validates :initial_rate, :next_rate, :connect_fee, numericality: true
+                        :routing_tag_mode, :routeset_discriminator, :lcr_rate_multiplier, presence: true
+  validates :initial_rate, :next_rate, :connect_fee, :lcr_rate_multiplier, numericality: true
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
   validates :acd_limit, numericality: { greater_than_or_equal_to: 0.00 }
   validates :asr_limit, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00 }
@@ -85,10 +85,10 @@ class Dialpeer < Yeti::ActiveRecord
   validates :batch_prefix, format: { without: /\s/ }
 
   validate :contractor_is_vendor
-  validate :vendor_owners_the_account
+  validate :vendor_owners_the_account, if: :account
   validate :gateway_presence
-  validate :vendor_owners_the_gateway
-  validate :vendor_owners_the_gateway_group
+  validate :vendor_owners_the_gateway, if: :gateway
+  validate :vendor_owners_the_gateway_group, if: :gateway_group
 
   validates_with RoutingTagIdsValidator
 
