@@ -67,6 +67,18 @@ RSpec.describe Dialpeer, type: :model do
         include_examples :validation_no_error_on_field, :gateway
       end
 
+      context 'with Gateway_id 0' do
+        let(:attributes) { { gateway_id: 0 } }
+
+        include_examples :validation_error_on_field, :base, 'Specify a gateway_group or a gateway'
+      end
+
+      context 'with Gateway_group_id 0' do
+        let(:attributes) { { gateway_group_id: 0 } }
+
+        include_examples :validation_error_on_field, :base, 'Specify a gateway_group or a gateway'
+      end
+
       context 'with Gateway' do
         let(:attributes) { { gateway: g, vendor_id: vendor.id, gateway_id: g.id } }
         let(:vendor) { g.contractor }
