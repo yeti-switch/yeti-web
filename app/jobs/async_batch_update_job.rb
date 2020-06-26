@@ -1,26 +1,23 @@
 # frozen_string_literal: true
 
-class AsyncBatchUpdateJob
+class AsyncBatchUpdateJob < ApplicationJob
   include BatchJobsLog
   BATCH_SIZE = 1000
+  queue_as 'batch_actions'
 
-  attr_reader :model_class, :sql_query, :changes, :who_is
+  attr_reader :model_class, :sql_query, :who_is
 
-  def initialize(model_class, sql_query, changes, who_is)
-    @model_class = model_class
+  def perform(model_class, sql_query, changes, who_is)
+    @model_class = model_class.constantize
     @sql_query = sql_query
-    @changes = changes
     @who_is = who_is
-  end
-
-  def perform
     set_audit_log_data
-    model_class.constantize.transaction do
-      total_count = model_class.constantize.count_by_sql count_sql_query
+    @model_class.transaction do
+      total_count = @model_class.count_by_sql count_sql_query
 
       (total_count.to_f / BATCH_SIZE).ceil.times do |batch_number|
         offset = batch_number * BATCH_SIZE
-        scoped_records = model_class.constantize.find_by_sql(order_by_id_sql + " OFFSET #{offset} LIMIT #{BATCH_SIZE}")
+        scoped_records = @model_class.find_by_sql(order_by_id_sql + " OFFSET #{offset} LIMIT #{BATCH_SIZE}")
         scoped_records.each { |record| record.update!(changes) }
       end
     end

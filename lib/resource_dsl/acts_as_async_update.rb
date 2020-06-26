@@ -11,11 +11,10 @@ module ResourceDSL
                                class: 'scoped_collection_action_button ui',
                                form: attrs_to_update,
                                if: proc { authorized?(:batch_destroy, resource_klass) } do
-        Delayed::Job.enqueue AsyncBatchUpdateJob.new(model_class,
+        AsyncBatchUpdateJob.perform_later(model_class,
                                                      scoped_collection_records.except(:eager_load).to_sql,
                                                      params[:changes].permit!,
-                                                     @paper_trail_info),
-                             queue: 'batch_actions'
+                                                     @paper_trail_info)
         flash[:notice] = I18n.t('flash.actions.batch_actions.batch_update.job_scheduled')
         head :ok
       end

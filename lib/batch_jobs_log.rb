@@ -1,20 +1,39 @@
 # frozen_string_literal: true
 
 module BatchJobsLog
-  def success(job)
-    LogicLog.create!(
-      source: "#{self.class} #{job.id}",
-      level: 0,
-      msg: 'Success'
-    )
+  extend ActiveSupport::Concern
+
+  included do
+    around_perform :with_logic_log
   end
 
-  def failure(job)
+  private
+
+  def with_logic_log
+    Rails.logger.info { "Delayed::Worker.plugins #{Delayed::Worker.plugins}" }
+    result = yield
+    success
+    result
+  rescue StandardError => e
+    failure(e)
+    raise e
+  end
+
+  def success
     LogicLog.create!(
-      source: "#{self.class} #{job.id}",
-      level: 0,
-      msg: job.last_error
-    )
+        source: "#{self.class} #{provider_job_id}",
+        level: 0,
+        msg: 'Success'
+      )
+  end
+
+  def failure(error)
+    LogicLog.create!(
+        source: "#{self.class} #{provider_job_id}",
+        level: 0,
+        msg: "Error: #{error.message}\nchanges: #{arguments[2]}\nclass: #{arguments[0]}\nqueue: #{queue_name}\nsql: #{arguments[1]}"
+      )
+    raise error
   end
 
   def set_audit_log_data

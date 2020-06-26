@@ -1,22 +1,19 @@
 # frozen_string_literal: true
 
-class AsyncBatchDestroyJob
+class AsyncBatchDestroyJob < ApplicationJob
   include BatchJobsLog
   BATCH_SIZE = 1000
+  queue_as 'batch_actions'
 
-  attr_reader :model_class, :sql_query, :who_is
+  attr_reader :model_class, :who_is
 
-  def initialize(model_class, sql_query, who_is)
-    @model_class = model_class
-    @sql_query = sql_query
+  def perform(model_class, sql_query, who_is)
+    @model_class = model_class.constantize
     @who_is = who_is
-  end
-
-  def perform
     set_audit_log_data
     begin
-      scoped_records = model_class.constantize.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
-      model_class.constantize.transaction do
+      scoped_records = @model_class.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
+      @model_class.transaction do
         scoped_records.each(&:destroy!)
       end
     end until scoped_records.empty?
