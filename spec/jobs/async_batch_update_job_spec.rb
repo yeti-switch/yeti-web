@@ -7,7 +7,7 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
     include_context :init_destination, id: 2, initial_rate: 0.5
     include_context :init_destination, id: 3, initial_rate: 0.7
 
-    subject { described_class.new(model_class, sql_query, changes, who_is).perform }
+    subject { described_class.perform_now(model_class, sql_query, changes, who_is) }
 
     before :each do
       stub_const('AsyncBatchUpdateJob::BATCH_SIZE', 2)
@@ -67,6 +67,28 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
 
           it { expect { subject }.to change(Routing::Destination.where(prefix: '300', reject_calls: false), :count).by(1) }
           it { expect { subject }.to change(Routing::Destination.where(id: 1, prefix: 300), :count).by(1) }
+        end
+      end
+
+      context 'test LogicLog class' do
+        let(:sql_query) { Routing::Destination.all.to_sql }
+
+        context 'should write record about' do
+          let(:changes) { { next_interval: 4 } }
+          it 'success performed job' do
+            expect { subject }.to change(LogicLog, :count).by 1
+            expect(LogicLog.last.msg).to start_with 'Success'
+          end
+        end
+
+        context 'when the job raise an error' do
+          let(:changes) { { next_interval: 'string' } }
+          it 'error performed job' do
+            expect do
+              expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+            end.to change(LogicLog, :count).by 1
+            expect(LogicLog.last.msg).to start_with 'Error'
+          end
         end
       end
     end
