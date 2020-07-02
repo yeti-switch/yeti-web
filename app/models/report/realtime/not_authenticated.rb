@@ -149,11 +149,9 @@
 #
 
 class Report::Realtime::NotAuthenticated < Report::Realtime::Base
-  attr_accessor :l
-
-  scope :detailed_scope, lambda { |length|
-    l = length.to_i
+  scope :detailed_scope, lambda {
     select("
+      row_number() over (partition by auth_orig_ip, auth_orig_port, internal_disconnect_code, internal_disconnect_reason) AS id,
       auth_orig_ip,
       auth_orig_port,
       internal_disconnect_code,
