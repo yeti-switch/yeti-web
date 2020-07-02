@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require 'prometheus_config'
+require 'prometheus_exporter'
+require 'prometheus_exporter/metric'
+require 'prometheus_exporter/client'
+require 'prometheus_exporter/middleware'
+require 'prometheus_exporter/instrumentation'
 
 if PrometheusConfig.enabled?
 
@@ -11,13 +16,9 @@ if PrometheusConfig.enabled?
   # Prometheus Ports:
   # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
 
-  require 'prometheus_exporter'
-
-  require 'prometheus_exporter/metric'
   PrometheusExporter::Metric::Base.default_labels = PrometheusConfig.default_labels
 
   # Connect to Prometheus Collector Process
-  require 'prometheus_exporter/client'
   my_client = PrometheusExporter::Client.new(
     host: PrometheusConfig.host,
     port: PrometheusConfig.port,
@@ -27,11 +28,9 @@ if PrometheusConfig.enabled?
   # Set Default Client
   PrometheusExporter::Client.default = my_client
   # This reports stats per request like HTTP status and timings
-  require 'prometheus_exporter/middleware'
   Rails.application.middleware.unshift PrometheusExporter::Middleware
 
   # this reports basic process stats like RSS and GC info
-  require 'prometheus_exporter/instrumentation'
   PrometheusExporter::Instrumentation::DelayedJob.register_plugin
 
   # Keep in mind that Processors that works in separate thread should be initialized in puma config #before_fork.

@@ -110,6 +110,7 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include TravelMonotonicHelpers
   config.include RspecRequestHelper, type: :request
   config.include RspecRequestHelper, type: :controller
   config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
@@ -143,6 +144,15 @@ RSpec.configure do |config|
     Cdr::AuthLog.add_partitions
     Cdr::RtpStatistic.add_partitions
     Log::ApiLog.add_partitions
+  end
+
+  config.before(:suite) do
+    RSpecTestPrometheusClient.instance = RSpecTestPrometheusClient.new
+    PrometheusExporter::Client.default = RSpecTestPrometheusClient.instance
+  end
+
+  config.before(:each) do
+    RSpecTestPrometheusClient.instance.clear!
   end
 
   config.before(:each) do
@@ -185,26 +195,5 @@ Shoulda::Matchers.configure do |config|
 
     with.library :active_record
     with.library :active_model
-  end
-end
-
-RSpec::Matchers.define :eq_time_string do |expected|
-  expected_time = (expected.is_a?(String) ? Time.parse(expected) : expected).change(usec: 0)
-
-  match do |actual|
-    actual_time = Time.parse(actual).change(usec: 0)
-    actual_time == expected_time
-  end
-  description do
-    "eq time string to #{expected_time}"
-  end
-end
-
-RSpec::Matchers.define :be_one_of do |*choices|
-  match do |actual|
-    choices.include?(actual)
-  end
-  description do
-    "be one of #{choices.map(&:inspect).join(', ')}"
   end
 end
