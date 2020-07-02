@@ -16,8 +16,7 @@ ActiveAdmin.register Report::Realtime::NotAuthenticated do
 
   controller do
     def scoped_collection
-      lenght = params[:q][:time_interval_eq].to_i
-      super.detailed_scope(lenght)
+      super.detailed_scope
     end
   end
 

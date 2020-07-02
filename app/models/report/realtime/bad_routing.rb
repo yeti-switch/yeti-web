@@ -149,11 +149,9 @@
 #
 
 class Report::Realtime::BadRouting < Report::Realtime::Base
-  attr_accessor :l
-
-  scope :detailed_scope, lambda { |length|
-    l = length.to_i
+  scope :detailed_scope, lambda {
     select("
+      row_number() over (partition by customer_id, customer_auth_id, rateplan_id, routing_plan_id, internal_disconnect_code, internal_disconnect_reason) AS id,
       customer_id,
       customer_auth_id,
       rateplan_id,
