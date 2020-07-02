@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'prometheus/active_calls_processor'
+
 module Jobs
   class CallsMonitoring < ::BaseJob
     class CallCollection
@@ -35,6 +37,18 @@ module Jobs
         balance_after_calls > max_balance
       end
 
+      # normal  calls: '+'
+      # reverse calls: '-'
+      def total_calls_cost
+        collection.inject(0) do |sum, call|
+          if call[call_reverse_billing_key] == false
+            sum += call_price(call)
+          else
+            sum -= call_price(call)
+          end
+        end
+      end
+
       private
 
       def call_reverse_billing_key
@@ -48,18 +62,6 @@ module Jobs
           balance - total_calls_cost
         elsif key == 'dialpeer'
           balance + total_calls_cost
-        end
-      end
-
-      # normal  calls: '+'
-      # reverse calls: '-'
-      def total_calls_cost
-        collection.inject(0) do |sum, call|
-          if call[call_reverse_billing_key] == false
-            sum += call_price(call)
-          else
-            sum -= call_price(call)
-          end
         end
       end
 
@@ -323,10 +325,49 @@ module Jobs
 
     def before_finish
       save_stats
+      send_prometheus_metrics
       terminate_calls!
     end
 
     private
+
+    def send_prometheus_metrics
+      return unless PrometheusConfig.enabled?
+
+      metrics = []
+
+      total = active_calls.values.sum(&:count)
+      metrics << ActiveCallsProcessor.collect(total: total)
+
+      customers_active_calls.each do |account_id, calls|
+        account_external_id = calls.first['customer_acc_external_id']
+        collection = CallCollection.new(calls, key: 'destination', account: [])
+        src_prefixes = calls.map { |c| c['src_prefix_routing'] }
+        dst_prefixes = calls.map { |c| c['dst_prefix_routing'] }
+
+        metrics << ActiveCallsProcessor.collect(
+            account_originated: calls.count,
+            account_originated_unique_src: src_prefixes.uniq.count,
+            account_originated_unique_dst: dst_prefixes.uniq.count,
+            account_price_originated: collection.total_calls_cost,
+            labels: { account_external_id: account_external_id, account_id: account_id }
+          )
+      end
+
+      vendors_active_calls.each do |account_id, calls|
+        account_external_id = calls.first['vendor_acc_external_id']
+        collection = CallCollection.new(calls, key: 'dialpeer', account: [])
+
+        metrics << ActiveCallsProcessor.collect(
+            account_terminated: calls.count,
+            account_price_terminated: collection.total_calls_cost,
+            labels: { account_external_id: account_external_id, account_id: account_id }
+          )
+      end
+
+      client = PrometheusExporter::Client.default
+      metrics.each { |metric| client.send_json(metric) }
+    end
 
     def save_stats
       Stats::ActiveCall.transaction do
