@@ -28,8 +28,7 @@ ActiveAdmin.register Report::Realtime::BadRouting do
 
   controller do
     def scoped_collection
-      length = params[:q][:time_interval_eq].to_i
-      super.detailed_scope(length)
+      super.detailed_scope
     end
   end
 
