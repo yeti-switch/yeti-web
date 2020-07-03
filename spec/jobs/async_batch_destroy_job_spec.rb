@@ -7,7 +7,7 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
     include_context :init_destination, id: 2, initial_rate: 0.5
     include_context :init_destination, id: 3, initial_rate: 0.7
 
-    subject { described_class.new(model_class, sql_query, who_is).perform }
+    subject { described_class.perform_now(model_class, sql_query, who_is) }
 
     before :each do
       stub_const('AsyncBatchDestroyJob::BATCH_SIZE', 2)
@@ -43,6 +43,31 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
 
         it { expect { subject }.to change(Routing::Destination, :count).by(-1) }
         it { expect { subject }.to change(Routing::Destination.where(id: 1), :count).by(-1) }
+      end
+
+      context 'test LogicLog class' do
+        let!(:contractor) { create :vendor }
+        let!(:contractor_alone) { create :vendor }
+        let!(:gateway_group) { create :gateway_group, vendor: contractor }
+        let(:model_class) { 'Contractor' }
+
+        context 'should write record about' do
+          let(:sql_query) { Contractor.where(id: contractor_alone.id).to_sql }
+          it 'success performed job' do
+            expect { subject }.to change(LogicLog, :count).by 1
+            expect(LogicLog.last.msg).to start_with 'Success'
+          end
+        end
+
+        context 'when the job raise an error' do
+          let(:sql_query) { Contractor.all.to_sql }
+          it 'error performed job' do
+            expect do
+              expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+            end.to change(LogicLog, :count).by 1
+            expect(LogicLog.last.msg).to start_with 'Error'
+          end
+        end
       end
     end
   end

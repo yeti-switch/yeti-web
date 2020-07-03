@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-Delayed::Worker.destroy_failed_jobs = false
-
 Dir[Rails.root.join('lib/ext/**/*.rb')].each { |s| require s }
 Dir[Rails.root.join('lib/active_record/**/*.rb')].each { |s| require s }
 Dir[Rails.root.join('lib/active_admin/**/*.rb')].each { |s| require s }
