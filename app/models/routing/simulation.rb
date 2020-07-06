@@ -60,12 +60,16 @@ class Routing::Simulation
                 :x_yeti_auth, :release_mode,
                 :pai, :ppi, :privacy, :rpid, :rpid_privacy
 
-  validates pop_id, transport_protocol_id, :remote_port, allow_nil: true,
-                                                         greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN,
-                                                         less_than: Yeti::ActiveRecord::L4_PORT_MAX,
-                                                         only_integer: true, numericality: true
+  validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, presence: true
 
-  validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, transport_protocol_id, presence: true
+  validates :pop_id, :transport_protocol_id, numericality: true
+
+  validates :remote_port, numericality: {
+    allow_nil: true,
+    greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN,
+    less_than: Yeti::ActiveRecord::L4_PORT_MAX,
+    only_integer: true
+  }
 
   validate :ip_is_valid
 
