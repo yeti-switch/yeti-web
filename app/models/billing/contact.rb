@@ -22,7 +22,7 @@ class Billing::Contact < Yeti::ActiveRecord
 
   scope :contractors, -> { where.not(contractor_id: nil) }
 
-  before_destroy do
+  before_destroy do # some changes
     Report::CustomerTrafficScheduler.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
