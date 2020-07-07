@@ -35,6 +35,7 @@ RSpec.describe Jobs::CallsMonitoring do
            min_balance: 0,
            max_balance: account_balance * 2,
            vat: 0,
+           external_id: 123,
            contractor: create(:customer))
   end
 
@@ -43,6 +44,7 @@ RSpec.describe Jobs::CallsMonitoring do
            balance: vendor_balance,
            min_balance: 0,
            max_balance: vendor_balance * 2,
+           external_id: 456,
            contractor: create(:vendor))
   end
 
@@ -108,9 +110,11 @@ RSpec.describe Jobs::CallsMonitoring do
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
           'customer_acc_vat' => account.vat.to_s,
+          'customer_acc_external_id' => account.external_id,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
+          'vendor_acc_external_id' => vendor_acc.external_id,
           'customer_auth_id' => customer_auth_id,
           'duration' => 61,
           # destination
@@ -129,6 +133,8 @@ RSpec.describe Jobs::CallsMonitoring do
           'customer_acc_check_balance' => customer_acc_check_balance,
           'destination_reverse_billing' => false,
           'dialpeer_reverse_billing' => false,
+          'src_prefix_routing' => '123457',
+          'dst_prefix_routing' => '654320',
 
           'orig_gw_id' => origin_gateway.id,
           'term_gw_id' => term_gateway.id
@@ -141,9 +147,11 @@ RSpec.describe Jobs::CallsMonitoring do
           'customer_id' => account.contractor.id,
           'customer_acc_id' => account.id,
           'customer_acc_vat' => account.vat.to_s,
+          'customer_acc_external_id' => account.external_id,
           # Vendor
           'vendor_id' => vendor_acc.contractor.id,
           'vendor_acc_id' => vendor_acc.id,
+          'vendor_acc_external_id' => vendor_acc.external_id,
           'duration' => 36,
           # destination
           'destination_fee' => '5.0000',
@@ -160,6 +168,8 @@ RSpec.describe Jobs::CallsMonitoring do
           'customer_acc_check_balance' => customer_acc_check_balance,
           'destination_reverse_billing' => true,
           'dialpeer_reverse_billing' => true,
+          'src_prefix_routing' => '123456',
+          'dst_prefix_routing' => '654321',
 
           'orig_gw_id' => origin_gateway.id,
           'term_gw_id' => term_gateway.id
@@ -175,7 +185,41 @@ RSpec.describe Jobs::CallsMonitoring do
     end
 
     context 'when Customer and Vendor have enough money' do
+      it 'does not send prometheus metrics' do
+        expect { subject }.to send_prometheus_metrics.exactly(0)
+      end
+
       include_examples :keep_calls
+
+      context 'with prometheus enabled' do
+        before { allow(PrometheusConfig).to receive(:enabled?).and_return(true) }
+
+        it 'sends prometheus metrics' do
+          expect { subject }.to send_prometheus_metrics
+            .exactly(3)
+            .with(type: 'yeti_ac', total: 2)
+            .with(
+                                        type: 'yeti_ac',
+                                        account_originated: 2,
+                                        account_originated_unique_src: 2,
+                                        account_originated_unique_dst: 2,
+                                        account_price_originated: -3.98,
+                                        metric_labels: {
+                                          account_id: account.id,
+                                          account_external_id: account.external_id
+                                        }
+                                      )
+            .with(
+                                        type: 'yeti_ac',
+                                        account_terminated: 2,
+                                        account_price_terminated: 5.0,
+                                        metric_labels: {
+                                          account_id: vendor_acc.id,
+                                          account_external_id: vendor_acc.external_id
+                                        }
+                                      )
+        end
+      end
     end
 
     context 'when origin gw disabled for origination' do
