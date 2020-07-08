@@ -4,8 +4,12 @@
 #
 # Table name: reports.scheduler_periods
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  scheduler_periods_name_key  (name) UNIQUE
 #
 
 class Report::SchedulerPeriod < Cdr::Base

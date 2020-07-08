@@ -4,8 +4,12 @@
 #
 # Table name: class4.areas
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  areas_name_key  (name) UNIQUE
 #
 
 class Routing::Area < Yeti::ActiveRecord

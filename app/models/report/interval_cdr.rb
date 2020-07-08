@@ -4,15 +4,19 @@
 #
 # Table name: reports.cdr_interval_report
 #
-#  id              :integer          not null, primary key
-#  date_start      :datetime         not null
+#  id              :integer(4)       not null, primary key
+#  aggregate_by    :string           not null
 #  date_end        :datetime         not null
+#  date_start      :datetime         not null
 #  filter          :string
 #  group_by        :string
+#  interval_length :integer(4)       not null
 #  created_at      :datetime         not null
-#  interval_length :integer          not null
-#  aggregator_id   :integer          not null
-#  aggregate_by    :string           not null
+#  aggregator_id   :integer(4)       not null
+#
+# Foreign Keys
+#
+#  cdr_interval_report_aggregator_id_fkey  (aggregator_id => cdr_interval_report_aggregator.id)
 #
 
 class Report::IntervalCdr < Cdr::Base

@@ -4,17 +4,21 @@
 #
 # Table name: class4.radius_accounting_profiles
 #
-#  id                          :integer          not null, primary key
-#  name                        :string           not null
-#  server                      :string           not null
-#  port                        :integer          not null
-#  secret                      :string           not null
-#  timeout                     :integer          default(100), not null
-#  attempts                    :integer          default(2), not null
-#  enable_start_accounting     :boolean          default(FALSE), not null
+#  id                          :integer(2)       not null, primary key
+#  attempts                    :integer(2)       default(2), not null
 #  enable_interim_accounting   :boolean          default(FALSE), not null
-#  interim_accounting_interval :integer          default(30), not null
+#  enable_start_accounting     :boolean          default(FALSE), not null
 #  enable_stop_accounting      :boolean          default(TRUE), not null
+#  interim_accounting_interval :integer(2)       default(30), not null
+#  name                        :string           not null
+#  port                        :integer(4)       not null
+#  secret                      :string           not null
+#  server                      :string           not null
+#  timeout                     :integer(2)       default(100), not null
+#
+# Indexes
+#
+#  radius_accounting_profiles_name_key  (name) UNIQUE
 #
 
 class Equipment::Radius::AccountingProfile < Yeti::ActiveRecord

@@ -4,20 +4,20 @@
 #
 # Table name: logs.api_requests
 #
-#  id               :integer          not null, primary key
-#  created_at       :datetime         not null
-#  path             :string
-#  method           :string
-#  status           :integer
-#  controller       :string
+#  id               :bigint(8)        not null, primary key
 #  action           :string
-#  page_duration    :float
+#  controller       :string
 #  db_duration      :float
+#  method           :string
+#  page_duration    :float
 #  params           :text
+#  path             :string
 #  request_body     :text
-#  response_body    :text
 #  request_headers  :text
+#  response_body    :text
 #  response_headers :text
+#  status           :integer(4)
+#  created_at       :datetime         not null
 #
 
 RSpec.describe Log::ApiLog do

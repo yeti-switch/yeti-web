@@ -4,78 +4,78 @@
 #
 # Table name: data_import.import_customers_auth
 #
-#  id                               :integer          not null, primary key
-#  o_id                             :integer
-#  customer_name                    :string
-#  customer_id                      :integer
-#  routing_group_name               :string
-#  routing_group_id                 :integer
-#  rateplan_name                    :string
-#  rateplan_id                      :integer
-#  enabled                          :boolean
+#  id                               :bigint(8)        not null, primary key
 #  account_name                     :string
-#  account_id                       :integer
-#  gateway_name                     :string
-#  gateway_id                       :integer
-#  src_rewrite_rule                 :string
-#  src_rewrite_result               :string
-#  dst_rewrite_rule                 :string
-#  dst_rewrite_result               :string
-#  src_prefix                       :string
-#  dst_prefix                       :string
-#  x_yeti_auth                      :string
-#  name                             :string
-#  dump_level_id                    :integer
-#  dump_level_name                  :string
-#  capacity                         :integer
-#  ip                               :string
-#  uri_domain                       :string
-#  pop_name                         :string
-#  pop_id                           :integer
-#  diversion_policy_id              :integer
+#  allow_receive_rate_limit         :boolean          default(FALSE), not null
+#  capacity                         :integer(4)
+#  check_account_balance            :boolean
+#  customer_name                    :string
 #  diversion_policy_name            :string
 #  diversion_rewrite_result         :string
 #  diversion_rewrite_rule           :string
+#  dst_number_max_length            :integer(4)
+#  dst_number_min_length            :integer(4)
+#  dst_number_radius_rewrite_result :string
+#  dst_number_radius_rewrite_rule   :string
+#  dst_numberlist_name              :string
+#  dst_prefix                       :string
+#  dst_rewrite_result               :string
+#  dst_rewrite_rule                 :string
+#  dump_level_name                  :string
+#  enable_audio_recording           :boolean
+#  enabled                          :boolean
+#  error_string                     :string
+#  from_domain                      :string
+#  gateway_name                     :string
+#  ip                               :string
+#  is_changed                       :boolean
+#  lua_script_name                  :string
+#  max_dst_number_length            :integer(2)
+#  min_dst_number_length            :integer(2)
+#  name                             :string
+#  pop_name                         :string
+#  radius_accounting_profile_name   :string
+#  radius_auth_profile_name         :string
+#  rateplan_name                    :string
+#  reject_calls                     :boolean
+#  require_incoming_auth            :boolean
+#  routing_group_name               :string
+#  routing_plan_name                :string
+#  send_billing_information         :boolean          default(FALSE), not null
 #  src_name_rewrite_result          :string
 #  src_name_rewrite_rule            :string
-#  error_string                     :string
-#  dst_numberlist_id                :integer
-#  dst_numberlist_name              :string
-#  src_numberlist_id                :integer
-#  src_numberlist_name              :string
-#  allow_receive_rate_limit         :boolean          default(FALSE), not null
-#  send_billing_information         :boolean          default(FALSE), not null
-#  routing_plan_id                  :integer
-#  routing_plan_name                :string
-#  radius_auth_profile_id           :integer
-#  radius_auth_profile_name         :string
-#  radius_accounting_profile_id     :integer
-#  radius_accounting_profile_name   :string
-#  src_number_radius_rewrite_rule   :string
+#  src_number_max_length            :integer(2)
+#  src_number_min_length            :integer(2)
 #  src_number_radius_rewrite_result :string
-#  dst_number_radius_rewrite_rule   :string
-#  dst_number_radius_rewrite_result :string
-#  enable_audio_recording           :boolean
-#  from_domain                      :string
-#  to_domain                        :string
-#  transport_protocol_id            :integer
-#  transport_protocol_name          :string
-#  min_dst_number_length            :integer
-#  max_dst_number_length            :integer
-#  check_account_balance            :boolean
-#  require_incoming_auth            :boolean
-#  tag_action_id                    :integer
-#  tag_action_value                 :integer          default([]), not null, is an Array
+#  src_number_radius_rewrite_rule   :string
+#  src_numberlist_name              :string
+#  src_prefix                       :string
+#  src_rewrite_result               :string
+#  src_rewrite_rule                 :string
 #  tag_action_name                  :string
+#  tag_action_value                 :integer(2)       default([]), not null, is an Array
 #  tag_action_value_names           :string
-#  dst_number_min_length            :integer
-#  dst_number_max_length            :integer
-#  reject_calls                     :boolean
-#  src_number_max_length            :integer
-#  src_number_min_length            :integer
-#  lua_script_id                    :integer
-#  lua_script_name                  :string
-#  is_changed                       :boolean
+#  to_domain                        :string
+#  transport_protocol_name          :string
+#  uri_domain                       :string
+#  x_yeti_auth                      :string
+#  account_id                       :integer(4)
+#  customer_id                      :integer(4)
+#  diversion_policy_id              :integer(4)
+#  dst_numberlist_id                :integer(4)
+#  dump_level_id                    :integer(4)
+#  gateway_id                       :integer(4)
+#  lua_script_id                    :integer(2)
+#  o_id                             :bigint(8)
+#  pop_id                           :integer(4)
+#  radius_accounting_profile_id     :integer(2)
+#  radius_auth_profile_id           :integer(2)
+#  rateplan_id                      :integer(4)
+#  routing_group_id                 :integer(4)
+#  routing_plan_id                  :integer(4)
+#  src_numberlist_id                :integer(4)
+#  tag_action_id                    :integer(2)
+#  transport_protocol_id            :integer(2)
 #
 
 class Importing::CustomersAuth < Importing::Base

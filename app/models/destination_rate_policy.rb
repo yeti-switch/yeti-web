@@ -4,8 +4,12 @@
 #
 # Table name: destination_rate_policy
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  destination_rate_policy_name_key  (name) UNIQUE
 #
 
 class DestinationRatePolicy < ActiveRecord::Base

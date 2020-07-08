@@ -4,8 +4,12 @@
 #
 # Table name: class4.routing_tags
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  routing_tags_name_key  (name) UNIQUE
 #
 
 class Routing::RoutingTag < Yeti::ActiveRecord

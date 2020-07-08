@@ -4,8 +4,12 @@
 #
 # Table name: class4.gateway_media_encryption_modes
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  gateway_media_encryption_modes_name_key  (name) UNIQUE
 #
 
 class Equipment::GatewayMediaEncryptionMode < Yeti::ActiveRecord

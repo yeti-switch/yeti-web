@@ -4,11 +4,11 @@
 #
 # Table name: reports.customer_traffic_report
 #
-#  id          :integer          not null, primary key
-#  created_at  :datetime
-#  date_start  :datetime
+#  id          :bigint(8)        not null, primary key
 #  date_end    :datetime
-#  customer_id :integer          not null
+#  date_start  :datetime
+#  created_at  :datetime
+#  customer_id :integer(4)       not null
 #
 
 class Report::CustomerTraffic < Cdr::Base

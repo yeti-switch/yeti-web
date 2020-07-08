@@ -4,7 +4,7 @@
 #
 # Table name: filter_types
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string
 #
 

@@ -4,13 +4,17 @@
 #
 # Table name: stats.traffic_vendor_accounts
 #
-#  id         :integer          not null, primary key
-#  account_id :integer          not null
-#  timestamp  :datetime         not null
-#  duration   :integer          not null
-#  count      :integer          not null
+#  id         :bigint(8)        not null, primary key
 #  amount     :decimal(, )
+#  count      :bigint(8)        not null
+#  duration   :bigint(8)        not null
 #  profit     :decimal(, )
+#  timestamp  :datetime         not null
+#  account_id :integer(4)       not null
+#
+# Indexes
+#
+#  traffic_vendor_accounts_account_id_timestamp_idx  (account_id,timestamp) UNIQUE
 #
 
 class Stats::TrafficVendorAccount < Stats::Traffic

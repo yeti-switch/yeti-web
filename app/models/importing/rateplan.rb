@@ -4,13 +4,13 @@
 #
 # Table name: import_rateplans
 #
-#  id                       :integer          not null, primary key
-#  o_id                     :integer
-#  name                     :string
+#  id                       :bigint(8)        not null, primary key
 #  error_string             :string
-#  profit_control_mode_id   :integer
-#  profit_control_mode_name :string
 #  is_changed               :boolean
+#  name                     :string
+#  profit_control_mode_name :string
+#  o_id                     :integer(4)
+#  profit_control_mode_id   :integer(4)
 #
 
 class Importing::Rateplan < Importing::Base

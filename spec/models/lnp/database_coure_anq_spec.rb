@@ -4,14 +4,14 @@
 #
 # Table name: class4.lnp_databases_coure_anq
 #
-#  id            :integer          not null, primary key
-#  database_id   :integer
+#  id            :integer(2)       not null, primary key
 #  base_url      :string           not null
-#  timeout       :integer          default(300), not null
-#  username      :string           not null
-#  password      :string           not null
 #  country_code  :string           not null
 #  operators_map :string
+#  password      :string           not null
+#  timeout       :integer(2)       default(300), not null
+#  username      :string           not null
+#  database_id   :integer(4)
 #
 
 RSpec.describe Lnp::DatabaseCoureAnq, type: :model do

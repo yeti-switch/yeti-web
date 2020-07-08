@@ -4,18 +4,22 @@
 #
 # Table name: dialpeer_next_rates
 #
-#  id               :integer          not null, primary key
-#  dialpeer_id      :integer          not null
-#  next_rate        :decimal(, )      not null
-#  initial_interval :integer          not null
-#  next_interval    :integer          not null
-#  connect_fee      :decimal(, )      not null
+#  id               :bigint(8)        not null, primary key
+#  applied          :boolean          default(FALSE), not null
 #  apply_time       :datetime         not null
+#  connect_fee      :decimal(, )      not null
+#  initial_interval :integer(2)       not null
+#  initial_rate     :decimal(, )      not null
+#  next_interval    :integer(2)       not null
+#  next_rate        :decimal(, )      not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime
-#  applied          :boolean          default(FALSE), not null
-#  external_id      :integer
-#  initial_rate     :decimal(, )      not null
+#  dialpeer_id      :bigint(8)        not null
+#  external_id      :bigint(8)
+#
+# Foreign Keys
+#
+#  dialpeer_next_rates_dialpeer_id_fkey  (dialpeer_id => dialpeers.id)
 #
 
 class DialpeerNextRate < Yeti::ActiveRecord

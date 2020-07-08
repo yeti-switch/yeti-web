@@ -4,16 +4,24 @@
 #
 # Table name: sys.sensors
 #
-#  id               :integer          not null, primary key
+#  id               :integer(2)       not null, primary key
 #  name             :string           not null
-#  mode_id          :integer          not null
 #  source_interface :string
-#  target_mac       :macaddr
-#  use_routing      :boolean          not null
-#  target_ip        :inet
 #  source_ip        :inet
-#  target_port      :integer
-#  hep_capture_id   :integer
+#  target_ip        :inet
+#  target_mac       :macaddr
+#  target_port      :integer(4)
+#  use_routing      :boolean          not null
+#  hep_capture_id   :integer(4)
+#  mode_id          :integer(4)       not null
+#
+# Indexes
+#
+#  sensors_name_key  (name) UNIQUE
+#
+# Foreign Keys
+#
+#  sensors_mode_id_fkey  (mode_id => sensor_modes.id)
 #
 
 require 'shared_examples/shared_examples_for_events'

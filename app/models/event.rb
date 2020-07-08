@@ -4,13 +4,17 @@
 #
 # Table name: events
 #
-#  id         :integer          not null, primary key
+#  id         :integer(4)       not null, primary key
 #  command    :string           not null
-#  retries    :integer          default(0), not null
-#  node_id    :integer          not null
+#  last_error :string
+#  retries    :integer(4)       default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime
-#  last_error :string
+#  node_id    :integer(4)       not null
+#
+# Foreign Keys
+#
+#  events_node_id_fkey  (node_id => nodes.id)
 #
 
 class Event < ActiveRecord::Base

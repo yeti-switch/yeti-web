@@ -4,14 +4,18 @@
 #
 # Table name: class4.radius_auth_profiles
 #
-#  id              :integer          not null, primary key
+#  id              :integer(2)       not null, primary key
+#  attempts        :integer(2)       default(2), not null
 #  name            :string           not null
-#  server          :string           not null
-#  port            :integer          not null
-#  secret          :string           not null
+#  port            :integer(4)       not null
 #  reject_on_error :boolean          default(TRUE), not null
-#  timeout         :integer          default(100), not null
-#  attempts        :integer          default(2), not null
+#  secret          :string           not null
+#  server          :string           not null
+#  timeout         :integer(2)       default(100), not null
+#
+# Indexes
+#
+#  radius_auth_profiles_name_key  (name) UNIQUE
 #
 
 class Equipment::Radius::AuthProfile < Yeti::ActiveRecord

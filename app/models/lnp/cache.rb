@@ -4,15 +4,24 @@
 #
 # Table name: class4.lnp_cache
 #
-#  id          :integer          not null, primary key
+#  id          :integer(4)       not null, primary key
+#  data        :string
 #  dst         :string           not null
+#  expires_at  :datetime
 #  lrn         :string           not null
+#  tag         :string
 #  created_at  :datetime
 #  updated_at  :datetime
-#  expires_at  :datetime
-#  database_id :integer
-#  data        :string
-#  tag         :string
+#  database_id :integer(2)
+#
+# Indexes
+#
+#  lnp_cache_dst_database_id_idx  (dst,database_id) UNIQUE
+#  lnp_cache_expires_at_idx       (expires_at)
+#
+# Foreign Keys
+#
+#  lnp_cache_database_id_fkey  (database_id => lnp_databases.id)
 #
 
 class Lnp::Cache < Yeti::ActiveRecord

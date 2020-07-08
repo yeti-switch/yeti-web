@@ -4,7 +4,7 @@
 #
 # Table name: disconnect_initiators
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string
 #
 

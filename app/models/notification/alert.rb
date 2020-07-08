@@ -4,9 +4,13 @@
 #
 # Table name: notifications.alerts
 #
-#  id      :integer          not null, primary key
+#  id      :integer(4)       not null, primary key
 #  event   :string           not null
-#  send_to :integer          is an Array
+#  send_to :integer(4)       is an Array
+#
+# Indexes
+#
+#  alerts_event_key  (event) UNIQUE
 #
 
 class Notification::Alert < Yeti::ActiveRecord

@@ -4,9 +4,17 @@
 #
 # Table name: class4.area_prefixes
 #
-#  id      :integer          not null, primary key
-#  area_id :integer          not null
+#  id      :bigint(8)        not null, primary key
 #  prefix  :string           not null
+#  area_id :integer(4)       not null
+#
+# Indexes
+#
+#  area_prefixes_prefix_key  (prefix) UNIQUE
+#
+# Foreign Keys
+#
+#  area_prefixes_area_id_fkey  (area_id => areas.id)
 #
 
 class Routing::AreaPrefix < Yeti::ActiveRecord

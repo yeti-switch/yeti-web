@@ -4,18 +4,22 @@
 #
 # Table name: delayed_jobs
 #
-#  id         :integer          not null, primary key
-#  priority   :integer          default(0), not null
-#  attempts   :integer          default(0), not null
+#  id         :integer(4)       not null, primary key
+#  attempts   :integer(4)       default(0), not null
+#  failed_at  :datetime
 #  handler    :text             not null
 #  last_error :text
-#  run_at     :datetime
 #  locked_at  :datetime
-#  failed_at  :datetime
 #  locked_by  :string(255)
+#  priority   :integer(4)       default(0), not null
 #  queue      :string(255)
+#  run_at     :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  delayed_jobs_priority  (priority,run_at)
 #
 
 class BackgroundTask < ActiveRecord::Base

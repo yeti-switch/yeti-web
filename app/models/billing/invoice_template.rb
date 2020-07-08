@@ -4,12 +4,16 @@
 #
 # Table name: invoice_templates
 #
-#  id         :integer          not null, primary key
-#  name       :string           not null
-#  filename   :string           not null
+#  id         :integer(4)       not null, primary key
 #  data       :binary
+#  filename   :string           not null
+#  name       :string           not null
 #  sha1       :string
 #  created_at :datetime
+#
+# Indexes
+#
+#  invoices_templates_name_key  (name) UNIQUE
 #
 
 class Billing::InvoiceTemplate < Yeti::ActiveRecord

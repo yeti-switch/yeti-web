@@ -4,13 +4,24 @@
 #
 # Table name: sys.network_prefixes
 #
-#  id                :integer          not null, primary key
+#  id                :integer(4)       not null, primary key
+#  number_max_length :integer(2)       default(100), not null
+#  number_min_length :integer(2)       default(0), not null
 #  prefix            :string           not null
-#  network_id        :integer          not null
-#  country_id        :integer
-#  number_min_length :integer          default(0), not null
-#  number_max_length :integer          default(100), not null
 #  uuid              :uuid             not null
+#  country_id        :integer(4)
+#  network_id        :integer(4)       not null
+#
+# Indexes
+#
+#  network_prefixes_prefix_key        (prefix) UNIQUE
+#  network_prefixes_prefix_range_idx  (((prefix)::prefix_range)) USING gist
+#  network_prefixes_uuid_key          (uuid) UNIQUE
+#
+# Foreign Keys
+#
+#  network_prefixes_country_id_fkey  (country_id => countries.id)
+#  network_prefixes_network_id_fkey  (network_id => networks.id)
 #
 
 class System::NetworkPrefix < Yeti::ActiveRecord

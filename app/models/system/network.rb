@@ -4,10 +4,19 @@
 #
 # Table name: sys.networks
 #
-#  id      :integer          not null, primary key
+#  id      :integer(4)       not null, primary key
 #  name    :string           not null
-#  type_id :integer          not null
 #  uuid    :uuid             not null
+#  type_id :integer(2)       not null
+#
+# Indexes
+#
+#  networks_name_key  (name) UNIQUE
+#  networks_uuid_key  (uuid) UNIQUE
+#
+# Foreign Keys
+#
+#  networks_type_id_fkey  (type_id => network_types.id)
 #
 
 class System::Network < Yeti::ActiveRecord

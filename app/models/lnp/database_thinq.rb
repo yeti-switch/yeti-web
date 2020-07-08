@@ -4,12 +4,12 @@
 #
 # Table name: class4.lnp_databases_thinq
 #
-#  id       :integer          not null, primary key
+#  id       :integer(2)       not null, primary key
 #  host     :string           not null
-#  port     :integer
-#  timeout  :integer          default(300), not null
-#  username :string
+#  port     :integer(4)
+#  timeout  :integer(2)       default(300), not null
 #  token    :string
+#  username :string
 #
 
 class Lnp::DatabaseThinq < Yeti::ActiveRecord

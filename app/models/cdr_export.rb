@@ -4,15 +4,15 @@
 #
 # Table name: cdr_exports
 #
-#  id           :integer          not null, primary key
-#  status       :string           not null
+#  id           :integer(4)       not null, primary key
+#  callback_url :string
 #  fields       :string           default([]), not null, is an Array
 #  filters      :json             not null
-#  callback_url :string
+#  rows_count   :integer(4)
+#  status       :string           not null
 #  type         :string           not null
 #  created_at   :datetime
 #  updated_at   :datetime
-#  rows_count   :integer
 #
 
 class CdrExport < Yeti::ActiveRecord

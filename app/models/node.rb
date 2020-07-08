@@ -4,12 +4,21 @@
 #
 # Table name: nodes
 #
-#  id              :integer          not null, primary key
-#  signalling_ip   :string
-#  signalling_port :integer
+#  id              :integer(4)       not null, primary key
 #  name            :string
-#  pop_id          :integer          not null
 #  rpc_endpoint    :string
+#  signalling_ip   :string
+#  signalling_port :integer(4)
+#  pop_id          :integer(4)       not null
+#
+# Indexes
+#
+#  node_name_key           (name) UNIQUE
+#  nodes_rpc_endpoint_key  (rpc_endpoint) UNIQUE
+#
+# Foreign Keys
+#
+#  node_pop_id_fkey  (pop_id => pops.id)
 #
 
 class Node < ActiveRecord::Base

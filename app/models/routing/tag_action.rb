@@ -4,8 +4,12 @@
 #
 # Table name: class4.tag_actions
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  tag_actions_name_key  (name) UNIQUE
 #
 
 class Routing::TagAction < ActiveRecord::Base

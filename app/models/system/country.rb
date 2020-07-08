@@ -4,9 +4,13 @@
 #
 # Table name: sys.countries
 #
-#  id   :integer          not null, primary key
-#  name :string           not null
+#  id   :integer(4)       not null, primary key
 #  iso2 :string(2)        not null
+#  name :string           not null
+#
+# Indexes
+#
+#  countries_name_key  (name) UNIQUE
 #
 
 class System::Country < Yeti::ActiveRecord

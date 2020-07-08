@@ -4,8 +4,12 @@
 #
 # Table name: sys.sensor_levels
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  sensor_levels_name_key  (name) UNIQUE
 #
 
 class System::SensorLevel < Yeti::ActiveRecord
