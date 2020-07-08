@@ -4,11 +4,15 @@
 #
 # Table name: payments
 #
-#  account_id :integer          not null
+#  id         :bigint(8)        not null, primary key
 #  amount     :decimal(, )      not null
 #  notes      :string
-#  id         :integer          not null, primary key
 #  created_at :datetime         not null
+#  account_id :integer(4)       not null
+#
+# Foreign Keys
+#
+#  payments_account_id_fkey  (account_id => accounts.id)
 #
 
 class Payment < Yeti::ActiveRecord

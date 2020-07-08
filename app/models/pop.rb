@@ -4,8 +4,12 @@
 #
 # Table name: pops
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  pop_name_key  (name) UNIQUE
 #
 
 class Pop < ActiveRecord::Base

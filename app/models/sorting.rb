@@ -4,9 +4,9 @@
 #
 # Table name: sortings
 #
-#  id                :integer          not null, primary key
-#  name              :string
+#  id                :integer(4)       not null, primary key
 #  description       :string
+#  name              :string
 #  use_static_routes :boolean          default(FALSE), not null
 #
 

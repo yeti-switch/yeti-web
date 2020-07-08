@@ -4,56 +4,79 @@
 #
 # Table name: class4.customers_auth
 #
-#  id                               :integer          not null, primary key
-#  customer_id                      :integer          not null
-#  rateplan_id                      :integer          not null
-#  enabled                          :boolean          default(TRUE), not null
-#  account_id                       :integer
-#  gateway_id                       :integer          not null
-#  src_rewrite_rule                 :string
-#  src_rewrite_result               :string
-#  dst_rewrite_rule                 :string
-#  dst_rewrite_result               :string
-#  name                             :string           not null
-#  dump_level_id                    :integer          default(0), not null
-#  capacity                         :integer
-#  pop_id                           :integer
-#  src_name_rewrite_rule            :string
-#  src_name_rewrite_result          :string
-#  diversion_policy_id              :integer          default(1), not null
-#  diversion_rewrite_rule           :string
-#  diversion_rewrite_result         :string
-#  dst_numberlist_id                :integer
-#  src_numberlist_id                :integer
-#  routing_plan_id                  :integer          not null
+#  id                               :integer(4)       not null, primary key
 #  allow_receive_rate_limit         :boolean          default(FALSE), not null
-#  send_billing_information         :boolean          default(FALSE), not null
-#  radius_auth_profile_id           :integer
-#  enable_audio_recording           :boolean          default(FALSE), not null
-#  src_number_radius_rewrite_rule   :string
-#  src_number_radius_rewrite_result :string
-#  dst_number_radius_rewrite_rule   :string
-#  dst_number_radius_rewrite_result :string
-#  radius_accounting_profile_id     :integer
-#  transport_protocol_id            :integer
-#  dst_number_max_length            :integer          default(100), not null
+#  capacity                         :integer(2)
 #  check_account_balance            :boolean          default(TRUE), not null
-#  require_incoming_auth            :boolean          default(FALSE), not null
-#  dst_number_min_length            :integer          default(0), not null
-#  tag_action_id                    :integer
-#  tag_action_value                 :integer          default([]), not null, is an Array
-#  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
-#  src_prefix                       :string           default(["\"\""]), is an Array
+#  diversion_rewrite_result         :string
+#  diversion_rewrite_rule           :string
+#  dst_number_max_length            :integer(2)       default(100), not null
+#  dst_number_min_length            :integer(2)       default(0), not null
+#  dst_number_radius_rewrite_result :string
+#  dst_number_radius_rewrite_rule   :string
 #  dst_prefix                       :string           default(["\"\""]), is an Array
-#  uri_domain                       :string           default([]), is an Array
+#  dst_rewrite_result               :string
+#  dst_rewrite_rule                 :string
+#  enable_audio_recording           :boolean          default(FALSE), not null
+#  enabled                          :boolean          default(TRUE), not null
 #  from_domain                      :string           default([]), is an Array
-#  to_domain                        :string           default([]), is an Array
-#  x_yeti_auth                      :string           default([]), is an Array
-#  external_id                      :integer
+#  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
+#  name                             :string           not null
 #  reject_calls                     :boolean          default(FALSE), not null
-#  src_number_max_length            :integer          default(100), not null
-#  src_number_min_length            :integer          default(0), not null
-#  lua_script_id                    :integer
+#  require_incoming_auth            :boolean          default(FALSE), not null
+#  send_billing_information         :boolean          default(FALSE), not null
+#  src_name_rewrite_result          :string
+#  src_name_rewrite_rule            :string
+#  src_number_max_length            :integer(2)       default(100), not null
+#  src_number_min_length            :integer(2)       default(0), not null
+#  src_number_radius_rewrite_result :string
+#  src_number_radius_rewrite_rule   :string
+#  src_prefix                       :string           default(["\"\""]), is an Array
+#  src_rewrite_result               :string
+#  src_rewrite_rule                 :string
+#  tag_action_value                 :integer(2)       default([]), not null, is an Array
+#  to_domain                        :string           default([]), is an Array
+#  uri_domain                       :string           default([]), is an Array
+#  x_yeti_auth                      :string           default([]), is an Array
+#  account_id                       :integer(4)
+#  customer_id                      :integer(4)       not null
+#  diversion_policy_id              :integer(4)       default(1), not null
+#  dst_numberlist_id                :integer(2)
+#  dump_level_id                    :integer(4)       default(0), not null
+#  external_id                      :bigint(8)
+#  gateway_id                       :integer(4)       not null
+#  lua_script_id                    :integer(2)
+#  pop_id                           :integer(4)
+#  radius_accounting_profile_id     :integer(2)
+#  radius_auth_profile_id           :integer(2)
+#  rateplan_id                      :integer(4)       not null
+#  routing_plan_id                  :integer(4)       not null
+#  src_numberlist_id                :integer(2)
+#  tag_action_id                    :integer(2)
+#  transport_protocol_id            :integer(2)
+#
+# Indexes
+#
+#  customers_auth_external_id_key  (external_id) UNIQUE
+#  customers_auth_name_key         (name) UNIQUE
+#
+# Foreign Keys
+#
+#  customers_auth_account_id_fkey                    (account_id => accounts.id)
+#  customers_auth_customer_id_fkey                   (customer_id => contractors.id)
+#  customers_auth_diversion_policy_id_fkey           (diversion_policy_id => diversion_policy.id)
+#  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
+#  customers_auth_dump_level_id_fkey                 (dump_level_id => dump_level.id)
+#  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
+#  customers_auth_lua_script_id_fkey                 (lua_script_id => lua_scripts.id)
+#  customers_auth_pop_id_fkey                        (pop_id => pops.id)
+#  customers_auth_radius_accounting_profile_id_fkey  (radius_accounting_profile_id => radius_accounting_profiles.id)
+#  customers_auth_radius_auth_profile_id_fkey        (radius_auth_profile_id => radius_auth_profiles.id)
+#  customers_auth_rateplan_id_fkey                   (rateplan_id => rateplans.id)
+#  customers_auth_routing_plan_id_fkey               (routing_plan_id => routing_plans.id)
+#  customers_auth_src_blacklist_id_fkey              (src_numberlist_id => numberlists.id)
+#  customers_auth_tag_action_id_fkey                 (tag_action_id => tag_actions.id)
+#  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 
 RSpec.describe CustomersAuth, type: :model do

@@ -4,8 +4,12 @@
 #
 # Table name: class4.transport_protocols
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  transport_protocols_name_key  (name) UNIQUE
 #
 
 class Equipment::TransportProtocol < Yeti::ActiveRecord

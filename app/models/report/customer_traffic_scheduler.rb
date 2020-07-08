@@ -4,13 +4,17 @@
 #
 # Table name: reports.customer_traffic_report_schedulers
 #
-#  id          :integer          not null, primary key
-#  created_at  :datetime
-#  period_id   :integer          not null
-#  customer_id :integer          not null
+#  id          :integer(4)       not null, primary key
 #  last_run_at :datetime
 #  next_run_at :datetime
-#  send_to     :integer          is an Array
+#  send_to     :integer(4)       is an Array
+#  created_at  :datetime
+#  customer_id :integer(4)       not null
+#  period_id   :integer(4)       not null
+#
+# Foreign Keys
+#
+#  customer_traffic_report_schedulers_period_id_fkey  (period_id => scheduler_periods.id)
 #
 
 class Report::CustomerTrafficScheduler < Cdr::Base

@@ -4,33 +4,46 @@
 #
 # Table name: accounts
 #
-#  id                            :integer          not null, primary key
-#  contractor_id                 :integer          not null
+#  id                            :integer(4)       not null, primary key
 #  balance                       :decimal(, )      not null
-#  min_balance                   :decimal(, )      not null
-#  max_balance                   :decimal(, )      not null
-#  name                          :string           not null
-#  origination_capacity          :integer
-#  termination_capacity          :integer
-#  customer_invoice_period_id    :integer
-#  customer_invoice_template_id  :integer
-#  vendor_invoice_template_id    :integer
-#  next_customer_invoice_at      :datetime
-#  next_vendor_invoice_at        :datetime
-#  vendor_invoice_period_id      :integer
-#  send_invoices_to              :integer          is an Array
-#  timezone_id                   :integer          default(1), not null
-#  next_customer_invoice_type_id :integer
-#  next_vendor_invoice_type_id   :integer
 #  balance_high_threshold        :decimal(, )
 #  balance_low_threshold         :decimal(, )
-#  send_balance_notifications_to :integer          is an Array
-#  uuid                          :uuid             not null
-#  external_id                   :integer
-#  vat                           :decimal(, )      default(0.0), not null
-#  total_capacity                :integer
 #  destination_rate_limit        :decimal(, )
-#  max_call_duration             :integer
+#  max_balance                   :decimal(, )      not null
+#  max_call_duration             :integer(4)
+#  min_balance                   :decimal(, )      not null
+#  name                          :string           not null
+#  next_customer_invoice_at      :datetime
+#  next_vendor_invoice_at        :datetime
+#  origination_capacity          :integer(2)
+#  send_balance_notifications_to :integer(4)       is an Array
+#  send_invoices_to              :integer(4)       is an Array
+#  termination_capacity          :integer(2)
+#  total_capacity                :integer(2)
+#  uuid                          :uuid             not null
+#  vat                           :decimal(, )      default(0.0), not null
+#  contractor_id                 :integer(4)       not null
+#  customer_invoice_period_id    :integer(2)
+#  customer_invoice_template_id  :integer(4)
+#  external_id                   :bigint(8)
+#  next_customer_invoice_type_id :integer(2)
+#  next_vendor_invoice_type_id   :integer(2)
+#  timezone_id                   :integer(4)       default(1), not null
+#  vendor_invoice_period_id      :integer(2)
+#  vendor_invoice_template_id    :integer(4)
+#
+# Indexes
+#
+#  accounts_external_id_key  (external_id) UNIQUE
+#  accounts_name_key         (name) UNIQUE
+#  accounts_uuid_key         (uuid) UNIQUE
+#
+# Foreign Keys
+#
+#  accounts_contractor_id_fkey             (contractor_id => contractors.id)
+#  accounts_invoice_period_id_fkey         (customer_invoice_period_id => invoice_periods.id)
+#  accounts_timezone_id_fkey               (timezone_id => timezones.id)
+#  accounts_vendor_invoice_period_id_fkey  (vendor_invoice_period_id => invoice_periods.id)
 #
 
 RSpec.describe Account, type: :model do

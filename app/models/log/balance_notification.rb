@@ -4,7 +4,7 @@
 #
 # Table name: balance_notifications
 #
-#  id           :integer          not null, primary key
+#  id           :bigint(8)        not null, primary key
 #  created_at   :datetime         not null
 #  is_processed :boolean          default(FALSE), not null
 #  processed_at :datetime

@@ -4,8 +4,12 @@
 #
 # Table name: diversion_policy
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  diversion_policy_name_key  (name) UNIQUE
 #
 
 class DiversionPolicy < ActiveRecord::Base

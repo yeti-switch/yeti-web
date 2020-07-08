@@ -4,12 +4,20 @@
 #
 # Table name: routing_plans
 #
-#  id                     :integer          not null, primary key
+#  id                     :integer(4)       not null, primary key
+#  max_rerouting_attempts :integer(2)       default(10), not null
 #  name                   :string           not null
-#  sorting_id             :integer          default(1), not null
 #  rate_delta_max         :decimal(, )      default(0.0), not null
 #  use_lnp                :boolean          default(FALSE), not null
-#  max_rerouting_attempts :integer          default(10), not null
+#  sorting_id             :integer(4)       default(1), not null
+#
+# Indexes
+#
+#  routing_plans_name_key  (name) UNIQUE
+#
+# Foreign Keys
+#
+#  routing_plans_sorting_id_fkey  (sorting_id => sortings.id)
 #
 
 class Routing::RoutingPlan < Yeti::ActiveRecord

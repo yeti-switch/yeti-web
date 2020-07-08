@@ -4,15 +4,20 @@
 #
 # Table name: stats.termination_quality_stats
 #
-#  id                  :integer          not null, primary key
-#  dialpeer_id         :integer
-#  gateway_id          :integer
-#  time_start          :datetime         not null
-#  success             :boolean          not null
-#  duration            :integer          not null
-#  pdd                 :float
+#  id                  :bigint(8)        not null, primary key
+#  duration            :bigint(8)        not null
 #  early_media_present :boolean
-#  destination_id      :integer
+#  pdd                 :float
+#  success             :boolean          not null
+#  time_start          :datetime         not null
+#  destination_id      :bigint(8)
+#  dialpeer_id         :bigint(8)
+#  gateway_id          :integer(4)
+#
+# Indexes
+#
+#  termination_quality_stats_dialpeer_id_idx  (dialpeer_id)
+#  termination_quality_stats_gateway_id_idx   (gateway_id)
 #
 
 class Stats::TerminationQualityStat < Cdr::Base

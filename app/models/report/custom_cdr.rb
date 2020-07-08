@@ -4,13 +4,17 @@
 #
 # Table name: reports.cdr_custom_report
 #
-#  id          :integer          not null, primary key
-#  date_start  :datetime
+#  id          :integer(4)       not null, primary key
 #  date_end    :datetime
+#  date_start  :datetime
 #  filter      :string
 #  group_by    :string
 #  created_at  :datetime
-#  customer_id :integer
+#  customer_id :integer(4)
+#
+# Indexes
+#
+#  cdr_custom_report_id_idx  (id) UNIQUE WHERE (id IS NOT NULL)
 #
 
 class Report::CustomCdr < Cdr::Base

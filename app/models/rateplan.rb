@@ -4,11 +4,20 @@
 #
 # Table name: class4.rateplans
 #
-#  id                     :integer          not null, primary key
+#  id                     :integer(4)       not null, primary key
 #  name                   :string
-#  profit_control_mode_id :integer          default(1), not null
-#  send_quality_alarms_to :integer          is an Array
+#  send_quality_alarms_to :integer(4)       is an Array
 #  uuid                   :uuid             not null
+#  profit_control_mode_id :integer(2)       default(1), not null
+#
+# Indexes
+#
+#  rateplans_name_unique  (name) UNIQUE
+#  rateplans_uuid_key     (uuid) UNIQUE
+#
+# Foreign Keys
+#
+#  rateplans_profit_control_mode_id_fkey  (profit_control_mode_id => rate_profit_control_modes.id)
 #
 
 class Rateplan < ActiveRecord::Base

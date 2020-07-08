@@ -4,11 +4,20 @@
 #
 # Table name: gateway_groups
 #
-#  id                :integer          not null, primary key
-#  vendor_id         :integer          not null
+#  id                :integer(4)       not null, primary key
 #  name              :string           not null
 #  prefer_same_pop   :boolean          default(TRUE), not null
-#  balancing_mode_id :integer          default(1), not null
+#  balancing_mode_id :integer(2)       default(1), not null
+#  vendor_id         :integer(4)       not null
+#
+# Indexes
+#
+#  gateway_groups_name_key  (name) UNIQUE
+#
+# Foreign Keys
+#
+#  gateway_groups_balancing_mode_id_fkey  (balancing_mode_id => gateway_group_balancing_modes.id)
+#  gateway_groups_contractor_id_fkey      (vendor_id => contractors.id)
 #
 
 class GatewayGroup < ActiveRecord::Base

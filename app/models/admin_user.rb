@@ -4,26 +4,32 @@
 #
 # Table name: admin_users
 #
-#  id                     :integer          not null, primary key
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0)
+#  id                     :integer(4)       not null, primary key
 #  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
 #  enabled                :boolean          default(TRUE)
-#  username               :string           not null
+#  encrypted_password     :string(255)      default(""), not null
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string(255)
+#  per_page               :json             not null
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string(255)
+#  roles                  :string           not null, is an Array
+#  saved_filters          :json             not null
+#  sign_in_count          :integer(4)       default(0)
 #  ssh_key                :text
 #  stateful_filters       :boolean          default(FALSE), not null
+#  username               :string           not null
 #  visible_columns        :json             not null
-#  per_page               :json             not null
-#  saved_filters          :json             not null
-#  roles                  :string           not null, is an Array
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+# Indexes
+#
+#  admin_users_username_idx                   (username) UNIQUE
+#  admin_users_username_key                   (username) UNIQUE
+#  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class AdminUser < ActiveRecord::Base

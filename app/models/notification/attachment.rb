@@ -4,9 +4,9 @@
 #
 # Table name: notifications.attachments
 #
-#  id       :integer          not null, primary key
-#  filename :string           not null
+#  id       :integer(4)       not null, primary key
 #  data     :binary
+#  filename :string           not null
 #
 
 class Notification::Attachment < ActiveRecord::Base

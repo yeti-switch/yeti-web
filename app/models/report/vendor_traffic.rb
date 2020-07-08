@@ -4,11 +4,11 @@
 #
 # Table name: reports.vendor_traffic_report
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime
-#  date_start :datetime
+#  id         :bigint(8)        not null, primary key
 #  date_end   :datetime
-#  vendor_id  :integer          not null
+#  date_start :datetime
+#  created_at :datetime
+#  vendor_id  :integer(4)       not null
 #
 
 class Report::VendorTraffic < Cdr::Base

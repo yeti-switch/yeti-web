@@ -4,25 +4,25 @@
 #
 # Table name: reports.customer_traffic_report_data_full
 #
-#  id                      :integer          not null, primary key
-#  report_id               :integer          not null
-#  vendor_id               :integer
-#  destination_prefix      :string
-#  dst_country_id          :integer
-#  dst_network_id          :integer
-#  calls_count             :integer          not null
-#  calls_duration          :integer          not null
+#  id                      :bigint(8)        not null, primary key
 #  acd                     :float
 #  asr                     :float
-#  origination_cost        :decimal(, )
-#  termination_cost        :decimal(, )
-#  profit                  :decimal(, )
-#  success_calls_count     :integer
+#  calls_count             :bigint(8)        not null
+#  calls_duration          :bigint(8)        not null
+#  customer_calls_duration :bigint(8)        not null
+#  destination_prefix      :string
 #  first_call_at           :datetime
 #  last_call_at            :datetime
-#  short_calls_count       :integer          not null
-#  customer_calls_duration :integer          not null
-#  vendor_calls_duration   :integer          not null
+#  origination_cost        :decimal(, )
+#  profit                  :decimal(, )
+#  short_calls_count       :bigint(8)        not null
+#  success_calls_count     :bigint(8)
+#  termination_cost        :decimal(, )
+#  vendor_calls_duration   :bigint(8)        not null
+#  dst_country_id          :integer(4)
+#  dst_network_id          :integer(4)
+#  report_id               :integer(4)       not null
+#  vendor_id               :integer(4)
 #
 
 class Report::CustomerTrafficDataFull < Cdr::Base

@@ -4,13 +4,18 @@
 #
 # Table name: notifications.contacts
 #
-#  id            :integer          not null, primary key
-#  contractor_id :integer
-#  admin_user_id :integer
+#  id            :integer(4)       not null, primary key
 #  email         :string           not null
 #  notes         :string
 #  created_at    :datetime
 #  updated_at    :datetime
+#  admin_user_id :integer(4)
+#  contractor_id :integer(4)
+#
+# Foreign Keys
+#
+#  contacts_admin_user_id_fkey  (admin_user_id => admin_users.id)
+#  contacts_contractor_id_fkey  (contractor_id => contractors.id)
 #
 
 class Billing::Contact < Yeti::ActiveRecord

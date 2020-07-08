@@ -4,8 +4,12 @@
 #
 # Table name: class4.rate_profit_control_modes
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  rate_profit_control_modes_name_key  (name) UNIQUE
 #
 
 class Routing::RateProfitControlMode < ActiveRecord::Base

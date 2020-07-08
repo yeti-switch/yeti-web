@@ -4,11 +4,15 @@
 #
 # Table name: stats.active_call_accounts
 #
-#  id               :integer          not null, primary key
-#  account_id       :integer          not null
-#  originated_count :integer          not null
-#  terminated_count :integer          not null
+#  id               :bigint(8)        not null, primary key
+#  originated_count :integer(4)       not null
+#  terminated_count :integer(4)       not null
 #  created_at       :datetime
+#  account_id       :integer(4)       not null
+#
+# Indexes
+#
+#  active_call_accounts_account_id_created_at_idx  (account_id,created_at)
 #
 
 FactoryBot.define do

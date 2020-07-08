@@ -4,51 +4,51 @@
 #
 # Table name: import_dialpeers
 #
-#  id                          :integer          not null, primary key
-#  o_id                        :integer
-#  enabled                     :boolean
-#  prefix                      :string
-#  src_rewrite_rule            :string
-#  dst_rewrite_rule            :string
-#  gateway_id                  :integer
-#  gateway_name                :string
-#  routing_group_id            :integer
-#  routing_group_name          :string
-#  connect_fee                 :decimal(, )
-#  vendor_id                   :integer
-#  vendor_name                 :string
-#  account_id                  :integer
+#  id                          :bigint(8)        not null, primary key
 #  account_name                :string
-#  src_rewrite_result          :string
-#  dst_rewrite_result          :string
-#  locked                      :boolean
-#  priority                    :integer
-#  asr_limit                   :float
 #  acd_limit                   :float
-#  initial_interval            :integer
-#  next_interval               :integer
+#  asr_limit                   :float
+#  capacity                    :integer(4)
+#  connect_fee                 :decimal(, )
+#  dst_number_max_length       :integer(4)
+#  dst_number_min_length       :integer(4)
+#  dst_rewrite_result          :string
+#  dst_rewrite_rule            :string
+#  enabled                     :boolean
+#  error_string                :string
+#  exclusive_route             :boolean
+#  force_hit_rate              :float
+#  gateway_group_name          :string
+#  gateway_name                :string
+#  initial_interval            :integer(4)
 #  initial_rate                :decimal(, )
-#  next_rate                   :decimal(, )
+#  is_changed                  :boolean
 #  lcr_rate_multiplier         :decimal(, )
-#  capacity                    :integer
+#  locked                      :boolean
+#  next_interval               :integer(4)
+#  next_rate                   :decimal(, )
+#  prefix                      :string
+#  priority                    :integer(4)
+#  reverse_billing             :boolean
+#  routeset_discriminator_name :string
+#  routing_group_name          :string
+#  routing_tag_ids             :integer(2)       default([]), not null, is an Array
+#  routing_tag_mode_name       :string
+#  routing_tag_names           :string
+#  short_calls_limit           :float            default(1.0), not null
+#  src_rewrite_result          :string
+#  src_rewrite_rule            :string
 #  valid_from                  :datetime
 #  valid_till                  :datetime
-#  gateway_group_name          :string
-#  gateway_group_id            :integer
-#  error_string                :string
-#  force_hit_rate              :float
-#  short_calls_limit           :float            default(1.0), not null
-#  exclusive_route             :boolean
-#  reverse_billing             :boolean
-#  routing_tag_ids             :integer          default([]), not null, is an Array
-#  routing_tag_names           :string
-#  dst_number_min_length       :integer
-#  dst_number_max_length       :integer
-#  routing_tag_mode_id         :integer
-#  routing_tag_mode_name       :string
-#  routeset_discriminator_id   :integer
-#  routeset_discriminator_name :string
-#  is_changed                  :boolean
+#  vendor_name                 :string
+#  account_id                  :integer(4)
+#  gateway_group_id            :integer(4)
+#  gateway_id                  :integer(4)
+#  o_id                        :bigint(8)
+#  routeset_discriminator_id   :integer(2)
+#  routing_group_id            :integer(4)
+#  routing_tag_mode_id         :integer(2)
+#  vendor_id                   :integer(4)
 #
 
 class Importing::Dialpeer < Importing::Base

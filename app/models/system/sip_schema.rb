@@ -4,8 +4,12 @@
 #
 # Table name: sys.sip_schemas
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  sip_schemas_name_key  (name) UNIQUE
 #
 
 class System::SipSchema < Yeti::ActiveRecord
