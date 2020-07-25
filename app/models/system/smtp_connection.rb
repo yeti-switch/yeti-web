@@ -4,15 +4,19 @@
 #
 # Table name: sys.smtp_connections
 #
-#  id            :integer          not null, primary key
-#  name          :string           not null
-#  host          :string           not null
-#  port          :integer          default(25), not null
-#  from_address  :string           not null
-#  auth_user     :string
+#  id            :integer(4)       not null, primary key
 #  auth_password :string
-#  global        :boolean          default(TRUE), not null
 #  auth_type     :string           default("plain"), not null
+#  auth_user     :string
+#  from_address  :string           not null
+#  global        :boolean          default(TRUE), not null
+#  host          :string           not null
+#  name          :string           not null
+#  port          :integer(4)       default(25), not null
+#
+# Indexes
+#
+#  smtp_connections_name_key  (name) UNIQUE
 #
 
 class System::SmtpConnection < Yeti::ActiveRecord

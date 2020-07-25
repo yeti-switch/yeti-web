@@ -4,7 +4,7 @@
 #
 # Table name: class4.lnp_databases_csv
 #
-#  id            :integer          not null, primary key
+#  id            :integer(2)       not null, primary key
 #  csv_file_path :string
 #
 

@@ -4,12 +4,18 @@
 #
 # Table name: sys.config
 #
-#  id                              :integer          not null, primary key
-#  call_duration_round_mode_id     :integer          default(1), not null
-#  customer_amount_round_mode_id   :integer          default(1), not null
-#  customer_amount_round_precision :integer          default(5), not null
-#  vendor_amount_round_mode_id     :integer          default(1), not null
-#  vendor_amount_round_precision   :integer          default(5), not null
+#  id                              :integer(2)       not null, primary key
+#  customer_amount_round_precision :integer(2)       default(5), not null
+#  vendor_amount_round_precision   :integer(2)       default(5), not null
+#  call_duration_round_mode_id     :integer(2)       default(1), not null
+#  customer_amount_round_mode_id   :integer(2)       default(1), not null
+#  vendor_amount_round_mode_id     :integer(2)       default(1), not null
+#
+# Foreign Keys
+#
+#  config_call_duration_round_mode_id_fkey    (call_duration_round_mode_id => sys.call_duration_round_modes.id)
+#  config_customer_amount_round_mode_id_fkey  (customer_amount_round_mode_id => sys.amount_round_modes.id)
+#  config_vendor_amount_round_mode_id_fkey    (vendor_amount_round_mode_id => sys.amount_round_modes.id)
 #
 
 class System::CdrConfig < Cdr::Base

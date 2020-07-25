@@ -4,11 +4,11 @@
 #
 # Table name: data_import.import_codec_groups
 #
-#  id           :integer          not null, primary key
-#  o_id         :integer
-#  name         :string
+#  id           :bigint(8)        not null, primary key
 #  error_string :string
 #  is_changed   :boolean
+#  name         :string
+#  o_id         :integer(4)
 #
 
 class Importing::CodecGroup < Importing::Base

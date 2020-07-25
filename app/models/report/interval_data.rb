@@ -4,80 +4,84 @@
 #
 # Table name: reports.cdr_interval_report_data
 #
-#  customer_id                  :integer
-#  vendor_id                    :integer
-#  customer_acc_id              :integer
-#  vendor_acc_id                :integer
-#  customer_auth_id             :integer
-#  destination_id               :integer
-#  dialpeer_id                  :integer
-#  orig_gw_id                   :integer
-#  term_gw_id                   :integer
-#  routing_group_id             :integer
-#  rateplan_id                  :integer
-#  destination_next_rate        :decimal(, )
-#  destination_fee              :decimal(, )
-#  dialpeer_next_rate           :decimal(, )
-#  dialpeer_fee                 :decimal(, )
-#  time_limit                   :string
-#  internal_disconnect_code     :integer
-#  internal_disconnect_reason   :string
-#  disconnect_initiator_id      :integer
-#  customer_price               :decimal(, )
-#  vendor_price                 :decimal(, )
-#  duration                     :integer
-#  success                      :boolean
-#  vendor_billed                :boolean
+#  id                           :bigint(8)        not null, primary key
+#  aggregated_value             :decimal(, )
 #  customer_billed              :boolean
-#  profit                       :decimal(, )
-#  dst_prefix_in                :string
-#  dst_prefix_out               :string
-#  src_prefix_in                :string
-#  src_prefix_out               :string
-#  time_start                   :datetime
-#  time_connect                 :datetime
-#  time_end                     :datetime
-#  sign_orig_ip                 :string
-#  sign_orig_port               :integer
-#  sign_orig_local_ip           :string
-#  sign_orig_local_port         :integer
-#  sign_term_ip                 :string
-#  sign_term_port               :integer
-#  sign_term_local_ip           :string
-#  sign_term_local_port         :integer
-#  orig_call_id                 :string
-#  term_call_id                 :string
-#  vendor_invoice_id            :integer
-#  customer_invoice_id          :integer
-#  local_tag                    :string
-#  log_sip                      :boolean
-#  log_rtp                      :boolean
-#  dump_file                    :string
+#  customer_price               :decimal(, )
+#  destination_fee              :decimal(, )
+#  destination_initial_interval :integer(4)
 #  destination_initial_rate     :decimal(, )
+#  destination_next_interval    :integer(4)
+#  destination_next_rate        :decimal(, )
+#  dialpeer_fee                 :decimal(, )
+#  dialpeer_initial_interval    :integer(4)
 #  dialpeer_initial_rate        :decimal(, )
-#  destination_initial_interval :integer
-#  destination_next_interval    :integer
-#  dialpeer_initial_interval    :integer
-#  dialpeer_next_interval       :integer
-#  destination_rate_policy_id   :integer
-#  routing_attempt              :integer
-#  is_last_cdr                  :boolean
-#  lega_disconnect_code         :integer
-#  lega_disconnect_reason       :string
-#  pop_id                       :integer
-#  node_id                      :integer
-#  src_name_in                  :string
-#  src_name_out                 :string
+#  dialpeer_next_interval       :integer(4)
+#  dialpeer_next_rate           :decimal(, )
 #  diversion_in                 :string
 #  diversion_out                :string
-#  dst_country_id               :integer
-#  dst_network_id               :integer
-#  legb_disconnect_code         :integer
+#  dst_prefix_in                :string
+#  dst_prefix_out               :string
+#  dump_file                    :string
+#  duration                     :integer(4)
+#  internal_disconnect_code     :integer(4)
+#  internal_disconnect_reason   :string
+#  is_last_cdr                  :boolean
+#  lega_disconnect_code         :integer(4)
+#  lega_disconnect_reason       :string
+#  legb_disconnect_code         :integer(4)
 #  legb_disconnect_reason       :string
-#  id                           :integer          not null, primary key
-#  report_id                    :integer          not null
+#  local_tag                    :string
+#  log_rtp                      :boolean
+#  log_sip                      :boolean
+#  profit                       :decimal(, )
+#  routing_attempt              :integer(4)
+#  sign_orig_ip                 :string
+#  sign_orig_local_ip           :string
+#  sign_orig_local_port         :integer(4)
+#  sign_orig_port               :integer(4)
+#  sign_term_ip                 :string
+#  sign_term_local_ip           :string
+#  sign_term_local_port         :integer(4)
+#  sign_term_port               :integer(4)
+#  src_name_in                  :string
+#  src_name_out                 :string
+#  src_prefix_in                :string
+#  src_prefix_out               :string
+#  success                      :boolean
+#  time_connect                 :datetime
+#  time_end                     :datetime
+#  time_limit                   :string
+#  time_start                   :datetime
 #  timestamp                    :datetime
-#  aggregated_value             :decimal(, )
+#  vendor_billed                :boolean
+#  vendor_price                 :decimal(, )
+#  customer_acc_id              :integer(4)
+#  customer_auth_id             :integer(4)
+#  customer_id                  :integer(4)
+#  customer_invoice_id          :integer(4)
+#  destination_id               :integer(4)
+#  destination_rate_policy_id   :integer(4)
+#  dialpeer_id                  :integer(4)
+#  disconnect_initiator_id      :integer(4)
+#  dst_country_id               :integer(4)
+#  dst_network_id               :integer(4)
+#  node_id                      :integer(4)
+#  orig_call_id                 :string
+#  orig_gw_id                   :integer(4)
+#  pop_id                       :integer(4)
+#  rateplan_id                  :integer(4)
+#  report_id                    :integer(4)       not null
+#  routing_group_id             :integer(4)
+#  term_call_id                 :string
+#  term_gw_id                   :integer(4)
+#  vendor_acc_id                :integer(4)
+#  vendor_id                    :integer(4)
+#  vendor_invoice_id            :integer(4)
+#
+# Foreign Keys
+#
+#  cdr_interval_report_data_report_id_fkey  (report_id => cdr_interval_report.id)
 #
 
 class Report::IntervalData < Cdr::Base

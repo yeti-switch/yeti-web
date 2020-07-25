@@ -4,8 +4,12 @@
 #
 # Table name: billing.invoice_types
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  invoice_types_name_key  (name) UNIQUE
 #
 
 class Billing::InvoiceType < Cdr::Base

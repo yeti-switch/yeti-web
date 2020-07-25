@@ -4,8 +4,12 @@
 #
 # Table name: class4.gateway_inband_dtmf_filtering_modes
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  gateway_inband_dtmf_filtering_modes_name_key  (name) UNIQUE
 #
 
 class Equipment::GatewayInbandDtmfFilteringMode < Yeti::ActiveRecord

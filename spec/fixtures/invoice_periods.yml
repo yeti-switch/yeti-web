@@ -2,8 +2,12 @@
 #
 # Table name: invoice_periods
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  invoice_periods_name_key  (name) UNIQUE
 #
 
 invoice_period_1:

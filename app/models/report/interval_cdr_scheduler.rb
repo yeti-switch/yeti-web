@@ -4,17 +4,21 @@
 #
 # Table name: reports.cdr_interval_report_schedulers
 #
-#  id              :integer          not null, primary key
-#  created_at      :datetime
-#  period_id       :integer          not null
+#  id              :integer(4)       not null, primary key
+#  aggregate_by    :string
 #  filter          :string
 #  group_by        :string           is an Array
-#  interval_length :integer
-#  aggregator_id   :integer
-#  aggregate_by    :string
-#  send_to         :integer          is an Array
+#  interval_length :integer(4)
 #  last_run_at     :datetime
 #  next_run_at     :datetime
+#  send_to         :integer(4)       is an Array
+#  created_at      :datetime
+#  aggregator_id   :integer(4)
+#  period_id       :integer(4)       not null
+#
+# Foreign Keys
+#
+#  cdr_interval_report_schedulers_period_id_fkey  (period_id => scheduler_periods.id)
 #
 
 class Report::IntervalCdrScheduler < Cdr::Base

@@ -4,12 +4,22 @@
 #
 # Table name: codec_group_codecs
 #
-#  id                   :integer          not null, primary key
-#  codec_group_id       :integer          not null
-#  codec_id             :integer          not null
-#  priority             :integer          default(100), not null
-#  dynamic_payload_type :integer
+#  id                   :integer(4)       not null, primary key
+#  dynamic_payload_type :integer(4)
 #  format_parameters    :string
+#  priority             :integer(4)       default(100), not null
+#  codec_group_id       :integer(4)       not null
+#  codec_id             :integer(4)       not null
+#
+# Indexes
+#
+#  codec_group_codecs_codec_group_id_codec_id_key  (codec_group_id,codec_id) UNIQUE
+#  codec_group_codecs_codec_group_id_priority_key  (codec_group_id,priority) UNIQUE
+#
+# Foreign Keys
+#
+#  codec_group_codecs_codec_group_id_fkey  (codec_group_id => codec_groups.id)
+#  codec_group_codecs_codec_id_fkey        (codec_id => codecs.id)
 #
 
 class CodecGroupCodec < ActiveRecord::Base

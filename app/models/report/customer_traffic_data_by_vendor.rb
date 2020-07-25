@@ -4,22 +4,30 @@
 #
 # Table name: reports.customer_traffic_report_data_by_vendor
 #
-#  id                      :integer          not null, primary key
-#  report_id               :integer          not null
-#  vendor_id               :integer
-#  calls_count             :integer
-#  calls_duration          :integer
+#  id                      :bigint(8)        not null, primary key
 #  acd                     :float
 #  asr                     :float
-#  origination_cost        :decimal(, )
-#  termination_cost        :decimal(, )
-#  profit                  :decimal(, )
-#  success_calls_count     :integer
+#  calls_count             :bigint(8)
+#  calls_duration          :bigint(8)
+#  customer_calls_duration :bigint(8)
 #  first_call_at           :datetime
 #  last_call_at            :datetime
-#  short_calls_count       :integer
-#  customer_calls_duration :integer
-#  vendor_calls_duration   :integer
+#  origination_cost        :decimal(, )
+#  profit                  :decimal(, )
+#  short_calls_count       :bigint(8)
+#  success_calls_count     :bigint(8)
+#  termination_cost        :decimal(, )
+#  vendor_calls_duration   :bigint(8)
+#  report_id               :integer(4)       not null
+#  vendor_id               :integer(4)
+#
+# Indexes
+#
+#  customer_traffic_report_data_report_id_idx  (report_id)
+#
+# Foreign Keys
+#
+#  customer_traffic_report_data_report_id_fkey  (report_id => customer_traffic_report.id)
 #
 
 class Report::CustomerTrafficDataByVendor < Cdr::Base

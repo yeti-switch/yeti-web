@@ -4,8 +4,12 @@
 #
 # Table name: routing_groups
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  routing_groups_name_unique  (name) UNIQUE
 #
 
 class RoutingGroup < ActiveRecord::Base

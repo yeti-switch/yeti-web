@@ -4,15 +4,15 @@
 #
 # Table name: import_routing_groups
 #
-#  id                       :integer          not null, primary key
-#  o_id                     :integer
-#  name                     :string
-#  sorting_name             :string
-#  sorting_id               :integer
-#  more_specific_per_vendor :boolean
-#  rate_delta_max           :decimal(, )      default(0.0), not null
+#  id                       :bigint(8)        not null, primary key
 #  error_string             :string
 #  is_changed               :boolean
+#  more_specific_per_vendor :boolean
+#  name                     :string
+#  rate_delta_max           :decimal(, )      default(0.0), not null
+#  sorting_name             :string
+#  o_id                     :integer(4)
+#  sorting_id               :integer(4)
 #
 
 class Importing::RoutingGroup < Importing::Base

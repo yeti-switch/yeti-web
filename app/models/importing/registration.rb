@@ -4,31 +4,31 @@
 #
 # Table name: data_import.import_registrations
 #
-#  id                            :integer          not null, primary key
-#  o_id                          :integer
-#  name                          :string
-#  enabled                       :boolean
-#  pop_name                      :string
-#  pop_id                        :integer
-#  node_name                     :string
-#  node_id                       :integer
-#  domain                        :string
-#  username                      :string
-#  display_username              :string
-#  auth_user                     :string
-#  proxy                         :string
-#  contact                       :string
+#  id                            :bigint(8)        not null, primary key
 #  auth_password                 :string
-#  expire                        :integer
-#  force_expire                  :boolean
+#  auth_user                     :string
+#  contact                       :string
+#  display_username              :string
+#  domain                        :string
+#  enabled                       :boolean
 #  error_string                  :string
-#  retry_delay                   :integer
-#  max_attempts                  :integer
-#  transport_protocol_id         :integer
-#  proxy_transport_protocol_id   :integer
-#  transport_protocol_name       :string
-#  proxy_transport_protocol_name :string
+#  expire                        :integer(4)
+#  force_expire                  :boolean
 #  is_changed                    :boolean
+#  max_attempts                  :integer(4)
+#  name                          :string
+#  node_name                     :string
+#  pop_name                      :string
+#  proxy                         :string
+#  proxy_transport_protocol_name :string
+#  retry_delay                   :integer(4)
+#  transport_protocol_name       :string
+#  username                      :string
+#  node_id                       :integer(4)
+#  o_id                          :integer(4)
+#  pop_id                        :integer(4)
+#  proxy_transport_protocol_id   :integer(2)
+#  transport_protocol_id         :integer(2)
 #
 
 class Importing::Registration < Importing::Base

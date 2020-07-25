@@ -4,16 +4,25 @@
 #
 # Table name: contractors
 #
-#  id                 :integer          not null, primary key
-#  name               :string
-#  enabled            :boolean
-#  vendor             :boolean
+#  id                 :integer(4)       not null, primary key
+#  address            :string
 #  customer           :boolean
 #  description        :string
-#  address            :string
+#  enabled            :boolean
+#  name               :string
 #  phones             :string
-#  smtp_connection_id :integer
-#  external_id        :integer
+#  vendor             :boolean
+#  external_id        :bigint(8)
+#  smtp_connection_id :integer(4)
+#
+# Indexes
+#
+#  contractors_external_id_key  (external_id) UNIQUE
+#  contractors_name_unique      (name) UNIQUE
+#
+# Foreign Keys
+#
+#  contractors_smtp_connection_id_fkey  (smtp_connection_id => smtp_connections.id)
 #
 
 RSpec.describe Contractor, type: :model do

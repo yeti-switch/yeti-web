@@ -4,25 +4,25 @@
 #
 # Table name: data_import.import_numberlists
 #
-#  id                         :integer          not null, primary key
-#  o_id                       :integer
-#  error_string               :string
-#  name                       :string
-#  mode_id                    :integer
-#  mode_name                  :string
-#  default_action_id          :integer
+#  id                         :integer(4)       not null, primary key
 #  default_action_name        :string
-#  default_src_rewrite_rule   :string
-#  default_src_rewrite_result :string
-#  default_dst_rewrite_rule   :string
 #  default_dst_rewrite_result :string
-#  tag_action_id              :integer
-#  tag_action_name            :string
-#  tag_action_value           :integer          default([]), not null, is an Array
-#  tag_action_value_names     :string
-#  lua_script_id              :integer
-#  lua_script_name            :string
+#  default_dst_rewrite_rule   :string
+#  default_src_rewrite_result :string
+#  default_src_rewrite_rule   :string
+#  error_string               :string
 #  is_changed                 :boolean
+#  lua_script_name            :string
+#  mode_name                  :string
+#  name                       :string
+#  tag_action_name            :string
+#  tag_action_value           :integer(2)       default([]), not null, is an Array
+#  tag_action_value_names     :string
+#  default_action_id          :integer(4)
+#  lua_script_id              :integer(2)
+#  mode_id                    :integer(4)
+#  o_id                       :integer(2)
+#  tag_action_id              :integer(4)
 #
 
 class Importing::Numberlist < Importing::Base

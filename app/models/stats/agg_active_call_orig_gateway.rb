@@ -4,13 +4,13 @@
 #
 # Table name: stats.active_call_orig_gateways_hourly
 #
-#  id         :integer          not null, primary key
-#  gateway_id :integer          not null
-#  max_count  :integer          not null
+#  id         :bigint(8)        not null, primary key
 #  avg_count  :float            not null
-#  min_count  :integer          not null
-#  created_at :datetime         not null
 #  calls_time :datetime         not null
+#  max_count  :integer(4)       not null
+#  min_count  :integer(4)       not null
+#  created_at :datetime         not null
+#  gateway_id :integer(4)       not null
 #
 
 class Stats::AggActiveCallOrigGateway < Stats::Base

@@ -4,18 +4,18 @@
 #
 # Table name: notifications.email_logs
 #
-#  id                 :integer          not null, primary key
-#  batch_id           :integer
-#  created_at         :datetime
-#  sent_at            :datetime
-#  contact_id         :integer
-#  smtp_connection_id :integer
-#  mail_to            :string           not null
-#  mail_from          :string           not null
-#  subject            :string           not null
-#  msg                :string
+#  id                 :bigint(8)        not null, primary key
 #  error              :string
-#  attachment_id      :integer          is an Array
+#  mail_from          :string           not null
+#  mail_to            :string           not null
+#  msg                :string
+#  sent_at            :datetime
+#  subject            :string           not null
+#  created_at         :datetime
+#  attachment_id      :integer(4)       is an Array
+#  batch_id           :bigint(8)
+#  contact_id         :integer(4)
+#  smtp_connection_id :integer(4)
 #
 
 class Log::EmailLog < Yeti::ActiveRecord

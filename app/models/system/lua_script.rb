@@ -4,11 +4,15 @@
 #
 # Table name: sys.lua_scripts
 #
-#  id         :integer          not null, primary key
+#  id         :integer(2)       not null, primary key
 #  name       :string           not null
 #  source     :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  lua_scripts_name_key  (name) UNIQUE
 #
 
 class System::LuaScript < ActiveRecord::Base

@@ -4,12 +4,20 @@
 #
 # Table name: sys.api_access
 #
-#  id              :integer          not null, primary key
-#  customer_id     :integer          not null
+#  id              :integer(4)       not null, primary key
+#  account_ids     :integer(4)       default([]), not null, is an Array
+#  allowed_ips     :inet             default(["\"0.0.0.0/0\""]), not null, is an Array
 #  login           :string           not null
 #  password_digest :string           not null
-#  account_ids     :integer          default([]), not null, is an Array
-#  allowed_ips     :inet             default(["\"0.0.0.0/0\""]), not null, is an Array
+#  customer_id     :integer(4)       not null
+#
+# Indexes
+#
+#  api_access_login_key  (login) UNIQUE
+#
+# Foreign Keys
+#
+#  api_access_customer_id_fkey  (customer_id => contractors.id)
 #
 
 class System::ApiAccess < ActiveRecord::Base

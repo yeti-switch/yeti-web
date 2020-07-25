@@ -4,13 +4,22 @@
 #
 # Table name: class4.routing_plan_static_routes
 #
-#  id                :integer          not null, primary key
-#  routing_plan_id   :integer          not null
+#  id                :integer(4)       not null, primary key
 #  prefix            :string           default(""), not null
-#  vendor_id         :integer          not null
-#  priority          :integer          default(100), not null
-#  network_prefix_id :integer
-#  weight            :integer          default(100), not null
+#  priority          :integer(2)       default(100), not null
+#  weight            :integer(2)       default(100), not null
+#  network_prefix_id :integer(4)
+#  routing_plan_id   :integer(4)       not null
+#  vendor_id         :integer(4)       not null
+#
+# Indexes
+#
+#  routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx  (((prefix)::prefix_range), vendor_id, routing_plan_id) USING gist
+#
+# Foreign Keys
+#
+#  routing_plan_static_routes_routing_plan_id_fkey  (routing_plan_id => routing_plans.id)
+#  routing_plan_static_routes_vendor_id_fkey        (vendor_id => contractors.id)
 #
 
 class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord

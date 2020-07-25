@@ -4,8 +4,12 @@
 #
 # Table name: codecs
 #
-#  id   :integer          not null, primary key
+#  id   :integer(4)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  codecs_name_key  (name) UNIQUE
 #
 
 class Codec < ActiveRecord::Base

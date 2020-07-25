@@ -4,8 +4,12 @@
 #
 # Table name: class4.routeset_discriminators
 #
-#  id   :integer          not null, primary key
+#  id   :integer(2)       not null, primary key
 #  name :string           not null
+#
+# Indexes
+#
+#  routeset_discriminators_name_key  (name) UNIQUE
 #
 
 class Routing::RoutesetDiscriminator < Yeti::ActiveRecord

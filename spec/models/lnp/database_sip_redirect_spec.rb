@@ -4,10 +4,10 @@
 #
 # Table name: class4.lnp_databases_30x_redirect
 #
-#  id      :integer          not null, primary key
+#  id      :integer(2)       not null, primary key
 #  host    :string           not null
-#  port    :integer
-#  timeout :integer          default(300), not null
+#  port    :integer(4)
+#  timeout :integer(2)       default(300), not null
 #
 
 RSpec.describe Lnp::DatabaseSipRedirect, type: :model do

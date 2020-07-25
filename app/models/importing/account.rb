@@ -4,28 +4,28 @@
 #
 # Table name: data_import.import_accounts
 #
-#  id                             :integer          not null, primary key
-#  o_id                           :integer
-#  contractor_name                :string
-#  contractor_id                  :integer
-#  balance                        :decimal(, )
-#  min_balance                    :decimal(, )
-#  max_balance                    :decimal(, )
-#  name                           :string
-#  origination_capacity           :integer
-#  termination_capacity           :integer
-#  error_string                   :string
-#  invoice_period_id              :integer
-#  invoice_period_name            :string
-#  autogenerate_vendor_invoices   :boolean          default(FALSE), not null
+#  id                             :bigint(8)        not null, primary key
 #  autogenerate_customer_invoices :boolean          default(FALSE), not null
+#  autogenerate_vendor_invoices   :boolean          default(FALSE), not null
+#  balance                        :decimal(, )
 #  balance_high_threshold         :decimal(, )
 #  balance_low_threshold          :decimal(, )
-#  total_capacity                 :integer
+#  contractor_name                :string
 #  destination_rate_limit         :decimal(, )
-#  vat                            :decimal(, )
-#  max_call_duration              :integer
+#  error_string                   :string
+#  invoice_period_name            :string
 #  is_changed                     :boolean
+#  max_balance                    :decimal(, )
+#  max_call_duration              :integer(4)
+#  min_balance                    :decimal(, )
+#  name                           :string
+#  origination_capacity           :integer(4)
+#  termination_capacity           :integer(4)
+#  total_capacity                 :integer(2)
+#  vat                            :decimal(, )
+#  contractor_id                  :integer(4)
+#  invoice_period_id              :integer(2)
+#  o_id                           :integer(4)
 #
 
 class Importing::Account < Importing::Base
