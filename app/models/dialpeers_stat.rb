@@ -4,18 +4,22 @@
 #
 # Table name: dialpeers_stats
 #
-#  dialpeer_id    :integer          not null
+#  id             :bigint(8)        not null, primary key
+#  acd            :float
+#  asr            :float
+#  calls          :bigint(8)        not null
+#  calls_fail     :bigint(8)        not null
+#  calls_success  :bigint(8)        not null
+#  locked_at      :datetime
+#  total_duration :bigint(8)        not null
+#  unlocked_at    :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  calls          :integer          not null
-#  calls_success  :integer          not null
-#  calls_fail     :integer          not null
-#  total_duration :integer          not null
-#  asr            :float
-#  acd            :float
-#  locked_at      :datetime
-#  unlocked_at    :datetime
-#  id             :integer          not null, primary key
+#  dialpeer_id    :bigint(8)        not null
+#
+# Indexes
+#
+#  unique_dp  (dialpeer_id) UNIQUE
 #
 
 class DialpeersStat < ActiveRecord::Base

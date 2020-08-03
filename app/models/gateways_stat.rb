@@ -4,18 +4,22 @@
 #
 # Table name: gateways_stats
 #
-#  id             :integer          not null, primary key
-#  gateway_id     :integer          not null
+#  id             :integer(4)       not null, primary key
+#  acd            :float
+#  asr            :float
+#  calls          :bigint(8)        not null
+#  calls_fail     :bigint(8)        not null
+#  calls_success  :bigint(8)        not null
+#  locked_at      :datetime
+#  total_duration :bigint(8)        not null
+#  unlocked_at    :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  calls          :integer          not null
-#  calls_success  :integer          not null
-#  calls_fail     :integer          not null
-#  total_duration :integer          not null
-#  asr            :float
-#  acd            :float
-#  locked_at      :datetime
-#  unlocked_at    :datetime
+#  gateway_id     :integer(4)       not null
+#
+# Indexes
+#
+#  unique_gw  (gateway_id) UNIQUE
 #
 
 class GatewaysStat < ActiveRecord::Base
