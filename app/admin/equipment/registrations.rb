@@ -4,12 +4,13 @@ ActiveAdmin.register Equipment::Registration do
   menu parent: 'Equipment', priority: 81, label: 'Registrations'
   config.batch_actions = true
 
-  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
+  includes :pop, :node, :transport_protocol, :proxy_transport_protocol, :sip_schema
 
   acts_as_export :id, :name, :enabled,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
+                 [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
                  :domain,
                  :username,
                  :display_username,
@@ -32,7 +33,7 @@ ActiveAdmin.register Equipment::Registration do
                 :auth_user, :proxy, :contact,
                 :auth_password,
                 :expire, :force_expire,
-                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id
+                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id
 
   index do
     selectable_column
@@ -42,6 +43,7 @@ ActiveAdmin.register Equipment::Registration do
     column :enabled
     column :pop
     column :node
+    column :sip_schema
     column :transport_protocol
     column :domain
     column :username
@@ -62,6 +64,7 @@ ActiveAdmin.register Equipment::Registration do
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :pop, input_html: { class: 'chosen' }
   filter :node, input_html: { class: 'chosen' }
+  filter :sip_schema
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -74,6 +77,7 @@ ActiveAdmin.register Equipment::Registration do
       f.input :node, as: :select,
                      include_blank: 'Any',
                      input_html: { class: 'chosen' }
+      f.input :sip_schema
       f.input :transport_protocol
       f.input :domain
       f.input :username
@@ -97,6 +101,7 @@ ActiveAdmin.register Equipment::Registration do
       row :enabled
       row :pop
       row :node
+      row :sip_schema
       row :transport_protocol
       row :domain
       row :username

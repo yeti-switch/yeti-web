@@ -30,6 +30,7 @@ ActiveAdmin.register Importing::Registration do
     column :enabled
     column :pop, sortable: :pop_name
     column :node, sortable: :node_name
+    column :sip_schema, sortable: :sip_schema_name
     column :transport_protocol, sortable: :transport_protocol_name
     column :domain
     column :username

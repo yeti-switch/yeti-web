@@ -4963,7 +4963,7 @@ $$;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: accounts; Type: TABLE; Schema: billing; Owner: -
@@ -32183,7 +32183,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch18; Owner: -
 --
 
-CREATE FUNCTION switch18.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint)
+CREATE FUNCTION switch18.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -32202,7 +32202,8 @@ BEGIN
     expire,
     force_expire,
     retry_delay,
-    max_attempts
+    max_attempts,
+    sip_schema_id
   FROM class4.registrations r
   WHERE
     r.enabled and
@@ -39681,7 +39682,8 @@ CREATE TABLE class4.registrations (
     retry_delay smallint DEFAULT 5 NOT NULL,
     max_attempts smallint,
     transport_protocol_id smallint DEFAULT 1 NOT NULL,
-    proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL
+    proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
+    sip_schema_id smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -40853,7 +40855,9 @@ CREATE TABLE data_import.import_registrations (
     proxy_transport_protocol_id smallint,
     transport_protocol_name character varying,
     proxy_transport_protocol_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    sip_schema_id smallint,
+    sip_schema_name character varying
 );
 
 
@@ -46099,7 +46103,7 @@ CREATE INDEX network_prefixes_prefix_range_idx ON sys.network_prefixes USING gis
 -- Name: accounts account_notification_tgf; Type: TRIGGER; Schema: billing; Owner: -
 --
 
-CREATE TRIGGER account_notification_tgf AFTER INSERT OR UPDATE ON billing.accounts FOR EACH ROW EXECUTE PROCEDURE billing.account_change_iu_tgf();
+CREATE TRIGGER account_notification_tgf AFTER INSERT OR UPDATE ON billing.accounts FOR EACH ROW EXECUTE FUNCTION billing.account_change_iu_tgf();
 
 
 --
@@ -46775,6 +46779,14 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
+-- Name: registrations registrations_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.registrations
+    ADD CONSTRAINT registrations_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
+
+
+--
 -- Name: registrations registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -47074,6 +47086,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200412135211'),
 ('20200425110642'),
 ('20200504210442'),
-('20200630132440');
+('20200630132440'),
+('20200803202810');
 
 
