@@ -19,6 +19,10 @@
 #  invoice_id               :integer(4)       not null
 #  network_id               :integer(4)
 #
+# Indexes
+#
+#  invoice_networks_invoice_id_idx  (invoice_id)
+#
 # Foreign Keys
 #
 #  invoice_networks_invoice_id_fkey  (invoice_id => invoices.id)
