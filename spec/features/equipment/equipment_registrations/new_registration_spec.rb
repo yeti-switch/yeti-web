@@ -28,7 +28,8 @@ RSpec.describe 'Create new Registration', type: :feature, js: true do
       contact: 'sip:test',
       pop_id: nil,
       node_id: nil,
-      transport_protocol_id: Equipment::TransportProtocol.find_by!(name: 'UDP').id
+      transport_protocol_id: Equipment::TransportProtocol.find_by!(name: 'UDP').id,
+      sip_schema_id: System::SipSchema.find_by!(name: 'sip').id
     )
   end
 

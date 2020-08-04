@@ -11,6 +11,7 @@ FactoryBot.define do
       node
       pop
       transport_protocol { Equipment::TransportProtocol.take }
+      sip_schema { System::SipSchema.take }
       proxy_transport_protocol { Equipment::TransportProtocol.take }
     end
   end

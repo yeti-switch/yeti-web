@@ -44,7 +44,6 @@ class Equipment::Registration < Yeti::ActiveRecord
   belongs_to :node
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
 
-
   validates :name, uniqueness: { allow_blank: false }
   validates :name, :domain, :username, :retry_delay, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
 
