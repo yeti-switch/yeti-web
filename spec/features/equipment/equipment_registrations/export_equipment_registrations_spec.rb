@@ -25,6 +25,7 @@ RSpec.describe 'Export Equipment Registrations', type: :feature do
         ['Enabled', item.enabled.to_s],
         ['Pop name', item.pop.name],
         ['Node name', item.node.name],
+        ['Sip schema name', item.sip_schema.name],
         ['Transport protocol name', item.transport_protocol.name],
         ['Domain', item.domain],
         ['Username', item.username],
