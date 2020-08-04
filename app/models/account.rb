@@ -125,7 +125,7 @@ class Account < Yeti::ActiveRecord
 
       if customer_invoice_period
         self.next_customer_invoice_at = customer_invoice_period.next_date_from_now
-        self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_customer_invoice_date, next_customer_invoice_at)
+        self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_customer_invoice_date.localtime, next_customer_invoice_at.localtime)
       else
         self.next_customer_invoice_at = nil
         self.next_customer_invoice_type_id = nil
@@ -136,7 +136,7 @@ class Account < Yeti::ActiveRecord
 
       if vendor_invoice_period
         self.next_vendor_invoice_at = vendor_invoice_period.next_date_from_now
-        self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_vendor_invoice_date, next_vendor_invoice_at)
+        self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_vendor_invoice_date.localtime, next_vendor_invoice_at.localtime)
       else
         self.next_vendor_invoice_at = nil
         self.next_vendor_invoice_type_id = nil
@@ -147,26 +147,30 @@ class Account < Yeti::ActiveRecord
   before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
-    invoices.for_customer.order('end_date desc').limit(1)
-            .take&.end_date || customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time
+    date = invoices.for_customer.order('end_date desc').limit(1).take&.end_date
+    return date unless date.nil?
+
+    customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time.utc
   end
 
   def last_vendor_invoice_date
-    invoices.for_vendor.order('end_date desc').limit(1)
-            .take&.end_date || vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time
+    date = invoices.for_vendor.order('end_date desc').limit(1).take&.end_date
+    return date unless date.nil?
+
+    vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time.utc
   end
 
   def schedule_next_customer_invoice!
     last_date = next_customer_invoice_at
     self.next_customer_invoice_at = customer_invoice_period.next_date(last_date)
-    self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_date, next_customer_invoice_at)
+    self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_date.localtime, next_customer_invoice_at.localtime)
     save!
   end
 
   def schedule_next_vendor_invoice!
     last_date = next_vendor_invoice_at
     self.next_vendor_invoice_at = vendor_invoice_period.next_date(last_date)
-    self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_date, next_vendor_invoice_at)
+    self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_date.localtime, next_vendor_invoice_at.localtime)
     save!
   end
 

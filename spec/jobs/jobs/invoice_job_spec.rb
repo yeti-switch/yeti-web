@@ -36,8 +36,8 @@ RSpec.describe Jobs::Invoice do
 
       it "changes account #{next_invoice_at_col} from '#{end_time}' to '#{next_invoice_at}'" do
         expect { subject }.to change {
-          account.reload[next_invoice_at_col].change(usec: 0)
-        }.from(end_time).to(next_invoice_at)
+          account.reload[next_invoice_at_col].change(usec: 0).utc.to_s
+        }.from(end_time.utc.to_s).to(next_invoice_at.utc.to_s)
       end
     end
 

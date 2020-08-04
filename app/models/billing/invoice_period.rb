@@ -150,7 +150,7 @@ class Billing::InvoicePeriod < Yeti::ActiveRecord
   end
 
   def self.today
-    Date.today
-    # Time.now.to_date
+    # Date.today
+    Time.now.to_date
   end
 end
