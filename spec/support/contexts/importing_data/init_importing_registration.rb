@@ -22,6 +22,7 @@ shared_context :init_importing_registration do |args|
       max_attempts: 123,
       transport_protocol_id: 1,
       proxy_transport_protocol_id: 1,
+      sip_schema_id: 1,
       is_changed: true
     }.merge(args)
 

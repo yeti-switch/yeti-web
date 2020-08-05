@@ -369,8 +369,6 @@ CREATE TYPE switch.versions_ty AS (
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
-
 --
 -- Name: cdr; Type: TABLE; Schema: cdr; Owner: -
 --
@@ -991,6 +989,8 @@ BEGIN
 END;
 $$;
 
+
+SET default_table_access_method = heap;
 
 --
 -- Name: config; Type: TABLE; Schema: sys; Owner: -
@@ -6871,6 +6871,13 @@ CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON billing.invoice_document
 
 
 --
+-- Name: invoice_networks_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX invoice_networks_invoice_id_idx ON billing.invoice_networks USING btree (invoice_id);
+
+
+--
 -- Name: cdr_customer_acc_external_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
@@ -6882,6 +6889,20 @@ CREATE INDEX cdr_customer_acc_external_id_time_start_idx ON ONLY cdr.cdr USING b
 --
 
 CREATE INDEX cdr_customer_acc_id_time_start_idx ON ONLY cdr.cdr USING btree (customer_acc_id, time_start) WHERE is_last_cdr;
+
+
+--
+-- Name: cdr_customer_acc_id_time_start_idx1; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_customer_acc_id_time_start_idx1 ON ONLY cdr.cdr USING btree (customer_acc_id, time_start);
+
+
+--
+-- Name: cdr_customer_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_customer_invoice_id_idx ON ONLY cdr.cdr USING btree (customer_invoice_id);
 
 
 --
@@ -7160,6 +7181,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200220113109'),
 ('20200221080918'),
 ('20200514153523'),
-('20200527173737');
+('20200527173737'),
+('20200803201602');
 
 
