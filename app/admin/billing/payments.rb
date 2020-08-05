@@ -6,7 +6,7 @@ ActiveAdmin.register Payment do
   config.batch_actions = false
   actions :index, :create, :new, :show
 
-  acts_as_async_destroy('Payment')
+  # acts_as_async_destroy('Payment')
   acts_as_async_update('Payment',
                        lambda do
                          {
@@ -16,7 +16,7 @@ ActiveAdmin.register Payment do
                          }
                        end)
 
-  acts_as_delayed_job_lock
+  # acts_as_delayed_job_lock
 
   permit_params :account_id, :amount, :notes
   scope :all, default: true
