@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::CustomersAuthResource < BaseResource
+  paginator :paged
+
   attributes :name, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
              :src_prefix, :src_number_min_length, :src_number_max_length,
              :dst_prefix, :dst_number_min_length, :dst_number_max_length,
@@ -26,6 +28,21 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
 
   filter :name
+
+  filter :customer, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :rateplan, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :routing_plan, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :gateway, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :account, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :dump_level, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :diversion_policy, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :pop, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :dst_numberlist, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :src_numberlist, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :tag_action, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :radius_auth_profile, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :radius_accounting_profile, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :transport_protocol, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
 
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
