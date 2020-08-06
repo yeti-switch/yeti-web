@@ -19,6 +19,14 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
     it { expect(response_data.size).to eq(contractors.size) }
   end
 
+  describe 'GET index with associations filter' do
+    before { create_list :contractor, 2, vendor: true }
+    let(:smtp_connection) { wrap_relationship(:'smtp-connections', create(:smtp_connection).id) }
+
+    subject(:contractor) { Contractor.where(smtp_connection_id: smtp_connection) }
+    it { expect(contractor).to contain_exactly(*Contractor.where(smtp_connection_id: smtp_connection).to_a) }
+  end
+
   describe 'GET index with filters' do
     before { create_list :contractor, 2, vendor: true }
 
