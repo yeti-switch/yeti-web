@@ -50,39 +50,46 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   validates :valid_from, presence: true, if: :valid_from_changed?
   validates :valid_till, presence: true, if: :valid_till_changed?
   validates :short_calls_limit, presence: true, if: :short_calls_limit_changed?
+  validates :lcr_rate_multiplier, presence: true, if: :lcr_rate_multiplier_changed?
 
   # required with
   validates :account_id, required_with: :vendor_id
   validates :gateway_id, required_with: :vendor_id, unless: :gateway_is_shared?
   validates :gateway_group_id, required_with: :vendor_id
-  validates :valid_from, required_with: :valid_till
+  validates :valid_from, required_with: :valid_till, if: -> { valid_from.nil? || valid_till.nil? }
   validates :dst_number_min_length, required_with: :dst_number_max_length
 
   # numericality
-  validates :initial_rate, numericality: true, if: :initial_rate_changed?
-  validates :next_rate, numericality: true, if: :next_rate_changed?
-  validates :connect_fee, numericality: true, if: :connect_fee_changed?
-  validates :initial_interval, numericality: { greater_than: 0, only_integer: true }, if: :initial_interval_changed?
-  validates :next_interval, numericality: { greater_than: 0, only_integer: true }, if: :next_interval_changed?
+  validates :lcr_rate_multiplier, numericality: { allow_blank: true }, if: :lcr_rate_multiplier_changed?
+  validates :initial_rate, numericality: { allow_blank: true }, if: :initial_rate_changed?
+  validates :next_rate, numericality: { allow_blank: true }, if: :next_rate_changed?
+  validates :connect_fee, numericality: { allow_blank: true }, if: :connect_fee_changed?
+  validates :initial_interval, numericality: { greater_than: 0, only_integer: true, allow_blank: true }, if: :initial_interval_changed?
+  validates :next_interval, numericality: { greater_than: 0, only_integer: true, allow_blank: true }, if: :next_interval_changed?
   validates :priority, numericality: {
-    only_integer: true
+    only_integer: true,
+    allow_blank: true
   }, if: :priority_changed?
   validates :acd_limit, numericality: {
     greater_than_or_equal_to: 0.00,
-    less_than_or_equal_to: 1.00
+    less_than_or_equal_to: 1.00,
+    allow_blank: true
   }, if: :acd_limit_changed?
   validates :asr_limit, numericality: {
     greater_than_or_equal_to: 0.00,
-    less_than_or_equal_to: 1.00
+    less_than_or_equal_to: 1.00,
+    allow_blank: true
   }, if: :asr_limit_changed?
   validates :short_calls_limit, numericality: {
     greater_than_or_equal_to: 0.00,
-    less_than_or_equal_to: 1.00
+    less_than_or_equal_to: 1.00,
+    allow_blank: true
   }, if: :short_calls_limit_changed?
   validates :force_hit_rate, numericality: {
     greater_than_or_equal_to: 0.00,
     less_than_or_equal_to: 1.00,
-    allow_blank: true
+    allow_blank: true,
+    allow_nil: true
   }, if: :force_hit_rate_changed?
   validates :capacity, numericality: {
     greater_than: 0,
@@ -91,26 +98,28 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   validates :dst_number_max_length, numericality: {
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 100,
-    only_integer: true
+    only_integer: true,
+    allow_blank: true
   }, if: :dst_number_max_length_changed?
   validates :dst_number_min_length, numericality: {
     greater_than_or_equal_to: 0,
-    less_than_or_equal_to: 100,
-    only_integer: true
-  }, if: :dst_number_min_length_changed?
+    less_than_or_equal_to: :dst_number_max_length,
+    only_integer: true,
+    allow_blank: true
+  }, if: -> { dst_number_min_length_changed? && dst_number_max_length =~ /^[0-9]+$/ }
 
-  validates :prefix, format: { without: /\s/, message: 'spaced is not allowed' }, if: :prefix_changed?
+  validates :prefix, format: { without: /\s/, message: I18n.t('activerecord.errors.models.dialpeer.attributes.prefix') }, if: :prefix_changed?
 
   validate :vendor_owners_the_gateway, if: %i[vendor_id_changed? gateway_id_changed?]
 
   validate :vendor_owners_the_gateway_group, if: %i[vendor_id_changed? gateway_group_id_changed?]
 
   validate if: :vendor_id_changed? do
-    errors.add(:base, 'contractor must be vendor') if is_customer?(vendor_id)
+    errors.add(:vendor_id, I18n.t('activerecord.errors.models.dialpeer.attributes.vendor.contractor_is_not_vendor')) if is_customer?(vendor_id)
   end
 
   validate if: %i[account_id_changed? vendor_id_changed?] do
-    errors.add(:account_id, 'must be owned by selected vendor') unless vendor_is_owners_account?
+    errors.add(:account_id, I18n.t('activerecord.errors.models.dialpeer.attributes.account.wrong_owner')) unless vendor_is_owners_account?
   end
 
   def vendor_is_owners_account?
@@ -124,11 +133,11 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     return true if gateway&.is_shared?
 
     unless vendor_id.to_i == gateway.contractor_id
-      errors.add(:gateway_id, 'must be owned by selected vendor or be shared')
+      errors.add(:gateway_id, I18n.t('activerecord.errors.models.dialpeer.attributes.gateway.wrong_owner'))
     end
 
     unless gateway.allow_termination
-      errors.add(:gateway_id, 'must be allowed for termination')
+      errors.add(:gateway_id, I18n.t('activerecord.errors.models.dialpeer.attributes.gateway.allow_termination'))
     end
   end
 
@@ -136,7 +145,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     return true if gateway_group_id.nil?
 
     gateway_group = GatewayGroup.find_by(id: gateway_group_id.to_i)
-    errors.add(:gateway_group_id, 'must be owners by selected vendor') if gateway_group&.vendor_id != vendor_id.to_i
+    errors.add(:gateway_group_id, I18n.t('activerecord.errors.models.gateway.attributes.gateway_group.wrong_owner')) if gateway_group&.vendor_id != vendor_id.to_i
   end
 
   def is_customer?(id)
@@ -149,5 +158,5 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     Gateway.find_by(id: gateway_id)&.is_shared?
   end
 
-  validates_date :valid_from, on_or_before: :valid_till, if: %i[valid_from_changed? valid_till_changed?]
+  validates_date :valid_from, on_or_before: :valid_till, if: -> { valid_from.present? && valid_till.present? }
 end

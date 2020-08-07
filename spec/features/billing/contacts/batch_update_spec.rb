@@ -2,105 +2,70 @@
 
 RSpec.describe BatchUpdateForm::Contact, :js do
   include_context :login_as_admin
-  let!(:_contacts) { create_list :contact, 3 }
-  let!(:contractor) { create :contractor, vendor: true }
-  let!(:admin_user) { create :admin_user }
+  let!(:_contacts) { FactoryBot.create_list :contact, 3 }
+  let!(:contractor) { FactoryBot.create :contractor, vendor: true }
+  let!(:admin_user) { FactoryBot.create :admin_user }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
+
   before do
     visit billing_contacts_path
     click_button 'Update batch'
+    expect(page).to have_selector('.ui-dialog')
   end
 
-  subject { click_button :OK }
-
-  context 'should check validates for the field:' do
-    context '"contractor_id"' do
-      let(:changes) { { contractor_id: contractor.id.to_s } }
-      it 'should change value and pass validates' do
-        check :Contractor_id
-        select contractor.name, from: :contractor_id
-        expect do
-          subject
-          expect(page).to have_selector '.flash', text: success_message
-        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Billing::Contact', be_present, changes, be_present
-      end
-    end
-
-    context '"admin_user_id"' do
-      it 'should change value and pass validates' do
-        check :Admin_user_id
-        select admin_user.username, from: :admin_user_id
-        click_button :OK
-        expect(page).to have_selector '.flash', text: success_message
-      end
-    end
-
-    context '"email"' do
-      before { check :Email }
-      context 'should have error:' do
-        it "can't be blank" do
-          fill_in :email, with: nil
-          click_button :OK
-          expect(page).to have_selector '.flash', text: "can't be blank"
-        end
-
-        it 'must be matched to the following format' do
-          fill_in :email, with: 'example.com'
-          click_button :OK
-          expect(page).to have_selector '.flash', text: 'must be matched to the following format john@deer.ua'
-        end
-      end
-
-      context 'should have success' do
-        let(:changes) { { email: 'yeti@gmail.com' } }
-        it 'change value lonely' do
-          check :Email
-          fill_in :email, with: 'yeti@gmail.com'
-          expect do
-            subject
-            expect(page).to have_selector '.flash', text: success_message
-          end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Billing::Contact', be_present, changes, be_present
-        end
-      end
-    end
-
-    context '"notes"' do
-      let(:changes) { { notes: 'some note' } }
-      it 'should change value lonely' do
-        check :Notes
-        fill_in :notes, with: 'some note'
-        expect do
-          subject
-          expect(page).to have_selector '.flash', text: success_message
-        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Billing::Contact', be_present, changes, be_present
-      end
-    end
-
-    let(:changes) {
-      {
-        contractor_id: contractor.id.to_s,
-        admin_user_id: admin_user.id.to_s,
-        email: 'example@gmail.com',
-        notes: 'notes'
-      }
+  let(:assign_params) do
+    {
+      contractor_id: contractor.id.to_s,
+      admin_user_id: admin_user.id.to_s,
+      email: 'example@gmail.com',
+      notes: 'notes'
     }
-    it 'all fields should pass validates' do
+  end
+
+  let(:fill_batch_form) do
+    if assign_params.key? :contractor_id
       check :Contractor_id
-      select contractor.name, from: :contractor_id
+      select_by_value assign_params[:contractor_id], from: :contractor_id
+    end
 
+    if assign_params.key? :admin_user_id
       check :Admin_user_id
-      select admin_user.username, from: :admin_user_id
+      select_by_value assign_params[:admin_user_id], from: :admin_user_id
+    end
 
+    if assign_params.key? :email
       check :Email
-      fill_in :email, with: 'example@gmail.com'
+      fill_in :email, with: assign_params[:email]
+    end
 
+    if assign_params.key? :notes
       check :Notes
-      fill_in :notes, with: 'notes'
+      fill_in :notes, with: assign_params[:notes]
+    end
+  end
 
-      expect do
+  subject do
+    fill_batch_form
+    click_button 'OK'
+  end
+
+  context 'should check validates' do
+    context 'when :email field with wrong format' do
+      let(:assign_params) { { email: 'text@text' } }
+
+      it 'should have error: must be matched to the following format' do
         subject
-        expect(page).to have_selector '.flash', text: success_message
-      end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Billing::Contact', be_present, changes, be_present
+        expect(page).to have_selector '.flash', text: I18n.t('activerecord.errors.models.billing\contact.attributes.email')
+      end
+    end
+
+    context 'when all fields is filled with valid values' do
+      it 'should have success message' do
+        expect do
+          subject
+          expect(page).to have_selector '.flash', text: success_message
+        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Billing::Contact', be_present, assign_params, be_present
+      end
     end
   end
 end

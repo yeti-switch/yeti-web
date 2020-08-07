@@ -14,11 +14,11 @@ class BatchUpdateForm::Contractor < BatchUpdateForm::Base
 
   validate if: -> { customer_changed? || vendor_changed? } do
     if !customer && !vendor
-      errors.add :base, I18n.t('activerecord.errors.models.contractor.vendor_and_customer')
+      errors.add :base, I18n.t('activerecord.errors.models.contractor.vendor_or_customer')
     elsif customer
-      errors.add :base, I18n.t('activerecord.errors.models.contractor.vendor_and_customer') if vendor
+      errors.add :base, I18n.t('activerecord.errors.models.contractor.vendor_or_customer') if vendor
     elsif vendor
-      errors.add :base, I18n.t('activerecord.errors.models.contractor.vendor_and_customer') if customer
+      errors.add :base, I18n.t('activerecord.errors.models.contractor.vendor_or_customer') if customer
     end
   end
 

@@ -8,7 +8,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   acts_as_audit
   acts_as_safe_destroy
   acts_as_async_destroy('Billing::Invoice')
-  acts_as_async_update BatchUpdateForm::Invoice
 
   acts_as_delayed_job_lock
 
