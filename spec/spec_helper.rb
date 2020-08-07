@@ -171,6 +171,11 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.expect_with :rspec do |c|
+    #  disable the should syntax...
+    c.syntax = :expect
+  end
 end
 
 RspecApiDocumentation.configure do |config|
