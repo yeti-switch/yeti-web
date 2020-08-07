@@ -41,7 +41,7 @@ class BatchUpdateForm::Base
   def initialize(attrs = {})
     attrs.each do |key, value|
       type = self.class._attributes[key.to_sym][:type]
-      if !value.empty?
+      if value.present? || value.is_a?(String)
         public_send("#{key}=", public_send("type_cast_#{type}", value))
       else
         public_send("#{key}=", value)
@@ -112,7 +112,7 @@ class BatchUpdateForm::Base
     end
 
     def form_data_boolean(_options)
-      [%w[Yes t], %w[No f]]
+      [%w[Yes true], %w[No false]]
     end
 
     # @param options [Hash]

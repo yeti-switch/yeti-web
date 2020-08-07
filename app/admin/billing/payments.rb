@@ -7,7 +7,6 @@ ActiveAdmin.register Payment do
   actions :index, :create, :new, :show
 
   acts_as_async_destroy('Payment')
-  acts_as_async_update BatchUpdateForm::Payment
 
   acts_as_delayed_job_lock
 

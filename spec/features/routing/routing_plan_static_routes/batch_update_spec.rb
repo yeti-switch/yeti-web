@@ -2,175 +2,77 @@
 
 RSpec.describe BatchUpdateForm::RoutingPlanStaticRoute, :js do
   include_context :login_as_admin
-  let!(:_static_routes) { create_list :static_route, 3 }
+  let!(:_static_routes) { FactoryBot.create_list :static_route, 3 }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
-  let!(:vendor) { create :vendor }
-  let!(:routing_plan) { create :routing_plan, :with_static_routes }
+  let!(:vendor) { FactoryBot.create :vendor }
+  let!(:routing_plan) { FactoryBot.create :routing_plan, :with_static_routes }
   let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+
   before do
     visit static_routes_path
     click_button 'Update batch'
+    expect(page).to have_selector('.ui-dialog')
   end
 
-  subject { click_button :OK }
+  let(:assign_params) do
+    {
+      routing_plan_id: routing_plan.id.to_s,
+      prefix: '_test',
+      priority: '12',
+      weight: '123',
+      vendor_id: vendor.id.to_s
+    }
+  end
 
-  context 'should check validates for the field:' do
-    context '"routing_plan_id"' do
-      let(:changes) { { routing_plan_id: routing_plan.id.to_s } }
-      it 'should change value lonely' do
-        check :Routing_plan_id
-        select routing_plan.name, from: :routing_plan_id
-        expect do
-          subject
-          expect(page).to have_selector '.flash', text: success_message
-        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, changes, be_present
-      end
-    end
-
-    context '"priority"' do
-      before { check :Priority }
-      context 'should have error:' do
-        it "can't be blank and is not a number" do
-          fill_in :priority, with: nil
-          click_button :OK
-          expect(page).to have_selector '.flash', text: "can't be blank"
-          expect(page).to have_selector '.flash', text: 'is not a number'
-        end
-
-        it 'must be greater than zero' do
-          fill_in :priority, with: 0
-          click_button :OK
-          expect(page).to have_selector '.flash', text: 'must be greater than 0'
-        end
-
-        it 'must be less or equal to' do
-          fill_in :priority, with: pg_max_smallint + 1
-          click_button :OK
-          expect(page).to have_selector('.flash', text: "must be less than or equal to #{pg_max_smallint}")
-        end
-
-        it 'must be an integer' do
-          fill_in :priority, with: 1.5
-          click_button :OK
-          expect(page).to have_selector '.flash', text: 'must be an integer'
-        end
-      end
-
-      context 'should have success' do
-        let(:changes) { { priority: '5' } }
-        it 'change value lonely' do
-          fill_in :priority, with: changes[:priority]
-          expect do
-            subject
-            expect(page).to have_selector '.flash', text: success_message
-          end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, changes, be_present
-        end
-      end
-    end
-
-    context '"weight"' do
-      before { check :Weight }
-      context 'should have error:' do
-        it "can't be blank and is not a number" do
-          fill_in :weight, with: nil
-          click_button :OK
-          expect(page).to have_selector '.flash', text: "can't be blank"
-          expect(page).to have_selector '.flash', text: 'is not a number'
-        end
-
-        it 'must be greater than zero' do
-          fill_in :weight, with: 0
-          click_button :OK
-          expect(page).to have_selector '.flash', text: 'must be greater than 0'
-        end
-
-        it 'must be less or equal to' do
-          fill_in :weight, with: pg_max_smallint + 1
-          click_button :OK
-          expect(page).to have_selector('.flash', text: "must be less than or equal to #{pg_max_smallint}")
-        end
-
-        it 'must be an integer' do
-          fill_in :weight, with: 1.5
-          click_button :OK
-          expect(page).to have_selector '.flash', text: 'must be an integer'
-        end
-      end
-
-      context 'should have success' do
-        let(:changes) { { weight: '5' } }
-        it 'change value lonely' do
-          fill_in :weight, with: changes[:weight]
-          expect do
-            subject
-            expect(page).to have_selector '.flash', text: success_message
-          end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, changes, be_present
-        end
-      end
-    end
-
-    context '"prefix"' do
-      context 'should have error:' do
-        it 'spaces are not allowed' do
-          check :Prefix
-          fill_in :prefix, with: 'with space'
-          click_button :OK
-          expect(page).to have_selector '.flash', text: 'spaces are not allowed'
-        end
-      end
-
-      context 'should have success' do
-        let(:changes) { { prefix: '_prefix_' } }
-        it 'change value lonely' do
-          check :Prefix
-          fill_in :prefix, with: changes[:prefix]
-          expect do
-            subject
-            expect(page).to have_selector '.flash', text: success_message
-          end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, changes, be_present
-        end
-      end
-    end
-
-    context '"vendor_id"' do
-      let(:changes) { { vendor_id: vendor.id.to_s } }
-      it 'should change value lonely' do
-        check :Vendor_id
-        select vendor.name, from: :vendor_id
-        expect do
-          subject
-          expect(page).to have_selector '.flash', text: success_message
-        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, changes, be_present
-      end
-    end
-
-    it 'all fields should have success' do
-      changes = {
-        routing_plan_id: routing_plan.id.to_s,
-        prefix: '_test',
-        priority: '12',
-        weight: '123',
-        vendor_id: vendor.id.to_s
-      }
+  let(:fill_batch_form) do
+    if assign_params.key? :routing_plan_id
       check :Routing_plan_id
-      select routing_plan.name, from: :routing_plan_id
+      select_by_value assign_params[:routing_plan_id], from: :routing_plan_id
+    end
 
+    if assign_params.key? :prefix
       check :Prefix
-      fill_in :prefix, with: changes[:prefix]
+      fill_in :prefix, with: assign_params[:prefix]
+    end
 
+    if assign_params.key? :priority
       check :Priority
-      fill_in :priority, with: changes[:priority]
+      fill_in :priority, with: assign_params[:priority]
+    end
 
+    if assign_params.key? :weight
       check :Weight
-      fill_in :weight, with: changes[:weight]
+      fill_in :weight, with: assign_params[:weight]
+    end
 
+    if assign_params.key? :vendor_id
       check :Vendor_id
-      select vendor.name, from: :vendor_id
+      select_by_value assign_params[:vendor_id], from: :vendor_id
+    end
+  end
 
-      expect do
+  subject do
+    fill_batch_form
+    click_button :OK
+  end
+
+  context 'should check validates' do
+    context 'when :prefix value with spaces' do
+      let(:assign_params) { { prefix: 'string test' } }
+
+      it 'should have error message' do
         subject
-        expect(page).to have_selector '.flash', text: success_message
-      end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, changes, be_present
+        expect(page).to have_selector '.flash', text: I18n.t('activerecord.errors.models.routing\plan_static_route.attributes.prefix.with_spaces')
+      end
+    end
+
+    context 'when all fields filled with valid values' do
+      it 'should have success message' do
+        expect do
+          subject
+          expect(page).to have_selector '.flash', text: success_message
+        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::RoutingPlanStaticRoute', be_present, assign_params, be_present
+      end
     end
   end
 end

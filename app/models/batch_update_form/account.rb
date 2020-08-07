@@ -19,6 +19,8 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   attribute :customer_invoice_template_id, type: :foreign_key, class_name: 'Billing::InvoiceTemplate'
   attribute :timezone_id, type: :foreign_key, class_name: 'System::Timezone'
 
+  validates :min_balance, required_with: :max_balance, if: -> { min_balance.nil? || max_balance.nil? }
+
   # presence
   validates :vat, presence: true, if: :vat_changed?
   validates :min_balance, presence: true, if: :min_balance_changed?
@@ -26,15 +28,19 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   validates :timezone_id, presence: true, if: :timezone_id_changed?
 
   # numericality
-  validates :min_balance, required_with: :max_balance
   validates :balance_low_threshold, required_with: :balance_high_threshold
-  validates :min_balance, numericality: true, if: :min_balance_changed?
-  validates :max_balance, numericality: { greater_than_or_equal_to: ->(r) { r.min_balance.to_i } }, if: :max_balance_changed?
+  validates :min_balance, numericality: { allow_blank: true }, if: :min_balance_changed?
+  validates :max_balance, numericality: {
+    allow_blank: true,
+    greater_than_or_equal_to: :min_balance
+  }, if: -> { :max_balance_changed? && min_balance =~ /^[0-9]+$/ }
+
   validates :termination_capacity, numericality: {
     greater_than: 0,
     less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT,
     allow_blank: true,
-    only_integer: true
+    only_integer: true,
+    allow_nil: true
   }, if: :termination_capacity_changed?
   validates :origination_capacity, numericality: {
     greater_than: 0,
@@ -51,18 +57,21 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   validates :vat, numericality: {
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 100,
-    allow_blank: false # this is percents
+    allow_blank: true
   }, if: :vat_changed?
   validates :destination_rate_limit, numericality: {
     greater_than_or_equal_to: 0,
-    allow_blank: true
+    allow_blank: true,
+    allow_nil: true
   }, if: :destination_rate_limit_changed?
   validates :max_call_duration, numericality: {
     greater_than: 0,
-    allow_blank: true
+    allow_blank: true,
+    only_integer: true,
+    allow_nil: true
   }, if: :max_call_duration_changed?
-  validates :balance_low_threshold, numericality: true, if: :balance_low_threshold_changed?
+  validates :balance_low_threshold, numericality: { allow_blank: true }, if: :balance_low_threshold_changed?
   validates :balance_high_threshold, numericality: {
-    greater_than_or_equal_to: ->(record) { record.balance_low_threshold.to_i }
-  }, if: :balance_high_threshold_changed?
+    greater_than_or_equal_to: :balance_low_threshold
+  }, if: -> { balance_high_threshold.present? && balance_low_threshold =~ /^[0-9]+$/ }
 end

@@ -17,14 +17,16 @@ class BatchUpdateForm::RoutingPlanStaticRoute < BatchUpdateForm::Base
     greater_than: 0,
     less_than_or_equal_to: Routing::RoutingPlanStaticRoute::PG_MAX_SMALLINT,
     allow_nil: false,
-    only_integer: true
+    only_integer: true,
+    allow_blank: true
   }, if: :priority_changed?
   validates :weight, numericality: {
     greater_than: 0,
     less_than_or_equal_to: Routing::RoutingPlanStaticRoute::PG_MAX_SMALLINT,
     allow_nil: false,
-    only_integer: true
+    only_integer: true,
+    allow_blank: true
   }, if: :weight_changed?
 
-  validates :prefix, format: { without: /\s/, message: 'spaces are not allowed' }, if: :prefix_changed?
+  validates :prefix, format: { without: /\s/, message: I18n.t('activerecord.errors.models.routing\plan_static_route.attributes.prefix.with_spaces') }, if: :prefix_changed?
 end

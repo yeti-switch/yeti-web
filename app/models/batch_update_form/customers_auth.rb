@@ -16,16 +16,42 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   attribute :routing_plan_id, type: :foreign_key, class_name: 'Routing::RoutingPlan'
   attribute :lua_script_id, type: :foreign_key, class_name: 'System::LuaScript'
 
-  validates :src_number_min_length, required_with: :src_number_max_length
-  validates :dst_number_min_length, required_with: :dst_number_max_length
-  validates :src_number_min_length, numericality: true, presence: true, if: :src_number_min_length_changed?
-  validates :dst_number_min_length, numericality: true, presence: true, if: :dst_number_min_length_changed?
+  # required with
+  validates :src_number_min_length, required_with: :src_number_max_length, if: -> { src_number_min_length.nil? || src_number_max_length.nil? }
+  validates :dst_number_min_length, required_with: :dst_number_max_length, if: -> { dst_number_min_length.nil? || dst_number_max_length.nil? }
 
-  validates :src_number_max_length, presence: true, numericality: {
-    greater_than_or_equal_to: ->(r) { r.src_number_min_length.to_i }
-  }, if: :src_number_max_length_changed?
+  # presence
+  validates :src_number_min_length, presence: true, if: :src_number_min_length_changed?
+  validates :src_number_max_length, presence: true, if: :src_number_max_length_changed?
+  validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
+  validates :dst_number_max_length, presence: true, if: :dst_number_max_length_changed?
 
-  validates :dst_number_max_length, presence: true, numericality: {
-    greater_than_or_equal_to: ->(r) { r.dst_number_min_length.to_i }
-  }, if: :dst_number_max_length_changed?
+  # numericality
+  validates :src_number_max_length, numericality: {
+    greater_than_or_equal_to: :src_number_min_length,
+    less_than_or_equal_to: 100,
+    allow_blank: true,
+    only_integer: true
+  }, if: -> { :src_number_max_length_changed? && src_number_min_length =~ /^[0-9]+$/ }
+
+  validates :src_number_min_length, numericality: {
+    greater_than_or_equal_to: 0,
+    less_than_or_equal_to: 100,
+    only_integer: true,
+    allow_blank: true
+  }, if: :src_number_min_length_changed?
+
+  validates :dst_number_max_length, numericality: {
+    greater_than_or_equal_to: :dst_number_min_length,
+    less_than_or_equal_to: 100,
+    allow_blank: true,
+    only_integer: true
+  }, if: -> { :dst_number_max_length_changed? && dst_number_min_length =~ /^[0-9]+$/ }
+
+  validates :dst_number_min_length, numericality: {
+    greater_than_or_equal_to: 0,
+    less_than_or_equal_to: 100,
+    only_integer: true,
+    allow_blank: true
+  }, if: :dst_number_min_length_changed?
 end

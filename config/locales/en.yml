@@ -102,10 +102,18 @@ en:
         x_yeti_auth: 'X-Yeti-Auth'
     errors:
       models:
-        contractor:
-          vendor_and_customer: "Contractor must be customer or vendor"
+        billing\contact:
           attributes:
-            customer: "can't be disabled when contractor used at Customer auth"
+            email: "must be matched to the following format john@deer.com"
+        billing\invoice:
+          attributes:
+            contractor:
+              wrong_owner: "must be owners by selected account"
+              contractor_is_not_vendor: "is not vendor"
+        contractor:
+          vendor_or_customer: "Contractor must be customer or vendor"
+          attributes:
+            customer: "Can't be disabled when contractor used at Customer auth"
         gateway:
           attributes:
             allow_termination:
@@ -135,6 +143,26 @@ en:
               empty_when_not_clear: "can't be empty when tag_action is defined and not \"Clear\""
               empty_element: "can't contain empty(NULL) value"
               duplicate: "can't contain duplicate tags"
+        dialpeer:
+          attributes:
+            prefix: "spaced is not allowed"
+            gateway:
+              wrong_owner: "must be owned by selected vendor or be shared"
+              allow_termination: "must be allowed for termination"
+            gateway_group:
+              wrong_owner: "must be owned by selected vendor"
+            account:
+              wrong_owner: "must be owned by selected vendor"
+            vendor:
+              contractor_is_not_vendor: 'is not vendor'
+        routing\destination:
+          attributes:
+            prefix:
+              with_spaces: "spaces are not allowed"
+        routing\plan_static_route:
+          attributes:
+            prefix:
+              with_spaces: "spaces are not allowed"
 
   invoice_template:
     placeholders:

@@ -8,5 +8,5 @@ class BatchUpdateForm::Contact < BatchUpdateForm::Base
   attribute :notes
 
   validates :email, presence: true, if: :email_changed?
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: 'must be matched to the following format john@deer.ua' }, if: :email_changed?
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: I18n.t('activerecord.errors.models.billing\contact.attributes.email') }, if: :email_changed?
 end
