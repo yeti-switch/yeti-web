@@ -102,7 +102,16 @@ en:
         x_yeti_auth: 'X-Yeti-Auth'
     errors:
       models:
+        billing\contact:
+          attributes:
+            email: "must be matched to the following format john@deer.com"
+        billing\invoice:
+          attributes:
+            contractor:
+              wrong_owner: "must be owners by selected account"
+              contractor_is_not_vendor: "is not vendor"
         contractor:
+          vendor_or_customer: "Contractor must be customer or vendor"
           attributes:
             customer: "Can't be disabled when contractor used at Customer auth"
         gateway:
@@ -134,6 +143,26 @@ en:
               empty_when_not_clear: "can't be empty when tag_action is defined and not \"Clear\""
               empty_element: "can't contain empty(NULL) value"
               duplicate: "can't contain duplicate tags"
+        dialpeer:
+          attributes:
+            prefix: "spaced is not allowed"
+            gateway:
+              wrong_owner: "must be owned by selected vendor or be shared"
+              allow_termination: "must be allowed for termination"
+            gateway_group:
+              wrong_owner: "must be owned by selected vendor"
+            account:
+              wrong_owner: "must be owned by selected vendor"
+            vendor:
+              contractor_is_not_vendor: 'is not vendor'
+        routing\destination:
+          attributes:
+            prefix:
+              with_spaces: "spaces are not allowed"
+        routing\plan_static_route:
+          attributes:
+            prefix:
+              with_spaces: "spaces are not allowed"
 
   invoice_template:
     placeholders:
@@ -163,3 +192,13 @@ en:
       inv_first_successful_call_at: "test"
       inv_last_call_at: "test"
       inv_last_successful_call_at: "test"
+  errors:
+    messages:
+      invalid_date: "is not a valid date"
+      invalid_time: "is not a valid time"
+      invalid_datetime: "is not a valid datetime"
+      is_at: "must be at %{restriction}"
+      before: "must be before %{restriction}"
+      on_or_before: "must be before or equal to %{restriction}"
+      after: "must be after %{restriction}"
+      on_or_after: "must be after or equal to %{restriction}"

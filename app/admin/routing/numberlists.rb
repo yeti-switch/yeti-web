@@ -9,18 +9,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_async_destroy('Routing::Numberlist')
-  acts_as_async_update('Routing::Numberlist',
-                       lambda do
-                         {
-                           mode_id: Routing::NumberlistMode.pluck(:name, :id),
-                           default_action_id: Routing::NumberlistAction.pluck(:name, :id),
-                           default_src_rewrite_rule: 'text',
-                           default_src_rewrite_result: 'text',
-                           default_dst_rewrite_rule: 'text',
-                           default_dst_rewrite_result: 'text',
-                           lua_script_id: System::LuaScript.pluck(:name, :id)
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::NumberList
 
   acts_as_delayed_job_lock
 

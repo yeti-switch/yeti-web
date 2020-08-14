@@ -47,6 +47,7 @@ gem 'jsonapi-resources', '0.9.1.beta1'
 # gem 'activeadmin_async_export'
 
 # Ext
+gem 'validates_timeliness'
 
 # Object oriented authorization for Rails applications
 gem 'pundit'

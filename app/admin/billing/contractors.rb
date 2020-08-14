@@ -8,18 +8,7 @@ ActiveAdmin.register Contractor do
   acts_as_safe_destroy
   acts_as_status
   acts_as_async_destroy('Contractor')
-  acts_as_async_update('Contractor',
-                       lambda do
-                         {
-                           enabled: boolean_select,
-                           vendor: boolean_select,
-                           customer: boolean_select,
-                           description: 'text',
-                           address: 'text',
-                           phones: 'text',
-                           smtp_connection_id: System::SmtpConnection.pluck(:name, :id)
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::Contractor
 
   acts_as_delayed_job_lock
 

@@ -12,18 +12,7 @@ ActiveAdmin.register Gateway do
   acts_as_lock
   acts_as_stats_actions
   acts_as_async_destroy('Gateway')
-  acts_as_async_update('Gateway',
-                       lambda do
-                         {
-                           enabled: boolean_select,
-                           priority: 'text',
-                           weight: 'text',
-                           is_shared: boolean_select,
-                           acd_limit: 'text',
-                           asr_limit: 'text',
-                           short_calls_limit: 'text'
-                         }
-                       end)
+  acts_as_async_update BatchUpdateForm::Gateway
 
   acts_as_delayed_job_lock
 
