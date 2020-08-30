@@ -46,7 +46,6 @@ ActiveAdmin.register Payment do
                               end
                             }
     column :notes
-
   end
 
   filter :id
@@ -54,5 +53,4 @@ ActiveAdmin.register Payment do
   filter :account, input_html: { class: 'chosen' }
   filter :amount
   filter :notes
-
 end
