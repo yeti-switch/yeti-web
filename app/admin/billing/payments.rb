@@ -6,18 +6,16 @@ ActiveAdmin.register Payment do
   config.batch_actions = false
   actions :index, :create, :new, :show
 
-  acts_as_async_destroy('Payment')
-
-  acts_as_delayed_job_lock
-
   permit_params :account_id, :amount, :notes
   scope :all, default: true
   scope :today
   scope :yesterday
 
   acts_as_export :id,
+                 :created_at,
                  [:account_name, proc { |row| row.account.try(:name) }],
-                 :amount, :notes, :created_at
+                 :amount,
+                 :notes
 
   controller do
     def scoped_collection
@@ -36,6 +34,7 @@ ActiveAdmin.register Payment do
 
   index footer_data: ->(collection) { collection.select('round(sum(amount),4) as total_amount').take } do
     id_column
+    column :created_at
     column :account, footer: lambda {
                                strong do
                                  'Total:'
@@ -47,13 +46,11 @@ ActiveAdmin.register Payment do
                               end
                             }
     column :notes
-    column :created_at
   end
 
   filter :id
-  filter :accoun, input_html: { class: 'chosen' }
+  filter :created_at, as: :date_time_range
+  filter :account, input_html: { class: 'chosen' }
   filter :amount
   filter :notes
-  filter :created_at, as: :date_time_range
-  # filter :created_at
 end
