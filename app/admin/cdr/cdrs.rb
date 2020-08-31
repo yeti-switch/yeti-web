@@ -112,6 +112,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_delay
   filter :pdd
   filter :rtt
+  filter :p_charge_info_in, as: :string_eq
 
   # X-Accel-Redirect: /protected/iso.img;
   #  location /protected/ {
@@ -337,6 +338,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :rpid_out
           column :rpid_privacy_out
 
+          column :p_charge_info_in
+
           column :lega_rx_payloads
           column :lega_tx_payloads
           column :legb_rx_payloads
@@ -473,6 +476,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
 
           row :is_redirected
+
+          row :p_charge_info_in
 
           row :local_tag
           row :legb_local_tag
@@ -706,6 +711,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :rpid_out
     column :rpid_privacy_out
 
+    column :p_charge_info_in
+
     column :lega_rx_payloads
     column :lega_tx_payloads
     column :legb_rx_payloads
@@ -778,6 +785,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :src_prefix_routing
       column :dst_prefix_routing
       column :destination_prefix
+
+      column :p_charge_info_in
 
     when 'vendor'
       column :time_start
