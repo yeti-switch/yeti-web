@@ -7,15 +7,6 @@ GIT
       net-ldap (>= 0.16.0)
 
 GIT
-  remote: https://github.com/didww/postgres_ext.git
-  revision: 6eec08d613f1dd0e453a0deb82ff9a7bb3dede7f
-  branch: rails-5-2
-  specs:
-    postgres_ext (4.0.0)
-      activerecord (~> 5.2)
-      arel (>= 4.0.1)
-
-GIT
   remote: https://github.com/didww/prometheus_exporter.git
   revision: d8cd0abd6163d920dd34e7ed4f210320fddbfa27
   branch: didww
@@ -122,6 +113,10 @@ GEM
     active_admin_sidebar (1.1.0)
       activeadmin
     active_admin_theme (1.0.3)
+    active_record_extended (1.4.0)
+      activerecord (>= 5.0, < 6.1)
+      ar_outer_joins (~> 0.2)
+      pg (< 2.0)
     activeadmin (1.4.3)
       arbre (>= 1.1.1)
       coffee-rails
@@ -173,6 +168,8 @@ GEM
       kramdown
       railties
       rspec_api_documentation
+    ar_outer_joins (0.2.0)
+      activerecord (>= 3.2)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     archive-zip (0.11.0)
@@ -545,6 +542,7 @@ DEPENDENCIES
   active_admin_scoped_collection_actions
   active_admin_sidebar (= 1.1.0)
   active_admin_theme
+  active_record_extended
   activeadmin
   activeldap
   activemodel-serializers-xml
@@ -584,7 +582,6 @@ DEPENDENCIES
   parallel_tests
   pg
   pgq_prometheus
-  postgres_ext!
   prometheus_exporter!
   puma (~> 4.3)
   puma_worker_killer
