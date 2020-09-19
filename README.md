@@ -14,7 +14,7 @@ https://www.postgresql.org/download/linux/debian/
 You need to install:
 
 ```sh
-sudo apt-get install postgresql-11 postgresql-contrib-11 postgresql-11-prefix postgresql-11-pgq3
+sudo apt-get install postgresql-11 postgresql-contrib-11 postgresql-11-prefix postgresql-11-pgq3 postgresql-11-pgq-ext postgresql-11-yeti
 sudo apt-get install -t stretch-pgdg libpq-dev
 ```
 In addition you need to compile or install from .deb package Yeti PostgreSQL extension https://github.com/yeti-switch/yeti-pg-ext
@@ -26,6 +26,8 @@ bundle install
 ```
 
 Then create `config/database.yml`, example is `database.yml.example`. Notice this project uses two databases main "yeti" and second database "cdr"
+
+Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.distr`.
 
 And run command to create development database:
 
@@ -41,8 +43,8 @@ login `admin` and password `111111`
 Then prepare test database(do not use db:test:prepare).
 
 ```sh
-RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
-RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
+RAILS_ENV=test bundle exec rake db:drop db:create db:structure:load db:migrate
+RAILS_ENV=test bundle exec rake db:second_base:drop:_unsafe db:second_base:create db:second_base:structure:load db:second_base:migrate
 RAILS_ENV=test bundle exec rake db:seed
 ```
 
