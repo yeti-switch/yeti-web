@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Create new CDR export', js: true do
+  subject do
+    click_submit 'Create Cdr export'
+  end
+
   include_context :login_as_admin
 
   let!(:account) do
@@ -10,22 +14,21 @@ RSpec.describe 'Create new CDR export', js: true do
   context 'with all filled attributes' do
     before do
       visit new_cdr_export_path
-      within '#new_cdr_export' do
-        chosen_select('#cdr_export_fields_input .search-field input', search: 'success', multiple: true)
-        chosen_select('#cdr_export_fields_input .search-field input', search: 'id', multiple: true)
-        within '#cdr_export_filters_customer_acc_id_eq_input' do
-          chosen_select('.chosen-single', search: "#{account.name} | #{account.id}")
-        end
-        page.find('#cdr_export_filters_time_start_gteq').set('2018-01-01')
-        page.find('#cdr_export_filters_time_start_lteq').set('2018-03-01')
-        page.click_button 'Create Cdr export'
-      end
+
+      fill_in_chosen 'Fields', with: 'success', multiple: true
+      fill_in_chosen 'Fields', with: 'id', multiple: true
+      fill_in_chosen 'Customer acc id eq', with: "#{account.name} | #{account.id}"
+      fill_in 'Time start gteq', with: '2018-01-01'
+      fill_in 'Time start lteq', with: '2018-03-01'
     end
 
     it 'cdr export should be created' do
+      subject
+      expect(page).to have_flash_message('Cdr export was successfully created.', type: :notice)
+
       cdr_export = CdrExport.last!
-      expect(page).to have_current_path(cdr_export_path(cdr_export))
-      expect(page).to have_text('Cdr export was successfully created.')
+      expect(page).to have_current_path cdr_export_path(cdr_export)
+
       expect(cdr_export).to have_attributes(
         callback_url: nil,
         fields: %w[id success],
@@ -43,20 +46,19 @@ RSpec.describe 'Create new CDR export', js: true do
     before do
       create :cdr_export, :completed, fields: %w[id success customer_id]
       visit new_cdr_export_path
-      within '#new_cdr_export' do
-        within '#cdr_export_filters_customer_acc_id_eq_input' do
-          chosen_select('.chosen-single', search: "#{account.name} | #{account.id}")
-        end
-        page.find('#cdr_export_filters_time_start_gteq').set('2018-01-01')
-        page.find('#cdr_export_filters_time_start_lteq').set('2018-03-01')
-        page.click_button 'Create Cdr export'
-      end
+
+      fill_in_chosen 'Customer acc id eq', with: "#{account.name} | #{account.id}"
+      fill_in 'Time start gteq', with: '2018-01-01'
+      fill_in 'Time start lteq', with: '2018-03-01'
     end
 
     it 'cdr export should be created' do
-      cdr_export = CdrExport.last!
-      expect(page).to have_current_path(cdr_export_path(cdr_export))
+      subject
       expect(page).to have_text('Cdr export was successfully created.')
+
+      cdr_export = CdrExport.last!
+      expect(page).to have_current_path cdr_export_path(cdr_export)
+
       expect(cdr_export).to have_attributes(
         callback_url: nil,
         fields: %w[id customer_id success],

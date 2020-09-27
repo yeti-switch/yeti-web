@@ -1,8 +1,17 @@
 GIT
-  remote: https://github.com/cschiewek/devise_ldap_authenticatable
-  revision: 472735c0455f2b0cff1cf6e860f591ec07b0d7c0
+  remote: https://github.com/activeadmin-plugins/capybara_active_admin.git
+  revision: 0e648b54fdd8d9c285ca84e8a8a9527fa97d5562
   specs:
-    devise_ldap_authenticatable (0.8.6)
+    capybara_active_admin (0.3.3)
+      activeadmin
+      rspec (~> 3.0)
+
+GIT
+  remote: https://github.com/cschiewek/devise_ldap_authenticatable.git
+  revision: 6ef2131e79ff3421429f8d1b0645c6e113db4dc7
+  branch: default
+  specs:
+    devise_ldap_authenticatable (0.8.7)
       devise (>= 3.4.1)
       net-ldap (>= 0.16.0)
 
@@ -186,13 +195,13 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 0.18)
     byebug (10.0.2)
-    capybara (3.12.0)
+    capybara (3.33.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-      regexp_parser (~> 1.2)
+      regexp_parser (~> 1.5)
       xpath (~> 3.2)
     capybara-screenshot (1.0.22)
       capybara (>= 1.0, < 4)
@@ -204,6 +213,7 @@ GEM
       railties (>= 3.0)
       sass-rails (>= 3.2)
     chunky_png (1.3.10)
+    cliver (0.3.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -237,6 +247,9 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.6)
+    cuprite (0.11)
+      capybara (>= 2.1, < 4)
+      ferrum (~> 0.9.0)
     d3-rails (3.5.2)
       railties (>= 3.1)
     daemons (1.2.6)
@@ -271,6 +284,11 @@ GEM
     faraday (0.17.1)
       multipart-post (>= 1.2, < 3)
     fast_gettext (1.6.0)
+    ferrum (0.9)
+      addressable (~> 2.5)
+      cliver (~> 0.3)
+      concurrent-ruby (~> 1.1)
+      websocket-driver (>= 0.6, < 0.8)
     ffi (1.9.25)
     file-tail (1.2.0)
       tins (~> 1.0)
@@ -413,7 +431,7 @@ GEM
       ffi (>= 0.5.0, < 2)
     rchardet (1.8.0)
     ref (2.0.0)
-    regexp_parser (1.3.0)
+    regexp_parser (1.8.2)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (2.4.0)
@@ -584,10 +602,12 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+  capybara_active_admin!
   chosen-rails (= 1.5.2)
   coffee-rails (~> 4.0)
   compass-rails (~> 3.0.2)
   coveralls
+  cuprite
   d3-rails (= 3.5.2)
   daemons
   database_cleaner
@@ -597,6 +617,7 @@ DEPENDENCIES
   draper
   excelinator!
   factory_bot_rails
+  ferrum
   font-awesome-rails
   jquery-rails
   jquery-tablesorter
