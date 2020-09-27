@@ -2,17 +2,17 @@
 
 module Helpers
   module Chosen
-    def chosen_select(chosen_selector, search:, multiple: false, chosen_node: nil, ajax: false)
+    def chosen_select(chosen_selector, search:, multiple: false, chosen_node: nil, ajax: false, exact: true)
       chosen_node ||= page.find(chosen_selector)
       chosen_node.click
       expect(page).to have_selector('ul.chosen-results li.active-result') unless ajax
       if multiple
-        find('.chosen-choices input').native.send_keys(search.to_s)
+        chosen_node.find('.chosen-choices input').native.send_keys(search.to_s)
       else
-        find('.chosen-search input').native.send_keys(search.to_s)
+        chosen_node.find('.chosen-search input').native.send_keys(search.to_s)
       end
       expect(page).to have_selector('ul.chosen-results li.active-result') if ajax
-      find('.active-result', text: search, exact_text: true).click
+      find('.active-result', text: search, exact_text: exact).click
     end
 
     def chosen_pick(css_selector, text:, chosen_node: nil)
