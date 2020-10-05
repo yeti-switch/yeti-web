@@ -3,6 +3,92 @@
 RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
   include_context :jsonapi_admin_headers
 
+  describe 'GET index with contractor filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:suitable_gateway) { create :gateway }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[contractor.id]=#{suitable_gateway.contractor_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+  FilterType
+  describe 'GET index with refresh method filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:suitable_gateway) { create :gateway, session_refresh_method_id: 2 }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[session_refresh_method.id]=#{suitable_gateway.session_refresh_method_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
+  describe 'GET index with sdp alines filter type filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:filter_types) { create :filter_types } # TODO: fix factory
+    let!(:suitable_gateway) { create :gateway, filter_types_id: filter_types.id }
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[sdp_alines_filter_type.id]=#{suitable_gateway.filter_types_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
+  describe 'GET index with term gateway group filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:gateway_group) { create :gateway_group }
+    let!(:suitable_gateway) { create :gateway, gateway_group_id: gateway_group.id, contractor_id: gateway_group.vendor_id }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[gateway_group.id]=#{suitable_gateway.gateway_group_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
+  describe 'GET index with diversion policy filter', type: :request do
+    let!(:gateway) { create :gateway }
+    # let!(:diversion_policy) { create :diversion_policy }  TODO: create factory
+
+    let!(:suitable_gateway) { create :gateway }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[diversion_policy.id]=#{suitable_gateway.diversion_policy_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
+  describe 'GET index with pop filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:pop) { create :pop }
+    let!(:suitable_gateway) { create :gateway, pop_id: pop.id }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[pop.id]=#{suitable_gateway.pop_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
+  describe 'GET index with codec group filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:codec_group) { create :codec_group }
+    let!(:suitable_gateway) { create :gateway, codec_group_id: codec_group.id }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[codec_group.id]=#{suitable_gateway.codec_group_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
+  describe 'GET index with sensor filter', type: :request do
+    let!(:gateway) { create :gateway }
+    let!(:sensor) { create :sensor }
+    let!(:suitable_gateway) { create :gateway, sensor_id: sensor.id }
+
+    it 'returns only associated records' do
+      get "/api/rest/admin/gateways?filter[sensor.id]=#{suitable_gateway.sensor_id}"
+      expect(response_data[0]['id']).to eq(suitable_gateway.id.to_s)
+    end
+  end
+
   describe 'GET index with ransack filters' do
     let(:factory) { :gateway }
     let(:trait) { :with_incoming_auth }

@@ -12,6 +12,17 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     it { expect(response_data.size).to eq(customers_auths.size) }
   end
 
+  describe 'GET index with customer filter' do
+    let!(:customers_auth) { create :customers_auth }
+    let!(:suitable_customers_auth) { create :customers_auth }
+
+
+    it 'returns only associated records' do
+
+    end
+
+  end
+
   describe 'GET index with ransack filters' do
     let(:factory) { :customers_auth }
 

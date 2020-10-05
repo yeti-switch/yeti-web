@@ -26,7 +26,7 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
 
     it 'returns only associated records' do
       get "/api/rest/admin/contractors?filter[smtp_connection.id]=#{smtp_connection.id}"
-      expect(JSON.parse(response.body)['data'][0]['id'].to_i).to eq(contractor_with_association.id)
+      expect(response_data[0]['id']).to eq(contractor_with_association.id.to_s)
     end
   end
 
