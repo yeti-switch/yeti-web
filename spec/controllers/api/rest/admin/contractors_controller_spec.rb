@@ -20,14 +20,13 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
   end
 
   describe 'GET index with associations filter', type: :request do
-    let!(:contractor) { create :contractor, vendor: true }
+    let!(:contractor) { create_list :contractor, 2, vendor: true }
     let!(:smtp_connection) { create :smtp_connection }
     let!(:contractor_with_association) { create :contractor, vendor: true, smtp_connection_id: smtp_connection.id }
 
     it 'returns only associated records' do
       get "/api/rest/admin/contractors?filter[smtp_connection.id]=#{smtp_connection.id}"
-      # debugger
-      expect(JSON.parse(response.body)['data']).to eq(Contractor.where(smtp_connection_id: smtp_connection).take)
+      expect(JSON.parse(response.body)['data'][0]['id'].to_i).to eq(contractor_with_association.id)
     end
   end
 
