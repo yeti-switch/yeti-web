@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::CustomersAuthResource < BaseResource
-  paginator :paged
-
   attributes :name, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
              :src_prefix, :src_number_min_length, :src_number_max_length,
              :dst_prefix, :dst_number_min_length, :dst_number_max_length,
@@ -29,20 +27,20 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
 
   filter :name
 
-  filter :customer, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :rateplan, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :routing_plan, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :gateway, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :account, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :dump_level, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :diversion_policy, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :pop, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :dst_numberlist, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :src_numberlist, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :tag_action, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :radius_auth_profile, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :radius_accounting_profile, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :transport_protocol, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :'customer.id', apply: ->(records, value, _options) { records.where(customer_id: value) }
+  filter :'rateplan.id', apply: ->(records, value, _options) { records.where(rateplan_id: value) }
+  filter :'routing_plan.id', apply: ->(records, value, _options) { records.where(routing_plan_id: value) }
+  filter :'gateway.id', apply: ->(records, value, _options) { records.where(gateway_id: value) }
+  filter :'account.id', apply: ->(records, value, _options) { records.where(account_id: value) }
+  filter :'dump_level.id', apply: ->(records, value, _options) { records.where(dump_level_id: value) }
+  filter :'diversion_policy.id', apply: ->(records, value, _options) { records.where(diversion_policy_id: value) }
+  filter :'pop.id', apply: ->(records, value, _options) { records.where(pop_id: value) }
+  filter :'dst_numberlist.id', apply: ->(records, value, _options) { records.where(dst_numberlist_id: value) }
+  filter :'src_numberlist.id', apply: ->(records, value, _options) { records.where(src_numberlist_id: value) }
+  filter :'tag_action.id', apply: ->(records, value, _options) { records.where(tag_action_id: value) }
+  filter :'radius_auth_profile.id', apply: ->(records, value, _options) { records.where(radius_auth_profile_id: value) }
+  filter :'radius_accounting_profile.id', apply: ->(records, value, _options) { records.where(radius_accounting_profile_id: value) }
+  filter :'transport_protocol.id', apply: ->(records, value, _options) { records.where(transport_protocol_id: value) }
 
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean

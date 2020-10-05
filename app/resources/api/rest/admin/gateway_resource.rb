@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::GatewayResource < ::BaseResource
-  paginator :paged
   attributes :name, :enabled, :priority, :weight, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
              :host, :port, :resolve_ruri, :diversion_rewrite_rule, :diversion_rewrite_result,
              :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule, :src_rewrite_result,
@@ -41,28 +40,28 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
 
   filter :name # DEPRECATED
 
-  filter :contractor, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :session_refresh_method, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :sdp_alines_filter_type, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :term_disconnect_policy, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :gateway_group, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :diversion_policy, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :pop, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :codec_group, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :sdp_c_location, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :sensor, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :sensor_level, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :dtmf_receive_mode, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :dtmf_send_mode, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :transport_protocol, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :term_proxy_transport_protocol, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :orig_proxy_transport_protocol, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :rel100_mode, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :rx_inband_dtmf_filtering_mode, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :tx_inband_dtmf_filtering_mode, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :network_protocol_priority, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :media_encryption_mode, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
-  filter :sip_schema, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :'contractor.id', apply: ->(records, value, _options) { records.where(contractor_id: value) }
+  filter :'session_refresh_method.id', apply: ->(records, value, _options) { records.where(session_refresh_method_id: value) }
+  filter :'sdp_alines_filter_type.id', apply: ->(records, value, _options) { records.where(sdp_alines_filter_type_id: value) }
+  filter :'term_disconnect_policy.id', apply: ->(records, value, _options) { records.where(term_disconnect_policy_id: value) }
+  filter :'gateway_group.id', apply: ->(records, value, _options) { records.where(gateway_group_id: value) }
+  filter :'diversion_policy.id', apply: ->(records, value, _options) { records.where(diversion_policy_id: value) }
+  filter :'pop.id', apply: ->(records, value, _options) { records.where(pop_id: value) }
+  filter :'codec_group.id', apply: ->(records, value, _options) { records.where(codec_group_id: value) }
+  filter :'sdp_c_location.id', apply: ->(records, value, _options) { records.where(sdp_c_location_id: value) }
+  filter :'sensor.id', apply: ->(records, value, _options) { records.where(sensor_id: value) }
+  filter :'sensor_level.id', apply: ->(records, value, _options) { records.where(sensor_level_id: value) }
+  filter :'dtmf_receive_mode.id', apply: ->(records, value, _options) { records.where(dtmf_receive_mode_id: value) }
+  filter :'dtmf_send_mode.id', apply: ->(records, value, _options) { records.where(dtmf_send_mode_id: value) }
+  filter :'transport_protocol.id', apply: ->(records, value, _options) { records.where(transport_protocol_id: value) }
+  filter :'term_proxy_transport_protocol.id', apply: ->(records, value, _options) { records.where(term_proxy_transport_protocol_id: value) }
+  filter :'orig_proxy_transport_protocol.id', apply: ->(records, value, _options) { records.where(orig_proxy_transport_protocol_id: value) }
+  filter :'rel100_mode.id', apply: ->(records, value, _options) { records.where(rel100_mode_id: value) }
+  filter :'rx_inband_dtmf_filtering_mode.id', apply: ->(records, value, _options) { records.where(rx_inband_dtmf_filtering_mode_id: value) }
+  filter :'tx_inband_dtmf_filtering_mode.id', apply: ->(records, value, _options) { records.where(tx_inband_dtmf_filtering_mode_id: value) }
+  filter :'network_protocol_priority.id', apply: ->(records, value, _options) { records.where(network_protocol_priority_id: value) }
+  filter :'media_encryption_mode.id', apply: ->(records, value, _options) { records.where(media_encryption_mode_id: value) }
+  filter :'sip_schema.id', apply: ->(records, value, _options) { records.where(sip_schema_id: value) }
 
   ransack_filter :host, type: :string
   ransack_filter :port, type: :number

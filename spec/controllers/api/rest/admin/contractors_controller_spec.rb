@@ -2,7 +2,7 @@
 
 RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
   let(:user) { create :admin_user }
-  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+  let(:auth_token) { ::Knock::AuthToken.new(payload: {sub: user.id}).token }
 
   before do
     request.accept = 'application/vnd.api+json'
@@ -19,12 +19,16 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
     it { expect(response_data.size).to eq(contractors.size) }
   end
 
-  describe 'GET index with associations filter' do
-    before { create_list :contractor, 2, vendor: true }
-    let(:smtp_connection) { wrap_relationship(:'smtp-connections', create(:smtp_connection).id) }
+  describe 'GET index with associations filter', type: :request do
+    let!(:contractor) { create :contractor, vendor: true }
+    let!(:smtp_connection) { create :smtp_connection }
+    let!(:contractor_with_association) { create :contractor, vendor: true, smtp_connection_id: smtp_connection.id }
 
-    subject(:contractor) { Contractor.where(smtp_connection_id: smtp_connection) }
-    it { expect(contractor).to contain_exactly(*Contractor.where(smtp_connection_id: smtp_connection).to_a) }
+    it 'returns only associated records' do
+      get "/api/rest/admin/contractors?filter[smtp_connection.id]=#{smtp_connection.id}"
+      # debugger
+      expect(JSON.parse(response.body)['data']).to eq(Contractor.where(smtp_connection_id: smtp_connection).take)
+    end
   end
 
   describe 'GET index with filters' do
@@ -104,14 +108,14 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
     let!(:contractor) { create :contractor, vendor: true }
 
     context 'when contractor exists' do
-      before { get :show, params: { id: contractor.to_param } }
+      before { get :show, params: {id: contractor.to_param} }
 
       it { expect(response.status).to eq(200) }
       it { expect(response_data['id']).to eq(contractor.id.to_s) }
     end
 
     context 'when contractor does not exist' do
-      before { get :show, params: { id: contractor.id + 10 } }
+      before { get :show, params: {id: contractor.id + 10} }
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
@@ -121,17 +125,17 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
   describe 'POST create' do
     before do
       post :create, params: {
-        data: { type: 'contractors',
-                attributes: attributes,
-                relationships: relationships }
+          data: {type: 'contractors',
+                 attributes: attributes,
+                 relationships: relationships}
       }
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', vendor: true, 'external-id': 100 } }
+      let(:attributes) { {name: 'name', vendor: true, 'external-id': 100} }
 
       let(:relationships) do
-        { 'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id) }
+        {'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id)}
       end
 
       it { expect(response.status).to eq(201) }
@@ -139,7 +143,7 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { vendor: false, customer: false } }
+      let(:attributes) { {vendor: false, customer: false} }
       let(:relationships) { {} }
 
       it { expect(response.status).to eq(422) }
@@ -151,26 +155,26 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
     let!(:contractor) { create :contractor, vendor: true }
     before do
       put :update, params: {
-        id: contractor.to_param, data: { type: 'contractors', id: contractor.to_param, attributes: attributes }
+          id: contractor.to_param, data: {type: 'contractors', id: contractor.to_param, attributes: attributes}
       }
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name' } }
+      let(:attributes) { {name: 'name'} }
 
       it { expect(response.status).to eq(200) }
       it { expect(contractor.reload.name).to eq('name') }
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { vendor: false, customer: false } }
+      let(:attributes) { {vendor: false, customer: false} }
 
       it { expect(response.status).to eq(422) }
       it { expect(contractor.reload.vendor).to_not eq(false) }
     end
 
     context 'when attributes are not updatable' do
-      let(:attributes) { { 'external-id': 200 } }
+      let(:attributes) { {'external-id': 200} }
 
       it { expect(response.status).to eq(400) }
       it { expect(contractor.reload.external_id).to_not eq(200) }
@@ -180,7 +184,7 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
   describe 'DELETE destroy' do
     let!(:contractor) { create :contractor, vendor: true }
 
-    before { delete :destroy, params: { id: contractor.to_param } }
+    before { delete :destroy, params: {id: contractor.to_param} }
 
     it { expect(response.status).to eq(204) }
     it { expect(Contractor.count).to eq(0) }

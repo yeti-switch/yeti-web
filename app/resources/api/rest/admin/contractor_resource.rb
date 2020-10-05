@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::ContractorResource < BaseResource
-  paginator :paged
 
   attributes :name, :enabled, :vendor, :customer, :description, :address, :phones, :external_id
 
   has_one :smtp_connection, class_name: 'System::SmtpConnection'
 
   filter :name
-
-  filter :smtp_connection, apply: ->(records, value, _options) { records.find_by_key(value, _options) }
+  filter :'smtp_connection.id', apply: ->(records, value, _options) { records.where(smtp_connection_id: value) }
 
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
