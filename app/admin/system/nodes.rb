@@ -7,7 +7,7 @@ ActiveAdmin.register Node do
 
   acts_as_clone
 
-  permit_params :pop_id, :signalling_ip, :signalling_port, :rpc_endpoint, :name
+  permit_params :id, :pop_id, :signalling_ip, :signalling_port, :rpc_endpoint, :name
 
   filter :pop, input_html: { class: 'chosen' }
   filter :name
@@ -44,6 +44,7 @@ ActiveAdmin.register Node do
 
   form do |f|
     f.inputs do
+      f.input :id
       f.input :name
       f.input :pop
       f.input :signalling_ip

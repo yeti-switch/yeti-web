@@ -18,4 +18,7 @@ class Pop < ActiveRecord::Base
   has_many :gateways, class_name: 'Gateway', foreign_key: :pop_id, dependent: :restrict_with_error
 
   has_paper_trail class_name: 'AuditLogItem'
+
+  validates_uniqueness_of :name
+  validates_presence_of :id, :name
 end
