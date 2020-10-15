@@ -35624,6 +35624,7 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
               and not dp_locked
             ORDER BY
               coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
               yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
               dp_metric
             LIMIT v_rp.max_rerouting_attempts
@@ -35689,6 +35690,7 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
               and dp_enabled
             ORDER BY
               coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
               yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
               dp_metric
             LIMIT v_rp.max_rerouting_attempts
@@ -36714,6 +36716,7 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
               and not dp_locked
             ORDER BY
               coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
               yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
               dp_metric
             LIMIT v_rp.max_rerouting_attempts
@@ -36779,6 +36782,7 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
               and dp_enabled
             ORDER BY
               coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
               yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
               dp_metric
             LIMIT v_rp.max_rerouting_attempts
@@ -37698,6 +37702,7 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
               and not dp_locked
             ORDER BY
               coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
               yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
               dp_metric
             LIMIT v_rp.max_rerouting_attempts
@@ -37763,6 +37768,7 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
               and dp_enabled
             ORDER BY
               coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
               yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
               dp_metric
             LIMIT v_rp.max_rerouting_attempts
@@ -47087,6 +47093,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200425110642'),
 ('20200504210442'),
 ('20200630132440'),
-('20200803202810');
+('20200803202810'),
+('20201015195346');
 
 
