@@ -4,12 +4,10 @@
 #
 # Table name: nodes
 #
-#  id              :integer(4)       not null, primary key
-#  name            :string
-#  rpc_endpoint    :string
-#  signalling_ip   :string
-#  signalling_port :integer(4)
-#  pop_id          :integer(4)       not null
+#  id           :integer(4)       not null, primary key
+#  name         :string
+#  rpc_endpoint :string
+#  pop_id       :integer(4)       not null
 #
 # Indexes
 #
@@ -24,7 +22,7 @@
 class Node < ActiveRecord::Base
   belongs_to :pop
 
-  validates :id, :pop, :signalling_ip, :signalling_port, :rpc_endpoint, :name, presence: true
+  validates :id, :pop, :rpc_endpoint, :name, presence: true
   validates :name, uniqueness: true
   #  validates :rpc_uri, format: URI::regexp(%w(http https))
 

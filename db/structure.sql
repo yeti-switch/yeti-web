@@ -42829,8 +42829,6 @@ ALTER SEQUENCE sys.networks_id_seq OWNED BY sys.networks.id;
 
 CREATE TABLE sys.nodes (
     id integer NOT NULL,
-    signalling_ip character varying,
-    signalling_port integer,
     name character varying,
     pop_id integer NOT NULL,
     rpc_endpoint character varying
