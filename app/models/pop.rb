@@ -19,6 +19,6 @@ class Pop < ActiveRecord::Base
 
   has_paper_trail class_name: 'AuditLogItem'
 
-  validates :name, uniqueness: true
+  validates :id, :name, uniqueness: true
   validates :id, :name, presence: true
 end

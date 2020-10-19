@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :pop, class: Pop do
+    sequence(:id) { |n| n }
     sequence(:name) { |n| "Point of presence #{n}" }
 
     trait :filled do

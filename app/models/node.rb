@@ -23,7 +23,7 @@ class Node < ActiveRecord::Base
   belongs_to :pop
 
   validates :id, :pop, :rpc_endpoint, :name, presence: true
-  validates :name, uniqueness: true
+  validates :id, :name, uniqueness: true
   #  validates :rpc_uri, format: URI::regexp(%w(http https))
 
   validates :rpc_endpoint, uniqueness: true
