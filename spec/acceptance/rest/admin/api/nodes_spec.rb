@@ -34,10 +34,10 @@ RSpec.resource 'Nodes' do
     parameter :type, 'Resource type (nodes)', scope: :data, required: true
     parameter :id, 'Node ID', scope: :data, required: true
 
-    jsonapi_attributes([:name, :'rpc-endpoint'], [])
+    jsonapi_attributes(%i[name rpc-endpoint], [])
     jsonapi_relationships([:pop], [])
 
-    let(:id)  { 11 }
+    let(:id) { 11 }
     let(:name) { 'name' }
     let(:'rpc-endpoint') { '127.0.0.1:8099' }
     let(:pop) { wrap_relationship(:pops, create(:pop).id) }

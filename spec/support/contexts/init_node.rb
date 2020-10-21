@@ -5,10 +5,10 @@ shared_context :init_node do |args|
 
   before do
     fields = {
-        name: 'Local node',
-        id: 100500,
-        pop_id: @pop.id,
-        rpc_endpoint: '127.1.2.3:7899'
+      name: 'Local node',
+      id: 500,
+      pop_id: @pop.id,
+      rpc_endpoint: '127.1.2.3:7899'
     }.merge(args)
 
     @node = FactoryBot.create(:node, fields)

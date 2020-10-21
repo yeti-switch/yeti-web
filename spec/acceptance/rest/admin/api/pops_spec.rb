@@ -34,9 +34,9 @@ RSpec.resource 'Pops' do
     parameter :type, 'Resource type (pops)', scope: :data, required: true
     parameter :id, 'POP ID', scope: :data, required: true
 
-    jsonapi_attributes([:name],[])
+    jsonapi_attributes([:name], [])
 
-    let(:id)  { 11 }
+    let(:id) { 11 }
     let(:name) { 'name' }
 
     example_request 'create new entry' do

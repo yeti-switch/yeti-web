@@ -18,5 +18,4 @@ class Api::Rest::Admin::PopResource < ::BaseResource
       name
     ]
   end
-
 end

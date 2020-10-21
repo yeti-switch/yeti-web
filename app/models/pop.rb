@@ -13,7 +13,7 @@
 #
 
 class Pop < ActiveRecord::Base
-  self.primary_key='id'
+  self.primary_key = 'id'
 
   has_many :nodes, dependent: :restrict_with_error
   has_many :customer_auths, class_name: 'CustomersAuth', foreign_key: :pop_id, dependent: :restrict_with_error

@@ -9,7 +9,7 @@ class Api::Rest::Admin::NodeResource < ::BaseResource
 
   ransack_filter :name, type: :string
 
-  def self.updatable_fields(context)
+  def self.updatable_fields(_context)
     %i[
       id
       name
@@ -21,5 +21,4 @@ class Api::Rest::Admin::NodeResource < ::BaseResource
   def self.creatable_fields(context)
     updatable_fields(context)
   end
-
 end

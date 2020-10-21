@@ -5,8 +5,8 @@ shared_context :init_pop do |args|
 
   before do
     fields = {
-        name: 'Local POP',
-        id: 100500
+      name: 'Local POP',
+      id: 500
     }.merge(args)
 
     @pop = FactoryBot.create(:pop, fields)
