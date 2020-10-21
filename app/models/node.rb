@@ -4,12 +4,10 @@
 #
 # Table name: nodes
 #
-#  id              :integer(4)       not null, primary key
-#  name            :string
-#  rpc_endpoint    :string
-#  signalling_ip   :string
-#  signalling_port :integer(4)
-#  pop_id          :integer(4)       not null
+#  id           :integer(4)       not null, primary key
+#  name         :string
+#  rpc_endpoint :string
+#  pop_id       :integer(4)       not null
 #
 # Indexes
 #
@@ -24,11 +22,9 @@
 class Node < ActiveRecord::Base
   belongs_to :pop
 
-  validates :pop, :signalling_ip, :signalling_port, :rpc_endpoint, :name, presence: true
-  validates :name, uniqueness: true
+  validates :id, :pop, :rpc_endpoint, :name, presence: true
+  validates :id, :name, :rpc_endpoint, uniqueness: true
   #  validates :rpc_uri, format: URI::regexp(%w(http https))
-
-  validates :rpc_endpoint, uniqueness: true
 
   has_many :events, dependent: :destroy
   has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error

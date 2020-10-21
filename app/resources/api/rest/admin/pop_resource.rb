@@ -5,4 +5,17 @@ class Api::Rest::Admin::PopResource < ::BaseResource
   filter :name # DEPRECATED
 
   ransack_filter :name, type: :string
+
+  def self.updatable_fields(_context)
+    %i[
+      name
+    ]
+  end
+
+  def self.creatable_fields(_context)
+    %i[
+      id
+      name
+    ]
+  end
 end

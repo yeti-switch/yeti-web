@@ -3,6 +3,7 @@
 require 'shared_examples/shared_examples_for_importing_hook'
 
 RSpec.describe Importing::CustomersAuth do
+  include_context :init_pop
   include_context :init_contractor, name: 'iBasis', vendor: true, customer: true
 
   include_context :init_rateplan

@@ -92,7 +92,7 @@ RSpec.describe Jobs::CallsMonitoring do
   end
 
   context '#run!' do
-    let(:node) { Node.take }
+    let(:node) { create(:node) }
 
     let(:cdr_filter_mock) do
       double('Yeti::CdrsFilter', raw_cdrs: [{ 'node_id' => 1 }, { 'node_id' => 2 }])
