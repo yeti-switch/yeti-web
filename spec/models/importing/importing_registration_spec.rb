@@ -3,6 +3,9 @@
 require 'shared_examples/shared_examples_for_importing_hook'
 
 RSpec.describe Importing::Registration do
+  include_context :init_pop
+  include_context :init_node
+
   let(:preview_item) { described_class.last }
 
   subject do
@@ -11,7 +14,7 @@ RSpec.describe Importing::Registration do
   end
 
   it_behaves_like 'after_import_hook when real items do not match' do
-    include_context :init_importing_registration, o_id: 8, name: 'HOT-Free-Telecom-REG-Test', pop_id: nil, node_id: nil
+    include_context :init_importing_registration, o_id: 8, name: 'REG-Test', pop_id: nil, node_id: nil
   end
 
   it_behaves_like 'after_import_hook when real items match' do

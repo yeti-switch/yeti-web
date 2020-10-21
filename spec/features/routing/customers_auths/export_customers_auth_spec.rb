@@ -10,7 +10,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
   let!(:item) do
     create(:customers_auth,
            transport_protocol: Equipment::TransportProtocol.take,
-           pop: Pop.take,
+           pop: create(:pop),
            dst_numberlist: create(:numberlist),
            src_numberlist: create(:numberlist),
            radius_auth_profile: create(:auth_profile),

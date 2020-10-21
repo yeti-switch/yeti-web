@@ -11,7 +11,7 @@ RSpec.describe 'Export Gateways', type: :feature do
     create :gateway,
            contractor: contractor,
            gateway_group: create(:gateway_group, vendor: contractor),
-           pop: Pop.take,
+           pop: create(:pop),
            session_refresh_method: SessionRefreshMethod.take,
            sensor: create(:sensor),
            orig_disconnect_policy: create(:disconnect_policy),

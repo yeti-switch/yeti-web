@@ -23,10 +23,8 @@ class Node < ActiveRecord::Base
   belongs_to :pop
 
   validates :id, :pop, :rpc_endpoint, :name, presence: true
-  validates :id, :name, uniqueness: true
+  validates :id, :name, :rpc_endpoint, uniqueness: true
   #  validates :rpc_uri, format: URI::regexp(%w(http https))
-
-  validates :rpc_endpoint, uniqueness: true
 
   has_many :events, dependent: :destroy
   has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error

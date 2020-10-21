@@ -7,8 +7,8 @@ RSpec.describe 'Export Equipment Registrations', type: :feature do
 
   let!(:item) do
     create :registration,
-           pop: Pop.take,
-           node: Node.take
+           pop: create(:pop),
+           node: create(:node)
   end
 
   before do

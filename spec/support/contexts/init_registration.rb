@@ -7,8 +7,8 @@ shared_context :init_registration do |args|
     fields = {
       name: 'Com-REG',
       enabled: false,
-      pop_id: 3,
-      node_id: 10,
+      pop_id: @pop.id,
+      node_id: @node.id,
       domain: '172.12.11.1',
       username: '78978986555',
       display_username: '',
