@@ -10,6 +10,7 @@ RSpec.describe 'Create new Pop', type: :feature do
   include_context :fill_form, 'new_pop' do
     let(:attributes) do
       {
+        id: 1,
         name: 'test POP'
       }
     end
@@ -20,6 +21,7 @@ RSpec.describe 'Create new Pop', type: :feature do
       expect(page).to have_css('.flash_notice', text: 'Pop was successfully created.')
 
       expect(Pop.last).to have_attributes(
+        id: attributes[:id],
         name: attributes[:name]
       )
     end

@@ -6,6 +6,10 @@ RSpec.describe Api::Rest::System::JobsController do
       put "/api/rest/system/jobs/#{job_type}/run"
     end
 
+    before do
+      create(:node)
+    end
+
     context 'when type is EventProcessor' do
       let(:job_type) { 'EventProcessor' }
 
@@ -14,7 +18,6 @@ RSpec.describe Api::Rest::System::JobsController do
       context 'with events' do
         before do
           Event.reload_translations
-
           allow_any_instance_of(YetisNode::JsonRpcTransport).to receive(:rpc_send)
             .with('request.router.translations.reload', []).and_return(nil)
         end

@@ -61,7 +61,7 @@ shared_context :init_gateway do |args|
       src_name_rewrite_rule: '',
       src_name_rewrite_result: '',
       priority: 100,
-      pop_id: 1,
+      pop_id: @pop.id,
       codec_group_id: CodecGroup.last.id,
       single_codec_in_200ok: false,
       ringing_timeout: nil,

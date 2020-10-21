@@ -53,8 +53,6 @@ RSpec.configure do |config|
   end
 
   config.global_fixtures = [
-    :pops,
-    :nodes,
     'sys.sensor_modes',
     :guiconfig,
     :sortings,

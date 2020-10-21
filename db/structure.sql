@@ -42829,31 +42829,10 @@ ALTER SEQUENCE sys.networks_id_seq OWNED BY sys.networks.id;
 
 CREATE TABLE sys.nodes (
     id integer NOT NULL,
-    signalling_ip character varying,
-    signalling_port integer,
     name character varying,
     pop_id integer NOT NULL,
     rpc_endpoint character varying
 );
-
-
---
--- Name: node_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.node_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: node_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.node_id_seq OWNED BY sys.nodes.id;
 
 
 --
@@ -42864,25 +42843,6 @@ CREATE TABLE sys.pops (
     id integer NOT NULL,
     name character varying NOT NULL
 );
-
-
---
--- Name: pop_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.pop_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pop_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.pop_id_seq OWNED BY sys.pops.id;
 
 
 --
@@ -43802,20 +43762,6 @@ ALTER TABLE ONLY sys.network_types ALTER COLUMN id SET DEFAULT nextval('sys.netw
 --
 
 ALTER TABLE ONLY sys.networks ALTER COLUMN id SET DEFAULT nextval('sys.networks_id_seq'::regclass);
-
-
---
--- Name: nodes id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.nodes ALTER COLUMN id SET DEFAULT nextval('sys.node_id_seq'::regclass);
-
-
---
--- Name: pops id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.pops ALTER COLUMN id SET DEFAULT nextval('sys.pop_id_seq'::regclass);
 
 
 --
@@ -47094,6 +47040,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200504210442'),
 ('20200630132440'),
 ('20200803202810'),
-('20201015195346');
+('20201015195346'),
+('20201015202253');
 
 
