@@ -172,7 +172,7 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
       let(:attributes) { { 'balance': 2100.2 } }
 
       it { expect(response.status).to eq(400) }
-      it { expect(account.reload.external_id).to_not eq(2100.2) }
+      it { expect(account.reload.balance).to_not eq(2100.2) }
     end
   end
 

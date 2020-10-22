@@ -26,10 +26,11 @@ class Api::Rest::Admin::ContractorResource < BaseResource
       address
       phones
       smtp_connection
+      external_id
     ]
   end
 
   def self.creatable_fields(context)
-    updatable_fields(context) + [:external_id]
+    updatable_fields(context)
   end
 end
