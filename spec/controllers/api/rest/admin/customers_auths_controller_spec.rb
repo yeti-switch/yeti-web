@@ -125,13 +125,6 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       it { expect(response.status).to eq(422) }
       it { expect(customers_auth.reload.name).to_not eq('name') }
     end
-
-    context 'when attributes are not allowed' do
-      let(:attributes) { { 'external-id': 101 } }
-
-      it { expect(response.status).to eq(400) }
-      it { expect(customers_auth.reload.external_id).to_not eq(101) }
-    end
   end
 
   describe 'DELETE destroy' do

@@ -106,10 +106,11 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       from_domain
       to_domain
       transport_protocol
+      external_id
     ]
   end
 
   def self.creatable_fields(context)
-    updatable_fields(context) + [:external_id]
+    updatable_fields(context)
   end
 end

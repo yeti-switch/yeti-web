@@ -65,10 +65,11 @@ class Api::Rest::Admin::AccountResource < BaseResource
       vendor_invoice_period
       customer_invoice_template
       vendor_invoice_template
+      external_id
     ]
   end
 
   def self.creatable_fields(context)
-    updatable_fields(context) + [:external_id]
+    updatable_fields(context)
   end
 end

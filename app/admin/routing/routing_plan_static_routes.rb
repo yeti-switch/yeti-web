@@ -56,12 +56,6 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
     column :priority
     column :weight
     column :vendor
-    column :updated_at do |row|
-      row.versions.last.created_at
-    end
-    column :updated_by do |row|
-      whodunit_link row.versions.last.whodunnit
-    end
   end
 
   show do |_s|
