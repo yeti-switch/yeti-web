@@ -40,6 +40,9 @@ ActiveAdmin.register CustomersAuth do
                  :send_billing_information,
                  [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) || '' }],
                  :diversion_rewrite_rule, :diversion_rewrite_result,
+                 [:src_number_field_name, proc { |row| row.src_number_field.try(:name) }],
+                 [:src_name_field_name, proc { |row| row.src_name_field.try(:name) }],
+                 [:dst_number_field_name, proc { |row| row.dst_number_field.try(:name) }],
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
@@ -73,12 +76,15 @@ ActiveAdmin.register CustomersAuth do
                 :radius_accounting_profile_id,
                 :enable_audio_recording,
                 :transport_protocol_id,
-                :tag_action_id, :lua_script_id, tag_action_value: []
+                :tag_action_id, :lua_script_id,
+                :dst_number_field_id, :src_number_field_id, :src_name_field_id,
+                tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
-           :lua_script, account: :contractor
+           :lua_script, :src_name_field, :src_number_field, :dst_number_field,
+           account: :contractor
 
   controller do
     def update
@@ -161,14 +167,18 @@ ActiveAdmin.register CustomersAuth do
     column :diversion_rewrite_rule
     column :diversion_rewrite_result
 
+    column :src_name_field
     column :src_name_rewrite_rule
     column :src_name_rewrite_result
 
+    column :src_number_field
     column :src_rewrite_rule
     column :src_rewrite_result
 
+    column :dst_number_field
     column :dst_rewrite_rule
     column :dst_rewrite_result
+
     column :lua_script
 
     column :radius_auth_profile, sortable: 'radius_auth_profiles.name'
@@ -286,12 +296,15 @@ ActiveAdmin.register CustomersAuth do
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
 
+          f.input :src_name_field
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
 
+          f.input :src_number_field
           f.input :src_rewrite_rule
           f.input :src_rewrite_result
 
+          f.input :dst_number_field
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
           f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
@@ -379,13 +392,18 @@ ActiveAdmin.register CustomersAuth do
           row :diversion_rewrite_rule
           row :diversion_rewrite_result
 
+          row :src_name_field
           row :src_name_rewrite_rule
           row :src_name_rewrite_result
 
+          row :src_number_field
           row :src_rewrite_rule
           row :src_rewrite_result
+
+          row :dst_number_field
           row :dst_rewrite_rule
           row :dst_rewrite_result
+
           row :lua_script
         end
       end

@@ -14,13 +14,20 @@ FactoryBot.define do
     association :lua_script
 
     # ip { ['127.0.0.0/8'] } # default
+    src_number_field_id { 1 }
     src_rewrite_rule { nil }
     src_rewrite_result { nil }
+
+    dst_number_field_id { 1 }
     dst_rewrite_rule { nil }
     dst_rewrite_result { nil }
+
     pop_id { nil }
+
+    src_name_field_id { 1 }
     src_name_rewrite_rule { nil }
     src_name_rewrite_result { nil }
+
     diversion_rewrite_rule { nil }
     diversion_rewrite_result { nil }
     dst_numberlist_id { nil }

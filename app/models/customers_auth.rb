@@ -120,6 +120,10 @@ class CustomersAuth < Yeti::ActiveRecord
   belongs_to :tag_action, class_name: 'Routing::TagAction'
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
 
+  belongs_to :dst_number_field, class_name: 'Routing::CustomerAuthDstNumberField', foreign_key: :dst_number_field_id
+  belongs_to :src_number_field, class_name: 'Routing::CustomerAuthSrcNumberField', foreign_key: :src_number_field_id
+  belongs_to :src_name_field, class_name: 'Routing::CustomerAuthSrcNameField', foreign_key: :src_name_field_id
+
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
   #  has_many :destinations, through: :rateplan
@@ -145,6 +149,8 @@ class CustomersAuth < Yeti::ActiveRecord
   validates :external_id, uniqueness: { allow_blank: true }
 
   validates :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy, presence: true
+
+  validates :src_name_field, :src_number_field, :dst_number_field, presence: true
 
   validates :dst_number_min_length, :dst_number_max_length, :src_number_min_length, :src_number_max_length, presence: true
   validates :src_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
