@@ -72,7 +72,6 @@ Rails.application.routes.draw do
           jsonapi_resources :api_accesses
           jsonapi_resources :customers_auths
 
-
           jsonapi_resources :dialpeers
           jsonapi_resources :dialpeer_next_rates
           jsonapi_resources :gateways

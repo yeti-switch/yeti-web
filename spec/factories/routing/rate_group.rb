@@ -8,7 +8,5 @@ FactoryBot.define do
     trait :filled do
       destinations { build_list :destination, 2 }
     end
-
   end
-
 end

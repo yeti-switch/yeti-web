@@ -38,5 +38,4 @@ ActiveAdmin.register Routing::RateGroup do
     end
     f.actions
   end
-
 end

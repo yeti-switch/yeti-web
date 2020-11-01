@@ -86,7 +86,6 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
     let!(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
     let!(:rate) { create(:rate, rate_group: rate_group) }
 
-
     it_behaves_like :json_api_check_authorization
 
     context 'when record exists' do

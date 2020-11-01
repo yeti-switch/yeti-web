@@ -20,7 +20,5 @@ FactoryBot.define do
       rate_groups { build_list :rate_group, 2 }
       with_uuid
     end
-
   end
-
 end

@@ -14,7 +14,6 @@
 class Importing::RateGroup < Importing::Base
   self.table_name = 'import_rate_groups'
 
-
   self.import_attributes = %w[name]
 
   import_for Routing::RateGroup

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.rate_groups
@@ -12,12 +14,11 @@
 #  rate_groups_name_key         (name) UNIQUE
 #
 class Routing::RateGroup < ActiveRecord::Base
-
   self.table_name = 'class4.rate_groups'
   before_destroy :check_deps
 
   has_and_belongs_to_many :rateplans, class_name: 'Routing::Rateplan',
-                          join_table: 'class4.rate_plan_groups'
+                                      join_table: 'class4.rate_plan_groups'
 
   has_many :destinations, dependent: :destroy
 

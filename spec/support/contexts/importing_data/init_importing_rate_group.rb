@@ -5,8 +5,8 @@ shared_context :init_importing_rate_group do |args|
 
   before do
     fields = {
-        name: 'a-RateGroup',
-        is_changed: true
+      name: 'a-RateGroup',
+      is_changed: true
     }.merge(args)
 
     @importing_rate_group = FactoryBot.create(:importing_rate_group, fields)

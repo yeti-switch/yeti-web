@@ -19,7 +19,7 @@ RSpec.resource 'Rates', document: :customer_v1 do
   end
 
   let(:rateplan) { customers_auth.rateplan.reload }
-  let(:rate_group) { create(:rate_group, rateplans: [rateplan])}
+  let(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
   let!(:rate) { create(:rate, rate_group: rate_group) }
 
   get '/api/rest/customer/v1/rates' do

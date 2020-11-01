@@ -152,7 +152,7 @@ class Routing::Destination < Yeti::ActiveRecord
     valid_till > Time.now
   end
 
-  #TODO should be rewrited
+  # TODO should be rewrited
   scope :routing_for_contains, lambda { |prx|
     where('destinations.id in (
       select id from

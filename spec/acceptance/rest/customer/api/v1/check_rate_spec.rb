@@ -17,8 +17,7 @@ RSpec.resource 'CheckRate', document: :customer_v1 do
   end
 
   let!(:rateplan) { customers_auth.rateplan.reload }
-  let!(:rate_group) { create(:rate_group, rateplans:[rateplan]) }
-
+  let!(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
 
   before do
     create :destination, rate_group: rate_group, prefix: '444', routing_tag_ids: [create(:routing_tag, :ua).id, create(:routing_tag, :us).id]

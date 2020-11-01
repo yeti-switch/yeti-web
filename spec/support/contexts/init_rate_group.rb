@@ -5,7 +5,7 @@ shared_context :init_rate_group do |args|
 
   before do
     fields = {
-        name: 'TEST-RateGroup'
+      name: 'TEST-RateGroup'
     }.merge(args)
 
     @rate_group = FactoryBot.create(:rate_group, fields)
