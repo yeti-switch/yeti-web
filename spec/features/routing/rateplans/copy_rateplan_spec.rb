@@ -8,8 +8,8 @@ RSpec.describe 'Copy Rateplan action', type: :feature do
       subject
       expect(rateplan.send_quality_alarms_to).to eq(send_to_ids)
       expect(rateplan.destinations.count).to eq(0)
-      expect(Rateplan.count).to eq(2)
-      expect(Rateplan.last).to have_attributes(
+      expect(Routing::Rateplan.count).to eq(2)
+      expect(Routing::Rateplan.last).to have_attributes(
         name: new_name,
         profit_control_mode_id: rateplan.profit_control_mode_id,
         send_quality_alarms_to: match_array(send_to_ids)
@@ -29,12 +29,12 @@ RSpec.describe 'Copy Rateplan action', type: :feature do
 
     let(:new_name) { rateplan.name + '_copy' }
 
-    before { visit rateplan_path(rateplan.id) }
+    before { visit routing_rateplan_path(rateplan.id) }
 
     before do
       click_link('Copy', exact_text: true)
-      within '#new_rateplan' do
-        fill_in('rateplan_name', with: new_name)
+      within '#new_routing_rateplan' do
+        fill_in('routing_rateplan_name', with: new_name)
       end
     end
 

@@ -9,10 +9,10 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :routing_tag_mode_id, type: :foreign_key, class_name: 'Routing::RoutingTagMode'
   attribute :reject_calls, type: :boolean
   attribute :quality_alarm, type: :boolean
-  attribute :rateplan_id, type: :foreign_key, class_name: 'Rateplan'
+  attribute :rate_group_id, type: :foreign_key, class_name: 'Routing::RateGroup'
   attribute :valid_from, type: :date
   attribute :valid_till, type: :date
-  attribute :rate_policy_id, type: :foreign_key, class_name: 'DestinationRatePolicy'
+  attribute :rate_policy_id, type: :foreign_key, class_name: 'Routing::DestinationRatePolicy'
   attribute :initial_interval
   attribute :initial_rate
   attribute :next_interval

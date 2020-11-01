@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Customer::V1::RateplanResource < BaseResource
-  model_name 'Rateplan'
+  model_name 'Routing::Rateplan'
 
   key_type :uuid
   primary_key :uuid

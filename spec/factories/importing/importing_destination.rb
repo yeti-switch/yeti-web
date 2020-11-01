@@ -10,8 +10,8 @@ FactoryBot.define do
     error_string { nil }
 
     prefix { nil }
-    rateplan_name { nil }
-    rateplan_id { nil }
+    rate_group_name { nil }
+    rate_group_id { nil }
     connect_fee { 0 }
     enabled { true }
     reject_calls { false }

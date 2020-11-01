@@ -4,9 +4,9 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   include_context :login_as_admin
   let!(:_destinations) { FactoryBot.create_list :destination, 3 }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
-  let!(:rateplan) { Rateplan.take || FactoryBot.create(:rateplan) }
+  let!(:rate_group) { Routing::RateGroup.take || FactoryBot.create(:rate_group) }
   let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
-  let!(:rate_policy) { DestinationRatePolicy.take! }
+  let!(:rate_policy) { Routing::DestinationRatePolicy.take! }
   let!(:profit_control_mode) { Routing::RateProfitControlMode.take! || FactoryBot.create(:rate_profit_control_mode) }
 
   before do
@@ -29,7 +29,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       routing_tag_mode_id: routing_tag_mode.id.to_s,
       reject_calls: false,
       quality_alarm: true,
-      rateplan_id: rateplan.id.to_s,
+      rate_group_id: rate_group.id.to_s,
       valid_from: '2020-01-10',
       valid_till: '2020-01-20',
       rate_policy_id: rate_policy.id.to_s,
@@ -84,9 +84,9 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       select_by_value assign_params[:quality_alarm], from: :quality_alarm
     end
 
-    if assign_params.key? :rateplan_id
-      check :Rateplan_id
-      select_by_value assign_params[:rateplan_id], from: :rateplan_id
+    if assign_params.key? :rate_group_id
+      check :Rate_group_id
+      select_by_value assign_params[:rate_group_id], from: :rate_group_id
     end
 
     if assign_params.key? :valid_from

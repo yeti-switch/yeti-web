@@ -23,9 +23,9 @@
 #
 
 RSpec.describe Routing::DestinationNextRate, type: :model do
-  let!(:rate_plan) { FactoryBot.create(:rateplan) }
+  let!(:rate_group) { FactoryBot.create(:rate_group) }
   let!(:destination) { FactoryBot.create(:destination, destination_attrs) }
-  let(:destination_attrs) { { rateplan: rate_plan } }
+  let(:destination_attrs) { { rate_group: rate_group } }
 
   describe '.create' do
     subject do

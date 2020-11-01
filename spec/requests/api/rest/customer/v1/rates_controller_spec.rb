@@ -27,7 +27,7 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
     context 'account_ids is empty', :with_rateplan_with_customer do
       before { create_list(:rate, 2) }
       let(:records_qty) { 2 }
-      let!(:rates) { create_list(:rate, records_qty, rateplan: customer.rateplans.first) }
+      let!(:rates) { create_list(:rate, records_qty, rate_group: create(:rate_group, rateplans: [customer.rateplans.first])) }
 
       it_behaves_like :json_api_check_pagination do
         let(:records_ids) { rates.map { |r| r.reload.uuid } }
@@ -53,7 +53,7 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
         api_access.update!(account_ids: allowed_accounts.map(&:id))
       end
 
-      let!(:rates) { create_list(:rate, 2, rateplan: Rateplan.where_account(allowed_accounts.first.id).first) }
+      let!(:rates) { create_list(:rate, 2, rate_group: create(:rate_group, rateplans: [Routing::Rateplan.where_account(allowed_accounts.first.id).first])) }
 
       before do
         create_list(:rate, 2) # other customer
@@ -80,8 +80,12 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
     let(:record_id) { rate.reload.uuid }
 
     let!(:customers_auth) { create(:customers_auth, customer_id: customer.id) }
-    let!(:rate) { create(:rate, rateplan: rateplan) }
+
     let(:rateplan) { customers_auth.rateplan.reload }
+
+    let!(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
+    let!(:rate) { create(:rate, rate_group: rate_group) }
+
 
     it_behaves_like :json_api_check_authorization
 

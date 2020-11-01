@@ -30,8 +30,8 @@
 #  external_id            :bigint(8)
 #  network_prefix_id      :integer(4)
 #  profit_control_mode_id :integer(2)
+#  rate_group_id          :integer(4)       not null
 #  rate_policy_id         :integer(4)       default(1), not null
-#  rateplan_id            :integer(4)       not null
 #  routing_tag_mode_id    :integer(2)       default(0), not null
 #
 # Indexes
@@ -42,17 +42,19 @@
 # Foreign Keys
 #
 #  destinations_profit_control_mode_id_fkey  (profit_control_mode_id => rate_profit_control_modes.id)
+#  destinations_rate_group_id_fkey           (rate_group_id => rate_groups.id)
 #  destinations_rate_policy_id_fkey          (rate_policy_id => destination_rate_policy.id)
-#  destinations_rateplan_id_fkey             (rateplan_id => rateplans.id)
 #  destinations_routing_tag_mode_id_fkey     (routing_tag_mode_id => routing_tag_modes.id)
 #
 
 class Routing::Destination < Yeti::ActiveRecord
   self.table_name = 'class4.destinations'
 
-  belongs_to :rateplan
-  has_many :customers_auths, through: :rateplan
-  belongs_to :rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :rate_policy_id
+  belongs_to :rate_group, class_name: 'Routing::RateGroup', foreign_key: :rate_group_id
+  has_many :rateplans, class_name: 'Routing::Rateplan', through: :rate_group
+  has_many :customers_auths, through: :rateplans
+
+  belongs_to :rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :rate_policy_id
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: :profit_control_mode_id
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :destination_id
   has_many :destination_next_rates, class_name: 'Routing::DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
@@ -71,14 +73,14 @@ class Routing::Destination < Yeti::ActiveRecord
   scope :low_quality, -> { where quality_alarm: true }
 
   scope :where_customer, lambda { |id|
-    joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
+    joins(:rate_group).joins(:rateplans).joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
   }
 
   scope :where_account, lambda { |id|
-    joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
+    joins(:rate_group).joins(:rateplans).joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
   }
 
-  validates :rateplan, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
+  validates :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
                         :asr_limit, :acd_limit, :short_calls_limit, :routing_tag_mode, presence: true
   validates :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, numericality: true
@@ -150,6 +152,7 @@ class Routing::Destination < Yeti::ActiveRecord
     valid_till > Time.now
   end
 
+  #TODO should be rewrited
   scope :routing_for_contains, lambda { |prx|
     where('destinations.id in (
       select id from

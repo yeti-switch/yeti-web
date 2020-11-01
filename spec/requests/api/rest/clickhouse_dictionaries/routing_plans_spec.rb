@@ -13,7 +13,7 @@ RSpec.describe '/api/rest/clickhouse-dictionaries/routing-plans' do
 
   include_examples :responds_with_correct_json_each_row do
     let(:expected_rows) do
-      routing_plans.map { |record| { id: record.id, name: record.name } }
+      routing_plans.map { |record| { id: record.id, name: record.name, external_id: record.external_id } }
     end
   end
 end

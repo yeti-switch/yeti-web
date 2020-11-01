@@ -20,5 +20,5 @@ class Importing::Rateplan < Importing::Base
 
   self.import_attributes = %w[name profit_control_mode_id]
 
-  import_for ::Rateplan
+  import_for Routing::Rateplan
 end

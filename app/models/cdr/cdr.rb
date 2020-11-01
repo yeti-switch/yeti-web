@@ -164,7 +164,7 @@ class Cdr::Cdr < Cdr::Base
   include Partitionable
   self.pg_partition_name = 'PgPartition::Cdr'
 
-  belongs_to :rateplan
+  belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
   belongs_to :routing_group
   belongs_to :src_area, class_name: 'Routing::Area', foreign_key: :src_area_id
   belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id
@@ -172,8 +172,8 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
   belongs_to :destination, class_name: 'Routing::Destination'
+  belongs_to :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :destination_rate_policy_id
   belongs_to :dialpeer
-  belongs_to :destination_rate_policy
   belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id
   belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id
   belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id
@@ -182,7 +182,6 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :disconnect_initiator
   belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id
   belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id
-  belongs_to :destination_rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :destination_rate_policy_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :dump_level

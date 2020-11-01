@@ -8,10 +8,10 @@ RSpec.describe Jobs::DialpeerRatesApply, type: :cron_job do
     end
 
     let!(:job) { described_class.take! }
-    let!(:rate_plan) { FactoryBot.create(:rateplan) }
-    let!(:destination) { FactoryBot.create(:destination, rateplan: rate_plan) }
-    let!(:another_destination) { FactoryBot.create(:destination, rateplan: rate_plan) }
-    let!(:skipped_destination) { FactoryBot.create(:destination, rateplan: rate_plan) }
+    let!(:rate_group) { FactoryBot.create(:rate_group) }
+    let!(:destination) { FactoryBot.create(:destination, rate_group: rate_group) }
+    let!(:another_destination) { FactoryBot.create(:destination, rate_group: rate_group) }
+    let!(:skipped_destination) { FactoryBot.create(:destination, rate_group: rate_group) }
     let!(:next_rate) do
       FactoryBot.create :destination_next_rate,
                         destination: destination,

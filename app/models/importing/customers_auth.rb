@@ -13,6 +13,7 @@
 #  diversion_policy_name            :string
 #  diversion_rewrite_result         :string
 #  diversion_rewrite_rule           :string
+#  dst_number_field_name            :integer(2)
 #  dst_number_max_length            :integer(4)
 #  dst_number_min_length            :integer(4)
 #  dst_number_radius_rewrite_result :string
@@ -42,8 +43,10 @@
 #  routing_group_name               :string
 #  routing_plan_name                :string
 #  send_billing_information         :boolean          default(FALSE), not null
+#  src_name_field_name              :integer(2)
 #  src_name_rewrite_result          :string
 #  src_name_rewrite_rule            :string
+#  src_number_field_name            :string
 #  src_number_max_length            :integer(2)
 #  src_number_min_length            :integer(2)
 #  src_number_radius_rewrite_result :string
@@ -62,6 +65,7 @@
 #  account_id                       :integer(4)
 #  customer_id                      :integer(4)
 #  diversion_policy_id              :integer(4)
+#  dst_number_field_id              :integer(2)
 #  dst_numberlist_id                :integer(4)
 #  dump_level_id                    :integer(4)
 #  gateway_id                       :integer(4)
@@ -73,6 +77,8 @@
 #  rateplan_id                      :integer(4)
 #  routing_group_id                 :integer(4)
 #  routing_plan_id                  :integer(4)
+#  src_name_field_id                :integer(2)
+#  src_number_field_id              :integer(2)
 #  src_numberlist_id                :integer(4)
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)
@@ -85,7 +91,7 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :gateway, class_name: '::Gateway'
   belongs_to :account, class_name: '::Account'
   belongs_to :routing_plan, class_name: '::Routing::RoutingPlan', foreign_key: :routing_plan_id
-  belongs_to :rateplan, class_name: '::Rateplan'
+  belongs_to :rateplan, class_name: 'Routing::Rateplan'
   belongs_to :pop, class_name: '::Pop'
   belongs_to :customer, -> { where customer: true }, class_name: '::Contractor', foreign_key: :customer_id
   belongs_to :diversion_policy, class_name: '::DiversionPolicy'

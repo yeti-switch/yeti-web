@@ -28,7 +28,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
     column :enabled
     column :prefix
     column :reject_calls
-    column :rateplan, sortable: :rateplan_name
+    column :rate_group, sortable: :rate_group_name
     column :routing_tag_ids
     column :routing_tag_mode, sortable: :routing_tag_mode_name
     column :rate_policy, sortable: :rate_policy_name
