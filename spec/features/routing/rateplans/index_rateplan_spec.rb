@@ -5,7 +5,7 @@ RSpec.describe 'Index Rateplans', type: :feature do
 
   it 'n+1 checks' do
     reteplans = create_list(:rateplan, 2, :filled)
-    visit rateplans_path
+    visit routing_rateplans_path
     reteplans.each do |reteplan|
       expect(page).to have_css('.resource_id_link', text: reteplan.id)
     end

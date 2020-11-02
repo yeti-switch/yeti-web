@@ -3,6 +3,7 @@
 RSpec.describe AsyncBatchDestroyJob, type: :job do
   describe '#perform' do
     include_context :init_rateplan
+    include_context :init_rate_group
     include_context :init_destination, id: 1, initial_rate: 0.3
     include_context :init_destination, id: 2, initial_rate: 0.5
     include_context :init_destination, id: 3, initial_rate: 0.7

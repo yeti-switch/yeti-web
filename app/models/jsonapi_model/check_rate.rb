@@ -24,7 +24,7 @@ module JsonapiModel
     def rateplan
       return @rateplan if defined?(@rateplan)
 
-      @rateplan = rateplan_id ? Rateplan.find_by(uuid: rateplan_id) : nil
+      @rateplan = rateplan_id ? Routing::Rateplan.find_by(uuid: rateplan_id) : nil
     end
 
     def self.all

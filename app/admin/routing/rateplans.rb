@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Rateplan do
-  menu parent: 'Routing', priority: 40
+ActiveAdmin.register Routing::Rateplan do
+  menu parent: 'Routing', label: 'Rateplans', priority: 40
 
   acts_as_audit
-  acts_as_clone_with_helper helper: Routing::RateplanDuplicator, name: 'Copy with destinations'
+  acts_as_clone
   acts_as_safe_destroy
 
   acts_as_export :id, :name,
@@ -12,33 +12,36 @@ ActiveAdmin.register Rateplan do
 
   acts_as_import resource_class: Importing::Rateplan
 
-  permit_params :name, :profit_control_mode_id, send_quality_alarms_to: []
+  permit_params :name, :profit_control_mode_id, rate_group_ids: [], send_quality_alarms_to: []
 
-  controller do
-    def scoped_collection
-      super.eager_load(:profit_control_mode)
-    end
-  end
+  includes :profit_control_mode, :rate_groups, :routing_rateplans_rate_groups
 
   index do
     selectable_column
     id_column
     actions
     column :name
+    column 'Rate Groups' do |r|
+      raw(r.rate_groups.map { |rg| link_to rg.name, destinations_path(q: { rate_group_id_eq: rg.id }) }.sort.join(', '))
+    end
     column :profit_control_mode
     column :send_quality_alarms_to do |r|
       r.contacts.map(&:email).sort.join(', ')
     end
     column :uuid
+    column :external_id
   end
 
   filter :id
   filter :uuid_equals, label: 'UUID'
   filter :name
+  filter :external_id
+
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do
       f.input :name
+      f.input :rate_groups, input_html: { class: 'chosen-sortable', multiple: true }
       f.input :profit_control_mode
       f.input :send_quality_alarms_to, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Billing::Contact.collection
     end
@@ -50,10 +53,14 @@ ActiveAdmin.register Rateplan do
       row :id
       row :uuid
       row :name
+      row 'Rate Groups' do |r|
+        raw(r.rate_groups.map { |rg| link_to rg.name, destinations_path(q: { rate_group_id_eq: rg.id }) }.sort.join(', '))
+      end
       row :profit_control_mode
       row :send_quality_alarms_to do
         s.contacts.map(&:email).sort.join(', ')
       end
+      row :external_id
     end
   end
 

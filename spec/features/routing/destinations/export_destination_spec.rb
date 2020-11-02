@@ -29,7 +29,7 @@ RSpec.describe 'Export Destination', type: :feature do
         ['Prefix', item.prefix.to_s, anything],
         ['Dst number min length', item.dst_number_min_length.to_s, anything],
         ['Dst number max length', item.dst_number_max_length.to_s, anything],
-        ['Rateplan name', item.rateplan.name, anything],
+        ['Rate group name', item.rate_group.name, anything],
         ['Reject calls', item.reject_calls.to_s, anything],
         ['Rate policy name', item.rate_policy.name, anything],
         ['Initial interval', item.initial_interval.to_s, anything],

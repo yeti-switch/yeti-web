@@ -10,7 +10,7 @@ RSpec.describe 'Export Rateplan', type: :feature do
   end
 
   before do
-    visit rateplans_path(format: :csv)
+    visit routing_rateplans_path(format: :csv)
   end
 
   subject { CSV.parse(page.body).slice(0, 2).transpose }

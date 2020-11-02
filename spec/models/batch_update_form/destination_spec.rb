@@ -2,9 +2,9 @@
 
 RSpec.describe BatchUpdateForm::Destination do
   let(:prefix_err_message) { I18n.t 'activerecord.errors.models.routing\destination.attributes.prefix.with_spaces' }
-  let!(:rateplan) { Rateplan.take || FactoryBot.create(:rateplan) }
+  let!(:rate_group) { Routing::RateGroup.take || FactoryBot.create(:rate_group) }
   let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
-  let!(:rate_policy) { DestinationRatePolicy.take! }
+  let!(:rate_policy) { Routing::DestinationRatePolicy.take! }
   let!(:profit_control_mode) { Routing::RateProfitControlMode.take! || FactoryBot.create(:rate_profit_control_mode) }
   let!(:assign_params) do
     {
@@ -15,7 +15,7 @@ RSpec.describe BatchUpdateForm::Destination do
       routing_tag_mode_id: routing_tag_mode.id.to_s,
       reject_calls: 'false',
       quality_alarm: 'true',
-      rateplan_id: rateplan.id.to_s,
+      rate_group_id: rate_group.id.to_s,
       valid_from: '2020-01-10',
       valid_till: '2020-01-20',
       rate_policy_id: rate_policy.id.to_s,

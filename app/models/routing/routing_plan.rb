@@ -9,11 +9,13 @@
 #  name                   :string           not null
 #  rate_delta_max         :decimal(, )      default(0.0), not null
 #  use_lnp                :boolean          default(FALSE), not null
+#  external_id            :bigint(8)
 #  sorting_id             :integer(4)       default(1), not null
 #
 # Indexes
 #
-#  routing_plans_name_key  (name) UNIQUE
+#  routing_plans_external_id_key  (external_id) UNIQUE
+#  routing_plans_name_key         (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -34,6 +36,7 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
   validates :name, :max_rerouting_attempts, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true }
+  validates :external_id, uniqueness: { allow_blank: true }
 
   scope :having_static_routes, -> { joins(:sorting).merge(Sorting.with_static_routes) }
 

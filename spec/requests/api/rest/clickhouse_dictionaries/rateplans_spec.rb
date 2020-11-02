@@ -15,7 +15,7 @@ RSpec.describe '/api/rest/clickhouse-dictionaries/rateplans' do
     let(:expected_rows) do
       rateplan.map do |record|
         record.reload
-        { id: record.id, name: record.name, uuid: record.uuid }
+        { id: record.id, name: record.name, uuid: record.uuid, external_id: record.external_id }
       end
     end
   end

@@ -4,10 +4,10 @@ RSpec.describe 'Create new Rateplan', type: :feature, js: true do
   include_context :login_as_admin
 
   before do
-    visit new_rateplan_path
+    visit new_routing_rateplan_path
   end
 
-  include_context :fill_form, 'new_rateplan' do
+  include_context :fill_form, 'new_routing_rateplan' do
     let(:attributes) do
       {
         name: 'test rateplan',
@@ -19,7 +19,7 @@ RSpec.describe 'Create new Rateplan', type: :feature, js: true do
       click_on_submit
       expect(page).to have_css('.flash_notice', text: 'Rateplan was successfully created.')
 
-      expect(Rateplan.last).to have_attributes(
+      expect(Routing::Rateplan.last).to have_attributes(
         name: attributes[:name],
         profit_control_mode_id: 2 # TODO: fix it
       )

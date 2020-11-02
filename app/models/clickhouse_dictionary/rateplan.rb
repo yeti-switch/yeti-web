@@ -2,10 +2,11 @@
 
 module ClickhouseDictionary
   class Rateplan < Base
-    model_class ::Rateplan
+    model_class Routing::Rateplan
 
     attributes :id,
                :name,
-               :uuid
+               :uuid,
+               :external_id
   end
 end
