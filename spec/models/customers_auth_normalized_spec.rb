@@ -42,6 +42,7 @@
 #  customer_id                      :integer(4)       not null
 #  customers_auth_id                :integer(4)       not null
 #  diversion_policy_id              :integer(4)       default(1), not null
+#  dst_number_field_id              :integer(2)       default(1), not null
 #  dst_numberlist_id                :integer(2)
 #  dump_level_id                    :integer(4)       default(0), not null
 #  external_id                      :bigint(8)
@@ -52,6 +53,8 @@
 #  radius_auth_profile_id           :integer(2)
 #  rateplan_id                      :integer(4)       not null
 #  routing_plan_id                  :integer(4)       not null
+#  src_name_field_id                :integer(2)       default(1), not null
+#  src_number_field_id              :integer(2)       default(1), not null
 #  src_numberlist_id                :integer(2)
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)

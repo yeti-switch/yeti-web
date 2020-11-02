@@ -56,7 +56,7 @@ class Billing::Contact < Yeti::ActiveRecord
       c.send_balance_notifications_to = c.send_balance_notifications_to.reject { |el| el == id }
       c.save!
     end
-    Rateplan.where('? = ANY(send_quality_alarms_to)', id).find_each do |c|
+    Routing::Rateplan.where('? = ANY(send_quality_alarms_to)', id).find_each do |c|
       c.send_quality_alarms_to = c.send_quality_alarms_to.reject { |el| el == id }
       c.save!
     end

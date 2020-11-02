@@ -71,18 +71,16 @@ Rails.application.routes.draw do
           jsonapi_resources :contacts
           jsonapi_resources :api_accesses
           jsonapi_resources :customers_auths
-          jsonapi_resources :destinations
-          jsonapi_resources :destination_next_rates
+
           jsonapi_resources :dialpeers
           jsonapi_resources :dialpeer_next_rates
           jsonapi_resources :gateways
           jsonapi_resources :gateway_groups
           jsonapi_resources :payments, except: %i[update destroy]
-          jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_plans
           jsonapi_resources :codec_groups
-          jsonapi_resources :destination_rate_policies
+
           jsonapi_resources :disconnect_policies
           jsonapi_resources :diversion_policies
           jsonapi_resources :dump_levels
@@ -142,9 +140,13 @@ Rails.application.routes.draw do
             jsonapi_resources :rate_profit_control_modes
             jsonapi_resources :routing_tag_detection_rules
             jsonapi_resources :tag_actions
+            jsonapi_resources :rateplans
             jsonapi_resources :routing_tags
             jsonapi_resources :routing_tag_modes
             jsonapi_resources :routeset_discriminators
+            jsonapi_resources :destinations
+            jsonapi_resources :destination_next_rates
+            jsonapi_resources :destination_rate_policies
           end
         end
 

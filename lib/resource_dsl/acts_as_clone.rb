@@ -65,7 +65,7 @@ module ResourceDSL
                          {}
                        end
           attributes
-            .reject { |k| k == 'uuid' } # TODO: improve this
+            .reject { |k| %w[uuid external_id].include?(k) }
             .map { |k, v| resource.send("#{k}=", v) }
           set_resource_ivar(resource)
         end

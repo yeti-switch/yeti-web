@@ -6512,7 +6512,7 @@ CREATE TABLE class4.destinations (
     id bigint NOT NULL,
     enabled boolean NOT NULL,
     prefix character varying NOT NULL,
-    rateplan_id integer NOT NULL,
+    rate_group_id integer NOT NULL,
     next_rate numeric NOT NULL,
     connect_fee numeric DEFAULT 0.0,
     initial_interval integer DEFAULT 1 NOT NULL,
@@ -35256,11 +35256,13 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.dst_network_id=v_network.network_id;
         v_ret.dst_country_id=v_network.country_id;
 
-        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/ from class4.destinations d
+        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
+        FROM class4.destinations d
+        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
           AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
-          AND rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
@@ -36348,11 +36350,13 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.dst_network_id=v_network.network_id;
         v_ret.dst_country_id=v_network.country_id;
 
-        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/ from class4.destinations d
+        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
+        FROM class4.destinations d
+        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
           AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
-          AND rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
@@ -37343,11 +37347,13 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.dst_network_id=v_network.network_id;
         v_ret.dst_country_id=v_network.country_id;
 
-        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/ from class4.destinations d
+        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
+        FROM class4.destinations d
+        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
           AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
-          AND rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
@@ -38628,7 +38634,20 @@ CREATE TABLE class4.customers_auth (
     src_number_max_length smallint DEFAULT 100 NOT NULL,
     src_number_min_length smallint DEFAULT 0 NOT NULL,
     lua_script_id smallint,
+    src_number_field_id smallint DEFAULT 1 NOT NULL,
+    src_name_field_id smallint DEFAULT 1 NOT NULL,
+    dst_number_field_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
+);
+
+
+--
+-- Name: customers_auth_dst_number_fields; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.customers_auth_dst_number_fields (
+    id smallint NOT NULL,
+    name character varying NOT NULL
 );
 
 
@@ -38707,6 +38726,9 @@ CREATE TABLE class4.customers_auth_normalized (
     src_number_max_length smallint DEFAULT 100 NOT NULL,
     src_number_min_length smallint DEFAULT 0 NOT NULL,
     lua_script_id smallint,
+    src_number_field_id smallint DEFAULT 1 NOT NULL,
+    src_name_field_id smallint DEFAULT 1 NOT NULL,
+    dst_number_field_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -38731,6 +38753,26 @@ CREATE SEQUENCE class4.customers_auth_normalized_id_seq
 --
 
 ALTER SEQUENCE class4.customers_auth_normalized_id_seq OWNED BY class4.customers_auth_normalized.id;
+
+
+--
+-- Name: customers_auth_src_name_fields; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.customers_auth_src_name_fields (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: customers_auth_src_number_fields; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.customers_auth_src_number_fields (
+    id smallint NOT NULL,
+    name character varying NOT NULL
+);
 
 
 --
@@ -39625,6 +39667,68 @@ ALTER SEQUENCE class4.radius_auth_profiles_id_seq OWNED BY class4.radius_auth_pr
 
 
 --
+-- Name: rate_groups; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.rate_groups (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    external_id bigint
+);
+
+
+--
+-- Name: rate_groups_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.rate_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rate_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.rate_groups_id_seq OWNED BY class4.rate_groups.id;
+
+
+--
+-- Name: rate_plan_groups; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.rate_plan_groups (
+    id integer NOT NULL,
+    rateplan_id integer NOT NULL,
+    rate_group_id integer NOT NULL
+);
+
+
+--
+-- Name: rate_plan_groups_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.rate_plan_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rate_plan_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.rate_plan_groups_id_seq OWNED BY class4.rate_plan_groups.id;
+
+
+--
 -- Name: rate_profit_control_modes; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -39643,7 +39747,8 @@ CREATE TABLE class4.rateplans (
     name character varying,
     profit_control_mode_id smallint DEFAULT 1 NOT NULL,
     send_quality_alarms_to integer[],
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    external_id bigint
 );
 
 
@@ -39880,7 +39985,8 @@ CREATE TABLE class4.routing_plans (
     sorting_id integer DEFAULT 1 NOT NULL,
     rate_delta_max numeric DEFAULT 0 NOT NULL,
     use_lnp boolean DEFAULT false NOT NULL,
-    max_rerouting_attempts smallint DEFAULT 10 NOT NULL
+    max_rerouting_attempts smallint DEFAULT 10 NOT NULL,
+    external_id bigint
 );
 
 
@@ -40302,7 +40408,13 @@ CREATE TABLE data_import.import_customers_auth (
     src_number_min_length smallint,
     lua_script_id smallint,
     lua_script_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    src_number_field_id smallint,
+    src_number_field_name character varying,
+    src_name_field_id smallint,
+    src_name_field_name smallint,
+    dst_number_field_id smallint,
+    dst_number_field_name smallint
 );
 
 
@@ -40333,8 +40445,8 @@ CREATE TABLE data_import.import_destinations (
     id bigint NOT NULL,
     o_id bigint,
     prefix character varying,
-    rateplan_name character varying,
-    rateplan_id integer,
+    rate_group_name character varying,
+    rate_group_id integer,
     connect_fee numeric,
     enabled boolean,
     reject_calls boolean,
@@ -40799,6 +40911,38 @@ ALTER SEQUENCE data_import.import_numberlists_id_seq OWNED BY data_import.import
 
 
 --
+-- Name: import_rate_groups; Type: TABLE; Schema: data_import; Owner: -
+--
+
+CREATE TABLE data_import.import_rate_groups (
+    id bigint NOT NULL,
+    o_id integer,
+    name character varying,
+    error_string character varying,
+    is_changed boolean
+);
+
+
+--
+-- Name: import_rate_groups_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
+--
+
+CREATE SEQUENCE data_import.import_rate_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: import_rate_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
+--
+
+ALTER SEQUENCE data_import.import_rate_groups_id_seq OWNED BY data_import.import_rate_groups.id;
+
+
+--
 -- Name: import_rateplans; Type: TABLE; Schema: data_import; Owner: -
 --
 
@@ -40894,10 +41038,6 @@ CREATE TABLE data_import.import_routing_groups (
     id bigint NOT NULL,
     o_id integer,
     name character varying,
-    sorting_name character varying,
-    sorting_id integer,
-    more_specific_per_vendor boolean,
-    rate_delta_max numeric DEFAULT 0 NOT NULL,
     error_string character varying,
     is_changed boolean
 );
@@ -43233,6 +43373,20 @@ ALTER TABLE ONLY class4.radius_auth_profiles ALTER COLUMN id SET DEFAULT nextval
 
 
 --
+-- Name: rate_groups id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_groups ALTER COLUMN id SET DEFAULT nextval('class4.rate_groups_id_seq'::regclass);
+
+
+--
+-- Name: rate_plan_groups id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_plan_groups ALTER COLUMN id SET DEFAULT nextval('class4.rate_plan_groups_id_seq'::regclass);
+
+
+--
 -- Name: rateplans id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -43398,6 +43552,13 @@ ALTER TABLE ONLY data_import.import_numberlist_items ALTER COLUMN id SET DEFAULT
 --
 
 ALTER TABLE ONLY data_import.import_numberlists ALTER COLUMN id SET DEFAULT nextval('data_import.import_numberlists_id_seq'::regclass);
+
+
+--
+-- Name: import_rate_groups id; Type: DEFAULT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_rate_groups ALTER COLUMN id SET DEFAULT nextval('data_import.import_rate_groups_id_seq'::regclass);
 
 
 --
@@ -43994,6 +44155,22 @@ ALTER TABLE ONLY class4.codecs
 
 
 --
+-- Name: customers_auth_dst_number_fields customers_auth_dst_number_fields_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth_dst_number_fields
+    ADD CONSTRAINT customers_auth_dst_number_fields_name_key UNIQUE (name);
+
+
+--
+-- Name: customers_auth_dst_number_fields customers_auth_dst_number_fields_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth_dst_number_fields
+    ADD CONSTRAINT customers_auth_dst_number_fields_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: customers_auth customers_auth_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -44023,6 +44200,38 @@ ALTER TABLE ONLY class4.customers_auth_normalized
 
 ALTER TABLE ONLY class4.customers_auth
     ADD CONSTRAINT customers_auth_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customers_auth_src_name_fields customers_auth_src_name_fields_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth_src_name_fields
+    ADD CONSTRAINT customers_auth_src_name_fields_name_key UNIQUE (name);
+
+
+--
+-- Name: customers_auth_src_name_fields customers_auth_src_name_fields_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth_src_name_fields
+    ADD CONSTRAINT customers_auth_src_name_fields_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customers_auth_src_number_fields customers_auth_src_number_fields_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth_src_number_fields
+    ADD CONSTRAINT customers_auth_src_number_fields_name_key UNIQUE (name);
+
+
+--
+-- Name: customers_auth_src_number_fields customers_auth_src_number_fields_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth_src_number_fields
+    ADD CONSTRAINT customers_auth_src_number_fields_pkey PRIMARY KEY (id);
 
 
 --
@@ -44474,6 +44683,38 @@ ALTER TABLE ONLY class4.radius_auth_profiles
 
 
 --
+-- Name: rate_groups rate_groups_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_groups
+    ADD CONSTRAINT rate_groups_external_id_key UNIQUE (external_id);
+
+
+--
+-- Name: rate_groups rate_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_groups
+    ADD CONSTRAINT rate_groups_name_key UNIQUE (name);
+
+
+--
+-- Name: rate_groups rate_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_groups
+    ADD CONSTRAINT rate_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rate_plan_groups rate_plan_groups_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_plan_groups
+    ADD CONSTRAINT rate_plan_groups_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: rate_profit_control_modes rate_profit_control_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -44487,6 +44728,14 @@ ALTER TABLE ONLY class4.rate_profit_control_modes
 
 ALTER TABLE ONLY class4.rate_profit_control_modes
     ADD CONSTRAINT rate_profit_control_modes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rateplans rateplans_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rateplans
+    ADD CONSTRAINT rateplans_external_id_key UNIQUE (external_id);
 
 
 --
@@ -44591,6 +44840,14 @@ ALTER TABLE ONLY class4.routing_plan_lnp_rules
 
 ALTER TABLE ONLY class4.routing_plan_static_routes
     ADD CONSTRAINT routing_plan_static_routes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: routing_plans routing_plans_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.routing_plans
+    ADD CONSTRAINT routing_plans_external_id_key UNIQUE (external_id);
 
 
 --
@@ -44807,6 +45064,14 @@ ALTER TABLE ONLY data_import.import_numberlist_items
 
 ALTER TABLE ONLY data_import.import_numberlists
     ADD CONSTRAINT import_numberlists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: import_rate_groups import_rate_groups_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_rate_groups
+    ADD CONSTRAINT import_rate_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -45933,6 +46198,13 @@ CREATE INDEX lnp_cache_expires_at_idx ON class4.lnp_cache USING btree (expires_a
 
 
 --
+-- Name: rate_plan_groups_rateplan_id_rate_group_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX rate_plan_groups_rateplan_id_rate_group_id_idx ON class4.rate_plan_groups USING btree (rateplan_id, rate_group_id);
+
+
+--
 -- Name: routing_plan_lnp_rules_prefix_range_routing_plan_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -46171,6 +46443,14 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
+-- Name: customers_auth customers_auth_dst_number_field_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth
+    ADD CONSTRAINT customers_auth_dst_number_field_id_fkey FOREIGN KEY (dst_number_field_id) REFERENCES class4.customers_auth_dst_number_fields(id);
+
+
+--
 -- Name: customers_auth customers_auth_dump_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -46251,6 +46531,22 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
+-- Name: customers_auth customers_auth_src_name_field_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth
+    ADD CONSTRAINT customers_auth_src_name_field_id_fkey FOREIGN KEY (src_name_field_id) REFERENCES class4.customers_auth_src_name_fields(id);
+
+
+--
+-- Name: customers_auth customers_auth_src_number_field_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth
+    ADD CONSTRAINT customers_auth_src_number_field_id_fkey FOREIGN KEY (src_number_field_id) REFERENCES class4.customers_auth_src_number_fields(id);
+
+
+--
 -- Name: customers_auth customers_auth_tag_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -46283,19 +46579,19 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
+-- Name: destinations destinations_rate_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.destinations
+    ADD CONSTRAINT destinations_rate_group_id_fkey FOREIGN KEY (rate_group_id) REFERENCES class4.rate_groups(id);
+
+
+--
 -- Name: destinations destinations_rate_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
     ADD CONSTRAINT destinations_rate_policy_id_fkey FOREIGN KEY (rate_policy_id) REFERENCES class4.destination_rate_policy(id);
-
-
---
--- Name: destinations destinations_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_rateplan_id_fkey FOREIGN KEY (rateplan_id) REFERENCES class4.rateplans(id);
 
 
 --
@@ -46699,6 +46995,22 @@ ALTER TABLE ONLY class4.radius_auth_profile_attributes
 
 
 --
+-- Name: rate_plan_groups rate_plan_groups_rate_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_plan_groups
+    ADD CONSTRAINT rate_plan_groups_rate_group_id_fkey FOREIGN KEY (rate_group_id) REFERENCES class4.rate_groups(id);
+
+
+--
+-- Name: rate_plan_groups rate_plan_groups_rateplan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.rate_plan_groups
+    ADD CONSTRAINT rate_plan_groups_rateplan_id_fkey FOREIGN KEY (rateplan_id) REFERENCES class4.rateplans(id);
+
+
+--
 -- Name: rateplans rateplans_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -47041,6 +47353,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200630132440'),
 ('20200803202810'),
 ('20201015195346'),
-('20201015202253');
+('20201015202253'),
+('20201023122436');
 
 

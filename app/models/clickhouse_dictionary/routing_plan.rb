@@ -5,6 +5,7 @@ module ClickhouseDictionary
     model_class ::Routing::RoutingPlan
 
     attributes :id,
-               :name
+               :name,
+               :external_id
   end
 end

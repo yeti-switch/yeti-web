@@ -11,7 +11,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :from_domain, :to_domain, :tag_action_value, :external_id
 
   has_one :customer
-  has_one :rateplan
+  has_one :rateplan, class_name: 'Routing::Rateplan'
   has_one :routing_plan, class_name: 'RoutingPlan'
   has_one :gateway
   has_one :account

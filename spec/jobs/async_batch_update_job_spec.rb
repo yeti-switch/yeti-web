@@ -3,6 +3,7 @@
 RSpec.describe AsyncBatchUpdateJob, type: :job do
   describe '#perform' do
     include_context :init_rateplan
+    include_context :init_rate_group
     include_context :init_destination, id: 1, initial_rate: 0.3
     include_context :init_destination, id: 2, initial_rate: 0.5
     include_context :init_destination, id: 3, initial_rate: 0.7
@@ -26,7 +27,7 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
       let(:model_class) { 'Routing::Destination' }
 
       context 'incorrect changes' do
-        let(:changes) { { rateplan_id: 2000 } } # there is no rateplan with id=2000
+        let(:changes) { { rate_group_id: 2000 } } # there is no rategroup with id=2000
         let(:sql_query) { Routing::Destination.all.to_sql }
 
         it { expect { subject }.to raise_error(ActiveRecord::RecordInvalid) }

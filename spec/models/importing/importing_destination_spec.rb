@@ -4,7 +4,7 @@ require 'shared_examples/shared_examples_for_importing_hook'
 require 'shared_examples/shared_examples_for_importing_with_routing_tags'
 
 RSpec.describe Importing::Destination do
-  include_context :init_rateplan, name: 'Cost'
+  include_context :init_rate_group, name: 'Cost'
 
   let(:preview_item) { described_class.last }
 
@@ -17,7 +17,7 @@ RSpec.describe Importing::Destination do
     include_context :init_importing_destination,
                     o_id: 8,
                     prefix: '373900',
-                    rateplan_id: nil,
+                    rate_group_id: nil,
                     rate_policy_id: nil,
                     routing_tag_mode_id: nil,
                     routing_tag_ids: []

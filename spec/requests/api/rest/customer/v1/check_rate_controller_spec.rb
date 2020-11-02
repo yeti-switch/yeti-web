@@ -4,11 +4,12 @@ RSpec.describe Api::Rest::Customer::V1::CheckRateController, type: :request do
   include_context :json_api_customer_v1_helpers, type: :check_rates
   let(:json_api_request_path) { "#{json_api_request_path_prefix}/check-rate" }
   let(:account) { create(:account, contractor: customer) }
+  let(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
 
   before do
-    @r1 = create :destination, rateplan: rateplan, prefix: '444', routing_tag_ids: [create(:routing_tag, :ua).id, create(:routing_tag, :us).id]
-    @r2 = create :destination, rateplan: rateplan, prefix: '4444', routing_tag_ids: [create(:routing_tag, :emergency).id]
-    create :destination, rateplan: rateplan, prefix: '3333' # out of range
+    @r1 = create :destination, rate_group: rate_group, prefix: '444', routing_tag_ids: [create(:routing_tag, :ua).id, create(:routing_tag, :us).id]
+    @r2 = create :destination, rate_group: rate_group, prefix: '4444', routing_tag_ids: [create(:routing_tag, :emergency).id]
+    create :destination, rate_group: rate_group, prefix: '3333' # out of range
   end
 
   describe 'POST /api/rest/customer/v1/check-rate' do

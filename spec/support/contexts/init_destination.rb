@@ -6,7 +6,7 @@ shared_context :init_destination do |args|
   before do
     fields = {
       prefix: '998713',
-      rateplan_id: @rateplan.id,
+      rate_group_id: @rate_group.id,
       rate_policy_id: 1,
       initial_interval: 1,
       next_interval: 1,

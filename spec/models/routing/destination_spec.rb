@@ -30,8 +30,8 @@
 #  external_id            :bigint(8)
 #  network_prefix_id      :integer(4)
 #  profit_control_mode_id :integer(2)
+#  rate_group_id          :integer(4)       not null
 #  rate_policy_id         :integer(4)       default(1), not null
-#  rateplan_id            :integer(4)       not null
 #  routing_tag_mode_id    :integer(2)       default(0), not null
 #
 # Indexes
@@ -42,8 +42,8 @@
 # Foreign Keys
 #
 #  destinations_profit_control_mode_id_fkey  (profit_control_mode_id => rate_profit_control_modes.id)
+#  destinations_rate_group_id_fkey           (rate_group_id => rate_groups.id)
 #  destinations_rate_policy_id_fkey          (rate_policy_id => destination_rate_policy.id)
-#  destinations_rateplan_id_fkey             (rateplan_id => rateplans.id)
 #  destinations_routing_tag_mode_id_fkey     (routing_tag_mode_id => routing_tag_modes.id)
 #
 

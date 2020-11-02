@@ -10,7 +10,7 @@ RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :controller d
     request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
 
-    allow(Rateplan).to receive(:where_customer) { Rateplan.all }
+    allow(Routing::Rateplan).to receive(:where_customer) { Routing::Rateplan.all }
   end
 
   describe 'GET index' do

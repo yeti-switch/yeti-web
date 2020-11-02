@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-workers ENV.fetch('WEB_CONCURRENCY') { 0 }
+workers ENV.fetch('WEB_CONCURRENCY') { 1 }
 
 max_threads_count = ENV.fetch('RAILS_MAX_THREADS') { 8 }
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS') { 2 }

@@ -7,9 +7,10 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
 
   module CONST
     ROOT_NAMESPACE_RELATIONS = %w[
-      Rateplan Dialpeer Pop RoutingGroup Destination CustomersAuth Contractor Account Gateway DestinationRatePolicy RoutingPlan
+      Dialpeer Pop RoutingGroup CustomersAuth Contractor Account Gateway RoutingPlan
     ].freeze
     SYSTEM_NAMESPACE_RELATIONS = %w[Country Network].freeze
+    ROUTING_NAMESPACE_RELATIONS = %w[Destination Rateplan DestinationRatePolicy].freeze
     freeze
   end
 
@@ -140,14 +141,14 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :customer_duration,
              :vendor_duration
 
-  has_one :rateplan
+  has_one :rateplan, class_name: 'Rateplan'
   has_one :dialpeer
   has_one :pop
   has_one :routing_group
   has_one :routing_plan, class_name: 'RoutingPlan'
   has_one :destination, class_name: 'Destination'
   has_one :customer_auth
-  has_one :destination_rate_policy
+  has_one :destination_rate_policy, class_name: 'DestinationRatePolicy'
   has_one :vendor, class_name: 'Contractor'
   has_one :customer, class_name: 'Contractor'
   has_one :customer_acc, class_name: 'Account'
@@ -336,6 +337,8 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
       "Api::Rest::Admin::#{type}Resource".safe_constantize
     elsif type.in?(CONST::SYSTEM_NAMESPACE_RELATIONS)
       "Api::Rest::Admin::System::#{type}Resource".safe_constantize
+    elsif type.in?(CONST::ROUTING_NAMESPACE_RELATIONS)
+      "Api::Rest::Admin::Routing::#{type}Resource".safe_constantize
     else
       super
     end

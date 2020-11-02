@@ -21,8 +21,8 @@
 #  next_rate                :decimal(, )
 #  prefix                   :string
 #  profit_control_mode_name :string
+#  rate_group_name          :string
 #  rate_policy_name         :string
-#  rateplan_name            :string
 #  reject_calls             :boolean
 #  reverse_billing          :boolean
 #  routing_tag_ids          :integer(2)       default([]), not null, is an Array
@@ -35,20 +35,20 @@
 #  network_prefix_id        :integer(4)
 #  o_id                     :bigint(8)
 #  profit_control_mode_id   :integer(2)
+#  rate_group_id            :integer(4)
 #  rate_policy_id           :integer(4)
-#  rateplan_id              :integer(4)
 #  routing_tag_mode_id      :integer(2)
 #
 
 class Importing::Destination < Importing::Base
   self.table_name = 'data_import.import_destinations'
 
-  belongs_to :rateplan, class_name: '::Rateplan'
+  belongs_to :rate_group, class_name: 'Routing::RateGroup'
   belongs_to :rate_policy, class_name: '::DestinationRatePolicy'
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
 
-  self.import_attributes = %w[enabled prefix reject_calls rateplan_id
+  self.import_attributes = %w[enabled prefix reject_calls rate_group_id
                               initial_interval next_interval initial_rate next_rate
                               connect_fee rate_policy_id reverse_billing dp_margin_fixed dp_margin_percent use_dp_intervals
                               valid_from valid_till profit_control_mode_id

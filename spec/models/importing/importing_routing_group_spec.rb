@@ -11,7 +11,7 @@ RSpec.describe Importing::RoutingGroup do
   end
 
   it_behaves_like 'after_import_hook when real items do not match' do
-    include_context :init_importing_routing_group, o_id: 8, name: 'PBXww-Canada-RG-GG', sorting_id: nil
+    include_context :init_importing_routing_group, o_id: 8, name: 'Canada-RG-GG'
   end
 
   it_behaves_like 'after_import_hook when real items match' do
