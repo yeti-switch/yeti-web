@@ -342,6 +342,9 @@ INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_orig
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8005,0,true,true,403,'Origination gateway is disabled',false,false,true,false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8006,0,true,true,403,'No destination with appropriate price found',false,false,true,false);
 
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8007,0,true,true,404,'No network found for dst number',484,'Address Incomplete',false,false,true,false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8008,0,true,true,404,'Invalid dst number format',484,'Address Incomplete',false,false,true,false);
+
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1505, 1, false, false, 487, 'Ringing timeout', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (2001, 3, true, false, 503, 'Radius response timeout', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (2002, 3, true, false, 503, 'Radius request error', NULL, NULL, false, false, true, false);
@@ -978,3 +981,4 @@ insert into class4.customers_auth_src_name_fields(id,name) values(1,'From header
 
 insert into class4.customers_auth_dst_number_fields(id,name) values(1,'R-URI userpart');
 insert into class4.customers_auth_dst_number_fields(id,name) values(2,'To URI userpart');
+insert into class4.customers_auth_dst_number_fields(id,name) values(3,'Top Diversion header userpart');

@@ -15,9 +15,13 @@ ActiveAdmin.register Routing::RoutingPlan do
                  [:sorting_name, proc { |row| row.sorting.try(:name) || '' }],
                  :use_lnp,
                  :rate_delta_max,
-                 :max_rerouting_attempts
+                 :max_rerouting_attempts,
+                 :validate_dst_number_format,
+                 :validate_dst_number_network
 
-  permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts, routing_group_ids: []
+  permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts,
+                :validate_dst_number_format, :validate_dst_number_network,
+                routing_group_ids: []
 
   includes :sorting, :routing_groups
 
@@ -39,6 +43,8 @@ ActiveAdmin.register Routing::RoutingPlan do
     column 'Routing groups' do |r|
       raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: { routing_group_id_eq: rg.id }) }.sort.join(', '))
     end
+    column :validate_dst_number_format
+    column :validate_dst_number_network
   end
 
   show do |_s|
@@ -54,6 +60,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       row 'Routing groups' do |r|
         raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: { routing_group_id_eq: rg.id }) }.sort.join(', '))
       end
+      row :validate_dst_number_format
+      row :validate_dst_number_network
     end
     active_admin_comments
   end
@@ -67,6 +75,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :rate_delta_max
       f.input :max_rerouting_attempts
       f.input :routing_groups, input_html: { class: 'chosen-sortable', multiple: true }
+      f.input :validate_dst_number_format
+      f.input :validate_dst_number_network
     end
     f.actions
   end

@@ -13,6 +13,9 @@ class Api::Rest::Admin::RoutingPlanResource < BaseResource
   ransack_filter :rate_delta_max, type: :number
   ransack_filter :use_lnp, type: :boolean
   ransack_filter :max_rerouting_attempts, type: :number
+  ransack_filter :validate_dst_number_format, type: :boolean
+  ransack_filter :validate_dst_number_network, type: :boolean
+  ransack_filter :external_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
@@ -21,6 +24,9 @@ class Api::Rest::Admin::RoutingPlanResource < BaseResource
       use_lnp
       sorting
       max_rerouting_attempts
+      validate_dst_number_format
+      validate_dst_number_network
+      external_id
     ]
   end
 
