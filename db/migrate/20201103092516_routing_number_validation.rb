@@ -284,23 +284,23 @@ CREATE OR REPLACE FUNCTION switch18.route(
 
         -- redefine call SRC/DST numbers
 
-        IF v_customer_auth.src_name_field_id=1 THEN  /* default - from uri display name */
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
           v_ret.src_name_in:=i_from_dsp;
         END IF;
         v_ret.src_name_out:=v_ret.src_name_in;
 
-        IF v_customer_auth.src_number_field_id=1 THEN  /* default - from uri userpart */
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
           v_ret.src_prefix_in:=i_from_name;
-        ELSIF v_customer_auth.src_number_field_id=2 THEN /* From uri Display name */
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
           v_ret.src_prefix_in:=i_from_dsp;
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
-        IF v_customer_auth.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
           v_ret.dst_prefix_in:=i_uri_name;
-        ELSIF v_customer_auth.dst_number_field_id=2 THEN /* TO URI userpart */
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
-        ELSIF v_customer_auth.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
           v_ret.dst_prefix_in:=i_diversion;
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
