@@ -34632,7 +34632,7 @@ $$;
 
 CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch18.callprofile62_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
-    AS $$
+    AS $_$
       DECLARE
         v_ret switch18.callprofile62_ty;
         i integer;
@@ -34714,9 +34714,11 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.src_name_out:=v_ret.src_name_in;
 
         v_ret.src_prefix_in:=i_from_name;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
         v_ret.dst_prefix_in:=i_uri_name;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
-        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
 
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
@@ -34868,6 +34870,30 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> AUTH. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_customer_auth_normalized, true);
         /*}dbg*/
+
+        -- redefine call SRC/DST numbers
+
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
+          v_ret.src_name_in:=i_from_dsp;
+        END IF;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
+          v_ret.src_prefix_in:=i_from_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
+          v_ret.src_prefix_in:=i_from_dsp;
+        END IF;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+          v_ret.dst_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
+          v_ret.dst_prefix_in:=i_to_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+          v_ret.dst_prefix_in:=i_diversion;
+        END IF;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
 
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
@@ -35255,6 +35281,29 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_network:=switch18.detect_network(v_ret.dst_prefix_routing);
         v_ret.dst_network_id=v_network.network_id;
         v_ret.dst_country_id=v_network.country_id;
+
+        IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting calls',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8007; --No network detected for DST number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+
+        IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Dst number format is not valid. DST number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key;
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8008; --Invalid number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
         FROM class4.destinations d
@@ -35717,7 +35766,7 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
         /*}dbg*/
         RETURN;
       END;
-      $$;
+      $_$;
 
 
 --
@@ -35726,7 +35775,7 @@ CREATE FUNCTION switch18.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
 CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch18.callprofile62_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
-    AS $$
+    AS $_$
       DECLARE
         v_ret switch18.callprofile62_ty;
         i integer;
@@ -35808,9 +35857,11 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.src_name_out:=v_ret.src_name_in;
 
         v_ret.src_prefix_in:=i_from_name;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
         v_ret.dst_prefix_in:=i_uri_name;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
-        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
 
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
@@ -35962,6 +36013,30 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> AUTH. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_customer_auth_normalized, true);
         /*}dbg*/
+
+        -- redefine call SRC/DST numbers
+
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
+          v_ret.src_name_in:=i_from_dsp;
+        END IF;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
+          v_ret.src_prefix_in:=i_from_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
+          v_ret.src_prefix_in:=i_from_dsp;
+        END IF;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+          v_ret.dst_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
+          v_ret.dst_prefix_in:=i_to_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+          v_ret.dst_prefix_in:=i_diversion;
+        END IF;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
 
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
@@ -36349,6 +36424,29 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_network:=switch18.detect_network(v_ret.dst_prefix_routing);
         v_ret.dst_network_id=v_network.network_id;
         v_ret.dst_country_id=v_network.country_id;
+
+        IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting calls',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8007; --No network detected for DST number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+
+        IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Dst number format is not valid. DST number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key;
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8008; --Invalid number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
         FROM class4.destinations d
@@ -36811,7 +36909,7 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
         /*}dbg*/
         RETURN;
       END;
-      $$;
+      $_$;
 
 
 --
@@ -36820,7 +36918,7 @@ CREATE FUNCTION switch18.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
 CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch18.callprofile62_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
-    AS $$
+    AS $_$
       DECLARE
         v_ret switch18.callprofile62_ty;
         i integer;
@@ -36895,9 +36993,11 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.src_name_out:=v_ret.src_name_in;
 
         v_ret.src_prefix_in:=i_from_name;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
         v_ret.dst_prefix_in:=i_uri_name;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
-        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
 
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
@@ -37028,6 +37128,30 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         end IF;
 
         
+
+        -- redefine call SRC/DST numbers
+
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
+          v_ret.src_name_in:=i_from_dsp;
+        END IF;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
+          v_ret.src_prefix_in:=i_from_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
+          v_ret.src_prefix_in:=i_from_dsp;
+        END IF;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+          v_ret.dst_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
+          v_ret.dst_prefix_in:=i_to_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+          v_ret.dst_prefix_in:=i_diversion;
+        END IF;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
 
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
@@ -37347,6 +37471,23 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.dst_network_id=v_network.network_id;
         v_ret.dst_country_id=v_network.country_id;
 
+        IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
+          
+
+          v_ret.disconnect_code_id=8007; --No network detected for DST number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+
+        IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
+          
+
+          v_ret.disconnect_code_id=8008; --Invalid number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
         FROM class4.destinations d
         JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
@@ -37793,7 +37934,7 @@ CREATE FUNCTION switch18.route_release(i_node_id integer, i_pop_id integer, i_pr
         
         RETURN;
       END;
-      $$;
+      $_$;
 
 
 --
@@ -39986,7 +40127,9 @@ CREATE TABLE class4.routing_plans (
     rate_delta_max numeric DEFAULT 0 NOT NULL,
     use_lnp boolean DEFAULT false NOT NULL,
     max_rerouting_attempts smallint DEFAULT 10 NOT NULL,
-    external_id bigint
+    external_id bigint,
+    validate_dst_number_format boolean DEFAULT false NOT NULL,
+    validate_dst_number_network boolean DEFAULT false NOT NULL
 );
 
 
@@ -47354,6 +47497,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200803202810'),
 ('20201015195346'),
 ('20201015202253'),
-('20201023122436');
+('20201023122436'),
+('20201103092516');
 
 

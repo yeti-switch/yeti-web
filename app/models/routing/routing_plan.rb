@@ -4,13 +4,15 @@
 #
 # Table name: routing_plans
 #
-#  id                     :integer(4)       not null, primary key
-#  max_rerouting_attempts :integer(2)       default(10), not null
-#  name                   :string           not null
-#  rate_delta_max         :decimal(, )      default(0.0), not null
-#  use_lnp                :boolean          default(FALSE), not null
-#  external_id            :bigint(8)
-#  sorting_id             :integer(4)       default(1), not null
+#  id                          :integer(4)       not null, primary key
+#  max_rerouting_attempts      :integer(2)       default(10), not null
+#  name                        :string           not null
+#  rate_delta_max              :decimal(, )      default(0.0), not null
+#  use_lnp                     :boolean          default(FALSE), not null
+#  validate_dst_number_format  :boolean          default(FALSE), not null
+#  validate_dst_number_network :boolean          default(FALSE), not null
+#  external_id                 :bigint(8)
+#  sorting_id                  :integer(4)       default(1), not null
 #
 # Indexes
 #

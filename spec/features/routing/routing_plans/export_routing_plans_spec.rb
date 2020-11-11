@@ -23,7 +23,9 @@ RSpec.describe 'Export Routing Plans', type: :feature do
         ['Sorting name', item.sorting.name],
         ['Use lnp', item.use_lnp.to_s],
         ['Rate delta max', item.rate_delta_max.to_s],
-        ['Max rerouting attempts', item.max_rerouting_attempts.to_s]
+        ['Max rerouting attempts', item.max_rerouting_attempts.to_s],
+        ['Validate dst number format', item.validate_dst_number_format.to_s],
+        ['Validate dst number network', item.validate_dst_number_network.to_s]
       ]
     )
   end

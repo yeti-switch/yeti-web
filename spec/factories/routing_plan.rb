@@ -7,6 +7,8 @@ FactoryBot.define do
     rate_delta_max { 0 }
     max_rerouting_attempts { 9 }
     use_lnp { false }
+    validate_dst_number_format { false }
+    validate_dst_number_network { false }
 
     trait :with_static_routes do
       sorting_id { FactoryBot.create(:sorting, use_static_routes: true).id }

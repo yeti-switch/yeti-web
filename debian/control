@@ -12,13 +12,11 @@ Build-Depends: debhelper (>= 10.2.5),
   ruby2.6-dev,
   zlib1g-dev,
   libpq-dev,
-  python-jinja2,
-  python-yaml
 
 Package: yeti-web
 Section: net
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby2.6, python, python-yaml, python-psycopg2, postgresql-client, curl
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby2.6, postgresql-client, curl
 Pre-Depends: adduser, procps
 Description: UI for YETI project
 	YETI user interface
