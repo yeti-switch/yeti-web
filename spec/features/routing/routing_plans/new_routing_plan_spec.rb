@@ -14,7 +14,9 @@ RSpec.describe 'Create new Routing Plan', type: :feature, js: true do
         name: 'test routing plan',
         use_lnp: true,
         rate_delta_max: 0.11,
-        max_rerouting_attempts: 8
+        max_rerouting_attempts: 8,
+        validate_dst_number_format: true,
+        validate_dst_number_network: true
       }
     end
 
