@@ -83,158 +83,11 @@ class Billing::Invoice < Cdr::Base
     end
 
     if vendor_invoice # vendor invoice
-
-      res = fetch_sp_val('select 1 from cdr.cdr WHERE vendor_acc_id=? AND time_start>=? and time_start<? AND vendor_invoice_id IS NOT NULL LIMIT 1',
-                         account_id, start_date, end_date)
-      unless res.nil?
-        raise 'billing.invoice_generate: some vendor invoices already found for this interval'
-      end
-
-      execute_sp("
-        WITH invoice_data as (
-          UPDATE cdr.cdr SET vendor_invoice_id=?
-          WHERE
-            vendor_acc_id =? AND
-            time_start>=? AND
-            time_start<? AND
-            vendor_invoice_id IS NULL
-          RETURNING *
-        )
-        insert into billing.invoice_destinations(
-          dst_prefix, country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
-          count(id),  -- calls count
-          count(nullif(success,false)),  -- succesful_calls_count
-          sum(duration),
-          sum(vendor_duration),
-          sum(vendor_price),
-          ?,
-          min(time_start),
-          min(case success when true then time_start else null end),
-          max(time_start),
-          max(case success when true then time_start else null end)
-        from invoice_data
-        group by dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
-                 id, account_id, start_date, end_date, id)
-
-      execute_sp("
-        insert into billing.invoice_networks(
-          country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          country_id, network_id, rate,
-          sum(calls_count),
-          sum(successful_calls_count),
-          sum(calls_duration),
-          sum(billing_duration),
-          sum(amount),
-          ?,
-          min(first_call_at),
-          min(first_successful_call_at),
-          max(last_call_at),
-          max(last_successful_call_at)
-        from billing.invoice_destinations
-        where invoice_id=?
-        group by country_id, network_id, rate",
-                 id, id)
-
+      generate_vendor_data
     else # customer invoice
-
-      res = fetch_sp_val('select 1 from cdr.cdr WHERE customer_acc_id=? AND time_start>=? and time_start<? AND customer_invoice_id IS NOT NULL LIMIT 1',
-                         account_id, start_date, end_date)
-      unless res.nil?
-        raise 'billing.invoice_generate: some customer invoices already found for this interval'
-      end
-
-      execute_sp("
-        WITH invoice_data as (
-          UPDATE cdr.cdr SET customer_invoice_id=?
-          WHERE
-            customer_acc_id =? AND
-            time_start >=? AND
-            time_start < ? AND
-            customer_invoice_id IS NULL
-          RETURNING *
-        )
-        insert into billing.invoice_destinations(
-          dst_prefix, country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
-          count(nullif(is_last_cdr,false)),
-          count(nullif((success AND is_last_cdr),false)),  -- succesful_calls_count
-          sum(duration),
-          sum(customer_duration),
-          sum(customer_price),
-          ?,
-          min(time_start),
-          min(case success when true then time_start else null end),
-          max(time_start),
-          max(case success when true then time_start else null end)
-        from invoice_data
-        group by destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
-                 id, account_id, start_date, end_date, id)
-
-      execute_sp("
-        insert into billing.invoice_networks(
-          country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          country_id, network_id, rate,
-          sum(calls_count),
-          sum(successful_calls_count),
-          sum(calls_duration),
-          sum(billing_duration),
-          sum(amount),
-          ?,
-          min(first_call_at),
-          min(first_successful_call_at),
-          max(last_call_at),
-          max(last_successful_call_at)
-        from billing.invoice_destinations
-        where invoice_id=?
-        group by country_id, network_id, rate",
-                 id, id)
-
+      generate_customer_data
     end
+
     detalize_invoice
   end
 
@@ -245,20 +98,6 @@ class Billing::Invoice < Cdr::Base
       self.calls_duration ||= 0
       self.billing_duration ||= 0
     end
-  end
-
-  def detalize_invoice
-    data = destinations.summary
-    self.amount = data.amount
-    self.calls_count = data.calls_count
-    self.successful_calls_count = data.successful_calls_count
-    self.calls_duration = data.calls_duration
-    self.billing_duration = data.billing_duration
-    self.first_call_at = data.first_call_at
-    self.first_successful_call_at = data.first_successful_call_at
-    self.last_call_at = data.last_call_at
-    self.last_successful_call_at = data.last_successful_call_at
-    save!
   end
 
   def cdr_filter_for_invoice
@@ -339,5 +178,169 @@ class Billing::Invoice < Cdr::Base
   # FIX this copy paste
   def send_email
     invoice_document&.send_invoice
+  end
+
+  private
+
+  def generate_vendor_data
+    SqlCaller::Cdr.execute(
+      "INSERT INTO billing.invoice_destinations(
+            dst_prefix, country_id, network_id, rate,
+            calls_count,
+            successful_calls_count,
+            calls_duration,
+            billing_duration,
+            amount,
+            invoice_id,
+            first_call_at,
+            first_successful_call_at,
+            last_call_at,
+            last_successful_call_at
+          ) SELECT
+            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
+            COUNT(id),  -- calls count
+            COUNT(NULLIF(success,false)),  -- successful_calls_count
+            SUM(duration), -- calls_duration
+            SUM(vendor_duration), -- billing_duration
+            SUM(vendor_price), -- amount
+            ?, -- invoice_id
+            MIN(time_start), -- first_call_at
+            MIN(CASE success WHEN true THEN time_start ELSE NULL END), -- first_successful_call_at
+            MAX(time_start), -- last_call_at
+            MAX(CASE success WHEN true THEN time_start ELSE NULL END) -- last_successful_call_at
+          FROM (
+            SELECT *
+            FROM cdr.cdr
+            WHERE
+              vendor_acc_id =? AND
+              time_start>=? AND
+              time_start<?
+          ) invoice_data
+          GROUP BY dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
+      id,
+      account_id,
+      start_date,
+      end_date
+    )
+
+    SqlCaller::Cdr.execute(
+      "INSERT INTO billing.invoice_networks(
+            country_id, network_id, rate,
+            calls_count,
+            successful_calls_count,
+            calls_duration,
+            billing_duration,
+            amount,
+            invoice_id,
+            first_call_at,
+            first_successful_call_at,
+            last_call_at,
+            last_successful_call_at
+          ) SELECT
+            country_id, network_id, rate,
+            SUM(calls_count),
+            SUM(successful_calls_count),
+            SUM(calls_duration),
+            SUM(billing_duration),
+            SUM(amount),
+            ?, -- invoice_id
+            MIN(first_call_at),
+            MIN(first_successful_call_at),
+            MAX(last_call_at),
+            MAX(last_successful_call_at)
+          FROM billing.invoice_destinations
+          WHERE invoice_id=?
+          GROUP BY country_id, network_id, rate",
+      id,
+      id
+    )
+  end
+
+  def generate_customer_data
+    SqlCaller::Cdr.execute(
+      "INSERT INTO billing.invoice_destinations(
+            dst_prefix, country_id, network_id, rate,
+            calls_count,
+            successful_calls_count,
+            calls_duration,
+            billing_duration,
+            amount,
+            invoice_id,
+            first_call_at,
+            first_successful_call_at,
+            last_call_at,
+            last_successful_call_at
+          ) SELECT
+            destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
+            COUNT(NULLIF(is_last_cdr,false)), -- calls_count
+            COUNT(NULLIF((success AND is_last_cdr),false)),  -- successful_calls_count
+            SUM(duration), -- calls_duration
+            SUM(customer_duration), -- billing_duration
+            SUM(customer_price), -- amount
+            ?, -- invoice_id
+            MIN(time_start), -- first_call_at
+            MIN(CASE success WHEN true THEN time_start ELSE NULL END), -- first_successful_call_at
+            MAX(time_start), -- last_call_at
+            MAX(CASE success WHEN true THEN time_start ELSE NULL END) -- last_successful_call_at
+          FROM (
+            SELECT *
+            FROM cdr.cdr
+            WHERE
+              customer_acc_id =? AND
+              time_start >=? AND
+              time_start < ?
+          ) invoice_data
+          GROUP BY destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
+      id,
+      account_id,
+      start_date,
+      end_date
+    )
+
+    SqlCaller::Cdr.execute(
+      "INSERT INTO billing.invoice_networks(
+            country_id, network_id, rate,
+            calls_count,
+            successful_calls_count,
+            calls_duration,
+            billing_duration,
+            amount,
+            invoice_id,
+            first_call_at,
+            first_successful_call_at,
+            last_call_at,
+            last_successful_call_at
+          ) SELECT
+            country_id, network_id, rate,
+            SUM(calls_count),
+            SUM(successful_calls_count),
+            SUM(calls_duration),
+            SUM(billing_duration),
+            SUM(amount),
+            ?, -- invoice_id
+            MIN(first_call_at),
+            MIN(first_successful_call_at),
+            MAX(last_call_at),
+            MAX(last_successful_call_at)
+          FROM billing.invoice_destinations
+          WHERE invoice_id=?
+          GROUP BY country_id, network_id, rate",
+      id,
+      id
+    )
+  end
+
+  def detalize_invoice
+    data = destinations.summary
+    self.amount = data.amount
+    self.calls_count = data.calls_count
+    self.successful_calls_count = data.successful_calls_count
+    self.calls_duration = data.calls_duration
+    self.billing_duration = data.billing_duration
+    self.first_call_at = data.first_call_at
+    self.first_successful_call_at = data.first_successful_call_at
+    self.last_call_at = data.last_call_at
+    self.last_successful_call_at = data.last_successful_call_at
+    save!
   end
 end
