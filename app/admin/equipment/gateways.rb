@@ -482,7 +482,7 @@ ActiveAdmin.register Gateway do
       end
       tab :radius do
         f.inputs 'RADIUS' do
-          f.input :radius_accounting_profile, input_html: { class: 'chosen' }
+          f.input :radius_accounting_profile, input_html: { class: 'chosen' }, include_blank: 'None'
         end
       end
     end
