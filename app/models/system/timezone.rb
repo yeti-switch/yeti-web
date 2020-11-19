@@ -21,4 +21,8 @@ class System::Timezone < Yeti::ActiveRecord
   def display_name
     "#{name} | #{abbrev} | #{utc_offset}"
   end
+
+  def time_zone
+    ActiveSupport::TimeZone.new(name)
+  end
 end

@@ -1,0 +1,66 @@
+# frozen_string_literal: true
+
+module BillingInvoice
+  module CalculatePeriod
+    # Calculates current period_start, next period_end, and next type_id by current period_end.
+    class Next < ApplicationService
+      # @!method account [Account]
+      parameter :account, required: true
+      # @!method is_vendor [Boolean]
+      parameter :is_vendor, required: true
+      # @!method period_end [Time]
+      parameter :period_end, required: true
+
+      # @raise [ApplicationService::Error]
+      # @return [Hash(:start_time, :next_end_time, :next_type_id)]
+      #  :start_time [Time] invoice.start_date (period_start) for provided period_end.
+      #  :next_end_time [Time] invoice.end_date for next invoice period.
+      #  :next_type_id [Integer] invoice.type_id for next invoice period.
+      def call
+        validate!
+
+        end_time = period_end.in_time_zone(time_zone)
+        start_time = period_class.period_start_for(time_zone, end_time)
+
+        next_start_time = end_time
+        next_end_time = period_class.period_end_for(time_zone, next_start_time)
+
+        next_type_id = BillingInvoice::CalculatePeriod.invoice_type_id(
+            start_time: next_start_time,
+            end_time: next_end_time,
+            period_class: period_class
+          )
+
+        {
+          start_time: start_time,
+          next_end_time: next_end_time,
+          next_type_id: next_type_id
+        }
+      end
+
+      private
+
+      # @raise [ApplicationService::Error]
+      def validate!
+        raise Error, 'account is required' if account.nil?
+        raise Error, "failed to find time zone #{account.timezone.name}" if time_zone.nil?
+        raise Error, 'account vendor invoice period is required' if is_vendor && account_invoice_period_id.nil?
+        raise Error, 'account customer invoice period is required' if !is_vendor && account_invoice_period_id.nil?
+      end
+
+      # @!method time_zone [ActiveSupport::TimeZone]
+      define_memoizable :time_zone, apply: lambda {
+        BillingInvoice::CalculatePeriod.time_zone_for(account.timezone.name)
+      }
+
+      # @!method period_class [Class<BillingPeriod::Base>]
+      define_memoizable :period_class, apply: lambda {
+        BillingInvoice::CalculatePeriod.period_class(account_invoice_period_id)
+      }
+
+      def account_invoice_period_id
+        is_vendor ? account.vendor_invoice_period_id : account.customer_invoice_period_id
+      end
+    end
+  end
+end

@@ -2,6 +2,6 @@
 
 module SqlCaller
   class Cdr < Base
-    model_name 'Cdr::Base'
+    model_class 'Cdr::Base'
   end
 end

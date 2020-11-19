@@ -16,7 +16,7 @@ RSpec.describe 'Create new CDR export', js: true do
       visit new_cdr_export_path
 
       fill_in_chosen 'Fields', with: 'success', multiple: true
-      fill_in_chosen 'Fields', with: 'id', multiple: true
+      fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
       fill_in_chosen 'Customer acc id eq', with: "#{account.name} | #{account.id}"
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'

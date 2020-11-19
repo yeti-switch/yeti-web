@@ -74,6 +74,23 @@ class Account < Yeti::ActiveRecord
   scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
+  scope :ready_for_customer_invoice, lambda {
+    # next_customer_invoice_at + max_call_duration => time
+    where('customer_invoice_period_id IS NOT NULL')
+      .where(
+        '(next_customer_invoice_at + MAKE_INTERVAL(secs => COALESCE(max_call_duration, ?))) <= ?',
+        GuiConfig.max_call_duration, Time.now
+      )
+  }
+
+  scope :ready_for_vendor_invoice, lambda {
+    where('vendor_invoice_period_id IS NOT NULL')
+      .where(
+        '(next_vendor_invoice_at + MAKE_INTERVAL(secs => COALESCE(max_call_duration, ?))) <= ?',
+        GuiConfig.max_call_duration, Time.now
+      )
+  }
+
   validates :min_balance, numericality: true, if: -> { min_balance.present? }
   validates :balance, numericality: true
   validates :uuid, :name, uniqueness: true
@@ -120,54 +137,20 @@ class Account < Yeti::ActiveRecord
     @contacts_balance ||= Billing::Contact.where(id: send_balance_notifications_to)
   end
 
-  before_save do
-    if customer_invoice_period_id_changed?
-
-      if customer_invoice_period
-        self.next_customer_invoice_at = customer_invoice_period.next_date_from_now
-        self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_customer_invoice_date, next_customer_invoice_at)
-      else
-        self.next_customer_invoice_at = nil
-        self.next_customer_invoice_type_id = nil
-      end
-    end
-
-    if vendor_invoice_period_id_changed?
-
-      if vendor_invoice_period
-        self.next_vendor_invoice_at = vendor_invoice_period.next_date_from_now
-        self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_vendor_invoice_date, next_vendor_invoice_at)
-      else
-        self.next_vendor_invoice_at = nil
-        self.next_vendor_invoice_type_id = nil
-      end
-    end
-  end
-
   before_destroy :remove_self_from_related_api_access!
 
   def last_customer_invoice_date
-    invoices.for_customer.order('end_date desc').limit(1)
-            .take&.end_date || customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time
+    date = invoices.for_customer.order('end_date desc').limit(1).take&.end_date
+    return date unless date.nil?
+
+    customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time.utc
   end
 
   def last_vendor_invoice_date
-    invoices.for_vendor.order('end_date desc').limit(1)
-            .take&.end_date || vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time
-  end
+    date = invoices.for_vendor.order('end_date desc').limit(1).take&.end_date
+    return date unless date.nil?
 
-  def schedule_next_customer_invoice!
-    last_date = next_customer_invoice_at
-    self.next_customer_invoice_at = customer_invoice_period.next_date(last_date)
-    self.next_customer_invoice_type_id = customer_invoice_period.invoice_type(last_date, next_customer_invoice_at)
-    save!
-  end
-
-  def schedule_next_vendor_invoice!
-    last_date = next_vendor_invoice_at
-    self.next_vendor_invoice_at = vendor_invoice_period.next_date(last_date)
-    self.next_vendor_invoice_type_id = vendor_invoice_period.invoice_type(last_date, next_vendor_invoice_at)
-    save!
+    vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time.utc
   end
 
   # after_update :, if: proc {|obj| obj.vendor_invoice_period_id_changed? }

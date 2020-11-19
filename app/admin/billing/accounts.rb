@@ -32,6 +32,18 @@ ActiveAdmin.register Account do
 
   acts_as_import resource_class: Importing::Account
 
+  controller do
+    def build_new_resource
+      AccountForm.new(*resource_params)
+    end
+
+    def find_resource
+      record = super
+      record = AccountForm.new(record) if params[:action].in? %w[edit update]
+      record
+    end
+  end
+
   scope :all
   scope :vendors_accounts
   scope :customers_accounts
@@ -207,7 +219,7 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.keys
     f.inputs form_title do
       f.input :name
-      f.input :contractor, input_html: { class: 'chosen' }
+      f.input :contractor_id, input_html: { class: 'chosen' }, collection: Contractor.all
       f.input :min_balance
       f.input :max_balance
       f.input :vat
@@ -221,15 +233,15 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
-      f.input :vendor_invoice_period
-      f.input :customer_invoice_period
+      f.input :vendor_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
+      f.input :customer_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
 
-      f.input :vendor_invoice_template
-      f.input :customer_invoice_template
+      f.input :vendor_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
+      f.input :customer_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
 
       f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
       f.input :send_balance_notifications_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
-      f.input :timezone, as: :select, input_html: { class: 'chosen' }
+      f.input :timezone_id, as: :select, input_html: { class: 'chosen' }, collection: System::Timezone.all
       f.input :uuid, as: :string
     end
     f.actions
