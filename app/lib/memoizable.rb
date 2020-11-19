@@ -11,7 +11,7 @@ module Memoizable
   #       @node_id = node_id
   #     end
   #
-  #     define_memoizable :node do
+  #     define_memoizable :node, apply: -> do
   #       Node.find(@node_id) if @node_id
   #     end
   #   end
@@ -33,10 +33,9 @@ module Memoizable
     # @param apply [Proc] - provide lambda instead of block here if needed
     # @yield once per instance
     # @yieldreturn value that will be memoized and returned on next accesses to this method
-    def define_memoizable(name, variable: nil, apply: nil, &block)
+    def define_memoizable(name, variable: nil, apply: nil)
       variable_name = :"@#{variable || "__memoized_#{name.to_s.gsub(/[!?]+/, '__')}"}"
-      apply = block if block_given?
-      raise ArgumentError, 'provide :apply callable object or block' if apply.nil?
+      raise ArgumentError, 'provide :apply callable object' if apply.nil?
 
       define_method(name) do
         return instance_variable_get(variable_name) if instance_variable_defined?(variable_name)

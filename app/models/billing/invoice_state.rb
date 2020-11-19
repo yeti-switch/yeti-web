@@ -17,4 +17,5 @@ class Billing::InvoiceState < Cdr::Base
 
   PENDING = 1
   APPROVED = 2
+  NEW = 3
 end

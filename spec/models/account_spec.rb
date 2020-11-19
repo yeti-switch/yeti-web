@@ -47,17 +47,143 @@
 #
 
 RSpec.describe Account, type: :model do
-  it do
-    is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
-    is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+  let(:server_time_zone) { ActiveSupport::TimeZone.new Rails.application.config.time_zone }
+  let(:utc_timezone) { System::Timezone.find_by!(abbrev: 'UTC') }
+  let(:la_timezone) { FactoryBot.create(:timezone, :los_angeles) }
+  let(:kiev_timezone) { FactoryBot.create(:timezone, :kiev) }
+
+  shared_examples :updates_account do
+    # let(:expected_account_attrs) {}
+
+    it 'updates account', :aggregate_failures do
+      expect(subject).to eq(true)
+      expect(account.errors.messages).to be_empty
+      expect(account.reload).to have_attributes(expected_account_attrs)
+    end
   end
 
-  context '#destroy' do
-    let!(:account) { create(:account) }
+  describe '.create' do
+    subject do
+      travel_to(current_time) do
+        described_class.create(create_params)
+      end
+    end
 
+    let(:current_time) { Time.now }
+    let(:create_params) { { name: 'test', contractor_id: contractor.id } }
+    let!(:contractor) { FactoryBot.create(:vendor) }
+    let(:default_params) do
+      {
+        balance: 0.0,
+        min_balance: 0.0,
+        max_balance: 0.0,
+        origination_capacity: nil,
+        termination_capacity: nil,
+        customer_invoice_period_id: nil,
+        customer_invoice_template_id: nil,
+        vendor_invoice_template_id: nil,
+        next_customer_invoice_at: nil,
+        next_vendor_invoice_at: nil,
+        vendor_invoice_period_id: nil,
+        send_invoices_to: nil,
+        timezone_id: utc_timezone.id,
+        next_customer_invoice_type_id: nil,
+        next_vendor_invoice_type_id: nil,
+        balance_high_threshold: nil,
+        balance_low_threshold: nil,
+        send_balance_notifications_to: nil,
+        external_id: nil,
+        vat: 0.0,
+        total_capacity: nil,
+        destination_rate_limit: nil,
+        max_call_duration: nil
+      }
+    end
+    let(:expected_account_attrs) { create_params.reverse_merge(default_params) }
+
+    shared_examples :creates_account do
+      include_examples :creates_record do
+        let(:expected_record_attrs) { expected_account_attrs }
+      end
+    end
+
+    context 'with empty params' do
+      let(:create_params) { {} }
+
+      include_examples :does_not_create_record, errors: {
+        name: "can't be blank",
+        contractor: "can't be blank"
+      }
+    end
+
+    context 'with only required params' do
+      let(:expected_account_attrs) do
+        super().merge next_customer_invoice_at: nil,
+                      next_customer_invoice_type_id: nil,
+                      customer_invoice_period_id: nil,
+                      next_vendor_invoice_at: nil,
+                      next_vendor_invoice_type_id: nil,
+                      vendor_invoice_period_id: nil
+      end
+
+      include_examples :creates_account
+
+      context 'with customer contractor' do
+        let!(:contractor) { FactoryBot.create(:customer) }
+
+        include_examples :creates_account
+      end
+    end
+  end
+
+  describe '#valid?' do
+    it do
+      is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    end
+
+    it do
+      is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+    end
+
+    context '#min_balance' do
+      it { is_expected.to_not allow_value('').for :min_balance }
+      it { is_expected.to_not allow_value(nil).for :min_balance }
+      it { is_expected.to_not allow_value('string').for :min_balance }
+
+      it { is_expected.to allow_value(2).for :min_balance }
+      it { is_expected.to allow_value(2.5).for :min_balance }
+
+      it "is_expected.to have error: can't be blank" do
+        record = FactoryBot.build :account, min_balance: nil
+        expect(record).to_not be_valid
+        expect(record.errors[:min_balance]).to include "can't be blank"
+      end
+    end
+
+    context '#max_balance' do
+      it { is_expected.to_not allow_value('').for :max_balance }
+      it { is_expected.to_not allow_value(nil).for :max_balance }
+      it { is_expected.to_not allow_value('string').for :max_balance }
+
+      it { is_expected.to allow_value(2).for :max_balance }
+      it { is_expected.to allow_value(2.5).for :max_balance }
+
+      it "is_expected.to have error: can't be blank" do
+        record = FactoryBot.build :account, max_balance: nil
+        expect(record).to_not be_valid
+        expect(record.errors[:max_balance]).to include "can't be blank"
+      end
+    end
+  end
+
+  describe '#destroy!' do
     subject do
       account.destroy!
     end
+
+    let!(:account) { create(:account) }
 
     context 'wihtout linked ApiAccess records' do
       let!(:api_access) { create(:api_access) }

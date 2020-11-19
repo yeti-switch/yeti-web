@@ -72,6 +72,7 @@ SELECT pg_catalog.setval('invoice_networks_id_seq', 1, false);
 -- Data for Name: invoice_states; Type: TABLE DATA; Schema: billing; Owner: yeti
 --
 
+INSERT INTO invoice_states VALUES (3, 'New');
 INSERT INTO invoice_states VALUES (2, 'Approved');
 INSERT INTO invoice_states VALUES (1, 'Pending');
 

@@ -2,21 +2,48 @@
 
 FactoryBot.define do
   factory :invoice, class: Billing::Invoice do
-    transient do
-      _acc { create(:account) }
+    start_date { 7.days.ago.utc }
+    end_date { 1.day.ago.utc }
+    state_id { Billing::InvoiceState::NEW }
+
+    after(:build) do |record, _ev|
+      record.contractor_id ||= record.account&.contractor_id
+    end
+
+    trait :vendor do
+      vendor_invoice { true }
+    end
+
+    trait :customer do
+      vendor_invoice { false }
     end
 
     trait :manual do
-      vendor_invoice { false }
-      start_date     { 7.days.ago.utc }
-      end_date       { 1.day.ago.utc }
-      type_id        { Billing::InvoiceType::MANUAL }
-      account        { _acc }
-      contractor     { _acc.contractor }
+      type_id { Billing::InvoiceType::MANUAL }
     end
 
-    trait :filled do
-      state { Billing::InvoiceState.take }
+    trait :auto_full do
+      type_id { Billing::InvoiceType::AUTO_FULL }
+    end
+
+    trait :auto_partial do
+      type_id { Billing::InvoiceType::AUTO_FULL }
+    end
+
+    trait :new do
+      state_id { Billing::InvoiceState::NEW }
+    end
+
+    trait :pending do
+      state_id { Billing::InvoiceState::PENDING }
+    end
+
+    trait :approved do
+      state_id { Billing::InvoiceState::APPROVED }
+    end
+
+    trait :with_vendor_account do
+      account { FactoryBot.create(:account, contractor: FactoryBot.create(:vendor)) }
     end
   end
 end

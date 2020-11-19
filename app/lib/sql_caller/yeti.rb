@@ -2,6 +2,6 @@
 
 module SqlCaller
   class Yeti < Base
-    model_name 'ActiveRecord::Base'
+    model_class 'ActiveRecord::Base'
   end
 end

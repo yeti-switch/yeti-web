@@ -44,15 +44,6 @@ class Billing::Invoice < Cdr::Base
   has_many :destinations, -> { where('successful_calls_count>0') }, class_name: 'Billing::InvoiceDestination', foreign_key: :invoice_id
   has_many :networks, -> { where('successful_calls_count>0') }, class_name: 'Billing::InvoiceNetwork', foreign_key: :invoice_id
 
-  before_destroy do
-    cdrs = Cdr::Cdr.where('time_start >= ? AND time_start <= ? ', start_date, end_date)
-    if vendor_invoice
-      cdrs.where(vendor_invoice_id: id).update_all(vendor_invoice_id: nil)
-    else
-      cdrs.where(customer_invoice_id: id).update_all(customer_invoice_id: nil)
-    end
-  end
-
   validates :contractor, :account, :end_date, :start_date, presence: true
 
   has_paper_trail class_name: 'AuditLogItem'
@@ -61,182 +52,7 @@ class Billing::Invoice < Cdr::Base
   scope :for_vendor, -> { where vendor_invoice: true }
   scope :approved, -> { where state_id: Billing::InvoiceState::APPROVED }
   scope :pending, -> { where state_id: Billing::InvoiceState::PENDING }
-
-  before_create do
-    execute_sp('SET LOCAL TIMEZONE TO ?', account.timezone.name)
-  end
-
-  # after_create do
-  #   execute_sp("SELECT * FROM billing.invoice_generate(?)", self.id)
-  # end
-
-  after_create do
-    execute_sp('lock table billing.invoices in exclusive mode') # see ticket #108
-    # we need lock customer-vendor pair. Now I use lock table for this - this is dirty workaround
-    # But we just need prevent vendor's invoice generation if any customer's invoice was generating now and vice versa
-
-    if start_date.nil?
-      previous_invoice = Billing::Invoice.where(account_id: account_id).order('end_date desc').limit(1).take
-      raise "Can't detect date start" if previous_invoice.nil?
-
-      self.start_date = previous_invoice.end_date
-    end
-
-    if vendor_invoice # vendor invoice
-
-      res = fetch_sp_val('select 1 from cdr.cdr WHERE vendor_acc_id=? AND time_start>=? and time_start<? AND vendor_invoice_id IS NOT NULL LIMIT 1',
-                         account_id, start_date, end_date)
-      unless res.nil?
-        raise 'billing.invoice_generate: some vendor invoices already found for this interval'
-      end
-
-      execute_sp("
-        WITH invoice_data as (
-          UPDATE cdr.cdr SET vendor_invoice_id=?
-          WHERE
-            vendor_acc_id =? AND
-            time_start>=? AND
-            time_start<? AND
-            vendor_invoice_id IS NULL
-          RETURNING *
-        )
-        insert into billing.invoice_destinations(
-          dst_prefix, country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
-          count(id),  -- calls count
-          count(nullif(success,false)),  -- succesful_calls_count
-          sum(duration),
-          sum(vendor_duration),
-          sum(vendor_price),
-          ?,
-          min(time_start),
-          min(case success when true then time_start else null end),
-          max(time_start),
-          max(case success when true then time_start else null end)
-        from invoice_data
-        group by dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
-                 id, account_id, start_date, end_date, id)
-
-      execute_sp("
-        insert into billing.invoice_networks(
-          country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          country_id, network_id, rate,
-          sum(calls_count),
-          sum(successful_calls_count),
-          sum(calls_duration),
-          sum(billing_duration),
-          sum(amount),
-          ?,
-          min(first_call_at),
-          min(first_successful_call_at),
-          max(last_call_at),
-          max(last_successful_call_at)
-        from billing.invoice_destinations
-        where invoice_id=?
-        group by country_id, network_id, rate",
-                 id, id)
-
-    else # customer invoice
-
-      res = fetch_sp_val('select 1 from cdr.cdr WHERE customer_acc_id=? AND time_start>=? and time_start<? AND customer_invoice_id IS NOT NULL LIMIT 1',
-                         account_id, start_date, end_date)
-      unless res.nil?
-        raise 'billing.invoice_generate: some customer invoices already found for this interval'
-      end
-
-      execute_sp("
-        WITH invoice_data as (
-          UPDATE cdr.cdr SET customer_invoice_id=?
-          WHERE
-            customer_acc_id =? AND
-            time_start >=? AND
-            time_start < ? AND
-            customer_invoice_id IS NULL
-          RETURNING *
-        )
-        insert into billing.invoice_destinations(
-          dst_prefix, country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
-          count(nullif(is_last_cdr,false)),
-          count(nullif((success AND is_last_cdr),false)),  -- succesful_calls_count
-          sum(duration),
-          sum(customer_duration),
-          sum(customer_price),
-          ?,
-          min(time_start),
-          min(case success when true then time_start else null end),
-          max(time_start),
-          max(case success when true then time_start else null end)
-        from invoice_data
-        group by destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
-                 id, account_id, start_date, end_date, id)
-
-      execute_sp("
-        insert into billing.invoice_networks(
-          country_id, network_id, rate,
-          calls_count,
-          successful_calls_count,
-          calls_duration,
-          billing_duration,
-          amount,
-          invoice_id,
-          first_call_at,
-          first_successful_call_at,
-          last_call_at,
-          last_successful_call_at
-        ) select
-          country_id, network_id, rate,
-          sum(calls_count),
-          sum(successful_calls_count),
-          sum(calls_duration),
-          sum(billing_duration),
-          sum(amount),
-          ?,
-          min(first_call_at),
-          min(first_successful_call_at),
-          max(last_call_at),
-          max(last_successful_call_at)
-        from billing.invoice_destinations
-        where invoice_id=?
-        group by country_id, network_id, rate",
-                 id, id)
-
-    end
-    detalize_invoice
-  end
+  scope :new_invoices, -> { where state_id: Billing::InvoiceState::NEW }
 
   after_initialize do
     if new_record?
@@ -244,25 +60,8 @@ class Billing::Invoice < Cdr::Base
       self.calls_count ||= 0
       self.calls_duration ||= 0
       self.billing_duration ||= 0
+      self.state_id = Billing::InvoiceState::NEW
     end
-  end
-
-  def detalize_invoice
-    data = destinations.summary
-    self.amount = data.amount
-    self.calls_count = data.calls_count
-    self.successful_calls_count = data.successful_calls_count
-    self.calls_duration = data.calls_duration
-    self.billing_duration = data.billing_duration
-    self.first_call_at = data.first_call_at
-    self.first_successful_call_at = data.first_successful_call_at
-    self.last_call_at = data.last_call_at
-    self.last_successful_call_at = data.last_successful_call_at
-    save!
-  end
-
-  def cdr_filter_for_invoice
-    "time_start=>'#{start_date.strftime('%Y-%m-%d %H%M%S.%L')}' AND time_end <'#{end_date.strftime('%Y-%m-%d %H%M%S.%L')}'"
   end
 
   def display_name
@@ -273,10 +72,12 @@ class Billing::Invoice < Cdr::Base
     vendor_invoice? ? 'Vendor' : 'Customer'
   end
 
+  # todo service
   def approve
-    self.state_id = Billing::InvoiceState::APPROVED
-    save
-    send_email
+    transaction do
+      update!(state_id: Billing::InvoiceState::APPROVED)
+      send_email
+    end
   end
 
   def approvable?
@@ -287,12 +88,13 @@ class Billing::Invoice < Cdr::Base
     Billing::InvoiceState::PENDING == state_id
   end
 
+  # todo service
   def regenerate_document
     transaction do
       invoice_document&.delete
       begin
-        InvoiceDocs.new(self).save!
-      rescue InvoiceDocs::TemplateUndefined => e
+        BillingInvoice::GenerateDocument.call(invoice: self)
+      rescue BillingInvoice::GenerateDocument::TemplateUndefined => e
         Rails.logger.info { e.message }
       end
     end
@@ -303,14 +105,6 @@ class Billing::Invoice < Cdr::Base
       account.vendor_invoice_period
     else
       account.customer_invoice_period
-    end
-  end
-
-  def odt_template
-    if vendor_invoice?
-      account.vendor_invoice_template
-    else
-      account.customer_invoice_template
     end
   end
 
@@ -337,6 +131,7 @@ class Billing::Invoice < Cdr::Base
   end
 
   # FIX this copy paste
+  # todo service
   def send_email
     invoice_document&.send_invoice
   end
