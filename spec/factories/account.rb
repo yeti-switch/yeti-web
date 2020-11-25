@@ -29,11 +29,19 @@ FactoryBot.define do
       customer_invoice_period { Billing::InvoicePeriod.find(Billing::InvoicePeriod::DAILY_ID) }
       contractor { build(:contractor, vendor: true) }
       timezone { System::Timezone.take || build(:timezone) }
-      payments { build_list :payment, 2 }
-      invoices { build_list :invoice, 2, :manual, :filled }
-      api_access { build_list :api_access, 2 }
-      customers_auths { build_list :customers_auth, 2 }
-      dialpeers { build_list :dialpeer, 2 }
+      payments { build_list(:payment, 2) }
+      # invoices { build_list(:invoice, 2, :manual, :pending) }
+      api_access { build_list(:api_access, 2) }
+      customers_auths { build_list(:customers_auth, 2) }
+      dialpeers { build_list(:dialpeer, 2) }
+    end
+
+    trait :vendor_weekly do
+      vendor_invoice_period_id { Billing::InvoicePeriod::WEEKLY_ID }
+    end
+
+    trait :customer_weekly do
+      customer_invoice_period_id { Billing::InvoicePeriod::WEEKLY_ID }
     end
   end
 end

@@ -11,7 +11,7 @@ class RealtimeData::IncomingRegistration < YetiResource
 
   has_one :gateway, class_name: 'Gateway', foreign_key: :auth_id
 
-  define_memoizable :id do
+  define_memoizable :id, apply: lambda {
     SecureRandom.uuid
-  end
+  }
 end

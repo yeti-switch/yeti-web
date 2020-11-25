@@ -55,7 +55,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     end
     panel 'test' do
       'You can use next placeholders:'
-      table_for InvoiceDocs.replaces_list.each do |_x|
+      table_for BillingInvoice::GenerateDocument.replaces_list.each do |_x|
         column :placeholder do |c|
           strong do
             "[#{c.to_s.upcase}]"

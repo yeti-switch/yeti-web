@@ -6,6 +6,8 @@ source 'https://rubygems.org'
 gem 'active_record_extended'
 gem 'activemodel-serializers-xml'
 gem 'pg'
+gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
+gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', '2.1.4' # https://github.com/rack/rack/issues/1628
 gem 'rails', '~> 5.2.4'
 gem 'responders'

@@ -16,6 +16,23 @@ GIT
       net-ldap (>= 0.16.0)
 
 GIT
+  remote: https://github.com/didww/pg_advisory_lock.git
+  revision: 8f9e8975bcff8acaa6cb27bea2f0b5464df78acc
+  specs:
+    pg_advisory_lock (0.2.0)
+      activerecord
+      activesupport
+      pg_sql_caller
+
+GIT
+  remote: https://github.com/didww/pg_sql_caller.git
+  revision: c87b59db82eeb77a7bccf6900687eda7410f5e57
+  specs:
+    pg_sql_caller (0.1.0)
+      activerecord
+      activesupport
+
+GIT
   remote: https://github.com/didww/prometheus_exporter.git
   revision: d8cd0abd6163d920dd34e7ed4f210320fddbfa27
   branch: didww
@@ -632,6 +649,8 @@ DEPENDENCIES
   parallel
   parallel_tests
   pg
+  pg_advisory_lock!
+  pg_sql_caller!
   pgq_prometheus
   prometheus_exporter!
   puma (~> 4.3)
