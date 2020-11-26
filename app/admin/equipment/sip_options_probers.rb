@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Equipment::Registration do
-  menu parent: 'Equipment', priority: 81, label: 'Registrations'
+ActiveAdmin.register Equipment::SipOptionsProber do
+  menu parent: 'Equipment', priority: 82, label: 'SIP Options probers'
   config.batch_actions = true
 
   includes :pop, :node, :transport_protocol, :proxy_transport_protocol, :sip_schema
@@ -11,29 +11,29 @@ ActiveAdmin.register Equipment::Registration do
                  [:node_name, proc { |row| row.node.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
-                 :domain,
-                 :username,
-                 :display_username,
-                 :auth_user,
+                 :ruri_domain,
+                 :ruri_username,
+                 :from_uri,
+                 :to_uri,
+                 :auth_username,
                  :auth_password,
                  :proxy,
                  [:proxy_transport_protocol_name, proc { |row| row.proxy_transport_protocol.try(:name) }],
-                 :contact,
-                 :expire,
-                 :force_expire,
-                 :retry_delay,
-                 :max_attempts
+                 :contact_uri,
+                 :interval,
+                 :sip_interface_name,
+                 :append_headers
 
-  acts_as_import resource_class: Importing::Registration
+  # acts_as_import resource_class: Importing::Registration
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
 
-  permit_params :name, :enabled, :pop_id, :node_id, :domain, :username, :display_username,
-                :auth_user, :proxy, :contact,
-                :auth_password,
-                :expire, :force_expire,
-                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id
+  permit_params :name, :enabled, :pop_id, :node_id,
+                :ruri_domain, :ruri_username, :from_uri, :to_uri, :contact_uri,
+                :auth_username, :proxy, :auth_password,
+                :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id, :append_headers,
+                :inteval, :sip_interface_name
 
   index do
     selectable_column
@@ -45,18 +45,17 @@ ActiveAdmin.register Equipment::Registration do
     column :node
     column :sip_schema
     column :transport_protocol
-    column :domain
-    column :username
-    column :display_username
-    column :auth_user
-    column :auth_password
+    column :ruri_domain
+    column :ruri_username
+    column :from_uri
+    column :to_uri
+    column :auth_username
     column :proxy
     column :proxy_transport_protocol
-    column :contact
-    column :expire
-    column :force_expire
-    column :retry_delay
-    column :max_attempts
+    column :contact_uri
+    column :interval
+    column :sip_interface_name
+    column :append_headers
   end
 
   filter :id
@@ -79,18 +78,18 @@ ActiveAdmin.register Equipment::Registration do
                      input_html: { class: 'chosen' }
       f.input :sip_schema, as: :select, include_blank: false
       f.input :transport_protocol, as: :select, include_blank: false
-      f.input :domain
-      f.input :username
-      f.input :display_username
-      f.input :auth_user
+      f.input :ruri_domain
+      f.input :ruri_username
+      f.input :from_uri
+      f.input :to_uri
+      f.input :auth_username
       f.input :auth_password, as: :string
       f.input :proxy
       f.input :proxy_transport_protocol, as: :select, include_blank: false
-      f.input :contact
-      f.input :expire
-      f.input :force_expire
-      f.input :retry_delay
-      f.input :max_attempts
+      f.input :contact_uri
+      f.input :interval
+      f.input :sip_interface_name
+      f.input :append_headers
     end
     f.actions
   end
@@ -103,18 +102,20 @@ ActiveAdmin.register Equipment::Registration do
       row :node
       row :sip_schema
       row :transport_protocol
-      row :domain
-      row :username
-      row :display_username
-      row :auth_user
+      row :ruri_domain
+      row :ruri_username
+      row :from_uri
+      row :to_uri
+      row :auth_username
       row :auth_password
       row :proxy
       row :proxy_transport_protocol
-      row :contact
-      row :expire
-      row :force_expire
-      row :retry_delay
-      row :max_attempts
+      row :contact_uri
+      row :interval
+      row :sip_interface_name
+      row :append_headers
+      row :updated_at
+      row :created_at
     end
   end
 end
