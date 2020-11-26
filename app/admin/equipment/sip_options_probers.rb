@@ -24,7 +24,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
                  :sip_interface_name,
                  :append_headers
 
-  #acts_as_import resource_class: Importing::Registration
+  # acts_as_import resource_class: Importing::Registration
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
@@ -71,11 +71,11 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       f.input :name
       f.input :enabled
       f.input :pop, as: :select,
-              include_blank: 'Any',
-              input_html: { class: 'chosen' }
+                    include_blank: 'Any',
+                    input_html: { class: 'chosen' }
       f.input :node, as: :select,
-              include_blank: 'Any',
-              input_html: { class: 'chosen' }
+                     include_blank: 'Any',
+                     input_html: { class: 'chosen' }
       f.input :sip_schema, as: :select, include_blank: false
       f.input :transport_protocol, as: :select, include_blank: false
       f.input :ruri_domain

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: class4.sip_options_probers
@@ -37,7 +39,6 @@
 #  sip_options_probers_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 class Equipment::SipOptionsProber < Yeti::ActiveRecord
-
   self.table_name = 'class4.sip_options_probers'
 
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
@@ -50,9 +51,9 @@ class Equipment::SipOptionsProber < Yeti::ActiveRecord
   validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
-#  validates :contact_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
-#  validates :from_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
-#  validates :to_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
+  #  validates :contact_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
+  #  validates :from_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
+  #  validates :to_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -61,5 +62,5 @@ class Equipment::SipOptionsProber < Yeti::ActiveRecord
   end
 
   include Yeti::ResourceStatus
-#  include Yeti::RegistrationReloader
+  #  include Yeti::RegistrationReloader
 end
