@@ -32266,6 +32266,48 @@ $$;
 
 
 --
+-- Name: load_sip_options_probers(integer, integer); Type: FUNCTION; Schema: switch18; Owner: -
+--
+
+CREATE FUNCTION switch18.load_sip_options_probers(i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(id integer, name character varying, ruri_domain character varying, ruri_username character varying, transport_protocol_id smallint, sip_schema_id smallint, from_uri character varying, to_uri character varying, contact_uri character varying, proxy character varying, proxy_transport_protocol_id smallint, "interval" smallint, append_headers character varying, sip_interface_name character varying, auth_username character varying, auth_password character varying, created_at timestamp with time zone, updated_at timestamp with time zone)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+        o.id,
+        o.name,
+        o.ruri_domain,
+        o.ruri_username,
+        o.transport_protocol_id,
+        o.sip_schema_id,
+        o.from_uri,
+        o.to_uri,
+        o.contact_uri,
+        o.proxy,
+        o.proxy_transport_protocol_id,
+        o.interval,
+        o.append_headers,
+        o.sip_interface_name,
+        o.auth_username,
+        o.auth_password,
+        o.created_at,
+        o.updated_at
+  FROM
+    class4.sip_options_probers o
+  WHERE
+    o.enabled AND
+    (
+      (o.pop_id is null and o.node_id is null) OR
+      (o.pop_id is not null and o.node_id is null and o.pop_id in (select n.pop_id from sys.nodes n where n.id=i_node_id)) OR
+      (o.node_id is not null and o.node_id=i_node_id )
+    ) AND
+    (i_registration_id is null OR o.id=i_registration_id);
+end;
+$$;
+
+
+--
 -- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch18; Owner: -
 --
 
@@ -40268,6 +40310,55 @@ ALTER SEQUENCE class4.session_refresh_methods_id_seq OWNED BY class4.session_ref
 
 
 --
+-- Name: sip_options_probers; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.sip_options_probers (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    pop_id smallint,
+    node_id smallint,
+    ruri_domain character varying NOT NULL,
+    ruri_username character varying NOT NULL,
+    transport_protocol_id smallint DEFAULT 1 NOT NULL,
+    sip_schema_id smallint DEFAULT 1 NOT NULL,
+    from_uri character varying,
+    to_uri character varying,
+    contact_uri character varying,
+    proxy character varying,
+    proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
+    "interval" smallint DEFAULT 60 NOT NULL,
+    append_headers character varying,
+    sip_interface_name character varying,
+    auth_username character varying,
+    auth_password character varying,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+--
+-- Name: sip_options_probers_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.sip_options_probers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_options_probers_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.sip_options_probers_id_seq OWNED BY class4.sip_options_probers.id;
+
+
+--
 -- Name: sortings; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -43607,6 +43698,13 @@ ALTER TABLE ONLY class4.session_refresh_methods ALTER COLUMN id SET DEFAULT next
 
 
 --
+-- Name: sip_options_probers id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers ALTER COLUMN id SET DEFAULT nextval('class4.sip_options_probers_id_seq'::regclass);
+
+
+--
 -- Name: sortings id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -45071,6 +45169,22 @@ ALTER TABLE ONLY class4.sdp_c_location
 
 ALTER TABLE ONLY class4.session_refresh_methods
     ADD CONSTRAINT session_refresh_methods_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_options_probers sip_options_probers_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_name_key UNIQUE (name);
+
+
+--
+-- Name: sip_options_probers sip_options_probers_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_pkey PRIMARY KEY (id);
 
 
 --
@@ -47282,6 +47396,46 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
+-- Name: sip_options_probers sip_options_probers_node_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_node_id_fkey FOREIGN KEY (node_id) REFERENCES sys.nodes(id);
+
+
+--
+-- Name: sip_options_probers sip_options_probers_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES sys.pops(id);
+
+
+--
+-- Name: sip_options_probers sip_options_probers_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
+
+
+--
+-- Name: sip_options_probers sip_options_probers_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
+
+
+--
+-- Name: sip_options_probers sip_options_probers_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.sip_options_probers
+    ADD CONSTRAINT sip_options_probers_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES class4.transport_protocols(id);
+
+
+--
 -- Name: contacts contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
@@ -47429,8 +47583,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -47499,6 +47652,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20201015195346'),
 ('20201015202253'),
 ('20201023122436'),
-('20201103092516');
+('20201103092516'),
+('20201111201356');
 
 
