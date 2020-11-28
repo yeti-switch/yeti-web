@@ -27,7 +27,7 @@ module BillingInvoice
         invoice
       end
     rescue ActiveRecord::RecordInvalid => e
-      message = e.record ? e.errors.full_messages.join(', ') : e.message
+      message = e.record ? e.record.errors.full_messages.join(', ') : e.message
       raise Error, message
     end
 
@@ -44,12 +44,14 @@ module BillingInvoice
     end
 
     def have_covered_invoices?
-      start_time_server = start_time.in_time_zone(Time.zone)
+      start_date = start_time.in_time_zone(Time.zone)
+      end_date = end_time.in_time_zone(Time.zone)
 
-      Billing::Invoice
-        .where(account_id: account.id, vendor_invoice: is_vendor)
-        .where('end_date >= ?', start_time_server)
-        .any?
+      covered_invoices = Billing::Invoice
+                         .where(account_id: account.id, vendor_invoice: is_vendor)
+                         .cover_period(start_date, end_date)
+
+      covered_invoices.any?
     end
   end
 end

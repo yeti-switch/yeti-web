@@ -5,6 +5,7 @@ FactoryBot.define do
     start_date { 7.days.ago.utc }
     end_date { 1.day.ago.utc }
     state_id { Billing::InvoiceState::NEW }
+    type_id { Billing::InvoiceType::MANUAL }
 
     after(:build) do |record, _ev|
       record.contractor_id ||= record.account&.contractor_id
