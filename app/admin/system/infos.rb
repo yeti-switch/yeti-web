@@ -15,6 +15,7 @@ ActiveAdmin.register_page 'Info' do
             column :total_size
           end
         end
+
         panel 'Build info' do
           data = {
             ui_version: Rails.application.config.app_build_info.fetch('version', 'unknown'),
@@ -31,6 +32,14 @@ ActiveAdmin.register_page 'Info' do
             end
           end
         end
+
+        if SystemInfoConfigs.loaded?
+          SystemInfoConfigs.configs.each do |name, config|
+            panel(name) { attributes_table_for(config, *config.members) }
+          end
+        else
+          text_node 'No System Info'
+        end
       end
       column do
         panel "TOP10 tables in CDR database. Full size: #{Cdr::Base.db_size}" do
@@ -42,6 +51,7 @@ ActiveAdmin.register_page 'Info' do
             column :total_size
           end
         end
+
         panel 'Replication' do
           if RsReplication.any?
             table_for(RsReplication.order('application_name')) do
