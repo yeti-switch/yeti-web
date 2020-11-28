@@ -21,6 +21,7 @@ RSpec.describe BillingInvoice::Generate do
       next_vendor_invoice_at: account_time_zone.now.beginning_of_day
     }
   end
+  before { Billing::Invoice.where(account_id: account.id).delete_all }
 
   context 'with invoice period daily' do
     before do

@@ -130,10 +130,10 @@ module BillingInvoice
               time_start < ?
           ) invoice_data
           GROUP BY destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
+          invoice.id,
           invoice.account_id,
           invoice.start_date,
-          invoice.end_date,
-          invoice.id
+          invoice.end_date
         )
 
       SqlCaller::Cdr.execute(
