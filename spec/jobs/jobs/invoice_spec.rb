@@ -29,7 +29,6 @@ RSpec.describe Jobs::Invoice, '#execute' do
 
   let(:config_max_call_duration) { 1_200 }
   before do
-    Billing::Invoice.where(account_id: account.id).delete_all
     allow(GuiConfig).to receive(:max_call_duration).and_return(config_max_call_duration)
   end
 

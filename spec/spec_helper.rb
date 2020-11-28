@@ -139,41 +139,36 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
+    MultiDatabaseCleaner.clean_with(:truncation)
 
-  config.before(:suite) do
-    # Create partition for current+next monthes if not exists
+    # Create partition for current+next months if not exists
     Cdr::Cdr.add_partitions
     Cdr::AuthLog.add_partitions
     Cdr::RtpStatistic.add_partitions
     Log::ApiLog.add_partitions
-  end
 
-  config.before(:suite) do
     RSpecTestPrometheusClient.instance = RSpecTestPrometheusClient.new
     PrometheusExporter::Client.default = RSpecTestPrometheusClient.instance
   end
 
   config.before(:each) do
     RSpecTestPrometheusClient.instance.clear!
-  end
 
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
     allow(Raven).to receive(:send_event).with(a_kind_of(Hash))
+
+    MultiDatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, js: true) do
-    DatabaseCleaner.strategy = :truncation
+  config.before(:each, type: :feature) do
+    MultiDatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do
-    DatabaseCleaner.start
+    MultiDatabaseCleaner.start
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
+    MultiDatabaseCleaner.clean
   end
 
   config.expect_with :rspec do |c|
@@ -206,3 +201,16 @@ Shoulda::Matchers.configure do |config|
     with.library :active_model
   end
 end
+
+class FindRecordStrategy
+  def association(_runner)
+    raise 'associations not allowed for FactoryBot find strategy'
+  end
+
+  def result(evaluation)
+    attrs = evaluation.object.attributes.reject { |_, val| val.blank? }
+    evaluation.object.class.find_by!(attrs.symbolize_keys)
+  end
+end
+
+FactoryBot.register_strategy(:find_record, FindRecordStrategy)

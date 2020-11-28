@@ -2,9 +2,6 @@
 
 RSpec.describe 'Index Invoices', type: :feature do
   include_context :login_as_admin
-  before do
-    Billing::Invoice.delete_all
-  end
   let!(:invoices) { FactoryBot.create_list(:invoice, 2, :manual, :pending, :with_vendor_account) }
 
   it 'n+1 checks' do
