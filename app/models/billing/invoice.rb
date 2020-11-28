@@ -44,7 +44,22 @@ class Billing::Invoice < Cdr::Base
   has_many :destinations, -> { where('successful_calls_count>0') }, class_name: 'Billing::InvoiceDestination', foreign_key: :invoice_id
   has_many :networks, -> { where('successful_calls_count>0') }, class_name: 'Billing::InvoiceNetwork', foreign_key: :invoice_id
 
-  validates :contractor, :account, :end_date, :start_date, presence: true
+  validates :contractor,
+            :account,
+            :end_date,
+            :start_date,
+            :state,
+            :type,
+            presence: true
+
+  validate :validate_dates
+  validates :vendor_invoice, inclusion: { in: [true, false] }
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }
+
+  validates :billing_duration,
+            :calls_count,
+            :calls_duration,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   has_paper_trail class_name: 'AuditLogItem'
 
@@ -53,6 +68,14 @@ class Billing::Invoice < Cdr::Base
   scope :approved, -> { where state_id: Billing::InvoiceState::APPROVED }
   scope :pending, -> { where state_id: Billing::InvoiceState::PENDING }
   scope :new_invoices, -> { where state_id: Billing::InvoiceState::NEW }
+
+  scope :cover_period, lambda { |start_date, end_date|
+    where '(start_date < ? AND end_date > ?) OR (start_date >= ? AND start_date < ?)',
+          start_date,
+          start_date,
+          start_date,
+          end_date
+  }
 
   after_initialize do
     if new_record?
@@ -116,11 +139,11 @@ class Billing::Invoice < Cdr::Base
 
   def self.totals
     row = extending(ActsAsTotalsRelation).totals_row_by(
-      'sum(amount) as total_amount',
-      'sum(calls_count) as total_calls_count',
-      'sum(calls_duration) as total_calls_duration',
-      'sum(billing_duration) as total_billing_duration'
-    )
+        'sum(amount) as total_amount',
+        'sum(calls_count) as total_calls_count',
+        'sum(calls_duration) as total_calls_duration',
+        'sum(billing_duration) as total_billing_duration'
+      )
     Totals.new(*row)
   end
 
@@ -134,5 +157,16 @@ class Billing::Invoice < Cdr::Base
   # todo service
   def send_email
     invoice_document&.send_invoice
+  end
+
+  private
+
+  def validate_dates
+    errors.add(:start_date, :blank) if start_date.blank?
+    errors.add(:end_date, :blank) if end_date.blank?
+
+    if start_date && end_date && start_date >= end_date
+      errors.add(:end_date, 'must be greater than start_date')
+    end
   end
 end
