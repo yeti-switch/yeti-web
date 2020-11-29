@@ -7,14 +7,14 @@
 # Contributing, Development setup
 
 
-It is strongly recommended to use PostgreSQL version 11.
+It is strongly recommended to use PostgreSQL version 13.
 The easiest way to install it - is to use Debian Linux and follow official PostgreSQL instruction
 https://www.postgresql.org/download/linux/debian/
 
 You need to install:
 
 ```sh
-sudo apt-get install postgresql-11 postgresql-contrib-11 postgresql-11-prefix postgresql-11-pgq3
+sudo apt-get install postgresql-13 postgresql-contrib-13 postgresql-13-prefix postgresql-13-pgq3 postgresql-13-pgq-ext postgresql-13-yeti
 sudo apt-get install -t stretch-pgdg libpq-dev
 ```
 In addition you need to compile or install from .deb package Yeti PostgreSQL extension https://github.com/yeti-switch/yeti-pg-ext
@@ -26,6 +26,8 @@ bundle install
 ```
 
 Then create `config/database.yml`, example is `database.yml.example`. Notice this project uses two databases main "yeti" and second database "cdr"
+
+Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.distr`.
 
 And run command to create development database:
 
@@ -41,8 +43,8 @@ login `admin` and password `111111`
 Then prepare test database(do not use db:test:prepare).
 
 ```sh
-RAILS_ENV=test bundle exec rake db:create db:structure:load db:migrate
-RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
+RAILS_ENV=test bundle exec rake db:drop db:create db:structure:load db:migrate
+RAILS_ENV=test bundle exec rake db:second_base:drop:_unsafe db:second_base:create db:second_base:structure:load db:second_base:migrate
 RAILS_ENV=test bundle exec rake db:seed
 ```
 
@@ -105,7 +107,7 @@ For development purpouse it is convinient to use PostgreSQL from Docker image. H
 * Run following commands in terminal from `yeti-web` projects directory
 
   ```
-  sudo docker build -t yeti_postgres -f ci/pgsql.Dockerfile .
+  sudo docker build -t yeti_postgres -f ci/pg13.Dockerfile .
   ```
 
 * Start the Postgres Server using docker image, with remapped port to 3010 and volume "yetiPgData" to persist data after docker container stops:
