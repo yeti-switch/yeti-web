@@ -17,3 +17,6 @@ no_policy_rule = Rails.configuration.yeti_web['role_policy']['when_no_policy_cla
 if allowed_rules.exclude? no_policy_rule&.to_sym
   raise StandardError, "invalid value #{no_policy_rule.inspect} for yeti_web.yml role_policy.when_no_policy_class, valid values #{allowed_rules}"
 end
+
+system_info_path = Rails.root.join('config/system_info.yml')
+SystemInfoConfigs.load_file(system_info_path) if File.exist?(system_info_path)
