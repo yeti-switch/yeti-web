@@ -15,7 +15,7 @@ class Routing::Simulation
     end
 
     def rateplan
-      Rateplan.find_by(id: rateplan_id)
+      Routing::Rateplan.find_by(id: rateplan_id)
     end
 
     def routing_plan
@@ -58,11 +58,17 @@ class Routing::Simulation
   attr_accessor :transport_protocol_id, :remote_ip, :remote_port, :src_number, :dst_number, :pop_id,
                 :uri_domain, :from_domain, :to_domain,
                 :x_yeti_auth, :release_mode,
-                :pai, :ppi, :privacy, :rpid, :rpid_privacy
+                :pai, :ppi, :privacy, :rpid, :rpid_privacy,
+                :auth_id
 
   validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, presence: true
 
   validates :pop_id, :transport_protocol_id, numericality: true
+
+  validates :auth_id, numericality: {
+    allow_nil: true,
+    only_integer: true
+  }
 
   validates :remote_port, numericality: {
     allow_nil: true,
@@ -74,6 +80,12 @@ class Routing::Simulation
   validate :ip_is_valid
 
   attr_reader :notices
+
+  #  before_save :set_nil_auth_id
+  #
+  #def set_nil_auth_id
+  # self[auth_id] = nil if self[auth_id].blank?
+  #end
 
   def initialize(attrs = {})
     @attrs = attrs
@@ -109,25 +121,70 @@ class Routing::Simulation
         1,
         1
       )
+      spname = release_mode ? "route_release" : "route_debug"
       @debug = Yeti::ActiveRecord.fetch_sp(
-        "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.debug(?::smallint,?::inet,?::integer,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.#{spname}(
+          ?::integer, /* i_node_id integer */
+          ?::integer, /* i_pop_id integer  */
+          ?::smallint, /* i_protocol_id smallint */
+          ?::inet, /* i_remote_ip inet */
+          ?::integer, /* i_remote_port integer */
+          ?::inet, /* i_local_ip inet */
+          ?::integer, /* i_local_port integer */
+          ?, /* i_from_dsp character varying */
+          ?, /* i_from_name character varying */
+          ?, /* i_from_domain character varying */
+          ?, /* i_from_port integer */
+          ?, /* i_to_name character varying */
+          ?, /* i_to_domain character varying */
+          ?::integer, /* i_to_port integer */
+          ?, /* i_contact_name character varying */
+          ?, /* i_contact_domain character varying */
+          ?::integer, /* i_contact_port integer */
+          ?, /* i_uri_name character varying */
+          ?, /* i_uri_domain character varying */
+          ?, /* i_auth_id integer */
+          ?, /* i_x_yeti_auth character varying, */
+          ?, /* i_diversion character varying */
+          ?, /* i_x_orig_ip inet */
+          ?, /* i_x_orig_port integer */
+          ?, /* i_x_orig_protocol_id smallint */
+          ?, /* i_pai character varying */
+          ?, /* i_ppi character varying */
+          ?, /* i_privacy character varying */
+          ?, /* i_rpid character varying */
+          ? /* i_rpid_privacy character varying */
+          )",
+        1, #node_id
+        pop_id.to_i,
         transport_protocol_id.to_i,
         remote_ip,
         remote_port.to_i,
+        '127.0.0.1', #local_ip
+        5060, #local_port
+        'from_name', #from name
         src_number,
-        dst_number,
-        pop_id.to_i,
-        uri_domain,
         from_domain,
+        5060,
+        dst_number,
         to_domain,
+        5060,
+        src_number,
+        remote_ip,
+        remote_port,
+        dst_number,
+        uri_domain,
+        auth_id.to_i,
         x_yeti_auth,
-        release_mode,
+        nil,
+        nil,
+        nil,
+        nil,
         pai,
         ppi,
         privacy,
         rpid,
-        rpid_privacy
-      )
+        rpid_privacy)
     rescue Exception => e
       Rails.logger.info 'EXCEPTION'
       raise e
