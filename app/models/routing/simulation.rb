@@ -119,7 +119,7 @@ class Routing::Simulation
         1,
         1
       )
-      spname = release_mode ? "route_release" : "route_debug"
+      spname = release_mode ? 'route_release' : 'route_debug'
       @debug = Yeti::ActiveRecord.fetch_sp(
         "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.#{spname}(
           ?::integer, /* i_node_id integer */
@@ -153,14 +153,14 @@ class Routing::Simulation
           ?, /* i_rpid character varying */
           ? /* i_rpid_privacy character varying */
           )",
-        1, #node_id
+        1, # node_id
         pop_id.to_i,
         transport_protocol_id.to_i,
         remote_ip,
         remote_port.to_i,
-        '127.0.0.1', #local_ip
-        5060, #local_port
-        'from_name', #from name
+        '127.0.0.1', # local_ip
+        5060, # local_port
+        'from_name', # from name
         src_number,
         from_domain,
         5060,
@@ -182,7 +182,8 @@ class Routing::Simulation
         ppi,
         privacy,
         rpid,
-        rpid_privacy)
+        rpid_privacy
+      )
     rescue Exception => e
       Rails.logger.info 'EXCEPTION'
       raise e
