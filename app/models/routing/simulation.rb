@@ -81,12 +81,6 @@ class Routing::Simulation
 
   attr_reader :notices
 
-  #  before_save :set_nil_auth_id
-  #
-  #def set_nil_auth_id
-  # self[auth_id] = nil if self[auth_id].blank?
-  #end
-
   def initialize(attrs = {})
     @attrs = attrs
     if attrs.present?
@@ -94,6 +88,10 @@ class Routing::Simulation
         send("#{k}=", v) if respond_to?("#{k}=")
       end
     end
+  end
+
+  def auth_id=(val)
+    @auth_id = val.presence
   end
 
   def has_attributes?
