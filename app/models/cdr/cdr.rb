@@ -282,7 +282,7 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def attempts
-    if local_tag.empty?
+    if local_tag.blank?
       self.class.where('cdr.id=?', id)
     else
       self.class.where(time_start: time_start).where(local_tag: local_tag).order('routing_attempt desc')
