@@ -175,6 +175,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     redirect_to routing_simulation_path(
       anchor: 'detailed',
       routing_simulation: {
+        auth_id: resource.customer_auth&.require_incoming_auth ? resource.orig_gw_id : nil,
         transport_protocol_id: proto,
         remote_ip: resource.auth_orig_ip,
         remote_port: resource.auth_orig_port,
