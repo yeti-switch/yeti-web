@@ -42,12 +42,8 @@ RSpec.describe CdrBilling do
   let(:vendor_reverse) { false }
   let(:customer_reverse) { false }
 
-  let(:logger) do
-    double('Logger::Syslog')
-  end
-
   let(:consumer) do
-    described_class.new(logger,
+    described_class.new(TestContext.logger,
                         'cdr_billing',
                         'cdr_billin',
                         CONFIG)
