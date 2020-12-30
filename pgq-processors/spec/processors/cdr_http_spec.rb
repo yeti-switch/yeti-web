@@ -13,9 +13,8 @@ RSpec.describe CdrHttp do
     ]
   end
 
-  let(:logger)     { double('Logger::Syslog') }
-  let(:consumer)   { CdrHttp.new(logger, 'cdr_billing', 'cdr_http', config) }
-  let(:method)     { 'POST' }
+  let(:consumer) { CdrHttp.new(TestContext.logger, 'cdr_billing', 'cdr_http', config) }
+  let(:method) { 'POST' }
   let(:cdr_fields) { 'all' }
   let(:config) do
     {
@@ -28,8 +27,6 @@ RSpec.describe CdrHttp do
   before :each do
     allow(consumer).to receive(:config).and_return config
     stub_request config['method'].downcase.to_sym, /#{config['url']}/
-    allow(logger).to receive(:info)
-    allow(logger).to receive(:error)
     subject
   end
 
