@@ -7,7 +7,7 @@ module BillingPeriod
 
     def period_end_for(time)
       date = time.to_date
-      today_week_end = Date.commercial(date.year, date.cweek).end_of_week
+      today_week_end = Date.commercial(date.cwyear, date.cweek).end_of_week
       if date.month == today_week_end.month
         period_end_date = today_week_end + 1.day
       else
@@ -19,7 +19,7 @@ module BillingPeriod
 
     def period_start_for(period_end)
       period_end_date = period_end.to_date
-      week_start = Date.commercial(period_end_date.year, period_end_date.cweek)
+      week_start = Date.commercial(period_end_date.cwyear, period_end_date.cweek)
 
       if period_end_date == week_start
         prev_week_start = period_end_date - 1.week
