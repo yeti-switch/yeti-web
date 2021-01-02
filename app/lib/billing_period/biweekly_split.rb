@@ -7,7 +7,7 @@ module BillingPeriod
 
     def period_end_for(time)
       date = time.to_date
-      today_week_start = Date.commercial(date.year, date.cweek)
+      today_week_start = Date.commercial(date.cwyear, date.cweek)
       next_biweekly_start = [
         today_week_start + 2.weeks, today_week_start + 1.week
       ].detect { |d| d.cweek.even? }
@@ -23,7 +23,7 @@ module BillingPeriod
 
     def period_start_for(period_end)
       period_end_date = period_end.to_date
-      period_end_week_start = Date.commercial(period_end_date.year, period_end_date.cweek)
+      period_end_week_start = Date.commercial(period_end_date.cwyear, period_end_date.cweek)
 
       if period_end_date == period_end_week_start
         prev_biweekly_start = [
