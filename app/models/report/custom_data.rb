@@ -98,7 +98,7 @@ class Report::CustomData < Cdr::Base
 
   belongs_to :report, class_name: 'Report::CustomCdr', foreign_key: :report_id
 
-  belongs_to :rateplan, class_name: 'Rateplan', foreign_key: :rateplan_id
+  belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
   belongs_to :routing_group, class_name: 'RoutingGroup', foreign_key: :routing_group_id
 
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
