@@ -14,8 +14,7 @@ RSpec.describe CdrAmqp do
     ]
   end
 
-  let(:logger)     { double('Logger::Syslog') }
-  let(:consumer)   { CdrAmqp.new(logger, 'cdr_streaming', 'cdr_amqp', config) }
+  let(:consumer) { CdrAmqp.new(TestContext.logger, 'cdr_streaming', 'cdr_amqp', config) }
   let(:config) do
     {
       connect:
@@ -38,8 +37,6 @@ RSpec.describe CdrAmqp do
   let(:queue) { channel.queue 'cdr_streaming' }
 
   before :each do
-    allow(logger).to receive(:info)
-    allow(logger).to receive(:error)
     allow(AmqpFactory.instance).to receive(:get_connection).and_return connection
     allow(consumer).to receive(:event_done?)
     allow(consumer).to receive(:event_done!)
