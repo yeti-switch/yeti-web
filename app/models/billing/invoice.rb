@@ -118,7 +118,7 @@ class Billing::Invoice < Cdr::Base
       begin
         BillingInvoice::GenerateDocument.call(invoice: self)
       rescue BillingInvoice::GenerateDocument::TemplateUndefined => e
-        Rails.logger.info { e.message }
+        Rails.logger.info { "#{e.class}: #{e.message}" }
       end
     end
   end

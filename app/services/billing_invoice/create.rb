@@ -43,6 +43,7 @@ module BillingInvoice
         raise Error, 'start_time must be less then end_time' if start_time.to_i >= end_time.to_i
         raise Error, 'is_vendor must be passed' if is_vendor.nil?
         raise Error, "end_time can't be in future" if end_time.to_i > Time.now.to_i
+
         CaptureError.with_extra(covered_invoice_ids: covered_invoice_ids) do
           raise Error, 'have invoice inside provided period' if covered_invoice_ids.any?
         end
