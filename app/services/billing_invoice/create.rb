@@ -34,16 +34,23 @@ module BillingInvoice
     private
 
     def validate!
-      raise Error, 'type_id must be present' if type_id.blank?
-      raise Error, 'start_time must be present' if start_time.blank?
-      raise Error, 'end_time must be present' if end_time.blank?
-      raise Error, 'start_time must be less then end_time' if start_time.to_i >= end_time.to_i
-      raise Error, 'is_vendor must be passed' if is_vendor.nil?
-      raise Error, "end_time can't be in future" if end_time.to_i > Time.now.to_i
-      raise Error, 'have invoice inside provided period' if have_covered_invoices?
+      start_date = start_time.in_time_zone(Time.zone)
+      end_date = end_time.in_time_zone(Time.zone)
+      CaptureError.with_extra(start_date: start_date, end_date: end_date, params: _params) do
+        raise Error, 'type_id must be present' if type_id.blank?
+        raise Error, 'start_time must be present' if start_time.blank?
+        raise Error, 'end_time must be present' if end_time.blank?
+        raise Error, 'start_time must be less then end_time' if start_time.to_i >= end_time.to_i
+        raise Error, 'is_vendor must be passed' if is_vendor.nil?
+        raise Error, "end_time can't be in future" if end_time.to_i > Time.now.to_i
+
+        CaptureError.with_extra(covered_invoice_ids: covered_invoice_ids) do
+          raise Error, 'have invoice inside provided period' if covered_invoice_ids.any?
+        end
+      end
     end
 
-    def have_covered_invoices?
+    define_memoizable :covered_invoice_ids, apply: lambda {
       start_date = start_time.in_time_zone(Time.zone)
       end_date = end_time.in_time_zone(Time.zone)
 
@@ -51,7 +58,7 @@ module BillingInvoice
                          .where(account_id: account.id, vendor_invoice: is_vendor)
                          .cover_period(start_date, end_date)
 
-      covered_invoices.any?
-    end
+      covered_invoices.pluck(:id)
+    }
   end
 end

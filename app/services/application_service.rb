@@ -22,7 +22,9 @@ class ApplicationService
     # @param name [Symbol]
     # @param required [Boolean] default false
     def parameter(name, required: false)
-      attr_accessor(name)
+      name = name.to_sym
+      define_method(name) { @_params[name] }
+      define_method("#{name}=") { |value| @_params[name] = value }
       _required_parameters.push(name) if required
     end
 
@@ -34,6 +36,7 @@ class ApplicationService
 
   class_attribute :logger, instance_writer: false, default: Rails.logger
   class_attribute :_required_parameters, instance_writer: false, default: []
+  attr_reader :_params
 
   # @param params [Hash,ActionController::Parameters]
   def initialize(params = {})
@@ -54,6 +57,7 @@ class ApplicationService
   private
 
   def assign_params(params)
+    @_params = {}
     params.each do |key, value|
       public_send("#{key}=", value)
     end

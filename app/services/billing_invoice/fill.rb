@@ -190,7 +190,6 @@ module BillingInvoice
       BillingInvoice::GenerateDocument.call(invoice: invoice)
     rescue BillingInvoice::GenerateDocument::TemplateUndefined => e
       Rails.logger.info { "#{e.class}: #{e.message}" }
-      capture_error(e)
     end
   end
 end
