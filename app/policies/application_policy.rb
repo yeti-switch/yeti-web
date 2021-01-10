@@ -49,7 +49,7 @@ class ApplicationPolicy
   alias_rule :destroy_all?, to: :destroy? # DSL acts_as_import_preview
   alias_rule :batch_insert?, to: :create? # DSL acts_as_import_preview
   alias_rule :batch_update?, to: :update? # DSL acts_as_import_preview
-  alias_rule :batch_perform, to: :perform? # for batch_action
+  alias_rule :batch_perform?, to: :perform? # for batch_action
 
   # DSL acts_as_import_preview
   def batch_replace?
