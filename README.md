@@ -14,10 +14,15 @@ https://www.postgresql.org/download/linux/debian/
 You need to install:
 
 ```sh
-sudo apt-get install postgresql-13 postgresql-contrib-13 postgresql-13-prefix postgresql-13-pgq3 postgresql-13-pgq-ext postgresql-13-yeti
-sudo apt-get install -t stretch-pgdg libpq-dev
+curl http://pkg.yeti-switch.org/key.gpg | sudo apt-key add -
+curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| sudo apt-key add -
+sudo add-apt-repository "deb http://pkg.yeti-switch.org/debian/buster unstable main"
+sudo add-apt-repository "deb http://deb.debian.org/debian buster main buster non-free"
+sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"
+sudo apt-get install postgresql-13 postgresql-contrib-13 postgresql-13-prefix postgresql-13-pgq3 postgresql-13-pgq-ext postgresql-13-yeti postgresql-13-pllua
+sudo apt-get install -t buster-pgdg libpq-dev
 ```
-In addition you need to compile or install from .deb package Yeti PostgreSQL extension https://github.com/yeti-switch/yeti-pg-ext
+In addition you need to compile or install from .deb package Yeti PostgreSQL extension `postgresql-13-yeti` https://github.com/yeti-switch/yeti-pg-ext
 
 Then fork and clone yeti-web repository and run:
 
