@@ -7,6 +7,8 @@ class Api::Rest::Admin::ContractorResource < BaseResource
 
   filter :name
 
+  relationship_filter :smtp_connection
+
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
   ransack_filter :vendor, type: :boolean
