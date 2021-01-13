@@ -40,6 +40,30 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
 
   filter :name # DEPRECATED
 
+  relationship_filter :contractor
+  relationship_filter :session_refresh_method
+  relationship_filter :sdp_alines_filter_type
+  relationship_filter :term_disconnect_policy
+  relationship_filter :gateway_group
+  relationship_filter :diversion_policy
+  relationship_filter :pop
+  relationship_filter :codec_group
+  relationship_filter :sdp_c_location
+  relationship_filter :sdp_c_location
+  relationship_filter :sensor
+  relationship_filter :sensor_level
+  relationship_filter :dtmf_receive_mode
+  relationship_filter :dtmf_send_mode
+  relationship_filter :transport_protocol
+  relationship_filter :term_proxy_transport_protocol
+  relationship_filter :orig_proxy_transport_protocol
+  relationship_filter :rel100_mode
+  relationship_filter :rx_inband_dtmf_filtering_mode
+  relationship_filter :tx_inband_dtmf_filtering_mode
+  relationship_filter :network_protocol_priority
+  relationship_filter :media_encryption_mode
+  relationship_filter :sip_schema
+
   ransack_filter :host, type: :string
   ransack_filter :port, type: :number
   ransack_filter :src_rewrite_rule, type: :string
