@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
   include_context :json_api_admin_helpers, type: :'customers-auths'
 
@@ -216,8 +218,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by radius_auth_profile.id' do
-      let!(:radius_auth_profile) { create(:audit_log_item) }
-      let!(:other_radius_auth_profile) { create(:audit_log_item) }
+      let!(:radius_auth_profile) { create(:auth_profile) }
+      let!(:other_radius_auth_profile) { create(:auth_profile) }
       let!(:customers_auths) { create_list(:customers_auth, 3, radius_auth_profile: radius_auth_profile) }
       before { create(:customers_auth, radius_auth_profile: other_radius_auth_profile) }
 
@@ -234,8 +236,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by radius_accounting_profile.id' do
-      let!(:radius_accounting_profile) { create(:audit_log_item) }
-      let!(:other_radius_accounting_profile) { create(:audit_log_item) }
+      let!(:radius_accounting_profile) { create(:accounting_profile) }
+      let!(:other_radius_accounting_profile) { create(:accounting_profile) }
       let!(:customers_auths) { create_list(:customers_auth, 3, radius_accounting_profile: radius_accounting_profile) }
       before { create(:customers_auth, radius_accounting_profile: other_radius_accounting_profile) }
 
