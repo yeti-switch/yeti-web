@@ -49,7 +49,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   relationship_filter :pop
   relationship_filter :codec_group
   relationship_filter :sdp_c_location
-  relationship_filter :sdp_c_location
   relationship_filter :sensor
   relationship_filter :sensor_level
   relationship_filter :dtmf_receive_mode
