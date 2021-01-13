@@ -109,7 +109,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     context 'with filter by diversion_policy.id' do
       let!(:diversion_policy) { DiversionPolicy.first }
-      let!(:other_diversion_policy) { DiversionPolicy.second }
+      let!(:other_diversion_policy) { DiversionPolicy.create!(id: 2, name: 'Test') }
       let!(:gateways) { create_list(:gateway, 3, diversion_policy: diversion_policy) }
       before { create(:gateway, diversion_policy: other_diversion_policy ) }
 
