@@ -162,8 +162,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by dst_numberlist.id' do
-      let!(:dst_numberlist) { Routing::Numberlist.first }
-      let!(:other_dst_numberlist) { Routing::Numberlist.second }
+      let!(:dst_numberlist) { create(:numberlist) }
+      let!(:other_dst_numberlist) { create(:numberlist) }
       let!(:customers_auths) { create_list(:customers_auth, 3, dst_numberlist: dst_numberlist) }
       before { create(:customers_auth, dst_numberlist: other_dst_numberlist) }
 
@@ -180,8 +180,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by src_numberlist.id' do
-      let!(:src_numberlist) { Routing::Numberlist.first }
-      let!(:other_src_numberlist) { Routing::Numberlist.second }
+      let!(:src_numberlist) { create(:numberlist) }
+      let!(:other_src_numberlist) { create(:numberlist) }
       let!(:customers_auths) { create_list(:customers_auth, 3, src_numberlist: src_numberlist) }
       before { create(:customers_auth, src_numberlist: other_src_numberlist) }
 
@@ -216,8 +216,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by radius_auth_profile.id' do
-      let!(:radius_auth_profile) { Equipment::Radius::AuthProfile.first }
-      let!(:other_radius_auth_profile) { Equipment::Radius::AuthProfile.second }
+      let!(:radius_auth_profile) { create(:audit_log_item) }
+      let!(:other_radius_auth_profile) { create(:audit_log_item) }
       let!(:customers_auths) { create_list(:customers_auth, 3, radius_auth_profile: radius_auth_profile) }
       before { create(:customers_auth, radius_auth_profile: other_radius_auth_profile) }
 
@@ -234,8 +234,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by radius_accounting_profile.id' do
-      let!(:radius_accounting_profile) { Equipment::Radius::AccountingProfile.first }
-      let!(:other_radius_accounting_profile) { Equipment::Radius::AccountingProfile.second }
+      let!(:radius_accounting_profile) { create(:audit_log_item) }
+      let!(:other_radius_accounting_profile) { create(:audit_log_item) }
       let!(:customers_auths) { create_list(:customers_auth, 3, radius_accounting_profile: radius_accounting_profile) }
       before { create(:customers_auth, radius_accounting_profile: other_radius_accounting_profile) }
 
