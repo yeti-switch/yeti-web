@@ -27,6 +27,21 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
 
   filter :name
 
+  relationship_filter :customer
+  relationship_filter :rateplan
+  relationship_filter :routing_plan
+  relationship_filter :gateway
+  relationship_filter :account
+  relationship_filter :dump_level
+  relationship_filter :diversion_policy
+  relationship_filter :pop
+  relationship_filter :dst_numberlist
+  relationship_filter :src_numberlist
+  relationship_filter :tag_action
+  relationship_filter :radius_auth_profile
+  relationship_filter :radius_accounting_profile
+  relationship_filter :transport_protocol
+
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
   ransack_filter :reject_calls, type: :boolean
