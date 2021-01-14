@@ -3,7 +3,7 @@
 RSpec.describe Api::Rest::Admin::ContractorsController, type: :request do
   include_context :json_api_admin_helpers, type: :contractors
 
-  describe 'GET /api/rest/admin/contractor' do
+  describe 'GET /api/rest/admin/contractors' do
     subject do
       get json_api_request_path, params: request_params, headers: json_api_request_headers
     end

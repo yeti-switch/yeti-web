@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
   include_context :json_api_admin_helpers, type: :gateways
 
@@ -93,7 +95,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       let!(:gateway_group) { create(:gateway_group) }
       let!(:other_gateway_group) { create(:gateway_group) }
       let!(:gateways) { create_list(:gateway, 3, gateway_group: gateway_group, contractor: gateway_group.vendor) }
-      before { create(:gateway, gateway_group: other_gateway_group, contractor: other_gateway_group.vendor ) }
+      before { create(:gateway, gateway_group: other_gateway_group, contractor: other_gateway_group.vendor) }
 
       let(:request_params) do
         { filter: { 'gateway_group.id': gateway_group.id } }
@@ -111,7 +113,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       let!(:diversion_policy) { DiversionPolicy.first }
       let!(:other_diversion_policy) { DiversionPolicy.create!(id: 2, name: 'Test') }
       let!(:gateways) { create_list(:gateway, 3, diversion_policy: diversion_policy) }
-      before { create(:gateway, diversion_policy: other_diversion_policy ) }
+      before { create(:gateway, diversion_policy: other_diversion_policy) }
 
       let(:request_params) do
         { filter: { 'diversion_policy.id': diversion_policy.id } }
@@ -321,7 +323,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         actual_ids = response_json[:data].map { |r| r[:id] }
         expect(actual_ids).to match_array gateways.map(&:id).map(&:to_s)
       end
-      end
+    end
 
     context 'with filter by rel100_mode.id' do
       let!(:rel100_mode) { Equipment::GatewayRel100Mode.first }
