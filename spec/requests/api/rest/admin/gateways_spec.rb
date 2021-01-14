@@ -3,7 +3,7 @@
 RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
   include_context :json_api_admin_helpers, type: :gateways
 
-  after { puts pretty_response_json }
+  # after { puts pretty_response_json }
 
   gateway_relationship_names = %i[
     contractor
@@ -541,5 +541,150 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       let(:json_api_record_id) { record_id }
       let(:json_api_record_attributes) { gateway_response_attributes }
     end
+  end
+
+  describe 'POST /api/rest/admin/gateways' do
+    subject do
+      post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:contractor) { FactoryBot.create(:customer) }
+    let(:session_refresh_method) { SessionRefreshMethod.first }
+    let(:sdp_alines_filter_type) { FilterType.first }
+    let(:codec_group) { FactoryBot.create(:codec_group) }
+    let(:sdp_c_location) { SdpCLocation.first }
+    let(:sensor) { FactoryBot.create(:sensor) }
+    let(:sensor_level) { System::SensorLevel.first }
+    let(:dtmf_receive_mode) { System::DtmfReceiveMode.first }
+    let(:dtmf_send_mode) { System::DtmfSendMode.first }
+    let(:transport_protocol) { Equipment::TransportProtocol.first }
+    let(:term_proxy_transport_protocol) { Equipment::TransportProtocol.first }
+    let(:orig_proxy_transport_protocol) { Equipment::TransportProtocol.first }
+    let(:rel100_mode) { Equipment::GatewayRel100Mode.first }
+    let(:rx_inband_dtmf_filtering_mode) { Equipment::GatewayInbandDtmfFilteringMode.first }
+    let(:tx_inband_dtmf_filtering_mode) { Equipment::GatewayInbandDtmfFilteringMode.first }
+    let(:network_protocol_priority) { Equipment::GatewayNetworkProtocolPriority.first }
+    let(:media_encryption_mode) { Equipment::GatewayMediaEncryptionMode.first }
+    let(:sip_schema) { System::SipSchema.first }
+
+    let(:gateway) { FactoryBot.build(:gateway) }
+
+    let(:json_api_request_attributes) do
+      {
+        'name': gateway.name,
+        'enabled': gateway.enabled,
+        'priority': gateway.priority,
+        'weight': gateway.weight,
+        'acd-limit': gateway.acd_limit,
+        'asr-limit': gateway.asr_limit,
+        'host': gateway.host
+      }
+    end
+
+    let(:gateway_response_attributes) do
+      {
+        'name': gateway.name,
+        'enabled': gateway.enabled,
+        'priority': gateway.priority,
+        'weight': gateway.weight,
+        'acd-limit': gateway.acd_limit,
+        'asr-limit': gateway.asr_limit,
+        'allow-origination': gateway.allow_origination,
+        'allow-termination': gateway.allow_termination,
+        'sst-enabled': gateway.sst_enabled,
+        'host': gateway.host,
+        'port': gateway.port,
+        'resolve-ruri': gateway.resolve_ruri,
+        'diversion-rewrite-rule': gateway.diversion_rewrite_rule,
+        'diversion-rewrite-result': gateway.diversion_rewrite_result,
+        'src-name-rewrite-rule': gateway.src_name_rewrite_rule,
+        'src-name-rewrite-result': gateway.src_name_rewrite_result,
+        'src-rewrite-rule': gateway.src_rewrite_rule,
+        'src-rewrite-result': gateway.src_rewrite_result,
+        'dst-rewrite-rule': gateway.dst_rewrite_rule,
+        'dst-rewrite-result': gateway.dst_rewrite_result,
+        'auth-enabled': gateway.auth_enabled,
+        'auth-user': gateway.auth_user,
+        'auth-password': gateway.auth_password,
+        'auth-from-user': gateway.auth_from_user,
+        'auth-from-domain': gateway.auth_from_domain,
+        'term-use-outbound-proxy': gateway.term_use_outbound_proxy,
+        'term-force-outbound-proxy': gateway.term_force_outbound_proxy,
+        'term-outbound-proxy': gateway.term_outbound_proxy,
+        'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
+        'term-next-hop': gateway.term_next_hop,
+        'term-append-headers-req': gateway.term_append_headers_req,
+        'sdp-alines-filter-list': gateway.sdp_alines_filter_list,
+        'ringing-timeout': gateway.ringing_timeout,
+        'relay-options': gateway.relay_options,
+        'relay-reinvite': gateway.relay_reinvite,
+        'relay-hold': gateway.relay_hold,
+        'relay-prack': gateway.relay_prack,
+        'relay-update': gateway.relay_update,
+        'suppress-early-media': gateway.suppress_early_media,
+        'fake-180-timer': gateway.fake_180_timer,
+        'transit-headers-from-origination': gateway.transit_headers_from_origination,
+        'transit-headers-from-termination': gateway.transit_headers_from_termination,
+        'sip-interface-name': gateway.sip_interface_name,
+        'allow-1xx-without-to-tag': gateway.allow_1xx_without_to_tag,
+        'sip-timer-b': gateway.sip_timer_b,
+        'dns-srv-failover-timer': gateway.dns_srv_failover_timer,
+        'anonymize-sdp': gateway.anonymize_sdp,
+        'proxy-media': gateway.proxy_media,
+        'single-codec-in-200ok': gateway.single_codec_in_200ok,
+        'transparent-seqno': gateway.transparent_seqno,
+        'transparent-ssrc': gateway.transparent_ssrc,
+        'force-symmetric-rtp': gateway.force_symmetric_rtp,
+        'symmetric-rtp-nonstop': gateway.symmetric_rtp_nonstop,
+        'symmetric-rtp-ignore-rtcp': gateway.symmetric_rtp_ignore_rtcp,
+        'force-dtmf-relay': gateway.force_dtmf_relay,
+        'rtp-ping': gateway.rtp_ping,
+        'rtp-timeout': gateway.rtp_timeout,
+        'filter-noaudio-streams': gateway.filter_noaudio_streams,
+        'rtp-relay-timestamp-aligning': gateway.rtp_relay_timestamp_aligning,
+        'rtp-force-relay-cn': gateway.rtp_force_relay_cn
+      }
+    end
+
+    let(:json_api_request_body) do
+      {
+        data: {
+          type: json_api_resource_type,
+          attributes: json_api_request_attributes,
+          relationships: json_api_request_relationships
+        }
+      }
+    end
+    let(:json_api_request_relationships) do
+      {
+        'contractor': { data: { id: contractor.id.to_s, type: 'contractors' } },
+        'session-refresh-method': { data: { id: session_refresh_method.id.to_s, type: 'session-refresh-methods' } },
+        'sdp-alines-filter-type': { data: { id: sdp_alines_filter_type.id.to_s, type: 'filter-types' } },
+        'codec-group': { data: { id: codec_group.id.to_s, type: 'codec-groups' } },
+        'sdp-c-location': { data: { id: sdp_c_location.id.to_s, type: 'sdp-c-locations' } },
+        'sensor-level': { data: { id: sensor_level.id.to_s, type: 'sensor-levels' } },
+        'dtmf-receive-mode': { data: { id: dtmf_receive_mode.id.to_s, type: 'dtmf-receive-modes' } },
+        'dtmf-send-mode': { data: { id: dtmf_send_mode.id.to_s, type: 'dtmf-send-modes' } },
+        'transport-protocol': { data: { id: transport_protocol.id.to_s, type: 'transport-protocols' } },
+        'term-proxy-transport-protocol': { data: { id: term_proxy_transport_protocol.id.to_s, type: 'transport-protocols' } },
+        'orig-proxy-transport-protocol': { data: { id: orig_proxy_transport_protocol.id.to_s, type: 'transport-protocols' } },
+        'rel100-mode': { data: { id: rel100_mode.id.to_s, type: 'gateway-rel100-modes' } },
+        'rx-inband-dtmf-filtering-mode': { data: { id: rx_inband_dtmf_filtering_mode.id.to_s, type: 'gateway-inband-dtmf-filtering-modes' } },
+        'tx-inband-dtmf-filtering-mode': { data: { id: tx_inband_dtmf_filtering_mode.id.to_s, type: 'gateway-inband-dtmf-filtering-modes' } },
+        'network-protocol-priority': { data: { id: network_protocol_priority.id.to_s, type: 'gateway-network-protocol-priorities' } },
+        'media-encryption-mode': { data: { id: media_encryption_mode.id.to_s, type: 'gateway-media-encryption-modes' } },
+        'sip-schema': { data: { id: sip_schema.id.to_s, type: 'sip-schemas' } }
+      }
+    end
+
+    let(:last_gateway) { Gateway.last! }
+
+    include_examples :returns_json_api_record, relationships: gateway_relationship_names, status: 201 do
+      let(:json_api_record_id) { last_gateway.id.to_s }
+      # Without all attributes test 'expect(actual_relationships).to match_array(relationships)' was falid
+      let(:json_api_record_attributes) { gateway_response_attributes }
+    end
+
+    include_examples :changes_records_qty_of, Gateway, by: 1
   end
 end
