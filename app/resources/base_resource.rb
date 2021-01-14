@@ -22,4 +22,12 @@ class BaseResource < JSONAPI::Resource
              apply: ->(records, values, _opts) { builder.apply(records, values) }
     end
   end
+
+  def self.relationship_filter(name, options = {})
+    foreign_key = options.fetch(:foreign_key, :"#{name}_id")
+
+    filter :"#{name}.id", apply: lambda { |records, values, _options|
+      records.where(foreign_key => values)
+    }
+  end
 end
