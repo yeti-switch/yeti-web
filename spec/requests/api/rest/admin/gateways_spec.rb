@@ -3,7 +3,7 @@
 RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
   include_context :json_api_admin_helpers, type: :gateways
 
-  # after { puts pretty_response_json }
+  after { puts pretty_response_json }
 
   gateway_relationship_names = %i[
     contractor
@@ -527,7 +527,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rtp-timeout': gateway.rtp_timeout,
         'filter-noaudio-streams': gateway.filter_noaudio_streams,
         'rtp-relay-timestamp-aligning': gateway.rtp_relay_timestamp_aligning,
-        'rtp-force-relay-cn': gateway.rtp_force_relay_cn
+        'rtp-force-relay-cn': gateway.rtp_force_relay_cn,
+        'incoming-auth-username': gateway.incoming_auth_username,
+        'incoming-auth-password': gateway.incoming_auth_password
       }
     end
 
@@ -574,7 +576,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         weight: 100,
         'acd-limit': 0.0,
         'asr-limit': 0.0,
-        host: 'test.example.com'
+        host: 'test.example.com',
+        'incoming-auth-username': 'test incoming auth username',
+        'incoming-auth-password': 'test incoming auth password'
       }
     end
 
@@ -631,6 +635,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   acd_limit: json_api_request_attributes[:'acd-limit'],
                                   asr_limit: json_api_request_attributes[:'asr-limit'],
                                   host: json_api_request_attributes[:host],
+                                  incoming_auth_username: json_api_request_attributes[:'incoming-auth-username'],
+                                  incoming_auth_password: json_api_request_attributes[:'incoming-auth-password'],
                                   contractor: contractor,
                                   session_refresh_method: session_refresh_method,
                                   sdp_alines_filter_type: sdp_alines_filter_type,
@@ -671,7 +677,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         weight: 100,
         'acd-limit': 0.1,
         'asr-limit': 0.1,
-        host: 'other.test.example.com'
+        host: 'other.test.example.com',
+        'incoming-auth-username': 'other test incoming auth username',
+        'incoming-auth-password': 'other test incoming auth password'
       }
     end
 
