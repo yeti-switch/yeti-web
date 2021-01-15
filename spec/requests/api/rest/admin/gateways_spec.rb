@@ -577,8 +577,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'acd-limit': 0.0,
         'asr-limit': 0.0,
         host: 'test.example.com',
-        'incoming-auth-username': 'test incoming auth username',
-        'incoming-auth-password': 'test incoming auth password'
+        'incoming-auth-username': 'incoming_username',
+        'incoming-auth-password': 'incoming_password'
       }
     end
 
@@ -678,8 +678,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'acd-limit': 0.1,
         'asr-limit': 0.1,
         host: 'other.test.example.com',
-        'incoming-auth-username': 'other test incoming auth username',
-        'incoming-auth-password': 'other test incoming auth password'
+        'incoming-auth-username': 'other_incoming_username',
+        'incoming-auth-password': 'other_incoming_password'
       }
     end
 
