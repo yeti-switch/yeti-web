@@ -3,8 +3,6 @@
 RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
   include_context :json_api_admin_helpers, type: :gateways
 
-  after { puts pretty_response_json }
-
   gateway_relationship_names = %i[
     contractor
     session-refresh-method
@@ -576,9 +574,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         weight: 100,
         'acd-limit': 0.0,
         'asr-limit': 0.0,
-        host: 'test.example.com',
-        'incoming-auth-username': 'incoming_username',
-        'incoming-auth-password': 'incoming_password'
+        host: 'test.example.com'
       }
     end
 
@@ -623,7 +619,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       end
     end
 
-    # include_examples :changes_records_qty_of, Gateway, by: 1
     it 'creates gateway with correct attributes' do
       expect { subject }.to change { Gateway.count }.by(1)
 
@@ -635,8 +630,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   acd_limit: json_api_request_attributes[:'acd-limit'],
                                   asr_limit: json_api_request_attributes[:'asr-limit'],
                                   host: json_api_request_attributes[:host],
-                                  incoming_auth_username: json_api_request_attributes[:'incoming-auth-username'],
-                                  incoming_auth_password: json_api_request_attributes[:'incoming-auth-password'],
                                   contractor: contractor,
                                   session_refresh_method: session_refresh_method,
                                   sdp_alines_filter_type: sdp_alines_filter_type,
@@ -655,6 +648,29 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   media_encryption_mode: media_encryption_mode,
                                   sip_schema: sip_schema
                                 )
+    end
+
+    context 'with incoming-auth-username and incoming-auth-password' do
+      let(:json_api_request_attributes) do
+        super().merge 'incoming-auth-username': 'other_incoming_auth_username',
+                      'incoming-auth-password': 'other_incoming_auth_password'
+      end
+
+      include_examples :returns_json_api_record, relationships: gateway_relationship_names, status: 201 do
+        let(:json_api_record_id) { last_gateway.id.to_s }
+        let(:json_api_record_attributes) do
+          hash_including(json_api_request_attributes)
+        end
+      end
+
+      it 'creates gateway with correct attributes' do
+        expect { subject }.to change { Gateway.count }.by(1)
+
+        expect(last_gateway).to have_attributes(
+                                  incoming_auth_username: json_api_request_attributes[:'incoming-auth-username'],
+                                  incoming_auth_password: json_api_request_attributes[:'incoming-auth-password']
+                                )
+      end
     end
   end
 
@@ -678,8 +694,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'acd-limit': 0.1,
         'asr-limit': 0.1,
         host: 'other.test.example.com',
-        'incoming-auth-username': 'other_incoming_username',
-        'incoming-auth-password': 'other_incoming_password'
+        'incoming-auth-username': 'other_incoming_auth_username',
+        'incoming-auth-password': 'other_incoming_auth_password'
       }
     end
 
