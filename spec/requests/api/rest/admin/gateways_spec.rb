@@ -3,73 +3,7 @@
 RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
   include_context :json_api_admin_helpers, type: :gateways
 
-  let!(:gateway) { FactoryBot.build(:gateway) }
   # after { puts pretty_response_json }
-
-  let!(:gateway_response_attributes) do
-    {
-      'name': gateway.name,
-      'enabled': gateway.enabled,
-      'priority': gateway.priority,
-      'weight': gateway.weight,
-      'acd-limit': gateway.acd_limit,
-      'asr-limit': gateway.asr_limit,
-      'allow-origination': gateway.allow_origination,
-      'allow-termination': gateway.allow_termination,
-      'sst-enabled': gateway.sst_enabled,
-      'host': gateway.host,
-      'port': gateway.port,
-      'resolve-ruri': gateway.resolve_ruri,
-      'diversion-rewrite-rule': gateway.diversion_rewrite_rule,
-      'diversion-rewrite-result': gateway.diversion_rewrite_result,
-      'src-name-rewrite-rule': gateway.src_name_rewrite_rule,
-      'src-name-rewrite-result': gateway.src_name_rewrite_result,
-      'src-rewrite-rule': gateway.src_rewrite_rule,
-      'src-rewrite-result': gateway.src_rewrite_result,
-      'dst-rewrite-rule': gateway.dst_rewrite_rule,
-      'dst-rewrite-result': gateway.dst_rewrite_result,
-      'auth-enabled': gateway.auth_enabled,
-      'auth-user': gateway.auth_user,
-      'auth-password': gateway.auth_password,
-      'auth-from-user': gateway.auth_from_user,
-      'auth-from-domain': gateway.auth_from_domain,
-      'term-use-outbound-proxy': gateway.term_use_outbound_proxy,
-      'term-force-outbound-proxy': gateway.term_force_outbound_proxy,
-      'term-outbound-proxy': gateway.term_outbound_proxy,
-      'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
-      'term-next-hop': gateway.term_next_hop,
-      'term-append-headers-req': gateway.term_append_headers_req,
-      'sdp-alines-filter-list': gateway.sdp_alines_filter_list,
-      'ringing-timeout': gateway.ringing_timeout,
-      'relay-options': gateway.relay_options,
-      'relay-reinvite': gateway.relay_reinvite,
-      'relay-hold': gateway.relay_hold,
-      'relay-prack': gateway.relay_prack,
-      'relay-update': gateway.relay_update,
-      'suppress-early-media': gateway.suppress_early_media,
-      'fake-180-timer': gateway.fake_180_timer,
-      'transit-headers-from-origination': gateway.transit_headers_from_origination,
-      'transit-headers-from-termination': gateway.transit_headers_from_termination,
-      'sip-interface-name': gateway.sip_interface_name,
-      'allow-1xx-without-to-tag': gateway.allow_1xx_without_to_tag,
-      'sip-timer-b': gateway.sip_timer_b,
-      'dns-srv-failover-timer': gateway.dns_srv_failover_timer,
-      'anonymize-sdp': gateway.anonymize_sdp,
-      'proxy-media': gateway.proxy_media,
-      'single-codec-in-200ok': gateway.single_codec_in_200ok,
-      'transparent-seqno': gateway.transparent_seqno,
-      'transparent-ssrc': gateway.transparent_ssrc,
-      'force-symmetric-rtp': gateway.force_symmetric_rtp,
-      'symmetric-rtp-nonstop': gateway.symmetric_rtp_nonstop,
-      'symmetric-rtp-ignore-rtcp': gateway.symmetric_rtp_ignore_rtcp,
-      'force-dtmf-relay': gateway.force_dtmf_relay,
-      'rtp-ping': gateway.rtp_ping,
-      'rtp-timeout': gateway.rtp_timeout,
-      'filter-noaudio-streams': gateway.filter_noaudio_streams,
-      'rtp-relay-timestamp-aligning': gateway.rtp_relay_timestamp_aligning,
-      'rtp-force-relay-cn': gateway.rtp_force_relay_cn
-    }
-  end
 
   gateway_relationship_names = %i[
     contractor
@@ -532,13 +466,76 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       get json_api_request_path, params: request_params, headers: json_api_request_headers
     end
 
-    before do
-      gateway.save!
+    let!(:gateway_response_attributes) do
+      {
+        'name': gateway.name,
+        'enabled': gateway.enabled,
+        'priority': gateway.priority,
+        'weight': gateway.weight,
+        'acd-limit': gateway.acd_limit,
+        'asr-limit': gateway.asr_limit,
+        'allow-origination': gateway.allow_origination,
+        'allow-termination': gateway.allow_termination,
+        'sst-enabled': gateway.sst_enabled,
+        'host': gateway.host,
+        'port': gateway.port,
+        'resolve-ruri': gateway.resolve_ruri,
+        'diversion-rewrite-rule': gateway.diversion_rewrite_rule,
+        'diversion-rewrite-result': gateway.diversion_rewrite_result,
+        'src-name-rewrite-rule': gateway.src_name_rewrite_rule,
+        'src-name-rewrite-result': gateway.src_name_rewrite_result,
+        'src-rewrite-rule': gateway.src_rewrite_rule,
+        'src-rewrite-result': gateway.src_rewrite_result,
+        'dst-rewrite-rule': gateway.dst_rewrite_rule,
+        'dst-rewrite-result': gateway.dst_rewrite_result,
+        'auth-enabled': gateway.auth_enabled,
+        'auth-user': gateway.auth_user,
+        'auth-password': gateway.auth_password,
+        'auth-from-user': gateway.auth_from_user,
+        'auth-from-domain': gateway.auth_from_domain,
+        'term-use-outbound-proxy': gateway.term_use_outbound_proxy,
+        'term-force-outbound-proxy': gateway.term_force_outbound_proxy,
+        'term-outbound-proxy': gateway.term_outbound_proxy,
+        'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
+        'term-next-hop': gateway.term_next_hop,
+        'term-append-headers-req': gateway.term_append_headers_req,
+        'sdp-alines-filter-list': gateway.sdp_alines_filter_list,
+        'ringing-timeout': gateway.ringing_timeout,
+        'relay-options': gateway.relay_options,
+        'relay-reinvite': gateway.relay_reinvite,
+        'relay-hold': gateway.relay_hold,
+        'relay-prack': gateway.relay_prack,
+        'relay-update': gateway.relay_update,
+        'suppress-early-media': gateway.suppress_early_media,
+        'fake-180-timer': gateway.fake_180_timer,
+        'transit-headers-from-origination': gateway.transit_headers_from_origination,
+        'transit-headers-from-termination': gateway.transit_headers_from_termination,
+        'sip-interface-name': gateway.sip_interface_name,
+        'allow-1xx-without-to-tag': gateway.allow_1xx_without_to_tag,
+        'sip-timer-b': gateway.sip_timer_b,
+        'dns-srv-failover-timer': gateway.dns_srv_failover_timer,
+        'anonymize-sdp': gateway.anonymize_sdp,
+        'proxy-media': gateway.proxy_media,
+        'single-codec-in-200ok': gateway.single_codec_in_200ok,
+        'transparent-seqno': gateway.transparent_seqno,
+        'transparent-ssrc': gateway.transparent_ssrc,
+        'force-symmetric-rtp': gateway.force_symmetric_rtp,
+        'symmetric-rtp-nonstop': gateway.symmetric_rtp_nonstop,
+        'symmetric-rtp-ignore-rtcp': gateway.symmetric_rtp_ignore_rtcp,
+        'force-dtmf-relay': gateway.force_dtmf_relay,
+        'rtp-ping': gateway.rtp_ping,
+        'rtp-timeout': gateway.rtp_timeout,
+        'filter-noaudio-streams': gateway.filter_noaudio_streams,
+        'rtp-relay-timestamp-aligning': gateway.rtp_relay_timestamp_aligning,
+        'rtp-force-relay-cn': gateway.rtp_force_relay_cn
+      }
     end
 
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:request_params) { nil }
     let(:record_id) { gateway.id.to_s }
+
+    let!(:gateway) { FactoryBot.create(:gateway) }
 
     include_examples :returns_json_api_record, relationships: gateway_relationship_names do
       let(:json_api_record_id) { record_id }
@@ -550,6 +547,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     subject do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
     end
+
+    let!(:gateway) { FactoryBot.build(:gateway) }
 
     let(:contractor) { FactoryBot.create(:customer) }
     let(:session_refresh_method) { SessionRefreshMethod.first }
@@ -591,6 +590,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         }
       }
     end
+
     let(:json_api_request_relationships) do
       {
         'contractor': { data: { id: contractor.id.to_s, type: 'contractors' } },
@@ -617,10 +617,44 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     include_examples :returns_json_api_record, relationships: gateway_relationship_names, status: 201 do
       let(:json_api_record_id) { last_gateway.id.to_s }
-      # Without all attributes test 'expect(actual_relationships).to match_array(relationships)' was falid
-      let(:json_api_record_attributes) { gateway_response_attributes }
+      let(:json_api_record_attributes) do
+        hash_including(json_api_request_attributes)
+      end
     end
 
     include_examples :changes_records_qty_of, Gateway, by: 1
+  end
+
+  describe 'PATCH /api/rest/admin/gateways/{id}' do
+    subject do
+      patch json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { gateway.id.to_s }
+    let(:json_api_request_body) do
+      { data: { id: record_id, type: json_api_resource_type, attributes: json_api_request_attributes } }
+    end
+
+    let(:json_api_request_attributes) do
+      {
+        'name': gateway.name,
+        'enabled': gateway.enabled,
+        'priority': gateway.priority,
+        'weight': gateway.weight,
+        'acd-limit': gateway.acd_limit,
+        'asr-limit': gateway.asr_limit,
+        'host': gateway.host
+      }
+    end
+
+    let!(:gateway) { FactoryBot.create(:gateway) }
+
+    include_examples :returns_json_api_record, relationships: gateway_relationship_names do
+      let(:json_api_record_id) { gateway.id.to_s }
+      let(:json_api_record_attributes) do
+        hash_including(json_api_request_attributes)
+      end
+    end
   end
 end
