@@ -47,6 +47,31 @@ module Helpers
       description = options.delete(:desc) || param_name.capitalize.tr('-', ' ')
       parameter param_name, description, **options
     end
+
+    def jsonapi_extract_fields_data(resource_class, format: :dasherize, context: {})
+      format_proc = proc { |attr| attr.to_s.public_send(format).to_sym }
+      options = { context: context }
+      relationships = resource_class._relationships.keys.map(&format_proc)
+      creatable_fields = resource_class.creatable_fields(options).map(&format_proc)
+      updatable_fields = resource_class.updatable_fields(options).map(&format_proc)
+      resource = resource_class.new(resource_class._model_class.new, context)
+      fetchable_fields = resource.fetchable_fields.map(&format_proc)
+      creatable_attributes = creatable_fields - relationships
+      updatable_attributes = updatable_fields - relationships
+      fetchable_attributes = fetchable_fields - relationships
+      creatable_relationships = relationships - creatable_attributes
+      updatable_relationships = relationships - updatable_attributes
+      fetchable_relationships = relationships - fetchable_attributes
+
+      {
+        creatable_attributes: creatable_attributes,
+        updatable_attributes: updatable_attributes,
+        fetchable_attributes: fetchable_attributes,
+        creatable_relationships: creatable_relationships,
+        updatable_relationships: updatable_relationships,
+        fetchable_relationships: fetchable_relationships
+      }
+    end
   end
 end
 
