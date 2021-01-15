@@ -12,6 +12,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       FactoryBot.create_list(:contact, 2) # only Contact with contractor
     end
 
+    include_examples :jsonapi_responds_with_pagination_links
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) do
         contacts.map { |r| r.id.to_s }
