@@ -11,18 +11,10 @@ RSpec.resource 'Gateways' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'gateways' }
 
-  required_params = %i[name enabled priority weight acd-limit asr-limit]
-  optional_params = %i[
-    allow-origination allow-termination sst-enabled host port resolve-ruri diversion-rewrite-rule
-    diversion-rewrite-result src-name-rewrite-rule src-name-rewrite-result src-rewrite-rule src-rewrite-result
-    dst-rewrite-rule dst-rewrite-result auth-enabled auth-user auth-password auth-from-user auth-from-domain
-    term-use-outbound-proxy term-force-outbound-proxy term-outbound-proxy term-next-hop-for-replies term-next-hop
-    term-append-headers-req sdp-alines-filter-list ringing-timeout relay-options relay-reinvite relay-hold relay-prack
-    relay-update suppress-early-media fake-180-timer transit-headers-from-origination transit-headers-from-termination
-    sip-interface-name allow-1xx-without-to-tag sip-timer-b dns-srv-failover-timer anonymize-sdp proxy-media
-    single-codec-in-200ok transparent-seqno transparent-ssrc force-symmetric-rtp symmetric-rtp-nonstop symmetric-rtp-ignore-rtcp
-    force-dtmf-relay rtp-ping rtp-timeout filter-noaudio-streams rtp-relay-timestamp-aligning rtp-force-relay-cn
-  ]
+  resource_data = jsonapi_extract_fields_data(Api::Rest::Admin::GatewayResource)
+
+  required_attributes = %i[name enabled priority weight acd-limit asr-limit]
+  optional_attributes = resource_data[:creatable_attributes] - required_attributes
 
   required_relationships = %i[
     contractor codec-group sdp-c-location sensor-level
@@ -33,9 +25,7 @@ RSpec.resource 'Gateways' do
     term-proxy-transport-protocol orig-proxy-transport-protocol
     network-protocol-priority media-encryption-mode sip-schema
   ]
-  optional_relationships = %i[
-    gateway-group pop sensor diversion-policy term-disconnect-policy
-  ]
+  optional_relationships = resource_data[:creatable_relationships] - required_relationships
 
   get '/api/rest/admin/gateways' do
     jsonapi_filters Api::Rest::Admin::GatewayResource._allowed_filters
@@ -58,7 +48,7 @@ RSpec.resource 'Gateways' do
   post '/api/rest/admin/gateways' do
     parameter :type, 'Resource type (gateways)', scope: :data, required: true
 
-    jsonapi_attributes(required_params, optional_params)
+    jsonapi_attributes(required_attributes, optional_attributes)
     jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:name) { 'name' }
@@ -98,7 +88,7 @@ RSpec.resource 'Gateways' do
     parameter :type, 'Resource type (gateways)', scope: :data, required: true
     parameter :id, 'Gateway ID', scope: :data, required: true
 
-    jsonapi_attributes(required_params, optional_params)
+    jsonapi_attributes(required_attributes, optional_attributes)
 
     let(:id) { create(:gateway).id }
     let(:name) { 'name' }
