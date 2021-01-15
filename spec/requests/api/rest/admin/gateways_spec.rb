@@ -468,17 +468,17 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     let!(:gateway_response_attributes) do
       {
-        'name': gateway.name,
-        'enabled': gateway.enabled,
-        'priority': gateway.priority,
-        'weight': gateway.weight,
+        name: gateway.name,
+        enabled: gateway.enabled,
+        priority: gateway.priority,
+        weight: gateway.weight,
         'acd-limit': gateway.acd_limit,
         'asr-limit': gateway.asr_limit,
         'allow-origination': gateway.allow_origination,
         'allow-termination': gateway.allow_termination,
         'sst-enabled': gateway.sst_enabled,
-        'host': gateway.host,
-        'port': gateway.port,
+        host: gateway.host,
+        port: gateway.port,
         'resolve-ruri': gateway.resolve_ruri,
         'diversion-rewrite-rule': gateway.diversion_rewrite_rule,
         'diversion-rewrite-result': gateway.diversion_rewrite_result,
@@ -548,14 +548,11 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
     end
 
-    let!(:gateway) { FactoryBot.build(:gateway) }
-
     let(:contractor) { FactoryBot.create(:customer) }
     let(:session_refresh_method) { SessionRefreshMethod.first }
     let(:sdp_alines_filter_type) { FilterType.first }
     let(:codec_group) { FactoryBot.create(:codec_group) }
     let(:sdp_c_location) { SdpCLocation.first }
-    let(:sensor) { FactoryBot.create(:sensor) }
     let(:sensor_level) { System::SensorLevel.first }
     let(:dtmf_receive_mode) { System::DtmfReceiveMode.first }
     let(:dtmf_send_mode) { System::DtmfSendMode.first }
@@ -571,13 +568,13 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     let(:json_api_request_attributes) do
       {
-        'name': gateway.name,
-        'enabled': gateway.enabled,
-        'priority': gateway.priority,
-        'weight': gateway.weight,
-        'acd-limit': gateway.acd_limit,
-        'asr-limit': gateway.asr_limit,
-        'host': gateway.host
+        name: 'Test name',
+        enabled: false,
+        priority: 100,
+        weight: 100,
+        'acd-limit': 0.0,
+        'asr-limit': 0.0,
+        host: 'test.example.com'
       }
     end
 
@@ -593,7 +590,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     let(:json_api_request_relationships) do
       {
-        'contractor': { data: { id: contractor.id.to_s, type: 'contractors' } },
+        contractor: { data: { id: contractor.id.to_s, type: 'contractors' } },
         'session-refresh-method': { data: { id: session_refresh_method.id.to_s, type: 'session-refresh-methods' } },
         'sdp-alines-filter-type': { data: { id: sdp_alines_filter_type.id.to_s, type: 'filter-types' } },
         'codec-group': { data: { id: codec_group.id.to_s, type: 'codec-groups' } },
@@ -622,7 +619,37 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       end
     end
 
-    include_examples :changes_records_qty_of, Gateway, by: 1
+    # include_examples :changes_records_qty_of, Gateway, by: 1
+    it 'creates gateway with correct attributes' do
+      expect { subject }.to change { Gateway.count }.by(1)
+
+      expect(last_gateway).to have_attributes(
+                                  name: json_api_request_attributes[:name],
+                                  enabled: json_api_request_attributes[:enabled],
+                                  priority: json_api_request_attributes[:priority],
+                                  weight: json_api_request_attributes[:weight],
+                                  acd_limit: json_api_request_attributes[:'acd-limit'],
+                                  asr_limit: json_api_request_attributes[:'asr-limit'],
+                                  host: json_api_request_attributes[:host],
+                                  contractor: contractor,
+                                  session_refresh_method: session_refresh_method,
+                                  sdp_alines_filter_type: sdp_alines_filter_type,
+                                  codec_group: codec_group,
+                                  sdp_c_location: sdp_c_location,
+                                  sensor_level: sensor_level,
+                                  dtmf_receive_mode: dtmf_receive_mode,
+                                  dtmf_send_mode: dtmf_send_mode,
+                                  transport_protocol: transport_protocol,
+                                  term_proxy_transport_protocol: term_proxy_transport_protocol,
+                                  orig_proxy_transport_protocol: orig_proxy_transport_protocol,
+                                  rel100_mode: rel100_mode,
+                                  rx_inband_dtmf_filtering_mode: rx_inband_dtmf_filtering_mode,
+                                  tx_inband_dtmf_filtering_mode: tx_inband_dtmf_filtering_mode,
+                                  network_protocol_priority: network_protocol_priority,
+                                  media_encryption_mode: media_encryption_mode,
+                                  sip_schema: sip_schema
+                                )
+    end
   end
 
   describe 'PATCH /api/rest/admin/gateways/{id}' do
@@ -638,13 +665,13 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     let(:json_api_request_attributes) do
       {
-        'name': gateway.name,
-        'enabled': gateway.enabled,
-        'priority': gateway.priority,
-        'weight': gateway.weight,
-        'acd-limit': gateway.acd_limit,
-        'asr-limit': gateway.asr_limit,
-        'host': gateway.host
+        name: 'other name',
+        enabled: false,
+        priority: 100,
+        weight: 100,
+        'acd-limit': 0.1,
+        'asr-limit': 0.1,
+        host: 'other.test.example.com'
       }
     end
 
