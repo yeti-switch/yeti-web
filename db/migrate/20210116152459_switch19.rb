@@ -3,6 +3,13 @@ class Switch19 < ActiveRecord::Migration[5.2]
   def down
     execute %q{
       drop schema switch19 cascade;
+
+      create schema switch13;
+      create schema switch14;
+      create schema switch15;
+      create schema switch16;
+      create schema switch17;
+
       }
   end
 
@@ -1681,6 +1688,7 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_call_tags smallint[]:='{}'::smallint[];
         v_area_direction class4.routing_tag_detection_rules%rowtype;
         v_numberlist_size integer;
+        v_lua_context switch19.lua_call_context;
 
       BEGIN
         /*dbg{*/
@@ -1986,7 +1994,27 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_auth_name=v_customer_auth_normalized."name";
         v_ret.customer_name=(select "name" from public.contractors where id=v_customer_auth_normalized.customer_id limit 1);
         --  end if;
-
+/*
+        if v_customer_auth_normalized.lua_script_id is not null then
+          v_lua_context.src_name_in = v_ret.src_name_in;
+	        v_lua_context.src_number_in = v_ret.src_prefix_in;
+	        v_lua_context.dst_number_in = v_ret.dst_prefix_in;
+	        v_lua_context.src_name_out = v_ret.src_name_out;
+	        v_lua_context.src_number_out = v_ret.src_prefix_out;
+	        v_lua_context.dst_number_out = v_ret.dst_prefix_out;
+	        -- v_lua_context.src_name_routing
+	        -- v_lua_context.src_number_routing
+	        -- v_lua_context.dst_number_routing
+          -- #arrays
+	        -- v_lua_context.diversion_in
+	        -- v_lua_context.diversion_routing
+	        -- v_lua_context.diversion_out
+          v_lua_context = switch19.lua_exec(v_customer_auth_normalized.lua_script_id, v_lua_context);
+          v_ret.src_name_out =  v_lua_context.src_name_out;
+          v_ret.src_prefix_out = v_lua_context.src_number_out;
+          v_ret.dst_prefix_out = v_lua_context.dst_number_out;
+        end if;
+*/
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -3373,12 +3401,10 @@ ALTER TABLE ONLY switch19.trusted_headers
 ALTER TABLE ONLY switch19.resource_type
     ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES switch19.resource_action(id);
 
+set search_path TO switch19;
+SELECT * from switch19.preprocess_all();
+set search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
--- Completed on 2021-01-16 17:28:43 EET
-
---
--- PostgreSQL database dump complete
---
 }
   end
 

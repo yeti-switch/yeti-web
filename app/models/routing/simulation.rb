@@ -119,7 +119,7 @@ class Routing::Simulation
         1,
         1
       )
-      spname = release_mode ? 'route_release' : 'route_debug'
+      spname = release_mode == '1' ? 'route_release' : 'route_debug'
       @debug = Yeti::ActiveRecord.fetch_sp(
         "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.#{spname}(
           ?::integer, /* i_node_id integer */
@@ -172,7 +172,7 @@ class Routing::Simulation
         remote_port,
         dst_number,
         uri_domain,
-        auth_id.to_i,
+        auth_id,
         x_yeti_auth,
         nil,
         nil,

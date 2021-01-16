@@ -32,17 +32,17 @@ ActiveAdmin.register Account do
 
   acts_as_import resource_class: Importing::Account
 
-  controller do
-    def build_new_resource
-      AccountForm.new(*resource_params)
-    end
+  #  controller do
+    #    def build_new_resource
+    #  AccountForm.new(*resource_params)
+    #end
 
-    def find_resource
-      record = super
-      record = AccountForm.new(record) if params[:action].in? %w[edit update]
-      record
-    end
-  end
+    #    def find_resource
+    #  record = super
+    #   record = AccountForm.new(record) if params[:action].in? %w[edit update]
+    #   record
+    # end
+    #  end
 
   scope :all
   scope :vendors_accounts
