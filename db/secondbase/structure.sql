@@ -305,7 +305,9 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	rpid_privacy_out character varying,
 	customer_acc_check_balance boolean,
 	destination_reverse_billing boolean,
-	dialpeer_reverse_billing boolean
+	dialpeer_reverse_billing boolean,
+	src_country_id integer,
+	src_network_id integer
 );
 
 
@@ -515,7 +517,9 @@ CREATE TABLE cdr.cdr (
     legb_local_tag character varying,
     legb_ruri character varying,
     legb_outbound_proxy character varying,
-    p_charge_info_in character varying
+    p_charge_info_in character varying,
+    src_country_id integer,
+    src_network_id integer
 )
 PARTITION BY RANGE (time_start);
 
@@ -2415,6 +2419,8 @@ BEGIN
 
   v_cdr.global_tag=i_global_tag;
 
+  v_cdr.src_country_id=v_dynamic.src_country_id;
+  v_cdr.src_network_id=v_dynamic.src_network_id;
   v_cdr.dst_country_id=v_dynamic.dst_country_id;
   v_cdr.dst_network_id=v_dynamic.dst_network_id;
   v_cdr.dst_prefix_routing=v_dynamic.dst_prefix_routing;
@@ -7183,6 +7189,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200514153523'),
 ('20200527173737'),
 ('20200803201602'),
-('20201128134302');
+('20201128134302'),
+('20210116150950');
 
 

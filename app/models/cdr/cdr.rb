@@ -138,6 +138,8 @@
 #  sign_orig_transport_protocol_id :integer(2)
 #  sign_term_transport_protocol_id :integer(2)
 #  src_area_id                     :integer(4)
+#  src_country_id                  :integer(4)
+#  src_network_id                  :integer(4)
 #  term_call_id                    :string
 #  term_gw_external_id             :bigint(8)
 #  term_gw_id                      :integer(4)
@@ -155,10 +157,12 @@ class Cdr::Cdr < Cdr::Base
   ADMIN_PRELOAD_LIST = %i[
     dialpeer routing_group destination disconnect_initiator
     auth_orig_transport_protocol sign_orig_transport_protocol
-    dst_network destination_rate_policy routing_plan vendor
+    src_network src_country
+    dst_network dst_country
+    destination_rate_policy routing_plan vendor
     term_gw orig_gw customer_auth vendor_acc customer_acc
     dst_area customer rateplan pop src_area lnp_database
-    dump_level dst_country node sign_term_transport_protocol
+    dump_level node sign_term_transport_protocol
   ].freeze
 
   include Partitionable
@@ -185,6 +189,8 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :dump_level
+  belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id
+  belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
   belongs_to :lnp_database, class_name: 'Lnp::Database', foreign_key: :lnp_database_id
