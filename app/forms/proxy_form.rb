@@ -43,6 +43,10 @@ class ProxyForm < ApplicationForm
     id
   end
 
+  def persisted?
+    id.present?
+  end
+
   private
 
   def _save
