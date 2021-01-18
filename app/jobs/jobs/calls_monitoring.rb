@@ -148,7 +148,7 @@ module Jobs
       if GuiConfig.random_disconnect_enable
         max_length = GuiConfig.random_disconnect_length
         flatten_calls.each do |call|
-          next unless call['duration'] > max_length
+          next if call['duration'].to_i <= max_length
 
           @terminate_calls.merge!(call['local_tag'] => call) if rand(100) < 10
         end

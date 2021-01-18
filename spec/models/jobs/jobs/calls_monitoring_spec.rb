@@ -319,6 +319,28 @@ RSpec.describe Jobs::CallsMonitoring do
       include_examples :drop_calls
     end
 
+    context 'when GuiConfig.random_disconnect_enable=true' do
+      before do
+        allow(GuiConfig).to receive(:random_disconnect_enable).and_return(true)
+        allow(GuiConfig).to receive(:random_disconnect_length).and_return(max_length)
+      end
+
+      context 'when max_length greater than calls duration' do
+        let(:max_length) { 600 }
+
+        include_examples :keep_calls
+      end
+
+      context 'when duration is nil' do
+        let(:max_length) { 10 }
+        let(:cdr_list_unsorted) do
+          super().map { |r| r.merge('duration' => nil) }
+        end
+
+        include_examples :keep_calls
+      end
+    end
+
     context 'Customer calls' do
       context 'when calls cost is within mim-max balance' do
         let(:account_balance) do
