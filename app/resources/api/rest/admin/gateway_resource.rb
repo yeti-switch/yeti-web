@@ -17,7 +17,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :incoming_auth_username, :incoming_auth_password
 
   paginator :paged
-  
+
   has_one :contractor
   has_one :session_refresh_method
   has_one :sdp_alines_filter_type, class_name: 'FilterType'
