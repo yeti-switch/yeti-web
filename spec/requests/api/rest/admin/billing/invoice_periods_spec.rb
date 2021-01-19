@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Billing::InvoicePeriodController, type: :request do
-  include_context :json_api_admin_helpers, type: :'invoice-period'
+  include_context :json_api_admin_helpers, type: :'invoice-periods', prefix: '/api/rest/admin/billing'
 
-  describe 'GET /api/rest/admin/billing/invoice-period-resources' do
+  let(:json_api_request_path) { "#{json_api_request_path_prefix}/invoice-period" }
+
+  describe 'GET /api/rest/admin/billing/invoice-period' do
     subject do
-      get '/api/rest/admin/billing/invoice-period', params: nil, headers: json_api_request_headers
+      get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
     let!(:invoice_periods) do
