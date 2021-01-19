@@ -8,8 +8,10 @@ RSpec.describe Api::Rest::Admin::Cdr::AuthLogsController, type: :request do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before { Cdr::AuthLog.delete_all }
+
     let!(:auth_logs) do
-      Cdr::AuthLog.all
+      FactoryBot.create_list(:auth_log, 2)
     end
 
     include_examples :jsonapi_responds_with_pagination_links
