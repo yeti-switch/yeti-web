@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::System::SipSchemasController, type: :request do
-  include_context :json_api_admin_helpers, type: :'sip-schemas', prefix: '/api/rest/admin/system'
+  include_context :json_api_admin_helpers, type: :'sip-schemas', prefix: 'system'
 
   describe 'GET /api/rest/admin/system/sip-schemas' do
     subject do

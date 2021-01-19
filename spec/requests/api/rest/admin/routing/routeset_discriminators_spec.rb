@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::RoutesetDiscriminatorsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'routeset-discriminators', prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :'routeset-discriminators', prefix: 'routing'
 
   describe 'GET /api/rest/admin/equipment/routeset-discriminators' do
     subject do

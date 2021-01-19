@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::RateProfitControlModesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'rate-profit-control-modes', prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :'rate-profit-control-modes', prefix: 'routing'
 
   describe 'GET /api/rest/admin/equipment/rate-profit-control-modes' do
     subject do

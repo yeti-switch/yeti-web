@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::System::SmtpConnectionsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'smtp-connections', prefix: '/api/rest/admin/system'
+  include_context :json_api_admin_helpers, type: :'smtp-connections', prefix: 'system'
 
   describe 'GET /api/rest/admin/system/smtp-connections' do
     subject do

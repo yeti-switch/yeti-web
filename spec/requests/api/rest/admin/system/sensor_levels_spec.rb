@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::System::SensorLevelsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'sensor-levels', prefix: '/api/rest/admin/system'
+  include_context :json_api_admin_helpers, type: :'sensor-levels', prefix: 'system'
 
   describe 'GET /api/rest/admin/system/sensor-levels' do
     subject do

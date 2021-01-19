@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::Radius::AccountingProfilesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'accounting-profiles', prefix: '/api/rest/admin/equipment/radius'
+  include_context :json_api_admin_helpers, type: :'accounting-profiles', prefix: 'equipment/radius'
 
   describe 'GET /api/rest/admin/equipment/accounting-profiles' do
     subject do

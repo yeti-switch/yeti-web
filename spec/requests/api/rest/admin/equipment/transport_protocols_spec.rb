@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::TransportProtocolsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'transport-protocols', prefix: '/api/rest/admin/equipment'
+  include_context :json_api_admin_helpers, type: :'transport-protocols', prefix: 'equipment'
 
   describe 'GET /api/rest/admin/equipment/transport-protocols' do
     subject do

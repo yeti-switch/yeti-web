@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::GatewayNetworkProtocolPrioritiesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'gateway-network-protocol-priorities', prefix: '/api/rest/admin/equipment'
+  include_context :json_api_admin_helpers, type: :'gateway-network-protocol-priorities', prefix: 'equipment'
 
   describe 'GET /api/rest/admin/equipment/gateway-network-protocol-priorities' do
     subject do

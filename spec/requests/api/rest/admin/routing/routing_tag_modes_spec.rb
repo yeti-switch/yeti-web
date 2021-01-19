@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::RoutingTagModesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'routing-tag-modes', prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :'routing-tag-modes', prefix: 'routing'
 
   describe 'GET /api/rest/admin/equipment/routing-tag-modes' do
     subject do

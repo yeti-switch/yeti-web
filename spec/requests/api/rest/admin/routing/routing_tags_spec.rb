@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::RoutingTagsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'routing-tags', prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :'routing-tags', prefix: 'routing'
 
   describe 'GET /api/rest/admin/equipment/routing-tags' do
     subject do

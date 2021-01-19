@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::Radius::AuthProfilesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'auth-profiles', prefix: '/api/rest/admin/equipment/radius'
+  include_context :json_api_admin_helpers, type: :'auth-profiles', prefix: 'equipment/radius'
 
   describe 'GET /api/rest/admin/equipment/auth-profiles' do
     subject do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::DestinationRatePoliciesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'destination-rate-policies', prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :'destination-rate-policies', prefix: 'routing'
 
   describe 'GET /api/rest/admin/equipment/destination-rate-policies' do
     subject do

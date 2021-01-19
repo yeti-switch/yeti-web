@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :request do
-  include_context :json_api_admin_helpers, type: :destinations, prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :destinations, prefix: 'routing'
 
   describe 'GET /api/rest/admin/equipment/destinations' do
     subject do

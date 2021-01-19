@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::System::DtmfSendModesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'dtmf-send-modes', prefix: '/api/rest/admin/system'
+  include_context :json_api_admin_helpers, type: :'dtmf-send-modes', prefix: 'system'
 
   describe 'GET /api/rest/admin/system/dtmf-send-modes' do
     subject do

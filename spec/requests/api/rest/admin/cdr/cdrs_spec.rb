@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
-  include_context :json_api_admin_helpers, type: :cdrs, prefix: '/api/rest/admin/cdr'
+  include_context :json_api_admin_helpers, type: :cdrs, prefix: 'cdr'
 
   describe 'GET /api/rest/admin/cdr/cdrs' do
     subject do

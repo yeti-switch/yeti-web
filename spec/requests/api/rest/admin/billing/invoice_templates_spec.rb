@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Billing::InvoiceTemplateController, type: :request do
-  include_context :json_api_admin_helpers, type: :'invoice-templates', prefix: '/api/rest/admin/billing'
+  include_context :json_api_admin_helpers, type: :'invoice-templates', prefix: 'billing'
 
   let(:json_api_request_path) { "#{json_api_request_path_prefix}/invoice-template" }
 

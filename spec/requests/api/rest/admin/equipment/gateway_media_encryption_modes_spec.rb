@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::GatewayMediaEncryptionModesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'gateway-media-encryption-modes', prefix: '/api/rest/admin/equipment'
+  include_context :json_api_admin_helpers, type: :'gateway-media-encryption-modes', prefix: 'equipment'
 
   describe 'GET /api/rest/admin/equipment/gateway-media-encryption-modes' do
     subject do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::GatewayRel100ModesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'gateway-rel100-modes', prefix: '/api/rest/admin/equipment'
+  include_context :json_api_admin_helpers, type: :'gateway-rel100-modes', prefix: 'equipment'
 
   describe 'GET /api/rest/admin/equipment/gateway-rel100-modes' do
     subject do

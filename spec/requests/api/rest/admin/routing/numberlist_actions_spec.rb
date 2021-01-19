@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::NumberlistActionsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'numberlist-actions', prefix: '/api/rest/admin/routing'
+  include_context :json_api_admin_helpers, type: :'numberlist-actions', prefix: 'routing'
 
   describe 'GET /api/rest/admin/routing/numberlist-actions' do
     subject do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Equipment::GatewayInbandDtmfFilteringModesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'gateway-inband-dtmf-filtering-modes', prefix: '/api/rest/admin/equipment'
+  include_context :json_api_admin_helpers, type: :'gateway-inband-dtmf-filtering-modes', prefix: 'equipment'
 
   describe 'GET /api/rest/admin/equipment/gateway-inband-dtmf-filtering-modes' do
     subject do

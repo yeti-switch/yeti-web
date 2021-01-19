@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::System::CountriesController, type: :request do
-  include_context :json_api_admin_helpers, type: :countries, prefix: '/api/rest/admin/system'
+  include_context :json_api_admin_helpers, type: :countries, prefix: 'system'
 
   describe 'GET /api/rest/admin/system/countries' do
     subject do
