@@ -6,5 +6,7 @@ class Api::Rest::Admin::Equipment::Radius::AccountingProfileResource < ::BaseRes
   attributes :name, :server, :port, :secret, :timeout, :attempts, :enable_start_accounting,
              :enable_interim_accounting, :interim_accounting_interval, :enable_stop_accounting
 
+  paginator :paged
+
   filter :name
 end

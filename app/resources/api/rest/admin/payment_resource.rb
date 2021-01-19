@@ -3,6 +3,8 @@
 class Api::Rest::Admin::PaymentResource < BaseResource
   attributes :amount, :notes
 
+  paginator :paged
+
   has_one :account
 
   ransack_filter :amount, type: :number

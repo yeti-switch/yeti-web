@@ -8,6 +8,8 @@ class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
              :dst_rewrite_rule, :dst_rewrite_result,
              :tag_action_value
 
+  paginator :paged
+
   has_one :action, class_name: 'NumberlistAction'
   has_one :numberlist, class_name: 'Numberlist'
   has_one :tag_action, class_name: 'TagAction'

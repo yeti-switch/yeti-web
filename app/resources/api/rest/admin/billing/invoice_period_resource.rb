@@ -5,5 +5,7 @@ class Api::Rest::Admin::Billing::InvoicePeriodResource < ::BaseResource
 
   attributes :name
 
+  paginator :paged
+
   filter :name
 end

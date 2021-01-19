@@ -7,6 +7,8 @@ class Api::Rest::Admin::Routing::RateplanResource < BaseResource
 
   has_one :profit_control_mode, class_name: 'RateProfitControlMode'
 
+  paginator :paged
+
   filter :name # DEPRECATED
 
   ransack_filter :name, type: :string

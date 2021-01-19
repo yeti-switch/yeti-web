@@ -10,6 +10,8 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
              :from_domain, :to_domain, :tag_action_value, :external_id
 
+  paginator :paged
+
   has_one :customer
   has_one :rateplan, class_name: 'Routing::Rateplan'
   has_one :routing_plan, class_name: 'RoutingPlan'

@@ -5,6 +5,8 @@ class Api::Rest::Admin::Routing::DestinationNextRateResource < ::BaseResource
   attributes :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :apply_time, :applied,
              :external_id
 
+  paginator :paged
+
   has_one :destination, class_name: 'Destination'
 
   filter :external_id

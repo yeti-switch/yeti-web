@@ -4,6 +4,7 @@ class Api::Rest::Admin::Routing::RoutesetDiscriminatorResource < ::BaseResource
   model_name 'Routing::RoutesetDiscriminator'
 
   attributes :name
+  paginator :paged
   filter :name
 
   ransack_filter :name, type: :string

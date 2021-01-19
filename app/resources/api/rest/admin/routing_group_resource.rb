@@ -3,6 +3,8 @@
 class Api::Rest::Admin::RoutingGroupResource < ::BaseResource
   attributes :name
 
+  paginator :paged
+
   filter :name # DEPRECATED
 
   ransack_filter :name, type: :string
