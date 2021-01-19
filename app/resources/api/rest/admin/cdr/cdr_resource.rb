@@ -157,10 +157,10 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   has_one :vendor_acc, class_name: 'Account'
   has_one :orig_gw, class_name: 'Gateway'
   has_one :term_gw, class_name: 'Gateway'
-  has_one :dst_country, relation_name: :dst_country, foreign_key_on: :dst_country_id
-  has_one :dst_network, relation_name: :dst_network, foreign_key_on: :dst_network_id
-  has_one :src_country, relation_name: :src_country, foreign_key_on: :src_country_id
-  has_one :src_network, relation_name: :src_network, foreign_key_on: :src_network_id
+  has_one :dst_country, class_name: 'Country'
+  has_one :dst_network, class_name: 'Network'
+  has_one :src_country, class_name: 'Country'
+  has_one :src_network, class_name: 'Network'
 
   filter :customer_auth_external_id_eq, apply: lambda { |records, values, _options|
     records.where(customer_auth_external_id: values)
