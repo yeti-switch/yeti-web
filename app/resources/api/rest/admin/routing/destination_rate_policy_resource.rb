@@ -5,6 +5,7 @@ class Api::Rest::Admin::Routing::DestinationRatePolicyResource < ::BaseResource
 
   immutable
   attributes :name
+  paginator :paged
   filter :name # DEPRECATED
 
   ransack_filter :name, type: :string

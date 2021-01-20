@@ -7,6 +7,8 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
              :default_dst_rewrite_rule, :default_dst_rewrite_result,
              :tag_action_value, :external_id
 
+  paginator :paged
+
   has_one :tag_action, class_name: 'TagAction'
 
   filter :name

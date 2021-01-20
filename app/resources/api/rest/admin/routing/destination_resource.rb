@@ -7,6 +7,8 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
              :routing_tag_ids, :dst_number_min_length, :dst_number_max_length
 
+  paginator :paged
+
   has_one :rate_group, class_name: 'RateGroup'
   has_one :rate_policy, class_name: 'DestinationRatePolicy'
   has_one :profit_control_mode, class_name: 'RateProfitControlMode'

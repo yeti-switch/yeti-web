@@ -6,5 +6,7 @@ class Api::Rest::Admin::Routing::TagActionResource < ::BaseResource
 
   attributes :name
 
+  paginator :paged
+
   ransack_filter :name, type: :string
 end

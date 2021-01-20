@@ -28,6 +28,12 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       let(:active_calls_ids) { active_calls.map { |r| "#{node.id}*#{r[:local_tag]}" } }
 
       include_examples :responds_with_status, 200
+
+      it 'has not pagination' do
+        subject
+        expect(response_json[:links]).to be_nil
+      end
+
       include_examples :returns_json_api_collection do
         let(:json_api_collection_ids) { active_calls_ids }
       end

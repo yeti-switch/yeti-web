@@ -5,6 +5,8 @@ class Api::Rest::Admin::ContactResource < ::BaseResource
 
   attributes :email, :notes
 
+  paginator :paged
+
   has_one :contractor
 
   ransack_filter :email, type: :string

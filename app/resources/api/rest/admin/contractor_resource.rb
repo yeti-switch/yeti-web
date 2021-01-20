@@ -3,6 +3,8 @@
 class Api::Rest::Admin::ContractorResource < BaseResource
   attributes :name, :enabled, :vendor, :customer, :description, :address, :phones, :external_id
 
+  paginator :paged
+
   has_one :smtp_connection, class_name: 'System::SmtpConnection'
 
   filter :name

@@ -3,6 +3,8 @@
 class Api::Rest::Admin::GatewayGroupResource < BaseResource
   attributes :name
 
+  paginator :paged
+
   has_one :vendor, class_name: 'Contractor'
 
   filter :name

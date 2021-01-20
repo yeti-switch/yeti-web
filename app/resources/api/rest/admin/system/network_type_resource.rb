@@ -3,6 +3,7 @@
 class Api::Rest::Admin::System::NetworkTypeResource < ::BaseResource
   model_name 'System::NetworkType'
   attributes :name
+  paginator :paged
   filter :name
 
   before_remove do
