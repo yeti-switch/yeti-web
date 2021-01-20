@@ -377,8 +377,8 @@ ActiveAdmin.register Gateway do
               f.input :transit_headers_from_origination
               f.input :transit_headers_from_termination
               f.input :sip_interface_name
-              f.input :incoming_auth_username
-              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }
+              f.input :incoming_auth_username, input_html: { value: f.object.new_record? && f.object.incoming_auth_username.blank? ? generate_credential : f.object.incoming_auth_username }
+              f.input :incoming_auth_password, as: :string, input_html: { value: f.object.new_record? && f.object.incoming_auth_password.blank? ? generate_credential : f.object.incoming_auth_password, autocomplete: 'off' }
             end
 
             f.inputs 'Origination' do
