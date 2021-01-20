@@ -34,6 +34,15 @@ Then create `config/database.yml`, example is `database.yml.example`. Notice thi
 
 Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.distr`.
 
+Сreate `config/policy_roles.yml`, example is `config/policy_roles.yml.distr`, 
+or disable policy feature by changing following lines in `config/yeti_web.yml`:
+
+```yaml
+role_policy:
+  when_no_config: allow
+  when_no_policy_class: allow
+```
+
 And run command to create development database:
 
 ```sh
