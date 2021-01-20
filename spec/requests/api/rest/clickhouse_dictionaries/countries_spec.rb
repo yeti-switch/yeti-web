@@ -1,24 +1,21 @@
 # frozen_string_literal: true
 
-RSpec.describe '/api/rest/clickhouse-dictionaries/countries' do
-  subject do
-    get clickhouse_dictionary_path
-  end
+RSpec.describe Api::Rest::ClickhouseDictionaries::CountriesController do
+  include_context :clickhouse_dictionaries_api_helpers, type: :countries
 
-  include_context :clickhouse_dictionaries_api_helpers do
-    let(:clickhouse_dictionary_type) { 'countries' }
-  end
+  describe 'GET /api/rest/clickhouse-dictionaries/countries' do
+    subject do
+      get clickhouse_dictionary_request_path
+    end
 
-  let!(:countries) do
-    [
-      create(:country, name: 'Canada', iso2: 'CA'),
-      create(:country, name: 'United Stated', iso2: 'US')
-    ]
-  end
+    let!(:countries) do
+      FactoryBot.create_list(:country, 2, :uniq_name)
+    end
 
-  include_examples :responds_with_correct_json_each_row do
-    let(:expected_rows) do
-      countries.map { |record| { id: record.id, name: record.name, iso2: record.iso2 } }
+    include_examples :responds_with_correct_json_each_row do
+      let(:expected_rows) do
+        countries.map { |record| { id: record.id, name: record.name, iso2: record.iso2 } }
+      end
     end
   end
 end
