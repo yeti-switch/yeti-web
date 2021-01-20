@@ -3,6 +3,8 @@
 class Api::Rest::Admin::RoutingPlanResource < BaseResource
   model_name 'Routing::RoutingPlan'
 
+  paginator :paged
+
   attributes :name, :rate_delta_max, :use_lnp, :max_rerouting_attempts
 
   has_one :sorting

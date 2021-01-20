@@ -5,5 +5,7 @@ class Api::Rest::Admin::Billing::InvoiceTemplateResource < ::BaseResource
 
   attributes :name, :filename
 
+  paginator :paged
+
   filter :name
 end

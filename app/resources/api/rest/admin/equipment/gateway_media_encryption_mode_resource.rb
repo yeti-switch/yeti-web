@@ -4,5 +4,6 @@ class Api::Rest::Admin::Equipment::GatewayMediaEncryptionModeResource < JSONAPI:
   model_name 'Equipment::GatewayMediaEncryptionMode'
   immutable
   attributes :name
+  paginator :paged
   filter :name
 end

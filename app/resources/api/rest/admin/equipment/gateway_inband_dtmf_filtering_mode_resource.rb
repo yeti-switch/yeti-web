@@ -4,5 +4,6 @@ class Api::Rest::Admin::Equipment::GatewayInbandDtmfFilteringModeResource < ::Ba
   model_name 'Equipment::GatewayInbandDtmfFilteringMode'
   immutable
   attributes :name
+  paginator :paged
   filter :name
 end

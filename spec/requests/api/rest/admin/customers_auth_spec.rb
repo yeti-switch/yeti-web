@@ -13,6 +13,7 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
     let(:request_params) { nil }
 
+    include_examples :jsonapi_responds_with_pagination_links
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) do
         customers_auths.map { |r| r.id.to_s }

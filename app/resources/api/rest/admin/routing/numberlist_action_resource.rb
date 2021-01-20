@@ -5,4 +5,6 @@ class Api::Rest::Admin::Routing::NumberlistActionResource < ::BaseResource
   immutable
 
   attributes :name
+
+  paginator :paged
 end

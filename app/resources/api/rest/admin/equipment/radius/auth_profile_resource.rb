@@ -5,5 +5,7 @@ class Api::Rest::Admin::Equipment::Radius::AuthProfileResource < ::BaseResource
 
   attributes :name, :server, :port, :secret, :reject_on_error, :timeout, :attempts
 
+  paginator :paged
+
   filter :name
 end

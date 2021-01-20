@@ -9,6 +9,8 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :origination_capacity, :termination_capacity, :total_capacity,
              :send_invoices_to
 
+  paginator :paged
+
   has_one :contractor
   has_one :timezone, class_name: 'System::Timezone'
 

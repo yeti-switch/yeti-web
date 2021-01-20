@@ -9,6 +9,8 @@ class Api::Rest::Admin::ApiAccessResource < ::BaseResource
              :account_ids,
              :allowed_ips
 
+  paginator :paged
+
   # auto-generated UUID must be "reloaded"
   after_create do
     _model.reload

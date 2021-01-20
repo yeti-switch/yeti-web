@@ -4,6 +4,8 @@ class Api::Rest::Admin::DialpeerNextRateResource < BaseResource
   attributes :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :apply_time, :applied,
              :external_id
 
+  paginator :paged
+
   has_one :dialpeer
 
   filter :external_id

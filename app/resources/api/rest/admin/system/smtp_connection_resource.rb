@@ -5,5 +5,7 @@ class Api::Rest::Admin::System::SmtpConnectionResource < ::BaseResource
 
   attributes :name, :host, :port, :from_address, :auth_user, :auth_password, :global
 
+  paginator :paged
+
   filter :name
 end

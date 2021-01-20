@@ -8,6 +8,8 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
              :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id,
              :routing_tag_ids, :dst_number_min_length, :dst_number_max_length
 
+  paginator :paged
+
   has_one :gateway
   has_one :gateway_group
   has_one :routing_group

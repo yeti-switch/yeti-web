@@ -3,6 +3,8 @@
 class Api::Rest::Admin::NodeResource < ::BaseResource
   attributes :name, :rpc_endpoint
 
+  paginator :paged
+
   has_one :pop
 
   filter :name # DEPRECATED
