@@ -175,6 +175,8 @@ Rails.application.routes.draw do
             dasherized_resources :gateways
             dasherized_resources :network_prefixes
             dasherized_resources :networks
+            dasherized_resources :nodes
+            dasherized_resources :pops
             dasherized_resources :rateplans
             dasherized_resources :routing_plans
           end
