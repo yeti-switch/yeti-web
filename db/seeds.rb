@@ -17,12 +17,8 @@ end
   'class4',
   'gui',
   'notifications', # depends on gui.admin_users
-  'switch13',
-  'switch14',
-  'switch15',
-  'switch16',
-  'switch17',
   'switch18',
+  'switch19',
   'sys'
 ].each do |filename|
   execute_sql_file("db/seeds/main/#{filename}.sql")

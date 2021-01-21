@@ -318,6 +318,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :legb_rx_bytes
     it_behaves_like :jsonapi_filters_by_number_field, :legb_tx_bytes
     it_behaves_like :jsonapi_filters_by_string_field, :global_tag
+    it_behaves_like :jsonapi_filters_by_number_field, :src_country_id
+    it_behaves_like :jsonapi_filters_by_number_field, :src_network_id
     it_behaves_like :jsonapi_filters_by_number_field, :dst_country_id
     it_behaves_like :jsonapi_filters_by_number_field, :dst_network_id
     it_behaves_like :jsonapi_filters_by_number_field, :lega_rx_decode_errs
@@ -390,7 +392,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
       }
     end
     let(:includes) do
-      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw destination-rate-policy routing-plan country network]
+      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw destination-rate-policy routing-plan src-country src-network dst-country dst-network]
     end
 
     it 'http status should eq 200' do
@@ -467,6 +469,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'legb-rx-bytes' => cdr.legb_rx_bytes,
             'legb-tx-bytes' => cdr.legb_tx_bytes,
             'global-tag' => cdr.global_tag,
+            'src-country-id' => cdr.src_country_id,
+            'src-network-id' => cdr.src_network_id,
             'dst-country-id' => cdr.dst_country_id,
             'dst-network-id' => cdr.dst_network_id,
             'lega-rx-decode-errs' => cdr.lega_rx_decode_errs,
@@ -577,10 +581,16 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'term-gw' => hash_including(
               'data' => nil
             ),
-            'country' => hash_including(
+            'src-country' => hash_including(
               'data' => nil
             ),
-            'network' => hash_including(
+            'src-network' => hash_including(
+              'data' => nil
+            ),
+            'dst-country' => hash_including(
+              'data' => nil
+            ),
+            'dst-network' => hash_including(
               'data' => nil
             )
           )

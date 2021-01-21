@@ -138,6 +138,8 @@
 #  sign_orig_transport_protocol_id :integer(2)
 #  sign_term_transport_protocol_id :integer(2)
 #  src_area_id                     :integer(4)
+#  src_country_id                  :integer(4)
+#  src_network_id                  :integer(4)
 #  term_call_id                    :string
 #  term_gw_external_id             :bigint(8)
 #  term_gw_id                      :integer(4)
