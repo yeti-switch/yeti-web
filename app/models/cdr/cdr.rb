@@ -162,7 +162,6 @@ class Cdr::Cdr < Cdr::Base
   ].freeze
 
   include Partitionable
-  include RoutingTagIdsScopeable
   self.pg_partition_name = 'PgPartition::Cdr'
 
   belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
@@ -322,6 +321,14 @@ class Cdr::Cdr < Cdr::Base
 
   scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
 
+  scope :tagged, lambda { |value|
+    if ActiveModel::Type::Boolean.new.cast(value)
+      where("routing_tag_ids <> '{}'") # has tags
+    else
+      where("routing_tag_ids = '{}'") # no tags
+    end
+  }
+
   private
 
   def self.ransackable_scopes(_auth_object = nil)
@@ -331,7 +338,6 @@ class Cdr::Cdr < Cdr::Base
       account_id_eq
       routing_tag_ids_include
       routing_tag_ids_array_contains
-      routing_tag_ids_covers
       tagged
     ]
   end
