@@ -53,4 +53,20 @@ RSpec.describe 'Cdrs index page filtering', js: true do
       expect(page).to have_select :Tagged, selected: 'Any'
     end
   end
+
+  context 'with filter by routing tag ids contains' do
+    let(:tagged_filter_value) { tag.name }
+
+    it 'shows filtered records with contains ids' do
+      within_filters do
+        fill_in_chosen 'Routing Tag IDs Contains', with: tagged_filter_value
+      end
+
+      subject
+      expect(page).to have_table
+      expect(page).to have_table_row count: 1
+      expect(page).to have_table_cell column: 'Id', text: cdr_tagged.id
+      expect(page).to have_select 'q_routing_tag_ids_array_contains', selected: tagged_filter_value
+    end
+  end
 end
