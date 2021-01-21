@@ -140,7 +140,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :rtt
   filter :p_charge_info_in, as: :string_eq
 
-  acts_as_filter_by_routing_tag_ids
+  acts_as_filter_by_routing_tag_ids is_ids_covers: false
 
   # X-Accel-Redirect: /protected/iso.img;
   #  location /protected/ {
