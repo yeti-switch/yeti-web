@@ -162,6 +162,7 @@ class Cdr::Cdr < Cdr::Base
   ].freeze
 
   include Partitionable
+  include RoutingTagIdsScopeable
   self.pg_partition_name = 'PgPartition::Cdr'
 
   belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
@@ -319,6 +320,8 @@ class Cdr::Cdr < Cdr::Base
     SqlCaller::Cdr.select_value("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
   end
 
+  scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
+
   private
 
   def self.ransackable_scopes(_auth_object = nil)
@@ -327,6 +330,9 @@ class Cdr::Cdr < Cdr::Base
       status_eq
       account_id_eq
       routing_tag_ids_include
+      routing_tag_ids_array_contains
+      routing_tag_ids_covers
+      tagged
     ]
   end
 end
