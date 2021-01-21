@@ -39,6 +39,7 @@
 //= require modal_link
 //= require import_apply_unique_fields
 //= require ajax-chosen
+//= require credential_generator
 
 
 $(document).ready(function () {
