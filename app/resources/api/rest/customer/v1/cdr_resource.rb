@@ -116,6 +116,8 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   ransack_filter :legb_rx_bytes, type: :number
   ransack_filter :legb_tx_bytes, type: :number
   ransack_filter :global_tag, type: :string
+  ransack_filter :src_country_id, type: :number
+  ransack_filter :src_network_id, type: :number
   ransack_filter :dst_country_id, type: :number
   ransack_filter :dst_network_id, type: :number
   ransack_filter :lega_rx_decode_errs, type: :number

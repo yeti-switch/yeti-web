@@ -287,6 +287,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :diversion_in
           column :diversion_out
 
+          column :src_country
+          column :src_network
           column :dst_country
           column :dst_network
 
@@ -457,6 +459,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :diversion_in
           row :diversion_out
 
+          row :src_country
+          row :src_network
           row :dst_country
           row :dst_network
 
@@ -652,6 +656,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
     column :diversion_in
     column :diversion_out
+
+    column :src_country
+    column :src_network
     column :dst_country
     column :dst_network
 
@@ -907,6 +914,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :dst_prefix_out
       column :diversion_in
       column :diversion_out
+      column :src_country
+      column :src_network
       column :dst_country
       column :dst_network
       column :node do |row|
