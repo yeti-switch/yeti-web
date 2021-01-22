@@ -4,7 +4,9 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   menu parent: 'CDR', priority: 97
   actions :index, :show, :create, :new
 
+  filter :id
   filter :status, as: :select, collection: CdrExport::STATUSES
+  filter :rows_count
   filter :callback_url
   filter :created_at
 

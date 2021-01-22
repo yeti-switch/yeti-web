@@ -71,6 +71,7 @@ class Routing::Destination < Yeti::ActiveRecord
   include RoutingTagIdsScopeable
 
   scope :low_quality, -> { where quality_alarm: true }
+  scope :time_valid, -> { where('valid_till >= :time AND valid_from < :time', time: Time.now) }
 
   scope :where_customer, lambda { |id|
     joins(:rate_group).joins(:rateplans).joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })

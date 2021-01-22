@@ -317,6 +317,12 @@ ActiveAdmin.register Gateway do
   filter :external_id
   filter :radius_accounting_profile, input_html: { class: 'chosen' }
   filter :lua_script, input_html: { class: 'chosen' }
+  boolean_filter :auth_enabled
+  filter :auth_user
+  filter :auth_password
+  filter :incoming_auth_username
+  filter :incoming_auth_password
+  filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
 
   form do |f|
     f.semantic_errors *f.object.errors.keys

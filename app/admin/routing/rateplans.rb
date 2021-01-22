@@ -36,6 +36,7 @@ ActiveAdmin.register Routing::Rateplan do
   filter :uuid_equals, label: 'UUID'
   filter :name
   filter :external_id
+  filter :profit_control_mode, input_html: { class: 'chosen' }, collection: proc { Routing::RateProfitControlMode.pluck(:name, :id) }
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)

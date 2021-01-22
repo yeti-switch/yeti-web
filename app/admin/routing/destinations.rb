@@ -34,6 +34,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                  skip_columns: [:routing_tag_ids]
 
   scope :low_quality
+  scope :time_valid
 
   filter :id
   filter :uuid_equals, label: 'UUID'
@@ -64,6 +65,15 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
          }
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
+  filter :valid_from, as: :date_time_range
+  filter :valid_till, as: :date_time_range
+  filter :rate_policy, input_html: { class: 'chosen' }, collection: proc { Routing::DestinationRatePolicy.pluck(:name, :id) }
+  boolean_filter :reverse_billing
+  filter :initial_interval
+  filter :next_interval
+  filter :asr_limit
+  filter :acd_limit
+  filter :short_calls_limit
 
   acts_as_filter_by_routing_tag_ids
 

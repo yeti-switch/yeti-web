@@ -183,6 +183,10 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :end_date, as: :date_time_range
   filter :vendor_invoice, label: 'Direction', as: :select, collection: [['Vendor', true], ['Customer', false]]
   filter :type
+  filter :amount
+  filter :billing_duration
+  filter :calls_count
+  filter :calls_duration
 
   show do |s|
     tabs do
