@@ -11,18 +11,18 @@ RSpec.describe 'Filter Destination records', :js do
       let!(:dialpeer_tagged) { create :dialpeer, routing_tag_ids: [tag.id] }
 
       it 'should have record with any tag' do
-        select :Yes, from: :Tagged
+        fill_in_chosen 'Tagged', with: 'Yes'
         click_button :Filter
         expect(page).to have_css 'table.index_table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: dialpeer_tagged.id
-        expect(page).to have_select :Tagged, selected: 'Yes'
+        expect(page).to have_field_chosen('Tagged', with: 'Yes')
       end
 
       it 'should have record without any tag' do
-        select :No, from: :Tagged
+        fill_in_chosen 'Tagged', with: 'No'
         click_button :Filter
         expect(page).to have_css('table.index_table tbody tr', count: other_dialpeers.count)
-        expect(page).to have_select :Tagged, selected: 'No'
+        expect(page).to have_field_chosen('Tagged', with: 'No')
         other_dialpeers.each { |p| expect(page).to have_css '.resource_id_link', text: p.id }
       end
     end

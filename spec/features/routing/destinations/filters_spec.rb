@@ -11,19 +11,19 @@ RSpec.describe 'Filter Destination records', :js do
 
       it 'should have records with any tag' do
         visit destinations_path
-        select :Yes, from: :Tagged
+        fill_in_chosen 'Tagged', with: 'Yes'
         click_button :Filter
         expect(page).to have_css 'table.index_table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_tagged.id
-        expect(page).to have_select :Tagged, selected: 'Yes'
+        expect(page).to have_field_chosen('Tagged', with: 'Yes')
       end
 
       it 'should have record without any tag' do
         visit destinations_path
-        select :No, from: :Tagged
+        fill_in_chosen 'Tagged', with: 'No'
         click_button :Filter
         expect(page).to have_css 'table.index_table tbody tr', count: other_destinations_list.count
-        expect(page).to have_select :Tagged, selected: 'No'
+        expect(page).to have_field_chosen('Tagged', with: 'No')
         other_destinations_list.each { |d| expect(page).to have_css('.resource_id_link', text: d.id) }
       end
     end
