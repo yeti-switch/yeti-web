@@ -1,4 +1,4 @@
-## Welcome to YETI
+# Welcome to YETI
 [![Build Status](https://api.travis-ci.org/yeti-switch/yeti-web.svg?branch=master)](https://travis-ci.org/yeti-switch/yeti-web)
 
 [![Coverage Status](https://coveralls.io/repos/github/yeti-switch/yeti-web/badge.svg?branch=master)](https://coveralls.io/github/yeti-switch/yeti-web?branch=master)
@@ -6,6 +6,11 @@
 
 # Contributing, Development setup
 
+## Ruby
+
+You have to use Ruby version 2.6 with installed bundler.
+
+## Postgresql
 
 It is strongly recommended to use PostgreSQL version 13.
 The easiest way to install it - is to use Debian Linux and follow official PostgreSQL instruction
@@ -24,7 +29,9 @@ sudo apt-get install -t buster-pgdg libpq-dev
 ```
 In addition you need to compile or install from .deb package Yeti PostgreSQL extension `postgresql-13-yeti` https://github.com/yeti-switch/yeti-pg-ext
 
-Then fork and clone yeti-web repository and run:
+## Preparing yeti-web application
+
+Fork and clone yeti-web repository and run:
 
 ```sh
 bundle install
@@ -74,7 +81,7 @@ And run tests:
 bundle exec rspec
 ```
 
-# Migrations
+## Migrations
 
 When you run several migrations in a row, you may wish to stop at some point. In this case you should add `stop_step` method to the migration:
 
