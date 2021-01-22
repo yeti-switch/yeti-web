@@ -39,6 +39,24 @@ module Helpers
       chosen_node.click
       find('ul.chosen-results li.active-result', text: text, exact_text: exact).click
     end
+
+    # Checks chosen select presence on page
+    # @param label [String] field label.
+    # @param options [Hash]
+    #   :with [String, nil] check selected option text whether not nil,
+    #   :disabled [Boolean, nil] default false,
+    #   :exact [Boolean] match :with by exact text (default true),
+    #   for other options @see #have_selector.
+    def have_field_chosen(label, options = {})
+      with = options.delete(:with)
+      disabled = options.delete(:disabled)
+      exact = options.delete(:exact)
+      exact = true if exact.nil?
+      warn 'empty :with will be ignored because :exact is false' if with.blank? && !exact
+      options[exact ? :exact_text : :text] = with unless with.nil?
+      selector = chosen_container_selector(label, disabled: disabled)
+      have_selector(selector, options)
+    end
   end
 end
 
