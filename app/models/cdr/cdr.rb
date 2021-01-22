@@ -325,7 +325,7 @@ class Cdr::Cdr < Cdr::Base
     if ActiveModel::Type::Boolean.new.cast(value)
       where("routing_tag_ids <> '{}'") # has tags
     else
-      where("routing_tag_ids = '{}'") # no tags
+      where("routing_tag_ids = '{}' OR routing_tag_ids IS NULL") # no tags
     end
   }
 
