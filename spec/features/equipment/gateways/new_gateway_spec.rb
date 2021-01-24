@@ -89,18 +89,18 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
     end
 
     context 'when credentials is empty' do
-      it 'should generate new credential by double click for :incoming_auth_username with 20 chars' do
+      it 'should generate new credential by click on the link in hint for :incoming_auth_username with 20 chars' do
+        click_link('Сlick to fill random username')
         incoming_auth_username = find_field('gateway_incoming_auth_username')
-        incoming_auth_username.double_click
         expect(incoming_auth_username).to be_present
         expect(incoming_auth_username.value).to be_present
         expect(incoming_auth_username.value).to match(/\A[a-zA-Z0-9]+\z/)
         expect(incoming_auth_username.value.length).to eq(20)
       end
 
-      it 'should generate new credential by double click for :incoming_auth_password with 20 chars' do
+      it 'should generate new credential by click on the link in hint for :incoming_auth_password with 20 chars' do
+        click_link('Сlick to fill random password')
         incoming_auth_password = find_field('gateway_incoming_auth_password')
-        incoming_auth_password.double_click
         expect(incoming_auth_password).to be_present
         expect(incoming_auth_password.value).to be_present
         expect(incoming_auth_password.value).to match(/\A[a-zA-Z0-9]+\z/)
@@ -126,9 +126,9 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
         aa_form.set_text 'gateway_incoming_auth_password', 'TestCredential'
       end
 
-      it 'should generate new credential by double click for :incoming_auth_username with 20 chars' do
+      it 'should generate new credential by click on the link in hint for :incoming_auth_username with 20 chars' do
+        click_link('Сlick to fill random username')
         incoming_auth_username = find_field('gateway_incoming_auth_username')
-        incoming_auth_username.double_click
         expect(incoming_auth_username).to be_present
         expect(incoming_auth_username.value).to be_present
         expect(incoming_auth_username.value).to match(/\A[a-zA-Z0-9]+\z/)
@@ -136,9 +136,9 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
         expect(incoming_auth_username.value).not_to eq('TestCredential')
       end
 
-      it 'should generate new credential by double click for :incoming_auth_password with 20 chars' do
+      it 'should generate new credential by click on the link in hint for :incoming_auth_password with 20 chars' do
+        click_link('Сlick to fill random password')
         incoming_auth_password = find_field('gateway_incoming_auth_password')
-        incoming_auth_password.double_click
         expect(incoming_auth_password).to be_present
         expect(incoming_auth_password.value).to be_present
         expect(incoming_auth_password.value).to match(/\A[a-zA-Z0-9]+\z/)

@@ -377,8 +377,8 @@ ActiveAdmin.register Gateway do
               f.input :transit_headers_from_origination
               f.input :transit_headers_from_termination
               f.input :sip_interface_name
-              f.input :incoming_auth_username, input_html: { ondblclick: 'generateCredential(this)' }
-              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off', ondblclick: 'generateCredential(this)' }
+              f.input :incoming_auth_username, hint: "#{link_to('Сlick to fill random username', 'javascript:void(0)', onclick: 'generateCredential(this)')}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
+              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
             end
 
             f.inputs 'Origination' do
