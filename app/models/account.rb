@@ -52,11 +52,11 @@ class Account < Yeti::ActiveRecord
   # belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'customer_invoice_period_id'
   # belongs_to :vendor_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'vendor_invoice_period_id'
 
-  belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod'
-  belongs_to :vendor_invoice_period, class_name: 'Billing::InvoicePeriod'
+  belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', optional: true
+  belongs_to :vendor_invoice_period, class_name: 'Billing::InvoicePeriod', optional: true
 
-  belongs_to :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'vendor_invoice_template_id'
-  belongs_to :customer_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'customer_invoice_template_id'
+  belongs_to :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'vendor_invoice_template_id', optional: true
+  belongs_to :customer_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'customer_invoice_template_id', optional: true
   belongs_to :timezone, class_name: 'System::Timezone', foreign_key: :timezone_id
 
   has_many :payments, dependent: :destroy
@@ -94,7 +94,7 @@ class Account < Yeti::ActiveRecord
   validates :min_balance, numericality: true, if: -> { min_balance.present? }
   validates :balance, numericality: true
   validates :uuid, :name, uniqueness: true
-  validates :name, :contractor, :timezone, :vat, :max_balance, :min_balance, presence: true
+  validates :name, :timezone, :vat, :max_balance, :min_balance, presence: true
   validates :max_balance, numericality: { greater_than_or_equal_to: :min_balance }, if: -> { min_balance.present? }
 
   validates :termination_capacity, :origination_capacity, :total_capacity,

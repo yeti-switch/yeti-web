@@ -54,13 +54,13 @@
 class Importing::Dialpeer < Importing::Base
   self.table_name = 'import_dialpeers'
 
-  belongs_to :gateway, class_name: '::Gateway'
-  belongs_to :gateway_group, class_name: '::GatewayGroup'
-  belongs_to :routing_group, class_name: '::RoutingGroup'
-  belongs_to :account, class_name: '::Account'
-  belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor'
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
-  belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id
+  belongs_to :gateway, class_name: '::Gateway', optional: true
+  belongs_to :gateway_group, class_name: '::GatewayGroup', optional: true
+  belongs_to :routing_group, class_name: '::RoutingGroup', optional: true
+  belongs_to :account, class_name: '::Account', optional: true
+  belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', optional: true
+  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
+  belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id, optional: true
   has_many :dialpeer_next_rates, dependent: :destroy
 
   self.import_attributes = %w[prefix enabled lcr_rate_multiplier

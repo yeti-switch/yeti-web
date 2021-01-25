@@ -31,10 +31,10 @@ class Importing::NumberlistItem < Importing::Base
   self.table_name = 'data_import.import_numberlist_items'
   attr_accessor :file
 
-  belongs_to :numberlist, class_name: 'Routing::Numberlist'
-  belongs_to :action, class_name: 'Routing::NumberlistAction'
-  belongs_to :tag_action, class_name: 'Routing::TagAction'
-  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :numberlist, class_name: 'Routing::Numberlist', optional: true
+  belongs_to :action, class_name: 'Routing::NumberlistAction', optional: true
+  belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
   import_for ::Routing::NumberlistItem
 

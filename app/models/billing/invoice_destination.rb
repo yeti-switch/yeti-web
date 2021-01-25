@@ -31,8 +31,8 @@
 
 class Billing::InvoiceDestination < Cdr::Base
   belongs_to :invoice, class_name: 'Billing::Invoice', foreign_key: :invoice_id
-  belongs_to :country, class_name: 'System::Country', foreign_key: :country_id
-  belongs_to :network, class_name: 'System::Network', foreign_key: :network_id
+  belongs_to :country, class_name: 'System::Country', foreign_key: :country_id, optional: true
+  belongs_to :network, class_name: 'System::Network', foreign_key: :network_id, optional: true
 
   def self.for_invoice
     includes(:country, :network)

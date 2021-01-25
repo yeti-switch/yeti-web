@@ -148,29 +148,29 @@ class Importing::Gateway < Importing::Base
   self.table_name = 'data_import.import_gateways'
   attr_accessor :file
 
-  belongs_to :contractor, class_name: '::Contractor'
-  belongs_to :session_refresh_method, class_name: '::SessionRefreshMethod'
-  belongs_to :sdp_alines_filter_type, class_name: '::FilterType', foreign_key: :sdp_alines_filter_type_id
-  belongs_to :orig_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :orig_disconnect_policy_id
-  belongs_to :term_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :term_disconnect_policy_id
-  belongs_to :gateway_group, class_name: '::GatewayGroup'
-  belongs_to :diversion_policy, class_name: '::DiversionPolicy'
-  belongs_to :pop, class_name: '::Pop'
-  belongs_to :codec_group, class_name: '::CodecGroup'
-  belongs_to :sdp_c_location, class_name: '::SdpCLocation'
-  belongs_to :sensor, class_name: '::System::Sensor', foreign_key: :sensor_id
-  belongs_to :sensor_level, class_name: '::System::SensorLevel', foreign_key: :sensor_level_id
-  belongs_to :dtmf_receive_mode, class_name: '::System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
-  belongs_to :dtmf_send_mode, class_name: '::System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
-  belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id
-  belongs_to :term_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
-  belongs_to :orig_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
-  belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
-  belongs_to :rx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
-  belongs_to :tx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
-  belongs_to :termination_dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
-  belongs_to :termination_src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_src_numberlist_id
-  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :contractor, class_name: '::Contractor', optional: true
+  belongs_to :session_refresh_method, class_name: '::SessionRefreshMethod', optional: true
+  belongs_to :sdp_alines_filter_type, class_name: '::FilterType', foreign_key: :sdp_alines_filter_type_id, optional: true
+  belongs_to :orig_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :orig_disconnect_policy_id, optional: true
+  belongs_to :term_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :term_disconnect_policy_id, optional: true
+  belongs_to :gateway_group, class_name: '::GatewayGroup', optional: true
+  belongs_to :diversion_policy, class_name: '::DiversionPolicy', optional: true
+  belongs_to :pop, class_name: '::Pop', optional: true
+  belongs_to :codec_group, class_name: '::CodecGroup', optional: true
+  belongs_to :sdp_c_location, class_name: '::SdpCLocation', optional: true
+  belongs_to :sensor, class_name: '::System::Sensor', foreign_key: :sensor_id, optional: true
+  belongs_to :sensor_level, class_name: '::System::SensorLevel', foreign_key: :sensor_level_id, optional: true
+  belongs_to :dtmf_receive_mode, class_name: '::System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id, optional: true
+  belongs_to :dtmf_send_mode, class_name: '::System::DtmfSendMode', foreign_key: :dtmf_send_mode_id, optional: true
+  belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
+  belongs_to :term_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id, optional: true
+  belongs_to :orig_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id, optional: true
+  belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id, optional: true
+  belongs_to :rx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id, optional: true
+  belongs_to :tx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id, optional: true
+  belongs_to :termination_dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_dst_numberlist_id, optional: true
+  belongs_to :termination_src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_src_numberlist_id, optional: true
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
   self.import_attributes = %w[
     name enabled

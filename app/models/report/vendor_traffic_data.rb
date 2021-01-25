@@ -34,7 +34,7 @@ class Report::VendorTrafficData < Cdr::Base
   self.table_name = 'reports.vendor_traffic_report_data'
 
   belongs_to :report, class_name: 'Report::VendorTraffic', foreign_key: :report_id
-  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id # ,:conditions => {:vendor => true}
+  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,:conditions => {:vendor => true}
 
   def display_name
     id.to_s

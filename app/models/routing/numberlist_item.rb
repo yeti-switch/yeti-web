@@ -39,9 +39,9 @@ class Routing::NumberlistItem < Yeti::ActiveRecord
   self.table_name = 'class4.numberlist_items'
 
   belongs_to :numberlist, class_name: 'Routing::Numberlist', foreign_key: :numberlist_id
-  belongs_to :action, class_name: 'Routing::NumberlistAction', foreign_key: :action_id
-  belongs_to :tag_action, class_name: 'Routing::TagAction'
-  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :action, class_name: 'Routing::NumberlistAction', foreign_key: :action_id, optional: true
+  belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
   validates :key, uniqueness: { scope: [:numberlist_id] }

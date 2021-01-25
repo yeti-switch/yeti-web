@@ -19,8 +19,8 @@ class Importing::CodecGroupCodec < Importing::Base
   self.table_name = 'data_import.import_codec_group_codecs'
   attr_accessor :file
 
-  belongs_to :codec_group, class_name: '::CodecGroup'
-  belongs_to :codec, class_name: '::Codec'
+  belongs_to :codec_group, class_name: '::CodecGroup', optional: true
+  belongs_to :codec, class_name: '::Codec', optional: true
 
   self.import_attributes = %w[codec_group_id codec_id priority]
 

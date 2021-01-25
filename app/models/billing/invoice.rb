@@ -34,7 +34,7 @@ class Billing::Invoice < Cdr::Base
   has_many :customer_cdrs, -> { where vendor_invoice: false }, class_name: 'Cdr', foreign_key: 'customer_invoice_id'
 
   belongs_to :account, class_name: 'Account', foreign_key: 'account_id'
-  belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id # , :conditions => {:customer => true}act
+  belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id, optional: true # , :conditions => {:customer => true}act
   belongs_to :state, class_name: 'Billing::InvoiceState', foreign_key: :state_id
   belongs_to :type, class_name: 'Billing::InvoiceType', foreign_key: :type_id
 

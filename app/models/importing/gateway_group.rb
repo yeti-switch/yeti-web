@@ -20,8 +20,8 @@ class Importing::GatewayGroup < Importing::Base
   self.table_name = 'data_import.import_gateway_groups'
   attr_accessor :file
 
-  belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', foreign_key: :vendor_id
-  belongs_to :balancing_mode, class_name: 'Equipment::GatewayGroupBalancingMode', foreign_key: :balancing_mode_id
+  belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', foreign_key: :vendor_id, optional: true
+  belongs_to :balancing_mode, class_name: 'Equipment::GatewayGroupBalancingMode', foreign_key: :balancing_mode_id, optional: true
 
   self.import_attributes = %w[
     name

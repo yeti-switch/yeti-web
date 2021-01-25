@@ -158,21 +158,21 @@
 require 'resolv'
 class Gateway < Yeti::ActiveRecord
   belongs_to :contractor
-  belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id
+  belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id, optional: true
   belongs_to :session_refresh_method
   belongs_to :sdp_alines_filter_type, class_name: 'FilterType', foreign_key: :sdp_alines_filter_type_id
-  belongs_to :orig_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :orig_disconnect_policy_id
-  belongs_to :term_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :term_disconnect_policy_id
-  belongs_to :gateway_group
+  belongs_to :orig_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :orig_disconnect_policy_id, optional: true
+  belongs_to :term_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :term_disconnect_policy_id, optional: true
+  belongs_to :gateway_group, optional: true
   belongs_to :diversion_policy
-  belongs_to :pop
+  belongs_to :pop, optional: true
   belongs_to :codec_group
   belongs_to :sdp_c_location, class_name: 'SdpCLocation'
-  belongs_to :sensor, class_name: 'System::Sensor', foreign_key: :sensor_id
+  belongs_to :sensor, class_name: 'System::Sensor', foreign_key: :sensor_id, optional: true
   belongs_to :sensor_level, class_name: 'System::SensorLevel', foreign_key: :sensor_level_id
   belongs_to :dtmf_receive_mode, class_name: 'System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id
   belongs_to :dtmf_send_mode, class_name: 'System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
-  belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
+  belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
   belongs_to :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
@@ -182,9 +182,9 @@ class Gateway < Yeti::ActiveRecord
   belongs_to :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority', foreign_key: :network_protocol_priority_id
   belongs_to :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode', foreign_key: :media_encryption_mode_id
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
-  belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id
-  belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id
-  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id, optional: true
+  belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id, optional: true
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
@@ -193,7 +193,7 @@ class Gateway < Yeti::ActiveRecord
 
   include WithPaperTrail
 
-  validates :contractor, :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id, presence: true
+  validates :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id, presence: true
   validates :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode, presence: true
   validates :name, :priority, :weight, presence: true
   validates :name, uniqueness: true
