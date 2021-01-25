@@ -20,8 +20,8 @@
 
 class Log::EmailLog < Yeti::ActiveRecord
   self.table_name = 'notifications.email_logs'
-  belongs_to :contact, class_name: 'Billing::Contact', foreign_key: :contact_id
-  belongs_to :smtp_connection, class_name: 'System::SmtpConnection', foreign_key: :smtp_connection_id
+  belongs_to :contact, class_name: 'Billing::Contact', foreign_key: :contact_id, optional: true
+  belongs_to :smtp_connection, class_name: 'System::SmtpConnection', foreign_key: :smtp_connection_id, optional: true
   # belongs_to :attachment, class_name: Notification::Attachment
   # belongs_to :attachment_no_data, -> { select [:id, :filename ] },
   #           class_name: Notification::Attachment, foreign_key: :attachment_id

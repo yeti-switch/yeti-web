@@ -168,35 +168,35 @@ class Cdr::Cdr < Cdr::Base
   include Partitionable
   self.pg_partition_name = 'PgPartition::Cdr'
 
-  belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
-  belongs_to :routing_group
-  belongs_to :src_area, class_name: 'Routing::Area', foreign_key: :src_area_id
-  belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id
-  belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id
-  belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
-  belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
-  belongs_to :destination, class_name: 'Routing::Destination'
-  belongs_to :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :destination_rate_policy_id
-  belongs_to :dialpeer
-  belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id
-  belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id
-  belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id
-  belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id # ,:conditions => {:vendor => true}
-  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id # ,  :conditions => {:customer => true}
-  belongs_to :disconnect_initiator
-  belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id
-  belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id
-  belongs_to :node, class_name: 'Node', foreign_key: :node_id
-  belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
+  belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id, optional: true
+  belongs_to :routing_group, optional: true
+  belongs_to :src_area, class_name: 'Routing::Area', foreign_key: :src_area_id, optional: true
+  belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id, optional: true
+  belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id, optional: true
+  belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id, optional: true
+  belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id, optional: true
+  belongs_to :destination, class_name: 'Routing::Destination', optional: true
+  belongs_to :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
+  belongs_to :dialpeer, optional: true
+  belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id, optional: true
+  belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id, optional: true
+  belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id, optional: true
+  belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id, optional: true # ,:conditions => {:vendor => true}
+  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
+  belongs_to :disconnect_initiator, optional: true
+  belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id, optional: true
+  belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
+  belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
+  belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :dump_level
-  belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id
-  belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id
-  belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
-  belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
-  belongs_to :lnp_database, class_name: 'Lnp::Database', foreign_key: :lnp_database_id
-  belongs_to :auth_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :auth_orig_transport_protocol_id
-  belongs_to :sign_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_orig_transport_protocol_id
-  belongs_to :sign_term_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_term_transport_protocol_id
+  belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id, optional: true
+  belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id, optional: true
+  belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id, optional: true
+  belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id, optional: true
+  belongs_to :lnp_database, class_name: 'Lnp::Database', foreign_key: :lnp_database_id, optional: true
+  belongs_to :auth_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :auth_orig_transport_protocol_id, optional: true
+  belongs_to :sign_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_orig_transport_protocol_id, optional: true
+  belongs_to :sign_term_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_term_transport_protocol_id, optional: true
 
   scope :success, -> { where success: true }
   scope :failure, -> { where success: false }

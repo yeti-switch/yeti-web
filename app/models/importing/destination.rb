@@ -43,10 +43,10 @@
 class Importing::Destination < Importing::Base
   self.table_name = 'data_import.import_destinations'
 
-  belongs_to :rate_group, class_name: 'Routing::RateGroup'
-  belongs_to :rate_policy, class_name: '::DestinationRatePolicy'
-  belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
+  belongs_to :rate_group, class_name: 'Routing::RateGroup', optional: true
+  belongs_to :rate_policy, class_name: '::DestinationRatePolicy', optional: true
+  belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id', optional: true
+  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
 
   self.import_attributes = %w[enabled prefix reject_calls rate_group_id
                               initial_interval next_interval initial_rate next_rate

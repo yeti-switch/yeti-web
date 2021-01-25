@@ -31,7 +31,7 @@
 class Importing::Account < Importing::Base
   self.table_name = 'data_import.import_accounts'
   attr_accessor :file
-  belongs_to :contractor, class_name: '::Contractor'
+  belongs_to :contractor, class_name: '::Contractor', optional: true
 
   self.import_attributes = %w[
     contractor_id

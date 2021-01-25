@@ -20,7 +20,7 @@
 class Report::CustomCdr < Cdr::Base
   self.table_name = 'reports.cdr_custom_report'
 
-  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id
+  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true
 
   CDR_COLUMNS = %i[
     customer_id

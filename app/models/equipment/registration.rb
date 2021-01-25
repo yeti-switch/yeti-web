@@ -40,8 +40,8 @@
 class Equipment::Registration < Yeti::ActiveRecord
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
-  belongs_to :pop
-  belongs_to :node
+  belongs_to :pop, optional: true
+  belongs_to :node, optional: true
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
 
   validates :name, uniqueness: { allow_blank: false }

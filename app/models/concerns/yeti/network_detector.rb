@@ -7,7 +7,7 @@ module Yeti
     EMPTY_NETWORK_HINT = 'Unknown network'
 
     included do
-      belongs_to :network_prefix, class_name: 'System::NetworkPrefix'
+      belongs_to :network_prefix, class_name: 'System::NetworkPrefix', optional: true
       has_one :country, through: :network_prefix
       has_one :network, through: :network_prefix
 

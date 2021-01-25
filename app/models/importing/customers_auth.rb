@@ -88,22 +88,22 @@ class Importing::CustomersAuth < Importing::Base
   self.table_name = 'data_import.import_customers_auth'
   attr_accessor :file
 
-  belongs_to :gateway, class_name: '::Gateway'
-  belongs_to :account, class_name: '::Account'
-  belongs_to :routing_plan, class_name: '::Routing::RoutingPlan', foreign_key: :routing_plan_id
-  belongs_to :rateplan, class_name: 'Routing::Rateplan'
-  belongs_to :pop, class_name: '::Pop'
-  belongs_to :customer, -> { where customer: true }, class_name: '::Contractor', foreign_key: :customer_id
-  belongs_to :diversion_policy, class_name: '::DiversionPolicy'
-  belongs_to :dump_level, class_name: '::DumpLevel'
+  belongs_to :gateway, class_name: '::Gateway', optional: true
+  belongs_to :account, class_name: '::Account', optional: true
+  belongs_to :routing_plan, class_name: '::Routing::RoutingPlan', foreign_key: :routing_plan_id, optional: true
+  belongs_to :rateplan, class_name: 'Routing::Rateplan', optional: true
+  belongs_to :pop, class_name: '::Pop', optional: true
+  belongs_to :customer, -> { where customer: true }, class_name: '::Contractor', foreign_key: :customer_id, optional: true
+  belongs_to :diversion_policy, class_name: '::DiversionPolicy', optional: true
+  belongs_to :dump_level, class_name: '::DumpLevel', optional: true
 
-  belongs_to :dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :dst_numberlist_id
-  belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id
-  belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id
-  belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id
-  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
-  belongs_to :tag_action, class_name: 'Routing::TagAction'
-  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :dst_numberlist_id, optional: true
+  belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
+  belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id, optional: true
+  belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
+  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
+  belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
   self.import_attributes = %w[
     enabled

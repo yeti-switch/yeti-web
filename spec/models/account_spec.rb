@@ -112,7 +112,7 @@ RSpec.describe Account, type: :model do
 
       include_examples :does_not_create_record, errors: {
         name: "can't be blank",
-        contractor: "can't be blank"
+        contractor: 'must exist'
       }
     end
 

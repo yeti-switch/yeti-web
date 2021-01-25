@@ -37,11 +37,11 @@ class Importing::Registration < Importing::Base
   self.table_name = 'data_import.import_registrations'
   attr_accessor :file
 
-  belongs_to :pop, class_name: '::Pop'
-  belongs_to :node, class_name: '::Node'
-  belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id
-  belongs_to :proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
-  belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
+  belongs_to :pop, class_name: '::Pop', optional: true
+  belongs_to :node, class_name: '::Node', optional: true
+  belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
+  belongs_to :proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id, optional: true
+  belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id, optional: true
 
   self.import_attributes = %w[name enabled
                               pop_id node_id domain

@@ -67,7 +67,7 @@ class Cdr::RtpStatistic < Cdr::Base
   self.pg_partition_depth_past = 3
   self.pg_partition_depth_future = 3
 
-  belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id
+  belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
   belongs_to :node, class_name: 'Node', foreign_key: :node_id
 

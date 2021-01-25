@@ -38,8 +38,8 @@ class Routing::Numberlist < Yeti::ActiveRecord
 
   belongs_to :mode, class_name: 'Routing::NumberlistMode', foreign_key: :mode_id
   belongs_to :default_action, class_name: 'Routing::NumberlistAction', foreign_key: :default_action_id
-  belongs_to :tag_action, class_name: 'Routing::TagAction'
-  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id
+  belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
+  belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 

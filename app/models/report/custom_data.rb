@@ -98,26 +98,26 @@ class Report::CustomData < Cdr::Base
 
   belongs_to :report, class_name: 'Report::CustomCdr', foreign_key: :report_id
 
-  belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
-  belongs_to :routing_group, class_name: 'RoutingGroup', foreign_key: :routing_group_id
+  belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id, optional: true
+  belongs_to :routing_group, class_name: 'RoutingGroup', foreign_key: :routing_group_id, optional: true
 
-  belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
-  belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
-  belongs_to :destination, class_name: 'Routing::Destination', foreign_key: :destination_id
-  belongs_to :dialpeer, class_name: 'Dialpeer', foreign_key: :dialpeer_id
-  belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id
-  belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id
-  belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id
-  belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id # ,:conditions => {:vendor => true}
-  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id # ,  :conditions => {:customer => true}
-  belongs_to :disconnect_initiator
-  belongs_to :vendor_invoice, class_name: 'Invoice', foreign_key: :vendor_invoice_id
-  belongs_to :customer_invoice, class_name: 'Invoice', foreign_key: :customer_invoice_id
-  belongs_to :destination_rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :destination_rate_policy_id
-  belongs_to :node, class_name: 'Node', foreign_key: :node_id
-  belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id
-  belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
-  belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
+  belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id, optional: true
+  belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id, optional: true
+  belongs_to :destination, class_name: 'Routing::Destination', foreign_key: :destination_id, optional: true
+  belongs_to :dialpeer, class_name: 'Dialpeer', foreign_key: :dialpeer_id, optional: true
+  belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id, optional: true
+  belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id, optional: true
+  belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id, optional: true
+  belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id, optional: true # ,:conditions => {:vendor => true}
+  belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
+  belongs_to :disconnect_initiator, optional: true
+  belongs_to :vendor_invoice, class_name: 'Invoice', foreign_key: :vendor_invoice_id, optional: true
+  belongs_to :customer_invoice, class_name: 'Invoice', foreign_key: :customer_invoice_id, optional: true
+  belongs_to :destination_rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
+  belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
+  belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
+  belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id, optional: true
+  belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id, optional: true
 
   def display_name
     id.to_s

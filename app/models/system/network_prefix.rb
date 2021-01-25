@@ -27,7 +27,7 @@
 class System::NetworkPrefix < Yeti::ActiveRecord
   self.table_name = 'sys.network_prefixes'
 
-  belongs_to :country, class_name: 'System::Country', foreign_key: :country_id
+  belongs_to :country, class_name: 'System::Country', foreign_key: :country_id, optional: true
   belongs_to :network, class_name: 'System::Network', foreign_key: :network_id
 
   include WithPaperTrail

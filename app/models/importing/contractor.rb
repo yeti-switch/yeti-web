@@ -23,7 +23,7 @@ class Importing::Contractor < Importing::Base
   self.table_name = 'data_import.import_contractors'
   attr_accessor :file
 
-  belongs_to :smtp_connection, class_name: 'System::SmtpConnection'
+  belongs_to :smtp_connection, class_name: 'System::SmtpConnection', optional: true
 
   self.import_attributes = %w[enabled name vendor customer smtp_connection_id]
 
