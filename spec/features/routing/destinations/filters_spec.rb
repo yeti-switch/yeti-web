@@ -1,45 +1,80 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Filter Destination records', :js do
+  subject do
+    visit destinations_path
+    filter_records
+    within_filters { click_submit('Filter') }
+  end
+
   include_context :login_as_admin
+
   let!(:other_destinations_list) { create_list :destination, 2 }
 
-  context 'by' do
-    context '"TAGGED"' do
-      let!(:tag) { create :routing_tag, :ua }
-      let!(:customers_auth_tagged) { create :destination, routing_tag_ids: [tag.id] }
+  describe 'filter by tagged' do
+    let!(:tag) { create :routing_tag, :ua }
+    let!(:customers_auth_tagged) { create :destination, routing_tag_ids: [tag.id] }
 
-      it 'should have records with any tag' do
-        visit destinations_path
-        fill_in_chosen 'Tagged', with: 'Yes'
-        click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
-        expect(page).to have_css '.resource_id_link', text: customers_auth_tagged.id
-        expect(page).to have_field_chosen('Tagged', with: 'Yes')
+    context 'with filter by tagged' do
+      let(:filter_records) do
+        within_filters do
+          fill_in_chosen 'Tagged', with: filter_value
+        end
       end
 
-      it 'should have record without any tag' do
-        visit destinations_path
-        fill_in_chosen 'Tagged', with: 'No'
-        click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: other_destinations_list.count
-        expect(page).to have_field_chosen('Tagged', with: 'No')
-        other_destinations_list.each { |d| expect(page).to have_css('.resource_id_link', text: d.id) }
+      let(:filter_value) { 'Yes' }
+
+      it 'returns records with any tag' do
+        subject
+
+        expect(page).to have_table
+        expect(page).to have_table_row count: 1
+        expect(page).to have_table_cell column: 'Id', text: customers_auth_tagged.id
+        expect(page).to have_field_chosen('Tagged', with: 'Yes')
       end
     end
 
-    context '"ROUTING TAG IDS CONTAINS"' do
-      let!(:tag_us) { create :routing_tag }
-      let!(:tag_ua) { create :routing_tag }
-      let!(:destinations_tag_contains) { create :destination, routing_tag_ids: [tag_us.id, tag_ua.id] }
+    context 'with filter by not tagged' do
+      let(:filter_records) do
+        within_filters do
+          fill_in_chosen 'Tagged', with: filter_value
+        end
+      end
 
-      it 'should have one record with routing_tag only' do
-        visit destinations_path
-        chosen_pick '#q_routing_tag_ids_array_contains_chosen', text: tag_us.name
-        chosen_pick '#q_routing_tag_ids_array_contains_chosen', text: tag_ua.name
-        click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
-        expect(page).to have_css '.resource_id_link', text: destinations_tag_contains.id
+      let(:filter_value) { 'No' }
+
+      it 'returns record without any tag' do
+        subject
+
+        expect(page).to have_table
+        expect(page).to have_table_row count: other_destinations_list.count
+        other_destinations_list.each { |d| expect(page).to have_table_cell column: 'Id', text: d.id }
+        expect(page).to have_field_chosen('Tagged', with: 'No')
+      end
+    end
+
+    describe 'filter by routing tag ids contains' do
+      context '"ROUTING TAG IDS CONTAINS"' do
+        let(:tags) { create_list(:routing_tag, 2) }
+
+        let!(:destinations_tag_contains) { create :destination, routing_tag_ids: [tags.first.id, tags.second.id] }
+
+        let(:filter_records) do
+          within_filters do
+            fill_in_chosen 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
+            fill_in_chosen 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
+          end
+        end
+
+        it 'returns one record with routing_tag only' do
+          subject
+
+          expect(page).to have_table
+          expect(page).to have_table_row count: 1
+          expect(page).to have_table_cell column: 'Id', text: destinations_tag_contains.id
+          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.first.name, exact: false)
+          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.second.name, exact: false)
+        end
       end
     end
   end
