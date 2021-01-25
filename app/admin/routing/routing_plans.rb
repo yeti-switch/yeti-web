@@ -30,6 +30,9 @@ ActiveAdmin.register Routing::RoutingPlan do
   filter :sorting
   filter :use_lnp, as: :select, collection: [['Yes', true], ['No', false]]
   filter :customers_auths_account_id_eq, as: :select, label: 'Assigned to account', collection: -> { Account.customers_accounts }
+  filter :rate_delta_max
+  filter :max_rerouting_attempts
+  filter :routing_groups, input_html: { class: 'chosen' }, collection: proc { RoutingGroup.pluck(:name, :id) }
 
   index do
     selectable_column

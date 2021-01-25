@@ -102,10 +102,14 @@ ActiveAdmin.register Contractor do
 
   filter :id
   filter :name
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :vendor, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :customer, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :address
+  filter :description
+  filter :phones
   filter :external_id
+  filter :smtp_connection, input_html: { class: 'chosen' }, collection: proc { System::SmtpConnection.pluck(:name, :id) }
+  boolean_filter :enabled
+  boolean_filter :vendor
+  boolean_filter :customer
 
   sidebar :links, only: %i[show edit] do
     ul do
