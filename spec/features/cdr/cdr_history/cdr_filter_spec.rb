@@ -45,7 +45,9 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table
         expect(page).to have_table_row count: cdrs_tagged.size
         cdrs_tagged.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
-        expect(page).to have_field_chosen('Tagged', with: 'Yes')
+        within_filters do
+          expect(page).to have_field_chosen('Tagged', with: filter_value)
+        end
       end
     end
 
@@ -57,7 +59,9 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table
         expect(page).to have_table_row count: cdrs_not_tagged.size
         cdrs_not_tagged.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
-        expect(page).to have_field_chosen('Tagged', with: 'No')
+        within_filters do
+          expect(page).to have_field_chosen('Tagged', with: filter_value)
+        end
       end
     end
   end
@@ -79,7 +83,9 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table
         expect(page).to have_table_row count: filtered_cdrs.size
         filtered_cdrs.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
-        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: filter_value)
+        within_filters do
+          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: filter_value)
+        end
       end
     end
   end
