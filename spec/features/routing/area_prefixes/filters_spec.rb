@@ -13,11 +13,13 @@ RSpec.describe 'Filtering the Area Prefix records', type: :feature do
 
   context 'filter by :prefix_covers' do
     let(:area) { FactoryBot.create(:area) }
-    let!(:area_prefixes) {[
-      FactoryBot.create(:area_prefix, area: area, prefix: '12'),
-      FactoryBot.create(:area_prefix, area: area, prefix: '1234'),
-      FactoryBot.create(:area_prefix, area: area, prefix: '123456')
-    ]}
+    let!(:area_prefixes) {
+      [
+        FactoryBot.create(:area_prefix, area: area, prefix: '12'),
+        FactoryBot.create(:area_prefix, area: area, prefix: '1234'),
+        FactoryBot.create(:area_prefix, area: area, prefix: '123456')
+      ]
+    }
 
     let(:filter_area_prefix_records) do
       within_filters { fill_in 'Prefix covers', with: filter_value }

@@ -237,16 +237,12 @@ ActiveAdmin.register CustomersAuth do
   filter :lua_script, input_html: { class: 'chosen' }
   boolean_filter :require_incoming_auth
   boolean_filter :check_account_balance
-  filter :gateway_incoming_auth_username_eq,
+  filter :gateway_incoming_auth_username,
          label: 'Incoming Auth Username',
-         as: :select,
-         input_html: { class: 'chosen' },
-         collection: proc { Gateway.distinct.pluck(:incoming_auth_username) }
-  filter :gateway_incoming_auth_password_eq,
+         as: :string
+  filter :gateway_incoming_auth_password,
          label: 'Incoming Auth Password',
-         as: :select,
-         input_html: { class: 'chosen' },
-         collection: proc { Gateway.distinct.pluck(:incoming_auth_password) }
+         as: :string
 
   form do |f|
     f.semantic_errors *f.object.errors.keys

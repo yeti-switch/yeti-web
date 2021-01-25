@@ -37,6 +37,7 @@ class Routing::AreaPrefix < Yeti::ActiveRecord
   end
 
   private
+
   def self.ransackable_scopes(_auth_object = nil)
     %i[
       prefix_covers
