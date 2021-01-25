@@ -105,4 +105,5 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :default_action
   filter :lua_script, input_html: { class: 'chosen' }
   filter :external_id, label: 'External ID'
+  filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
 end

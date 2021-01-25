@@ -139,6 +139,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :pdd
   filter :rtt
   filter :p_charge_info_in, as: :string_eq
+  filter :uuid_equals, label: 'UUID'
+  filter :auth_orig_ip, as: :string
+  filter :sign_orig_ip
+  filter :sign_orig_local_ip
+  filter :sign_term_local_ip
+  filter :sign_term_ip
 
   # X-Accel-Redirect: /protected/iso.img;
   #  location /protected/ {

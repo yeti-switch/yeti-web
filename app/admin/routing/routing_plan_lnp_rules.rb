@@ -34,7 +34,10 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   end
 
   filter :id
-  filter :name
+  filter :dst_prefix
+  filter :routing_plan, input_html: { class: 'chosen' }, collection: proc { Routing::RoutingPlan.pluck(:name, :id) }
+  filter :database, input_html: { class: 'chosen' }, collection: proc { Lnp::Database.pluck(:name, :id) }
+  filter :created_at, as: :date_time_range
 
   show do |_s|
     attributes_table do

@@ -235,6 +235,14 @@ ActiveAdmin.register CustomersAuth do
   filter :to_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.to_domain')
   filter :x_yeti_auth_array_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
   filter :lua_script, input_html: { class: 'chosen' }
+  boolean_filter :require_incoming_auth
+  boolean_filter :check_account_balance
+  filter :gateway_incoming_auth_username,
+         label: 'Incoming Auth Username',
+         as: :string
+  filter :gateway_incoming_auth_password,
+         label: 'Incoming Auth Password',
+         as: :string
 
   form do |f|
     f.semantic_errors *f.object.errors.keys

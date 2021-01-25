@@ -120,4 +120,16 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :from_uri
   filter :to_uri
   filter :call_id
+  filter :code
+  filter :reason
+  filter :internal_reason
+  filter :realm
+  filter :request_method
+  filter :x_yeti_auth
+  filter :diversion
+  filter :pai
+  filter :ppi
+  filter :privacy
+  filter :rpid
+  filter :rpid_privacy
 end

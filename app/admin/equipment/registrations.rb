@@ -65,6 +65,12 @@ ActiveAdmin.register Equipment::Registration do
   filter :pop, input_html: { class: 'chosen' }
   filter :node, input_html: { class: 'chosen' }
   filter :sip_schema
+  filter :transport_protocol, input_html: { class: 'chosen' }, collection: proc { Equipment::TransportProtocol.pluck(:name, :id) }
+  filter :domain
+  filter :username
+  filter :auth_user
+  filter :auth_password
+  filter :contact
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
