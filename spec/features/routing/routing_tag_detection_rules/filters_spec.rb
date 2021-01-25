@@ -16,6 +16,8 @@ RSpec.describe 'Filter Routing Tag detection rule records', :js do
       within_filters do
         fill_in_chosen 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
         fill_in_chosen 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
+        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.first.name, exact: false)
+        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.second.name, exact: false)
       end
     end
 
@@ -30,8 +32,6 @@ RSpec.describe 'Filter Routing Tag detection rule records', :js do
         expect(page).to have_table
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', text: routing_tag_contains.id
-        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.first.name, exact: false)
-        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.second.name, exact: false)
       end
     end
   end
