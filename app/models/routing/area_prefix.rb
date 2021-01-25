@@ -28,7 +28,18 @@ class Routing::AreaPrefix < Yeti::ActiveRecord
   validates :prefix, format: { without: /\s/ }
   validates :area, presence: true
 
+  scope :prefix_covers, lambda { |prefix|
+    where("prefix_range(prefix) @> prefix_range('#{prefix}')")
+  }
+
   def display_name
     "#{prefix} | #{id}"
+  end
+
+  private
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      prefix_covers
+    ]
   end
 end

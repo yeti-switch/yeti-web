@@ -43,4 +43,5 @@ ActiveAdmin.register Routing::AreaPrefix do
   filter :id
   filter :prefix
   filter :area, input_html: { class: 'chosen' }
+  filter :prefix_covers, as: :string
 end
