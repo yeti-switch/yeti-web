@@ -55,8 +55,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
     f.semantic_errors *f.object.errors.keys
 
     f.inputs do
-      f.input :login
-      f.input :password
+      f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
+      f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.input :customer, as: :select,
                          input_html: {
                            class: 'chosen',
