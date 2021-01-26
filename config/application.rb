@@ -25,6 +25,14 @@ module Yeti
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Initialize Audit log configuration
+    begin
+      config.audit = config_for(:audit)
+    rescue StandardError => e
+      config.audit = {}
+      warn(e.message)
+    end
+
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W[#{config.root}/lib]
 
