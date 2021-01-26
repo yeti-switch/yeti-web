@@ -18,5 +18,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: install gems
         run: make gems-test
-      - name: test
+      - name: Run rspec
         run: make rspec
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+
