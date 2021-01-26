@@ -27,25 +27,6 @@ jobs:
             pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
  
-  pgq-processors-gems-caching:
-    name: GEMs caching
-    runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
-    steps:
-      - uses: actions/checkout@v2
-      - name: install gems
-        run: make gems-test
-      - name: Caching /vendor
-        uses: actions/cache@v2
-        with:
-          path: |
-            vendor
-            pgq-processors/vendor
-            .bundle
-            pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
-
-
   lint:
     name: Rubocop and bundle audit
     runs-on: ubuntu-latest
