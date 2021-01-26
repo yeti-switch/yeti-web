@@ -125,6 +125,7 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
+#https://github.com/coverallsapp/github-action/issues/29
 #      - name: Coveralls Parallel
 #        uses: coverallsapp/github-action@master
 #        with:
@@ -139,7 +140,7 @@ jobs:
           if-no-files-found: ignore
           path: |
             tmp/capybara
-            logs
+            log
 
 #  finalize-coveralls:
 #    needs: rspec
