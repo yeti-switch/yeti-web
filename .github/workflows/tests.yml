@@ -25,7 +25,7 @@ jobs:
       - name: install gems
         run: make gems-test
       - name: install gems for pgq
-        run: mage pgq-processors-gems
+        run: make pgq-processors-gems
       - name: Caching gems
         uses: actions/cache@v2
         with:
