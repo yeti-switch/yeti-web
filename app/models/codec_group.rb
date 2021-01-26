@@ -13,8 +13,6 @@
 #
 
 class CodecGroup < ActiveRecord::Base
-  has_paper_trail class_name: 'AuditLogItem'
-
   has_many :codec_group_codecs, inverse_of: :codec_group, dependent: :destroy
   has_many :codecs, through: :codec_group_codecs
 

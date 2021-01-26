@@ -22,8 +22,6 @@ class Routing::RateGroup < ActiveRecord::Base
 
   has_many :destinations, dependent: :destroy
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :external_id, uniqueness: { allow_blank: true }

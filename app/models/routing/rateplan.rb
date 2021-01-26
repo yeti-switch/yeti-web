@@ -25,8 +25,6 @@
 class Routing::Rateplan < ActiveRecord::Base
   self.table_name = 'class4.rateplans'
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
   has_many :customers_auths, dependent: :restrict_with_error
   has_and_belongs_to_many :rate_groups, join_table: 'class4.rate_plan_groups', class_name: 'Routing::RateGroup'

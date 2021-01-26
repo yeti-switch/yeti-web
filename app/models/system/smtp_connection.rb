@@ -28,8 +28,6 @@ class System::SmtpConnection < Yeti::ActiveRecord
     freeze
   end
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   has_many :contractors, dependent: :restrict_with_error
 
   validates :name, :host, :port, :from_address, presence: true

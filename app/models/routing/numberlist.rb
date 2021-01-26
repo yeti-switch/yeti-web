@@ -33,7 +33,6 @@
 #
 
 class Routing::Numberlist < Yeti::ActiveRecord
-  has_paper_trail class_name: 'AuditLogItem'
   self.table_name = 'class4.numberlists'
 
   belongs_to :mode, class_name: 'Routing::NumberlistMode', foreign_key: :mode_id

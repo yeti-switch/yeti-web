@@ -34,8 +34,6 @@ class DisconnectCode < ActiveRecord::Base
     "#{namespace_id}.#{code} - #{reason}"
   end
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   include Yeti::TranslationReloader
 
   NS_TM  = 0

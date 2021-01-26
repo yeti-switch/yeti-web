@@ -13,7 +13,6 @@
 #
 
 class Routing::Area < Yeti::ActiveRecord
-  has_paper_trail class_name: 'AuditLogItem'
   self.table_name = 'class4.areas'
 
   validates :name, presence: true

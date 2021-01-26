@@ -30,8 +30,6 @@ class System::NetworkPrefix < Yeti::ActiveRecord
   belongs_to :country, class_name: 'System::Country', foreign_key: :country_id
   belongs_to :network, class_name: 'System::Network', foreign_key: :network_id
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   validates :number_max_length,
             presence: true,
             numericality: {

@@ -23,7 +23,6 @@
 
 class Equipment::Radius::AccountingProfile < Yeti::ActiveRecord
   self.table_name = 'class4.radius_accounting_profiles'
-  has_paper_trail class_name: 'AuditLogItem'
 
   has_many :stop_avps, class_name: 'Equipment::Radius::AccountingProfileStopAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy
   has_many :start_avps, class_name: 'Equipment::Radius::AccountingProfileStartAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy

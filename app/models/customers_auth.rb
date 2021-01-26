@@ -129,8 +129,6 @@ class CustomersAuth < Yeti::ActiveRecord
   #  has_many :destinations, through: :rateplan
   has_many :normalized_copies, class_name: 'CustomersAuthNormalized', foreign_key: :customers_auth_id, dependent: :delete_all
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   # REDIRECT_METHODS = [
   #     301,
   #     302

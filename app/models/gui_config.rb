@@ -31,8 +31,6 @@
 class GuiConfig < ActiveRecord::Base
   self.table_name = 'guiconfig'
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   SETTINGS_NAMES = %i[rows_per_page
                       cdr_unload_dir
                       cdr_unload_uri

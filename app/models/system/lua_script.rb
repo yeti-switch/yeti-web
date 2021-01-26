@@ -18,8 +18,6 @@
 class System::LuaScript < ActiveRecord::Base
   self.table_name = 'sys.lua_scripts'
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   has_many :gateways, class_name: 'Gateway', foreign_key: :lua_script_id, dependent: :restrict_with_error
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :lua_script_id, dependent: :restrict_with_error
   has_many :numberlists, class_name: 'Routing::Numberlist', foreign_key: :lua_script_id, dependent: :restrict_with_error

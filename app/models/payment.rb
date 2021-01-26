@@ -18,8 +18,6 @@
 class Payment < Yeti::ActiveRecord
   belongs_to :account
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   validates :amount, numericality: true
   validates :account, presence: true
 

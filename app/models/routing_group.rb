@@ -20,8 +20,6 @@ class RoutingGroup < ActiveRecord::Base
 
   has_many :dialpeers, dependent: :destroy
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
 

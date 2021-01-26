@@ -191,8 +191,6 @@ class Gateway < Yeti::ActiveRecord
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :gateway_id, dependent: :nullify
   has_one :statistic, class_name: 'GatewaysStat', dependent: :delete
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   validates :contractor, :sdp_alines_filter_type, :codec_group, :sdp_c_location, :sensor_level_id, presence: true
   validates :dtmf_receive_mode, :dtmf_send_mode, :rel100_mode, presence: true
   validates :name, :priority, :weight, presence: true

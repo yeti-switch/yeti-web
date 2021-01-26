@@ -33,8 +33,6 @@ class Routing::RoutingPlan < Yeti::ActiveRecord
   has_many :lnp_rules, class_name: 'Lnp::RoutingPlanLnpRule', foreign_key: :routing_plan_id, dependent: :delete_all
   belongs_to :sorting
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   validates :name, :max_rerouting_attempts, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true }

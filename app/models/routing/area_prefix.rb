@@ -18,8 +18,6 @@
 #
 
 class Routing::AreaPrefix < Yeti::ActiveRecord
-  has_paper_trail class_name: 'AuditLogItem'
-
   self.table_name = 'class4.area_prefixes'
 
   belongs_to :area, class_name: 'Routing::Area', foreign_key: :area_id

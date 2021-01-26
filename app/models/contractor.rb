@@ -35,8 +35,6 @@ class Contractor < ActiveRecord::Base
   has_many :api_access, class_name: 'System::ApiAccess', foreign_key: 'customer_id', dependent: :destroy
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection'
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   scope :customers, -> { where customer: true }
   scope :vendors, -> { where vendor: true }
   scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }

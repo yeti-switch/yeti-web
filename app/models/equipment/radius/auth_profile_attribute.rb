@@ -21,7 +21,6 @@
 
 class Equipment::Radius::AuthProfileAttribute < Equipment::Radius::Attribute
   self.table_name = 'class4.radius_auth_profile_attributes'
-  has_paper_trail class_name: 'AuditLogItem'
 
   belongs_to :profile, class_name: 'Equipment::Radius::AuthProfile', foreign_key: :profile_id
 

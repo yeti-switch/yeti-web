@@ -16,8 +16,6 @@
 class Notification::Alert < Yeti::ActiveRecord
   self.table_name = 'notifications.alerts'
 
-  has_paper_trail class_name: 'AuditLogItem'
-
   include Hints
 
   validate do
