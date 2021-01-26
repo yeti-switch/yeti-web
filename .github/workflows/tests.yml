@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: yeti-web:build-buster
+    container: 'buster.Dockerfile'
     services:
       db:
         image: switchyeti/yeti-web:pg13
