@@ -7,27 +7,54 @@ on:
     branches: [ master, github_actions ]
 
 jobs:
-  lint:
+  gems-caching:
+    name: GEMs caching
     runs-on: ubuntu-latest
     container: switchyeti/yeti-web:buster-build
     steps:
       - uses: actions/checkout@v2
       - name: install gems
         run: make gems-test
+      - name: Caching /vendor
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: gems-${{ runner.os }}
+
+  lint:
+    name: Rubocop and bundle audit
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: gems-${{ runner.os }}
       - name: Rubocop and bundle audit
         run: make lint
 
   pgq-processors:
+    name: PqQ processors tests
     runs-on: ubuntu-latest
     container: switchyeti/yeti-web:buster-build
     services:
       db:
         image: switchyeti/yeti-web:pg13
 
+    needs: gems-caching
     steps:
       - uses: actions/checkout@v2
-      - name: install gems
-        run: make gems-test
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: gems-${{ runner.os }}
       - name: Run test-pgq-processors
         run: make test-pgq-processors
         env:
@@ -36,28 +63,34 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
-  test:
+  rspec:
+    name: Rspec tests
     runs-on: ubuntu-latest
     container: switchyeti/yeti-web:buster-build
     services:
       db:
         image: switchyeti/yeti-web:pg13
 
+    needs: gems-caching
     strategy:
       fail-fast: false
       matrix:
         # Set N number of parallel jobs you want to run tests on.
         # Use higher number if you have slow tests to split them on more parallel jobs.
         # Remember to update ci_node_index below to 0..N-1
-        ci_node_total: [3]
+        ci_node_total: [6]
         # set N-1 indexes for parallel jobs
         # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
-        ci_node_index: [0, 1, 3]
+        ci_node_index: [0, 1, 2, 3, 4, 5]
 
     steps:
       - uses: actions/checkout@v2
-      - name: install gems
-        run: make gems-test
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: gems-${{ runner.os }}
       - name: Run rspec
         run: make rspec
         env:
