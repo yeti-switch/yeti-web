@@ -16,8 +16,8 @@ module ActiveRecordExtension
         # Object modification (actions :update, :touch) will not cause log saving if the class was declared with a 'false' value in the config.
         options = {}
         options[:class_name] = 'AuditLogItem' if defined?(AuditLogItem)
-        options[:on] = [:create, :destroy] if Rails.configuration.audit[subclass.name&.gsub('::', '/')]
-        subclass.send(:has_paper_trail, options)
+        options[:on] = [:create, :destroy] if Rails.configuration.audit[subclass.name&.gsub('::', '/')] == false
+        subclass.send(:has_paper_trail, options) if %w[AuditLogItem PaperTrail::Version].exclude?(subclass.name)
       rescue StandardError => e
         logger.error(e.message)
       end

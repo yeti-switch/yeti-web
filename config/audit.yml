@@ -1,0 +1,18 @@
+default: &default
+
+development:
+  <<: *default
+
+test:
+  Account: true
+  Routing/NumberlistItem: false
+  Node: true
+
+sandbox:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
