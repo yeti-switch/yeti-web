@@ -9,12 +9,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: 'buster.Dockerfile'
+    container: switchyeti/yeti-web:buster-build
     services:
       db:
         image: switchyeti/yeti-web:pg13
 
     steps:
       - uses: actions/checkout@v2
+      - name: install gems
+        run: make gems-test
       - name: test
         run: make rspec
