@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NodeRpcClient
   class_attribute :logger, instance_writer: false, default: Rails.logger
 
@@ -21,13 +23,11 @@ class NodeRpcClient
     nodes ||= Node.all.to_a
 
     data = Parallel.map(nodes, in_threads: nodes.count) do |node|
-      begin
-        client = new(node.rpc_endpoint)
-        block.call(client, node)
-      rescue Error => e
-        Rails.logger.error { "#{e.class}: #{e.message}" }
-        default
-      end
+      client = new(node.rpc_endpoint)
+      block.call(client, node)
+    rescue Error => e
+      Rails.logger.error { "#{e.class}: #{e.message}" }
+      default
     end
     data.flatten
   end

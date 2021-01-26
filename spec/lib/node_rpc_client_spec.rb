@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe NodeRpcClient do
   let!(:node) { create(:node) }
 
