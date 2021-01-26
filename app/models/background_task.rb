@@ -22,6 +22,6 @@
 #  delayed_jobs_priority  (priority,run_at)
 #
 
-class BackgroundTask < ActiveRecord::Base
+class BackgroundTask < ApplicationRecord
   self.table_name = 'delayed_jobs'
 end

@@ -20,7 +20,7 @@
 #  created_at       :datetime         not null
 #
 
-class Log::ApiLog < ActiveRecord::Base
+class Log::ApiLog < ApplicationRecord
   self.table_name = 'logs.api_requests'
   self.primary_key = :id
 

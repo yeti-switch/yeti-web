@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BaseJob < ActiveRecord::Base
+class BaseJob < ApplicationRecord
   self.table_name = 'sys.jobs'
   self.store_full_sti_class = false
 

@@ -22,7 +22,7 @@
 #  codec_group_codecs_codec_id_fkey        (codec_id => codecs.id)
 #
 
-class CodecGroupCodec < ActiveRecord::Base
+class CodecGroupCodec < ApplicationRecord
   belongs_to :codec_group
   belongs_to :codec
 

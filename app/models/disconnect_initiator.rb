@@ -8,7 +8,7 @@
 #  name :string
 #
 
-class DisconnectInitiator < ActiveRecord::Base
+class DisconnectInitiator < ApplicationRecord
   ID_TRAFFIC_MANAGER = 0
   ID_TRAFFIC_SWITCH = 1
   ID_DESTINATION = 2

@@ -26,7 +26,7 @@
 #  disconnect_code_namespace_id_fkey  (namespace_id => disconnect_code_namespace.id)
 #
 
-class DisconnectCode < ActiveRecord::Base
+class DisconnectCode < ApplicationRecord
   self.table_name = 'disconnect_code'
   belongs_to :namespace, class_name: 'DisconnectCodeNamespace', foreign_key: 'namespace_id'
 

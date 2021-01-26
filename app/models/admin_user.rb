@@ -32,7 +32,7 @@
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-class AdminUser < ActiveRecord::Base
+class AdminUser < ApplicationRecord
   include Yeti::ResourceStatus
 
   has_one :billing_contact, class_name: 'Billing::Contact', dependent: :destroy, autosave: true

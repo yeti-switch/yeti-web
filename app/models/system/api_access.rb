@@ -20,7 +20,7 @@
 #  api_access_customer_id_fkey  (customer_id => contractors.id)
 #
 
-class System::ApiAccess < ActiveRecord::Base
+class System::ApiAccess < ApplicationRecord
   self.table_name = 'sys.api_access'
 
   has_secure_password

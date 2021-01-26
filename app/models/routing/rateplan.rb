@@ -22,7 +22,7 @@
 #  rateplans_profit_control_mode_id_fkey  (profit_control_mode_id => rate_profit_control_modes.id)
 #
 
-class Routing::Rateplan < ActiveRecord::Base
+class Routing::Rateplan < ApplicationRecord
   self.table_name = 'class4.rateplans'
 
   include WithPaperTrail

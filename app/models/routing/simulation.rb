@@ -197,7 +197,7 @@ class Routing::Simulation
 
   def ip_is_valid
     _tmp = IPAddr.new(remote_ip)
-  rescue IPAddr::Error => error
+  rescue IPAddr::Error => _error
     errors.add(:remote_ip, 'is not valid')
   end
 end

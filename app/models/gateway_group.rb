@@ -20,7 +20,7 @@
 #  gateway_groups_contractor_id_fkey      (vendor_id => contractors.id)
 #
 
-class GatewayGroup < ActiveRecord::Base
+class GatewayGroup < ApplicationRecord
   belongs_to :vendor, class_name: 'Contractor'
   belongs_to :balancing_mode, class_name: 'Equipment::GatewayGroupBalancingMode', foreign_key: :balancing_mode_id
 

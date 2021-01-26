@@ -13,7 +13,7 @@
 #  rate_groups_external_id_key  (external_id) UNIQUE
 #  rate_groups_name_key         (name) UNIQUE
 #
-class Routing::RateGroup < ActiveRecord::Base
+class Routing::RateGroup < ApplicationRecord
   self.table_name = 'class4.rate_groups'
   before_destroy :check_deps
 

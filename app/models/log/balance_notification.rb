@@ -13,7 +13,7 @@
 #  data         :json
 #
 
-class Log::BalanceNotification < ActiveRecord::Base
+class Log::BalanceNotification < ApplicationRecord
   self.table_name = 'balance_notifications'
   scope :processed, -> { where('is_processed') }
   scope :not_processed, -> { where('not is_processed') }

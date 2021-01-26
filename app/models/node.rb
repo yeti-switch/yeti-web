@@ -19,7 +19,7 @@
 #  node_pop_id_fkey  (pop_id => pops.id)
 #
 
-class Node < ActiveRecord::Base
+class Node < ApplicationRecord
   include WithPaperTrail
 
   belongs_to :pop

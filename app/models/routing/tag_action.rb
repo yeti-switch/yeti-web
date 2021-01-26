@@ -12,7 +12,7 @@
 #  tag_actions_name_key  (name) UNIQUE
 #
 
-class Routing::TagAction < ActiveRecord::Base
+class Routing::TagAction < ApplicationRecord
   self.table_name = 'class4.tag_actions'
 
   module CONST

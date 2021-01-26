@@ -12,7 +12,7 @@
 #  destination_rate_policy_name_key  (name) UNIQUE
 #
 
-class Routing::DestinationRatePolicy < ActiveRecord::Base
+class Routing::DestinationRatePolicy < ApplicationRecord
   has_many :destination, class_name: 'Routing::Destination'
   self.table_name = 'destination_rate_policy'
 end

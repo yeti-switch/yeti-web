@@ -10,5 +10,5 @@
 #  end_date   :datetime         not null
 #
 
-class ReportVendor < ActiveRecord::Base
+class ReportVendor < ApplicationRecord
 end

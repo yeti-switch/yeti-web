@@ -12,7 +12,7 @@
 #  disconnect_code_policy_name_key  (name) UNIQUE
 #
 
-class DisconnectPolicy < ActiveRecord::Base
+class DisconnectPolicy < ApplicationRecord
   has_many :gateways, dependent: :restrict_with_error, foreign_key: :orig_disconnect_policy_id
   # belongs_to :policy_code
 

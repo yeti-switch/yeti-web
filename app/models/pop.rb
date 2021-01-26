@@ -12,7 +12,7 @@
 #  pop_name_key  (name) UNIQUE
 #
 
-class Pop < ActiveRecord::Base
+class Pop < ApplicationRecord
   self.primary_key = 'id'
 
   has_many :nodes, dependent: :restrict_with_error

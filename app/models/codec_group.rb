@@ -12,7 +12,7 @@
 #  codec_groups_name_key  (name) UNIQUE
 #
 
-class CodecGroup < ActiveRecord::Base
+class CodecGroup < ApplicationRecord
   include WithPaperTrail
 
   has_many :codec_group_codecs, inverse_of: :codec_group, dependent: :destroy

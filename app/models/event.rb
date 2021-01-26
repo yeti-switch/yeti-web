@@ -17,7 +17,7 @@
 #  events_node_id_fkey  (node_id => nodes.id)
 #
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   belongs_to :node
 
   CMD = {

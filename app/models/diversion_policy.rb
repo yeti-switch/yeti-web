@@ -12,6 +12,6 @@
 #  diversion_policy_name_key  (name) UNIQUE
 #
 
-class DiversionPolicy < ActiveRecord::Base
+class DiversionPolicy < ApplicationRecord
   self.table_name = 'diversion_policy'
 end

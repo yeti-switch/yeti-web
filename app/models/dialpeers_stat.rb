@@ -22,6 +22,6 @@
 #  unique_dp  (dialpeer_id) UNIQUE
 #
 
-class DialpeersStat < ActiveRecord::Base
+class DialpeersStat < ApplicationRecord
   belongs_to :dialpeer
 end
