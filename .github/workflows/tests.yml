@@ -125,12 +125,12 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
-      - name: Coveralls Parallel
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{secrets.github_token}}
-          flag-name: run-${{matrix.ci_node_index}}
-          parallel: true
+#      - name: Coveralls Parallel
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{secrets.github_token}}
+#          flag-name: run-${{matrix.ci_node_index}}
+#          parallel: true
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2
@@ -141,14 +141,14 @@ jobs:
             tmp/capybara
             logs
 
-  finalize-coveralls:
-    needs: rspec
-    runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
-    steps:
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{secrets.github_token}}
-        parallel-finished: true
+#  finalize-coveralls:
+#    needs: rspec
+#    runs-on: ubuntu-latest
+#    container: switchyeti/yeti-web:buster-build
+#    steps:
+#    - name: Coveralls Finished
+#      uses: coverallsapp/github-action@master
+#      with:
+#        github-token: ${{secrets.github_token}}
+#        parallel-finished: true
 
