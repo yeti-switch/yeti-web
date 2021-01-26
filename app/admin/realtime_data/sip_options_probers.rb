@@ -3,7 +3,6 @@
 ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' do
   menu parent: 'Realtime Data', label: 'Sip Options Probers', priority: 10
   config.batch_actions = false
-
   actions :index
 
   controller do
