@@ -114,6 +114,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+
       - name: Run rspec
         run: make rspec
         env:
@@ -123,12 +124,14 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
+
        - name: Coveralls Parallel
          uses: coverallsapp/github-action@master
          with:
            github-token: ${{secrets.github_token}}
            flag-name: run-${{matrix.ci_node_index}}
            parallel: true
+
       - name: Save artifacts
         uses: actions/upload-artifact@v2
           with:
