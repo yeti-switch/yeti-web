@@ -134,6 +134,7 @@ jobs:
 #          parallel: true
 
       - name: Save artifacts
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: rspec-artifacts-${{matrix.ci_node_index}}
