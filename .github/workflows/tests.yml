@@ -134,12 +134,12 @@ jobs:
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2
-          with:
-            name: rspec-artifacts-${{matrix.ci_node_index}}
-            if-no-files-found: ignore
-            path: |
-              tmp/capybara
-              logs
+        with:
+          name: rspec-artifacts-${{matrix.ci_node_index}}
+          if-no-files-found: ignore
+          path: |
+            tmp/capybara
+            logs
 
   finalize-coveralls:
     needs: rspec
