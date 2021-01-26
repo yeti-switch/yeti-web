@@ -20,11 +20,11 @@ jobs:
       - name: Caching gems
         uses: actions/cache@v2
         with:
-          path:
-            - vendor
-            - pgq-processors/vendor
-            - .bundle
-            - pgq-processors/.bundle
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
  
   pgq-processors-gems-caching:
@@ -38,11 +38,11 @@ jobs:
       - name: Caching /vendor
         uses: actions/cache@v2
         with:
-          path:
-            - vendor
-            - pgq-processors/vendor
-            - .bundle
-            - pgq-processors/.bundle
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
 
 
@@ -56,11 +56,11 @@ jobs:
       - name: use cache
         uses: actions/cache@v2
         with:
-          path: 
-            - vendor
-            - pgq-processors/vendor
-            - .bundle
-            - pgq-processors/.bundle
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: Rubocop and bundle audit
         run: make lint
@@ -79,11 +79,11 @@ jobs:
       - name: use cache
         uses: actions/cache@v2
         with:
-          path: 
-            - vendor
-            - pgq-processors/vendor
-            - .bundle
-            - pgq-processors/.bundle
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: Run test-pgq-processors
         run: make test-pgq-processors
@@ -118,11 +118,11 @@ jobs:
       - name: use cache
         uses: actions/cache@v2
         with:
-          path: 
-            - vendor
-            - pgq-processors/vendor
-            - .bundle
-            - pgq-processors/.bundle
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: Run rspec
         run: make rspec
