@@ -15,12 +15,36 @@ jobs:
       - uses: actions/checkout@v2
       - name: install gems
         run: make gems-test
+      - name: install gems for pgq
+        run: pgq-processors-gems
+      - name: Caching gems
+        uses: actions/cache@v2
+        with:
+          path:
+            - vendor
+            - pgq-processors/vendor
+            - .bundle
+            - pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+ 
+  pgq-processors-gems-caching:
+    name: GEMs caching
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    steps:
+      - uses: actions/checkout@v2
+      - name: install gems
+        run: make gems-test
       - name: Caching /vendor
         uses: actions/cache@v2
         with:
-          path: vendor
-          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: gems-${{ runner.os }}
+          path:
+            - vendor
+            - pgq-processors/vendor
+            - .bundle
+            - pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+
 
   lint:
     name: Rubocop and bundle audit
@@ -32,9 +56,12 @@ jobs:
       - name: use cache
         uses: actions/cache@v2
         with:
-          path: vendor
-          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: gems-${{ runner.os }}
+          path: 
+            - vendor
+            - pgq-processors/vendor
+            - .bundle
+            - pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: Rubocop and bundle audit
         run: make lint
 
@@ -52,9 +79,12 @@ jobs:
       - name: use cache
         uses: actions/cache@v2
         with:
-          path: vendor
-          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: gems-${{ runner.os }}
+          path: 
+            - vendor
+            - pgq-processors/vendor
+            - .bundle
+            - pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: Run test-pgq-processors
         run: make test-pgq-processors
         env:
@@ -88,9 +118,12 @@ jobs:
       - name: use cache
         uses: actions/cache@v2
         with:
-          path: vendor
-          key: gems-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: gems-${{ runner.os }}
+          path: 
+            - vendor
+            - pgq-processors/vendor
+            - .bundle
+            - pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: Run rspec
         run: make rspec
         env:
