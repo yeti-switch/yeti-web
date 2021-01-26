@@ -325,6 +325,16 @@ class Cdr::Cdr < Cdr::Base
     SqlCaller::Cdr.select_value("select pending_events from pgq.get_consumer_info('cdr_billing', 'cdr_billing')")
   end
 
+  scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
+
+  scope :tagged, lambda { |value|
+    if ActiveModel::Type::Boolean.new.cast(value)
+      where("routing_tag_ids <> '{}'") # has tags
+    else
+      where("routing_tag_ids = '{}' OR routing_tag_ids IS NULL") # no tags
+    end
+  }
+
   private
 
   def self.ransackable_scopes(_auth_object = nil)
@@ -333,6 +343,8 @@ class Cdr::Cdr < Cdr::Base
       status_eq
       account_id_eq
       routing_tag_ids_include
+      routing_tag_ids_array_contains
+      tagged
     ]
   end
 end
