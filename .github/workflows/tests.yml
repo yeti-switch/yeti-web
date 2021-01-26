@@ -13,10 +13,19 @@ jobs:
     container: switchyeti/yeti-web:buster-build
     steps:
       - uses: actions/checkout@v2
+      - name: Fetching gems cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
       - name: install gems
         run: make gems-test
       - name: install gems for pgq
-        run: pgq-processors-gems
+        run: mage pgq-processors-gems
       - name: Caching gems
         uses: actions/cache@v2
         with:
