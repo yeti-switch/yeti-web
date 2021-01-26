@@ -9,7 +9,7 @@
 #  filename :string           not null
 #
 
-class Notification::Attachment < ActiveRecord::Base
+class Notification::Attachment < ApplicationRecord
   self.table_name = 'notifications.attachments'
 
   def basename

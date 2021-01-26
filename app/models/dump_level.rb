@@ -14,6 +14,6 @@
 #  dump_level_name_key  (name) UNIQUE
 #
 
-class DumpLevel < ActiveRecord::Base
+class DumpLevel < ApplicationRecord
   self.table_name = 'dump_level'
 end

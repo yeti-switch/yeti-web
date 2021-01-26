@@ -18,7 +18,7 @@
 #  disconnect_code_policy_codes_policy_id_fkey  (policy_id => disconnect_policy.id)
 #
 
-class DisconnectPolicyCode < ActiveRecord::Base
+class DisconnectPolicyCode < ApplicationRecord
   self.table_name = 'disconnect_policy_code'
 
   belongs_to :policy, class_name: 'DisconnectPolicy', foreign_key: :policy_id

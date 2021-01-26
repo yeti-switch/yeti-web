@@ -25,7 +25,7 @@
 #  contractors_smtp_connection_id_fkey  (smtp_connection_id => smtp_connections.id)
 #
 
-class Contractor < ActiveRecord::Base
+class Contractor < ApplicationRecord
   has_many :gateways, dependent: :restrict_with_error
   has_many :gateway_groups, foreign_key: :vendor_id, dependent: :restrict_with_error
   has_many :customers_auths, foreign_key: :customer_id, dependent: :restrict_with_error

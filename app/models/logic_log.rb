@@ -12,10 +12,10 @@
 #  txid      :bigint(8)        not null
 #
 
-class LogicLog < ActiveRecord::Base
+class LogicLog < ApplicationRecord
   self.table_name = 'logic_log'
 
   def display_name
     id.to_s
- end
+  end
 end

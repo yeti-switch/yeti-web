@@ -13,7 +13,7 @@
 #  api_log_config_controller_key  (controller) UNIQUE
 #
 
-class System::ApiLogConfig < ActiveRecord::Base
+class System::ApiLogConfig < ApplicationRecord
   self.table_name = 'sys.api_log_config'
 
   include WithPaperTrail

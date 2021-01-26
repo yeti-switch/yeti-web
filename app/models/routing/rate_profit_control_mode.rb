@@ -12,7 +12,7 @@
 #  rate_profit_control_modes_name_key  (name) UNIQUE
 #
 
-class Routing::RateProfitControlMode < ActiveRecord::Base
+class Routing::RateProfitControlMode < ApplicationRecord
   self.table_name = 'class4.rate_profit_control_modes'
   def display_name
     name.to_s

@@ -12,7 +12,7 @@
 #  codecs_name_key  (name) UNIQUE
 #
 
-class Codec < ActiveRecord::Base
+class Codec < ApplicationRecord
   has_many :codec_group_codecs
   has_many :codec_groups
 end

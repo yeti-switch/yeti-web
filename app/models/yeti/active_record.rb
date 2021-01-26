@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Yeti::ActiveRecord < ActiveRecord::Base
+class Yeti::ActiveRecord < ApplicationRecord
   self.abstract_class = true
 
   include WithJsonAttributes

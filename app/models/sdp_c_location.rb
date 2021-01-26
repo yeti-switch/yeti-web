@@ -12,6 +12,6 @@
 #  sdp_c_location_name_key  (name) UNIQUE
 #
 
-class SdpCLocation < ActiveRecord::Base
+class SdpCLocation < ApplicationRecord
   self.table_name = 'sdp_c_location'
 end

@@ -9,6 +9,6 @@
 #  value :string           not null
 #
 
-class SessionRefreshMethod < ActiveRecord::Base
+class SessionRefreshMethod < ApplicationRecord
   has_many :gateways
 end

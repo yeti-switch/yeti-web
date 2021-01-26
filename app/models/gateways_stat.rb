@@ -22,6 +22,6 @@
 #  unique_gw  (gateway_id) UNIQUE
 #
 
-class GatewaysStat < ActiveRecord::Base
+class GatewaysStat < ApplicationRecord
   belongs_to :gateway
 end

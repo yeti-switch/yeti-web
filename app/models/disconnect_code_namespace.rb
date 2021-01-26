@@ -12,7 +12,7 @@
 #  disconnect_code_namespace_name_key  (name) UNIQUE
 #
 
-class DisconnectCodeNamespace < ActiveRecord::Base
+class DisconnectCodeNamespace < ApplicationRecord
   self.table_name = 'disconnect_code_namespace'
 
   def display_name

@@ -28,7 +28,7 @@
 #  web_url                         :string           default("http://127.0.0.1"), not null
 #
 
-class GuiConfig < ActiveRecord::Base
+class GuiConfig < ApplicationRecord
   self.table_name = 'guiconfig'
 
   include WithPaperTrail

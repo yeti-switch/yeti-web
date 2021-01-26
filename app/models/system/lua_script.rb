@@ -15,7 +15,7 @@
 #  lua_scripts_name_key  (name) UNIQUE
 #
 
-class System::LuaScript < ActiveRecord::Base
+class System::LuaScript < ApplicationRecord
   self.table_name = 'sys.lua_scripts'
 
   include WithPaperTrail

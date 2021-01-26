@@ -10,6 +10,6 @@
 #  use_static_routes :boolean          default(FALSE), not null
 #
 
-class Sorting < ActiveRecord::Base
+class Sorting < ApplicationRecord
   scope :with_static_routes, -> { where(use_static_routes: true) }
 end

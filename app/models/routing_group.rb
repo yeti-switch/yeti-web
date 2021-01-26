@@ -12,7 +12,7 @@
 #  routing_groups_name_unique  (name) UNIQUE
 #
 
-class RoutingGroup < ActiveRecord::Base
+class RoutingGroup < ApplicationRecord
   before_destroy :check_deps
 
   has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan',

@@ -8,6 +8,6 @@
 #  name :string
 #
 
-class FilterType < ActiveRecord::Base
+class FilterType < ApplicationRecord
   self.table_name = 'filter_types'
 end
