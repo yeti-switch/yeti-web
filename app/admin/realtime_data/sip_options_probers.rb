@@ -16,7 +16,6 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
     def apply_filtering(chain)
       query_params = (params.to_unsafe_h[:q] || {}).delete_if { |_, v| v.blank? }
       @search = OpenStruct.new(query_params)
-      chain = chain.none if query_params.blank?
       chain.where(query_params)
     end
 
@@ -45,10 +44,11 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
     column :ruri
     column :sip_interface_name
     column :to
-    column :transport_protocol
-    column :proxy_transport_protocol
+
+    column :transport_protocol, :transport_protocol_link
+    column :proxy_transport_protocol, :proxy_transport_protocol_link
     column :node, :node_link
     column :pop, :pop_link
-    column :sip_schema
+    column :sip_schema, :sip_schema_link
   end
 end
