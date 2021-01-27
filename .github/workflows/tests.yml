@@ -1,0 +1,155 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master, github_actions ]
+  pull_request:
+    branches: [ master, github_actions ]
+
+jobs:
+  gems-caching:
+    name: GEMs caching
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Fetching gems cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+      - name: install gems
+        run: make gems-test
+      - name: install gems for pgq
+        run: make pgq-processors-gems
+      - name: Caching gems
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+ 
+  lint:
+    name: Rubocop and bundle audit
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+      - name: Rubocop and bundle audit
+        run: make lint
+
+  pgq-processors:
+    name: PqQ processors tests
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    services:
+      db:
+        image: switchyeti/yeti-web:pg13
+
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+      - name: Run test-pgq-processors
+        run: make test-pgq-processors
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+
+  rspec:
+    name: Rspec tests
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    services:
+      db:
+        image: switchyeti/yeti-web:pg13
+
+    needs: gems-caching
+    strategy:
+      fail-fast: false
+      matrix:
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [6]
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [0, 1, 2, 3, 4, 5]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+
+      - name: Run rspec
+        run: make rspec
+        env:
+          PARALLEL_TEST_PROCESSORS: ${{ matrix.ci_node_total }}
+          TEST_GROUP: ${{ matrix.ci_node_index }}
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+
+#https://github.com/coverallsapp/github-action/issues/29
+#      - name: Coveralls Parallel
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{secrets.github_token}}
+#          flag-name: run-${{matrix.ci_node_index}}
+#          parallel: true
+
+      - name: Save artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: rspec-artifacts-${{matrix.ci_node_index}}
+          if-no-files-found: ignore
+          path: |
+            tmp/capybara
+
+#  finalize-coveralls:
+#    needs: rspec
+#    runs-on: ubuntu-latest
+#    container: switchyeti/yeti-web:buster-build
+#    steps:
+#    - name: Coveralls Finished
+#      uses: coverallsapp/github-action@master
+#      with:
+#        github-token: ${{secrets.github_token}}
+#        parallel-finished: true
+
