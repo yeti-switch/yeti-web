@@ -2,7 +2,7 @@
 
 module RealtimeData
   class SipOptionsProberPolicy < ::RolePolicy
-    section 'RealtimeData/SipOptionsProberPolicy'
+    section 'RealtimeData/SipOptionsProber'
 
     class Scope < ::RolePolicy::Scope
     end
