@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Sip Options Probers index page', js: true do
   include_context :login_as_admin
 
