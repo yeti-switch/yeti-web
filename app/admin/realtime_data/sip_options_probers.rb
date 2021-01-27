@@ -27,7 +27,6 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
     end
   end
 
-
   filter :name, as: :string
 
   index do

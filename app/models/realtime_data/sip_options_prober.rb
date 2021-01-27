@@ -5,14 +5,7 @@ class RealtimeData::SipOptionsProber < YetiResource
   include WithQueryBuilder
 
   class << self
-    def query_builder_find(id, includes:, **_)
-      node_id, local_tag = id.split('*')
-      record = Node.find(node_id).active_call(local_tag)
-      RealtimeData::ActiveCall.load_associations([record], *includes)
-      record
-    end
-
-    def query_builder_collection(includes:, filters:, **_)
+    def query_builder_collection(**_)
       result = NodeRpcClient.perform_parallel(default: []) do |client, node|
         result = client.sip_options_probers
         result.map { |row| row.merge(node: node) }
