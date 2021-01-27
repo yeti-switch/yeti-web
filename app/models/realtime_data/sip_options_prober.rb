@@ -31,9 +31,9 @@ class RealtimeData::SipOptionsProber < YetiResource
   attribute :sip_interface_name, :string
   attribute :to, :string
 
-  has_one :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
-  has_one :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
+  has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
+  has_one :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :node, class_name: 'Node', foreign_key: :node_id
   has_one :pop, class_name: 'Pop', foreign_key: :pop_id
-  has_one :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
+  has_one :sip_schema, class_name: 'System::SipSchema'
 end
