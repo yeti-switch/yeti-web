@@ -16,6 +16,8 @@
 class System::ApiLogConfig < ActiveRecord::Base
   self.table_name = 'sys.api_log_config'
 
+  include WithPaperTrail
+
   def debug?
     !!debug
   end

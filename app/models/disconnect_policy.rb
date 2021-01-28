@@ -18,6 +18,8 @@ class DisconnectPolicy < ActiveRecord::Base
 
   self.table_name = 'disconnect_policy'
 
+  include WithPaperTrail
+
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
 

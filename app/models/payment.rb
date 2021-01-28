@@ -18,6 +18,8 @@
 class Payment < Yeti::ActiveRecord
   belongs_to :account
 
+  include WithPaperTrail
+
   validates :amount, numericality: true
   validates :account, presence: true
 

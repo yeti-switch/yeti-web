@@ -17,6 +17,8 @@
 class System::LoadBalancer < Yeti::ActiveRecord
   self.table_name = 'sys.load_balancers'
 
+  include WithPaperTrail
+
   validates :name, :signalling_ip, presence: true
   validates :name, :signalling_ip, uniqueness: true
 end

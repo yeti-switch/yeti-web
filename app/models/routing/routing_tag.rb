@@ -13,6 +13,7 @@
 #
 
 class Routing::RoutingTag < Yeti::ActiveRecord
+  include WithPaperTrail
   self.table_name = 'class4.routing_tags'
 
   ANY_TAG = 'any tag'

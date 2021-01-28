@@ -90,4 +90,8 @@ module ApplicationHelper
     html_options = options.delete(:html) || {}
     pre_wrap JSON.pretty_generate(json, options), html_options
   end
+
+  def versioning_enabled_for_model?(model)
+    Rails.configuration.yeti_web['versioning_disable_for_models'].exclude?(model.name)
+  end
 end

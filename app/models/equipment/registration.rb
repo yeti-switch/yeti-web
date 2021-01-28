@@ -53,6 +53,8 @@ class Equipment::Registration < Yeti::ActiveRecord
   validates :retry_delay, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
   validates :max_attempts, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
+  include WithPaperTrail
+
   def display_name
     "#{name} | #{id}"
   end

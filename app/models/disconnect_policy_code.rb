@@ -24,6 +24,8 @@ class DisconnectPolicyCode < ActiveRecord::Base
   belongs_to :policy, class_name: 'DisconnectPolicy', foreign_key: :policy_id
   belongs_to :code, -> { where namespace_id: DisconnectCode::NS_SIP }, class_name: 'DisconnectCode', foreign_key: :code_id
 
+  include WithPaperTrail
+
   validates :policy_id, :code_id, presence: true
 
   def display_name

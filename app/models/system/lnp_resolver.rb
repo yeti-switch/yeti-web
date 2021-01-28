@@ -19,6 +19,8 @@ class System::LnpResolver < Yeti::ActiveRecord
   validates :name, uniqueness: true
   validates :name, :address, :port, presence: true
 
+  include WithPaperTrail
+
   def display_name
     name.to_s
   end

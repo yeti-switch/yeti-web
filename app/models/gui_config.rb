@@ -31,6 +31,8 @@
 class GuiConfig < ActiveRecord::Base
   self.table_name = 'guiconfig'
 
+  include WithPaperTrail
+
   SETTINGS_NAMES = %i[rows_per_page
                       cdr_unload_dir
                       cdr_unload_uri

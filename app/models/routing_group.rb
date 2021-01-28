@@ -20,6 +20,8 @@ class RoutingGroup < ActiveRecord::Base
 
   has_many :dialpeers, dependent: :destroy
 
+  include WithPaperTrail
+
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
 

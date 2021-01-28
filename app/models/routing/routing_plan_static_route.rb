@@ -28,6 +28,8 @@ class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord
   belongs_to :routing_plan
   belongs_to :vendor, -> { where vendor: true }, class_name: 'Contractor', foreign_key: :vendor_id
 
+  include WithPaperTrail
+
   include Yeti::NetworkDetector
 
   validates :prefix, format: { without: /\s/ }

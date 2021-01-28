@@ -34,6 +34,8 @@
 #
 
 class Routing::NumberlistItem < Yeti::ActiveRecord
+  include WithPaperTrail
+
   self.table_name = 'class4.numberlist_items'
 
   belongs_to :numberlist, class_name: 'Routing::Numberlist', foreign_key: :numberlist_id

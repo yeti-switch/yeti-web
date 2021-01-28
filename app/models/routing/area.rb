@@ -13,6 +13,7 @@
 #
 
 class Routing::Area < Yeti::ActiveRecord
+  include WithPaperTrail
   self.table_name = 'class4.areas'
 
   validates :name, presence: true

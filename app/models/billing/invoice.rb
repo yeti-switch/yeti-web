@@ -61,6 +61,8 @@ class Billing::Invoice < Cdr::Base
             :calls_duration,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  include WithPaperTrail
+
   scope :for_customer, -> { where vendor_invoice: false }
   scope :for_vendor, -> { where vendor_invoice: true }
   scope :approved, -> { where state_id: Billing::InvoiceState::APPROVED }

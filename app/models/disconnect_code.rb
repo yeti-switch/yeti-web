@@ -34,6 +34,8 @@ class DisconnectCode < ActiveRecord::Base
     "#{namespace_id}.#{code} - #{reason}"
   end
 
+  include WithPaperTrail
+
   include Yeti::TranslationReloader
 
   NS_TM  = 0

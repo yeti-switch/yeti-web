@@ -27,6 +27,8 @@ class GatewayGroup < ActiveRecord::Base
   has_many :gateways, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
 
+  include WithPaperTrail
+
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :vendor, :balancing_mode, presence: true

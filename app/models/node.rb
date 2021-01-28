@@ -20,6 +20,8 @@
 #
 
 class Node < ActiveRecord::Base
+  include WithPaperTrail
+
   belongs_to :pop
 
   validates :id, :pop, :rpc_endpoint, :name, presence: true

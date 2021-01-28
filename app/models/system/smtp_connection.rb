@@ -28,6 +28,8 @@ class System::SmtpConnection < Yeti::ActiveRecord
     freeze
   end
 
+  include WithPaperTrail
+
   has_many :contractors, dependent: :restrict_with_error
 
   validates :name, :host, :port, :from_address, presence: true

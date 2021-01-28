@@ -26,6 +26,8 @@ class CodecGroupCodec < ActiveRecord::Base
   belongs_to :codec_group
   belongs_to :codec
 
+  include WithPaperTrail
+
   validates :priority, uniqueness: { scope: [:codec_group_id] }
   validates :priority, numericality: true
   validates :codec_id, uniqueness: { scope: [:codec_group_id] }

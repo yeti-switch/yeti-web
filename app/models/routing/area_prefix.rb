@@ -18,6 +18,8 @@
 #
 
 class Routing::AreaPrefix < Yeti::ActiveRecord
+  include WithPaperTrail
+
   self.table_name = 'class4.area_prefixes'
 
   belongs_to :area, class_name: 'Routing::Area', foreign_key: :area_id

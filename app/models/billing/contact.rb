@@ -20,6 +20,7 @@
 
 class Billing::Contact < Yeti::ActiveRecord
   self.table_name = 'notifications.contacts'
+  include WithPaperTrail
 
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id
   belongs_to :admin_user, class_name: 'AdminUser', foreign_key: :admin_user_id

@@ -27,6 +27,7 @@
 #
 
 class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
+  include WithPaperTrail
   self.table_name = 'class4.routing_tag_detection_rules'
 
   validates_with TagActionValueValidator

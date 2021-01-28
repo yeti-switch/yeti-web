@@ -16,6 +16,8 @@
 class Notification::Alert < Yeti::ActiveRecord
   self.table_name = 'notifications.alerts'
 
+  include WithPaperTrail
+
   include Hints
 
   validate do

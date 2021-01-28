@@ -41,10 +41,10 @@ Then create `config/database.yml`, example is `database.yml.example`. Notice thi
 
 Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.distr`.
 
+To disable the creation of new versions via paper_trail for some model please fill the array under key `versioning_disable_for_models` in the `config/yeti_web.yml`
+
 Сreate `config/policy_roles.yml`, example is `config/policy_roles.yml.distr`,
 or disable policy feature by changing following lines in `config/yeti_web.yml`:
-
-Then create configuration file for Paper Trail `config/audit.yml`, example is `config/audit.yml.distr`. Paper trail is enabled by default even if the class is not declared in the config or config is missing.
 
 ```yaml
 role_policy:
