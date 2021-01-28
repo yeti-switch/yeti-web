@@ -9,12 +9,21 @@ jobs:
     name: Debian 10 release package building
     runs-on: ubuntu-latest
     container: switchyeti/yeti-web:buster-build
+    services:
+      db:
+        image: switchyeti/yeti-web:pg13
+
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Build package
         run: make package
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
       - name: Upload package to ${{github.ref}} repo
         run: ci/deploy.sh "$API_ENDPOINT" buster ${{github.ref}} main /build/*.deb
 
