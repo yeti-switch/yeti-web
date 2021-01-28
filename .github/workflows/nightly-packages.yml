@@ -9,7 +9,6 @@ jobs:
     name: Debian 10 nightly package building
     runs-on: ubuntu-latest
     container: switchyeti/yeti-web:buster-build
-    needs: rspec
     steps:
       - uses: actions/checkout@v2
       - name: Build package
