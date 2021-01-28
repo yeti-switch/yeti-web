@@ -1,5 +1,7 @@
 name: Tests
 on:
+  check_run:
+    types: [ created, rerequested ]
   push:
     branches: [ master, github_actions ]
   pull_request:
