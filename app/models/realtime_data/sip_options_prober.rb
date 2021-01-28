@@ -5,6 +5,17 @@ class RealtimeData::SipOptionsProber < YetiResource
   include WithQueryBuilder
 
   class << self
+    def query_builder_find(id, **_)
+      node_id, id = id.split('*')
+      node = Node.find(node_id)
+      result = NodeRpcClient.perform_parallel([node], default: []) do |client, node|
+        result = client.sip_options_probers([id])
+        result.map { |row| row.merge(node: node) }
+      end
+      records = result.map { |item| RealtimeData::SipOptionsProber.new(item) }
+      records
+    end
+
     def query_builder_collection(**_)
       result = NodeRpcClient.perform_parallel(default: []) do |client, node|
         result = client.sip_options_probers
@@ -31,9 +42,5 @@ class RealtimeData::SipOptionsProber < YetiResource
   attribute :sip_interface_name, :string
   attribute :to, :string
 
-  has_one :transport_protocol, class_name: 'Equipment::TransportProtocol'
-  has_one :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol'
   has_one :node, class_name: 'Node', foreign_key: :node_id
-  has_one :pop, class_name: 'Pop', foreign_key: :pop_id
-  has_one :sip_schema, class_name: 'System::SipSchema'
 end
