@@ -1,0 +1,19 @@
+name: Release process
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  deb10:
+    name: Debian 10 release package building
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    needs: rspec
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build package
+        run: make package
+      - name: Upload package to ${{github.ref}} repo
+        run: ci/deploy.sh "$API_ENDPOINT" buster ${{github.ref}} main /build/*.deb
+
