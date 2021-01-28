@@ -11,6 +11,8 @@ jobs:
     container: switchyeti/yeti-web:buster-build
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Build package
         run: make package
       - name: Upload package to ${{github.ref}} repo
