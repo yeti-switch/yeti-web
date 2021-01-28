@@ -1,11 +1,6 @@
 name: Tests
 on:
-  check_run:
-    types: [ created, rerequested ]
-  push:
-    branches: [ master, github_actions ]
   pull_request:
-    branches: [ master, github_actions ]
 
 jobs:
   gems-caching:
@@ -153,26 +148,4 @@ jobs:
 #      with:
 #        github-token: ${{secrets.github_token}}
 #        parallel-finished: true
-
-  deb10:
-    name: Debian 10 package building
-    runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
-    needs: rspec
-    steps:
-      - uses: actions/checkout@v2
-      - name: use cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            vendor
-            pgq-processors/vendor
-            .bundle
-            pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
-      - name: Build package
-        run: make package
-      - name: Upload package to nightly repo
-        if: github.ref == 'refs/heads/master'
-        run: ci/deploy.sh "$API_ENDPOINT" buster nightly main /build/*.deb
 
