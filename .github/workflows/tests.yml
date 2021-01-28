@@ -173,6 +173,6 @@ jobs:
       - name: Build package
         run: make package
       - name: Upload package to nightly repo
-	if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: ci/deploy.sh "$API_ENDPOINT" buster nightly main /build/*.deb
 
