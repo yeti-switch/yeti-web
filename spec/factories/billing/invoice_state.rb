@@ -12,17 +12,17 @@ FactoryBot.define do
   factory :invoice_state, class: Billing::InvoiceState do
     trait :pending do
       id { Billing::InvoiceState::PENDING }
-      name { 'Pending' }
+      # name { 'Pending' }
     end
 
     trait :approved do
       id { Billing::InvoiceState::APPROVED }
-      name { 'Approved' }
+      # name { 'Approved' }
     end
 
     trait :new do
       id { Billing::InvoiceState::NEW }
-      name { 'Approved' }
+      # name { 'Approved' }
     end
   end
 end

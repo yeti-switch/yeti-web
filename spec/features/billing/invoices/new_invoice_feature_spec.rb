@@ -30,9 +30,6 @@ RSpec.describe 'New Invoice', type: :feature, js: true do
   let(:account_attrs) { { contractor: contractor } }
   let(:before_visit!) {}
   before do
-    # temporary bandage until we fix cdr db data truncation
-    Billing::Invoice.where(account_id: account.id).delete_all
-
     before_visit!
     visit new_invoice_path
   end

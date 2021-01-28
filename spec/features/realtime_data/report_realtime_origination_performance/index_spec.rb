@@ -5,7 +5,6 @@ RSpec.describe 'Report Realtime Origination Performance', type: :feature do
 
   let!(:customers_auth) { FactoryBot.create(:customers_auth) }
   before do
-    Cdr::Cdr.delete_all
     FactoryBot.create_list(:cdr, 5, customer_auth: customers_auth, time_start: 28.hours.ago.utc)
     visit report_realtime_origination_performances_path(q: { time_interval_eq: 1.day })
   end

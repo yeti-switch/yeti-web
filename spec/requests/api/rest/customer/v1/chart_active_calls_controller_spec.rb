@@ -6,8 +6,6 @@ RSpec.describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :reque
   let!(:account) { create(:account, contractor: customer).reload }
   let!(:another_account) { create(:account, contractor: customer).reload }
   before do
-    Stats::ActiveCallAccount.where(account_id: account.id).delete_all
-
     create :active_call_account,
            account: account,
            originated_count: 10,

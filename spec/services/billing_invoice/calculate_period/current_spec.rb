@@ -17,9 +17,6 @@ RSpec.describe BillingInvoice::CalculatePeriod::Current, '.call' do
   include_context :stub_calculate_period_current_time
   let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone.name) }
   let(:current_account_time) { account_time_zone.parse('2020-03-17 05:15:32') }
-  before do
-    Billing::Invoice.where(account_id: account.id).delete_all
-  end
 
   context 'with vendor account' do
     context 'when vendor_invoice_period is daily and today is Tue 2020-03-17 in account timezone' do
