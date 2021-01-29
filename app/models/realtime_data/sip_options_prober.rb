@@ -5,17 +5,23 @@ class RealtimeData::SipOptionsProber < YetiResource
   include WithQueryBuilder
 
   class << self
+    # def query_builder_find(id, **_)
+    #   node_id, id = id.split('*')
+    #   node = Node.find(node_id)
+    #   result = NodeRpcClient.perform_parallel([node], default: []) do |client, node|
+    #     result = client.sip_options_probers([id])
+    #     result.map { |row| row.merge(node: node) }
+    #   end
+    #   records = result.map { |item| RealtimeData::SipOptionsProber.new(item) }
+    #   records
+    # end
     def query_builder_find(id, **_)
       node_id, id = id.split('*')
       node = Node.find(node_id)
-      result = NodeRpcClient.perform_parallel([node], default: []) do |client, node|
-        result = client.sip_options_probers([id])
-        result.map { |row| row.merge(node: node) }
-      end
-      records = result.map { |item| RealtimeData::SipOptionsProber.new(item) }
-      records
+      record = NodeRpcClient.new(node.rpc_endpoint).sip_options_probers([id])
+      record
     end
-
+    #{model.node.id}*#{model.id}
     def query_builder_collection(**_)
       result = NodeRpcClient.perform_parallel(default: []) do |client, node|
         result = client.sip_options_probers
