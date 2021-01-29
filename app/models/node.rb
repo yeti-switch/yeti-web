@@ -20,6 +20,8 @@
 #
 
 class Node < ActiveRecord::Base
+  include WithPaperTrail
+
   belongs_to :pop
 
   validates :id, :pop, :rpc_endpoint, :name, presence: true
@@ -28,8 +30,6 @@ class Node < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
   has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error
-
-  has_paper_trail class_name: 'AuditLogItem'
 
   def self.random_node
     ids = pluck(:id)

@@ -19,7 +19,7 @@ class System::LnpResolver < Yeti::ActiveRecord
   validates :name, uniqueness: true
   validates :name, :address, :port, presence: true
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   def display_name
     name.to_s

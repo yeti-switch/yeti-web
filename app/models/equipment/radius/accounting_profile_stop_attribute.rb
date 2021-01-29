@@ -21,7 +21,7 @@
 
 class Equipment::Radius::AccountingProfileStopAttribute < Equipment::Radius::Attribute
   self.table_name = 'class4.radius_accounting_profile_stop_attributes'
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   belongs_to :profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :profile_id
 end

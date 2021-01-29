@@ -28,7 +28,7 @@ class System::Network < Yeti::ActiveRecord
   validates :name, uniqueness: { allow_blank: true }, presence: true
   validates :network_type, presence: true
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   def display_name
     "#{id} | #{name}"

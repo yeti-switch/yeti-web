@@ -8,19 +8,21 @@ module ResourceDSL
           #           resource = active_admin_config.resource_class.find(params[:id])
           #           instance_variable_name = active_admin_config.resource_class.model_name.route_key
           resource = active_admin_config.resource_class.find(params[:id])
-          @last_version = resource.versions.last
-          @version = if params[:version]
-                       resource.versions.find(params[:version])
-                     else
-                       @last_version
-                     end
-          if @version
+          if helpers.versioning_enabled_for_model?(resource_class)
+            @last_version = resource.versions.last
+            @version = if params[:version]
+                         resource.versions.find(params[:version])
+                       else
+                         @last_version
+                       end
+            if @version
 
-            @next_version = @version.next
-            @previous_version = @version.previous
+              @next_version = @version.next
+              @previous_version = @version.previous
 
-            @versions_total_count = resource.versions.count
-            resource = @next_version.reify if params[:version] && @next_version
+              @versions_total_count = resource.versions.count
+              resource = @next_version.reify if params[:version] && @next_version
+            end
           end
 
           if active_admin_config.decorator_class_name
@@ -33,7 +35,7 @@ module ResourceDSL
         end
       end
 
-      action_item :history, only: %i[show edit] do
+      action_item :history, only: %i[show edit], if: proc { versioning_enabled_for_model?(resource_class) } do
         if authorized?(:history)
           link_to 'History', action: :history, id: resource.id
         end
@@ -42,11 +44,11 @@ module ResourceDSL
       member_action :history do
         # TODO: add paginations
         # @versions = resource.versions.includes(:admin).reorder('id desc').limit(500)
-        @versions = resource.versions.reorder('id desc').limit(500)
+        @versions = helpers.versioning_enabled_for_model?(resource_class) ? resource.versions.reorder('id desc').limit(500) : []
         render 'layouts/history'
       end
 
-      sidebar :history, partial: 'layouts/version', only: :show
+      sidebar :history, partial: 'layouts/version', only: :show, if: proc { versioning_enabled_for_model?(resource_class) }
     end
   end
 end

@@ -39,7 +39,7 @@ class DialpeerNextRate < Yeti::ActiveRecord
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   scope :ready_for_apply, lambda {
     not_applied.where('apply_time < ?', Time.now.utc).preload(:dialpeer)

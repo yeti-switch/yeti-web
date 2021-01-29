@@ -27,7 +27,7 @@
 class System::Sensor < Yeti::ActiveRecord
   self.table_name = 'sys.sensors'
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
   belongs_to :mode, class_name: 'System::SensorMode', foreign_key: :mode_id
 
   has_many :gateways, dependent: :restrict_with_error

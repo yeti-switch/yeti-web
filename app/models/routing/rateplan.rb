@@ -25,7 +25,7 @@
 class Routing::Rateplan < ActiveRecord::Base
   self.table_name = 'class4.rateplans'
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
   has_many :customers_auths, dependent: :restrict_with_error

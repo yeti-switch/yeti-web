@@ -27,7 +27,7 @@ class GatewayGroup < ActiveRecord::Base
   has_many :gateways, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }

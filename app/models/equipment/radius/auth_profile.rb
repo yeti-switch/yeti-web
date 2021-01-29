@@ -20,7 +20,7 @@
 
 class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
   self.table_name = 'class4.radius_auth_profiles'
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :radius_auth_profile_id, dependent: :restrict_with_error
   has_many :avps, class_name: 'Equipment::Radius::AuthProfileAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy

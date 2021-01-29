@@ -62,7 +62,7 @@ class Routing::Destination < Yeti::ActiveRecord
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   include Yeti::ResourceStatus
 

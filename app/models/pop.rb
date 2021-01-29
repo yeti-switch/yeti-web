@@ -19,7 +19,7 @@ class Pop < ActiveRecord::Base
   has_many :customer_auths, class_name: 'CustomersAuth', foreign_key: :pop_id, dependent: :restrict_with_error
   has_many :gateways, class_name: 'Gateway', foreign_key: :pop_id, dependent: :restrict_with_error
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   validates :id, :name, uniqueness: true
   validates :id, :name, presence: true

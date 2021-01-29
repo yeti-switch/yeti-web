@@ -55,7 +55,7 @@ class Equipment::SipOptionsProber < Yeti::ActiveRecord
   #  validates :from_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
   #  validates :to_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   def display_name
     "#{name} | #{id}"

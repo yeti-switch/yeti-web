@@ -17,7 +17,7 @@
 class System::LoadBalancer < Yeti::ActiveRecord
   self.table_name = 'sys.load_balancers'
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   validates :name, :signalling_ip, presence: true
   validates :name, :signalling_ip, uniqueness: true

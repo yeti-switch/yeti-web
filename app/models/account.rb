@@ -65,7 +65,7 @@ class Account < Yeti::ActiveRecord
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   default_scope { includes(:contractor) }
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }

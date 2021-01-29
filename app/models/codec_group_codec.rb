@@ -26,7 +26,7 @@ class CodecGroupCodec < ActiveRecord::Base
   belongs_to :codec_group
   belongs_to :codec
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   validates :priority, uniqueness: { scope: [:codec_group_id] }
   validates :priority, numericality: true

@@ -21,7 +21,7 @@
 class System::CdrConfig < Cdr::Base
   self.table_name = 'sys.config'
 
-  has_paper_trail class_name: 'AuditLogItem'
+  include WithPaperTrail
 
   belongs_to :call_duration_round_mode, class_name: 'System::CdrRoundMode', foreign_key: :call_duration_round_mode_id
   belongs_to :customer_price_round_mode, class_name: 'System::CdrPriceRoundMode', foreign_key: :customer_amount_round_mode_id
