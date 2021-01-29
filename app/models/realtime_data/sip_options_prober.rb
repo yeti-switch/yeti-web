@@ -21,7 +21,8 @@ class RealtimeData::SipOptionsProber < YetiResource
       record = NodeRpcClient.new(node.rpc_endpoint).sip_options_probers([id])
       record
     end
-    #{model.node.id}*#{model.id}
+
+    # {model.node.id}*#{model.id}
     def query_builder_collection(**_)
       result = NodeRpcClient.perform_parallel(default: []) do |client, node|
         result = client.sip_options_probers
