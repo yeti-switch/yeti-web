@@ -40,7 +40,6 @@ RSpec.describe 'Sip Options Probers index page', js: true do
     record_attributes.each do |record_attribute|
       expect(page).to have_link(record_attribute[:id].to_s, href: sip_options_prober_path("#{record_attribute[:node_id]}*#{record_attribute[:id]}"))
     end
-    click_link({ href: sip_options_prober_path("#{record_attributes.first[:node_id]}*#{record_attributes.first[:id]}") })
     click_link(record_attributes.first[:id])
     record_attributes.first.each { |attribute| expect(page).to have_table_cell text: attribute }
   end

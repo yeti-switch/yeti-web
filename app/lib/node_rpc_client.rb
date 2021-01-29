@@ -61,4 +61,3 @@ class NodeRpcClient
     raise Error, e.message
   end
 end
-query_builder_findquery_builder_find
