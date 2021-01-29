@@ -26,6 +26,6 @@ jobs:
           CDR_DB_PORT: 5432
       - name: Upload package to ${{github.ref}} repo
         env:
-	  PKG_API_BASE: ${{secrets.PKG_API_BASE}}
+          PKG_API_BASE: ${{secrets.PKG_API_BASE}}
         run: ci/deploy.sh buster nightly main /build/*.deb
 
