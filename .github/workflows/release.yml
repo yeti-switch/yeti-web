@@ -27,5 +27,7 @@ jobs:
       - name: Upload package to ${{github.ref}} repo
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
-        run: ci/deploy.sh buster ${{github.ref}} main ../*.deb
+          PKG_TAG: ${{github.ref}} 
+        run: ci/deploy.sh buster ${PKG_TAG##*/} main ../*.deb
+
 
