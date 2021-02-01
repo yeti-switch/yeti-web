@@ -52,7 +52,7 @@ RSpec.describe 'Sip Options Probers', js: true do
       subject
 
       expect(page).to have_attribute_row('ID', exact_text: record_attributes.first[:id])
-      record_attributes.first.each do |attribute, value|
+      record_attributes.first.each do |attribute, _value|
         next if attribute == :node_id
 
         expect(page).to have_attribute_row(attribute.to_s.upcase)
