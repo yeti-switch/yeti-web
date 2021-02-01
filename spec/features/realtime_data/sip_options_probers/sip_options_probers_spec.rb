@@ -11,16 +11,16 @@ RSpec.describe 'Sip Options Probers', js: true do
     ]
   end
 
+  before do
+    stub_jrpc_request('options_prober.show.probers', nodes.first.rpc_endpoint, { logger: be_present })
+      .and_return([record_attributes.first.stringify_keys])
+    stub_jrpc_request('options_prober.show.probers', nodes.second.rpc_endpoint, { logger: be_present })
+      .and_return([record_attributes.second.stringify_keys])
+  end
+
   describe 'index page' do
     subject do
       visit sip_options_probers_path
-    end
-
-    before do
-      stub_jrpc_request('options_prober.show.probers', nodes.first.rpc_endpoint, { logger: be_present })
-        .and_return([record_attributes.first.stringify_keys])
-      stub_jrpc_request('options_prober.show.probers', nodes.second.rpc_endpoint, { logger: be_present })
-        .and_return([record_attributes.second.stringify_keys])
     end
 
     it 'returns correct Sip Options Probers' do
@@ -44,16 +44,18 @@ RSpec.describe 'Sip Options Probers', js: true do
 
     before do
       stub_jrpc_request('options_prober.show.probers', nodes.first.rpc_endpoint, { logger: be_present })
+        .with(record_attributes.first[:id].to_s)
         .and_return([record_attributes.first.stringify_keys])
-      stub_jrpc_request('options_prober.show.probers', nodes.second.rpc_endpoint, { logger: be_present })
-        .and_return([record_attributes.second.stringify_keys])
     end
 
     it 'returns correct Sip Options Prober{#id}' do
       subject
 
-      record_attributes.first.each do |attribute|
-        expect(page).to have_attribute_row(attribute.first.to_s.upcase, exact_text: attribute.first.to_s.upcase)
+      expect(page).to have_attribute_row('ID', exact_text: record_attributes.first[:id])
+      record_attributes.first.each do |attribute, value|
+        next if attribute == :node_id
+
+        expect(page).to have_attribute_row(attribute.to_s.upcase)
       end
     end
   end

@@ -13,7 +13,9 @@ RSpec.describe NodeRpcClient, '#sip_options_probers' do
   let!(:node) { create(:node) }
   let(:response_attribute) { FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: node.id) }
 
-  it 'returns correct sip option prober' do
-    expect(subject).to eq([response_attribute])
+  context 'with ids' do
+    it 'returns correct sip option prober' do
+      expect(subject).to eq([response_attribute])
+    end
   end
 end
