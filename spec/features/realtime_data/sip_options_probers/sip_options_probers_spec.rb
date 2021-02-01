@@ -6,8 +6,8 @@ RSpec.describe 'Sip Options Probers', js: true do
   let!(:nodes) { create_list(:node, 2) }
   let(:record_attributes) do
     [
-    FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: nodes.first.id),
-    FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: nodes.second.id)
+      FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: nodes.first.id),
+      FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: nodes.second.id)
     ]
   end
 
@@ -35,7 +35,7 @@ RSpec.describe 'Sip Options Probers', js: true do
       record_attributes.each { |record_attribute| expect(page).to have_table_cell column: 'Id', text: record_attribute[:id] }
     end
   end
-  #{model.node.id}*#{model.id}
+
   describe 'show page' do
     subject do
       visit sip_options_probers_path
