@@ -3,10 +3,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 if ENV['SKIP_COVERAGE'].nil?
-  require 'coveralls'
-  Coveralls.wear_merged! do
-    add_filter 'spec/'
-  end
+  require 'simplecov'
 end
 
 require File.expand_path('../config/environment', __dir__)
