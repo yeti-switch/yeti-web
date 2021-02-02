@@ -115,11 +115,12 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'capybara_active_admin', github: 'activeadmin-plugins/capybara_active_admin', require: false
-  gem 'coveralls', require: false
   gem 'cuprite'
   gem 'ferrum'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'simplecov', '~> 0.21.2', require: false
+  gem 'simplecov-lcov', '~> 0.8.0', require: false
   gem 'webdrivers', '~> 4.0'
   gem 'webmock'
 end

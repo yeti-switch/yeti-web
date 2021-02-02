@@ -35,7 +35,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
- 
+
   lint:
     name: Rubocop and bundle audit
     runs-on: ubuntu-latest
@@ -125,13 +125,13 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
-#https://github.com/coverallsapp/github-action/issues/29
-#      - name: Coveralls Parallel
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{secrets.github_token}}
-#          flag-name: run-${{matrix.ci_node_index}}
-#          parallel: true
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@master
+        with:
+          path-to-lcov: ./coverage/lcov.info
+          github-token: ${{secrets.github_token}}
+          flag-name: run-${{matrix.ci_node_index}}
+          parallel: true
 
       - name: Save artifacts
         if: always()
@@ -142,14 +142,13 @@ jobs:
           path: |
             tmp/capybara
 
-#  finalize-coveralls:
-#    needs: rspec
-#    runs-on: ubuntu-latest
-#    container: switchyeti/yeti-web:buster-build
-#    steps:
-#    - name: Coveralls Finished
-#      uses: coverallsapp/github-action@master
-#      with:
-#        github-token: ${{secrets.github_token}}
-#        parallel-finished: true
-
+  finalize-coveralls:
+    needs: rspec
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{secrets.github_token}}
+          parallel-finished: true
