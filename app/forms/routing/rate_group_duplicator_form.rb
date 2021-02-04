@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Routing::RateGroupDuplicator
+class Routing::RateGroupDuplicatorForm
   include ActiveModel::Model
 
   attr_accessor :name, :id

@@ -5,7 +5,7 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
     aa_form.submit
   end
 
-  active_admin_form_for Routing::RoutingPlanStaticRouteBatchCreator, 'new'
+  active_admin_form_for Routing::RoutingPlanStaticRouteBatchCreatorForm, 'new'
   include_context :login_as_admin
 
   let!(:vendor_1) { FactoryBot.create(:vendor) }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Routing::RoutingPlanStaticRouteBatchCreator
+class Routing::RoutingPlanStaticRouteBatchCreatorForm
   include ActiveModel::Model
 
   def self.inheritance_column

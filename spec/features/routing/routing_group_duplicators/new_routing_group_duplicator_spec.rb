@@ -5,7 +5,7 @@ RSpec.describe 'Create new Routing Group Duplicator', type: :feature, js: true d
     aa_form.submit
   end
 
-  active_admin_form_for Routing::RoutingGroupDuplicator, 'new'
+  active_admin_form_for Routing::RoutingGroupDuplicatorForm, 'new'
   include_context :login_as_admin
 
   let!(:routing_group) { FactoryBot.create(:routing_group) }

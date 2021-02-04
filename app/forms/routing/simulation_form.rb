@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Routing::Simulation
+class Routing::SimulationForm
   class Result < OpenStruct
     def vendor
       Contractor.find_by(id: vendor_id)

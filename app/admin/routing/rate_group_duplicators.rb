@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Routing::RateGroupDuplicator do
+ActiveAdmin.register Routing::RateGroupDuplicatorForm do
   menu false
 
   actions :new, :create

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register_page 'Routing simulation' do
-  menu parent: 'Routing', priority: 999, label: 'Routing Simulation'
+  menu parent: 'Routing', priority: 999, label: 'Routing SimulationForm'
 
   content do
     begin
-      @dc = Routing::Simulation.new(params[:routing_simulation])
+      @dc = Routing::SimulationForm.new(params[:routing_simulation])
       if !params[:routing_simulation].nil? && @dc.valid? # force object validation before form rendering
         @dc.save!
         Rails.logger.info @dc.errors

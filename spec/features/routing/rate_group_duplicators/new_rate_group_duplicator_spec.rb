@@ -5,7 +5,7 @@ RSpec.describe 'Create new RateGroup Duplicator', type: :feature, js: true do
     aa_form.submit
   end
 
-  active_admin_form_for Routing::RateGroupDuplicator, 'new'
+  active_admin_form_for Routing::RateGroupDuplicatorForm, 'new'
   include_context :login_as_admin
 
   let!(:rate_group) { FactoryBot.create(:rate_group) }

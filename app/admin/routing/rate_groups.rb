@@ -4,7 +4,7 @@ ActiveAdmin.register Routing::RateGroup do
   menu parent: 'Routing', label: 'Rate Groups', priority: 42
 
   acts_as_audit
-  acts_as_clone_with_helper helper: Routing::RateGroupDuplicator, name: 'Copy with destinations'
+  acts_as_clone_with_helper helper: Routing::RateGroupDuplicatorForm, name: 'Copy with destinations'
   acts_as_safe_destroy
   acts_as_export :id, :name
   acts_as_import resource_class: Importing::RateGroup

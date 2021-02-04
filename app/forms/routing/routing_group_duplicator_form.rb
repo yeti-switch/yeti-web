@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Routing::RoutingGroupDuplicator
+class Routing::RoutingGroupDuplicatorForm
   include ActiveModel::Model
 
   attr_accessor :name, :id
