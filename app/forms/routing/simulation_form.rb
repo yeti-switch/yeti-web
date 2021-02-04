@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Routing::SimulationForm
+class Routing::SimulationForm < ApplicationForm
   class Result < OpenStruct
     def vendor
       Contractor.find_by(id: vendor_id)
@@ -51,15 +51,23 @@ class Routing::SimulationForm
     end
   end
 
-  include ActiveModel::Validations
-  include ActiveModel::Naming
-  include ActiveModel::Conversion
-
-  attr_accessor :transport_protocol_id, :remote_ip, :remote_port, :src_number, :dst_number, :pop_id,
-                :uri_domain, :from_domain, :to_domain,
-                :x_yeti_auth, :release_mode,
-                :pai, :ppi, :privacy, :rpid, :rpid_privacy,
-                :auth_id
+  attribute :transport_protocol_id
+  attribute :remote_ip
+  attribute :remote_port
+  attribute :src_number
+  attribute :dst_number
+  attribute :pop_id
+  attribute :uri_domain
+  attribute :from_domain
+  attribute :to_domain
+  attribute :x_yeti_auth
+  attribute :release_mode
+  attribute :pai
+  attribute :ppi
+  attribute :privacy
+  attribute :rpid
+  attribute :rpid_privacy
+  attribute :auth_id
 
   validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, presence: true
 
@@ -81,116 +89,8 @@ class Routing::SimulationForm
 
   attr_reader :notices
 
-  def initialize(attrs = {})
-    @attrs = attrs
-    if attrs.present?
-      attrs.each do |k, v|
-        send("#{k}=", v) if respond_to?("#{k}=")
-      end
-    end
-  end
-
-  def auth_id=(val)
-    @auth_id = val.presence
-  end
-
-  def has_attributes?
-    @attrs.present? && @attrs.to_unsafe_h.any?
-  end
-
-  def persisted?
-    false
-  end
-
   def debug
     @debug&.map { |d| Result.new(d) }
-  end
-
-  def save!
-    return false unless has_attributes?
-
-    @notices = []
-    @debug = nil
-
-    begin
-      t = ActiveRecord::Base.connection.raw_connection.set_notice_processor { |result| @notices << result.to_s.chomp }
-      Yeti::ActiveRecord.fetch_sp(
-        "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(?::integer, ?::integer)",
-        1,
-        1
-      )
-      spname = release_mode == '1' ? 'route_release' : 'route_debug'
-      @debug = Yeti::ActiveRecord.fetch_sp(
-        "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.#{spname}(
-          ?::integer, /* i_node_id integer */
-          ?::integer, /* i_pop_id integer  */
-          ?::smallint, /* i_protocol_id smallint */
-          ?::inet, /* i_remote_ip inet */
-          ?::integer, /* i_remote_port integer */
-          ?::inet, /* i_local_ip inet */
-          ?::integer, /* i_local_port integer */
-          ?, /* i_from_dsp character varying */
-          ?, /* i_from_name character varying */
-          ?, /* i_from_domain character varying */
-          ?, /* i_from_port integer */
-          ?, /* i_to_name character varying */
-          ?, /* i_to_domain character varying */
-          ?::integer, /* i_to_port integer */
-          ?, /* i_contact_name character varying */
-          ?, /* i_contact_domain character varying */
-          ?::integer, /* i_contact_port integer */
-          ?, /* i_uri_name character varying */
-          ?, /* i_uri_domain character varying */
-          ?, /* i_auth_id integer */
-          ?, /* i_x_yeti_auth character varying, */
-          ?, /* i_diversion character varying */
-          ?, /* i_x_orig_ip inet */
-          ?, /* i_x_orig_port integer */
-          ?, /* i_x_orig_protocol_id smallint */
-          ?, /* i_pai character varying */
-          ?, /* i_ppi character varying */
-          ?, /* i_privacy character varying */
-          ?, /* i_rpid character varying */
-          ? /* i_rpid_privacy character varying */
-          )",
-        1, # node_id
-        pop_id.to_i,
-        transport_protocol_id.to_i,
-        remote_ip,
-        remote_port.to_i,
-        '127.0.0.1', # local_ip
-        5060, # local_port
-        'from_name', # from name
-        src_number,
-        from_domain,
-        5060,
-        dst_number,
-        to_domain,
-        5060,
-        src_number,
-        remote_ip,
-        remote_port,
-        dst_number,
-        uri_domain,
-        auth_id,
-        x_yeti_auth,
-        nil,
-        nil,
-        nil,
-        nil,
-        pai,
-        ppi,
-        privacy,
-        rpid,
-        rpid_privacy
-      )
-    rescue Exception => e
-      Rails.logger.info 'EXCEPTION'
-      raise e
-    ensure
-      ActiveRecord::Base.connection.raw_connection.set_notice_processor(&t)
-    end
-    @notices.map! { |el| el.gsub('NOTICE:', '').gsub(/CONTEXT:.*/, '').gsub(%r{PL/pgSQL function .*}, '') }
   end
 
   protected

@@ -38,7 +38,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   # end
 
   action_item :batch_create do
-    link_to('Batch create', new_routing_routing_plan_static_route_batch_creator_path)
+    link_to('Batch create', new_routing_routing_plan_static_route_batch_creator_form_path)
   end
 
   index do
