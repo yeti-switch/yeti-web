@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BatchUpdateForm::Base
+class BatchUpdateForm::Base < ApplicationForm
   # Base class for batch update form.
   # Usage:
   #
@@ -32,22 +32,9 @@ class BatchUpdateForm::Base
   #     # ...
   #   end
 
-  include ActiveModel::Validations
-
   class_attribute :_attributes, instance_writer: false, default: {}
   class_attribute :_model_class_name, instance_writer: false
-  attr_accessor :selected_record
-
-  def initialize(attrs = {})
-    attrs.each do |key, value|
-      type = self.class._attributes[key.to_sym][:type]
-      if value.present? || value.is_a?(String)
-        public_send("#{key}=", public_send("type_cast_#{type}", value))
-      else
-        public_send("#{key}=", value)
-      end
-    end
-  end
+  attribute :selected_record
 
   # methods for type casting
   def type_cast_boolean(raw_value)
@@ -64,7 +51,6 @@ class BatchUpdateForm::Base
 
   class << self
     private def inherited(subclass)
-      subclass._attributes = _attributes.dup
       super
     end
 
@@ -76,18 +62,6 @@ class BatchUpdateForm::Base
 
     def _model_class
       @_model_class ||= _model_class_name.constantize
-    end
-
-    # Define form attribute.
-    # Defines method "#{name}_changed?" to check whether attribute passed or not
-    # @param name [Symbol]
-    # @param options [Hash]
-    #  :type [Symbol] default :text.
-    #  other options depends on type (@see form_data_#{type} method).
-    def attribute(name, options = {})
-      _attributes[name] = options
-      attr_accessor(name)
-      define_method("#{name}_changed?") { attribute_changed?(name) }
     end
 
     # Needed for active admin scoped collection action to build form.
@@ -134,31 +108,9 @@ class BatchUpdateForm::Base
     end
   end
 
-  # @param collection_sql [String]
-  # @param paper_trail_info [Hash]
-  def perform(collection_sql, paper_trail_info)
-    AsyncBatchUpdateJob.perform_later(
-        self.class._model_class_name,
-        collection_sql,
-        attributes,
-        paper_trail_info
-      )
-  end
-
   # @param name [Symbol]
   # @return [Boolean]
   def attribute_changed?(name)
     !public_send(name).nil?
-  end
-
-  # @return [Hash]
-  def attributes
-    data = {}
-
-    _attributes.each do |name, _|
-      data[name] = public_send(name) if attribute_changed?(name)
-    end
-
-    data
   end
 end
