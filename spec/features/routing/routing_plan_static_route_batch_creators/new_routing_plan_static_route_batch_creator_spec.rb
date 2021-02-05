@@ -16,7 +16,7 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
     FactoryBot.create(:routing_plan, :with_static_routes)
     FactoryBot.create(:vendor)
 
-    visit new_routing_routing_plan_static_route_batch_creator_form_path
+    visit new_routing_plan_static_route_batch_creator_path
 
     aa_form.search_chosen 'Routing plan', routing_plan.display_name, ajax: true
     aa_form.set_text 'Prefixes', '123,456'

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Routing::RoutingPlanStaticRouteBatchCreatorForm do
+ActiveAdmin.register Routing::RoutingPlanStaticRouteBatchCreatorForm, as: 'Routing Plan Static Route Batch Creator' do
   menu false
 
   actions :new, :create

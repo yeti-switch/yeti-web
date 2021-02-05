@@ -10,7 +10,7 @@ RSpec.describe 'Create new Routing Group Duplicator', type: :feature, js: true d
 
   let!(:routing_group) { FactoryBot.create(:routing_group) }
   before do
-    visit new_routing_routing_group_duplicator_path(from: routing_group.id)
+    visit new_routing_group_duplicator_path(from: routing_group.id)
 
     aa_form.set_text 'Name', "#{routing_group.name} dup"
   end
@@ -25,5 +25,5 @@ RSpec.describe 'Create new Routing Group Duplicator', type: :feature, js: true d
   end
 
   include_examples :changes_records_qty_of, RoutingGroup, by: 1
-  include_examples :shows_flash_message, :notice, 'Routing group duplicator was successfully created.'
+  include_examples :shows_flash_message, :notice, 'Routing group duplicator form was successfully created.'
 end

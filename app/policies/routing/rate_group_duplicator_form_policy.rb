@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Routing
-  class RoutingGroupDuplicatorPolicy < ::RolePolicy
-    section 'Routing/RoutingGroupDuplicatorForm'
+  class RateGroupDuplicatorFormPolicy < ::RolePolicy
+    section 'Routing/RateGroupDuplicatorForm'
 
     class Scope < ::RolePolicy::Scope
     end
