@@ -2,7 +2,7 @@
 
 module Routing
   class RoutingPlanStaticRouteBatchCreatorFormPolicy < ::RolePolicy
-    section 'Routing/RoutingPlanStaticRouteBatchCreatorForm'
+    section 'Routing/RoutingPlanStaticRouteBatchCreator'
 
     class Scope < ::RolePolicy::Scope
     end

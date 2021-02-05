@@ -2,7 +2,7 @@
 
 module Routing
   class RateGroupDuplicatorFormPolicy < ::RolePolicy
-    section 'Routing/RateGroupDuplicatorForm'
+    section 'Routing/RateGroupDuplicator'
 
     class Scope < ::RolePolicy::Scope
     end

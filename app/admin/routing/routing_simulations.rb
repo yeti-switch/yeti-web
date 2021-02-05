@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register_page 'Routing simulation' do
-  menu parent: 'Routing', priority: 999, label: 'Routing SimulationForm'
+  menu parent: 'Routing', priority: 999, label: 'Routing Simulation'
 
   content do
     begin

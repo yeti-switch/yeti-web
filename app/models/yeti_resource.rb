@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-class YetiResource < ApplicationForm
+class YetiResource
   FakeColumn = Struct.new(:name)
 
+  include ActiveModel::Model
+  include ActiveModel::Serializers::Xml
+  include ActiveModel::Attributes
   include WithAssociations
 
   class_attribute :logger, instance_writer: false, default: Rails.logger
@@ -30,7 +33,11 @@ class YetiResource < ApplicationForm
     end
   end
 
-  attribute :_rest_attributes
+  def to_param
+    id
+  end
+
+  attr_accessor :_rest_attributes
 
   private
 
