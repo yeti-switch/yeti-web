@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Routing::RoutingGroupDuplicatorForm < ApplicationForm
-
   attribute :name
   attribute :id
 
@@ -20,6 +19,19 @@ class Routing::RoutingGroupDuplicatorForm < ApplicationForm
   private
 
   def _save
-    RoutingGroup.create!(name: name)
+    dst = RoutingGroup.create!(
+      name: name
+    )
+    src = RoutingGroup.find(id)
+    src.dialpeers.includes(:dialpeer_next_rates).find_each do |n|
+      x = n.dup
+      x.routing_group_id = dst.id
+      x.save!
+      n.dialpeer_next_rates.each do |nn|
+        xx = nn.dup
+        xx.dialpeer_id = x.id
+        xx.save!
+      end
+    end
   end
 end

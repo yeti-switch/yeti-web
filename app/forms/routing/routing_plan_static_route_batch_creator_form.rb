@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Routing::RoutingPlanStaticRouteBatchCreatorForm < ApplicationForm
-
   def self.inheritance_column
     :_type
   end
