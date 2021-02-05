@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class Routing::RateGroupDuplicatorForm
-  include ActiveModel::Model
+class Routing::RateGroupDuplicatorForm < ApplicationForm
 
-  attr_accessor :name, :id
+  attribute :name
+  attribute :id
 
   validates :name, :id, presence: true
 
@@ -12,26 +12,14 @@ class Routing::RateGroupDuplicatorForm
     errors.add(:name, :taken) if Routing::RateGroup.exists?(name: name)
   end
 
-  def save
-    if valid?
-      Routing::RateGroup.transaction do
-        dst = Routing::RateGroup.create!(
-          name: name
-        )
-        src = Routing::RateGroup.find(id)
-        src.destinations.each do |n|
-          x = n.dup
-          x.uuid = nil
-          x.external_id = nil
-          x.rate_group_id = dst.id
-          x.save!
-        end
-      end
-    end
-  end
-
   # Required by activeadmin https://github.com/activeadmin/activeadmin/pull/5253#discussion_r155525109
   def self.inheritance_column
     nil
+  end
+
+  private
+
+  def _save
+    Routing::RateGroup.create!(name: name)
   end
 end
