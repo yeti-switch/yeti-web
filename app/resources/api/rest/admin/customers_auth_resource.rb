@@ -8,6 +8,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_rewrite_rule, :diversion_rewrite_result,
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
+             :check_account_balance, :require_incoming_auth,
              :from_domain, :to_domain, :tag_action_value, :external_id
 
   paginator :paged
@@ -119,6 +120,8 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       src_number_radius_rewrite_result
       dst_number_radius_rewrite_rule
       dst_number_radius_rewrite_result
+      check_account_balance
+      require_incoming_auth
       radius_accounting_profile
       from_domain
       to_domain

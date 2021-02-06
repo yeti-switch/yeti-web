@@ -13,7 +13,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :dns_srv_failover_timer, :anonymize_sdp, :proxy_media, :single_codec_in_200ok, :transparent_seqno,
              :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
-             :rtp_force_relay_cn,
+             :rtp_force_relay_cn, :preserve_anonymous_from_domain, :use_registered_aor,
              :incoming_auth_username, :incoming_auth_password
 
   paginator :paged
@@ -237,6 +237,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       network_protocol_priority
       media_encryption_mode
       sip_schema
+      preserve_anonymous_from_domain
+      use_registered_aor
       incoming_auth_username
       incoming_auth_password
     ]
