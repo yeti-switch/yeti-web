@@ -7,8 +7,8 @@ RSpec.resource 'Authentication' do
   header 'Content-Type', 'application/json'
 
   post '/api/rest/admin/auth' do
-    parameter :username, 'Login', scope: :auth, requred: true
-    parameter :password, 'Password', scope: :auth, requred: true
+    parameter :username, 'Login', scope: :auth, required: true
+    parameter :password, 'Password', scope: :auth, required: true
 
     let(:username) { 'admin' }
     let(:password) { 'password' }
