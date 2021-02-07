@@ -14,7 +14,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
              :rtp_force_relay_cn, :preserve_anonymous_from_domain, :use_registered_aor,
-             :incoming_auth_username, :incoming_auth_password
+             :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity
 
   paginator :paged
 
@@ -239,6 +239,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       sip_schema
       preserve_anonymous_from_domain
       use_registered_aor
+      origination_capacity
+      termination_capacity
       incoming_auth_username
       incoming_auth_password
     ]
