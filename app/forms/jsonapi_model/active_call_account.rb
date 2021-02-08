@@ -4,7 +4,9 @@ module JsonapiModel
   class ActiveCallAccount < Base
     include ActiveModel::Validations::Callbacks
 
-    attr_accessor :account_id, :customer
+    attribute :account_id
+    attribute :customer
+
     attr_reader :from_time, :to_time, :originated_calls, :terminated_calls
 
     before_validation do
@@ -17,6 +19,22 @@ module JsonapiModel
     validate do
       errors.add(:base, 'from_time must be greater than to_time') if from_time > to_time
     end
+
+    def account
+      return @account if defined?(@account)
+
+      @account = account_id && customer ? customer.accounts.find_by(uuid: account_id) : nil
+    end
+
+    def from_time=(val)
+      @from_time = ActiveModel::Type::DateTime.new.cast(val)
+    end
+
+    def to_time=(val)
+      @to_time = ActiveModel::Type::DateTime.new.cast(val)
+    end
+
+    private
 
     def _save
       scope = Stats::ActiveCallAccount
@@ -34,20 +52,6 @@ module JsonapiModel
         originated_calls.push(y: originated_count, x: created_at_formatted)
         terminated_calls.push(y: terminated_count, x: created_at_formatted)
       end
-    end
-
-    def account
-      return @account if defined?(@account)
-
-      @account = account_id && customer ? customer.accounts.find_by(uuid: account_id) : nil
-    end
-
-    def from_time=(val)
-      @from_time = ActiveModel::Type::DateTime.new.cast(val)
-    end
-
-    def to_time=(val)
-      @to_time = ActiveModel::Type::DateTime.new.cast(val)
     end
   end
 end

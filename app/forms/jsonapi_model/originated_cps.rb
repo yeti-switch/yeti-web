@@ -7,7 +7,9 @@ module JsonapiModel
     TIME_START_SQL = Arel.sql("date_trunc('minute',time_start)").freeze
     CPS_SQL = Arel.sql('round((count(*)::float/60)::decimal,3)').freeze
 
-    attr_accessor :account_id, :customer
+    attribute :account_id, :integer
+    attribute :customer
+
     attr_reader :from_time, :to_time, :cps
 
     before_validation do
@@ -19,20 +21,6 @@ module JsonapiModel
 
     validate do
       errors.add(:base, 'from_time must be greater than to_time') if from_time > to_time
-    end
-
-    def _save
-      scope = Cdr::Cdr
-              .where(customer_acc_id: account.id, is_last_cdr: true)
-              .where('time_start BETWEEN ? AND ?', from_time, to_time)
-              .group(TIME_START_SQL)
-              .order(TIME_START_SQL)
-
-      values = scope.pluck(TIME_START_SQL, CPS_SQL)
-
-      @cps = values.map do |(time_start, cps)|
-        { y: cps, x: time_start.to_s(:db) }
-      end
     end
 
     def account
@@ -47,6 +35,22 @@ module JsonapiModel
 
     def to_time=(val)
       @to_time = ActiveModel::Type::DateTime.new.cast(val)
+    end
+
+    private
+
+    def _save
+      scope = Cdr::Cdr
+              .where(customer_acc_id: account.id, is_last_cdr: true)
+              .where('time_start BETWEEN ? AND ?', from_time, to_time)
+              .group(TIME_START_SQL)
+              .order(TIME_START_SQL)
+
+      values = scope.pluck(TIME_START_SQL, CPS_SQL)
+
+      @cps = values.map do |(time_start, cps)|
+        { y: cps, x: time_start.to_s(:db) }
+      end
     end
   end
 end
