@@ -25,5 +25,5 @@ RSpec.describe 'Create new Routing Group Duplicator', type: :feature, js: true d
   end
 
   include_examples :changes_records_qty_of, RoutingGroup, by: 1
-  include_examples :shows_flash_message, :notice, 'Routing group duplicator form was successfully created.'
+  include_examples :shows_flash_message, :notice, 'Routing group duplicator was successfully created.'
 end

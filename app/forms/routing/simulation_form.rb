@@ -93,7 +93,17 @@ class Routing::SimulationForm < ApplicationForm
     @debug&.map { |d| Result.new(d) }
   end
 
-  def save!
+  protected
+
+  def ip_is_valid
+    _tmp = IPAddr.new(remote_ip)
+  rescue IPAddr::Error => _error
+    errors.add(:remote_ip, 'is not valid')
+  end
+
+  private
+
+  def _save
     return false unless has_attributes?
 
     @notices = []
@@ -178,13 +188,5 @@ class Routing::SimulationForm < ApplicationForm
       ActiveRecord::Base.connection.raw_connection.set_notice_processor(&t)
     end
     @notices.map! { |el| el.gsub('NOTICE:', '').gsub(/CONTEXT:.*/, '').gsub(%r{PL/pgSQL function .*}, '') }
-  end
-
-  protected
-
-  def ip_is_valid
-    _tmp = IPAddr.new(remote_ip)
-  rescue IPAddr::Error => _error
-    errors.add(:remote_ip, 'is not valid')
   end
 end

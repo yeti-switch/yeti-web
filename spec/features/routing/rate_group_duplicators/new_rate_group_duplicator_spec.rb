@@ -24,5 +24,5 @@ RSpec.describe 'Create new RateGroup Duplicator', type: :feature, js: true do
   end
 
   include_examples :changes_records_qty_of, Routing::RateGroup, by: 1
-  include_examples :shows_flash_message, :notice, 'Rate group duplicator form was successfully created.'
+  include_examples :shows_flash_message, :notice, 'Rate group duplicator was successfully created.'
 end

@@ -63,5 +63,5 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
   end
 
   include_examples :changes_records_qty_of, Routing::RoutingPlanStaticRoute, by: 4 # 2 vendors X 2 prefixes
-  include_examples :shows_flash_message, :notice, 'Routing plan static route batch creator form was successfully created.'
+  include_examples :shows_flash_message, :notice, 'Routing plan static route batch creator was successfully created.'
 end

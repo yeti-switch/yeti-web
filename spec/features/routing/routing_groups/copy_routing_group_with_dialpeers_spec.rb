@@ -25,7 +25,7 @@ RSpec.describe 'Copy Routing group with dialpeers action', type: :feature do
   end
 
   it 'creates new Routing group with duplicated Dialpeers' do
-    expect(page).to have_css('.flash_notice', text: 'Routing group duplicator form was successfully created.')
+    expect(page).to have_css('.flash_notice', text: 'Routing group duplicator was successfully created.')
 
     expect(routing_group.reload.dialpeers.count).to eq(2)
     expect(RoutingGroup.count).to eq(2)
