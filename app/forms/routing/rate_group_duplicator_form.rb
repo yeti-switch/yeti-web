@@ -11,11 +11,6 @@ class Routing::RateGroupDuplicatorForm < ApplicationForm
     errors.add(:name, :taken) if Routing::RateGroup.exists?(name: name)
   end
 
-  # Required by activeadmin https://github.com/activeadmin/activeadmin/pull/5253#discussion_r155525109
-  def self.inheritance_column
-    nil
-  end
-
   private
 
   def _save

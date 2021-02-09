@@ -54,7 +54,7 @@ class ApplicationForm
 
   class_attribute :_abstract, instance_writer: false, default: true
   class_attribute :_reflections, instance_writer: false, default: {}
-  class_attribute :inheritance_column, instance_accessor: false
+  class_attribute :inheritance_column, instance_accessor: false, default: nil
 
   class << self
     def inherited(subclass)
@@ -132,6 +132,11 @@ class ApplicationForm
       @association_changes = []
     end
     assign_attributes(attributes) if attributes
+  end
+
+  # Required by activeadmin https://github.com/activeadmin/activeadmin/pull/5253#discussion_r155525109
+  def self.inheritance_column
+    nil
   end
 
   # override #persisted? method if needed.

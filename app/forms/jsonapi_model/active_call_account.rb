@@ -6,13 +6,10 @@ module JsonapiModel
 
     attribute :account_id, :string
     attribute :customer
+    attribute :from_time, :datetime, default: 24.hours.ago
+    attribute :to_time, :datetime, default: Time.now
 
-    attr_reader :from_time, :to_time, :originated_calls, :terminated_calls
-
-    before_validation do
-      self.from_time ||= 24.hours.ago
-      self.to_time ||= Time.now
-    end
+    attr_reader :originated_calls, :terminated_calls
 
     validates :customer, :account, presence: true
 
@@ -24,14 +21,6 @@ module JsonapiModel
       return @account if defined?(@account)
 
       @account = account_id && customer ? customer.accounts.find_by(uuid: account_id) : nil
-    end
-
-    def from_time=(val)
-      @from_time = ActiveModel::Type::DateTime.new.cast(val)
-    end
-
-    def to_time=(val)
-      @to_time = ActiveModel::Type::DateTime.new.cast(val)
     end
 
     private
