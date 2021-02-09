@@ -85,7 +85,7 @@ class Routing::SimulationForm < ApplicationForm
     only_integer: true
   }
 
-  validate :ip_is_valid
+  validates :remote_ip, ip_address: true
 
   attr_reader :notices
 
@@ -94,12 +94,6 @@ class Routing::SimulationForm < ApplicationForm
   end
 
   protected
-
-  def ip_is_valid
-    _tmp = IPAddr.new(remote_ip)
-  rescue IPAddr::Error => _error
-    errors.add(:remote_ip, 'is not valid')
-  end
 
   private
 
