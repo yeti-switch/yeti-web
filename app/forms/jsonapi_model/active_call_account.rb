@@ -6,8 +6,8 @@ module JsonapiModel
 
     attribute :account_id, :string
     attribute :customer
-    attribute :from_time, :datetime, default: 24.hours.ago
-    attribute :to_time, :datetime, default: Time.now
+    attribute :from_time, :datetime, default: proc { 24.hours.ago }
+    attribute :to_time, :datetime, default: proc { Time.now }
 
     attr_reader :originated_calls, :terminated_calls
 

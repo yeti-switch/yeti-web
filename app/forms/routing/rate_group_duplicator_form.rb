@@ -7,8 +7,14 @@ class Routing::RateGroupDuplicatorForm < ApplicationForm
   validates :name, :id, presence: true
 
   validate do
-    errors.add(:id, :invalid) unless Routing::RateGroup.exists?(id)
+    errors.add(:id, :invalid) if src_rate_group.nil?
     errors.add(:name, :taken) if Routing::RateGroup.exists?(name: name)
+  end
+
+  def src_rate_group
+    return @src_rate_group if defined? @src_rate_group
+
+    @src_rate_group = Routing::RateGroup.find_by(id: id)
   end
 
   private
@@ -17,8 +23,7 @@ class Routing::RateGroupDuplicatorForm < ApplicationForm
     dst = Routing::RateGroup.create!(
       name: name
     )
-    src = Routing::RateGroup.find(id)
-    src.destinations.each do |n|
+    src_rate_group.destinations.each do |n|
       x = n.dup
       x.uuid = nil
       x.external_id = nil

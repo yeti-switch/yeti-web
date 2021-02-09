@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class Routing::RoutingPlanStaticRouteBatchCreatorForm < ApplicationForm
-  def self.inheritance_column
-    :_type
-  end
-
   attribute :routing_plan, :string
   attribute :prefixes, :string
   attribute :priority, :integer
@@ -24,7 +20,7 @@ class Routing::RoutingPlanStaticRouteBatchCreatorForm < ApplicationForm
   private
 
   def _save
-    prio = priority.to_i
+    prio = priority
     prefix_arr = prefixes.delete(' ').split(',').uniq
     vendors.each do |vendor|
       prefix_arr.each do |prefix|
