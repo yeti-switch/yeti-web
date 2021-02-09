@@ -527,10 +527,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'filter-noaudio-streams': gateway.filter_noaudio_streams,
         'rtp-relay-timestamp-aligning': gateway.rtp_relay_timestamp_aligning,
         'rtp-force-relay-cn': gateway.rtp_force_relay_cn,
-        'preserve-anonymous-from-domain': gateway.preserve_anonymous_from_domain,
-        'use-registered-aor': gateway.use_registered_aor,
-        'origination-capacity': gateway.origination_capacity,
-        'termination-capacity': gateway.termination_capacity,
         'incoming-auth-username': gateway.incoming_auth_username,
         'incoming-auth-password': gateway.incoming_auth_password
       }
