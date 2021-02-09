@@ -151,6 +151,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :max_transfers, type: :number
   ransack_filter :incoming_auth_username, type: :string
   ransack_filter :incoming_auth_password, type: :string
+  ransack_filter :preserve_anonymous_from_domain, type: :boolean
+  ransack_filter :use_registered_aor, type: :boolean
   ransack_filter :weight, type: :number
 
   def self.updatable_fields(_context)

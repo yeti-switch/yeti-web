@@ -72,6 +72,8 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :src_number_radius_rewrite_result, type: :string
   ransack_filter :dst_number_radius_rewrite_rule, type: :string
   ransack_filter :dst_number_radius_rewrite_result, type: :string
+  ransack_filter :check_account_balance, type: :boolean
+  ransack_filter :require_incoming_auth, type: :boolean
   ransack_filter :from_domain, type: :string
   ransack_filter :to_domain, type: :string
   ransack_filter :tag_action_value, type: :number
