@@ -4,7 +4,7 @@ module JsonapiModel
   class ActiveCallAccount < Base
     include ActiveModel::Validations::Callbacks
 
-    attribute :account_id
+    attribute :account_id, :string
     attribute :customer
 
     attr_reader :from_time, :to_time, :originated_calls, :terminated_calls

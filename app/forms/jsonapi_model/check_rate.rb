@@ -2,8 +2,8 @@
 
 module JsonapiModel
   class CheckRate < Base
-    attribute :rateplan_id
-    attribute :number
+    attribute :rateplan_id, :string
+    attribute :number, :string
     attribute :rates
 
     validates :rateplan_id, :number, presence: true

@@ -5,10 +5,10 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   attribute :enabled, type: :boolean
   attribute :reject_calls, type: :boolean
   attribute :transport_protocol_id, type: :foreign_key, class_name: 'Equipment::TransportProtocol'
-  attribute :src_number_min_length
-  attribute :src_number_max_length
-  attribute :dst_number_min_length
-  attribute :dst_number_max_length
+  attribute :src_number_min_length, type: :integer
+  attribute :src_number_max_length, type: :integer
+  attribute :dst_number_min_length, type: :integer
+  attribute :dst_number_max_length, type: :integer
   attribute :dst_numberlist_id, type: :foreign_key, class_name: 'Routing::Numberlist'
   attribute :src_numberlist_id, type: :foreign_key, class_name: 'Routing::Numberlist'
   attribute :dump_level_id, type: :foreign_key, class_name: 'DumpLevel'

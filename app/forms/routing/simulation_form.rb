@@ -51,23 +51,23 @@ class Routing::SimulationForm < ApplicationForm
     end
   end
 
-  attribute :transport_protocol_id
-  attribute :remote_ip
-  attribute :remote_port
-  attribute :src_number
-  attribute :dst_number
-  attribute :pop_id
-  attribute :uri_domain
-  attribute :from_domain
-  attribute :to_domain
-  attribute :x_yeti_auth
-  attribute :release_mode
-  attribute :pai
-  attribute :ppi
-  attribute :privacy
-  attribute :rpid
-  attribute :rpid_privacy
-  attribute :auth_id
+  attribute :transport_protocol_id, :string
+  attribute :remote_ip, :string
+  attribute :remote_port, :string
+  attribute :src_number, :integer
+  attribute :dst_number, :integer
+  attribute :pop_id, :string
+  attribute :uri_domain, :string
+  attribute :from_domain, :string
+  attribute :to_domain, :string
+  attribute :x_yeti_auth, :string
+  attribute :release_mode, :string
+  attribute :pai, :string
+  attribute :ppi, :string
+  attribute :privacy, :string
+  attribute :rpid, :string
+  attribute :rpid_privacy, :string
+  attribute :auth_id, :integer
 
   validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, presence: true
 

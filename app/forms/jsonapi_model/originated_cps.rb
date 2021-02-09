@@ -7,7 +7,7 @@ module JsonapiModel
     TIME_START_SQL = Arel.sql("date_trunc('minute',time_start)").freeze
     CPS_SQL = Arel.sql('round((count(*)::float/60)::decimal,3)').freeze
 
-    attribute :account_id, :integer
+    attribute :account_id, :string
     attribute :customer
 
     attr_reader :from_time, :to_time, :cps

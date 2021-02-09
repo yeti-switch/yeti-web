@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Routing::RateGroupDuplicatorForm < ApplicationForm
-  attribute :name
-  attribute :id
+  attribute :name, :string
+  attribute :id, :integer
 
   validates :name, :id, presence: true
 
