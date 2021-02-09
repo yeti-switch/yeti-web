@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Routing::Simulation, 'index' do
+RSpec.describe Routing::SimulationForm, 'index' do
   include_context :login_as_admin
   subject { visit routing_simulation_path }
 

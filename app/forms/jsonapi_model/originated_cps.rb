@@ -7,19 +7,26 @@ module JsonapiModel
     TIME_START_SQL = Arel.sql("date_trunc('minute',time_start)").freeze
     CPS_SQL = Arel.sql('round((count(*)::float/60)::decimal,3)').freeze
 
-    attr_accessor :account_id, :customer
-    attr_reader :from_time, :to_time, :cps
+    attribute :account_id, :string
+    attribute :customer
+    attribute :from_time, :datetime, default: proc { 24.hours.ago }
+    attribute :to_time, :datetime, default: proc { Time.now }
 
-    before_validation do
-      self.from_time ||= 24.hours.ago
-      self.to_time ||= Time.now
-    end
+    attr_reader :cps
 
     validates :customer, :account, presence: true
 
     validate do
       errors.add(:base, 'from_time must be greater than to_time') if from_time > to_time
     end
+
+    def account
+      return @account if defined?(@account)
+
+      @account = account_id && customer ? customer.accounts.find_by(uuid: account_id) : nil
+    end
+
+    private
 
     def _save
       scope = Cdr::Cdr
@@ -33,20 +40,6 @@ module JsonapiModel
       @cps = values.map do |(time_start, cps)|
         { y: cps, x: time_start.to_s(:db) }
       end
-    end
-
-    def account
-      return @account if defined?(@account)
-
-      @account = account_id && customer ? customer.accounts.find_by(uuid: account_id) : nil
-    end
-
-    def from_time=(val)
-      @from_time = ActiveModel::Type::DateTime.new.cast(val)
-    end
-
-    def to_time=(val)
-      @to_time = ActiveModel::Type::DateTime.new.cast(val)
     end
   end
 end

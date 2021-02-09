@@ -17,7 +17,7 @@ RSpec.describe 'Copy Routing group with dialpeers action', type: :feature do
 
   before do
     click_link('Copy with dialpeers', exact_text: true)
-    within '#new_routing_routing_group_duplicator' do
+    within '#new_routing_routing_group_duplicator_form' do
       fill_in('Name', with: new_name)
       find('input[type=submit]').click
     end

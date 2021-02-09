@@ -5,7 +5,7 @@ ActiveAdmin.register_page 'Routing simulation' do
 
   content do
     begin
-      @dc = Routing::Simulation.new(params[:routing_simulation])
+      @dc = Routing::SimulationForm.new(params[:routing_simulation])
       if !params[:routing_simulation].nil? && @dc.valid? # force object validation before form rendering
         @dc.save!
         Rails.logger.info @dc.errors

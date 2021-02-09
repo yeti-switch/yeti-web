@@ -3,8 +3,7 @@
 require 'securerandom'
 
 module JsonapiModel
-  class Base
-    include ActiveModel::Model
+  class Base < ApplicationForm
     attr_reader :id
 
     class << self
@@ -17,16 +16,7 @@ module JsonapiModel
 
     def initialize(attributes = {})
       @id = SecureRandom.uuid
-      assign_attributes(attributes)
-    end
-
-    def save(validate: true)
-      if !validate || valid?
-        _save
-        errors.empty?
-      else
-        false
-      end
+      super
     end
 
     def call

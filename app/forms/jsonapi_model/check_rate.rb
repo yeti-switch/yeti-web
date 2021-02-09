@@ -2,7 +2,9 @@
 
 module JsonapiModel
   class CheckRate < Base
-    attr_accessor :rateplan_id, :number, :rates
+    attribute :rateplan_id, :string
+    attribute :number, :string
+    attribute :rates
 
     validates :rateplan_id, :number, presence: true
     validate do
@@ -12,13 +14,6 @@ module JsonapiModel
     def call
       get_rates
       self
-    end
-
-    def _save
-      get_rates
-    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
-      Rails.logger.error(e.record.errors)
-      errors.add(:base, 'save failed')
     end
 
     def rateplan
@@ -37,8 +32,12 @@ module JsonapiModel
 
     private
 
+    def _save
+      get_rates
+    end
+
     def get_rates
-      @rates = rateplan.number_rates(@number).map do |el|
+      self.rates = rateplan.number_rates(number).map do |el|
         el.slice!('uuid',
                   'prefix',
                   'initial_rate',

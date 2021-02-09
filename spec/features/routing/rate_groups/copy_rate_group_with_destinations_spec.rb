@@ -18,7 +18,7 @@ RSpec.describe 'Copy RateGroup action', type: :feature do
 
     before do
       click_link('Copy with destinations', exact_text: true)
-      within '#new_routing_rate_group_duplicator' do
+      within '#new_routing_rate_group_duplicator_form' do
         fill_in('Name', with: new_name)
         find('input[type=submit]').click
       end

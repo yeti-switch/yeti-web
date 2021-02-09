@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Routing::Simulation
+class Routing::SimulationForm < ApplicationForm
   class Result < OpenStruct
     def vendor
       Contractor.find_by(id: vendor_id)
@@ -51,15 +51,23 @@ class Routing::Simulation
     end
   end
 
-  include ActiveModel::Validations
-  include ActiveModel::Naming
-  include ActiveModel::Conversion
-
-  attr_accessor :transport_protocol_id, :remote_ip, :remote_port, :src_number, :dst_number, :pop_id,
-                :uri_domain, :from_domain, :to_domain,
-                :x_yeti_auth, :release_mode,
-                :pai, :ppi, :privacy, :rpid, :rpid_privacy,
-                :auth_id
+  attribute :transport_protocol_id, :string
+  attribute :remote_ip, :string
+  attribute :remote_port, :string
+  attribute :src_number, :integer
+  attribute :dst_number, :integer
+  attribute :pop_id, :string
+  attribute :uri_domain, :string
+  attribute :from_domain, :string
+  attribute :to_domain, :string
+  attribute :x_yeti_auth, :string
+  attribute :release_mode, :string
+  attribute :pai, :string
+  attribute :ppi, :string
+  attribute :privacy, :string
+  attribute :rpid, :string
+  attribute :rpid_privacy, :string
+  attribute :auth_id, :integer
 
   validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, presence: true
 
@@ -77,36 +85,19 @@ class Routing::Simulation
     only_integer: true
   }
 
-  validate :ip_is_valid
+  validates :remote_ip, ip_address: true
 
   attr_reader :notices
-
-  def initialize(attrs = {})
-    @attrs = attrs
-    if attrs.present?
-      attrs.each do |k, v|
-        send("#{k}=", v) if respond_to?("#{k}=")
-      end
-    end
-  end
-
-  def auth_id=(val)
-    @auth_id = val.presence
-  end
-
-  def has_attributes?
-    @attrs.present? && @attrs.to_unsafe_h.any?
-  end
-
-  def persisted?
-    false
-  end
 
   def debug
     @debug&.map { |d| Result.new(d) }
   end
 
-  def save!
+  protected
+
+  private
+
+  def _save
     return false unless has_attributes?
 
     @notices = []
@@ -191,13 +182,5 @@ class Routing::Simulation
       ActiveRecord::Base.connection.raw_connection.set_notice_processor(&t)
     end
     @notices.map! { |el| el.gsub('NOTICE:', '').gsub(/CONTEXT:.*/, '').gsub(%r{PL/pgSQL function .*}, '') }
-  end
-
-  protected
-
-  def ip_is_valid
-    _tmp = IPAddr.new(remote_ip)
-  rescue IPAddr::Error => _error
-    errors.add(:remote_ip, 'is not valid')
   end
 end

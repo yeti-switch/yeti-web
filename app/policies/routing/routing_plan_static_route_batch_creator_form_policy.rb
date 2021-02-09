@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Routing
-  class RoutingPlanStaticRouteBatchCreatorPolicy < ::RolePolicy
+  class RoutingPlanStaticRouteBatchCreatorFormPolicy < ::RolePolicy
     section 'Routing/RoutingPlanStaticRouteBatchCreator'
 
     class Scope < ::RolePolicy::Scope

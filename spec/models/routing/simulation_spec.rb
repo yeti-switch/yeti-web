@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Routing::Simulation do
+RSpec.describe Routing::SimulationForm do
   describe 'validates' do
     context '#remote_ip' do
       it { is_expected.to_not allow_value('').for :remote_ip }

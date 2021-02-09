@@ -138,11 +138,11 @@ class BatchUpdateForm::Base
   # @param paper_trail_info [Hash]
   def perform(collection_sql, paper_trail_info)
     AsyncBatchUpdateJob.perform_later(
-        self.class._model_class_name,
-        collection_sql,
-        attributes,
-        paper_trail_info
-      )
+      self.class._model_class_name,
+      collection_sql,
+      attributes,
+      paper_trail_info
+    )
   end
 
   # @param name [Symbol]
