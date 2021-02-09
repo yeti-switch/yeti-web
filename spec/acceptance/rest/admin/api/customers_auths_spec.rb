@@ -18,7 +18,7 @@ RSpec.resource 'Customer Auths' do
     diversion-rewrite-result allow-receive-rate-limit send-billing-information
     enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
     dst-number-radius-rewrite-rule dst-number-radius-rewrite-result from-domain to-domain
-    tag-action-value
+    tag-action-value check-account-balance require-incoming-auth
   ]
 
   required_relationships = %i[customer rateplan routing-plan gateway account dump-level diversion-policy]
