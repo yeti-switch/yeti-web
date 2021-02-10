@@ -33,10 +33,13 @@ FactoryBot.define do
     term_outbound_proxy { nil }
     term_next_hop_for_replies { false }
     term_use_outbound_proxy { false }
+    termination_capacity { 1 }
     allow_termination { true }
     allow_origination { true }
     anonymize_sdp { true }
     proxy_media { true }
+    origination_capacity { 1 }
+    preserve_anonymous_from_domain { false }
     transparent_seqno { false }
     transparent_ssrc { false }
     sst_enabled { false }
