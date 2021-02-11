@@ -13,8 +13,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :dns_srv_failover_timer, :anonymize_sdp, :proxy_media, :single_codec_in_200ok, :transparent_seqno,
              :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
-             :rtp_force_relay_cn,
-             :incoming_auth_username, :incoming_auth_password
+             :rtp_force_relay_cn, :preserve_anonymous_from_domain, :use_registered_aor,
+             :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity
 
   paginator :paged
 
@@ -151,6 +151,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :max_transfers, type: :number
   ransack_filter :incoming_auth_username, type: :string
   ransack_filter :incoming_auth_password, type: :string
+  ransack_filter :preserve_anonymous_from_domain, type: :boolean
+  ransack_filter :use_registered_aor, type: :boolean
   ransack_filter :weight, type: :number
 
   def self.updatable_fields(_context)
@@ -237,6 +239,10 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       network_protocol_priority
       media_encryption_mode
       sip_schema
+      preserve_anonymous_from_domain
+      use_registered_aor
+      origination_capacity
+      termination_capacity
       incoming_auth_username
       incoming_auth_password
     ]
