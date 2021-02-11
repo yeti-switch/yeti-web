@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'CDR exports', type: :feature do
+RSpec.describe 'CDR exports', type: :feature, js: true do
   include_context :login_as_admin
 
   describe 'delete_file' do
