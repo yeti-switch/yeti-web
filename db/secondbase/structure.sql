@@ -2309,7 +2309,14 @@ CREATE TABLE reports.cdr_custom_report_data (
     legb_disconnect_reason character varying,
     agg_customer_calls_duration bigint,
     agg_vendor_calls_duration bigint,
-    agg_customer_price_no_vat numeric
+    agg_customer_price_no_vat numeric,
+    src_area_id integer,
+    dst_area_id integer,
+    src_network_id integer,
+    src_country_id integer,
+    lega_user_agent character varying,
+    legb_user_agent character varying,
+    p_charge_info_in character varying
 );
 
 
@@ -4391,6 +4398,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200527173737'),
 ('20200803201602'),
 ('20201128134302'),
-('20210116150950');
+('20210116150950'),
+('20210212102105');
 
 

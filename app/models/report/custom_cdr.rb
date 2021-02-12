@@ -93,6 +93,13 @@ class Report::CustomCdr < Cdr::Base
     diversion_out
     dst_country_id
     dst_network_id
+    src_area_id
+    dst_area_id
+    src_network_id
+    src_country_id
+    lega_user_agent
+    legb_user_agent
+    p_charge_info_in
   ].freeze
 
   validates :group_by_fields, :date_start, :date_end, presence: true
