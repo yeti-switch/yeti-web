@@ -39,11 +39,14 @@
 #  is_last_cdr                  :boolean
 #  lega_disconnect_code         :integer(4)
 #  lega_disconnect_reason       :string
+#  lega_user_agent              :string
 #  legb_disconnect_code         :integer(4)
 #  legb_disconnect_reason       :string
+#  legb_user_agent              :string
 #  local_tag                    :string
 #  log_rtp                      :boolean
 #  log_sip                      :boolean
+#  p_charge_info_in             :string
 #  profit                       :decimal(, )
 #  routing_attempt              :integer(4)
 #  sign_orig_ip                 :string
@@ -73,6 +76,7 @@
 #  destination_rate_policy_id   :integer(4)
 #  dialpeer_id                  :integer(4)
 #  disconnect_initiator_id      :integer(4)
+#  dst_area_id                  :integer(4)
 #  dst_country_id               :integer(4)
 #  dst_network_id               :integer(4)
 #  node_id                      :integer(4)
@@ -82,6 +86,9 @@
 #  rateplan_id                  :integer(4)
 #  report_id                    :integer(4)       not null
 #  routing_group_id             :integer(4)
+#  src_area_id                  :integer(4)
+#  src_country_id               :integer(4)
+#  src_network_id               :integer(4)
 #  term_call_id                 :string
 #  term_gw_id                   :integer(4)
 #  vendor_acc_id                :integer(4)
@@ -118,6 +125,10 @@ class Report::CustomData < Cdr::Base
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id, optional: true
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id, optional: true
+  belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id, optional: true
+  belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id, optional: true
+  belongs_to :src_area, class_name: 'Routing::Area', foreign_key: :src_area_id, optional: true
+  belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id, optional: true
 
   def display_name
     id.to_s
