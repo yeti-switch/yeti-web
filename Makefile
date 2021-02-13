@@ -88,7 +88,7 @@ config/yeti_web.yml:
 	$(info:msg=Creating yeti_web.yml for build/tests)
 	@# explicitly raise error during tests if policy is misconfigured
 	sed -E 's/( +when_no_(config|policy_class): *)(.*)/\1raise/' \
-		config/yeti_web.yml.distr > config/yeti_web.yml
+		config/yeti_web.yml.ci > config/yeti_web.yml
 
 
 config/policy_roles.yml:
