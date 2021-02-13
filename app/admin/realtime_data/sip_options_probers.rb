@@ -5,6 +5,8 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
   config.batch_actions = false
   config.filters = false
 
+  actions :index, :show
+
   decorate_with SipOptionsProberDecorator
 
   controller do
