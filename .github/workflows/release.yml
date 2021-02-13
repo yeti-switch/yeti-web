@@ -28,6 +28,5 @@ jobs:
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
           PKG_TAG: ${{github.ref}} 
-        run: v=${PKG_TAG##*/};major_version=${v%.!(.)};ci/deploy.sh buster $major_version main ../*.deb
-
+        run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh buster $major_version main ../*.deb
 
