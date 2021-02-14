@@ -1,8 +1,10 @@
 name: Sentry release notification
 
 on:
-  release:
-    types: [ published ]
+  workflow_run:
+    workflows: ["Release process"]
+    types: 
+      - completed
 
 jobs:
   sentry:
