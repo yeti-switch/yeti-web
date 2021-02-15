@@ -2,15 +2,12 @@
 
 class Api::Rest::System::JobsController < Api::RestController
   def run
-    #    BaseJob.transaction do
     @job = BaseJob.launch!(params[:id])
-    #    end
-    #    @job.run!
-    respond_with(@job)
+    render json: @job, status: :no_content
   end
 
   def index
-    respond_with BaseJob.all
+    render json: BaseJob.all
   end
 
   def capture_tags

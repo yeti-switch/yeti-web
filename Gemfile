@@ -21,8 +21,7 @@ gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatabl
 gem 'net-ldap', '~> 0.16.0'
 
 # Seamless JWT authentication for Rails API
-# need this fix https://github.com/nsarno/knock/pull/126
-gem 'knock', github: 'nsarno/knock', ref: '66b60437a5acc28e4863f011ab59324dc1b5d0ae'
+gem 'knock', github: 'nsarno/knock'
 
 # ActiveAdmin
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'

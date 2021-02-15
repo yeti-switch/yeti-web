@@ -18,16 +18,16 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
   end
 
   def current_customer
-    current_system_apiaccess
+    current_system_api_access
   end
 
   def capture_user
-    return if current_system_apiaccess.nil?
+    return if current_system_api_access.nil?
 
     {
-      id: current_system_apiaccess.id,
-      customer_id: current_system_apiaccess.customer_id,
-      login: current_system_apiaccess.login,
+      id: current_system_api_access.id,
+      customer_id: current_system_api_access.customer_id,
+      login: current_system_api_access.login,
       class: 'System::ApiAccess'
     }
   end
