@@ -3,8 +3,6 @@
 class Api::Rest::Customer::V1::AuthController < Knock::AuthTokenController
   private
 
-  protect_from_forgery with: :null_session
-
   def entity_name
     'System::ApiAccess'
   end

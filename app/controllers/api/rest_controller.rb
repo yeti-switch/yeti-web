@@ -3,8 +3,6 @@
 require 'base64'
 
 class Api::RestController < ApiController
-  protect_from_forgery with: :null_session
-
   respond_to :json
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from AbstractController::ActionNotFound, with: :render_404

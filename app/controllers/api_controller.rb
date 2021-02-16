@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApiController < ActionController::Base
+class ApiController < ActionController::API
   around_action :db_logging
 
   def db_logging

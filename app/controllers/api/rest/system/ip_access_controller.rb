@@ -2,7 +2,7 @@
 
 class Api::Rest::System::IpAccessController < Api::RestController
   def index
-    respond_with addresses
+    render json: addresses
   end
 
   private
