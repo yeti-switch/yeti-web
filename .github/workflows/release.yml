@@ -29,4 +29,13 @@ jobs:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
           PKG_TAG: ${{github.ref}} 
         run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh buster $major_version main ../*.deb
+      - name: Create Sentry Release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_URL: ${{secrets.SENTRY_URL}}
+          SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
+          SENTRY_ORG: ${{secrets.SENTRY_ORG}}
+          SENTRY_PROJECT:  ${{secrets.SENTRY_PROJECT}}
+        with:
+          version: ${{github.ref}}
 
