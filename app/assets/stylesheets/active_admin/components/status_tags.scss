@@ -1,0 +1,11 @@
+.status_tag {
+  &.ok, &.published, &.complete, &.completed, &.green, &.yes { background: #8daa92; }
+  &.warn, &.warning, &.orange { background: #e29b20; }
+  &.error, &.errored, &.red { background: #d45f53; }
+  &.empty, &.unknown, &.none, &.no {
+    background: unset;
+    color: #bbbbbb;
+    font-weight: bold;
+    font-size: 0.8em;
+  }
+}
