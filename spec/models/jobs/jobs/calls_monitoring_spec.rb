@@ -203,7 +203,7 @@ RSpec.describe Jobs::CallsMonitoring do
                                         account_originated: 2,
                                         account_originated_unique_src: 2,
                                         account_originated_unique_dst: 2,
-                                        account_price_originated: -3.98,
+                                        account_price_originated: -3.96, # +1.04 normal call -5 reverse call
                                         metric_labels: {
                                           account_id: account.id,
                                           account_external_id: account.external_id
@@ -212,7 +212,7 @@ RSpec.describe Jobs::CallsMonitoring do
             .with(
                                         type: 'yeti_ac',
                                         account_terminated: 2,
-                                        account_price_terminated: 5.0,
+                                        account_price_terminated: 5.0, # +9 normal call -4 reverse call
                                         metric_labels: {
                                           account_id: vendor_acc.id,
                                           account_external_id: vendor_acc.external_id
@@ -262,7 +262,8 @@ RSpec.describe Jobs::CallsMonitoring do
         super().select { |c| c['local_tag'] == 'normal-call' }
       end
       let(:account_balance) do
-        1.02
+        # active calls cost on next calls monitoring run (after 1 min)
+        2.04 # 1.02 * 2
       end
 
       include_examples :keep_calls

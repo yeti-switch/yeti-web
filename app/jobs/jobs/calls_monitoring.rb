@@ -5,6 +5,8 @@ require 'prometheus/active_calls_processor'
 module Jobs
   class CallsMonitoring < ::BaseJob
     class CallCollection
+      MONITORING_INTERVAL = 60
+
       attr_reader :collection,
                   :key,
                   :balance, :min_balance, :max_balance
@@ -83,7 +85,8 @@ module Jobs
       def call_price(attrs)
         i_per_second_rate = attrs.fetch("#{key}_initial_rate").to_f / 60.0
         n_per_second_rate = attrs.fetch("#{key}_next_rate").to_f / 60.0
-        duration = attrs.fetch('duration').to_i # TODO: check if needed cast to int
+        # duration that will be on next calls monitoring run
+        duration = attrs.fetch('duration').to_i + MONITORING_INTERVAL # TODO: check if needed cast to int
         initial_interval = attrs.fetch("#{key}_initial_interval").to_i # TODO: check if needed cast to int
         next_interval = attrs.fetch("#{key}_next_interval").to_i # TODO: check if needed cast to int
         connect_fee = attrs.fetch("#{key}_fee").to_f
