@@ -2132,7 +2132,8 @@ CREATE TABLE billing.invoices (
     last_successful_call_at timestamp with time zone,
     successful_calls_count bigint,
     type_id smallint NOT NULL,
-    billing_duration bigint NOT NULL
+    billing_duration bigint NOT NULL,
+    reference character varying
 );
 
 
@@ -4071,6 +4072,13 @@ CREATE INDEX auth_log_request_time_idx ON ONLY auth_log.auth_log USING btree (re
 
 
 --
+-- Name: index_billing.invoices_on_reference; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX "index_billing.invoices_on_reference" ON billing.invoices USING btree (reference);
+
+
+--
 -- Name: invoice_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -4399,6 +4407,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20200803201602'),
 ('20201128134302'),
 ('20210116150950'),
-('20210212102105');
+('20210212102105'),
+('20210218095038');
 
 

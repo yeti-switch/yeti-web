@@ -105,6 +105,7 @@ class Account < Yeti::ActiveRecord
   validates :vat, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false } # this is percents
   validates :destination_rate_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :max_call_duration, numericality: { greater_than: 0, allow_nil: true }
+  validates :customer_invoice_ref_template, :vendor_invoice_ref_template, presence: true
 
   after_initialize do
     if new_record?

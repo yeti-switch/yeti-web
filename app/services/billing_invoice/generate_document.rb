@@ -29,6 +29,7 @@ module BillingInvoice
     # INV_DST_AMOUNT,
     # INV_DST_FIRST_CALL_AT,
     # INV_DST_LAST_CALL_AT
+    # INV_REF
 
     class TemplateUndefined < Error
       def initialize(invoice_id)
@@ -50,6 +51,7 @@ module BillingInvoice
         contractor_address
         contractor_phones
         inv_id
+        inv_ref
         inv_created_at
         inv_start_date
         inv_end_date
@@ -125,6 +127,7 @@ module BillingInvoice
         contractor_address: invoice.contractor.address,
         contractor_phones: invoice.contractor.phones,
         inv_id: invoice.id,
+        inv_ref: invoice.reference,
         inv_created_at: invoice.created_at,
         inv_start_date: invoice.start_date,
         inv_end_date: invoice.end_date,

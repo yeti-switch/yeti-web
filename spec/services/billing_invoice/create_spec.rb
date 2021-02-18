@@ -6,7 +6,14 @@ RSpec.describe BillingInvoice::Create do
   end
 
   shared_examples :creates_an_invoice do
+    let(:expected_reference) { Billing::Invoice.last!.id.to_s }
+
     it 'creates an invoice with correct params' do
+      expect(InvoiceRefTemplate).to receive(:call).once.with(
+        a_kind_of(Billing::Invoice),
+        service_params[:is_vendor] ? account.vendor_invoice_ref_template : account.customer_invoice_ref_template
+      ).and_call_original
+
       expect { subject }.to change { Billing::Invoice.count }.by(1)
       invoice = Billing::Invoice.last!
 
@@ -26,7 +33,8 @@ RSpec.describe BillingInvoice::Create do
                              first_successful_call_at: nil,
                              last_call_at: nil,
                              last_successful_call_at: nil,
-                             successful_calls_count: nil
+                             successful_calls_count: nil,
+                             reference: expected_reference
                            )
     end
 
@@ -104,10 +112,30 @@ RSpec.describe BillingInvoice::Create do
     include_examples :creates_an_invoice
   end
 
+  context 'when vendor_invoice_ref_template is different' do
+    let(:account_attrs) do
+      super().merge vendor_invoice_ref_template: 'rspec_$id'
+    end
+
+    include_examples :creates_an_invoice do
+      let(:expected_reference) { "rspec_#{Billing::Invoice.last!.id}" }
+    end
+  end
+
   context 'with is_vendor=false' do
     let(:service_params) { super().merge is_vendor: false }
 
     include_examples :creates_an_invoice
+
+    context 'when customer_invoice_ref_template is different' do
+      let(:account_attrs) do
+        super().merge customer_invoice_ref_template: 'rspec_$id'
+      end
+
+      include_examples :creates_an_invoice do
+        let(:expected_reference) { "rspec_#{Billing::Invoice.last!.id}" }
+      end
+    end
   end
 
   context 'without type_id' do

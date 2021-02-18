@@ -118,6 +118,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     selectable_column
     id_column
     actions
+    column :reference
     column :contractor, footer: lambda {
       strong do
         'Total:'
@@ -164,6 +165,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   filter :id
+  filter :reference
   filter :contractor,
          input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
          collection: proc {
@@ -193,6 +195,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       tab 'Invoice' do
         attributes_table_for s do
           row :id
+          row :reference
           row :contractor_id
           row :account
           row :state

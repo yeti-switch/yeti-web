@@ -31,4 +31,25 @@ RSpec.describe 'Update Account', type: :feature, js: true do
                                 )
     end
   end
+
+  context 'with invoice ref templates change' do
+    before do
+      fill_in 'Customer invoice ref template', with: 'cust-$id'
+      fill_in 'Vendor invoice ref template', with: 'vend-$id'
+    end
+
+    it 'updates account' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Account was successfully updated.', type: :notice)
+      }.to change { Account.count }.by(0)
+
+      expect(page).to have_current_path account_path(account.id)
+
+      expect(account.reload).to have_attributes(
+                                  customer_invoice_ref_template: 'cust-$id',
+                                  vendor_invoice_ref_template: 'vend-$id'
+                                )
+    end
+  end
 end

@@ -46,5 +46,9 @@ FactoryBot.define do
     trait :with_vendor_account do
       account { FactoryBot.create(:account, contractor: FactoryBot.create(:vendor)) }
     end
+
+    after(:create) do |record|
+      record.update!(reference: record.id.to_s) if record.reference.blank?
+    end
   end
 end
