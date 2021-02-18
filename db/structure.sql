@@ -910,6 +910,8 @@ CREATE TABLE billing.accounts (
     total_capacity smallint,
     destination_rate_limit numeric,
     max_call_duration integer,
+    customer_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
+    vendor_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
     CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
     CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
     CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
@@ -23004,6 +23006,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20201103092516'),
 ('20201111201356'),
 ('20201226161344'),
-('20210116152459');
+('20210116152459'),
+('20210218092245');
 
 

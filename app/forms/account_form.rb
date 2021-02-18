@@ -27,7 +27,9 @@ class AccountForm < ProxyForm
                    :send_invoices_to,
                    :send_balance_notifications_to,
                    :timezone_id,
-                   :uuid
+                   :uuid,
+                   :customer_invoice_ref_template,
+                   :vendor_invoice_ref_template
 
   before_save :apply_vendor_invoice_period
   before_save :apply_customer_invoice_period

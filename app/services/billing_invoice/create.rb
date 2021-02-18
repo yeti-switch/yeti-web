@@ -23,6 +23,7 @@ module BillingInvoice
             start_date: start_time,
             end_date: end_time
           )
+        invoice.update! reference: build_reference(invoice)
         Worker::FillInvoiceJob.perform_later(invoice.id)
         invoice
       end
@@ -32,6 +33,12 @@ module BillingInvoice
     end
 
     private
+
+    def build_reference(invoice)
+      template_name = is_vendor ? :vendor_invoice_ref_template : :customer_invoice_ref_template
+      template = account.public_send(template_name)
+      InvoiceRefTemplate.call(invoice, template)
+    end
 
     def validate!
       start_date = start_time.in_time_zone(Time.zone)

@@ -57,6 +57,7 @@ ActiveAdmin.register Account do
                 :customer_invoice_period_id, :vendor_invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
+                :customer_invoice_ref_template, :vendor_invoice_ref_template,
                 send_invoices_to: [], send_balance_notifications_to: []
 
   includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone,
@@ -177,6 +178,8 @@ ActiveAdmin.register Account do
             end
           end
           row :timezone
+          row :customer_invoice_ref_template
+          row :vendor_invoice_ref_template
         end
 
         panel 'Last Payments' do
@@ -242,6 +245,8 @@ ActiveAdmin.register Account do
       f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
       f.input :send_balance_notifications_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
       f.input :timezone_id, as: :select, input_html: { class: 'chosen' }, collection: System::Timezone.all
+      f.input :customer_invoice_ref_template
+      f.input :vendor_invoice_ref_template
       f.input :uuid, as: :string
     end
     f.actions
