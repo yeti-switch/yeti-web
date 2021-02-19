@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Routing::SimulationForm < ApplicationForm
+  def self.model_name
+    ActiveModel::Name.new(self, nil, 'Routing::Simulation')
+  end
+
   class Result < OpenStruct
     def vendor
       Contractor.find_by(id: vendor_id)
@@ -54,8 +58,8 @@ class Routing::SimulationForm < ApplicationForm
   attribute :transport_protocol_id, :string
   attribute :remote_ip, :string
   attribute :remote_port, :string
-  attribute :src_number, :integer
-  attribute :dst_number, :integer
+  attribute :src_number, :string
+  attribute :dst_number, :string
   attribute :pop_id, :string
   attribute :uri_domain, :string
   attribute :from_domain, :string
@@ -98,8 +102,6 @@ class Routing::SimulationForm < ApplicationForm
   private
 
   def _save
-    return false unless has_attributes?
-
     @notices = []
     @debug = nil
 

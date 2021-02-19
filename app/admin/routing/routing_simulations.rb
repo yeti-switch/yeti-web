@@ -5,7 +5,27 @@ ActiveAdmin.register_page 'Routing simulation' do
 
   content do
     begin
-      @dc = Routing::SimulationForm.new(params[:routing_simulation])
+      @dc = Routing::SimulationForm.new(
+        params[:routing_simulation]&.permit(
+          :auth_id,
+          :transport_protocol_id,
+          :remote_ip,
+          :remote_port,
+          :pop_id,
+          :src_number,
+          :dst_number,
+          :uri_domain,
+          :from_domain,
+          :to_domain,
+          :x_yeti_auth,
+          :pai,
+          :ppi,
+          :privacy,
+          :rpid,
+          :rpid_privacy,
+          :release_mode
+        )
+      )
       if !params[:routing_simulation].nil? && @dc.valid? # force object validation before form rendering
         @dc.save!
         Rails.logger.info @dc.errors
