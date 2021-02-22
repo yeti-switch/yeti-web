@@ -55,4 +55,15 @@ RSpec.describe CdrExport, type: :model do
       expect(subject).to eq(sql.join(' '))
     end
   end
+
+  describe '#create' do
+    subject { described_class.create!(record_attributes) }
+
+    let(:filters) { { time_start_gteq: 1.month.ago.utc.to_s(:db), time_start_lteq: Time.now.utc.to_s(:db) } }
+    let(:record_attributes) { { status: 'Completed', fields: %w[customer_id vendor_id], type: 'Base', filters: filters } }
+
+    it 'should create record' do
+      expect { subject }.to change { CdrExport.count }.by 1
+    end
+  end
 end
