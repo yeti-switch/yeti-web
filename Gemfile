@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 # Core
 gem 'active_record_extended'
 gem 'activemodel-serializers-xml'
+gem 'activerecord-import'
 gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'

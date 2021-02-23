@@ -11,3 +11,4 @@ MAILTO=""
 */16 * * * * yeti-web curl -X PUT -H 'Content-Length: 0' http://127.0.0.1:6666/api/rest/system/jobs/TerminationQualityCheck/run
 * * * * *    yeti-web curl -X PUT -H 'Content-Length: 0' http://127.0.0.1:6666/api/rest/system/jobs/DialpeerRatesApply/run
 * * * * *    yeti-web curl -X PUT -H 'Content-Length: 0' http://127.0.0.1:6666/api/rest/system/jobs/AccountBalanceNotify/run
+0 2 * * *    yeti-web curl -X PUT -H 'Content-Length: 0' http://127.0.0.1:6666/api/rest/system/jobs/SyncDatabaseTables/run

@@ -16,5 +16,10 @@ FactoryBot.define do
     sequence(:type) { |n| "CdrPartitioning #{n}" }
     description { nil }
     running { false }
+
+    trait :SyncDatabaseTables do
+      type { 'SyncDatabaseTables' }
+      description { 'Copy networks prefixes and countries from routing database to CDR' }
+    end
   end
 end
