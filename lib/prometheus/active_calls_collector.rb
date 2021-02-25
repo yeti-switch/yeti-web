@@ -52,7 +52,7 @@ class ActiveCallsCollector < PrometheusExporter::Server::TypeCollector
       end
     end
 
-    @observers.values.select { |m| m.data.present? }
+    @observers.values.reject { |m| m.data.empty? }
   end
 
   #   @example { metric_labels, custom_labels, total }
