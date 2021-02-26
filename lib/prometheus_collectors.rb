@@ -2,6 +2,8 @@
 
 # Custom prometheus type collectors should be defined as lib/prometheus/*_collector.rb files.
 
+require 'active_support/all'
+
 Dir[File.join(__dir__, 'prometheus/*_collector.rb')].each do |filename|
   require_relative filename
 end
