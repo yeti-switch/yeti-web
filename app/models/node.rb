@@ -26,7 +26,6 @@ class Node < ApplicationRecord
 
   validates :id, :pop, :rpc_endpoint, :name, presence: true
   validates :id, :name, :rpc_endpoint, uniqueness: true
-  #  validates :rpc_uri, format: URI::regexp(%w(http https))
 
   has_many :events, dependent: :destroy
   has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error
@@ -37,7 +36,7 @@ class Node < ApplicationRecord
   end
 
   def api
-    @api ||= YetisNode::Client.new(rpc_endpoint, transport: :json_rpc, logger: logger)
+    NodeApi.find(rpc_endpoint)
   end
 
   def total_calls_count
@@ -74,7 +73,7 @@ class Node < ApplicationRecord
   # @param auth_id [Integer] - filter by gateway.id (nil to show all data)
   def incoming_registrations(auth_id: nil, empty_on_error: false)
     params = auth_id.nil? ? [] : [auth_id]
-    api.invoke_show_command('aors', params)
+    api.aors(params)
   rescue StandardError => e
     if empty_on_error
       logger.error { "Failed to fetch incoming_registrations with auth_id=#{auth_id.inspect}" }
@@ -90,9 +89,9 @@ class Node < ApplicationRecord
   def calls(options = {})
     empty_on_error = !!options[:empty_on_error]
     args = []
-    method_name = +'calls'
+    method_name = :calls
     if options[:only]
-      method_name << '.filtered'
+      method_name = :calls_filtered
       args << options[:only]
     end
     if options[:where]
@@ -101,7 +100,7 @@ class Node < ApplicationRecord
     end
 
     begin
-      api.invoke_show_command(method_name, args.flatten)
+      api.public_send(method_name, *args.flatten)
     rescue StandardError => e
       if empty_on_error
         logger.warn { e.message }
@@ -127,5 +126,29 @@ class Node < ApplicationRecord
     else
       RealtimeData::ActiveCall.collection(api.calls)
     end
+  end
+
+  # @param nodes [Array<Node>,nil] omit or pass nil to use all nodes.
+  # @param default [Object] value when error came (default empty array).
+  # @yield in thread for each node
+  # @yieldparam node [Node]
+  # @return [Array] flatten array of data returned by all threads.
+  # @example Usage
+  #
+  #   rows = Node.perform_parallel(default: []) do |node|
+  #     result = node.api.sip_options_probers
+  #     result.map { |row| row.merge(node: node) }
+  #   end
+  #
+  def self.perform_parallel(nodes = nil, default: [], &block)
+    nodes ||= all.to_a
+
+    data = Parallel.map(nodes, in_threads: nodes.size) do |node|
+      block.call(node)
+    rescue NodeApi::Error => e
+      Rails.logger.error { "#{e.class}: #{e.message}" }
+      default
+    end
+    data.flatten
   end
 end

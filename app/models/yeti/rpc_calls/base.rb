@@ -59,7 +59,7 @@ module Yeti
           data = process_node(node)
           # will return data on first success response from node
           return [data, errors]
-        rescue YetisNode::Error => e
+        rescue NodeApi::Error => e
           errors.push error_for(node, e)
         end
         [[], errors]
@@ -70,7 +70,7 @@ module Yeti
         data = []
         parallel_nodes do |node|
           data.concat process_node(node)
-        rescue YetisNode::Error => e
+        rescue NodeApi::Error => e
           errors.push error_for(node, e)
         end
         [data, errors]

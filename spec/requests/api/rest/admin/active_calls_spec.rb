@@ -135,7 +135,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:local_tag) { active_call[:local_tag] }
 
     before do
-      expect_any_instance_of(YetisNode::Client).to receive(:calls).with(local_tag).once.and_return(active_call)
+      stub_jrpc_connect(node.rpc_endpoint)
+      expect_any_instance_of(NodeApi).to receive(:calls).with(local_tag).once.and_return(active_call)
     end
 
     let(:active_call) { FactoryBot.attributes_for(:active_call, :filled, node_id: node.id) }
@@ -242,8 +243,9 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:active_call) { FactoryBot.attributes_for(:active_call, :filled, node_id: node.id) }
 
     before do
-      expect_any_instance_of(YetisNode::Client).to receive(:calls).with(local_tag).once.and_return(active_call)
-      expect_any_instance_of(YetisNode::Client).to receive(:call_disconnect).with(local_tag).once
+      stub_jrpc_connect(node.rpc_endpoint)
+      expect_any_instance_of(NodeApi).to receive(:calls).with(local_tag).once.and_return(active_call)
+      expect_any_instance_of(NodeApi).to receive(:call_disconnect).with(local_tag).once
     end
 
     include_examples :responds_with_status, 204

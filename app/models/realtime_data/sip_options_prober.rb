@@ -8,7 +8,7 @@ class RealtimeData::SipOptionsProber < YetiResource
     def query_builder_find(id, **_)
       node_id, id = id.split('*')
       node = Node.find(node_id)
-      result = NodeRpcClient.new(node.rpc_endpoint).sip_options_probers([id])
+      result = node.api.sip_options_probers([id])
       raise ActiveRecord::RecordNotFound if result.empty?
 
       item = result.first.merge(node: node)
@@ -16,8 +16,8 @@ class RealtimeData::SipOptionsProber < YetiResource
     end
 
     def query_builder_collection(**_)
-      result = NodeRpcClient.perform_parallel(default: []) do |client, node|
-        result = client.sip_options_probers
+      result = Node.perform_parallel(default: []) do |node|
+        result = node.api.sip_options_probers
         result.map { |row| row.merge(node: node) }
       end
       records = result.map { |item| RealtimeData::SipOptionsProber.new(item) }

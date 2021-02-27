@@ -6,7 +6,7 @@ RSpec.describe Api::Rest::System::JobsController do
       put "/api/rest/system/jobs/#{job_type}/run"
     end
 
-    before do
+    let!(:node) do
       create(:node)
     end
 
@@ -18,15 +18,23 @@ RSpec.describe Api::Rest::System::JobsController do
       context 'with events' do
         before do
           Event.reload_translations
-          allow_any_instance_of(YetisNode::JsonRpcTransport).to receive(:rpc_send)
-            .with('request.router.translations.reload', []).and_return(nil)
         end
 
-        it 'expects to delete success events' do
-          expect { subject }.to change { Event.count }.from(Node.count).to(0)
-        end
+        context 'with successful events' do
+          before do
+            stub_jrpc_request(
+              node.rpc_endpoint,
+              'yeti.request.router.translations.reload',
+              []
+            ).and_return(nil)
+          end
 
-        include_examples :responds_with_status, 204
+          it 'expects to delete success events' do
+            expect { subject }.to change { Event.count }.from(Node.count).to(0)
+          end
+
+          include_examples :responds_with_status, 204
+        end
 
         context 'when one event failed' do
           before do
