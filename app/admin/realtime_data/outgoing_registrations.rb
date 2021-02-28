@@ -17,7 +17,7 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
   controller do
     def show
       show!
-    rescue YetisNode::Error => e
+    rescue NodeApi::Error => e
       flash[:warning] = e.message
       redirect_to_back
     end

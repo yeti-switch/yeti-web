@@ -101,7 +101,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     ids.each do |node_id_with_local_tag|
       node_id, local_tag = node_id_with_local_tag.split('*')
       Node.find(node_id).drop_call(local_tag)
-    rescue YetisNode::Error => e
+    rescue NodeApi::Error => e
       Rails.logger.warn { e.message }
     end
     flash[:notice] = 'Terminated!'
@@ -113,7 +113,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     Node.find(node_id).drop_call(local_tag)
     flash[:notice] = "#{params[:id]} was terminated"
     redirect_to action: :index
-  rescue YetisNode::Error => e
+  rescue NodeApi::Error => e
     flash[:notice] = "#{params[:id]} was terminated"
     redirect_to action: :index
   rescue StandardError => e
@@ -140,7 +140,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
     def show
       show!
-    rescue YetisNode::Error => e
+    rescue NodeApi::Error => e
       flash[:warning] = e.message
       redirect_to_back
     end

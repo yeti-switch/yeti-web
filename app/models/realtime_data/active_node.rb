@@ -25,14 +25,6 @@ class RealtimeData::ActiveNode < Node
     find(ids.sample)
   end
 
-  def api
-    @api ||= if rpc_endpoint.present?
-               YetisNode::Client.new(rpc_endpoint, transport: :json_rpc, logger: logger)
-             else
-               YetisNode::Client.new(rpc_uri, logger: logger)
-             end
-  end
-
   def total_calls_count
     api.calls_count
   end

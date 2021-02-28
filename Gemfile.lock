@@ -16,6 +16,14 @@ GIT
       net-ldap (>= 0.16.0)
 
 GIT
+  remote: https://github.com/didww/jrpc.git
+  revision: f48c8e08bedbcc582a67538cc69bf8b7902fdc82
+  specs:
+    jrpc (1.1.8)
+      netstring (~> 0)
+      oj (~> 3.0)
+
+GIT
   remote: https://github.com/didww/pg_advisory_lock.git
   revision: 8f9e8975bcff8acaa6cb27bea2f0b5464df78acc
   specs:
@@ -62,16 +70,6 @@ GIT
     active_admin_date_range_preset (0.3.1)
 
 GIT
-  remote: https://github.com/yeti-switch/jrpc.git
-  revision: ddb9bf39395b6be2ca14cab461cb9f5f9d715221
-  ref: ddb9bf3
-  specs:
-    jrpc (1.0.1)
-      net_tcp_client (~> 2.0)
-      netstring (~> 0)
-      oj (~> 2.0)
-
-GIT
   remote: https://github.com/yeti-switch/nvd3-community-rails.git
   revision: 34afaba76846debbfcb7b17528d02834c2723cc2
   specs:
@@ -92,13 +90,6 @@ GIT
   specs:
     secondbase (2.1.4)
       rails (>= 4.0)
-
-GIT
-  remote: https://github.com/yeti-switch/yetis_node.git
-  revision: 99440a719fde0904b4ad093ede27d6661e595190
-  specs:
-    yetis_node (1.0.0)
-      jrpc (~> 1.0, >= 0.4.6)
 
 GEM
   remote: https://rubygems.org/
@@ -375,13 +366,12 @@ GEM
     multipart-post (2.1.1)
     mustache (1.0.5)
     net-ldap (0.16.1)
-    net_tcp_client (2.0.1)
     netstring (0.0.3)
     nio4r (2.5.4)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    oj (2.18.5)
+    oj (3.11.2)
     orm_adapter (0.5.0)
     paper_trail (9.0.0)
       activerecord (>= 4.2, < 5.3)
@@ -677,7 +667,6 @@ DEPENDENCIES
   validates_timeliness
   webdrivers (~> 4.0)
   webmock
-  yetis_node!
   zip-zip
 
 BUNDLED WITH

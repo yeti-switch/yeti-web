@@ -2,6 +2,7 @@
 
 RSpec.describe 'Sip Options Probers', js: true do
   include_context :login_as_admin
+  include_context :stub_parallel_map
 
   let!(:nodes) { create_list(:node, 2) }
   let(:record_attributes) do
@@ -11,16 +12,16 @@ RSpec.describe 'Sip Options Probers', js: true do
     ]
   end
 
-  before do
-    stub_jrpc_request('options_prober.show.probers', nodes.first.rpc_endpoint, { logger: be_present })
-      .and_return([record_attributes.first.stringify_keys])
-    stub_jrpc_request('options_prober.show.probers', nodes.second.rpc_endpoint, { logger: be_present })
-      .and_return([record_attributes.second.stringify_keys])
-  end
-
   describe 'index page' do
     subject do
       visit sip_options_probers_path
+    end
+
+    before do
+      stub_jrpc_request(nodes.first.rpc_endpoint, 'options_prober.show.probers', [])
+        .and_return([record_attributes.first.stringify_keys])
+      stub_jrpc_request(nodes.second.rpc_endpoint, 'options_prober.show.probers', [])
+        .and_return([record_attributes.second.stringify_keys])
     end
 
     it 'returns correct Sip Options Probers' do
@@ -43,8 +44,14 @@ RSpec.describe 'Sip Options Probers', js: true do
     end
 
     before do
-      stub_jrpc_request('options_prober.show.probers', nodes.first.rpc_endpoint, { logger: be_present })
-        .with(record_attributes.first[:id].to_s)
+      stub_jrpc_request(nodes.second.rpc_endpoint, 'options_prober.show.probers', [])
+        .and_return([record_attributes.second.stringify_keys])
+
+      # using single connection to perform both request because of NodeApi logic.
+      api_stub = stub_jrpc_connect(nodes.first.rpc_endpoint)
+      stub_jrpc_request(api_stub, 'options_prober.show.probers', [])
+        .and_return([record_attributes.first.stringify_keys])
+      stub_jrpc_request(api_stub, 'options_prober.show.probers', [record_attributes.first[:id].to_s])
         .and_return([record_attributes.first.stringify_keys])
     end
 

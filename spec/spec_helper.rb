@@ -15,6 +15,7 @@ WebMock.disable_net_connect!(
   allow_localhost: true,
   allow: 'chromedriver.storage.googleapis.com'
 )
+Thread.abort_on_exception = true
 # require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -157,6 +158,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    # Prevent JRPC to create real connections in tests.
+    expect(JRPC::Transport::SocketTcp).to_not receive(:new)
+  end
+
+  config.before(:each) do
     DatabaseCleaner.strategy = :transaction
     allow(Raven).to receive(:send_event).with(a_kind_of(Hash))
   end
@@ -171,6 +177,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    NodeApi.reset_all
   end
 
   config.expect_with :rspec do |c|

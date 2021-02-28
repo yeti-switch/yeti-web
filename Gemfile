@@ -34,8 +34,7 @@ gem 'draper'
 gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
 gem 'ransack'
 
-gem 'jrpc', github: 'yeti-switch/jrpc', ref: 'ddb9bf3'
-gem 'yetis_node', github: 'yeti-switch/yetis_node'
+gem 'jrpc', github: 'didww/jrpc'
 
 gem 'active_admin_sidebar', '1.1.0'
 

@@ -16,7 +16,7 @@ module Jobs
     def process_event(ev)
       args = ev.command.split /\s+/
       logger.info "RPC send #{args} to node #{ev.node.id}"
-      ev.node.api.rpc_send(args.shift, args)
+      ev.node.api.perform_yeti_request(args.shift, args)
     end
 
     private
