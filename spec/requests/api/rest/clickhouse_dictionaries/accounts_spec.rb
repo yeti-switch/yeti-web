@@ -34,7 +34,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::AccountsController do
       end
 
       include_examples :raises_exception, StandardError, 'test error'
-      include_examples :captures_error, safe: true
+      include_examples :captures_error, safe: true, request: true
     end
   end
 end
