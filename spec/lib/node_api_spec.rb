@@ -116,7 +116,7 @@ RSpec.describe NodeApi do
     let(:described_instance) { NodeApi.new(node.rpc_endpoint) }
     let(:args) { [] }
     let(:jrpc_result) do
-      [FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: node.id)]
+      [FactoryBot.attributes_for(:realtime_sip_options_prober, :filled, node_id: node.id)]
     end
 
     context 'no arguments' do
@@ -154,5 +154,65 @@ RSpec.describe NodeApi do
     end
 
     it { is_expected.to eq jrpc_result }
+  end
+
+  describe '#reload_sip_options_probers' do
+    subject do
+      described_instance.reload_sip_options_probers
+    end
+
+    let(:described_instance) { NodeApi.new(node.rpc_endpoint) }
+    let(:jrpc_result) { 'ok' }
+
+    before do
+      stub_jrpc_request(node.rpc_endpoint, 'yeti.request.options_prober.reload', [])
+        .and_return(jrpc_result)
+    end
+
+    it { is_expected.to eq jrpc_result }
+  end
+
+  describe '#custom_request' do
+    subject do
+      described_instance.custom_request(*args)
+    end
+
+    let(:described_instance) { NodeApi.new(node.rpc_endpoint) }
+
+    context 'with method_name' do
+      let(:args) { ['some.test.method.name'] }
+      let(:jrpc_result) { 'some test response' }
+
+      before do
+        stub_jrpc_request(node.rpc_endpoint, 'some.test.method.name', [])
+          .and_return(jrpc_result)
+      end
+
+      it { is_expected.to eq jrpc_result }
+    end
+
+    context 'with method_name and array params' do
+      let(:args) { ['some.test.method.name', [1, 2]] }
+      let(:jrpc_result) { 'some test response' }
+
+      before do
+        stub_jrpc_request(node.rpc_endpoint, 'some.test.method.name', [1, 2])
+          .and_return(jrpc_result)
+      end
+
+      it { is_expected.to eq jrpc_result }
+    end
+
+    context 'with method_name and hash params' do
+      let(:args) { ['some.test.method.name', { foo: 'bar' }] }
+      let(:jrpc_result) { 'some test response' }
+
+      before do
+        stub_jrpc_request(node.rpc_endpoint, 'some.test.method.name', { foo: 'bar' })
+          .and_return(jrpc_result)
+      end
+
+      it { is_expected.to eq jrpc_result }
+    end
   end
 end

@@ -16,7 +16,7 @@ module Jobs
     def process_event(ev)
       args = ev.command.split /\s+/
       logger.info "RPC send #{args} to node #{ev.node.id}"
-      ev.node.api.perform_yeti_request(args.shift, args)
+      ev.node.api.custom_request("yeti.#{args.shift}", args)
     end
 
     private
@@ -33,8 +33,9 @@ module Jobs
       logger.warn { "Processing event ##{ev.id} was failed" }
       logger.warn { "<#{e.class}>: #{e.message}" }
       logger.warn { e.backtrace.join("\n") }
-      extra = { job_class: self.class.name, event_id: ev.id, command: ev.command, node_id: ev.node_id }
-      CaptureError.capture(e, extra: extra)
+      tags = { job_class: self.class.name }
+      extra = { event_id: ev.id, command: ev.command, node_id: ev.node_id }
+      CaptureError.capture(e, tags: tags, extra: extra)
       ev.retries += 1
       ev.last_error = e.message
       ev.save!

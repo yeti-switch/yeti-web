@@ -119,6 +119,7 @@ RSpec.configure do |config|
   config.include Helpers::ActiveAdminForms::Examples, type: :feature
   config.include FeatureTestHelper, type: :feature
   config.include JRPCMockHelper
+  config.include CustomRspecHelper
 
   config.around(:each, freeze_time: proc { |val| val == true || val.is_a?(Time) }) do |example|
     val = example.metadata[:freeze_time]

@@ -2,8 +2,10 @@
 
 RSpec.describe Jobs::Invoice, '#execute' do
   subject do
-    described_class.first!.execute
+    job.execute
   end
+
+  let(:job) { described_class.first! }
 
   shared_examples :does_not_generate_invoice do
     it 'does not call BillingInvoice::Generate' do

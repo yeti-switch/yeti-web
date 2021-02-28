@@ -7,8 +7,8 @@ RSpec.describe 'Sip Options Probers', js: true do
   let!(:nodes) { create_list(:node, 2) }
   let(:record_attributes) do
     [
-      FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: nodes.first.id),
-      FactoryBot.attributes_for(:sip_options_prober, :filled, node_id: nodes.second.id)
+      FactoryBot.attributes_for(:realtime_sip_options_prober, :filled, node_id: nodes.first.id),
+      FactoryBot.attributes_for(:realtime_sip_options_prober, :filled, node_id: nodes.second.id)
     ]
   end
 

@@ -91,11 +91,6 @@ class NodeApi
     perform_request('yeti.show.system.status', params)
   end
 
-  def perform_yeti_request(method_name, params = nil)
-    method_name = "yeti.#{method_name}"
-    perform_request(method_name, params)
-  end
-
   # @param ids [Array<Integer>,nil] specific ids or all probers
   # @return [Array<Hash>]
   # @raise [NodeApi::Error]
@@ -118,6 +113,14 @@ class NodeApi
   def resource_state(type_id, id = nil)
     params = [type_id, id || :all]
     perform_request('yeti.show.resource_state', params)
+  end
+
+  def reload_sip_options_probers
+    perform_request('yeti.request.options_prober.reload')
+  end
+
+  def custom_request(method_name, params = [])
+    perform_request(method_name, params)
   end
 
   private
