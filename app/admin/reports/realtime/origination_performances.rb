@@ -35,7 +35,7 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
       if !row.customer_auth_id.nil?
         auto_link(row.customer_auth) || status_tag(:unknown)
       else
-        status_tag(:not_authenticated, :red)
+        status_tag(:not_authenticated, class: :red)
       end
     end
 

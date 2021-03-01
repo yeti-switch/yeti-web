@@ -57,7 +57,7 @@ ActiveAdmin.register Report::CustomerTrafficDataByVendor, as: 'CustomerTrafficDa
       if row.vendor
         auto_link(row.vendor)
       else
-        status_tag('Rejected', :red)
+        status_tag('Rejected', class: :red)
       end
       # row.vendor.try(:display_name) || 'Rejected calls'
     end
