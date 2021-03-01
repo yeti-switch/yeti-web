@@ -40,7 +40,7 @@ class BaseJob < ApplicationRecord
         logger.info { "Starting scheduler #{job.type}" }
         job.start!
       rescue StandardError => e
-        logger.warn { e.message }
+        logger.warn { "#{e.class} #{e.message}" }
         logger.warn { e.backtrace.join("\n") }
         raise ActiveRecord::RecordNotFound
       end

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples :captures_error do |safe: false|
-  let(:capture_error_context) { hash_including tags: a_kind_of(Hash), extra: a_kind_of(Hash) }
+RSpec.shared_examples :captures_error do |safe: false, request: false|
+  let(:capture_error_context) do
+    { tags: a_kind_of(Hash), extra: a_kind_of(Hash), request_env: request ? be_present : nil }
+  end
   let(:capture_error_exception_class) { StandardError }
   let(:capture_error_exception) { a_kind_of(capture_error_exception_class) }
 
@@ -13,10 +15,6 @@ RSpec.shared_examples :captures_error do |safe: false|
       expect(options[:extra]).to match(capture_error_context[:extra])
       expect(options[:request_env]).to match(capture_error_context[:request_env])
     end
-    safe ? (begin
-              subject
-            rescue StandardError
-              nil
-            end) : subject
+    safe ? safe_subject : subject
   end
 end

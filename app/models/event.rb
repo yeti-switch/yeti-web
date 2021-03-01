@@ -27,7 +27,8 @@ class Event < ApplicationRecord
     reload_sensors: 'request.sensors.reload',
     reload_radius_auth_profiles: 'request.radius.authorization.profiles.reload',
     reload_radius_acc_profiles: 'request.radius.accounting.profiles.reload',
-    reload_incoming_auth: 'request.auth.credentials.reload'
+    reload_incoming_auth: 'request.auth.credentials.reload',
+    reload_sip_options_probers: 'request.options_prober.reload'
   }.freeze
 
   def self.reload_registrations(options = {})
@@ -63,6 +64,16 @@ class Event < ApplicationRecord
 
   def self.reload_incoming_auth
     create_events_for_nodes CMD[__method__]
+  end
+
+  def self.reload_sip_options_probers(node_id: nil, pop_id: nil)
+    scope = Node.all
+    if node_id
+      scope = scope.where(id: node_id)
+    elsif pop_id
+      scope = scope.where(pop_id: pop_id)
+    end
+    create_events_for_nodes CMD[:reload_sip_options_probers], scope
   end
 
   def self.create_events_for_nodes(command, node_scope = nil)

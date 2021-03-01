@@ -38,29 +38,12 @@
 #  sip_options_probers_sip_schema_id_fkey                (sip_schema_id => sip_schemas.id)
 #  sip_options_probers_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
-class Equipment::SipOptionsProber < Yeti::ActiveRecord
-  self.table_name = 'class4.sip_options_probers'
-
-  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
-  belongs_to :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
-  belongs_to :pop, optional: true
-  belongs_to :node, optional: true
-  belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
-
-  validates :name, uniqueness: { allow_blank: false }
-  validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
-
-  # validates_format_of :contact, :with => /\Asip:(.*)\z/
-  #  validates :contact_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
-  #  validates :from_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
-  #  validates :to_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
-
-  include WithPaperTrail
-
-  def display_name
-    "#{name} | #{id}"
+FactoryBot.define do
+  factory :sip_options_prober, class: Equipment::SipOptionsProber do
+    sequence(:name) { |n| "SIP Options Prober #{n}" }
+    sequence(:ruri_domain) { |n| "#{n}.sip.com" }
+    sequence(:ruri_username) { |n| "username_#{n}" }
+    pop_id { nil }
+    node_id { nil }
   end
-
-  include Yeti::ResourceStatus
-  include Yeti::SipOptionsProberReloader
 end

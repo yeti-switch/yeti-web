@@ -25,6 +25,10 @@ module JRPCMockHelper
       create_stub.and_return(*args)
     end
 
+    def and_raise(*args)
+      create_stub.and_raise(*args)
+    end
+
     private
 
     def create_stub
