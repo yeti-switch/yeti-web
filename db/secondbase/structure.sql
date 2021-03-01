@@ -38,6 +38,13 @@ CREATE SCHEMA event;
 
 
 --
+-- Name: external_data; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA external_data;
+
+
+--
 -- Name: pgq; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -2185,6 +2192,44 @@ CREATE SEQUENCE cdr.cdr_id_seq
 --
 
 ALTER SEQUENCE cdr.cdr_id_seq OWNED BY cdr.cdr.id;
+
+
+--
+-- Name: countries; Type: TABLE; Schema: external_data; Owner: -
+--
+
+CREATE TABLE external_data.countries (
+    id integer NOT NULL,
+    name character varying,
+    iso2 character varying
+);
+
+
+--
+-- Name: network_prefixes; Type: TABLE; Schema: external_data; Owner: -
+--
+
+CREATE TABLE external_data.network_prefixes (
+    id integer NOT NULL,
+    number_max_length integer,
+    number_min_length integer,
+    prefix character varying,
+    uuid uuid,
+    country_id integer,
+    network_id integer
+);
+
+
+--
+-- Name: networks; Type: TABLE; Schema: external_data; Owner: -
+--
+
+CREATE TABLE external_data.networks (
+    id integer NOT NULL,
+    name character varying,
+    type_id integer,
+    uuid uuid
+);
 
 
 --
@@ -4408,6 +4453,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20201128134302'),
 ('20210116150950'),
 ('20210212102105'),
-('20210218095038');
+('20210218095038'),
+('20210223125543');
 
 
