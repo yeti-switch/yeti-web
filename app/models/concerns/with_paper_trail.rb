@@ -4,6 +4,6 @@ module WithPaperTrail
   extend ActiveSupport::Concern
 
   included do
-    has_paper_trail class_name: 'AuditLogItem', if: proc { Rails.configuration.yeti_web['versioning_disable_for_models'].exclude?(name) }
+    has_paper_trail versions: { class_name: 'AuditLogItem' }, if: proc { Rails.configuration.yeti_web['versioning_disable_for_models'].exclude?(name) }
   end
 end
