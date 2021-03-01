@@ -91,7 +91,45 @@ class CdrExport < Yeti::ActiveRecord
   alias_attribute :export_type, :type
 
   def export_sql
-    Cdr::Cdr.select(fields.join(', ')).order('time_start desc').ransack(filters.as_json).result.to_sql
+    s = Cdr::Cdr.select(select_sql)
+    s = s.order('time_start desc')
+    s = s.ransack(filters.as_json).result
+    if fields.include?('src_country_name')
+      s = s.joins('LEFT JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id')
+    end
+    if fields.include?('dst_country_name')
+      s = s.joins('LEFT JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id')
+    end
+    if fields.include?('src_network_name')
+      s = s.joins('LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id')
+    end
+    if fields.include?('dst_network_name')
+      s = s.joins('LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_country_id = dst_n.id')
+    end
+    s.to_sql
+  end
+
+  def select_sql
+    transformed_fields.join(', ')
+  end
+
+  def transformed_fields
+    fields.map do |f|
+      case f
+      when 'id'
+        'cdr.cdr.id AS "ID"'
+      when 'src_country_name'
+        'src_c.name AS "Src Country Name"'
+      when 'dst_country_name'
+        'dst_c.name AS "Dst Country Name"'
+      when 'src_network_name'
+        'src_n.name AS "Src Network Name"'
+      when 'dst_network_name'
+        'dst_n.name AS "Dst Network Name"'
+      else
+        "#{f} AS \"#{f.titleize}\""
+      end
+    end
   end
 
   def completed?
@@ -108,6 +146,11 @@ class CdrExport < Yeti::ActiveRecord
 
   # any cdr columns
   def self.allowed_fields
-    Cdr::Cdr.column_names
+    Cdr::Cdr.column_names + %w[
+      src_country_name
+      dst_country_name
+      src_network_name
+      dst_network_name
+    ]
   end
 end
