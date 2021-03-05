@@ -38,7 +38,7 @@ RSpec.describe CdrExport, type: :model do
 
     it 'SQL should be valid' do
       sql = [
-        'SELECT success, id',
+        'SELECT success AS "Success", cdr.cdr.id AS "ID"',
         'FROM "cdr"."cdr"',
         'WHERE',
         "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
