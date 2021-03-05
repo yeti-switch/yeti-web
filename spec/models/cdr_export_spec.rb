@@ -54,5 +54,36 @@ RSpec.describe CdrExport, type: :model do
       ]
       expect(subject).to eq(sql.join(' '))
     end
+
+    context 'when added virtual attributes to export cdr' do
+      let(:fields) { %w[src_country_name dst_country_name src_network_name dst_network_name] }
+
+      it 'SQL should be valid' do
+        sql = [
+          'SELECT',
+          'src_c.name AS "Src Country Name",',
+          'dst_c.name AS "Dst Country Name",',
+          'src_n.name AS "Src Network Name",',
+          'dst_n.name AS "Dst Network Name"',
+          'FROM "cdr"."cdr"',
+          'LEFT JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id',
+          'LEFT JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id',
+          'LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id',
+          'LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_country_id = dst_n.id',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          '"cdr"."cdr"."success" = TRUE',
+          'AND',
+          '"cdr"."cdr"."failed_resource_type_id" = 3',
+          'AND',
+          "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%')",
+          'ORDER BY time_start desc'
+        ]
+        expect(subject).to eq(sql.join(' '))
+      end
+    end
   end
 end
