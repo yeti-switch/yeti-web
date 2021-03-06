@@ -14,24 +14,24 @@ class ActiveNodeDecorator < Draper::Decorator
 
   def active_calls_count
     if safe_system_status.present?
-      h.link_to(safe_system_status['calls'], h.active_calls_path(q: { node_id_eq: model.id }))
+      h.link_to(safe_system_status[:calls], h.active_calls_path(q: { node_id_eq: model.id }))
     end
   end
 
   def version
-    safe_system_status['version'] if safe_system_status.present?
+    safe_system_status[:version] if safe_system_status.present?
   end
 
   def shutdown_req_time
-    safe_system_status['shutdown_request_time'] if safe_system_status.present?
+    safe_system_status[:shutdown_request_time] if safe_system_status.present?
   end
 
   def sessions_num
-    safe_system_status['sessions'] if safe_system_status.present?
+    safe_system_status[:sessions] if safe_system_status.present?
   end
 
   def uptime
-    humanize_time_interval(safe_system_status['uptime']) if safe_system_status.present?
+    humanize_time_interval(safe_system_status[:uptime]) if safe_system_status.present?
   end
 
   def humanize_time_interval(seconds)
