@@ -174,7 +174,7 @@ RSpec.describe Jobs::CallsMonitoring do
           'orig_gw_id' => origin_gateway.id,
           'term_gw_id' => term_gateway.id
         }
-      ]
+      ].map(&:symbolize_keys)
     end
 
     before do
@@ -259,7 +259,7 @@ RSpec.describe Jobs::CallsMonitoring do
 
     context 'when Customer has money for the call' do
       let(:cdr_list_unsorted) do
-        super().select { |c| c['local_tag'] == 'normal-call' }
+        super().select { |c| c[:local_tag] == 'normal-call' }
       end
       let(:account_balance) do
         # active calls cost on next calls monitoring run (after 1 min)
@@ -299,7 +299,7 @@ RSpec.describe Jobs::CallsMonitoring do
 
     context 'when Customer has no money for the call after vat apply' do
       let(:cdr_list_unsorted) do
-        super().select { |c| c['local_tag'] == 'normal-call' }
+        super().select { |c| c[:local_tag] == 'normal-call' }
       end
       let(:account_balance) do
         1.02
@@ -335,7 +335,7 @@ RSpec.describe Jobs::CallsMonitoring do
       context 'when duration is nil' do
         let(:max_length) { 10 }
         let(:cdr_list_unsorted) do
-          super().map { |r| r.merge('duration' => nil) }
+          super().map { |r| r.merge(duration: nil) }
         end
 
         include_examples :keep_calls
@@ -362,7 +362,7 @@ RSpec.describe Jobs::CallsMonitoring do
 
         context 'when reserved does not exit' do
           let(:cdr_list_unsorted) do
-            super().select { |c| c['local_tag'] == 'normal-call' }
+            super().select { |c| c[:local_tag] == 'normal-call' }
           end
           it 'total calls cost exceeds min_balance. Drop normal calls' do
             expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
