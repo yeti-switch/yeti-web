@@ -22,6 +22,7 @@
 #  contractor_id            :integer(4)
 #  state_id                 :integer(2)       default(1), not null
 #  type_id                  :integer(2)       not null
+#  uuid                     :uuid             not null
 #
 # Foreign Keys
 #

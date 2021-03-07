@@ -117,6 +117,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
     id_column
+    column 'UUID', :uuid
     actions
     column :reference
     column :contractor, footer: lambda {
@@ -165,6 +166,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   filter :id
+  filter :uuid_equals, label: 'UUID'
   filter :reference
   filter :contractor,
          input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
@@ -195,6 +197,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       tab 'Invoice' do
         attributes_table_for s do
           row :id
+          row :uuid
           row :reference
           row :contractor_id
           row :account

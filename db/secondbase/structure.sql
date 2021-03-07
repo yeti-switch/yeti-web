@@ -2140,7 +2140,8 @@ CREATE TABLE billing.invoices (
     successful_calls_count bigint,
     type_id smallint NOT NULL,
     billing_duration bigint NOT NULL,
-    reference character varying
+    reference character varying,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -4454,6 +4455,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210116150950'),
 ('20210212102105'),
 ('20210218095038'),
-('20210223125543');
+('20210223125543'),
+('20210307170219');
 
 

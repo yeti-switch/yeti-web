@@ -34,7 +34,8 @@ RSpec.describe BillingInvoice::Create do
                              last_call_at: nil,
                              last_successful_call_at: nil,
                              successful_calls_count: nil,
-                             reference: expected_reference
+                             reference: expected_reference,
+                             uuid: be_present
                            )
     end
 

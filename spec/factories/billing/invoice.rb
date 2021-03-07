@@ -49,6 +49,7 @@ FactoryBot.define do
 
     after(:create) do |record|
       record.update!(reference: record.id.to_s) if record.reference.blank?
+      record.reload # to populate uuid
     end
   end
 end
