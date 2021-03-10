@@ -17,7 +17,7 @@
 
 class Stats::ActiveCallAccount < Stats::Base
   self.table_name = 'stats.active_call_accounts'
-  belongs_to :account
+  belongs_to :account, optional: true
 
   include ::Chart
   self.chart_entity_column = :account_id

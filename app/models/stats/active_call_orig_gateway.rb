@@ -12,7 +12,7 @@
 
 class Stats::ActiveCallOrigGateway < Stats::Base
   self.table_name = 'stats.active_call_orig_gateways'
-  belongs_to :gateway
+  belongs_to :gateway, optional: true
 
   include ::Chart
   self.chart_entity_column = :gateway_id
