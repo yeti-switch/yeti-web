@@ -12,7 +12,7 @@
 
 class Stats::ActiveCall < Stats::Base
   self.table_name = 'stats.active_calls'
-  belongs_to :node
+  belongs_to :node, optional: true
 
   include ::Chart
   self.chart_entity_column = :node_id
