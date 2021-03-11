@@ -69,7 +69,7 @@ RSpec.describe CdrExport, type: :model do
           'LEFT JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id',
           'LEFT JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id',
           'LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id',
-          'LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_country_id = dst_n.id',
+          'LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_network_id = dst_n.id',
           'WHERE',
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',

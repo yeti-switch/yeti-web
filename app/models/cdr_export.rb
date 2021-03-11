@@ -104,7 +104,7 @@ class CdrExport < Yeti::ActiveRecord
       s = s.joins('LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id')
     end
     if fields.include?('dst_network_name')
-      s = s.joins('LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_country_id = dst_n.id')
+      s = s.joins('LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_network_id = dst_n.id')
     end
     s.to_sql
   end
