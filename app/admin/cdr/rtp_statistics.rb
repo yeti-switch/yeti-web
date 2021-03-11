@@ -59,12 +59,9 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
                  :tx_rtcp_jitter_mean,
                  :tx_rtcp_jitter_std
 
-  before_action only: [:index] do
-    if params['q'].blank?
-      from_date = 0.days.ago.beginning_of_day
-      params['q'] = { time_start_gteq: from_date } # only 1 last days by default
-      flash.now[:notice] = "Only RTP streams started from #{from_date}  showed by default"
-    end
+  with_default_params do
+    params[:q] = { time_start_gteq_datetime_picker: 0.days.ago.beginning_of_day }
+    'Only RTP streams started from beginning of the day showed by default'
   end
 
   controller do

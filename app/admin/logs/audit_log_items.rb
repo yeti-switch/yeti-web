@@ -13,6 +13,11 @@ ActiveAdmin.register AuditLogItem do
   filter :ip
   filter :txid
 
+  with_default_params do
+    params[:q] = { created_at_gteq: 0.days.ago.beginning_of_day }
+    'Only records started from beginning of the day showed by default'
+  end
+
   controller do
     def scoped_collection
       super.includes(:item)

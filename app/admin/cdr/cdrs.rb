@@ -10,12 +10,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   decorate_with CdrDecorator
 
+  with_default_params do
+    params[:q] = { time_start_gteq_datetime_picker: 0.days.ago.beginning_of_day }
+    'Only CDRs started from beginning of the day showed by default'
+  end
+
   before_action only: [:index] do
-    if params['q'].blank?
-      from_date = 0.days.ago.beginning_of_day
-      params['q'] = { time_start_gteq: from_date } # only 1 last days by default
-      flash.now[:notice] = "Only CDRs started from #{from_date}  showed by default"
-    else
+    if params['q'].present?
       # fix this with right filter setup
       params['q']['account_id_eq'] = params['q']['account_id_eq'].to_i if params['q']['account_id_eq'].present?
       params['q']['disconnect_code_eq'] = params['q']['disconnect_code_eq'].to_i if params['q']['disconnect_code_eq'].present?
@@ -132,9 +133,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_attempt
   filter :customer_price
   filter :vendor_price
-  filter :vendor_invoice_id
-  filter :customer_invoice_id
-
   filter :routing_delay
   filter :pdd
   filter :rtt
@@ -369,8 +367,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :local_tag
           column :legb_local_tag
           column('Term call', &:term_call_id)
-          column :customer_invoice_id
-          column :vendor_invoice_id
 
           column :pai_in
           column :ppi_in
@@ -585,9 +581,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :dialpeer_next_rate
 
           row :time_limit
-
-          row :customer_invoice_id
-          row :vendor_invoice_id
         end
       end
       tab :privacy_information do
@@ -747,8 +740,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :local_tag
     column :legb_local_tag
     column :term_call_id
-    column :customer_invoice_id
-    column :vendor_invoice_id
 
     column :pai_in
     column :ppi_in
@@ -1007,8 +998,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :local_tag
       column :legb_local_tag
       column :term_call_id
-      column :customer_invoice_id
-      column :vendor_invoice_id
       column :lega_rx_payloads
       column :lega_tx_payloads
       column :legb_rx_payloads
