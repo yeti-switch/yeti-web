@@ -367,8 +367,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :local_tag
           column :legb_local_tag
           column('Term call', &:term_call_id)
-          column :customer_invoice_id
-          column :vendor_invoice_id
 
           column :pai_in
           column :ppi_in
@@ -583,9 +581,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :dialpeer_next_rate
 
           row :time_limit
-
-          row :customer_invoice_id
-          row :vendor_invoice_id
         end
       end
       tab :privacy_information do
@@ -745,8 +740,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :local_tag
     column :legb_local_tag
     column :term_call_id
-    column :customer_invoice_id
-    column :vendor_invoice_id
 
     column :pai_in
     column :ppi_in
@@ -1005,8 +998,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :local_tag
       column :legb_local_tag
       column :term_call_id
-      column :customer_invoice_id
-      column :vendor_invoice_id
       column :lega_rx_payloads
       column :lega_tx_payloads
       column :legb_rx_payloads
