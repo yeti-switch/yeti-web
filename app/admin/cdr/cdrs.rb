@@ -190,7 +190,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         src_number: resource.src_prefix_in,
         dst_number: resource.dst_prefix_in,
         pop_id: resource.pop_id,
-        x_yeti_auth: resource.customer_auth&.x_yeti_auth,
+        x_yeti_auth: resource.customer_auth&.x_yeti_auth&.first,
         uri_domain: resource.ruri_domain,
         from_domain: resource.from_domain,
         to_domain: resource.to_domain,
