@@ -326,9 +326,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     ul do
       li do
         if resource.vendor_invoice?
-          link_to 'CDR list', cdrs_path(q: { vendor_invoice_id_equals: params[:id], time_start_gteq: resource.first_call_at - 1, time_start_lteq: resource.last_call_at + 1 }), target: '_blank'
+          link_to 'CDR list', cdrs_path(q: { vendor_invoice_id_equals: params[:id], time_start_gteq_datetime_picker: resource.first_call_at - 1, time_start_lteq_datetime_picker: resource.last_call_at + 1 }), target: '_blank'
         else
-          link_to 'CDR list', cdrs_path(q: { customer_invoice_id_equals: params[:id], time_start_gteq: resource.first_call_at - 1, time_start_lteq: resource.last_call_at + 1 }), target: '_blank'
+          link_to 'CDR list', cdrs_path(q: { customer_invoice_id_equals: params[:id], time_start_gteq_datetime_picker: resource.first_call_at - 1, time_start_lteq_datetime_picker: resource.last_call_at + 1 }), target: '_blank'
         end
       end
     end
