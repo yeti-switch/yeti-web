@@ -104,6 +104,11 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  # add custom spec type sql
+  config.define_derived_metadata(file_path: Regexp.new('/spec/sql/')) do |metadata|
+    metadata[:type] = :sql
+  end
+
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
   config.profile_examples = 10
@@ -120,6 +125,7 @@ RSpec.configure do |config|
   config.include FeatureTestHelper, type: :feature
   config.include JRPCMockHelper
   config.include CustomRspecHelper
+  config.include RspecSqlHelper, type: :sql
 
   config.around(:each, freeze_time: proc { |val| val == true || val.is_a?(Time) }) do |example|
     val = example.metadata[:freeze_time]

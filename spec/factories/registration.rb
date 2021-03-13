@@ -13,6 +13,7 @@ FactoryBot.define do
       transport_protocol { Equipment::TransportProtocol.take }
       sip_schema { System::SipSchema.take }
       proxy_transport_protocol { Equipment::TransportProtocol.take }
+      sequence(:sip_interface_name) { |n| "interface_#{n}" }
     end
   end
 end
