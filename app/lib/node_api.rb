@@ -38,6 +38,8 @@ class NodeApi
 
   class Error < StandardError
   end
+  class ConnectionError < Error
+  end
 
   attr_reader :uri
   delegate :close, to: :api
@@ -46,7 +48,7 @@ class NodeApi
     @_mutex = Thread::Mutex.new
     @uri = uri
     options = default_options.dup
-    @api = JRPC::TcpClient.new(uri, options)
+    @api = wrap_errors { JRPC::TcpClient.new(uri, options) }
   end
 
   def calls_count
@@ -129,20 +131,16 @@ class NodeApi
 
   def perform_notification(method, params = [])
     _mutex.synchronize do
-      api.perform_request(method, params: params, type: :notification)
+      wrap_errors { api.perform_request(method, params: params, type: :notification) }
     end
     nil
-  rescue JRPC::Error => e
-    raise Error, e.message
   end
 
   def perform_request(method, params = [])
     result = _mutex.synchronize do
-      api.perform_request(method, params: params)
+      wrap_errors { api.perform_request(method, params: params) }
     end
     normalize_result(result)
-  rescue JRPC::Error => e
-    raise Error, e.message
   end
 
   def normalize_result(result)
@@ -150,5 +148,13 @@ class NodeApi
     return result.map { |item| normalize_result(item) } if result.is_a?(Array)
 
     result
+  end
+
+  def wrap_errors
+    yield
+  rescue JRPC::ConnectionError => e
+    raise ConnectionError, e.message
+  rescue JRPC::Error => e
+    raise Error, e.message
   end
 end
