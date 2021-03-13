@@ -8,6 +8,7 @@
 #  balance                       :decimal(, )      not null
 #  balance_high_threshold        :decimal(, )
 #  balance_low_threshold         :decimal(, )
+#  customer_invoice_ref_template :string           default("$id"), not null
 #  destination_rate_limit        :decimal(, )
 #  max_balance                   :decimal(, )      not null
 #  max_call_duration             :integer(4)
@@ -22,6 +23,7 @@
 #  total_capacity                :integer(2)
 #  uuid                          :uuid             not null
 #  vat                           :decimal(, )      default(0.0), not null
+#  vendor_invoice_ref_template   :string           default("$id"), not null
 #  contractor_id                 :integer(4)       not null
 #  customer_invoice_period_id    :integer(2)
 #  customer_invoice_template_id  :integer(4)

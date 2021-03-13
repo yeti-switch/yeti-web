@@ -14,15 +14,20 @@
 #  first_successful_call_at :datetime
 #  last_call_at             :datetime
 #  last_successful_call_at  :datetime
+#  reference                :string
 #  start_date               :datetime         not null
 #  successful_calls_count   :bigint(8)
+#  uuid                     :uuid             not null
 #  vendor_invoice           :boolean          default(FALSE), not null
 #  created_at               :datetime         not null
 #  account_id               :integer(4)       not null
 #  contractor_id            :integer(4)
 #  state_id                 :integer(2)       default(1), not null
 #  type_id                  :integer(2)       not null
-#  uuid                     :uuid             not null
+#
+# Indexes
+#
+#  index_billing.invoices_on_reference  (reference)
 #
 # Foreign Keys
 #
