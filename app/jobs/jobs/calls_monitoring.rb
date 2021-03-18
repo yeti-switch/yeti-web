@@ -132,7 +132,11 @@ module Jobs
 
       :customer_auth_id, # link to CustomersAuth, drop calls when CustomersAuth#reject_calls=true
       :customer_id, # link to contractor, drop call if contractor is not enabled or not customer
-      :vendor_id # link to contractor, drop call if contractor is not enabled or not vendor
+      :vendor_id, # link to contractor, drop call if contractor is not enabled or not vendor
+
+      :customer_acc_external_id,
+      :vendor_acc_external_id
+
     ].freeze
 
     def after_start
