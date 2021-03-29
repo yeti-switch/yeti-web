@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: registrations
+# Table name: class4.registrations
 #
 #  id                          :integer(4)       not null, primary key
 #  auth_password               :string
@@ -17,6 +17,7 @@
 #  name                        :string           not null
 #  proxy                       :string
 #  retry_delay                 :integer(2)       default(5), not null
+#  sip_interface_name          :string
 #  username                    :string           not null
 #  node_id                     :integer(4)
 #  pop_id                      :integer(4)
@@ -38,6 +39,8 @@
 #
 
 class Equipment::Registration < Yeti::ActiveRecord
+  self.table_name = 'class4.registrations'
+
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
   belongs_to :pop, optional: true

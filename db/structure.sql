@@ -8384,7 +8384,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch19; Owner: -
 --
 
-CREATE FUNCTION switch19.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint)
+CREATE FUNCTION switch19.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -8404,7 +8404,8 @@ BEGIN
     force_expire,
     retry_delay,
     max_attempts,
-    sip_schema_id
+    sip_schema_id,
+    sip_interface_name
   FROM class4.registrations r
   WHERE
     r.enabled and
@@ -16256,7 +16257,8 @@ CREATE TABLE class4.registrations (
     max_attempts smallint,
     transport_protocol_id smallint DEFAULT 1 NOT NULL,
     proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
-    sip_schema_id smallint DEFAULT 1 NOT NULL
+    sip_schema_id smallint DEFAULT 1 NOT NULL,
+    sip_interface_name character varying
 );
 
 
@@ -23009,6 +23011,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20201226161344'),
 ('20210116152459'),
 ('20210218092245'),
-('20210223142035');
+('20210223142035'),
+('20210313203526'),
+('20210328145540');
 
 

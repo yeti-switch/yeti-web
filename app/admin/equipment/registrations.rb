@@ -11,6 +11,7 @@ ActiveAdmin.register Equipment::Registration do
                  [:node_name, proc { |row| row.node.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
+                 :sip_interface_name,
                  :domain,
                  :username,
                  :display_username,
@@ -33,7 +34,8 @@ ActiveAdmin.register Equipment::Registration do
                 :auth_user, :proxy, :contact,
                 :auth_password,
                 :expire, :force_expire,
-                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id
+                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id,
+                :sip_interface_name
 
   index do
     selectable_column
@@ -44,6 +46,7 @@ ActiveAdmin.register Equipment::Registration do
     column :pop
     column :node
     column :sip_schema
+    column 'SIP Interface Name', :sip_interface_name, sortable: :sip_interface_name
     column :transport_protocol
     column :domain
     column :username
@@ -59,12 +62,13 @@ ActiveAdmin.register Equipment::Registration do
     column :max_attempts
   end
 
-  filter :id
+  filter :id, label: 'ID'
   filter :name
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :pop, input_html: { class: 'chosen' }
   filter :node, input_html: { class: 'chosen' }
   filter :sip_schema
+  filter :sip_interface_name, label: 'SIP Interface Name'
   filter :transport_protocol, input_html: { class: 'chosen' }, collection: proc { Equipment::TransportProtocol.pluck(:name, :id) }
   filter :domain
   filter :username
@@ -84,6 +88,7 @@ ActiveAdmin.register Equipment::Registration do
                      include_blank: 'Any',
                      input_html: { class: 'chosen' }
       f.input :sip_schema, as: :select, include_blank: false
+      f.input :sip_interface_name, label: 'SIP Interface Name'
       f.input :transport_protocol, as: :select, include_blank: false
       f.input :domain
       f.input :username
@@ -103,11 +108,13 @@ ActiveAdmin.register Equipment::Registration do
 
   show do |_s|
     attributes_table do
+      row :id
       row :name
       row :enabled
       row :pop
       row :node
       row :sip_schema
+      row :sip_interface_name
       row :transport_protocol
       row :domain
       row :username

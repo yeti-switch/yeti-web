@@ -38,4 +38,21 @@ module FeatureTestHelper
   def has_many_fields_selector(association_name)
     ".has_many_container.#{association_name} > fieldset.inputs.has_many_fields"
   end
+
+  def response_csv
+    CSV.parse(page.body)
+  end
+
+  def response_csv_header
+    response_csv.first
+  end
+
+  def response_csv_rows
+    response_csv[1..-1]
+  end
+
+  # @return [Array<Hash>]
+  def response_csv_collection
+    response_csv_rows.map { |row| [response_csv_header, row].transpose.to_h }
+  end
 end
