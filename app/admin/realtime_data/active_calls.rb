@@ -42,11 +42,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
            resource_id ? Contractor.where(id: resource_id) : []
          },
          label: 'Vendor',
-         input_html: {
-           class: 'chosen-ajax',
-           'data-path': '/contractors/search?q[vendor_eq]=true',
-           onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :q_vendor_acc_id_eq)
-         }
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' }
 
   filter :customer_id_eq,
          as: :select,
@@ -55,23 +51,25 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
            resource_id ? Contractor.where(id: resource_id) : []
          },
          label: 'Customer',
-         input_html: {
-           class: 'chosen-ajax',
-           'data-path': '/contractors/search?q[customer_eq]=true',
-           onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :q_customer_acc_id_eq)
-         }
+         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' }
 
   filter :vendor_acc_id_eq,
          as: :select,
-         collection: [],
+         collection: proc {
+           resource_id = params.dig(:q, :vendor_acc_id_eq)
+           resource_id ? Account.where(id: resource_id) : []
+         },
          label: 'Vendor Account',
-         input_html: { class: 'chosen' }
+         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' }
 
   filter :customer_acc_id_eq,
          as: :select,
-         collection: [],
+         collection: proc {
+           resource_id = params.dig(:q, :customer_acc_id_eq)
+           resource_id ? Account.where(id: resource_id) : []
+         },
          label: 'Customer Account',
-         input_html: { class: 'chosen' }
+         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' }
 
   filter :orig_gw_id_eq,
          as: :select,
