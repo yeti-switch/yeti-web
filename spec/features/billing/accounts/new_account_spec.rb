@@ -134,6 +134,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
           type_id: Billing::InvoiceType::AUTO_FULL
         )
 
+      fill_in_chosen 'Customer invoice period', with: 'None'
       fill_in_chosen 'Customer invoice period', with: invoice_period.name, exact: true
     end
 
@@ -181,6 +182,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
           type_id: Billing::InvoiceType::AUTO_PARTIAL
         )
 
+      fill_in_chosen 'Vendor invoice period', with: 'None'
       fill_in_chosen 'Vendor invoice period', with: invoice_period.name, exact: true
     end
 
