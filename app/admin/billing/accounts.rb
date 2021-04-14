@@ -236,9 +236,8 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
-      none_invoice_period = Billing::InvoicePeriod.new(id: nil, name: 'None')
-      f.input :vendor_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: [none_invoice_period, *Billing::InvoicePeriod.all]
-      f.input :customer_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: [none_invoice_period, *Billing::InvoicePeriod.all]
+      f.input :vendor_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
+      f.input :customer_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
 
       f.input :vendor_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
       f.input :customer_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all

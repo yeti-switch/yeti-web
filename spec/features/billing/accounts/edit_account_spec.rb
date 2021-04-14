@@ -7,7 +7,7 @@ RSpec.describe 'Update Account', type: :feature, js: true do
 
   include_context :login_as_admin
   let(:before_visit!) {}
-  let!(:account) { create(:account, :filled) }
+  let!(:account) { create(:account, :filled, :vendor_weekly) }
   before do
     before_visit!
     visit edit_account_path(account.id)
@@ -51,5 +51,25 @@ RSpec.describe 'Update Account', type: :feature, js: true do
                                   vendor_invoice_ref_template: 'vend-$id'
                                 )
     end
+  end
+
+  context 'with Customer invoice period disable' do
+    before do
+      chosen_disable_value 'Customer invoice period'
+    end
+
+    it 'updates account' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Account was successfully updated.', type: :notice)
+      }.to change { Account.count }.by(0)
+
+      expect(page).to have_current_path account_path(account.id)
+
+      expect(account.reload).to have_attributes(
+                                  customer_invoice_period: nil,
+                                )
+    end
+
   end
 end
