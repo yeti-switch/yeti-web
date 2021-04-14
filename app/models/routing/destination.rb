@@ -159,7 +159,7 @@ class Routing::Destination < Yeti::ActiveRecord
       select id from
       (
         SELECT t_dst.id as id,
-        rank() OVER (PARTITION BY t_dst.rateplan_id ORDER BY length(t_dst.prefix) desc) as r
+        rank() OVER (PARTITION BY t_dst.rate_group_id ORDER BY length(t_dst.prefix) desc) as r
         FROM class4.destinations t_dst
         WHERE prefix_range(t_dst.prefix)@>prefix_range(?) and
           length(?)>=t_dst.dst_number_min_length and
