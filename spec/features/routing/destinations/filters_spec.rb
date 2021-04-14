@@ -77,7 +77,7 @@ RSpec.describe 'Filter Destination records', :js do
   end
 
   describe 'filter by routing for contains' do
-    let!(:destination) { create :destination, prefix: 'test'}
+    let!(:destination) { create :destination, prefix: 'test' }
 
     context 'with filter by valid value' do
       let(:filter_value) { 'test1111' }
@@ -107,7 +107,7 @@ RSpec.describe 'Filter Destination records', :js do
 
       it 'shoul be return zero record' do
         subject
-        
+
         expect(page).to have_text('No Destinations found')
         expect(page).to_not have_table
         within_filters { expect(page).to have_field('Routing for contains', with: filter_value) }
