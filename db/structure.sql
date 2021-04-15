@@ -16615,7 +16615,8 @@ CREATE TABLE class4.sip_options_probers (
     auth_username character varying,
     auth_password character varying,
     created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL
+    updated_at timestamp with time zone NOT NULL,
+    external_id bigint
 );
 
 
@@ -23013,6 +23014,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210218092245'),
 ('20210223142035'),
 ('20210313203526'),
-('20210328145540');
+('20210328145540'),
+('20210415123322');
 
 

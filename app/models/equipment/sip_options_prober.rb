@@ -20,6 +20,7 @@
 #  to_uri                      :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  external_id                 :bigint(8)
 #  node_id                     :integer(2)
 #  pop_id                      :integer(2)
 #  proxy_transport_protocol_id :integer(2)       default(1), not null
