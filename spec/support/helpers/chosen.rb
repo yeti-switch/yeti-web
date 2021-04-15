@@ -40,6 +40,12 @@ module Helpers
       find('ul.chosen-results li.active-result', text: text, exact_text: exact).click
     end
 
+    def chosen_deselect_value(label)
+      select_selector = chosen_container_selector(label)
+      chosen_node = page.find(select_selector)
+      chosen_node.find('abbr.search-choice-close').click
+    end
+
     # Checks chosen select presence on page
     # @param label [String] field label.
     # @param options [Hash]
