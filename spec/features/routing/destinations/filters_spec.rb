@@ -9,9 +9,9 @@ RSpec.describe 'Filter Destination records', :js do
 
   include_context :login_as_admin
 
-  let!(:other_destinations_list) { create_list :destination, 2 }
-
   describe 'filter by tagged' do
+    let!(:other_destinations_list) { create_list :destination, 2 }
+
     let(:filter_records) do
       within_filters do
         fill_in_chosen 'Tagged', with: filter_value
@@ -72,6 +72,45 @@ RSpec.describe 'Filter Destination records', :js do
           expect(page).to have_table_row count: 1
           expect(page).to have_table_cell column: 'Id', text: destinations_tag_contains.id
         end
+      end
+    end
+  end
+
+  describe 'filter by routing for contains' do
+    let!(:destination) { create :destination, prefix: 'test' }
+
+    context 'with filter by valid value' do
+      let(:filter_value) { 'test1111' }
+      let(:filter_records) do
+        within_filters do
+          fill_in 'Routing for contains', with: filter_value
+        end
+      end
+
+      it 'shoul be return one record' do
+        subject
+
+        expect(page).to have_table
+        expect(page).to have_table_row count: 1
+        expect(page).to have_table_cell column: 'Id', text: destination.id
+        within_filters { expect(page).to have_field('Routing for contains', with: filter_value) }
+      end
+    end
+
+    context 'with filter by invalid value' do
+      let(:filter_value) { 'invalid_prefix' }
+      let(:filter_records) do
+        within_filters do
+          fill_in 'Routing for contains', with: filter_value
+        end
+      end
+
+      it 'shoul be return zero record' do
+        subject
+
+        expect(page).to have_text('No Destinations found')
+        expect(page).to_not have_table
+        within_filters { expect(page).to have_field('Routing for contains', with: filter_value) }
       end
     end
   end
