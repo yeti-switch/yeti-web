@@ -44,7 +44,7 @@ class Importing::Destination < Importing::Base
   self.table_name = 'data_import.import_destinations'
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', optional: true
-  belongs_to :rate_policy, class_name: '::DestinationRatePolicy', optional: true
+  belongs_to :rate_policy, class_name: 'Routing::DestinationRatePolicy', optional: true
   belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id', optional: true
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
 
