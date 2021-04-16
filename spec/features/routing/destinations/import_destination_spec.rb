@@ -11,7 +11,6 @@ RSpec.describe 'Destination imports', type: :feature do
     it 'should have table with items' do
       subject
       expect(page).to have_table
-      expect(page).to have_table_row(id: importing_destination.id)
       within_table_row(id: importing_destination.id) do
         expect(page).to have_table_cell(text: 'Fixed', column: 'Rate Policy')
       end

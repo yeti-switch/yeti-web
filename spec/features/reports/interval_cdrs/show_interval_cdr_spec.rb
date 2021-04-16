@@ -11,7 +11,6 @@ RSpec.describe 'Show interval cdrs report' do
   it 'should have tabel with interval data and destination rate pocily' do
     subject
     expect(page).to have_table
-    expect(page).to have_table_row(id: interval_data.id)
     within_table_row(id: interval_data.id) do
       expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
     end
