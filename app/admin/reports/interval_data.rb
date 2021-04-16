@@ -57,5 +57,6 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
       column col
     end
     column assigns[:report_interval_cdr].aggregation, :aggregated_value
+    column :destination_rate_policy
   end
 end

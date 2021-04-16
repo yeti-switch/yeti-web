@@ -103,7 +103,7 @@ class Report::IntervalData < Cdr::Base
   belongs_to :disconnect_initiator, optional: true
   belongs_to :vendor_invoice, class_name: 'Invoice', foreign_key: :vendor_invoice_id, optional: true
   belongs_to :customer_invoice, class_name: 'Invoice', foreign_key: :customer_invoice_id, optional: true
-  belongs_to :destination_rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
+  belongs_to :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id, optional: true
