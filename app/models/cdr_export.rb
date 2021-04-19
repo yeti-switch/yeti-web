@@ -31,6 +31,8 @@ class CdrExport < Yeti::ActiveRecord
     attribute :dst_prefix_in_contains, :string
     attribute :src_prefix_routing_contains, :string
     attribute :dst_prefix_routing_contains, :string
+    attribute :src_prefix_out_contains, :string
+    attribute :dst_prefix_out_contains, :string
     attribute :customer_acc_external_id_eq, :integer
 
     private
