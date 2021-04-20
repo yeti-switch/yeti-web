@@ -44,6 +44,7 @@ FactoryBot.define do
     sequence(:name) { |n| "SIP Options Prober #{n}" }
     sequence(:ruri_domain) { |n| "#{n}.sip.com" }
     sequence(:ruri_username) { |n| "username_#{n}" }
+    sequence(:external_id) { |n| n }
     pop_id { nil }
     node_id { nil }
   end
