@@ -85,5 +85,79 @@ RSpec.describe CdrExport, type: :model do
         expect(subject).to eq(sql.join(' '))
       end
     end
+
+    context 'when filled all filters' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01',
+          time_start_lteq: '2018-03-01',
+          success_eq: 'true',
+          src_prefix_in_contains: '111111',
+          src_prefix_routing_contains: '123123',
+          src_prefix_out_contains: '222222',
+          dst_prefix_in_contains: '333123',
+          dst_prefix_routing_contains: '221133',
+          dst_prefix_out_contains: '333221'
+        }
+      end
+
+      it 'SQL should be valid' do
+        sql = [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          '"cdr"."cdr"."success" = TRUE',
+          'AND',
+          "\"cdr\".\"cdr\".\"src_prefix_in\" ILIKE '%111111%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_prefix_in\" ILIKE '%333123%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_prefix_routing\" ILIKE '%221133%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"src_prefix_out\" ILIKE '%222222%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+          'ORDER BY time_start desc'
+        ]
+        expect(subject).to eq(sql.join(' '))
+      end
+    end
+
+    context 'when filled some filters' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01',
+          time_start_lteq: '2018-03-01',
+          src_prefix_in_contains: '111111',
+          src_prefix_routing_contains: '123123',
+          dst_prefix_out_contains: '333221'
+        }
+      end
+
+      it 'SQL should be valid' do
+        sql = [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"src_prefix_in\" ILIKE '%111111%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+          'ORDER BY time_start desc'
+        ]
+        expect(subject).to eq(sql.join(' '))
+      end
+    end
   end
 end
