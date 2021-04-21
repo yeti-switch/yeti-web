@@ -29,7 +29,8 @@
 #
 # Indexes
 #
-#  sip_options_probers_name_key  (name) UNIQUE
+#  index_class4.sip_options_probers_on_external_id  (external_id) UNIQUE
+#  sip_options_probers_name_key                     (name) UNIQUE
 #
 # Foreign Keys
 #

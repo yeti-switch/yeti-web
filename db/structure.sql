@@ -21827,6 +21827,13 @@ CREATE UNIQUE INDEX "index_class4.lnp_databases_on_database_id_and_database_type
 
 
 --
+-- Name: index_class4.sip_options_probers_on_external_id; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX "index_class4.sip_options_probers_on_external_id" ON class4.sip_options_probers USING btree (external_id);
+
+
+--
 -- Name: lnp_cache_dst_database_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
