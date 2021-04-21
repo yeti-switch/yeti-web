@@ -51,7 +51,13 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
     let(:filters) do
       {
         'time_start_gteq' => '2018-01-01',
-        'time_start_lteq' => '2018-03-01'
+        'time_start_lteq' => '2018-03-01',
+        'src_prefix_in_contains' => 'src_prefix_in_test',
+        'src_prefix_routing_contains' => 'src_prefix_routing_test',
+        'src_prefix_out_contains' => 'src_prefix_out_test',
+        'dst_prefix_in_contains' => 'dst_prefix_in_test',
+        'dst_prefix_routing_contains' => 'dst_prefix_routing_test',
+        'dst_prefix_out_contains' => 'dst_prefix_out_test'
       }
     end
 
@@ -85,7 +91,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
             'callback-url' => nil,
             'status' => CdrExport::STATUS_PENDING,
             'fields' => fields,
-            'filters' => filters.transform_values { |v| "#{v}T00:00:00.000Z" },
+            'filters' => CdrExport::FiltersModel.new(filters).as_json,
             'created-at' => cdr_export.created_at.iso8601(3)
           }
         )

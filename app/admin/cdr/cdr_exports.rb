@@ -97,7 +97,16 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     end
   end
 
-  permit_params filters: %i[time_start_gteq time_start_lteq customer_acc_id_eq is_last_cdr_eq],
+  permit_params filters: %i[time_start_gteq
+                            time_start_lteq
+                            customer_acc_id_eq
+                            is_last_cdr_eq
+                            src_prefix_in_contains
+                            src_prefix_routing_contains
+                            src_prefix_out_contains
+                            dst_prefix_in_contains
+                            dst_prefix_routing_contains
+                            dst_prefix_out_contains],
                 fields: []
 
   form do |f|
@@ -122,6 +131,14 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                as: :select,
                collection: [['Any', nil], ['Yes', true], ['No', false]],
                input_html: { class: 'chosen' }
+
+      ff.input :src_prefix_in_contains, required: false
+      ff.input :src_prefix_routing_contains, required: false
+      ff.input :src_prefix_out_contains, required: false
+
+      ff.input :dst_prefix_in_contains, required: false
+      ff.input :dst_prefix_routing_contains, required: false
+      ff.input :dst_prefix_out_contains, required: false
     end
     f.actions
   end
