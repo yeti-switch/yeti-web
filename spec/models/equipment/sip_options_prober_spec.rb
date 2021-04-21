@@ -98,6 +98,13 @@ RSpec.describe Equipment::SipOptionsProber do
         ruri_username: ["can't be blank"]
       }
     end
+
+    context 'without external_id' do
+      let(:create_params) { super().merge external_id: nil }
+
+      include_examples :creates_record
+      include_examples :changes_records_qty_of, Equipment::SipOptionsProber, by: 1
+    end
   end
 
   describe '#update' do

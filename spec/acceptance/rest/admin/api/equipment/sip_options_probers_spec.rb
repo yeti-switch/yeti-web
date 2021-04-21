@@ -2,7 +2,7 @@
 
 require 'rspec_api_documentation/dsl'
 
-RSpec.resource 'SipOptionsProber' do
+RSpec.resource 'Sip options prober' do
   header 'Accept', 'application/vnd.api+json'
   header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token
@@ -34,21 +34,18 @@ RSpec.resource 'SipOptionsProber' do
   get '/api/rest/admin/equipment/sip-options-probers' do
     jsonapi_filters Api::Rest::Admin::Equipment::SipOptionsProberResource._allowed_filters
 
-    let!(:sip_options_probers) { create_list(:sip_options_prober, 10) }
+    let!(:sip_options_probers) { create_list(:sip_options_prober, 2) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
-      expect(JSON.parse(response_body)['data'].size).to eq(sip_options_probers.size)
     end
   end
 
   get '/api/rest/admin/equipment/sip-options-probers/:id' do
-    let(:id) { sip_options_prober.id }
-    let(:sip_options_prober) { create(:sip_options_prober, external_id: 10) }
+    let(:id) { create(:sip_options_prober).id }
 
     example_request 'get specific entry', timezone: Time.zone do
       expect(status).to eq(200)
-      expect(JSON.parse(response_body)['data']['attributes']['external-id']).to eq(sip_options_prober.external_id)
     end
   end
 
@@ -68,7 +65,6 @@ RSpec.resource 'SipOptionsProber' do
 
     example_request 'create new entry' do
       expect(status).to eq(201)
-      expect(JSON.parse(response_body)['data']['id']).to eq(Equipment::SipOptionsProber.last.id.to_s)
     end
   end
 
@@ -79,14 +75,11 @@ RSpec.resource 'SipOptionsProber' do
     jsonapi_attributes(required_params, optional_params)
     jsonapi_relationships(required_relationships, optional_relationships)
 
-    let(:id) { sip_options_prober.id }
-    let(:sip_options_prober) { create(:sip_options_prober) }
+    let(:id) { create(:sip_options_prober).id }
     let(:name) { 'test_name' }
 
     example_request 'update values' do
       expect(status).to eq(200)
-      expect(JSON.parse(response_body)['data']['id']).to eq(id.to_s)
-      expect(JSON.parse(response_body)['data']['attributes']['name']).to eq(name)
     end
   end
 
