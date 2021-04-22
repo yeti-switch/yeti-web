@@ -50,7 +50,7 @@ class Equipment::SipOptionsProber < Yeti::ActiveRecord
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
 
   validates :name, uniqueness: { allow_blank: false }
-  validates :external_id, uniqueness: { allow_nil: true, allow_blank: false }
+  validates :external_id, uniqueness: { allow_blank: true }
   validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
