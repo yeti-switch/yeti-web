@@ -126,6 +126,7 @@ Rails.application.routes.draw do
             jsonapi_resources :gateway_media_encryption_modes
             jsonapi_resources :transport_protocols
             jsonapi_resources :registrations
+            jsonapi_resources :sip_options_probers
             namespace :radius do
               jsonapi_resources :accounting_profiles
               jsonapi_resources :auth_profiles

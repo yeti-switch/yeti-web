@@ -56,6 +56,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
     column :interval
     column :sip_interface_name
     column :append_headers
+    column :external_id
   end
 
   filter :id
@@ -64,6 +65,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
   filter :pop, input_html: { class: 'chosen' }
   filter :node, input_html: { class: 'chosen' }
   filter :sip_schema
+  filter :external_id
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -116,6 +118,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       row :append_headers
       row :updated_at
       row :created_at
+      row :external_id
     end
   end
 end

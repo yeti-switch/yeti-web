@@ -20,6 +20,7 @@
 #  to_uri                      :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  external_id                 :bigint(8)
 #  node_id                     :integer(2)
 #  pop_id                      :integer(2)
 #  proxy_transport_protocol_id :integer(2)       default(1), not null
@@ -28,7 +29,8 @@
 #
 # Indexes
 #
-#  sip_options_probers_name_key  (name) UNIQUE
+#  index_class4.sip_options_probers_on_external_id  (external_id) UNIQUE
+#  sip_options_probers_name_key                     (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -95,6 +97,13 @@ RSpec.describe Equipment::SipOptionsProber do
         ruri_domain: ["can't be blank"],
         ruri_username: ["can't be blank"]
       }
+    end
+
+    context 'without external_id' do
+      let(:create_params) { super().merge external_id: nil }
+
+      include_examples :creates_record
+      include_examples :changes_records_qty_of, Equipment::SipOptionsProber, by: 1
     end
   end
 

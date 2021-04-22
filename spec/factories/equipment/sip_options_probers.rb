@@ -20,6 +20,7 @@
 #  to_uri                      :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  external_id                 :bigint(8)
 #  node_id                     :integer(2)
 #  pop_id                      :integer(2)
 #  proxy_transport_protocol_id :integer(2)       default(1), not null
@@ -28,7 +29,8 @@
 #
 # Indexes
 #
-#  sip_options_probers_name_key  (name) UNIQUE
+#  index_class4.sip_options_probers_on_external_id  (external_id) UNIQUE
+#  sip_options_probers_name_key                     (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -43,6 +45,7 @@ FactoryBot.define do
     sequence(:name) { |n| "SIP Options Prober #{n}" }
     sequence(:ruri_domain) { |n| "#{n}.sip.com" }
     sequence(:ruri_username) { |n| "username_#{n}" }
+    sequence(:external_id) { |n| n }
     pop_id { nil }
     node_id { nil }
   end

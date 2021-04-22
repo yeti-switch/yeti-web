@@ -20,6 +20,7 @@
 #  to_uri                      :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  external_id                 :bigint(8)
 #  node_id                     :integer(2)
 #  pop_id                      :integer(2)
 #  proxy_transport_protocol_id :integer(2)       default(1), not null
@@ -28,7 +29,8 @@
 #
 # Indexes
 #
-#  sip_options_probers_name_key  (name) UNIQUE
+#  index_class4.sip_options_probers_on_external_id  (external_id) UNIQUE
+#  sip_options_probers_name_key                     (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -48,6 +50,7 @@ class Equipment::SipOptionsProber < Yeti::ActiveRecord
   belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
 
   validates :name, uniqueness: { allow_blank: false }
+  validates :external_id, uniqueness: { allow_blank: true }
   validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
