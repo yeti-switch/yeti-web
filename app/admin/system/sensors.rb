@@ -23,8 +23,8 @@ ActiveAdmin.register System::Sensor do
     def build_resource_params
       result = super
       attrs = result.first
-      attrs.delete('hep_target_ip') if attrs['mode_id'] != System::SensorMode::HEPv3
-      attrs['target_ip'] = attrs.delete('hep_target_ip') if attrs['hep_target_ip'].present? && attrs['mode_id'] == System::SensorMode::HEPv3
+      attrs.delete('hep_target_ip') if attrs['mode_id'].to_i != System::SensorMode::HEPv3
+      attrs['target_ip'] = attrs.delete('hep_target_ip') if attrs['hep_target_ip'].present? && attrs['mode_id'].to_i == System::SensorMode::HEPv3
       [attrs]
     end
   end
