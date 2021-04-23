@@ -75,7 +75,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :acd_limit
   filter :short_calls_limit
 
-  acts_as_filter_by_routing_tag_ids
+  acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
   permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rate_group_id, :next_rate, :connect_fee,
                 :initial_interval, :next_interval, :dp_margin_fixed,

@@ -15,5 +15,7 @@ module RoutingTagIdsScopeable
         where("routing_tag_ids = '{}'") # no tags
       end
     }
+
+    scope :routing_tag_ids_count_equals, ->(count) { where('array_length(routing_tag_ids, 1) = ?', count) if count.to_i >= 0 }
   end
 end
