@@ -178,6 +178,7 @@ class Routing::Destination < Yeti::ActiveRecord
       routing_for_contains
       routing_tag_ids_covers
       tagged
+      routing_tag_ids_count_equals
     ]
   end
 end

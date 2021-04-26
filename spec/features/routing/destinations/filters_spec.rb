@@ -114,4 +114,85 @@ RSpec.describe 'Filter Destination records', :js do
       end
     end
   end
+
+  describe 'filter by routing tags count' do
+    let!(:other_destinations) { create_list :destination, 2 }
+    let!(:tags) { create_list :routing_tag, 3 }
+    let!(:destination_tagged) { create :destination, routing_tag_ids: tags.map(&:id) }
+
+    context 'when user set negative tags count' do
+      let(:filter_records) do
+        within_filters do
+          fill_in name: 'q[routing_tag_ids_count_equals]', with: negative_value
+          expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: negative_value)
+        end
+      end
+
+      let(:negative_value) { -2 }
+
+      it 'shoul be return all destinations' do
+        subject
+
+        expect(page).to have_table
+        expect(page).to have_table_row count: (other_destinations << destination_tagged).size
+        expect(page).to have_table_cell column: 'Id', text: destination_tagged.id
+      end
+    end
+
+    context 'when user set correct tags count' do
+      let(:filter_records) do
+        within_filters do
+          fill_in name: 'q[routing_tag_ids_count_equals]', with: tags.size
+          expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: tags.size)
+        end
+      end
+
+      it 'shoul be return destinations with correct routing tags count' do
+        subject
+
+        expect(page).to have_table
+        expect(page).to have_table_row count: 1
+        expect(page).to have_table_cell column: 'Id', text: destination_tagged.id
+      end
+
+      context 'when set specific routing tag cover and routing tag count' do
+        let(:filter_records) do
+          within_filters do
+            fill_in name: 'q[routing_tag_ids_count_equals]', with: 1
+            fill_in_chosen 'Routing tag ids covers', with: specific_tag.name, multiple: true
+            expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: 1)
+            expect(page).to have_field_chosen('Routing tag ids covers', with: specific_tag.name, exact: false)
+          end
+        end
+        let!(:specific_tag) { tags.first }
+        let!(:destination_with_one_tag) { create :destination, routing_tag_ids: [specific_tag.id] }
+
+        it 'should return only destinations with specific tag' do
+          subject
+
+          expect(page).to have_table
+          expect(page).to have_table_row count: 1
+          within_table_row(id: destination_with_one_tag.id) do
+            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name)
+          end
+        end
+      end
+
+      context 'when there are no destinations wtih specified routing tags count' do
+        let(:filter_records) do
+          within_filters do
+            fill_in name: 'q[routing_tag_ids_count_equals]', with: tags.size + 1
+            expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: tags.size + 1)
+          end
+        end
+
+        it 'shouldn`t return any rows' do
+          subject
+
+          expect(page).to_not have_table
+          expect(page).to have_text('No Destinations found')
+        end
+      end
+    end
+  end
 end
