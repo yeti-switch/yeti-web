@@ -18,6 +18,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
   let!(:routing_tag_mode) { Routing::RoutingTagMode.last! }
   let!(:routeset_discriminator) { Routing::RoutesetDiscriminator.last! }
   let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let!(:routing_tags) { create_list(:routing_tag, 5) }
 
   before do
     visit dialpeers_path
@@ -58,7 +59,8 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
       src_rewrite_rule: '12',
       src_rewrite_result: '12',
       dst_rewrite_rule: '12',
-      dst_rewrite_result: '12'
+      dst_rewrite_result: '12',
+      routing_tag_ids: routing_tags.map { |tag| tag.id.to_s }
     }
   end
   let(:fill_batch_form) do
@@ -220,6 +222,11 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
     if assign_params.key? :dst_rewrite_result
       check :Dst_rewrite_result
       fill_in :dst_rewrite_result, with: assign_params[:dst_rewrite_result]
+    end
+
+    if assign_params.key? :routing_tag_ids
+      check :Routing_tag_ids
+      routing_tags.each { |tag| fill_in_chosen 'routing_tag_ids[]', with: tag.name, multiple: true, visible: false }
     end
   end
 

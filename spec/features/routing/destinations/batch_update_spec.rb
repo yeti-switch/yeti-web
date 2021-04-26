@@ -8,6 +8,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
   let!(:rate_policy) { Routing::DestinationRatePolicy.take! }
   let!(:profit_control_mode) { Routing::RateProfitControlMode.take! || FactoryBot.create(:rate_profit_control_mode) }
+  let!(:routing_tags) { create_list(:routing_tag, 5) }
 
   before do
     visit destinations_path
@@ -44,7 +45,8 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       dp_margin_percent: '2',
       asr_limit: '0.9',
       acd_limit: '1',
-      short_calls_limit: '4'
+      short_calls_limit: '4',
+      routing_tag_ids: routing_tags.map { |tag| tag.id.to_s }
     }
   end
 
@@ -162,6 +164,11 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
     if assign_params.key? :short_calls_limit
       check :Short_calls_limit
       fill_in :short_calls_limit, with: assign_params[:short_calls_limit]
+    end
+
+    if assign_params.key? :routing_tag_ids
+      check :Routing_tag_ids
+      routing_tags.each { |tag| fill_in_chosen 'routing_tag_ids[]', with: tag.name, multiple: true, visible: false }
     end
   end
 

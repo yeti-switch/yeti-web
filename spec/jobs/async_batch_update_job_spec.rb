@@ -92,6 +92,38 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
           end
         end
       end
+
+      context 'with routing tags changes' do
+        let!(:routing_tag_ids) { create_list(:routing_tag, 3).map { |tag| tag.id.to_s } }
+        let(:changes) { { routing_tag_ids: routing_tag_ids } }
+
+        context 'no filter/selection' do
+          let(:sql_query) { Routing::Destination.all.to_sql }
+
+          it { expect { subject }.to change(Routing::Destination.where(routing_tag_ids: routing_tag_ids), :count).by(3) }
+        end
+
+        context 'records selected' do
+          let(:sql_query) { Routing::Destination.where(id: [1, 3]).to_sql }
+
+          it { expect { subject }.to change(Routing::Destination.where(routing_tag_ids: routing_tag_ids), :count).by(2) }
+          it { expect { subject }.to change(Routing::Destination.where(id: 2, routing_tag_ids: []), :count).by(0) }
+        end
+
+        context 'records filtered' do
+          let(:sql_query) { Routing::Destination.where('initial_rate < ?', 0.5).to_sql }
+
+          it { expect { subject }.to change(Routing::Destination.where(routing_tag_ids: routing_tag_ids), :count).by(1) }
+          it { expect { subject }.to change(Routing::Destination.where(id: 1, routing_tag_ids: routing_tag_ids), :count).by(1) }
+        end
+
+        context 'records filtered and ordering' do
+          let(:sql_query) { Routing::Destination.where('initial_rate < ?', 0.5).order(:id).to_sql }
+
+          it { expect { subject }.to change(Routing::Destination.where(routing_tag_ids: routing_tag_ids), :count).by(1) }
+          it { expect { subject }.to change(Routing::Destination.where(id: 1, routing_tag_ids: routing_tag_ids), :count).by(1) }
+        end
+      end
     end
   end
 end

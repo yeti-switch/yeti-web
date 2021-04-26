@@ -34,6 +34,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   attribute :src_rewrite_result
   attribute :dst_rewrite_rule
   attribute :dst_rewrite_result
+  attribute :routing_tag_ids, type: :foreign_key, class_name: 'Routing::RoutingTag'
 
   # presence
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
