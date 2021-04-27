@@ -253,8 +253,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     end
   end
 
-  index as: :table,
-        blank_slate_content: lambda {
+  index blank_slate_content: lambda {
                                GuiConfig::FILTER_MISSED_TEXT if GuiConfig.active_calls_require_filter
                              } do
     selectable_column
