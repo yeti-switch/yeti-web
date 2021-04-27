@@ -33,9 +33,9 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
         var disabled = tagsChosen.prop('disabled');
     
         if (disabled) { 
-            $("[name='routing_tag_ids']").prop('disabled', true); 
+            hidden.prop('disabled', true); 
         }else if(!disabled && tagsChosen.val() == ''){
-            $("[name='routing_tag_ids']").prop('disabled', false); 
+            hidden.prop('disabled', false); 
         }
     });
 });
