@@ -37,7 +37,6 @@ $(document).on('chosen:updated', function(event){
     
     var tagChosen = $('select#routing_tag_ids.chosen');
     var disabled = tagChosen.prop('disabled')
-    console.log(disabled);
 
     if (disabled) { 
         $("[name='routing_tag_ids']").prop('disabled', true); 
