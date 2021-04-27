@@ -4,7 +4,7 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
     var tagsChosen = $(form).find("select[name='routing_tag_ids']").prop({
         'name': 'routing_tag_ids[]', 
         'class': 'chosen', 
-        'id': 'routing_tag_ids',
+        'id': 'batch_update_routing_tag_ids',
         'value': '', // reset default value
         'multiple': true
     });
@@ -13,9 +13,9 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
         return;
     }
 
-    var hidden = $('<input>').prop({
+    var hidden = $('<input>', {
         'type': 'hidden',
-        'id': 'routing_tag_ids',
+        'id': 'hidden_routing_tag_ids',
         'name': 'routing_tag_ids',
         'value': '',
         'disabled': true
@@ -23,24 +23,19 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
 
     tagsChosen.chosen({no_results_text: "No results matched", width: '240px', search_contains: true, allow_single_deselect: true});
 
-    tagsChosen.change({hidden: hidden}, function(event){
-        if ($(event.target).val() != ''){
-            event.data.hidden.prop('disabled', true);
-        }else{
-            event.data.hidden.prop('disabled', false);
+    tagsChosen.change(function(){
+        tagsChosen.val() == '' ? hidden.prop('disabled', false) : hidden.prop('disabled', true);
+    });
+
+    $(document).on('chosen:updated', function(event){
+        if ($(event.target).prop('id') != 'batch_update_routing_tag_ids') { return; }
+        
+        var disabled = tagsChosen.prop('disabled');
+    
+        if (disabled) { 
+            $("[name='routing_tag_ids']").prop('disabled', true); 
+        }else if(!disabled && tagsChosen.val() == ''){
+            $("[name='routing_tag_ids']").prop('disabled', false); 
         }
     });
-});
-
-$(document).on('chosen:updated', function(event){
-    if ($(event.target).prop('id') != 'routing_tag_ids') { return; }
-    
-    var tagChosen = $('select#routing_tag_ids.chosen');
-    var disabled = tagChosen.prop('disabled')
-
-    if (disabled) { 
-        $("[name='routing_tag_ids']").prop('disabled', true); 
-    }else if(!disabled && tagChosen.val() == ''){
-        $("[name='routing_tag_ids']").prop('disabled', false); 
-    }
 });
