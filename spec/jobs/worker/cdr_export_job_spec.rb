@@ -16,7 +16,7 @@ RSpec.describe Worker::CdrExportJob, type: :job do
     # valid SQL will be tested in model spec
     export_sql = 'SELECT * FROM cdr.cdr'
     expect_any_instance_of(CdrExport).to receive(:export_sql).and_return(export_sql)
-    expect(cdr_connection).to receive(:execute).with("COPY (#{export_sql}) TO '/tmp/#{cdr_export.id}.csv' WITH (FORMAT CSV, HEADER, FORCE_QUOTE *);")
+    expect(cdr_connection).to receive(:execute).with("COPY (#{export_sql}) TO PROGRAM 'gzip > /tmp/#{cdr_export.id}.csv.gz' WITH (FORMAT CSV, HEADER, FORCE_QUOTE *);")
     subject
   end
 
