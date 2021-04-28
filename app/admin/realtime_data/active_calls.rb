@@ -253,7 +253,9 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     end
   end
 
-  index do
+  index blank_slate_content: lambda {
+                               GuiConfig::FILTER_MISSED_TEXT if GuiConfig.active_calls_require_filter
+                             } do
     selectable_column
     actions do |resource|
       item 'Terminate',
@@ -312,27 +314,5 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     column :legB_remote_port
     column :node, :node_link
     column :pop, :pop_link
-  end
-
-  index as: :list_with_content, default: true, download_links: false, partial: 'shared/active_calls_top_chart',
-        blank_slate_content: lambda {
-          GuiConfig::FILTER_MISSED_TEXT if GuiConfig.active_calls_require_filter
-        } do
-    selectable_column
-    actions do |resource|
-      item 'Terminate',
-           url_for(action: :drop, id: resource.id),
-           method: :post,
-           class: 'member_link delete_link',
-           data: { confirm: I18n.t('active_admin.delete_confirmation') }
-    end
-
-    column :customer, :customer_link
-    column :vendor, :vendor_link
-    column :duration
-    column :dst_number, :dst_prefix_routing
-    column :dst_network, :dst_network_link
-    column :origination_rate, :destination_next_rate
-    column :termination_rate, :dialpeer_next_rate
   end
 end
