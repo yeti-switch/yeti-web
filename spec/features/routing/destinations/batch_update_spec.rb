@@ -168,9 +168,11 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
 
     if assign_params.key? :routing_tag_ids
       check :Routing_tag_ids
-      page.scroll_to find_field('routing_tag_ids[]')
-      assign_params[:routing_tag_ids].each do |tag_id|
-        fill_in_chosen 'routing_tag_ids[]', with: RoutingTag.find(tag_id).name, multiple: true
+      page.scroll_to find_button('OK')
+      if assign_params[:routing_tag_ids].present?
+        assign_params[:routing_tag_ids].each do |tag_id|
+          fill_in_chosen 'routing_tag_ids[]', with: Routing::RoutingTag.find(tag_id).name, multiple: true
+        end
       end
     end
   end
