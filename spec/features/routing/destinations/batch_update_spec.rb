@@ -168,8 +168,10 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
 
     if assign_params.key? :routing_tag_ids
       check :Routing_tag_ids
-      routing_tags.select { |tag| assign_params[:routing_tag_ids].include? tag.id.to_s }
-                  .each { |tag| fill_in_chosen 'routing_tag_ids[]', with: tag.name, multiple: true, visible: false }
+      page.scroll_to find_field('routing_tag_ids[]')
+      assign_params[:routing_tag_ids].each do |tag_id|
+        fill_in_chosen 'routing_tag_ids[]', with RoutingTag.find(tag_id).name, multiple: true
+      end
     end
   end
 
@@ -193,7 +195,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
     end
 
     context 'when routing tag ids field is empty' do
-      let(:assign_params) { { routing_tag_ids: '' } }
+      let(:assign_params) { { routing_tag_ids: [] } }
 
       it 'should have success message' do
         expect do
