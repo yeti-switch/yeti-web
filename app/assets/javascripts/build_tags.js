@@ -8,6 +8,7 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
         'value': '', // reset default value
         'multiple': true
     });
+    var tagsCheckbox = $('#mass_update_dialog_routing_tag_ids');
 
     if (tagsChosen.length === 0) {
         return;
@@ -23,19 +24,15 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
 
     tagsChosen.chosen({no_results_text: "No results matched", width: '240px', search_contains: true, allow_single_deselect: true});
 
-    tagsChosen.change(function(){
-        tagsChosen.val() == '' ? hidden.prop('disabled', false) : hidden.prop('disabled', true);
+    tagsChosen.change(function() {
+        tagsChosen.val().length === 0 ? hidden.prop('disabled', false) : hidden.prop('disabled', true);
     });
 
-    $(document).on('chosen:updated', function(event){
-        if ($(event.target).prop('id') != 'batch_update_routing_tag_ids') { return; }
-        
-        var disabled = tagsChosen.prop('disabled');
-    
-        if (disabled) { 
-            hidden.prop('disabled', true); 
-        }else if(!disabled && tagsChosen.val() == ''){
-            hidden.prop('disabled', false); 
+    tagsCheckbox.change(function () {
+        if (tagsCheckbox.is(':checked') && tagsChosen.val().length === 0) {
+            hidden.prop('disabled', false);
+        } else {
+            hidden.prop('disabled', true);
         }
     });
 });
