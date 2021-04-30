@@ -8,6 +8,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
   let!(:rate_policy) { Routing::DestinationRatePolicy.take! }
   let!(:profit_control_mode) { Routing::RateProfitControlMode.take! || FactoryBot.create(:rate_profit_control_mode) }
+  let!(:routing_tags) { create_list(:routing_tag, 5) }
 
   before do
     visit destinations_path
@@ -44,7 +45,8 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       dp_margin_percent: '2',
       asr_limit: '0.9',
       acd_limit: '1',
-      short_calls_limit: '4'
+      short_calls_limit: '4',
+      routing_tag_ids: routing_tags.map { |tag| tag.id.to_s }
     }
   end
 
@@ -163,6 +165,16 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       check :Short_calls_limit
       fill_in :short_calls_limit, with: assign_params[:short_calls_limit]
     end
+
+    if assign_params.key? :routing_tag_ids
+      check :Routing_tag_ids
+      page.scroll_to find_button('OK')
+      if assign_params[:routing_tag_ids].present?
+        assign_params[:routing_tag_ids].each do |tag_id|
+          fill_in_chosen 'routing_tag_ids[]', with: Routing::RoutingTag.find(tag_id).name, multiple: true
+        end
+      end
+    end
   end
 
   context 'should check validates' do
@@ -176,6 +188,17 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
     end
 
     context 'when all fields filled with valid values' do
+      it 'should have success message' do
+        expect do
+          subject
+          expect(page).to have_selector '.flash', text: success_message
+        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::Destination', be_present, assign_params, be_present
+      end
+    end
+
+    context 'when routing tag ids field is empty' do
+      let(:assign_params) { { routing_tag_ids: '' } }
+
       it 'should have success message' do
         expect do
           subject

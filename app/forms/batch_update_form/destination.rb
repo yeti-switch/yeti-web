@@ -25,6 +25,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :asr_limit
   attribute :acd_limit
   attribute :short_calls_limit
+  attribute :routing_tag_ids, type: :foreign_key, class_name: 'Routing::RoutingTag'
 
   # presence validations
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?

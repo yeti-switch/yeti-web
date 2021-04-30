@@ -40,6 +40,8 @@
 //= require import_apply_unique_fields
 //= require ajax-chosen
 //= require credential_generator
+//= require vendor/jquery.serialize-object.min.js
+//= require build_tags
 
 
 $(document).ready(function () {
