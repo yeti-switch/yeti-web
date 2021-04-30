@@ -197,7 +197,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
     end
 
     context 'when routing tag ids field is empty' do
-      let(:assign_params) { { routing_tag_ids: [] } }
+      let(:assign_params) { { routing_tag_ids: '' } }
 
       it 'should have success message' do
         expect do
