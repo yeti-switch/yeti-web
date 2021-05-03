@@ -138,11 +138,15 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :rtt
   filter :p_charge_info_in, as: :string_eq
   filter :uuid_equals, label: 'UUID'
-  filter :auth_orig_ip, as: :string
+  filter :auth_orig_ip_covers,
+         as: :string,
+         input_html: { class: 'search_filter_string' },
+         label: I18n.t('activerecord.attributes.cdr.auth_orig_ip')
   filter :sign_orig_ip
   filter :sign_orig_local_ip
   filter :sign_term_local_ip
   filter :sign_term_ip
+
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
 

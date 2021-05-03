@@ -235,6 +235,15 @@ class Cdr::Cdr < Cdr::Base
     where('success = ?', success) if [true, false].include? success
   }
 
+  scope :auth_orig_ip_covers, lambda { |ip|
+    begin
+      IPAddr.new(ip)
+    rescue StandardError
+      return none
+    end
+    where('auth_orign_ip>>=?::inet', ip)
+  }
+
   #### end override filters ##############
 
   def status_sym
@@ -345,6 +354,7 @@ class Cdr::Cdr < Cdr::Base
       routing_tag_ids_include
       routing_tag_ids_array_contains
       tagged
+      auth_orig_ip_covers
     ]
   end
 end
