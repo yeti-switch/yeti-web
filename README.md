@@ -37,14 +37,13 @@ Fork and clone yeti-web repository and run:
 bundle install
 ```
 
-Then create `config/database.yml`, example is `database.yml.example`. Notice this project uses two databases main "yeti" and second database "cdr"
+Then create `config/database.yml`, example is `config/database.yml.development`. Notice this project uses two databases main "yeti" and second database "cdr"
 
-Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.distr`.
+Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.development`.
 
 To disable the creation of new versions via paper_trail for some model please fill the array under key `versioning_disable_for_models` in the `config/yeti_web.yml`
 
-Сreate `config/policy_roles.yml`, example is `config/policy_roles.yml.distr`,
-or disable policy feature by changing following lines in `config/yeti_web.yml`:
+Сreate `config/policy_roles.yml`, example is `config/policy_roles.yml.distr` or disable policy feature by changing following lines in `config/yeti_web.yml`:
 
 ```yaml
 role_policy:

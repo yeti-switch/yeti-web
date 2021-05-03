@@ -1,0 +1,34 @@
+site_title: "Yeti Admin"
+site_title_image: "yeti.png"
+api:
+  token_lifetime: 600 # jwt token lifetime in seconds, empty string means permanent tokens
+cdr_export:
+  dir_path: "/tmp"
+  delete_url: http://localhost/cdrs_export/
+
+role_policy:
+  when_no_config: disallow # allow, disallow, raise
+  when_no_policy_class: raise # allow, disallow, raise
+
+partition_remove_delay:
+  cdr.cdr: 120
+  auth_log.auth_log: 7
+  rtp_statistics.streams: 3
+  logs.api_requests: 90
+
+prometheus:
+  enabled: false
+  host: localhost
+  port: 9394
+  default_labels:
+    host: my-host
+
+sentry:
+  enabled: true
+  dsn: "PUT_YOUR_DSN_HERE"
+  node_name: "local"
+  environment: "prod"
+
+versioning_disable_for_models:
+  - ClassName::ClassName
+  - ClassName
