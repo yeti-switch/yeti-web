@@ -20,9 +20,10 @@ app_files :=	bin \
 		pgq-processors \
 		$(version_file)
 
-exclude_files := config/database.yml \
-		*.o \
-		*.a
+exclude_files :=	config/database.yml \
+			config/yeti_web.yml \
+			*.o \
+			*.a
 
 version = $(shell dpkg-parsechangelog --help | grep -q '\--show-field' \
 	&& dpkg-parsechangelog --show-field version \

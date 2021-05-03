@@ -35,10 +35,6 @@ case "$1" in
 			cp -p /opt/yeti-web/config/pgq_processors.yml.distr /opt/yeti-web/config/pgq_processors.yml
 		fi
 
-                if [ ! -f /opt/yeti-web/config/yeti_web.yml ]; then
-                        cp -p /opt/yeti-web/config/yeti_web.yml.distr /opt/yeti-web/config/yeti_web.yml
-                fi
-		
 		#remove old init scripts
 		rm -f /etc/init.d/yeti-cdr-billing /etc/init.d/yeti-web /etc/init.d/yeti-delayed-job || true
 
