@@ -173,7 +173,7 @@ class CustomersAuth < Yeti::ActiveRecord
     rescue StandardError
       return none
     end
-    #customers_auth IP subnet contain or equal subnet from filter
+    # customers_auth IP subnet contain or equal subnet from filter
     where(
       "#{table_name}.id IN (
         SELECT customers_auth_id FROM #{CustomersAuthNormalized.table_name} WHERE ip>>=?::inet

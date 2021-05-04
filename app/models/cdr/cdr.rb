@@ -241,7 +241,7 @@ class Cdr::Cdr < Cdr::Base
     rescue StandardError
       return none
     end
-    #auth_orig_ip contained by or equal to IP from filter
+    # auth_orig_ip contained by or equal to IP from filter
     where('auth_orig_ip<<=?::inet', ip)
   }
 

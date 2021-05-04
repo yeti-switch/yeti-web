@@ -147,7 +147,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :sign_term_local_ip
   filter :sign_term_ip
 
-
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
 
   # X-Accel-Redirect: /protected/iso.img;
