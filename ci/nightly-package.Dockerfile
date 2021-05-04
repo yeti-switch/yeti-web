@@ -24,10 +24,9 @@ RUN	apt update && \
 COPY	*.deb /
 RUN	ls -la /
 
-RUN	dpkg -i /*.deb
-RUN	apt install -f -y --no-install-recommends
+RUN	dpkg -i /*.deb || apt install -f -y --no-install-recommends
 
-RUN     ln -s /opt/yeti-web/_config/database.yml /opt/yeti-web/config/database.yml
+#RUN     ln -s /opt/yeti-web/_config/database.yml /opt/yeti-web/config/database.yml
 
 EXPOSE 3000/tcp
 
