@@ -20,4 +20,4 @@ Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
 RuntimeDirectory=yeti-prometheus
 ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec /opt/yeti-web/bin/prometheus_exporter -a /opt/yeti-web/lib/prometheus_collectors.rb
 Type=simple
-Restart=on-abnormal
+Restart=always
