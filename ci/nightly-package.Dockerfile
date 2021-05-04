@@ -21,7 +21,8 @@ RUN	apt update && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list && \
 	apt update 
 
-COPY	../*.deb /
+COPY	*.deb /
+RUN	ls -la /
 
 RUN	dpkg -i /*.deb
 RUN	apt install -f -y --no-install-recommends
