@@ -24,8 +24,36 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
+
+      - name: Save deb package as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb-package
+          path: ../*.deb
+
       - name: Upload package to ${{github.ref}} repo
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
         run: ci/deploy.sh buster nightly main ../*.deb
+
+  deb10_container:
+    name: Debian 10 container
+    needs: deb10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: deb-package
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: my-docker-hub-namespace/my-docker-hub-repository
+          tag_with_ref: true
 
