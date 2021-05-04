@@ -173,10 +173,11 @@ class CustomersAuth < Yeti::ActiveRecord
     rescue StandardError
       return none
     end
+    # customers_auth IP subnet contain or equal subnet from filter
     where(
       "#{table_name}.id IN (
-        SELECT customers_auth_id FROM #{CustomersAuthNormalized.table_name} WHERE ip>>='#{ip}'::inet
-      )"
+        SELECT customers_auth_id FROM #{CustomersAuthNormalized.table_name} WHERE ip>>=?::inet
+      )", ip
     )
   }
   scope :src_prefix_array_contains, ->(src) { where.contains src_prefix: Array(src) }
