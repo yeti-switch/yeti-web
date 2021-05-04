@@ -25,11 +25,14 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
+      - name: Display structure
+        run: ls -R /__w
+
       - name: Save deb package as artifact
         uses: actions/upload-artifact@v2
         with:
           name: deb-package
-          path: ../*.deb
+          path: /__w/yeti-web/*.deb
 
       - name: Upload package to ${{github.ref}} repo
         env:
