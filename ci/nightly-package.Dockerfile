@@ -21,8 +21,10 @@ RUN	apt update && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list && \
 	apt update 
 
-COPY	/home/runner/work/yeti-web/yeti-web/*.deb /
-RUN	apt install -y --no-install-recommends /*.deb
+COPY	../*.deb /
+
+RUN	dpkg -i /*.deb
+RUN	apt install -f -y --no-install-recommends
 
 RUN     ln -s /opt/yeti-web/_config/database.yml /opt/yeti-web/config/database.yml
 
