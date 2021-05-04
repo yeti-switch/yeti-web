@@ -21,4 +21,4 @@ RuntimeDirectory=yeti
 ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec puma -C /opt/yeti-web/config/puma_production.rb --daemon --pidfile /run/yeti/yeti-web-puma.pid /opt/yeti-web/config.ru
 PIDFile=/run/yeti/yeti-web-puma.pid
 Type=forking
-Restart=on-abnormal
+Restart=always

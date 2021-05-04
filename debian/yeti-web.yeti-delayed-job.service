@@ -21,4 +21,4 @@ Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
 RuntimeDirectory=yeti-delayed-job
 ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec /opt/yeti-web/bin/delayed_job start -n 4 --pid-dir=/run/yeti-delayed-job
 Type=forking
-Restart=on-abnormal
+Restart=always
