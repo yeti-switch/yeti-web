@@ -19,7 +19,8 @@ RUN	apt update && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
 	echo "deb http://pkg.yeti-switch.org/debian/buster 1.11 main"	>> /etc/apt/sources.list && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list && \
-	apt update 
+	apt update && \
+	apt install procps
 
 COPY	*.deb /
 RUN	ls -la /
