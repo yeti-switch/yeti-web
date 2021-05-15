@@ -20,7 +20,7 @@ RUN	apt update && \
 	echo "deb http://pkg.yeti-switch.org/debian/buster 1.11 main"	>> /etc/apt/sources.list && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list && \
 	apt update && \
-	apt install procps
+	apt install -f -y --no-install-recommends procps 
 
 COPY	*.deb /
 RUN	ls -la /
