@@ -57,9 +57,12 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
         'src_prefix_out_contains' => 'src_prefix_out_test',
         'dst_prefix_in_contains' => 'dst_prefix_in_test',
         'dst_prefix_routing_contains' => 'dst_prefix_routing_test',
-        'dst_prefix_out_contains' => 'dst_prefix_out_test'
+        'dst_prefix_out_contains' => 'dst_prefix_out_test',
+        'src_country_iso_eq' => country.iso2,
+        'dst_country_iso_eq' => country.iso2
       }
     end
+    let(:country) { create(:country) }
 
     it 'http status should eq 201' do
       subject
@@ -136,6 +139,27 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
         expect(JSON.parse(response.body)['errors']).to match_array(
           hash_including(
             'detail' => 'fields - unknown_field not allowed'
+          )
+        )
+      end
+    end
+
+    context 'with invalid iso country code' do
+      let(:filters) do
+        {
+          'time_start_gteq' => '2018-01-01',
+          'time_start_lteq' => '2018-03-01',
+          'dst_country_iso_eq' => 'invalid',
+          'src_country_iso_eq' => 'invalid'
+        }
+      end
+
+      it 'validation error should be present' do
+        subject
+        expect(response.status).to eq(422)
+        expect(JSON.parse(response.body)['errors']).to match_array(
+          hash_including(
+            'detail' => 'filters - invalid iso code for dst_country_iso_eq'
           )
         )
       end

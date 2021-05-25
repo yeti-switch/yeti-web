@@ -136,15 +136,22 @@ RSpec.describe CdrExport, type: :model do
           time_start_lteq: '2018-03-01',
           src_prefix_in_contains: '111111',
           src_prefix_routing_contains: '123123',
-          dst_prefix_out_contains: '333221'
+          dst_prefix_out_contains: '333221',
+          src_country_iso_eq: country.iso2,
+          dst_country_iso_eq: country.iso2
         }
       end
+      let(:country) { create(:country) }
 
       it 'SQL should be valid' do
         sql = [
           'SELECT success AS "Success", cdr.cdr.id AS "ID"',
           'FROM "cdr"."cdr"',
           'WHERE',
+          "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+          'AND',
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',
           "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",

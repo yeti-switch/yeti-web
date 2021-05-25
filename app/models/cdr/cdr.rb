@@ -203,6 +203,20 @@ class Cdr::Cdr < Cdr::Base
   scope :routing_tag_ids_include, lambda { |id|
     where('? = ANY(routing_tag_ids)', id)
   }
+  scope :src_country_iso_eq, lambda { |iso2|
+    if (country = System::Country.find_by(iso2: iso2))
+      where(src_country_id: country.id)
+    else
+      none
+    end
+  }
+  scope :dst_country_iso_eq, lambda { |iso2|
+    if (country = System::Country.find_by(iso2: iso2))
+      where(dst_country_id: country.id)
+    else
+      none
+    end
+  }
 
   ##### metasearch override filters ##########
 
@@ -353,6 +367,8 @@ class Cdr::Cdr < Cdr::Base
       status_eq
       account_id_eq
       routing_tag_ids_include
+      src_country_iso_eq
+      dst_country_iso_eq
       routing_tag_ids_array_contains
       tagged
       auth_orig_ip_covers
