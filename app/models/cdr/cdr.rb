@@ -203,6 +203,16 @@ class Cdr::Cdr < Cdr::Base
   scope :routing_tag_ids_include, lambda { |id|
     where('? = ANY(routing_tag_ids)', id)
   }
+  scope :routing_tag_ids_exclude, lambda { |id|
+    where.not('? = ANY(routing_tag_ids)', id)
+  }
+  scope :routing_tag_ids_empty, lambda { |flag = true| # it doesn't work now. Problem with sending boolean argument for ransackable scopes
+    if ActiveModel::Type::Boolean.new.cast(flag)
+      where('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
+    else
+      where.not('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
+    end
+  }
   scope :src_country_iso_eq, lambda { |iso2|
     if (country = System::Country.find_by(iso2: iso2))
       where(src_country_id: country.id)
@@ -367,6 +377,8 @@ class Cdr::Cdr < Cdr::Base
       status_eq
       account_id_eq
       routing_tag_ids_include
+      routing_tag_ids_exclude
+      routing_tag_ids_empty
       src_country_iso_eq
       dst_country_iso_eq
       routing_tag_ids_array_contains

@@ -59,7 +59,10 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
         'dst_prefix_routing_contains' => 'dst_prefix_routing_test',
         'dst_prefix_out_contains' => 'dst_prefix_out_test',
         'src_country_iso_eq' => country.iso2,
-        'dst_country_iso_eq' => country.iso2
+        'dst_country_iso_eq' => country.iso2,
+        'routing_tag_ids_include' => 1,
+        'routing_tag_ids_exclude' => 2,
+        'routing_tag_ids_empty' => false
       }
     end
     let(:country) { create(:country) }
@@ -144,13 +147,12 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
       end
     end
 
-    context 'with invalid iso country code' do
+    context 'with invalid dst iso country code' do
       let(:filters) do
         {
           'time_start_gteq' => '2018-01-01',
           'time_start_lteq' => '2018-03-01',
-          'dst_country_iso_eq' => 'invalid',
-          'src_country_iso_eq' => 'invalid'
+          'dst_country_iso_eq' => 'invalid'
         }
       end
 
@@ -162,6 +164,26 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
             'detail' => 'filters - invalid iso code for dst_country_iso_eq'
           )
         )
+      end
+    end
+
+    context 'with invalid src iso country code' do
+      let(:filters) do
+        {
+          'time_start_gteq' => '2018-01-01',
+          'time_start_lteq' => '2018-03-01',
+          'src_country_iso_eq' => 'invalid'
+        }
+      end
+
+      it 'validation error should be present' do
+        subject
+        expect(response.status).to eq(422)
+        expect(JSON.parse(response.body)['errors']).to match_array(
+                                                         hash_including(
+                                                           'detail' => 'filters - invalid iso code for src_country_iso_eq'
+                                                         )
+                                                       )
       end
     end
   end

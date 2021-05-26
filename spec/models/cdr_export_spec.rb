@@ -138,7 +138,9 @@ RSpec.describe CdrExport, type: :model do
           src_prefix_routing_contains: '123123',
           dst_prefix_out_contains: '333221',
           src_country_iso_eq: country.iso2,
-          dst_country_iso_eq: country.iso2
+          dst_country_iso_eq: country.iso2,
+          routing_tag_ids_include: 1,
+          routing_tag_ids_exclude: 2
         }
       end
       let(:country) { create(:country) }
@@ -151,6 +153,10 @@ RSpec.describe CdrExport, type: :model do
           "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
           'AND',
           "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+          'AND',
+          '(1 = ANY(routing_tag_ids))',
+          'AND',
+          'NOT (2 = ANY(routing_tag_ids))',
           'AND',
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',

@@ -36,6 +36,9 @@ class CdrExport < Yeti::ActiveRecord
     attribute :customer_acc_external_id_eq, :integer
     attribute :src_country_iso_eq, :string
     attribute :dst_country_iso_eq, :string
+    attribute :routing_tag_ids_include, :integer
+    attribute :routing_tag_ids_exclude, :integer
+    attribute :routing_tag_ids_empty, :boolean
 
     private
 
