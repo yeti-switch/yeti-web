@@ -4,7 +4,6 @@ workers 2
 threads 2, 8
 
 directory '/opt/yeti-web'
-daemonize
 
 bind 'unix:///run/yeti/yeti-unicorn.sock'
 

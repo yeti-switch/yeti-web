@@ -10,11 +10,6 @@ port ENV.fetch('PORT') { 3000 }
 
 environment ENV.fetch('RAILS_ENV') { 'development' }
 
-# directory '/opt/yeti-web'
-# daemonize
-
-# bind '/run/yeti/yeti-unicorn.sock'
-
 worker_timeout 1200
 
 # pidfile '/run/yeti/yeti-web-puma.pid'
