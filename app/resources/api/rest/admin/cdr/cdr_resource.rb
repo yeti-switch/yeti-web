@@ -213,31 +213,33 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.where(is_last_cdr: values[0])
   }
 
-  filter :dst_country_iso_equals, apply: lambda { |records, values, _options|
-    if (country = System::Country.find_by(iso2: values[0]))
+  filter :dst_country_iso_eq, apply: lambda { |records, values, _options|
+    country = System::Country.find_by(iso2: values[0])
+    if country
       records.where(dst_country_id: country.id)
     else
-      raise JSONAPI::Exceptions::InvalidFilterValue.new(:dst_country_iso_equals, values[0])
+      raise JSONAPI::Exceptions::InvalidFilterValue.new(:dst_country_iso_eq, values[0])
     end
   }
 
-  filter :src_country_iso_equals, apply: lambda { |records, values, _options|
-    if (country = System::Country.find_by(iso2: values[0]))
+  filter :src_country_iso_eq, apply: lambda { |records, values, _options|
+    country = System::Country.find_by(iso2: values[0])
+    if country
       records.where(src_country_id: country.id)
     else
-      raise JSONAPI::Exceptions::InvalidFilterValue.new(:scr_country_iso_equals, values[0])
+      raise JSONAPI::Exceptions::InvalidFilterValue.new(:scr_country_iso_eq, values[0])
     end
   }
 
-  filter :routing_tag_ids_includes, apply: lambda { |records, values, _options|
+  filter :routing_tag_ids_include, apply: lambda { |records, values, _options|
     records.where('? = ANY(routing_tag_ids)', values[0])
   }
 
-  filter :routing_tag_ids_excludes, apply: lambda { |records, values, _options|
+  filter :routing_tag_ids_exclude, apply: lambda { |records, values, _options|
     records.where.not('? = ANY(routing_tag_ids)', values[0])
   }
 
-  filter :routing_tag_ids_blank, apply: lambda { |records, values, _options|
+  filter :routing_tag_ids_empty, apply: lambda { |records, values, _options|
     if ActiveModel::Type::Boolean.new.cast(values[0])
       records.where('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
     else

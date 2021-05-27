@@ -250,10 +250,10 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by dst_country_iso_equals' do
+      context 'by dst_country_iso_eq' do
         context 'when valid iso2 country code' do
           let(:filters) do
-            { 'dst-country-iso-equals' => country.iso2 }
+            { 'dst-country-iso-eq' => country.iso2 }
           end
           let!(:cdr) do
             create :cdr, :with_id, dst_country_id: country.id
@@ -267,7 +267,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
         context 'when invalid iso2 country code' do
           let(:filters) do
-            { 'dst-country-iso-equals' => 'invalid iso code' }
+            { 'dst-country-iso-eq' => 'invalid iso code' }
           end
 
           it 'should be raise InvalidFilterValue and return 400' do
@@ -275,7 +275,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             expect(response_body[:errors].first).to include(
                                                       {
                                                         title: 'Invalid filter value',
-                                                        detail: 'invalid iso code is not a valid value for dst_country_iso_equals.',
+                                                        detail: 'invalid iso code is not a valid value for dst_country_iso_eq.',
                                                         status: '400'
                                                       }
                                                     )
@@ -285,10 +285,10 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by src_country_iso_equals' do
+      context 'by src_country_iso_eq' do
         context 'when invalid iso2 country code' do
           let(:filters) do
-            { 'src-country-iso-equals' => 'invalid iso code' }
+            { 'src-country-iso-eq' => 'invalid iso code' }
           end
 
           it 'should be raise InvalidFilterValue and return 400' do
@@ -296,7 +296,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             expect(response_body[:errors].first).to include(
                                             {
                                               title: 'Invalid filter value',
-                                              detail: 'invalid iso code is not a valid value for scr_country_iso_equals.',
+                                              detail: 'invalid iso code is not a valid value for scr_country_iso_eq.',
                                               status: '400'
                                             }
                                           )
@@ -307,7 +307,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
 
         context 'when valid iso2 country code' do
           let(:filters) do
-            { 'src-country-iso-equals' => country.iso2 }
+            { 'src-country-iso-eq' => country.iso2 }
           end
           let!(:cdr) do
             create :cdr, :with_id, src_country_id: country.id
@@ -320,8 +320,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by routing_tag_ids_includes' do
-        let(:filters) { { 'routing-tag-ids-includes' => routing_tag_ids.first } }
+      context 'by routing_tag_ids_include' do
+        let(:filters) { { 'routing-tag-ids-include' => routing_tag_ids.first } }
         let!(:cdr) { create :cdr, :with_id, routing_tag_ids: routing_tag_ids }
         let!(:another_cdr) { create(:cdr, routing_tag_ids: [another_routing_id]) }
         let(:routing_tag_ids) { create_list(:routing_tag, 5).map(&:id) }
@@ -334,8 +334,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by routing_tag_ids_excludes' do
-        let(:filters) { { 'routing-tag-ids-excludes' => another_routing_id } }
+      context 'by routing_tag_ids_exclude' do
+        let(:filters) { { 'routing-tag-ids-exclude' => another_routing_id } }
         let!(:cdr) { create :cdr, :with_id, routing_tag_ids: routing_tag_ids }
         let(:routing_tag_ids) { create_list(:routing_tag, 5).map(&:id) }
         let(:another_routing_id) { create(:routing_tag).id }
@@ -347,14 +347,14 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
-      context 'by routing_tag_ids_blank' do
+      context 'by routing_tag_ids_empty' do
         let!(:cdrs) {}
         let!(:cdr) { create :cdr, :with_id, routing_tag_ids: {} }
         let!(:another_cdr) { create(:cdr, routing_tag_ids: [another_routing_id]) }
         let(:another_routing_id) { create(:routing_tag).id }
 
         context 'with true value' do
-          let(:filters) { { 'routing-tag-ids-blank' => true } }
+          let(:filters) { { 'routing-tag-ids-empty' => true } }
 
           it 'only desired cdrs should be present' do
             subject
@@ -364,7 +364,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
 
         context 'with false value' do
-          let(:filters) { { 'routing-tag-ids-blank' => false } }
+          let(:filters) { { 'routing-tag-ids-empty' => false } }
 
           it 'only desired cdrs should be present' do
             subject
