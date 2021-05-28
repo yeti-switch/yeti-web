@@ -149,6 +149,10 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
 
       ff.input :routing_tag_ids_include, required: false
       ff.input :routing_tag_ids_exclude, required: false
+      ff.input :routing_tag_ids_empty,
+               as: :select,
+               collection: [['Any', nil], ['Yes', true], ['No', false]],
+               input_html: { class: 'chosen' }
     end
     f.actions
   end

@@ -214,14 +214,16 @@ class Cdr::Cdr < Cdr::Base
     end
   }
   scope :src_country_iso_eq, lambda { |iso2|
-    if (country = System::Country.find_by(iso2: iso2))
+    country = System::Country.find_by(iso2: iso2)
+    if country
       where(src_country_id: country.id)
     else
       none
     end
   }
   scope :dst_country_iso_eq, lambda { |iso2|
-    if (country = System::Country.find_by(iso2: iso2))
+    country = System::Country.find_by(iso2: iso2)
+    if country
       where(dst_country_id: country.id)
     else
       none

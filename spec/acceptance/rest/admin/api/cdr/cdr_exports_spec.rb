@@ -10,6 +10,7 @@ RSpec.resource 'Cdr Exports' do
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'cdr-exports' }
+  let(:country) { create(:country) }
 
   required_params = %i[fields filters]
 
@@ -37,10 +38,11 @@ RSpec.resource 'Cdr Exports' do
         src_prefix_out_contains: '5555',
         dst_prefix_out_contains: '6666',
         customer_acc_external_id_eq: 241_251,
-        src_country_iso_eq: 'US',
-        dst_country_iso_eq: 'UA',
+        src_country_iso_eq: country.iso2,
+        dst_country_iso_eq: country.iso2,
         routing_tag_ids_include: 2,
-        routing_tag_ids_exclude: 5
+        routing_tag_ids_exclude: 5,
+        routing_tag_ids_empty: false
       }
     end
     let(:'callback-url') { 'test.url.com' }

@@ -106,7 +106,9 @@ class CdrExport < Yeti::ActiveRecord
   def export_sql
     s = Cdr::Cdr.select(select_sql)
     s = s.order('time_start desc')
-    s = s.ransack(filters.as_json).result
+    filters = self.filters.as_json
+    filters['routing_tag_ids_empty'] = filters['routing_tag_ids_empty'].to_s
+    s = s.ransack(filters).result
     if fields.include?('src_country_name')
       s = s.joins('LEFT JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id')
     end

@@ -111,6 +111,7 @@ RSpec.describe 'Create new CDR export', js: true do
       fill_in 'Dst country iso eq', with: country.iso2
       fill_in 'Routing tag ids include', with: 2
       fill_in 'Routing tag ids exclude', with: 25
+      fill_in_chosen 'Routing tag ids empty', with: 'Any'
     end
 
     let(:country) { create(:country) }
@@ -139,7 +140,8 @@ RSpec.describe 'Create new CDR export', js: true do
           'src_country_iso_eq' => country.iso2,
           'dst_country_iso_eq' => country.iso2,
           'routing_tag_ids_include' => 2,
-          'routing_tag_ids_exclude' => 25
+          'routing_tag_ids_exclude' => 25,
+          'routing_tag_ids_empty' => nil
         )
       )
     end

@@ -171,6 +171,72 @@ RSpec.describe CdrExport, type: :model do
         ]
         expect(subject).to eq(sql.join(' '))
       end
+
+      context 'with routing_tag_ids_empty false' do
+        let(:filters) { super().merge({ routing_tag_ids_empty: false }) }
+
+        it 'SQL should be valid' do
+          sql = [
+            'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+            'FROM "cdr"."cdr"',
+            'WHERE',
+            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+            'AND',
+            '(1 = ANY(routing_tag_ids))',
+            'AND',
+            'NOT (2 = ANY(routing_tag_ids))',
+            'AND NOT',
+            '(routing_tag_ids IS NULL OR routing_tag_ids = \'{}\')',
+            'AND',
+            "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_in\" ILIKE '%111111%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+            'ORDER BY time_start desc'
+          ]
+          expect(subject).to eq(sql.join(' '))
+        end
+      end
+
+      context 'with routing_tag_ids_empty true' do
+        let(:filters) { super().merge({ routing_tag_ids_empty: true }) }
+
+        it 'SQL should be valid' do
+          sql = [
+            'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+            'FROM "cdr"."cdr"',
+            'WHERE',
+            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+            'AND',
+            '(1 = ANY(routing_tag_ids))',
+            'AND',
+            'NOT (2 = ANY(routing_tag_ids))',
+            'AND',
+            '(routing_tag_ids IS NULL OR routing_tag_ids = \'{}\')',
+            'AND',
+            "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_in\" ILIKE '%111111%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+            'ORDER BY time_start desc'
+          ]
+          expect(subject).to eq(sql.join(' '))
+        end
+      end
     end
   end
 end
