@@ -1,7 +1,7 @@
 #!/bin/bash
 
 user=yeti-web
-services="yeti-web.service yeti-delayed-job.service yeti-prometheus.service yeti-libreoffice-headless.service"
+services="yeti-web.service yeti-scheduler.service yeti-delayed-job.service yeti-prometheus.service yeti-libreoffice-headless.service"
 
 case "$1" in 
 	configure)
@@ -24,6 +24,7 @@ case "$1" in
 		fi
 
         	rm -f /lib/systemd/system/yeti-cdr-billing.service || true
+        	rm -f /etc/cron.d/yeti-web || true
 
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
