@@ -250,6 +250,35 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         end
       end
 
+      context 'by dst_country_id_eq' do
+        let(:filters) do
+          { 'dst-country-id-eq' => country.id }
+        end
+        let!(:cdr) do
+          create :cdr, :with_id, dst_country_id: country.id
+        end
+        let(:country) { create(:country) }
+        it 'only desired cdrs should be present' do
+          subject
+          expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))
+        end
+      end
+
+      context 'by src_country_id_eq' do
+        let(:filters) do
+          { 'src-country-id-eq' => country.id }
+        end
+        let!(:cdr) do
+          create :cdr, :with_id, src_country_id: country.id
+        end
+        let(:country) { create(:country) }
+
+        it 'only desired cdrs should be present' do
+          subject
+          expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))
+        end
+      end
+
       context 'by dst_country_iso_eq' do
         context 'when valid iso2 country code' do
           let(:filters) do

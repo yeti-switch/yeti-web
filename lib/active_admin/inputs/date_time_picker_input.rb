@@ -6,9 +6,9 @@ module ActiveAdmin
       val = object.public_send(input_name || method)
       if val.blank?
         val
-      elsif column&.type == :date # column == NilClass object on rising validation errors from other (no datetime) fields
+      elsif column.type == :date
         val
-      elsif column&.type == :string
+      elsif column.type == :string
         begin
           DateTime.parse(val).strftime(format)
         rescue StandardError

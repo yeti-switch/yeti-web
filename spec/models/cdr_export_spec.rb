@@ -137,8 +137,8 @@ RSpec.describe CdrExport, type: :model do
           src_prefix_in_contains: '111111',
           src_prefix_routing_contains: '123123',
           dst_prefix_out_contains: '333221',
-          src_country_iso_eq: country.iso2,
-          dst_country_iso_eq: country.iso2,
+          src_country_id_eq: country.id,
+          dst_country_id_eq: country.id,
           routing_tag_ids_include: 1,
           routing_tag_ids_exclude: 2
         }
@@ -150,10 +150,6 @@ RSpec.describe CdrExport, type: :model do
           'SELECT success AS "Success", cdr.cdr.id AS "ID"',
           'FROM "cdr"."cdr"',
           'WHERE',
-          "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
-          'AND',
-          "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
-          'AND',
           '(1 = ANY(routing_tag_ids))',
           'AND',
           'NOT (2 = ANY(routing_tag_ids))',
@@ -166,7 +162,11 @@ RSpec.describe CdrExport, type: :model do
           'AND',
           "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
           'AND',
-          "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+          "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
           'ORDER BY time_start desc'
         ]
         expect(subject).to eq(sql.join(' '))
@@ -180,10 +180,6 @@ RSpec.describe CdrExport, type: :model do
             'SELECT success AS "Success", cdr.cdr.id AS "ID"',
             'FROM "cdr"."cdr"',
             'WHERE',
-            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
-            'AND',
-            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
-            'AND',
             '(1 = ANY(routing_tag_ids))',
             'AND',
             'NOT (2 = ANY(routing_tag_ids))',
@@ -198,7 +194,11 @@ RSpec.describe CdrExport, type: :model do
             'AND',
             "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
             'AND',
-            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
             'ORDER BY time_start desc'
           ]
           expect(subject).to eq(sql.join(' '))
@@ -213,10 +213,6 @@ RSpec.describe CdrExport, type: :model do
             'SELECT success AS "Success", cdr.cdr.id AS "ID"',
             'FROM "cdr"."cdr"',
             'WHERE',
-            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
-            'AND',
-            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
-            'AND',
             '(1 = ANY(routing_tag_ids))',
             'AND',
             'NOT (2 = ANY(routing_tag_ids))',
@@ -231,7 +227,11 @@ RSpec.describe CdrExport, type: :model do
             'AND',
             "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
             'AND',
-            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
             'ORDER BY time_start desc'
           ]
           expect(subject).to eq(sql.join(' '))

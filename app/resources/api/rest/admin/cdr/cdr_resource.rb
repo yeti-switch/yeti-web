@@ -232,19 +232,15 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   }
 
   filter :routing_tag_ids_include, apply: lambda { |records, values, _options|
-    records.where('? = ANY(routing_tag_ids)', values[0])
+    records.routing_tag_ids_include(values[0])
   }
 
   filter :routing_tag_ids_exclude, apply: lambda { |records, values, _options|
-    records.where.not('? = ANY(routing_tag_ids)', values[0])
+    records.routing_tag_ids_exclude(values[0])
   }
 
   filter :routing_tag_ids_empty, apply: lambda { |records, values, _options|
-    if ActiveModel::Type::Boolean.new.cast(values[0])
-      records.where('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
-    else
-      records.where.not('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
-    end
+    records.routing_tag_ids_empty(values[0])
   }
 
   ransack_filter :time_start, type: :datetime

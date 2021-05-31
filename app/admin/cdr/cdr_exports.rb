@@ -107,10 +107,11 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                             dst_prefix_in_contains
                             dst_prefix_routing_contains
                             dst_prefix_out_contains
-                            src_country_iso_eq
-                            dst_country_iso_eq
+                            src_country_id_eq
+                            dst_country_id_eq
                             routing_tag_ids_include
-                            routing_tag_ids_exclude],
+                            routing_tag_ids_exclude
+                            routing_tag_ids_empty],
                 fields: []
 
   form do |f|
@@ -144,8 +145,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       ff.input :dst_prefix_routing_contains, required: false
       ff.input :dst_prefix_out_contains, required: false
 
-      ff.input :src_country_iso_eq, required: false
-      ff.input :dst_country_iso_eq, required: false
+      ff.input :src_country_id_eq, as: :select,
+                                   collection: System::Country.all,
+                                   input_html: { class: 'chosen' }
+      ff.input :dst_country_id_eq, as: :select,
+                                   collection: System::Country.all,
+                                   input_html: { class: 'chosen' }
 
       ff.input :routing_tag_ids_include, required: false
       ff.input :routing_tag_ids_exclude, required: false

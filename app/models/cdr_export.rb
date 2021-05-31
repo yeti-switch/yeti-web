@@ -34,8 +34,8 @@ class CdrExport < Yeti::ActiveRecord
     attribute :src_prefix_out_contains, :string
     attribute :dst_prefix_out_contains, :string
     attribute :customer_acc_external_id_eq, :integer
-    attribute :src_country_iso_eq, :string
-    attribute :dst_country_iso_eq, :string
+    attribute :src_country_id_eq, :integer
+    attribute :dst_country_id_eq, :integer
     attribute :routing_tag_ids_include, :integer
     attribute :routing_tag_ids_exclude, :integer
     attribute :routing_tag_ids_empty, :boolean
@@ -68,12 +68,6 @@ class CdrExport < Yeti::ActiveRecord
   validate do
     if filters.time_start_gteq.nil? || filters.time_start_lteq.nil?
       errors.add(:filters, 'requires time_start_lteq & time_start_gteq')
-    end
-    if filters.src_country_iso_eq.present? && System::Country.find_by(iso2: filters.src_country_iso_eq).nil?
-      errors.add(:filters, 'invalid iso code for src_country_iso_eq')
-    end
-    if filters.dst_country_iso_eq.present? && System::Country.find_by(iso2: filters.src_country_iso_eq).nil?
-      errors.add(:filters, 'invalid iso code for dst_country_iso_eq')
     end
   end
   validate do

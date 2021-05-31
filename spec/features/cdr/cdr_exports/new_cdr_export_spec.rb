@@ -43,8 +43,8 @@ RSpec.describe 'Create new CDR export', js: true do
           'dst_prefix_in_contains' => '',
           'dst_prefix_routing_contains' => '',
           'dst_prefix_out_contains' => '',
-          'src_country_iso_eq' => '',
-          'dst_country_iso_eq' => '',
+          'src_country_id_eq' => '',
+          'dst_country_id_eq' => '',
           'routing_tag_ids_include' => '',
           'routing_tag_ids_exclude' => ''
         )
@@ -83,8 +83,8 @@ RSpec.describe 'Create new CDR export', js: true do
           'dst_prefix_in_contains' => '',
           'dst_prefix_routing_contains' => '',
           'dst_prefix_out_contains' => '',
-          'src_country_iso_eq' => '',
-          'dst_country_iso_eq' => '',
+          'src_country_id_eq' => '',
+          'dst_country_id_eq' => '',
           'routing_tag_ids_include' => '',
           'routing_tag_ids_exclude' => ''
         )
@@ -93,6 +93,8 @@ RSpec.describe 'Create new CDR export', js: true do
   end
 
   context 'with all filled filters' do
+    let!(:countries) { create_list(:country, 2, :uniq_name) }
+
     before do
       visit new_cdr_export_path
 
@@ -107,14 +109,12 @@ RSpec.describe 'Create new CDR export', js: true do
       fill_in 'Dst prefix in contains', with: 'dst_prefix_in_test'
       fill_in 'Dst prefix routing contains', with: 'dst_prefix_routing_test'
       fill_in 'Dst prefix out contains', with: 'dst_prefix_out_test'
-      fill_in 'Src country iso eq', with: country.iso2
-      fill_in 'Dst country iso eq', with: country.iso2
+      fill_in_chosen 'Src country id eq', with: countries.first.name
+      fill_in_chosen 'Dst country id eq', with: countries.last.name
       fill_in 'Routing tag ids include', with: 2
       fill_in 'Routing tag ids exclude', with: 25
       fill_in_chosen 'Routing tag ids empty', with: 'Any'
     end
-
-    let(:country) { create(:country) }
 
     it 'should be created' do
       subject
@@ -137,8 +137,8 @@ RSpec.describe 'Create new CDR export', js: true do
           'dst_prefix_in_contains' => 'dst_prefix_in_test',
           'dst_prefix_routing_contains' => 'dst_prefix_routing_test',
           'dst_prefix_out_contains' => 'dst_prefix_out_test',
-          'src_country_iso_eq' => country.iso2,
-          'dst_country_iso_eq' => country.iso2,
+          'src_country_id_eq' => countries.first.id,
+          'dst_country_id_eq' => countries.last.id,
           'routing_tag_ids_include' => 2,
           'routing_tag_ids_exclude' => 25,
           'routing_tag_ids_empty' => nil
@@ -153,15 +153,11 @@ RSpec.describe 'Create new CDR export', js: true do
 
       fill_in_chosen 'Fields', with: 'success', multiple: true
       fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
-      fill_in 'Src country iso eq', with: 'invalid country'
-      fill_in 'Dst country iso eq', with: 'invalid country'
     end
 
     it 'should rise semantic error' do
       subject
-      expect(page).to have_semantic_error('Filters requires time_start_lteq & time_start_gteq')
-      expect(page).to have_semantic_error('invalid iso code for src_country_iso_eq')
-      expect(page).to have_semantic_error('invalid iso code for dst_country_iso_eq')
+      expect(page).to have_semantic_error('Filters can\'t be blank and requires time_start_lteq & time_start_gteq')
     end
   end
 end

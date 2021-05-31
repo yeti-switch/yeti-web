@@ -65,6 +65,10 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
         'routing_tag_ids_empty' => false
       }
     end
+    let(:expected_filters) do
+      filters.except('src_country_iso_eq', 'dst_country_iso_eq')
+             .merge({ 'src_country_id_eq': country.id, 'dst_country_id_eq': country.id })
+    end
     let(:country) { create(:country) }
 
     it 'http status should eq 201' do
@@ -81,7 +85,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
       expect(CdrExport.last!).to have_attributes(
         status: CdrExport::STATUS_PENDING,
         fields: fields,
-        filters: CdrExport::FiltersModel.new(filters)
+        filters: CdrExport::FiltersModel.new(expected_filters)
       )
     end
 
@@ -97,7 +101,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
             'callback-url' => nil,
             'status' => CdrExport::STATUS_PENDING,
             'fields' => fields,
-            'filters' => CdrExport::FiltersModel.new(filters).as_json,
+            'filters' => CdrExport::FiltersModel.new(expected_filters).as_json,
             'created-at' => cdr_export.created_at.iso8601(3)
           }
         )
@@ -158,10 +162,10 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
 
       it 'validation error should be present' do
         subject
-        expect(response.status).to eq(422)
+        expect(response.status).to eq(400)
         expect(JSON.parse(response.body)['errors']).to match_array(
           hash_including(
-            'detail' => 'filters - invalid iso code for dst_country_iso_eq'
+            'detail' => 'invalid is not a valid value for dst_country_iso_eq.'
           )
         )
       end
@@ -178,12 +182,12 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
 
       it 'validation error should be present' do
         subject
-        expect(response.status).to eq(422)
+        expect(response.status).to eq(400)
         expect(JSON.parse(response.body)['errors']).to match_array(
-                                                         hash_including(
-                                                           'detail' => 'filters - invalid iso code for src_country_iso_eq'
-                                                         )
-                                                       )
+          hash_including(
+            'detail' => 'invalid is not a valid value for src_country_iso_eq.'
+          )
+        )
       end
     end
   end
