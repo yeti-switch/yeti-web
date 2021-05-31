@@ -85,6 +85,8 @@ gem 'pgq_prometheus', require: false
 gem 'prometheus_exporter', github: 'didww/prometheus_exporter', branch: 'didww', require: false
 gem 'sentry-raven', require: false
 
+gem 'rufus-scheduler', require: false
+
 group :development do
   gem 'annotate'
   gem 'sourcify'

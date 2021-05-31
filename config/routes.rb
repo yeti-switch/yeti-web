@@ -51,12 +51,6 @@ Rails.application.routes.draw do
     namespace :rest do
       with_options defaults: { format: :json } do |api|
         namespace :system do
-          api.resources :jobs, only: [:index] do
-            member do
-              put :run
-            end
-          end
-
           api.resources :admin_users, only: [:index]
           api.resources :nodes, only: [:index]
           api.resources :ip_access, only: [:index]
