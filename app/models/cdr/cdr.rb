@@ -203,6 +203,16 @@ class Cdr::Cdr < Cdr::Base
   scope :routing_tag_ids_include, lambda { |id|
     where('? = ANY(routing_tag_ids)', id)
   }
+  scope :routing_tag_ids_exclude, lambda { |id|
+    where.not('? = ANY(routing_tag_ids)', id)
+  }
+  scope :routing_tag_ids_empty, lambda { |flag = true|
+    if ActiveModel::Type::Boolean.new.cast(flag)
+      where('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
+    else
+      where.not('routing_tag_ids IS NULL OR routing_tag_ids = \'{}\'')
+    end
+  }
 
   ##### metasearch override filters ##########
 
@@ -353,6 +363,8 @@ class Cdr::Cdr < Cdr::Base
       status_eq
       account_id_eq
       routing_tag_ids_include
+      routing_tag_ids_exclude
+      routing_tag_ids_empty
       routing_tag_ids_array_contains
       tagged
       auth_orig_ip_covers

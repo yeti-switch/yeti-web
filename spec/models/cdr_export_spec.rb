@@ -136,15 +136,24 @@ RSpec.describe CdrExport, type: :model do
           time_start_lteq: '2018-03-01',
           src_prefix_in_contains: '111111',
           src_prefix_routing_contains: '123123',
-          dst_prefix_out_contains: '333221'
+          dst_prefix_out_contains: '333221',
+          src_country_id_eq: country.id,
+          dst_country_id_eq: country.id,
+          routing_tag_ids_include: 1,
+          routing_tag_ids_exclude: 2
         }
       end
+      let(:country) { create(:country) }
 
       it 'SQL should be valid' do
         sql = [
           'SELECT success AS "Success", cdr.cdr.id AS "ID"',
           'FROM "cdr"."cdr"',
           'WHERE',
+          '(1 = ANY(routing_tag_ids))',
+          'AND',
+          'NOT (2 = ANY(routing_tag_ids))',
+          'AND',
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',
           "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
@@ -153,10 +162,80 @@ RSpec.describe CdrExport, type: :model do
           'AND',
           "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
           'AND',
-          "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+          "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%'",
+          'AND',
+          "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+          'AND',
+          "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
           'ORDER BY time_start desc'
         ]
         expect(subject).to eq(sql.join(' '))
+      end
+
+      context 'with routing_tag_ids_empty false' do
+        let(:filters) { super().merge({ routing_tag_ids_empty: false }) }
+
+        it 'SQL should be valid' do
+          sql = [
+            'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+            'FROM "cdr"."cdr"',
+            'WHERE',
+            '(1 = ANY(routing_tag_ids))',
+            'AND',
+            'NOT (2 = ANY(routing_tag_ids))',
+            'AND NOT',
+            '(routing_tag_ids IS NULL OR routing_tag_ids = \'{}\')',
+            'AND',
+            "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_in\" ILIKE '%111111%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
+            'ORDER BY time_start desc'
+          ]
+          expect(subject).to eq(sql.join(' '))
+        end
+      end
+
+      context 'with routing_tag_ids_empty true' do
+        let(:filters) { super().merge({ routing_tag_ids_empty: true }) }
+
+        it 'SQL should be valid' do
+          sql = [
+            'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+            'FROM "cdr"."cdr"',
+            'WHERE',
+            '(1 = ANY(routing_tag_ids))',
+            'AND',
+            'NOT (2 = ANY(routing_tag_ids))',
+            'AND',
+            '(routing_tag_ids IS NULL OR routing_tag_ids = \'{}\')',
+            'AND',
+            "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_in\" ILIKE '%111111%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%'",
+            'AND',
+            "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
+            'ORDER BY time_start desc'
+          ]
+          expect(subject).to eq(sql.join(' '))
+        end
       end
     end
   end

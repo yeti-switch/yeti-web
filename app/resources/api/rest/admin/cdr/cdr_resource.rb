@@ -213,6 +213,36 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.where(is_last_cdr: values[0])
   }
 
+  filter :dst_country_iso_eq, apply: lambda { |records, values, _options|
+    country = System::Country.find_by(iso2: values[0])
+    if country
+      records.where(dst_country_id: country.id)
+    else
+      raise JSONAPI::Exceptions::InvalidFilterValue.new(:dst_country_iso_eq, values[0])
+    end
+  }
+
+  filter :src_country_iso_eq, apply: lambda { |records, values, _options|
+    country = System::Country.find_by(iso2: values[0])
+    if country
+      records.where(src_country_id: country.id)
+    else
+      raise JSONAPI::Exceptions::InvalidFilterValue.new(:scr_country_iso_eq, values[0])
+    end
+  }
+
+  filter :routing_tag_ids_include, apply: lambda { |records, values, _options|
+    records.routing_tag_ids_include(values[0])
+  }
+
+  filter :routing_tag_ids_exclude, apply: lambda { |records, values, _options|
+    records.routing_tag_ids_exclude(values[0])
+  }
+
+  filter :routing_tag_ids_empty, apply: lambda { |records, values, _options|
+    records.routing_tag_ids_empty(values[0])
+  }
+
   ransack_filter :time_start, type: :datetime
   ransack_filter :destination_next_rate, type: :number
   ransack_filter :destination_fee, type: :number

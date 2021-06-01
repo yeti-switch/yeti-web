@@ -34,6 +34,11 @@ class CdrExport < Yeti::ActiveRecord
     attribute :src_prefix_out_contains, :string
     attribute :dst_prefix_out_contains, :string
     attribute :customer_acc_external_id_eq, :integer
+    attribute :src_country_id_eq, :integer
+    attribute :dst_country_id_eq, :integer
+    attribute :routing_tag_ids_include, :integer
+    attribute :routing_tag_ids_exclude, :integer
+    attribute :routing_tag_ids_empty, :boolean
 
     private
 
@@ -95,7 +100,9 @@ class CdrExport < Yeti::ActiveRecord
   def export_sql
     s = Cdr::Cdr.select(select_sql)
     s = s.order('time_start desc')
-    s = s.ransack(filters.as_json).result
+    filters = self.filters.as_json
+    filters['routing_tag_ids_empty'] = filters['routing_tag_ids_empty'].to_s
+    s = s.ransack(filters).result
     if fields.include?('src_country_name')
       s = s.joins('LEFT JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id')
     end
