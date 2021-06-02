@@ -2,14 +2,19 @@
 
 RSpec.describe 'Filter Destination records', :js do
   subject do
-    visit destinations_path
+    visit destinations_path(visit_params)
+    filter_records_and_submit!
+  end
+
+  let(:visit_params) { {} }
+  let(:filter_records_and_submit!) do
     filter_records
     within_filters { click_submit('Filter') }
   end
 
   include_context :login_as_admin
 
-  describe 'filter by tagged' do
+  context 'filter by tagged' do
     let!(:other_destinations_list) { create_list :destination, 2 }
 
     let(:filter_records) do
@@ -51,7 +56,7 @@ RSpec.describe 'Filter Destination records', :js do
       end
     end
 
-    describe 'filter by routing tag ids contains' do
+    context 'filter by routing tag ids contains' do
       let(:filter_records) do
         within_filters do
           fill_in_chosen 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
@@ -76,7 +81,7 @@ RSpec.describe 'Filter Destination records', :js do
     end
   end
 
-  describe 'filter by routing for contains' do
+  context 'filter by routing for contains' do
     let!(:destination) { create :destination, prefix: 'test' }
 
     context 'with filter by valid value' do
@@ -115,7 +120,7 @@ RSpec.describe 'Filter Destination records', :js do
     end
   end
 
-  describe 'filter by routing tags count' do
+  context 'filter by routing tags count' do
     let!(:other_destinations) { create_list :destination, 2 }
     let!(:tags) { create_list :routing_tag, 3 }
     let!(:destination_tagged) { create :destination, routing_tag_ids: tags.map(&:id) }
@@ -192,6 +197,62 @@ RSpec.describe 'Filter Destination records', :js do
           expect(page).to_not have_table
           expect(page).to have_text('No Destinations found')
         end
+      end
+    end
+  end
+
+  context 'when query has filter by routing_tag_ids_covers' do
+    let(:filter_records_and_submit!) {}
+    let(:visit_params) { { q: { routing_tag_ids_covers: filter_value } } }
+
+    context 'when filter by valid routing tag ids' do
+      let(:filter_value) { [tags.first.id.to_s, tags.third.id.to_s] }
+
+      let!(:tags) do
+        [create(:routing_tag, :ua), create(:routing_tag, :us), create(:routing_tag, name: 'test')]
+      end
+      let!(:destination) { create(:destination, destination_attrs) }
+      let(:destination_attrs) do
+        {
+          routing_tag_ids: tags.map(&:id),
+          routing_tag_mode_id: Routing::RoutingTagMode::CONST::OR
+        }
+      end
+      before { create(:destination) }
+
+      it 'returns correct records' do
+        subject
+
+        expect(page).to have_table
+        expect(page).to have_table_row count: 1
+        expect(page).to have_table_cell column: 'Id', text: destination.id
+        within_filters do
+          expect(page).to have_field_chosen('Routing tag ids covers', with: filter_value)
+        end
+      end
+    end
+
+    context 'when filter by invalid routing tag id' do
+      let(:filter_value) { ['1], routing_tag_mode_id)>0; SELECT * FROM class4.destinations '] }
+      before { create(:destination) }
+
+      it 'returns empty table' do
+        subject
+
+        expect(page).to_not have_table
+        expect(page).to have_text 'No Destinations found'
+      end
+    end
+
+    context 'when filter by huge tag id number' do
+      let(:filter_value) { ['999999999999999999999999999999999999999999999'] }
+      before { create(:destination) }
+
+      it 'returns empty table' do
+        subject
+
+        expect(page).to_not have_table
+        expect(page).to have_text 'No Destinations found'
       end
     end
   end
