@@ -94,7 +94,26 @@ jobs:
           path: |
             log/
 
-
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+      - name: brakeman
+        continue-on-error: true
+        run: make brakeman
 
   pgq-processors:
     name: PqQ processors tests
