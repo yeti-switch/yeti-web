@@ -4,8 +4,16 @@ module RoutingTagIdsScopeable
   extend ActiveSupport::Concern
 
   included do
-    scope :routing_tag_ids_covers, lambda { |*id|
-      where("yeti_ext.tag_compare(routing_tag_ids, ARRAY[#{id.join(',')}], routing_tag_mode_id)>0")
+    scope :routing_tag_ids_covers, lambda { |*routing_tag_ids|
+      type = ActiveModel::Type::Integer.new(limit: 2)
+      routing_tag_ids = routing_tag_ids.map do |id|
+        type.serialize(id)
+      rescue ActiveModel::RangeError
+        nil
+      end
+      return none if routing_tag_ids.any?(&:nil?)
+
+      where('yeti_ext.tag_compare(routing_tag_ids, ARRAY[?], routing_tag_mode_id)>0', routing_tag_ids)
     }
 
     scope :tagged, lambda { |value|
