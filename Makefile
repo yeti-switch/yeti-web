@@ -217,7 +217,7 @@ lint: gems-test config/database.yml config/yeti_web.yml
 	RAILS_ENV=test $(bundle_bin) exec rake bundle:audit
 
 .PHONY: brakeman
-lint: gems-test config/database.yml config/yeti_web.yml
+brakeman: gems-test config/database.yml config/yeti_web.yml
 	$(info:msg=Running brakeman)
 	RAILS_ENV=test $(bundle_bin) exec brakeman
 
