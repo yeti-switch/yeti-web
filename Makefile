@@ -181,7 +181,7 @@ prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy
 
 
 .PHONY: test
-test: test-pgq-processors lint rspec
+test: test-pgq-processors lint brakeman rspec
 
 
 .PHONY: rspec
@@ -206,6 +206,10 @@ lint: gems-test config/database.yml config/yeti_web.yml
 	RAILS_ENV=test $(bundle_bin) exec rubocop -P
 	RAILS_ENV=test $(bundle_bin) exec rake bundle:audit
 
+.PHONY: brakeman
+lint: gems-test config/database.yml config/yeti_web.yml
+	$(info:msg=Running brakeman)
+	RAILS_ENV=test $(bundle_bin) exec brakeman
 
 .PHONY: test-pgq-processors
 test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles.yml

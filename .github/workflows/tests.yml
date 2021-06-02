@@ -81,6 +81,25 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    container: switchyeti/yeti-web:buster-build
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+      - name: brakeman
+        run: make brakeman
+
   rspec:
     name: Rspec tests
     runs-on: ubuntu-latest
