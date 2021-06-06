@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Jobs::EventProcessor, '.start!' do
+RSpec.describe Jobs::EventProcessor, '#call' do
   subject do
-    job.execute
+    job.call
   end
 
-  let(:job) { described_class.first! }
+  let(:job) { described_class.new(double) }
 
   context 'without events' do
     it 'does not do anything' do

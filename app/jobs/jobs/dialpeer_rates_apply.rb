@@ -2,6 +2,8 @@
 
 module Jobs
   class DialpeerRatesApply < ::BaseJob
+    self.cron_line = '* * * * *'
+
     def execute
       ActiveRecord::Base.transaction do
         DialpeerNextRate.ready_for_apply.find_each do |rate|

@@ -4,6 +4,8 @@ require 'prometheus/active_calls_processor'
 
 module Jobs
   class CallsMonitoring < ::BaseJob
+    self.cron_line = '* * * * *'
+
     class CallCollection
       MONITORING_INTERVAL = 60
 

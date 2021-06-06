@@ -25485,38 +25485,6 @@ ALTER SEQUENCE sys.guiconfig_id_seq OWNED BY sys.guiconfig.id;
 
 
 --
--- Name: jobs; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.jobs (
-    id integer NOT NULL,
-    type character varying NOT NULL,
-    description character varying,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    running boolean DEFAULT false NOT NULL
-);
-
-
---
--- Name: jobs_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.jobs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.jobs_id_seq OWNED BY sys.jobs.id;
-
-
---
 -- Name: lnp_resolvers; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -26552,13 +26520,6 @@ ALTER TABLE ONLY sys.delayed_jobs ALTER COLUMN id SET DEFAULT nextval('sys.delay
 --
 
 ALTER TABLE ONLY sys.guiconfig ALTER COLUMN id SET DEFAULT nextval('sys.guiconfig_id_seq'::regclass);
-
-
---
--- Name: jobs id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.jobs ALTER COLUMN id SET DEFAULT nextval('sys.jobs_id_seq'::regclass);
 
 
 --
@@ -28321,22 +28282,6 @@ ALTER TABLE ONLY sys.guiconfig
 
 
 --
--- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.jobs
-    ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
-
-
---
--- Name: jobs jobs_type_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.jobs
-    ADD CONSTRAINT jobs_type_key UNIQUE (type);
-
-
---
 -- Name: lnp_resolvers lnp_resolvers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -29795,7 +29740,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -29873,6 +29819,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210313203526'),
 ('20210328145540'),
 ('20210415123322'),
-('20210605094810');
+('20210605094810'),
+('20210606143950');
 
 

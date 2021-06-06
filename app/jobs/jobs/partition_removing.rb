@@ -2,6 +2,8 @@
 
 module Jobs
   class PartitionRemoving < ::BaseJob
+    self.cron_line = '20 * * * *'
+
     def execute
       remove_partition! PartitionModel::Cdr, Cdr::Cdr
       remove_partition! PartitionModel::Cdr, Cdr::AuthLog

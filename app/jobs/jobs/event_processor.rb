@@ -2,6 +2,8 @@
 
 module Jobs
   class EventProcessor < ::BaseJob
+    self.cron_line = '* * * * *'
+
     def execute
       processed_count = 0
       events_count = events.count

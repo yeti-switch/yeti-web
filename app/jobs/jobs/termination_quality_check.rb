@@ -2,6 +2,8 @@
 
 module Jobs
   class TerminationQualityCheck < ::BaseJob
+    self.cron_line = '*/16 * * * *'
+
     def execute
       # check quality for dialpeer
       Stats::TerminationQualityStat.dp_measurement.each do |stat|
