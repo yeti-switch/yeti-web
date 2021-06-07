@@ -25,4 +25,9 @@ class Api::Rest::Customer::V1::AuthController < Knock::AuthTokenController
       raise Knock.not_found_exception_class
     end
   end
+
+  def not_found
+    error = JSONAPI::Exceptions::AuthenticationFailed.new
+    render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
+  end
 end

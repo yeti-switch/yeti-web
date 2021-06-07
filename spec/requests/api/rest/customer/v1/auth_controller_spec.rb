@@ -15,6 +15,21 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
   let!(:api_access) { create :api_access, api_access_attrs }
   let(:api_access_attrs) { {} }
 
+  shared_examples :responds_with_failed_login do
+    it 'responds with failed login' do
+      subject
+      expect(response.status).to eq(401)
+      expect(response_json).to match(
+                                 errors: [
+                                   title: 'Authentication failed',
+                                   detail: 'Incorrect login or password.',
+                                   code: '401',
+                                   status: '401'
+                                 ]
+                               )
+    end
+  end
+
   describe 'POST /api/rest/customer/v1/auth' do
     subject do
       post json_request_path, params: json_request_body.to_json, headers: json_request_headers
@@ -33,19 +48,19 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     context 'when password is invalid' do
       let(:attributes) { super().merge password: 'wrong.password' }
 
-      include_examples :responds_with_status, 404, without_body: true
+      include_examples :responds_with_failed_login
     end
 
     context 'when customer not exists' do
       let(:attributes) { super().merge login: 'fake.login' }
 
-      include_examples :responds_with_status, 404, without_body: true
+      include_examples :responds_with_failed_login
     end
 
     context 'when IP is not allowed' do
       let(:remote_ip) { '127.0.0.2' }
 
-      include_examples :responds_with_status, 404, without_body: true
+      include_examples :responds_with_failed_login
     end
 
     context 'Issue#338: 0.0.0.0/0 allows requests from any IP' do
@@ -59,7 +74,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       let(:api_access_attrs) { { allowed_ips: ['192.168.0.0/24'] } }
       let(:remote_ip) { '192.169.1.1' }
 
-      include_examples :responds_with_status, 404, without_body: true
+      include_examples :responds_with_failed_login
     end
   end
 end
