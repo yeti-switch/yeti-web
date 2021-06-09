@@ -74,9 +74,9 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   end
 
   member_action :download do
-    response.headers['X-Accel-Redirect'] = "/x-redirect/cdr_export/#{resource.id}.csv"
+    response.headers['X-Accel-Redirect'] = "/x-redirect/cdr_export/#{resource.id}.csv.gz"
     response.headers['Content-Type'] = 'text/csv; charset=utf-8'
-    response.headers['Content-Disposition'] = "attachment; filename=\"#{resource.id}.csv\""
+    response.headers['Content-Disposition'] = "attachment; filename=\"#{resource.id}.csv.gz\""
 
     render body: nil
   end
