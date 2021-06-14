@@ -600,6 +600,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :rpid_privacy_out
         end
       end
+      tab :identity do
+        attributes_table do
+          row :lega_identity
+        end
+      end
     end
   end
 
