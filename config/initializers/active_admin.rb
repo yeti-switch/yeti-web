@@ -5,7 +5,10 @@ ActiveAdmin.setup do |config|
     #        admin.build_menu :utility_navigation do |menu|
     admin.build_menu do |menu|
       menu.add label: 'Billing', priority: 20
-      menu.add label: 'Equipment', priority: 30
+      menu.add label: 'Equipment', priority: 30 do |sub_menu|
+        sub_menu.add label: 'RADIUS', priority: 900
+        sub_menu.add label: 'STIR/SHAKEN', priority: 1000
+      end
       menu.add label: 'Routing', priority: 40
       menu.add label: 'CDR', priority: 50
       menu.add label: 'Reports', priority: 60

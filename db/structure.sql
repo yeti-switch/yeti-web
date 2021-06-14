@@ -15060,6 +15060,58 @@ $$;
 
 
 --
+-- Name: stir_shaken_trusted_certificates; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.stir_shaken_trusted_certificates (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    certificate character varying NOT NULL,
+    updated_at timestamp with time zone
+);
+
+
+--
+-- Name: load_stir_shaken_trusted_certificates(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_stir_shaken_trusted_certificates() RETURNS SETOF class4.stir_shaken_trusted_certificates
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_trusted_certificates order by id;
+END;
+$$;
+
+
+--
+-- Name: stir_shaken_trusted_repositories; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.stir_shaken_trusted_repositories (
+    id smallint NOT NULL,
+    url_pattern character varying NOT NULL,
+    validate_https_certificate boolean DEFAULT true NOT NULL,
+    updated_at timestamp with time zone
+);
+
+
+--
+-- Name: load_stir_shaken_trusted_repositories(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_stir_shaken_trusted_repositories() RETURNS SETOF class4.stir_shaken_trusted_repositories
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_trusted_repositories order by id;
+END;
+$$;
+
+
+--
 -- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
@@ -23228,6 +23280,46 @@ ALTER SEQUENCE class4.sortings_id_seq OWNED BY class4.sortings.id;
 
 
 --
+-- Name: stir_shaken_trusted_certificates_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_trusted_certificates_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stir_shaken_trusted_certificates_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.stir_shaken_trusted_certificates_id_seq OWNED BY class4.stir_shaken_trusted_certificates.id;
+
+
+--
+-- Name: stir_shaken_trusted_repositories_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_trusted_repositories_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stir_shaken_trusted_repositories_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.stir_shaken_trusted_repositories_id_seq OWNED BY class4.stir_shaken_trusted_repositories.id;
+
+
+--
 -- Name: tag_actions; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -26157,6 +26249,20 @@ ALTER TABLE ONLY class4.sortings ALTER COLUMN id SET DEFAULT nextval('class4.sor
 
 
 --
+-- Name: stir_shaken_trusted_certificates id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_certificates ALTER COLUMN id SET DEFAULT nextval('class4.stir_shaken_trusted_certificates_id_seq'::regclass);
+
+
+--
+-- Name: stir_shaken_trusted_repositories id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_repositories ALTER COLUMN id SET DEFAULT nextval('class4.stir_shaken_trusted_repositories_id_seq'::regclass);
+
+
+--
 -- Name: import_accounts id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
@@ -27575,6 +27681,22 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 ALTER TABLE ONLY class4.sortings
     ADD CONSTRAINT sortings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stir_shaken_trusted_certificates stir_shaken_trusted_certificates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_certificates
+    ADD CONSTRAINT stir_shaken_trusted_certificates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stir_shaken_trusted_repositories stir_shaken_trusted_repositories_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_repositories
+    ADD CONSTRAINT stir_shaken_trusted_repositories_pkey PRIMARY KEY (id);
 
 
 --

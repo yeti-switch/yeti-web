@@ -1,10 +1,12 @@
 class RoutingIdentityParsing < ActiveRecord::Migration[5.2]
 
-
   def down
     execute %q{
 
     DROP SCHEMA switch20 cascade;
+
+    DROP table class4.stir_shaken_trusted_repositories;
+    DROP table class4.stir_shaken_trusted_certificates;
 
 
     }
@@ -30,8 +32,40 @@ SET row_security = off;
 -- Name: switch20; Type: SCHEMA; Schema: -; Owner: -
 --
 
+
+create table class4.stir_shaken_trusted_repositories (
+  id smallserial primary key,
+  url_pattern varchar not null,
+  validate_https_certificate boolean not null default true,
+  updated_at timestamptz
+);
+
+create table class4.stir_shaken_trusted_certificates (
+  id smallserial primary key,
+  name varchar not null,
+  certificate varchar not null,
+  updated_at timestamptz
+);
+
 CREATE SCHEMA switch20;
 
+CREATE FUNCTION switch20.load_stir_shaken_trusted_repositories() RETURNS SETOF class4.stir_shaken_trusted_repositories
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_trusted_repositories order by id;
+END;
+$$;
+
+CREATE FUNCTION switch20.load_stir_shaken_trusted_certificates() RETURNS SETOF class4.stir_shaken_trusted_certificates
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_trusted_certificates order by id;
+END;
+$$;
 
 --
 -- TOC entry 1423 (class 1247 OID 294689)
