@@ -269,12 +269,6 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1034, 'registered_aor_id', 'integer', false, 1076, false);
 
 
---
--- TOC entry 4508 (class 0 OID 295982)
--- Dependencies: 454
--- Data for Name: trusted_headers; Type: TABLE DATA; Schema: switch20; Owner: -
---
-
 
 
 --
@@ -312,14 +306,6 @@ SELECT pg_catalog.setval('switch20.switch_in_interface_id_seq', 10, true);
 
 SELECT pg_catalog.setval('switch20.switch_interface_id_seq', 1034, true);
 
-
---
--- TOC entry 4519 (class 0 OID 0)
--- Dependencies: 455
--- Name: trusted_headers_id_seq; Type: SEQUENCE SET; Schema: switch20; Owner: -
---
-
-SELECT pg_catalog.setval('switch20.trusted_headers_id_seq', 2, true);
 
 
 -- Completed on 2021-06-14 12:13:59 EEST

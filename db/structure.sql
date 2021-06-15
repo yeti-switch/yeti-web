@@ -15112,19 +15112,6 @@ $$;
 
 
 --
--- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch20; Owner: -
---
-
-CREATE FUNCTION switch20.load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
-    LANGUAGE plpgsql COST 10 ROWS 100
-    AS $$
-BEGIN
-  RETURN QUERY    SELECT "name" from trusted_headers order by rank asc;
-end;
-$$;
-
-
---
 -- Name: lua_clear_cache(); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
@@ -25155,36 +25142,6 @@ CREATE TABLE switch20.switch_interface_in (
 
 
 --
--- Name: trusted_headers; Type: TABLE; Schema: switch20; Owner: -
---
-
-CREATE TABLE switch20.trusted_headers (
-    id integer NOT NULL,
-    name character varying,
-    rank integer NOT NULL
-);
-
-
---
--- Name: trusted_headers_id_seq; Type: SEQUENCE; Schema: switch20; Owner: -
---
-
-CREATE SEQUENCE switch20.trusted_headers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: trusted_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: switch20; Owner: -
---
-
-ALTER SEQUENCE switch20.trusted_headers_id_seq OWNED BY switch20.trusted_headers.id;
-
-
---
 -- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -26533,13 +26490,6 @@ ALTER TABLE ONLY switch20.resource_type ALTER COLUMN id SET DEFAULT nextval('swi
 --
 
 ALTER TABLE ONLY switch20.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch20.switch_interface_id_seq'::regclass);
-
-
---
--- Name: trusted_headers id; Type: DEFAULT; Schema: switch20; Owner: -
---
-
-ALTER TABLE ONLY switch20.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch20.trusted_headers_id_seq'::regclass);
 
 
 --
@@ -28249,14 +28199,6 @@ ALTER TABLE ONLY switch20.switch_interface_out
 
 ALTER TABLE ONLY switch20.switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
-
-
---
--- Name: trusted_headers trusted_headers_pkey; Type: CONSTRAINT; Schema: switch20; Owner: -
---
-
-ALTER TABLE ONLY switch20.trusted_headers
-    ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
 
 
 --

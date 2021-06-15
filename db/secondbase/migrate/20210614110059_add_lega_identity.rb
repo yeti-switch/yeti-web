@@ -49,6 +49,7 @@ CREATE OR REPLACE FUNCTION switch.writecdr(
     i_is_redirected boolean,
     i_dynamic json,
     i_lega_headers json,
+    i_legb_headers json,
     i_lega_identity json
 )
   RETURNS integer AS

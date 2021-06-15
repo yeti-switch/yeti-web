@@ -805,19 +805,6 @@ end;
 $$;
 
 
---
--- TOC entry 923 (class 1255 OID 294968)
--- Name: load_trusted_headers(integer); Type: FUNCTION; Schema: switch20; Owner: -
---
-
-CREATE FUNCTION switch20.load_trusted_headers(i_node_id integer) RETURNS TABLE(o_name character varying)
-    LANGUAGE plpgsql COST 10 ROWS 100
-    AS $$
-BEGIN
-  RETURN QUERY    SELECT "name" from trusted_headers order by rank asc;
-end;
-$$;
-
 
 --
 -- TOC entry 924 (class 1255 OID 294969)
@@ -3201,38 +3188,10 @@ CREATE TABLE switch20.switch_interface_in (
 );
 
 
---
--- TOC entry 454 (class 1259 OID 295982)
--- Name: trusted_headers; Type: TABLE; Schema: switch20; Owner: -
---
-
-CREATE TABLE switch20.trusted_headers (
-    id integer NOT NULL,
-    name character varying,
-    rank integer NOT NULL
-);
 
 
---
--- TOC entry 455 (class 1259 OID 295988)
--- Name: trusted_headers_id_seq; Type: SEQUENCE; Schema: switch20; Owner: -
---
-
-CREATE SEQUENCE switch20.trusted_headers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
 
 
---
--- TOC entry 4517 (class 0 OID 0)
--- Dependencies: 455
--- Name: trusted_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: switch20; Owner: -
---
-
-ALTER SEQUENCE switch20.trusted_headers_id_seq OWNED BY switch20.trusted_headers.id;
 
 
 --
@@ -3250,13 +3209,6 @@ ALTER TABLE ONLY switch20.resource_type ALTER COLUMN id SET DEFAULT nextval('swi
 
 ALTER TABLE ONLY switch20.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch20.switch_interface_id_seq'::regclass);
 
-
---
--- TOC entry 4350 (class 2604 OID 296301)
--- Name: trusted_headers id; Type: DEFAULT; Schema: switch20; Owner: -
---
-
-ALTER TABLE ONLY switch20.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch20.trusted_headers_id_seq'::regclass);
 
 
 --
@@ -3519,11 +3471,6 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1034, 'registered_aor_id', 'integer', false, 1076, false);
 
 
---
--- TOC entry 4508 (class 0 OID 295982)
--- Dependencies: 454
--- Data for Name: trusted_headers; Type: TABLE DATA; Schema: switch20; Owner: -
---
 
 
 
@@ -3562,14 +3509,6 @@ SELECT pg_catalog.setval('switch20.switch_in_interface_id_seq', 10, true);
 
 SELECT pg_catalog.setval('switch20.switch_interface_id_seq', 1034, true);
 
-
---
--- TOC entry 4522 (class 0 OID 0)
--- Dependencies: 455
--- Name: trusted_headers_id_seq; Type: SEQUENCE SET; Schema: switch20; Owner: -
---
-
-SELECT pg_catalog.setval('switch20.trusted_headers_id_seq', 2, true);
 
 
 --
@@ -3642,15 +3581,6 @@ ALTER TABLE ONLY switch20.switch_interface_out
 
 ALTER TABLE ONLY switch20.switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
-
-
---
--- TOC entry 4368 (class 2606 OID 296694)
--- Name: trusted_headers trusted_headers_pkey; Type: CONSTRAINT; Schema: switch20; Owner: -
---
-
-ALTER TABLE ONLY switch20.trusted_headers
-    ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
 
 
 --
