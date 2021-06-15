@@ -1066,8 +1066,8 @@ CREATE TYPE switch20.identity_header_ty AS (
 --
 
 CREATE TYPE switch20.identity_payload_dest_ty AS (
-	tn character varying,
-	uri character varying
+	tn character varying[],
+	uri character varying[]
 );
 
 

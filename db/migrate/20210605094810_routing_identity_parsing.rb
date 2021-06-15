@@ -1828,8 +1828,8 @@ create type switch20.identity_header_ty as (
 );
 
 create type switch20.identity_payload_dest_ty as (
-  tn varchar,
-  uri varchar
+  tn varchar[],
+  uri varchar[]
 );
 
 create type switch20.identity_payload_orig_ty as (
