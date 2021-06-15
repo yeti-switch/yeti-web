@@ -250,7 +250,8 @@ RSpec.describe Cdr::Cdr, type: :model do
 
     it 'creates CDR with expected attributes' do
       subject
-      expect(described_class.last.attributes.symbolize_keys).to match(
+      cdr = described_class.last
+      expect(cdr).to have_attributes(
         id: kind_of(Integer),
         customer_id: 1105,
         vendor_id: 1755,
@@ -394,9 +395,14 @@ RSpec.describe Cdr::Cdr, type: :model do
         customer_duration: 566,
         vendor_duration: 571,
         customer_auth_name: 'Customer Auth for trunk 1',
-        p_charge_info_in: 'sip:p-charge-info@example.com/uri',
-        lega_identity: [{ "header": { "alg": 'ES256', "ppt": 'shaken', "typ": 'passport', "x5u": 'http://127.0.0.1/share/test.pem' }, "parsed": true, "payload": { "attest": 'C', "dest": { "tn": '456', "uri": 'sip:456' }, "iat": 1_622_830_203, "orig": { "tn": '123', "uri": 'sip:123' }, "origid": '8-000F7304-60BA6C7B000B6828-A43657C0' }, "verified": true }, { "error_code": 4, "error_reason": 'Incorrect Identity Header Value', "parsed": false }, { "error_code": -1, "error_reason": 'certificate is not available', "header": { "alg": 'ES256', "ppt": 'shaken', "typ": 'passport', "x5u": 'http://127.0.0.1/share/test2.pem' }, "parsed": true, "payload": { "attest": 'C', "dest": { "tn": '13' }, "iat": 1_622_831_252, "orig": { "tn": '42' }, "origid": '8-000F7304-60BA7094000207EC-2B5F27C0' }, "verified": false }].deep_symbolize_keys
+        p_charge_info_in: 'sip:p-charge-info@example.com/uri'
       )
+
+      expect(cdr.lega_identity).to match [
+        { header: { alg: 'ES256', ppt: 'shaken', typ: 'passport', x5u: 'http://127.0.0.1/share/test.pem' }, parsed: true, payload: { attest: 'C', dest: { tn: '456', uri: 'sip:456' }, iat: 1_622_830_203, orig: { tn: '123', uri: 'sip:123' }, origid: '8-000F7304-60BA6C7B000B6828-A43657C0' }, verified: true },
+        { error_code: 4, error_reason: 'Incorrect Identity Header Value', parsed: false },
+        { error_code: -1, error_reason: 'certificate is not available', header: { alg: 'ES256', ppt: 'shaken', typ: 'passport', x5u: 'http://127.0.0.1/share/test2.pem' }, parsed: true, payload: { attest: 'C', dest: { tn: '13' }, iat: 1_622_831_252, orig: { tn: '42' }, origid: '8-000F7304-60BA7094000207EC-2B5F27C0' }, verified: false }
+      ]
     end
 
     context 'When call duration =0 and  price already rounded' do
