@@ -966,7 +966,6 @@ CREATE TYPE switch20.callprofile_ty AS (
 	aleg_auth_required boolean,
 	aleg_rtp_filter_inband_dtmf boolean,
 	bleg_rtp_filter_inband_dtmf boolean,
-	registration_auth_id integer,
 	bleg_protocol_priority_id smallint,
 	aleg_media_encryption_mode_id smallint,
 	bleg_media_encryption_mode_id smallint,

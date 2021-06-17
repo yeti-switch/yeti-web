@@ -203,7 +203,6 @@ CREATE TYPE switch20.callprofile_ty AS (
 	aleg_auth_required boolean,
 	aleg_rtp_filter_inband_dtmf boolean,
 	bleg_rtp_filter_inband_dtmf boolean,
-	registration_auth_id integer,
 	bleg_protocol_priority_id smallint,
 	aleg_media_encryption_mode_id smallint,
 	bleg_media_encryption_mode_id smallint,
@@ -3460,7 +3459,6 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1023, 'customer_acc_vat', 'numeric', true, 1973, true);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1024, 'aleg_rtp_filter_inband_dtmf', 'boolean', false, 1066, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1025, 'bleg_rtp_filter_inband_dtmf', 'boolean', false, 1067, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1026, 'registration_auth_id', 'integer', false, 1068, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1027, 'bleg_protocol_priority_id', 'smallint', false, 1069, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1028, 'aleg_media_encryption_mode_id', 'smallint', false, 1070, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1029, 'bleg_media_encryption_mode_id', 'smallint', false, 1071, false);
