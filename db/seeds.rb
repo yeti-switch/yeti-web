@@ -19,6 +19,7 @@ end
   'notifications', # depends on gui.admin_users
   'switch18',
   'switch19',
+  'switch20',
   'sys'
 ].each do |filename|
   execute_sql_file("db/seeds/main/#{filename}.sql")

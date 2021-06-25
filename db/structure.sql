@@ -108,6 +108,13 @@ CREATE SCHEMA switch19;
 
 
 --
+-- Name: switch20; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA switch20;
+
+
+--
 -- Name: sys; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -809,6 +816,312 @@ CREATE TYPE switch19.lnp_resolve AS (
 --
 
 CREATE TYPE switch19.lua_call_context AS (
+	src_name_in character varying,
+	src_number_in character varying,
+	dst_number_in character varying,
+	src_name_out character varying,
+	src_number_out character varying,
+	dst_number_out character varying,
+	src_name_routing character varying,
+	src_number_routing character varying,
+	dst_number_routing character varying,
+	diversion_in character varying[],
+	diversion_routing character varying[],
+	diversion_out character varying[]
+);
+
+
+--
+-- Name: callprofile_ty; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.callprofile_ty AS (
+	ruri character varying,
+	bleg_transport_protocol_id smallint,
+	"from" character varying,
+	"to" character varying,
+	call_id character varying,
+	dlg_nat_handling boolean,
+	force_outbound_proxy boolean,
+	outbound_proxy character varying,
+	bleg_outbound_proxy_transport_protocol_id smallint,
+	aleg_force_outbound_proxy boolean,
+	aleg_outbound_proxy character varying,
+	aleg_outbound_proxy_transport_protocol_id smallint,
+	next_hop character varying,
+	next_hop_1st_req boolean,
+	aleg_next_hop character varying,
+	sdp_filter_type_id integer,
+	sdp_filter_list character varying,
+	sdp_alines_filter_type_id integer,
+	sdp_alines_filter_list character varying,
+	enable_session_timer boolean,
+	enable_aleg_session_timer boolean,
+	session_expires integer,
+	minimum_timer integer,
+	maximum_timer integer,
+	session_refresh_method_id integer,
+	accept_501_reply character varying,
+	aleg_session_expires integer,
+	aleg_minimum_timer integer,
+	aleg_maximum_timer integer,
+	aleg_session_refresh_method_id integer,
+	aleg_accept_501_reply character varying,
+	enable_auth boolean,
+	auth_user character varying,
+	auth_pwd character varying,
+	enable_aleg_auth boolean,
+	auth_aleg_user character varying,
+	auth_aleg_pwd character varying,
+	append_headers character varying,
+	append_headers_req character varying,
+	aleg_append_headers_req character varying,
+	disconnect_code_id integer,
+	enable_rtprelay boolean,
+	rtprelay_interface character varying,
+	aleg_rtprelay_interface character varying,
+	outbound_interface character varying,
+	aleg_outbound_interface character varying,
+	contact_displayname character varying,
+	contact_user character varying,
+	contact_host character varying,
+	contact_port smallint,
+	try_avoid_transcoding boolean,
+	rtprelay_dtmf_filtering boolean,
+	rtprelay_dtmf_detection boolean,
+	dump_level_id integer,
+	time_limit integer,
+	resources character varying,
+	cache_time integer,
+	reply_translations character varying,
+	aleg_policy_id integer,
+	bleg_policy_id integer,
+	aleg_codecs_group_id integer,
+	bleg_codecs_group_id integer,
+	aleg_single_codec_in_200ok boolean,
+	bleg_single_codec_in_200ok boolean,
+	ringing_timeout integer,
+	global_tag character varying,
+	patch_ruri_next_hop boolean,
+	rtprelay_force_dtmf_relay boolean,
+	aleg_force_symmetric_rtp boolean,
+	bleg_force_symmetric_rtp boolean,
+	aleg_symmetric_rtp_nonstop boolean,
+	bleg_symmetric_rtp_nonstop boolean,
+	aleg_symmetric_rtp_ignore_rtcp boolean,
+	bleg_symmetric_rtp_ignore_rtcp boolean,
+	aleg_rtp_ping boolean,
+	bleg_rtp_ping boolean,
+	aleg_relay_options boolean,
+	bleg_relay_options boolean,
+	filter_noaudio_streams boolean,
+	aleg_relay_reinvite boolean,
+	bleg_relay_reinvite boolean,
+	aleg_relay_hold boolean,
+	bleg_relay_hold boolean,
+	aleg_relay_prack boolean,
+	bleg_relay_prack boolean,
+	aleg_sdp_c_location_id integer,
+	bleg_sdp_c_location_id integer,
+	trusted_hdrs_gw boolean,
+	aleg_append_headers_reply character varying,
+	bleg_sdp_alines_filter_list character varying,
+	bleg_sdp_alines_filter_type_id integer,
+	dead_rtp_time integer,
+	rtp_relay_timestamp_aligning boolean,
+	allow_1xx_wo2tag boolean,
+	invite_timeout integer,
+	srv_failover_timeout integer,
+	rtp_force_relay_cn boolean,
+	aleg_sensor_id smallint,
+	aleg_sensor_level_id smallint,
+	bleg_sensor_id smallint,
+	bleg_sensor_level_id smallint,
+	aleg_dtmf_send_mode_id integer,
+	bleg_dtmf_send_mode_id integer,
+	aleg_dtmf_recv_modes integer,
+	bleg_dtmf_recv_modes integer,
+	suppress_early_media boolean,
+	aleg_relay_update boolean,
+	bleg_relay_update boolean,
+	force_one_way_early_media boolean,
+	radius_auth_profile_id smallint,
+	record_audio boolean,
+	aleg_radius_acc_profile_id smallint,
+	bleg_radius_acc_profile_id smallint,
+	transit_headers_a2b character varying,
+	transit_headers_b2a character varying,
+	src_number_radius character varying,
+	dst_number_radius character varying,
+	orig_gw_name character varying,
+	customer_auth_name character varying,
+	customer_name character varying,
+	customer_account_name character varying,
+	term_gw_name character varying,
+	fake_180_timer smallint,
+	aleg_rel100_mode_id smallint,
+	bleg_rel100_mode_id smallint,
+	bleg_max_30x_redirects smallint,
+	bleg_max_transfers smallint,
+	aleg_auth_required boolean,
+	aleg_rtp_filter_inband_dtmf boolean,
+	bleg_rtp_filter_inband_dtmf boolean,
+	bleg_protocol_priority_id smallint,
+	aleg_media_encryption_mode_id smallint,
+	bleg_media_encryption_mode_id smallint,
+	aleg_sip_acl character varying[],
+	aleg_rtp_acl character varying[],
+	bleg_sip_acl character varying[],
+	bleg_rtp_acl character varying[],
+	registered_aor_id integer,
+	customer_id integer,
+	vendor_id integer,
+	customer_acc_id integer,
+	vendor_acc_id integer,
+	customer_auth_id integer,
+	destination_id bigint,
+	destination_prefix character varying,
+	dialpeer_id bigint,
+	dialpeer_prefix character varying,
+	orig_gw_id integer,
+	term_gw_id integer,
+	routing_group_id integer,
+	rateplan_id integer,
+	destination_initial_rate numeric,
+	destination_next_rate numeric,
+	destination_initial_interval integer,
+	destination_next_interval integer,
+	destination_rate_policy_id smallint,
+	dialpeer_initial_interval integer,
+	dialpeer_next_interval integer,
+	dialpeer_next_rate numeric,
+	destination_fee numeric,
+	dialpeer_initial_rate numeric,
+	dialpeer_fee numeric,
+	dst_prefix_in character varying,
+	dst_prefix_out character varying,
+	src_prefix_in character varying,
+	src_prefix_out character varying,
+	src_name_in character varying,
+	src_name_out character varying,
+	diversion_in character varying,
+	diversion_out character varying,
+	auth_orig_protocol_id smallint,
+	auth_orig_ip inet,
+	auth_orig_port integer,
+	src_network_id integer,
+	src_country_id integer,
+	dst_country_id integer,
+	dst_network_id integer,
+	dst_prefix_routing character varying,
+	src_prefix_routing character varying,
+	routing_plan_id integer,
+	lrn character varying,
+	lnp_database_id smallint,
+	from_domain character varying,
+	to_domain character varying,
+	ruri_domain character varying,
+	src_area_id integer,
+	dst_area_id integer,
+	routing_tag_ids smallint[],
+	pai_in character varying,
+	ppi_in character varying,
+	privacy_in character varying,
+	rpid_in character varying,
+	rpid_privacy_in character varying,
+	pai_out character varying,
+	ppi_out character varying,
+	privacy_out character varying,
+	rpid_out character varying,
+	rpid_privacy_out character varying,
+	customer_acc_check_balance boolean,
+	destination_reverse_billing boolean,
+	dialpeer_reverse_billing boolean,
+	customer_auth_external_id bigint,
+	customer_external_id bigint,
+	vendor_external_id bigint,
+	customer_acc_external_id bigint,
+	vendor_acc_external_id bigint,
+	orig_gw_external_id bigint,
+	term_gw_external_id bigint,
+	customer_acc_vat numeric
+);
+
+
+--
+-- Name: identity_header_ty; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.identity_header_ty AS (
+	alg character varying,
+	ppt character varying,
+	typ character varying,
+	x5u character varying
+);
+
+
+--
+-- Name: identity_payload_dest_ty; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.identity_payload_dest_ty AS (
+	tn character varying[],
+	uri character varying[]
+);
+
+
+--
+-- Name: identity_payload_orig_ty; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.identity_payload_orig_ty AS (
+	tn character varying,
+	uri character varying
+);
+
+
+--
+-- Name: identity_payload_ty; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.identity_payload_ty AS (
+	attest character varying,
+	dest switch20.identity_payload_dest_ty,
+	iat integer,
+	orig switch20.identity_payload_orig_ty,
+	origid character varying
+);
+
+
+--
+-- Name: identity_data_ty; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.identity_data_ty AS (
+	error_code smallint,
+	error_reason character varying,
+	parsed boolean,
+	verified boolean,
+	header switch20.identity_header_ty,
+	payload switch20.identity_payload_ty
+);
+
+
+--
+-- Name: lnp_resolve; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.lnp_resolve AS (
+	lrn text,
+	tag text
+);
+
+
+--
+-- Name: lua_call_context; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.lua_call_context AS (
 	src_name_in character varying,
 	src_number_in character varying,
 	dst_number_in character varying,
@@ -14286,6 +14599,6287 @@ $$;
 
 
 --
+-- Name: check_event(integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.check_event(i_event_id integer) RETURNS boolean
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  PERFORM id from sys.events where id=i_event_id;
+  return FOUND;
+END;
+$$;
+
+
+--
+-- Name: detect_network(character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+    LANGUAGE plpgsql COST 10
+    AS $$
+declare
+  v_ret sys.network_prefixes%rowtype;
+BEGIN
+
+  select into v_ret *
+  from sys.network_prefixes
+  where prefix_range(prefix)@>prefix_range(i_dst)
+  order by length(prefix_range(prefix)) desc
+  limit 1;
+
+  return v_ret;
+END;
+$$;
+
+
+--
+-- Name: init(integer, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.init(i_node_id integer, i_pop_id integer) RETURNS void
+    LANGUAGE plpgsql COST 10
+    AS $$
+declare
+  v_lnp_sockets text[];
+  v_timeout integer:=1000;
+BEGIN
+  select into v_lnp_sockets array_agg('tcp://'||address||':'||port::varchar) from sys.lnp_resolvers;-- where 0=1;
+  RAISE WARNING 'Adding LNP resolvers sockets: %. Resolver timeout: %ms', v_lnp_sockets, v_timeout;
+  perform yeti_ext.lnp_endpoints_set(ARRAY[]::text[]);
+  perform yeti_ext.lnp_endpoints_set(v_lnp_sockets);
+  perform yeti_ext.lnp_set_timeout(v_timeout);
+  RETURN;
+end;
+$$;
+
+
+--
+-- Name: lnp_resolve(smallint, character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.lnp_resolve(i_database_id smallint, i_dst character varying) RETURNS character varying
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  return lrn from yeti_ext.lnp_resolve_tagged(i_database_id::int, i_dst);
+END;
+$$;
+
+
+--
+-- Name: lnp_resolve_tagged(smallint, character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.lnp_resolve_tagged(i_database_id smallint, i_dst character varying) RETURNS switch20.lnp_resolve
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  return yeti_ext.lnp_resolve_tagged(i_database_id::int, i_dst);
+END;
+$$;
+
+
+--
+-- Name: load_codecs(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN
+  QUERY SELECT
+          cgc.id,
+          cgc.codec_group_id,
+          c.name ,
+          cgc.priority,
+          cgc.dynamic_payload_type,
+          cgc.format_parameters
+        from class4.codec_group_codecs cgc
+          JOIN class4.codecs c ON c.id=cgc.codec_id
+        order by cgc.codec_group_id,cgc.priority desc ,c.name;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_namespace(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.disconnect_code_namespace order by id;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_refuse(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_refuse() RETURNS TABLE(o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN
+  QUERY SELECT id,code,reason,rewrited_code,rewrited_reason,store_cdr,silently_drop
+        from class4.disconnect_code
+        where namespace_id=0 or namespace_id=1 OR namespace_id=3 /* radius */
+        order by id;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_refuse_overrides(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN
+  QUERY SELECT
+            dpc.policy_id,
+            dc.id,
+            dc.code,
+            dc.reason,
+            dpc.rewrited_code,
+            dpc.rewrited_reason,
+            dc.store_cdr,
+            dc.silently_drop
+        from class4.disconnect_policy_code dpc
+          JOIN class4.disconnect_code dc
+            ON dc.id=dpc.code_id
+        where namespace_id=0 or namespace_id=1 OR namespace_id=3 /* radius */
+        order by dpc.id;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_rerouting(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_rerouting() RETURNS TABLE(received_code integer, stop_rerouting boolean)
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT code,stop_hunting
+               from class4.disconnect_code
+               WHERE namespace_id=2
+               order by id;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_rerouting_overrides(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_rerouting_overrides() RETURNS TABLE(policy_id integer, received_code integer, stop_rerouting boolean)
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT dpc.policy_id,dc.code,dpc.stop_hunting
+               from class4.disconnect_policy_code dpc
+                 join class4.disconnect_code dc
+                   ON dpc.code_id=dc.id
+               WHERE dc.namespace_id=2 -- SIP ONLY
+               order by dpc.id;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_rewrite(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_rewrite() RETURNS TABLE(o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN
+  QUERY SELECT code,reason,pass_reason_to_originator,rewrited_code,rewrited_reason
+        from class4.disconnect_code
+        where namespace_id=2
+        order by id;
+END;
+$$;
+
+
+--
+-- Name: load_disconnect_code_rewrite_overrides(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_disconnect_code_rewrite_overrides() RETURNS TABLE(o_policy_id integer, o_code integer, o_reason character varying, o_pass_reason_to_originator boolean, o_rewrited_code integer, o_rewrited_reason character varying)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN
+  QUERY SELECT dpc.policy_id,dc.code,dc.reason,dpc.pass_reason_to_originator,dpc.rewrited_code,dpc.rewrited_reason
+        from class4.disconnect_policy_code dpc
+          JOIN class4.disconnect_code dc
+            ON dc.id=dpc.code_id
+        where dc.namespace_id=2 -- ONLY SIP
+        order by dpc.id;
+END;
+$$;
+
+
+--
+-- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+    LANGUAGE plpgsql COST 10 ROWS 10
+    AS $$
+BEGIN
+  RETURN QUERY
+    SELECT
+      gw.id,
+      gw.incoming_auth_username,
+      gw.incoming_auth_password
+    from class4.gateways gw
+    where
+      gw.enabled and
+      gw.incoming_auth_username is not null and gw.incoming_auth_password is not null and
+      gw.incoming_auth_username !='' and gw.incoming_auth_password !='';
+END;
+$$;
+
+
+--
+-- Name: load_interface_in(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_interface_in() RETURNS TABLE(varname character varying, vartype character varying, varformat character varying, varhashkey boolean, varparam character varying)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN QUERY SELECT "name","type","format","hashkey","param" from switch_interface_in order by rank asc;
+END;
+$$;
+
+
+--
+-- Name: load_interface_out(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_interface_out() RETURNS TABLE(varname character varying, vartype character varying, forcdr boolean, forradius boolean)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN QUERY SELECT "name","type","custom","for_radius" from switch20.switch_interface_out order by rank asc;
+END;
+$$;
+
+
+--
+-- Name: load_radius_accounting_profiles(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_radius_accounting_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, timeout smallint, attempts smallint, enable_start_accounting boolean, enable_interim_accounting boolean, enable_stop_accounting boolean, interim_accounting_interval smallint, start_avps json, interim_avps json, stop_avps json)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    p.id,
+    p.name,
+    p.server,
+    p.port,
+    p.secret,
+    p.timeout,
+    p.attempts,
+    p.enable_start_accounting,
+    p.enable_interim_accounting,
+    p.enable_stop_accounting,
+    p.interim_accounting_interval,
+    (select json_agg(d.*) from class4.radius_accounting_profile_start_attributes d where profile_id=p.id),
+    (select json_agg(d.*) from class4.radius_accounting_profile_interim_attributes d where profile_id=p.id),
+    (select json_agg(d.*) from class4.radius_accounting_profile_stop_attributes d where profile_id=p.id)
+  from class4.radius_accounting_profiles p
+  order by p.id;
+END;
+$$;
+
+
+--
+-- Name: load_radius_profiles(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_radius_profiles() RETURNS TABLE(id smallint, name character varying, server character varying, port integer, secret character varying, reject_on_error boolean, timeout smallint, attempts smallint, avps json)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN QUERY SELECT p.id, p.name, p.server, p.port, p.secret, p.reject_on_error, p.timeout, p.attempts, json_agg(a.*)
+               from class4.radius_auth_profiles p
+                 JOIN class4.radius_auth_profile_attributes a ON p.id=a.profile_id
+               GROUP by p.id, p.name, p.server, p.port, p.secret
+               order by p.id;
+END;
+$$;
+
+
+--
+-- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    id,
+    transport_protocol_id,
+    "domain",
+    "username",
+    "display_username",
+    auth_user,
+    auth_password,
+    proxy,
+    proxy_transport_protocol_id,
+    contact,
+    expire,
+    force_expire,
+    retry_delay,
+    max_attempts,
+    sip_schema_id,
+    sip_interface_name
+  FROM class4.registrations r
+  WHERE
+    r.enabled and
+    (r.pop_id=i_pop_id OR r.pop_id is null) AND
+    (r.node_id=i_node_id OR r.node_id IS NULL) AND
+    (i_registration_id is null OR id=i_registration_id);
+
+end;
+$$;
+
+
+--
+-- Name: resource_type; Type: TABLE; Schema: switch20; Owner: -
+--
+
+CREATE TABLE switch20.resource_type (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    internal_code_id integer NOT NULL,
+    action_id integer DEFAULT 1 NOT NULL
+);
+
+
+--
+-- Name: load_resource_types(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_resource_types() RETURNS SETOF switch20.resource_type
+    LANGUAGE plpgsql COST 10 ROWS 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from resource_type;
+END;
+$$;
+
+
+--
+-- Name: load_sensor(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_sensor() RETURNS TABLE(o_id smallint, o_name character varying, o_mode_id integer, o_source_interface character varying, o_target_mac macaddr, o_use_routing boolean, o_target_ip inet, o_target_port integer, o_hep_capture_id integer, o_source_ip inet)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN
+  QUERY SELECT
+          id,
+          name,
+          mode_id,
+          source_interface,
+          target_mac macaddr,
+          use_routing,
+          target_ip,
+          target_port,
+          hep_capture_id,
+          source_ip from sys.sensors;
+END;
+$$;
+
+
+--
+-- Name: load_sip_options_probers(integer, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_sip_options_probers(i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(id integer, name character varying, ruri_domain character varying, ruri_username character varying, transport_protocol_id smallint, sip_schema_id smallint, from_uri character varying, to_uri character varying, contact_uri character varying, proxy character varying, proxy_transport_protocol_id smallint, "interval" smallint, append_headers character varying, sip_interface_name character varying, auth_username character varying, auth_password character varying, created_at timestamp with time zone, updated_at timestamp with time zone)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+        o.id,
+        o.name,
+        o.ruri_domain,
+        o.ruri_username,
+        o.transport_protocol_id,
+        o.sip_schema_id,
+        o.from_uri,
+        o.to_uri,
+        o.contact_uri,
+        o.proxy,
+        o.proxy_transport_protocol_id,
+        o.interval,
+        o.append_headers,
+        o.sip_interface_name,
+        o.auth_username,
+        o.auth_password,
+        o.created_at,
+        o.updated_at
+  FROM
+    class4.sip_options_probers o
+  WHERE
+    o.enabled AND
+    (
+      (o.pop_id is null and o.node_id is null) OR
+      (o.pop_id is not null and o.node_id is null and o.pop_id in (select n.pop_id from sys.nodes n where n.id=i_node_id)) OR
+      (o.node_id is not null and o.node_id=i_node_id )
+    ) AND
+    (i_registration_id is null OR o.id=i_registration_id);
+end;
+$$;
+
+
+--
+-- Name: stir_shaken_trusted_certificates; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.stir_shaken_trusted_certificates (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    certificate character varying NOT NULL,
+    updated_at timestamp with time zone
+);
+
+
+--
+-- Name: load_stir_shaken_trusted_certificates(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_stir_shaken_trusted_certificates() RETURNS SETOF class4.stir_shaken_trusted_certificates
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_trusted_certificates order by id;
+END;
+$$;
+
+
+--
+-- Name: stir_shaken_trusted_repositories; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.stir_shaken_trusted_repositories (
+    id smallint NOT NULL,
+    url_pattern character varying NOT NULL,
+    validate_https_certificate boolean DEFAULT true NOT NULL,
+    updated_at timestamp with time zone
+);
+
+
+--
+-- Name: load_stir_shaken_trusted_repositories(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_stir_shaken_trusted_repositories() RETURNS SETOF class4.stir_shaken_trusted_repositories
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_trusted_repositories order by id;
+END;
+$$;
+
+
+--
+-- Name: lua_clear_cache(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.lua_clear_cache() RETURNS void
+    LANGUAGE pllua
+    AS $$
+        if shared.functions_cache ~= nil then
+          for k in pairs(shared.functions_cache) do
+            shared.functions_cache[k] = nil
+          end
+        end
+      $$;
+
+
+--
+-- Name: lua_exec(integer, switch20.lua_call_context); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.lua_exec(function_id integer, arg switch20.lua_call_context) RETURNS switch20.lua_call_context
+    LANGUAGE pllua
+    AS $_$
+        local ttl = 5 --seconds
+        if shared.functions_cache == nil then
+          setshared('functions_cache',{})
+        end
+
+        local cached_entry = shared.functions_cache[function_id]
+
+        if cached_entry ~= nil then
+          if os.time() < cached_entry.expire_at then
+            -- execute cached function
+            return cached_entry.func()(arg)
+          end
+          -- clear cache entry because of expired ttl
+          shared.functions_cache[function_id] = nil
+        end
+
+        -- try to fetch and compile function
+        if shared.prepared_user_function_query == nil then
+          -- prepare and cache query
+          setshared(
+            'prepared_user_function_query',
+             server.prepare('SELECT source FROM sys.lua_scripts WHERE id=$1',{"integer"}):save()
+          )
+        end
+
+        local c = shared.prepared_user_function_query:getcursor({function_id}, true)
+        local r = c:fetch(1)
+        if r == nil then
+          error("no user function with id: "..function_id)
+        end
+
+        shared.functions_cache[function_id] = {
+          func = assert(load('return function(arg) ' .. r[1].source .. ' end')),
+          expire_at = os.time()+ttl
+        }
+        return shared.functions_cache[function_id].func()(arg)
+
+      $_$;
+
+
+--
+-- Name: new_profile(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.new_profile() RETURNS switch20.callprofile_ty
+    LANGUAGE plpgsql COST 10
+    AS $_$
+DECLARE
+  v_ret switch20.callprofile_ty;
+BEGIN
+  --v_ret.append_headers:='Max-Forwards: 70\r\n';
+  v_ret.enable_auth:=false;
+  v_ret.auth_user:='';
+  v_ret.auth_pwd:='';
+  v_ret.enable_aleg_auth:=false;
+  v_ret.auth_aleg_user:='';
+  v_ret.auth_aleg_pwd:='';
+  v_ret.call_id:='$ci_leg43';
+  --    v_ret.contact:='<sip:$Ri>';
+  v_ret."from":='$f';
+  v_ret."to":='$t';
+  v_ret.ruri:='$r';
+  v_ret.force_outbound_proxy:=false;
+  v_ret.outbound_proxy:='';
+  v_ret.next_hop:='';
+  --    v_ret.next_hop_for_replies:='';
+  v_ret.next_hop_1st_req:=false;
+
+  v_ret.sdp_filter_type_id:=0; -- transparent
+  v_ret.sdp_filter_list:='';
+  v_ret.sdp_alines_filter_type_id:=0; -- transparent
+  v_ret.sdp_alines_filter_list:='';
+
+  v_ret.enable_session_timer:=false;
+  v_ret.session_expires ='150';
+  v_ret.minimum_timer:='30';
+  v_ret.minimum_timer:='60';
+  v_ret.session_refresh_method_id:=1;
+  v_ret.accept_501_reply:=true;
+  v_ret.enable_aleg_session_timer=false;
+  v_ret.aleg_session_expires:='180';
+  v_ret.aleg_minimum_timer:='30';
+  v_ret.aleg_maximum_timer:='60';
+  v_ret.aleg_session_refresh_method_id:=1;
+  v_ret.aleg_accept_501_reply:='';
+  v_ret.reply_translations:='';
+
+  v_ret.enable_rtprelay:=false;
+
+  v_ret.rtprelay_interface:='';
+  v_ret.aleg_rtprelay_interface:='';
+  v_ret.outbound_interface:='';
+
+  v_ret.try_avoid_transcoding:=FALSE;
+
+  v_ret.rtprelay_dtmf_filtering:=TRUE;
+  v_ret.rtprelay_dtmf_detection:=TRUE;
+  v_ret.rtprelay_force_dtmf_relay:=FALSE;
+
+  v_ret.patch_ruri_next_hop:=FALSE;
+
+  v_ret.aleg_force_symmetric_rtp:=TRUE;
+  v_ret.bleg_force_symmetric_rtp:=TRUE;
+
+  v_ret.aleg_symmetric_rtp_nonstop:=FALSE;
+  v_ret.bleg_symmetric_rtp_nonstop:=FALSE;
+
+  v_ret.aleg_symmetric_rtp_ignore_rtcp:=TRUE;
+  v_ret.bleg_symmetric_rtp_ignore_rtcp:=TRUE;
+
+  v_ret.aleg_rtp_ping:=FALSE;
+  v_ret.bleg_rtp_ping:=FALSE;
+
+  v_ret.aleg_relay_options:=FALSE;
+  v_ret.bleg_relay_options:=FALSE;
+
+  v_ret.filter_noaudio_streams:=FALSE;
+
+  /* enum conn_location {
+   *   BOTH = 0,
+   *   SESSION_ONLY,
+   *   MEDIA_ONLY
+   * } */
+  v_ret.aleg_sdp_c_location_id:=0; --BOTH
+  v_ret.bleg_sdp_c_location_id:=0; --BOTH
+
+  v_ret.trusted_hdrs_gw:=FALSE;
+
+  --v_ret.aleg_append_headers_reply:='';
+  --v_ret.aleg_append_headers_reply=E'X-VND-INIT-INT:60\r\nX-VND-NEXT-INT:60\r\nX-VND-INIT-RATE:0\r\nX-VND-NEXT-RATE:0\r\nX-VND-CF:0';
+
+
+  /*
+   *  #define FILTER_TYPE_TRANSPARENT     0
+   *  #define FILTER_TYPE_BLACKLIST       1
+   *  #define FILTER_TYPE_WHITELIST       2
+   */
+  v_ret.bleg_sdp_alines_filter_list:='';
+  v_ret.bleg_sdp_alines_filter_type_id:=0; --FILTER_TYPE_TRANSPARENT
+
+  RETURN v_ret;
+END;
+$_$;
+
+
+--
+-- Name: preprocess(character varying, character varying, boolean); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.preprocess(i_namespace character varying, i_funcname character varying, i_comment boolean) RETURNS void
+    LANGUAGE plpgsql COST 10
+    AS $$
+DECLARE
+  v_sql VARCHAR;
+  v_sql_debug VARCHAR;
+  v_sql_release VARCHAR;
+  v_dbg_suffix VARCHAR = '_debug';
+  v_rel_suffix VARCHAR = '_release';
+BEGIN
+
+  -- get function oiriginal definition
+  SELECT INTO v_sql
+    pg_get_functiondef(p.oid)
+  FROM pg_proc p
+    JOIN pg_namespace n
+      ON p.pronamespace = n.oid
+  WHERE n.nspname = i_namespace AND p.proname = i_funcname;
+
+  IF v_sql IS NULL THEN
+    RAISE EXCEPTION 'no such fucntion';
+  END IF;
+
+  --change function name for debug
+  SELECT into v_sql_debug regexp_replace(v_sql,'(CREATE OR REPLACE FUNCTION '||i_namespace||')\.('||i_funcname||')','\1.'||i_funcname||v_dbg_suffix);
+  --change function name for release
+  SELECT into v_sql_release regexp_replace(v_sql,'(CREATE OR REPLACE FUNCTION '||i_namespace||')\.('||i_funcname||')','\1.'||i_funcname||v_rel_suffix);
+
+  IF i_comment THEN
+    --comment debug stuff in release code
+    SELECT into v_sql_release regexp_replace(v_sql_release,'(/\*dbg{\*/)(.*?)(/\*}dbg\*/)','\1/*\2*/\3','g');
+    --comment release stuff in debug code
+    SELECT into v_sql_debug regexp_replace(v_sql_debug,'(/\*rel{\*/)(.*?)(/\*}rel\*/)','\1/*\2*/\3','g');
+  ELSE
+    --remove debug stuff from release code
+    SELECT into v_sql_release regexp_replace(v_sql_release,'/\*dbg{\*/.*?/\*}dbg\*/','','g');
+    --remove release stuff from debug code
+    SELECT into v_sql_debug regexp_replace(v_sql_debug,'/\*rel{\*/.*?/\*}rel\*/','','g');
+  END IF;
+
+  --RAISE NOTICE 'v_sql = "%"', v_sql;
+  --RAISE NOTICE 'v_sql_debug = "%"', v_sql_debug;
+  --RAISE NOTICE 'v_sql_release = "%"', v_sql_release;
+
+  -- CREATE OR REPLACE FUNCTION  debug version
+  EXECUTE v_sql_debug;
+  -- CREATE OR REPLACE FUNCTION  release version
+  EXECUTE v_sql_release;
+
+END;
+$$;
+
+
+--
+-- Name: preprocess_all(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.preprocess_all() RETURNS void
+    LANGUAGE plpgsql COST 10
+    AS $$
+DECLARE
+  v_sql VARCHAR;
+  v_sql_debug VARCHAR;
+  v_sql_release VARCHAR;
+  v_dbg_suffix VARCHAR = '_debug';
+  v_rel_suffix VARCHAR = '_release';
+BEGIN
+  PERFORM preprocess('switch20','route',false);
+  PERFORM preprocess('switch20','process_dp',false);
+  PERFORM preprocess('switch20','process_gw',false);
+END;
+$$;
+
+
+--
+-- Name: process_dp(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.process_dp(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch20.callprofile_ty
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
+    AS $$
+DECLARE
+  /*dbg{*/
+  v_start timestamp;
+  v_end timestamp;
+  /*}dbg*/
+  v_gw class4.gateways%rowtype;
+  v_gateway_group class4.gateway_groups%rowtype;
+BEGIN
+  /*dbg{*/
+  v_start:=now();
+  --RAISE NOTICE 'process_dp in: %',i_profile;5
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> process-DP. Found dialpeer: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_dp,true);
+  /*}dbg*/
+
+  --RAISE NOTICE 'process_dp dst: %',i_destination;
+  if i_dp.gateway_id is null then /* termination to gw group */
+    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
+    IF v_gateway_group.balancing_mode_id=2 THEN
+      /*rel{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.contractor_id=i_dp.vendor_id and
+          cg.enabled
+        ORDER BY
+          cg.pop_id=i_pop_id desc,
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LOOP
+        return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}rel*/
+      /*dbg{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.enabled
+        ORDER BY
+          cg.pop_id=i_pop_id desc,
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+        IF v_gw.contractor_id!=i_dp.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+          continue;
+        end if;
+        return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}dbg*/
+    elsif v_gateway_group.balancing_mode_id=1 then
+      /*rel{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.contractor_id=i_dp.vendor_id AND
+          cg.enabled
+        ORDER BY
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+        return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}rel*/
+      /*dbg{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.enabled
+        ORDER BY
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+        IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
+          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+          continue;
+        end if;
+        return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}dbg*/
+
+    elsif v_gateway_group.balancing_mode_id=3 THEN
+      /*rel{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+	  (cg.pop_id is null OR cg.pop_id=i_pop_id) and
+          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.contractor_id=i_dp.vendor_id and
+          cg.enabled
+        ORDER BY
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LOOP
+        return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}rel*/
+      /*dbg{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.enabled
+        ORDER BY
+          cg.pop_id=i_pop_id desc,
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+          RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_pop_id;
+          continue;
+        end if;
+        IF v_gw.contractor_id!=i_dp.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+          continue;
+        end if;
+        return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}dbg*/
+    end if;
+  else
+    select into v_gw * from class4.gateways cg where cg.id=i_dp.gateway_id and cg.enabled;
+    if FOUND THEN
+      IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
+        RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Stop processing';
+        return;
+      end if;
+
+      /*rel{*/
+      return query select * from
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+      /*}rel*/
+      /*dbg{*/
+      return query select * from
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+      /*}dbg*/
+    else
+      return;
+    end if;
+  end if;
+END;
+$$;
+
+
+--
+-- Name: process_dp_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.process_dp_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch20.callprofile_ty
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
+    AS $$
+DECLARE
+  /*dbg{*/
+  v_start timestamp;
+  v_end timestamp;
+  /*}dbg*/
+  v_gw class4.gateways%rowtype;
+  v_gateway_group class4.gateway_groups%rowtype;
+BEGIN
+  /*dbg{*/
+  v_start:=now();
+  --RAISE NOTICE 'process_dp in: %',i_profile;5
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> process-DP. Found dialpeer: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_dp,true);
+  /*}dbg*/
+
+  --RAISE NOTICE 'process_dp dst: %',i_destination;
+  if i_dp.gateway_id is null then /* termination to gw group */
+    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
+    IF v_gateway_group.balancing_mode_id=2 THEN
+      
+      /*dbg{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.enabled
+        ORDER BY
+          cg.pop_id=i_pop_id desc,
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+        IF v_gw.contractor_id!=i_dp.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+          continue;
+        end if;
+        return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}dbg*/
+    elsif v_gateway_group.balancing_mode_id=1 then
+      
+      /*dbg{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.enabled
+        ORDER BY
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+        IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
+          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+          continue;
+        end if;
+        return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}dbg*/
+
+    elsif v_gateway_group.balancing_mode_id=3 THEN
+      
+      /*dbg{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.enabled
+        ORDER BY
+          cg.pop_id=i_pop_id desc,
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+          RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_pop_id;
+          continue;
+        end if;
+        IF v_gw.contractor_id!=i_dp.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+          continue;
+        end if;
+        return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}dbg*/
+    end if;
+  else
+    select into v_gw * from class4.gateways cg where cg.id=i_dp.gateway_id and cg.enabled;
+    if FOUND THEN
+      IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
+        RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Stop processing';
+        return;
+      end if;
+
+      
+      /*dbg{*/
+      return query select * from
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+      /*}dbg*/
+    else
+      return;
+    end if;
+  end if;
+END;
+$$;
+
+
+--
+-- Name: process_dp_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.process_dp_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch20.callprofile_ty
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
+    AS $$
+DECLARE
+  
+  v_gw class4.gateways%rowtype;
+  v_gateway_group class4.gateway_groups%rowtype;
+BEGIN
+  
+
+  --RAISE NOTICE 'process_dp dst: %',i_destination;
+  if i_dp.gateway_id is null then /* termination to gw group */
+    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
+    IF v_gateway_group.balancing_mode_id=2 THEN
+      /*rel{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.contractor_id=i_dp.vendor_id and
+          cg.enabled
+        ORDER BY
+          cg.pop_id=i_pop_id desc,
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LOOP
+        return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}rel*/
+      
+    elsif v_gateway_group.balancing_mode_id=1 then
+      /*rel{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.contractor_id=i_dp.vendor_id AND
+          cg.enabled
+        ORDER BY
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+      LOOP
+        return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}rel*/
+      
+
+    elsif v_gateway_group.balancing_mode_id=3 THEN
+      /*rel{*/
+      FOR v_gw in
+        select * from class4.gateways cg
+        where
+	  (cg.pop_id is null OR cg.pop_id=i_pop_id) and
+          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.contractor_id=i_dp.vendor_id and
+          cg.enabled
+        ORDER BY
+          yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LOOP
+        return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+      end loop;
+      /*}rel*/
+      
+    end if;
+  else
+    select into v_gw * from class4.gateways cg where cg.id=i_dp.gateway_id and cg.enabled;
+    if FOUND THEN
+      IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
+        RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Stop processing';
+        return;
+      end if;
+
+      /*rel{*/
+      return query select * from
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+      /*}rel*/
+      
+    else
+      return;
+    end if;
+  end if;
+END;
+$$;
+
+
+--
+-- Name: process_gw(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch20.callprofile_ty
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
+    AS $_$
+DECLARE
+  i integer;
+  v_customer_allowtime real;
+  v_vendor_allowtime real;
+  v_route_found boolean:=false;
+  v_from_user varchar;
+  v_from_domain varchar;
+  v_schema varchar;
+  v_termination_numberlist class4.numberlists%rowtype;
+  v_termination_numberlist_item class4.numberlist_items%rowtype;
+  v_termination_numberlist_size integer;
+  /*dbg{*/
+  v_start timestamp;
+  v_end timestamp;
+  /*}dbg*/
+BEGIN
+  /*dbg{*/
+  v_start:=now();
+  --RAISE NOTICE 'process_dp in: %',i_profile;
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. Found dialpeer: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_dp,true);
+  /*}dbg*/
+
+  --RAISE NOTICE 'process_dp dst: %',i_destination;
+
+  i_profile.destination_id:=i_destination.id;
+  --    i_profile.destination_initial_interval:=i_destination.initial_interval;
+  i_profile.destination_fee:=i_destination.connect_fee::varchar;
+  --i_profile.destination_next_interval:=i_destination.next_interval;
+  i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
+
+  --vendor account capacity limit;
+  if i_vendor_acc.termination_capacity is not null then
+    i_profile.resources:=i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+  end if;
+
+  if i_vendor_acc.total_capacity is not null then
+    i_profile.resources:=i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+  end if;
+
+
+  -- dialpeer account capacity limit;
+  if i_dp.capacity is not null then
+    i_profile.resources:=i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+  end if;
+
+  /* */
+  i_profile.dialpeer_id=i_dp.id;
+  i_profile.dialpeer_prefix=i_dp.prefix;
+  i_profile.dialpeer_next_rate=i_dp.next_rate::varchar;
+  i_profile.dialpeer_initial_rate=i_dp.initial_rate::varchar;
+  i_profile.dialpeer_initial_interval=i_dp.initial_interval;
+  i_profile.dialpeer_next_interval=i_dp.next_interval;
+  i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
+  i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
+  i_profile.vendor_id=i_dp.vendor_id;
+  i_profile.vendor_acc_id=i_dp.account_id;
+  i_profile.term_gw_id=i_vendor_gw.id;
+
+  i_profile.orig_gw_name=i_customer_gw."name";
+  i_profile.orig_gw_external_id=i_customer_gw.external_id;
+
+  i_profile.term_gw_name=i_vendor_gw."name";
+  i_profile.term_gw_external_id=i_vendor_gw.external_id;
+
+  i_profile.customer_account_name=i_customer_acc."name";
+
+  i_profile.routing_group_id:=i_dp.routing_group_id;
+
+  if i_send_billing_information then
+    i_profile.aleg_append_headers_reply=E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval||E'\r\nX-VND-NEXT-INT:'||i_profile.dialpeer_next_interval||E'\r\nX-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate||E'\r\nX-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate||E'\r\nX-VND-CF:'||i_profile.dialpeer_fee;
+  end if;
+
+  if i_destination.use_dp_intervals THEN
+    i_profile.destination_initial_interval:=i_dp.initial_interval;
+    i_profile.destination_next_interval:=i_dp.next_interval;
+  ELSE
+    i_profile.destination_initial_interval:=i_destination.initial_interval;
+    i_profile.destination_next_interval:=i_destination.next_interval;
+  end if;
+
+  CASE i_profile.destination_rate_policy_id
+    WHEN 1 THEN -- fixed
+    i_profile.destination_next_rate:=i_destination.next_rate::varchar;
+    i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    WHEN 2 THEN -- based on dialpeer
+    i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    WHEN 3 THEN -- min
+    IF i_dp.next_rate >= i_destination.next_rate THEN
+      i_profile.destination_next_rate:=i_destination.next_rate::varchar; -- FIXED least
+      i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    ELSE
+      i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar; -- DYNAMIC
+      i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    END IF;
+    WHEN 4 THEN -- max
+    IF i_dp.next_rate < i_destination.next_rate THEN
+      i_profile.destination_next_rate:=i_destination.next_rate::varchar; --FIXED
+      i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    ELSE
+      i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar; -- DYNAMIC
+      i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    END IF;
+  ELSE
+  --
+  end case;
+
+
+
+  /* time limiting START */
+  --SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth.account_id;
+  --SELECT INTO STRICT v_v_acc * FROM billing.accounts  WHERE id=v_dialpeer.account_id;
+
+  IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee <0 THEN
+    v_customer_allowtime:=0;
+    i_profile.disconnect_code_id=8000; --Not enough customer balance
+    RETURN i_profile;
+  ELSIF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+    v_customer_allowtime:=i_destination.initial_interval;
+    i_profile.disconnect_code_id=8000; --Not enough customer balance
+    RETURN i_profile;
+  ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
+    v_customer_allowtime:=i_destination.initial_interval+
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
+  end IF;
+
+
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
+    v_vendor_allowtime:=0;
+    return null;
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
+    return null;
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
+    v_vendor_allowtime:=i_dp.initial_interval+
+                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
+                                    (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
+  end IF;
+
+  i_profile.time_limit=LEAST(
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
+    v_vendor_allowtime,
+    v_customer_allowtime
+  )::integer;
+
+
+  /* number rewriting _After_ routing */
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true);
+
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+
+  /*
+      get termination gw data
+  */
+  --SELECT into v_dst_gw * from class4.gateways WHERE id=v_dialpeer.gateway_id;
+  --SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth.gateway_id;
+  --vendor gw
+  if i_vendor_gw.termination_capacity is not null then
+    i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
+  end if;
+
+
+  /*
+      numberlist processing _After_ routing _IN_ termination GW
+  */
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> GW. Before numberlist processing src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+
+
+  ----- DST Numberlist processing-------------------------------------------------------------------------------------------------------
+  IF i_vendor_gw.termination_dst_numberlist_id is not null then
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.dst_prefix_out;
+    /*}dbg*/
+
+    select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_dst_numberlist_id;
+    CASE v_termination_numberlist.mode_id
+      when 1 then -- strict match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          ni.key=i_profile.dst_prefix_out
+        limit 1;
+      when 2 then -- prefix match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_profile.dst_prefix_out) and
+          length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
+    END CASE;
+
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_termination_numberlist_item);
+    /*}dbg*/
+
+    IF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW DST Numberlist. Drop by key action. Skipping route. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_termination_numberlist_item.key;
+      /*}dbg*/
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=2 then
+        i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.src_prefix_out,
+          v_termination_numberlist_item.src_rewrite_rule,
+          v_termination_numberlist_item.src_rewrite_result
+        );
+
+        i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.dst_prefix_out,
+          v_termination_numberlist_item.dst_rewrite_rule,
+          v_termination_numberlist_item.dst_rewrite_result
+        );
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW DST Numberlist. Drop by default action. Skipping route',EXTRACT(MILLISECOND from v_end-v_start);
+      /*}dbg*/
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=2 then
+      i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.src_prefix_out,
+        v_termination_numberlist.default_src_rewrite_rule,
+        v_termination_numberlist.default_src_rewrite_result
+      );
+
+      i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.dst_prefix_out,
+        v_termination_numberlist.default_dst_rewrite_rule,
+        v_termination_numberlist.default_dst_rewrite_result
+      );
+    END IF;
+  END IF;
+
+
+
+  ----- SRC Numberlist processing-------------------------------------------------------------------------------------------------------
+  IF i_vendor_gw.termination_src_numberlist_id is not null then
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW SRC Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.src_prefix_out;
+    /*}dbg*/
+
+    select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_src_numberlist_id;
+    CASE v_termination_numberlist.mode_id
+      when 1 then -- strict match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
+          ni.key=i_profile.src_prefix_out
+        limit 1;
+      when 2 then -- prefix match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
+          length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
+    END CASE;
+
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_termination_numberlist_item);
+    /*}dbg*/
+
+    IF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW SRC Numberlist. Drop by key action. Skipping route. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_termination_numberlist_item.key;
+      /*}dbg*/
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=2 then
+        i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.src_prefix_out,
+          v_termination_numberlist_item.src_rewrite_rule,
+          v_termination_numberlist_item.src_rewrite_result
+        );
+
+        i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.dst_prefix_out,
+          v_termination_numberlist_item.dst_rewrite_rule,
+          v_termination_numberlist_item.dst_rewrite_result
+        );
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW DST Numberlist. Drop by default action. Skipping route.',EXTRACT(MILLISECOND from v_end-v_start);
+      /*}dbg*/
+      -- drop by default
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=2 then
+      i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.src_prefix_out,
+        v_termination_numberlist.default_src_rewrite_rule,
+        v_termination_numberlist.default_src_rewrite_result
+      );
+
+      i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.dst_prefix_out,
+        v_termination_numberlist.default_dst_rewrite_rule,
+        v_termination_numberlist.default_dst_rewrite_result
+      );
+    END IF;
+  END IF;
+
+
+
+  /*
+      number rewriting _After_ routing _IN_ termination GW
+  */
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> GW. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true);
+
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+
+  -- i_profile.anonymize_sdp:=i_vendor_gw.anonymize_sdp OR i_customer_gw.anonymize_sdp;
+
+  --i_profile.append_headers:='User-Agent: YETI SBC\r\n';
+  i_profile.append_headers_req:=i_vendor_gw.term_append_headers_req;
+  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+
+
+
+  i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
+  i_profile.next_hop:=i_vendor_gw.term_next_hop;
+  i_profile.aleg_next_hop:=i_customer_gw.orig_next_hop;
+  --    i_profile.next_hop_for_replies:=v_dst_gw.term_next_hop_for_replies;
+
+  i_profile.dlg_nat_handling=i_customer_gw.dialog_nat_handling;
+
+  i_profile.call_id:=''; -- Generation by sems
+
+  i_profile.enable_auth:=i_vendor_gw.auth_enabled;
+  i_profile.auth_pwd:=i_vendor_gw.auth_password;
+  i_profile.auth_user:=i_vendor_gw.auth_user;
+  i_profile.enable_aleg_auth:=false;
+  i_profile.auth_aleg_pwd:='';
+  i_profile.auth_aleg_user:='';
+
+  if i_profile.enable_auth then
+    v_from_user=COALESCE(i_vendor_gw.auth_from_user,i_profile.src_prefix_out,'');
+    v_from_domain=COALESCE(i_vendor_gw.auth_from_domain,'$Oi');
+  else
+    v_from_user=COALESCE(i_profile.src_prefix_out,'');
+    if i_vendor_gw.preserve_anonymous_from_domain and i_profile.from_domain='anonymous.invalid' then
+      v_from_domain='anonymous.invalid';
+    else
+      v_from_domain='$Oi';
+    end if;
+  end if;
+
+  if i_vendor_gw.sip_schema_id = 1 then
+    v_schema='sip';
+  elsif i_vendor_gw.sip_schema_id = 2 then
+    v_schema='sips';
+  else
+    RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
+  end if;
+
+
+  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
+  i_profile."to":='<'||v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+
+  if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
+    if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
+      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      i_profile.lrn=nullif(i_profile.dst_prefix_routing,i_profile.lrn); -- clear lnr field if number not ported;
+    else -- if number ported
+      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';rn='||i_profile.lrn||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+    end if;
+  else
+    i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
+  end if;
+
+  if i_vendor_gw.use_registered_aor then
+    i_profile.registered_aor_id=i_vendor_gw.id;
+  end if;
+
+  i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
+  i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
+
+  i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
+  i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
+
+
+  IF (i_vendor_gw.term_use_outbound_proxy ) THEN
+    i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
+    i_profile.force_outbound_proxy:=i_vendor_gw.term_force_outbound_proxy;
+    i_profile.bleg_outbound_proxy_transport_protocol_id:=i_vendor_gw.term_proxy_transport_protocol_id;
+  ELSE
+    i_profile.outbound_proxy:=NULL;
+    i_profile.force_outbound_proxy:=false;
+  END IF;
+
+  IF (i_customer_gw.orig_use_outbound_proxy ) THEN
+    i_profile.aleg_force_outbound_proxy:=i_customer_gw.orig_force_outbound_proxy;
+    i_profile.aleg_outbound_proxy=v_schema||':'||i_customer_gw.orig_outbound_proxy;
+    i_profile.aleg_outbound_proxy_transport_protocol_id:=i_customer_gw.orig_proxy_transport_protocol_id;
+  else
+    i_profile.aleg_force_outbound_proxy:=FALSE;
+    i_profile.aleg_outbound_proxy=NULL;
+  end if;
+
+  i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
+  i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
+
+  i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
+  i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
+
+
+  i_profile.sdp_filter_type_id:=0;
+  i_profile.sdp_filter_list:='';
+
+  i_profile.sdp_alines_filter_type_id:=i_vendor_gw.sdp_alines_filter_type_id;
+  i_profile.sdp_alines_filter_list:=i_vendor_gw.sdp_alines_filter_list;
+
+  i_profile.enable_session_timer=i_vendor_gw.sst_enabled;
+  i_profile.session_expires =i_vendor_gw.sst_session_expires;
+  i_profile.minimum_timer:=i_vendor_gw.sst_minimum_timer;
+  i_profile.maximum_timer:=i_vendor_gw.sst_maximum_timer;
+  i_profile.session_refresh_method_id:=i_vendor_gw.session_refresh_method_id;
+  i_profile.accept_501_reply:=i_vendor_gw.sst_accept501;
+
+  i_profile.enable_aleg_session_timer=i_customer_gw.sst_enabled;
+  i_profile.aleg_session_expires:=i_customer_gw.sst_session_expires;
+  i_profile.aleg_minimum_timer:=i_customer_gw.sst_minimum_timer;
+  i_profile.aleg_maximum_timer:=i_customer_gw.sst_maximum_timer;
+  i_profile.aleg_session_refresh_method_id:=i_customer_gw.session_refresh_method_id;
+  i_profile.aleg_accept_501_reply:=i_customer_gw.sst_accept501;
+
+  i_profile.reply_translations:='';
+  i_profile.disconnect_code_id:=NULL;
+  i_profile.enable_rtprelay:=i_vendor_gw.proxy_media OR i_customer_gw.proxy_media;
+
+  i_profile.rtprelay_interface:=i_vendor_gw.rtp_interface_name;
+  i_profile.aleg_rtprelay_interface:=i_customer_gw.rtp_interface_name;
+
+  i_profile.outbound_interface:=i_vendor_gw.sip_interface_name;
+  i_profile.aleg_outbound_interface:=i_customer_gw.sip_interface_name;
+
+  i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
+  i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
+  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
+
+  i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
+  i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
+  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
+
+  i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
+  i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
+
+  i_profile.bleg_relay_options = i_vendor_gw.relay_options;
+  i_profile.aleg_relay_options = i_customer_gw.relay_options;
+
+
+  i_profile.filter_noaudio_streams = i_vendor_gw.filter_noaudio_streams OR i_customer_gw.filter_noaudio_streams;
+  i_profile.force_one_way_early_media = i_vendor_gw.force_one_way_early_media OR i_customer_gw.force_one_way_early_media;
+  i_profile.aleg_relay_reinvite = i_vendor_gw.relay_reinvite;
+  i_profile.bleg_relay_reinvite = i_customer_gw.relay_reinvite;
+
+  i_profile.aleg_relay_hold = i_vendor_gw.relay_hold;
+  i_profile.bleg_relay_hold = i_customer_gw.relay_hold;
+
+  i_profile.aleg_relay_prack = i_vendor_gw.relay_prack;
+  i_profile.bleg_relay_prack = i_customer_gw.relay_prack;
+  i_profile.aleg_rel100_mode_id = i_customer_gw.rel100_mode_id;
+  i_profile.bleg_rel100_mode_id = i_vendor_gw.rel100_mode_id;
+
+  i_profile.rtp_relay_timestamp_aligning=i_vendor_gw.rtp_relay_timestamp_aligning OR i_customer_gw.rtp_relay_timestamp_aligning;
+  i_profile.allow_1xx_wo2tag=i_vendor_gw.allow_1xx_without_to_tag OR i_customer_gw.allow_1xx_without_to_tag;
+
+  i_profile.aleg_sdp_c_location_id=i_customer_gw.sdp_c_location_id;
+  i_profile.bleg_sdp_c_location_id=i_vendor_gw.sdp_c_location_id;
+  i_profile.trusted_hdrs_gw=false;
+
+
+
+  i_profile.aleg_codecs_group_id:=i_customer_gw.codec_group_id;
+  i_profile.bleg_codecs_group_id:=i_vendor_gw.codec_group_id;
+  i_profile.aleg_single_codec_in_200ok:=i_customer_gw.single_codec_in_200ok;
+  i_profile.bleg_single_codec_in_200ok:=i_vendor_gw.single_codec_in_200ok;
+  i_profile.ringing_timeout=i_vendor_gw.ringing_timeout;
+  i_profile.dead_rtp_time=GREATEST(i_vendor_gw.rtp_timeout,i_customer_gw.rtp_timeout);
+  i_profile.invite_timeout=i_vendor_gw.sip_timer_b;
+  i_profile.srv_failover_timeout=i_vendor_gw.dns_srv_failover_timer;
+  i_profile.fake_180_timer=i_vendor_gw.fake_180_timer;
+  i_profile.rtp_force_relay_cn=i_vendor_gw.rtp_force_relay_cn OR i_customer_gw.rtp_force_relay_cn;
+  i_profile.patch_ruri_next_hop=i_vendor_gw.resolve_ruri;
+
+  i_profile.aleg_sensor_id=i_customer_gw.sensor_id;
+  i_profile.aleg_sensor_level_id=i_customer_gw.sensor_level_id;
+  i_profile.bleg_sensor_id=i_vendor_gw.sensor_id;
+  i_profile.bleg_sensor_level_id=i_vendor_gw.sensor_level_id;
+
+  i_profile.aleg_dtmf_send_mode_id=i_customer_gw.dtmf_send_mode_id;
+  i_profile.aleg_dtmf_recv_modes=i_customer_gw.dtmf_receive_mode_id;
+  i_profile.bleg_dtmf_send_mode_id=i_vendor_gw.dtmf_send_mode_id;
+  i_profile.bleg_dtmf_recv_modes=i_vendor_gw.dtmf_receive_mode_id;
+
+
+  i_profile.aleg_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
+
+  if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
+    i_profile.aleg_rtp_filter_inband_dtmf=true;
+  elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
+    if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
+    end if;
+  end if;
+
+
+  if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
+    i_profile.bleg_rtp_filter_inband_dtmf=true;
+  elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
+    if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
+    end if;
+  end if;
+
+
+  i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
+  i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
+  i_profile.rtprelay_dtmf_filtering=NOT i_vendor_gw.force_dtmf_relay;
+  i_profile.bleg_max_30x_redirects = i_vendor_gw.max_30x_redirects;
+  i_profile.bleg_max_transfers = i_vendor_gw.max_transfers;
+
+
+  i_profile.aleg_relay_update=i_customer_gw.relay_update;
+  i_profile.bleg_relay_update=i_vendor_gw.relay_update;
+  i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
+
+  i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. Finished: % ',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_profile,true);
+  /*}dbg*/
+  RETURN i_profile;
+END;
+$_$;
+
+
+--
+-- Name: process_gw_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.process_gw_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch20.callprofile_ty
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
+    AS $_$
+DECLARE
+  i integer;
+  v_customer_allowtime real;
+  v_vendor_allowtime real;
+  v_route_found boolean:=false;
+  v_from_user varchar;
+  v_from_domain varchar;
+  v_schema varchar;
+  v_termination_numberlist class4.numberlists%rowtype;
+  v_termination_numberlist_item class4.numberlist_items%rowtype;
+  v_termination_numberlist_size integer;
+  /*dbg{*/
+  v_start timestamp;
+  v_end timestamp;
+  /*}dbg*/
+BEGIN
+  /*dbg{*/
+  v_start:=now();
+  --RAISE NOTICE 'process_dp in: %',i_profile;
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. Found dialpeer: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_dp,true);
+  /*}dbg*/
+
+  --RAISE NOTICE 'process_dp dst: %',i_destination;
+
+  i_profile.destination_id:=i_destination.id;
+  --    i_profile.destination_initial_interval:=i_destination.initial_interval;
+  i_profile.destination_fee:=i_destination.connect_fee::varchar;
+  --i_profile.destination_next_interval:=i_destination.next_interval;
+  i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
+
+  --vendor account capacity limit;
+  if i_vendor_acc.termination_capacity is not null then
+    i_profile.resources:=i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+  end if;
+
+  if i_vendor_acc.total_capacity is not null then
+    i_profile.resources:=i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+  end if;
+
+
+  -- dialpeer account capacity limit;
+  if i_dp.capacity is not null then
+    i_profile.resources:=i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+  end if;
+
+  /* */
+  i_profile.dialpeer_id=i_dp.id;
+  i_profile.dialpeer_prefix=i_dp.prefix;
+  i_profile.dialpeer_next_rate=i_dp.next_rate::varchar;
+  i_profile.dialpeer_initial_rate=i_dp.initial_rate::varchar;
+  i_profile.dialpeer_initial_interval=i_dp.initial_interval;
+  i_profile.dialpeer_next_interval=i_dp.next_interval;
+  i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
+  i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
+  i_profile.vendor_id=i_dp.vendor_id;
+  i_profile.vendor_acc_id=i_dp.account_id;
+  i_profile.term_gw_id=i_vendor_gw.id;
+
+  i_profile.orig_gw_name=i_customer_gw."name";
+  i_profile.orig_gw_external_id=i_customer_gw.external_id;
+
+  i_profile.term_gw_name=i_vendor_gw."name";
+  i_profile.term_gw_external_id=i_vendor_gw.external_id;
+
+  i_profile.customer_account_name=i_customer_acc."name";
+
+  i_profile.routing_group_id:=i_dp.routing_group_id;
+
+  if i_send_billing_information then
+    i_profile.aleg_append_headers_reply=E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval||E'\r\nX-VND-NEXT-INT:'||i_profile.dialpeer_next_interval||E'\r\nX-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate||E'\r\nX-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate||E'\r\nX-VND-CF:'||i_profile.dialpeer_fee;
+  end if;
+
+  if i_destination.use_dp_intervals THEN
+    i_profile.destination_initial_interval:=i_dp.initial_interval;
+    i_profile.destination_next_interval:=i_dp.next_interval;
+  ELSE
+    i_profile.destination_initial_interval:=i_destination.initial_interval;
+    i_profile.destination_next_interval:=i_destination.next_interval;
+  end if;
+
+  CASE i_profile.destination_rate_policy_id
+    WHEN 1 THEN -- fixed
+    i_profile.destination_next_rate:=i_destination.next_rate::varchar;
+    i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    WHEN 2 THEN -- based on dialpeer
+    i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    WHEN 3 THEN -- min
+    IF i_dp.next_rate >= i_destination.next_rate THEN
+      i_profile.destination_next_rate:=i_destination.next_rate::varchar; -- FIXED least
+      i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    ELSE
+      i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar; -- DYNAMIC
+      i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    END IF;
+    WHEN 4 THEN -- max
+    IF i_dp.next_rate < i_destination.next_rate THEN
+      i_profile.destination_next_rate:=i_destination.next_rate::varchar; --FIXED
+      i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    ELSE
+      i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar; -- DYNAMIC
+      i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    END IF;
+  ELSE
+  --
+  end case;
+
+
+
+  /* time limiting START */
+  --SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth.account_id;
+  --SELECT INTO STRICT v_v_acc * FROM billing.accounts  WHERE id=v_dialpeer.account_id;
+
+  IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee <0 THEN
+    v_customer_allowtime:=0;
+    i_profile.disconnect_code_id=8000; --Not enough customer balance
+    RETURN i_profile;
+  ELSIF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+    v_customer_allowtime:=i_destination.initial_interval;
+    i_profile.disconnect_code_id=8000; --Not enough customer balance
+    RETURN i_profile;
+  ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
+    v_customer_allowtime:=i_destination.initial_interval+
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
+  end IF;
+
+
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
+    v_vendor_allowtime:=0;
+    return null;
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
+    return null;
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
+    v_vendor_allowtime:=i_dp.initial_interval+
+                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
+                                    (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
+  end IF;
+
+  i_profile.time_limit=LEAST(
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
+    v_vendor_allowtime,
+    v_customer_allowtime
+  )::integer;
+
+
+  /* number rewriting _After_ routing */
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true);
+
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+
+  /*
+      get termination gw data
+  */
+  --SELECT into v_dst_gw * from class4.gateways WHERE id=v_dialpeer.gateway_id;
+  --SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth.gateway_id;
+  --vendor gw
+  if i_vendor_gw.termination_capacity is not null then
+    i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
+  end if;
+
+
+  /*
+      numberlist processing _After_ routing _IN_ termination GW
+  */
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> GW. Before numberlist processing src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+
+
+  ----- DST Numberlist processing-------------------------------------------------------------------------------------------------------
+  IF i_vendor_gw.termination_dst_numberlist_id is not null then
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.dst_prefix_out;
+    /*}dbg*/
+
+    select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_dst_numberlist_id;
+    CASE v_termination_numberlist.mode_id
+      when 1 then -- strict match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          ni.key=i_profile.dst_prefix_out
+        limit 1;
+      when 2 then -- prefix match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_profile.dst_prefix_out) and
+          length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
+    END CASE;
+
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_termination_numberlist_item);
+    /*}dbg*/
+
+    IF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW DST Numberlist. Drop by key action. Skipping route. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_termination_numberlist_item.key;
+      /*}dbg*/
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=2 then
+        i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.src_prefix_out,
+          v_termination_numberlist_item.src_rewrite_rule,
+          v_termination_numberlist_item.src_rewrite_result
+        );
+
+        i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.dst_prefix_out,
+          v_termination_numberlist_item.dst_rewrite_rule,
+          v_termination_numberlist_item.dst_rewrite_result
+        );
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW DST Numberlist. Drop by default action. Skipping route',EXTRACT(MILLISECOND from v_end-v_start);
+      /*}dbg*/
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=2 then
+      i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.src_prefix_out,
+        v_termination_numberlist.default_src_rewrite_rule,
+        v_termination_numberlist.default_src_rewrite_result
+      );
+
+      i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.dst_prefix_out,
+        v_termination_numberlist.default_dst_rewrite_rule,
+        v_termination_numberlist.default_dst_rewrite_result
+      );
+    END IF;
+  END IF;
+
+
+
+  ----- SRC Numberlist processing-------------------------------------------------------------------------------------------------------
+  IF i_vendor_gw.termination_src_numberlist_id is not null then
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW SRC Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.src_prefix_out;
+    /*}dbg*/
+
+    select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_src_numberlist_id;
+    CASE v_termination_numberlist.mode_id
+      when 1 then -- strict match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
+          ni.key=i_profile.src_prefix_out
+        limit 1;
+      when 2 then -- prefix match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
+          length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
+    END CASE;
+
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> GW SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_termination_numberlist_item);
+    /*}dbg*/
+
+    IF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW SRC Numberlist. Drop by key action. Skipping route. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_termination_numberlist_item.key;
+      /*}dbg*/
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=2 then
+        i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.src_prefix_out,
+          v_termination_numberlist_item.src_rewrite_rule,
+          v_termination_numberlist_item.src_rewrite_result
+        );
+
+        i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.dst_prefix_out,
+          v_termination_numberlist_item.dst_rewrite_rule,
+          v_termination_numberlist_item.dst_rewrite_result
+        );
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW DST Numberlist. Drop by default action. Skipping route.',EXTRACT(MILLISECOND from v_end-v_start);
+      /*}dbg*/
+      -- drop by default
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=2 then
+      i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.src_prefix_out,
+        v_termination_numberlist.default_src_rewrite_rule,
+        v_termination_numberlist.default_src_rewrite_result
+      );
+
+      i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.dst_prefix_out,
+        v_termination_numberlist.default_dst_rewrite_rule,
+        v_termination_numberlist.default_dst_rewrite_result
+      );
+    END IF;
+  END IF;
+
+
+
+  /*
+      number rewriting _After_ routing _IN_ termination GW
+  */
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> GW. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true);
+
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  /*}dbg*/
+
+  -- i_profile.anonymize_sdp:=i_vendor_gw.anonymize_sdp OR i_customer_gw.anonymize_sdp;
+
+  --i_profile.append_headers:='User-Agent: YETI SBC\r\n';
+  i_profile.append_headers_req:=i_vendor_gw.term_append_headers_req;
+  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+
+
+
+  i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
+  i_profile.next_hop:=i_vendor_gw.term_next_hop;
+  i_profile.aleg_next_hop:=i_customer_gw.orig_next_hop;
+  --    i_profile.next_hop_for_replies:=v_dst_gw.term_next_hop_for_replies;
+
+  i_profile.dlg_nat_handling=i_customer_gw.dialog_nat_handling;
+
+  i_profile.call_id:=''; -- Generation by sems
+
+  i_profile.enable_auth:=i_vendor_gw.auth_enabled;
+  i_profile.auth_pwd:=i_vendor_gw.auth_password;
+  i_profile.auth_user:=i_vendor_gw.auth_user;
+  i_profile.enable_aleg_auth:=false;
+  i_profile.auth_aleg_pwd:='';
+  i_profile.auth_aleg_user:='';
+
+  if i_profile.enable_auth then
+    v_from_user=COALESCE(i_vendor_gw.auth_from_user,i_profile.src_prefix_out,'');
+    v_from_domain=COALESCE(i_vendor_gw.auth_from_domain,'$Oi');
+  else
+    v_from_user=COALESCE(i_profile.src_prefix_out,'');
+    if i_vendor_gw.preserve_anonymous_from_domain and i_profile.from_domain='anonymous.invalid' then
+      v_from_domain='anonymous.invalid';
+    else
+      v_from_domain='$Oi';
+    end if;
+  end if;
+
+  if i_vendor_gw.sip_schema_id = 1 then
+    v_schema='sip';
+  elsif i_vendor_gw.sip_schema_id = 2 then
+    v_schema='sips';
+  else
+    RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
+  end if;
+
+
+  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
+  i_profile."to":='<'||v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+
+  if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
+    if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
+      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      i_profile.lrn=nullif(i_profile.dst_prefix_routing,i_profile.lrn); -- clear lnr field if number not ported;
+    else -- if number ported
+      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';rn='||i_profile.lrn||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+    end if;
+  else
+    i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
+  end if;
+
+  if i_vendor_gw.use_registered_aor then
+    i_profile.registered_aor_id=i_vendor_gw.id;
+  end if;
+
+  i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
+  i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
+
+  i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
+  i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
+
+
+  IF (i_vendor_gw.term_use_outbound_proxy ) THEN
+    i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
+    i_profile.force_outbound_proxy:=i_vendor_gw.term_force_outbound_proxy;
+    i_profile.bleg_outbound_proxy_transport_protocol_id:=i_vendor_gw.term_proxy_transport_protocol_id;
+  ELSE
+    i_profile.outbound_proxy:=NULL;
+    i_profile.force_outbound_proxy:=false;
+  END IF;
+
+  IF (i_customer_gw.orig_use_outbound_proxy ) THEN
+    i_profile.aleg_force_outbound_proxy:=i_customer_gw.orig_force_outbound_proxy;
+    i_profile.aleg_outbound_proxy=v_schema||':'||i_customer_gw.orig_outbound_proxy;
+    i_profile.aleg_outbound_proxy_transport_protocol_id:=i_customer_gw.orig_proxy_transport_protocol_id;
+  else
+    i_profile.aleg_force_outbound_proxy:=FALSE;
+    i_profile.aleg_outbound_proxy=NULL;
+  end if;
+
+  i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
+  i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
+
+  i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
+  i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
+
+
+  i_profile.sdp_filter_type_id:=0;
+  i_profile.sdp_filter_list:='';
+
+  i_profile.sdp_alines_filter_type_id:=i_vendor_gw.sdp_alines_filter_type_id;
+  i_profile.sdp_alines_filter_list:=i_vendor_gw.sdp_alines_filter_list;
+
+  i_profile.enable_session_timer=i_vendor_gw.sst_enabled;
+  i_profile.session_expires =i_vendor_gw.sst_session_expires;
+  i_profile.minimum_timer:=i_vendor_gw.sst_minimum_timer;
+  i_profile.maximum_timer:=i_vendor_gw.sst_maximum_timer;
+  i_profile.session_refresh_method_id:=i_vendor_gw.session_refresh_method_id;
+  i_profile.accept_501_reply:=i_vendor_gw.sst_accept501;
+
+  i_profile.enable_aleg_session_timer=i_customer_gw.sst_enabled;
+  i_profile.aleg_session_expires:=i_customer_gw.sst_session_expires;
+  i_profile.aleg_minimum_timer:=i_customer_gw.sst_minimum_timer;
+  i_profile.aleg_maximum_timer:=i_customer_gw.sst_maximum_timer;
+  i_profile.aleg_session_refresh_method_id:=i_customer_gw.session_refresh_method_id;
+  i_profile.aleg_accept_501_reply:=i_customer_gw.sst_accept501;
+
+  i_profile.reply_translations:='';
+  i_profile.disconnect_code_id:=NULL;
+  i_profile.enable_rtprelay:=i_vendor_gw.proxy_media OR i_customer_gw.proxy_media;
+
+  i_profile.rtprelay_interface:=i_vendor_gw.rtp_interface_name;
+  i_profile.aleg_rtprelay_interface:=i_customer_gw.rtp_interface_name;
+
+  i_profile.outbound_interface:=i_vendor_gw.sip_interface_name;
+  i_profile.aleg_outbound_interface:=i_customer_gw.sip_interface_name;
+
+  i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
+  i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
+  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
+
+  i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
+  i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
+  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
+
+  i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
+  i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
+
+  i_profile.bleg_relay_options = i_vendor_gw.relay_options;
+  i_profile.aleg_relay_options = i_customer_gw.relay_options;
+
+
+  i_profile.filter_noaudio_streams = i_vendor_gw.filter_noaudio_streams OR i_customer_gw.filter_noaudio_streams;
+  i_profile.force_one_way_early_media = i_vendor_gw.force_one_way_early_media OR i_customer_gw.force_one_way_early_media;
+  i_profile.aleg_relay_reinvite = i_vendor_gw.relay_reinvite;
+  i_profile.bleg_relay_reinvite = i_customer_gw.relay_reinvite;
+
+  i_profile.aleg_relay_hold = i_vendor_gw.relay_hold;
+  i_profile.bleg_relay_hold = i_customer_gw.relay_hold;
+
+  i_profile.aleg_relay_prack = i_vendor_gw.relay_prack;
+  i_profile.bleg_relay_prack = i_customer_gw.relay_prack;
+  i_profile.aleg_rel100_mode_id = i_customer_gw.rel100_mode_id;
+  i_profile.bleg_rel100_mode_id = i_vendor_gw.rel100_mode_id;
+
+  i_profile.rtp_relay_timestamp_aligning=i_vendor_gw.rtp_relay_timestamp_aligning OR i_customer_gw.rtp_relay_timestamp_aligning;
+  i_profile.allow_1xx_wo2tag=i_vendor_gw.allow_1xx_without_to_tag OR i_customer_gw.allow_1xx_without_to_tag;
+
+  i_profile.aleg_sdp_c_location_id=i_customer_gw.sdp_c_location_id;
+  i_profile.bleg_sdp_c_location_id=i_vendor_gw.sdp_c_location_id;
+  i_profile.trusted_hdrs_gw=false;
+
+
+
+  i_profile.aleg_codecs_group_id:=i_customer_gw.codec_group_id;
+  i_profile.bleg_codecs_group_id:=i_vendor_gw.codec_group_id;
+  i_profile.aleg_single_codec_in_200ok:=i_customer_gw.single_codec_in_200ok;
+  i_profile.bleg_single_codec_in_200ok:=i_vendor_gw.single_codec_in_200ok;
+  i_profile.ringing_timeout=i_vendor_gw.ringing_timeout;
+  i_profile.dead_rtp_time=GREATEST(i_vendor_gw.rtp_timeout,i_customer_gw.rtp_timeout);
+  i_profile.invite_timeout=i_vendor_gw.sip_timer_b;
+  i_profile.srv_failover_timeout=i_vendor_gw.dns_srv_failover_timer;
+  i_profile.fake_180_timer=i_vendor_gw.fake_180_timer;
+  i_profile.rtp_force_relay_cn=i_vendor_gw.rtp_force_relay_cn OR i_customer_gw.rtp_force_relay_cn;
+  i_profile.patch_ruri_next_hop=i_vendor_gw.resolve_ruri;
+
+  i_profile.aleg_sensor_id=i_customer_gw.sensor_id;
+  i_profile.aleg_sensor_level_id=i_customer_gw.sensor_level_id;
+  i_profile.bleg_sensor_id=i_vendor_gw.sensor_id;
+  i_profile.bleg_sensor_level_id=i_vendor_gw.sensor_level_id;
+
+  i_profile.aleg_dtmf_send_mode_id=i_customer_gw.dtmf_send_mode_id;
+  i_profile.aleg_dtmf_recv_modes=i_customer_gw.dtmf_receive_mode_id;
+  i_profile.bleg_dtmf_send_mode_id=i_vendor_gw.dtmf_send_mode_id;
+  i_profile.bleg_dtmf_recv_modes=i_vendor_gw.dtmf_receive_mode_id;
+
+
+  i_profile.aleg_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
+
+  if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
+    i_profile.aleg_rtp_filter_inband_dtmf=true;
+  elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
+    if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
+    end if;
+  end if;
+
+
+  if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
+    i_profile.bleg_rtp_filter_inband_dtmf=true;
+  elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
+    if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
+    end if;
+  end if;
+
+
+  i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
+  i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
+  i_profile.rtprelay_dtmf_filtering=NOT i_vendor_gw.force_dtmf_relay;
+  i_profile.bleg_max_30x_redirects = i_vendor_gw.max_30x_redirects;
+  i_profile.bleg_max_transfers = i_vendor_gw.max_transfers;
+
+
+  i_profile.aleg_relay_update=i_customer_gw.relay_update;
+  i_profile.bleg_relay_update=i_vendor_gw.relay_update;
+  i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
+
+  i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+
+  /*dbg{*/
+  v_end:=clock_timestamp();
+  RAISE NOTICE '% ms -> DP. Finished: % ',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_profile,true);
+  /*}dbg*/
+  RETURN i_profile;
+END;
+$_$;
+
+
+--
+-- Name: process_gw_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.process_gw_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch20.callprofile_ty
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
+    AS $_$
+DECLARE
+  i integer;
+  v_customer_allowtime real;
+  v_vendor_allowtime real;
+  v_route_found boolean:=false;
+  v_from_user varchar;
+  v_from_domain varchar;
+  v_schema varchar;
+  v_termination_numberlist class4.numberlists%rowtype;
+  v_termination_numberlist_item class4.numberlist_items%rowtype;
+  v_termination_numberlist_size integer;
+  
+BEGIN
+  
+
+  --RAISE NOTICE 'process_dp dst: %',i_destination;
+
+  i_profile.destination_id:=i_destination.id;
+  --    i_profile.destination_initial_interval:=i_destination.initial_interval;
+  i_profile.destination_fee:=i_destination.connect_fee::varchar;
+  --i_profile.destination_next_interval:=i_destination.next_interval;
+  i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
+
+  --vendor account capacity limit;
+  if i_vendor_acc.termination_capacity is not null then
+    i_profile.resources:=i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+  end if;
+
+  if i_vendor_acc.total_capacity is not null then
+    i_profile.resources:=i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+  end if;
+
+
+  -- dialpeer account capacity limit;
+  if i_dp.capacity is not null then
+    i_profile.resources:=i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+  end if;
+
+  /* */
+  i_profile.dialpeer_id=i_dp.id;
+  i_profile.dialpeer_prefix=i_dp.prefix;
+  i_profile.dialpeer_next_rate=i_dp.next_rate::varchar;
+  i_profile.dialpeer_initial_rate=i_dp.initial_rate::varchar;
+  i_profile.dialpeer_initial_interval=i_dp.initial_interval;
+  i_profile.dialpeer_next_interval=i_dp.next_interval;
+  i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
+  i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
+  i_profile.vendor_id=i_dp.vendor_id;
+  i_profile.vendor_acc_id=i_dp.account_id;
+  i_profile.term_gw_id=i_vendor_gw.id;
+
+  i_profile.orig_gw_name=i_customer_gw."name";
+  i_profile.orig_gw_external_id=i_customer_gw.external_id;
+
+  i_profile.term_gw_name=i_vendor_gw."name";
+  i_profile.term_gw_external_id=i_vendor_gw.external_id;
+
+  i_profile.customer_account_name=i_customer_acc."name";
+
+  i_profile.routing_group_id:=i_dp.routing_group_id;
+
+  if i_send_billing_information then
+    i_profile.aleg_append_headers_reply=E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval||E'\r\nX-VND-NEXT-INT:'||i_profile.dialpeer_next_interval||E'\r\nX-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate||E'\r\nX-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate||E'\r\nX-VND-CF:'||i_profile.dialpeer_fee;
+  end if;
+
+  if i_destination.use_dp_intervals THEN
+    i_profile.destination_initial_interval:=i_dp.initial_interval;
+    i_profile.destination_next_interval:=i_dp.next_interval;
+  ELSE
+    i_profile.destination_initial_interval:=i_destination.initial_interval;
+    i_profile.destination_next_interval:=i_destination.next_interval;
+  end if;
+
+  CASE i_profile.destination_rate_policy_id
+    WHEN 1 THEN -- fixed
+    i_profile.destination_next_rate:=i_destination.next_rate::varchar;
+    i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    WHEN 2 THEN -- based on dialpeer
+    i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    WHEN 3 THEN -- min
+    IF i_dp.next_rate >= i_destination.next_rate THEN
+      i_profile.destination_next_rate:=i_destination.next_rate::varchar; -- FIXED least
+      i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    ELSE
+      i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar; -- DYNAMIC
+      i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    END IF;
+    WHEN 4 THEN -- max
+    IF i_dp.next_rate < i_destination.next_rate THEN
+      i_profile.destination_next_rate:=i_destination.next_rate::varchar; --FIXED
+      i_profile.destination_initial_rate:=i_destination.initial_rate::varchar;
+    ELSE
+      i_profile.destination_next_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.next_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar; -- DYNAMIC
+      i_profile.destination_initial_rate:=(COALESCE(i_destination.dp_margin_fixed,0)+i_dp.initial_rate*(1+COALESCE(i_destination.dp_margin_percent,0)))::varchar;
+    END IF;
+  ELSE
+  --
+  end case;
+
+
+
+  /* time limiting START */
+  --SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth.account_id;
+  --SELECT INTO STRICT v_v_acc * FROM billing.accounts  WHERE id=v_dialpeer.account_id;
+
+  IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee <0 THEN
+    v_customer_allowtime:=0;
+    i_profile.disconnect_code_id=8000; --Not enough customer balance
+    RETURN i_profile;
+  ELSIF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+    v_customer_allowtime:=i_destination.initial_interval;
+    i_profile.disconnect_code_id=8000; --Not enough customer balance
+    RETURN i_profile;
+  ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
+    v_customer_allowtime:=i_destination.initial_interval+
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
+  ELSE /* DST rates is 0, allowing maximum call length */
+    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
+  end IF;
+
+
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
+    v_vendor_allowtime:=0;
+    return null;
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
+    return null;
+  ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
+    v_vendor_allowtime:=i_dp.initial_interval+
+                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
+                                    (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
+  ELSE /* DP rates is 0, allowing maximum call length */
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
+  end IF;
+
+  i_profile.time_limit=LEAST(
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
+    v_vendor_allowtime,
+    v_customer_allowtime
+  )::integer;
+
+
+  /* number rewriting _After_ routing */
+  
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true);
+
+  
+
+  /*
+      get termination gw data
+  */
+  --SELECT into v_dst_gw * from class4.gateways WHERE id=v_dialpeer.gateway_id;
+  --SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth.gateway_id;
+  --vendor gw
+  if i_vendor_gw.termination_capacity is not null then
+    i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
+  end if;
+
+
+  /*
+      numberlist processing _After_ routing _IN_ termination GW
+  */
+  
+
+
+  ----- DST Numberlist processing-------------------------------------------------------------------------------------------------------
+  IF i_vendor_gw.termination_dst_numberlist_id is not null then
+    
+
+    select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_dst_numberlist_id;
+    CASE v_termination_numberlist.mode_id
+      when 1 then -- strict match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          ni.key=i_profile.dst_prefix_out
+        limit 1;
+      when 2 then -- prefix match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_profile.dst_prefix_out) and
+          length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
+    END CASE;
+
+    
+
+    IF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=1 then
+      
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=2 then
+        i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.src_prefix_out,
+          v_termination_numberlist_item.src_rewrite_rule,
+          v_termination_numberlist_item.src_rewrite_result
+        );
+
+        i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.dst_prefix_out,
+          v_termination_numberlist_item.dst_rewrite_rule,
+          v_termination_numberlist_item.dst_rewrite_result
+        );
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
+      
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=2 then
+      i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.src_prefix_out,
+        v_termination_numberlist.default_src_rewrite_rule,
+        v_termination_numberlist.default_src_rewrite_result
+      );
+
+      i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.dst_prefix_out,
+        v_termination_numberlist.default_dst_rewrite_rule,
+        v_termination_numberlist.default_dst_rewrite_result
+      );
+    END IF;
+  END IF;
+
+
+
+  ----- SRC Numberlist processing-------------------------------------------------------------------------------------------------------
+  IF i_vendor_gw.termination_src_numberlist_id is not null then
+    
+
+    select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_src_numberlist_id;
+    CASE v_termination_numberlist.mode_id
+      when 1 then -- strict match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
+          ni.key=i_profile.src_prefix_out
+        limit 1;
+      when 2 then -- prefix match
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+        where
+          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
+          length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      when 3 then -- random
+        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
+        select into v_termination_numberlist_item * from class4.numberlist_items ni
+         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
+    END CASE;
+
+    
+
+    IF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=1 then
+      
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is not null and v_termination_numberlist_item.action_id=2 then
+        i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.src_prefix_out,
+          v_termination_numberlist_item.src_rewrite_rule,
+          v_termination_numberlist_item.src_rewrite_result
+        );
+
+        i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+          i_profile.dst_prefix_out,
+          v_termination_numberlist_item.dst_rewrite_rule,
+          v_termination_numberlist_item.dst_rewrite_result
+        );
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
+      
+      -- drop by default
+      RETURN null;
+    ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=2 then
+      i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.src_prefix_out,
+        v_termination_numberlist.default_src_rewrite_rule,
+        v_termination_numberlist.default_src_rewrite_result
+      );
+
+      i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
+        i_profile.dst_prefix_out,
+        v_termination_numberlist.default_dst_rewrite_rule,
+        v_termination_numberlist.default_dst_rewrite_result
+      );
+    END IF;
+  END IF;
+
+
+
+  /*
+      number rewriting _After_ routing _IN_ termination GW
+  */
+  
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true);
+
+  
+
+  -- i_profile.anonymize_sdp:=i_vendor_gw.anonymize_sdp OR i_customer_gw.anonymize_sdp;
+
+  --i_profile.append_headers:='User-Agent: YETI SBC\r\n';
+  i_profile.append_headers_req:=i_vendor_gw.term_append_headers_req;
+  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+
+
+
+  i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
+  i_profile.next_hop:=i_vendor_gw.term_next_hop;
+  i_profile.aleg_next_hop:=i_customer_gw.orig_next_hop;
+  --    i_profile.next_hop_for_replies:=v_dst_gw.term_next_hop_for_replies;
+
+  i_profile.dlg_nat_handling=i_customer_gw.dialog_nat_handling;
+
+  i_profile.call_id:=''; -- Generation by sems
+
+  i_profile.enable_auth:=i_vendor_gw.auth_enabled;
+  i_profile.auth_pwd:=i_vendor_gw.auth_password;
+  i_profile.auth_user:=i_vendor_gw.auth_user;
+  i_profile.enable_aleg_auth:=false;
+  i_profile.auth_aleg_pwd:='';
+  i_profile.auth_aleg_user:='';
+
+  if i_profile.enable_auth then
+    v_from_user=COALESCE(i_vendor_gw.auth_from_user,i_profile.src_prefix_out,'');
+    v_from_domain=COALESCE(i_vendor_gw.auth_from_domain,'$Oi');
+  else
+    v_from_user=COALESCE(i_profile.src_prefix_out,'');
+    if i_vendor_gw.preserve_anonymous_from_domain and i_profile.from_domain='anonymous.invalid' then
+      v_from_domain='anonymous.invalid';
+    else
+      v_from_domain='$Oi';
+    end if;
+  end if;
+
+  if i_vendor_gw.sip_schema_id = 1 then
+    v_schema='sip';
+  elsif i_vendor_gw.sip_schema_id = 2 then
+    v_schema='sips';
+  else
+    RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
+  end if;
+
+
+  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
+  i_profile."to":='<'||v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+
+  if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
+    if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
+      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      i_profile.lrn=nullif(i_profile.dst_prefix_routing,i_profile.lrn); -- clear lnr field if number not ported;
+    else -- if number ported
+      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';rn='||i_profile.lrn||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+    end if;
+  else
+    i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
+  end if;
+
+  if i_vendor_gw.use_registered_aor then
+    i_profile.registered_aor_id=i_vendor_gw.id;
+  end if;
+
+  i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
+  i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
+
+  i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
+  i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
+
+
+  IF (i_vendor_gw.term_use_outbound_proxy ) THEN
+    i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
+    i_profile.force_outbound_proxy:=i_vendor_gw.term_force_outbound_proxy;
+    i_profile.bleg_outbound_proxy_transport_protocol_id:=i_vendor_gw.term_proxy_transport_protocol_id;
+  ELSE
+    i_profile.outbound_proxy:=NULL;
+    i_profile.force_outbound_proxy:=false;
+  END IF;
+
+  IF (i_customer_gw.orig_use_outbound_proxy ) THEN
+    i_profile.aleg_force_outbound_proxy:=i_customer_gw.orig_force_outbound_proxy;
+    i_profile.aleg_outbound_proxy=v_schema||':'||i_customer_gw.orig_outbound_proxy;
+    i_profile.aleg_outbound_proxy_transport_protocol_id:=i_customer_gw.orig_proxy_transport_protocol_id;
+  else
+    i_profile.aleg_force_outbound_proxy:=FALSE;
+    i_profile.aleg_outbound_proxy=NULL;
+  end if;
+
+  i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
+  i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
+
+  i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
+  i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
+
+
+  i_profile.sdp_filter_type_id:=0;
+  i_profile.sdp_filter_list:='';
+
+  i_profile.sdp_alines_filter_type_id:=i_vendor_gw.sdp_alines_filter_type_id;
+  i_profile.sdp_alines_filter_list:=i_vendor_gw.sdp_alines_filter_list;
+
+  i_profile.enable_session_timer=i_vendor_gw.sst_enabled;
+  i_profile.session_expires =i_vendor_gw.sst_session_expires;
+  i_profile.minimum_timer:=i_vendor_gw.sst_minimum_timer;
+  i_profile.maximum_timer:=i_vendor_gw.sst_maximum_timer;
+  i_profile.session_refresh_method_id:=i_vendor_gw.session_refresh_method_id;
+  i_profile.accept_501_reply:=i_vendor_gw.sst_accept501;
+
+  i_profile.enable_aleg_session_timer=i_customer_gw.sst_enabled;
+  i_profile.aleg_session_expires:=i_customer_gw.sst_session_expires;
+  i_profile.aleg_minimum_timer:=i_customer_gw.sst_minimum_timer;
+  i_profile.aleg_maximum_timer:=i_customer_gw.sst_maximum_timer;
+  i_profile.aleg_session_refresh_method_id:=i_customer_gw.session_refresh_method_id;
+  i_profile.aleg_accept_501_reply:=i_customer_gw.sst_accept501;
+
+  i_profile.reply_translations:='';
+  i_profile.disconnect_code_id:=NULL;
+  i_profile.enable_rtprelay:=i_vendor_gw.proxy_media OR i_customer_gw.proxy_media;
+
+  i_profile.rtprelay_interface:=i_vendor_gw.rtp_interface_name;
+  i_profile.aleg_rtprelay_interface:=i_customer_gw.rtp_interface_name;
+
+  i_profile.outbound_interface:=i_vendor_gw.sip_interface_name;
+  i_profile.aleg_outbound_interface:=i_customer_gw.sip_interface_name;
+
+  i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
+  i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
+  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
+
+  i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
+  i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
+  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
+
+  i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
+  i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
+
+  i_profile.bleg_relay_options = i_vendor_gw.relay_options;
+  i_profile.aleg_relay_options = i_customer_gw.relay_options;
+
+
+  i_profile.filter_noaudio_streams = i_vendor_gw.filter_noaudio_streams OR i_customer_gw.filter_noaudio_streams;
+  i_profile.force_one_way_early_media = i_vendor_gw.force_one_way_early_media OR i_customer_gw.force_one_way_early_media;
+  i_profile.aleg_relay_reinvite = i_vendor_gw.relay_reinvite;
+  i_profile.bleg_relay_reinvite = i_customer_gw.relay_reinvite;
+
+  i_profile.aleg_relay_hold = i_vendor_gw.relay_hold;
+  i_profile.bleg_relay_hold = i_customer_gw.relay_hold;
+
+  i_profile.aleg_relay_prack = i_vendor_gw.relay_prack;
+  i_profile.bleg_relay_prack = i_customer_gw.relay_prack;
+  i_profile.aleg_rel100_mode_id = i_customer_gw.rel100_mode_id;
+  i_profile.bleg_rel100_mode_id = i_vendor_gw.rel100_mode_id;
+
+  i_profile.rtp_relay_timestamp_aligning=i_vendor_gw.rtp_relay_timestamp_aligning OR i_customer_gw.rtp_relay_timestamp_aligning;
+  i_profile.allow_1xx_wo2tag=i_vendor_gw.allow_1xx_without_to_tag OR i_customer_gw.allow_1xx_without_to_tag;
+
+  i_profile.aleg_sdp_c_location_id=i_customer_gw.sdp_c_location_id;
+  i_profile.bleg_sdp_c_location_id=i_vendor_gw.sdp_c_location_id;
+  i_profile.trusted_hdrs_gw=false;
+
+
+
+  i_profile.aleg_codecs_group_id:=i_customer_gw.codec_group_id;
+  i_profile.bleg_codecs_group_id:=i_vendor_gw.codec_group_id;
+  i_profile.aleg_single_codec_in_200ok:=i_customer_gw.single_codec_in_200ok;
+  i_profile.bleg_single_codec_in_200ok:=i_vendor_gw.single_codec_in_200ok;
+  i_profile.ringing_timeout=i_vendor_gw.ringing_timeout;
+  i_profile.dead_rtp_time=GREATEST(i_vendor_gw.rtp_timeout,i_customer_gw.rtp_timeout);
+  i_profile.invite_timeout=i_vendor_gw.sip_timer_b;
+  i_profile.srv_failover_timeout=i_vendor_gw.dns_srv_failover_timer;
+  i_profile.fake_180_timer=i_vendor_gw.fake_180_timer;
+  i_profile.rtp_force_relay_cn=i_vendor_gw.rtp_force_relay_cn OR i_customer_gw.rtp_force_relay_cn;
+  i_profile.patch_ruri_next_hop=i_vendor_gw.resolve_ruri;
+
+  i_profile.aleg_sensor_id=i_customer_gw.sensor_id;
+  i_profile.aleg_sensor_level_id=i_customer_gw.sensor_level_id;
+  i_profile.bleg_sensor_id=i_vendor_gw.sensor_id;
+  i_profile.bleg_sensor_level_id=i_vendor_gw.sensor_level_id;
+
+  i_profile.aleg_dtmf_send_mode_id=i_customer_gw.dtmf_send_mode_id;
+  i_profile.aleg_dtmf_recv_modes=i_customer_gw.dtmf_receive_mode_id;
+  i_profile.bleg_dtmf_send_mode_id=i_vendor_gw.dtmf_send_mode_id;
+  i_profile.bleg_dtmf_recv_modes=i_vendor_gw.dtmf_receive_mode_id;
+
+
+  i_profile.aleg_rtp_filter_inband_dtmf=false;
+  i_profile.bleg_rtp_filter_inband_dtmf=false;
+
+  if i_customer_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
+    i_profile.aleg_rtp_filter_inband_dtmf=true;
+  elsif i_customer_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
+    if i_vendor_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=false;
+    elsif i_vendor_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.aleg_rtp_filter_inband_dtmf=true;
+    end if;
+  end if;
+
+
+  if i_vendor_gw.rx_inband_dtmf_filtering_mode_id=3 then -- enable filtering
+    i_profile.bleg_rtp_filter_inband_dtmf=true;
+  elsif i_vendor_gw.rx_inband_dtmf_filtering_mode_id=1 then -- inherit
+    if i_customer_gw.tx_inband_dtmf_filtering_mode_id in (1,2) then  -- inherit or disable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=false;
+    elsif i_customer_gw.tx_inband_dtmf_filtering_mode_id = 3 then -- enable filtering
+      i_profile.bleg_rtp_filter_inband_dtmf=true;
+    end if;
+  end if;
+
+
+  i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
+  i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
+  i_profile.rtprelay_dtmf_filtering=NOT i_vendor_gw.force_dtmf_relay;
+  i_profile.bleg_max_30x_redirects = i_vendor_gw.max_30x_redirects;
+  i_profile.bleg_max_transfers = i_vendor_gw.max_transfers;
+
+
+  i_profile.aleg_relay_update=i_customer_gw.relay_update;
+  i_profile.bleg_relay_update=i_vendor_gw.relay_update;
+  i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
+
+  i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+
+  
+  RETURN i_profile;
+END;
+$_$;
+
+
+--
+-- Name: recompile_interface(integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.recompile_interface(i_version integer) RETURNS void
+    LANGUAGE plpgsql COST 10
+    AS $$
+DECLARE
+  v_attr record;
+  v_sql varchar;
+BEGIN
+  v_sql:='CREATE TYPE callprofile'||i_version::varchar||'_ty AS (';
+  FOR v_attr IN SELECT * from load_interface_out() LOOP
+    v_sql:=v_sql||'"'||v_attr.varname::varchar||'" '||v_attr.vartype||',';
+  END LOOP;
+  v_sql:=left(v_sql,-1)||')'; --removing last ',' added in loop and add )
+  EXECUTE v_sql;
+END;
+$$;
+
+
+--
+-- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch20.callprofile_ty
+    LANGUAGE plpgsql SECURITY DEFINER ROWS 10
+    AS $_$
+      DECLARE
+        v_ret switch20.callprofile_ty;
+        i integer;
+        v_ip inet;
+        v_remote_ip inet;
+        v_remote_port INTEGER;
+        v_transport_protocol_id smallint;
+        v_customer_auth_normalized class4.customers_auth_normalized;
+        v_destination class4.destinations%rowtype;
+        v_dialpeer record;
+        v_rateplan class4.rateplans%rowtype;
+        v_dst_gw class4.gateways%rowtype;
+        v_orig_gw class4.gateways%rowtype;
+        v_rp class4.routing_plans%rowtype;
+        v_customer_allowtime real;
+        v_vendor_allowtime real;
+        v_sorting_id integer;
+        v_customer_acc integer;
+        v_route_found boolean:=false;
+        v_c_acc billing.accounts%rowtype;
+        v_v_acc billing.accounts%rowtype;
+        v_network sys.network_prefixes%rowtype;
+        v_src_network sys.network_prefixes%rowtype;
+        routedata record;
+        /*dbg{*/
+        v_start timestamp;
+        v_end timestamp;
+        /*}dbg*/
+        v_rate NUMERIC;
+        v_now timestamp;
+        v_x_yeti_auth varchar;
+        --  v_uri_domain varchar;
+        v_rate_limit float:='Infinity'::float;
+        v_destination_rate_limit float:='Infinity'::float;
+        v_test_vendor_id integer;
+        v_random float;
+        v_max_call_length integer;
+        v_routing_key varchar;
+        v_lnp_key varchar;
+        v_drop_call_if_lnp_fail boolean;
+        v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
+        v_numberlist record;
+        v_numberlist_item record;
+        v_call_tags smallint[]:='{}'::smallint[];
+        v_area_direction class4.routing_tag_detection_rules%rowtype;
+        v_numberlist_size integer;
+        v_lua_context switch20.lua_call_context;
+        v_identity_data switch20.identity_data_ty[];
+
+      BEGIN
+        /*dbg{*/
+        v_start:=now();
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Execution start',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+
+        perform id from sys.load_balancers where signalling_ip=host(i_remote_ip)::varchar;
+        IF FOUND and i_x_orig_ip IS not NULL AND i_x_orig_port IS not NULL THEN
+          v_remote_ip:=i_x_orig_ip;
+          v_remote_port:=i_x_orig_port;
+          v_transport_protocol_id=i_x_orig_protocol_id;
+          /*dbg{*/RAISE NOTICE '% ms -> Got originator address "%:%, proto: %" from x-headers',EXTRACT(MILLISECOND from v_end-v_start), v_remote_ip,v_remote_port, v_transport_protocol_id;/*}dbg*/
+        else
+          v_remote_ip:=i_remote_ip;
+          v_remote_port:=i_remote_port;
+          v_transport_protocol_id:=i_protocol_id;
+          /*dbg{*/RAISE NOTICE '% ms -> Got originator address "%:%, proto: %" from switch leg info',EXTRACT(MILLISECOND from v_end-v_start), v_remote_ip,v_remote_port, v_transport_protocol_id;/*}dbg*/
+        end if;
+
+        v_now:=now();
+        v_ret:=switch20.new_profile();
+        v_ret.cache_time = 10;
+
+        v_ret.diversion_in:=i_diversion;
+        v_ret.diversion_out:=i_diversion; -- FIXME
+
+        v_ret.auth_orig_protocol_id =v_transport_protocol_id;
+        v_ret.auth_orig_ip = v_remote_ip;
+        v_ret.auth_orig_port = v_remote_port;
+
+        v_ret.src_name_in:=i_from_dsp;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        v_ret.src_prefix_in:=i_from_name;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        v_ret.dst_prefix_in:=i_uri_name;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+
+        v_ret.ruri_domain=i_uri_domain;
+        v_ret.from_domain=i_from_domain;
+        v_ret.to_domain=i_to_domain;
+
+        v_ret.pai_in=i_pai;
+        v_ret.ppi_in=i_ppi;
+        v_ret.privacy_in=i_privacy;
+        v_ret.rpid_in=i_rpid;
+        v_ret.rpid_privacy_in=i_rpid_privacy;
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. lookup started',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+        v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
+        --  v_uri_domain:=COALESCE(i_uri_domain,'');
+
+        if i_auth_id is null then
+            SELECT into v_customer_auth_normalized ca.*
+            from class4.customers_auth_normalized ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
+              c.enabled and c.customer
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null,
+                ca.require_incoming_auth
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+            if v_customer_auth_normalized.require_incoming_auth then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.aleg_auth_required=true;
+                RETURN NEXT v_ret;
+                RETURN;
+            end IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
+        else
+            SELECT into v_customer_auth_normalized ca.*
+            from class4.customers_auth_normalized ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
+              c.enabled and c.customer and
+              ca.require_incoming_auth and gateway_id = i_auth_id
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
+        end IF;
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_customer_auth_normalized, true);
+        /*}dbg*/
+
+        -- redefine call SRC/DST numbers
+
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
+          v_ret.src_name_in:=i_from_dsp;
+        END IF;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
+          v_ret.src_prefix_in:=i_from_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
+          v_ret.src_prefix_in:=i_from_dsp;
+        END IF;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+          v_ret.dst_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
+          v_ret.dst_prefix_in:=i_to_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+          v_ret.dst_prefix_in:=i_diversion;
+        END IF;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
+
+        -- feel customer data ;-)
+        v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
+        v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+        v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
+
+        v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+        v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+        v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+        v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+
+        v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
+        v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
+        v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
+
+        v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
+
+        SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+        v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
+
+        if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+          v_ret.disconnect_code_id=8000; --No enough customer balance
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+
+        SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        v_ret.resources:='';
+        if v_customer_auth_normalized.capacity is not null then
+          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
+        if v_orig_gw.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
+        end if;
+
+        -- Tag processing CA
+        v_call_tags=yeti_ext.tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
+
+        /*
+            number rewriting _Before_ routing
+        */
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        /*}dbg*/
+        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
+        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
+        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true);
+
+        --  if v_ret.radius_auth_profile_id is not null then
+        v_ret.src_number_radius:=i_from_name;
+        v_ret.dst_number_radius:=i_uri_name;
+        v_ret.src_number_radius=yeti_ext.regexp_replace_rand(
+            v_ret.src_number_radius,
+            v_customer_auth_normalized.src_number_radius_rewrite_rule,
+            v_customer_auth_normalized.src_number_radius_rewrite_result
+        );
+
+        v_ret.dst_number_radius=yeti_ext.regexp_replace_rand(
+            v_ret.dst_number_radius,
+            v_customer_auth_normalized.dst_number_radius_rewrite_rule,
+            v_customer_auth_normalized.dst_number_radius_rewrite_result
+        );
+        v_ret.customer_auth_name=v_customer_auth_normalized."name";
+        v_ret.customer_name=(select "name" from public.contractors where id=v_customer_auth_normalized.customer_id limit 1);
+        --  end if;
+/**
+        if v_customer_auth_normalized.lua_script_id is not null then
+          v_lua_context.src_name_in = v_ret.src_name_in;
+	        v_lua_context.src_number_in = v_ret.src_prefix_in;
+	        v_lua_context.dst_number_in = v_ret.dst_prefix_in;
+	        v_lua_context.src_name_out = v_ret.src_name_out;
+	        v_lua_context.src_number_out = v_ret.src_prefix_out;
+	        v_lua_context.dst_number_out = v_ret.dst_prefix_out;
+	        -- v_lua_context.src_name_routing
+	        -- v_lua_context.src_number_routing
+	        -- v_lua_context.dst_number_routing
+          -- #arrays
+	        -- v_lua_context.diversion_in
+	        -- v_lua_context.diversion_routing
+	        -- v_lua_context.diversion_out
+          select into v_lua_context switch20.lua_exec(v_customer_auth_normalized.lua_script_id, v_lua_context);
+          v_ret.src_name_out =  v_lua_context.src_name_out;
+          v_ret.src_prefix_out = v_lua_context.src_number_out;
+          v_ret.dst_prefix_out = v_lua_context.dst_number_out;
+        end if;
+**/
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        /*}dbg*/
+
+        ----- Numberlist processing-------------------------------------------------------------------------------------------------------
+        if v_customer_auth_normalized.dst_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
+          /*}dbg*/
+          select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.dst_numberlist_id;
+          CASE v_numberlist.mode_id
+            when 1 then -- strict match
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and ni.key=v_ret.dst_prefix_out limit 1;
+            when 2 then -- prefix match
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
+                order by length(prefix_range(ni.key))
+                desc limit 1;
+            when 3 then -- random
+                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+          end case;
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> DST Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8001; --destination blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist_item.src_rewrite_rule,
+                v_numberlist_item.src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist_item.dst_rewrite_rule,
+                v_numberlist_item.dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> DST Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            -- drop by default
+            v_ret.disconnect_code_id=8001; --destination blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist.default_dst_rewrite_rule,
+                v_numberlist.default_dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        if v_customer_auth_normalized.src_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+          /*}dbg*/
+          select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
+          CASE v_numberlist.mode_id
+            when 1 then -- strict match
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
+            when 2 then -- prefix match
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where
+                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
+              order by length(prefix_range(ni.key)) desc limit 1;
+            when 3 then -- random
+              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
+              select into v_numberlist_item *
+              from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+          end case;
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8002; --source blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist_item.src_rewrite_rule,
+                v_numberlist_item.src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist_item.dst_rewrite_rule,
+                v_numberlist_item.dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            v_ret.disconnect_code_id=8002; --source blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist.default_dst_rewrite_rule,
+                v_numberlist.default_dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        --  setting numbers used for routing & billing
+        v_ret.src_prefix_routing=v_ret.src_prefix_out;
+        v_ret.dst_prefix_routing=v_ret.dst_prefix_out;
+        v_routing_key=v_ret.dst_prefix_out;
+
+        -- Areas and Tag detection-------------------------------------------
+        v_ret.src_area_id:=(
+          select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.src_prefix_routing)
+          order by length(prefix_range(prefix)) desc limit 1
+        );
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> SRC Area found: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_area_id;
+        /*}dbg*/
+
+        v_ret.dst_area_id:=(
+          select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.dst_prefix_routing)
+          order by length(prefix_range(prefix)) desc limit 1
+        );
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DST Area found: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_area_id;
+        /*}dbg*/
+
+
+        select into v_area_direction * from class4.routing_tag_detection_rules
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id = v_ret.dst_area_id) AND
+          prefix_range(src_prefix) @> prefix_range(v_ret.src_prefix_routing) AND
+          prefix_range(dst_prefix) @> prefix_range(v_ret.dst_prefix_routing) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
+          length(prefix_range(v_ret.src_prefix_routing)) desc,
+          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
+        if found then
+            v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
+        end if;
+
+        v_ret.routing_tag_ids:=v_call_tags;
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Routing tag detected: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
+        /*}dbg*/
+        ----------------------------------------------------------------------
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+
+        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+
+        v_routing_key=v_ret.dst_prefix_routing;
+        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+        if v_rp.sorting_id=5 then -- route testing
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
+          v_ret.dst_prefix_out=v_routing_key;
+          v_ret.dst_prefix_routing=v_routing_key;
+        end if;
+
+        if v_rp.use_lnp then
+          select into v_lnp_rule rules.*
+          from class4.routing_plan_lnp_rules rules
+          WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
+          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          if found then
+            v_ret.lnp_database_id=v_lnp_rule.database_id;
+            v_lnp_key=v_ret.dst_prefix_routing;
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> LNP. Need LNP lookup, LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
+            /*}dbg*/
+            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result);
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> LNP key translation. LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
+            /*}dbg*/
+            -- try cache
+            select into v_ret.lrn lrn from class4.lnp_cache where dst=v_lnp_key AND database_id=v_lnp_rule.database_id and expires_at>v_now;
+            if found then
+              /*dbg{*/
+              v_end:=clock_timestamp();
+              RAISE NOTICE '% ms -> LNP. Data found in cache, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+              /*}dbg*/
+              -- TRANSLATING response from cache
+              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+              /*dbg{*/
+              v_end:=clock_timestamp();
+              RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+              /*}dbg*/
+              v_routing_key=v_ret.lrn;
+            else
+              v_ret.lrn=switch20.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
+              if v_ret.lrn is null then -- fail
+                /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> LNP. Query failed',EXTRACT(MILLISECOND from v_end-v_start);
+                /*}dbg*/
+                if v_drop_call_if_lnp_fail then
+                  /*dbg{*/
+                  v_end:=clock_timestamp();
+                  RAISE NOTICE '% ms -> LNP. Dropping call',EXTRACT(MILLISECOND from v_end-v_start);
+                  /*}dbg*/
+                  v_ret.disconnect_code_id=8003; --No response from LNP DB
+                  RETURN NEXT v_ret;
+                  RETURN;
+                end if;
+              else
+                /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> LNP. Success, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+                /*}dbg*/
+                -- TRANSLATING response from LNP DB
+                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+                /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+                /*}dbg*/
+                v_routing_key=v_ret.lrn;
+              end if;
+            end if;
+          end if;
+        end if;
+
+
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
+        /*}dbg*/
+        v_src_network:=switch20.detect_network(v_ret.src_prefix_routing);
+        v_ret.src_network_id=v_src_network.network_id;
+        v_ret.src_country_id=v_src_network.country_id;
+
+        v_network:=switch20.detect_network(v_ret.dst_prefix_routing);
+        v_ret.dst_network_id=v_network.network_id;
+        v_ret.dst_country_id=v_network.country_id;
+
+        IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting calls',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8007; --No network detected for DST number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+
+        IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Dst number format is not valid. DST number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key;
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8008; --Invalid number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
+        FROM class4.destinations d
+        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
+        WHERE
+          prefix_range(prefix)@>prefix_range(v_routing_key)
+          AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
+          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND enabled
+          AND valid_from <= v_now
+          AND valid_till >= v_now
+          AND yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags, d.routing_tag_mode_id)>0
+        ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
+        limit 1;
+        IF NOT FOUND THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> DST.  Destination not found',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+          v_ret.disconnect_code_id=111; --Cant find destination prefix
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DST. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_destination, true);
+        /*}dbg*/
+
+        v_ret.destination_id:=v_destination.id;
+        v_ret.destination_prefix=v_destination.prefix;
+        v_ret.destination_initial_interval:=v_destination.initial_interval;
+        v_ret.destination_fee:=v_destination.connect_fee::varchar;
+        v_ret.destination_next_interval:=v_destination.next_interval;
+        v_ret.destination_rate_policy_id:=v_destination.rate_policy_id;
+        v_ret.destination_reverse_billing:=v_destination.reverse_billing;
+        IF v_destination.reject_calls THEN
+          v_ret.disconnect_code_id=112; --Rejected by destination
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        if v_destination.next_rate::float>v_destination_rate_limit then
+          v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
+        if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
+          v_rate_limit=v_destination.next_rate::float;
+        end if;
+
+
+        /*
+                    FIND dialpeers logic. Queries must use prefix index for best performance
+        */
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
+        /*}dbg*/
+        CASE v_rp.sorting_id
+          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          FOR routedata IN (
+            WITH step1 AS(
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
+                  t_dp.priority AS dp_priority,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            from step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              AND dp_next_rate<=v_rate_limit
+              AND dp_enabled
+              and not dp_locked --ACD&ASR control for DP
+            ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          end LOOP;
+          WHEN '2' THEN --LCR, no prio, No ACD&ASR control
+          FOR routedata IN (
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  --  (t_vendor_gateway.*)::class4.gateways as s1_vendor_gateway,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              AND dp_enabled
+              and dp_next_rate<=v_rate_limit
+            ORDER BY dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN '3' THEN --Prio, LCR, ACD&ASR control
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+              and not dp_locked
+            ORDER BY dp_metric_priority DESC, dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
+          FOR routedata IN (
+            WITH step1 AS(
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            from step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_next_rate <= v_rate_limit
+              and dp_enabled
+              and not dp_locked --ACD&ASR control for DP
+            ORDER BY r2 ASC
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          end LOOP;
+          WHEN'5' THEN -- Route test
+          FOR routedata IN (
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  and t_dp.vendor_id=v_test_vendor_id
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_enabled
+              and dp_next_rate<=v_rate_limit
+            ORDER BY dp_metric_priority DESC, dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
+          v_random:=random();
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled,
+                  t_dp.force_hit_rate as dp_force_hit_rate,
+                  rpsr.priority as rpsr_priority,
+                  rpsr.weight as rpsr_weight
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                  left join class4.routing_plan_static_routes rpsr
+                    ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                      and rpsr.vendor_id=t_dp.vendor_id
+                      AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and r2=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+              and not dp_locked
+            ORDER BY
+              coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
+              yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
+              dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN'7' THEN -- QD.Static, No ACD&ACR control
+          v_random:=random();
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled,
+                  t_dp.force_hit_rate as dp_force_hit_rate,
+                  rpsr.priority as rpsr_priority,
+                  rpsr.weight as rpsr_weight
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                  join class4.routing_plan_static_routes rpsr
+                    ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                      and rpsr.vendor_id=t_dp.vendor_id
+                      AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and r2=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+            ORDER BY
+              coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
+              yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
+              dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+
+        ELSE
+          RAISE NOTICE 'BUG: unknown sorting_id';
+        END CASE;
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Dialpeer search done',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+        v_ret.disconnect_code_id=113; --No routes
+        RETURN NEXT v_ret;
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DONE.',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+        RETURN;
+      END;
+      $_$;
+
+
+--
+-- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch20.callprofile_ty
+    LANGUAGE plpgsql SECURITY DEFINER ROWS 10
+    AS $_$
+      DECLARE
+        v_ret switch20.callprofile_ty;
+        i integer;
+        v_ip inet;
+        v_remote_ip inet;
+        v_remote_port INTEGER;
+        v_transport_protocol_id smallint;
+        v_customer_auth_normalized class4.customers_auth_normalized;
+        v_destination class4.destinations%rowtype;
+        v_dialpeer record;
+        v_rateplan class4.rateplans%rowtype;
+        v_dst_gw class4.gateways%rowtype;
+        v_orig_gw class4.gateways%rowtype;
+        v_rp class4.routing_plans%rowtype;
+        v_customer_allowtime real;
+        v_vendor_allowtime real;
+        v_sorting_id integer;
+        v_customer_acc integer;
+        v_route_found boolean:=false;
+        v_c_acc billing.accounts%rowtype;
+        v_v_acc billing.accounts%rowtype;
+        v_network sys.network_prefixes%rowtype;
+        v_src_network sys.network_prefixes%rowtype;
+        routedata record;
+        /*dbg{*/
+        v_start timestamp;
+        v_end timestamp;
+        /*}dbg*/
+        v_rate NUMERIC;
+        v_now timestamp;
+        v_x_yeti_auth varchar;
+        --  v_uri_domain varchar;
+        v_rate_limit float:='Infinity'::float;
+        v_destination_rate_limit float:='Infinity'::float;
+        v_test_vendor_id integer;
+        v_random float;
+        v_max_call_length integer;
+        v_routing_key varchar;
+        v_lnp_key varchar;
+        v_drop_call_if_lnp_fail boolean;
+        v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
+        v_numberlist record;
+        v_numberlist_item record;
+        v_call_tags smallint[]:='{}'::smallint[];
+        v_area_direction class4.routing_tag_detection_rules%rowtype;
+        v_numberlist_size integer;
+        v_lua_context switch20.lua_call_context;
+        v_identity_data switch20.identity_data_ty[];
+
+      BEGIN
+        /*dbg{*/
+        v_start:=now();
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Execution start',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+
+        perform id from sys.load_balancers where signalling_ip=host(i_remote_ip)::varchar;
+        IF FOUND and i_x_orig_ip IS not NULL AND i_x_orig_port IS not NULL THEN
+          v_remote_ip:=i_x_orig_ip;
+          v_remote_port:=i_x_orig_port;
+          v_transport_protocol_id=i_x_orig_protocol_id;
+          /*dbg{*/RAISE NOTICE '% ms -> Got originator address "%:%, proto: %" from x-headers',EXTRACT(MILLISECOND from v_end-v_start), v_remote_ip,v_remote_port, v_transport_protocol_id;/*}dbg*/
+        else
+          v_remote_ip:=i_remote_ip;
+          v_remote_port:=i_remote_port;
+          v_transport_protocol_id:=i_protocol_id;
+          /*dbg{*/RAISE NOTICE '% ms -> Got originator address "%:%, proto: %" from switch leg info',EXTRACT(MILLISECOND from v_end-v_start), v_remote_ip,v_remote_port, v_transport_protocol_id;/*}dbg*/
+        end if;
+
+        v_now:=now();
+        v_ret:=switch20.new_profile();
+        v_ret.cache_time = 10;
+
+        v_ret.diversion_in:=i_diversion;
+        v_ret.diversion_out:=i_diversion; -- FIXME
+
+        v_ret.auth_orig_protocol_id =v_transport_protocol_id;
+        v_ret.auth_orig_ip = v_remote_ip;
+        v_ret.auth_orig_port = v_remote_port;
+
+        v_ret.src_name_in:=i_from_dsp;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        v_ret.src_prefix_in:=i_from_name;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        v_ret.dst_prefix_in:=i_uri_name;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+
+        v_ret.ruri_domain=i_uri_domain;
+        v_ret.from_domain=i_from_domain;
+        v_ret.to_domain=i_to_domain;
+
+        v_ret.pai_in=i_pai;
+        v_ret.ppi_in=i_ppi;
+        v_ret.privacy_in=i_privacy;
+        v_ret.rpid_in=i_rpid;
+        v_ret.rpid_privacy_in=i_rpid_privacy;
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. lookup started',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+        v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
+        --  v_uri_domain:=COALESCE(i_uri_domain,'');
+
+        if i_auth_id is null then
+            SELECT into v_customer_auth_normalized ca.*
+            from class4.customers_auth_normalized ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
+              c.enabled and c.customer
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null,
+                ca.require_incoming_auth
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+            if v_customer_auth_normalized.require_incoming_auth then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.aleg_auth_required=true;
+                RETURN NEXT v_ret;
+                RETURN;
+            end IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
+        else
+            SELECT into v_customer_auth_normalized ca.*
+            from class4.customers_auth_normalized ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
+              c.enabled and c.customer and
+              ca.require_incoming_auth and gateway_id = i_auth_id
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null
+            LIMIT 1;
+            IF NOT FOUND THEN
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+            if v_customer_auth_normalized.reject_calls then
+            /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> AUTH.  disconnection with 8004. Reject by customers auth',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
+        end IF;
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_customer_auth_normalized, true);
+        /*}dbg*/
+
+        -- redefine call SRC/DST numbers
+
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
+          v_ret.src_name_in:=i_from_dsp;
+        END IF;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
+          v_ret.src_prefix_in:=i_from_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
+          v_ret.src_prefix_in:=i_from_dsp;
+        END IF;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+          v_ret.dst_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
+          v_ret.dst_prefix_in:=i_to_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+          v_ret.dst_prefix_in:=i_diversion;
+        END IF;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
+
+        -- feel customer data ;-)
+        v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
+        v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+        v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
+
+        v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+        v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+        v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+        v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+
+        v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
+        v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
+        v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
+
+        v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
+
+        SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+        v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
+
+        if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+          v_ret.disconnect_code_id=8000; --No enough customer balance
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+
+        SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        v_ret.resources:='';
+        if v_customer_auth_normalized.capacity is not null then
+          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
+        if v_orig_gw.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
+        end if;
+
+        -- Tag processing CA
+        v_call_tags=yeti_ext.tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
+
+        /*
+            number rewriting _Before_ routing
+        */
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        /*}dbg*/
+        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
+        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
+        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true);
+
+        --  if v_ret.radius_auth_profile_id is not null then
+        v_ret.src_number_radius:=i_from_name;
+        v_ret.dst_number_radius:=i_uri_name;
+        v_ret.src_number_radius=yeti_ext.regexp_replace_rand(
+            v_ret.src_number_radius,
+            v_customer_auth_normalized.src_number_radius_rewrite_rule,
+            v_customer_auth_normalized.src_number_radius_rewrite_result
+        );
+
+        v_ret.dst_number_radius=yeti_ext.regexp_replace_rand(
+            v_ret.dst_number_radius,
+            v_customer_auth_normalized.dst_number_radius_rewrite_rule,
+            v_customer_auth_normalized.dst_number_radius_rewrite_result
+        );
+        v_ret.customer_auth_name=v_customer_auth_normalized."name";
+        v_ret.customer_name=(select "name" from public.contractors where id=v_customer_auth_normalized.customer_id limit 1);
+        --  end if;
+/**
+        if v_customer_auth_normalized.lua_script_id is not null then
+          v_lua_context.src_name_in = v_ret.src_name_in;
+	        v_lua_context.src_number_in = v_ret.src_prefix_in;
+	        v_lua_context.dst_number_in = v_ret.dst_prefix_in;
+	        v_lua_context.src_name_out = v_ret.src_name_out;
+	        v_lua_context.src_number_out = v_ret.src_prefix_out;
+	        v_lua_context.dst_number_out = v_ret.dst_prefix_out;
+	        -- v_lua_context.src_name_routing
+	        -- v_lua_context.src_number_routing
+	        -- v_lua_context.dst_number_routing
+          -- #arrays
+	        -- v_lua_context.diversion_in
+	        -- v_lua_context.diversion_routing
+	        -- v_lua_context.diversion_out
+          select into v_lua_context switch20.lua_exec(v_customer_auth_normalized.lua_script_id, v_lua_context);
+          v_ret.src_name_out =  v_lua_context.src_name_out;
+          v_ret.src_prefix_out = v_lua_context.src_number_out;
+          v_ret.dst_prefix_out = v_lua_context.dst_number_out;
+        end if;
+**/
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> AUTH. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        /*}dbg*/
+
+        ----- Numberlist processing-------------------------------------------------------------------------------------------------------
+        if v_customer_auth_normalized.dst_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
+          /*}dbg*/
+          select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.dst_numberlist_id;
+          CASE v_numberlist.mode_id
+            when 1 then -- strict match
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and ni.key=v_ret.dst_prefix_out limit 1;
+            when 2 then -- prefix match
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
+                order by length(prefix_range(ni.key))
+                desc limit 1;
+            when 3 then -- random
+                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+          end case;
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> DST Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8001; --destination blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist_item.src_rewrite_rule,
+                v_numberlist_item.src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist_item.dst_rewrite_rule,
+                v_numberlist_item.dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> DST Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            -- drop by default
+            v_ret.disconnect_code_id=8001; --destination blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist.default_dst_rewrite_rule,
+                v_numberlist.default_dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        if v_customer_auth_normalized.src_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+          /*}dbg*/
+          select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
+          CASE v_numberlist.mode_id
+            when 1 then -- strict match
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
+            when 2 then -- prefix match
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where
+                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
+              order by length(prefix_range(ni.key)) desc limit 1;
+            when 3 then -- random
+              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
+              select into v_numberlist_item *
+              from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+          end case;
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8002; --source blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist_item.src_rewrite_rule,
+                v_numberlist_item.src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist_item.dst_rewrite_rule,
+                v_numberlist_item.dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            v_ret.disconnect_code_id=8002; --source blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist.default_dst_rewrite_rule,
+                v_numberlist.default_dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        --  setting numbers used for routing & billing
+        v_ret.src_prefix_routing=v_ret.src_prefix_out;
+        v_ret.dst_prefix_routing=v_ret.dst_prefix_out;
+        v_routing_key=v_ret.dst_prefix_out;
+
+        -- Areas and Tag detection-------------------------------------------
+        v_ret.src_area_id:=(
+          select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.src_prefix_routing)
+          order by length(prefix_range(prefix)) desc limit 1
+        );
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> SRC Area found: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_area_id;
+        /*}dbg*/
+
+        v_ret.dst_area_id:=(
+          select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.dst_prefix_routing)
+          order by length(prefix_range(prefix)) desc limit 1
+        );
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DST Area found: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_area_id;
+        /*}dbg*/
+
+
+        select into v_area_direction * from class4.routing_tag_detection_rules
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id = v_ret.dst_area_id) AND
+          prefix_range(src_prefix) @> prefix_range(v_ret.src_prefix_routing) AND
+          prefix_range(dst_prefix) @> prefix_range(v_ret.dst_prefix_routing) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
+          length(prefix_range(v_ret.src_prefix_routing)) desc,
+          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
+        if found then
+            v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
+        end if;
+
+        v_ret.routing_tag_ids:=v_call_tags;
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Routing tag detected: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
+        /*}dbg*/
+        ----------------------------------------------------------------------
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+
+        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+
+        v_routing_key=v_ret.dst_prefix_routing;
+        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+        if v_rp.sorting_id=5 then -- route testing
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
+          v_ret.dst_prefix_out=v_routing_key;
+          v_ret.dst_prefix_routing=v_routing_key;
+        end if;
+
+        if v_rp.use_lnp then
+          select into v_lnp_rule rules.*
+          from class4.routing_plan_lnp_rules rules
+          WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
+          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          if found then
+            v_ret.lnp_database_id=v_lnp_rule.database_id;
+            v_lnp_key=v_ret.dst_prefix_routing;
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> LNP. Need LNP lookup, LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
+            /*}dbg*/
+            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result);
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> LNP key translation. LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
+            /*}dbg*/
+            -- try cache
+            select into v_ret.lrn lrn from class4.lnp_cache where dst=v_lnp_key AND database_id=v_lnp_rule.database_id and expires_at>v_now;
+            if found then
+              /*dbg{*/
+              v_end:=clock_timestamp();
+              RAISE NOTICE '% ms -> LNP. Data found in cache, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+              /*}dbg*/
+              -- TRANSLATING response from cache
+              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+              /*dbg{*/
+              v_end:=clock_timestamp();
+              RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+              /*}dbg*/
+              v_routing_key=v_ret.lrn;
+            else
+              v_ret.lrn=switch20.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
+              if v_ret.lrn is null then -- fail
+                /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> LNP. Query failed',EXTRACT(MILLISECOND from v_end-v_start);
+                /*}dbg*/
+                if v_drop_call_if_lnp_fail then
+                  /*dbg{*/
+                  v_end:=clock_timestamp();
+                  RAISE NOTICE '% ms -> LNP. Dropping call',EXTRACT(MILLISECOND from v_end-v_start);
+                  /*}dbg*/
+                  v_ret.disconnect_code_id=8003; --No response from LNP DB
+                  RETURN NEXT v_ret;
+                  RETURN;
+                end if;
+              else
+                /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> LNP. Success, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+                /*}dbg*/
+                -- TRANSLATING response from LNP DB
+                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+                /*dbg{*/
+                v_end:=clock_timestamp();
+                RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
+                /*}dbg*/
+                v_routing_key=v_ret.lrn;
+              end if;
+            end if;
+          end if;
+        end if;
+
+
+
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
+        /*}dbg*/
+        v_src_network:=switch20.detect_network(v_ret.src_prefix_routing);
+        v_ret.src_network_id=v_src_network.network_id;
+        v_ret.src_country_id=v_src_network.country_id;
+
+        v_network:=switch20.detect_network(v_ret.dst_prefix_routing);
+        v_ret.dst_network_id=v_network.network_id;
+        v_ret.dst_country_id=v_network.country_id;
+
+        IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting calls',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8007; --No network detected for DST number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+
+        IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Dst number format is not valid. DST number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key;
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8008; --Invalid number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
+        FROM class4.destinations d
+        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
+        WHERE
+          prefix_range(prefix)@>prefix_range(v_routing_key)
+          AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
+          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND enabled
+          AND valid_from <= v_now
+          AND valid_till >= v_now
+          AND yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags, d.routing_tag_mode_id)>0
+        ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
+        limit 1;
+        IF NOT FOUND THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> DST.  Destination not found',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+          v_ret.disconnect_code_id=111; --Cant find destination prefix
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DST. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_destination, true);
+        /*}dbg*/
+
+        v_ret.destination_id:=v_destination.id;
+        v_ret.destination_prefix=v_destination.prefix;
+        v_ret.destination_initial_interval:=v_destination.initial_interval;
+        v_ret.destination_fee:=v_destination.connect_fee::varchar;
+        v_ret.destination_next_interval:=v_destination.next_interval;
+        v_ret.destination_rate_policy_id:=v_destination.rate_policy_id;
+        v_ret.destination_reverse_billing:=v_destination.reverse_billing;
+        IF v_destination.reject_calls THEN
+          v_ret.disconnect_code_id=112; --Rejected by destination
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        if v_destination.next_rate::float>v_destination_rate_limit then
+          v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
+        if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
+          v_rate_limit=v_destination.next_rate::float;
+        end if;
+
+
+        /*
+                    FIND dialpeers logic. Queries must use prefix index for best performance
+        */
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
+        /*}dbg*/
+        CASE v_rp.sorting_id
+          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          FOR routedata IN (
+            WITH step1 AS(
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
+                  t_dp.priority AS dp_priority,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            from step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              AND dp_next_rate<=v_rate_limit
+              AND dp_enabled
+              and not dp_locked --ACD&ASR control for DP
+            ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          end LOOP;
+          WHEN '2' THEN --LCR, no prio, No ACD&ASR control
+          FOR routedata IN (
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  --  (t_vendor_gateway.*)::class4.gateways as s1_vendor_gateway,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              AND dp_enabled
+              and dp_next_rate<=v_rate_limit
+            ORDER BY dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN '3' THEN --Prio, LCR, ACD&ASR control
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+              and not dp_locked
+            ORDER BY dp_metric_priority DESC, dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
+          FOR routedata IN (
+            WITH step1 AS(
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            from step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_next_rate <= v_rate_limit
+              and dp_enabled
+              and not dp_locked --ACD&ASR control for DP
+            ORDER BY r2 ASC
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          end LOOP;
+          WHEN'5' THEN -- Route test
+          FOR routedata IN (
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  and t_dp.vendor_id=v_test_vendor_id
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_enabled
+              and dp_next_rate<=v_rate_limit
+            ORDER BY dp_metric_priority DESC, dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
+          v_random:=random();
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled,
+                  t_dp.force_hit_rate as dp_force_hit_rate,
+                  rpsr.priority as rpsr_priority,
+                  rpsr.weight as rpsr_weight
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                  left join class4.routing_plan_static_routes rpsr
+                    ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                      and rpsr.vendor_id=t_dp.vendor_id
+                      AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and r2=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+              and not dp_locked
+            ORDER BY
+              coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
+              yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
+              dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+          WHEN'7' THEN -- QD.Static, No ACD&ACR control
+          v_random:=random();
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled,
+                  t_dp.force_hit_rate as dp_force_hit_rate,
+                  rpsr.priority as rpsr_priority,
+                  rpsr.weight as rpsr_weight
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                  join class4.routing_plan_static_routes rpsr
+                    ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                      and rpsr.vendor_id=t_dp.vendor_id
+                      AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and r2=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+            ORDER BY
+              coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
+              yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
+              dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+          END LOOP;
+
+        ELSE
+          RAISE NOTICE 'BUG: unknown sorting_id';
+        END CASE;
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> Dialpeer search done',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+        v_ret.disconnect_code_id=113; --No routes
+        RETURN NEXT v_ret;
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> DONE.',EXTRACT(MILLISECOND from v_end-v_start);
+        /*}dbg*/
+        RETURN;
+      END;
+      $_$;
+
+
+--
+-- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch20.callprofile_ty
+    LANGUAGE plpgsql SECURITY DEFINER ROWS 10
+    AS $_$
+      DECLARE
+        v_ret switch20.callprofile_ty;
+        i integer;
+        v_ip inet;
+        v_remote_ip inet;
+        v_remote_port INTEGER;
+        v_transport_protocol_id smallint;
+        v_customer_auth_normalized class4.customers_auth_normalized;
+        v_destination class4.destinations%rowtype;
+        v_dialpeer record;
+        v_rateplan class4.rateplans%rowtype;
+        v_dst_gw class4.gateways%rowtype;
+        v_orig_gw class4.gateways%rowtype;
+        v_rp class4.routing_plans%rowtype;
+        v_customer_allowtime real;
+        v_vendor_allowtime real;
+        v_sorting_id integer;
+        v_customer_acc integer;
+        v_route_found boolean:=false;
+        v_c_acc billing.accounts%rowtype;
+        v_v_acc billing.accounts%rowtype;
+        v_network sys.network_prefixes%rowtype;
+        v_src_network sys.network_prefixes%rowtype;
+        routedata record;
+        
+        v_rate NUMERIC;
+        v_now timestamp;
+        v_x_yeti_auth varchar;
+        --  v_uri_domain varchar;
+        v_rate_limit float:='Infinity'::float;
+        v_destination_rate_limit float:='Infinity'::float;
+        v_test_vendor_id integer;
+        v_random float;
+        v_max_call_length integer;
+        v_routing_key varchar;
+        v_lnp_key varchar;
+        v_drop_call_if_lnp_fail boolean;
+        v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
+        v_numberlist record;
+        v_numberlist_item record;
+        v_call_tags smallint[]:='{}'::smallint[];
+        v_area_direction class4.routing_tag_detection_rules%rowtype;
+        v_numberlist_size integer;
+        v_lua_context switch20.lua_call_context;
+        v_identity_data switch20.identity_data_ty[];
+
+      BEGIN
+        
+
+        perform id from sys.load_balancers where signalling_ip=host(i_remote_ip)::varchar;
+        IF FOUND and i_x_orig_ip IS not NULL AND i_x_orig_port IS not NULL THEN
+          v_remote_ip:=i_x_orig_ip;
+          v_remote_port:=i_x_orig_port;
+          v_transport_protocol_id=i_x_orig_protocol_id;
+          
+        else
+          v_remote_ip:=i_remote_ip;
+          v_remote_port:=i_remote_port;
+          v_transport_protocol_id:=i_protocol_id;
+          
+        end if;
+
+        v_now:=now();
+        v_ret:=switch20.new_profile();
+        v_ret.cache_time = 10;
+
+        v_ret.diversion_in:=i_diversion;
+        v_ret.diversion_out:=i_diversion; -- FIXME
+
+        v_ret.auth_orig_protocol_id =v_transport_protocol_id;
+        v_ret.auth_orig_ip = v_remote_ip;
+        v_ret.auth_orig_port = v_remote_port;
+
+        v_ret.src_name_in:=i_from_dsp;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        v_ret.src_prefix_in:=i_from_name;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        v_ret.dst_prefix_in:=i_uri_name;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+
+        v_ret.ruri_domain=i_uri_domain;
+        v_ret.from_domain=i_from_domain;
+        v_ret.to_domain=i_to_domain;
+
+        v_ret.pai_in=i_pai;
+        v_ret.ppi_in=i_ppi;
+        v_ret.privacy_in=i_privacy;
+        v_ret.rpid_in=i_rpid;
+        v_ret.rpid_privacy_in=i_rpid_privacy;
+
+        
+        v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
+        --  v_uri_domain:=COALESCE(i_uri_domain,'');
+
+        if i_auth_id is null then
+            SELECT into v_customer_auth_normalized ca.*
+            from class4.customers_auth_normalized ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
+              c.enabled and c.customer
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null,
+                ca.require_incoming_auth
+            LIMIT 1;
+            IF NOT FOUND THEN
+            
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+            if v_customer_auth_normalized.require_incoming_auth then
+            
+                v_ret.aleg_auth_required=true;
+                RETURN NEXT v_ret;
+                RETURN;
+            end IF;
+            if v_customer_auth_normalized.reject_calls then
+            
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
+        else
+            SELECT into v_customer_auth_normalized ca.*
+            from class4.customers_auth_normalized ca
+                JOIN public.contractors c ON c.id=ca.customer_id
+            WHERE ca.enabled AND
+              ca.ip>>=v_remote_ip AND
+              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
+              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
+              (ca.pop_id=i_pop_id or ca.pop_id is null) and
+              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
+              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
+              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
+              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
+              c.enabled and c.customer and
+              ca.require_incoming_auth and gateway_id = i_auth_id
+            ORDER BY
+                masklen(ca.ip) DESC,
+                ca.transport_protocol_id is null,
+                length(prefix_range(ca.dst_prefix)) DESC,
+                length(prefix_range(ca.src_prefix)) DESC,
+                ca.pop_id is null,
+                ca.uri_domain is null,
+                ca.to_domain is null,
+                ca.from_domain is null
+            LIMIT 1;
+            IF NOT FOUND THEN
+            
+                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+                RETURN NEXT v_ret;
+                RETURN;
+            END IF;
+            if v_customer_auth_normalized.reject_calls then
+            
+                v_ret.disconnect_code_id=8004; -- call rejected by authorization
+
+                v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+                v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+                v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+                select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
+
+                v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+                v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+
+                v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+                SELECT INTO STRICT v_ret.customer_acc_external_id external_id FROM billing.accounts WHERE id=v_customer_auth_normalized.account_id;
+
+                RETURN NEXT v_ret;
+                RETURN;
+            end if;
+        end IF;
+
+        
+
+        -- redefine call SRC/DST numbers
+
+        IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
+          v_ret.src_name_in:=i_from_dsp;
+        END IF;
+        v_ret.src_name_out:=v_ret.src_name_in;
+
+        IF v_customer_auth_normalized.src_number_field_id=1 THEN  /* default - from uri userpart */
+          v_ret.src_prefix_in:=i_from_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
+          v_ret.src_prefix_in:=i_from_dsp;
+        END IF;
+        v_ret.src_prefix_out:=v_ret.src_prefix_in;
+
+        IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
+          v_ret.dst_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
+          v_ret.dst_prefix_in:=i_to_name;
+        ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
+          v_ret.dst_prefix_in:=i_diversion;
+        END IF;
+        v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
+
+        -- feel customer data ;-)
+        v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
+        v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
+        v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+
+        v_ret.customer_id:=v_customer_auth_normalized.customer_id;
+        select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
+
+        v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
+        v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
+        v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+        v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+
+        v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
+        v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
+        v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
+
+        v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
+
+        SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth_normalized.account_id;
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+        v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
+
+        if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+          v_ret.disconnect_code_id=8000; --No enough customer balance
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        v_ret.customer_acc_external_id=v_c_acc.external_id;
+        v_ret.customer_acc_vat=v_c_acc.vat;
+
+        SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        v_ret.resources:='';
+        if v_customer_auth_normalized.capacity is not null then
+          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_c_acc.total_capacity is not null then
+          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
+        end if;
+
+        if v_orig_gw.origination_capacity is not null then
+          v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
+        end if;
+
+        -- Tag processing CA
+        v_call_tags=yeti_ext.tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
+
+        /*
+            number rewriting _Before_ routing
+        */
+        
+        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
+        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
+        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true);
+
+        --  if v_ret.radius_auth_profile_id is not null then
+        v_ret.src_number_radius:=i_from_name;
+        v_ret.dst_number_radius:=i_uri_name;
+        v_ret.src_number_radius=yeti_ext.regexp_replace_rand(
+            v_ret.src_number_radius,
+            v_customer_auth_normalized.src_number_radius_rewrite_rule,
+            v_customer_auth_normalized.src_number_radius_rewrite_result
+        );
+
+        v_ret.dst_number_radius=yeti_ext.regexp_replace_rand(
+            v_ret.dst_number_radius,
+            v_customer_auth_normalized.dst_number_radius_rewrite_rule,
+            v_customer_auth_normalized.dst_number_radius_rewrite_result
+        );
+        v_ret.customer_auth_name=v_customer_auth_normalized."name";
+        v_ret.customer_name=(select "name" from public.contractors where id=v_customer_auth_normalized.customer_id limit 1);
+        --  end if;
+/**
+        if v_customer_auth_normalized.lua_script_id is not null then
+          v_lua_context.src_name_in = v_ret.src_name_in;
+	        v_lua_context.src_number_in = v_ret.src_prefix_in;
+	        v_lua_context.dst_number_in = v_ret.dst_prefix_in;
+	        v_lua_context.src_name_out = v_ret.src_name_out;
+	        v_lua_context.src_number_out = v_ret.src_prefix_out;
+	        v_lua_context.dst_number_out = v_ret.dst_prefix_out;
+	        -- v_lua_context.src_name_routing
+	        -- v_lua_context.src_number_routing
+	        -- v_lua_context.dst_number_routing
+          -- #arrays
+	        -- v_lua_context.diversion_in
+	        -- v_lua_context.diversion_routing
+	        -- v_lua_context.diversion_out
+          select into v_lua_context switch20.lua_exec(v_customer_auth_normalized.lua_script_id, v_lua_context);
+          v_ret.src_name_out =  v_lua_context.src_name_out;
+          v_ret.src_prefix_out = v_lua_context.src_number_out;
+          v_ret.dst_prefix_out = v_lua_context.dst_number_out;
+        end if;
+**/
+
+        
+
+        ----- Numberlist processing-------------------------------------------------------------------------------------------------------
+        if v_customer_auth_normalized.dst_numberlist_id is not null then
+          
+          select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.dst_numberlist_id;
+          CASE v_numberlist.mode_id
+            when 1 then -- strict match
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and ni.key=v_ret.dst_prefix_out limit 1;
+            when 2 then -- prefix match
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where
+                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
+                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
+                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
+                order by length(prefix_range(ni.key))
+                desc limit 1;
+            when 3 then -- random
+                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
+                select into v_numberlist_item *
+                from class4.numberlist_items ni
+                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+          end case;
+          
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            
+            v_ret.disconnect_code_id=8001; --destination blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist_item.src_rewrite_rule,
+                v_numberlist_item.src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist_item.dst_rewrite_rule,
+                v_numberlist_item.dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            
+            -- drop by default
+            v_ret.disconnect_code_id=8001; --destination blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist.default_dst_rewrite_rule,
+                v_numberlist.default_dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        if v_customer_auth_normalized.src_numberlist_id is not null then
+          
+          select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
+          CASE v_numberlist.mode_id
+            when 1 then -- strict match
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
+            when 2 then -- prefix match
+              select into v_numberlist_item * from class4.numberlist_items ni
+              where
+                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
+                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
+                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
+              order by length(prefix_range(ni.key)) desc limit 1;
+            when 3 then -- random
+              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
+              select into v_numberlist_item *
+              from class4.numberlist_items ni
+              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+          end case;
+          
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            
+            v_ret.disconnect_code_id=8002; --source blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist_item.src_rewrite_rule,
+                v_numberlist_item.src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist_item.dst_rewrite_rule,
+                v_numberlist_item.dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            
+            v_ret.disconnect_code_id=8002; --source blacklisted
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+            );
+            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_numberlist.default_dst_rewrite_rule,
+                v_numberlist.default_dst_rewrite_result
+            );
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        --  setting numbers used for routing & billing
+        v_ret.src_prefix_routing=v_ret.src_prefix_out;
+        v_ret.dst_prefix_routing=v_ret.dst_prefix_out;
+        v_routing_key=v_ret.dst_prefix_out;
+
+        -- Areas and Tag detection-------------------------------------------
+        v_ret.src_area_id:=(
+          select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.src_prefix_routing)
+          order by length(prefix_range(prefix)) desc limit 1
+        );
+
+        
+
+        v_ret.dst_area_id:=(
+          select area_id from class4.area_prefixes where prefix_range(prefix)@>prefix_range(v_ret.dst_prefix_routing)
+          order by length(prefix_range(prefix)) desc limit 1
+        );
+
+        
+
+
+        select into v_area_direction * from class4.routing_tag_detection_rules
+        where
+          (src_area_id is null OR src_area_id = v_ret.src_area_id) AND
+          (dst_area_id is null OR dst_area_id = v_ret.dst_area_id) AND
+          prefix_range(src_prefix) @> prefix_range(v_ret.src_prefix_routing) AND
+          prefix_range(dst_prefix) @> prefix_range(v_ret.dst_prefix_routing) AND
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
+        order by
+          yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
+          length(prefix_range(v_ret.src_prefix_routing)) desc,
+          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          src_area_id is null,
+          dst_area_id is null
+        limit 1;
+        if found then
+            v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
+        end if;
+
+        v_ret.routing_tag_ids:=v_call_tags;
+
+        
+        ----------------------------------------------------------------------
+
+        
+
+        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+
+        v_routing_key=v_ret.dst_prefix_routing;
+        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+        if v_rp.sorting_id=5 then -- route testing
+          v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
+          v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
+          v_ret.dst_prefix_out=v_routing_key;
+          v_ret.dst_prefix_routing=v_routing_key;
+        end if;
+
+        if v_rp.use_lnp then
+          select into v_lnp_rule rules.*
+          from class4.routing_plan_lnp_rules rules
+          WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
+          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          if found then
+            v_ret.lnp_database_id=v_lnp_rule.database_id;
+            v_lnp_key=v_ret.dst_prefix_routing;
+            
+            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result);
+            
+            -- try cache
+            select into v_ret.lrn lrn from class4.lnp_cache where dst=v_lnp_key AND database_id=v_lnp_rule.database_id and expires_at>v_now;
+            if found then
+              
+              -- TRANSLATING response from cache
+              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+              
+              v_routing_key=v_ret.lrn;
+            else
+              v_ret.lrn=switch20.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
+              if v_ret.lrn is null then -- fail
+                
+                if v_drop_call_if_lnp_fail then
+                  
+                  v_ret.disconnect_code_id=8003; --No response from LNP DB
+                  RETURN NEXT v_ret;
+                  RETURN;
+                end if;
+              else
+                
+                -- TRANSLATING response from LNP DB
+                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+                
+                v_routing_key=v_ret.lrn;
+              end if;
+            end if;
+          end if;
+        end if;
+
+
+
+        
+        v_src_network:=switch20.detect_network(v_ret.src_prefix_routing);
+        v_ret.src_network_id=v_src_network.network_id;
+        v_ret.src_country_id=v_src_network.country_id;
+
+        v_network:=switch20.detect_network(v_ret.dst_prefix_routing);
+        v_ret.dst_network_id=v_network.network_id;
+        v_ret.dst_country_id=v_network.country_id;
+
+        IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
+          
+
+          v_ret.disconnect_code_id=8007; --No network detected for DST number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+
+        IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
+          
+
+          v_ret.disconnect_code_id=8008; --Invalid number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
+        FROM class4.destinations d
+        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
+        WHERE
+          prefix_range(prefix)@>prefix_range(v_routing_key)
+          AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
+          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND enabled
+          AND valid_from <= v_now
+          AND valid_till >= v_now
+          AND yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags, d.routing_tag_mode_id)>0
+        ORDER BY length(prefix_range(prefix)) DESC, yeti_ext.tag_compare(d.routing_tag_ids, v_call_tags) desc
+        limit 1;
+        IF NOT FOUND THEN
+          
+          v_ret.disconnect_code_id=111; --Cant find destination prefix
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+        
+
+        v_ret.destination_id:=v_destination.id;
+        v_ret.destination_prefix=v_destination.prefix;
+        v_ret.destination_initial_interval:=v_destination.initial_interval;
+        v_ret.destination_fee:=v_destination.connect_fee::varchar;
+        v_ret.destination_next_interval:=v_destination.next_interval;
+        v_ret.destination_rate_policy_id:=v_destination.rate_policy_id;
+        v_ret.destination_reverse_billing:=v_destination.reverse_billing;
+        IF v_destination.reject_calls THEN
+          v_ret.disconnect_code_id=112; --Rejected by destination
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        if v_destination.next_rate::float>v_destination_rate_limit then
+          v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
+
+        select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
+        if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
+          v_rate_limit=v_destination.next_rate::float;
+        end if;
+
+
+        /*
+                    FIND dialpeers logic. Queries must use prefix index for best performance
+        */
+        
+        CASE v_rp.sorting_id
+          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          FOR routedata IN (
+            WITH step1 AS(
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
+                  t_dp.priority AS dp_priority,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            from step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              AND dp_next_rate<=v_rate_limit
+              AND dp_enabled
+              and not dp_locked --ACD&ASR control for DP
+            ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          end LOOP;
+          WHEN '2' THEN --LCR, no prio, No ACD&ASR control
+          FOR routedata IN (
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  --  (t_vendor_gateway.*)::class4.gateways as s1_vendor_gateway,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              AND dp_enabled
+              and dp_next_rate<=v_rate_limit
+            ORDER BY dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          END LOOP;
+          WHEN '3' THEN --Prio, LCR, ACD&ASR control
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                    ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                    ) as exclusive_rank,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+              and not dp_locked
+            ORDER BY dp_metric_priority DESC, dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          END LOOP;
+          WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
+          FOR routedata IN (
+            WITH step1 AS(
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            from step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_next_rate <= v_rate_limit
+              and dp_enabled
+              and not dp_locked --ACD&ASR control for DP
+            ORDER BY r2 ASC
+            LIMIT v_rp.max_rerouting_attempts
+          ) LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          end LOOP;
+          WHEN'5' THEN -- Route test
+          FOR routedata IN (
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  and t_dp.vendor_id=v_test_vendor_id
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and dp_enabled
+              and dp_next_rate<=v_rate_limit
+            ORDER BY dp_metric_priority DESC, dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          END LOOP;
+          WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
+          v_random:=random();
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.locked as dp_locked,
+                  t_dp.enabled as dp_enabled,
+                  t_dp.force_hit_rate as dp_force_hit_rate,
+                  rpsr.priority as rpsr_priority,
+                  rpsr.weight as rpsr_weight
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                  left join class4.routing_plan_static_routes rpsr
+                    ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                      and rpsr.vendor_id=t_dp.vendor_id
+                      AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and r2=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+              and not dp_locked
+            ORDER BY
+              coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
+              yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
+              dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          END LOOP;
+          WHEN'7' THEN -- QD.Static, No ACD&ACR control
+          v_random:=random();
+          FOR routedata in(
+            WITH step1 AS( -- filtering
+                SELECT
+                  (t_dp.*)::class4.dialpeers as s1_dialpeer,
+                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY
+                      length(prefix_range(t_dp.prefix)) desc,
+                      yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) desc,
+                      t_dp.exclusive_route desc -- in case when we have two identical prefixes with different exclusive flag value, we should lift up exclusive route, otherwise it will be filtered at WHERE r=1  and exclusive_rank=1
+                  ) as r,
+                  rank() OVER (
+                    ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
+                  ) as exclusive_rank,
+                  rank() OVER (
+                    PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
+                    ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
+                  ) as r2,
+                  t_dp.priority as dp_metric_priority,
+                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate as dp_next_rate,
+                  t_dp.enabled as dp_enabled,
+                  t_dp.force_hit_rate as dp_force_hit_rate,
+                  rpsr.priority as rpsr_priority,
+                  rpsr.weight as rpsr_weight
+                FROM class4.dialpeers t_dp
+                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
+                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
+                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
+                  join class4.routing_plan_static_routes rpsr
+                    ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                      and rpsr.vendor_id=t_dp.vendor_id
+                      AND prefix_range(rpsr.prefix)@>prefix_range(v_routing_key)
+                WHERE
+                  prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
+                  AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
+                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  and t_dp.valid_from<=v_now
+                  and t_dp.valid_till>=v_now
+                  AND t_vendor_account.balance<t_vendor_account.max_balance
+                  and t_vendor.enabled and t_vendor.vendor
+                  AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
+            )
+            SELECT s1_dialpeer as s2_dialpeer,
+                  s1_vendor_account as s2_vendor_account
+            FROM step1
+            WHERE
+              r=1
+              and exclusive_rank=1
+              and r2=1
+              and dp_next_rate<=v_rate_limit
+              and dp_enabled
+            ORDER BY
+              coalesce(v_random<=dp_force_hit_rate,false) desc,
+              rpsr_priority,
+              yeti_ext.rank_dns_srv(rpsr_weight) over ( partition by rpsr_priority order by rpsr_weight),
+              dp_metric
+            LIMIT v_rp.max_rerouting_attempts
+          )LOOP
+            RETURN QUERY
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            
+          END LOOP;
+
+        ELSE
+          RAISE NOTICE 'BUG: unknown sorting_id';
+        END CASE;
+        
+        v_ret.disconnect_code_id=113; --No routes
+        RETURN NEXT v_ret;
+        
+        RETURN;
+      END;
+      $_$;
+
+
+--
+-- Name: tracelog(class4.destinations); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.tracelog(i_in class4.destinations) RETURNS void
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RAISE INFO'switch20.tracelog: % : %',clock_timestamp()::char(25),i_in;
+END;
+$$;
+
+
+--
+-- Name: tracelog(class4.dialpeers); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.tracelog(i_in class4.dialpeers) RETURNS void
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RAISE INFO 'switch20.tracelog: % : %',clock_timestamp()::char(25),i_in;
+END;
+$$;
+
+
+--
 -- Name: cdr_createtable(integer); Type: FUNCTION; Schema: sys; Owner: -
 --
 
@@ -16672,6 +23266,46 @@ ALTER SEQUENCE class4.sortings_id_seq OWNED BY class4.sortings.id;
 
 
 --
+-- Name: stir_shaken_trusted_certificates_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_trusted_certificates_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stir_shaken_trusted_certificates_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.stir_shaken_trusted_certificates_id_seq OWNED BY class4.stir_shaken_trusted_certificates.id;
+
+
+--
+-- Name: stir_shaken_trusted_repositories_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_trusted_repositories_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stir_shaken_trusted_repositories_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.stir_shaken_trusted_repositories_id_seq OWNED BY class4.stir_shaken_trusted_repositories.id;
+
+
+--
 -- Name: tag_actions; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -18406,6 +25040,107 @@ ALTER SEQUENCE switch19.trusted_headers_id_seq OWNED BY switch19.trusted_headers
 
 
 --
+-- Name: events_id_seq; Type: SEQUENCE; Schema: switch20; Owner: -
+--
+
+CREATE SEQUENCE switch20.events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resource_action; Type: TABLE; Schema: switch20; Owner: -
+--
+
+CREATE TABLE switch20.resource_action (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: switch20; Owner: -
+--
+
+CREATE SEQUENCE switch20.resource_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: switch20; Owner: -
+--
+
+ALTER SEQUENCE switch20.resource_type_id_seq OWNED BY switch20.resource_type.id;
+
+
+--
+-- Name: switch_in_interface_id_seq; Type: SEQUENCE; Schema: switch20; Owner: -
+--
+
+CREATE SEQUENCE switch20.switch_in_interface_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: switch_interface_out; Type: TABLE; Schema: switch20; Owner: -
+--
+
+CREATE TABLE switch20.switch_interface_out (
+    id integer NOT NULL,
+    name character varying,
+    type character varying,
+    custom boolean NOT NULL,
+    rank integer NOT NULL,
+    for_radius boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- Name: switch_interface_id_seq; Type: SEQUENCE; Schema: switch20; Owner: -
+--
+
+CREATE SEQUENCE switch20.switch_interface_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: switch_interface_id_seq; Type: SEQUENCE OWNED BY; Schema: switch20; Owner: -
+--
+
+ALTER SEQUENCE switch20.switch_interface_id_seq OWNED BY switch20.switch_interface_out.id;
+
+
+--
+-- Name: switch_interface_in; Type: TABLE; Schema: switch20; Owner: -
+--
+
+CREATE TABLE switch20.switch_interface_in (
+    id integer DEFAULT nextval('switch20.switch_in_interface_id_seq'::regclass) NOT NULL,
+    name character varying,
+    type character varying,
+    rank integer NOT NULL,
+    format character varying,
+    hashkey boolean DEFAULT false NOT NULL,
+    param character varying
+);
+
+
+--
 -- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -19470,6 +26205,20 @@ ALTER TABLE ONLY class4.sortings ALTER COLUMN id SET DEFAULT nextval('class4.sor
 
 
 --
+-- Name: stir_shaken_trusted_certificates id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_certificates ALTER COLUMN id SET DEFAULT nextval('class4.stir_shaken_trusted_certificates_id_seq'::regclass);
+
+
+--
+-- Name: stir_shaken_trusted_repositories id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_repositories ALTER COLUMN id SET DEFAULT nextval('class4.stir_shaken_trusted_repositories_id_seq'::regclass);
+
+
+--
 -- Name: import_accounts id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
@@ -19726,6 +26475,20 @@ ALTER TABLE ONLY switch19.switch_interface_out ALTER COLUMN id SET DEFAULT nextv
 --
 
 ALTER TABLE ONLY switch19.trusted_headers ALTER COLUMN id SET DEFAULT nextval('switch19.trusted_headers_id_seq'::regclass);
+
+
+--
+-- Name: resource_type id; Type: DEFAULT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.resource_type ALTER COLUMN id SET DEFAULT nextval('switch20.resource_type_id_seq'::regclass);
+
+
+--
+-- Name: switch_interface_out id; Type: DEFAULT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch20.switch_interface_id_seq'::regclass);
 
 
 --
@@ -20870,6 +27633,22 @@ ALTER TABLE ONLY class4.sortings
 
 
 --
+-- Name: stir_shaken_trusted_certificates stir_shaken_trusted_certificates_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_certificates
+    ADD CONSTRAINT stir_shaken_trusted_certificates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stir_shaken_trusted_repositories stir_shaken_trusted_repositories_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_trusted_repositories
+    ADD CONSTRAINT stir_shaken_trusted_repositories_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tag_actions tag_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -21355,6 +28134,70 @@ ALTER TABLE ONLY switch19.switch_interface_out
 
 ALTER TABLE ONLY switch19.trusted_headers
     ADD CONSTRAINT trusted_headers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: resource_action resource_action_name_key; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.resource_action
+    ADD CONSTRAINT resource_action_name_key UNIQUE (name);
+
+
+--
+-- Name: resource_action resource_action_pkey; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.resource_action
+    ADD CONSTRAINT resource_action_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: resource_type resource_type_name_key; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.resource_type
+    ADD CONSTRAINT resource_type_name_key UNIQUE (name);
+
+
+--
+-- Name: resource_type resource_type_pkey; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.resource_type
+    ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: switch_interface_in switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.switch_interface_in
+    ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: switch_interface_in switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.switch_interface_in
+    ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
+
+
+--
+-- Name: switch_interface_out switch_interface_pkey; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.switch_interface_out
+    ADD CONSTRAINT switch_interface_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: switch_interface_out switch_interface_rank_key; Type: CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.switch_interface_out
+    ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
 
 
 --
@@ -22869,6 +29712,14 @@ ALTER TABLE ONLY switch19.resource_type
 
 
 --
+-- Name: resource_type resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch20; Owner: -
+--
+
+ALTER TABLE ONLY switch20.resource_type
+    ADD CONSTRAINT resource_type_action_id_fkey FOREIGN KEY (action_id) REFERENCES switch20.resource_action(id);
+
+
+--
 -- Name: active_currencies active_currencies_currency_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -22944,8 +29795,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -23022,6 +29872,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210223142035'),
 ('20210313203526'),
 ('20210328145540'),
-('20210415123322');
+('20210415123322'),
+('20210605094810');
 
 

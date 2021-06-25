@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Equipment::Radius::AccountingProfile do
-  menu parent: 'Equipment', priority: 120, label: 'RADIUS Accounting profile'
+  menu parent: %w[Equipment RADIUS], priority: 120, label: 'RADIUS Accounting profile'
   config.batch_actions = false
 
   acts_as_audit

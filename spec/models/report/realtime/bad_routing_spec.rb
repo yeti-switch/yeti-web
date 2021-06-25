@@ -44,6 +44,7 @@
 #  is_redirected                   :boolean
 #  lega_disconnect_code            :integer(4)
 #  lega_disconnect_reason          :string
+#  lega_identity                   :jsonb
 #  lega_rx_bytes                   :integer(4)
 #  lega_rx_decode_errs             :integer(4)
 #  lega_rx_no_buf_errs             :integer(4)

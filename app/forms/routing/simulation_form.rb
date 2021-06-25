@@ -137,6 +137,7 @@ class Routing::SimulationForm < ApplicationForm
             ?, /* i_uri_name character varying */
             ?, /* i_uri_domain character varying */
             ?, /* i_auth_id integer */
+            ?, /* i_identity */
             ?, /* i_x_yeti_auth character varying, */
             ?, /* i_diversion character varying */
             ?, /* i_x_orig_ip inet */
@@ -168,6 +169,7 @@ class Routing::SimulationForm < ApplicationForm
           dst_number,
           uri_domain,
           auth_id,
+          '[]',
           x_yeti_auth,
           nil,
           nil,

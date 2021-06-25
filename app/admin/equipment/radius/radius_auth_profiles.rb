@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Equipment::Radius::AuthProfile do
-  menu parent: 'Equipment', priority: 110, label: 'RADIUS Auth profile'
+  menu parent: %w[Equipment RADIUS], priority: 110, label: 'RADIUS Auth profile'
   config.batch_actions = true
 
   acts_as_audit

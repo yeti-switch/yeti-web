@@ -23,7 +23,8 @@ RSpec.describe '#routing logic' do
         ?::integer,
         ?::varchar,
         ?::varchar,
-        ?::integer,
+        ?::integer, /* i_auth_id */
+        ?::json, /* i_identity */
         ?::varchar,
         ?::varchar,
         ?::inet,
@@ -55,6 +56,7 @@ RSpec.describe '#routing logic' do
       uri_name,
       uri_domain,
       auth_id,
+      identity,
       x_yeti_auth,
       diversion,
       x_orig_ip,
@@ -88,6 +90,7 @@ RSpec.describe '#routing logic' do
   let(:uri_name) { 'uri-name' }
   let(:uri_domain) { 'uri-domain' }
   let(:auth_id) { nil }
+  let(:identity) { '[]' }
   let(:x_yeti_auth) { nil }
   let(:diversion) { 'test' }
   let(:x_orig_ip) { '3.3.3.3' }
