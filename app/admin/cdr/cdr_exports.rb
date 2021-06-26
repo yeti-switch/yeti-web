@@ -97,21 +97,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     end
   end
 
-  permit_params filters: %i[time_start_gteq
-                            time_start_lteq
-                            customer_acc_id_eq
-                            is_last_cdr_eq
-                            src_prefix_in_contains
-                            src_prefix_routing_contains
-                            src_prefix_out_contains
-                            dst_prefix_in_contains
-                            dst_prefix_routing_contains
-                            dst_prefix_out_contains
-                            src_country_id_eq
-                            dst_country_id_eq
-                            routing_tag_ids_include
-                            routing_tag_ids_exclude
-                            routing_tag_ids_empty],
+  permit_params filters: CdrExport::FiltersModel.attribute_types.keys.map(&:to_sym),
                 fields: []
 
   form do |f|
@@ -121,21 +107,67 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
               as: :select,
               multiple: true,
               collection: CdrExport.allowed_fields,
-              input_html: { class: 'chosen' }
+              input_html: { class: 'chosen' },
+              required: true
+
+      f.input :callback_url, required: false
     end
     f.inputs 'Filters', for: [:filters, f.object.filters] do |ff|
-      ff.input :time_start_gteq, as: :date_time_picker
-      ff.input :time_start_lteq, as: :date_time_picker
+      accounts = Account.order(:name)
+      gateways = Gateway.order(:name)
+      boolean_options = [['Any', nil], ['Yes', true], ['No', false]]
+
+      ff.input :time_start_gteq, as: :date_time_picker, required: true
+      ff.input :time_start_lteq, as: :date_time_picker, required: true
+
+      ff.input :customer_id_eq,
+               as: :select,
+               collection: Contractor.customers.order(:name),
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :customer_external_id_eq, required: false
 
       ff.input :customer_acc_id_eq,
                as: :select,
-               collection: Account.order(:name),
-               input_html: { class: 'chosen' }
+               collection: accounts,
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :customer_acc_external_id_eq, required: false
+
+      ff.input :success_eq,
+               as: :select,
+               collection: boolean_options,
+               input_html: { class: 'chosen' },
+               required: false
+
+      ff.input :failed_resource_type_id_eq, required: false
+
+      ff.input :vendor_id_eq,
+               as: :select,
+               collection: Contractor.vendors.order(:name),
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :vendor_external_id_eq, required: false
+
+      ff.input :vendor_acc_id_eq,
+               as: :select,
+               collection: accounts,
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :vendor_acc_external_id_eq, required: false
+
+      ff.input :customer_auth_id_eq,
+               as: :select,
+               collection: CustomersAuth.order(:name),
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :customer_auth_external_id_eq, required: false
 
       ff.input :is_last_cdr_eq,
                as: :select,
-               collection: [['Any', nil], ['Yes', true], ['No', false]],
-               input_html: { class: 'chosen' }
+               collection: boolean_options,
+               input_html: { class: 'chosen' },
+               required: false
 
       ff.input :src_prefix_in_contains, required: false
       ff.input :src_prefix_routing_contains, required: false
@@ -145,19 +177,38 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       ff.input :dst_prefix_routing_contains, required: false
       ff.input :dst_prefix_out_contains, required: false
 
-      ff.input :src_country_id_eq, as: :select,
-                                   collection: System::Country.all,
-                                   input_html: { class: 'chosen' }
-      ff.input :dst_country_id_eq, as: :select,
-                                   collection: System::Country.all,
-                                   input_html: { class: 'chosen' }
+      ff.input :src_country_id_eq,
+               as: :select,
+               collection: System::Country.all,
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :dst_country_id_eq,
+               as: :select,
+               collection: System::Country.all,
+               input_html: { class: 'chosen' },
+               required: false
 
       ff.input :routing_tag_ids_include, required: false
       ff.input :routing_tag_ids_exclude, required: false
       ff.input :routing_tag_ids_empty,
                as: :select,
-               collection: [['Any', nil], ['Yes', true], ['No', false]],
-               input_html: { class: 'chosen' }
+               collection: boolean_options,
+               input_html: { class: 'chosen' },
+               required: false
+
+      ff.input :orig_gw_id_eq,
+               as: :select,
+               collection: gateways,
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :orig_gw_external_id_eq, required: false
+
+      ff.input :term_gw_id_eq,
+               as: :select,
+               collection: gateways,
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :term_gw_external_id_eq, required: false
     end
     f.actions
   end

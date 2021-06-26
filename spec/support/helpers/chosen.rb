@@ -30,8 +30,10 @@ module Helpers
       else
         chosen_node.find('.chosen-search input').native.send_keys(search.to_s)
       end
-      expect(page).to have_selector('ul.chosen-results li.active-result') if ajax
-      find('.active-result', text: search, exact_text: exact).click
+      within(chosen_node) do
+        expect(page).to have_selector('ul.chosen-results li.active-result') if ajax
+        find('.active-result', text: search, exact_text: exact).click
+      end
     end
 
     def chosen_pick(css_selector, text:, chosen_node: nil, exact: false)

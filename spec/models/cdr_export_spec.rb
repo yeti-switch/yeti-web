@@ -15,7 +15,132 @@
 #  updated_at   :datetime
 #
 
-RSpec.describe CdrExport, type: :model do
+RSpec.describe CdrExport do
+  describe '.create' do
+    subject do
+      described_class.create(create_params)
+    end
+
+    let(:create_params) do
+      {
+        fields: ['id'],
+        filters: {
+          time_start_lteq: 1.day.ago.utc.iso8601(3),
+          time_start_gteq: Time.now.utc.iso8601(3)
+        }
+      }
+    end
+    let(:expected_cdr_export_attrs) do
+      create_params.except(:filters)
+    end
+    let(:expected_cdr_export_filters) do
+      create_params[:filters]
+    end
+
+    shared_examples :creates_cdr_export do
+      # let(:expected_cdr_export_attrs) {}
+      # let(:expected_cdr_export_filters) {}
+
+      it 'creates cdr_export' do
+        expect(subject.errors).to be_empty
+        expect(subject).to be_persisted
+        expect(subject).to have_attributes(expected_cdr_export_attrs)
+        filters = subject.filters.as_json.symbolize_keys
+        expect(filters).to match(expected_cdr_export_filters)
+      end
+    end
+
+    context 'with only required attributes' do
+      include_examples :creates_cdr_export
+    end
+
+    context 'with all allowed filters' do
+      let(:create_params) do
+        super().merge filters: {
+          time_start_lteq: 15.days.ago.utc.iso8601(3),
+          time_start_gteq: 10.days.ago.utc.iso8601(3),
+          customer_id_eq: 1234,
+          customer_external_id_eq: 1235,
+          customer_acc_id_eq: 1236,
+          customer_acc_external_id_eq: 241_251,
+          vendor_id_eq: 1237,
+          vendor_external_id_eq: 1238,
+          vendor_acc_id_eq: 1239,
+          vendor_acc_external_id_eq: 1240,
+          is_last_cdr_eq: true,
+          success_eq: true,
+          customer_auth_id_eq: 1241,
+          customer_auth_external_id_eq: 2_151_321,
+          failed_resource_type_id_eq: 25,
+          src_prefix_in_contains: '1111',
+          dst_prefix_in_contains: '2222',
+          src_prefix_routing_contains: '3333',
+          dst_prefix_routing_contains: '4444',
+          src_prefix_out_contains: '5555',
+          dst_prefix_out_contains: '6666',
+          src_country_id_eq: 111_222,
+          dst_country_id_eq: 111_223,
+          routing_tag_ids_include: 2,
+          routing_tag_ids_exclude: 5,
+          routing_tag_ids_empty: false,
+          orig_gw_id_eq: 1242,
+          orig_gw_external_id_eq: 1243,
+          term_gw_id_eq: 1244,
+          term_gw_external_id_eq: 1245
+        }
+      end
+      before do
+        # add allowed filters must be filled in this test.
+        allowed_filters = CdrExport::FiltersModel.attribute_types.keys.map(&:to_sym)
+        expect(create_params[:filters].keys).to match_array(allowed_filters)
+      end
+
+      include_examples :creates_cdr_export
+    end
+
+    context 'with all allowed fields' do
+      let(:create_params) do
+        super().merge fields: described_class.allowed_fields
+      end
+
+      include_examples :creates_cdr_export
+    end
+
+    context 'with not allowed filter' do
+      let(:create_params) do
+        super().merge filters: {
+          time_start_lteq: 15.days.ago.utc.iso8601(3),
+          time_start_gteq: 10.days.ago.utc.iso8601(3),
+          foo: 'bar',
+          baz: 'boo'
+        }
+      end
+
+      include_examples :does_not_create_record, errors: {
+        'filters': 'foo, baz not allowed'
+      }
+    end
+
+    context 'with not allowed field' do
+      let(:create_params) do
+        super().merge fields: %w[id qwe asd]
+      end
+
+      include_examples :does_not_create_record, errors: {
+        fields: 'qwe, asd not allowed'
+      }
+    end
+
+    context 'without attributes' do
+      let(:create_params) { {} }
+
+      include_examples :does_not_create_record, errors: {
+        fields: "can't be blank",
+        filters: ["can't be blank", 'requires time_start_lteq & time_start_gteq']
+      }
+    end
+  end
+
   describe '#export_sql' do
     subject do
       cdr_export.export_sql

@@ -14,6 +14,13 @@ class JsonAttributeModel
     end
   end
 
+  attr_accessor :_unknown_attributes
+
+  def initialize(*)
+    self._unknown_attributes = {}
+    super
+  end
+
   # serializes model as hash of it's attributes
   def as_json(options = {})
     filled_attributes.with_indifferent_access.as_json(options)
@@ -48,5 +55,25 @@ class JsonAttributeModel
 
   def filled_attributes
     attributes.reject { |_, value| value.nil? }
+  end
+
+  def unknown_attributes_raise?
+    false
+  end
+
+  def _assign_attribute(name, value)
+    super
+  rescue ActiveModel::UnknownAttributeError
+    raise e if unknown_attributes_raise?
+
+    _unknown_attributes[name] = value
+  end
+
+  def write_attribute(name, value)
+    super
+  rescue ActiveModel::UnknownAttributeError
+    raise e if unknown_attributes_raise?
+
+    _unknown_attributes[name] = value
   end
 end

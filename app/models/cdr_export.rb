@@ -22,9 +22,17 @@ class CdrExport < Yeti::ActiveRecord
   class FiltersModel < JsonAttributeModel
     attribute :time_start_gteq, :db_datetime
     attribute :time_start_lteq, :db_datetime
+    attribute :customer_id_eq, :integer
+    attribute :customer_external_id_eq, :integer
     attribute :customer_acc_id_eq, :integer
+    attribute :customer_acc_external_id_eq, :integer
+    attribute :vendor_id_eq, :integer
+    attribute :vendor_external_id_eq, :integer
+    attribute :vendor_acc_id_eq, :integer
+    attribute :vendor_acc_external_id_eq, :integer
     attribute :is_last_cdr_eq, :boolean
     attribute :success_eq, :boolean
+    attribute :customer_auth_id_eq, :integer
     attribute :customer_auth_external_id_eq, :integer
     attribute :failed_resource_type_id_eq, :integer
     attribute :src_prefix_in_contains, :string
@@ -33,18 +41,15 @@ class CdrExport < Yeti::ActiveRecord
     attribute :dst_prefix_routing_contains, :string
     attribute :src_prefix_out_contains, :string
     attribute :dst_prefix_out_contains, :string
-    attribute :customer_acc_external_id_eq, :integer
     attribute :src_country_id_eq, :integer
     attribute :dst_country_id_eq, :integer
     attribute :routing_tag_ids_include, :integer
     attribute :routing_tag_ids_exclude, :integer
     attribute :routing_tag_ids_empty, :boolean
-
-    private
-
-    def write_attribute(attr_name, value)
-      super
-    end
+    attribute :orig_gw_id_eq, :integer
+    attribute :orig_gw_external_id_eq, :integer
+    attribute :term_gw_id_eq, :integer
+    attribute :term_gw_external_id_eq, :integer
   end
 
   STATUS_PENDING = 'Pending'
@@ -66,6 +71,11 @@ class CdrExport < Yeti::ActiveRecord
 
   validates :status, :fields, :filters, presence: true
   validate do
+    if filters._unknown_attributes.any?
+      message = "#{filters._unknown_attributes.keys.join(', ')} not allowed"
+      errors.add(:filters, message)
+    end
+
     if filters.time_start_gteq.nil? || filters.time_start_lteq.nil?
       errors.add(:filters, 'requires time_start_lteq & time_start_gteq')
     end
