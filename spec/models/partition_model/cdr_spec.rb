@@ -56,6 +56,7 @@ RSpec.describe PartitionModel::Cdr do
     let(:cdrs_qty) { 5 }
 
     before do
+      Cdr::Cdr.delete_all
       # Cdr::Cdr.add_partition_for Date.parse('2018-12-02')
       # Cdr::Cdr.add_partition_for Date.parse('2019-01-15')
       FactoryBot.create_list :cdr, cdrs_qty, time_start: Date.parse('2018-12-02')
