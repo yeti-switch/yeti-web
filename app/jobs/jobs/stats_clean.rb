@@ -2,6 +2,8 @@
 
 module Jobs
   class StatsClean < ::BaseJob
+    self.cron_line = '35 * * * *'
+
     def execute
       Stats::AggActiveCall.where('created_at < ?', ago).delete_all
       Stats::AggActiveCallAccount.where('created_at < ?', ago).delete_all

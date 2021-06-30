@@ -2,10 +2,12 @@
 
 module Jobs
   class ReportScheduler < ::BaseJob
+    self.cron_line = '*/15 * * * *'
+
     def execute
       customer_traffic_tasks.each do |t|
         capture_job_extra(id: t.id, class: t.class.name) do
-          transaction do
+          Yeti::ActiveRecord.transaction do
             timedata = t.reschedule(time_now)
             Report::CustomerTraffic.create!(
               date_start: timedata.date_from,
@@ -22,7 +24,7 @@ module Jobs
 
       custom_cdr_tasks.each do |t|
         capture_job_extra(id: t.id, class: t.class.name) do
-          transaction do
+          Yeti::ActiveRecord.transaction do
             timedata = t.reschedule(time_now)
             Report::CustomCdr.create!(
               date_start: timedata.date_from,
@@ -41,7 +43,7 @@ module Jobs
 
       interval_cdr_tasks.each do |t|
         capture_job_extra(id: t.id, class: t.class.name) do
-          transaction do
+          Yeti::ActiveRecord.transaction do
             timedata = t.reschedule(time_now)
             Report::IntervalCdr.create!(
               date_start: timedata.date_from,
@@ -62,7 +64,7 @@ module Jobs
 
       vendor_traffic_tasks.each do |t|
         capture_job_extra(id: t.id, class: t.class.name) do
-          transaction do
+          Yeti::ActiveRecord.transaction do
             timedata = t.reschedule(time_now)
             Report::VendorTraffic.create!(
               date_start: timedata.date_from,

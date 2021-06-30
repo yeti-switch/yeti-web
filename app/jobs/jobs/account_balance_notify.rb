@@ -2,6 +2,8 @@
 
 module Jobs
   class AccountBalanceNotify < ::BaseJob
+    self.cron_line = '* * * * *'
+
     def execute
       notifications.each do |ev|
         #        begin

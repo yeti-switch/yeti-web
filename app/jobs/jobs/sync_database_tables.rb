@@ -2,13 +2,15 @@
 
 module Jobs
   class SyncDatabaseTables < ::BaseJob
+    self.cron_line = '0 2 * * *'
+
     module CONST
       BATCH_SIZE = 1_000
       freeze
     end.freeze
 
     def execute
-      transaction do
+      Yeti::ActiveRecord.transaction do
         Cdr::Country.delete_all
         Cdr::Country.import System::Country.all.to_a
 

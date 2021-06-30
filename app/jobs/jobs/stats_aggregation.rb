@@ -2,6 +2,8 @@
 
 module Jobs
   class StatsAggregation < ::BaseJob
+    self.cron_line = '25 * * * *'
+
     def execute
       aggregate(Stats::ActiveCall, Stats::AggActiveCall, :node_id)
       aggregate_account

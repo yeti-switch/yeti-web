@@ -18,6 +18,6 @@ Environment=BUNDLE_GEMFILE=/opt/yeti-web/Gemfile
 Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
 
 RuntimeDirectory=yeti-scheduler
-ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec /opt/yeti-web/bin/cron_scheduler
+ExecStart=/usr/bin/ruby /opt/yeti-web/vendor/bundler/bin/bundle exec /opt/yeti-web/bin/scheduler
 Type=simple
 Restart=always

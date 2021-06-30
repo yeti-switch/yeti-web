@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Jobs::Invoice, '#execute' do
+RSpec.describe Jobs::Invoice, '#call' do
   subject do
-    job.execute
+    job.call
   end
 
-  let(:job) { described_class.first! }
+  let(:job) { described_class.new(double) }
 
   shared_examples :does_not_generate_invoice do
     it 'does not call BillingInvoice::Generate' do

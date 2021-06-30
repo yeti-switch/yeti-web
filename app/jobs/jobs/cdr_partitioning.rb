@@ -2,6 +2,8 @@
 
 module Jobs
   class CdrPartitioning < ::BaseJob
+    self.cron_line = '10 * * * *'
+
     def execute
       Cdr::Cdr.add_partitions
       Cdr::AuthLog.add_partitions
