@@ -98,6 +98,7 @@ group :development, :test do
   gem 'byebug'
   gem 'thin'
 
+  gem 'brakeman'
   gem 'bundler-audit', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
