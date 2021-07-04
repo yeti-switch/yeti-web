@@ -131,15 +131,10 @@ docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
 		db:create \
 		db:structure:load \
 		db:migrate \
-		db:second_base:drop:_unsafe \
-		db:second_base:create \
-		db:second_base:structure:load \
-		db:second_base:migrate \
 		db:seed
 	$(info:msg=Generating documentation)
 	RAILS_ENV=test $(bundle_bin) exec rake docs:generate
 	RAILS_ENV=test $(bundle_bin) exec rake db:drop
-	RAILS_ENV=test $(bundle_bin) exec rake db:second_base:drop:_unsafe
 
 
 .PHONY: assets
@@ -163,20 +158,14 @@ swagger: debian/changelog
 .PHONY: prepare-test-db
 prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
 	$(info:msg=Preparing test database)
-	RAILS_ENV=test $(bundle_bin) exec rake \
-		parallel:drop \
-		parallel:rake[db:second_base:drop:_unsafe]
+	RAILS_ENV=test $(bundle_bin) exec rake parallel:drop
 	@# avoid race condition when createing pgq roles in parallel with
 	@# parallel:spec
 	@# https://github.com/pgq/pgq/blob/master/functions/pgq.upgrade_schema.sql
 	psql -h db -U postgres -c '$(pgq_drop_roles)'
 	psql -h db -U postgres -c '$(pgq_create_roles)'
-	RAILS_ENV=test $(bundle_bin) exec rake  \
-		parallel:create \
-		parallel:rake[db:second_base:create]
-	RAILS_ENV=test $(bundle_bin) exec rake \
-		parallel:load_structure \
-		parallel:rake[db:second_base:structure:load]
+	RAILS_ENV=test $(bundle_bin) exec rake parallel:create
+	RAILS_ENV=test $(bundle_bin) exec rake parallel:load_structure
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[db:seed]
 
 
@@ -217,16 +206,10 @@ test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles
 		db:create \
 		db:structure:load \
 		db:migrate \
-		db:second_base:drop:_unsafe \
-		db:second_base:create \
-		db:second_base:structure:load \
-		db:second_base:migrate \
 		db:seed
 	$(info:msg=Run pgq-processors tests)
 	$(MAKE) -C pgq-processors test
-	RAILS_ENV=test PGQ_PROCESSORS_TEST=true $(bundle_bin) exec rake \
-		db:drop \
-		db:second_base:drop:_unsafe
+	RAILS_ENV=test PGQ_PROCESSORS_TEST=true $(bundle_bin) exec rake db:drop
 
 
 .PHONY: install

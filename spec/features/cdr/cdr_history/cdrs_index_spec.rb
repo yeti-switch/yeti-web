@@ -5,10 +5,8 @@ RSpec.describe 'CDRs index', type: :feature do
   include_context :init_routing_tag_collection
 
   before do
-    Cdr::Cdr.destroy_all
     create(:lnp_database, :thinq)
   end
-  after { Cdr::Cdr.destroy_all }
 
   let!(:routing_tag) { create(:routing_tag) }
   let!(:cdr_no_tags) do

@@ -2,7 +2,7 @@
 
 class Cdr::Base < Yeti::ActiveRecord
   self.abstract_class = true
-  establish_connection SecondBase.config
+  connects_to database: { writing: :cdr, reading: :cdr }
 
   DB_VER = LazyObject.new { db_version }
 end

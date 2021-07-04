@@ -72,12 +72,6 @@ module Yeti
     # Controls which database schemas will be dumped when calling db:structure:dump.
     config.active_record.dump_schemas = :all
 
-    # SecondBase aims to work seamlessly within your Rails application.
-    # When it makes sense, we run a mirrored db:second_base task
-    # for matching ActiveRecord base database task.
-    # These can all be deactivated by set to "false"
-    config.second_base.run_with_db_tasks = false
-
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = {

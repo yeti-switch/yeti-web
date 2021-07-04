@@ -4,9 +4,6 @@ RSpec.describe 'CDR show', type: :feature do
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 
-  before { Cdr::Cdr.destroy_all }
-  after { Cdr::Cdr.destroy_all }
-
   let!(:cdrs) do
     create_list :cdr, 12,
                 :with_id,

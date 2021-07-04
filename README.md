@@ -54,9 +54,7 @@ role_policy:
 And run command to create development database:
 
 ```sh
-RAILS_ENV=development bundle exec rake db:create db:structure:load db:migrate
-RAILS_ENV=development bundle exec rake db:second_base:create db:second_base:structure:load db:second_base:migrate
-RAILS_ENV=development bundle exec rake db:seed
+RAILS_ENV=development bundle exec rake db:create db:structure:load db:migrate db:seed
 ```
 
 Then start rails server `bundle exec rails s` and login to http://localhost:3000/ with
@@ -65,14 +63,12 @@ login `admin` and password `111111`
 Then prepare test database(do not use db:test:prepare).
 
 ```sh
-RAILS_ENV=test bundle exec rake db:drop db:create db:structure:load db:migrate
-RAILS_ENV=test bundle exec rake db:second_base:drop:_unsafe db:second_base:create db:second_base:structure:load db:second_base:migrate
-RAILS_ENV=test bundle exec rake db:seed
+RAILS_ENV=test bundle exec rake db:drop db:create db:structure:load db:migrate db:seed
 ```
 
-This project has CDR-database, configured as SecondDatabase
-https://github.com/customink/secondbase
-And all commands should be run explicitly by calling "db:second_base:*" commands.
+This project has CDR-database, configured as cdr
+see https://guides.rubyonrails.org/active_record_multiple_databases.html
+And all commands should be run explicitly by calling "db:*:cdr" commands.
 
 NOTICE: Test DB needs seeds, actually only PGQ seed.
 
@@ -108,14 +104,12 @@ IGNORE_STOPS=true bundle exec rake db:migrate
 ## Migrations that insert rows into yeti database
 
 ```bash
-RAILS_ENV=test bundle exec rake db:create db:structure:load
-RAILS_ENV=test bundle exec rake db:second_base:create db:second_base:structure:load
-RAILS_ENV=test bundle exec rake db:seed
+RAILS_ENV=test bundle exec rake db:create db:structure:load db:seed
 # create migration inside db/migrations
 RAILS_ENV=test bundle exec rake db:migrate
 # SCHEMA_NAME - schema of table into which you've inserted row(s)
 # YETI_TEST_DB_NAME - yeti test database name on local machine
-pg_dump --column-inserts --data-only --schema=sys --file=db/seeds/main/SCHEMA_NAME.sql YETI_TEST_DB_NAME
+pg_dump --column-inserts --data-only --schema=SCHEMA_NAME --file=db/seeds/main/SCHEMA_NAME.sql YETI_TEST_DB_NAME
 ```
 
 ## Use Docker Postgres for development

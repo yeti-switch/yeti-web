@@ -12,7 +12,6 @@ gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', '2.1.4' # https://github.com/rack/rack/issues/1628
 gem 'rails', '~> 6.0.4'
 gem 'responders'
-gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'activeldap'
@@ -97,7 +96,6 @@ group :development, :test do
   gem 'thin'
 
   gem 'bundler-audit', require: false
-  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'parallel_tests'
   gem 'rspec-rails'

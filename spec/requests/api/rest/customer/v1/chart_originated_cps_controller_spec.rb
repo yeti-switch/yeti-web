@@ -6,8 +6,6 @@ RSpec.describe Api::Rest::Customer::V1::ChartOriginatedCpsController, type: :req
   let!(:account) { create(:account, contractor: customer).reload }
   let!(:another_account) { create(:account, contractor: customer).reload }
   before do
-    Cdr::Cdr.where(customer_acc_id: account.id).delete_all
-
     create_list :cdr, 4,
                 customer_acc_id: account.id,
                 routing_attempt: 1,
