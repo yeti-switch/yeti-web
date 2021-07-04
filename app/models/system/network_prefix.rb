@@ -24,7 +24,7 @@
 #  network_prefixes_network_id_fkey  (network_id => networks.id)
 #
 
-class System::NetworkPrefix < Yeti::ActiveRecord
+class System::NetworkPrefix < ApplicationRecord
   self.table_name = 'sys.network_prefixes'
 
   belongs_to :country, class_name: 'System::Country', foreign_key: :country_id, optional: true

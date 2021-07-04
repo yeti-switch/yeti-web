@@ -25,9 +25,8 @@ RSpec.describe 'Copy Routing group action', type: :feature do
     end
 
     it 'creates new Routing group with identical fields, except name' do
-      subject
+      expect { subject }.to change { RoutingGroup.count }.by(1)
       expect(routing_group.dialpeers.count).to eq(0)
-      expect(RoutingGroup.count).to eq(2)
       expect(RoutingGroup.last).to have_attributes(
         name: new_name
       )

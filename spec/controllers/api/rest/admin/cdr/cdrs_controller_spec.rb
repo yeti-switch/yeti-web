@@ -255,7 +255,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         let!(:cdr) do
           create :cdr, :with_id, dst_country_id: country.id
         end
-        let(:country) { create(:country) }
+        let(:country) { System::Country.take! }
         it 'only desired cdrs should be present' do
           subject
           expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))
@@ -269,7 +269,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         let!(:cdr) do
           create :cdr, :with_id, src_country_id: country.id
         end
-        let(:country) { create(:country) }
+        let(:country) { System::Country.take! }
 
         it 'only desired cdrs should be present' do
           subject
@@ -285,7 +285,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           let!(:cdr) do
             create :cdr, :with_id, dst_country_id: country.id
           end
-          let(:country) { create(:country) }
+          let(:country) { System::Country.take! }
           it 'only desired cdrs should be present' do
             subject
             expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))
@@ -339,7 +339,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           let!(:cdr) do
             create :cdr, :with_id, src_country_id: country.id
           end
-          let(:country) { create(:country) }
+          let(:country) { System::Country.take! }
           it 'only desired cdrs should be present' do
             subject
             expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))

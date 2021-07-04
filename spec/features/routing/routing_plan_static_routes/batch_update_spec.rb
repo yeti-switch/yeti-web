@@ -6,7 +6,7 @@ RSpec.describe BatchUpdateForm::RoutingPlanStaticRoute, :js do
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
   let!(:vendor) { FactoryBot.create :vendor }
   let!(:routing_plan) { FactoryBot.create :routing_plan, :with_static_routes }
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
 
   before do
     visit static_routes_path

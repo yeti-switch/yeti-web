@@ -10,11 +10,9 @@ RSpec.describe Api::Rest::Customer::V1::NetworkTypesController, type: :request d
 
     let(:json_api_request_query) { nil }
 
+    before { create_list(:network_type, 2) }
     let!(:network_types) do
-      [
-        FactoryBot.create(:network_type).reload,
-        FactoryBot.create(:network_type).reload
-      ]
+      System::NetworkType.all.to_a
     end
 
     it_behaves_like :json_api_check_authorization

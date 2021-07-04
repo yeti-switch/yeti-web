@@ -63,7 +63,9 @@
 #  dialpeers_vendor_id_fkey                  (vendor_id => contractors.id)
 #
 
-class Dialpeer < Yeti::ActiveRecord
+class Dialpeer < ApplicationRecord
+  self.table_name = 'class4.dialpeers'
+
   belongs_to :gateway, optional: true
   belongs_to :gateway_group, optional: true
   belongs_to :routing_group

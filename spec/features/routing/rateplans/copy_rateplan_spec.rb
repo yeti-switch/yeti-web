@@ -23,8 +23,7 @@ RSpec.describe 'Copy Rateplan action', type: :feature do
     end
 
     let!(:rateplan) do
-      create(:rateplan,
-             send_quality_alarms_to: send_to_ids).reload # after_save
+      create(:rateplan, send_quality_alarms_to: send_to_ids).reload # after_save
     end
 
     let(:new_name) { rateplan.name + '_copy' }
@@ -51,7 +50,8 @@ RSpec.describe 'Copy Rateplan action', type: :feature do
 
     context 'when "Send quality alarms to" has values' do
       # assign two Admins to "Send quality alarms to"
-      let(:send_to_ids) { AdminUser.all.pluck(:id) }
+      let(:send_to_ids) { Billing::Contact.all.pluck(:id) }
+      before { expect(send_to_ids).to be_present }
 
       include_examples :cloned_rateplan_is_valid
     end

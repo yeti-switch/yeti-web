@@ -12,7 +12,7 @@
 #  routing_tag_modes_name_key  (name) UNIQUE
 #
 
-class Routing::RoutingTagMode < Yeti::ActiveRecord
+class Routing::RoutingTagMode < ApplicationRecord
   self.table_name = 'class4.routing_tag_modes'
 
   module CONST

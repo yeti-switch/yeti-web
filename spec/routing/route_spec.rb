@@ -3,7 +3,7 @@
 RSpec.describe '#routing logic' do
   subject do
     CallSql::Yeti.select_all_serialized(
-      "SELECT * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.route_debug(
+      "SELECT * from #{ApplicationRecord::ROUTING_SCHEMA}.route_debug(
         ?::integer,
         ?::integer,
         ?::smallint,

@@ -19,7 +19,7 @@
 #  networks_type_id_fkey  (type_id => network_types.id)
 #
 
-class System::Network < Yeti::ActiveRecord
+class System::Network < ApplicationRecord
   self.table_name = 'sys.networks'
 
   has_many :prefixes, class_name: 'System::NetworkPrefix'

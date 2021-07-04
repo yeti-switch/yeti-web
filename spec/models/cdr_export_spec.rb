@@ -268,7 +268,7 @@ RSpec.describe CdrExport do
           routing_tag_ids_exclude: 2
         }
       end
-      let(:country) { create(:country) }
+      let(:country) { System::Country.take! }
 
       it 'SQL should be valid' do
         sql = [

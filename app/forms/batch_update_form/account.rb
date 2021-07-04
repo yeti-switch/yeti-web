@@ -37,20 +37,20 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
 
   validates :termination_capacity, numericality: {
     greater_than: 0,
-    less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT,
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
     allow_blank: true,
     only_integer: true,
     allow_nil: true
   }, if: :termination_capacity_changed?
   validates :origination_capacity, numericality: {
     greater_than: 0,
-    less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT,
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
     allow_blank: true,
     only_integer: true
   }, if: :origination_capacity_changed?
   validates :total_capacity, numericality: {
     greater_than: 0,
-    less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT,
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
     allow_blank: true,
     only_integer: true
   }, if: :total_capacity_changed?

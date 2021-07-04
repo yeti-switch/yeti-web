@@ -38,7 +38,7 @@
 #  registrations_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 
-class Equipment::Registration < Yeti::ActiveRecord
+class Equipment::Registration < ApplicationRecord
   self.table_name = 'class4.registrations'
 
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id

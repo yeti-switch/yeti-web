@@ -22,7 +22,7 @@
 #  routing_plan_static_routes_vendor_id_fkey        (vendor_id => contractors.id)
 #
 
-class Routing::RoutingPlanStaticRoute < Yeti::ActiveRecord
+class Routing::RoutingPlanStaticRoute < ApplicationRecord
   self.table_name = 'class4.routing_plan_static_routes'
 
   belongs_to :routing_plan

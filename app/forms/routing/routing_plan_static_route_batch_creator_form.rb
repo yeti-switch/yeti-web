@@ -11,7 +11,7 @@ class Routing::RoutingPlanStaticRouteBatchCreatorForm < ApplicationForm
   attr_reader :vendors
 
   validates :routing_plan, :priority, :weight, :prefixes, :vendors, presence: true
-  validates :weight, :priority, numericality: { greater_than: 0, less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
+  validates :weight, :priority, numericality: { greater_than: 0, less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
 
   def vendors=(s)
     @vendors = s.reject(&:blank?)

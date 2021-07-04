@@ -14,7 +14,7 @@ ActiveAdmin.register Routing::Rateplan do
 
   permit_params :name, :profit_control_mode_id, rate_group_ids: [], send_quality_alarms_to: []
 
-  includes :profit_control_mode, :rate_groups, :routing_rateplans_rate_groups
+  includes :profit_control_mode, :rate_groups, :rate_groups_routing_rateplans
 
   index do
     selectable_column

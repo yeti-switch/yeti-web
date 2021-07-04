@@ -8,8 +8,9 @@ RSpec.describe Api::Rest::Admin::System::NetworkTypesController, type: :request 
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before { FactoryBot.create_list(:network_type, 2) }
     let!(:network_types) do
-      FactoryBot.create_list(:network_type, 2)
+      System::NetworkType.all.to_a
     end
 
     include_examples :jsonapi_responds_with_pagination_links

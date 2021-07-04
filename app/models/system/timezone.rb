@@ -15,7 +15,7 @@
 #  timezones_name_key  (name) UNIQUE
 #
 
-class System::Timezone < Yeti::ActiveRecord
+class System::Timezone < ApplicationRecord
   self.table_name = 'sys.timezones'
 
   def display_name

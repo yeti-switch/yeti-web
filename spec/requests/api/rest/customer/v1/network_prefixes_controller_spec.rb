@@ -11,6 +11,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :reques
     let(:json_api_request_query) { nil }
 
     let!(:network_prefixes) do
+      System::NetworkPrefix.delete_all
       [
         FactoryBot.create(:network_prefix).reload,
         FactoryBot.create(:network_prefix).reload
@@ -32,7 +33,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :reques
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network_prefix.uuid }
 
-    let!(:network_prefix) { FactoryBot.create(:network_prefix).reload }
+    let!(:network_prefix) { System::NetworkPrefix.take! }
 
     it_behaves_like :json_api_check_authorization
 

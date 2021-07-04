@@ -17,7 +17,7 @@
 #  area_prefixes_area_id_fkey  (area_id => areas.id)
 #
 
-class Routing::AreaPrefix < Yeti::ActiveRecord
+class Routing::AreaPrefix < ApplicationRecord
   include WithPaperTrail
 
   self.table_name = 'class4.area_prefixes'

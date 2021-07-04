@@ -6,7 +6,7 @@
 
 # Use seeds in migration. Example "/db/migrate/20170821071806_add_seed_data.rb"
 
-def execute_sql_file(path, connection = ActiveRecord::Base.connection)
+def execute_sql_file(path, connection = ApplicationRecord.connection)
   connection.execute(IO.read(path))
 end
 

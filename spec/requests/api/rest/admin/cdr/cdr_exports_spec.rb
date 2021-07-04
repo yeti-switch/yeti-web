@@ -102,8 +102,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
           .merge(src_country_id_eq: country1.id, dst_country_id_eq: country2.id)
       end
 
-      let(:country1) { create(:country) }
-      let(:country2) { create(:country, name: 'Ukraine', iso2: 'UA') }
+      let(:country1) { System::Country.find_by!(name: 'France') }
+      let(:country2) { System::Country.find_by!(name: 'Ukraine') }
 
       include_examples :creates_cdr_export
       include_examples :returns_json_api_record, relationships: [], status: 201 do

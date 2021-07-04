@@ -8,8 +8,9 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :request do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before { FactoryBot.create_list(:routing_group, 2) }
     let!(:routing_groups) do
-      FactoryBot.create_list(:routing_group, 2)
+      RoutingGroup.all.to_a
     end
 
     include_examples :jsonapi_responds_with_pagination_links

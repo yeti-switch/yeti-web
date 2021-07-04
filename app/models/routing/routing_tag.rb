@@ -12,7 +12,7 @@
 #  routing_tags_name_key  (name) UNIQUE
 #
 
-class Routing::RoutingTag < Yeti::ActiveRecord
+class Routing::RoutingTag < ApplicationRecord
   include WithPaperTrail
   self.table_name = 'class4.routing_tags'
 

@@ -24,7 +24,7 @@
 #  lnp_cache_database_id_fkey  (database_id => lnp_databases.id)
 #
 
-class Lnp::Cache < Yeti::ActiveRecord
+class Lnp::Cache < ApplicationRecord
   self.table_name = 'class4.lnp_cache'
 
   belongs_to :database, class_name: 'Lnp::Database', foreign_key: :database_id, optional: true

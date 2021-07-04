@@ -22,19 +22,22 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
     aa_form.set_text 'Prefixes', '123,456'
     aa_form.select_chosen 'Vendors', vendor_2.display_name
     aa_form.select_chosen 'Vendors', vendor_1.display_name
+    Capybara::Screenshot.screenshot_and_save_page
   end
 
   it 'creates record' do
     subject
     records = Routing::RoutingPlanStaticRoute.last(4)
     expect(records.size).to eq(4)
+    network_prefix_123 = System::NetworkPrefix.longest_match('123')
+    network_prefix_456 = System::NetworkPrefix.longest_match('456')
     expect(records.first).to have_attributes(
       routing_plan_id: routing_plan.id,
       prefix: '123',
       vendor_id: vendor_2.id,
       priority: 100,
       weight: 100,
-      network_prefix_id: nil
+      network_prefix_id: network_prefix_123.id
     )
     expect(records.second).to have_attributes(
       routing_plan_id: routing_plan.id,
@@ -42,7 +45,7 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
       vendor_id: vendor_2.id,
       priority: 100,
       weight: 100,
-      network_prefix_id: nil
+      network_prefix_id: network_prefix_456.id
     )
     expect(records.third).to have_attributes(
       routing_plan_id: routing_plan.id,
@@ -50,7 +53,7 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
       vendor_id: vendor_1.id,
       priority: 95,
       weight: 100,
-      network_prefix_id: nil
+      network_prefix_id: network_prefix_123.id
     )
     expect(records.fourth).to have_attributes(
       routing_plan_id: routing_plan.id,
@@ -58,7 +61,7 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
       vendor_id: vendor_1.id,
       priority: 95,
       weight: 100,
-      network_prefix_id: nil
+      network_prefix_id: network_prefix_456.id
     )
   end
 

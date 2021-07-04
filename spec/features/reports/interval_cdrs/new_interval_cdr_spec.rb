@@ -23,8 +23,8 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
     record = Report::IntervalCdr.last
     expect(record).to be_present
     expect(record).to have_attributes(
-      date_start: Time.parse('2019-01-01 00:00:00 UTC'),
-      date_end: Time.parse('2019-02-01 01:00:00 UTC'),
+      date_start: Time.zone.parse('2019-01-01 00:00:00'),
+      date_end: Time.zone.parse('2019-02-01 01:00:00'),
       aggregator_id: Report::IntervalAggregator.find_by!(name: 'Count').id,
       aggregate_by: 'destination_fee',
       interval_length: 10,

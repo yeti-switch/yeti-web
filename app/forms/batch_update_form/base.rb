@@ -69,7 +69,7 @@ class BatchUpdateForm::Base
     end
 
     # Set model class.
-    # @param [String,Class<ActiveRecord::Base>]
+    # @param [String,Class<ApplicationRecord>]
     def model_class(class_name)
       self._model_class_name = class_name.to_s
     end

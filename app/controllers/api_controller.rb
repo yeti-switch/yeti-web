@@ -38,7 +38,7 @@ class ApiController < ActionController::API
   protected
 
   def current_db_connection
-    ActiveRecord::Base.connection
+    ApplicationRecord.connection
   end
 
   def info_for_paper_trail

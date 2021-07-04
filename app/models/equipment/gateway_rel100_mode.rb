@@ -12,6 +12,6 @@
 #  gateway_rel100_modes_name_key  (name) UNIQUE
 #
 
-class Equipment::GatewayRel100Mode < Yeti::ActiveRecord
+class Equipment::GatewayRel100Mode < ApplicationRecord
   self.table_name = 'class4.gateway_rel100_modes'
 end

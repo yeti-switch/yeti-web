@@ -21,6 +21,6 @@
 FactoryBot.define do
   factory :disconnect_policy_code, class: DisconnectPolicyCode do
     policy { DisconnectPolicy.take || create(:disconnect_policy) }
-    code { DisconnectCode.take || create(:disconnect_code, namespace_id: DisconnectCode::NS_SIP) }
+    code { DisconnectCode.take! }
   end
 end

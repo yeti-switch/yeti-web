@@ -12,7 +12,7 @@
 #  invoice_periods_name_key  (name) UNIQUE
 #
 
-class Billing::InvoicePeriod < Yeti::ActiveRecord
+class Billing::InvoicePeriod < ApplicationRecord
   DAILY_ID = 1
   WEEKLY_ID = 2
   BIWEEKLY_ID = 3

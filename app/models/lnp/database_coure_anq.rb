@@ -14,7 +14,7 @@
 #  database_id   :integer(4)
 #
 
-class Lnp::DatabaseCoureAnq < Yeti::ActiveRecord
+class Lnp::DatabaseCoureAnq < ApplicationRecord
   self.table_name = 'class4.lnp_databases_coure_anq'
 
   # ~ Sample

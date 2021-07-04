@@ -18,7 +18,7 @@
 #  radius_auth_profiles_name_key  (name) UNIQUE
 #
 
-class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
+class Equipment::Radius::AuthProfile < ApplicationRecord
   self.table_name = 'class4.radius_auth_profiles'
   include WithPaperTrail
 
@@ -38,7 +38,7 @@ class Equipment::Radius::AuthProfile < Yeti::ActiveRecord
 
   validates :timeout, numericality: { greater_than_or_equal_to: TIMEOUT_MIN, less_than_or_equal_to: TIMEOUT_MAX, allow_nil: true, only_integer: true }
   validates :attempts, numericality: { greater_than_or_equal_to: ATTEMPTS_MIN, less_than_or_equal_to: ATTEMPTS_MAX, allow_nil: true, only_integer: true }
-  validates :port, numericality: { greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
+  validates :port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
   before_save do
     Event.reload_radius_auth_profiles

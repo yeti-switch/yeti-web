@@ -33,7 +33,7 @@ RSpec.describe 'Create new Destination Next Rate', type: :feature, js: true do
       initial_rate: 0.1,
       next_rate: 0.2,
       connect_fee: 0.3,
-      apply_time: Time.parse('2019-01-01 01:00:00 UTC')
+      apply_time: Time.zone.parse('2019-01-01 01:00:00')
     )
   end
 

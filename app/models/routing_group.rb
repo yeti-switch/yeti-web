@@ -13,6 +13,8 @@
 #
 
 class RoutingGroup < ApplicationRecord
+  self.table_name = 'class4.routing_groups'
+
   before_destroy :check_deps
 
   has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan',

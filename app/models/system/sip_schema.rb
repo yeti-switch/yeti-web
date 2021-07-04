@@ -12,6 +12,6 @@
 #  sip_schemas_name_key  (name) UNIQUE
 #
 
-class System::SipSchema < Yeti::ActiveRecord
+class System::SipSchema < ApplicationRecord
   self.table_name = 'sys.sip_schemas'
 end

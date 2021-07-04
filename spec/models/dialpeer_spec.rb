@@ -66,7 +66,7 @@
 RSpec.describe Dialpeer, type: :model do
   describe 'validations' do
     it do
-      is_expected.to validate_numericality_of(:capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     end
 
     describe '.errors' do

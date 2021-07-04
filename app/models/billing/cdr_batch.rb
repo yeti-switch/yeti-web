@@ -10,6 +10,6 @@
 #  created_at :datetime         not null
 #
 
-class Billing::CdrBatch < Yeti::ActiveRecord
+class Billing::CdrBatch < ApplicationRecord
   self.table_name = 'billing.cdr_batches'
 end

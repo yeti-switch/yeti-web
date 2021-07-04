@@ -111,13 +111,15 @@ module Reporter
     end
 
     def html_template_name
-      'base.html.erb'
+      File.join(template_path, 'base.html.erb')
     end
 
     def generate_mail_body(data)
       return if options[:skip_mail_body]
 
-      view = ActionView::Base.new(Rails.root.join('app/views/mail_reports'), {})
+      path_set = ActionView::PathSet.new([template_path])
+      lookup = ActionView::LookupContext.new(path_set)
+      view = ActionView::Base.new(lookup, {})
       view.render(
         file: html_template_name,
         layout: false,
@@ -142,6 +144,10 @@ module Reporter
       path += "-#{n}" if n
       path += suffix if suffix
       path
+    end
+
+    def template_path
+      Rails.root.join('app/views/mail_reports').to_s
     end
   end
 end

@@ -10,7 +10,7 @@ RSpec.resource 'Authentication' do
     parameter :username, 'Login', scope: :auth, required: true
     parameter :password, 'Password', scope: :auth, required: true
 
-    let(:username) { 'admin' }
+    let(:username) { 'test-admin' }
     let(:password) { 'password' }
 
     before { create :admin_user, username: username, password: password }

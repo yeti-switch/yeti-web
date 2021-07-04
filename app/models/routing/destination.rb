@@ -47,7 +47,7 @@
 #  destinations_routing_tag_mode_id_fkey     (routing_tag_mode_id => routing_tag_modes.id)
 #
 
-class Routing::Destination < Yeti::ActiveRecord
+class Routing::Destination < ApplicationRecord
   self.table_name = 'class4.destinations'
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', foreign_key: :rate_group_id

@@ -14,7 +14,7 @@
 #  lnp_resolvers_name_key  (name) UNIQUE
 #
 
-class System::LnpResolver < Yeti::ActiveRecord
+class System::LnpResolver < ApplicationRecord
   self.table_name = 'sys.lnp_resolvers'
   validates :name, uniqueness: true
   validates :name, :address, :port, presence: true

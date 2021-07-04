@@ -3,7 +3,7 @@
 RSpec.describe BatchUpdateForm::Gateway, :js do
   include_context :login_as_admin
   let!(:_gateways) { FactoryBot.create_list :gateway, 3 }
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
 
   before do

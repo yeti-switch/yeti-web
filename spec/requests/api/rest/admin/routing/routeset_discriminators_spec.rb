@@ -8,8 +8,9 @@ RSpec.describe Api::Rest::Admin::Routing::RoutesetDiscriminatorsController, type
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before { FactoryBot.create_list(:routeset_discriminator, 2) }
     let!(:routeset_discriminators) do
-      FactoryBot.create_list(:routeset_discriminator, 2)
+      Routing::RoutesetDiscriminator.all.to_a
     end
 
     include_examples :jsonapi_responds_with_pagination_links

@@ -85,7 +85,7 @@
 #  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 
-class CustomersAuth < Yeti::ActiveRecord
+class CustomersAuth < ApplicationRecord
   self.table_name = 'class4.customers_auth'
 
   module CONST

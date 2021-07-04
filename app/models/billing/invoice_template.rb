@@ -16,7 +16,7 @@
 #  invoices_templates_name_key  (name) UNIQUE
 #
 
-class Billing::InvoiceTemplate < Yeti::ActiveRecord
+class Billing::InvoiceTemplate < ApplicationRecord
   self.table_name = 'invoice_templates'
   # attr_accessible :template_file,:data,:name
   validates :name, presence: true

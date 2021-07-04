@@ -22,7 +22,7 @@
 #  destination_next_rates_destination_id_fkey  (destination_id => destinations.id)
 #
 
-class Routing::DestinationNextRate < Yeti::ActiveRecord
+class Routing::DestinationNextRate < ApplicationRecord
   self.table_name = 'class4.destination_next_rates'
 
   validates :destination, presence: true

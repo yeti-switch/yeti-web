@@ -17,7 +17,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
   let!(:routing_tag_mode) { Routing::RoutingTagMode.last! }
   let!(:routing_tag_mode) { Routing::RoutingTagMode.last! }
   let!(:routeset_discriminator) { Routing::RoutesetDiscriminator.last! }
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let!(:routing_tags) { create_list(:routing_tag, 5) }
 
   before do

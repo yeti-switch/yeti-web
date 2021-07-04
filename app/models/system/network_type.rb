@@ -14,7 +14,7 @@
 #  network_types_uuid_key  (uuid) UNIQUE
 #
 
-class System::NetworkType < Yeti::ActiveRecord
+class System::NetworkType < ApplicationRecord
   self.table_name = 'sys.network_types'
 
   has_many :networks, class_name: 'System::Network', foreign_key: :type_id, dependent: :restrict_with_exception

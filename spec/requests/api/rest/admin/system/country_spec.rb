@@ -8,6 +8,10 @@ RSpec.describe Api::Rest::Admin::System::CountriesController, type: :request do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before do
+      System::NetworkPrefix.delete_all
+      System::Country.delete_all
+    end
     let!(:countries) do
       FactoryBot.create_list(:country, 2, :uniq_name)
     end

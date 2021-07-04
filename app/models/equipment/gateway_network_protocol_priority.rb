@@ -12,6 +12,6 @@
 #  gateway_network_protocol_priorities_name_key  (name) UNIQUE
 #
 
-class Equipment::GatewayNetworkProtocolPriority < Yeti::ActiveRecord
+class Equipment::GatewayNetworkProtocolPriority < ApplicationRecord
   self.table_name = 'class4.gateway_network_protocol_priorities'
 end

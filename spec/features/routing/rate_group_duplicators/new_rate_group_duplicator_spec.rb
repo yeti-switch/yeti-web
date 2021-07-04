@@ -15,14 +15,13 @@ RSpec.describe 'Create new RateGroup Duplicator', type: :feature, js: true do
   end
 
   it 'creates record' do
-    subject
-    record = Routing::RateGroup.last
-    expect(record).to be_present
+    expect {
+      subject
+      expect(page).to have_flash_message('Rate group duplicator was successfully created.', type: :notice)
+    }.to change { Routing::RateGroup.count }.by(1)
+    record = Routing::RateGroup.last!
     expect(record).to have_attributes(
       name: "#{rate_group.name} dup"
     )
   end
-
-  include_examples :changes_records_qty_of, Routing::RateGroup, by: 1
-  include_examples :shows_flash_message, :notice, 'Rate group duplicator was successfully created.'
 end

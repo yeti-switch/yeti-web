@@ -12,6 +12,8 @@ RSpec.describe Api::Rest::Admin::System::CountriesController, type: :controller 
 
   describe 'GET index' do
     let!(:countries) do
+      System::NetworkPrefix.delete_all
+      System::Country.delete_all
       [
         create(:country),
         create(:country, name: 'Canada', iso2: 'CA')
@@ -72,7 +74,7 @@ RSpec.describe Api::Rest::Admin::System::CountriesController, type: :controller 
 
   describe 'GET show' do
     let!(:country) do
-      create :country
+      System::Country.take!
     end
 
     subject do
@@ -108,8 +110,8 @@ RSpec.describe Api::Rest::Admin::System::CountriesController, type: :controller 
         data: {
           type: 'countries',
           attributes: {
-            name: 'Ukraine',
-            iso2: 'UA'
+            name: 'Wonderland',
+            iso2: 'WL'
           }
         }
       }
@@ -136,10 +138,10 @@ RSpec.describe Api::Rest::Admin::System::CountriesController, type: :controller 
       }
     end
     let(:country) do
-      create :country
+      System::Country.take!
     end
     it 'country name should be changed' do
-      expect { subject }.to change { country.reload.name }.from('United States').to('US')
+      expect { subject }.to change { country.reload.name }.from(country.name).to('US')
     end
   end
 
@@ -148,7 +150,7 @@ RSpec.describe Api::Rest::Admin::System::CountriesController, type: :controller 
       delete :destroy, params: { id: country.id }
     end
     let!(:country) do
-      create :country
+      create(:country, name: 'Wonderland', iso2: 'WL')
     end
 
     it 'country should be deleted' do

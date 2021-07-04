@@ -10,7 +10,7 @@ RSpec.resource 'Cdr Exports' do
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'cdr-exports' }
-  let(:country) { create(:country) }
+  let(:country) { System::Country.take! }
 
   required_params = %i[fields filters]
 

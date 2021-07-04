@@ -12,7 +12,7 @@
 #  database_id :integer(4)
 #
 
-class Lnp::DatabaseAlcazar < Yeti::ActiveRecord
+class Lnp::DatabaseAlcazar < ApplicationRecord
   self.table_name = 'class4.lnp_databases_alcazar'
 
   #

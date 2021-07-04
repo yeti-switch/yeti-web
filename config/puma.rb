@@ -20,7 +20,7 @@ worker_timeout 1200
 preload_app!
 
 before_fork do
-  ActiveRecord::Base.connection.disconnect!
+  ApplicationRecord.connection.disconnect!
   Cdr::Base.connection.disconnect!
 
   require 'puma_worker_killer'
@@ -64,8 +64,8 @@ end
 
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do
-    ActiveRecord::Base.establish_connection
-    SecondBase::Base.establish_connection
+    ApplicationRecord.establish_connection
+    Cdr::Base.establish_connection
   end
 
   if PrometheusConfig.enabled?

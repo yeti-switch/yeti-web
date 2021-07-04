@@ -12,7 +12,7 @@
 #  transport_protocols_name_key  (name) UNIQUE
 #
 
-class Equipment::TransportProtocol < Yeti::ActiveRecord
+class Equipment::TransportProtocol < ApplicationRecord
   self.table_name = 'class4.transport_protocols'
 
   def display_name

@@ -5,7 +5,7 @@ RSpec.describe BatchUpdateForm::Account, :js do
   let!(:_accounts) { FactoryBot.create_list :account, 3 }
   let!(:contractor) { FactoryBot.create :contractor, vendor: true }
   let!(:invoice_template) { FactoryBot.create :invoice_template }
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
 
   before do

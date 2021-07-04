@@ -13,7 +13,7 @@
 #  countries_name_key  (name) UNIQUE
 #
 
-class System::Country < Yeti::ActiveRecord
+class System::Country < ApplicationRecord
   self.table_name = 'sys.countries'
   has_many :prefixes, class_name: 'System::NetworkPrefix'
   has_many :networks, -> { distinct }, through: :prefixes

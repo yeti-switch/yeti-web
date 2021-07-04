@@ -12,7 +12,7 @@ RSpec.describe BatchUpdateForm::Dialpeer do
   let!(:gateway_vendors) { FactoryBot.create :gateway, contractor: vendor_main }
   let!(:gateway_group_vendors) { FactoryBot.create :gateway_group, vendor: vendor_main }
   let!(:account) { FactoryBot.create :account }
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let(:assign_params) do
     {
       enabled: 'true',

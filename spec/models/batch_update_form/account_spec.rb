@@ -123,21 +123,21 @@ RSpec.describe BatchUpdateForm::Account do
     it { is_expected.to allow_value(nil, '', ' ').for :origination_capacity }
     it { is_expected.to validate_numericality_of(:origination_capacity).only_integer }
     it { is_expected.to validate_numericality_of(:origination_capacity).is_greater_than 0 }
-    it { is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to Yeti::ActiveRecord::PG_MAX_SMALLINT }
+    it { is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to ApplicationRecord::PG_MAX_SMALLINT }
 
     # termination_capacity
     it { is_expected.to_not allow_value('string', 1.5).for :termination_capacity }
     it { is_expected.to allow_value(nil, '', ' ').for :termination_capacity }
     it { is_expected.to validate_numericality_of(:termination_capacity).only_integer }
     it { is_expected.to validate_numericality_of(:termination_capacity).is_greater_than 0 }
-    it { is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to Yeti::ActiveRecord::PG_MAX_SMALLINT }
+    it { is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to ApplicationRecord::PG_MAX_SMALLINT }
 
     # total_capacity
     it { is_expected.to_not allow_value('string', 1.5).for :total_capacity }
     it { is_expected.to allow_value(nil, '', ' ').for :termination_capacity }
     it { is_expected.to validate_numericality_of(:total_capacity).only_integer }
     it { is_expected.to validate_numericality_of(:total_capacity).is_greater_than 0 }
-    it { is_expected.to validate_numericality_of(:total_capacity).is_less_than_or_equal_to Yeti::ActiveRecord::PG_MAX_SMALLINT }
+    it { is_expected.to validate_numericality_of(:total_capacity).is_less_than_or_equal_to ApplicationRecord::PG_MAX_SMALLINT }
 
     # max_call_duration
     it { is_expected.to_not allow_value('string', 1.5).for :max_call_duration }
