@@ -30,7 +30,7 @@ class ApiController < ActionController::API
     @debug_mode
   end
 
-  include Concerns::WithPayloads
+  include WithPayloads
   include CaptureError::ControllerMethods
 
   rescue_from StandardError, with: :capture_error!
