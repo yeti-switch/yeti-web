@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', '2.1.4' # https://github.com/rack/rack/issues/1628
-gem 'rails', '~> 5.2.6'
+gem 'rails', '~> 6.0.4'
 gem 'responders'
 gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
@@ -57,12 +57,10 @@ gem 'paper_trail'
 gem 'parallel'
 
 # Assets
-gem 'coffee-rails', '~> 4.0'
-gem 'compass-rails', '~> 3.0.2'
 gem 'sass-rails'
 gem 'sprockets'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'chosen-rails', '1.5.2'
+gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'

@@ -31,7 +31,7 @@
 //= require index_as_table_visible_columns
 //= require sidebar_filter_actions
 //= require modal_confirm_fix
-//= require d3_charts.coffee
+//= require d3_charts
 //= require password-toggle
 
 //= require vendor/highlight.pack
