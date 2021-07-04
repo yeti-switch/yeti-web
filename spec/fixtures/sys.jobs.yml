@@ -1,0 +1,48 @@
+# == Schema Information
+#
+# Table name: sys.jobs
+#
+#  id             :bigint(8)        not null, primary key
+#  last_duration  :decimal(, )
+#  last_exception :string
+#  last_run_at    :datetime
+#  name           :string           not null
+#
+CdrPartitioning:
+  name: 'CdrPartitioning'
+
+EventProcessor:
+  name: 'EventProcessor'
+
+CdrBatchCleaner:
+  name: 'CdrBatchCleaner'
+
+PartitionRemoving:
+  name: 'PartitionRemoving'
+
+CallsMonitoring:
+  name: 'CallsMonitoring'
+
+StatsClean:
+  name: 'StatsClean'
+
+StatsAggregation:
+  name: 'StatsAggregation'
+
+Invoice:
+  name: 'Invoice'
+
+ReportScheduler:
+  name: 'ReportScheduler'
+
+TerminationQualityCheck:
+  name: 'TerminationQualityCheck'
+
+DialpeerRatesApply:
+  name: 'DialpeerRatesApply'
+
+AccountBalanceNotify:
+  name: 'AccountBalanceNotify'
+
+SyncDatabaseTables:
+  name: 'SyncDatabaseTables'
