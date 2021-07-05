@@ -25485,6 +25485,38 @@ ALTER SEQUENCE sys.guiconfig_id_seq OWNED BY sys.guiconfig.id;
 
 
 --
+-- Name: jobs; Type: TABLE; Schema: sys; Owner: -
+--
+
+CREATE TABLE sys.jobs (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    last_duration numeric,
+    last_exception character varying,
+    last_run_at timestamp without time zone
+);
+
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.jobs_id_seq OWNED BY sys.jobs.id;
+
+
+--
 -- Name: lnp_resolvers; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -26520,6 +26552,13 @@ ALTER TABLE ONLY sys.delayed_jobs ALTER COLUMN id SET DEFAULT nextval('sys.delay
 --
 
 ALTER TABLE ONLY sys.guiconfig ALTER COLUMN id SET DEFAULT nextval('sys.guiconfig_id_seq'::regclass);
+
+
+--
+-- Name: jobs id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.jobs ALTER COLUMN id SET DEFAULT nextval('sys.jobs_id_seq'::regclass);
 
 
 --
@@ -28282,6 +28321,14 @@ ALTER TABLE ONLY sys.guiconfig
 
 
 --
+-- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.jobs
+    ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lnp_resolvers lnp_resolvers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -29820,6 +29867,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210328145540'),
 ('20210415123322'),
 ('20210605094810'),
-('20210606143950');
+('20210606143950'),
+('20210630120418');
 
 

@@ -26,8 +26,33 @@ class YetiScheduler < Scheduler::Base
       end
     end
   end
+  DatabaseInfoMiddleware = Class.new(Scheduler::Middleware::Base) do
+    def call(options)
+      app.call(options)
+      # DB Connections does not released yet.
+      job_info = CronJobInfo.find_by!(name: options.name)
+      job_info.update! attributes(options)
+    end
+
+    private
+
+    def attributes(options)
+      {
+        last_run_at: options.started_at,
+        last_duration: options.duration,
+        last_exception: format_error(options.exception)
+      }
+    end
+
+    def format_error(exception)
+      return if exception.nil?
+
+      "#{exception.class} #{exception.message}\n#{exception.backtrace&.join("\n")}"
+    end
+  end
 
   use ConnectionsMiddleware
+  use DatabaseInfoMiddleware
   use PrometheusMiddleware
   self.logger = Rails.logger
 
