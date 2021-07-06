@@ -160,6 +160,9 @@ require 'resolv'
 class Gateway < ApplicationRecord
   self.table_name = 'class4.gateways'
 
+  RTP_TIMEOUT_MIN = 0
+  RTP_TIMEOUT_MAX = 600
+
   belongs_to :contractor
   belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id, optional: true
   belongs_to :session_refresh_method
@@ -231,6 +234,13 @@ class Gateway < ApplicationRecord
   validate :allow_termination_can_be_enabled
   validate :is_shared_can_be_changed
   validate :incoming_auth_can_be_disabled
+
+  validates :rtp_timeout, presence: true
+  validates :rtp_timeout, allow_blank: true, numericality: {
+    greater_than_or_equal_to: RTP_TIMEOUT_MIN,
+    less_than_or_equal_to: RTP_TIMEOUT_MAX,
+    only_integer: true
+  }
 
   include Yeti::ResourceStatus
 

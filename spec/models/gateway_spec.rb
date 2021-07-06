@@ -156,12 +156,15 @@
 #
 
 RSpec.describe Gateway, type: :model do
-  it do
+  it 'validates correctly' do
     is_expected.to validate_numericality_of(:max_30x_redirects).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     is_expected.to validate_numericality_of(:max_transfers).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     is_expected.to validate_numericality_of(:fake_180_timer).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
+    is_expected.to validate_presence_of(:rtp_timeout)
+    is_expected.to validate_numericality_of(:rtp_timeout).is_less_than_or_equal_to(Gateway::RTP_TIMEOUT_MAX)
+    is_expected.to validate_numericality_of(:rtp_timeout).is_greater_than_or_equal_to(Gateway::RTP_TIMEOUT_MIN)
   end
 
   shared_examples :validation_error_on_is_shared_change do
