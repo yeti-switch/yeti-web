@@ -31,7 +31,7 @@ ActiveAdmin.register System::CdrConfig do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :call_duration_round_mode, as: :select, include_blank: false
       f.input :customer_price_round_mode, as: :select, include_blank: false

@@ -54,7 +54,7 @@ role_policy:
 And run command to create development database:
 
 ```sh
-RAILS_ENV=development bundle exec rake db:create db:structure:load db:migrate db:seed
+RAILS_ENV=development bundle exec rake db:create db:schema:load db:migrate db:seed
 ```
 
 Then start rails server `bundle exec rails s` and login to http://localhost:3000/ with
@@ -63,7 +63,7 @@ login `admin` and password `111111`
 Then prepare test database(do not use db:test:prepare).
 
 ```sh
-RAILS_ENV=test bundle exec rake db:drop db:create db:structure:load db:migrate db:seed
+RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed
 ```
 
 This project has CDR-database, configured as cdr
@@ -104,7 +104,7 @@ IGNORE_STOPS=true bundle exec rake db:migrate
 ## Migrations that insert rows into yeti database
 
 ```bash
-RAILS_ENV=test bundle exec rake db:create db:structure:load db:seed
+RAILS_ENV=test bundle exec rake db:create db:schema:load db:seed
 # create migration inside db/migrations
 RAILS_ENV=test bundle exec rake db:migrate
 # SCHEMA_NAME - schema of table into which you've inserted row(s)
@@ -140,4 +140,4 @@ For development purpouse it is convinient to use PostgreSQL from Docker image. H
   port: 3010
   ```
 
-* Initialize database with instructions described in [Contributing, Development setup](#contributing-development-setup) section(db:create, db:structure:load, etc.)
+* Initialize database with instructions described in [Contributing, Development setup](#contributing-development-setup) section(db:create, db:schema:load, etc.)

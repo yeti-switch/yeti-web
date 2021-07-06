@@ -129,7 +129,7 @@ docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
 	RAILS_ENV=test $(bundle_bin) exec rake \
 		db:drop \
 		db:create \
-		db:structure:load \
+		db:schema:load \
 		db:migrate \
 		db:seed
 	$(info:msg=Generating documentation)
@@ -165,7 +165,7 @@ prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy
 	psql -h db -U postgres -c '$(pgq_drop_roles)'
 	psql -h db -U postgres -c '$(pgq_create_roles)'
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:create
-	RAILS_ENV=test $(bundle_bin) exec rake parallel:load_structure
+	RAILS_ENV=test $(bundle_bin) exec rake parallel:load_schema
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[db:seed]
 
 
@@ -204,7 +204,7 @@ test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles
 	RAILS_ENV=test PGQ_PROCESSORS_TEST=true $(bundle_bin) exec rake \
 		db:drop \
 		db:create \
-		db:structure:load \
+		db:schema:load \
 		db:migrate \
 		db:seed
 	$(info:msg=Run pgq-processors tests)

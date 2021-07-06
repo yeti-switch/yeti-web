@@ -83,7 +83,7 @@ ActiveAdmin.register DisconnectCode do
   end
   ##### clean this #####
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       if resource.namespace_id == DisconnectCode::NS_TM ## TM
         f.input :namespace, input_html: { readonly: true, disabled: true }

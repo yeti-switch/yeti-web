@@ -32,7 +32,7 @@ ActiveAdmin.register Routing::RateGroup do
   end
 
   form do |f|
-    f.semantic_errors(*f.object.errors.keys)
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
     end

@@ -143,24 +143,24 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :customer_duration,
              :vendor_duration
 
-  has_one :rateplan, class_name: 'Rateplan'
-  has_one :dialpeer
-  has_one :pop
-  has_one :routing_group
-  has_one :routing_plan, class_name: 'RoutingPlan'
-  has_one :destination, class_name: 'Destination'
-  has_one :customer_auth
-  has_one :destination_rate_policy, class_name: 'DestinationRatePolicy'
-  has_one :vendor, class_name: 'Contractor'
-  has_one :customer, class_name: 'Contractor'
-  has_one :customer_acc, class_name: 'Account'
-  has_one :vendor_acc, class_name: 'Account'
-  has_one :orig_gw, class_name: 'Gateway'
-  has_one :term_gw, class_name: 'Gateway'
-  has_one :dst_country, class_name: 'Country'
-  has_one :dst_network, class_name: 'Network'
-  has_one :src_country, class_name: 'Country'
-  has_one :src_network, class_name: 'Network'
+  has_one :rateplan, class_name: 'Rateplan', force_routed: true
+  has_one :dialpeer, force_routed: true
+  has_one :pop, force_routed: true
+  has_one :routing_group, force_routed: true
+  has_one :routing_plan, class_name: 'RoutingPlan', force_routed: true
+  has_one :destination, class_name: 'Destination', force_routed: true
+  has_one :customer_auth, force_routed: true
+  has_one :destination_rate_policy, class_name: 'DestinationRatePolicy', force_routed: true
+  has_one :vendor, class_name: 'Contractor', force_routed: true
+  has_one :customer, class_name: 'Contractor', force_routed: true
+  has_one :customer_acc, class_name: 'Account', force_routed: true
+  has_one :vendor_acc, class_name: 'Account', force_routed: true
+  has_one :orig_gw, class_name: 'Gateway', force_routed: true
+  has_one :term_gw, class_name: 'Gateway', force_routed: true
+  has_one :dst_country, class_name: 'Country', force_routed: true
+  has_one :dst_network, class_name: 'Network', force_routed: true
+  has_one :src_country, class_name: 'Country', force_routed: true
+  has_one :src_network, class_name: 'Network', force_routed: true
 
   filter :customer_auth_external_id_eq, apply: lambda { |records, values, _options|
     records.where(customer_auth_external_id: values)

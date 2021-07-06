@@ -41,8 +41,12 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   if Bullet.enable?
-    # bullet false positive with HABTM association
-    Bullet.add_whitelist type: :n_plus_one_query, class_name: 'Routing::RoutingPlan::HABTM_RoutingGroups', association: :routing_group
+    # bullet bug https://github.com/flyerhzm/bullet/issues/586
+    # fails spec/features/routing/routing_plans/batch_update_spec.rb
+    Bullet.add_whitelist type: :n_plus_one_query,
+                         class_name: 'Routing::RoutingPlan',
+                         association: :routing_routingplans_routing_groups
+
     config.before(:each, type: :feature) do
       Bullet.start_request
     end

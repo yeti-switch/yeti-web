@@ -15,7 +15,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
   let!(:vendor) { FactoryBot.create :vendor }
   let!(:account) { FactoryBot.create :account }
   let!(:routing_tag_mode) { Routing::RoutingTagMode.last! }
-  let!(:routing_tag_mode) { Routing::RoutingTagMode.last! }
+  let!(:routing_group) { RoutingGroup.last! }
   let!(:routeset_discriminator) { Routing::RoutesetDiscriminator.last! }
   let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let!(:routing_tags) { create_list(:routing_tag, 5) }
@@ -33,7 +33,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
       dst_number_min_length: '10',
       dst_number_max_length: '20',
       routing_tag_mode_id: routing_tag_mode.id.to_s,
-      routing_group_id: routing_tag_mode.id.to_s,
+      routing_group_id: routing_group.id.to_s,
       priority: '3',
       force_hit_rate: '0.5',
       exclusive_route: true,

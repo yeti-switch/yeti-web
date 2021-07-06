@@ -202,7 +202,7 @@ ActiveAdmin.register Dialpeer do
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       if f.object.new_record? # allow multiple prefixes delimited by comma in NEW form.
         f.input :batch_prefix, label: 'Prefix',

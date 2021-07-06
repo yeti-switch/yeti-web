@@ -74,26 +74,26 @@ RSpec.describe Dialpeer, type: :model do
 
       before { record.validate }
       subject do
-        record.errors.to_h
+        record.errors.to_hash
       end
 
       context 'without Gateway' do
         let(:attributes) {}
 
-        include_examples :validation_error_on_field, :base, 'Specify a gateway_group or a gateway'
+        include_examples :validation_error_on_field, :base, ['Specify a gateway_group or a gateway']
         include_examples :validation_no_error_on_field, :gateway
       end
 
       context 'with Gateway_id 0' do
         let(:attributes) { { gateway_id: 0 } }
 
-        include_examples :validation_error_on_field, :base, 'Specify a gateway_group or a gateway'
+        include_examples :validation_error_on_field, :base, ['Specify a gateway_group or a gateway']
       end
 
       context 'with Gateway_group_id 0' do
         let(:attributes) { { gateway_group_id: 0 } }
 
-        include_examples :validation_error_on_field, :base, 'Specify a gateway_group or a gateway'
+        include_examples :validation_error_on_field, :base, ['Specify a gateway_group or a gateway']
       end
 
       context 'with Gateway' do
@@ -107,14 +107,14 @@ RSpec.describe Dialpeer, type: :model do
         context 'not allow_termination' do
           let(:g_attr) { { allow_termination: false } }
 
-          include_examples :validation_error_on_field, :gateway, 'must be allowed for termination'
+          include_examples :validation_error_on_field, :gateway, ['must be allowed for termination']
         end
 
         context 'different vendor' do
           let(:vendor) { create(:vendor) }
           let(:g_attr) { { allow_termination: true } }
 
-          include_examples :validation_error_on_field, :gateway, 'must be owned by selected vendor or be shared'
+          include_examples :validation_error_on_field, :gateway, ['must be owned by selected vendor or be shared']
         end
 
         context 'different vendor, gateway is shared' do

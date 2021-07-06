@@ -151,7 +151,7 @@
 #  vendor_invoice_id               :integer(4)
 #
 RSpec.describe Report::Realtime::NotAuthenticated, '.time_interval_eq' do
-  subject { described_class.time_interval_eq(time_interval) }
+  subject { described_class.time_interval_eq(time_interval).to_a }
   let(:time_interval) { Report::Realtime::Base::DEFAULT_INTERVAL } # DEFAULT_INTERVAL = 60
 
   context 'record created now' do

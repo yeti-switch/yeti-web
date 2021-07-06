@@ -245,7 +245,7 @@ ActiveAdmin.register CustomersAuth do
          as: :string
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     tabs do
       tab :general do
         f.inputs do

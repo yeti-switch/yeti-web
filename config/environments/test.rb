@@ -47,6 +47,9 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :test
 
+  # Highlight code that triggered database queries in logs.
+  config.active_record.verbose_query_logs = true
+
   config.after_initialize do
     Bullet.enable = true
     # Detect unnecessary COUNT queries which could be avoided

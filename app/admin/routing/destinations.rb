@@ -167,7 +167,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       if f.object.new_record? # allow multiple prefixes delimited by comma in NEW form.
         f.input :batch_prefix, label: 'Prefix',

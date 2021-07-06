@@ -38,11 +38,11 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
              :x_yeti_auth,
              :diversion, :pai, :ppi, :privacy, :rpid, :rpid_privacy
 
-  has_one :gateway, class_name: 'Gateway'
-  has_one :pop, class_name: 'Pop'
-  has_one :node, class_name: 'Node'
-  has_one :origination_protocol, class_name: 'TransportProtocol', foreign_key: :origination_proto_id
-  has_one :transport_protocol, class_name: 'TransportProtocol', foreign_key: :transport_proto_id
+  has_one :gateway, class_name: 'Gateway', force_routed: true
+  has_one :pop, class_name: 'Pop', force_routed: true
+  has_one :node, class_name: 'Node', force_routed: true
+  has_one :origination_protocol, class_name: 'TransportProtocol', foreign_key: :origination_proto_id, force_routed: true
+  has_one :transport_protocol, class_name: 'TransportProtocol', foreign_key: :transport_proto_id, force_routed: true
 
   filter :request_time_gteq, apply: lambda { |records, values, _options|
     records.where('request_time >= ?', values[0])

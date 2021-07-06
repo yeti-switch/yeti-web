@@ -119,7 +119,7 @@ module Reporter
 
       path_set = ActionView::PathSet.new([template_path])
       lookup = ActionView::LookupContext.new(path_set)
-      view = ActionView::Base.new(lookup, {})
+      view = ActionView::Base.new(lookup, {}, nil)
       view.render(
         file: html_template_name,
         layout: false,

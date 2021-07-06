@@ -39,7 +39,7 @@ ActiveAdmin.register Routing::Rateplan do
   filter :profit_control_mode, input_html: { class: 'chosen' }, collection: proc { Routing::RateProfitControlMode.pluck(:name, :id) }
 
   form do |f|
-    f.semantic_errors(*f.object.errors.keys)
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
       f.input :rate_groups, input_html: { class: 'chosen-sortable', multiple: true }

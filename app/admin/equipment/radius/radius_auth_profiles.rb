@@ -44,7 +44,7 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
   filter :reject_on_error, as: :select, collection: [['Yes', true], ['No', false]]
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys.uniq
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
       f.input :server
