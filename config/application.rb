@@ -26,7 +26,7 @@ Bundler.require(*Rails.groups)
 module Yeti
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     # changing defaults
     Rails.application.config.action_view.default_enforce_utf8 = true
