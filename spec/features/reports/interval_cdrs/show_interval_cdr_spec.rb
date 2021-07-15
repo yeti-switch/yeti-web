@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Show interval cdrs report' do
+RSpec.describe 'Show interval cdrs report', js: true do
   include_context :login_as_admin
 
   let!(:report) { create(:interval_cdr) }
@@ -8,7 +8,7 @@ RSpec.describe 'Show interval cdrs report' do
 
   subject { visit report_interval_cdr_interval_items_path report_interval_cdr_id: report.id }
 
-  it 'should have tabel with interval data and destination rate pocily' do
+  it 'should have table with interval data and destination rate policy' do
     subject
     expect(page).to have_table
     within_table_row(id: interval_data.id) do

@@ -30,4 +30,9 @@ class BaseResource < JSONAPI::Resource
       records.where(foreign_key => values)
     }
   end
+
+  def self.has_one(name, options = {})
+    super name, options.except(:force_routed)
+    _relationships[name.to_sym]._routed = true if options.fetch(:force_routed, false)
+  end
 end

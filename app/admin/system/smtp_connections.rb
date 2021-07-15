@@ -61,7 +61,7 @@ ActiveAdmin.register System::SmtpConnection do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
       f.input :host

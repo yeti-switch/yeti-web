@@ -30,7 +30,7 @@ class ApiController < ActionController::API
     @debug_mode
   end
 
-  include Concerns::WithPayloads
+  include WithPayloads
   include CaptureError::ControllerMethods
 
   rescue_from StandardError, with: :capture_error!
@@ -38,7 +38,7 @@ class ApiController < ActionController::API
   protected
 
   def current_db_connection
-    ActiveRecord::Base.connection
+    ApplicationRecord.connection
   end
 
   def info_for_paper_trail

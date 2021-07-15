@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'capture_error/base_methods'
-require 'capture_error/controller_methods'
-require 'capture_error/job_methods'
+require_relative 'capture_error/base_methods'
+require_relative 'capture_error/controller_methods'
+require_relative 'capture_error/job_methods'
 
 module CaptureError
   EXTRA_VAR_NAME = :@__capture_error_extra

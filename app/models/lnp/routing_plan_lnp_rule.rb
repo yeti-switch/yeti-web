@@ -24,7 +24,7 @@
 #  routing_plan_lnp_rules_database_id_fkey  (database_id => lnp_databases.id)
 #
 
-class Lnp::RoutingPlanLnpRule < Yeti::ActiveRecord
+class Lnp::RoutingPlanLnpRule < ApplicationRecord
   self.table_name = 'class4.routing_plan_lnp_rules'
 
   belongs_to :database, class_name: 'Lnp::Database', foreign_key: :database_id

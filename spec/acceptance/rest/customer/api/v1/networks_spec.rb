@@ -12,7 +12,7 @@ RSpec.resource 'Networks', document: :customer_v1 do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
   let(:type) { 'networks' }
 
-  let!(:network) { FactoryBot.create(:network, name: 'US').reload }
+  let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
 
   get '/api/rest/customer/v1/networks' do
     jsonapi_filters Api::Rest::Customer::V1::NetworkResource._allowed_filters

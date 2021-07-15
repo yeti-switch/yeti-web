@@ -13,7 +13,7 @@
 FactoryBot.define do
   factory :network, class: System::Network do
     name { 'US Eagle Mobile' }
-    network_type { System::NetworkType.take || FactoryBot.create(:network_type) }
+    network_type { System::NetworkType.take! }
     uuid { SecureRandom.uuid }
 
     trait :filled do

@@ -12,7 +12,7 @@
 #  username :string
 #
 
-class Lnp::DatabaseThinq < Yeti::ActiveRecord
+class Lnp::DatabaseThinq < ApplicationRecord
   self.table_name = 'class4.lnp_databases_thinq'
 
   has_one :lnp_database, as: :database, class_name: 'Lnp::Database'

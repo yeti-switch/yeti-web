@@ -65,7 +65,7 @@ ActiveAdmin.register AdminUser do
 
   # unless AdminUser.ldap?
   form do |f|
-    f.semantic_errors *f.object.errors.keys.uniq
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Admin Details' do
       unless AdminUser.ldap?
         f.input :email

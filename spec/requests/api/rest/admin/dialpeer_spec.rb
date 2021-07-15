@@ -69,9 +69,13 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
         }
       end
 
-      include_examples :returns_json_api_errors, errors: [
-        { detail: 'base - Specify a gateway_group or a gateway' }
-      ], status: 422
+      include_examples :returns_json_api_errors, status: 422, errors: [
+        {
+          detail: 'Specify a gateway_group or a gateway',
+          title: 'Specify a gateway_group or a gateway',
+          source: { pointer: '/data' }
+        }
+      ]
     end
 
     context 'without lcr-rate-multiplier' do

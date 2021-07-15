@@ -65,7 +65,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :routing_tag_ids, as: :select,
                                 collection: RoutingTagDetectionRuleDecorator.decorate(f.object).routing_tag_options,

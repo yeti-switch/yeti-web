@@ -27,7 +27,8 @@
 #
 
 class DisconnectCode < ApplicationRecord
-  self.table_name = 'disconnect_code'
+  self.table_name = 'class4.disconnect_code'
+
   belongs_to :namespace, class_name: 'DisconnectCodeNamespace', foreign_key: 'namespace_id'
 
   def display_name

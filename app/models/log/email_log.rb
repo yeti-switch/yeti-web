@@ -18,7 +18,7 @@
 #  smtp_connection_id :integer(4)
 #
 
-class Log::EmailLog < Yeti::ActiveRecord
+class Log::EmailLog < ApplicationRecord
   self.table_name = 'notifications.email_logs'
   belongs_to :contact, class_name: 'Billing::Contact', foreign_key: :contact_id, optional: true
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', foreign_key: :smtp_connection_id, optional: true

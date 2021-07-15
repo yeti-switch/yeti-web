@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::BalanceResource < ::BaseResource
+  singleton
   attributes :balance
 
   model_name 'Account'

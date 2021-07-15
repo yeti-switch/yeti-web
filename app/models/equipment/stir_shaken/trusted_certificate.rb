@@ -9,6 +9,6 @@
 #  name        :string           not null
 #  updated_at  :datetime
 #
-class Equipment::StirShaken::TrustedCertificate < Yeti::ActiveRecord
+class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   self.table_name = 'stir_shaken_trusted_certificates'
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Concerns::IndexMaxRecords
+module IndexMaxRecords
   extend ActiveSupport::Concern
 
   def fix_max_records

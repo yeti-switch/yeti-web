@@ -52,7 +52,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
 
     f.inputs do
       f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')

@@ -11,7 +11,7 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'GET index' do
-    let!(:routing_groups) { create_list :routing_group, 2 }
+    let!(:routing_groups) { RoutingGroup.all.to_a }
 
     before { get :index }
 
@@ -20,15 +20,15 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'GET index with filters' do
-    before { create_list :routing_group, 2 }
+    before { create_list(:routing_group, 2) }
 
     it_behaves_like :jsonapi_filter_by_name do
-      let(:subject_record) { create :routing_group }
+      let(:subject_record) { create(:routing_group) }
     end
   end
 
   describe 'GET show' do
-    let!(:routing_group) { create :routing_group }
+    let!(:routing_group) { RoutingGroup.take! }
 
     context 'when routing_group exists' do
       before { get :show, params: { id: routing_group.to_param } }
@@ -46,24 +46,30 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'POST create' do
-    before do
+    subject do
       post :create, params: {
         data: { type: 'routing-groups', attributes: attributes }
       }
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name' } }
+      let(:attributes) { { name: 'test-name' } }
 
-      it { expect(response.status).to eq(201) }
-      it { expect(RoutingGroup.count).to eq(1) }
+      it 'creates routing group' do
+        expect { subject }.to change { RoutingGroup.count }.by(1)
+        expect(response.status).to eq(201)
+        record = RoutingGroup.last!
+        expect(record).to have_attributes(attributes)
+      end
     end
 
     context 'when attributes are invalid' do
       let(:attributes) { { name: nil } }
 
-      it { expect(response.status).to eq(422) }
-      it { expect(RoutingGroup.count).to eq(0) }
+      it 'does not create routing group' do
+        expect { subject }.to change { RoutingGroup.count }.by(0)
+        expect(response.status).to eq(422)
+      end
     end
   end
 
@@ -93,11 +99,13 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'DELETE destroy' do
+    subject { delete :destroy, params: { id: routing_group.to_param } }
+
     let!(:routing_group) { create :routing_group }
 
-    before { delete :destroy, params: { id: routing_group.to_param } }
-
-    it { expect(response.status).to eq(204) }
-    it { expect(RoutingGroup.count).to eq(0) }
+    it 'deletes routing group' do
+      expect { subject }.to change { RoutingGroup.count }.by(-1)
+      expect(response.status).to eq(204)
+    end
   end
 end

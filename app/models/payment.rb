@@ -15,7 +15,7 @@
 #  payments_account_id_fkey  (account_id => accounts.id)
 #
 
-class Payment < Yeti::ActiveRecord
+class Payment < ApplicationRecord
   belongs_to :account
 
   include WithPaperTrail

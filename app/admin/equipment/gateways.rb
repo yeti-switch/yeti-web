@@ -325,7 +325,7 @@ ActiveAdmin.register Gateway do
   filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
 
     tabs do
       tab :general do

@@ -12,6 +12,6 @@
 #  sensor_levels_name_key  (name) UNIQUE
 #
 
-class System::SensorLevel < Yeti::ActiveRecord
+class System::SensorLevel < ApplicationRecord
   self.table_name = 'sys.sensor_levels'
 end

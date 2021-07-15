@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Customer::V1::CheckRateResource < BaseResource
+  singleton
   model_name 'JsonapiModel::CheckRate'
 
   key_type :uuid

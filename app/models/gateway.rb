@@ -156,7 +156,10 @@
 #
 
 require 'resolv'
-class Gateway < Yeti::ActiveRecord
+
+class Gateway < ApplicationRecord
+  self.table_name = 'class4.gateways'
+
   belongs_to :contractor
   belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id, optional: true
   belongs_to :session_refresh_method
@@ -211,7 +214,7 @@ class Gateway < Yeti::ActiveRecord
   validates :max_30x_redirects, :max_transfers, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
 
   validates :origination_capacity, :termination_capacity, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
-  validates :port, numericality: { greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
+  validates :port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
   validates :fake_180_timer, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
   validates :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,

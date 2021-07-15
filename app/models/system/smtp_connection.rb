@@ -19,7 +19,7 @@
 #  smtp_connections_name_key  (name) UNIQUE
 #
 
-class System::SmtpConnection < Yeti::ActiveRecord
+class System::SmtpConnection < ApplicationRecord
   self.table_name = 'sys.smtp_connections'
 
   module CONST

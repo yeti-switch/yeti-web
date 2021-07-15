@@ -15,7 +15,7 @@ module CallSql
     private
 
     def model_klass
-      ::Yeti::ActiveRecord
+      ApplicationRecord
     end
   end
 end

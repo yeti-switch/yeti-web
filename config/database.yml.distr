@@ -1,20 +1,19 @@
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: yeti
-  pool: 5
-  username: yeti
-  password: somepassword
-  host: 127.0.0.1
-  schema_search_path: >
-    gui, public, switch,
-    billing, class4, runtime_stats,
-    sys, logs, data_import
-  port: 5432
-  #min_messages: warning
-
-secondbase:
-  production:
+  primary:
+    adapter: postgresql
+    encoding: unicode
+    database: yeti
+    pool: 5
+    username: yeti
+    password: somepassword
+    host: 127.0.0.1
+    schema_search_path: >
+      gui, public, switch,
+      billing, class4, runtime_stats,
+      sys, logs, data_import
+    port: 5432
+    #min_messages: warning
+  cdr:
     adapter: postgresql
     encoding: unicode
     database: cdr
@@ -24,4 +23,5 @@ secondbase:
     host: 127.0.0.1
     schema_search_path: 'cdr, reports, billing, public'
     port: 5432
+    migrations_paths: db/cdr_migrate
     #min_messages: warning

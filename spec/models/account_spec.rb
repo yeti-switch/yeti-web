@@ -140,13 +140,13 @@ RSpec.describe Account, type: :model do
 
   describe '#valid?' do
     it do
-      is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
-      is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     end
 
     it do
-      is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
-      is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(Yeti::ActiveRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:origination_capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
+      is_expected.to validate_numericality_of(:termination_capacity).is_less_than_or_equal_to(ApplicationRecord::PG_MAX_SMALLINT)
     end
 
     context '#min_balance' do

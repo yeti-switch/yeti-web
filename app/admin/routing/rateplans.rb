@@ -14,7 +14,7 @@ ActiveAdmin.register Routing::Rateplan do
 
   permit_params :name, :profit_control_mode_id, rate_group_ids: [], send_quality_alarms_to: []
 
-  includes :profit_control_mode, :rate_groups, :routing_rateplans_rate_groups
+  includes :profit_control_mode, :rate_groups, :rate_groups_routing_rateplans
 
   index do
     selectable_column
@@ -39,7 +39,7 @@ ActiveAdmin.register Routing::Rateplan do
   filter :profit_control_mode, input_html: { class: 'chosen' }, collection: proc { Routing::RateProfitControlMode.pluck(:name, :id) }
 
   form do |f|
-    f.semantic_errors(*f.object.errors.keys)
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
       f.input :rate_groups, input_html: { class: 'chosen-sortable', multiple: true }

@@ -12,6 +12,6 @@
 #  dtmf_send_modes_name_key  (name) UNIQUE
 #
 
-class System::DtmfSendMode < Yeti::ActiveRecord
+class System::DtmfSendMode < ApplicationRecord
   self.table_name = 'class4.dtmf_send_modes'
 end

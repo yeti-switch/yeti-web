@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
   rescue_from StandardError, with: :capture_error!
 
   include CaptureError::ControllerMethods
-  include Concerns::Rescuers
-  include Concerns::IndexMaxRecords
+  include Rescuers
+  include IndexMaxRecords
 
   def redirect_to_back(default = root_url)
     if request.env['HTTP_REFERER'].present? && (request.env['HTTP_REFERER'] != request.env['REQUEST_URI'])

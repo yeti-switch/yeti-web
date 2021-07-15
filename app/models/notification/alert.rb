@@ -13,7 +13,7 @@
 #  alerts_event_key  (event) UNIQUE
 #
 
-class Notification::Alert < Yeti::ActiveRecord
+class Notification::Alert < ApplicationRecord
   self.table_name = 'notifications.alerts'
 
   include WithPaperTrail

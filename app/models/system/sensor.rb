@@ -24,7 +24,7 @@
 #  sensors_mode_id_fkey  (mode_id => sensor_modes.id)
 #
 
-class System::Sensor < Yeti::ActiveRecord
+class System::Sensor < ApplicationRecord
   self.table_name = 'sys.sensors'
 
   include WithPaperTrail
@@ -50,11 +50,11 @@ class System::Sensor < Yeti::ActiveRecord
             presence: { if: proc { |sensor| sensor.mode_id.to_i == System::SensorMode::IP_ETHERNET } },
             format: { with: /\A\z|\A(([0-9A-Fa-f]{2})\-){5}(([0-9A-Fa-f]{2}))$|^(([0-9A-Fa-f]{2})\:){5}(([0-9A-Fa-f]{2}))\z/ }
 
-  validates :target_port, numericality: { greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN, less_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
+  validates :target_port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
   validates :target_port,
             presence: { if: proc { |sensor| sensor.mode_id.to_i == System::SensorMode::HEPv3 } }
 
-  validates :hep_capture_id, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_INT, allow_nil: true, only_integer: true }
+  validates :hep_capture_id, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: ApplicationRecord::PG_MAX_INT, allow_nil: true, only_integer: true }
 
   before_save :on_save_change_empty_to_null
 

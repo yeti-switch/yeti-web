@@ -10,6 +10,10 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
 
     let(:json_api_request_query) { nil }
 
+    before do
+      System::NetworkPrefix.delete_all
+      System::Network.delete_all
+    end
     let!(:networks) do
       [
         FactoryBot.create(:network, name: 'US').reload,
@@ -32,7 +36,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network.uuid }
 
-    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
+    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
 
     it_behaves_like :json_api_check_authorization
 
@@ -66,7 +70,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
+    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -81,7 +85,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
+    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -94,7 +98,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network.uuid }
 
-    let!(:network) { FactoryBot.create(:network, name: 'US').reload }
+    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
 
     include_examples :raises_exception, ActionController::RoutingError
   end

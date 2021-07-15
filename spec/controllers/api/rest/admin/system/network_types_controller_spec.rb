@@ -11,7 +11,7 @@ RSpec.describe Api::Rest::Admin::System::NetworkTypesController, type: :controll
   end
 
   describe 'GET index' do
-    let!(:network_types) do
+    before do
       create_list(:network_type, 2)
     end
 
@@ -27,7 +27,7 @@ RSpec.describe Api::Rest::Admin::System::NetworkTypesController, type: :controll
 
     it 'response should contain valid count of items' do
       subject
-      expect(response_data.size).to eq(network_types.size)
+      expect(response_data.size).to eq(System::NetworkType.count)
     end
 
     context 'filtering' do

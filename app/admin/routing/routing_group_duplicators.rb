@@ -27,7 +27,7 @@ ActiveAdmin.register Routing::RoutingGroupDuplicatorForm, as: 'Routing Group Dup
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Copy Routing Group' do
       f.input :id, as: :hidden
       f.input :name

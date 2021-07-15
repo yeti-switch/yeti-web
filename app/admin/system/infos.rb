@@ -5,9 +5,9 @@ ActiveAdmin.register_page 'Info' do
   content do
     columns do
       column do
-        panel "TOP10 tables in Routing database. Full size: #{Yeti::ActiveRecord.db_size}" do
-          data = Yeti::ActiveRecord.top_tables.each(&:deep_symbolize_keys!)
-          table_for Yeti::ActiveRecord.top_tables.each(&:deep_symbolize_keys!) do
+        panel "TOP10 tables in Routing database. Full size: #{ApplicationRecord.db_size}" do
+          data = ApplicationRecord.top_tables.each(&:deep_symbolize_keys!)
+          table_for ApplicationRecord.top_tables.each(&:deep_symbolize_keys!) do
             column :table do |c|
               "#{c[:table_schema]}.#{c[:table_name]}"
             end
@@ -19,10 +19,10 @@ ActiveAdmin.register_page 'Info' do
         panel 'Build info' do
           data = {
             ui_version: Rails.application.config.app_build_info.fetch('version', 'unknown'),
-            routing_version: Yeti::ActiveRecord::DB_VER,
+            routing_version: ApplicationRecord::DB_VER,
             cdr_version: Cdr::Base::DB_VER,
             ruby: "#{RUBY_VERSION}/#{RUBY_PLATFORM}/#{RUBY_RELEASE_DATE}",
-            switch_interface: Yeti::ActiveRecord::ROUTING_SCHEMA
+            switch_interface: ApplicationRecord::ROUTING_SCHEMA
           }
           attributes_table_for data do
             data.each do |k, v|

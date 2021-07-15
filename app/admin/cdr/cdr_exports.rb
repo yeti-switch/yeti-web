@@ -101,7 +101,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                 fields: []
 
   form do |f|
-    f.semantic_errors(*f.object.errors.keys)
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :fields,
               as: :select,

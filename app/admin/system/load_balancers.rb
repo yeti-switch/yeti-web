@@ -18,7 +18,7 @@ ActiveAdmin.register System::LoadBalancer do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys.uniq
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
       f.input :signalling_ip

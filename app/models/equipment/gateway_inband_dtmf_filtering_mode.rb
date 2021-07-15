@@ -12,6 +12,6 @@
 #  gateway_inband_dtmf_filtering_modes_name_key  (name) UNIQUE
 #
 
-class Equipment::GatewayInbandDtmfFilteringMode < Yeti::ActiveRecord
+class Equipment::GatewayInbandDtmfFilteringMode < ApplicationRecord
   self.table_name = 'class4.gateway_inband_dtmf_filtering_modes'
 end

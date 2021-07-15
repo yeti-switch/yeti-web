@@ -27,12 +27,21 @@ module CallSql
 
     def select_all_serialized(sql, *bindings)
       result = select_all(sql, *bindings)
-      result.map { |row| row.map { |k, v| [k.to_sym, result.column_types[k].deserialize(v)] }.to_h }
+      result.map do |row|
+        row.map { |key, value| [key.to_sym, deserialize_result(result, key, value)] }.to_h
+      end
     end
 
     _delegate_to_instance(:select_row, :select_all_serialized, *AVAILABLE_METHODS)
 
     private
+
+    def deserialize_result(result, column_name, raw_value)
+      column_type = result.column_types[column_name]
+      return raw_value if column_type.nil?
+
+      column_type.deserialize(raw_value)
+    end
 
     def model_klass
       raise NotImplementedError, 'method #model_klass must be defined'

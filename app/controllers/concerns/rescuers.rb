@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Concerns::Rescuers
+module Rescuers
   extend ActiveSupport::Concern
 
   included do

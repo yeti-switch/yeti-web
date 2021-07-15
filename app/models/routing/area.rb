@@ -12,7 +12,7 @@
 #  areas_name_key  (name) UNIQUE
 #
 
-class Routing::Area < Yeti::ActiveRecord
+class Routing::Area < ApplicationRecord
   include WithPaperTrail
   self.table_name = 'class4.areas'
 

@@ -48,7 +48,7 @@
 #  accounts_vendor_invoice_period_id_fkey  (vendor_invoice_period_id => invoice_periods.id)
 #
 
-class Account < Yeti::ActiveRecord
+class Account < ApplicationRecord
   belongs_to :contractor
 
   # belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'customer_invoice_period_id'

@@ -12,6 +12,8 @@ RSpec.describe Api::Rest::Admin::System::NetworksController, type: :controller d
 
   describe 'GET index' do
     let!(:networks) do
+      System::NetworkPrefix.delete_all
+      System::Network.delete_all
       [
         create(:network),
         create(:network, name: 'US AMC Mobile')
@@ -164,11 +166,11 @@ RSpec.describe Api::Rest::Admin::System::NetworksController, type: :controller d
       }
     end
 
-    let!(:network) { create(:network) }
+    let!(:network) { System::Network.take! }
     let!(:network_type) { create(:network_type) }
 
     it 'network name should be changed' do
-      expect { subject }.to change { network.reload.name }.from('US Eagle Mobile').to('US AMC Mobile')
+      expect { subject }.to change { network.reload.name }.from(network.name).to('US AMC Mobile')
     end
 
     it 'network network_type should be changed' do

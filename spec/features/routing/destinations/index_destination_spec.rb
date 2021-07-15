@@ -16,12 +16,12 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
   end
 
   context 'when filter by country and network' do
-    let!(:country) { create(:country, name: 'United Stated', iso2: 'US') }
+    let!(:country) { System::Country.find_by!(name: 'United States') }
     let!(:network) { create(:network, name: 'some network') }
     let!(:network_prefix) { create(:network_prefix, country: country, network: network, prefix: '123') }
     let!(:matched_record) { create(:destination, prefix: network_prefix.prefix) }
     before do
-      canada = create(:country, name: 'Canada', iso2: 'CA')
+      canada = System::Country.find_by!(name: 'Canada')
       other_network = create(:network, name: 'other network')
       create(:network_prefix, country: canada, network: other_network, prefix: '23435678')
     end

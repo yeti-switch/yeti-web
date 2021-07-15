@@ -94,7 +94,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   }, if: :force_hit_rate_changed?
   validates :capacity, numericality: {
     greater_than: 0,
-    less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT
   }, if: :capacity_changed?
   validates :dst_number_max_length, numericality: {
     greater_than_or_equal_to: 0,

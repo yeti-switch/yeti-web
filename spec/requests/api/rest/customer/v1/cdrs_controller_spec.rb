@@ -2,8 +2,6 @@
 
 RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
   include_context :json_api_customer_v1_helpers, type: :cdrs
-  before { Cdr::Cdr.destroy_all }
-  after { Cdr::Cdr.destroy_all }
 
   let(:account) { create(:account, contractor: customer) }
 

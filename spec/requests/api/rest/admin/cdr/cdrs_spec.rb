@@ -8,8 +8,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
-    before { Cdr::Cdr.delete_all }
-
     let!(:cdrs) do
       FactoryBot.create_list(:cdr, 2)
     end

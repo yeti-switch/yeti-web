@@ -69,7 +69,7 @@
 #  customers_auth_normalized_customers_auth_id_fkey  (customers_auth_id => customers_auth.id)
 #
 
-class CustomersAuthNormalized < Yeti::ActiveRecord
+class CustomersAuthNormalized < ApplicationRecord
   self.table_name = 'class4.customers_auth_normalized'
 
   belongs_to :customers_auth

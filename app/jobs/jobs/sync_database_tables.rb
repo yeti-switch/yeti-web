@@ -10,7 +10,7 @@ module Jobs
     end.freeze
 
     def execute
-      Yeti::ActiveRecord.transaction do
+      ApplicationRecord.transaction do
         Cdr::Country.delete_all
         Cdr::Country.import System::Country.all.to_a
 

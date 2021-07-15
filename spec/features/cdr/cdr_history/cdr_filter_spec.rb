@@ -7,10 +7,6 @@ RSpec.describe 'Cdrs index page filtering', js: true do
     within_filters { click_submit('Filter') }
   end
 
-  before do
-    Cdr::Cdr.delete_all
-  end
-
   include_context :login_as_admin
 
   let(:filter_value) { nil }

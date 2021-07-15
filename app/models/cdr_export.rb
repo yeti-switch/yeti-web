@@ -15,7 +15,7 @@
 #  updated_at   :datetime
 #
 
-class CdrExport < Yeti::ActiveRecord
+class CdrExport < ApplicationRecord
   self.table_name = 'cdr_exports'
   self.store_full_sti_class = false
 

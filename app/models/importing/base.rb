@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Importing::Base < Yeti::ActiveRecord
+class Importing::Base < ApplicationRecord
   self.abstract_class = true
 
   class Error < StandardError
@@ -31,7 +31,7 @@ class Importing::Base < Yeti::ActiveRecord
     where.not(is_changed: nil)
   end
 
-  # @param klass [Class<ActiveRecord::Base>]
+  # @param klass [Class<ApplicationRecord>]
   def self.import_for(klass)
     self.import_class = klass
 
@@ -69,7 +69,7 @@ class Importing::Base < Yeti::ActiveRecord
     query = where('id % ? = ?', options[:max_jobs_count], options[:job_number])
     query = query.where(is_changed: true)
     query = query.send(options[:action]) if options[:action]
-    Yeti::ActiveRecord.transaction do
+    ApplicationRecord.transaction do
       query.find_in_batches do |batch|
         batch.each { |item| move_one!(item) }
       end
@@ -118,10 +118,10 @@ class Importing::Base < Yeti::ActiveRecord
       "FROM #{import_class.table_name} orig_t",
       'WHERE import_t.o_id IS NOT NULL AND import_t.o_id = orig_t.id'
     ].join(' ')
-    Yeti::ActiveRecord.connection.execute(sql_matched)
+    ApplicationRecord.connection.execute(sql_matched)
 
     sql_non_matched = "UPDATE #{table_name} SET is_changed = true WHERE is_changed IS NULL"
-    Yeti::ActiveRecord.connection.execute(sql_non_matched)
+    ApplicationRecord.connection.execute(sql_non_matched)
   end
 
   def self.calc_changed_conditions(orig_table, import_table)
@@ -146,7 +146,7 @@ class Importing::Base < Yeti::ActiveRecord
       condition = "ta.#{field}_name = tb.name"
     end
     sql = "UPDATE #{table_name} ta SET #{field}_id = tb.id FROM #{relation_table_name} tb WHERE #{condition}"
-    Yeti::ActiveRecord.connection.execute(sql)
+    ApplicationRecord.connection.execute(sql)
   end
 
   # Use this method for resolving:
@@ -162,7 +162,7 @@ class Importing::Base < Yeti::ActiveRecord
           )
       WHERE ta.#{ids_column} = '{}' AND ta.#{names_column} <> '';
     "
-    Yeti::ActiveRecord.connection.execute(sql)
+    ApplicationRecord.connection.execute(sql)
   end
 
   def self.resolve_null_tag(ids_column, names_column)
@@ -173,6 +173,6 @@ class Importing::Base < Yeti::ActiveRecord
               string_to_array(replace(ta.#{names_column}, ', ', ',')::varchar, ',')::varchar[]
             );
     "
-    Yeti::ActiveRecord.connection.execute(sql)
+    ApplicationRecord.connection.execute(sql)
   end
 end

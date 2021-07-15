@@ -10,9 +10,8 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', '2.1.4' # https://github.com/rack/rack/issues/1628
-gem 'rails', '~> 5.2.6'
+gem 'rails', '~> 6.1.4'
 gem 'responders'
-gem 'secondbase', git: 'https://github.com/yeti-switch/secondbase.git'
 
 # Authentication
 gem 'activeldap'
@@ -43,7 +42,7 @@ gem 'active_admin_sidebar', '1.1.0'
 gem 'excelinator', github: 'livingsocial/excelinator'
 
 # REST API
-gem 'jsonapi-resources', '0.9.1.beta1'
+gem 'jsonapi-resources', '~> 0.9.12'
 
 # gem 'activeadmin_async_export'
 
@@ -57,17 +56,15 @@ gem 'paper_trail'
 gem 'parallel'
 
 # Assets
-gem 'coffee-rails', '~> 4.0'
-gem 'compass-rails', '~> 3.0.2'
 gem 'sass-rails'
 gem 'sprockets'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'chosen-rails', '1.5.2'
+gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
 gem 'jquery-ui-rails'
-gem 'rails-html-sanitizer', '~> 1.0.3'
+gem 'rails-html-sanitizer', '~> 1.0'
 gem 'sass-globbing'
 gem 'therubyracer', '~> 0.12.1'
 gem 'uglifier', '>= 1.3'
@@ -94,12 +91,11 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'bullet'
+  gem 'bullet', github: 'flyerhzm/bullet'
   gem 'byebug'
   gem 'thin'
 
   gem 'bundler-audit', require: false
-  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'parallel_tests'
   gem 'rspec-rails'

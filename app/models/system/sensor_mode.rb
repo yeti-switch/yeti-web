@@ -8,7 +8,7 @@
 #  name :string           not null
 #
 
-class System::SensorMode < Yeti::ActiveRecord
+class System::SensorMode < ApplicationRecord
   self.table_name = 'sys.sensor_modes'
 
   # mode_id constants from this table

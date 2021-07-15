@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Equipment::Radius::Attribute < Yeti::ActiveRecord
+class Equipment::Radius::Attribute < ApplicationRecord
   self.abstract_class = true
 
   # FORMATS = ['string', 'octets', 'ipaddr', 'integer', 'date', 'ifid', 'ipv6addr', 'ipv6prefix', 'abinary']

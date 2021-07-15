@@ -12,6 +12,6 @@
 #  numberlist_actions_name_key  (name) UNIQUE
 #
 
-class Routing::NumberlistAction < Yeti::ActiveRecord
+class Routing::NumberlistAction < ApplicationRecord
   self.table_name = 'class4.numberlist_actions'
 end

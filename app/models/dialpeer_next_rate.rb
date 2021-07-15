@@ -22,7 +22,7 @@
 #  dialpeer_next_rates_dialpeer_id_fkey  (dialpeer_id => dialpeers.id)
 #
 
-class DialpeerNextRate < Yeti::ActiveRecord
+class DialpeerNextRate < ApplicationRecord
   validates :dialpeer, presence: true
   validates :next_rate,
                         :initial_rate,

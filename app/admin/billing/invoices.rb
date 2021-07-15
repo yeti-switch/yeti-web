@@ -284,7 +284,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
                 :end_date
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :is_vendor,
               as: :select,

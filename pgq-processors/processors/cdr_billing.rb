@@ -8,7 +8,7 @@ class CdrBilling < Pgq::ConsumerGroup
     Dir['models/*.rb'].each { |file| require_relative File.join('../', file) }
     p options
     key = options['mode']
-    ::RoutingBase.establish_connection options['databases'][key]
+    ::RoutingBase.establish_connection options['databases'][key]['primary']
 
     # dbkey = @config['mode'] || 'development'
   end

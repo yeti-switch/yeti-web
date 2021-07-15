@@ -17,12 +17,12 @@ RSpec.describe CdrBilling do
   # fake models, since we have no access to main project
   class Account < ::RoutingBase
     self.table_name = 'billing.accounts'
-    establish_connection(CONFIG['databases']['test'])
+    establish_connection(CONFIG['databases']['test']['primary'])
   end
 
   class Contractor < ::RoutingBase
     self.table_name = 'public.contractors'
-    establish_connection(CONFIG['databases']['test'])
+    establish_connection(CONFIG['databases']['test']['primary'])
   end
 
   let(:cdrs) do

@@ -8,6 +8,10 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::CountriesController do
       get clickhouse_dictionary_request_path
     end
 
+    before do
+      System::NetworkPrefix.delete_all
+      System::Country.delete_all
+    end
     let!(:countries) do
       FactoryBot.create_list(:country, 2, :uniq_name)
     end

@@ -69,7 +69,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :controller do
       filters.except('src_country_iso_eq', 'dst_country_iso_eq')
              .merge({ 'src_country_id_eq': country.id, 'dst_country_id_eq': country.id })
     end
-    let(:country) { create(:country) }
+    let(:country) { System::Country.take! }
 
     it 'http status should eq 201' do
       subject

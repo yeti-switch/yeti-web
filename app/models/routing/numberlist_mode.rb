@@ -12,6 +12,6 @@
 #  blacklist_modes_name_key  (name) UNIQUE
 #
 
-class Routing::NumberlistMode < Yeti::ActiveRecord
+class Routing::NumberlistMode < ApplicationRecord
   self.table_name = 'class4.numberlist_modes'
 end

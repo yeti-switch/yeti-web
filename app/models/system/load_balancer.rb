@@ -14,7 +14,7 @@
 #  load_balancers_signalling_ip_key  (signalling_ip) UNIQUE
 #
 
-class System::LoadBalancer < Yeti::ActiveRecord
+class System::LoadBalancer < ApplicationRecord
   self.table_name = 'sys.load_balancers'
 
   include WithPaperTrail

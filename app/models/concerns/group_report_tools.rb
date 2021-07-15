@@ -43,8 +43,9 @@ module GroupReportTools
       #        }
       #      end
       #      attrs
-      result = group_by_arr.map do |attribute_name|
-        belongs_to_relations.detect { |e| e.foreign_key == attribute_name }.try(:name) || attribute_name
+      group_by_arr.map do |attribute_name|
+        relation = belongs_to_relations.detect { |e| e.foreign_key.to_s == attribute_name.to_s }
+        relation&.name&.to_sym || attribute_name
       end
     end
 

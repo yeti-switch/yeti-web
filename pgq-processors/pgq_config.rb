@@ -23,7 +23,7 @@ class PgqConfig
     @dbconfig = YAML.safe_load(ERB.new(File.read('../config/database.yml')).result, aliases: true)
     raise 'Invalid db configuration file' if @dbconfig.blank?
 
-    @config['source_database'] = @dbconfig['secondbase'][dbkey.to_s]
+    @config['source_database'] = @dbconfig[dbkey.to_s]['cdr']
     @config['databases'] = @dbconfig
     @config
   end

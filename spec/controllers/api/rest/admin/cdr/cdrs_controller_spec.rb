@@ -5,12 +5,10 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: admin_user.id }).token }
 
   before do
-    Cdr::Cdr.destroy_all
     request.accept = 'application/vnd.api+json'
     request.headers['Content-Type'] = 'application/vnd.api+json'
     request.headers['Authorization'] = auth_token
   end
-  after { Cdr::Cdr.destroy_all }
 
   describe 'GET index' do
     let!(:cdrs) do
@@ -257,7 +255,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         let!(:cdr) do
           create :cdr, :with_id, dst_country_id: country.id
         end
-        let(:country) { create(:country) }
+        let(:country) { System::Country.take! }
         it 'only desired cdrs should be present' do
           subject
           expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))
@@ -271,7 +269,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
         let!(:cdr) do
           create :cdr, :with_id, src_country_id: country.id
         end
-        let(:country) { create(:country) }
+        let(:country) { System::Country.take! }
 
         it 'only desired cdrs should be present' do
           subject
@@ -287,7 +285,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           let!(:cdr) do
             create :cdr, :with_id, dst_country_id: country.id
           end
-          let(:country) { create(:country) }
+          let(:country) { System::Country.take! }
           it 'only desired cdrs should be present' do
             subject
             expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))
@@ -341,7 +339,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           let!(:cdr) do
             create :cdr, :with_id, src_country_id: country.id
           end
-          let(:country) { create(:country) }
+          let(:country) { System::Country.take! }
           it 'only desired cdrs should be present' do
             subject
             expect(response_data).to match_array(hash_including('id' => cdr.id.to_s))

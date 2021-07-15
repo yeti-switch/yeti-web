@@ -42,7 +42,7 @@ ActiveAdmin.register CodecGroup do
   filter :name
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys.uniq
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
     end

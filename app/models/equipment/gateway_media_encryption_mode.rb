@@ -12,6 +12,6 @@
 #  gateway_media_encryption_modes_name_key  (name) UNIQUE
 #
 
-class Equipment::GatewayMediaEncryptionMode < Yeti::ActiveRecord
+class Equipment::GatewayMediaEncryptionMode < ApplicationRecord
   self.table_name = 'class4.gateway_media_encryption_modes'
 end

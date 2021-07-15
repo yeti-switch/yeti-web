@@ -8,10 +8,8 @@ RSpec.describe 'Create new Network Prefix', type: :feature, js: true do
   active_admin_form_for System::NetworkPrefix, 'new'
   include_context :login_as_admin
 
-  let!(:network) { FactoryBot.create(:network, name: 'some network') }
+  let!(:network) { System::Network.take! }
   before do
-    FactoryBot.create(:network)
-
     visit new_system_network_prefix_path
 
     aa_form.set_text 'Prefix', '123'

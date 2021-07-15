@@ -10,7 +10,7 @@
 #  timeout :integer(2)       default(300), not null
 #
 
-class Lnp::DatabaseSipRedirect < Yeti::ActiveRecord
+class Lnp::DatabaseSipRedirect < ApplicationRecord
   self.table_name = 'class4.lnp_databases_30x_redirect'
 
   has_one :lnp_database, as: :database, class_name: 'Lnp::Database'

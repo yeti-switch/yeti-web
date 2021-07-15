@@ -12,6 +12,6 @@
 #  dtmf_receive_modes_name_key  (name) UNIQUE
 #
 
-class System::DtmfReceiveMode < Yeti::ActiveRecord
+class System::DtmfReceiveMode < ApplicationRecord
   self.table_name = 'class4.dtmf_receive_modes'
 end

@@ -8,6 +8,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::NetworkPrefixesController do
       get clickhouse_dictionary_request_path
     end
 
+    before { System::NetworkPrefix.delete_all }
     let!(:network_prefixes) { create_list(:network_prefix, 3) }
 
     include_examples :responds_with_correct_json_each_row do

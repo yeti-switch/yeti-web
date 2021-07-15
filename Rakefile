@@ -7,7 +7,3 @@
 require File.expand_path('config/application', __dir__)
 
 Rails.application.load_tasks
-
-unless SecondBase.config
-  raise ActiveRecord::AdapterNotFound, 'database.yml#secondbase is not specified'
-end

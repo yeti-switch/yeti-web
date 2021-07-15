@@ -58,7 +58,7 @@ ActiveAdmin.register Billing::Contact do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :contractor, input_html: { class: 'chosen' }
       f.input :admin_user, input_html: { class: 'chosen' }

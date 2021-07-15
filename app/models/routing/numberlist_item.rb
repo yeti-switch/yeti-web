@@ -33,7 +33,7 @@
 #  numberlist_items_tag_action_id_fkey  (tag_action_id => tag_actions.id)
 #
 
-class Routing::NumberlistItem < Yeti::ActiveRecord
+class Routing::NumberlistItem < ApplicationRecord
   include WithPaperTrail
 
   self.table_name = 'class4.numberlist_items'

@@ -18,7 +18,7 @@
 #  contacts_contractor_id_fkey  (contractor_id => contractors.id)
 #
 
-class Billing::Contact < Yeti::ActiveRecord
+class Billing::Contact < ApplicationRecord
   self.table_name = 'notifications.contacts'
   include WithPaperTrail
 

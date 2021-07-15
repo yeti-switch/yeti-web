@@ -84,8 +84,8 @@ class Routing::SimulationForm < ApplicationForm
 
   validates :remote_port, numericality: {
     allow_nil: true,
-    greater_than_or_equal_to: Yeti::ActiveRecord::L4_PORT_MIN,
-    less_than: Yeti::ActiveRecord::L4_PORT_MAX,
+    greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN,
+    less_than: ApplicationRecord::L4_PORT_MAX,
     only_integer: true
   }
 
@@ -104,19 +104,19 @@ class Routing::SimulationForm < ApplicationForm
     @debug = nil
 
     begin
-      t = ActiveRecord::Base.connection.raw_connection.set_notice_processor { |result| @notices << result.to_s.chomp }
-      Yeti::ActiveRecord.transaction do
-        Yeti::ActiveRecord.fetch_sp(
-          "set local search_path to #{Yeti::ActiveRecord::ROUTING_SCHEMA},sys,public"
+      t = ApplicationRecord.connection.raw_connection.set_notice_processor { |result| @notices << result.to_s.chomp }
+      ApplicationRecord.transaction do
+        ApplicationRecord.fetch_sp(
+          "set local search_path to #{ApplicationRecord::ROUTING_SCHEMA},sys,public"
         )
-        Yeti::ActiveRecord.fetch_sp(
-          "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(?::integer, ?::integer)",
+        ApplicationRecord.fetch_sp(
+          "select * from #{ApplicationRecord::ROUTING_SCHEMA}.init(?::integer, ?::integer)",
           1,
           1
         )
         spname = release_mode == '1' ? 'route_release' : 'route_debug'
-        @debug = Yeti::ActiveRecord.fetch_sp(
-          "select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.#{spname}(
+        @debug = ApplicationRecord.fetch_sp(
+          "select * from #{ApplicationRecord::ROUTING_SCHEMA}.#{spname}(
             ?::integer, /* i_node_id integer */
             ?::integer, /* i_pop_id integer  */
             ?::smallint, /* i_protocol_id smallint */
@@ -186,7 +186,7 @@ class Routing::SimulationForm < ApplicationForm
       Rails.logger.info 'EXCEPTION'
       raise e
     ensure
-      ActiveRecord::Base.connection.raw_connection.set_notice_processor(&t)
+      ApplicationRecord.connection.raw_connection.set_notice_processor(&t)
     end
     @notices.map! { |el| el.gsub('NOTICE:', '').gsub(/CONTEXT:.*/, '').gsub(%r{PL/pgSQL function .*}, '') }
   end

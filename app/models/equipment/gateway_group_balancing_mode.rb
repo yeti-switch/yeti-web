@@ -12,6 +12,6 @@
 #  gateway_group_balancing_modes_name_key  (name) UNIQUE
 #
 
-class Equipment::GatewayGroupBalancingMode < Yeti::ActiveRecord
+class Equipment::GatewayGroupBalancingMode < ApplicationRecord
   self.table_name = 'class4.gateway_group_balancing_modes'
 end

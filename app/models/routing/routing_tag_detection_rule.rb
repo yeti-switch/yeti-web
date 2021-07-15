@@ -26,7 +26,7 @@
 #  routing_tag_detection_rules_tag_action_id_fkey        (tag_action_id => tag_actions.id)
 #
 
-class Routing::RoutingTagDetectionRule < Yeti::ActiveRecord
+class Routing::RoutingTagDetectionRule < ApplicationRecord
   include WithPaperTrail
   self.table_name = 'class4.routing_tag_detection_rules'
 

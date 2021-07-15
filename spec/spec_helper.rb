@@ -37,12 +37,16 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = false
+  config.use_transactional_fixtures = true
   config.disable_monkey_patching!
 
   if Bullet.enable?
-    # bullet false positive with HABTM association
-    Bullet.add_whitelist type: :n_plus_one_query, class_name: 'Routing::RoutingPlan::HABTM_RoutingGroups', association: :routing_group
+    # bullet bug https://github.com/flyerhzm/bullet/issues/586
+    # fails spec/features/routing/routing_plans/batch_update_spec.rb
+    Bullet.add_whitelist type: :n_plus_one_query,
+                         class_name: 'Routing::RoutingPlan',
+                         association: :routing_routingplans_routing_groups
+
     config.before(:each, type: :feature) do
       Bullet.start_request
     end
@@ -116,6 +120,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include FactoryBot::Syntax::Methods
+  config.include ActionDispatch::TestProcess
   config.include ActiveSupport::Testing::TimeHelpers
   config.include TravelMonotonicHelpers
   config.include RspecRequestHelper, type: :request
@@ -144,10 +149,6 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:suite) do
     # Create partition for current+next monthes if not exists
     Cdr::Cdr.add_partitions
     Cdr::AuthLog.add_partitions
@@ -170,20 +171,10 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
     allow(Raven).to receive(:send_event).with(a_kind_of(Hash))
   end
 
-  config.before(:each, js: true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
   config.after(:each) do
-    DatabaseCleaner.clean
     NodeApi.reset_all
   end
 

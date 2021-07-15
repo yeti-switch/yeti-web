@@ -40,7 +40,7 @@
 #  sip_options_probers_sip_schema_id_fkey                (sip_schema_id => sip_schemas.id)
 #  sip_options_probers_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
-class Equipment::SipOptionsProber < Yeti::ActiveRecord
+class Equipment::SipOptionsProber < ApplicationRecord
   self.table_name = 'class4.sip_options_probers'
 
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id

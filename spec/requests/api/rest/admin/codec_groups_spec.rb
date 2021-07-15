@@ -8,8 +8,9 @@ RSpec.describe Api::Rest::Admin::CodecGroupsController, type: :request do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before { FactoryBot.create_list(:codec_group, 2) }
     let!(:codec_groups) do
-      FactoryBot.create_list(:codec_group, 2)
+      CodecGroup.all.to_a
     end
 
     include_examples :jsonapi_responds_with_pagination_links

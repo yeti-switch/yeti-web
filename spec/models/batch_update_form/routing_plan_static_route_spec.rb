@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe BatchUpdateForm::RoutingPlanStaticRoute do
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let(:prefix_err_message) { I18n.t 'activerecord.errors.models.routing\plan_static_route.attributes.prefix.with_spaces' }
   let!(:vendor) { FactoryBot.create :vendor }
   let!(:routing_plan) { FactoryBot.create :routing_plan, :with_static_routes }

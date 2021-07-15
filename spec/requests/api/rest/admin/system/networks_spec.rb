@@ -8,6 +8,10 @@ RSpec.describe Api::Rest::Admin::System::NetworksController, type: :request do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
+    before do
+      System::NetworkPrefix.delete_all
+      System::Network.delete_all
+    end
     let!(:networks) do
       FactoryBot.create_list(:network, 2, :uniq_name)
     end

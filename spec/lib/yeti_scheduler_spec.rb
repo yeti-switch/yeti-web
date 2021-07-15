@@ -49,8 +49,8 @@ RSpec.describe YetiScheduler do
 
     let(:rufus_stub) { instance_double(Rufus::Scheduler) }
     before do
-      expect(Yeti::ActiveRecord).to receive(:clear_active_connections!).once
-      expect(Yeti::ActiveRecord).to receive(:flush_idle_connections!).once
+      expect(ApplicationRecord).to receive(:clear_active_connections!).once
+      expect(ApplicationRecord).to receive(:flush_idle_connections!).once
       expect(Cdr::Base).to receive(:clear_active_connections!).once
       expect(Cdr::Base).to receive(:flush_idle_connections!).once
 
@@ -99,7 +99,7 @@ RSpec.describe YetiScheduler do
     let!(:time_double) { instance_double(EtOrbi::EoTime) }
 
     before do
-      expect(Yeti::ActiveRecord.connection_pool).to receive(:connection).once.ordered
+      expect(ApplicationRecord.connection_pool).to receive(:connection).once.ordered
       expect(Cdr::Base.connection_pool).to receive(:connection).once.ordered
 
       # We stubbing active record model because we required to stub connection_pool connect/release.
@@ -173,7 +173,7 @@ RSpec.describe YetiScheduler do
             YetiScheduler.use(test_middleware)
             expect(handler_class).to receive(:call).with(matcher_options_before).once.ordered
             expect(test_middleware).to receive(:check!).with(matcher_options_after).once.ordered
-            expect(Yeti::ActiveRecord.connection_pool).to receive(:release_connection).once.ordered
+            expect(ApplicationRecord.connection_pool).to receive(:release_connection).once.ordered
             expect(Cdr::Base.connection_pool).to receive(:release_connection).once.ordered
 
             expect(job_info_stub).to receive(:update!).with(
@@ -233,7 +233,7 @@ RSpec.describe YetiScheduler do
           end
           before do
             expect(handler_class).to receive(:call).with(matcher_options_before).once.ordered.and_raise(raised_exception)
-            expect(Yeti::ActiveRecord.connection_pool).to receive(:release_connection).once.ordered
+            expect(ApplicationRecord.connection_pool).to receive(:release_connection).once.ordered
             expect(Cdr::Base.connection_pool).to receive(:release_connection).once.ordered
 
             expect(job_info_stub).to receive(:update!).with(

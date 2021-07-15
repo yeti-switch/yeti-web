@@ -9,6 +9,6 @@
 #  validate_https_certificate :boolean          default(TRUE), not null
 #  updated_at                 :datetime
 #
-class Equipment::StirShaken::TrustedRepository < Yeti::ActiveRecord
+class Equipment::StirShaken::TrustedRepository < ApplicationRecord
   self.table_name = 'stir_shaken_trusted_repositories'
 end

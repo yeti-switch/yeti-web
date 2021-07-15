@@ -27,7 +27,7 @@ ActiveAdmin.register Routing::RateGroupDuplicatorForm, as: 'Routing Rate Group D
   end
 
   form do |f|
-    f.semantic_errors(*f.object.errors.keys)
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Copy Rate Group' do
       f.input :id, as: :hidden
       f.input :name

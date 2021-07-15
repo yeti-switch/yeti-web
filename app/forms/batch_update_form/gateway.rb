@@ -19,12 +19,12 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
   # numericality
   validates :priority, numericality: {
     greater_than: 0,
-    less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT,
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
     only_integer: true
   }, if: :priority_changed?
   validates :weight, numericality: {
     only_integer: true,
-    less_than_or_equal_to: Yeti::ActiveRecord::PG_MAX_SMALLINT,
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
     greater_than: 0
   }, if: :weight_changed?
   validates :acd_limit, numericality: {

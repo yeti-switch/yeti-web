@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe BatchUpdateForm::Gateway do
-  let(:pg_max_smallint) { Yeti::ActiveRecord::PG_MAX_SMALLINT }
+  let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let!(:assign_params) do
     {
       enabled: 'true',

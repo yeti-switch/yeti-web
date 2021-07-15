@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Concerns::WithPayloads
+module WithPayloads
   def append_info_to_raw_payload(payload)
     payload[:debug_mode] = debug_mode
     payload[:request] = request

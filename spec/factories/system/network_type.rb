@@ -5,7 +5,7 @@ FactoryBot.define do
     sequence(:name) { |n| "Network type #{n}" }
 
     trait :filled do
-      networks { build_list :network, 2 }
+      networks { System::Network.take(2) }
     end
   end
 end

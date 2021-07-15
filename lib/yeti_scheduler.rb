@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
-require_relative './scheduler/base'
-require_relative './scheduler/middleware/base'
+require_relative './scheduler'
 require_relative './prometheus/yeti_cron_job_processor'
 
 class YetiScheduler < Scheduler::Base
   ConnectionsMiddleware = Class.new(Scheduler::Middleware::Base) do
     def call(options)
-      Yeti::ActiveRecord.connection_pool.connection
+      ApplicationRecord.connection_pool.connection
       Cdr::Base.connection_pool.connection
       app.call(options)
-      Yeti::ActiveRecord.connection_pool.release_connection
+      ApplicationRecord.connection_pool.release_connection
       Cdr::Base.connection_pool.release_connection
     end
   end
@@ -60,8 +59,8 @@ class YetiScheduler < Scheduler::Base
     # close database connections if they were open.
     # main thread does not use database.
     # each time thread should acquire and release database connection.
-    Yeti::ActiveRecord.clear_active_connections!
-    Yeti::ActiveRecord.flush_idle_connections!
+    ApplicationRecord.clear_active_connections!
+    ApplicationRecord.flush_idle_connections!
     Cdr::Base.clear_active_connections!
     Cdr::Base.flush_idle_connections!
   end

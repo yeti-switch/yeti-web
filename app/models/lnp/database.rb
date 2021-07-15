@@ -16,7 +16,7 @@
 #  lnp_databases_name_key                                       (name) UNIQUE
 #
 
-class Lnp::Database < Yeti::ActiveRecord
+class Lnp::Database < ApplicationRecord
   self.table_name = 'class4.lnp_databases'
 
   module CONST
@@ -81,8 +81,8 @@ class Lnp::Database < Yeti::ActiveRecord
 
   def test_db(destination)
     transaction do
-      fetch_sp_val("select * from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.init(0,0)") # loading configuration
-      d = fetch_sp("select lrn, tag from #{Yeti::ActiveRecord::ROUTING_SCHEMA}.lnp_resolve_tagged(?::smallint,?::varchar)",
+      fetch_sp_val("select * from #{ApplicationRecord::ROUTING_SCHEMA}.init(0,0)") # loading configuration
+      d = fetch_sp("select lrn, tag from #{ApplicationRecord::ROUTING_SCHEMA}.lnp_resolve_tagged(?::smallint,?::varchar)",
                    id,
                    destination)[0]
       OpenStruct.new(d)

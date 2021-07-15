@@ -68,7 +68,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
   filter :external_id
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
       f.input :enabled

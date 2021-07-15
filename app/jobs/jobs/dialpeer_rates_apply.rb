@@ -5,7 +5,7 @@ module Jobs
     self.cron_line = '* * * * *'
 
     def execute
-      ActiveRecord::Base.transaction do
+      ApplicationRecord.transaction do
         DialpeerNextRate.ready_for_apply.find_each do |rate|
           capture_job_extra(id: rate.id, class: rate.class.name) do
             rate.dialpeer.update!(

@@ -11,7 +11,7 @@
 #
 #  customers_auth_src_number_fields_name_key  (name) UNIQUE
 #
-class Routing::CustomerAuthSrcNumberField < Yeti::ActiveRecord
+class Routing::CustomerAuthSrcNumberField < ApplicationRecord
   self.table_name = 'class4.customers_auth_src_number_fields'
 
   def display_name

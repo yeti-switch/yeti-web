@@ -10,7 +10,7 @@ RSpec.describe Api::Rest::Admin::AuthController do
   end
   let(:json_request_body) { { auth: attributes } }
 
-  let!(:admin) { create :admin_user, username: 'admin', password: 'password' }
+  let!(:admin) { create :admin_user, username: 'test-admin', password: 'password' }
 
   describe 'POST create' do
     subject do
@@ -18,7 +18,7 @@ RSpec.describe Api::Rest::Admin::AuthController do
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { username: 'admin', password: 'password' } }
+      let(:attributes) { { username: 'test-admin', password: 'password' } }
 
       context 'ldap' do
         before do
@@ -46,7 +46,7 @@ RSpec.describe Api::Rest::Admin::AuthController do
     end
 
     context 'when attributes are invalid' do
-      let(:attributes) { { username: 'admin', password: 'wrong_password' } }
+      let(:attributes) { { username: 'test-admin', password: 'wrong_password' } }
 
       it 'responds with failed login', :aggregate_failures do
         subject

@@ -8,6 +8,10 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::NetworksController do
       get clickhouse_dictionary_request_path
     end
 
+    before do
+      System::NetworkPrefix.delete_all
+      System::Network.delete_all
+    end
     let!(:networks) do
       FactoryBot.create_list(:network, 2, :uniq_name)
     end

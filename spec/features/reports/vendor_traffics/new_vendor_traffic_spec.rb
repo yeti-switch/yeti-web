@@ -24,8 +24,8 @@ RSpec.describe 'Create new Vendor Traffic', type: :feature, js: true do
     record = Report::VendorTraffic.last
     expect(record).to be_present
     expect(record).to have_attributes(
-      date_start: Time.parse('2019-01-01 00:00:00 UTC'),
-      date_end: Time.parse('2019-02-01 01:00:00 UTC'),
+      date_start: Time.zone.parse('2019-01-01 00:00:00'),
+      date_end: Time.zone.parse('2019-02-01 01:00:00'),
       vendor_id: vendor.id,
       send_to: nil
     )

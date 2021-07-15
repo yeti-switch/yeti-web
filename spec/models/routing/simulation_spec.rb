@@ -11,7 +11,7 @@ RSpec.describe Routing::SimulationForm do
     context '#remote_port' do
       it { is_expected.to_not allow_value('').for :remote_port }
 
-      it { is_expected.to allow_value(Yeti::ActiveRecord::L4_PORT_MIN + 10).for :remote_port }
+      it { is_expected.to allow_value(ApplicationRecord::L4_PORT_MIN + 10).for :remote_port }
     end
 
     context '#src_number' do
@@ -43,13 +43,13 @@ RSpec.describe Routing::SimulationForm do
     context '#remote_port' do
       it { is_expected.to_not allow_value('').for :remote_port }
       it { is_expected.to_not allow_value('string').for :remote_port }
-      it { is_expected.to_not allow_value(Yeti::ActiveRecord::L4_PORT_MIN - 1).for :remote_port }
-      it { is_expected.to_not allow_value(Yeti::ActiveRecord::L4_PORT_MAX + 1).for :remote_port }
-      it { is_expected.to_not allow_value(Yeti::ActiveRecord::L4_PORT_MAX).for :remote_port }
+      it { is_expected.to_not allow_value(ApplicationRecord::L4_PORT_MIN - 1).for :remote_port }
+      it { is_expected.to_not allow_value(ApplicationRecord::L4_PORT_MAX + 1).for :remote_port }
+      it { is_expected.to_not allow_value(ApplicationRecord::L4_PORT_MAX).for :remote_port }
       it { is_expected.to_not allow_value(2.5).for :remote_port }
 
-      it { is_expected.to allow_value(Yeti::ActiveRecord::L4_PORT_MIN).for :remote_port }
-      it { is_expected.to allow_value(Yeti::ActiveRecord::L4_PORT_MAX - 1).for :remote_port }
+      it { is_expected.to allow_value(ApplicationRecord::L4_PORT_MIN).for :remote_port }
+      it { is_expected.to allow_value(ApplicationRecord::L4_PORT_MAX - 1).for :remote_port }
     end
   end
 end

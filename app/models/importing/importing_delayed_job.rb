@@ -58,7 +58,7 @@ class Importing::ImportingDelayedJob
 
   def write_log(status)
     # TODO: use AR
-    Yeti::ActiveRecord.execute_sp(
+    ApplicationRecord.execute_sp(
       'select sys.logic_log(?, ?, ?)',
       "#{@klass.import_class} (#{@options[:job_number]})",
       0, status

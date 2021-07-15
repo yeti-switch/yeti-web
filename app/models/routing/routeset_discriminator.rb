@@ -12,7 +12,7 @@
 #  routeset_discriminators_name_key  (name) UNIQUE
 #
 
-class Routing::RoutesetDiscriminator < Yeti::ActiveRecord
+class Routing::RoutesetDiscriminator < ApplicationRecord
   self.table_name = 'class4.routeset_discriminators'
 
   has_many :dialpeers, class_name: 'Diapeer', foreign_key: :routeset_discriminator_id
