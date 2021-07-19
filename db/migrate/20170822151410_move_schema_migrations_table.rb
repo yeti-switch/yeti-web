@@ -1,4 +1,4 @@
-class MoveSchemaMigrationsTable < ActiveRecord::Migration
+class MoveSchemaMigrationsTable < ActiveRecord::Migration[4.2]
   def up
     execute %q{ DROP TABLE IF EXISTS gui.schema_migrations; }
   end

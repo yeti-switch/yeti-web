@@ -1,4 +1,4 @@
-class FixSharedGw < ActiveRecord::Migration
+class FixSharedGw < ActiveRecord::Migration[4.2]
   def up
     execute %q{
 

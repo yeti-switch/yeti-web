@@ -1,4 +1,4 @@
-class Uuid < ActiveRecord::Migration
+class Uuid < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       CREATE EXTENSION "uuid-ossp" WITH SCHEMA public;

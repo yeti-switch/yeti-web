@@ -1,4 +1,4 @@
-class ReverseBilling < ActiveRecord::Migration
+class ReverseBilling < ActiveRecord::Migration[4.2]
 
   def stop_step
     true

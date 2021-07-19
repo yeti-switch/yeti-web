@@ -1,4 +1,4 @@
-class FixCdrWriting < ActiveRecord::Migration
+class FixCdrWriting < ActiveRecord::Migration[4.2]
   def down
     execute %q{
     CREATE OR REPLACE FUNCTION switch.writecdr(

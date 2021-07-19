@@ -1,4 +1,4 @@
-class CreateLuaScripts < ActiveRecord::Migration
+class CreateLuaScripts < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       CREATE TABLE sys.lua_scripts (

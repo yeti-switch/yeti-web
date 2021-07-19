@@ -1,4 +1,4 @@
-class FixVendorTest < ActiveRecord::Migration
+class FixVendorTest < ActiveRecord::Migration[4.2]
   def up
     execute %q{
     CREATE OR REPLACE FUNCTION switch13.route(

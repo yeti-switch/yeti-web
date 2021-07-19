@@ -1,4 +1,4 @@
-class CustomersAuthIpNotNull < ActiveRecord::Migration
+class CustomersAuthIpNotNull < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       UPDATE class4.customers_auth SET ip='{127.0.0.0/8}' WHERE ip='{}';

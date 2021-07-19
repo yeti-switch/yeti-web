@@ -1,4 +1,4 @@
-class FixRouteSimulation < ActiveRecord::Migration
+class FixRouteSimulation < ActiveRecord::Migration[4.2]
   def up
     execute %q{
 

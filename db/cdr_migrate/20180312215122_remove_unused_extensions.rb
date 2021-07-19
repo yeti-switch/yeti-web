@@ -1,4 +1,4 @@
-class RemoveUnusedExtensions < ActiveRecord::Migration
+class RemoveUnusedExtensions < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       drop extension pgq_coop;

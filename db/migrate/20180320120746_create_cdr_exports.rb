@@ -1,4 +1,4 @@
-class CreateCdrExports < ActiveRecord::Migration
+class CreateCdrExports < ActiveRecord::Migration[4.2]
   def change
     create_table 'sys.cdr_exports' do |t|
       t.string :status, null: false

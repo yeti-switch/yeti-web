@@ -1,4 +1,4 @@
-class IncomingSipAuth < ActiveRecord::Migration
+class IncomingSipAuth < ActiveRecord::Migration[4.2]
 
   def down
     execute %q{
