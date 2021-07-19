@@ -19,6 +19,11 @@
 #  status           :integer(4)
 #  created_at       :datetime         not null
 #
+# Indexes
+#
+#  api_requests_created_at_idx  (created_at)
+#  api_requests_id_idx          (id)
+#
 
 RSpec.describe Log::ApiLog do
   describe '.create' do

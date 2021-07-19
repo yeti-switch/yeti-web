@@ -56,6 +56,11 @@
 #  node_id                 :integer(4)       not null
 #  pop_id                  :integer(4)       not null
 #
+# Indexes
+#
+#  streams_id_idx         (id)
+#  streams_local_tag_idx  (local_tag)
+#
 
 class Cdr::RtpStatistic < Cdr::Base
   self.table_name = 'rtp_statistics.streams'

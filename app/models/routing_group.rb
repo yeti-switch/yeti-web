@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: routing_groups
+# Table name: class4.routing_groups
 #
 #  id   :integer(4)       not null, primary key
 #  name :string           not null
