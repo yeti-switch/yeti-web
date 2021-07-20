@@ -1,4 +1,4 @@
-class CdrAddPrivacyAndUuid < ActiveRecord::Migration
+class CdrAddPrivacyAndUuid < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       CREATE EXTENSION "uuid-ossp" WITH SCHEMA public;

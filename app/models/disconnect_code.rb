@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: disconnect_code
+# Table name: class4.disconnect_code
 #
 #  id                        :integer(4)       not null, primary key
 #  code                      :integer(4)       not null

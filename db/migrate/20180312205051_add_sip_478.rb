@@ -1,4 +1,4 @@
-class AddSip478 < ActiveRecord::Migration
+class AddSip478 < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       insert into class4.disconnect_code(

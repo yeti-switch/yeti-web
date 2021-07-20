@@ -1,4 +1,4 @@
-class DropColumnRoutingTagId < ActiveRecord::Migration
+class DropColumnRoutingTagId < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       ALTER TABLE class4.dialpeers DROP routing_tag_id;

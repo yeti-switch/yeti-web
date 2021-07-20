@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: gateways
+# Table name: class4.gateways
 #
 #  id                               :integer(4)       not null, primary key
 #  acd_limit                        :float            default(0.0), not null

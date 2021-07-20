@@ -1,4 +1,4 @@
-class AddMissingColumnsToDataImport < ActiveRecord::Migration
+class AddMissingColumnsToDataImport < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       --

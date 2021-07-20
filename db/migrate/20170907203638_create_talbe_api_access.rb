@@ -1,4 +1,4 @@
-class CreateTalbeApiAccess < ActiveRecord::Migration
+class CreateTalbeApiAccess < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       CREATE TABLE sys.api_access (

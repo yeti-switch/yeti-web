@@ -1,4 +1,4 @@
-class AddBillingDecrement < ActiveRecord::Migration
+class AddBillingDecrement < ActiveRecord::Migration[4.2]
   def up
     execute %q{
         alter type billing.cdr_v2

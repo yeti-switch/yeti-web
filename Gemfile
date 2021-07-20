@@ -86,6 +86,7 @@ gem 'rufus-scheduler', require: false
 
 group :development do
   gem 'annotate'
+  gem 'listen', require: false
   gem 'sourcify'
 end
 

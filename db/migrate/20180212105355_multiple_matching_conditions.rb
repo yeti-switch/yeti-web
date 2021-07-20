@@ -1,4 +1,4 @@
-class MultipleMatchingConditions < ActiveRecord::Migration
+class MultipleMatchingConditions < ActiveRecord::Migration[4.2]
   def up
     execute %q{
 

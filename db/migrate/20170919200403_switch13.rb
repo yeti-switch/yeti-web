@@ -1,4 +1,4 @@
-class Switch13 < ActiveRecord::Migration
+class Switch13 < ActiveRecord::Migration[4.2]
 
   def stop_step
     true

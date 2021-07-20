@@ -150,6 +150,16 @@
 #  vendor_id                       :integer(4)
 #  vendor_invoice_id               :integer(4)
 #
+# Indexes
+#
+#  cdr_customer_acc_external_id_time_start_idx  (customer_acc_external_id,time_start) WHERE is_last_cdr
+#  cdr_customer_acc_id_time_start_idx           (customer_acc_id,time_start) WHERE is_last_cdr
+#  cdr_customer_acc_id_time_start_idx1          (customer_acc_id,time_start)
+#  cdr_customer_invoice_id_idx                  (customer_invoice_id)
+#  cdr_id_idx                                   (id)
+#  cdr_time_start_idx                           (time_start)
+#  cdr_vendor_invoice_id_idx                    (vendor_invoice_id)
+#
 RSpec.describe Report::Realtime::NotAuthenticated, '.time_interval_eq' do
   subject { described_class.time_interval_eq(time_interval).to_a }
   let(:time_interval) { Report::Realtime::Base::DEFAULT_INTERVAL } # DEFAULT_INTERVAL = 60

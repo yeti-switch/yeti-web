@@ -1,4 +1,4 @@
-class NumberLength < ActiveRecord::Migration
+class NumberLength < ActiveRecord::Migration[4.2]
   def up
     execute %q{
     ALTER TABLE class4.destinations

@@ -38,6 +38,11 @@
 #  pop_id                :integer(2)
 #  transport_proto_id    :integer(2)
 #
+# Indexes
+#
+#  auth_log_id_idx            (id)
+#  auth_log_request_time_idx  (request_time)
+#
 
 RSpec.describe Cdr::AuthLog, type: :model do
   before { described_class.destroy_all }

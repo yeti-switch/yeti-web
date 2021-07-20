@@ -1,4 +1,4 @@
-class RemoveVersionTable < ActiveRecord::Migration
+class RemoveVersionTable < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       drop table sys.version;

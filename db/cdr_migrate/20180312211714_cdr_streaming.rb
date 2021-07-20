@@ -1,4 +1,4 @@
-class CdrStreaming < ActiveRecord::Migration
+class CdrStreaming < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       select pgq.create_queue('cdr_streaming');

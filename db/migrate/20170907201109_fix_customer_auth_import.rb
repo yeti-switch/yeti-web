@@ -1,4 +1,4 @@
-class FixCustomerAuthImport < ActiveRecord::Migration
+class FixCustomerAuthImport < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       alter table data_import.import_customers_auth rename column dst_blacklist_id to dst_numberlist_id;

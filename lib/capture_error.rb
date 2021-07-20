@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'capture_error/errors'
 require_relative 'capture_error/base_methods'
 require_relative 'capture_error/controller_methods'
 require_relative 'capture_error/job_methods'

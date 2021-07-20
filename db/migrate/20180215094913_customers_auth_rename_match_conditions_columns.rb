@@ -1,4 +1,4 @@
-class CustomersAuthRenameMatchConditionsColumns < ActiveRecord::Migration
+class CustomersAuthRenameMatchConditionsColumns < ActiveRecord::Migration[4.2]
   def up
     execute %q{
       -- deprecated columns
