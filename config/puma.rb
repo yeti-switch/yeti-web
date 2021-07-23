@@ -20,8 +20,10 @@ worker_timeout 1200
 preload_app!
 
 before_fork do
-  ApplicationRecord.connection.disconnect!
-  Cdr::Base.connection.disconnect!
+  # Proper way to clear db connections.
+  # Like AR initializer does in active_record/railtie.rb:265
+  ActiveRecord::Base.clear_active_connections!
+  ActiveRecord::Base.flush_idle_connections!
 
   require 'puma_worker_killer'
 
@@ -63,11 +65,6 @@ before_fork do
 end
 
 on_worker_boot do
-  ActiveSupport.on_load(:active_record) do
-    ApplicationRecord.establish_connection
-    Cdr::Base.establish_connection
-  end
-
   if PrometheusConfig.enabled?
     require 'prometheus_exporter/instrumentation'
     PrometheusExporter::Instrumentation::Process.start(type: 'web')
