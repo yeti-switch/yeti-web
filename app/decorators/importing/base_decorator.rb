@@ -61,11 +61,11 @@ module Importing
     # Formats column value
     def column_value(column_name)
       value = model.public_send(column_name)
-      value = status_tag(:yes) if value == true
-      value = status_tag(:no) if value == false
-      value = status_tag(:empty) if value.presence.nil?
+      return status_tag(:yes) if value == true
+      return status_tag(:no) if value == false
+      return status_tag(:empty) if value.presence.nil?
 
-      value
+      value.to_s
     end
 
     # highlights value with orange background if it's changed.
