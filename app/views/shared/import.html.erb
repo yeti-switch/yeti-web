@@ -18,7 +18,6 @@
     <%= f.inputs "Import" do %>
         <%= f.input :file, as: :file %>
         <%= f.input :script, as: :select, collection: GuiConfig.import_scripts('r2c_') %>
-        <%= f.input :select_all, as: :boolean %>
 
     <% end %>
 
