@@ -42,5 +42,17 @@ FactoryBot.define do
 
     routing_tag_ids { _tags.map(&:id) }
     routing_tag_names { _tags.map(&:name).join(', ') }
+
+    trait :with_names do
+      after(:build) do |record, _ev|
+        record.vendor_name = record.vendor.name if record.vendor.present?
+        record.account_name = record.account.name if record.account.present?
+        record.gateway_name = record.gateway.name if record.gateway.present?
+        record.gateway_group_name = record.gateway_group.name if record.gateway_group.present?
+        record.routing_group_name = record.routing_group.name if record.routing_group.present?
+        record.routing_tag_mode_name = record.routing_tag_mode.name if record.routing_tag_mode.present?
+        record.routeset_discriminator_name = record.routeset_discriminator.name if record.routeset_discriminator.present?
+      end
+    end
   end
 end
