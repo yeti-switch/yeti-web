@@ -12,13 +12,13 @@ class AsyncBatchUpdateJob < ApplicationJob
     @sql_query = sql_query
     @who_is = who_is
     set_audit_log_data
-    @model_class.transaction do
-      total_count = @model_class.count_by_sql count_sql_query
-
-      (total_count.to_f / BATCH_SIZE).ceil.times do |batch_number|
-        offset = batch_number * BATCH_SIZE
-        scoped_records = @model_class.find_by_sql(order_by_id_sql + " OFFSET #{offset} LIMIT #{BATCH_SIZE}")
-        scoped_records.each { |record| record.update!(changes) }
+    @model_class.connection.cache do
+      @model_class.transaction do
+        ids = @model_class.connection.select_values(ids_sql)
+        ids.each_slice(BATCH_SIZE) do |batch_ids|
+          scoped_records = @model_class.find(batch_ids)
+          scoped_records.each { |record| record.update!(changes) }
+        end
       end
     end
   end
@@ -28,13 +28,12 @@ class AsyncBatchUpdateJob < ApplicationJob
              .gsub(/ORDER BY .* (ASC)|(DESC)/, '')
   end
 
-  # Some records are sorted by updated_at column by default, and that breaks our OFFSET setting, because freshly
-  # updated records go up in query queue. To avoid that we change default ordering to order by id.
-  def order_by_id_sql
-    order_by_id_path = sql_query[/FROM\s(.*?)(\s|\z)/m, 1] + '."id"'
-    result_sql = sql_query.gsub(/ORDER BY .* (ASC)|(DESC)/, "ORDER BY #{order_by_id_path} ASC")
-    result_sql += " ORDER BY #{order_by_id_path} ASC" unless sql_query.include? 'ORDER'
-    result_sql
+  # Fetch all IDs at once, because earlier records updates can lead to change sql_query result.
+  def ids_sql
+    id_path = sql_query[/FROM\s(.*?)(\s|\z)/m, 1] + '."id"'
+
+    sql_query.gsub(/ORDER BY .* (ASC)|(DESC)/, '')
+             .gsub(/^SELECT .* FROM/, "SELECT #{id_path} FROM")
   end
 
   def reschedule_at(_time, _attempts)
