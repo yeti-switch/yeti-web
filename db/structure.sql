@@ -11754,8 +11754,8 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -12923,8 +12923,8 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -14028,8 +14028,8 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
