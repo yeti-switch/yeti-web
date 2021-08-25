@@ -14624,9 +14624,12 @@ declare
 BEGIN
 
   select into v_ret *
-  from sys.network_prefixes
-  where prefix_range(prefix)@>prefix_range(i_dst)
-  order by length(prefix_range(prefix)) desc
+  from sys.network_prefixes np
+  where
+    prefix_range(np.prefix)@>prefix_range(i_dst) AND
+    np.number_min_length <= length(i_dst) AND
+    np.number_max_length >= length(i_dst)
+  order by length(prefix_range(np.prefix)) desc
   limit 1;
 
   return v_ret;
@@ -29787,8 +29790,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -29868,6 +29870,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210415123322'),
 ('20210605094810'),
 ('20210606143950'),
-('20210630120418');
+('20210630120418'),
+('20210825190138');
 
 
