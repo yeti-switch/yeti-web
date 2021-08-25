@@ -11754,8 +11754,8 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -12923,8 +12923,8 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -14028,8 +14028,8 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -14624,9 +14624,12 @@ declare
 BEGIN
 
   select into v_ret *
-  from sys.network_prefixes
-  where prefix_range(prefix)@>prefix_range(i_dst)
-  order by length(prefix_range(prefix)) desc
+  from sys.network_prefixes np
+  where
+    prefix_range(np.prefix)@>prefix_range(i_dst) AND
+    np.number_min_length <= length(i_dst) AND
+    np.number_max_length >= length(i_dst)
+  order by length(prefix_range(np.prefix)) desc
   limit 1;
 
   return v_ret;
@@ -18031,8 +18034,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -19202,8 +19205,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -20309,8 +20312,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id ) > 0
         order by
           yeti_ext.tag_compare(routing_tag_ids, v_call_tags, routing_tag_mode_id) desc,
-          length(prefix_range(v_ret.src_prefix_routing)) desc,
-          length(prefix_range(v_ret.dst_prefix_routing)) desc,
+          length(prefix_range(src_prefix)) desc,
+          length(prefix_range(dst_prefix)) desc,
           src_area_id is null,
           dst_area_id is null
         limit 1;
@@ -29787,8 +29790,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -29868,6 +29870,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210415123322'),
 ('20210605094810'),
 ('20210606143950'),
-('20210630120418');
+('20210630120418'),
+('20210825190138');
 
 
