@@ -156,4 +156,73 @@ RSpec.describe 'Filter dialpeer records', :js do
       end
     end
   end
+
+  describe 'filter by initial rate' do
+    let!(:dialpeer_one) { create :dialpeer, initial_rate: 1 }
+    let!(:dialpeer_two) { create :dialpeer, initial_rate: 2 }
+    let!(:dialpeer_three) { create :dialpeer, initial_rate: 3 }
+
+    let(:filter_records) do
+      within_filters do
+        fill_in 'Initial rate', with: initial_rate_value
+        expect(page).to have_field('Initial rate', with: initial_rate_value)
+      end
+    end
+
+    let(:initial_rate_value) { 1 }
+
+    it 'should be return one dialpeer' do
+      subject
+
+      expect(page).to have_table
+      expect(page).to have_table_row count: 1
+      expect(page).to have_table_cell column: 'Id', text: dialpeer_one.id
+    end
+  end
+
+  describe 'filter by next rate' do
+    let!(:dialpeer_one) { create :dialpeer, next_rate: 1 }
+    let!(:dialpeer_two) { create :dialpeer, next_rate: 2 }
+    let!(:dialpeer_three) { create :dialpeer, next_rate: 3 }
+
+    let(:filter_records) do
+      within_filters do
+        fill_in 'Next rate', with: next_rate_value
+        expect(page).to have_field('Next rate', with: next_rate_value)
+      end
+    end
+
+    let(:next_rate_value) { 1 }
+
+    it 'should be return one dialpeer' do
+      subject
+
+      expect(page).to have_table
+      expect(page).to have_table_row count: 1
+      expect(page).to have_table_cell column: 'Id', text: dialpeer_one.id
+    end
+  end
+
+  describe 'filter by connect fee' do
+    let!(:dialpeer_one) { create :dialpeer, connect_fee: 1 }
+    let!(:dialpeer_two) { create :dialpeer, connect_fee: 2 }
+    let!(:dialpeer_three) { create :dialpeer, connect_fee: 3 }
+
+    let(:filter_records) do
+      within_filters do
+        fill_in 'Connect fee', with: connect_fee_value
+        expect(page).to have_field('Connect fee', with: connect_fee_value)
+      end
+    end
+
+    let(:connect_fee_value) { 1 }
+
+    it 'should be return one dialpeer' do
+      subject
+
+      expect(page).to have_table
+      expect(page).to have_table_row count: 1
+      expect(page).to have_table_cell column: 'Id', text: dialpeer_one.id
+    end
+  end
 end

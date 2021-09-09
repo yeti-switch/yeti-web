@@ -199,6 +199,10 @@ ActiveAdmin.register Dialpeer do
   filter :external_id
   filter :exclusive_route, as: :select, collection: [['Yes', true], ['No', false]]
 
+  filter :initial_rate
+  filter :next_rate
+  filter :connect_fee
+
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
   form do |f|
