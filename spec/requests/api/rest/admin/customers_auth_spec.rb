@@ -20,6 +20,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
       end
     end
 
+    it_behaves_like :json_api_admin_check_authorization
+
     context 'with filter by customer.id' do
       let!(:customer) { create(:customer) }
       let!(:other_customer) { create(:customer) }

@@ -15,4 +15,17 @@ class Api::Rest::Admin::AuthController < Knock::AuthTokenController
     error = JSONAPI::Exceptions::AuthenticationFailed.new
     render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
   end
+
+  def ip_not_allowed
+    error = JSONAPI::Exceptions::AuthenticationFailed.new(
+      detail: 'Your IP address is not allowed.'
+    )
+    render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
+  end
+
+  def authenticate
+    super
+
+    ip_not_allowed unless entity.ip_allowed?(request.remote_ip)
+  end
 end

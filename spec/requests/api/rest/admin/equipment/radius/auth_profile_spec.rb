@@ -3,7 +3,7 @@
 RSpec.describe Api::Rest::Admin::Equipment::Radius::AuthProfilesController, type: :request do
   include_context :json_api_admin_helpers, type: :'auth-profiles', prefix: 'equipment/radius'
 
-  describe 'GET /api/rest/admin/equipment/auth-profiles' do
+  describe 'GET /api/rest/admin/equipment/radius/auth-profiles' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
@@ -18,5 +18,7 @@ RSpec.describe Api::Rest::Admin::Equipment::Radius::AuthProfilesController, type
         auth_profiles.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end

@@ -62,6 +62,8 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
 
     include_examples :responds_with_status, 200
     include_examples :jsonapi_responds_with_pagination_links
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'GET /api/rest/admin/equipment/sip-options-probers/:id' do
@@ -74,6 +76,8 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
     let(:request_params) { nil }
     let!(:sip_options_prober) { create(:sip_options_prober, sip_options_prober_attrs) }
     let(:sip_options_prober_attrs) { { pop: pops[0], node: nodes[0] } }
+
+    it_behaves_like :json_api_admin_check_authorization
 
     context 'without query' do
       it 'does not have relationships data' do
@@ -172,6 +176,8 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
     end
     let(:json_api_request_relationships) { {} }
     let(:sip_options_prober) { Equipment::SipOptionsProber.last! }
+
+    it_behaves_like :json_api_admin_check_authorization, status: 201
 
     context 'with only required fields' do
       it 'creates sip options prober' do
@@ -286,6 +292,8 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
 
       include_examples :responds_with_status, 200
       include_examples :responds_jsonapi_sip_options_prober
+
+      it_behaves_like :json_api_admin_check_authorization
     end
 
     context 'when update external id to exist external id' do
@@ -329,5 +337,7 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
     end
 
     include_examples :responds_with_status, 204, without_body: true
+
+    it_behaves_like :json_api_admin_check_authorization, status: 204
   end
 end

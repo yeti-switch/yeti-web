@@ -137,6 +137,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
       end
     end
 
+    it_behaves_like :json_api_admin_check_authorization, status: 201
+
     context 'with only required attributes' do
       include_examples :creates_cdr_export
       include_examples :returns_json_api_record, relationships: [], status: 201 do
@@ -299,5 +301,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
     end
 
     include_examples :responds_with_status, 204, without_body: true
+
+    it_behaves_like :json_api_admin_check_authorization, status: 204
   end
 end

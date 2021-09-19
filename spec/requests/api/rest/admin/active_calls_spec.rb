@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
+RSpec.describe Api::Rest::Admin::ActiveCallsController, type: :request do
   include_context :json_api_admin_helpers, type: :'active-calls'
   let!(:node) { FactoryBot.create(:node) }
 
@@ -11,11 +11,22 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
 
     let(:json_api_request_params) { nil }
 
-    before do
+    let!(:stub_jrpc_req) do
       cdrs_filter_stub = instance_double(Yeti::CdrsFilter)
       expect(Yeti::CdrsFilter).to receive(:new).with(Node.all, {}).and_return(cdrs_filter_stub)
       expect(cdrs_filter_stub).to receive(:search).with(only: nil, empty_on_error: true)
                                                   .and_return(active_calls.map(&:stringify_keys))
+    end
+
+    it_behaves_like :json_api_admin_check_authorization do
+      let!(:stub_jrpc_req) { nil }
+      let(:when_valid_auth) do
+        cdrs_filter_stub = instance_double(Yeti::CdrsFilter)
+        expect(Yeti::CdrsFilter).to receive(:new).with(Node.all, {}).and_return(cdrs_filter_stub)
+        active_calls = [FactoryBot.attributes_for(:active_call, :filled, node_id: node.id)]
+        expect(cdrs_filter_stub).to receive(:search).with(only: nil, empty_on_error: true)
+                                                    .and_return(active_calls.map(&:stringify_keys))
+      end
     end
 
     context 'with 2 calls' do
@@ -134,7 +145,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:record_id) { "#{node.id}*#{local_tag}" }
     let(:local_tag) { active_call[:local_tag] }
 
-    before do
+    let!(:stub_jrpc_req) do
       stub_jrpc_connect(node.rpc_endpoint)
       expect_any_instance_of(NodeApi).to receive(:calls).with(local_tag).once.and_return(active_call)
     end
@@ -145,6 +156,14 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       customer vendor customer-acc vendor-acc customer-auth destination dialpeer
       orig-gw term-gw routing-group rateplan destination-rate-policy node
     ]
+
+    it_behaves_like :json_api_admin_check_authorization do
+      let!(:stub_jrpc_req) { nil }
+      let(:when_valid_auth) do
+        stub_jrpc_connect(node.rpc_endpoint)
+        expect_any_instance_of(NodeApi).to receive(:calls).with(local_tag).once.and_return(active_call)
+      end
+    end
 
     context 'without includes' do
       include_examples :responds_with_status, 200

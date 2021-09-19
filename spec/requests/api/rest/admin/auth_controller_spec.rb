@@ -10,7 +10,10 @@ RSpec.describe Api::Rest::Admin::AuthController do
   end
   let(:json_request_body) { { auth: attributes } }
 
-  let!(:admin) { create :admin_user, username: 'test-admin', password: 'password' }
+  let!(:admin) { create(:admin_user, admin_attrs) }
+  let(:admin_attrs) do
+    { username: 'test-admin', password: 'password' }
+  end
 
   describe 'POST create' do
     subject do
@@ -18,7 +21,12 @@ RSpec.describe Api::Rest::Admin::AuthController do
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { username: 'test-admin', password: 'password' } }
+      let(:attributes) do
+        {
+          username: admin_attrs[:username],
+          password: admin_attrs[:password]
+        }
+      end
 
       context 'ldap' do
         before do
@@ -29,6 +37,37 @@ RSpec.describe Api::Rest::Admin::AuthController do
           subject
           expect(response.status).to eq(201)
           expect(response_json).to match(jwt: a_kind_of(String))
+        end
+
+        context 'when admin.allowed_ips does not match request.remote_ip' do
+          let(:admin_attrs) do
+            super().merge allowed_ips: ['127.0.0.1']
+          end
+
+          it 'responds successfully' do
+            subject
+            expect(response.status).to eq(201)
+            expect(response_json).to match(jwt: a_kind_of(String))
+          end
+        end
+
+        context 'when admin.allowed_ips does not match request.remote_ip' do
+          let(:admin_attrs) do
+            super().merge allowed_ips: ['10.1.2.3']
+          end
+
+          it 'responds with failed login', :aggregate_failures do
+            subject
+            expect(response.status).to eq(401)
+            expect(response_json).to match(
+                                       errors: [
+                                         title: 'Authentication failed',
+                                         detail: 'Your IP address is not allowed.',
+                                         code: '401',
+                                         status: '401'
+                                       ]
+                                     )
+          end
         end
       end
 

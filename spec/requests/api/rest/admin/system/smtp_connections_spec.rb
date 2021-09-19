@@ -18,5 +18,7 @@ RSpec.describe Api::Rest::Admin::System::SmtpConnectionsController, type: :reque
         smtp_connections.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end
