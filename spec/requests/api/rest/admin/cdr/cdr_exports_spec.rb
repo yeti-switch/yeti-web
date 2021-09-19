@@ -43,6 +43,50 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
     end
   end
 
+  describe 'GET /api/rest/admin/cdr/cdr-exports/:id/download' do
+    subject do
+      get json_api_request_path, params: nil, headers: { 'Authorization' => json_api_auth_token }
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}/download" }
+    let(:record_id) { cdr_export.id.to_s }
+
+    let!(:cdr_export) { create(:cdr_export, :completed) }
+
+    it 'responds with X-Accel-Redirect' do
+      subject
+      expect(response.status).to eq 200
+      expect(response.body).to be_blank
+      expect(response.headers['X-Accel-Redirect']).to eq "/x-redirect/cdr_export/#{cdr_export.id}.csv.gz"
+      expect(response.headers['Content-Type']).to eq 'text/csv; charset=utf-8'
+      expect(response.headers['Content-Disposition']).to eq "attachment; filename=\"#{cdr_export.id}.csv.gz\""
+    end
+
+    context 'when cdr_export is pending' do
+      let!(:cdr_export) { create(:cdr_export) }
+
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq 404
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+
+    context 'when cdr_export is deleted' do
+      let!(:cdr_export) { create(:cdr_export, :deleted) }
+
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq 404
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+  end
+
   describe 'POST /api/rest/admin/cdr/cdr-exports' do
     subject do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
