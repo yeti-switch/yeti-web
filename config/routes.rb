@@ -92,7 +92,7 @@ Rails.application.routes.draw do
             end
             jsonapi_resources :auth_logs, only: %i[index show] do
             end
-            jsonapi_resources :cdr_exports, only: %i[create destroy]
+            jsonapi_resources :cdr_exports, only: %i[index show create destroy]
           end
 
           namespace :billing do
