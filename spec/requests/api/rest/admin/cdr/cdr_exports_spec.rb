@@ -1,7 +1,91 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
+RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
   include_context :json_api_admin_helpers, prefix: 'cdr', type: 'cdr-exports'
+
+  describe 'GET /api/rest/admin/cdr/cdr-exports' do
+    subject do
+      get json_api_request_path, params: nil, headers: json_api_request_headers
+    end
+
+    let!(:cdr_exports) { create_list(:cdr_export, 3) }
+
+    include_examples :jsonapi_responds_with_pagination_links
+    include_examples :returns_json_api_collection do
+      let(:json_api_collection_ids) do
+        cdr_exports.map { |r| r.id.to_s }
+      end
+    end
+  end
+
+  describe 'GET /api/rest/admin/cdr/cdr-exports/:id' do
+    subject do
+      get json_api_request_path, params: nil, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { cdr_export.id.to_s }
+
+    let!(:cdr_export) { create(:cdr_export, callback_url: 'https://api.rubyonrails.org') }
+
+    include_examples :returns_json_api_record, relationships: [] do
+      let(:json_api_record_id) { record_id }
+      let(:json_api_record_attributes) do
+        {
+          'callback-url': cdr_export.callback_url,
+          'created-at': cdr_export.created_at.iso8601(3),
+          'export-type': cdr_export.export_type,
+          status: cdr_export.status,
+          fields: cdr_export.fields,
+          filters: cdr_export.filters.as_json.symbolize_keys
+        }
+      end
+    end
+  end
+
+  describe 'GET /api/rest/admin/cdr/cdr-exports/:id/download' do
+    subject do
+      get json_api_request_path, params: nil, headers: { 'Authorization' => json_api_auth_token }
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}/download" }
+    let(:record_id) { cdr_export.id.to_s }
+
+    let!(:cdr_export) { create(:cdr_export, :completed) }
+
+    it 'responds with X-Accel-Redirect' do
+      subject
+      expect(response.status).to eq 200
+      expect(response.body).to be_blank
+      expect(response.headers['X-Accel-Redirect']).to eq "/x-redirect/cdr_export/#{cdr_export.id}.csv.gz"
+      expect(response.headers['Content-Type']).to eq 'text/csv; charset=utf-8'
+      expect(response.headers['Content-Disposition']).to eq "attachment; filename=\"#{cdr_export.id}.csv.gz\""
+    end
+
+    context 'when cdr_export is pending' do
+      let!(:cdr_export) { create(:cdr_export) }
+
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq 404
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+
+    context 'when cdr_export is deleted' do
+      let!(:cdr_export) { create(:cdr_export, :deleted) }
+
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq 404
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+  end
 
   describe 'POST /api/rest/admin/cdr/cdr-exports' do
     subject do
@@ -45,6 +129,11 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
         expect(last_record).to have_attributes(expected_cdr_export_attrs)
         filters = last_record.filters.as_json.symbolize_keys
         expect(filters).to match(expected_cdr_export_filters)
+      end
+
+      it 'enqueues Worker::CdrExportJob' do
+        subject
+        expect(Worker::CdrExportJob).to have_been_enqueued.with(last_record.id)
       end
     end
 
@@ -137,6 +226,54 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
         end
       end
     end
+
+    context 'with not supported filters' do
+      let(:json_api_request_attributes) do
+        super().deep_merge filters: { 'unknown-filter' => '123' }
+      end
+
+      include_examples :returns_json_api_errors, errors: [
+        detail: 'filters - unknown-filter not allowed'
+      ]
+    end
+
+    context 'with not supported fields' do
+      let(:json_api_request_attributes) do
+        super().merge fields: ['unknown_field']
+      end
+
+      include_examples :returns_json_api_errors, errors: [
+        detail: 'fields - unknown_field not allowed'
+      ]
+    end
+
+    context 'with invalid filter value for dst_country_iso_eq' do
+      let(:json_api_request_attributes) do
+        super().merge filters: {
+          'time_start_gteq' => '2018-01-01',
+          'time_start_lteq' => '2018-03-01',
+          'dst_country_iso_eq' => 'invalid'
+        }
+      end
+
+      include_examples :returns_json_api_errors, status: 400, errors: [
+        detail: 'invalid is not a valid value for dst_country_iso_eq.'
+      ]
+    end
+
+    context 'with invalid filter value for src_country_iso_eq' do
+      let(:json_api_request_attributes) do
+        super().merge filters: {
+          'time_start_gteq' => '2018-01-01',
+          'time_start_lteq' => '2018-03-01',
+          'src_country_iso_eq' => 'invalid'
+        }
+      end
+
+      include_examples :returns_json_api_errors, status: 400, errors: [
+        detail: 'invalid is not a valid value for src_country_iso_eq.'
+      ]
+    end
   end
 
   describe 'DELETE /api/rest/admin/cdr/cdr-exports/:id' do
@@ -154,6 +291,11 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
       expect(cdr_export.reload).to have_attributes(
                                      status: CdrExport::STATUS_DELETED
                                    )
+    end
+
+    it 'enqueues Worker::RemoveCdrExportFileJob' do
+      subject
+      expect(Worker::RemoveCdrExportFileJob).to have_been_enqueued.with(cdr_export.id)
     end
 
     include_examples :responds_with_status, 204, without_body: true
