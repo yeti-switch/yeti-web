@@ -7,6 +7,9 @@ class IpAuthOffloading < ActiveRecord::Migration[6.1]
         alter attribute aleg_rtp_acl type inet[],
         alter attribute bleg_rtp_acl type inet[];
 
+      update switch20.switch_interface_out set type = 'inet[]' where name in('aleg_sip_acl', 'aleg_rtp_acl', 'bleg_sip_acl', 'bleg_rtp_acl');
+
+
 CREATE or replace FUNCTION switch20.load_trusted_lb() RETURNS TABLE(
   id smallint,
   name varchar,
@@ -1248,6 +1251,8 @@ $_$;
       alter type switch20.callprofile_ty
         alter attribute aleg_rtp_acl type varchar[],
         alter attribute bleg_rtp_acl type varchar[];
+
+      update switch20.switch_interface_out set type = 'varchar' where name in('aleg_sip_acl', 'aleg_rtp_acl', 'bleg_sip_acl', 'bleg_rtp_acl');
 
       drop function switch20.load_ip_auth( i_pop_id integer,  i_node_id integer);
       drop FUNCTION switch20.load_trusted_lb();

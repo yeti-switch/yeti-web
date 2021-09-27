@@ -261,10 +261,10 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1027, 'bleg_protocol_priority_id', 'smallint', false, 1069, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1028, 'aleg_media_encryption_mode_id', 'smallint', false, 1070, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1029, 'bleg_media_encryption_mode_id', 'smallint', false, 1071, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1030, 'aleg_sip_acl', 'varchar[]', false, 1072, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1031, 'aleg_rtp_acl', 'varchar[]', false, 1073, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1032, 'bleg_sip_acl', 'varchar[]', false, 1074, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1033, 'bleg_rtp_acl', 'varchar[]', false, 1075, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1030, 'aleg_sip_acl', 'inet[]', false, 1072, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1031, 'aleg_rtp_acl', 'inet[]', false, 1073, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1032, 'bleg_sip_acl', 'inet[]', false, 1074, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1033, 'bleg_rtp_acl', 'inet[]', false, 1075, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1034, 'registered_aor_id', 'integer', false, 1076, false);
 
 
