@@ -3,6 +3,9 @@ class IpAuthOffloading < ActiveRecord::Migration[6.1]
     execute %q{
 
       alter table class4.gateways add rtp_acl inet[];
+      alter type switch20.callprofile_ty
+        alter attribute aleg_rtp_acl type inet[],
+        alter attribute bleg_rtp_acl type inet[];
 
 CREATE or replace FUNCTION switch20.load_trusted_lb() RETURNS TABLE(
   id smallint,
@@ -614,8 +617,8 @@ BEGIN
     end if;
   end if;
 
-  i_profile.aleg_rtp_acl = i_customer_gw.rtp_acl::varchar[];
-  i_profile.bleg_rtp_acl = i_vendor_gw.rtp_acl::varchar[];
+  i_profile.aleg_rtp_acl = i_customer_gw.rtp_acl;
+  i_profile.bleg_rtp_acl = i_vendor_gw.rtp_acl;
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
   i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
@@ -1242,6 +1245,10 @@ $_$;
     set search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
       alter table class4.gateways DROP COLUMN rtp_acl;
+      alter type switch20.callprofile_ty
+        alter attribute aleg_rtp_acl type varchar[],
+        alter attribute bleg_rtp_acl type varchar[];
+
       drop function switch20.load_ip_auth( i_pop_id integer,  i_node_id integer);
       drop FUNCTION switch20.load_trusted_lb();
 }
