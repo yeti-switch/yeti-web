@@ -70,8 +70,8 @@ ActiveAdmin.register AdminUser do
       unless AdminUser.ldap?
         f.input :email
         f.input :username
-        f.input :password
-        f.input :password_confirmation
+        f.input :password, input_html: { autocomplete: 'new-password' }
+        f.input :password_confirmation, input_html: { autocomplete: 'new-password' }
         f.input :roles,
                 as: :select,
                 collection: AdminUser.available_roles,
