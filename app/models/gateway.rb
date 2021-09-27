@@ -56,6 +56,7 @@
 #  relay_update                     :boolean          default(FALSE), not null
 #  resolve_ruri                     :boolean          default(FALSE), not null
 #  ringing_timeout                  :integer(4)
+#  rtp_acl                          :inet             is an Array
 #  rtp_force_relay_cn               :boolean          default(TRUE), not null
 #  rtp_interface_name               :string
 #  rtp_ping                         :boolean          default(FALSE), not null
@@ -242,6 +243,9 @@ class Gateway < ApplicationRecord
     only_integer: true
   }
 
+  validates :rtp_acl, array_format: { without: /\s/, message: 'spaces are not allowed', allow_nil: true }, array_uniqueness: { allow_nil: true }
+  validate :validate_rtp_acl
+
   include Yeti::ResourceStatus
 
   scope :locked, -> { where locked: true }
@@ -262,6 +266,8 @@ class Gateway < ApplicationRecord
     self.auth_from_domain = nil if auth_from_domain.blank?
   end
 
+  before_validation :ensure_rtp_acl_format
+
   include PgEvent
   has_pg_queue 'gateway-sync'
 
@@ -279,6 +285,11 @@ class Gateway < ApplicationRecord
     else
       self[:transit_headers_from_termination] = s.split(',').uniq.reject(&:blank?).join(',')
     end
+  end
+
+  def rtp_acl=(value)
+    value = value.split(',').map(&:strip).reject(&:blank?) if value.is_a? String
+    self[:rtp_acl] = value
   end
 
   def display_name
@@ -356,6 +367,19 @@ class Gateway < ApplicationRecord
   include Yeti::IncomingAuthReloader
 
   private
+
+  def validate_rtp_acl
+    return unless rtp_acl.is_a?(Array)
+    rtp_acl.each do |raw_ip|
+      IPAddr.new(raw_ip)
+    end
+  rescue IPAddr::Error => _e
+    errors.add(:rtp_acl, :invalid)
+  end
+
+  def ensure_rtp_acl_format
+    self.rtp_acl = nil if rtp_acl.blank?
+  end
 
   # @see Yeti::IncomingAuthReloader
   def reload_incoming_auth_on_create?

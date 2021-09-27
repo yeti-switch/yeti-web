@@ -475,6 +475,7 @@ ActiveAdmin.register Gateway do
           f.input :force_one_way_early_media
           f.input :rtp_interface_name
           f.input :media_encryption_mode, as: :select, include_blank: false
+          f.input :rtp_acl, as: :array_of_strings
         end
       end
       tab :dtmf do
@@ -645,6 +646,7 @@ ActiveAdmin.register Gateway do
           row :force_one_way_early_media
           row :rtp_interface_name
           row :media_encryption_mode
+          row :rtp_acl
         end
       end
       tab :dtmf do

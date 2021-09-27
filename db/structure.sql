@@ -970,9 +970,9 @@ CREATE TYPE switch20.callprofile_ty AS (
 	aleg_media_encryption_mode_id smallint,
 	bleg_media_encryption_mode_id smallint,
 	aleg_sip_acl character varying[],
-	aleg_rtp_acl character varying[],
+	aleg_rtp_acl inet[],
 	bleg_sip_acl character varying[],
-	bleg_rtp_acl character varying[],
+	bleg_rtp_acl inet[],
 	registered_aor_id integer,
 	customer_id integer,
 	vendor_id integer,
@@ -2918,7 +2918,8 @@ CREATE TABLE class4.gateways (
     termination_src_numberlist_id smallint,
     termination_dst_numberlist_id smallint,
     lua_script_id smallint,
-    use_registered_aor boolean DEFAULT false NOT NULL
+    use_registered_aor boolean DEFAULT false NOT NULL,
+    rtp_acl inet[]
 );
 
 
@@ -14886,6 +14887,31 @@ $$;
 
 
 --
+-- Name: load_ip_auth(integer, integer); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_ip_auth(i_pop_id integer, i_node_id integer) RETURNS TABLE(ip inet, x_yeti_auth character varying, require_incoming_auth boolean, require_identity_parsing boolean)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    ca.ip,
+    ca.x_yeti_auth,
+    /** all records for this ip with require_incoming_auth **/
+    count(nullif(ca.require_incoming_auth,false)) = count(*) as require_incoming_auth,
+    true as require_identity_parsing
+  FROM class4.customers_auth_normalized ca
+  WHERE
+    ca.enabled
+  GROUP BY
+    ca.ip,
+    ca.x_yeti_auth;
+END;
+$$;
+
+
+--
 -- Name: load_radius_accounting_profiles(); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
@@ -15109,6 +15135,24 @@ CREATE FUNCTION switch20.load_stir_shaken_trusted_repositories() RETURNS SETOF c
 
 BEGIN
   RETURN QUERY SELECT * from class4.stir_shaken_trusted_repositories order by id;
+END;
+$$;
+
+
+--
+-- Name: load_trusted_lb(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.load_trusted_lb() RETURNS TABLE(id smallint, name character varying, signalling_ip character varying)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    lb.id,
+    lb.name,
+    lb.signalling_ip
+  FROM sys.load_balancers lb;
 END;
 $$;
 
@@ -16283,6 +16327,8 @@ BEGIN
     end if;
   end if;
 
+  i_profile.aleg_rtp_acl = i_customer_gw.rtp_acl;
+  i_profile.bleg_rtp_acl = i_vendor_gw.rtp_acl;
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
   i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
@@ -16875,6 +16921,8 @@ BEGIN
     end if;
   end if;
 
+  i_profile.aleg_rtp_acl = i_customer_gw.rtp_acl;
+  i_profile.bleg_rtp_acl = i_vendor_gw.rtp_acl;
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
   i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
@@ -17420,6 +17468,8 @@ BEGIN
     end if;
   end if;
 
+  i_profile.aleg_rtp_acl = i_customer_gw.rtp_acl;
+  i_profile.bleg_rtp_acl = i_vendor_gw.rtp_acl;
 
   i_profile.rtprelay_force_dtmf_relay=i_vendor_gw.force_dtmf_relay;
   i_profile.rtprelay_dtmf_detection=NOT i_vendor_gw.force_dtmf_relay;
@@ -29803,8 +29853,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -29886,6 +29935,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210606143950'),
 ('20210630120418'),
 ('20210825190138'),
+('20210909143022'),
 ('20210919130327'),
 ('20211002164333');
 
