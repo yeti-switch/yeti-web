@@ -370,6 +370,7 @@ class Gateway < ApplicationRecord
 
   def validate_rtp_acl
     return unless rtp_acl.is_a?(Array)
+
     rtp_acl.each do |raw_ip|
       IPAddr.new(raw_ip)
     end
