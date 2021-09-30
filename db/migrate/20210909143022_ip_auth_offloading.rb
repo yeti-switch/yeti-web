@@ -20,10 +20,10 @@ LANGUAGE plpgsql COST 10 ROWS 100
 BEGIN
   RETURN QUERY
   SELECT
-    id,
-    name,
-    signalling_ip
-  FROM sys.load_balancers;
+    lb.id,
+    lb.name,
+    lb.signalling_ip
+  FROM sys.load_balancers lb;
 END;
 $$;
 
@@ -44,7 +44,7 @@ BEGIN
     ca.ip,
     ca.x_yeti_auth,
     /** all records for this ip with require_incoming_auth **/
-    count(nullif(require_incoming_auth,false)) = count(*) as require_incoming_auth,
+    count(nullif(ca.require_incoming_auth,false)) = count(*) as require_incoming_auth,
     true as require_identity_parsing
   FROM class4.customers_auth_normalized ca
   WHERE
