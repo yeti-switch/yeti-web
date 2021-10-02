@@ -20,5 +20,7 @@ RSpec.describe Api::Rest::Admin::Cdr::AuthLogsController, type: :request do
         auth_logs.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end

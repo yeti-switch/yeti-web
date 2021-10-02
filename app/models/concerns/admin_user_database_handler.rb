@@ -4,7 +4,7 @@ module AdminUserDatabaseHandler
   extend ActiveSupport::Concern
 
   included do
-    devise :database_authenticatable, :trackable, :validatable
+    devise :database_authenticatable, :trackable, :validatable, :ip_allowable
     alias_method :authenticate, :valid_password?
 
     before_validation do

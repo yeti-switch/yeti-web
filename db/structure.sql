@@ -24275,7 +24275,8 @@ CREATE TABLE gui.admin_users (
     visible_columns json DEFAULT '{}'::json NOT NULL,
     per_page json DEFAULT '{}'::json NOT NULL,
     saved_filters json DEFAULT '{}'::json NOT NULL,
-    roles character varying[] NOT NULL
+    roles character varying[] NOT NULL,
+    allowed_ips inet[]
 );
 
 
@@ -29790,7 +29791,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -29871,6 +29873,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210605094810'),
 ('20210606143950'),
 ('20210630120418'),
-('20210825190138');
+('20210825190138'),
+('20210919130327');
 
 

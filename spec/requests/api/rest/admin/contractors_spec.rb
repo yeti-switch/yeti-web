@@ -20,6 +20,8 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :request do
       end
     end
 
+    it_behaves_like :json_api_admin_check_authorization
+
     context 'with filter by smtp_connection.id' do
       let!(:smtp_connection) { create(:smtp_connection) }
       let!(:other_smtp_connection) { create(:smtp_connection) }

@@ -19,5 +19,7 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :request do
         routing_groups.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end

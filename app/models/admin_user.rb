@@ -5,6 +5,7 @@
 # Table name: admin_users
 #
 #  id                     :integer(4)       not null, primary key
+#  allowed_ips            :inet             is an Array
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
 #  enabled                :boolean          default(TRUE)
@@ -44,6 +45,14 @@ class AdminUser < ApplicationRecord
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email? }
   validates :roles, presence: true
 
+  before_validation :ensure_allowed_ips_format
+
+  validates :allowed_ips,
+            array_format: { without: /\s/, message: 'spaces are not allowed', allow_nil: true },
+            array_uniqueness: { allow_nil: true }
+
+  validate :validate_allowed_ips
+
   after_save do
     contact = billing_contact || build_billing_contact
     contact.update!(email: email) if @email
@@ -78,6 +87,11 @@ class AdminUser < ApplicationRecord
     include AdminUserLdapHandler
   else
     include AdminUserDatabaseHandler
+  end
+
+  def allowed_ips=(value)
+    value = value.split(',').map(&:strip).reject(&:blank?) if value.is_a? String
+    self[:allowed_ips] = value
   end
 
   def email
@@ -134,12 +148,26 @@ class AdminUser < ApplicationRecord
     false
   end
 
-  protected
+  private
 
   def check_if_last
     if self.class.count.zero?
       errors.add(:base, "Last admin user can't  be deleted")
       throw(:abort)
     end
+  end
+
+  def validate_allowed_ips
+    return unless allowed_ips.is_a?(Array)
+
+    allowed_ips.each do |raw_ip|
+      IPAddr.new(raw_ip)
+    end
+  rescue IPAddr::Error => _e
+    errors.add(:allowed_ips, :invalid)
+  end
+
+  def ensure_allowed_ips_format
+    self.allowed_ips = nil if allowed_ips.blank?
   end
 end

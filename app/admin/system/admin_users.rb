@@ -31,6 +31,7 @@ ActiveAdmin.register AdminUser do
     column :last_sign_in_at
     column :sign_in_count
     column :ssh_key, :ssh_key_tag
+    column :allowed_ips, :has_allowed_ips
   end
 
   show do
@@ -38,6 +39,7 @@ ActiveAdmin.register AdminUser do
       row :id
       row :username
       row :email
+      row :allowed_ips
       row :sign_in_count
       row :current_sign_in_at
       row :last_sign_in_at
@@ -55,12 +57,13 @@ ActiveAdmin.register AdminUser do
   end
 
   permit_params do
-    attrs = %i[ssh_key stateful_filters]
+    attrs = %i[ssh_key stateful_filters allowed_ips]
+    attrs_last = { allowed_ips: [] }
     unless AdminUser.ldap?
       attrs.concat %i[username email password password_confirmation]
-      attrs.push(roles: [])
+      attrs_last[:roles] = []
     end
-    attrs
+    attrs + [attrs_last]
   end
 
   # unless AdminUser.ldap?
@@ -79,6 +82,7 @@ ActiveAdmin.register AdminUser do
       end
       f.input :ssh_key
       f.input :stateful_filters
+      f.input :allowed_ips, as: :array_of_strings
     end
     f.actions
   end

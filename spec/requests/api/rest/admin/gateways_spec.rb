@@ -45,6 +45,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       end
     end
 
+    it_behaves_like :json_api_admin_check_authorization
+
     context 'with filter by contractor.id' do
       let!(:contractor) { create(:vendor) }
       let!(:other_contractor) { create(:vendor) }
@@ -546,6 +548,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       let(:json_api_record_id) { record_id }
       let(:json_api_record_attributes) { gateway_response_attributes }
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'POST /api/rest/admin/gateways' do
@@ -623,6 +627,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         hash_including(json_api_request_attributes)
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization, status: 201
 
     it 'creates gateway with correct attributes' do
       expect { subject }.to change { Gateway.count }.by(1)
@@ -712,5 +718,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         hash_including(json_api_request_attributes)
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end

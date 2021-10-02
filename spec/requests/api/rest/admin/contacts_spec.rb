@@ -18,6 +18,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
         contacts.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'GET /api/rest/admin/contacts/{id}' do
@@ -43,6 +45,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
       let(:json_api_record_id) { record_id }
       let(:json_api_record_attributes) { contact_response_attributes }
     end
+
+    it_behaves_like :json_api_admin_check_authorization
 
     context 'with include destination' do
       let(:request_query) { { include: 'contractor' } }
@@ -98,6 +102,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     end
 
     include_examples :changes_records_qty_of, Billing::Contact, by: 1
+
+    it_behaves_like :json_api_admin_check_authorization, status: 201
   end
 
   describe 'PATCH /api/rest/admin/contacts/{id}' do
@@ -120,6 +126,8 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
         hash_including(json_api_request_attributes)
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'DELETE /api/rest/admin/contacts/{id}' do
@@ -135,5 +143,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
 
     include_examples :responds_with_status, 204
     include_examples :changes_records_qty_of, Billing::Contact, by: -1
+
+    it_behaves_like :json_api_admin_check_authorization, status: 204
   end
 end

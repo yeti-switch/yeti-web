@@ -4,7 +4,7 @@ module AdminUserLdapHandler
   extend ActiveSupport::Concern
 
   included do
-    devise :ldap_authenticatable, :trackable
+    devise :ldap_authenticatable, :trackable, :ip_allowable
     before_update :get_ldap_attributes
     before_validation :get_ldap_attributes, on: :create
     include LdapPasswordHelper

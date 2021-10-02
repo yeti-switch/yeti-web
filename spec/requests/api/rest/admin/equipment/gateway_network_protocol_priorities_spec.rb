@@ -18,5 +18,7 @@ RSpec.describe Api::Rest::Admin::Equipment::GatewayNetworkProtocolPrioritiesCont
         gateway_network_protocol_priorities.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end

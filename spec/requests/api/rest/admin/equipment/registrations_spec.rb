@@ -60,6 +60,8 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
 
     include_examples :responds_with_status, 200
     include_examples :jsonapi_responds_with_pagination_links
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'GET /api/rest/admin/equipment/registrations/:id' do
@@ -72,6 +74,8 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
     let(:request_params) { nil }
     let!(:registration) { create(:registration, :filled, registration_attrs) }
     let(:registration_attrs) { {} }
+
+    it_behaves_like :json_api_admin_check_authorization
 
     context 'without query' do
       it 'does not have relationships data' do
@@ -171,6 +175,8 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
     end
     let(:json_api_request_relationships) { {} }
     let(:registration) { Equipment::Registration.last! }
+
+    it_behaves_like :json_api_admin_check_authorization, status: 201
 
     context 'with only required fields' do
       it 'creates registration' do
@@ -293,6 +299,8 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
 
       include_examples :responds_with_status, 200
       include_examples :responds_jsonapi_registration
+
+      it_behaves_like :json_api_admin_check_authorization
     end
 
     context 'when update sip-schema' do
@@ -331,5 +339,7 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
     end
 
     include_examples :responds_with_status, 204, without_body: true
+
+    it_behaves_like :json_api_admin_check_authorization, status: 204
   end
 end

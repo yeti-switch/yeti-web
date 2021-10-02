@@ -3,7 +3,7 @@
 RSpec.describe Api::Rest::Admin::Routing::RateProfitControlModesController, type: :request do
   include_context :json_api_admin_helpers, type: :'rate-profit-control-modes', prefix: 'routing'
 
-  describe 'GET /api/rest/admin/equipment/rate-profit-control-modes' do
+  describe 'GET /api/rest/admin/routing/rate-profit-control-modes' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
@@ -18,5 +18,7 @@ RSpec.describe Api::Rest::Admin::Routing::RateProfitControlModesController, type
         rate_profit_control_modes.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 end

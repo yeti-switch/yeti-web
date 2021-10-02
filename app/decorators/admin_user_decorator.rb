@@ -20,4 +20,18 @@ class AdminUserDecorator < ApplicationDecorator
   def pretty_saved_filters
     h.pre_wrap_json(model.saved_filters)
   end
+
+  def has_allowed_ips
+    if model.allowed_ips.nil?
+      status_tag(:no)
+    else
+      status_tag(:yes)
+    end
+  end
+
+  def pretty_allowed_ips
+    return if model.allowed_ips.nil?
+
+    pre_wrap model.allowed_ips.join("\n")
+  end
 end

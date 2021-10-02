@@ -20,6 +20,8 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationNextRatesController, type: 
         next_rates.map { |r| r.id.to_s }
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'GET /api/rest/admin/routing/destination-next-rates/{id}' do
@@ -50,6 +52,8 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationNextRatesController, type: 
       let(:json_api_record_id) { record_id }
       let(:json_api_record_attributes) { next_rate_response_attributes }
     end
+
+    it_behaves_like :json_api_admin_check_authorization
 
     context 'with include destination' do
       let(:request_query) { { include: 'destination' } }
@@ -118,6 +122,8 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationNextRatesController, type: 
     end
 
     include_examples :changes_records_qty_of, Routing::DestinationNextRate, by: 1
+
+    it_behaves_like :json_api_admin_check_authorization, status: 201
   end
 
   describe 'PATCH /api/rest/admin/routing/destination-next-rates/{id}' do
@@ -141,6 +147,8 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationNextRatesController, type: 
         hash_including(json_api_request_attributes)
       end
     end
+
+    it_behaves_like :json_api_admin_check_authorization
   end
 
   describe 'DELETE /api/rest/admin/routing/destination-next-rates/{id}' do
@@ -157,5 +165,7 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationNextRatesController, type: 
 
     include_examples :responds_with_status, 204
     include_examples :changes_records_qty_of, Routing::DestinationNextRate, by: -1
+
+    it_behaves_like :json_api_admin_check_authorization, status: 204
   end
 end
