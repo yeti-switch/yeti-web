@@ -126,4 +126,18 @@ RSpec.describe BatchUpdateForm::CustomersAuth, :js do
       end
     end
   end
+
+  it 'schedules update successfully' do
+    subject
+    expect(page).to have_flash_message('Batch Update is scheduled', type: :notice)
+    expect(AsyncBatchUpdateJob).to have_been_enqueued.with(
+      'CustomersAuth',
+      'SELECT "class4"."customers_auth".* FROM "class4"."customers_auth"',
+      assign_params,
+      {
+        whodunnit: admin_user.id,
+        controller_info: { ip: '127.0.0.1' }
+      }
+    )
+  end
 end

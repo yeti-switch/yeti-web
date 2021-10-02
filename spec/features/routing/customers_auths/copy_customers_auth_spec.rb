@@ -27,13 +27,14 @@ RSpec.describe 'Copy Customers Auth', type: :feature do
     }
   end
 
-  before do
+  subject do
     visit customers_auth_path(record.id)
     click_link 'Copy'
     find('#page_title', text: 'New Customers Auth') # wait page load
   end
 
   it 'check if every type of attribute cloned as expected' do
+    subject
     within 'form#new_customers_auth' do
       # String
       expect(page).to have_field('Name', with: attrs[:name])
@@ -54,4 +55,6 @@ RSpec.describe 'Copy Customers Auth', type: :feature do
       expect(page).to have_select('Tag action value', selected: [@tag_ua.display_name, @tag_us.display_name])
     end
   end
+
+  include_examples :increments_customers_auth_state_seq
 end

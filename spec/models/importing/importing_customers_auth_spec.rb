@@ -46,6 +46,8 @@ RSpec.describe Importing::CustomersAuth do
         tag_action_value: tags.map(&:id)
       )
     end
+
+    include_examples :increments_customers_auth_state_seq
   end
 
   context 'when tag_action_value_names is NULL' do
@@ -60,6 +62,8 @@ RSpec.describe Importing::CustomersAuth do
         tag_action_value: []
       )
     end
+
+    include_examples :increments_customers_auth_state_seq
   end
 
   it_behaves_like 'after_import_hook when real items match' do
@@ -67,5 +71,7 @@ RSpec.describe Importing::CustomersAuth do
     include_context :init_customers_auth, name: 'SameName'
 
     let(:real_item) { described_class.import_class.last }
+
+    include_examples :increments_customers_auth_state_seq
   end
 end

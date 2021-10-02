@@ -159,6 +159,7 @@ class Importing::CustomersAuth < Importing::Base
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     super
+    CustomersAuth.increment_state_sequence
   end
 
   def self.calc_changed_conditions(orig_table, import_table)

@@ -9,7 +9,7 @@ RSpec.shared_examples :test_unset_tag_action_value do |factory: nil, controller_
     create(factory, tag_action_value: [tag.id])
   end
 
-  before do
+  subject do
     visit "/#{controller_name}/#{record.id}/edit"
 
     within 'li', text: 'Tag action value' do
@@ -19,6 +19,7 @@ RSpec.shared_examples :test_unset_tag_action_value do |factory: nil, controller_
   end
 
   it 'saves empyt array' do
+    subject
     find('body.show') # wait page load
     expect(record.reload.tag_action_value).to be_empty
   end
