@@ -14614,6 +14614,22 @@ $$;
 
 
 --
+-- Name: check_states(); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+    BEGIN
+    RETURN QUERY
+      SELECT
+        currval('class4.customers_auth_state_seq'),
+        currval('class4.customers_auth_state_seq');
+    END;
+    $$;
+
+
+--
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
@@ -29937,6 +29953,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210825190138'),
 ('20210909143022'),
 ('20210919130327'),
-('20211002164333');
+('20211002164333'),
+('20211004152514');
 
 
