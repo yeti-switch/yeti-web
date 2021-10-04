@@ -12,8 +12,8 @@ class AddStateCheck < ActiveRecord::Migration[6.1]
     BEGIN
     RETURN QUERY
       SELECT
-        currval('class4.customers_auth_state_seq'),
-        currval('class4.customers_auth_state_seq');
+        (select last_value from class4.customers_auth_state_seq),
+        (select last_value from class4.customers_auth_state_seq);
     END;
     $$;
     }

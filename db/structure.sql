@@ -14623,8 +14623,8 @@ CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth
     BEGIN
     RETURN QUERY
       SELECT
-        currval('class4.customers_auth_state_seq'),
-        currval('class4.customers_auth_state_seq');
+        (select last_value from class4.customers_auth_state_seq),
+        (select last_value from class4.customers_auth_state_seq);
     END;
     $$;
 
