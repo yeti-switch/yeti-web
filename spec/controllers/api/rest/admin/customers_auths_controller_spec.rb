@@ -60,7 +60,7 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
   end
 
   describe 'POST create' do
-    before do
+    subject do
       post :create, params: {
         data: { type: 'customers-auths',
                 attributes: attributes,
@@ -89,22 +89,29 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
           account: wrap_relationship(:accounts, create(:account).id) }
       end
 
-      it { expect(response.status).to eq(201) }
-      it { expect(CustomersAuth.where(external_id: attributes[:'external-id']).count).to eq(1) }
+      it 'creates customers auth' do
+        subject
+        expect(response.status).to eq(201)
+        expect(CustomersAuth.where(external_id: attributes[:'external-id']).count).to eq(1)
+      end
+
+      include_examples :increments_customers_auth_state_seq
     end
 
     context 'when attributes are invalid' do
       let(:attributes) { {  name: 'name' } }
       let(:relationships) { {} }
 
-      it { expect(response.status).to eq(422) }
-      it { expect(CustomersAuth.count).to eq(0) }
+      it 'does not create customers auth' do
+        subject
+        expect(response.status).to eq(422)
+        expect(CustomersAuth.count).to eq(0)
+      end
     end
   end
 
   describe 'PUT update' do
-    let!(:customers_auth) { create :customers_auth }
-    before do
+    subject do
       put :update, params: {
         id: customers_auth.to_param, data: { type: 'customers-auths',
                                              id: customers_auth.to_param,
@@ -112,28 +119,45 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       }
     end
 
+    let!(:customers_auth) { create :customers_auth }
+
     context 'when attributes are valid' do
       let(:attributes) { { name: 'name', enabled: false } }
 
-      it { expect(response.status).to eq(200) }
-      it { expect(customers_auth.reload.name).to eq('name') }
+      it 'updates customers auth' do
+        subject
+        expect(response.status).to eq(200)
+        expect(customers_auth.reload).to have_attributes(name: 'name')
+      end
+
+      include_examples :increments_customers_auth_state_seq
     end
 
     context 'when attributes are invalid' do
       let(:attributes) { { name: 'name', capacity: 0 } }
 
-      it { expect(response.status).to eq(422) }
-      it { expect(customers_auth.reload.name).to_not eq('name') }
+      it 'does not update customers auth' do
+        subject
+        expect(response.status).to eq(422)
+        expect(customers_auth.reload.name).to_not eq('name')
+      end
     end
   end
 
   describe 'DELETE destroy' do
+    subject do
+      delete :destroy, params: { id: customers_auth.to_param }
+    end
+
     let!(:customers_auth) { create :customers_auth }
 
-    before { delete :destroy, params: { id: customers_auth.to_param } }
+    it 'destroys customers auth' do
+      subject
+      expect(response.status).to eq(204)
+      expect(CustomersAuth.count).to eq(0)
+    end
 
-    it { expect(response.status).to eq(204) }
-    it { expect(CustomersAuth.count).to eq(0) }
+    include_examples :increments_customers_auth_state_seq
   end
 
   describe 'editable tag_action and tag_action_value' do

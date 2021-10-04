@@ -11,13 +11,17 @@ RSpec.describe 'Edit Customers Auth', type: :feature do
       let(:account) { create(:account, contractor: contractor) }
       let(:gateway) { create(:gateway, contractor: contractor) }
 
-      let(:record) do
-        create(:customers_auth,
-               customer: contractor,
-               account: account,
-               gateway: gateway,
-               tag_action_value: [tag.id])
+      let!(:record) do
+        create(
+          :customers_auth,
+          customer: contractor,
+          account: account,
+          gateway: gateway,
+          tag_action_value: [tag.id]
+        )
       end
+
+      include_examples :increments_customers_auth_state_seq
     end
   end
 end

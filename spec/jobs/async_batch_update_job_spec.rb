@@ -125,5 +125,24 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
         end
       end
     end
+
+    context 'with CustomersAuth' do
+      let(:model_class) { 'CustomersAuth' }
+
+      let!(:customer_auths) do
+        create_list(:customers_auth, 3, capacity: 1)
+      end
+
+      let(:changes) { { capacity: 124 } }
+      let(:sql_query) { CustomersAuth.all.to_sql }
+
+      it 'updates successfully' do
+        expect { subject }.to change {
+          CustomersAuth.where(capacity: 124).count
+        }.from(0).to(customer_auths.size)
+      end
+
+      include_examples :increments_customers_auth_state_seq, by: 3
+    end
   end
 end

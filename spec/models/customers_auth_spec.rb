@@ -158,4 +158,63 @@ RSpec.describe CustomersAuth, type: :model do
       end
     end
   end
+
+  describe '.create' do
+    subject do
+      described_class.create(create_params)
+    end
+
+    let(:create_params) do
+      {
+        customer: customer,
+        rateplan: rateplan,
+        routing_plan: routing_plan,
+        gateway: gateway,
+        name: 'some name',
+        account: account
+      }
+    end
+
+    let!(:customer) { create(:customer) }
+    let!(:rateplan) { create(:rateplan) }
+    let!(:routing_plan) { create(:routing_plan) }
+    let!(:gateway) { create(:gateway, contractor: customer) }
+    let!(:account) { create(:account, contractor: customer) }
+
+    include_examples :creates_record
+    include_examples :changes_records_qty_of, described_class, by: 1
+    include_examples :increments_customers_auth_state_seq
+  end
+
+  describe '#update' do
+    subject do
+      record.update(update_params)
+    end
+
+    let(:update_params) do
+      { name: 'new name' }
+    end
+
+    let!(:record) do
+      FactoryBot.create(:customers_auth)
+    end
+
+    include_examples :updates_record
+    include_examples :changes_records_qty_of, described_class, by: 0
+    include_examples :increments_customers_auth_state_seq
+  end
+
+  describe '#destroy' do
+    subject do
+      record.destroy
+    end
+
+    let!(:record) do
+      FactoryBot.create(:customers_auth)
+    end
+
+    include_examples :destroys_record
+    include_examples :changes_records_qty_of, described_class, by: -1
+    include_examples :increments_customers_auth_state_seq
+  end
 end

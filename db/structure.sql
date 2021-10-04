@@ -21836,6 +21836,18 @@ CREATE TABLE class4.customers_auth_src_number_fields (
 
 
 --
+-- Name: customers_auth_state_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.customers_auth_state_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: destination_next_rates; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -29874,6 +29886,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210606143950'),
 ('20210630120418'),
 ('20210825190138'),
-('20210919130327');
+('20210919130327'),
+('20211002164333');
 
 
