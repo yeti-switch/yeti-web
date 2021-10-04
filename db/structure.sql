@@ -14617,14 +14617,16 @@ $$;
 -- Name: check_states(); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint)
+CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
     BEGIN
     RETURN QUERY
       SELECT
+        (select last_value from sys.load_balancers_state_seq),
         (select last_value from class4.customers_auth_state_seq),
-        (select last_value from class4.customers_auth_state_seq);
+        (select last_value from class4.stir_shaken_trusted_certificates_state_seq),
+        (select last_value from class4.stir_shaken_trusted_repositories_state_seq);
     END;
     $$;
 
@@ -23367,6 +23369,18 @@ ALTER SEQUENCE class4.stir_shaken_trusted_certificates_id_seq OWNED BY class4.st
 
 
 --
+-- Name: stir_shaken_trusted_certificates_state_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_trusted_certificates_state_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: stir_shaken_trusted_repositories_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
@@ -23384,6 +23398,18 @@ CREATE SEQUENCE class4.stir_shaken_trusted_repositories_id_seq
 --
 
 ALTER SEQUENCE class4.stir_shaken_trusted_repositories_id_seq OWNED BY class4.stir_shaken_trusted_repositories.id;
+
+
+--
+-- Name: stir_shaken_trusted_repositories_state_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_trusted_repositories_state_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -25657,6 +25683,18 @@ CREATE SEQUENCE sys.load_balancers_id_seq
 --
 
 ALTER SEQUENCE sys.load_balancers_id_seq OWNED BY sys.load_balancers.id;
+
+
+--
+-- Name: load_balancers_state_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.load_balancers_state_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
