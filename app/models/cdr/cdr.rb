@@ -127,6 +127,8 @@
 #  dump_level_id                   :integer(4)       default(0), not null
 #  failed_resource_id              :bigint(8)
 #  failed_resource_type_id         :integer(2)
+#  lega_identity_attestation_id    :integer(2)
+#  lega_identity_verstat_id        :integer(2)
 #  lnp_database_id                 :integer(2)
 #  node_id                         :integer(4)
 #  orig_call_id                    :string

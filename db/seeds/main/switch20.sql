@@ -266,9 +266,8 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1032, 'bleg_sip_acl', 'inet[]', false, 1074, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1033, 'bleg_rtp_acl', 'inet[]', false, 1075, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1034, 'registered_aor_id', 'integer', false, 1076, false);
-
-
-
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1035, 'lega_identity_attestation_id', 'smallint', true, 1974, true);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1036, 'lega_identity_verstat_id', 'smallint', true, 1975, true);
 
 --
 -- TOC entry 4515 (class 0 OID 0)

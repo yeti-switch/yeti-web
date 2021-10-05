@@ -20,7 +20,6 @@ class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   end
 
   def self.state_sequence
-    SqlCaller::Yeti.select_value("SELECT last_value FROM class4.stir_shaken_trusted_certificates_state_seq")
+    SqlCaller::Yeti.select_value('SELECT last_value FROM class4.stir_shaken_trusted_certificates_state_seq')
   end
-
 end

@@ -1044,7 +1044,9 @@ CREATE TYPE switch20.callprofile_ty AS (
 	vendor_acc_external_id bigint,
 	orig_gw_external_id bigint,
 	term_gw_external_id bigint,
-	customer_acc_vat numeric
+	customer_acc_vat numeric,
+	lega_identity_attestation_id smallint,
+	lega_identity_verstat_id smallint
 );
 
 
@@ -29992,6 +29994,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210909143022'),
 ('20210919130327'),
 ('20211002164333'),
-('20211004152514');
+('20211004152514'),
+('20211005184247');
 
 

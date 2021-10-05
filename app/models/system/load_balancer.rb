@@ -30,7 +30,6 @@ class System::LoadBalancer < ApplicationRecord
   end
 
   def self.state_sequence
-    SqlCaller::Yeti.select_value("SELECT last_value FROM sys.load_balancers_state_seq")
+    SqlCaller::Yeti.select_value('SELECT last_value FROM sys.load_balancers_state_seq')
   end
-
 end
