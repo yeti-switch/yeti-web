@@ -21,4 +21,15 @@ class System::LoadBalancer < ApplicationRecord
 
   validates :name, :signalling_ip, presence: true
   validates :name, :signalling_ip, uniqueness: true
+
+  after_save { self.class.increment_state_sequence }
+  after_destroy { self.class.increment_state_sequence }
+
+  def self.increment_state_sequence
+    SqlCaller::Yeti.execute("SELECT nextval('sys.load_balancers_state_seq')")
+  end
+
+  def self.state_sequence
+    SqlCaller::Yeti.select_value('SELECT last_value FROM sys.load_balancers_state_seq')
+  end
 end

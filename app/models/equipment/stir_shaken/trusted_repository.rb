@@ -11,4 +11,15 @@
 #
 class Equipment::StirShaken::TrustedRepository < ApplicationRecord
   self.table_name = 'stir_shaken_trusted_repositories'
+
+  after_save { self.class.increment_state_sequence }
+  after_destroy { self.class.increment_state_sequence }
+
+  def self.increment_state_sequence
+    SqlCaller::Yeti.execute("SELECT nextval('class4.stir_shaken_trusted_repositories_state_seq')")
+  end
+
+  def self.state_sequence
+    SqlCaller::Yeti.select_value('SELECT last_value FROM class4.stir_shaken_trusted_repositories_state_seq')
+  end
 end

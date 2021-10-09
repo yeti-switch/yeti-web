@@ -56,6 +56,7 @@
 #  relay_update                     :boolean          default(FALSE), not null
 #  resolve_ruri                     :boolean          default(FALSE), not null
 #  ringing_timeout                  :integer(4)
+#  rtp_acl                          :inet             is an Array
 #  rtp_force_relay_cn               :boolean          default(TRUE), not null
 #  rtp_interface_name               :string
 #  rtp_ping                         :boolean          default(FALSE), not null
