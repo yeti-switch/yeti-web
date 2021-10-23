@@ -13,6 +13,8 @@ Group=yeti-web
 LimitNOFILE=65536
 LimitCORE=infinity
 
+Environment=RBENV_ROOT=/opt/yeti-web/vendor/rbenv
+Environment=PATH=/opt/yeti-web/vendor/rbenv/shims:/usr/bin:/opt/yeti-web/pgq-processors/vendor/bundler/bin:/bin
 Environment=RAILS_ENV=production
 Environment=RACK_ENV=production
 Environment=RAKE_ENV=production
@@ -21,7 +23,14 @@ Environment=GEM_PATH=/opt/yeti-web/pgq-processors/vendor/bundler
 
 WorkingDirectory=/opt/yeti-web/pgq-processors
 RuntimeDirectory=yeti-cdr-billing
-ExecStart=/usr/bin/ruby /opt/yeti-web/pgq-processors/vendor/bundler/bin/bundle exec rake pgq:worker processor=%i pid_file=/run/yeti-cdr-billing/%i.pid config_file=/opt/yeti-web/config/pgq_processors.yml
+ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
+	/opt/yeti-web/pgq-processors/vendor/bundler/bin/bundle exec \
+	rake \
+	pgq:worker \
+	processor=%i \
+	pid_file=/run/yeti-cdr-billing/%i.pid \
+	config_file=/opt/yeti-web/config/pgq_processors.yml
+
 PIDFile=/run/yeti-cdr-billing/%i.pid
 
 Type=simple

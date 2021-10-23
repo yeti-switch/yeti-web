@@ -8,7 +8,7 @@ jobs:
   gems-caching:
     name: GEMs caching
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web:buster-build
     steps:
       - uses: actions/checkout@v2
       - name: Fetching gems cache
@@ -19,7 +19,8 @@ jobs:
             pgq-processors/vendor
             .bundle
             pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: install gems
         run: make gems-test
       - name: install gems for pgq
@@ -32,12 +33,13 @@ jobs:
             pgq-processors/vendor
             .bundle
             pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
   lint:
     name: Rubocop and bundle audit
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web:buster-build
     needs: gems-caching
     steps:
       - uses: actions/checkout@v2
@@ -49,17 +51,18 @@ jobs:
             pgq-processors/vendor
             .bundle
             pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Rubocop and bundle audit
         run: make lint
 
   pgq-processors:
     name: PqQ processors tests
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web:buster-build
     services:
       db:
-        image: switchyeti/yeti-web:pg13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
 
     needs: gems-caching
     steps:
@@ -72,7 +75,8 @@ jobs:
             pgq-processors/vendor
             .bundle
             pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Run test-pgq-processors
         run: make test-pgq-processors
         env:
@@ -84,10 +88,10 @@ jobs:
   rspec:
     name: Rspec tests
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web:buster-build
     services:
       db:
-        image: switchyeti/yeti-web:pg13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
 
     needs: gems-caching
     strategy:
@@ -111,7 +115,8 @@ jobs:
             pgq-processors/vendor
             .bundle
             pgq-processors/.bundle
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
       - name: Run rspec
         run: make rspec
@@ -143,7 +148,7 @@ jobs:
   finalize-coveralls:
     needs: rspec
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web:buster-build
     steps:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master

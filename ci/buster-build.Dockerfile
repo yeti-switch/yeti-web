@@ -3,45 +3,25 @@ FROM debian:buster
 ENV	DEBIAN_FRONTEND=noninteractive \
 	LANG=C.UTF-8
 
-RUN	apt-get update && \
-	apt-get -y dist-upgrade && \
-	apt-get -y --no-install-recommends install \
-		curl \
-		gnupg \
-		ca-certificates \
-		sudo
+ADD http://pkg.yeti-switch.org/key.gpg /etc/apt/trusted.gpg.d/yeti-switch.asc
+ADD https://www.postgresql.org/media/keys/ACCC4CF8.asc /etc/apt/trusted.gpg.d/postgres.asc
 
-RUN	echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-	adduser --disabled-password --gecos "" build && \
-	curl http://pkg.yeti-switch.org/key.gpg			| apt-key add - && \
-	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
-	echo "deb http://pkg.yeti-switch.org/debian/buster unstable main"	>> /etc/apt/sources.list && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list 
+RUN	echo "deb http://pkg.yeti-switch.org/debian/buster unstable main" >> /etc/apt/sources.list && \
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list  && \
+	chmod 644 /etc/apt/trusted.gpg.d/*.asc
 
-RUN 	apt-get update && \
-	apt-get -y --no-install-recommends install \
-		build-essential \
-		devscripts \
-		ca-certificates \
-		debhelper \
-		fakeroot \
-		lintian \
-		python-jinja2 \
-		ruby2.6 \
-		ruby2.6-dev \
-		zlib1g-dev \
-		libpq-dev \
-		python-yaml \
-		postgresql-client-13 \
-		git-changelog \
-		python-setuptools \
-		lsb-release \
-		&& \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+COPY debian/control debian/control 
 
-RUN curl -sSO https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb && \
-	{ dpkg -i google-chrome-stable_current_amd64.deb || /bin/true; } && \
-	apt-get update && apt-get -y --no-install-recommends --fix-broken install && \
-	rm -v google-chrome-stable_current_amd64.deb && \
+RUN	apt update && \
+	apt -y --no-install-recommends build-dep . && \
+	rm -r debian/
+
+ADD https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb .
+
+RUN	apt install -y ./google-chrome-stable_current_amd64.deb && \
 	google-chrome-stable --version && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+	rm -v google-chrome-stable_current_amd64.deb && \
+	apt clean && rm -rf /var/lib/apt/lists/*
+	
+#WORKDIR /build/yeti-web 
+#COPY . .

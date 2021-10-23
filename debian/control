@@ -3,20 +3,35 @@ Maintainer: yeti team <dev@yeti-switch.org>
 Section: net
 Priority: optional
 Standards-Version: 4.4.0
-Build-Depends: debhelper (>= 10.2.5),
-  build-essential,
+Build-Depends:
+  debhelper-compat (= 12),
   devscripts,
+  ca-certificates,
   fakeroot,
-  lsb-release,
-  ruby2.6,
-  ruby2.6-dev,
   zlib1g-dev,
   libpq-dev,
+  postgresql-client-13,
+  lsb-release,
+  libdistro-info-perl,
+  git,
+  curl,
+  rbenv,
+  ruby-build,
+  openssl,
+  libssl-dev,
+  bison,
+  libyaml-dev,
+  libreadline6-dev,
+  libncurses5-dev,
+  libffi-dev,
+  libgdbm6,
+  libgdbm-dev,
+  libdb-dev,
 
 Package: yeti-web
 Section: net
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby2.6, postgresql-client
+Depends: ${shlibs:Depends}, ${misc:Depends}, rbenv, postgresql-client
 Pre-Depends: adduser, procps
 Description: UI for YETI project
 	YETI user interface
