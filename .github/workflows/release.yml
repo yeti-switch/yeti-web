@@ -8,10 +8,10 @@ jobs:
   deb10:
     name: Debian 10 release package building
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web:buster-build
     services:
       db:
-        image: switchyeti/yeti-web:pg13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
 
     steps:
       - uses: actions/checkout@v2

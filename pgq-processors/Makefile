@@ -17,14 +17,16 @@ all: gems
 .PHONY: bundler
 bundler:
 	$(info:msg=Install bundler)
-	gem install --no-document --install-dir $(gems) bundler -v 2.1.4
+	gem install --no-document --install-dir $(gems) bundler
+	$(bundle_bin) config --local clean 'true'
+	$(bundle_bin) config --local jobs 4
+	$(bundle_bin) config --local deployment 'true'
 
 
 .PHONY: gems
 gems: bundler
 	$(info:msg=Install/Update gems)
-	$(bundle_bin) config set deployment 'true'
-	$(bundle_bin) install --jobs=4 --binstubs
+	$(bundle_bin) install --binstubs
 
 .PHONY: test
 test: gems
