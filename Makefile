@@ -28,7 +28,7 @@ exclude_files :=	config/database.yml \
 			*.a
 
 version != git describe --tags --abbrev=0
-debian_version := $(shell echo $(version) | sed 's/_/~/' | sed 's/-master/~master/' | sed 's/-rc/~rc/')-1
+debian_version = $(shell echo $(version) | sed 's/_/~/' | sed 's/-master/~master/' | sed 's/-rc/~rc/')-1
 commit != git rev-parse HEAD
 
 debian_host_release != lsb_release -sc
