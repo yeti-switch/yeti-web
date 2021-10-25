@@ -11,8 +11,6 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web:buster-build
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Fetching gems cache
         uses: actions/cache@v2
         with:
@@ -45,8 +43,6 @@ jobs:
     needs: gems-caching
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: use cache
         uses: actions/cache@v2
         with:
@@ -71,8 +67,6 @@ jobs:
     needs: gems-caching
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: use cache
         uses: actions/cache@v2
         with:
@@ -113,8 +107,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: use cache
         uses: actions/cache@v2
         with:
