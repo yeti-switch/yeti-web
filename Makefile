@@ -27,9 +27,9 @@ exclude_files :=	config/database.yml \
 			*.o \
 			*.a
 
-version != git describe --tags --abbrev=0
+version = $(shell git describe --tags --exact 2>/dev/null || { git describe --tags | sed -E 's/-([0-9]+)-[^-]*$$/+\1/'; })
 debian_version = $(shell echo $(version) | sed 's/_/~/' | sed 's/-master/~master/' | sed 's/-rc/~rc/')-1
-commit != git rev-parse HEAD
+commit = $(shell git rev-parse HEAD)
 
 debian_host_release != lsb_release -sc
 export DEBFULLNAME ?= YETI team
