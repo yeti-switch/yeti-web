@@ -1,13 +1,19 @@
 #!/usr/bin/make -f
 
-extra_services=yeti-cdr-billing yeti-cdr-billing\@ yeti-scheduler yeti-delayed-job yeti-libreoffice-headless yeti-prometheus yeti-libreoffice-headless
+extra_services=yeti-cdr-billing \
+	       yeti-cdr-billing@ \
+	       yeti-scheduler \
+	       yeti-delayed-job \
+	       yeti-libreoffice-headless \
+	       yeti-prometheus \
+	       yeti-libreoffice-headless
 
 %:
 	dh $@ --no-parallel
 
-override_dh_installinit:
-	for s in ${extra_services}; do dh_installinit --name=$$s; done
-	dh_installinit
+override_dh_installsystemd:
+	dh_installsystemd
+	for s in ${extra_services}; do dh_installsystemd --name "$$s" "$$s.service"; done
 
 # avoid building debug symbols from so files in gems
 override_dh_strip:
