@@ -41,7 +41,7 @@ class ApplicationRecord < ActiveRecord::Base
     perform_sp(:select_value, sql, *bindings)
   end
 
-  # clone methods for isntance objects
+  # clone methods for instance objects
   %i[execute_sp fetch_sp fetch_sp_val].each do |method|
     define_method method   do |*args|
       self.class.send(method, *args)
@@ -70,7 +70,7 @@ class ApplicationRecord < ActiveRecord::Base
         order by pg_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) desc, table_schema, table_name)
       ) x
       order by x.total_size desc, x.size desc, table_schema, table_name
-      limit 10").to_hash
+      limit 10").to_ary.map(&:deep_symbolize_keys!)
   end
 
   def self.db_size
