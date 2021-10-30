@@ -32,6 +32,8 @@ class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :first_successful_call_at, type: :datetime
   ransack_filter :last_successful_call_at, type: :datetime
 
+  association_uuid_filter :account_id, class_name: 'Account'
+
   def has_pdf
     _model.invoice_document&.pdf_data.present?
   end
