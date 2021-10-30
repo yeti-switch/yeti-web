@@ -3,10 +3,6 @@
 class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
 
-  key_type :uuid
-  primary_key :uuid
-  paginator :paged
-
   def self.default_sort
     [{ field: 'time_start', direction: :desc }]
   end
@@ -180,14 +176,9 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
 
   association_uuid_filter :account_id, column: :customer_acc_id, class_name: 'Account'
 
-  # TODO: move to BaseResource
-  def self.records(options = {})
-    apply_allowed_accounts(super(options), options)
-  end
-
-  def self.apply_allowed_accounts(_records, options)
+  def self.apply_allowed_accounts(records, options)
     context = options[:context]
-    scope = _records.where_customer(context[:customer_id])
+    scope = records.where_customer(context[:customer_id])
     scope = scope.where_account(context[:allowed_account_ids]) if context[:allowed_account_ids].present?
     scope
   end

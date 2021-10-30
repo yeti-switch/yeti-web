@@ -94,6 +94,67 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
         expect(actual_ids).to match_array invoices.map(&:uuid)
       end
     end
+
+    context 'with filters' do
+      let(:json_api_request_query) do
+        { filter: request_filters }
+      end
+
+      shared_examples :responds_with_filtered_records do
+        it 'response contains only filtered records' do
+          subject
+          actual_ids = response_json[:data].pluck(:id)
+          expect(actual_ids).to match_array expected_records.map(&:uuid)
+        end
+      end
+
+      context 'account_id_eq' do
+        let(:request_filters) { { account_id_eq: another_account.reload.uuid } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:expected_records) do
+          create_list(:invoice, 2, :customer, :approved, account: another_account)
+        end
+
+        include_examples :responds_with_filtered_records
+      end
+
+      context 'account_id_not_eq' do
+        let(:request_filters) { { account_id_not_eq: accounts.first.reload.uuid } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:invoices) do
+          create_list(:invoice, 2, :customer, :approved, account: accounts.first)
+        end
+        let!(:expected_records) do
+          create_list(:invoice, 2, :customer, :approved, account: another_account)
+        end
+
+        include_examples :responds_with_filtered_records
+      end
+
+      context 'account_id_in' do
+        let(:request_filters) { { account_id_in: "#{another_account.reload.uuid},#{another_account2.reload.uuid}" } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:another_account2) { create(:account, contractor: customer) }
+        let!(:expected_records) do
+          [
+            create(:invoice, :customer, :approved, account: another_account),
+            create(:invoice, :customer, :approved, account: another_account2)
+          ]
+        end
+
+        include_examples :responds_with_filtered_records
+      end
+
+      context 'account_id_not_in' do
+        let(:request_filters) { { account_id_not_in: "#{accounts.first.reload.uuid},#{accounts.second.reload.uuid}" } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:expected_records) do
+          create_list(:invoice, 2, :customer, :approved, account: another_account)
+        end
+
+        include_examples :responds_with_filtered_records
+      end
+    end
   end
 
   describe 'GET /api/rest/customer/v1/invoices/{id}' do

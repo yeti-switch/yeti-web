@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::NetworkPrefixResource < BaseResource
+class Api::Rest::Customer::V1::NetworkPrefixResource < Api::Rest::Customer::V1::BaseResource
   model_name 'System::NetworkPrefix'
-
-  key_type :uuid
-  primary_key :uuid
-  paginator :paged
 
   attributes :prefix,
              :number_min_length,

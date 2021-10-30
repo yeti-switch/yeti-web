@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::InvoiceResource < BaseResource
+class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Billing::Invoice'
-
-  key_type :uuid
-  primary_key :uuid
-  paginator :paged
 
   attributes :reference,
              :start_date,
@@ -36,13 +32,10 @@ class Api::Rest::Customer::V1::InvoiceResource < BaseResource
   ransack_filter :first_successful_call_at, type: :datetime
   ransack_filter :last_successful_call_at, type: :datetime
 
+  association_uuid_filter :account_id, class_name: 'Account'
+
   def has_pdf
     _model.invoice_document&.pdf_data.present?
-  end
-
-  def self.records(options = {})
-    records = super(options)
-    apply_allowed_accounts(records, options)
   end
 
   def self.apply_allowed_accounts(records, options)

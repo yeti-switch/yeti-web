@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::RateResource < BaseResource
+class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Routing::Destination'
-
-  key_type :uuid
-  primary_key :uuid
-  paginator :paged
 
   attributes :prefix,
              :initial_rate,
@@ -43,10 +39,6 @@ class Api::Rest::Customer::V1::RateResource < BaseResource
   ransack_filter :dst_number_min_length, type: :number
   ransack_filter :dst_number_max_length, type: :number
   ransack_filter :reverse_billing, type: :boolean
-
-  def self.records(options = {})
-    apply_allowed_accounts(super(options), options)
-  end
 
   def self.apply_allowed_accounts(_records, options)
     context = options[:context]
