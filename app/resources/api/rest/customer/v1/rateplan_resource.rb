@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::RateplanResource < BaseResource
+class Api::Rest::Customer::V1::RateplanResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Routing::Rateplan'
-
-  key_type :uuid
-  primary_key :uuid
-  paginator :paged
 
   attributes :name
 
   ransack_filter :name, type: :string
-
-  def self.records(options = {})
-    apply_allowed_accounts(super(options), options)
-  end
 
   def self.apply_allowed_accounts(records, options)
     context = options[:context]

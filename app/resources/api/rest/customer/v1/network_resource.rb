@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::NetworkResource < BaseResource
+class Api::Rest::Customer::V1::NetworkResource < Api::Rest::Customer::V1::BaseResource
   model_name 'System::Network'
-
-  key_type :uuid
-  primary_key :uuid
-  paginator :paged
 
   attributes :name
 

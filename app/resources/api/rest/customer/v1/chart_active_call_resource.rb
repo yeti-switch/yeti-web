@@ -2,7 +2,7 @@
 
 class Api::Rest::Customer::V1::ChartActiveCallResource < Api::Rest::Customer::V1::BaseResource
   model_name 'JsonapiModel::ActiveCallAccount'
-  key_type :uuid
+  primary_key :id
 
   before_replace_fields do
     _model.customer = context[:current_customer].customer
