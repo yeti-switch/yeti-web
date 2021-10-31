@@ -5,7 +5,7 @@ ENV	DEBIAN_FRONTEND=noninteractive \
 
 ADD https://www.postgresql.org/media/keys/ACCC4CF8.asc /etc/apt/trusted.gpg.d/postgres.asc
 
-RUN	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list  && \
+RUN	echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" >> /etc/apt/sources.list  && \
 	chmod 644 /etc/apt/trusted.gpg.d/*.asc
 
 COPY debian/control debian/control 
