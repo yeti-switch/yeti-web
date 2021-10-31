@@ -21,13 +21,21 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push app image
+      - name: Push Buster build image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ci/buster-build.Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/yeti-web:buster-build
+          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:buster
+
+      - name: Push Bullseye build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ci/bullseye-build.Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:bullseye
 
       - name: Push db image
         uses: docker/build-push-action@v2
