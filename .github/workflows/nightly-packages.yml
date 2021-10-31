@@ -8,7 +8,7 @@ jobs:
   deb10:
     name: Debian 10 nightly package building
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web:buster-build
+    container: ghcr.io/yeti-switch/yeti-web/build-image:buster
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:13
@@ -28,13 +28,44 @@ jobs:
       - name: Save deb package as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: deb-package
+          name: deb10-package
           path: /__w/yeti-web/*.deb
 
       - name: Upload package to ${{github.ref}} repo
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
         run: ci/deploy.sh buster nightly main ../*.deb
+
+  deb11:
+    name: Debian 11 nightly package building
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
+    services:
+      db:
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build package
+        run: make package
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+
+      - name: Save deb package as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb11-package
+          path: /__w/yeti-web/*.deb
+
+      - name: Upload package to ${{github.ref}} repo
+        env:
+          PKG_API_BASE: ${{secrets.PKG_API_BASE}}
+        run: ci/deploy.sh bullseye nightly main ../*.deb
 
   deb10_container:
     name: Debian 10 container
@@ -48,7 +79,7 @@ jobs:
       - name: Download a single artifact
         uses: actions/download-artifact@v2
         with:
-          name: deb-package
+          name: deb10-package
 
       - name: Display structure of downloaded files
         run: ls -la
@@ -70,4 +101,5 @@ jobs:
           file: ci/nightly-package.Dockerfile
           push: true
           tags: ghcr.io/yeti-switch/yeti-web:nightly-build
+
 
