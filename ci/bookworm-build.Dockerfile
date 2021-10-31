@@ -1,11 +1,11 @@
-FROM debian:buster
+FROM debian:bookworm
 
 ENV	DEBIAN_FRONTEND=noninteractive \
 	LANG=C.UTF-8
 
 ADD https://www.postgresql.org/media/keys/ACCC4CF8.asc /etc/apt/trusted.gpg.d/postgres.asc
 
-RUN	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list  && \
+RUN	echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" >> /etc/apt/sources.list  && \
 	chmod 644 /etc/apt/trusted.gpg.d/*.asc
 
 COPY debian/control debian/control 
@@ -21,5 +21,3 @@ RUN	apt install -y ./google-chrome-stable_current_amd64.deb && \
 	rm -v google-chrome-stable_current_amd64.deb && \
 	apt clean && rm -rf /var/lib/apt/lists/*
 	
-#WORKDIR /build/yeti-web 
-#COPY . .

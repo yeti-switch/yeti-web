@@ -15,7 +15,6 @@ RUN	apt update && \
 		gnupg \
 		ca-certificates \
 		sudo && \
-	curl http://pkg.yeti-switch.org/key.gpg	| apt-key add - && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main"	>> /etc/apt/sources.list && \
 	apt update && \

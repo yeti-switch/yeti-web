@@ -5,8 +5,8 @@ on:
     - cron: '6 9 * * SUN'
 
 jobs:
-  ci-image:
-    name: Build images for CI
+  deb10-build-image:
+    name: Build deb10 images for CI
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -29,6 +29,22 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:buster
 
+  deb11-build-image:
+    name: Build deb11 images for CI
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Push Bullseye build image
         uses: docker/build-push-action@v2
         with:
@@ -36,6 +52,46 @@ jobs:
           file: ci/bullseye-build.Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:bullseye
+
+  deb12-build-image:
+    name: Build deb12 images for CI
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Bullseye build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ci/bookworm-build.Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:bookworm
+
+  postgres-build-image:
+    name: Build Postgresql images for CI
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push db image
         uses: docker/build-push-action@v2
