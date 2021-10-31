@@ -6,8 +6,7 @@ ActiveAdmin.register_page 'Info' do
     columns do
       column do
         panel "TOP10 tables in Routing database. Full size: #{ApplicationRecord.db_size}" do
-          data = ApplicationRecord.top_tables.each(&:deep_symbolize_keys!)
-          table_for ApplicationRecord.top_tables.each(&:deep_symbolize_keys!) do
+          table_for ApplicationRecord.top_tables do
             column :table do |c|
               "#{c[:table_schema]}.#{c[:table_name]}"
             end
@@ -43,7 +42,7 @@ ActiveAdmin.register_page 'Info' do
       end
       column do
         panel "TOP10 tables in CDR database. Full size: #{Cdr::Base.db_size}" do
-          table_for Cdr::Base.top_tables.each(&:deep_symbolize_keys!) do
+          table_for Cdr::Base.top_tables do
             column :table do |c|
               "#{c[:table_schema]}.#{c[:table_name]}"
             end
