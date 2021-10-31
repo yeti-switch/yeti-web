@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 ENV	DEBIAN_FRONTEND=noninteractive \
 	LANG=C.UTF-8 \
@@ -17,8 +17,7 @@ RUN	apt update && \
 		sudo && \
 	curl http://pkg.yeti-switch.org/key.gpg	| apt-key add - && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
-	echo "deb http://pkg.yeti-switch.org/debian/buster 1.11 main"	>> /etc/apt/sources.list && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list && \
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main"	>> /etc/apt/sources.list && \
 	apt update && \
 	apt install -f -y --no-install-recommends procps cron
 
