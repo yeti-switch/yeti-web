@@ -8,7 +8,7 @@ jobs:
   gems-caching:
     name: GEMs caching
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     steps:
       - uses: actions/checkout@v2
       - name: Fetching gems cache
@@ -39,7 +39,7 @@ jobs:
   lint:
     name: Rubocop and bundle audit
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     needs: gems-caching
     steps:
       - uses: actions/checkout@v2
@@ -59,7 +59,7 @@ jobs:
   pgq-processors:
     name: PqQ processors tests
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:13
@@ -88,7 +88,7 @@ jobs:
   rspec:
     name: Rspec tests
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:13
@@ -148,7 +148,7 @@ jobs:
   finalize-coveralls:
     needs: rspec
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     steps:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master

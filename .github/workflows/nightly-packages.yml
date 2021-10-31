@@ -67,9 +67,9 @@ jobs:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
         run: ci/deploy.sh bullseye nightly main ../*.deb
 
-  deb10_container:
-    name: Debian 10 container
-    needs: deb10
+  deb11_container:
+    name: Debian 11 container
+    needs: deb11
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -79,7 +79,7 @@ jobs:
       - name: Download a single artifact
         uses: actions/download-artifact@v2
         with:
-          name: deb10-package
+          name: deb11-package
 
       - name: Display structure of downloaded files
         run: ls -la
