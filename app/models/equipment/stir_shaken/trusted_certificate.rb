@@ -12,14 +12,6 @@
 class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_trusted_certificates'
 
-  after_save { self.class.increment_state_sequence }
-  after_destroy { self.class.increment_state_sequence }
-
-  def self.increment_state_sequence
-    SqlCaller::Yeti.execute("SELECT nextval('class4.stir_shaken_trusted_certificates_state_seq')")
-  end
-
-  def self.state_sequence
-    SqlCaller::Yeti.select_value('SELECT last_value FROM class4.stir_shaken_trusted_certificates_state_seq')
-  end
+  include Yeti::StateSequenceUpdater
+  self.state_sequence_name = 'class4.stir_shaken_trusted_certificates_state_seq'
 end
