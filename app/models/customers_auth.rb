@@ -165,8 +165,8 @@ class CustomersAuth < ApplicationRecord
 
   validates_with TagActionValueValidator
 
-  after_save { self.class.increment_state_sequence }
-  after_destroy { self.class.increment_state_sequence }
+  include Yeti::StateSequenceUpdater
+  self.state_sequence_name = 'class4.customers_auth_state_seq'
 
   scope :with_radius, -> { where('radius_auth_profile_id is not null') }
   scope :with_dump, -> { where('dump_level_id > 0') }
@@ -316,17 +316,5 @@ class CustomersAuth < ApplicationRecord
               first_arr = ar_values.shift
               first_arr.product(*ar_values)
             end
-  end
-
-  def self.increment_state_sequence
-    SqlCaller::Yeti.execute <<-SQL
-      SELECT nextval('class4.customers_auth_state_seq')
-    SQL
-  end
-
-  def self.state_sequence
-    SqlCaller::Yeti.select_value <<-SQL
-      SELECT last_value FROM class4.customers_auth_state_seq
-    SQL
   end
 end
