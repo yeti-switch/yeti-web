@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bullseye-slim
 
 ENV	DEBIAN_FRONTEND=noninteractive \
 	LANG=C.UTF-8 \
