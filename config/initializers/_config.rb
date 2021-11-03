@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-Rails.configuration.yeti_web = begin
-  YAML.load_file(Rails.root.join('config/yeti_web.yml')).freeze
-                               rescue StandardError => e
-                                 raise StandardError, "Can't load /config/yeti_web.yml, message: #{e.message}"
+config_path = Rails.root.join('config/yeti_web.yml')
+begin
+  Rails.configuration.yeti_web = ActiveSupport::ConfigurationFile.parse(config_path).freeze
+rescue StandardError => e
+  raise StandardError, "Can't load #{config_path}, message: #{e.message}"
 end
 
 allowed_rules = %i[allow disallow raise]
