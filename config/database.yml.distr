@@ -13,6 +13,7 @@ production:
       sys, logs, data_import
     port: 5432
     #min_messages: warning
+    schema_cache_path: tmp/primary_schema_cache.yml
   cdr:
     adapter: postgresql
     encoding: unicode
@@ -25,3 +26,4 @@ production:
     port: 5432
     migrations_paths: db/cdr_migrate
     #min_messages: warning
+    schema_cache_path: tmp/cdr_schema_cache.yml

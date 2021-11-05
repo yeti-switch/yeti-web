@@ -15,6 +15,7 @@ production:
       sys, logs, data_import
     port: <%= (ENV['YETI_DB_PORT'] || '5432' ) %>
     #min_messages: warning
+    schema_cache_path: tmp/primary_schema_cache.yml
   cdr: &build_cdr
     adapter: postgresql
     encoding: unicode
@@ -29,6 +30,7 @@ production:
     port: <%= (ENV['CDR_DB_PORT'] || '5432') %>
     migrations_paths: db/cdr_migrate
     #min_messages: warning
+    schema_cache_path: tmp/cdr_schema_cache.yml
 
 test:
   primary:
