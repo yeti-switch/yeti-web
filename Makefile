@@ -205,6 +205,10 @@ else
 		  || { script/format_runtime_log log/parallel_runtime_rspec.log; false; }
 endif
 
+.PHONY: rspec
+database_consistency: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml prepare-test-db
+	$(info:msg=Check the consistency of the database constraints with the application validations)
+	RAILS_ENV=test $(bundle_bin) exec database_consistency
 
 .PHONY: lint
 lint: gems-test config/database.yml config/yeti_web.yml

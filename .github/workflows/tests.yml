@@ -56,6 +56,46 @@ jobs:
       - name: Rubocop and bundle audit
         run: make lint
 
+  database_consistency:
+    name: Check the consistency of the database constraints with the application validations
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
+    services:
+      db:
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+      - name: Check the consistency of the database constraints with the application validations
+        continue-on-error: true
+        run: make database_consistency
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+
+      - name: Save artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: database_consistency-artifacts
+          if-no-files-found: ignore
+          path: |
+            log/
+
+
+
   pgq-processors:
     name: PqQ processors tests
     runs-on: ubuntu-latest

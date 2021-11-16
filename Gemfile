@@ -114,6 +114,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'capybara_active_admin', github: 'activeadmin-plugins/capybara_active_admin', require: false
   gem 'cuprite'
+  gem 'database_consistency', require: false
   gem 'ferrum'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
