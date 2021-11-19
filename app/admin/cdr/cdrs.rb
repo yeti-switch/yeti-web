@@ -253,7 +253,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   show do |cdr|
     panel 'Attempts' do
       unless cdr.attempts.empty?
-        table_for cdr.attempts.preload(Cdr::Cdr::ADMIN_PRELOAD_LIST) do
+        scope = cdr.attempts.preload(Cdr::Cdr::ADMIN_PRELOAD_LIST)
+        records = CdrDecorator.decorate_collection(scope.to_a)
+        table_for records do
           column(:id) do |cdr_attempt|
             link_to cdr_attempt.id, resource_path(cdr_attempt), class: 'resource_id_link'
           end
