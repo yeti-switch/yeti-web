@@ -53,7 +53,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :bad_routing, show_count: false
 
   filter :id
-  filter :routing_tag_ids_include, as: :select, collection: proc { Routing::RoutingTag.all }, label: 'With routing tag'
+  filter :routing_tag_ids_include,
+         as: :select,
+         collection: proc { Routing::RoutingTag.all },
+         label: 'With routing tag',
+         input_html: { class: 'chosen' }
   filter :time_start, as: :date_time_range
   filter :customer,
          input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' },

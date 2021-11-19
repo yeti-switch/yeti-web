@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe 'CDRs index', type: :feature do
+  subject do
+    visit cdrs_path
+    filter!
+  end
+
   include_context :login_as_admin
   include_context :init_routing_tag_collection
 
@@ -23,33 +28,55 @@ RSpec.describe 'CDRs index', type: :feature do
                 routing_tag_ids: [@tag_ua.id, 321, @tag_us.id]
   end
 
-  before do
-    visit cdrs_path
+  let(:filter!) { nil }
+
+  it 'shows CDRs with correct routing tags' do
+    subject
+    expect(page).to have_table_row(count: 3)
+
+    within_table_row(id: cdr_no_tags.id) do
+      expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: '')
+    end
+
+    within_table_row(id: cdrs.first.id) do
+      expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{@tag_ua.name} 321 #{@tag_us.name}")
+      within_table_cell('Routing Tags') do
+        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_ua.name)
+        expect(page).to have_selector('.status_tag.no', exact_text: '321')
+        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_us.name)
+      end
+    end
+
+    within_table_row(id: cdrs.second.id) do
+      expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{@tag_ua.name} 321 #{@tag_us.name}")
+      within_table_cell('Routing Tags') do
+        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_ua.name)
+        expect(page).to have_selector('.status_tag.no', exact_text: '321')
+        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_us.name)
+      end
+    end
   end
 
-  it_behaves_like :test_page_has_routing_tag_names do
-    subject do
-      page.find("#cdr_cdr_#{cdrs.last.id}").find('td.col-routing_tags')
+  context 'with filter by routing tags', js: true do
+    let(:filter!) do
+      within_filters do
+        fill_in_chosen 'With routing tag', with: routing_tag.name
+        click_button('Filter')
+      end
     end
 
-    it 'display not existing Tag ID in in grey-color' do
-      expect(subject).to have_css('.status_tag.no:not(.yes)', text: '321')
+    let!(:cdr_with_one_tag) do
+      create(:cdr, routing_tag_ids: [routing_tag.id, @tag_ua.id])
     end
 
-    it 'display EMPTY when CDR has no tags' do
-      tr = page.find("#cdr_cdr_#{cdr_no_tags.id}").find('td.col-routing_tags')
-      expect(tr.text).to be_empty
-    end
-  end
-
-  context 'with filtered cdrs by routing tag id' do
-    let!(:cdr_with_one_tag) { create(:cdr, routing_tag_ids: [routing_tag.id, @tag_ua.id]) }
-
-    it 'should showing one cdr' do
-      select routing_tag.id, from: 'q_routing_tag_ids_include'
-      page.find('input[type=submit]').click
-      expect(page).to have_css('.resource_id_link', text: cdr_with_one_tag.id)
-      expect(page).to have_css('#index_table_cdrs tbody tr', count: 1)
+    it 'shows one CDR with correct routing tags' do
+      subject
+      expect(page).to have_table_row(count: 1)
+      expect(page).to have_table_cell(column: 'ID', exact_text: cdr_with_one_tag.id)
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tag.name} #{@tag_ua.name}")
     end
   end
 end
