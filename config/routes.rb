@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
   post 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#create'
+  get 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#show'
+  delete 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#destroy'
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 

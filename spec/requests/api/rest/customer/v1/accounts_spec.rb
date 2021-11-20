@@ -17,7 +17,7 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
     let(:records_qty) { 2 }
     let!(:accounts) { create_list :account, records_qty, contractor: customer }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     it_behaves_like :json_api_check_pagination do
       let(:records_ids) { accounts.map { |r| r.reload.uuid } }
@@ -95,7 +95,7 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
     let(:record_id) { account.reload.uuid }
     let!(:account) { create(:account, contractor: customer) }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     context 'when record exists' do
       it 'returns record with expected attributes' do

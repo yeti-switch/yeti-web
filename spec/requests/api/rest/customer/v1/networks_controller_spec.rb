@@ -21,7 +21,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
       ]
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) { networks.map(&:uuid) }
@@ -38,7 +38,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
 
     let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     include_examples :returns_json_api_record, relationships: [:'network-type'] do
       let(:json_api_record_id) { network.uuid }

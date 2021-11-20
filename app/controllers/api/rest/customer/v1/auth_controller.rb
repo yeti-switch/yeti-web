@@ -1,33 +1,68 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::AuthController < Knock::AuthTokenController
+class Api::Rest::Customer::V1::AuthController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+  before_action :authenticate!, only: :create
+  rescue_from Authentication::CustomerV1Auth::AuthenticationError, with: :handle_authentication_error
+
+  include CustomerV1Authorizable
+  before_action :authorize!, only: :show
+  after_action :setup_authorization_cookie, only: :show
+
+  def create
+    if auth_params[:cookie_auth]
+      cookies[Authentication::CustomerV1Auth::COOKIE_NAME] = {
+        value: @auth_token,
+        expires: @expires_at,
+        httponly: true
+      }
+      head 201
+    else
+      render json: { jwt: @auth_token }, status: 201
+    end
+  end
+
+  def show
+    head 200
+  end
+
+  def destroy
+    cookies[Authentication::CustomerV1Auth::COOKIE_NAME] = {
+      value: 'logout',
+      expires: Time.parse('1970-01-01 00:00:00 UTC'),
+      httponly: true
+    }
+    head 204
+  end
+
   private
 
-  def entity_name
-    'System::ApiAccess'
+  def authenticate!
+    result = Authentication::CustomerV1Auth.authenticate!(
+      auth_params[:login],
+      auth_params[:password],
+      remote_ip: remote_ip
+    )
+    @auth_token = result.token
+    @expires_at = result.expires_at
   end
 
   def auth_params
-    params.require(:auth).permit(:login, :password)
+    params.require(:auth).permit(:login, :password, :cookie_auth)
   end
 
   def remote_ip
     request.env['HTTP_X_REAL_IP'] || request.remote_ip
   end
 
-  def authenticate
-    super
-    authenticate_allowed_ip
-  end
-
-  def authenticate_allowed_ip
-    unless entity.present? && entity.authenticate_ip(remote_ip)
-      raise Knock.not_found_exception_class
-    end
-  end
-
-  def not_found
+  def handle_authentication_error
     error = JSONAPI::Exceptions::AuthenticationFailed.new
+    render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
+  end
+
+  def handle_authorization_error
+    error = JSONAPI::Exceptions::AuthorizationFailed.new
     render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
   end
 end

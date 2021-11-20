@@ -15,7 +15,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworkTypesController, type: :request d
       System::NetworkType.all.to_a
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) { network_types.map(&:uuid) }
@@ -32,7 +32,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworkTypesController, type: :request d
 
     let!(:network_type) { FactoryBot.create(:network_type).reload }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     include_examples :returns_json_api_record do
       let(:json_api_record_id) { network_type.uuid }

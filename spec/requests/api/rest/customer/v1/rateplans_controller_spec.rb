@@ -12,7 +12,7 @@ RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :request do
 
     let(:json_api_request_query) { nil }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     context 'account_ids is empty' do
       before do
@@ -77,7 +77,7 @@ RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :request do
 
     let!(:customers_auth) { create(:customers_auth, customer_id: customer.id) }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     context 'when record exists' do
       it 'returns record with expected attributes' do

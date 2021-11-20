@@ -17,6 +17,8 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     end
     let(:json_api_request_query) { nil }
 
+    it_behaves_like :json_api_customer_v1_check_authorization
+
     context 'account_ids is empty' do
       let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
       let(:records_qty) { 2 }
@@ -231,7 +233,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).take
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     it 'returns record with expected attributes' do
       subject
