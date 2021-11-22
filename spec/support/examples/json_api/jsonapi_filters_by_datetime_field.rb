@@ -13,10 +13,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => smaller_value }
       let!(:other_record) { create_record attr_name => greater_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'not equal operator' do
@@ -25,10 +25,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => greater_value }
       let!(:other_record) { create_record attr_name => smaller_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'less then operator' do
@@ -37,10 +37,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => smaller_value }
       let!(:other_record) { create_record attr_name => greater_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'less then or equal operator' do
@@ -49,10 +49,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => smaller_value }
       let!(:other_record) { create_record attr_name => greater_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'greater then operator' do
@@ -61,10 +61,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => greater_value }
       let!(:other_record) { create_record attr_name => smaller_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'greater then or equal operator' do
@@ -73,10 +73,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => greater_value }
       let!(:other_record) { create_record attr_name => smaller_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'in operator' do
@@ -85,10 +85,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => greater_value }
       let!(:other_record) { create_record attr_name => smaller_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'not_in operator' do
@@ -97,10 +97,10 @@ RSpec.shared_examples :jsonapi_filters_by_datetime_field do |attr_name|
       let!(:suitable_record) { create_record attr_name => greater_value }
       let!(:other_record) { create_record attr_name => smaller_value }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
   end
 end

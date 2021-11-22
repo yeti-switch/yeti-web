@@ -64,6 +64,19 @@ RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :request do
         let(:records_ids) { customers_auths.map { |r| r.rateplan.reload }.sort_by(&:name).map(&:uuid) }
       end
     end
+
+    context 'with ransack filters' do
+      before do
+        create(:customers_auth, customer: customer, rateplan: suitable_record)
+        create(:customers_auth, customer: customer, rateplan: other_record)
+      end
+
+      let(:factory) { :rateplan }
+      let(:trait) { :with_uuid }
+      let(:pk) { :uuid }
+
+      it_behaves_like :jsonapi_filters_by_string_field, :name
+    end
   end
 
   describe 'GET /api/rest/customer/v1/rateplans/{id}' do

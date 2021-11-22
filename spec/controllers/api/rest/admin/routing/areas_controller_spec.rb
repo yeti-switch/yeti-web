@@ -16,6 +16,9 @@ RSpec.describe Api::Rest::Admin::Routing::AreasController, type: :controller do
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :area }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name

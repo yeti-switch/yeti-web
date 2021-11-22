@@ -15,6 +15,9 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
   end
 
   describe 'GET index with filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     before { create_list :dialpeer, 2 }
 
     it_behaves_like :jsonapi_filter_by_external_id do
@@ -22,17 +25,26 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
     end
 
     it_behaves_like :jsonapi_filter_by, :prefix do
+      include_context :ransack_filter_setup
+      let(:filter_key) { :prefix }
+      let(:filter_value) { subject_record.prefix }
       let(:subject_record) { create :dialpeer, prefix: attr_value }
       let(:attr_value) { '987' }
     end
 
     it_behaves_like :jsonapi_filter_by, :routing_group_id do
+      include_context :ransack_filter_setup
+      let(:filter_key) { :routing_group_id }
+      let(:filter_value) { subject_record.routing_group_id }
       let(:subject_record) { create :dialpeer }
       let(:attr_value) { subject_record.routing_group_id }
     end
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :dialpeer }
 
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled

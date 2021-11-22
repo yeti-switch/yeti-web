@@ -88,6 +88,9 @@ RSpec.describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :auth_log }
     let(:trait) { :with_id }
 

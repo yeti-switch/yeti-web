@@ -27,6 +27,9 @@ RSpec.describe Api::Rest::Admin::Routing::RoutingTagDetectionRulesController, ty
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :routing_tag_detection_rule }
 
     it_behaves_like :jsonapi_filters_by_string_field, :src_prefix

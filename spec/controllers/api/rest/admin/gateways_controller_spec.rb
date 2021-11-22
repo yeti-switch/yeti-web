@@ -4,6 +4,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
   include_context :jsonapi_admin_headers
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :gateway }
     let(:trait) { :with_incoming_auth }
 

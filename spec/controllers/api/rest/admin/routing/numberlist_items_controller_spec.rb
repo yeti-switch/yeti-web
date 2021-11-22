@@ -17,6 +17,9 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :cont
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :numberlist_item }
 
     it_behaves_like :jsonapi_filters_by_string_field, :key

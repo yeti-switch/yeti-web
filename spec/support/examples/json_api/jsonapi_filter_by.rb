@@ -8,8 +8,8 @@ RSpec.shared_examples :jsonapi_filter_by do |attr_name|
     subject_record
   end
 
-  it 'returns only one expected record' do
-    get :index, params: { filter: { attr_name => attr_value } }
+  it "returns only one record with matched #{attr_name}" do
+    subject
 
     expect(response_data).to match_array(
       [
