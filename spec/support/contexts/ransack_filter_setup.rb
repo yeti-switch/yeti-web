@@ -23,9 +23,10 @@ RSpec.shared_context :ransack_filter_setup do
     record.try(primary_key).to_s
   end
 
-  let(:subject_request) do
-    get :index, params: { filter: { filter_key => filter_value } }
+  let(:response_ids) do
+    response_data.map { |r| r['id'] }
   end
-
-  subject { response_data.map { |r| r['id'] } }
+  let(:json_api_request_query) do
+    { filter: { filter_key => filter_value } }
+  end
 end

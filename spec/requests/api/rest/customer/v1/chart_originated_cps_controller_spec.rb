@@ -61,7 +61,7 @@ RSpec.describe Api::Rest::Customer::V1::ChartOriginatedCpsController, type: :req
       { account: { data: { id: account.uuid, type: 'accounts' } } }
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization, success_status: 201
 
     context 'success' do
       include_examples :returns_json_api_record, relationships: [:account], status: 201 do

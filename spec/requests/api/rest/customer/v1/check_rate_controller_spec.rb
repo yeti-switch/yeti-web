@@ -23,7 +23,7 @@ RSpec.describe Api::Rest::Customer::V1::CheckRateController, type: :request do
 
     let(:rateplan) { create(:rateplan).reload }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization, success_status: 201
 
     context 'success' do
       it 'returns two plans' do

@@ -22,6 +22,9 @@ RSpec.describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :gateway_group }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
@@ -46,6 +49,9 @@ RSpec.describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
   end
 
   describe 'GET index with filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     before { create_list :gateway_group, 2 }
 
     it_behaves_like :jsonapi_filter_by_name do

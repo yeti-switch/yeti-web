@@ -9,7 +9,8 @@ RSpec.resource 'Networks', document: :customer_v1 do
 
   let(:api_access) { create :api_access }
   let(:customer) { api_access.customer }
-  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
+  include_context :customer_v1_cookie_helpers
+  let(:auth_token) { build_customer_token(api_access.id, expiration: 1.minute.from_now) }
   let(:type) { 'networks' }
 
   let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }

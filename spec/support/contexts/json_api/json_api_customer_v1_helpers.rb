@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.shared_context :json_api_customer_v1_helpers do |type: nil|
+  include_context :customer_v1_cookie_helpers
+
   let(:json_api_resource_type) { type.to_s.dasherize }
-  let(:json_api_auth_token) { ::Knock::AuthToken.new(payload: { sub: api_access.id }).token }
+  let(:json_api_auth_token) { build_customer_token(api_access.id, expiration: 1.minute.from_now) }
   let(:json_api_request_path_prefix) { '/api/rest/customer/v1' }
   let(:json_api_request_path) { "#{json_api_request_path_prefix}/#{json_api_resource_type}" }
   let(:json_api_request_headers) do

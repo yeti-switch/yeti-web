@@ -10,10 +10,10 @@ RSpec.shared_examples :jsonapi_filters_by_uuid_field do |attr_name|
       let!(:suitable_record) { create_record }
       let!(:other_record) { create_record }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'not equal operator' do
@@ -22,10 +22,10 @@ RSpec.shared_examples :jsonapi_filters_by_uuid_field do |attr_name|
       let!(:suitable_record) { create_record }
       let!(:other_record) { create_record }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'in operator' do
@@ -34,10 +34,10 @@ RSpec.shared_examples :jsonapi_filters_by_uuid_field do |attr_name|
       let!(:suitable_record) { create_record }
       let!(:other_record) { create_record }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
 
     context 'not_in operator' do
@@ -46,10 +46,10 @@ RSpec.shared_examples :jsonapi_filters_by_uuid_field do |attr_name|
       let!(:suitable_record) { create_record }
       let!(:other_record) { create_record }
 
-      before { subject_request }
+      before { subject }
 
-      it { is_expected.to include primary_key_for(suitable_record) }
-      it { is_expected.not_to include primary_key_for(other_record) }
+      it { expect(response_ids).to include primary_key_for(suitable_record) }
+      it { expect(response_ids).not_to include primary_key_for(other_record) }
     end
   end
 end

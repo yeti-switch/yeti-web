@@ -404,6 +404,9 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :cdr }
     let(:trait) { :with_id_and_uuid }
 

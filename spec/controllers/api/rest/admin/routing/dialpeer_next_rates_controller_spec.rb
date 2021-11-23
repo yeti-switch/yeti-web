@@ -20,6 +20,9 @@ RSpec.describe Api::Rest::Admin::DialpeerNextRatesController do
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :dialpeer_next_rate }
 
     it_behaves_like :jsonapi_filters_by_number_field, :next_rate

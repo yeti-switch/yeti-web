@@ -18,7 +18,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :reques
       ]
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) { network_prefixes.map(&:uuid) }
@@ -35,7 +35,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :reques
 
     let!(:network_prefix) { System::NetworkPrefix.take! }
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     include_examples :returns_json_api_record, relationships: [:network] do
       let(:json_api_record_id) { network_prefix.uuid }

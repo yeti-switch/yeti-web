@@ -21,6 +21,7 @@ gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatabl
 gem 'net-ldap', '~> 0.16.0'
 
 # Seamless JWT authentication for Rails API
+gem 'jwt'
 gem 'knock', github: 'nsarno/knock'
 
 # ActiveAdmin

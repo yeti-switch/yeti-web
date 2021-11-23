@@ -20,6 +20,9 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'GET index with filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     before { create_list(:routing_group, 2) }
 
     it_behaves_like :jsonapi_filter_by_name do

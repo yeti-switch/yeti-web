@@ -11,6 +11,9 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :controller do
   end
 
   describe 'GET index with ransack filters' do
+    subject do
+      get :index, params: json_api_request_query
+    end
     let(:factory) { :contact }
 
     it_behaves_like :jsonapi_filters_by_string_field, :email

@@ -50,7 +50,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
       ]
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     it_behaves_like :json_api_check_pagination do
       let!(:accounts) do
@@ -170,7 +170,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
       create(:invoice, :customer, :auto_full, :approved, account: account)
     end
 
-    it_behaves_like :json_api_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization
 
     context 'when record exists' do
       it 'returns record with expected attributes' do

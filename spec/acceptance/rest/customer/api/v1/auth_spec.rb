@@ -20,4 +20,24 @@ RSpec.resource 'Authentication', document: :customer_v1 do
       expect(status).to eq(201)
     end
   end
+
+  get '/api/rest/customer/v1/auth' do
+    header 'Cookie', :auth_cookie
+
+    include_context :customer_v1_cookie_helpers
+    let(:auth_cookie) { build_customer_cookie(api_access.id, expiration: 1.minute.from_now) }
+    let(:api_access) { create :api_access }
+
+    example_request 'check auth cookie' do
+      explanation 'auth cookie is valid'
+      expect(status).to eq(200)
+    end
+  end
+
+  delete '/api/rest/customer/v1/auth' do
+    example_request 'respond with logout cookie' do
+      explanation 'logged out'
+      expect(status).to eq(204)
+    end
+  end
 end
