@@ -139,7 +139,7 @@ class Importing::Base < ApplicationRecord
     if unique_columns.any?
       condition_array = []
       unique_columns.each do |column_name|
-        condition_array << "ta.#{column_name} = tb.#{column_name}"
+        condition_array << "ta.#{column_name} IS NOT DISTINCT FROM tb.#{column_name}"
       end
       condition = condition_array.join(' AND ')
     else

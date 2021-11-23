@@ -8,6 +8,7 @@ $(document).ready(function () {
     // fix inputs
     form.find('select')
       .attr('name', 'changes[unique_columns][]')
+      .attr('id', 'changes_unique_columns')
       .attr('multiple', 'multiple')
       .chosen({ width: '100%' });
   });
