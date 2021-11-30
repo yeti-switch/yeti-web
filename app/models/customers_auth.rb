@@ -165,8 +165,8 @@ class CustomersAuth < ApplicationRecord
 
   validates_with TagActionValueValidator
 
-  include Yeti::StateSequenceUpdater
-  self.state_sequence_name = 'class4.customers_auth_state_seq'
+  include Yeti::StateUpdater
+  self.state_name = 'customers_auth'
 
   scope :with_radius, -> { where('radius_auth_profile_id is not null') }
   scope :with_dump, -> { where('dump_level_id > 0') }

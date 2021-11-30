@@ -47,7 +47,7 @@ RSpec.describe Importing::CustomersAuth do
       )
     end
 
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 
   context 'when tag_action_value_names is NULL' do
@@ -63,7 +63,7 @@ RSpec.describe Importing::CustomersAuth do
       )
     end
 
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 
   it_behaves_like 'after_import_hook when real items match' do
@@ -72,6 +72,6 @@ RSpec.describe Importing::CustomersAuth do
 
     let(:real_item) { described_class.import_class.last }
 
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 end

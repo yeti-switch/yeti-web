@@ -183,7 +183,7 @@ RSpec.describe CustomersAuth, type: :model do
 
     include_examples :creates_record
     include_examples :changes_records_qty_of, described_class, by: 1
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 
   describe '#update' do
@@ -201,7 +201,7 @@ RSpec.describe CustomersAuth, type: :model do
 
     include_examples :updates_record
     include_examples :changes_records_qty_of, described_class, by: 0
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 
   describe '#destroy' do
@@ -215,6 +215,6 @@ RSpec.describe CustomersAuth, type: :model do
 
     include_examples :destroys_record
     include_examples :changes_records_qty_of, described_class, by: -1
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 end

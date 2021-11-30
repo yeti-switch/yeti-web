@@ -22,6 +22,6 @@ class System::LoadBalancer < ApplicationRecord
   validates :name, :signalling_ip, presence: true
   validates :name, :signalling_ip, uniqueness: true
 
-  include Yeti::StateSequenceUpdater
-  self.state_sequence_name = 'sys.load_balancers_state_seq'
+  include Yeti::StateUpdater
+  self.state_name = 'load_balancers'
 end
