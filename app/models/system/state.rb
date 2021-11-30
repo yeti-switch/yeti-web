@@ -4,7 +4,7 @@
 #
 # Table name: sys.states
 #
-#  key   :string           primary key
+#  key   :string           not null, primary key
 #  value :bigint(8)        default(0), not null
 #
 class System::State < ApplicationRecord

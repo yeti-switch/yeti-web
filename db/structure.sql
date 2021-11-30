@@ -25894,7 +25894,7 @@ ALTER SEQUENCE sys.smtp_connections_id_seq OWNED BY sys.smtp_connections.id;
 --
 
 CREATE TABLE sys.states (
-    key character varying,
+    key character varying NOT NULL,
     value bigint DEFAULT 0 NOT NULL
 );
 
@@ -28653,6 +28653,14 @@ ALTER TABLE ONLY sys.smtp_connections
 
 
 --
+-- Name: states states_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.states
+    ADD CONSTRAINT states_pkey PRIMARY KEY (key);
+
+
+--
 -- Name: timezones timezones_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -29958,6 +29966,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211002164333'),
 ('20211004152514'),
 ('20211005184247'),
-('20211130113417');
+('20211130113417'),
+('20211130142405');
 
 
