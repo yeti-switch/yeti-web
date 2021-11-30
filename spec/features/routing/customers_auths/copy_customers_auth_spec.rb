@@ -56,5 +56,5 @@ RSpec.describe 'Copy Customers Auth', type: :feature do
     end
   end
 
-  include_examples :increments_customers_auth_state_seq
+  include_examples :increments_customers_auth_state
 end

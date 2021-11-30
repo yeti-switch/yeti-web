@@ -12,6 +12,6 @@
 class Equipment::StirShaken::TrustedRepository < ApplicationRecord
   self.table_name = 'stir_shaken_trusted_repositories'
 
-  include Yeti::StateSequenceUpdater
-  self.state_sequence_name = 'class4.stir_shaken_trusted_repositories_state_seq'
+  include Yeti::StateUpdater
+  self.state_name = 'stir_shaken_trusted_repositories'
 end

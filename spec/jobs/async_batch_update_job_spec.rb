@@ -142,7 +142,7 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
         }.from(0).to(customer_auths.size)
       end
 
-      include_examples :increments_customers_auth_state_seq, by: 3
+      include_examples :increments_customers_auth_state, by: 3
     end
   end
 end

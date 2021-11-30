@@ -90,7 +90,8 @@ RSpec.configure do |config|
     'class4.gateway_group_balancing_modes',
     'sys.timezones',
     'sys.jobs',
-    'sys.sip_schemas'
+    'sys.sip_schemas',
+    'sys.states'
   ]
 
   # RSpec Rails can automatically mix in different behaviours to your tests

@@ -98,7 +98,7 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
         expect(CustomersAuth.where(external_id: attributes[:'external-id']).count).to eq(1)
       end
 
-      include_examples :increments_customers_auth_state_seq
+      include_examples :increments_customers_auth_state
     end
 
     context 'when attributes are invalid' do
@@ -133,7 +133,7 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
         expect(customers_auth.reload).to have_attributes(name: 'name')
       end
 
-      include_examples :increments_customers_auth_state_seq
+      include_examples :increments_customers_auth_state
     end
 
     context 'when attributes are invalid' do
@@ -160,7 +160,7 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       expect(CustomersAuth.count).to eq(0)
     end
 
-    include_examples :increments_customers_auth_state_seq
+    include_examples :increments_customers_auth_state
   end
 
   describe 'editable tag_action and tag_action_value' do

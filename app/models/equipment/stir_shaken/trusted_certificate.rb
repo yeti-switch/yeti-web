@@ -12,6 +12,6 @@
 class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_trusted_certificates'
 
-  include Yeti::StateSequenceUpdater
-  self.state_sequence_name = 'class4.stir_shaken_trusted_certificates_state_seq'
+  include Yeti::StateUpdater
+  self.state_name = 'stir_shaken_trusted_certificates'
 end

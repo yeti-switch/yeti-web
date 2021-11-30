@@ -21,7 +21,7 @@ RSpec.describe 'Edit Customers Auth', type: :feature do
         )
       end
 
-      include_examples :increments_customers_auth_state_seq
+      include_examples :increments_customers_auth_state
     end
   end
 end
