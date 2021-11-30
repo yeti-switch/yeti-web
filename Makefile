@@ -27,7 +27,7 @@ exclude_files :=	config/database.yml \
 			*.o \
 			*.a
 
-version = $(shell git describe --tags --exact 2>/dev/null || { git describe --tags | sed -E 's/-([0-9]+)-[^-]*$$/+\1/'; })
+version = $(shell ./ci/gen_version.sh)
 debian_version = $(shell echo $(version) | sed 's/_/~/' | sed 's/-master/~master/' | sed 's/-rc/~rc/')-1
 commit = $(shell git rev-parse HEAD)
 
