@@ -24,6 +24,7 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
+          PACKAGE_TYPE: nightly
 
       - name: Save deb package as artifact
         uses: actions/upload-artifact@v2
@@ -55,6 +56,7 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
+          PACKAGE_TYPE: nightly
 
       - name: Save deb package as artifact
         uses: actions/upload-artifact@v2
