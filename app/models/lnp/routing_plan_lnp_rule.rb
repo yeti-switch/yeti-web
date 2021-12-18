@@ -4,15 +4,17 @@
 #
 # Table name: class4.routing_plan_lnp_rules
 #
-#  id                     :integer(4)       not null, primary key
-#  dst_prefix             :string           default(""), not null
-#  lrn_rewrite_result     :string
-#  lrn_rewrite_rule       :string
-#  req_dst_rewrite_result :string
-#  req_dst_rewrite_rule   :string
-#  created_at             :datetime
-#  database_id            :integer(2)       not null
-#  routing_plan_id        :integer(4)       not null
+#  id                       :integer(4)       not null, primary key
+#  drop_call_on_error       :boolean          default(FALSE), not null
+#  dst_prefix               :string           default(""), not null
+#  lrn_rewrite_result       :string
+#  lrn_rewrite_rule         :string
+#  req_dst_rewrite_result   :string
+#  req_dst_rewrite_rule     :string
+#  rewrite_call_destination :boolean          default(FALSE), not null
+#  created_at               :datetime
+#  database_id              :integer(2)       not null
+#  routing_plan_id          :integer(4)       not null
 #
 # Indexes
 #

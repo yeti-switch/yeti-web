@@ -15,7 +15,8 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
 
   permit_params :routing_plan_id, :database_id, :dst_prefix,
                 :req_dst_rewrite_rule, :req_dst_rewrite_result,
-                :lrn_rewrite_rule, :lrn_rewrite_result
+                :lrn_rewrite_rule, :lrn_rewrite_result,
+                :drop_call_on_error,:rewrite_call_destination
 
   includes :routing_plan, :database
 
@@ -30,6 +31,8 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
     column :database
     column :lrn_rewrite_rule
     column :lrn_rewrite_result
+    column :drop_call_on_error
+    column :rewrite_call_destination
     column :created_at
   end
 
@@ -49,19 +52,23 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
       row :database
       row :lrn_rewrite_rule
       row :lrn_rewrite_result
+      row :drop_call_on_error
+      row :rewrite_call_destination
       row :created_at
     end
   end
 
   form do |f|
     f.inputs do
-      f.input :routing_plan
+      f.input :routing_plan, input_html: { class: 'chosen' }
       f.input :dst_prefix
       f.input :req_dst_rewrite_rule
       f.input :req_dst_rewrite_result
-      f.input :database
+      f.input :database, input_html: { class: 'chosen' }
       f.input :lrn_rewrite_rule
       f.input :lrn_rewrite_result
+      f.input :drop_call_on_error
+      f.input :rewrite_call_destination
     end
     actions
   end

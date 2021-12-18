@@ -1780,14 +1780,16 @@ CREATE FUNCTION lnp.cache_lnp_data(i_database_id smallint, i_dst character varyi
         v_ttl integer;
         v_expire timestamptz;
       BEGIN
-        select into v_ttl lnp_cache_ttl from sys.guiconfig;
-        v_expire=now()+v_ttl*'1 minute'::interval;
-        begin
-          insert into class4.lnp_cache(dst,lrn,created_at,updated_at,expires_at,database_id,data,tag) values( i_dst, i_lrn, now(),now(),v_expire,i_database_id,i_data,i_tag);
-        Exception
-          when unique_violation then
-            update class4.lnp_cache set lrn=i_lrn, updated_at=now(), expires_at=v_expire, data=i_data, tag=i_tag WHERE dst=i_dst and database_id=i_database_id;
-        end;
+        select into v_ttl cache_ttl from class4.lnp_databases where id=i_database_id;
+        if v_ttl is not null and v_ttl > 0 then
+          v_expire=now()+v_ttl*'1 seconds'::interval;
+          begin
+            insert into class4.lnp_cache(dst,lrn,created_at,updated_at,expires_at,database_id,data,tag) values( i_dst, i_lrn, now(),now(),v_expire,i_database_id,i_data,i_tag);
+          exception
+            when unique_violation then
+              update class4.lnp_cache set lrn=i_lrn, updated_at=now(), expires_at=v_expire, data=i_data, tag=i_tag WHERE dst=i_dst and database_id=i_database_id;
+          end;
+        end if;
       END;
     $$;
 
@@ -22343,7 +22345,8 @@ CREATE TABLE class4.lnp_databases (
     name character varying NOT NULL,
     created_at timestamp with time zone,
     database_type character varying,
-    database_id smallint NOT NULL
+    database_id smallint NOT NULL,
+    cache_ttl integer DEFAULT 10800 NOT NULL
 );
 
 
@@ -22362,7 +22365,18 @@ CREATE TABLE class4.lnp_databases_30x_redirect (
     id smallint NOT NULL,
     host character varying NOT NULL,
     port integer,
-    timeout smallint DEFAULT 300 NOT NULL
+    timeout smallint DEFAULT 300 NOT NULL,
+    format_id smallint DEFAULT 1 NOT NULL
+);
+
+
+--
+-- Name: lnp_databases_30x_redirect_formats; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases_30x_redirect_formats (
+    id smallint NOT NULL,
+    name character varying NOT NULL
 );
 
 
@@ -23049,7 +23063,9 @@ CREATE TABLE class4.routing_plan_lnp_rules (
     lrn_rewrite_rule character varying,
     lrn_rewrite_result character varying,
     req_dst_rewrite_rule character varying,
-    req_dst_rewrite_result character varying
+    req_dst_rewrite_result character varying,
+    drop_call_on_error boolean DEFAULT false NOT NULL,
+    rewrite_call_destination boolean DEFAULT false NOT NULL
 );
 
 
@@ -27301,6 +27317,22 @@ ALTER TABLE ONLY class4.lnp_cache
 
 
 --
+-- Name: lnp_databases_30x_redirect_formats lnp_databases_30x_redirect_formats_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_30x_redirect_formats
+    ADD CONSTRAINT lnp_databases_30x_redirect_formats_name_key UNIQUE (name);
+
+
+--
+-- Name: lnp_databases_30x_redirect_formats lnp_databases_30x_redirect_formats_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_30x_redirect_formats
+    ADD CONSTRAINT lnp_databases_30x_redirect_formats_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lnp_databases_30x_redirect lnp_databases_30x_redirect_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29492,6 +29524,14 @@ ALTER TABLE ONLY class4.lnp_cache
 
 
 --
+-- Name: lnp_databases_30x_redirect lnp_databases_30x_redirect_format_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.lnp_databases_30x_redirect
+    ADD CONSTRAINT lnp_databases_30x_redirect_format_id_fkey FOREIGN KEY (format_id) REFERENCES class4.lnp_databases_30x_redirect_formats(id);
+
+
+--
 -- Name: numberlist_items numberlist_items_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29967,6 +30007,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211004152514'),
 ('20211005184247'),
 ('20211130113417'),
-('20211130142405');
+('20211130142405'),
+('20211217132047');
 
 

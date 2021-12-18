@@ -48,6 +48,7 @@ ActiveAdmin.register Lnp::Database do
     actions
     column :name
     column :type, :database_type_name, sortable: :database_type
+    column :cache_ttl
     column :created_at
   end
 
@@ -78,6 +79,7 @@ ActiveAdmin.register Lnp::Database do
         attributes_table do
           row :id
           row :name
+          row :cache_ttl
           row :created_at
         end
       end
@@ -93,6 +95,7 @@ ActiveAdmin.register Lnp::Database do
               row :username
               row :token
             when Lnp::Database::CONST::TYPE_SIP_REDIRECT
+              row :format
               row :host
               row :port
               row :timeout
@@ -118,7 +121,7 @@ ActiveAdmin.register Lnp::Database do
   end
 
   permit_params do
-    attrs = %i[name database_type]
+    attrs = %i[name database_type cache_ttl]
     database_attrs = [:type]
     database_type = params[:lnp_database].try!(:[], :database_type) ||
                     params[:lnp_database].try!(:[], :database_attributes).try!(:[], :type)
@@ -127,7 +130,7 @@ ActiveAdmin.register Lnp::Database do
     when Lnp::Database::CONST::TYPE_THINQ
       database_attrs += %i[host port username token timeout]
     when Lnp::Database::CONST::TYPE_SIP_REDIRECT
-      database_attrs += %i[host port timeout]
+      database_attrs += %i[host port timeout format_id]
     when Lnp::Database::CONST::TYPE_CSV
       database_attrs += [:csv_file_path]
     when Lnp::Database::CONST::TYPE_ALCAZAR
@@ -145,6 +148,7 @@ ActiveAdmin.register Lnp::Database do
 
     f.inputs name: 'Main' do
       f.input :name
+      f.input :cache_ttl
     end
 
     database = f.object.database || f.object.database_type.constantize.new
@@ -159,6 +163,7 @@ ActiveAdmin.register Lnp::Database do
         o.input :token
         o.input :timeout
       when Lnp::Database::CONST::TYPE_SIP_REDIRECT
+        o.input :format, as: :select, include_blank: false
         o.input :host
         o.input :port
         o.input :timeout
