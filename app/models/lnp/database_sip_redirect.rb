@@ -28,5 +28,4 @@ class Lnp::DatabaseSipRedirect < ApplicationRecord
     only_integer: true
   }
   validates :format_id, presence: true
-
 end

@@ -66,7 +66,7 @@ class Lnp::Database < ApplicationRecord
   end
 
   validates :database, presence: true
-  validates :cache_ttl, presence: true
+  validates :cache_ttl, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: PG_MAX_INT, allow_nil: false, only_integer: true }
   validates :name, presence: true, uniqueness: true
   validates :database_id, uniqueness: { scope: :database_type }
 

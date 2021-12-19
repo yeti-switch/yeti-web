@@ -30,7 +30,9 @@ RSpec.describe 'Create new Routing Plan Lnp Rule', type: :feature, js: true do
       req_dst_rewrite_rule: '',
       req_dst_rewrite_result: '',
       lrn_rewrite_rule: '',
-      lrn_rewrite_result: ''
+      lrn_rewrite_result: '',
+      drop_call_on_error: true,
+      rewrite_call_destination: true
     )
   end
 

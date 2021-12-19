@@ -16,7 +16,7 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   permit_params :routing_plan_id, :database_id, :dst_prefix,
                 :req_dst_rewrite_rule, :req_dst_rewrite_result,
                 :lrn_rewrite_rule, :lrn_rewrite_result,
-                :drop_call_on_error,:rewrite_call_destination
+                :drop_call_on_error, :rewrite_call_destination
 
   includes :routing_plan, :database
 
