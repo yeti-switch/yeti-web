@@ -314,7 +314,9 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	destination_reverse_billing boolean,
 	dialpeer_reverse_billing boolean,
 	src_country_id integer,
-	src_network_id integer
+	src_network_id integer,
+	lega_identity_attestation_id smallint,
+	lega_identity_verstat_id smallint
 );
 
 
@@ -527,7 +529,9 @@ CREATE TABLE cdr.cdr (
     p_charge_info_in character varying,
     src_country_id integer,
     src_network_id integer,
-    lega_identity jsonb
+    lega_identity jsonb,
+    lega_identity_attestation_id smallint,
+    lega_identity_verstat_id smallint
 )
 PARTITION BY RANGE (time_start);
 
@@ -1923,6 +1927,8 @@ BEGIN
   v_cdr.p_charge_info_in = v_lega_headers.p_charge_info;
 
   v_cdr.lega_identity = i_lega_identity;
+  v_cdr.lega_identity_attestation_id = v_dynamic.lega_identity_attestation_id;
+  v_cdr.lega_identity_verstat_id = v_dynamic.lega_identity_attestation_id;
 
   v_cdr.core_version=v_version_data.core;
   v_cdr.yeti_version=v_version_data.yeti;
@@ -4830,6 +4836,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210218095038'),
 ('20210223125543'),
 ('20210307170219'),
-('20210614110059');
+('20210614110059'),
+('20211005183259');
 
 
