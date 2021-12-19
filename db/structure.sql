@@ -22463,8 +22463,7 @@ CREATE TABLE class4.lnp_databases_alcazar (
     host character varying NOT NULL,
     port integer,
     timeout smallint DEFAULT 300 NOT NULL,
-    key character varying NOT NULL,
-    database_id integer
+    key character varying NOT NULL
 );
 
 
@@ -22494,7 +22493,6 @@ ALTER SEQUENCE class4.lnp_databases_alcazar_id_seq OWNED BY class4.lnp_databases
 
 CREATE TABLE class4.lnp_databases_coure_anq (
     id smallint NOT NULL,
-    database_id integer,
     base_url character varying NOT NULL,
     timeout smallint DEFAULT 300 NOT NULL,
     username character varying NOT NULL,

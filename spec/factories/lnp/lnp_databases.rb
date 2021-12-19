@@ -27,5 +27,51 @@ FactoryBot.define do
         }
       end
     end
+
+    trait :sip_redirect do
+      database_attributes do
+        {
+          type: Lnp::Database::CONST::TYPE_SIP_REDIRECT,
+          host: 'sip.example.com',
+          port: 6050,
+          timeout: 300,
+          format_id: 1
+        }
+      end
+    end
+
+    trait :csv do
+      database_attributes do
+        {
+          type: Lnp::Database::CONST::TYPE_CSV,
+          csv_file_path: '/tmp/lnp.csv'
+        }
+      end
+    end
+
+    trait :alcazar do
+      database_attributes do
+        {
+          type: Lnp::Database::CONST::TYPE_ALCAZAR,
+          host: 'rspec.example.com',
+          port: 1239,
+          timeout: 600,
+          key: 'lnp-key'
+        }
+      end
+    end
+
+    trait :coure_anq do
+      database_attributes do
+        {
+          type: Lnp::Database::CONST::TYPE_COURE_ANQ,
+          base_url: 'http://lnp.rspec.example.com/api',
+          username: 'rspec.test.name',
+          password: 'rspec.test.password',
+          country_code: 'UA',
+          operators_map: '{"operator1": "tag1", "operator2": "tag2"}'
+        }
+      end
+    end
   end
 end
