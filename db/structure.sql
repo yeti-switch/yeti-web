@@ -11234,7 +11234,6 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
-        v_drop_call_if_lnp_fail boolean;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
@@ -11781,7 +11780,7 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
         RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
 
-        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -11796,7 +11795,7 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) desc limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -11823,6 +11822,11 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
               RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
               /*}dbg*/
               v_routing_key=v_ret.lrn;
+              if v_lnp_rule.rewrite_call_destination then
+                v_ret.dst_prefix_out=v_ret.lrn;
+                v_ret.dst_prefix_routing=v_ret.lrn;
+                -- TODO shouldn't we perform tag detection again there? Call destination changed.
+              end if;
             else
               v_ret.lrn=switch19.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
               if v_ret.lrn is null then -- fail
@@ -11830,7 +11834,7 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_end:=clock_timestamp();
                 RAISE NOTICE '% ms -> LNP. Query failed',EXTRACT(MILLISECOND from v_end-v_start);
                 /*}dbg*/
-                if v_drop_call_if_lnp_fail then
+                if v_lnp_rule.drop_call_on_error then
                   /*dbg{*/
                   v_end:=clock_timestamp();
                   RAISE NOTICE '% ms -> LNP. Dropping call',EXTRACT(MILLISECOND from v_end-v_start);
@@ -11851,6 +11855,11 @@ CREATE FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
                 /*}dbg*/
                 v_routing_key=v_ret.lrn;
+                if v_lnp_rule.rewrite_call_destination then
+                  v_ret.dst_prefix_out=v_ret.lrn;
+                  v_ret.dst_prefix_routing=v_ret.lrn;
+                  -- TODO shouldn't we perform tag detection again there? Call destination changed.
+                end if;
               end if;
             end if;
           end if;
@@ -12403,7 +12412,6 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
-        v_drop_call_if_lnp_fail boolean;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
@@ -12950,7 +12958,7 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
         RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
 
-        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -12965,7 +12973,7 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) desc limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -12992,6 +13000,11 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
               RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
               /*}dbg*/
               v_routing_key=v_ret.lrn;
+              if v_lnp_rule.rewrite_call_destination then
+                v_ret.dst_prefix_out=v_ret.lrn;
+                v_ret.dst_prefix_routing=v_ret.lrn;
+                -- TODO shouldn't we perform tag detection again there? Call destination changed.
+              end if;
             else
               v_ret.lrn=switch19.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
               if v_ret.lrn is null then -- fail
@@ -12999,7 +13012,7 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_end:=clock_timestamp();
                 RAISE NOTICE '% ms -> LNP. Query failed',EXTRACT(MILLISECOND from v_end-v_start);
                 /*}dbg*/
-                if v_drop_call_if_lnp_fail then
+                if v_lnp_rule.drop_call_on_error then
                   /*dbg{*/
                   v_end:=clock_timestamp();
                   RAISE NOTICE '% ms -> LNP. Dropping call',EXTRACT(MILLISECOND from v_end-v_start);
@@ -13020,6 +13033,11 @@ CREATE FUNCTION switch19.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
                 /*}dbg*/
                 v_routing_key=v_ret.lrn;
+                if v_lnp_rule.rewrite_call_destination then
+                  v_ret.dst_prefix_out=v_ret.lrn;
+                  v_ret.dst_prefix_routing=v_ret.lrn;
+                  -- TODO shouldn't we perform tag detection again there? Call destination changed.
+                end if;
               end if;
             end if;
           end if;
@@ -13569,7 +13587,6 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
-        v_drop_call_if_lnp_fail boolean;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
@@ -14049,7 +14066,7 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         
 
-        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -14064,7 +14081,7 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) desc limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -14079,11 +14096,16 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
               v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
               
               v_routing_key=v_ret.lrn;
+              if v_lnp_rule.rewrite_call_destination then
+                v_ret.dst_prefix_out=v_ret.lrn;
+                v_ret.dst_prefix_routing=v_ret.lrn;
+                -- TODO shouldn't we perform tag detection again there? Call destination changed.
+              end if;
             else
               v_ret.lrn=switch19.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
               if v_ret.lrn is null then -- fail
                 
-                if v_drop_call_if_lnp_fail then
+                if v_lnp_rule.drop_call_on_error then
                   
                   v_ret.disconnect_code_id=8003; --No response from LNP DB
                   RETURN NEXT v_ret;
@@ -14095,6 +14117,11 @@ CREATE FUNCTION switch19.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
                 
                 v_routing_key=v_ret.lrn;
+                if v_lnp_rule.rewrite_call_destination then
+                  v_ret.dst_prefix_out=v_ret.lrn;
+                  v_ret.dst_prefix_routing=v_ret.lrn;
+                  -- TODO shouldn't we perform tag detection again there? Call destination changed.
+                end if;
               end if;
             end if;
           end if;
@@ -17579,7 +17606,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
-        v_drop_call_if_lnp_fail boolean;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
@@ -18128,7 +18154,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
 
-        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -18143,7 +18169,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) desc limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -18170,6 +18196,11 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
               RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
               /*}dbg*/
               v_routing_key=v_ret.lrn;
+              if v_lnp_rule.rewrite_call_destination then
+                v_ret.dst_prefix_out=v_ret.lrn;
+                v_ret.dst_prefix_routing=v_ret.lrn;
+                -- TODO shouldn't we perform tag detection again there? Call destination changed.
+              end if;
             else
               v_ret.lrn=switch20.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
               if v_ret.lrn is null then -- fail
@@ -18177,7 +18208,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_end:=clock_timestamp();
                 RAISE NOTICE '% ms -> LNP. Query failed',EXTRACT(MILLISECOND from v_end-v_start);
                 /*}dbg*/
-                if v_drop_call_if_lnp_fail then
+                if v_lnp_rule.drop_call_on_error then
                   /*dbg{*/
                   v_end:=clock_timestamp();
                   RAISE NOTICE '% ms -> LNP. Dropping call',EXTRACT(MILLISECOND from v_end-v_start);
@@ -18198,6 +18229,11 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
                 /*}dbg*/
                 v_routing_key=v_ret.lrn;
+                if v_lnp_rule.rewrite_call_destination then
+                  v_ret.dst_prefix_out=v_ret.lrn;
+                  v_ret.dst_prefix_routing=v_ret.lrn;
+                  -- TODO shouldn't we perform tag detection again there? Call destination changed.
+                end if;
               end if;
             end if;
           end if;
@@ -18750,7 +18786,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
-        v_drop_call_if_lnp_fail boolean;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
@@ -19299,7 +19334,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
 
-        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -19314,7 +19349,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) desc limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -19341,6 +19376,11 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
               RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
               /*}dbg*/
               v_routing_key=v_ret.lrn;
+              if v_lnp_rule.rewrite_call_destination then
+                v_ret.dst_prefix_out=v_ret.lrn;
+                v_ret.dst_prefix_routing=v_ret.lrn;
+                -- TODO shouldn't we perform tag detection again there? Call destination changed.
+              end if;
             else
               v_ret.lrn=switch20.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
               if v_ret.lrn is null then -- fail
@@ -19348,7 +19388,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_end:=clock_timestamp();
                 RAISE NOTICE '% ms -> LNP. Query failed',EXTRACT(MILLISECOND from v_end-v_start);
                 /*}dbg*/
-                if v_drop_call_if_lnp_fail then
+                if v_lnp_rule.drop_call_on_error then
                   /*dbg{*/
                   v_end:=clock_timestamp();
                   RAISE NOTICE '% ms -> LNP. Dropping call',EXTRACT(MILLISECOND from v_end-v_start);
@@ -19369,6 +19409,11 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
                 /*}dbg*/
                 v_routing_key=v_ret.lrn;
+                if v_lnp_rule.rewrite_call_destination then
+                  v_ret.dst_prefix_out=v_ret.lrn;
+                  v_ret.dst_prefix_routing=v_ret.lrn;
+                  -- TODO shouldn't we perform tag detection again there? Call destination changed.
+                end if;
               end if;
             end if;
           end if;
@@ -19918,7 +19963,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
-        v_drop_call_if_lnp_fail boolean;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
         v_numberlist record;
         v_numberlist_item record;
@@ -20400,7 +20444,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         
 
-        select into v_max_call_length,v_drop_call_if_lnp_fail max_call_duration,drop_call_if_lnp_fail from sys.guiconfig limit 1;
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -20415,7 +20459,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           select into v_lnp_rule rules.*
           from class4.routing_plan_lnp_rules rules
           WHERE prefix_range(rules.dst_prefix)@>prefix_range(v_ret.dst_prefix_routing) and rules.routing_plan_id=v_rp.id
-          order by length(prefix_range(rules.dst_prefix)) limit 1;
+          order by length(prefix_range(rules.dst_prefix)) desc limit 1;
           if found then
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
@@ -20430,11 +20474,16 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
               v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
               
               v_routing_key=v_ret.lrn;
+              if v_lnp_rule.rewrite_call_destination then
+                v_ret.dst_prefix_out=v_ret.lrn;
+                v_ret.dst_prefix_routing=v_ret.lrn;
+                -- TODO shouldn't we perform tag detection again there? Call destination changed.
+              end if;
             else
               v_ret.lrn=switch20.lnp_resolve(v_ret.lnp_database_id,v_lnp_key);
               if v_ret.lrn is null then -- fail
                 
-                if v_drop_call_if_lnp_fail then
+                if v_lnp_rule.drop_call_on_error then
                   
                   v_ret.disconnect_code_id=8003; --No response from LNP DB
                   RETURN NEXT v_ret;
@@ -20446,6 +20495,11 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
                 
                 v_routing_key=v_ret.lrn;
+                if v_lnp_rule.rewrite_call_destination then
+                  v_ret.dst_prefix_out=v_ret.lrn;
+                  v_ret.dst_prefix_routing=v_ret.lrn;
+                  -- TODO shouldn't we perform tag detection again there? Call destination changed.
+                end if;
               end if;
             end if;
           end if;
