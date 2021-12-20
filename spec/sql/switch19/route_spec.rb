@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe '#routing logic' do
+RSpec.describe '#routing logic switch19' do
   subject do
     CallSql::Yeti.select_all_serialized(
-      "SELECT * from #{ApplicationRecord::ROUTING_SCHEMA}.route_debug(
+      "SELECT * from switch19.route_debug(
         ?::integer,
         ?::integer,
         ?::smallint,
@@ -24,7 +24,6 @@ RSpec.describe '#routing logic' do
         ?::varchar,
         ?::varchar,
         ?::integer, /* i_auth_id */
-        ?::json, /* i_identity */
         ?::varchar,
         ?::varchar,
         ?::inet,
@@ -56,7 +55,6 @@ RSpec.describe '#routing logic' do
       uri_name,
       uri_domain,
       auth_id,
-      identity,
       x_yeti_auth,
       diversion,
       x_orig_ip,
@@ -264,7 +262,7 @@ RSpec.describe '#routing logic' do
     end
   end
 
-  context 'Auhtorized, Balance checking disabled' do
+  context 'Authorized, Balance checking disabled' do
     before do
       FactoryBot.create(:system_load_balancer,
                         signalling_ip: '1.1.1.1')
@@ -282,6 +280,85 @@ RSpec.describe '#routing logic' do
       expect(subject.first[:customer_auth_id]).to be
       expect(subject.first[:customer_id]).to be
       expect(subject.first[:disconnect_code_id]).to eq(111) # Can't find destination prefix
+    end
+  end
+
+  context 'Authorized, Balance checking disabled, LNP' do
+    before do
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
+
+      FactoryBot.create(:customers_auth,
+                        ip: '3.3.3.3',
+                        check_account_balance: false,
+                        routing_plan_id: routing_plan.id)
+    end
+
+    let(:remote_ip) { '1.1.1.1' }
+    let(:x_orig_ip) { '3.3.3.3' }
+    let!(:routing_plan) { create(:routing_plan, use_lnp: true) }
+    let!(:lnp_rule) { create(:lnp_routing_plan_lnp_rule, routing_plan_id: routing_plan.id, drop_call_on_error: drop_call_on_error, rewrite_call_destination: rewrite_call_destination) }
+
+    context 'Authorized, Balance checking disabled, LNP Error' do
+      let(:drop_call_on_error) { true }
+      let(:rewrite_call_destination) { false }
+
+      it 'LNP fail ' do
+        expect(subject.size).to eq(1)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(8003) # no LNP Error
+        expect(subject.first[:lrn]).to eq(nil) # No LRN
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+      end
+    end
+
+    context 'Authorized, Balance checking disabled, LNP Error failover' do
+      let(:drop_call_on_error) { false }
+      let(:rewrite_call_destination) { false }
+
+      it 'LNP fail ' do
+        expect(subject.size).to eq(1)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(111) # no destination
+        expect(subject.first[:lrn]).to eq(nil) # No LRN
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+      end
+    end
+
+    context 'Authorized, Balance checking disabled, LNP cache without redirect' do
+      let(:drop_call_on_error) { true }
+      let(:rewrite_call_destination) { false }
+      let!(:lnp_cache) { create(:lnp_cache, database_id: lnp_rule.database_id, dst: 'uri-name', lrn: 'lrn111') }
+
+      it 'LNP fail ' do
+        expect(subject.size).to eq(1)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(111) # no destination
+        expect(subject.first[:lrn]).to eq('lrn111') # LRN from cache
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+      end
+    end
+
+    context 'Authorized, Balance checking disabled, LNP cache with redirect' do
+      let(:drop_call_on_error) { true }
+      let(:rewrite_call_destination) { true }
+      let!(:lnp_cache) { create(:lnp_cache, database_id: lnp_rule.database_id, dst: 'uri-name', lrn: 'lrn111') }
+
+      it 'LNP fail ' do
+        expect(subject.size).to eq(1)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(111) # no destination
+        expect(subject.first[:lrn]).to eq('lrn111') # LRN from cache
+        expect(subject.first[:dst_prefix_out]).to eq('lrn111') # Destination rewrited
+        expect(subject.first[:dst_prefix_routing]).to eq('lrn111') # Destination rewrited
+      end
     end
   end
 end

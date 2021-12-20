@@ -22364,7 +22364,7 @@ CREATE TABLE class4.lnp_cache (
     lrn character varying NOT NULL,
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
-    expires_at timestamp with time zone,
+    expires_at timestamp with time zone DEFAULT now() NOT NULL,
     database_id smallint,
     data character varying,
     tag character varying

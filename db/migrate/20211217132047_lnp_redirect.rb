@@ -21,6 +21,10 @@ class LnpRedirect < ActiveRecord::Migration[6.1]
       alter table class4.lnp_databases_alcazar drop column database_id;
       alter table class4.lnp_databases_coure_anq drop column database_id;
 
+      alter table class4.lnp_cache alter column expires_at set default now();
+      update class4.lnp_cache set expires_at=now();
+      alter table class4.lnp_cache alter column expires_at set not null;
+
 CREATE OR REPLACE FUNCTION lnp.cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying)
  RETURNS void
  LANGUAGE plpgsql
@@ -2453,6 +2457,8 @@ CREATE or replace FUNCTION switch19.route(i_node_id integer, i_pop_id integer, i
       alter table class4.lnp_databases_alcazar add database_id integer;
       alter table class4.lnp_databases_coure_anq add database_id integer;
 
+      alter table class4.lnp_cache alter column expires_at drop default;
+      alter table class4.lnp_cache alter column expires_at drop not null;
 
 CREATE OR REPLACE FUNCTION lnp.cache_lnp_data(i_database_id smallint, i_dst character varying, i_lrn character varying, i_tag character varying, i_data character varying)
  RETURNS void
