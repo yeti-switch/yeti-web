@@ -5,6 +5,7 @@
 # Table name: class4.lnp_databases
 #
 #  id                                                                                   :integer(2)       not null, primary key
+#  cache_ttl                                                                            :integer(4)       default(10800), not null
 #  database_type(One of Lnp::DatabaseThinq, Lnp::DatabaseSipRedirect, Lnp::DatabaseCsv) :string
 #  name                                                                                 :string           not null
 #  created_at                                                                           :datetime
