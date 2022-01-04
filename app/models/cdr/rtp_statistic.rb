@@ -78,8 +78,14 @@ class Cdr::RtpStatistic < Cdr::Base
 
   scope :no_rx, -> { where rx_packets: 0 }
   scope :no_tx, -> { where tx_packets: 0 }
+  scope :rx_ssrc_hex, ->(value) { ransack(rx_ssrc_equals: value.hex).result }
+  scope :tx_ssrc_hex, ->(value) { ransack(tx_ssrc_equals: value.hex).result }
 
   def display_name
     id.to_s
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[rx_ssrc_hex tx_ssrc_hex]
   end
 end

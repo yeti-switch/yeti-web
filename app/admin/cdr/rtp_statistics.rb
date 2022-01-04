@@ -158,6 +158,8 @@ ActiveAdmin.register Cdr::RtpStatistic, as: 'RtpStatistics' do
   filter :rx_bytes
   filter :tx_packets
   filter :rx_bytes
+  filter :rx_ssrc, as: :numeric, filters: %i[hex equals]
+  filter :tx_ssrc, as: :numeric, filters: %i[hex equals]
 
   show do
     attributes_table do
