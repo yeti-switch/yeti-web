@@ -10,14 +10,17 @@ namespace :pgq do
     w = Pgq::Worker.new(pgq_env)
 
     pid_file = ENV['pid_file']
-    raise 'pid_file is mandatory option!' if pid_file.blank?
-    raise 'pid file exists!' if File.exist? pid_file
 
-    File.open(pid_file, 'w') { |f| f.puts Process.pid }
+    if pid_file.present?
+      raise 'pid file exists!' if File.exist? pid_file
+
+      File.open(pid_file, 'w') { |f| f.puts Process.pid }
+    end
+
     begin
       w.run
     ensure
-      File.delete pid_file
+      File.delete pid_file if pid_file.present?
     end
   end
 end
