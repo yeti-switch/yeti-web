@@ -66,6 +66,10 @@ class Contractor < ApplicationRecord
     Gateway.for_termination(id)
   end
 
+  def for_termination_gateway_groups
+    GatewayGroup.for_termination(id)
+  end
+
   private
 
   def vendor_or_customer?

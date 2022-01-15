@@ -232,7 +232,7 @@ ActiveAdmin.register Dialpeer do
                           class: 'chosen',
                           onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :dialpeer_account_id) +
                                     remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
-                                    remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
+                                    remote_chosen_request(:get, for_termination_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
                         }
       f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),
                         include_blank: false,
@@ -253,7 +253,7 @@ ActiveAdmin.register Dialpeer do
                         include_blank: 'None',
                         input_html: { class: 'chosen' }
 
-      f.input :gateway_group, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateway_groups),
+      f.input :gateway_group, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_termination_gateway_groups),
                               include_blank: 'None',
                               input_html: { class: 'chosen' }
 

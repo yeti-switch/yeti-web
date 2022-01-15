@@ -350,10 +350,10 @@ class Gateway < ApplicationRecord
     return true unless is_shared_changed?(from: true, to: false)
 
     if dialpeers.any?
-      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_dialpeer'))
+      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.is_shared.cant_be_disabled_when_linked_to_dialpeer'))
     end
     if customers_auths.any?
-      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_customers_auth'))
+      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway.attributes.is_shared.cant_be_disabled_when_linked_to_customers_auth'))
     end
   end
 

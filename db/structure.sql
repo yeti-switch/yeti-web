@@ -22272,7 +22272,8 @@ CREATE TABLE class4.gateway_groups (
     vendor_id integer NOT NULL,
     name character varying NOT NULL,
     prefer_same_pop boolean DEFAULT true NOT NULL,
-    balancing_mode_id smallint DEFAULT 1 NOT NULL
+    balancing_mode_id smallint DEFAULT 1 NOT NULL,
+    is_shared boolean DEFAULT false NOT NULL
 );
 
 
@@ -30060,6 +30061,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211005184247'),
 ('20211130113417'),
 ('20211130142405'),
-('20211217132047');
+('20211217132047'),
+('20220115143706');
 
 
