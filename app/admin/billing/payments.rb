@@ -25,7 +25,7 @@ ActiveAdmin.register Payment do
 
   form do |f|
     f.inputs form_title do
-      f.input :account, input_html: { class: 'chosen' }
+      f.input :account, input_html: { class: 'chosen' }, collection: Account.reorder(:name)
       f.input :amount
       f.input :notes
     end
