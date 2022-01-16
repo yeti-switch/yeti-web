@@ -97,6 +97,7 @@ group :development, :test do
   gem 'byebug'
   gem 'thin'
 
+  gem 'brakeman'
   gem 'bundler-audit', require: false
   gem 'factory_bot_rails'
   gem 'parallel_tests'
