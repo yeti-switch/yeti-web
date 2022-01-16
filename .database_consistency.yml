@@ -11,10 +11,156 @@ ActiveStorage::VariantRecord:
 DatabaseConsistencySettings:
   color: true
 
+
+AdminUser:
+  email:
+    ColumnPresenceChecker:
+      enabled: false
+  password:
+    ColumnPresenceChecker:
+      enabled: false
+
+Log::EmailLog:
+  contact:
+    ForeignKeyChecker:
+      enabled: false
+  smtp_connection:
+    ForeignKeyChecker:
+      enabled: false
+
 System::ApiAccess:
   id:
     PrimaryKeyTypeChecker:
       enabled: false
+
+Routing::NumberlistAction:
+  numberlist_actions_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Routing::CustomerAuthSrcNameField:
+  customers_auth_src_name_fields_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+
+Routing::NumberlistMode:
+  blacklist_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Routing::CustomerAuthSrcNumberField:
+  customers_auth_src_number_fields_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Routing::RoutingTagMode:
+  routing_tag_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Routing::DestinationRatePolicy:
+  destination_rate_policy_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Routing::CustomerAuthDstNumberField:
+  customers_auth_dst_number_fields_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+ActiveRecord::SchemaMigration:
+  unique_public.schema_migrations:
+    UniqueIndexChecker:
+      enabled: false
+
+DiversionPolicy:
+  diversion_policy_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Codec:
+  codecs_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+DisconnectCodeNamespace:
+  disconnect_code_namespace_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+DumpLevel:
+  dump_level_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+SdpCLocation:
+  sdp_c_location_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Lnp::DatabaseSipRedirectFormat:
+  lnp_databases_30x_redirect_formats_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Billing::InvoicePeriod:
+  invoice_periods_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+System::DtmfSendMode:
+  dtmf_send_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+System::DtmfReceiveMode:
+  dtmf_receive_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+System::SipSchema:
+  sip_schemas_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+System::SensorLevel:
+  sensor_levels_name_key: 
+    UniqueIndexChecker:
+      enabled: false
+
+Equipment::GatewayMediaEncryptionMode:
+  gateway_media_encryption_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Equipment::GatewayNetworkProtocolPriority:
+  gateway_network_protocol_priorities_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Equipment::TransportProtocol:
+  transport_protocols_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Equipment::GatewayGroupBalancingMode:
+  gateway_group_balancing_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+Equipment::GatewayInbandDtmfFilteringMode:
+  gateway_inband_dtmf_filtering_modes_name_key: 
+    UniqueIndexChecker:
+      enabled: false
+
+Equipment::GatewayRel100Mode:
+  gateway_rel100_modes_name_key:
+    UniqueIndexChecker:
+      enabled: false
+
+
+
 
 Cdr::Cdr:
   time_start:
