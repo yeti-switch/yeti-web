@@ -193,7 +193,7 @@ RSpec.describe Gateway, type: :model do
       include_examples :validation_error_on_is_shared_change do
         before { create(:customers_auth, gateway: record) }
         let(:expected_error_message) do
-          I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_customers_auth')
+          I18n.t('activerecord.errors.models.gateway.attributes.is_shared.cant_be_disabled_when_linked_to_customers_auth')
         end
       end
     end
@@ -203,7 +203,7 @@ RSpec.describe Gateway, type: :model do
         before { create(:dialpeer, gateway: record) }
 
         let(:expected_error_message) do
-          I18n.t('activerecord.errors.models.gateway.attributes.contractor.cant_be_changed_when_linked_to_dialpeer')
+          I18n.t('activerecord.errors.models.gateway.attributes.is_shared.cant_be_disabled_when_linked_to_dialpeer')
         end
       end
     end
