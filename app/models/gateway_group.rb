@@ -72,5 +72,4 @@ class GatewayGroup < ApplicationRecord
       errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway_group.attributes.is_shared.cant_be_disabled_when_linked_to_dialpeer'))
     end
   end
-
 end

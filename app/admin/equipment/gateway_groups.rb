@@ -15,7 +15,6 @@ ActiveAdmin.register GatewayGroup do
                   :name,
                   :is_shared,
                   [:vendor_name, proc { |row| row.vendor.try(:name) }],
-
                   [:balancing_mode_name, proc { |row| row.balancing_mode.try(:name) }]
 
   acts_as_import resource_class: Importing::GatewayGroup
@@ -39,7 +38,6 @@ ActiveAdmin.register GatewayGroup do
     @gr = GatewayGroup.for_termination(params[:contractor_id].to_i)
     render plain: view_context.options_from_collection_for_select(@gr, :id, :display_name)
   end
-
 
   index do
     selectable_column
