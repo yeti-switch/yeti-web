@@ -10,3 +10,136 @@ ActiveStorage::VariantRecord:
 
 DatabaseConsistencySettings:
   color: true
+
+System::ApiAccess:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Cdr::Cdr:
+  time_start:
+    NullConstraintChecker:
+      enabled: false
+
+  rateplan:
+    ForeignKeyChecker:
+      enabled: false
+  routing_group:
+    ForeignKeyChecker:
+      enabled: false
+  src_area:
+    ForeignKeyChecker:
+      enabled: false
+  dst_area:
+    ForeignKeyChecker:
+      enabled: false
+  routing_plan:
+    ForeignKeyChecker:
+      enabled: false
+  orig_gw:
+    ForeignKeyChecker:
+      enabled: false
+  term_gw:
+    ForeignKeyChecker:
+      enabled: false
+  destination:
+    ForeignKeyChecker:
+      enabled: false
+  destination_rate_policy:
+    ForeignKeyChecker:
+      enabled: false
+  dialpeer:
+    ForeignKeyChecker:
+      enabled: false
+  customer_auth:
+    ForeignKeyChecker:
+      enabled: false
+  vendor_acc:
+    ForeignKeyChecker:
+      enabled: false
+  customer_acc:
+    ForeignKeyChecker:
+      enabled: false
+  vendor:
+    ForeignKeyChecker:
+      enabled: false
+  customer:
+    ForeignKeyChecker:
+      enabled: false
+  disconnect_initiator:
+    ForeignKeyChecker:
+      enabled: false
+  vendor_invoice:
+    ForeignKeyChecker:
+      enabled: false
+  customer_invoice:
+    ForeignKeyChecker:
+      enabled: false
+  node:
+    ForeignKeyChecker:
+      enabled: false
+  pop:
+    ForeignKeyChecker:
+      enabled: false
+  dump_level:
+    ForeignKeyChecker:
+      enabled: false
+  src_network:
+    ForeignKeyChecker:
+      enabled: false
+  src_country:
+    ForeignKeyChecker:
+      enabled: false
+  dst_network:
+    ForeignKeyChecker:
+      enabled: false
+  dst_country:
+    ForeignKeyChecker:
+      enabled: false
+  lnp_database:
+    ForeignKeyChecker:
+      enabled: false
+  auth_orig_transport_protocol:
+    ForeignKeyChecker:
+      enabled: false
+  sign_orig_transport_protocol:
+    ForeignKeyChecker:
+      enabled: false
+  sign_term_transport_protocol:
+    ForeignKeyChecker:
+      enabled: false
+
+Cdr::RtpStatistic:
+  time_start:
+    NullConstraintChecker:
+      enabled: false
+  gateway:
+    ForeignKeyChecker:
+      enabled: false
+  pop:
+    ForeignKeyChecker:
+      enabled: false
+  node:
+    ForeignKeyChecker:
+      enabled: false
+
+Cdr::AuthLog:
+  request_time:
+    NullConstraintChecker:
+      enabled: false
+
+Cdr::Country:
+  id:
+    NullConstraintChecker:
+      enabled: false
+
+Cdr::Network:
+  id:
+    NullConstraintChecker:
+      enabled: false
+
+Cdr::NetworkPrefix:
+  id:
+    NullConstraintChecker:
+      enabled: false
+
