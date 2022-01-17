@@ -6,17 +6,13 @@ RSpec.describe 'Disable versioning', type: :feature do
   context 'validate displaying the history sidebar and action item' do
     before do
       # Stub the config
-      allow(Rails.application.config).to receive(:yeti_web).and_return(
-        {
-          'role_policy' => {
-            'when_no_config' => 'disallow',
-            'when_no_policy_class' => 'raise'
-          },
-          'versioning_disable_for_models' => [
-            'Routing::NumberlistItem',
-            'Node'
-          ]
-        }
+      allow(YetiConfig.role_policy).to receive(:when_no_config).and_return('disallow')
+      allow(YetiConfig.role_policy).to receive(:when_no_policy_class).and_return('raise')
+      allow(YetiConfig).to receive(:versioning_disable_for_models).and_return(
+        [
+          'Routing::NumberlistItem',
+          'Node'
+        ]
       )
     end
 

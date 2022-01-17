@@ -6,7 +6,7 @@ if File.file?(policy_roles_path)
   Rails.configuration.policy_roles = policy_roles
 else
   Rails.configuration.policy_roles = nil
-  rule = Rails.configuration.yeti_web['role_policy']['when_no_config']
+  rule = YetiConfig.role_policy.when_no_config
   case rule.to_sym
   when :allow, :disallow then
     Rails.logger.warn { "config/policy_roles.yml config is missing. Default rule is #{rule}." }

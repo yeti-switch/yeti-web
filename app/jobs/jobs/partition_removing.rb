@@ -14,7 +14,7 @@ module Jobs
     private
 
     def partition_remove_delay
-      Rails.configuration.yeti_web.fetch('partition_remove_delay')
+      YetiConfig.partition_remove_delay
     end
 
     def remove_partition!(partition_class, model_class)

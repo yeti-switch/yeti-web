@@ -34,7 +34,7 @@ module Worker
     end
 
     def dir_path
-      Rails.configuration.yeti_web.fetch('cdr_export').fetch('dir_path').chomp('/')
+      YetiConfig.cdr_export.dir_path.chomp('/')
     end
   end
 end
