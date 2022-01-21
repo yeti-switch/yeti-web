@@ -36,7 +36,7 @@ class BaseJob < Scheduler::Job::Base
   def after_start; end
 
   def capture_job_extra(extra)
-    CaptureError.with_extra(type => extra) { yield }
+    CaptureError.with_exception_context(extra: { type => extra }) { yield }
   end
 
   def capture_extra

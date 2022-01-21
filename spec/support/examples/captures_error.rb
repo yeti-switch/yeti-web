@@ -2,7 +2,7 @@
 
 RSpec.shared_examples :captures_error do |safe: false, request: false|
   let(:capture_error_context) do
-    { tags: a_kind_of(Hash), extra: a_kind_of(Hash), request_env: request ? be_present : nil }
+    { tags: a_kind_of(Hash), extra: a_kind_of(Hash), rack_env: request ? be_present : nil }
   end
   let(:capture_error_exception_class) { StandardError }
   let(:capture_error_exception) { a_kind_of(capture_error_exception_class) }
@@ -13,7 +13,7 @@ RSpec.shared_examples :captures_error do |safe: false, request: false|
       expect(options[:user]).to match(capture_error_context[:user])
       expect(options[:tags]).to match(capture_error_context[:tags])
       expect(options[:extra]).to match(capture_error_context[:extra])
-      expect(options[:request_env]).to match(capture_error_context[:request_env])
+      expect(options[:rack_env]).to match(capture_error_context[:rack_env])
     end
     safe ? safe_subject : subject
   end

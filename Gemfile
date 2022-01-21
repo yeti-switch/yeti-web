@@ -81,7 +81,9 @@ gem 'zip-zip'
 
 gem 'pgq_prometheus', require: false
 gem 'prometheus_exporter', github: 'didww/prometheus_exporter', branch: 'didww', require: false
-gem 'sentry-raven', require: false
+gem 'sentry-delayed_job', require: false
+gem 'sentry-rails', require: false
+gem 'sentry-ruby', require: false
 
 gem 'rufus-scheduler', require: false
 

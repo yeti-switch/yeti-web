@@ -77,7 +77,7 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
               request_id: be_present
             },
             extra: {},
-            request_env: be_present
+            rack_env: be_present
           }
         end
       end

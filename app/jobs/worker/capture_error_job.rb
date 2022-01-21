@@ -7,14 +7,14 @@ module Worker
 
     rescue_from StandardError, with: :log_error
 
-    retry_on CaptureError::Errors::SentFailed,
+    retry_on Sentry::Error,
              wait: 1.minute,
              attempts: 5
 
-    def perform(event)
+    def perform(event, hint)
       return unless CaptureError.enabled?
 
-      Raven.send_event(event)
+      Sentry.send_event(event, hint)
     end
   end
 end

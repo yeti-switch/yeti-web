@@ -49,11 +49,11 @@ RSpec.describe BillingInvoice::Create do
 
   shared_examples :does_not_create_invoice do
     let(:service_error) { nil }
-    let(:expected_exception_capture_extra) { anything }
+    let(:expected_exception_capture_context) { anything }
 
     it 'raises BillingInvoice::Create::Error' do
       expect { subject }.to raise_error(BillingInvoice::Create::Error, service_error) do |error|
-        expect(CaptureError.retrieve_extra(error)).to match(expected_exception_capture_extra)
+        expect(CaptureError.retrieve_exception_context(error)).to match(expected_exception_capture_context)
       end
     end
 
@@ -143,11 +143,13 @@ RSpec.describe BillingInvoice::Create do
     let(:service_params) { super().merge type_id: nil }
 
     include_examples :does_not_create_invoice do
-      let(:expected_exception_capture_extra) do
+      let(:expected_exception_capture_context) do
         {
-          start_date: service_params[:start_time],
-          end_date: service_params[:end_time],
-          params: a_kind_of(Hash)
+          extra: {
+            start_date: service_params[:start_time],
+            end_date: service_params[:end_time],
+            params: a_kind_of(Hash)
+          }
         }
       end
       let(:service_error) { 'type_id must be present' }
@@ -167,12 +169,14 @@ RSpec.describe BillingInvoice::Create do
 
     context 'when other invoice starts at start_time and ends at end_time' do
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -186,12 +190,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -205,12 +211,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -224,12 +232,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -243,12 +253,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -262,12 +274,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -299,12 +313,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -318,12 +334,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
@@ -337,12 +355,14 @@ RSpec.describe BillingInvoice::Create do
       end
 
       include_examples :does_not_create_invoice do
-        let(:expected_exception_capture_extra) do
+        let(:expected_exception_capture_context) do
           {
-            start_date: service_params[:start_time],
-            end_date: service_params[:end_time],
-            covered_invoice_ids: [other_invoice.id],
-            params: a_kind_of(Hash)
+            extra: {
+              start_date: service_params[:start_time],
+              end_date: service_params[:end_time],
+              covered_invoice_ids: [other_invoice.id],
+              params: a_kind_of(Hash)
+            }
           }
         end
         let(:service_error) { 'have invoice inside provided period' }
