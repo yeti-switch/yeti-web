@@ -79,6 +79,7 @@ class Node < ApplicationRecord
       logger.error { "Failed to fetch incoming_registrations with auth_id=#{auth_id.inspect}" }
       logger.error { "<#{e.class}>: #{e.message}" }
       logger.error { e.backtrace.join("\n") }
+      CaptureError.capture(e, extra: { model_class: self.class.name, auth_id: auth_id })
       []
     else
       raise e
@@ -105,6 +106,7 @@ class Node < ApplicationRecord
       if empty_on_error
         logger.warn { e.message }
         logger.warn { e.backtrace.join '\n' }
+        CaptureError.capture(e)
         []
       else
         raise e

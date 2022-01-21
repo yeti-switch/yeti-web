@@ -15,6 +15,7 @@ module ResourceDSL
                                    plural_model: active_admin_config.plural_resource_label(count: selected_ids.count).downcase)
       rescue StandardError => e
         flash[:error] = e.message
+        CaptureError.capture(e, extra: { selected_ids: selected_ids })
         redirect_back fallback_location: root_path
       end
 
@@ -31,6 +32,7 @@ module ResourceDSL
           destroy!
         rescue StandardError => e
           logger.warn { e.message }
+          CaptureError.capture(e)
           flash[:error] = e.message
           redirect_to action: 'show', id: params[:id]
         end

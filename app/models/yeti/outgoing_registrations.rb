@@ -24,6 +24,7 @@ module Yeti
           raise e unless options[:empty_on_error]
 
           Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+          CaptureError.capture(e, extra: { model_class: self.class.name, node_id: node&.id })
           @errors << e.message
         end
         Rails.logger.info { " loading  #{registrations.count} registrations" }

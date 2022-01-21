@@ -7,6 +7,10 @@ end
 ActiveAdmin::BaseController.class_eval do
   include CaptureError::ControllerMethods
 
+  def capture_tags
+    { component: 'AdminUI' }
+  end
+
   def capture_user
     return if current_admin_user.nil?
 

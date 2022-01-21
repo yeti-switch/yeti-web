@@ -102,6 +102,7 @@ class RealtimeData::ActiveCall < YetiResource
     true
   rescue StandardError => e
     logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+    CaptureError.capture(e, extra: { model_class: self.class.name, node_id: node_id, local_tag: local_tag })
     errors.add(:base, e.message)
     false
   end

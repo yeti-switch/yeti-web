@@ -41,8 +41,10 @@ module Jobs
       cdr_remove_candidate.destroy!
     rescue ActiveRecord::RecordNotDestroyed => e
       logger.error { "#{self.class}: {#{table_name}} #{cdr_remove_candidate&.name} - #{e.message}" }
+      capture_error(e, extra: { partition_class: partition_class, model_class: model_class })
     rescue StandardError => e
       logger.error { "#{self.class}: {#{table_name}} <#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+      capture_error(e, extra: { partition_class: partition_class.name, model_class: model_class.name })
       raise e
     end
   end

@@ -56,6 +56,7 @@ class RealtimeData::ActiveNode < Node
       if empty_on_error
         logger.warn { e.message }
         logger.warn { e.backtrace.join("\n") }
+        CaptureError.capture(e, extra: { model_class: self.class.name, params: params })
         []
       else
         raise e

@@ -206,6 +206,7 @@ module BillingInvoice
     rescue StandardError => e
       logger.error { e.message }
       logger.error { e.backtrace.join("\n") }
+      capture_error(e, extra: { service_class: self.class.name, file_path: file_path })
       nil
     end
   end
