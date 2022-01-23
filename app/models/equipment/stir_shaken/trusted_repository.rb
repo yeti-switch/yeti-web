@@ -12,6 +12,8 @@
 class Equipment::StirShaken::TrustedRepository < ApplicationRecord
   self.table_name = 'stir_shaken_trusted_repositories'
 
+  validates :url_pattern, presence: true
+
   include Yeti::StateUpdater
   self.state_name = 'stir_shaken_trusted_repositories'
 end

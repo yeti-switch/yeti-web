@@ -11,6 +11,8 @@
 class System::SensorMode < ApplicationRecord
   self.table_name = 'sys.sensor_modes'
 
+  validates :name, presence: true, uniqueness: true
+
   # mode_id constants from this table
   IP_IP       = 1  # IP-IP encapsulation
   IP_ETHERNET = 2  # IP-Ethernet encapsulation

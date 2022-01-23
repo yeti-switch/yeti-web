@@ -21,6 +21,8 @@ class System::Timezone < ApplicationRecord
   # Rails 7 will use ActiveSupport::Duration type for interval by default.
   attribute :utc_offset, :string
 
+  validates :name, presence: true, uniqueness: true
+
   def display_name
     "#{name} | #{abbrev} | #{utc_offset}"
   end

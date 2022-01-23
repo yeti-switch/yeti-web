@@ -15,4 +15,6 @@
 class Routing::DestinationRatePolicy < ApplicationRecord
   has_many :destination, class_name: 'Routing::Destination'
   self.table_name = 'destination_rate_policy'
+
+  validates :name, presence: true, uniqueness: true
 end

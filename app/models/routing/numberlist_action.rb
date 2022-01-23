@@ -14,4 +14,6 @@
 
 class Routing::NumberlistAction < ApplicationRecord
   self.table_name = 'class4.numberlist_actions'
+
+  validates :name, presence: true, uniqueness: true
 end

@@ -15,6 +15,8 @@
 class Routing::RoutingTagMode < ApplicationRecord
   self.table_name = 'class4.routing_tag_modes'
 
+  validates :name, presence: true, uniqueness: true
+
   module CONST
     OR = 0
     AND = 1

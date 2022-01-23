@@ -14,4 +14,6 @@
 
 class Equipment::GatewayNetworkProtocolPriority < ApplicationRecord
   self.table_name = 'class4.gateway_network_protocol_priorities'
+
+  validates :name, presence: true, uniqueness: true
 end

@@ -14,4 +14,6 @@
 
 class System::SipSchema < ApplicationRecord
   self.table_name = 'sys.sip_schemas'
+
+  validates :name, presence: true, uniqueness: true
 end

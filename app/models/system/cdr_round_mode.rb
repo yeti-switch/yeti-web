@@ -14,4 +14,5 @@
 
 class System::CdrRoundMode < Cdr::Base
   self.table_name = 'sys.call_duration_round_modes'
+  validates :name, presence: true, uniqueness: true
 end

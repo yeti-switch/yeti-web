@@ -15,4 +15,6 @@
 class Codec < ApplicationRecord
   has_many :codec_group_codecs
   has_many :codec_groups
+
+  validates :name, presence: true, uniqueness: true
 end

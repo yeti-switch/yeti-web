@@ -18,6 +18,8 @@ class System::Country < ApplicationRecord
   has_many :prefixes, class_name: 'System::NetworkPrefix'
   has_many :networks, -> { distinct }, through: :prefixes
 
+  validates :name, presence: true, uniqueness: true
+
   def display_name
     "#{id} | #{name}"
   end

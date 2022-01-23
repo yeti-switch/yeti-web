@@ -19,4 +19,6 @@ class Billing::InvoicePeriod < ApplicationRecord
   MONTHLY_ID = 4
   BIWEEKLY_SPLIT_ID = 5
   WEEKLY_SPLIT_ID = 6
+
+  validates :name, uniqueness: true, presence: true
 end

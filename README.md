@@ -1,6 +1,5 @@
 # Welcome to YETI
 ![Tests](https://github.com/yeti-switch/yeti-web/workflows/Tests/badge.svg?branch=master)
-
 [![Coverage Status](https://coveralls.io/repos/github/yeti-switch/yeti-web/badge.svg?branch=master)](https://coveralls.io/github/yeti-switch/yeti-web?branch=master)
 
 

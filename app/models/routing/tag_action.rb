@@ -15,6 +15,8 @@
 class Routing::TagAction < ApplicationRecord
   self.table_name = 'class4.tag_actions'
 
+  validates :name, presence: true, uniqueness: true
+
   module CONST
     CLEAR_ID = 1
     REMOVE_ID = 2

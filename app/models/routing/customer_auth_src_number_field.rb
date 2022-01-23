@@ -14,6 +14,8 @@
 class Routing::CustomerAuthSrcNumberField < ApplicationRecord
   self.table_name = 'class4.customers_auth_src_number_fields'
 
+  validates :name, presence: true, uniqueness: true
+
   def display_name
     name.to_s
   end

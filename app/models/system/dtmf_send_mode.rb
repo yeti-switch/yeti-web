@@ -14,4 +14,6 @@
 
 class System::DtmfSendMode < ApplicationRecord
   self.table_name = 'class4.dtmf_send_modes'
+
+  validates :name, presence: true, uniqueness: true
 end
