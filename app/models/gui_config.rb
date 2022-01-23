@@ -86,6 +86,7 @@ class GuiConfig < ApplicationRecord
     rescue StandardError => e
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
+      CaptureError.capture(e, extra: { model_class: name })
     end
     scripts
   end

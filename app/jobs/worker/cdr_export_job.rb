@@ -17,6 +17,7 @@ module Worker
     rescue StandardError => e
       logger.error { e.message }
       logger.error { e.backtrace.join("\n") }
+      capture_error(e)
       cdr_export.update!(status: CdrExport::STATUS_FAILED)
     ensure
       # ping callback_url

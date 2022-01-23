@@ -43,7 +43,7 @@ module BillingInvoice
     def validate!
       start_date = start_time.in_time_zone(Time.zone)
       end_date = end_time.in_time_zone(Time.zone)
-      CaptureError.with_extra(start_date: start_date, end_date: end_date, params: _params) do
+      CaptureError.with_exception_context(extra: { start_date: start_date, end_date: end_date, params: _params }) do
         raise Error, 'type_id must be present' if type_id.blank?
         raise Error, 'start_time must be present' if start_time.blank?
         raise Error, 'end_time must be present' if end_time.blank?
@@ -51,7 +51,7 @@ module BillingInvoice
         raise Error, 'is_vendor must be passed' if is_vendor.nil?
         raise Error, "end_time can't be in future" if end_time.to_i > Time.now.to_i
 
-        CaptureError.with_extra(covered_invoice_ids: covered_invoice_ids) do
+        CaptureError.with_exception_context(extra: { covered_invoice_ids: covered_invoice_ids }) do
           raise Error, 'have invoice inside provided period' if covered_invoice_ids.any?
         end
       end

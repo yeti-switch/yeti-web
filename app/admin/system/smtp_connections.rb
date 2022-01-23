@@ -17,6 +17,7 @@ ActiveAdmin.register System::SmtpConnection do
     rescue StandardError => e
       Rails.logger.warn { e.message }
       Rails.logger.warn { e.backtrace.join("\n") }
+      CaptureError.capture(e, tags: { component: 'AdminUI' }, extra: { params: params.to_unsafe_h })
       flash[:warning] = e.message
     end
     redirect_back fallback_location: root_path

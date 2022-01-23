@@ -20,6 +20,7 @@ ActiveAdmin.register RealtimeData::IncomingRegistration, as: 'Incoming Registrat
         flash.now[:warning] = result.errors if result.errors.any?
       rescue StandardError => e
         logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+        CaptureError.capture(e, tags: { component: 'AdminUI' })
         flash.now[:error] = e.message
       end
 

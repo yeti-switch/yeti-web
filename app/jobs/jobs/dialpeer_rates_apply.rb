@@ -21,7 +21,7 @@ module Jobs
         end
 
         Routing::DestinationNextRate.ready_for_apply.find_each do |rate|
-          CaptureError.with_extra(id: rate.id, class: rate.class.name) do
+          CaptureError.with_exception_context(extra: { id: rate.id, class: rate.class.name }) do
             rate.destination.update!(
               # current_rate_id: rate.id,
               initial_interval: rate.initial_interval,

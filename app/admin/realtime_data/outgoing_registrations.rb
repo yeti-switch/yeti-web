@@ -35,6 +35,7 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
         flash.now[:warning] = searcher.errors if searcher.errors.any?
       rescue StandardError => e
         Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+        CaptureError.capture(e, tags: { component: 'AdminUI' })
         flash.now[:warning] = e.message
       end
       @skip_drop_down_pagination = true

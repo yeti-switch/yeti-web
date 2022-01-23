@@ -116,6 +116,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     redirect_to action: :index
   rescue StandardError => e
     Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+    CaptureError.capture(e, tags: { component: 'AdminUI' }, extra: { params: params.to_unsafe_h })
     flash[:warning] = e.message
     redirect_to action: :index
   end
@@ -133,6 +134,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
       index!
     rescue StandardError => e
       flash.now[:warning] = e.message
+      CaptureError.capture(e, tags: { component: 'AdminUI' })
       raise e
     end
 

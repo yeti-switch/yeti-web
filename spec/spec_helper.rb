@@ -172,7 +172,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    allow(Raven).to receive(:send_event).with(a_kind_of(Hash))
+    allow(Sentry).to receive(:send_event).with(a_kind_of(Hash))
   end
 
   config.after(:each) do

@@ -10,7 +10,7 @@ module Worker
     rescue StandardError => e
       Rails.logger.warn { "<#{e.class}>: #{e.message}" }
       Rails.logger.warn { e.backtrace.join("\n") }
-
+      capture_error(e)
       Log::EmailLog.where(id: email_log_id).update_all(error: e.message)
     end
   end
