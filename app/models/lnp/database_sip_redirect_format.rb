@@ -13,4 +13,6 @@
 #
 class Lnp::DatabaseSipRedirectFormat < ApplicationRecord
   self.table_name = 'class4.lnp_databases_30x_redirect_formats'
+
+  validates :name, uniqueness: true, presence: true
 end

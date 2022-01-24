@@ -14,4 +14,6 @@
 
 class Routing::NumberlistMode < ApplicationRecord
   self.table_name = 'class4.numberlist_modes'
+
+  validates :name, presence: true, uniqueness: true
 end

@@ -14,4 +14,6 @@
 
 class Equipment::GatewayRel100Mode < ApplicationRecord
   self.table_name = 'class4.gateway_rel100_modes'
+
+  validates :name, presence: true, uniqueness: true
 end

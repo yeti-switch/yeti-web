@@ -14,4 +14,6 @@
 
 class Equipment::GatewayMediaEncryptionMode < ApplicationRecord
   self.table_name = 'class4.gateway_media_encryption_modes'
+
+  validates :name, presence: true, uniqueness: true
 end

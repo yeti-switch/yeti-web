@@ -14,4 +14,6 @@
 
 class System::SensorLevel < ApplicationRecord
   self.table_name = 'sys.sensor_levels'
+
+  validates :name, presence: true, uniqueness: true
 end

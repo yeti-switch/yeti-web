@@ -16,4 +16,6 @@
 
 class DumpLevel < ApplicationRecord
   self.table_name = 'dump_level'
+
+  validates :name, presence: true, uniqueness: true
 end

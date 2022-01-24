@@ -14,4 +14,6 @@
 
 class Equipment::GatewayInbandDtmfFilteringMode < ApplicationRecord
   self.table_name = 'class4.gateway_inband_dtmf_filtering_modes'
+
+  validates :name, presence: true, uniqueness: true
 end

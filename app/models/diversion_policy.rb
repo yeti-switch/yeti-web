@@ -14,4 +14,6 @@
 
 class DiversionPolicy < ApplicationRecord
   self.table_name = 'diversion_policy'
+
+  validates :name, presence: true, uniqueness: true
 end

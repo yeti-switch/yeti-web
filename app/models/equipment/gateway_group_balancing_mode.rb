@@ -14,4 +14,6 @@
 
 class Equipment::GatewayGroupBalancingMode < ApplicationRecord
   self.table_name = 'class4.gateway_group_balancing_modes'
+
+  validates :name, presence: true, uniqueness: true
 end

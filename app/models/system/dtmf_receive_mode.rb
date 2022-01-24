@@ -14,4 +14,6 @@
 
 class System::DtmfReceiveMode < ApplicationRecord
   self.table_name = 'class4.dtmf_receive_modes'
+
+  validates :name, presence: true, uniqueness: true
 end

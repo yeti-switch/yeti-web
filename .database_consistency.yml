@@ -11,10 +11,612 @@ ActiveStorage::VariantRecord:
 DatabaseConsistencySettings:
   color: true
 
+
+AdminUser:
+  email:
+    ColumnPresenceChecker:
+      enabled: false
+  password:
+    ColumnPresenceChecker:
+      enabled: false
+
+Log::EmailLog:
+  contact:
+    ForeignKeyChecker:
+      enabled: false
+  smtp_connection:
+    ForeignKeyChecker:
+      enabled: false
+
+
+Delayed::Backend::ActiveRecord::Job:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Account:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::Invoice:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::InvoiceDocument:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::InvoiceState:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::InvoiceType:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::CustomCdr:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::CustomCdrScheduler:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::CustomerTrafficScheduler:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::IntervalCdr:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::IntervalCdrScheduler:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::SchedulerPeriod:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::VendorTrafficScheduler:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::CdrConfig:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::CdrPriceRoundMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::CdrRoundMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Report::IntervalAggregator:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::Contact:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::InvoiceTemplate:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+CdrExport:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Contractor:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+CustomersAuth:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+DisconnectCode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::StirShaken::TrustedRepository:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Gateway:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+GatewayGroup:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+GatewaysStat:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Importing::Gateway:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Importing::Numberlist:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Importing::NumberlistItem:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::Numberlist:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::NumberlistItem:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::Rateplan:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::Registration:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+RoutingGroup:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::Database:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Event:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Node:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Pop:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::Area:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::Cache:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RateGroup:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RateProfitControlMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RoutesetDiscriminator:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::RoutingPlanLnpRule:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RoutingTag:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RoutingTagDetectionRule:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RoutingPlanStaticRoute:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::TagAction:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RoutingPlan:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::Sensor:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Sorting:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::ApiLogConfig:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::Country:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::LnpResolver:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::LoadBalancer:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::LuaScript:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::Network:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::NetworkPrefix:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::NetworkType:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Notification::Alert:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::SmtpConnection:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::Timezone:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+AdminUser:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+CodecGroup:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+CodecGroupCodec:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+CustomersAuthNormalized:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+GuiConfig:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+SessionRefreshMethod:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+SdpCLocation:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+FilterType:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::DatabaseCoureAnq:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::DatabaseSipRedirect:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::DatabaseAlcazar:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::DatabaseThinq:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::DatabaseCsv:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::State:
+  key:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::SensorMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Notification::Attachment:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+PaperTrail::Version:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+ActiveAdmin::Comment:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+
 System::ApiAccess:
   id:
     PrimaryKeyTypeChecker:
       enabled: false
+
+Routing::NumberlistAction:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::CustomerAuthSrcNameField:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+
+Routing::NumberlistMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::CustomerAuthSrcNumberField:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::RoutingTagMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::DestinationRatePolicy:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Routing::CustomerAuthDstNumberField:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+ActiveRecord::SchemaMigration:
+  version:
+    PrimaryKeyTypeChecker:
+      enabled: false
+  unique_public.schema_migrations:
+    UniqueIndexChecker:
+      enabled: false
+
+DiversionPolicy:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Codec:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+DisconnectCodeNamespace:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+DumpLevel:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+SdpCLocation:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Lnp::DatabaseSipRedirectFormat:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Billing::InvoicePeriod:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::DtmfSendMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::DtmfReceiveMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::SipSchema:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+System::SensorLevel:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::GatewayMediaEncryptionMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::GatewayNetworkProtocolPriority:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::TransportProtocol:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::GatewayGroupBalancingMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::GatewayInbandDtmfFilteringMode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+Equipment::GatewayRel100Mode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+DisconnectInitiator:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+DisconnectPolicy:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+DisconnectPolicyCode:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::Radius::AccountingProfile:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::Radius::AccountingProfileStartAttribute:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::Radius::AccountingProfileStopAttribute:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::Radius::AuthProfileAttribute:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::Radius::AccountingProfileInterimAttribute:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::Radius::AuthProfile:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::SipOptionsProber:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+Equipment::StirShaken::TrustedCertificate:
+  id:
+    PrimaryKeyTypeChecker:
+      enabled: false
+
+
+
+
 
 Cdr::Cdr:
   time_start:
@@ -140,6 +742,18 @@ Cdr::Network:
 
 Cdr::NetworkPrefix:
   id:
+    NullConstraintChecker:
+      enabled: false
+
+
+Stats::ActiveCallAccount:
+  account_id:
+    NullConstraintChecker:
+      enabled: false
+  originated_count:
+    NullConstraintChecker:
+      enabled: false
+  terminated_count:
     NullConstraintChecker:
       enabled: false
 

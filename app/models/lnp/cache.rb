@@ -28,4 +28,7 @@ class Lnp::Cache < ApplicationRecord
   self.table_name = 'class4.lnp_cache'
 
   belongs_to :database, class_name: 'Lnp::Database', foreign_key: :database_id, optional: true
+
+  validates :dst, :lrn, presence: true
+  validates :dst, uniqueness: { scope: :database_id }
 end

@@ -15,6 +15,8 @@
 class DisconnectCodeNamespace < ApplicationRecord
   self.table_name = 'disconnect_code_namespace'
 
+  validates :name, presence: true, uniqueness: true
+
   def display_name
     name
   end

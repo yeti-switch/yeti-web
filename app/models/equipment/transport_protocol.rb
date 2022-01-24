@@ -15,6 +15,8 @@
 class Equipment::TransportProtocol < ApplicationRecord
   self.table_name = 'class4.transport_protocols'
 
+  validates :name, presence: true, uniqueness: true
+
   def display_name
     name
   end
