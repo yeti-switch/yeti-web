@@ -15,8 +15,10 @@ module Partitionable
       pg_partition_name.constantize
     end
 
+    # @param time [Time, Date]
     def add_partition_for(time)
-      pg_partition_class.add_partition(table_name, pg_partition_interval_type, time.to_time.utc)
+      time = time.to_time if time.is_a?(Date)
+      pg_partition_class.add_partition(table_name, pg_partition_interval_type, time)
     end
 
     def add_partitions
