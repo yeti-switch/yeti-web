@@ -2,7 +2,7 @@
 
 RSpec.describe 'lnp.cache_lnp_data' do
   subject do
-    yeti_select_all(sql, *sql_params)
+    SqlCaller::Yeti.select_all(sql, *sql_params)
   end
 
   let(:sql) { 'SELECT * FROM lnp.cache_lnp_data(?::smallint,?::varchar,?::varchar,?::varchar,?::varchar)' }
