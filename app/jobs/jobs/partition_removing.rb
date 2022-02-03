@@ -25,14 +25,15 @@ module Jobs
         return
       end
 
+      # has format /\A\d+ days\z/
+      remove_delay = remove_delay.split(' ').first.to_i
       cdr_collection = partition_class
                        .where(parent_table_eq: table_name)
                        .to_a
-                       .select { |r| r.date_to < Time.now.utc }
-                       .to_a
+                       .select { |r| r.date_to <= remove_delay.days.ago.utc }
                        .sort_by(&:date_to)
 
-      if cdr_collection.size <= remove_delay
+      if cdr_collection.empty?
         logger.info { "#{self.class}: does not enough partitions for #{table_name}" }
         return
       end

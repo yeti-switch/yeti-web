@@ -37,10 +37,10 @@ Config.setup do |setup_config|
     end
 
     required(:partition_remove_delay).hash do
-      required(:'cdr.cdr').maybe(:int?)
-      required(:'auth_log.auth_log').maybe(:int?)
-      required(:'rtp_statistics.streams').maybe(:int?)
-      required(:'logs.api_requests').maybe(:int?)
+      required(:'cdr.cdr').maybe(:string, format?: /\A\d+ days\z/)
+      required(:'auth_log.auth_log').maybe(:string, format?: /\A\d+ days\z/)
+      required(:'rtp_statistics.streams').maybe(:string, format?: /\A\d+ days\z/)
+      required(:'logs.api_requests').maybe(:string, format?: /\A\d+ days\z/)
     end
 
     required(:prometheus).schema do
