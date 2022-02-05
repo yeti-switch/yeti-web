@@ -216,7 +216,11 @@ class Dialpeer < ApplicationRecord
   end
 
   def vendor_owners_the_gateway_group
-    errors.add(:gateway_group, 'must be owned by selected vendor') unless gateway_group_id.nil? || (vendor_id && gateway_group_id && vendor_id == gateway_group.vendor_id)
+    return true if gateway_group_id.nil? || gateway_group.is_shared?
+
+    unless vendor_id && vendor_id == gateway_group.vendor_id
+      errors.add(:gateway_group, 'must be owned by selected vendor or be shared')
+    end
   end
 
   scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }

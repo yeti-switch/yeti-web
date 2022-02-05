@@ -20,6 +20,7 @@ RSpec.describe 'Export Gateway Groups', type: :feature do
       [
         ['Id', item.id.to_s],
         ['Name', item.name],
+        ['Is shared', item.is_shared.to_s],
         ['Vendor name', item.vendor.name],
         ['Balancing mode name', item.balancing_mode.name]
       ]

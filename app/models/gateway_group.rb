@@ -5,6 +5,7 @@
 # Table name: gateway_groups
 #
 #  id                :integer(4)       not null, primary key
+#  is_shared         :boolean          default(FALSE), not null
 #  name              :string           not null
 #  prefer_same_pop   :boolean          default(TRUE), not null
 #  balancing_mode_id :integer(2)       default(1), not null
@@ -35,6 +36,13 @@ class GatewayGroup < ApplicationRecord
 
   validate :contractor_is_vendor
   validate :vendor_can_be_changed
+  validate :is_shared_can_be_changed
+
+  scope :for_termination, lambda { |contractor_id|
+    where("#{table_name}.vendor_id=? OR #{table_name}.is_shared", contractor_id)
+      .joins(:vendor)
+      .order(:name)
+  }
 
   def display_name
     "#{name} | #{id}"
@@ -54,6 +62,14 @@ class GatewayGroup < ApplicationRecord
     if vendor_id_changed?
       errors.add(:vendor, "can't be changed because Gateway Group contain gateways") if gateways.any?
       errors.add(:vendor, "can't be changed because Gateway Group belongs to dialpeers") if dialpeers.any?
+    end
+  end
+
+  def is_shared_can_be_changed
+    return true unless is_shared_changed?(from: true, to: false)
+
+    if dialpeers.any?
+      errors.add(:is_shared, I18n.t('activerecord.errors.models.gateway_group.attributes.is_shared.cant_be_disabled_when_linked_to_dialpeer'))
     end
   end
 end

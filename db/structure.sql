@@ -15474,15 +15474,22 @@ BEGIN
   /*}dbg*/
 
   --RAISE NOTICE 'process_dp dst: %',i_destination;
-  if i_dp.gateway_id is null then /* termination to gw group */
-    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
+  if i_dp.gateway_id IS NULL AND i_dp.gateway_group_id IS NOT NULL then /* termination to gw group */
+    select into v_gateway_group * from class4.gateway_groups where id=i_dp.gateway_group_id and (vendor_id=i_dp.vendor_id or is_shared);
+    IF v_gateway_group.vendor_id!=i_dp.vendor_id and not v_gateway_group.is_shared THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process-DP. Gateway Group id=%, name=% is not shared and owned by other vendor then dialpeer id=%',EXTRACT(MILLISECOND from v_end-v_start),v_gateway_group.id,v_gateway_group.name,i_dp.id;
+      /*}dbg*/
+      return;
+    END IF;
     IF v_gateway_group.balancing_mode_id=2 THEN
       /*rel{*/
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id and
-          cg.contractor_id=i_dp.vendor_id and
+          cg.gateway_group_id=v_gateway_group.id and
+          cg.contractor_id=v_gateway_group.vendor_id and
           cg.enabled
         ORDER BY
           cg.pop_id=i_pop_id desc,
@@ -15496,27 +15503,28 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.gateway_group_id=v_gateway_group.id AND
           cg.enabled
         ORDER BY
           cg.pop_id=i_pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
-        IF v_gw.contractor_id!=i_dp.vendor_id THEN
-          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+        IF v_gw.contractor_id!=v_gateway_group.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner != Gateway Group owner. Skip gateway';
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
                                                     i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
       end loop;
       /*}dbg*/
+
     elsif v_gateway_group.balancing_mode_id=1 then
       /*rel{*/
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id AND
-          cg.contractor_id=i_dp.vendor_id AND
+          cg.gateway_group_id=v_gateway_group.id AND
+          cg.contractor_id=v_gateway_group.vendor_id AND
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
@@ -15529,13 +15537,13 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.gateway_group_id=v_gateway_group.id and
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
-        IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
-          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+        IF v_gw.contractor_id!=v_gateway_group.vendor_id AND NOT v_gw.is_shared THEN
+          RAISE WARNING 'process_dp: Gateway owner != Gateway Group owner. Skip gateway';
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
@@ -15548,13 +15556,13 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-	  (cg.pop_id is null OR cg.pop_id=i_pop_id) and
-          cg.gateway_group_id=i_dp.gateway_group_id and
-          cg.contractor_id=i_dp.vendor_id and
+	        (cg.pop_id is null OR cg.pop_id=i_pop_id) and
+          cg.gateway_group_id=v_gateway_group.id and
+          cg.contractor_id=v_gateway_group.vendor_id and
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
-        LOOP
+      LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
       end loop;
@@ -15563,18 +15571,18 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.gateway_group_id=v_gateway_group.id AND
           cg.enabled
         ORDER BY
           cg.pop_id=i_pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	      IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_pop_id;
           continue;
         end if;
-        IF v_gw.contractor_id!=i_dp.vendor_id THEN
-          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+        IF v_gw.contractor_id!=v_gateway_group.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner != Gateway Group owner. Skip gateway';
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
@@ -15629,41 +15637,49 @@ BEGIN
   /*}dbg*/
 
   --RAISE NOTICE 'process_dp dst: %',i_destination;
-  if i_dp.gateway_id is null then /* termination to gw group */
-    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
+  if i_dp.gateway_id IS NULL AND i_dp.gateway_group_id IS NOT NULL then /* termination to gw group */
+    select into v_gateway_group * from class4.gateway_groups where id=i_dp.gateway_group_id and (vendor_id=i_dp.vendor_id or is_shared);
+    IF v_gateway_group.vendor_id!=i_dp.vendor_id and not v_gateway_group.is_shared THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process-DP. Gateway Group id=%, name=% is not shared and owned by other vendor then dialpeer id=%',EXTRACT(MILLISECOND from v_end-v_start),v_gateway_group.id,v_gateway_group.name,i_dp.id;
+      /*}dbg*/
+      return;
+    END IF;
     IF v_gateway_group.balancing_mode_id=2 THEN
       
       /*dbg{*/
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.gateway_group_id=v_gateway_group.id AND
           cg.enabled
         ORDER BY
           cg.pop_id=i_pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
-        IF v_gw.contractor_id!=i_dp.vendor_id THEN
-          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+        IF v_gw.contractor_id!=v_gateway_group.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner != Gateway Group owner. Skip gateway';
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
                                                     i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
       end loop;
       /*}dbg*/
+
     elsif v_gateway_group.balancing_mode_id=1 then
       
       /*dbg{*/
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id and
+          cg.gateway_group_id=v_gateway_group.id and
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
-        IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
-          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+        IF v_gw.contractor_id!=v_gateway_group.vendor_id AND NOT v_gw.is_shared THEN
+          RAISE WARNING 'process_dp: Gateway owner != Gateway Group owner. Skip gateway';
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
@@ -15677,18 +15693,18 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id AND
+          cg.gateway_group_id=v_gateway_group.id AND
           cg.enabled
         ORDER BY
           cg.pop_id=i_pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	      IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_pop_id;
           continue;
         end if;
-        IF v_gw.contractor_id!=i_dp.vendor_id THEN
-          RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
+        IF v_gw.contractor_id!=v_gateway_group.vendor_id THEN
+          RAISE WARNING 'process_dp: Gateway owner != Gateway Group owner. Skip gateway';
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
@@ -15732,15 +15748,19 @@ BEGIN
   
 
   --RAISE NOTICE 'process_dp dst: %',i_destination;
-  if i_dp.gateway_id is null then /* termination to gw group */
-    select into v_gateway_group * from  class4.gateway_groups where id=i_dp.gateway_group_id;
+  if i_dp.gateway_id IS NULL AND i_dp.gateway_group_id IS NOT NULL then /* termination to gw group */
+    select into v_gateway_group * from class4.gateway_groups where id=i_dp.gateway_group_id and (vendor_id=i_dp.vendor_id or is_shared);
+    IF v_gateway_group.vendor_id!=i_dp.vendor_id and not v_gateway_group.is_shared THEN
+      
+      return;
+    END IF;
     IF v_gateway_group.balancing_mode_id=2 THEN
       /*rel{*/
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id and
-          cg.contractor_id=i_dp.vendor_id and
+          cg.gateway_group_id=v_gateway_group.id and
+          cg.contractor_id=v_gateway_group.vendor_id and
           cg.enabled
         ORDER BY
           cg.pop_id=i_pop_id desc,
@@ -15751,13 +15771,14 @@ BEGIN
       end loop;
       /*}rel*/
       
+
     elsif v_gateway_group.balancing_mode_id=1 then
       /*rel{*/
       FOR v_gw in
         select * from class4.gateways cg
         where
-          cg.gateway_group_id=i_dp.gateway_group_id AND
-          cg.contractor_id=i_dp.vendor_id AND
+          cg.gateway_group_id=v_gateway_group.id AND
+          cg.contractor_id=v_gateway_group.vendor_id AND
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
@@ -15773,13 +15794,13 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-	  (cg.pop_id is null OR cg.pop_id=i_pop_id) and
-          cg.gateway_group_id=i_dp.gateway_group_id and
-          cg.contractor_id=i_dp.vendor_id and
+	        (cg.pop_id is null OR cg.pop_id=i_pop_id) and
+          cg.gateway_group_id=v_gateway_group.id and
+          cg.contractor_id=v_gateway_group.vendor_id and
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
-        LOOP
+      LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
       end loop;
@@ -22272,7 +22293,8 @@ CREATE TABLE class4.gateway_groups (
     vendor_id integer NOT NULL,
     name character varying NOT NULL,
     prefer_same_pop boolean DEFAULT true NOT NULL,
-    balancing_mode_id smallint DEFAULT 1 NOT NULL
+    balancing_mode_id smallint DEFAULT 1 NOT NULL,
+    is_shared boolean DEFAULT false NOT NULL
 );
 
 
@@ -30060,6 +30082,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211005184247'),
 ('20211130113417'),
 ('20211130142405'),
-('20211217132047');
+('20211217132047'),
+('20220115143706');
 
 
