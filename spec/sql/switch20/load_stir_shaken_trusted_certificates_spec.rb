@@ -2,9 +2,12 @@
 
 RSpec.describe 'switch20.load_stir_shaken_trusted_certificates' do
   subject do
-    yeti_select_all('SELECT * FROM switch20.load_stir_shaken_trusted_certificates()')
+    SqlCaller::Yeti.select_all(sql).map(&:deep_symbolize_keys)
   end
 
+  let(:sql) do
+    'SELECT * FROM switch20.load_stir_shaken_trusted_certificates()'
+  end
   let!(:crts) do
     [
       create(:stir_shaken_trusted_certificate)

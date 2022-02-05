@@ -2,7 +2,7 @@
 
 module Authentication
   class CustomerV1Auth
-    EXPIRATION_INTERVAL = Rails.configuration.yeti_web['api']['token_lifetime'].presence&.seconds&.freeze
+    EXPIRATION_INTERVAL = YetiConfig.api.token_lifetime.presence&.seconds&.freeze
     AUDIENCE = 'customer-v1'
     COOKIE_NAME = '_yeti_customer_v1_session'
     Result = Struct.new(:token, :expires_at)

@@ -2,7 +2,7 @@
 
 RSpec.describe 'switch19.load_registrations_out' do
   subject do
-    yeti_select_all(sql, *sql_params)
+    SqlCaller::Yeti.select_all(sql, *sql_params).map(&:deep_symbolize_keys)
   end
 
   let(:sql) { 'SELECT * FROM switch19.load_registrations_out(?, ?)' }

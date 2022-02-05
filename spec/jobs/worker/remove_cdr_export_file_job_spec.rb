@@ -11,7 +11,7 @@ RSpec.describe Worker::RemoveCdrExportFileJob, type: :job do
 
   let(:delete_url) do
     [
-      Rails.configuration.yeti_web.fetch('cdr_export').fetch('delete_url').chomp('/'),
+      YetiConfig.cdr_export.delete_url.chomp('/'),
       "#{cdr_export.id}.csv"
     ].join('/')
   end

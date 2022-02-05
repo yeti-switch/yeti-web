@@ -2,7 +2,7 @@
 
 RSpec.describe '#routing logic switch19' do
   subject do
-    CallSql::Yeti.select_all_serialized(
+    SqlCaller::Yeti.select_all_serialized(
       "SELECT * from switch19.route_debug(
         ?::integer,
         ?::integer,

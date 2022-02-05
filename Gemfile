@@ -87,10 +87,13 @@ gem 'sentry-ruby', require: false
 
 gem 'rufus-scheduler', require: false
 
+# Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other Ruby projects.
+# https://github.com/rubyconfig/config
+gem 'config', require: false
+
 group :development do
   gem 'annotate'
   gem 'listen', require: false
-  gem 'sourcify'
 end
 
 group :development, :test do

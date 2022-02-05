@@ -180,6 +180,9 @@ class Cdr::Cdr < Cdr::Base
 
   include Partitionable
   self.pg_partition_name = 'PgPartition::Cdr'
+  self.pg_partition_interval_type = PgPartition::INTERVAL_DAY
+  self.pg_partition_depth_past = 3
+  self.pg_partition_depth_future = 3
 
   belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id, optional: true
   belongs_to :routing_group, optional: true

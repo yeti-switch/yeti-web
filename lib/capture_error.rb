@@ -11,7 +11,7 @@ module CaptureError
     # Checks whether capture error enabled or not
     # @return [TrueClass,FalseClass]
     def enabled?
-      Rails.configuration.yeti_web.dig('sentry', 'enabled')
+      YetiConfig.sentry.enabled
     end
 
     # Configures Sentry gem.
@@ -25,9 +25,9 @@ module CaptureError
       end
 
       Sentry.init do |sentry_config|
-        sentry_config.dsn = Rails.configuration.yeti_web.dig('sentry', 'dsn')
+        sentry_config.dsn = YetiConfig.sentry.dsn
         sentry_config.release = Rails.configuration.app_build_info.fetch('version', 'unknown')
-        sentry_config.environment = Rails.configuration.yeti_web.dig('sentry', 'environment')
+        sentry_config.environment = YetiConfig.sentry.environment
         sentry_config.logger = Rails.logger
         sentry_config.inspect_exception_causes_for_exclusion = false
 
@@ -50,7 +50,7 @@ module CaptureError
 
       Sentry.set_tags(
         rails_env: Rails.env.to_s,
-        node_name: Rails.configuration.yeti_web.dig('sentry', 'node_name')
+        node_name: YetiConfig.sentry.node_name
       )
 
       # Override method added by Sentry::Rails::ActiveJobExtensions,

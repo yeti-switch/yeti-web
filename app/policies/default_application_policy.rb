@@ -21,7 +21,7 @@ class DefaultApplicationPolicy < ApplicationPolicy
 
   def default_policy!
     record_class = record.is_a?(Class) ? record : record.class
-    rule = Rails.configuration.yeti_web['role_policy']['when_no_policy_class']
+    rule = YetiConfig.role_policy.when_no_policy_class
     # if Rails.env.development? && record_class != NilClass
     #   logger.debug { "[POLICY DEBUG] create missing policy class for #{record_class}." }
     #   Rails::Generators.invoke 'role_policy', [record_class.to_s] # `rails g role_policy #{record_class}`

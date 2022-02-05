@@ -2,7 +2,7 @@
 
 RSpec.describe 'lnp.load_lnp_databases' do
   subject do
-    yeti_select_all(sql)
+    SqlCaller::Yeti.select_all(sql).map(&:deep_symbolize_keys)
   end
 
   let(:sql) { 'SELECT * FROM lnp.load_lnp_databases()' }
