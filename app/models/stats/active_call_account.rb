@@ -24,36 +24,6 @@ class Stats::ActiveCallAccount < Stats::Base
   self.chart_entity_klass = Account
 
   class << self
-    def create_stats(customer_calls = {}, vendor_calls = {}, now_time)
-      calls = Hash.new { |h, k| h[k] = { terminated_count: 0, originated_count: 0 } }
-      customer_calls.each do |account_id, sub_calls|
-        calls[account_id.to_i][:originated_count] = sub_calls.count
-      end
-      vendor_calls.each do |account_id, sub_calls|
-        calls[account_id.to_i][:terminated_count] = sub_calls.count
-      end
-      missing_foreign_ids = Account.pluck(:id) - calls.keys
-
-      transaction do
-        calls.each do |account_id, opts|
-          create!(
-            created_at: now_time,
-            originated_count: opts[:originated_count],
-            terminated_count: opts[:terminated_count],
-            account_id: account_id
-          )
-        end
-        missing_foreign_ids.each do |foreign_id|
-          create!(
-            created_at: now_time,
-            originated_count: 0,
-            terminated_count: 0,
-            account_id: foreign_id
-          )
-        end
-      end
-    end
-
     def to_chart_all(account_id)
       lines = to_chart_vendor(account_id, area: false, key: 'Vendor')
       lines.concat to_chart_customer(account_id, area: false, key: 'Account')
