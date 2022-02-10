@@ -22,6 +22,10 @@ Config.setup do |setup_config|
     required(:site_title).filled(:string)
     required(:site_title_image).filled(:string)
 
+    required(:calls_monitoring).schema do
+      required(:write_account_stats).value(:bool?)
+    end
+
     required(:api).schema do
       required(:token_lifetime).maybe(:int?)
     end

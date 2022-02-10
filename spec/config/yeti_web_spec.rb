@@ -9,6 +9,9 @@ RSpec.describe 'config/yeti_web.yml' do
     {
       site_title: be_kind_of(String),
       site_title_image: be_kind_of(String),
+      calls_monitoring: {
+        write_account_stats: be_one_of(true, false)
+      },
       api: {
         token_lifetime: be_kind_of(Integer)
       },
