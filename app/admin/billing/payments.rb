@@ -50,7 +50,7 @@ ActiveAdmin.register Payment do
 
   filter :id
   filter :created_at, as: :date_time_range
-  filter :account, input_html: { class: 'chosen' }
+  account_filter :account_id_eq
   filter :amount
   filter :notes
 end
