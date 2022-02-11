@@ -53,23 +53,9 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
          label: 'Customer',
          input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' }
 
-  filter :vendor_acc_id_eq,
-         as: :select,
-         collection: proc {
-           resource_id = params.dig(:q, :vendor_acc_id_eq)
-           resource_id ? Account.where(id: resource_id) : []
-         },
-         label: 'Vendor Account',
-         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' }
+  account_filter :vendor_acc_id_eq, label: 'Vendor Account'
 
-  filter :customer_acc_id_eq,
-         as: :select,
-         collection: proc {
-           resource_id = params.dig(:q, :customer_acc_id_eq)
-           resource_id ? Account.where(id: resource_id) : []
-         },
-         label: 'Customer Account',
-         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' }
+  account_filter :customer_acc_id_eq, label: 'Customer Account'
 
   filter :orig_gw_id_eq,
          as: :select,

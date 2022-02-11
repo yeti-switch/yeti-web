@@ -152,12 +152,7 @@ ActiveAdmin.register Dialpeer do
            resource_id = params.fetch(:q, {})[:vendor_id_eq]
            resource_id ? Contractor.where(id: resource_id) : []
          }
-  filter :account,
-         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:account_id_eq]
-           resource_id ? Account.where(id: resource_id) : []
-         }
+  account_filter :account_id_eq
   filter :routeset_discriminator, input_html: { class: 'chosen' }
   filter :gateway,
          input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },

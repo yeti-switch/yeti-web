@@ -204,12 +204,7 @@ ActiveAdmin.register CustomersAuth do
            resource_id ? Contractor.where(id: resource_id) : []
          }
 
-  filter :account,
-         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:account_id_eq]
-           resource_id ? Account.where(id: resource_id) : []
-         }
+  account_filter :account_id_eq
 
   filter :gateway,
          input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
