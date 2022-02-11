@@ -9,7 +9,7 @@ module ActiveAdmin
       end
 
       def account_input(name, label: 'Account', q: nil, **options)
-        resource_id = object[name]
+        resource_id = object.respond_to?(name) ? object.send(name) : nil
 
         classes = [
           'chosen-ajax',
@@ -22,7 +22,7 @@ module ActiveAdmin
             class: classes,
             'data-path': "/accounts/search?#{q&.to_param}"
           },
-          collection: resource_id ? Account.ransack(q).result.where(id: resource_id) : []
+          collection: resource_id ? Account.ransack(q[:q]).result.where(id: resource_id) : []
         }
         input_options = options.deep_merge(input_options)
 
@@ -30,7 +30,7 @@ module ActiveAdmin
       end
 
       def contractor_input(name, label: 'Contractor', q: nil, **options)
-        resource_id = object[name]
+        resource_id = object.respond_to?(name) ? object.send(name) : nil
 
         classes = [
           'chosen-ajax',
@@ -43,7 +43,7 @@ module ActiveAdmin
             class: classes,
             'data-path': "/contractors/search?#{q&.to_param}"
           },
-          collection: resource_id ? Contractor.ransack(q).result.where(id: resource_id) : []
+          collection: resource_id ? Contractor.ransack(q[:q]).result.where(id: resource_id) : []
         }
         input_options = options.deep_merge(input_options)
 

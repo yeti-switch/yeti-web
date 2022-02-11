@@ -73,7 +73,7 @@ class Account < ApplicationRecord
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }
   scope :customers_accounts, -> { joins(:contractor).where('contractors.customer' => true) }
   scope :collection, -> { order(:name) }
-  scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
+  scope :search_for, ->(term) { where("accounts.name || ' | ' || accounts.id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
   scope :ready_for_customer_invoice, lambda {
