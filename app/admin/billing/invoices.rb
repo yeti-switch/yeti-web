@@ -289,7 +289,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
               input_html: { class: 'chosen' }
 
       f.contractor_input :contractor_id
-      f.account_input :account_id
+      f.account_input :account_id,
+                      input_html: {
+                        class: 'contractor_id-input-child',
+                        'data-path-parents': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
+                        'data-path-required-parent': '.contractor_id-input'
+                      }
 
       f.input :start_date,
               as: :date_time_picker,

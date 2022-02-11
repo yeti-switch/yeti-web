@@ -228,7 +228,12 @@ ActiveAdmin.register Dialpeer do
                                         onchange: remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
                                                   remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
                                       }
-      f.account_input :account_id, q: { q: { contractor_vendor_eq: true } }
+      f.account_input :account_id,
+                      input_html: {
+                        class: 'vendor_id_eq-input-child',
+                        'data-path-parents': { 'q[contractor_id_eq]': '.vendor_id_eq-input' }.to_json,
+                        'data-path-required-parent': '.vendor_id_eq-input'
+                      }
 
       f.input :routeset_discriminator, include_blank: false, input_html: { class: 'chosen' }
       f.input :priority

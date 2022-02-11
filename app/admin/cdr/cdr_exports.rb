@@ -124,7 +124,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
 
       ff.input :customer_external_id_eq, required: false
 
-      f.account_input :customer_acc_id_eq, fb: ff, label: 'Customer acc id eq', q: { q: { contractor_customer_eq: true } }
+      f.account_input :customer_acc_id_eq, fb: ff, label: 'Customer acc id eq',
+                      input_html: {
+                        class: 'customer_id_eq-input-child',
+                        'data-path-parents': { 'q[contractor_id_eq]': '.customer_id_eq-input' }.to_json,
+                        'data-path-required-parent': '.customer_id_eq-input'
+                      }
       ff.input :customer_acc_external_id_eq, required: false
 
       ff.input :success_eq,
@@ -138,7 +143,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       f.contractor_input :vendor_id_eq, fb: ff, label: 'Vendor id eq', q: { q: { vendor_eq: true } }
       ff.input :vendor_external_id_eq, required: false
 
-      f.account_input :vendor_acc_id_eq, fb: ff, label: 'Vendor acc id eq', q: { q: { contractor_vendor_eq: true } }
+      f.account_input :vendor_acc_id_eq, fb: ff, label: 'Vendor acc id eq',
+                      input_html: {
+                        class: 'vendor_id_eq-input-child',
+                        'data-path-parents': { 'q[contractor_id_eq]': '.vendor_id_eq-input' }.to_json,
+                        'data-path-required-parent': '.vendor_id_eq-input'
+                      }
       ff.input :vendor_acc_external_id_eq, required: false
 
       ff.input :customer_auth_id_eq,

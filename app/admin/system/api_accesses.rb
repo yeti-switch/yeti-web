@@ -53,7 +53,12 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
       f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.contractor_input :customer_id, label: 'Customer', q: { q: { customer_eq: true } }
-      f.account_input :account_ids, q: { q: { contractor_customer_eq: true } }, multiple: true
+      f.account_input :account_ids, multiple: true,
+                      input_html: {
+                        class: 'customer_id-input-child',
+                        'data-path-parents': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                        'data-path-required-parent': '.customer_id-input'
+                      }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
     end
