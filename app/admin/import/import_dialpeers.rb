@@ -6,12 +6,7 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   boolean_filter :enabled
   contractor_filter :vendor_id_eq
 
-  account_filter :account_id_eq,
-                 input_html: {
-                   class: 'vendor_id_eq-filter-child',
-                   'data-path-parents': { 'q[contractor_id_eq]': '.vendor_id_eq-filter' }.to_json,
-                   'data-path-required-parent': '.vendor_id_eq-filter'
-                 }
+  account_filter :account_id_eq
 
   filter :gateway,
          input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },

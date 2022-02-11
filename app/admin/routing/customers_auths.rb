@@ -202,12 +202,7 @@ ActiveAdmin.register CustomersAuth do
                     label: 'Customer',
                     path_params: { q: { customer_eq: true } }
 
-  account_filter :account_id_eq,
-                 input_html: {
-                   class: 'customer_id_eq-filter-child',
-                   'data-path-parents': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
-                   'data-path-required-parent': '.customer_id_eq-filter'
-                 }
+  account_filter :account_id_eq
 
   filter :gateway_id_eq,
          as: :select,

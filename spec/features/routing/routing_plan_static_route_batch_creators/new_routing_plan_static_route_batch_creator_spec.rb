@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feature, js: true do
+RSpec.xdescribe 'Create new Routing Plan Static Route Batch Creator', type: :feature, js: true do
   subject do
     aa_form.submit
   end

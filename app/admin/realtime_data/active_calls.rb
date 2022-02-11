@@ -39,19 +39,9 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
 
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
-  account_filter :vendor_acc_id_eq, label: 'Vendor Account',
-                                    input_html: {
-                                      class: 'vendor_id_eq-filter-child',
-                                      'data-path-parents': { 'q[contractor_id_eq]': '.vendor_id_eq-filter' }.to_json,
-                                      'data-path-required-parent': '.vendor_id_eq-filter'
-                                    }
+  account_filter :vendor_acc_id_eq, label: 'Vendor Account'
 
-  account_filter :customer_acc_id_eq, label: 'Customer Account',
-                                      input_html: {
-                                        class: 'customer_id_eq-filter-child',
-                                        'data-path-parents': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
-                                        'data-path-required-parent': '.customer_id_eq-filter'
-                                      }
+  account_filter :customer_acc_id_eq, label: 'Customer Account'
 
   filter :orig_gw_id_eq,
          as: :select,

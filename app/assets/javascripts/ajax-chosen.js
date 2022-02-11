@@ -114,8 +114,12 @@
                             return true
                         }
                         // Clear options
-                        select.find('option').remove()
-                        // chosen.find('ul.chosen-results').html('')
+                        if (select.prop('multiple')) {
+                            select.find('option:not(:selected)').remove()
+                        }else{
+                            select.find('option').remove()
+                            // chosen.find('ul.chosen-results').html('')
+                        }
                         // Set new options
                         if (emptyOption) {
                             select.append('<option value="">' + emptyOption+ '</option>')
@@ -125,7 +129,7 @@
                         $.each(data, function (i, item) {
                             select.append('<option value="' + item.id + '">' + item.value + '</option>')
                         })
-                        select.val(currentSelectValue)
+                        if (!select.prop('multiple')) select.val(currentSelectValue)
                         select.trigger('chosen:updated')
                         // restores search input after ajax request
                         chosen.find('.search-field input').click()
