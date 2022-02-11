@@ -2,7 +2,6 @@
 
 module ResourceDSL
   module AccountFilter
-
     def account_filter(name, q: nil, label: 'Account', **options)
       classes = [
         'chosen-ajax',
