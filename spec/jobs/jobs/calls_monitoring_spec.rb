@@ -79,6 +79,7 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
     create(:customers_auth,
            reject_calls: customers_auth_reject_calls,
            customer: account.contractor,
+           account: account,
            gateway: origin_gateway)
   end
 
@@ -175,11 +176,66 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
     ].map(&:symbolize_keys)
   end
 
+  let!(:another_account) do
+    FactoryBot.create(:account)
+  end
+
   before do
     # Yeti::CdrsFilter.new(Node.all).raw_cdrs(*)
     allow(Yeti::CdrsFilter).to receive(:new) { cdr_filter_mock }
     allow(cdr_filter_mock).to receive(:raw_cdrs) { cdr_list_unsorted }
-    allow(job).to receive(:save_stats)
+    allow(Stats::ActiveCall).to receive(:create_stats)
+    allow(Stats::ActiveCallOrigGateway).to receive(:create_stats)
+    allow(Stats::ActiveCallTermGateway).to receive(:create_stats)
+  end
+
+  context 'when YetiConfig.calls_monitoring.write_account_stats=true' do
+    before do
+      expect(YetiConfig.calls_monitoring).to receive(:write_account_stats).and_return(true)
+    end
+
+    it 'creates Stats::ActiveCallAccount' do
+      expect(ActiveCalls::CreateAccountStats).to receive(:call).with(
+        customer_calls: be_present,
+        vendor_calls: be_present,
+        current_time: be_within(2).of(Time.now)
+      ).and_call_original
+
+      # account + vendor_acc + another_account
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(3)
+
+      account_stats = Stats::ActiveCallAccount.where(account_id: account.id).to_a
+      expect(account_stats.size).to eq 1
+      expect(account_stats.first).to have_attributes(
+                                       terminated_count: 0,
+                                       originated_count: 2
+                                     )
+
+      vendor_acc_stats = Stats::ActiveCallAccount.where(account_id: vendor_acc.id).to_a
+      expect(vendor_acc_stats.size).to eq 1
+      expect(vendor_acc_stats.first).to have_attributes(
+                                          terminated_count: 2,
+                                          originated_count: 0
+                                        )
+
+      another_account_stats = Stats::ActiveCallAccount.where(account_id: another_account.id).to_a
+      expect(another_account_stats.size).to eq(1)
+      expect(another_account_stats.first).to have_attributes(
+                                               terminated_count: 0,
+                                               originated_count: 0
+                                             )
+    end
+  end
+
+  context 'when YetiConfig.calls_monitoring.write_account_stats=false' do
+    before do
+      expect(YetiConfig.calls_monitoring).to receive(:write_account_stats).and_return(false)
+    end
+
+    it 'creates Stats::ActiveCallAccount' do
+      expect(ActiveCalls::CreateAccountStats).not_to receive(:call)
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(0)
+    end
   end
 
   context 'when Customer and Vendor have enough money' do
