@@ -2,20 +2,22 @@
 
 module Helpers
   module Chosen
-    def fill_in_chosen(label, with:, disabled: nil, **options)
-      select_selector = chosen_container_selector(label, disabled: disabled)
+    def fill_in_chosen(label, with:, disabled: nil, exact_label: false, **options)
+      select_selector = chosen_container_selector(label, disabled: disabled, exact: exact_label)
       chosen_select(select_selector, search: with, **options)
     end
 
-    def chosen_select_selector(label, disabled: nil)
+    def chosen_select_selector(label, disabled: nil, exact: false)
       disabled = false if disabled.nil?
-      select = find_field(label, visible: false, disabled: disabled)
+      find_field_opts = { visible: false, disabled: disabled }
+      find_field_opts[:match] = :prefer_exact if exact
+      select = find_field(label, find_field_opts)
       "select##{select[:id]}"
     end
 
-    def chosen_container_selector(label, disabled: nil)
+    def chosen_container_selector(label, disabled: nil, exact: false)
       disabled = false if disabled.nil?
-      select_selector = chosen_select_selector(label, disabled: disabled)
+      select_selector = chosen_select_selector(label, disabled: disabled, exact: exact)
       chosen_selector = '.chosen-container'
       chosen_selector += disabled ? '.chosen-disabled' : ':not(.chosen-disabled)'
       "#{select_selector} + #{chosen_selector}"
@@ -42,8 +44,8 @@ module Helpers
       find('ul.chosen-results li.active-result', text: text, exact_text: exact).click
     end
 
-    def chosen_deselect_value(label)
-      select_selector = chosen_container_selector(label)
+    def chosen_deselect_value(label, exact: false)
+      select_selector = chosen_container_selector(label, exact: exact)
       chosen_node = page.find(select_selector)
       chosen_node.find('abbr.search-choice-close').click
     end
@@ -55,14 +57,14 @@ module Helpers
     #   :disabled [Boolean, nil] default false,
     #   :exact [Boolean] match :with by exact text (default true),
     #   for other options @see #have_selector.
-    def have_field_chosen(label, options = {})
+    def have_field_chosen(label, exact_label: false, **options)
       with = options.delete(:with)
       disabled = options.delete(:disabled)
       exact = options.delete(:exact)
       exact = true if exact.nil?
       warn 'empty :with will be ignored because :exact is false' if with.blank? && !exact
       options[exact ? :exact_text : :text] = with unless with.nil?
-      selector = chosen_container_selector(label, disabled: disabled)
+      selector = chosen_container_selector(label, disabled: disabled, exact: exact_label)
       have_selector(selector, options)
     end
   end

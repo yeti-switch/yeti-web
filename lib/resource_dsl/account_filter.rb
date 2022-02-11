@@ -5,18 +5,23 @@ module ResourceDSL
     def account_filter(name, q: nil, label: 'Account', **options)
       classes = [
         'chosen-ajax',
-        options.key?(:input_html) ? options.delete(:class) : nil
+        "#{name}-filter",
+        options.key?(:input_html) ? options[:input_html].delete(:class) : nil
       ].compact.join(' ')
       filter_options = {
         as: :select,
         label: label,
+        include_blank: true,
         input_html: {
           class: classes,
-          'data-path': "/accounts/search?#{q&.to_param}"
+          'data-path': "/accounts/search?#{q&.to_param}",
+          'data-clear-on-change': ".#{name}-filter-child",
+          'data-empty-option': 'Any'
         },
         collection: proc {
           resource_id = params.fetch(:q, {})[name]
-          resource_id ? Account.ransack(q&.[](:q)).result.where(id: resource_id) : []
+          ransack_query = q ? q[:q] : nil
+          resource_id ? Account.ransack(ransack_query).result.where(id: resource_id) : []
         }
       }
       filter_options = options.deep_merge(filter_options)

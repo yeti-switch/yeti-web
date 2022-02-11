@@ -17,13 +17,16 @@ module FeatureTestHelper
 
   # adds chosen fill for capybara/active_admin DSL
   def fill_in_chosen(label, options = {})
+    exact_label = options.fetch(:exact_label, false)
     exact = options.fetch(:exact, false)
     ajax = options.fetch(:ajax, false)
     disabled = options.fetch(:disabled, false)
     no_search = options.fetch(:no_search, false)
     multiple = options.fetch(:multiple, false)
     value = options.delete(:with)
-    select_node = find_field(label, visible: false, disabled: disabled)
+    find_field_opts = { visible: false, disabled: disabled }
+    find_field_opts[:match] = :prefer_exact if exact_label
+    select_node = find_field(label, find_field_opts)
     chosen_selector = "select##{select_node[:id]} + .chosen-container"
     if no_search
       chosen_pick(chosen_selector, text: value, exact: exact)

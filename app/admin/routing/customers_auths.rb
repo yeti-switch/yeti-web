@@ -197,12 +197,28 @@ ActiveAdmin.register CustomersAuth do
   filter :name
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
-  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true } }
 
-  account_filter :account_id_eq
+  contractor_filter :customer_id_eq,
+                    label: 'Customer',
+                    q: { q: { customer_eq: true } }
 
-  filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+  account_filter :account_id_eq,
+                 input_html: {
+                   class: 'customer_id_eq-filter-child',
+                   'data-path-parents': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
+                   'data-path-required-parent': '.customer_id_eq-filter'
+                 }
+
+  filter :gateway_id_eq,
+         as: :select,
+         label: 'Gateway',
+         input_html: {
+           class: 'chosen-ajax customer_id_eq-filter-child',
+           'data-path': '/gateways/search',
+           'data-path-parents': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
+           'data-path-required-parent': '.customer_id_eq-filter',
+           'data-empty-option': 'Any'
+         },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []
@@ -242,15 +258,26 @@ ActiveAdmin.register CustomersAuth do
           f.input :name
           f.input :enabled
           f.input :reject_calls
-          f.input :customer,
-                  input_html: {
-                    class: 'chosen',
-                    onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :customers_auth_account_id) +
-                              remote_chosen_request(:get, for_origination_gateways_path, { contractor_id: '$(this).val()' }, :customers_auth_gateway_id)
-                  }
-          f.input :account, collection: (f.object.customer.nil? ? [] : f.object.customer.accounts),
-                            include_blank: true,
-                            input_html: { class: 'chosen' }
+          f.contractor_input :customer_id,
+                             label: 'Customer',
+                             q: { q: { customer_eq: true } },
+                             input_html: {
+                               onchange: remote_chosen_request(
+                                 :get,
+                                 for_origination_gateways_path,
+                                 { contractor_id: '$(this).val()' },
+                                 :customers_auth_gateway_id,
+                                 ''
+                               )
+                             }
+
+          f.account_input :account_id,
+                          input_html: {
+                            class: 'customer_id-input-child',
+                            'data-path-parents': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                            'data-path-required-parent': '.customer_id-input'
+                          }
+
           f.input :check_account_balance
 
           f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.for_origination_gateways),

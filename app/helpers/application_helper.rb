@@ -37,6 +37,7 @@ module ApplicationHelper
   end
 
   def remote_chosen_request(type, path, params, target_selector, prompt = 'Select an Option')
+    add_empty_option = !prompt.nil?
     target_selector = "$('##{target_selector}')" if target_selector.is_a?(Symbol)
 
     "
@@ -46,10 +47,11 @@ module ApplicationHelper
           { #{params.collect { |p| "#{p[0]}: #{p[1]}" }.join(', ')} },
           function(data) {
             var target = $(#{target_selector}),
-                prompt = '#{prompt}';
+                prompt = '#{prompt}',
+                addEmptyOption = #{add_empty_option};
             if ( target.is( 'select' ) ) {
               var options_html = '';
-              if ( prompt ) {
+              if ( addEmptyOption ) {
                 options_html += '<option value=\"\">' + prompt + '</option>';
               }
               options_html += data;

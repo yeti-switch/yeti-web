@@ -49,7 +49,7 @@ $(document).ready(function () {
     $("select.chosen-wide").chosen({no_results_text: "No results matched", width: '80%', search_contains: true, allow_single_deselect: true});
     $("select.chosen-sortable").chosen({no_results_text: "No results matched", width: '80%', search_contains: true, allow_single_deselect: true}).chosenSortable();
 
-    $("select.chosen-ajax").chosen_ajax({ajax_method: "GET", ajax_min_chars: 3, no_results_text: "No results matched", allow_single_deselect: true})
+    $("select.chosen-ajax").chosen_ajax({ajax_method: "GET", ajax_min_chars: 3, width: '240px', no_results_text: "No results matched", allow_single_deselect: true})
 
     $('.index_as_table .index_table').stickyTableHeaders();
     $(document).on('has_many_add:after', function (e, fieldset) {

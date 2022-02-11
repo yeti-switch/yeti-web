@@ -15,8 +15,10 @@ module ActiveAdmin
                         object.respond_to?(name) ? object.send(name) : nil
                       end
 
+        ransack_query = q ? q[:q] : nil
         classes = [
           'chosen-ajax',
+          "#{name}-input",
           options.key?(:input_html) ? options[:input_html].delete(:class) : nil
         ].compact.join(' ')
         input_options = {
@@ -24,9 +26,10 @@ module ActiveAdmin
           label: label,
           input_html: {
             class: classes,
-            'data-path': "/accounts/search?#{q&.to_param}"
+            'data-path': "/accounts/search?#{q&.to_param}",
+            'data-clear-on-change': ".#{name}-input-child"
           },
-          collection: resource_id ? Account.ransack(q&.[](:q)).result.where(id: resource_id) : []
+          collection: resource_id ? Account.ransack(ransack_query).result.where(id: resource_id) : []
         }
         input_options = options.deep_merge(input_options)
 
@@ -44,8 +47,10 @@ module ActiveAdmin
                         object.respond_to?(name) ? object.send(name) : nil
                       end
 
+        ransack_query = q ? q[:q] : nil
         classes = [
           'chosen-ajax',
+          "#{name}-input",
           options.key?(:input_html) ? options[:input_html].delete(:class) : nil
         ].compact.join(' ')
         input_options = {
@@ -53,9 +58,10 @@ module ActiveAdmin
           label: label,
           input_html: {
             class: classes,
-            'data-path': "/contractors/search?#{q&.to_param}"
+            'data-path': "/contractors/search?#{q&.to_param}",
+            'data-clear-on-change': ".#{name}-input-child"
           },
-          collection: resource_id ? Contractor.ransack(q&.[](:q)).result.where(id: resource_id) : []
+          collection: resource_id ? Contractor.ransack(ransack_query).result.where(id: resource_id) : []
         }
         input_options = options.deep_merge(input_options)
 
