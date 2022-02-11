@@ -52,14 +52,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
     f.inputs do
       f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
-      f.input :customer, as: :select,
-                         input_html: {
-                           class: 'chosen',
-                           onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :system_api_access_account_ids, '')
-                         }
-      f.input :account_ids, as: :select, label: 'Accounts',
-                            input_html: { class: 'chosen', multiple: true, 'data-placeholder': 'Choose an Account...' },
-                            collection: (f.object.customer.nil? ? [] : f.object.customer.accounts.collection)
+      f.contractor_input :customer_id, label: 'Customer', q: { q: { customer_eq: true } }
+      f.account_input :account_ids, q: { q: { contractor_customer_eq: true } }, multiple: true
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
     end

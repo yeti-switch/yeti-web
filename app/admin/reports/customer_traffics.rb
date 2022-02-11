@@ -34,7 +34,7 @@ ActiveAdmin.register Report::CustomerTraffic, as: 'CustomerTraffic' do
     f.inputs do
       f.input :date_start, as: :date_time_picker, wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
       f.input :date_end, as: :date_time_picker
-      f.input :customer, as: :select, input_html: { class: 'chosen' }, collection: Contractor.where(customer: true)
+      f.contractor_input :customer_id, label: 'Customer', q: { q: { customer_eq: true } }
       f.input :send_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

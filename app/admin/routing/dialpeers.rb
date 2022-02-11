@@ -217,16 +217,13 @@ ActiveAdmin.register Dialpeer do
                                 input_html: { class: 'chosen' }
       f.input :routing_tag_mode
 
-      f.input :vendor,  collection: Contractor.vendors,
-                        input_html: {
-                          class: 'chosen',
-                          onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :dialpeer_account_id) +
-                                    remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
-                                    remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
-                        }
-      f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),
-                        include_blank: false,
-                        input_html: { class: 'chosen' }
+      f.contractor_input :vendor_id,  label: 'Vendor',
+                                      input_html: {
+                                        onchange: remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
+                                                  remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
+                                      }
+      f.account_input :account_id, q: { q: { contractor_vendor_eq: true } }
+
       f.input :routeset_discriminator, include_blank: false, input_html: { class: 'chosen' }
       f.input :priority
       f.input :force_hit_rate

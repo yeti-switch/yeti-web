@@ -74,7 +74,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
       f.input :prefix, input_html: { class: :prefix_detector }, hint: f.object.network_details_hint
       f.input :priority
       f.input :weight
-      f.input :vendor, collection: Contractor.vendors, input_html: { class: 'chosen', multiple: false }
+      f.contractor_input :vendor_id, label: 'Vendor', q: { q: { vendor_eq: true } }
     end
     f.actions
   end

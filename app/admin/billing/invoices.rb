@@ -283,23 +283,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
               include_blank: false,
               input_html: { class: 'chosen' }
 
-      f.input :contractor_id,
-              as: :select,
-              collection: Contractor.all,
-              input_html: {
-                class: 'chosen',
-                onchange: remote_chosen_request(
-                      :get,
-                      get_accounts_contractors_path,
-                      { contractor_id: '$(this).val()' },
-                      :billing_invoice_account_id
-                    )
-              }
-
-      f.input :account_id,
-              as: :select,
-              collection: [],
-              input_html: { class: 'chosen' }
+      f.contractor_input :contractor_id
+      f.account_input :account_id
 
       f.input :start_date,
               as: :date_time_picker,

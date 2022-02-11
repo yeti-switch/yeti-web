@@ -73,7 +73,7 @@ ActiveAdmin.register GatewayGroup do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :vendor, input_html: { class: 'chosen' }, collection: Contractor.vendors
+      f.contractor_input :vendor_id, label: 'Vendor', q: { q: { vendor_eq: true } }
       f.input :balancing_mode, as: :select, include_blank: false
     end
     f.actions

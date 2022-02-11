@@ -217,7 +217,7 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :contractor_id, input_html: { class: 'chosen' }, collection: Contractor.all
+      f.contractor_input :contractor_id
       f.input :min_balance
       f.input :max_balance
       f.input :vat
