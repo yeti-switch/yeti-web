@@ -100,11 +100,11 @@ class Importing::Base < ApplicationRecord
   end
 
   # Resolve existing items relation(by unique names)
-  def self.resolve_object_id(unique_columns)
+  def self.resolve_object_id(unique_columns, extra_condition = nil)
     for_update.update_all(o_id: nil)
     ready_to_process.update_all(is_changed: nil)
     if unique_columns.any?
-      update_relations_for_each!(import_class.table_name, :o, unique_columns)
+      update_relations_for_each!(import_class.table_name, :o, unique_columns, extra_condition)
     end
     apply_is_changed!
   end
@@ -135,7 +135,7 @@ class Importing::Base < ApplicationRecord
   # query like UPDATE+SET+FROM+WHERE, it skips "FROM"
   # "FROM" is crucial for this kind of queries
   #
-  def self.update_relations_for_each!(relation_table_name, field, unique_columns = [])
+  def self.update_relations_for_each!(relation_table_name, field, unique_columns = [], extra_condition = nil)
     if unique_columns.any?
       condition_array = []
       unique_columns.each do |column_name|
@@ -144,6 +144,9 @@ class Importing::Base < ApplicationRecord
       condition = condition_array.join(' AND ')
     else
       condition = "ta.#{field}_name = tb.name"
+    end
+    if extra_condition.present?
+      condition = "#{condition} AND #{extra_condition}"
     end
     sql = "UPDATE #{table_name} ta SET #{field}_id = tb.id FROM #{relation_table_name} tb WHERE #{condition}"
     ApplicationRecord.connection.execute(sql)

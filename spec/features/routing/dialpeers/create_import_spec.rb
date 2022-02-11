@@ -87,19 +87,33 @@ RSpec.describe 'Create Dialpeer Imports' do
       super()
       page.find('#collection_selection_toggle_all').set(true)
       click_on 'Apply unique columns'
-      fill_in_chosen 'changes[unique_columns][]', with: :prefix, multiple: true, ajax: false
-      fill_in_chosen 'changes[unique_columns][]', with: :gateway_id, multiple: true, ajax: false
-      fill_in_chosen 'changes[unique_columns][]', with: :gateway_group_id, multiple: true, ajax: false
+      fill_in_form!
       click_on 'OK'
     end
 
+    let(:fill_in_form!) do
+      fill_in_chosen 'changes[unique_columns][]', with: :prefix, multiple: true, ajax: false
+      fill_in_chosen 'changes[unique_columns][]', with: :gateway_id, multiple: true, ajax: false
+      fill_in_chosen 'changes[unique_columns][]', with: :gateway_group_id, multiple: true, ajax: false
+    end
+
     it 'should fill correct o_id for imported data' do
-      expect { subject }.to change {
-        import_1.reload.o_id
-      }.to(dialpeer_1.id)
-        .and change {
-               import_2.reload.o_id
-             }.to(dialpeer_2.id)
+      subject
+      expect(import_1.reload.o_id).to eq dialpeer_1.id
+      expect(import_2.reload.o_id).to eq dialpeer_2.id
+    end
+
+    context 'with additional_filter' do
+      let(:fill_in_form!) do
+        super()
+        fill_in 'changes[additional_filter]', with: "tb.id=#{dialpeer_1.id}"
+      end
+
+      it 'changes only filtered record' do
+        subject
+        expect(import_1.reload.o_id).to eq dialpeer_1.id
+        expect(import_2.reload.o_id).to eq nil
+      end
     end
   end
 end

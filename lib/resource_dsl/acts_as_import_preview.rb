@@ -64,6 +64,7 @@ module ResourceDSL
                   data: {
                     method: :put,
                     inputs: {
+                      additional_filter: :text,
                       unique_columns: [''] + acts_as_import_resource_class.import_attributes
                     }.to_json
                   }
@@ -78,9 +79,11 @@ module ResourceDSL
 
       collection_action :apply_unique_columns, method: :put do
         authorize!(:batch_update)
-        unique_columns = params.require(:changes).permit(unique_columns: [])[:unique_columns].reject(&:blank?)
+        permitted_params = params.require(:changes).permit(:additional_filter, unique_columns: [])
+        unique_columns = permitted_params[:unique_columns].reject(&:blank?)
+        extra_condition = permitted_params[:additional_filter]
         begin
-          acts_as_import_resource_class.resolve_object_id(unique_columns)
+          acts_as_import_resource_class.resolve_object_id(unique_columns, extra_condition)
           flash[:notice] = 'Unique columns applied!'
         rescue Importing::Base::Error => e
           flash[:error] = e.message
