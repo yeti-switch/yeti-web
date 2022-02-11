@@ -24,8 +24,10 @@ ActiveAdmin.register Payment do
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.attribute_names
+
     f.inputs form_title do
-      f.input :account, input_html: { class: 'chosen' }, collection: Account.reorder(:name)
+      f.account_input :account_id
       f.input :amount
       f.input :notes
     end
