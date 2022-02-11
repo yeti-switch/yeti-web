@@ -170,7 +170,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :reference
   contractor_filter :contractor_id_eq
 
-  account_filter :account_id_eq
+  account_filter :account_id_eq,
+                 input_html: {
+                   class: 'contractor_id_eq-filter-child',
+                   'data-path-parents': { 'q[contractor_id_eq]': '.contractor_id_eq-filter' }.to_json,
+                   'data-path-required-parent': '.contractor_id_eq-filter'
+                 }
 
   filter :state
   filter :start_date, as: :date_time_range
