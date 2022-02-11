@@ -46,12 +46,7 @@ ActiveAdmin.register Report::CustomerTrafficDataFull, as: 'CustomerTrafficDataFu
   filter :destination_prefix
   filter :dst_country_id, label: 'Country', as: :select, input_html: { class: 'chosen' }, collection: proc { System::Country.collection } ## TODO Why dst_country_id????
   filter :dst_network_id, label: 'Network', as: :select, input_html: { class: 'chosen' }, collection: proc { System::Network.collection }
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     column :destination_prefix

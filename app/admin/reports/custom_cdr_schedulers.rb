@@ -49,10 +49,5 @@ ActiveAdmin.register Report::CustomCdrScheduler, as: 'CustomCdrScheduler' do
 
   filter :id
   filter :period
-  filter :customer,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:customer_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true } }
 end

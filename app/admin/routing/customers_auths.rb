@@ -197,12 +197,7 @@ ActiveAdmin.register CustomersAuth do
   filter :name
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :customer,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:customer_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true } }
 
   account_filter :account_id_eq
 

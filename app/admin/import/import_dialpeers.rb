@@ -4,12 +4,7 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   filter :o_id
   filter :prefix
   boolean_filter :enabled
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq
 
   account_filter :account_id_eq
 

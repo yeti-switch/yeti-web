@@ -168,12 +168,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :id
   filter :uuid_equals, label: 'UUID'
   filter :reference
-  filter :contractor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:contractor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :contractor_id_eq
 
   account_filter :account_id_eq
 

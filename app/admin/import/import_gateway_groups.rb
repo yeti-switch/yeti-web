@@ -2,12 +2,7 @@
 
 ActiveAdmin.register Importing::GatewayGroup do
   filter :name
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
 
   filter :balancing_mode, as: :select
   boolean_filter :is_changed

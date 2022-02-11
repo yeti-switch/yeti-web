@@ -146,12 +146,7 @@ ActiveAdmin.register Dialpeer do
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
   account_filter :account_id_eq
   filter :routeset_discriminator, input_html: { class: 'chosen' }
   filter :gateway,

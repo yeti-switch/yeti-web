@@ -296,12 +296,7 @@ ActiveAdmin.register Gateway do
   filter :name
   filter :gateway_group, input_html: { class: 'chosen' }
   filter :pop, input_html: { class: 'chosen' }
-  filter :contractor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:contractor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :contractor_id_eq
 
   filter :transport_protocol
   filter :host

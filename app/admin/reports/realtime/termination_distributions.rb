@@ -14,12 +14,7 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
                             collection: Report::Realtime::Base::INTERVALS,
                             input_html: { class: 'chosen' }, include_blank: false
 
-  filter :customer,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:customer_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true, ordered_by: :name } }
 
   with_default_realtime_interval
 
