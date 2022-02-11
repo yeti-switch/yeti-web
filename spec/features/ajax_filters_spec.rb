@@ -14,12 +14,13 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
 
     subject do
       # open chosen popup to get input
-      find('#q_customer_id_chosen').click
-      find('#q_customer_id_chosen input').fill_in with: 'cus'
+      chosen_select = page.find(chosen_container_selector('Customer'))
+      chosen_select.click
+      chosen_select.find('.chosen-search input').native.send_keys('cus')
     end
 
     it 'should have one option in select' do
-      within '#sidebar #new_q #q_customer_input select', visible: false do
+      within '#sidebar #new_q #q_customer_id_eq_input select', visible: false do
         expect(page).to have_css('option', count: 1, visible: false)
         expect(page).to have_css('option:first-child', text: 'Any', visible: false)
       end
@@ -28,24 +29,24 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
     it 'when type letters load options (2 results and "Any" existed)' do
       subject
       goal_customer_list.each do |item|
-        expect(page).to have_css('#q_customer_input select option', text: item.name, visible: false)
+        expect(page).to have_css('#q_customer_id_eq_input select option', text: item.name, visible: false)
       end
       # 2 results from database and "Any" option by default = total 3
-      expect(page).to have_css('#q_customer_input select option', count: 3, visible: false)
+      expect(page).to have_css('#q_customer_id_eq_input select option', count: 3, visible: false)
     end
 
     it 'should select option and execute filter ' do
       customer = goal_customer_list.first
       subject
       # make first element selected
-      find('#q_customer_id_chosen li', text: customer.name).click
+      find('#q_customer_id_eq_input li', text: customer.name).click
 
       # execute filter and reload page
       page.find('input[type=submit]').click
 
       expect(CGI.unescape(page.current_url)).to include("q[customer_id_eq]=#{customer.id}")
       # check selected element
-      expect(find('#q_customer_input select option', visible: false, text: customer.name)).to be_selected
+      expect(find('#q_customer_id_eq_input select option', visible: false, text: customer.name)).to be_selected
     end
   end
 end

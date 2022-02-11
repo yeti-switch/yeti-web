@@ -20,9 +20,8 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
 
     aa_form.search_chosen 'Routing plan', routing_plan.display_name, ajax: true
     aa_form.set_text 'Prefixes', '123,456'
-    aa_form.select_chosen 'Vendors', vendor_2.display_name
-    aa_form.select_chosen 'Vendors', vendor_1.display_name
-    Capybara::Screenshot.screenshot_and_save_page
+    aa_form.search_chosen 'Vendors', vendor_2.display_name, ajax: true, multiple: true
+    aa_form.search_chosen 'Vendors', vendor_1.display_name, ajax: true, multiple: true
   end
 
   it 'creates record' do

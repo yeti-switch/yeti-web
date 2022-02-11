@@ -14,7 +14,7 @@ RSpec.describe 'Create new Customer Traffic', type: :feature, js: true do
     FactoryBot.create(:vendor)
     visit new_customer_traffic_path
 
-    aa_form.select_chosen 'Customer', customer.name
+    aa_form.search_chosen 'Customer', customer.name, ajax: true
     aa_form.set_date_time 'Date start', '2019-01-01 00:00'
     aa_form.set_date_time 'Date end', '2019-02-01 01:00'
   end

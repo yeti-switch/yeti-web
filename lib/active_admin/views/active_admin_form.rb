@@ -8,8 +8,12 @@ module ActiveAdmin
         cancel_link
       end
 
-      def account_input(name, label: 'Account', q: nil, **options)
-        resource_id = object.respond_to?(name) ? object.send(name) : nil
+      def account_input(name, fb: nil, label: 'Account', q: nil, **options)
+        resource_id = if fb.present?
+                        fb.object.respond_to?(name) ? fb.object.send(name) : nil
+                      else
+                        object.respond_to?(name) ? object.send(name) : nil
+                      end
 
         classes = [
           'chosen-ajax',
@@ -22,15 +26,23 @@ module ActiveAdmin
             class: classes,
             'data-path': "/accounts/search?#{q&.to_param}"
           },
-          collection: resource_id ? Account.ransack(q[:q]).result.where(id: resource_id) : []
+          collection: resource_id ? Account.ransack(q&.[](:q)).result.where(id: resource_id) : []
         }
         input_options = options.deep_merge(input_options)
 
-        input name, input_options
+        if fb.present?
+          fb.input name, input_options
+        else
+          input name, input_options
+        end
       end
 
-      def contractor_input(name, label: 'Contractor', q: nil, **options)
-        resource_id = object.respond_to?(name) ? object.send(name) : nil
+      def contractor_input(name, fb: nil, label: 'Contractor', q: nil, **options)
+        resource_id = if fb.present?
+                        fb.object.respond_to?(name) ? fb.object.send(name) : nil
+                      else
+                        object.respond_to?(name) ? object.send(name) : nil
+                      end
 
         classes = [
           'chosen-ajax',
@@ -43,11 +55,15 @@ module ActiveAdmin
             class: classes,
             'data-path': "/contractors/search?#{q&.to_param}"
           },
-          collection: resource_id ? Contractor.ransack(q[:q]).result.where(id: resource_id) : []
+          collection: resource_id ? Contractor.ransack(q&.[](:q)).result.where(id: resource_id) : []
         }
         input_options = options.deep_merge(input_options)
 
-        input name, input_options
+        if fb.present?
+          fb.input name, input_options
+        else
+          input name, input_options
+        end
       end
     end
   end

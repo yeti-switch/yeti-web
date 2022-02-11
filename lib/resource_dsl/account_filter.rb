@@ -16,7 +16,7 @@ module ResourceDSL
         },
         collection: proc {
           resource_id = params.fetch(:q, {})[name]
-          resource_id ? Account.ransack(q[:q]).result.where(id: resource_id) : []
+          resource_id ? Account.ransack(q&.[](:q)).result.where(id: resource_id) : []
         }
       }
       filter_options = options.deep_merge(filter_options)

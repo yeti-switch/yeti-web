@@ -16,7 +16,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     visit new_account_path
 
     fill_in 'Name', with: form_params[:name]
-    fill_in_chosen 'Contractor', with: form_params[:contractor].display_name
+    fill_in_chosen 'Contractor', with: form_params[:contractor].display_name, ajax: true
     fill_in 'Min balance', with: form_params[:min_balance]
     fill_in 'Max balance', with: form_params[:max_balance]
     fill_in 'Vat', with: form_params[:vat]

@@ -26,8 +26,8 @@ RSpec.describe 'Create new Dialpeer', type: :feature, js: true do
 
     aa_form.set_text 'Initial rate', '0.1'
     aa_form.set_text 'Next rate', '0.2'
-    aa_form.select_chosen 'Vendor', vendor.display_name
-    aa_form.select_chosen 'Account', account.display_name
+    aa_form.search_chosen 'Vendor', vendor.display_name, ajax: true
+    aa_form.search_chosen 'Account', account.display_name, ajax: true
     aa_form.select_chosen 'Routing group', routing_group.display_name
     aa_form.select_chosen 'Routeset discriminator', routeset_discriminator.display_name
     aa_form.select_chosen 'Gateway', gateway.display_name
