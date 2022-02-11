@@ -2,7 +2,7 @@
 
 module ResourceDSL
   module AccountFilter
-    def account_filter(name, q: nil, label: 'Account', **options)
+    def account_filter(name, path_params: nil, label: 'Account', **options)
       classes = [
         'chosen-ajax',
         "#{name}-filter",
@@ -14,13 +14,13 @@ module ResourceDSL
         include_blank: true,
         input_html: {
           class: classes,
-          'data-path': "/accounts/search?#{q&.to_param}",
+          'data-path': "/accounts/search?#{path_params&.to_param}",
           'data-clear-on-change': ".#{name}-filter-child",
           'data-empty-option': 'Any'
         },
         collection: proc {
           resource_id = params.fetch(:q, {})[name]
-          ransack_query = q ? q[:q] : nil
+          ransack_query = path_params ? path_params[:q] : nil
           resource_id ? Account.ransack(ransack_query).result.where(id: resource_id) : []
         }
       }

@@ -146,7 +146,7 @@ ActiveAdmin.register Dialpeer do
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
   account_filter :account_id_eq,
                  input_html: {
                    class: 'vendor_id_eq-filter-child',

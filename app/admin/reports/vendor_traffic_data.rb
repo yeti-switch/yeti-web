@@ -11,7 +11,7 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
 
   filter :calls_count
   filter :calls_duration
-  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true } }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
   controller do
     def scoped_collection

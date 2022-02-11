@@ -29,7 +29,7 @@ ActiveAdmin.register Routing::RoutingPlan do
   filter :name
   filter :sorting
   filter :use_lnp, as: :select, collection: [['Yes', true], ['No', false]]
-  account_filter :customers_auths_account_id_eq, label: 'Assigned to account', q: { q: { contractor_customer_eq: true } }
+  account_filter :customers_auths_account_id_eq, label: 'Assigned to account', path_params: { q: { contractor_customer_eq: true } }
   filter :rate_delta_max
   filter :max_rerouting_attempts
   filter :routing_groups, input_html: { class: 'chosen' }, collection: proc { RoutingGroup.pluck(:name, :id) }

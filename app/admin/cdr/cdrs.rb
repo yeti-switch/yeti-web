@@ -59,9 +59,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          label: 'With routing tag',
          input_html: { class: 'chosen' }
   filter :time_start, as: :date_time_range
-  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true } }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
-  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   filter :customer_auth, collection: proc { CustomersAuth.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
   filter :src_prefix_routing

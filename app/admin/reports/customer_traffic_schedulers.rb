@@ -32,7 +32,7 @@ ActiveAdmin.register Report::CustomerTrafficScheduler, as: 'CustomerTrafficSched
   form do |f|
     f.inputs do
       f.input :period
-      f.contractor_input :customer_id, label: 'Customer', q: { q: { customer_eq: true } }
+      f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
       f.input :send_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions
@@ -40,7 +40,7 @@ ActiveAdmin.register Report::CustomerTrafficScheduler, as: 'CustomerTrafficSched
 
   filter :id
   filter :created_at, as: :date_time_range
-  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true } }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
   show do |_s|
     attributes_table do

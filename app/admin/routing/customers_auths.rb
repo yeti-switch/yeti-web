@@ -200,7 +200,7 @@ ActiveAdmin.register CustomersAuth do
 
   contractor_filter :customer_id_eq,
                     label: 'Customer',
-                    q: { q: { customer_eq: true } }
+                    path_params: { q: { customer_eq: true } }
 
   account_filter :account_id_eq,
                  input_html: {
@@ -260,7 +260,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :reject_calls
           f.contractor_input :customer_id,
                              label: 'Customer',
-                             q: { q: { customer_eq: true } },
+                             path_params: { q: { customer_eq: true } },
                              input_html: {
                                onchange: remote_chosen_request(
                                  :get,

@@ -46,7 +46,7 @@ ActiveAdmin.register GatewayGroup do
 
   filter :id
   filter :name
-  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   filter :balancing_mode
 
@@ -73,7 +73,7 @@ ActiveAdmin.register GatewayGroup do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.contractor_input :vendor_id, label: 'Vendor', q: { q: { vendor_eq: true } }
+      f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
       f.input :balancing_mode, as: :select, include_blank: false
     end
     f.actions

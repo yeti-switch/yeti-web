@@ -14,7 +14,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
                 account_ids: []
 
   filter :id
-  contractor_filter :customer_id_eq, label: 'Customer', q: { q: { customer_eq: true, ordered_by: :name } }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
 
   filter :login
 
@@ -52,13 +52,13 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
     f.inputs do
       f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
-      f.contractor_input :customer_id, label: 'Customer', q: { q: { customer_eq: true } }
+      f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
       f.account_input :account_ids, multiple: true,
-                      input_html: {
-                        class: 'customer_id-input-child',
-                        'data-path-parents': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
-                        'data-path-required-parent': '.customer_id-input'
-                      }
+                                    input_html: {
+                                      class: 'customer_id-input-child',
+                                      'data-path-parents': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                                      'data-path-required-parent': '.customer_id-input'
+                                    }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
     end

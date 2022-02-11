@@ -36,7 +36,6 @@
                         }
                         child.val('')
                         child.trigger('chosen:updated')
-                        console.log('clear options', childrenSelector, child)
                     })
                 }
             })
@@ -47,7 +46,6 @@
                 if (requireParentSelector) {
                     var requireParent = $(requireParentSelector)
                     if (!$(requireParent).val()) {
-                        console.log('requireParent', requireParentSelector, $(requireParent))
                         return true
                     }
                 }
@@ -58,13 +56,11 @@
 
                 // skip if search blank or equal to last search
                 if (!searchTerm || oldSearchTerm === searchTerm) {
-                    console.log('oldSearchTerm === searchTerm', oldSearchTerm, searchTerm)
                     return true
                 }
 
                 // skip if search input has less then required min characters
                 if (options.hasOwnProperty('ajax_min_chars') && searchTerm.length < options.ajax_min_chars) {
-                    console.log('ajax_min_chars', searchTerm, options.ajax_min_chars)
                     return true
                 }
 

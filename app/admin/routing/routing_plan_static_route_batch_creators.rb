@@ -26,7 +26,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRouteBatchCreatorForm, as: 'Routi
       f.input :priority, input_html: { value: 100 }
       f.input :weight, input_html: { value: 100 }
 
-      f.contractor_input :vendors, label: 'Vendors', q: { q: { vendor_eq: true } }, multiple: true,
+      f.contractor_input :vendors, label: 'Vendors', path_params: { q: { vendor_eq: true } }, multiple: true,
                                    hint: 'Priority will be decremented on 5 for each next Vendor'
     end
     f.actions do

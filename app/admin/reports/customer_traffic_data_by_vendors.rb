@@ -9,7 +9,7 @@ ActiveAdmin.register Report::CustomerTrafficDataByVendor, as: 'CustomerTrafficDa
 
   filter :calls_count
   filter :calls_duration
-  contractor_filter :vendor_id_eq, label: 'Vendor', q: { q: { vendor_eq: true } }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   decorate_with ReportCustomerTrafficByVendorDecorator
 
