@@ -4,6 +4,7 @@
     var ajax_xml_http_request = {};
 
     $.fn.chosen_ajax = function (options) {
+        options.width = '50%'
         // Call chosen
         $(this).chosen(options);
 
