@@ -208,9 +208,8 @@ ActiveAdmin.register CustomersAuth do
          as: :select,
          label: 'Gateway',
          input_html: {
-           class: 'chosen-ajax customer_id_eq-filter-child',
+           class: 'chosen-ajax',
            'data-path': '/gateways/search',
-           'data-path-params': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
            'data-empty-option': 'Any'
          },
          collection: proc {
@@ -266,6 +265,7 @@ ActiveAdmin.register CustomersAuth do
                              }
 
           f.account_input :account_id,
+                          fill_params: { contractor_id_eq: f.object.customer_id },
                           input_html: {
                             'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
                             'data-required-param': 'q[contractor_id_eq]'

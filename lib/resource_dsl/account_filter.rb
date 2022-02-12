@@ -2,30 +2,23 @@
 
 module ResourceDSL
   module AccountFilter
-    def account_filter(name, path_params: nil, label: 'Account', **options)
-      classes = [
-        'chosen-ajax',
-        "#{name}-filter",
-        options.key?(:input_html) ? options[:input_html].delete(:class) : nil
-      ].compact.join(' ')
-      filter_options = {
-        as: :select,
+    # @param name [Symbol] column name for account foreign key.
+    # @param label [String] label for input, default 'Account'.
+    # path_params [Hash,nil] static params for search query, default nil.
+    # fill_params [Hash,nil] dynamic params for chosen-ajax-filled collection, key - ransack key for search, value.
+    # fill_required [Symbol,nil] required dynamic param key, if blank collection will be empty.
+    # @param options [Hash] other input params
+    #   :'data-path-params' [String] json hash: key is parameter for search query, value is selector of a field.
+    #   :input_html [Hash] options will be passed directly to html builder of input node.
+    #
+    def account_filter(name, label: 'Account', **options)
+      association_ajax_filter(
+        name,
         label: label,
-        include_blank: true,
-        input_html: {
-          class: classes,
-          'data-path': "/accounts/search?#{path_params&.to_param}",
-          'data-empty-option': 'Any'
-        },
-        collection: proc {
-          resource_id = params.fetch(:q, {})[name]
-          ransack_query = path_params ? path_params[:q] : nil
-          resource_id ? Account.ransack(ransack_query).result.where(id: resource_id) : []
-        }
-      }
-      filter_options = options.deep_merge(filter_options)
-
-      filter name, filter_options
+        scope: -> { Account.order(:name) },
+        path: '/accounts/search',
+        **options
+      )
     end
   end
 end

@@ -39,6 +39,7 @@
 //= require modal_link
 //= require import_apply_unique_fields
 //= require chosen_ajax
+//= require chosen_ajax_fillable
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
@@ -69,6 +70,16 @@ $(document).ready(function () {
         parent.find("select.chosen-ajax").chosenAjax(
             {ajax_method: "GET", ajax_min_chars: 3 },
             {width: '240px', no_results_text: "No results matched", allow_single_deselect: true}
+        )
+
+        parent.find("select.chosen-ajax-fillable").chosenAjaxFillable(
+            {ajax_method: "GET"},
+            {
+                width: '240px',
+                no_results_text: "No results matched",
+                allow_single_deselect: true,
+                search_contains: true
+            }
         )
     }
 

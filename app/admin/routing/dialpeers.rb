@@ -218,12 +218,25 @@ ActiveAdmin.register Dialpeer do
                                 input_html: { class: 'chosen' }
       f.input :routing_tag_mode
 
-      f.contractor_input :vendor_id,  label: 'Vendor',
-                                      input_html: {
-                                        onchange: remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
-                                                  remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
-                                      }
+      f.contractor_input :vendor_id,
+                         label: 'Vendor',
+                         input_html: {
+                           onchange: remote_chosen_request(
+                             :get,
+                             for_termination_gateways_path,
+                             { contractor_id: '$(this).val()' },
+                             :dialpeer_gateway_id
+                           ) + remote_chosen_request(
+                             :get,
+                             with_contractor_gateway_groups_path,
+                             { contractor_id: '$(this).val()' },
+                             :dialpeer_gateway_group_id
+                           )
+                         }
+
       f.account_input :account_id,
+                      fill_params: { contractor_id_eq: f.object.vendor_id },
+                      fill_required: :contractor_id_eq,
                       input_html: {
                         'data-path-params': { 'q[contractor_id_eq]': '.vendor_id-input' }.to_json,
                         'data-required-param': 'q[contractor_id_eq]'

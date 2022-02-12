@@ -2,30 +2,20 @@
 
 module ResourceDSL
   module ContractorFilter
-    def contractor_filter(name, path_params: nil, label: 'Contractor', **options)
-      classes = [
-        'chosen-ajax',
-        "#{name}-filter",
-        options.key?(:input_html) ? options[:input_html].delete(:class) : nil
-      ].compact.join(' ')
-      filter_options = {
-        as: :select,
+    # @param name [Symbol] column name for contractor foreign key.
+    # @param label [String] label for input, default 'Contractor'.
+    # @param options [Hash] other input params
+    #   :path_params [Hash,nil] static params for search query, default nil.
+    #   :input_html [Hash] options will be passed directly to html builder of input node.
+    #
+    def contractor_filter(name, label: 'Contractor', **options)
+      association_ajax_filter(
+        name,
         label: label,
-        include_blank: true,
-        input_html: {
-          class: classes,
-          'data-path': "/contractors/search?#{path_params&.to_param}",
-          'data-empty-option': 'Any'
-        },
-        collection: proc {
-          resource_id = params.fetch(:q, {})[name]
-          ransack_query = path_params ? path_params[:q] : nil
-          resource_id ? Contractor.ransack(ransack_query).result.where(id: resource_id) : []
-        }
-      }
-      filter_options = options.deep_merge(filter_options)
-
-      filter name, filter_options
+        scope: -> { Contractor.order(:name) },
+        path: '/contractors/search',
+        **options
+      )
     end
   end
 end
