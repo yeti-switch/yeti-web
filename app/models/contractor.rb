@@ -58,14 +58,6 @@ class Contractor < ApplicationRecord
     enabled
   end
 
-  def for_origination_gateways
-    Gateway.for_origination(id)
-  end
-
-  def for_termination_gateways
-    Gateway.for_termination(id)
-  end
-
   private
 
   def vendor_or_customer?

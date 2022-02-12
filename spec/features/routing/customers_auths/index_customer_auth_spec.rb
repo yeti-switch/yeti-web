@@ -85,4 +85,125 @@ RSpec.describe 'Index Customer Auths', type: :feature do
       end
     end
   end
+
+  context 'with filter by account only', js: true do
+    let(:apply_filters!) do
+      within_filters do
+        fill_in_chosen 'Account', with: account.name, exact_label: true, ajax: true
+      end
+      click_submit('Filter')
+    end
+
+    let!(:customer) { create(:customer) }
+    let!(:account) { create(:account, contractor: customer) }
+    let!(:filtered_customer_auths) do
+      create_list(:customers_auth, 2, :filled, customer: customer, account: account)
+    end
+
+    before do
+      # ignored because belongs to another account
+      create(:customers_auth, :filled, customer: customer)
+    end
+
+    it 'shows only filtered rows' do
+      subject
+
+      expect(page).to have_table_row count: filtered_customer_auths.size
+      filtered_customer_auths.each do |customer_auth|
+        expect(page).to have_table_cell(column: 'ID', exact_text: customer_auth.id.to_s)
+      end
+    end
+  end
+
+  context 'with filter by customer and gateway', js: true do
+    let(:apply_filters!) do
+      within_filters do
+        fill_in_chosen 'Customer', with: customer.name, exact_label: true, ajax: true
+        fill_in_chosen 'Gateway', with: gateway.name, exact_label: true, ajax: true
+      end
+      click_submit('Filter')
+    end
+
+    let!(:customer) { create(:customer) }
+    let!(:gateway) { create(:gateway, :with_incoming_auth, contractor: customer) }
+    let!(:filtered_customer_auths) do
+      create_list(:customers_auth, 2, :filled, customer: customer, gateway: gateway)
+    end
+
+    before do
+      # ignored because belongs to another gateway
+      create(:customers_auth, :filled, customer: customer)
+    end
+
+    it 'shows only filtered rows' do
+      subject
+
+      expect(page).to have_table_row count: filtered_customer_auths.size
+      filtered_customer_auths.each do |customer_auth|
+        expect(page).to have_table_cell(column: 'ID', exact_text: customer_auth.id.to_s)
+      end
+    end
+  end
+
+  context 'with filter by contractors gateway', js: true do
+    let(:apply_filters!) do
+      within_filters do
+        fill_in_chosen 'Gateway', with: gateway.name, exact_label: true, ajax: true
+      end
+      click_submit('Filter')
+    end
+
+    let!(:customer) { create(:customer) }
+    let!(:gateway) { create(:gateway, :with_incoming_auth, contractor: customer) }
+    let!(:filtered_customer_auths) do
+      create_list(:customers_auth, 2, :filled, customer: customer, gateway: gateway)
+    end
+
+    before do
+      # ignored because belongs to another gateway
+      create(:customers_auth, :filled, customer: customer)
+    end
+
+    it 'shows only filtered rows' do
+      subject
+
+      expect(page).to have_table_row count: filtered_customer_auths.size
+      filtered_customer_auths.each do |customer_auth|
+        expect(page).to have_table_cell(column: 'ID', exact_text: customer_auth.id.to_s)
+      end
+    end
+  end
+
+  context 'with filter by shared gateway', js: true do
+    let(:apply_filters!) do
+      within_filters do
+        fill_in_chosen 'Gateway', with: gateway.name, exact_label: true, ajax: true
+      end
+      click_submit('Filter')
+    end
+
+    let!(:customer) { create(:customer) }
+    let!(:another_customer) { create(:customer) }
+    let!(:gateway) { create(:gateway, :with_incoming_auth, is_shared: true) }
+    let!(:filtered_customer_auths) do
+      [
+        create(:customers_auth, :filled, customer: customer, gateway: gateway),
+        create(:customers_auth, :filled, customer: another_customer, gateway: gateway)
+      ]
+    end
+
+    before do
+      # ignored because belongs to another gateway
+      create(:customers_auth, :filled, customer: customer)
+    end
+
+    it 'shows only filtered rows' do
+      subject
+
+      expect(page).to have_table_row count: filtered_customer_auths.size
+      filtered_customer_auths.each do |customer_auth|
+        expect(page).to have_table_cell(column: 'ID', exact_text: customer_auth.id.to_s)
+      end
+    end
+  end
 end

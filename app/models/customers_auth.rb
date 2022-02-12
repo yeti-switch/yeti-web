@@ -227,19 +227,6 @@ class CustomersAuth < ApplicationRecord
   #   pop.nil? ? "Any" : pop.name
   # end
 
-  def self.search_for_debug(src, dst)
-    if src.blank? && dst.blank?
-      CustomersAuth.all.reorder(:name)
-    elsif src.blank?
-      CustomersAuth.where('prefix_range(customers_auth.dst_prefix)@>prefix_range(?)', dst).reorder(:name)
-    elsif dst.blank?
-      CustomersAuth.where('prefix_range(customers_auth.src_prefix)@>prefix_range(?)', src).reorder(:name)
-    else
-      CustomersAuth.where("prefix_range(customers_auth.src_prefix)@>prefix_range(?) AND
-  prefix_range(customers_auth.dst_prefix)@>prefix_range(?)", src, dst).reorder(:name)
-    end
-  end
-
   # force update IP
   def keys_for_partial_write
     (changed + ['ip']).uniq

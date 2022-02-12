@@ -2,7 +2,7 @@
 
 ActiveAdmin.register GatewayGroup do
   menu parent: 'Equipment', priority: 70
-
+  search_support!
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
@@ -26,11 +26,6 @@ ActiveAdmin.register GatewayGroup do
     def scoped_collection
       super.eager_load(:vendor, :balancing_mode)
     end
-  end
-
-  collection_action :with_contractor do
-    @gr = Contractor.find(params[:contractor_id]).gateway_groups
-    render plain: view_context.options_from_collection_for_select(@gr, :id, :display_name)
   end
 
   index do

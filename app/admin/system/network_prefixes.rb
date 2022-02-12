@@ -13,31 +13,10 @@ ActiveAdmin.register System::NetworkPrefix do
     end
   end
 
-  collection_action :search do
+  collection_action :prefix_hint do
     render plain: System::NetworkPrefix.prefix_hint(params[:prefix])
   end
 
-  collection_action :with_network do
-    render plain: System::NetworkPrefix.prefix_list_by_network(params[:network_id].to_i)
-  end
-
-  # filter :network_prefix_country_id_eq,
-  #        label: 'Country',
-  #        input_html: {class: 'chosen',
-  #                     onchange: remote_chosen_request(:get, 'system_countries/get_networks', {country_id: "$(this).val()"}, :q_network_prefix_network_id_eq)
-  #
-  #        },
-  #        as: :select, collection: ->{ System::Country.all }
-  #
-  #
-  # filter :network_prefix_network_id_eq,
-  #        label: 'Network',
-  #        input_html: {class: 'chosen'},
-  #        as: :select,
-  #        collection: -> {
-  #          System::Country.find(assigns["search"].network_prefix_country_id_eq).networks rescue []
-  #
-  #        }
   filter :id
   filter :uuid_equals, label: 'UUID'
   filter :prefix

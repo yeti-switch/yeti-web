@@ -247,11 +247,6 @@ ActiveAdmin.register Account do
     f.actions
   end
 
-  collection_action :with_contractor do
-    @accounts = Contractor.find_by(id: params[:contractor_id]).try(:accounts) || Account.none
-    render plain: view_context.options_from_collection_for_select(@accounts, :id, :display_name)
-  end
-
   sidebar 'Create Payment', only: [:show] do
     active_admin_form_for(Payment.new(account_id: params[:id]),
                           url: payment_account_path(params[:id]),

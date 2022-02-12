@@ -105,7 +105,7 @@ $(document).ready(function () {
         hint = self.next();
         if (hint.hasClass('inline-hints') && $.isNumeric(self.val())) {
             hint.text('loading...');
-            $.get("/system_network_prefixes/search", {prefix: self.val()}, function (json) {
+            $.get("/system_network_prefixes/prefix_hint", {prefix: self.val()}, function (json) {
                 hint.html(json);
             });
         }

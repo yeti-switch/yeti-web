@@ -46,23 +46,26 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
-  filter :network_prefix_country_id_eq,
-         label: 'Country',
-         input_html: { class: 'chosen',
-                       onchange: remote_chosen_request(:get, 'system_countries/get_networks', { country_id: '$(this).val()' }, :q_network_prefix_network_id_eq) },
-         as: :select, collection: -> { System::Country.all }
 
-  filter :network_prefix_network_id_eq,
-         label: 'Network',
-         input_html: { class: 'chosen' },
+  filter :network_prefix_country_id_eq,
          as: :select,
-         collection: lambda {
-           begin
-             System::Country.find(assigns['search'].network_prefix_country_id_eq).networks
-           rescue StandardError
-             []
-           end
-         }
+         label: 'Country',
+         input_html: {
+           class: 'chosen network_prefix_country_id_eq-filter'
+         },
+         collection: -> { System::Country.order(:name) }
+
+  association_ajax_filter :network_prefix_network_id_eq,
+                          label: 'Network',
+                          scope: -> { System::Network.order(:name) },
+                          path: '/system_networks/search',
+                          input_html: {
+                            'data-path-params': { 'q[country_id_eq]': '.network_prefix_country_id_eq-filter' }.to_json,
+                            'data-required-param': 'q[country_id_eq]'
+                          },
+                          fill_params: lambda {
+                            { country_id_eq: params.dig(:q, :network_prefix_country_id_eq) }
+                          }
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
   filter :valid_from, as: :date_time_range

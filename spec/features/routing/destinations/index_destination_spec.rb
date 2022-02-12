@@ -31,7 +31,7 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
 
       page.scroll_to('.filter_form input[type="submit"]')
       chosen_select('#q_network_prefix_country_id_eq_chosen', search: country.display_name)
-      chosen_select('#q_network_prefix_network_id_eq_chosen', search: network.name)
+      chosen_select('#q_network_prefix_network_id_eq_chosen', search: network.name, ajax: true)
       page.find('.filter_form input[type="submit"]').click
 
       expect(page).to have_css('.resource_id_link', text: matched_record.id)

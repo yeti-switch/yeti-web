@@ -95,13 +95,6 @@ ActiveAdmin.register CustomersAuth do
     end
   end
 
-  collection_action :search_for_debug do
-    src_prefix = params[:src_prefix].to_s
-    dst_prefix = params[:dst_prefix].to_s
-    @ca = CustomersAuth.search_for_debug(src_prefix, dst_prefix)
-    render plain: view_context.options_from_collection_for_select(@ca, :id, :display_name_for_debug)
-  end
-
   scope :with_radius
   scope :with_dump
 
@@ -204,18 +197,10 @@ ActiveAdmin.register CustomersAuth do
 
   account_filter :account_id_eq
 
-  filter :gateway_id_eq,
-         as: :select,
-         label: 'Gateway',
-         input_html: {
-           class: 'chosen-ajax',
-           'data-path': '/gateways/search',
-           'data-empty-option': 'Any'
-         },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:gateway_id_eq]
-           resource_id ? Gateway.where(id: resource_id) : []
-         }
+  association_ajax_filter :gateway_id_eq,
+                         label: 'Gateway',
+                         scope: -> { Gateway.order(:name) },
+                         path: '/gateways/search'
 
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }
@@ -253,16 +238,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :reject_calls
           f.contractor_input :customer_id,
                              label: 'Customer',
-                             path_params: { q: { customer_eq: true } },
-                             input_html: {
-                               onchange: remote_chosen_request(
-                                 :get,
-                                 for_origination_gateways_path,
-                                 { contractor_id: '$(this).val()' },
-                                 :customers_auth_gateway_id,
-                                 ''
-                               )
-                             }
+                             path_params: { q: { customer_eq: true } }
 
           f.account_input :account_id,
                           fill_params: { contractor_id_eq: f.object.customer_id },
@@ -273,9 +249,15 @@ ActiveAdmin.register CustomersAuth do
 
           f.input :check_account_balance
 
-          f.input :gateway, collection: (f.object.customer.nil? ? [] : f.object.customer.for_origination_gateways),
-                            include_blank: true,
-                            input_html: { class: 'chosen' }
+          f.association_ajax_input :gateway_id,
+                                   label: 'Gateway',
+                                   scope: Gateway.order(:name),
+                                   path: '/gateways/search',
+                                   fill_params: { origination_contractor_id_eq: f.object.customer_id },
+                                   input_html: {
+                                     'data-path-params': { 'q[origination_contractor_id_eq]': '.customer_id-input' }.to_json,
+                                     'data-required-param': 'q[origination_contractor_id_eq]'
+                                   }
 
           f.input :require_incoming_auth
 
