@@ -66,7 +66,12 @@ Config.setup do |setup_config|
 end
 
 Config.evaluate_erb_in_yaml = true
-Config.load_and_set_settings(Config.setting_files(::Rails.root.join('config'), ::Rails.env))
+begin
+  Config.load_and_set_settings(Config.setting_files(::Rails.root.join('config'), ::Rails.env))
+rescue Config::Validation::Error => e
+  warn e.message
+  exit 1 # rubocop:disable Rails/Exit
+end
 
 system_info_path = Rails.root.join('config/system_info.yml')
 SystemInfoConfigs.load_file(system_info_path) if File.exist?(system_info_path)
