@@ -111,8 +111,8 @@ RSpec.describe 'Active Calls Index', js: true do
       ]
     end
 
-    let!(:account) { create(:account) }
-    let!(:another_account) { create(:account) }
+    let!(:account) { create(:account, contractor: create(:customer)) }
+    let!(:another_account) { create(:account, contractor: create(:customer)) }
 
     it 'renders filtered results' do
       subject

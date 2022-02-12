@@ -38,23 +38,47 @@
 //= require highlightjs
 //= require modal_link
 //= require import_apply_unique_fields
-//= require ajax-chosen
+//= require chosen_ajax
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
 
 
 $(document).ready(function () {
-    $("select.chosen").chosen({no_results_text: "No results matched", width: '240px', search_contains: true, allow_single_deselect: true});
-    $("select.chosen-wide").chosen({no_results_text: "No results matched", width: '80%', search_contains: true, allow_single_deselect: true});
-    $("select.chosen-sortable").chosen({no_results_text: "No results matched", width: '80%', search_contains: true, allow_single_deselect: true}).chosenSortable();
 
-    $("select.chosen-ajax").chosen_ajax({ajax_method: "GET", ajax_min_chars: 3, no_results_text: "No results matched", allow_single_deselect: true})
+    function initChosen (parent) {
+        parent.find("select.chosen").chosen({
+                no_results_text: 'No results matched',
+                width: '240px',
+                search_contains: true,
+                allow_single_deselect: true
+        })
+        parent.find("select.chosen-wide").chosen({
+            no_results_text: 'No results matched',
+            width: '80%',
+            search_contains: true,
+            allow_single_deselect: true
+        })
+        parent.find("select.chosen-sortable").chosen({
+            no_results_text: 'No results matched',
+            width: '80%',
+            search_contains: true,
+            allow_single_deselect: true
+        }).chosenSortable()
+
+        parent.find("select.chosen-ajax").chosenAjax(
+            {ajax_method: "GET", ajax_min_chars: 3 },
+            {width: '240px', no_results_text: "No results matched", allow_single_deselect: true}
+        )
+    }
+
+    initChosen($('body'))
+
+    $(document).on('has_many_add:after', function (e, fieldset) {
+        initChosen(fieldset)
+    })
 
     $('.index_as_table .index_table').stickyTableHeaders();
-    $(document).on('has_many_add:after', function (e, fieldset) {
-        fieldset.find('select.chosen').chosen({no_results_text: "No results matched", width: '240px', search_contains: true});
-    });
 
     $('#active_admin_content .tabs').on("tabsactivate", function (event, ui) {
 

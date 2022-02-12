@@ -39,7 +39,7 @@ class Contractor < ApplicationRecord
 
   scope :customers, -> { where customer: true }
   scope :vendors, -> { where vendor: true }
-  scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
+  scope :search_for, ->(term) { where("contractors.name || ' | ' || contractors.id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
   include Yeti::ResourceStatus

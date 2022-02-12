@@ -59,19 +59,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          label: 'With routing tag',
          input_html: { class: 'chosen' }
   filter :time_start, as: :date_time_range
-  filter :customer,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:customer_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true&q[ordered_by]=name' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   filter :customer_auth, collection: proc { CustomersAuth.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
   filter :src_prefix_routing

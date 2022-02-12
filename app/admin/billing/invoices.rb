@@ -168,20 +168,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :id
   filter :uuid_equals, label: 'UUID'
   filter :reference
-  filter :contractor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:contractor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
-
-  filter :account,
-         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:account_id_eq]
-           resource_id ? Account.where(id: resource_id) : []
-         }
-
+  contractor_filter :contractor_id_eq
+  account_filter :account_id_eq
   filter :state
   filter :start_date, as: :date_time_range
   filter :end_date, as: :date_time_range
@@ -293,23 +281,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
               include_blank: false,
               input_html: { class: 'chosen' }
 
-      f.input :contractor_id,
-              as: :select,
-              collection: Contractor.all,
-              input_html: {
-                class: 'chosen',
-                onchange: remote_chosen_request(
-                      :get,
-                      get_accounts_contractors_path,
-                      { contractor_id: '$(this).val()' },
-                      :billing_invoice_account_id
-                    )
-              }
-
-      f.input :account_id,
-              as: :select,
-              collection: [],
-              input_html: { class: 'chosen' }
+      f.contractor_input :contractor_id
+      f.account_input :account_id,
+                      input_html: {
+                        'data-path-params': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
+                        'data-required-param': 'q[contractor_id_eq]'
+                      }
 
       f.input :start_date,
               as: :date_time_picker,

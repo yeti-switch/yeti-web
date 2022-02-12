@@ -2,10 +2,9 @@
 
 RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feature, js: true do
   subject do
-    aa_form.submit
+    click_submit('Create Routing plan static route batch creator')
   end
 
-  active_admin_form_for Routing::RoutingPlanStaticRouteBatchCreatorForm, 'new'
   include_context :login_as_admin
 
   let!(:vendor_1) { FactoryBot.create(:vendor) }
@@ -18,15 +17,18 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
 
     visit new_routing_plan_static_route_batch_creator_path
 
-    aa_form.search_chosen 'Routing plan', routing_plan.display_name, ajax: true
-    aa_form.set_text 'Prefixes', '123,456'
-    aa_form.select_chosen 'Vendors', vendor_2.display_name
-    aa_form.select_chosen 'Vendors', vendor_1.display_name
-    Capybara::Screenshot.screenshot_and_save_page
+    fill_in_chosen 'Routing plan', with: routing_plan.display_name, ajax: true
+    fill_in 'Prefixes', with: '123,456'
+    fill_in_chosen 'Vendors', with: vendor_2.display_name, ajax: true, multiple: true
+    fill_in_chosen 'Vendors', with: vendor_1.display_name, ajax: true, multiple: true
   end
 
   it 'creates record' do
-    subject
+    expect {
+      subject
+      expect(page).to have_flash_message('Routing plan static route batch creator was successfully created.', type: :notice)
+    }.to change { Routing::RoutingPlanStaticRoute.count }.by(4)
+
     records = Routing::RoutingPlanStaticRoute.last(4)
     expect(records.size).to eq(4)
     network_prefix_123 = System::NetworkPrefix.longest_match('123')
@@ -64,7 +66,4 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
       network_prefix_id: network_prefix_456.id
     )
   end
-
-  include_examples :changes_records_qty_of, Routing::RoutingPlanStaticRoute, by: 4 # 2 vendors X 2 prefixes
-  include_examples :shows_flash_message, :notice, 'Routing plan static route batch creator was successfully created.'
 end

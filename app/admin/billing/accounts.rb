@@ -115,12 +115,7 @@ ActiveAdmin.register Account do
 
   filter :id
   filter :uuid_equals, label: 'UUID'
-  filter :contractor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:contractor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :contractor_id_eq
 
   filter :name
   filter :balance
@@ -222,7 +217,7 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :contractor_id, input_html: { class: 'chosen' }, collection: Contractor.all
+      f.contractor_input :contractor_id
       f.input :min_balance
       f.input :max_balance
       f.input :vat

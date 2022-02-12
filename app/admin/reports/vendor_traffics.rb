@@ -32,7 +32,7 @@ ActiveAdmin.register Report::VendorTraffic, as: 'VendorTraffic' do
     f.inputs do
       f.input :date_start, as: :date_time_picker, wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
       f.input :date_end, as: :date_time_picker
-      f.input :vendor, as: :select, input_html: { class: 'chosen' }, collection: Contractor.where(vendor: true)
+      f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
       f.input :send_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions
@@ -42,10 +42,5 @@ ActiveAdmin.register Report::VendorTraffic, as: 'VendorTraffic' do
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at, as: :date_time_range
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 end

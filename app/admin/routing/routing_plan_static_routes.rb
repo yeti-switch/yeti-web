@@ -21,12 +21,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   filter :prefix
   filter :country, input_html: { class: 'chosen' }
   filter :network, input_html: { class: 'chosen' }
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   # after_build do |resource|
   #   from = begin
@@ -79,7 +74,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
       f.input :prefix, input_html: { class: :prefix_detector }, hint: f.object.network_details_hint
       f.input :priority
       f.input :weight
-      f.input :vendor, collection: Contractor.vendors, input_html: { class: 'chosen', multiple: false }
+      f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
     end
     f.actions
   end

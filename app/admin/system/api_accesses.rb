@@ -14,12 +14,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
                 account_ids: []
 
   filter :id
-  filter :customer,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[customer_eq]=true&q[ordered_by]=name' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:customer_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
 
   filter :login
 
@@ -57,14 +52,12 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
     f.inputs do
       f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
-      f.input :customer, as: :select,
-                         input_html: {
-                           class: 'chosen',
-                           onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :system_api_access_account_ids, '')
-                         }
-      f.input :account_ids, as: :select, label: 'Accounts',
-                            input_html: { class: 'chosen', multiple: true, 'data-placeholder': 'Choose an Account...' },
-                            collection: (f.object.customer.nil? ? [] : f.object.customer.accounts.collection)
+      f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
+      f.account_input :account_ids, multiple: true,
+                                    input_html: {
+                                      'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                                      'data-required-param': 'q[contractor_id_eq]'
+                                    }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
     end

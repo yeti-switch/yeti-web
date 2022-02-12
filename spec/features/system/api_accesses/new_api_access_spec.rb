@@ -4,7 +4,8 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
   include_context :login_as_admin
 
   before do
-    @account = create(:account)
+    @customer = create(:customer)
+    @account = create(:account, contractor: @customer)
 
     visit new_api_access_path
   end
@@ -16,7 +17,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
           login: 'Account',
           password: 'Pass',
           customer_id: lambda {
-                         chosen_pick('#system_api_access_customer_id+div', text: @account.contractor.name)
+                         fill_in_chosen('Customer', with: @customer.name, ajax: true)
                        },
           formtastic_allowed_ips: '127.0.0.1,1.1.0.0/16'
         }

@@ -146,18 +146,9 @@ ActiveAdmin.register Dialpeer do
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
-  filter :account,
-         input_html: { class: 'chosen-ajax', 'data-path': '/accounts/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:account_id_eq]
-           resource_id ? Account.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
+  account_filter :account_id_eq
+
   filter :routeset_discriminator, input_html: { class: 'chosen' }
   filter :gateway,
          input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
@@ -227,16 +218,17 @@ ActiveAdmin.register Dialpeer do
                                 input_html: { class: 'chosen' }
       f.input :routing_tag_mode
 
-      f.input :vendor,  collection: Contractor.vendors,
-                        input_html: {
-                          class: 'chosen',
-                          onchange: remote_chosen_request(:get, with_contractor_accounts_path, { contractor_id: '$(this).val()' }, :dialpeer_account_id) +
-                                    remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
-                                    remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
-                        }
-      f.input :account, collection: (f.object.vendor.nil? ? [] : f.object.vendor.accounts),
-                        include_blank: false,
-                        input_html: { class: 'chosen' }
+      f.contractor_input :vendor_id,  label: 'Vendor',
+                                      input_html: {
+                                        onchange: remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
+                                                  remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
+                                      }
+      f.account_input :account_id,
+                      input_html: {
+                        'data-path-params': { 'q[contractor_id_eq]': '.vendor_id-input' }.to_json,
+                        'data-required-param': 'q[contractor_id_eq]'
+                      }
+
       f.input :routeset_discriminator, include_blank: false, input_html: { class: 'chosen' }
       f.input :priority
       f.input :force_hit_rate

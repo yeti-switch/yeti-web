@@ -46,12 +46,7 @@ ActiveAdmin.register GatewayGroup do
 
   filter :id
   filter :name
-  filter :vendor,
-         input_html: { class: 'chosen-ajax', 'data-path': '/contractors/search?q[vendor_eq]=true' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:vendor_id_eq]
-           resource_id ? Contractor.where(id: resource_id) : []
-         }
+  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   filter :balancing_mode
 
@@ -78,7 +73,7 @@ ActiveAdmin.register GatewayGroup do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :vendor, input_html: { class: 'chosen' }, collection: Contractor.vendors
+      f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
       f.input :balancing_mode, as: :select, include_blank: false
     end
     f.actions
