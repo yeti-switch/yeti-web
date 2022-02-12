@@ -6,10 +6,10 @@ module ActiveAdminFormPatch
 
     ransack_query = path_params ? path_params[:q] : nil
     classes = [
-                'chosen-ajax',
-                "#{name}-input",
-                options.key?(:input_html) ? options[:input_html].delete(:class) : nil
-              ].compact.join(' ')
+      'chosen-ajax',
+      "#{name}-input",
+      options.key?(:input_html) ? options[:input_html].delete(:class) : nil
+    ].compact.join(' ')
     input_options = {
       as: :select,
       label: label,
@@ -29,10 +29,10 @@ module ActiveAdminFormPatch
 
     ransack_query = path_params ? path_params[:q] : nil
     classes = [
-                'chosen-ajax',
-                "#{name}-input",
-                options.key?(:input_html) ? options[:input_html].delete(:class) : nil
-              ].compact.join(' ')
+      'chosen-ajax',
+      "#{name}-input",
+      options.key?(:input_html) ? options[:input_html].delete(:class) : nil
+    ].compact.join(' ')
     input_options = {
       as: :select,
       label: label,
