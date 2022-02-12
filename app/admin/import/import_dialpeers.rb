@@ -5,7 +5,6 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   filter :prefix
   boolean_filter :enabled
   contractor_filter :vendor_id_eq
-
   account_filter :account_id_eq
 
   filter :gateway,

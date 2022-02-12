@@ -55,9 +55,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
       f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
       f.account_input :account_ids, multiple: true,
                                     input_html: {
-                                      class: 'customer_id-input-child',
-                                      'data-path-parents': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
-                                      'data-path-required-parent': '.customer_id-input'
+                                      'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                                      'data-required-param': 'q[contractor_id_eq]'
                                     }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'

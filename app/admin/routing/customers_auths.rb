@@ -210,8 +210,7 @@ ActiveAdmin.register CustomersAuth do
          input_html: {
            class: 'chosen-ajax customer_id_eq-filter-child',
            'data-path': '/gateways/search',
-           'data-path-parents': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
-           'data-path-required-parent': '.customer_id_eq-filter',
+           'data-path-params': { 'q[contractor_id_eq]': '.customer_id_eq-filter' }.to_json,
            'data-empty-option': 'Any'
          },
          collection: proc {
@@ -268,9 +267,8 @@ ActiveAdmin.register CustomersAuth do
 
           f.account_input :account_id,
                           input_html: {
-                            class: 'customer_id-input-child',
-                            'data-path-parents': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
-                            'data-path-required-parent': '.customer_id-input'
+                            'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                            'data-required-param': 'q[contractor_id_eq]'
                           }
 
           f.input :check_account_balance

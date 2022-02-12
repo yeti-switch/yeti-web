@@ -225,9 +225,8 @@ ActiveAdmin.register Dialpeer do
                                       }
       f.account_input :account_id,
                       input_html: {
-                        class: 'vendor_id-input-child',
-                        'data-path-parents': { 'q[contractor_id_eq]': '.vendor_id-input' }.to_json,
-                        'data-path-required-parent': '.vendor_id-input'
+                        'data-path-params': { 'q[contractor_id_eq]': '.vendor_id-input' }.to_json,
+                        'data-required-param': 'q[contractor_id_eq]'
                       }
 
       f.input :routeset_discriminator, include_blank: false, input_html: { class: 'chosen' }

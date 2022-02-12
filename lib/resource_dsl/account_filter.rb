@@ -15,7 +15,6 @@ module ResourceDSL
         input_html: {
           class: classes,
           'data-path': "/accounts/search?#{path_params&.to_param}",
-          'data-clear-on-change': ".#{name}-filter-child",
           'data-empty-option': 'Any'
         },
         collection: proc {

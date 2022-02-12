@@ -1,15 +1,11 @@
 (function ($) {
 
-    function generateRandomKey() {
-        return 'k-' + Math.floor((Math.random() * 9999999999) + 1000000000)
-    }
-
     // Ajax objects holder
     var ajaxXmlHttpRequests = {}
 
-    $.fn.chosen_ajax = function (options) {
+    $.fn.chosenAjax = function (options, chosenOptions) {
         // Call chosen
-        $(this).chosen(options)
+        $(this).chosen(chosenOptions)
 
         // Loo selectors
         $.each(this, function () {
@@ -18,51 +14,43 @@
 
             // Create unique key for each element to be able to abort search
             // when new search triggered before previous being finished.
-            var key = generateRandomKey()
+            var key = 'k-' + Math.floor((Math.random() * 9999999999) + 1000000000)
             select.attr('data-key', key)
 
-            select.on('change', function () {
-                var childrenSelector = select.attr('data-clear-on-change')
-                if (childrenSelector) {
-                    $.each($(childrenSelector), function () {
-                        var child = $(this)
-                        child.removeAttr('data-search-term')
-                        var emptyOption = child.attr('data-empty-option')
-                        child.find('option').remove()
-                        if (emptyOption) {
-                            child.append('<option value="">' + emptyOption+ '</option>')
-                        } else {
-                            child.append('<option value=""></option>')
-                        }
-                        child.val('')
-                        child.trigger('chosen:updated')
-                    })
-                }
-            })
+            var ajaxMethod = options.ajax_method || 'GET'
+            var path = select.attr('data-path')
+            var emptyOption = select.attr('data-empty-option')
+            var pathParams = select.data('pathParams') // data-path-params
+            var requiredParam = select.attr('data-required-param')
+
+            if (requiredParam) {
+                var requiredParamSelector = pathParams[requiredParam]
+                $(requiredParamSelector).on('change', function () {
+                    var requiredField = $(this)
+                    if (requiredField.val()) return
+
+                    select.removeAttr('data-search-term')
+                    select.find('option').remove()
+                    if (emptyOption) {
+                        select.append('<option value="">' + emptyOption+ '</option>')
+                    } else {
+                        select.append('<option value=""></option>')
+                    }
+                    select.val('')
+                    select.trigger('chosen:updated')
+                })
+            }
 
             // Set listener on search field
             chosen.find('.search-field input, .chosen-search input').on('input', function () {
-                var requireParentSelector = select.attr('data-path-required-parent')
-                if (requireParentSelector) {
-                    var requireParent = $(requireParentSelector)
-                    if (!$(requireParent).val()) {
-                        return true
-                    }
-                }
-
-
                 var oldSearchTerm = select.attr('data-search-term')
                 var searchTerm = $(this).val()
 
                 // skip if search blank or equal to last search
-                if (!searchTerm || oldSearchTerm === searchTerm) {
-                    return true
-                }
+                if (!searchTerm || oldSearchTerm === searchTerm) return
 
                 // skip if search input has less then required min characters
-                if (options.hasOwnProperty('ajax_min_chars') && searchTerm.length < options.ajax_min_chars) {
-                    return true
-                }
+                if (options.ajax_min_chars !== undefined && searchTerm.length < options.ajax_min_chars) return
 
                 // assign data-search-term to check future changes as above
                 select.attr('data-search-term', searchTerm)
@@ -70,30 +58,16 @@
                 // save current selected value to restore it after options rewrite
                 var currentSelectValue = select.val()
 
-                // Set URL
-                var path = select.attr('data-path')
-
-                // Set Method
-                var ajaxMethod = options.ajax_method || 'GET'
-
                 // Set term parameter
                 var ajaxData = { 'q[search_for]': searchTerm }
 
                 // set data from options
-                if (options.ajaxData) {
-                    $.extend(ajaxData, options.ajaxData)
-                }
+                if (options.ajaxData) $.extend(ajaxData, options.ajaxData)
 
-                var emptyOption = select.attr('data-empty-option')
-
-                // Set data from dependent fields (data-path-parents)
-                var pathParents = select.data('pathParents')
-                if (pathParents) {
-                    var params = {}
-                    Object.keys(pathParents).forEach(function (name) {
-                        params[name] = $(pathParents[name]).val()
+                if (pathParams) {
+                    Object.keys(pathParams).forEach(function (name) {
+                        ajaxData[name] = $(pathParams[name]).val()
                     })
-                    $.extend(ajaxData, params)
                 }
 
                 // Abort previous ajax request

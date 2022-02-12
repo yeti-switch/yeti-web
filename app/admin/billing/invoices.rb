@@ -169,9 +169,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :uuid_equals, label: 'UUID'
   filter :reference
   contractor_filter :contractor_id_eq
-
   account_filter :account_id_eq
-
   filter :state
   filter :start_date, as: :date_time_range
   filter :end_date, as: :date_time_range
@@ -286,9 +284,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       f.contractor_input :contractor_id
       f.account_input :account_id,
                       input_html: {
-                        class: 'contractor_id-input-child',
-                        'data-path-parents': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
-                        'data-path-required-parent': '.contractor_id-input'
+                        'data-path-params': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
+                        'data-required-param': 'q[contractor_id_eq]'
                       }
 
       f.input :start_date,
