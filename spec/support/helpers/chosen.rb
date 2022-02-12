@@ -2,9 +2,23 @@
 
 module Helpers
   module Chosen
-    def fill_in_chosen(label, with:, disabled: nil, exact_label: false, **options)
-      select_selector = chosen_container_selector(label, disabled: disabled, exact: exact_label)
-      chosen_select(select_selector, search: with, **options)
+    def fill_in_chosen(label, options = {})
+      exact_label = options.fetch(:exact_label, false)
+      exact = options.fetch(:exact, false)
+      ajax = options.fetch(:ajax, false)
+      disabled = options.fetch(:disabled, false)
+      no_search = options.fetch(:no_search, false)
+      multiple = options.fetch(:multiple, false)
+      value = options.delete(:with)
+      find_field_opts = { visible: false, disabled: disabled }
+      find_field_opts[:match] = :prefer_exact if exact_label
+      select_node = find_field(label, find_field_opts)
+      chosen_selector = "select##{select_node[:id]} + .chosen-container"
+      if no_search
+        chosen_pick(chosen_selector, text: value, exact: exact)
+      else
+        chosen_select(chosen_selector, search: value, multiple: multiple, ajax: ajax, exact: exact)
+      end
     end
 
     def chosen_select_selector(label, disabled: nil, exact: false)
@@ -25,7 +39,11 @@ module Helpers
 
     def chosen_select(chosen_selector, search:, multiple: false, chosen_node: nil, ajax: false, exact: false)
       chosen_node ||= page.find(chosen_selector)
-      chosen_node.click
+      if multiple
+        chosen_node.find('.search-field').click
+      else
+        chosen_node.click
+      end
       expect(page).to have_selector('ul.chosen-results li.active-result') unless ajax
       if multiple
         chosen_node.find('.chosen-choices input').native.send_keys(search.to_s)
@@ -68,8 +86,4 @@ module Helpers
       have_selector(selector, options)
     end
   end
-end
-
-RSpec.configure do |config|
-  config.include Helpers::Chosen
 end
