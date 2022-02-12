@@ -6,10 +6,10 @@ require 'capybara/cuprite'
 require 'capybara/active_admin/rspec'
 
 chrome_log = ENV['CHROME_LOG_FILE'] ? File.open(ENV['CHROME_LOG_FILE'], 'w') : nil
-
-Capybara.register_driver :cuprite_headless do |app|
+build_cuprite_driver = lambda do |app, headless:|
   Capybara::Cuprite::Driver.new(
     app,
+    headless: headless,
     logger: chrome_log,
     js_errors: true,
     # https://github.com/rubycdp/cuprite#debugging
@@ -29,9 +29,22 @@ Capybara.register_driver :cuprite_headless do |app|
   )
 end
 
+Capybara.register_driver :cuprite_headless do |app|
+  build_cuprite_driver.call(app, headless: true)
+end
+
+Capybara.register_driver :cuprite do |app|
+  build_cuprite_driver.call(app, headless: false)
+end
+
 Capybara::Screenshot.register_driver(:cuprite_headless) do |driver, path|
   driver.render(path, full: true)
 end
+
+Capybara::Screenshot.register_driver(:cuprite) do |driver, path|
+  driver.render(path, full: true)
+end
+
 # Capybara::Screenshot.screenshot_and_save_page
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
