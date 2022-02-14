@@ -209,7 +209,7 @@ RSpec.describe Gateway, type: :model do
     end
   end
 
-  context 'scope :for_termination' do
+  context 'scope :termination_contractor_id_eq' do
     before do
       # in scope
       @record = create(:gateway, is_shared: false, allow_termination: true, name: 'b-gateway')
@@ -229,7 +229,7 @@ RSpec.describe Gateway, type: :model do
     let(:vendor) { @record.vendor }
 
     subject do
-      described_class.for_termination(vendor.id)
+      described_class.termination_contractor_id_eq(vendor.id)
     end
 
     it 'allow_termination is mandatory, then look for shared or vendors gateways, order by name' do

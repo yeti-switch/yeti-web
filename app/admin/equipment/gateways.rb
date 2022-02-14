@@ -121,21 +121,6 @@ ActiveAdmin.register Gateway do
     flash.now[:warning] = @registrations.errors if @registrations.errors.any?
   end
 
-  collection_action :with_contractor do
-    @gateways = Contractor.find(params[:contractor_id]).gateways
-    render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
-  end
-
-  collection_action :for_origination do
-    @gateways = Gateway.for_origination(params[:contractor_id].to_i)
-    render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
-  end
-
-  collection_action :for_termination do
-    @gateways = Gateway.for_termination(params[:contractor_id].to_i)
-    render plain: view_context.options_from_collection_for_select(@gateways, :id, :display_name)
-  end
-
   index do
     selectable_column
     id_column
@@ -294,10 +279,14 @@ ActiveAdmin.register Gateway do
 
   filter :id
   filter :name
-  filter :gateway_group, input_html: { class: 'chosen' }
-  filter :pop, input_html: { class: 'chosen' }
   contractor_filter :contractor_id_eq
 
+  association_ajax_filter :gateway_group_id_eq,
+                          label: 'Gateway Group',
+                          scope: -> { GatewayGroup.order(:name) },
+                          path: '/gateway_groups/search'
+
+  filter :pop, input_html: { class: 'chosen' }
   filter :transport_protocol
   filter :host
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
@@ -327,13 +316,18 @@ ActiveAdmin.register Gateway do
         f.inputs 'General' do
           f.input :name
           f.input :enabled
-          f.input :contractor,
-                  input_html: {
-                    class: 'chosen',
-                    onchange: remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :gateway_gateway_group_id)
-                  }
+          f.contractor_input :contractor_id
           f.input :is_shared
-          f.input :gateway_group, as: :select, include_blank: 'None', input_html: { class: 'chosen' }
+          f.association_ajax_input :gateway_group_id,
+                                   label: 'Gateway Group',
+                                   scope: GatewayGroup.order(:name),
+                                   path: '/gateway_groups/search',
+                                   fill_params: { vendor_id_eq: f.object.contractor_id },
+                                   input_html: {
+                                     'data-path-params': { 'q[vendor_id_eq]': '.contractor_id-input' }.to_json,
+                                     'data-required-param': 'q[vendor_id_eq]',
+                                     'data-empty-option': 'None'
+                                   }
           f.input :priority
           f.input :weight
           f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }

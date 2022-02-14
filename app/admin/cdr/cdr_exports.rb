@@ -128,9 +128,6 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
 
       ff.account_input :customer_acc_id_eq,
                        label: 'Customer acc id eq',
-                       input_html: {
-                         'data-path-params': { 'q[contractor_id_eq]': '.customer_id_eq-input' }.to_json
-                       },
                        path_params: { q: { contractor_customer_eq: true } }
 
       ff.input :customer_acc_external_id_eq, required: false
@@ -150,9 +147,6 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
 
       ff.account_input :vendor_acc_id_eq,
                        label: 'Vendor acc id eq',
-                       input_html: {
-                         'data-path-params': { 'q[contractor_id_eq]': '.vendor_id_eq-input' }.to_json
-                       },
                        path_params: { q: { contractor_vendor_eq: true } }
       ff.input :vendor_acc_external_id_eq, required: false
 

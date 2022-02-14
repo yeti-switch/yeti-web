@@ -28,6 +28,11 @@ class System::Network < ApplicationRecord
   validates :name, uniqueness: { allow_blank: true }, presence: true
   validates :network_type, presence: true
 
+  scope :country_id_eq, lambda { |country_id|
+    network_id_select = System::NetworkPrefix.where(country_id: country_id).select(:network_id)
+    where(id: network_id_select)
+  }
+
   include WithPaperTrail
 
   def display_name
@@ -36,5 +41,11 @@ class System::Network < ApplicationRecord
 
   def self.collection
     order(:name)
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      country_id_eq
+    ]
   end
 end

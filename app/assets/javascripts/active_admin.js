@@ -39,6 +39,7 @@
 //= require modal_link
 //= require import_apply_unique_fields
 //= require chosen_ajax
+//= require chosen_ajax_fillable
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
@@ -70,6 +71,16 @@ $(document).ready(function () {
             {ajax_method: "GET", ajax_min_chars: 3 },
             {width: '240px', no_results_text: "No results matched", allow_single_deselect: true}
         )
+
+        parent.find("select.chosen-ajax-fillable").chosenAjaxFillable(
+            {ajax_method: "GET"},
+            {
+                width: '240px',
+                no_results_text: "No results matched",
+                allow_single_deselect: true,
+                search_contains: true
+            }
+        )
     }
 
     initChosen($('body'))
@@ -94,7 +105,7 @@ $(document).ready(function () {
         hint = self.next();
         if (hint.hasClass('inline-hints') && $.isNumeric(self.val())) {
             hint.text('loading...');
-            $.get("/system_network_prefixes/search", {prefix: self.val()}, function (json) {
+            $.get("/system_network_prefixes/prefix_hint", {prefix: self.val()}, function (json) {
                 hint.html(json);
             });
         }

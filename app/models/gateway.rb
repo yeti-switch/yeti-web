@@ -251,14 +251,14 @@ class Gateway < ApplicationRecord
   scope :locked, -> { where locked: true }
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null' }
   scope :shared, -> { where is_shared: true }
-  scope :for_origination, ->(contractor_id) { where('allow_origination and ( is_shared or contractor_id=?)', contractor_id).order(:name) }
+  scope :origination_contractor_id_eq, lambda { |contractor_id|
+    where("#{table_name}.allow_origination AND (#{table_name}.is_shared OR #{table_name}.contractor_id=?)", contractor_id)
+  }
+  scope :termination_contractor_id_eq, lambda { |contractor_id|
+    where("#{table_name}.allow_termination AND (#{table_name}.contractor_id=? OR #{table_name}.is_shared)", contractor_id)
+  }
   scope :search_for, ->(term) { where("name || ' | ' || id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
-  scope :for_termination, lambda { |contractor_id|
-    where("#{table_name}.allow_termination AND (#{table_name}.contractor_id=? OR #{table_name}.is_shared)", contractor_id)
-      .joins(:vendor)
-      .order(:name)
-  }
 
   before_validation do
     self.term_next_hop = nil if term_next_hop.blank?
@@ -403,7 +403,10 @@ class Gateway < ApplicationRecord
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[
-      search_for ordered_by
+      search_for
+      ordered_by
+      origination_contractor_id_eq
+      termination_contractor_id_eq
     ]
   end
 end

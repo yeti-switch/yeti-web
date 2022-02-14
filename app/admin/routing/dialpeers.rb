@@ -169,23 +169,27 @@ ActiveAdmin.register Dialpeer do
   filter :statistic_asr, as: :numeric
   filter :statistic_acd, as: :numeric
   filter :force_hit_rate
-  filter :network_prefix_country_id_eq,
-         label: 'Country',
-         input_html: { class: 'chosen',
-                       onchange: remote_chosen_request(:get, 'system_countries/get_networks', { country_id: '$(this).val()' }, :q_network_prefix_network_id_eq) },
-         as: :select, collection: -> { System::Country.all }
 
-  filter :network_prefix_network_id_eq,
-         label: 'Network',
-         input_html: { class: 'chosen' },
+  filter :network_prefix_country_id_eq,
          as: :select,
-         collection: lambda {
-           begin
-                 System::Country.find(assigns['search'].network_prefix_country_id_eq).networks
-           rescue StandardError
-             []
-               end
-         }
+         label: 'Country',
+         input_html: {
+           class: 'chosen network_prefix_country_id_eq-filter'
+         },
+         collection: -> { System::Country.order(:name) }
+
+  association_ajax_filter :network_prefix_network_id_eq,
+                          label: 'Network',
+                          scope: -> { System::Network.order(:name) },
+                          path: '/system_networks/search',
+                          input_html: {
+                            'data-path-params': { 'q[country_id_eq]': '.network_prefix_country_id_eq-filter' }.to_json,
+                            'data-required-param': 'q[country_id_eq]'
+                          },
+                          fill_params: lambda {
+                            { country_id_eq: params.dig(:q, :network_prefix_country_id_eq) }
+                          }
+
   filter :created_at, as: :date_time_range
   filter :external_id
   filter :exclusive_route, as: :select, collection: [['Yes', true], ['No', false]]
@@ -216,14 +220,13 @@ ActiveAdmin.register Dialpeer do
                                 multiple: true,
                                 include_hidden: false,
                                 input_html: { class: 'chosen' }
-      f.input :routing_tag_mode
 
-      f.contractor_input :vendor_id,  label: 'Vendor',
-                                      input_html: {
-                                        onchange: remote_chosen_request(:get, for_termination_gateways_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_id) +
-                                                  remote_chosen_request(:get, with_contractor_gateway_groups_path, { contractor_id: '$(this).val()' }, :dialpeer_gateway_group_id)
-                                      }
+      f.input :routing_tag_mode
+      f.contractor_input :vendor_id, label: 'Vendor'
+
       f.account_input :account_id,
+                      fill_params: { contractor_id_eq: f.object.vendor_id },
+                      fill_required: :contractor_id_eq,
                       input_html: {
                         'data-path-params': { 'q[contractor_id_eq]': '.vendor_id-input' }.to_json,
                         'data-required-param': 'q[contractor_id_eq]'
@@ -241,13 +244,27 @@ ActiveAdmin.register Dialpeer do
       f.input :connect_fee
       f.input :reverse_billing
 
-      f.input :gateway, collection: (f.object.vendor.nil? ? [] : f.object.vendor.for_termination_gateways),
-                        include_blank: 'None',
-                        input_html: { class: 'chosen' }
+      f.association_ajax_input :gateway_id,
+                               label: 'Gateway',
+                               scope: Gateway.order(:name),
+                               path: '/gateways/search',
+                               fill_params: { termination_contractor_id_eq: f.object.vendor_id },
+                               input_html: {
+                                 'data-path-params': { 'q[termination_contractor_id_eq]': '.vendor_id-input' }.to_json,
+                                 'data-required-param': 'q[termination_contractor_id_eq]',
+                                 'data-empty-option': 'None'
+                               }
 
-      f.input :gateway_group, collection: (f.object.vendor.nil? ? [] : f.object.vendor.gateway_groups),
-                              include_blank: 'None',
-                              input_html: { class: 'chosen' }
+      f.association_ajax_input :gateway_group_id,
+                               label: 'Gateway Group',
+                               scope: GatewayGroup.order(:name),
+                               path: '/gateway_groups/search',
+                               fill_params: { vendor_id_eq: f.object.vendor_id },
+                               input_html: {
+                                 'data-path-params': { 'q[vendor_id_eq]': '.vendor_id-input' }.to_json,
+                                 'data-required-param': 'q[vendor_id_eq]',
+                                 'data-empty-option': 'None'
+                               }
 
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker

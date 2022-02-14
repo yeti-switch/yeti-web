@@ -283,6 +283,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
       f.contractor_input :contractor_id
       f.account_input :account_id,
+                      fill_params: { contractor_id_eq: f.object.contractor_id },
+                      fill_required: :contractor_id_eq,
                       input_html: {
                         'data-path-params': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
                         'data-required-param': 'q[contractor_id_eq]'

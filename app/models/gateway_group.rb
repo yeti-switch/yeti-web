@@ -36,12 +36,22 @@ class GatewayGroup < ApplicationRecord
   validate :contractor_is_vendor
   validate :vendor_can_be_changed
 
+  scope :search_for, lambda { |term|
+    where("gateway_groups.name || ' | ' || gateway_groups.id::varchar ILIKE ?", "%#{term}%")
+  }
+
   def display_name
     "#{name} | #{id}"
   end
 
   def have_valid_gateways?
     gateways.where('enabled and allow_termination').count > 0
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      search_for
+    ]
   end
 
   protected
