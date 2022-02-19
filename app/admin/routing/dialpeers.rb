@@ -54,10 +54,17 @@ ActiveAdmin.register Dialpeer do
       end
       super
     end
-  end
 
-  includes :gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic, :routeset_discriminator,
-           network_prefix: %i[country network]
+    # Better not to use includes, because it generates select count(*) from (select distinct ...) queries and such queries very slow
+    # see https://github.com/rails/rails/issues/42331
+    # https://github.com/yeti-switch/yeti-web/pull/985
+    #
+    # preload have more controllable behavior, but sorting by associated tables not possible
+    def scoped_collection
+      super.preload(:gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic,
+                    :routeset_discriminator, network_prefix: %i[country network])
+    end
+  end
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', dialpeer_dialpeer_next_rates_path(resource.id)
@@ -82,13 +89,13 @@ ActiveAdmin.register Dialpeer do
     column :dst_number_length do |c|
       c.dst_number_min_length == c.dst_number_max_length ? c.dst_number_min_length.to_s : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
-    column :country, sortable: 'countries.name' do |row|
+    column :country do |row|
       auto_link row.network_prefix&.country
     end
-    column :network, sortable: 'networks.name' do |row|
+    column :network do |row|
       auto_link row.network_prefix&.network
     end
-    column :routing_group, sortable: 'routing_groups.name'
+    column :routing_group
     column :routing_tags
     column :priority
     column :force_hit_rate
@@ -100,16 +107,16 @@ ActiveAdmin.register Dialpeer do
     column :connect_fee
     column :reverse_billing
     column :lcr_rate_multiplier
-    column :gateway, sortable: 'gateways.name' do |c|
+    column :gateway do |c|
       auto_link(c.gateway, c.gateway.decorated_termination_display_name) unless c.gateway.nil?
     end
     column :gateway_group do |c|
       auto_link(c.gateway_group, c.gateway_group.decorated_display_name) unless c.gateway_group.nil?
     end
-    column :vendor, sortable: 'contractor.name' do |c|
+    column :vendor do |c|
       auto_link(c.vendor, c.vendor.decorated_vendor_display_name)
     end
-    column :account, sortable: 'accounts.id' do |c|
+    column :account do |c|
       auto_link(c.account, c.account.decorated_vendor_display_name)
     end
     column :routeset_discriminator
@@ -118,18 +125,18 @@ ActiveAdmin.register Dialpeer do
 
     column :capacity
 
-    column :calls, sortable: 'dialpeers_stats.calls' do |row|
+    column :calls do |row|
       row.statistic.try(:calls)
     end
-    column :total_duration, sortable: 'dialpeers_stats.total_duration' do |row|
+    column :total_duration do |row|
       "#{row.statistic.try(:total_duration) || 0} sec."
     end
 
-    column :asr, sortable: 'dialpeers_stats.asr' do |row|
+    column :asr do |row|
       row.statistic.try(:asr)
     end
     column :asr_limit
-    column :acd, sortable: 'dialpeers_stats.acd' do |row|
+    column :acd do |row|
       row.statistic.try(:acd)
     end
     column :acd_limit

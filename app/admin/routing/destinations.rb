@@ -87,8 +87,6 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
                 :reverse_billing, :routing_tag_mode_id, routing_tag_ids: []
 
-  includes :rate_group, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: %i[country network]
-
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', destination_destination_next_rates_path(resource.id)
   end
@@ -107,6 +105,15 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
         params[:routing_destination][:routing_tag_ids] = []
       end
       super
+    end
+
+    # Better not to use includes, because it generates select count(*) from (select distinct ...) queries and such queries very slow
+    # see https://github.com/rails/rails/issues/42331
+    # https://github.com/yeti-switch/yeti-web/pull/985
+    #
+    # preload have more controllable behavior, but sorting by associated tables not possible
+    def scoped_collection
+      super.preload(:rate_group, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: %i[country network])
     end
   end
 
@@ -131,16 +138,16 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :dst_number_length do |c|
       c.dst_number_min_length == c.dst_number_max_length ? c.dst_number_min_length.to_s : "#{c.dst_number_min_length}..#{c.dst_number_max_length}"
     end
-    column :country, sortable: 'countries.name' do |row|
+    column :country do |row|
       auto_link row.network_prefix&.country
     end
-    column :network, sortable: 'networks.name' do |row|
+    column :network do |row|
       auto_link row.network_prefix&.network
     end
 
     column :reject_calls
     column :quality_alarm
-    column :rate_group, sortable: 'rate_groups.name'
+    column :rate_group
     column :routing_tags
     column :valid_from, &:decorated_valid_from
     column :valid_till, &:decorated_valid_till
