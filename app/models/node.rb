@@ -102,9 +102,16 @@ class Node < ApplicationRecord
 
     begin
       api.public_send(method_name, *args.flatten)
+    rescue NodeApi::ConnectionError => e
+      if empty_on_error
+        logger.warn { "#{e.class} #{e.message}" }
+        []
+      else
+        raise e
+      end
     rescue StandardError => e
       if empty_on_error
-        logger.warn { e.message }
+        logger.warn { "#{e.class} #{e.message}" }
         logger.warn { e.backtrace.join '\n' }
         CaptureError.capture(e)
         []

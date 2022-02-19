@@ -156,5 +156,12 @@ RSpec.describe 'Active Calls Index', js: true do
       expect(page).to_not have_flash_message(type: :warning)
       expect(page).to_not have_table
     end
+
+    include_examples :does_not_capture_error do
+      let(:does_not_capture_error_subject) do
+        subject
+        expect(page).to have_page_title('Active Calls')
+      end
+    end
   end
 end
