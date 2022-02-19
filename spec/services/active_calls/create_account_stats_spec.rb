@@ -17,12 +17,8 @@ RSpec.describe ActiveCalls::CreateAccountStats, '.call' do
   end
 
   context 'without calls' do
-    let(:customer_calls) do
-      {}
-    end
-    let(:vendor_calls) do
-      {}
-    end
+    let!(:customer_calls) { {} }
+    let!(:vendor_calls) { {} }
 
     it 'creates correct stats' do
       expect { subject }.to change { Stats::ActiveCallAccount.count }.by(accounts.size)
@@ -90,6 +86,16 @@ RSpec.describe ActiveCalls::CreateAccountStats, '.call' do
                                  created_at: be_within(1).of(service_params[:current_time])
                                )
       end
+    end
+  end
+
+  context 'without accounts' do
+    let!(:customer_calls) { {} }
+    let!(:vendor_calls) { {} }
+    let!(:accounts) { nil }
+
+    it 'does not create any stats' do
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(0)
     end
   end
 end

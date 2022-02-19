@@ -11,6 +11,7 @@ module ActiveCalls
       calls_account_ids = (customer_calls.keys + vendor_calls.keys).uniq
       missing_account_ids = Account.where.not(id: calls_account_ids).pluck(:id)
       attrs_list.concat build_empty_attrs_list(missing_account_ids)
+      return if attrs_list.empty?
 
       Stats::ActiveCallAccount.insert_all!(attrs_list)
     end
