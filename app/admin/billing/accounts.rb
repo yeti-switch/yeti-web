@@ -42,6 +42,16 @@ ActiveAdmin.register Account do
       record = AccountForm.new(record) if params[:action].in? %w[edit update]
       record
     end
+
+    # Better not to use includes, because it generates select count(*) from (select distinct ...) queries and such queries very slow
+    # see https://github.com/rails/rails/issues/42331
+    # https://github.com/yeti-switch/yeti-web/pull/985
+    #
+    # preload have more controllable behavior, but sorting by associated tables not possible
+    def scoped_collection
+      super.preload(:customer_invoice_period, :vendor_invoice_period, :contractor, :timezone,
+                    :vendor_invoice_template, :customer_invoice_template)
+    end
   end
 
   scope :all
@@ -59,9 +69,6 @@ ActiveAdmin.register Account do
                 :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
                 :customer_invoice_ref_template, :vendor_invoice_ref_template,
                 send_invoices_to: [], send_balance_notifications_to: []
-
-  includes :customer_invoice_period, :vendor_invoice_period, :contractor, :timezone,
-           :vendor_invoice_template, :customer_invoice_template
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
