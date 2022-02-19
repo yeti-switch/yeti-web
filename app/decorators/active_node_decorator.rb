@@ -7,6 +7,9 @@ class ActiveNodeDecorator < Draper::Decorator
 
   def safe_system_status
     @safe_system_status ||= model.system_status
+  rescue NodeApi::ConnectionError => e
+    Rails.logger.error { "(RtNode ##{model.id} Exception) <#{e.class}> #{e.message}" }
+    @safe_system_status = {}
   rescue StandardError => e
     Rails.logger.error { "(RtNode ##{model.id} Exception) <#{e.class}> #{e.message}" }
     CaptureError.capture(e, tags: { component: 'RealtimeData' }, extra: { rt_node_id: model.id })
