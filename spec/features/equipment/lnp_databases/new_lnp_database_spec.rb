@@ -2,29 +2,35 @@
 
 RSpec.describe 'Create new LNP Database', type: :feature, js: true do
   subject do
-    aa_form.submit
+    visit new_lnp_database_path(index_params)
+    fill_form!
+    submit_form!
   end
 
-  active_admin_form_for Lnp::Database, 'new'
   include_context :login_as_admin
 
-  before do
-    visit new_lnp_database_path(lnp_database: { database_type: database_type })
-
-    aa_form.set_text 'Name', 'test'
+  let(:index_params) do
+    { lnp_database: { database_type: database_type } }
+  end
+  let(:fill_form!) { nil }
+  let(:submit_form!) do
+    click_submit('Create Database')
   end
 
   context 'with database type thinq' do
     let(:database_type) { Lnp::Database::CONST::TYPE_THINQ }
-
-    before do
-      aa_form.set_text 'Host', 'example.com'
+    let(:fill_form!) do
+      fill_in 'Name', with: 'test'
+      fill_in 'Host', with: 'example.com'
     end
 
     it 'creates record' do
-      subject
+      expect {
+        subject
+        expect(page).to have_flash_message('Database was successfully created.', type: :notice, exact: true)
+      }.to change { Lnp::Database.count }.by(1)
+
       record = Lnp::Database.last
-      expect(record).to be_present
       expect(record).to have_attributes(
         name: 'test',
         database_type: database_type
@@ -37,8 +43,29 @@ RSpec.describe 'Create new LNP Database', type: :feature, js: true do
         timeout: 300
       )
     end
+  end
 
-    include_examples :changes_records_qty_of, Lnp::Database, by: 1
-    include_examples :shows_flash_message, :notice, 'Database was successfully created.'
+  context 'with invalid database type' do
+    let(:database_type) { 'foobar' }
+    let(:fill_form!) { nil }
+    let(:submit_form!) { nil }
+
+    it 'redirects to index with an error' do
+      subject
+      expect(page).to have_current_path lnp_databases_path
+      expect(page).to have_flash_message('invalid database type "foobar"', type: :error, exact: true)
+    end
+  end
+
+  context 'with empty params' do
+    let(:index_params) { nil }
+    let(:fill_form!) { nil }
+    let(:submit_form!) { nil }
+
+    it 'redirects to index with an error' do
+      subject
+      expect(page).to have_current_path lnp_databases_path
+      expect(page).to have_flash_message('invalid database type nil', type: :error, exact: true)
+    end
   end
 end

@@ -30,6 +30,14 @@ ActiveAdmin.register Lnp::Database do
     end
   end
 
+  before_action only: [:new] do
+    database_type = params.dig(:lnp_database, :database_type)
+    if Lnp::Database::CONST::TYPES.keys.exclude?(database_type)
+      flash[:error] = "invalid database type #{database_type.inspect}"
+      redirect_to lnp_databases_path
+    end
+  end
+
   member_action :test_resolve, method: :post do
     begin
       resolved = resource.test_db(params['dst']['dst'])
