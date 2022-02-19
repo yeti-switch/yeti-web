@@ -16,12 +16,11 @@ class RealtimeData::SipOptionsProber < YetiResource
     end
 
     def query_builder_collection(**_)
-      result = Node.perform_parallel(default: []) do |node|
+      result = NodeParallelRpc.call(default: [], default_on_error: true) do |node|
         result = node.api.sip_options_probers
         result.map { |row| row.merge(node: node) }
       end
-      records = result.map { |item| RealtimeData::SipOptionsProber.new(item) }
-      records
+      result.map { |item| RealtimeData::SipOptionsProber.new(item) }
     end
   end
 

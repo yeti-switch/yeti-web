@@ -129,28 +129,4 @@ class Node < ApplicationRecord
       RealtimeData::ActiveCall.collection(api.calls)
     end
   end
-
-  # @param nodes [Array<Node>,nil] omit or pass nil to use all nodes.
-  # @param default [Object] value when error came (default empty array).
-  # @yield in thread for each node
-  # @yieldparam node [Node]
-  # @return [Array] flatten array of data returned by all threads.
-  # @example Usage
-  #
-  #   rows = Node.perform_parallel(default: []) do |node|
-  #     result = node.api.sip_options_probers
-  #     result.map { |row| row.merge(node: node) }
-  #   end
-  #
-  def self.perform_parallel(nodes = nil, default: [], &block)
-    nodes ||= all.to_a
-
-    data = Parallel.map(nodes, in_threads: nodes.size) do |node|
-      block.call(node)
-    rescue NodeApi::Error => e
-      Rails.logger.error { "#{e.class}: #{e.message}" }
-      default
-    end
-    data.flatten
-  end
 end

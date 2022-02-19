@@ -2,6 +2,7 @@
 
 module Yeti
   class OutgoingRegistrations
+    Error = Class.new(StandardError)
     attr_reader :errors
 
     def initialize(nodes, params = {})
@@ -15,22 +16,14 @@ module Yeti
     end
 
     def raw_registrations(options = {})
-      raw = Parallel.map(@nodes.to_a, in_threads: @nodes.count) do |node|
-        Rails.logger.info { "request to node #{node.id}" }
-        registrations = []
-        begin
-          registrations = node.registrations
-        rescue StandardError => e
-          raise e unless options[:empty_on_error]
-
-          Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
-          CaptureError.capture(e, extra: { model_class: self.class.name, node_id: node&.id })
-          @errors << e.message
-        end
-        Rails.logger.info { " loading  #{registrations.count} registrations" }
-        registrations
+      NodeParallelRpc.call(nodes: @nodes.to_a) do |node|
+        retrieve_registrations(node, options)
       end
-      raw.flatten
+    rescue StandardError => e
+      # Here we capture error from thread created by Parallel and raise new one,
+      # because original exception will not have useful information, like where it were called.
+      CaptureError.log_error(e)
+      raise Error, "Caught #{e.class} #{e.message}"
     end
 
     def set_nodes(nodes)
@@ -47,6 +40,22 @@ module Yeti
       else
         {}
       end
+    end
+
+    def retrieve_registrations(node, options)
+      Rails.logger.info { "request to node #{node.id}" }
+      registrations = []
+      begin
+        registrations = node.registrations
+      rescue StandardError => e
+        raise e unless options[:empty_on_error]
+
+        Rails.logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+        CaptureError.capture(e, extra: { model_class: self.class.name, node_id: node&.id })
+        @errors << e.message
+      end
+      Rails.logger.info { " loading  #{registrations.count} registrations" }
+      registrations
     end
   end
 end
