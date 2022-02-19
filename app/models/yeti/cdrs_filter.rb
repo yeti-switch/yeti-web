@@ -2,6 +2,8 @@
 
 module Yeti
   class CdrsFilter
+    Error = Class.new(StandardError)
+
     include Enumerable
 
     EQ_FILTERABLE = %i[
@@ -37,14 +39,17 @@ module Yeti
     end
 
     def raw_cdrs(options = {})
-      raw = Parallel.map(@nodes.to_a, in_threads: @nodes.count) do |node|
+      NodeParallelRpc.call(nodes: @nodes.to_a) do |node|
         Rails.logger.info { "request to node #{node.id}" }
-
         calls = node.calls(options)
         Rails.logger.info { " loading  #{calls.count} active calls" }
         calls
       end
-      raw.flatten
+    rescue StandardError => e
+      # Here we capture error from thread created by Parallel and raise new one,
+      # because original exception will not have useful information, like where it were called.
+      CaptureError.log_error(e)
+      raise Error, "Caught #{e.class} #{e.message}"
     end
 
     def generate_filter

@@ -89,7 +89,7 @@ module Yeti
       end
 
       def parallel_nodes
-        Parallel.map(nodes, in_threads: nodes.size) { |node| yield(node) }
+        NodeParallelRpc.call(nodes: nodes) { |node| yield(node) }
       end
     end
   end

@@ -11,6 +11,7 @@ RSpec.describe 'Active Calls Index', js: true do
   include_context :stub_parallel_map
 
   let(:visit_params) { nil }
+  let(:filter_records!) { nil }
   let(:stub_jrpc_show_calls!) do
     stub_jrpc_request(node.rpc_endpoint, 'yeti.show.calls', []).and_return(
       calls_attributes.map(&:stringify_keys)
@@ -124,9 +125,7 @@ RSpec.describe 'Active Calls Index', js: true do
   end
 
   context 'without filters' do
-    let(:visit_params) { {} }
     let(:stub_jrpc_show_calls!) { nil }
-    let(:filter_records!) { nil }
 
     it 'renders no table' do
       subject
@@ -135,6 +134,34 @@ RSpec.describe 'Active Calls Index', js: true do
       expect(page).to_not have_flash_message(type: :error)
       expect(page).to_not have_flash_message(type: :warning)
       expect(page).to_not have_table
+    end
+  end
+
+  context 'when connection failed' do
+    let(:filter_records!) do
+      within_filters do
+        fill_in_chosen 'Node', with: node.name
+        click_submit('Filter')
+      end
+    end
+    let(:stub_jrpc_show_calls!) do
+      stub_jrpc_connect_error(node.rpc_endpoint)
+    end
+
+    it 'renders no table' do
+      subject
+      expect(page).to have_page_title('Active Calls')
+      expect(page).to have_selector('.blank_slate', text: 'No Active Calls found')
+      expect(page).to_not have_flash_message(type: :error)
+      expect(page).to_not have_flash_message(type: :warning)
+      expect(page).to_not have_table
+    end
+
+    include_examples :does_not_capture_error do
+      let(:does_not_capture_error_subject) do
+        subject
+        expect(page).to have_page_title('Active Calls')
+      end
     end
   end
 end

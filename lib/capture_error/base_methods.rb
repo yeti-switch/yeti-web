@@ -40,15 +40,7 @@ module CaptureError
     end
 
     def log_error(error, skip_backtrace: false)
-      Rails.logger.error do
-        msg = ["<#{error.class}>: #{error.message}"]
-        msg.concat(error.backtrace) unless skip_backtrace
-        msg.join("\n")
-      end
-      if error.cause && error.cause != error
-        Rails.logger.error { 'caused by:' }
-        log_error(error.cause, skip_backtrace: skip_backtrace)
-      end
+      CaptureError.log_error(error, skip_backtrace: skip_backtrace)
     end
   end
 end
