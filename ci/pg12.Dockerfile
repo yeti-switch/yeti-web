@@ -8,11 +8,11 @@ RUN	apt-get update && \
 	apt-get -y dist-upgrade && \
 	apt-get -y --no-install-recommends install curl gnupg ca-certificates
 
-RUN	curl http://pkg.yeti-switch.org/key.gpg			| apt-key add - && \
+RUN	curl https://pkg.yeti-switch.org/key.gpg | apt-key add - && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
-	echo "deb http://pkg.yeti-switch.org/debian/buster unstable main"	>> /etc/apt/sources.list && \
-	echo "deb http://deb.debian.org/debian buster main buster non-free"	>> /etc/apt/sources.list && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"	>> /etc/apt/sources.list
+	echo "deb http://pkg.yeti-switch.org/debian/buster unstable main" >> /etc/apt/sources.list && \
+	echo "deb http://deb.debian.org/debian buster main buster non-free" >> /etc/apt/sources.list && \
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list
 
 RUN 	apt-get update && \
 	apt-get -y --no-install-recommends install \
