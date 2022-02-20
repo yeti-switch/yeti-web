@@ -18,7 +18,7 @@ https://www.postgresql.org/download/linux/debian/
 You need to install:
 
 ```sh
-curl http://pkg.yeti-switch.org/key.gpg | sudo apt-key add -
+curl https://pkg.yeti-switch.org/key.gpg | sudo apt-key add -
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| sudo apt-key add -
 sudo add-apt-repository "deb http://pkg.yeti-switch.org/debian/buster unstable main"
 sudo add-apt-repository "deb http://deb.debian.org/debian buster main buster non-free"
