@@ -107,7 +107,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'parallel_tests'
   gem 'rspec-rails'
-  gem 'rspec_api_documentation', '~> 5.0.0'
+  # https://github.com/zipmark/rspec_api_documentation/pull/458
+  # present only on master
+  gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
