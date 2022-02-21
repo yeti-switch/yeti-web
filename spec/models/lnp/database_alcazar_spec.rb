@@ -4,12 +4,11 @@
 #
 # Table name: class4.lnp_databases_alcazar
 #
-#  id          :integer(2)       not null, primary key
-#  host        :string           not null
-#  key         :string           not null
-#  port        :integer(4)
-#  timeout     :integer(2)       default(300), not null
-#  database_id :integer(4)
+#  id      :integer(2)       not null, primary key
+#  host    :string           not null
+#  key     :string           not null
+#  port    :integer(4)
+#  timeout :integer(2)       default(300), not null
 #
 
 RSpec.describe Lnp::DatabaseAlcazar, type: :model do
