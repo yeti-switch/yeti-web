@@ -6,10 +6,10 @@ class CreateSysStateTableInsteadSequence < ActiveRecord::Migration[6.1]
     end
 
     execute <<-SQL
-      INSERT INTO sys.states(key,value) VALUES('customers_auth',0);
-      INSERT INTO sys.states(key,value) VALUES('stir_shaken_trusted_certificates',0);
-      INSERT INTO sys.states(key,value) VALUES('stir_shaken_trusted_repositories',0);
-      INSERT INTO sys.states(key,value) VALUES('load_balancers',0);
+      INSERT INTO sys.states(key,value) VALUES('customers_auth',1);
+      INSERT INTO sys.states(key,value) VALUES('stir_shaken_trusted_certificates',1);
+      INSERT INTO sys.states(key,value) VALUES('stir_shaken_trusted_repositories',1);
+      INSERT INTO sys.states(key,value) VALUES('load_balancers',1);
 
       DROP SEQUENCE IF EXISTS class4.customers_auth_state_seq;
       DROP SEQUENCE IF EXISTS sys.load_balancers_state_seq;
