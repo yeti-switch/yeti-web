@@ -5,77 +5,63 @@ module Jobs
     self.cron_line = '*/15 * * * *'
 
     def execute
-      customer_traffic_tasks.each do |t|
-        capture_job_extra(id: t.id, class: t.class.name) do
-          ApplicationRecord.transaction do
-            timedata = t.reschedule(time_now)
-            Report::CustomerTraffic.create!(
-              date_start: timedata.date_from,
-              date_end: timedata.date_to,
-              customer_id: t.customer_id,
-              send_to: t.send_to
-            )
-            t.last_run_at = time_now
-            t.next_run_at = timedata.next_run_at
-            t.save!
-          end
+      customer_traffic_tasks.each do |task|
+        process_task(task) do |time_data|
+          Report::CustomerTraffic.create!(
+            date_start: time_data.date_from,
+            date_end: time_data.date_to,
+            customer_id: task.customer_id,
+            send_to: task.send_to
+          )
         end
       end
 
-      custom_cdr_tasks.each do |t|
-        capture_job_extra(id: t.id, class: t.class.name) do
-          ApplicationRecord.transaction do
-            timedata = t.reschedule(time_now)
-            Report::CustomCdr.create!(
-              date_start: timedata.date_from,
-              date_end: timedata.date_to,
-              customer_id: t.customer_id,
-              filter: t.filter,
-              group_by_fields: t.group_by, # TODO: rewrite reports to use Arrays for group_by instead varchar
-              send_to: t.send_to
-            )
-            t.last_run_at = time_now
-            t.next_run_at = timedata.next_run_at
-            t.save!
-          end
+      custom_cdr_tasks.each do |task|
+        process_task(task) do |time_data|
+          Report::CustomCdr.create!(
+            date_start: time_data.date_from,
+            date_end: time_data.date_to,
+            customer_id: task.customer_id,
+            filter: task.filter,
+            group_by_fields: task.group_by, # TODO: rewrite reports to use Arrays for group_by instead varchar
+            send_to: task.send_to
+          )
         end
       end
 
-      interval_cdr_tasks.each do |t|
-        capture_job_extra(id: t.id, class: t.class.name) do
-          ApplicationRecord.transaction do
-            timedata = t.reschedule(time_now)
-            Report::IntervalCdr.create!(
-              date_start: timedata.date_from,
-              date_end: timedata.date_to,
-              filter: t.filter,
-              group_by_fields: t.group_by, # TODO: rewrite reports to use Arrays for group_by instead varchar
-              aggregator_id: t.aggregator_id,
-              aggregate_by: t.aggregate_by,
-              interval_length: t.interval_length,
-              send_to: t.send_to
-            )
-            t.last_run_at = time_now
-            t.next_run_at = timedata.next_run_at
-            t.save!
-          end
+      interval_cdr_tasks.each do |task|
+        process_task(task) do |time_data|
+          Report::IntervalCdr.create!(
+            date_start: time_data.date_from,
+            date_end: time_data.date_to,
+            filter: task.filter,
+            group_by_fields: task.group_by, # TODO: rewrite reports to use Arrays for group_by instead varchar
+            aggregator_id: task.aggregator_id,
+            aggregate_by: task.aggregate_by,
+            interval_length: task.interval_length,
+            send_to: task.send_to
+          )
         end
       end
 
-      vendor_traffic_tasks.each do |t|
-        capture_job_extra(id: t.id, class: t.class.name) do
-          ApplicationRecord.transaction do
-            timedata = t.reschedule(time_now)
-            Report::VendorTraffic.create!(
-              date_start: timedata.date_from,
-              date_end: timedata.date_to,
-              vendor_id: t.vendor_id,
-              send_to: t.send_to
-            )
-            t.last_run_at = time_now
-            t.next_run_at = timedata.next_run_at
-            t.save!
-          end
+      vendor_traffic_tasks.each do |task|
+        process_task(task) do |time_data|
+          Report::VendorTraffic.create!(
+            date_start: time_data.date_from,
+            date_end: time_data.date_to,
+            vendor_id: task.vendor_id,
+            send_to: task.send_to
+          )
+        end
+      end
+    end
+
+    def process_task(task)
+      capture_job_extra(id: task.id, class: task.class.name) do
+        Cdr::Base.transaction do
+          time_data = task.reschedule(time_now)
+          yield(time_data)
+          task.update!(last_run_at: time_now, next_run_at: time_data.next_run_at)
         end
       end
     end
