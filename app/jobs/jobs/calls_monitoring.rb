@@ -147,12 +147,42 @@ module Jobs
     end
 
     def execute
-      detect_customers_calls_to_reject
-      detect_customers_auth_calls_to_reject
-      detect_vendors_calls_to_reject
-      detect_gateway_calls_to_reject
-      detect_random_calls_to_reject
+      log_time('detect_customers_calls_to_reject') do
+        detect_customers_calls_to_reject
+      end
+
+      log_time('detect_customers_auth_calls_to_reject') do
+        detect_customers_auth_calls_to_reject
+      end
+
+      log_time('detect_vendors_calls_to_reject') do
+        detect_vendors_calls_to_reject
+      end
+
+      log_time('detect_gateway_calls_to_reject') do
+        detect_gateway_calls_to_reject
+      end
+
+      log_time('detect_random_calls_to_reject') do
+        detect_random_calls_to_reject
+      end
     end
+
+    def before_finish
+      log_time('save_stats') do
+        save_stats
+      end
+
+      log_time('send_prometheus_metrics') do
+        send_prometheus_metrics
+      end
+
+      log_time('terminate_calls!') do
+        terminate_calls!
+      end
+    end
+
+    private
 
     # random_disconnect_enable        | f
     # random_disconnect_length        | 7000
@@ -172,9 +202,7 @@ module Jobs
         account = active_customers_balances[acc_id]
 
         if account
-          call_collection = CallCollection.new(calls,
-                                               key: :destination,
-                                               account: account)
+          call_collection = CallCollection.new(calls, key: :destination, account: account)
 
           if call_collection.exceed_min_balance?
             @terminate_calls.merge!(
@@ -250,6 +278,87 @@ module Jobs
         if disabled_orig_gw_active_calls.key?(call[:orig_gw_id]) || disabled_term_gw_active_calls.key?(call[:term_gw_id])
           local_tag = call[:local_tag]
           @terminate_calls[local_tag] = call
+        end
+      end
+    end
+
+    def send_prometheus_metrics
+      return unless PrometheusConfig.enabled?
+
+      metrics = []
+
+      total = active_calls.values.sum(&:count)
+      metrics << ActiveCallsProcessor.collect(total: total)
+
+      customers_active_calls.each do |account_id, calls|
+        account_external_id = calls.first[:customer_acc_external_id]
+        collection = CallCollection.new(calls, key: :destination, account: [])
+        src_prefixes = calls.map { |c| c[:src_prefix_routing] }
+        dst_prefixes = calls.map { |c| c[:dst_prefix_routing] }
+
+        metrics << ActiveCallsProcessor.collect(
+          account_originated: calls.count,
+          account_originated_unique_src: src_prefixes.uniq.count,
+          account_originated_unique_dst: dst_prefixes.uniq.count,
+          account_price_originated: collection.total_calls_cost,
+          labels: { account_external_id: account_external_id, account_id: account_id }
+        )
+      end
+
+      vendors_active_calls.each do |account_id, calls|
+        account_external_id = calls.first[:vendor_acc_external_id]
+        collection = CallCollection.new(calls, key: :dialpeer, account: [])
+
+        metrics << ActiveCallsProcessor.collect(
+          account_terminated: calls.count,
+          account_price_terminated: collection.total_calls_cost,
+          labels: { account_external_id: account_external_id, account_id: account_id }
+        )
+      end
+
+      client = PrometheusExporter::Client.default
+      metrics.each { |metric| client.send_json(metric) }
+    end
+
+    def save_stats
+      Stats::ActiveCall.transaction do
+        ActiveCalls::CreateStats.call(
+          calls: active_calls,
+          current_time: now
+        )
+
+        if YetiConfig.calls_monitoring.write_account_stats
+          ActiveCalls::CreateAccountStats.call(
+            customer_calls: customers_active_calls,
+            vendor_calls: vendors_active_calls,
+            current_time: now
+          )
+        end
+        if YetiConfig.calls_monitoring.write_gateway_stats
+          ActiveCalls::CreateOriginationGatewayStats.call(
+            calls: flatten_calls.group_by { |c| c[:orig_gw_id] },
+            current_time: now
+          )
+          ActiveCalls::CreateTerminationGatewayStats.call(
+            calls: flatten_calls.group_by { |c| c[:term_gw_id] },
+            current_time: now
+          )
+        end
+      end
+    end
+
+    def terminate_calls!
+      logger.info { "Going to terminate #{@terminate_calls.keys.size} call(s)." }
+      nodes = Node.all.index_by(&:id)
+      @terminate_calls.each do |local_tag, call|
+        logger.warn { "Terminate call Node: #{call[:node_id]}, local_tag :#{local_tag}" }
+        begin
+          node_id = call[:node_id].to_i
+          nodes[node_id].drop_call(local_tag)
+        rescue StandardError => e
+          node_id = call.is_a?(Hash) ? call[:node_id] : nil
+          capture_error(e, extra: { local_tag: local_tag, node_id: node_id })
+          logger.error "#{e.class} #{e.message}"
         end
       end
     end
@@ -336,82 +445,10 @@ module Jobs
       end
     end
 
-    def before_finish
-      save_stats
-      send_prometheus_metrics
-      terminate_calls!
-    end
-
-    private
-
-    def send_prometheus_metrics
-      return unless PrometheusConfig.enabled?
-
-      metrics = []
-
-      total = active_calls.values.sum(&:count)
-      metrics << ActiveCallsProcessor.collect(total: total)
-
-      customers_active_calls.each do |account_id, calls|
-        account_external_id = calls.first[:customer_acc_external_id]
-        collection = CallCollection.new(calls, key: :destination, account: [])
-        src_prefixes = calls.map { |c| c[:src_prefix_routing] }
-        dst_prefixes = calls.map { |c| c[:dst_prefix_routing] }
-
-        metrics << ActiveCallsProcessor.collect(
-            account_originated: calls.count,
-            account_originated_unique_src: src_prefixes.uniq.count,
-            account_originated_unique_dst: dst_prefixes.uniq.count,
-            account_price_originated: collection.total_calls_cost,
-            labels: { account_external_id: account_external_id, account_id: account_id }
-          )
-      end
-
-      vendors_active_calls.each do |account_id, calls|
-        account_external_id = calls.first[:vendor_acc_external_id]
-        collection = CallCollection.new(calls, key: :dialpeer, account: [])
-
-        metrics << ActiveCallsProcessor.collect(
-            account_terminated: calls.count,
-            account_price_terminated: collection.total_calls_cost,
-            labels: { account_external_id: account_external_id, account_id: account_id }
-          )
-      end
-
-      client = PrometheusExporter::Client.default
-      metrics.each { |metric| client.send_json(metric) }
-    end
-
-    def save_stats
-      Stats::ActiveCall.transaction do
-        Stats::ActiveCall.create_stats(active_calls, now)
-        if YetiConfig.calls_monitoring.write_account_stats
-          ActiveCalls::CreateAccountStats.call(
-            customer_calls: customers_active_calls,
-            vendor_calls: vendors_active_calls,
-            current_time: now
-          )
-        end
-        orig_gw_grouped_calls = flatten_calls.group_by { |c| c[:orig_gw_id] }
-        Stats::ActiveCallOrigGateway.create_stats(orig_gw_grouped_calls, now)
-        term_gw_grouped_calls = flatten_calls.group_by { |c| c[:term_gw_id] }
-        Stats::ActiveCallTermGateway.create_stats(term_gw_grouped_calls, now)
-      end
-    end
-
-    def terminate_calls!
-      nodes = Node.all.index_by(&:id)
-      @terminate_calls.each do |local_tag, call|
-        logger.warn { "CallsMonitoring#terminate_calls! Node #{call[:node_id]}, local_tag :#{local_tag}" }
-        begin
-          node_id = call[:node_id].to_i
-          nodes[node_id].drop_call(local_tag)
-        rescue StandardError => e
-          node_id = call.is_a?(Hash) ? call[:node_id] : nil
-          capture_error(e, extra: { local_tag: local_tag, node_id: node_id })
-          logger.error e.message
-        end
-      end
+    def log_time(name, &block)
+      logger.info { "Operation #{name} started." }
+      seconds = logger.tagged(name) { ::Benchmark.realtime(&block) }
+      logger.info { format("Operation #{name} finished %.6f sec.", seconds) }
     end
   end
 end

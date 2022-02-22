@@ -22,9 +22,11 @@ class BaseJob < Scheduler::Job::Base
   end
 
   def call
-    after_start
-    execute
-    before_finish
+    logger.tagged(self.class.name) do
+      after_start
+      execute
+      before_finish
+    end
   end
 
   def execute

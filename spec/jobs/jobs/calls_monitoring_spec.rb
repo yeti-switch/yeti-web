@@ -238,6 +238,59 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
     end
   end
 
+  context 'when YetiConfig.calls_monitoring.write_gateway_stats=true' do
+    before do
+      expect(YetiConfig.calls_monitoring).to receive(:write_gateway_stats).and_return(true)
+    end
+
+    it 'creates Stats::ActiveCallOrigGateway and Stats::ActiveCallTermGateway' do
+      expect(ActiveCalls::CreateOriginationGatewayStats).to receive(:call).with(
+        calls: be_present,
+        current_time: be_within(2).of(Time.now)
+      ).and_call_original
+
+      expect(ActiveCalls::CreateTerminationGatewayStats).to receive(:call).with(
+        calls: be_present,
+        current_time: be_within(2).of(Time.now)
+      ).and_call_original
+
+      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(2).and(
+        change { Stats::ActiveCallTermGateway.count }.by(2)
+      )
+
+      orig_gw1_stats = Stats::ActiveCallOrigGateway.where(gateway_id: origin_gateway.id).to_a
+      expect(orig_gw1_stats.size).to eq 1
+      expect(orig_gw1_stats.first).to have_attributes(count: 2)
+
+      orig_gw2_stats = Stats::ActiveCallOrigGateway.where(gateway_id: term_gateway.id).to_a
+      expect(orig_gw2_stats.size).to eq 1
+      expect(orig_gw2_stats.first).to have_attributes(count: 0)
+
+      term_gw1_stats = Stats::ActiveCallTermGateway.where(gateway_id: term_gateway.id).to_a
+      expect(term_gw1_stats.size).to eq 1
+      expect(term_gw1_stats.first).to have_attributes(count: 2)
+
+      term_gw2_stats = Stats::ActiveCallTermGateway.where(gateway_id: origin_gateway.id).to_a
+      expect(term_gw2_stats.size).to eq 1
+      expect(term_gw2_stats.first).to have_attributes(count: 0)
+    end
+  end
+
+  context 'when YetiConfig.calls_monitoring.write_gateway_stats=false' do
+    before do
+      expect(YetiConfig.calls_monitoring).to receive(:write_gateway_stats).and_return(false)
+    end
+
+    it 'does not create Stats::ActiveCallOrigGateway and Stats::ActiveCallTermGateway' do
+      expect(ActiveCalls::CreateOriginationGatewayStats).not_to receive(:call)
+      expect(ActiveCalls::CreateTerminationGatewayStats).not_to receive(:call)
+
+      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(0).and(
+        change { Stats::ActiveCallTermGateway.count }.by(0)
+      )
+    end
+  end
+
   context 'when Customer and Vendor have enough money' do
     it 'does not send prometheus metrics' do
       expect { subject }.to send_prometheus_metrics.exactly(0)
