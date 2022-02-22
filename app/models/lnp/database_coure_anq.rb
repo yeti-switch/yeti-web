@@ -11,7 +11,6 @@
 #  password      :string           not null
 #  timeout       :integer(2)       default(300), not null
 #  username      :string           not null
-#  database_id   :integer(4)
 #
 
 class Lnp::DatabaseCoureAnq < ApplicationRecord

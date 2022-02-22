@@ -38,4 +38,23 @@ module FeatureTestHelper
   def response_csv_collection
     response_csv_rows.map { |row| [response_csv_header, row].transpose.to_h }
   end
+
+  # sets value of date time picker.
+  def fill_in_date_time(field, with:)
+    # date time picker can't be found by label
+    # so we need to find it by input id
+    input_id = page.find('label', text: field)['for']
+    input = find_field(input_id)
+    input.set(with)
+    input.send_keys(:enter)
+  end
+
+  def have_semantic_error_texts(*texts)
+    satisfy do |actual|
+      expect(actual).to have_semantic_errors(count: texts.size)
+      texts.each do |text|
+        expect(actual).to have_semantic_error(text)
+      end
+    end
+  end
 end

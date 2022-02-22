@@ -39,12 +39,11 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
     end
   end
 
-  Report::CustomCdr::CDR_COLUMNS.each do |key|
-    next if %i[destination_id dialpeer_id].include? key
-
-    filter key.to_s[0..-4].to_sym, if: proc {
-      @custom_cdr.group_by_include? key
-    }, input_html: { class: 'chosen' }
+  assoc_filter_columns = Report::CustomData::CDR_COLUMNS - %i[destination_id dialpeer_id]
+  assoc_filter_columns.each do |key|
+    filter key.to_s[0..-4].to_sym,
+           if: proc { @custom_cdr.group_by_include? key },
+           input_html: { class: 'chosen' }
   end
 
   controller do

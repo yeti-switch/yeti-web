@@ -7,7 +7,7 @@
 #  id          :integer(4)       not null, primary key
 #  data        :string
 #  dst         :string           not null
-#  expires_at  :datetime
+#  expires_at  :datetime         not null
 #  lrn         :string           not null
 #  tag         :string
 #  created_at  :datetime

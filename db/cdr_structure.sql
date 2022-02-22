@@ -2642,9 +2642,11 @@ CREATE TABLE reports.cdr_custom_report (
     date_start timestamp with time zone,
     date_end timestamp with time zone,
     filter character varying,
-    group_by character varying,
+    group_by character varying[],
     created_at timestamp with time zone,
-    customer_id integer
+    customer_id integer,
+    completed boolean DEFAULT false NOT NULL,
+    send_to integer[]
 );
 
 
@@ -4837,6 +4839,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20210223125543'),
 ('20210307170219'),
 ('20210614110059'),
-('20211005183259');
+('20211005183259'),
+('20220221142459');
 
 

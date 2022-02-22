@@ -41,7 +41,7 @@ ActiveAdmin.register Report::CustomCdrScheduler, as: 'CustomCdrScheduler' do
       f.input :period
       f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
       f.input :filter
-      f.input :group_by, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Report::CustomCdr::CDR_COLUMNS.map { |a| [a, a] }
+      f.input :group_by, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Report::CustomData::CDR_COLUMNS.map { |a| [a, a] }
       f.input :send_to, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions

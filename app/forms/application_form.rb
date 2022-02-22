@@ -6,6 +6,7 @@ class ApplicationForm
   include ActiveModel::Attributes
   include ActiveModel::Dirty
   extend ActiveModel::Callbacks
+  include WithActiveModelArrayAttribute
   include Memoizable
   include CaptureError::BaseMethods
 
@@ -111,6 +112,12 @@ class ApplicationForm
       end
     end
 
+    def with_policy_class(class_name)
+      define_singleton_method(:policy_class) do
+        class_name.constantize
+      end
+    end
+
     def abstract(flag = true)
       self._abstract = flag
     end
@@ -139,6 +146,11 @@ class ApplicationForm
   # override #persisted? method if needed.
   def new_record?
     !persisted?
+  end
+
+  # @return [Boolean]
+  def persisted?
+    false
   end
 
   def save(opts = {})
