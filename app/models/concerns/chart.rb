@@ -14,10 +14,6 @@ module Chart
   end
 
   class_methods do
-    def create_stats(calls = {}, now_time)
-      super calls, now_time, chart_entity_klass.all, chart_entity_column
-    end
-
     def to_chart(id, options = {})
       time_column = options.delete(:time_column) || :created_at
       count_column = options.delete(:count_column) || :count

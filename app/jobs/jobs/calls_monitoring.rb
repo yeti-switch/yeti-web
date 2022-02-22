@@ -322,7 +322,11 @@ module Jobs
 
     def save_stats
       Stats::ActiveCall.transaction do
-        Stats::ActiveCall.create_stats(active_calls, now)
+        ActiveCalls::CreateStats.call(
+          calls: active_calls,
+          current_time: now
+        )
+
         if YetiConfig.calls_monitoring.write_account_stats
           ActiveCalls::CreateAccountStats.call(
             customer_calls: customers_active_calls,
@@ -330,10 +334,16 @@ module Jobs
             current_time: now
           )
         end
-        orig_gw_grouped_calls = flatten_calls.group_by { |c| c[:orig_gw_id] }
-        Stats::ActiveCallOrigGateway.create_stats(orig_gw_grouped_calls, now)
-        term_gw_grouped_calls = flatten_calls.group_by { |c| c[:term_gw_id] }
-        Stats::ActiveCallTermGateway.create_stats(term_gw_grouped_calls, now)
+        if YetiConfig.calls_monitoring.write_gateway_stats
+          ActiveCalls::CreateOriginationGatewayStats.call(
+            calls: flatten_calls.group_by { |c| c[:orig_gw_id] },
+            current_time: now
+          )
+          ActiveCalls::CreateTerminationGatewayStats.call(
+            calls: flatten_calls.group_by { |c| c[:term_gw_id] },
+            current_time: now
+          )
+        end
       end
     end
 

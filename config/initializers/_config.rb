@@ -24,6 +24,7 @@ Config.setup do |setup_config|
 
     required(:calls_monitoring).schema do
       required(:write_account_stats).value(:bool?)
+      required(:write_gateway_stats).value(:bool?)
     end
 
     required(:api).schema do
