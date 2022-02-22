@@ -68,7 +68,12 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  if ENV['NO_FILE_WATCHER'].blank?
+    # We need possibility to remove file_watcher because
+    # ActiveSupport::EventedFileUpdateChecker causes crash on delayed job process.
+    # @see https://github.com/collectiveidea/delayed_job/issues/1099
+    config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  end
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
