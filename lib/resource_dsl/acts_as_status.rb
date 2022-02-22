@@ -2,10 +2,10 @@
 
 module ResourceDSL
   module ActsAsStatus
-    def acts_as_status
-      scope :all, default: true
-      scope :enabled
-      scope :disabled
+    def acts_as_status(show_count: true)
+      scope :all, default: true, show_count: show_count
+      scope :enabled, show_count: show_count
+      scope :disabled, show_count: show_count
 
       batch_action :enable, confirm: 'Are you sure?' do |selection|
         active_admin_config.resource_class.find(selection).each(&:enable!)
