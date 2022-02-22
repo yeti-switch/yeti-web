@@ -25527,7 +25527,8 @@ CREATE TABLE sys.delayed_jobs (
     locked_by character varying(255),
     queue character varying(255),
     created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL
+    updated_at timestamp with time zone NOT NULL,
+    unique_name character varying
 );
 
 
@@ -30061,6 +30062,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211005184247'),
 ('20211130113417'),
 ('20211130142405'),
-('20211217132047');
+('20211217132047'),
+('20220222110900');
 
 
