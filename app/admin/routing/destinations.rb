@@ -6,7 +6,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
-  acts_as_status
+  acts_as_status(show_count: false)
   acts_as_quality_stat
   acts_as_stats_actions
   acts_as_async_destroy('Routing::Destination')
