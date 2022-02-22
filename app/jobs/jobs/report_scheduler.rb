@@ -18,12 +18,12 @@ module Jobs
 
       custom_cdr_tasks.each do |task|
         process_task(task) do |time_data|
-          Report::CustomCdr.create!(
+          CustomCdrReport::Create.call(
             date_start: time_data.date_from,
             date_end: time_data.date_to,
-            customer_id: task.customer_id,
+            customer: task.customer,
             filter: task.filter,
-            group_by_fields: task.group_by, # TODO: rewrite reports to use Arrays for group_by instead varchar
+            group_by_fields: task.group_by,
             send_to: task.send_to
           )
         end
@@ -75,7 +75,7 @@ module Jobs
     end
 
     def custom_cdr_tasks
-      Report::CustomCdrScheduler.where('next_run_at<?', time_now)
+      Report::CustomCdrScheduler.where('next_run_at<?', time_now).preload(:customer)
     end
 
     def interval_cdr_tasks
