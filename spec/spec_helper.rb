@@ -199,6 +199,16 @@ RspecApiDocumentation.configure do |config|
     c.docs_dir = Rails.root.join 'doc/api/customer/v1'
     c.api_name = 'Customer API V2'
   end
+
+  config.response_body_formatter = proc do |content_type, response_body|
+    if %r{application/.*json}.match?(content_type)
+      JSON.pretty_generate(JSON.parse(response_body))
+    elsif response_body.encoding == Encoding::ASCII_8BIT
+      '[binary data]'
+    else
+      response_body
+    end
+  end
 end
 
 Shoulda::Matchers.configure do |config|
