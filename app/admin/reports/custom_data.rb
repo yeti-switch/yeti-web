@@ -26,6 +26,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
     div class: :report_sidebar_info do
       attributes_table_for assigns[:custom_cdr] do
         row :id
+        row :completed
         row :date_start
         row :date_end
         row :filter
@@ -39,11 +40,31 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
     end
   end
 
-  assoc_filter_columns = Report::CustomData::CDR_COLUMNS - %i[destination_id dialpeer_id]
+  assoc_filter_columns = Report::CustomData::CDR_COLUMNS - %i[destination_id dialpeer_id customer_id vendor_id vendor_acc_id customer_acc_id]
   assoc_filter_columns.each do |key|
     filter key.to_s[0..-4].to_sym,
            if: proc { @custom_cdr.group_by_include? key },
            input_html: { class: 'chosen' }
+
+    contractor_filter :customer_id_eq,
+                      label: 'Customer',
+                      path_params: { q: { customer_eq: true } },
+                      if: proc { @custom_cdr.group_by_include?(:customer_id) }
+
+    contractor_filter :vendor_id_eq,
+                      label: 'Vendor',
+                      path_params: { q: { vendor_eq: true } },
+                      if: proc { @custom_cdr.group_by_include?(:vendor_id) }
+
+    account_filter :customer_acc_id_eq,
+                   label: 'Customer Acc',
+                   path_params: { q: { contractor_customer_eq: true } },
+                   if: proc { @custom_cdr.group_by_include?(:customer_acc_id) }
+
+    account_filter :vendor_acc_id_eq,
+                   label: 'Vendor Acc',
+                   path_params: { q: { contractor_vendor_eq: true } },
+                   if: proc { @custom_cdr.group_by_include?(:vendor_acc_id) }
   end
 
   controller do

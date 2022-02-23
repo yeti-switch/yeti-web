@@ -64,7 +64,7 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
   end
 
   filter :id
-  # boolean_filter :completed
+  boolean_filter :completed
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at, as: :date_time_range
