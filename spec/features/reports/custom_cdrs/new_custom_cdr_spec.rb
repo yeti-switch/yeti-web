@@ -44,6 +44,26 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
 
   include_examples :creates_custom_cdr_report
 
+  context 'with set range date_start date_end' do
+    let(:fill_form!) do
+      fill_in_chosen 'Group by', with: 'customer_id', no_search: true
+      within_form_for { click_link 'Set range' }
+      within('.block_timerange') { click_on_text 'This Week' }
+    end
+    let(:expected_service_params) do
+      {
+        date_start: Time.zone.now.beginning_of_week,
+        date_end: Time.zone.now.next_week,
+        group_by: %w[customer_id],
+        filter: nil,
+        customer: nil,
+        send_to: nil
+      }
+    end
+
+    include_examples :creates_custom_cdr_report
+  end
+
   context 'with customer' do
     let(:fill_form!) do
       super()

@@ -46,7 +46,7 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
-      f.input :date_start, as: :date_time_picker
+      f.input :date_start, as: :date_time_picker, wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
       f.input :date_end, as: :date_time_picker
       f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
       f.input :filter
@@ -64,7 +64,7 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
   end
 
   filter :id
-  # boolean_filter :completed
+  boolean_filter :completed
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at, as: :date_time_range
