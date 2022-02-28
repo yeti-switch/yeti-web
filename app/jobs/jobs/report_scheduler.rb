@@ -23,7 +23,7 @@ module Jobs
             date_end: time_data.date_to,
             customer: task.customer,
             filter: task.filter,
-            group_by_fields: task.group_by,
+            group_by: task.group_by,
             send_to: task.send_to
           )
         end
