@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe CustomCdrReport::Create do
+RSpec.describe CreateReport::CustomCdr do
   subject do
     described_class.call(service_params)
   end
@@ -14,9 +14,9 @@ RSpec.describe CustomCdrReport::Create do
     end
 
     it 'enqueues Worker::CustomCdrReportJob' do
-      expect { subject }.to have_enqueued_job(Worker::CustomCdrReportJob).once.on_queue('report').with do |*args|
+      expect { subject }.to have_enqueued_job(Worker::GenerateReportDataJob).once.on_queue('report').with do |*args|
         report = Report::CustomCdr.last!
-        expect(args).to eq [report.id]
+        expect(args).to eq ['CustomCdr', report.id]
       end
     end
   end
@@ -26,13 +26,13 @@ RSpec.describe CustomCdrReport::Create do
       expect { safe_subject }.to change { Report::CustomCdr.count }.by(0)
     end
 
-    it 'raises CustomCdrReport::Create::Error' do
-      expect { subject }.to raise_error(CustomCdrReport::Create::Error)
+    it "raises #{described_class}::Error" do
+      expect { subject }.to raise_error(described_class::Error)
     end
 
-    it 'does not enqueue Worker::CustomCdrReportJob' do
+    it 'does not enqueue Worker::GenerateReportDataJob' do
       safe_subject
-      expect { safe_subject }.not_to have_enqueued_job(Worker::CustomCdrReportJob)
+      expect { safe_subject }.not_to have_enqueued_job(Worker::GenerateReportDataJob)
     end
   end
 

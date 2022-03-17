@@ -16,18 +16,19 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
     div class: :report_sidebar_info do
       attributes_table_for assigns[:report_interval_cdr] do
         row :id
-        row :created_at
+        row :completed
         row :date_start
         row :date_end
         row :interval_length
         row :filter
         row :group_by do
           content_tag :ul do
-            assigns[:report_interval_cdr].group_by_arr.collect { |item| concat(content_tag(:li, item)) }
+            assigns[:report_interval_cdr].group_by&.collect { |item| concat(content_tag(:li, item)) }
           end
         end
         row :aggregation_function
         row :aggregate_by
+        row :created_at
       end
     end
   end

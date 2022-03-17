@@ -33,6 +33,7 @@ ActiveAdmin.register Report::CustomerTrafficDataFull, as: 'CustomerTrafficDataFu
     div class: :report_sidebar_info do
       attributes_table_for assigns[:customer_traffic] do
         row :id
+        row :completed
         row :date_start
         row :date_end
         row :customer

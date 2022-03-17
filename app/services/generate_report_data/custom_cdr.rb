@@ -1,24 +1,8 @@
 # frozen_string_literal: true
 
-module CustomCdrReport
-  class GenerateData < ApplicationService
-    parameter :report
-
-    def call
-      report.with_lock do
-        validate!
-
-        insert_report_data
-        report.update!(completed: true)
-        Reporter::CustomCdr.new(report).save!
-      end
-    end
-
+module GenerateReportData
+  class CustomCdr < Base
     private
-
-    def validate!
-      raise Error, "Report::CustomCdr ##{report.id} already completed" if report.completed?
-    end
 
     def insert_report_data
       SqlCaller::Cdr.execute(
@@ -37,11 +21,11 @@ module CustomCdrReport
             agg_asr_termination,
             agg_calls_acd
           )
-          #{build_scope.to_sql}"
+          #{cdr_scope.to_sql}"
       )
     end
 
-    def build_scope
+    def cdr_scope
       scope = Cdr::Cdr.select(
         report.id,
         *report.group_by,

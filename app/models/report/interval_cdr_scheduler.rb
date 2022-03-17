@@ -54,8 +54,8 @@ class Report::IntervalCdrScheduler < Cdr::Base
     self[:send_to] = send_to_ids.reject(&:blank?)
   end
 
-  def group_by=(group_by_fields)
-    self[:group_by] = group_by_fields.reject(&:blank?)
+  def group_by=(value)
+    self[:group_by] = value.reject(&:blank?)
   end
 
   def aggregation

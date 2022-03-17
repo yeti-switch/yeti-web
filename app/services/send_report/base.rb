@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-module Reporter
-  class Base < ::BaseService
-    attr_reader :report, :options
-
+module SendReport
+  class Base < ApplicationService
     CsvData = Struct.new(:columns, :collection)
-
     EmailData = Struct.new(:columns, :collection, :decorator, :footers) do
       def decorated_collection
         decorator ? decorator.decorate_collection(collection) : collection
@@ -30,27 +27,32 @@ module Reporter
       end
     end
 
-    def initialize(report, options = {})
-      @report = report
-      @options = options
-    end
+    parameter :report
+    parameter :skip_attachments, default: false
+    parameter :skip_mail_body, default: false
 
-    def save!
+    def call
       return unless contacts.any?
 
       contacts.each do |contact|
-        next unless contact.smtp_connection
-
-        ::Log::EmailLog.create!(
-          contact_id: contact.id,
-          smtp_connection_id: contact.smtp_connection.id,
-          mail_to: contact.email,
-          mail_from: contact.smtp_connection.from_address,
-          subject: email_subject,
-          attachment_id: generate_attachments(csv_data),
-          msg: generate_mail_body(email_data)
-        )
+        create_email_log!(contact)
       end
+    end
+
+    private
+
+    def create_email_log!(contact)
+      return unless contact.smtp_connection
+
+      ::Log::EmailLog.create!(
+        contact_id: contact.id,
+        smtp_connection_id: contact.smtp_connection.id,
+        mail_to: contact.email,
+        mail_from: contact.smtp_connection.from_address,
+        subject: email_subject,
+        attachment_id: generate_attachments(csv_data),
+        msg: generate_mail_body(email_data)
+      )
     end
 
     def email_subject
@@ -65,8 +67,6 @@ module Reporter
       raise 'implement me'
     end
 
-    protected
-
     def contacts
       unless instance_variable_defined?(:@contacts)
         @contacts ||= ::Billing::Contact.where(id: report.send_to)
@@ -75,7 +75,7 @@ module Reporter
     end
 
     def generate_attachments(data)
-      return [] if options[:skip_attachments]
+      return [] if skip_attachments
 
       data.map do |data_item|
         file_name = generate_csv_file(data_item)
@@ -115,7 +115,7 @@ module Reporter
     end
 
     def generate_mail_body(data)
-      return if options[:skip_mail_body]
+      return if skip_mail_body
 
       path_set = ActionView::PathSet.new([template_path])
       lookup = ActionView::LookupContext.new(path_set)

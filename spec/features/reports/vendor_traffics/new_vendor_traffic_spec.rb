@@ -2,27 +2,32 @@
 
 RSpec.describe 'Create new Vendor Traffic', type: :feature, js: true do
   subject do
-    aa_form.submit
+    visit new_vendor_traffic_path
+    fill_form!
+    submit_form!
   end
 
-  active_admin_form_for Report::VendorTraffic, 'new'
   include_context :login_as_admin
 
-  let!(:vendor) { FactoryBot.create(:vendor, name: 'John Doe') }
   before do
     FactoryBot.create(:customer)
     FactoryBot.create(:vendor)
-    visit new_vendor_traffic_path
+  end
 
-    aa_form.search_chosen 'Vendor', vendor.name, ajax: true
-    aa_form.set_date_time 'Date start', '2019-01-01 00:00'
-    aa_form.set_date_time 'Date end', '2019-02-01 01:00'
+  let!(:vendor) { FactoryBot.create(:vendor, name: 'John Doe') }
+  let(:submit_form!) { click_submit('Create Vendor traffic report') }
+  let(:fill_form!) do
+    fill_in_chosen 'Vendor', with: vendor.name, ajax: true
+    fill_in_date_time 'Date start', with: '2019-01-01 00:00:00'
+    fill_in_date_time 'Date end', with: '2019-02-01 01:00:00'
   end
 
   it 'creates record' do
-    subject
-    record = Report::VendorTraffic.last
-    expect(record).to be_present
+    expect {
+      subject
+      expect(page).to have_flash_message('Vendor traffic report was successfully created.', type: :notice)
+    }.to change { Report::VendorTraffic.count }.by(1)
+    record = Report::VendorTraffic.last!
     expect(record).to have_attributes(
       date_start: Time.zone.parse('2019-01-01 00:00:00'),
       date_end: Time.zone.parse('2019-02-01 01:00:00'),
@@ -31,6 +36,16 @@ RSpec.describe 'Create new Vendor Traffic', type: :feature, js: true do
     )
   end
 
-  include_examples :changes_records_qty_of, Report::VendorTraffic, by: 1
-  include_examples :shows_flash_message, :notice, 'Vendor traffic was successfully created.'
+  context 'with empty form' do
+    let(:fill_form!) { nil }
+
+    it 'does not create report' do
+      subject
+      expect(page).to have_semantic_error_texts(
+                        "Date start can't be blank",
+                        "Date end can't be blank",
+                        "Vendor can't be blank"
+                      )
+    end
+  end
 end

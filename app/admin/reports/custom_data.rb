@@ -18,8 +18,11 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
   end
 
   action_item :reports, only: :index do
-    link_to 'Delete report', custom_cdr_path(assigns[:custom_cdr].id), method: :delete,
-                                                                       data: { confirm: I18n.t('active_admin.delete_confirmation') }, class: 'member_link delete_link'
+    link_to 'Delete report',
+            custom_cdr_path(assigns[:custom_cdr].id),
+            method: :delete,
+            data: { confirm: I18n.t('active_admin.delete_confirmation') },
+            class: 'member_link delete_link'
   end
 
   sidebar 'Custom CDR Report', class: 'toggle', priority: 0 do
@@ -32,7 +35,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
         row :filter
         row :group_by do
           content_tag :ul do
-            assigns[:custom_cdr].group_by_arr.collect { |item| concat(content_tag(:li, item)) }
+            assigns[:custom_cdr].group_by.collect { |item| concat(content_tag(:li, item)) }
           end
         end
         row :created_at
@@ -40,7 +43,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
     end
   end
 
-  assoc_filter_columns = Report::CustomData::CDR_COLUMNS - %i[destination_id dialpeer_id customer_id vendor_id vendor_acc_id customer_acc_id]
+  assoc_filter_columns = Report::CustomCdr::CDR_COLUMNS - %i[destination_id dialpeer_id customer_id vendor_id vendor_acc_id customer_acc_id]
   assoc_filter_columns.each do |key|
     filter key.to_s[0..-4].to_sym,
            if: proc { @custom_cdr.group_by_include? key },

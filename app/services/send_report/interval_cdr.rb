@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-module Reporter
+module SendReport
   class IntervalCdr < Base
+    private
+
     def csv_data
       [
         CsvData.new(report.csv_columns, report.report_records)

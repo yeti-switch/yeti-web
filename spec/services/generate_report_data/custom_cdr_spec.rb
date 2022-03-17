@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe CustomCdrReport::GenerateData do
+RSpec.describe GenerateReportData::CustomCdr do
   subject do
     described_class.call(service_params)
   end
@@ -170,6 +170,6 @@ RSpec.describe CustomCdrReport::GenerateData do
       expect { safe_subject }.to change { Report::CustomData.count }.by(0)
     end
 
-    include_examples :raises_exception, CustomCdrReport::GenerateData::Error
+    include_examples :raises_exception, GenerateReportData::CustomCdr::Error
   end
 end

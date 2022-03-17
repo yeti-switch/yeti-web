@@ -1,9 +1,28 @@
 # frozen_string_literal: true
 
-module Reporter
+module SendReport
   class VendorTraffic < Base
+    private
+
     def email_subject
       'Vendor traffic report'
+    end
+
+    def csv_columns
+      %i[customer
+         calls_count
+         calls_duration
+         customer_calls_duration
+         vendor_calls_duration
+         acd
+         asr
+         origination_cost
+         termination_cost
+         profit
+         success_calls_count
+         first_call_at
+         last_call_at
+         short_calls_count]
     end
 
     def email_columns
@@ -27,7 +46,7 @@ module Reporter
 
     def csv_data
       [
-        CsvData.new(report.csv_columns, report.report_records)
+        CsvData.new(csv_columns, report.report_records)
       ]
     end
 

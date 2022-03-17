@@ -4,6 +4,8 @@ class ApplicationService
   include Memoizable
   include CaptureError::BaseMethods
 
+  class_attribute :logger, instance_writer: false, default: Rails.logger
+
   class Error < StandardError
   end
 
@@ -21,9 +23,9 @@ class ApplicationService
 
     # @param name [Symbol]
     # @param required [Boolean] default false
-    def parameter(name, required: false)
+    def parameter(name, required: false, default: nil)
       name = name.to_sym
-      define_method(name) { @_params[name] }
+      define_method(name) { @_params.key?(name) ? @_params[name] : default }
       define_method("#{name}=") { |value| @_params[name] = value }
       _required_parameters.push(name) if required
     end
