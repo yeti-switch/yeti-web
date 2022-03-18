@@ -30,6 +30,7 @@ ActiveAdmin.register Report::CustomerTrafficScheduler, as: 'CustomerTrafficSched
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :period
       f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }

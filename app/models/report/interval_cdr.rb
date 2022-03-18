@@ -6,11 +6,13 @@
 #
 #  id              :integer(4)       not null, primary key
 #  aggregate_by    :string           not null
+#  completed       :boolean          default(FALSE), not null
 #  date_end        :datetime         not null
 #  date_start      :datetime         not null
 #  filter          :string
-#  group_by        :string
+#  group_by        :string           is an Array
 #  interval_length :integer(4)       not null
+#  send_to         :integer(4)       is an Array
 #  created_at      :datetime         not null
 #  aggregator_id   :integer(4)       not null
 #
@@ -21,6 +23,18 @@
 
 class Report::IntervalCdr < Cdr::Base
   self.table_name = 'reports.cdr_interval_report'
+
+  # *NOTE* Creation from user input should be performed only through Report::IntervalCdrForm
+  # *NOTE* Creation from business logic should be performed only through CreateReport::IntervalCdr
+
+  INTERVALS = {
+    5 => '5 Min',
+    10 => '10 Min',
+    30 => '30 Min',
+    60 => '1 Hour',
+    360 => '6 Hours',
+    1440 => '1 Day'
+  }.freeze
 
   CDR_COLUMNS = %i[
     customer_id
@@ -112,24 +126,14 @@ class Report::IntervalCdr < Cdr::Base
 
   validates :date_start, :date_end, :interval_length, :aggregation_function, :aggregate_by, presence: true
 
+  include GroupReportTools
+  setup_report_with(Report::IntervalData)
+
   def display_name
     id.to_s
   end
 
   def aggregation
     "#{aggregation_function.name}(#{aggregate_by})"
-  end
-
-  include GroupReportTools
-  setup_report_with(Report::IntervalData)
-
-  after_create do
-    execute_sp('SELECT * FROM reports.cdr_interval_report(?)', id)
-  end
-
-  include Hints
-  include CsvReport
-  after_create do
-    Reporter::IntervalCdr.new(self).save!
   end
 end

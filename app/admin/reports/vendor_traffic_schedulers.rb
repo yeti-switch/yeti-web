@@ -30,6 +30,7 @@ ActiveAdmin.register Report::VendorTrafficScheduler, as: 'VendorTrafficScheduler
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :period
       f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }

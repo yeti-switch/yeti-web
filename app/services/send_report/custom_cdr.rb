@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-module Reporter
+module SendReport
   class CustomCdr < Base
+    private
+
     def email_subject
       'Custom CDR report'
     end

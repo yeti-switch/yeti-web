@@ -9,7 +9,7 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
 
   shared_examples :creates_custom_cdr_report do
     it 'creates custom cdr report' do
-      expect(CustomCdrReport::Create).to receive(:call).with(expected_service_params).and_call_original
+      expect(CreateReport::CustomCdr).to receive(:call).with(expected_service_params).and_call_original
       expect {
         subject
         expect(page).to have_flash_message('Custom cdr report was successfully created.', type: :notice)

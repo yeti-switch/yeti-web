@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-module Reporter
+module SendReport
   class CustomerTraffic < Base
+    private
+
     def email_columns
       [:vendor,
        :calls_count,
@@ -62,15 +64,75 @@ module Reporter
       ]
     end
 
+    def csv_columns
+      %i[vendor
+         calls_count
+         success_calls_count
+         short_calls_count
+         calls_duration
+         customer_calls_duration
+         vendor_calls_duration
+         acd
+         asr
+         origination_cost
+         termination_cost
+         profit
+         first_call_at
+         last_call_at]
+    end
+
+    def csv_columns_by_destination
+      %i[
+        destination_prefix
+        country
+        network
+        calls_count
+        success_calls_count
+        short_calls_count
+        calls_duration
+        customer_calls_duration
+        vendor_calls_duration
+        acd
+        asr
+        origination_cost
+        termination_cost
+        profit
+        first_call_at
+        last_call_at
+      ]
+    end
+
+    def csv_columns_full
+      %i[
+        vendor
+        destination_prefix
+        country
+        network
+        calls_count
+        success_calls_count
+        short_calls_count
+        calls_duration
+        customer_calls_duration
+        vendor_calls_duration
+        acd
+        asr
+        origination_cost
+        termination_cost
+        profit
+        first_call_at
+        last_call_at
+      ]
+    end
+
     def email_subject
       'Customer traffic report'
     end
 
     def csv_data
       [
-        CsvData.new(report.csv_columns, report.report_records_by_vendor),
-        CsvData.new(report.csv_columns_by_destination, report.report_records_by_destination),
-        CsvData.new(report.csv_columns_full, report.report_records_full)
+        CsvData.new(csv_columns, report.report_records_by_vendor),
+        CsvData.new(csv_columns_by_destination, report.report_records_by_destination),
+        CsvData.new(csv_columns_full, report.report_records_full)
       ]
     end
 

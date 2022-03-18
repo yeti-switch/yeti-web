@@ -7,10 +7,10 @@ module Jobs
     def execute
       customer_traffic_tasks.each do |task|
         process_task(task) do |time_data|
-          Report::CustomerTraffic.create!(
+          CreateReport::CustomerTraffic.call(
             date_start: time_data.date_from,
             date_end: time_data.date_to,
-            customer_id: task.customer_id,
+            customer: task.customer,
             send_to: task.send_to
           )
         end
@@ -18,7 +18,7 @@ module Jobs
 
       custom_cdr_tasks.each do |task|
         process_task(task) do |time_data|
-          CustomCdrReport::Create.call(
+          CreateReport::CustomCdr.call(
             date_start: time_data.date_from,
             date_end: time_data.date_to,
             customer: task.customer,
@@ -31,12 +31,12 @@ module Jobs
 
       interval_cdr_tasks.each do |task|
         process_task(task) do |time_data|
-          Report::IntervalCdr.create!(
+          CreateReport::IntervalCdr.call(
             date_start: time_data.date_from,
             date_end: time_data.date_to,
             filter: task.filter,
-            group_by_fields: task.group_by, # TODO: rewrite reports to use Arrays for group_by instead varchar
-            aggregator_id: task.aggregator_id,
+            group_by: task.group_by,
+            aggregation_function: task.aggregation_function,
             aggregate_by: task.aggregate_by,
             interval_length: task.interval_length,
             send_to: task.send_to
@@ -46,10 +46,10 @@ module Jobs
 
       vendor_traffic_tasks.each do |task|
         process_task(task) do |time_data|
-          Report::VendorTraffic.create!(
+          CreateReport::VendorTraffic.call(
             date_start: time_data.date_from,
             date_end: time_data.date_to,
-            vendor_id: task.vendor_id,
+            vendor_id: task.vendor,
             send_to: task.send_to
           )
         end
@@ -67,11 +67,11 @@ module Jobs
     end
 
     def customer_traffic_tasks
-      Report::CustomerTrafficScheduler.where('next_run_at<?', time_now)
+      Report::CustomerTrafficScheduler.where('next_run_at<?', time_now).preload(:customer)
     end
 
     def vendor_traffic_tasks
-      Report::VendorTrafficScheduler.where('next_run_at<?', time_now)
+      Report::VendorTrafficScheduler.where('next_run_at<?', time_now).preload(:vendor)
     end
 
     def custom_cdr_tasks
@@ -79,7 +79,7 @@ module Jobs
     end
 
     def interval_cdr_tasks
-      Report::IntervalCdrScheduler.where('next_run_at<?', time_now)
+      Report::IntervalCdrScheduler.where('next_run_at<?', time_now).preload(:aggregation_function)
     end
 
     def time_now

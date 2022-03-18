@@ -27,6 +27,7 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
     div class: :report_sidebar_info do
       attributes_table_for assigns[:vendor_traffic] do
         row :id
+        row :completed
         row :date_start
         row :date_end
         row :vendor
