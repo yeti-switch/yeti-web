@@ -145,7 +145,7 @@ jobs:
           CDR_DB_PORT: 5432
 
   rspec:
-    name: Rspec tests
+    name: Rspec tests ${{ matrix.ci_timezone }}
     runs-on: ubuntu-latest
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     services:
@@ -163,6 +163,7 @@ jobs:
         # set N-1 indexes for parallel jobs
         # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
         ci_node_index: [0, 1, 2, 3, 4, 5]
+        ci_timezone: ["UTC", "Europe/Kiev"]
 
     steps:
       - uses: actions/checkout@v2
@@ -186,6 +187,10 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
+          PGTZ: ${{ matrix.ci_timezone }}
+          TZ: ${{ matrix.ci_timezone }}
+          YETI_TZ: ${{ matrix.ci_timezone }}
+          YETI_PG_TZ: ${{ matrix.ci_timezone }}
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
