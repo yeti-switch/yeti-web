@@ -33,7 +33,8 @@ RUN	sed -Ei "/^#?listen_addresses +=/s/.*/listen_addresses = '*'/"		"$PGCONFIG" 
 	sed -Ei "/^#?ssl +=/s/.*/ssl = off/"					"$PGCONFIG" && \
 	sed -Ei "/^#?autovacuum +=/s/.*/autovacuum = off/"			"$PGCONFIG" && \
 	cat "$PGCONFIG" && \
-	echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/$PGVER/main/pg_hba.conf
+	echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/$PGVER/main/pg_hba.conf && \
+	echo "host all all ::/0 trust" >> /etc/postgresql/$PGVER/main/pg_hba.conf
 
 EXPOSE 5432
 USER postgres:postgres
