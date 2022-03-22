@@ -16,23 +16,30 @@ RSpec.describe Delayed::Job do
     end
 
     let!(:regular_delayed_jobs) do
-      [
-        enqueue_delayed_job(Worker::CaptureErrorJob, { foo: '123' }),
-        enqueue_delayed_job(Worker::CaptureErrorJob, { foo: '124' }),
-        enqueue_delayed_job(Worker::CdrExportJob, 123),
-        enqueue_delayed_job(Worker::CdrExportJob, 124),
-        enqueue_delayed_job(Worker::FillInvoiceJob, 123),
-        enqueue_delayed_job(Worker::FillInvoiceJob, 124),
-        enqueue_delayed_job(Worker::PingCallbackUrlJob, 'example.com', {}),
-        enqueue_delayed_job(Worker::PingCallbackUrlJob, 'test.com', {}),
-        enqueue_delayed_job(Worker::RemoveCdrExportFileJob, 123),
-        enqueue_delayed_job(Worker::RemoveCdrExportFileJob, 124),
-        enqueue_delayed_job(Worker::SendEmailLogJob, 123),
-        enqueue_delayed_job(Worker::SendEmailLogJob, 124)
-      ]
+      active_jobs = with_real_active_job_adapter do
+        [
+          Worker::CdrExportJob.perform_later(123),
+          Worker::CdrExportJob.perform_later(124),
+          Worker::FillInvoiceJob.perform_later(123),
+          Worker::FillInvoiceJob.perform_later(124),
+          Worker::PingCallbackUrlJob.perform_later('example.com', {}),
+          Worker::PingCallbackUrlJob.perform_later('test.com', {}),
+          Worker::RemoveCdrExportFileJob.perform_later(123),
+          Worker::RemoveCdrExportFileJob.perform_later(124),
+          Worker::SendEmailLogJob.perform_later(123),
+          Worker::SendEmailLogJob.perform_later(124),
+          Worker::GenerateReportDataJob.perform_later('QweAsd', 123),
+          Worker::GenerateReportDataJob.perform_later('ZxcUio', 124)
+        ]
+      end
+      delayed_job_ids = active_jobs.map(&:provider_job_id)
+      Delayed::Job.find(*delayed_job_ids)
     end
     let!(:custom_cdr_report_job) do
-      enqueue_delayed_job(Worker::CustomCdrReportJob, 123)
+      active_job = with_real_active_job_adapter do
+        Worker::CustomCdrReportJob.perform_later(123)
+      end
+      Delayed::Job.find(active_job.provider_job_id)
     end
 
     include_examples :includes_delayed_jobs do
@@ -62,7 +69,10 @@ RSpec.describe Delayed::Job do
 
     context 'when 2 Worker::CustomCdrReportJob are enqueued' do
       let!(:old_custom_cdr_report_job) do
-        enqueue_delayed_job(Worker::CustomCdrReportJob, 122)
+        active_job = with_real_active_job_adapter do
+          Worker::CustomCdrReportJob.perform_later(122)
+        end
+        Delayed::Job.find(active_job.provider_job_id)
       end
 
       include_examples :includes_delayed_jobs do
@@ -93,10 +103,16 @@ RSpec.describe Delayed::Job do
 
     context 'when 3 Worker::CustomCdrReportJob are enqueued' do
       let!(:old_custom_cdr_report_job) do
-        enqueue_delayed_job(Worker::CustomCdrReportJob, 122)
+        active_job = with_real_active_job_adapter do
+          Worker::CustomCdrReportJob.perform_later(122)
+        end
+        Delayed::Job.find(active_job.provider_job_id)
       end
       let!(:very_old_custom_cdr_report_job) do
-        enqueue_delayed_job(Worker::CustomCdrReportJob, 121)
+        active_job = with_real_active_job_adapter do
+          Worker::CustomCdrReportJob.perform_later(121)
+        end
+        Delayed::Job.find(active_job.provider_job_id)
       end
 
       include_examples :includes_delayed_jobs do
@@ -132,7 +148,10 @@ RSpec.describe Delayed::Job do
 
   describe 'enqueue' do
     subject do
-      enqueue_delayed_job(active_job_class, *active_job_args)
+      active_job = with_real_active_job_adapter do
+        active_job_class.perform_later(*active_job_args)
+      end
+      Delayed::Job.find(active_job.provider_job_id)
     end
 
     shared_examples :creates_delayed_job do
@@ -152,15 +171,6 @@ RSpec.describe Delayed::Job do
 
       include_examples :creates_delayed_job do
         let(:expected_unique_name) { active_job_class.to_s }
-      end
-    end
-
-    context 'with Worker::CaptureErrorJob' do
-      let(:active_job_class) { Worker::CaptureErrorJob }
-      let(:active_job_args) { [foo: '123'] }
-
-      include_examples :creates_delayed_job do
-        let(:expected_unique_name) { nil }
       end
     end
 

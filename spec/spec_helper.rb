@@ -132,6 +132,7 @@ RSpec.configure do |config|
   config.include Helpers::Chosen, type: :feature
   config.include JRPCMockHelper
   config.include CustomRspecHelper
+  config.include ActiveJob::TestHelper
 
   config.around(:each, freeze_time: proc { |val| val == true || val.is_a?(Time) }) do |example|
     val = example.metadata[:freeze_time]

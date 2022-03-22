@@ -49,4 +49,10 @@ module ApplicationHelper
   def versioning_enabled_for_model?(model)
     YetiConfig.versioning_disable_for_models.exclude?(model.name)
   end
+
+  def short_text(text, max_length:)
+    return text if text.nil? || text.size <= max_length
+
+    "#{text[0..max_length]}..."
+  end
 end
