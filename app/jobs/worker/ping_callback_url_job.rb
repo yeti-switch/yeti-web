@@ -22,7 +22,11 @@ module Worker
       ) do |http|
         http.request(req)
       end
-      raise TryAgainError unless res.code.to_i == 200
+      unless res.code.to_i == 200
+        message = "Response code: #{res.code}\n"
+        message += res.read_body.to_s[0..500] if res.class.body_permitted?
+        raise TryAgainError, message
+      end
     end
   end
 end
