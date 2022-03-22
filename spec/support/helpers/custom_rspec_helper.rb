@@ -7,17 +7,13 @@ module CustomRspecHelper
     nil
   end
 
-  def enqueue_delayed_job(active_job_class, *arguments)
-    old_test_adapter = active_job_class._test_adapter
-    old_adapter = active_job_class.queue_adapter
-    active_job_class._test_adapter = nil
-    active_job_class.queue_adapter = :delayed_job
+  # @see ActiveJob::TestHelper
+  def with_real_active_job_adapter
+    queue_adapter_changed_jobs.each(&:disable_test_adapter)
     begin
-      active_job_class.perform_later(*arguments)
-      Delayed::Job.last!
+      yield
     ensure
-      active_job_class._test_adapter = old_test_adapter
-      active_job_class.queue_adapter = old_adapter
+      queue_adapter_changed_jobs.each { |klass| klass.enable_test_adapter(queue_adapter_for_test) }
     end
   end
 end
