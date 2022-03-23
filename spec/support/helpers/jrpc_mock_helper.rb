@@ -50,12 +50,9 @@ module JRPCMockHelper
     jrpc_tcp_stub
   end
 
-  def stub_jrpc_connect_error(uri)
-    error_class = JRPC::ConnectionError
-    error_msg = "can't connect to #{uri}"
+  def stub_jrpc_connect_error(uri, error_class: JRPC::ConnectionError, error_msg: nil)
+    error_msg ||= "can't connect to #{uri}"
     options = NodeApi.default_options
-    jrpc_tcp_stub = instance_double(::JRPC::TcpClient, closed?: false, close: nil)
     expect(::JRPC::TcpClient).to receive(:new).with(uri, options).and_raise(error_class, error_msg)
-    jrpc_tcp_stub
   end
 end

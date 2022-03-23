@@ -31,17 +31,24 @@ module Jobs
       process_event(ev)
       ev.destroy!
       true
+    rescue NodeApi::ConnectionError => e
+      handle_event_error(event: ev, exception: e)
+      false
     rescue StandardError => e
-      logger.warn { "Processing event ##{ev.id} was failed" }
-      logger.warn { "<#{e.class}>: #{e.message}" }
-      logger.warn { e.backtrace.join("\n") }
+      handle_event_error(event: ev, exception: e)
       tags = { job_class: self.class.name }
       extra = { event_id: ev.id, command: ev.command, node_id: ev.node_id }
       CaptureError.capture(e, tags: tags, extra: extra)
-      ev.retries += 1
-      ev.last_error = e.message
-      ev.save!
       false
+    end
+
+    def handle_event_error(event:, exception:)
+      logger.warn { "Processing event ##{event.id} was failed" }
+      logger.warn { "<#{exception.class}>: #{exception.message}\n#{exception.backtrace&.join("\n")}" }
+      event.update!(
+        retries: event.retries + 1,
+        last_error: exception.message
+      )
     end
   end
 end
