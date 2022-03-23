@@ -107,12 +107,16 @@ RSpec.describe GenerateReportData::VendorTraffic do
 
     it 'creates correct email logs' do
       expect { subject }.to change { ::Log::EmailLog.count }.by(2)
-      expect(
-        ::Log::EmailLog.where(contact_id: contacts.first.id, smtp_connection_id: contacts.first.smtp_connection.id).count
-      ).to eq 1
-      expect(
-        ::Log::EmailLog.where(contact_id: contacts.second.id, smtp_connection_id: contacts.first.smtp_connection.id).count
-      ).to eq 1
+      email_log_1 = ::Log::EmailLog.find_by!(contact_id: contacts.first.id)
+      expect(email_log_1).to have_attributes(
+                               smtp_connection_id: contacts.first.smtp_connection.id,
+                               msg: include('2019-02-15 00:00:00')
+                             )
+      email_log_2 = ::Log::EmailLog.find_by!(contact_id: contacts.second.id)
+      expect(email_log_2).to have_attributes(
+                               smtp_connection_id: contacts.second.smtp_connection.id,
+                               msg: include('2019-02-15 00:00:00')
+                             )
     end
   end
 

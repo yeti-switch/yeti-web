@@ -111,17 +111,18 @@ module SendReport
     end
 
     def html_template_name
-      File.join(template_path, 'base.html.erb')
+      'base'
     end
 
     def generate_mail_body(data)
       return if skip_mail_body
 
-      path_set = ActionView::PathSet.new([template_path])
-      lookup = ActionView::LookupContext.new(path_set)
-      view = ActionView::Base.new(lookup, {}, nil)
+      view = ActionView::Base
+             .with_empty_template_cache
+             .with_view_paths([template_path], {})
+
       view.render(
-        file: html_template_name,
+        template: html_template_name,
         layout: false,
         locals: {
           data: data,
