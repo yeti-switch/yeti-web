@@ -15,14 +15,48 @@ RSpec.describe Jobs::EventProcessor, '#call' do
 
   context 'when event with only method' do
     let!(:node) { create(:node) }
-    before do
-      create(:event, node: node, command: 'some.test.method.name')
+    let!(:event) do
+      create(:event, node: node, command: 'some.test.method.name', retries: 0)
+    end
+    let!(:stub_node_request) do
       stub_jrpc_request(node.rpc_endpoint, 'yeti.some.test.method.name', [])
         .and_return(nil)
     end
 
     it 'expects to delete success events' do
       expect { subject }.to change { Event.count }.from(1).to(0)
+    end
+
+    context 'when connection to node failed' do
+      let!(:stub_node_request) do
+        stub_jrpc_connect_error(node.rpc_endpoint)
+      end
+
+      it 'expects to delete success events' do
+        expect { subject }.not_to change { Event.count }.from(1)
+        expect(event.reload).to have_attributes(
+                                  retries: 1,
+                                  last_error: be_present
+                                )
+      end
+
+      include_examples :does_not_capture_error
+    end
+
+    context 'when connection to node failed' do
+      let!(:stub_node_request) do
+        stub_jrpc_connect_error(node.rpc_endpoint, error_class: StandardError)
+      end
+
+      it 'expects to delete success events' do
+        expect { subject }.not_to change { Event.count }.from(1)
+        expect(event.reload).to have_attributes(
+                                  retries: 1,
+                                  last_error: be_present
+                                )
+      end
+
+      include_examples :captures_error
     end
   end
 
