@@ -5,10 +5,14 @@ class BackgroundTaskDecorator < Draper::Decorator
   decorates BackgroundTask
 
   def name
+    return model.payload_object.class.name unless model.payload_object.respond_to?(:job_data)
+
     model.payload_object.job_data['job_class']
   end
 
   def args
+    return '-' unless model.payload_object.respond_to?(:job_data)
+
     model.payload_object.job_data['arguments'].join("\n,")
   end
 

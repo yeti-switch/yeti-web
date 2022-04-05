@@ -71,4 +71,19 @@ RSpec.describe 'Show System Background Task', type: :feature do
 
     include_examples :responds_successfully
   end
+
+  context 'with Importing::ImportingDelayedJob' do
+    let!(:background_task) do
+      allow(GuiConfig).to receive(:import_max_threads).and_return(1)
+      Importing::ImportingDelayedJob.create_jobs(Importing::Rateplan, controller_info: { ip: '127.0.0.1' })
+      BackgroundTask.last!
+    end
+
+    it 'responds successfully' do
+      subject
+      expect(page).to have_attribute_row('ID', exact_text: background_task.id)
+      expect(page).to have_attribute_row('name', exact_text: 'Importing::ImportingDelayedJob')
+      expect(page).to have_attribute_row('args', exact_text: '-')
+    end
+  end
 end

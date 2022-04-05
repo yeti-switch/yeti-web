@@ -7,6 +7,12 @@ RSpec.describe 'Index System Background Tasks', type: :feature do
 
   include_context :login_as_admin
 
+  let!(:importing_task) do
+    allow(GuiConfig).to receive(:import_max_threads).and_return(1)
+    Importing::ImportingDelayedJob.create_jobs(Importing::Rateplan, controller_info: { ip: '127.0.0.1' })
+    BackgroundTask.last!
+  end
+
   let!(:background_tasks) do
     active_jobs = with_real_active_job_adapter do
       [
@@ -28,5 +34,6 @@ RSpec.describe 'Index System Background Tasks', type: :feature do
     background_tasks.each do |background_task|
       expect(page).to have_css('.resource_id_link', text: background_task.id)
     end
+    expect(page).to have_css('.resource_id_link', text: importing_task.id)
   end
 end
