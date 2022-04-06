@@ -5,30 +5,6 @@ on:
     - cron: '6 9 * * SUN'
 
 jobs:
-  deb10-build-image:
-    name: Build deb10 images for CI
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push Buster build image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ci/buster-build.Dockerfile
-          push: true
-          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:buster
-
   deb11-build-image:
     name: Build deb11 images for CI
     runs-on: ubuntu-latest
