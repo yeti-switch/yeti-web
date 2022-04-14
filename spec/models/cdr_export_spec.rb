@@ -58,6 +58,7 @@ RSpec.describe CdrExport do
       let(:create_params) do
         super().merge filters: {
           time_start_lteq: 15.days.ago.utc.iso8601(3),
+          time_start_lt: 15.days.ago.utc.iso8601(3),
           time_start_gteq: 10.days.ago.utc.iso8601(3),
           customer_id_eq: 1234,
           customer_external_id_eq: 1235,
@@ -136,7 +137,7 @@ RSpec.describe CdrExport do
 
       include_examples :does_not_create_record, errors: {
         fields: "can't be blank",
-        filters: ["can't be blank", 'requires time_start_lteq & time_start_gteq']
+        filters: ["can't be blank", 'requires time_start_gteq', 'requires time_start_lteq']
       }
     end
   end
@@ -145,6 +146,14 @@ RSpec.describe CdrExport do
     subject do
       cdr_export.export_sql
     end
+
+    shared_examples :returns_correct_sql do
+      it 'SQL should be valid' do
+        expect(subject).to eq(expected_sql)
+        expect { Cdr::Cdr.connection.execute(subject) }.not_to raise_error
+      end
+    end
+
     let(:cdr_export) do
       FactoryBot.create(:cdr_export, fields: fields, filters: filters)
     end
@@ -154,37 +163,29 @@ RSpec.describe CdrExport do
     let(:filters) do
       {
         time_start_gteq: '2018-01-01',
-        time_start_lteq: '2018-03-01',
-        success_eq: 'true',
-        failed_resource_type_id_eq: '3',
-        src_prefix_routing_contains: '123123'
+        time_start_lteq: '2018-03-01'
       }
     end
-
-    it 'SQL should be valid' do
-      sql = [
+    let(:expected_sql) do
+      [
         'SELECT success AS "Success", cdr.cdr.id AS "ID"',
         'FROM "cdr"."cdr"',
         'WHERE',
         "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
         'AND',
-        "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
-        'AND',
-        '"cdr"."cdr"."success" = TRUE',
-        'AND',
-        '"cdr"."cdr"."failed_resource_type_id" = 3',
-        'AND',
-        "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%')",
+        "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
         'ORDER BY time_start desc'
-      ]
-      expect(subject).to eq(sql.join(' '))
+      ].join(' ')
+    end
+
+    context 'with only required filters' do
+      include_examples :returns_correct_sql
     end
 
     context 'when added virtual attributes to export cdr' do
       let(:fields) { %w[src_country_name dst_country_name src_network_name dst_network_name] }
-
-      it 'SQL should be valid' do
-        sql = [
+      let(:expected_sql) do
+        [
           'SELECT',
           'src_c.name AS "Src Country Name",',
           'dst_c.name AS "Dst Country Name",',
@@ -198,17 +199,12 @@ RSpec.describe CdrExport do
           'WHERE',
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',
-          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
-          'AND',
-          '"cdr"."cdr"."success" = TRUE',
-          'AND',
-          '"cdr"."cdr"."failed_resource_type_id" = 3',
-          'AND',
-          "\"cdr\".\"cdr\".\"src_prefix_routing\" ILIKE '%123123%')",
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
           'ORDER BY time_start desc'
-        ]
-        expect(subject).to eq(sql.join(' '))
+        ].join(' ')
       end
+
+      include_examples :returns_correct_sql
     end
 
     context 'when filled all filters' do
@@ -225,9 +221,8 @@ RSpec.describe CdrExport do
           dst_prefix_out_contains: '333221'
         }
       end
-
-      it 'SQL should be valid' do
-        sql = [
+      let(:expected_sql) do
+        [
           'SELECT success AS "Success", cdr.cdr.id AS "ID"',
           'FROM "cdr"."cdr"',
           'WHERE',
@@ -249,9 +244,10 @@ RSpec.describe CdrExport do
           'AND',
           "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
           'ORDER BY time_start desc'
-        ]
-        expect(subject).to eq(sql.join(' '))
+        ].join(' ')
       end
+
+      include_examples :returns_correct_sql
     end
 
     context 'when filled some filters' do
@@ -269,9 +265,8 @@ RSpec.describe CdrExport do
         }
       end
       let(:country) { System::Country.take! }
-
-      it 'SQL should be valid' do
-        sql = [
+      let(:expected_sql) do
+        [
           'SELECT success AS "Success", cdr.cdr.id AS "ID"',
           'FROM "cdr"."cdr"',
           'WHERE',
@@ -293,15 +288,15 @@ RSpec.describe CdrExport do
           'AND',
           "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
           'ORDER BY time_start desc'
-        ]
-        expect(subject).to eq(sql.join(' '))
+        ].join(' ')
       end
+
+      include_examples :returns_correct_sql
 
       context 'with routing_tag_ids_empty false' do
         let(:filters) { super().merge({ routing_tag_ids_empty: false }) }
-
-        it 'SQL should be valid' do
-          sql = [
+        let(:expected_sql) do
+          [
             'SELECT success AS "Success", cdr.cdr.id AS "ID"',
             'FROM "cdr"."cdr"',
             'WHERE',
@@ -325,16 +320,16 @@ RSpec.describe CdrExport do
             'AND',
             "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
             'ORDER BY time_start desc'
-          ]
-          expect(subject).to eq(sql.join(' '))
+          ].join(' ')
         end
+
+        include_examples :returns_correct_sql
       end
 
       context 'with routing_tag_ids_empty true' do
         let(:filters) { super().merge({ routing_tag_ids_empty: true }) }
-
-        it 'SQL should be valid' do
-          sql = [
+        let(:expected_sql) do
+          [
             'SELECT success AS "Success", cdr.cdr.id AS "ID"',
             'FROM "cdr"."cdr"',
             'WHERE',
@@ -358,10 +353,33 @@ RSpec.describe CdrExport do
             'AND',
             "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
             'ORDER BY time_start desc'
-          ]
-          expect(subject).to eq(sql.join(' '))
+          ].join(' ')
         end
+
+        include_examples :returns_correct_sql
       end
+    end
+
+    context 'with time_start_lt' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01 00:00:00',
+          time_start_lt: '2018-03-01 00:00:00'
+        }
+      end
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" < '2018-03-01 00:00:00')",
+          'ORDER BY time_start desc'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
     end
   end
 end

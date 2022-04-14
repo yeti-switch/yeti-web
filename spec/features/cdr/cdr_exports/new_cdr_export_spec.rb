@@ -31,25 +31,23 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(page).to have_current_path cdr_export_path(cdr_export)
 
       expect(cdr_export).to have_attributes(
-        callback_url: nil,
+        callback_url: '',
         fields: %w[id success],
         status: 'Pending',
-        filters: CdrExport::FiltersModel.new(
-          'time_start_gteq' => '2018-01-01',
-          'time_start_lteq' => '2018-03-01',
-          'customer_acc_id_eq' => account.id.to_s,
-          'src_prefix_in_contains' => '',
-          'src_prefix_routing_contains' => '',
-          'src_prefix_out_contains' => '',
-          'dst_prefix_in_contains' => '',
-          'dst_prefix_routing_contains' => '',
-          'dst_prefix_out_contains' => '',
-          'src_country_id_eq' => '',
-          'dst_country_id_eq' => '',
-          'routing_tag_ids_include' => '',
-          'routing_tag_ids_exclude' => ''
-        )
+        filters: a_kind_of(CdrExport::FiltersModel)
       )
+      filters = cdr_export.filters.as_json.symbolize_keys
+      expect(filters).to match(
+          time_start_gteq: '2018-01-01T00:00:00.000Z',
+          time_start_lteq: '2018-03-01T00:00:00.000Z',
+          customer_acc_id_eq: account.id,
+          src_prefix_in_contains: '',
+          src_prefix_routing_contains: '',
+          src_prefix_out_contains: '',
+          dst_prefix_in_contains: '',
+          dst_prefix_routing_contains: '',
+          dst_prefix_out_contains: ''
+        )
     end
   end
 
@@ -71,25 +69,23 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(page).to have_current_path cdr_export_path(cdr_export)
 
       expect(cdr_export).to have_attributes(
-        callback_url: nil,
+        callback_url: '',
         fields: %w[id customer_id success],
         status: 'Pending',
-        filters: CdrExport::FiltersModel.new(
-          'time_start_gteq' => '2018-01-01',
-          'time_start_lteq' => '2018-03-01',
-          'customer_acc_id_eq' => account.id.to_s,
-          'src_prefix_in_contains' => '',
-          'src_prefix_routing_contains' => '',
-          'src_prefix_out_contains' => '',
-          'dst_prefix_in_contains' => '',
-          'dst_prefix_routing_contains' => '',
-          'dst_prefix_out_contains' => '',
-          'src_country_id_eq' => '',
-          'dst_country_id_eq' => '',
-          'routing_tag_ids_include' => '',
-          'routing_tag_ids_exclude' => ''
-        )
+        filters: a_kind_of(CdrExport::FiltersModel)
       )
+      filters = cdr_export.filters.as_json.symbolize_keys
+      expect(filters).to match(
+          time_start_gteq: '2018-01-01T00:00:00.000Z',
+          time_start_lteq: '2018-03-01T00:00:00.000Z',
+          customer_acc_id_eq: account.id,
+          src_prefix_in_contains: '',
+          src_prefix_routing_contains: '',
+          src_prefix_out_contains: '',
+          dst_prefix_in_contains: '',
+          dst_prefix_routing_contains: '',
+          dst_prefix_out_contains: ''
+        )
     end
   end
 
@@ -139,6 +135,7 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in_chosen 'Term gw id eq', with: "#{gateway2.name} | #{gateway2.id}"
         fill_in 'Time start gteq', with: '2018-01-01'
         fill_in 'Time start lteq', with: '2018-03-01'
+        fill_in 'Time start lt', with: '2018-03-01', exact: true
 
         # all allowed filters must be filled in this test.
         CdrExport::FiltersModel.attribute_types.each_key do |filter_key|
@@ -160,7 +157,7 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(page).to have_current_path cdr_export_path(cdr_export)
 
       expect(cdr_export).to have_attributes(
-                              callback_url: nil,
+                              callback_url: '',
                               fields: %w[id success],
                               status: 'Pending',
                               filters: a_kind_of(CdrExport::FiltersModel)
@@ -169,6 +166,7 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(filters).to match(
                            time_start_gteq: '2018-01-01T00:00:00.000Z',
                            time_start_lteq: '2018-03-01T00:00:00.000Z',
+                           time_start_lt: '2018-03-01T00:00:00.000Z',
                            customer_external_id_eq: 1231,
                            customer_id_eq: customer.id,
                            customer_acc_external_id_eq: 1232,
@@ -201,6 +199,43 @@ RSpec.describe 'Create new CDR export', js: true do
     end
   end
 
+  context 'with filter time_start_lt' do
+    before do
+      visit new_cdr_export_path
+
+      fill_in_chosen 'Fields', with: 'success', multiple: true
+      fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
+      fill_in 'Time start gteq', with: '2018-01-01'
+      fill_in 'Time start lt', with: '2018-03-01', exact: true
+    end
+
+    it 'cdr export should be created' do
+      subject
+      expect(page).to have_text('Cdr export was successfully created.')
+
+      cdr_export = CdrExport.last!
+      expect(page).to have_current_path cdr_export_path(cdr_export)
+
+      expect(cdr_export).to have_attributes(
+                              callback_url: '',
+                              fields: %w[id success],
+                              status: 'Pending',
+                              filters: a_kind_of(CdrExport::FiltersModel)
+                            )
+      filters = cdr_export.filters.as_json.symbolize_keys
+      expect(filters).to match(
+                           time_start_gteq: '2018-01-01T00:00:00.000Z',
+                           time_start_lt: '2018-03-01T00:00:00.000Z',
+                           src_prefix_in_contains: '',
+                           src_prefix_routing_contains: '',
+                           src_prefix_out_contains: '',
+                           dst_prefix_in_contains: '',
+                           dst_prefix_routing_contains: '',
+                           dst_prefix_out_contains: ''
+                         )
+    end
+  end
+
   context 'with incorrect filters' do
     before do
       visit new_cdr_export_path
@@ -211,7 +246,27 @@ RSpec.describe 'Create new CDR export', js: true do
 
     it 'should rise semantic error' do
       subject
-      expect(page).to have_semantic_error('Filters can\'t be blank and requires time_start_lteq & time_start_gteq')
+      expect(page).to have_semantic_errors(count: 1)
+      expect(page).to have_semantic_error(
+                        'Filters can\'t be blank, requires time_start_gteq, and requires time_start_lteq'
+                      )
+    end
+  end
+
+  context 'without fields' do
+    before do
+      visit new_cdr_export_path
+
+      fill_in 'Time start gteq', with: '2018-01-01'
+      fill_in 'Time start lteq', with: '2018-03-01', exact: true
+    end
+
+    it 'should rise semantic error' do
+      subject
+      expect(page).to have_semantic_errors(count: 1)
+      expect(page).to have_semantic_error(
+                        'Fields can\'t be blank'
+                      )
     end
   end
 end
