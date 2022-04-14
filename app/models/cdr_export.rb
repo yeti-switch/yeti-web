@@ -22,6 +22,7 @@ class CdrExport < ApplicationRecord
   class FiltersModel < JsonAttributeModel
     attribute :time_start_gteq, :db_datetime
     attribute :time_start_lteq, :db_datetime
+    attribute :time_start_lt, :db_datetime
     attribute :customer_id_eq, :integer
     attribute :customer_external_id_eq, :integer
     attribute :customer_acc_id_eq, :integer
@@ -65,7 +66,7 @@ class CdrExport < ApplicationRecord
 
   # need for activeadmin form
   attr_accessor :customer_acc_id_eq,
-                :is_last_cdr_eq, :time_start_gteq, :time_start_lteq
+                :is_last_cdr_eq, :time_start_gteq, :time_start_lteq, :time_start_lt
 
   json_attribute :filters, class_name: 'CdrExport::FiltersModel'
 
@@ -76,8 +77,12 @@ class CdrExport < ApplicationRecord
       errors.add(:filters, message)
     end
 
-    if filters.time_start_gteq.nil? || filters.time_start_lteq.nil?
-      errors.add(:filters, 'requires time_start_lteq & time_start_gteq')
+    if filters.time_start_gteq.nil?
+      errors.add(:filters, 'requires time_start_gteq')
+    end
+
+    if filters.time_start_lt.nil? && filters.time_start_lteq.nil?
+      errors.add(:filters, 'requires time_start_lteq')
     end
   end
   validate do

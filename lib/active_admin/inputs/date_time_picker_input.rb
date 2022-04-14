@@ -6,9 +6,9 @@ module ActiveAdmin
       val = object.public_send(input_name || method)
       if val.blank?
         val
-      elsif column.type == :date
+      elsif column&.type == :date || val.is_a?(Date)
         val
-      elsif column.type == :string
+      elsif column&.type == :string || val.is_a?(String)
         begin
           DateTime.parse(val).strftime(format)
         rescue StandardError

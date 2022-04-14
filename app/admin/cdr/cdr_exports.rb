@@ -97,7 +97,8 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     end
   end
 
-  permit_params filters: CdrExport::FiltersModel.attribute_types.keys.map(&:to_sym),
+  permit_params :callback_url,
+                filters: CdrExport::FiltersModel.attribute_types.keys.map(&:to_sym),
                 fields: []
 
   form do |f|
@@ -118,7 +119,8 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       boolean_options = [['Any', nil], ['Yes', true], ['No', false]]
 
       ff.input :time_start_gteq, as: :date_time_picker, required: true
-      ff.input :time_start_lteq, as: :date_time_picker, required: true
+      ff.input :time_start_lteq, as: :date_time_picker, required: false
+      ff.input :time_start_lt, as: :date_time_picker, required: false
 
       ff.contractor_input :customer_id_eq,
                           label: 'Customer id eq',

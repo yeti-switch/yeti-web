@@ -24,8 +24,9 @@ RSpec.resource 'Cdr Exports' do
     let(:fields) { %w[id success] }
     let(:filters) do
       {
-        time_start_gteq: '2018-01-01',
-        time_start_lteq: '2018-01-02',
+        time_start_gteq: '2018-01-01 00:00:00',
+        time_start_lteq: '2018-01-01 23:59:59.999999',
+        time_start_lt: '2018-01-02 00:00:00',
         customer_id_eq: 1234,
         customer_external_id_eq: 1235,
         customer_acc_id_eq: 1236,

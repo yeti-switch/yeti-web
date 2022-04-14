@@ -152,6 +152,26 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
       end
     end
 
+    context 'with time_start_lt' do
+      let(:json_api_request_attributes) do
+        super().merge filters: {
+          time_start_gteq: '2018-01-01T00:00:00.000Z',
+          time_start_lt: '2018-01-02T00:00:00.000Z'
+        }
+      end
+
+      include_examples :creates_cdr_export
+      include_examples :returns_json_api_record, relationships: [], status: 201 do
+        let(:json_api_record_id) { last_record.id.to_s }
+        let(:json_api_record_attributes) do
+          json_api_request_attributes.merge 'callback-url': nil,
+                                            'created-at': be_present,
+                                            'export-type': 'Base',
+                                            status: 'Pending'
+        end
+      end
+    end
+
     context 'with all allowed filters' do
       let(:json_api_request_attributes) do
         super().merge filters: {
