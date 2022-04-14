@@ -199,12 +199,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     end
     _scope
   }
-  filter :time_start_gteq, apply: lambda { |records, values, _options|
-    records.where('time_start >= ?', values[0])
-  }
-  filter :time_start_lteq, apply: lambda { |records, values, _options|
-    records.where('time_start <= ?', values[0])
-  }
   filter :customer_acc_external_id_eq, apply: lambda { |records, values, _options|
     records.where(customer_acc_external_id: values)
   }
