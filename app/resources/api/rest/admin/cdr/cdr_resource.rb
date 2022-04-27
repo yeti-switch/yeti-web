@@ -66,30 +66,16 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :src_name_out,
              :diversion_in,
              :diversion_out,
-             :lega_rx_payloads,
-             :lega_tx_payloads,
-             :legb_rx_payloads,
-             :legb_tx_payloads,
              :legb_disconnect_code,
              :legb_disconnect_reason,
              :dump_level_id,
              :auth_orig_ip,
              :auth_orig_port,
-             :lega_rx_bytes,
-             :lega_tx_bytes,
-             :legb_rx_bytes,
-             :legb_tx_bytes,
              :global_tag,
              :src_network_id,
              :src_country_id,
              :dst_country_id,
              :dst_network_id,
-             :lega_rx_decode_errs,
-             :lega_rx_no_buf_errs,
-             :lega_rx_parse_errs,
-             :legb_rx_decode_errs,
-             :legb_rx_no_buf_errs,
-             :legb_rx_parse_errs,
              :src_prefix_routing,
              :dst_prefix_routing,
              :routing_delay,
@@ -285,30 +271,16 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :src_name_out, type: :string
   ransack_filter :diversion_in, type: :string
   ransack_filter :diversion_out, type: :string
-  ransack_filter :lega_rx_payloads, type: :string
-  ransack_filter :lega_tx_payloads, type: :string
-  ransack_filter :legb_rx_payloads, type: :string
-  ransack_filter :legb_tx_payloads, type: :string
   ransack_filter :legb_disconnect_code, type: :number
   ransack_filter :legb_disconnect_reason, type: :string
   ransack_filter :dump_level_id, type: :number
   ransack_filter :auth_orig_ip, type: :inet
   ransack_filter :auth_orig_port, type: :number
-  ransack_filter :lega_rx_bytes, type: :number
-  ransack_filter :lega_tx_bytes, type: :number
-  ransack_filter :legb_rx_bytes, type: :number
-  ransack_filter :legb_tx_bytes, type: :number
   ransack_filter :global_tag, type: :string
   ransack_filter :src_country_id, type: :number
   ransack_filter :src_network_id, type: :number
   ransack_filter :dst_country_id, type: :number
   ransack_filter :dst_network_id, type: :number
-  ransack_filter :lega_rx_decode_errs, type: :number
-  ransack_filter :lega_rx_no_buf_errs, type: :number
-  ransack_filter :lega_rx_parse_errs, type: :number
-  ransack_filter :legb_rx_decode_errs, type: :number
-  ransack_filter :legb_rx_no_buf_errs, type: :number
-  ransack_filter :legb_rx_parse_errs, type: :number
   ransack_filter :src_prefix_routing, type: :string
   ransack_filter :dst_prefix_routing, type: :string
   ransack_filter :routing_delay, type: :number

@@ -268,28 +268,14 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       it_behaves_like :jsonapi_filters_by_string_field, :src_name_out
       it_behaves_like :jsonapi_filters_by_string_field, :diversion_in
       it_behaves_like :jsonapi_filters_by_string_field, :diversion_out
-      it_behaves_like :jsonapi_filters_by_string_field, :lega_rx_payloads
-      it_behaves_like :jsonapi_filters_by_string_field, :lega_tx_payloads
-      it_behaves_like :jsonapi_filters_by_string_field, :legb_rx_payloads
-      it_behaves_like :jsonapi_filters_by_string_field, :legb_tx_payloads
       it_behaves_like :jsonapi_filters_by_number_field, :legb_disconnect_code
       it_behaves_like :jsonapi_filters_by_string_field, :legb_disconnect_reason
       it_behaves_like :jsonapi_filters_by_number_field, :dump_level_id
       it_behaves_like :jsonapi_filters_by_inet_field, :auth_orig_ip
       it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_port
-      it_behaves_like :jsonapi_filters_by_number_field, :lega_rx_bytes
-      it_behaves_like :jsonapi_filters_by_number_field, :lega_tx_bytes
-      it_behaves_like :jsonapi_filters_by_number_field, :legb_rx_bytes
-      it_behaves_like :jsonapi_filters_by_number_field, :legb_tx_bytes
       it_behaves_like :jsonapi_filters_by_string_field, :global_tag
       it_behaves_like :jsonapi_filters_by_number_field, :dst_country_id
       it_behaves_like :jsonapi_filters_by_number_field, :dst_network_id
-      it_behaves_like :jsonapi_filters_by_number_field, :lega_rx_decode_errs
-      it_behaves_like :jsonapi_filters_by_number_field, :lega_rx_no_buf_errs
-      it_behaves_like :jsonapi_filters_by_number_field, :lega_rx_parse_errs
-      it_behaves_like :jsonapi_filters_by_number_field, :legb_rx_decode_errs
-      it_behaves_like :jsonapi_filters_by_number_field, :legb_rx_no_buf_errs
-      it_behaves_like :jsonapi_filters_by_number_field, :legb_rx_parse_errs
       it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_routing
       it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_routing
       it_behaves_like :jsonapi_filters_by_number_field, :routing_delay
@@ -399,16 +385,9 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
           'local-tag': cdr.local_tag,
           'lega-disconnect-code': cdr.lega_disconnect_code,
           'lega-disconnect-reason': cdr.lega_disconnect_reason,
-          'lega-rx-payloads': cdr.lega_rx_payloads,
-          'lega-tx-payloads': cdr.lega_tx_payloads,
           'auth-orig-transport-protocol-id': cdr.auth_orig_transport_protocol_id,
           'auth-orig-ip': cdr.auth_orig_ip,
           'auth-orig-port': cdr.auth_orig_port,
-          'lega-rx-bytes': cdr.lega_rx_bytes,
-          'lega-tx-bytes': cdr.lega_tx_bytes,
-          'lega-rx-decode-errs': cdr.lega_rx_decode_errs,
-          'lega-rx-no-buf-errs': cdr.lega_rx_no_buf_errs,
-          'lega-rx-parse-errs': cdr.lega_rx_parse_errs,
           'src-prefix-routing': cdr.src_prefix_routing,
           'dst-prefix-routing': cdr.dst_prefix_routing,
           'destination-prefix': cdr.destination_prefix

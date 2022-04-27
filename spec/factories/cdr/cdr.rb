@@ -25,15 +25,8 @@ FactoryBot.define do
     local_tag                    { 'EU' }
     lega_disconnect_code         { 200 }
     lega_disconnect_reason       { 201 }
-    lega_rx_payloads             { 'LegA RX Payloads' }
-    lega_tx_payloads             { 'LegA TX Payloads' }
     auth_orig_ip                 { '127.0.0.1' }
     auth_orig_port               { 8080 }
-    lega_rx_bytes                { 256 }
-    lega_tx_bytes                { 1024 }
-    lega_rx_decode_errs          { 0 }
-    lega_rx_no_buf_errs          { 0 }
-    lega_rx_parse_errs           { 0 }
     src_prefix_routing           { 'SRC Prefix Routing' }
     dst_prefix_routing           { 'DST Prefix Routing' }
     destination_prefix           { 'Destination Prefix' }

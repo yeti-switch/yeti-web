@@ -28,16 +28,9 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :local_tag,
              :lega_disconnect_code,
              :lega_disconnect_reason,
-             :lega_rx_payloads,
-             :lega_tx_payloads,
              :auth_orig_transport_protocol_id,
              :auth_orig_ip,
              :auth_orig_port,
-             :lega_rx_bytes,
-             :lega_tx_bytes,
-             :lega_rx_decode_errs,
-             :lega_rx_no_buf_errs,
-             :lega_rx_parse_errs,
              :src_prefix_routing,
              :dst_prefix_routing,
              :destination_prefix
@@ -98,30 +91,16 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   ransack_filter :src_name_out, type: :string
   ransack_filter :diversion_in, type: :string
   ransack_filter :diversion_out, type: :string
-  ransack_filter :lega_rx_payloads, type: :string
-  ransack_filter :lega_tx_payloads, type: :string
-  ransack_filter :legb_rx_payloads, type: :string
-  ransack_filter :legb_tx_payloads, type: :string
   ransack_filter :legb_disconnect_code, type: :number
   ransack_filter :legb_disconnect_reason, type: :string
   ransack_filter :dump_level_id, type: :number
   ransack_filter :auth_orig_ip, type: :inet
   ransack_filter :auth_orig_port, type: :number
-  ransack_filter :lega_rx_bytes, type: :number
-  ransack_filter :lega_tx_bytes, type: :number
-  ransack_filter :legb_rx_bytes, type: :number
-  ransack_filter :legb_tx_bytes, type: :number
   ransack_filter :global_tag, type: :string
   ransack_filter :src_country_id, type: :number
   ransack_filter :src_network_id, type: :number
   ransack_filter :dst_country_id, type: :number
   ransack_filter :dst_network_id, type: :number
-  ransack_filter :lega_rx_decode_errs, type: :number
-  ransack_filter :lega_rx_no_buf_errs, type: :number
-  ransack_filter :lega_rx_parse_errs, type: :number
-  ransack_filter :legb_rx_decode_errs, type: :number
-  ransack_filter :legb_rx_no_buf_errs, type: :number
-  ransack_filter :legb_rx_parse_errs, type: :number
   ransack_filter :src_prefix_routing, type: :string
   ransack_filter :dst_prefix_routing, type: :string
   ransack_filter :routing_delay, type: :number
