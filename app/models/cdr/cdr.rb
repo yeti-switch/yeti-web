@@ -239,7 +239,6 @@ class Cdr::Cdr < Cdr::Base
   scope :short_calls, -> { where('success AND duration<=?', GuiConfig.short_call_length) }
   scope :successful_calls, -> { where('success') }
   scope :rerouted_calls, -> { where('(NOT is_last_cdr) OR routing_attempt>1') }
-  scope :no_rtp, -> { where('success AND (lega_tx_bytes=0 OR lega_rx_bytes=0 OR legb_tx_bytes=0 OR legb_rx_bytes=0)') }
   scope :not_authorized, -> { where('customer_auth_id is null') }
   scope :bad_routing, -> { where('customer_auth_id is not null AND disconnect_initiator_id=0') }
   scope :with_trace, -> { where('dump_level_id > 0') }

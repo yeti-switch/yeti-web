@@ -48,7 +48,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :short_calls, show_count: false
   scope :rerouted_calls, show_count: false
   scope :with_trace, show_count: false
-  scope :no_rtp, show_count: false
   scope :not_authorized, show_count: false
   scope :bad_routing, show_count: false
 
@@ -380,22 +379,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           column :p_charge_info_in
 
-          column :lega_rx_payloads
-          column :lega_tx_payloads
-          column :legb_rx_payloads
-          column :legb_tx_payloads
-
-          column :lega_rx_bytes
-          column :lega_tx_bytes
-          column :lega_rx_decode_errs
-          column :lega_rx_no_buf_errs
-          column :lega_rx_parse_errs
-
-          column :legb_rx_bytes
-          column :legb_tx_bytes
-          column :legb_rx_decode_errs
-          column :legb_rx_no_buf_errs
-          column :legb_rx_parse_errs
           column :core_version
           column :yeti_version
           column :lega_user_agent
@@ -527,22 +510,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :pdd
           row :rtt
           row :early_media_present
-          row :lega_rx_payloads
-          row :lega_tx_payloads
-          row :legb_rx_payloads
-          row :legb_tx_payloads
-
-          row :lega_rx_bytes
-          row :lega_tx_bytes
-          row :lega_rx_decode_errs
-          row :lega_rx_no_buf_errs
-          row :lega_rx_parse_errs
-
-          row :legb_rx_bytes
-          row :legb_tx_bytes
-          row :legb_rx_decode_errs
-          row :legb_rx_no_buf_errs
-          row :legb_rx_parse_errs
           row :core_version
           row :yeti_version
           row :lega_user_agent
@@ -758,23 +725,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
     column :p_charge_info_in
 
-    column :lega_rx_payloads
-    column :lega_tx_payloads
-    column :legb_rx_payloads
-    column :legb_tx_payloads
-
-    column :lega_rx_bytes
-    column :lega_tx_bytes
-    #    column :lega_rx_decode_errs
-    #    column :lega_rx_no_buf_errs
-    #    column :lega_rx_parse_errs
-
-    column :legb_rx_bytes
-    column :legb_tx_bytes
-    #    column :legb_rx_decode_errs
-    #    column :legb_rx_no_buf_errs
-    #    column :legb_rx_parse_errs
-
     column :core_version
     column :yeti_version
     column :lega_user_agent
@@ -816,17 +766,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         cdr.lega_disconnect_code.to_s unless (cdr.lega_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
       end
       column('LegA Reason', sortable: 'lega_disconnect_reason', &:lega_disconnect_reason)
-      column :lega_rx_payloads
-      column :lega_tx_payloads
       column :auth_orig_transport_protocol
       column :auth_orig_ip do |cdr|
         "#{cdr.auth_orig_ip}:#{cdr.auth_orig_port}".chomp(':')
       end
-      column :lega_rx_bytes
-      column :lega_tx_bytes
-      column :lega_rx_decode_errs
-      column :lega_rx_no_buf_errs
-      column :lega_rx_parse_errs
       column :src_prefix_routing
       column :dst_prefix_routing
       column :destination_prefix
@@ -866,13 +809,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         cdr.legb_disconnect_code.to_s unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
       end
       column('LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason)
-      column :legb_rx_payloads
-      column :legb_tx_payloads
-      column :legb_rx_bytes
-      column :legb_tx_bytes
-      column :legb_rx_decode_errs
-      column :legb_rx_no_buf_errs
-      column :legb_rx_parse_errs
+
       column :pdd
       column :rtt
       column :early_media_present
@@ -1002,15 +939,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :local_tag
       column :legb_local_tag
       column :term_call_id
-      column :lega_rx_payloads
-      column :lega_tx_payloads
-      column :legb_rx_payloads
-      column :legb_tx_payloads
-      column :lega_rx_bytes
-      column :lega_tx_bytes
-      column :legb_rx_bytes
-      column :legb_tx_bytes
-
     end
   end
 end
