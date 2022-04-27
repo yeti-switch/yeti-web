@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RtpStatistics::RxStream < Cdr::Base
   self.table_name = 'rtp_statistics.rx_streams'
   self.primary_key = :id

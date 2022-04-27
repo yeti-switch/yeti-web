@@ -232,6 +232,4 @@ RSpec.describe 'switch.write_rtp_statistics()' do
   it 'creates RX streams' do
     expect { subject }.to change { RtpStatistics::RxStream.count }.by(4)
   end
-
-
 end

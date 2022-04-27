@@ -23,7 +23,7 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
 
   index do
     id_column
-    #column :tx_stream_id
+    # column :tx_stream_id
     #
     column :local_tag
 
@@ -58,7 +58,6 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
     column :rx_rtcp_jitter_max
     column :rx_rtcp_jitter_mean
     column :rx_rtcp_jitter_std
-
   end
 
   filter :id
