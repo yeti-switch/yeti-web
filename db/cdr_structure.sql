@@ -272,8 +272,8 @@ CREATE TYPE rtp_statistics.stream_ty AS (
 --
 
 CREATE TYPE rtp_statistics.tx_stream_ty AS (
-	time_start timestamp with time zone,
-	time_end timestamp with time zone,
+	time_start double precision,
+	time_end double precision,
 	local_tag character varying,
 	rtcp_rtt_min double precision,
 	rtcp_rtt_max double precision,
@@ -1165,8 +1165,8 @@ BEGIN
         v_rtp_tx_stream_data.node_id=i_node_id;
         v_rtp_tx_stream_data.local_tag=v_tx_stream.local_tag;
 
-        v_rtp_tx_stream_data.time_start=v_tx_stream.time_start;
-        v_rtp_tx_stream_data.time_end=v_tx_stream.time_end;
+        v_rtp_tx_stream_data.time_start=to_timestamp(v_tx_stream.time_start);
+        v_rtp_tx_stream_data.time_end=to_timestamp(v_tx_stream.time_end);
 
         v_rtp_tx_stream_data.rtcp_rtt_min=v_tx_stream.rtcp_rtt_min;
         v_rtp_tx_stream_data.rtcp_rtt_max=v_tx_stream.rtcp_rtt_max;
