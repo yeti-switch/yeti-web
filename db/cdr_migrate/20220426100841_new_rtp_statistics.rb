@@ -13,10 +13,10 @@ create table rtp_statistics.tx_streams (
   gateway_external_id bigint,
 
   local_tag varchar not null,
-  rtcp_rtt_min float,
-  rtcp_rtt_max float,
-  rtcp_rtt_mean double precision,
-  rtcp_rtt_std double precision,
+  rtcp_rtt_min real,
+  rtcp_rtt_max real,
+  rtcp_rtt_mean real,
+  rtcp_rtt_std real,
   rx_out_of_buffer_errors integer,
   rx_rtp_parse_errors integer,
   rx_dropped_packets integer,
@@ -28,10 +28,10 @@ create table rtp_statistics.tx_streams (
   tx_total_lost integer,
   tx_payloads_transcoded varchar[],
   tx_payloads_relayed varchar[],
-  tx_rtcp_jitter_min float,
-  tx_rtcp_jitter_max float,
-  tx_rtcp_jitter_mean double precision,
-  tx_rtcp_jitter_std double precision
+  tx_rtcp_jitter_min real,
+  tx_rtcp_jitter_max real,
+  tx_rtcp_jitter_mean real,
+  tx_rtcp_jitter_std real
 ) PARTITION BY RANGE (time_start);
 ALTER TABLE ONLY rtp_statistics.tx_streams ADD CONSTRAINT tx_streams_pkey PRIMARY KEY (id, time_start);
 
@@ -49,6 +49,8 @@ create table rtp_statistics.rx_streams (
 
   local_tag varchar,
   rx_ssrc integer,
+  local_host inet,
+  local_port integer,
   remote_host inet,
   remote_port integer,
   rx_packets integer,
@@ -57,23 +59,25 @@ create table rtp_statistics.rx_streams (
   rx_payloads_transcoded varchar[],
   rx_payloads_relayed varchar[],
   rx_decode_errors integer,
-  rx_packet_delta_min float,
-  rx_packet_delta_max float,
-  rx_packet_delta_mean double precision,
-  rx_packet_delta_std double precision,
-  rx_packet_jitter_min float,
-  rx_packet_jitter_max float,
-  rx_packet_jitter_mean double precision,
-  rx_packet_jitter_std double precision,
-  rx_rtcp_jitter_min float,
-  rx_rtcp_jitter_max float,
-  rx_rtcp_jitter_mean double precision,
-  rx_rtcp_jitter_std double precision
+  rx_packet_delta_min real,
+  rx_packet_delta_max real,
+  rx_packet_delta_mean real,
+  rx_packet_delta_std real,
+  rx_packet_jitter_min real,
+  rx_packet_jitter_max real,
+  rx_packet_jitter_mean real,
+  rx_packet_jitter_std real,
+  rx_rtcp_jitter_min real,
+  rx_rtcp_jitter_max real,
+  rx_rtcp_jitter_mean real,
+  rx_rtcp_jitter_std real
 ) PARTITION BY RANGE (time_start);
 ALTER TABLE ONLY rtp_statistics.rx_streams ADD CONSTRAINT rx_streams_pkey PRIMARY KEY (id, time_start);
 
 create type rtp_statistics.rx_stream_ty as(
   rx_ssrc integer,
+  local_host inet,
+  local_port integer,
   remote_host inet,
   remote_port integer,
   rx_packets integer,
@@ -82,28 +86,28 @@ create type rtp_statistics.rx_stream_ty as(
   rx_payloads_transcoded varchar,
   rx_payloads_relayed varchar,
   rx_decode_errors integer,
-  rx_packet_delta_min float,
-  rx_packet_delta_max float,
-  rx_packet_delta_mean double precision,
-  rx_packet_delta_std double precision,
-  rx_packet_jitter_min float,
-  rx_packet_jitter_max float,
-  rx_packet_jitter_mean double precision,
-  rx_packet_jitter_std double precision,
-  rx_rtcp_jitter_min float,
-  rx_rtcp_jitter_max float,
-  rx_rtcp_jitter_mean double precision,
-  rx_rtcp_jitter_std double precision
+  rx_packet_delta_min real,
+  rx_packet_delta_max real,
+  rx_packet_delta_mean real,
+  rx_packet_delta_std real,
+  rx_packet_jitter_min real,
+  rx_packet_jitter_max real,
+  rx_packet_jitter_mean real,
+  rx_packet_jitter_std real,
+  rx_rtcp_jitter_min real,
+  rx_rtcp_jitter_max real,
+  rx_rtcp_jitter_mean real,
+  rx_rtcp_jitter_std real
 );
 
 create type rtp_statistics.tx_stream_ty as(
   time_start double precision,
   time_end double precision,
   local_tag varchar,
-  rtcp_rtt_min float,
-  rtcp_rtt_max float,
-  rtcp_rtt_mean double precision,
-  rtcp_rtt_std double precision,
+  rtcp_rtt_min real,
+  rtcp_rtt_max real,
+  rtcp_rtt_mean real,
+  rtcp_rtt_std real,
   rx_out_of_buffer_errors integer,
   rx_rtp_parse_errors integer,
   rx_dropped_packets integer,
@@ -117,10 +121,10 @@ create type rtp_statistics.tx_stream_ty as(
   tx_payloads_transcoded varchar,
   tx_payloads_relayed varchar,
 
-  tx_rtcp_jitter_min float,
-  tx_rtcp_jitter_max float,
-  tx_rtcp_jitter_mean double precision,
-  tx_rtcp_jitter_std double precision,
+  tx_rtcp_jitter_min real,
+  tx_rtcp_jitter_max real,
+  tx_rtcp_jitter_mean real,
+  tx_rtcp_jitter_std real,
   rx rtp_statistics.rx_stream_ty[]
 );
 
@@ -209,6 +213,11 @@ BEGIN
 
           v_rtp_rx_stream_data.local_tag=v_tx_stream.local_tag;
           v_rtp_rx_stream_data.rx_ssrc=v_rx.rx_ssrc;
+
+          -- local socket info from TX stream
+          v_rtp_rx_stream_data.local_host = v_tx_stream.local_host;
+          v_rtp_rx_stream_data.remote_port = v_tx_stream.local_port;
+
           v_rtp_rx_stream_data.remote_host=v_rx.remote_host;
           v_rtp_rx_stream_data.remote_port=v_rx.remote_port;
           v_rtp_rx_stream_data.rx_packets=v_rx.rx_packets;

@@ -40,6 +40,8 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
 
     column :remote_host
     column :remote_port
+    column :local_host
+    column :local_port
     column :rx_packets
     column :rx_bytes
     column :rx_total_lost
@@ -76,6 +78,8 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
   filter :gateway_external_id
   filter :remote_host
   filter :remote_port
+  filter :local_host
+  filter :local_port
   filter :rx_packets
   filter :rx_bytes
   filter :rx_ssrc, as: :numeric, filters: %i[hex equals]
@@ -96,6 +100,8 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
       end
       row :remote_host
       row :remote_port
+      row :local_host
+      row :local_port
       row :rx_packets
       row :rx_bytes
       row :rx_total_lost
