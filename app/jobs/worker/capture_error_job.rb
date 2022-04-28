@@ -7,7 +7,7 @@ module Worker
 
     rescue_from StandardError, with: :log_error
 
-    retry_on Sentry::Error,
+    retry_on 'Sentry::Error',
              wait: 1.minute,
              attempts: 5
 
