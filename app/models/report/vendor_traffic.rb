@@ -5,10 +5,8 @@
 # Table name: reports.vendor_traffic_report
 #
 #  id         :bigint(8)        not null, primary key
-#  completed  :boolean          default(FALSE), not null
 #  date_end   :datetime
 #  date_start :datetime
-#  send_to    :integer(4)       is an Array
 #  created_at :datetime
 #  vendor_id  :integer(4)       not null
 #
