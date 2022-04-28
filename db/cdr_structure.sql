@@ -189,7 +189,7 @@ CREATE TYPE billing.interval_billing_data AS (
 --
 
 CREATE TYPE rtp_statistics.rx_stream_ty AS (
-	rx_ssrc integer,
+	rx_ssrc bigint,
 	local_host inet,
 	local_port integer,
 	remote_host inet,
@@ -286,7 +286,7 @@ CREATE TYPE rtp_statistics.tx_stream_ty AS (
 	rx_dropped_packets integer,
 	tx_packets integer,
 	tx_bytes integer,
-	tx_ssrc integer,
+	tx_ssrc bigint,
 	local_host inet,
 	local_port integer,
 	tx_total_lost integer,
@@ -3407,7 +3407,7 @@ CREATE TABLE rtp_statistics.rx_streams (
     gateway_id bigint,
     gateway_external_id bigint,
     local_tag character varying,
-    rx_ssrc integer,
+    rx_ssrc bigint,
     local_host inet,
     local_port integer,
     remote_host inet,
@@ -3554,7 +3554,7 @@ CREATE TABLE rtp_statistics.tx_streams (
     rx_dropped_packets integer,
     tx_packets integer,
     tx_bytes integer,
-    tx_ssrc integer,
+    tx_ssrc bigint,
     local_host inet,
     local_port integer,
     tx_total_lost integer,

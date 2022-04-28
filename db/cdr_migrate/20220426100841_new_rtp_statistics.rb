@@ -22,7 +22,7 @@ create table rtp_statistics.tx_streams (
   rx_dropped_packets integer,
   tx_packets  integer,
   tx_bytes  integer,
-  tx_ssrc integer,
+  tx_ssrc bigint,
   local_host inet,
   local_port integer,
   tx_total_lost integer,
@@ -48,7 +48,7 @@ create table rtp_statistics.rx_streams (
   gateway_external_id bigint,
 
   local_tag varchar,
-  rx_ssrc integer,
+  rx_ssrc bigint,
   local_host inet,
   local_port integer,
   remote_host inet,
@@ -75,7 +75,7 @@ create table rtp_statistics.rx_streams (
 ALTER TABLE ONLY rtp_statistics.rx_streams ADD CONSTRAINT rx_streams_pkey PRIMARY KEY (id, time_start);
 
 create type rtp_statistics.rx_stream_ty as(
-  rx_ssrc integer,
+  rx_ssrc bigint,
   local_host inet,
   local_port integer,
   remote_host inet,
@@ -113,7 +113,7 @@ create type rtp_statistics.tx_stream_ty as(
   rx_dropped_packets integer,
   tx_packets  integer,
   tx_bytes  integer,
-  tx_ssrc integer,
+  tx_ssrc bigint,
   local_host inet,
   local_port integer,
   tx_total_lost integer,

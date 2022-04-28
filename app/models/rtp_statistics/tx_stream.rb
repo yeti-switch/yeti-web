@@ -25,7 +25,7 @@
 #  tx_rtcp_jitter_mean     :float
 #  tx_rtcp_jitter_min      :float
 #  tx_rtcp_jitter_std      :float
-#  tx_ssrc                 :integer(4)
+#  tx_ssrc                 :bigint(8)
 #  tx_total_lost           :integer(4)
 #  gateway_external_id     :bigint(8)
 #  gateway_id              :bigint(8)

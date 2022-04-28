@@ -27,7 +27,7 @@
 #  rx_rtcp_jitter_mean    :float
 #  rx_rtcp_jitter_min     :float
 #  rx_rtcp_jitter_std     :float
-#  rx_ssrc                :integer(4)
+#  rx_ssrc                :bigint(8)
 #  rx_total_lost          :integer(4)
 #  time_end               :datetime
 #  time_start             :datetime         not null
