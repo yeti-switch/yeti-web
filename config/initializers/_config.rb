@@ -45,6 +45,8 @@ Config.setup do |setup_config|
       required(:'cdr.cdr').maybe(:string, format?: /\A\d+ days\z/)
       required(:'auth_log.auth_log').maybe(:string, format?: /\A\d+ days\z/)
       required(:'rtp_statistics.streams').maybe(:string, format?: /\A\d+ days\z/)
+      required(:'rtp_statistics.rx_streams').maybe(:string, format?: /\A\d+ days\z/)
+      required(:'rtp_statistics.tx_streams').maybe(:string, format?: /\A\d+ days\z/)
       required(:'logs.api_requests').maybe(:string, format?: /\A\d+ days\z/)
     end
 

@@ -23,8 +23,7 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
 
   index do
     id_column
-    # column :tx_stream_id
-    #
+    column :tx_stream_id
     column :local_tag
 
     column :time_start

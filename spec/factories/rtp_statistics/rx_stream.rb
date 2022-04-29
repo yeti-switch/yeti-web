@@ -37,7 +37,7 @@ FactoryBot.define do
 
     before(:create) do |record, _evaluator|
       # Create partition for current+next monthes if not exists
-      RtpStatistics.RxStream.add_partition_for(record.time_start)
+      RtpStatistics::RxStream.add_partition_for(record.time_start)
     end
   end
 end
