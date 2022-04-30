@@ -7,6 +7,34 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
   config.batch_actions = false
   config.sort_order = 'id_desc'
 
+  acts_as_export :id,
+                 :time_start,
+                 :time_end,
+                 [:gateway_name, proc { |row| row.gateway.try(:name) }],
+                 :gateway_external_id,
+                 [:node_name, proc { |row| row.node.try(:name) }],
+                 [:pop_name, proc { |row| row.pop.try(:name) }],
+                 :local_tag,
+                 :rtcp_rtt_min,
+                 :rtcp_rtt_max,
+                 :rtcp_rtt_mean,
+                 :rtcp_rtt_std,
+                 :rx_out_of_buffer_errors,
+                 :rx_rtp_parse_errors,
+                 :rx_dropped_packets,
+                 :tx_packets,
+                 :tx_bytes,
+                 :tx_ssrc,
+                 :local_host,
+                 :local_port,
+                 :tx_total_lost,
+                 :tx_payloads_transcoded,
+                 :tx_payloads_relayed,
+                 :tx_rtcp_jitter_min,
+                 :tx_rtcp_jitter_max,
+                 :tx_rtcp_jitter_mean,
+                 :tx_rtcp_jitter_std
+
   with_default_params do
     params[:q] = { time_start_gteq_datetime_picker: 0.days.ago.beginning_of_day }
     'Only RTP streams started from beginning of the day showed by default'
