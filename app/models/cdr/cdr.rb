@@ -45,26 +45,12 @@
 #  lega_disconnect_code            :integer(4)
 #  lega_disconnect_reason          :string
 #  lega_identity                   :jsonb
-#  lega_rx_bytes                   :integer(4)
-#  lega_rx_decode_errs             :integer(4)
-#  lega_rx_no_buf_errs             :integer(4)
-#  lega_rx_parse_errs              :integer(4)
-#  lega_rx_payloads                :string
-#  lega_tx_bytes                   :integer(4)
-#  lega_tx_payloads                :string
 #  lega_user_agent                 :string
 #  legb_disconnect_code            :integer(4)
 #  legb_disconnect_reason          :string
 #  legb_local_tag                  :string
 #  legb_outbound_proxy             :string
 #  legb_ruri                       :string
-#  legb_rx_bytes                   :integer(4)
-#  legb_rx_decode_errs             :integer(4)
-#  legb_rx_no_buf_errs             :integer(4)
-#  legb_rx_parse_errs              :integer(4)
-#  legb_rx_payloads                :string
-#  legb_tx_bytes                   :integer(4)
-#  legb_tx_payloads                :string
 #  legb_user_agent                 :string
 #  local_tag                       :string
 #  lrn                             :string
@@ -239,7 +225,6 @@ class Cdr::Cdr < Cdr::Base
   scope :short_calls, -> { where('success AND duration<=?', GuiConfig.short_call_length) }
   scope :successful_calls, -> { where('success') }
   scope :rerouted_calls, -> { where('(NOT is_last_cdr) OR routing_attempt>1') }
-  scope :no_rtp, -> { where('success AND (lega_tx_bytes=0 OR lega_rx_bytes=0 OR legb_tx_bytes=0 OR legb_rx_bytes=0)') }
   scope :not_authorized, -> { where('customer_auth_id is null') }
   scope :bad_routing, -> { where('customer_auth_id is not null AND disconnect_initiator_id=0') }
   scope :with_trace, -> { where('dump_level_id > 0') }
