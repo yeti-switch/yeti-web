@@ -128,6 +128,19 @@ create type rtp_statistics.tx_stream_ty as(
   rx rtp_statistics.rx_stream_ty[]
 );
 
+select pgq.create_queue('rtp_rx_stream');
+select pgq.create_queue('rtp_tx_stream');
+
+CREATE OR REPLACE FUNCTION event.rtp_streams_insert_event(ev_type varchar, ev_data anyelement)
+ RETURNS bigint
+ LANGUAGE plpgsql
+AS $function$
+begin
+    return pgq.insert_event(ev_type, ev_type, event.serialize(ev_data), null, null, null, null);
+end;
+$function$;
+
+
 CREATE OR REPLACE FUNCTION switch.write_rtp_statistics(
   i_data json,
   i_pop_id integer,
@@ -197,7 +210,7 @@ BEGIN
         v_rtp_tx_stream_data.tx_rtcp_jitter_std=v_tx_stream.tx_rtcp_jitter_std;
 
         INSERT INTO rtp_statistics.tx_streams VALUES(v_rtp_tx_stream_data.*);
-        perform event.rtp_statistics_insert_event(v_rtp_tx_stream_data);
+        PERFORM event.rtp_streams_insert_event('rtp_tx_stream', v_rtp_tx_stream_data);
 
         FOREACH v_rx IN ARRAY v_tx_stream.rx LOOP
           v_rtp_rx_stream_data = NULL;
@@ -240,7 +253,7 @@ BEGIN
           v_rtp_rx_stream_data.rx_rtcp_jitter_std=v_rx.rx_rtcp_jitter_std;
 
           INSERT INTO rtp_statistics.rx_streams VALUES(v_rtp_rx_stream_data.*);
-          perform event.rtp_statistics_insert_event(v_rtp_rx_stream_data);
+          PERFORM event.rtp_streams_insert_event('rtp_rx_stream', v_rtp_rx_stream_data);
         END LOOP;
   end loop;
 
@@ -1054,6 +1067,11 @@ DROP FUNCTION switch.write_rtp_statistics(
   i_lega_local_tag varchar,
   i_legb_local_tag varchar
 );
+
+  DROP FUNCTION event.rtp_streams_insert_event(ev_type varchar, ev_data anyelement);
+
+select pgq.drop_queue('rtp_rx_stream');
+select pgq.drop_queue('rtp_tx_stream');
 
   drop type rtp_statistics.tx_stream_ty;
   drop type rtp_statistics.rx_stream_ty;
