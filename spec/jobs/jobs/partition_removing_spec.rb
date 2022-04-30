@@ -8,8 +8,12 @@ RSpec.describe Jobs::PartitionRemoving, '#call' do
   let(:job) { described_class.new(double) }
 
   before do
-    expect(job).to receive(:partition_remove_delay).exactly(4).times.and_return(
+    expect(job).to receive(:partition_remove_delay).exactly(6).times.and_return(
       'cdr.cdr' => '3 days',
+      'auth_log.auth_log' => '3 days',
+      'rtp_statistics.streams' => '3 days',
+      'rtp_statistics.rx_streams' => '3 days',
+      'rtp_statistics.tx_streams' => '3 days',
       'logs.api_requests' => '5 days'
     )
     PartitionModel::Cdr.to_a.each(&:destroy!)
