@@ -49,6 +49,38 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
   scope :all, show_count: false
   scope :no_tx, show_count: false
 
+  filter :id
+  filter :time_start, as: :date_time_range
+  filter :time_end, as: :date_time_range
+  filter :pop
+  filter :node
+  filter :gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
+
+  filter :gateway_external_id
+  filter :local_tag
+  filter :local_host
+  filter :local_port
+  filter :tx_ssrc, as: :numeric, filters: %i[hex equals]
+  filter :tx_packets
+  filter :tx_bytes
+  filter :rtcp_rtt_min
+  filter :rtcp_rtt_max
+  filter :rtcp_rtt_mean
+  filter :rtcp_rtt_std
+  filter :rx_out_of_buffer_errors
+  filter :rx_rtp_parse_errors
+  filter :rx_dropped_packets
+  filter :tx_total_lost
+  filter :tx_rtcp_jitter_min
+  filter :tx_rtcp_jitter_max
+  filter :tx_rtcp_jitter_mean
+  filter :tx_rtcp_jitter_std
+
   index do
     id_column
     column :time_start
@@ -56,6 +88,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
     column :pop
     column :node
     column :gateway
+    column :gateway_external_id
     column :local_tag
     column :rtcp_rtt_min
     column :rtcp_rtt_max
@@ -79,26 +112,6 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
     column :tx_rtcp_jitter_mean
     column :tx_rtcp_jitter_std
   end
-
-  filter :id
-  filter :time_start, as: :date_time_range
-  filter :time_end, as: :date_time_range
-  filter :local_tag
-  filter :pop
-  filter :node
-  filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:gateway_id_eq]
-           resource_id ? Gateway.where(id: resource_id) : []
-         }
-
-  filter :gateway_external_id
-  filter :remote_host
-  filter :remote_port
-  filter :tx_packets
-  filter :tx_bytes
-  filter :tx_ssrc, as: :numeric, filters: %i[hex equals]
 
   show do
     attributes_table do

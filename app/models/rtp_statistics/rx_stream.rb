@@ -10,8 +10,8 @@
 #  local_tag              :string
 #  remote_host            :inet
 #  remote_port            :integer(4)
-#  rx_bytes               :integer(4)
-#  rx_decode_errors       :integer(4)
+#  rx_bytes               :bigint(8)
+#  rx_decode_errors       :bigint(8)
 #  rx_packet_delta_max    :float
 #  rx_packet_delta_mean   :float
 #  rx_packet_delta_min    :float
@@ -20,7 +20,7 @@
 #  rx_packet_jitter_mean  :float
 #  rx_packet_jitter_min   :float
 #  rx_packet_jitter_std   :float
-#  rx_packets             :integer(4)
+#  rx_packets             :bigint(8)
 #  rx_payloads_relayed    :string           is an Array
 #  rx_payloads_transcoded :string           is an Array
 #  rx_rtcp_jitter_max     :float
@@ -28,7 +28,7 @@
 #  rx_rtcp_jitter_min     :float
 #  rx_rtcp_jitter_std     :float
 #  rx_ssrc                :bigint(8)
-#  rx_total_lost          :integer(4)
+#  rx_total_lost          :bigint(8)
 #  time_end               :datetime
 #  time_start             :datetime         not null
 #  gateway_external_id    :bigint(8)

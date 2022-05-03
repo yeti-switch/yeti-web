@@ -38,6 +38,7 @@
 #  max_30x_redirects                :integer(2)       default(0), not null
 #  max_transfers                    :integer(2)       default(0), not null
 #  name                             :string           not null
+#  orig_append_headers_reply        :string           is an Array
 #  orig_append_headers_req          :string
 #  orig_force_outbound_proxy        :boolean          default(FALSE), not null
 #  orig_next_hop                    :string
@@ -290,6 +291,11 @@ class Gateway < ApplicationRecord
   def rtp_acl=(value)
     value = value.split(',').map(&:strip).reject(&:blank?) if value.is_a? String
     self[:rtp_acl] = value
+  end
+
+  def orig_append_headers_reply=(value)
+    value = value.split(',').map(&:strip).reject(&:blank?) if value.is_a? String
+    self[:orig_append_headers_reply] = value
   end
 
   def display_name

@@ -38,6 +38,7 @@
 #  max_30x_redirects                :integer(2)       default(0), not null
 #  max_transfers                    :integer(2)       default(0), not null
 #  name                             :string           not null
+#  orig_append_headers_reply        :string           is an Array
 #  orig_append_headers_req          :string
 #  orig_force_outbound_proxy        :boolean          default(FALSE), not null
 #  orig_next_hop                    :string
