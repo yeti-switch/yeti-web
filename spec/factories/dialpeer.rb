@@ -22,8 +22,9 @@ FactoryBot.define do
     initial_rate { 0.0 }
     next_interval { 60 }
     initial_interval { 60 }
-    valid_from { '1970-01-01 00:00:00' }
-    valid_till { '2020-01-01 00:00:00' }
+
+    valid_from { 1.day.ago.utc }
+    valid_till { 1.day.from_now.utc }
 
     association :routing_group
     association :routeset_discriminator

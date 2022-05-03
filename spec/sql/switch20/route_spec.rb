@@ -2,6 +2,7 @@
 
 RSpec.describe '#routing logic' do
   subject do
+    SqlCaller::Yeti.select_all('set search_path to switch20,sys,public')
     SqlCaller::Yeti.select_all_serialized(
       "SELECT * from switch20.route_debug(
         ?::integer,
@@ -236,7 +237,7 @@ RSpec.describe '#routing logic' do
     end
   end
 
-  context 'Auhtorized but customer has no enough balance' do
+  context 'Authorized but customer has no enough balance' do
     before do
       FactoryBot.create(:system_load_balancer,
                         signalling_ip: '1.1.1.1')
@@ -360,6 +361,145 @@ RSpec.describe '#routing logic' do
         expect(subject.first[:lrn]).to eq('lrn111') # LRN from cache
         expect(subject.first[:dst_prefix_out]).to eq('lrn111') # Destination rewrited
         expect(subject.first[:dst_prefix_routing]).to eq('lrn111') # Destination rewrited
+      end
+    end
+  end
+
+  context 'Authorized, Successful routing, Test orig_append_headers_reply' do
+    before do
+      FactoryBot.create(:system_load_balancer,
+                        signalling_ip: '1.1.1.1')
+
+      FactoryBot.create(:customers_auth,
+                        ip: '3.3.3.3',
+                        check_account_balance: false,
+                        customer_id: customer.id,
+                        account_id: customer_account.id,
+                        gateway_id: customer_gateway.id,
+                        rateplan_id: rateplan.id,
+                        routing_plan_id: routing_plan.id,
+                        send_billing_information: send_billing_information)
+    end
+
+    let(:remote_ip) { '1.1.1.1' }
+    let(:x_orig_ip) { '3.3.3.3' }
+    let!(:vendor) { create(:contractor, vendor: true, enabled: true) }
+    let!(:vendor_account) { create(:account, contractor_id: vendor.id, max_balance: 100_500) }
+    let!(:vendor_gateway) { create(:gateway, contractor_id: vendor.id, enabled: true, host: '1.1.2.3', allow_termination: true) }
+
+    let!(:customer) { create(:contractor, customer: true, enabled: true) }
+    let!(:customer_account) { create(:account, contractor_id: customer.id, min_balance: -100_500) }
+    let!(:customer_gateway) {
+      create(:gateway,
+             contractor_id: customer.id,
+             enabled: true,
+             allow_origination: true,
+             orig_append_headers_reply: orig_append_headers_reply)
+    }
+
+    let!(:rate_group) { create(:rate_group) }
+    let!(:rateplan) { create(:rateplan, rate_groups: [rate_group]) }
+    let!(:destination) { create(:destination, prefix: '', enabled: true, rate_group_id: rate_group.id) }
+
+    let!(:routing_group) { create(:routing_group) }
+    let!(:routing_plan) { create(:routing_plan, use_lnp: false, routing_groups: [routing_group]) }
+    let!(:dialpeer) {
+      create(:dialpeer,
+             prefix: '',
+             enabled: true,
+             routing_group_id: routing_group.id,
+             vendor_id: vendor.id,
+             account_id: vendor_account.id,
+             gateway_id: vendor_gateway.id)
+    }
+
+    context 'Authorized, send_billing_information enabled, no additional headers' do
+      let!(:send_billing_information) { true }
+      let!(:orig_append_headers_reply) { [] }
+      let!(:expected_headers) {
+        [
+          "X-VND-INIT-INT:#{dialpeer.initial_interval}",
+          "X-VND-NEXT-INT:#{dialpeer.next_interval}",
+          "X-VND-INIT-RATE:#{dialpeer.initial_rate}",
+          "X-VND-NEXT-RATE:#{dialpeer.next_rate}",
+          "X-VND-CF:#{dialpeer.connect_fee}"
+        ]
+      }
+
+      it 'response with X-VND headers ' do
+        expect(subject.size).to eq(2)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(nil) # no LNP Error
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+
+        expect(subject.first[:aleg_append_headers_reply]).to eq(expected_headers.join('\r\n'))
+
+        expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+      end
+    end
+
+    context 'Authorized, send_billing_information disabled, no additional headers' do
+      let!(:send_billing_information) { false }
+      let!(:orig_append_headers_reply) { [] }
+
+      it 'response without X-VND headers ' do
+        expect(subject.size).to eq(2)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(nil) # no LNP Error
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+
+        expect(subject.first[:aleg_append_headers_reply]).to eq(orig_append_headers_reply.join('\r\n'))
+
+        expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+      end
+    end
+
+    context 'Authorized, send_billing_information disabled, additional headers present' do
+      let!(:send_billing_information) { false }
+      let!(:orig_append_headers_reply) { ['header1: value1', 'header2: value2'] }
+
+      it 'response without X-VND headers ' do
+        expect(subject.size).to eq(2)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(nil) # no LNP Error
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+
+        expect(subject.first[:aleg_append_headers_reply]).to eq(orig_append_headers_reply.join('\r\n'))
+
+        expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+      end
+    end
+
+    context 'Authorized, send_billing_information enabled, additional headers present' do
+      let!(:send_billing_information) { true }
+      let!(:orig_append_headers_reply) { ['header5:value5', 'header6: value7'] }
+      let!(:expected_headers) {
+        [
+          "X-VND-INIT-INT:#{dialpeer.initial_interval}",
+          "X-VND-NEXT-INT:#{dialpeer.next_interval}",
+          "X-VND-INIT-RATE:#{dialpeer.initial_rate}",
+          "X-VND-NEXT-RATE:#{dialpeer.next_rate}",
+          "X-VND-CF:#{dialpeer.connect_fee}"
+        ] + orig_append_headers_reply
+      }
+
+      it 'response with X-VND headers ' do
+        expect(subject.size).to eq(2)
+        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_id]).to be
+        expect(subject.first[:disconnect_code_id]).to eq(nil) # no LNP Error
+        expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+        expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+
+        expect(subject.first[:aleg_append_headers_reply]).to eq(expected_headers.join('\r\n'))
+
+        expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
       end
     end
   end

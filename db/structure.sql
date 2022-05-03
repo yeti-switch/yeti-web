@@ -2923,7 +2923,8 @@ CREATE TABLE class4.gateways (
     termination_dst_numberlist_id smallint,
     lua_script_id smallint,
     use_registered_aor boolean DEFAULT false NOT NULL,
-    rtp_acl inet[]
+    rtp_acl inet[],
+    orig_append_headers_reply character varying[]
 );
 
 
@@ -15825,6 +15826,7 @@ DECLARE
   v_termination_numberlist class4.numberlists%rowtype;
   v_termination_numberlist_item class4.numberlist_items%rowtype;
   v_termination_numberlist_size integer;
+  v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -15884,8 +15886,14 @@ BEGIN
   i_profile.routing_group_id:=i_dp.routing_group_id;
 
   if i_send_billing_information then
-    i_profile.aleg_append_headers_reply=E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval||E'\r\nX-VND-NEXT-INT:'||i_profile.dialpeer_next_interval||E'\r\nX-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate||E'\r\nX-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate||E'\r\nX-VND-CF:'||i_profile.dialpeer_fee;
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-INT:'||i_profile.dialpeer_next_interval)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-CF:'||i_profile.dialpeer_fee)::varchar);
   end if;
+    v_aleg_append_headers_reply = array_cat(v_aleg_append_headers_reply,i_customer_gw.orig_append_headers_reply);
+    i_profile.aleg_append_headers_reply=ARRAY_TO_STRING(v_aleg_append_headers_reply,'\r\n');
 
   if i_destination.use_dp_intervals THEN
     i_profile.destination_initial_interval:=i_dp.initial_interval;
@@ -16419,6 +16427,7 @@ DECLARE
   v_termination_numberlist class4.numberlists%rowtype;
   v_termination_numberlist_item class4.numberlist_items%rowtype;
   v_termination_numberlist_size integer;
+  v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16478,8 +16487,14 @@ BEGIN
   i_profile.routing_group_id:=i_dp.routing_group_id;
 
   if i_send_billing_information then
-    i_profile.aleg_append_headers_reply=E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval||E'\r\nX-VND-NEXT-INT:'||i_profile.dialpeer_next_interval||E'\r\nX-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate||E'\r\nX-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate||E'\r\nX-VND-CF:'||i_profile.dialpeer_fee;
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-INT:'||i_profile.dialpeer_next_interval)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-CF:'||i_profile.dialpeer_fee)::varchar);
   end if;
+    v_aleg_append_headers_reply = array_cat(v_aleg_append_headers_reply,i_customer_gw.orig_append_headers_reply);
+    i_profile.aleg_append_headers_reply=ARRAY_TO_STRING(v_aleg_append_headers_reply,'\r\n');
 
   if i_destination.use_dp_intervals THEN
     i_profile.destination_initial_interval:=i_dp.initial_interval;
@@ -17013,6 +17028,7 @@ DECLARE
   v_termination_numberlist class4.numberlists%rowtype;
   v_termination_numberlist_item class4.numberlist_items%rowtype;
   v_termination_numberlist_size integer;
+  v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
   
 BEGIN
   
@@ -17064,8 +17080,14 @@ BEGIN
   i_profile.routing_group_id:=i_dp.routing_group_id;
 
   if i_send_billing_information then
-    i_profile.aleg_append_headers_reply=E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval||E'\r\nX-VND-NEXT-INT:'||i_profile.dialpeer_next_interval||E'\r\nX-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate||E'\r\nX-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate||E'\r\nX-VND-CF:'||i_profile.dialpeer_fee;
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-INT:'||i_profile.dialpeer_next_interval)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate)::varchar);
+    v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-CF:'||i_profile.dialpeer_fee)::varchar);
   end if;
+    v_aleg_append_headers_reply = array_cat(v_aleg_append_headers_reply,i_customer_gw.orig_append_headers_reply);
+    i_profile.aleg_append_headers_reply=ARRAY_TO_STRING(v_aleg_append_headers_reply,'\r\n');
 
   if i_destination.use_dp_intervals THEN
     i_profile.destination_initial_interval:=i_dp.initial_interval;
@@ -30063,6 +30085,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211130142405'),
 ('20211217132047'),
 ('20220222110900'),
-('20220429111721');
+('20220429111721'),
+('20220501181051');
 
 
