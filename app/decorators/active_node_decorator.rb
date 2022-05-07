@@ -26,6 +26,10 @@ class ActiveNodeDecorator < Draper::Decorator
     safe_system_status[:version] if safe_system_status.present?
   end
 
+  def core_version
+    safe_system_status[:core_version] if safe_system_status.present?
+  end
+
   def shutdown_req_time
     safe_system_status[:shutdown_request_time] if safe_system_status.present?
   end
