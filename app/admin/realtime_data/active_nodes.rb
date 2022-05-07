@@ -24,6 +24,7 @@ ActiveAdmin.register RealtimeData::ActiveNode do
     column :name, sortable: false
     column :active_calls_count
     column :version
+    column :core_version
     column :shutdown_req_time
     column :sessions_num
     column :uptime
