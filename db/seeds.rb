@@ -38,7 +38,6 @@ end
 # Create partition for current+next monthes if not exists
 Cdr::Cdr.add_partitions
 Cdr::AuthLog.add_partitions
-Cdr::RtpStatistic.add_partitions
 RtpStatistics::TxStream.add_partitions
 RtpStatistics::RxStream.add_partitions
 Log::ApiLog.add_partitions
