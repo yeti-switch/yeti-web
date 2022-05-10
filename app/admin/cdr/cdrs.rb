@@ -197,13 +197,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     )
   end
 
-  action_item :lega_rtp_streams, only: :show do
-    link_to('Leg A RTP Streams', rtp_statistics_path(q: { local_tag_equals: resource.local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
-  end
+  #  action_item :lega_rtp_streams, only: :show do
+  #  link_to('Leg A RTP Streams', rtp_statistics_path(q: { local_tag_equals: resource.local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+  # end
 
-  action_item :legb_rtp_streams, only: :show do
-    link_to('Leg B RTP Streams', rtp_statistics_path(q: { local_tag_equals: resource.legb_local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
-  end
+  # action_item :legb_rtp_streams, only: :show do
+  #  link_to('Leg B RTP Streams', rtp_statistics_path(q: { local_tag_equals: resource.legb_local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+  # end
 
   action_item :routing_simulation, only: :show do
     link_to('Routing simulation', routing_simulation_cdr_path(resource))
