@@ -216,60 +216,6 @@ CREATE TYPE rtp_statistics.rx_stream_ty AS (
 
 
 --
--- Name: stream_ty; Type: TYPE; Schema: rtp_statistics; Owner: -
---
-
-CREATE TYPE rtp_statistics.stream_ty AS (
-	local_tag character varying,
-	time_start double precision,
-	time_end double precision,
-	rtcp_rtt_min double precision,
-	rtcp_rtt_max double precision,
-	rtcp_rtt_mean double precision,
-	rtcp_rtt_std double precision,
-	rx_rtcp_rr_count double precision,
-	rx_rtcp_sr_count double precision,
-	tx_rtcp_rr_count double precision,
-	tx_rtcp_sr_count double precision,
-	local_host character varying,
-	local_port integer,
-	remote_host character varying,
-	remote_port integer,
-	rx_ssrc double precision,
-	rx_packets double precision,
-	rx_bytes double precision,
-	rx_total_lost double precision,
-	rx_payloads_transcoded character varying,
-	rx_payloads_relayed character varying,
-	rx_decode_errors double precision,
-	rx_out_of_buffer_errors double precision,
-	rx_rtp_parse_errors double precision,
-	rx_packet_delta_min double precision,
-	rx_packet_delta_max double precision,
-	rx_packet_delta_mean double precision,
-	rx_packet_delta_std double precision,
-	rx_packet_jitter_min double precision,
-	rx_packet_jitter_max double precision,
-	rx_packet_jitter_mean double precision,
-	rx_packet_jitter_std double precision,
-	rx_rtcp_jitter_min double precision,
-	rx_rtcp_jitter_max double precision,
-	rx_rtcp_jitter_mean double precision,
-	rx_rtcp_jitter_std double precision,
-	tx_ssrc double precision,
-	tx_packets double precision,
-	tx_bytes double precision,
-	tx_total_lost double precision,
-	tx_payloads_transcoded character varying,
-	tx_payloads_relayed character varying,
-	tx_rtcp_jitter_min double precision,
-	tx_rtcp_jitter_max double precision,
-	tx_rtcp_jitter_mean double precision,
-	tx_rtcp_jitter_std double precision
-);
-
-
---
 -- Name: tx_stream_ty; Type: TYPE; Schema: rtp_statistics; Owner: -
 --
 
@@ -856,19 +802,6 @@ CREATE FUNCTION event.billing_insert_event(ev_type text, ev_data anyelement) RET
     AS $$
 begin
     return pgq.insert_event('cdr_billing', ev_type, event.serialize(ev_data), null, null, null, null);
-end;
-$$;
-
-
---
--- Name: rtp_statistics_insert_event(anyelement); Type: FUNCTION; Schema: event; Owner: -
---
-
-CREATE FUNCTION event.rtp_statistics_insert_event(ev_data anyelement) RETURNS bigint
-    LANGUAGE plpgsql
-    AS $$
-begin
-    return pgq.insert_event('rtp_statistics', 'rtp_statistics', event.serialize(ev_data), null, null, null, null);
 end;
 $$;
 
@@ -2009,8 +1942,6 @@ DECLARE
   v_nozerolen boolean;
   v_config sys.config%rowtype;
 
-  v_rtp_stream rtp_statistics.stream_ty;
-  v_rtp_stream_data rtp_statistics.streams%rowtype;
   v_rtp_rx_stream_data rtp_statistics.rx_streams%rowtype;
   v_rtp_tx_stream_data rtp_statistics.tx_streams%rowtype;
 
@@ -3467,85 +3398,6 @@ ALTER SEQUENCE rtp_statistics.rx_streams_id_seq OWNED BY rtp_statistics.rx_strea
 
 
 --
--- Name: streams; Type: TABLE; Schema: rtp_statistics; Owner: -
---
-
-CREATE TABLE rtp_statistics.streams (
-    id bigint NOT NULL,
-    time_start timestamp with time zone NOT NULL,
-    time_end timestamp with time zone,
-    pop_id integer NOT NULL,
-    node_id integer NOT NULL,
-    gateway_id bigint,
-    gateway_external_id bigint,
-    local_tag character varying,
-    rtcp_rtt_min double precision,
-    rtcp_rtt_max double precision,
-    rtcp_rtt_mean double precision,
-    rtcp_rtt_std double precision,
-    rx_rtcp_rr_count bigint,
-    rx_rtcp_sr_count bigint,
-    tx_rtcp_rr_count bigint,
-    tx_rtcp_sr_count bigint,
-    local_host character varying,
-    local_port integer,
-    remote_host character varying,
-    remote_port integer,
-    rx_ssrc bigint,
-    rx_packets bigint,
-    rx_bytes bigint,
-    rx_total_lost bigint,
-    rx_payloads_transcoded character varying,
-    rx_payloads_relayed character varying,
-    rx_decode_errors bigint,
-    rx_out_of_buffer_errors bigint,
-    rx_rtp_parse_errors bigint,
-    rx_packet_delta_min double precision,
-    rx_packet_delta_max double precision,
-    rx_packet_delta_mean double precision,
-    rx_packet_delta_std double precision,
-    rx_packet_jitter_min double precision,
-    rx_packet_jitter_max double precision,
-    rx_packet_jitter_mean double precision,
-    rx_packet_jitter_std double precision,
-    rx_rtcp_jitter_min double precision,
-    rx_rtcp_jitter_max double precision,
-    rx_rtcp_jitter_mean double precision,
-    rx_rtcp_jitter_std double precision,
-    tx_ssrc bigint,
-    tx_packets bigint,
-    tx_bytes bigint,
-    tx_total_lost bigint,
-    tx_payloads_transcoded character varying,
-    tx_payloads_relayed character varying,
-    tx_rtcp_jitter_min double precision,
-    tx_rtcp_jitter_max double precision,
-    tx_rtcp_jitter_mean double precision,
-    tx_rtcp_jitter_std double precision
-)
-PARTITION BY RANGE (time_start);
-
-
---
--- Name: streams_id_seq; Type: SEQUENCE; Schema: rtp_statistics; Owner: -
---
-
-CREATE SEQUENCE rtp_statistics.streams_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: streams_id_seq; Type: SEQUENCE OWNED BY; Schema: rtp_statistics; Owner: -
---
-
-ALTER SEQUENCE rtp_statistics.streams_id_seq OWNED BY rtp_statistics.streams.id;
-
-
---
 -- Name: tx_streams; Type: TABLE; Schema: rtp_statistics; Owner: -
 --
 
@@ -4150,13 +4002,6 @@ ALTER TABLE ONLY rtp_statistics.rx_streams ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
--- Name: streams id; Type: DEFAULT; Schema: rtp_statistics; Owner: -
---
-
-ALTER TABLE ONLY rtp_statistics.streams ALTER COLUMN id SET DEFAULT nextval('rtp_statistics.streams_id_seq'::regclass);
-
-
---
 -- Name: tx_streams id; Type: DEFAULT; Schema: rtp_statistics; Owner: -
 --
 
@@ -4505,14 +4350,6 @@ ALTER TABLE ONLY rtp_statistics.rx_streams
 
 
 --
--- Name: streams streams_pkey; Type: CONSTRAINT; Schema: rtp_statistics; Owner: -
---
-
-ALTER TABLE ONLY rtp_statistics.streams
-    ADD CONSTRAINT streams_pkey PRIMARY KEY (id, time_start);
-
-
---
 -- Name: tx_streams tx_streams_pkey; Type: CONSTRAINT; Schema: rtp_statistics; Owner: -
 --
 
@@ -4768,20 +4605,6 @@ CREATE INDEX vendor_traffic_report_data_report_id_idx ON reports.vendor_traffic_
 
 
 --
--- Name: streams_id_idx; Type: INDEX; Schema: rtp_statistics; Owner: -
---
-
-CREATE INDEX streams_id_idx ON ONLY rtp_statistics.streams USING btree (id);
-
-
---
--- Name: streams_local_tag_idx; Type: INDEX; Schema: rtp_statistics; Owner: -
---
-
-CREATE INDEX streams_local_tag_idx ON ONLY rtp_statistics.streams USING btree (local_tag);
-
-
---
 -- Name: active_call_accounts_account_id_created_at_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
@@ -5009,6 +4832,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220317180321'),
 ('20220317180333'),
 ('20220426100841'),
-('20220503094804');
+('20220503094804'),
+('20220509203319');
 
 

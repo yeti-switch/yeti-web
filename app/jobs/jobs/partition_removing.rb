@@ -7,7 +7,6 @@ module Jobs
     def execute
       remove_partition! PartitionModel::Cdr, Cdr::Cdr
       remove_partition! PartitionModel::Cdr, Cdr::AuthLog
-      remove_partition! PartitionModel::Cdr, Cdr::RtpStatistic
       remove_partition! PartitionModel::Cdr, RtpStatistics::TxStream
       remove_partition! PartitionModel::Cdr, RtpStatistics::RxStream
       remove_partition! PartitionModel::Log, Log::ApiLog
