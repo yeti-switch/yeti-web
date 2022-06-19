@@ -10,6 +10,10 @@
 #  created_at :datetime         not null
 #  account_id :integer(4)       not null
 #
+# Indexes
+#
+#  payments_account_id_idx  (account_id)
+#
 # Foreign Keys
 #
 #  payments_account_id_fkey  (account_id => accounts.id)

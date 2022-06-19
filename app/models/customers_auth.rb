@@ -60,6 +60,8 @@
 #
 # Indexes
 #
+#  customers_auth_account_id_idx   (account_id)
+#  customers_auth_customer_id_idx  (customer_id)
 #  customers_auth_external_id_key  (external_id) UNIQUE
 #  customers_auth_name_key         (name) UNIQUE
 #

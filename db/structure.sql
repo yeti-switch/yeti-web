@@ -28784,6 +28784,20 @@ ALTER TABLE ONLY sys.timezones
 
 
 --
+-- Name: accounts_contractor_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX accounts_contractor_id_idx ON billing.accounts USING btree (contractor_id);
+
+
+--
+-- Name: payments_account_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX payments_account_id_idx ON billing.payments USING btree (account_id);
+
+
+--
 -- Name: blacklist_items_blacklist_id_key_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -28795,6 +28809,20 @@ CREATE UNIQUE INDEX blacklist_items_blacklist_id_key_idx ON class4.numberlist_it
 --
 
 CREATE INDEX blacklist_items_blacklist_id_prefix_range_idx ON class4.numberlist_items USING gist (numberlist_id, ((key)::public.prefix_range));
+
+
+--
+-- Name: customers_auth_account_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX customers_auth_account_id_idx ON class4.customers_auth USING btree (account_id);
+
+
+--
+-- Name: customers_auth_customer_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX customers_auth_customer_id_idx ON class4.customers_auth USING btree (customer_id);
 
 
 --
@@ -28816,6 +28844,13 @@ CREATE INDEX customers_auth_normalized_prefix_range_prefix_range1_idx ON class4.
 --
 
 CREATE INDEX destinations_prefix_range_idx ON class4.destinations USING gist (((prefix)::public.prefix_range));
+
+
+--
+-- Name: dialpeers_account_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX dialpeers_account_id_idx ON class4.dialpeers USING btree (account_id);
 
 
 --
@@ -28847,10 +28882,31 @@ CREATE INDEX dialpeers_prefix_range_valid_from_valid_till_idx1 ON class4.dialpee
 
 
 --
+-- Name: dialpeers_vendor_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX dialpeers_vendor_id_idx ON class4.dialpeers USING btree (vendor_id);
+
+
+--
 -- Name: disconnect_code_code_success_successnozerolen_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
 CREATE INDEX disconnect_code_code_success_successnozerolen_idx ON class4.disconnect_code USING btree (code, success, successnozerolen);
+
+
+--
+-- Name: gateway_groups_vendor_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX gateway_groups_vendor_id_idx ON class4.gateway_groups USING btree (vendor_id);
+
+
+--
+-- Name: gateways_contractor_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX gateways_contractor_id_idx ON class4.gateways USING btree (contractor_id);
 
 
 --
@@ -28907,6 +28963,13 @@ CREATE UNIQUE INDEX routing_plan_lnp_rules_routing_plan_id_dst_prefix_database__
 --
 
 CREATE INDEX routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx ON class4.routing_plan_static_routes USING gist (((prefix)::public.prefix_range), vendor_id, routing_plan_id);
+
+
+--
+-- Name: routing_plan_static_routes_vendor_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX routing_plan_static_routes_vendor_id_idx ON class4.routing_plan_static_routes USING btree (vendor_id);
 
 
 --
@@ -28980,10 +29043,24 @@ CREATE INDEX api_requests_id_idx ON ONLY logs.api_requests USING btree (id);
 
 
 --
+-- Name: contacts_contractor_id_idx; Type: INDEX; Schema: notifications; Owner: -
+--
+
+CREATE INDEX contacts_contractor_id_idx ON notifications.contacts USING btree (contractor_id);
+
+
+--
 -- Name: unique_public.schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migrations USING btree (version);
+
+
+--
+-- Name: api_access_customer_id_idx; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE INDEX api_access_customer_id_idx ON sys.api_access USING btree (customer_id);
 
 
 --
@@ -30086,6 +30163,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20211217132047'),
 ('20220222110900'),
 ('20220429111721'),
-('20220501181051');
+('20220501181051'),
+('20220513084847');
 
 
