@@ -70,7 +70,7 @@ module Jobs
     rescue StandardError => e
       logger.error { "#{self.class}: {#{table_name}} <#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
       capture_error(e, extra: { partition_class: partition_class.name, model_class: model_class.name })
-      # raise e
+      raise e
     end
   end
 end
