@@ -18,6 +18,12 @@ module Jobs
       YetiConfig.partition_remove_delay
     end
 
+    def execute_cmd(cmd)
+      Open3.popen3(cmd) do |_stdin, _stdout, _stderr, wait_thr|
+        return wait_thr.value # Process::Status object returned.
+      end
+    end
+
     def remove_partition!(partition_class, model_class)
       table_name = model_class.table_name
       remove_delay = partition_remove_delay[table_name]
@@ -40,7 +46,24 @@ module Jobs
       end
 
       cdr_remove_candidate = cdr_collection.first
+
+      if YetiConfig.partition_remove_hook.present?
+        cmd = "#{YetiConfig.partition_remove_hook} #{cdr_remove_candidate.class} #{cdr_remove_candidate.parent_table} #{cdr_remove_candidate.name}"
+        logger.info { "Running partition removing hook: #{cmd}" }
+        return_value = execute_cmd(cmd)
+        if return_value.success?
+          logger.info { "Partition remove hook succeed, exit code: #{return_value.exitstatus}" }
+        else
+          logger.info { "Partition remove hook failed: #{return_value.exitstatus}. Stopping removing procedure" }
+          return
+        end
+      end
+
       cdr_remove_candidate.destroy!
+    rescue Errno::ENOENT => e
+      # usually raised on hook execution
+      logger.error { "Partition removing hook failed #{self.class}: {#{table_name}} #{cdr_remove_candidate&.name} - #{e.message}" }
+      capture_error(e, extra: { partition_class: partition_class, model_class: model_class })
     rescue ActiveRecord::RecordNotDestroyed => e
       logger.error { "#{self.class}: {#{table_name}} #{cdr_remove_candidate&.name} - #{e.message}" }
       capture_error(e, extra: { partition_class: partition_class, model_class: model_class })
