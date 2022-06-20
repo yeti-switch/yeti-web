@@ -41,6 +41,8 @@ class CodecGroup < ApplicationRecord
   end
 
   include Yeti::CodecReloader
+  include Yeti::StateUpdater
+  self.state_name = 'codec_groups'
 
   protected
 

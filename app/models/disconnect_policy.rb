@@ -28,4 +28,6 @@ class DisconnectPolicy < ApplicationRecord
   end
 
   include Yeti::TranslationReloader
+  include Yeti::StateUpdater
+  self.state_name = 'translations'
 end

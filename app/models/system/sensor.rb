@@ -73,6 +73,8 @@ class System::Sensor < ApplicationRecord
   end
 
   include Yeti::SensorReloader
+  include Yeti::StateUpdater
+  self.state_name = 'sensors'
 
   def display_name
     name.to_s

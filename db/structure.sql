@@ -14649,7 +14649,7 @@ $$;
 -- Name: check_states(); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint)
+CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint, sensors bigint, translations bigint, codec_groups bigint, registrations bigint, radius_authorization_profiles bigint, radius_accounting_profiles bigint, auth_credentials bigint, options_probers bigint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
     BEGIN
@@ -14658,7 +14658,15 @@ CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth
         (select value from sys.states where key = 'load_balancers'),
         (select value from sys.states where key = 'customers_auth'),
         (select value from sys.states where key = 'stir_shaken_trusted_certificates'),
-        (select value from sys.states where key = 'stir_shaken_trusted_repositories');
+        (select value from sys.states where key = 'stir_shaken_trusted_repositories'),
+        (select value from sys.states where key = 'sensors'),
+        (select value from sys.states where key = 'translations'),
+        (select value from sys.states where key = 'codec_groups'),
+        (select value from sys.states where key = 'registrations'),
+        (select value from sys.states where key = 'radius_authorization_profiles'),
+        (select value from sys.states where key = 'radius_accounting_profiles'),
+        (select value from sys.states where key = 'auth_credentials'),
+        (select value from sys.states where key = 'options_probers');
     END;
     $$;
 
@@ -30164,6 +30172,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220222110900'),
 ('20220429111721'),
 ('20220501181051'),
-('20220513084847');
+('20220513084847'),
+('20220620135342');
 
 

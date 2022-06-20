@@ -66,4 +66,6 @@ class Equipment::SipOptionsProber < ApplicationRecord
 
   include Yeti::ResourceStatus
   include Yeti::SipOptionsProberReloader
+  include Yeti::StateUpdater
+  self.state_name = 'options_probers'
 end
