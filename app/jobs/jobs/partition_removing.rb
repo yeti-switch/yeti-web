@@ -47,15 +47,15 @@ module Jobs
 
       cdr_remove_candidate = cdr_collection.first
 
-      if !YetiConfig.partition_remove_hook.blank?
-        cmd = "#{YetiConfig.partition_remove_hook} #{cdr_remove_candidate.class.to_s} #{cdr_remove_candidate.parent_table} #{cdr_remove_candidate.name.to_s}"
-        puts "Running partition remove hook: #{cmd}"
-        return_value=execute_cmd(cmd)
+      if YetiConfig.partition_remove_hook.present?
+        cmd = "#{YetiConfig.partition_remove_hook} #{cdr_remove_candidate.class} #{cdr_remove_candidate.parent_table} #{cdr_remove_candidate.name}"
+        logger.info { "Running partition removing hook: #{cmd}" }
+        return_value = execute_cmd(cmd)
         if return_value.success?
-          puts "Success: #{return_value.exitstatus}"
+          logger.info { "Partition remove hook succeed, exit code: #{return_value.exitstatus}" }
         else
-          puts "Partition remove hook failed: #{return_value.exitstatus}, faising exception"
-          raise StandardError
+          logger.info { "Partition remove hook failed: #{return_value.exitstatus}. Stopping removing procedure" }
+          return
         end
       end
 
@@ -70,7 +70,7 @@ module Jobs
     rescue StandardError => e
       logger.error { "#{self.class}: {#{table_name}} <#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
       capture_error(e, extra: { partition_class: partition_class.name, model_class: model_class.name })
-      raise e
+      # raise e
     end
   end
 end
