@@ -126,7 +126,8 @@
 #
 # Indexes
 #
-#  gateways_name_unique  (name) UNIQUE
+#  gateways_contractor_id_idx  (contractor_id)
+#  gateways_name_unique        (name) UNIQUE
 #
 # Foreign Keys
 #

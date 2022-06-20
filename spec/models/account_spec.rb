@@ -36,9 +36,10 @@
 #
 # Indexes
 #
-#  accounts_external_id_key  (external_id) UNIQUE
-#  accounts_name_key         (name) UNIQUE
-#  accounts_uuid_key         (uuid) UNIQUE
+#  accounts_contractor_id_idx  (contractor_id)
+#  accounts_external_id_key    (external_id) UNIQUE
+#  accounts_name_key           (name) UNIQUE
+#  accounts_uuid_key           (uuid) UNIQUE
 #
 # Foreign Keys
 #

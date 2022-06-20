@@ -47,10 +47,12 @@
 #
 # Indexes
 #
+#  dialpeers_account_id_idx                           (account_id)
 #  dialpeers_external_id_idx                          (external_id)
 #  dialpeers_prefix_range_idx                         (((prefix)::prefix_range)) USING gist
 #  dialpeers_prefix_range_valid_from_valid_till_idx   (((prefix)::prefix_range), valid_from, valid_till) WHERE enabled USING gist
 #  dialpeers_prefix_range_valid_from_valid_till_idx1  (((prefix)::prefix_range), valid_from, valid_till) WHERE (enabled AND (NOT locked)) USING gist
+#  dialpeers_vendor_id_idx                            (vendor_id)
 #
 # Foreign Keys
 #

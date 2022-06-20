@@ -13,7 +13,8 @@
 #
 # Indexes
 #
-#  api_access_login_key  (login) UNIQUE
+#  api_access_customer_id_idx  (customer_id)
+#  api_access_login_key        (login) UNIQUE
 #
 # Foreign Keys
 #

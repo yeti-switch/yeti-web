@@ -15,6 +15,7 @@
 # Indexes
 #
 #  routing_plan_static_routes_prefix_range_vendor_id_routing_p_idx  (((prefix)::prefix_range), vendor_id, routing_plan_id) USING gist
+#  routing_plan_static_routes_vendor_id_idx                         (vendor_id)
 #
 # Foreign Keys
 #

@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  gateway_groups_name_key  (name) UNIQUE
+#  gateway_groups_name_key       (name) UNIQUE
+#  gateway_groups_vendor_id_idx  (vendor_id)
 #
 # Foreign Keys
 #

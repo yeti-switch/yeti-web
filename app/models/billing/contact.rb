@@ -12,6 +12,10 @@
 #  admin_user_id :integer(4)
 #  contractor_id :integer(4)
 #
+# Indexes
+#
+#  contacts_contractor_id_idx  (contractor_id)
+#
 # Foreign Keys
 #
 #  contacts_admin_user_id_fkey  (admin_user_id => admin_users.id)
