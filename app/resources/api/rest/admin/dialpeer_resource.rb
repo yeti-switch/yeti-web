@@ -6,7 +6,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
              :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
              :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id,
-             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length
+             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing
 
   paginator :paged
 
@@ -28,6 +28,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :initial_rate, type: :number
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
+  ransack_filter :reverse_billing, type: :boolean
   ransack_filter :valid_from, type: :datetime
   ransack_filter :valid_till, type: :datetime
   ransack_filter :prefix, type: :string
@@ -72,6 +73,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
       initial_rate
       initial_interval
       next_interval
+      reverse_billing
       valid_from
       valid_till
       gateway_group

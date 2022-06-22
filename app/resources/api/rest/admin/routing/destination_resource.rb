@@ -5,7 +5,7 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
-             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length
+             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing
 
   paginator :paged
 
@@ -52,6 +52,7 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
       dp_margin_percent
       rate_policy
       initial_rate
+      reverse_billing
       reject_calls
       use_dp_intervals
       valid_from
