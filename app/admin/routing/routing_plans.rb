@@ -4,7 +4,7 @@ ActiveAdmin.register Routing::RoutingPlan do
   menu parent: 'Routing', label: 'Routing plans', priority: 50
 
   acts_as_audit
-  acts_as_clone
+  acts_as_clone links: [:routing_groups]
   acts_as_safe_destroy
   acts_as_async_destroy('Routing::RoutingPlan')
   acts_as_async_update BatchUpdateForm::RoutingPlan

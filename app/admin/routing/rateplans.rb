@@ -4,8 +4,9 @@ ActiveAdmin.register Routing::Rateplan do
   menu parent: 'Routing', label: 'Rateplans', priority: 40
 
   acts_as_audit
-  acts_as_clone
   acts_as_safe_destroy
+
+  acts_as_clone links: [:rate_groups]
 
   acts_as_export :id, :name,
                  [:profit_control_mode_name, proc { |row| row.profit_control_mode.name }]
