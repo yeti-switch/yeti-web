@@ -48,6 +48,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
       {
         'acd-limit': '0.01',
         'enabled': 'true',
+        'reverse-billing': 'true',
         'prefix': '_test_',
         'asr-limit': '0.02',
         'next-rate': '0.01',
@@ -109,6 +110,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'valid-till': Time.parse('2020-02-02').in_time_zone.iso8601(3),
           capacity: nil,
           enabled: true,
+          'reverse-billing': true,
           locked: false,
           prefix: '_test_',
           priority: 100
@@ -134,6 +136,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
         {
           'acd-limit': '0.01',
           'enabled': 'true',
+          'reverse-billing': 'true',
           'prefix': '_test_',
           'asr-limit': '0.02',
           'next-rate': '0.01',
@@ -181,6 +184,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
         {
           'acd-limit': '0.01',
           'enabled': 'true',
+          'reverse-billing': true,
           'prefix': '_test_',
           'asr-limit': '0.02',
           'next-rate': '0.01',

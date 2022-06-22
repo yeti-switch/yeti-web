@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :dialpeer, class: Dialpeer do
     sequence(:external_id)
     enabled { true }
+    reverse_billing { false }
     prefix { nil }
     src_rewrite_rule { nil }
     dst_rewrite_rule { nil }

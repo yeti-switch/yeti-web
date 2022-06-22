@@ -17,7 +17,7 @@ RSpec.resource 'Destinations' do
   ]
   optional_params = %i[
     prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids
-    dst_number-min-length dst-number-max-length
+    dst_number-min-length dst-number-max-length reverse-billing
   ]
 
   required_relationships = %i[rate-group rate-policy]
@@ -59,6 +59,7 @@ RSpec.resource 'Destinations' do
     let(:'rate-policy') { wrap_relationship(:'destination-rate-policies', 1) }
     let(:'dst-number-min-length') { 0 }
     let(:'dst-number-max-length') { 100 }
+    let(:'reverse-billing') { true }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

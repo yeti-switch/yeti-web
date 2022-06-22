@@ -102,6 +102,7 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
       let(:attributes) do
         { prefix: 'test',
           enabled: true,
+          'reverse-billing': true,
           'initial-interval': 60,
           'next-interval': 60,
           'initial-rate': 0,

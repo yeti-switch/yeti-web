@@ -6,6 +6,7 @@ FactoryBot.define do
     prefix { nil }
     connect_fee { 0 }
     enabled { true }
+    reverse_billing { false }
     reject_calls { false }
     initial_interval { 60 }
     next_interval { 60 }

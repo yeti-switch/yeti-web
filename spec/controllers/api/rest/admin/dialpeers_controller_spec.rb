@@ -53,6 +53,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :initial_rate
     it_behaves_like :jsonapi_filters_by_number_field, :initial_interval
     it_behaves_like :jsonapi_filters_by_number_field, :next_interval
+    it_behaves_like :jsonapi_filters_by_boolean_field, :reverse_billing
     it_behaves_like :jsonapi_filters_by_datetime_field, :valid_from
     it_behaves_like :jsonapi_filters_by_datetime_field, :valid_till
     it_behaves_like :jsonapi_filters_by_string_field, :prefix
@@ -108,6 +109,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
       let(:attributes) do
         {
           enabled: true,
+          'reverse-billing': true,
           'valid-from': DateTime.now,
           'valid-till': 1.year.from_now,
           'initial-interval': 60,
