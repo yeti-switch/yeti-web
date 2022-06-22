@@ -372,6 +372,8 @@ class Gateway < ApplicationRecord
   end
 
   include Yeti::IncomingAuthReloader
+  include Yeti::StateUpdater
+  self.state_name = 'auth_credentials'
 
   private
 

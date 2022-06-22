@@ -21,6 +21,8 @@
 class Equipment::Radius::AuthProfile < ApplicationRecord
   self.table_name = 'class4.radius_auth_profiles'
   include WithPaperTrail
+  include Yeti::StateUpdater
+  self.state_name = 'radius_authorization_profiles'
 
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :radius_auth_profile_id, dependent: :restrict_with_error
   has_many :avps, class_name: 'Equipment::Radius::AuthProfileAttribute', foreign_key: :profile_id, inverse_of: :profile, dependent: :destroy
