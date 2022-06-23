@@ -2,9 +2,10 @@
 
 ActiveAdmin.register Routing::RoutingPlan do
   menu parent: 'Routing', label: 'Routing plans', priority: 50
+  decorate_with RoutingPlanDecorator
 
   acts_as_audit
-  acts_as_clone
+  acts_as_clone links: [:routing_groups]
   acts_as_safe_destroy
   acts_as_async_destroy('Routing::RoutingPlan')
   acts_as_async_update BatchUpdateForm::RoutingPlan
@@ -43,14 +44,12 @@ ActiveAdmin.register Routing::RoutingPlan do
     column 'Use LNP', :use_lnp
     column :rate_delta_max
     column :max_rerouting_attempts
-    column 'Routing groups' do |r|
-      raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: { routing_group_id_eq: rg.id }) }.sort.join(', '))
-    end
+    column 'Routing groups', :routing_groups_links
     column :validate_dst_number_format
     column :validate_dst_number_network
   end
 
-  show do |_s|
+  show do
     # tabs do
     #   tab "Details" do
     attributes_table do
@@ -61,7 +60,7 @@ ActiveAdmin.register Routing::RoutingPlan do
       row :rate_delta_max
       row :max_rerouting_attempts
       row 'Routing groups' do |r|
-        raw(r.routing_groups.map { |rg| link_to rg.name, dialpeers_path(q: { routing_group_id_eq: rg.id }) }.sort.join(', '))
+        r.routing_groups_links(newline: true)
       end
       row :validate_dst_number_format
       row :validate_dst_number_network

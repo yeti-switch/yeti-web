@@ -5,7 +5,7 @@ ActiveAdmin.register Equipment::Radius::AccountingProfile do
   config.batch_actions = false
 
   acts_as_audit
-  acts_as_clone :stop_avps, :start_avps, :interim_avps
+  acts_as_clone duplicates: %i[stop_avps start_avps interim_avps]
   acts_as_safe_destroy
 
   acts_as_export :id, :name

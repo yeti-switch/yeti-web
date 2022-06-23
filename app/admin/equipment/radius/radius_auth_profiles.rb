@@ -5,7 +5,7 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
   config.batch_actions = true
 
   acts_as_audit
-  acts_as_clone :avps
+  acts_as_clone duplicates: [:avps]
   acts_as_safe_destroy
 
   acts_as_export :id, :name

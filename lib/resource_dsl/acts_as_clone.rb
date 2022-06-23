@@ -2,35 +2,17 @@
 
 module ResourceDSL
   module ActsAsClone
-    def acts_as_clone(*dup_methods)
+    def acts_as_clone(links: [], duplicates: [])
       before_action only: [:new] do
-        copy_resource(dup_methods) if params[:from].present?
+        copy_resource(links: links, duplicates: duplicates) if params[:from].present?
       end
 
       controller do
         protected
 
-        def copy_resource(dup_methods)
+        def copy_resource(links:, duplicates:)
           from = active_admin_config.resource_class.find(params[:from])
-          attributes = begin
-                         from.dup.attributes
-                       rescue StandardError
-                         {}
-                       end
-          resource = scoped_collection.new
-          dup_methods.each do |m|
-            res = from.send(m).dup
-            res = if res.respond_to?(:map)
-                    res.map(&:dup)
-                  else
-                    res.dup
-                  end
-            attributes[m] = res
-          end
-          attributes.map do |k, v|
-            resource.send("#{k}=", v)
-          end
-
+          resource = BuildRecordCopy.call(from: from, duplicates: duplicates, links: links)
           set_resource_ivar(resource)
         end
       end

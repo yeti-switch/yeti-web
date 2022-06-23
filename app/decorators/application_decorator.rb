@@ -16,6 +16,8 @@ class ApplicationDecorator < Draper::Decorator
     nil
   end
 
+  private
+
   def arbre(assigns = {}, &block)
     Arbre::Context.new(assigns, self, &block).to_s
   end
