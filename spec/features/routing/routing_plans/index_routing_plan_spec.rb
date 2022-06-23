@@ -1,17 +1,34 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Index Routing Plans', type: :feature do
+  subject do
+    visit routing_routing_plans_path
+    fill_in_filters!
+  end
+
   include_context :login_as_admin
 
-  it 'n+1 checks' do
-    routing_plans = create_list(:routing_plan, 2, :filled)
-    visit routing_routing_plans_path
+  let(:fill_in_filters!) { nil }
+  let!(:routing_plans) do
+    create_list(:routing_plan, 2, :filled)
+  end
+
+  it 'responds with correct records' do
+    subject
+    expect(page).to have_table_row(count: routing_plans.count)
     routing_plans.each do |routing_plan|
-      expect(page).to have_css('.resource_id_link', text: routing_plan.id)
+      expect(page).to have_table_cell(column: 'ID', exact_text: routing_plan.id.to_s)
     end
   end
 
   describe 'account filter', js: true do
+    let(:fill_in_filters!) do
+      within_filters do
+        fill_in_chosen 'Assigned to account', with: account_1.display_name, exact: true, ajax: true
+        click_on 'Filter'
+      end
+    end
+
     let!(:customer_auth_1) { FactoryBot.create(:customers_auth, account: account_1, routing_plan: routing_plan_1) }
     let!(:contractor_1) { FactoryBot.create(:customer) }
     let!(:account_1) { FactoryBot.create(:account, contractor: contractor_1) }
@@ -21,14 +38,6 @@ RSpec.describe 'Index Routing Plans', type: :feature do
     let!(:contractor_2) { FactoryBot.create(:vendor) }
     let!(:account_2) { FactoryBot.create(:account, contractor: contractor_2) }
     let!(:routing_plan_2) { FactoryBot.create(:routing_plan) }
-
-    subject do
-      visit routing_routing_plans_path
-      within_filters do
-        fill_in_chosen 'Assigned to account', with: account_1.display_name, exact: true, ajax: true
-      end
-      click_on 'Filter'
-    end
 
     it 'should be filtered by account' do
       subject

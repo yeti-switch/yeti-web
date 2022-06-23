@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class BillingDecorator < Draper::Decorator
-  delegate_all
-
+class BillingDecorator < ApplicationDecorator
   def money_format(attr)
     return nil if model.public_send(attr).nil?
 

@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Routing::Rateplan do
   menu parent: 'Routing', label: 'Rateplans', priority: 40
+  decorate_with RateplanDecorator
 
   acts_as_audit
   acts_as_safe_destroy
@@ -22,13 +23,9 @@ ActiveAdmin.register Routing::Rateplan do
     id_column
     actions
     column :name
-    column 'Rate Groups' do |r|
-      raw(r.rate_groups.map { |rg| link_to rg.name, destinations_path(q: { rate_group_id_eq: rg.id }) }.sort.join(', '))
-    end
+    column 'Rate Groups', :rate_groups_links
     column :profit_control_mode
-    column :send_quality_alarms_to do |r|
-      r.contacts.map(&:email).sort.join(', ')
-    end
+    column :send_quality_alarms_to, :quality_alarm_emails
     column :uuid
     column :external_id
   end
@@ -50,17 +47,17 @@ ActiveAdmin.register Routing::Rateplan do
     f.actions
   end
 
-  show do |s|
+  show do
     attributes_table do
       row :id
       row :uuid
       row :name
       row 'Rate Groups' do |r|
-        raw(r.rate_groups.map { |rg| link_to rg.name, destinations_path(q: { rate_group_id_eq: rg.id }) }.sort.join(', '))
+        r.rate_groups_links(newline: true)
       end
       row :profit_control_mode
-      row :send_quality_alarms_to do
-        s.contacts.map(&:email).sort.join(', ')
+      row :send_quality_alarms_to do |r|
+        r.quality_alarm_emails(newline: true)
       end
       row :external_id
     end
