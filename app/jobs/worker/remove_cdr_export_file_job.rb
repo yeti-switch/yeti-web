@@ -39,7 +39,7 @@ module Worker
     def delete_url(cdr_export_id)
       [
         YetiConfig.cdr_export.delete_url.chomp('/'),
-        "#{cdr_export_id}.csv"
+        "#{cdr_export_id}.csv.gz"
       ].join('/')
     end
   end
