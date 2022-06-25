@@ -6,6 +6,7 @@
 #
 #  id                           :bigint(8)        not null, primary key
 #  aggregated_value             :decimal(, )
+#  auth_orig_ip                 :string
 #  customer_billed              :boolean
 #  customer_price               :decimal(, )
 #  destination_fee              :decimal(, )
