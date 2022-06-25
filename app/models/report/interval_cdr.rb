@@ -71,6 +71,7 @@ class Report::IntervalCdr < Cdr::Base
     time_start
     time_connect
     time_end
+    auth_orig_ip
     sign_orig_ip
     sign_orig_port
     sign_orig_local_ip

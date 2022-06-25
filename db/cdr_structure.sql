@@ -2688,7 +2688,8 @@ CREATE TABLE reports.cdr_custom_report_data (
     src_country_id integer,
     lega_user_agent character varying,
     legb_user_agent character varying,
-    p_charge_info_in character varying
+    p_charge_info_in character varying,
+    auth_orig_ip character varying
 );
 
 
@@ -2873,7 +2874,8 @@ CREATE TABLE reports.cdr_interval_report_data (
     id bigint NOT NULL,
     report_id integer NOT NULL,
     "timestamp" timestamp with time zone,
-    aggregated_value numeric
+    aggregated_value numeric,
+    auth_orig_ip character varying
 );
 
 
@@ -4833,6 +4835,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220317180333'),
 ('20220426100841'),
 ('20220503094804'),
-('20220509203319');
+('20220509203319'),
+('20220625185940');
 
 

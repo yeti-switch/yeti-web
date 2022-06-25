@@ -16,6 +16,7 @@
 #  agg_profit                   :decimal(, )
 #  agg_vendor_calls_duration    :bigint(8)
 #  agg_vendor_price             :decimal(, )
+#  auth_orig_ip                 :string
 #  customer_billed              :boolean
 #  customer_price               :decimal(, )
 #  destination_fee              :decimal(, )
