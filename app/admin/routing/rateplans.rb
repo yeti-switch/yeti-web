@@ -66,13 +66,10 @@ ActiveAdmin.register Routing::Rateplan do
   sidebar :links, only: %i[show edit] do
     ul do
       li do
-        link_to 'Destinations', destinations_path(q: { rateplan_id_eq: params[:id] })
+        link_to 'Destinations', destinations_path(q: { rate_group_rateplans_id_eq: params[:id] })
       end
       li do
         link_to 'Customer Auths', customers_auths_path(q: { rateplan_id_eq: params[:id] })
-      end
-      li do
-        link_to 'CDR list', cdrs_path(q: { rateplan_id_eq: params[:id] })
       end
     end
   end
