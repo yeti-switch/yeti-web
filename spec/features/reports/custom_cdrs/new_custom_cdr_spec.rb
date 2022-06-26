@@ -52,8 +52,8 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
     end
     let(:expected_service_params) do
       {
-        date_start: Time.zone.now.beginning_of_week,
-        date_end: Time.zone.now.next_week,
+        date_start: Time.zone.now.beginning_of_month,
+        date_end: Time.zone.now.next_month,
         group_by: %w[customer_id],
         filter: nil,
         customer: nil,
