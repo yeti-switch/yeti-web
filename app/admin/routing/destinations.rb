@@ -42,6 +42,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :rate_group, input_html: { class: 'chosen' }
+  filter :rate_group_rateplans_id_eq, as: :select, input_html: { class: 'chosen' }, label: 'Rateplan', collection: -> { Routing::Rateplan.all }
   filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
   filter :initial_rate
   filter :next_rate
