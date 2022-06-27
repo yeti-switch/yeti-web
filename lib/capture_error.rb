@@ -41,7 +41,10 @@ module CaptureError
           event
         }
 
-        sentry_config.async = ->(event, hint = nil) { Worker::CaptureErrorJob.perform_later(event, hint) }
+        # Usage of an async option is discouraged by sentry-ruby developers.
+        # By default sentry will create its own background workers to send sentry events.
+        # See https://github.com/getsentry/sentry-ruby/issues/1522
+        # and https://docs.sentry.io/platforms/ruby/configuration/options/#optional-settings
         sentry_config.send_default_pii = true
         sentry_config.breadcrumbs_logger = %i[sentry_logger active_support_logger]
         sentry_config.project_root = Rails.root.to_s
