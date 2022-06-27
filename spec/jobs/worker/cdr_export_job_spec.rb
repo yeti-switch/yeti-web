@@ -50,6 +50,16 @@ RSpec.describe Worker::CdrExportJob, type: :job do
     end
   end
 
+  context 'when callback_url is an empty string' do
+    let(:callback_url) { '' }
+
+    it 'ping callback dj should not be enqueued' do
+      expect { subject }.not_to have_enqueued_job(Worker::PingCallbackUrlJob)
+    end
+
+    include_examples :performs_cdr_export
+  end
+
   context 'when callback_url defined' do
     let(:cdr_export_attrs) do
       super().merge callback_url: 'http://example.com/notify'
