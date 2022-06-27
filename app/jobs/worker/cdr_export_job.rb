@@ -21,7 +21,7 @@ module Worker
       cdr_export.update!(status: CdrExport::STATUS_FAILED)
     ensure
       # ping callback_url
-      if cdr_export.callback_url
+      if cdr_export.callback_url.present?
         params = { export_id: cdr_export.id, status: cdr_export.status }
         PingCallbackUrlJob.perform_later(cdr_export.callback_url, params)
       end
