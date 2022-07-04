@@ -223,7 +223,7 @@ class Scheduler::Base
     text = "#{exception.class} #{exception.message}\n#{exception.backtrace&.join("\n")}"
     if exception.cause && exception.cause != exception && !causes.include?(exception.cause)
       new_causes = causes + [exception]
-      text += "\n\nCaused by:\n" + log_error_formatted(exception, causes: new_causes)
+      text += "\n\nCaused by:\n" + log_error_formatted(exception.cause, causes: new_causes)
     end
     text
   end
