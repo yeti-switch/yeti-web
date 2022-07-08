@@ -1819,6 +1819,16 @@ CREATE FUNCTION lnp.load_lnp_databases() RETURNS TABLE(id smallint, name charact
             SELECT t.id, 'Lnp::DatabaseAlcazar' as type, row_to_json(t.*) as data from class4.lnp_databases_alcazar t
             UNION ALL
             SELECT t.id, 'Lnp::DatabaseCoureAnq' as type, row_to_json(t.*) as data from class4.lnp_databases_coure_anq t
+            ) params ON db.database_id=params.id AND db.database_type=params.type
+          UNION ALL
+          SELECT
+            db.id,
+            db.name,
+            db.database_type,
+            params.data
+          from class4.cnam_databases db
+          join (
+            SELECT t.id, 'Cnam::DatabaseHttp' as type, row_to_json(t.*) as data from class4.cnam_databases_http t
             ) params ON db.database_id=params.id AND db.database_type=params.type;
       END;
       $$;
@@ -21705,6 +21715,90 @@ ALTER SEQUENCE class4.blacklists_id_seq OWNED BY class4.numberlists.id;
 
 
 --
+-- Name: lnp_databases; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.lnp_databases (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp with time zone,
+    database_type character varying,
+    database_id smallint NOT NULL,
+    cache_ttl integer DEFAULT 10800 NOT NULL
+);
+
+
+--
+-- Name: COLUMN lnp_databases.database_type; Type: COMMENT; Schema: class4; Owner: -
+--
+
+COMMENT ON COLUMN class4.lnp_databases.database_type IS 'One of Lnp::DatabaseThinq, Lnp::DatabaseSipRedirect, Lnp::DatabaseCsv';
+
+
+--
+-- Name: lnp_databases_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.lnp_databases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lnp_databases_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.lnp_databases_id_seq OWNED BY class4.lnp_databases.id;
+
+
+--
+-- Name: cnam_databases; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.cnam_databases (
+    id smallint DEFAULT nextval('class4.lnp_databases_id_seq'::regclass) NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp with time zone,
+    database_type character varying NOT NULL,
+    database_id smallint NOT NULL
+);
+
+
+--
+-- Name: cnam_databases_http; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.cnam_databases_http (
+    id smallint NOT NULL,
+    url character varying NOT NULL,
+    timeout smallint DEFAULT 5 NOT NULL
+);
+
+
+--
+-- Name: cnam_databases_http_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.cnam_databases_http_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cnam_databases_http_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.cnam_databases_http_id_seq OWNED BY class4.cnam_databases_http.id;
+
+
+--
 -- Name: codec_group_codecs; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -22421,27 +22515,6 @@ ALTER SEQUENCE class4.lnp_cache_id_seq OWNED BY class4.lnp_cache.id;
 
 
 --
--- Name: lnp_databases; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.lnp_databases (
-    id smallint NOT NULL,
-    name character varying NOT NULL,
-    created_at timestamp with time zone,
-    database_type character varying,
-    database_id smallint NOT NULL,
-    cache_ttl integer DEFAULT 10800 NOT NULL
-);
-
-
---
--- Name: COLUMN lnp_databases.database_type; Type: COMMENT; Schema: class4; Owner: -
---
-
-COMMENT ON COLUMN class4.lnp_databases.database_type IS 'One of Lnp::DatabaseThinq, Lnp::DatabaseSipRedirect, Lnp::DatabaseCsv';
-
-
---
 -- Name: lnp_databases_30x_redirect; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -22600,25 +22673,6 @@ CREATE SEQUENCE class4.lnp_databases_database_id_seq
 --
 
 ALTER SEQUENCE class4.lnp_databases_database_id_seq OWNED BY class4.lnp_databases.database_id;
-
-
---
--- Name: lnp_databases_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
---
-
-CREATE SEQUENCE class4.lnp_databases_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: lnp_databases_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
---
-
-ALTER SEQUENCE class4.lnp_databases_id_seq OWNED BY class4.lnp_databases.id;
 
 
 --
@@ -26073,6 +26127,13 @@ ALTER TABLE ONLY class4.areas ALTER COLUMN id SET DEFAULT nextval('class4.areas_
 
 
 --
+-- Name: cnam_databases_http id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.cnam_databases_http ALTER COLUMN id SET DEFAULT nextval('class4.cnam_databases_http_id_seq'::regclass);
+
+
+--
 -- Name: codec_group_codecs id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -26957,6 +27018,30 @@ ALTER TABLE ONLY class4.numberlists
 
 ALTER TABLE ONLY class4.numberlists
     ADD CONSTRAINT blacklists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cnam_databases_http cnam_databases_http_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.cnam_databases_http
+    ADD CONSTRAINT cnam_databases_http_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cnam_databases cnam_databases_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.cnam_databases
+    ADD CONSTRAINT cnam_databases_name_key UNIQUE (name);
+
+
+--
+-- Name: cnam_databases cnam_databases_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.cnam_databases
+    ADD CONSTRAINT cnam_databases_pkey PRIMARY KEY (id);
 
 
 --
@@ -30173,6 +30258,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220429111721'),
 ('20220501181051'),
 ('20220513084847'),
-('20220620135342');
+('20220620135342'),
+('20220707145142');
 
 
