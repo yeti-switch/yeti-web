@@ -97,7 +97,7 @@ ActiveAdmin.register Cnam::Database do
     attrs = %i[name database_type]
     database_attrs = [:type]
     database_type = params[:cnam_database].try!(:[], :database_type) ||
-      params[:cnam_database].try!(:[], :database_attributes).try!(:[], :type)
+                    params[:cnam_database].try!(:[], :database_attributes).try!(:[], :type)
 
     case database_type
     when Cnam::Database::CONST::TYPE_HTTP
