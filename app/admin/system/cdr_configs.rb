@@ -18,7 +18,7 @@ ActiveAdmin.register System::CdrConfig do
 
   permit_params :call_duration_round_mode_id,
                 :customer_amount_round_mode_id, :customer_amount_round_precision,
-                :vendor_amount_round_mode_id, :vendor_amount_round_precision
+                :vendor_amount_round_mode_id, :vendor_amount_round_precision, :disable_realtime_statistics
 
   show do |_config|
     attributes_table do
@@ -27,6 +27,7 @@ ActiveAdmin.register System::CdrConfig do
       row :customer_amount_round_precision
       row :vendor_price_round_mode
       row :vendor_amount_round_precision
+      row :disable_realtime_statistics
     end
   end
 
@@ -38,6 +39,7 @@ ActiveAdmin.register System::CdrConfig do
       f.input :customer_amount_round_precision
       f.input :vendor_price_round_mode, as: :select, include_blank: false
       f.input :vendor_amount_round_precision
+      f.input :disable_realtime_statistics
     end
     f.actions
   end
