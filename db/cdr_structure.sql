@@ -1394,7 +1394,7 @@ BEGIN
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
-  if v_config.disable_realtime_statistics then
+  if not v_config.disable_realtime_statistics then
     perform stats.update_rt_stats(v_cdr);
   end if;
 
@@ -1667,7 +1667,7 @@ BEGIN
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
-  if v_config.disable_realtime_statistics then
+  if not v_config.disable_realtime_statistics then
     perform stats.update_rt_stats(v_cdr);
   end if;
 
@@ -1955,7 +1955,7 @@ BEGIN
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
-  if v_config.disable_realtime_statistics then
+  if not v_config.disable_realtime_statistics then
     perform stats.update_rt_stats(v_cdr);
   end if;
 
