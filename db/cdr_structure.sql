@@ -936,6 +936,7 @@ CREATE TABLE sys.config (
     customer_amount_round_precision smallint DEFAULT 5 NOT NULL,
     vendor_amount_round_mode_id smallint DEFAULT 1 NOT NULL,
     vendor_amount_round_precision smallint DEFAULT 5 NOT NULL,
+    disable_realtime_statistics boolean DEFAULT false NOT NULL,
     CONSTRAINT config_customer_amount_round_precision_check CHECK (((customer_amount_round_precision >= 0) AND (customer_amount_round_precision <= 10))),
     CONSTRAINT config_vendor_amount_round_precision_check CHECK (((vendor_amount_round_precision >= 0) AND (vendor_amount_round_precision <= 10)))
 );
@@ -1209,8 +1210,6 @@ DECLARE
 
   v_nozerolen boolean;
   v_config sys.config%rowtype;
-  v_rtp_stream rtp_statistics.stream_ty;
-  v_rtp_stream_data rtp_statistics.streams%rowtype;
 
 BEGIN
   --  raise warning 'type: % id: %', i_failed_resource_type_id, i_failed_resource_id;
@@ -1357,103 +1356,6 @@ BEGIN
 
   v_rtp_stats_data:=json_populate_record(null::switch.rtp_stats_data_ty, i_rtp_stats_data);
 
-  v_cdr.lega_rx_payloads:=v_rtp_stats_data.lega_rx_payloads;
-  v_cdr.lega_tx_payloads:=v_rtp_stats_data.lega_tx_payloads;
-  v_cdr.legb_rx_payloads:=v_rtp_stats_data.legb_rx_payloads;
-  v_cdr.legb_tx_payloads:=v_rtp_stats_data.legb_tx_payloads;
-
-  v_cdr.lega_rx_bytes:=v_rtp_stats_data.lega_rx_bytes;
-  v_cdr.lega_tx_bytes:=v_rtp_stats_data.lega_tx_bytes;
-  v_cdr.legb_rx_bytes:=v_rtp_stats_data.legb_rx_bytes;
-  v_cdr.legb_tx_bytes:=v_rtp_stats_data.legb_tx_bytes;
-
-  v_cdr.lega_rx_decode_errs:=v_rtp_stats_data.lega_rx_decode_errs;
-  v_cdr.lega_rx_no_buf_errs:=v_rtp_stats_data.lega_rx_no_buf_errs;
-  v_cdr.lega_rx_parse_errs:=v_rtp_stats_data.lega_rx_parse_errs;
-  v_cdr.legb_rx_decode_errs:=v_rtp_stats_data.legb_rx_decode_errs;
-  v_cdr.legb_rx_no_buf_errs:=v_rtp_stats_data.legb_rx_no_buf_errs;
-  v_cdr.legb_rx_parse_errs:=v_rtp_stats_data.legb_rx_parse_errs;
-
-  if i_rtp_statistics is not null and json_array_length(i_rtp_statistics)>0 then
-    for v_rtp_stream IN select * from json_populate_recordset(null::rtp_statistics.stream_ty,i_rtp_statistics) LOOP
-
-        v_rtp_stream_data.id=nextval('rtp_statistics.streams_id_seq'::regclass);
-
-        v_rtp_stream_data.pop_id=i_pop_id;
-        v_rtp_stream_data.node_id=i_node_id;
-        v_rtp_stream_data.local_tag=v_rtp_stream.local_tag;
-
-        if v_rtp_stream.local_tag = i_local_tag then
-          v_rtp_stream_data.gateway_id = v_dynamic.orig_gw_id;
-          v_rtp_stream_data.gateway_external_id = v_dynamic.orig_gw_external_id;
-        else
-          v_rtp_stream_data.gateway_id = v_dynamic.term_gw_id;
-          v_rtp_stream_data.gateway_external_id = v_dynamic.term_gw_external_id;
-        end if;
-
-        v_rtp_stream_data.time_start=to_timestamp(v_rtp_stream.time_start);
-        v_rtp_stream_data.time_end=to_timestamp(v_rtp_stream.time_end);
-
-        v_rtp_stream_data.rtcp_rtt_min=v_rtp_stream.rtcp_rtt_min;
-        v_rtp_stream_data.rtcp_rtt_max=v_rtp_stream.rtcp_rtt_max;
-        v_rtp_stream_data.rtcp_rtt_mean=v_rtp_stream.rtcp_rtt_mean;
-        v_rtp_stream_data.rtcp_rtt_std=v_rtp_stream.rtcp_rtt_std;
-        v_rtp_stream_data.rx_rtcp_rr_count=v_rtp_stream.rx_rtcp_rr_count::bigint;
-        v_rtp_stream_data.rx_rtcp_sr_count=v_rtp_stream.rx_rtcp_sr_count::bigint;
-        v_rtp_stream_data.tx_rtcp_rr_count=v_rtp_stream.tx_rtcp_rr_count::bigint;
-        v_rtp_stream_data.tx_rtcp_sr_count=v_rtp_stream.tx_rtcp_sr_count::bigint;
-
-        v_rtp_stream_data.local_host=v_rtp_stream.local_host;
-        v_rtp_stream_data.local_port=v_rtp_stream.local_port;
-        v_rtp_stream_data.remote_host=v_rtp_stream.remote_host;
-        v_rtp_stream_data.remote_port=v_rtp_stream.remote_port;
-
-        v_rtp_stream_data.rx_ssrc=v_rtp_stream.rx_ssrc::bigint;
-        v_rtp_stream_data.rx_packets=v_rtp_stream.rx_packets::bigint;
-        v_rtp_stream_data.rx_bytes=v_rtp_stream.rx_bytes::bigint;
-        v_rtp_stream_data.rx_total_lost=v_rtp_stream.rx_total_lost::bigint;
-
-        v_rtp_stream_data.rx_payloads_transcoded=v_rtp_stream.rx_payloads_transcoded;
-        v_rtp_stream_data.rx_payloads_relayed=v_rtp_stream.rx_payloads_relayed;
-
-        v_rtp_stream_data.rx_decode_errors=v_rtp_stream.rx_decode_errors::bigint;
-        v_rtp_stream_data.rx_out_of_buffer_errors=v_rtp_stream.rx_out_of_buffer_errors::bigint;
-        v_rtp_stream_data.rx_rtp_parse_errors=v_rtp_stream.rx_rtp_parse_errors::bigint;
-
-        v_rtp_stream_data.rx_packet_delta_min=v_rtp_stream.rx_packet_delta_min;
-        v_rtp_stream_data.rx_packet_delta_max=v_rtp_stream.rx_packet_delta_max;
-        v_rtp_stream_data.rx_packet_delta_mean=v_rtp_stream.rx_packet_delta_mean;
-        v_rtp_stream_data.rx_packet_delta_std=v_rtp_stream.rx_packet_delta_std;
-
-        v_rtp_stream_data.rx_packet_jitter_min=v_rtp_stream.rx_packet_jitter_min;
-        v_rtp_stream_data.rx_packet_jitter_max=v_rtp_stream.rx_packet_jitter_max;
-        v_rtp_stream_data.rx_packet_jitter_mean=v_rtp_stream.rx_packet_jitter_mean;
-        v_rtp_stream_data.rx_packet_jitter_std=v_rtp_stream.rx_packet_jitter_std;
-
-        v_rtp_stream_data.rx_rtcp_jitter_min=v_rtp_stream.rx_rtcp_jitter_min;
-        v_rtp_stream_data.rx_rtcp_jitter_max=v_rtp_stream.rx_rtcp_jitter_max;
-        v_rtp_stream_data.rx_rtcp_jitter_mean=v_rtp_stream.rx_rtcp_jitter_mean;
-        v_rtp_stream_data.rx_rtcp_jitter_std=v_rtp_stream.rx_rtcp_jitter_std;
-
-        v_rtp_stream_data.tx_ssrc=v_rtp_stream.tx_ssrc::bigint;
-
-        v_rtp_stream_data.tx_packets=v_rtp_stream.tx_packets::bigint;
-        v_rtp_stream_data.tx_bytes=v_rtp_stream.tx_bytes::bigint;
-        v_rtp_stream_data.tx_total_lost=v_rtp_stream.tx_total_lost::bigint;
-
-        v_rtp_stream_data.tx_payloads_transcoded=v_rtp_stream.tx_payloads_transcoded;
-        v_rtp_stream_data.tx_payloads_relayed=v_rtp_stream.tx_payloads_relayed;
-
-        v_rtp_stream_data.tx_rtcp_jitter_min=v_rtp_stream.tx_rtcp_jitter_min;
-        v_rtp_stream_data.tx_rtcp_jitter_max=v_rtp_stream.tx_rtcp_jitter_max;
-        v_rtp_stream_data.tx_rtcp_jitter_mean=v_rtp_stream.tx_rtcp_jitter_mean;
-        v_rtp_stream_data.tx_rtcp_jitter_std=v_rtp_stream.tx_rtcp_jitter_std;
-
-        INSERT INTO rtp_statistics.streams VALUES( v_rtp_stream_data.*);
-        perform event.rtp_statistics_insert_event(v_rtp_stream_data);
-    end loop;
-  end if;
-
   v_cdr.global_tag=i_global_tag;
 
   v_cdr.dst_country_id=v_dynamic.dst_country_id;
@@ -1492,7 +1394,9 @@ BEGIN
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
-  perform stats.update_rt_stats(v_cdr);
+  if not v_config.disable_realtime_statistics then
+    perform stats.update_rt_stats(v_cdr);
+  end if;
 
   v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
   v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
@@ -1572,8 +1476,6 @@ DECLARE
 
   v_nozerolen boolean;
   v_config sys.config%rowtype;
-  v_rtp_stream rtp_statistics.stream_ty;
-  v_rtp_stream_data rtp_statistics.streams%rowtype;
 
   v_lega_headers switch.lega_headers_ty;
 
@@ -1725,103 +1627,6 @@ BEGIN
 
   v_rtp_stats_data:=json_populate_record(null::switch.rtp_stats_data_ty, i_rtp_stats_data);
 
-  v_cdr.lega_rx_payloads:=v_rtp_stats_data.lega_rx_payloads;
-  v_cdr.lega_tx_payloads:=v_rtp_stats_data.lega_tx_payloads;
-  v_cdr.legb_rx_payloads:=v_rtp_stats_data.legb_rx_payloads;
-  v_cdr.legb_tx_payloads:=v_rtp_stats_data.legb_tx_payloads;
-
-  v_cdr.lega_rx_bytes:=v_rtp_stats_data.lega_rx_bytes;
-  v_cdr.lega_tx_bytes:=v_rtp_stats_data.lega_tx_bytes;
-  v_cdr.legb_rx_bytes:=v_rtp_stats_data.legb_rx_bytes;
-  v_cdr.legb_tx_bytes:=v_rtp_stats_data.legb_tx_bytes;
-
-  v_cdr.lega_rx_decode_errs:=v_rtp_stats_data.lega_rx_decode_errs;
-  v_cdr.lega_rx_no_buf_errs:=v_rtp_stats_data.lega_rx_no_buf_errs;
-  v_cdr.lega_rx_parse_errs:=v_rtp_stats_data.lega_rx_parse_errs;
-  v_cdr.legb_rx_decode_errs:=v_rtp_stats_data.legb_rx_decode_errs;
-  v_cdr.legb_rx_no_buf_errs:=v_rtp_stats_data.legb_rx_no_buf_errs;
-  v_cdr.legb_rx_parse_errs:=v_rtp_stats_data.legb_rx_parse_errs;
-
-  if i_rtp_statistics is not null and json_array_length(i_rtp_statistics)>0 then
-    for v_rtp_stream IN select * from json_populate_recordset(null::rtp_statistics.stream_ty,i_rtp_statistics) LOOP
-
-        v_rtp_stream_data.id=nextval('rtp_statistics.streams_id_seq'::regclass);
-
-        v_rtp_stream_data.pop_id=i_pop_id;
-        v_rtp_stream_data.node_id=i_node_id;
-        v_rtp_stream_data.local_tag=v_rtp_stream.local_tag;
-
-        if v_rtp_stream.local_tag = i_local_tag then
-          v_rtp_stream_data.gateway_id = v_dynamic.orig_gw_id;
-          v_rtp_stream_data.gateway_external_id = v_dynamic.orig_gw_external_id;
-        else
-          v_rtp_stream_data.gateway_id = v_dynamic.term_gw_id;
-          v_rtp_stream_data.gateway_external_id = v_dynamic.term_gw_external_id;
-        end if;
-
-        v_rtp_stream_data.time_start=to_timestamp(v_rtp_stream.time_start);
-        v_rtp_stream_data.time_end=to_timestamp(v_rtp_stream.time_end);
-
-        v_rtp_stream_data.rtcp_rtt_min=v_rtp_stream.rtcp_rtt_min;
-        v_rtp_stream_data.rtcp_rtt_max=v_rtp_stream.rtcp_rtt_max;
-        v_rtp_stream_data.rtcp_rtt_mean=v_rtp_stream.rtcp_rtt_mean;
-        v_rtp_stream_data.rtcp_rtt_std=v_rtp_stream.rtcp_rtt_std;
-        v_rtp_stream_data.rx_rtcp_rr_count=v_rtp_stream.rx_rtcp_rr_count::bigint;
-        v_rtp_stream_data.rx_rtcp_sr_count=v_rtp_stream.rx_rtcp_sr_count::bigint;
-        v_rtp_stream_data.tx_rtcp_rr_count=v_rtp_stream.tx_rtcp_rr_count::bigint;
-        v_rtp_stream_data.tx_rtcp_sr_count=v_rtp_stream.tx_rtcp_sr_count::bigint;
-
-        v_rtp_stream_data.local_host=v_rtp_stream.local_host;
-        v_rtp_stream_data.local_port=v_rtp_stream.local_port;
-        v_rtp_stream_data.remote_host=v_rtp_stream.remote_host;
-        v_rtp_stream_data.remote_port=v_rtp_stream.remote_port;
-
-        v_rtp_stream_data.rx_ssrc=v_rtp_stream.rx_ssrc::bigint;
-        v_rtp_stream_data.rx_packets=v_rtp_stream.rx_packets::bigint;
-        v_rtp_stream_data.rx_bytes=v_rtp_stream.rx_bytes::bigint;
-        v_rtp_stream_data.rx_total_lost=v_rtp_stream.rx_total_lost::bigint;
-
-        v_rtp_stream_data.rx_payloads_transcoded=v_rtp_stream.rx_payloads_transcoded;
-        v_rtp_stream_data.rx_payloads_relayed=v_rtp_stream.rx_payloads_relayed;
-
-        v_rtp_stream_data.rx_decode_errors=v_rtp_stream.rx_decode_errors::bigint;
-        v_rtp_stream_data.rx_out_of_buffer_errors=v_rtp_stream.rx_out_of_buffer_errors::bigint;
-        v_rtp_stream_data.rx_rtp_parse_errors=v_rtp_stream.rx_rtp_parse_errors::bigint;
-
-        v_rtp_stream_data.rx_packet_delta_min=v_rtp_stream.rx_packet_delta_min;
-        v_rtp_stream_data.rx_packet_delta_max=v_rtp_stream.rx_packet_delta_max;
-        v_rtp_stream_data.rx_packet_delta_mean=v_rtp_stream.rx_packet_delta_mean;
-        v_rtp_stream_data.rx_packet_delta_std=v_rtp_stream.rx_packet_delta_std;
-
-        v_rtp_stream_data.rx_packet_jitter_min=v_rtp_stream.rx_packet_jitter_min;
-        v_rtp_stream_data.rx_packet_jitter_max=v_rtp_stream.rx_packet_jitter_max;
-        v_rtp_stream_data.rx_packet_jitter_mean=v_rtp_stream.rx_packet_jitter_mean;
-        v_rtp_stream_data.rx_packet_jitter_std=v_rtp_stream.rx_packet_jitter_std;
-
-        v_rtp_stream_data.rx_rtcp_jitter_min=v_rtp_stream.rx_rtcp_jitter_min;
-        v_rtp_stream_data.rx_rtcp_jitter_max=v_rtp_stream.rx_rtcp_jitter_max;
-        v_rtp_stream_data.rx_rtcp_jitter_mean=v_rtp_stream.rx_rtcp_jitter_mean;
-        v_rtp_stream_data.rx_rtcp_jitter_std=v_rtp_stream.rx_rtcp_jitter_std;
-
-        v_rtp_stream_data.tx_ssrc=v_rtp_stream.tx_ssrc::bigint;
-
-        v_rtp_stream_data.tx_packets=v_rtp_stream.tx_packets::bigint;
-        v_rtp_stream_data.tx_bytes=v_rtp_stream.tx_bytes::bigint;
-        v_rtp_stream_data.tx_total_lost=v_rtp_stream.tx_total_lost::bigint;
-
-        v_rtp_stream_data.tx_payloads_transcoded=v_rtp_stream.tx_payloads_transcoded;
-        v_rtp_stream_data.tx_payloads_relayed=v_rtp_stream.tx_payloads_relayed;
-
-        v_rtp_stream_data.tx_rtcp_jitter_min=v_rtp_stream.tx_rtcp_jitter_min;
-        v_rtp_stream_data.tx_rtcp_jitter_max=v_rtp_stream.tx_rtcp_jitter_max;
-        v_rtp_stream_data.tx_rtcp_jitter_mean=v_rtp_stream.tx_rtcp_jitter_mean;
-        v_rtp_stream_data.tx_rtcp_jitter_std=v_rtp_stream.tx_rtcp_jitter_std;
-
-        INSERT INTO rtp_statistics.streams VALUES( v_rtp_stream_data.*);
-        perform event.rtp_statistics_insert_event(v_rtp_stream_data);
-    end loop;
-  end if;
-
   v_cdr.global_tag=i_global_tag;
 
   v_cdr.src_country_id=v_dynamic.src_country_id;
@@ -1862,7 +1667,9 @@ BEGIN
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
-  perform stats.update_rt_stats(v_cdr);
+  if not v_config.disable_realtime_statistics then
+    perform stats.update_rt_stats(v_cdr);
+  end if;
 
   v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
   v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
@@ -2148,7 +1955,9 @@ BEGIN
 
   v_cdr:=billing.bill_cdr(v_cdr);
 
-  perform stats.update_rt_stats(v_cdr);
+  if not v_config.disable_realtime_statistics then
+    perform stats.update_rt_stats(v_cdr);
+  end if;
 
   v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
   v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
@@ -4836,6 +4645,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220426100841'),
 ('20220503094804'),
 ('20220509203319'),
-('20220625185940');
+('20220625185940'),
+('20220709123408');
 
 

@@ -6,6 +6,7 @@
 #
 #  id                              :integer(2)       not null, primary key
 #  customer_amount_round_precision :integer(2)       default(5), not null
+#  disable_realtime_statistics     :boolean          default(FALSE), not null
 #  vendor_amount_round_precision   :integer(2)       default(5), not null
 #  call_duration_round_mode_id     :integer(2)       default(1), not null
 #  customer_amount_round_mode_id   :integer(2)       default(1), not null
