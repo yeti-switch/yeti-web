@@ -21,9 +21,7 @@ RUN	apt update && \
 	apt install -f -y --no-install-recommends procps cron
 
 COPY	*.deb /
-RUN	ls -la /
-
-RUN	dpkg -i /*.deb || apt install -f -y --no-install-recommends
+RUN	dpkg -i /*.deb || apt install -f -y --no-install-recommends && rm /*.deb
 
 EXPOSE 3000/tcp
 
