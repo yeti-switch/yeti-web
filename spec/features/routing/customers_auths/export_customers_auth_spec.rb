@@ -88,7 +88,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Dst number radius rewrite result', item.dst_number_radius_rewrite_result.to_s, anything],
         ['Radius accounting profile name', item.radius_accounting_profile.name, anything],
         ['Tag action name', item.tag_action.name, anything],
-        ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything]
+        ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything],
+        ['Cnam database name', item.cnam_database.name, anything]
       ]
     )
   end
