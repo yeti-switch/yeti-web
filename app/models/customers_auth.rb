@@ -39,6 +39,7 @@
 #  uri_domain                       :string           default([]), is an Array
 #  x_yeti_auth                      :string           default([]), is an Array
 #  account_id                       :integer(4)
+#  cnam_database_id                 :integer(2)
 #  customer_id                      :integer(4)       not null
 #  diversion_policy_id              :integer(4)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
@@ -68,6 +69,7 @@
 # Foreign Keys
 #
 #  customers_auth_account_id_fkey                    (account_id => accounts.id)
+#  customers_auth_cnam_database_id_fkey              (cnam_database_id => cnam_databases.id)
 #  customers_auth_customer_id_fkey                   (customer_id => contractors.id)
 #  customers_auth_diversion_policy_id_fkey           (diversion_policy_id => diversion_policy.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
@@ -125,6 +127,8 @@ class CustomersAuth < ApplicationRecord
   belongs_to :dst_number_field, class_name: 'Routing::CustomerAuthDstNumberField', foreign_key: :dst_number_field_id
   belongs_to :src_number_field, class_name: 'Routing::CustomerAuthSrcNumberField', foreign_key: :src_number_field_id
   belongs_to :src_name_field, class_name: 'Routing::CustomerAuthSrcNameField', foreign_key: :src_name_field_id
+
+  belongs_to :cnam_database, class_name: 'Cnam::Database', foreign_key: :cnam_database_id, optional: true
 
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 

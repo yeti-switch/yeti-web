@@ -4,11 +4,14 @@
 #
 # Table name: class4.cnam_databases
 #
-#  id            :integer(2)       not null, primary key
-#  database_type :string           not null
-#  name          :string           not null
-#  created_at    :datetime
-#  database_id   :integer(2)       not null
+#  id                 :integer(2)       not null, primary key
+#  database_type      :string           not null
+#  drop_call_on_error :boolean          default(FALSE), not null
+#  name               :string           not null
+#  request_lua        :string
+#  response_lua       :string
+#  created_at         :datetime
+#  database_id        :integer(2)       not null
 #
 # Indexes
 #

@@ -1051,6 +1051,20 @@ CREATE TYPE switch20.callprofile_ty AS (
 
 
 --
+-- Name: cnam_lua_resp; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.cnam_lua_resp AS (
+	ppi character varying,
+	pai character varying,
+	dst_number character varying,
+	src_name character varying,
+	src_number character varying,
+	routing_tag_ids smallint[]
+);
+
+
+--
 -- Name: identity_header_ty; Type: TYPE; Schema: switch20; Owner: -
 --
 
@@ -14682,6 +14696,30 @@ CREATE FUNCTION switch20.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth
 
 
 --
+-- Name: cnam_lua_build_request(character varying, text); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.cnam_lua_build_request(fn character varying, arg text) RETURNS text
+    LANGUAGE pllua
+    AS $$
+        func = assert(load(fn))
+        return func()(arg)
+$$;
+
+
+--
+-- Name: cnam_lua_response_exec(character varying, text); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.cnam_lua_response_exec(fn character varying, arg text) RETURNS switch20.cnam_lua_resp
+    LANGUAGE pllua
+    AS $$
+        func = assert(load(fn))
+        return func()(arg)
+$$;
+
+
+--
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
@@ -17654,7 +17692,12 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_numberlist_size integer;
         v_lua_context switch20.lua_call_context;
         v_identity_data switch20.identity_data_ty[];
-
+        v_pai varchar[];
+        v_ppi varchar[];
+        v_cnam_req_json json;
+        v_cnam_resp_json json;
+        v_cnam_lua_resp switch20.cnam_lua_resp;
+        v_cnam_database class4.cnam_databases%rowtype;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -17701,7 +17744,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.to_domain=i_to_domain;
 
         v_ret.pai_in=i_pai;
+        v_pai=string_to_array(i_pai,',');
         v_ret.ppi_in=i_ppi;
+        v_ppi=string_to_array(i_ppi,',');
         v_ret.privacy_in=i_privacy;
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
@@ -17981,6 +18026,47 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_ret.dst_prefix_out = v_lua_context.dst_number_out;
         end if;
 **/
+        if v_customer_auth_normalized.cnam_database_id is not null then
+          select into v_cnam_database * from class4.cnam_databases where id=v_customer_auth_normalized.cnam_database_id;
+
+          select into v_cnam_req_json * from switch20.cnam_lua_build_request(v_cnam_database.request_lua, row_to_json(v_ret)::text);
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> CNAM. Lua generated request: %',EXTRACT(MILLISECOND from v_end-v_start),v_cnam_req_json;
+          /*}dbg*/
+
+          select into v_cnam_resp_json yeti_ext.lnp_resolve_cnam(v_cnam_database.id, v_cnam_req_json);
+
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> CNAM. resolver response: %',EXTRACT(MILLISECOND from v_end-v_start),v_cnam_resp_json;
+          /*}dbg*/
+
+          if json_extract_path_text(v_cnam_resp_json,'error') is not null then
+            RAISE NOTICE '% ms -> CNAM. error',EXTRACT(MILLISECOND from v_end-v_start);
+
+            if v_cnam_database.drop_call_on_error then
+              v_ret.disconnect_code_id=8009; -- CNAM Error
+              RETURN NEXT v_ret;
+              RETURN;
+            end if;
+          else
+            select into v_cnam_lua_resp * from switch20.cnam_lua_response_exec(v_cnam_database.response_lua, json_extract_path_text(v_cnam_resp_json,'response'));
+
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> CNAM. Lua parsed response: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_cnam_lua_resp);
+            /*}dbg*/
+
+            v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
+            v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
+            v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
+            v_ret.pai_out = coalesce(v_cnam_lua_resp.pai,v_ret.pai_out);
+            v_ret.ppi_out = coalesce(v_cnam_lua_resp.ppi,v_ret.ppi_out);
+            v_call_tags = coalesce(v_cnam_lua_resp.routing_tag_ids,v_call_tags);
+          end if;
+
+        end if;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -18834,7 +18920,12 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_numberlist_size integer;
         v_lua_context switch20.lua_call_context;
         v_identity_data switch20.identity_data_ty[];
-
+        v_pai varchar[];
+        v_ppi varchar[];
+        v_cnam_req_json json;
+        v_cnam_resp_json json;
+        v_cnam_lua_resp switch20.cnam_lua_resp;
+        v_cnam_database class4.cnam_databases%rowtype;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -18881,7 +18972,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.to_domain=i_to_domain;
 
         v_ret.pai_in=i_pai;
+        v_pai=string_to_array(i_pai,',');
         v_ret.ppi_in=i_ppi;
+        v_ppi=string_to_array(i_ppi,',');
         v_ret.privacy_in=i_privacy;
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
@@ -19161,6 +19254,47 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_ret.dst_prefix_out = v_lua_context.dst_number_out;
         end if;
 **/
+        if v_customer_auth_normalized.cnam_database_id is not null then
+          select into v_cnam_database * from class4.cnam_databases where id=v_customer_auth_normalized.cnam_database_id;
+
+          select into v_cnam_req_json * from switch20.cnam_lua_build_request(v_cnam_database.request_lua, row_to_json(v_ret)::text);
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> CNAM. Lua generated request: %',EXTRACT(MILLISECOND from v_end-v_start),v_cnam_req_json;
+          /*}dbg*/
+
+          select into v_cnam_resp_json yeti_ext.lnp_resolve_cnam(v_cnam_database.id, v_cnam_req_json);
+
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> CNAM. resolver response: %',EXTRACT(MILLISECOND from v_end-v_start),v_cnam_resp_json;
+          /*}dbg*/
+
+          if json_extract_path_text(v_cnam_resp_json,'error') is not null then
+            RAISE NOTICE '% ms -> CNAM. error',EXTRACT(MILLISECOND from v_end-v_start);
+
+            if v_cnam_database.drop_call_on_error then
+              v_ret.disconnect_code_id=8009; -- CNAM Error
+              RETURN NEXT v_ret;
+              RETURN;
+            end if;
+          else
+            select into v_cnam_lua_resp * from switch20.cnam_lua_response_exec(v_cnam_database.response_lua, json_extract_path_text(v_cnam_resp_json,'response'));
+
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> CNAM. Lua parsed response: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_cnam_lua_resp);
+            /*}dbg*/
+
+            v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
+            v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
+            v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
+            v_ret.pai_out = coalesce(v_cnam_lua_resp.pai,v_ret.pai_out);
+            v_ret.ppi_out = coalesce(v_cnam_lua_resp.ppi,v_ret.ppi_out);
+            v_call_tags = coalesce(v_cnam_lua_resp.routing_tag_ids,v_call_tags);
+          end if;
+
+        end if;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -20011,7 +20145,12 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_numberlist_size integer;
         v_lua_context switch20.lua_call_context;
         v_identity_data switch20.identity_data_ty[];
-
+        v_pai varchar[];
+        v_ppi varchar[];
+        v_cnam_req_json json;
+        v_cnam_resp_json json;
+        v_cnam_lua_resp switch20.cnam_lua_resp;
+        v_cnam_database class4.cnam_databases%rowtype;
       BEGIN
         
 
@@ -20054,7 +20193,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.to_domain=i_to_domain;
 
         v_ret.pai_in=i_pai;
+        v_pai=string_to_array(i_pai,',');
         v_ret.ppi_in=i_ppi;
+        v_ppi=string_to_array(i_ppi,',');
         v_ret.privacy_in=i_privacy;
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
@@ -20310,6 +20451,38 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           v_ret.dst_prefix_out = v_lua_context.dst_number_out;
         end if;
 **/
+        if v_customer_auth_normalized.cnam_database_id is not null then
+          select into v_cnam_database * from class4.cnam_databases where id=v_customer_auth_normalized.cnam_database_id;
+
+          select into v_cnam_req_json * from switch20.cnam_lua_build_request(v_cnam_database.request_lua, row_to_json(v_ret)::text);
+          
+
+          select into v_cnam_resp_json yeti_ext.lnp_resolve_cnam(v_cnam_database.id, v_cnam_req_json);
+
+          
+
+          if json_extract_path_text(v_cnam_resp_json,'error') is not null then
+            RAISE NOTICE '% ms -> CNAM. error',EXTRACT(MILLISECOND from v_end-v_start);
+
+            if v_cnam_database.drop_call_on_error then
+              v_ret.disconnect_code_id=8009; -- CNAM Error
+              RETURN NEXT v_ret;
+              RETURN;
+            end if;
+          else
+            select into v_cnam_lua_resp * from switch20.cnam_lua_response_exec(v_cnam_database.response_lua, json_extract_path_text(v_cnam_resp_json,'response'));
+
+            
+
+            v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
+            v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
+            v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
+            v_ret.pai_out = coalesce(v_cnam_lua_resp.pai,v_ret.pai_out);
+            v_ret.ppi_out = coalesce(v_cnam_lua_resp.ppi,v_ret.ppi_out);
+            v_call_tags = coalesce(v_cnam_lua_resp.routing_tag_ids,v_call_tags);
+          end if;
+
+        end if;
 
         
 
@@ -21763,7 +21936,10 @@ CREATE TABLE class4.cnam_databases (
     name character varying NOT NULL,
     created_at timestamp with time zone,
     database_type character varying NOT NULL,
-    database_id smallint NOT NULL
+    database_id smallint NOT NULL,
+    response_lua character varying,
+    request_lua character varying,
+    drop_call_on_error boolean DEFAULT false NOT NULL
 );
 
 
@@ -21947,6 +22123,7 @@ CREATE TABLE class4.customers_auth (
     src_number_field_id smallint DEFAULT 1 NOT NULL,
     src_name_field_id smallint DEFAULT 1 NOT NULL,
     dst_number_field_id smallint DEFAULT 1 NOT NULL,
+    cnam_database_id smallint,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -22039,6 +22216,7 @@ CREATE TABLE class4.customers_auth_normalized (
     src_number_field_id smallint DEFAULT 1 NOT NULL,
     src_name_field_id smallint DEFAULT 1 NOT NULL,
     dst_number_field_id smallint DEFAULT 1 NOT NULL,
+    cnam_database_id smallint,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -29273,6 +29451,14 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
+-- Name: customers_auth customers_auth_cnam_database_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth
+    ADD CONSTRAINT customers_auth_cnam_database_id_fkey FOREIGN KEY (cnam_database_id) REFERENCES class4.cnam_databases(id);
+
+
+--
 -- Name: customers_auth customers_auth_customer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30259,6 +30445,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220501181051'),
 ('20220513084847'),
 ('20220620135342'),
-('20220707145142');
+('20220707145142'),
+('20220717150840'),
+('20220718195457');
 
 

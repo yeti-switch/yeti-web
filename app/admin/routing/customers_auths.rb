@@ -46,6 +46,7 @@ ActiveAdmin.register CustomersAuth do
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
+                 [:cnam_database_name, proc { |row| row.cnam_database.try(:name) }],
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  [:radius_auth_profile_name, proc { |row| row.radius_auth_profile.try(:name) || '' }],
                  :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
@@ -78,12 +79,13 @@ ActiveAdmin.register CustomersAuth do
                 :transport_protocol_id,
                 :tag_action_id, :lua_script_id,
                 :dst_number_field_id, :src_number_field_id, :src_name_field_id,
+                :cnam_database_id,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
-           :lua_script, :src_name_field, :src_number_field, :dst_number_field,
+           :lua_script, :src_name_field, :src_number_field, :dst_number_field, :cnam_database,
            account: :contractor
 
   controller do
@@ -173,6 +175,7 @@ ActiveAdmin.register CustomersAuth do
     column :dst_rewrite_result
 
     column :lua_script
+    column :cnam_database
 
     column :radius_auth_profile, sortable: 'radius_auth_profiles.name'
     column :src_number_radius_rewrite_rule
@@ -227,6 +230,7 @@ ActiveAdmin.register CustomersAuth do
   filter :gateway_incoming_auth_password,
          label: 'Incoming Auth Password',
          as: :string
+  filter :cnam_database, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -308,6 +312,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
           f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :cnam_database, input_html: { class: 'chosen' }, include_blank: 'None'
         end
       end
 
@@ -404,6 +409,7 @@ ActiveAdmin.register CustomersAuth do
           row :dst_rewrite_rule
           row :dst_rewrite_result
 
+          row :cnam_database
           row :lua_script
         end
       end
