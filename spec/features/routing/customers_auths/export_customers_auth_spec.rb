@@ -23,7 +23,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
            to_domain: ['to.com', 'to.net'],
            x_yeti_auth: %w[qwe asd],
            tag_action: Routing::TagAction.take,
-           tag_action_value: [@tag_us.id, @tag_emergency.id])
+           tag_action_value: [@tag_us.id, @tag_emergency.id],
+           cnam_database: create(:cnam_database))
   end
 
   before do
@@ -88,7 +89,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Dst number radius rewrite result', item.dst_number_radius_rewrite_result.to_s, anything],
         ['Radius accounting profile name', item.radius_accounting_profile.name, anything],
         ['Tag action name', item.tag_action.name, anything],
-        ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything]
+        ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything],
+        ['Cnam database name', item.cnam_database.name, anything]
       ]
     )
   end

@@ -39,6 +39,7 @@
 #  uri_domain                       :string
 #  x_yeti_auth                      :string
 #  account_id                       :integer(4)
+#  cnam_database_id                 :integer(2)
 #  customer_id                      :integer(4)       not null
 #  customers_auth_id                :integer(4)       not null
 #  diversion_policy_id              :integer(4)       default(1), not null

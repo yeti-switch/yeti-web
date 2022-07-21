@@ -75,6 +75,12 @@ ActiveAdmin.register Cnam::Database do
         attributes_table do
           row :id
           row :name
+          row :request_lua do |row|
+            pre code row.request_lua
+          end
+          row :response_lua do |row|
+            pre code row.response_lua
+          end
           row :created_at
         end
       end
@@ -94,7 +100,7 @@ ActiveAdmin.register Cnam::Database do
   end
 
   permit_params do
-    attrs = %i[name database_type]
+    attrs = %i[name database_type response_lua request_lua]
     database_attrs = [:type]
     database_type = params[:cnam_database].try!(:[], :database_type) ||
                     params[:cnam_database].try!(:[], :database_attributes).try!(:[], :type)
@@ -113,6 +119,8 @@ ActiveAdmin.register Cnam::Database do
 
     f.inputs name: 'Main' do
       f.input :name
+      f.input :request_lua, as: :text
+      f.input :response_lua, as: :text
     end
 
     database = f.object.database || f.object.database_type.constantize.new
