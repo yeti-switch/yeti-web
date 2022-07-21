@@ -23,7 +23,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
            to_domain: ['to.com', 'to.net'],
            x_yeti_auth: %w[qwe asd],
            tag_action: Routing::TagAction.take,
-           tag_action_value: [@tag_us.id, @tag_emergency.id])
+           tag_action_value: [@tag_us.id, @tag_emergency.id],
+           cnam_database: create(:cnam_database))
   end
 
   before do
