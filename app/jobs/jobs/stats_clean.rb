@@ -12,6 +12,7 @@ module Jobs
       Stats::TrafficCustomerAccount.where('timestamp < ?', ago).delete_all
       Stats::TrafficVendorAccount.where('timestamp < ?', ago).delete_all
       Stats::TerminationQualityStat.where('time_start < ?', quality_stats_period).delete_all
+      Stats::CustomerAuthStats.where('timestamp < ?', ago).delete_all
       Log::ApiLog.where('created_at < ?', ago).delete_all
       Lnp::Cache.where('expires_at<now()').delete_all
     end

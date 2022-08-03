@@ -861,12 +861,48 @@ DECLARE
     v_profit numeric;
 
 BEGIN
-    if i_cdr.customer_acc_id is null or i_cdr.customer_acc_id=0 then
+    if i_cdr.customer_acc_id is null or i_cdr.customer_acc_id=0 or i_cdr.customer_auth_id is null or i_cdr.customer_auth_id=0 then
         return;
     end if;
-    v_ts=date_trunc(v_agg_period,i_cdr.time_start);
     v_profit=coalesce(i_cdr.profit,0);
 
+    v_ts=date_trunc('hour',i_cdr.time_start);
+    update stats.customer_auth_stats set
+        duration = duration + coalesce(i_cdr.duration, 0),
+        customer_duration = customer_duration + coalesce(i_cdr.customer_duration, 0),
+        calls_count = calls_count + 1,
+        customer_price = customer_price + coalesce(i_cdr.customer_price, 0),
+        customer_price_no_vat = customer_price_no_vat + coalesce(i_cdr.customer_price_no_vat, 0),
+        vendor_price = vendor_price + coalesce(i_cdr.vendor_price, 0)
+    where customer_auth_id = i_cdr.customer_auth_id and timestamp = v_ts;
+    if not found then
+        begin
+            insert into stats.customer_auth_stats(
+                timestamp, customer_auth_id, duration, customer_duration, calls_count, customer_price, customer_price_no_vat, vendor_price)
+            values(
+              v_ts,
+              i_cdr.customer_auth_id,
+              coalesce(i_cdr.duration, 0),
+              coalesce(i_cdr.customer_duration, 0),
+              1,
+              coalesce(i_cdr.customer_price, 0),
+              coalesce(i_cdr.customer_price_no_vat, 0),
+              coalesce(i_cdr.vendor_price, 0)
+            );
+        exception
+            when unique_violation then
+              update stats.customer_auth_stats set
+                duration = duration + coalesce(i_cdr.duration, 0),
+                customer_duration = customer_duration + coalesce(i_cdr.customer_duration, 0),
+                calls_count = calls_count + 1,
+                customer_price = customer_price + coalesce(i_cdr.customer_price, 0),
+                customer_price_no_vat = customer_price_no_vat + coalesce(i_cdr.customer_price_no_vat, 0),
+                vendor_price = vendor_price + coalesce(i_cdr.vendor_price, 0)
+              where customer_auth_id = i_cdr.customer_auth_id and timestamp = v_ts;
+        end;
+    end if;
+
+    v_ts=date_trunc(v_agg_period,i_cdr.time_start);
     update stats.traffic_customer_accounts set
         duration=duration+coalesce(i_cdr.duration,0),
         count=count+1,
@@ -3528,6 +3564,42 @@ ALTER SEQUENCE stats.active_calls_id_seq OWNED BY stats.active_calls.id;
 
 
 --
+-- Name: customer_auth_stats; Type: TABLE; Schema: stats; Owner: -
+--
+
+CREATE TABLE stats.customer_auth_stats (
+    id bigint NOT NULL,
+    customer_auth_id integer NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    duration integer DEFAULT 0 NOT NULL,
+    customer_duration integer DEFAULT 0 NOT NULL,
+    calls_count integer DEFAULT 0 NOT NULL,
+    customer_price numeric DEFAULT 0 NOT NULL,
+    customer_price_no_vat numeric DEFAULT 0 NOT NULL,
+    vendor_price numeric DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: customer_auth_stats_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
+--
+
+CREATE SEQUENCE stats.customer_auth_stats_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customer_auth_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
+--
+
+ALTER SEQUENCE stats.customer_auth_stats_id_seq OWNED BY stats.customer_auth_stats.id;
+
+
+--
 -- Name: termination_quality_stats; Type: TABLE; Schema: stats; Owner: -
 --
 
@@ -3873,6 +3945,13 @@ ALTER TABLE ONLY stats.active_calls ALTER COLUMN id SET DEFAULT nextval('stats.a
 --
 
 ALTER TABLE ONLY stats.active_calls_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_hourly_id_seq'::regclass);
+
+
+--
+-- Name: customer_auth_stats id; Type: DEFAULT; Schema: stats; Owner: -
+--
+
+ALTER TABLE ONLY stats.customer_auth_stats ALTER COLUMN id SET DEFAULT nextval('stats.customer_auth_stats_id_seq'::regclass);
 
 
 --
@@ -4233,6 +4312,14 @@ ALTER TABLE ONLY stats.active_calls
 
 
 --
+-- Name: customer_auth_stats customer_auth_stats_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
+--
+
+ALTER TABLE ONLY stats.customer_auth_stats
+    ADD CONSTRAINT customer_auth_stats_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: termination_quality_stats termination_quality_stats_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
@@ -4420,6 +4507,13 @@ CREATE INDEX vendor_traffic_report_data_report_id_idx ON reports.vendor_traffic_
 --
 
 CREATE INDEX active_call_accounts_account_id_created_at_idx ON stats.active_call_accounts USING btree (account_id, created_at);
+
+
+--
+-- Name: customer_auth_stats_customer_auth_id_timestamp_idx; Type: INDEX; Schema: stats; Owner: -
+--
+
+CREATE UNIQUE INDEX customer_auth_stats_customer_auth_id_timestamp_idx ON stats.customer_auth_stats USING btree (customer_auth_id, "timestamp");
 
 
 --
@@ -4646,6 +4740,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220503094804'),
 ('20220509203319'),
 ('20220625185940'),
-('20220709123408');
+('20220709123408'),
+('20220803115423');
 
 
