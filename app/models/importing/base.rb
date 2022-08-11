@@ -155,6 +155,7 @@ class Importing::Base < ApplicationRecord
   # Use this method for resolving:
   #   routing_tag_names => routing_tag_ids
   #   tag_action_value_names => tag_action_value
+  # Sorts routing_tag_ids in same way as RoutingTagsSort#call
   def self.resolve_array_of_tags(ids_column, names_column)
     sql = "
       UPDATE #{table_name} ta
@@ -162,12 +163,14 @@ class Importing::Base < ApplicationRecord
             SELECT id::smallint
             FROM #{Routing::RoutingTag.table_name}
             WHERE name = ANY ( string_to_array(replace(ta.#{names_column}, ', ', ',')::varchar, ',')::varchar[] )
+            ORDER BY id ASC
           )
       WHERE ta.#{ids_column} = '{}' AND ta.#{names_column} <> '';
     "
     ApplicationRecord.connection.execute(sql)
   end
 
+  # Sorts routing_tag_ids in same way as RoutingTagsSort#call
   def self.resolve_null_tag(ids_column, names_column)
     sql = "
       UPDATE #{table_name} ta

@@ -53,4 +53,31 @@ RSpec.describe Importing::Dialpeer do
 
     let(:real_item) { described_class.import_class.last }
   end
+
+  context 'when routing_tag_names filled' do
+    let!(:routing_tags) do
+      [
+        FactoryBot.create(:routing_tag, name: 'rt1'),
+        FactoryBot.create(:routing_tag, name: 'rt2')
+      ]
+    end
+    include_context :init_importing_dialpeer,
+                    prefix: '111',
+                    routing_tag_ids: [],
+                    routing_tag_names: "rt2,#{Routing::RoutingTag::ANY_TAG},rt1"
+    include_context :init_dialpeer, prefix: '111'
+
+    let(:real_item) { described_class.import_class.last }
+
+    it 'stores ordered routing_tag_ids in importing dialpeer record' do
+      expect { subject }.to change {
+        @importing_dialpeer.reload.routing_tag_ids
+      }.from([]).to(
+        # correctly sorted: rt1, rt2, ANY_TAG
+        [routing_tags[0].id, routing_tags[1].id, nil]
+      )
+    end
+
+    include_examples 'after_import_hook when real items match'
+  end
 end
