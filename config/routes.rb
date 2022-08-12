@@ -121,6 +121,7 @@ Rails.application.routes.draw do
           namespace :equipment do
             jsonapi_resources :gateway_rel100_modes
             jsonapi_resources :gateway_inband_dtmf_filtering_modes
+            jsonapi_resources :gateway_diversion_send_modes
             jsonapi_resources :gateway_network_protocol_priorities
             jsonapi_resources :gateway_media_encryption_modes
             jsonapi_resources :transport_protocols
