@@ -73,11 +73,7 @@ ActiveAdmin.register Importing::Gateway do
     column :allow_termination
     column :allow_origination
 
-    column :anonymize_sdp
     column :proxy_media
-
-    column :transparent_seqno
-    column :transparent_ssrc
 
     column :incoming_auth_username
     column :incoming_auth_password

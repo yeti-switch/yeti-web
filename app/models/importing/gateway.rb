@@ -188,8 +188,7 @@ class Importing::Gateway < Importing::Base
     dst_rewrite_rule dst_rewrite_result
     acd_limit asr_limit short_calls_limit
     allow_termination allow_origination
-    anonymize_sdp proxy_media
-    transparent_seqno transparent_ssrc
+    proxy_media
     auth_enabled auth_user auth_password
     term_use_outbound_proxy term_outbound_proxy term_force_outbound_proxy
     term_next_hop orig_next_hop

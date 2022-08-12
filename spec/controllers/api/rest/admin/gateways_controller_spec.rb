@@ -26,10 +26,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :term_use_outbound_proxy
     it_behaves_like :jsonapi_filters_by_boolean_field, :allow_termination
     it_behaves_like :jsonapi_filters_by_boolean_field, :allow_origination
-    it_behaves_like :jsonapi_filters_by_boolean_field, :anonymize_sdp
     it_behaves_like :jsonapi_filters_by_boolean_field, :proxy_media
-    it_behaves_like :jsonapi_filters_by_boolean_field, :transparent_seqno
-    it_behaves_like :jsonapi_filters_by_boolean_field, :transparent_ssrc
     it_behaves_like :jsonapi_filters_by_boolean_field, :sst_enabled
     it_behaves_like :jsonapi_filters_by_number_field, :sst_minimum_timer
     it_behaves_like :jsonapi_filters_by_number_field, :sst_maximum_timer
@@ -53,6 +50,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :prefer_existing_codecs
     it_behaves_like :jsonapi_filters_by_boolean_field, :force_symmetric_rtp
     it_behaves_like :jsonapi_filters_by_string_field, :sdp_alines_filter_list
+    it_behaves_like :jsonapi_filters_by_string_field, :diversion_domain
     it_behaves_like :jsonapi_filters_by_string_field, :diversion_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :diversion_rewrite_result
     it_behaves_like :jsonapi_filters_by_string_field, :src_name_rewrite_rule

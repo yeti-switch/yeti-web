@@ -20,10 +20,7 @@ FactoryBot.define do
     contractor_id { nil }
     allow_termination { true }
     allow_origination { true }
-    anonymize_sdp { true }
     proxy_media { true }
-    transparent_seqno { false }
-    transparent_ssrc { false }
     sst_enabled { false }
     sst_minimum_timer { 50 }
     sst_maximum_timer { 50 }
