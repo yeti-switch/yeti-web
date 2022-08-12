@@ -622,6 +622,7 @@ ActiveAdmin.register Gateway do
         attributes_table_for s do
           row :sdp_c_location
           row :codec_group, input_html: { class: 'chosen' }
+          row :try_avoid_transcoding
           row :proxy_media
           row :single_codec_in_200ok
           row :force_symmetric_rtp
