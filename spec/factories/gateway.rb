@@ -113,7 +113,7 @@ FactoryBot.define do
       sdp_alines_filter_type { FilterType.take }
       orig_disconnect_policy { DisconnectPolicy.take || build(:disconnect_policy) }
       term_disconnect_policy { DisconnectPolicy.take || build(:disconnect_policy) }
-      diversion_policy { DiversionPolicy.take }
+      diversion_send_mode { Equipment::GatewayDiversionSendMode.take }
       sdp_c_location { SdpCLocation.take }
       sensor
       sensor_level { System::SensorLevel.take }

@@ -152,7 +152,7 @@ class Importing::Gateway < Importing::Base
   belongs_to :orig_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :orig_disconnect_policy_id, optional: true
   belongs_to :term_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :term_disconnect_policy_id, optional: true
   belongs_to :gateway_group, class_name: '::GatewayGroup', optional: true
-  belongs_to :diversion_policy, class_name: '::DiversionPolicy', optional: true
+  belongs_to :diversion_send_mode, class_name: '::Equipment::DiversionSendMode', optional: true
   belongs_to :pop, class_name: '::Pop', optional: true
   belongs_to :codec_group, class_name: '::CodecGroup', optional: true
   belongs_to :sdp_c_location, class_name: '::SdpCLocation', optional: true
@@ -181,7 +181,8 @@ class Importing::Gateway < Importing::Base
     host port
     origination_capacity
     termination_capacity
-    diversion_policy_id
+    diversion_send_mode_id
+    diversion_domain
     diversion_rewrite_rule diversion_rewrite_result
     src_name_rewrite_rule src_name_rewrite_result
     src_rewrite_rule src_rewrite_result

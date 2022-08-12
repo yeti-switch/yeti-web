@@ -52,7 +52,8 @@ ActiveAdmin.register Importing::Gateway do
     column :termination_src_numberlist, sortable: :termination_src_numberlist_name
     column :termination_dst_numberlist, sortable: :termination_dst_numberlist_name
 
-    column :diversion_policy, sortable: :diversion_policy_name
+    column :diversion_send_mode, sortable: :diversion_send_mode_name
+    column :diversion_domain
     column :diversion_rewrite_rule
     column :diversion_rewrite_result
 
