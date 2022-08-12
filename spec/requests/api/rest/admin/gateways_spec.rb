@@ -138,8 +138,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     end
 
     context 'with filter by diversion_send_mode.id' do
-      let!(:diversion_send_mode) { Equipment::GatewayDiversionSendMode.first }
-      let!(:other_diversion_send_mode) { Equipment::GatewayDiversionSendMode.create!(id: 2, name: 'Test') }
+      let!(:diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(1) }
+      let!(:other_diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(2) }
       let!(:gateways) { create_list(:gateway, 3, diversion_send_mode: diversion_send_mode) }
       before { create(:gateway, diversion_send_mode: other_diversion_send_mode) }
 
