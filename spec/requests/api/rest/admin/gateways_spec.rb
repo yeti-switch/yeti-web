@@ -9,7 +9,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     sdp-alines-filter-type
     term-disconnect-policy
     gateway-group
-    diversion-policy
+    diversion-send-mode
     pop
     codec-group
     sdp-c-location
