@@ -53,7 +53,7 @@ shared_context :init_gateway do |args|
       orig_disconnect_policy_id: 1,
       term_disconnect_policy_id: 1,
       diversion_send_mode_id: 1,
-      divesion_domain: '',
+      diversion_domain: '',
       diversion_rewrite_rule: '',
       diversion_rewrite_result: '',
       src_name_rewrite_rule: '',
