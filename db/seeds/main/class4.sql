@@ -442,7 +442,12 @@ INSERT INTO disconnect_initiators (id, name) VALUES (3, 'Origination');
 -- Data for Name: diversion_policy; Type: TABLE DATA; Schema: class4; Owner: yeti
 --
 
-INSERT INTO diversion_policy (id, name) VALUES (1, 'Clear header');
+INSERT INTO diversion_policy (id, name) VALUES (1, 'Do not accept');
+INSERT INTO diversion_policy (id, name) VALUES (2, 'Accept');
+
+insert into class4.gateway_diversion_send_modes(id,name) values(1,'Do not send');
+insert into class4.gateway_diversion_send_modes(id,name) values(2,'Send as SIP URI');
+insert into class4.gateway_diversion_send_modes(id,name) values(3,'Send as TEL URI');
 
 
 --
