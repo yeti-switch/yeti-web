@@ -16233,10 +16233,10 @@ BEGIN
   /*}dbg*/
 
 
-  IF array_length(i_diversion) > 0 AND i_vendor_gw.diversion_send_policy > 1 THEN
+  IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
 
-    IF i_vendor_gw.diversion_policy_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
+    IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
@@ -16248,7 +16248,7 @@ BEGIN
           format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
         );
       END LOOP;
-    ELSIF i_vendor_gw.diversion_policy_id = 3 THEN
+    ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
@@ -16266,7 +16266,7 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n'));
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
   i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
@@ -16867,10 +16867,10 @@ BEGIN
   /*}dbg*/
 
 
-  IF array_length(i_diversion) > 0 AND i_vendor_gw.diversion_send_policy > 1 THEN
+  IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
 
-    IF i_vendor_gw.diversion_policy_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
+    IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
@@ -16882,7 +16882,7 @@ BEGIN
           format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
         );
       END LOOP;
-    ELSIF i_vendor_gw.diversion_policy_id = 3 THEN
+    ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
@@ -16900,7 +16900,7 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n'));
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
   i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
@@ -17454,10 +17454,10 @@ BEGIN
   
 
 
-  IF array_length(i_diversion) > 0 AND i_vendor_gw.diversion_send_policy > 1 THEN
+  IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
 
-    IF i_vendor_gw.diversion_policy_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
+    IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
@@ -17469,7 +17469,7 @@ BEGIN
           format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
         );
       END LOOP;
-    ELSIF i_vendor_gw.diversion_policy_id = 3 THEN
+    ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
@@ -17487,7 +17487,7 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n'));
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
   i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
