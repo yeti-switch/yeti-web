@@ -144,5 +144,53 @@ RSpec.describe AsyncBatchUpdateJob, type: :job do
 
       include_examples :increments_customers_auth_state, by: 3
     end
+
+    context 'with Dialpeer' do
+      let(:model_class) { 'Dialpeer' }
+
+      let!(:routing_tags) do
+        FactoryBot.create_list(:routing_tag, 5)
+      end
+      let!(:dialpeers) do
+        FactoryBot.create_list(:dialpeer, 3)
+      end
+      let!(:another_dialpeer) do
+        FactoryBot.create(:dialpeer)
+      end
+
+      let(:changes) do
+        {
+          routing_tag_ids: [
+            routing_tags[2].id.to_s,
+            routing_tags[3].id.to_s,
+            '',
+            routing_tags[0].id.to_s
+          ]
+        }
+      end
+      let(:sql_query) do
+        Dialpeer.where(id: dialpeers.map(&:id)).to_sql
+      end
+
+      it 'updates successfully' do
+        subject
+        expect(dialpeers.map(&:reload)).to all(
+                                             have_attributes(
+                                               routing_tag_ids: [
+                                                 routing_tags[0].id,
+                                                 routing_tags[2].id,
+                                                 routing_tags[3].id,
+                                                 nil
+                                               ]
+                                             )
+                                           )
+      end
+
+      it 'does not change another_dialpeer' do
+        expect { subject }.not_to change {
+          another_dialpeer.reload.attributes
+        }
+      end
+    end
   end
 end

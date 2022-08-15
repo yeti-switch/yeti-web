@@ -222,11 +222,13 @@ ActiveAdmin.register Dialpeer do
       f.input :enabled
       f.input :routing_group, input_html: { class: 'chosen' }
 
-      f.input :routing_tag_ids, as: :select,
-                                collection: DialpeerDecorator.decorate(f.object).routing_tag_options,
-                                multiple: true,
-                                include_hidden: false,
-                                input_html: { class: 'chosen' }
+      f.input :routing_tag_ids,
+              as: :select,
+              label: 'Routing tags',
+              collection: DialpeerDecorator.decorate(f.object).routing_tag_options,
+              multiple: true,
+              include_hidden: false,
+              input_html: { class: 'chosen' }
 
       f.input :routing_tag_mode
       f.contractor_input :vendor_id, label: 'Vendor'

@@ -131,6 +131,10 @@ class Dialpeer < ApplicationRecord
     end
   end
 
+  before_save do
+    self.routing_tag_ids = RoutingTagsSort.call(routing_tag_ids)
+  end
+
   before_create do
     if batch_prefix.present?
       prefixes = batch_prefix.delete(' ').split(',').uniq
