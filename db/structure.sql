@@ -16241,11 +16241,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
@@ -16253,11 +16253,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<tel:%s>', v_diversion_header)
+          format('<tel:%s>', v_diversion_header)::varchar
         );
       END LOOP;
     END IF;
@@ -16875,11 +16875,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
@@ -16887,11 +16887,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<tel:%s>', v_diversion_header)
+          format('<tel:%s>', v_diversion_header)::varchar
         );
       END LOOP;
     END IF;
@@ -17462,11 +17462,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
@@ -17474,11 +17474,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<tel:%s>', v_diversion_header)
+          format('<tel:%s>', v_diversion_header)::varchar
         );
       END LOOP;
     END IF;

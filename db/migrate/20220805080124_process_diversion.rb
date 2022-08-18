@@ -1,6 +1,8 @@
 class ProcessDiversion < ActiveRecord::Migration[6.1]
   def up
     execute %q{
+      alter extension yeti update TO "1.3.5";
+
       update class4.diversion_policy set name='Do not accept' where id=1;
       insert into class4.diversion_policy(id,name) values(2,'Accept');
 
@@ -1831,11 +1833,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
@@ -1843,11 +1845,11 @@ BEGIN
       FOREACH v_diversion_header IN ARRAY v_diversion LOOP
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
         );
         v_diversion_out = array_append(
           v_diversion_out,
-          format('<tel:%s>', v_diversion_header)
+          format('<tel:%s>', v_diversion_header)::varchar
         );
       END LOOP;
     END IF;

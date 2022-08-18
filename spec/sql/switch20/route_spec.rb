@@ -529,7 +529,7 @@ RSpec.describe '#routing logic' do
         end
       end
 
-      context 'Authorized, send_billing_information enabled, Diversion processing, no append headers' do
+      context 'Authorized, send_billing_information enabled, Diversion processing' do
         let(:customer_auth_diversion_policy_id) { 2 } # Accept
         let(:customer_auth_diversion_rewrite_rule) { '^\+380(.*)$' } # removing +380
         let(:customer_auth_diversion_rewrite_result) { '\1' }
@@ -541,26 +541,85 @@ RSpec.describe '#routing logic' do
         let(:vendor_gw_diversion_rewrite_rule) { '^(.*)' } # adding 10
         let(:vendor_gw_diversion_rewrite_result) { '10\1' }
 
-        let!(:term) { ['header5:value5', 'header6: value7'] }
         let!(:expected_headers) {
           [
-            "Diversion: <sip:067689798989@#{vendor_gw_diversion_domain}>",
-            "Diversion: <sip:000000@#{vendor_gw_diversion_domain}>"
+            "Diversion: <sip:1067689798989@#{vendor_gw_diversion_domain}>",
+            "Diversion: <sip:100000000@#{vendor_gw_diversion_domain}>"
           ]
         }
 
-        it 'response with Diversion headers ' do
-          expect(subject.size).to eq(2)
-          expect(subject.first[:customer_auth_id]).to be
-          expect(subject.first[:customer_id]).to be
-          expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
-          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
-          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+        context 'without append headers, SIP ' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:diversion) { '+38067689798989,+3800000000' }
 
-          expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+          let!(:expected_headers) {
+            [
+              "Diversion: <sip:1067689798989@#{vendor_gw_diversion_domain}>",
+              "Diversion: <sip:100000000@#{vendor_gw_diversion_domain}>"
+            ]
+          }
 
-          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+
         end
+
+        context 'without append headers, TEL' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:diversion) { '+38067689798989,+3800000001' }
+          let(:vendor_gw_diversion_send_mode_id) { 3 } # send Diversion as TEL
+
+          let!(:expected_headers) {
+            [
+              "Diversion: <tel:1067689798989>",
+              "Diversion: <tel:100000001>"
+            ]
+          }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+
+        end
+
+        context 'with append headers' do
+          let(:vendor_gw_term_append_headers_req) { 'Header5: value5\r\nHeader6: value7' }
+          let(:diversion) { '+38067689798989,+3800000000' }
+          let!(:expected_headers) {
+            [
+              "Diversion: <sip:1067689798989@#{vendor_gw_diversion_domain}>",
+              "Diversion: <sip:100000000@#{vendor_gw_diversion_domain}>",
+              "Header5: value5",
+              "Header6: value7"
+            ]
+          }
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
       end
     end
   end
