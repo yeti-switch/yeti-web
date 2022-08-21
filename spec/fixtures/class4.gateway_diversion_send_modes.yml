@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: class4.gateway_diversion_send_modes
+#
+#  id   :integer(2)       not null, primary key
+#  name :string           not null
+#
+# Indexes
+#
+#  gateway_diversion_send_modes_name_key  (name) UNIQUE
+#
+mode_1:
+  id: 1
+  name: 'Do not send'
+
+mode_2:
+  id: 2
+  name: 'Send as SIP URI'
+
+mode_3:
+  id: 3
+  name: 'Send as TEL URI'

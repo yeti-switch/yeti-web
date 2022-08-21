@@ -52,7 +52,8 @@ ActiveAdmin.register Importing::Gateway do
     column :termination_src_numberlist, sortable: :termination_src_numberlist_name
     column :termination_dst_numberlist, sortable: :termination_dst_numberlist_name
 
-    column :diversion_policy, sortable: :diversion_policy_name
+    column :diversion_send_mode, sortable: :diversion_send_mode_name
+    column :diversion_domain
     column :diversion_rewrite_rule
     column :diversion_rewrite_result
 
@@ -73,11 +74,7 @@ ActiveAdmin.register Importing::Gateway do
     column :allow_termination
     column :allow_origination
 
-    column :anonymize_sdp
     column :proxy_media
-
-    column :transparent_seqno
-    column :transparent_ssrc
 
     column :incoming_auth_username
     column :incoming_auth_password

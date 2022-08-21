@@ -2848,10 +2848,7 @@ CREATE TABLE class4.gateways (
     contractor_id integer NOT NULL,
     allow_termination boolean DEFAULT true NOT NULL,
     allow_origination boolean DEFAULT true NOT NULL,
-    anonymize_sdp boolean DEFAULT true NOT NULL,
     proxy_media boolean DEFAULT true NOT NULL,
-    transparent_seqno boolean DEFAULT false NOT NULL,
-    transparent_ssrc boolean DEFAULT false NOT NULL,
     sst_enabled boolean DEFAULT false,
     sst_minimum_timer integer DEFAULT 50 NOT NULL,
     sst_maximum_timer integer DEFAULT 50 NOT NULL,
@@ -2881,7 +2878,6 @@ CREATE TABLE class4.gateways (
     gateway_group_id integer,
     orig_disconnect_policy_id integer,
     term_disconnect_policy_id integer,
-    diversion_policy_id integer DEFAULT 1 NOT NULL,
     diversion_rewrite_rule character varying,
     diversion_rewrite_result character varying,
     src_name_rewrite_rule character varying,
@@ -2948,7 +2944,10 @@ CREATE TABLE class4.gateways (
     lua_script_id smallint,
     use_registered_aor boolean DEFAULT false NOT NULL,
     rtp_acl inet[],
-    orig_append_headers_reply character varying[]
+    orig_append_headers_reply character varying[],
+    diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
+    diversion_domain character varying,
+    try_avoid_transcoding boolean DEFAULT false NOT NULL
 );
 
 
@@ -15509,10 +15508,10 @@ $$;
 
 
 --
--- Name: process_dp(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_dp(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_dp(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch20.callprofile_ty
+CREATE FUNCTION switch20.process_dp(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15546,7 +15545,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -15564,7 +15563,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}dbg*/
     elsif v_gateway_group.balancing_mode_id=1 then
@@ -15579,7 +15578,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -15596,7 +15595,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}dbg*/
 
@@ -15613,7 +15612,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -15635,7 +15634,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}dbg*/
     end if;
@@ -15649,11 +15648,11 @@ BEGIN
 
       /*rel{*/
       return query select * from
-          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       /*}rel*/
       /*dbg{*/
       return query select * from
-          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       /*}dbg*/
     else
       return;
@@ -15664,10 +15663,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_dp_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_dp_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch20.callprofile_ty
+CREATE FUNCTION switch20.process_dp_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15705,7 +15704,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}dbg*/
     elsif v_gateway_group.balancing_mode_id=1 then
@@ -15724,7 +15723,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}dbg*/
 
@@ -15749,7 +15748,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}dbg*/
     end if;
@@ -15764,7 +15763,7 @@ BEGIN
       
       /*dbg{*/
       return query select * from
-          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       /*}dbg*/
     else
       return;
@@ -15775,10 +15774,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_dp_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_dp_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer) RETURNS SETOF switch20.callprofile_ty
+CREATE FUNCTION switch20.process_dp_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15804,7 +15803,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}rel*/
       
@@ -15820,7 +15819,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}rel*/
       
@@ -15838,7 +15837,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information,i_max_call_length);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       end loop;
       /*}rel*/
       
@@ -15853,7 +15852,7 @@ BEGIN
 
       /*rel{*/
       return query select * from
-          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information,i_max_call_length);
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
       /*}rel*/
       
     else
@@ -15865,10 +15864,10 @@ $$;
 
 
 --
--- Name: process_gw(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_gw(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch20.callprofile_ty
+CREATE FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -15883,6 +15882,10 @@ DECLARE
   v_termination_numberlist_item class4.numberlist_items%rowtype;
   v_termination_numberlist_size integer;
   v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
+  v_bleg_append_headers_req varchar[] not null default ARRAY[]::varchar[];
+  v_diversion varchar[] not null default ARRAY[]::varchar[];
+  v_diversion_header varchar;
+  v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -15898,9 +15901,7 @@ BEGIN
   --RAISE NOTICE 'process_dp dst: %',i_destination;
 
   i_profile.destination_id:=i_destination.id;
-  --    i_profile.destination_initial_interval:=i_destination.initial_interval;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
-  --i_profile.destination_next_interval:=i_destination.next_interval;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -16231,13 +16232,44 @@ BEGIN
   RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
   /*}dbg*/
 
-  -- i_profile.anonymize_sdp:=i_vendor_gw.anonymize_sdp OR i_customer_gw.anonymize_sdp;
 
-  --i_profile.append_headers:='User-Agent: YETI SBC\r\n';
-  i_profile.append_headers_req:=i_vendor_gw.term_append_headers_req;
+  IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
+    v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+
+    IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
+      /* Diversion as SIP URI */
+      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+        v_bleg_append_headers_req = array_append(
+          v_bleg_append_headers_req,
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+        );
+        v_diversion_out = array_append(
+          v_diversion_out,
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+        );
+      END LOOP;
+    ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
+      /* Diversion as TEL URI */
+      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+        v_bleg_append_headers_req=array_append(
+          v_bleg_append_headers_req,
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
+        );
+        v_diversion_out = array_append(
+          v_diversion_out,
+          format('<tel:%s>', v_diversion_header)::varchar
+        );
+      END LOOP;
+    END IF;
+
+    /* Field for CDR */
+    i_profile.diversion_out = array_to_string(v_diversion_out, ',');
+  END IF;
+
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
+
   i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
-
-
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -16325,7 +16357,6 @@ BEGIN
   i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
   i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
 
-
   i_profile.sdp_filter_type_id:=0;
   i_profile.sdp_filter_list:='';
 
@@ -16397,6 +16428,7 @@ BEGIN
   i_profile.bleg_codecs_group_id:=i_vendor_gw.codec_group_id;
   i_profile.aleg_single_codec_in_200ok:=i_customer_gw.single_codec_in_200ok;
   i_profile.bleg_single_codec_in_200ok:=i_vendor_gw.single_codec_in_200ok;
+  i_profile.try_avoid_transcoding = i_customer_gw.try_avoid_transcoding;
   i_profile.ringing_timeout=i_vendor_gw.ringing_timeout;
   i_profile.dead_rtp_time=GREATEST(i_vendor_gw.rtp_timeout,i_customer_gw.rtp_timeout);
   i_profile.invite_timeout=i_vendor_gw.sip_timer_b;
@@ -16466,10 +16498,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_gw_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_gw_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch20.callprofile_ty
+CREATE FUNCTION switch20.process_gw_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -16484,6 +16516,10 @@ DECLARE
   v_termination_numberlist_item class4.numberlist_items%rowtype;
   v_termination_numberlist_size integer;
   v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
+  v_bleg_append_headers_req varchar[] not null default ARRAY[]::varchar[];
+  v_diversion varchar[] not null default ARRAY[]::varchar[];
+  v_diversion_header varchar;
+  v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16499,9 +16535,7 @@ BEGIN
   --RAISE NOTICE 'process_dp dst: %',i_destination;
 
   i_profile.destination_id:=i_destination.id;
-  --    i_profile.destination_initial_interval:=i_destination.initial_interval;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
-  --i_profile.destination_next_interval:=i_destination.next_interval;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -16832,13 +16866,44 @@ BEGIN
   RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
   /*}dbg*/
 
-  -- i_profile.anonymize_sdp:=i_vendor_gw.anonymize_sdp OR i_customer_gw.anonymize_sdp;
 
-  --i_profile.append_headers:='User-Agent: YETI SBC\r\n';
-  i_profile.append_headers_req:=i_vendor_gw.term_append_headers_req;
+  IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
+    v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+
+    IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
+      /* Diversion as SIP URI */
+      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+        v_bleg_append_headers_req = array_append(
+          v_bleg_append_headers_req,
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+        );
+        v_diversion_out = array_append(
+          v_diversion_out,
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+        );
+      END LOOP;
+    ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
+      /* Diversion as TEL URI */
+      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+        v_bleg_append_headers_req=array_append(
+          v_bleg_append_headers_req,
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
+        );
+        v_diversion_out = array_append(
+          v_diversion_out,
+          format('<tel:%s>', v_diversion_header)::varchar
+        );
+      END LOOP;
+    END IF;
+
+    /* Field for CDR */
+    i_profile.diversion_out = array_to_string(v_diversion_out, ',');
+  END IF;
+
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
+
   i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
-
-
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -16926,7 +16991,6 @@ BEGIN
   i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
   i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
 
-
   i_profile.sdp_filter_type_id:=0;
   i_profile.sdp_filter_list:='';
 
@@ -16998,6 +17062,7 @@ BEGIN
   i_profile.bleg_codecs_group_id:=i_vendor_gw.codec_group_id;
   i_profile.aleg_single_codec_in_200ok:=i_customer_gw.single_codec_in_200ok;
   i_profile.bleg_single_codec_in_200ok:=i_vendor_gw.single_codec_in_200ok;
+  i_profile.try_avoid_transcoding = i_customer_gw.try_avoid_transcoding;
   i_profile.ringing_timeout=i_vendor_gw.ringing_timeout;
   i_profile.dead_rtp_time=GREATEST(i_vendor_gw.rtp_timeout,i_customer_gw.rtp_timeout);
   i_profile.invite_timeout=i_vendor_gw.sip_timer_b;
@@ -17067,10 +17132,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_gw_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_gw_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer) RETURNS switch20.callprofile_ty
+CREATE FUNCTION switch20.process_gw_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -17085,6 +17150,10 @@ DECLARE
   v_termination_numberlist_item class4.numberlist_items%rowtype;
   v_termination_numberlist_size integer;
   v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
+  v_bleg_append_headers_req varchar[] not null default ARRAY[]::varchar[];
+  v_diversion varchar[] not null default ARRAY[]::varchar[];
+  v_diversion_header varchar;
+  v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   
 BEGIN
   
@@ -17092,9 +17161,7 @@ BEGIN
   --RAISE NOTICE 'process_dp dst: %',i_destination;
 
   i_profile.destination_id:=i_destination.id;
-  --    i_profile.destination_initial_interval:=i_destination.initial_interval;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
-  --i_profile.destination_next_interval:=i_destination.next_interval;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -17386,13 +17453,44 @@ BEGIN
 
   
 
-  -- i_profile.anonymize_sdp:=i_vendor_gw.anonymize_sdp OR i_customer_gw.anonymize_sdp;
 
-  --i_profile.append_headers:='User-Agent: YETI SBC\r\n';
-  i_profile.append_headers_req:=i_vendor_gw.term_append_headers_req;
+  IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
+    v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+
+    IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
+      /* Diversion as SIP URI */
+      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+        v_bleg_append_headers_req = array_append(
+          v_bleg_append_headers_req,
+          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+        );
+        v_diversion_out = array_append(
+          v_diversion_out,
+          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+        );
+      END LOOP;
+    ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
+      /* Diversion as TEL URI */
+      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+        v_bleg_append_headers_req=array_append(
+          v_bleg_append_headers_req,
+          format('Diversion: <tel:%s>', v_diversion_header)::varchar
+        );
+        v_diversion_out = array_append(
+          v_diversion_out,
+          format('<tel:%s>', v_diversion_header)::varchar
+        );
+      END LOOP;
+    END IF;
+
+    /* Field for CDR */
+    i_profile.diversion_out = array_to_string(v_diversion_out, ',');
+  END IF;
+
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
+
   i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
-
-
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -17480,7 +17578,6 @@ BEGIN
   i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
   i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
 
-
   i_profile.sdp_filter_type_id:=0;
   i_profile.sdp_filter_list:='';
 
@@ -17552,6 +17649,7 @@ BEGIN
   i_profile.bleg_codecs_group_id:=i_vendor_gw.codec_group_id;
   i_profile.aleg_single_codec_in_200ok:=i_customer_gw.single_codec_in_200ok;
   i_profile.bleg_single_codec_in_200ok:=i_vendor_gw.single_codec_in_200ok;
+  i_profile.try_avoid_transcoding = i_customer_gw.try_avoid_transcoding;
   i_profile.ringing_timeout=i_vendor_gw.ringing_timeout;
   i_profile.dead_rtp_time=GREATEST(i_vendor_gw.rtp_timeout,i_customer_gw.rtp_timeout);
   i_profile.invite_timeout=i_vendor_gw.sip_timer_b;
@@ -17694,6 +17792,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_identity_data switch20.identity_data_ty[];
         v_pai varchar[];
         v_ppi varchar[];
+        v_diversion varchar[] not null default ARRAY[]::varchar[];
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -17723,7 +17822,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.cache_time = 10;
 
         v_ret.diversion_in:=i_diversion;
-        v_ret.diversion_out:=i_diversion; -- FIXME
 
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
@@ -17914,6 +18012,15 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_ret.dst_prefix_in:=i_diversion;
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+        IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
+          v_diversion = string_to_array(i_diversion,',');
+          v_diversion = yeti_ext.regexp_replace_rand(
+            v_diversion,
+            v_customer_auth_normalized.diversion_rewrite_rule,
+            v_customer_auth_normalized.diversion_rewrite_result
+          );
+        END IF;
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
 
@@ -18510,8 +18617,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
           FOR routedata IN (
@@ -18559,8 +18666,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
           FOR routedata in(
@@ -18610,8 +18717,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
           FOR routedata IN (
@@ -18660,8 +18767,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           end LOOP;
           WHEN'5' THEN -- Route test
           FOR routedata IN (
@@ -18710,8 +18817,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
           v_random:=random();
@@ -18778,8 +18885,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
           v_random:=random();
@@ -18844,8 +18951,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
 
         ELSE
@@ -18922,6 +19029,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_identity_data switch20.identity_data_ty[];
         v_pai varchar[];
         v_ppi varchar[];
+        v_diversion varchar[] not null default ARRAY[]::varchar[];
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -18951,7 +19059,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.cache_time = 10;
 
         v_ret.diversion_in:=i_diversion;
-        v_ret.diversion_out:=i_diversion; -- FIXME
 
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
@@ -19142,6 +19249,15 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_ret.dst_prefix_in:=i_diversion;
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+        IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
+          v_diversion = string_to_array(i_diversion,',');
+          v_diversion = yeti_ext.regexp_replace_rand(
+            v_diversion,
+            v_customer_auth_normalized.diversion_rewrite_rule,
+            v_customer_auth_normalized.diversion_rewrite_result
+          );
+        END IF;
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
 
@@ -19739,7 +19855,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
           FOR routedata IN (
@@ -19788,7 +19904,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
           FOR routedata in(
@@ -19839,7 +19955,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
           FOR routedata IN (
@@ -19889,7 +20005,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           end LOOP;
           WHEN'5' THEN -- Route test
           FOR routedata IN (
@@ -19939,7 +20055,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
           v_random:=random();
@@ -20007,7 +20123,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
           v_random:=random();
@@ -20073,7 +20189,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
           END LOOP;
 
         ELSE
@@ -20147,6 +20263,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_identity_data switch20.identity_data_ty[];
         v_pai varchar[];
         v_ppi varchar[];
+        v_diversion varchar[] not null default ARRAY[]::varchar[];
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -20172,7 +20289,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.cache_time = 10;
 
         v_ret.diversion_in:=i_diversion;
-        v_ret.diversion_out:=i_diversion; -- FIXME
 
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
@@ -20342,6 +20458,15 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           v_ret.dst_prefix_in:=i_diversion;
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
+
+        IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
+          v_diversion = string_to_array(i_diversion,',');
+          v_diversion = yeti_ext.regexp_replace_rand(
+            v_diversion,
+            v_customer_auth_normalized.diversion_rewrite_rule,
+            v_customer_auth_normalized.diversion_rewrite_result
+          );
+        END IF;
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
 
@@ -20845,7 +20970,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
@@ -20894,7 +21019,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
@@ -20945,7 +21070,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
@@ -20995,7 +21120,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           end LOOP;
           WHEN'5' THEN -- Route test
@@ -21045,7 +21170,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
@@ -21113,7 +21238,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
@@ -21179,7 +21304,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
             
           END LOOP;
 
@@ -22552,6 +22677,16 @@ CREATE TABLE class4.dump_level (
 CREATE TABLE class4.filter_types (
     id integer NOT NULL,
     name character varying
+);
+
+
+--
+-- Name: gateway_diversion_send_modes; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.gateway_diversion_send_modes (
+    id smallint NOT NULL,
+    name character varying NOT NULL
 );
 
 
@@ -24214,10 +24349,7 @@ CREATE TABLE data_import.import_gateways (
     contractor_id integer,
     allow_termination boolean,
     allow_origination boolean,
-    anonymize_sdp boolean,
     proxy_media boolean,
-    transparent_seqno boolean,
-    transparent_ssrc boolean,
     sst_enabled boolean,
     sst_minimum_timer integer,
     sst_maximum_timer integer,
@@ -24246,7 +24378,6 @@ CREATE TABLE data_import.import_gateways (
     gateway_group_id integer,
     orig_disconnect_policy_id integer,
     term_disconnect_policy_id integer,
-    diversion_policy_id integer,
     diversion_rewrite_rule character varying,
     diversion_rewrite_result character varying,
     src_name_rewrite_rule character varying,
@@ -24262,7 +24393,6 @@ CREATE TABLE data_import.import_gateways (
     sdp_alines_filter_type_name character varying,
     orig_disconnect_policy_name character varying,
     term_disconnect_policy_name character varying,
-    diversion_policy_name character varying,
     error_string character varying,
     codec_group_id integer,
     codec_group_name character varying,
@@ -24334,7 +24464,10 @@ CREATE TABLE data_import.import_gateways (
     lua_script_id smallint,
     lua_script_name character varying,
     use_registered_aor boolean,
-    is_changed boolean
+    is_changed boolean,
+    diversion_send_mode_id smallint,
+    diversion_send_mode_name character varying,
+    try_avoid_transcoding boolean
 );
 
 
@@ -27543,6 +27676,22 @@ ALTER TABLE ONLY class4.filter_types
 
 
 --
+-- Name: gateway_diversion_send_modes gateway_diversion_send_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_diversion_send_modes
+    ADD CONSTRAINT gateway_diversion_send_modes_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_diversion_send_modes gateway_diversion_send_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_diversion_send_modes
+    ADD CONSTRAINT gateway_diversion_send_modes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: gateway_group_balancing_modes gateway_group_balancing_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29763,11 +29912,11 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways gateways_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+-- Name: gateways gateways_diversion_send_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_diversion_policy_id_fkey FOREIGN KEY (diversion_policy_id) REFERENCES class4.diversion_policy(id);
+    ADD CONSTRAINT gateways_diversion_send_mode_id_fkey FOREIGN KEY (diversion_send_mode_id) REFERENCES class4.gateway_diversion_send_modes(id);
 
 
 --
@@ -30447,6 +30596,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220620135342'),
 ('20220707145142'),
 ('20220717150840'),
-('20220718195457');
+('20220718195457'),
+('20220805080124');
 
 

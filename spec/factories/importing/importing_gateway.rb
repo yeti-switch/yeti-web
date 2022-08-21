@@ -20,10 +20,7 @@ FactoryBot.define do
     contractor_id { nil }
     allow_termination { true }
     allow_origination { true }
-    anonymize_sdp { true }
     proxy_media { true }
-    transparent_seqno { false }
-    transparent_ssrc { false }
     sst_enabled { false }
     sst_minimum_timer { 50 }
     sst_maximum_timer { 50 }
@@ -54,9 +51,13 @@ FactoryBot.define do
     gateway_group_id { nil }
     orig_disconnect_policy_id { nil }
     term_disconnect_policy_id { nil }
-    diversion_policy_id { 1 }
+
+    diversion_send_mode_id { 1 }
+    diversion_send_mode_name { nil }
+    diversion_domain { nil }
     diversion_rewrite_rule { nil }
     diversion_rewrite_result { nil }
+
     src_name_rewrite_rule { nil }
     src_name_rewrite_result { nil }
     priority { 100 }
@@ -67,7 +68,6 @@ FactoryBot.define do
     session_refresh_method_name { nil }
     orig_disconnect_policy_name { nil }
     term_disconnect_policy_name { nil }
-    diversion_policy_name { nil }
     codec_group_id { 1 }
     codec_group_name { nil }
     single_codec_in_200ok { false }

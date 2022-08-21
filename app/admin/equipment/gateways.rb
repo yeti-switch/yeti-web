@@ -50,7 +50,8 @@ ActiveAdmin.register Gateway do
                  :use_registered_aor,
                  [:network_protocol_priority_name, proc { |row| row.network_protocol_priority.try(:name) }],
                  :resolve_ruri,
-                 [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) }],
+                 [:diversion_send_mode_name, proc { |row| row.diversion_send_mode.try(:name) }],
+                 :diversion_domain,
                  :diversion_rewrite_rule, :diversion_rewrite_result,
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
@@ -75,7 +76,7 @@ ActiveAdmin.register Gateway do
                  :sip_timer_b, :dns_srv_failover_timer,
                  [:sdp_c_location_name, proc { |row| row.sdp_c_location.try(:name) }],
                  [:codec_group_name, proc { |row| row.codec_group.try(:name) }],
-                 :anonymize_sdp, :proxy_media, :single_codec_in_200ok, :transparent_seqno, :transparent_ssrc, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay, :rtp_ping,
+                 :proxy_media, :single_codec_in_200ok, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay, :rtp_ping,
                  :rtp_timeout,
                  :filter_noaudio_streams,
                  :rtp_relay_timestamp_aligning,
@@ -95,7 +96,7 @@ ActiveAdmin.register Gateway do
   scope :shared
   scope :with_radius_accounting
 
-  includes :contractor, :gateway_group, :pop, :statistic, :diversion_policy,
+  includes :contractor, :gateway_group, :pop, :statistic, :diversion_send_mode,
            :session_refresh_method, :codec_group,
            :term_disconnect_policy, :orig_disconnect_policy,
            :sdp_c_location, :sdp_alines_filter_type,
@@ -236,9 +237,11 @@ ActiveAdmin.register Gateway do
     column :send_lnp_information
 
     # TRANSLATIONS
-    column :diversion_policy
-    column :diversion_rewrite_rule
-    column :diversion_rewrite_result
+    # disabling to improve performance of index page rendering
+    # column :diversion_send_mode
+    # column :diversion_domain
+    # column :diversion_rewrite_rule
+    # column :diversion_rewrite_result
     column :src_name_rewrite_rule
     column :src_name_rewrite_result
     column :src_rewrite_rule
@@ -250,11 +253,8 @@ ActiveAdmin.register Gateway do
     # MEDIA
     column :sdp_c_location
     column :codec_group
-    column :anonymize_sdp
     column :proxy_media
     column :single_codec_in_200ok
-    column :transparent_seqno
-    column :transparent_ssrc
     column :force_symmetric_rtp
     column :symmetric_rtp_nonstop
     column :symmetric_rtp_ignore_rtcp
@@ -307,6 +307,7 @@ ActiveAdmin.register Gateway do
   filter :incoming_auth_username
   filter :incoming_auth_password
   filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
+  filter :diversion_send_mode
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -433,7 +434,8 @@ ActiveAdmin.register Gateway do
         f.inputs 'Translations' do
           f.input :termination_src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :termination_dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
-          f.input :diversion_policy
+          f.input :diversion_send_mode, include_blank: false
+          f.input :diversion_domain
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
           f.input :src_name_rewrite_rule
@@ -449,11 +451,9 @@ ActiveAdmin.register Gateway do
         f.inputs 'Media settings' do
           f.input :sdp_c_location, as: :select, include_blank: false
           f.input :codec_group, input_html: { class: 'chosen' }
-          f.input :anonymize_sdp
+          f.input :try_avoid_transcoding
           f.input :proxy_media
           f.input :single_codec_in_200ok
-          f.input :transparent_seqno
-          f.input :transparent_ssrc
           f.input :force_symmetric_rtp
           f.input :symmetric_rtp_nonstop
           f.input :symmetric_rtp_ignore_rtcp
@@ -604,7 +604,8 @@ ActiveAdmin.register Gateway do
         attributes_table_for s do
           row :termination_src_numberlist
           row :termination_dst_numberlist
-          row :diversion_policy
+          row :diversion_send_mode
+          row :diversion_domain
           row :diversion_rewrite_rule
           row :diversion_rewrite_result
           row :src_name_rewrite_rule
@@ -621,11 +622,9 @@ ActiveAdmin.register Gateway do
         attributes_table_for s do
           row :sdp_c_location
           row :codec_group, input_html: { class: 'chosen' }
-          row :anonymize_sdp
+          row :try_avoid_transcoding
           row :proxy_media
           row :single_codec_in_200ok
-          row :transparent_seqno
-          row :transparent_ssrc
           row :force_symmetric_rtp
           row :symmetric_rtp_nonstop
           row :symmetric_rtp_ignore_rtcp

@@ -9,7 +9,6 @@
 #  allow_1xx_without_to_tag           :boolean
 #  allow_origination                  :boolean
 #  allow_termination                  :boolean
-#  anonymize_sdp                      :boolean
 #  asr_limit                          :float
 #  auth_enabled                       :boolean
 #  auth_from_domain                   :string
@@ -21,9 +20,9 @@
 #  codecs_prefer_transcoding_for      :string
 #  contractor_name                    :string
 #  dialog_nat_handling                :boolean
-#  diversion_policy_name              :string
 #  diversion_rewrite_result           :string
 #  diversion_rewrite_rule             :string
+#  diversion_send_mode_name           :string
 #  dns_srv_failover_timer             :integer(4)
 #  dst_rewrite_result                 :string
 #  dst_rewrite_rule                   :string
@@ -108,15 +107,14 @@
 #  termination_capacity               :integer(2)
 #  termination_dst_numberlist_name    :string
 #  termination_src_numberlist_name    :string
-#  transparent_seqno                  :boolean
-#  transparent_ssrc                   :boolean
 #  transport_protocol_name            :string
+#  try_avoid_transcoding              :boolean
 #  tx_inband_dtmf_filtering_mode_name :string
 #  use_registered_aor                 :boolean
 #  weight                             :integer(2)
 #  codec_group_id                     :integer(4)
 #  contractor_id                      :integer(4)
-#  diversion_policy_id                :integer(4)
+#  diversion_send_mode_id             :integer(2)
 #  dtmf_receive_mode_id               :integer(2)
 #  dtmf_send_mode_id                  :integer(2)
 #  gateway_group_id                   :integer(4)
@@ -154,7 +152,7 @@ class Importing::Gateway < Importing::Base
   belongs_to :orig_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :orig_disconnect_policy_id, optional: true
   belongs_to :term_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :term_disconnect_policy_id, optional: true
   belongs_to :gateway_group, class_name: '::GatewayGroup', optional: true
-  belongs_to :diversion_policy, class_name: '::DiversionPolicy', optional: true
+  belongs_to :diversion_send_mode, class_name: '::Equipment::DiversionSendMode', optional: true
   belongs_to :pop, class_name: '::Pop', optional: true
   belongs_to :codec_group, class_name: '::CodecGroup', optional: true
   belongs_to :sdp_c_location, class_name: '::SdpCLocation', optional: true
@@ -183,15 +181,15 @@ class Importing::Gateway < Importing::Base
     host port
     origination_capacity
     termination_capacity
-    diversion_policy_id
+    diversion_send_mode_id
+    diversion_domain
     diversion_rewrite_rule diversion_rewrite_result
     src_name_rewrite_rule src_name_rewrite_result
     src_rewrite_rule src_rewrite_result
     dst_rewrite_rule dst_rewrite_result
     acd_limit asr_limit short_calls_limit
     allow_termination allow_origination
-    anonymize_sdp proxy_media
-    transparent_seqno transparent_ssrc
+    proxy_media
     auth_enabled auth_user auth_password
     term_use_outbound_proxy term_outbound_proxy term_force_outbound_proxy
     term_next_hop orig_next_hop

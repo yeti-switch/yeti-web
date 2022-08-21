@@ -36,12 +36,9 @@ FactoryBot.define do
     termination_capacity { 1 }
     allow_termination { true }
     allow_origination { true }
-    anonymize_sdp { true }
     proxy_media { true }
     origination_capacity { 1 }
     preserve_anonymous_from_domain { false }
-    transparent_seqno { false }
-    transparent_ssrc { false }
     sst_enabled { false }
     sst_minimum_timer { 50 }
     sst_maximum_timer { 50 }
@@ -68,7 +65,8 @@ FactoryBot.define do
     gateway_group_id { nil }
     orig_disconnect_policy_id { nil }
     term_disconnect_policy_id { nil }
-    diversion_policy_id { 1 }
+    diversion_send_mode_id { 1 }
+    diversion_domain { nil }
     diversion_rewrite_rule { nil }
     diversion_rewrite_result { nil }
     src_name_rewrite_rule { nil }
@@ -115,7 +113,7 @@ FactoryBot.define do
       sdp_alines_filter_type { FilterType.take }
       orig_disconnect_policy { DisconnectPolicy.take || build(:disconnect_policy) }
       term_disconnect_policy { DisconnectPolicy.take || build(:disconnect_policy) }
-      diversion_policy { DiversionPolicy.take }
+      diversion_send_mode { Equipment::GatewayDiversionSendMode.take }
       sdp_c_location { SdpCLocation.take }
       sensor
       sensor_level { System::SensorLevel.take }

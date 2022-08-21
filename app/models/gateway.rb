@@ -9,7 +9,6 @@
 #  allow_1xx_without_to_tag         :boolean          default(FALSE), not null
 #  allow_origination                :boolean          default(TRUE), not null
 #  allow_termination                :boolean          default(TRUE), not null
-#  anonymize_sdp                    :boolean          default(TRUE), not null
 #  asr_limit                        :float            default(0.0), not null
 #  auth_enabled                     :boolean          default(FALSE), not null
 #  auth_from_domain                 :string
@@ -19,6 +18,7 @@
 #  codecs_payload_order             :string           default("")
 #  codecs_prefer_transcoding_for    :string           default("")
 #  dialog_nat_handling              :boolean          default(TRUE), not null
+#  diversion_domain                 :string
 #  diversion_rewrite_result         :string
 #  diversion_rewrite_rule           :string
 #  dns_srv_failover_timer           :integer(4)       default(2000), not null
@@ -90,13 +90,12 @@
 #  termination_capacity             :integer(2)
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string
-#  transparent_seqno                :boolean          default(FALSE), not null
-#  transparent_ssrc                 :boolean          default(FALSE), not null
+#  try_avoid_transcoding            :boolean          default(FALSE), not null
 #  use_registered_aor               :boolean          default(FALSE), not null
 #  weight                           :integer(2)       default(100), not null
 #  codec_group_id                   :integer(4)       default(1), not null
 #  contractor_id                    :integer(4)       not null
-#  diversion_policy_id              :integer(4)       default(1), not null
+#  diversion_send_mode_id           :integer(2)       default(1), not null
 #  dtmf_receive_mode_id             :integer(2)       default(1), not null
 #  dtmf_send_mode_id                :integer(2)       default(1), not null
 #  external_id                      :bigint(8)
@@ -133,7 +132,7 @@
 #
 #  gateways_codec_group_id_fkey                    (codec_group_id => codec_groups.id)
 #  gateways_contractor_id_fkey                     (contractor_id => contractors.id)
-#  gateways_diversion_policy_id_fkey               (diversion_policy_id => diversion_policy.id)
+#  gateways_diversion_send_mode_id_fkey            (diversion_send_mode_id => gateway_diversion_send_modes.id)
 #  gateways_dtmf_receive_mode_id_fkey              (dtmf_receive_mode_id => dtmf_receive_modes.id)
 #  gateways_dtmf_send_mode_id_fkey                 (dtmf_send_mode_id => dtmf_send_modes.id)
 #  gateways_gateway_group_id_fkey                  (gateway_group_id => gateway_groups.id)
@@ -173,7 +172,6 @@ class Gateway < ApplicationRecord
   belongs_to :orig_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :orig_disconnect_policy_id, optional: true
   belongs_to :term_disconnect_policy, class_name: 'DisconnectPolicy', foreign_key: :term_disconnect_policy_id, optional: true
   belongs_to :gateway_group, optional: true
-  belongs_to :diversion_policy
   belongs_to :pop, optional: true
   belongs_to :codec_group
   belongs_to :sdp_c_location, class_name: 'SdpCLocation'
@@ -194,6 +192,7 @@ class Gateway < ApplicationRecord
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id, optional: true
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id, optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
+  belongs_to :diversion_send_mode, class_name: 'Equipment::GatewayDiversionSendMode', foreign_key: :diversion_send_mode_id
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error

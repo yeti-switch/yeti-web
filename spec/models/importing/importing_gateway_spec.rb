@@ -26,7 +26,7 @@ RSpec.xdescribe Importing::Gateway do
                     sdp_alines_filter_type_id: nil,
                     orig_disconnect_policy_id: nil,
                     term_disconnect_policy_id: nil,
-                    diversion_policy_id: nil,
+                    diversion_send_mode_id: nil,
                     pop_id: nil,
                     codec_group_id: nil,
                     sdp_c_location_id: nil,

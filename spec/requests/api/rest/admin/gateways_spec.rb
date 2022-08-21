@@ -9,7 +9,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     sdp-alines-filter-type
     term-disconnect-policy
     gateway-group
-    diversion-policy
+    diversion-send-mode
     pop
     codec-group
     sdp-c-location
@@ -137,17 +137,17 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       end
     end
 
-    context 'with filter by diversion_policy.id' do
-      let!(:diversion_policy) { DiversionPolicy.first }
-      let!(:other_diversion_policy) { DiversionPolicy.create!(id: 2, name: 'Test') }
-      let!(:gateways) { create_list(:gateway, 3, diversion_policy: diversion_policy) }
-      before { create(:gateway, diversion_policy: other_diversion_policy) }
+    context 'with filter by diversion_send_mode.id' do
+      let!(:diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(1) }
+      let!(:other_diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(2) }
+      let!(:gateways) { create_list(:gateway, 3, diversion_send_mode: diversion_send_mode) }
+      before { create(:gateway, diversion_send_mode: other_diversion_send_mode) }
 
       let(:request_params) do
-        { filter: { 'diversion_policy.id': diversion_policy.id } }
+        { filter: { 'diversion_send_mode.id': diversion_send_mode.id } }
       end
 
-      it 'returns filtered gateways by diversion_policy.id' do
+      it 'returns filtered gateways by diversion_send_mode.id' do
         subject
         expect(response.status).to eq(200)
         actual_ids = response_json[:data].map { |r| r[:id] }
@@ -481,6 +481,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         host: gateway.host,
         port: gateway.port,
         'resolve-ruri': gateway.resolve_ruri,
+        'diversion-domain': gateway.diversion_domain,
         'diversion-rewrite-rule': gateway.diversion_rewrite_rule,
         'diversion-rewrite-result': gateway.diversion_rewrite_result,
         'src-name-rewrite-rule': gateway.src_name_rewrite_rule,
@@ -516,13 +517,10 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'allow-1xx-without-to-tag': gateway.allow_1xx_without_to_tag,
         'sip-timer-b': gateway.sip_timer_b,
         'dns-srv-failover-timer': gateway.dns_srv_failover_timer,
-        'anonymize-sdp': gateway.anonymize_sdp,
         'proxy-media': gateway.proxy_media,
         'origination-capacity': gateway.origination_capacity,
         'preserve-anonymous-from-domain': gateway.preserve_anonymous_from_domain,
         'single-codec-in-200ok': gateway.single_codec_in_200ok,
-        'transparent-seqno': gateway.transparent_seqno,
-        'transparent-ssrc': gateway.transparent_ssrc,
         'use-registered-aor': gateway.use_registered_aor,
         'force-symmetric-rtp': gateway.force_symmetric_rtp,
         'symmetric-rtp-nonstop': gateway.symmetric_rtp_nonstop,
