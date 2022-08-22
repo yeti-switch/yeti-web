@@ -2,7 +2,7 @@
 
 ActiveAdmin.register DialpeerNextRate do
   belongs_to :dialpeer, parent_class: Dialpeer, optional: true
-  menu false
+  menu parent: 'Routing', priority: 52
   actions :index, :new, :create, :edit, :update, :destroy
   config.batch_actions = false
 
