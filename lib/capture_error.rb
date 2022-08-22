@@ -37,7 +37,7 @@ module CaptureError
           ActiveSupport::ParameterFilter.new(['Authorization'])
         ]
         sentry_config.before_send = lambda { |event, _hint = nil|
-          filters.each { |filter| event = filter.filter(event) }
+          filters.each { |filter| event = filter.filter(event.to_hash) }
           event
         }
 
