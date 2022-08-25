@@ -326,8 +326,7 @@ ActiveAdmin.register Gateway do
                                    fill_params: { vendor_id_eq: f.object.contractor_id },
                                    input_html: {
                                      'data-path-params': { 'q[vendor_id_eq]': '.contractor_id-input' }.to_json,
-                                     'data-required-param': 'q[vendor_id_eq]',
-                                     'data-empty-option': 'None'
+                                     'data-required-param': 'q[vendor_id_eq]'
                                    }
           f.input :priority
           f.input :weight
