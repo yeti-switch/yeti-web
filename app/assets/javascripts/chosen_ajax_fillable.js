@@ -5,12 +5,23 @@
 
     $.fn.chosenAjaxFillable = function (options, chosenOptions) {
         // Call chosen
+        // see https://harvesthq.github.io/chosen/options.html
         $(this).chosen(chosenOptions)
 
         // Loo selectors
         $.each(this, function () {
             var select = $(this)
             var chosen = $(this).next('div')
+
+            function clearSelect() {
+                select.find('option').remove()
+                // Set new options
+                if (emptyOption) {
+                    select.append('<option value="">' + emptyOption+ '</option>')
+                } else {
+                    select.append('<option value=""></option>')
+                }
+            }
 
             // Create unique key for each element to be able to abort search
             // when new search triggered before previous being finished.
@@ -27,15 +38,12 @@
 
             // Trigger filling select when any parent change
             Object.values(pathParams).forEach(function (paramSelector) {
-                console.log('event listener change', select, paramSelector)
                 $(paramSelector).on('change', function () {
-                    console.log('change event', select, $(this))
                     select.trigger('chosen:ajax-fill')
                 })
             })
 
             select.on('chosen:ajax-fill', function () {
-                console.log('chosen:ajax-fill event', select)
                 // Set term parameter
                 var ajaxData = {}
 
@@ -48,8 +56,7 @@
 
                 // clear options when required parameter is missing
                 if (requiredParam && !ajaxData[requiredParam]) {
-                    console.log('requiredParam is missing', select, ajaxData)
-                    select.find('option').remove()
+                    clearSelect()
                     select.trigger('chosen:updated')
                     return
                 }
@@ -70,18 +77,13 @@
                     data: ajaxData,
                     dataType: 'json',
                     success: function (data) {
-                        console.log('data fetched', select, data)
                         ajaxFillableXmlHttpRequests[key] = null
-                        if (data.length === 0) return
-
-                        select.find('option').remove()
-
-                        // Set new options
-                        if (emptyOption) {
-                            select.append('<option value="">' + emptyOption+ '</option>')
-                        } else {
-                            select.append('<option value=""></option>')
+                        clearSelect()
+                        if (data.length === 0) {
+                            select.trigger('chosen:updated')
+                            return
                         }
+
                         $.each(data, function (i, item) {
                             select.append('<option value="' + item.id + '">' + item.value + '</option>')
                         })

@@ -260,8 +260,7 @@ ActiveAdmin.register Dialpeer do
                                fill_params: { termination_contractor_id_eq: f.object.vendor_id },
                                input_html: {
                                  'data-path-params': { 'q[termination_contractor_id_eq]': '.vendor_id-input' }.to_json,
-                                 'data-required-param': 'q[termination_contractor_id_eq]',
-                                 'data-empty-option': 'None'
+                                 'data-required-param': 'q[termination_contractor_id_eq]'
                                }
 
       f.association_ajax_input :gateway_group_id,
@@ -271,8 +270,7 @@ ActiveAdmin.register Dialpeer do
                                fill_params: { vendor_id_eq: f.object.vendor_id },
                                input_html: {
                                  'data-path-params': { 'q[vendor_id_eq]': '.vendor_id-input' }.to_json,
-                                 'data-required-param': 'q[vendor_id_eq]',
-                                 'data-empty-option': 'None'
+                                 'data-required-param': 'q[vendor_id_eq]'
                                }
 
       f.input :valid_from, as: :date_time_picker
