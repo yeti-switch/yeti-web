@@ -138,11 +138,8 @@ RSpec.describe 'Active Calls Index', js: true do
   end
 
   context 'when connection failed' do
-    let(:filter_records!) do
-      within_filters do
-        fill_in_chosen 'Node', with: node.name
-        click_submit('Filter')
-      end
+    let(:visit_params) do
+      { q: { node_id_eq: node.id } }
     end
     let(:stub_jrpc_show_calls!) do
       stub_jrpc_connect_error(node.rpc_endpoint)
