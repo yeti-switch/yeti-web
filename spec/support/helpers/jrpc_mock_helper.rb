@@ -19,6 +19,7 @@ module JRPCMockHelper
       @ctx = ctx
       @meth = meth
       @params = params
+      @ordered = false
     end
 
     def and_return(*args)
@@ -29,10 +30,17 @@ module JRPCMockHelper
       create_stub.and_raise(*args)
     end
 
+    def ordered
+      @ordered = true
+      self
+    end
+
     private
 
     def create_stub
-      @ctx.expect(@stub).to @ctx.receive(:perform_request).with(@meth, params: @params)
+      receive_matcher = @ctx.receive(:perform_request).with(@meth, params: @params)
+      receive_matcher = receive_matcher.ordered if @ordered
+      @ctx.expect(@stub).to(receive_matcher)
     end
   end
 

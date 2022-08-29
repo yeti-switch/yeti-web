@@ -57,4 +57,8 @@ module FeatureTestHelper
       end
     end
   end
+
+  def table_select_all
+    page.find('.resource_selection_toggle_cell label').click
+  end
 end

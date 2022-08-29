@@ -1,19 +1,18 @@
-var $active_calls_sorter;
 $(document).ready(function () {
 
     $active_calls_sorter = function(sort) {
-        $('#index_table_active_calls').tablesorter({
+        var $table = $('#index_table_active_calls');
+        $table.tablesorter({
             headers: { 0: { sorter: false }, 1: { sorter: false }},
             widgets: ['zebra', 'columns'],
             sortList: sort
         });
+        // The tablesorter lib breaks activeadmin toggle_all logic,
+        // because it changes table thead DOM after actvieadmin checkboxToggler() initialized.
+        // In order to fix it we need to reinitialize checkboxToggler again.
+        $table.checkboxToggler();
     };
     $active_calls_sorter([]);
-
-
-});
-
-$(document).ready( function() {
 
     if ($("#active_calls_dynamic_page").length > 0) {
          setInterval(function(){
@@ -52,13 +51,11 @@ $(document).ready( function() {
                      //.html(content.html());
                  //$(this).children(':first').unwrap();
                  $active_calls_sorter(lastSortList);
-                 $("#index_table_active_calls").tableCheckboxToggler();
              });
 
             //$("#active_calls_dynamic_page").next().load('active_calls #index_table_active_calls', params ,function(){
             //    $(this).children(':first').unwrap();
             //    $active_calls_sorter(lastSortList);
-            //    $("#index_table_active_calls").tableCheckboxToggler();
             //});
 
         }, 15000);
