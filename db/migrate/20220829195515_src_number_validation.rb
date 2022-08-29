@@ -1169,8 +1169,8 @@ CREATE or replace FUNCTION switch20.route(
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
-                  rpsr.priority as rpsr_priority,
-                  rpsr.weight as rpsr_weight
+                  COALESCE(rpsr.priority, t_dp.priority) as rpsr_priority,
+                  COALESCE(rpsr.weight, 100) as rpsr_weight
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
