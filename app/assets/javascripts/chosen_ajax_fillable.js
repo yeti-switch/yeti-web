@@ -84,11 +84,13 @@
                             return
                         }
 
+                        var hasPrevVal = false
                         $.each(data, function (i, item) {
+                            if (!hasPrevVal && item.id.toString() === currentSelectValue) hasPrevVal = true
                             select.append('<option value="' + item.id + '">' + item.value + '</option>')
                         })
 
-                        select.val(currentSelectValue)
+                        if (hasPrevVal) select.val(currentSelectValue)
                         select.trigger('chosen:updated')
                     },
                     error: function (jqXHR, exception) {

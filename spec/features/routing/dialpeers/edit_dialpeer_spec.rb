@@ -102,4 +102,129 @@ RSpec.describe 'Edit Dialpeer', js: true do
                                )
     end
   end
+
+  context 'with different vendor and account' do
+    let!(:old_vendor) { FactoryBot.create(:vendor) }
+    let!(:old_account) { FactoryBot.create(:account, contractor: old_vendor) }
+    let!(:old_gateway) { FactoryBot.create(:gateway, contractor: old_vendor) }
+    let!(:old_gateway_group) { FactoryBot.create(:gateway_group, vendor: old_vendor) }
+    let!(:record) do
+      FactoryBot.create(
+        :dialpeer,
+        vendor: old_vendor,
+        account: old_account,
+        gateway: old_gateway,
+        gateway_group: old_gateway_group
+      )
+    end
+    let!(:vendor) { FactoryBot.create(:vendor) }
+    let!(:account) { FactoryBot.create(:account, contractor: vendor) }
+    let(:fill_form!) do
+      fill_in_chosen 'Vendor', with: vendor.name, ajax: true
+      fill_in_chosen 'Account', with: account.name
+    end
+
+    it 'does not update dialpeer' do
+      subject
+      expect(page).to have_semantic_error_texts('Specify a gateway_group or a gateway')
+    end
+
+    context 'when dialpeer linked to shared gateway' do
+      let(:old_gateway) { FactoryBot.create(:gateway, contractor: old_vendor, is_shared: true) }
+
+      it 'updates correctly' do
+        subject
+        expect(page).to have_flash_message('Dialpeer was successfully updated.', type: :notice)
+        expect(record.reload).to have_attributes(
+                                   vendor: vendor,
+                                   account: account,
+                                   gateway: old_gateway,
+                                   gateway_group: nil
+                                 )
+      end
+    end
+
+    context 'when new vendor has gateway' do
+      let!(:gateway) { FactoryBot.create(:gateway, contractor: vendor) }
+
+      it 'does not update dialpeer' do
+        subject
+        expect(page).to have_semantic_error_texts('Specify a gateway_group or a gateway')
+      end
+
+      context 'with gateway' do
+        let(:fill_form!) do
+          super()
+          fill_in_chosen 'Gateway', with: gateway.name, exact_label: true
+        end
+
+        it 'updates correctly' do
+          subject
+          expect(page).to have_flash_message('Dialpeer was successfully updated.', type: :notice)
+          expect(record.reload).to have_attributes(
+                                     vendor: vendor,
+                                     account: account,
+                                     gateway: gateway,
+                                     gateway_group: nil
+                                   )
+        end
+      end
+    end
+
+    context 'when new vendor has gateway_group' do
+      let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: vendor) }
+
+      it 'does not update dialpeer' do
+        subject
+        expect(page).to have_semantic_error_texts('Specify a gateway_group or a gateway')
+      end
+
+      context 'with gateway_group' do
+        let(:fill_form!) do
+          super()
+          fill_in_chosen 'Gateway Group', with: gateway_group.name
+        end
+
+        it 'updates correctly' do
+          subject
+          expect(page).to have_flash_message('Dialpeer was successfully updated.', type: :notice)
+          expect(record.reload).to have_attributes(
+                                     vendor: vendor,
+                                     account: account,
+                                     gateway: nil,
+                                     gateway_group: gateway_group
+                                   )
+        end
+      end
+    end
+
+    context 'when new vendor both gateway and gateway_group' do
+      let!(:gateway) { FactoryBot.create(:gateway, contractor: vendor) }
+      let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: vendor) }
+
+      it 'does not update dialpeer' do
+        subject
+        expect(page).to have_semantic_error_texts('Specify a gateway_group or a gateway')
+      end
+
+      context 'with gateway and gateway_group' do
+        let(:fill_form!) do
+          super()
+          fill_in_chosen 'Gateway', with: gateway.name, exact_label: true
+          fill_in_chosen 'Gateway Group', with: gateway_group.name
+        end
+
+        it 'updates correctly' do
+          subject
+          expect(page).to have_flash_message('Dialpeer was successfully updated.', type: :notice)
+          expect(record.reload).to have_attributes(
+                                     vendor: vendor,
+                                     account: account,
+                                     gateway: gateway,
+                                     gateway_group: gateway_group
+                                   )
+        end
+      end
+    end
+  end
 end
