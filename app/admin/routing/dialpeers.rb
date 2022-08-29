@@ -149,7 +149,7 @@ ActiveAdmin.register Dialpeer do
     column :external_id
   end
 
-  filter :id
+  filter :id, filters: %i[equals greater_than less_than in_string]
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]

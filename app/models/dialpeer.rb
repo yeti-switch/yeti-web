@@ -226,6 +226,7 @@ class Dialpeer < ApplicationRecord
   end
 
   scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
+  scope :id_in_string, ->(value) { ransack(id_in: value.to_s.split(',')).result }
 
   private
 
@@ -236,6 +237,7 @@ class Dialpeer < ApplicationRecord
       routing_tag_ids_covers
       tagged
       routing_tag_ids_count_equals
+      id_in_string
     ]
   end
 end
