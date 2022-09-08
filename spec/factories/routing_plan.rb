@@ -9,6 +9,8 @@ FactoryBot.define do
     use_lnp { false }
     validate_dst_number_format { false }
     validate_dst_number_network { false }
+    validate_src_number_format { false }
+    validate_src_number_network { false }
 
     trait :with_static_routes do
       sorting_id { FactoryBot.create(:sorting, use_static_routes: true).id }
