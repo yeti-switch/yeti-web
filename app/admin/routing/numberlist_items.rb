@@ -121,7 +121,7 @@ ActiveAdmin.register Routing::NumberlistItem do
 
       f.input :tag_action
       f.input :tag_action_value, as: :select,
-                                 collection: Routing::RoutingTag.all,
+                                 collection: tag_action_value_options,
                                  multiple: true,
                                  include_hidden: false,
                                  input_html: { class: 'chosen' }

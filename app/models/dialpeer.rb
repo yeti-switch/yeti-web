@@ -105,6 +105,13 @@ class Dialpeer < ApplicationRecord
   validates :prefix, format: { without: /\s/ }
   validates :batch_prefix, format: { without: /\s/ }
 
+  validates :priority, presence: true
+  validates :priority, numericality: {
+    greater_than_or_equal_to: PG_MIN_INT,
+    less_than_or_equal_to: PG_MAX_INT,
+    allow_nil: true
+  }
+
   validate :contractor_is_vendor
   validate :vendor_owners_the_account, if: :account
   validate :gateway_presence
@@ -199,6 +206,7 @@ class Dialpeer < ApplicationRecord
 
   def gateway_presence
     errors.add(:base, 'Specify a gateway_group or a gateway') if gateway.blank? && gateway_group.blank?
+    errors.add(:base, "both gateway and gateway_group can't be set in a same time") if gateway && gateway_group
   end
 
   def contractor_is_vendor

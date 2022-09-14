@@ -158,7 +158,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
                           aggregator_id: Report::IntervalAggregator.find_by!(name: 'Count').id,
                           aggregate_by: 'destination_fee',
                           interval_length: 10,
-                          send_to: [contacts.first.id, contacts.second.id],
+                          send_to: match_array([contacts.first.id, contacts.second.id]),
                           group_by: nil,
                           filter: nil
                         )

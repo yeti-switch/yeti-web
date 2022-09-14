@@ -9,7 +9,9 @@ class CustomersAuthDecorator < BillingDecorator
   decorates_association :account, with: AccountDecorator
   decorates_association :routing_plan, with: RoutingPlanDecorator
 
-  include RoutingTagActionDecorator
+  def display_tag_action_value
+    h.tag_action_values_badges(model.tag_action_value)
+  end
 
   def decorated_display_name
     if !enabled?

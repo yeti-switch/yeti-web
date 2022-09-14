@@ -81,7 +81,7 @@ class ApplicationRecord < ActiveRecord::Base
   ROUTING_SCHEMA = 'switch20'
 
   PG_MAX_INT = 2_147_483_647
-  PG_MIN_INT = 2_147_483_647
+  PG_MIN_INT = -2_147_483_647
 
   PG_MAX_SMALLINT = 32_767
   PG_MIN_SMALLINT = -32_768
