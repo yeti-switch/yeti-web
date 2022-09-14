@@ -91,4 +91,67 @@ RSpec.describe 'Create new Dialpeer', js: true do
                         )
     end
   end
+
+  context 'with only default fields filled' do
+    let(:fill_form!) { nil }
+
+    it 'does not create record' do
+      expect {
+        subject
+        expect(page).to have_semantic_error_texts(
+                          "Routing group must exist and can't be blank",
+                          "Account must exist and can't be blank",
+                          "Vendor must exist, can't be blank, and Is not vendor",
+                          "Initial rate can't be blank and is not a number",
+                          "Next rate can't be blank and is not a number",
+                          'Specify a gateway_group or a gateway'
+                        )
+      }.to change { Dialpeer.count }.by(0)
+    end
+  end
+
+  context 'with all fields cleared' do
+    let(:fill_form!) do
+      fill_in 'Dst number min length', with: ''
+      fill_in 'Dst number max length', with: ''
+      select_by_value('', from: 'Routing tag mode')
+      fill_in 'Priority', with: ''
+      fill_in 'Initial interval', with: ''
+      fill_in 'Next interval', with: ''
+      fill_in 'Lcr rate multiplier', with: ''
+      fill_in 'Connect fee', with: ''
+      fill_in 'Valid from', with: ''
+      fill_in 'Valid till', with: ''
+      fill_in 'Acd limit', with: ''
+      fill_in 'Asr limit', with: ''
+      fill_in 'Short calls limit', with: ''
+    end
+
+    it 'does not create record' do
+      expect {
+        subject
+        expect(page).to have_semantic_error_texts(
+                          "Routing group must exist and can't be blank",
+                          "Account must exist and can't be blank",
+                          "Vendor must exist, can't be blank, and Is not vendor",
+                          "Routing tag mode must exist and can't be blank",
+                          "Valid from can't be blank",
+                          "Valid till can't be blank",
+                          "Initial rate can't be blank and is not a number",
+                          "Next rate can't be blank and is not a number",
+                          "Initial interval can't be blank and is not a number",
+                          "Next interval can't be blank and is not a number",
+                          "Connect fee can't be blank and is not a number",
+                          "Lcr rate multiplier can't be blank and is not a number",
+                          'Acd limit is not a number',
+                          'Asr limit is not a number',
+                          'Short calls limit is not a number',
+                          "Dst number min length can't be blank and is not a number",
+                          "Dst number max length can't be blank and is not a number",
+                          "Priority can't be blank",
+                          'Specify a gateway_group or a gateway'
+                        )
+      }.to change { Dialpeer.count }.by(0)
+    end
+  end
 end
