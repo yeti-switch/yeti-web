@@ -18,8 +18,40 @@ RSpec.describe 'Create new Dialpeer', js: true do
   let!(:routing_group) { FactoryBot.create(:routing_group) }
   let!(:routeset_discriminator) { FactoryBot.create(:routeset_discriminator) }
   let!(:gateway) { FactoryBot.create(:gateway, contractor: vendor) }
+  let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: vendor) }
   let!(:routing_tags) do
     FactoryBot.create_list(:routing_tag, 5)
+  end
+  let(:default_dialpeer_attributes) do
+    {
+      acd_limit: 0.0,
+      asr_limit: 0.0,
+      connect_fee: 0.0,
+      dst_number_max_length: 100,
+      dst_number_min_length: 0,
+      exclusive_route: false,
+      initial_interval: 1,
+      lcr_rate_multiplier: 1.0,
+      locked: false,
+      next_interval: 1,
+      enabled: false,
+      priority: 100,
+      reverse_billing: false,
+      routing_tag_ids: [],
+      short_calls_limit: 1.0,
+      gateway_id: nil,
+      gateway_group_id: nil,
+      capacity: nil,
+      force_hit_rate: nil,
+      current_rate_id: nil,
+      external_id: nil,
+      dst_rewrite_result: '',
+      dst_rewrite_rule: '',
+      src_name_rewrite_result: '',
+      src_name_rewrite_rule: '',
+      src_rewrite_result: '',
+      src_rewrite_rule: ''
+    }
   end
   before do
     FactoryBot.create(:routing_group)
@@ -48,13 +80,14 @@ RSpec.describe 'Create new Dialpeer', js: true do
 
     record = Dialpeer.last
     expect(record).to have_attributes(
+      **default_dialpeer_attributes,
       vendor_id: vendor.id,
       account_id: account.id,
       routing_group_id: routing_group.id,
       routeset_discriminator_id: routeset_discriminator.id,
+      gateway_id: gateway.id,
       initial_rate: 0.1,
-      next_rate: 0.2,
-      routing_tag_ids: []
+      next_rate: 0.2
     )
   end
 
@@ -75,10 +108,12 @@ RSpec.describe 'Create new Dialpeer', js: true do
 
       record = Dialpeer.last
       expect(record).to have_attributes(
+                          **default_dialpeer_attributes,
                           vendor_id: vendor.id,
                           account_id: account.id,
                           routing_group_id: routing_group.id,
                           routeset_discriminator_id: routeset_discriminator.id,
+                          gateway_id: gateway.id,
                           initial_rate: 0.1,
                           next_rate: 0.2,
                           # routing_tag_ids are correctly sorted
@@ -89,6 +124,59 @@ RSpec.describe 'Create new Dialpeer', js: true do
                             nil
                           ]
                         )
+    end
+  end
+
+  context 'with gateway group' do
+    let(:fill_form!) do
+      fill_in 'Initial rate', with: '0.1'
+      fill_in 'Next rate', with: '0.2'
+      fill_in_chosen 'Vendor', with: vendor.display_name, ajax: true
+      fill_in_chosen 'Account', with: account.display_name, ajax: true
+      fill_in_chosen 'Routing group', with: routing_group.display_name
+      fill_in_chosen 'Routeset discriminator', with: routeset_discriminator.display_name
+      fill_in_chosen 'Gateway Group', with: gateway_group.display_name
+    end
+
+    it 'creates record' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Dialpeer was successfully created.', type: :notice)
+      }.to change { Dialpeer.count }.by(1)
+
+      record = Dialpeer.last
+      expect(record).to have_attributes(
+                          **default_dialpeer_attributes,
+                          vendor_id: vendor.id,
+                          account_id: account.id,
+                          routing_group_id: routing_group.id,
+                          routeset_discriminator_id: routeset_discriminator.id,
+                          gateway_group_id: gateway_group.id,
+                          initial_rate: 0.1,
+                          next_rate: 0.2
+                        )
+    end
+  end
+
+  context 'with gateway and gateway group' do
+    let(:fill_form!) do
+      fill_in 'Initial rate', with: '0.1'
+      fill_in 'Next rate', with: '0.2'
+      fill_in_chosen 'Vendor', with: vendor.display_name, ajax: true
+      fill_in_chosen 'Account', with: account.display_name, ajax: true
+      fill_in_chosen 'Routing group', with: routing_group.display_name
+      fill_in_chosen 'Routeset discriminator', with: routeset_discriminator.display_name
+      fill_in_chosen 'Gateway', with: gateway.display_name
+      fill_in_chosen 'Gateway Group', with: gateway_group.display_name
+    end
+
+    it 'does not create record' do
+      expect {
+        subject
+        expect(page).to have_semantic_error_texts(
+                          "both gateway and gateway_group can't be set in a same time"
+                        )
+      }.to change { Dialpeer.count }.by(0)
     end
   end
 

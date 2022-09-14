@@ -206,6 +206,7 @@ class Dialpeer < ApplicationRecord
 
   def gateway_presence
     errors.add(:base, 'Specify a gateway_group or a gateway') if gateway.blank? && gateway_group.blank?
+    errors.add(:base, "both gateway and gateway_group can't be set in a same time") if gateway && gateway_group
   end
 
   def contractor_is_vendor
