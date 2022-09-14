@@ -192,7 +192,9 @@ jobs:
         with:
           path-to-lcov: ./coverage/lcov.info
           github-token: ${{secrets.github_token}}
-          flag-name: run-${{matrix.ci_node_index}}
+          # github.run_id needed as workaround to have job names unique between master and PR
+          # so coveralls will not compare each job, only aggregated results.
+          flag-name: run-${{matrix.ci_node_index}}-${{ github.run_id }}
           parallel: true
 
       - name: Save artifacts
