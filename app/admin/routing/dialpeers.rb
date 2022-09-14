@@ -225,7 +225,7 @@ ActiveAdmin.register Dialpeer do
       f.input :routing_tag_ids,
               as: :select,
               label: 'Routing tags',
-              collection: DialpeerDecorator.decorate(f.object).routing_tag_options,
+              collection: routing_tag_options,
               multiple: true,
               include_hidden: false,
               input_html: { class: 'chosen' }

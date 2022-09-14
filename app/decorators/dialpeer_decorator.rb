@@ -4,7 +4,12 @@ class DialpeerDecorator < BillingDecorator
   delegate_all
   decorates Dialpeer
 
-  include RoutingTagIdsDecorator
+  def routing_tags
+    h.routing_tags_badges(
+      routing_tag_ids: model.routing_tag_ids,
+      routing_tag_mode_id: model.routing_tag_mode_id
+    )
+  end
 
   decorates_association :gateway, with: GatewayDecorator
   decorates_association :gateway_group, with: GatewayGroupDecorator

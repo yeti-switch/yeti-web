@@ -32,9 +32,11 @@ module Importing
     # Shows whether routing tags column changed or not
     def routing_tags_column(column_name, name_column:)
       col_value = model.public_send(column_name)
-      value = col_value.present? ?
-                  Routing::RoutingTag.where(id: col_value).pluck(:name).join(', ') :
-                  model.public_send(name_column)
+      if col_value.present?
+        value = col_value.map { |id| h.routing_tags_map[id] }.join(', ')
+      else
+        value = model.public_send(name_column)
+      end
 
       wrap_changed_column(column_name) { value }
     end

@@ -55,4 +55,35 @@ module ApplicationHelper
 
     "#{text[0..max_length]}..."
   end
+
+  def routing_tags_map
+    @routing_tags_map ||= Routing::RoutingTag.all.pluck(:id, :name).to_h
+  end
+
+  def tag_action_value_options
+    @tag_action_value_options ||= Routing::RoutingTag.all.map { |record| [record.display_name, record.id] }
+  end
+
+  def routing_tag_options
+    @routing_tag_options ||= routing_tags_map.invert.to_a + [[Routing::RoutingTag::ANY_TAG, nil]]
+  end
+
+  def routing_tags_badges(routing_tag_ids:, routing_tag_mode_id:)
+    separator_character = routing_tag_mode_id == Routing::RoutingTagMode::CONST::AND ? ' & ' : ' <b>|</b> '
+    if routing_tag_ids.blank?
+      return tag.span('NOT TAGGED', class: 'status_tag')
+    end
+
+    routing_tag_ids.map do |tag_id|
+      tag_name = routing_tags_map[tag_id]
+      tag.span(tag_name, class: 'status_tag ok')
+    end.join(separator_character).html_safe
+  end
+
+  def tag_action_values_badges(tag_action_value)
+    tag_action_value.map do |id|
+      tag_name = routing_tags_map[id]
+      tag.span(tag_name, class: 'status_tag ok')
+    end.join('&nbsp;').html_safe
+  end
 end

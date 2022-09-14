@@ -4,7 +4,12 @@ class DestinationDecorator < BillingDecorator
   delegate_all
   decorates Routing::Destination
 
-  include RoutingTagIdsDecorator
+  def routing_tags
+    h.routing_tags_badges(
+      routing_tag_ids: model.routing_tag_ids,
+      routing_tag_mode_id: model.routing_tag_mode_id
+    )
+  end
 
   def decorated_display_name
     if reject_calls?

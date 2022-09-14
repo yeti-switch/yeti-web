@@ -68,7 +68,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :routing_tag_ids, as: :select,
-                                collection: RoutingTagDetectionRuleDecorator.decorate(f.object).routing_tag_options,
+                                collection: routing_tag_options,
                                 multiple: true,
                                 include_hidden: false,
                                 input_html: { class: 'chosen' }
@@ -79,7 +79,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
       f.input :dst_prefix
       f.input :tag_action
       f.input :tag_action_value, as: :select,
-                                 collection: Routing::RoutingTag.all,
+                                 collection: tag_action_value_options,
                                  multiple: true,
                                  include_hidden: false,
                                  input_html: { class: 'chosen' }

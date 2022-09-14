@@ -194,7 +194,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :rate_group, input_html: { class: 'chosen' }
 
       f.input :routing_tag_ids, as: :select,
-                                collection: DestinationDecorator.decorate(f.object).routing_tag_options,
+                                collection: routing_tag_options,
                                 include_hidden: false,
                                 input_html: { class: 'chosen', multiple: true }
       f.input :routing_tag_mode

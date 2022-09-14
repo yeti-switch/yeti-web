@@ -54,7 +54,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :id
   filter :routing_tag_ids_include,
          as: :select,
-         collection: proc { Routing::RoutingTag.all },
+         collection: proc { tag_action_value_options },
          label: 'With routing tag',
          input_html: { class: 'chosen' }
   filter :time_start, as: :date_time_range

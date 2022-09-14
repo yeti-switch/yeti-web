@@ -8,9 +8,9 @@ class CdrDecorator < Draper::Decorator
     return nil if model.routing_tag_ids.blank?
 
     model.routing_tag_ids.map do |id|
-      tag = Routing::RoutingTag.where(id: id).first
-      if tag
-        h.content_tag(:span, tag.name, class: 'status_tag ok')
+      tag_name = h.routing_tags_map[id]
+      if tag_name
+        h.content_tag(:span, tag_name, class: 'status_tag ok')
       else
         h.content_tag(:span, id, class: 'status_tag no')
       end
