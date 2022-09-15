@@ -71,12 +71,16 @@ module ApplicationHelper
   def routing_tags_badges(routing_tag_ids:, routing_tag_mode_id:)
     separator_character = routing_tag_mode_id == Routing::RoutingTagMode::CONST::AND ? ' & ' : ' <b>|</b> '
     if routing_tag_ids.blank?
-      return tag.span('NOT TAGGED', class: 'status_tag')
+      return tag.span(Routing::RoutingTag::NOT_TAGGED, class: 'status_tag')
     end
 
     routing_tag_ids.map do |tag_id|
-      tag_name = routing_tags_map[tag_id]
-      tag.span(tag_name, class: 'status_tag ok')
+      if tag_id.nil?
+        tag.span(Routing::RoutingTag::ANY_TAG, class: 'status_tag ok')
+      else
+        tag_name = routing_tags_map[tag_id]
+        tag.span(tag_name, class: 'status_tag ok')
+      end
     end.join(separator_character).html_safe
   end
 

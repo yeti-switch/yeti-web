@@ -16,6 +16,7 @@ class Routing::RoutingTag < ApplicationRecord
   include WithPaperTrail
   self.table_name = 'class4.routing_tags'
 
+  NOT_TAGGED = 'not tagged'
   ANY_TAG = 'any tag'
 
   has_many :customers_auths, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.tag_action_value)", tag.id) }, class_name: 'CustomersAuth', autosave: false
