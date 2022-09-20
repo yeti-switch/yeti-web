@@ -428,7 +428,20 @@ RSpec.describe '#routing logic' do
       let!(:destination) { create(:destination, prefix: '', enabled: true, rate_group_id: rate_group.id) }
 
       let!(:routing_group) { create(:routing_group) }
-      let!(:routing_plan) { create(:routing_plan, use_lnp: false, routing_groups: [routing_group]) }
+      let!(:routing_plan) {
+        create(:routing_plan,
+               use_lnp: false,
+               routing_groups: [routing_group],
+               validate_dst_number_format: validate_dst_number_format,
+               validate_dst_number_network: validate_dst_number_network,
+               validate_src_number_format: validate_src_number_format,
+               validate_src_number_network: validate_src_number_network)
+      }
+      let!(:validate_dst_number_format) { false }
+      let!(:validate_dst_number_network) { false }
+      let!(:validate_src_number_format) { false }
+      let!(:validate_src_number_network) { false }
+
       let!(:dialpeer) {
         create(:dialpeer,
                prefix: '',
@@ -615,6 +628,90 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
             expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'SRC Number format validation enabled' do
+        let(:validate_src_number_format) { true }
+
+        context 'Number is valid' do
+          let(:from_name) { '3809611111111' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is not valid' do
+          let(:from_name) { '#%%3809611111111' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8011) # last profile with invalid SRS number format error
+          end
+        end
+      end
+
+      context 'SRC Number network validation enabled' do
+        let(:validate_src_number_network) { true }
+
+        context 'Number is valid' do
+          let(:from_name) { '3809611111111' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is not valid' do
+          let(:from_name) { '000003809611111111' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8010) # last profile with invalid SRC number network error
+          end
+        end
+      end
+
+      context 'DST Number format validation enabled' do
+        let(:validate_dst_number_format) { true }
+
+        context 'Number is valid' do
+          let(:uri_name) { '3809611111111' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is not valid' do
+          let(:uri_name) { '#%%3809611111111' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8008) # last profile with invalid DST number format error
+          end
+        end
+      end
+
+      context 'DST Number network validation enabled' do
+        let(:validate_dst_number_network) { true }
+
+        context 'Number is valid' do
+          let(:uri_name) { '3809611111111' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is not valid' do
+          let(:uri_name) { '000003809611111111' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8007) # last profile with invalid DST number network error
           end
         end
       end

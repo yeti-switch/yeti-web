@@ -18,10 +18,13 @@ ActiveAdmin.register Routing::RoutingPlan do
                  :rate_delta_max,
                  :max_rerouting_attempts,
                  :validate_dst_number_format,
-                 :validate_dst_number_network
+                 :validate_dst_number_network,
+                 :validate_src_number_format,
+                 :validate_src_number_network
 
   permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts,
                 :validate_dst_number_format, :validate_dst_number_network,
+                :validate_src_number_format, :validate_src_number_network,
                 routing_group_ids: []
 
   includes :sorting, :routing_groups
@@ -47,6 +50,8 @@ ActiveAdmin.register Routing::RoutingPlan do
     column 'Routing groups', :routing_groups_links
     column :validate_dst_number_format
     column :validate_dst_number_network
+    column :validate_src_number_format
+    column :validate_src_number_network
   end
 
   show do
@@ -64,6 +69,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       end
       row :validate_dst_number_format
       row :validate_dst_number_network
+      row :validate_src_number_format
+      row :validate_src_number_network
     end
     active_admin_comments
   end
@@ -79,6 +86,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :routing_groups, input_html: { class: 'chosen-sortable', multiple: true }
       f.input :validate_dst_number_format
       f.input :validate_dst_number_network
+      f.input :validate_src_number_format
+      f.input :validate_src_number_network
     end
     f.actions
   end

@@ -11,6 +11,8 @@
 #  use_lnp                     :boolean          default(FALSE), not null
 #  validate_dst_number_format  :boolean          default(FALSE), not null
 #  validate_dst_number_network :boolean          default(FALSE), not null
+#  validate_src_number_format  :boolean          default(FALSE), not null
+#  validate_src_number_network :boolean          default(FALSE), not null
 #  external_id                 :bigint(8)
 #  sorting_id                  :integer(4)       default(1), not null
 #

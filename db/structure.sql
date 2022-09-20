@@ -18489,7 +18489,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
           /*dbg{*/
           v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting calls',EXTRACT(MILLISECOND from v_end-v_start);
+          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
           /*}dbg*/
 
           v_ret.disconnect_code_id=8007; --No network detected for DST number
@@ -18497,6 +18497,16 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         END IF;
 
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8010; --No network detected for SRC number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           /*dbg{*/
@@ -18504,7 +18514,18 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RAISE NOTICE '% ms -> Dst number format is not valid. DST number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key;
           /*}dbg*/
 
-          v_ret.disconnect_code_id=8008; --Invalid number format
+          v_ret.disconnect_code_id=8008; --Invalid DST number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_rp.validate_src_number_format AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> SRC number format is not valid. SRC number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_routing;
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8011; --Invalid SRC number format
           RETURN NEXT v_ret;
           RETURN;
         END IF;
@@ -18847,8 +18868,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
-                  rpsr.priority as rpsr_priority,
-                  rpsr.weight as rpsr_weight
+                  COALESCE(rpsr.priority, t_dp.priority) as rpsr_priority,
+                  COALESCE(rpsr.weight, 100) as rpsr_weight
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
@@ -19726,7 +19747,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
           /*dbg{*/
           v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting calls',EXTRACT(MILLISECOND from v_end-v_start);
+          RAISE NOTICE '% ms -> Network detection. DST network validation enabled and DST network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
           /*}dbg*/
 
           v_ret.disconnect_code_id=8007; --No network detected for DST number
@@ -19734,6 +19755,16 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         END IF;
 
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8010; --No network detected for SRC number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           /*dbg{*/
@@ -19741,7 +19772,18 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RAISE NOTICE '% ms -> Dst number format is not valid. DST number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key;
           /*}dbg*/
 
-          v_ret.disconnect_code_id=8008; --Invalid number format
+          v_ret.disconnect_code_id=8008; --Invalid DST number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_rp.validate_src_number_format AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> SRC number format is not valid. SRC number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_routing;
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8011; --Invalid SRC number format
           RETURN NEXT v_ret;
           RETURN;
         END IF;
@@ -20084,8 +20126,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
-                  rpsr.priority as rpsr_priority,
-                  rpsr.weight as rpsr_weight
+                  COALESCE(rpsr.priority, t_dp.priority) as rpsr_priority,
+                  COALESCE(rpsr.weight, 100) as rpsr_weight
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
@@ -20862,11 +20904,26 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         END IF;
 
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null THEN
+          
+
+          v_ret.disconnect_code_id=8010; --No network detected for SRC number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           
 
-          v_ret.disconnect_code_id=8008; --Invalid number format
+          v_ret.disconnect_code_id=8008; --Invalid DST number format
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_rp.validate_src_number_format AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+          
+
+          v_ret.disconnect_code_id=8011; --Invalid SRC number format
           RETURN NEXT v_ret;
           RETURN;
         END IF;
@@ -21200,8 +21257,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
-                  rpsr.priority as rpsr_priority,
-                  rpsr.weight as rpsr_weight
+                  COALESCE(rpsr.priority, t_dp.priority) as rpsr_priority,
+                  COALESCE(rpsr.weight, 100) as rpsr_weight
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
@@ -23584,7 +23641,9 @@ CREATE TABLE class4.routing_plans (
     max_rerouting_attempts smallint DEFAULT 10 NOT NULL,
     external_id bigint,
     validate_dst_number_format boolean DEFAULT false NOT NULL,
-    validate_dst_number_network boolean DEFAULT false NOT NULL
+    validate_dst_number_network boolean DEFAULT false NOT NULL,
+    validate_src_number_format boolean DEFAULT false NOT NULL,
+    validate_src_number_network boolean DEFAULT false NOT NULL
 );
 
 
@@ -30597,6 +30656,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220707145142'),
 ('20220717150840'),
 ('20220718195457'),
-('20220805080124');
+('20220805080124'),
+('20220829195515');
 
 
