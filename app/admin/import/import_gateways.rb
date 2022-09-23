@@ -120,6 +120,7 @@ ActiveAdmin.register Importing::Gateway do
     column :relay_reinvite
     column :relay_prack
     column :rel100_mode, sortable: :rel100_mode_name
+    column :force_cancel_routeset
 
     # DTMF
     column :rx_inband_dtmf_filtering_mode, sortable: :rx_inband_dtmf_filtering_mode_name

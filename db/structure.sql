@@ -24527,7 +24527,8 @@ CREATE TABLE data_import.import_gateways (
     is_changed boolean,
     diversion_send_mode_id smallint,
     diversion_send_mode_name character varying,
-    try_avoid_transcoding boolean
+    try_avoid_transcoding boolean,
+    force_cancel_routeset boolean
 );
 
 

@@ -83,7 +83,8 @@ shared_context :init_gateway do |args|
       dns_srv_failover_timer: 2000,
       rtp_force_relay_cn: true,
       sensor_id: nil,
-      sensor_level_id: 1
+      sensor_level_id: 1,
+      force_cancel_routeset: true
     }.merge(args)
 
     @gateway = FactoryBot.create(:gateway, fields)

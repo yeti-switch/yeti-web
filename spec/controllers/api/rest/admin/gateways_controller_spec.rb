@@ -73,6 +73,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :relay_prack
     it_behaves_like :jsonapi_filters_by_boolean_field, :rtp_relay_timestamp_aligning
     it_behaves_like :jsonapi_filters_by_boolean_field, :allow_1xx_without_to_tag
+    it_behaves_like :jsonapi_filters_by_boolean_field, :force_cancel_routeset
     it_behaves_like :jsonapi_filters_by_number_field, :dns_srv_failover_timer
     it_behaves_like :jsonapi_filters_by_boolean_field, :rtp_force_relay_cn
     it_behaves_like :jsonapi_filters_by_boolean_field, :relay_update

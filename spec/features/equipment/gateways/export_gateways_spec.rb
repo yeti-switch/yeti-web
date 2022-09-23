@@ -131,7 +131,8 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Preserve anonymous from domain',     item.preserve_anonymous_from_domain.to_s],
         ['Termination dst numberlist name',    item.termination_dst_numberlist.name],
         ['Termination src numberlist name',    item.termination_src_numberlist.name],
-        ['Lua script name',                    item.lua_script.name]
+        ['Lua script name',                    item.lua_script.name],
+        ['Force cancel routeset', item.force_cancel_routeset.to_s]
       ]
     )
   end
