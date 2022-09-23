@@ -1046,7 +1046,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	term_gw_external_id bigint,
 	customer_acc_vat numeric,
 	lega_identity_attestation_id smallint,
-	lega_identity_verstat_id smallint
+	lega_identity_verstat_id smallint,
+	bleg_force_cancel_routeset boolean
 );
 
 
@@ -16488,6 +16489,7 @@ BEGIN
   i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+  i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -17122,6 +17124,7 @@ BEGIN
   i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+  i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -17709,6 +17712,7 @@ BEGIN
   i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+  i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
   
   RETURN i_profile;
