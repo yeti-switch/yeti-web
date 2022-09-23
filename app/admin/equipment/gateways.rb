@@ -42,6 +42,7 @@ ActiveAdmin.register Gateway do
                  [:orig_proxy_transport_protocol_name, proc { |row| row.orig_proxy_transport_protocol.try(:name) }],
                  :orig_outbound_proxy,
                  :dialog_nat_handling, # :transparent_dialog_id,
+                 :force_cancel_routeset,
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
@@ -418,6 +419,7 @@ ActiveAdmin.register Gateway do
               f.input :sdp_alines_filter_list
               f.input :ringing_timeout
               f.input :allow_1xx_without_to_tag
+              f.input :force_cancel_routeset
               f.input :max_30x_redirects
               f.input :max_transfers
               f.input :sip_timer_b
@@ -579,7 +581,7 @@ ActiveAdmin.register Gateway do
 
             row :term_use_outbound_proxy
             row :term_force_outbound_proxy
-            row :orig_proxy_transport_protocol
+            row :term_proxy_transport_protocol
             row :term_outbound_proxy
             row :term_next_hop_for_replies
             row :term_next_hop
@@ -589,6 +591,7 @@ ActiveAdmin.register Gateway do
             row :sdp_alines_filter_list
             row :ringing_timeout
             row :allow_1xx_without_to_tag
+            row :force_cancel_routeset
             row :max_30x_redirects
             row :max_transfers
             row :sip_timer_b

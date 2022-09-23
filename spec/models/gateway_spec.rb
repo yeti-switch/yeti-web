@@ -27,6 +27,7 @@
 #  enabled                          :boolean          not null
 #  fake_180_timer                   :integer(2)
 #  filter_noaudio_streams           :boolean          default(FALSE), not null
+#  force_cancel_routeset            :boolean          default(FALSE), not null
 #  force_dtmf_relay                 :boolean          default(FALSE), not null
 #  force_one_way_early_media        :boolean          default(FALSE), not null
 #  force_symmetric_rtp              :boolean          default(TRUE), not null
