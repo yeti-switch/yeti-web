@@ -15,7 +15,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
              :rtp_force_relay_cn, :preserve_anonymous_from_domain, :use_registered_aor,
-             :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity
+             :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity,
+             :force_cancel_routeset
 
   paginator :paged
 
@@ -153,6 +154,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :preserve_anonymous_from_domain, type: :boolean
   ransack_filter :use_registered_aor, type: :boolean
   ransack_filter :weight, type: :number
+  ransack_filter :force_cancel_routeset, type: :boolean
 
   def self.updatable_fields(_context)
     %i[
@@ -242,6 +244,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       termination_capacity
       incoming_auth_username
       incoming_auth_password
+      force_cancel_routeset
     ]
   end
 

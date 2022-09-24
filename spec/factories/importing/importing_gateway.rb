@@ -106,5 +106,6 @@ FactoryBot.define do
     send_lnp_information { true }
     force_one_way_early_media { true }
     max_30x_redirects { 1 }
+    force_cancel_routeset { false }
   end
 end

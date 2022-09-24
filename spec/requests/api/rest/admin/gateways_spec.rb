@@ -532,7 +532,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rtp-relay-timestamp-aligning': gateway.rtp_relay_timestamp_aligning,
         'rtp-force-relay-cn': gateway.rtp_force_relay_cn,
         'incoming-auth-username': gateway.incoming_auth_username,
-        'incoming-auth-password': gateway.incoming_auth_password
+        'incoming-auth-password': gateway.incoming_auth_password,
+        'force-cancel-routeset': gateway.force_cancel_routeset
       }
     end
 

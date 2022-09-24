@@ -31,6 +31,7 @@
 #  enabled                            :boolean
 #  error_string                       :string
 #  filter_noaudio_streams             :boolean
+#  force_cancel_routeset              :boolean
 #  force_dtmf_relay                   :boolean
 #  force_one_way_early_media          :boolean
 #  force_symmetric_rtp                :boolean
@@ -228,6 +229,7 @@ class Importing::Gateway < Importing::Base
     termination_src_numberlist_id
     lua_script_id
     use_registered_aor
+    force_cancel_routeset
   ]
 
   import_for ::Gateway

@@ -1046,7 +1046,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	term_gw_external_id bigint,
 	customer_acc_vat numeric,
 	lega_identity_attestation_id smallint,
-	lega_identity_verstat_id smallint
+	lega_identity_verstat_id smallint,
+	bleg_force_cancel_routeset boolean
 );
 
 
@@ -2947,7 +2948,8 @@ CREATE TABLE class4.gateways (
     orig_append_headers_reply character varying[],
     diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
     diversion_domain character varying,
-    try_avoid_transcoding boolean DEFAULT false NOT NULL
+    try_avoid_transcoding boolean DEFAULT false NOT NULL,
+    force_cancel_routeset boolean DEFAULT false NOT NULL
 );
 
 
@@ -16487,6 +16489,7 @@ BEGIN
   i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+  i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -17121,6 +17124,7 @@ BEGIN
   i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+  i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -17708,6 +17712,7 @@ BEGIN
   i_profile.suppress_early_media=i_customer_gw.suppress_early_media OR i_vendor_gw.suppress_early_media;
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
+  i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
   
   RETURN i_profile;
@@ -24526,7 +24531,8 @@ CREATE TABLE data_import.import_gateways (
     is_changed boolean,
     diversion_send_mode_id smallint,
     diversion_send_mode_name character varying,
-    try_avoid_transcoding boolean
+    try_avoid_transcoding boolean,
+    force_cancel_routeset boolean
 );
 
 
@@ -30657,6 +30663,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220717150840'),
 ('20220718195457'),
 ('20220805080124'),
-('20220829195515');
+('20220829195515'),
+('20220923131906');
 
 
