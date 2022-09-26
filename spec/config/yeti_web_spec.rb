@@ -43,7 +43,8 @@ RSpec.describe 'config/yeti_web.yml' do
         environment: a_kind_of(String),
         node_name: a_kind_of(String)
       },
-      versioning_disable_for_models: a_kind_of(Array)
+      versioning_disable_for_models: a_kind_of(Array),
+      keep_expired_dialpeers_days: a_kind_of(String)
     }
   end
 
