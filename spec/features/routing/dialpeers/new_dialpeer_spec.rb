@@ -242,4 +242,35 @@ RSpec.describe 'Create new Dialpeer', js: true do
       }.to change { Dialpeer.count }.by(0)
     end
   end
+
+  context 'with invalid valid_from' do
+    let(:valid_from) { 2.days.from_now.utc }
+    let(:valid_till) { valid_from - 1.second }
+
+    let(:fill_form!) do
+      super()
+      fill_in 'Valid from', with: valid_from
+      fill_in 'Valid till', with: valid_till
+    end
+
+    it 'should raise validation errors' do
+      expect {
+        subject
+        expect(page).to have_semantic_errors(count: 1)
+        expect(page).to have_semantic_error('Valid from must be earlier than valid till')
+      }.to change { Dialpeer.count }.by(0)
+    end
+
+    context 'when valid_from = valid_till' do
+      let(:valid_till) { valid_from }
+
+      it 'should raise validation errors' do
+        expect {
+          subject
+          expect(page).to have_semantic_errors(count: 1)
+          expect(page).to have_semantic_error('Valid from must be earlier than valid till')
+        }.to change { Dialpeer.count }.by(0)
+      end
+    end
+  end
 end
