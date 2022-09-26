@@ -48,18 +48,22 @@ class Routing::RoutingTag < ApplicationRecord
   end
 
   def prevent_destroy_if_have_assosiations
-    if has_active_assosiations?
-      raise ActiveRecord::RecordNotDestroyed,
-            'Can not be deleted. Has related Customers Auth'
+    associations = active_assosiations
+
+    if associations.any?
+      errors.add(:base, "Has related #{associations.join(', ')}")
+      throw(:abort)
     end
   end
 
-  def has_active_assosiations?
-    customers_auths.any? ||
-      numberlists.any? ||
-      numberlist_items.any? ||
-      detection_rules.any? ||
-      dialpeers.any? ||
-      destinations.any?
+  def active_assosiations
+    associations = []
+    associations << 'Customer Auth' if customers_auths.exists?
+    associations << 'Numberlist' if numberlists.exists?
+    associations << 'Numberlist Item' if numberlist_items.exists?
+    associations << 'Detection Rule' if detection_rules.exists?
+    associations << 'Dialpeer' if dialpeers.exists?
+    associations << 'Destination' if destinations.exists?
+    associations
   end
 end
