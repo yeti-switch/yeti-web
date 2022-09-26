@@ -3,7 +3,7 @@
 RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
   include_context :init_routing_tag_collection
 
-  let(:tag_ids) { [@tag_ua.id, @tag_us.id] }
+  let(:tag_ids) { [tag_ua.id, tag_us.id] }
 
   # let(:resource_type) { 'customers-auths' }
   # let(:factory_name) { :destination }
@@ -30,7 +30,7 @@ RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
           type: resource_type,
           id: record.to_param,
           attributes: {
-            'routing-tag-ids': [@tag_emergency.id]
+            'routing-tag-ids': [tag_emergency.id]
           }
         }
       }
@@ -38,7 +38,7 @@ RSpec.shared_examples :jsonapi_resource_with_routing_tag_ids do
 
     it 'updates `routing_tag_ids` array' do
       expect(record.reload)
-        .to have_attributes(routing_tag_ids: [@tag_emergency.id])
+        .to have_attributes(routing_tag_ids: [tag_emergency.id])
     end
   end
 end

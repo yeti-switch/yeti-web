@@ -10,7 +10,7 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
     Routing::TagAction.find(Routing::TagAction::CONST::APPEND_ID)
   end
 
-  let(:tag_ids) { [@tag_ua.id, @tag_us.id] }
+  let(:tag_ids) { [tag_ua.id, tag_us.id] }
 
   let(:record) do
     create(factory_name,
@@ -49,7 +49,7 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
           type: resource_type,
           id: record.to_param,
           attributes: {
-            'tag-action-value': [@tag_emergency.id]
+            'tag-action-value': [tag_emergency.id]
           },
           relationships: {
             'tag-action': wrap_relationship(:'tag-actions', new_tag_action.to_param)
@@ -61,7 +61,7 @@ RSpec.shared_examples :jsonapi_resource_with_multiple_tags do
     it 'updates record with new tag_action and tag_action_value' do
       expect(record.reload).to have_attributes(
         tag_action_id: new_tag_action.id,
-        tag_action_value: [@tag_emergency.id]
+        tag_action_value: [tag_emergency.id]
       )
     end
   end

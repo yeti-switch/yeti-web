@@ -24,8 +24,8 @@ FactoryBot.define do
     next_interval { 60 }
     initial_interval { 60 }
 
-    valid_from { 1.day.ago.utc }
-    valid_till { 1.day.from_now.utc }
+    valid_from { 10.days.ago.utc }
+    valid_till { 10.days.from_now.utc }
 
     association :routing_group
     association :routeset_discriminator

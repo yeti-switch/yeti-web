@@ -8,14 +8,14 @@ RSpec.describe 'Export RoutingTagDetectionRule', type: :feature do
 
   let!(:item) do
     create(:routing_tag_detection_rule,
-           routing_tag_ids: [@tag_emergency.id, @tag_us.id],
+           routing_tag_ids: [tag_emergency.id, tag_us.id],
            src_area: create(:area),
            dst_area: create(:area),
            src_prefix: '111',
            dst_prefix: '222',
            routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
            tag_action: Routing::TagAction.take,
-           tag_action_value: [@tag_ua.id, @tag_us.id])
+           tag_action_value: [tag_ua.id, tag_us.id])
   end
 
   before do

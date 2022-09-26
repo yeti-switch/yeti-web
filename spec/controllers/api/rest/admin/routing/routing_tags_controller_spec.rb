@@ -36,7 +36,7 @@ RSpec.describe Api::Rest::Admin::Routing::RoutingTagsController, type: :controll
     end
 
     let(:attributes) do
-      { name: 'RSpec tag n-1' }
+      { name: 'rspec tag n-1' }
     end
 
     it { expect(response.status).to eq(201) }
