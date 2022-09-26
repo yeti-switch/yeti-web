@@ -30,16 +30,22 @@ class Routing::RoutingTag < ApplicationRecord
   validates :name,
             presence: true,
             uniqueness: true,
-            exclusion: { in: [ANY_TAG] },
+            exclusion: { in: [ANY_TAG, NOT_TAGGED] },
             format: { with: /\A[^\s][^,]+?[^\s]\z/ } # not allow: ',' and start/end spaces
 
   before_destroy :prevent_destroy_if_have_assosiations
+
+  before_validation :name_to_lowercase
 
   def display_name
     "#{name} | #{id}"
   end
 
   private
+
+  def name_to_lowercase
+    name.downcase! if name.present?
+  end
 
   def prevent_destroy_if_have_assosiations
     if has_active_assosiations?
