@@ -19,6 +19,7 @@ ActiveAdmin.register Dialpeer do
   decorate_with DialpeerDecorator
 
   scope :locked
+  scope :expired
 
   # "Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
   acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,
