@@ -134,7 +134,7 @@ RSpec.describe 'Filter dialpeer records', :js do
           expect(page).to have_table
           expect(page).to have_table_row count: 1
           within_table_row(id: dialpeers_with_one_tag.id) do
-            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name)
+            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name.upcase)
           end
         end
       end

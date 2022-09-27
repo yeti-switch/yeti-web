@@ -33,7 +33,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
         src_rewrite_result: '',
         src_rewrite_rule: '',
         # timestamps cropped to minutes when dialpeer created from admin UI
-        valid_from: 1.day.ago.change(sec: 0),
+        valid_from: 2.days.ago.change(sec: 0),
         valid_till: 1.day.ago.change(sec: 0)
       )
     end

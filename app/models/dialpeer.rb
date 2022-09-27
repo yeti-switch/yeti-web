@@ -117,6 +117,7 @@ class Dialpeer < ApplicationRecord
   validate :gateway_presence
   validate :vendor_owners_the_gateway, if: :gateway
   validate :vendor_owners_the_gateway_group, if: :gateway_group
+  validate :validate_valid_from
 
   validates_with RoutingTagIdsValidator
 
@@ -203,6 +204,12 @@ class Dialpeer < ApplicationRecord
   }
 
   protected
+
+  def validate_valid_from
+    if valid_till.present? && valid_from.present?
+      errors.add(:valid_from, 'must be earlier than valid till') if valid_from >= valid_till
+    end
+  end
 
   def gateway_presence
     errors.add(:base, 'Specify a gateway_group or a gateway') if gateway.blank? && gateway_group.blank?

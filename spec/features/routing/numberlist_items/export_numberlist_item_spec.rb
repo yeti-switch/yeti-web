@@ -10,7 +10,7 @@ RSpec.describe 'Export Numberlist Item', type: :feature do
     create(:numberlist_item,
            action: Routing::NumberlistAction.take,
            tag_action: Routing::TagAction.take,
-           tag_action_value: [@tag_ua.id, @tag_us.id])
+           tag_action_value: [tag_ua.id, tag_us.id])
   end
 
   before do

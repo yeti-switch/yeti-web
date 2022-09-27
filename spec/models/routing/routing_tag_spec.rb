@@ -15,13 +15,21 @@
 RSpec.describe Routing::RoutingTag, type: :model do
   context 'validators' do
     context 'name' do
-      it { is_expected.not_to allow_value(Routing::RoutingTag::ANY_TAG).for(:name) }
+      it { is_expected.not_to allow_value(Routing::RoutingTag::NOT_TAGGED, 'NOT TAGGED').for(:name) }
+      it { is_expected.not_to allow_value(Routing::RoutingTag::ANY_TAG, 'ANY TAG').for(:name) }
+
       it { is_expected.not_to allow_value('UA_CLI ').for(:name) }
       it { is_expected.not_to allow_value(' UA_CLI').for(:name) }
       it { is_expected.not_to allow_value('UA,CLI').for(:name) }
 
       it { is_expected.to allow_value('UA_CLI').for(:name) }
       it { is_expected.to allow_value('UA_C LI').for(:name) }
+
+      context 'with same name' do
+        before { FactoryBot.create(:routing_tag, name: 'didww1') }
+
+        it { is_expected.not_to allow_value('didww1', 'Didww1', 'DIDWW1', 'DiDwW1').for(:name) }
+      end
     end
   end
 

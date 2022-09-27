@@ -55,8 +55,8 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
         'initial-rate': '0.01',
         'connect-fee': '0.01',
         'valid-from': '2020-02-02',
-        'valid-till': '2020-02-02',
-        'routing-tag-ids': [@tag_ua.id]
+        'valid-till': '2020-02-03',
+        'routing-tag-ids': [tag_ua.id]
       }
     end
     let(:json_api_request_relationships) do
@@ -102,12 +102,12 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'network-prefix-id': nil,
           'next-interval': 1,
           'next-rate': '0.01',
-          'routing-tag-ids': [@tag_ua.id],
+          'routing-tag-ids': [tag_ua.id],
           'short-calls-limit': 1.0,
           'src-rewrite-result': nil,
           'src-rewrite-rule': nil,
           'valid-from': Time.parse('2020-02-02').in_time_zone.iso8601(3),
-          'valid-till': Time.parse('2020-02-02').in_time_zone.iso8601(3),
+          'valid-till': Time.parse('2020-02-03').in_time_zone.iso8601(3),
           capacity: nil,
           enabled: true,
           'reverse-billing': true,
@@ -143,7 +143,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'initial-rate': '0.01',
           'connect-fee': '0.01',
           'valid-from': '2020-02-02',
-          'valid-till': '2020-02-02'
+          'valid-till': '2020-02-03'
 
         }
       end
@@ -154,7 +154,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'routing-tag-mode': { data: { id: routing_tag_mode.id.to_s, type: 'routing_tag_modes' } },
           'routeset-discriminator': { data: { id: routeset_discriminator.id.to_s, type: 'routeset_discriminators' } },
           'vendor': { data: { id: vendor.id.to_s, type: 'contractors' } },
-          'routing-tag-ids': { data: { id: [@tag_ua], type: 'routing_tags' } },
+          'routing-tag-ids': { data: { id: [tag_ua], type: 'routing_tags' } },
           'gateway': { data: { id: 0, type: 'gateways' } },
           'gateway-group': { data: { id: 0, type: 'gateway_groups' } }
         }
@@ -191,7 +191,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'initial-rate': '0.01',
           'connect-fee': '0.01',
           'valid-from': '2020-02-02',
-          'valid-till': '2020-02-02',
+          'valid-till': '2020-02-03',
 
           'lcr-rate-multiplier': ''
 
@@ -204,7 +204,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'routing-tag-mode': { data: { id: routing_tag_mode.id.to_s, type: 'routing_tag_modes' } },
           'routeset-discriminator': { data: { id: routeset_discriminator.id.to_s, type: 'routeset_discriminators' } },
           'vendor': { data: { id: vendor.id.to_s, type: 'contractors' } },
-          'routing-tag-ids': { data: { id: [@tag_ua], type: 'routing_tags' } },
+          'routing-tag-ids': { data: { id: [tag_ua], type: 'routing_tags' } },
           'gateway': { data: { id: gateway.id, type: 'gateways' } }
         }
       end

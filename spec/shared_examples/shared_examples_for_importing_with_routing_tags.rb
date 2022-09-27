@@ -2,16 +2,16 @@
 
 RSpec.shared_examples 'resolve "any tag" as NULL' do |collection_context_name|
   context 'with "any tag"' do
-    before { @tag = create(:routing_tag, name: 'TAG_1') }
+    before { @tag = create(:routing_tag, name: 'tag_1') }
 
     include_context collection_context_name,
-                    routing_tag_names: ['TAG_1', Routing::RoutingTag::ANY_TAG].join(', '),
+                    routing_tag_names: ['tag_1', Routing::RoutingTag::ANY_TAG].join(', '),
                     routing_tag_ids: []
 
     it 'resolve "any tag" to NULL' do
       subject
       expect(preview_item.reload).to have_attributes(
-        routing_tag_names: ['TAG_1', Routing::RoutingTag::ANY_TAG].join(', '),
+        routing_tag_names: ['tag_1', Routing::RoutingTag::ANY_TAG].join(', '),
         routing_tag_ids: [@tag.id, nil]
       )
     end

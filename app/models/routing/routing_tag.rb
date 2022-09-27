@@ -30,10 +30,12 @@ class Routing::RoutingTag < ApplicationRecord
   validates :name,
             presence: true,
             uniqueness: true,
-            exclusion: { in: [ANY_TAG] },
+            exclusion: { in: [ANY_TAG, NOT_TAGGED] },
             format: { with: /\A[^\s][^,]+?[^\s]\z/ } # not allow: ',' and start/end spaces
 
   before_destroy :prevent_destroy_if_have_assosiations
+
+  before_validation :name_to_lowercase
 
   def display_name
     "#{name} | #{id}"
@@ -41,19 +43,27 @@ class Routing::RoutingTag < ApplicationRecord
 
   private
 
+  def name_to_lowercase
+    name.downcase! if name.present?
+  end
+
   def prevent_destroy_if_have_assosiations
-    if has_active_assosiations?
-      raise ActiveRecord::RecordNotDestroyed,
-            'Can not be deleted. Has related Customers Auth'
+    associations = active_assosiations
+
+    if associations.any?
+      errors.add(:base, "Has related #{associations.join(', ')}")
+      throw(:abort)
     end
   end
 
-  def has_active_assosiations?
-    customers_auths.any? ||
-      numberlists.any? ||
-      numberlist_items.any? ||
-      detection_rules.any? ||
-      dialpeers.any? ||
-      destinations.any?
+  def active_assosiations
+    associations = []
+    associations << 'Customer Auth' if customers_auths.exists?
+    associations << 'Numberlist' if numberlists.exists?
+    associations << 'Numberlist Item' if numberlist_items.exists?
+    associations << 'Detection Rule' if detection_rules.exists?
+    associations << 'Dialpeer' if dialpeers.exists?
+    associations << 'Destination' if destinations.exists?
+    associations
   end
 end

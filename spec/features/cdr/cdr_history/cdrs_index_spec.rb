@@ -25,7 +25,7 @@ RSpec.describe 'CDRs index', type: :feature do
     create_list :cdr, 2,
                 :with_id,
                 time_start: 1.hour.ago.utc,
-                routing_tag_ids: [@tag_ua.id, 321, @tag_us.id]
+                routing_tag_ids: [tag_ua.id, 321, tag_us.id]
   end
 
   let(:filter!) { nil }
@@ -41,21 +41,21 @@ RSpec.describe 'CDRs index', type: :feature do
 
     within_table_row(id: cdrs.first.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{@tag_ua.name} 321 #{@tag_us.name}")
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{tag_ua.name} 321 #{tag_us.name}")
       within_table_cell('Routing Tags') do
-        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_ua.name)
+        expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
         expect(page).to have_selector('.status_tag.no', exact_text: '321')
-        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_us.name)
+        expect(page).to have_selector('.status_tag.ok', exact_text: tag_us.name)
       end
     end
 
     within_table_row(id: cdrs.second.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{@tag_ua.name} 321 #{@tag_us.name}")
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{tag_ua.name} 321 #{tag_us.name}")
       within_table_cell('Routing Tags') do
-        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_ua.name)
+        expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
         expect(page).to have_selector('.status_tag.no', exact_text: '321')
-        expect(page).to have_selector('.status_tag.ok', exact_text: @tag_us.name)
+        expect(page).to have_selector('.status_tag.ok', exact_text: tag_us.name)
       end
     end
   end
@@ -69,14 +69,14 @@ RSpec.describe 'CDRs index', type: :feature do
     end
 
     let!(:cdr_with_one_tag) do
-      create(:cdr, routing_tag_ids: [routing_tag.id, @tag_ua.id])
+      create(:cdr, routing_tag_ids: [routing_tag.id, tag_ua.id])
     end
 
     it 'shows one CDR with correct routing tags' do
       subject
       expect(page).to have_table_row(count: 1)
       expect(page).to have_table_cell(column: 'ID', exact_text: cdr_with_one_tag.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tag.name} #{@tag_ua.name}")
+      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tag.name.upcase} #{tag_ua.name.upcase}")
     end
   end
 end
