@@ -242,6 +242,7 @@ class Dialpeer < ApplicationRecord
 
   scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
   scope :id_in_string, ->(value) { ransack(id_in: value.to_s.split(',')).result }
+  scope :expired, -> { where('valid_till < NOW()') }
 
   private
 

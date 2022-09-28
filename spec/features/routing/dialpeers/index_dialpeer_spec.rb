@@ -4,10 +4,11 @@ RSpec.describe 'Index Dialpeer', type: :feature, js: true do
   include_context :login_as_admin
 
   subject do
-    visit dialpeers_path
+    visit dialpeers_path(index_params)
     fill_filters!
   end
 
+  let(:index_params) { nil }
   let(:fill_filters!) { nil }
   let!(:dialpeers) do
     create_list(:dialpeer, 2)
@@ -38,6 +39,25 @@ RSpec.describe 'Index Dialpeer', type: :feature, js: true do
       subject
       expect(page).to have_table_row(count: dialpeers.size)
       dialpeers.each do |dialpeer|
+        expect(page).to have_table_cell(column: 'ID', exact_text: dialpeer.id.to_s)
+      end
+    end
+  end
+
+  context 'with expired scope' do
+    let(:index_params) { { scope: 'expired' } }
+    let!(:expired_dialpeers) do
+      create_list(:dialpeer, 3, valid_from: 1.day.ago, valid_till: 1.second.ago)
+    end
+
+    before do
+      create(:dialpeer, valid_from: 1.day.ago, valid_till: 1.minute.from_now)
+    end
+
+    it 'responds with correct rows' do
+      subject
+      expect(page).to have_table_row(count: expired_dialpeers.size)
+      expired_dialpeers.each do |dialpeer|
         expect(page).to have_table_cell(column: 'ID', exact_text: dialpeer.id.to_s)
       end
     end
