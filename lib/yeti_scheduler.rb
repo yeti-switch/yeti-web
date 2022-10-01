@@ -86,4 +86,6 @@ class YetiScheduler < Scheduler::Base
   cron Jobs::DialpeerRatesApply
   cron Jobs::AccountBalanceNotify
   cron Jobs::SyncDatabaseTables
+  cron Jobs::DeleteExpiredDestinations
+  cron Jobs::DeleteExpiredDialpeers
 end
