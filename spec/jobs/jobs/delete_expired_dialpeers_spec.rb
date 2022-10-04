@@ -17,7 +17,7 @@ RSpec.describe Jobs::DeleteExpiredDialpeers, '#call', freeze_time: true do
   let(:valid_from) { valid_till - 1.day }
 
   before do
-    allow(Rails.configuration).to receive(:[]).and_return(keep_expired_dialpeers_days)
+    allow(YetiConfig).to receive(:keep_expired_dialpeers_days).and_return(keep_expired_dialpeers_days)
 
     # fresh dialpeers with next rates
     fresh_dialpeers = FactoryBot.create_list(:dialpeer, 3, valid_from: valid_from, valid_till: valid_till + 1.second)

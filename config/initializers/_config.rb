@@ -64,6 +64,9 @@ Config.setup do |setup_config|
     end
 
     required(:versioning_disable_for_models).each(:string)
+
+    optional(:keep_expired_destinations_days)
+    optional(:keep_expired_dialpeers_days)
   end
 end
 
