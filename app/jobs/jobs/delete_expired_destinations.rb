@@ -20,8 +20,8 @@ module Jobs
     def expired_date
       return @expired_date if instance_variable_defined?(:@expired_date)
 
-      keep_expired_destinations_days = Rails.configuration[:keep_expired_destinations_days]
-      @expired_date ||= keep_expired_destinations_days.days.ago if keep_expired_destinations_days.present?
+      keep_expired_days = YetiConfig.keep_expired_destinations_days
+      @expired_date = keep_expired_days.days.ago if keep_expired_days.present?
     end
   end
 end

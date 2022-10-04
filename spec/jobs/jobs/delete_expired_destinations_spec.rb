@@ -17,7 +17,7 @@ RSpec.describe Jobs::DeleteExpiredDestinations, '#call', freeze_time: true do
   let(:valid_from) { valid_till - 1.day }
 
   before do
-    allow(Rails.configuration).to receive(:[]).and_return(keep_expired_destinations_days)
+    allow(YetiConfig).to receive(:keep_expired_destinations_days).and_return(keep_expired_destinations_days)
 
     # fresh destinations with next rates
     fresh_destinations = FactoryBot.create_list(:destination, 3, valid_from: valid_from, valid_till: valid_till + 1.second)
