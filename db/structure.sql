@@ -18502,16 +18502,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null THEN
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
-          /*}dbg*/
-
-          v_ret.disconnect_code_id=8010; --No network detected for SRC number
-          RETURN NEXT v_ret;
-          RETURN;
-        END IF;
 
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           /*dbg{*/
@@ -18524,7 +18514,18 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_format AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null AND v_ret.src_prefix_routing!='anonymous' THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8010; --No network detected for SRC number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_rp.validate_src_number_format AND v_ret.src_prefix_routing!='anonymous' AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> SRC number format is not valid. SRC number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_routing;
@@ -19760,16 +19761,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null THEN
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
-          /*}dbg*/
-
-          v_ret.disconnect_code_id=8010; --No network detected for SRC number
-          RETURN NEXT v_ret;
-          RETURN;
-        END IF;
 
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           /*dbg{*/
@@ -19782,7 +19773,18 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_format AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null AND v_ret.src_prefix_routing!='anonymous' THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+
+          v_ret.disconnect_code_id=8010; --No network detected for SRC number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_rp.validate_src_number_format AND v_ret.src_prefix_routing!='anonymous' AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> SRC number format is not valid. SRC number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_routing;
@@ -20909,13 +20911,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null THEN
-          
-
-          v_ret.disconnect_code_id=8010; --No network detected for SRC number
-          RETURN NEXT v_ret;
-          RETURN;
-        END IF;
 
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           
@@ -20925,7 +20920,15 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_format AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null AND v_ret.src_prefix_routing!='anonymous' THEN
+          
+
+          v_ret.disconnect_code_id=8010; --No network detected for SRC number
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_rp.validate_src_number_format AND v_ret.src_prefix_routing!='anonymous' AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
           
 
           v_ret.disconnect_code_id=8011; --Invalid SRC number format
@@ -30666,6 +30669,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220829195515'),
 ('20220923131906'),
 ('20220926083051'),
-('20221004060840');
+('20221004060840'),
+('20221008113325');
 
 
