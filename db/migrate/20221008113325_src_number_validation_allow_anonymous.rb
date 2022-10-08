@@ -803,7 +803,7 @@ CREATE or replace FUNCTION switch20.route(
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null AND v_ret.src_prefix_routing!='anonymous' THEN
+        IF v_rp.validate_src_number_network AND v_ret.src_network_id is null AND lower(v_ret.src_prefix_routing)!='anonymous' THEN
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> Network detection. SRC network validation enabled and SRC network was not found. Rejecting call',EXTRACT(MILLISECOND from v_end-v_start);
@@ -814,7 +814,7 @@ CREATE or replace FUNCTION switch20.route(
           RETURN;
         END IF;
 
-        IF v_rp.validate_src_number_format AND v_ret.src_prefix_routing!='anonymous' AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
+        IF v_rp.validate_src_number_format AND lower(v_ret.src_prefix_routing)!='anonymous' AND NOT (v_ret.src_prefix_routing ~ '^[0-9]+$') THEN
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> SRC number format is not valid. SRC number: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_routing;
