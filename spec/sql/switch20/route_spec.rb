@@ -643,6 +643,22 @@ RSpec.describe '#routing logic' do
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end
+        context 'Number is anonymous(valid)' do
+          let(:from_name) { 'anonymous' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is AnonYmous(valid)' do
+          let(:from_name) { 'AnonYmous' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
         context 'Number is not valid' do
           let(:from_name) { '#%%3809611111111' }
 
@@ -658,6 +674,22 @@ RSpec.describe '#routing logic' do
 
         context 'Number is valid' do
           let(:from_name) { '3809611111111' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is anonymous(valid)' do
+          let(:from_name) { 'anonymous' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+        context 'Number is AnonYmous(valid)' do
+          let(:from_name) { 'AnonYmous' }
 
           it 'response with ok ' do
             expect(subject.size).to eq(2)
