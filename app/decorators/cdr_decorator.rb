@@ -4,6 +4,19 @@ class CdrDecorator < Draper::Decorator
   delegate_all
   decorates Cdr::Cdr
 
+
+  def decorated_routing_delay
+    round5_format :routing_delay
+  end
+
+  def decorated_rtt
+    round5_format :rtt
+  end
+
+  def decorated_pdd
+    round5_format :pdd
+  end
+
   def routing_tags
     return nil if model.routing_tag_ids.blank?
 
@@ -16,4 +29,9 @@ class CdrDecorator < Draper::Decorator
       end
     end.join('&nbsp;').html_safe
   end
+
+  def round5_format(attr)
+    model.public_send(attr).round(5)
+  end
+
 end

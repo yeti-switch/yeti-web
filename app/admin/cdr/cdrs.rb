@@ -338,9 +338,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             "#{cdr_attempt.sign_term_local_ip}:#{cdr_attempt.sign_term_local_port}".chomp(':')
           end
           column :is_redirected
-          column :routing_delay
-          column :pdd
-          column :rtt
+
+          column :routing_delay, &:decorated_routing_delay
+          column :pdd, &:decorated_pdd
+          column :rtt, &:decorated_rtt
+
           column :early_media_present
           column('Status') do |cdr_attempt|
             status_tag(cdr_attempt.status_sym.to_s, class: cdr_attempt.success? ? :ok : nil)
@@ -349,10 +351,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :destination
           column :destination_rate_policy
           column :destination_fee
-          column :destination_initial_interval
-          column :destination_initial_rate
-          column :destination_next_interval
-          column :destination_next_rate
+
+          column('Destination rates', sortable: 'destination_next_rate') do |cdr|
+            "#{cdr.destination_initial_rate}/#{cdr.destination_next_rate}".chomp('/')
+          end
+          column('Destination intervals', sortable: 'destination_next_interval') do |cdr|
+            "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
+          end
+
           column :customer_price
           column :customer_price_no_vat
           column :customer_duration
@@ -361,10 +367,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :routing_tags
           column :dialpeer
           column :dialpeer_fee
-          column :dialpeer_initial_interval
-          column :dialpeer_initial_rate
-          column :dialpeer_next_interval
-          column :dialpeer_next_rate
+
+          column('Dialpeer rates', sortable: 'dialpeer_next_rate') do |cdr|
+            "#{cdr.dialpeer_initial_rate}/#{cdr.dialpeer_next_rate}".chomp('/')
+          end
+          column('Dialpeer intervals', sortable: 'dialpeer_next_interval') do |cdr|
+            "#{cdr.dialpeer_initial_interval}/#{cdr.dialpeer_next_interval}".chomp('/')
+          end
+
           column :vendor_price
           column :vendor_duration
           column :time_limit
@@ -682,9 +692,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       "#{cdr.sign_term_local_ip}:#{cdr.sign_term_local_port}".chomp(':')
     end
     column :is_redirected
-    column :routing_delay
-    column :pdd
-    column :rtt
+
+    column :routing_delay, &:decorated_routing_delay
+    column :pdd, &:decorated_pdd
+    column :rtt, &:decorated_rtt
+
     column :early_media_present
     column('Status', sortable: 'success') do |cdr|
       status_tag(cdr.status_sym.to_s, class: cdr.success? ? :ok : nil)
@@ -693,10 +705,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :destination
     column :destination_rate_policy
     column :destination_fee
-    column :destination_initial_interval
-    column :destination_initial_rate
-    column :destination_next_interval
-    column :destination_next_rate
+
+    column('Destination rates', sortable: 'destination_next_rate') do |cdr|
+      "#{cdr.destination_initial_rate}/#{cdr.destination_next_rate}".chomp('/')
+    end
+    column('Destination intervals', sortable: 'destination_next_interval') do |cdr|
+      "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
+    end
+
     column :customer_price
     column :customer_acc_vat
     column :customer_price_no_vat
@@ -707,10 +723,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :dialpeer
 
     column :dialpeer_fee
-    column :dialpeer_initial_interval
-    column :dialpeer_initial_rate
-    column :dialpeer_next_interval
-    column :dialpeer_next_rate
+    column('Dialpeer rates', sortable: 'dialpeer_next_rate') do |cdr|
+      "#{cdr.dialpeer_initial_rate}/#{cdr.dialpeer_next_rate}".chomp('/')
+    end
+    column('Dialpeer intervals', sortable: 'dialpeer_next_interval') do |cdr|
+      "#{cdr.dialpeer_initial_interval}/#{cdr.dialpeer_next_interval}".chomp('/')
+    end
+
     column :vendor_price
     column :vendor_duration
     column :time_limit
