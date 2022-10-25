@@ -20,8 +20,6 @@ ActiveAdmin.register Account do
                  :min_balance,
                  :max_balance,
                  :vat,
-                 :balance_low_threshold,
-                 :balance_high_threshold,
                  :destination_rate_limit,
                  :max_call_duration,
                  :origination_capacity,
@@ -49,8 +47,14 @@ ActiveAdmin.register Account do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:customer_invoice_period, :vendor_invoice_period, :contractor, :timezone,
-                    :vendor_invoice_template, :customer_invoice_template)
+      super.preload(
+        :customer_invoice_period,
+        :vendor_invoice_period,
+        :contractor,
+        :timezone,
+        :vendor_invoice_template,
+        :customer_invoice_template
+      )
     end
   end
 
@@ -59,16 +63,13 @@ ActiveAdmin.register Account do
   scope :customers_accounts
   scope :insufficient_balance
 
-  permit_params :uuid, :contractor_id, :balance,
-                :min_balance, :max_balance, :vat,
-                :balance_low_threshold, :balance_high_threshold,
-                :name, :origination_capacity, :termination_capacity, :total_capacity,
-                :destination_rate_limit, :max_call_duration,
-                :customer_invoice_period_id, :vendor_invoice_period_id,
-                :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
-                :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
-                :customer_invoice_ref_template, :vendor_invoice_ref_template,
-                send_invoices_to: [], send_balance_notifications_to: []
+  filter :id
+  filter :uuid_equals, label: 'UUID'
+  contractor_filter :contractor_id_eq
+  filter :name
+  filter :balance
+  filter :vat
+  filter :external_id
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
@@ -98,8 +99,6 @@ ActiveAdmin.register Account do
 
     column :max_balance, &:decorated_max_balance
 
-    column :balance_low_threshold
-    column :balance_high_threshold
     column :vat
     column :destination_rate_limit
     column :max_call_duration
@@ -115,19 +114,27 @@ ActiveAdmin.register Account do
     column :customer_invoice_template
     column :timezone
     column :send_invoices_to, &:send_invoices_to_emails
-    column :send_balance_notifications_to, &:send_balance_notifications_to_emails
     column :external_id
     column :uuid
   end
 
-  filter :id
-  filter :uuid_equals, label: 'UUID'
-  contractor_filter :contractor_id_eq
+  sidebar 'Create Payment', only: [:show] do
+    active_admin_form_for(Payment.new(account_id: params[:id]),
+                          url: payment_account_path(params[:id]),
+                          as: :payment,
+                          method: :post) do |f|
+      f.inputs do
+        f.input :account_id, as: :hidden
+        f.input :amount, input_html: { style: 'width: 200px' }
+        f.input :notes, input_html: { style: 'width: 200px' }
+      end
+      f.actions
+    end
+  end
 
-  filter :name
-  filter :balance
-  filter :vat
-  filter :external_id
+  action_item :balance_notifications, only: [:show] do
+    link_to 'Balance Notifications', log_balance_notifications_path(q: { account_id_eq: resource.id })
+  end
 
   show do |s|
     tabs do
@@ -150,8 +157,6 @@ ActiveAdmin.register Account do
           end
 
           row :vat
-          row :balance_low_threshold
-          row :balance_high_threshold
           row :destination_rate_limit
           row :max_call_duration
 
@@ -163,7 +168,6 @@ ActiveAdmin.register Account do
           row :vendor_invoice_template
           row :customer_invoice_template
           row :send_invoices_to, &:send_invoices_to_emails
-          row :send_balance_notifications_to, &:send_balance_notifications_to_emails
           row :vendor_invoice_period do
             if s.vendor_invoice_period
               text_node s.vendor_invoice_period.name
@@ -184,6 +188,14 @@ ActiveAdmin.register Account do
           row :vendor_invoice_ref_template
         end
 
+        panel 'Balance Notification Settings' do
+          attributes_table_for s.balance_notification_setting do
+            row :low_threshold
+            row :high_threshold
+            row :send_balance_notifications_to, &:send_to_emails
+          end
+        end
+
         panel 'Last Payments' do
           table_for s.payments.last(10).reverse do
             column :id
@@ -193,6 +205,7 @@ ActiveAdmin.register Account do
           end
         end
       end
+
       tab 'Comments' do
         active_admin_comments
       end
@@ -220,6 +233,17 @@ ActiveAdmin.register Account do
     end
   end
 
+  permit_params :uuid, :contractor_id, :balance,
+                :min_balance, :max_balance, :vat,
+                :balance_low_threshold, :balance_high_threshold,
+                :name, :origination_capacity, :termination_capacity, :total_capacity,
+                :destination_rate_limit, :max_call_duration,
+                :customer_invoice_period_id, :vendor_invoice_period_id,
+                :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
+                :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
+                :customer_invoice_ref_template, :vendor_invoice_ref_template,
+                send_invoices_to: [], send_balance_notifications_to: []
+
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
@@ -228,8 +252,6 @@ ActiveAdmin.register Account do
       f.input :min_balance
       f.input :max_balance
       f.input :vat
-      f.input :balance_low_threshold
-      f.input :balance_high_threshold
 
       f.input :destination_rate_limit
       f.input :max_call_duration
@@ -238,6 +260,11 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
+      f.input :timezone_id, as: :select, input_html: { class: 'chosen' }, collection: System::Timezone.all
+      f.input :uuid, as: :string
+    end
+
+    f.inputs 'Invoice Settings' do
       f.input :vendor_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
       f.input :customer_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
 
@@ -245,27 +272,21 @@ ActiveAdmin.register Account do
       f.input :customer_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
 
       f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
-      f.input :send_balance_notifications_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
-      f.input :timezone_id, as: :select, input_html: { class: 'chosen' }, collection: System::Timezone.all
+
       f.input :customer_invoice_ref_template
       f.input :vendor_invoice_ref_template
-      f.input :uuid, as: :string
     end
-    f.actions
-  end
 
-  sidebar 'Create Payment', only: [:show] do
-    active_admin_form_for(Payment.new(account_id: params[:id]),
-                          url: payment_account_path(params[:id]),
-                          as: :payment,
-                          method: :post) do |f|
-      f.inputs do
-        f.input :account_id, as: :hidden
-        f.input :amount, input_html: { style: 'width: 200px' }
-        f.input :notes, input_html: { style: 'width: 200px' }
-      end
-      f.actions
+    f.inputs 'Balance Notification Settings' do
+      f.input :balance_low_threshold
+      f.input :balance_high_threshold
+      f.input :send_balance_notifications_to,
+              as: :select,
+              input_html: { class: 'chosen', multiple: true },
+              collection: Billing::Contact.collection
     end
+
+    f.actions
   end
 
   member_action :payment, method: :post do

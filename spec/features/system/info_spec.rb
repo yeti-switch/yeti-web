@@ -21,6 +21,7 @@ RSpec.describe 'Info' do
       within_panel 'Yeti-web config' do
         expect(page).to have_attribute_row('KEEP EXPIRED DESTINATIONS DAYS', exact_text: YetiConfig.keep_expired_destinations_days.presence || 'Empty')
         expect(page).to have_attribute_row('KEEP EXPIRED DIALPEERS DAYS', exact_text: YetiConfig.keep_expired_dialpeers_days.presence || 'Empty')
+        expect(page).to have_attribute_row('KEEP BALANCE NOTIFICATIONS DAYS', exact_text: YetiConfig.keep_balance_notifications_days.presence || 'Empty')
         expect(page).to have_attribute_row('CALLS MONITORING')
         expect(page).to have_attribute_row('WRITE ACCOUNT STATS', exact_text: YetiConfig.calls_monitoring.write_account_stats.presence || 'Empty')
         expect(page).to have_attribute_row('WRITE GATEWAY STATS', exact_text: YetiConfig.calls_monitoring.write_gateway_stats.presence || 'Empty')

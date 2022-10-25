@@ -3,6 +3,44 @@
 class BaseResource < JSONAPI::Resource
   abstract
 
+  class_attribute :create_form_class_name, instance_writer: false
+  class_attribute :update_form_class_name, instance_writer: false
+
+  def self.save_form(class_name)
+    create_form(class_name)
+    update_form(class_name)
+  end
+
+  def self.create_form(class_name)
+    if class_name.nil?
+      self.create_form_class_name = nil
+      define_method(:wrap_create_form) { nil }
+      define_method(:unwrap_create_form) { nil }
+      return
+    end
+
+    self.create_form_class_name = class_name.to_s
+    define_method(:wrap_create_form) { @model = create_form_class_name.constantize.new(_model) }
+    define_method(:unwrap_create_form) { @model = _model.model }
+    before_create(:wrap_create_form)
+    after_create(:unwrap_create_form)
+  end
+
+  def self.update_form(class_name)
+    if class_name.nil?
+      self.update_form_class_name = nil
+      define_method(:wrap_update_form) { nil }
+      define_method(:unwrap_update_form) { nil }
+      return
+    end
+
+    self.update_form_class_name = class_name.to_s
+    define_method(:wrap_update_form) { @model = update_form_class_name.constantize.new(_model) }
+    define_method(:unwrap_update_form) { @model = _model.model }
+    before_update(:wrap_update_form)
+    after_update(:unwrap_update_form)
+  end
+
   def self.type(custom_type)
     self._type = custom_type
   end

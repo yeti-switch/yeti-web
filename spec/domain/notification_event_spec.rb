@@ -24,7 +24,7 @@ RSpec.describe NotificationEvent do
       include_examples :sends_email_to_contacts
     end
 
-    context 'when account has send_balance_notifications_to=nil' do
+    context 'when account has balance_notification_setting.send_to=nil' do
       let(:account_attrs) do
         super().merge send_balance_notifications_to: nil
       end
@@ -33,7 +33,7 @@ RSpec.describe NotificationEvent do
       include_examples :sends_email_to_contacts
     end
 
-    context 'when account has send_balance_notifications_to empty' do
+    context 'when account has balance_notification_setting.send_to empty' do
       let(:account_attrs) do
         super().merge send_balance_notifications_to: []
       end
@@ -131,7 +131,7 @@ RSpec.describe NotificationEvent do
 
   describe '.low_threshold_reached' do
     subject do
-      described_class.low_threshold_reached(account, data)
+      described_class.low_threshold_reached(account)
     end
 
     let(:event_subscription) do
@@ -157,23 +157,29 @@ RSpec.describe NotificationEvent do
     let!(:contacts) do
       FactoryBot.create_list(:contact, 3, contractor: contractor)
     end
-    let!(:account) do
+    let(:account) do
       FactoryBot.create(:account, account_attrs)
     end
     let(:account_attrs) do
       { send_balance_notifications_to: contacts.map(&:id) }
     end
-    let(:data) { account.attributes.to_json }
     let(:expected_contacts) { subscription_contacts + contacts }
     let(:expected_subject) { "Account with id #{account.id} low balance" }
-    let(:expected_message) { data }
+    let(:expected_message) do
+      data = account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
+      data.to_json
+    end
 
     include_examples :sends_account_threshold_event_emails
   end
 
   describe '.high_threshold_reached' do
     subject do
-      described_class.high_threshold_reached(account, data)
+      described_class.high_threshold_reached(account)
     end
 
     let(:event_subscription) do
@@ -199,23 +205,29 @@ RSpec.describe NotificationEvent do
     let!(:contacts) do
       FactoryBot.create_list(:contact, 3, contractor: contractor)
     end
-    let!(:account) do
+    let(:account) do
       FactoryBot.create(:account, account_attrs)
     end
     let(:account_attrs) do
       { send_balance_notifications_to: contacts.map(&:id) }
     end
-    let(:data) { account.attributes.to_json }
     let(:expected_contacts) { subscription_contacts + contacts }
     let(:expected_subject) { "Account with id #{account.id} high balance" }
-    let(:expected_message) { data }
+    let(:expected_message) do
+      data = account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
+      data.to_json
+    end
 
     include_examples :sends_account_threshold_event_emails
   end
 
   describe '.low_threshold_cleared' do
     subject do
-      described_class.low_threshold_cleared(account, data)
+      described_class.low_threshold_cleared(account)
     end
 
     let(:event_subscription) do
@@ -247,17 +259,23 @@ RSpec.describe NotificationEvent do
     let(:account_attrs) do
       { send_balance_notifications_to: contacts.map(&:id) }
     end
-    let(:data) { account.attributes.to_json }
     let(:expected_contacts) { subscription_contacts + contacts }
     let(:expected_subject) { "Account with id #{account.id} low balance cleared" }
-    let(:expected_message) { data }
+    let(:expected_message) do
+      data = account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
+      data.to_json
+    end
 
     include_examples :sends_account_threshold_event_emails
   end
 
   describe '.high_threshold_cleared' do
     subject do
-      described_class.high_threshold_cleared(account, data)
+      described_class.high_threshold_cleared(account)
     end
 
     let(:event_subscription) do
@@ -283,16 +301,22 @@ RSpec.describe NotificationEvent do
     let!(:contacts) do
       FactoryBot.create_list(:contact, 3, contractor: contractor)
     end
-    let!(:account) do
+    let(:account) do
       FactoryBot.create(:account, account_attrs)
     end
     let(:account_attrs) do
       { send_balance_notifications_to: contacts.map(&:id) }
     end
-    let(:data) { account.attributes.to_json }
     let(:expected_contacts) { subscription_contacts + contacts }
     let(:expected_subject) { "Account with id #{account.id} high balance cleared" }
-    let(:expected_message) { data }
+    let(:expected_message) do
+      data = account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
+      data.to_json
+    end
 
     include_examples :sends_account_threshold_event_emails
   end

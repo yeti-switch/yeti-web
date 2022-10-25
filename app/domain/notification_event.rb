@@ -15,38 +15,38 @@ class NotificationEvent
              to: :new
   end
 
-  def low_threshold_reached(account, data)
+  def low_threshold_reached(account)
     fire_event(
       System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_REACHED,
       subject: "Account with id #{account.id} low balance",
-      message: data.to_s,
+      message: account_threshold_message(account),
       additional_contacts: account_contacts(account)
     )
   end
 
-  def high_threshold_reached(account, data)
+  def high_threshold_reached(account)
     fire_event(
       System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_REACHED,
       subject: "Account with id #{account.id} high balance",
-      message: data.to_s,
+      message: account_threshold_message(account),
       additional_contacts: account_contacts(account)
     )
   end
 
-  def low_threshold_cleared(account, data)
+  def low_threshold_cleared(account)
     fire_event(
       System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_CLEARED,
       subject: "Account with id #{account.id} low balance cleared",
-      message: data.to_s,
+      message: account_threshold_message(account),
       additional_contacts: account_contacts(account)
     )
   end
 
-  def high_threshold_cleared(account, data)
+  def high_threshold_cleared(account)
     fire_event(
       System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_CLEARED,
       subject: "Account with id #{account.id} high balance cleared",
-      message: data.to_s,
+      message: account_threshold_message(account),
       additional_contacts: account_contacts(account)
     )
   end
@@ -118,8 +118,17 @@ class NotificationEvent
 
   private
 
+  def account_threshold_message(account)
+    data = account.attributes.merge(
+      balance_low_threshold: account.balance_notification_setting.low_threshold,
+      balance_high_threshold: account.balance_notification_setting.high_threshold,
+      send_balance_notifications_to: account.balance_notification_setting.send_to
+    )
+    data.to_json
+  end
+
   def account_contacts(account)
-    account.contacts_for_balance_notifications.preload(contractor: :smtp_connection).to_a
+    account.balance_notification_setting.contacts.preload(contractor: :smtp_connection).to_a
   end
 
   def destination_contacts(destination)

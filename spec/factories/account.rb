@@ -15,6 +15,13 @@ FactoryBot.define do
     total_capacity { 5 }
     timezone_id { 1 }
 
+    transient do
+      balance_low_threshold { nil }
+      balance_high_threshold { nil }
+      send_balance_notifications_to { nil }
+      threshold_state_id { AccountBalanceNotificationSetting::CONST::STATE_ID_NONE }
+    end
+
     trait :with_max_balance do
       max_balance { 1_000 }
     end
@@ -42,6 +49,15 @@ FactoryBot.define do
 
     trait :customer_weekly do
       customer_invoice_period_id { Billing::InvoicePeriod::WEEKLY_ID }
+    end
+
+    after(:build) do |record, ev|
+      record.build_balance_notification_setting(
+        state_id: ev.threshold_state_id,
+        low_threshold: ev.balance_low_threshold,
+        high_threshold: ev.balance_high_threshold,
+        send_to: ev.send_balance_notifications_to
+      )
     end
   end
 end

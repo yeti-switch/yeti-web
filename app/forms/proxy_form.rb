@@ -65,8 +65,8 @@ class ProxyForm < ApplicationForm
   end
 
   def propagate_errors(record)
-    record.errors.each do |attribute, msg|
-      errors.add(attribute, msg)
+    record.errors.each do |error|
+      errors.add(error.attribute, error.message)
     end
   end
 

@@ -31,8 +31,6 @@ ActiveAdmin.register Importing::Account do
     column :vat
     column :min_balance
     column :max_balance
-    column :balance_low_threshold
-    column :balance_high_threshold
     column :destination_rate_limit
     column :origination_capacity
     column :termination_capacity

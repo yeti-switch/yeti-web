@@ -8,8 +8,6 @@
 #  autogenerate_customer_invoices :boolean          default(FALSE), not null
 #  autogenerate_vendor_invoices   :boolean          default(FALSE), not null
 #  balance                        :decimal(, )
-#  balance_high_threshold         :decimal(, )
-#  balance_low_threshold          :decimal(, )
 #  contractor_name                :string
 #  destination_rate_limit         :decimal(, )
 #  error_string                   :string
@@ -43,8 +41,6 @@ class Importing::Account < Importing::Base
     origination_capacity
     termination_capacity
     total_capacity
-    balance_high_threshold
-    balance_low_threshold
     destination_rate_limit
     max_call_duration
   ]
