@@ -154,9 +154,9 @@ Rails.application.routes.draw do
 
         namespace :customer do
           namespace :v1 do
-            jsonapi_resources :accounts
-            jsonapi_resources :rateplans
-            jsonapi_resources :rates
+            jsonapi_resources :accounts, only: %i[index show]
+            jsonapi_resources :rateplans, only: %i[index show]
+            jsonapi_resources :rates, only: %i[index show]
             jsonapi_resource :check_rate, only: %i[create]
             jsonapi_resources :cdrs, only: %i[index show]
             jsonapi_resources :networks, only: %i[index show]
