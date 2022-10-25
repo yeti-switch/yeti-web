@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Notification::Alert do
-  menu parent: 'System', label: 'Alerts', priority: 10
-
+ActiveAdmin.register System::EventSubscription, as: 'Event Subscription' do
+  menu parent: 'System', priority: 10
   config.batch_actions = false
   actions :index, :update, :edit, :show
-
   acts_as_audit
 
-  permit_params send_to: []
+  filter :id
 
   index do
     selectable_column
@@ -18,13 +16,6 @@ ActiveAdmin.register Notification::Alert do
     column :send_to do |r|
       r.contacts.map(&:email).sort.join(', ')
     end
-  end
-
-  form do |f|
-    f.inputs do
-      f.input :send_to, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
-    end
-    f.actions
   end
 
   show do |s|
@@ -37,5 +28,16 @@ ActiveAdmin.register Notification::Alert do
     end
   end
 
-  filter :id
+  permit_params send_to: []
+
+  form do |f|
+    f.inputs do
+      f.input :send_to,
+              as: :select,
+              input_html: { class: 'chosen-sortable', multiple: true },
+              collection: Billing::Contact.collection,
+              hint: f.object.send_to_hint
+    end
+    f.actions
+  end
 end

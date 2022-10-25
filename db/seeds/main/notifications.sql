@@ -12,19 +12,19 @@ SET client_min_messages = warning;
 SET search_path = notifications, pg_catalog;
 
 --
--- Data for Name: alerts; Type: TABLE DATA; Schema: notifications; Owner: yeti
+-- Data for Name: event_subscriptions; Type: TABLE DATA; Schema: notifications; Owner: yeti
 --
 
-INSERT INTO alerts (id, event, send_to) VALUES (1, 'DialpeerLocked', NULL);
-INSERT INTO alerts (id, event, send_to) VALUES (2, 'GatewayLocked', NULL);
-INSERT INTO alerts (id, event, send_to) VALUES (3, 'DialpeerUnlocked', NULL);
-INSERT INTO alerts (id, event, send_to) VALUES (4, 'GatewayUnlocked', NULL);
-INSERT INTO alerts (id, event, send_to) VALUES (5, 'DestinationQualityAlarmFired', NULL);
-INSERT INTO alerts (id, event, send_to) VALUES (6, 'DestinationQualityAlarmCleared', NULL);
-INSERT INTO alerts (id, event, send_to) VALUES (7, 'AccountLowThesholdReached', '{}');
-INSERT INTO alerts (id, event, send_to) VALUES (8, 'AccountHighThesholdReached', '{}');
-INSERT INTO alerts (id, event, send_to) VALUES (9, 'AccountLowThesholdCleared', '{}');
-INSERT INTO alerts (id, event, send_to) VALUES (10, 'AccountHighThesholdCleared', '{}');
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (1, 'DialpeerLocked', NULL);
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (2, 'GatewayLocked', NULL);
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (3, 'DialpeerUnlocked', NULL);
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (4, 'GatewayUnlocked', NULL);
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (5, 'DestinationQualityAlarmFired', NULL);
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (6, 'DestinationQualityAlarmCleared', NULL);
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (7, 'AccountLowThesholdReached', '{}');
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (8, 'AccountHighThesholdReached', '{}');
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (9, 'AccountLowThesholdCleared', '{}');
+INSERT INTO event_subscriptions (id, event, send_to) VALUES (10, 'AccountHighThesholdCleared', '{}');
 
 
 --

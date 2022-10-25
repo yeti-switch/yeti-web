@@ -25114,10 +25114,10 @@ ALTER SEQUENCE logs.logic_log_id_seq OWNED BY logs.logic_log.id;
 
 
 --
--- Name: alerts; Type: TABLE; Schema: notifications; Owner: -
+-- Name: event_subscriptions; Type: TABLE; Schema: notifications; Owner: -
 --
 
-CREATE TABLE notifications.alerts (
+CREATE TABLE notifications.event_subscriptions (
     id integer NOT NULL,
     event character varying NOT NULL,
     send_to integer[]
@@ -25140,7 +25140,7 @@ CREATE SEQUENCE notifications.alerts_id_seq
 -- Name: alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: notifications; Owner: -
 --
 
-ALTER SEQUENCE notifications.alerts_id_seq OWNED BY notifications.alerts.id;
+ALTER SEQUENCE notifications.alerts_id_seq OWNED BY notifications.event_subscriptions.id;
 
 
 --
@@ -27010,13 +27010,6 @@ ALTER TABLE ONLY logs.logic_log ALTER COLUMN id SET DEFAULT nextval('logs.logic_
 
 
 --
--- Name: alerts id; Type: DEFAULT; Schema: notifications; Owner: -
---
-
-ALTER TABLE ONLY notifications.alerts ALTER COLUMN id SET DEFAULT nextval('notifications.alerts_id_seq'::regclass);
-
-
---
 -- Name: attachments id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
@@ -27035,6 +27028,13 @@ ALTER TABLE ONLY notifications.contacts ALTER COLUMN id SET DEFAULT nextval('not
 --
 
 ALTER TABLE ONLY notifications.email_logs ALTER COLUMN id SET DEFAULT nextval('notifications.email_log_id_seq'::regclass);
+
+
+--
+-- Name: event_subscriptions id; Type: DEFAULT; Schema: notifications; Owner: -
+--
+
+ALTER TABLE ONLY notifications.event_subscriptions ALTER COLUMN id SET DEFAULT nextval('notifications.alerts_id_seq'::regclass);
 
 
 --
@@ -28568,18 +28568,18 @@ ALTER TABLE ONLY logs.logic_log
 
 
 --
--- Name: alerts alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -
+-- Name: event_subscriptions alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.alerts
+ALTER TABLE ONLY notifications.event_subscriptions
     ADD CONSTRAINT alerts_event_key UNIQUE (event);
 
 
 --
--- Name: alerts alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
+-- Name: event_subscriptions alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.alerts
+ALTER TABLE ONLY notifications.event_subscriptions
     ADD CONSTRAINT alerts_pkey PRIMARY KEY (id);
 
 
@@ -30670,6 +30670,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220923131906'),
 ('20220926083051'),
 ('20221004060840'),
-('20221008113325');
+('20221008113325'),
+('20221015081756');
 
 

@@ -26,16 +26,16 @@ class Log::BalanceNotification < ApplicationRecord
     acc = Account.find(data['id'].to_i)
 
     if direction == 'low' && action == 'fire'
-      acc.fire_low_balance_alarm(data)
+      NotificationEvent.low_threshold_reached(acc, data)
 
     elsif direction == 'low' && action == 'clear'
-      acc.clear_low_balance_alarm(data)
+      NotificationEvent.low_threshold_cleared(acc, data)
 
     elsif direction == 'high' && action == 'fire'
-      acc.fire_high_balance_alarm(data)
+      NotificationEvent.high_threshold_reached(acc, data)
 
     elsif direction == 'high' && action == 'clear'
-      acc.clear_high_balance_alarm(data)
+      NotificationEvent.high_threshold_cleared(acc, data)
 
     end
 

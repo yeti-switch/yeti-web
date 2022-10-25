@@ -129,22 +129,6 @@ class Routing::Destination < ApplicationRecord
     "#{prefix} | #{id}"
   end
 
-  def fire_alarm(stat)
-    transaction do
-      self.quality_alarm = true
-      save
-      Notification::Alert.fire_quality_alarm(self, stat)
-    end
-  end
-
-  def clear_quality_alarm
-    transaction do
-      self.quality_alarm = false
-      save
-      Notification::Alert.clear_quality_alarm(self)
-    end
-  end
-
   def is_valid_from?
     valid_from < Time.now
   end

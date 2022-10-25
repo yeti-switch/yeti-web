@@ -181,22 +181,6 @@ class Account < ApplicationRecord
     balance * 1.1 >= max_balance
   end
 
-  def fire_low_balance_alarm(data)
-    Notification::Alert.fire_account_low_balance(self, data)
-  end
-
-  def clear_low_balance_alarm(data)
-    Notification::Alert.clear_account_low_balance(self, data)
-  end
-
-  def fire_high_balance_alarm(data)
-    Notification::Alert.fire_account_high_balance(self, data)
-  end
-
-  def clear_high_balance_alarm(data)
-    Notification::Alert.clear_account_high_balance(self, data)
-  end
-
   def remove_self_from_related_api_access!
     api_access.each do |record|
       record.account_ids.delete(id)

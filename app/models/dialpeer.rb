@@ -172,22 +172,6 @@ class Dialpeer < ApplicationRecord
     valid_till > Time.now
   end
 
-  def fire_lock(stat)
-    transaction do
-      self.locked = true
-      save
-      Notification::Alert.fire_lock(self, stat)
-    end
-  end
-
-  def unlock
-    transaction do
-      self.locked = false
-      save
-      Notification::Alert.fire_unlock(self)
-    end
-  end
-
   scope :routing_for_contains, lambda { |prx|
     where('dialpeers.id in (
       select id from

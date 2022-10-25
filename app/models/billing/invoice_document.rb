@@ -53,21 +53,15 @@ class Billing::InvoiceDocument < Cdr::Base
 
   def send_invoice
     contacts = contacts_for_invoices
-    if contacts.any?
-      # create attachments
-      files = attachments
-      files.map(&:save!)
-      attachment_ids = files.map(&:id)
-      contacts.each do |contact|
-        Log::EmailLog.create!(
-          contact_id: contact.id,
-          smtp_connection_id: contact.smtp_connection.id,
-          mail_to: contact.email,
-          mail_from: contact.smtp_connection.from_address,
-          subject: subject,
-          attachment_id: attachment_ids
-        )
-      end
-    end
+    return if contacts.empty?
+
+    # create attachments
+    files = attachments
+    files.each(&:save!)
+    ContactEmailSender.batch_send_emails(
+      contacts,
+      subject: subject,
+      attachments: files
+    )
   end
 end
