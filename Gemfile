@@ -128,7 +128,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.21.2', require: false
-  gem 'simplecov-lcov', '~> 0.8.0', require: false
+  gem 'simplecov-cobertura', '~> 2.1', require: false
   gem 'webdrivers', '~> 4.0'
   gem 'webmock'
 end
