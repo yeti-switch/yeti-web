@@ -150,4 +150,60 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
       end
     end
   end
+
+  describe 'POST /api/rest/customer/v1/accounts' do
+    subject do
+      post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_body) do
+      {
+        data: {
+          type: 'accounts',
+          attributes: json_api_attributes
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      { name: 'some name' }
+    end
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
+
+  describe 'PATCH /api/rest/customer/v1/accounts/{id}' do
+    subject do
+      patch json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { account.reload.uuid }
+    let!(:account) { create(:account, contractor: customer) }
+    let(:json_api_request_body) do
+      {
+        data: {
+          id: record_id,
+          type: 'accounts',
+          attributes: json_api_attributes
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      { name: 'some new name' }
+    end
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
+
+  describe 'DELETE /api/rest/customer/v1/accounts/{id}' do
+    subject do
+      delete json_api_request_path, params: nil, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { account.reload.uuid }
+    let!(:account) { create(:account, contractor: customer) }
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
 end

@@ -114,4 +114,62 @@ RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :request do
       include_examples :responds_with_status, 404
     end
   end
+
+  describe 'POST /api/rest/customer/v1/rateplans' do
+    subject do
+      post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_body) do
+      {
+        data: {
+          type: 'rateplans',
+          attributes: json_api_attributes
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      { name: 'some new name' }
+    end
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
+
+  describe 'PATCH /api/rest/customer/v1/rateplans/{id}' do
+    subject do
+      patch json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { rateplan.uuid }
+    let(:rateplan) { customers_auth.rateplan.reload }
+    let!(:customers_auth) { create(:customers_auth, customer_id: customer.id) }
+    let(:json_api_request_body) do
+      {
+        data: {
+          id: record_id,
+          type: 'rateplans',
+          attributes: json_api_attributes
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      { name: 'some new name' }
+    end
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
+
+  describe 'DELETE /api/rest/customer/v1/rateplans/{id}' do
+    subject do
+      delete json_api_request_path, params: nil, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { rateplan.uuid }
+    let(:rateplan) { customers_auth.rateplan.reload }
+    let!(:customers_auth) { create(:customers_auth, customer_id: customer.id) }
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
 end

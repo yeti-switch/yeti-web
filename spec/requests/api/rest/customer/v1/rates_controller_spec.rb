@@ -105,7 +105,7 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
     end
   end
 
-  describe 'GET show' do
+  describe 'GET /api/rest/customer/v1/rates/{id}' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
@@ -152,5 +152,67 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
 
       include_examples :responds_with_status, 404
     end
+  end
+
+  describe 'POST /api/rest/customer/v1/rates' do
+    subject do
+      post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_body) do
+      {
+        data: {
+          type: 'rates',
+          attributes: json_api_attributes
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      { prefix: '123' }
+    end
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
+
+  describe 'PATCH /api/rest/customer/v1/rates/{id}' do
+    subject do
+      patch json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { rate.reload.uuid }
+    let!(:customers_auth) { create(:customers_auth, customer_id: customer.id) }
+    let(:rateplan) { customers_auth.rateplan.reload }
+    let!(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
+    let!(:rate) { create(:rate, rate_group: rate_group) }
+    let(:json_api_request_body) do
+      {
+        data: {
+          id: record_id,
+          type: 'rates',
+          attributes: json_api_attributes
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      { prefix: '123' }
+    end
+
+    include_examples :raises_exception, ActionController::RoutingError
+  end
+
+  describe 'DELETE /api/rest/customer/v1/rates/{id}' do
+    subject do
+      delete json_api_request_path, params: nil, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}" }
+    let(:record_id) { rate.reload.uuid }
+    let!(:customers_auth) { create(:customers_auth, customer_id: customer.id) }
+    let(:rateplan) { customers_auth.rateplan.reload }
+    let!(:rate_group) { create(:rate_group, rateplans: [rateplan]) }
+    let!(:rate) { create(:rate, rate_group: rate_group) }
+
+    include_examples :raises_exception, ActionController::RoutingError
   end
 end
