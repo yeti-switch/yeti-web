@@ -25084,7 +25084,8 @@ ALTER SEQUENCE logs.logic_log_id_seq OWNED BY logs.logic_log.id;
 CREATE TABLE notifications.event_subscriptions (
     id integer NOT NULL,
     event character varying NOT NULL,
-    send_to integer[]
+    send_to integer[],
+    url character varying
 );
 
 
@@ -30670,6 +30671,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221015082627'),
 ('20221016081523'),
 ('20221016100614'),
+('20221025105955'),
 ('20221025175803');
 
 

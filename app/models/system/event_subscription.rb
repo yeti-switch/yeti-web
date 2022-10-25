@@ -7,6 +7,7 @@
 #  id      :integer(4)       not null, primary key
 #  event   :string           not null
 #  send_to :integer(4)       is an Array
+#  url     :string
 #
 # Indexes
 #

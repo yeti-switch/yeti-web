@@ -1,8 +1,33 @@
 # frozen_string_literal: true
 
 RSpec.describe NotificationEvent do
+  before do
+    FactoryBot.create(:smtp_connection, global: true, from_address: 'global@example.com')
+  end
+
+  shared_examples :enqueues_send_http_job do
+    let(:stubbed_event_time) { '2022-10-25 12:13:14 EET' }
+    let(:expected_http_body) do
+      JSON.generate(event_type: event_subscription.event, event_data: expected_event_data, event_time: stubbed_event_time)
+    end
+
+    it 'enqueues Worker::SendHttpJob' do
+      allow(NotificationEvent).to receive(:event_time).and_return(stubbed_event_time)
+      expect { subject }.to have_enqueued_job(Worker::SendHttpJob)
+        .on_queue('send_http')
+        .with(event_subscription.url, HttpSender::CONTENT_TYPE_JSON, expected_http_body)
+    end
+  end
+
+  shared_examples :does_not_enqueue_send_http_job do
+    it 'does not enqueue Worker::SendHttpJob' do
+      expect { subject }.not_to have_enqueued_job(Worker::SendHttpJob)
+    end
+  end
+
   shared_examples :sends_account_threshold_event_emails do
     include_examples :sends_email_to_contacts
+    include_examples :does_not_enqueue_send_http_job
 
     context 'when event_subscription has send_to=nil' do
       let(:expected_contacts) { contacts }
@@ -52,11 +77,33 @@ RSpec.describe NotificationEvent do
       end
 
       include_examples :does_not_send_email
+      include_examples :does_not_enqueue_send_http_job
+
+      context 'when event_subscription has url filled' do
+        before do
+          event_subscription.update! url: 'http://example.com/cb'
+        end
+
+        include_examples :does_not_send_email
+        include_examples :enqueues_send_http_job
+      end
     end
+
+    context 'when event_subscription has url filled' do
+      before do
+        event_subscription.update! url: 'http://example.com/cb'
+      end
+
+      include_examples :sends_email_to_contacts
+      include_examples :enqueues_send_http_job
+    end
+
+    context 'when event_subscription has url'
   end
 
   shared_examples :send_destination_quality_alarm_emails do
     include_examples :sends_email_to_contacts
+    include_examples :does_not_enqueue_send_http_job
 
     context 'when event_subscription has send_to=nil' do
       let(:expected_contacts) { contacts }
@@ -106,11 +153,31 @@ RSpec.describe NotificationEvent do
       end
 
       include_examples :does_not_send_email
+      include_examples :does_not_enqueue_send_http_job
+
+      context 'when event_subscription has url filled' do
+        before do
+          event_subscription.update! url: 'http://example.com/cb'
+        end
+
+        include_examples :does_not_send_email
+        include_examples :enqueues_send_http_job
+      end
+    end
+
+    context 'when event_subscription has url filled' do
+      before do
+        event_subscription.update! url: 'http://example.com/cb'
+      end
+
+      include_examples :sends_email_to_contacts
+      include_examples :enqueues_send_http_job
     end
   end
 
   shared_examples :send_events_to_event_subscription_contacts do
     include_examples :sends_email_to_contacts
+    include_examples :does_not_enqueue_send_http_job
 
     context 'when event_subscription has send_to=nil' do
       before do
@@ -118,6 +185,16 @@ RSpec.describe NotificationEvent do
       end
 
       include_examples :does_not_send_email
+      include_examples :does_not_enqueue_send_http_job
+
+      context 'when event_subscription has url filled' do
+        before do
+          event_subscription.update! url: 'http://example.com/cb'
+        end
+
+        include_examples :does_not_send_email
+        include_examples :enqueues_send_http_job
+      end
     end
 
     context 'when event_subscription has send_to empty' do
@@ -126,6 +203,25 @@ RSpec.describe NotificationEvent do
       end
 
       include_examples :does_not_send_email
+      include_examples :does_not_enqueue_send_http_job
+
+      context 'when event_subscription has url filled' do
+        before do
+          event_subscription.update! url: 'http://example.com/cb'
+        end
+
+        include_examples :does_not_send_email
+        include_examples :enqueues_send_http_job
+      end
+    end
+
+    context 'when event_subscription has url filled' do
+      before do
+        event_subscription.update! url: 'http://example.com/cb'
+      end
+
+      include_examples :sends_email_to_contacts
+      include_examples :enqueues_send_http_job
     end
   end
 
@@ -172,6 +268,13 @@ RSpec.describe NotificationEvent do
         send_balance_notifications_to: account.balance_notification_setting.send_to
       )
       data.to_json
+    end
+    let(:expected_event_data) do
+      account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
     end
 
     include_examples :sends_account_threshold_event_emails
@@ -221,6 +324,13 @@ RSpec.describe NotificationEvent do
       )
       data.to_json
     end
+    let(:expected_event_data) do
+      account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
+    end
 
     include_examples :sends_account_threshold_event_emails
   end
@@ -268,6 +378,13 @@ RSpec.describe NotificationEvent do
         send_balance_notifications_to: account.balance_notification_setting.send_to
       )
       data.to_json
+    end
+    let(:expected_event_data) do
+      account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
     end
 
     include_examples :sends_account_threshold_event_emails
@@ -317,6 +434,13 @@ RSpec.describe NotificationEvent do
       )
       data.to_json
     end
+    let(:expected_event_data) do
+      account.attributes.merge(
+        balance_low_threshold: account.balance_notification_setting.low_threshold,
+        balance_high_threshold: account.balance_notification_setting.high_threshold,
+        send_balance_notifications_to: account.balance_notification_setting.send_to
+      )
+    end
 
     include_examples :sends_account_threshold_event_emails
   end
@@ -353,6 +477,9 @@ RSpec.describe NotificationEvent do
         "ASR Limit: #{dialpeer.asr_limit}, ASR actual value: #{quality_stat.asr}"
       ].join("\n")
     end
+    let(:expected_event_data) do
+      dialpeer.attributes.merge(acd: quality_stat.acd, asr: quality_stat.asr)
+    end
 
     before do
       FactoryBot.create(:contact)
@@ -388,6 +515,9 @@ RSpec.describe NotificationEvent do
     end
     let(:expected_message) do
       expected_subject
+    end
+    let(:expected_event_data) do
+      dialpeer.attributes
     end
 
     before do
@@ -429,6 +559,9 @@ RSpec.describe NotificationEvent do
         "ASR Limit: #{gateway.asr_limit}, ASR actual value: #{quality_stat.asr}"
       ].join("\n")
     end
+    let(:expected_event_data) do
+      gateway.attributes.merge(acd: quality_stat.acd, asr: quality_stat.asr)
+    end
 
     before do
       FactoryBot.create(:contact)
@@ -464,6 +597,9 @@ RSpec.describe NotificationEvent do
     end
     let(:expected_message) do
       expected_subject
+    end
+    let(:expected_event_data) do
+      gateway.attributes
     end
 
     before do
@@ -516,6 +652,9 @@ RSpec.describe NotificationEvent do
         "ACD Limit: #{destination.acd_limit}, ACD actual value: #{quality_stat.acd}",
         "ASR Limit: #{destination.asr_limit}, ASR actual value: #{quality_stat.asr}"
       ].join("\n")
+    end
+    let(:expected_event_data) do
+      destination.attributes.merge(acd: quality_stat.acd, asr: quality_stat.asr)
     end
 
     before do
@@ -572,6 +711,9 @@ RSpec.describe NotificationEvent do
     let(:expected_message) do
       expected_subject
     end
+    let(:expected_event_data) do
+      destination.attributes
+    end
 
     before do
       another_contact = FactoryBot.create(:contact)
@@ -585,5 +727,17 @@ RSpec.describe NotificationEvent do
     end
 
     include_examples :send_destination_quality_alarm_emails
+  end
+
+  describe '.event_time' do
+    subject do
+      travel_to(current_time) { described_class.event_time }
+    end
+
+    let(:current_time) { Time.current }
+
+    it 'returns formatted time' do
+      expect(subject).to eq current_time.strftime('%F %T %Z')
+    end
   end
 end

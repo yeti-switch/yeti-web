@@ -16,6 +16,7 @@ ActiveAdmin.register System::EventSubscription, as: 'Event Subscription' do
     column :send_to do |r|
       r.contacts.map(&:email).sort.join(', ')
     end
+    column :url
   end
 
   show do |s|
@@ -25,10 +26,11 @@ ActiveAdmin.register System::EventSubscription, as: 'Event Subscription' do
       row :send_to do
         s.contacts.map(&:email).sort.join(', ')
       end
+      row :url
     end
   end
 
-  permit_params send_to: []
+  permit_params :url, send_to: []
 
   form do |f|
     f.inputs do
@@ -37,6 +39,8 @@ ActiveAdmin.register System::EventSubscription, as: 'Event Subscription' do
               input_html: { class: 'chosen-sortable', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
+
+      f.input :url
     end
     f.actions
   end
