@@ -87,45 +87,90 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
 
   describe 'POST create' do
     before do
-      post :create, params: {
-        data: { type: 'accounts',
-                attributes: attributes,
-                relationships: relationships }
+      post :create, params: request_payload
+    end
+
+    let(:request_payload) do
+      {
+        data: {
+          type: 'accounts',
+          attributes: attributes,
+          relationships: relationships
+        }
+      }
+    end
+    let(:attributes) do
+      {
+        name: 'name',
+        'min-balance': 1,
+        'external-id': 100,
+        'uuid': '29161666-c29c-11e8-a11d-a088b4454590',
+        'max-balance': 10,
+        'balance-low-threshold': 90,
+        'balance-high-threshold': 95,
+        'destination-rate-limit': 0.333,
+        'max-call-duration': 24_000,
+        'send-balance-notifications-to': Array.wrap(Billing::Contact.collection.first.id),
+        'send-invoices-to': Billing::Contact.collection.first.id,
+        'origination-capacity': 10,
+        'termination-capacity': 3,
+        'total-capacity': 11
+      }
+    end
+    let(:relationships) do
+      {
+        timezone: wrap_relationship(:timezones, 1),
+        contractor: wrap_relationship(:contractors, create(:contractor, vendor: true).id)
       }
     end
 
-    context 'when attributes are valid' do
+    context 'when attributes and relationships are valid' do
+      it { expect(response.status).to eq(201) }
+      it { expect(Account.count).to eq(1) }
+      it { expect(AccountBalanceNotificationSetting.count).to eq(1) }
+    end
+
+    context 'when attributes and relationships are invalid' do
+      let(:attributes) { { name: 'name', 'max-balance': -1 } }
+      let(:relationships) { {} }
+
+      it { expect(response.status).to eq(422) }
+      it { expect(Account.count).to eq(0) }
+      it { expect(AccountBalanceNotificationSetting.count).to eq(0) }
+    end
+
+    context 'when only required attributes and relationships' do
       let(:attributes) do
         {
-          name: 'name',
-          'min-balance': 1,
-          'external-id': 100,
-          'uuid': '29161666-c29c-11e8-a11d-a088b4454590',
-          'max-balance': 10,
-          'balance-low-threshold': 90,
-          'balance-high-threshold': 95,
-          'destination-rate-limit': 0.333,
-          'max-call-duration': 24_000,
-          'send-balance-notifications-to': Array.wrap(Billing::Contact.collection.first.id),
-          'send-invoices-to': Billing::Contact.collection.first.id,
-          'origination-capacity': 10,
-          'termination-capacity': 3,
-          'total-capacity': 11
+          name: 'name'
         }
       end
-
       let(:relationships) do
-        { timezone: wrap_relationship(:timezones, 1),
-          contractor: wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
+        {
+          contractor: wrap_relationship(:contractors, create(:contractor, vendor: true).id)
+        }
       end
 
       it { expect(response.status).to eq(201) }
       it { expect(Account.count).to eq(1) }
+      it { expect(AccountBalanceNotificationSetting.count).to eq(1) }
     end
 
-    context 'when attributes are invalid' do
-      let(:attributes) { { name: 'name', 'max-balance': -1 } }
-      let(:relationships) { {} }
+    context 'with attributes balance-low-threshold = balance-high-threshold' do
+      let(:attributes) do
+        super().merge 'balance-low-threshold': 90,
+                      'balance-high-threshold': 90
+      end
+
+      it { expect(response.status).to eq(422) }
+      it { expect(Account.count).to eq(0) }
+    end
+
+    context 'with attributes balance-low-threshold > balance-high-threshold' do
+      let(:attributes) do
+        super().merge 'balance-low-threshold': 91,
+                      'balance-high-threshold': 90
+      end
 
       it { expect(response.status).to eq(422) }
       it { expect(Account.count).to eq(0) }
@@ -135,11 +180,16 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
   describe 'PUT update' do
     let!(:account) { create :account }
     before do
-      put :update, params: {
+      put :update, params: request_payload
+    end
+    let(:request_payload) do
+      {
         id: account.to_param,
-        data: { type: 'accounts',
-                id: account.to_param,
-                attributes: attributes }
+        data: {
+          type: 'accounts',
+          id: account.to_param,
+          attributes: attributes
+        }
       }
     end
 
@@ -180,6 +230,32 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
       it { expect(response.status).to eq(400) }
       it { expect(account.reload.balance).to_not eq(2100.2) }
     end
+
+    context 'with attributes balance-low-threshold = balance-high-threshold' do
+      let(:attributes) do
+        {
+          'balance-low-threshold': 90,
+          'balance-high-threshold': 90
+        }
+      end
+
+      it { expect(response.status).to eq(422) }
+      it { expect(account.reload.balance_notification_setting.low_threshold).to_not eq(90) }
+      it { expect(account.reload.balance_notification_setting.high_threshold).to_not eq(90) }
+    end
+
+    context 'with attributes balance-low-threshold > balance-high-threshold' do
+      let(:attributes) do
+        {
+          'balance-low-threshold': 91,
+          'balance-high-threshold': 90
+        }
+      end
+
+      it { expect(response.status).to eq(422) }
+      it { expect(account.reload.balance_notification_setting.low_threshold).to_not eq(91) }
+      it { expect(account.reload.balance_notification_setting.high_threshold).to_not eq(90) }
+    end
   end
 
   describe 'DELETE destroy' do
@@ -189,5 +265,15 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
 
     it { expect(response.status).to eq(204) }
     it { expect(Account.count).to eq(0) }
+
+    context 'when account has balance_notifications' do
+      before do
+        FactoryBot.create_list(:balance_notification, 2, account: account)
+      end
+
+      it { expect(response.status).to eq(204) }
+      it { expect(Account.count).to eq(0) }
+      it { expect(Log::BalanceNotification.count).to eq(2) }
+    end
   end
 end

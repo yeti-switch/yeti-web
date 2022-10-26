@@ -44,14 +44,10 @@ module SendReport
     def create_email_log!(contact)
       return unless contact.smtp_connection
 
-      ::Log::EmailLog.create!(
-        contact_id: contact.id,
-        smtp_connection_id: contact.smtp_connection.id,
-        mail_to: contact.email,
-        mail_from: contact.smtp_connection.from_address,
+      ContactEmailSender.new(contact).send_email(
         subject: email_subject,
-        attachment_id: generate_attachments(csv_data),
-        msg: generate_mail_body(email_data)
+        message: generate_mail_body(email_data),
+        attachments: generate_attachments(csv_data)
       )
     end
 
@@ -83,7 +79,7 @@ module SendReport
           filename: file_name
         )
         ::Notification::Attachment.where(id: attachment.id).update_all(data: File.read(file_name))
-        attachment.id
+        attachment
       end
     end
 

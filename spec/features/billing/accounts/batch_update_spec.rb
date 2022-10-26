@@ -20,8 +20,6 @@ RSpec.describe BatchUpdateForm::Account, :js do
       min_balance: '1',
       max_balance: '5',
       vat: '100',
-      balance_low_threshold: '2',
-      balance_high_threshold: '3',
       destination_rate_limit: '0',
       origination_capacity: pg_max_smallint.to_s,
       termination_capacity: pg_max_smallint.to_s,
@@ -54,16 +52,6 @@ RSpec.describe BatchUpdateForm::Account, :js do
     if assign_params.key? :vat
       check :Vat
       fill_in :vat, with: assign_params[:vat]
-    end
-
-    if assign_params.key? :balance_low_threshold
-      check :Balance_low_threshold
-      fill_in :balance_low_threshold, with: assign_params[:balance_low_threshold]
-    end
-
-    if assign_params.key? :balance_high_threshold
-      check :Balance_high_threshold
-      fill_in :balance_high_threshold, with: assign_params[:balance_high_threshold]
     end
 
     if assign_params.key? :destination_rate_limit

@@ -2,12 +2,10 @@
 
 # == Schema Information
 #
-# Table name: accounts
+# Table name: billing.accounts
 #
 #  id                            :integer(4)       not null, primary key
 #  balance                       :decimal(, )      not null
-#  balance_high_threshold        :decimal(, )
-#  balance_low_threshold         :decimal(, )
 #  customer_invoice_ref_template :string           default("$id"), not null
 #  destination_rate_limit        :decimal(, )
 #  max_balance                   :decimal(, )      not null
@@ -17,7 +15,6 @@
 #  next_customer_invoice_at      :datetime
 #  next_vendor_invoice_at        :datetime
 #  origination_capacity          :integer(2)
-#  send_balance_notifications_to :integer(4)       is an Array
 #  send_invoices_to              :integer(4)       is an Array
 #  termination_capacity          :integer(2)
 #  total_capacity                :integer(2)
@@ -50,6 +47,7 @@
 #
 
 class Account < ApplicationRecord
+  self.table_name = 'billing.accounts'
   belongs_to :contractor
 
   # belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'customer_invoice_period_id'
@@ -67,6 +65,11 @@ class Account < ApplicationRecord
   has_many :api_access, ->(record) { unscope(:where).where("? = ANY(#{table_name}.account_ids)", record.id) }, class_name: 'System::ApiAccess', autosave: false
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
+
+  has_one :balance_notification_setting,
+          class_name: 'AccountBalanceNotificationSetting',
+          inverse_of: :account,
+          dependent: :destroy
 
   include WithPaperTrail
 
@@ -94,6 +97,21 @@ class Account < ApplicationRecord
       )
   }
 
+  scope :balance_threshold_notification_required, lambda {
+    state_none = AccountBalanceNotificationSetting::CONST::STATE_ID_NONE
+    state_low_threshold = AccountBalanceNotificationSetting::CONST::STATE_ID_LOW_THRESHOLD
+    state_high_threshold = AccountBalanceNotificationSetting::CONST::STATE_ID_HIGH_THRESHOLD
+    joins(:balance_notification_setting).where("
+      (state_id = #{state_low_threshold} AND (low_threshold IS NULL OR balance > low_threshold)) -- clear low
+      OR
+      (state_id = #{state_high_threshold} AND (high_threshold IS NULL OR balance < high_threshold)) -- clear high
+      OR
+      (state_id = #{state_none} AND low_threshold IS NOT NULL AND balance < low_threshold) -- fire low
+      OR
+      (state_id = #{state_none} AND high_threshold IS NOT NULL AND balance > high_threshold) -- fire high
+    ")
+  }
+
   validates :min_balance, numericality: true, if: -> { min_balance.present? }
   validates :balance, numericality: true
   validates :uuid, :name, uniqueness: true
@@ -118,12 +136,12 @@ class Account < ApplicationRecord
     end
   end
 
-  def send_invoices_to_emails
-    contacts_for_invoices.map(&:email).join(',')
+  after_create do
+    create_balance_notification_setting! if balance_notification_setting.nil?
   end
 
-  def send_balance_notifications_to_emails
-    contacts_for_balance_notifications.map(&:email).join(',')
+  def send_invoices_to_emails
+    contacts_for_invoices.map(&:email).join(',')
   end
 
   Totals = Struct.new(:total_balance)
@@ -135,10 +153,6 @@ class Account < ApplicationRecord
 
   def contacts_for_invoices
     @contacts ||= Billing::Contact.where(id: send_invoices_to)
-  end
-
-  def contacts_for_balance_notifications
-    @contacts_balance ||= Billing::Contact.where(id: send_balance_notifications_to)
   end
 
   before_destroy :remove_self_from_related_api_access!
@@ -179,22 +193,6 @@ class Account < ApplicationRecord
 
   def max_balance_close?
     balance * 1.1 >= max_balance
-  end
-
-  def fire_low_balance_alarm(data)
-    Notification::Alert.fire_account_low_balance(self, data)
-  end
-
-  def clear_low_balance_alarm(data)
-    Notification::Alert.clear_account_low_balance(self, data)
-  end
-
-  def fire_high_balance_alarm(data)
-    Notification::Alert.fire_account_high_balance(self, data)
-  end
-
-  def clear_high_balance_alarm(data)
-    Notification::Alert.clear_account_high_balance(self, data)
   end
 
   def remove_self_from_related_api_access!

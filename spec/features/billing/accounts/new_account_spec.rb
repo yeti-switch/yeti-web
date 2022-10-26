@@ -2,6 +2,8 @@
 
 RSpec.describe 'Create new Account', type: :feature, js: true do
   subject do
+    visit new_account_path
+    fill_form!
     click_submit('Create Account')
   end
 
@@ -9,12 +11,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
   include_context :timezone_helpers
   let!(:customer) { create(:customer) }
   let!(:vendor) { create(:vendor) }
-  let!(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone].name) }
-  let(:before_visit!) {}
-  before do
-    before_visit!
-    visit new_account_path
-
+  let(:fill_form!) do
     fill_in 'Name', with: form_params[:name]
     fill_in_chosen 'Contractor', with: form_params[:contractor].display_name, ajax: true
     fill_in 'Min balance', with: form_params[:min_balance]
@@ -29,7 +26,6 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     fill_in 'Total capacity', with: form_params[:total_capacity]
     fill_in_chosen 'Timezone', with: form_params[:timezone].name
   end
-
   let(:form_params) do
     {
       name: 'Account',
@@ -48,11 +44,12 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     }
   end
 
-  context 'with only required fields' do
+  context 'with all fields filled' do
     it 'creates new account successfully' do
-      subject
-
-      expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      expect do
+        subject
+        expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      end.to change { Account.count }.by(1)
       account = Account.last!
       expect(page).to have_current_path account_path(account.id)
 
@@ -61,8 +58,6 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            contractor: form_params[:contractor],
                            max_balance: form_params[:max_balance],
                            min_balance: form_params[:min_balance],
-                           balance_low_threshold: form_params[:balance_low_threshold],
-                           balance_high_threshold: form_params[:balance_high_threshold],
                            destination_rate_limit: form_params[:destination_rate_limit],
                            max_call_duration: form_params[:max_call_duration],
                            origination_capacity: form_params[:origination_capacity],
@@ -78,6 +73,58 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            customer_invoice_ref_template: '$id',
                            vendor_invoice_ref_template: '$id'
                          )
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
+                                                        low_threshold: form_params[:balance_low_threshold],
+                                                        high_threshold: form_params[:balance_high_threshold],
+                                                        send_to: nil
+                                                      )
+    end
+  end
+
+  context 'with only required fields filled' do
+    let(:fill_form!) do
+      fill_in 'Name', with: form_params[:name]
+      fill_in_chosen 'Contractor', with: form_params[:contractor].display_name, ajax: true
+    end
+    let(:form_params) do
+      super().slice(:name, :contractor)
+    end
+
+    it 'creates new account successfully' do
+      expect do
+        subject
+        expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      end.to change { Account.count }.by(1)
+      account = Account.last!
+      expect(page).to have_current_path account_path(account.id)
+
+      expect(account).to have_attributes(
+                           name: form_params[:name],
+                           contractor: form_params[:contractor],
+                           max_balance: 0.0,
+                           min_balance: 0.0,
+                           destination_rate_limit: nil,
+                           max_call_duration: nil,
+                           origination_capacity: nil,
+                           termination_capacity: nil,
+                           total_capacity: nil,
+                           timezone: utc_timezone,
+                           vendor_invoice_period_id: nil,
+                           next_vendor_invoice_at: nil,
+                           next_vendor_invoice_type_id: nil,
+                           customer_invoice_period_id: nil,
+                           next_customer_invoice_at: nil,
+                           next_customer_invoice_type_id: nil,
+                           customer_invoice_ref_template: '$id',
+                           vendor_invoice_ref_template: '$id'
+                         )
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
+                                                        low_threshold: nil,
+                                                        high_threshold: nil,
+                                                        send_to: nil
+                                                      )
     end
   end
 
@@ -86,15 +133,17 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
       super().merge customer_invoice_ref_template: 'cust-$id',
                     vendor_invoice_ref_template: 'vend-$id'
     end
-    before do
+    let(:fill_form!) do
+      super()
       fill_in 'Customer invoice ref template', with: form_params[:customer_invoice_ref_template]
       fill_in 'Vendor invoice ref template', with: form_params[:vendor_invoice_ref_template]
     end
 
     it 'creates new account successfully' do
-      subject
-
-      expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      expect do
+        subject
+        expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      end.to change { Account.count }.by(1)
       account = Account.last!
       expect(page).to have_current_path account_path(account.id)
 
@@ -103,8 +152,6 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            contractor: form_params[:contractor],
                            max_balance: form_params[:max_balance],
                            min_balance: form_params[:min_balance],
-                           balance_low_threshold: form_params[:balance_low_threshold],
-                           balance_high_threshold: form_params[:balance_high_threshold],
                            destination_rate_limit: form_params[:destination_rate_limit],
                            max_call_duration: form_params[:max_call_duration],
                            origination_capacity: form_params[:origination_capacity],
@@ -120,11 +167,22 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            customer_invoice_ref_template: form_params[:customer_invoice_ref_template],
                            vendor_invoice_ref_template: form_params[:vendor_invoice_ref_template]
                          )
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
+                                                        low_threshold: form_params[:balance_low_threshold],
+                                                        high_threshold: form_params[:balance_high_threshold],
+                                                        send_to: nil
+                                                      )
     end
   end
 
   context 'with customer invoice period' do
     let(:invoice_period) { Billing::InvoicePeriod.find Billing::InvoicePeriod::WEEKLY_ID }
+    let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone].name) }
+    let(:fill_form!) do
+      super()
+      fill_in_chosen 'Customer invoice period', with: invoice_period.name, exact: true
+    end
 
     before do
       expect(BillingInvoice::CalculatePeriod::Current).to receive(:call)
@@ -133,14 +191,13 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
           end_time: account_time_zone.parse('2020-01-06 00:00:00'),
           type_id: Billing::InvoiceType::AUTO_FULL
         )
-
-      fill_in_chosen 'Customer invoice period', with: invoice_period.name, exact: true
     end
 
     it 'creates new account successfully' do
-      subject
-
-      expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      expect do
+        subject
+        expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      end.to change { Account.count }.by(1)
       account = Account.last!
       expect(page).to have_current_path account_path(account.id)
 
@@ -149,8 +206,6 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            contractor: form_params[:contractor],
                            max_balance: form_params[:max_balance],
                            min_balance: form_params[:min_balance],
-                           balance_low_threshold: form_params[:balance_low_threshold],
-                           balance_high_threshold: form_params[:balance_high_threshold],
                            destination_rate_limit: form_params[:destination_rate_limit],
                            max_call_duration: form_params[:max_call_duration],
                            origination_capacity: form_params[:origination_capacity],
@@ -166,12 +221,23 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            customer_invoice_ref_template: '$id',
                            vendor_invoice_ref_template: '$id'
                          )
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
+                                                        low_threshold: form_params[:balance_low_threshold],
+                                                        high_threshold: form_params[:balance_high_threshold],
+                                                        send_to: nil
+                                                      )
     end
   end
 
   context 'with vendor invoice period' do
     let(:form_params) { super().merge contractor: vendor }
     let(:invoice_period) { Billing::InvoicePeriod.find Billing::InvoicePeriod::WEEKLY_SPLIT_ID }
+    let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone].name) }
+    let(:fill_form!) do
+      super()
+      fill_in_chosen 'Vendor invoice period', with: invoice_period.name, exact: true
+    end
 
     before do
       expect(BillingInvoice::CalculatePeriod::Current).to receive(:call)
@@ -180,14 +246,13 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
           end_time: account_time_zone.parse('2020-01-02 00:00:00'),
           type_id: Billing::InvoiceType::AUTO_PARTIAL
         )
-
-      fill_in_chosen 'Vendor invoice period', with: invoice_period.name, exact: true
     end
 
     it 'creates new account successfully' do
-      subject
-
-      expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      expect do
+        subject
+        expect(page).to have_flash_message('Account was successfully created.', type: :notice)
+      end.to change { Account.count }.by(1)
       account = Account.last!
       expect(page).to have_current_path account_path(account.id)
 
@@ -196,8 +261,6 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            contractor: form_params[:contractor],
                            max_balance: form_params[:max_balance],
                            min_balance: form_params[:min_balance],
-                           balance_low_threshold: form_params[:balance_low_threshold],
-                           balance_high_threshold: form_params[:balance_high_threshold],
                            destination_rate_limit: form_params[:destination_rate_limit],
                            max_call_duration: form_params[:max_call_duration],
                            origination_capacity: form_params[:origination_capacity],
@@ -213,6 +276,59 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            customer_invoice_ref_template: '$id',
                            vendor_invoice_ref_template: '$id'
                          )
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
+                                                        low_threshold: form_params[:balance_low_threshold],
+                                                        high_threshold: form_params[:balance_high_threshold],
+                                                        send_to: nil
+                                                      )
+    end
+  end
+
+  context 'with empty form' do
+    let(:fill_form!) { nil }
+    let(:form_params) { nil }
+
+    it 'shows validation errors' do
+      expect do
+        subject
+        expect(page).to have_semantic_error_texts(
+                          "Name can't be blank",
+                          'Contractor must exist'
+                        )
+      end.not_to change { Account.count }
+    end
+  end
+
+  context 'with balance_low_threshold = balance_high_threshold' do
+    let(:form_params) do
+      super().merge balance_low_threshold: '90.01',
+                    balance_high_threshold: '90.01'
+    end
+
+    it 'shows validation errors' do
+      expect do
+        subject
+        expect(page).to have_semantic_error_texts(
+                          'Balance low threshold must be less than Balance high threshold'
+                        )
+      end.not_to change { Account.count }
+    end
+  end
+
+  context 'with balance_low_threshold > balance_high_threshold' do
+    let(:form_params) do
+      super().merge balance_low_threshold: '91',
+                    balance_high_threshold: '90'
+    end
+
+    it 'shows validation errors' do
+      expect do
+        subject
+        expect(page).to have_semantic_error_texts(
+                          'Balance low threshold must be less than Balance high threshold'
+                        )
+      end.not_to change { Account.count }
     end
   end
 end

@@ -122,6 +122,63 @@ RSpec.describe Api::Rest::Admin::ActiveCallsController, type: :request do
           end
         end
       end
+
+      context 'with include customer-acc' do
+        let(:json_api_request_params) { { include: 'customer-acc' } }
+        let(:active_calls) do
+          result = super()
+          result.first[:customer_acc_id] = account.id
+          result
+        end
+
+        let!(:account) { FactoryBot.create(:account) }
+
+        include_examples :responds_with_status, 200
+        include_examples :returns_json_api_collection do
+          let(:json_api_collection_ids) { active_calls_ids }
+        end
+        include_examples :returns_json_api_record_relationship, :'customer-acc' do
+          let(:json_api_record_data) { response_json[:data].first }
+          let(:json_api_relationship_data) { { id: account.id.to_s, type: 'accounts' } }
+        end
+        include_examples :returns_json_api_record_include, type: :accounts do
+          let(:json_api_include_id) { account.id.to_s }
+          let(:json_api_include_attributes) { hash_including(name: account.name) }
+        end
+      end
+
+      context 'with include vendor-acc.contractor' do
+        let(:json_api_request_params) { { include: 'vendor-acc.contractor' } }
+        let(:active_calls) do
+          result = super()
+          result.first[:vendor_acc_id] = account.id
+          result
+        end
+
+        let!(:vendor) { FactoryBot.create(:vendor) }
+        let!(:account) { FactoryBot.create(:account, contractor: vendor) }
+
+        include_examples :responds_with_status, 200
+        include_examples :returns_json_api_collection do
+          let(:json_api_collection_ids) { active_calls_ids }
+        end
+        it_behaves_like :returns_json_api_record_relationship, :'vendor-acc' do
+          let(:json_api_record_data) { response_json[:data].first }
+          let(:json_api_relationship_data) { { id: account.id.to_s, type: 'accounts' } }
+        end
+        it_behaves_like :returns_json_api_record_include, type: :accounts do
+          let(:json_api_include_id) { account.id.to_s }
+          let(:json_api_include_attributes) { hash_including(name: account.name) }
+        end
+        it_behaves_like :returns_json_api_record_relationship, :contractor do
+          let(:json_api_record_data) { response_json[:included].detect { |r| r[:type] == 'accounts' } }
+          let(:json_api_relationship_data) { { id: vendor.id.to_s, type: 'contractors' } }
+        end
+        it_behaves_like :returns_json_api_record_include, type: :contractors do
+          let(:json_api_include_id) { vendor.id.to_s }
+          let(:json_api_include_attributes) { hash_including(name: vendor.name) }
+        end
+      end
     end
 
     context 'without active calls' do

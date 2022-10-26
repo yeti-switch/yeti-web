@@ -133,3 +133,5 @@ group :test do
   gem 'webmock'
 end
 gem 'bootsnap', require: false
+
+gem 'httparty', '~> 0.20.0'

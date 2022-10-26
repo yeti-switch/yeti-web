@@ -6,8 +6,6 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   attribute :min_balance
   attribute :max_balance
   attribute :vat
-  attribute :balance_low_threshold
-  attribute :balance_high_threshold
   attribute :destination_rate_limit
   attribute :origination_capacity
   attribute :termination_capacity
@@ -28,7 +26,6 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   validates :timezone_id, presence: true, if: :timezone_id_changed?
 
   # numericality
-  validates :balance_low_threshold, required_with: :balance_high_threshold
   validates :min_balance, numericality: { allow_blank: true }, if: :min_balance_changed?
   validates :max_balance, numericality: {
     allow_blank: true,
@@ -70,8 +67,4 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
     only_integer: true,
     allow_nil: true
   }, if: :max_call_duration_changed?
-  validates :balance_low_threshold, numericality: { allow_blank: true }, if: :balance_low_threshold_changed?
-  validates :balance_high_threshold, numericality: {
-    greater_than_or_equal_to: :balance_low_threshold
-  }, if: -> { balance_high_threshold.present? && balance_low_threshold =~ /^[0-9]+$/ }
 end

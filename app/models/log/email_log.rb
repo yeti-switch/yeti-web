@@ -37,8 +37,4 @@ class Log::EmailLog < ApplicationRecord
   def attachments_no_data
     @attachments_no_data ||= Notification::Attachment.select(:id, :filename).where(id: attachment_id)
   end
-
-  after_create do
-    Worker::SendEmailLogJob.perform_later(id)
-  end
 end

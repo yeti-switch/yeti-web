@@ -2,45 +2,55 @@
 
 # == Schema Information
 #
-# Table name: balance_notifications
+# Table name: logs.balance_notifications
 #
-#  id           :bigint(8)        not null, primary key
-#  created_at   :datetime         not null
-#  is_processed :boolean          default(FALSE), not null
-#  processed_at :datetime
-#  direction    :string
-#  action       :string
-#  data         :json
+#  id                     :bigint(8)        not null, primary key
+#  account_balance        :decimal(, )      not null
+#  balance_high_threshold :decimal(, )
+#  balance_low_threshold  :decimal(, )
+#  created_at             :datetime         not null
+#  account_id             :integer(4)       not null
+#  event_id               :integer(2)       not null
+#
+# Indexes
+#
+#  balance_notifications_account_id_idx  (account_id)
 #
 
 class Log::BalanceNotification < ApplicationRecord
-  self.table_name = 'balance_notifications'
-  scope :processed, -> { where('is_processed') }
-  scope :not_processed, -> { where('not is_processed') }
+  self.table_name = 'logs.balance_notifications'
 
-  def display_name
-    id.to_s
+  module CONST
+    EVENT_ID_LOW_THRESHOLD_CLEARED = 1
+    EVENT_ID_HIGH_THRESHOLD_CLEARED = 2
+    EVENT_ID_LOW_THRESHOLD_REACHED = 3
+    EVENT_ID_HIGH_THRESHOLD_REACHED = 4
+    EVENT_IDS = [
+      EVENT_ID_LOW_THRESHOLD_CLEARED,
+      EVENT_ID_HIGH_THRESHOLD_CLEARED,
+      EVENT_ID_LOW_THRESHOLD_REACHED,
+      EVENT_ID_HIGH_THRESHOLD_REACHED
+    ].freeze
+    EVENTS = {
+      EVENT_ID_LOW_THRESHOLD_CLEARED => 'Low Threshold Cleared',
+      EVENT_ID_HIGH_THRESHOLD_CLEARED => 'High Threshold Cleared',
+      EVENT_ID_LOW_THRESHOLD_REACHED => 'Low Threshold Reached',
+      EVENT_ID_HIGH_THRESHOLD_REACHED => 'High Threshold Reached'
+    }.freeze
+
+    freeze
   end
 
-  def process!
-    acc = Account.find(data['id'].to_i)
+  belongs_to :account
 
-    if direction == 'low' && action == 'fire'
-      acc.fire_low_balance_alarm(data)
+  validates :event_id, inclusion: { in: CONST::EVENT_IDS }
+  validates :account_balance, presence: true
 
-    elsif direction == 'low' && action == 'clear'
-      acc.clear_low_balance_alarm(data)
+  def display_name
+    "#{id} | #{event} #{account_id}"
+  end
 
-    elsif direction == 'high' && action == 'fire'
-      acc.fire_high_balance_alarm(data)
-
-    elsif direction == 'high' && action == 'clear'
-      acc.clear_high_balance_alarm(data)
-
-    end
-
-    self.is_processed = true
-    self.processed_at = Time.now # seems it will write wrong time when timezone is not UTC
-    save!
+  def event
+    CONST::EVENTS.fetch(event_id)
   end
 end

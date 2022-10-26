@@ -1155,115 +1155,6 @@ CREATE TYPE switch20.lua_call_context AS (
 
 
 --
--- Name: account_change_iu_tgf(); Type: FUNCTION; Schema: billing; Owner: -
---
-
-CREATE FUNCTION billing.account_change_iu_tgf() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-if TG_OP='UPDATE' then
-    if (new.balance_high_threshold is not null and (new.balance > new.balance_high_threshold)) and NOT
-        (old.balance_high_threshold is not null AND (old.balance > old.balance_high_threshold)) then
-        -- fire high balance
-        perform billing.balance_notify('high', 'fire', new);
-    end if;
-
-    if (new.balance_low_threshold is not null and (new.balance < new.balance_low_threshold)) and NOT
-        (old.balance_low_threshold is not null AND (old.balance < old.balance_low_threshold)) then
-        -- fire low balance
-        perform billing.balance_notify('low', 'fire', new);
-    end if;
-
-    if (new.balance_high_threshold is null OR (new.balance <= new.balance_high_threshold)) and NOT
-        (old.balance_high_threshold is null OR (old.balance <= old.balance_high_threshold)) then
-        -- clear high balance
-        perform billing.balance_notify('high', 'clear', new);
-    end if;
-
-    if (new.balance_low_threshold is null OR (new.balance >= new.balance_low_threshold)) and NOT
-        (old.balance_low_threshold is null OR (old.balance >= old.balance_low_threshold)) then
-        -- clear low balance
-        perform billing.balance_notify('low', 'clear', new);
-    end if;
-
-elsif TG_OP='INSERT' THEN
-    if new.balance_high_threshold is not null and (new.balance > new.balance_high_threshold) then
-        -- fire high balance
-        perform billing.balance_notify('high', 'fire', new);
-    end if;
-
-    if new.balance_low_threshold is not null and (new.balance < new.balance_low_threshold) then
-        -- fire low balance
-        perform billing.balance_notify('low', 'fire', new);
-    end if;
-END IF;
-
-return new;
-END;
-$$;
-
-
-SET default_tablespace = '';
-
-SET default_table_access_method = heap;
-
---
--- Name: accounts; Type: TABLE; Schema: billing; Owner: -
---
-
-CREATE TABLE billing.accounts (
-    id integer NOT NULL,
-    contractor_id integer NOT NULL,
-    balance numeric NOT NULL,
-    min_balance numeric NOT NULL,
-    max_balance numeric NOT NULL,
-    name character varying NOT NULL,
-    origination_capacity smallint,
-    termination_capacity smallint,
-    customer_invoice_period_id smallint,
-    customer_invoice_template_id integer,
-    vendor_invoice_template_id integer,
-    next_customer_invoice_at timestamp with time zone,
-    next_vendor_invoice_at timestamp with time zone,
-    vendor_invoice_period_id smallint,
-    send_invoices_to integer[],
-    timezone_id integer DEFAULT 1 NOT NULL,
-    next_customer_invoice_type_id smallint,
-    next_vendor_invoice_type_id smallint,
-    balance_high_threshold numeric,
-    balance_low_threshold numeric,
-    send_balance_notifications_to integer[],
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
-    external_id bigint,
-    vat numeric DEFAULT 0 NOT NULL,
-    total_capacity smallint,
-    destination_rate_limit numeric,
-    max_call_duration integer,
-    customer_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
-    vendor_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
-    CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
-    CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
-    CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
-    CONSTRAINT positive_total_capacity CHECK ((total_capacity > 0))
-);
-
-
---
--- Name: balance_notify(character varying, character varying, billing.accounts); Type: FUNCTION; Schema: billing; Owner: -
---
-
-CREATE FUNCTION billing.balance_notify(i_type character varying, i_action character varying, i_account billing.accounts) RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-begin
-    insert into logs.balance_notifications(direction,action,data) values(i_type,i_action,row_to_json(i_account));
-    return;
-END;
-$$;
-
-
---
 -- Name: bill_account(integer, numeric); Type: FUNCTION; Schema: billing; Owner: -
 --
 
@@ -2005,6 +1896,10 @@ END;
 $$;
 
 
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
 --
 -- Name: network_prefixes; Type: TABLE; Schema: sys; Owner: -
 --
@@ -2731,6 +2626,44 @@ BEGIN
   PERFORM preprocess('switch18','process_gw',false);
 END;
 $$;
+
+
+--
+-- Name: accounts; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.accounts (
+    id integer NOT NULL,
+    contractor_id integer NOT NULL,
+    balance numeric NOT NULL,
+    min_balance numeric NOT NULL,
+    max_balance numeric NOT NULL,
+    name character varying NOT NULL,
+    origination_capacity smallint,
+    termination_capacity smallint,
+    customer_invoice_period_id smallint,
+    customer_invoice_template_id integer,
+    vendor_invoice_template_id integer,
+    next_customer_invoice_at timestamp with time zone,
+    next_vendor_invoice_at timestamp with time zone,
+    vendor_invoice_period_id smallint,
+    send_invoices_to integer[],
+    timezone_id integer DEFAULT 1 NOT NULL,
+    next_customer_invoice_type_id smallint,
+    next_vendor_invoice_type_id smallint,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    external_id bigint,
+    vat numeric DEFAULT 0 NOT NULL,
+    total_capacity smallint,
+    destination_rate_limit numeric,
+    max_call_duration integer,
+    customer_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
+    vendor_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
+    CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
+    CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
+    CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
+    CONSTRAINT positive_total_capacity CHECK ((total_capacity > 0))
+);
 
 
 --
@@ -21809,6 +21742,39 @@ $$;
 
 
 --
+-- Name: account_balance_notification_settings; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.account_balance_notification_settings (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    low_threshold numeric,
+    high_threshold numeric,
+    state_id smallint DEFAULT 0 NOT NULL,
+    send_to integer[]
+);
+
+
+--
+-- Name: account_balance_notification_settings_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.account_balance_notification_settings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_balance_notification_settings_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.account_balance_notification_settings_id_seq OWNED BY billing.account_balance_notification_settings.id;
+
+
+--
 -- Name: accounts_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
@@ -23950,8 +23916,6 @@ CREATE TABLE data_import.import_accounts (
     invoice_period_name character varying,
     autogenerate_vendor_invoices boolean DEFAULT false NOT NULL,
     autogenerate_customer_invoices boolean DEFAULT false NOT NULL,
-    balance_high_threshold numeric,
-    balance_low_threshold numeric,
     total_capacity smallint,
     destination_rate_limit numeric,
     vat numeric,
@@ -25053,11 +25017,11 @@ ALTER SEQUENCE logs.api_requests_id_seq OWNED BY logs.api_requests.id;
 CREATE TABLE logs.balance_notifications (
     id bigint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    is_processed boolean DEFAULT false NOT NULL,
-    processed_at timestamp with time zone,
-    direction character varying,
-    action character varying,
-    data json
+    account_id integer NOT NULL,
+    event_id smallint NOT NULL,
+    account_balance numeric NOT NULL,
+    balance_low_threshold numeric,
+    balance_high_threshold numeric
 );
 
 
@@ -25114,13 +25078,14 @@ ALTER SEQUENCE logs.logic_log_id_seq OWNED BY logs.logic_log.id;
 
 
 --
--- Name: alerts; Type: TABLE; Schema: notifications; Owner: -
+-- Name: event_subscriptions; Type: TABLE; Schema: notifications; Owner: -
 --
 
-CREATE TABLE notifications.alerts (
+CREATE TABLE notifications.event_subscriptions (
     id integer NOT NULL,
     event character varying NOT NULL,
-    send_to integer[]
+    send_to integer[],
+    url character varying
 );
 
 
@@ -25140,7 +25105,7 @@ CREATE SEQUENCE notifications.alerts_id_seq
 -- Name: alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: notifications; Owner: -
 --
 
-ALTER SEQUENCE notifications.alerts_id_seq OWNED BY notifications.alerts.id;
+ALTER SEQUENCE notifications.alerts_id_seq OWNED BY notifications.event_subscriptions.id;
 
 
 --
@@ -26464,6 +26429,13 @@ ALTER SEQUENCE sys.timezones_id_seq OWNED BY sys.timezones.id;
 
 
 --
+-- Name: account_balance_notification_settings id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.account_balance_notification_settings ALTER COLUMN id SET DEFAULT nextval('billing.account_balance_notification_settings_id_seq'::regclass);
+
+
+--
 -- Name: accounts id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -27010,13 +26982,6 @@ ALTER TABLE ONLY logs.logic_log ALTER COLUMN id SET DEFAULT nextval('logs.logic_
 
 
 --
--- Name: alerts id; Type: DEFAULT; Schema: notifications; Owner: -
---
-
-ALTER TABLE ONLY notifications.alerts ALTER COLUMN id SET DEFAULT nextval('notifications.alerts_id_seq'::regclass);
-
-
---
 -- Name: attachments id; Type: DEFAULT; Schema: notifications; Owner: -
 --
 
@@ -27035,6 +27000,13 @@ ALTER TABLE ONLY notifications.contacts ALTER COLUMN id SET DEFAULT nextval('not
 --
 
 ALTER TABLE ONLY notifications.email_logs ALTER COLUMN id SET DEFAULT nextval('notifications.email_log_id_seq'::regclass);
+
+
+--
+-- Name: event_subscriptions id; Type: DEFAULT; Schema: notifications; Owner: -
+--
+
+ALTER TABLE ONLY notifications.event_subscriptions ALTER COLUMN id SET DEFAULT nextval('notifications.alerts_id_seq'::regclass);
 
 
 --
@@ -27245,6 +27217,14 @@ ALTER TABLE ONLY sys.smtp_connections ALTER COLUMN id SET DEFAULT nextval('sys.s
 --
 
 ALTER TABLE ONLY sys.timezones ALTER COLUMN id SET DEFAULT nextval('sys.timezones_id_seq'::regclass);
+
+
+--
+-- Name: account_balance_notification_settings account_balance_notification_settings_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.account_balance_notification_settings
+    ADD CONSTRAINT account_balance_notification_settings_pkey PRIMARY KEY (id);
 
 
 --
@@ -28568,18 +28548,18 @@ ALTER TABLE ONLY logs.logic_log
 
 
 --
--- Name: alerts alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -
+-- Name: event_subscriptions alerts_event_key; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.alerts
+ALTER TABLE ONLY notifications.event_subscriptions
     ADD CONSTRAINT alerts_event_key UNIQUE (event);
 
 
 --
--- Name: alerts alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
+-- Name: event_subscriptions alerts_pkey; Type: CONSTRAINT; Schema: notifications; Owner: -
 --
 
-ALTER TABLE ONLY notifications.alerts
+ALTER TABLE ONLY notifications.event_subscriptions
     ADD CONSTRAINT alerts_pkey PRIMARY KEY (id);
 
 
@@ -29272,6 +29252,13 @@ ALTER TABLE ONLY sys.timezones
 
 
 --
+-- Name: account_balance_notification_settings_account_id_uniq_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE UNIQUE INDEX account_balance_notification_settings_account_id_uniq_idx ON billing.account_balance_notification_settings USING btree (account_id);
+
+
+--
 -- Name: accounts_contractor_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -29531,6 +29518,13 @@ CREATE INDEX api_requests_id_idx ON ONLY logs.api_requests USING btree (id);
 
 
 --
+-- Name: balance_notifications_account_id_idx; Type: INDEX; Schema: logs; Owner: -
+--
+
+CREATE INDEX balance_notifications_account_id_idx ON logs.balance_notifications USING btree (account_id);
+
+
+--
 -- Name: contacts_contractor_id_idx; Type: INDEX; Schema: notifications; Owner: -
 --
 
@@ -29573,13 +29567,6 @@ CREATE INDEX network_prefixes_prefix_range_idx ON sys.network_prefixes USING gis
 
 
 --
--- Name: accounts account_notification_tgf; Type: TRIGGER; Schema: billing; Owner: -
---
-
-CREATE TRIGGER account_notification_tgf AFTER INSERT OR UPDATE ON billing.accounts FOR EACH ROW EXECUTE FUNCTION billing.account_change_iu_tgf();
-
-
---
 -- Name: accounts accounts_contractor_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -29609,6 +29596,14 @@ ALTER TABLE ONLY billing.accounts
 
 ALTER TABLE ONLY billing.accounts
     ADD CONSTRAINT accounts_vendor_invoice_period_id_fkey FOREIGN KEY (vendor_invoice_period_id) REFERENCES billing.invoice_periods(id);
+
+
+--
+-- Name: account_balance_notification_settings fk_rails_f185d22f87; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.account_balance_notification_settings
+    ADD CONSTRAINT fk_rails_f185d22f87 FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
 
 
 --
@@ -30567,7 +30562,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30670,6 +30666,12 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220923131906'),
 ('20220926083051'),
 ('20221004060840'),
-('20221008113325');
+('20221008113325'),
+('20221015081756'),
+('20221015082627'),
+('20221016081523'),
+('20221016100614'),
+('20221025105955'),
+('20221025175803');
 
 

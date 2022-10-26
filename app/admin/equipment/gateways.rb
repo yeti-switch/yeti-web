@@ -9,7 +9,7 @@ ActiveAdmin.register Gateway do
   acts_as_status
   acts_as_stat
   acts_as_quality_stat
-  acts_as_lock
+  acts_as_lock GatewayQualityCheck
   acts_as_stats_actions
   acts_as_async_destroy('Gateway')
   acts_as_async_update BatchUpdateForm::Gateway

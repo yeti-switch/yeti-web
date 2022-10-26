@@ -48,7 +48,7 @@ class Billing::Contact < ApplicationRecord
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
-    Notification::Alert.where('? = ANY(send_to)', id).find_each do |c|
+    System::EventSubscription.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
@@ -56,8 +56,8 @@ class Billing::Contact < ApplicationRecord
       c.send_invoices_to = c.send_invoices_to.reject { |el| el == id }
       c.save!
     end
-    Account.where('? = ANY(send_balance_notifications_to)', id).find_each do |c|
-      c.send_balance_notifications_to = c.send_balance_notifications_to.reject { |el| el == id }
+    AccountBalanceNotificationSetting.where('? = ANY(send_to)', id).find_each do |c|
+      c.send_to = c.send_to.reject { |el| el == id }
       c.save!
     end
     Routing::Rateplan.where('? = ANY(send_quality_alarms_to)', id).find_each do |c|

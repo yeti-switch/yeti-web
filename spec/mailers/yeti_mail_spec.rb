@@ -3,7 +3,7 @@
 RSpec.describe YetiMail do
   describe '.email_message' do
     subject do
-      YetiMail.email_message(log_id)
+      YetiMail.email_message(log)
     end
 
     before do
@@ -15,20 +15,15 @@ RSpec.describe YetiMail do
         global: true
       )
     end
-    let(:log_id) { log.id }
     let!(:log) do
-      Log::EmailLog.create!(
-        contact_id: contact.id,
-        smtp_connection_id: contact.smtp_connection.id,
-        mail_to: contact.email,
-        mail_from: 'rspec@example.com',
+      ContactEmailSender.new(contact).send_email(
         subject: 'test',
-        attachment_id: [attachment.id],
-        msg: '<h1>Hello</h1>'
+        message: '<h1>Hello</h1>',
+        attachments: [attachment]
       )
     end
     let(:attachment) do
-      Notification::Attachment.create!(filename: 'test.txt', data: 'some data')
+      FactoryBot.create(:notification_attachment, filename: 'test.txt', data: 'some data')
     end
     let(:contact) do
       Billing::Contact.create!(email: 'test@example.com')

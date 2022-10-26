@@ -8,13 +8,15 @@ class AccountForm < ProxyForm
   with_model_name 'Account'
   model_class 'Account'
 
+  attribute :balance_low_threshold, :decimal
+  attribute :balance_high_threshold, :decimal
+  attribute :send_balance_notifications_to, :integer, array: true
+
   model_attributes :name,
                    :contractor_id,
                    :min_balance,
                    :max_balance,
                    :vat,
-                   :balance_low_threshold,
-                   :balance_high_threshold,
                    :destination_rate_limit,
                    :max_call_duration,
                    :origination_capacity,
@@ -25,14 +27,16 @@ class AccountForm < ProxyForm
                    :vendor_invoice_template_id,
                    :customer_invoice_template_id,
                    :send_invoices_to,
-                   :send_balance_notifications_to,
                    :timezone_id,
                    :uuid,
                    :customer_invoice_ref_template,
                    :vendor_invoice_ref_template
 
+  validate :validate_balance_thresholds
+
   before_save :apply_vendor_invoice_period
   before_save :apply_customer_invoice_period
+  before_save :sync_balance_notification_setting
 
   private
 
@@ -60,6 +64,23 @@ class AccountForm < ProxyForm
     else
       model.next_vendor_invoice_at = nil
       model.next_vendor_invoice_type_id = nil
+    end
+  end
+
+  def sync_balance_notification_setting
+    setting = model.balance_notification_setting || model.build_balance_notification_setting
+    setting.assign_attributes(
+      low_threshold: balance_low_threshold,
+      high_threshold: balance_high_threshold,
+      send_to: send_balance_notifications_to.reject(&:nil?).presence
+    )
+  end
+
+  def validate_balance_thresholds
+    return if balance_low_threshold.nil? || balance_high_threshold.nil?
+
+    if balance_low_threshold >= balance_high_threshold
+      errors.add(:balance_low_threshold, 'must be less than Balance high threshold')
     end
   end
 end

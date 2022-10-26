@@ -45,7 +45,8 @@ RSpec.describe 'config/yeti_web.yml' do
       },
       versioning_disable_for_models: a_kind_of(Array),
       keep_expired_dialpeers_days: a_kind_of(Integer),
-      keep_expired_destinations_days: be_nil
+      keep_expired_destinations_days: be_nil,
+      keep_balance_notifications_days: a_kind_of(Integer)
     }
   end
 

@@ -12,8 +12,8 @@ class Api::Rest::Customer::V1::AccountResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :balance, type: :number
   ransack_filter :min_balance, type: :number
   ransack_filter :max_balance, type: :number
-  ransack_filter :balance_low_threshold, type: :number
-  ransack_filter :balance_high_threshold, type: :number
+  ransack_filter :balance_low_threshold, type: :number, column: :balance_notification_setting_low_threshold
+  ransack_filter :balance_high_threshold, type: :number, column: :balance_notification_setting_high_threshold
   ransack_filter :destination_rate_limit, type: :number
   ransack_filter :max_call_duration, type: :number
   ransack_filter :external_id, type: :number

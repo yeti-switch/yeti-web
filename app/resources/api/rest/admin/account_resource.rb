@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::AccountResource < BaseResource
+  save_form 'AdminApi::AccountForm'
+  paginator :paged
+
   attributes :name,
              :balance, :min_balance, :max_balance,
              :balance_low_threshold, :balance_high_threshold, :send_balance_notifications_to,
@@ -8,8 +11,6 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
              :send_invoices_to
-
-  paginator :paged
 
   has_one :contractor
   has_one :timezone, class_name: 'System::Timezone'
@@ -25,8 +26,8 @@ class Api::Rest::Admin::AccountResource < BaseResource
   ransack_filter :balance, type: :number
   ransack_filter :min_balance, type: :number
   ransack_filter :max_balance, type: :number
-  ransack_filter :balance_low_threshold, type: :number
-  ransack_filter :balance_high_threshold, type: :number
+  ransack_filter :balance_low_threshold, type: :number, column: :balance_notification_setting_low_threshold
+  ransack_filter :balance_high_threshold, type: :number, column: :balance_notification_setting_high_threshold
   ransack_filter :destination_rate_limit, type: :number
   ransack_filter :max_call_duration, type: :number
   ransack_filter :external_id, type: :number
@@ -35,12 +36,16 @@ class Api::Rest::Admin::AccountResource < BaseResource
   ransack_filter :termination_capacity, type: :number
   ransack_filter :total_capacity, type: :number
 
-  def send_invoices_to=(value)
-    _model.send_invoices_to = Array.wrap(value)
+  def send_balance_notifications_to
+    _model.balance_notification_setting.send_to
   end
 
-  def send_balance_notifications_to=(value)
-    _model.send_balance_notifications_to = Array.wrap(value)
+  def balance_low_threshold
+    _model.balance_notification_setting.low_threshold
+  end
+
+  def balance_high_threshold
+    _model.balance_notification_setting.high_threshold
   end
 
   def self.updatable_fields(_context)
@@ -73,5 +78,13 @@ class Api::Rest::Admin::AccountResource < BaseResource
 
   def self.creatable_fields(context)
     updatable_fields(context)
+  end
+
+  def self.sortable_fields(context)
+    super - %i[balance_low_threshold balance_high_threshold send_balance_notifications_to]
+  end
+
+  def self.required_model_includes(_context)
+    [:balance_notification_setting]
   end
 end

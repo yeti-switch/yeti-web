@@ -10,8 +10,6 @@ RSpec.describe BatchUpdateForm::Account do
       min_balance: '10',
       max_balance: '10',
       vat: '3',
-      balance_low_threshold: '10',
-      balance_high_threshold: '20',
       origination_capacity: '5',
       termination_capacity: '300',
       total_capacity: '50',
@@ -79,37 +77,6 @@ RSpec.describe BatchUpdateForm::Account do
     it { is_expected.to validate_numericality_of :vat }
     it { is_expected.to validate_numericality_of(:vat).is_greater_than_or_equal_to 0 }
     it { is_expected.to validate_numericality_of(:vat).is_less_than_or_equal_to 100 }
-
-    # balance_high_threshold and balance_low_threshold
-    context 'when :balance_high_threshold to change value without :balance_low_threshold' do
-      let(:assign_params) { { balance_low_threshold: '' } }
-
-      it 'should have failed with invalid message' do
-        subject
-        expect(subject.errors.to_a).to contain_exactly 'Balance low threshold must be changed together with Balance high threshold'
-      end
-    end
-
-    context 'when :balance_low_threshold is greater than or equal to :balance_high_threshold' do
-      let(:assign_params) { { balance_low_threshold: '100', balance_high_threshold: '1' } }
-
-      it 'should have failed with invalid message' do
-        subject
-        expect(subject.errors.to_a).to contain_exactly "Balance high threshold must be greater than or equal to #{assign_params[:balance_low_threshold]}"
-      end
-    end
-
-    # balance_high_threshold
-    it { is_expected.to validate_numericality_of(:balance_high_threshold) }
-    it { is_expected.to_not allow_value('string').for :balance_high_threshold }
-    it { is_expected.to_not validate_presence_of :balance_high_threshold }
-    it { is_expected.to allow_value(nil, '', ' ', '12', '12.5').for :balance_high_threshold }
-
-    # balance_low_threshold
-    it { is_expected.to validate_numericality_of(:balance_low_threshold) }
-    it { is_expected.to_not allow_value('string').for :balance_low_threshold }
-    it { is_expected.to_not validate_presence_of :balance_low_threshold }
-    it { is_expected.to allow_value(nil, '', ' ', '12', '12.5').for :balance_low_threshold }
 
     # destination_rate_limit
     it { is_expected.to_not allow_value('string').for :destination_rate_limit }

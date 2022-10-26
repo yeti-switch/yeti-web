@@ -5,13 +5,14 @@ module Worker
     queue_as 'email_log'
 
     def perform(email_log_id)
-      YetiMail.email_message(email_log_id).deliver!
-      Log::EmailLog.where(id: email_log_id).update_all(sent_at: Time.now)
+      email_log = Log::EmailLog.find(email_log_id)
+      YetiMail.email_message(email_log).deliver!
+      email_log.update!(sent_at: Time.now)
     rescue StandardError => e
-      Rails.logger.warn { "<#{e.class}>: #{e.message}" }
-      Rails.logger.warn { e.backtrace.join("\n") }
+      error_message = "<#{e.class}>: #{e.message}\n#{e.backtrace&.join("\n")}"
+      Rails.logger.error { error_message }
       capture_error(e)
-      Log::EmailLog.where(id: email_log_id).update_all(error: e.message)
+      email_log&.update!(error: error_message)
     end
   end
 end

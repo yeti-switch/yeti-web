@@ -2,12 +2,10 @@
 
 # == Schema Information
 #
-# Table name: accounts
+# Table name: billing.accounts
 #
 #  id                            :integer(4)       not null, primary key
 #  balance                       :decimal(, )      not null
-#  balance_high_threshold        :decimal(, )
-#  balance_low_threshold         :decimal(, )
 #  customer_invoice_ref_template :string           default("$id"), not null
 #  destination_rate_limit        :decimal(, )
 #  max_balance                   :decimal(, )      not null
@@ -17,7 +15,6 @@
 #  next_customer_invoice_at      :datetime
 #  next_vendor_invoice_at        :datetime
 #  origination_capacity          :integer(2)
-#  send_balance_notifications_to :integer(4)       is an Array
 #  send_invoices_to              :integer(4)       is an Array
 #  termination_capacity          :integer(2)
 #  total_capacity                :integer(2)
@@ -92,9 +89,6 @@ RSpec.describe Account, type: :model do
         timezone_id: utc_timezone.id,
         next_customer_invoice_type_id: nil,
         next_vendor_invoice_type_id: nil,
-        balance_high_threshold: nil,
-        balance_low_threshold: nil,
-        send_balance_notifications_to: nil,
         external_id: nil,
         vat: 0.0,
         total_capacity: nil,
@@ -103,10 +97,22 @@ RSpec.describe Account, type: :model do
       }
     end
     let(:expected_account_attrs) { create_params.reverse_merge(default_params) }
+    let(:expected_balance_notification_setting_attrs) do
+      {
+        low_threshold: nil,
+        high_threshold: nil,
+        send_to: nil
+      }
+    end
 
     shared_examples :creates_account do
       include_examples :creates_record do
         let(:expected_record_attrs) { expected_account_attrs }
+      end
+
+      it 'creates account_balance_notification_setting' do
+        expect { subject }.to change { AccountBalanceNotificationSetting.count }.by(1)
+        expect(subject.balance_notification_setting).to have_attributes(expected_balance_notification_setting_attrs)
       end
     end
 

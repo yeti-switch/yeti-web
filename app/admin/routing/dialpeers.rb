@@ -9,7 +9,7 @@ ActiveAdmin.register Dialpeer do
   acts_as_status(show_count: false)
   acts_as_stat
   acts_as_quality_stat
-  acts_as_lock
+  acts_as_lock DialpeerQualityCheck
   acts_as_stats_actions
   acts_as_async_destroy('Dialpeer')
   acts_as_async_update BatchUpdateForm::Dialpeer
