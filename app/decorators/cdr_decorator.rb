@@ -31,6 +31,7 @@ class CdrDecorator < Draper::Decorator
   end
 
   def round5_format(attr)
+    return nil if model.public_send(attr).nil?
     model.public_send(attr).round(5)
   end
 
