@@ -221,6 +221,11 @@ brakeman: gems-test config/database.yml config/yeti_web.yml
 	$(info:msg=Running brakeman)
 	RAILS_ENV=test $(bundle_bin) exec brakeman
 
+.PHONY: coverage_report
+coverage_report: gems-test
+	$(info:msg=Generate coverage report)
+	$(bundle_bin) exec rake coverage:report
+
 .PHONY: test-pgq-processors
 test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles.yml
 	$(info:msg=Preparing test database for pgq-processors)

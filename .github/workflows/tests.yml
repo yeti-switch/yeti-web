@@ -187,14 +187,6 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
-      - name: Coveralls Parallel
-        uses: coverallsapp/github-action@master
-        with:
-          path-to-lcov: ./coverage/lcov.info
-          github-token: ${{secrets.github_token}}
-          flag-name: run-${{matrix.ci_node_index}}
-          parallel: true
-
       - name: Save artifacts
         if: always()
         uses: actions/upload-artifact@v2
@@ -203,14 +195,54 @@ jobs:
           if-no-files-found: ignore
           path: |
             tmp/capybara
+            coverage
 
-  finalize-coveralls:
-    needs: rspec
+  coverage:
+    name: Coverage
     runs-on: ubuntu-latest
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
+    needs:
+      - gems-caching
+      - rspec
     steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
+      - uses: actions/checkout@v2
+      - name: use cache
+        uses: actions/cache@v2
         with:
-          github-token: ${{secrets.github_token}}
-          parallel-finished: true
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+            /opt/yeti-web/vendor/rbenv
+          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+      - name: Download Coverage Outputs
+        uses: actions/download-artifact@v3
+        with:
+          path: coverage
+
+      - name: Merge Coverage results
+        run: make coverage_report
+
+      - name: Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: coverage/coverage.xml
+          badge: true
+          fail_below_min: true
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: true
+          indicators: true
+          output: both
+          thresholds: '60 80'
+
+      - name: Adding coverage report to summary
+        run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+#      - name: Add Coverage PR Comment
+#        uses: marocchino/sticky-pull-request-comment@v2
+#        if: github.event_name == 'pull_request'
+#        with:
+#          recreate: true
+#          path: code-coverage-results.md
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

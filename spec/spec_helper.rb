@@ -2,8 +2,9 @@
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
-if ENV['SKIP_COVERAGE'].nil?
-  require 'simplecov'
+if ENV['CI'] == 'true'
+  require_relative 'coverage_helper'
+  CoverageHelper.start parallel_number: ENV['TEST_GROUP']
 end
 
 require File.expand_path('../config/environment', __dir__)
