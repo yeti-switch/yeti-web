@@ -67,10 +67,6 @@ class NodeApi
     perform_request('yeti.show.status')
   end
 
-  def router_cache_clear(params = nil)
-    perform_request('yeti.request.router.cache.clear', params)
-  end
-
   def call_disconnect(id)
     params = [id]
     perform_request('yeti.request.call.disconnect', params)

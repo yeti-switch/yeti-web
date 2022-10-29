@@ -12,16 +12,6 @@ ActiveAdmin.register Node do
   filter :pop, input_html: { class: 'chosen' }
   filter :name
 
-  member_action :clear_cache, method: :post do
-    resource.clear_cache
-    flash[:notice] = 'Cleared!'
-    redirect_to action: :index
-  end
-
-  action_item :clear_cache, only: :show do
-    link_to('Clear Cache', clear_cache_node_path(id: params[:id]), method: :post)
-  end
-
   controller do
     def destroy
       destroy!

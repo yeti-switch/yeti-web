@@ -61,10 +61,6 @@ class Node < ApplicationRecord
 
   delegate :system_status, to: :api
 
-  def clear_cache
-    api.router_cache_clear
-  end
-
   def drop_call(id)
     api.call_disconnect(id)
   end
