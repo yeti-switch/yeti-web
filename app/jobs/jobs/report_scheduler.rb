@@ -49,7 +49,7 @@ module Jobs
           CreateReport::VendorTraffic.call(
             date_start: time_data.date_from,
             date_end: time_data.date_to,
-            vendor_id: task.vendor,
+            vendor: task.vendor,
             send_to: task.send_to
           )
         end
