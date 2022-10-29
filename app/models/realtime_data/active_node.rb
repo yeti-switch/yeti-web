@@ -35,10 +35,6 @@ class RealtimeData::ActiveNode < Node
     @system_status ||= api.system_status
   end
 
-  def clear_cache
-    api.router_clear_cache
-  end
-
   def drop_call(id)
     api.call_disconnect(id)
   end
