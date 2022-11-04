@@ -4,6 +4,21 @@ require_relative './scheduler'
 require_relative './prometheus/yeti_cron_job_processor'
 
 class YetiScheduler < Scheduler::Base
+  CaptureErrorMiddleware = Class.new(Scheduler::Middleware::Base) do
+    def call(options)
+      context = capture_context(options)
+      CaptureError.with_clean_context(context) { app.call(options) }
+    end
+
+    private
+
+    def capture_context(options)
+      {
+        tags: { component: 'YetiScheduler', job_name: options.name },
+        extra: { options: options.to_h, scheduler_options: options.handler_class.scheduler_options }
+      }
+    end
+  end
   ConnectionsMiddleware = Class.new(Scheduler::Middleware::Base) do
     def call(options)
       ApplicationRecord.connection_pool.connection
@@ -50,6 +65,7 @@ class YetiScheduler < Scheduler::Base
     end
   end
 
+  use CaptureErrorMiddleware
   use ConnectionsMiddleware
   use DatabaseInfoMiddleware
   use PrometheusMiddleware
@@ -65,12 +81,8 @@ class YetiScheduler < Scheduler::Base
     Cdr::Base.flush_idle_connections!
   end
 
-  on_error do |error, options|
-    CaptureError.capture(
-      error,
-      tags: { component: 'YetiScheduler', job_name: options.name },
-      extra: { options: options.to_h, scheduler_options: options.handler_class.scheduler_options }
-    )
+  on_error do |error, _options|
+    CaptureError.capture(error)
   end
 
   cron Jobs::CdrPartitioning
