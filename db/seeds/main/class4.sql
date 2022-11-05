@@ -480,18 +480,6 @@ INSERT INTO dtmf_send_modes (id, name) VALUES (4, 'SIP INFO application/dtmf');
 
 
 --
--- TOC entry 4340 (class 0 OID 19227)
--- Dependencies: 323
--- Data for Name: dump_level; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO dump_level (id, name, log_sip, log_rtp) VALUES (3, 'Capture all traffic', true, true);
-INSERT INTO dump_level (id, name, log_sip, log_rtp) VALUES (0, 'Capture nothing', false, false);
-INSERT INTO dump_level (id, name, log_sip, log_rtp) VALUES (2, 'Capture rtp traffic', true, false);
-INSERT INTO dump_level (id, name, log_sip, log_rtp) VALUES (1, 'Capture signaling traffic', true, false);
-
-
---
 -- TOC entry 4341 (class 0 OID 19235)
 -- Dependencies: 324
 -- Data for Name: filter_types; Type: TABLE DATA; Schema: class4; Owner: yeti

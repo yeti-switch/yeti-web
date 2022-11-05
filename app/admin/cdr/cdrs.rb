@@ -31,7 +31,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     def scoped_collection
       if params[:as] == 'table'
         super.preload(
-          :dump_level,
           :node,
           :pop,
           :disconnect_initiator,
@@ -74,7 +73,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :status, as: :select, collection: proc { [['FAILURE', false], ['SUCCESS', true]] }
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
-  filter :dump_level, as: :select, collection: proc { DumpLevel.select(%i[id name]).reorder(:id) }
+
+  filter :dump_level_id_eq, label:'Dump level', as: :select, collection: Cdr::Cdr::DUMP_LEVELS.invert
 
   filter :orig_gw_id_eq,
          as: :select,
@@ -218,7 +218,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
   action_item :log_level_trace, only: :show do
-    link_to("#{resource.log_level_name} trace", dump_cdr_path(resource)) if resource.has_dump?
+    link_to("#{resource.dump_level_name} trace", dump_cdr_path(resource)) if resource.has_dump?
   end
 
   action_item :call_record_lega, only: :show do
@@ -591,7 +591,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   index do
     column :id do |cdr|
-      if cdr.dump_level_id > 0
+      if cdr.has_dump?
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
       else
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details')

@@ -74,7 +74,6 @@
 #  customers_auth_diversion_policy_id_fkey           (diversion_policy_id => diversion_policy.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
 #  customers_auth_dst_number_field_id_fkey           (dst_number_field_id => customers_auth_dst_number_fields.id)
-#  customers_auth_dump_level_id_fkey                 (dump_level_id => dump_level.id)
 #  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
 #  customers_auth_lua_script_id_fkey                 (lua_script_id => lua_scripts.id)
 #  customers_auth_pop_id_fkey                        (pop_id => pops.id)
@@ -91,6 +90,17 @@
 
 class CustomersAuth < ApplicationRecord
   self.table_name = 'class4.customers_auth'
+
+  DUMP_LEVEL_DISABLED = 0
+  DUMP_LEVEL_CAPTURE_SIP = 1
+  DUMP_LEVEL_CAPTURE_RTP = 2
+  DUMP_LEVEL_CAPTURE_ALL = 3
+  DUMP_LEVELS = {
+    DUMP_LEVEL_DISABLED => 'Capture nothing',
+    DUMP_LEVEL_CAPTURE_SIP => 'Capture signaling traffic',
+    DUMP_LEVEL_CAPTURE_RTP => 'Capture RTP traffic',
+    DUMP_LEVEL_CAPTURE_ALL => 'Capture all traffic'
+  }.freeze
 
   module CONST
     MATCH_CONDITION_ATTRIBUTES = %i[ip
@@ -112,7 +122,6 @@ class CustomersAuth < ApplicationRecord
   belongs_to :routing_plan, class_name: 'Routing::RoutingPlan'
   belongs_to :gateway
   belongs_to :account, optional: true
-  belongs_to :dump_level
   belongs_to :pop, optional: true
   belongs_to :diversion_policy
   belongs_to :dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :dst_numberlist_id, optional: true
@@ -154,7 +163,7 @@ class CustomersAuth < ApplicationRecord
   validates :name, presence: true
   validates :external_id, uniqueness: { allow_blank: true }
 
-  validates :customer, :rateplan, :routing_plan, :gateway, :account, :dump_level, :diversion_policy, presence: true
+  validates :customer, :rateplan, :routing_plan, :gateway, :account, :diversion_policy, presence: true
 
   validates :src_name_field, :src_number_field, :dst_number_field, presence: true
 
@@ -169,7 +178,11 @@ class CustomersAuth < ApplicationRecord
   validate :ip_is_valid
   validate :gateway_supports_incoming_auth
 
+  validates :dump_level_id, presence: true
+  validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: true
+
   validates_with TagActionValueValidator
+
 
   include Yeti::StateUpdater
   self.state_name = 'customers_auth'
@@ -206,6 +219,10 @@ class CustomersAuth < ApplicationRecord
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def dump_level_name
+    dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
 
   # TODO: move to decorator when ActiveAdmin fix problem

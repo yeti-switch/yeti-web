@@ -22732,18 +22732,6 @@ CREATE TABLE class4.dtmf_send_modes (
 
 
 --
--- Name: dump_level; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.dump_level (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    log_sip boolean DEFAULT false NOT NULL,
-    log_rtp boolean DEFAULT false NOT NULL
-);
-
-
---
 -- Name: filter_types; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -27742,22 +27730,6 @@ ALTER TABLE ONLY class4.dtmf_send_modes
 
 
 --
--- Name: dump_level dump_level_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.dump_level
-    ADD CONSTRAINT dump_level_name_key UNIQUE (name);
-
-
---
--- Name: dump_level dump_level_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.dump_level
-    ADD CONSTRAINT dump_level_pkey PRIMARY KEY (id);
-
-
---
 -- Name: filter_types filter_types_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29745,14 +29717,6 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth customers_auth_dump_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_dump_level_id_fkey FOREIGN KEY (dump_level_id) REFERENCES class4.dump_level(id);
-
-
---
 -- Name: customers_auth customers_auth_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30714,6 +30678,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221016100614'),
 ('20221025105955'),
 ('20221025175803'),
-('20221105134455');
+('20221105134455'),
+('20221105203239');
 
 
