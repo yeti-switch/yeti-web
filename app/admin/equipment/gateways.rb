@@ -439,6 +439,10 @@ ActiveAdmin.register Gateway do
           f.input :diversion_domain
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
+
+          f.input :pai_send_mode_id, as: :select, include_blank: false,
+                                     collection: Gateway.pai_send_modes
+
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
           f.input :src_rewrite_rule
@@ -610,6 +614,9 @@ ActiveAdmin.register Gateway do
           row :diversion_domain
           row :diversion_rewrite_rule
           row :diversion_rewrite_result
+
+          row :pai_send_mode, &:pai_send_mode_name
+
           row :src_name_rewrite_rule
           row :src_name_rewrite_result
           row :src_rewrite_rule

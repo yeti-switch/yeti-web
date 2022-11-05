@@ -106,6 +106,7 @@
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
 #  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
+#  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  radius_accounting_profile_id     :integer(2)
 #  rel100_mode_id                   :integer(2)       default(4), not null
@@ -224,7 +225,7 @@ class Gateway < ApplicationRecord
 
   validates :fake_180_timer, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
   validates :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema, presence: true
+                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema, :pai_send_mode_id, presence: true
 
   validates :incoming_auth_username, presence: true, if: proc { incoming_auth_password.present? }
   validates :incoming_auth_password, presence: true, if: proc { incoming_auth_username.present? }
@@ -317,6 +318,26 @@ class Gateway < ApplicationRecord
     )
   }
 
+  def fire_lock(stat)
+    transaction do
+      self.locked = true
+      save
+      Notification::Alert.fire_lock(self, stat)
+    end
+  end
+
+  def unlock
+    transaction do
+      self.locked = false
+      save
+      Notification::Alert.fire_unlock(self)
+    end
+  end
+
+  def pai_send_mode_name
+    Gateway.pai_send_modes[pai_send_mode_id][0]
+  end
+
   protected
 
   def allow_termination_can_be_enabled
@@ -400,6 +421,14 @@ class Gateway < ApplicationRecord
       ordered_by
       origination_contractor_id_eq
       termination_contractor_id_eq
+    ]
+  end
+
+  def self.pai_send_modes
+    [
+      ['Do not send', 0],
+      ['Build tel URI from CLI', 1],
+      ['Build sip URI from CLI', 2]
     ]
   end
 end

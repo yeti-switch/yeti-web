@@ -106,6 +106,7 @@
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
 #  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
+#  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  radius_accounting_profile_id     :integer(2)
 #  rel100_mode_id                   :integer(2)       default(4), not null

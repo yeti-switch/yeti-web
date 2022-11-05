@@ -2882,7 +2882,8 @@ CREATE TABLE class4.gateways (
     diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
     diversion_domain character varying,
     try_avoid_transcoding boolean DEFAULT false NOT NULL,
-    force_cancel_routeset boolean DEFAULT false NOT NULL
+    force_cancel_routeset boolean DEFAULT false NOT NULL,
+    pai_send_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -30562,8 +30563,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30672,6 +30672,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221016081523'),
 ('20221016100614'),
 ('20221025105955'),
-('20221025175803');
+('20221025175803'),
+('20221105134455');
 
 
