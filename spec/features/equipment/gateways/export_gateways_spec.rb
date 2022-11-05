@@ -72,7 +72,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Diversion rewrite rule',             item.diversion_rewrite_rule.to_s],
         ['Diversion rewrite result',           item.diversion_rewrite_result.to_s],
         ['Pai send mode name', item.pai_send_mode_name],
-        ['Pai domain', item.pai_domain],
+        ['Pai domain', item.pai_domain.to_s],
         ['Src name rewrite rule',              item.src_name_rewrite_rule.to_s],
         ['Src name rewrite result',            item.src_name_rewrite_result.to_s],
         ['Src rewrite rule',                   item.src_rewrite_rule.to_s],

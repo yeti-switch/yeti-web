@@ -141,7 +141,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       let!(:diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(1) }
       let!(:other_diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(2) }
       let!(:gateways) { create_list(:gateway, 3, diversion_send_mode: diversion_send_mode) }
-      before { create(:gateway, diversion_send_mode: other_diversion_send_mode) }
+      before { create(:gateway, diversion_send_mode: other_diversion_send_mode, diversion_domain: 'diversion.domain') }
 
       let(:request_params) do
         { filter: { 'diversion_send_mode.id': diversion_send_mode.id } }

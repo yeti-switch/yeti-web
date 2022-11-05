@@ -414,11 +414,11 @@ BEGIN
   IF i_vendor_gw.pai_send_mode_id = 1 THEN
     -- TEL URI
     v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
-    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
   ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
     -- SIP URL
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain));
-    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain)::varchar);
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
