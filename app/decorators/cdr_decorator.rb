@@ -4,7 +4,6 @@ class CdrDecorator < Draper::Decorator
   delegate_all
   decorates Cdr::Cdr
 
-
   def decorated_routing_delay
     round5_format :routing_delay
   end
@@ -33,5 +32,4 @@ class CdrDecorator < Draper::Decorator
   def round5_format(attr)
     model.public_send(attr).round(5)
   end
-
 end

@@ -14,9 +14,8 @@ customer_auth = CustomersAuth.find_or_create_by!(name: 'seed_customer_acc', cust
 pop = Pop.find_or_create_by!(id: 100_500, name: 'seed-UA')
 
 100.times do
-  Routing::Area.find_or_create_by!(name:"Area #{rand(200)}")
+  Routing::Area.find_or_create_by!(name: "Area #{rand(200)}")
 end
-
 
 200.times do
   dur = rand(-1000..6199)

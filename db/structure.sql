@@ -2949,7 +2949,8 @@ CREATE TABLE class4.gateways (
     diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
     diversion_domain character varying,
     try_avoid_transcoding boolean DEFAULT false NOT NULL,
-    force_cancel_routeset boolean DEFAULT false NOT NULL
+    force_cancel_routeset boolean DEFAULT false NOT NULL,
+    pai_send_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -30670,6 +30671,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220923131906'),
 ('20220926083051'),
 ('20221004060840'),
-('20221008113325');
+('20221008113325'),
+('20221105134455');
 
 
