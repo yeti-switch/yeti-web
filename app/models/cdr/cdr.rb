@@ -190,7 +190,9 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
-  belongs_to :dump_level
+
+  belongs_to :dump_level, optional: true
+
   belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id, optional: true
   belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id, optional: true
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id, optional: true
