@@ -24,7 +24,7 @@ FactoryBot.define do
     sip_schema_id { 1 }
     host { 'test.example.com' }
     port { nil }
-    use_registered_aor { true }
+    registered_aor_mode_id { 1 }
     src_rewrite_rule { nil }
     dst_rewrite_rule { nil }
     auth_enabled { false }
