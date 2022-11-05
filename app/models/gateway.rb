@@ -318,22 +318,6 @@ class Gateway < ApplicationRecord
     )
   }
 
-  def fire_lock(stat)
-    transaction do
-      self.locked = true
-      save
-      Notification::Alert.fire_lock(self, stat)
-    end
-  end
-
-  def unlock
-    transaction do
-      self.locked = false
-      save
-      Notification::Alert.fire_unlock(self)
-    end
-  end
-
   def pai_send_mode_name
     Gateway.pai_send_modes[pai_send_mode_id][0]
   end
