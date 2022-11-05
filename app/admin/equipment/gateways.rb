@@ -48,12 +48,14 @@ ActiveAdmin.register Gateway do
                  [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
                  :host,
                  :port,
-                 :use_registered_aor,
+                 :registered_aor_mode_name,
                  [:network_protocol_priority_name, proc { |row| row.network_protocol_priority.try(:name) }],
                  :resolve_ruri,
                  [:diversion_send_mode_name, proc { |row| row.diversion_send_mode.try(:name) }],
                  :diversion_domain,
                  :diversion_rewrite_rule, :diversion_rewrite_result,
+                 :pai_send_mode_name,
+                 :pai_domain,
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
@@ -396,7 +398,8 @@ ActiveAdmin.register Gateway do
               f.input :sip_schema, as: :select, include_blank: false
               f.input :host
               f.input :port
-              f.input :use_registered_aor
+              f.input :registered_aor_mode_id, as: :select, include_blank: false,
+                                               collection: Gateway::REGISTERED_AOR_MODES.invert
               f.input :network_protocol_priority, as: :select, include_blank: false
               f.input :resolve_ruri
               f.input :preserve_anonymous_from_domain
@@ -441,7 +444,8 @@ ActiveAdmin.register Gateway do
           f.input :diversion_rewrite_result
 
           f.input :pai_send_mode_id, as: :select, include_blank: false,
-                                     collection: Gateway.pai_send_modes
+                                     collection: Gateway::PAI_SEND_MODES.invert
+          f.input :pai_domain
 
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
@@ -572,7 +576,9 @@ ActiveAdmin.register Gateway do
             row :sip_schema
             row :host
             row :port
-            row :use_registered_aor
+
+            row :registered_aor_mode, &:registered_aor_mode_name
+
             row :network_protocol_priority
             row :resolve_ruri
             row :preserve_anonymous_from_domain
@@ -616,6 +622,7 @@ ActiveAdmin.register Gateway do
           row :diversion_rewrite_result
 
           row :pai_send_mode, &:pai_send_mode_name
+          row :pai_domain
 
           row :src_name_rewrite_rule
           row :src_name_rewrite_result

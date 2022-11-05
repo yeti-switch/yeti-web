@@ -1047,7 +1047,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	customer_acc_vat numeric,
 	lega_identity_attestation_id smallint,
 	lega_identity_verstat_id smallint,
-	bleg_force_cancel_routeset boolean
+	bleg_force_cancel_routeset boolean,
+	registered_aor_mode_id smallint
 );
 
 
@@ -2876,14 +2877,15 @@ CREATE TABLE class4.gateways (
     termination_src_numberlist_id smallint,
     termination_dst_numberlist_id smallint,
     lua_script_id smallint,
-    use_registered_aor boolean DEFAULT false NOT NULL,
     rtp_acl inet[],
     orig_append_headers_reply character varying[],
     diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
     diversion_domain character varying,
     try_avoid_transcoding boolean DEFAULT false NOT NULL,
     force_cancel_routeset boolean DEFAULT false NOT NULL,
-    pai_send_mode_id smallint DEFAULT 0 NOT NULL
+    pai_send_mode_id smallint DEFAULT 0 NOT NULL,
+    pai_domain character varying,
+    registered_aor_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -15822,6 +15824,7 @@ DECLARE
   v_diversion varchar[] not null default ARRAY[]::varchar[];
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai_out varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16202,6 +16205,17 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
+  IF i_vendor_gw.pai_send_mode_id = 1 THEN
+    -- TEL URI
+    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    -- SIP URL
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain));
+    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain)::varchar);
+  END IF;
+  i_profile.pai_out = array_to_string(v_pai_out, ',');
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -16258,7 +16272,8 @@ BEGIN
     i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
 
-  if i_vendor_gw.use_registered_aor then
+  i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
+  if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
@@ -16457,6 +16472,7 @@ DECLARE
   v_diversion varchar[] not null default ARRAY[]::varchar[];
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai_out varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16837,6 +16853,17 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
+  IF i_vendor_gw.pai_send_mode_id = 1 THEN
+    -- TEL URI
+    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    -- SIP URL
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain));
+    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain)::varchar);
+  END IF;
+  i_profile.pai_out = array_to_string(v_pai_out, ',');
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -16893,7 +16920,8 @@ BEGIN
     i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
 
-  if i_vendor_gw.use_registered_aor then
+  i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
+  if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
@@ -17092,6 +17120,7 @@ DECLARE
   v_diversion varchar[] not null default ARRAY[]::varchar[];
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai_out varchar[] not null default ARRAY[]::varchar[];
   
 BEGIN
   
@@ -17425,6 +17454,17 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
+  IF i_vendor_gw.pai_send_mode_id = 1 THEN
+    -- TEL URI
+    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    -- SIP URL
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain));
+    v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, v_vendor_gw.pai_domain)::varchar);
+  END IF;
+  i_profile.pai_out = array_to_string(v_pai_out, ',');
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -17481,7 +17521,8 @@ BEGIN
     i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
 
-  if i_vendor_gw.use_registered_aor then
+  i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
+  if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 

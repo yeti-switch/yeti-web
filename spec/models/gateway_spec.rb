@@ -46,6 +46,7 @@
 #  orig_outbound_proxy              :string
 #  orig_use_outbound_proxy          :boolean          default(FALSE), not null
 #  origination_capacity             :integer(2)
+#  pai_domain                       :string
 #  port                             :integer(4)
 #  prefer_existing_codecs           :boolean          default(TRUE), not null
 #  preserve_anonymous_from_domain   :boolean          default(FALSE), not null
@@ -92,7 +93,6 @@
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string
 #  try_avoid_transcoding            :boolean          default(FALSE), not null
-#  use_registered_aor               :boolean          default(FALSE), not null
 #  weight                           :integer(2)       default(100), not null
 #  codec_group_id                   :integer(4)       default(1), not null
 #  contractor_id                    :integer(4)       not null
@@ -109,6 +109,7 @@
 #  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  radius_accounting_profile_id     :integer(2)
+#  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
 #  rx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
 #  sdp_alines_filter_type_id        :integer(4)       default(0), not null
