@@ -158,10 +158,10 @@ class Cdr::Cdr < Cdr::Base
   DUMP_LEVEL_RTP = 2
   DUMP_LEVEL_ALL = 3
   DUMP_LEVELS = {
-      DUMP_LEVEL_NO => "None",
-      DUMP_LEVEL_SIP => "SIP",
-      DUMP_LEVEL_RTP => "RTP",
-      DUMP_LEVEL_ALL => "Full"
+    DUMP_LEVEL_NO => 'None',
+    DUMP_LEVEL_SIP => 'SIP',
+    DUMP_LEVEL_RTP => 'RTP',
+    DUMP_LEVEL_ALL => 'Full'
   }.freeze
 
   ADMIN_PRELOAD_LIST = %i[
@@ -284,7 +284,7 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def has_dump?
-    (not dump_level_id.nil?) and dump_level_id > 0
+    !dump_level_id.nil? and dump_level_id > 0
   end
 
   def dump_level_name

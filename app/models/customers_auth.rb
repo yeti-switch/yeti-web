@@ -183,7 +183,6 @@ class CustomersAuth < ApplicationRecord
 
   validates_with TagActionValueValidator
 
-
   include Yeti::StateUpdater
   self.state_name = 'customers_auth'
 

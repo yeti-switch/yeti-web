@@ -74,7 +74,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
 
-  filter :dump_level_id_eq, label:'Dump level', as: :select, collection: Cdr::Cdr::DUMP_LEVELS.invert
+  filter :dump_level_id_eq, label: 'Dump level', as: :select, collection: Cdr::Cdr::DUMP_LEVELS.invert
 
   filter :orig_gw_id_eq,
          as: :select,
