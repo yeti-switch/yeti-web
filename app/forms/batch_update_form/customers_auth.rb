@@ -11,7 +11,7 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   attribute :dst_number_max_length
   attribute :dst_numberlist_id, type: :foreign_key, class_name: 'Routing::Numberlist'
   attribute :src_numberlist_id, type: :foreign_key, class_name: 'Routing::Numberlist'
-  attribute :dump_level_id, type: :foreign_key, class_name: 'DumpLevel'
+  #  attribute :dump_level_id, type: :foreign_key, class_name: 'DumpLevel'
   attribute :rateplan_id, type: :foreign_key, class_name: 'Routing::Rateplan'
   attribute :routing_plan_id, type: :foreign_key, class_name: 'Routing::RoutingPlan'
   attribute :lua_script_id, type: :foreign_key, class_name: 'System::LuaScript'
