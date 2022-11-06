@@ -112,7 +112,7 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (742, 'to', 'varchar', false, 40, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (783, 'disconnect_code_id', 'integer', false, 450, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (772, 'aleg_session_refresh_method_id', 'integer', false, 340, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (812, 'dump_level_id', 'integer', false, 740, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (812, 'dump_level_id', 'smallint', false, 740, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (767, 'session_refresh_method_id', 'integer', false, 290, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (837, 'src_name_in', 'varchar', true, 1880, true);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (838, 'src_name_out', 'varchar', true, 1890, true);

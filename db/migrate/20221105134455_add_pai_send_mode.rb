@@ -1310,6 +1310,7 @@ $_$;
 
 
 alter type switch20.callprofile_ty drop attribute registered_aor_mode_id;
+alter type switch20.callprofile_ty alter attribute dump_level_id type integer;
 
 
     }
