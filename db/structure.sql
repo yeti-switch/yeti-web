@@ -889,7 +889,7 @@ CREATE TYPE switch20.callprofile_ty AS (
 	try_avoid_transcoding boolean,
 	rtprelay_dtmf_filtering boolean,
 	rtprelay_dtmf_detection boolean,
-	dump_level_id integer,
+	dump_level_id smallint,
 	time_limit integer,
 	resources character varying,
 	cache_time integer,
@@ -1047,7 +1047,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	customer_acc_vat numeric,
 	lega_identity_attestation_id smallint,
 	lega_identity_verstat_id smallint,
-	bleg_force_cancel_routeset boolean
+	bleg_force_cancel_routeset boolean,
+	registered_aor_mode_id smallint
 );
 
 
@@ -2876,13 +2877,15 @@ CREATE TABLE class4.gateways (
     termination_src_numberlist_id smallint,
     termination_dst_numberlist_id smallint,
     lua_script_id smallint,
-    use_registered_aor boolean DEFAULT false NOT NULL,
     rtp_acl inet[],
     orig_append_headers_reply character varying[],
     diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
     diversion_domain character varying,
     try_avoid_transcoding boolean DEFAULT false NOT NULL,
-    force_cancel_routeset boolean DEFAULT false NOT NULL
+    force_cancel_routeset boolean DEFAULT false NOT NULL,
+    pai_send_mode_id smallint DEFAULT 0 NOT NULL,
+    pai_domain character varying,
+    registered_aor_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -15821,6 +15824,7 @@ DECLARE
   v_diversion varchar[] not null default ARRAY[]::varchar[];
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai_out varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16201,6 +16205,17 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
+  IF i_vendor_gw.pai_send_mode_id = 1 THEN
+    -- TEL URI
+    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    -- SIP URL
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  END IF;
+  i_profile.pai_out = array_to_string(v_pai_out, ',');
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -16257,7 +16272,8 @@ BEGIN
     i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
 
-  if i_vendor_gw.use_registered_aor then
+  i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
+  if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
@@ -16456,6 +16472,7 @@ DECLARE
   v_diversion varchar[] not null default ARRAY[]::varchar[];
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai_out varchar[] not null default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16836,6 +16853,17 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
+  IF i_vendor_gw.pai_send_mode_id = 1 THEN
+    -- TEL URI
+    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    -- SIP URL
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  END IF;
+  i_profile.pai_out = array_to_string(v_pai_out, ',');
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -16892,7 +16920,8 @@ BEGIN
     i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
 
-  if i_vendor_gw.use_registered_aor then
+  i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
+  if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
@@ -17091,6 +17120,7 @@ DECLARE
   v_diversion varchar[] not null default ARRAY[]::varchar[];
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai_out varchar[] not null default ARRAY[]::varchar[];
   
 BEGIN
   
@@ -17424,6 +17454,17 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
+  IF i_vendor_gw.pai_send_mode_id = 1 THEN
+    -- TEL URI
+    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    -- SIP URL
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  END IF;
+  i_profile.pai_out = array_to_string(v_pai_out, ',');
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -17480,7 +17521,8 @@ BEGIN
     i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
 
-  if i_vendor_gw.use_registered_aor then
+  i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
+  if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
   end if;
 
@@ -22237,7 +22279,7 @@ CREATE TABLE class4.customers_auth (
     dst_rewrite_rule character varying,
     dst_rewrite_result character varying,
     name character varying NOT NULL,
-    dump_level_id integer DEFAULT 0 NOT NULL,
+    dump_level_id smallint DEFAULT 0 NOT NULL,
     capacity smallint,
     pop_id integer,
     src_name_rewrite_rule character varying,
@@ -22334,7 +22376,7 @@ CREATE TABLE class4.customers_auth_normalized (
     dst_prefix character varying DEFAULT ''::character varying NOT NULL,
     x_yeti_auth character varying,
     name character varying NOT NULL,
-    dump_level_id integer DEFAULT 0 NOT NULL,
+    dump_level_id smallint DEFAULT 0 NOT NULL,
     capacity smallint,
     pop_id integer,
     uri_domain character varying,
@@ -22686,18 +22728,6 @@ CREATE TABLE class4.dtmf_receive_modes (
 CREATE TABLE class4.dtmf_send_modes (
     id smallint NOT NULL,
     name character varying NOT NULL
-);
-
-
---
--- Name: dump_level; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.dump_level (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    log_sip boolean DEFAULT false NOT NULL,
-    log_rtp boolean DEFAULT false NOT NULL
 );
 
 
@@ -27700,22 +27730,6 @@ ALTER TABLE ONLY class4.dtmf_send_modes
 
 
 --
--- Name: dump_level dump_level_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.dump_level
-    ADD CONSTRAINT dump_level_name_key UNIQUE (name);
-
-
---
--- Name: dump_level dump_level_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.dump_level
-    ADD CONSTRAINT dump_level_pkey PRIMARY KEY (id);
-
-
---
 -- Name: filter_types filter_types_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29703,14 +29717,6 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth customers_auth_dump_level_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_dump_level_id_fkey FOREIGN KEY (dump_level_id) REFERENCES class4.dump_level(id);
-
-
---
 -- Name: customers_auth customers_auth_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30562,8 +30568,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30672,6 +30677,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221016081523'),
 ('20221016100614'),
 ('20221025105955'),
-('20221025175803');
+('20221025175803'),
+('20221105134455'),
+('20221105203239');
 
 

@@ -46,6 +46,7 @@
 #  orig_outbound_proxy              :string
 #  orig_use_outbound_proxy          :boolean          default(FALSE), not null
 #  origination_capacity             :integer(2)
+#  pai_domain                       :string
 #  port                             :integer(4)
 #  prefer_existing_codecs           :boolean          default(TRUE), not null
 #  preserve_anonymous_from_domain   :boolean          default(FALSE), not null
@@ -92,7 +93,6 @@
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string
 #  try_avoid_transcoding            :boolean          default(FALSE), not null
-#  use_registered_aor               :boolean          default(FALSE), not null
 #  weight                           :integer(2)       default(100), not null
 #  codec_group_id                   :integer(4)       default(1), not null
 #  contractor_id                    :integer(4)       not null
@@ -106,8 +106,10 @@
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
 #  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
+#  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  radius_accounting_profile_id     :integer(2)
+#  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
 #  rx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
 #  sdp_alines_filter_type_id        :integer(4)       default(0), not null
@@ -165,6 +167,24 @@ class Gateway < ApplicationRecord
 
   RTP_TIMEOUT_MIN = 0
   RTP_TIMEOUT_MAX = 600
+
+  PAI_SEND_MODE_NO_SEND = 0
+  PAI_SEND_MODE_BUILD_TEL = 1
+  PAI_SEND_MODE_BUILD_SIP = 2
+  PAI_SEND_MODES = {
+    PAI_SEND_MODE_NO_SEND => 'Do not send',
+    PAI_SEND_MODE_BUILD_TEL => 'Build TEL URI from Source Number',
+    PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number'
+  }.freeze
+
+  REGISTERED_AOR_MODE_NO_USE = 0
+  REGISTERED_AOR_MODE_AS_IS = 1
+  REGISTERED_AOR_MODE_REPLACE_USERPART = 2
+  REGISTERED_AOR_MODES = {
+    PAI_SEND_MODE_NO_SEND => 'Do not use',
+    PAI_SEND_MODE_BUILD_TEL => 'Use AOR as is',
+    PAI_SEND_MODE_BUILD_SIP => 'Use AOR, replace userpart with dst number'
+  }.freeze
 
   belongs_to :contractor
   belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id, optional: true
@@ -225,6 +245,13 @@ class Gateway < ApplicationRecord
   validates :fake_180_timer, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
   validates :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
                         :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema, presence: true
+
+  validates :registered_aor_mode_id, inclusion: { in: REGISTERED_AOR_MODES.keys }, allow_nil: true
+
+  validates :pai_send_mode_id, inclusion: { in: PAI_SEND_MODES.keys }, allow_nil: true
+  validates :pai_domain, presence: true, if: proc { pai_send_mode_id == 2 }
+
+  validates :diversion_domain, presence: true, if: proc { diversion_send_mode_id == 2 }
 
   validates :incoming_auth_username, presence: true, if: proc { incoming_auth_password.present? }
   validates :incoming_auth_password, presence: true, if: proc { incoming_auth_username.present? }
@@ -317,13 +344,25 @@ class Gateway < ApplicationRecord
     )
   }
 
+  def pai_send_mode_name
+    PAI_SEND_MODES[pai_send_mode_id]
+  end
+
+  def registered_aor_mode_name
+    REGISTERED_AOR_MODES[registered_aor_mode_id]
+  end
+
+  def use_registered_aor?
+    registered_aor_mode_id > 0
+  end
+
   protected
 
   def allow_termination_can_be_enabled
-    if host.blank? && use_registered_aor == false && (allow_termination == true)
+    if host.blank? && registered_aor_mode_id == 0 && allow_termination == true
       errors.add(:allow_termination, I18n.t('activerecord.errors.models.gateway.attributes.allow_termination.empty_host_for_termination'))
       errors.add(:host, I18n.t('activerecord.errors.models.gateway.attributes.host.empty_host_for_termination'))
-      errors.add(:use_registered_aor, I18n.t('activerecord.errors.models.gateway.attributes.use_registered_aor.empty_host_for_termination'))
+      errors.add(:registered_aor_mode_id, I18n.t('activerecord.errors.models.gateway.attributes.registered_aor_mode_id.empty_host_for_termination'))
     end
   end
 

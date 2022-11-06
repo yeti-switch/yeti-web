@@ -33,7 +33,7 @@ ActiveAdmin.register CustomersAuth do
                  [:routing_plan_name, proc { |row| row.routing_plan.try(:name) || '' }],
                  [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) || '' }],
                  [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) || '' }],
-                 [:dump_level_name, proc { |row| row.dump_level.try(:name) || '' }],
+                 :dump_level_name,
                  :enable_audio_recording,
                  :capacity,
                  :allow_receive_rate_limit,
@@ -83,7 +83,7 @@ ActiveAdmin.register CustomersAuth do
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
-  includes :tag_action, :rateplan, :routing_plan, :gateway, :dump_level, :src_numberlist, :dst_numberlist,
+  includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
            :pop, :diversion_policy, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
            :lua_script, :src_name_field, :src_number_field, :dst_number_field, :cnam_database,
            account: :contractor
@@ -152,7 +152,7 @@ ActiveAdmin.register CustomersAuth do
     column :dst_numberlist
     column :src_numberlist
 
-    column :dump_level
+    column :dump_level, &:dump_level_name
     column :enable_audio_recording
     column :capacity
     column :allow_receive_rate_limit
@@ -207,7 +207,7 @@ ActiveAdmin.register CustomersAuth do
 
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }
-  filter :dump_level, as: :select, collection: proc { DumpLevel.select(%i[id name]).reorder(:id) }
+  filter :dump_level_id_eq, label: 'Dump Level', as: :select, collection: CustomersAuth::DUMP_LEVELS.invert
   filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
   filter :transport_protocol
   filter :ip_covers,
@@ -270,7 +270,7 @@ ActiveAdmin.register CustomersAuth do
 
           f.input :dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
-          f.input :dump_level, as: :select, include_blank: false, collection: DumpLevel.select(%i[id name]).reorder(:id)
+          f.input :dump_level_id, as: :select, include_blank: false, collection: CustomersAuth::DUMP_LEVELS.invert
           f.input :enable_audio_recording
           f.input :capacity
           f.input :allow_receive_rate_limit
@@ -367,7 +367,7 @@ ActiveAdmin.register CustomersAuth do
           row :dst_numberlist
           row :src_numberlist
 
-          row :dump_level
+          row :dump_level, &:dump_level_name
           row :enable_audio_recording
           row :capacity
           row :allow_receive_rate_limit

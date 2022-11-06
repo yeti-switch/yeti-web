@@ -110,7 +110,7 @@
 #  dst_area_id                     :integer(4)
 #  dst_country_id                  :integer(4)
 #  dst_network_id                  :integer(4)
-#  dump_level_id                   :integer(4)       default(0), not null
+#  dump_level_id                   :integer(2)
 #  failed_resource_id              :bigint(8)
 #  failed_resource_type_id         :integer(2)
 #  lega_identity_attestation_id    :integer(2)

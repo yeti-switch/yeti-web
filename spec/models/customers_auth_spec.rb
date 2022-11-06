@@ -44,7 +44,7 @@
 #  diversion_policy_id              :integer(4)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
 #  dst_numberlist_id                :integer(2)
-#  dump_level_id                    :integer(4)       default(0), not null
+#  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_id                       :integer(4)       not null
 #  lua_script_id                    :integer(2)
@@ -74,7 +74,6 @@
 #  customers_auth_diversion_policy_id_fkey           (diversion_policy_id => diversion_policy.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
 #  customers_auth_dst_number_field_id_fkey           (dst_number_field_id => customers_auth_dst_number_fields.id)
-#  customers_auth_dump_level_id_fkey                 (dump_level_id => dump_level.id)
 #  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
 #  customers_auth_lua_script_id_fkey                 (lua_script_id => lua_scripts.id)
 #  customers_auth_pop_id_fkey                        (pop_id => pops.id)

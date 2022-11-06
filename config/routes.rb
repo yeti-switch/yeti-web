@@ -79,7 +79,6 @@ Rails.application.routes.draw do
 
           jsonapi_resources :disconnect_policies
           jsonapi_resources :diversion_policies
-          jsonapi_resources :dump_levels
           jsonapi_resources :filter_types
           jsonapi_resources :pops
           jsonapi_resources :nodes

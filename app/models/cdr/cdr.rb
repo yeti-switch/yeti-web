@@ -110,7 +110,7 @@
 #  dst_area_id                     :integer(4)
 #  dst_country_id                  :integer(4)
 #  dst_network_id                  :integer(4)
-#  dump_level_id                   :integer(4)       default(0), not null
+#  dump_level_id                   :integer(2)
 #  failed_resource_id              :bigint(8)
 #  failed_resource_type_id         :integer(2)
 #  lega_identity_attestation_id    :integer(2)
@@ -153,6 +153,17 @@ class Cdr::Cdr < Cdr::Base
   self.table_name = 'cdr.cdr'
   self.primary_key = :id
 
+  DUMP_LEVEL_NO = 0
+  DUMP_LEVEL_SIP = 1
+  DUMP_LEVEL_RTP = 2
+  DUMP_LEVEL_ALL = 3
+  DUMP_LEVELS = {
+    DUMP_LEVEL_NO => 'None',
+    DUMP_LEVEL_SIP => 'SIP',
+    DUMP_LEVEL_RTP => 'RTP',
+    DUMP_LEVEL_ALL => 'Full'
+  }.freeze
+
   ADMIN_PRELOAD_LIST = %i[
     dialpeer routing_group destination disconnect_initiator
     auth_orig_transport_protocol sign_orig_transport_protocol
@@ -161,7 +172,7 @@ class Cdr::Cdr < Cdr::Base
     destination_rate_policy routing_plan vendor
     term_gw orig_gw customer_auth vendor_acc customer_acc
     dst_area customer rateplan pop src_area lnp_database
-    dump_level node sign_term_transport_protocol
+    node sign_term_transport_protocol
   ].freeze
 
   include Partitionable
@@ -190,7 +201,7 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
-  belongs_to :dump_level
+  belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id, optional: true
   belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id, optional: true
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id, optional: true
@@ -273,26 +284,12 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def has_dump?
-    log_level_name.present?
+    !dump_level_id.nil? and dump_level_id > 0
   end
 
-  def log_level_name
-    if log_full?
-      :Full
-    elsif log_rtp?
-      :RTP
-    elsif log_sip?
-      :SIP
-    end
+  def dump_level_name
+    dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
-
-  def log_full?
-    log_rtp? && log_sip?
-  end
-
-  delegate :log_rtp?, to: :dump_level
-
-  delegate :log_sip?, to: :dump_level
 
   def dump_filename
     if local_tag.present? && node_id.present?

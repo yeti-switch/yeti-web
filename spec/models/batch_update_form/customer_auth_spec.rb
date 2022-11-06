@@ -4,7 +4,7 @@ RSpec.describe BatchUpdateForm::CustomersAuth do
   let!(:routing_plan) { FactoryBot.create :routing_plan }
   let!(:lua_script) { FactoryBot.create :lua_script }
   let!(:rateplan) { FactoryBot.create :rateplan }
-  let!(:dump_level) { DumpLevel.take! }
+  let!(:dump_level_id) { CustomersAuth::DUMP_LEVEL_CAPTURE_RTP }
   let!(:numberlist) { FactoryBot.create :numberlist }
   let!(:protocol) { Equipment::TransportProtocol.last! }
   let!(:assign_params) do
@@ -18,7 +18,7 @@ RSpec.describe BatchUpdateForm::CustomersAuth do
       dst_number_max_length: '50',
       dst_numberlist_id: numberlist.id.to_s,
       src_numberlist_id: numberlist.id.to_s,
-      dump_level_id: dump_level.id.to_s,
+      dump_level_id: dump_level_id,
       rateplan_id: rateplan.id.to_s,
       routing_plan_id: routing_plan.id.to_s,
       lua_script_id: lua_script.id.to_s

@@ -398,19 +398,28 @@ RSpec.describe '#routing logic' do
         create(:gateway,
                contractor_id: vendor.id,
                enabled: true,
-               host: '1.1.2.3',
+               host: vendor_gw_host,
                allow_termination: true,
                term_append_headers_req: vendor_gw_term_append_headers_req,
                diversion_send_mode_id: vendor_gw_diversion_send_mode_id,
                diversion_domain: vendor_gw_diversion_domain,
                diversion_rewrite_rule: vendor_gw_diversion_rewrite_rule,
-               diversion_rewrite_result: vendor_gw_diversion_rewrite_result)
+               diversion_rewrite_result: vendor_gw_diversion_rewrite_result,
+               pai_send_mode_id: vendor_gw_pai_send_mode_id,
+               pai_domain: vendor_gw_pai_domain,
+               registered_aor_mode_id: vendor_gw_registered_aor_mode_id)
       }
+      let(:vendor_gw_host) { '1.1.2.3' }
       let(:vendor_gw_term_append_headers_req) { '' }
       let(:vendor_gw_diversion_send_mode_id) { 1 } # do not send
       let(:vendor_gw_diversion_domain) { nil }
       let(:vendor_gw_diversion_rewrite_rule) { nil }
       let(:vendor_gw_diversion_rewrite_result) { nil }
+
+      let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_NO_SEND }
+      let(:vendor_gw_pai_domain) { nil }
+
+      let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_NO_USE }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) { create(:account, contractor_id: customer.id, min_balance: -100_500) }
@@ -627,6 +636,157 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
             expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
             expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'Authorized, PAI send modes' do
+        let(:from_name) { '123456789' }
+
+        context 'without append headers, SIP ' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:vendor_gw_pai_send_mode_id) { 2 } # sip URI
+          let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+
+          let!(:expected_headers) {
+            [
+              "P-Asserted-Identity: <sip:123456789@#{vendor_gw_pai_domain}>"
+            ]
+          }
+
+          let!(:expected_pai_out) {
+            [
+              "<sip:123456789@#{vendor_gw_pai_domain}>"
+            ]
+          }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'without append headers, TEL' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:vendor_gw_pai_send_mode_id) { 1 } # tel: URI
+
+          let!(:expected_headers) {
+            [
+              'P-Asserted-Identity: <tel:123456789>'
+            ]
+          }
+
+          let!(:expected_pai_out) {
+            [
+              '<tel:123456789>'
+            ]
+          }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'with append headers' do
+          let(:vendor_gw_term_append_headers_req) { 'Header5: value5\r\nHeader6: value7' }
+          let(:vendor_gw_pai_send_mode_id) { 2 } # sip: URI
+          let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+
+          let!(:expected_headers) {
+            [
+              "P-Asserted-Identity: <sip:123456789@#{vendor_gw_pai_domain}>",
+              'Header5: value5',
+              'Header6: value7'
+            ]
+          }
+
+          let!(:expected_pai_out) {
+            [
+              "<sip:123456789@#{vendor_gw_pai_domain}>"
+            ]
+          }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'Authorized, registered Aor modes' do
+        let(:uri_name) { '+1234567890' }
+        let(:vendor_gw_host) { 'pai.test.domain.com' }
+
+        context 'registered aor mode - disable' do
+          let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_NO_USE }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
+            expect(subject.first[:registered_aor_id]).to eq(nil)
+            expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_NO_USE)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'registered aor mode - As is' do
+          let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_AS_IS }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
+            expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
+            expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_AS_IS)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'registered aor mode - replace userpart' do
+          let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
+            expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
+            expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART)
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end

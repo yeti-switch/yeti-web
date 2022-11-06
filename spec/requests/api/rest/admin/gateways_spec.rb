@@ -141,7 +141,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       let!(:diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(1) }
       let!(:other_diversion_send_mode) { Equipment::GatewayDiversionSendMode.find(2) }
       let!(:gateways) { create_list(:gateway, 3, diversion_send_mode: diversion_send_mode) }
-      before { create(:gateway, diversion_send_mode: other_diversion_send_mode) }
+      before { create(:gateway, diversion_send_mode: other_diversion_send_mode, diversion_domain: 'diversion.domain') }
 
       let(:request_params) do
         { filter: { 'diversion_send_mode.id': diversion_send_mode.id } }
@@ -521,7 +521,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'origination-capacity': gateway.origination_capacity,
         'preserve-anonymous-from-domain': gateway.preserve_anonymous_from_domain,
         'single-codec-in-200ok': gateway.single_codec_in_200ok,
-        'use-registered-aor': gateway.use_registered_aor,
+        'registered-aor-mode-id': gateway.registered_aor_mode_id,
         'force-symmetric-rtp': gateway.force_symmetric_rtp,
         'symmetric-rtp-nonstop': gateway.symmetric_rtp_nonstop,
         'symmetric-rtp-ignore-rtcp': gateway.symmetric_rtp_ignore_rtcp,

@@ -95,7 +95,6 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :pop, class_name: '::Pop', optional: true
   belongs_to :customer, -> { where customer: true }, class_name: '::Contractor', foreign_key: :customer_id, optional: true
   belongs_to :diversion_policy, class_name: '::DiversionPolicy', optional: true
-  belongs_to :dump_level, class_name: '::DumpLevel', optional: true
 
   belongs_to :dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :dst_numberlist_id, optional: true
   belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true

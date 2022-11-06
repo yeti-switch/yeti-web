@@ -9,7 +9,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
              :check_account_balance, :require_incoming_auth,
-             :from_domain, :to_domain, :tag_action_value, :external_id
+             :from_domain, :to_domain, :tag_action_value, :external_id, :dump_level_id
 
   paginator :paged
 
@@ -18,7 +18,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   has_one :routing_plan, class_name: 'RoutingPlan'
   has_one :gateway
   has_one :account
-  has_one :dump_level
   has_one :diversion_policy
   has_one :pop
   has_one :dst_numberlist, class_name: 'Routing::Numberlist'
@@ -35,7 +34,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   relationship_filter :routing_plan
   relationship_filter :gateway
   relationship_filter :account
-  relationship_filter :dump_level
   relationship_filter :diversion_policy
   relationship_filter :pop
   relationship_filter :dst_numberlist
@@ -78,6 +76,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :to_domain, type: :string
   ransack_filter :tag_action_value, type: :number
   ransack_filter :external_id, type: :number
+  ransack_filter :dump_level_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
@@ -101,7 +100,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       dst_number_max_length
       x_yeti_auth
       tag_action_value
-      dump_level
+      dump_level_id
       capacity
       pop
       uri_domain

@@ -45,7 +45,7 @@
 #  diversion_policy_id              :integer(4)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
 #  dst_numberlist_id                :integer(2)
-#  dump_level_id                    :integer(4)       default(0), not null
+#  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_id                       :integer(4)       not null
 #  lua_script_id                    :integer(2)
