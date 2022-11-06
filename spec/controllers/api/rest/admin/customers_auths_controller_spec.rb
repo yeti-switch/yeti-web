@@ -78,13 +78,13 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
           enabled: true,
           'reject-calls': true,
           ip: '0.0.0.0',
-          'external-id': 100
+          'external-id': 100,
+          'dump-level-id': CustomersAuth::DUMP_LEVEL_CAPTURE_SIP
         }
       end
 
       let(:relationships) do
-        { 'dump-level': wrap_relationship(:'dump-levels', 1),
-          'diversion-policy': wrap_relationship(:'diversion-policies', 1),
+        { 'diversion-policy': wrap_relationship(:'diversion-policies', 1),
           customer: wrap_relationship(:contractors, create(:contractor, customer: true).id),
           rateplan: wrap_relationship(:rateplans, create(:rateplan).id),
           'routing-plan': wrap_relationship(:'routing-plans', create(:routing_plan).id),
