@@ -112,14 +112,14 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
       end
     end
 
-    context 'with filter by dump_level.id' do
+    context 'with filter by dump_level_id' do
       let!(:dump_level_id) { CustomersAuth::DUMP_LEVEL_CAPTURE_ALL }
       let!(:other_dump_level_id) { CustomersAuth::DUMP_LEVEL_CAPTURE_RTP }
       let!(:customers_auths) { create_list(:customers_auth, 3, dump_level_id: dump_level_id) }
       before { create(:customers_auth, dump_level_id: other_dump_level_id) }
 
       let(:request_params) do
-        { filter: { 'dump_level.id': dump_level_id } }
+        { filter: { 'dump_level_id_eq': dump_level_id } }
       end
 
       it 'returns filtered gateways by dump_level_id' do

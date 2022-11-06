@@ -81,10 +81,10 @@ RSpec.describe BatchUpdateForm::CustomersAuth, :js do
       select_by_value assign_params[:src_numberlist_id], from: :src_numberlist_id
     end
 
-    if assign_params.key? :dump_level_id
-      check :Dump_level_id
-      select_by_value assign_params[:dump_level_id], from: :dump_level_id
-    end
+    #    if assign_params.key? :dump_level_id
+    #      check :Dump_level_id
+    #      select_by_value assign_params[:dump_level_id], from: :dump_level_id
+    #    end
 
     if assign_params.key? :rateplan_id
       check :Rateplan_id

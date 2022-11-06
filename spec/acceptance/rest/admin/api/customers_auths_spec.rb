@@ -55,7 +55,7 @@ RSpec.resource 'Customer Auths' do
     let(:enabled) { true }
     let(:'reject-calls') { false }
     let(:ip) { '0.0.0.0' }
-    let(:'dump-level-id') { 2 }
+    let(:'dump-level-id') { CustomersAuth::DUMP_LEVEL_CAPTURE_ALL }
     let(:'diversion-policy') { wrap_relationship(:'diversion-policies', 1) }
     let(:customer) { wrap_relationship(:contractors, create(:contractor, customer: true).id) }
     let(:rateplan) { wrap_relationship(:rateplans, create(:rateplan).id) }

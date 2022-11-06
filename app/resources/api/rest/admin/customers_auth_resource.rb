@@ -9,7 +9,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
              :check_account_balance, :require_incoming_auth,
-             :from_domain, :to_domain, :tag_action_value, :external_id
+             :from_domain, :to_domain, :tag_action_value, :external_id, :dump_level_id
 
   paginator :paged
 
