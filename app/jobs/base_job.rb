@@ -40,17 +40,4 @@ class BaseJob < Scheduler::Job::Base
   def capture_job_extra(extra)
     CaptureError.with_exception_context(extra: { type => extra }) { yield }
   end
-
-  def capture_extra
-    {
-      scheduler_job_class: self.class.name
-    }
-  end
-
-  def capture_tags
-    {
-      component: 'SchedulerJob',
-      scheduler_job_name: type
-    }
-  end
 end
