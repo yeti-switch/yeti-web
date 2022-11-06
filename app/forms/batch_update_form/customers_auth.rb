@@ -9,9 +9,9 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   attribute :src_number_max_length
   attribute :dst_number_min_length
   attribute :dst_number_max_length
+  attribute :dump_level_id, type: :integer_collection, collection: CustomersAuth::DUMP_LEVELS.invert.to_a
   attribute :dst_numberlist_id, type: :foreign_key, class_name: 'Routing::Numberlist'
   attribute :src_numberlist_id, type: :foreign_key, class_name: 'Routing::Numberlist'
-  #  attribute :dump_level_id, type: :foreign_key, class_name: 'DumpLevel'
   attribute :rateplan_id, type: :foreign_key, class_name: 'Routing::Rateplan'
   attribute :routing_plan_id, type: :foreign_key, class_name: 'Routing::RoutingPlan'
   attribute :lua_script_id, type: :foreign_key, class_name: 'System::LuaScript'
@@ -25,6 +25,9 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   validates :src_number_max_length, presence: true, if: :src_number_max_length_changed?
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
   validates :dst_number_max_length, presence: true, if: :dst_number_max_length_changed?
+
+  # TODO: Why it doesn't work??
+  # validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }
 
   # numericality
   validates :src_number_max_length, numericality: {

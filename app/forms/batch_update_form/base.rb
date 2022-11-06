@@ -132,6 +132,11 @@ class BatchUpdateForm::Base
       scope = custom_scope.call(scope) if custom_scope.is_a?(Proc)
       scope.pluck(display_name, primary_key)
     end
+
+    def form_data_integer_collection(options)
+      c = options.fetch(:collection)
+      c
+    end
   end
 
   # @param collection_sql [String]
