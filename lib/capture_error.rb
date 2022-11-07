@@ -154,6 +154,16 @@ module CaptureError
       end
     end
 
+    def with_clean_context(context)
+      return yield unless enabled?
+
+      Sentry.clone_hub_to_current_thread
+      Sentry.with_scope do |scope|
+        scope.clear_breadcrumbs
+        with_capture_context(context) { yield }
+      end
+    end
+
     private
 
     def with_capture_context(context, exception: nil)

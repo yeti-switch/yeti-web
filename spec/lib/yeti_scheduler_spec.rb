@@ -133,9 +133,7 @@ RSpec.describe YetiScheduler do
 
     shared_examples :runs_with_captured_exception do
       it 'runs with captured exception' do
-        expect(CaptureError).to receive(:capture).with(
-          raised_exception, capture_payload
-        ).once.ordered
+        expect(CaptureError).to receive(:capture).with(raised_exception).once.ordered
         subject
       end
     end
@@ -212,25 +210,6 @@ RSpec.describe YetiScheduler do
 
         context 'when handler executes with exception' do
           let(:raised_exception) { StandardError.new('test') }
-          let(:capture_payload) do
-            {
-              tags: { component: described_class.name, job_name: handler_name },
-              extra: {
-                options: {
-                  name: handler_name,
-                  handler_class: handler_class,
-                  job: job_double,
-                  time: time_double,
-                  started_at: be_within(1).of(Time.zone.now),
-                  ended_at: be_within(1).of(Time.zone.now),
-                  duration: be > 0,
-                  success: false,
-                  exception: raised_exception
-                },
-                scheduler_options: scheduler_options
-              }
-            }
-          end
           before do
             expect(handler_class).to receive(:call).with(matcher_options_before).once.ordered.and_raise(raised_exception)
             expect(ApplicationRecord.connection_pool).to receive(:release_connection).once.ordered
