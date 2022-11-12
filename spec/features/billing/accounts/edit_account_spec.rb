@@ -8,7 +8,31 @@ RSpec.describe 'Update Account', type: :feature, js: true do
   end
 
   include_context :login_as_admin
-  let!(:account) { create(:account, :filled, :vendor_weekly) }
+  let!(:account) { create(:account, :filled, :vendor_weekly, account_attrs) }
+  let(:account_attrs) { {} }
+
+  context 'without changes' do
+    let(:fill_form!) { nil }
+    let!(:contact) { FactoryBot.create(:contact, contractor: account.contractor) }
+    let(:account_attrs) do
+      super().merge balance_low_threshold: 10,
+                    balance_high_threshold: 20,
+                    send_balance_notifications_to: [contact.id]
+    end
+
+    it 'does not update anything' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Account was successfully updated.', type: :notice)
+      }.not_to change {
+        account.reload
+        [
+          account.attributes.except('updated_at'),
+          account.balance_notification_setting.attributes.except('updated_at')
+        ]
+      }
+    end
+  end
 
   context 'with name change' do
     let(:fill_form!) do
@@ -64,6 +88,49 @@ RSpec.describe 'Update Account', type: :feature, js: true do
                                   customer_invoice_period: nil,
                                   vendor_invoice_period: nil
                                 )
+    end
+  end
+
+  context 'with balance_low_threshold < balance_high_threshold' do
+    let(:fill_form!) do
+      fill_in 'Balance low threshold', with: '90.01'
+      fill_in 'Balance high threshold', with: '100.02'
+    end
+
+    it 'updates account' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Account was successfully updated.', type: :notice)
+      }.to change { Account.count }.by(0)
+
+      expect(page).to have_current_path account_path(account.id)
+
+      account.reload
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        low_threshold: 90.01.to_d,
+                                                        high_threshold: 100.02.to_d
+                                                      )
+    end
+  end
+
+  context 'with send_balance_notifications_to' do
+    let!(:contact) { FactoryBot.create(:contact, contractor: account.contractor) }
+    let(:fill_form!) do
+      fill_in_chosen 'Send balance notifications to', with: contact.email, multiple: true
+    end
+
+    it 'updates account' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Account was successfully updated.', type: :notice)
+      }.to change { Account.count }.by(0)
+
+      expect(page).to have_current_path account_path(account.id)
+
+      account.reload
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        send_to: [contact.id]
+                                                      )
     end
   end
 

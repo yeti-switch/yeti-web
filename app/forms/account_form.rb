@@ -38,6 +38,10 @@ class AccountForm < ProxyForm
   before_save :apply_customer_invoice_period
   before_save :sync_balance_notification_setting
 
+  def send_invoices_to=(value)
+    model.send_invoices_to = Array.wrap(value).reject(&:blank?).presence
+  end
+
   private
 
   def apply_customer_invoice_period

@@ -10,6 +10,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
   include_context :login_as_admin
   include_context :timezone_helpers
   let!(:customer) { create(:customer) }
+  let!(:contact) { create(:contact, contractor: customer) }
   let!(:vendor) { create(:vendor) }
   let(:fill_form!) do
     fill_in 'Name', with: form_params[:name]
@@ -21,6 +22,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     fill_in 'Max call duration', with: form_params[:max_call_duration]
     fill_in 'Balance low threshold', with: form_params[:balance_low_threshold]
     fill_in 'Balance high threshold', with: form_params[:balance_high_threshold]
+    fill_in_chosen 'Send balance notifications to', with: form_params[:send_balance_notifications_to].email, multiple: true
     fill_in 'Origination capacity', with: form_params[:origination_capacity]
     fill_in 'Termination capacity', with: form_params[:termination_capacity]
     fill_in 'Total capacity', with: form_params[:total_capacity]
@@ -37,6 +39,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
       max_call_duration: 100_500,
       balance_low_threshold: -90,
       balance_high_threshold: 90,
+      send_balance_notifications_to: contact,
       origination_capacity: 100,
       termination_capacity: 50,
       total_capacity: 101,
@@ -77,7 +80,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
                                                         low_threshold: form_params[:balance_low_threshold],
                                                         high_threshold: form_params[:balance_high_threshold],
-                                                        send_to: nil
+                                                        send_to: [form_params[:send_balance_notifications_to].id]
                                                       )
     end
   end
@@ -171,7 +174,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
                                                         low_threshold: form_params[:balance_low_threshold],
                                                         high_threshold: form_params[:balance_high_threshold],
-                                                        send_to: nil
+                                                        send_to: [form_params[:send_balance_notifications_to].id]
                                                       )
     end
   end
@@ -225,7 +228,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
                                                         low_threshold: form_params[:balance_low_threshold],
                                                         high_threshold: form_params[:balance_high_threshold],
-                                                        send_to: nil
+                                                        send_to: [form_params[:send_balance_notifications_to].id]
                                                       )
     end
   end
@@ -280,7 +283,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
                                                         low_threshold: form_params[:balance_low_threshold],
                                                         high_threshold: form_params[:balance_high_threshold],
-                                                        send_to: nil
+                                                        send_to: [form_params[:send_balance_notifications_to].id]
                                                       )
     end
   end
