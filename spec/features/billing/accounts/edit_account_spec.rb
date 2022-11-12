@@ -31,6 +31,11 @@ RSpec.describe 'Update Account', type: :feature, js: true do
           account.balance_notification_setting.attributes.except('updated_at')
         ]
       }
+      expect(account.balance_notification_setting).to have_attributes(
+                                                        low_threshold: 10,
+                                                        high_threshold: 20,
+                                                        send_to: [contact.id]
+                                                      )
     end
   end
 
