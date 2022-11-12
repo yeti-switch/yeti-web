@@ -34,9 +34,10 @@ class AccountForm < ProxyForm
 
   validate :validate_balance_thresholds
 
+  after_initialize :assign_from_balance_notification_setting
   before_save :apply_vendor_invoice_period
   before_save :apply_customer_invoice_period
-  before_save :sync_balance_notification_setting
+  after_save :save_balance_notification_setting
 
   def send_invoices_to=(value)
     model.send_invoices_to = Array.wrap(value).reject(&:blank?).presence
@@ -71,9 +72,16 @@ class AccountForm < ProxyForm
     end
   end
 
-  def sync_balance_notification_setting
-    setting = model.balance_notification_setting || model.build_balance_notification_setting
-    setting.assign_attributes(
+  def assign_from_balance_notification_setting
+    model.build_balance_notification_setting if model.balance_notification_setting.nil?
+    self.balance_low_threshold = model.balance_notification_setting.low_threshold
+    self.balance_high_threshold = model.balance_notification_setting.high_threshold
+    self.send_balance_notifications_to = model.balance_notification_setting.send_to
+  end
+
+  def save_balance_notification_setting
+    model.build_balance_notification_setting if model.balance_notification_setting.nil?
+    model.balance_notification_setting.update!(
       low_threshold: balance_low_threshold,
       high_threshold: balance_high_threshold,
       send_to: send_balance_notifications_to.reject(&:nil?).presence

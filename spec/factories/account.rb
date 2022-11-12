@@ -51,8 +51,9 @@ FactoryBot.define do
       customer_invoice_period_id { Billing::InvoicePeriod::WEEKLY_ID }
     end
 
-    after(:build) do |record, ev|
-      record.build_balance_notification_setting(
+    after(:create) do |record, ev|
+      record.build_balance_notification_setting if record.balance_notification_setting.nil?
+      record.balance_notification_setting.update!(
         state_id: ev.threshold_state_id,
         low_threshold: ev.balance_low_threshold,
         high_threshold: ev.balance_high_threshold,
