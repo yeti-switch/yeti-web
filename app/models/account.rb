@@ -69,6 +69,7 @@ class Account < ApplicationRecord
   has_one :balance_notification_setting,
           class_name: 'AccountBalanceNotificationSetting',
           inverse_of: :account,
+          autosave: true,
           dependent: :destroy
 
   include WithPaperTrail

@@ -35,7 +35,7 @@ module AdminApi
     before_save :apply_customer_invoice_period
 
     def send_invoices_to=(value)
-      model.send_invoices_to = Array.wrap(value)
+      model.send_invoices_to = Array.wrap(value).reject(&:blank?).presence
     end
 
     def send_balance_notifications_to=(value)
