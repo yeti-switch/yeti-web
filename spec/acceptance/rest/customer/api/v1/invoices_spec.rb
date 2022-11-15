@@ -15,7 +15,7 @@ RSpec.resource 'Invoices', document: :customer_v1 do
   let!(:account) { create(:account, contractor: customer) }
 
   get '/api/rest/customer/v1/invoices' do
-    jsonapi_filters Api::Rest::Customer::V1::AccountResource._allowed_filters
+    jsonapi_filters Api::Rest::Customer::V1::InvoiceResource._allowed_filters
 
     before do
       create_list(:invoice, 2, :customer, :manual, :approved, account: account)
