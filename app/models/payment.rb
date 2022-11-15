@@ -7,12 +7,14 @@
 #  id         :bigint(8)        not null, primary key
 #  amount     :decimal(, )      not null
 #  notes      :string
+#  uuid       :uuid             not null
 #  created_at :datetime         not null
 #  account_id :integer(4)       not null
 #
 # Indexes
 #
 #  payments_account_id_idx  (account_id)
+#  payments_uuid_key        (uuid) UNIQUE
 #
 # Foreign Keys
 #
