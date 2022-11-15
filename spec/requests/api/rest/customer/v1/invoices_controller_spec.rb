@@ -155,6 +155,36 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
         include_examples :responds_with_filtered_records
       end
     end
+
+    context 'with include account' do
+      let(:json_api_request_query) do
+        { include: 'account' }
+      end
+
+      it 'responds with included accounts' do
+        subject
+        invoices.each do |invoice|
+          data = response_json[:data].detect { |item| item[:id] == invoice.uuid }
+          expect(data[:relationships][:account][:data]).to eq(
+                                                             id: invoice.account.uuid,
+                                                             type: 'accounts'
+                                                           )
+        end
+        invoices_accounts = invoices.map(&:account).uniq
+        expect(response_json[:included]).to match_array(
+                                              invoices_accounts.map do |account|
+                                                hash_including(id: account.uuid, type: 'accounts')
+                                              end
+                                            )
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].map { |data| data[:id] }
+        expect(actual_ids).to match_array invoices.map(&:uuid)
+      end
+    end
   end
 
   describe 'GET /api/rest/customer/v1/invoices/{id}' do

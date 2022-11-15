@@ -36,7 +36,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :destination_prefix
 
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
-  has_one :account, class_name: 'Account'
+  has_one :account, class_name: 'Account', relation_name: :customer_acc, foreign_key_on: :related
 
   filter :is_last_cdr, default: true
 

@@ -328,6 +328,74 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       it_behaves_like :jsonapi_filters_by_number_field, :customer_duration
       it_behaves_like :jsonapi_filters_by_number_field, :vendor_duration
     end
+
+    context 'with include account' do
+      let!(:cdrs) do
+        create_list(:cdr, 2, customer_acc: account)
+        Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).to_a
+      end
+      let(:json_api_request_query) do
+        { include: 'account' }
+      end
+
+      it 'responds with included accounts' do
+        subject
+        cdrs.each do |cdr|
+          data = response_json[:data].detect { |item| item[:id] == cdr.uuid }
+          expect(data[:relationships][:account][:data]).to eq(
+                                                             id: cdr.customer_acc.uuid,
+                                                             type: 'accounts'
+                                                           )
+        end
+        cdrs_accounts = cdrs.map(&:customer_acc).uniq
+        expect(response_json[:included]).to match_array(
+                                              cdrs_accounts.map do |account|
+                                                hash_including(id: account.uuid, type: 'accounts')
+                                              end
+                                            )
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].map { |data| data[:id] }
+        expect(actual_ids).to match_array cdrs.map(&:uuid)
+      end
+    end
+
+    context 'with include auth-orig-transport-protocol' do
+      let!(:cdrs) do
+        create_list(:cdr, 2, customer_acc: account)
+        Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).to_a
+      end
+      let(:json_api_request_query) do
+        { include: 'auth-orig-transport-protocol' }
+      end
+
+      it 'responds with included transport-protocols' do
+        subject
+        cdrs.each do |cdr|
+          data = response_json[:data].detect { |item| item[:id] == cdr.uuid }
+          expect(data[:relationships][:'auth-orig-transport-protocol'][:data]).to eq(
+                                                             id: cdr.auth_orig_transport_protocol.id.to_s,
+                                                             type: 'transport-protocols'
+                                                           )
+        end
+        cdrs_transport_protocols = cdrs.map(&:auth_orig_transport_protocol).uniq
+        expect(response_json[:included]).to match_array(
+                                              cdrs_transport_protocols.map do |transport_protocol|
+                                                hash_including(id: transport_protocol.id.to_s, type: 'transport-protocols')
+                                              end
+                                            )
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].map { |data| data[:id] }
+        expect(actual_ids).to match_array cdrs.map(&:uuid)
+      end
+    end
   end
 
   describe 'GET /api/rest/customer/v1/cdrs/{id}' do
