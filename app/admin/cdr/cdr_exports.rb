@@ -166,12 +166,18 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                required: false
 
       ff.input :src_prefix_in_contains, required: false
+      ff.input :src_prefix_in_eq, required: false
       ff.input :src_prefix_routing_contains, required: false
+      ff.input :src_prefix_routing_eq, required: false
       ff.input :src_prefix_out_contains, required: false
+      ff.input :src_prefix_out_eq, required: false
 
       ff.input :dst_prefix_in_contains, required: false
+      ff.input :dst_prefix_in_eq, required: false
       ff.input :dst_prefix_routing_contains, required: false
+      ff.input :dst_prefix_routing_eq, required: false
       ff.input :dst_prefix_out_contains, required: false
+      ff.input :dst_prefix_out_eq, required: false
 
       ff.input :src_country_id_eq,
                as: :select,

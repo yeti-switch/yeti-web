@@ -42,11 +42,17 @@ RSpec.describe 'Create new CDR export', js: true do
           time_start_lteq: '2018-03-01T00:00:00.000Z',
           customer_acc_id_eq: account.id,
           src_prefix_in_contains: '',
+          src_prefix_in_eq: '',
           src_prefix_routing_contains: '',
+          src_prefix_routing_eq: '',
           src_prefix_out_contains: '',
+          src_prefix_out_eq: '',
           dst_prefix_in_contains: '',
+          dst_prefix_in_eq: '',
           dst_prefix_routing_contains: '',
-          dst_prefix_out_contains: ''
+          dst_prefix_routing_eq: '',
+          dst_prefix_out_contains: '',
+          dst_prefix_out_eq: ''
         )
     end
   end
@@ -80,11 +86,17 @@ RSpec.describe 'Create new CDR export', js: true do
           time_start_lteq: '2018-03-01T00:00:00.000Z',
           customer_acc_id_eq: account.id,
           src_prefix_in_contains: '',
+          src_prefix_in_eq: '',
           src_prefix_routing_contains: '',
+          src_prefix_routing_eq: '',
           src_prefix_out_contains: '',
+          src_prefix_out_eq: '',
           dst_prefix_in_contains: '',
+          dst_prefix_in_eq: '',
           dst_prefix_routing_contains: '',
-          dst_prefix_out_contains: ''
+          dst_prefix_routing_eq: '',
+          dst_prefix_out_contains: '',
+          dst_prefix_out_eq: ''
         )
     end
   end
@@ -116,11 +128,17 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Customer auth external id eq', with: '1235'
         fill_in_chosen 'Customer auth id eq', with: "#{customer_auth.name} | #{customer_auth.id}"
         fill_in 'Src prefix in contains', with: 'src_prefix_in_test'
+        fill_in 'Src prefix in eq', with: 'src_prefix_in_test'
         fill_in 'Src prefix routing contains', with: 'src_prefix_routing_test'
+        fill_in 'Src prefix routing eq', with: 'src_prefix_routing_test'
         fill_in 'Src prefix out contains', with: 'src_prefix_out_test'
+        fill_in 'Src prefix out eq', with: 'src_prefix_out_test'
         fill_in 'Dst prefix in contains', with: 'dst_prefix_in_test'
+        fill_in 'Dst prefix in eq', with: 'dst_prefix_in_test'
         fill_in 'Dst prefix routing contains', with: 'dst_prefix_routing_test'
+        fill_in 'Dst prefix routing eq', with: 'dst_prefix_routing_test'
         fill_in 'Dst prefix out contains', with: 'dst_prefix_out_test'
+        fill_in 'Dst prefix out eq', with: 'dst_prefix_out_test'
         fill_in_chosen 'Src country id eq', with: countries.first.name
         fill_in_chosen 'Dst country id eq', with: countries.last.name
         fill_in 'Routing tag ids include', with: 2
@@ -178,11 +196,17 @@ RSpec.describe 'Create new CDR export', js: true do
                            customer_auth_external_id_eq: 1235,
                            customer_auth_id_eq: customer_auth.id,
                            src_prefix_in_contains: 'src_prefix_in_test',
+                           src_prefix_in_eq: 'src_prefix_in_test',
                            src_prefix_routing_contains: 'src_prefix_routing_test',
+                           src_prefix_routing_eq: 'src_prefix_routing_test',
                            src_prefix_out_contains: 'src_prefix_out_test',
+                           src_prefix_out_eq: 'src_prefix_out_test',
                            dst_prefix_in_contains: 'dst_prefix_in_test',
+                           dst_prefix_in_eq: 'dst_prefix_in_test',
                            dst_prefix_routing_contains: 'dst_prefix_routing_test',
+                           dst_prefix_routing_eq: 'dst_prefix_routing_test',
                            dst_prefix_out_contains: 'dst_prefix_out_test',
+                           dst_prefix_out_eq: 'dst_prefix_out_test',
                            src_country_id_eq: countries.first.id,
                            dst_country_id_eq: countries.last.id,
                            routing_tag_ids_include: 2,
@@ -227,11 +251,17 @@ RSpec.describe 'Create new CDR export', js: true do
                            time_start_gteq: '2018-01-01T00:00:00.000Z',
                            time_start_lt: '2018-03-01T00:00:00.000Z',
                            src_prefix_in_contains: '',
+                           src_prefix_in_eq: '',
                            src_prefix_routing_contains: '',
+                           src_prefix_routing_eq: '',
                            src_prefix_out_contains: '',
+                           src_prefix_out_eq: '',
                            dst_prefix_in_contains: '',
+                           dst_prefix_in_eq: '',
                            dst_prefix_routing_contains: '',
-                           dst_prefix_out_contains: ''
+                           dst_prefix_routing_eq: '',
+                           dst_prefix_out_contains: '',
+                           dst_prefix_out_eq: ''
                          )
     end
   end

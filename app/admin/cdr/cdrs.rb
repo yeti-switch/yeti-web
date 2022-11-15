@@ -65,9 +65,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   account_filter :vendor_acc_id_eq, label: 'Vendor account'
 
   filter :customer_auth, collection: proc { CustomersAuth.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
-  filter :src_prefix_routing
+  filter :src_prefix_routing, filters: %i[equals contains starts_with ends_with]
   filter :src_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'chosen' }
-  filter :dst_prefix_routing
+  filter :dst_prefix_routing, filters: %i[equals contains starts_with ends_with]
   filter :dst_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :dst_country, input_html: { class: 'chosen' }
   filter :status, as: :select, collection: proc { [['FAILURE', false], ['SUCCESS', true]] }
@@ -113,19 +113,19 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   filter :src_prefix_in, as: :string_eq
   filter :dst_prefix_in, as: :string_eq
-  filter :src_prefix_out
-  filter :dst_prefix_out
-  filter :lrn
+  filter :src_prefix_out, filters: %i[equals contains starts_with ends_with]
+  filter :dst_prefix_out, filters: %i[equals contains starts_with ends_with]
+  filter :lrn, filters: %i[equals contains starts_with ends_with]
   filter :diversion_in, as: :string_eq
   filter :diversion_out, as: :string_eq
   filter :src_name_in, as: :string_eq
   filter :src_name_out, as: :string_eq
   filter :node, input_html: { class: 'chosen' }
   filter :pop, input_html: { class: 'chosen' }
-  filter :local_tag
-  filter :legb_local_tag
-  filter :orig_call_id, as: :string
-  filter :term_call_id, as: :string
+  filter :local_tag, filters: %i[equals contains starts_with ends_with]
+  filter :legb_local_tag, filters: %i[equals contains starts_with ends_with]
+  filter :orig_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
+  filter :term_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
   filter :routing_attempt
   filter :customer_price
   filter :vendor_price
@@ -138,10 +138,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          as: :string,
          input_html: { class: 'search_filter_string' },
          label: I18n.t('activerecord.attributes.cdr.auth_orig_ip')
-  filter :sign_orig_ip
-  filter :sign_orig_local_ip
-  filter :sign_term_local_ip
-  filter :sign_term_ip
+  filter :sign_orig_ip, filters: %i[equals contains starts_with ends_with]
+  filter :sign_orig_local_ip, filters: %i[equals contains starts_with ends_with]
+  filter :sign_term_local_ip, filters: %i[equals contains starts_with ends_with]
+  filter :sign_term_ip, filters: %i[equals contains starts_with ends_with]
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
 
