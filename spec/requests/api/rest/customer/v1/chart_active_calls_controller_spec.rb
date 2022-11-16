@@ -57,12 +57,12 @@ RSpec.describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :reque
             'from-time': Time.parse('2019-01-01 00:00:00').iso8601(3),
             'to-time': Time.parse('2019-01-02 00:00:00').iso8601(3),
             'originated-calls': [
-              { y: 10, x: Time.parse('2019-01-01 00:00:01').utc.to_s },
-              { y: 17, x: Time.parse('2019-01-01 15:15:00').utc.to_s }
+              { y: 10, x: Time.parse('2019-01-01 00:00:01').utc.to_s(:iso8601) },
+              { y: 17, x: Time.parse('2019-01-01 15:15:00').utc.to_s(:iso8601) }
             ],
             'terminated-calls': [
-              { y: 15, x: Time.parse('2019-01-01 00:00:01').utc.to_s },
-              { y: 13, x: Time.parse('2019-01-01 15:15:00').utc.to_s }
+              { y: 15, x: Time.parse('2019-01-01 00:00:01').utc.to_s(:iso8601) },
+              { y: 13, x: Time.parse('2019-01-01 15:15:00').utc.to_s(:iso8601) }
             ]
           }
         end

@@ -37,7 +37,7 @@ module JsonapiModel
       @terminated_calls = []
 
       values.each do |(created_at, terminated_count, originated_count)|
-        created_at_formatted = created_at.to_s
+        created_at_formatted = created_at.to_s(:iso8601)
         originated_calls.push(y: originated_count, x: created_at_formatted)
         terminated_calls.push(y: terminated_count, x: created_at_formatted)
       end
