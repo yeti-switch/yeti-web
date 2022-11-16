@@ -48,9 +48,11 @@ ActiveAdmin.register Payment do
                               end
                             }
     column :notes
+    column :uuid
   end
 
   filter :id
+  filter :uuid_equals, label: 'UUID'
   filter :created_at, as: :date_time_range
   account_filter :account_id_eq
   filter :amount

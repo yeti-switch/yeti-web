@@ -17,7 +17,7 @@ class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseRe
              :last_successful_call_at,
              :has_pdf
 
-  has_one :account
+  has_one :account, foreign_key_on: :related
 
   ransack_filter :reference, type: :string
   ransack_filter :start_date, type: :datetime

@@ -21918,7 +21918,8 @@ CREATE TABLE billing.payments (
     amount numeric NOT NULL,
     notes character varying,
     id bigint NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -27338,6 +27339,14 @@ ALTER TABLE ONLY billing.payments
 
 
 --
+-- Name: payments payments_uuid_key; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.payments
+    ADD CONSTRAINT payments_uuid_key UNIQUE (uuid);
+
+
+--
 -- Name: area_prefixes area_prefixes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30568,7 +30577,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30679,6 +30689,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221025105955'),
 ('20221025175803'),
 ('20221105134455'),
-('20221105203239');
+('20221105203239'),
+('20221115180256');
 
 
