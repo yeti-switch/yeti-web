@@ -2,6 +2,8 @@
 
 RSpec.describe 'Create new CDR export', js: true do
   subject do
+    visit new_cdr_export_path
+    fill_form!
     click_submit 'Create Cdr export'
   end
 
@@ -13,9 +15,7 @@ RSpec.describe 'Create new CDR export', js: true do
   end
 
   context 'with all filled attributes' do
-    before do
-      visit new_cdr_export_path
-
+    let(:fill_form!) do
       fill_in_chosen 'Fields', with: 'success', multiple: true
       fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
       fill_in_chosen 'Customer acc id eq', with: account.name, ajax: true
@@ -40,19 +40,7 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(filters).to match(
           time_start_gteq: '2018-01-01T00:00:00.000Z',
           time_start_lteq: '2018-03-01T00:00:00.000Z',
-          customer_acc_id_eq: account.id,
-          src_prefix_in_contains: '',
-          src_prefix_in_eq: '',
-          src_prefix_routing_contains: '',
-          src_prefix_routing_eq: '',
-          src_prefix_out_contains: '',
-          src_prefix_out_eq: '',
-          dst_prefix_in_contains: '',
-          dst_prefix_in_eq: '',
-          dst_prefix_routing_contains: '',
-          dst_prefix_routing_eq: '',
-          dst_prefix_out_contains: '',
-          dst_prefix_out_eq: ''
+          customer_acc_id_eq: account.id
         )
     end
   end
@@ -60,8 +48,9 @@ RSpec.describe 'Create new CDR export', js: true do
   context 'with inherited fields' do
     before do
       create :cdr_export, :completed, fields: %w[id success customer_id]
-      visit new_cdr_export_path
+    end
 
+    let(:fill_form!) do
       fill_in_chosen 'Customer acc id eq', with: account.name, ajax: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'
@@ -84,19 +73,7 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(filters).to match(
           time_start_gteq: '2018-01-01T00:00:00.000Z',
           time_start_lteq: '2018-03-01T00:00:00.000Z',
-          customer_acc_id_eq: account.id,
-          src_prefix_in_contains: '',
-          src_prefix_in_eq: '',
-          src_prefix_routing_contains: '',
-          src_prefix_routing_eq: '',
-          src_prefix_out_contains: '',
-          src_prefix_out_eq: '',
-          dst_prefix_in_contains: '',
-          dst_prefix_in_eq: '',
-          dst_prefix_routing_contains: '',
-          dst_prefix_routing_eq: '',
-          dst_prefix_out_contains: '',
-          dst_prefix_out_eq: ''
+          customer_acc_id_eq: account.id
         )
     end
   end
@@ -109,9 +86,7 @@ RSpec.describe 'Create new CDR export', js: true do
     let!(:gateway1) { create(:gateway) }
     let!(:gateway2) { create(:gateway) }
 
-    before do
-      visit new_cdr_export_path
-
+    let(:fill_form!) do
       within_form_for do
         fill_in_chosen 'Fields', with: 'success', multiple: true
         fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
@@ -223,10 +198,38 @@ RSpec.describe 'Create new CDR export', js: true do
     end
   end
 
-  context 'with filter time_start_lt' do
-    before do
-      visit new_cdr_export_path
+  context 'with only required filters' do
+    let(:fill_form!) do
+      within_form_for do
+        fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
+        fill_in 'Time start gteq', with: '2018-01-01'
+        fill_in 'Time start lteq', with: '2018-03-01'
+      end
+    end
 
+    it 'creates correct cdr_export' do
+      subject
+      expect(page).to have_text('Cdr export was successfully created.')
+
+      cdr_export = CdrExport.last!
+      expect(page).to have_current_path cdr_export_path(cdr_export)
+
+      expect(cdr_export).to have_attributes(
+                              callback_url: '',
+                              fields: %w[id],
+                              status: 'Pending',
+                              filters: a_kind_of(CdrExport::FiltersModel)
+                            )
+      filters = cdr_export.filters.as_json.symbolize_keys
+      expect(filters).to match(
+                           time_start_gteq: '2018-01-01T00:00:00.000Z',
+                           time_start_lteq: '2018-03-01T00:00:00.000Z'
+                         )
+    end
+  end
+
+  context 'with filter time_start_lt' do
+    let(:fill_form!) do
       fill_in_chosen 'Fields', with: 'success', multiple: true
       fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
       fill_in 'Time start gteq', with: '2018-01-01'
@@ -249,27 +252,13 @@ RSpec.describe 'Create new CDR export', js: true do
       filters = cdr_export.filters.as_json.symbolize_keys
       expect(filters).to match(
                            time_start_gteq: '2018-01-01T00:00:00.000Z',
-                           time_start_lt: '2018-03-01T00:00:00.000Z',
-                           src_prefix_in_contains: '',
-                           src_prefix_in_eq: '',
-                           src_prefix_routing_contains: '',
-                           src_prefix_routing_eq: '',
-                           src_prefix_out_contains: '',
-                           src_prefix_out_eq: '',
-                           dst_prefix_in_contains: '',
-                           dst_prefix_in_eq: '',
-                           dst_prefix_routing_contains: '',
-                           dst_prefix_routing_eq: '',
-                           dst_prefix_out_contains: '',
-                           dst_prefix_out_eq: ''
+                           time_start_lt: '2018-03-01T00:00:00.000Z'
                          )
     end
   end
 
   context 'with incorrect filters' do
-    before do
-      visit new_cdr_export_path
-
+    let(:fill_form!) do
       fill_in_chosen 'Fields', with: 'success', multiple: true
       fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
     end
@@ -284,9 +273,7 @@ RSpec.describe 'Create new CDR export', js: true do
   end
 
   context 'without fields' do
-    before do
-      visit new_cdr_export_path
-
+    let(:fill_form!) do
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01', exact: true
     end
