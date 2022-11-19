@@ -36,18 +36,18 @@ class CdrExport < ApplicationRecord
     attribute :customer_auth_id_eq, :integer
     attribute :customer_auth_external_id_eq, :integer
     attribute :failed_resource_type_id_eq, :integer
-    attribute :src_prefix_in_contains, :string
-    attribute :src_prefix_in_eq, :string
-    attribute :dst_prefix_in_contains, :string
-    attribute :dst_prefix_in_eq, :string
-    attribute :src_prefix_routing_contains, :string
-    attribute :src_prefix_routing_eq, :string
-    attribute :dst_prefix_routing_contains, :string
-    attribute :dst_prefix_routing_eq, :string
-    attribute :src_prefix_out_contains, :string
-    attribute :src_prefix_out_eq, :string
-    attribute :dst_prefix_out_contains, :string
-    attribute :dst_prefix_out_eq, :string
+    attribute :src_prefix_in_contains, :string_presence
+    attribute :src_prefix_in_eq, :string_presence
+    attribute :dst_prefix_in_contains, :string_presence
+    attribute :dst_prefix_in_eq, :string_presence
+    attribute :src_prefix_routing_contains, :string_presence
+    attribute :src_prefix_routing_eq, :string_presence
+    attribute :dst_prefix_routing_contains, :string_presence
+    attribute :dst_prefix_routing_eq, :string_presence
+    attribute :src_prefix_out_contains, :string_presence
+    attribute :src_prefix_out_eq, :string_presence
+    attribute :dst_prefix_out_contains, :string_presence
+    attribute :dst_prefix_out_eq, :string_presence
     attribute :src_country_id_eq, :integer
     attribute :dst_country_id_eq, :integer
     attribute :routing_tag_ids_include, :integer
