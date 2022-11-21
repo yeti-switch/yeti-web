@@ -7,7 +7,7 @@ module JsonapiModel
     attribute :account_id, :string
     attribute :customer
     attribute :from_time, :datetime, default: proc { 24.hours.ago }
-    attribute :to_time, :datetime, default: proc { Time.now }
+    attribute :to_time, :datetime, default: proc { Time.current }
 
     attr_reader :originated_calls, :terminated_calls
 
@@ -37,7 +37,7 @@ module JsonapiModel
       @terminated_calls = []
 
       values.each do |(created_at, terminated_count, originated_count)|
-        created_at_formatted = created_at.to_s(:iso8601)
+        created_at_formatted = created_at.in_time_zone.iso8601(3)
         originated_calls.push(y: originated_count, x: created_at_formatted)
         terminated_calls.push(y: terminated_count, x: created_at_formatted)
       end

@@ -54,15 +54,15 @@ RSpec.describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :reque
         let(:json_api_record_id) { be_present }
         let(:json_api_record_attributes) do
           {
-            'from-time': Time.parse('2019-01-01 00:00:00').iso8601(3),
-            'to-time': Time.parse('2019-01-02 00:00:00').iso8601(3),
+            'from-time': Time.zone.parse('2019-01-01 00:00:00').iso8601(3),
+            'to-time': Time.zone.parse('2019-01-02 00:00:00').iso8601(3),
             'originated-calls': [
-              { y: 10, x: Time.parse('2019-01-01 00:00:01').utc.to_s(:iso8601) },
-              { y: 17, x: Time.parse('2019-01-01 15:15:00').utc.to_s(:iso8601) }
+              { y: 10, x: Time.zone.parse('2019-01-01 00:00:01').iso8601(3) },
+              { y: 17, x: Time.zone.parse('2019-01-01 15:15:00').iso8601(3) }
             ],
             'terminated-calls': [
-              { y: 15, x: Time.parse('2019-01-01 00:00:01').utc.to_s(:iso8601) },
-              { y: 13, x: Time.parse('2019-01-01 15:15:00').utc.to_s(:iso8601) }
+              { y: 15, x: Time.zone.parse('2019-01-01 00:00:01').iso8601(3) },
+              { y: 13, x: Time.zone.parse('2019-01-01 15:15:00').iso8601(3) }
             ]
           }
         end

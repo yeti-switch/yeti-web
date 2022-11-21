@@ -10,7 +10,7 @@ module JsonapiModel
     attribute :account_id, :string
     attribute :customer
     attribute :from_time, :datetime, default: proc { 24.hours.ago }
-    attribute :to_time, :datetime, default: proc { Time.now }
+    attribute :to_time, :datetime, default: proc { Time.current }
 
     attr_reader :cps
 
@@ -38,7 +38,7 @@ module JsonapiModel
       values = scope.pluck(TIME_START_SQL, CPS_SQL)
 
       @cps = values.map do |(time_start, cps)|
-        { y: cps, x: time_start.to_s(:iso8601) }
+        { y: cps, x: time_start.in_time_zone.iso8601(3) }
       end
     end
   end
