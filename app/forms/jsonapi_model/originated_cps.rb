@@ -31,7 +31,7 @@ module JsonapiModel
     def _save
       scope = Cdr::Cdr
               .where(customer_acc_id: account.id, is_last_cdr: true)
-              .where('time_start BETWEEN ? AND ?', from_time, to_time)
+              .where('time_start BETWEEN ? AND ?', from_time.in_time_zone, to_time.in_time_zone)
               .group(TIME_START_SQL)
               .order(TIME_START_SQL)
 

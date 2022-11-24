@@ -28,7 +28,7 @@ module JsonapiModel
     def _save
       scope = Stats::ActiveCallAccount
               .where(account_id: account.id)
-              .where('created_at BETWEEN ? AND ?', from_time, to_time)
+              .where('created_at BETWEEN ? AND ?', from_time.in_time_zone, to_time.in_time_zone)
               .order('created_at')
 
       values = scope.pluck(:created_at, :terminated_count, :originated_count)
