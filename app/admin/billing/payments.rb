@@ -12,6 +12,7 @@ ActiveAdmin.register Payment do
   scope :yesterday
 
   acts_as_export :id,
+                 :uuid,
                  :created_at,
                  [:account_name, proc { |row| row.account.try(:name) }],
                  :amount,
