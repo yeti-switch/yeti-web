@@ -19,9 +19,11 @@ RSpec.describe 'Export Payments', type: :feature do
     expect(subject).to match_array(
       [
         ['Id', item.id.to_s],
+        ['Uuid', item.uuid.to_s],
         ['Account name', item.account.name],
         ['Amount', item.amount.to_s],
         ['Notes', item.notes.to_s],
+        ['Private notes', item.private_notes.to_s],
         ['Created at', item.created_at.to_s]
       ]
     )

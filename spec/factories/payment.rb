@@ -5,6 +5,7 @@ FactoryBot.define do
     amount { 10 }
     association :account
     notes { 'notes text' }
+    private_notes { 'private notes' }
 
     after(:create, &:reload) # to populate uuid
   end

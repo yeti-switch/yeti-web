@@ -21919,7 +21919,8 @@ CREATE TABLE billing.payments (
     notes character varying,
     id bigint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    private_notes character varying
 );
 
 
@@ -30577,8 +30578,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30690,6 +30690,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221025175803'),
 ('20221105134455'),
 ('20221105203239'),
-('20221115180256');
+('20221115180256'),
+('20221126105630');
 
 

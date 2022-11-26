@@ -6,16 +6,18 @@ ActiveAdmin.register Payment do
   config.batch_actions = false
   actions :index, :create, :new, :show
 
-  permit_params :account_id, :amount, :notes
+  permit_params :account_id, :amount, :notes, :private_notes
   scope :all, default: true
   scope :today
   scope :yesterday
 
   acts_as_export :id,
+                 :uuid,
                  :created_at,
                  [:account_name, proc { |row| row.account.try(:name) }],
                  :amount,
-                 :notes
+                 :notes,
+                 :private_notes
 
   controller do
     def scoped_collection
@@ -29,6 +31,7 @@ ActiveAdmin.register Payment do
     f.inputs form_title do
       f.account_input :account_id
       f.input :amount
+      f.input :private_notes
       f.input :notes
     end
     f.actions
@@ -47,6 +50,7 @@ ActiveAdmin.register Payment do
                                 @footer_data[:total_amount]
                               end
                             }
+    column :private_notes
     column :notes
     column :uuid
   end
@@ -56,5 +60,18 @@ ActiveAdmin.register Payment do
   filter :created_at, as: :date_time_range
   account_filter :account_id_eq
   filter :amount
+  filter :private_notes
   filter :notes
+
+  show do |_s|
+    attributes_table do
+      row :id
+      row :uuid
+      row :created_at
+      row :account
+      row :amount
+      row :private_notes
+      row :notes
+    end
+  end
 end

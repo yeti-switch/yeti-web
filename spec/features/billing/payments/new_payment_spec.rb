@@ -15,7 +15,8 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
           fill_in_chosen('Account', with: @account.display_name, ajax: true)
         },
         amount: 100_500,
-        notes: 'Some notes'
+        notes: 'Some notes',
+        private_notes: 'Some private notes'
       }
     end
 
@@ -26,7 +27,8 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
       expect(Payment.last).to have_attributes(
         account_id: @account.id,
         amount: attributes[:amount],
-        notes: attributes[:notes]
+        notes: attributes[:notes],
+        private_notes: attributes[:private_notes]
       )
     end
 
