@@ -17,7 +17,8 @@ class Api::Rest::Admin::BaseController < Api::RestController
     {
       id: current_admin_user.id,
       username: current_admin_user.username,
-      class: 'AdminUser'
+      class: 'AdminUser',
+      ip_address: '{{auto}}'
     }
   end
 

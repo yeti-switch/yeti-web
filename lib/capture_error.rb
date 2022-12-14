@@ -56,6 +56,10 @@ module CaptureError
         node_name: YetiConfig.sentry.node_name
       )
 
+      Sentry.set_user(
+        ip_address: '{{auto}}'
+      )
+
       # Override method added by Sentry::Rails::ActiveJobExtensions,
       # because we ErrorNotification adds it's own active job extension.
       ActiveSupport.on_load(:active_job) do

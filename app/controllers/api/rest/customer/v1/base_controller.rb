@@ -14,7 +14,8 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
     {
       customer_id: current_customer.customer_id,
       allowed_account_ids: current_customer.account_ids,
-      current_customer: current_customer
+      current_customer: current_customer,
+      ip_address: '{{auto}}'
     }
   end
 
