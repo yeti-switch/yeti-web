@@ -22324,6 +22324,7 @@ CREATE TABLE class4.customers_auth (
     src_name_field_id smallint DEFAULT 1 NOT NULL,
     dst_number_field_id smallint DEFAULT 1 NOT NULL,
     cnam_database_id smallint,
+    cps_limit double precision,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -22417,6 +22418,7 @@ CREATE TABLE class4.customers_auth_normalized (
     src_name_field_id smallint DEFAULT 1 NOT NULL,
     dst_number_field_id smallint DEFAULT 1 NOT NULL,
     cnam_database_id smallint,
+    cps_limit double precision,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -24165,7 +24167,8 @@ CREATE TABLE data_import.import_customers_auth (
     src_name_field_id smallint,
     src_name_field_name smallint,
     dst_number_field_id smallint,
-    dst_number_field_name smallint
+    dst_number_field_name smallint,
+    cps_limit double precision
 );
 
 
@@ -30691,6 +30694,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221105134455'),
 ('20221105203239'),
 ('20221115180256'),
-('20221126105630');
+('20221126105630'),
+('20221216095859');
 
 

@@ -4,7 +4,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   attributes :name, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
              :src_prefix, :src_number_min_length, :src_number_max_length,
              :dst_prefix, :dst_number_min_length, :dst_number_max_length,
-             :x_yeti_auth, :capacity, :uri_domain,
+             :x_yeti_auth, :capacity, :cps_limit, :uri_domain,
              :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_rewrite_rule, :diversion_rewrite_result,
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
@@ -58,6 +58,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :dst_number_max_length, type: :number
   ransack_filter :x_yeti_auth, type: :string
   ransack_filter :capacity, type: :number
+  ransack_filter :cps_limit, type: :number
   ransack_filter :uri_domain, type: :string
   ransack_filter :src_name_rewrite_rule, type: :string
   ransack_filter :src_name_rewrite_result, type: :string
@@ -102,6 +103,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       tag_action_value
       dump_level_id
       capacity
+      cps_limit
       pop
       uri_domain
       src_name_rewrite_rule

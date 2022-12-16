@@ -59,6 +59,7 @@ ActiveAdmin.register Importing::CustomersAuth do
 
     column :enable_audio_recording
     column :capacity
+    column :cps_limit
     column :allow_receive_rate_limit
     column :send_billing_information
 
