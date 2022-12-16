@@ -67,6 +67,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Dump level name', item.dump_level_name, anything],
         ['Enable audio recording', item.enable_audio_recording.to_s, anything],
         ['Capacity', item.capacity.to_s, anything],
+        ['Cps limit', item.cps_limit.to_s, anything],
         ['Allow receive rate limit', item.allow_receive_rate_limit.to_s, anything],
         ['Send billing information', item.send_billing_information.to_s, anything],
         ['Diversion policy name', item.diversion_policy.name, anything],
