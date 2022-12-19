@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe '#routing logic' do
-  subject do
+  def routing_sp
     SqlCaller::Yeti.select_all('set search_path to switch20,sys,public')
     SqlCaller::Yeti.select_all_serialized(
       "SELECT * from switch20.route_#{mode}(
@@ -69,6 +69,10 @@ RSpec.describe '#routing logic' do
       rpid,
       rpid_privacy
     )
+  end
+
+  subject do
+    routing_sp
   end
 
   let(:node_id) { 1 }
@@ -382,13 +386,15 @@ RSpec.describe '#routing logic' do
                           send_billing_information: send_billing_information,
                           diversion_policy_id: customer_auth_diversion_policy_id,
                           diversion_rewrite_rule: customer_auth_diversion_rewrite_rule,
-                          diversion_rewrite_result: customer_auth_diversion_rewrite_result)
+                          diversion_rewrite_result: customer_auth_diversion_rewrite_result,
+                          cps_limit: customer_auth_cps_limit)
       end
 
       let!(:send_billing_information) { false }
       let(:customer_auth_diversion_policy_id) { 1 } # do not accept diversion header
       let(:customer_auth_diversion_rewrite_rule) { nil } # removing +380
       let(:customer_auth_diversion_rewrite_result) { nil }
+      let(:customer_auth_cps_limit) { nil }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -460,6 +466,23 @@ RSpec.describe '#routing logic' do
                account_id: vendor_account.id,
                gateway_id: vendor_gateway.id)
       }
+
+      context 'Authorized, customer auth CPS Limit' do
+        let!(:customer_auth_cps_limit) { 10 }
+
+        # calling routing sp 100 times to consume cps limit
+        before do
+          100.times { routing_sp }
+        end
+
+        it 'response with CPS limit' do
+          expect(subject.size).to eq(1)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:disconnect_code_id]).to eq(8012) # CPS Limit
+        end
+      end
 
       context 'Authorized, send_billing_information enabled, no additional headers' do
         let!(:send_billing_information) { true }

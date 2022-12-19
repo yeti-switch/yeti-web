@@ -18061,6 +18061,14 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
+        if v_customer_auth_normalized.cps_limit is not null then
+          if not yeti_ext.tbf_rate_check(1::integer,v_customer_auth_normalized.customers_auth_id::bigint, v_customer_auth_normalized.cps_limit::real) then
+            v_ret.disconnect_code_id=8012; -- CPS limit on customer auth
+            RETURN NEXT v_ret;
+            RETURN;
+          end if;
+        end if;
+
         -- Tag processing CA
         v_call_tags=yeti_ext.tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
 
@@ -19320,6 +19328,14 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
+        if v_customer_auth_normalized.cps_limit is not null then
+          if not yeti_ext.tbf_rate_check(1::integer,v_customer_auth_normalized.customers_auth_id::bigint, v_customer_auth_normalized.cps_limit::real) then
+            v_ret.disconnect_code_id=8012; -- CPS limit on customer auth
+            RETURN NEXT v_ret;
+            RETURN;
+          end if;
+        end if;
+
         -- Tag processing CA
         v_call_tags=yeti_ext.tag_action(v_customer_auth_normalized.tag_action_id, v_call_tags, v_customer_auth_normalized.tag_action_value);
 
@@ -20549,6 +20565,14 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         if v_orig_gw.origination_capacity is not null then
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
+        end if;
+
+        if v_customer_auth_normalized.cps_limit is not null then
+          if not yeti_ext.tbf_rate_check(1::integer,v_customer_auth_normalized.customers_auth_id::bigint, v_customer_auth_normalized.cps_limit::real) then
+            v_ret.disconnect_code_id=8012; -- CPS limit on customer auth
+            RETURN NEXT v_ret;
+            RETURN;
+          end if;
         end if;
 
         -- Tag processing CA
