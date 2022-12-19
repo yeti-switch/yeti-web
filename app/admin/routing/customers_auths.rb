@@ -36,6 +36,7 @@ ActiveAdmin.register CustomersAuth do
                  :dump_level_name,
                  :enable_audio_recording,
                  :capacity,
+                 :cps_limit,
                  :allow_receive_rate_limit,
                  :send_billing_information,
                  [:diversion_policy_name, proc { |row| row.diversion_policy.try(:name) || '' }],
@@ -65,7 +66,7 @@ ActiveAdmin.register CustomersAuth do
                 :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule,
                 :dst_rewrite_result,
                 :dst_numberlist_id, :src_numberlist_id,
-                :dump_level_id, :capacity, :allow_receive_rate_limit,
+                :dump_level_id, :capacity, :cps_limit, :allow_receive_rate_limit,
                 :send_billing_information,
                 :ip, :pop_id,
                 :src_prefix, :src_number_min_length, :src_number_max_length,
@@ -155,6 +156,7 @@ ActiveAdmin.register CustomersAuth do
     column :dump_level, &:dump_level_name
     column :enable_audio_recording
     column :capacity
+    column :cps_limit
     column :allow_receive_rate_limit
     column :send_billing_information
 
@@ -273,6 +275,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :dump_level_id, as: :select, include_blank: false, collection: CustomersAuth::DUMP_LEVELS.invert
           f.input :enable_audio_recording
           f.input :capacity
+          f.input :cps_limit
           f.input :allow_receive_rate_limit
           f.input :send_billing_information
         end
@@ -370,6 +373,7 @@ ActiveAdmin.register CustomersAuth do
           row :dump_level, &:dump_level_name
           row :enable_audio_recording
           row :capacity
+          row :cps_limit
           row :allow_receive_rate_limit
           row :send_billing_information
         end

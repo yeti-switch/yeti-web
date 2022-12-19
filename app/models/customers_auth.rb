@@ -8,6 +8,7 @@
 #  allow_receive_rate_limit         :boolean          default(FALSE), not null
 #  capacity                         :integer(2)
 #  check_account_balance            :boolean          default(TRUE), not null
+#  cps_limit                        :float
 #  diversion_rewrite_result         :string
 #  diversion_rewrite_rule           :string
 #  dst_number_max_length            :integer(2)       default(100), not null
@@ -174,6 +175,7 @@ class CustomersAuth < ApplicationRecord
   validates :dst_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
   validates :capacity, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
+  validates :cps_limit, numericality: { greater_than_or_equal_to: 0.01, allow_nil: true }
 
   validate :ip_is_valid
   validate :gateway_supports_incoming_auth

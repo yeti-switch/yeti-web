@@ -9,6 +9,7 @@
 #  allow_receive_rate_limit         :boolean          default(FALSE), not null
 #  capacity                         :integer(4)
 #  check_account_balance            :boolean
+#  cps_limit                        :float
 #  customer_name                    :string
 #  diversion_policy_name            :string
 #  diversion_rewrite_result         :string
