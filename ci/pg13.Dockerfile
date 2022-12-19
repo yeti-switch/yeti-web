@@ -32,7 +32,7 @@ RUN	sed -Ei "/^#?listen_addresses +=/s/.*/listen_addresses = '*'/"		"$PGCONFIG" 
 	sed -Ei "/^#?checkpoint_timeout +=/s/.*/checkpoint_timeout = 50min/"	"$PGCONFIG" && \
 	sed -Ei "/^#?ssl +=/s/.*/ssl = off/"					"$PGCONFIG" && \
 	sed -Ei "/^#?autovacuum +=/s/.*/autovacuum = off/"			"$PGCONFIG" && \
-    echo "shared_preload_libraries = 'yeti_pg_ext'" > $PGCONFIG && \
+    echo "shared_preload_libraries = 'yeti_pg_ext'" >> $PGCONFIG && \
     cat "$PGCONFIG" && \
     echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/$PGVER/main/pg_hba.conf && \
 	echo "host all all ::/0 trust" >> /etc/postgresql/$PGVER/main/pg_hba.conf
