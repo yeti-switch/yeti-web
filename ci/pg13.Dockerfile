@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 ENV	DEBIAN_FRONTEND=noninteractive
 ENV	LANG=C.UTF-8
@@ -10,9 +10,9 @@ RUN	apt-get update && \
 
 RUN	curl https://pkg.yeti-switch.org/key.gpg | apt-key add - && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
-	echo "deb http://pkg.yeti-switch.org/debian/buster unstable main" >> /etc/apt/sources.list && \
-	echo "deb http://deb.debian.org/debian buster main buster non-free" >> /etc/apt/sources.list && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list
+	echo "deb http://pkg.yeti-switch.org/debian/bullseye nightly main" >> /etc/apt/sources.list && \
+	echo "deb http://deb.debian.org/debian bullseye main contrib non-free" >> /etc/apt/sources.list && \
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" >> /etc/apt/sources.list
 
 RUN 	apt-get update && \
 	apt-get -y --no-install-recommends install \
