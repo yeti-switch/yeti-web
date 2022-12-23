@@ -2,17 +2,30 @@
 
 module ResourceDSL
   module ActsAsClone
-    def acts_as_clone(links: [], duplicates: [])
+    def acts_as_clone(links: [], duplicates: [], wrap_resource: nil, except: [])
       before_action only: [:new] do
-        copy_resource(links: links, duplicates: duplicates) if params[:from].present?
+        if params[:from].present?
+          copy_resource(
+            links: links,
+            duplicates: duplicates,
+            wrap_resource: wrap_resource,
+            except: except
+          )
+        end
       end
 
       controller do
         protected
 
-        def copy_resource(links:, duplicates:)
+        def copy_resource(links:, duplicates:, wrap_resource: nil, except: [])
           from = active_admin_config.resource_class.find(params[:from])
-          resource = BuildRecordCopy.call(from: from, duplicates: duplicates, links: links)
+          resource = BuildRecordCopy.call(
+            from: from,
+            duplicates: duplicates,
+            links: links,
+            except: except
+          )
+          resource = wrap_resource ? wrap_resource.call(resource) : resource
           set_resource_ivar(resource)
         end
       end
