@@ -66,8 +66,13 @@ class ProxyForm < ApplicationForm
 
   def propagate_errors(record)
     record.errors.each do |error|
-      errors.add(error.attribute, error.message)
+      attribute, message = transform_model_error(error.attribute, error.message)
+      errors.add(attribute, message)
     end
+  end
+
+  def transform_model_error(attribute, message)
+    [attribute, message]
   end
 
   def transaction_class

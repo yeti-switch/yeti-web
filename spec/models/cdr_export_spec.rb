@@ -4,15 +4,26 @@
 #
 # Table name: cdr_exports
 #
-#  id           :integer(4)       not null, primary key
-#  callback_url :string
-#  fields       :string           default([]), not null, is an Array
-#  filters      :json             not null
-#  rows_count   :integer(4)
-#  status       :string           not null
-#  type         :string           not null
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                  :integer(4)       not null, primary key
+#  callback_url        :string
+#  fields              :string           default([]), not null, is an Array
+#  filters             :json             not null
+#  rows_count          :integer(4)
+#  status              :string           not null
+#  type                :string           not null
+#  uuid                :uuid             not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  customer_account_id :integer(4)
+#
+# Indexes
+#
+#  index_sys.cdr_exports_on_customer_account_id  (customer_account_id)
+#  index_sys.cdr_exports_on_uuid                 (uuid) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_e796f29195  (customer_account_id => accounts.id)
 #
 
 RSpec.describe CdrExport do
@@ -30,8 +41,21 @@ RSpec.describe CdrExport do
         }
       }
     end
+    let(:default_cdr_export_attrs) do
+      {
+        callback_url: nil,
+        fields: [],
+        rows_count: nil,
+        status: CdrExport::STATUS_PENDING,
+        type: 'Base',
+        uuid: be_present,
+        created_at: be_within(1).of(Time.current),
+        updated_at: be_within(1).of(Time.current),
+        customer_account_id: nil
+      }
+    end
     let(:expected_cdr_export_attrs) do
-      create_params.except(:filters)
+      default_cdr_export_attrs.merge create_params.except(:filters)
     end
     let(:expected_cdr_export_filters) do
       create_params[:filters]
@@ -44,7 +68,7 @@ RSpec.describe CdrExport do
       it 'creates cdr_export' do
         expect(subject.errors).to be_empty
         expect(subject).to be_persisted
-        expect(subject).to have_attributes(expected_cdr_export_attrs)
+        expect(subject.reload).to have_attributes(expected_cdr_export_attrs)
         filters = subject.filters.as_json.symbolize_keys
         expect(filters).to match(expected_cdr_export_filters)
       end
@@ -52,6 +76,25 @@ RSpec.describe CdrExport do
 
     context 'with only required attributes' do
       include_examples :creates_cdr_export
+    end
+
+    context 'with valid customer_account_id' do
+      let(:create_params) do
+        super().merge customer_account_id: account.id
+      end
+      let!(:account) { FactoryBot.create(:account, :with_customer) }
+
+      include_examples :creates_cdr_export
+    end
+
+    context 'with invalid customer_account_id' do
+      let(:create_params) do
+        super().merge customer_account_id: 999_999_99
+      end
+
+      include_examples :does_not_create_record, errors: {
+        customer_account: 'is invalid'
+      }
     end
 
     context 'with all allowed filters' do
@@ -93,7 +136,10 @@ RSpec.describe CdrExport do
           orig_gw_id_eq: 1242,
           orig_gw_external_id_eq: 1243,
           term_gw_id_eq: 1244,
-          term_gw_external_id_eq: 1245
+          term_gw_external_id_eq: 1245,
+          duration_eq: 30,
+          duration_gteq: 0,
+          duration_lteq: 60
         }
       end
       before do
@@ -143,7 +189,7 @@ RSpec.describe CdrExport do
 
       include_examples :does_not_create_record, errors: {
         fields: "can't be blank",
-        filters: ["can't be blank", 'requires time_start_gteq', 'requires time_start_lteq']
+        filters: "can't be blank"
       }
     end
   end

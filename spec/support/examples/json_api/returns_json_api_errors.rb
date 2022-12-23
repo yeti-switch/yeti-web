@@ -6,12 +6,9 @@ RSpec.shared_examples :returns_json_api_errors do |errors:, status: 422|
   it "returns json api errors with status #{status}" do
     subject
     expect(response.status).to eq(status)
-    expect(response_json).to match(
-      hash_including(
-        errors: match_array(
-          Array.wrap(errors).map { |error| hash_including(error) }
-        )
-      )
-    )
+    expect(response_json).to match errors: a_kind_of(Array)
+    expect(response_json[:errors]).to match_array(
+                                        Array.wrap(errors).map { |error| hash_including(error) }
+                                      )
   end
 end

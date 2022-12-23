@@ -192,9 +192,10 @@ RSpec.describe Account, type: :model do
       account.destroy!
     end
 
-    let!(:account) { create(:account) }
+    let!(:account) { create(:account, account_attrs) }
+    let(:account_attrs) { {} }
 
-    context 'wihtout linked ApiAccess records' do
+    context 'without linked ApiAccess records' do
       let!(:api_access) { create(:api_access) }
 
       it 'removes Account successfully' do
@@ -255,6 +256,22 @@ RSpec.describe Account, type: :model do
 
       it 'throw error' do
         expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+      end
+    end
+
+    context 'when Account has related CDR Exports' do
+      let(:account_attrs) { { contractor: customer } }
+      let!(:customer) { create(:customer) }
+      let!(:cdr_export) { create(:cdr_export, customer_account: account) }
+
+      it 'removes Account successfully' do
+        expect { subject }.to change { described_class.count }.by(-1)
+        expect(Account.where(id: account.id)).not_to be_exists
+      end
+
+      it 'keeps ApiAccess records' do
+        expect { subject }.not_to change { CdrExport.count }
+        expect(cdr_export.reload).to have_attributes(customer_account: nil)
       end
     end
   end

@@ -4,15 +4,26 @@
 #
 # Table name: cdr_exports
 #
-#  id           :integer(4)       not null, primary key
-#  callback_url :string
-#  fields       :string           default([]), not null, is an Array
-#  filters      :json             not null
-#  rows_count   :integer(4)
-#  status       :string           not null
-#  type         :string           not null
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                  :integer(4)       not null, primary key
+#  callback_url        :string
+#  fields              :string           default([]), not null, is an Array
+#  filters             :json             not null
+#  rows_count          :integer(4)
+#  status              :string           not null
+#  type                :string           not null
+#  uuid                :uuid             not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  customer_account_id :integer(4)
+#
+# Indexes
+#
+#  index_sys.cdr_exports_on_customer_account_id  (customer_account_id)
+#  index_sys.cdr_exports_on_uuid                 (uuid) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_e796f29195  (customer_account_id => accounts.id)
 #
 
 class CdrExport < ApplicationRecord
@@ -57,6 +68,9 @@ class CdrExport < ApplicationRecord
     attribute :orig_gw_external_id_eq, :integer
     attribute :term_gw_id_eq, :integer
     attribute :term_gw_external_id_eq, :integer
+    attribute :duration_eq, :integer
+    attribute :duration_gteq, :integer
+    attribute :duration_lteq, :integer
   end
 
   STATUS_PENDING = 'Pending'
@@ -70,53 +84,31 @@ class CdrExport < ApplicationRecord
     STATUS_DELETED
   ].freeze
 
+  alias_attribute :export_type, :type
+
   # need for activeadmin form
-  attr_accessor :customer_acc_id_eq,
-                :is_last_cdr_eq, :time_start_gteq, :time_start_lteq, :time_start_lt
+  attr_accessor :customer_acc_id_eq, :is_last_cdr_eq, :time_start_gteq, :time_start_lteq, :time_start_lt
 
   json_attribute :filters, class_name: 'CdrExport::FiltersModel'
 
+  belongs_to :customer_account, class_name: 'Account', optional: true
+
   validates :status, :fields, :filters, presence: true
-  validate do
-    if filters._unknown_attributes.any?
-      message = "#{filters._unknown_attributes.keys.join(', ')} not allowed"
-      errors.add(:filters, message)
-    end
-
-    if filters.time_start_gteq.nil?
-      errors.add(:filters, 'requires time_start_gteq')
-    end
-
-    if filters.time_start_lt.nil? && filters.time_start_lteq.nil?
-      errors.add(:filters, 'requires time_start_lteq')
-    end
-  end
-  validate do
-    extra_fields = fields - self.class.allowed_fields
-    if extra_fields.any?
-      errors.add(:fields, "#{extra_fields.join(', ')} not allowed")
-    end
-  end
-
-  def fields=(f)
-    self[:fields] = f.map(&:presence).compact
-  end
+  validate :validate_filters
+  validate :validate_fields
+  validate :validate_customer_account
 
   before_validation(on: :create) do
     self.status ||= STATUS_PENDING
     self.type ||= 'Base'
   end
 
-  after_create do
-    # dj which exports CDRs into CSV
-    Worker::CdrExportJob.perform_later(id)
-  end
+  after_create :enqueue_export_job
+  after_update :enqueue_remove_file_job, if: :saved_change_deleted?
 
-  after_update if: proc { saved_change_to_attribute?(:status) && deleted? } do
-    Worker::RemoveCdrExportFileJob.perform_later(id)
+  def fields=(f)
+    self[:fields] = f.map(&:presence).compact
   end
-
-  alias_attribute :export_type, :type
 
   def export_sql
     s = Cdr::Cdr.select(select_sql)
@@ -143,25 +135,6 @@ class CdrExport < ApplicationRecord
     transformed_fields.join(', ')
   end
 
-  def transformed_fields
-    fields.map do |f|
-      case f
-      when 'id'
-        'cdr.cdr.id AS "ID"'
-      when 'src_country_name'
-        'src_c.name AS "Src Country Name"'
-      when 'dst_country_name'
-        'dst_c.name AS "Dst Country Name"'
-      when 'src_network_name'
-        'src_n.name AS "Src Network Name"'
-      when 'dst_network_name'
-        'dst_n.name AS "Dst Network Name"'
-      else
-        "#{f} AS \"#{f.titleize}\""
-      end
-    end
-  end
-
   def completed?
     status == STATUS_COMPLETED
   end
@@ -182,5 +155,68 @@ class CdrExport < ApplicationRecord
       src_network_name
       dst_network_name
     ]
+  end
+
+  private
+
+  def validate_filters
+    return if filters.blank?
+
+    if filters._unknown_attributes.any?
+      message = "#{filters._unknown_attributes.keys.join(', ')} not allowed"
+      errors.add(:filters, message)
+    end
+
+    if filters.time_start_gteq.nil?
+      errors.add(:filters, 'requires time_start_gteq')
+    end
+
+    if filters.time_start_lt.nil? && filters.time_start_lteq.nil?
+      errors.add(:filters, 'requires time_start_lteq')
+    end
+  end
+
+  def validate_fields
+    extra_fields = fields - self.class.allowed_fields
+    if extra_fields.any?
+      errors.add(:fields, "#{extra_fields.join(', ')} not allowed")
+    end
+  end
+
+  def validate_customer_account
+    errors.add(:customer_account, :invalid) if customer_account_id && customer_account.nil?
+    errors.add(:customer_account, 'requires customer account') if customer_account && !customer_account.contractor.customer
+  end
+
+  def enqueue_export_job
+    # dj which exports CDRs into CSV
+    Worker::CdrExportJob.perform_later(id)
+  end
+
+  def enqueue_remove_file_job
+    Worker::RemoveCdrExportFileJob.perform_later(id)
+  end
+
+  def saved_change_deleted?
+    saved_change_to_attribute?(:status) && deleted?
+  end
+
+  def transformed_fields
+    fields.map do |f|
+      case f
+      when 'id'
+        'cdr.cdr.id AS "ID"'
+      when 'src_country_name'
+        'src_c.name AS "Src Country Name"'
+      when 'dst_country_name'
+        'dst_c.name AS "Dst Country Name"'
+      when 'src_network_name'
+        'src_n.name AS "Src Network Name"'
+      when 'dst_network_name'
+        'dst_n.name AS "Dst Network Name"'
+      else
+        "#{f} AS \"#{f.titleize}\""
+      end
+    end
   end
 end

@@ -4,24 +4,39 @@ RSpec.describe 'CDR exports', type: :feature do
   include_context :login_as_admin
 
   describe 'index' do
-    let!(:cdr_exports) do
-      create_list(:cdr_export, 2, :completed)
-    end
-
-    before do
+    subject do
       visit cdr_exports_path
     end
 
+    let!(:account1) { create(:account, :with_customer) }
+    let!(:account2) { create(:account, :with_customer) }
+    let!(:cdr_exports) do
+      [
+        create(:cdr_export),
+        create(:cdr_export, :completed),
+        create(:cdr_export, :failed),
+        create(:cdr_export, :deleted),
+        create(:cdr_export, customer_account: account1),
+        create(:cdr_export, :completed, customer_account: account1),
+        create(:cdr_export, :deleted, customer_account: account2)
+      ]
+    end
+
     it 'cdr export should be displayed' do
+      subject
+      expect(page).to have_table_row count: cdr_exports.size
+
       cdr_exports.each do |cdr_export|
-        within "#cdr_export_base_#{cdr_export.id}" do
-          expect(page).to have_selector('.col-id a', text: cdr_export.id)
-          expect(page).to have_selector('.col-download a', text: 'download')
-          expect(page).to have_selector('.col-status', text: cdr_export.status)
-          expect(page).to have_selector('.col-fields', text: cdr_export.fields.join(', '))
-          expect(page).to have_selector('.col-filters', text: cdr_export.filters.as_json)
-          expect(page).to have_selector('.col-callback_url', text: cdr_export.callback_url)
-          expect(page).to have_selector('.col-created_at', text: cdr_export.created_at.strftime('%Y-%m-%d %H:%M:%S'))
+        within_table_row(id: cdr_export.id) do
+          expect(page).to have_table_cell column: 'ID', exact_text: cdr_export.id.to_s
+          expect(page).to have_table_cell column: 'Download'
+          expect(page).to have_table_cell column: 'Status', exact_text: cdr_export.status
+          expect(page).to have_table_cell column: 'Fields', exact_text: cdr_export.fields.join(', ')
+          expect(page).to have_table_cell column: 'Filters', exact_text: cdr_export.filters.as_json.to_s
+          expect(page).to have_table_cell column: 'Callback Url', exact_text: cdr_export.callback_url.to_s
+          expect(page).to have_table_cell column: 'Created At', exact_text: cdr_export.created_at.strftime('%F %T')
+          expect(page).to have_table_cell column: 'Updated At', exact_text: cdr_export.updated_at.strftime('%F %T')
+          expect(page).to have_table_cell column: 'UUID', exact_text: cdr_export.reload.uuid
         end
       end
     end

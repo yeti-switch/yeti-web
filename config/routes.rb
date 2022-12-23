@@ -168,6 +168,10 @@ Rails.application.routes.draw do
               jsonapi_relationships
               member { get :download }
             end
+            jsonapi_resources :cdr_exports, only: %i[index show create] do
+              jsonapi_relationships
+              member { get :download }
+            end
           end
         end
 

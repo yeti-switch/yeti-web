@@ -120,6 +120,9 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Routing tag ids exclude', with: 25
         fill_in_chosen 'Routing tag ids empty', with: 'No'
         fill_in_chosen 'Success eq', with: 'Yes'
+        fill_in 'Duration eq', with: '30'
+        fill_in 'Duration gteq', with: '0'
+        fill_in 'Duration lteq', with: '60'
         fill_in_chosen 'Is last cdr eq', with: 'Yes'
         fill_in 'Failed resource type id eq', with: '10'
         fill_in 'Orig gw external id eq', with: '1236'
@@ -193,7 +196,10 @@ RSpec.describe 'Create new CDR export', js: true do
                            orig_gw_external_id_eq: 1236,
                            orig_gw_id_eq: gateway1.id,
                            term_gw_external_id_eq: 1237,
-                           term_gw_id_eq: gateway2.id
+                           term_gw_id_eq: gateway2.id,
+                           duration_eq: 30,
+                           duration_gteq: 0,
+                           duration_lteq: 60
                          )
     end
   end
@@ -266,9 +272,7 @@ RSpec.describe 'Create new CDR export', js: true do
     it 'should rise semantic error' do
       subject
       expect(page).to have_semantic_errors(count: 1)
-      expect(page).to have_semantic_error(
-                        'Filters can\'t be blank, requires time_start_gteq, and requires time_start_lteq'
-                      )
+      expect(page).to have_semantic_error "Filters can't be blank"
     end
   end
 
