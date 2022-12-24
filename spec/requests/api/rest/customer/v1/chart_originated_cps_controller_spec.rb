@@ -55,7 +55,10 @@ RSpec.describe Api::Rest::Customer::V1::ChartOriginatedCpsController, type: :req
     end
 
     let(:json_api_request_attributes) do
-      { 'from-time': '2019-01-01 00:00:00', 'to-time': '2019-01-02 00:00:00' }
+      {
+        'from-time': Time.zone.parse('2019-01-01 00:00:00').iso8601(3),
+        'to-time': Time.zone.parse('2019-01-02 00:00:00').iso8601(3)
+      }
     end
     let(:json_api_relationships) do
       { account: { data: { id: account.uuid, type: 'accounts' } } }

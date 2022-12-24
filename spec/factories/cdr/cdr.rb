@@ -38,7 +38,7 @@ FactoryBot.define do
 
     before(:create) do |record, _evaluator|
       # Create partition for current+next monthes if not exists
-      Cdr::Cdr.add_partition_for(record.time_start)
+      Cdr::Cdr.add_partition_for(record.time_start.utc)
 
       # link Customer from associated Account
       unless record.customer_id
