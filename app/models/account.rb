@@ -65,6 +65,7 @@ class Account < ApplicationRecord
   has_many :api_access, ->(record) { unscope(:where).where("? = ANY(#{table_name}.account_ids)", record.id) }, class_name: 'System::ApiAccess', autosave: false
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
+  has_many :cdr_exports, class_name: 'CdrExport', foreign_key: :customer_account_id, dependent: :nullify
 
   has_one :balance_notification_setting,
           class_name: 'AccountBalanceNotificationSetting',

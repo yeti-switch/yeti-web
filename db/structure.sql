@@ -25880,7 +25880,9 @@ CREATE TABLE sys.cdr_exports (
     type character varying NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    rows_count integer
+    rows_count integer,
+    customer_account_id integer,
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
 );
 
 
@@ -29611,6 +29613,20 @@ CREATE INDEX delayed_jobs_priority ON sys.delayed_jobs USING btree (priority, ru
 
 
 --
+-- Name: index_sys.cdr_exports_on_customer_account_id; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE INDEX "index_sys.cdr_exports_on_customer_account_id" ON sys.cdr_exports USING btree (customer_account_id);
+
+
+--
+-- Name: index_sys.cdr_exports_on_uuid; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE UNIQUE INDEX "index_sys.cdr_exports_on_uuid" ON sys.cdr_exports USING btree (uuid);
+
+
+--
 -- Name: network_prefixes_prefix_range_idx; Type: INDEX; Schema: sys; Owner: -
 --
 
@@ -30562,6 +30578,14 @@ ALTER TABLE ONLY sys.events
 
 
 --
+-- Name: cdr_exports fk_rails_e796f29195; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.cdr_exports
+    ADD CONSTRAINT fk_rails_e796f29195 FOREIGN KEY (customer_account_id) REFERENCES billing.accounts(id);
+
+
+--
 -- Name: network_prefixes network_prefixes_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -30605,7 +30629,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30719,6 +30744,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221105203239'),
 ('20221115180256'),
 ('20221126105630'),
-('20221216095859');
+('20221216095859'),
+('20221222184742');
 
 

@@ -17,6 +17,10 @@ FactoryBot.define do
       status { CdrExport::STATUS_COMPLETED }
     end
 
+    trait :failed do
+      status { CdrExport::STATUS_FAILED }
+    end
+
     trait :deleted do
       status { CdrExport::STATUS_DELETED }
     end

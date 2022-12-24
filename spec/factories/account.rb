@@ -22,6 +22,10 @@ FactoryBot.define do
       threshold_state_id { AccountBalanceNotificationSetting::CONST::STATE_ID_NONE }
     end
 
+    trait :with_customer do
+      association :contractor, vendor: false, customer: true
+    end
+
     trait :with_max_balance do
       max_balance { 1_000 }
     end

@@ -60,7 +60,10 @@ RSpec.resource 'Cdr Exports' do
         orig_gw_id_eq: 1242,
         orig_gw_external_id_eq: 1243,
         term_gw_id_eq: 1244,
-        term_gw_external_id_eq: 1245
+        term_gw_external_id_eq: 1245,
+        duration_eq: 60,
+        duration_gteq: 0,
+        duration_lteq: 100
       }
     end
     let(:'callback-url') { 'test.url.com' }

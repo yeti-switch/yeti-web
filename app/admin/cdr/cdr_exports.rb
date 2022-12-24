@@ -4,11 +4,28 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   menu parent: 'CDR', priority: 97
   actions :index, :show, :create, :new
 
+  controller do
+    def scoped_collection
+      super.preload(:customer_account)
+    end
+
+    def build_new_resource
+      record = super
+      if params[:action] == 'new'
+        record.fields = CdrExport.last&.fields || []
+      end
+      record
+    end
+  end
+
   filter :id
   filter :status, as: :select, collection: CdrExport::STATUSES
   filter :rows_count
+  account_filter :customer_account, path_params: { q: { contractor_customer_eq: true } }
   filter :callback_url
   filter :created_at
+  filter :updated_at
+  filter :uuid_equals, label: 'UUID'
 
   action_item(:download, only: [:show]) do
     link_to 'Download', action: :download if resource.completed?
@@ -30,9 +47,11 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     column :filters do |r|
       r.filters.as_json
     end
+    column :customer_account
     column :callback_url
     column :created_at
     column :updated_at
+    column :uuid
     actions
   end
 
@@ -53,6 +72,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
           row :status
           row :callback_url
           row :type
+          row :customer_account
           row :created_at
           row :updated_at
           row :rows_count
@@ -85,16 +105,6 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     resource.update!(status: CdrExport::STATUS_DELETED)
     flash[:notice] = 'The file will be deleted in background!'
     redirect_back fallback_location: root_path
-  end
-
-  controller do
-    def build_new_resource
-      record = super
-      if params[:action] == 'new'
-        record.fields = CdrExport.last&.fields || []
-      end
-      record
-    end
   end
 
   permit_params :callback_url,
@@ -139,6 +149,10 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                collection: boolean_options,
                input_html: { class: 'chosen' },
                required: false
+
+      ff.input :duration_eq, as: :number
+      ff.input :duration_lteq, as: :number
+      ff.input :duration_gteq, as: :number
 
       ff.input :failed_resource_type_id_eq, required: false
 
