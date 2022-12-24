@@ -31,6 +31,8 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 include Warden::Test::Helpers
 Warden.test_mode!
 
+RSpec::Matchers.define_negated_matcher :not_eq, :eq
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join 'spec/fixtures'

@@ -5,7 +5,7 @@ ActiveAdmin.register Account do
   search_support!
   acts_as_safe_destroy
   acts_as_audit
-  acts_as_clone
+  acts_as_clone wrap_resource: proc { |model| AccountForm.new(model) }, except: [:uuid]
   acts_as_async_destroy('Account')
   acts_as_async_update BatchUpdateForm::Account
 

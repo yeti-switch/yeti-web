@@ -8,11 +8,14 @@ class BuildRecordCopy < ApplicationService
   # The duplicates creates copies of associations from original record to a copy.
   # Usage: has_many, has_one associations.
   parameter :duplicates, default: []
+  # Exclude attributes
+  parameter :except, default: []
 
   def call
     attributes = build_attributes
     links.each { |name| attributes[name] = build_assoc_link(name) }
     duplicates.each { |name| attributes[name] = build_assoc_dup(name) }
+    attributes.except!(*except.map(&:to_s))
     from.class.new(attributes)
   end
 
