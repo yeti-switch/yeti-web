@@ -25,8 +25,8 @@ RSpec.describe 'Export Numberlist', type: :feature do
       [
         ['Id', item.id.to_s],
         ['Name', item.name],
-        ['Mode name', item.mode.name],
-        ['Default action name', item.default_action.name],
+        ['Mode name', item.mode_name],
+        ['Default action name', item.default_action_name],
         ['Default src rewrite rule', item.default_src_rewrite_rule.to_s],
         ['Default src rewrite result', item.default_src_rewrite_result.to_s],
         ['Default dst rewrite rule', item.default_dst_rewrite_rule.to_s],
