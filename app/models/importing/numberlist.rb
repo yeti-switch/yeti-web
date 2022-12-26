@@ -29,8 +29,6 @@ class Importing::Numberlist < Importing::Base
   self.table_name = 'data_import.import_numberlists'
   attr_accessor :file
 
-  belongs_to :mode, class_name: 'Routing::NumberlistMode', optional: true
-  belongs_to :default_action, class_name: 'Routing::NumberlistAction', optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 

@@ -4,8 +4,8 @@ RSpec.describe BatchUpdateForm::NumberList, :js do
   include_context :login_as_admin
   let!(:_numberlists) { FactoryBot.create_list :numberlist, 3 }
   let(:success_message) { I18n.t('flash.actions.batch_actions.batch_update.job_scheduled') }
-  let!(:mode) { Routing::NumberlistMode.take! }
-  let!(:default_action) { Routing::NumberlistAction.take! }
+  let!(:mode_id) { Routing::Numberlist::MODE_STRICT }
+  let!(:default_action_id) { Routing::Numberlist::DEFAULT_ACTION_ACCEPT }
   let!(:lua_script) { FactoryBot.create :lua_script }
 
   before do

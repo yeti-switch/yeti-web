@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe BatchUpdateForm::NumberList do
-  let!(:mode) { Routing::NumberlistMode.take! }
-  let!(:default_action) { Routing::NumberlistAction.take! }
+  let!(:mode_id) { Routing::Numberlist::MODE_STRICT }
+  let!(:default_action_id) { Routing::Numberlist::DEFAULT_ACTION_ACCEPT }
   let!(:lua_script) { FactoryBot.create :lua_script }
   let!(:assign_params) do
     {

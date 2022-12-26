@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :importing_numberlist, class: Importing::Numberlist do
     transient do
-      _mode { Routing::NumberlistMode.take }
-      _default_action { Routing::NumberlistAction.take }
+      _mode_id { Routing::Numberlist::MODE_STRICT }
+      _default_action_id { Routing::Numberlist::DEFAULT_ACTION_ACCEPT }
       _tag_action { Routing::TagAction.take }
       _routing_tags { create_list(:routing_tag, 2) }
     end
@@ -15,10 +15,8 @@ FactoryBot.define do
     sequence(:name) { |n| "RSpec Import Numberlist n-#{n}" }
 
     mode_id { _mode.id }
-    mode_name { _mode.name }
 
     default_action_id { _default_action.id }
-    default_action_name { _default_action.name }
 
     default_src_rewrite_rule { '111' }
     default_src_rewrite_result { '222' }

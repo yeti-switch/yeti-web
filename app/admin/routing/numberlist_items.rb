@@ -43,7 +43,7 @@ ActiveAdmin.register Routing::NumberlistItem do
   filter :numberlist, input_html: { class: 'chosen' }
   filter :key
   filter :lua_script, input_html: { class: 'chosen' }
-  filter :action, input_html: { class: 'chosen' }, collection: proc { Routing::NumberlistAction.pluck(:name, :id) }
+  filter :action_id_eq, label: 'Action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
   filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
   filter :created_at, as: :date_time_range
   filter :updated_at, as: :date_time_range

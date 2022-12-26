@@ -32,7 +32,6 @@ class Importing::NumberlistItem < Importing::Base
   attr_accessor :file
 
   belongs_to :numberlist, class_name: 'Routing::Numberlist', optional: true
-  belongs_to :action, class_name: 'Routing::NumberlistAction', optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
