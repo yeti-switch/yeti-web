@@ -24894,7 +24894,6 @@ CREATE TABLE gui.admin_users (
     updated_at timestamp with time zone NOT NULL,
     enabled boolean DEFAULT true,
     username character varying NOT NULL,
-    ssh_key text,
     stateful_filters boolean DEFAULT false NOT NULL,
     visible_columns json DEFAULT '{}'::json NOT NULL,
     per_page json DEFAULT '{}'::json NOT NULL,
@@ -30629,8 +30628,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -30745,6 +30743,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221115180256'),
 ('20221126105630'),
 ('20221216095859'),
-('20221222184742');
+('20221222184742'),
+('20221226124025');
 
 
