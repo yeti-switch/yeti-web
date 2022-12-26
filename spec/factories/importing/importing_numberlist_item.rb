@@ -5,6 +5,7 @@ FactoryBot.define do
     transient do
       _numberlist { Routing::Numberlist.take || create(:numberlist) }
       _action_id { Routing::NumberlistItem::ACTION_REJECT }
+      _action_name { Routing::NumberlistItem::ACTIONS[Routing::NumberlistItem::ACTION_REJECT]}
       _tag_action { Routing::TagAction.take }
       _routing_tags { create_list(:routing_tag, 2) }
     end
@@ -18,6 +19,7 @@ FactoryBot.define do
     numberlist_name { _numberlist.name }
 
     action_id { _action_id }
+    action_name { _action_name }
 
     number_min_length { 5 }
     number_max_length { 10 }
