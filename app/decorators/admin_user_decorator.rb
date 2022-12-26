@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class AdminUserDecorator < ApplicationDecorator
-  def ssh_key_tag
-    status_tag(model.ssh_key.present?.to_s, class: model.ssh_key.present? ? :ok : nil)
-  end
-
   def roles_list
     model.roles.join(', ')
   end

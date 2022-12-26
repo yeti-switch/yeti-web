@@ -19,7 +19,6 @@
 #  roles                  :string           not null, is an Array
 #  saved_filters          :json             not null
 #  sign_in_count          :integer(4)       default(0)
-#  ssh_key                :text
 #  stateful_filters       :boolean          default(FALSE), not null
 #  username               :string           not null
 #  visible_columns        :json             not null
