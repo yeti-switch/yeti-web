@@ -16,7 +16,7 @@ ActiveAdmin.register Routing::NumberlistItem do
                  :number_min_length,
                  :number_max_length,
                  [:numberlist_name, proc { |row| row.numberlist.name }],
-                 [:action_name, proc { |row| row.action.try(:name) }],
+                 :action_name,
                  :src_rewrite_rule,
                  :src_rewrite_result,
                  :dst_rewrite_rule,
@@ -30,7 +30,7 @@ ActiveAdmin.register Routing::NumberlistItem do
   acts_as_import resource_class: Importing::NumberlistItem,
                  skip_columns: [:tag_action_value]
 
-  includes :numberlist, :action, :lua_script, :tag_action
+  includes :numberlist, :lua_script, :tag_action
 
   permit_params :numberlist_id,
                 :key, :number_min_length, :number_max_length,
@@ -66,9 +66,7 @@ ActiveAdmin.register Routing::NumberlistItem do
     column :number_length do |c|
       c.number_min_length == c.number_max_length ? c.number_min_length.to_s : "#{c.number_min_length}..#{c.number_max_length}"
     end
-    column :action do |c|
-      c.action.blank? ? 'Default action' : c.action.name
-    end
+    column :action, &:action_name
     column :src_rewrite_rule
     column :src_rewrite_result
     column :dst_rewrite_rule
@@ -89,7 +87,7 @@ ActiveAdmin.register Routing::NumberlistItem do
           row :key
           row :number_min_length
           row :number_max_length
-          row :action
+          row :action, &:action_name
           row :src_rewrite_rule
           row :src_rewrite_result
           row :dst_rewrite_rule
@@ -113,7 +111,7 @@ ActiveAdmin.register Routing::NumberlistItem do
       f.input :key
       f.input :number_min_length
       f.input :number_max_length
-      f.input :action, as: :select, include_blank: 'Default action'
+      f.input :action_id, as: :select, include_blank: 'Default action', collection: Routing::NumberlistItem::ACTIONS.invert
       f.input :src_rewrite_rule
       f.input :src_rewrite_result
       f.input :dst_rewrite_rule

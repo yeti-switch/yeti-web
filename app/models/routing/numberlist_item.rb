@@ -28,7 +28,6 @@
 # Foreign Keys
 #
 #  blacklist_items_blacklist_id_fkey    (numberlist_id => numberlists.id)
-#  numberlist_items_action_id_fkey      (action_id => numberlist_actions.id)
 #  numberlist_items_lua_script_id_fkey  (lua_script_id => lua_scripts.id)
 #  numberlist_items_tag_action_id_fkey  (tag_action_id => tag_actions.id)
 #
@@ -38,8 +37,15 @@ class Routing::NumberlistItem < ApplicationRecord
 
   self.table_name = 'class4.numberlist_items'
 
+  ACTION_REJECT = 1
+  ACTION_ACCEPT = 2
+  ACTIONS = {
+    ACTION_REJECT => 'Reject call',
+    ACTION_ACCEPT => 'Allow call'
+  }.freeze
+
   belongs_to :numberlist, class_name: 'Routing::Numberlist', foreign_key: :numberlist_id
-  belongs_to :action, class_name: 'Routing::NumberlistAction', foreign_key: :action_id, optional: true
+
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
@@ -51,10 +57,15 @@ class Routing::NumberlistItem < ApplicationRecord
   validates :number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
   validates :numberlist, presence: true
+  validates :action_id, inclusion: { in: ACTIONS.keys }, allow_nil: true
 
   validates_with TagActionValueValidator
 
   def display_name
     "#{key} | #{id}"
+  end
+
+  def action_name
+    action_id.nil? ? 'Default action' : ACTIONS[action_id]
   end
 end

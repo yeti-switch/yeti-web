@@ -26,10 +26,8 @@
 #
 # Foreign Keys
 #
-#  blacklists_mode_id_fkey             (mode_id => numberlist_modes.id)
-#  numberlists_default_action_id_fkey  (default_action_id => numberlist_actions.id)
-#  numberlists_lua_script_id_fkey      (lua_script_id => lua_scripts.id)
-#  numberlists_tag_action_id_fkey      (tag_action_id => tag_actions.id)
+#  numberlists_lua_script_id_fkey  (lua_script_id => lua_scripts.id)
+#  numberlists_tag_action_id_fkey  (tag_action_id => tag_actions.id)
 #
 
 RSpec.describe Routing::Numberlist, type: :model do
