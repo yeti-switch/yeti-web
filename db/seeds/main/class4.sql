@@ -573,41 +573,6 @@ SELECT pg_catalog.setval('lnp_cache_id_seq', 1, false);
 SELECT pg_catalog.setval('lnp_databases_id_seq', 1, false);
 
 
---
--- TOC entry 4350 (class 0 OID 19275)
--- Dependencies: 333
--- Data for Name: numberlist_actions; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO numberlist_actions (id, name) VALUES (1, 'Reject call');
-INSERT INTO numberlist_actions (id, name) VALUES (2, 'Allow call');
-
-
---
--- TOC entry 4313 (class 0 OID 19091)
--- Dependencies: 296
--- Data for Name: numberlist_items; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-
-
---
--- TOC entry 4351 (class 0 OID 19281)
--- Dependencies: 334
--- Data for Name: numberlist_modes; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO class4.numberlist_modes (id, name) VALUES (1, 'Strict number match');
-INSERT INTO class4.numberlist_modes (id, name) VALUES (2, 'Prefix match');
-INSERT INTO class4.numberlist_modes (id, name) VALUES (3, 'Random');
-
---
--- TOC entry 4315 (class 0 OID 19099)
--- Dependencies: 298
--- Data for Name: numberlists; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-
 
 --
 -- TOC entry 4352 (class 0 OID 19287)
