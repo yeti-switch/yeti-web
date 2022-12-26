@@ -2,10 +2,10 @@
 
 class BatchUpdateForm::NumberList < BatchUpdateForm::Base
   model_class 'Routing::Numberlist'
-  #attribute :mode_id, type: :foreign_key, class_name: 'Routing::NumberlistMode'
-  #collection: Routing::Numberlist::MODES.invert
-  #attribute :default_action_id, type: :foreign_key, class_name: 'Routing::NumberlistAction'
-  #collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
+  # attribute :mode_id, type: :foreign_key, class_name: 'Routing::NumberlistMode'
+  # collection: Routing::Numberlist::MODES.invert
+  # attribute :default_action_id, type: :foreign_key, class_name: 'Routing::NumberlistAction'
+  # collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
 
   attribute :default_src_rewrite_rule
   attribute :default_src_rewrite_result
