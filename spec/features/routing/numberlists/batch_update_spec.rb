@@ -21,8 +21,8 @@ RSpec.describe BatchUpdateForm::NumberList, :js do
 
   let(:assign_params) do
     {
-      mode_id: mode.id.to_s,
-      default_action_id: default_action.id.to_s,
+      mode_id: mode_id.to_s,
+      default_action_id: default_action_id.to_s,
       default_src_rewrite_rule: 'string',
       default_src_rewrite_result: 'string',
       default_dst_rewrite_rule: 'string',
@@ -70,7 +70,7 @@ RSpec.describe BatchUpdateForm::NumberList, :js do
 
   context 'should check validates' do
     context 'when :mode_id changed' do
-      let(:assign_params) { { mode_id: mode.id.to_s } }
+      let(:assign_params) { { mode_id: mode_id.to_s } }
 
       it 'should pass validations with success message' do
         expect do

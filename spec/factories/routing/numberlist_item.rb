@@ -7,6 +7,8 @@ FactoryBot.define do
     association :numberlist
     association :lua_script
 
+    action_id { Routing::NumberlistItem::ACTION_REJECT }
+
     trait :filled do
       tag_action { Routing::TagAction.take }
     end

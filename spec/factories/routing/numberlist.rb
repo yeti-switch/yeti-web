@@ -6,10 +6,8 @@ FactoryBot.define do
 
     association :lua_script
 
-    after :build do |numberlist|
-      numberlist.mode_id = Routing::Numberlist::MODE_STRICT
-      numberlist.default_action_id = Routing::Numberlist::DEFAULT_ACTION_REJECT
-    end
+    mode_id { Routing::Numberlist::MODE_STRICT }
+    default_action_id { Routing::Numberlist::DEFAULT_ACTION_REJECT }
 
     trait :filled do
       tag_action { Routing::TagAction.take }
