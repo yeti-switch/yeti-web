@@ -154,10 +154,15 @@ class Importing::CustomersAuth < Importing::Base
 
   import_for ::CustomersAuth
 
+  def dump_level_display_name
+    dump_level_id.nil? ? 'unknown' : CustomersAuth::DUMP_LEVELS[dump_level_id]
+  end
+
   def self.after_import_hook
     where(src_prefix: nil).update_all(src_prefix: '')
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    resolve_integer_constant('dump_level_id', 'dump_level_name', CustomersAuth::DUMP_LEVELS)
     super
     CustomersAuth.increment_state_value
   end

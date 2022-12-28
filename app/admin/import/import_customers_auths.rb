@@ -55,7 +55,7 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :routing_plan, sortable: :routing_plan_name
     column :dst_numberlist, sortable: :dst_numberlist_name
     column :src_numberlist, sortable: :src_numberlist_name
-    column :dump_level, sortable: :dump_level_name
+    column :dump_level, &:dump_level_display_name
 
     column :enable_audio_recording
     column :capacity
