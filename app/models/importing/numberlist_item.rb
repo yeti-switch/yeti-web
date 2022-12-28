@@ -44,8 +44,13 @@ class Importing::NumberlistItem < Importing::Base
                               dst_rewrite_rule dst_rewrite_result
                               tag_action_id tag_action_value lua_script_id]
 
+  def action_display_name
+    action_id.nil? ? 'unknown' : Routing::Numberlist::ACTIONS[action_id]
+  end
+
   def self.after_import_hook
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    resolve_integer_constant('action_id', 'action_name', Routing::NumberlistItem::ACTIONS)
     super
   end
 end
