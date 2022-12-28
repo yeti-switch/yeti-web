@@ -30,7 +30,6 @@ ActiveAdmin.register Importing::NumberlistItem, as: 'Numberlist Item Imports' do
     column :key
     column :number_min_length
     column :number_max_length
-    column :action
     column :action, &:action_display_name
     column :src_rewrite_rule
     column :src_rewrite_result

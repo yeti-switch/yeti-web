@@ -3,10 +3,11 @@
 class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
   model_name 'Routing::NumberlistItem'
 
-  attributes :key, :action_id,
+  attributes :key, :number_min_length, :number_max_length,
+             :action_id,
              :src_rewrite_rule, :src_rewrite_result,
              :dst_rewrite_rule, :dst_rewrite_result,
-             :tag_action_value
+             :tag_action_value, :created_at, :updated_at
 
   paginator :paged
 
