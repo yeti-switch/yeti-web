@@ -137,7 +137,6 @@ Rails.application.routes.draw do
             jsonapi_resources :area_prefixes
             jsonapi_resources :numberlists
             jsonapi_resources :numberlist_items
-            jsonapi_resources :numberlist_actions
             jsonapi_resources :rate_profit_control_modes
             jsonapi_resources :routing_tag_detection_rules
             jsonapi_resources :tag_actions

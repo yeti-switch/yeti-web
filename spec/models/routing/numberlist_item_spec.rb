@@ -28,7 +28,6 @@
 # Foreign Keys
 #
 #  blacklist_items_blacklist_id_fkey    (numberlist_id => numberlists.id)
-#  numberlist_items_action_id_fkey      (action_id => numberlist_actions.id)
 #  numberlist_items_lua_script_id_fkey  (lua_script_id => lua_scripts.id)
 #  numberlist_items_tag_action_id_fkey  (tag_action_id => tag_actions.id)
 #

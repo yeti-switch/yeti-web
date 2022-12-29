@@ -29,8 +29,6 @@ class Importing::Numberlist < Importing::Base
   self.table_name = 'data_import.import_numberlists'
   attr_accessor :file
 
-  belongs_to :mode, class_name: 'Routing::NumberlistMode', optional: true
-  belongs_to :default_action, class_name: 'Routing::NumberlistAction', optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
@@ -41,8 +39,18 @@ class Importing::Numberlist < Importing::Base
                               default_dst_rewrite_rule default_dst_rewrite_result
                               tag_action_id tag_action_value lua_script_id]
 
+  def default_action_display_name
+    default_action_id.nil? ? 'unknown' : Routing::Numberlist::DEFAULT_ACTIONS[default_action_id]
+  end
+
+  def mode_display_name
+    mode_id.nil? ? 'unknown' : Routing::Numberlist::MODES[mode_id]
+  end
+
   def self.after_import_hook
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    resolve_integer_constant('mode_id', 'mode_name', Routing::Numberlist::MODES)
+    resolve_integer_constant('default_action_id', 'default_action_name', Routing::Numberlist::DEFAULT_ACTIONS)
     super
   end
 end

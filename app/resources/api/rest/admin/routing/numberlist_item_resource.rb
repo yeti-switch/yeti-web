@@ -3,20 +3,21 @@
 class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
   model_name 'Routing::NumberlistItem'
 
-  attributes :key,
+  attributes :key, :number_min_length, :number_max_length,
+             :action_id,
              :src_rewrite_rule, :src_rewrite_result,
              :dst_rewrite_rule, :dst_rewrite_result,
-             :tag_action_value
+             :tag_action_value, :created_at, :updated_at
 
   paginator :paged
 
-  has_one :action, class_name: 'NumberlistAction'
   has_one :numberlist, class_name: 'Numberlist'
   has_one :tag_action, class_name: 'TagAction'
 
   filter :key # DEPRECATED
 
   ransack_filter :key, type: :string
+  ransack_filter :action_id, type: :number
   ransack_filter :created_at, type: :datetime
   ransack_filter :updated_at, type: :datetime
   ransack_filter :src_rewrite_rule, type: :string

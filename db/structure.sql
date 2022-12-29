@@ -23112,26 +23112,6 @@ ALTER SEQUENCE class4.lnp_databases_thinq_id_seq OWNED BY class4.lnp_databases_t
 
 
 --
--- Name: numberlist_actions; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.numberlist_actions (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
--- Name: numberlist_modes; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.numberlist_modes (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: radius_accounting_profile_interim_attributes; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -27416,22 +27396,6 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
--- Name: numberlist_modes blacklist_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlist_modes
-    ADD CONSTRAINT blacklist_modes_name_key UNIQUE (name);
-
-
---
--- Name: numberlist_modes blacklist_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlist_modes
-    ADD CONSTRAINT blacklist_modes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: numberlists blacklists_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -27981,22 +27945,6 @@ ALTER TABLE ONLY class4.lnp_databases
 
 ALTER TABLE ONLY class4.lnp_databases_thinq
     ADD CONSTRAINT lnp_databases_thinq_pkey PRIMARY KEY (id);
-
-
---
--- Name: numberlist_actions numberlist_actions_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlist_actions
-    ADD CONSTRAINT numberlist_actions_name_key UNIQUE (name);
-
-
---
--- Name: numberlist_actions numberlist_actions_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlist_actions
-    ADD CONSTRAINT numberlist_actions_pkey PRIMARY KEY (id);
 
 
 --
@@ -29697,14 +29645,6 @@ ALTER TABLE ONLY class4.numberlist_items
 
 
 --
--- Name: numberlists blacklists_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlists
-    ADD CONSTRAINT blacklists_mode_id_fkey FOREIGN KEY (mode_id) REFERENCES class4.numberlist_modes(id);
-
-
---
 -- Name: codec_group_codecs codec_group_codecs_codec_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30233,14 +30173,6 @@ ALTER TABLE ONLY class4.lnp_databases_30x_redirect
 
 
 --
--- Name: numberlist_items numberlist_items_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlist_items
-    ADD CONSTRAINT numberlist_items_action_id_fkey FOREIGN KEY (action_id) REFERENCES class4.numberlist_actions(id);
-
-
---
 -- Name: numberlist_items numberlist_items_lua_script_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30254,14 +30186,6 @@ ALTER TABLE ONLY class4.numberlist_items
 
 ALTER TABLE ONLY class4.numberlist_items
     ADD CONSTRAINT numberlist_items_tag_action_id_fkey FOREIGN KEY (tag_action_id) REFERENCES class4.tag_actions(id);
-
-
---
--- Name: numberlists numberlists_default_action_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlists
-    ADD CONSTRAINT numberlists_default_action_id_fkey FOREIGN KEY (default_action_id) REFERENCES class4.numberlist_actions(id);
 
 
 --
@@ -30744,6 +30668,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221126105630'),
 ('20221216095859'),
 ('20221222184742'),
-('20221226124025');
+('20221226124025'),
+('20221226205639');
 
 

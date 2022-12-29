@@ -4,8 +4,8 @@ RSpec.describe BatchUpdateForm::NumberList, :js do
   include_context :login_as_admin
   let!(:_numberlists) { FactoryBot.create_list :numberlist, 3 }
   let(:success_message) { I18n.t('flash.actions.batch_actions.batch_update.job_scheduled') }
-  let!(:mode) { Routing::NumberlistMode.take! }
-  let!(:default_action) { Routing::NumberlistAction.take! }
+  let!(:mode_id) { Routing::Numberlist::MODE_STRICT }
+  let!(:default_action_id) { Routing::Numberlist::DEFAULT_ACTION_ACCEPT }
   let!(:lua_script) { FactoryBot.create :lua_script }
 
   before do
@@ -21,8 +21,8 @@ RSpec.describe BatchUpdateForm::NumberList, :js do
 
   let(:assign_params) do
     {
-      mode_id: mode.id.to_s,
-      default_action_id: default_action.id.to_s,
+      mode_id: mode_id.to_s,
+      default_action_id: default_action_id.to_s,
       default_src_rewrite_rule: 'string',
       default_src_rewrite_result: 'string',
       default_dst_rewrite_rule: 'string',
@@ -70,7 +70,7 @@ RSpec.describe BatchUpdateForm::NumberList, :js do
 
   context 'should check validates' do
     context 'when :mode_id changed' do
-      let(:assign_params) { { mode_id: mode.id.to_s } }
+      let(:assign_params) { { mode_id: mode_id.to_s } }
 
       it 'should pass validations with success message' do
         expect do

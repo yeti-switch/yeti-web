@@ -23,6 +23,7 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :cont
     let(:factory) { :numberlist_item }
 
     it_behaves_like :jsonapi_filters_by_string_field, :key
+    it_behaves_like :jsonapi_filters_by_number_field, :action_id
     it_behaves_like :jsonapi_filters_by_datetime_field, :created_at
     it_behaves_like :jsonapi_filters_by_datetime_field, :updated_at
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
@@ -63,8 +64,7 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :cont
 
     let(:relationships) do
       {
-        'numberlist': wrap_relationship(:numberlists, numberlist.to_param),
-        'action': wrap_relationship(:'numberlist-actions', Routing::NumberlistAction.take.to_param)
+        'numberlist': wrap_relationship(:numberlists, numberlist.to_param)
       }
     end
 

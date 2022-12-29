@@ -181,4 +181,11 @@ class Importing::Base < ApplicationRecord
     "
     ApplicationRecord.connection.execute(sql)
   end
+
+  def self.resolve_integer_constant(id_column, name_column, collection)
+    collection.each do |cid, cname|
+      sql = "UPDATE #{table_name} ta SET #{id_column} = #{cid} WHERE #{name_column} = '#{cname}'"
+      ApplicationRecord.connection.execute(sql)
+    end
+  end
 end
