@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :routing_plan, class: Routing::RoutingPlan do
     sequence(:name) { |n| "routing_plan_#{n}" }
-    sorting_id { 1 }
+    sorting_id { Routing::RoutingPlan::SORTING_LCR_PRIO_CONTROL }
     rate_delta_max { 0 }
     max_rerouting_attempts { 9 }
     use_lnp { false }
@@ -13,7 +13,7 @@ FactoryBot.define do
     validate_src_number_network { false }
 
     trait :with_static_routes do
-      sorting_id { FactoryBot.create(:sorting, use_static_routes: true).id }
+      sorting_id { Routing::RoutingPlan::SORTING_STATIC_LCR_CONTROL }
     end
 
     trait :filled do

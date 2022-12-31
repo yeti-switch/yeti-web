@@ -12,14 +12,14 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :rate_group_id, type: :foreign_key, class_name: 'Routing::RateGroup'
   attribute :valid_from, type: :date
   attribute :valid_till, type: :date
-  attribute :rate_policy_id, type: :foreign_key, class_name: 'Routing::DestinationRatePolicy'
+  attribute :rate_policy_id, type: :integer_collection, collection: Routing::Destination::RATE_POLICIES.invert.to_a
   attribute :initial_interval
   attribute :initial_rate
   attribute :next_interval
   attribute :next_rate
   attribute :use_dp_intervals, type: :boolean
   attribute :connect_fee
-  attribute :profit_control_mode_id, type: :foreign_key, class_name: 'Routing::RateProfitControlMode'
+  attribute :profit_control_mode_id, type: :integer_collection, collection: Routing::RateProfitControlMode::MODES.invert.to_a
   attribute :dp_margin_fixed
   attribute :dp_margin_percent
   attribute :asr_limit
