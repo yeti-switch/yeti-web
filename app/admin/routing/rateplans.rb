@@ -9,14 +9,13 @@ ActiveAdmin.register Routing::Rateplan do
 
   acts_as_clone links: [:rate_groups]
 
-  acts_as_export :id, :name,
-                 [:profit_control_mode_name, proc { |row| row.profit_control_mode.name }]
+  acts_as_export :id, :name, :profit_control_mode_name
 
   acts_as_import resource_class: Importing::Rateplan
 
   permit_params :name, :profit_control_mode_id, rate_group_ids: [], send_quality_alarms_to: []
 
-  includes :profit_control_mode, :rate_groups, :rate_groups_routing_rateplans
+  includes :rate_groups, :rate_groups_routing_rateplans
 
   index do
     selectable_column
@@ -24,7 +23,7 @@ ActiveAdmin.register Routing::Rateplan do
     actions
     column :name
     column 'Rate Groups', :rate_groups_links
-    column :profit_control_mode
+    column :profit_control_mode, &:profit_control_mode_name
     column :send_quality_alarms_to, :quality_alarm_emails
     column :uuid
     column :external_id
@@ -34,14 +33,14 @@ ActiveAdmin.register Routing::Rateplan do
   filter :uuid_equals, label: 'UUID'
   filter :name
   filter :external_id
-  filter :profit_control_mode, input_html: { class: 'chosen' }, collection: proc { Routing::RateProfitControlMode.pluck(:name, :id) }
+  filter :profit_control_mode_id_eq, label: 'Profit control mode', as: :select, collection: Routing::RateProfitControlMode::MODES.invert
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
       f.input :rate_groups, input_html: { class: 'chosen-sortable', multiple: true }
-      f.input :profit_control_mode
+      f.input :profit_control_mode_id, as: :select, include_blank: false, collection: Routing::RateProfitControlMode::MODES.invert
       f.input :send_quality_alarms_to, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Billing::Contact.collection
     end
     f.actions
@@ -55,7 +54,7 @@ ActiveAdmin.register Routing::Rateplan do
       row 'Rate Groups' do |r|
         r.rate_groups_links(newline: true)
       end
-      row :profit_control_mode
+      row :profit_control_mode, &:profit_control_mode_name
       row :send_quality_alarms_to do |r|
         r.quality_alarm_emails(newline: true)
       end

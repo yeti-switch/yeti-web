@@ -19,12 +19,12 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_export :id, :enabled, :prefix, :dst_number_min_length, :dst_number_max_length,
                  [:rate_group_name, proc { |row| row.rate_group.try(:name) }],
                  :reject_calls,
-                 [:rate_policy_name, proc { |row| row.rate_policy.try(:name) }],
+                 :rate_policy_name,
                  :initial_interval, :next_interval,
                  :use_dp_intervals,
                  :initial_rate, :next_rate, :connect_fee,
                  :dp_margin_fixed, :dp_margin_percent,
-                 [:profit_control_mode_name, proc { |row| row.profit_control_mode.try(:name) }],
+                 :profit_control_mode_name,
                  :valid_from, :valid_till,
                  :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
@@ -71,7 +71,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :external_id_eq, label: 'EXTERNAL_ID'
   filter :valid_from, as: :date_time_range
   filter :valid_till, as: :date_time_range
-  filter :rate_policy, input_html: { class: 'chosen' }, collection: proc { Routing::DestinationRatePolicy.pluck(:name, :id) }
+  filter :rate_policy_id_eq, input_html: { class: 'chosen' }, collection: proc { Routing::DestinationRatePolicy.pluck(:name, :id) }
   boolean_filter :reverse_billing
   filter :initial_interval
   filter :next_interval
@@ -114,7 +114,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:rate_group, :rate_policy, :profit_control_mode, :routing_tag_mode, network_prefix: %i[country network])
+      super.preload(:rate_group, :routing_tag_mode, network_prefix: %i[country network])
     end
   end
 
@@ -153,7 +153,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :valid_from, &:decorated_valid_from
     column :valid_till, &:decorated_valid_till
 
-    column :rate_policy
+    column :rate_policy, &:rate_policy_name
     column :reverse_billing
 
     ## fixed price
@@ -167,7 +167,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     # cost + X ( $ or % )
     column :dp_margin_fixed
     column :dp_margin_percent
-    column :profit_control_mode
+    column :profit_control_mode, &:profit_control_mode_name
     column :external_id
 
     column :asr_limit
@@ -202,6 +202,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
       f.input :rate_policy
+      f.input :rate_policy_id, as: :select, include_blank: false, collection: Routing::Destination::RATE_POLICIES.invert
       f.input :reverse_billing
       f.input :initial_interval
       f.input :next_interval
@@ -211,7 +212,11 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
-      f.input :profit_control_mode, hint: 'Leave it empty to inherit Profit control mode from Rateplan'
+      f.input :profit_control_mode_id,
+              as: :select,
+              include_blank: true,
+              collection: Routing::RateProfitControlMode::MODES.invert,
+              hint: 'Leave it empty to inherit Profit control mode from Rateplan'
     end
 
     f.inputs 'Dialpeer based rating configuration' do
@@ -247,7 +252,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           row :routing_tag_mode
           row :valid_from, &:decorated_valid_from
           row :valid_till, &:decorated_valid_till
-          row :rate_policy
+          row :rate_policy, &:rate_policy_name
           row :reverse_billing
           row :initial_interval
           row :next_interval
@@ -259,7 +264,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
             row :initial_rate
             row :next_rate
             row :connect_fee
-            row :profit_control_mode
+            row :profit_control_mode, &:profit_control_mode_name
           end
         end
         panel 'Dialpeer based rating configuration' do

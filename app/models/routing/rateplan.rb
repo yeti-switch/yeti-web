@@ -17,17 +17,12 @@
 #  rateplans_name_unique      (name) UNIQUE
 #  rateplans_uuid_key         (uuid) UNIQUE
 #
-# Foreign Keys
-#
-#  rateplans_profit_control_mode_id_fkey  (profit_control_mode_id => rate_profit_control_modes.id)
-#
 
 class Routing::Rateplan < ApplicationRecord
   self.table_name = 'class4.rateplans'
 
   include WithPaperTrail
 
-  belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', foreign_key: 'profit_control_mode_id'
   has_many :customers_auths, dependent: :restrict_with_error
   has_and_belongs_to_many :rate_groups, join_table: 'class4.rate_plan_groups', class_name: 'Routing::RateGroup'
   has_many :destinations, class_name: 'Routing::Destination', through: :rate_groups
@@ -43,6 +38,7 @@ class Routing::Rateplan < ApplicationRecord
   validates :name, :profit_control_mode, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :external_id, uniqueness: { allow_blank: true }
+  validates :profit_control_mode_id, inclusion: { in: Routing::RateProfitControlMode::MODES.keys }, allow_nil: false
 
   validate do
     if send_quality_alarms_to.present? && send_quality_alarms_to.any?
@@ -52,6 +48,10 @@ class Routing::Rateplan < ApplicationRecord
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def profit_control_mode_name
+    Routing::RateProfitControlMode::MODES[profit_control_mode_id]
   end
 
   def send_quality_alarms_to=(send_to_ids)

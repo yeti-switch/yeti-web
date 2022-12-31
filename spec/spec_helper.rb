@@ -63,8 +63,6 @@ RSpec.configure do |config|
   config.global_fixtures = [
     'sys.sensor_modes',
     :guiconfig,
-    :sortings,
-    :destination_rate_policy,
     :session_refresh_methods,
     'sys.sensor_levels',
     :disconnect_policy,
@@ -86,7 +84,6 @@ RSpec.configure do |config|
     'class4.gateway_diversion_send_modes',
     'class4.transport_protocols',
     'class4.tag_actions',
-    'class4.rate_profit_control_modes',
     'class4.routing_tag_modes',
     'class4.gateway_group_balancing_modes',
     'sys.timezones',

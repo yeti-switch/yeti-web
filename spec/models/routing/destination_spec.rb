@@ -41,10 +41,8 @@
 #
 # Foreign Keys
 #
-#  destinations_profit_control_mode_id_fkey  (profit_control_mode_id => rate_profit_control_modes.id)
-#  destinations_rate_group_id_fkey           (rate_group_id => rate_groups.id)
-#  destinations_rate_policy_id_fkey          (rate_policy_id => destination_rate_policy.id)
-#  destinations_routing_tag_mode_id_fkey     (routing_tag_mode_id => routing_tag_modes.id)
+#  destinations_rate_group_id_fkey        (rate_group_id => rate_groups.id)
+#  destinations_routing_tag_mode_id_fkey  (routing_tag_mode_id => routing_tag_modes.id)
 #
 
 RSpec.describe Routing::Destination, type: :model do
