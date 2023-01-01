@@ -349,7 +349,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
           column :rateplan
           column :destination
-          column :destination_rate_policy
+          column :destination_rate_policy, &:destination_rate_policy_name
           column :destination_fee
 
           column('Destination rates', sortable: 'destination_next_rate') do |cdr|
@@ -546,7 +546,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           row :rateplan
           row :destination
-          row :destination_rate_policy
+          row :destination_rate_policy, &:destination_rate_policy_name
           row :destination_fee
           row :destination_initial_interval
           row :destination_initial_rate
@@ -703,7 +703,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
     column :rateplan
     column :destination
-    column :destination_rate_policy
+    column :destination_rate_policy, &:destination_rate_policy_name
     column :destination_fee
 
     column('Destination rates', sortable: 'destination_next_rate') do |cdr|
@@ -940,9 +940,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       end
       column :rateplan
       column :destination
-      column :destination_rate_policy do |row|
-        "#{row.destination_rate_policy.name} ##{row.destination_rate_policy.id}" if row.destination_rate_policy.present?
-      end
+      column :destination_rate_policy, &:destination_rate_policy_name
       column :destination_fee
       column :destination_initial_interval
       column :destination_initial_rate

@@ -12,7 +12,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :rate_group_id, type: :foreign_key, class_name: 'Routing::RateGroup'
   attribute :valid_from, type: :date
   attribute :valid_till, type: :date
-  attribute :rate_policy_id, type: :integer_collection, collection: Routing::Destination::RATE_POLICIES.invert.to_a
+  attribute :rate_policy_id, type: :integer_collection, collection: Routing::DestinationRatePolicy::POLICIES.invert.to_a
   attribute :initial_interval
   attribute :initial_rate
   attribute :next_interval

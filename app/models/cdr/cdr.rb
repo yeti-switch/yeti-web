@@ -169,7 +169,7 @@ class Cdr::Cdr < Cdr::Base
     auth_orig_transport_protocol sign_orig_transport_protocol
     src_network src_country
     dst_network dst_country
-    destination_rate_policy routing_plan vendor
+    routing_plan vendor
     term_gw orig_gw customer_auth vendor_acc customer_acc
     dst_area customer rateplan pop src_area lnp_database
     node sign_term_transport_protocol
@@ -189,7 +189,6 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id, optional: true
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id, optional: true
   belongs_to :destination, class_name: 'Routing::Destination', optional: true
-  belongs_to :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
   belongs_to :dialpeer, optional: true
   belongs_to :customer_auth, class_name: 'CustomersAuth', foreign_key: :customer_auth_id, optional: true
   belongs_to :vendor_acc, class_name: 'Account', foreign_key: :vendor_acc_id, optional: true
@@ -275,6 +274,10 @@ class Cdr::Cdr < Cdr::Base
 
   def display_name
     id.to_s
+  end
+
+  def destination_rate_policy_name
+    destination_rate_policy_id.nil? ? nil : Routing::DestinationRatePolicy::POLICIES[destination_rate_policy_id]
   end
 
   # TODO: use DisconnectInitiator#display_name instead

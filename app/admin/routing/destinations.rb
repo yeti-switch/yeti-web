@@ -71,7 +71,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :external_id_eq, label: 'EXTERNAL_ID'
   filter :valid_from, as: :date_time_range
   filter :valid_till, as: :date_time_range
-  filter :rate_policy_id_eq, input_html: { class: 'chosen' }, collection: proc { Routing::DestinationRatePolicy.pluck(:name, :id) }
+  filter :rate_policy_id_eq, input_html: { class: 'chosen' }, collection: Routing::DestinationRatePolicy::POLICIES.invert
   boolean_filter :reverse_billing
   filter :initial_interval
   filter :next_interval
@@ -201,8 +201,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
-      f.input :rate_policy
-      f.input :rate_policy_id, as: :select, include_blank: false, collection: Routing::Destination::RATE_POLICIES.invert
+      f.input :rate_policy_id, as: :select, include_blank: false, collection: Routing::DestinationRatePolicy::POLICIES.invert
       f.input :reverse_billing
       f.input :initial_interval
       f.input :next_interval

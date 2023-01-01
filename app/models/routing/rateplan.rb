@@ -35,7 +35,7 @@ class Routing::Rateplan < ApplicationRecord
     joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
   }
 
-  validates :name, :profit_control_mode, presence: true
+  validates :name, :profit_control_mode_id, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :external_id, uniqueness: { allow_blank: true }
   validates :profit_control_mode_id, inclusion: { in: Routing::RateProfitControlMode::MODES.keys }, allow_nil: false

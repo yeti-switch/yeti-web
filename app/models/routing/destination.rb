@@ -48,17 +48,6 @@
 class Routing::Destination < ApplicationRecord
   self.table_name = 'class4.destinations'
 
-  RATE_POLICY_FIXED = 1
-  RATE_POLICY_DP = 2
-  RATE_POLICY_MIN = 3
-  RATE_POLICY_MAX = 4
-  RATE_POLICIES = {
-    RATE_POLICY_FIXED => 'Fixed',
-    RATE_POLICY_DP => 'Based on used dialpeer',
-    RATE_POLICY_MIN => 'MIN(Fixed,Based on used dialpeer)',
-    RATE_POLICY_MAX => 'MAX(Fixed,Based on used dialpeer)'
-  }.freeze
-
   belongs_to :rate_group, class_name: 'Routing::RateGroup', foreign_key: :rate_group_id
   has_many :rateplans, class_name: 'Routing::Rateplan', through: :rate_group
   has_many :customers_auths, through: :rateplans
@@ -99,7 +88,7 @@ class Routing::Destination < ApplicationRecord
   validates :dst_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
   validates :profit_control_mode_id, inclusion: { in: Routing::RateProfitControlMode::MODES.keys }, allow_nil: true
-  validates :rate_policy_id, inclusion: { in: Routing::Destination::RATE_POLICIES.keys }, allow_nil: false
+  validates :rate_policy_id, inclusion: { in: Routing::DestinationRatePolicy::POLICIES.keys }, allow_nil: false
 
   validates_with RoutingTagIdsValidator
 
@@ -144,7 +133,7 @@ class Routing::Destination < ApplicationRecord
   end
 
   def rate_policy_name
-    RATE_POLICIES[rate_policy_id]
+    Routing::DestinationRatePolicy::POLICIES[rate_policy_id]
   end
 
   def is_valid_from?

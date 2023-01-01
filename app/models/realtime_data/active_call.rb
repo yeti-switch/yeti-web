@@ -82,7 +82,6 @@ class RealtimeData::ActiveCall < YetiResource
   has_one :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
   has_one :routing_group, class_name: 'RoutingGroup', foreign_key: :routing_group_id
   has_one :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
-  has_one :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy', foreign_key: :destination_rate_policy_id
   has_one :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
   has_one :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
   has_one :node, class_name: 'Node', foreign_key: :node_id
@@ -90,6 +89,10 @@ class RealtimeData::ActiveCall < YetiResource
 
   def display_name
     local_tag
+  end
+
+  def destination_rate_policy
+    destination_rate_policy_id.nil? ? nil : Routing::DestinationRatePolicy::POLICIES[destination_rate_policy_id]
   end
 
   def id
