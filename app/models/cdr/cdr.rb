@@ -164,8 +164,20 @@ class Cdr::Cdr < Cdr::Base
     DUMP_LEVEL_ALL => 'Full'
   }.freeze
 
+  DISCONNECT_INITIATOR_ROUTING = 0
+  DISCONNECT_INITIATOR_SWITCH = 1
+  DISCONNECT_INITIATOR_DEST = 2
+  DISCONNECT_INITIATOR_ORIG = 3
+
+  DISCONNECT_INITIATORS = {
+    DISCONNECT_INITIATOR_ROUTING => 'Routing',
+    DISCONNECT_INITIATOR_SWITCH => 'Switch',
+    DISCONNECT_INITIATOR_DEST => 'Destination',
+    DISCONNECT_INITIATOR_ORIG => 'Origination'
+  }.freeze
+
   ADMIN_PRELOAD_LIST = %i[
-    dialpeer routing_group destination disconnect_initiator
+    dialpeer routing_group destination
     auth_orig_transport_protocol sign_orig_transport_protocol
     src_network src_country
     dst_network dst_country
@@ -195,7 +207,6 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id, optional: true
   belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id, optional: true # ,:conditions => {:vendor => true}
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
-  belongs_to :disconnect_initiator, optional: true
   belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id, optional: true
   belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
@@ -280,10 +291,8 @@ class Cdr::Cdr < Cdr::Base
     destination_rate_policy_id.nil? ? nil : Routing::DestinationRatePolicy::POLICIES[destination_rate_policy_id]
   end
 
-  # TODO: use DisconnectInitiator#display_name instead
-  # Why in was cached this way? `DISCONNECTORS = DisconnectInitiator.all.index_by(&:id)`
   def disconnect_initiator_name
-    disconnect_initiator.try(:name)
+    disconnect_initiator_id.nil? ? nil : DISCONNECT_INITIATORS[disconnect_initiator_id]
   end
 
   def has_dump?

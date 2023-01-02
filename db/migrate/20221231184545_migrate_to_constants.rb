@@ -10,11 +10,23 @@ class MigrateToConstants < ActiveRecord::Migration[6.1]
 
       alter table class4.destinations drop constraint destinations_rate_policy_id_fkey;
       drop table class4.destination_rate_policy;
+
+      drop table class4.disconnect_initiators;
     }
   end
 
   def down
         execute %q{
+          create table class4.disconnect_initiators (
+            id integer primary key,
+            name varchar
+          );
+
+          INSERT INTO disconnect_initiators (id, name) VALUES (0, 'Traffic manager');
+          INSERT INTO disconnect_initiators (id, name) VALUES (1, 'Traffic switch');
+          INSERT INTO disconnect_initiators (id, name) VALUES (2, 'Destination');
+          INSERT INTO disconnect_initiators (id, name) VALUES (3, 'Origination');
+
           CREATE TABLE class4.destination_rate_policy (
             id integer primary key,
             name character varying unique NOT NULL

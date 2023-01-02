@@ -33,7 +33,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         super.preload(
           :node,
           :pop,
-          :disconnect_initiator,
           :lb_node
         )
       else
@@ -275,9 +274,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             status_tag(cdr_attempt.legb_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.legb_disconnect_code == 0) || cdr_attempt.legb_disconnect_code.nil?
           end
           column('LegB Reason', &:legb_disconnect_reason)
-          column :disconnect_initiator do |cdr_attempt|
-            "#{cdr_attempt.disconnect_initiator_id} - #{cdr_attempt.disconnect_initiator_name}"
-          end
+          column :disconnect_initiator, &:disconnect_initiator_name
           column :routing_attempt do |cdr_attempt|
             status_tag(cdr_attempt.routing_attempt.to_s, class: cdr_attempt.is_last_cdr? ? :ok : nil)
           end
@@ -431,9 +428,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :status do
             status_tag(cdr.status_sym.to_s, class: cdr.success? ? :ok : nil)
           end
-          row :disconnect_initiator do
-            "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
-          end
+          row :disconnect_initiator, &:disconnect_initiator_name
           row :lega_disconnect_code
           row :lega_disconnect_reason
           row :internal_disconnect_code
@@ -617,9 +612,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       status_tag(cdr.legb_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
     end
     column('LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason)
-    column :disconnect_initiator do |cdr|
-      "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
-    end
+    column :disconnect_initiator, &:disconnect_initiator_name
     column :routing_attempt do |cdr|
       status_tag(cdr.routing_attempt.to_s, class: cdr.is_last_cdr? ? :ok : nil)
     end
@@ -861,9 +854,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         cdr.legb_disconnect_code.to_s unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
       end
       column('LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason)
-      column :disconnect_initiator do |cdr|
-        "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
-      end
+      column :disconnect_initiator, &:disconnect_initiator_name
       column :routing_attempt do |cdr|
         "#{cdr.routing_attempt} #{cdr.is_last_cdr? ? '(last)' : ''}"
       end

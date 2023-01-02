@@ -393,32 +393,6 @@ SELECT pg_catalog.setval('disconnect_code_policy_codes_id_seq', 3, true);
 SELECT pg_catalog.setval('disconnect_code_policy_id_seq', 2, true);
 
 
---
--- TOC entry 4336 (class 0 OID 19203)
--- Dependencies: 319
--- Data for Name: disconnect_initiators; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO disconnect_initiators (id, name) VALUES (0, 'Traffic manager');
-INSERT INTO disconnect_initiators (id, name) VALUES (1, 'Traffic switch');
-INSERT INTO disconnect_initiators (id, name) VALUES (2, 'Destination');
-INSERT INTO disconnect_initiators (id, name) VALUES (3, 'Origination');
-
-
---
--- TOC entry 4334 (class 0 OID 19195)
--- Dependencies: 317
--- Data for Name: disconnect_policy; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-
-
---
--- TOC entry 4332 (class 0 OID 19185)
--- Dependencies: 315
--- Data for Name: disconnect_policy_code; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
 
 
 --

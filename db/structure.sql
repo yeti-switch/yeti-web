@@ -22710,16 +22710,6 @@ ALTER SEQUENCE class4.disconnect_code_policy_id_seq OWNED BY class4.disconnect_p
 
 
 --
--- Name: disconnect_initiators; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.disconnect_initiators (
-    id integer NOT NULL,
-    name character varying
-);
-
-
---
 -- Name: diversion_policy; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -27599,14 +27589,6 @@ ALTER TABLE ONLY class4.disconnect_policy
 
 ALTER TABLE ONLY class4.disconnect_policy
     ADD CONSTRAINT disconnect_code_policy_pkey PRIMARY KEY (id);
-
-
---
--- Name: disconnect_initiators disconnect_initiators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.disconnect_initiators
-    ADD CONSTRAINT disconnect_initiators_pkey PRIMARY KEY (id);
 
 
 --
