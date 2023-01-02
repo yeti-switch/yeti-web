@@ -20,7 +20,7 @@ RSpec.describe 'Export Rateplan', type: :feature do
       [
         ['Id', item.id.to_s],
         ['Name', item.name],
-        ['Profit control mode name', item.profit_control_mode.name]
+        ['Profit control mode name', item.profit_control_mode_name]
       ]
     )
   end

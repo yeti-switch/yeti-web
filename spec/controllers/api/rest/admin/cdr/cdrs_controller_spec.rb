@@ -532,7 +532,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
       }
     end
     let(:includes) do
-      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw destination-rate-policy routing-plan src-country src-network dst-country dst-network]
+      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw routing-plan src-country src-network dst-country dst-network]
     end
 
     it 'http status should eq 200' do
@@ -656,7 +656,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'failed-resource-id' => cdr.failed_resource_id,
             'customer-price-no-vat' => cdr.customer_price_no_vat,
             'customer-duration' => cdr.customer_duration,
-            'vendor-duration' => cdr.vendor_duration
+            'vendor-duration' => cdr.vendor_duration,
+            'destination-rate-policy-id' => cdr.destination_rate_policy_id
           },
           'relationships' => hash_including(
             'rateplan' => hash_including(
@@ -678,9 +679,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
               'data' => nil
             ),
             'customer-auth' => hash_including(
-              'data' => nil
-            ),
-            'destination-rate-policy' => hash_including(
               'data' => nil
             ),
             'vendor' => hash_including(

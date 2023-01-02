@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Admin::Routing::RateplansController, type: :controller do
-  let(:rpcm) { Routing::RateProfitControlMode.last }
-
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
@@ -69,10 +67,13 @@ RSpec.describe Api::Rest::Admin::Routing::RateplansController, type: :controller
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name' } }
-      let(:relationships) do
-        { 'profit-control-mode': wrap_relationship(:rate_profit_control_modes, rpcm.id) }
-      end
+      let(:attributes) {
+        {
+          name: 'name',
+          'profit-control-mode-id': Routing::RateProfitControlMode::MODE_PER_CALL
+        }
+      }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(201) }
       it { expect(Routing::Rateplan.count).to eq(1) }
@@ -99,10 +100,13 @@ RSpec.describe Api::Rest::Admin::Routing::RateplansController, type: :controller
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name' } }
-      let(:relationships) do
-        { 'profit-control-mode': wrap_relationship(:rate_profit_control_modes, rpcm.id) }
-      end
+      let(:attributes) {
+        {
+          name: 'name',
+          'profit-control-mode-id': Routing::RateProfitControlMode::MODE_PER_CALL
+        }
+      }
+      let(:relationships) { {} }
 
       it { expect(response.status).to eq(200) }
       it { expect(rateplan.reload.name).to eq('name') }

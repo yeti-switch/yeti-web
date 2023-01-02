@@ -19,8 +19,8 @@ FactoryBot.define do
     next_interval { 60 }
     initial_rate { 0 }
     next_rate { 0 }
-    rate_policy_name { 'Fixed' }
-    rate_policy_id { 1 }
+    rate_policy_name { Routing::DestinationRatePolicy::POLICIES[Routing::DestinationRatePolicy::POLICY_FIXED] }
+    rate_policy_id { Routing::DestinationRatePolicy::POLICY_FIXED }
     dp_margin_fixed { 0 }
     dp_margin_percent { 0 }
     use_dp_intervals { false }

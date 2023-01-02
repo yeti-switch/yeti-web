@@ -6,8 +6,8 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
   let!(:rate_group) { Routing::RateGroup.take || FactoryBot.create(:rate_group) }
   let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
-  let!(:rate_policy) { Routing::DestinationRatePolicy.take! }
-  let!(:profit_control_mode) { Routing::RateProfitControlMode.take! || FactoryBot.create(:rate_profit_control_mode) }
+  let!(:rate_policy_id) { Routing::DestinationRatePolicy::POLICY_DP }
+  let!(:profit_control_mode_id) { Routing::RateProfitControlMode::MODE_PER_CALL }
   let!(:routing_tags) { create_list(:routing_tag, 5) }
 
   before do
@@ -33,14 +33,14 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       rate_group_id: rate_group.id.to_s,
       valid_from: '2020-01-10',
       valid_till: '2020-01-20',
-      rate_policy_id: rate_policy.id.to_s,
+      rate_policy_id: rate_policy_id.to_s,
       initial_interval: '1',
       initial_rate: '1',
       next_interval: '2',
       next_rate: '3',
       use_dp_intervals: false,
       connect_fee: '1',
-      profit_control_mode_id: profit_control_mode.id.to_s,
+      profit_control_mode_id: profit_control_mode_id.to_s,
       dp_margin_fixed: '1',
       dp_margin_percent: '2',
       asr_limit: '0.9',

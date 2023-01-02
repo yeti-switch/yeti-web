@@ -59,7 +59,7 @@ class Routing::RoutingPlan < ApplicationRecord
 
   validates :sorting_id, inclusion: { in: SORTINGS.keys }, allow_nil: false
 
-  scope :having_static_routes, -> { joins(:sorting).merge(Sorting.with_static_routes) }
+  scope :having_static_routes, -> { where(sorting_id: SORTINGS_WITH_STATIC_ROUTES) }
 
   def display_name
     "#{name} | #{id}"

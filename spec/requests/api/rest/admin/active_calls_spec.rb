@@ -211,7 +211,7 @@ RSpec.describe Api::Rest::Admin::ActiveCallsController, type: :request do
 
     rels = %i[
       customer vendor customer-acc vendor-acc customer-auth destination dialpeer
-      orig-gw term-gw routing-group rateplan destination-rate-policy node
+      orig-gw term-gw routing-group rateplan node
     ]
 
     it_behaves_like :json_api_admin_check_authorization do
