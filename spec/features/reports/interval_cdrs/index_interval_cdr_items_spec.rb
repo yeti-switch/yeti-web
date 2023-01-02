@@ -14,7 +14,7 @@ RSpec.describe 'Index interval cdr interval items', js: true do
     subject
     expect(page).to have_table
     within_table_row(id: interval_data.id) do
-      expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
+      expect(page).to have_table_cell(text: 'Traffic switch', column: 'Disconnect initiator')
     end
   end
 end

@@ -109,12 +109,13 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
           'next-rate': 0,
           'connect-fee': 0,
           'dp-margin-fixed': 0,
-          'dp-margin-percent': 0 }
+          'dp-margin-percent': 0,
+          'profit-control-mode-id': Routing::RateProfitControlMode::MODE_PER_CALL,
+          'rate-policy-id': Routing::DestinationRatePolicy::POLICY_MIN }
       end
 
       let(:relationships) do
         { 'rate-group': wrap_relationship(:'rate-groups', create(:rate_group).id),
-          'rate-policy': wrap_relationship(:'destination-rate-policies', 1),
           'routing-tag-mode': wrap_relationship(:'routing-tag-modes', 1) }
       end
 

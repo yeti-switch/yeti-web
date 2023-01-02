@@ -49,7 +49,6 @@ class Report::IntervalCdr < Cdr::Base
     vendor_acc_id
     customer_acc_id
     disconnect_initiator_id
-    destination_rate_policy_id
     node_id
     pop_id
     destination_next_rate

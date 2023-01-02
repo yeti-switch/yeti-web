@@ -20,7 +20,7 @@ FactoryBot.define do
     date_start { Time.now.utc }
     date_end { Time.now.utc + 1.week }
     interval_length { 10 }
-    group_by { %w[destination_rate_policy_id] }
+    group_by { %w[disconnect_initiator_id] }
     aggregator_id { Report::IntervalAggregator.take.id }
     aggregate_by { 'destination_fee' }
   end
