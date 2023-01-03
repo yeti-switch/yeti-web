@@ -52,8 +52,8 @@ module GroupReportTools
       custom_items.with_includes
     end
 
-    def csv_columns
-      (auto_columns + report_items_class.report_columns.map(&:to_sym))
+    def csv_columns(constant_columns = {})
+      (auto_columns(constant_columns).map { |c| c[0] } + report_items_class.report_columns.map(&:to_sym))
     end
   end
 end

@@ -10,7 +10,7 @@ module SendReport
 
     def csv_data
       [
-        CsvData.new(report.csv_columns, report.report_records)
+        CsvData.new(report.csv_columns(Report::CustomCdr::CDR_COLUMNS_CONSTANTS), report.report_records)
       ]
     end
 
@@ -22,8 +22,8 @@ module SendReport
 
     def email_columns
       d = []
-      report.auto_columns.each do |col|
-        d << col
+      report.auto_columns(Report::CustomCdr::CDR_COLUMNS_CONSTANTS).each do |col|
+        d << col[0]
       end
 
       d += [
