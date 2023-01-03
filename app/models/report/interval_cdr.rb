@@ -103,6 +103,10 @@ class Report::IntervalCdr < Cdr::Base
     dst_network_id
   ].freeze
 
+  CDR_COLUMNS_CONSTANTS = {
+    'disconnect_initiator_id' => %i[disconnect_initiator disconnect_initiator_name]
+  }.freeze
+
   CDR_AGG_COLUMNS = %i[
     destination_next_rate
     destination_fee

@@ -73,7 +73,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
 
-  filter :dump_level_id_eq, label: 'Dump level', as: :select, collection: Cdr::Cdr::DUMP_LEVELS.invert
+  filter :dump_level_id_eq, label: 'Dump level', as: :select,
+                            collection: Cdr::Cdr::DUMP_LEVELS.invert
+  filter :disconnect_initiator_id_eq, label: 'Disconnect initiator', as: :select,
+                                      collection: Cdr::Cdr::DISCONNECT_INITIATORS.invert
 
   filter :orig_gw_id_eq,
          as: :select,
@@ -103,12 +106,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_group, collection: proc { RoutingGroup.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :rateplan, collection: proc { Routing::Rateplan.select(%i[id name]) }, input_html: { class: 'chosen' }
 
-  filter :internal_disconnect_code, as: :string_eq
-  filter :internal_disconnect_reason, as: :string_eq
-  filter :lega_disconnect_code, as: :string_eq
-  filter :lega_disconnect_reason, as: :string_eq
-  filter :legb_disconnect_code, as: :string_eq
-  filter :legb_disconnect_reason, as: :string_eq
+  filter :internal_disconnect_code
+  filter :internal_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :lega_disconnect_code
+  filter :lega_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :legb_disconnect_code
+  filter :legb_disconnect_reason, filters: %i[equals contains starts_with ends_with]
 
   filter :src_prefix_in, as: :string_eq
   filter :dst_prefix_in, as: :string_eq

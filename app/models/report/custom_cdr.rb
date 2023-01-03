@@ -106,6 +106,10 @@ class Report::CustomCdr < Cdr::Base
     p_charge_info_in
   ].freeze
 
+  CDR_COLUMNS_CONSTANTS = {
+    'disconnect_initiator_id' => %i[disconnect_initiator disconnect_initiator_name]
+  }.freeze
+
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true
 
   validates :group_by, :date_start, :date_end, presence: true

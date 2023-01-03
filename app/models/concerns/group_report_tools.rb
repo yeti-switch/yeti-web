@@ -26,19 +26,16 @@ module GroupReportTools
     #      auto_includes +  (group_by.map(&:to_sym) - belongs_to_relations.map{|r| r.foreign_key })
     #    end
 
-    def auto_columns
+    def auto_columns(constant_columns = {})
       return [] if group_by.blank?
 
-      #      attrs =  group_by.map(&:to_sym)
-      #      belongs_to_relations.each do |c|
-      #        attrs.map!{ |e|
-      #          e==c.foreign_key.to_sym ? c.name.to_sym : e
-      #        }
-      #      end
-      #      attrs
       group_by.map do |attribute_name|
-        relation = belongs_to_relations.detect { |e| e.foreign_key.to_s == attribute_name }
-        relation&.name&.to_sym || attribute_name.to_sym
+        if constant_columns.key?(attribute_name)
+          constant_columns[attribute_name]
+        else
+          relation = belongs_to_relations.detect { |e| e.foreign_key.to_s == attribute_name }
+          [relation&.name&.to_sym || attribute_name.to_sym, relation&.name&.to_sym || attribute_name.to_sym]
+        end
       end
     end
 
