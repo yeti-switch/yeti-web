@@ -104,7 +104,7 @@ class Report::IntervalCdr < Cdr::Base
   ].freeze
 
   CDR_COLUMNS_CONSTANTS = {
-    'disconnect_initiator_id' => %i[disconnect_initiator disconnect_initiator_name]
+    disconnect_initiator_id: %i[disconnect_initiator disconnect_initiator_name].freeze
   }.freeze
 
   CDR_AGG_COLUMNS = %i[
@@ -139,5 +139,11 @@ class Report::IntervalCdr < Cdr::Base
 
   def aggregation
     "#{aggregation_function.name}(#{aggregate_by})"
+  end
+
+  private
+
+  def auto_column_constants
+    CDR_COLUMNS_CONSTANTS
   end
 end

@@ -26,15 +26,18 @@ module GroupReportTools
     #      auto_includes +  (group_by.map(&:to_sym) - belongs_to_relations.map{|r| r.foreign_key })
     #    end
 
-    def auto_columns(constant_columns = {})
+    # @return [Array<Array>] array of pairs column name and attribute name.
+    def auto_columns
       return [] if group_by.blank?
 
       group_by.map do |attribute_name|
-        if constant_columns.key?(attribute_name)
-          constant_columns[attribute_name]
+        attribute_name = attribute_name.to_sym
+        if auto_column_constants.key?(attribute_name)
+          auto_column_constants[attribute_name]
         else
-          relation = belongs_to_relations.detect { |e| e.foreign_key.to_s == attribute_name }
-          [relation&.name&.to_sym || attribute_name.to_sym, relation&.name&.to_sym || attribute_name.to_sym]
+          relation = belongs_to_relations.detect { |e| e.foreign_key.to_sym == attribute_name }
+          column_name = relation ? relation.name.to_sym : attribute_name
+          [column_name, column_name]
         end
       end
     end
@@ -52,8 +55,15 @@ module GroupReportTools
       custom_items.with_includes
     end
 
-    def csv_columns(constant_columns = {})
-      (auto_columns(constant_columns).map { |c| c[0] } + report_items_class.report_columns.map(&:to_sym))
+    def csv_columns
+      auto_columns.map(&:first) + report_items_class.report_columns.map(&:to_sym)
     end
+  end
+
+  private
+
+  # @return [Hash<Symbol,Array>]
+  def auto_column_constants
+    {}
   end
 end

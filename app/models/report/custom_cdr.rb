@@ -107,7 +107,7 @@ class Report::CustomCdr < Cdr::Base
   ].freeze
 
   CDR_COLUMNS_CONSTANTS = {
-    'disconnect_initiator_id' => %i[disconnect_initiator disconnect_initiator_name]
+    disconnect_initiator_id: %i[disconnect_initiator disconnect_initiator_name].freeze
   }.freeze
 
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true
@@ -119,5 +119,11 @@ class Report::CustomCdr < Cdr::Base
 
   def display_name
     id.to_s
+  end
+
+  private
+
+  def auto_column_constants
+    CDR_COLUMNS_CONSTANTS
   end
 end
