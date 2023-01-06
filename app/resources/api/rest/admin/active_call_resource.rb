@@ -67,7 +67,6 @@ class Api::Rest::Admin::ActiveCallResource < ::BaseResource
   has_one :term_gw, class_name: 'Gateway'
   has_one :routing_group, class_name: 'RoutingGroup'
   has_one :rateplan, class_name: 'Routing::Rateplan'
-  has_one :destination_rate_policy, class_name: 'Routing::DestinationRatePolicy'
   has_one :node, class_name: 'Node', foreign_key: :node_id
 
   filter :node_id_eq

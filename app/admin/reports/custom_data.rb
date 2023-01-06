@@ -90,8 +90,8 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
   end
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
-    assigns[:custom_cdr].auto_columns.each do |col|
-      column col
+    assigns[:custom_cdr].auto_columns.each do |(column_name, attribute_name)|
+      column(column_name, &attribute_name)
     end
 
     column :calls_count, sortable: :agg_calls_count, footer: lambda {

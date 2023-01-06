@@ -31,7 +31,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
     column :rate_group, sortable: :rate_group_name
     column :routing_tag_ids
     column :routing_tag_mode, sortable: :routing_tag_mode_name
-    column :rate_policy, sortable: :rate_policy_name
+    column :rate_policy, &:rate_policy_display_name
     column :reverse_billing
     column :initial_interval
     column :initial_rate

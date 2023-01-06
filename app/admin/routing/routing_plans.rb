@@ -13,7 +13,7 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_delayed_job_lock
   acts_as_export :id,
                  :name,
-                 [:sorting_name, proc { |row| row.sorting.try(:name) || '' }],
+                 :sorting_name,
                  :use_lnp,
                  :rate_delta_max,
                  :max_rerouting_attempts,
@@ -27,11 +27,11 @@ ActiveAdmin.register Routing::RoutingPlan do
                 :validate_src_number_format, :validate_src_number_network,
                 routing_group_ids: []
 
-  includes :sorting, :routing_groups
+  includes :routing_groups
 
   filter :id
   filter :name
-  filter :sorting
+  filter :sorting_id_eq, label: 'Sorting', as: :select, collection: Routing::RoutingPlan::SORTINGS.invert
   filter :use_lnp, as: :select, collection: [['Yes', true], ['No', false]]
   account_filter :customers_auths_account_id_eq, label: 'Assigned to account', path_params: { q: { contractor_customer_eq: true } }
   filter :rate_delta_max
@@ -43,7 +43,7 @@ ActiveAdmin.register Routing::RoutingPlan do
     id_column
     actions
     column :name
-    column :sorting, sortable: 'sortings.name'
+    column :sorting, &:sorting_name
     column 'Use LNP', :use_lnp
     column :rate_delta_max
     column :max_rerouting_attempts
@@ -60,7 +60,7 @@ ActiveAdmin.register Routing::RoutingPlan do
     attributes_table do
       row :id
       row :name
-      row :sorting
+      row :sorting, &:sorting_name
       row :use_lnp
       row :rate_delta_max
       row :max_rerouting_attempts
@@ -79,7 +79,7 @@ ActiveAdmin.register Routing::RoutingPlan do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :sorting
+      f.input :sorting_id, as: :select, include_blank: false, collection: Routing::RoutingPlan::SORTINGS.invert
       f.input :use_lnp
       f.input :rate_delta_max
       f.input :max_rerouting_attempts

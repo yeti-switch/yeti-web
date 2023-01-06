@@ -1,20 +1,10 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: class4.rate_profit_control_modes
-#
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#
-# Indexes
-#
-#  rate_profit_control_modes_name_key  (name) UNIQUE
-#
-
-class Routing::RateProfitControlMode < ApplicationRecord
-  self.table_name = 'class4.rate_profit_control_modes'
-  def display_name
-    name.to_s
-  end
+class Routing::RateProfitControlMode
+  MODE_DISABLED = 1
+  MODE_PER_CALL = 2
+  MODES = {
+    MODE_DISABLED => 'Disabled',
+    MODE_PER_CALL => 'Per call'
+  }.freeze
 end

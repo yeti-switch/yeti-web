@@ -4,7 +4,6 @@ RSpec.describe BatchUpdateForm::RoutingPlan, :js do
   include_context :login_as_admin
   let!(:_routing_plans) { FactoryBot.create_list :routing_plan, 3 }
   let(:success_message) { I18n.t('flash.actions.batch_actions.batch_update.job_scheduled') }
-  let!(:sorting) { Sorting.take || FactoryBot.create(:sorting) }
 
   before do
     visit routing_routing_plans_path
@@ -14,7 +13,7 @@ RSpec.describe BatchUpdateForm::RoutingPlan, :js do
 
   let(:assign_params) do
     {
-      sorting_id: sorting.id.to_s,
+      sorting_id: Routing::RoutingPlan::SORTING_LCR_PRIO_CONTROL.to_s,
       use_lnp: true,
       rate_delta_max: '2.5'
     }

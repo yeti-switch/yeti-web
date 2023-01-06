@@ -20,7 +20,7 @@ RSpec.describe 'Export Routing Plans', type: :feature do
       [
         ['Id', item.id.to_s],
         ['Name', item.name],
-        ['Sorting name', item.sorting.name],
+        ['Sorting name', item.sorting_name],
         ['Use lnp', item.use_lnp.to_s],
         ['Rate delta max', item.rate_delta_max.to_s],
         ['Max rerouting attempts', item.max_rerouting_attempts.to_s],

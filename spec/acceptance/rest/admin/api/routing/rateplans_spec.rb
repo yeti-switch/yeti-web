@@ -11,8 +11,6 @@ RSpec.resource 'Rateplans' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'rateplans' }
 
-  let(:profit_control_mode) { Routing::RateProfitControlMode.last }
-
   get '/api/rest/admin/routing/rateplans' do
     jsonapi_filters Api::Rest::Admin::Routing::RateplanResource._allowed_filters
 
@@ -34,11 +32,11 @@ RSpec.resource 'Rateplans' do
   post '/api/rest/admin/routing/rateplans' do
     parameter :type, 'Resource type (rateplans)', scope: :data, required: true
 
-    jsonapi_attributes([:name], [])
-    jsonapi_relationships([:'profit-control-mode'], [])
+    jsonapi_attributes([:name], [:'profit-control-mode-id'])
+    jsonapi_relationships([], [])
 
     let(:name) { 'name' }
-    let(:'profit-control-mode') { wrap_relationship(:rate_profit_control_modes, profit_control_mode.id) }
+    let(:'profit-control-mode-id') { Routing::RateProfitControlMode::MODE_PER_CALL }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -49,12 +47,12 @@ RSpec.resource 'Rateplans' do
     parameter :type, 'Resource type (rateplans)', scope: :data, required: true
     parameter :id, 'Rateplan ID', scope: :data, required: true
 
-    jsonapi_attributes([:name], [])
-    jsonapi_relationships([:'profit-control-mode'], [])
+    jsonapi_attributes([:name], [:'profit-control-mode-id'])
+    jsonapi_relationships([], [])
 
     let(:id) { create(:rateplan).id }
     let(:name) { 'name' }
-    let(:'profit-control-mode') { wrap_relationship(:rate_profit_control_modes, profit_control_mode.id) }
+    let(:'profit-control-mode-id') { Routing::RateProfitControlMode::MODE_DISABLED }
 
     example_request 'update values' do
       expect(status).to eq(200)

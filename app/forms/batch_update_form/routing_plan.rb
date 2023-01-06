@@ -2,7 +2,7 @@
 
 class BatchUpdateForm::RoutingPlan < BatchUpdateForm::Base
   model_class 'Routing::RoutingPlan'
-  attribute :sorting_id, type: :foreign_key, class_name: 'Sorting'
+  attribute :sorting_id, type: :integer_collection, collection: Routing::RoutingPlan::SORTINGS.invert.to_a
   attribute :use_lnp, type: :boolean
   attribute :rate_delta_max
   attribute :validate_dst_number_format, type: :boolean

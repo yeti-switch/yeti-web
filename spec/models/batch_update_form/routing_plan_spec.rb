@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe BatchUpdateForm::RoutingPlan do
-  let!(:sorting) { Sorting.take || FactoryBot.create(:sorting) }
   let!(:assign_params) do
     {
-      sorting_id: sorting.id.to_s,
+      sorting_id: Routing::RoutingPlan::SORTING_LCRD_PRIO_CONTROL.to_s,
       use_lnp: 'true',
       rate_delta_max: '2.5'
     }

@@ -21,13 +21,27 @@
 #  routing_plans_external_id_key  (external_id) UNIQUE
 #  routing_plans_name_key         (name) UNIQUE
 #
-# Foreign Keys
-#
-#  routing_plans_sorting_id_fkey  (sorting_id => sortings.id)
-#
 
 class Routing::RoutingPlan < ApplicationRecord
   self.table_name = 'class4.routing_plans'
+
+  SORTING_LCR_PRIO_CONTROL = 1
+  SORTING_LCR_NOCONTROL = 2
+  SORTING_PRIO_LCR_CONTROL = 3
+  SORTING_LCRD_PRIO_CONTROL = 4
+  SORTING_TESTING = 5
+  SORTING_STATIC_LCR_CONTROL = 6
+  SORTING_STATIC_ONLY_NOCONTROL = 7
+  SORTINGS = {
+    SORTING_LCR_PRIO_CONTROL => 'LCR,Prio, ACD&ASR control',
+    SORTING_LCR_NOCONTROL => 'LCR, No ACD&ASR control',
+    SORTING_PRIO_LCR_CONTROL => 'Prio,LCR, ACD&ASR control',
+    SORTING_LCRD_PRIO_CONTROL => 'LCRD, Prio, ACD&ASR control',
+    SORTING_TESTING => 'Route testing',
+    SORTING_STATIC_LCR_CONTROL => 'QD-Static, LCR, ACD&ASR control',
+    SORTING_STATIC_ONLY_NOCONTROL => 'Static only, No ACD&ASR control'
+  }.freeze
+  SORTINGS_WITH_STATIC_ROUTES = [SORTING_STATIC_LCR_CONTROL, SORTING_STATIC_ONLY_NOCONTROL].freeze
 
   has_and_belongs_to_many :routing_groups, join_table: 'class4.routing_plan_groups', class_name: 'RoutingGroup'
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :routing_plan_id, dependent: :restrict_with_error
@@ -35,7 +49,6 @@ class Routing::RoutingPlan < ApplicationRecord
                            foreign_key: :routing_plan_id, dependent: :delete_all
 
   has_many :lnp_rules, class_name: 'Lnp::RoutingPlanLnpRule', foreign_key: :routing_plan_id, dependent: :delete_all
-  belongs_to :sorting
 
   include WithPaperTrail
 
@@ -44,24 +57,25 @@ class Routing::RoutingPlan < ApplicationRecord
   validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true }
   validates :external_id, uniqueness: { allow_blank: true }
 
-  scope :having_static_routes, -> { joins(:sorting).merge(Sorting.with_static_routes) }
+  validates :sorting_id, inclusion: { in: SORTINGS.keys }, allow_nil: false
+
+  scope :having_static_routes, -> { where(sorting_id: SORTINGS_WITH_STATIC_ROUTES) }
 
   def display_name
     "#{name} | #{id}"
   end
 
-  # #todo: remove this
-  # def use_lnp_sym
-  #   self.use_lnp ?  :true : :false
-  # end
+  def sorting_name
+    SORTINGS[sorting_id]
+  end
 
-  delegate :use_static_routes?, to: :sorting
+  def use_static_routes?
+    SORTINGS_WITH_STATIC_ROUTES.include?(sorting_id)
+  end
 
   def have_routing_groups?
     routing_groups.count > 0
   end
-
-  #  after_update :delete_static_routes, if: proc {|obj| obj.sorting_id_changed? }
 
   private
 

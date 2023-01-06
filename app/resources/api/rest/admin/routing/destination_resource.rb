@@ -5,13 +5,12 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
-             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing
+             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing,
+             :profit_control_mode_id, :rate_policy_id
 
   paginator :paged
 
   has_one :rate_group, class_name: 'RateGroup'
-  has_one :rate_policy, class_name: 'DestinationRatePolicy'
-  has_one :profit_control_mode, class_name: 'RateProfitControlMode'
   has_one :routing_tag_mode, class_name: 'RoutingTagMode'
 
   filters :external_id, :prefix, :rate_group_id
@@ -38,6 +37,8 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   ransack_filter :dst_number_min_length, type: :number
   ransack_filter :dst_number_max_length, type: :number
   ransack_filter :reverse_billing, type: :boolean
+  ransack_filter :profit_control_mode_id, type: :number
+  ransack_filter :rate_policy_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
@@ -50,14 +51,14 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
       next_interval
       dp_margin_fixed
       dp_margin_percent
-      rate_policy
+      rate_policy_id
       initial_rate
       reverse_billing
       reject_calls
       use_dp_intervals
       valid_from
       valid_till
-      profit_control_mode
+      profit_control_mode_id
       routing_tag_mode
       external_id
       asr_limit

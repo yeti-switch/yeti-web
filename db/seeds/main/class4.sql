@@ -166,26 +166,6 @@ SELECT pg_catalog.setval('customers_auth_id_seq', 20083, true);
 
 
 --
--- TOC entry 4325 (class 0 OID 19150)
--- Dependencies: 308
--- Data for Name: destination_rate_policy; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO destination_rate_policy (id, name) VALUES (1, 'Fixed');
-INSERT INTO destination_rate_policy (id, name) VALUES (2, 'Based on used dialpeer');
-INSERT INTO destination_rate_policy (id, name) VALUES (3, 'MIN(Fixed,Based on used dialpeer)');
-INSERT INTO destination_rate_policy (id, name) VALUES (4, 'MAX(Fixed,Based on used dialpeer)');
-
-
---
--- TOC entry 4306 (class 0 OID 18506)
--- Dependencies: 273
--- Data for Name: destinations; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-
-
---
 -- TOC entry 4436 (class 0 OID 0)
 -- Dependencies: 309
 -- Name: destinations_id_seq; Type: SEQUENCE SET; Schema: class4; Owner: yeti
@@ -412,32 +392,6 @@ SELECT pg_catalog.setval('disconnect_code_policy_codes_id_seq', 3, true);
 
 SELECT pg_catalog.setval('disconnect_code_policy_id_seq', 2, true);
 
-
---
--- TOC entry 4336 (class 0 OID 19203)
--- Dependencies: 319
--- Data for Name: disconnect_initiators; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO disconnect_initiators (id, name) VALUES (0, 'Traffic manager');
-INSERT INTO disconnect_initiators (id, name) VALUES (1, 'Traffic switch');
-INSERT INTO disconnect_initiators (id, name) VALUES (2, 'Destination');
-INSERT INTO disconnect_initiators (id, name) VALUES (3, 'Origination');
-
-
---
--- TOC entry 4334 (class 0 OID 19195)
--- Dependencies: 317
--- Data for Name: disconnect_policy; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-
-
---
--- TOC entry 4332 (class 0 OID 19185)
--- Dependencies: 315
--- Data for Name: disconnect_policy_code; Type: TABLE DATA; Schema: class4; Owner: yeti
---
 
 
 
@@ -677,24 +631,6 @@ SELECT pg_catalog.setval('radius_auth_profiles_id_seq', 1, false);
 
 
 --
--- TOC entry 4364 (class 0 OID 19348)
--- Dependencies: 347
--- Data for Name: rate_profit_control_modes; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO rate_profit_control_modes (id, name) VALUES (1, 'no control');
-INSERT INTO rate_profit_control_modes (id, name) VALUES (2, 'per call');
-
-
---
--- TOC entry 4365 (class 0 OID 19354)
--- Dependencies: 348
--- Data for Name: rateplans; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-
-
---
 -- TOC entry 4452 (class 0 OID 0)
 -- Dependencies: 349
 -- Name: rateplans_id_seq; Type: SEQUENCE SET; Schema: class4; Owner: yeti
@@ -870,30 +806,6 @@ INSERT INTO session_refresh_methods (id, value, name) VALUES (3, 'UPDATE_FALLBAC
 --
 
 SELECT pg_catalog.setval('session_refresh_methods_id_seq', 3, true);
-
-
---
--- TOC entry 4386 (class 0 OID 19446)
--- Dependencies: 369
--- Data for Name: sortings; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (2, 'LCR, No ACD&ASR control', 'Without ACD&ASR control', false);
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (3, 'Prio,LCR, ACD&ASR control', 'Same as default, but priotity has more weight', false);
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (1, 'LCR,Prio, ACD&ASR control', 'Default dialpeer sorting method', false);
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (4, 'LCRD, Prio, ACD&ASR control', 'Same as default, but take in account diff between costs', false);
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (5, 'Route testing', NULL, false);
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (6, 'QD-Static, LCR, ACD&ASR control', NULL, true);
-INSERT INTO sortings (id, name, description, use_static_routes) VALUES (7, 'Static only, No ACD&ASR control', NULL, true);
-
-
---
--- TOC entry 4462 (class 0 OID 0)
--- Dependencies: 370
--- Name: sortings_id_seq; Type: SEQUENCE SET; Schema: class4; Owner: yeti
---
-
-SELECT pg_catalog.setval('sortings_id_seq', 3, true);
 
 
 --

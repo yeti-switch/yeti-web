@@ -11,7 +11,7 @@ RSpec.describe 'Create new Rateplan', type: :feature, js: true do
     let(:attributes) do
       {
         name: 'test rateplan',
-        profit_control_mode_id: 'per call'
+        profit_control_mode_id: Routing::RateProfitControlMode::MODES[Routing::RateProfitControlMode::MODE_PER_CALL]
       }
     end
 
@@ -21,7 +21,7 @@ RSpec.describe 'Create new Rateplan', type: :feature, js: true do
 
       expect(Routing::Rateplan.last).to have_attributes(
         name: attributes[:name],
-        profit_control_mode_id: 2 # TODO: fix it
+        profit_control_mode_id: Routing::RateProfitControlMode::MODE_PER_CALL
       )
     end
   end

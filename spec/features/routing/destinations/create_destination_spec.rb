@@ -21,7 +21,7 @@ RSpec.describe 'Create new Destinations', type: :feature do
         reverse_billing: true,
         initial_rate: 60,
         next_rate: 30,
-        profit_control_mode_id: rateplan.profit_control_mode.name,
+        profit_control_mode_id: rateplan.profit_control_mode_name,
         routing_tag_ids: [tag.name, Routing::RoutingTag::ANY_TAG]
       }
     end
@@ -38,7 +38,7 @@ RSpec.describe 'Create new Destinations', type: :feature do
         reverse_billing: true,
         initial_rate: attributes[:initial_rate],
         next_rate: attributes[:next_rate],
-        profit_control_mode_id: rateplan.profit_control_mode.id,
+        profit_control_mode_id: rateplan.profit_control_mode_id,
         routing_tag_ids: [tag.id, nil]
       )
     end

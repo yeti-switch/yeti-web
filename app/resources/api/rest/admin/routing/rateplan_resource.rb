@@ -3,20 +3,19 @@
 class Api::Rest::Admin::Routing::RateplanResource < BaseResource
   model_name 'Routing::Rateplan'
 
-  attributes :name
-
-  has_one :profit_control_mode, class_name: 'RateProfitControlMode'
+  attributes :name, :profit_control_mode_id
 
   paginator :paged
 
   filter :name # DEPRECATED
 
   ransack_filter :name, type: :string
+  ransack_filter :profit_control_mode_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
       name
-      profit_control_mode
+      profit_control_mode_id
     ]
   end
 

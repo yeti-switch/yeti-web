@@ -49,7 +49,6 @@ class Report::IntervalCdr < Cdr::Base
     vendor_acc_id
     customer_acc_id
     disconnect_initiator_id
-    destination_rate_policy_id
     node_id
     pop_id
     destination_next_rate
@@ -104,6 +103,10 @@ class Report::IntervalCdr < Cdr::Base
     dst_network_id
   ].freeze
 
+  CDR_COLUMNS_CONSTANTS = {
+    disconnect_initiator_id: %i[disconnect_initiator disconnect_initiator_name].freeze
+  }.freeze
+
   CDR_AGG_COLUMNS = %i[
     destination_next_rate
     destination_fee
@@ -136,5 +139,11 @@ class Report::IntervalCdr < Cdr::Base
 
   def aggregation
     "#{aggregation_function.name}(#{aggregate_by})"
+  end
+
+  private
+
+  def auto_column_constants
+    CDR_COLUMNS_CONSTANTS
   end
 end

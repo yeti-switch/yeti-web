@@ -21,12 +21,7 @@ module SendReport
     end
 
     def email_columns
-      d = []
-      report.auto_columns.each do |col|
-        d << col
-      end
-
-      d += [
+      report.auto_columns.map(&:first) + [
         [:agg_calls_count, 'Calls count'],
         [:decorated_agg_calls_duration, 'Duration'],
         [:decorated_agg_calls_acd, 'ACD'],
@@ -36,8 +31,6 @@ module SendReport
         [:decorated_agg_customer_price, 'Origination cost'],
         [:decorated_agg_profit, 'Profit']
       ]
-
-      d
     end
   end
 end

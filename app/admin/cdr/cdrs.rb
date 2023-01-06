@@ -33,7 +33,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         super.preload(
           :node,
           :pop,
-          :disconnect_initiator,
           :lb_node
         )
       else
@@ -74,7 +73,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
 
-  filter :dump_level_id_eq, label: 'Dump level', as: :select, collection: Cdr::Cdr::DUMP_LEVELS.invert
+  filter :dump_level_id_eq, label: 'Dump level', as: :select,
+                            collection: Cdr::Cdr::DUMP_LEVELS.invert
+  filter :disconnect_initiator_id_eq, label: 'Disconnect initiator', as: :select,
+                                      collection: Cdr::Cdr::DISCONNECT_INITIATORS.invert
 
   filter :orig_gw_id_eq,
          as: :select,
@@ -104,12 +106,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_group, collection: proc { RoutingGroup.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :rateplan, collection: proc { Routing::Rateplan.select(%i[id name]) }, input_html: { class: 'chosen' }
 
-  filter :internal_disconnect_code, as: :string_eq
-  filter :internal_disconnect_reason, as: :string_eq
-  filter :lega_disconnect_code, as: :string_eq
-  filter :lega_disconnect_reason, as: :string_eq
-  filter :legb_disconnect_code, as: :string_eq
-  filter :legb_disconnect_reason, as: :string_eq
+  filter :internal_disconnect_code
+  filter :internal_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :lega_disconnect_code
+  filter :lega_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :legb_disconnect_code
+  filter :legb_disconnect_reason, filters: %i[equals contains starts_with ends_with]
 
   filter :src_prefix_in, as: :string_eq
   filter :dst_prefix_in, as: :string_eq
@@ -275,9 +277,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             status_tag(cdr_attempt.legb_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.legb_disconnect_code == 0) || cdr_attempt.legb_disconnect_code.nil?
           end
           column('LegB Reason', &:legb_disconnect_reason)
-          column :disconnect_initiator do |cdr_attempt|
-            "#{cdr_attempt.disconnect_initiator_id} - #{cdr_attempt.disconnect_initiator_name}"
-          end
+          column :disconnect_initiator, &:disconnect_initiator_name
           column :routing_attempt do |cdr_attempt|
             status_tag(cdr_attempt.routing_attempt.to_s, class: cdr_attempt.is_last_cdr? ? :ok : nil)
           end
@@ -349,7 +349,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
           column :rateplan
           column :destination
-          column :destination_rate_policy
+          column :destination_rate_policy, &:destination_rate_policy_name
           column :destination_fee
 
           column('Destination rates', sortable: 'destination_next_rate') do |cdr|
@@ -431,9 +431,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :status do
             status_tag(cdr.status_sym.to_s, class: cdr.success? ? :ok : nil)
           end
-          row :disconnect_initiator do
-            "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
-          end
+          row :disconnect_initiator, &:disconnect_initiator_name
           row :lega_disconnect_code
           row :lega_disconnect_reason
           row :internal_disconnect_code
@@ -546,7 +544,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           row :rateplan
           row :destination
-          row :destination_rate_policy
+          row :destination_rate_policy, &:destination_rate_policy_name
           row :destination_fee
           row :destination_initial_interval
           row :destination_initial_rate
@@ -617,9 +615,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       status_tag(cdr.legb_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
     end
     column('LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason)
-    column :disconnect_initiator do |cdr|
-      "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
-    end
+    column :disconnect_initiator, &:disconnect_initiator_name
     column :routing_attempt do |cdr|
       status_tag(cdr.routing_attempt.to_s, class: cdr.is_last_cdr? ? :ok : nil)
     end
@@ -703,7 +699,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
     column :rateplan
     column :destination
-    column :destination_rate_policy
+    column :destination_rate_policy, &:destination_rate_policy_name
     column :destination_fee
 
     column('Destination rates', sortable: 'destination_next_rate') do |cdr|
@@ -861,9 +857,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         cdr.legb_disconnect_code.to_s unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
       end
       column('LegB Reason', sortable: 'legb_disconnect_reason', &:legb_disconnect_reason)
-      column :disconnect_initiator do |cdr|
-        "#{cdr.disconnect_initiator_id} - #{cdr.disconnect_initiator_name}"
-      end
+      column :disconnect_initiator, &:disconnect_initiator_name
       column :routing_attempt do |cdr|
         "#{cdr.routing_attempt} #{cdr.is_last_cdr? ? '(last)' : ''}"
       end
@@ -940,9 +934,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       end
       column :rateplan
       column :destination
-      column :destination_rate_policy do |row|
-        "#{row.destination_rate_policy.name} ##{row.destination_rate_policy.id}" if row.destination_rate_policy.present?
-      end
+      column :destination_rate_policy, &:destination_rate_policy_name
       column :destination_fee
       column :destination_initial_interval
       column :destination_initial_rate

@@ -118,7 +118,6 @@ class Report::CustomData < Cdr::Base
   belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id, optional: true
   belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id, optional: true # ,:conditions => {:vendor => true}
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
-  belongs_to :disconnect_initiator, optional: true
   belongs_to :vendor_invoice, class_name: 'Invoice', foreign_key: :vendor_invoice_id, optional: true
   belongs_to :customer_invoice, class_name: 'Invoice', foreign_key: :customer_invoice_id, optional: true
   belongs_to :destination_rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
@@ -133,6 +132,10 @@ class Report::CustomData < Cdr::Base
 
   def display_name
     id.to_s
+  end
+
+  def disconnect_initiator_name
+    disconnect_initiator_id.nil? ? nil : Cdr::Cdr::DISCONNECT_INITIATORS[disconnect_initiator_id]
   end
 
   def self.report_columns

@@ -17,11 +17,11 @@ RSpec.resource 'Destinations' do
   ]
   optional_params = %i[
     prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids
-    dst_number-min-length dst-number-max-length reverse-billing
+    dst_number-min-length dst-number-max-length reverse-billing profit-control-mode-id rate-policy-id
   ]
 
-  required_relationships = %i[rate-group rate-policy]
-  optional_relationships = %i[profit-control-mode routing-tag-modes]
+  required_relationships = %i[rate-group]
+  optional_relationships = %i[routing-tag-modes]
 
   get '/api/rest/admin/routing/destinations' do
     jsonapi_filters Api::Rest::Admin::Routing::DestinationResource._allowed_filters
@@ -60,6 +60,8 @@ RSpec.resource 'Destinations' do
     let(:'dst-number-min-length') { 0 }
     let(:'dst-number-max-length') { 100 }
     let(:'reverse-billing') { true }
+    let(:'rate-policy-id') { Routing::DestinationRatePolicy::POLICY_FIXED }
+    let(:'profit-control-mode-id') { Routing::RateProfitControlMode::MODE_PER_CALL }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

@@ -84,7 +84,6 @@ Rails.application.routes.draw do
           jsonapi_resources :nodes
           jsonapi_resources :sdp_c_locations
           jsonapi_resources :session_refresh_methods
-          jsonapi_resources :sortings
           jsonapi_resources :active_calls, only: %i[index show destroy]
           jsonapi_resources :incoming_registrations, only: %i[index]
 
@@ -137,7 +136,6 @@ Rails.application.routes.draw do
             jsonapi_resources :area_prefixes
             jsonapi_resources :numberlists
             jsonapi_resources :numberlist_items
-            jsonapi_resources :rate_profit_control_modes
             jsonapi_resources :routing_tag_detection_rules
             jsonapi_resources :tag_actions
             jsonapi_resources :rateplans
@@ -146,7 +144,6 @@ Rails.application.routes.draw do
             jsonapi_resources :routeset_discriminators
             jsonapi_resources :destinations
             jsonapi_resources :destination_next_rates
-            jsonapi_resources :destination_rate_policies
           end
         end
 

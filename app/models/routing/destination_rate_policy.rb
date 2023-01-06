@@ -1,20 +1,14 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: destination_rate_policy
-#
-#  id   :integer(4)       not null, primary key
-#  name :string           not null
-#
-# Indexes
-#
-#  destination_rate_policy_name_key  (name) UNIQUE
-#
-
-class Routing::DestinationRatePolicy < ApplicationRecord
-  has_many :destination, class_name: 'Routing::Destination'
-  self.table_name = 'destination_rate_policy'
-
-  validates :name, presence: true, uniqueness: true
+class Routing::DestinationRatePolicy
+  POLICY_FIXED = 1
+  POLICY_DP = 2
+  POLICY_MIN = 3
+  POLICY_MAX = 4
+  POLICIES = {
+    POLICY_FIXED => 'Fixed',
+    POLICY_DP => 'Based on used dialpeer',
+    POLICY_MIN => 'MIN(Fixed,Based on used dialpeer)',
+    POLICY_MAX => 'MAX(Fixed,Based on used dialpeer)'
+  }.freeze
 end

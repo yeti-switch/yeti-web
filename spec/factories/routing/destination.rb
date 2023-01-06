@@ -18,6 +18,7 @@ FactoryBot.define do
     use_dp_intervals { false }
     valid_from { 1.day.ago.utc }
     valid_till { 1.day.from_now.utc }
+    profit_control_mode_id { Routing::RateProfitControlMode::MODE_PER_CALL }
 
     association :rate_group
 
@@ -27,7 +28,6 @@ FactoryBot.define do
 
     trait :filled do
       with_uuid
-      association :profit_control_mode, factory: :rate_profit_control_mode
     end
   end
 end

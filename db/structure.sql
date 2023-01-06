@@ -22529,16 +22529,6 @@ ALTER SEQUENCE class4.destination_next_rates_id_seq OWNED BY class4.destination_
 
 
 --
--- Name: destination_rate_policy; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.destination_rate_policy (
-    id integer NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: destinations_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
@@ -22717,16 +22707,6 @@ CREATE SEQUENCE class4.disconnect_code_policy_id_seq
 --
 
 ALTER SEQUENCE class4.disconnect_code_policy_id_seq OWNED BY class4.disconnect_policy.id;
-
-
---
--- Name: disconnect_initiators; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.disconnect_initiators (
-    id integer NOT NULL,
-    name character varying
-);
 
 
 --
@@ -23391,16 +23371,6 @@ ALTER SEQUENCE class4.rate_plan_groups_id_seq OWNED BY class4.rate_plan_groups.i
 
 
 --
--- Name: rate_profit_control_modes; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.rate_profit_control_modes (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: rateplans; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -23841,37 +23811,6 @@ CREATE SEQUENCE class4.sip_options_probers_id_seq
 --
 
 ALTER SEQUENCE class4.sip_options_probers_id_seq OWNED BY class4.sip_options_probers.id;
-
-
---
--- Name: sortings; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.sortings (
-    id integer NOT NULL,
-    name character varying,
-    description character varying,
-    use_static_routes boolean DEFAULT false NOT NULL
-);
-
-
---
--- Name: sortings_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
---
-
-CREATE SEQUENCE class4.sortings_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sortings_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
---
-
-ALTER SEQUENCE class4.sortings_id_seq OWNED BY class4.sortings.id;
 
 
 --
@@ -26833,13 +26772,6 @@ ALTER TABLE ONLY class4.sip_options_probers ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
--- Name: sortings id; Type: DEFAULT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.sortings ALTER COLUMN id SET DEFAULT nextval('class4.sortings_id_seq'::regclass);
-
-
---
 -- Name: stir_shaken_trusted_certificates id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -27580,22 +27512,6 @@ ALTER TABLE ONLY class4.destination_next_rates
 
 
 --
--- Name: destination_rate_policy destination_rate_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destination_rate_policy
-    ADD CONSTRAINT destination_rate_policy_name_key UNIQUE (name);
-
-
---
--- Name: destination_rate_policy destination_rate_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destination_rate_policy
-    ADD CONSTRAINT destination_rate_policy_pkey PRIMARY KEY (id);
-
-
---
 -- Name: destinations destinations_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -27673,14 +27589,6 @@ ALTER TABLE ONLY class4.disconnect_policy
 
 ALTER TABLE ONLY class4.disconnect_policy
     ADD CONSTRAINT disconnect_code_policy_pkey PRIMARY KEY (id);
-
-
---
--- Name: disconnect_initiators disconnect_initiators_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.disconnect_initiators
-    ADD CONSTRAINT disconnect_initiators_pkey PRIMARY KEY (id);
 
 
 --
@@ -28052,22 +27960,6 @@ ALTER TABLE ONLY class4.rate_plan_groups
 
 
 --
--- Name: rate_profit_control_modes rate_profit_control_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.rate_profit_control_modes
-    ADD CONSTRAINT rate_profit_control_modes_name_key UNIQUE (name);
-
-
---
--- Name: rate_profit_control_modes rate_profit_control_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.rate_profit_control_modes
-    ADD CONSTRAINT rate_profit_control_modes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: rateplans rateplans_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -28281,14 +28173,6 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 ALTER TABLE ONLY class4.sip_options_probers
     ADD CONSTRAINT sip_options_probers_pkey PRIMARY KEY (id);
-
-
---
--- Name: sortings sortings_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.sortings
-    ADD CONSTRAINT sortings_pkey PRIMARY KEY (id);
 
 
 --
@@ -29821,27 +29705,11 @@ ALTER TABLE ONLY class4.destination_next_rates
 
 
 --
--- Name: destinations destinations_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_profit_control_mode_id_fkey FOREIGN KEY (profit_control_mode_id) REFERENCES class4.rate_profit_control_modes(id);
-
-
---
 -- Name: destinations destinations_rate_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
 ALTER TABLE ONLY class4.destinations
     ADD CONSTRAINT destinations_rate_group_id_fkey FOREIGN KEY (rate_group_id) REFERENCES class4.rate_groups(id);
-
-
---
--- Name: destinations destinations_rate_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_rate_policy_id_fkey FOREIGN KEY (rate_policy_id) REFERENCES class4.destination_rate_policy(id);
 
 
 --
@@ -30253,14 +30121,6 @@ ALTER TABLE ONLY class4.rate_plan_groups
 
 
 --
--- Name: rateplans rateplans_profit_control_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.rateplans
-    ADD CONSTRAINT rateplans_profit_control_mode_id_fkey FOREIGN KEY (profit_control_mode_id) REFERENCES class4.rate_profit_control_modes(id);
-
-
---
 -- Name: registrations registrations_node_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30338,14 +30198,6 @@ ALTER TABLE ONLY class4.routing_plan_static_routes
 
 ALTER TABLE ONLY class4.routing_plan_static_routes
     ADD CONSTRAINT routing_plan_static_routes_vendor_id_fkey FOREIGN KEY (vendor_id) REFERENCES public.contractors(id);
-
-
---
--- Name: routing_plans routing_plans_sorting_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_plans
-    ADD CONSTRAINT routing_plans_sorting_id_fkey FOREIGN KEY (sorting_id) REFERENCES class4.sortings(id);
 
 
 --
@@ -30669,6 +30521,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221216095859'),
 ('20221222184742'),
 ('20221226124025'),
-('20221226205639');
+('20221226205639'),
+('20221231184545');
 
 

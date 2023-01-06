@@ -10,7 +10,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
       Dialpeer Pop RoutingGroup CustomersAuth Contractor Account Gateway RoutingPlan
     ].freeze
     SYSTEM_NAMESPACE_RELATIONS = %w[Country Network].freeze
-    ROUTING_NAMESPACE_RELATIONS = %w[Destination Rateplan DestinationRatePolicy].freeze
+    ROUTING_NAMESPACE_RELATIONS = %w[Destination Rateplan].freeze
     freeze
   end
 
@@ -127,7 +127,8 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :failed_resource_id,
              :customer_price_no_vat,
              :customer_duration,
-             :vendor_duration
+             :vendor_duration,
+             :destination_rate_policy_id
 
   has_one :rateplan, class_name: 'Rateplan', force_routed: true
   has_one :dialpeer, force_routed: true
@@ -136,7 +137,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   has_one :routing_plan, class_name: 'RoutingPlan', force_routed: true
   has_one :destination, class_name: 'Destination', force_routed: true
   has_one :customer_auth, force_routed: true
-  has_one :destination_rate_policy, class_name: 'DestinationRatePolicy', force_routed: true
   has_one :vendor, class_name: 'Contractor', force_routed: true
   has_one :customer, class_name: 'Contractor', force_routed: true
   has_one :customer_acc, class_name: 'Account', force_routed: true
@@ -332,6 +332,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :customer_price_no_vat, type: :number
   ransack_filter :customer_duration, type: :number
   ransack_filter :vendor_duration, type: :number
+  ransack_filter :destination_rate_policy_id, type: :number
 
   # add supporting associations from non cdr namespaces
   def self.resource_for(type)

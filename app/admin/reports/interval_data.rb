@@ -54,8 +54,8 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
   index do
     column :id
     column :timestamp
-    assigns[:report_interval_cdr].auto_columns.each do |col|
-      column col
+    assigns[:report_interval_cdr].auto_columns.each do |(column_name, attribute_name)|
+      column(column_name, &attribute_name)
     end
     column assigns[:report_interval_cdr].aggregation, :aggregated_value
   end
