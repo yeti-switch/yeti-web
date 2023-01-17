@@ -14,6 +14,8 @@ class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
   has_one :numberlist, class_name: 'Numberlist'
   has_one :tag_action, class_name: 'TagAction'
 
+  relationship_filter :numberlist
+
   filter :key # DEPRECATED
 
   ransack_filter :key, type: :string

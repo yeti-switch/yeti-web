@@ -134,4 +134,4 @@ group :test do
 end
 gem 'bootsnap', require: false
 
-gem 'httparty', '~> 0.20.0'
+gem 'httparty', '~> 0.21.0'
