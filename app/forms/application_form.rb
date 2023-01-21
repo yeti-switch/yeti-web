@@ -7,6 +7,7 @@ class ApplicationForm
   include ActiveModel::Dirty
   extend ActiveModel::Callbacks
   include WithActiveModelArrayAttribute
+  include WithNormalizeAttribute
   include Memoizable
   include CaptureError::BaseMethods
 

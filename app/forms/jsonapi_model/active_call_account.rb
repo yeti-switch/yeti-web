@@ -2,12 +2,13 @@
 
 module JsonapiModel
   class ActiveCallAccount < Base
-    include ActiveModel::Validations::Callbacks
-
     attribute :account_id, :string
     attribute :customer
     attribute :from_time, :datetime, default: proc { 24.hours.ago }
     attribute :to_time, :datetime, default: proc { Time.current }
+
+    normalize_attribute :from_time, with: ->(from_time) { from_time.in_time_zone }
+    normalize_attribute :to_time, with: :in_time_zone
 
     attr_reader :originated_calls, :terminated_calls
 

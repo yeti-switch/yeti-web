@@ -2,8 +2,6 @@
 
 module JsonapiModel
   class OriginatedCps < Base
-    include ActiveModel::Validations::Callbacks
-
     TIME_START_SQL = Arel.sql("date_trunc('minute',time_start)").freeze
     CPS_SQL = Arel.sql('round((count(*)::float/60)::decimal,3)').freeze
 
@@ -11,6 +9,9 @@ module JsonapiModel
     attribute :customer
     attribute :from_time, :datetime, default: proc { 24.hours.ago }
     attribute :to_time, :datetime, default: proc { Time.current }
+
+    normalize_attribute :from_time, with: :in_time_zone
+    normalize_attribute :to_time, with: :in_time_zone
 
     attr_reader :cps
 

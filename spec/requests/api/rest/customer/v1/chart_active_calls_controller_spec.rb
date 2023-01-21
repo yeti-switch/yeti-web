@@ -72,6 +72,22 @@ RSpec.describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :reque
       end
     end
 
+    context 'without from-time and to-time', freeze_time: true do
+      let(:json_api_request_attributes) { {} }
+
+      include_examples :returns_json_api_record, relationships: [:account], status: 201 do
+        let(:json_api_record_id) { be_present }
+        let(:json_api_record_attributes) do
+          {
+            'from-time': 24.hours.ago.iso8601(3),
+            'to-time': Time.current.iso8601(3),
+            'originated-calls': [],
+            'terminated-calls': []
+          }
+        end
+      end
+    end
+
     context 'when Account not exists' do
       let(:json_api_relationships) do
         { account: { data: { id: SecureRandom.uuid, type: 'accounts' } } }

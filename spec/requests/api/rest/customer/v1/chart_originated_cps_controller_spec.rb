@@ -73,10 +73,25 @@ RSpec.describe Api::Rest::Customer::V1::ChartOriginatedCpsController, type: :req
           {
             'from-time': Time.zone.parse('2019-01-01 00:00:00').iso8601(3),
             'to-time': Time.zone.parse('2019-01-02 00:00:00').iso8601(3),
-            'cps': [
+            cps: [
               { y: '0.1', x: Time.zone.parse('2019-01-01 00:00:00').iso8601(3) },
               { y: '0.2', x: Time.zone.parse('2019-01-01 23:59:00').iso8601(3) }
             ]
+          }
+        end
+      end
+    end
+
+    context 'without from-time and to-time', freeze_time: true do
+      let(:json_api_request_attributes) { {} }
+
+      include_examples :returns_json_api_record, relationships: [:account], status: 201 do
+        let(:json_api_record_id) { be_present }
+        let(:json_api_record_attributes) do
+          {
+            'from-time': 24.hours.ago.iso8601(3),
+            'to-time': Time.current.iso8601(3),
+            cps: []
           }
         end
       end
