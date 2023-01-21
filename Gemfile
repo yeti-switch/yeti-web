@@ -9,7 +9,7 @@ gem 'activerecord-import'
 gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
-gem 'rack', '2.2.3.1'
+gem 'rack', ' ~> 2.2.6'
 gem 'rails', '~> 6.1'
 gem 'responders'
 
