@@ -106,7 +106,7 @@ INSERT INTO codecs (id, name) VALUES (17, 'G726-40/8000');
 INSERT INTO codecs (id, name) VALUES (18, 'G726-16/8000');
 INSERT INTO codecs (id, name) VALUES (19, 'L16/8000');
 INSERT INTO codecs (id, name) VALUES (20, 'G722/8000');
-
+INSERT INTO codecs (id, name) VALUES (21, 'opus/48000/2');
 
 --
 -- TOC entry 4431 (class 0 OID 0)
