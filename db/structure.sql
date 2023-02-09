@@ -87,6 +87,13 @@ COMMENT ON EXTENSION pgq_ext IS 'Target-side batch tracking infrastructure';
 
 
 --
+-- Name: ratemanagement; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA ratemanagement;
+
+
+--
 -- Name: runtime_stats; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -25247,6 +25254,176 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: pricelist_items; Type: TABLE; Schema: ratemanagement; Owner: -
+--
+
+CREATE TABLE ratemanagement.pricelist_items (
+    id bigint NOT NULL,
+    pricelist_id integer NOT NULL,
+    valid_from timestamp without time zone,
+    valid_till timestamp without time zone NOT NULL,
+    prefix character varying DEFAULT ''::character varying NOT NULL,
+    connect_fee numeric NOT NULL,
+    initial_rate numeric NOT NULL,
+    next_rate numeric NOT NULL,
+    initial_interval smallint NOT NULL,
+    next_interval smallint NOT NULL,
+    enabled boolean,
+    src_rewrite_rule character varying,
+    dst_rewrite_rule character varying,
+    src_rewrite_result character varying,
+    dst_rewrite_result character varying,
+    src_name_rewrite_rule character varying,
+    src_name_rewrite_result character varying,
+    acd_limit real,
+    asr_limit real,
+    priority integer,
+    capacity smallint,
+    lcr_rate_multiplier numeric,
+    force_hit_rate double precision,
+    short_calls_limit real NOT NULL,
+    exclusive_route boolean NOT NULL,
+    dst_number_min_length smallint NOT NULL,
+    dst_number_max_length smallint NOT NULL,
+    reverse_billing boolean DEFAULT false,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    gateway_id integer,
+    gateway_group_id integer,
+    routing_tag_mode_id smallint DEFAULT 0,
+    account_id integer,
+    vendor_id integer NOT NULL,
+    routing_group_id integer,
+    routeset_discriminator_id smallint,
+    dialpeer_id bigint,
+    detected_dialpeer_ids bigint[] DEFAULT '{}'::bigint[],
+    to_delete boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: pricelist_items_id_seq; Type: SEQUENCE; Schema: ratemanagement; Owner: -
+--
+
+CREATE SEQUENCE ratemanagement.pricelist_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pricelist_items_id_seq; Type: SEQUENCE OWNED BY; Schema: ratemanagement; Owner: -
+--
+
+ALTER SEQUENCE ratemanagement.pricelist_items_id_seq OWNED BY ratemanagement.pricelist_items.id;
+
+
+--
+-- Name: pricelists; Type: TABLE; Schema: ratemanagement; Owner: -
+--
+
+CREATE TABLE ratemanagement.pricelists (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    filename character varying NOT NULL,
+    valid_till timestamp without time zone NOT NULL,
+    items_count integer DEFAULT 0 NOT NULL,
+    applied_at timestamp without time zone,
+    apply_changes_in_progress boolean DEFAULT false NOT NULL,
+    detect_dialpeers_in_progress boolean DEFAULT false NOT NULL,
+    retain_enabled boolean DEFAULT false NOT NULL,
+    retain_priority boolean DEFAULT false NOT NULL,
+    valid_from timestamp without time zone,
+    state_id smallint NOT NULL,
+    project_id integer NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pricelists_id_seq; Type: SEQUENCE; Schema: ratemanagement; Owner: -
+--
+
+CREATE SEQUENCE ratemanagement.pricelists_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pricelists_id_seq; Type: SEQUENCE OWNED BY; Schema: ratemanagement; Owner: -
+--
+
+ALTER SEQUENCE ratemanagement.pricelists_id_seq OWNED BY ratemanagement.pricelists.id;
+
+
+--
+-- Name: projects; Type: TABLE; Schema: ratemanagement; Owner: -
+--
+
+CREATE TABLE ratemanagement.projects (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    enabled boolean DEFAULT false NOT NULL,
+    src_rewrite_rule character varying,
+    dst_rewrite_rule character varying,
+    src_rewrite_result character varying,
+    dst_rewrite_result character varying,
+    src_name_rewrite_rule character varying,
+    src_name_rewrite_result character varying,
+    acd_limit real DEFAULT 0.0,
+    asr_limit real DEFAULT 0.0,
+    keep_applied_pricelists_days smallint DEFAULT 30 NOT NULL,
+    priority integer DEFAULT 100 NOT NULL,
+    capacity smallint,
+    lcr_rate_multiplier numeric DEFAULT 1.0,
+    initial_interval integer DEFAULT 1,
+    next_interval integer DEFAULT 1,
+    force_hit_rate double precision,
+    short_calls_limit real DEFAULT 1.0 NOT NULL,
+    exclusive_route boolean DEFAULT false NOT NULL,
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
+    dst_number_max_length smallint DEFAULT 100 NOT NULL,
+    reverse_billing boolean DEFAULT false,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    account_id integer NOT NULL,
+    vendor_id integer NOT NULL,
+    routing_group_id integer NOT NULL,
+    routeset_discriminator_id smallint NOT NULL,
+    gateway_id integer,
+    gateway_group_id integer,
+    routing_tag_mode_id smallint DEFAULT 0,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE; Schema: ratemanagement; Owner: -
+--
+
+CREATE SEQUENCE ratemanagement.projects_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: projects_id_seq; Type: SEQUENCE OWNED BY; Schema: ratemanagement; Owner: -
+--
+
+ALTER SEQUENCE ratemanagement.projects_id_seq OWNED BY ratemanagement.projects.id;
+
+
+--
 -- Name: dialpeers_stats; Type: TABLE; Schema: runtime_stats; Owner: -
 --
 
@@ -26989,6 +27166,27 @@ ALTER TABLE ONLY public.contractors ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: pricelist_items id; Type: DEFAULT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items ALTER COLUMN id SET DEFAULT nextval('ratemanagement.pricelist_items_id_seq'::regclass);
+
+
+--
+-- Name: pricelists id; Type: DEFAULT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelists ALTER COLUMN id SET DEFAULT nextval('ratemanagement.pricelists_id_seq'::regclass);
+
+
+--
+-- Name: projects id; Type: DEFAULT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects ALTER COLUMN id SET DEFAULT nextval('ratemanagement.projects_id_seq'::regclass);
+
+
+--
 -- Name: dialpeers_stats id; Type: DEFAULT; Schema: runtime_stats; Owner: -
 --
 
@@ -28504,6 +28702,30 @@ ALTER TABLE ONLY public.contractors
 
 
 --
+-- Name: pricelist_items pricelist_items_pkey; Type: CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT pricelist_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pricelists pricelists_pkey; Type: CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelists
+    ADD CONSTRAINT pricelists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: dialpeers_stats dialpeers_stats_pkey; Type: CONSTRAINT; Schema: runtime_stats; Owner: -
 --
 
@@ -29423,6 +29645,132 @@ CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migration
 
 
 --
+-- Name: index_ratemanagement.pricelist_items_on_account_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_account_id" ON ratemanagement.pricelist_items USING btree (account_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_dialpeer_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_dialpeer_id" ON ratemanagement.pricelist_items USING btree (dialpeer_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_gateway_group_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_gateway_group_id" ON ratemanagement.pricelist_items USING btree (gateway_group_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_gateway_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_gateway_id" ON ratemanagement.pricelist_items USING btree (gateway_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_pricelist_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_pricelist_id" ON ratemanagement.pricelist_items USING btree (pricelist_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_routing_group_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_routing_group_id" ON ratemanagement.pricelist_items USING btree (routing_group_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_routing_tag_mode_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_routing_tag_mode_id" ON ratemanagement.pricelist_items USING btree (routing_tag_mode_id);
+
+
+--
+-- Name: index_ratemanagement.pricelist_items_on_vendor_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelist_items_on_vendor_id" ON ratemanagement.pricelist_items USING btree (vendor_id);
+
+
+--
+-- Name: index_ratemanagement.pricelistitems_on_routesetdiscriminator_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelistitems_on_routesetdiscriminator_id" ON ratemanagement.pricelist_items USING btree (routeset_discriminator_id);
+
+
+--
+-- Name: index_ratemanagement.pricelists_on_project_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.pricelists_on_project_id" ON ratemanagement.pricelists USING btree (project_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_account_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_account_id" ON ratemanagement.projects USING btree (account_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_gateway_group_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_gateway_group_id" ON ratemanagement.projects USING btree (gateway_group_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_gateway_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_gateway_id" ON ratemanagement.projects USING btree (gateway_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_name; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE UNIQUE INDEX "index_ratemanagement.projects_on_name" ON ratemanagement.projects USING btree (name);
+
+
+--
+-- Name: index_ratemanagement.projects_on_routeset_discriminator_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_routeset_discriminator_id" ON ratemanagement.projects USING btree (routeset_discriminator_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_routing_group_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_routing_group_id" ON ratemanagement.projects USING btree (routing_group_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_routing_tag_mode_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_routing_tag_mode_id" ON ratemanagement.projects USING btree (routing_tag_mode_id);
+
+
+--
+-- Name: index_ratemanagement.projects_on_vendor_id; Type: INDEX; Schema: ratemanagement; Owner: -
+--
+
+CREATE INDEX "index_ratemanagement.projects_on_vendor_id" ON ratemanagement.projects USING btree (vendor_id);
+
+
+--
 -- Name: api_access_customer_id_idx; Type: INDEX; Schema: sys; Owner: -
 --
 
@@ -30297,6 +30645,142 @@ ALTER TABLE ONLY public.contractors
 
 
 --
+-- Name: pricelist_items fk_rails_161e735c3a; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_161e735c3a FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+
+
+--
+-- Name: projects fk_rails_2016c4d0a1; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_2016c4d0a1 FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
+
+
+--
+-- Name: pricelist_items fk_rails_2bccc045c8; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_2bccc045c8 FOREIGN KEY (pricelist_id) REFERENCES ratemanagement.pricelists(id);
+
+
+--
+-- Name: pricelist_items fk_rails_2f466a9c79; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_2f466a9c79 FOREIGN KEY (routeset_discriminator_id) REFERENCES class4.routeset_discriminators(id);
+
+
+--
+-- Name: pricelist_items fk_rails_5952853742; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_5952853742 FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
+
+
+--
+-- Name: projects fk_rails_8c0fbee7b0; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_8c0fbee7b0 FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+
+
+--
+-- Name: pricelist_items fk_rails_935caa9063; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_935caa9063 FOREIGN KEY (gateway_group_id) REFERENCES class4.gateway_groups(id);
+
+
+--
+-- Name: pricelist_items fk_rails_995ef47750; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_995ef47750 FOREIGN KEY (vendor_id) REFERENCES public.contractors(id);
+
+
+--
+-- Name: projects fk_rails_9da44a0caf; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_9da44a0caf FOREIGN KEY (gateway_group_id) REFERENCES class4.gateway_groups(id);
+
+
+--
+-- Name: projects fk_rails_ab15e0e646; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_ab15e0e646 FOREIGN KEY (gateway_id) REFERENCES class4.gateways(id);
+
+
+--
+-- Name: projects fk_rails_bba2bcfb14; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_bba2bcfb14 FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+
+
+--
+-- Name: pricelists fk_rails_bbdbad8a45; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelists
+    ADD CONSTRAINT fk_rails_bbdbad8a45 FOREIGN KEY (project_id) REFERENCES ratemanagement.projects(id);
+
+
+--
+-- Name: projects fk_rails_ca9d46244c; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_ca9d46244c FOREIGN KEY (routeset_discriminator_id) REFERENCES class4.routeset_discriminators(id);
+
+
+--
+-- Name: projects fk_rails_ce692652ea; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.projects
+    ADD CONSTRAINT fk_rails_ce692652ea FOREIGN KEY (vendor_id) REFERENCES public.contractors(id);
+
+
+--
+-- Name: pricelist_items fk_rails_e6d13b64c3; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_e6d13b64c3 FOREIGN KEY (dialpeer_id) REFERENCES class4.dialpeers(id);
+
+
+--
+-- Name: pricelist_items fk_rails_f7be9605b8; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_f7be9605b8 FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+
+
+--
+-- Name: pricelist_items fk_rails_fc08843331; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
+--
+
+ALTER TABLE ONLY ratemanagement.pricelist_items
+    ADD CONSTRAINT fk_rails_fc08843331 FOREIGN KEY (gateway_id) REFERENCES class4.gateways(id);
+
+
+--
 -- Name: resource_type resource_type_action_id_fkey; Type: FK CONSTRAINT; Schema: switch18; Owner: -
 --
 
@@ -30503,10 +30987,13 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220717150840'),
 ('20220718195457'),
 ('20220805080124'),
+('20220810115417'),
+('20220816081007'),
 ('20220829195515'),
 ('20220923131906'),
 ('20220926083051'),
 ('20221004060840'),
+('20221004062536'),
 ('20221008113325'),
 ('20221015081756'),
 ('20221015082627'),

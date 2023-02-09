@@ -274,5 +274,68 @@ RSpec.describe Account, type: :model do
         expect(cdr_export.reload).to have_attributes(customer_account: nil)
       end
     end
+
+    context 'when Account is linked to RateManagement Project' do
+      let!(:projects) { FactoryBot.create_list(:rate_management_project, 3, :filled, vendor: account.contractor, account: account) }
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_message = "Can't be deleted because linked to Rate Management Project(s) ##{projects.map(&:id).join(', #')}"
+        expect(account.errors.to_a).to contain_exactly error_message
+
+        expect(Account).to be_exists(account.id)
+      end
+    end
+
+    context 'when Account is linked to RateManagement Pricelist Item' do
+      let(:new_account) { FactoryBot.create(:account) }
+      let(:project) { FactoryBot.create(:rate_management_project, :filled, account: new_account, vendor: new_account.contractor) }
+      let!(:pricelists) do
+        FactoryBot.create_list(:rate_management_pricelist, 2, pricelist_state, project: project)
+      end
+      let(:pricelist_state) { :new }
+      let!(:pricelist_items) do
+        [
+          FactoryBot.create_list(:rate_management_pricelist_item, 2, :filed_from_project, pricelist: pricelists[0], account: account),
+          FactoryBot.create_list(:rate_management_pricelist_item, 2, :filed_from_project, pricelist: pricelists[1], account: account)
+        ].flatten
+      end
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_message = "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelists.map(&:id).join(', #')}"
+        expect(account.errors.to_a).to contain_exactly error_message
+
+        expect(Account).to be_exists(account.id)
+      end
+
+      context 'when pricelist has dialpeers_detected state' do
+        let(:pricelist_state) { :dialpeers_detected }
+
+        it 'should raise validation error' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+          error_message = "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelists.map(&:id).join(', #')}"
+          expect(account.errors.to_a).to contain_exactly error_message
+
+          expect(Account).to be_exists(account.id)
+        end
+      end
+
+      context 'when pricelist has applied state' do
+        let(:pricelist_state) { :applied }
+
+        it 'should delete account' do
+          expect { subject }.not_to raise_error
+          expect(Account).not_to be_exists(account.id)
+
+          pricelist_items.each do |item|
+            expect(item.reload.account_id).to be_nil
+          end
+        end
+      end
+    end
   end
 end

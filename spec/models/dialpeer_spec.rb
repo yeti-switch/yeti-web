@@ -132,4 +132,80 @@ RSpec.describe Dialpeer, type: :model do
   context 'validate routing_tag_ids' do
     include_examples :test_model_with_routing_tag_ids
   end
+
+  describe '.without_ratemanagement_pricelist_items' do
+    subject { described_class.without_ratemanagement_pricelist_items }
+
+    let!(:dialpeer) { FactoryBot.create(:dialpeer) }
+
+    it 'should be included' do
+      expect(subject).to include(dialpeer)
+    end
+
+    context 'with ratemanagement pricelist item' do
+      before do
+        pricelist = FactoryBot.create(:rate_management_pricelist, :with_project)
+        FactoryBot.create(:rate_management_pricelist_item, :filed_from_project, pricelist: pricelist, dialpeer_id: dialpeer.id)
+      end
+
+      it 'should not be included' do
+        expect(subject).not_to include(dialpeer)
+      end
+    end
+  end
+
+  describe '#destroy' do
+    subject { dialpeer.destroy! }
+
+    let(:dialpeer) { FactoryBot.create(:dialpeer) }
+
+    context 'when Dialpeer is linked to RateManagement Pricelist Item' do
+      let(:project) { FactoryBot.create(:rate_management_project, :filled) }
+      let!(:pricelists) do
+        FactoryBot.create_list(:rate_management_pricelist, 2, pricelist_state, project: project)
+      end
+      let(:pricelist_state) { :new }
+      let!(:pricelist_items) do
+        [
+          FactoryBot.create_list(:rate_management_pricelist_item, 2, :filed_from_project, pricelist: pricelists[0], dialpeer: dialpeer),
+          FactoryBot.create_list(:rate_management_pricelist_item, 2, :filed_from_project, pricelist: pricelists[1], dialpeer: dialpeer)
+        ].flatten
+      end
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_message = "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelists.map(&:id).join(', #')}"
+        expect(dialpeer.errors.to_a).to contain_exactly error_message
+
+        expect(Dialpeer).to be_exists(dialpeer.id)
+      end
+
+      context 'when pricelist has dialpeers_detected state' do
+        let(:pricelist_state) { :dialpeers_detected }
+
+        it 'should raise validation error' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+          error_message = "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelists.map(&:id).join(', #')}"
+          expect(dialpeer.errors.to_a).to contain_exactly error_message
+
+          expect(Dialpeer).to be_exists(dialpeer.id)
+        end
+      end
+
+      context 'when pricelist has applied state' do
+        let(:pricelist_state) { :applied }
+
+        it 'should delete dialpeer' do
+          expect { subject }.not_to raise_error
+          expect(Dialpeer).not_to be_exists(dialpeer.id)
+
+          pricelist_items.each do |item|
+            expect(item.reload.dialpeer_id).to be_nil
+          end
+        end
+      end
+    end
+  end
 end

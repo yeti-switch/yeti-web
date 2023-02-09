@@ -77,6 +77,13 @@ class Dialpeer < ApplicationRecord
   include WithPaperTrail
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :dialpeer_id
   has_many :dialpeer_next_rates, class_name: 'DialpeerNextRate', foreign_key: :dialpeer_id, dependent: :delete_all
+  has_many :active_rate_management_pricelist_items,
+           -> { not_applied },
+           class_name: 'RateManagement::PricelistItem'
+  has_many :applied_rate_management_pricelist_items,
+           -> { applied },
+           class_name: 'RateManagement::PricelistItem',
+           dependent: :nullify
   belongs_to :current_rate, class_name: 'DialpeerNextRate', foreign_key: :current_rate_id, optional: true
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id
@@ -160,6 +167,8 @@ class Dialpeer < ApplicationRecord
     end
   end
 
+  before_destroy :prevent_destroy_if_have_pricelist_item
+
   def display_name
     "#{prefix} | #{id}"
   end
@@ -185,6 +194,10 @@ class Dialpeer < ApplicationRecord
           length(?)<=t_dp.dst_number_max_length
       ) h where h.r=1
     )', prx, prx, prx)
+  }
+
+  scope :without_ratemanagement_pricelist_items, lambda {
+    where('NOT EXISTS (SELECT 1 FROM ratemanagement.pricelist_items WHERE dialpeers.id = pricelist_items.dialpeer_id)')
   }
 
   protected
@@ -229,6 +242,14 @@ class Dialpeer < ApplicationRecord
   scope :expired, -> { where('valid_till < NOW()') }
 
   private
+
+  def prevent_destroy_if_have_pricelist_item
+    pricelist_ids = active_rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
+    if pricelist_ids.any?
+      errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
+      throw(:abort)
+    end
+  end
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[

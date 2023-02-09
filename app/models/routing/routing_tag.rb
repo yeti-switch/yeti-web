@@ -27,6 +27,16 @@ class Routing::RoutingTag < ApplicationRecord
   has_many :dialpeers, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) }, class_name: 'Dialpeer', autosave: false
   has_many :destinations, ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) }, class_name: 'Routing::Destination', autosave: false
 
+  has_many :rate_management_projects,
+           ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) },
+           class_name: 'RateManagement::Project',
+           autosave: false
+
+  has_many :rate_management_pricelist_items,
+           ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) },
+           class_name: 'RateManagement::PricelistItem',
+           autosave: false
+
   validates :name,
             presence: true,
             uniqueness: true,
@@ -64,6 +74,8 @@ class Routing::RoutingTag < ApplicationRecord
     associations << 'Detection Rule' if detection_rules.exists?
     associations << 'Dialpeer' if dialpeers.exists?
     associations << 'Destination' if destinations.exists?
+    associations << 'Rate Management Project' if rate_management_projects.exists?
+    associations << 'Rate Management Pricelist Item' if rate_management_pricelist_items.exists?
     associations
   end
 end
