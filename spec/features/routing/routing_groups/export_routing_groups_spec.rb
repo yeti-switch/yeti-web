@@ -10,7 +10,7 @@ RSpec.describe 'Export Routing Groups', type: :feature do
   end
 
   before do
-    visit routing_groups_path(format: :csv)
+    visit routing_routing_groups_path(format: :csv)
   end
 
   subject { CSV.parse(page.body).slice(0, 2).transpose }

@@ -12,7 +12,7 @@ ActiveAdmin.register Routing::RoutingGroupDuplicatorForm, as: 'Routing Group Dup
   controller do
     # Redirects to index page instead of rendering updated resource
     def create
-      create! { routing_groups_path }
+      create! { routing_routing_groups_path }
     end
   end
 
