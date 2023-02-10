@@ -8,19 +8,19 @@ class Routing::RoutingGroupDuplicatorForm < ApplicationForm
 
   validate do
     errors.add(:id, :invalid) if src_routing_group.nil?
-    errors.add(:name, :taken) if RoutingGroup.exists?(name: name)
+    errors.add(:name, :taken) if Routing::RoutingGroup.exists?(name: name)
   end
 
   def src_routing_group
     return @src_routing_group if defined? @src_routing_group
 
-    @src_routing_group = RoutingGroup.find_by(id: id)
+    @src_routing_group = Routing::RoutingGroup.find_by(id: id)
   end
 
   private
 
   def _save
-    dst = RoutingGroup.create!(
+    dst = Routing::RoutingGroup.create!(
       name: name
     )
     src_routing_group.dialpeers.includes(:dialpeer_next_rates).find_each do |n|

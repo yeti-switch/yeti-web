@@ -70,7 +70,7 @@ class Dialpeer < ApplicationRecord
 
   belongs_to :gateway, optional: true
   belongs_to :gateway_group, optional: true
-  belongs_to :routing_group
+  belongs_to :routing_group, class_name: 'Routing::RoutingGroup'
   belongs_to :account
   belongs_to :vendor, class_name: 'Contractor'
   has_one :statistic, class_name: 'DialpeersStat', dependent: :delete

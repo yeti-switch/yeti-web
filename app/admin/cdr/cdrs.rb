@@ -103,7 +103,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          }
 
   filter :routing_plan, collection: proc { Routing::RoutingPlan.select(%i[id name]) }, input_html: { class: 'chosen' }
-  filter :routing_group, collection: proc { RoutingGroup.select(%i[id name]) }, input_html: { class: 'chosen' }
+  filter :routing_group, collection: proc { Routing::RoutingGroup.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :rateplan, collection: proc { Routing::Rateplan.select(%i[id name]) }, input_html: { class: 'chosen' }
 
   filter :internal_disconnect_code

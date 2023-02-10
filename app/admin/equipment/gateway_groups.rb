@@ -37,6 +37,7 @@ ActiveAdmin.register GatewayGroup do
       auto_link(c.vendor, c.vendor.decorated_display_name)
     end
     column :balancing_mode
+    column :gateways
   end
 
   filter :id
@@ -53,13 +54,19 @@ ActiveAdmin.register GatewayGroup do
         auto_link(s.vendor, s.vendor.decorated_display_name)
       end
       row :balancing_mode
+      row :gateways
     end
     panel('Gateways in group') do
-      table_for resource.gateways do |_g|
+      table_for resource.gateways.order(:priority) do |_g|
         column :id
+        column :priority
+        column :weight
+        column :enabled
         column :name
+        column :pop
         column :host
         column :port
+        column :termination_capacity
       end
     end
   end

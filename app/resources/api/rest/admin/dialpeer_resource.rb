@@ -12,7 +12,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
 
   has_one :gateway
   has_one :gateway_group
-  has_one :routing_group
+  has_one :routing_group, class_name: 'Routing::RoutingGroup'
   has_one :vendor, class_name: 'Contractor'
   has_one :account
   has_one :routing_tag_mode, class_name: 'Routing::RoutingTagMode'

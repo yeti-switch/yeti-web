@@ -65,7 +65,7 @@ class Api::Rest::Admin::ActiveCallResource < ::BaseResource
   has_one :dialpeer, class_name: 'Dialpeer'
   has_one :orig_gw, class_name: 'Gateway'
   has_one :term_gw, class_name: 'Gateway'
-  has_one :routing_group, class_name: 'RoutingGroup'
+  has_one :routing_group, class_name: 'Routing::RoutingGroup'
   has_one :rateplan, class_name: 'Routing::Rateplan'
   has_one :node, class_name: 'Node', foreign_key: :node_id
 

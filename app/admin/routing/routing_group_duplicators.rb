@@ -5,7 +5,7 @@ ActiveAdmin.register Routing::RoutingGroupDuplicatorForm, as: 'Routing Group Dup
 
   actions :new, :create
 
-  act_as_clone_helper_for RoutingGroup
+  act_as_clone_helper_for Routing::RoutingGroup
 
   permit_params :id, :name
 
@@ -17,7 +17,7 @@ ActiveAdmin.register Routing::RoutingGroupDuplicatorForm, as: 'Routing Group Dup
   end
 
   sidebar 'Original routing group', only: %i[new create] do
-    attributes_table_for RoutingGroup.find(resource.id) do
+    attributes_table_for Routing::RoutingGroup.find(resource.id) do
       row :id
       row :name
       row 'Destinations count' do |r|

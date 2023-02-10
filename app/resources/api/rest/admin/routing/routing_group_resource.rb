@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::RoutingGroupResource < ::BaseResource
+class Api::Rest::Admin::Routing::RoutingGroupResource < ::BaseResource
+  model_name 'Routing::RoutingGroup'
   attributes :name
 
   paginator :paged
