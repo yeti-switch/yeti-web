@@ -18,7 +18,7 @@ RSpec.describe 'Create new Routing Group', type: :feature do
       click_on_submit
       expect(page).to have_css('.flash_notice', text: 'Routing group was successfully created.')
 
-      expect(RoutingGroup.last).to have_attributes(
+      expect(Routing::RoutingGroup.last).to have_attributes(
         name: attributes[:name]
       )
     end

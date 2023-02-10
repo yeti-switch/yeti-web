@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
+RSpec.describe Api::Rest::Admin::Routing::RoutingGroupsController, type: :controller do
   let(:user) { create :admin_user }
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
 
@@ -11,7 +11,7 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'GET index' do
-    let!(:routing_groups) { RoutingGroup.all.to_a }
+    let!(:routing_groups) { Routing::RoutingGroup.all.to_a }
 
     before { get :index }
 
@@ -31,7 +31,7 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
   end
 
   describe 'GET show' do
-    let!(:routing_group) { RoutingGroup.take! }
+    let!(:routing_group) { Routing::RoutingGroup.take! }
 
     context 'when routing_group exists' do
       before { get :show, params: { id: routing_group.to_param } }
@@ -59,9 +59,9 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
       let(:attributes) { { name: 'test-name' } }
 
       it 'creates routing group' do
-        expect { subject }.to change { RoutingGroup.count }.by(1)
+        expect { subject }.to change { Routing::RoutingGroup.count }.by(1)
         expect(response.status).to eq(201)
-        record = RoutingGroup.last!
+        record = Routing::RoutingGroup.last!
         expect(record).to have_attributes(attributes)
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
       let(:attributes) { { name: nil } }
 
       it 'does not create routing group' do
-        expect { subject }.to change { RoutingGroup.count }.by(0)
+        expect { subject }.to change { Routing::RoutingGroup.count }.by(0)
         expect(response.status).to eq(422)
       end
     end
@@ -107,7 +107,7 @@ RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :controller do
     let!(:routing_group) { create :routing_group }
 
     it 'deletes routing group' do
-      expect { subject }.to change { RoutingGroup.count }.by(-1)
+      expect { subject }.to change { Routing::RoutingGroup.count }.by(-1)
       expect(response.status).to eq(204)
     end
   end
