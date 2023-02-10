@@ -194,10 +194,10 @@ class Cdr::Cdr < Cdr::Base
   self.pg_partition_depth_future = 3
 
   belongs_to :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id, optional: true
-  belongs_to :routing_group, optional: true
   belongs_to :src_area, class_name: 'Routing::Area', foreign_key: :src_area_id, optional: true
   belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id, optional: true
   belongs_to :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id, optional: true
+  belongs_to :routing_group, class_name: 'Routing::RoutingGroup', foreign_key: :routing_group_id, optional: true
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id, optional: true
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id, optional: true
   belongs_to :destination, class_name: 'Routing::Destination', optional: true
