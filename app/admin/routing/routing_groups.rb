@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Routing::RoutingGroup do
-  decorate_with RoutingGroupDecorator
   menu parent: 'Routing', label: 'Routing groups', priority: 50
 
   acts_as_audit
@@ -15,21 +14,21 @@ ActiveAdmin.register Routing::RoutingGroup do
 
   permit_params :name, routing_plan_ids: []
 
+  includes :routing_plans
+
   index do
     selectable_column
     id_column
     actions
     column :name
-    column 'Routing plans', :routing_plans_links
+    column :routing_plans
   end
 
   show do |_s|
     attributes_table do
       row :id
       row :name
-      row 'Used in routing plans' do |r|
-        r.routing_plans_links(newline: true)
-      end
+      row :routing_plans
     end
     active_admin_comments
   end

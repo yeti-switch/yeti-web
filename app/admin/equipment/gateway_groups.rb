@@ -24,7 +24,7 @@ ActiveAdmin.register GatewayGroup do
 
   controller do
     def scoped_collection
-      super.eager_load(:vendor, :balancing_mode)
+      super.eager_load(:vendor, :balancing_mode, :gateways)
     end
   end
 
