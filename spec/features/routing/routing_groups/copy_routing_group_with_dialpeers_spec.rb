@@ -2,7 +2,7 @@
 
 RSpec.describe 'Copy Routing group with dialpeers action', type: :feature do
   subject do
-    visit routing_group_path(routing_group.id)
+    visit routing_routing_group_path(routing_group.id)
     click_link('Copy with dialpeers', exact_text: true)
     within '#new_routing_routing_group_duplicator_form' do
       fill_in('Name', with: new_name)

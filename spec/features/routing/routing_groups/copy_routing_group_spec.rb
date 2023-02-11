@@ -10,12 +10,12 @@ RSpec.describe 'Copy Routing group action', type: :feature do
 
     let(:new_name) { routing_group.name + '_copy' }
 
-    before { visit routing_group_path(routing_group.id) }
+    before { visit routing_routing_group_path(routing_group.id) }
 
     before do
       click_link('Copy', exact_text: true)
-      within '#new_routing_group' do
-        fill_in('routing_group_name', with: new_name)
+      within '#new_routing_routing_group' do
+        fill_in('routing_routing_group_name', with: new_name)
       end
     end
 
