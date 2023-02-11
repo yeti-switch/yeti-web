@@ -4,10 +4,10 @@ RSpec.describe 'Create new Routing Group', type: :feature do
   include_context :login_as_admin
 
   before do
-    visit new_routing_group_path
+    visit new_routing_routing_group_path
   end
 
-  include_context :fill_form, 'new_routing_group' do
+  include_context :fill_form, 'new_routing_routing_group' do
     let(:attributes) do
       {
         name: 'test routing group'
