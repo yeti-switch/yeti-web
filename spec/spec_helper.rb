@@ -46,7 +46,7 @@ RSpec.configure do |config|
   if Bullet.enable?
     # bullet bug https://github.com/flyerhzm/bullet/issues/586
     # fails spec/features/routing/routing_plans/batch_update_spec.rb
-    Bullet.add_whitelist type: :n_plus_one_query,
+    Bullet.add_safelist type: :n_plus_one_query,
                          class_name: 'Routing::RoutingPlan',
                          association: :routing_routingplans_routing_groups
 

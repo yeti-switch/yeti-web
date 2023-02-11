@@ -49,9 +49,6 @@ ActiveAdmin.register Routing::RoutingGroup do
       li do
         link_to 'Dialpeers', dialpeers_path(q: { routing_group_id_eq: params[:id] })
       end
-      li do
-        link_to 'CDR list', cdrs_path(q: { routing_group_id_eq: params[:id] })
-      end
     end
   end
 end
