@@ -11,9 +11,8 @@ module Yeti
       has_one :country, through: :network_prefix
       has_one :network, through: :network_prefix
 
-      before_save do
-        detect_network_prefix!
-      end
+      before_create :detect_network_prefix!
+      before_update :detect_network_prefix!, if: :prefix_changed?
     end
 
     def detect_network_prefix!

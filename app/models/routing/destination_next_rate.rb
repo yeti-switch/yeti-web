@@ -25,18 +25,19 @@
 class Routing::DestinationNextRate < ApplicationRecord
   self.table_name = 'class4.destination_next_rates'
 
+  belongs_to :destination, class_name: 'Routing::Destination'
+
   validates :destination, presence: true
   validates :next_rate,
-                        :initial_rate,
-                        :initial_interval,
-                        :next_interval,
-                        :connect_fee,
-                        :apply_time, presence: true
+            :initial_rate,
+            :initial_interval,
+            :next_interval,
+            :connect_fee,
+            :apply_time,
+            presence: true
 
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
   validates :next_rate, :initial_rate, :connect_fee, numericality: true
-
-  belongs_to :destination, class_name: 'Routing::Destination'
 
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }
@@ -44,6 +45,25 @@ class Routing::DestinationNextRate < ApplicationRecord
   include WithPaperTrail
 
   scope :ready_for_apply, lambda {
-    not_applied.where('apply_time < ?', Time.now.utc).preload(:destination)
+    not_applied.where('apply_time < ?', Time.now.utc).preload(
+      destination: %i[
+        rate_group
+        routing_tag_mode
+      ]
+    )
   }
+
+  def apply!
+    transaction do
+      destination.update!(
+        # current_rate_id: rate.id,
+        initial_interval: initial_interval,
+        next_interval: next_interval,
+        initial_rate: initial_rate,
+        next_rate: next_rate,
+        connect_fee: connect_fee
+      )
+      update!(applied: true)
+    end
+  end
 end

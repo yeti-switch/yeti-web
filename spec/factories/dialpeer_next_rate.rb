@@ -11,5 +11,13 @@ FactoryBot.define do
     applied          { false }
 
     association :dialpeer
+
+    trait :random do
+      initial_rate { 0.04 + rand.round(2) }
+      next_rate { 0.05 + rand.round(2) }
+      initial_interval { rand(90..149) }
+      next_interval { rand(120..179) }
+      connect_fee { 0.06 + rand.round(2) }
+    end
   end
 end
