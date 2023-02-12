@@ -56,7 +56,7 @@ class Importing::Dialpeer < Importing::Base
 
   belongs_to :gateway, class_name: '::Gateway', optional: true
   belongs_to :gateway_group, class_name: '::GatewayGroup', optional: true
-  belongs_to :routing_group, class_name: '::RoutingGroup', optional: true
+  belongs_to :routing_group, class_name: 'Routing::RoutingGroup', optional: true
   belongs_to :account, class_name: '::Account', optional: true
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', optional: true
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true

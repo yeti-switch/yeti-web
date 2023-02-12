@@ -17,13 +17,13 @@ RSpec.describe 'Create new Routing Group Duplicator', type: :feature, js: true d
 
   it 'creates record' do
     subject
-    record = RoutingGroup.last
+    record = Routing::RoutingGroup.last
     expect(record).to be_present
     expect(record).to have_attributes(
       name: "#{routing_group.name} dup"
     )
   end
 
-  include_examples :changes_records_qty_of, RoutingGroup, by: 1
+  include_examples :changes_records_qty_of, Routing::RoutingGroup, by: 1
   include_examples :shows_flash_message, :notice, 'Routing group duplicator was successfully created.'
 end

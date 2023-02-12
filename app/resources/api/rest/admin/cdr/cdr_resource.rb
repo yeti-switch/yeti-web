@@ -7,10 +7,10 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
 
   module CONST
     ROOT_NAMESPACE_RELATIONS = %w[
-      Dialpeer Pop RoutingGroup CustomersAuth Contractor Account Gateway RoutingPlan
+      Dialpeer Pop CustomersAuth Contractor Account Gateway RoutingPlan
     ].freeze
     SYSTEM_NAMESPACE_RELATIONS = %w[Country Network].freeze
-    ROUTING_NAMESPACE_RELATIONS = %w[Destination Rateplan].freeze
+    ROUTING_NAMESPACE_RELATIONS = %w[Destination Rateplan RoutingGroup].freeze
     freeze
   end
 
@@ -133,7 +133,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   has_one :rateplan, class_name: 'Rateplan', force_routed: true
   has_one :dialpeer, force_routed: true
   has_one :pop, force_routed: true
-  has_one :routing_group, force_routed: true
+  has_one :routing_group, class_name: 'RoutingGroup', force_routed: true
   has_one :routing_plan, class_name: 'RoutingPlan', force_routed: true
   has_one :destination, class_name: 'Destination', force_routed: true
   has_one :customer_auth, force_routed: true

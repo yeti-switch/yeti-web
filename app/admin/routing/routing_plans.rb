@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Routing::RoutingPlan do
-  menu parent: 'Routing', label: 'Routing plans', priority: 50
+  menu parent: 'Routing', label: 'Routing plans', priority: 49
   decorate_with RoutingPlanDecorator
 
   acts_as_audit
@@ -36,7 +36,7 @@ ActiveAdmin.register Routing::RoutingPlan do
   account_filter :customers_auths_account_id_eq, label: 'Assigned to account', path_params: { q: { contractor_customer_eq: true } }
   filter :rate_delta_max
   filter :max_rerouting_attempts
-  filter :routing_groups, input_html: { class: 'chosen' }, collection: proc { RoutingGroup.pluck(:name, :id) }
+  filter :routing_groups, input_html: { class: 'chosen' }, collection: proc { Routing::RoutingGroup.order(:name).pluck(:name, :id) }
 
   index do
     selectable_column
@@ -83,7 +83,9 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :use_lnp
       f.input :rate_delta_max
       f.input :max_rerouting_attempts
-      f.input :routing_groups, input_html: { class: 'chosen-sortable', multiple: true }
+      f.input :routing_groups,
+              input_html: { class: 'chosen-sortable', multiple: true },
+              collection: Routing::RoutingGroup.order(:name)
       f.input :validate_dst_number_format
       f.input :validate_dst_number_network
       f.input :validate_src_number_format

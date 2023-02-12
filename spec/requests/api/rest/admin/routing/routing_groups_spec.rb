@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Admin::RoutingGroupsController, type: :request do
-  include_context :json_api_admin_helpers, type: :'routing-groups'
+RSpec.describe Api::Rest::Admin::Routing::RoutingGroupsController, type: :request do
+  include_context :json_api_admin_helpers, type: :'routing-groups', prefix: 'routing'
 
-  describe 'GET /api/rest/admin/routing-groups' do
+  describe 'GET /api/rest/admin/routing/routing-groups' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
 
     before { FactoryBot.create_list(:routing_group, 2) }
     let!(:routing_groups) do
-      RoutingGroup.all.to_a
+      Routing::RoutingGroup.all.to_a
     end
 
     include_examples :jsonapi_responds_with_pagination_links

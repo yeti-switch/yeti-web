@@ -7,7 +7,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   attribute :dst_number_min_length
   attribute :dst_number_max_length
   attribute :routing_tag_mode_id, type: :foreign_key, class_name: 'Routing::RoutingTagMode'
-  attribute :routing_group_id, type: :foreign_key, class_name: 'RoutingGroup'
+  attribute :routing_group_id, type: :foreign_key, class_name: 'Routing::RoutingGroup'
   attribute :priority
   attribute :force_hit_rate
   attribute :exclusive_route, type: :boolean

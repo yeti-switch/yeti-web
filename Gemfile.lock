@@ -48,14 +48,6 @@ GIT
     prometheus_exporter (0.5.1)
 
 GIT
-  remote: https://github.com/flyerhzm/bullet.git
-  revision: e44e37512d78352dca34d711ec9593e025cef080
-  specs:
-    bullet (6.1.4)
-      activesupport (>= 3.0.0)
-      uniform_notifier (~> 1.11)
-
-GIT
   remote: https://github.com/livingsocial/excelinator.git
   revision: 51cd9dbdbcc0e610ff5bd31b85e4744ac379e8c5
   specs:
@@ -222,6 +214,9 @@ GEM
       msgpack (~> 1.0)
     brakeman (5.2.0)
     builder (3.2.4)
+    bullet (7.0.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     bundler-audit (0.8.0)
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
@@ -595,7 +590,7 @@ GEM
     uglifier (4.1.8)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
-    uniform_notifier (1.14.2)
+    uniform_notifier (1.16.0)
     validates_timeliness (4.1.1)
       timeliness (>= 0.3.10, < 1)
     warden (1.2.9)
@@ -640,7 +635,7 @@ DEPENDENCIES
   awesome_print
   bootsnap
   brakeman
-  bullet!
+  bullet
   bundler-audit
   byebug
   capybara

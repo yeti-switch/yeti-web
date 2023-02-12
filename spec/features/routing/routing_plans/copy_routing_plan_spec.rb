@@ -13,7 +13,7 @@ RSpec.describe 'Copy Routing Plan action', js: true do
         subject
         expect(page).to have_page_title(new_name)
       }.to change { Routing::RoutingPlan.count }.by(1)
-                                                .and change { RoutingGroup.count }.by(0)
+                                                .and change { Routing::RoutingGroup.count }.by(0)
       new_routing_plan = Routing::RoutingPlan.last
       expect(new_routing_plan).to have_attributes(
                                     name: new_name,

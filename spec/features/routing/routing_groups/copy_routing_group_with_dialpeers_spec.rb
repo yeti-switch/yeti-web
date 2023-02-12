@@ -2,7 +2,7 @@
 
 RSpec.describe 'Copy Routing group with dialpeers action', type: :feature do
   subject do
-    visit routing_group_path(routing_group.id)
+    visit routing_routing_group_path(routing_group.id)
     click_link('Copy with dialpeers', exact_text: true)
     within '#new_routing_routing_group_duplicator_form' do
       fill_in('Name', with: new_name)
@@ -24,9 +24,9 @@ RSpec.describe 'Copy Routing group with dialpeers action', type: :feature do
   let(:new_name) { routing_group.name + '_copy' }
 
   it 'creates new Routing group with duplicated Dialpeers' do
-    expect { subject }.to change { RoutingGroup.count }.by(1)
+    expect { subject }.to change { Routing::RoutingGroup.count }.by(1)
     expect(page).to have_css('.flash_notice', text: 'Routing group duplicator was successfully created.')
     expect(routing_group.reload.dialpeers.count).to eq(2)
-    expect(RoutingGroup.last.dialpeers.count).to eq(2)
+    expect(Routing::RoutingGroup.last.dialpeers.count).to eq(2)
   end
 end

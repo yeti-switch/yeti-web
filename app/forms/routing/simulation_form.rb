@@ -27,7 +27,7 @@ class Routing::SimulationForm < ApplicationForm
     end
 
     def routing_group
-      RoutingGroup.find_by(id: routing_group_id)
+      Routing::RoutingGroup.find_by(id: routing_group_id)
     end
 
     def destination

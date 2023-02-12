@@ -98,7 +98,7 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'bullet', github: 'flyerhzm/bullet'
+  gem 'bullet'
   gem 'byebug'
   gem 'thin'
 

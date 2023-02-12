@@ -12,7 +12,7 @@
 #  routing_groups_name_unique  (name) UNIQUE
 #
 
-class RoutingGroup < ApplicationRecord
+class Routing::RoutingGroup < ApplicationRecord
   self.table_name = 'class4.routing_groups'
 
   before_destroy :check_deps
@@ -29,6 +29,10 @@ class RoutingGroup < ApplicationRecord
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def have_routing_plans?
+    routing_plans.count > 0
   end
 
   private

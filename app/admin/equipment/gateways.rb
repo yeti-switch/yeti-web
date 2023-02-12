@@ -428,7 +428,7 @@ ActiveAdmin.register Gateway do
               f.input :sip_timer_b
               f.input :dns_srv_failover_timer
               f.input :suppress_early_media
-              f.input :fake_180_timer, hint: 'Timeout in ms.'
+              f.input :fake_180_timer
               f.input :send_lnp_information
             end
           end
@@ -467,7 +467,7 @@ ActiveAdmin.register Gateway do
           f.input :symmetric_rtp_nonstop
           f.input :symmetric_rtp_ignore_rtcp
           f.input :rtp_ping
-          f.input :rtp_timeout, hint: 'value in seconds, 0 - do not check RTP timeout, 1-600 - valid range'
+          f.input :rtp_timeout
           f.input :filter_noaudio_streams
           f.input :rtp_relay_timestamp_aligning
           f.input :rtp_force_relay_cn

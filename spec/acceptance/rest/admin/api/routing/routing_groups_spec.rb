@@ -11,8 +11,8 @@ RSpec.resource 'Routing groups' do
   let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:type) { 'routing-groups' }
 
-  get '/api/rest/admin/routing-groups' do
-    jsonapi_filters Api::Rest::Admin::RoutingGroupResource._allowed_filters
+  get '/api/rest/admin/routing/routing-groups' do
+    jsonapi_filters Api::Rest::Admin::Routing::RoutingGroupResource._allowed_filters
 
     before { create_list(:routing_group, 2) }
 
@@ -21,7 +21,7 @@ RSpec.resource 'Routing groups' do
     end
   end
 
-  get '/api/rest/admin/routing-groups/:id' do
+  get '/api/rest/admin/routing/routing-groups/:id' do
     let(:id) { create(:routing_group).id }
 
     example_request 'get specific entry' do
@@ -29,7 +29,7 @@ RSpec.resource 'Routing groups' do
     end
   end
 
-  post '/api/rest/admin/routing-groups' do
+  post '/api/rest/admin/routing/routing-groups' do
     parameter :type, 'Resource type (routing-groups)', scope: :data, required: true
 
     jsonapi_attributes([:name], [])
@@ -41,7 +41,7 @@ RSpec.resource 'Routing groups' do
     end
   end
 
-  put '/api/rest/admin/routing-groups/:id' do
+  put '/api/rest/admin/routing/routing-groups/:id' do
     parameter :type, 'Resource type (routing-groups)', scope: :data, required: true
     parameter :id, 'Routing group ID', scope: :data, required: true
 
@@ -55,7 +55,7 @@ RSpec.resource 'Routing groups' do
     end
   end
 
-  delete '/api/rest/admin/routing-groups/:id' do
+  delete '/api/rest/admin/routing/routing-groups/:id' do
     let(:id) { create(:routing_group).id }
 
     example_request 'delete entry' do

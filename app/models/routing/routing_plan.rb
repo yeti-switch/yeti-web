@@ -43,7 +43,7 @@ class Routing::RoutingPlan < ApplicationRecord
   }.freeze
   SORTINGS_WITH_STATIC_ROUTES = [SORTING_STATIC_LCR_CONTROL, SORTING_STATIC_ONLY_NOCONTROL].freeze
 
-  has_and_belongs_to_many :routing_groups, join_table: 'class4.routing_plan_groups', class_name: 'RoutingGroup'
+  has_and_belongs_to_many :routing_groups, join_table: 'class4.routing_plan_groups', class_name: 'Routing::RoutingGroup'
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :routing_plan_id, dependent: :restrict_with_error
   has_many :static_routes, class_name: 'Routing::RoutingPlanStaticRoute',
                            foreign_key: :routing_plan_id, dependent: :delete_all

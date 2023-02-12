@@ -91,7 +91,7 @@ class Report::IntervalData < Cdr::Base
   belongs_to :report, class_name: 'Report::IntervalCdr', foreign_key: :report_id
 
   belongs_to :rateplan, optional: true
-  belongs_to :routing_group, optional: true
+  belongs_to :routing_group, class_name: 'Routing::RoutingGroup', foreign_key: :routing_group_id, optional: true
   belongs_to :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id, optional: true
   belongs_to :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id, optional: true
   belongs_to :destination, class_name: 'Routing::Destination', optional: true
