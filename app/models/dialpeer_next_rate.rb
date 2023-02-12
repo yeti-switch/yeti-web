@@ -23,18 +23,21 @@
 #
 
 class DialpeerNextRate < ApplicationRecord
+  self.table_name = 'dialpeer_next_rates'
+
+  belongs_to :dialpeer, class_name: 'Dialpeer'
+
   validates :dialpeer, presence: true
   validates :next_rate,
-                        :initial_rate,
-                        :initial_interval,
-                        :next_interval,
-                        :connect_fee,
-                        :apply_time, presence: true
+            :initial_rate,
+            :initial_interval,
+            :next_interval,
+            :connect_fee,
+            :apply_time,
+            presence: true
 
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
   validates :next_rate, :initial_rate, :connect_fee, numericality: true
-
-  belongs_to :dialpeer
 
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }
@@ -42,6 +45,31 @@ class DialpeerNextRate < ApplicationRecord
   include WithPaperTrail
 
   scope :ready_for_apply, lambda {
-    not_applied.where('apply_time < ?', Time.now.utc).preload(:dialpeer)
+    # preload dialpeer's belongs_to association to avoid N+1 on update
+    not_applied.where('apply_time < ?', Time.now.utc).preload(
+      dialpeer: %i[
+        gateway_group
+        routing_group
+        account
+        vendor
+        current_rate
+        routing_tag_mode
+        routeset_discriminator
+      ]
+    )
   }
+
+  def apply!
+    transaction do
+      dialpeer.update!(
+        current_rate_id: id,
+        initial_interval: initial_interval,
+        next_interval: next_interval,
+        initial_rate: initial_rate,
+        next_rate: next_rate,
+        connect_fee: connect_fee
+      )
+      update!(applied: true)
+    end
+  end
 end
