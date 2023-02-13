@@ -22,7 +22,7 @@ class DisconnectPolicyCode < ApplicationRecord
   self.table_name = 'disconnect_policy_code'
 
   belongs_to :policy, class_name: 'DisconnectPolicy', foreign_key: :policy_id
-  belongs_to :code, -> { where namespace_id: DisconnectCode::NS_SIP }, class_name: 'DisconnectCode', foreign_key: :code_id
+  belongs_to :code, class_name: 'DisconnectCode', foreign_key: :code_id
 
   include WithPaperTrail
 

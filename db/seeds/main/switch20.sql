@@ -270,6 +270,9 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1036, 'lega_identity_verstat_id', 'smallint', true, 1975, true);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1037, 'bleg_force_cancel_routeset', 'boolean', false, 1976, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1038, 'registered_aor_mode_id', 'smallint', false, 1977, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1039, 'src_country_id', 'integer', true, 1978, true);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1040, 'src_network_id', 'integer', true, 1979, true);
+
 
 --
 -- TOC entry 4515 (class 0 OID 0)

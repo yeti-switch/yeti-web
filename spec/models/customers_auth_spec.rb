@@ -32,6 +32,7 @@
 #  src_number_min_length            :integer(2)       default(0), not null
 #  src_number_radius_rewrite_result :string
 #  src_number_radius_rewrite_rule   :string
+#  src_numberlist_use_diversion     :boolean          default(FALSE), not null
 #  src_prefix                       :string           default(["\"\""]), is an Array
 #  src_rewrite_result               :string
 #  src_rewrite_rule                 :string

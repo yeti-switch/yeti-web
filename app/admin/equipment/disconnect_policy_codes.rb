@@ -57,7 +57,7 @@ ActiveAdmin.register DisconnectPolicyCode do
     f.inputs form_title do
       f.input :policy, input_html: { class: 'chosen' }
       f.input :code, as: :select,
-                     collection: DisconnectCode.where(namespace_id: DisconnectCode::NS_SIP).order(:code),
+                     collection: DisconnectCode.order(:code),
                      input_html: { class: 'chosen' }
       f.input :stop_hunting
       f.input :pass_reason_to_originator
