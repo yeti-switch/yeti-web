@@ -14786,7 +14786,7 @@ $$;
 -- Name: load_disconnect_code_refuse_overrides(); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.load_disconnect_code_refuse_overrides() RETURNS TABLE(o_policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
+CREATE FUNCTION switch20.load_disconnect_code_refuse_overrides() RETURNS TABLE(policy_id integer, o_id integer, o_code integer, o_reason character varying, o_rewrited_code integer, o_rewrited_reason character varying, o_store_cdr boolean, o_silently_drop boolean)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -15260,6 +15260,84 @@ CREATE FUNCTION switch20.lua_exec(function_id integer, arg switch20.lua_call_con
         return shared.functions_cache[function_id].func()(arg)
 
       $_$;
+
+
+--
+-- Name: numberlist_items; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.numberlist_items (
+    id integer NOT NULL,
+    numberlist_id smallint NOT NULL,
+    key character varying NOT NULL,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone,
+    action_id smallint,
+    src_rewrite_rule character varying,
+    src_rewrite_result character varying,
+    dst_rewrite_rule character varying,
+    dst_rewrite_result character varying,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    number_min_length smallint DEFAULT 0 NOT NULL,
+    number_max_length smallint DEFAULT 100 NOT NULL,
+    lua_script_id smallint,
+    CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
+    CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
+);
+
+
+--
+-- Name: match_numberlist(integer, character varying, character varying); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.match_numberlist(i_numberlist_id integer, i_key character varying, i_key2 character varying DEFAULT NULL::character varying) RETURNS class4.numberlist_items
+    LANGUAGE plpgsql COST 10
+    AS $$
+DECLARE
+  v_numberlist class4.numberlists%rowtype;
+  v_numberlist_item class4.numberlist_items%rowtype;
+  v_numberlist_size integer;
+BEGIN
+  select into v_numberlist * from class4.numberlists where id = i_numberlist_id;
+  CASE v_numberlist.mode_id
+    when 1 then -- strict match
+      select into v_numberlist_item * from class4.numberlist_items ni
+        where ni.numberlist_id=i_numberlist_id and ni.key = i_key limit 1;
+      IF NOT FOUND and i_key2 is not null THEN
+        select into v_numberlist_item * from class4.numberlist_items ni
+          where ni.numberlist_id=i_numberlist_id and ni.key = i_key2 limit 1;
+      END IF;
+    when 2 then -- prefix match
+      select into v_numberlist_item *
+      from class4.numberlist_items ni
+      where ni.numberlist_id=i_numberlist_id and
+        prefix_range(ni.key)@>prefix_range(i_key) and
+        length(i_key) between ni.number_min_length and ni.number_max_length
+      order by length(prefix_range(ni.key)) desc
+      limit 1;
+      IF NOT FOUND and i_key2 is not null THEN
+        select into v_numberlist_item *
+        from class4.numberlist_items ni
+        where ni.numberlist_id=i_numberlist_id and
+          prefix_range(ni.key)@>prefix_range(i_key2) and
+          length(i_key2) between ni.number_min_length and ni.number_max_length
+        order by length(prefix_range(ni.key)) desc
+        limit 1;
+      END IF;
+    when 3 then -- random
+      select into v_numberlist_size count(*)
+      from class4.numberlist_items
+      where numberlist_id=i_numberlist_id;
+      select into v_numberlist_item *
+      from class4.numberlist_items ni
+      where ni.numberlist_id=i_numberlist_id
+      order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
+  end case;
+
+  RETURN v_numberlist_item;
+END;
+$$;
 
 
 --
@@ -17773,6 +17851,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
+        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -18174,27 +18253,10 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
           /*}dbg*/
+
+          v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.dst_numberlist_id, v_ret.dst_prefix_out);
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.dst_numberlist_id;
-          CASE v_numberlist.mode_id
-            when 1 then -- strict match
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and ni.key=v_ret.dst_prefix_out limit 1;
-            when 2 then -- prefix match
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where
-                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
-                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
-                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-                order by length(prefix_range(ni.key))
-                desc limit 1;
-            when 3 then -- random
-                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
-          end case;
+
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
@@ -18246,28 +18308,23 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         end if;
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
-          /*}dbg*/
+
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[0] is not null then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, fallback to %s', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[0];
+            /*}dbg*/
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[0]);
+          else
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+            /*}dbg*/
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
+          end if;
+
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
-          CASE v_numberlist.mode_id
-            when 1 then -- strict match
-              select into v_numberlist_item * from class4.numberlist_items ni
-              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
-            when 2 then -- prefix match
-              select into v_numberlist_item * from class4.numberlist_items ni
-              where
-                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
-                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
-                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-              order by length(prefix_range(ni.key)) desc limit 1;
-            when 3 then -- random
-              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
-              select into v_numberlist_item *
-              from class4.numberlist_items ni
-              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
-          end case;
+
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
@@ -19040,6 +19097,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
+        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -19441,27 +19499,10 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
           /*}dbg*/
+
+          v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.dst_numberlist_id, v_ret.dst_prefix_out);
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.dst_numberlist_id;
-          CASE v_numberlist.mode_id
-            when 1 then -- strict match
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and ni.key=v_ret.dst_prefix_out limit 1;
-            when 2 then -- prefix match
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where
-                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
-                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
-                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-                order by length(prefix_range(ni.key))
-                desc limit 1;
-            when 3 then -- random
-                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
-          end case;
+
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
@@ -19513,28 +19554,23 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         end if;
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key: %s',EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
-          /*}dbg*/
+
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[0] is not null then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, fallback to %s', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[0];
+            /*}dbg*/
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[0]);
+          else
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+            /*}dbg*/
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
+          end if;
+
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
-          CASE v_numberlist.mode_id
-            when 1 then -- strict match
-              select into v_numberlist_item * from class4.numberlist_items ni
-              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
-            when 2 then -- prefix match
-              select into v_numberlist_item * from class4.numberlist_items ni
-              where
-                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
-                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
-                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-              order by length(prefix_range(ni.key)) desc limit 1;
-            when 3 then -- random
-              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
-              select into v_numberlist_item *
-              from class4.numberlist_items ni
-              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
-          end case;
+
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
@@ -20304,6 +20340,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
+        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -20662,27 +20699,10 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         ----- Numberlist processing-------------------------------------------------------------------------------------------------------
         if v_customer_auth_normalized.dst_numberlist_id is not null then
           
+
+          v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.dst_numberlist_id, v_ret.dst_prefix_out);
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.dst_numberlist_id;
-          CASE v_numberlist.mode_id
-            when 1 then -- strict match
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and ni.key=v_ret.dst_prefix_out limit 1;
-            when 2 then -- prefix match
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where
-                  ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id and
-                  prefix_range(ni.key)@>prefix_range(v_ret.dst_prefix_out) and
-                  length(v_ret.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-                order by length(prefix_range(ni.key))
-                desc limit 1;
-            when 3 then -- random
-                select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.dst_numberlist_id;
-                select into v_numberlist_item *
-                from class4.numberlist_items ni
-                where ni.numberlist_id=v_customer_auth_normalized.dst_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
-          end case;
+
           
           IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
             
@@ -20725,25 +20745,17 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         end if;
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
-          
+
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[0] is not null then
+            
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[0]);
+          else
+            
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
+          end if;
+
           select into v_numberlist * from class4.numberlists where id=v_customer_auth_normalized.src_numberlist_id;
-          CASE v_numberlist.mode_id
-            when 1 then -- strict match
-              select into v_numberlist_item * from class4.numberlist_items ni
-              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and ni.key=v_ret.src_prefix_out limit 1;
-            when 2 then -- prefix match
-              select into v_numberlist_item * from class4.numberlist_items ni
-              where
-                ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id and
-                prefix_range(ni.key)@>prefix_range(v_ret.src_prefix_out) and
-                length(v_ret.src_prefix_out) between ni.number_min_length and ni.number_max_length
-              order by length(prefix_range(ni.key)) desc limit 1;
-            when 3 then -- random
-              select into v_numberlist_size count(*) from class4.numberlist_items where numberlist_id=v_customer_auth_normalized.src_numberlist_id;
-              select into v_numberlist_item *
-              from class4.numberlist_items ni
-              where ni.numberlist_id=v_customer_auth_normalized.src_numberlist_id order by ni.id OFFSET floor(random()*v_numberlist_size) limit 1;
-          end case;
+
           
           IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
             
@@ -22027,31 +22039,6 @@ ALTER SEQUENCE class4.areas_id_seq OWNED BY class4.areas.id;
 
 
 --
--- Name: numberlist_items; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.numberlist_items (
-    id integer NOT NULL,
-    numberlist_id smallint NOT NULL,
-    key character varying NOT NULL,
-    created_at timestamp with time zone,
-    updated_at timestamp with time zone,
-    action_id smallint,
-    src_rewrite_rule character varying,
-    src_rewrite_result character varying,
-    dst_rewrite_rule character varying,
-    dst_rewrite_result character varying,
-    tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    number_min_length smallint DEFAULT 0 NOT NULL,
-    number_max_length smallint DEFAULT 100 NOT NULL,
-    lua_script_id smallint,
-    CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
-    CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
-);
-
-
---
 -- Name: blacklist_items_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
@@ -22349,6 +22336,7 @@ CREATE TABLE class4.customers_auth (
     dst_number_field_id smallint DEFAULT 1 NOT NULL,
     cnam_database_id smallint,
     cps_limit double precision,
+    src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -22443,6 +22431,7 @@ CREATE TABLE class4.customers_auth_normalized (
     dst_number_field_id smallint DEFAULT 1 NOT NULL,
     cnam_database_id smallint,
     cps_limit double precision,
+    src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -30523,6 +30512,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221226124025'),
 ('20221226205639'),
 ('20221231184545'),
-('20230208213717');
+('20230208213717'),
+('20230213210713');
 
 
