@@ -176,7 +176,6 @@ CREATE or replace FUNCTION switch20.route(
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
-        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;

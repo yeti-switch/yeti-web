@@ -17851,7 +17851,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
-        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -19100,7 +19099,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
-        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
@@ -20346,7 +20344,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_pai varchar[];
         v_ppi varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
-        v_src_numberlist_key varchar;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
