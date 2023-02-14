@@ -10,7 +10,7 @@ RSpec.describe 'switch20.load_disconnect_code_refuse_overrides' do
   end
 
   let!(:dpp) { create(:disconnect_policy) }
-  let!(:dp_code) { create(:disconnect_policy_code, policy_id: dpp.id, code_id: 111) }
+  let!(:dp_code) { create(:disconnect_policy_code, policy_id: dpp.id, code_id: DisconnectCode.where(namespace_id: DisconnectCode::NS_TM).first.id) }
 
   it 'responds with correct rows' do
     expect(subject.first).to have_key(:o_id)
@@ -22,5 +22,4 @@ RSpec.describe 'switch20.load_disconnect_code_refuse_overrides' do
     expect(subject.first).to have_key(:o_silently_drop)
     expect(subject.first).to have_key(:o_store_cdr)
   end
-  0
 end
