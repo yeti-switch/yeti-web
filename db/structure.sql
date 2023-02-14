@@ -18312,16 +18312,16 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
 
-          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[0] is not null then
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1] is not null then
             /*dbg{*/
             v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, fallback to %s', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[0];
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, fallback to %', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[1];
             /*}dbg*/
-            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[0]);
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1]);
           else
             /*dbg{*/
             v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
             /*}dbg*/
             v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
           end if;
@@ -19561,16 +19561,16 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
 
-          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[0] is not null then
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1] is not null then
             /*dbg{*/
             v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, fallback to %s', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[0];
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, fallback to %', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[1];
             /*}dbg*/
-            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[0]);
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1]);
           else
             /*dbg{*/
             v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %s, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
             /*}dbg*/
             v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
           end if;
@@ -20755,9 +20755,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
 
-          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[0] is not null then
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1] is not null then
             
-            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[0]);
+            v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1]);
           else
             
             v_numberlist_item=switch20.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
