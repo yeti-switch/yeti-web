@@ -277,17 +277,30 @@ RSpec.describe '#routing logic' do
 
         FactoryBot.create(:customers_auth,
                           ip: '3.3.3.3',
-                          check_account_balance: false)
+                          check_account_balance: false,
+                          gateway_id: customer_gateway.id,
+                          dump_level_id: dump_level
+        )
       end
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
+      let!(:customer_gateway) {
+        create(:gateway,
+               orig_disconnect_policy_id: dp.id)
+      }
+      let(:dp) {
+        create(:disconnect_policy)
+      }
+      let(:dump_level) { CustomersAuth::DUMP_LEVEL_CAPTURE_SIP }
 
       it 'reject ' do
         expect(subject.size).to eq(1)
         expect(subject.first[:customer_auth_id]).to be
         expect(subject.first[:customer_id]).to be
         expect(subject.first[:disconnect_code_id]).to eq(111) # Can't find destination prefix
+        expect(subject.first[:aleg_policy_id]).to eq(dp.id)
+        expect(subject.first[:dump_level_id]).to eq(dump_level)
       end
     end
 
