@@ -32,7 +32,7 @@ class DisconnectCode < ApplicationRecord
   belongs_to :namespace, class_name: 'DisconnectCodeNamespace', foreign_key: 'namespace_id'
 
   def display_name
-    "#{namespace_id}.#{code} - #{reason}"
+    "#{namespace_name}/#{code} - #{reason}"
   end
 
   include WithPaperTrail
@@ -45,4 +45,14 @@ class DisconnectCode < ApplicationRecord
   NS_TS  = 1
   NS_SIP = 2
   NS_RADIUS = 3
+  NSS = {
+    NS_TM => 'TM',
+    NS_TS => 'TS',
+    NS_SIP => 'SIP',
+    NS_RADIUS => 'Radius'
+  }.freeze
+
+  def namespace_name
+    NSS[namespace_id]
+  end
 end
