@@ -18095,6 +18095,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
         v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+        -- we have to set disconnect policy to allow rewrite internal reject when call rejected before gw processing
+        SELECT INTO v_ret.aleg_policy_id orig_disconnect_policy_id from class4.gateways where id=v_customer_auth_normalized.gateway_id;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -19341,6 +19343,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
         v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+        -- we have to set disconnect policy to allow rewrite internal reject when call rejected before gw processing
+        SELECT INTO v_ret.aleg_policy_id orig_disconnect_policy_id from class4.gateways where id=v_customer_auth_normalized.gateway_id;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -20559,6 +20563,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
         v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+        -- we have to set disconnect policy to allow rewrite internal reject when call rejected before gw processing
+        SELECT INTO v_ret.aleg_policy_id orig_disconnect_policy_id from class4.gateways where id=v_customer_auth_normalized.gateway_id;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
