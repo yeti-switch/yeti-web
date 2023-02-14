@@ -419,9 +419,17 @@ CREATE or replace FUNCTION switch20.route(
         v_ret.rateplan_id:=v_customer_auth_normalized.rateplan_id;
         v_ret.routing_plan_id:=v_customer_auth_normalized.routing_plan_id;
         v_ret.customer_acc_id:=v_customer_auth_normalized.account_id;
+
         v_ret.orig_gw_id:=v_customer_auth_normalized.gateway_id;
+        SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
         -- we have to set disconnect policy to allow rewrite internal reject when call rejected before gw processing
-        SELECT INTO v_ret.aleg_policy_id orig_disconnect_policy_id from class4.gateways where id=v_customer_auth_normalized.gateway_id;
+        v_ret.aleg_policy_id = v_orig_gw.orig_disconnect_policy_id;
+
+        if not v_orig_gw.enabled then
+          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
+          RETURN NEXT v_ret;
+          RETURN;
+        end if;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -442,13 +450,6 @@ CREATE or replace FUNCTION switch20.route(
 
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
-
-        SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
-        if not v_orig_gw.enabled then
-          v_ret.disconnect_code_id=8005; -- Origination gateway is disabled
-          RETURN NEXT v_ret;
-          RETURN;
-        end if;
 
         v_ret.resources:='';
         if v_customer_auth_normalized.capacity is not null then
