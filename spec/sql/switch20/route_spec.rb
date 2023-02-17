@@ -277,17 +277,29 @@ RSpec.describe '#routing logic' do
 
         FactoryBot.create(:customers_auth,
                           ip: '3.3.3.3',
-                          check_account_balance: false)
+                          check_account_balance: false,
+                          gateway_id: customer_gateway.id,
+                          dump_level_id: dump_level)
       end
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
+      let!(:customer_gateway) {
+        create(:gateway,
+               orig_disconnect_policy_id: dp.id)
+      }
+      let(:dp) {
+        create(:disconnect_policy)
+      }
+      let(:dump_level) { CustomersAuth::DUMP_LEVEL_CAPTURE_SIP }
 
       it 'reject ' do
         expect(subject.size).to eq(1)
         expect(subject.first[:customer_auth_id]).to be
         expect(subject.first[:customer_id]).to be
         expect(subject.first[:disconnect_code_id]).to eq(111) # Can't find destination prefix
+        expect(subject.first[:aleg_policy_id]).to eq(dp.id)
+        expect(subject.first[:dump_level_id]).to eq(dump_level)
       end
     end
 
@@ -387,7 +399,11 @@ RSpec.describe '#routing logic' do
                           diversion_policy_id: customer_auth_diversion_policy_id,
                           diversion_rewrite_rule: customer_auth_diversion_rewrite_rule,
                           diversion_rewrite_result: customer_auth_diversion_rewrite_result,
-                          cps_limit: customer_auth_cps_limit)
+                          cps_limit: customer_auth_cps_limit,
+                          src_numberlist_id: customer_auth_src_numberlist_id,
+                          dst_numberlist_id: customer_auth_dst_numberlist_id,
+                          dump_level_id: customer_auth_dump_level,
+                          src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion)
       end
 
       let!(:send_billing_information) { false }
@@ -395,6 +411,10 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_diversion_rewrite_rule) { nil } # removing +380
       let(:customer_auth_diversion_rewrite_result) { nil }
       let(:customer_auth_cps_limit) { nil }
+      let(:customer_auth_src_numberlist_id) { nil }
+      let(:customer_auth_dst_numberlist_id) { nil }
+      let(:customer_auth_dump_level) { CustomersAuth::DUMP_LEVEL_CAPTURE_SIP }
+      let(:customer_auth_src_numberlist_use_diversion) { false }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -434,8 +454,14 @@ RSpec.describe '#routing logic' do
                contractor_id: customer.id,
                enabled: true,
                allow_origination: true,
-               orig_append_headers_reply: orig_append_headers_reply)
+               orig_append_headers_reply: orig_append_headers_reply,
+               orig_disconnect_policy_id: orig_disconnect_policy.id)
       }
+
+      let(:orig_disconnect_policy) {
+        create(:disconnect_policy)
+      }
+
       let!(:orig_append_headers_reply) { [] }
 
       let!(:rate_group) { create(:rate_group) }
@@ -481,6 +507,221 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:customer_id]).to be
           expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
           expect(subject.first[:disconnect_code_id]).to eq(8012) # CPS Limit
+        end
+      end
+
+      context 'Authorized, DST numberlist' do
+        let!(:nl) {
+          create(:numberlist, mode_id: nl_mode, default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT)
+        }
+        let!(:nl_item) {
+          create(:numberlist_item,
+                 numberlist_id: nl.id,
+                 key: '12345678',
+                 action_id: Routing::NumberlistItem::ACTION_REJECT)
+        }
+        let(:customer_auth_dst_numberlist_id) { nl.id }
+
+        let(:uri_name) { '12345678' }
+
+        context 'not matched in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:uri_name) { '122' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).not_to eq(8001)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8001)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in prefix mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_PREFIX }
+          let(:uri_name) { '123456780000000' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8001)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in random mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_RANDOM }
+          let(:uri_name) { '123456780000000' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8001)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+      end
+
+      context 'Authorized, SRC numberlist' do
+        let!(:nl) {
+          create(:numberlist, mode_id: nl_mode, default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT)
+        }
+        let!(:nl_item) {
+          create(:numberlist_item,
+                 numberlist_id: nl.id,
+                 key: '12345678',
+                 action_id: Routing::NumberlistItem::ACTION_REJECT)
+        }
+        let(:customer_auth_src_numberlist_id) { nl.id }
+
+        let(:from_name) { '12345678' }
+
+        context 'not matched in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:from_name) { '122' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).not_to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:src_prefix_out]).to eq(from_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in prefix mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_PREFIX }
+          let(:uri_name) { '123456780000000' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:src_prefix_out]).to eq(from_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in random mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_RANDOM }
+          let(:uri_name) { '123456780000000' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:src_prefix_out]).to eq(from_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+      end
+
+      context 'Authorized, SRC numberlist, fallback to Diversion' do
+        let(:customer_auth_src_numberlist_use_diversion) { true }
+        let(:customer_auth_diversion_policy_id) { 2 } # accept
+
+        let!(:nl) {
+          create(:numberlist, mode_id: nl_mode, default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT)
+        }
+        let!(:nl_item) {
+          create(:numberlist_item,
+                 numberlist_id: nl.id,
+                 key: '12345678',
+                 action_id: Routing::NumberlistItem::ACTION_REJECT)
+        }
+        let(:customer_auth_src_numberlist_id) { nl.id }
+
+        let(:from_name) { '111111111' } ## not matching
+        let(:diversion) { '12345678,111' }
+
+        context 'not matched in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:from_name) { '122' }
+          let(:diversion) { '100500' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).not_to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:src_prefix_out]).to eq(from_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in prefix mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_PREFIX }
+          let(:uri_name) { '123456780000000' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:src_prefix_out]).to eq(from_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched in random mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_RANDOM }
+          let(:uri_name) { '123456780000000' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:src_prefix_out]).to eq(from_name) # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(8002)
+            expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
+            expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
         end
       end
 

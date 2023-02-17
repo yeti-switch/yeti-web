@@ -389,7 +389,7 @@ ActiveAdmin.register Gateway do
               f.input :orig_outbound_proxy
               f.input :transparent_dialog_id
               f.input :dialog_nat_handling
-              f.input :orig_disconnect_policy
+              f.input :orig_disconnect_policy, input_html: { class: 'chosen' }, include_blank: true
             end
           end
           column do
@@ -416,7 +416,7 @@ ActiveAdmin.register Gateway do
               f.input :term_outbound_proxy
               f.input :term_next_hop_for_replies
               f.input :term_next_hop
-              f.input :term_disconnect_policy
+              f.input :term_disconnect_policy, input_html: { class: 'chosen' }, include_blank: true
               f.input :term_append_headers_req
               f.input :sdp_alines_filter_type, as: :select, include_blank: false
               f.input :sdp_alines_filter_list
