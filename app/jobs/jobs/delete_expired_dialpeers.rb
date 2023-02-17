@@ -14,7 +14,7 @@ module Jobs
     private
 
     def expired_dialpeer_ids
-      Dialpeer.where('valid_till <= ?', expired_date).pluck(:id)
+      Dialpeer.without_ratemanagement_pricelist_items.where('valid_till <= ?', expired_date).pluck(:id)
     end
 
     def expired_date

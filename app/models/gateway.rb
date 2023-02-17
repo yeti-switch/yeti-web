@@ -218,6 +218,14 @@ class Gateway < ApplicationRecord
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :gateway_id, dependent: :nullify
+  has_many :rate_management_projects, class_name: 'RateManagement::Project'
+  has_many :active_rate_management_pricelist_items,
+           -> { not_applied },
+           class_name: 'RateManagement::PricelistItem'
+  has_many :applied_rate_management_pricelist_items,
+           -> { applied },
+           class_name: 'RateManagement::PricelistItem',
+           dependent: :nullify
   has_one :statistic, class_name: 'GatewaysStat', dependent: :delete
 
   include WithPaperTrail
@@ -296,6 +304,8 @@ class Gateway < ApplicationRecord
   end
 
   before_validation :ensure_rtp_acl_format
+
+  before_destroy :check_associated_records
 
   include PgEvent
   has_pg_queue 'gateway-sync'
@@ -431,6 +441,20 @@ class Gateway < ApplicationRecord
 
   def incoming_auth_changed?
     incoming_auth_username_changed? || incoming_auth_password_changed?
+  end
+
+  def check_associated_records
+    project_ids = rate_management_projects.pluck(:id)
+    if project_ids.any?
+      errors.add(:base, "Can't be deleted because linked to Rate Management Project(s) ##{project_ids.join(', #')}")
+      throw(:abort)
+    end
+
+    pricelist_ids = active_rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
+    if pricelist_ids.any?
+      errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
+      throw(:abort)
+    end
   end
 
   def self.ransackable_scopes(_auth_object = nil)

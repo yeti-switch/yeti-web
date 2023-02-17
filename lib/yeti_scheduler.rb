@@ -101,4 +101,5 @@ class YetiScheduler < Scheduler::Base
   cron Jobs::DeleteExpiredDestinations
   cron Jobs::DeleteExpiredDialpeers
   cron Jobs::DeleteBalanceNotifications
+  cron Jobs::DeleteAppliedRateManagementPricelists
 end

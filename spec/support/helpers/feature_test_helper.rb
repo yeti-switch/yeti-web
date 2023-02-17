@@ -61,4 +61,8 @@ module FeatureTestHelper
   def table_select_all
     page.find('.resource_selection_toggle_cell label').click
   end
+
+  def within_main_content(&block)
+    within('#main_content_wrapper', &block)
+  end
 end

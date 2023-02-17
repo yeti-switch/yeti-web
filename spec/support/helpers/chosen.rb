@@ -94,5 +94,14 @@ module Helpers
       selector = chosen_container_selector(label, disabled: disabled, exact: exact_label)
       have_selector(selector, options)
     end
+
+    def chosen_deselect_values(label, values:, exact: false)
+      select_selector = chosen_container_selector(label, exact: exact)
+      chosen_node = page.find(select_selector)
+      values.each do |value|
+        item = chosen_node.find('li.search-choice', text: value.to_s)
+        item.find('a.search-choice-close').click
+      end
+    end
   end
 end

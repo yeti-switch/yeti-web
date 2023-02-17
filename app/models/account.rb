@@ -66,6 +66,14 @@ class Account < ApplicationRecord
   has_many :customers_auths, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
   has_many :cdr_exports, class_name: 'CdrExport', foreign_key: :customer_account_id, dependent: :nullify
+  has_many :rate_management_projects, class_name: 'RateManagement::Project'
+  has_many :active_rate_management_pricelist_items,
+           -> { not_applied },
+           class_name: 'RateManagement::PricelistItem'
+  has_many :applied_rate_management_pricelist_items,
+           -> { applied },
+           class_name: 'RateManagement::PricelistItem',
+           dependent: :nullify
 
   has_one :balance_notification_setting,
           class_name: 'AccountBalanceNotificationSetting',
@@ -141,6 +149,8 @@ class Account < ApplicationRecord
     create_balance_notification_setting! if balance_notification_setting.nil?
   end
 
+  before_destroy :check_associated_records
+
   def send_invoices_to_emails
     contacts_for_invoices.map(&:email).join(',')
   end
@@ -207,5 +217,21 @@ class Account < ApplicationRecord
     %i[
       search_for ordered_by
     ]
+  end
+
+  private
+
+  def check_associated_records
+    project_ids = rate_management_projects.pluck(:id)
+    if project_ids.any?
+      errors.add(:base, "Can't be deleted because linked to Rate Management Project(s) ##{project_ids.join(', #')}")
+      throw(:abort)
+    end
+
+    pricelist_ids = active_rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
+    if pricelist_ids.any?
+      errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
+      throw(:abort)
+    end
   end
 end
