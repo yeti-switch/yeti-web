@@ -80,7 +80,7 @@ ActiveAdmin.register CustomersAuth do
                 :transport_protocol_id,
                 :tag_action_id, :lua_script_id,
                 :dst_number_field_id, :src_number_field_id, :src_name_field_id,
-                :cnam_database_id,
+                :cnam_database_id, :src_numberlist_use_diversion,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
@@ -302,6 +302,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :diversion_policy, as: :select, include_blank: false
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
+          f.input :src_numberlist_use_diversion
 
           f.input :src_name_field
           f.input :src_name_rewrite_rule
@@ -400,6 +401,7 @@ ActiveAdmin.register CustomersAuth do
           row :diversion_policy
           row :diversion_rewrite_rule
           row :diversion_rewrite_result
+          row :src_numberlist_use_diversion
 
           row :src_name_field
           row :src_name_rewrite_rule
