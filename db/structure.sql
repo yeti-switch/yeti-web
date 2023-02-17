@@ -1215,7 +1215,6 @@ CREATE FUNCTION billing.bill_cdr_batch(i_batch_id bigint, i_data text, i_data_ve
     AS $$
 DECLARE
     v_batch_data billing.cdr_v2;
-    v_batch_id bigint;
     _j_data json;
 BEGIN
     begin
@@ -1224,9 +1223,9 @@ BEGIN
         when others then
             RAISE exception 'billing.bill_cdr_batch: Invalid json payload';
     end;
-    
+
     BEGIN
-        insert into billing.cdr_batches(id,size,raw_data) values( i_batch_id, json_array_length(_j_data),i_data) returning id into v_batch_id;
+        insert into billing.cdr_batches(id) values(i_batch_id);
     exception
         WHEN unique_violation then
             RAISE WARNING 'billing.bill_cdr_batch:  Data batch % already billed. Skip it.',i_batch_id;
@@ -1238,7 +1237,7 @@ BEGIN
     else
         RAISE EXCEPTION 'billing.bill_cdr_batch: No logic for this data version';
     end if;
-    
+
     for v_batch_data IN select * from json_populate_recordset(null::billing.cdr_v2,_j_data) LOOP
         if v_batch_data.customer_price >0  or v_batch_data.vendor_price>0 then
             perform billing.bill_cdr(v_batch_data);
@@ -1248,28 +1247,13 @@ BEGIN
         perform runtime_stats.update_dp(v_batch_data.destination_id,v_batch_data.dialpeer_id,
             v_batch_data.success,v_batch_data.duration
             );
-            
+
         perform runtime_stats.update_gw(v_batch_data.orig_gw_id,v_batch_data.term_gw_id,
             v_batch_data.success,v_batch_data.duration
             );
-        
-       
-    end LOOp;
-END;
-$$;
 
 
---
--- Name: clean_cdr_batch(); Type: FUNCTION; Schema: billing; Owner: -
---
-
-CREATE FUNCTION billing.clean_cdr_batch() RETURNS void
-    LANGUAGE plpgsql SECURITY DEFINER COST 10
-    AS $$
-DECLARE
-BEGIN
-    DELETE FROM billing.cdr_batches where id not in (SELECT id from billing.cdr_batches order by id desc limit 50);
-    return;
+    end loop;
 END;
 $$;
 
@@ -21890,9 +21874,7 @@ ALTER SEQUENCE billing.accounts_id_seq OWNED BY billing.accounts.id;
 
 CREATE TABLE billing.cdr_batches (
     id bigint NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    size integer NOT NULL,
-    raw_data text
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -31006,6 +30988,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221226205639'),
 ('20221231184545'),
 ('20230208213717'),
-('20230213210713');
+('20230213210713'),
+('20230217170438');
 
 
