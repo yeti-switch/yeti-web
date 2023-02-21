@@ -25268,7 +25268,7 @@ CREATE TABLE ratemanagement.pricelist_items (
     gateway_group_id integer,
     routing_tag_mode_id smallint DEFAULT 0,
     account_id integer,
-    vendor_id integer NOT NULL,
+    vendor_id integer,
     routing_group_id integer,
     routeset_discriminator_id smallint,
     dialpeer_id bigint,
@@ -30989,6 +30989,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221231184545'),
 ('20230208213717'),
 ('20230213210713'),
-('20230217170438');
+('20230217170438'),
+('20230221112029');
 
 

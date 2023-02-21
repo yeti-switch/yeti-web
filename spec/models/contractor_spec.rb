@@ -41,5 +41,35 @@ RSpec.describe Contractor, type: :model do
         expect { subject }.to change { System::ApiAccess.count }.by(-1)
       end
     end
+
+    context 'when contractor has RateManagement Pricelist Items' do
+      let(:contractor) { FactoryBot.create(:vendor) }
+      let(:another_vendor) { FactoryBot.create(:vendor) }
+      let!(:project) { FactoryBot.create(:rate_management_project, :filled, vendor: another_vendor) }
+      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, project: project) }
+      let!(:pricelits_items) { FactoryBot.create_list(:rate_management_pricelist_item, 3, pricelist: pricelist, vendor: contractor) }
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_message = "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist.id}"
+        expect(contractor.errors.to_a).to contain_exactly error_message
+
+        expect(Contractor).to be_exists(contractor.id)
+      end
+
+      context 'when pricelist applied' do
+        let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, :applied, project: project) }
+
+        it 'should raise validation error' do
+          expect { subject }.to change { Contractor.count }.by(-1)
+
+          pricelits_items.each do |item|
+            expect(item.reload.vendor).to be_nil
+          end
+          expect(Contractor).not_to be_exists(contractor.id)
+        end
+      end
+    end
   end
 end

@@ -42,7 +42,7 @@
 #  routeset_discriminator_id :integer(2)
 #  routing_group_id          :integer(4)
 #  routing_tag_mode_id       :integer(2)       default(0)
-#  vendor_id                 :integer(4)       not null
+#  vendor_id                 :integer(4)
 #
 # Indexes
 #
