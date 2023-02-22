@@ -33,6 +33,15 @@ class Contractor < ApplicationRecord
   has_many :accounts, dependent: :restrict_with_error
   has_many :contacts, class_name: 'Billing::Contact', foreign_key: 'contractor_id', dependent: :delete_all
   has_many :api_access, class_name: 'System::ApiAccess', foreign_key: 'customer_id', dependent: :destroy
+  has_many :active_rate_management_pricelist_items,
+           -> { not_applied },
+           class_name: 'RateManagement::PricelistItem',
+           foreign_key: :vendor_id
+  has_many :applied_rate_management_pricelist_items,
+           -> { applied },
+           class_name: 'RateManagement::PricelistItem',
+           dependent: :nullify,
+           foreign_key: :vendor_id
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', optional: true
 
   include WithPaperTrail
@@ -49,6 +58,8 @@ class Contractor < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :external_id, uniqueness: { allow_blank: true }
+
+  before_destroy :check_associated_records
 
   def display_name
     "#{name} | #{id}"
@@ -70,6 +81,14 @@ class Contractor < ApplicationRecord
   def customer_can_be_disabled
     if customer_changed?(from: true, to: false) && customers_auths.any?
       errors.add(:customer, I18n.t('activerecord.errors.models.contractor.attributes.customer'))
+    end
+  end
+
+  def check_associated_records
+    pricelist_ids = active_rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
+    if pricelist_ids.any?
+      errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
+      throw(:abort)
     end
   end
 
