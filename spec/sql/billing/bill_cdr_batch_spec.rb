@@ -54,7 +54,7 @@ RSpec.describe 'billing.bill_cdr_batch' do
         customer_price: 11,
         destination_reverse_billing: false,
         vendor_acc_id: vendor_acc2.id,
-        vendor_price: 555,
+        vendor_price: -555, #should be ignored
         dialpeer_reverse_billing: false
       },
     ].to_json.to_s
@@ -65,6 +65,6 @@ RSpec.describe 'billing.bill_cdr_batch' do
     expect(Account.find(customer_acc1.id).balance).to eq -6.001
     expect(Account.find(customer_acc2.id).balance).to eq -11
     expect(Account.find(vendor_acc1.id).balance).to eq 1100
-    expect(Account.find(vendor_acc2.id).balance).to eq 1120-0.99999+555
+    expect(Account.find(vendor_acc2.id).balance).to eq 1120-0.99999
   end
 end
