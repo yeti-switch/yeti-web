@@ -5,7 +5,7 @@ class ImproveCdrBilling < ActiveRecord::Migration[6.1]
 
 drop FUNCTION runtime_stats.update_dp(i_destination_id bigint, i_dialpeer_id bigint, i_success boolean, i_duration integer);
 
-CREATE FUNCTION runtime_stats.update_dp(
+CREATE or replace FUNCTION runtime_stats.update_dp(
   i_dialpeer_id bigint,
   i_calls integer,
   i_successful_calls integer,
@@ -52,7 +52,7 @@ END;
 $$;
 
 drop FUNCTION runtime_stats.update_gw(i_orig_gw_id integer, i_term_gw_id integer, i_success boolean, i_duration integer);
-CREATE FUNCTION runtime_stats.update_gw(
+CREATE or replace FUNCTION runtime_stats.update_gw(
   i_gw_id bigint,
   i_calls integer,
   i_successful_calls integer,
@@ -81,7 +81,7 @@ BEGIN
     WHERE gateway_id = i_gw_id;
     IF NOT FOUND THEN
       /* Unique violation possible there in if multiple CDR billed in parallel. This case is not valid, let it fail */
-      INSERT into runtime_stats.dialpeers_stats(
+      INSERT into runtime_stats.gateways_stats(
         gateway_id,
         calls,
         calls_success,
@@ -172,12 +172,12 @@ BEGIN
     FOR v_dp_stats_data IN
       SELECT
         dialpeer_id,
-        sum(duration) as duration,
-        count(*) as calls,
-        count(*) FILTER(WHERE duration>0) as successful_calls,
-        count(*) FILTER(WHERE duration=0) as failed_calls
+        sum(duration)::integer as duration,
+        count(*)::integer as calls,
+        (count(*) FILTER(WHERE duration>0))::integer as successful_calls,
+        (count(*) FILTER(WHERE duration=0))::integer as failed_calls
       FROM json_populate_recordset(null::billing.cdr_v2,_j_data)
-      WHERE duration >= 0 /* Negative duration should not exists */
+      WHERE dialpeer_id is not null AND duration is not null AND duration >= 0 /* Negative duration should not exists */
       GROUP BY dialpeer_id
     LOOP
       perform runtime_stats.update_dp(
@@ -192,20 +192,20 @@ BEGIN
     FOR v_gw_stats_data IN
       SELECT
         term_gw_id,
-        sum(duration) as duration,
-        count(*) as calls,
-        count(*) FILTER(WHERE duration>0) as successful_calls,
-        count(*) FILTER(WHERE duration=0) as failed_calls
+        sum(duration)::integer as duration,
+        count(*)::integer as calls,
+        (count(*) FILTER(WHERE duration>0))::integer as successful_calls,
+        (count(*) FILTER(WHERE duration=0))::integer as failed_calls
       FROM json_populate_recordset(null::billing.cdr_v2,_j_data)
-      WHERE duration >= 0 /* Negative duration should not exists */
+      WHERE term_gw_id is not null AND duration is not null AND duration >= 0 /* Negative duration should not exists */
       GROUP BY term_gw_id
     LOOP
       perform runtime_stats.update_gw(
-        v_dp_stats_data.term_gw_id,
-        v_dp_stats_data.calls,
-        v_dp_stats_data.successful_calls,
-        v_dp_stats_data.failed_calls,
-        v_dp_stats_data.duration
+        v_gw_stats_data.term_gw_id,
+        v_gw_stats_data.calls,
+        v_gw_stats_data.successful_calls,
+        v_gw_stats_data.failed_calls,
+        v_gw_stats_data.duration
       );
     END LOOP;
 
@@ -222,7 +222,6 @@ drop FUNCTION billing.unbill_cdr(i_cdr_id bigint);
   def down
     execute %q{
 
-/*
 
 drop FUNCTION runtime_stats.update_dp(
   i_dialpeer_id bigint,
@@ -239,7 +238,7 @@ drop FUNCTION runtime_stats.update_gw(
   i_failed_calls integer,
   i_duration integer
 );
-*/
+
 
 CREATE or replace FUNCTION runtime_stats.update_dp(i_destination_id bigint, i_dialpeer_id bigint, i_success boolean, i_duration integer) RETURNS void
     LANGUAGE plpgsql COST 10

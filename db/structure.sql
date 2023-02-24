@@ -1251,12 +1251,12 @@ BEGIN
     FOR v_dp_stats_data IN
       SELECT
         dialpeer_id,
-        sum(duration) as duration,
-        count(*) as calls,
-        count(*) FILTER(WHERE duration>0) as successful_calls,
-        count(*) FILTER(WHERE duration=0) as failed_calls
+        sum(duration)::integer as duration,
+        count(*)::integer as calls,
+        (count(*) FILTER(WHERE duration>0))::integer as successful_calls,
+        (count(*) FILTER(WHERE duration=0))::integer as failed_calls
       FROM json_populate_recordset(null::billing.cdr_v2,_j_data)
-      WHERE duration >= 0 /* Negative duration should not exists */
+      WHERE dialpeer_id is not null AND duration is not null AND duration >= 0 /* Negative duration should not exists */
       GROUP BY dialpeer_id
     LOOP
       perform runtime_stats.update_dp(
@@ -1271,20 +1271,20 @@ BEGIN
     FOR v_gw_stats_data IN
       SELECT
         term_gw_id,
-        sum(duration) as duration,
-        count(*) as calls,
-        count(*) FILTER(WHERE duration>0) as successful_calls,
-        count(*) FILTER(WHERE duration=0) as failed_calls
+        sum(duration)::integer as duration,
+        count(*)::integer as calls,
+        (count(*) FILTER(WHERE duration>0))::integer as successful_calls,
+        (count(*) FILTER(WHERE duration=0))::integer as failed_calls
       FROM json_populate_recordset(null::billing.cdr_v2,_j_data)
-      WHERE duration >= 0 /* Negative duration should not exists */
+      WHERE term_gw_id is not null AND duration is not null AND duration >= 0 /* Negative duration should not exists */
       GROUP BY term_gw_id
     LOOP
       perform runtime_stats.update_gw(
-        v_dp_stats_data.term_gw_id,
-        v_dp_stats_data.calls,
-        v_dp_stats_data.successful_calls,
-        v_dp_stats_data.failed_calls,
-        v_dp_stats_data.duration
+        v_gw_stats_data.term_gw_id,
+        v_gw_stats_data.calls,
+        v_gw_stats_data.successful_calls,
+        v_gw_stats_data.failed_calls,
+        v_gw_stats_data.duration
       );
     END LOOP;
 
@@ -1863,7 +1863,7 @@ BEGIN
     WHERE gateway_id = i_gw_id;
     IF NOT FOUND THEN
       /* Unique violation possible there in if multiple CDR billed in parallel. This case is not valid, let it fail */
-      INSERT into runtime_stats.dialpeers_stats(
+      INSERT into runtime_stats.gateways_stats(
         gateway_id,
         calls,
         calls_success,
