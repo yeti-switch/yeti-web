@@ -1222,7 +1222,7 @@ BEGIN
         sum(customer_price) as customer_price,
         destination_reverse_billing
       from json_populate_recordset(null::billing.cdr_v2,_j_data)
-      where customer_price>0
+      where customer_acc_id is not null AND customer_price > 0
       group by customer_acc_id, destination_reverse_billing
     LOOP
       IF v_c_acc_data.destination_reverse_billing IS NULL OR v_c_acc_data.destination_reverse_billing = false THEN
@@ -1238,7 +1238,7 @@ BEGIN
         sum(vendor_price) as vendor_price,
         dialpeer_reverse_billing
       from json_populate_recordset(null::billing.cdr_v2,_j_data)
-      where vendor_price>0
+      where vendor_acc_id is not null AND vendor_price>0
       group by vendor_acc_id, dialpeer_reverse_billing
     LOOP
       IF v_v_acc_data.dialpeer_reverse_billing IS NULL OR v_v_acc_data.dialpeer_reverse_billing = false THEN
