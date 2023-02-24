@@ -38,6 +38,17 @@ RSpec.describe 'billing.bill_cdr_batch' do
         customer_price: 10,
         destination_reverse_billing: false,
         vendor_acc_id: vendor_acc1.id,
+        vendor_price: 99,
+        dialpeer_reverse_billing: false,
+        dialpeer_id: -22, # there is no such dp
+        term_gw_id: -11, # there is no such gw
+        duration: 600
+      },
+      {
+        customer_acc_id: customer_acc1.id,
+        customer_price: 10,
+        destination_reverse_billing: false,
+        vendor_acc_id: vendor_acc1.id,
         vendor_price: 1100,
         dialpeer_reverse_billing: false,
         dialpeer_id: dp.id,
@@ -82,9 +93,9 @@ RSpec.describe 'billing.bill_cdr_batch' do
 
   it 'responds with correct rows' do
     subject
-    expect(Account.find(customer_acc1.id).balance).to eq -6.001
+    expect(Account.find(customer_acc1.id).balance).to eq -6.001 - 10
     expect(Account.find(customer_acc2.id).balance).to eq -11
-    expect(Account.find(vendor_acc1.id).balance).to eq 1100
+    expect(Account.find(vendor_acc1.id).balance).to eq 1100 + 99
     expect(Account.find(vendor_acc2.id).balance).to eq 1120 - 0.99999
 
     ds = Dialpeer.find(dp.id).statistic
