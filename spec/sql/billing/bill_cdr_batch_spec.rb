@@ -2,35 +2,17 @@
 
 RSpec.describe 'billing.bill_cdr_batch' do
   subject do
-    SqlCaller::Yeti.select_all('SELECT * FROM billing.bill_cdr_batch(?,?)', batch_id, batch_data).map(&:deep_symbolize_keys)
+    SqlCaller::Yeti.execute('SELECT * FROM billing.bill_cdr_batch(?,?)', batch_id, batch_data.to_json)
   end
 
+  let(:customer_acc1) { FactoryBot.create(:account, balance: 10) }
+  let(:customer_acc2) { FactoryBot.create(:account, balance: 20) }
+  let(:vendor_acc1) { FactoryBot.create(:account, balance: 30) }
+  let(:vendor_acc2) { FactoryBot.create(:account, balance: 40) }
+  let(:dp) { FactoryBot.create(:dialpeer) }
+  let(:gw) { FactoryBot.create(:gateway) }
+
   let(:batch_id) { 1 }
-
-  let(:customer_acc1) {
-    FactoryBot.create(:account, balance: 0)
-  }
-
-  let(:customer_acc2) {
-    FactoryBot.create(:account, balance: 0)
-  }
-
-  let(:vendor_acc1) {
-    FactoryBot.create(:account, balance: 0)
-  }
-
-  let(:vendor_acc2) {
-    FactoryBot.create(:account, balance: 0)
-  }
-
-  let(:dp) {
-    FactoryBot.create(:dialpeer)
-  }
-
-  let(:gw) {
-    FactoryBot.create(:gateway)
-  }
-
   let(:batch_data) do
     [
       {
@@ -88,30 +70,58 @@ RSpec.describe 'billing.bill_cdr_batch' do
         term_gw_id: gw.id,
         duration: -11 # should be skipped in stats
       }
-    ].to_json.to_s
+    ]
   end
 
-  it 'responds with correct rows' do
+  it 'updates customer accounts' do
+    customer_acc1_balance = customer_acc1.balance
+    # destination_reverse_billing=false and customer_price > 0
+    customer_acc1_spending = batch_data[0][:customer_price] + batch_data[1][:customer_price]
+    # destination_reverse_billing=true and customer_price > 0
+    customer_acc1_income = batch_data[2][:customer_price]
+
+    customer_acc2_balance = customer_acc2.balance
+    # destination_reverse_billing=false and customer_price > 0
+    customer_acc2_spending = batch_data[4][:customer_price]
+
     subject
-    expect(Account.find(customer_acc1.id).balance).to eq -6.001 - 10
-    expect(Account.find(customer_acc2.id).balance).to eq -11
-    expect(Account.find(vendor_acc1.id).balance).to eq 1100 + 99
-    expect(Account.find(vendor_acc2.id).balance).to eq 1120 - 0.99999
+    expect(customer_acc1.reload.balance).to eq(customer_acc1_balance - customer_acc1_spending + customer_acc1_income)
+    expect(customer_acc2.reload.balance).to eq(customer_acc2_balance - customer_acc2_spending)
+  end
 
-    ds = Dialpeer.find(dp.id).statistic
-    expect(ds.calls).to eq 3
-    expect(ds.calls_success).to eq 2
-    expect(ds.calls_fail).to eq 1
-    expect(ds.total_duration).to eq 32
-    expect(ds.asr).to eq 0.6666667
-    expect(ds.acd).to eq 16
+  it 'updates vendor accounts' do
+    vendor_acc1_balance = vendor_acc1.balance
+    # dialpeer_reverse_billing=false and vendor_price > 0
+    vendor_acc1_income = batch_data[0][:vendor_price] + batch_data[1][:vendor_price]
 
-    gs = Gateway.find(gw.id).statistic
-    expect(gs.calls).to eq 2
-    expect(gs.calls_success).to eq 1
-    expect(gs.calls_fail).to eq 1
-    expect(gs.total_duration).to eq 22
-    expect(gs.asr).to eq 0.5
-    expect(gs.acd).to eq 22
+    vendor_acc2_balance = vendor_acc2.balance
+    # dialpeer_reverse_billing=false and vendor_price > 0
+    vendor_acc2_income = batch_data[2][:vendor_price]
+    # dialpeer_reverse_billing=true and vendor_price > 0
+    vendor_acc2_spending = batch_data[3][:vendor_price]
+    subject
+    expect(vendor_acc1.reload.balance).to eq(vendor_acc1_balance + vendor_acc1_income)
+    expect(vendor_acc2.reload.balance).to eq(vendor_acc2_balance + vendor_acc2_income - vendor_acc2_spending)
+  end
+
+  it 'updates statistic' do
+    subject
+    expect(dp.reload.statistic).to have_attributes(
+                                     calls: 3,
+                                     calls_success: 2,
+                                     calls_fail: 1,
+                                     total_duration: 32,
+                                     asr: 0.6666667,
+                                     acd: 16
+                                   )
+
+    expect(gw.reload.statistic).to have_attributes(
+                                     calls: 2,
+                                     calls_success: 1,
+                                     calls_fail: 1,
+                                     total_duration: 22,
+                                     asr: 0.5,
+                                     acd: 22
+                                   )
   end
 end
