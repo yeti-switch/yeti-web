@@ -124,4 +124,91 @@ RSpec.describe 'billing.bill_cdr_batch' do
                                      acd: 22
                                    )
   end
+
+  context 'zero duration batch' do
+
+    let(:batch_data) do
+      [
+        {
+          customer_acc_id: customer_acc1.id,
+          customer_price: 10,
+          destination_reverse_billing: false,
+          vendor_acc_id: vendor_acc1.id,
+          vendor_price: 99,
+          dialpeer_reverse_billing: false,
+          dialpeer_id: -22, # there is no such dp
+          term_gw_id: -11, # there is no such gw
+          duration: 0
+        },
+        {
+          customer_acc_id: customer_acc1.id,
+          customer_price: 10,
+          destination_reverse_billing: false,
+          vendor_acc_id: vendor_acc1.id,
+          vendor_price: 1100,
+          dialpeer_reverse_billing: false,
+          dialpeer_id: dp.id,
+          term_gw_id: -11, # there is no such gw
+          duration: 0
+        },
+        {
+          customer_acc_id: customer_acc1.id,
+          customer_price: 3.999,
+          destination_reverse_billing: true,
+          vendor_acc_id: vendor_acc2.id,
+          vendor_price: 1120,
+          dialpeer_reverse_billing: false,
+          dialpeer_id: dp.id,
+          term_gw_id: gw.id,
+          duration: 0
+        },
+        {
+          customer_acc_id: customer_acc1.id,
+          customer_price: -110, # should be ignored
+          destination_reverse_billing: false,
+          vendor_acc_id: vendor_acc2.id,
+          vendor_price: 0.99999,
+          dialpeer_reverse_billing: true,
+          dialpeer_id: dp.id,
+          term_gw_id: gw.id,
+          duration: 0
+        },
+        {
+          customer_acc_id: customer_acc2.id,
+          customer_price: 11,
+          destination_reverse_billing: false,
+          vendor_acc_id: vendor_acc2.id,
+          vendor_price: -555, # should be ignored
+          dialpeer_reverse_billing: false,
+          dialpeer_id: dp.id,
+          term_gw_id: gw.id,
+          duration: -11 # should be skipped in stats
+        }
+      ]
+    end
+
+    it 'works' do
+      subject
+      expect(dp.reload.statistic).to have_attributes(
+                                     calls: 3,
+                                     calls_success: 0,
+                                     calls_fail: 3,
+                                     total_duration: 0,
+                                     asr: 0,
+                                     acd: 0
+                                   )
+
+      expect(gw.reload.statistic).to have_attributes(
+                                     calls: 2,
+                                     calls_success: 0,
+                                     calls_fail: 2,
+                                     total_duration: 0,
+                                     asr: 0,
+                                     acd: 0
+                                   )
+
+    end
+
+  end
+
 end
