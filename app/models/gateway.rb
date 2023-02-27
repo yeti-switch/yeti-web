@@ -447,14 +447,14 @@ class Gateway < ApplicationRecord
     project_ids = rate_management_projects.pluck(:id)
     if project_ids.any?
       errors.add(:base, "Can't be deleted because linked to Rate Management Project(s) ##{project_ids.join(', #')}")
-      throw(:abort)
     end
 
     pricelist_ids = active_rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
     if pricelist_ids.any?
       errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
-      throw(:abort)
     end
+
+    throw(:abort) if errors.any?
   end
 
   def self.ransackable_scopes(_auth_object = nil)

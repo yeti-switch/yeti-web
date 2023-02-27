@@ -381,7 +381,7 @@ RSpec.describe Gateway, type: :model do
       include_examples :calls_event_with, :reload_incoming_auth
     end
 
-    context 'when RoutingGroup is linked to RateManagement Project' do
+    context 'when Gateway is linked to RateManagement Project' do
       let!(:projects) { FactoryBot.create_list(:rate_management_project, 3, :filled, gateway: record, vendor: record.vendor) }
 
       it 'should raise validation error' do
@@ -441,6 +441,23 @@ RSpec.describe Gateway, type: :model do
             expect(item.reload.gateway_id).to be_nil
           end
         end
+      end
+    end
+
+    context 'when Gateway is linked to RateManagement Project and Pricelist Items' do
+      let!(:project) { FactoryBot.create(:rate_management_project, :filled, gateway: record, vendor: record.vendor) }
+      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, project: project, items_qty: 1) }
+
+      it 'should raise validation error' do
+        subject
+
+        error_messages = [
+          "Can't be deleted because linked to Rate Management Project(s) ##{project.id}",
+          "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist.id}"
+        ]
+        expect(record.errors).to contain_exactly *error_messages
+
+        expect(described_class).to be_exists(record.id)
       end
     end
   end

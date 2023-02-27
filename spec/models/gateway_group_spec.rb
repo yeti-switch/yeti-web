@@ -25,7 +25,7 @@ RSpec.describe GatewayGroup do
     subject { gateway_group.destroy! }
     let(:gateway_group) { FactoryBot.create(:gateway_group) }
 
-    context 'when RoutingGroup is linked to RateManagement Project' do
+    context 'when GatewayGroup is linked to RateManagement Project' do
       let!(:projects) do
         FactoryBot.create_list(:rate_management_project, 3, :filled, vendor: gateway_group.vendor, gateway: nil, gateway_group: gateway_group)
       end
@@ -87,6 +87,25 @@ RSpec.describe GatewayGroup do
             expect(item.reload.gateway_group_id).to be_nil
           end
         end
+      end
+    end
+
+    context 'when GatewayGroup is linked to RateManagement Project and Pricelist Items' do
+      let!(:project) do
+        FactoryBot.create(:rate_management_project, :filled, vendor: gateway_group.vendor, gateway: nil, gateway_group: gateway_group)
+      end
+      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, project: project, items_qty: 1) }
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_messages = [
+          "Can't be deleted because linked to Rate Management Project(s) ##{project.id}",
+          "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist.id}"
+        ]
+        expect(gateway_group.errors).to contain_exactly *error_messages
+
+        expect(GatewayGroup).to be_exists(gateway_group.id)
       end
     end
   end

@@ -337,5 +337,22 @@ RSpec.describe Account, type: :model do
         end
       end
     end
+
+    context 'when Account is linked to RateManagement Project and Pricelist Items' do
+      let!(:project) { FactoryBot.create(:rate_management_project, :filled, vendor: account.contractor, account: account) }
+      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, project: project, items_qty: 1) }
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_messages = [
+          "Can't be deleted because linked to Rate Management Project(s) ##{project.id}",
+          "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist.id}"
+        ]
+        expect(account.errors).to contain_exactly *error_messages
+
+        expect(Account).to be_exists(account.id)
+      end
+    end
   end
 end

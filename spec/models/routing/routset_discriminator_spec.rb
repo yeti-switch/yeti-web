@@ -67,5 +67,22 @@ RSpec.describe Routing::RoutesetDiscriminator do
         end
       end
     end
+
+    context 'when RoutesetDiscriminator is linked to RateManagement Project and Pricelist Items' do
+      let!(:project) { FactoryBot.create(:rate_management_project, :filled, routeset_discriminator: routeset_discriminator) }
+      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, project: project, items_qty: 1) }
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        error_messages = [
+          "Can't be deleted because linked to Rate Management Project(s) ##{project.id}",
+          "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist.id}"
+        ]
+        expect(routeset_discriminator.errors).to contain_exactly *error_messages
+
+        expect(Routing::RoutesetDiscriminator).to be_exists(routeset_discriminator.id)
+      end
+    end
   end
 end
