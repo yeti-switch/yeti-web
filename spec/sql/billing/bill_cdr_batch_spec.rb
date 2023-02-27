@@ -126,7 +126,6 @@ RSpec.describe 'billing.bill_cdr_batch' do
   end
 
   context 'zero duration batch' do
-
     let(:batch_data) do
       [
         {
@@ -206,9 +205,6 @@ RSpec.describe 'billing.bill_cdr_batch' do
                                      asr: 0,
                                      acd: 0
                                    )
-
     end
-
   end
-
 end
