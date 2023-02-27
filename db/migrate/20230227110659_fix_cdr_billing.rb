@@ -2,6 +2,8 @@ class FixCdrBilling < ActiveRecord::Migration[6.1]
   def up
     execute %q{
 
+CREATE INDEX if not exists dialpeer_next_rates_dialpeer_id_idx ON class4.dialpeer_next_rates USING btree (dialpeer_id);
+
 CREATE or replace FUNCTION runtime_stats.update_dp(
   i_dialpeer_id bigint,
   i_calls integer,
@@ -102,6 +104,8 @@ $$;}
 
   def down
     execute %q{
+
+drop INDEX if exists class4.dialpeer_next_rates_dialpeer_id_idx;
 
 CREATE or replace FUNCTION runtime_stats.update_dp(
   i_dialpeer_id bigint,

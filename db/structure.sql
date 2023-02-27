@@ -29416,6 +29416,13 @@ CREATE INDEX destinations_prefix_range_idx ON class4.destinations USING gist (((
 
 
 --
+-- Name: dialpeer_next_rates_dialpeer_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX dialpeer_next_rates_dialpeer_id_idx ON class4.dialpeer_next_rates USING btree (dialpeer_id);
+
+
+--
 -- Name: dialpeers_account_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 

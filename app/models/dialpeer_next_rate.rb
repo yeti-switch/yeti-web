@@ -17,6 +17,10 @@
 #  dialpeer_id      :bigint(8)        not null
 #  external_id      :bigint(8)
 #
+# Indexes
+#
+#  dialpeer_next_rates_dialpeer_id_idx  (dialpeer_id)
+#
 # Foreign Keys
 #
 #  dialpeer_next_rates_dialpeer_id_fkey  (dialpeer_id => dialpeers.id)
