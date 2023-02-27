@@ -18,6 +18,7 @@ ActiveAdmin.setup do |config|
       menu.add label: 'System', priority: 90 do |sub_menu|
         sub_menu.add label: 'Components'
       end
+      menu.add label: 'Rate Management', priority: 100
 
       # http://127.0.0.1:3000/admin/admin_users/1
       menu.add label: proc { display_name current_active_admin_user },

@@ -15,7 +15,7 @@
 class Routing::RoutingGroup < ApplicationRecord
   self.table_name = 'class4.routing_groups'
 
-  before_destroy :sociated_records
+  before_destroy :check_associated_records
 
   has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan',
                                           join_table: 'class4.routing_plan_groups'
@@ -45,7 +45,7 @@ class Routing::RoutingGroup < ApplicationRecord
 
   private
 
-  def sociated_records
+  def check_associated_records
     if routing_plans.count > 0
       errors.add(:base, 'Routing Group used in Routing Plan configuration. You must unlink it first')
     end

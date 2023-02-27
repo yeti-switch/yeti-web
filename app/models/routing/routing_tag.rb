@@ -62,8 +62,19 @@ class Routing::RoutingTag < ApplicationRecord
 
     if associations.any?
       errors.add(:base, "Has related #{associations.join(', ')}")
-      throw(:abort)
     end
+
+    project_ids = rate_management_projects.pluck(:id)
+    if project_ids.any?
+      errors.add(:base, "Can't be deleted because linked to Rate Management Project(s) ##{project_ids.join(', #')}")
+    end
+
+    pricelist_ids = rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
+    if pricelist_ids.any?
+      errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
+    end
+
+    throw(:abort) if errors.any?
   end
 
   def active_assosiations
@@ -74,8 +85,6 @@ class Routing::RoutingTag < ApplicationRecord
     associations << 'Detection Rule' if detection_rules.exists?
     associations << 'Dialpeer' if dialpeers.exists?
     associations << 'Destination' if destinations.exists?
-    associations << 'Rate Management Project' if rate_management_projects.exists?
-    associations << 'Rate Management Pricelist Item' if rate_management_pricelist_items.exists?
     associations
   end
 end

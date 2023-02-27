@@ -89,7 +89,7 @@ module RateManagement
     belongs_to :gateway_group, optional: true
     belongs_to :routing_group, class_name: 'Routing::RoutingGroup', optional: true
     belongs_to :account, optional: true
-    belongs_to :vendor, class_name: 'Contractor'
+    belongs_to :vendor, class_name: 'Contractor', optional: true
     belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode'
     belongs_to :pricelist, class_name: 'RateManagement::Pricelist'
     belongs_to :dialpeer, class_name: 'Dialpeer', optional: true
