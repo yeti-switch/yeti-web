@@ -1810,7 +1810,7 @@ BEGIN
           calls_success = calls_success + i_successful_calls,
           calls_fail = calls_fail + i_failed_calls,
           total_duration = total_duration + i_duration,
-          acd = (total_duration + i_duration )::real/(calls_success + i_successful_calls)::real,
+          acd = coalesce((total_duration + i_duration )::real/nullif((calls_success + i_successful_calls),0)::real,0),
           asr = (calls_success + i_successful_calls)::real/(calls + i_calls)::real
         WHERE dialpeer_id = i_dialpeer_id;
         IF NOT FOUND THEN
@@ -1829,7 +1829,7 @@ BEGIN
             i_successful_calls,
             i_failed_calls,
             i_duration,
-            i_duration::real/i_successful_calls::real,
+            coalesce(i_duration::real/nullif(i_successful_calls,0)::real,0),
             i_successful_calls::real/i_calls::real
           );
         END IF;
@@ -1858,7 +1858,7 @@ BEGIN
       calls_success = calls_success + i_successful_calls,
       calls_fail = calls_fail + i_failed_calls,
       total_duration = total_duration + i_duration,
-      acd = (total_duration + i_duration )::real/(calls_success + i_successful_calls)::real,
+      acd = coalesce((total_duration + i_duration )::real/nullif(calls_success + i_successful_calls,0)::real,0),
       asr = (calls_success + i_successful_calls)::real/(calls + i_calls)::real
     WHERE gateway_id = i_gw_id;
     IF NOT FOUND THEN
@@ -1877,7 +1877,7 @@ BEGIN
         i_successful_calls,
         i_failed_calls,
         i_duration,
-        i_duration::real/i_successful_calls::real,
+        coalesce(i_duration::real/nullif(i_successful_calls,0)::real,0),
         i_successful_calls::real/i_calls::real
       );
     END IF;
@@ -29416,6 +29416,13 @@ CREATE INDEX destinations_prefix_range_idx ON class4.destinations USING gist (((
 
 
 --
+-- Name: dialpeer_next_rates_dialpeer_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX dialpeer_next_rates_dialpeer_id_idx ON class4.dialpeer_next_rates USING btree (dialpeer_id);
+
+
+--
 -- Name: dialpeers_account_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -31002,6 +31009,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230213210713'),
 ('20230217170438'),
 ('20230221112029'),
-('20230224000357');
+('20230224000357'),
+('20230227110659');
 
 
