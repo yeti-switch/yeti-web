@@ -32,8 +32,8 @@ class Routing::RoutingTag < ApplicationRecord
            class_name: 'RateManagement::Project',
            autosave: false
 
-  has_many :rate_management_pricelist_items,
-           ->(tag) { unscope(:where).where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) },
+  has_many :active_rate_management_pricelist_items,
+           ->(tag) { unscope(:where).not_applied.where("? = ANY(#{table_name}.routing_tag_ids)", tag.id) },
            class_name: 'RateManagement::PricelistItem',
            autosave: false
 
@@ -69,7 +69,9 @@ class Routing::RoutingTag < ApplicationRecord
       errors.add(:base, "Can't be deleted because linked to Rate Management Project(s) ##{project_ids.join(', #')}")
     end
 
-    pricelist_ids = rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
+    # we allow keeping deleted routing tag IDs in applied rate management pricelist items
+    # because it does not break anything and such records are used only as a temporary history
+    pricelist_ids = active_rate_management_pricelist_items.pluck(Arel.sql('DISTINCT(pricelist_id)'))
     if pricelist_ids.any?
       errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
     end
