@@ -5,6 +5,18 @@ RSpec.describe Routing::RoutesetDiscriminator do
     subject { routeset_discriminator.destroy! }
     let!(:routeset_discriminator) { FactoryBot.create(:routeset_discriminator) }
 
+    context 'when RoutesetDiscriminator is linked to Dialpeer' do
+      before { FactoryBot.create(:dialpeer, routeset_discriminator: routeset_discriminator) }
+
+      it 'should raise validation error' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+        expect(routeset_discriminator.errors.to_a).to contain_exactly 'Cannot delete record because dependent dialpeers exist'
+
+        expect(Routing::RoutesetDiscriminator).to be_exists(routeset_discriminator.id)
+      end
+    end
+
     context 'when RoutesetDiscriminator is linked to RateManagement Project' do
       let!(:projects) { FactoryBot.create_list(:rate_management_project, 3, :filled, routeset_discriminator: routeset_discriminator) }
 
