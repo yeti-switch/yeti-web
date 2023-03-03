@@ -15,7 +15,7 @@
 class Routing::RoutesetDiscriminator < ApplicationRecord
   self.table_name = 'class4.routeset_discriminators'
 
-  has_many :dialpeers, class_name: 'Diapeer', foreign_key: :routeset_discriminator_id
+  has_many :dialpeers, class_name: 'Dialpeer', foreign_key: :routeset_discriminator_id, dependent: :restrict_with_error
 
   has_many :rate_management_projects, class_name: 'RateManagement::Project'
   has_many :active_rate_management_pricelist_items,

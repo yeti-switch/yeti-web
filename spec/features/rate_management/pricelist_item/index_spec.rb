@@ -1019,5 +1019,29 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
         end
       end
     end
+
+    context('when pricelist item include deleted rotuing tag id') do
+      let(:pricelist_items) do
+        [FactoryBot.create(:rate_management_pricelist_item,
+                           :filed_from_project,
+                           pricelist: pricelist,
+                           routing_tag_ids: project.routing_tag_ids + [523])]
+      end
+
+      it 'should render correct' do
+        subject
+
+        within_main_content do
+          expect(page).to have_table_row(count: pricelist_items.size)
+          pricelist_items.each do |item|
+            within_table_row(id: item.id) do
+              expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
+              routing_tags = project.routing_tags.map(&:name).join(' | ').upcase
+              expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tags} | 523")
+            end
+          end
+        end
+      end
+    end
   end
 end

@@ -79,7 +79,7 @@ module ApplicationHelper
         tag.span(Routing::RoutingTag::ANY_TAG, class: 'status_tag ok')
       else
         tag_name = routing_tags_map[tag_id]
-        tag.span(tag_name, class: 'status_tag ok')
+        tag_name.present? ? tag.span(tag_name, class: 'status_tag ok') : tag.span(tag_id, class: 'status_tag warning')
       end
     end.join(separator_character).html_safe
   end

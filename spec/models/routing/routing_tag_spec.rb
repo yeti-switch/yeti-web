@@ -168,20 +168,22 @@ RSpec.describe Routing::RoutingTag, type: :model do
       context 'when pricelist has applied state' do
         let(:pricelist_state) { :applied }
 
-        it 'should raise validation error' do
-          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+        it 'should delete dialpeer' do
+          expect { subject }.not_to raise_error
+          expect(described_class).not_to be_exists(tag.id)
 
-          error_message = "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelists.map(&:id).join(', #')}"
-          expect(tag.errors.to_a).to contain_exactly error_message
-
-          expect(Routing::RoutingTag).to be_exists(tag.id)
+          pricelist_items.each do |item|
+            routing_tag_ids = item.routing_tag_ids
+            expect(item.reload.routing_tag_ids).to eq(routing_tag_ids)
+          end
         end
       end
     end
 
     context 'when Account is linked to RateManagement Project and Pricelist Items' do
       let!(:project) { FactoryBot.create(:rate_management_project, :filled, routing_tag_ids: [tag.id]) }
-      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, project: project, items_qty: 1) }
+      let!(:pricelist) { FactoryBot.create(:rate_management_pricelist, pricelist_state, project: project, items_qty: 1) }
+      let(:pricelist_state) { :new }
 
       it 'should raise validation error' do
         expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
@@ -193,6 +195,21 @@ RSpec.describe Routing::RoutingTag, type: :model do
         expect(tag.errors).to contain_exactly *error_messages
 
         expect(Routing::RoutingTag).to be_exists(tag.id)
+      end
+
+      context 'when pricelist in applied state' do
+        let(:pricelist_state) { :applied }
+
+        it 'should raise validation error' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+
+          error_messages = [
+            "Can't be deleted because linked to Rate Management Project(s) ##{project.id}"
+          ]
+          expect(tag.errors).to contain_exactly *error_messages
+
+          expect(Routing::RoutingTag).to be_exists(tag.id)
+        end
       end
     end
   end
