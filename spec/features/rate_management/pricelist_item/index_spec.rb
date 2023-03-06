@@ -1043,5 +1043,34 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
         end
       end
     end
+
+    context 'when pricelist item has empty account,vendor,routing_group,routeset_discriminator' do
+      let(:pricelist_items) do
+        [FactoryBot.create(:rate_management_pricelist_item,
+                           :filed_from_project,
+                           pricelist: pricelist,
+                           vendor: nil,
+                           account: nil,
+                           routing_group: nil,
+                           routeset_discriminator: nil)]
+      end
+
+      it 'should render correct' do
+        subject
+
+        within_main_content do
+          expect(page).to have_table_row(count: pricelist_items.size)
+          pricelist_items.each do |item|
+            within_table_row(id: item.id) do
+              expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
+              expect(page).to have_table_cell(column: 'Vendor', exact_text: 'EMPTY')
+              expect(page).to have_table_cell(column: 'Account', exact_text: 'EMPTY')
+              expect(page).to have_table_cell(column: 'Routing Group', exact_text: 'EMPTY')
+              expect(page).to have_table_cell(column: 'Routeset Discriminator', exact_text: 'EMPTY')
+            end
+          end
+        end
+      end
+    end
   end
 end

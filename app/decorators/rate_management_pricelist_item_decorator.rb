@@ -24,6 +24,22 @@ class RateManagementPricelistItemDecorator < ApplicationDecorator
     end
   end
 
+  def link_to_vendor
+    vendor_id.nil? ? status_tag(:empty) : h.auto_link(model.vendor)
+  end
+
+  def link_to_account
+    account_id.nil? ? status_tag(:empty) : h.auto_link(model.account)
+  end
+
+  def link_to_routing_group
+    routing_group_id.nil? ? status_tag(:empty) : h.auto_link(model.routing_group)
+  end
+
+  def link_to_routeset_discriminator
+    routeset_discriminator_id.nil? ? status_tag(:empty) : h.auto_link(model.routeset_discriminator)
+  end
+
   def type_badge
     html = status_tag(model.type, class: type_color)
     html += status_tag('next rate', class: :no) if will_create_next_rate?

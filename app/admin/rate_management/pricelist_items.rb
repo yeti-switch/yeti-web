@@ -137,10 +137,10 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
     column :dst_number_max_length
     column :enabled
     column :priority
-    column :vendor
-    column :account
-    column :routing_group
-    column :routeset_discriminator
+    column :vendor, &:link_to_vendor
+    column :account, &:link_to_account
+    column :routing_group, &:link_to_routing_group
+    column :routeset_discriminator, &:link_to_routeset_discriminator
     column :gateway
     column :gateway_group
     column :exclusive_route
