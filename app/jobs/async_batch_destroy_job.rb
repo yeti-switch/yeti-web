@@ -14,9 +14,15 @@ class AsyncBatchDestroyJob < ApplicationJob
     begin
       scoped_records = @model_class.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
       @model_class.transaction do
-        scoped_records.each(&:destroy!)
+        scoped_records.each do |record|
+          raise ActiveRecord::RecordNotDestroyed.new(error_message_for(record), record) unless record.destroy
+        end
       end
     end until scoped_records.empty?
+  end
+
+  def error_message_for(record)
+    "#{model_class} ##{record.id} can't be deleted: #{record.errors.full_messages.to_sentence}"
   end
 
   def reschedule_at(_time, _attempts)
