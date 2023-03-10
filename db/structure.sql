@@ -18069,12 +18069,12 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
-          v_ret.dst_prefix_in:=i_diversion;
+          v_ret.dst_prefix_in:=COALESCE(i_diversion,'');
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
         IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
-          v_diversion = string_to_array(i_diversion,',');
+          v_diversion = string_to_array(COALESCE(i_diversion,''),',');
           v_diversion = yeti_ext.regexp_replace_rand(
             v_diversion,
             v_customer_auth_normalized.diversion_rewrite_rule,
@@ -19317,12 +19317,12 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
-          v_ret.dst_prefix_in:=i_diversion;
+          v_ret.dst_prefix_in:=COALESCE(i_diversion,'');
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
         IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
-          v_diversion = string_to_array(i_diversion,',');
+          v_diversion = string_to_array(COALESCE(i_diversion,''),',');
           v_diversion = yeti_ext.regexp_replace_rand(
             v_diversion,
             v_customer_auth_normalized.diversion_rewrite_rule,
@@ -20537,12 +20537,12 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
-          v_ret.dst_prefix_in:=i_diversion;
+          v_ret.dst_prefix_in:=COALESCE(i_diversion,'');
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
         IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
-          v_diversion = string_to_array(i_diversion,',');
+          v_diversion = string_to_array(COALESCE(i_diversion,''),',');
           v_diversion = yeti_ext.regexp_replace_rand(
             v_diversion,
             v_customer_auth_normalized.diversion_rewrite_rule,
@@ -31010,6 +31010,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230217170438'),
 ('20230221112029'),
 ('20230224000357'),
-('20230227110659');
+('20230227110659'),
+('20230310102534');
 
 
