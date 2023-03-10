@@ -881,6 +881,38 @@ RSpec.describe '#routing logic' do
           end
         end
 
+        context 'without append headers, TEL, NULL diversion' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:diversion) { nil }
+          let(:vendor_gw_diversion_send_mode_id) { 3 } # send Diversion as TEL
+
+          it 'response ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'without append headers, TEL, empty diversion' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:diversion) { '' }
+          let(:vendor_gw_diversion_send_mode_id) { 3 } # send Diversion as TEL
+
+          it 'response ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
         context 'with append headers' do
           let(:vendor_gw_term_append_headers_req) { 'Header5: value5\r\nHeader6: value7' }
           let(:diversion) { '+38067689798989,+3800000000' }
