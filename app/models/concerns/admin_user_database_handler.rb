@@ -9,7 +9,8 @@ module AdminUserDatabaseHandler
 
     before_validation do
       self.password = nil if password.blank?
-      self.password_confirmation = nil if password_confirmation.blank?
+      # disallow to change password with empty confirmation
+      self.password_confirmation = nil if password.blank? && password_confirmation.blank?
     end
   end
 end
