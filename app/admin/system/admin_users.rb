@@ -84,4 +84,34 @@ ActiveAdmin.register AdminUser do
     f.actions
   end
   #  end
+
+  unless AdminUser.ldap?
+    # link to change own password
+    action_item :change_password, only: :show do
+      if authorized?(:change_password, resource.model)
+        link_to 'Change Password', url_for(action: :change_password)
+      end
+    end
+
+    # form to change own password
+    collection_action :change_password, method: :get do
+      authorize!(:change_password, current_admin_user)
+      @form = AdminUserPasswordForm.new(current_admin_user)
+      # renders app/views/admin_users/change_password.html.erb
+    end
+
+    # action to change own password
+    collection_action :submit_password, method: :post do
+      # param_key = active_admin_config.param_key.to_sym
+      param_key = AdminUserPasswordForm.model_name.param_key.to_sym
+      permitted_params = params.require(param_key).permit(:password, :password_confirmation)
+      @form = AdminUserPasswordForm.new(current_admin_user, permitted_params)
+      if @form.save
+        flash[:notice] = 'Password was successfully changed'
+        redirect_to admin_user_path(current_admin_user.id)
+      else
+        render :change_password
+      end
+    end
+  end
 end
