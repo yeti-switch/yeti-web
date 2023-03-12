@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-require_relative './scheduler'
-require_relative './prometheus/yeti_cron_job_processor'
+require 'scheduler'
+require 'prometheus_config'
+require 'prometheus/yeti_cron_job_processor'
+require 'prometheus/yeti_info_processor'
 
 class YetiScheduler < Scheduler::Base
   CaptureErrorMiddleware = Class.new(Scheduler::Middleware::Base) do
@@ -79,6 +81,10 @@ class YetiScheduler < Scheduler::Base
     ApplicationRecord.flush_idle_connections!
     Cdr::Base.clear_active_connections!
     Cdr::Base.flush_idle_connections!
+
+    if PrometheusConfig.enabled?
+      YetiInfoProcessor.start(labels: { app_type: 'scheduler' })
+    end
   end
 
   on_error do |error, _options|

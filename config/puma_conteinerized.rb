@@ -52,6 +52,7 @@ before_fork do
     require 'pgq_prometheus/processor'
     require 'pgq_prometheus/sql_caller/active_record'
     require 'prometheus/pgq_prometheus_config'
+    require 'prometheus/yeti_info_processor'
     PgqPrometheus::Processor.tap do |processor|
       processor.sql_caller = PgqPrometheus::SqlCaller::ActiveRecord.new('Cdr::Base')
       processor.logger = Rails.logger
@@ -69,6 +70,7 @@ before_fork do
     PrometheusExporter::Instrumentation::Puma.start
     PrometheusExporter::Instrumentation::Process.start(type: 'master')
     PgqPrometheus::Processor.start
+    YetiInfoProcessor.start(labels: { app_type: 'puma' })
   end
 end
 
