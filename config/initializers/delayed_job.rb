@@ -13,3 +13,4 @@ if Rails.env.development?
 end
 
 Delayed::Worker.destroy_failed_jobs = false
+Delayed::Worker.read_ahead = 1
