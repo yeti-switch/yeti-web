@@ -20,6 +20,7 @@
 #  codecs_prefer_transcoding_for      :string
 #  contractor_name                    :string
 #  dialog_nat_handling                :boolean
+#  diversion_domain                   :string
 #  diversion_rewrite_result           :string
 #  diversion_rewrite_rule             :string
 #  diversion_send_mode_name           :string
@@ -61,6 +62,7 @@
 #  preserve_anonymous_from_domain     :boolean
 #  priority                           :integer(4)
 #  proxy_media                        :boolean
+#  registered_aor_mode_name           :string
 #  rel100_mode_name                   :string
 #  relay_hold                         :boolean
 #  relay_options                      :boolean
@@ -111,7 +113,6 @@
 #  transport_protocol_name            :string
 #  try_avoid_transcoding              :boolean
 #  tx_inband_dtmf_filtering_mode_name :string
-#  use_registered_aor                 :boolean
 #  weight                             :integer(2)
 #  codec_group_id                     :integer(4)
 #  contractor_id                      :integer(4)
@@ -126,6 +127,7 @@
 #  orig_disconnect_policy_id          :integer(4)
 #  orig_proxy_transport_protocol_id   :integer(2)
 #  pop_id                             :integer(4)
+#  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)
 #  rx_inband_dtmf_filtering_mode_id   :integer(2)
 #  sdp_alines_filter_type_id          :integer(4)
@@ -153,7 +155,7 @@ class Importing::Gateway < Importing::Base
   belongs_to :orig_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :orig_disconnect_policy_id, optional: true
   belongs_to :term_disconnect_policy, class_name: '::DisconnectPolicy', foreign_key: :term_disconnect_policy_id, optional: true
   belongs_to :gateway_group, class_name: '::GatewayGroup', optional: true
-  belongs_to :diversion_send_mode, class_name: '::Equipment::DiversionSendMode', optional: true
+  belongs_to :diversion_send_mode, class_name: '::Equipment::GatewayDiversionSendMode', optional: true
   belongs_to :pop, class_name: '::Pop', optional: true
   belongs_to :codec_group, class_name: '::CodecGroup', optional: true
   belongs_to :sdp_c_location, class_name: '::SdpCLocation', optional: true
@@ -228,9 +230,18 @@ class Importing::Gateway < Importing::Base
     termination_dst_numberlist_id
     termination_src_numberlist_id
     lua_script_id
-    use_registered_aor
+    registered_aor_mode_id
     force_cancel_routeset
   ]
 
   import_for ::Gateway
+
+  def registered_aor_mode_display_name
+    registered_aor_mode_id.nil? ? 'unknown' : Gateway::REGISTERED_AOR_MODES[registered_aor_mode_id]
+  end
+
+  def self.after_import_hook
+    resolve_integer_constant('registered_aor_mode_id', 'registered_aor_mode_name', Gateway::REGISTERED_AOR_MODES)
+    super
+  end
 end

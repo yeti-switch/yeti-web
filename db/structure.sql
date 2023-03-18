@@ -24467,12 +24467,14 @@ CREATE TABLE data_import.import_gateways (
     termination_dst_numberlist_name character varying,
     lua_script_id smallint,
     lua_script_name character varying,
-    use_registered_aor boolean,
     is_changed boolean,
     diversion_send_mode_id smallint,
     diversion_send_mode_name character varying,
     try_avoid_transcoding boolean,
-    force_cancel_routeset boolean
+    force_cancel_routeset boolean,
+    diversion_domain character varying,
+    registered_aor_mode_id smallint,
+    registered_aor_mode_name character varying
 );
 
 
@@ -31011,6 +31013,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230221112029'),
 ('20230224000357'),
 ('20230227110659'),
-('20230310102534');
+('20230310102534'),
+('20230318105458');
 
 
