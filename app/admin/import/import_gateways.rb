@@ -44,7 +44,7 @@ ActiveAdmin.register Importing::Gateway do
     column :transport_protocol_name
     column :host
     column :port
-    column :use_registered_aor
+    column :registered_aor_mode, &:registered_aor_mode_display_name
 
     column :origination_capacity
     column :termination_capacity
