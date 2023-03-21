@@ -281,7 +281,7 @@ RSpec.describe 'switch.writecdr()' do
         NULL,
         '{"core":"1.7.60-4","yeti":"1.7.30-1","aleg":"Twinkle/1.10.1","bleg":"Localhost Media Gateway"}',
         'f',
-        '{"customer_auth_name":"Customer Auth for trunk 1","customer_id":1105,"vendor_id":1755,"customer_acc_id":1886,"vendor_acc_id":32,"customer_auth_id":20084,"destination_id":4201534,"destination_prefix":"","dialpeer_id":1376789,"dialpeer_prefix":"","orig_gw_id":17,"term_gw_id":39,"routing_group_id":22,"rateplan_id":14,"destination_initial_rate":"0.0001","destination_next_rate":"0.0001","destination_initial_interval":60,"destination_next_interval":11,"destination_rate_policy_id":1442,"dialpeer_initial_interval":12,"dialpeer_next_interval":13,"dialpeer_next_rate":"1.0","destination_fee":"0.0","dialpeer_initial_rate":"1.0","dialpeer_fee":"0.0","dst_prefix_in":"380947100008","dst_prefix_out":"echotest","src_prefix_in":"h","src_prefix_out":"380947111223","src_name_in":"","src_name_out":"","diversion_in":"rspec-diversion-in","diversion_out":"rspec-diversion-out","auth_orig_protocol_id":1567,"auth_orig_ip":"127.0.0.1","auth_orig_port":1947,"src_country_id":111,"src_network_id":333,"dst_country_id":222,"dst_network_id":1533,"dst_prefix_routing":"380947100008","src_prefix_routing":"380947111223","routing_plan_id":1,"lrn":"rspec-lrn","lnp_database_id":111,"from_domain":"node-10.yeti-sandbox.localhost","to_domain":"node-10.yeti-sandbox.localhost","ruri_domain":"node-10.yeti-sandbox.localhost","src_area_id":222,"dst_area_id":333,"routing_tag_ids":"{9}","pai_in":"rspec-pai-in","ppi_in":"rspec-ppi-in","privacy_in":"rspec-privacy-in","rpid_in":"rspec-rpid-in","rpid_privacy_in":"rspec-rpid-privacy-in","pai_out":"rspec-pai-out","ppi_out":"rspec-ppi-out","privacy_out":"rspec-privacy-out","rpid_out":"rspec-rpid-out","rpid_privacy_out":"rspec-rpid-privacy-out","customer_acc_check_balance":true,"destination_reverse_billing":false,"dialpeer_reverse_billing":false,"customer_auth_external_id":1504,"customer_external_id":156998,"vendor_external_id":1111,"customer_acc_external_id":156998,"vendor_acc_external_id":2222,"orig_gw_external_id":1,"term_gw_external_id":4444,"customer_acc_vat":"0.0"}',
+        '{"customer_auth_name":"Customer Auth for trunk 1","customer_id":1105,"vendor_id":1755,"customer_acc_id":1886,"vendor_acc_id":32,"customer_auth_id":20084,"destination_id":4201534,"destination_prefix":"","dialpeer_id":1376789,"dialpeer_prefix":"","orig_gw_id":17,"term_gw_id":39,"routing_group_id":22,"rateplan_id":14,"destination_initial_rate":"0.0001","destination_next_rate":"0.0001","destination_initial_interval":60,"destination_next_interval":11,"destination_rate_policy_id":1442,"dialpeer_initial_interval":12,"dialpeer_next_interval":13,"dialpeer_next_rate":"1.0","destination_fee":"0.0","dialpeer_initial_rate":"1.0","dialpeer_fee":"0.0","dst_prefix_in":"380947100008","dst_prefix_out":"echotest","src_prefix_in":"h","src_prefix_out":"380947111223","src_name_in":"","src_name_out":"","diversion_in":"rspec-diversion-in","diversion_out":"rspec-diversion-out","auth_orig_protocol_id":1567,"auth_orig_ip":"127.0.0.1","auth_orig_port":1947,"src_country_id":111,"src_network_id":333,"dst_country_id":222,"dst_network_id":1533,"dst_prefix_routing":"380947100008","src_prefix_routing":"380947111223","routing_plan_id":1,"lrn":"rspec-lrn","lnp_database_id":111,"from_domain":"node-10.yeti-sandbox.localhost","to_domain":"node-10.yeti-sandbox.localhost","ruri_domain":"node-10.yeti-sandbox.localhost","src_area_id":222,"dst_area_id":333,"routing_tag_ids":"{9}","pai_in":"rspec-pai-in","ppi_in":"rspec-ppi-in","privacy_in":"rspec-privacy-in","rpid_in":"rspec-rpid-in","rpid_privacy_in":"rspec-rpid-privacy-in","pai_out":"rspec-pai-out","ppi_out":"rspec-ppi-out","privacy_out":"rspec-privacy-out","rpid_out":"rspec-rpid-out","rpid_privacy_out":"rspec-rpid-privacy-out","customer_acc_check_balance":true,"destination_reverse_billing":false,"dialpeer_reverse_billing":false,"customer_auth_external_id":1504,"customer_external_id":156998,"vendor_external_id":1111,"customer_acc_external_id":156998,"vendor_acc_external_id":2222,"orig_gw_external_id":1,"term_gw_external_id":4444,"customer_acc_vat":"23.0"}',
         '{"p_charge_info":"sip:p-charge-info@example.com/uri"}',
         '{"v_info":"sip:p-charge-info@example.com/uri"}',
         '[{"header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"456","uri":"sip:456"},"iat":1622830203,"orig":{"tn":"123","uri":"sip:123"},"origid":"8-000F7304-60BA6C7B000B6828-A43657C0"},"verified":true},{"error_code":4,"error_reason":"Incorrect Identity Header Value","parsed":false},{"error_code":-1,"error_reason":"certificate is not available","header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test2.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"13"},"iat":1622831252,"orig":{"tn":"42"},"origid":"8-000F7304-60BA7094000207EC-2B5F27C0"},"verified":false}]'
@@ -316,7 +316,9 @@ RSpec.describe 'switch.writecdr()' do
                      internal_disconnect_code: 200,
                      internal_disconnect_reason: 'Bye',
                      disconnect_initiator_id: 3,
-                     customer_price: be_within(0.00001).of(0.00094),
+                     customer_acc_vat: 23.0,
+                     customer_price: be_within(0.00002).of(0.00115),
+                     customer_price_no_vat: be_within(0.00001).of(0.00094),
                      vendor_price: be_within(0.1).of(9.5),
                      duration: 560,
                      success: true,
@@ -412,7 +414,6 @@ RSpec.describe 'switch.writecdr()' do
                      customer_account_check_balance: true,
                      customer_external_id: 156_998,
                      customer_auth_external_id: 1504,
-                     customer_acc_vat: 0.0,
                      customer_acc_external_id: 156_998,
                      routing_tag_ids: [9],
                      vendor_external_id: 1111,
@@ -421,7 +422,6 @@ RSpec.describe 'switch.writecdr()' do
                      term_gw_external_id: 4444,
                      failed_resource_type_id: 3,
                      failed_resource_id: 1_551_231_112,
-                     customer_price_no_vat: be_within(0.00001).of(0.00094),
                      customer_duration: 566,
                      vendor_duration: 571,
                      customer_auth_name: 'Customer Auth for trunk 1',
@@ -513,6 +513,7 @@ RSpec.describe 'switch.writecdr()' do
     it 'customer amount' do
       expect { subject }.to change { Cdr::Cdr.count }.by(1)
       expect(Cdr::Cdr.last.customer_price).to eq(0)
+      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0)
       expect(Cdr::Cdr.last.vendor_price).to eq(0)
     end
   end
@@ -529,8 +530,12 @@ RSpec.describe 'switch.writecdr()' do
     end
 
     it 'customer amount' do
+      # 560 sec duration, 10s first interval, 11s next, rates = 0.0001/60*10 , 0.0001/60*11
+      # (50 × 11) + (1 × 10) = 560s,
+      # 0.0001/60*11 * 50 + 0.0001/60*10 = 0,0009333333333
       expect { subject }.to change { Cdr::Cdr.count }.by(1)
-      expect(Cdr::Cdr.last.customer_price).to eq(0.001)
+      expect(Cdr::Cdr.last.customer_price).to eq(0.0012) # 0,0009333333333 * 1.23(vat) = 0,001148000000, rounded UP to 4 digits
+      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0.001) # 0,0009333333333 rounded UP to 4 digits
       expect(Cdr::Cdr.last.vendor_price).to eq(9.5167)
     end
   end
@@ -548,7 +553,8 @@ RSpec.describe 'switch.writecdr()' do
 
     it 'customer amount' do
       expect { subject }.to change { Cdr::Cdr.count }.by(1)
-      expect(Cdr::Cdr.last.customer_price).to eq(0.0009)
+      expect(Cdr::Cdr.last.customer_price).to eq(0.0011) # 0,0009333333333 * 1.23(vat) = 0,001148000000, rounded DOWN to 4 digits
+      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0.0009) # 0,0009333333333 rounded DOWN to 4 digits
       expect(Cdr::Cdr.last.vendor_price).to eq(9.5166)
     end
   end
@@ -566,7 +572,8 @@ RSpec.describe 'switch.writecdr()' do
 
     it 'customer amount' do
       expect { subject }.to change { Cdr::Cdr.count }.by(1)
-      expect(Cdr::Cdr.last.customer_price).to eq(0.0009)
+      expect(Cdr::Cdr.last.customer_price).to eq(0.0011) # 0,0009333333333 * 1.23(vat) = 0,001148000000, rounded MATH to 4 digits
+      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0.0009) # 0,0009333333333 rounded MATH to 4 digits
       expect(Cdr::Cdr.last.vendor_price).to eq(9.5166)
     end
   end

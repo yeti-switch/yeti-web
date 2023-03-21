@@ -1434,8 +1434,9 @@ BEGIN
     perform stats.update_rt_stats(v_cdr);
   end if;
 
-  v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
-  v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
+  v_cdr.customer_price = switch.customer_price_round(v_config, v_cdr.customer_price);
+  v_cdr.customer_price_no_vat = switch.customer_price_round(v_config, v_cdr.customer_price_no_vat);
+  v_cdr.vendor_price = switch.vendor_price_round(v_config, v_cdr.vendor_price);
 
   v_billing_event.id=v_cdr.id;
   v_billing_event.customer_id=v_cdr.customer_id;
@@ -1707,8 +1708,9 @@ BEGIN
     perform stats.update_rt_stats(v_cdr);
   end if;
 
-  v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
-  v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
+  v_cdr.customer_price = switch.customer_price_round(v_config, v_cdr.customer_price);
+  v_cdr.customer_price_no_vat = switch.customer_price_round(v_config, v_cdr.customer_price_no_vat);
+  v_cdr.vendor_price = switch.vendor_price_round(v_config, v_cdr.vendor_price);
 
   v_billing_event.id=v_cdr.id;
   v_billing_event.customer_id=v_cdr.customer_id;
@@ -1995,8 +1997,9 @@ BEGIN
     perform stats.update_rt_stats(v_cdr);
   end if;
 
-  v_cdr.customer_price:=switch.customer_price_round(v_config, v_cdr.customer_price);
-  v_cdr.vendor_price:=switch.vendor_price_round(v_config, v_cdr.vendor_price);
+  v_cdr.customer_price = switch.customer_price_round(v_config, v_cdr.customer_price);
+  v_cdr.customer_price_no_vat = switch.customer_price_round(v_config, v_cdr.customer_price_no_vat);
+  v_cdr.vendor_price = switch.vendor_price_round(v_config, v_cdr.vendor_price);
 
   v_billing_event.id=v_cdr.id;
   v_billing_event.customer_id=v_cdr.customer_id;
@@ -4742,6 +4745,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220625185940'),
 ('20220709123408'),
 ('20220803115423'),
-('20221105191015');
+('20221105191015'),
+('20230321124900');
 
 
