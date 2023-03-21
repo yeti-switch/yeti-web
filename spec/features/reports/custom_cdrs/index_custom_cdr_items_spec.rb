@@ -1,22 +1,21 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Index interval cdr interval items', js: true do
+RSpec.describe 'Index custom cdr custom items', js: true do
   subject do
-    visit report_interval_cdr_interval_items_path report_interval_cdr_id: report.id
+    visit custom_cdr_custom_items_path report.id
   end
 
   include_context :login_as_admin
 
   let!(:report) do
-    FactoryBot.create(:interval_cdr, group_by: group_by)
+    FactoryBot.create(:custom_cdr, group_by: group_by)
   end
-  let!(:interval_data) do
-    FactoryBot.create(:interval_data,
+  let!(:custom_data) do
+    FactoryBot.create(:custom_data,
                       rateplan: rateplan,
                       report: report,
                       customer: customer,
                       vendor: vendor,
-                      destination_rate_policy_id: destination_rate_policy_id,
                       routing_group: routing_group,
                       orig_gw: orig_gw,
                       term_gw: term_gw,
@@ -30,7 +29,13 @@ RSpec.describe 'Index interval cdr interval items', js: true do
                       node: node,
                       pop: pop,
                       dst_country: dst_country,
-                      dst_network: dst_network)
+                      dst_network: dst_network,
+                      destination_rate_policy_id: destination_rate_policy_id,
+                      disconnect_initiator_id: disconnect_initiator_id,
+                      src_country: src_country,
+                      src_network: src_network,
+                      dst_area: dst_area,
+                      src_area: src_area)
   end
 
   let(:group_by) do
@@ -52,6 +57,10 @@ RSpec.describe 'Index interval cdr interval items', js: true do
       pop_id
       dst_country_id
       dst_network_id
+      src_country_id
+      src_network_id
+      src_area_id
+      dst_area_id
       destination_rate_policy_id
       disconnect_initiator_id
     ]
@@ -61,6 +70,7 @@ RSpec.describe 'Index interval cdr interval items', js: true do
   let(:vendor) { FactoryBot.create(:vendor) }
   let(:rateplan) { FactoryBot.create(:rateplan) }
   let(:destination_rate_policy_id) { Routing::DestinationRatePolicy::POLICY_FIXED }
+  let(:disconnect_initiator_id) { Cdr::Cdr::DISCONNECT_INITIATOR_SWITCH }
   let(:routing_group) { FactoryBot.create(:routing_group) }
   let(:orig_gw) { FactoryBot.create(:gateway) }
   let(:term_gw) { FactoryBot.create(:gateway) }
@@ -75,11 +85,15 @@ RSpec.describe 'Index interval cdr interval items', js: true do
   let(:pop) { FactoryBot.create(:pop) }
   let(:dst_country) { System::Country.take }
   let(:dst_network) { System::Network.take }
+  let(:src_country) { System::Country.take }
+  let(:src_network) { System::Network.take }
+  let(:dst_area) { FactoryBot.create(:area) }
+  let(:src_area) { FactoryBot.create(:area) }
 
   it 'should have table with correct data' do
     subject
     expect(page).to have_table
-    within_table_row(id: interval_data.id) do
+    within_table_row(id: custom_data.id) do
       expect(page).to have_table_cell(text: customer.display_name, column: 'Customer')
       expect(page).to have_table_cell(text: vendor.display_name, column: 'Vendor')
       expect(page).to have_table_cell(text: rateplan.display_name, column: 'Rateplan')
@@ -97,6 +111,10 @@ RSpec.describe 'Index interval cdr interval items', js: true do
       expect(page).to have_table_cell(text: pop.name, column: 'Pop')
       expect(page).to have_table_cell(text: dst_country.name, column: 'Dst Country')
       expect(page).to have_table_cell(text: dst_network.name, column: 'Dst Network')
+      expect(page).to have_table_cell(text: src_country.name, column: 'Src Country')
+      expect(page).to have_table_cell(text: src_network.name, column: 'Src Network')
+      expect(page).to have_table_cell(text: src_area.display_name, column: 'Src Area')
+      expect(page).to have_table_cell(text: dst_area.display_name, column: 'Dst Area')
       expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
       expect(page).to have_table_cell(text: 'Switch', column: 'Disconnect Initiator')
     end
