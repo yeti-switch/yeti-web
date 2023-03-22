@@ -37,7 +37,7 @@ module GroupReportTools
         else
           relation = belongs_to_relations.detect { |e| e.foreign_key.to_sym == attribute_name }
           column_name = relation ? relation.name.to_sym : attribute_name
-          [column_name, column_name]
+          [column_name, nil]
         end
       end
     end

@@ -118,9 +118,8 @@ class Report::CustomData < Cdr::Base
   belongs_to :customer_acc, class_name: 'Account', foreign_key: :customer_acc_id, optional: true
   belongs_to :vendor, class_name: 'Contractor', foreign_key: :vendor_id, optional: true # ,:conditions => {:vendor => true}
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
-  belongs_to :vendor_invoice, class_name: 'Invoice', foreign_key: :vendor_invoice_id, optional: true
-  belongs_to :customer_invoice, class_name: 'Invoice', foreign_key: :customer_invoice_id, optional: true
-  belongs_to :destination_rate_policy, class_name: 'DestinationRatePolicy', foreign_key: :destination_rate_policy_id, optional: true
+  belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id, optional: true
+  belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id, optional: true
@@ -136,6 +135,10 @@ class Report::CustomData < Cdr::Base
 
   def disconnect_initiator_name
     disconnect_initiator_id.nil? ? nil : Cdr::Cdr::DISCONNECT_INITIATORS[disconnect_initiator_id]
+  end
+
+  def destination_rate_policy_name
+    destination_rate_policy_id.nil? ? nil : Routing::DestinationRatePolicy::POLICIES[destination_rate_policy_id]
   end
 
   def self.report_columns

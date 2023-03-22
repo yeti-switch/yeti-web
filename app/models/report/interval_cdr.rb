@@ -104,7 +104,8 @@ class Report::IntervalCdr < Cdr::Base
   ].freeze
 
   CDR_COLUMNS_CONSTANTS = {
-    disconnect_initiator_id: %i[disconnect_initiator disconnect_initiator_name].freeze
+    disconnect_initiator_id: %i[disconnect_initiator disconnect_initiator_name].freeze,
+    destination_rate_policy_id: %i[destination_rate_policy destination_rate_policy_name].freeze
   }.freeze
 
   CDR_AGG_COLUMNS = %i[
