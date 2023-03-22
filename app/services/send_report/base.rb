@@ -88,11 +88,11 @@ module SendReport
       data = data_item.collection
       file_name = csv_file_name
       CSV.open(file_name, 'w') do |csv|
-        csv << columns.map { |c| c.to_s.humanize }
+        csv << columns.map { |column_name, _attribute| column_name.to_s.humanize }
         data.each do |row|
           line = []
-          columns.each do |column|
-            ceil = row.send(column)
+          columns.each do |column_name, attribute_name|
+            ceil = row.send(attribute_name || column_name)
             ceil = ceil.display_name if ceil.respond_to?(:display_name)
             line << ceil
           end

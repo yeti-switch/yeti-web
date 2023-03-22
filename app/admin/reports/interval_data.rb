@@ -9,7 +9,9 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
   config.batch_actions = false
 
   csv do
-    parent.csv_columns.map { |c| column c }
+    parent.csv_columns.map do |column_name, attribute_name|
+      column(column_name, &attribute_name)
+    end
   end
 
   sidebar 'Interval CDR Report', class: 'toggle', priority: 0 do

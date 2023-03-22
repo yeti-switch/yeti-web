@@ -86,7 +86,9 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
   filter :agg_profit
 
   csv do
-    parent.csv_columns.map { |c| column c }
+    parent.csv_columns.map do |column_name, attribute_name|
+      column(column_name, &attribute_name)
+    end
   end
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do

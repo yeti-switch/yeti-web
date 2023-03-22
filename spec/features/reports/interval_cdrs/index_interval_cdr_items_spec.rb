@@ -30,7 +30,9 @@ RSpec.describe 'Index interval cdr interval items', js: true do
                       node: node,
                       pop: pop,
                       dst_country: dst_country,
-                      dst_network: dst_network)
+                      dst_network: dst_network,
+                      timestamp: timestamp,
+                      aggregated_value: aggregated_value)
   end
 
   let(:group_by) do
@@ -75,6 +77,8 @@ RSpec.describe 'Index interval cdr interval items', js: true do
   let(:pop) { FactoryBot.create(:pop) }
   let(:dst_country) { System::Country.take }
   let(:dst_network) { System::Network.take }
+  let(:timestamp) { Time.now.utc }
+  let(:aggregated_value) { 755.0 }
 
   it 'should have table with correct data' do
     subject
@@ -93,12 +97,82 @@ RSpec.describe 'Index interval cdr interval items', js: true do
       expect(page).to have_table_cell(text: customer_acc.display_name, column: 'Customer Acc')
       expect(page).to have_table_cell(text: vendor_invoice.display_name, column: 'Vendor Invoice')
       expect(page).to have_table_cell(text: customer_invoice.display_name, column: 'Customer Invoice')
-      expect(page).to have_table_cell(text: node.name, column: 'Node')
-      expect(page).to have_table_cell(text: pop.name, column: 'Pop')
-      expect(page).to have_table_cell(text: dst_country.name, column: 'Dst Country')
-      expect(page).to have_table_cell(text: dst_network.name, column: 'Dst Network')
+      expect(page).to have_table_cell(text: node.display_name, column: 'Node')
+      expect(page).to have_table_cell(text: pop.display_name, column: 'Pop')
+      expect(page).to have_table_cell(text: dst_country.display_name, column: 'Dst Country')
+      expect(page).to have_table_cell(text: dst_network.display_name, column: 'Dst Network')
       expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
       expect(page).to have_table_cell(text: 'Switch', column: 'Disconnect Initiator')
+    end
+  end
+
+  describe 'csv', js: false do
+    subject do
+      super()
+      click_on 'CSV'
+    end
+
+    let(:expected_filename) { "interval-items-#{Time.zone.today.strftime('%F')}.csv" }
+
+    let(:expected_csv) do
+      headers = [
+        'Rateplan',
+        'Routing group',
+        'Orig gw',
+        'Term gw',
+        'Destination',
+        'Dialpeer',
+        'Customer auth',
+        'Vendor acc',
+        'Customer acc',
+        'Vendor',
+        'Customer',
+        'Vendor invoice',
+        'Customer invoice',
+        'Node',
+        'Pop',
+        'Dst country',
+        'Dst network',
+        'Destination rate policy',
+        'Disconnect initiator',
+        'Timestamp',
+        'Aggregated value'
+      ]
+      rows = [
+        [
+          rateplan.display_name,
+          routing_group.display_name,
+          orig_gw.display_name,
+          term_gw.display_name,
+          destination.display_name,
+          dialpeer.display_name,
+          customer_auth.display_name,
+          vendor_acc.display_name,
+          customer_acc.display_name,
+          vendor.display_name,
+          customer.display_name,
+          vendor_invoice.display_name,
+          customer_invoice.display_name,
+          node.display_name,
+          pop.display_name,
+          dst_country.display_name,
+          dst_network.display_name,
+          'Fixed',
+          'Switch',
+          timestamp.to_s,
+          aggregated_value.to_s
+        ]
+      ]
+
+      [headers, *rows]
+    end
+
+    it 'downloads correct csv' do
+      subject
+      expect(page.response_headers['Content-Disposition']).to eq("attachment; filename=\"#{expected_filename}\"")
+      expect(page.status_code).to eq(200)
+      expect(page.response_headers['Content-Type']).to eq('text/csv; charset=utf-8')
+      expect(page_csv).to match_array(expected_csv)
     end
   end
 end
