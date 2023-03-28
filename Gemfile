@@ -67,7 +67,7 @@ gem 'jquery-tablesorter'
 gem 'jquery-ui-rails'
 gem 'rails-html-sanitizer', '~> 1.0'
 gem 'sass-globbing'
-gem 'therubyracer', '~> 0.12.1'
+gem 'mini_racer'
 gem 'uglifier', '>= 1.3'
 
 # Server Tools
@@ -135,3 +135,13 @@ end
 gem 'bootsnap', require: false
 
 gem 'httparty', '~> 0.21.0'
+
+gem "matrix", "~> 0.4.2"
+
+gem "net-smtp", "~> 0.3.3"
+
+gem "net-pop", "~> 0.1.2"
+
+gem "net-imap", "~> 0.3.4"
+
+gem 'webrick', '~> 1.8', require: false

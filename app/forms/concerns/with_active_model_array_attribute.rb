@@ -22,7 +22,7 @@ module WithActiveModelArrayAttribute
       if array
         array_opts = array.is_a?(TrueClass) ? {} : array
         subtype = type.is_a?(Symbol) ? ActiveModel::Type.lookup(type, **options.except(:default)) : type
-        type = ArrayType.new(subtype, array_opts)
+        type = ArrayType.new(subtype, **array_opts)
       end
       super(name, type, **options)
     end

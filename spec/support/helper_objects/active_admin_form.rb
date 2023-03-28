@@ -103,7 +103,7 @@ module HelperObjects
         fieldset.find(:field, field, opts)
       else
         field = input_id(field) if exact
-        form_node.find_field(field, opts)
+        form_node.find_field(field, **opts)
       end
     end
 

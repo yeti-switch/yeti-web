@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/activeadmin-plugins/capybara_active_admin.git
-  revision: 0e648b54fdd8d9c285ca84e8a8a9527fa97d5562
+  revision: d2cdc2c0a5478d4ee1afb30f3465c7be3b760a86
   specs:
     capybara_active_admin (0.3.3)
       activeadmin
@@ -138,11 +138,11 @@ GEM
       activeadmin (>= 1.1, < 3.a)
       coffee-rails
       xdan-datetimepicker-rails (~> 2.5.4)
-    active_admin_import (4.1.2)
-      activeadmin (>= 1.0.0.pre2)
+    active_admin_import (5.0.0)
+      activeadmin (>= 1.0.0)
       activerecord-import (>= 0.27)
-      rchardet (~> 1.6)
-      rubyzip (~> 1.2)
+      rchardet (>= 1.6)
+      rubyzip (>= 1.2)
     active_admin_scoped_collection_actions (0.3.5)
     active_admin_sidebar (1.1.0)
       activeadmin
@@ -250,8 +250,8 @@ GEM
     config (3.1.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
-    crack (0.4.3)
-      safe_yaml (~> 1.0.0)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     cuprite (0.11)
       capybara (>= 2.1, < 4)
@@ -261,6 +261,7 @@ GEM
     daemons (1.2.6)
     database_consistency (1.1.11)
       activerecord (>= 3.2)
+    date (3.3.3)
     deep_merge (1.2.1)
     delayed_job (4.1.9)
       activesupport (>= 3.0, < 6.2)
@@ -275,12 +276,13 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
     docile (1.4.0)
-    draper (4.0.1)
+    draper (4.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
       activemodel-serializers-xml (>= 1.0)
       activesupport (>= 5.0)
       request_store (>= 1.0)
+      ruby2_keywords
     dry-configurable (0.13.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.6)
@@ -350,7 +352,7 @@ GEM
     has_scope (0.8.0)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
-    hashdiff (0.3.8)
+    hashdiff (1.0.1)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -390,7 +392,7 @@ GEM
       rexml
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19)
+    libv8-node (16.10.0.0)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -401,14 +403,26 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.1)
+    mini_racer (0.6.3)
+      libv8-node (~> 16.10.0.0)
     minitest (5.18.0)
     msgpack (1.4.2)
     multi_xml (0.6.0)
     mustache (1.1.1)
+    net-imap (0.3.4)
+      date
+      net-protocol
     net-ldap (0.16.1)
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.3.3)
+      net-protocol
     netstring (0.0.3)
     nio4r (2.5.8)
     nokogiri (1.14.2)
@@ -424,7 +438,7 @@ GEM
       parallel
     parser (2.7.1.3)
       ast (~> 2.4.0)
-    pg (1.2.3)
+    pg (1.4.6)
     pgq_prometheus (0.2.3)
       prometheus_exporter
     public_suffix (4.0.6)
@@ -476,7 +490,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rchardet (1.8.0)
-    ref (2.0.0)
     regexp_parser (1.8.2)
     request_store (1.4.1)
       rack (>= 1.4)
@@ -529,7 +542,6 @@ GEM
     rubyzip (1.3.0)
     rufus-scheduler (3.7.0)
       fugit (~> 1.1, >= 1.1.6)
-    safe_yaml (1.0.4)
     sass (3.4.25)
     sass-globbing (1.1.5)
       sass (>= 3.1)
@@ -575,23 +587,22 @@ GEM
       sprockets (>= 3.0.0)
     syslog-logger (1.6.8)
     text (1.3.1)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (>= 1, < 3)
     thor (1.2.1)
     tilt (2.0.9)
-    timeliness (0.4.4)
+    timeliness (0.4.5)
+    timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uglifier (4.1.8)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
     uniform_notifier (1.16.0)
-    validates_timeliness (4.1.1)
+    validates_timeliness (6.0.1)
+      activemodel (>= 6.0.0, < 7)
       timeliness (>= 0.3.10, < 1)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -599,10 +610,11 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
-    webmock (3.5.1)
-      addressable (>= 2.3.6)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
       crack (>= 0.3.2)
-      hashdiff
+      hashdiff (>= 0.4.0, < 2.0.0)
+    webrick (1.8.1)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -664,7 +676,12 @@ DEPENDENCIES
   jwt
   knock!
   listen
+  matrix (~> 0.4.2)
+  mini_racer
+  net-imap (~> 0.3.4)
   net-ldap (~> 0.16.0)
+  net-pop (~> 0.1.2)
+  net-smtp (~> 0.3.3)
   novus-nvd3-rails!
   odf-report!
   paper_trail
@@ -701,12 +718,12 @@ DEPENDENCIES
   simplecov-cobertura (~> 2.1)
   sprockets
   syslog-logger
-  therubyracer (~> 0.12.1)
   thin
   uglifier (>= 1.3)
   validates_timeliness
   webdrivers (~> 4.0)
   webmock
+  webrick (~> 1.8)
   zip-zip
 
 BUNDLED WITH

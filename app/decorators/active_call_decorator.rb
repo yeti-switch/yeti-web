@@ -5,10 +5,10 @@ class ActiveCallDecorator < ApplicationDecorator
     'RealtimeData'
   end
 
-  RealtimeData::ActiveCall.association_types.each do |name, foreign_key:, **_|
+  RealtimeData::ActiveCall.association_types.each do |name, options|
     define_method("#{name}_link") do
       record = model.public_send(name)
-      record ? h.auto_link(record) : model.public_send(foreign_key)
+      record ? h.auto_link(record) : model.public_send(options[:foreign_key])
     end
   end
 end

@@ -31,7 +31,7 @@ module WithAssociations
 
   class_methods do
     def has_one(name, options = {})
-      register_association(name, :has_one, options)
+      register_association(name, :has_one, **options)
     end
 
     def register_association(name, type, class_name:, foreign_key: nil, primary_key: 'id', **options)
