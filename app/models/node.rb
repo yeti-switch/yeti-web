@@ -132,4 +132,8 @@ class Node < ApplicationRecord
       RealtimeData::ActiveCall.collection(api.calls)
     end
   end
+
+  def display_name
+    "#{name} | #{id}"
+  end
 end

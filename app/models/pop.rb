@@ -23,4 +23,8 @@ class Pop < ApplicationRecord
 
   validates :id, :name, uniqueness: true
   validates :id, :name, presence: true
+
+  def display_name
+    "#{name} | #{id}"
+  end
 end

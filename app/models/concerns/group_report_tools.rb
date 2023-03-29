@@ -56,7 +56,7 @@ module GroupReportTools
     end
 
     def csv_columns
-      auto_columns.map(&:first) + report_items_class.report_columns.map(&:to_sym)
+      auto_columns + report_items_class.report_columns.map(&:to_sym)
     end
   end
 

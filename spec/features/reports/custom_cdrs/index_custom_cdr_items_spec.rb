@@ -35,7 +35,18 @@ RSpec.describe 'Index custom cdr custom items', js: true do
                       src_country: src_country,
                       src_network: src_network,
                       dst_area: dst_area,
-                      src_area: src_area)
+                      src_area: src_area,
+                      agg_calls_count: agg_calls_count,
+                      agg_calls_duration: agg_calls_duration,
+                      agg_calls_acd: agg_calls_acd,
+                      agg_asr_origination: agg_asr_origination,
+                      agg_asr_termination: agg_asr_termination,
+                      agg_vendor_price: agg_vendor_price,
+                      agg_customer_price: agg_customer_price,
+                      agg_profit: agg_profit,
+                      agg_customer_calls_duration: agg_customer_calls_duration,
+                      agg_vendor_calls_duration: agg_vendor_calls_duration,
+                      agg_customer_price_no_vat: agg_customer_price_no_vat)
   end
 
   let(:group_by) do
@@ -89,6 +100,17 @@ RSpec.describe 'Index custom cdr custom items', js: true do
   let(:src_network) { System::Network.take }
   let(:dst_area) { FactoryBot.create(:area) }
   let(:src_area) { FactoryBot.create(:area) }
+  let(:agg_calls_count) { 3 }
+  let(:agg_calls_duration) { 5 }
+  let(:agg_calls_acd) { 2.0 }
+  let(:agg_asr_origination) { 3.0 }
+  let(:agg_asr_termination) { 3.0 }
+  let(:agg_vendor_price) { 1.5 }
+  let(:agg_customer_price) { 1.8 }
+  let(:agg_profit) { 0.25 }
+  let(:agg_customer_calls_duration) { 1 }
+  let(:agg_vendor_calls_duration) { 2 }
+  let(:agg_customer_price_no_vat) { 1.5 }
 
   it 'should have table with correct data' do
     subject
@@ -117,6 +139,102 @@ RSpec.describe 'Index custom cdr custom items', js: true do
       expect(page).to have_table_cell(text: dst_area.display_name, column: 'Dst Area')
       expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
       expect(page).to have_table_cell(text: 'Switch', column: 'Disconnect Initiator')
+    end
+  end
+
+  describe 'csv', js: false do
+    subject do
+      super()
+      click_on 'CSV'
+    end
+
+    let(:expected_filename) { "custom-items-#{Time.zone.today.strftime('%F')}.csv" }
+
+    let(:expected_csv) do
+      headers = [
+        'Rateplan',
+        'Routing group',
+        'Orig gw',
+        'Term gw',
+        'Destination',
+        'Dialpeer',
+        'Customer auth',
+        'Vendor acc',
+        'Customer acc',
+        'Vendor',
+        'Customer',
+        'Vendor invoice',
+        'Customer invoice',
+        'Node',
+        'Pop',
+        'Dst country',
+        'Dst network',
+        'Src country',
+        'Src network',
+        'Src area',
+        'Dst area',
+        'Destination rate policy',
+        'Disconnect initiator',
+        'Agg calls count',
+        'Agg calls duration',
+        'Agg calls acd',
+        'Agg asr origination',
+        'Agg asr termination',
+        'Agg vendor price',
+        'Agg customer price',
+        'Agg profit',
+        'Agg customer calls duration',
+        'Agg vendor calls duration',
+        'Agg customer price no vat'
+      ]
+      rows = [
+        [
+          rateplan.display_name,
+          routing_group.display_name,
+          orig_gw.display_name,
+          term_gw.display_name,
+          destination.display_name,
+          dialpeer.display_name,
+          customer_auth.display_name,
+          vendor_acc.display_name,
+          customer_acc.display_name,
+          vendor.display_name,
+          customer.display_name,
+          vendor_invoice.display_name,
+          customer_invoice.display_name,
+          node.display_name,
+          pop.display_name,
+          dst_country.display_name,
+          dst_network.display_name,
+          src_country.display_name,
+          src_network.display_name,
+          src_area.display_name,
+          dst_area.display_name,
+          'Fixed',
+          'Switch',
+          agg_calls_count.to_s,
+          agg_calls_duration.to_s,
+          agg_calls_acd.to_s,
+          agg_asr_origination.to_s,
+          agg_asr_termination.to_s,
+          agg_vendor_price.to_s,
+          agg_customer_price.to_s,
+          agg_profit.to_s,
+          agg_customer_calls_duration.to_s,
+          agg_vendor_calls_duration.to_s,
+          agg_customer_price_no_vat.to_s
+        ]
+      ]
+
+      [headers, *rows]
+    end
+
+    it 'downloads correct csv' do
+      subject
+      expect(page.response_headers['Content-Disposition']).to eq("attachment; filename=\"#{expected_filename}\"")
+      expect(page.status_code).to eq(200)
+      expect(page.response_headers['Content-Type']).to eq('text/csv; charset=utf-8')
+      expect(page_csv).to match_array(expected_csv)
     end
   end
 end

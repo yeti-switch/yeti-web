@@ -17,7 +17,7 @@ module SendReport
     end
 
     def email_columns
-      report.csv_columns
+      report.csv_columns.map { |column_name, attribute_name| [attribute_name || column_name, column_name] }
     end
 
     def email_subject

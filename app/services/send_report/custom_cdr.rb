@@ -21,7 +21,7 @@ module SendReport
     end
 
     def email_columns
-      report.auto_columns.map(&:first) + [
+      report.auto_columns.map { |column_name, attribute_name| [attribute_name || column_name, column_name] } + [
         [:agg_calls_count, 'Calls count'],
         [:decorated_agg_calls_duration, 'Duration'],
         [:decorated_agg_calls_acd, 'ACD'],
