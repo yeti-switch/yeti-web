@@ -152,24 +152,6 @@ ActiveAdmin.setup do |config|
   #
   config.batch_actions = true
 
-  # == Controller Filters
-  #
-  # You can add before, after and around filters to all of your
-  # Active Admin resources from here.
-  #
-  config.before_action do
-    left_sidebar!(collapsed: true) if respond_to?(:left_sidebar!)
-  end
-
-  config.before_action only: [:index] do
-    fix_max_records
-    restore_search_filters if respond_to?(:save_filters?) && save_filters?
-  end
-
-  config.after_action do
-    save_search_filters if respond_to?(:save_filters?) && save_filters?
-  end
-
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
@@ -200,63 +182,44 @@ ActiveAdmin.setup do |config|
   config.csv_options = { col_sep: ',', force_quotes: true }
   config.download_links = [:csv]
 
+  require Rails.root.join('app/lib/policy_adapter')
+
   config.authorization_adapter = PolicyAdapter
   config.pundit_default_policy = 'DefaultApplicationPolicy'
+end
 
-  ActiveAdmin::BaseController.class_eval do
-    include Pundit
+Dir[Rails.root.join('lib/active_admin/**/*.rb')].each { |s| require s }
 
-    def pundit_user
-      current_admin_user
-    end
+ActiveAdmin.before_load do
+  Dir[Rails.root.join('lib/resource_dsl/**/*.rb')].each { |s| require s }
 
-    protected
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsClone
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsStatus
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAudit
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsSafeDestroy
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsStat
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsLock
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsExport
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsCdrStat
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsImport
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsImportPreview
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBatchChangeable
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ReportScheduler
+  ActiveAdmin::ResourceController.include ActiveAdmin::PerPageExtension
+  ActiveAdmin::ResourceDSL.include ResourceDSL::BatchActionUpdate
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncDestroy
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncUpdate
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsDelayedJobLock
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsFilterByRoutingTagIds
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBelongsTo
+  ActiveAdmin::ResourceDSL.include ResourceDSL::WithDefaultParams
+  ActiveAdmin::ResourceDSL.include ResourceDSL::WithGlobalDSL
+  ActiveAdmin::ResourceDSL.include ResourceDSL::BooleanFilter
+  ActiveAdmin::ResourceDSL.include ResourceDSL::AssociationAjaxFilter
+  ActiveAdmin::ResourceDSL.include ResourceDSL::AccountFilter
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ContractorFilter
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActiveSearch
 
-    # syntax sugar - skip action argument if it is equal to `params[:action].to_sym`
-    # authorized? => authorized?(params[:action].to_sym, resource)
-    # authorized?(record) => authorized?(params[:action].to_sym, record)
-    def authorized?(action = nil, subject = nil)
-      action, subject = normalize_authorized_params(action, subject)
-      invalid_action = ->(msg) { capture_message(msg) }
-      active_admin_authorization.authorized?(action, subject, invalid_action: invalid_action)
-    end
-
-    def authorize!(action = nil, subject = nil)
-      action, subject = normalize_authorized_params(action, subject)
-      unless authorized?(action, subject)
-        subj = active_admin_authorization.pretty_subject(subject)
-        user = active_admin_authorization.pretty_user(current_active_admin_user)
-        logger.warn { "[POLICY] #{subj} not authorized to perform #{action} for #{user}" }
-        raise ActiveAdmin::AccessDenied.new(current_active_admin_user, action, subject)
-      end
-    end
-
-    private
-
-    def normalize_authorized_params(action, subject)
-      if subject.nil? && (!action.is_a?(Symbol) && !action.is_a?(String) && !action.is_a?(NilClass))
-        subject = action
-        action = nil
-      end
-      action = params[:action].to_sym if action.nil?
-      subject = resource_class if subject.nil?
-      [action, subject]
-    end
-
-    private
-
-    # https://github.com/activeadmin/activeadmin/issues/3335
-    # def interpolation_options
-    def flash_interpolation_options
-      options = {}
-
-      options[:resource_errors] =
-        if resource&.errors&.any?
-          "#{resource.errors.full_messages.to_sentence}."
-        else
-          ''
-        end
-      options
-    end
-  end
+  ActiveAdmin::ResourceDSL.include Rails.application.routes.url_helpers
+  ActiveAdmin::ResourceDSL.include ApplicationHelper
 end

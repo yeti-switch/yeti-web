@@ -2,35 +2,6 @@
 
 Dir[Rails.root.join('lib/ext/**/*.rb')].each { |s| require s }
 Dir[Rails.root.join('lib/active_record/**/*.rb')].each { |s| require s }
-Dir[Rails.root.join('lib/active_admin/**/*.rb')].each { |s| require s }
-Dir[Rails.root.join('lib/resource_dsl/**/*.rb')].each { |s| require s }
-
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsClone
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsStatus
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsAudit
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsSafeDestroy
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsStat
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsLock
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsExport
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsCdrStat
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsImport
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsImportPreview
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBatchChangeable
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ReportScheduler
-ActiveAdmin::ResourceController.send(:include, ActiveAdmin::PerPageExtension)
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::BatchActionUpdate
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsAsyncDestroy
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsAsyncUpdate
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsDelayedJobLock
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsFilterByRoutingTagIds
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActsAsBelongsTo
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithDefaultParams
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::WithGlobalDSL
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::BooleanFilter
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::AssociationAjaxFilter
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::AccountFilter
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ContractorFilter
-ActiveAdmin::ResourceDSL.send :include, ResourceDSL::ActiveSearch
 
 # ActiveAdmin::CSVBuilder.send(:include, Yeti::CSVBuilder)
 
@@ -45,9 +16,6 @@ module ActiveAdmin
     end
   end
 end
-
-ActiveAdmin::ResourceDSL.send :include, Rails.application.routes.url_helpers
-ActiveAdmin::ResourceDSL.send :include, ApplicationHelper
 
 # ##patches for filters form for non AR objects
 module ActiveAdmin
@@ -84,7 +52,7 @@ module Arel
       private
 
       def visit_Arel_Nodes_Contains(o, collector)
-        left_column = o.left.relation.send(:type_caster).send(:types).columns.find do |col|
+        left_column = o.left.relation.send(:type_caster).send(:klass).columns.find do |col|
           col.name == o.left.name.to_s || col.name == o.left.relation.name.to_s
         end
 

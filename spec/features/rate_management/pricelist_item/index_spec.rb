@@ -77,8 +77,8 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
           expect(page).to have_table_cell(column: 'Src Name Rewrite Rule', exact_text: item.src_name_rewrite_rule)
           expect(page).to have_table_cell(column: 'Src Rewrite Result', exact_text: item.src_rewrite_result)
           expect(page).to have_table_cell(column: 'Src Rewrite Rule', exact_text: item.src_rewrite_rule)
-          expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_s(:db))
-          expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_s(:db))
+          expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_fs(:db))
+          expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_fs(:db))
         end
       end
     end
@@ -149,8 +149,8 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
             expect(page).to have_table_cell(column: 'Src Name Rewrite Rule', exact_text: item.src_name_rewrite_rule)
             expect(page).to have_table_cell(column: 'Src Rewrite Result', exact_text: item.src_rewrite_result)
             expect(page).to have_table_cell(column: 'Src Rewrite Rule', exact_text: item.src_rewrite_rule)
-            expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_s(:db))
-            expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_s(:db))
+            expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_fs(:db))
+            expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_fs(:db))
           end
         end
       end
@@ -638,7 +638,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
               expect(page).to have_table_cell(column: 'Type', exact_text: 'CREATE')
               expect(page).to have_table_cell(column: 'Dialpeer', exact_text: 'EMPTY')
-              expect(page).to have_table_cell(column: 'Valid from', exact_text: item.valid_from&.to_s(:db) || 'NOW')
+              expect(page).to have_table_cell(column: 'Valid from', exact_text: item.valid_from&.to_fs(:db) || 'NOW')
             end
           end
         end
@@ -665,7 +665,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
             expect(page).to have_table_cell(column: 'Gateway Group', exact_text: "#{to_change.first.dialpeer.gateway_group.display_name} => EMPTY")
             expect(page).to have_table_cell(column: 'Connect Fee', exact_text: "#{to_change.first.dialpeer.connect_fee} => #{to_change.first.connect_fee}")
             expect(page).to have_table_cell(column: 'Enabled', exact_text: 'YES')
-            expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change.first.dialpeer.valid_from.to_s(:db)} => NOW")
+            expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change.first.dialpeer.valid_from.to_fs(:db)} => NOW")
             expect(page).to have_table_cell(column: 'Src Name Rewrite Result', exact_text: "EMPTY => #{to_change.first.src_name_rewrite_result}")
           end
           within_table_row(id: to_change.second.id) do
@@ -680,7 +680,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
             expect(page).to have_table_cell(column: 'Gateway Group', exact_text: to_change.second.dialpeer.gateway_group.display_name.to_s)
             expect(page).to have_table_cell(column: 'Connect Fee', exact_text: "#{to_change.second.dialpeer.connect_fee} => #{to_change.second.connect_fee}")
             expect(page).to have_table_cell(column: 'Enabled', exact_text: "#{to_change.second.dialpeer.enabled ? 'YES' : 'NO'} => NO")
-            expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change.second.dialpeer.valid_from.to_s(:db)} => #{to_change.second.valid_from.to_s(:db)}")
+            expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change.second.dialpeer.valid_from.to_fs(:db)} => #{to_change.second.valid_from.to_fs(:db)}")
             expect(page).to have_table_cell(column: 'Src Name Rewrite Result', exact_text: 'EMPTY')
           end
           within_table_row(id: to_change.third.id) do
@@ -723,7 +723,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
               expect(page).to have_table_cell(column: 'Type', exact_text: 'DELETE')
               expect(page).to have_table_cell(column: 'Dialpeer', exact_text: item.dialpeer.display_name)
-              expect(page).to have_table_cell(column: 'Valid Till', exact_text: "#{item.dialpeer.valid_till.to_s(:db)} => #{pricelist.valid_from.to_s(:db)}")
+              expect(page).to have_table_cell(column: 'Valid Till', exact_text: "#{item.dialpeer.valid_till.to_fs(:db)} => #{pricelist.valid_from.to_fs(:db)}")
             end
           end
         end
@@ -742,7 +742,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
                 expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
                 expect(page).to have_table_cell(column: 'Type', exact_text: 'DELETE')
                 expect(page).to have_table_cell(column: 'Dialpeer', exact_text: item.dialpeer.display_name)
-                expect(page).to have_table_cell(column: 'Valid Till', exact_text: "#{item.dialpeer.valid_till.to_s(:db)} => NOW")
+                expect(page).to have_table_cell(column: 'Valid Till', exact_text: "#{item.dialpeer.valid_till.to_fs(:db)} => NOW")
               end
             end
           end
@@ -908,8 +908,8 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'Src Name Rewrite Rule', exact_text: item.src_name_rewrite_rule)
               expect(page).to have_table_cell(column: 'Src Rewrite Result', exact_text: item.src_rewrite_result)
               expect(page).to have_table_cell(column: 'Src Rewrite Rule', exact_text: item.src_rewrite_rule)
-              expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_s(:db))
-              expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_s(:db))
+              expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_fs(:db))
+              expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_fs(:db))
             end
           end
         end
@@ -960,8 +960,8 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'Src Name Rewrite Rule', exact_text: item.src_name_rewrite_rule)
               expect(page).to have_table_cell(column: 'Src Rewrite Result', exact_text: item.src_rewrite_result)
               expect(page).to have_table_cell(column: 'Src Rewrite Rule', exact_text: item.src_rewrite_rule)
-              expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_s(:db))
-              expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_s(:db))
+              expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_fs(:db))
+              expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_fs(:db))
             end
           end
         end
@@ -1012,8 +1012,8 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'Src Name Rewrite Rule', exact_text: item.src_name_rewrite_rule)
               expect(page).to have_table_cell(column: 'Src Rewrite Result', exact_text: item.src_rewrite_result)
               expect(page).to have_table_cell(column: 'Src Rewrite Rule', exact_text: item.src_rewrite_rule)
-              expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_s(:db))
-              expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_s(:db))
+              expect(page).to have_table_cell(column: 'Valid From', exact_text: item.valid_from.to_fs(:db))
+              expect(page).to have_table_cell(column: 'Valid Till', exact_text: item.valid_till.to_fs(:db))
             end
           end
         end

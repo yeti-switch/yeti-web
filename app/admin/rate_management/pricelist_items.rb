@@ -190,8 +190,8 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
     column(:lcr_rate_multiplier) { |r| r.model.lcr_rate_multiplier }
     column(:reverse_billing) { |r| r.model.reverse_billing }
     column(:short_calls_limit) { |r| r.model.short_calls_limit }
-    column(:valid_from) { |r| r.model.valid_from&.to_s(:db) }
-    column(:valid_till) { |r| r.model.valid_till.to_s(:db) }
+    column(:valid_from) { |r| r.model.valid_from&.to_fs(:db) }
+    column(:valid_till) { |r| r.model.valid_till.to_fs(:db) }
     column(:src_name_rewrite_result) { |r| r.model.src_name_rewrite_result }
     column(:src_name_rewrite_rule) { |r| r.model.src_name_rewrite_rule }
     column(:src_rewrite_result) { |r| r.model.src_rewrite_result }

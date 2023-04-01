@@ -226,7 +226,7 @@ class RateManagementPricelistItemDecorator < ApplicationDecorator
     return status_tag(:empty) if value_blank?(value)
     return status_tag(:yes) if value == true
     return status_tag(:no) if value == false
-    return value.to_s(:db) if value.is_a?(Time)
+    return value.to_fs(:db) if value.is_a?(Time)
 
     value
   end
