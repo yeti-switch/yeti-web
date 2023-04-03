@@ -16,7 +16,8 @@ module ResourceDSL
       Importing::GatewayGroup,
       Importing::Rateplan,
       Importing::Registration,
-      Importing::RoutingGroup
+      Importing::RoutingGroup,
+      Importing::RoutingTagDetectionRule
     ].freeze
 
     def acts_as_import(options)

@@ -24756,6 +24756,49 @@ ALTER SEQUENCE data_import.import_routing_groups_id_seq OWNED BY data_import.imp
 
 
 --
+-- Name: import_routing_tag_detection_rules; Type: TABLE; Schema: data_import; Owner: -
+--
+
+CREATE TABLE data_import.import_routing_tag_detection_rules (
+    id bigint NOT NULL,
+    routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    src_area_id integer,
+    dst_area_id integer,
+    tag_action_id smallint,
+    routing_tag_names character varying,
+    src_area_name character varying,
+    dst_area_name character varying,
+    src_prefix character varying,
+    dst_prefix character varying,
+    tag_action_name character varying,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    tag_action_value_names character varying,
+    error_string character varying,
+    o_id bigint,
+    is_changed boolean
+);
+
+
+--
+-- Name: import_routing_tag_detection_rules_id_seq; Type: SEQUENCE; Schema: data_import; Owner: -
+--
+
+CREATE SEQUENCE data_import.import_routing_tag_detection_rules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: import_routing_tag_detection_rules_id_seq; Type: SEQUENCE OWNED BY; Schema: data_import; Owner: -
+--
+
+ALTER SEQUENCE data_import.import_routing_tag_detection_rules_id_seq OWNED BY data_import.import_routing_tag_detection_rules.id;
+
+
+--
 -- Name: active_admin_comments; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -27065,6 +27108,13 @@ ALTER TABLE ONLY data_import.import_routing_groups ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: import_routing_tag_detection_rules id; Type: DEFAULT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_routing_tag_detection_rules ALTER COLUMN id SET DEFAULT nextval('data_import.import_routing_tag_detection_rules_id_seq'::regclass);
+
+
+--
 -- Name: active_admin_comments id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -28540,6 +28590,14 @@ ALTER TABLE ONLY data_import.import_routing_groups
 
 
 --
+-- Name: import_routing_tag_detection_rules import_routing_tag_detection_rules_pkey; Type: CONSTRAINT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_routing_tag_detection_rules
+    ADD CONSTRAINT import_routing_tag_detection_rules_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: active_admin_comments admin_notes_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
@@ -29555,6 +29613,27 @@ CREATE INDEX routing_plan_static_routes_vendor_id_idx ON class4.routing_plan_sta
 --
 
 CREATE INDEX routing_tag_detection_rules_prefix_range_idx ON class4.routing_tag_detection_rules USING gist (((src_prefix)::public.prefix_range), ((dst_prefix)::public.prefix_range));
+
+
+--
+-- Name: index_import_routing_tag_detection_rules_on_dst_area_id; Type: INDEX; Schema: data_import; Owner: -
+--
+
+CREATE INDEX index_import_routing_tag_detection_rules_on_dst_area_id ON data_import.import_routing_tag_detection_rules USING btree (dst_area_id);
+
+
+--
+-- Name: index_import_routing_tag_detection_rules_on_src_area_id; Type: INDEX; Schema: data_import; Owner: -
+--
+
+CREATE INDEX index_import_routing_tag_detection_rules_on_src_area_id ON data_import.import_routing_tag_detection_rules USING btree (src_area_id);
+
+
+--
+-- Name: index_import_routing_tag_detection_rules_on_tag_action_id; Type: INDEX; Schema: data_import; Owner: -
+--
+
+CREATE INDEX index_import_routing_tag_detection_rules_on_tag_action_id ON data_import.import_routing_tag_detection_rules USING btree (tag_action_id);
 
 
 --
@@ -30618,6 +30697,30 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 
 --
+-- Name: import_routing_tag_detection_rules fk_rails_c247bd5783; Type: FK CONSTRAINT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_routing_tag_detection_rules
+    ADD CONSTRAINT fk_rails_c247bd5783 FOREIGN KEY (tag_action_id) REFERENCES class4.tag_actions(id);
+
+
+--
+-- Name: import_routing_tag_detection_rules fk_rails_c8cbef7aaf; Type: FK CONSTRAINT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_routing_tag_detection_rules
+    ADD CONSTRAINT fk_rails_c8cbef7aaf FOREIGN KEY (dst_area_id) REFERENCES class4.areas(id);
+
+
+--
+-- Name: import_routing_tag_detection_rules fk_rails_db4b62868c; Type: FK CONSTRAINT; Schema: data_import; Owner: -
+--
+
+ALTER TABLE ONLY data_import.import_routing_tag_detection_rules
+    ADD CONSTRAINT fk_rails_db4b62868c FOREIGN KEY (src_area_id) REFERENCES class4.areas(id);
+
+
+--
 -- Name: contacts contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
@@ -31014,6 +31117,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230224000357'),
 ('20230227110659'),
 ('20230310102534'),
-('20230318105458');
+('20230318105458'),
+('20230330131911');
 
 
