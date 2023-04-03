@@ -3,8 +3,8 @@
 source 'https://rubygems.org'
 
 # Core
-gem 'active_record_extended'
 gem 'activemodel-serializers-xml'
+gem 'active_record_extended'
 gem 'activerecord-import'
 gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
@@ -25,12 +25,12 @@ gem 'jwt'
 gem 'knock', github: 'nsarno/knock'
 
 # ActiveAdmin
+gem 'activeadmin'
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
 gem 'active_admin_datetimepicker'
 gem 'active_admin_import'
 gem 'active_admin_scoped_collection_actions'
 gem 'active_admin_theme'
-gem 'activeadmin'
 gem 'draper'
 gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
 gem 'ransack'
@@ -65,9 +65,9 @@ gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
 gem 'jquery-ui-rails'
+gem 'mini_racer'
 gem 'rails-html-sanitizer', '~> 1.0'
 gem 'sass-globbing'
-gem 'mini_racer'
 gem 'uglifier', '>= 1.3'
 
 # Server Tools
@@ -120,8 +120,8 @@ gem 'apitome', '~> 0.1.0'
 
 group :test do
   gem 'capybara'
-  gem 'capybara-screenshot'
   gem 'capybara_active_admin', github: 'activeadmin-plugins/capybara_active_admin', require: false
+  gem 'capybara-screenshot'
   gem 'cuprite'
   gem 'database_consistency', require: false
   gem 'ferrum'
@@ -136,12 +136,12 @@ gem 'bootsnap', require: false
 
 gem 'httparty', '~> 0.21.0'
 
-gem "matrix", "~> 0.4.2"
+gem 'matrix', '~> 0.4.2'
 
-gem "net-smtp", "~> 0.3.3"
+gem 'net-smtp', '~> 0.3.3'
 
-gem "net-pop", "~> 0.1.2"
+gem 'net-pop', '~> 0.1.2'
 
-gem "net-imap", "~> 0.3.4"
+gem 'net-imap', '~> 0.3.4'
 
 gem 'webrick', '~> 1.8', require: false

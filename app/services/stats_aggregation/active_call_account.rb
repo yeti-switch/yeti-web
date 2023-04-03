@@ -15,7 +15,7 @@ module StatsAggregation
     def aggregate_sql
       <<-SQL
         INSERT INTO #{agg_class.table_name}
-        (max_originated_count, min_originated_count, avg_originated_count, max_terminated_count, 
+        (max_originated_count, min_originated_count, avg_originated_count, max_terminated_count,
         min_terminated_count, avg_terminated_count, account_id, calls_time, created_at)
         SELECT
           max(originated_count) AS max_originated_count,

@@ -58,11 +58,11 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
 
   def handle_authentication_error
     error = JSONAPI::Exceptions::AuthenticationFailed.new
-    render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
+    render status: 401, json: { errors: error.errors.map(&:to_hash) }
   end
 
   def handle_authorization_error
     error = JSONAPI::Exceptions::AuthorizationFailed.new
-    render status: :unauthorized, json: { errors: error.errors.map(&:to_hash) }
+    render status: 401, json: { errors: error.errors.map(&:to_hash) }
   end
 end

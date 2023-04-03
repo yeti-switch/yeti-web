@@ -157,7 +157,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     raise ActiveRecord::RecordNotFound if file.blank?
 
     response.headers['X-Accel-Redirect'] = file
-    head :ok
+    head 200
   end
 
   member_action :download_call_record_lega, method: :get do
@@ -165,7 +165,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     raise ActiveRecord::RecordNotFound if file.blank?
 
     response.headers['X-Accel-Redirect'] = file
-    head :ok
+    head 200
   end
 
   member_action :download_call_record_legb, method: :get do
@@ -173,7 +173,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     raise ActiveRecord::RecordNotFound if file.blank?
 
     response.headers['X-Accel-Redirect'] = file
-    head :ok
+    head 200
   end
 
   member_action :routing_simulation, method: :get do

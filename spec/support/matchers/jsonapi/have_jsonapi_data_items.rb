@@ -5,7 +5,7 @@
 #   expect(response_json[:data]).to have_jsonapi_data_items([1, 2], 'registrations')
 RSpec::Matchers.define :have_jsonapi_data_items do |expected_ids, type: nil, strict_order: false|
   expected_ids = expected_ids.map(&:to_s)
-  expected_type = type ? type.to_s : nil
+  expected_type = type&.to_s
 
   match do |actual|
     unless expected_type.nil?

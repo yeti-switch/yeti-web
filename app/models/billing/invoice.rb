@@ -110,11 +110,11 @@ class Billing::Invoice < Cdr::Base
   end
 
   def approvable?
-    Billing::InvoiceState::PENDING == state_id
+    state_id == Billing::InvoiceState::PENDING
   end
 
   def regenerate_document_allowed?
-    Billing::InvoiceState::PENDING == state_id
+    state_id == Billing::InvoiceState::PENDING
   end
 
   # todo service
