@@ -12,7 +12,7 @@ module Helpers
       value = options.delete(:with)
       find_field_opts = { visible: false, disabled: disabled }
       find_field_opts[:match] = :prefer_exact if exact_label
-      select_node = find_field(label, find_field_opts)
+      select_node = find_field(label, **find_field_opts)
       chosen_selector = "select##{select_node[:id]} + .chosen-container"
       if no_search
         chosen_pick(chosen_selector, text: value, exact: exact)
@@ -25,7 +25,7 @@ module Helpers
       disabled = false if disabled.nil?
       find_field_opts = { visible: false, disabled: disabled }
       find_field_opts[:match] = :prefer_exact if exact
-      select = find_field(label, find_field_opts)
+      select = find_field(label, **find_field_opts)
       "select##{select[:id]}"
     end
 
@@ -92,7 +92,7 @@ module Helpers
       warn 'empty :with will be ignored because :exact is false' if with.blank? && !exact
       options[exact ? :exact_text : :text] = with unless with.nil?
       selector = chosen_container_selector(label, disabled: disabled, exact: exact_label)
-      have_selector(selector, options)
+      have_selector(selector, **options)
     end
 
     def chosen_deselect_values(label, values:, exact: false)

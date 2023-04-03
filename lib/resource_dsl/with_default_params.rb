@@ -10,7 +10,7 @@ module ResourceDSL
       if_proc = opts[:if] || proc { |q: nil, **_| q.blank? }
       flash_type = opts.fetch(:flash_type, :notice_message)
       before_action only: [:index] do
-        if instance_exec(params.to_unsafe_h.deep_symbolize_keys, &if_proc)
+        if instance_exec(**params.to_unsafe_h.deep_symbolize_keys, &if_proc)
           message = instance_exec(&block)
           flash.now[flash_type] = message if message.present?
         end

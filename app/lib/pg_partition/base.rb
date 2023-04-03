@@ -31,7 +31,7 @@ module PgPartition
 
     def add_partition(table_name, interval_type, time)
       options = partition_options(interval_type, time)
-      add_partition_for_range(table_name, options)
+      add_partition_for_range(table_name, **options)
     end
 
     def add_partition_for_range(table_name, prefix:, from:, to:)

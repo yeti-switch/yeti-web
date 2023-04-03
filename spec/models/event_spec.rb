@@ -203,7 +203,7 @@ RSpec.describe Event do
 
   describe '.reload_sip_options_probers' do
     subject do
-      Event.reload_sip_options_probers(event_params)
+      Event.reload_sip_options_probers(**event_params)
     end
 
     let(:expected_event_attributes) do

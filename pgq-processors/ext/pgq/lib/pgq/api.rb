@@ -7,7 +7,7 @@ module Pgq::Api
 
   def pgq_next_batch(queue_name, consumer_name)
     result = connection.select_value(sanitize_sql_array(['SELECT pgq.next_batch(?, ?)', queue_name, consumer_name]))
-    result ? result.to_i : nil
+    result&.to_i
   end
 
   def pgq_get_batch_events(consumer_name, batch_id)

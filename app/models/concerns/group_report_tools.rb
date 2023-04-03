@@ -12,10 +12,8 @@ module GroupReportTools
     end
 
     def belongs_to_relations
-      @belongs_to_relations ||= begin
-        report_items_class.reflect_on_all_associations(:belongs_to)
-                          .select { |name| group_by_include?(name.foreign_key) }
-      end
+      @belongs_to_relations ||= report_items_class.reflect_on_all_associations(:belongs_to)
+                                                  .select { |name| group_by_include?(name.foreign_key) }
     end
 
     def auto_includes

@@ -12,7 +12,7 @@ module ResourceDSL
                                if: proc { authorized?(:batch_destroy, resource_klass) } do
         AsyncBatchDestroyJob.perform_later(model_class, scoped_collection_records.except(:eager_load).to_sql, @paper_trail_info)
         flash[:notice] = I18n.t('flash.actions.batch_actions.batch_destroy.job_scheduled')
-        head :ok
+        head 200
       end
 
       before_action do

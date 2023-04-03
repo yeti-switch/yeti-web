@@ -18,6 +18,6 @@ class ArrayFormatValidator < ActiveModel::EachValidator
   private
 
   def record_error(record, attribute, name, value)
-    record.errors.add(attribute, :invalid, options.except(name).merge!(value: value))
+    record.errors.add(attribute, :invalid, **options.except(name).merge!(value: value))
   end
 end

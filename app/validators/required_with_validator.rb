@@ -11,7 +11,7 @@ class RequiredWithValidator < ActiveModel::EachValidator
 
     return false if attr_second_value.nil? && attr_main_value.nil?
 
-    if not_set?(attr_second_value) && not_set?(attr_second_value)
+    if not_set?(attr_second_value)
       record.errors.add(attr_main_name, "must be changed together with #{attr_second_name.to_s.humanize}")
     elsif not_set?(attr_second_value)
       record.errors.add(attr_main_name, "must be changed together with #{attr_second_name.to_s.humanize}")

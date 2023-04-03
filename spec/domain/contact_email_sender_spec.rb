@@ -3,7 +3,7 @@
 RSpec.describe ContactEmailSender do
   describe '#send_email' do
     subject do
-      described_class.new(contact).send_email(service_params)
+      described_class.new(contact).send_email(**service_params)
     end
 
     let(:expected_email_log_attrs) do
@@ -103,7 +103,7 @@ RSpec.describe ContactEmailSender do
 
   describe '.batch_send_emails' do
     subject do
-      described_class.batch_send_emails(contacts, service_params)
+      described_class.batch_send_emails(contacts, **service_params)
     end
 
     let!(:contacts) do

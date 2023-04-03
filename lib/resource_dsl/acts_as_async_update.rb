@@ -23,7 +23,7 @@ module ResourceDSL
             flash[:error] = "Validation Error: #{form.errors.full_messages.to_sentence}"
           end
         end
-        head :ok
+        head 200
       end
 
       before_action do

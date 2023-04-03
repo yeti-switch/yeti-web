@@ -35,7 +35,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     amq-protocol (2.3.2)
     builder (3.2.4)
-    bunny (2.19.0)
+    bunny (2.20.3)
       amq-protocol (~> 2.3, >= 2.3.1)
       sorted_set (~> 1, >= 1.0.2)
     bunny-mock (1.7.0)
@@ -64,13 +64,17 @@ GEM
     minitest (5.15.0)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.3.3)
+      net-protocol
     netrc (0.11.0)
-    pg (1.2.3)
+    pg (1.4.6)
     pony (1.13.1)
       mail (>= 2.0)
     public_suffix (4.0.6)
     rake (13.0.6)
-    rbtree (0.4.4)
+    rbtree (0.4.6)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -90,11 +94,12 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
-    set (1.0.2)
+    set (1.0.3)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
     syslog-logger (1.6.8)
+    timeout (0.3.2)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -118,6 +123,7 @@ DEPENDENCIES
   bunny-mock
   byebug
   http_logger
+  net-smtp
   pg
   pgq!
   pony

@@ -6,7 +6,7 @@ require:
 AllCops:
   DisplayCopNames: true
   DisabledByDefault: true
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
   Exclude:
     - 'db/migrate/**/*'
     - 'db/cdr_migrate/**/*'
@@ -30,7 +30,7 @@ Gemspec/DuplicatedAssignment:
 Gemspec/OrderedDependencies:
   Enabled: true
 Gemspec/RequiredRubyVersion:
-  Enabled: true
+  Enabled: false
 
 Layout/ClassStructure:
   Enabled: false
@@ -207,6 +207,8 @@ Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Lint/BooleanSymbol:
   Enabled: false
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
 Lint/DuplicateMethods:
   Enabled: false
 Lint/ImplicitStringConcatenation:
@@ -281,6 +283,8 @@ Lint/LiteralInInterpolation:
   Enabled: true
 Lint/MissingCopEnableDirective:
   Enabled: true
+Lint/MissingSuper:
+  Enabled: false
 Lint/MultipleComparison:
   Enabled: true
 Lint/NestedPercentLiteral:
@@ -342,8 +346,6 @@ Lint/UnusedMethodArgument:
 Lint/UriEscapeUnescape:
   Enabled: true
 Lint/UriRegexp:
-  Enabled: true
-Lint/UselessComparison:
   Enabled: true
 Lint/UselessElseWithoutRescue:
   Enabled: true
@@ -503,6 +505,7 @@ Rails/HttpPositionalArguments:
   Enabled: true
 Rails/HttpStatus:
   Enabled: true
+  EnforcedStyle: numeric
 Rails/InverseOf:
   Enabled: false
 Rails/LexicallyScopedActionFilter:
@@ -609,8 +612,6 @@ Style/MethodCalledOnDoEndBlock:
   Enabled: false
 Style/MethodCallWithArgsParentheses:
   Enabled: false
-Style/MethodMissingSuper:
-  Enabled: false
 Style/MissingElse:
   Enabled: false
 Style/MissingRespondToMissing:
@@ -700,7 +701,7 @@ Style/FrozenStringLiteralComment:
 Style/GlobalVars:
   Enabled: true
 Style/HashSyntax:
-  Enabled: true
+  Enabled: false
 Style/IfInsideElse:
   Enabled: true
 Style/IfUnlessModifierOfIfUnless:
@@ -815,6 +816,8 @@ Style/SingleLineMethods:
   Enabled: true
 Style/SpecialGlobalVars:
   Enabled: true
+  Exclude:
+    - 'pgq-processors/bin/bundle'
 Style/StabbyLambdaParentheses:
   Enabled: true
 Style/StderrPuts:
@@ -831,6 +834,8 @@ Style/SymbolLiteral:
   Enabled: true
 Style/SymbolProc:
   Enabled: true
+  Exclude:
+    - 'spec/factories/payment.rb'
 Style/TernaryParentheses:
   Enabled: true
 Style/TrailingBodyOnClass:

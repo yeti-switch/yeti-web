@@ -416,11 +416,9 @@ module Jobs
     # returns array of hashes
     # [ { customer_auth_id => [reject_calls] }, ... ]
     def active_customers_auths_reject_calls
-      @active_customers_auths_reject_calls ||= begin
-        CustomersAuth
-          .where(id: active_customers_auth_ids)
-          .pluck(:id, :reject_calls).index_by { |c| c[0] }
-      end
+      @active_customers_auths_reject_calls ||= CustomersAuth
+                                               .where(id: active_customers_auth_ids)
+                                               .pluck(:id, :reject_calls).index_by { |c| c[0] }
     end
 
     # unique list of all customer_acc_id from all current calls

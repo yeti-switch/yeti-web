@@ -107,7 +107,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     less_than_or_equal_to: :dst_number_max_length,
     only_integer: true,
     allow_blank: true
-  }, if: -> { dst_number_min_length_changed? && dst_number_max_length =~ /^[0-9]+$/ }
+  }, if: -> { dst_number_min_length_changed? && dst_number_max_length.to_s =~ /^[0-9]+$/ }
 
   validates :prefix, format: { without: /\s/, message: I18n.t('activerecord.errors.models.dialpeer.attributes.prefix') }, if: :prefix_changed?
 

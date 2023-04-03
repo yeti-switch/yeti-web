@@ -7,6 +7,8 @@ FactoryBot.define do
     notes { 'notes text' }
     private_notes { 'private notes' }
 
-    after(:create, &:reload) # to populate uuid
+    after(:create) do |record|
+      record.reload # to populate uuid
+    end
   end
 end

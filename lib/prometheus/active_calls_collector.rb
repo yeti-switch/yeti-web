@@ -30,7 +30,7 @@ class ActiveCallsCollector < PrometheusExporter::Server::TypeCollector
   end
 
   def metrics
-    @observers.values.each(&:reset!)
+    @observers.each_value(&:reset!)
 
     @orig_accounts.each do |account_labels|
       @observers.except('total', 'account_terminated', 'account_price_terminated').each do |_, observer|

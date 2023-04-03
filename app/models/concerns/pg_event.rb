@@ -17,7 +17,7 @@ module PgEvent
 
     def pgq_insert_event(queue_name, ev_type, ev_data)
       result = connection.select_value("SELECT pgq.insert_event(#{connection.quote(queue_name)}, #{connection.quote(ev_type)}, #{connection.quote(ev_data)})")
-      result ? result.to_i : nil
+      result&.to_i
     end
   end
 

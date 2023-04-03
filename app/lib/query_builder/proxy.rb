@@ -20,13 +20,13 @@ module QueryBuilder
     end
 
     def find_record(id)
-      model_class.query_builder_find(id, query_values)
+      model_class.query_builder_find(id, **query_values)
     end
 
     def find_collection
       return [] if is_none
 
-      model_class.query_builder_collection(query_values)
+      model_class.query_builder_collection(**query_values)
     end
   end
 end
