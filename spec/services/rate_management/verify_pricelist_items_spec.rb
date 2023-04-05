@@ -710,13 +710,13 @@ RSpec.describe RateManagement::VerifyPricelistItems do
     end
 
     context 'when CSV row has valid_from=now' do
-      let(:item_attrs) { super().merge(valid_from: Time.zone.now.to_s(:db)) }
+      let(:item_attrs) { super().merge(valid_from: Time.zone.now.to_fs(:db)) }
 
       include_examples :raises_service_error, 'Valid from must be in future for row 2'
     end
 
     context 'when CSV row has valid_from is in the past' do
-      let(:item_attrs) { super().merge(valid_from: 1.second.ago.to_s(:db)) }
+      let(:item_attrs) { super().merge(valid_from: 1.second.ago.to_fs(:db)) }
 
       include_examples :raises_service_error, 'Valid from must be in future for row 2'
     end

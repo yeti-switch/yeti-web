@@ -212,7 +212,7 @@ class Scheduler::Base
 
   # @param time [Time]
   def log_time_formatted(time)
-    time.to_s(:db)
+    time.to_fs(:db)
   end
 
   # @param exception [Exception]

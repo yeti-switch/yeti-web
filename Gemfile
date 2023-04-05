@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', ' ~> 2.2.6'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 gem 'responders'
 
 # Authentication
@@ -48,7 +48,7 @@ gem 'jsonapi-resources', '~> 0.9.12'
 # gem 'activeadmin_async_export'
 
 # Ext
-gem 'validates_timeliness'
+gem 'validates_timeliness', '~> 7.0.0.beta1'
 
 # Object oriented authorization for Rails applications
 gem 'pundit'
@@ -74,7 +74,7 @@ gem 'uglifier', '>= 1.3'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'odf-report', github: 'yeti-switch/odf-report', branch: 'master-2018'
-gem 'puma', '~> 5.3'
+gem 'puma', '~> 6.1'
 gem 'puma_worker_killer'
 gem 'syslog-logger'
 gem 'zip-zip'
