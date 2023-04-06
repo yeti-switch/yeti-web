@@ -80,7 +80,7 @@ RSpec.describe 'Index interval cdr interval items', js: true do
   let(:timestamp) { Time.now.utc }
   let(:aggregated_value) { 755.0 }
 
-  it 'should have table with correct data' do
+  it 'should render index page properly' do
     subject
     expect(page).to have_table
     within_table_row(id: interval_data.id) do
@@ -104,6 +104,22 @@ RSpec.describe 'Index interval cdr interval items', js: true do
       expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
       expect(page).to have_table_cell(text: 'Switch', column: 'Disconnect Initiator')
     end
+
+    expect(page).to have_select 'Customer', visible: false
+    expect(page).to have_select 'Vendor', visible: false
+    expect(page).to have_select 'Rateplan', visible: false
+    expect(page).to have_select 'Routing group', visible: false
+    expect(page).to have_select 'Orig gw', visible: false
+    expect(page).to have_select 'Term gw', visible: false
+    expect(page).to have_select 'Customer auth', visible: false
+    expect(page).to have_select 'Vendor acc', visible: false
+    expect(page).to have_select 'Customer acc', visible: false
+    expect(page).to have_select 'Vendor invoice', visible: false
+    expect(page).to have_select 'Customer invoice', visible: false
+    expect(page).to have_select 'Node', visible: false
+    expect(page).to have_select 'Pop', visible: false
+    expect(page).to have_select 'Dst country', visible: false
+    expect(page).to have_select 'Dst network', visible: false
   end
 
   describe 'csv', js: false do
