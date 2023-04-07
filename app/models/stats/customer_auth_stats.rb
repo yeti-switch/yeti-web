@@ -10,7 +10,7 @@
 #  customer_price        :decimal(, )      default(0.0), not null
 #  customer_price_no_vat :decimal(, )      default(0.0), not null
 #  duration              :integer(4)       default(0), not null
-#  timestamp             :datetime         not null
+#  timestamp             :timestamptz      not null
 #  vendor_price          :decimal(, )      default(0.0), not null
 #  customer_auth_id      :integer(4)       not null
 #

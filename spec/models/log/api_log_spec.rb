@@ -17,7 +17,7 @@
 #  response_body    :text
 #  response_headers :text
 #  status           :integer(4)
-#  created_at       :datetime         not null
+#  created_at       :timestamptz      not null
 #
 # Indexes
 #

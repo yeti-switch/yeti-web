@@ -18,7 +18,7 @@
 #  realm                 :string
 #  reason                :string
 #  request_method        :string
-#  request_time          :datetime         not null
+#  request_time          :timestamptz      not null
 #  response              :string
 #  rpid                  :string
 #  rpid_privacy          :string

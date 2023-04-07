@@ -12,8 +12,8 @@
 #  max_call_duration             :integer(4)
 #  min_balance                   :decimal(, )      not null
 #  name                          :string           not null
-#  next_customer_invoice_at      :datetime
-#  next_vendor_invoice_at        :datetime
+#  next_customer_invoice_at      :timestamptz
+#  next_vendor_invoice_at        :timestamptz
 #  origination_capacity          :integer(2)
 #  send_invoices_to              :integer(4)       is an Array
 #  termination_capacity          :integer(2)

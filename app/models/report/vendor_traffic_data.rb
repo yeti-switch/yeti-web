@@ -10,8 +10,8 @@
 #  calls_count             :bigint(8)
 #  calls_duration          :bigint(8)
 #  customer_calls_duration :bigint(8)
-#  first_call_at           :datetime
-#  last_call_at            :datetime
+#  first_call_at           :timestamptz
+#  last_call_at            :timestamptz
 #  origination_cost        :decimal(, )
 #  profit                  :decimal(, )
 #  short_calls_count       :bigint(8)

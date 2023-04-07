@@ -8,8 +8,8 @@
 #  command    :string           not null
 #  last_error :string
 #  retries    :integer(4)       default(0), not null
-#  created_at :datetime         not null
-#  updated_at :datetime
+#  created_at :timestamptz      not null
+#  updated_at :timestamptz
 #  node_id    :integer(4)       not null
 #
 # Foreign Keys

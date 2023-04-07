@@ -5,10 +5,10 @@
 # Table name: reports.customer_traffic_report_schedulers
 #
 #  id          :integer(4)       not null, primary key
-#  last_run_at :datetime
-#  next_run_at :datetime
+#  last_run_at :timestamptz
+#  next_run_at :timestamptz
 #  send_to     :integer(4)       is an Array
-#  created_at  :datetime
+#  created_at  :timestamptz
 #  customer_id :integer(4)       not null
 #  period_id   :integer(4)       not null
 #

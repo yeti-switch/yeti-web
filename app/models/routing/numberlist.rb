@@ -11,8 +11,8 @@
 #  default_src_rewrite_rule   :string
 #  name                       :string           not null
 #  tag_action_value           :integer(2)       default([]), not null, is an Array
-#  created_at                 :datetime
-#  updated_at                 :datetime
+#  created_at                 :timestamptz
+#  updated_at                 :timestamptz
 #  default_action_id          :integer(2)       default(1), not null
 #  external_id                :bigint(8)
 #  lua_script_id              :integer(2)

@@ -29,8 +29,8 @@
 #  rx_rtcp_jitter_std     :float
 #  rx_ssrc                :bigint(8)
 #  rx_total_lost          :bigint(8)
-#  time_end               :datetime
-#  time_start             :datetime         not null
+#  time_end               :timestamptz
+#  time_start             :timestamptz      not null
 #  gateway_external_id    :bigint(8)
 #  gateway_id             :bigint(8)
 #  node_id                :integer(4)

@@ -6,10 +6,10 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  completed  :boolean          default(FALSE), not null
-#  date_end   :datetime
-#  date_start :datetime
+#  date_end   :timestamptz
+#  date_start :timestamptz
 #  send_to    :integer(4)       is an Array
-#  created_at :datetime
+#  created_at :timestamptz
 #  vendor_id  :integer(4)       not null
 #
 

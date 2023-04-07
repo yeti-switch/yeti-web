@@ -7,8 +7,8 @@
 #  id            :integer(4)       not null, primary key
 #  email         :string           not null
 #  notes         :string
-#  created_at    :datetime
-#  updated_at    :datetime
+#  created_at    :timestamptz
+#  updated_at    :timestamptz
 #  admin_user_id :integer(4)
 #  contractor_id :integer(4)
 #

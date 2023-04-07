@@ -15,8 +15,8 @@
 #  rx_dropped_packets      :bigint(8)
 #  rx_out_of_buffer_errors :bigint(8)
 #  rx_rtp_parse_errors     :bigint(8)
-#  time_end                :datetime
-#  time_start              :datetime         not null
+#  time_end                :timestamptz
+#  time_start              :timestamptz      not null
 #  tx_bytes                :bigint(8)
 #  tx_packets              :bigint(8)
 #  tx_payloads_relayed     :string           is an Array

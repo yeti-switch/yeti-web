@@ -12,7 +12,7 @@
 #  object_changes :text
 #  txid           :bigint(8)
 #  whodunnit      :string(255)
-#  created_at     :datetime
+#  created_at     :timestamptz
 #  item_id        :bigint(8)        not null
 #
 # Indexes

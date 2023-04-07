@@ -10,11 +10,11 @@
 #  calls          :bigint(8)        not null
 #  calls_fail     :bigint(8)        not null
 #  calls_success  :bigint(8)        not null
-#  locked_at      :datetime
+#  locked_at      :timestamptz
 #  total_duration :bigint(8)        not null
-#  unlocked_at    :datetime
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  unlocked_at    :timestamptz
+#  created_at     :timestamptz      not null
+#  updated_at     :timestamptz      not null
 #  dialpeer_id    :bigint(8)        not null
 #
 # Indexes

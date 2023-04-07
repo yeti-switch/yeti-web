@@ -9,17 +9,17 @@
 #  billing_duration         :bigint(8)        not null
 #  calls_count              :bigint(8)        not null
 #  calls_duration           :bigint(8)        not null
-#  end_date                 :datetime         not null
-#  first_call_at            :datetime
-#  first_successful_call_at :datetime
-#  last_call_at             :datetime
-#  last_successful_call_at  :datetime
+#  end_date                 :timestamptz      not null
+#  first_call_at            :timestamptz
+#  first_successful_call_at :timestamptz
+#  last_call_at             :timestamptz
+#  last_successful_call_at  :timestamptz
 #  reference                :string
-#  start_date               :datetime         not null
+#  start_date               :timestamptz      not null
 #  successful_calls_count   :bigint(8)
 #  uuid                     :uuid             not null
 #  vendor_invoice           :boolean          default(FALSE), not null
-#  created_at               :datetime         not null
+#  created_at               :timestamptz      not null
 #  account_id               :integer(4)       not null
 #  contractor_id            :integer(4)
 #  state_id                 :integer(2)       default(1), not null

@@ -7,13 +7,13 @@
 #  id              :integer(4)       not null, primary key
 #  aggregate_by    :string           not null
 #  completed       :boolean          default(FALSE), not null
-#  date_end        :datetime         not null
-#  date_start      :datetime         not null
+#  date_end        :timestamptz      not null
+#  date_start      :timestamptz      not null
 #  filter          :string
 #  group_by        :string           is an Array
 #  interval_length :integer(4)       not null
 #  send_to         :integer(4)       is an Array
-#  created_at      :datetime         not null
+#  created_at      :timestamptz      not null
 #  aggregator_id   :integer(4)       not null
 #
 # Foreign Keys

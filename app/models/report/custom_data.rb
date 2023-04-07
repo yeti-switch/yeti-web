@@ -63,10 +63,10 @@
 #  src_prefix_in                :string
 #  src_prefix_out               :string
 #  success                      :boolean
-#  time_connect                 :datetime
-#  time_end                     :datetime
+#  time_connect                 :timestamptz
+#  time_end                     :timestamptz
 #  time_limit                   :string
-#  time_start                   :datetime
+#  time_start                   :timestamptz
 #  vendor_billed                :boolean
 #  vendor_price                 :decimal(, )
 #  customer_acc_id              :integer(4)

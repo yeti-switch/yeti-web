@@ -9,7 +9,7 @@
 #  count      :bigint(8)        not null
 #  duration   :bigint(8)        not null
 #  profit     :decimal(, )
-#  timestamp  :datetime         not null
+#  timestamp  :timestamptz      not null
 #  account_id :integer(4)       not null
 #
 # Indexes

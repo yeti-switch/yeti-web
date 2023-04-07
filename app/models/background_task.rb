@@ -6,17 +6,17 @@
 #
 #  id          :integer(4)       not null, primary key
 #  attempts    :integer(4)       default(0), not null
-#  failed_at   :datetime
+#  failed_at   :timestamptz
 #  handler     :text             not null
 #  last_error  :text
-#  locked_at   :datetime
+#  locked_at   :timestamptz
 #  locked_by   :string(255)
 #  priority    :integer(4)       default(0), not null
 #  queue       :string(255)
-#  run_at      :datetime
+#  run_at      :timestamptz
 #  unique_name :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  created_at  :timestamptz      not null
+#  updated_at  :timestamptz      not null
 #
 # Indexes
 #

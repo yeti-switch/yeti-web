@@ -30,8 +30,8 @@
 #  routing_tag_names        :string
 #  short_calls_limit        :float
 #  use_dp_intervals         :boolean
-#  valid_from               :datetime
-#  valid_till               :datetime
+#  valid_from               :timestamptz
+#  valid_till               :timestamptz
 #  network_prefix_id        :integer(4)
 #  o_id                     :bigint(8)
 #  profit_control_mode_id   :integer(2)

@@ -8,7 +8,7 @@
 #  account_balance        :decimal(, )      not null
 #  balance_high_threshold :decimal(, )
 #  balance_low_threshold  :decimal(, )
-#  created_at             :datetime         not null
+#  created_at             :timestamptz      not null
 #  account_id             :integer(4)       not null
 #  event_id               :integer(2)       not null
 #

@@ -6,14 +6,14 @@
 #
 #  id               :bigint(8)        not null, primary key
 #  applied          :boolean          default(FALSE), not null
-#  apply_time       :datetime
+#  apply_time       :timestamptz
 #  connect_fee      :decimal(, )      not null
 #  initial_interval :integer(2)       not null
 #  initial_rate     :decimal(, )      not null
 #  next_interval    :integer(2)       not null
 #  next_rate        :decimal(, )      not null
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :timestamptz
+#  updated_at       :timestamptz
 #  destination_id   :bigint(8)        not null
 #  external_id      :bigint(8)
 #
