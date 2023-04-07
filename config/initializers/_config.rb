@@ -79,5 +79,8 @@ rescue Config::Validation::Error => e
   exit 1 # rubocop:disable Rails/Exit
 end
 
+require 'system_info_configs'
+require 'custom_struct'
+
 system_info_path = Rails.root.join('config/system_info.yml')
 SystemInfoConfigs.load_file(system_info_path) if File.exist?(system_info_path)
