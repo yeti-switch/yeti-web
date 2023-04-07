@@ -109,7 +109,8 @@ group :development, :test do
   gem 'rspec-rails'
   # https://github.com/zipmark/rspec_api_documentation/pull/458
   # present only on master
-  gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation'
+  # Temporary solution. Waiting for merge https://github.com/zipmark/rspec_api_documentation/pull/507
+  gem 'rspec_api_documentation', github: 'BigG1947/rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
