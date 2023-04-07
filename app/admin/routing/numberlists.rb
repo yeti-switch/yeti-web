@@ -58,6 +58,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :created_at
     column :updated_at
     column 'External ID', :external_id, sortable: :external_id
+    column :external_type
   end
 
   show do |_s|
@@ -76,6 +77,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :created_at
       row :updated_at
       row 'External ID', &:external_id
+      row :external_type
     end
   end
 
@@ -105,5 +107,6 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
   filter :lua_script, input_html: { class: 'chosen' }
   filter :external_id, label: 'External ID'
+  filter :external_type
   filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
 end

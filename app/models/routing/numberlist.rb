@@ -9,6 +9,7 @@
 #  default_dst_rewrite_rule   :string
 #  default_src_rewrite_result :string
 #  default_src_rewrite_rule   :string
+#  external_type              :string
 #  name                       :string           not null
 #  tag_action_value           :integer(2)       default([]), not null, is an Array
 #  created_at                 :timestamptz
@@ -21,8 +22,9 @@
 #
 # Indexes
 #
-#  blacklists_name_key          (name) UNIQUE
-#  numberlists_external_id_key  (external_id) UNIQUE
+#  blacklists_name_key                             (name) UNIQUE
+#  numberlists_external_id_external_type_key_uniq  (external_id,external_type) UNIQUE
+#  numberlists_external_id_key_uniq                (external_id) UNIQUE WHERE (external_type IS NULL)
 #
 # Foreign Keys
 #
@@ -50,6 +52,8 @@ class Routing::Numberlist < ApplicationRecord
     MODE_RANDOM => 'Random'
   }.freeze
 
+  attribute :external_type, :string_presence
+
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
@@ -62,6 +66,13 @@ class Routing::Numberlist < ApplicationRecord
 
   validates :default_action_id, inclusion: { in: DEFAULT_ACTIONS.keys }, allow_nil: false
   validates :mode_id, inclusion: { in: MODES.keys }, allow_nil: false
+  validates :external_type, absence: { message: 'requires external_id' }, unless: :external_id
+  validates :external_id,
+            uniqueness: { scope: :external_type },
+            if: proc { external_id && external_type }
+  validates :external_id,
+            uniqueness: { conditions: -> { where(external_type: nil) } },
+            if: proc { external_id && !external_type }
 
   validates_with TagActionValueValidator
 

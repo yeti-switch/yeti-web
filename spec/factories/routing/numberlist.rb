@@ -12,5 +12,9 @@ FactoryBot.define do
     trait :filled do
       tag_action { Routing::TagAction.take }
     end
+
+    trait :with_external_id do
+      sequence(:external_id)
+    end
   end
 end

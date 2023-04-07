@@ -22081,7 +22081,8 @@ CREATE TABLE class4.numberlists (
     tag_action_id smallint,
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     lua_script_id smallint,
-    external_id bigint
+    external_id bigint,
+    external_type character varying
 );
 
 
@@ -28094,14 +28095,6 @@ ALTER TABLE ONLY class4.lnp_databases_thinq
 
 
 --
--- Name: numberlists numberlists_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.numberlists
-    ADD CONSTRAINT numberlists_external_id_key UNIQUE (external_id);
-
-
---
 -- Name: radius_accounting_profile_interim_attributes radius_accounting_profile_interim_attributes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29571,6 +29564,20 @@ CREATE UNIQUE INDEX lnp_cache_dst_database_id_idx ON class4.lnp_cache USING btre
 --
 
 CREATE INDEX lnp_cache_expires_at_idx ON class4.lnp_cache USING btree (expires_at);
+
+
+--
+-- Name: numberlists_external_id_external_type_key_uniq; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX numberlists_external_id_external_type_key_uniq ON class4.numberlists USING btree (external_id, external_type);
+
+
+--
+-- Name: numberlists_external_id_key_uniq; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX numberlists_external_id_key_uniq ON class4.numberlists USING btree (external_id) WHERE (external_type IS NULL);
 
 
 --
@@ -31119,6 +31126,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230227110659'),
 ('20230310102534'),
 ('20230318105458'),
-('20230330131911');
+('20230330131911'),
+('20230407140050');
 
 
