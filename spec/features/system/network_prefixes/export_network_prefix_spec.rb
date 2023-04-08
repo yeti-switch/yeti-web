@@ -3,7 +3,6 @@
 RSpec.describe 'Export Network Prefixes', type: :feature do
   include_context :login_as_admin
 
-
   let!(:item) do
     create(:network_prefix)
   end
@@ -23,7 +22,7 @@ RSpec.describe 'Export Network Prefixes', type: :feature do
                            ['Number max length', item.number_max_length.to_s],
                            ['Country name', item.country.name],
                            ['Network name', item.network.name],
-                           ['Uuid', item.uuid ]
+                           ['Uuid', item.uuid]
                          ]
                        )
   end

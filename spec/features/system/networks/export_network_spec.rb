@@ -3,7 +3,6 @@
 RSpec.describe 'Export Networks', type: :feature do
   include_context :login_as_admin
 
-
   let!(:item) do
     create(:network)
   end
@@ -20,7 +19,7 @@ RSpec.describe 'Export Networks', type: :feature do
                            ['Id', item.id.to_s],
                            ['Name', item.name],
                            ['Network type name', item.network_type.name],
-                           ['Uuid', item.uuid ]
+                           ['Uuid', item.uuid]
                          ]
                        )
   end
