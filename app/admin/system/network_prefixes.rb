@@ -5,6 +5,12 @@ ActiveAdmin.register System::NetworkPrefix do
   menu parent: 'System', label: 'Network Prefixes', priority: 131
   config.batch_actions = false
 
+  acts_as_export :id,
+                 :prefix, :number_min_length, :number_max_length,
+                 [:country_name, proc { |row| row.country.try(:name) }],
+                 [:network_name, proc { |row| row.network.try(:name) }],
+                 :uuid
+
   permit_params :prefix, :country_id, :network_id, :number_min_length, :number_max_length
 
   controller do
@@ -29,10 +35,10 @@ ActiveAdmin.register System::NetworkPrefix do
   index do
     id_column
     column :prefix
-    column :country, sortable: 'countries.name'
-    column :network, sortable: 'networks.name'
     column :number_min_length
     column :number_max_length
+    column :country, sortable: 'countries.name'
+    column :network, sortable: 'networks.name'
     column :uuid
   end
 
@@ -40,10 +46,10 @@ ActiveAdmin.register System::NetworkPrefix do
     attributes_table do
       row :id
       row :prefix
-      row :country
-      row :network
       row :number_min_length
       row :number_max_length
+      row :country
+      row :network
       row :uuid
     end
   end
@@ -52,10 +58,10 @@ ActiveAdmin.register System::NetworkPrefix do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :prefix
-      f.input :country, input_html: { class: 'chosen' }
-      f.input :network, input_html: { class: 'chosen' }
       f.input :number_min_length
       f.input :number_max_length
+      f.input :country, input_html: { class: 'chosen' }
+      f.input :network, input_html: { class: 'chosen' }
     end
     f.actions
   end

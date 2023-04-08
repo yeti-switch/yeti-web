@@ -3,10 +3,17 @@
 ActiveAdmin.register System::Network do
   menu parent: 'System', label: 'Networks', priority: 130
   search_support!
-  includes :network_type
   actions :all
   config.batch_actions = false
+
+  acts_as_export :id,
+                 :name,
+                 [:network_type_name, proc { |row| row.network_type.try(:name) }],
+                 :uuid
+
   permit_params :name, :type_id
+
+  includes :network_type
 
   filter :id
   filter :uuid_equals, label: 'UUID'

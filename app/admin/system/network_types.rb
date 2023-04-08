@@ -4,6 +4,11 @@ ActiveAdmin.register System::NetworkType do
   actions :all
   menu parent: 'System', label: 'Network Types', priority: 132
   config.batch_actions = false
+
+  acts_as_export :id,
+                 :name,
+                 :uuid
+
   permit_params :name
 
   filter :id
