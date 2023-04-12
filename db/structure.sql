@@ -17857,6 +17857,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
         v_cnam_database class4.cnam_databases%rowtype;
+        v_rate_groups integer[];
+        v_routing_groups integer[];
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -18580,13 +18582,14 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         END IF;
 
+        SELECT INTO v_rate_groups array_agg(rate_group_id) from class4.rate_plan_groups where rateplan_id = v_customer_auth_normalized.rateplan_id;
+
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
         FROM class4.destinations d
-        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
           AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
-          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND d.rate_group_id = ANY(v_rate_groups)
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
@@ -18639,6 +18642,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
+
+        SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
+
         CASE v_rp.sorting_id
           WHEN'1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
@@ -18664,11 +18670,10 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -18714,11 +18719,10 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -18764,11 +18768,10 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -18814,11 +18817,10 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -18864,11 +18866,10 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -18923,7 +18924,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                   left join class4.routing_plan_static_routes rpsr
                     ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
                       and rpsr.vendor_id=t_dp.vendor_id
@@ -18931,7 +18931,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -18990,7 +18990,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                   join class4.routing_plan_static_routes rpsr
                     ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
                       and rpsr.vendor_id=t_dp.vendor_id
@@ -18998,7 +18997,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -19105,6 +19104,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
         v_cnam_database class4.cnam_databases%rowtype;
+        v_rate_groups integer[];
+        v_routing_groups integer[];
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -19828,13 +19829,14 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         END IF;
 
+        SELECT INTO v_rate_groups array_agg(rate_group_id) from class4.rate_plan_groups where rateplan_id = v_customer_auth_normalized.rateplan_id;
+
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
         FROM class4.destinations d
-        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
           AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
-          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND d.rate_group_id = ANY(v_rate_groups)
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
@@ -19887,6 +19889,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
+
+        SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
+
         CASE v_rp.sorting_id
           WHEN'1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
@@ -19912,11 +19917,10 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -19962,11 +19966,10 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -20012,11 +20015,10 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -20062,11 +20064,10 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -20112,11 +20113,10 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -20171,7 +20171,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                   left join class4.routing_plan_static_routes rpsr
                     ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
                       and rpsr.vendor_id=t_dp.vendor_id
@@ -20179,7 +20178,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -20238,7 +20237,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                   join class4.routing_plan_static_routes rpsr
                     ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
                       and rpsr.vendor_id=t_dp.vendor_id
@@ -20246,7 +20244,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -20350,6 +20348,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
         v_cnam_database class4.cnam_databases%rowtype;
+        v_rate_groups integer[];
+        v_routing_groups integer[];
       BEGIN
         
 
@@ -20955,13 +20955,14 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         END IF;
 
+        SELECT INTO v_rate_groups array_agg(rate_group_id) from class4.rate_plan_groups where rateplan_id = v_customer_auth_normalized.rateplan_id;
+
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
         FROM class4.destinations d
-        JOIN class4.rate_plan_groups rpg ON d.rate_group_id=rpg.rate_group_id
         WHERE
           prefix_range(prefix)@>prefix_range(v_routing_key)
           AND length(v_routing_key) between d.dst_number_min_length and d.dst_number_max_length
-          AND rpg.rateplan_id=v_customer_auth_normalized.rateplan_id
+          AND d.rate_group_id = ANY(v_rate_groups)
           AND enabled
           AND valid_from <= v_now
           AND valid_till >= v_now
@@ -21005,6 +21006,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                     FIND dialpeers logic. Queries must use prefix index for best performance
         */
         
+
+        SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
+
         CASE v_rp.sorting_id
           WHEN'1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
@@ -21030,11 +21034,10 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -21080,11 +21083,10 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -21130,11 +21132,10 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -21180,11 +21181,10 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -21230,11 +21230,10 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -21289,7 +21288,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                   left join class4.routing_plan_static_routes rpsr
                     ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
                       and rpsr.vendor_id=t_dp.vendor_id
@@ -21297,7 +21295,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -21356,7 +21354,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 FROM class4.dialpeers t_dp
                   JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
                   join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
-                  JOIN class4.routing_plan_groups t_rpg ON t_dp.routing_group_id=t_rpg.routing_group_id
                   join class4.routing_plan_static_routes rpsr
                     ON rpsr.routing_plan_id=v_customer_auth_normalized.routing_plan_id
                       and rpsr.vendor_id=t_dp.vendor_id
@@ -21364,7 +21361,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
-                  AND t_rpg.routing_plan_id=v_customer_auth_normalized.routing_plan_id
+                  AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
                   AND t_vendor_account.balance<t_vendor_account.max_balance
@@ -30995,8 +30992,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31127,6 +31123,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230310102534'),
 ('20230318105458'),
 ('20230330131911'),
-('20230407140050');
+('20230407140050'),
+('20230412134246');
 
 

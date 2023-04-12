@@ -473,11 +473,13 @@ RSpec.describe '#routing logic' do
         create(:routing_plan,
                use_lnp: false,
                routing_groups: [routing_group],
+               sorting_id: routing_plan_sorting_id,
                validate_dst_number_format: validate_dst_number_format,
                validate_dst_number_network: validate_dst_number_network,
                validate_src_number_format: validate_src_number_format,
                validate_src_number_network: validate_src_number_network)
       }
+      let!( :routing_plan_sorting_id) { 1 }
       let!(:validate_dst_number_format) { false }
       let!(:validate_dst_number_network) { false }
       let!(:validate_src_number_format) { false }
@@ -494,6 +496,7 @@ RSpec.describe '#routing logic' do
       }
 
       context 'Authorized, customer auth CPS Limit' do
+
         let!(:customer_auth_cps_limit) { 10 }
 
         # calling routing sp 100 times to consume cps limit
@@ -722,6 +725,107 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
             expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
           end
+        end
+      end
+
+
+      context 'Authorized, sorting = 1' do
+        let( :routing_plan_sorting_id) { 1 }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+      context 'Authorized, sorting = 2' do
+        let( :routing_plan_sorting_id) { 2 }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+      context 'Authorized, sorting = 3' do
+        let( :routing_plan_sorting_id) { 3 }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+      context 'Authorized, sorting = 4' do
+        let( :routing_plan_sorting_id) { 4 }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+
+
+      context 'Authorized, sorting = 5' do
+        # routing test require passing vendor id in number
+        let(:uri_name) { "#{vendor.id}*uri-name" }
+
+        let( :routing_plan_sorting_id) { 5 }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+      context 'Authorized, sorting = 6' do
+        let( :routing_plan_sorting_id) { 6 }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+
+
+      context 'Authorized, sorting = 7' do
+        let( :routing_plan_sorting_id) { Routing::RoutingPlan::SORTING_STATIC_ONLY_NOCONTROL }
+        #this sorting requires additional routing_plan_static_route object
+        let!(:routing_plan_static_route) { create(:routing_plan_static_route, routing_plan: routing_plan, vendor: vendor) }
+        it 'response OK' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
+          expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+          expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
         end
       end
 
