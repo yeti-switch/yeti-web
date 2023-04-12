@@ -479,7 +479,7 @@ RSpec.describe '#routing logic' do
                validate_src_number_format: validate_src_number_format,
                validate_src_number_network: validate_src_number_network)
       }
-      let!( :routing_plan_sorting_id) { 1 }
+      let!(:routing_plan_sorting_id) { 1 }
       let!(:validate_dst_number_format) { false }
       let!(:validate_dst_number_network) { false }
       let!(:validate_src_number_format) { false }
@@ -496,7 +496,6 @@ RSpec.describe '#routing logic' do
       }
 
       context 'Authorized, customer auth CPS Limit' do
-
         let!(:customer_auth_cps_limit) { 10 }
 
         # calling routing sp 100 times to consume cps limit
@@ -728,9 +727,8 @@ RSpec.describe '#routing logic' do
         end
       end
 
-
       context 'Authorized, sorting = 1' do
-        let( :routing_plan_sorting_id) { 1 }
+        let(:routing_plan_sorting_id) { 1 }
         it 'response OK' do
           expect(subject.size).to eq(2)
           expect(subject.first[:customer_auth_id]).to be
@@ -743,7 +741,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, sorting = 2' do
-        let( :routing_plan_sorting_id) { 2 }
+        let(:routing_plan_sorting_id) { 2 }
         it 'response OK' do
           expect(subject.size).to eq(2)
           expect(subject.first[:customer_auth_id]).to be
@@ -756,7 +754,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, sorting = 3' do
-        let( :routing_plan_sorting_id) { 3 }
+        let(:routing_plan_sorting_id) { 3 }
         it 'response OK' do
           expect(subject.size).to eq(2)
           expect(subject.first[:customer_auth_id]).to be
@@ -769,7 +767,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, sorting = 4' do
-        let( :routing_plan_sorting_id) { 4 }
+        let(:routing_plan_sorting_id) { 4 }
         it 'response OK' do
           expect(subject.size).to eq(2)
           expect(subject.first[:customer_auth_id]).to be
@@ -781,13 +779,11 @@ RSpec.describe '#routing logic' do
         end
       end
 
-
-
       context 'Authorized, sorting = 5' do
         # routing test require passing vendor id in number
         let(:uri_name) { "#{vendor.id}*uri-name" }
 
-        let( :routing_plan_sorting_id) { 5 }
+        let(:routing_plan_sorting_id) { 5 }
         it 'response OK' do
           expect(subject.size).to eq(2)
           expect(subject.first[:customer_auth_id]).to be
@@ -800,7 +796,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, sorting = 6' do
-        let( :routing_plan_sorting_id) { 6 }
+        let(:routing_plan_sorting_id) { 6 }
         it 'response OK' do
           expect(subject.size).to eq(2)
           expect(subject.first[:customer_auth_id]).to be
@@ -812,11 +808,9 @@ RSpec.describe '#routing logic' do
         end
       end
 
-
-
       context 'Authorized, sorting = 7' do
-        let( :routing_plan_sorting_id) { Routing::RoutingPlan::SORTING_STATIC_ONLY_NOCONTROL }
-        #this sorting requires additional routing_plan_static_route object
+        let(:routing_plan_sorting_id) { Routing::RoutingPlan::SORTING_STATIC_ONLY_NOCONTROL }
+        # this sorting requires additional routing_plan_static_route object
         let!(:routing_plan_static_route) { create(:routing_plan_static_route, routing_plan: routing_plan, vendor: vendor) }
         it 'response OK' do
           expect(subject.size).to eq(2)
