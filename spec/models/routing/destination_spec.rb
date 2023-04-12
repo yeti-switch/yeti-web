@@ -25,8 +25,8 @@
 #  short_calls_limit      :float            default(0.0), not null
 #  use_dp_intervals       :boolean          default(FALSE), not null
 #  uuid                   :uuid             not null
-#  valid_from             :datetime         not null
-#  valid_till             :datetime         not null
+#  valid_from             :timestamptz      not null
+#  valid_till             :timestamptz      not null
 #  external_id            :bigint(8)
 #  network_prefix_id      :integer(4)
 #  profit_control_mode_id :integer(2)

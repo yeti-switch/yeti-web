@@ -6,7 +6,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  count      :integer(4)       not null
-#  created_at :datetime
+#  created_at :timestamptz
 #  node_id    :integer(4)       not null
 #
 

@@ -10,10 +10,10 @@
 #  calls_count              :bigint(8)
 #  calls_duration           :bigint(8)
 #  dst_prefix               :string
-#  first_call_at            :datetime
-#  first_successful_call_at :datetime
-#  last_call_at             :datetime
-#  last_successful_call_at  :datetime
+#  first_call_at            :timestamptz
+#  first_successful_call_at :timestamptz
+#  last_call_at             :timestamptz
+#  last_successful_call_at  :timestamptz
 #  rate                     :decimal(, )
 #  successful_calls_count   :bigint(8)
 #  country_id               :integer(4)

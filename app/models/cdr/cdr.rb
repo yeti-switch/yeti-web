@@ -86,10 +86,10 @@
 #  src_prefix_out                  :string
 #  src_prefix_routing              :string
 #  success                         :boolean
-#  time_connect                    :datetime
-#  time_end                        :datetime
+#  time_connect                    :timestamptz
+#  time_end                        :timestamptz
 #  time_limit                      :string
-#  time_start                      :datetime         not null
+#  time_start                      :timestamptz      not null
 #  to_domain                       :string
 #  uuid                            :uuid
 #  vendor_duration                 :integer(4)

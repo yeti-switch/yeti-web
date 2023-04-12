@@ -7,7 +7,7 @@
 #  id          :integer(2)       not null, primary key
 #  certificate :string           not null
 #  name        :string           not null
-#  updated_at  :datetime
+#  updated_at  :timestamptz
 #
 class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_trusted_certificates'

@@ -9,7 +9,7 @@
 #  early_media_present :boolean
 #  pdd                 :float
 #  success             :boolean          not null
-#  time_start          :datetime         not null
+#  time_start          :timestamptz      not null
 #  destination_id      :bigint(8)
 #  dialpeer_id         :bigint(8)
 #  gateway_id          :integer(4)

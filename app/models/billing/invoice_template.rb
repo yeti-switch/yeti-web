@@ -9,7 +9,7 @@
 #  filename   :string           not null
 #  name       :string           not null
 #  sha1       :string
-#  created_at :datetime
+#  created_at :timestamptz
 #
 # Indexes
 #

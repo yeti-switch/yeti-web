@@ -9,7 +9,7 @@
 #  notes         :string
 #  private_notes :string
 #  uuid          :uuid             not null
-#  created_at    :datetime         not null
+#  created_at    :timestamptz      not null
 #  account_id    :integer(4)       not null
 #
 # Indexes

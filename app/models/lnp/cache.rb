@@ -7,11 +7,11 @@
 #  id          :integer(4)       not null, primary key
 #  data        :string
 #  dst         :string           not null
-#  expires_at  :datetime         not null
+#  expires_at  :timestamptz      not null
 #  lrn         :string           not null
 #  tag         :string
-#  created_at  :datetime
-#  updated_at  :datetime
+#  created_at  :timestamptz
+#  updated_at  :timestamptz
 #  database_id :integer(2)
 #
 # Indexes

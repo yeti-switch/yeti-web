@@ -12,7 +12,7 @@
 #  req_dst_rewrite_result   :string
 #  req_dst_rewrite_rule     :string
 #  rewrite_call_destination :boolean          default(FALSE), not null
-#  created_at               :datetime
+#  created_at               :timestamptz
 #  database_id              :integer(2)       not null
 #  routing_plan_id          :integer(4)       not null
 #

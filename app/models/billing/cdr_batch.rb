@@ -5,7 +5,7 @@
 # Table name: billing.cdr_batches
 #
 #  id         :bigint(8)        not null, primary key
-#  created_at :datetime         not null
+#  created_at :timestamptz      not null
 #
 
 class Billing::CdrBatch < ApplicationRecord

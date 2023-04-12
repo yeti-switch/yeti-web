@@ -6,12 +6,12 @@
 #
 #  id          :integer(4)       not null, primary key
 #  completed   :boolean          default(FALSE), not null
-#  date_end    :datetime
-#  date_start  :datetime
+#  date_end    :timestamptz
+#  date_start  :timestamptz
 #  filter      :string
 #  group_by    :string           is an Array
 #  send_to     :integer(4)       is an Array
-#  created_at  :datetime
+#  created_at  :timestamptz
 #  customer_id :integer(4)
 #
 # Indexes

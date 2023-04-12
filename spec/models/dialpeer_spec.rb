@@ -31,9 +31,9 @@
 #  src_name_rewrite_rule     :string
 #  src_rewrite_result        :string
 #  src_rewrite_rule          :string
-#  valid_from                :datetime         not null
-#  valid_till                :datetime         not null
-#  created_at                :datetime         not null
+#  valid_from                :timestamptz      not null
+#  valid_till                :timestamptz      not null
+#  created_at                :timestamptz      not null
 #  account_id                :integer(4)       not null
 #  current_rate_id           :bigint(8)
 #  external_id               :bigint(8)

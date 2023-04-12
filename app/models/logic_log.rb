@@ -8,7 +8,7 @@
 #  level     :integer(4)       not null
 #  msg       :text
 #  source    :string           not null
-#  timestamp :datetime         not null
+#  timestamp :timestamptz      not null
 #  txid      :bigint(8)        not null
 #
 

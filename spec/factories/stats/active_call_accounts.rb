@@ -7,7 +7,7 @@
 #  id               :bigint(8)        not null, primary key
 #  originated_count :integer(4)       not null
 #  terminated_count :integer(4)       not null
-#  created_at       :datetime
+#  created_at       :timestamptz
 #  account_id       :integer(4)       not null
 #
 # Indexes

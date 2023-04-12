@@ -10,7 +10,7 @@
 #  name               :string           not null
 #  request_lua        :string
 #  response_lua       :string
-#  created_at         :datetime
+#  created_at         :timestamptz
 #  database_id        :integer(2)       not null
 #
 # Indexes

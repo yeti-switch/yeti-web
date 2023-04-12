@@ -6,15 +6,15 @@
 #
 #  id                     :integer(4)       not null, primary key
 #  allowed_ips            :inet             is an Array
-#  current_sign_in_at     :datetime
+#  current_sign_in_at     :timestamptz
 #  current_sign_in_ip     :string(255)
 #  enabled                :boolean          default(TRUE)
 #  encrypted_password     :string(255)      default(""), not null
-#  last_sign_in_at        :datetime
+#  last_sign_in_at        :timestamptz
 #  last_sign_in_ip        :string(255)
 #  per_page               :json             not null
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
+#  remember_created_at    :timestamptz
+#  reset_password_sent_at :timestamptz
 #  reset_password_token   :string(255)
 #  roles                  :string           not null, is an Array
 #  saved_filters          :json             not null
@@ -22,8 +22,8 @@
 #  stateful_filters       :boolean          default(FALSE), not null
 #  username               :string           not null
 #  visible_columns        :json             not null
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :timestamptz      not null
+#  updated_at             :timestamptz      not null
 #
 # Indexes
 #

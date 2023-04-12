@@ -9,9 +9,9 @@
 #  mail_from          :string           not null
 #  mail_to            :string           not null
 #  msg                :string
-#  sent_at            :datetime
+#  sent_at            :timestamptz
 #  subject            :string           not null
-#  created_at         :datetime
+#  created_at         :timestamptz
 #  attachment_id      :integer(4)       is an Array
 #  batch_id           :bigint(8)
 #  contact_id         :integer(4)

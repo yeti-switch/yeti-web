@@ -7,10 +7,10 @@
 #  id          :integer(4)       not null, primary key
 #  filter      :string
 #  group_by    :string           is an Array
-#  last_run_at :datetime
-#  next_run_at :datetime
+#  last_run_at :timestamptz
+#  next_run_at :timestamptz
 #  send_to     :integer(4)       is an Array
-#  created_at  :datetime
+#  created_at  :timestamptz
 #  customer_id :integer(4)
 #  period_id   :integer(4)       not null
 #

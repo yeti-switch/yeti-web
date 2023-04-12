@@ -18,8 +18,8 @@
 #  ruri_username               :string           not null
 #  sip_interface_name          :string
 #  to_uri                      :string
-#  created_at                  :datetime         not null
-#  updated_at                  :datetime         not null
+#  created_at                  :timestamptz      not null
+#  updated_at                  :timestamptz      not null
 #  external_id                 :bigint(8)
 #  node_id                     :integer(2)
 #  pop_id                      :integer(2)

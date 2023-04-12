@@ -8,7 +8,7 @@
 #  cache_ttl                                                                            :integer(4)       default(10800), not null
 #  database_type(One of Lnp::DatabaseThinq, Lnp::DatabaseSipRedirect, Lnp::DatabaseCsv) :string
 #  name                                                                                 :string           not null
-#  created_at                                                                           :datetime
+#  created_at                                                                           :timestamptz
 #  database_id                                                                          :integer(2)       not null
 #
 # Indexes

@@ -7,12 +7,12 @@
 #  id                   :bigint(8)        not null, primary key
 #  avg_originated_count :integer(4)       not null
 #  avg_terminated_count :integer(4)       not null
-#  calls_time           :datetime         not null
+#  calls_time           :timestamptz      not null
 #  max_originated_count :integer(4)       not null
 #  max_terminated_count :integer(4)       not null
 #  min_originated_count :integer(4)       not null
 #  min_terminated_count :integer(4)       not null
-#  created_at           :datetime         not null
+#  created_at           :timestamptz      not null
 #  account_id           :integer(4)       not null
 #
 
