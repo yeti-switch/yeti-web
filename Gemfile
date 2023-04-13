@@ -40,7 +40,9 @@ gem 'jrpc', github: 'didww/jrpc'
 gem 'active_admin_sidebar', '1.1.0'
 
 # XLS generation
-gem 'excelinator', github: 'livingsocial/excelinator'
+# can be switched back to the original repo after ruby 3 fix PR merged
+# https://github.com/livingsocial/excelinator/pull/19
+gem 'excelinator', github: 'senid231/excelinator', branch: 'ruby3-fix'
 
 # REST API
 gem 'jsonapi-resources', '~> 0.9.12'
