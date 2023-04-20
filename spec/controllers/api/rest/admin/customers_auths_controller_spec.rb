@@ -145,8 +145,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     let!(:customer) { create(:contractor, customer: true) }
     let!(:rateplan) { create(:rateplan).reload }
     let!(:routing_plan) { create(:routing_plan) }
-    let!(:gateway) { create(:gateway) }
-    let!(:account) { create(:account, contractor: create(:contractor, customer: true)).reload }
+    let!(:gateway) { create(:gateway, contractor: customer) }
+    let!(:account) { create(:account, contractor: customer).reload }
     let(:relationships) do
       {
         'diversion-policy': wrap_relationship(:'diversion-policies', 1),

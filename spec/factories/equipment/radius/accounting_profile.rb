@@ -10,10 +10,12 @@ FactoryBot.define do
     attempts { 2 }
 
     trait :filled do
-      gateways { build_list :gateway, 2 }
-      stop_avps { build_list :accounting_profile_stop_attribute, 2 }
-      start_avps { build_list :accounting_profile_start_attribute, 2 }
-      customers_auths { build_list :customers_auth, 2 }
+      after(:create) do |record|
+        FactoryBot.create_list(:gateway, 2, radius_accounting_profile: record)
+        FactoryBot.create_list(:accounting_profile_stop_attribute, 2, profile: record)
+        FactoryBot.create_list(:accounting_profile_start_attribute, 2, profile: record)
+        FactoryBot.create_list(:customers_auth, 2, radius_accounting_profile: record)
+      end
     end
   end
 end

@@ -52,17 +52,19 @@ RSpec.resource 'Customer Auths' do
     jsonapi_attributes(required_params, optional_params)
     jsonapi_relationships(required_relationships, optional_relationships)
 
+    let!(:contractor) { create(:contractor, customer: true) }
+
     let(:name) { 'name' }
     let(:enabled) { true }
     let(:'reject-calls') { false }
     let(:ip) { '0.0.0.0' }
     let(:'dump-level-id') { CustomersAuth::DUMP_LEVEL_CAPTURE_ALL }
     let(:'diversion-policy') { wrap_relationship(:'diversion-policies', 1) }
-    let(:customer) { wrap_relationship(:contractors, create(:contractor, customer: true).id) }
+    let(:customer) { wrap_relationship(:contractors, contractor.id) }
     let(:rateplan) { wrap_relationship(:rateplans, create(:rateplan).id) }
     let(:'routing-plan') { wrap_relationship(:'routing-plans', create(:routing_plan).id) }
-    let(:gateway) { wrap_relationship(:gateways, create(:gateway).id) }
-    let(:account) { wrap_relationship(:accounts, create(:account).id) }
+    let(:gateway) { wrap_relationship(:gateways, create(:gateway, contractor: contractor).id) }
+    let(:account) { wrap_relationship(:accounts, create(:account, contractor: contractor).id) }
     let(:'external-id') { 123 }
     let(:'external-type') { 'test' }
 

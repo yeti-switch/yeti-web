@@ -177,6 +177,8 @@ class CustomersAuth < ApplicationRecord
             if: proc { external_id && !external_type }
 
   validates :customer, :rateplan, :routing_plan, :gateway, :account, :diversion_policy, presence: true
+  validate :validate_account
+  validate :validate_gateway
 
   validates :src_name_field, :src_number_field, :dst_number_field, presence: true
 
@@ -269,6 +271,18 @@ class CustomersAuth < ApplicationRecord
   end
 
   private
+
+  def validate_account
+    return if customer.nil? || account.nil?
+
+    errors.add(:account, 'belongs to different customer') if account.contractor_id != customer_id
+  end
+
+  def validate_gateway
+    return if customer.nil? || gateway.nil?
+
+    errors.add(:gateway, 'belongs to different customer') if !gateway.is_shared && gateway.contractor_id != customer_id
+  end
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[

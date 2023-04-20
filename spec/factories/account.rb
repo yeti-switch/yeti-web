@@ -39,13 +39,8 @@ FactoryBot.define do
       association :customer_invoice_template, factory: :invoice_template
       customer_invoice_period { Billing::InvoicePeriod.find(Billing::InvoicePeriod::DAILY_ID) }
       vendor_invoice_period { Billing::InvoicePeriod.find(Billing::InvoicePeriod::WEEKLY_ID) }
-      contractor { build(:contractor, vendor: true) }
-      timezone { System::Timezone.take || build(:timezone) }
-      payments { build_list(:payment, 2) }
-      # invoices { build_list(:invoice, 2, :manual, :pending) }
-      api_access { build_list(:api_access, 2) }
-      customers_auths { build_list(:customers_auth, 2) }
-      dialpeers { build_list(:dialpeer, 2) }
+      contractor { create(:contractor, vendor: true) }
+      timezone { System::Timezone.take || create(:timezone) }
       balance { 100 }
       max_balance { 1_000 }
       min_balance { 0 }
@@ -62,6 +57,14 @@ FactoryBot.define do
       vendor_invoice_ref_template { 'ven_$id' }
       send_invoices_to { [FactoryBot.create(:contact, contractor: contractor).id] }
       vat { 1.23 }
+
+      after(:create) do |record|
+        # create_list(:invoice, 2, :manual, :pending, account: record)
+        create_list(:payment, 2, account: record)
+        create_list(:api_access, 2, customer: record.contractor, account_ids: [record.id])
+        create_list(:customers_auth, 2, account: record)
+        create_list(:dialpeer, 2, vendor: record.contractor, account: record) if record.contractor.vendor
+      end
     end
 
     trait :vendor_weekly do

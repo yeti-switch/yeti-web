@@ -294,6 +294,16 @@ RSpec.describe CustomersAuth, type: :model do
         include_examples :changes_records_qty_of, described_class, by: 0
       end
     end
+
+    context 'when account belongs to another customer' do
+      let!(:another_customer) { create(:customer) }
+      let(:account) { create(:account, contractor: another_customer) }
+
+      include_examples :does_not_create_record, errors: {
+        account: 'belongs to different customer'
+      }
+      include_examples :changes_records_qty_of, described_class, by: 0
+    end
   end
 
   describe '#update' do

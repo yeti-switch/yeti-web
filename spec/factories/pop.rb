@@ -6,9 +6,11 @@ FactoryBot.define do
     sequence(:name) { |n| "Point of presence #{n}" }
 
     trait :filled do
-      nodes { build_list :node, 2 }
-      customer_auths { build_list :customers_auth, 2 }
-      gateways { build_list :gateway, 2 }
+      after(:create) do |record|
+        create_list(:node, 2, pop: record)
+        create_list(:customers_auth, 2, pop: record)
+        create_list(:gateway, 2, pop: record)
+      end
     end
   end
 end

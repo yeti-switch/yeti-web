@@ -17,9 +17,12 @@ FactoryBot.define do
     end
 
     trait :filled do
-      customers_auths { build_list :customers_auth, 2 }
-      rate_groups { build_list :rate_group, 2 }
       with_uuid
+
+      after(:create) do |record|
+        create_list(:customers_auth, 2, rateplan: record)
+        create_list(:rate_group, 2, rateplans: [record])
+      end
     end
   end
 end

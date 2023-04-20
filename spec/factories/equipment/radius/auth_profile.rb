@@ -10,7 +10,9 @@ FactoryBot.define do
     attempts { 2 }
 
     trait :filled do
-      customers_auths { build_list :customers_auth, 2 }
+      after(:create) do |record|
+        create_list(:customers_auth, 2, radius_auth_profile: record)
+      end
     end
   end
 end

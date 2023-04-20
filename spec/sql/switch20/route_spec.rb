@@ -278,14 +278,19 @@ RSpec.describe '#routing logic' do
         FactoryBot.create(:customers_auth,
                           ip: '3.3.3.3',
                           check_account_balance: false,
-                          gateway_id: customer_gateway.id,
+                          customer: customer,
+                          gateway: customer_gateway,
                           dump_level_id: dump_level)
       end
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
+      let!(:customer) do
+        create(:contractor, customer: true)
+      end
       let!(:customer_gateway) {
         create(:gateway,
+               contractor: customer,
                orig_disconnect_policy_id: dp.id)
       }
       let(:dp) {
@@ -390,9 +395,9 @@ RSpec.describe '#routing logic' do
         FactoryBot.create(:customers_auth,
                           ip: '3.3.3.3',
                           check_account_balance: false,
-                          customer_id: customer.id,
-                          account_id: customer_account.id,
-                          gateway_id: customer_gateway.id,
+                          customer: customer,
+                          account: customer_account,
+                          gateway: customer_gateway,
                           rateplan_id: rateplan.id,
                           routing_plan_id: routing_plan.id,
                           send_billing_information: send_billing_information,
@@ -404,6 +409,7 @@ RSpec.describe '#routing logic' do
                           dst_numberlist_id: customer_auth_dst_numberlist_id,
                           dump_level_id: customer_auth_dump_level,
                           src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion)
+        puts CustomersAuth.last.attributes
       end
 
       let!(:send_billing_information) { false }
@@ -448,10 +454,10 @@ RSpec.describe '#routing logic' do
       let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_NO_USE }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
-      let!(:customer_account) { create(:account, contractor_id: customer.id, min_balance: -100_500) }
+      let!(:customer_account) { create(:account, contractor: customer, min_balance: -100_500) }
       let!(:customer_gateway) {
         create(:gateway,
-               contractor_id: customer.id,
+               contractor: customer,
                enabled: true,
                allow_origination: true,
                orig_append_headers_reply: orig_append_headers_reply,

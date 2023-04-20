@@ -6,13 +6,6 @@ FactoryBot.define do
     diversion_policy_id { 1 }
     dump_level_id { 1 }
 
-    association :customer, factory: :contractor, customer: true
-    association :rateplan
-    association :routing_plan
-    association :gateway
-    association :account
-    association :lua_script
-
     # ip { ['127.0.0.0/8'] } # default
     src_number_field_id { 1 }
     src_rewrite_rule { nil }
@@ -35,8 +28,16 @@ FactoryBot.define do
     allow_receive_rate_limit { false }
     send_billing_information { false }
 
+    association :rateplan
+    association :routing_plan
+    association :lua_script
+
+    transient do
+      gateway_traits { [] }
+    end
+
     trait :with_incoming_auth do
-      association :gateway, factory: %i[gateway with_incoming_auth]
+      gateway_traits { %i[with_incoming_auth] }
       require_incoming_auth { true }
     end
 
@@ -52,6 +53,15 @@ FactoryBot.define do
 
     trait :with_external_id do
       sequence(:external_id)
+    end
+
+    after(:build) do |record, ev|
+      record.customer ||= record.account.contractor if record.account
+      record.customer ||= record.gateway.contractor if record.gateway
+      record.customer ||= FactoryBot.create(:contractor, customer: true)
+
+      record.account ||= FactoryBot.create(:account, contractor: record.customer)
+      record.gateway ||= FactoryBot.create(:gateway, *ev.gateway_traits, contractor: record.customer)
     end
   end
 end
