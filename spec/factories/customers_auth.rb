@@ -49,5 +49,9 @@ FactoryBot.define do
       with_reject
       tag_action { Routing::TagAction.take || FactoryBot.create(:tag_action) }
     end
+
+    trait :with_external_id do
+      sequence(:external_id)
+    end
   end
 end

@@ -118,6 +118,7 @@ ActiveAdmin.register CustomersAuth do
     column :transport_protocol
     column :ip
     column :external_id
+    column :external_type
     column :pop
     column :src_prefix
     column :src_number_length do |c|
@@ -191,7 +192,8 @@ ActiveAdmin.register CustomersAuth do
   end
 
   filter :id
-  filter :external_id
+  filter :external_id, label: 'External ID'
+  filter :external_type
   filter :name
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
@@ -351,6 +353,7 @@ ActiveAdmin.register CustomersAuth do
         attributes_table do
           row :name
           row :external_id
+          row :external_type
           row :enabled
           row :reject_calls
           row :customer

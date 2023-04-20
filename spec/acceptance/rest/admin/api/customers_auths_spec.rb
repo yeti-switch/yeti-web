@@ -19,6 +19,7 @@ RSpec.resource 'Customer Auths' do
     enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
     dst-number-radius-rewrite-rule dst-number-radius-rewrite-result from-domain to-domain
     tag-action-value check-account-balance require-incoming-auth dump-level-id
+    external-id external-type
   ]
 
   required_relationships = %i[customer rateplan routing-plan gateway account diversion-policy]
@@ -62,6 +63,8 @@ RSpec.resource 'Customer Auths' do
     let(:'routing-plan') { wrap_relationship(:'routing-plans', create(:routing_plan).id) }
     let(:gateway) { wrap_relationship(:gateways, create(:gateway).id) }
     let(:account) { wrap_relationship(:accounts, create(:account).id) }
+    let(:'external-id') { 123 }
+    let(:'external-type') { 'test' }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

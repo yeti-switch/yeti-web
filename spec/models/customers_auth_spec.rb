@@ -20,6 +20,7 @@
 #  dst_rewrite_rule                 :string
 #  enable_audio_recording           :boolean          default(FALSE), not null
 #  enabled                          :boolean          default(TRUE), not null
+#  external_type                    :string
 #  from_domain                      :string           default([]), is an Array
 #  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  name                             :string           not null
@@ -63,10 +64,11 @@
 #
 # Indexes
 #
-#  customers_auth_account_id_idx   (account_id)
-#  customers_auth_customer_id_idx  (customer_id)
-#  customers_auth_external_id_key  (external_id) UNIQUE
-#  customers_auth_name_key         (name) UNIQUE
+#  customers_auth_account_id_idx                      (account_id)
+#  customers_auth_customer_id_idx                     (customer_id)
+#  customers_auth_external_id_external_type_key_uniq  (external_id,external_type) UNIQUE
+#  customers_auth_external_id_key_uniq                (external_id) UNIQUE WHERE (external_type IS NULL)
+#  customers_auth_name_key                            (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -185,10 +187,113 @@ RSpec.describe CustomersAuth, type: :model do
     let!(:routing_plan) { create(:routing_plan) }
     let!(:gateway) { create(:gateway, contractor: customer) }
     let!(:account) { create(:account, contractor: customer) }
+    let(:default_attrs) do
+      {
+        external_id: nil,
+        external_type: nil
+      }
+    end
 
-    include_examples :creates_record
+    include_examples :creates_record do
+      let(:expected_record_attrs) { default_attrs.merge(create_params) }
+    end
     include_examples :changes_records_qty_of, described_class, by: 1
     include_examples :increments_customers_auth_state
+
+    context 'with external_type="" and external_id=123' do
+      let(:create_params) do
+        super().merge external_id: 123,
+                      external_type: ''
+      end
+
+      include_examples :creates_record do
+        let(:expected_record_attrs) { default_attrs.merge(create_params).merge(external_type: nil) }
+      end
+      include_examples :changes_records_qty_of, described_class, by: 1
+      include_examples :increments_customers_auth_state
+    end
+
+    context 'with external_id=123' do
+      let(:create_params) do
+        super().merge external_id: 123
+      end
+
+      include_examples :creates_record do
+        let(:expected_record_attrs) { default_attrs.merge(create_params) }
+      end
+      include_examples :changes_records_qty_of, described_class, by: 1
+      include_examples :increments_customers_auth_state
+
+      context 'when customers_auth with external_id=123,external_type=null exists' do
+        before do
+          create(:customers_auth, external_id: 123)
+        end
+
+        include_examples :does_not_create_record, errors: {
+          external_id: 'has already been taken'
+        }
+        include_examples :changes_records_qty_of, described_class, by: 0
+      end
+
+      context 'when customers_auth with external_id=123,external_type="foo" exists' do
+        before do
+          create(:customers_auth, external_id: 123, external_type: 'foo')
+        end
+
+        include_examples :creates_record do
+          let(:expected_record_attrs) { default_attrs.merge(create_params) }
+        end
+        include_examples :changes_records_qty_of, described_class, by: 1
+        include_examples :increments_customers_auth_state
+      end
+    end
+
+    context 'with external_type="bar"' do
+      let(:create_params) do
+        super().merge external_type: 'bar'
+      end
+
+      include_examples :does_not_create_record, errors: {
+        external_type: 'requires external_id'
+      }
+      include_examples :changes_records_qty_of, described_class, by: 0
+    end
+
+    context 'with external_type="foo" and external_id=123' do
+      let(:create_params) do
+        super().merge external_id: 123,
+                      external_type: 'foo'
+      end
+
+      include_examples :creates_record do
+        let(:expected_record_attrs) { default_attrs.merge(create_params) }
+      end
+      include_examples :changes_records_qty_of, described_class, by: 1
+      include_examples :increments_customers_auth_state
+
+      context 'when customers_auth with external_id=123,external_type=null exists' do
+        before do
+          create(:customers_auth, external_id: 123)
+        end
+
+        include_examples :creates_record do
+          let(:expected_record_attrs) { default_attrs.merge(create_params) }
+        end
+        include_examples :changes_records_qty_of, described_class, by: 1
+        include_examples :increments_customers_auth_state
+      end
+
+      context 'when customers_auth with external_id=123,external_type="foo" exists' do
+        before do
+          create(:customers_auth, external_id: 123, external_type: 'foo')
+        end
+
+        include_examples :does_not_create_record, errors: {
+          external_id: 'has already been taken'
+        }
+        include_examples :changes_records_qty_of, described_class, by: 0
+      end
+    end
   end
 
   describe '#update' do
