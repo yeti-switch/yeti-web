@@ -22341,6 +22341,7 @@ CREATE TABLE class4.customers_auth (
     cnam_database_id smallint,
     cps_limit double precision,
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
+    external_type character varying,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -22436,6 +22437,7 @@ CREATE TABLE class4.customers_auth_normalized (
     cnam_database_id smallint,
     cps_limit double precision,
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
+    external_type character varying,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -27676,14 +27678,6 @@ ALTER TABLE ONLY class4.customers_auth_dst_number_fields
 
 
 --
--- Name: customers_auth customers_auth_external_id_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_external_id_key UNIQUE (external_id);
-
-
---
 -- Name: customers_auth customers_auth_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -29445,6 +29439,20 @@ CREATE INDEX customers_auth_customer_id_idx ON class4.customers_auth USING btree
 
 
 --
+-- Name: customers_auth_external_id_external_type_key_uniq; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX customers_auth_external_id_external_type_key_uniq ON class4.customers_auth USING btree (external_id, external_type);
+
+
+--
+-- Name: customers_auth_external_id_key_uniq; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX customers_auth_external_id_key_uniq ON class4.customers_auth USING btree (external_id) WHERE (external_type IS NULL);
+
+
+--
 -- Name: customers_auth_normalized_ip_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -30992,7 +31000,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31124,6 +31133,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230318105458'),
 ('20230330131911'),
 ('20230407140050'),
-('20230412134246');
+('20230412134246'),
+('20230420082151'),
+('20230420144539');
 
 

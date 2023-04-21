@@ -20,6 +20,7 @@
 #  dst_rewrite_rule                 :string
 #  enable_audio_recording           :boolean          default(FALSE), not null
 #  enabled                          :boolean          default(TRUE), not null
+#  external_type                    :string
 #  from_domain                      :string
 #  ip                               :inet             not null
 #  name                             :string           not null

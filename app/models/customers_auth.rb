@@ -20,6 +20,7 @@
 #  dst_rewrite_rule                 :string
 #  enable_audio_recording           :boolean          default(FALSE), not null
 #  enabled                          :boolean          default(TRUE), not null
+#  external_type                    :string
 #  from_domain                      :string           default([]), is an Array
 #  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  name                             :string           not null
@@ -63,10 +64,11 @@
 #
 # Indexes
 #
-#  customers_auth_account_id_idx   (account_id)
-#  customers_auth_customer_id_idx  (customer_id)
-#  customers_auth_external_id_key  (external_id) UNIQUE
-#  customers_auth_name_key         (name) UNIQUE
+#  customers_auth_account_id_idx                      (account_id)
+#  customers_auth_customer_id_idx                     (customer_id)
+#  customers_auth_external_id_external_type_key_uniq  (external_id,external_type) UNIQUE
+#  customers_auth_external_id_key_uniq                (external_id) UNIQUE WHERE (external_type IS NULL)
+#  customers_auth_name_key                            (name) UNIQUE
 #
 # Foreign Keys
 #
@@ -116,6 +118,8 @@ class CustomersAuth < ApplicationRecord
     freeze
   end
 
+  attribute :external_type, :string_presence
+
   belongs_to :customer, -> { where customer: true }, class_name: 'Contractor', foreign_key: :customer_id
 
   belongs_to :rateplan, class_name: 'Routing::Rateplan'
@@ -163,9 +167,18 @@ class CustomersAuth < ApplicationRecord
 
   validates :name, uniqueness: { allow_blank: :false }
   validates :name, presence: true
-  validates :external_id, uniqueness: { allow_blank: true }
+
+  validates :external_type, absence: { message: 'requires external_id' }, unless: :external_id
+  validates :external_id,
+            uniqueness: { scope: :external_type },
+            if: proc { external_id && external_type }
+  validates :external_id,
+            uniqueness: { conditions: -> { where(external_type: nil) } },
+            if: proc { external_id && !external_type }
 
   validates :customer, :rateplan, :routing_plan, :gateway, :account, :diversion_policy, presence: true
+  validate :validate_account
+  validate :validate_gateway
 
   validates :src_name_field, :src_number_field, :dst_number_field, presence: true
 
@@ -258,6 +271,18 @@ class CustomersAuth < ApplicationRecord
   end
 
   private
+
+  def validate_account
+    return if customer.nil? || account.nil?
+
+    errors.add(:account, 'belongs to different customer') if account.contractor_id != customer_id
+  end
+
+  def validate_gateway
+    return if customer.nil? || gateway.nil?
+
+    errors.add(:gateway, 'belongs to different customer') if !gateway.is_shared && gateway.contractor_id != customer_id
+  end
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[

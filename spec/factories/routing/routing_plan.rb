@@ -17,8 +17,10 @@ FactoryBot.define do
     end
 
     trait :filled do
-      customers_auths { build_list :customers_auth, 2 }
-      routing_groups { build_list :routing_group, 2 }
+      after(:create) do |record|
+        FactoryBot.create_list(:customers_auth, 2, routing_plan: record)
+        FactoryBot.create_list(:routing_group, 2, routing_plans: [record])
+      end
     end
   end
 end

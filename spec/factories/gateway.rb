@@ -130,9 +130,12 @@ FactoryBot.define do
       sip_schema { System::SipSchema.take }
       termination_dst_numberlist { build :numberlist }
       lua_script
-      customers_auths { build_list :customers_auth, 2 }
-      quality_stats { build_list :quality_stat, 2 }
       statistic { build :gateways_stat }
+
+      after(:create) do |record|
+        FactoryBot.create_list(:customers_auth, 2, gateway: record)
+        FactoryBot.create_list(:quality_stat, 2, gateway: record)
+      end
     end
   end
 end
