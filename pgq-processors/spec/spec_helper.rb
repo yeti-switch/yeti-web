@@ -22,6 +22,18 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = '.rspec_status'
 
   config.expect_with :rspec do |c|
+    #  disable the should syntax...
     c.syntax = :expect
+    # Prevents expectation failure message truncation
+    c.max_formatted_output_length = nil
+    c.on_potential_false_positives = :raise
+    c.strict_predicate_matchers = true
+  end
+
+  config.mock_with :rspec do |c|
+    c.allow_message_expectations_on_nil = false
+    c.verify_partial_doubles = true
+    c.verify_doubled_constant_names = true
+    c.transfer_nested_constants = false
   end
 end
