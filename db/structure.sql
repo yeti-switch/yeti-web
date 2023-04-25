@@ -18651,7 +18651,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             WITH step1 AS(
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   t_dp.next_rate as dp_next_rate,
                   t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
                   t_dp.priority AS dp_priority,
@@ -18668,27 +18669,28 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
-            from step1
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
+            FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               AND dp_next_rate<=v_rate_limit
               AND dp_enabled
               and not dp_locked --ACD&ASR control for DP
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -18701,8 +18703,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  --  (t_vendor_gateway.*)::class4.gateways as s1_vendor_gateway,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -18717,26 +18719,27 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.next_rate as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               AND dp_enabled
               and dp_next_rate<=v_rate_limit
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -18749,7 +18752,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -18766,27 +18770,28 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                    s1_dialpeer as s2_dialpeer,
+                    (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
-              and exclusive_rank=1
-              and dp_next_rate<=v_rate_limit
-              and dp_enabled
-              and not dp_locked
+              AND exclusive_rank=1
+              AND dp_next_rate<=v_rate_limit
+              AND dp_enabled
+              AND NOT dp_locked
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric_priority DESC, dp_metric
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
@@ -18799,7 +18804,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             WITH step1 AS(
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -18815,27 +18821,28 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
-            from step1
+            SELECT
+                    s1_dialpeer as s2_dialpeer,
+                    (t_vendor_account.*)::billing.accounts as s2_vendor_account
+            FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               and dp_next_rate <= v_rate_limit
               and dp_enabled
               and not dp_locked --ACD&ASR control for DP
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY r2 ASC
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -18848,7 +18855,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -18864,27 +18872,28 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   t_dp.next_rate as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
-                  and t_dp.vendor_id=v_test_vendor_id
+                  and t_dp.vendor_id = v_test_vendor_id
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               and dp_enabled
               and dp_next_rate<=v_rate_limit
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric_priority DESC, dp_metric
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
@@ -19898,7 +19907,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             WITH step1 AS(
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   t_dp.next_rate as dp_next_rate,
                   t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
                   t_dp.priority AS dp_priority,
@@ -19915,27 +19925,28 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
-            from step1
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
+            FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               AND dp_next_rate<=v_rate_limit
               AND dp_enabled
               and not dp_locked --ACD&ASR control for DP
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -19948,8 +19959,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  --  (t_vendor_gateway.*)::class4.gateways as s1_vendor_gateway,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -19964,26 +19975,27 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.next_rate as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               AND dp_enabled
               and dp_next_rate<=v_rate_limit
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -19996,7 +20008,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -20013,27 +20026,28 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                    s1_dialpeer as s2_dialpeer,
+                    (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
-              and exclusive_rank=1
-              and dp_next_rate<=v_rate_limit
-              and dp_enabled
-              and not dp_locked
+              AND exclusive_rank=1
+              AND dp_next_rate<=v_rate_limit
+              AND dp_enabled
+              AND NOT dp_locked
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric_priority DESC, dp_metric
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
@@ -20046,7 +20060,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             WITH step1 AS(
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -20062,27 +20077,28 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
-            from step1
+            SELECT
+                    s1_dialpeer as s2_dialpeer,
+                    (t_vendor_account.*)::billing.accounts as s2_vendor_account
+            FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               and dp_next_rate <= v_rate_limit
               and dp_enabled
               and not dp_locked --ACD&ASR control for DP
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY r2 ASC
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -20095,7 +20111,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -20111,27 +20128,28 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   t_dp.next_rate as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
-                  and t_dp.vendor_id=v_test_vendor_id
+                  and t_dp.vendor_id = v_test_vendor_id
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               and dp_enabled
               and dp_next_rate<=v_rate_limit
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric_priority DESC, dp_metric
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
@@ -21015,7 +21033,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             WITH step1 AS(
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   t_dp.next_rate as dp_next_rate,
                   t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
                   t_dp.priority AS dp_priority,
@@ -21032,27 +21051,28 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
-            from step1
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
+            FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               AND dp_next_rate<=v_rate_limit
               AND dp_enabled
               and not dp_locked --ACD&ASR control for DP
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_next_rate*dp_lcr_rate_multiplier, dp_priority DESC
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -21065,8 +21085,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  --  (t_vendor_gateway.*)::class4.gateways as s1_vendor_gateway,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -21081,26 +21101,27 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.next_rate as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               AND dp_enabled
               and dp_next_rate<=v_rate_limit
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -21113,7 +21134,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -21130,27 +21152,28 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids, v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                    s1_dialpeer as s2_dialpeer,
+                    (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
-              and exclusive_rank=1
-              and dp_next_rate<=v_rate_limit
-              and dp_enabled
-              and not dp_locked
+              AND exclusive_rank=1
+              AND dp_next_rate<=v_rate_limit
+              AND dp_enabled
+              AND NOT dp_locked
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric_priority DESC, dp_metric
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
@@ -21163,7 +21186,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             WITH step1 AS(
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -21179,27 +21203,28 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id = t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id)>0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
-            from step1
+            SELECT
+                    s1_dialpeer as s2_dialpeer,
+                    (t_vendor_account.*)::billing.accounts as s2_vendor_account
+            FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               and dp_next_rate <= v_rate_limit
               and dp_enabled
               and not dp_locked --ACD&ASR control for DP
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY r2 ASC
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
@@ -21212,7 +21237,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             WITH step1 AS( -- filtering
                 SELECT
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
-                  (t_vendor_account.*)::billing.accounts as s1_vendor_account,
+                  t_dp.vendor_id as s1_vendor_id,
+                  t_dp.account_id as s1_vendor_account_id,
                   rank() OVER (
                     PARTITION BY t_dp.vendor_id, t_dp.routeset_discriminator_id
                     ORDER BY
@@ -21228,27 +21254,28 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                   t_dp.next_rate as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
-                  JOIN billing.accounts t_vendor_account ON t_dp.account_id=t_vendor_account.id
-                  join public.contractors t_vendor on t_dp.vendor_id=t_vendor.id
                 WHERE
                   prefix_range(t_dp.prefix)@>prefix_range(v_routing_key)
                   AND length(v_routing_key) between t_dp.dst_number_min_length and t_dp.dst_number_max_length
                   AND t_dp.routing_group_id = ANY(v_routing_groups)
                   and t_dp.valid_from<=v_now
                   and t_dp.valid_till>=v_now
-                  AND t_vendor_account.balance<t_vendor_account.max_balance
-                  and t_vendor.enabled and t_vendor.vendor
-                  and t_dp.vendor_id=v_test_vendor_id
+                  and t_dp.vendor_id = v_test_vendor_id
                   AND yeti_ext.tag_compare(t_dp.routing_tag_ids,v_call_tags, t_dp.routing_tag_mode_id) > 0
             )
-            SELECT s1_dialpeer as s2_dialpeer,
-                  s1_vendor_account as s2_vendor_account
+            SELECT
+                s1_dialpeer as s2_dialpeer,
+                (t_vendor_account.*)::billing.accounts as s2_vendor_account
             FROM step1
+            JOIN public.contractors t_vendor ON step1.s1_vendor_id = t_vendor.id
+            JOIN billing.accounts t_vendor_account ON step1.s1_vendor_account_id = t_vendor_account.id
             WHERE
               r=1
               and exclusive_rank=1
               and dp_enabled
               and dp_next_rate<=v_rate_limit
+              AND t_vendor_account.balance < t_vendor_account.max_balance
+              AND t_vendor.enabled AND t_vendor.vendor
             ORDER BY dp_metric_priority DESC, dp_metric
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
@@ -31000,8 +31027,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31135,6 +31161,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230407140050'),
 ('20230412134246'),
 ('20230420082151'),
-('20230420144539');
+('20230420144539'),
+('20230425141522');
 
 
