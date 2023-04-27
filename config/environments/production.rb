@@ -26,6 +26,10 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  if ENV['IS_DELAYED_JOB'].present?
+    MiniRacer::Platform.set_flags! :single_threaded
+  end
+
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
   config.assets.js_compressor = Uglifier.new(harmony: true)
