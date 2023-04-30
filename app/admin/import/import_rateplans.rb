@@ -22,7 +22,7 @@ ActiveAdmin.register Importing::Rateplan, as: 'Rateplan Imports' do
     column :error_string
     column :o_id
     column :is_changed
-
     column :name
+    column :profit_control_mode, &:profit_control_mode_name
   end
 end

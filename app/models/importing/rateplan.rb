@@ -16,9 +16,16 @@
 class Importing::Rateplan < Importing::Base
   self.table_name = 'import_rateplans'
 
-  belongs_to :profit_control_mode, class_name: 'Routing::RateProfitControlMode', optional: true
-
   self.import_attributes = %w[name profit_control_mode_id]
 
   import_for Routing::Rateplan
+
+  def profit_control_mode_display_name
+    profit_control_mode_id.nil? ? 'nil' : Routing::RateProfitControlMode::MODES[rate_policy_id]
+  end
+
+  def self.after_import_hook
+    resolve_integer_constant('profit_control_mode_id', 'profit_control_mode_name', Routing::RateProfitControlMode::MODES)
+    super
+  end
 end
