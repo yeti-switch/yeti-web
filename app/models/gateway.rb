@@ -336,6 +336,17 @@ class Gateway < ApplicationRecord
     self[:orig_append_headers_reply] = value
   end
 
+  def host=(value)
+    a = IPAddr.new(value)
+    if a.ipv6?
+      self[:host] = "[#{value}]"
+    else
+      self[:host] = value
+    end
+  rescue IPAddr::Error => _e
+    self[:host] = value
+  end
+
   def display_name
     "#{name} | #{id}"
   end
