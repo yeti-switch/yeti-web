@@ -270,6 +270,30 @@ RSpec.describe Gateway, type: :model do
       include_examples :creates_record
       include_examples :changes_records_qty_of, described_class, by: 1
     end
+
+    context 'with raw IPv6 host' do
+      let(:create_params) { super().merge(host: 'dd:ee:aa:dd::') }
+      it 'should convert address to reference' do
+        subject
+        expect(subject.host).to eq('[dd:ee:aa:dd::]')
+      end
+    end
+
+    context 'with raw IPv4 host' do
+      let(:create_params) { super().merge(host: '1.2.3.4') }
+      it 'should not change value' do
+        subject
+        expect(subject.host).to eq('1.2.3.4')
+      end
+    end
+
+    context 'with not IPv4 nor IPv6 host' do
+      let(:create_params) { super().merge(host: '11:222sdasda') }
+      it 'should not change value' do
+        subject
+        expect(subject.host).to eq('11:222sdasda')
+      end
+    end
   end
 
   describe '#update' do
