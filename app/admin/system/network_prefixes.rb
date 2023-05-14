@@ -13,11 +13,7 @@ ActiveAdmin.register System::NetworkPrefix do
 
   permit_params :prefix, :country_id, :network_id, :number_min_length, :number_max_length
 
-  controller do
-    def scoped_collection
-      super.eager_load(:country, :network)
-    end
-  end
+  includes :country, :network
 
   collection_action :prefix_hint do
     render plain: System::NetworkPrefix.prefix_hint(params[:prefix])
@@ -39,9 +35,6 @@ ActiveAdmin.register System::NetworkPrefix do
     column :number_max_length
     column :country, sortable: 'countries.name'
     column :network, sortable: 'networks.name'
-    column :network_type do |c|
-      c.network.network_type.name
-    end
     column :uuid
   end
 
