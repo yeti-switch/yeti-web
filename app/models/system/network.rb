@@ -33,6 +33,9 @@ class System::Network < ApplicationRecord
     where(id: network_id_select)
   }
 
+  scope :search_for, ->(term) { where("networks.name || ' | ' || networks.id::varchar ILIKE ?", "%#{term}%") }
+  scope :ordered_by, ->(term) { order(term) }
+
   include WithPaperTrail
 
   def display_name
@@ -46,6 +49,7 @@ class System::Network < ApplicationRecord
   def self.ransackable_scopes(_auth_object = nil)
     %i[
       country_id_eq
+      search_for ordered_by
     ]
   end
 end

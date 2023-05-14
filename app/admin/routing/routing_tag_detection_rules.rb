@@ -95,5 +95,5 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   filter :src_area, input_html: { class: 'chosen' }
   filter :dst_area, input_html: { class: 'chosen' }
 
-  acts_as_filter_by_routing_tag_ids
+  acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 end

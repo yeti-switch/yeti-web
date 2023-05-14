@@ -57,6 +57,7 @@ class Routing::RoutingTagDetectionRule < ApplicationRecord
     %i[
       routing_tag_ids_array_contains
       routing_tag_ids_covers
+      routing_tag_ids_count_equals
       tagged
     ]
   end
