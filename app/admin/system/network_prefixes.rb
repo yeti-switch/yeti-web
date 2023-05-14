@@ -39,6 +39,9 @@ ActiveAdmin.register System::NetworkPrefix do
     column :number_max_length
     column :country, sortable: 'countries.name'
     column :network, sortable: 'networks.name'
+    column :network_type do |c|
+      c.network.network_type.name
+    end
     column :uuid
   end
 
