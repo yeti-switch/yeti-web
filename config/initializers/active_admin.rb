@@ -218,6 +218,8 @@ ActiveAdmin.before_load do
   ActiveAdmin::ResourceDSL.include ResourceDSL::AssociationAjaxFilter
   ActiveAdmin::ResourceDSL.include ResourceDSL::AccountFilter
   ActiveAdmin::ResourceDSL.include ResourceDSL::ContractorFilter
+  ActiveAdmin::ResourceDSL.include ResourceDSL::CountryFilter
+  ActiveAdmin::ResourceDSL.include ResourceDSL::NetworkFilter
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActiveSearch
 
   ActiveAdmin::ResourceDSL.include Rails.application.routes.url_helpers

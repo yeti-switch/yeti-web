@@ -20,11 +20,20 @@ class System::Country < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  scope :search_for, ->(term) { where("countries.name || ' | ' || countries.id::varchar ILIKE ?", "%#{term}%") }
+  scope :ordered_by, ->(term) { order(term) }
+
   def display_name
     "#{id} | #{name}"
   end
 
   def self.collection
     order(:name)
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[
+      search_for ordered_by
+    ]
   end
 end
