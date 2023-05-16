@@ -186,6 +186,18 @@ class Gateway < ApplicationRecord
     PAI_SEND_MODE_BUILD_SIP => 'Use AOR, replace userpart with dst number'
   }.freeze
 
+  class << self
+    # Returns a reference if host is IPv6, otherwise returns host
+    # @param value [String]
+    # @return [String]
+    def normalize_host(value)
+      ip_addr = IPAddr.new(value)
+      ip_addr.ipv6? ? "[#{ip_addr}]" : value
+    rescue IPAddr::Error => _e
+      value
+    end
+  end
+
   belongs_to :contractor
   belongs_to :vendor, -> { vendors }, class_name: 'Contractor', foreign_key: :contractor_id, optional: true
   belongs_to :session_refresh_method
@@ -337,14 +349,7 @@ class Gateway < ApplicationRecord
   end
 
   def host=(value)
-    a = IPAddr.new(value)
-    if a.ipv6?
-      self[:host] = "[#{value}]"
-    else
-      self[:host] = value
-    end
-  rescue IPAddr::Error => _e
-    self[:host] = value
+    self[:host] = self.class.normalize_host(value)
   end
 
   def display_name
