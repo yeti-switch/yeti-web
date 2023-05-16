@@ -15284,6 +15284,8 @@ CREATE TABLE class4.numberlist_items (
     number_min_length smallint DEFAULT 0 NOT NULL,
     number_max_length smallint DEFAULT 100 NOT NULL,
     lua_script_id smallint,
+    defer_src_rewrite boolean DEFAULT false NOT NULL,
+    defer_dst_rewrite boolean DEFAULT false NOT NULL,
     CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
     CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
@@ -22106,7 +22108,9 @@ CREATE TABLE class4.numberlists (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     lua_script_id smallint,
     external_id bigint,
-    external_type character varying
+    external_type character varying,
+    defer_src_rewrite boolean DEFAULT false NOT NULL,
+    defer_dst_rewrite boolean DEFAULT false NOT NULL
 );
 
 
@@ -31163,6 +31167,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230420082151'),
 ('20230420144539'),
 ('20230425141522'),
-('20230514130310');
+('20230514130310'),
+('20230516110137');
 
 

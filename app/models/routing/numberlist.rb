@@ -9,6 +9,8 @@
 #  default_dst_rewrite_rule   :string
 #  default_src_rewrite_result :string
 #  default_src_rewrite_rule   :string
+#  defer_dst_rewrite          :boolean          default(FALSE), not null
+#  defer_src_rewrite          :boolean          default(FALSE), not null
 #  external_type              :string
 #  name                       :string           not null
 #  tag_action_value           :integer(2)       default([]), not null, is an Array
