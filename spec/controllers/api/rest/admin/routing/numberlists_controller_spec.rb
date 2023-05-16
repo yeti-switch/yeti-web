@@ -16,8 +16,10 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistsController, type: :controll
     it_behaves_like :jsonapi_filters_by_datetime_field, :updated_at
     it_behaves_like :jsonapi_filters_by_string_field, :default_src_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :default_src_rewrite_result
+    it_behaves_like :jsonapi_filters_by_boolean_field, :defer_src_rewrite
     it_behaves_like :jsonapi_filters_by_string_field, :default_dst_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :default_dst_rewrite_result
+    it_behaves_like :jsonapi_filters_by_boolean_field, :defer_dst_rewrite
     it_behaves_like :jsonapi_filters_by_string_field, :external_type do
       let(:trait) { :with_external_id }
     end

@@ -5,9 +5,9 @@
 # Table name: report_vendors
 #
 #  id         :integer(4)       not null, primary key
-#  end_date   :datetime         not null
-#  start_date :datetime         not null
-#  created_at :datetime         not null
+#  end_date   :timestamptz      not null
+#  start_date :timestamptz      not null
+#  created_at :timestamptz      not null
 #
 
 class ReportVendor < ApplicationRecord

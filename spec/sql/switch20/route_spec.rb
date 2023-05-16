@@ -520,14 +520,44 @@ RSpec.describe '#routing logic' do
 
       context 'Authorized, DST numberlist' do
         let!(:nl) {
-          create(:numberlist, mode_id: nl_mode, default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT)
+          create(:numberlist,
+                 mode_id: nl_mode,
+                 default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                 default_src_rewrite_rule: nl_default_src_rewrite_rule,
+                 default_src_rewrite_result: nl_default_src_rewrite_result,
+                 defer_src_rewrite: nl_defer_src_rewrite,
+                 default_dst_rewrite_rule: nl_default_dst_rewrite_rule,
+                 default_dst_rewrite_result: nl_default_dst_rewrite_result,
+                 defer_dst_rewrite: nl_defer_dst_rewrite)
         }
         let!(:nl_item) {
           create(:numberlist_item,
                  numberlist_id: nl.id,
                  key: '12345678',
-                 action_id: Routing::NumberlistItem::ACTION_REJECT)
+                 action_id: ni_action_id,
+                 src_rewrite_rule: ni_src_rewrite_rule,
+                 src_rewrite_result: ni_src_rewrite_result,
+                 defer_src_rewrite: ni_defer_src_rewrite,
+                 dst_rewrite_rule: ni_dst_rewrite_rule,
+                 dst_rewrite_result: ni_dst_rewrite_result,
+                 defer_dst_rewrite: ni_defer_dst_rewrite)
         }
+        let(:ni_action_id) { Routing::NumberlistItem::ACTION_REJECT }
+        let(:ni_src_rewrite_rule) { nil }
+        let(:ni_src_rewrite_result) { nil }
+        let(:ni_defer_src_rewrite) { false }
+        let(:ni_dst_rewrite_rule) { nil }
+        let(:ni_dst_rewrite_result) { nil }
+        let(:ni_defer_dst_rewrite) { false }
+
+        let(:nl_default_src_rewrite_rule) { nil }
+        let(:nl_default_src_rewrite_result) { nil }
+        let(:nl_defer_src_rewrite) { false }
+
+        let(:nl_default_dst_rewrite_rule) { nil }
+        let(:nl_default_dst_rewrite_result) { nil }
+        let(:nl_defer_dst_rewrite) { false }
+
         let(:customer_auth_dst_numberlist_id) { nl.id }
 
         let(:uri_name) { '12345678' }
@@ -544,6 +574,44 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
             expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
           end
+
+          context 'with default rewrites' do
+            let(:nl_default_src_rewrite_rule) { '(.*)' }
+            let(:nl_default_src_rewrite_result) { 'src_rewrite_default\1' }
+
+            let(:nl_default_dst_rewrite_rule) { '(.*)' }
+            let(:nl_default_dst_rewrite_result) { 'dst_rewrite_default\1' }
+
+            context 'not defered' do
+              let(:nl_defer_src_rewrite) { false }
+              let(:nl_defer_dst_rewrite) { false }
+
+              it 'not defered rewrite' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:src_prefix_routing]).to eq("src_rewrite_default#{from_name}")
+                expect(subject.first[:src_prefix_out]).to eq("src_rewrite_default#{from_name}")
+                expect(subject.first[:dst_prefix_routing]).to eq("dst_rewrite_default#{uri_name}")
+                expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite_default#{uri_name}")
+              end
+            end
+
+            context 'defered' do
+              let(:nl_defer_src_rewrite) { true }
+              let(:nl_defer_dst_rewrite) { true }
+
+              it 'defered rewrite' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:src_prefix_routing]).to eq(from_name)
+                expect(subject.first[:src_prefix_out]).to eq("src_rewrite_default#{from_name}")
+                expect(subject.first[:dst_prefix_routing]).to eq(uri_name)
+                expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite_default#{uri_name}")
+              end
+            end
+          end
         end
 
         context 'matched in strict mode' do
@@ -556,6 +624,47 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:disconnect_code_id]).to eq(8001)
             expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
             expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched ITEM in strict mode + rewrites' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:ni_action_id) { Routing::NumberlistItem::ACTION_ACCEPT }
+
+          let(:ni_src_rewrite_rule) { '(.*)' }
+          let(:ni_src_rewrite_result) { 'src_rewrite\1' }
+
+          let(:ni_dst_rewrite_rule) { '(.*)' }
+          let(:ni_dst_rewrite_result) { 'dst_rewrite\1' }
+
+          context 'not defered' do
+            let(:ni_defer_src_rewrite) { false }
+            let(:ni_defer_dst_rewrite) { false }
+
+            it 'not defered rewrite' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:src_prefix_routing]).to eq("src_rewrite#{from_name}")
+              expect(subject.first[:src_prefix_out]).to eq("src_rewrite#{from_name}")
+              expect(subject.first[:dst_prefix_routing]).to eq("dst_rewrite#{uri_name}")
+              expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite#{uri_name}")
+            end
+          end
+
+          context 'defered' do
+            let(:ni_defer_src_rewrite) { true }
+            let(:ni_defer_dst_rewrite) { true }
+
+            it 'defered rewrite' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:src_prefix_routing]).to eq(from_name)
+              expect(subject.first[:src_prefix_out]).to eq("src_rewrite#{from_name}")
+              expect(subject.first[:dst_prefix_routing]).to eq(uri_name)
+              expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite#{uri_name}")
+            end
           end
         end
 
@@ -590,14 +699,46 @@ RSpec.describe '#routing logic' do
 
       context 'Authorized, SRC numberlist' do
         let!(:nl) {
-          create(:numberlist, mode_id: nl_mode, default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT)
+          create(:numberlist,
+                 mode_id: nl_mode,
+                 default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                 default_src_rewrite_rule: nl_default_src_rewrite_rule,
+                 default_src_rewrite_result: nl_default_src_rewrite_result,
+                 defer_src_rewrite: nl_defer_src_rewrite,
+                 default_dst_rewrite_rule: nl_default_dst_rewrite_rule,
+                 default_dst_rewrite_result: nl_default_dst_rewrite_result,
+                 defer_dst_rewrite: nl_defer_dst_rewrite)
         }
+
         let!(:nl_item) {
           create(:numberlist_item,
                  numberlist_id: nl.id,
                  key: '12345678',
-                 action_id: Routing::NumberlistItem::ACTION_REJECT)
+                 action_id: ni_action_id,
+                 src_rewrite_rule: ni_src_rewrite_rule,
+                 src_rewrite_result: ni_src_rewrite_result,
+                 defer_src_rewrite: ni_defer_src_rewrite,
+                 dst_rewrite_rule: ni_dst_rewrite_rule,
+                 dst_rewrite_result: ni_dst_rewrite_result,
+                 defer_dst_rewrite: ni_defer_dst_rewrite)
         }
+
+        let(:ni_action_id) { Routing::NumberlistItem::ACTION_REJECT }
+        let(:ni_src_rewrite_rule) { nil }
+        let(:ni_src_rewrite_result) { nil }
+        let(:ni_defer_src_rewrite) { false }
+        let(:ni_dst_rewrite_rule) { nil }
+        let(:ni_dst_rewrite_result) { nil }
+        let(:ni_defer_dst_rewrite) { false }
+
+        let(:nl_default_src_rewrite_rule) { nil }
+        let(:nl_default_src_rewrite_result) { nil }
+        let(:nl_defer_src_rewrite) { false }
+
+        let(:nl_default_dst_rewrite_rule) { nil }
+        let(:nl_default_dst_rewrite_result) { nil }
+        let(:nl_defer_dst_rewrite) { false }
+
         let(:customer_auth_src_numberlist_id) { nl.id }
 
         let(:from_name) { '12345678' }
@@ -614,6 +755,44 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
             expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
           end
+
+          context 'with default rewrites' do
+            let(:nl_default_src_rewrite_rule) { '(.*)' }
+            let(:nl_default_src_rewrite_result) { 'src_rewrite_default2\1' }
+
+            let(:nl_default_dst_rewrite_rule) { '(.*)' }
+            let(:nl_default_dst_rewrite_result) { 'dst_rewrite_default2\1' }
+
+            context 'not defered' do
+              let(:nl_defer_src_rewrite) { false }
+              let(:nl_defer_dst_rewrite) { false }
+
+              it 'not defered rewrite' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:src_prefix_routing]).to eq("src_rewrite_default2#{from_name}")
+                expect(subject.first[:src_prefix_out]).to eq("src_rewrite_default2#{from_name}")
+                expect(subject.first[:dst_prefix_routing]).to eq("dst_rewrite_default2#{uri_name}")
+                expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite_default2#{uri_name}")
+              end
+            end
+
+            context 'defered' do
+              let(:nl_defer_src_rewrite) { true }
+              let(:nl_defer_dst_rewrite) { true }
+
+              it 'defered rewrite' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:src_prefix_routing]).to eq(from_name)
+                expect(subject.first[:src_prefix_out]).to eq("src_rewrite_default2#{from_name}")
+                expect(subject.first[:dst_prefix_routing]).to eq(uri_name)
+                expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite_default2#{uri_name}")
+              end
+            end
+          end
         end
 
         context 'matched in strict mode' do
@@ -626,6 +805,47 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:disconnect_code_id]).to eq(8002)
             expect(subject.first[:aleg_policy_id]).to eq(orig_disconnect_policy.id) # disconnect policy should be applied
             expect(subject.first[:dump_level_id]).to eq(customer_auth_dump_level)
+          end
+        end
+
+        context 'matched ITEM in strict mode + rewrites' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:ni_action_id) { Routing::NumberlistItem::ACTION_ACCEPT }
+
+          let(:ni_src_rewrite_rule) { '(.*)' }
+          let(:ni_src_rewrite_result) { 'src_rewrite3\1' }
+
+          let(:ni_dst_rewrite_rule) { '(.*)' }
+          let(:ni_dst_rewrite_result) { 'dst_rewrite3\1' }
+
+          context 'not defered' do
+            let(:ni_defer_src_rewrite) { false }
+            let(:ni_defer_dst_rewrite) { false }
+
+            it 'not defered rewrite' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:src_prefix_routing]).to eq("src_rewrite3#{from_name}")
+              expect(subject.first[:src_prefix_out]).to eq("src_rewrite3#{from_name}")
+              expect(subject.first[:dst_prefix_routing]).to eq("dst_rewrite3#{uri_name}")
+              expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite3#{uri_name}")
+            end
+          end
+
+          context 'defered' do
+            let(:ni_defer_src_rewrite) { true }
+            let(:ni_defer_dst_rewrite) { true }
+
+            it 'defered rewrite' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:src_prefix_routing]).to eq(from_name)
+              expect(subject.first[:src_prefix_out]).to eq("src_rewrite3#{from_name}")
+              expect(subject.first[:dst_prefix_routing]).to eq(uri_name)
+              expect(subject.first[:dst_prefix_out]).to eq("dst_rewrite3#{uri_name}")
+            end
           end
         end
 

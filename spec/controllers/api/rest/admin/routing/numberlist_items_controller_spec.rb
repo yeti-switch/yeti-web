@@ -28,8 +28,10 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :cont
     it_behaves_like :jsonapi_filters_by_datetime_field, :updated_at
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :src_rewrite_result
+    it_behaves_like :jsonapi_filters_by_boolean_field, :defer_src_rewrite
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_rule
     it_behaves_like :jsonapi_filters_by_string_field, :dst_rewrite_result
+    it_behaves_like :jsonapi_filters_by_boolean_field, :defer_dst_rewrite
     it_behaves_like :jsonapi_filters_by_number_field, :number_min_length
     it_behaves_like :jsonapi_filters_by_number_field, :number_max_length
   end
@@ -57,8 +59,10 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :cont
         key: 'rspec-key-1',
         'src-rewrite-rule': 'value-1',
         'src-rewrite-result': 'value-2',
+        'defer-src-rewrite': true,
         'dst-rewrite-rule': 'value-3',
-        'dst-rewrite-result': 'value-4'
+        'dst-rewrite-result': 'value-4',
+        'defer-dst-rewrite': true
       }
     end
 
