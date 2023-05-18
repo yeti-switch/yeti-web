@@ -1,6 +1,6 @@
 # Welcome to YETI
 ![Tests](https://github.com/yeti-switch/yeti-web/workflows/Tests/badge.svg?branch=master)
-[![Coverage Status](https://img.shields.io/badge/Code%20Coverage-87%25-success?style=flat)
+![Coverage Status](https://img.shields.io/badge/Code%20Coverage-87%25-success?style=flat)
 [![Made in Ukraine](https://img.shields.io/badge/made_in-ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)
 
 
