@@ -16,8 +16,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_export :id, :name,
                  :mode_name,
                  :default_action_name,
-                 :default_src_rewrite_rule, :default_src_rewrite_result,
-                 :default_dst_rewrite_rule, :default_dst_rewrite_result,
+                 :default_src_rewrite_rule, :default_src_rewrite_result, :defer_src_rewrite,
+                 :default_dst_rewrite_rule, :default_dst_rewrite_result, :defer_dst_rewrite,
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
@@ -29,8 +29,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   includes :lua_script, :tag_action
 
   permit_params :name, :mode_id, :default_action_id,
-                :default_src_rewrite_rule, :default_src_rewrite_result,
-                :default_dst_rewrite_rule, :default_dst_rewrite_result,
+                :default_src_rewrite_rule, :default_src_rewrite_result, :defer_src_rewrite,
+                :default_dst_rewrite_rule, :default_dst_rewrite_result, :defer_dst_rewrite,
                 :tag_action_id, :lua_script_id, tag_action_value: []
   controller do
     def update
@@ -50,8 +50,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :default_action, &:default_action_name
     column :default_src_rewrite_rule
     column :default_src_rewrite_result
+    column :defer_src_rewrite
     column :default_dst_rewrite_rule
     column :default_dst_rewrite_result
+    column :defer_dst_rewrite
     column :lua_script
     column :tag_action
     column :display_tag_action_value
@@ -69,8 +71,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :default_action, &:default_action_name
       row :default_src_rewrite_rule
       row :default_src_rewrite_result
+      row :defer_src_rewrite
       row :default_dst_rewrite_rule
       row :default_dst_rewrite_result
+      row :defer_dst_rewrite
       row :lua_script
       row :tag_action
       row :display_tag_action_value
@@ -88,8 +92,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       f.input :default_action_id, as: :select, include_blank: false, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
       f.input :default_src_rewrite_rule
       f.input :default_src_rewrite_result
+      f.input :defer_src_rewrite
       f.input :default_dst_rewrite_rule
       f.input :default_dst_rewrite_result
+      f.input :defer_dst_rewrite
       f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
       f.input :tag_action
       f.input :tag_action_value, as: :select,
@@ -109,4 +115,6 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :external_id, label: 'External ID'
   filter :external_type
   filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
+  filter :defer_src_rewrite
+  filter :defer_dst_rewrite
 end

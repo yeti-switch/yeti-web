@@ -5,8 +5,8 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
 
   attributes :name, :default_action_id, :mode_id,
              :created_at, :updated_at,
-             :default_src_rewrite_rule, :default_src_rewrite_result,
-             :default_dst_rewrite_rule, :default_dst_rewrite_result,
+             :default_src_rewrite_rule, :default_src_rewrite_result, :defer_src_rewrite,
+             :default_dst_rewrite_rule, :default_dst_rewrite_result, :defer_dst_rewrite,
              :tag_action_value, :external_id, :external_type
 
   paginator :paged
@@ -22,8 +22,10 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
   ransack_filter :updated_at, type: :datetime
   ransack_filter :default_src_rewrite_rule, type: :string
   ransack_filter :default_src_rewrite_result, type: :string
+  ransack_filter :defer_src_rewrite, type: :boolean
   ransack_filter :default_dst_rewrite_rule, type: :string
   ransack_filter :default_dst_rewrite_result, type: :string
+  ransack_filter :defer_dst_rewrite, type: :boolean
   ransack_filter :external_id, type: :number
   ransack_filter :external_type, type: :string
 
@@ -34,8 +36,10 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
       mode_id
       default_src_rewrite_rule
       default_src_rewrite_result
+      defer_src_rewrite
       default_dst_rewrite_rule
       default_dst_rewrite_result
+      defer_dst_rewrite
       tag_action_value
       external_id
       external_type

@@ -15,8 +15,10 @@ RSpec.resource 'Numberlist' do
     mode-id
     default-src-rewrite-rule
     default-src-rewrite-result
+    defer-src-rewrite
     default-dst-rewrite-rule
     default-dst-rewrite-result
+    defer-dst-rewrite
     tag-action-value
     external-id
     external-type

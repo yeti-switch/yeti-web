@@ -1074,6 +1074,16 @@ CREATE TYPE switch20.cnam_lua_resp AS (
 
 
 --
+-- Name: defered_rewrite; Type: TYPE; Schema: switch20; Owner: -
+--
+
+CREATE TYPE switch20.defered_rewrite AS (
+	rule character varying,
+	result character varying
+);
+
+
+--
 -- Name: identity_header_ty; Type: TYPE; Schema: switch20; Owner: -
 --
 
@@ -15284,6 +15294,8 @@ CREATE TABLE class4.numberlist_items (
     number_min_length smallint DEFAULT 0 NOT NULL,
     number_max_length smallint DEFAULT 100 NOT NULL,
     lua_script_id smallint,
+    defer_src_rewrite boolean DEFAULT false NOT NULL,
+    defer_dst_rewrite boolean DEFAULT false NOT NULL,
     CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
     CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
@@ -17857,6 +17869,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
         v_cnam_database class4.cnam_databases%rowtype;
+        v_rewrite switch20.defered_rewrite;
+        v_defered_src_rewrites switch20.defered_rewrite[] not null default ARRAY[]::switch20.defered_rewrite[];
+        v_defered_dst_rewrites switch20.defered_rewrite[] not null default ARRAY[]::switch20.defered_rewrite[];
         v_rate_groups integer[];
         v_routing_groups integer[];
       BEGIN
@@ -18276,16 +18291,30 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist_item.src_rewrite_rule,
-                v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist_item.dst_rewrite_rule,
-                v_numberlist_item.dst_rewrite_result
-            );
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
@@ -18298,16 +18327,30 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
                 v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist.default_dst_rewrite_rule,
-                v_numberlist.default_dst_rewrite_result
-            );
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
@@ -18344,16 +18387,30 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist_item.src_rewrite_rule,
-                v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist_item.dst_rewrite_rule,
-                v_numberlist_item.dst_rewrite_result
-            );
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
@@ -18365,16 +18422,30 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist.default_dst_rewrite_rule,
-                v_numberlist.default_dst_rewrite_result
-            );
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist.default_src_rewrite_rule,
+                    v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
@@ -18642,6 +18713,25 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
+
+
+        /* apply defered rewrites there, not really after routing, but without affecting v_routing_key */
+
+        FOREACH v_rewrite IN ARRAY v_defered_src_rewrites LOOP
+            v_ret.src_prefix_out = yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_rewrite.rule,
+                v_rewrite.result
+            );
+        END LOOP;
+
+        FOREACH v_rewrite IN ARRAY v_defered_dst_rewrites LOOP
+            v_ret.dst_prefix_out = yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_rewrite.rule,
+                v_rewrite.result
+            );
+        END LOOP;
 
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
@@ -19113,6 +19203,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
         v_cnam_database class4.cnam_databases%rowtype;
+        v_rewrite switch20.defered_rewrite;
+        v_defered_src_rewrites switch20.defered_rewrite[] not null default ARRAY[]::switch20.defered_rewrite[];
+        v_defered_dst_rewrites switch20.defered_rewrite[] not null default ARRAY[]::switch20.defered_rewrite[];
         v_rate_groups integer[];
         v_routing_groups integer[];
       BEGIN
@@ -19532,16 +19625,30 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist_item.src_rewrite_rule,
-                v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist_item.dst_rewrite_rule,
-                v_numberlist_item.dst_rewrite_result
-            );
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
@@ -19554,16 +19661,30 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
                 v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist.default_dst_rewrite_rule,
-                v_numberlist.default_dst_rewrite_result
-            );
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
@@ -19600,16 +19721,30 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist_item.src_rewrite_rule,
-                v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist_item.dst_rewrite_rule,
-                v_numberlist_item.dst_rewrite_result
-            );
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
@@ -19621,16 +19756,30 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist.default_dst_rewrite_rule,
-                v_numberlist.default_dst_rewrite_result
-            );
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist.default_src_rewrite_rule,
+                    v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
@@ -19898,6 +20047,25 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
+
+
+        /* apply defered rewrites there, not really after routing, but without affecting v_routing_key */
+
+        FOREACH v_rewrite IN ARRAY v_defered_src_rewrites LOOP
+            v_ret.src_prefix_out = yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_rewrite.rule,
+                v_rewrite.result
+            );
+        END LOOP;
+
+        FOREACH v_rewrite IN ARRAY v_defered_dst_rewrites LOOP
+            v_ret.dst_prefix_out = yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_rewrite.rule,
+                v_rewrite.result
+            );
+        END LOOP;
 
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
@@ -20366,6 +20534,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_cnam_resp_json json;
         v_cnam_lua_resp switch20.cnam_lua_resp;
         v_cnam_database class4.cnam_databases%rowtype;
+        v_rewrite switch20.defered_rewrite;
+        v_defered_src_rewrites switch20.defered_rewrite[] not null default ARRAY[]::switch20.defered_rewrite[];
+        v_defered_dst_rewrites switch20.defered_rewrite[] not null default ARRAY[]::switch20.defered_rewrite[];
         v_rate_groups integer[];
         v_routing_groups integer[];
       BEGIN
@@ -20736,16 +20907,30 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist_item.src_rewrite_rule,
-                v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist_item.dst_rewrite_rule,
-                v_numberlist_item.dst_rewrite_result
-            );
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
@@ -20755,16 +20940,30 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
                 v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist.default_dst_rewrite_rule,
-                v_numberlist.default_dst_rewrite_result
-            );
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
@@ -20789,16 +20988,30 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist_item.src_rewrite_rule,
-                v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist_item.dst_rewrite_rule,
-                v_numberlist_item.dst_rewrite_result
-            );
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
@@ -20807,16 +21020,30 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             RETURN NEXT v_ret;
             RETURN;
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.dst_prefix_out,
-                v_numberlist.default_dst_rewrite_rule,
-                v_numberlist.default_dst_rewrite_result
-            );
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist.default_src_rewrite_rule,
+                    v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch20.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
             -- pass by default
           end if;
@@ -21024,6 +21251,25 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
                     FIND dialpeers logic. Queries must use prefix index for best performance
         */
         
+
+
+        /* apply defered rewrites there, not really after routing, but without affecting v_routing_key */
+
+        FOREACH v_rewrite IN ARRAY v_defered_src_rewrites LOOP
+            v_ret.src_prefix_out = yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_rewrite.rule,
+                v_rewrite.result
+            );
+        END LOOP;
+
+        FOREACH v_rewrite IN ARRAY v_defered_dst_rewrites LOOP
+            v_ret.dst_prefix_out = yeti_ext.regexp_replace_rand(
+                v_ret.dst_prefix_out,
+                v_rewrite.rule,
+                v_rewrite.result
+            );
+        END LOOP;
 
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
@@ -22106,7 +22352,9 @@ CREATE TABLE class4.numberlists (
     tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     lua_script_id smallint,
     external_id bigint,
-    external_type character varying
+    external_type character varying,
+    defer_src_rewrite boolean DEFAULT false NOT NULL,
+    defer_dst_rewrite boolean DEFAULT false NOT NULL
 );
 
 
@@ -31163,6 +31411,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230420082151'),
 ('20230420144539'),
 ('20230425141522'),
-('20230514130310');
+('20230514130310'),
+('20230516110137');
 
 

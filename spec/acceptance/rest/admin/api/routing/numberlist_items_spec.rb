@@ -11,8 +11,8 @@ RSpec.resource 'Routing NumberlistItems' do
   required_params = %i[key]
 
   optional_params = %i[
-    src_rewrite_rule src_rewrite_result
-    dst_rewrite_rule dst_rewrite_result
+    src_rewrite_rule src_rewrite_result defer_src_rewrite
+    dst_rewrite_rule dst_rewrite_result defer_dst_rewrite
     tag_action_value
   ]
 
