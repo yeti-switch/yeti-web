@@ -11,7 +11,7 @@
 
 ## Ruby
 
-You have to use Ruby version 2.7 with installed bundler.
+You have to use Ruby version 3.2 with installed bundler.
 
 ## Postgresql
 
