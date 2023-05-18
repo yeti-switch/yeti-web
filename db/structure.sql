@@ -18493,6 +18493,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           dst_area_id is null
         limit 1;
         if found then
+            /*dbg{*/
+            RAISE NOTICE '% ms -> Routing tag detection rule found: %',EXTRACT(MILLISECOND from clock_timestamp() - v_start), row_to_json(v_area_direction);
+            /*}dbg*/
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
 
@@ -18500,7 +18503,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> Routing tag detected: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
+        RAISE NOTICE '% ms -> Routing tags: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
         /*}dbg*/
         ----------------------------------------------------------------------
 
@@ -19827,6 +19830,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           dst_area_id is null
         limit 1;
         if found then
+            /*dbg{*/
+            RAISE NOTICE '% ms -> Routing tag detection rule found: %',EXTRACT(MILLISECOND from clock_timestamp() - v_start), row_to_json(v_area_direction);
+            /*}dbg*/
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
 
@@ -19834,7 +19840,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> Routing tag detected: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
+        RAISE NOTICE '% ms -> Routing tags: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.routing_tag_ids;
         /*}dbg*/
         ----------------------------------------------------------------------
 
@@ -21085,6 +21091,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           dst_area_id is null
         limit 1;
         if found then
+            
             v_call_tags=yeti_ext.tag_action(v_area_direction.tag_action_id, v_call_tags, v_area_direction.tag_action_value);
         end if;
 
@@ -31412,6 +31419,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230420144539'),
 ('20230425141522'),
 ('20230514130310'),
-('20230516110137');
+('20230516110137'),
+('20230518130328');
 
 
