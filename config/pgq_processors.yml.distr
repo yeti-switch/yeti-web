@@ -8,6 +8,12 @@ cdr_billing:
   mail_from: "yeti-cdr-billing@example.com"
   mail_subject: "Exception happened in CDR billing"
 
+cdr_stats:
+  mode: production
+  class: cdr_stat
+  stored_procedure: switch.async_cdr_statistics
+  syslog_program_name: "yeti-cdr-stats"
+
 cdr_http:
   mode: production
   class: cdr_http
