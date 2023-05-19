@@ -1,6 +1,6 @@
 #!/bin/bash
 
-services="yeti-web.service yeti-cdr-billing@cdr_billing.service yeti-delayed-job.service yeti-prometheus.service yeti-libreoffice-headless.service"
+services="yeti-web.service yeti-cdr-billing@cdr_billing.service yeti-cdr-billing@cdr_stats.service yeti-delayed-job.service yeti-prometheus.service yeti-libreoffice-headless.service"
 
 if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
 	deb-systemd-invoke stop ${services} >/dev/null

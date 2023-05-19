@@ -29,15 +29,12 @@ case "$1" in
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
 			systemctl enable yeti-cdr-billing@cdr_billing
-			systemctl disable yeti-libreoffice-headless
+			systemctl enable yeti-cdr-billing@cdr_stats
 		fi
 
 		if [ ! -f /opt/yeti-web/config/pgq_processors.yml ]; then
 			cp -p /opt/yeti-web/config/pgq_processors.yml.distr /opt/yeti-web/config/pgq_processors.yml
 		fi
-
-		#remove old init scripts
-		rm -f /etc/init.d/yeti-cdr-billing /etc/init.d/yeti-web /etc/init.d/yeti-delayed-job || true
 
 	;;
 	abort-upgrade|abort-remove|abort-deconfigure)
