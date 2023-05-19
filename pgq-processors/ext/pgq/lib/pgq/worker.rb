@@ -36,7 +36,7 @@ class Pgq::Worker
       env.config['consumer'],
       env.config.config
     )
-    @sleep_time = 0.5
+    @sleep_time = ENV.fetch('PGQ_SLEEP_INTERVAL', 0.5).to_f
   end
 
   def process_batch

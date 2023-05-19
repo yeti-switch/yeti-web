@@ -55,7 +55,7 @@ class Pgq::ConsumerBase
 
   def perform_batch
     events = []
-    begin
+    safe_batch_perform do
       pgq_events = get_batch_events
 
       return 0 if pgq_events.nil? # if no batch
@@ -73,16 +73,20 @@ class Pgq::ConsumerBase
       perform_events(events)
 
       finish_batch
-    rescue SystemExit
-      log_error('System Exit')
-    rescue StandardError => e
-      error_message = "<#{e.class}> #{e.message}"
-      log_error(error_message)
-      Pony.mail(body: e.backtrace.join("\n"), subject: error_message)
-      Pgq::Worker.shutdown!(e) unless Pgq::Worker.interrupted?
     end
 
     events.size
+  end
+
+  def safe_batch_perform
+    yield
+  rescue SystemExit
+    log_error('System Exit')
+  rescue StandardError => e
+    error_message = "<#{e.class}> #{e.message}"
+    log_error(error_message)
+    Pony.mail(body: e.backtrace.join("\n"), subject: error_message)
+    Pgq::Worker.shutdown!(e) unless Pgq::Worker.interrupted?
   end
 
   def perform_events(events)
