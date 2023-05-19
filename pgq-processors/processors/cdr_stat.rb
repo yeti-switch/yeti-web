@@ -3,15 +3,15 @@
 class CdrStat < Pgq::ConsumerGroup
   def initialize(logger, queue, consumer, options)
     super
-    require_relative '../models/routing_base'
+    require_relative '../models/cdr_base'
     key = options['mode']
-    ::RoutingBase.establish_connection options.dig('databases', key, 'primary')
+    ::CdrBase.establish_connection options.dig('databases', key, 'cdr')
     @sp_name = options['stored_procedure']
   end
 
   def perform_batch
     safe_batch_perform do
-      events_qty = ::RoutingBase.fetch_sp_val("SELECT processed_records FROM #{@sp_name}()")
+      events_qty = ::CdrBase.fetch_sp_val("SELECT processed_records FROM #{@sp_name}()")
 
       if events_qty.nil?
         # no batch
