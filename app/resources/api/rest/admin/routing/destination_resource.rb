@@ -2,6 +2,11 @@
 
 class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   model_name 'Routing::Destination'
+
+  module CONST
+    SYSTEM_NAMESPACE_RELATIONS = %w[Country].freeze
+  end.freeze
+
   attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
@@ -12,6 +17,7 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
 
   has_one :rate_group, class_name: 'RateGroup'
   has_one :routing_tag_mode, class_name: 'RoutingTagMode'
+  has_one :country, class_name: 'Country', force_routed: true, foreign_key_on: :related
 
   filters :external_id, :prefix, :rate_group_id
 
@@ -39,6 +45,8 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   ransack_filter :reverse_billing, type: :boolean
   ransack_filter :profit_control_mode_id, type: :number
   ransack_filter :rate_policy_id, type: :number
+  ransack_filter :rateplan_id, type: :foreign_key, column: :rate_group_rateplans_id
+  ransack_filter :country_id, type: :foreign_key, column: :network_prefix_country_id
 
   def self.updatable_fields(_context)
     %i[
@@ -72,5 +80,13 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
 
   def self.creatable_fields(context)
     updatable_fields(context)
+  end
+
+  def self.resource_for(type)
+    if type.in?(CONST::SYSTEM_NAMESPACE_RELATIONS)
+      "Api::Rest::Admin::System::#{type}Resource".safe_constantize
+    else
+      super
+    end
   end
 end

@@ -39,6 +39,26 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
       let(:subject_record) { create :destination, rate_group: rate_group }
       let(:attr_value) { subject_record.rate_group_id }
     end
+
+    it_behaves_like :jsonapi_filter_by, :rateplan_id_eq do
+      include_context :ransack_filter_setup
+      let(:filter_key) { :rateplan_id_eq }
+      let(:filter_value) { rateplan.id }
+      let!(:rateplan) { FactoryBot.create(:rateplan, rate_groups: [rate_group]) }
+      let!(:subject_record) { FactoryBot.create(:destination, rate_group: rate_group) }
+      let(:attr_value) { rateplan.id }
+    end
+
+    it_behaves_like :jsonapi_filter_by, :country_id_eq do
+      include_context :ransack_filter_setup
+      let(:filter_key) { :country_id_eq }
+      let(:filter_value) { country.id }
+      let!(:network) { FactoryBot.create(:network_uniq) }
+      let!(:network_prefix) { FactoryBot.create(:network_prefix, network:) }
+      let!(:country) { network_prefix.country }
+      let!(:subject_record) { FactoryBot.create(:destination, prefix: network_prefix.prefix) }
+      let(:attr_value) { country.id }
+    end
   end
 
   describe 'GET index with ransack filters' do
@@ -86,6 +106,35 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
 
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
+    end
+
+    context 'include Country' do
+      let!(:network) { FactoryBot.create(:network_uniq) }
+      let!(:network_prefix) { FactoryBot.create(:network_prefix, network:) }
+      let!(:country) { network_prefix.country }
+      let!(:destination) { FactoryBot.create(:destination, prefix: network_prefix.prefix) }
+
+      before { get :show, params: { id: destination.to_param, include: 'country' } }
+
+      include_examples :responds_with_status, 200
+      include_examples :returns_json_api_record, type: 'destinations', relationships: [:country] do
+        let(:json_api_record_id) { destination.id.to_s }
+        let(:json_api_record_attributes) do
+          hash_including(
+            prefix: network_prefix.prefix,
+            enabled: true
+          )
+        end
+      end
+
+      include_examples :returns_json_api_record_relationship, :country do
+        let(:json_api_relationship_data) { { id: country.id.to_s, type: 'countries' } }
+      end
+
+      include_examples :returns_json_api_record_include, type: :countries do
+        let(:json_api_include_id) { country.id.to_s }
+        let(:json_api_include_attributes) { hash_including(name: country.name, iso2: country.iso2) }
+      end
     end
   end
 

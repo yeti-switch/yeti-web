@@ -143,7 +143,9 @@ Rails.application.routes.draw do
             jsonapi_resources :routing_tags
             jsonapi_resources :routing_tag_modes
             jsonapi_resources :routeset_discriminators
-            jsonapi_resources :destinations
+            jsonapi_resources :destinations do
+              # remove relationships endpoints because they fail work with cross namespace relationships.
+            end
             jsonapi_resources :destination_next_rates
           end
         end

@@ -8,7 +8,8 @@ class RansackFilterBuilder
     number: %w[eq not_eq gt gteq lt lteq in not_in],
     string: %w[eq not_eq cont start end in not_in cont_any],
     uuid: %w[eq not_eq in not_in],
-    enum: %w[eq not_eq in not_in]
+    enum: %w[eq not_eq in not_in],
+    foreign_key: %w[eq not_eq in not_in]
   }.freeze
 
   RANSACK_ARRAY_SUFFIXES = %w[in not_in cont_any].freeze
