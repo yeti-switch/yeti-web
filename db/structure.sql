@@ -1055,7 +1055,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	lega_identity_attestation_id smallint,
 	lega_identity_verstat_id smallint,
 	bleg_force_cancel_routeset boolean,
-	registered_aor_mode_id smallint
+	registered_aor_mode_id smallint,
+	metadata character varying
 );
 
 
@@ -1069,7 +1070,8 @@ CREATE TYPE switch20.cnam_lua_resp AS (
 	dst_number character varying,
 	src_name character varying,
 	src_number character varying,
-	routing_tag_ids smallint[]
+	routing_tag_ids smallint[],
+	metadata character varying
 );
 
 
@@ -18252,7 +18254,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> CNAM. Lua parsed response: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_cnam_lua_resp);
             /*}dbg*/
-
+            if v_cnam_lua_resp.metadata is not null then
+                v_ret.metadata = json_build_object('cnam_resp', v_cnam_lua_resp.metadata::json)::varchar;
+            end if;
             v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
             v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
             v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
@@ -19589,7 +19593,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> CNAM. Lua parsed response: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_cnam_lua_resp);
             /*}dbg*/
-
+            if v_cnam_lua_resp.metadata is not null then
+                v_ret.metadata = json_build_object('cnam_resp', v_cnam_lua_resp.metadata::json)::varchar;
+            end if;
             v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
             v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
             v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
@@ -20886,7 +20892,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             select into v_cnam_lua_resp * from switch20.cnam_lua_response_exec(v_cnam_database.response_lua, json_extract_path_text(v_cnam_resp_json,'response'));
 
             
-
+            if v_cnam_lua_resp.metadata is not null then
+                v_ret.metadata = json_build_object('cnam_resp', v_cnam_lua_resp.metadata::json)::varchar;
+            end if;
             v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
             v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
             v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
@@ -31420,6 +31428,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230425141522'),
 ('20230514130310'),
 ('20230516110137'),
-('20230518130328');
+('20230518130328'),
+('20230524191752');
 
 

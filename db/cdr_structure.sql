@@ -334,7 +334,8 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	src_country_id integer,
 	src_network_id integer,
 	lega_identity_attestation_id smallint,
-	lega_identity_verstat_id smallint
+	lega_identity_verstat_id smallint,
+	metadata character varying
 );
 
 
@@ -535,7 +536,8 @@ CREATE TABLE cdr.cdr (
     lega_identity jsonb,
     lega_identity_attestation_id smallint,
     lega_identity_verstat_id smallint,
-    dump_level_id smallint
+    dump_level_id smallint,
+    metadata jsonb
 )
 PARTITION BY RANGE (time_start);
 
@@ -1872,6 +1874,8 @@ BEGIN
   v_cdr.lega_identity = i_lega_identity;
   v_cdr.lega_identity_attestation_id = v_dynamic.lega_identity_attestation_id;
   v_cdr.lega_identity_verstat_id = v_dynamic.lega_identity_attestation_id;
+
+  v_cdr.metadata = v_dynamic.metadata;
 
   v_cdr.core_version=v_version_data.core;
   v_cdr.yeti_version=v_version_data.yeti;
@@ -4813,6 +4817,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20220803115423'),
 ('20221105191015'),
 ('20230321124900'),
-('20230518150839');
+('20230518150839'),
+('20230524185032');
 
 
