@@ -287,9 +287,11 @@ RSpec.describe 'switch.writecdr()' do
       "customer_auth_external_id": 1504, "customer_external_id": 156_998, "vendor_external_id": 1111,
       "customer_acc_external_id": 156_998, "vendor_acc_external_id": 2222, "orig_gw_external_id": 1,
       "term_gw_external_id": 4444, "customer_acc_vat": '23.0',
-      "metadata": '{"lua_response":"test_response"}'
+      "metadata": metadata
     }.to_json
   end
+
+  let!(:metadata) { nil }
 
   let(:writecdr_parameters) do
     %(
@@ -480,8 +482,7 @@ RSpec.describe 'switch.writecdr()' do
                      customer_duration: 566,
                      vendor_duration: 571,
                      customer_auth_name: 'Customer Auth for trunk 1',
-                     p_charge_info_in: 'sip:p-charge-info@example.com/uri',
-                     metadata: { "lua_response": 'test_response' }.to_hash.stringify_keys!
+                     p_charge_info_in: 'sip:p-charge-info@example.com/uri'
                    )
 
     expect(cdr.lega_identity).to match [
@@ -633,4 +634,35 @@ RSpec.describe 'switch.writecdr()' do
       expect(Cdr::Cdr.last.vendor_price).to eq(9.5166)
     end
   end
+
+  context 'When metadata is null' do
+    let(:metadata) { nil }
+
+    it 'metadata is null in CDR' do
+      expect { subject }.to change { Cdr::Cdr.count }.by(1)
+      expect(Cdr::Cdr.last.metadata).to eq(nil)
+    end
+  end
+
+  context 'When metadata is valid json' do
+    let(:metadata) do
+      '{"lua_response":"test_response"}'
+    end
+
+    it 'metadata is json in CDR' do
+      expect { subject }.to change { Cdr::Cdr.count }.by(1)
+      expect(Cdr::Cdr.last.metadata.to_json).to eq(metadata)
+    end
+  end
+
+  context 'When metadata is not valid json' do
+    let(:metadata) do
+      '{"lua_responsedwww}'
+    end
+
+    it 'writecdr raising exception' do
+      expect { subject }.to raise_error(ActiveRecord::StatementInvalid,/PG::InvalidTextRepresentation: ERROR:  invalid input syntax for type json(.*)/)
+    end
+  end
+
 end

@@ -1875,7 +1875,7 @@ BEGIN
   v_cdr.lega_identity_attestation_id = v_dynamic.lega_identity_attestation_id;
   v_cdr.lega_identity_verstat_id = v_dynamic.lega_identity_attestation_id;
 
-  v_cdr.metadata = v_dynamic.metadata;
+  v_cdr.metadata = v_dynamic.metadata::jsonb;
 
   v_cdr.core_version=v_version_data.core;
   v_cdr.yeti_version=v_version_data.yeti;

@@ -6,6 +6,8 @@ class AddLuaMetadata < ActiveRecord::Migration[7.0]
         alter type switch20.cnam_lua_resp add attribute metadata varchar;
         alter type switch20.callprofile_ty add attribute metadata varchar;
 
+        INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1041, 'metadata', 'varchar', true, 1980, false);
+
         CREATE or replace FUNCTION switch20.route(
   i_node_id integer,
   i_pop_id integer,
@@ -2754,6 +2756,8 @@ class AddLuaMetadata < ActiveRecord::Migration[7.0]
 
     alter type switch20.cnam_lua_resp drop attribute metadata;
     alter type switch20.callprofile_ty drop attribute metadata;
+    delete from switch20.switch_interface_out where id = 1041;
+
 
     }
   end
