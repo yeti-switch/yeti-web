@@ -661,8 +661,7 @@ RSpec.describe 'switch.writecdr()' do
     end
 
     it 'writecdr raising exception' do
-      expect { subject }.to raise_error(ActiveRecord::StatementInvalid,/PG::InvalidTextRepresentation: ERROR:  invalid input syntax for type json(.*)/)
+      expect { subject }.to raise_error(ActiveRecord::StatementInvalid, /PG::InvalidTextRepresentation: ERROR:  invalid input syntax for type json(.*)/)
     end
   end
-
 end
