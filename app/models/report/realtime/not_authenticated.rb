@@ -54,6 +54,7 @@
 #  legb_user_agent                 :string
 #  local_tag                       :string
 #  lrn                             :string
+#  metadata                        :jsonb
 #  p_charge_info_in                :string
 #  pai_in                          :string
 #  pai_out                         :string
