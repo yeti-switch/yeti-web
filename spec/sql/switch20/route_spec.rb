@@ -107,22 +107,48 @@ RSpec.describe '#routing logic' do
   let(:rpid) { 'rpid' }
   let(:rpid_privacy) { 'rpid-privacy' }
 
-  shared_context 'routing' do
+  shared_examples 'routing' do
     context 'Use X-SRC-IP if originator is trusted load balancer' do
       before do
         FactoryBot.create(:system_load_balancer,
                           signalling_ip: '1.1.1.1')
-
-        FactoryBot.create(:customers_auth,
-                          ip: '3.3.3.3')
       end
-
+      let!(:customer_auth) { FactoryBot.create(:customers_auth, customer_auth_attrs) }
+      let(:customer_auth_attrs) { { ip: x_orig_ip } }
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
 
       it 'return 404 ' do
         expect(subject.size).to eq(1)
-        expect(subject.first[:customer_auth_id]).to be
+        expect(subject.first[:customer_auth_id]).to eq customer_auth.id
+        expect(subject.first[:customer_auth_external_id]).to be_nil
+        expect(subject.first[:customer_auth_external_type]).to be_nil
+      end
+
+      context 'when customer_auth has external_id only' do
+        let(:customer_auth_attrs) do
+          super().merge external_id: 123
+        end
+
+        it 'return 404 ' do
+          expect(subject.size).to eq(1)
+          expect(subject.first[:customer_auth_id]).to eq(customer_auth.id)
+          expect(subject.first[:customer_auth_external_id]).to eq(123)
+          expect(subject.first[:customer_auth_external_type]).to be_nil
+        end
+      end
+
+      context 'when customer_auth has external_id and external_type' do
+        let(:customer_auth_attrs) do
+          super().merge external_id: 123, external_type: 'term'
+        end
+
+        it 'return 404 ' do
+          expect(subject.size).to eq(1)
+          expect(subject.first[:customer_auth_id]).to eq(customer_auth.id)
+          expect(subject.first[:customer_auth_external_id]).to eq(123)
+          expect(subject.first[:customer_auth_external_type]).to eq('term')
+        end
       end
     end
 
@@ -149,9 +175,9 @@ RSpec.describe '#routing logic' do
       before do
         FactoryBot.create(:system_load_balancer,
                           signalling_ip: '1.1.1.1')
-        @ca = FactoryBot.create(:customers_auth, :with_incoming_auth,
-                                ip: '3.3.3.3')
+        @ca = FactoryBot.create(:customers_auth, :with_incoming_auth, ca_attrs)
       end
+      let(:ca_attrs) { { ip: '3.3.3.3' } }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -160,6 +186,8 @@ RSpec.describe '#routing logic' do
         it 'Reject with 401' do
           expect(subject.size).to eq(1)
           expect(subject.first[:customer_auth_id]).to be_nil
+          expect(subject.first[:customer_auth_external_id]).to be_nil
+          expect(subject.first[:customer_auth_external_type]).to be_nil
           expect(subject.first[:aleg_auth_required]).to eq(true)
         end
       end
@@ -167,11 +195,43 @@ RSpec.describe '#routing logic' do
       context 'Authorized' do
         let(:auth_id) { @ca.gateway_id }
 
-        it 'Pass auth ' do
+        it 'Pass auth' do
           expect(subject.size).to eq(1)
           expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+          expect(subject.first[:customer_auth_external_id]).to be_nil
+          expect(subject.first[:customer_auth_external_type]).to be_nil
           expect(subject.first[:aleg_auth_required]).to be_nil
           expect(subject.first[:disconnect_code_id]).to eq(8000) # No enough customer balance
+        end
+
+        context 'when customer_auth has external_id only' do
+          let(:ca_attrs) do
+            super().merge external_id: 123
+          end
+
+          it 'Pass auth' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+            expect(subject.first[:customer_auth_external_id]).to eq(123)
+            expect(subject.first[:customer_auth_external_type]).to be_nil
+            expect(subject.first[:aleg_auth_required]).to be_nil
+            expect(subject.first[:disconnect_code_id]).to eq(8000) # No enough customer balance
+          end
+        end
+
+        context 'when customer_auth has external_id and external_type' do
+          let(:ca_attrs) do
+            super().merge external_id: 123, external_type: 'term'
+          end
+
+          it 'Pass auth' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+            expect(subject.first[:customer_auth_external_id]).to eq(123)
+            expect(subject.first[:customer_auth_external_type]).to eq('term')
+            expect(subject.first[:aleg_auth_required]).to be_nil
+            expect(subject.first[:disconnect_code_id]).to eq(8000) # No enough customer balance
+          end
         end
       end
     end
@@ -180,10 +240,9 @@ RSpec.describe '#routing logic' do
       before do
         FactoryBot.create(:system_load_balancer,
                           signalling_ip: '1.1.1.1')
-        @ca = FactoryBot.create(:customers_auth, :with_incoming_auth, :with_reject,
-                                ip: '3.3.3.3')
+        @ca = FactoryBot.create(:customers_auth, :with_incoming_auth, :with_reject, ca_attrs)
       end
-
+      let(:ca_attrs) { { ip: '3.3.3.3' } }
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
 
@@ -198,19 +257,64 @@ RSpec.describe '#routing logic' do
       context 'Authorized' do
         let(:auth_id) { CustomersAuth.take!.gateway_id }
 
-        it 'Pass auth ' do
+        it 'Pass auth' do
           expect(subject.size).to eq(1)
           expect(subject.first[:aleg_auth_required]).to be_nil
           expect(subject.first[:disconnect_code_id]).to eq(8004) # Reject by customer auth
 
           expect(subject.first[:customer_auth_id]).to eq(@ca.id)
-          expect(subject.first[:customer_auth_external_id]).to eq(@ca.external_id)
+          expect(subject.first[:customer_auth_external_id]).to be_nil
+          expect(subject.first[:customer_auth_external_type]).to be_nil
           expect(subject.first[:customer_id]).to eq(@ca.customer_id)
           expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
           expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
           expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
           expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
           expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
+        end
+
+        context 'when customer_auth has external_id only' do
+          let(:ca_attrs) do
+            super().merge external_id: 123
+          end
+
+          it 'Pass auth' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:aleg_auth_required]).to be_nil
+            expect(subject.first[:disconnect_code_id]).to eq(8004) # Reject by customer auth
+
+            expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+            expect(subject.first[:customer_auth_external_id]).to eq(123)
+            expect(subject.first[:customer_auth_external_type]).to be_nil
+            expect(subject.first[:customer_id]).to eq(@ca.customer_id)
+            expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
+            expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
+            expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
+            expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
+            expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
+          end
+        end
+
+        context 'when customer_auth has external_id and external_type' do
+          let(:ca_attrs) do
+            super().merge external_id: 123, external_type: 'term'
+          end
+
+          it 'Pass auth' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:aleg_auth_required]).to be_nil
+            expect(subject.first[:disconnect_code_id]).to eq(8004) # Reject by customer auth
+
+            expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+            expect(subject.first[:customer_auth_external_id]).to eq(123)
+            expect(subject.first[:customer_auth_external_type]).to eq('term')
+            expect(subject.first[:customer_id]).to eq(@ca.customer_id)
+            expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
+            expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
+            expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
+            expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
+            expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
+          end
         end
       end
     end
@@ -219,26 +323,70 @@ RSpec.describe '#routing logic' do
       before do
         FactoryBot.create(:system_load_balancer,
                           signalling_ip: '1.1.1.1')
-        @ca = FactoryBot.create(:customers_auth, :with_reject,
-                                ip: '3.3.3.3')
+        @ca = FactoryBot.create(:customers_auth, :with_reject, ca_attrs)
       end
-
+      let(:ca_attrs) { { ip: '3.3.3.3' } }
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
 
-      it 'Reject ' do
+      it 'Reject' do
         expect(subject.size).to eq(1)
         expect(subject.first[:aleg_auth_required]).to be_nil
         expect(subject.first[:disconnect_code_id]).to eq(8004) # Reject by customer auth
 
         expect(subject.first[:customer_auth_id]).to eq(@ca.id)
-        expect(subject.first[:customer_auth_external_id]).to eq(@ca.external_id)
+        expect(subject.first[:customer_auth_external_id]).to be_nil
+        expect(subject.first[:customer_auth_external_type]).to be_nil
         expect(subject.first[:customer_id]).to eq(@ca.customer_id)
         expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
         expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
         expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
         expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
         expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
+      end
+
+      context 'when customer_auth has external_id only' do
+        let(:ca_attrs) do
+          super().merge external_id: 123
+        end
+
+        it 'Reject' do
+          expect(subject.size).to eq(1)
+          expect(subject.first[:aleg_auth_required]).to be_nil
+          expect(subject.first[:disconnect_code_id]).to eq(8004) # Reject by customer auth
+
+          expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+          expect(subject.first[:customer_auth_external_id]).to eq(123)
+          expect(subject.first[:customer_auth_external_type]).to be_nil
+          expect(subject.first[:customer_id]).to eq(@ca.customer_id)
+          expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
+          expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
+          expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
+          expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
+          expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
+        end
+      end
+
+      context 'when customer_auth has external_id and external_type' do
+        let(:ca_attrs) do
+          super().merge external_id: 123, external_type: 'term'
+        end
+
+        it 'Reject' do
+          expect(subject.size).to eq(1)
+          expect(subject.first[:aleg_auth_required]).to be_nil
+          expect(subject.first[:disconnect_code_id]).to eq(8004) # Reject by customer auth
+
+          expect(subject.first[:customer_auth_id]).to eq(@ca.id)
+          expect(subject.first[:customer_auth_external_id]).to eq(123)
+          expect(subject.first[:customer_auth_external_type]).to eq('term')
+          expect(subject.first[:customer_id]).to eq(@ca.customer_id)
+          expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
+          expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
+          expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
+          expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
+          expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
+        end
       end
     end
 
@@ -409,7 +557,6 @@ RSpec.describe '#routing logic' do
                           dst_numberlist_id: customer_auth_dst_numberlist_id,
                           dump_level_id: customer_auth_dump_level,
                           src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion)
-        puts CustomersAuth.last.attributes
       end
 
       let!(:send_billing_information) { false }
