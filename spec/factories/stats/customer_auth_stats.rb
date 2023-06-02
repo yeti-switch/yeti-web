@@ -18,8 +18,11 @@
 #
 #  customer_auth_stats_customer_auth_id_timestamp_idx  (customer_auth_id,timestamp) UNIQUE
 #
-class Stats::CustomerAuthStats < Stats::Traffic
-  self.table_name = 'stats.customer_auth_stats'
+FactoryBot.define do
+  factory :customer_auth_stats, class: Stats::CustomerAuthStats do
+    calls_count { rand(5) }
+    timestamp { Time.now.utc }
 
-  belongs_to :customer_auth, class_name: 'CustomersAuth', optional: true
+    association :customer_auth, factory: :customers_auth
+  end
 end
