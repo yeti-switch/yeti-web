@@ -335,7 +335,8 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	src_network_id integer,
 	lega_identity_attestation_id smallint,
 	lega_identity_verstat_id smallint,
-	metadata character varying
+	metadata character varying,
+	customer_auth_external_type character varying
 );
 
 
@@ -537,7 +538,8 @@ CREATE TABLE cdr.cdr (
     lega_identity_attestation_id smallint,
     lega_identity_verstat_id smallint,
     dump_level_id smallint,
-    metadata jsonb
+    metadata jsonb,
+    customer_auth_external_type character varying
 )
 PARTITION BY RANGE (time_start);
 
@@ -1901,6 +1903,7 @@ BEGIN
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
+  v_cdr.customer_auth_external_type:=v_dynamic.customer_auth_external_type;
   v_cdr.customer_auth_name:=v_dynamic.customer_auth_name;
 
   v_cdr.vendor_id:=v_dynamic.vendor_id;
@@ -4818,6 +4821,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20221105191015'),
 ('20230321124900'),
 ('20230518150839'),
-('20230524185032');
+('20230524185032'),
+('20230602123903');
 
 

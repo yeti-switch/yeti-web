@@ -414,6 +414,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           column :customer_external_id
           column :customer_auth_external_id
+          column :customer_auth_external_type
           column :customer_acc_vat
           column :customer_acc_external_id
 

@@ -11,6 +11,7 @@
 #  core_version                    :string
 #  customer_acc_vat                :decimal(, )
 #  customer_account_check_balance  :boolean
+#  customer_auth_external_type     :string
 #  customer_auth_name              :string
 #  customer_duration               :integer(4)
 #  customer_price                  :decimal(, )

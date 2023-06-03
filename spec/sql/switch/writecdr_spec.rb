@@ -287,7 +287,8 @@ RSpec.describe 'switch.writecdr()' do
       "customer_auth_external_id": 1504, "customer_external_id": 156_998, "vendor_external_id": 1111,
       "customer_acc_external_id": 156_998, "vendor_acc_external_id": 2222, "orig_gw_external_id": 1,
       "term_gw_external_id": 4444, "customer_acc_vat": '23.0',
-      "metadata": metadata
+      "metadata": metadata,
+      "customer_auth_external_type": 'term'
     }.to_json
   end
 
@@ -471,6 +472,7 @@ RSpec.describe 'switch.writecdr()' do
                      customer_account_check_balance: true,
                      customer_external_id: 156_998,
                      customer_auth_external_id: 1504,
+                     customer_auth_external_type: 'term',
                      customer_acc_external_id: 156_998,
                      routing_tag_ids: [9],
                      vendor_external_id: 1111,

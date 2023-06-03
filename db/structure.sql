@@ -1056,7 +1056,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	lega_identity_verstat_id smallint,
 	bleg_force_cancel_routeset boolean,
 	registered_aor_mode_id smallint,
-	metadata character varying
+	metadata character varying,
+	customer_auth_external_type character varying
 );
 
 
@@ -17990,6 +17991,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
                 v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
                 v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+                v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
                 v_ret.customer_id:=v_customer_auth_normalized.customer_id;
                 select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
@@ -18049,6 +18051,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
                 v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
                 v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+                v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
                 v_ret.customer_id:=v_customer_auth_normalized.customer_id;
                 select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
@@ -18107,6 +18110,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
         v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
@@ -19329,6 +19333,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
                 v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
                 v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+                v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
                 v_ret.customer_id:=v_customer_auth_normalized.customer_id;
                 select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
@@ -19388,6 +19393,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
                 v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
                 v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+                v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
                 v_ret.customer_id:=v_customer_auth_normalized.customer_id;
                 select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
@@ -19446,6 +19452,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
         v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
@@ -20649,6 +20656,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
                 v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
                 v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+                v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
                 v_ret.customer_id:=v_customer_auth_normalized.customer_id;
                 select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
@@ -20702,6 +20710,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
                 v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
                 v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+                v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
                 v_ret.customer_id:=v_customer_auth_normalized.customer_id;
                 select into strict v_ret.customer_external_id external_id from public.contractors where id=v_ret.customer_id;
@@ -20757,6 +20766,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
         v_ret.customer_auth_external_id:=v_customer_auth_normalized.external_id;
+        v_ret.customer_auth_external_type:=v_customer_auth_normalized.external_type;
 
         v_ret.customer_id:=v_customer_auth_normalized.customer_id;
         select into strict v_ret.customer_external_id external_id from public.contractors where id=v_customer_auth_normalized.customer_id;
@@ -31429,6 +31439,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230514130310'),
 ('20230516110137'),
 ('20230518130328'),
-('20230524191752');
+('20230524191752'),
+('20230602113601');
 
 
