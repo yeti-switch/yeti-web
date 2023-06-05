@@ -29,9 +29,7 @@ ActiveAdmin.register LogicLog do
     column :msg do |row|
       if row.msg.present?
         if row.msg.length > 100
-          div class: :has_tooltip, title: row.msg do
-            row.msg[0...100] << '...'
-          end
+          h.with_tooltip(row.msg) { row.msg[0...100] << '...' }
         else
           row.msg
         end
