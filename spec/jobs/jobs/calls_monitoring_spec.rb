@@ -83,12 +83,21 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
            gateway: origin_gateway)
   end
 
-  let(:customer_auth_id) do
-    customers_auth.id
-  end
+  let(:customer_auth_id) { customers_auth.id }
 
   let(:customers_auth_reject_calls) do
     false
+  end
+
+  let(:customers_auth2) do
+    create(
+      :customers_auth,
+      external_id: 123,
+      external_type: 'term',
+      customer: account.contractor,
+      account: account,
+      gateway: origin_gateway
+    )
   end
 
   let(:node) { create(:node) }
@@ -110,11 +119,13 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
         'customer_acc_id' => account.id,
         'customer_acc_vat' => account.vat.to_s,
         'customer_acc_external_id' => account.external_id,
+        'customer_auth_id' => customer_auth_id,
+        'customer_auth_external_id' => customers_auth.external_id,
+        'customer_auth_external_type' => customers_auth.external_type,
         # Vendor
         'vendor_id' => vendor_acc.contractor.id,
         'vendor_acc_id' => vendor_acc.id,
         'vendor_acc_external_id' => vendor_acc.external_id,
-        'customer_auth_id' => customer_auth_id,
         'duration' => 61,
         # destination
         'destination_fee' => '1.0000',
@@ -137,7 +148,6 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
 
         'orig_gw_id' => origin_gateway.id,
         'term_gw_id' => term_gateway.id
-
       },
       {
         'local_tag' => 'reverse-call',
@@ -147,6 +157,9 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
         'customer_acc_id' => account.id,
         'customer_acc_vat' => account.vat.to_s,
         'customer_acc_external_id' => account.external_id,
+        'customer_auth_id' => customers_auth2.id,
+        'customer_auth_external_id' => customers_auth2.external_id,
+        'customer_auth_external_type' => customers_auth2.external_type,
         # Vendor
         'vendor_id' => vendor_acc.contractor.id,
         'vendor_acc_id' => vendor_acc.id,
@@ -303,28 +316,102 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
 
       it 'sends prometheus metrics' do
         expect { subject }.to send_prometheus_metrics
-          .exactly(3)
+          .exactly(5)
           .with(type: 'yeti_ac', total: 2)
           .with(
-                                type: 'yeti_ac',
-                                account_originated: 2,
-                                account_originated_unique_src: 2,
-                                account_originated_unique_dst: 2,
-                                account_price_originated: -3.96, # +1.04 normal call -5 reverse call
-                                metric_labels: {
-                                  account_id: account.id,
-                                  account_external_id: account.external_id
-                                }
-                              )
+            type: 'yeti_ac',
+            account_originated: 2,
+            account_originated_unique_src: 2,
+            account_originated_unique_dst: 2,
+            account_price_originated: -3.96, # +1.04 normal call -5 reverse call
+            metric_labels: {
+              account_id: account.id,
+              account_external_id: account.external_id
+            }
+          )
           .with(
-                                type: 'yeti_ac',
-                                account_terminated: 2,
-                                account_price_terminated: 5.0, # +9 normal call -4 reverse call
-                                metric_labels: {
-                                  account_id: vendor_acc.id,
-                                  account_external_id: vendor_acc.external_id
-                                }
-                              )
+            type: 'yeti_ac',
+            account_terminated: 2,
+            account_price_terminated: 5.0, # +9 normal call -4 reverse call
+            metric_labels: {
+              account_id: vendor_acc.id,
+              account_external_id: vendor_acc.external_id
+            }
+          )
+          .with(
+            type: 'yeti_ac',
+            ca: 1,
+            ca_price_originated: 1.04, # +1.04 normal call -5 reverse call
+            metric_labels: {
+              id: customers_auth.id,
+              external_id: customers_auth.external_id,
+              external_type: customers_auth.external_type,
+              account_id: account.id,
+              account_external_id: account.external_id
+            }
+          )
+          .with(
+            type: 'yeti_ac',
+            ca: 1,
+            ca_price_originated: -5,
+            metric_labels: {
+              id: customers_auth2.id,
+              external_id: customers_auth2.external_id,
+              external_type: customers_auth2.external_type,
+              account_id: account.id,
+              account_external_id: account.external_id
+            }
+          )
+      end
+
+      context 'when calls have same customer_auth' do
+        let(:cdr_list_unsorted) do
+          list = super()
+          list.last.merge!(
+            customer_auth_id: customer_auth_id,
+            customer_auth_external_id: customers_auth.external_id,
+            customer_auth_external_type: customers_auth.external_type
+          )
+          list
+        end
+
+        it 'sends prometheus metrics' do
+          expect { subject }.to send_prometheus_metrics
+            .exactly(4)
+            .with(type: 'yeti_ac', total: 2)
+            .with(
+              type: 'yeti_ac',
+              account_originated: 2,
+              account_originated_unique_src: 2,
+              account_originated_unique_dst: 2,
+              account_price_originated: -3.96, # +1.04 normal call -5 reverse call
+              metric_labels: {
+                account_id: account.id,
+                account_external_id: account.external_id
+              }
+            )
+            .with(
+              type: 'yeti_ac',
+              account_terminated: 2,
+              account_price_terminated: 5.0, # +9 normal call -4 reverse call
+              metric_labels: {
+                account_id: vendor_acc.id,
+                account_external_id: vendor_acc.external_id
+              }
+            )
+            .with(
+              type: 'yeti_ac',
+              ca: 2,
+              ca_price_originated: -3.96, # +1.04 normal call -5 reverse call
+              metric_labels: {
+                id: customers_auth.id,
+                external_id: customers_auth.external_id,
+                external_type: customers_auth.external_type,
+                account_id: account.id,
+                account_external_id: account.external_id
+              }
+            )
+        end
       end
     end
   end

@@ -133,6 +133,8 @@ module Jobs
       :duration,
 
       :customer_auth_id, # link to CustomersAuth, drop calls when CustomersAuth#reject_calls=true
+      :customer_auth_external_id,
+      :customer_auth_external_type,
       :customer_id, # link to contractor, drop call if contractor is not enabled or not customer
       :vendor_id, # link to contractor, drop call if contractor is not enabled or not vendor
 
@@ -260,7 +262,7 @@ module Jobs
     end
 
     # drop calls where `customer_auth_id`
-    # is linked to `CustoemrsAuth#reject_calls = true`
+    # is linked to `CustomersAuth#reject_calls = true`
     def detect_customers_auth_calls_to_reject
       flatten_calls.each do |call|
         customers_auth_id = call[:customer_auth_id]
@@ -282,6 +284,7 @@ module Jobs
       end
     end
 
+    # @see ActiveCallsCollector#collect
     def send_prometheus_metrics
       return unless PrometheusConfig.enabled?
 
@@ -313,6 +316,26 @@ module Jobs
           account_terminated: calls.count,
           account_price_terminated: collection.total_calls_cost,
           labels: { account_external_id: account_external_id, account_id: account_id }
+        )
+      end
+
+      customer_auths_active_calls.each do |customer_auth_id, calls|
+        customer_auth_external_id = calls.first[:customer_auth_external_id]
+        customer_auth_external_type = calls.first[:customer_auth_external_type]
+        account_id = calls.first[:customer_acc_id]
+        account_external_id = calls.first[:customer_acc_external_id]
+        collection = CallCollection.new(calls, key: :destination, account: [])
+
+        metrics << ActiveCallsProcessor.collect(
+          ca: calls.count,
+          ca_price_originated: collection.total_calls_cost,
+          labels: {
+            id: customer_auth_id,
+            external_id: customer_auth_external_id,
+            external_type: customer_auth_external_type,
+            account_id: account_id,
+            account_external_id: account_external_id
+          }
         )
       end
 
@@ -369,6 +392,10 @@ module Jobs
 
     def customers_active_calls
       @customers_active_calls ||= flatten_calls.group_by { |c| c[:customer_acc_id] }
+    end
+
+    def customer_auths_active_calls
+      @customer_auths_active_calls ||= flatten_calls.group_by { |c| c[:customer_auth_id] }
     end
 
     def vendors_active_calls
