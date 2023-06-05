@@ -28,7 +28,7 @@ ActiveAdmin.register CodecGroup do
     column :codecs do |row|
       codec_names = row.codec_names
 
-      div class: :has_tooltip, title: codec_names.join(',') do
+      with_tooltip(codec_names.join(',')) do
         if codec_names.size > 3
           row.codec_names.take(3).join(' ') << '...'
         else

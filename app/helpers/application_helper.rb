@@ -90,4 +90,9 @@ module ApplicationHelper
       tag.span(tag_name, class: 'status_tag ok')
     end.join('&nbsp;').html_safe
   end
+
+  def with_tooltip(tooltip_text)
+    tooltip_options = { class: 'has_tooltip', title: tooltip_text }
+    content_tag(:div, tooltip_options) { yield }
+  end
 end

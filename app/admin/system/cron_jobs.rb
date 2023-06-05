@@ -2,7 +2,7 @@
 
 ActiveAdmin.register CronJobInfo, as: 'Cron Job' do
   menu parent: 'System', priority: 100
-
+  decorate_with CronJobInfoDecorator
   config.batch_actions = false
   actions :index, :show
 
@@ -11,7 +11,7 @@ ActiveAdmin.register CronJobInfo, as: 'Cron Job' do
     column :last_success
     column :last_run_at
     column :last_duration
-    column :cron_line
+    column :cron_line, :cron_line_formatted
     actions
   end
 
@@ -23,7 +23,7 @@ ActiveAdmin.register CronJobInfo, as: 'Cron Job' do
           row :last_success
           row :last_run_at
           row :last_duration
-          row :cron_line
+          row :cron_line, &:cron_line_formatted
         end
       end
 
