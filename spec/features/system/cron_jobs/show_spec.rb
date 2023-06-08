@@ -60,4 +60,24 @@ RSpec.describe 'Cron Job show', js: true do
       end
     end
   end
+
+  context 'with every cron job info' do
+    let(:record) { CronJobInfo.find_by!(name: 'PrometheusCustomerAuthStats') }
+
+    before do
+      record.update!(last_run_at: Time.zone.now, last_duration: 123.456)
+    end
+
+    it 'renders show page correctly' do
+      subject
+      expect(page).to have_attribute_row('NAME', exact_text: record.name)
+      expect(page).to have_attribute_row('LAST SUCCESS', exact_text: 'YES')
+      expect(page).to have_attribute_row('LAST RUN AT', exact_text: record.last_run_at.strftime('%F %T'))
+      expect(page).to have_attribute_row('LAST DURATION', exact_text: record.last_duration.to_s)
+      expect(page).to have_attribute_row('CRON LINE', exact_text: "every #{record.handler_class.every_interval}")
+      within_panel 'Last Exception' do
+        expect(page).to have_text('', exact: true)
+      end
+    end
+  end
 end

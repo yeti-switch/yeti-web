@@ -3,6 +3,11 @@
 require 'yeti_scheduler'
 
 RSpec.describe YetiScheduler do
+  it 'has handlers' do
+    expect(YetiScheduler._cron_handlers).to_not be_empty
+    expect(YetiScheduler._every_handlers).to_not be_empty
+  end
+
   describe '.start!' do
     subject do
       described_class.start!(*args)
@@ -60,6 +65,18 @@ RSpec.describe YetiScheduler do
         time_double = double
         expect(rufus_stub).to receive(:cron)
           .with(handler_class.cron_line, handler_class.scheduler_options)
+          .and_yield(job_double, time_double)
+
+        # called when cron time is come but we yield it in test stub above to check #run_handler being run
+        expect(described_instance).to receive(:run_handler)
+          .with(handler_class, job_double, time_double)
+          .once
+      end
+      described_class._every_handlers.each do |handler_class|
+        job_double = double
+        time_double = double
+        expect(rufus_stub).to receive(:every)
+          .with(handler_class.every_interval, handler_class.scheduler_options)
           .and_yield(job_double, time_double)
 
         # called when cron time is come but we yield it in test stub above to check #run_handler being run
@@ -138,8 +155,9 @@ RSpec.describe YetiScheduler do
       end
     end
 
-    YetiScheduler._cron_handlers.each do |handler|
-      context "with handler_class #{handler}" do
+    handlers = YetiScheduler._cron_handlers + YetiScheduler._every_handlers
+    handlers.each do |handler|
+      context "with cron handler_class #{handler}" do
         let!(:handler_class) { handler }
         let(:handler_name) { scheduler_options[:name] }
 

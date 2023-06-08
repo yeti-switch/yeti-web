@@ -21,5 +21,45 @@
 class Stats::CustomerAuthStats < Stats::Traffic
   self.table_name = 'stats.customer_auth_stats'
 
+  StatRow = Struct.new(
+    :account_id,
+    :account_external_id,
+    :customer_auth_id,
+    :customer_auth_external_id,
+    :customer_auth_external_type,
+    :customer_price
+  )
+
   belongs_to :customer_auth, class_name: 'CustomersAuth', optional: true
+
+  def self.last24_hour
+    from_time = 24.hours.ago.beginning_of_hour
+
+    stats = where('timestamp >= ?', from_time)
+            .group(:customer_auth_id)
+            .pluck(
+                :customer_auth_id,
+                'SUM(customer_price)'
+              ).index_by(&:first)
+
+    info = CustomersAuth.joins(:account)
+                        .where(id: stats.keys)
+                        .pluck(
+                          :account_id,
+                          'accounts.external_id',
+                          :id,
+                          :external_id,
+                          :external_type
+                        ).index_by(&:third)
+
+    result = []
+    stats.each_value do |(customer_auth_id, customer_price)|
+      row = info[customer_auth_id]
+      next if row.nil?
+
+      result << StatRow.new(*row, customer_price)
+    end
+
+    result
+  end
 end
