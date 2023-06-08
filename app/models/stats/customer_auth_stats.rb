@@ -21,5 +21,33 @@
 class Stats::CustomerAuthStats < Stats::Traffic
   self.table_name = 'stats.customer_auth_stats'
 
+  StatRow = Struct.new(
+    :account_id,
+    :account_external_id,
+    :customer_auth_id,
+    :customer_auth_external_id,
+    :customer_auth_external_type,
+    :customer_price
+  )
+
   belongs_to :customer_auth, class_name: 'CustomersAuth', optional: true
+
+  def self.last24_hour
+    from_time = 24.hours.ago.beginning_of_hour
+
+    joins(customer_auth: :account)
+      .where('timestamp >= ?', from_time)
+      .group(
+        :customer_auth_id,
+        Arel.sql('accounts.external_id')
+      )
+      .pluck(
+        Arel.sql('customers_auth.account_id'),
+        Arel.sql('accounts.external_id AS account_external_id'),
+        :customer_auth_id,
+        Arel.sql('customers_auth.external_id AS customer_auth_external_id'),
+        Arel.sql('customers_auth.external_type AS customer_auth_external_type'),
+        Arel.sql('SUM(customer_price) AS customer_price')
+      )
+  end
 end

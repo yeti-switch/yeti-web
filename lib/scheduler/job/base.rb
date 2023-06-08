@@ -4,6 +4,7 @@ module Scheduler
   module Job
     class Base
       class_attribute :cron_line, instance_accessor: false
+      class_attribute :every_interval, instance_accessor: false
       class_attribute :logger, instance_writer: false
 
       class << self

@@ -19,6 +19,7 @@ class Scheduler::Base
   class_attribute :logger, instance_writer: false
   class_attribute :scheduler, instance_accessor: false
   class_attribute :_cron_handlers, instance_writer: false, default: []
+  class_attribute :_every_handlers, instance_writer: false, default: []
   class_attribute :_middlewares, instance_writer: false, default: []
   class_attribute :_before_run_callbacks, instance_writer: false, default: []
   class_attribute :_on_error_callback, instance_writer: false
@@ -27,6 +28,7 @@ class Scheduler::Base
     def inherited(subclass)
       subclass.scheduler = nil
       subclass._cron_handlers = []
+      subclass._every_handlers = []
       subclass._middlewares = []
       subclass._before_run_callbacks = []
       subclass._on_error_callback = nil
@@ -58,6 +60,10 @@ class Scheduler::Base
     # handler_class [Class<Scheduler::Job::Base>]
     def cron(handler_class)
       _cron_handlers.push(handler_class)
+    end
+
+    def every(handler_class)
+      _every_handlers.push(handler_class)
     end
 
     # @param middleware_class [Class<Scheduler::Middleware::Base>]
@@ -118,6 +124,11 @@ class Scheduler::Base
 
     _cron_handlers.each do |handler_class|
       rufus_scheduler.cron(handler_class.cron_line, handler_class.scheduler_options) do |job, time|
+        run_handler(handler_class, job, time)
+      end
+    end
+    _every_handlers.each do |handler_class|
+      rufus_scheduler.every(handler_class.every_interval, handler_class.scheduler_options) do |job, time|
         run_handler(handler_class, job, time)
       end
     end
