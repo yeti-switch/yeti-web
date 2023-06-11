@@ -83,6 +83,8 @@ class GuiConfig < ApplicationRecord
         script_name = std[2].gets || f
         scripts << [script_name.chomp, f]
       end
+    rescue Errno::ENOENT => _e
+      return []
     rescue StandardError => e
       Rails.logger.error e.message
       Rails.logger.error e.backtrace
