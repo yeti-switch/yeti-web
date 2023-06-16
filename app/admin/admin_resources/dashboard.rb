@@ -26,9 +26,7 @@ ActiveAdmin.register_page 'Dashboard' do
               column :node
               column :retries
               column :last_error do |e|
-                div class: :has_tooltip, title: e.last_error do
-                  e.last_error.to_s[0..20]
-                end
+                with_tooltip(e.last_error) { e.last_error.to_s[0..20] }
               end
             end
           end

@@ -13,7 +13,7 @@
 class CronJobInfo < ApplicationRecord
   self.table_name = 'sys.jobs'
 
-  delegate :cron_line, to: :handler_class
+  delegate :cron_line, :every_interval, to: :handler_class
 
   def last_success
     return if last_run_at.nil?
