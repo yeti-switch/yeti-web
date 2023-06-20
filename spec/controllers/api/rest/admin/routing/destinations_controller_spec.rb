@@ -6,12 +6,33 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
   include_context :jsonapi_admin_headers
 
   describe 'GET index' do
+    subject { get :index, params: index_params }
+
+    let(:index_params) { {} }
     let!(:destinations) { create_list :destination, 2, rate_group: rate_group }
 
-    before { get :index }
+    context 'without any parameters' do
+      it 'should return valid response with all Destinations' do
+        subject
 
-    it { expect(response.status).to eq(200) }
-    it { expect(response_data.size).to eq(destinations.size) }
+        expect(response.status).to eq(200)
+        expect(response_data.size).to eq(destinations.size)
+      end
+    end
+
+    describe 'include' do
+      describe 'by routing_tag_mode' do
+        context 'when routing_tag_mode is present' do
+          let(:index_params) { { include: :routing_tag_mode } }
+
+          it 'should return destinations with routing tag mode included' do
+            subject
+
+            expect(response_body[:errors]).to be_nil
+          end
+        end
+      end
+    end
   end
 
   describe 'GET index with filters' do
