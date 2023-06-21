@@ -82,11 +82,32 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
     updatable_fields(context)
   end
 
+  def self.sortable_fields(_context = nil)
+    super + [:'country.name']
+  end
+
   def self.resource_for(type)
     if type.in?(CONST::SYSTEM_NAMESPACE_RELATIONS)
       "Api::Rest::Admin::System::#{type}Resource".safe_constantize
     else
       super
     end
+  end
+
+  # related to issue https://github.com/cerebris/jsonapi-resources/issues/1409
+  def self.sort_records(records, order_options, context = {})
+    local_records = records
+
+    order_options.each_pair do |field, direction|
+      case field.to_s
+      when 'country.name'
+        local_records = records.left_joins(:country).order("countries.name #{direction}")
+        order_options.delete('country.name')
+      else
+        local_records = apply_sort(local_records, order_options, context)
+      end
+    end
+
+    local_records
   end
 end

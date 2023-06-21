@@ -6,12 +6,98 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
   include_context :jsonapi_admin_headers
 
   describe 'GET index' do
+    subject { get :index, params: index_params }
+
+    let(:index_params) { {} }
     let!(:destinations) { create_list :destination, 2, rate_group: rate_group }
 
-    before { get :index }
+    context 'without query params' do
+      it 'should return valid response with all destinations' do
+        subject
+        expect(response.status).to eq(200)
+        expect(response_data.size).to eq(destinations.size)
+      end
+    end
 
-    it { expect(response.status).to eq(200) }
-    it { expect(response_data.size).to eq(destinations.size) }
+    describe 'sort' do
+      context 'by country & prefix' do
+        let(:destinations) { nil }
+        let!(:net_type) { FactoryBot.create(:network_type) }
+        let!(:network) { FactoryBot.create(:network) }
+
+        let!(:first_destination_afghanistan) do
+          afghanistan = System::Country.find_by!(name: 'Afghanistan')
+          network_prefix = FactoryBot.create(:network_prefix, country: afghanistan)
+          record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '111')
+          record.update!(network_prefix_id: network_prefix.id)
+          record
+        end
+
+        let!(:second_destination_ukraine) do
+          ukraine = System::Country.find_by!(name: 'Ukraine')
+          network_prefix = FactoryBot.create(:network_prefix, country: ukraine)
+          record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '999')
+          record.update!(network_prefix_id: network_prefix.id)
+          record
+        end
+
+        context 'by name of the country in ascending order' do
+          let(:index_params) { { sort: 'country.name' } }
+
+          it 'returns ordered records' do
+            subject
+
+            expect(response_body[:errors]).to be_nil
+            expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, second_destination_ukraine.id.to_s]
+          end
+        end
+
+        context 'by name of the country in descending order' do
+          let(:index_params) { { sort: '-country.name' } }
+
+          it 'returns ordered records' do
+            subject
+
+            expect(response_body[:errors]).to be_nil
+            expect(response_body[:data].pluck(:id)).to eq [second_destination_ukraine.id.to_s, first_destination_afghanistan.id.to_s]
+          end
+        end
+
+        context 'by country and prefix' do
+          let!(:third_destination_ukraine) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '555')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          context 'when sort by country name and then by prefix in ASC order' do
+            let(:index_params) { { sort: 'country.name,prefix' } }
+
+            it 'returns ordered records' do
+              subject
+
+              expect(response_body[:errors]).to be_nil
+              expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, third_destination_ukraine.id.to_s, second_destination_ukraine.id.to_s]
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 555 999]
+            end
+          end
+
+          context 'when sort by country name in ASC order and then by prefix in DESC order' do
+            let(:index_params) { { sort: 'country.name,-prefix' } }
+
+            it 'returns ordered records' do
+              subject
+
+              expect(response_body[:errors]).to be_nil
+              expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, second_destination_ukraine.id.to_s, third_destination_ukraine.id.to_s]
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 999 555]
+            end
+          end
+        end
+      end
+    end
   end
 
   describe 'GET index with filters' do
