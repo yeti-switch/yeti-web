@@ -1,0 +1,16 @@
+default: &default
+  url: http://127.0.0.1:8123
+  username: yeti
+  password: yeti
+  database: yeti
+  timeout: 60
+  open_timeout: 3
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

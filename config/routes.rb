@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   post 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#create'
   get 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#show'
   delete 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#destroy'
+
+  get 'api/rest/customer/v1/statistics', to: 'api/rest/customer/v1/statistics#show'
+
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
