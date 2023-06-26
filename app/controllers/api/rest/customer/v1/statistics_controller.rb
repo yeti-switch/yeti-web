@@ -18,6 +18,7 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
     @sampling_fn = SAMPLINGS[params[:sampling]]
     if @sampling_fn.nil?
       head 500
+      return
     end
 
     filters = []
@@ -29,23 +30,28 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
     q = "
       SELECT
         toUnixTimestamp(#{@sampling_fn}(time_start)) as t,
-        count(*) AS counter
+        count(*) AS c,
+        avgIf(duration, duration>0) AS acd,
+        countIf(duration>0)/count(*) AS asr
       FROM cdrs
       WHERE #{filters.join(' AND ')}
       GROUP BY t
       ORDER BY t
-      FORMAT JSON
+      FORMAT JSONColumns
     "
     response = ClickHouse.connection.execute(
       q, nil,
       params: {
-        param_time_start_gteq: '2023-02-01 00:00:00',
-        param_time_start_lt: '2023-02-01 00:00:00',
-        param_customer_account_id_eq: 22
+        param_time_start_gteq: '2023-06-01 00:00:00',
+        param_time_start_lt: '2023-6-26 00:00:00',
+        param_customer_account_id_eq: 28
       }
     )
+    if response.status == 200
+      render json: response.body, status: 200
+    else
+      head 500
+    end
 
-    # head 200
-    render json: { data: response.body['data'] }, status: 200
   end
 end
