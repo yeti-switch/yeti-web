@@ -11,10 +11,19 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
     'minute' => 'toStartOfMinute',
     '5minutes' => 'toStartOfMinute5minutes',
     'hour' => 'toStartOfHour',
-    'day' => 'toStartOfDay'
+    'day' => 'toStartOfDay',
+    'week' => 'toStartOfWeek',
+    'month' => 'toStartOfMonth'
   }.freeze
 
   def show
+    if current_customer.allowed_account_ids.include? params[:customer_acc_id_eq].to_i
+      @customer_acc_id = params[:customer_acc_id_eq]
+    else
+      head 500
+      return
+    end
+
     @sampling_fn = SAMPLINGS[params[:sampling]]
     if @sampling_fn.nil?
       head 500
@@ -24,8 +33,6 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
     filters = []
     filters.push('time_start>={time_start_gteq: DateTime}')
     filters.push('time_start<{time_start_lt: DateTime}') unless params[:time_start_lt].nil?
-    filters.push('customer_acc_id = {customer_account_id_eq: UInt32}')
-    filters.push('is_last_cdr = true')
 
     q = "
       SELECT
@@ -37,7 +44,7 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
         round(avgIf(duration, duration>0),5) AS acd,
         round(countIf(duration>0)/count(*),5) AS asr
       FROM cdrs
-      WHERE #{filters.join(' AND ')}
+      WHERE customer_acc_id = {customer_account_id_eq: UInt32} AND #{filters.join(' AND ')} AND is_last_cdr = true
       GROUP BY t
       ORDER BY t
       FORMAT JSONColumns
@@ -46,8 +53,8 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
       q, nil,
       params: {
         param_time_start_gteq: '2023-06-01 00:00:00',
-        param_time_start_lt: '2023-6-26 00:00:00',
-        param_customer_account_id_eq: 28
+        param_time_start_lt: '2023-06-26 00:00:00',
+        param_customer_account_id_eq: @customer_acc_id
       }
     )
     if response.status == 200
