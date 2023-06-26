@@ -2,12 +2,12 @@
 
 begin
   @cfg = Rails.application.config_for('click_house')
-  rescue
+rescue StandardError
 end
 
-if not @cfg.nil?
-ClickHouse.config do |config|
-  config.logger = Rails.logger
-  config.assign(@cfg)
-end
+unless @cfg.nil?
+  ClickHouse.config do |config|
+    config.logger = Rails.logger
+    config.assign(@cfg)
+  end
 end

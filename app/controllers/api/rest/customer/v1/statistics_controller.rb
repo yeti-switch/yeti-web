@@ -30,9 +30,12 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
     q = "
       SELECT
         toUnixTimestamp(#{@sampling_fn}(time_start)) as t,
-        count(*) AS c,
-        avgIf(duration, duration>0) AS acd,
-        countIf(duration>0)/count(*) AS asr
+        count(*) AS total_calls,
+        countIf(duration>0) as successful_calls,
+        countIf(duration=0) as failed_calls,
+        sum(duration) as total_duration,
+        round(avgIf(duration, duration>0),5) AS acd,
+        round(countIf(duration>0)/count(*),5) AS asr
       FROM cdrs
       WHERE #{filters.join(' AND ')}
       GROUP BY t
@@ -52,6 +55,5 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
     else
       head 500
     end
-
   end
 end
