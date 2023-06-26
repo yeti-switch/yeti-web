@@ -17,8 +17,8 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
   }.freeze
 
   def show
-    filters = params[:filter]
-    @customer_acc_id = current_customer.allowed_accounts_uuid_ids_hash[filters['account-id-eq']]
+    @req_filters = params[:filter]
+    @customer_acc_id = current_customer.allowed_accounts_uuid_ids_hash[@req_filters['account-id-eq']]
 
     if @customer_acc_id.nil?
       head 500
