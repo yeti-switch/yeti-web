@@ -61,11 +61,11 @@ class System::ApiAccess < ApplicationRecord
     end
   end
 
-  def allowed_account_ids
+  def allowed_accounts_uuid_ids_hash
     if account_ids.empty?
-      Account.where(contractor_id: customer_id).pluck(:id)
+      Account.where(contractor_id: customer_id).pluck(:uuid, :id).to_h
     else
-      account_ids
+      Account.where(id: account_ids).pluck(:uuid, :id).to_h
     end
   end
 

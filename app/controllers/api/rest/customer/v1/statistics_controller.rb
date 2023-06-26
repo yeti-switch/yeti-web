@@ -17,9 +17,10 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
   }.freeze
 
   def show
-    if current_customer.allowed_account_ids.include? params[:customer_acc_id_eq].to_i
-      @customer_acc_id = params[:customer_acc_id_eq]
-    else
+    filters = params[:filter]
+    @customer_acc_id = current_customer.allowed_accounts_uuid_ids_hash[filters['account-id-eq']]
+
+    if @customer_acc_id.nil?
       head 500
       return
     end
