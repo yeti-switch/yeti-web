@@ -61,6 +61,14 @@ class System::ApiAccess < ApplicationRecord
     end
   end
 
+  def allowed_accounts_uuid_ids_hash
+    if account_ids.empty?
+      Account.where(contractor_id: customer_id).pluck(:uuid, :id).to_h
+    else
+      Account.where(id: account_ids).pluck(:uuid, :id).to_h
+    end
+  end
+
   # Auth
 
   def authenticate_ip(remote_ip)

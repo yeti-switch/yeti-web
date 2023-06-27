@@ -150,3 +150,5 @@ gem 'net-imap', '~> 0.3.4'
 gem 'webrick', '~> 1.8', require: false
 
 gem 'cronex', '~> 0.12.0'
+
+gem 'click_house'
