@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-begin
-  @cfg = Rails.application.config_for('click_house')
-rescue StandardError
-end
-
-unless @cfg.nil?
+config_path = Rails.root.join('config/click_house.yml')
+if config_path.exist?
+  cfg = Rails.application.config_for(config_path)
   ClickHouse.config do |config|
     config.logger = Rails.logger
-    config.assign(@cfg)
+    config.assign(cfg)
   end
 end
