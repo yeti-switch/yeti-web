@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::StatisticsController < Api::RestController
+class Api::Rest::Customer::V1::OriginationStatisticsController < Api::RestController
   include CustomerV1Authorizable
   include ActionController::Cookies
 
@@ -17,9 +17,7 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
   }.freeze
 
   def show
-    @req_filters = params[:filter]
-    @customer_acc_id = current_customer.allowed_accounts_uuid_ids_hash[@req_filters['account-id-eq']]
-
+    @customer_acc_id = current_customer.allowed_accounts_uuid_ids_hash[params['account-id']]
     if @customer_acc_id.nil?
       head 500
       return
@@ -31,9 +29,24 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
       return
     end
 
+    if params['from-time'].nil?
+      head 500
+      return
+    end
+
     filters = []
-    filters.push('time_start>={time_start_gteq: DateTime}')
-    filters.push('time_start<{time_start_lt: DateTime}') unless params[:time_start_lt].nil?
+    query_params = {}
+
+    filters.push('customer_acc_id = {account_id: UInt32}')
+    query_params['param_account_id'] = @customer_acc_id
+
+    filters.push('time_start>={from_time: DateTime}')
+    query_params['param_from_time'] = params['from-time']
+
+    unless params['to-time'].nil?
+      filters.push('time_start<{to_time: DateTime}')
+      query_params['param_to_time'] = params['to-time']
+    end
 
     q = "
       SELECT
@@ -43,25 +56,24 @@ class Api::Rest::Customer::V1::StatisticsController < Api::RestController
         countIf(duration=0) as failed_calls,
         sum(duration) as total_duration,
         round(avgIf(duration, duration>0),5) AS acd,
-        round(countIf(duration>0)/count(*),5) AS asr
+        round(countIf(duration>0)/count(*),5) AS asr,
+        sum(customer_price) as total_price
       FROM cdrs
-      WHERE customer_acc_id = {customer_account_id_eq: UInt32} AND #{filters.join(' AND ')} AND is_last_cdr = true
+      WHERE #{filters.join(' AND ')} AND is_last_cdr = true
       GROUP BY t
       ORDER BY t
       FORMAT JSONColumns
     "
+
     response = ClickHouse.connection.execute(
       q, nil,
-      params: {
-        param_time_start_gteq: '2023-06-01 00:00:00',
-        param_time_start_lt: '2023-06-26 00:00:00',
-        param_customer_account_id_eq: @customer_acc_id
-      }
+      params: query_params
     )
     if response.status == 200
       render json: response.body, status: 200
     else
       head 500
+      nil
     end
   end
 end
