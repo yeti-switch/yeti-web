@@ -32,7 +32,7 @@ class PgqEnv
 
     @config = ::PgqConfig.new(ENV['config_file'], ENV['processor'])
     ActiveRecord::Base.establish_connection(@config['source_database'])
-    @logger = Logger::Syslog.new(@config['syslog_program_name'], Syslog::LOG_LOCAL7)
+    @logger = build_logger
     HttpLogger.logger = @logger
     Pgq::Worker.logger = @logger
 
@@ -42,5 +42,28 @@ class PgqEnv
       from: @config['mail_from'],
       subject: @config['mail_subject']
     }
+  end
+
+  private
+
+  def build_logger
+    if ENV['LOG_TO_STDOUT'].present?
+      stdout_logger
+    else
+      syslog_logger
+    end
+  end
+
+  def stdout_logger
+    STDOUT.sync = true
+    logger = Logger.new(STDOUT)
+    logger.level = Logger::INFO
+    logger
+  end
+
+  def syslog_logger
+    logger = Logger::Syslog.new(@config['syslog_program_name'], Syslog::LOG_LOCAL7)
+    logger.level = Logger::INFO
+    logger
   end
 end
