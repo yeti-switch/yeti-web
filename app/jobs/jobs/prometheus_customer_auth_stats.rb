@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'prometheus/active_calls_processor'
+require 'prometheus/customer_auth_processor'
 
 module Jobs
   class PrometheusCustomerAuthStats < ::BaseJob
@@ -9,8 +9,8 @@ module Jobs
     def execute
       client = PrometheusExporter::Client.default
       Stats::CustomerAuthStats.last24_hour.each do |stat|
-        metric = ActiveCallsProcessor.collect(
-          last24h_customer_price: stat.customer_price,
+        metric = CustomerAuthProcessor.collect(
+          last24h_customer_price: stat.customer_price.to_f,
           labels: {
             account_id: stat.account_id,
             account_external_id: stat.account_external_id,

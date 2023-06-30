@@ -33,7 +33,7 @@ class Stats::CustomerAuthStats < Stats::Traffic
   belongs_to :customer_auth, class_name: 'CustomersAuth', optional: true
 
   def self.last24_hour
-    from_time = 24.hours.ago.beginning_of_hour
+    from_time = 23.hours.ago.beginning_of_hour
 
     stats = where('timestamp >= ?', from_time)
             .group(:customer_auth_id)

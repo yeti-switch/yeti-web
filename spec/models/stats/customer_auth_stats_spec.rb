@@ -16,9 +16,9 @@ RSpec.describe Stats::CustomerAuthStats, type: :model do
     let(:customer_auth3) { FactoryBot.create(:customers_auth, **customer_auth3_attrs) }
     let(:customer_auth3_attrs) { { account: account_internal, external_id: nil, external_type: nil } }
 
-    let(:timestamp_24_hours_ago) { 24.hours.ago.beginning_of_hour }
+    let(:timestamp_24_hours_ago) { 23.hours.ago.beginning_of_hour }
     let(:timestamp_now) { Time.now }
-    let(:timestamp_early_than_24_hours) { 24.hours.ago.beginning_of_hour - 1.second }
+    let(:timestamp_early_than_24_hours) { 23.hours.ago.beginning_of_hour - 1.second }
 
     let!(:ca_stats1) do
       [
