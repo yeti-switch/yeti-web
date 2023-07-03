@@ -47,7 +47,7 @@ RSpec.describe Jobs::PrometheusCustomerAuthStats do
   it 'sends prometheus metrics' do
     expect { subject }.to send_prometheus_metrics
       .exactly(3)
-      .with(type: 'yeti_ac',
+      .with(type: 'yeti_ca',
             last24h_customer_price: 0.3,
             metric_labels: {
               account_id: account1.id,
@@ -56,7 +56,7 @@ RSpec.describe Jobs::PrometheusCustomerAuthStats do
               customer_auth_external_id: customer_auth1.external_id,
               customer_auth_external_type: customer_auth1.external_type
             })
-      .with(type: 'yeti_ac',
+      .with(type: 'yeti_ca',
             last24h_customer_price: 0.4,
             metric_labels: {
               account_id: account2.id,
@@ -65,7 +65,7 @@ RSpec.describe Jobs::PrometheusCustomerAuthStats do
               customer_auth_external_id: customer_auth2.external_id,
               customer_auth_external_type: customer_auth2.external_type
             })
-      .with(type: 'yeti_ac',
+      .with(type: 'yeti_ca',
             last24h_customer_price: 0.5,
             metric_labels: {
               account_id: account3.id,
