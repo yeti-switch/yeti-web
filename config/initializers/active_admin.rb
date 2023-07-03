@@ -186,6 +186,10 @@ ActiveAdmin.setup do |config|
 
   config.authorization_adapter = PolicyAdapter
   config.pundit_default_policy = 'DefaultApplicationPolicy'
+
+  # Enables CSV streaming in development and test modes.
+  # Useful to test streaming bugs locally.
+  config.disable_streaming_in = []
 end
 
 Dir[Rails.root.join('lib/active_admin/**/*.rb')].each { |s| require s }
@@ -224,4 +228,6 @@ ActiveAdmin.before_load do
 
   ActiveAdmin::ResourceDSL.include Rails.application.routes.url_helpers
   ActiveAdmin::ResourceDSL.include ApplicationHelper
+
+  ActiveAdmin::ResourceController.prepend ActiveAdmin::CsvStreamWithErrorHandler
 end
