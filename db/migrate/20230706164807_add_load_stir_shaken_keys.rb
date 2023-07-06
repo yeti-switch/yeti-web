@@ -6,7 +6,7 @@ create table class4.stir_shaken_signing_certificates (
     name varchar not null,
     certificate varchar not null,
     key varchar not null,
-    url varchar not null,
+    x5u varchar not null,
     updated_at timestamptz
 );
 

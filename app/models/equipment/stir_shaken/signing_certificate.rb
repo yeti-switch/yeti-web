@@ -8,13 +8,13 @@
 #  certificate :string           not null
 #  key         :string           not null
 #  name        :string           not null
-#  url         :string           not null
+#  x5u         :string           not null
 #  updated_at  :timestamptz
 #
 class Equipment::StirShaken::SigningCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_signing_certificates'
 
-  validates :name, :certificate, :key, :url, presence: true
+  validates :name, :certificate, :key, :x5u, presence: true
 
   include Yeti::StateUpdater
   self.state_name = 'stir_shaken_signing_certificates'

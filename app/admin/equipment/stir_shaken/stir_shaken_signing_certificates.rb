@@ -6,7 +6,7 @@ ActiveAdmin.register Equipment::StirShaken::SigningCertificate do
 
   acts_as_clone
 
-  permit_params :id, :name, :certificate, :key, :url
+  permit_params :id, :name, :certificate, :key, :x5u
 
   filter :id
   filter :name
@@ -18,7 +18,7 @@ ActiveAdmin.register Equipment::StirShaken::SigningCertificate do
     column :certificate do |c|
       pre code c.certificate
     end
-    column :url
+    column :x5u
     column :updated_at
   end
 
@@ -27,7 +27,7 @@ ActiveAdmin.register Equipment::StirShaken::SigningCertificate do
       f.input :name
       f.input :certificate, as: :text
       f.input :key, as: :text
-      f.input :url
+      f.input :x5u
     end
     f.actions
   end
@@ -42,7 +42,7 @@ ActiveAdmin.register Equipment::StirShaken::SigningCertificate do
       row :key do |row|
         pre code row.key
       end
-      row :url
+      row :x5u
       row :updated_at
     end
     active_admin_comments

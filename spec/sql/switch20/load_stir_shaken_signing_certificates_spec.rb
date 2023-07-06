@@ -22,7 +22,7 @@ RSpec.describe 'switch20.load_stir_shaken_sigining_certificates' do
                              name: c.name,
                              certificate: c.certificate,
                              key: c.key,
-                             url: c.url,
+                             x5u: c.x5u,
                              updated_at: c.updated_at.utc.change(usec: 0)
                            }
                          end

@@ -15155,7 +15155,7 @@ CREATE TABLE class4.stir_shaken_signing_certificates (
     name character varying NOT NULL,
     certificate character varying NOT NULL,
     key character varying NOT NULL,
-    url character varying NOT NULL,
+    x5u character varying NOT NULL,
     updated_at timestamp with time zone
 );
 
