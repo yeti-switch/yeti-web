@@ -54,7 +54,8 @@ ActiveAdmin.register CustomersAuth do
                  :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
                  [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || '' }],
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) || '' }],
-                 [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }]
+                 [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
+                 [:rewrite_attestation_to]
 
   acts_as_import resource_class: Importing::CustomersAuth,
                  skip_columns: [:tag_action_value]
@@ -80,7 +81,7 @@ ActiveAdmin.register CustomersAuth do
                 :transport_protocol_id,
                 :tag_action_id, :lua_script_id,
                 :dst_number_field_id, :src_number_field_id, :src_name_field_id,
-                :cnam_database_id, :src_numberlist_use_diversion,
+                :cnam_database_id, :src_numberlist_use_diversion, :rewrite_attestation_id,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
@@ -343,6 +344,12 @@ ActiveAdmin.register CustomersAuth do
                                      input_html: { class: 'chosen' }
         end
       end
+
+      tab :stir_shaken do
+        f.inputs do
+          f.input :rewrite_attestation_id, as: :select, include_blank: true, collection: CustomersAuth::SS_STATUSES.invert
+        end
+      end
     end
     f.actions
   end
@@ -437,6 +444,12 @@ ActiveAdmin.register CustomersAuth do
         attributes_table do
           row :tag_action
           row :display_tag_action_value
+        end
+      end
+
+      tab :stir_shaken do
+        attributes_table do
+          row :rewrite_attestation_to
         end
       end
     end

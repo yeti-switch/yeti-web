@@ -1060,7 +1060,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	customer_auth_external_type character varying,
 	ss_crt_id smallint,
 	ss_otn character varying,
-	ss_dtn character varying
+	ss_dtn character varying,
+	ss_attest_id smallint
 );
 
 
@@ -16345,11 +16346,12 @@ BEGIN
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
-  IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+  IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
       -- insert signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
       i_profile.ss_otn = i_profile.src_prefix_routing;
       i_profile.ss_dtn = i_profile.dst_prefix_routing;
+      i_profile.legb_ss_status_id = i_profile.ss_attest_id;
   END IF;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
@@ -17000,11 +17002,12 @@ BEGIN
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
-  IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+  IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
       -- insert signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
       i_profile.ss_otn = i_profile.src_prefix_routing;
       i_profile.ss_dtn = i_profile.dst_prefix_routing;
+      i_profile.legb_ss_status_id = i_profile.ss_attest_id;
   END IF;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
@@ -17608,11 +17611,12 @@ BEGIN
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
-  IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+  IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
       -- insert signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
       i_profile.ss_otn = i_profile.src_prefix_routing;
       i_profile.ss_dtn = i_profile.dst_prefix_routing;
+      i_profile.legb_ss_status_id = i_profile.ss_attest_id;
   END IF;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
@@ -18160,6 +18164,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         END IF;
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
+        IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+        END IF;
 
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
@@ -19502,6 +19509,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         END IF;
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
+        IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+        END IF;
 
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
@@ -20816,6 +20826,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         END IF;
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
+        IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+        END IF;
 
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
@@ -22697,6 +22710,7 @@ CREATE TABLE class4.customers_auth (
     cps_limit double precision,
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     external_type character varying,
+    rewrite_ss_status_id smallint,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -22793,6 +22807,7 @@ CREATE TABLE class4.customers_auth_normalized (
     cps_limit double precision,
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     external_type character varying,
+    rewrite_ss_status_id smallint,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -31541,6 +31556,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230602113601'),
 ('20230608134717'),
 ('20230706164807'),
-('20230706202154');
+('20230706202154'),
+('20230708194737');
 
 

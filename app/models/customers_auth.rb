@@ -55,6 +55,7 @@
 #  radius_accounting_profile_id     :integer(2)
 #  radius_auth_profile_id           :integer(2)
 #  rateplan_id                      :integer(4)       not null
+#  rewrite_ss_status_id             :integer(2)
 #  routing_plan_id                  :integer(4)       not null
 #  src_name_field_id                :integer(2)       default(1), not null
 #  src_number_field_id              :integer(2)       default(1), not null
@@ -104,6 +105,20 @@ class CustomersAuth < ApplicationRecord
     DUMP_LEVEL_CAPTURE_SIP => 'Capture signaling traffic',
     DUMP_LEVEL_CAPTURE_RTP => 'Capture RTP traffic',
     DUMP_LEVEL_CAPTURE_ALL => 'Capture all traffic'
+  }.freeze
+
+  SS_STATUS_INVALID = -1
+  SS_STATUS_NONE = 0
+  SS_STATUS_A = 1
+  SS_STATUS_B = 2
+  SS_STATUS_C = 3
+
+  SS_STATUSES = {
+    SS_STATUS_INVALID => 'Validation failed',
+    SS_STATUS_NONE => 'No identity',
+    SS_STATUS_A => 'A',
+    SS_STATUS_B => 'B',
+    SS_STATUS_C => 'C'
   }.freeze
 
   module CONST
@@ -196,6 +211,7 @@ class CustomersAuth < ApplicationRecord
 
   validates :dump_level_id, presence: true
   validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: true
+  validates :rewrite_ss_status_id, inclusion: { in: CustomersAuth::SS_STATUSES.keys }, allow_nil: true
 
   validates_with TagActionValueValidator
 
@@ -238,6 +254,10 @@ class CustomersAuth < ApplicationRecord
 
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
+  end
+
+  def rewrite_ss_status_to
+    rewrite_ss_status_id.nil? ? nil : SS_STATUSES[rewrite_ss_status_id]
   end
 
   # TODO: move to decorator when ActiveAdmin fix problem

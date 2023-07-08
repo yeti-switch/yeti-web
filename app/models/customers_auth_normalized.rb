@@ -56,6 +56,7 @@
 #  radius_accounting_profile_id     :integer(2)
 #  radius_auth_profile_id           :integer(2)
 #  rateplan_id                      :integer(4)       not null
+#  rewrite_ss_status_id             :integer(2)
 #  routing_plan_id                  :integer(4)       not null
 #  src_name_field_id                :integer(2)       default(1), not null
 #  src_number_field_id              :integer(2)       default(1), not null
