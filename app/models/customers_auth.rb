@@ -116,9 +116,9 @@ class CustomersAuth < ApplicationRecord
   SS_STATUSES = {
     SS_STATUS_INVALID => 'Validation failed',
     SS_STATUS_NONE => 'No identity',
-    SS_STATUS_A => 'A',
-    SS_STATUS_B => 'B',
-    SS_STATUS_C => 'C'
+    SS_STATUS_A => 'Attestation A',
+    SS_STATUS_B => 'Attestation B',
+    SS_STATUS_C => 'Attestation C'
   }.freeze
 
   module CONST
@@ -256,7 +256,7 @@ class CustomersAuth < ApplicationRecord
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
 
-  def rewrite_ss_status_to
+  def rewrite_ss_status_name
     rewrite_ss_status_id.nil? ? nil : SS_STATUSES[rewrite_ss_status_id]
   end
 

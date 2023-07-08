@@ -81,7 +81,7 @@ ActiveAdmin.register CustomersAuth do
                 :transport_protocol_id,
                 :tag_action_id, :lua_script_id,
                 :dst_number_field_id, :src_number_field_id, :src_name_field_id,
-                :cnam_database_id, :src_numberlist_use_diversion, :rewrite_attestation_id,
+                :cnam_database_id, :src_numberlist_use_diversion, :rewrite_ss_status_id,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
@@ -347,7 +347,7 @@ ActiveAdmin.register CustomersAuth do
 
       tab :stir_shaken do
         f.inputs do
-          f.input :rewrite_attestation_id, as: :select, include_blank: true, collection: CustomersAuth::SS_STATUSES.invert
+          f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: CustomersAuth::SS_STATUSES.invert
         end
       end
     end
@@ -449,7 +449,7 @@ ActiveAdmin.register CustomersAuth do
 
       tab :stir_shaken do
         attributes_table do
-          row :rewrite_attestation_to
+          row :rewrite_ss_status, &:rewrite_ss_status_name
         end
       end
     end
