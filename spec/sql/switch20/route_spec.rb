@@ -586,7 +586,9 @@ RSpec.describe '#routing logic' do
                diversion_rewrite_result: vendor_gw_diversion_rewrite_result,
                pai_send_mode_id: vendor_gw_pai_send_mode_id,
                pai_domain: vendor_gw_pai_domain,
-               registered_aor_mode_id: vendor_gw_registered_aor_mode_id)
+               registered_aor_mode_id: vendor_gw_registered_aor_mode_id,
+               stir_shaken_mode_id: vendor_gw_stir_shaken_mode_id,
+               stir_shaken_crt_id: vendor_gw_stir_shaken_crt_id)
       }
       let(:vendor_gw_host) { '1.1.2.3' }
       let(:vendor_gw_term_append_headers_req) { '' }
@@ -599,6 +601,9 @@ RSpec.describe '#routing logic' do
       let(:vendor_gw_pai_domain) { nil }
 
       let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_NO_USE }
+
+      let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_DISABLE }
+      let(:vendor_gw_stir_shaken_crt_id) { nil }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) { create(:account, contractor: customer, min_balance: -100_500) }
@@ -1554,6 +1559,40 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
             expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
             expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'Authorized, STIR/SHAKEN modes' do
+        context 'STIR/SHAKEN mode - disable' do
+          let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_DISABLE }
+
+          it 'response without ss' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:ss_crt_id]).to eq(nil)
+            expect(subject.first[:ss_otn]).to eq(nil)
+            expect(subject.first[:ss_dtn]).to eq(nil)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'STIR/SHAKEN mode - insert' do
+          let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_INSERT }
+          let(:crt) { create(:stir_shaken_signing_certificate) }
+          let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+
+          it 'response without ss' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:ss_crt_id]).to eq(crt.id)
+            expect(subject.first[:ss_otn]).to eq(subject.first[:src_prefix_routing])
+            expect(subject.first[:ss_dtn]).to eq(subject.first[:dst_prefix_routing])
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end
