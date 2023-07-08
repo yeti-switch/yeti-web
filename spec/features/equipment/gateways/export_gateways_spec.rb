@@ -18,7 +18,8 @@ RSpec.describe 'Export Gateways', type: :feature do
            term_disconnect_policy: create(:disconnect_policy),
            termination_dst_numberlist: create(:numberlist),
            termination_src_numberlist: create(:numberlist),
-           lua_script: create(:lua_script)
+           lua_script: create(:lua_script),
+           stir_shaken_crt: create(:stir_shaken_signing_certificate)
   end
 
   before do
@@ -134,7 +135,9 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Termination dst numberlist name',    item.termination_dst_numberlist.name],
         ['Termination src numberlist name',    item.termination_src_numberlist.name],
         ['Lua script name',                    item.lua_script.name],
-        ['Force cancel routeset', item.force_cancel_routeset.to_s]
+        ['Force cancel routeset',              item.force_cancel_routeset.to_s],
+        ['Stir shaken mode name',              item.stir_shaken_mode_name],
+        ['Stir shaken crt name',               item.stir_shaken_crt.name]
       ]
     )
   end
