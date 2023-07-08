@@ -4,6 +4,12 @@ class AddSsAttest < ActiveRecord::Migration[7.0]
       ALTER TYPE switch20.callprofile_ty
         ADD ATTRIBUTE ss_attest_id smallint;
 
+      ALTER TYPE switch20.callprofile_ty
+        RENAME ATTRIBUTE lega_identity_attestation_id TO lega_ss_status_id;
+
+      ALTER TYPE switch20.callprofile_ty
+        RENAME ATTRIBUTE lega_identity_verstat_id TO legb_ss_status_id;
+
       INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1046, 'ss_attest_id', 'smallint', false, 1985, false);
       update switch20.switch_interface_out set name = 'lega_ss_status_id' where name = 'lega_identity_attestation_id';
       update switch20.switch_interface_out set name = 'legb_ss_status_id' where name = 'lega_identity_verstat_id';
@@ -302,7 +308,7 @@ class AddSsAttest < ActiveRecord::Migration[7.0]
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
 
         -- feel customer data ;-)
@@ -4007,15 +4013,23 @@ $_$;
       SELECT * from switch20.preprocess_all();
       set search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
-      alter table class4.customers_auth drop column rewrite_attestation_id;
-      alter table class4.customers_auth_normalized drop column rewrite_attestation_id;
+      alter table class4.customers_auth drop column rewrite_ss_status_id;
+      alter table class4.customers_auth_normalized drop column rewrite_ss_status_id;
 
       ALTER TYPE switch20.callprofile_ty
         drop ATTRIBUTE ss_attest_id;
 
+      ALTER TYPE switch20.callprofile_ty
+        RENAME ATTRIBUTE lega_ss_status_id TO lega_identity_attestation_id;
+
+      ALTER TYPE switch20.callprofile_ty
+        RENAME ATTRIBUTE legb_ss_status_id TO lega_identity_verstat_id;
+
       delete from switch20.switch_interface_out where name='ss_attest_id';
       update switch20.switch_interface_out set name = 'lega_identity_attestation_id' WHERE name = 'lega_ss_status_id';
       update switch20.switch_interface_out set name = 'lega_identity_verstat_id' WHERE name = 'legb_ss_status_id';
+
+
 
     }
   end

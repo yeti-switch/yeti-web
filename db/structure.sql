@@ -1052,8 +1052,8 @@ CREATE TYPE switch20.callprofile_ty AS (
 	orig_gw_external_id bigint,
 	term_gw_external_id bigint,
 	customer_acc_vat numeric,
-	lega_identity_attestation_id smallint,
-	lega_identity_verstat_id smallint,
+	lega_ss_status_id smallint,
+	legb_ss_status_id smallint,
 	bleg_force_cancel_routeset boolean,
 	registered_aor_mode_id smallint,
 	metadata character varying,
@@ -18165,7 +18165,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
 
         -- feel customer data ;-)
@@ -19510,7 +19510,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
 
         -- feel customer data ;-)
@@ -20827,7 +20827,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch20.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_attestation_id;
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
 
         -- feel customer data ;-)
