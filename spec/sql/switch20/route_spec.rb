@@ -557,8 +557,7 @@ RSpec.describe '#routing logic' do
                           dst_numberlist_id: customer_auth_dst_numberlist_id,
                           dump_level_id: customer_auth_dump_level,
                           src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion,
-                          rewrite_ss_status_id: customer_auth_rewrite_ss_status_id
-        )
+                          rewrite_ss_status_id: customer_auth_rewrite_ss_status_id)
       end
 
       let!(:send_billing_information) { false }
@@ -1568,7 +1567,6 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, STIR/SHAKEN modes' do
-
         let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
 
         context 'STIR/SHAKEN mode - disable' do
@@ -1622,7 +1620,6 @@ RSpec.describe '#routing logic' do
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
-
         end
       end
 
