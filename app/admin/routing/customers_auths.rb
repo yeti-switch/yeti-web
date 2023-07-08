@@ -55,7 +55,7 @@ ActiveAdmin.register CustomersAuth do
                  [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || '' }],
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) || '' }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
-                 [:rewrite_attestation_to]
+                 :rewrite_ss_status_name
 
   acts_as_import resource_class: Importing::CustomersAuth,
                  skip_columns: [:tag_action_value]
