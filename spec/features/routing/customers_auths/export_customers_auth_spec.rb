@@ -25,8 +25,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
            tag_action: Routing::TagAction.take,
            tag_action_value: [tag_us.id, tag_emergency.id],
            cnam_database: create(:cnam_database),
-           rewrite_ss_status_id: CustomersAuth::SS_STATUS_A
-    )
+           rewrite_ss_status_id: CustomersAuth::SS_STATUS_A)
   end
 
   before do
