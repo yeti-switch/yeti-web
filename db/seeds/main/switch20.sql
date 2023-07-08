@@ -274,6 +274,9 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1040, 'src_network_id', 'integer', true, 1979, true);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1041, 'metadata', 'varchar', true, 1980, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1042, 'customer_auth_external_type', 'varchar', true, 1981, true);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1043, 'ss_crt_id', 'smallint', false, 1982, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1044, 'ss_otn', 'varchar', false, 1983, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1045, 'ss_dtn', 'varchar', false, 1984, false);
 
 
 --

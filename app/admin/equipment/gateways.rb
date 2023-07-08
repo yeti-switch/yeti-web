@@ -91,7 +91,9 @@ ActiveAdmin.register Gateway do
                  [:media_encryption_mode, proc { |row| row.media_encryption_mode.try(:name) }],
                  :suppress_early_media,
                  :send_lnp_information,
-                 :force_one_way_early_media, :max_30x_redirects
+                 :force_one_way_early_media, :max_30x_redirects,
+                 :stir_shaken_mode_name,
+                 [:stir_shaken_crt_name, proc { |row| row.stir_shaken_crt.try(:name) }]
 
   acts_as_import resource_class: Importing::Gateway
 
@@ -109,7 +111,7 @@ ActiveAdmin.register Gateway do
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode, :sip_schema,
-           :termination_src_numberlist, :termination_dst_numberlist, :lua_script
+           :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt
 
   controller do
     def resource_params
@@ -491,6 +493,13 @@ ActiveAdmin.register Gateway do
           f.input :radius_accounting_profile, input_html: { class: 'chosen' }, include_blank: 'None'
         end
       end
+      tab :stir_shaken do
+        f.inputs 'STIR/SHAKEN' do
+          f.input :stir_shaken_mode_id, as: :select, include_blank: false,
+                                        collection: Gateway::STIR_SHAKEN_MODES.invert
+          f.input :stir_shaken_crt, as: :select
+        end
+      end
     end
 
     f.actions
@@ -667,6 +676,13 @@ ActiveAdmin.register Gateway do
       tab :radius do
         attributes_table_for s do
           row :radius_accounting_profile
+        end
+      end
+
+      tab :stir_shaken do
+        attributes_table_for s do
+          row :stir_shaken_mode, &:stir_shaken_mode_name
+          row :stir_shaken_crt
         end
       end
 

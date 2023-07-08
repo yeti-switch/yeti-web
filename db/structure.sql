@@ -1057,7 +1057,10 @@ CREATE TYPE switch20.callprofile_ty AS (
 	bleg_force_cancel_routeset boolean,
 	registered_aor_mode_id smallint,
 	metadata character varying,
-	customer_auth_external_type character varying
+	customer_auth_external_type character varying,
+	ss_crt_id smallint,
+	ss_otn character varying,
+	ss_dtn character varying
 );
 
 
@@ -2900,7 +2903,9 @@ CREATE TABLE class4.gateways (
     force_cancel_routeset boolean DEFAULT false NOT NULL,
     pai_send_mode_id smallint DEFAULT 0 NOT NULL,
     pai_domain character varying,
-    registered_aor_mode_id smallint DEFAULT 0 NOT NULL
+    registered_aor_mode_id smallint DEFAULT 0 NOT NULL,
+    stir_shaken_mode_id smallint DEFAULT 0 NOT NULL,
+    stir_shaken_crt_id smallint
 );
 
 
@@ -16340,6 +16345,13 @@ BEGIN
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
+  IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+      -- insert signature
+      i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
+      i_profile.ss_otn = i_profile.src_prefix_routing;
+      i_profile.ss_dtn = i_profile.dst_prefix_routing;
+  END IF;
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -16988,6 +17000,13 @@ BEGIN
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
+  IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+      -- insert signature
+      i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
+      i_profile.ss_otn = i_profile.src_prefix_routing;
+      i_profile.ss_dtn = i_profile.dst_prefix_routing;
+  END IF;
+
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
@@ -17588,6 +17607,13 @@ BEGIN
     v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
+
+  IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+      -- insert signature
+      i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
+      i_profile.ss_otn = i_profile.src_prefix_routing;
+      i_profile.ss_dtn = i_profile.dst_prefix_routing;
+  END IF;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
@@ -30793,6 +30819,14 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways gateways_stir_shaken_crt_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_stir_shaken_crt_id_fkey FOREIGN KEY (stir_shaken_crt_id) REFERENCES class4.stir_shaken_signing_certificates(id);
+
+
+--
 -- Name: gateways gateways_term_disconnect_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -31506,6 +31540,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230524191752'),
 ('20230602113601'),
 ('20230608134717'),
-('20230706164807');
+('20230706164807'),
+('20230706202154');
 
 
