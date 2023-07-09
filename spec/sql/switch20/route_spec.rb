@@ -556,7 +556,8 @@ RSpec.describe '#routing logic' do
                           src_numberlist_id: customer_auth_src_numberlist_id,
                           dst_numberlist_id: customer_auth_dst_numberlist_id,
                           dump_level_id: customer_auth_dump_level,
-                          src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion)
+                          src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion,
+                          rewrite_ss_status_id: customer_auth_rewrite_ss_status_id)
       end
 
       let!(:send_billing_information) { false }
@@ -568,6 +569,7 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_dst_numberlist_id) { nil }
       let(:customer_auth_dump_level) { CustomersAuth::DUMP_LEVEL_CAPTURE_SIP }
       let(:customer_auth_src_numberlist_use_diversion) { false }
+      let(:customer_auth_rewrite_ss_status_id) { nil }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -1565,6 +1567,8 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, STIR/SHAKEN modes' do
+        let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
+
         context 'STIR/SHAKEN mode - disable' do
           let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_DISABLE }
 
@@ -1576,6 +1580,7 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:ss_crt_id]).to eq(nil)
             expect(subject.first[:ss_otn]).to eq(nil)
             expect(subject.first[:ss_dtn]).to eq(nil)
+            expect(subject.first[:legb_ss_status_id]).to eq(nil)
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end
@@ -1585,15 +1590,35 @@ RSpec.describe '#routing logic' do
           let(:crt) { create(:stir_shaken_signing_certificate) }
           let(:vendor_gw_stir_shaken_crt_id) { crt.id }
 
-          it 'response without ss' do
-            expect(subject.size).to eq(2)
-            expect(subject.first[:customer_auth_id]).to be
-            expect(subject.first[:customer_id]).to be
-            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
-            expect(subject.first[:ss_crt_id]).to eq(crt.id)
-            expect(subject.first[:ss_otn]).to eq(subject.first[:src_prefix_routing])
-            expect(subject.first[:ss_dtn]).to eq(subject.first[:dst_prefix_routing])
-            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          context 'Valid identity on LegA' do
+            it 'response without ss' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:ss_crt_id]).to eq(crt.id)
+              expect(subject.first[:ss_otn]).to eq(subject.first[:src_prefix_routing])
+              expect(subject.first[:ss_dtn]).to eq(subject.first[:dst_prefix_routing])
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_rewrite_ss_status_id)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+
+          context 'Invalid identity on LegA' do
+            let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_INVALID }
+            it 'response without ss' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:ss_crt_id]).to eq(nil)
+              expect(subject.first[:ss_otn]).to eq(nil)
+              expect(subject.first[:ss_dtn]).to eq(nil)
+              expect(subject.first[:ss_attest_id]).to eq(CustomersAuth::SS_STATUS_INVALID)
+              expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
           end
         end
       end

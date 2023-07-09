@@ -266,8 +266,8 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1032, 'bleg_sip_acl', 'inet[]', false, 1074, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1033, 'bleg_rtp_acl', 'inet[]', false, 1075, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1034, 'registered_aor_id', 'integer', false, 1076, false);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1035, 'lega_identity_attestation_id', 'smallint', true, 1974, true);
-INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1036, 'lega_identity_verstat_id', 'smallint', true, 1975, true);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1035, 'lega_ss_status_id', 'smallint', true, 1974, true);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1036, 'legb_ss_status_id', 'smallint', true, 1975, true);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1037, 'bleg_force_cancel_routeset', 'boolean', false, 1976, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1038, 'registered_aor_mode_id', 'smallint', false, 1977, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1039, 'src_country_id', 'integer', true, 1978, true);
@@ -277,6 +277,7 @@ INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1043, 'ss_crt_id', 'smallint', false, 1982, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1044, 'ss_otn', 'varchar', false, 1983, false);
 INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1045, 'ss_dtn', 'varchar', false, 1984, false);
+INSERT INTO switch20.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1046, 'ss_attest_id', 'smallint', false, 1985, false);
 
 
 --

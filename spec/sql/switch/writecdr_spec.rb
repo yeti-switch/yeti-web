@@ -288,7 +288,9 @@ RSpec.describe 'switch.writecdr()' do
       "customer_acc_external_id": 156_998, "vendor_acc_external_id": 2222, "orig_gw_external_id": 1,
       "term_gw_external_id": 4444, "customer_acc_vat": '23.0',
       "metadata": metadata,
-      "customer_auth_external_type": 'term'
+      "customer_auth_external_type": 'term',
+      "lega_ss_status_id": -1,
+      "legb_ss_status_id": 2
     }.to_json
   end
 
@@ -484,7 +486,9 @@ RSpec.describe 'switch.writecdr()' do
                      customer_duration: 566,
                      vendor_duration: 571,
                      customer_auth_name: 'Customer Auth for trunk 1',
-                     p_charge_info_in: 'sip:p-charge-info@example.com/uri'
+                     p_charge_info_in: 'sip:p-charge-info@example.com/uri',
+                     lega_ss_status_id: -1,
+                     legb_ss_status_id: 2
                    )
 
     expect(cdr.lega_identity).to match [

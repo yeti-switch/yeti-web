@@ -122,58 +122,6 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 
 --
--- Name: cdr_v2; Type: TYPE; Schema: billing; Owner: -
---
-
-CREATE TYPE billing.cdr_v2 AS (
-	id bigint,
-	customer_id integer,
-	vendor_id integer,
-	customer_acc_id integer,
-	vendor_acc_id integer,
-	customer_auth_id integer,
-	destination_id integer,
-	dialpeer_id integer,
-	orig_gw_id integer,
-	term_gw_id integer,
-	routing_group_id integer,
-	rateplan_id integer,
-	destination_next_rate numeric,
-	destination_fee numeric,
-	dialpeer_next_rate numeric,
-	dialpeer_fee numeric,
-	internal_disconnect_code integer,
-	internal_disconnect_reason character varying,
-	disconnect_initiator_id integer,
-	customer_price numeric,
-	vendor_price numeric,
-	duration integer,
-	success boolean,
-	profit numeric,
-	time_start timestamp without time zone,
-	time_connect timestamp without time zone,
-	time_end timestamp without time zone,
-	lega_disconnect_code integer,
-	lega_disconnect_reason character varying,
-	legb_disconnect_code integer,
-	legb_disconnect_reason character varying,
-	src_prefix_in character varying,
-	src_prefix_out character varying,
-	dst_prefix_in character varying,
-	dst_prefix_out character varying,
-	destination_initial_interval integer,
-	destination_next_interval integer,
-	destination_initial_rate numeric,
-	orig_call_id character varying,
-	term_call_id character varying,
-	local_tag character varying,
-	from_domain character varying,
-	destination_reverse_billing boolean,
-	dialpeer_reverse_billing boolean
-);
-
-
---
 -- Name: interval_billing_data; Type: TYPE; Schema: billing; Owner: -
 --
 
@@ -333,8 +281,8 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	dialpeer_reverse_billing boolean,
 	src_country_id integer,
 	src_network_id integer,
-	lega_identity_attestation_id smallint,
-	lega_identity_verstat_id smallint,
+	lega_ss_status_id smallint,
+	legb_ss_status_id smallint,
 	metadata character varying,
 	customer_auth_external_type character varying
 );
@@ -535,8 +483,8 @@ CREATE TABLE cdr.cdr (
     src_country_id integer,
     src_network_id integer,
     lega_identity jsonb,
-    lega_identity_attestation_id smallint,
-    lega_identity_verstat_id smallint,
+    lega_ss_status_id smallint,
+    legb_ss_status_id smallint,
     dump_level_id smallint,
     metadata jsonb,
     customer_auth_external_type character varying
@@ -1848,7 +1796,6 @@ CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id
     AS $$
 DECLARE
   v_cdr cdr.cdr%rowtype;
-  v_billing_event billing.cdr_v2;
 
   v_time_data switch.time_data_ty;
   v_version_data switch.versions_ty;
@@ -1874,8 +1821,8 @@ BEGIN
   v_cdr.p_charge_info_in = v_lega_headers.p_charge_info;
 
   v_cdr.lega_identity = i_lega_identity;
-  v_cdr.lega_identity_attestation_id = v_dynamic.lega_identity_attestation_id;
-  v_cdr.lega_identity_verstat_id = v_dynamic.lega_identity_attestation_id;
+  v_cdr.lega_ss_status_id = v_dynamic.lega_ss_status_id;
+  v_cdr.legb_ss_status_id = v_dynamic.legb_ss_status_id;
 
   v_cdr.metadata = v_dynamic.metadata::jsonb;
 
@@ -2074,56 +2021,8 @@ BEGIN
   v_cdr.customer_price_no_vat = switch.customer_price_round(v_config, v_cdr.customer_price_no_vat);
   v_cdr.vendor_price = switch.vendor_price_round(v_config, v_cdr.vendor_price);
 
-  v_billing_event.id=v_cdr.id;
-  v_billing_event.customer_id=v_cdr.customer_id;
-  v_billing_event.vendor_id=v_cdr.vendor_id;
-  v_billing_event.customer_acc_id=v_cdr.customer_acc_id;
-  v_billing_event.vendor_acc_id=v_cdr.vendor_acc_id;
-  v_billing_event.customer_auth_id=v_cdr.customer_auth_id;
-  v_billing_event.destination_id=v_cdr.destination_id;
-  v_billing_event.dialpeer_id=v_cdr.dialpeer_id;
-  v_billing_event.orig_gw_id=v_cdr.orig_gw_id;
-  v_billing_event.term_gw_id=v_cdr.term_gw_id;
-  v_billing_event.routing_group_id=v_cdr.routing_group_id;
-  v_billing_event.rateplan_id=v_cdr.rateplan_id;
-
-  v_billing_event.destination_next_rate=v_cdr.destination_next_rate;
-  v_billing_event.destination_fee=v_cdr.destination_fee;
-  v_billing_event.destination_initial_interval=v_cdr.destination_initial_interval;
-  v_billing_event.destination_next_interval=v_cdr.destination_next_interval;
-  v_billing_event.destination_initial_rate=v_cdr.destination_initial_rate;
-  v_billing_event.destination_reverse_billing=v_cdr.destination_reverse_billing;
-
-  v_billing_event.dialpeer_next_rate=v_cdr.dialpeer_next_rate;
-  v_billing_event.dialpeer_fee=v_cdr.dialpeer_fee;
-  v_billing_event.dialpeer_reverse_billing=v_cdr.dialpeer_reverse_billing;
-
-  v_billing_event.internal_disconnect_code=v_cdr.internal_disconnect_code;
-  v_billing_event.internal_disconnect_reason=v_cdr.internal_disconnect_reason;
-  v_billing_event.disconnect_initiator_id=v_cdr.disconnect_initiator_id;
-  v_billing_event.customer_price=v_cdr.customer_price;
-  v_billing_event.vendor_price=v_cdr.vendor_price;
-  v_billing_event.duration=v_cdr.duration;
-  v_billing_event.success=v_cdr.success;
-  v_billing_event.profit=v_cdr.profit;
-  v_billing_event.time_start=v_cdr.time_start;
-  v_billing_event.time_connect=v_cdr.time_connect;
-  v_billing_event.time_end=v_cdr.time_end;
-  v_billing_event.lega_disconnect_code=v_cdr.lega_disconnect_code;
-  v_billing_event.lega_disconnect_reason=v_cdr.lega_disconnect_reason;
-  v_billing_event.legb_disconnect_code=v_cdr.legb_disconnect_code;
-  v_billing_event.legb_disconnect_reason=v_cdr.legb_disconnect_reason;
-  v_billing_event.src_prefix_in=v_cdr.src_prefix_in;
-  v_billing_event.src_prefix_out=v_cdr.src_prefix_out;
-  v_billing_event.dst_prefix_in=v_cdr.dst_prefix_in;
-  v_billing_event.dst_prefix_out=v_cdr.dst_prefix_out;
-  v_billing_event.orig_call_id=v_cdr.orig_call_id;
-  v_billing_event.term_call_id=v_cdr.term_call_id;
-  v_billing_event.local_tag=v_cdr.local_tag;
-  v_billing_event.from_domain=v_cdr.from_domain;
-
   -- generate event to billing engine
-  perform event.billing_insert_event('cdr_full',v_billing_event);
+  perform event.billing_insert_event('cdr_full',v_cdr);
   perform event.streaming_insert_event(v_cdr);
   INSERT INTO cdr.cdr VALUES( v_cdr.*);
   RETURN 0;
@@ -4822,6 +4721,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230321124900'),
 ('20230518150839'),
 ('20230524185032'),
-('20230602123903');
+('20230602123903'),
+('20230708183812');
 
 

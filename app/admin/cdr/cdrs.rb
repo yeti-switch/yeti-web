@@ -589,6 +589,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       tab :identity do
         attributes_table do
           row :lega_identity
+          row :lega_ss_status
+          row :legb_ss_status
         end
       end
     end
