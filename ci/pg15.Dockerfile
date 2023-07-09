@@ -2,7 +2,7 @@ FROM debian:bookworm
 
 ENV	DEBIAN_FRONTEND=noninteractive
 ENV	LANG=C.UTF-8
-ENV	PGVER=13
+ENV	PGVER=15
 ENV	PGCONFIG=/etc/postgresql/$PGVER/main/postgresql.conf
 RUN	apt-get update && \
 	apt-get -y dist-upgrade && \
@@ -39,6 +39,6 @@ RUN	sed -Ei "/^#?listen_addresses +=/s/.*/listen_addresses = '*'/"		"$PGCONFIG" 
 
 EXPOSE 5432
 USER postgres:postgres
-ENTRYPOINT ["/usr/lib/postgresql/13/bin/postgres", \
-	"-D", "/var/lib/postgresql/13/main", \
-	"-c", "config_file=/etc/postgresql/13/main/postgresql.conf"]
+ENTRYPOINT ["/usr/lib/postgresql/15/bin/postgres", \
+	"-D", "/var/lib/postgresql/15/main", \
+	"-c", "config_file=/etc/postgresql/15/main/postgresql.conf"]
