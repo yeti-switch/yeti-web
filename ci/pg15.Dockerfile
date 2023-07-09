@@ -11,7 +11,6 @@ RUN	apt-get update && \
 RUN	curl https://pkg.yeti-switch.org/key.gpg | apt-key add - && \
 	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
 	echo "deb http://pkg.yeti-switch.org/debian/bookworm 1.12 main" >> /etc/apt/sources.list && \
-	echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" >> /etc/apt/sources.list
 
 RUN 	apt-get update && \
