@@ -41,16 +41,41 @@ jobs:
           PKG_TAG: ${{github.ref}} 
         run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh bullseye $major_version main ../*.deb
 
-#      - name: Create Sentry Release
-#        uses: getsentry/action-release@v1
-#        env:
-#          SENTRY_URL: ${{secrets.SENTRY_URL}}
-#          SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
-#          SENTRY_ORG: ${{secrets.SENTRY_ORG}}
-#          SENTRY_PROJECT:  ${{secrets.SENTRY_PROJECT}}
-#        with:
-#          version: ${{github.ref}}
+  deb12:
+    name: Debian 12 release package building
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    services:
+      db:
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
 
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: set git safe directory
+        run: git config --global --add safe.directory '*'
+
+      - name: Build package
+        run: make package
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+
+      - name: Save deb package as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb12-package
+          path: /__w/yeti-web/*.deb
+
+      - name: Upload package to ${{github.ref}} repo
+        env:
+          PKG_API_BASE: ${{secrets.PKG_API_BASE}}
+          PKG_TAG: ${{github.ref}} 
+        run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh bookworm $major_version main ../*.deb
 
 
   deb11_container:
