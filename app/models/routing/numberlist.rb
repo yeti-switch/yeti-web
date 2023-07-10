@@ -62,6 +62,10 @@ class Routing::Numberlist < ApplicationRecord
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
   has_many :routing_numberlist_items, class_name: 'Routing::NumberlistItem', foreign_key: :numberlist_id, dependent: :delete_all
+  has_many :src_customers_auths, class_name: 'CustomersAuth', foreign_key: :src_numberlist_id, dependent: :restrict_with_error
+  has_many :dst_customers_auths, class_name: 'CustomersAuth', foreign_key: :dst_numberlist_id, dependent: :restrict_with_error
+  has_many :termination_dst_gateways, class_name: 'Gateway', foreign_key: :termination_dst_numberlist_id, dependent: :restrict_with_error
+  has_many :termination_src_gateways, class_name: 'Gateway', foreign_key: :termination_src_numberlist_id, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :name, uniqueness: true
