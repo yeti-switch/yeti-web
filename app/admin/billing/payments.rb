@@ -5,6 +5,7 @@ ActiveAdmin.register Payment do
 
   config.batch_actions = false
   actions :index, :create, :new, :show
+  decorate_with PaymentDecorator
 
   permit_params :account_id, :amount, :notes, :private_notes
   scope :all, default: true
@@ -64,7 +65,7 @@ ActiveAdmin.register Payment do
   filter :status_id,
          label: 'Status',
          as: :select,
-         collection: proc { Payment::CONST::STATUS_IDS },
+         collection: Payment::CONST::STATUS_IDS.invert.to_a,
          input_html: { class: 'chosen' }
   filter :amount
   filter :private_notes
@@ -84,7 +85,7 @@ ActiveAdmin.register Payment do
           row :uuid
           row :created_at
           row :account
-          row :status, :status_formatted
+          row :status, &:status_formatted
           row :amount
           row :private_notes
           row :notes
