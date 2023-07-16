@@ -22,7 +22,9 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
       [
         create(:payment, amount: 100.25, account: accounts.first),
         create(:payment, notes: 'test', account: accounts.first),
-        create(:payment, account: accounts.second)
+        create(:payment, account: accounts.second),
+        create(:payment, :pending, account: accounts.first),
+        create(:payment, :canceled, account: accounts.first)
       ]
     end
     before do
@@ -145,6 +147,42 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
       include_examples :responds_with_correct_records
     end
 
+    context 'with filter status_eq' do
+      let(:json_api_request_query) do
+        { filter: { status_eq: 'completed' } }
+      end
+      let(:expected_records) { payments.first(3) }
+
+      include_examples :responds_with_correct_records
+    end
+
+    context 'with filter status_not_eq' do
+      let(:json_api_request_query) do
+        { filter: { status_not_eq: 'pending' } }
+      end
+      let(:expected_records) { payments.first(3) + [payments.last] }
+
+      include_examples :responds_with_correct_records
+    end
+
+    context 'with filter status_in' do
+      let(:json_api_request_query) do
+        { filter: { status_in: 'pending,canceled' } }
+      end
+      let(:expected_records) { payments.last(2) }
+
+      include_examples :responds_with_correct_records
+    end
+
+    context 'with filter status_not_in' do
+      let(:json_api_request_query) do
+        { filter: { status_not_in: 'pending,completed' } }
+      end
+      let(:expected_records) { [payments.last] }
+
+      include_examples :responds_with_correct_records
+    end
+
     context 'with include account' do
       let(:json_api_request_query) do
         { include: 'account' }
@@ -187,7 +225,8 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
                                           attributes: {
                                             amount: payment.amount.to_s,
                                             notes: payment.notes,
-                                            'created-at': payment.created_at.iso8601(3)
+                                            'created-at': payment.created_at.iso8601(3),
+                                            status: payment.status
                                           },
                                           relationships: {
                                             account: {
@@ -202,11 +241,24 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
     let(:record_id) { payment.uuid }
 
     let!(:account) { create(:account, contractor: customer) }
-    let!(:payment) { create(:payment, account: account) }
+    let!(:payment) { create(:payment, payment_attrs) }
+    let(:payment_attrs) { { account: account } }
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
-    context 'when record exists' do
+    context 'when payment is completed' do
+      include_examples :responds_with_correct_record
+    end
+
+    context 'when payment is pending' do
+      let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_PENDING }
+
+      include_examples :responds_with_correct_record
+    end
+
+    context 'when payment is canceled' do
+      let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_CANCELED }
+
       include_examples :responds_with_correct_record
     end
 

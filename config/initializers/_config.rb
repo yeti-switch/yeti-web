@@ -68,6 +68,12 @@ Config.setup do |setup_config|
     optional(:keep_expired_destinations_days)
     optional(:keep_expired_dialpeers_days)
     optional(:keep_balance_notifications_days)
+
+    optional(:cryptomus).schema do
+      optional(:api_key).maybe(:string)
+      optional(:merchant_id).maybe(:string)
+      optional(:url_callback).maybe(:string)
+    end
   end
 end
 

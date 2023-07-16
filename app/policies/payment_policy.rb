@@ -5,4 +5,6 @@ class PaymentPolicy < ::RolePolicy
 
   class Scope < ::RolePolicy::Scope
   end
+
+  alias_rule :check_cryptomus?, to: :perform?
 end
