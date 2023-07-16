@@ -13,7 +13,7 @@ RSpec.describe 'Payments show page', js: true do
     subject
     expect(page).to have_attribute_row 'ID', exact_text: payment.id.to_s
     expect(page).to have_attribute_row 'AMOUNT', exact_text: payment.amount.to_s
-    expect(page).to have_attribute_row 'STATUS', exact_text: 'completed'
+    expect(page).to have_attribute_row 'STATUS', exact_text: 'COMPLETED'
     expect(page).to have_attribute_row 'UUID', exact_text: payment.uuid
     expect(page).not_to have_action_item 'Check Cryptomus'
   end
@@ -74,7 +74,7 @@ RSpec.describe 'Payments show page', js: true do
       subject
       expect(page).to have_attribute_row 'ID', exact_text: payment.id.to_s
       expect(page).to have_attribute_row 'AMOUNT', exact_text: payment.amount.to_s
-      expect(page).to have_attribute_row 'STATUS', exact_text: 'pending'
+      expect(page).to have_attribute_row 'STATUS', exact_text: 'PENDING'
       expect(page).to have_attribute_row 'UUID', exact_text: payment.uuid
       expect(page).to have_action_item 'Check Cryptomus'
 
@@ -108,7 +108,7 @@ RSpec.describe 'Payments show page', js: true do
       subject
       expect(page).to have_attribute_row 'ID', exact_text: payment.id.to_s
       expect(page).to have_attribute_row 'AMOUNT', exact_text: payment.amount.to_s
-      expect(page).to have_attribute_row 'STATUS', exact_text: 'canceled'
+      expect(page).to have_attribute_row 'STATUS', exact_text: 'CANCELED'
       expect(page).to have_attribute_row 'UUID', exact_text: payment.uuid
       expect(page).not_to have_action_item 'Check Cryptomus'
     end
