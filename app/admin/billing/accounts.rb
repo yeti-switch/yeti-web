@@ -119,12 +119,8 @@ ActiveAdmin.register Account do
   end
 
   sidebar 'Create Payment', only: [:show] do
-    active_admin_form_for(Payment.new(account_id: params[:id]),
-                          url: payment_account_path(params[:id]),
-                          as: :payment,
-                          method: :post) do |f|
+    active_admin_form_for(Payment.new, url: payment_account_path(params[:id]), as: :payment, method: :post) do |f|
       f.inputs do
-        f.input :account_id, as: :hidden
         f.input :amount, input_html: { style: 'width: 200px' }
         f.input :notes, input_html: { style: 'width: 200px' }
       end
@@ -291,8 +287,9 @@ ActiveAdmin.register Account do
 
   member_action :payment, method: :post do
     authorize!
-    payment_params = params.require(:payment).permit(:account_id, :amount, :notes)
+    payment_params = params.require(:payment).permit(:amount, :notes)
     payment = Payment.new(payment_params)
+    payment.account = Draper.undecorate(resource)
     if payment.save
       flash[:notice] = 'Payment created!'
     else

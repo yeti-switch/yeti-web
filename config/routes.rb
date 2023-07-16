@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
+  post 'cryptomus_webhooks', to: 'cryptomus_webhooks#create'
+
   resources :active_calls, constraints: { id: %r{[^/]+} }, only: %i[show index destroy]
 
   resources :remote_stats do
@@ -166,6 +168,7 @@ Rails.application.routes.draw do
             jsonapi_resources :chart_active_calls, only: %i[create]
             jsonapi_resources :chart_originated_cps, only: %i[create]
             jsonapi_resources :payments, only: %i[index show]
+            jsonapi_resources :cryptomus_payments, only: %i[create]
             jsonapi_resources :invoices, only: %i[index show] do
               jsonapi_relationships
               member { get :download }

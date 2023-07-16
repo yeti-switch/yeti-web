@@ -24,6 +24,7 @@ RSpec.describe 'Export Payments', type: :feature do
         ['Amount', item.amount.to_s],
         ['Notes', item.notes.to_s],
         ['Private notes', item.private_notes.to_s],
+        ['Status', item.status],
         ['Created at', item.created_at.to_s]
       ]
     )
