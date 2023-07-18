@@ -19,13 +19,13 @@ class CryptomusWebhooksController < ActionController::API
 
     unless payload['is_final']
       Rails.logger.info { "status is not final: #{payload['status']}" }
-      head 204
+      head 200
       return
     end
 
     payment = Payment.find(payload['order_id'])
     CryptomusPayment::CheckStatus.call(payment:)
-    head 204
+    head 200
   end
 
   private
