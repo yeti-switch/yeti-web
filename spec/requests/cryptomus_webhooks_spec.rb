@@ -38,10 +38,10 @@ RSpec.describe 'Cryptomus Webhooks', type: :request do
       }
     end
 
-    it 'returns 204' do
+    it 'returns 200' do
       expect(CryptomusPayment::CheckStatus).to receive(:call).with(payment:).once
       subject
-      expect(response.status).to eq(204)
+      expect(response.status).to eq(200)
     end
   end
 end

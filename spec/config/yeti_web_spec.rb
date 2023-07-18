@@ -50,7 +50,8 @@ RSpec.describe 'config/yeti_web.yml' do
       cryptomus: {
         api_key: a_kind_of(String),
         merchant_id: a_kind_of(String),
-        url_callback: a_kind_of(String)
+        url_callback: a_kind_of(String),
+        url_return: a_kind_of(String)
       }
     }
   end

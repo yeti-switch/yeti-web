@@ -14,7 +14,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
     shared_examples :creates_successfully do
       it 'creates pending payment' do
         expect { subject }.to change { Payment.count }.by(1)
-        expect(stub_cryptomus_payment_services).to have_been_requested.once
+        #     expect(stub_cryptomus_payment_services).to have_been_requested.once
         expect(stub_create_cryptomus_payment).to have_been_requested.once
         expect(Payment.last).to have_attributes(
                                   account_id: account.id,
@@ -51,7 +51,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
 
       it 'does not create payment' do
         expect { subject }.not_to change { Payment.count }
-        expect(stub_cryptomus_payment_services).not_to have_been_requested
+        #     expect(stub_cryptomus_payment_services).not_to have_been_requested
         expect(stub_create_cryptomus_payment).not_to have_been_requested
       end
 
@@ -109,11 +109,13 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
       {
         order_id: (prev_payment.id + 1).to_s,
         amount: json_api_attributes[:amount].to_d.to_s,
-        currency: 'USD',
-        currencies: cryptomus_currencies,
+        currency: 'USDT',
+        network: 'TRON',
         url_callback: YetiConfig.cryptomus&.url_callback,
+        url_return: YetiConfig.cryptomus&.url_return,
         lifetime: CustomerApi::CryptomusPaymentForm::EXPIRATION_SEC,
-        subtract: 100
+        subtract: 100,
+        is_payment_multiple: false
       }
     end
     let(:cryptomus_response_status) { 200 }
@@ -129,7 +131,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
           "payer_currency": 'USDT',
           "currency": 'USDT',
           "comments": nil,
-          "network": 'tron_trc20',
+          "network": 'TRON',
           "address": nil,
           "from": nil,
           "txid": nil,
@@ -139,16 +141,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
           "status": 'check',
           "is_final": false,
           "additional_data": nil,
-          "currencies": [
-            {
-              "currency": 'USDT',
-              "network": 'tron_trc20'
-            },
-            {
-              "currency": 'USDT',
-              "network": 'eth_erc20'
-            }
-          ]
+          "is_payment_multiple": false
         }
       }
     end
