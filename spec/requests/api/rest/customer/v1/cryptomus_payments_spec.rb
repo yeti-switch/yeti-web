@@ -112,6 +112,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
         currency: 'USD',
         currencies: cryptomus_currencies,
         url_callback: YetiConfig.cryptomus&.url_callback,
+        url_return: YetiConfig.cryptomus&.url_return,
         lifetime: CustomerApi::CryptomusPaymentForm::EXPIRATION_SEC,
         subtract: 100
       }

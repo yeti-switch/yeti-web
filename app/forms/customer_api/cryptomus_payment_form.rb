@@ -54,11 +54,14 @@ module CustomerApi
       Cryptomus::Client.create_payment(
         order_id: payment.id.to_s,
         amount: amount.to_s,
-        currency: 'USD',
-        currencies: available_currencies,
+        currency: 'USDT',
+        # currencies: available_currencies,
+        network: 'TRON',
         url_callback: YetiConfig.cryptomus&.url_callback,
+        url_return: YetiConfig.cryptomus&.url_return,
         lifetime: EXPIRATION_SEC,
-        subtract: 100 # customer will pay 100% of commission
+        subtract: 100, # customer will pay 100% of commission
+        is_payment_multiple: false
       )
     end
 
