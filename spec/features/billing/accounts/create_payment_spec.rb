@@ -33,6 +33,7 @@ RSpec.describe 'Account details Create Payment', type: :feature, js: true do
     expect(page).to have_current_path account_path(account.id)
     payment = Payment.last!
     expect(payment).to have_attributes(
+                         type_id: Payment::CONST::TYPE_ID_MANUAL,
                          status_id: Payment::CONST::STATUS_ID_COMPLETED,
                          account: account,
                          amount: 200.50,

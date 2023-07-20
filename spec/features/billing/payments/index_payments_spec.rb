@@ -23,6 +23,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
       within_table_row(id: payment.id) do
         expect(page).to have_table_cell(column: 'ID', exact_text: payment.id.to_s)
         expect(page).to have_table_cell(column: 'Account', exact_text: payment.account.display_name)
+        expect(page).to have_table_cell(column: 'Type', exact_text: payment.type_name.upcase)
         expect(page).to have_table_cell(column: 'Status', exact_text: payment.status.upcase)
       end
     end
@@ -82,6 +83,32 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
 
       within_filters do
         expect(page).to have_field_chosen('Status', with: 'pending')
+      end
+    end
+  end
+
+  context 'with filter by Type' do
+    let(:filtered_payments) { [payments[0]] }
+    let(:filter_records!) do
+      within_filters do
+        fill_in_chosen 'Type', with: 'manual'
+      end
+      click_on 'Filter'
+    end
+
+    it 'displays filtered records' do
+      subject
+
+      expect(page).to have_table_row(count: filtered_payments.size)
+      filtered_payments.each do |payment|
+        within_table_row(id: payment.id) do
+          expect(page).to have_table_cell(column: 'ID', exact_text: payment.id.to_s)
+          expect(page).to have_table_cell(column: 'Type', exact_text: 'MANUAL')
+        end
+      end
+
+      within_filters do
+        expect(page).to have_field_chosen('Type', with: 'manual')
       end
     end
   end

@@ -11,7 +11,8 @@
 #  uuid          :uuid             not null
 #  created_at    :timestamptz      not null
 #  account_id    :integer(4)       not null
-#  status_id     :integer(2)       not null
+#  status_id     :integer(2)       default(20), not null
+#  type_id       :integer(2)       default(20), not null
 #
 # Indexes
 #
@@ -34,12 +35,17 @@ class Payment < ApplicationRecord
       STATUS_ID_PENDING => 'pending'
     }.freeze
 
+    TYPE_ID_CRYPTOMUS = 10
+    TYPE_ID_MANUAL = 20
+    TYPE_IDS = {
+      TYPE_ID_CRYPTOMUS => 'cryptomus',
+      TYPE_ID_MANUAL => 'manual'
+    }.freeze
+
     freeze
   end
 
   include WithPaperTrail
-
-  attribute :status_id, :integer, default: CONST::STATUS_ID_COMPLETED
 
   belongs_to :account, class_name: 'Account'
 
@@ -48,28 +54,17 @@ class Payment < ApplicationRecord
 
   validate :validate_status_id
 
+  validates :type_id, presence: true, on: :create
+  validates :type_id, inclusion: { in: CONST::TYPE_IDS.keys }, allow_nil: true, on: :create
+  validates :type_id, readonly: true, on: :update
+
   before_save :top_up_balance
 
-  # eq not_eq in not_in
-  scope :status_eq, lambda { |value|
-    status_id = CONST::STATUS_IDS.key(value)
-    status_id ? where(status_id:) : none
-  }
+  # creates scopes status_eq status_not_eq status_in status_not_in
+  define_enum_scopes(name: :status, allowed_values: CONST::STATUS_IDS)
 
-  scope :status_not_eq, lambda { |value|
-    status_id = CONST::STATUS_IDS.key(value)
-    status_id ? where.not(status_id:) : all
-  }
-
-  scope :status_in, lambda { |*values|
-    status_ids = values.map { |value| CONST::STATUS_IDS.key(value) }.compact
-    status_ids.present? ? where(status_id: status_ids) : none
-  }
-
-  scope :status_not_in, lambda { |*values|
-    status_ids = values.map { |value| CONST::STATUS_IDS.key(value) }.compact
-    status_ids.present? ? where.not(status_id: status_ids) : all
-  }
+  # creates scopes type_name_eq type_name_not_eq type_name_in type_name_not_in
+  define_enum_scopes(name: :type_name, id_column: :type_id, allowed_values: CONST::TYPE_IDS)
 
   scope :today, lambda {
     where('created_at >= ? ', Time.now.at_beginning_of_day)
@@ -81,6 +76,10 @@ class Payment < ApplicationRecord
 
   def status
     CONST::STATUS_IDS[status_id]
+  end
+
+  def type_name
+    CONST::TYPE_IDS[type_id]
   end
 
   def completed?
@@ -95,14 +94,22 @@ class Payment < ApplicationRecord
     status_id == CONST::STATUS_ID_PENDING
   end
 
+  def type_manual?
+    type_id == CONST::TYPE_ID_MANUAL
+  end
+
+  def type_cryptomus?
+    type_id == CONST::TYPE_ID_CRYPTOMUS
+  end
+
   def self.ransackable_scopes(_auth_object = nil)
-    %i[status_eq status_not_eq status_in status_not_in]
+    enum_scope_names(:status) + enum_scope_names(:type_name)
   end
 
   private
 
   def top_up_balance
-    if status_id_changed? && completed?
+    if (new_record? || status_id_changed?) && completed?
       account.lock! # will generate SELECT FOR UPDATE SQL statement
       account.balance += amount
       throw(:abort) unless account.save
@@ -120,8 +127,12 @@ class Payment < ApplicationRecord
       return
     end
 
-    if status_id_changed? && status_id_was == Payment::CONST::STATUS_ID_COMPLETED
-      errors.add(:status_id, :readonly)
+    if persisted? && status_id_changed? && status_id_was == Payment::CONST::STATUS_ID_COMPLETED
+      errors.add(:status_id, 'is readonly')
+    end
+
+    if new_record? && type_manual? && !completed?
+      errors.add(:status_id, 'must be completed for manual payments')
     end
   end
 end

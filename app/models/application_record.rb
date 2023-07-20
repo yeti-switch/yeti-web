@@ -77,6 +77,37 @@ class ApplicationRecord < ActiveRecord::Base
     fetch_sp_val('SELECT pg_size_pretty(pg_database_size(current_database()))')
   end
 
+  # @param name [Symbol]
+  # @param id_column [Symbol]
+  # @param allowed_values [Hash<Integer, String>] id_column_value => value
+  def self.define_enum_scopes(name:, id_column: nil, allowed_values:)
+    id_column ||= :"#{name}_id"
+
+    scope :"#{name}_eq", lambda { |value|
+      id_column_value = allowed_values.key(value)
+      id_column_value ? where(id_column => id_column_value) : none
+    }
+
+    scope :"#{name}_not_eq", lambda { |value|
+      id_column_value = allowed_values.key(value)
+      id_column_value ? where.not(id_column => id_column_value) : all
+    }
+
+    scope :"#{name}_in", lambda { |*values|
+      id_column_values = values.map { |val| allowed_values.key(val) }.compact
+      id_column_values.present? ? where(id_column => id_column_values) : none
+    }
+
+    scope :"#{name}_not_in", lambda { |*values|
+      id_column_values = values.map { |val| allowed_values.key(val) }.compact
+      id_column_values.present? ? where.not(id_column => id_column_values) : all
+    }
+  end
+
+  def self.enum_scope_names(name)
+    [:"#{name}_eq", :"#{name}_not_eq", :"#{name}_in", :"#{name}_not_in"]
+  end
+
   DB_VER = LazyObject.new { db_version }
   ROUTING_SCHEMA = 'switch20'
 

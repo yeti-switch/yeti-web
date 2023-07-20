@@ -5,7 +5,11 @@ class PaymentDecorator < BillingDecorator
   decorates Payment
 
   def status_formatted
-    status_tag(status, class: status_color)
+    status_tag(model.status, class: status_color)
+  end
+
+  def type_formatted
+    status_tag(model.type_name, class: :no)
   end
 
   private

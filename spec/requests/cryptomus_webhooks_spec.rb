@@ -38,10 +38,67 @@ RSpec.describe 'Cryptomus Webhooks', type: :request do
       }
     end
 
-    it 'returns 200' do
-      expect(CryptomusPayment::CheckStatus).to receive(:call).with(payment:).once
-      subject
-      expect(response.status).to eq(200)
+    context 'with success handle webhook' do
+      before do
+        allow(CryptomusPayment::HandleWebhook).to receive(:call).with(payload:)
+      end
+
+      it 'returns 200' do
+        expect(CryptomusPayment::HandleWebhook).to receive(:call).with(payload:).once
+        subject
+        expect(response.status).to eq(200)
+      end
+
+      include_examples :does_not_capture_error
+    end
+
+    context 'when signature is invalid' do
+      let(:sign) { 'invalid' }
+
+      it 'returns 400' do
+        expect(CryptomusPayment::HandleWebhook).not_to receive(:call)
+        subject
+        expect(response.status).to eq(400)
+      end
+
+      include_examples :does_not_capture_error
+    end
+
+    context 'when CryptomusPayment::HandleWebhook::Error raised' do
+      before do
+        allow(CryptomusPayment::HandleWebhook).to receive(:call).with(payload:).once.and_raise(
+          CryptomusPayment::HandleWebhook::Error, 'some error'
+        )
+      end
+
+      it 'returns 500' do
+        subject
+        expect(response.status).to eq(500)
+      end
+
+      include_examples :captures_error, request: true do
+        let(:capture_error_exception_class) { CryptomusPayment::HandleWebhook::Error }
+        let(:capture_error_extra) { hash_including(params: a_kind_of(Hash)) }
+      end
+    end
+
+    context 'when unknown error raised' do
+      let(:unknown_error_class) { Class.new(StandardError) }
+      before do
+        allow(CryptomusPayment::HandleWebhook).to receive(:call).with(payload:).once.and_raise(
+          unknown_error_class, 'some error'
+        )
+      end
+
+      it 'returns 500' do
+        subject
+        expect(response.status).to eq(500)
+      end
+
+      include_examples :captures_error, request: true do
+        let(:capture_error_exception_class) { unknown_error_class }
+        let(:capture_error_extra) { hash_including(params: a_kind_of(Hash)) }
+      end
     end
   end
 end

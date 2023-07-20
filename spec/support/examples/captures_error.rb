@@ -2,8 +2,9 @@
 
 RSpec.shared_examples :captures_error do |safe: false, request: false|
   let(:capture_error_context) do
-    { tags: a_kind_of(Hash), extra: a_kind_of(Hash), rack_env: request ? be_present : nil }
+    { tags: a_kind_of(Hash), extra: capture_error_extra, rack_env: request ? be_present : nil }
   end
+  let(:capture_error_extra) { a_kind_of(Hash) }
   let(:capture_error_exception_class) { StandardError }
   let(:capture_error_exception) { a_kind_of(capture_error_exception_class) }
 

@@ -19,7 +19,8 @@ ActiveAdmin.register Payment do
                  :amount,
                  :notes,
                  :private_notes,
-                 :status
+                 :status,
+                 :type_name
 
   controller do
     def scoped_collection
@@ -47,6 +48,7 @@ ActiveAdmin.register Payment do
         'Total:'
       end
     }
+    column :type, :type_formatted, sortable: :type_id
     column :status, :status_formatted, sortable: :status_id
     column :amount, footer: lambda {
       strong do
@@ -62,6 +64,11 @@ ActiveAdmin.register Payment do
   filter :uuid_equals, label: 'UUID'
   filter :created_at, as: :date_time_range
   account_filter :account_id_eq
+  filter :type_id,
+         label: 'Type',
+         as: :select,
+         collection: Payment::CONST::TYPE_IDS.invert.to_a,
+         input_html: { class: 'chosen' }
   filter :status_id,
          label: 'Status',
          as: :select,
@@ -71,12 +78,6 @@ ActiveAdmin.register Payment do
   filter :private_notes
   filter :notes
 
-  action_item :check_cryptomus, only: :show do
-    if resource.pending?
-      link_to 'Check Cryptomus', check_cryptomus_payment_path(resource.id), method: :put
-    end
-  end
-
   show do |_s|
     tabs do
       tab :details do
@@ -85,6 +86,7 @@ ActiveAdmin.register Payment do
           row :uuid
           row :created_at
           row :account
+          row :type, &:type_formatted
           row :status, &:status_formatted
           row :amount
           row :private_notes
@@ -92,7 +94,7 @@ ActiveAdmin.register Payment do
         end
       end
 
-      if payment.pending?
+      if payment.type_cryptomus?
         tab :cryptomus_info do
           pre do
             cryptomus_info = Cryptomus::Client.payment(order_id: resource.id.to_s)
@@ -103,18 +105,5 @@ ActiveAdmin.register Payment do
         end
       end
     end
-  end
-
-  member_action :check_cryptomus, method: :put do
-    begin
-      payment = Draper.undecorate(resource)
-      CryptomusPayment::CheckStatus.call(payment:)
-      flash[:notice] = 'Payment status updated.'
-    rescue CryptomusPayment::CheckStatus::Error => e
-      flash[:error] = e.message
-    rescue Cryptomus::Errors::ApiError => e
-      flash[:error] = "Response status #{e.status}"
-    end
-    redirect_to payment_path(resource.id)
   end
 end
