@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Cryptomus Webhooks', type: :request do
-  describe 'POST /cryptomus_webhooks' do
+RSpec.describe 'Api Cryptomus Callbacks', type: :request do
+  describe 'POST /api/cryptomus_callbacks' do
     subject do
-      post '/cryptomus_webhooks',
+      post '/api/cryptomus_callbacks',
            params: request_body.to_json,
            headers: { 'Content-Type': 'application/json' }
     end
@@ -30,10 +30,10 @@ RSpec.describe 'Cryptomus Webhooks', type: :request do
         payer_currency: 'TRX',
         additional_data: 'Some additional info',
         convert: {
-          "to_currency": 'USDT',
-          "commission": nil,
-          "rate": '0.06193320',
-          "amount": '4.16321164'
+          to_currency: 'USDT',
+          commission: nil,
+          rate: '0.06193320',
+          amount: '4.16321164'
         }
       }
     end

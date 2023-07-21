@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
-  post 'cryptomus_webhooks', to: 'cryptomus_webhooks#create'
+  post 'api/cryptomus_callbacks', to: 'api/cryptomus_callbacks#create'
 
   resources :active_calls, constraints: { id: %r{[^/]+} }, only: %i[show index destroy]
 

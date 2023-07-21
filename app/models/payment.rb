@@ -102,6 +102,10 @@ class Payment < ApplicationRecord
     type_id == CONST::TYPE_ID_CRYPTOMUS
   end
 
+  def display_name
+    "Payment ##{id}"
+  end
+
   def self.ransackable_scopes(_auth_object = nil)
     enum_scope_names(:status) + enum_scope_names(:type_name)
   end
