@@ -61,6 +61,8 @@ RSpec.describe 'Payments show page', js: true do
   context 'when payment is type=manual status=completed' do
     it 'displays payment details' do
       subject
+      expect(page).to have_title("Payment ##{payment.id} | Yeti Admin", exact: true)
+      expect(page).to have_page_title("Payment ##{payment.id}", exact: true)
       expect(page).to have_attribute_row 'ID', exact_text: payment.id.to_s
       expect(page).to have_attribute_row 'AMOUNT', exact_text: payment.amount.to_s
       expect(page).to have_attribute_row 'TYPE', exact_text: 'MANUAL'

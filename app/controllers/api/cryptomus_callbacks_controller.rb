@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class CryptomusWebhooksController < ActionController::API
+class Api::CryptomusCallbacksController < ActionController::API
   include CaptureError::ControllerMethods
 
   rescue_from StandardError, with: :server_error
 
   # https://doc.cryptomus.com/payments/webhook
   def create
-    payload = params.except(:controller, :action, :sign, :cryptomus_webhook).to_unsafe_h.to_h
+    payload = params.except(:controller, :action, :sign, :cryptomus_callback).to_unsafe_h.to_h
     sign = params[:sign]
 
     unless Cryptomus::WebhookValidator.validate(payload:, sign:)
