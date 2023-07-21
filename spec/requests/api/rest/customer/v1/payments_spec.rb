@@ -183,6 +183,42 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
       include_examples :responds_with_correct_records
     end
 
+    context 'with filter type_name_eq' do
+      let(:json_api_request_query) do
+        { filter: { type_name_eq: 'manual' } }
+      end
+      let(:expected_records) { payments.first(3) }
+
+      include_examples :responds_with_correct_records
+    end
+
+    context 'with filter type_name_not_eq' do
+      let(:json_api_request_query) do
+        { filter: { type_name_not_eq: 'cryptomus' } }
+      end
+      let(:expected_records) { payments.first(3) }
+
+      include_examples :responds_with_correct_records
+    end
+
+    context 'with filter type_name_in' do
+      let(:json_api_request_query) do
+        { filter: { type_name_in: 'cryptomus' } }
+      end
+      let(:expected_records) { payments.last(2) }
+
+      include_examples :responds_with_correct_records
+    end
+
+    context 'with filter type_name_not_in' do
+      let(:json_api_request_query) do
+        { filter: { type_name_not_in: 'manual' } }
+      end
+      let(:expected_records) { payments.last(2) }
+
+      include_examples :responds_with_correct_records
+    end
+
     context 'with include account' do
       let(:json_api_request_query) do
         { include: 'account' }
@@ -226,7 +262,8 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
                                             amount: payment.amount.to_s,
                                             notes: payment.notes,
                                             'created-at': payment.created_at.iso8601(3),
-                                            status: payment.status
+                                            status: payment.status,
+                                            'type-name': payment.type_name
                                           },
                                           relationships: {
                                             account: {
@@ -246,20 +283,30 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
-    context 'when payment is completed' do
+    context 'when payment is type=manual status=completed' do
       include_examples :responds_with_correct_record
     end
 
-    context 'when payment is pending' do
-      let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_PENDING }
+    context 'when payment is type=cryptomus' do
+      let(:payment_attrs) { super().merge type_id: Payment::CONST::TYPE_ID_CRYPTOMUS }
 
-      include_examples :responds_with_correct_record
-    end
+      context 'when payment is status=pending' do
+        let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_PENDING }
 
-    context 'when payment is canceled' do
-      let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_CANCELED }
+        include_examples :responds_with_correct_record
+      end
 
-      include_examples :responds_with_correct_record
+      context 'when payment is status=completed' do
+        let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_CANCELED }
+
+        include_examples :responds_with_correct_record
+      end
+
+      context 'when payment is status=canceled' do
+        let(:payment_attrs) { super().merge status_id: Payment::CONST::STATUS_ID_CANCELED }
+
+        include_examples :responds_with_correct_record
+      end
     end
 
     context 'when payment account listed in allowed_ids' do

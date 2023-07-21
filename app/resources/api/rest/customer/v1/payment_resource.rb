@@ -6,6 +6,7 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
   attributes :amount,
              :notes,
              :status,
+             :type_name,
              :created_at
 
   has_one :account, foreign_key_on: :related
@@ -16,6 +17,7 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :created_at, type: :datetime
   association_uuid_filter :account_id, class_name: 'Account'
   ransack_filter :status, type: :enum, collection: Payment::CONST::STATUS_IDS.values
+  ransack_filter :type_name, type: :enum, collection: Payment::CONST::TYPE_IDS.values
 
   def self.apply_allowed_accounts(records, options)
     context = options[:context]

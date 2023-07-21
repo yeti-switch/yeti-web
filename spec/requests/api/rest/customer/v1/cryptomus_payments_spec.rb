@@ -14,8 +14,6 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
     shared_examples :creates_successfully do
       it 'creates pending payment' do
         expect { subject }.to change { Payment.count }.by(1)
-        #     expect(stub_cryptomus_payment_services).to have_been_requested.once
-        expect(stub_create_cryptomus_payment).to have_been_requested.once
         expect(Payment.last).to have_attributes(
                                   account_id: account.id,
                                   amount: json_api_attributes[:amount].to_d,
@@ -50,9 +48,8 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
       include_examples :returns_json_api_errors, errors: errors
 
       it 'does not create payment' do
+        expect(CryptomusPayment::Create).not_to receive(:call)
         expect { subject }.not_to change { Payment.count }
-        #     expect(stub_cryptomus_payment_services).not_to have_been_requested
-        expect(stub_create_cryptomus_payment).not_to have_been_requested
       end
 
       it 'does not change account balance' do
@@ -81,69 +78,11 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
       'https://pay.cryptomus.com/pay/f1386fb5-ecfa-41d4-a85d-b151d98df5e1'
     end
 
-    let!(:payment_services_body) do
-      File.read Rails.root.join('spec/fixtures/json/cryptomus_payment_services.json')
-    end
-    let!(:stub_cryptomus_payment_services) do
-      WebMock.stub_request(:post, "#{Cryptomus::CONST::URL}/v1/payment/services")
-             .with(headers: { 'Content-Type': 'application/json' }, body: '{}')
-             .and_return(headers: { 'Content-Type': 'application/json' }, status: 201, body: payment_services_body)
-    end
-    let(:cryptomus_currencies) do
-      JSON.parse(payment_services_body, symbolize_names: true)[:result].map { |row| row.slice(:currency) }.uniq
-    end
-
-    let!(:stub_create_cryptomus_payment) do
-      WebMock.stub_request(:post, "#{Cryptomus::CONST::URL}/v1/payment")
-             .with(
-               headers: { 'Content-Type': 'application/json' },
-               body: cryptomus_request_body.to_json
-             )
-             .and_return(
-               headers: { 'Content-Type': 'application/json' },
-               status: cryptomus_response_status,
-               body: cryptomus_response_body.to_json
-             )
-    end
-    let(:cryptomus_request_body) do
-      {
-        order_id: (prev_payment.id + 1).to_s,
-        amount: json_api_attributes[:amount].to_d.to_s,
-        currency: 'USDT',
-        network: 'TRON',
-        url_callback: YetiConfig.cryptomus&.url_callback,
-        url_return: YetiConfig.cryptomus&.url_return,
-        lifetime: CustomerApi::CryptomusPaymentForm::EXPIRATION_SEC,
-        subtract: 100,
-        is_payment_multiple: false
-      }
-    end
-    let(:cryptomus_response_status) { 200 }
-    let(:cryptomus_response_body) do
-      {
-        "state": 0,
-        "result": {
-          "uuid": 'f1386fb5-ecfa-41d4-a85d-b151d98df5e1',
-          "order_id": (prev_payment.id + 1).to_s,
-          "amount": '100.00000000',
-          "payment_amount": '110.95000000',
-          "payer_amount": '100.00000000',
-          "payer_currency": 'USDT',
-          "currency": 'USDT',
-          "comments": nil,
-          "network": 'TRON',
-          "address": nil,
-          "from": nil,
-          "txid": nil,
-          "payment_status": 'check',
-          "url": cryptomus_url,
-          "expired_at": CustomerApi::CryptomusPaymentForm::EXPIRATION_SEC.seconds.from_now.to_i,
-          "status": 'check',
-          "is_final": false,
-          "additional_data": nil,
-          "is_payment_multiple": false
-        }
-      }
+    before do
+      allow(CryptomusPayment::Create).to receive(:call).with(
+        order_id: (prev_payment.id + 1),
+        amount: json_api_attributes[:amount].to_d
+      ).and_return(cryptomus_url)
     end
 
     include_examples :creates_successfully

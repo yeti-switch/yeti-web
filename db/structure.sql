@@ -22326,7 +22326,8 @@ CREATE TABLE billing.payments (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     private_notes character varying,
-    status_id smallint NOT NULL
+    status_id smallint DEFAULT 20 NOT NULL,
+    type_id smallint DEFAULT 20 NOT NULL
 );
 
 
@@ -31560,6 +31561,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230702152539'),
 ('20230706164807'),
 ('20230706202154'),
-('20230708194737');
+('20230708194737'),
+('20230717103315');
 
 

@@ -42,33 +42,12 @@ module CustomerApi
           account:,
           amount:,
           notes:,
+          type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
           status_id: Payment::CONST::STATUS_ID_PENDING
         )
-        crypto_payment = create_cryptomus_payment(payment)
-        @url = crypto_payment[:result][:url]
+        @url = CryptomusPayment::Create.call(order_id: payment.id, amount:)
         @uuid = payment.reload.uuid
       end
-    end
-
-    def create_cryptomus_payment(payment)
-      Cryptomus::Client.create_payment(
-        order_id: payment.id.to_s,
-        amount: amount.to_s,
-        currency: 'USDT',
-        # currencies: available_currencies,
-        network: 'TRON',
-        url_callback: YetiConfig.cryptomus&.url_callback,
-        url_return: YetiConfig.cryptomus&.url_return,
-        lifetime: EXPIRATION_SEC,
-        subtract: 100, # customer will pay 100% of commission
-        is_payment_multiple: false
-      )
-    end
-
-    def available_currencies
-      response = Cryptomus::Client.list_services
-      currencies = response[:result].map { |currency| currency[:currency] }.uniq
-      currencies.map { |currency| { currency: } }
     end
   end
 end
