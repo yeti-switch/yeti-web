@@ -74,6 +74,8 @@ class Payment < ApplicationRecord
     where('created_at >= ? and created_at < ?', 1.day.ago.at_beginning_of_day, Time.now.at_beginning_of_day)
   }
 
+  scope :type_cryptomus, -> { where(type_id: CONST::TYPE_ID_CRYPTOMUS) }
+
   def status
     CONST::STATUS_IDS[status_id]
   end
