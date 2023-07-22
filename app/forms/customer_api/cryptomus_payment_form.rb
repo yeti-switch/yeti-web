@@ -45,7 +45,7 @@ module CustomerApi
           type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
           status_id: Payment::CONST::STATUS_ID_PENDING
         )
-        @url = CryptomusPayment::Create.call(order_id: payment.id, amount:)
+        @url = ::CryptomusPayment::Create.call(order_id: payment.id, amount:)
         @uuid = payment.reload.uuid
       end
     end

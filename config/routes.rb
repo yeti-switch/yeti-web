@@ -168,7 +168,7 @@ Rails.application.routes.draw do
             jsonapi_resources :chart_active_calls, only: %i[create]
             jsonapi_resources :chart_originated_cps, only: %i[create]
             jsonapi_resources :payments, only: %i[index show]
-            jsonapi_resources :cryptomus_payments, only: %i[create]
+            jsonapi_resources :cryptomus_payments, only: %i[create show]
             jsonapi_resources :invoices, only: %i[index show] do
               jsonapi_relationships
               member { get :download }
