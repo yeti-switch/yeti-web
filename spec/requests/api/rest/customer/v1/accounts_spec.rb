@@ -62,22 +62,20 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
       end
 
       include_examples :jsonapi_server_error
-      include_examples :captures_error do
-        let(:capture_error_context) do
+      include_examples :captures_error, request: true do
+        let(:capture_error_user) do
           {
-            user: {
-              id: api_access.id,
-              customer_id: api_access.customer_id,
-              login: api_access.login,
-              class: api_access.class.name
-            },
-            tags: {
-              action_name: 'index',
-              controller_name: 'api/rest/customer/v1/accounts',
-              request_id: be_present
-            },
-            extra: {},
-            rack_env: be_present
+            id: api_access.id,
+            customer_id: api_access.customer_id,
+            login: api_access.login,
+            class: api_access.class.name
+          }
+        end
+        let(:capture_error_tags) do
+          {
+            action_name: 'index',
+            controller_name: 'api/rest/customer/v1/accounts',
+            request_id: be_present
           }
         end
       end

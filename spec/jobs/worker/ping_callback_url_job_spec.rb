@@ -36,30 +36,30 @@ RSpec.describe Worker::PingCallbackUrlJob, type: :job do
 
     include_examples :captures_error, safe: true do
       let(:capture_error_exception_class) { Worker::PingCallbackUrlJob::TryAgainError }
-      let(:capture_error_context) do
+      let(:capture_error_user) { nil }
+      let(:capture_error_tags) do
         {
-          user: nil,
-          tags: {
-            delayed_job_queue: 'ping_callback_url',
-            delayed_job_id: nil,
-            active_job_class: described_class.to_s,
-            active_job_id: be_present
-          },
-          extra: {
-            active_job_class: described_class.to_s,
-            active_job_id: be_present,
-            arguments: [callback_url, params],
-            scheduled_at: nil,
-            delayed_job: {
-              id: nil,
-              priority: nil,
-              attempts: nil,
-              run_at: nil,
-              locked_at: nil,
-              locked_by: nil,
-              queue: nil,
-              created_at: nil
-            }
+          delayed_job_queue: 'ping_callback_url',
+          delayed_job_id: nil,
+          active_job_class: described_class.to_s,
+          active_job_id: be_present
+        }
+      end
+      let(:capture_error_extra) do
+        {
+          active_job_class: described_class.to_s,
+          active_job_id: be_present,
+          arguments: [callback_url, params],
+          scheduled_at: nil,
+          delayed_job: {
+            id: nil,
+            priority: nil,
+            attempts: nil,
+            run_at: nil,
+            locked_at: nil,
+            locked_by: nil,
+            queue: nil,
+            created_at: nil
           }
         }
       end

@@ -23,9 +23,9 @@ module CustomerApi
     private
 
     def fetch_payment_info
-      Cryptomus::Client.payment(order_id: payment.id.to_s)
-    rescue Cryptomus::Client::ApiError => e
-      capture_error!(e, extra: { payment_id: payment.id, status: e.status, body: e.response_body })
+      CaptureError.with_exception_context(extra: { payment_id: payment.id }) do
+        Cryptomus::Client.payment(order_id: payment.id.to_s)
+      end
     end
   end
 end
