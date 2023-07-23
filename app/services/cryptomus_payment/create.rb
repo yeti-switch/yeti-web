@@ -21,7 +21,7 @@ module CryptomusPayment
         url_return: YetiConfig.cryptomus&.url_return,
         lifetime: EXPIRATION_SECONDS,
         subtract: 100, # customer will pay 100% of commission
-        is_payment_multiple: false
+        is_payment_multiple: true
       )
       crypto_payment[:result][:url]
     rescue Cryptomus::Errors::ApiError => e
