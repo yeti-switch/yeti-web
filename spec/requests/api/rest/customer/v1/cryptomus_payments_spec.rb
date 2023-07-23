@@ -157,7 +157,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
           "status": 'check',
           "is_final": false,
           "additional_data": nil,
-          "is_payment_multiple": false
+          "is_payment_multiple": true
         }
       }
     end

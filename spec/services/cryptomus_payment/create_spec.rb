@@ -31,7 +31,7 @@ RSpec.describe CryptomusPayment::Create do
         url_return: YetiConfig.cryptomus&.url_return,
         lifetime: CryptomusPayment::Create::EXPIRATION_SECONDS,
         subtract: 100,
-        is_payment_multiple: false
+        is_payment_multiple: true
       }
     end
     let(:cryptomus_response_status) { 200 }
@@ -57,7 +57,7 @@ RSpec.describe CryptomusPayment::Create do
           "status": 'check',
           "is_final": false,
           "additional_data": nil,
-          "is_payment_multiple": false
+          "is_payment_multiple": true
         }
       }
     end
