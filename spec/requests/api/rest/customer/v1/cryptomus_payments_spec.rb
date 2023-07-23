@@ -174,6 +174,22 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
       let(:expected_resource_id) { resource_id }
     end
 
+    context 'when cryptomus api returns error' do
+      let(:cryptomus_response_status) { 404 }
+      let(:cryptomus_response_body) do
+        {
+          state: 1,
+          message: 'No query results for model [App\\Models\\MerchantPayment].'
+        }
+      end
+
+      include_examples :responds_with_status, 500
+      include_examples :captures_error, request: true do
+        let(:capture_error_exception_class) { Cryptomus::Errors::ApiError }
+        let(:capture_error_user) { be_present }
+      end
+    end
+
     context 'when payment type=cryptomus, status=completed' do
       let!(:payment) { create(:payment, :cryptomus_completed, account:) }
       let(:cryptomus_response_body) do
