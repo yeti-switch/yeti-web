@@ -9,7 +9,7 @@ class Api::Rest::Customer::V1::OriginationStatisticsController < Api::RestContro
 
   SAMPLINGS = {
     'minute' => 'toStartOfMinute',
-    '5minutes' => 'toStartOfMinute5minutes',
+    '5minutes' => 'toStartOfFiveMinutes',
     'hour' => 'toStartOfHour',
     'day' => 'toStartOfDay',
     'week' => 'toStartOfWeek',
@@ -33,6 +33,15 @@ class Api::Rest::Customer::V1::OriginationStatisticsController < Api::RestContro
       head 500
       return
     end
+
+    # TODO filters by:
+    # src_country_id - eq
+    # dst_country_id - eq
+    # src_prefix_routing - eq, start with, end with, contains
+    # dst_prefix_routing - eq, start with, end with, contains
+    # duration - eq, <, >
+    # auth_orig_ip - eq
+    # customer_price - eq, <, >
 
     filters = []
     query_params = {}
