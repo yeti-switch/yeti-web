@@ -400,6 +400,40 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
           end
         end
       end
+
+      context 'by customer_auth_external_type_eq' do
+        let(:filters) { { 'customer-auth-external-type-eq' => customer_auth.external_type } }
+        let(:customer_auth) { FactoryBot.create(:customers_auth, external_id: 123, external_type: 'term') }
+        let!(:cdr) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth.external_id, customer_auth_external_type: customer_auth.external_type) }
+
+        it 'only desired cdrs should be present' do
+          subject
+          expect(response_data.size).to eq(1)
+          expect(response_data).to match_array([hash_including('id' => cdr.id.to_s)])
+        end
+      end
+
+      context 'by customer_auth_external_type_not_eq' do
+        let(:filters) { { 'customer-auth-external-type-not-eq' => customer_auth_1.external_type } }
+        let(:customer_auth_1) { FactoryBot.create(:customers_auth, external_id: 111, external_type: 'em') }
+        let(:customer_auth_2) { FactoryBot.create(:customers_auth, external_id: 222, external_type: 'term') }
+        let(:customer_auth_3) { FactoryBot.create(:customers_auth, external_id: 333, external_type: nil) }
+        let(:cdrs) { nil }
+        let!(:cdr_1) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth_1.external_id, customer_auth_external_type: customer_auth_1.external_type) }
+        let!(:cdr_2) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth_2.external_id, customer_auth_external_type: customer_auth_2.external_type) }
+        let!(:cdr_3) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth_3.external_id, customer_auth_external_type: customer_auth_3.external_type) }
+
+        it 'only desired cdrs should be present' do
+          subject
+          expect(response_data.size).to eq(2)
+          expect(response_data).to match_array(
+            [
+              hash_including('id' => cdr_2.id.to_s),
+              hash_including('id' => cdr_3.id.to_s)
+            ]
+          )
+        end
+      end
     end
   end
 
