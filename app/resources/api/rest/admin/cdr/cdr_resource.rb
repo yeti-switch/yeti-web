@@ -223,6 +223,14 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.routing_tag_ids_empty(values[0])
   }
 
+  filter :customer_auth_external_type_eq, apply: lambda { |records, values, _options|
+    records.where(customer_auth_external_type: values)
+  }
+
+  filter :customer_auth_external_type_not_eq, apply: lambda { |records, values, _options|
+    records.where(customer_auth_external_type: nil).or(records.where.not(customer_auth_external_type: values))
+  }
+
   ransack_filter :time_start, type: :datetime
   ransack_filter :destination_next_rate, type: :number
   ransack_filter :destination_fee, type: :number
