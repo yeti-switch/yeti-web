@@ -18301,13 +18301,15 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           select into v_cnam_resp_json yeti_ext.lnp_resolve_cnam(v_cnam_database.id, v_cnam_req_json);
 
           /*dbg{*/
-          v_end:=clock_timestamp();
+          v_end=clock_timestamp();
           RAISE NOTICE '% ms -> CNAM. resolver response: %',EXTRACT(MILLISECOND from v_end-v_start),v_cnam_resp_json;
           /*}dbg*/
 
           if json_extract_path_text(v_cnam_resp_json,'error') is not null then
+            /*dbg{*/
+            v_end=clock_timestamp();
             RAISE NOTICE '% ms -> CNAM. error',EXTRACT(MILLISECOND from v_end-v_start);
-
+            /*}dbg*/
             if v_cnam_database.drop_call_on_error then
               v_ret.disconnect_code_id=8009; -- CNAM Error
               RETURN NEXT v_ret;
@@ -18317,7 +18319,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             select into v_cnam_lua_resp * from switch20.cnam_lua_response_exec(v_cnam_database.response_lua, json_extract_path_text(v_cnam_resp_json,'response'));
 
             /*dbg{*/
-            v_end:=clock_timestamp();
+            v_end=clock_timestamp();
             RAISE NOTICE '% ms -> CNAM. Lua parsed response: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_cnam_lua_resp);
             /*}dbg*/
             if v_cnam_lua_resp.metadata is not null then
@@ -19646,13 +19648,15 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           select into v_cnam_resp_json yeti_ext.lnp_resolve_cnam(v_cnam_database.id, v_cnam_req_json);
 
           /*dbg{*/
-          v_end:=clock_timestamp();
+          v_end=clock_timestamp();
           RAISE NOTICE '% ms -> CNAM. resolver response: %',EXTRACT(MILLISECOND from v_end-v_start),v_cnam_resp_json;
           /*}dbg*/
 
           if json_extract_path_text(v_cnam_resp_json,'error') is not null then
+            /*dbg{*/
+            v_end=clock_timestamp();
             RAISE NOTICE '% ms -> CNAM. error',EXTRACT(MILLISECOND from v_end-v_start);
-
+            /*}dbg*/
             if v_cnam_database.drop_call_on_error then
               v_ret.disconnect_code_id=8009; -- CNAM Error
               RETURN NEXT v_ret;
@@ -19662,7 +19666,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
             select into v_cnam_lua_resp * from switch20.cnam_lua_response_exec(v_cnam_database.response_lua, json_extract_path_text(v_cnam_resp_json,'response'));
 
             /*dbg{*/
-            v_end:=clock_timestamp();
+            v_end=clock_timestamp();
             RAISE NOTICE '% ms -> CNAM. Lua parsed response: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_cnam_lua_resp);
             /*}dbg*/
             if v_cnam_lua_resp.metadata is not null then
@@ -20959,8 +20963,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           
 
           if json_extract_path_text(v_cnam_resp_json,'error') is not null then
-            RAISE NOTICE '% ms -> CNAM. error',EXTRACT(MILLISECOND from v_end-v_start);
-
+            
             if v_cnam_database.drop_call_on_error then
               v_ret.disconnect_code_id=8009; -- CNAM Error
               RETURN NEXT v_ret;
@@ -31415,8 +31418,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31562,6 +31564,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230706164807'),
 ('20230706202154'),
 ('20230708194737'),
-('20230717103315');
+('20230717103315'),
+('20230808192245');
 
 
