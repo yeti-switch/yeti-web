@@ -83,6 +83,7 @@ FactoryBot.define do
         high_threshold: ev.balance_high_threshold,
         send_to: ev.send_balance_notifications_to
       )
+      record.reload # populate UUID
     end
   end
 end

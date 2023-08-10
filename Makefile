@@ -86,6 +86,10 @@ config/database.yml:
 	$(info:msg=Creating database.yml for build/tests)
 	cp config/database.build.yml config/database.yml
 
+config/click_house.yml:
+	$(info:msg=Creating click_house.yml for tests)
+	cp config/click_house.yml.distr config/click_house.yml
+
 
 config/yeti_web.yml:
 	$(info:msg=Creating yeti_web.yml for build/tests)
@@ -191,7 +195,7 @@ test: test-pgq-processors lint brakeman rspec
 
 
 .PHONY: rspec
-rspec: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml prepare-test-db
+rspec: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml prepare-test-db config/click_house.yml
 ifdef spec
 	$(info:msg=Testing spec $(spec))
 	RAILS_ENV=test $(bundle_bin) exec rspec "$(spec)"
