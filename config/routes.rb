@@ -177,6 +177,7 @@ Rails.application.routes.draw do
               jsonapi_relationships
               member { get :download }
             end
+            jsonapi_resources :countries, only: %i[index show]
           end
         end
 

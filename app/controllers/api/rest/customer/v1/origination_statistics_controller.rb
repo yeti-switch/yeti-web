@@ -7,82 +7,22 @@ class Api::Rest::Customer::V1::OriginationStatisticsController < Api::RestContro
   before_action :authorize!
   after_action :setup_authorization_cookie
 
-  SAMPLINGS = {
-    'minute' => 'toStartOfMinute',
-    '5minutes' => 'toStartOfFiveMinutes',
-    'hour' => 'toStartOfHour',
-    'day' => 'toStartOfDay',
-    'week' => 'toStartOfWeek',
-    'month' => 'toStartOfMonth'
-  }.freeze
-
   def show
-    @customer_acc_id = current_customer.allowed_accounts_uuid_ids_hash[params['account-id']]
-    if @customer_acc_id.nil?
-      head 500
-      return
-    end
-
-    @sampling_fn = SAMPLINGS[params[:sampling]]
-    if @sampling_fn.nil?
-      head 500
-      return
-    end
-
-    if params['from-time'].nil?
-      head 500
-      return
-    end
-
-    # TODO filters by:
-    # src_country_id - eq
-    # dst_country_id - eq
-    # src_prefix_routing - eq, start with, end with, contains
-    # dst_prefix_routing - eq, start with, end with, contains
-    # duration - eq, <, >
-    # auth_orig_ip - eq
-    # customer_price - eq, <, >
-
-    filters = []
-    query_params = {}
-
-    filters.push('customer_acc_id = {account_id: UInt32}')
-    query_params['param_account_id'] = @customer_acc_id
-
-    filters.push('time_start>={from_time: DateTime}')
-    query_params['param_from_time'] = params['from-time']
-
-    unless params['to-time'].nil?
-      filters.push('time_start<{to_time: DateTime}')
-      query_params['param_to_time'] = params['to-time']
-    end
-
-    q = "
-      SELECT
-        toUnixTimestamp(#{@sampling_fn}(time_start)) as t,
-        count(*) AS total_calls,
-        countIf(duration>0) as successful_calls,
-        countIf(duration=0) as failed_calls,
-        sum(duration) as total_duration,
-        round(avgIf(duration, duration>0),5) AS acd,
-        round(countIf(duration>0)/count(*),5) AS asr,
-        sum(customer_price) as total_price
-      FROM cdrs
-      WHERE #{filters.join(' AND ')} AND is_last_cdr = true
-      GROUP BY t
-      ORDER BY t
-      FORMAT JSONColumns
-    "
-
-    response = ClickHouse.connection.execute(
-      q, nil,
-      params: query_params
+    statistic = ClickhouseReport::OriginationStatistic.new(
+      params.to_unsafe_h,
+      customer: current_customer
     )
-    if response.status == 200
-      render json: response.body, status: 200
-    else
+
+    begin
+      rows = statistic.collection
+      render json: rows, status: 200
+    rescue ClickhouseReport::Base::ParamError => e
+      Rails.logger.error { "Bad Request <#{e.class}>: #{e.message}" }
+      render json: { error: e.message }, status: 400
+    rescue ClickhouseReport::Base::Error, StandardError => e
+      Rails.logger.error { "Server Error <#{e.class}>: #{e.message}" }
+      CaptureError.capture(e, extra: { params: params.to_unsafe_h })
       head 500
-      nil
     end
   end
 end
