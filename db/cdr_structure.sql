@@ -293,7 +293,17 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 --
 
 CREATE TYPE switch.lega_headers_ty AS (
-	p_charge_info character varying
+	p_charge_info character varying,
+	reason character varying
+);
+
+
+--
+-- Name: legb_headers_ty; Type: TYPE; Schema: switch; Owner: -
+--
+
+CREATE TYPE switch.legb_headers_ty AS (
+	reason character varying
 );
 
 
@@ -487,7 +497,9 @@ CREATE TABLE cdr.cdr (
     legb_ss_status_id smallint,
     dump_level_id smallint,
     metadata jsonb,
-    customer_auth_external_type character varying
+    customer_auth_external_type character varying,
+    lega_reason character varying,
+    legb_reason character varying
 )
 PARTITION BY RANGE (time_start);
 
@@ -1808,7 +1820,7 @@ DECLARE
   v_rtp_tx_stream_data rtp_statistics.tx_streams%rowtype;
 
   v_lega_headers switch.lega_headers_ty;
-
+  v_legb_headers switch.legb_headers_ty;
 BEGIN
   --  raise warning 'type: % id: %', i_failed_resource_type_id, i_failed_resource_id;
   --  RAISE warning 'DTMF: %', i_dtmf_events;
@@ -1818,7 +1830,11 @@ BEGIN
   v_dynamic:=json_populate_record(null::switch.dynamic_cdr_data_ty, i_dynamic);
 
   v_lega_headers:=json_populate_record(null::switch.lega_headers_ty, i_lega_headers);
+  v_legb_headers:=json_populate_record(null::switch.legb_headers_ty, i_legb_headers);
+
   v_cdr.p_charge_info_in = v_lega_headers.p_charge_info;
+  v_cdr.lega_reason =  v_lega_headers.reason;
+  v_cdr.legb_reason =  v_legb_headers.reason;
 
   v_cdr.lega_identity = i_lega_identity;
   v_cdr.lega_ss_status_id = v_dynamic.lega_ss_status_id;
@@ -4722,6 +4738,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230518150839'),
 ('20230524185032'),
 ('20230602123903'),
-('20230708183812');
+('20230708183812'),
+('20230828175949');
 
 

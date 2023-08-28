@@ -342,8 +342,8 @@ RSpec.describe 'switch.writecdr()' do
         '{"core":"1.7.60-4","yeti":"1.7.30-1","aleg":"Twinkle/1.10.1","bleg":"Localhost Media Gateway"}',
         'f',
         '#{i_dynamic_fields}',
-        '{"p_charge_info":"sip:p-charge-info@example.com/uri"}',
-        '{"v_info":"sip:p-charge-info@example.com/uri"}',
+        '{"p_charge_info":"sip:p-charge-info@example.com/uri","reason":"Q.850;cause=16;text=\\"Normal call clearing\\""}',
+        '{"v_info":"sip:p-charge-info@example.com/uri","reason":"Q.850;cause=31;text=\\"Normal, unspecified\\""}',
         '[{"header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"456","uri":"sip:456"},"iat":1622830203,"orig":{"tn":"123","uri":"sip:123"},"origid":"8-000F7304-60BA6C7B000B6828-A43657C0"},"verified":true},{"error_code":4,"error_reason":"Incorrect Identity Header Value","parsed":false},{"error_code":-1,"error_reason":"certificate is not available","header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test2.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"13"},"iat":1622831252,"orig":{"tn":"42"},"origid":"8-000F7304-60BA7094000207EC-2B5F27C0"},"verified":false}]'
       )
   end
@@ -487,6 +487,8 @@ RSpec.describe 'switch.writecdr()' do
                      vendor_duration: 571,
                      customer_auth_name: 'Customer Auth for trunk 1',
                      p_charge_info_in: 'sip:p-charge-info@example.com/uri',
+                     lega_reason: 'Q.850;cause=16;text="Normal call clearing"',
+                     legb_reason: 'Q.850;cause=31;text="Normal, unspecified"',
                      lega_ss_status_id: -1,
                      legb_ss_status_id: 2
                    )
@@ -568,8 +570,8 @@ RSpec.describe 'switch.writecdr()' do
           '{"core":"1.7.60-4","yeti":"1.7.30-1","aleg":"Twinkle/1.10.1","bleg":"Localhost Media Gateway"}',
           'f',
           '#{i_dynamic_fields}',
-          '{"p_charge_info":"sip:p-charge-info@example.com/uri"}',
-          '{"v_info":"sip:p-charge-info@example.com/uri"}',
+          '{"p_charge_info":"sip:p-charge-info@example.com/uri","reason":"Q.850;cause=16;text=\\"Normal call clearing\\""}',
+          '{"v_info":"sip:p-charge-info@example.com/uri","reason":"Q.850;cause=31;text=\\"Normal, unspecified\\""}',
           '[{"header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"456","uri":"sip:456"},"iat":1622830203,"orig":{"tn":"123","uri":"sip:123"},"origid":"8-000F7304-60BA6C7B000B6828-A43657C0"},"verified":true},{"error_code":4,"error_reason":"Incorrect Identity Header Value","parsed":false},{"error_code":-1,"error_reason":"certificate is not available","header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test2.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"13"},"iat":1622831252,"orig":{"tn":"42"},"origid":"8-000F7304-60BA7094000207EC-2B5F27C0"},"verified":false}]'
         )
     end

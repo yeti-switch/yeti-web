@@ -287,6 +287,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :routing_attempt do |cdr_attempt|
             status_tag(cdr_attempt.routing_attempt.to_s, class: cdr_attempt.is_last_cdr? ? :ok : nil)
           end
+          column :lega_reason
+          column :legb_reason
           column :src_name_in
           column :src_prefix_in
           column :from_domain
@@ -445,6 +447,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :internal_disconnect_reason
           row :legb_disconnect_code
           row :legb_disconnect_reason
+          row :lega_reason
+          row :legb_reason
+
           row :routing_attempt
           row :is_last_cdr
           row :src_name_in
