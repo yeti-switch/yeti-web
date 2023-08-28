@@ -46,11 +46,13 @@
 #  lega_disconnect_code            :integer(4)
 #  lega_disconnect_reason          :string
 #  lega_identity                   :jsonb
+#  lega_reason                     :string
 #  lega_user_agent                 :string
 #  legb_disconnect_code            :integer(4)
 #  legb_disconnect_reason          :string
 #  legb_local_tag                  :string
 #  legb_outbound_proxy             :string
+#  legb_reason                     :string
 #  legb_ruri                       :string
 #  legb_user_agent                 :string
 #  local_tag                       :string
