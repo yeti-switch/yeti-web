@@ -90,6 +90,9 @@ config/click_house.yml:
 	$(info:msg=Creating click_house.yml for tests)
 	cp config/click_house.yml.distr config/click_house.yml
 
+config/secrets.yml:
+	$(info:msg=Creating secrets.yml for tests)
+	cp config/secrets.yml.distr config/secrets.yml
 
 config/yeti_web.yml:
 	$(info:msg=Creating yeti_web.yml for build/tests)
@@ -145,7 +148,7 @@ gems-test: bundler
 
 
 .PHONY: docs
-docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
+docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml
 	$(info:msg=Preparing test database for docs generation)
 	RAILS_ENV=test $(bundle_bin) exec rake \
 		db:drop \
@@ -159,7 +162,7 @@ docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
 
 
 .PHONY: assets
-assets:	gems config/database.yml config/yeti_web.yml config/policy_roles.yml
+assets:	gems config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml
 	$(info:msg=Precompile assets)
 	RAILS_ENV=production $(bundle_bin) exec rake assets:precompile
 
@@ -195,7 +198,7 @@ test: test-pgq-processors lint brakeman rspec
 
 
 .PHONY: rspec
-rspec: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml prepare-test-db config/click_house.yml
+rspec: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml prepare-test-db config/click_house.yml config/secrets.yml
 ifdef spec
 	$(info:msg=Testing spec $(spec))
 	RAILS_ENV=test $(bundle_bin) exec rspec "$(spec)"
@@ -210,18 +213,18 @@ else
 endif
 
 .PHONY: rspec
-database_consistency: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml prepare-test-db
+database_consistency: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml prepare-test-db
 	$(info:msg=Check the consistency of the database constraints with the application validations)
 	RAILS_ENV=test $(bundle_bin) exec database_consistency
 
 .PHONY: lint
-lint: gems-test config/database.yml config/yeti_web.yml
+lint: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
 	$(info:msg=Running rubocop and bundle audit)
 	RAILS_ENV=test $(bundle_bin) exec rubocop -P
 	RAILS_ENV=test $(bundle_bin) exec rake bundle:audit
 
 .PHONY: brakeman
-brakeman: gems-test config/database.yml config/yeti_web.yml
+brakeman: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
 	$(info:msg=Running brakeman)
 	RAILS_ENV=test $(bundle_bin) exec brakeman
 
@@ -231,7 +234,7 @@ coverage_report: gems-test
 	$(bundle_bin) exec rake coverage:report
 
 .PHONY: test-pgq-processors
-test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles.yml
+test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml
 	$(info:msg=Preparing test database for pgq-processors)
 	@# PGQ_PROCESSORS_TEST is used in database_build.yml to setup separate db
 	@# to not interfere with main test suite when running make tasks in parallel
@@ -270,7 +273,8 @@ clean:
 		doc/api
 	rm -fv 	config/database.yml \
 		config/yeti_web.yml \
-		config/policy_roles.yml
+		config/policy_roles.yml \
+		config/secrets.yml
 	rm -fv bin/rspec
 
 
