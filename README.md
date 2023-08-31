@@ -43,6 +43,7 @@ bundle install
 Then create `config/database.yml`, example is `config/database.yml.development`. Notice this project uses two databases main "yeti" and second database "cdr"
 
 Then create `config/yeti_web.yml`, example is `config/yeti_web.yml.development`.
+Then create `config/secrets.yml`, example is `config/secrets.yml.distr`.
 
 To disable the creation of new versions via paper_trail for some model please fill the array under key `versioning_disable_for_models` in the `config/yeti_web.yml`
 
