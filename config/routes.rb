@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   delete 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#destroy'
 
   get 'api/rest/customer/v1/origination-statistics', to: 'api/rest/customer/v1/origination_statistics#show'
+  get 'api/rest/customer/v1/origination-statistics-quality', to: 'api/rest/customer/v1/origination_statistics_quality#show'
+  get 'api/rest/customer/v1/origination-active-calls', to: 'api/rest/customer/v1/origination_active_calls#show'
 
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
