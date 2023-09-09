@@ -576,13 +576,15 @@ RSpec.describe '#routing logic' do
         create(:destination,
                                   prefix: '',
                                   enabled: true,
-                                  initial_interval: 1,
-                                  next_interval: 1,
+                                  initial_interval: destination_initial_interval,
+                                  next_interval: destination_next_interval,
                                   initial_rate: destination_rate,
                                   next_rate: destination_rate,
                                   rate_group_id: rate_group.id)
       }
       let!(:destination_rate) { 0.11 }
+      let!(:destination_initial_interval) { 1 }
+      let!(:destination_next_interval) { 1 }
 
       let!(:routing_group) { create(:routing_group) }
       let!(:routing_plan) {
@@ -649,6 +651,24 @@ RSpec.describe '#routing logic' do
         it 'reject ' do
           expect(subject.size).to eq(2) # reject after routing
           expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ENOUGH_CUSTOMER_BALANCE)
+          expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
+        end
+      end
+
+      context 'Authorized, Customer has enough balance. Checking time limit' do
+        let!(:customer_auth_check_account_balance) { true }
+        let!(:customer_account_min_balance) { 0 }
+        let!(:customer_account_balance) { 60 }
+
+        let!(:destination_rate) { 3.0 }
+        let!(:destination_initial_interval) { 1.0 }
+        let!(:destination_next_interval) { 1.0 }
+
+        it 'routing OK ' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+          expect(subject.first[:destination_initial_rate]).to eq(destination_rate)
+          expect(subject.first[:time_limit]).to eq(1200)
           expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
         end
       end

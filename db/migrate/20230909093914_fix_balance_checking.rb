@@ -1498,6 +1498,10 @@ BEGIN
       i_profile.time_limit = (i_destination.initial_interval+
                           LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
+      /*}dbg*/
     ELSE /* DST rates is 0, allowing maximum call length */
       i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
       /*dbg{*/
