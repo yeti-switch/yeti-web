@@ -390,72 +390,6 @@ RSpec.describe '#routing logic' do
       end
     end
 
-    context 'Authorized but customer has no enough balance' do
-      before do
-        FactoryBot.create(:system_load_balancer,
-                          signalling_ip: '1.1.1.1')
-
-        @ca = FactoryBot.create(:customers_auth,
-                                ip: '3.3.3.3')
-      end
-
-      let(:remote_ip) { '1.1.1.1' }
-      let(:x_orig_ip) { '3.3.3.3' }
-
-      it 'reject ' do
-        expect(subject.size).to eq(1)
-        expect(subject.first[:aleg_auth_required]).to be_nil
-        expect(subject.first[:disconnect_code_id]).to eq(8000) # No enough customer balance
-
-        expect(subject.first[:customer_auth_id]).to eq(@ca.id)
-        expect(subject.first[:customer_auth_external_id]).to eq(@ca.external_id)
-        expect(subject.first[:customer_id]).to eq(@ca.customer_id)
-        expect(subject.first[:customer_external_id]).to eq(@ca.customer.external_id)
-        expect(subject.first[:customer_acc_id]).to eq(@ca.account_id)
-        expect(subject.first[:customer_acc_external_id]).to eq(@ca.account.external_id)
-        expect(subject.first[:rateplan_id]).to eq(@ca.rateplan_id)
-        expect(subject.first[:routing_plan_id]).to eq(@ca.routing_plan_id)
-      end
-    end
-
-    context 'Authorized, Balance checking disabled' do
-      before do
-        FactoryBot.create(:system_load_balancer,
-                          signalling_ip: '1.1.1.1')
-
-        FactoryBot.create(:customers_auth,
-                          ip: '3.3.3.3',
-                          check_account_balance: false,
-                          customer: customer,
-                          gateway: customer_gateway,
-                          dump_level_id: dump_level)
-      end
-
-      let(:remote_ip) { '1.1.1.1' }
-      let(:x_orig_ip) { '3.3.3.3' }
-      let!(:customer) do
-        create(:contractor, customer: true)
-      end
-      let!(:customer_gateway) {
-        create(:gateway,
-               contractor: customer,
-               orig_disconnect_policy_id: dp.id)
-      }
-      let(:dp) {
-        create(:disconnect_policy)
-      }
-      let(:dump_level) { CustomersAuth::DUMP_LEVEL_CAPTURE_SIP }
-
-      it 'reject ' do
-        expect(subject.size).to eq(1)
-        expect(subject.first[:customer_auth_id]).to be
-        expect(subject.first[:customer_id]).to be
-        expect(subject.first[:disconnect_code_id]).to eq(111) # Can't find destination prefix
-        expect(subject.first[:aleg_policy_id]).to eq(dp.id)
-        expect(subject.first[:dump_level_id]).to eq(dump_level)
-      end
-    end
-
     context 'Authorized, Balance checking disabled, LNP' do
       before do
         FactoryBot.create(:system_load_balancer,
@@ -542,7 +476,7 @@ RSpec.describe '#routing logic' do
 
         FactoryBot.create(:customers_auth,
                           ip: '3.3.3.3',
-                          check_account_balance: false,
+                          check_account_balance: customer_auth_check_account_balance,
                           customer: customer,
                           account: customer_account,
                           gateway: customer_gateway,
@@ -560,6 +494,7 @@ RSpec.describe '#routing logic' do
                           rewrite_ss_status_id: customer_auth_rewrite_ss_status_id)
       end
 
+      let!(:customer_auth_check_account_balance) { true }
       let!(:send_billing_information) { false }
       let(:customer_auth_diversion_policy_id) { 1 } # do not accept diversion header
       let(:customer_auth_diversion_rewrite_rule) { nil } # removing +380
@@ -608,7 +543,18 @@ RSpec.describe '#routing logic' do
       let(:vendor_gw_stir_shaken_crt_id) { nil }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
-      let!(:customer_account) { create(:account, contractor: customer, min_balance: -100_500) }
+      let!(:customer_account) {
+        create(:account,
+               contractor: customer,
+               destination_rate_limit: customer_account_destination_rate_limit,
+               min_balance: customer_account_min_balance,
+               balance: customer_account_balance)
+      }
+
+      let!(:customer_account_min_balance) { -100_500 }
+      let!(:customer_account_balance) { 0 }
+      let!(:customer_account_destination_rate_limit) { nil }
+
       let!(:customer_gateway) {
         create(:gateway,
                contractor: customer,
@@ -626,7 +572,19 @@ RSpec.describe '#routing logic' do
 
       let!(:rate_group) { create(:rate_group) }
       let!(:rateplan) { create(:rateplan, rate_groups: [rate_group]) }
-      let!(:destination) { create(:destination, prefix: '', enabled: true, rate_group_id: rate_group.id) }
+      let!(:destination) {
+        create(:destination,
+                                  prefix: '',
+                                  enabled: true,
+                                  initial_interval: destination_initial_interval,
+                                  next_interval: destination_next_interval,
+                                  initial_rate: destination_rate,
+                                  next_rate: destination_rate,
+                                  rate_group_id: rate_group.id)
+      }
+      let!(:destination_rate) { 0.11 }
+      let!(:destination_initial_interval) { 1 }
+      let!(:destination_next_interval) { 1 }
 
       let!(:routing_group) { create(:routing_group) }
       let!(:routing_plan) {
@@ -669,6 +627,85 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:customer_id]).to be
           expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
           expect(subject.first[:disconnect_code_id]).to eq(8012) # CPS Limit
+        end
+      end
+
+      context 'Authorized, Customer has no enough balance' do
+        let!(:customer_auth_check_account_balance) { true }
+        let!(:customer_account_min_balance) { 0 }
+        let!(:customer_account_balance) { -10_000_000 }
+
+        it 'reject ' do
+          expect(subject.size).to eq(1) # reject before routing. there will be only one profile
+          expect(subject.first[:aleg_auth_required]).to be_nil
+          expect(subject.first[:disconnect_code_id]).to eq(8000) # No enough customer balance
+        end
+      end
+
+      context 'Authorized, Customer has no enough balance for first billing interval' do
+        let!(:customer_auth_check_account_balance) { true }
+        let!(:customer_account_min_balance) { 0 }
+        let!(:customer_account_balance) { 0.00001 }
+        let!(:destination_rate) { 1.0 }
+
+        it 'reject ' do
+          expect(subject.size).to eq(2) # reject after routing
+          expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ENOUGH_CUSTOMER_BALANCE)
+          expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
+        end
+      end
+
+      context 'Authorized, Customer has enough balance. Checking time limit' do
+        let!(:customer_auth_check_account_balance) { true }
+        let!(:customer_account_min_balance) { 0 }
+        let!(:customer_account_balance) { 60 }
+
+        let!(:destination_rate) { 3.0 }
+        let!(:destination_initial_interval) { 1.0 }
+        let!(:destination_next_interval) { 1.0 }
+
+        it 'routing OK ' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+          expect(subject.first[:destination_initial_rate]).to eq(destination_rate)
+          expect(subject.first[:time_limit]).to eq(1200)
+          expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
+        end
+      end
+
+      context 'Authorized, Customer has no enough balance, Balance checking disabled' do
+        let!(:customer_auth_check_account_balance) { false }
+        let!(:customer_account_min_balance) { 0 }
+        let!(:customer_account_balance) { -1_000_000 }
+
+        it 'routing OK ' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+        end
+      end
+
+      context 'Authorized, no destination by max_destination_rate limit' do
+        let!(:destination_rate) { 0.11 }
+        let!(:customer_account_destination_rate_limit) { 0.11 }
+
+        it 'Routing OK ' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+        end
+
+        context 'account dst rate limit too low' do
+          let!(:customer_account_destination_rate_limit) { 0.1 }
+
+          it 'No destination found' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_DESTINATION_WITH_APPROPRIATE_RATE)
+          end
         end
       end
 
@@ -1129,7 +1166,7 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:disconnect_code_id]).to eq(nil) # no  Error
           expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
           expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
-          expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES) # last profile with route not found error
         end
       end
 

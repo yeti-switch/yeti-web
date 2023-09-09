@@ -15940,7 +15940,6 @@ CREATE FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destina
     AS $_$
 DECLARE
   i integer;
-  v_customer_allowtime real;
   v_vendor_allowtime real;
   v_route_found boolean:=false;
   v_from_user varchar;
@@ -16062,22 +16061,35 @@ BEGIN
   --SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth.account_id;
   --SELECT INTO STRICT v_v_acc * FROM billing.accounts  WHERE id=v_dialpeer.account_id;
 
-  IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee <0 THEN
-    v_customer_allowtime:=0;
-    i_profile.disconnect_code_id=8000; --Not enough customer balance
-    RETURN i_profile;
-  ELSIF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
-    v_customer_allowtime:=i_destination.initial_interval;
-    i_profile.disconnect_code_id=8000; --Not enough customer balance
-    RETURN i_profile;
-  ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
-    v_customer_allowtime:=i_destination.initial_interval+
-                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
-                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE /* DST rates is 0, allowing maximum call length */
-    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
-  end IF;
 
+  if i_profile.time_limit is null then
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> process_gw: customer time limit is not set, calculating',EXTRACT(MILLISECOND from v_end-v_start);
+    /*}dbg*/
+    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: No enough customer balance even for first billing interval. rejecting',EXTRACT(MILLISECOND from v_end-v_start);
+      /*}dbg*/
+      i_profile.disconnect_code_id=8000; --Not enough customer balance
+      RETURN i_profile;
+    ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
+      i_profile.time_limit = (i_destination.initial_interval+
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
+      /*}dbg*/
+    ELSE /* DST rates is 0, allowing maximum call length */
+      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: DST rate is 0. customer time limit set to max value: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
+      /*}dbg*/
+    end IF;
+  end if;
 
   IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
@@ -16093,10 +16105,10 @@ BEGIN
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer,
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length)::integer,
     v_vendor_allowtime,
-    v_customer_allowtime
+    i_profile.time_limit
   )::integer;
 
 
@@ -16596,7 +16608,6 @@ CREATE FUNCTION switch20.process_gw_debug(i_profile switch20.callprofile_ty, i_d
     AS $_$
 DECLARE
   i integer;
-  v_customer_allowtime real;
   v_vendor_allowtime real;
   v_route_found boolean:=false;
   v_from_user varchar;
@@ -16718,22 +16729,35 @@ BEGIN
   --SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth.account_id;
   --SELECT INTO STRICT v_v_acc * FROM billing.accounts  WHERE id=v_dialpeer.account_id;
 
-  IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee <0 THEN
-    v_customer_allowtime:=0;
-    i_profile.disconnect_code_id=8000; --Not enough customer balance
-    RETURN i_profile;
-  ELSIF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
-    v_customer_allowtime:=i_destination.initial_interval;
-    i_profile.disconnect_code_id=8000; --Not enough customer balance
-    RETURN i_profile;
-  ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
-    v_customer_allowtime:=i_destination.initial_interval+
-                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
-                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE /* DST rates is 0, allowing maximum call length */
-    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
-  end IF;
 
+  if i_profile.time_limit is null then
+    /*dbg{*/
+    v_end:=clock_timestamp();
+    RAISE NOTICE '% ms -> process_gw: customer time limit is not set, calculating',EXTRACT(MILLISECOND from v_end-v_start);
+    /*}dbg*/
+    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: No enough customer balance even for first billing interval. rejecting',EXTRACT(MILLISECOND from v_end-v_start);
+      /*}dbg*/
+      i_profile.disconnect_code_id=8000; --Not enough customer balance
+      RETURN i_profile;
+    ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
+      i_profile.time_limit = (i_destination.initial_interval+
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
+      /*}dbg*/
+    ELSE /* DST rates is 0, allowing maximum call length */
+      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> process_gw: DST rate is 0. customer time limit set to max value: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
+      /*}dbg*/
+    end IF;
+  end if;
 
   IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
@@ -16749,10 +16773,10 @@ BEGIN
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer,
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length)::integer,
     v_vendor_allowtime,
-    v_customer_allowtime
+    i_profile.time_limit
   )::integer;
 
 
@@ -17252,7 +17276,6 @@ CREATE FUNCTION switch20.process_gw_release(i_profile switch20.callprofile_ty, i
     AS $_$
 DECLARE
   i integer;
-  v_customer_allowtime real;
   v_vendor_allowtime real;
   v_route_found boolean:=false;
   v_from_user varchar;
@@ -17366,22 +17389,23 @@ BEGIN
   --SELECT INTO STRICT v_c_acc * FROM billing.accounts  WHERE id=v_customer_auth.account_id;
   --SELECT INTO STRICT v_v_acc * FROM billing.accounts  WHERE id=v_dialpeer.account_id;
 
-  IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee <0 THEN
-    v_customer_allowtime:=0;
-    i_profile.disconnect_code_id=8000; --Not enough customer balance
-    RETURN i_profile;
-  ELSIF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
-    v_customer_allowtime:=i_destination.initial_interval;
-    i_profile.disconnect_code_id=8000; --Not enough customer balance
-    RETURN i_profile;
-  ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
-    v_customer_allowtime:=i_destination.initial_interval+
-                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
-                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval;
-  ELSE /* DST rates is 0, allowing maximum call length */
-    v_customer_allowtime:=COALESCE(i_customer_acc.max_call_duration, i_max_call_length);
-  end IF;
 
+  if i_profile.time_limit is null then
+    
+    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+      
+      i_profile.disconnect_code_id=8000; --Not enough customer balance
+      RETURN i_profile;
+    ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
+      i_profile.time_limit = (i_destination.initial_interval+
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+      
+    ELSE /* DST rates is 0, allowing maximum call length */
+      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
+      
+    end IF;
+  end if;
 
   IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
@@ -17397,10 +17421,10 @@ BEGIN
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration, i_max_call_length),
-    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length),
+    COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer,
+    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length)::integer,
     v_vendor_allowtime,
-    v_customer_allowtime
+    i_profile.time_limit
   )::integer;
 
 
@@ -18203,7 +18227,19 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_acc_vat=v_c_acc.vat;
         v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
-        if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
+
+        if NOT v_customer_auth_normalized.check_account_balance then
+          v_ret.time_limit = LEAST(v_max_call_length, v_c_acc.max_call_duration);
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH. No customer acc balance checking. customer time limit set to max value: % ',EXTRACT(MILLISECOND from v_end-v_start), v_ret.time_limit;
+          /*}dbg*/
+        elsif v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH. Customer acc balance checking. Call blocked before routing',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
           v_ret.disconnect_code_id=8000; --No enough customer balance
           RETURN NEXT v_ret;
           RETURN;
@@ -18583,8 +18619,6 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
-
-        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -19550,7 +19584,19 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_acc_vat=v_c_acc.vat;
         v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
-        if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
+
+        if NOT v_customer_auth_normalized.check_account_balance then
+          v_ret.time_limit = LEAST(v_max_call_length, v_c_acc.max_call_duration);
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH. No customer acc balance checking. customer time limit set to max value: % ',EXTRACT(MILLISECOND from v_end-v_start), v_ret.time_limit;
+          /*}dbg*/
+        elsif v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH. Customer acc balance checking. Call blocked before routing',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
           v_ret.disconnect_code_id=8000; --No enough customer balance
           RETURN NEXT v_ret;
           RETURN;
@@ -19930,8 +19976,6 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
-
-        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -20869,7 +20913,13 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_acc_vat=v_c_acc.vat;
         v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
-        if v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
+
+        if NOT v_customer_auth_normalized.check_account_balance then
+          v_ret.time_limit = LEAST(v_max_call_length, v_c_acc.max_call_duration);
+          
+        elsif v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
+          
           v_ret.disconnect_code_id=8000; --No enough customer balance
           RETURN NEXT v_ret;
           RETURN;
@@ -21190,8 +21240,6 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         ----------------------------------------------------------------------
 
         
-
-        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
 
         v_routing_key=v_ret.dst_prefix_routing;
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
@@ -31565,6 +31613,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230706202154'),
 ('20230708194737'),
 ('20230717103315'),
-('20230808192245');
+('20230808192245'),
+('20230909093914');
 
 
