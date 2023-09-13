@@ -447,8 +447,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :internal_disconnect_reason
           row :legb_disconnect_code
           row :legb_disconnect_reason
-          row :lega_reason
-          row :legb_reason
+
+          row :lega_q850_cause
+          row :lega_q850_text
+          row :lega_q850_params
+          row :legb_q850_cause
+          row :legb_q850_text
+          row :legb_q850_params
 
           row :routing_attempt
           row :is_last_cdr
