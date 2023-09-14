@@ -289,12 +289,23 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 
 
 --
+-- Name: reason_ty; Type: TYPE; Schema: switch; Owner: -
+--
+
+CREATE TYPE switch.reason_ty AS (
+	q850_cause smallint,
+	q850_text character varying,
+	q850_params character varying
+);
+
+
+--
 -- Name: lega_headers_ty; Type: TYPE; Schema: switch; Owner: -
 --
 
 CREATE TYPE switch.lega_headers_ty AS (
 	p_charge_info character varying,
-	reason character varying
+	reason switch.reason_ty
 );
 
 
@@ -303,7 +314,7 @@ CREATE TYPE switch.lega_headers_ty AS (
 --
 
 CREATE TYPE switch.legb_headers_ty AS (
-	reason character varying
+	reason switch.reason_ty
 );
 
 
@@ -498,8 +509,12 @@ CREATE TABLE cdr.cdr (
     dump_level_id smallint,
     metadata jsonb,
     customer_auth_external_type character varying,
-    lega_reason character varying,
-    legb_reason character varying
+    lega_q850_text character varying,
+    legb_q850_text character varying,
+    lega_q850_cause smallint,
+    lega_q850_params character varying,
+    legb_q850_cause smallint,
+    legb_q850_params character varying
 )
 PARTITION BY RANGE (time_start);
 
@@ -1821,6 +1836,8 @@ DECLARE
 
   v_lega_headers switch.lega_headers_ty;
   v_legb_headers switch.legb_headers_ty;
+  v_lega_reason switch.reason_ty;
+  v_legb_reason switch.reason_ty;
 BEGIN
   --  raise warning 'type: % id: %', i_failed_resource_type_id, i_failed_resource_id;
   --  RAISE warning 'DTMF: %', i_dtmf_events;
@@ -1833,8 +1850,16 @@ BEGIN
   v_legb_headers:=json_populate_record(null::switch.legb_headers_ty, i_legb_headers);
 
   v_cdr.p_charge_info_in = v_lega_headers.p_charge_info;
-  v_cdr.lega_reason =  v_lega_headers.reason;
-  v_cdr.legb_reason =  v_legb_headers.reason;
+
+  v_lega_reason = v_lega_headers.reason;
+  v_cdr.lega_q850_cause = v_lega_reason.q850_cause;
+  v_cdr.lega_q850_text = v_lega_reason.q850_text;
+  v_cdr.lega_q850_params = v_lega_reason.q850_params;
+
+  v_legb_reason = v_legb_headers.reason;
+  v_cdr.legb_q850_cause = v_legb_reason.q850_cause;
+  v_cdr.legb_q850_text = v_legb_reason.q850_text;
+  v_cdr.legb_q850_params = v_legb_reason.q850_params;
 
   v_cdr.lega_identity = i_lega_identity;
   v_cdr.lega_ss_status_id = v_dynamic.lega_ss_status_id;
@@ -4739,6 +4764,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230524185032'),
 ('20230602123903'),
 ('20230708183812'),
-('20230828175949');
+('20230828175949'),
+('20230913210707');
 
 
