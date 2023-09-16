@@ -2550,7 +2550,10 @@ CREATE TABLE reports.cdr_custom_report_data (
     lega_user_agent character varying,
     legb_user_agent character varying,
     p_charge_info_in character varying,
-    auth_orig_ip character varying
+    auth_orig_ip character varying,
+    agg_successful_calls_count bigint,
+    agg_short_calls_count bigint,
+    agg_uniq_calls_count bigint
 );
 
 
@@ -4765,6 +4768,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230602123903'),
 ('20230708183812'),
 ('20230828175949'),
-('20230913210707');
+('20230913210707'),
+('20230916152534');
 
 

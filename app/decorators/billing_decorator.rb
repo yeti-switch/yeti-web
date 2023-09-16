@@ -25,14 +25,14 @@ class BillingDecorator < ApplicationDecorator
 
   def time_format_min(attr)
     duration = model.public_send(attr)
-    return '0 sec.' if duration.nil?
+    return '0 s.' if duration.nil?
 
     if duration >= 60
       mins = duration.div(60).to_i
       secs = (duration - 60 * mins).to_i
-      "#{mins} min. #{secs} sec."
+      "#{mins} m. #{secs} s."
     else
-      "#{duration.to_i} sec."
+      "#{duration.to_i} s."
     end
   end
 

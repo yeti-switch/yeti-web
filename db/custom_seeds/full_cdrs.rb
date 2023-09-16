@@ -18,7 +18,7 @@ pop = Pop.find_or_create_by!(id: 100_500, name: 'seed-UA')
 end
 
 200.times do
-  dur = rand(-1000..6199)
+  dur = rand(-5000..5000)
   initial_time = Time.now.utc
   if dur > 0
     connect_time = initial_time + rand(40)

@@ -14,6 +14,9 @@
 #  agg_customer_price           :decimal(, )
 #  agg_customer_price_no_vat    :decimal(, )
 #  agg_profit                   :decimal(, )
+#  agg_short_calls_count        :bigint(8)
+#  agg_successful_calls_count   :bigint(8)
+#  agg_uniq_calls_count         :bigint(8)
 #  agg_vendor_calls_duration    :bigint(8)
 #  agg_vendor_price             :decimal(, )
 #  auth_orig_ip                 :string
@@ -147,6 +150,9 @@ class Report::CustomData < Cdr::Base
 
   Totals = Struct.new(
     :agg_calls_count,
+    :agg_successful_calls_count,
+    :agg_short_calls_count,
+    :agg_uniq_calls_count,
     :agg_calls_duration,
     :agg_customer_calls_duration,
     :agg_vendor_calls_duration,
@@ -160,10 +166,13 @@ class Report::CustomData < Cdr::Base
   def self.totals
     row = extending(ActsAsTotalsRelation).totals_row_by(
       'sum(agg_calls_count)::integer as agg_calls_count',
+      'sum(agg_successful_calls_count)::integer as agg_successful_calls_count',
+      'sum(agg_short_calls_count) as agg_short_calls_count',
+      'sum(agg_uniq_calls_count) as agg_uniq_calls_count',
       'sum(agg_calls_duration) as agg_calls_duration',
       'sum(agg_customer_calls_duration) as agg_customer_calls_duration',
       'sum(agg_vendor_calls_duration) as agg_vendor_calls_duration',
-      'coalesce(sum(agg_calls_duration)::float/nullif(sum(agg_calls_count),0),0) as agg_acd',
+      'coalesce(sum(agg_calls_duration)::float/nullif(sum(agg_successful_calls_count),0),0) as agg_acd',
       'sum(agg_customer_price) as agg_customer_price',
       'sum(agg_customer_price_no_vat) as agg_customer_price_no_vat',
       'sum(agg_vendor_price) as agg_vendor_price',
