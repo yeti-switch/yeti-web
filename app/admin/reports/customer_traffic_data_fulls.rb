@@ -15,7 +15,7 @@ ActiveAdmin.register Report::CustomerTrafficDataFull, as: 'CustomerTrafficDataFu
     end
   end
 
-  #TODO use dedicated decorators for CSV data or show measurement units in header
+  # TODO use dedicated decorators for CSV data or show measurement units in header
   csv do
     column :destination_prefix
     column :vendor

@@ -19,7 +19,6 @@ ActiveAdmin.register Report::CustomerTrafficDataByVendor, as: 'CustomerTrafficDa
     end
   end
 
-
   # TODO use dedicated decorators for CSV data or show measurement units in header
   csv do
     column :vendor
