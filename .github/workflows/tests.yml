@@ -62,7 +62,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
     needs: gems-caching
     steps:
       - uses: actions/checkout@v2
@@ -121,7 +121,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
 
     needs: gems-caching
     steps:
@@ -150,7 +150,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
 
     needs: gems-caching
     strategy:
