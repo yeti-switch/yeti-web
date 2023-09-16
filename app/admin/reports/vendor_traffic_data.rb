@@ -19,8 +19,22 @@ ActiveAdmin.register Report::VendorTrafficData, as: 'VendorTrafficData' do
     end
   end
 
+  # TODO use dedicated decorators for CSV data or show measurement units in header
   csv do
-    parent.csv_columns.map { |c| column c }
+    column :customer
+    column :calls_count
+    column :success_calls_count
+    column :short_calls_count
+    column :calls_duration
+    column :customer_calls_duration
+    column :vendor_calls_duration
+    column :asr
+    column :acd
+    column :origination_cost
+    column :termination_cost
+    column :profit
+    column :first_call_at
+    column :last_call_at
   end
 
   sidebar 'Vendor traffic report', priority: 0, only: :index do
