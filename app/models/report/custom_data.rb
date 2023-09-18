@@ -163,7 +163,7 @@ class Report::CustomData < Cdr::Base
       'sum(agg_calls_duration) as agg_calls_duration',
       'sum(agg_customer_calls_duration) as agg_customer_calls_duration',
       'sum(agg_vendor_calls_duration) as agg_vendor_calls_duration',
-      'coalesce(sum(agg_calls_duration)::float/nullif(sum(agg_calls_count),0),0) as agg_acd',
+      'sum(agg_calls_acd) as agg_acd',
       'sum(agg_customer_price) as agg_customer_price',
       'sum(agg_customer_price_no_vat) as agg_customer_price_no_vat',
       'sum(agg_vendor_price) as agg_vendor_price',

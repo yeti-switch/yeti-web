@@ -140,6 +140,18 @@ RSpec.describe 'Index custom cdr custom items', js: true do
       expect(page).to have_table_cell(text: 'Fixed', column: 'Destination Rate Policy')
       expect(page).to have_table_cell(text: 'Switch', column: 'Disconnect Initiator')
     end
+
+    within('tfoot > tr') do
+      expect(page).to have_table_cell(exact_text: "#{custom_data.agg_calls_count} calls", column: 'Calls Count')
+      expect(page).to have_table_cell(exact_text: "#{custom_data.agg_calls_duration} sec.", column: 'Calls Duration')
+      expect(page).to have_table_cell(exact_text: "#{custom_data.agg_customer_calls_duration} sec.", column: 'Customer Calls Duration')
+      expect(page).to have_table_cell(exact_text: "#{custom_data.agg_vendor_calls_duration} sec.", column: 'Vendor Calls Duration')
+      expect(page).to have_table_cell(exact_text: "#{custom_data.agg_calls_acd.to_i} sec.", column: 'Acd')
+      expect(page).to have_table_cell(exact_text: format('%.2f', custom_data.agg_customer_price), column: 'Origination Cost')
+      expect(page).to have_table_cell(exact_text: format('%.2f', custom_data.agg_customer_price_no_vat), column: 'Origination Cost No Vat')
+      expect(page).to have_table_cell(exact_text: format('%.2f', custom_data.agg_vendor_price), column: 'Termination Cost')
+      expect(page).to have_table_cell(exact_text: format('%.2f', custom_data.agg_profit), column: 'Profit')
+    end
   end
 
   describe 'csv', js: false do
