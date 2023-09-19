@@ -145,7 +145,23 @@ class Report::CustomData < Cdr::Base
   end
 
   def self.report_columns
-    column_names.select { |column| column.start_with?('agg_') }
+    # columns should be ordered how you want to see it in CSV
+    %w[
+      agg_calls_count
+      agg_successful_calls_count
+      agg_short_calls_count
+      agg_uniq_calls_count
+      agg_calls_duration
+      agg_calls_acd
+      agg_asr_origination
+      agg_asr_termination
+      agg_vendor_price
+      agg_customer_price
+      agg_profit
+      agg_customer_calls_duration
+      agg_vendor_calls_duration
+      agg_customer_price_no_vat
+    ]
   end
 
   Totals = Struct.new(
