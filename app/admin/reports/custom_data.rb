@@ -78,6 +78,9 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
 
   filter :agg_calls_count
   filter :agg_calls_duration
+  filter :agg_successful_calls_count
+  filter :agg_short_calls_count
+  filter :agg_uniq_calls_count
   filter :agg_calls_acd
   filter :agg_asr_origination
   filter :agg_asr_termination
@@ -96,12 +99,28 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
       column(column_name, &attribute_name)
     end
 
-    column :calls_count, sortable: :agg_calls_count, footer: lambda {
-                                                               strong do
-                                                                 text_node @footer_data.agg_calls_count.to_s
-                                                                 text_node ' calls'
-                                                               end
-                                                             }, &:agg_calls_count
+    column :calls, sortable: :agg_calls_count, footer: lambda {
+                                                         strong do
+                                                           text_node @footer_data.agg_calls_count.to_s
+                                                         end
+                                                       }, &:agg_calls_count
+    column :successful_calls, sortable: :agg_successful_calls_count, footer: lambda {
+      strong do
+        text_node @footer_data.agg_successful_calls_count.to_s
+      end
+    }, &:agg_successful_calls_count
+
+    column :short_calls, sortable: :agg_short_calls_count, footer: lambda {
+      strong do
+        text_node @footer_data.agg_short_calls_count.to_s
+      end
+    }, &:agg_short_calls_count
+
+    column :uniq_calls, sortable: :agg_uniq_calls_count, footer: lambda {
+      strong do
+        text_node @footer_data.agg_uniq_calls_count.to_s
+      end
+    }, &:agg_uniq_calls_count
 
     column :calls_duration, sortable: :agg_calls_duration, footer: lambda {
       strong do

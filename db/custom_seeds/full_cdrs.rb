@@ -18,7 +18,7 @@ pop = Pop.find_or_create_by!(id: 100_500, name: 'seed-UA')
 end
 
 200.times do
-  dur = rand(-1000..6199)
+  dur = rand(-5000..5000)
   initial_time = Time.now.utc
   if dur > 0
     connect_time = initial_time + rand(40)
@@ -30,6 +30,10 @@ end
     end_time = initial_time + rand(120)
     success = false
   end
+
+  vp = rand(0..0.99)
+  cp = vp + rand(0.01..0.99)
+  prof = cp - vp
   Cdr::Cdr.create!(
     time_start: initial_time,
     time_connect: connect_time,
@@ -47,9 +51,10 @@ end
     vendor_acc: vendor_acc,
     duration: dur,
     customer_duration: dur,
-    customer_price: rand,
+    customer_price: cp,
     vendor_duration: dur,
-    vendor_price: rand,
+    vendor_price: vp,
+    profit: prof,
     dst_country: System::Country.offset(rand(System::Country.count)).first,
     dst_network: System::Network.offset(rand(System::Network.count)).first,
     src_country: System::Country.offset(rand(System::Country.count)).first,

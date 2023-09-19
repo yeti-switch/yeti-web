@@ -37,6 +37,9 @@ RSpec.describe 'Index custom cdr custom items', js: true do
                       dst_area: dst_area,
                       src_area: src_area,
                       agg_calls_count: agg_calls_count,
+                      agg_successful_calls_count: agg_successful_calls_count,
+                      agg_short_calls_count: agg_short_calls_count,
+                      agg_uniq_calls_count: agg_uniq_calls_count,
                       agg_calls_duration: agg_calls_duration,
                       agg_calls_acd: agg_calls_acd,
                       agg_asr_origination: agg_asr_origination,
@@ -101,6 +104,9 @@ RSpec.describe 'Index custom cdr custom items', js: true do
   let(:dst_area) { FactoryBot.create(:area) }
   let(:src_area) { FactoryBot.create(:area) }
   let(:agg_calls_count) { 3 }
+  let(:agg_successful_calls_count) { 2 }
+  let(:agg_short_calls_count) { 1 }
+  let(:agg_uniq_calls_count) { 1 }
   let(:agg_calls_duration) { 5 }
   let(:agg_calls_acd) { 2.0 }
   let(:agg_asr_origination) { 3.0 }
@@ -176,6 +182,9 @@ RSpec.describe 'Index custom cdr custom items', js: true do
         'Destination rate policy',
         'Disconnect initiator',
         'Agg calls count',
+        'Agg successful calls count',
+        'Agg short calls count',
+        'Agg uniq calls count',
         'Agg calls duration',
         'Agg calls acd',
         'Agg asr origination',
@@ -213,6 +222,9 @@ RSpec.describe 'Index custom cdr custom items', js: true do
           'Fixed',
           'Switch',
           agg_calls_count.to_s,
+          agg_successful_calls_count.to_s,
+          agg_short_calls_count.to_s,
+          agg_uniq_calls_count.to_s,
           agg_calls_duration.to_s,
           agg_calls_acd.to_s,
           agg_asr_origination.to_s,
