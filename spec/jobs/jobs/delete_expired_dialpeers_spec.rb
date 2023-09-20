@@ -25,7 +25,7 @@ RSpec.describe Jobs::DeleteExpiredDialpeers, '#call', freeze_time: true do
   end
 
   it 'should call DeleteDialpeers service' do
-    expect(DeleteDialpeers).to receive(:call).with(:dialpeer_ids => contain_exactly(*expired_dialpeers.map(&:id))).and_call_original
+    expect(DeleteDialpeers).to receive(:call).with(dialpeer_ids: contain_exactly(*expired_dialpeers.map(&:id))).and_call_original
     subject
   end
 
