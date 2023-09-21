@@ -47,7 +47,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
 
     steps:
       - uses: actions/checkout@v2
@@ -78,9 +78,9 @@ jobs:
         run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh bookworm $major_version main ../*.deb
 
 
-  deb11_container:
-    name: Debian 11 release container
-    needs: deb11
+  deb12_container:
+    name: Debian 12 release container
+    needs: deb12
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -90,7 +90,7 @@ jobs:
       - name: Download a single artifact
         uses: actions/download-artifact@v2
         with:
-          name: deb11-package
+          name: deb12-package
 
       - name: Display structure of downloaded files
         run: ls -la

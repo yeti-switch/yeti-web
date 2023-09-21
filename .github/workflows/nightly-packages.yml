@@ -5,13 +5,13 @@ on:
     branches: [ master ]
 
 jobs:
-  deb11:
-    name: Debian 11 nightly package building
+  deb12:
+    name: Debian 12 nightly package building
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:13
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
 
     steps:
       - uses: actions/checkout@v2
@@ -33,17 +33,17 @@ jobs:
       - name: Save deb package as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: deb11-package
+          name: deb12-package
           path: /__w/yeti-web/*.deb
 
       - name: Upload package to ${{github.ref}} repo
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
-        run: ci/deploy.sh bullseye nightly main ../*.deb
+        run: ci/deploy.sh bookworm nightly main ../*.deb
 
-  deb11_container:
-    name: Debian 11 container
-    needs: deb11
+  deb12_container:
+    name: Debian 12 container
+    needs: deb12
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -53,7 +53,7 @@ jobs:
       - name: Download a single artifact
         uses: actions/download-artifact@v2
         with:
-          name: deb11-package
+          name: deb12-package
 
       - name: Display structure of downloaded files
         run: ls -la
