@@ -239,6 +239,8 @@ class CustomersAuth < ApplicationRecord
   scope :from_domain_array_contains, ->(f_dom) { where.contains from_domain: Array(f_dom) }
   scope :to_domain_array_contains, ->(to_dom) { where.contains to_domain: Array(to_dom) }
   scope :x_yeti_auth_array_contains, ->(auth) { where.contains x_yeti_auth: Array(auth) }
+  scope :search_for, ->(term) { where("class4.customers_auth.name || ' | ' || class4.customers_auth.id::varchar ILIKE ?", "%#{term}%") }
+  scope :ordered_by, ->(term) { order(term) }
 
   include Yeti::ResourceStatus
 
@@ -313,6 +315,8 @@ class CustomersAuth < ApplicationRecord
       to_domain_array_contains
       x_yeti_auth_array_contains
       ip_covers
+      search_for
+      ordered_by
     ]
   end
 

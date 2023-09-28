@@ -30,7 +30,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
       it 'creates cdr_export' do
         expect { subject }.to change { CdrExport.count }.by(1)
         expect(cdr_export).to have_attributes(expected_cdr_export_attrs)
-        expect(cdr_export.filters.as_json.symbolize_keys).to match(expected_cdr_export_filters)
+        expect(cdr_export.filters_json).to match(expected_cdr_export_filters)
       end
     end
 

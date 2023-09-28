@@ -30,7 +30,11 @@ class CdrExport < ApplicationRecord
   self.table_name = 'cdr_exports'
   self.store_full_sti_class = false
 
+  include Memoizable
+
   class FiltersModel < JsonAttributeModel
+    include WithActiveModelArrayAttribute
+
     attribute :time_start_gteq, :db_datetime
     attribute :time_start_lteq, :db_datetime
     attribute :time_start_lt, :db_datetime
@@ -71,6 +75,11 @@ class CdrExport < ApplicationRecord
     attribute :duration_eq, :integer
     attribute :duration_gteq, :integer
     attribute :duration_lteq, :integer
+    attribute :customer_auth_external_type_eq, :string_presence
+    attribute :customer_auth_external_type_not_eq, :string_presence
+    attribute :customer_auth_external_id_in, :integer, array: { reject_blank: true }
+    attribute :dst_country_iso_in, :string, array: { reject_blank: true }
+    attribute :src_country_iso_in, :string, array: { reject_blank: true }
   end
 
   STATUS_PENDING = 'Pending'
@@ -82,6 +91,11 @@ class CdrExport < ApplicationRecord
     STATUS_COMPLETED,
     STATUS_FAILED,
     STATUS_DELETED
+  ].freeze
+
+  REGULAR_FILTERS = %i[
+    src_country_iso_in
+    dst_country_iso_in
   ].freeze
 
   alias_attribute :export_type, :type
@@ -111,24 +125,10 @@ class CdrExport < ApplicationRecord
   end
 
   def export_sql
-    s = Cdr::Cdr.select(select_sql)
-    s = s.order('time_start desc')
-    filters = self.filters.as_json
-    filters['routing_tag_ids_empty'] = filters['routing_tag_ids_empty'].to_s
-    s = s.ransack(filters).result
-    if fields.include?('src_country_name')
-      s = s.joins('LEFT JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id')
-    end
-    if fields.include?('dst_country_name')
-      s = s.joins('LEFT JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id')
-    end
-    if fields.include?('src_network_name')
-      s = s.joins('LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id')
-    end
-    if fields.include?('dst_network_name')
-      s = s.joins('LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_network_id = dst_n.id')
-    end
-    s.to_sql
+    scope = Cdr::Cdr.select(select_sql)
+    scope = apply_joins_for!(scope)
+    scope = apply_filters_for!(scope)
+    scope.order(export_order).ransack(ransack_filters!).result.to_sql
   end
 
   def select_sql
@@ -156,6 +156,8 @@ class CdrExport < ApplicationRecord
       dst_network_name
     ]
   end
+
+  define_memoizable :filters_json, apply: -> { filters.as_json.symbolize_keys }
 
   private
 
@@ -218,5 +220,45 @@ class CdrExport < ApplicationRecord
         "#{f} AS \"#{f.titleize}\""
       end
     end
+  end
+
+  def apply_joins_for!(scope)
+    if fields.include?('src_country_name') || filters_json.key?(:src_country_iso_in)
+      scope = scope.joins("#{join_type_for(filters_json[:src_country_iso_in])} JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id")
+    end
+
+    if fields.include?('dst_country_name') || filters_json.key?(:dst_country_iso_in)
+      scope = scope.joins("#{join_type_for(filters_json[:dst_country_iso_in])} JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id")
+    end
+
+    if fields.include?('src_network_name')
+      scope = scope.joins('LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id')
+    end
+
+    if fields.include?('dst_network_name')
+      scope = scope.joins('LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_network_id = dst_n.id')
+    end
+
+    scope
+  end
+
+  def join_type_for(filter)
+    filter.present? ? 'INNER' : 'LEFT'
+  end
+
+  def apply_filters_for!(scope)
+    scope = scope.where(src_c: { iso2: filters_json[:src_country_iso_in] }) if filters_json.key?(:src_country_iso_in)
+    scope = scope.where(dst_c: { iso2: filters_json[:dst_country_iso_in] }) if filters_json.key?(:dst_country_iso_in)
+    scope
+  end
+
+  def ransack_filters!
+    filters = filters_json.except(*REGULAR_FILTERS)
+    filters[:routing_tag_ids_empty] = filters[:routing_tag_ids_empty].to_s
+    filters
+  end
+
+  def export_order
+    'cdr.cdr.time_start DESC'
   end
 end

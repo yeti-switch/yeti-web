@@ -108,7 +108,53 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   end
 
   permit_params :callback_url,
-                filters: CdrExport::FiltersModel.attribute_types.keys.map(&:to_sym),
+                filters: [
+                  :time_start_gteq,
+                  :time_start_lteq,
+                  :time_start_lt,
+                  :customer_id_eq,
+                  :customer_external_id_eq,
+                  :customer_acc_id_eq,
+                  :customer_acc_external_id_eq,
+                  :vendor_id_eq,
+                  :vendor_external_id_eq,
+                  :vendor_acc_id_eq,
+                  :vendor_acc_external_id_eq,
+                  :is_last_cdr_eq,
+                  :success_eq,
+                  :customer_auth_id_eq,
+                  :customer_auth_external_id_eq,
+                  :failed_resource_type_id_eq,
+                  :src_prefix_in_contains,
+                  :src_prefix_in_eq,
+                  :dst_prefix_in_contains,
+                  :dst_prefix_in_eq,
+                  :src_prefix_routing_contains,
+                  :src_prefix_routing_eq,
+                  :dst_prefix_routing_contains,
+                  :dst_prefix_routing_eq,
+                  :src_prefix_out_contains,
+                  :src_prefix_out_eq,
+                  :dst_prefix_out_contains,
+                  :dst_prefix_out_eq,
+                  :src_country_id_eq,
+                  :dst_country_id_eq,
+                  :routing_tag_ids_include,
+                  :routing_tag_ids_exclude,
+                  :routing_tag_ids_empty,
+                  :orig_gw_id_eq,
+                  :orig_gw_external_id_eq,
+                  :term_gw_id_eq,
+                  :term_gw_external_id_eq,
+                  :duration_eq,
+                  :duration_gteq,
+                  :duration_lteq,
+                  :customer_auth_external_type_eq,
+                  :customer_auth_external_type_not_eq,
+                  customer_auth_external_id_in: [],
+                  dst_country_iso_in: [],
+                  src_country_iso_in: []
+                ],
                 fields: []
 
   form do |f|
@@ -225,6 +271,35 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                input_html: { class: 'chosen' },
                required: false
       ff.input :term_gw_external_id_eq, required: false
+      ff.input :customer_auth_external_type_eq, required: false
+      ff.input :customer_auth_external_type_not_eq, required: false
+      ff.input :customer_auth_external_id_in,
+               as: :select,
+               multiple: true,
+               required: false,
+               input_html: {
+                 class: 'chosen-ajax',
+                 data: {
+                   path: '/customers_auths/search_with_return_external_id?q[ordered_by]=name'
+                 }
+               },
+               collection: if params.dig(:q, :customer_auth_external_id_in)
+                             CustomersAuth.where(external_id: params.dig(:q, :customer_auth_external_id_in)).order(:name).pluck(:name, :external_id)
+                           else
+                             CustomersAuth.none
+                           end
+      ff.input :src_country_iso_in,
+               as: :select,
+               multiple: true,
+               collection: System::Country.pluck(:name, :iso2),
+               input_html: { class: 'chosen' },
+               required: false
+      ff.input :dst_country_iso_in,
+               as: :select,
+               multiple: true,
+               collection: System::Country.pluck(:name, :iso2),
+               input_html: { class: 'chosen' },
+               required: false
     end
     f.actions
   end
