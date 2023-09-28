@@ -12,6 +12,8 @@ ActiveAdmin.register CustomersAuth do
 
   acts_as_delayed_job_lock
 
+  search_support!(search_name: :search_with_return_external_id, id_column: :external_id)
+
   decorate_with CustomersAuthDecorator
 
   acts_as_export :id, :enabled, :reject_calls, :name,

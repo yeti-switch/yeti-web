@@ -37,7 +37,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
           'export-type': cdr_export.export_type,
           status: cdr_export.status,
           fields: cdr_export.fields,
-          filters: cdr_export.filters.as_json.symbolize_keys
+          filters: cdr_export.filters_json
         }
       end
     end
@@ -127,8 +127,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrExportsController, type: :request do
       it 'creates cdr_export' do
         expect { subject }.to change { CdrExport.count }.by(1)
         expect(last_record).to have_attributes(expected_cdr_export_attrs)
-        filters = last_record.filters.as_json.symbolize_keys
-        expect(filters).to match(expected_cdr_export_filters)
+        expect(last_record.filters_json).to match(expected_cdr_export_filters)
       end
 
       it 'enqueues Worker::CdrExportJob' do

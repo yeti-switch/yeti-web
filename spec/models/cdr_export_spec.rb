@@ -69,8 +69,7 @@ RSpec.describe CdrExport do
         expect(subject.errors).to be_empty
         expect(subject).to be_persisted
         expect(subject.reload).to have_attributes(expected_cdr_export_attrs)
-        filters = subject.filters.as_json.symbolize_keys
-        expect(filters).to match(expected_cdr_export_filters)
+        expect(subject.filters_json).to match(expected_cdr_export_filters)
       end
     end
 
@@ -139,7 +138,12 @@ RSpec.describe CdrExport do
           term_gw_external_id_eq: 1245,
           duration_eq: 30,
           duration_gteq: 0,
-          duration_lteq: 60
+          duration_lteq: 60,
+          customer_auth_external_type_eq: 'foo',
+          customer_auth_external_type_not_eq: 'bar',
+          customer_auth_external_id_in: [1, 2, 3],
+          dst_country_iso_in: %w[UA UK],
+          src_country_iso_in: %w[UA UK]
         }
       end
       before do
@@ -226,7 +230,7 @@ RSpec.describe CdrExport do
         "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
         'AND',
         "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
-        'ORDER BY time_start desc'
+        'ORDER BY cdr.cdr.time_start DESC'
       ].join(' ')
     end
 
@@ -252,7 +256,7 @@ RSpec.describe CdrExport do
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',
           "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
-          'ORDER BY time_start desc'
+          'ORDER BY cdr.cdr.time_start DESC'
         ].join(' ')
       end
 
@@ -295,7 +299,7 @@ RSpec.describe CdrExport do
           "\"cdr\".\"cdr\".\"src_prefix_out\" ILIKE '%222222%'",
           'AND',
           "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
-          'ORDER BY time_start desc'
+          'ORDER BY cdr.cdr.time_start DESC'
         ].join(' ')
       end
 
@@ -313,7 +317,12 @@ RSpec.describe CdrExport do
           src_country_id_eq: country.id,
           dst_country_id_eq: country.id,
           routing_tag_ids_include: 1,
-          routing_tag_ids_exclude: 2
+          routing_tag_ids_exclude: 2,
+          customer_auth_external_type_eq: 'term',
+          customer_auth_external_type_not_eq: 'em',
+          customer_auth_external_id_in: [1, 2, 3],
+          dst_country_iso_in: %w[UA UK],
+          src_country_iso_in: %w[UA UK]
         }
       end
       let(:country) { System::Country.take! }
@@ -321,7 +330,13 @@ RSpec.describe CdrExport do
         [
           'SELECT success AS "Success", cdr.cdr.id AS "ID"',
           'FROM "cdr"."cdr"',
+          'INNER JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id',
+          'INNER JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id',
           'WHERE',
+          "\"src_c\".\"iso2\" IN ('UA', 'UK')",
+          'AND',
+          "\"dst_c\".\"iso2\" IN ('UA', 'UK')",
+          'AND',
           '(1 = ANY(routing_tag_ids))',
           'AND',
           'NOT (2 = ANY(routing_tag_ids))',
@@ -338,8 +353,14 @@ RSpec.describe CdrExport do
           'AND',
           "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
           'AND',
-          "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
-          'ORDER BY time_start desc'
+          "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+          'AND',
+          "\"cdr\".\"cdr\".\"customer_auth_external_type\" = 'term'",
+          'AND',
+          "\"cdr\".\"cdr\".\"customer_auth_external_type\" != 'em'",
+          'AND',
+          '"cdr"."cdr"."customer_auth_external_id" IN (1, 2, 3))',
+          'ORDER BY cdr.cdr.time_start DESC'
         ].join(' ')
       end
 
@@ -351,7 +372,13 @@ RSpec.describe CdrExport do
           [
             'SELECT success AS "Success", cdr.cdr.id AS "ID"',
             'FROM "cdr"."cdr"',
+            'INNER JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id',
+            'INNER JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id',
             'WHERE',
+            "\"src_c\".\"iso2\" IN ('UA', 'UK')",
+            'AND',
+            "\"dst_c\".\"iso2\" IN ('UA', 'UK')",
+            'AND',
             '(1 = ANY(routing_tag_ids))',
             'AND',
             'NOT (2 = ANY(routing_tag_ids))',
@@ -370,8 +397,14 @@ RSpec.describe CdrExport do
             'AND',
             "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
             'AND',
-            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
-            'ORDER BY time_start desc'
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"customer_auth_external_type\" = 'term'",
+            'AND',
+            "\"cdr\".\"cdr\".\"customer_auth_external_type\" != 'em'",
+            'AND',
+            '"cdr"."cdr"."customer_auth_external_id" IN (1, 2, 3))',
+            'ORDER BY cdr.cdr.time_start DESC'
           ].join(' ')
         end
 
@@ -384,7 +417,13 @@ RSpec.describe CdrExport do
           [
             'SELECT success AS "Success", cdr.cdr.id AS "ID"',
             'FROM "cdr"."cdr"',
+            'INNER JOIN external_data.countries as src_c ON cdr.cdr.src_country_id = src_c.id',
+            'INNER JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id',
             'WHERE',
+            "\"src_c\".\"iso2\" IN ('UA', 'UK')",
+            'AND',
+            "\"dst_c\".\"iso2\" IN ('UA', 'UK')",
+            'AND',
             '(1 = ANY(routing_tag_ids))',
             'AND',
             'NOT (2 = ANY(routing_tag_ids))',
@@ -403,8 +442,14 @@ RSpec.describe CdrExport do
             'AND',
             "\"cdr\".\"cdr\".\"src_country_id\" = #{country.id}",
             'AND',
-            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id})",
-            'ORDER BY time_start desc'
+            "\"cdr\".\"cdr\".\"dst_country_id\" = #{country.id}",
+            'AND',
+            "\"cdr\".\"cdr\".\"customer_auth_external_type\" = 'term'",
+            'AND',
+            "\"cdr\".\"cdr\".\"customer_auth_external_type\" != 'em'",
+            'AND',
+            '"cdr"."cdr"."customer_auth_external_id" IN (1, 2, 3))',
+            'ORDER BY cdr.cdr.time_start DESC'
           ].join(' ')
         end
 
@@ -427,7 +472,7 @@ RSpec.describe CdrExport do
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',
           "\"cdr\".\"cdr\".\"time_start\" < '2018-03-01 00:00:00')",
-          'ORDER BY time_start desc'
+          'ORDER BY cdr.cdr.time_start DESC'
         ].join(' ')
       end
 

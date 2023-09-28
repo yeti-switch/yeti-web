@@ -36,12 +36,14 @@ RSpec.describe 'Create new CDR export', js: true do
         status: 'Pending',
         filters: a_kind_of(CdrExport::FiltersModel)
       )
-      filters = cdr_export.filters.as_json.symbolize_keys
-      expect(filters).to match(
-          time_start_gteq: '2018-01-01T00:00:00.000Z',
-          time_start_lteq: '2018-03-01T00:00:00.000Z',
-          customer_acc_id_eq: account.id
-        )
+      expect(cdr_export.filters_json).to match(
+        time_start_gteq: '2018-01-01T00:00:00.000Z',
+        time_start_lteq: '2018-03-01T00:00:00.000Z',
+        customer_acc_id_eq: account.id,
+        customer_auth_external_id_in: [],
+        dst_country_iso_in: [],
+        src_country_iso_in: []
+      )
     end
   end
 
@@ -69,12 +71,14 @@ RSpec.describe 'Create new CDR export', js: true do
         status: 'Pending',
         filters: a_kind_of(CdrExport::FiltersModel)
       )
-      filters = cdr_export.filters.as_json.symbolize_keys
-      expect(filters).to match(
-          time_start_gteq: '2018-01-01T00:00:00.000Z',
-          time_start_lteq: '2018-03-01T00:00:00.000Z',
-          customer_acc_id_eq: account.id
-        )
+      expect(cdr_export.filters_json).to match(
+        time_start_gteq: '2018-01-01T00:00:00.000Z',
+        time_start_lteq: '2018-03-01T00:00:00.000Z',
+        customer_acc_id_eq: account.id,
+        customer_auth_external_id_in: [],
+        dst_country_iso_in: [],
+        src_country_iso_in: []
+      )
     end
   end
 
@@ -82,7 +86,7 @@ RSpec.describe 'Create new CDR export', js: true do
     let!(:countries) { create_list(:country, 2, :uniq_name) }
     let!(:vendor) { create(:vendor) }
     let!(:vendor_acc) { create(:account, name: 'test', contractor: vendor) }
-    let!(:customer_auth) { create(:customers_auth) }
+    let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
     let!(:gateway1) { create(:gateway) }
     let!(:gateway2) { create(:gateway) }
 
@@ -132,10 +136,15 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Time start gteq', with: '2018-01-01'
         fill_in 'Time start lteq', with: '2018-03-01'
         fill_in 'Time start lt', with: '2018-03-01', exact: true
+        fill_in 'Customer auth external type eq', with: 'term'
+        fill_in 'Customer auth external type not eq', with: 'em'
+        fill_in_chosen 'Customer auth external id in', with: customer_auth.name, multiple: true, ajax: true
+        fill_in_chosen 'Src country iso in', with: countries.first.name, multiple: true
+        fill_in_chosen 'Dst country iso in', with: countries.first.name, multiple: true
 
         # all allowed filters must be filled in this test.
         CdrExport::FiltersModel.attribute_types.each_key do |filter_key|
-          selector = "[name=\"cdr_export[filters][#{filter_key}]\"]"
+          selector = "#cdr_export_filters_#{filter_key}"
           field_node = page.find("input#{selector}, select#{selector}", visible: :all)
           expect(field_node.value).to(
             be_present,
@@ -158,8 +167,7 @@ RSpec.describe 'Create new CDR export', js: true do
                               status: 'Pending',
                               filters: a_kind_of(CdrExport::FiltersModel)
                             )
-      filters = cdr_export.filters.as_json.symbolize_keys
-      expect(filters).to match(
+      expect(cdr_export.filters_json).to match(
                            time_start_gteq: '2018-01-01T00:00:00.000Z',
                            time_start_lteq: '2018-03-01T00:00:00.000Z',
                            time_start_lt: '2018-03-01T00:00:00.000Z',
@@ -199,7 +207,12 @@ RSpec.describe 'Create new CDR export', js: true do
                            term_gw_id_eq: gateway2.id,
                            duration_eq: 30,
                            duration_gteq: 0,
-                           duration_lteq: 60
+                           duration_lteq: 60,
+                           customer_auth_external_type_eq: 'term',
+                           customer_auth_external_type_not_eq: 'em',
+                           customer_auth_external_id_in: [customer_auth.external_id],
+                           dst_country_iso_in: [countries.first.iso2],
+                           src_country_iso_in: [countries.first.iso2]
                          )
     end
   end
@@ -226,11 +239,13 @@ RSpec.describe 'Create new CDR export', js: true do
                               status: 'Pending',
                               filters: a_kind_of(CdrExport::FiltersModel)
                             )
-      filters = cdr_export.filters.as_json.symbolize_keys
-      expect(filters).to match(
-                           time_start_gteq: '2018-01-01T00:00:00.000Z',
-                           time_start_lteq: '2018-03-01T00:00:00.000Z'
-                         )
+      expect(cdr_export.filters_json).to match(
+        time_start_gteq: '2018-01-01T00:00:00.000Z',
+        time_start_lteq: '2018-03-01T00:00:00.000Z',
+        customer_auth_external_id_in: [],
+        dst_country_iso_in: [],
+        src_country_iso_in: []
+      )
     end
   end
 
@@ -255,11 +270,13 @@ RSpec.describe 'Create new CDR export', js: true do
                               status: 'Pending',
                               filters: a_kind_of(CdrExport::FiltersModel)
                             )
-      filters = cdr_export.filters.as_json.symbolize_keys
-      expect(filters).to match(
-                           time_start_gteq: '2018-01-01T00:00:00.000Z',
-                           time_start_lt: '2018-03-01T00:00:00.000Z'
-                         )
+      expect(cdr_export.filters_json).to match(
+        time_start_gteq: '2018-01-01T00:00:00.000Z',
+        time_start_lt: '2018-03-01T00:00:00.000Z',
+        customer_auth_external_id_in: [],
+        dst_country_iso_in: [],
+        src_country_iso_in: []
+      )
     end
   end
 
