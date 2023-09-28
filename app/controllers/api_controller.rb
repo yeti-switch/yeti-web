@@ -35,6 +35,10 @@ class ApiController < ActionController::API
 
   rescue_from StandardError, with: :capture_error!
 
+  def meta
+    nil
+  end
+
   protected
 
   def current_db_connection

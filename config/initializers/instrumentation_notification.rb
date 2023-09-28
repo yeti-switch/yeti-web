@@ -15,6 +15,7 @@ module ActionController
       raw_payload = {
         controller: self.class.name,
         action: action_name,
+        meta: meta,
         params: request.filtered_parameters,
         format: request.format.try(:ref),
         method: request.method,
@@ -43,6 +44,9 @@ ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_n
 
     Log::ApiLog.create do |api_request|
       debug_mode = payload[:debug_mode]
+
+      api_request.meta = payload[:meta]
+      api_request.remote_ip = payload[:remote_ip]
 
       if payload[:status].nil? && payload[:exception].present?
         payload[:status] = ActionDispatch::ExceptionWrapper.status_code_for_exception(payload[:exception].class)

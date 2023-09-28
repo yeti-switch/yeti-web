@@ -8,10 +8,12 @@
 #  action           :string
 #  controller       :string
 #  db_duration      :float
+#  meta             :jsonb
 #  method           :string
 #  page_duration    :float
 #  params           :text
 #  path             :string
+#  remote_ip        :inet
 #  request_body     :text
 #  request_headers  :text
 #  response_body    :text

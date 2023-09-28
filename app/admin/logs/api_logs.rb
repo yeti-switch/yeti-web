@@ -16,7 +16,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
 
   controller do
     def scoped_collection
-      super.select('id, created_at, status, method, path, db_duration, page_duration')
+      super.select('id, created_at, status, method, path, db_duration, page_duration, remote_ip')
     end
 
     def find_resource
@@ -37,6 +37,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   filter :response_body
   filter :request_headers
   filter :response_headers
+  filter :remote_ip_eq_inet, as: :string, label: 'Remote IP'
 
   index do
     id_column
@@ -46,6 +47,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
     column :path
     column :db_duration
     column :page_duration
+    column :remote_ip
   end
 
   show do
@@ -84,6 +86,12 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
           l.response_body
         end
       end
+      row :meta do |l|
+        pre do
+          l.meta
+        end
+      end
+      row :remote_ip
     end
     active_admin_comments
   end
