@@ -99,6 +99,10 @@
 #  vendor_id                    :integer(4)
 #  vendor_invoice_id            :integer(4)
 #
+# Indexes
+#
+#  cdr_custom_report_data_report_id_idx  (report_id)
+#
 # Foreign Keys
 #
 #  cdr_custom_report_data_report_id_fkey  (report_id => cdr_custom_report.id)

@@ -23,6 +23,10 @@
 #  dst_network_id          :integer(4)
 #  report_id               :integer(4)       not null
 #
+# Indexes
+#
+#  customer_traffic_report_data_by_destination_report_id_idx  (report_id)
+#
 
 class Report::CustomerTrafficDataByDestination < Cdr::Base
   self.table_name = 'reports.customer_traffic_report_data_by_destination'

@@ -14,10 +14,6 @@
 #  created_at  :timestamptz
 #  customer_id :integer(4)
 #
-# Indexes
-#
-#  cdr_custom_report_id_idx  (id) UNIQUE WHERE (id IS NOT NULL)
-#
 
 class Report::CustomCdr < Cdr::Base
   self.table_name = 'reports.cdr_custom_report'
