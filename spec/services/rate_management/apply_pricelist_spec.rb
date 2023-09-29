@@ -139,7 +139,7 @@ RSpec.describe RateManagement::ApplyPricelist do
 
     shared_examples :should_delete_dialpeers do
       it 'should delete dialpeers' do
-        expect(DeleteDialpeers).to receive(:call).with(dialpeer_ids: to_delete_dialpeers.map(&:id)).and_call_original
+        expect(DeleteDialpeers).to receive(:call).with(dialpeer_ids: match_array(to_delete_dialpeers.map(&:id))).and_call_original
         expect { subject }.to change(Dialpeer, :count).by(-to_delete_dialpeers.size)
       end
     end
