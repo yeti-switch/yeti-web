@@ -12,6 +12,8 @@ module ActionController
     end
 
     def process_action(*args)
+      return super unless request.path.start_with?('/api/')
+
       raw_payload = {
         controller: self.class.name,
         action: action_name,
