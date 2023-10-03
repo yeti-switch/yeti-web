@@ -22,6 +22,10 @@ class Api::CryptomusCallbacksController < ActionController::API
     head 200
   end
 
+  def meta
+    nil
+  end
+
   private
 
   def server_error(error)

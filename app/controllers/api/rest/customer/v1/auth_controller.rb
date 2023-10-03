@@ -36,6 +36,10 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
     head 204
   end
 
+  def meta
+    nil
+  end
+
   private
 
   def authenticate!

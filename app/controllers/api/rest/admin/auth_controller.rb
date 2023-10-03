@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::AuthController < Knock::AuthTokenController
+  def meta
+    nil
+  end
+
   private
 
   def entity_name

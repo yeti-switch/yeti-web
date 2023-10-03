@@ -8,10 +8,12 @@
 #  action           :string
 #  controller       :string
 #  db_duration      :float
+#  meta             :jsonb
 #  method           :string
 #  page_duration    :float
 #  params           :text
 #  path             :string
+#  remote_ip        :inet
 #  request_body     :text
 #  request_headers  :text
 #  response_body    :text
@@ -36,8 +38,13 @@ class Log::ApiLog < ApplicationRecord
   self.pg_partition_depth_future = 3
 
   scope :failed, -> { where('status >= ?', 400) }
+  scope :remote_ip_eq_inet, ->(value) { where('remote_ip >>= ?', value) }
 
   def display_name
     id.to_s
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[remote_ip_eq_inet]
   end
 end
