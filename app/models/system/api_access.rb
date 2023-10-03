@@ -6,7 +6,7 @@
 #
 #  id              :integer(4)       not null, primary key
 #  account_ids     :integer(4)       default([]), not null, is an Array
-#  allowed_ips     :inet             default(["\"0.0.0.0/0\""]), not null, is an Array
+#  allowed_ips     :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
 #  login           :string           not null
 #  password_digest :string           not null
 #  customer_id     :integer(4)       not null
