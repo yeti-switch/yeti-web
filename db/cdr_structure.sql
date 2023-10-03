@@ -3022,67 +3022,6 @@ ALTER SEQUENCE reports.customer_traffic_report_schedulers_id_seq OWNED BY report
 
 
 --
--- Name: report_vendors; Type: TABLE; Schema: reports; Owner: -
---
-
-CREATE TABLE reports.report_vendors (
-    id integer NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    start_date timestamp with time zone NOT NULL,
-    end_date timestamp with time zone NOT NULL
-);
-
-
---
--- Name: report_vendors_data; Type: TABLE; Schema: reports; Owner: -
---
-
-CREATE TABLE reports.report_vendors_data (
-    id bigint NOT NULL,
-    report_id integer NOT NULL,
-    calls_count bigint
-);
-
-
---
--- Name: report_vendors_data_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
---
-
-CREATE SEQUENCE reports.report_vendors_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_vendors_data_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
---
-
-ALTER SEQUENCE reports.report_vendors_data_id_seq OWNED BY reports.report_vendors_data.id;
-
-
---
--- Name: report_vendors_id_seq; Type: SEQUENCE; Schema: reports; Owner: -
---
-
-CREATE SEQUENCE reports.report_vendors_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: report_vendors_id_seq; Type: SEQUENCE OWNED BY; Schema: reports; Owner: -
---
-
-ALTER SEQUENCE reports.report_vendors_id_seq OWNED BY reports.report_vendors.id;
-
-
---
 -- Name: scheduler_periods; Type: TABLE; Schema: reports; Owner: -
 --
 
@@ -3862,20 +3801,6 @@ ALTER TABLE ONLY reports.customer_traffic_report_schedulers ALTER COLUMN id SET 
 
 
 --
--- Name: report_vendors id; Type: DEFAULT; Schema: reports; Owner: -
---
-
-ALTER TABLE ONLY reports.report_vendors ALTER COLUMN id SET DEFAULT nextval('reports.report_vendors_id_seq'::regclass);
-
-
---
--- Name: report_vendors_data id; Type: DEFAULT; Schema: reports; Owner: -
---
-
-ALTER TABLE ONLY reports.report_vendors_data ALTER COLUMN id SET DEFAULT nextval('reports.report_vendors_data_id_seq'::regclass);
-
-
---
 -- Name: vendor_traffic_report id; Type: DEFAULT; Schema: reports; Owner: -
 --
 
@@ -4195,22 +4120,6 @@ ALTER TABLE ONLY reports.customer_traffic_report_schedulers
 
 
 --
--- Name: report_vendors_data report_vendors_data_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
---
-
-ALTER TABLE ONLY reports.report_vendors_data
-    ADD CONSTRAINT report_vendors_data_pkey PRIMARY KEY (id);
-
-
---
--- Name: report_vendors report_vendors_pkey; Type: CONSTRAINT; Schema: reports; Owner: -
---
-
-ALTER TABLE ONLY reports.report_vendors
-    ADD CONSTRAINT report_vendors_pkey PRIMARY KEY (id);
-
-
---
 -- Name: scheduler_periods scheduler_periods_name_key; Type: CONSTRAINT; Schema: reports; Owner: -
 --
 
@@ -4501,10 +4410,31 @@ CREATE UNIQUE INDEX "unique_public.schema_migrations" ON public.schema_migration
 
 
 --
--- Name: cdr_custom_report_id_idx; Type: INDEX; Schema: reports; Owner: -
+-- Name: cdr_custom_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -
 --
 
-CREATE UNIQUE INDEX cdr_custom_report_id_idx ON reports.cdr_custom_report USING btree (id) WHERE (id IS NOT NULL);
+CREATE INDEX cdr_custom_report_data_report_id_idx ON reports.cdr_custom_report_data USING btree (report_id);
+
+
+--
+-- Name: cdr_interval_report_data_report_id_idx; Type: INDEX; Schema: reports; Owner: -
+--
+
+CREATE INDEX cdr_interval_report_data_report_id_idx ON reports.cdr_interval_report_data USING btree (report_id);
+
+
+--
+-- Name: customer_traffic_report_data_by_destination_report_id_idx; Type: INDEX; Schema: reports; Owner: -
+--
+
+CREATE INDEX customer_traffic_report_data_by_destination_report_id_idx ON reports.customer_traffic_report_data_by_destination USING btree (report_id);
+
+
+--
+-- Name: customer_traffic_report_data_full_report_id_idx; Type: INDEX; Schema: reports; Owner: -
+--
+
+CREATE INDEX customer_traffic_report_data_full_report_id_idx ON reports.customer_traffic_report_data_full USING btree (report_id);
 
 
 --
@@ -4660,14 +4590,6 @@ ALTER TABLE ONLY reports.customer_traffic_report_schedulers
 
 
 --
--- Name: report_vendors_data report_vendors_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
---
-
-ALTER TABLE ONLY reports.report_vendors_data
-    ADD CONSTRAINT report_vendors_data_report_id_fkey FOREIGN KEY (report_id) REFERENCES reports.report_vendors(id);
-
-
---
 -- Name: vendor_traffic_report_data vendor_traffic_report_data_report_id_fkey; Type: FK CONSTRAINT; Schema: reports; Owner: -
 --
 
@@ -4769,6 +4691,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230708183812'),
 ('20230828175949'),
 ('20230913210707'),
-('20230916152534');
+('20230916152534'),
+('20230929081324');
 
 

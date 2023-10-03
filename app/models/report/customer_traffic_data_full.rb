@@ -24,6 +24,10 @@
 #  report_id               :integer(4)       not null
 #  vendor_id               :integer(4)
 #
+# Indexes
+#
+#  customer_traffic_report_data_full_report_id_idx  (report_id)
+#
 
 class Report::CustomerTrafficDataFull < Cdr::Base
   self.table_name = 'reports.customer_traffic_report_data_full'

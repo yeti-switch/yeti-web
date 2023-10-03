@@ -26387,7 +26387,7 @@ CREATE TABLE sys.api_access (
     login character varying NOT NULL,
     password_digest character varying NOT NULL,
     account_ids integer[] DEFAULT '{}'::integer[] NOT NULL,
-    allowed_ips inet[] DEFAULT '{0.0.0.0/0}'::inet[] NOT NULL
+    allowed_ips inet[] DEFAULT '{0.0.0.0/0,::/0}'::inet[] NOT NULL
 );
 
 
@@ -31618,6 +31618,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230808192245'),
 ('20230909093914'),
 ('20230928100513'),
-('20230928134637');
+('20230928134637'),
+('20230929114329');
 
 
