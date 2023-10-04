@@ -150,6 +150,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :sign_orig_local_ip, filters: %i[equals contains starts_with ends_with]
   filter :sign_term_local_ip, filters: %i[equals contains starts_with ends_with]
   filter :sign_term_ip, filters: %i[equals contains starts_with ends_with]
+  filter :customer_auth_external_type_eq, as: :string, label: 'CUSTOMER AUTH EXTERNAL TYPE'
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
 
