@@ -79,4 +79,23 @@ RSpec.describe 'CDRs index', type: :feature do
       expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tag.name.upcase} #{tag_ua.name.upcase}")
     end
   end
+
+  context 'with filter by customer auth external type', js: true do
+    let(:filter!) do
+      within_filters do
+        fill_in 'CUSTOMER AUTH EXTERNAL TYPE', with: 'em'
+        click_button('Filter')
+      end
+    end
+
+    let!(:cdr) do
+      create(:cdr, customer_auth_external_type: 'em')
+    end
+
+    it 'shows one CDR with correct routing tags' do
+      subject
+      expect(page).to have_table_row(count: 1)
+      expect(page).to have_table_cell(column: 'ID', exact_text: cdr.id)
+    end
+  end
 end
