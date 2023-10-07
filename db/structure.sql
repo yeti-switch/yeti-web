@@ -2906,7 +2906,9 @@ CREATE TABLE class4.gateways (
     pai_domain character varying,
     registered_aor_mode_id smallint DEFAULT 0 NOT NULL,
     stir_shaken_mode_id smallint DEFAULT 0 NOT NULL,
-    stir_shaken_crt_id smallint
+    stir_shaken_crt_id smallint,
+    to_rewrite_rule character varying,
+    to_rewrite_result character varying
 );
 
 
@@ -15954,6 +15956,7 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_to_username varchar;
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -16407,9 +16410,10 @@ BEGIN
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-
   i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
-  i_profile."to":='<'||v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+  i_profile."to":='<'||v_schema||':'||v_to_username||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
@@ -16622,6 +16626,7 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_to_username varchar;
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -17075,9 +17080,10 @@ BEGIN
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-
   i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
-  i_profile."to":='<'||v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+  i_profile."to":='<'||v_schema||':'||v_to_username||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
@@ -17290,6 +17296,7 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_to_username varchar;
   
 BEGIN
   
@@ -17684,9 +17691,10 @@ BEGIN
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-
   i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
-  i_profile."to":='<'||v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+  i_profile."to":='<'||v_schema||':'||v_to_username||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
@@ -24917,7 +24925,9 @@ CREATE TABLE data_import.import_gateways (
     force_cancel_routeset boolean,
     diversion_domain character varying,
     registered_aor_mode_id smallint,
-    registered_aor_mode_name character varying
+    registered_aor_mode_name character varying,
+    to_rewrite_rule character varying,
+    to_rewrite_result character varying
 );
 
 
@@ -31619,6 +31629,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230909093914'),
 ('20230928100513'),
 ('20230928134637'),
-('20230929114329');
+('20230929114329'),
+('20231007204855');
 
 

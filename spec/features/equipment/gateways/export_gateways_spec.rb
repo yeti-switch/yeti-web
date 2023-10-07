@@ -80,6 +80,8 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Src rewrite result',                 item.src_rewrite_result.to_s],
         ['Dst rewrite rule',                   item.dst_rewrite_rule.to_s],
         ['Dst rewrite result',                 item.dst_rewrite_result.to_s],
+        ['To rewrite rule',                    item.to_rewrite_rule.to_s],
+        ['To rewrite result',                  item.to_rewrite_result.to_s],
         ['Auth enabled',                       item.auth_enabled.to_s],
         ['Auth user',                          item.auth_user.to_s],
         ['Auth password',                      item.auth_password.to_s],
