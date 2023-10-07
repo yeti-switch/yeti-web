@@ -1932,16 +1932,16 @@ BEGIN
 
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id=i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip:=i_legA_remote_ip;
-  v_cdr.sign_orig_port=i_legA_remote_port;
-  v_cdr.sign_orig_local_ip:=i_legA_local_ip;
-  v_cdr.sign_orig_local_port=i_legA_local_port;
+  v_cdr.sign_orig_ip=i_lega_remote_ip;
+  v_cdr.sign_orig_port=NULLIF(i_lega_remote_port,0);
+  v_cdr.sign_orig_local_ip=i_lega_local_ip;
+  v_cdr.sign_orig_local_port=NULLIF(i_lega_local_port,0);
 
   v_cdr.sign_term_transport_protocol_id=i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip:=i_legB_remote_ip;
-  v_cdr.sign_term_port:=i_legB_remote_port;
-  v_cdr.sign_term_local_ip:=i_legB_local_ip;
-  v_cdr.sign_term_local_port:=i_legB_local_port;
+  v_cdr.sign_term_ip=i_legb_remote_ip;
+  v_cdr.sign_term_port=NULLIF(i_legb_remote_port,0);
+  v_cdr.sign_term_local_ip=i_legb_local_ip;
+  v_cdr.sign_term_local_port=NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag=i_local_tag;
   v_cdr.legb_local_tag=i_legb_local_tag;
@@ -4375,6 +4375,13 @@ CREATE INDEX cdr_customer_acc_id_time_start_idx1 ON ONLY cdr.cdr USING btree (cu
 
 
 --
+-- Name: cdr_customer_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_customer_id_time_start_idx ON ONLY cdr.cdr USING btree (customer_id, time_start);
+
+
+--
 -- Name: cdr_customer_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
@@ -4393,6 +4400,13 @@ CREATE INDEX cdr_id_idx ON ONLY cdr.cdr USING btree (id);
 --
 
 CREATE INDEX cdr_time_start_idx ON ONLY cdr.cdr USING btree (time_start);
+
+
+--
+-- Name: cdr_vendor_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_vendor_id_time_start_idx ON ONLY cdr.cdr USING btree (vendor_id, time_start);
 
 
 --
@@ -4692,6 +4706,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230828175949'),
 ('20230913210707'),
 ('20230916152534'),
-('20230929081324');
+('20230929081324'),
+('20231007121159'),
+('20231007123320');
 
 
