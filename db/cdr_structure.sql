@@ -4375,6 +4375,13 @@ CREATE INDEX cdr_customer_acc_id_time_start_idx1 ON ONLY cdr.cdr USING btree (cu
 
 
 --
+-- Name: cdr_customer_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_customer_id_time_start_idx ON ONLY cdr.cdr USING btree (customer_id, time_start);
+
+
+--
 -- Name: cdr_customer_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
@@ -4393,6 +4400,13 @@ CREATE INDEX cdr_id_idx ON ONLY cdr.cdr USING btree (id);
 --
 
 CREATE INDEX cdr_time_start_idx ON ONLY cdr.cdr USING btree (time_start);
+
+
+--
+-- Name: cdr_vendor_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
+--
+
+CREATE INDEX cdr_vendor_id_time_start_idx ON ONLY cdr.cdr USING btree (vendor_id, time_start);
 
 
 --
@@ -4692,6 +4706,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230828175949'),
 ('20230913210707'),
 ('20230916152534'),
-('20230929081324');
+('20230929081324'),
+('20231007121159');
 
 
