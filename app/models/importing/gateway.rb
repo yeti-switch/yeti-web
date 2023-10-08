@@ -110,6 +110,8 @@
 #  termination_capacity               :integer(2)
 #  termination_dst_numberlist_name    :string
 #  termination_src_numberlist_name    :string
+#  to_rewrite_result                  :string
+#  to_rewrite_rule                    :string
 #  transport_protocol_name            :string
 #  try_avoid_transcoding              :boolean
 #  tx_inband_dtmf_filtering_mode_name :string
@@ -190,6 +192,7 @@ class Importing::Gateway < Importing::Base
     src_name_rewrite_rule src_name_rewrite_result
     src_rewrite_rule src_rewrite_result
     dst_rewrite_rule dst_rewrite_result
+    to_rewrite_rule to_rewrite_result
     acd_limit asr_limit short_calls_limit
     allow_termination allow_origination
     proxy_media

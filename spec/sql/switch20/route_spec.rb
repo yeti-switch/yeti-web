@@ -521,6 +521,10 @@ RSpec.describe '#routing logic' do
                diversion_domain: vendor_gw_diversion_domain,
                diversion_rewrite_rule: vendor_gw_diversion_rewrite_rule,
                diversion_rewrite_result: vendor_gw_diversion_rewrite_result,
+               dst_rewrite_rule: vendor_gw_dst_rewrite_rule,
+               dst_rewrite_result: vendor_gw_dst_rewrite_result,
+               to_rewrite_rule: vendor_gw_to_rewrite_rule,
+               to_rewrite_result: vendor_gw_to_rewrite_result,
                pai_send_mode_id: vendor_gw_pai_send_mode_id,
                pai_domain: vendor_gw_pai_domain,
                registered_aor_mode_id: vendor_gw_registered_aor_mode_id,
@@ -541,6 +545,11 @@ RSpec.describe '#routing logic' do
 
       let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_DISABLE }
       let(:vendor_gw_stir_shaken_crt_id) { nil }
+
+      let(:vendor_gw_dst_rewrite_rule) { nil }
+      let(:vendor_gw_dst_rewrite_result) { nil }
+      let(:vendor_gw_to_rewrite_rule) { nil }
+      let(:vendor_gw_to_rewrite_result) { nil }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) {
@@ -1598,6 +1607,83 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
             expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
             expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'Authorized, DST Number (RURI/To) rewrite rule' do
+        let(:uri_name) { '+1234567890' }
+        let(:vendor_gw_host) { 'dst.domain.com' }
+
+        context 'Rewrite disabled' do
+          let(:vendor_gw_dst_rewrite_rule) { nil }
+          let(:vendor_gw_dst_rewrite_result) { '1211\1' }
+          let(:vendor_gw_to_rewrite_rule) { nil }
+          let(:vendor_gw_to_rewrite_result) { '2322\1' }
+
+          it 'response with original number ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq(uri_name) # Original destination
+            expect(subject.first[:ruri]).to eq("sip:#{uri_name}@#{vendor_gateway.host}")
+            expect(subject.first[:to]).to eq("<sip:#{uri_name}@#{vendor_gateway.host}>")
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'TO Rewrite enabled' do
+          let(:vendor_gw_to_rewrite_rule) { '^(.*)$' }
+          let(:vendor_gw_to_rewrite_result) { '1111#\1' }
+
+          it 'response with Diversion headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq(uri_name) # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq(uri_name) # Original destination
+            expect(subject.first[:ruri]).to eq("sip:#{uri_name}@#{vendor_gateway.host}") # original dst in RURI
+            expect(subject.first[:to]).to eq("<sip:1111##{uri_name}@#{vendor_gateway.host}>") # rewtited dst in TO
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'DST Rewrite enabled' do
+          let(:vendor_gw_dst_rewrite_rule) { '^(.*)$' }
+          let(:vendor_gw_dst_rewrite_result) { '8888#\1' }
+
+          it 'response with original number ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_routing]).to eq(uri_name) # Original destination
+            expect(subject.first[:dst_prefix_out]).to eq("8888##{uri_name}") # Original destination
+            expect(subject.first[:ruri]).to eq("sip:8888##{uri_name}@#{vendor_gateway.host}")
+            expect(subject.first[:to]).to eq("<sip:8888##{uri_name}@#{vendor_gateway.host}>")
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'DST and TO Rewrite enabled' do
+          let(:vendor_gw_dst_rewrite_rule) { '^(.*)$' }
+          let(:vendor_gw_dst_rewrite_result) { '8888#\1' }
+          let(:vendor_gw_to_rewrite_rule) { '^(.*)$' }
+          let(:vendor_gw_to_rewrite_result) { '9999#\1' }
+
+          it 'response with original number ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_routing]).to eq(uri_name) # Original destination
+            expect(subject.first[:dst_prefix_out]).to eq("8888##{uri_name}") # Original destination
+            expect(subject.first[:ruri]).to eq("sip:8888##{uri_name}@#{vendor_gateway.host}")
+            expect(subject.first[:to]).to eq("<sip:9999#8888##{uri_name}@#{vendor_gateway.host}>")
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end

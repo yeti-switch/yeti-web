@@ -59,6 +59,7 @@ ActiveAdmin.register Gateway do
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
+                 :to_rewrite_rule, :to_rewrite_result,
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  :auth_enabled, :auth_user, :auth_password, :auth_from_user, :auth_from_domain,
                  :incoming_auth_username, :incoming_auth_password,
@@ -247,12 +248,12 @@ ActiveAdmin.register Gateway do
     # column :diversion_domain
     # column :diversion_rewrite_rule
     # column :diversion_rewrite_result
-    column :src_name_rewrite_rule
-    column :src_name_rewrite_result
-    column :src_rewrite_rule
-    column :src_rewrite_result
-    column :dst_rewrite_rule
-    column :dst_rewrite_result
+    # column :src_name_rewrite_rule
+    # column :src_name_rewrite_result
+    # column :src_rewrite_rule
+    # column :src_rewrite_result
+    # column :dst_rewrite_rule
+    # column :dst_rewrite_result
     column :lua_script
 
     # MEDIA
@@ -455,6 +456,8 @@ ActiveAdmin.register Gateway do
           f.input :src_rewrite_result
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
+          f.input :to_rewrite_rule
+          f.input :to_rewrite_result
           f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
         end
       end
@@ -639,6 +642,8 @@ ActiveAdmin.register Gateway do
           row :src_rewrite_result
           row :dst_rewrite_rule
           row :dst_rewrite_result
+          row :to_rewrite_rule
+          row :to_rewrite_result
           row :lua_script
         end
       end
