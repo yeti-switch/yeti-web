@@ -35,5 +35,21 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
         end
       end
     end
+
+    describe 'by Controller', :js do
+      let(:record_attrs) { super().merge controller: 'Api::Rest::Admin::AuthController' }
+
+      before do
+        visit api_logs_path
+        fill_in_chosen 'Controller', with: 'Api::Rest::Admin::AuthController'
+      end
+
+      it 'should return filtered records only' do
+        subject
+
+        expect(page).to have_table_row count: 1
+        expect(page).to have_table_cell column: 'Id', exact_text: record.id
+      end
+    end
   end
 end

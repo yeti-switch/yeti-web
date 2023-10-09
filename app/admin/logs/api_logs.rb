@@ -28,7 +28,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   filter :path
   filter :method
   filter :status
-  filter :controller, as: :select, collection: proc { System::ApiLogConfig.order('controller').pluck('controller') }, input_html: { class: :chosen }
+  filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: :chosen }
   filter :action
   filter :page_duration
   filter :db_duration

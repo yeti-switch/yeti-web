@@ -3,14 +3,24 @@
 ActiveAdmin.register System::ApiLogConfig, as: 'Api Log Config' do
   menu parent: 'System', priority: 3
   config.batch_actions = false
-  actions :index, :update
+  actions :index, :create, :new, :destroy
 
-  permit_params :debug
+  permit_params :controller
 
-  filter :controller
+  filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: :chosen }
 
   index do
+    actions
     column :controller
-    boolean_edit_column :debug
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :controller, as: :select,
+                           collection: ApiControllers.list,
+                           input_html: { class: 'chosen chosen-wide' },
+                           hint: 'Only controllers within "Api" namespace will be displayed.'
+    end
+    f.actions
   end
 end

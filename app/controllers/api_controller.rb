@@ -23,15 +23,11 @@ class ApiController < ActionController::API
     end
   end
 
-  def debug_mode
-    unless instance_variable_defined?(:@debug_mode)
-      @debug_mode ||= System::ApiLogConfig.where(controller: self.class.name).pluck(:debug).first
-    end
-    @debug_mode
-  end
-
   include WithPayloads
   include CaptureError::ControllerMethods
+  include Memoizable
+
+  define_memoizable :debug_mode, apply: -> { System::ApiLogConfig.exists?(controller: self.class.name) }
 
   rescue_from StandardError, with: :capture_error!
 

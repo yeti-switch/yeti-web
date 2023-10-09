@@ -26426,8 +26426,7 @@ ALTER SEQUENCE sys.api_access_id_seq OWNED BY sys.api_access.id;
 
 CREATE TABLE sys.api_log_config (
     id integer NOT NULL,
-    controller character varying NOT NULL,
-    debug boolean DEFAULT false NOT NULL
+    controller character varying NOT NULL
 );
 
 
@@ -31630,6 +31629,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230928100513'),
 ('20230928134637'),
 ('20230929114329'),
+('20231005114627'),
 ('20231007204855');
 
 

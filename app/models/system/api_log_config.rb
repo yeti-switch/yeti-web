@@ -6,7 +6,6 @@
 #
 #  id         :integer(4)       not null, primary key
 #  controller :string           not null
-#  debug      :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -18,7 +17,5 @@ class System::ApiLogConfig < ApplicationRecord
 
   include WithPaperTrail
 
-  def debug?
-    !!debug
-  end
+  validates :controller, presence: true, uniqueness: true
 end
