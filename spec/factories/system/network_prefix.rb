@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :network_prefix, class: System::NetworkPrefix do
-    # Max prefix length in db/seeds/main/sys.sql is 12.
+    # Max prefix length in db/network_prefixes.yml is 12.
     # To avoid duplication we create prefixes wih length 13+.
     base_prefix = '1' * 12
     sequence(:prefix) { |n| base_prefix + n.to_s }

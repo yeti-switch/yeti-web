@@ -58,8 +58,10 @@ role_policy:
 And run command to create development database:
 
 ```sh
-RAILS_ENV=development bundle exec rake db:create db:schema:load db:migrate db:seed
+RAILS_ENV=development bundle exec rake db:create db:schema:load db:migrate db:seed custom_seeds[network_prefixes]
 ```
+
+You can skip `custom_seeds[network_prefixes]` is you want to use your own network prefixes.
 
 Then start rails server `bundle exec rails s` and login to http://localhost:3000/ with
 login `admin` and password `111111`
@@ -67,7 +69,7 @@ login `admin` and password `111111`
 Then prepare test database(do not use db:test:prepare).
 
 ```sh
-RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed
+RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed custom_seeds[network_prefixes]
 ```
 
 This project has CDR-database, configured as cdr
@@ -108,12 +110,34 @@ IGNORE_STOPS=true bundle exec rake db:migrate
 ## Migrations that insert rows into yeti database
 
 ```bash
-RAILS_ENV=test bundle exec rake db:create db:schema:load db:seed
+RAILS_ENV=test bundle exec rake db:create db:schema:load db:seed custom_seeds[network_prefixes]
 # create migration inside db/migrations
 RAILS_ENV=test bundle exec rake db:migrate
 # SCHEMA_NAME - schema of table into which you've inserted row(s)
 # YETI_TEST_DB_NAME - yeti test database name on local machine
 pg_dump --column-inserts --data-only --schema=SCHEMA_NAME --file=db/seeds/main/SCHEMA_NAME.sql YETI_TEST_DB_NAME
+```
+
+If you want to use network prefixes from yaml you need to exclude them from db/seeds/main/sys.sql
+```bash
+pg_dump --column-inserts --data-only --schema=sys --file=db/seeds/main/sys.sql --exclude-table=countries --exclude-table=networks --exclude-table=network_prefixes --exclude-table=network_types YETI_TEST_DB_NAME
+```
+
+## Dump network prefixes
+
+```ruby
+nt_keys = %w[id name uuid]
+network_types = System::NetworkType.order(id: :asc).pluck(*nt_keys).map { |values| Hash[nt_keys.zip(values)] }
+File.write('db/network_types.yml', network_types.to_yaml)
+network_keys = %w[id name uuid type_id]
+networks = System::Network.order(id: :asc).pluck(*network_keys).map { |values| Hash[network_keys.zip(values)] }
+File.write('db/networks.yml', networks.to_yaml)
+country_keys = %w[id iso2 name]
+countries = System::Country.order(id: :asc).pluck(*country_keys).map { |values| Hash[country_keys.zip(values)] }
+File.write('db/countries.yml', countries.to_yaml)
+np_keys = %w[id number_max_length number_min_length prefix uuid country_id network_id]
+network_prefixes = System::NetworkPrefix.order(id: :asc).pluck(*np_keys).map { |values| Hash[np_keys.zip(values)] }
+File.write('db/network_prefixes.yml', network_prefixes.to_yaml)
 ```
 
 ## Use Docker Postgres for development

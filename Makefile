@@ -156,7 +156,8 @@ docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml 
 		db:create \
 		db:schema:load \
 		db:migrate \
-		db:seed
+		db:seed \
+		custom_seeds[network_prefixes]
 	$(info:msg=Generating documentation)
 	RAILS_ENV=test $(bundle_bin) exec rake docs:generate
 	RAILS_ENV=test $(bundle_bin) exec rake db:drop
@@ -192,6 +193,7 @@ prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:create
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:load_schema
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[db:seed]
+	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[custom_seeds[network_prefixes]]
 
 
 .PHONY: test
