@@ -11,6 +11,8 @@ module ApiControllers
         "#{route[:controller].camelize}Controller"
       end
     end
+
+    @list.uniq!
   end
 
   module_function :list
