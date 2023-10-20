@@ -11,18 +11,28 @@ class AsyncBatchDestroyJob < ApplicationJob
     @model_class = model_class.constantize
     @who_is = who_is
     set_audit_log_data
-    begin
-      scoped_records = @model_class.find_by_sql(sql_query + " LIMIT #{BATCH_SIZE}")
-      @model_class.transaction do
-        scoped_records.each do |record|
-          raise ActiveRecord::RecordNotDestroyed.new(error_message_for(record), record) unless record.destroy
-        end
+
+    @model_class.where(id: record_ids(sql_query)).find_in_batches(batch_size: BATCH_SIZE) do |records|
+      records.each do |record|
+        delete_record(record)
       end
-    end until scoped_records.empty?
+    end
   end
 
-  def error_message_for(record)
-    "#{model_class} ##{record.id} can't be deleted: #{record.errors.full_messages.to_sentence}"
+  def record_ids(sql_query)
+    @model_class.find_by_sql(sql_query).pluck(:id)
+  end
+
+  def delete_record(record)
+    unless record.destroy
+      Rails.logger.warn "#{@model_class} ##{record.id} can't be deleted: #{record.errors.full_messages.to_sentence}"
+    end
+  rescue ActiveRecord::InvalidForeignKey => e
+    Rails.logger.error error_message_for(id: record.id, error_class: e.class)
+  end
+
+  def error_message_for(id:, error_class:)
+    "#{@model_class} ##{id} can't be deleted: #{error_class}"
   end
 
   def reschedule_at(_time, _attempts)
