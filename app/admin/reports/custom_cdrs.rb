@@ -21,11 +21,16 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
 
   report_scheduler Report::CustomCdrScheduler
 
-  filter :id
+  filter :id_eq, label: 'ID'
   boolean_filter :completed
   filter :date_start, as: :date_time_range
   filter :date_end, as: :date_time_range
   filter :created_at, as: :date_time_range
+  filter :group_by_any, as: :select,
+                        label: 'Group By',
+                        collection: Report::CustomCdr::CDR_COLUMNS,
+                        input_html: { multiple: true, class: :chosen }
+  filter :filter_eq, as: :string, label: 'Filter'
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
   index do
