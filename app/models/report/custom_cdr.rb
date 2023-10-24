@@ -118,9 +118,15 @@ class Report::CustomCdr < Cdr::Base
     id.to_s
   end
 
+  scope :group_by_any, ->(*values) { where.contains(group_by: values) }
+
   private
 
   def auto_column_constants
     CDR_COLUMNS_CONSTANTS
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[group_by_any]
   end
 end
