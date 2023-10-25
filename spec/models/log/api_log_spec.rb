@@ -39,4 +39,37 @@ RSpec.describe Log::ApiLog do
       expect(subject.errors).to be_empty
     end
   end
+
+  describe '.remote_ip_inet' do
+    subject { described_class.remote_ip_eq_inet(scope_value) }
+
+    let(:scope_value) { nil }
+
+    context 'when invalid IP address' do
+      let(:scope_value) { '127.0.0.' }
+
+      it 'should return empty relation' do
+        expect(subject).to be_empty
+      end
+    end
+
+    context 'when invalid string' do
+      let(:scope_value) { 'invalid' }
+
+      it 'should return empty relation' do
+        expect(subject).to be_empty
+      end
+    end
+
+    context 'when valid IP address' do
+      let(:scope_value) { '127.0.0.1' }
+      let!(:record) { FactoryBot.create(:api_log, remote_ip: '127.0.0.1') }
+
+      before { FactoryBot.create(:api_log, remote_ip: '80.80.123.23') }
+
+      it 'should return filtered recprd only' do
+        expect(subject).to contain_exactly(record)
+      end
+    end
+  end
 end
