@@ -4,7 +4,7 @@
 #
 # Table name: external_data.networks
 #
-#  id      :integer(4)       not null
+#  id      :integer(4)       not null, primary key
 #  name    :string
 #  uuid    :uuid
 #  type_id :integer(4)

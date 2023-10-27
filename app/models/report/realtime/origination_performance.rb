@@ -149,14 +149,11 @@
 # Indexes
 #
 #  cdr_customer_acc_external_id_time_start_idx  (customer_acc_external_id,time_start) WHERE is_last_cdr
-#  cdr_customer_acc_id_time_start_idx           (customer_acc_id,time_start) WHERE is_last_cdr
 #  cdr_customer_acc_id_time_start_idx1          (customer_acc_id,time_start)
 #  cdr_customer_id_time_start_idx               (customer_id,time_start)
-#  cdr_customer_invoice_id_idx                  (customer_invoice_id)
 #  cdr_id_idx                                   (id)
 #  cdr_time_start_idx                           (time_start)
 #  cdr_vendor_id_time_start_idx                 (vendor_id,time_start)
-#  cdr_vendor_invoice_id_idx                    (vendor_invoice_id)
 #
 
 class Report::Realtime::OriginationPerformance < Report::Realtime::Base

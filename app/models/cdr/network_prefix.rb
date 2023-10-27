@@ -4,7 +4,7 @@
 #
 # Table name: external_data.network_prefixes
 #
-#  id                :integer(4)       not null
+#  id                :integer(4)       not null, primary key
 #  number_max_length :integer(4)
 #  number_min_length :integer(4)
 #  prefix            :string

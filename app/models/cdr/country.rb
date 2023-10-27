@@ -4,7 +4,7 @@
 #
 # Table name: external_data.countries
 #
-#  id   :integer(4)       not null
+#  id   :integer(4)       not null, primary key
 #  iso2 :string
 #  name :string
 #
