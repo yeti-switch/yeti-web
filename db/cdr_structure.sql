@@ -4008,6 +4008,30 @@ ALTER TABLE ONLY cdr.cdr
 
 
 --
+-- Name: countries countries_pkey; Type: CONSTRAINT; Schema: external_data; Owner: -
+--
+
+ALTER TABLE ONLY external_data.countries
+    ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: network_prefixes network_prefixes_pkey; Type: CONSTRAINT; Schema: external_data; Owner: -
+--
+
+ALTER TABLE ONLY external_data.network_prefixes
+    ADD CONSTRAINT network_prefixes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: networks networks_pkey; Type: CONSTRAINT; Schema: external_data; Owner: -
+--
+
+ALTER TABLE ONLY external_data.networks
+    ADD CONSTRAINT networks_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4361,13 +4385,6 @@ CREATE INDEX cdr_customer_acc_external_id_time_start_idx ON ONLY cdr.cdr USING b
 
 
 --
--- Name: cdr_customer_acc_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
---
-
-CREATE INDEX cdr_customer_acc_id_time_start_idx ON ONLY cdr.cdr USING btree (customer_acc_id, time_start) WHERE is_last_cdr;
-
-
---
 -- Name: cdr_customer_acc_id_time_start_idx1; Type: INDEX; Schema: cdr; Owner: -
 --
 
@@ -4379,13 +4396,6 @@ CREATE INDEX cdr_customer_acc_id_time_start_idx1 ON ONLY cdr.cdr USING btree (cu
 --
 
 CREATE INDEX cdr_customer_id_time_start_idx ON ONLY cdr.cdr USING btree (customer_id, time_start);
-
-
---
--- Name: cdr_customer_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
---
-
-CREATE INDEX cdr_customer_invoice_id_idx ON ONLY cdr.cdr USING btree (customer_invoice_id);
 
 
 --
@@ -4407,13 +4417,6 @@ CREATE INDEX cdr_time_start_idx ON ONLY cdr.cdr USING btree (time_start);
 --
 
 CREATE INDEX cdr_vendor_id_time_start_idx ON ONLY cdr.cdr USING btree (vendor_id, time_start);
-
-
---
--- Name: cdr_vendor_invoice_id_idx; Type: INDEX; Schema: cdr; Owner: -
---
-
-CREATE INDEX cdr_vendor_invoice_id_idx ON ONLY cdr.cdr USING btree (vendor_invoice_id);
 
 
 --
@@ -4708,6 +4711,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230916152534'),
 ('20230929081324'),
 ('20231007121159'),
-('20231007123320');
+('20231007123320'),
+('20231027110359');
 
 
