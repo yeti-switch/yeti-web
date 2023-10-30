@@ -4,6 +4,8 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   menu parent: 'CDR', priority: 97
   actions :index, :show, :create, :new
 
+  acts_as_clone
+
   controller do
     def scoped_collection
       super.preload(:customer_account)
