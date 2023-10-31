@@ -341,7 +341,7 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
           .with(
             type: 'yeti_ac',
             ca: 1,
-            ca_price_originated: 1.04, # +1.04 normal call -5 reverse call
+            ca_price_originated: 1.02, # +1.02 normal call
             metric_labels: {
               id: customers_auth.id,
               external_id: customers_auth.external_id,
@@ -353,7 +353,7 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
           .with(
             type: 'yeti_ac',
             ca: 1,
-            ca_price_originated: -5,
+            ca_price_originated: -5, # -5 reverse call
             metric_labels: {
               id: customers_auth2.id,
               external_id: customers_auth2.external_id,
@@ -402,7 +402,7 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
             .with(
               type: 'yeti_ac',
               ca: 2,
-              ca_price_originated: -3.96, # +1.04 normal call -5 reverse call
+              ca_price_originated: -3.98, # +1.02 normal call -5 reverse call
               metric_labels: {
                 id: customers_auth.id,
                 external_id: customers_auth.external_id,

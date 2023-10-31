@@ -11,17 +11,20 @@ module Jobs
 
       attr_reader :collection,
                   :key,
-                  :balance, :min_balance, :max_balance
+                  :balance, :min_balance, :max_balance,
+                  :future_duration
 
       # @param collection [Array<Hash>]
       # @param key [Symbol]
       # @param account [Array]
-      def initialize(collection, key:, account:)
+      # @param future_duration [Boolean] whether include duration till next monitoring run into call price calculation
+      def initialize(collection, key:, account:, future_duration:)
         @collection = collection
         @key = key
         @balance = account[0]
         @min_balance = account[1]
         @max_balance = account[2]
+        @future_duration = future_duration
       end
 
       def normal_calls
@@ -90,8 +93,9 @@ module Jobs
       def call_price(attrs)
         i_per_second_rate = attrs.fetch(:"#{key}_initial_rate").to_f / 60.0
         n_per_second_rate = attrs.fetch(:"#{key}_next_rate").to_f / 60.0
+        duration = attrs.fetch(:duration).to_i # TODO: check if needed cast to int
         # duration that will be on next calls monitoring run
-        duration = attrs.fetch(:duration).to_i + MONITORING_INTERVAL # TODO: check if needed cast to int
+        duration += MONITORING_INTERVAL if future_duration
         initial_interval = attrs.fetch(:"#{key}_initial_interval").to_i # TODO: check if needed cast to int
         next_interval = attrs.fetch(:"#{key}_next_interval").to_i # TODO: check if needed cast to int
         connect_fee = attrs.fetch(:"#{key}_fee").to_f
@@ -204,7 +208,12 @@ module Jobs
         account = active_customers_balances[acc_id]
 
         if account
-          call_collection = CallCollection.new(calls, key: :destination, account: account)
+          call_collection = CallCollection.new(
+            calls,
+            key: :destination,
+            account: account,
+            future_duration: true
+          )
 
           if call_collection.exceed_min_balance?
             @terminate_calls.merge!(
@@ -234,9 +243,12 @@ module Jobs
         vendor = active_vendors_balances[acc_id]
 
         if vendor
-          call_collection = CallCollection.new(calls,
-                                               key: :dialpeer,
-                                               account: vendor)
+          call_collection = CallCollection.new(
+            calls,
+            key: :dialpeer,
+            account: vendor,
+            future_duration: true
+          )
           # drop reverse-billing calls when balance reaches minimum
           if call_collection.exceed_min_balance?
             @terminate_calls.merge!(
@@ -295,7 +307,12 @@ module Jobs
 
       customers_active_calls.each do |account_id, calls|
         account_external_id = calls.first[:customer_acc_external_id]
-        collection = CallCollection.new(calls, key: :destination, account: [])
+        collection = CallCollection.new(
+          calls,
+          key: :destination,
+          account: [],
+          future_duration: true
+        )
         src_prefixes = calls.map { |c| c[:src_prefix_routing] }
         dst_prefixes = calls.map { |c| c[:dst_prefix_routing] }
 
@@ -310,7 +327,12 @@ module Jobs
 
       vendors_active_calls.each do |account_id, calls|
         account_external_id = calls.first[:vendor_acc_external_id]
-        collection = CallCollection.new(calls, key: :dialpeer, account: [])
+        collection = CallCollection.new(
+          calls,
+          key: :dialpeer,
+          account: [],
+          future_duration: true
+        )
 
         metrics << ActiveCallsProcessor.collect(
           account_terminated: calls.count,
@@ -324,7 +346,13 @@ module Jobs
         customer_auth_external_type = calls.first[:customer_auth_external_type]
         account_id = calls.first[:customer_acc_id]
         account_external_id = calls.first[:customer_acc_external_id]
-        collection = CallCollection.new(calls, key: :destination, account: [])
+        collection = CallCollection.new(
+          calls,
+          key: :destination,
+          account: [],
+          # will count total_calls_cost only by current duration
+          future_duration: false
+        )
 
         metrics << ActiveCallsProcessor.collect(
           ca: calls.count,
