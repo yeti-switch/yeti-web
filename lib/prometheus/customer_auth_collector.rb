@@ -3,6 +3,7 @@
 class CustomerAuthCollector < PrometheusExporter::Server::TypeCollector
   MAX_METRIC_AGE = 30
   GAUGES = {
+    alive: '1 if PrometheusCustomerAuthStats job is alive, otherwise missing',
     last24h_customer_price: 'total customer price originated by customer auth in last 24 hours'
   }.freeze
 

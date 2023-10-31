@@ -8,8 +8,10 @@ module Jobs
 
     def execute
       client = PrometheusExporter::Client.default
+      metrics = []
+      metrics << CustomerAuthProcessor.collect(alive: 1)
       Stats::CustomerAuthStats.last24_hour.each do |stat|
-        metric = CustomerAuthProcessor.collect(
+        metrics << CustomerAuthProcessor.collect(
           last24h_customer_price: stat.customer_price.to_f,
           labels: {
             account_id: stat.account_id,
@@ -19,8 +21,8 @@ module Jobs
             customer_auth_external_type: stat.customer_auth_external_type
           }
         )
-        client.send_json(metric)
       end
+      metrics.each { |metric| client.send_json(metric) }
     end
   end
 end
