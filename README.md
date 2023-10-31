@@ -58,7 +58,8 @@ role_policy:
 And run command to create development database:
 
 ```sh
-RAILS_ENV=development bundle exec rake db:create db:schema:load db:migrate db:seed custom_seeds[network_prefixes]
+RAILS_ENV=development bundle exec rake db:create db:schema:load db:migrate db:seed
+RAILS_ENV=development bundle exec rake custom_seeds[network_prefixes]
 ```
 
 You can skip `custom_seeds[network_prefixes]` is you want to use your own network prefixes.
@@ -69,7 +70,8 @@ login `admin` and password `111111`
 Then prepare test database(do not use db:test:prepare).
 
 ```sh
-RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed custom_seeds[network_prefixes]
+RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate db:seed
+RAILS_ENV=test bundle exec rake custom_seeds[network_prefixes]
 ```
 
 This project has CDR-database, configured as cdr
@@ -110,7 +112,8 @@ IGNORE_STOPS=true bundle exec rake db:migrate
 ## Migrations that insert rows into yeti database
 
 ```bash
-RAILS_ENV=test bundle exec rake db:create db:schema:load db:seed custom_seeds[network_prefixes]
+RAILS_ENV=test bundle exec rake db:create db:schema:load db:seed
+RAILS_ENV=test bundle exec rake custom_seeds[network_prefixes]
 # create migration inside db/migrations
 RAILS_ENV=test bundle exec rake db:migrate
 # SCHEMA_NAME - schema of table into which you've inserted row(s)
