@@ -46,7 +46,8 @@ RSpec.describe Jobs::PrometheusCustomerAuthStats do
 
   it 'sends prometheus metrics' do
     expect { subject }.to send_prometheus_metrics
-      .exactly(3)
+      .exactly(4)
+      .with(type: 'yeti_ca', alive: 1, metric_labels: {})
       .with(type: 'yeti_ca',
             last24h_customer_price: 0.3,
             metric_labels: {
