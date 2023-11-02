@@ -279,7 +279,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column('DC') do |cdr_attempt|
             status_tag(cdr_attempt.internal_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.internal_disconnect_code == 0) || cdr_attempt.internal_disconnect_code.nil?
           end
-          column('Reason', &:internal_disconnect_reason)
+          column('Reason') do |cdr|
+            if cdr.internal_disconnect_code_id.nil?
+              cdr.internal_disconnect_reason
+            else
+              link_to(cdr.internal_disconnect_code_id, disconnect_code_path(cdr.internal_disconnect_code_id)) + ' ' + cdr.internal_disconnect_reason
+            end
+          end
           column('LegB DC') do |cdr_attempt|
             status_tag(cdr_attempt.legb_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.legb_disconnect_code == 0) || cdr_attempt.legb_disconnect_code.nil?
           end
@@ -445,7 +451,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :lega_disconnect_code
           row :lega_disconnect_reason
           row :internal_disconnect_code
-          row :internal_disconnect_reason
+          row :internal_disconnect_reason do |cdr|
+            if cdr.internal_disconnect_code_id.nil?
+              cdr.internal_disconnect_reason
+            else
+              link_to(cdr.internal_disconnect_code_id, disconnect_code_path(cdr.internal_disconnect_code_id)) + ' ' + cdr.internal_disconnect_reason
+            end
+          end
           row :legb_disconnect_code
           row :legb_disconnect_reason
 
@@ -630,7 +642,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column('DC', sortable: 'internal_disconnect_code') do |cdr|
       status_tag(cdr.internal_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.internal_disconnect_code == 0) || cdr.internal_disconnect_code.nil?
     end
-    column('Reason', sortable: 'internal_disconnect_reason', &:internal_disconnect_reason)
+    column('Reason', sortable: 'internal_disconnect_reason') do |cdr|
+      if cdr.internal_disconnect_code_id.nil?
+        cdr.internal_disconnect_reason
+      else
+        link_to(cdr.internal_disconnect_code_id, disconnect_code_path(cdr.internal_disconnect_code_id)) + ' ' + cdr.internal_disconnect_reason
+      end
+    end
     column('LegB DC', sortable: 'legb_disconnect_code') do |cdr|
       status_tag(cdr.legb_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.legb_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
     end
