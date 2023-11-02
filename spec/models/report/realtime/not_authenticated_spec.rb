@@ -121,6 +121,7 @@
 #  dump_level_id                   :integer(2)
 #  failed_resource_id              :bigint(8)
 #  failed_resource_type_id         :integer(2)
+#  internal_disconnect_code_id     :integer(2)
 #  lega_ss_status_id               :integer(2)
 #  legb_ss_status_id               :integer(2)
 #  lnp_database_id                 :integer(2)
