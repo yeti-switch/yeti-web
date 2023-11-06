@@ -39,19 +39,15 @@ RSpec.describe 'Copy Account', type: :feature, js: true do
       termination_capacity: old_account.termination_capacity,
       total_capacity: old_account.total_capacity,
       timezone: old_account.timezone,
-      vendor_invoice_period_id: old_account.vendor_invoice_period_id,
-      next_vendor_invoice_at: old_account.next_vendor_invoice_at,
-      next_vendor_invoice_type_id: old_account.next_vendor_invoice_type_id,
-      customer_invoice_period_id: old_account.customer_invoice_period_id,
-      next_customer_invoice_at: old_account.next_customer_invoice_at,
-      next_customer_invoice_type_id: old_account.next_customer_invoice_type_id,
-      customer_invoice_ref_template: old_account.customer_invoice_ref_template,
-      vendor_invoice_ref_template: old_account.vendor_invoice_ref_template,
+      invoice_period_id: old_account.invoice_period_id,
+      # next_invoice_at: old_account.next_invoice_at,
+      next_invoice_type_id: old_account.next_invoice_type_id,
+      invoice_ref_template: old_account.invoice_ref_template,
       send_invoices_to: old_account.send_invoices_to,
       vat: old_account.vat,
-      customer_invoice_template_id: old_account.customer_invoice_template_id,
-      vendor_invoice_template_id: old_account.vendor_invoice_template_id
+      invoice_template_id: old_account.invoice_template_id
     )
+    expect(account.next_invoice_at).to be_within(1.second).of(old_account.next_invoice_at)
     expect(account.balance_notification_setting).to have_attributes(
       state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
       low_threshold: nil,

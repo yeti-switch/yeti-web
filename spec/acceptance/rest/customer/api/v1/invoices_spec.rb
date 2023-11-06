@@ -18,7 +18,7 @@ RSpec.resource 'Invoices', document: :customer_v1 do
     jsonapi_filters Api::Rest::Customer::V1::InvoiceResource._allowed_filters
 
     before do
-      create_list(:invoice, 2, :customer, :manual, :approved, account: account)
+      create_list(:invoice, 2, :manual, :approved, account: account)
     end
 
     example_request 'get listing' do
@@ -28,7 +28,7 @@ RSpec.resource 'Invoices', document: :customer_v1 do
 
   get '/api/rest/customer/v1/invoices/:id' do
     let(:id) do
-      create(:invoice, :customer, :manual, :approved, account: account).reload.uuid
+      create(:invoice, :manual, :approved, account: account).reload.uuid
     end
 
     example_request 'get specific entry' do

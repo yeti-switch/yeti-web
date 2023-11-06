@@ -4,32 +4,27 @@
 #
 # Table name: billing.accounts
 #
-#  id                            :integer(4)       not null, primary key
-#  balance                       :decimal(, )      not null
-#  customer_invoice_ref_template :string           default("$id"), not null
-#  destination_rate_limit        :decimal(, )
-#  max_balance                   :decimal(, )      not null
-#  max_call_duration             :integer(4)
-#  min_balance                   :decimal(, )      not null
-#  name                          :string           not null
-#  next_customer_invoice_at      :timestamptz
-#  next_vendor_invoice_at        :timestamptz
-#  origination_capacity          :integer(2)
-#  send_invoices_to              :integer(4)       is an Array
-#  termination_capacity          :integer(2)
-#  total_capacity                :integer(2)
-#  uuid                          :uuid             not null
-#  vat                           :decimal(, )      default(0.0), not null
-#  vendor_invoice_ref_template   :string           default("$id"), not null
-#  contractor_id                 :integer(4)       not null
-#  customer_invoice_period_id    :integer(2)
-#  customer_invoice_template_id  :integer(4)
-#  external_id                   :bigint(8)
-#  next_customer_invoice_type_id :integer(2)
-#  next_vendor_invoice_type_id   :integer(2)
-#  timezone_id                   :integer(4)       default(1), not null
-#  vendor_invoice_period_id      :integer(2)
-#  vendor_invoice_template_id    :integer(4)
+#  id                     :integer(4)       not null, primary key
+#  balance                :decimal(, )      not null
+#  destination_rate_limit :decimal(, )
+#  invoice_ref_template   :string           default("$id"), not null
+#  max_balance            :decimal(, )      not null
+#  max_call_duration      :integer(4)
+#  min_balance            :decimal(, )      not null
+#  name                   :string           not null
+#  next_invoice_at        :timestamptz
+#  origination_capacity   :integer(2)
+#  send_invoices_to       :integer(4)       is an Array
+#  termination_capacity   :integer(2)
+#  total_capacity         :integer(2)
+#  uuid                   :uuid             not null
+#  vat                    :decimal(, )      default(0.0), not null
+#  contractor_id          :integer(4)       not null
+#  external_id            :bigint(8)
+#  invoice_period_id      :integer(2)
+#  invoice_template_id    :integer(4)
+#  next_invoice_type_id   :integer(2)
+#  timezone_id            :integer(4)       default(1), not null
 #
 # Indexes
 #
@@ -40,10 +35,8 @@
 #
 # Foreign Keys
 #
-#  accounts_contractor_id_fkey             (contractor_id => contractors.id)
-#  accounts_invoice_period_id_fkey         (customer_invoice_period_id => invoice_periods.id)
-#  accounts_timezone_id_fkey               (timezone_id => timezones.id)
-#  accounts_vendor_invoice_period_id_fkey  (vendor_invoice_period_id => invoice_periods.id)
+#  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_timezone_id_fkey    (timezone_id => timezones.id)
 #
 
 RSpec.describe Account, type: :model do
@@ -79,16 +72,12 @@ RSpec.describe Account, type: :model do
         max_balance: 0.0,
         origination_capacity: nil,
         termination_capacity: nil,
-        customer_invoice_period_id: nil,
-        customer_invoice_template_id: nil,
-        vendor_invoice_template_id: nil,
-        next_customer_invoice_at: nil,
-        next_vendor_invoice_at: nil,
-        vendor_invoice_period_id: nil,
+        invoice_period_id: nil,
+        invoice_template_id: nil,
+        next_invoice_at: nil,
         send_invoices_to: nil,
         timezone_id: utc_timezone.id,
-        next_customer_invoice_type_id: nil,
-        next_vendor_invoice_type_id: nil,
+        next_invoice_type_id: nil,
         external_id: nil,
         vat: 0.0,
         total_capacity: nil,
@@ -127,12 +116,9 @@ RSpec.describe Account, type: :model do
 
     context 'with only required params' do
       let(:expected_account_attrs) do
-        super().merge next_customer_invoice_at: nil,
-                      next_customer_invoice_type_id: nil,
-                      customer_invoice_period_id: nil,
-                      next_vendor_invoice_at: nil,
-                      next_vendor_invoice_type_id: nil,
-                      vendor_invoice_period_id: nil
+        super().merge next_invoice_at: nil,
+                      next_invoice_type_id: nil,
+                      invoice_period_id: nil
       end
 
       include_examples :creates_account

@@ -1,27 +1,17 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: billing.invoice_types
-#
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#
-# Indexes
-#
-#  invoice_types_name_key  (name) UNIQUE
-#
-
-class Billing::InvoiceType < Cdr::Base
-  self.table_name = 'billing.invoice_types'
-
+class Billing::InvoiceType < ApplicationEnum
   MANUAL = 1
   AUTO_FULL = 2
   AUTO_PARTIAL = 3
 
-  NAMES = {
-    MANUAL => 'Manual',
-    AUTO_FULL => 'Auto Full',
-    AUTO_PARTIAL => 'Auto Partial'
-  }.freeze
+  setup_collection do
+    [
+      { id: MANUAL, name: 'Manual' },
+      { id: AUTO_FULL, name: 'Auto Full' },
+      { id: AUTO_PARTIAL, name: 'Auto Partial' }
+    ]
+  end
+
+  attribute :name
 end

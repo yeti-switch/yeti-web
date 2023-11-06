@@ -14,7 +14,7 @@ ActiveAdmin.register Account do
   decorate_with AccountDecorator
 
   acts_as_export :id,
-                 [:contractor_name, proc { |row| row.contractor.try(:name) }],
+                 [:contractor_name, proc { |row| row.contractor.name }],
                  :name,
                  :balance,
                  :min_balance,
@@ -25,8 +25,7 @@ ActiveAdmin.register Account do
                  :origination_capacity,
                  :termination_capacity,
                  :total_capacity,
-                 :customer_invoice_period,
-                 :vendor_invoice_period
+                 [:invoice_period, proc { |row| row.invoice_period&.name }]
 
   acts_as_import resource_class: Importing::Account
 
@@ -48,12 +47,9 @@ ActiveAdmin.register Account do
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
       super.preload(
-        :customer_invoice_period,
-        :vendor_invoice_period,
         :contractor,
         :timezone,
-        :vendor_invoice_template,
-        :customer_invoice_template
+        :invoice_template
       )
     end
   end
@@ -107,11 +103,9 @@ ActiveAdmin.register Account do
     column :termination_capacity
     column :total_capacity
 
-    column :vendor_invoice_period
-    column :customer_invoice_period
+    column :invoice_period
 
-    column :vendor_invoice_template
-    column :customer_invoice_template
+    column :invoice_template
     column :timezone
     column :send_invoices_to, &:send_invoices_to_emails
     column :external_id
@@ -161,27 +155,17 @@ ActiveAdmin.register Account do
           row :termination_capacity
           row :total_capacity
 
-          row :vendor_invoice_template
-          row :customer_invoice_template
+          row :invoice_template
           row :send_invoices_to, &:send_invoices_to_emails
-          row :vendor_invoice_period do
-            if s.vendor_invoice_period
-              text_node s.vendor_invoice_period.name
+          row :invoice_period do
+            if s.invoice_period
+              text_node s.invoice_period.name
               text_node ' - '
-              text_node s.next_vendor_invoice_at.to_date if s.next_vendor_invoice_at.present?
-            end
-          end
-
-          row :customer_invoice_period do
-            if s.customer_invoice_period
-              text_node s.customer_invoice_period.name
-              text_node ' - '
-              text_node s.next_customer_invoice_at.to_date if s.next_customer_invoice_at.present?
+              text_node s.next_invoice_at.to_date if s.next_invoice_at.present?
             end
           end
           row :timezone
-          row :customer_invoice_ref_template
-          row :vendor_invoice_ref_template
+          row :invoice_ref_template
         end
 
         panel 'Balance Notification Settings' do
@@ -233,11 +217,9 @@ ActiveAdmin.register Account do
                 :min_balance, :max_balance, :vat,
                 :balance_low_threshold, :balance_high_threshold,
                 :name, :origination_capacity, :termination_capacity, :total_capacity,
-                :destination_rate_limit, :max_call_duration,
-                :customer_invoice_period_id, :vendor_invoice_period_id,
+                :destination_rate_limit, :max_call_duration, :invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
-                :vendor_invoice_template_id, :customer_invoice_template_id, :timezone_id,
-                :customer_invoice_ref_template, :vendor_invoice_ref_template,
+                :invoice_template_id, :timezone_id, :invoice_ref_template,
                 send_invoices_to: [], send_balance_notifications_to: []
 
   form do |f|
@@ -261,16 +243,13 @@ ActiveAdmin.register Account do
     end
 
     f.inputs 'Invoice Settings' do
-      f.input :vendor_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
-      f.input :customer_invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
+      f.input :invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
 
-      f.input :vendor_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
-      f.input :customer_invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
+      f.input :invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
 
       f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
 
-      f.input :customer_invoice_ref_template
-      f.input :vendor_invoice_ref_template
+      f.input :invoice_ref_template
     end
 
     f.inputs 'Balance Notification Settings' do

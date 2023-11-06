@@ -11,10 +11,8 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   attribute :termination_capacity
   attribute :total_capacity
   attribute :max_call_duration
-  attribute :vendor_invoice_period_id, type: :foreign_key, class_name: 'Billing::InvoicePeriod'
-  attribute :customer_invoice_period_id, type: :foreign_key, class_name: 'Billing::InvoicePeriod'
-  attribute :vendor_invoice_template_id, type: :foreign_key, class_name: 'Billing::InvoiceTemplate'
-  attribute :customer_invoice_template_id, type: :foreign_key, class_name: 'Billing::InvoiceTemplate'
+  attribute :invoice_period_id, type: :integer_collection, collection: Billing::InvoicePeriod.pluck(:name, :id)
+  attribute :invoice_template_id, type: :foreign_key, class_name: 'Billing::InvoiceTemplate'
   attribute :timezone_id, type: :foreign_key, class_name: 'System::Timezone'
 
   validates :min_balance, required_with: :max_balance, if: -> { min_balance.nil? || max_balance.nil? }

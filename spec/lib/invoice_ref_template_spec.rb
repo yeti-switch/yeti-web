@@ -10,7 +10,7 @@ RSpec.describe InvoiceRefTemplate, '.call' do
   let(:account_attrs) do
     { contractor: contractor }
   end
-  let(:invoice) { FactoryBot.create(:invoice, :vendor, :manual, invoice_attrs) }
+  let(:invoice) { FactoryBot.create(:invoice, :manual, invoice_attrs) }
   let(:invoice_attrs) do
     { account: account }
   end

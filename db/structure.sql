@@ -2661,24 +2661,19 @@ CREATE TABLE billing.accounts (
     name character varying NOT NULL,
     origination_capacity smallint,
     termination_capacity smallint,
-    customer_invoice_period_id smallint,
-    customer_invoice_template_id integer,
-    vendor_invoice_template_id integer,
-    next_customer_invoice_at timestamp with time zone,
-    next_vendor_invoice_at timestamp with time zone,
-    vendor_invoice_period_id smallint,
+    invoice_period_id smallint,
+    invoice_template_id integer,
+    next_invoice_at timestamp with time zone,
     send_invoices_to integer[],
     timezone_id integer DEFAULT 1 NOT NULL,
-    next_customer_invoice_type_id smallint,
-    next_vendor_invoice_type_id smallint,
+    next_invoice_type_id smallint,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     external_id bigint,
     vat numeric DEFAULT 0 NOT NULL,
     total_capacity smallint,
     destination_rate_limit numeric,
     max_call_duration integer,
-    customer_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
-    vendor_invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
+    invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
     CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
     CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
     CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
@@ -22312,35 +22307,6 @@ CREATE TABLE billing.cdr_batches (
 
 
 --
--- Name: invoice_periods; Type: TABLE; Schema: billing; Owner: -
---
-
-CREATE TABLE billing.invoice_periods (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
--- Name: invoice_periods_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
---
-
-CREATE SEQUENCE billing.invoice_periods_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: invoice_periods_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
---
-
-ALTER SEQUENCE billing.invoice_periods_id_seq OWNED BY billing.invoice_periods.id;
-
-
---
 -- Name: invoice_templates; Type: TABLE; Schema: billing; Owner: -
 --
 
@@ -27086,13 +27052,6 @@ ALTER TABLE ONLY billing.accounts ALTER COLUMN id SET DEFAULT nextval('billing.a
 
 
 --
--- Name: invoice_periods id; Type: DEFAULT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_periods ALTER COLUMN id SET DEFAULT nextval('billing.invoice_periods_id_seq'::regclass);
-
-
---
 -- Name: invoice_templates id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -27936,22 +27895,6 @@ ALTER TABLE ONLY billing.accounts
 
 ALTER TABLE ONLY billing.cdr_batches
     ADD CONSTRAINT cdr_batches_pkey PRIMARY KEY (id);
-
-
---
--- Name: invoice_periods invoice_periods_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_periods
-    ADD CONSTRAINT invoice_periods_name_key UNIQUE (name);
-
-
---
--- Name: invoice_periods invoice_periods_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_periods
-    ADD CONSTRAINT invoice_periods_pkey PRIMARY KEY (id);
 
 
 --
@@ -30385,27 +30328,11 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts accounts_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.accounts
-    ADD CONSTRAINT accounts_invoice_period_id_fkey FOREIGN KEY (customer_invoice_period_id) REFERENCES billing.invoice_periods(id);
-
-
---
 -- Name: accounts accounts_timezone_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
 ALTER TABLE ONLY billing.accounts
     ADD CONSTRAINT accounts_timezone_id_fkey FOREIGN KEY (timezone_id) REFERENCES sys.timezones(id);
-
-
---
--- Name: accounts accounts_vendor_invoice_period_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.accounts
-    ADD CONSTRAINT accounts_vendor_invoice_period_id_fkey FOREIGN KEY (vendor_invoice_period_id) REFERENCES billing.invoice_periods(id);
 
 
 --
@@ -31492,7 +31419,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31646,6 +31574,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230929114329'),
 ('20231005114627'),
 ('20231007204855'),
+('20231106095901'),
+('20231106100113'),
 ('20231107100745');
 
 

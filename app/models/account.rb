@@ -4,32 +4,27 @@
 #
 # Table name: billing.accounts
 #
-#  id                            :integer(4)       not null, primary key
-#  balance                       :decimal(, )      not null
-#  customer_invoice_ref_template :string           default("$id"), not null
-#  destination_rate_limit        :decimal(, )
-#  max_balance                   :decimal(, )      not null
-#  max_call_duration             :integer(4)
-#  min_balance                   :decimal(, )      not null
-#  name                          :string           not null
-#  next_customer_invoice_at      :timestamptz
-#  next_vendor_invoice_at        :timestamptz
-#  origination_capacity          :integer(2)
-#  send_invoices_to              :integer(4)       is an Array
-#  termination_capacity          :integer(2)
-#  total_capacity                :integer(2)
-#  uuid                          :uuid             not null
-#  vat                           :decimal(, )      default(0.0), not null
-#  vendor_invoice_ref_template   :string           default("$id"), not null
-#  contractor_id                 :integer(4)       not null
-#  customer_invoice_period_id    :integer(2)
-#  customer_invoice_template_id  :integer(4)
-#  external_id                   :bigint(8)
-#  next_customer_invoice_type_id :integer(2)
-#  next_vendor_invoice_type_id   :integer(2)
-#  timezone_id                   :integer(4)       default(1), not null
-#  vendor_invoice_period_id      :integer(2)
-#  vendor_invoice_template_id    :integer(4)
+#  id                     :integer(4)       not null, primary key
+#  balance                :decimal(, )      not null
+#  destination_rate_limit :decimal(, )
+#  invoice_ref_template   :string           default("$id"), not null
+#  max_balance            :decimal(, )      not null
+#  max_call_duration      :integer(4)
+#  min_balance            :decimal(, )      not null
+#  name                   :string           not null
+#  next_invoice_at        :timestamptz
+#  origination_capacity   :integer(2)
+#  send_invoices_to       :integer(4)       is an Array
+#  termination_capacity   :integer(2)
+#  total_capacity         :integer(2)
+#  uuid                   :uuid             not null
+#  vat                    :decimal(, )      default(0.0), not null
+#  contractor_id          :integer(4)       not null
+#  external_id            :bigint(8)
+#  invoice_period_id      :integer(2)
+#  invoice_template_id    :integer(4)
+#  next_invoice_type_id   :integer(2)
+#  timezone_id            :integer(4)       default(1), not null
 #
 # Indexes
 #
@@ -40,24 +35,42 @@
 #
 # Foreign Keys
 #
-#  accounts_contractor_id_fkey             (contractor_id => contractors.id)
-#  accounts_invoice_period_id_fkey         (customer_invoice_period_id => invoice_periods.id)
-#  accounts_timezone_id_fkey               (timezone_id => timezones.id)
-#  accounts_vendor_invoice_period_id_fkey  (vendor_invoice_period_id => invoice_periods.id)
+#  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_timezone_id_fkey    (timezone_id => timezones.id)
 #
 
 class Account < ApplicationRecord
   self.table_name = 'billing.accounts'
+
+  include WithPaperTrail
+
+  Totals = Struct.new(:total_balance)
+
+  class << self
+    def totals
+      row = extending(ActsAsTotalsRelation).totals_row_by('sum(balance) as total_balance')
+      Totals.new(*row)
+    end
+
+    def ransackable_scopes(_auth_object = nil)
+      %i[
+        search_for ordered_by
+      ]
+    end
+  end
+
+  composed_of :invoice_period,
+              class_name: 'Billing::InvoicePeriod',
+              mapping: { invoice_period_id: :id },
+              constructor: ->(invoice_period_id) { Billing::InvoicePeriod.find(invoice_period_id) }
+
+  composed_of :next_invoice_type,
+              class_name: 'Billing::InvoiceType',
+              mapping: { next_invoice_type_id: :id },
+              constructor: ->(next_invoice_type_id) { Billing::InvoiceType.find(next_invoice_type_id) }
+
   belongs_to :contractor
-
-  # belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'customer_invoice_period_id'
-  # belongs_to :vendor_invoice_period, class_name: 'Billing::InvoicePeriod', foreign_key: 'vendor_invoice_period_id'
-
-  belongs_to :customer_invoice_period, class_name: 'Billing::InvoicePeriod', optional: true
-  belongs_to :vendor_invoice_period, class_name: 'Billing::InvoicePeriod', optional: true
-
-  belongs_to :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'vendor_invoice_template_id', optional: true
-  belongs_to :customer_invoice_template, class_name: 'Billing::InvoiceTemplate', foreign_key: 'customer_invoice_template_id', optional: true
+  belongs_to :invoice_template, class_name: 'Billing::InvoiceTemplate', optional: true
   belongs_to :timezone, class_name: 'System::Timezone', foreign_key: :timezone_id
 
   has_many :payments, dependent: :destroy
@@ -80,7 +93,38 @@ class Account < ApplicationRecord
           inverse_of: :account,
           dependent: :destroy
 
-  include WithPaperTrail
+  validates :min_balance, numericality: true, if: -> { min_balance.present? }
+  validates :balance, numericality: true
+  validates :uuid, :name, uniqueness: true
+  validates :name, :timezone, :vat, :max_balance, :min_balance, presence: true
+  validates :max_balance, numericality: { greater_than_or_equal_to: :min_balance }, if: -> { min_balance.present? }
+
+  validates :termination_capacity, :origination_capacity, :total_capacity,
+            numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
+
+  validates :external_id, uniqueness: { allow_blank: true }
+
+  validates :vat, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false } # this is percents
+  validates :destination_rate_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validates :max_call_duration, numericality: { greater_than: 0, allow_nil: true }
+  validates :invoice_ref_template, presence: true
+  validates :invoice_period_id, inclusion: { in: Billing::InvoicePeriod.ids }, allow_nil: true
+  validates :next_invoice_type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
+
+  after_initialize do
+    if new_record?
+      self.balance ||= 0
+      self.max_balance ||= 0
+      self.min_balance ||= 0
+    end
+  end
+
+  after_create do
+    create_balance_notification_setting! if balance_notification_setting.nil?
+  end
+
+  before_destroy :check_associated_records
+  before_destroy :remove_self_from_related_api_access!
 
   default_scope { includes(:contractor) }
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }
@@ -89,19 +133,11 @@ class Account < ApplicationRecord
   scope :search_for, ->(term) { where("accounts.name || ' | ' || accounts.id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
-  scope :ready_for_customer_invoice, lambda {
-    # next_customer_invoice_at + max_call_duration => time
-    where('customer_invoice_period_id IS NOT NULL')
+  scope :ready_for_invoice, lambda {
+    # next_invoice_at + max_call_duration => time
+    where('invoice_period_id IS NOT NULL')
       .where(
-        '(next_customer_invoice_at + MAKE_INTERVAL(secs => COALESCE(max_call_duration, ?))) <= ?',
-        GuiConfig.max_call_duration, Time.now
-      )
-  }
-
-  scope :ready_for_vendor_invoice, lambda {
-    where('vendor_invoice_period_id IS NOT NULL')
-      .where(
-        '(next_vendor_invoice_at + MAKE_INTERVAL(secs => COALESCE(max_call_duration, ?))) <= ?',
+        '(next_invoice_at + MAKE_INTERVAL(secs => COALESCE(max_call_duration, ?))) <= ?',
         GuiConfig.max_call_duration, Time.now
       )
   }
@@ -121,74 +157,19 @@ class Account < ApplicationRecord
     ")
   }
 
-  validates :min_balance, numericality: true, if: -> { min_balance.present? }
-  validates :balance, numericality: true
-  validates :uuid, :name, uniqueness: true
-  validates :name, :timezone, :vat, :max_balance, :min_balance, presence: true
-  validates :max_balance, numericality: { greater_than_or_equal_to: :min_balance }, if: -> { min_balance.present? }
-
-  validates :termination_capacity, :origination_capacity, :total_capacity,
-                            numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
-
-  validates :external_id, uniqueness: { allow_blank: true }
-
-  validates :vat, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false } # this is percents
-  validates :destination_rate_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
-  validates :max_call_duration, numericality: { greater_than: 0, allow_nil: true }
-  validates :customer_invoice_ref_template, :vendor_invoice_ref_template, presence: true
-
-  after_initialize do
-    if new_record?
-      self.balance ||= 0
-      self.max_balance ||= 0
-      self.min_balance ||= 0
-    end
-  end
-
-  after_create do
-    create_balance_notification_setting! if balance_notification_setting.nil?
-  end
-
-  before_destroy :check_associated_records
+  scope :insufficient_balance, -> { where('balance<=min_balance OR balance>=max_balance') }
 
   def send_invoices_to_emails
     contacts_for_invoices.map(&:email).join(',')
-  end
-
-  Totals = Struct.new(:total_balance)
-
-  def self.totals
-    row = extending(ActsAsTotalsRelation).totals_row_by('sum(balance) as total_balance')
-    Totals.new(*row)
   end
 
   def contacts_for_invoices
     @contacts ||= Billing::Contact.where(id: send_invoices_to)
   end
 
-  before_destroy :remove_self_from_related_api_access!
-
-  def last_customer_invoice_date
-    date = invoices.for_customer.order('end_date desc').limit(1).take&.end_date
-    return date unless date.nil?
-
-    customer_invoice_period.initial_date(next_customer_invoice_at.to_date).to_time.utc
-  end
-
-  def last_vendor_invoice_date
-    date = invoices.for_vendor.order('end_date desc').limit(1).take&.end_date
-    return date unless date.nil?
-
-    vendor_invoice_period.initial_date(next_vendor_invoice_at.to_date).to_time.utc
-  end
-
-  # after_update :, if: proc {|obj| obj.vendor_invoice_period_id_changed? }
-
   def display_name
     "#{name} | #{id}"
   end
-
-  scope :insufficient_balance, -> { where('balance<=min_balance OR balance>=max_balance') }
 
   def min_balance_reached?
     balance <= min_balance
@@ -206,20 +187,14 @@ class Account < ApplicationRecord
     balance * 1.1 >= max_balance
   end
 
+  private
+
   def remove_self_from_related_api_access!
     api_access.each do |record|
       record.account_ids.delete(id)
       record.save!
     end
   end
-
-  def self.ransackable_scopes(_auth_object = nil)
-    %i[
-      search_for ordered_by
-    ]
-  end
-
-  private
 
   def check_associated_records
     project_ids = rate_management_projects.pluck(:id)

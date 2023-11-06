@@ -25,10 +25,8 @@ RSpec.describe BatchUpdateForm::Account, :js do
       termination_capacity: pg_max_smallint.to_s,
       total_capacity: pg_max_smallint.to_s,
       max_call_duration: '1',
-      vendor_invoice_period_id: Billing::InvoicePeriod.first!.id.to_s,
-      customer_invoice_period_id: Billing::InvoicePeriod.last!.id.to_s,
-      vendor_invoice_template_id: invoice_template.id.to_s,
-      customer_invoice_template_id: invoice_template.id.to_s,
+      invoice_period_id: Billing::InvoicePeriod::DAILY.to_s,
+      invoice_template_id: invoice_template.id.to_s,
       timezone_id: System::Timezone.last!.id.to_s
     }
   end
@@ -79,24 +77,14 @@ RSpec.describe BatchUpdateForm::Account, :js do
       fill_in :max_call_duration, with: assign_params[:max_call_duration]
     end
 
-    if assign_params.key? :vendor_invoice_period_id
-      check :Vendor_invoice_period_id
-      select_by_value assign_params[:vendor_invoice_period_id], from: :vendor_invoice_period_id
+    if assign_params.key? :invoice_period_id
+      check :Invoice_period_id
+      select_by_value assign_params[:invoice_period_id], from: :invoice_period_id
     end
 
-    if assign_params.key? :customer_invoice_period_id
-      check :Customer_invoice_period_id
-      select_by_value assign_params[:customer_invoice_period_id], from: :customer_invoice_period_id
-    end
-
-    if assign_params.key? :vendor_invoice_template_id
-      check :Vendor_invoice_template_id
-      select_by_value assign_params[:vendor_invoice_template_id], from: :vendor_invoice_template_id
-    end
-
-    if assign_params.key? :customer_invoice_template_id
-      check :Customer_invoice_template_id
-      select_by_value assign_params[:customer_invoice_template_id], from: :customer_invoice_template_id
+    if assign_params.key? :invoice_template_id
+      check :Invoice_template_id
+      select_by_value assign_params[:invoice_template_id], from: :invoice_template_id
     end
 
     if assign_params.key? :timezone_id

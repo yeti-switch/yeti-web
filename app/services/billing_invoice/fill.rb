@@ -9,7 +9,8 @@ module BillingInvoice
         invoice.reload
         validate!
 
-        invoice.vendor_invoice ? generate_vendor_data : generate_customer_data
+        generate_originated_data
+        generate_terminated_data
         update_totals
         create_invoice_docs
       end
@@ -21,9 +22,9 @@ module BillingInvoice
       raise Error, 'invoice already filled' if invoice.state_id != Billing::InvoiceState::NEW
     end
 
-    def generate_vendor_data
+    def generate_originated_data
       SqlCaller::Cdr.execute(
-          "INSERT INTO billing.invoice_destinations(
+          "INSERT INTO billing.invoice_originated_destinations(
             dst_prefix, country_id, network_id, rate,
             calls_count,
             successful_calls_count,
@@ -32,9 +33,7 @@ module BillingInvoice
             amount,
             invoice_id,
             first_call_at,
-            first_successful_call_at,
-            last_call_at,
-            last_successful_call_at
+            last_call_at
           ) SELECT
             dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
             COUNT(id),  -- calls count
@@ -44,9 +43,7 @@ module BillingInvoice
             SUM(vendor_price), -- amount
             ?, -- invoice_id
             MIN(time_start), -- first_call_at
-            MIN(CASE success WHEN true THEN time_start ELSE NULL END), -- first_successful_call_at
-            MAX(time_start), -- last_call_at
-            MAX(CASE success WHEN true THEN time_start ELSE NULL END) -- last_successful_call_at
+            MAX(time_start) -- last_call_at
           FROM (
             SELECT *
             FROM cdr.cdr
@@ -63,7 +60,7 @@ module BillingInvoice
         )
 
       SqlCaller::Cdr.execute(
-          "INSERT INTO billing.invoice_networks(
+          "INSERT INTO billing.invoice_originated_networks(
             country_id, network_id, rate,
             calls_count,
             successful_calls_count,
@@ -72,9 +69,7 @@ module BillingInvoice
             amount,
             invoice_id,
             first_call_at,
-            first_successful_call_at,
-            last_call_at,
-            last_successful_call_at
+            last_call_at
           ) SELECT
             country_id, network_id, rate,
             SUM(calls_count),
@@ -84,10 +79,8 @@ module BillingInvoice
             SUM(amount),
             ?, -- invoice_id
             MIN(first_call_at),
-            MIN(first_successful_call_at),
-            MAX(last_call_at),
-            MAX(last_successful_call_at)
-          FROM billing.invoice_destinations
+            MAX(last_call_at)
+          FROM billing.invoice_originated_destinations
           WHERE invoice_id=?
           GROUP BY country_id, network_id, rate",
           invoice.id,
@@ -95,9 +88,9 @@ module BillingInvoice
         )
     end
 
-    def generate_customer_data
+    def generate_terminated_data
       SqlCaller::Cdr.execute(
-          "INSERT INTO billing.invoice_destinations(
+          "INSERT INTO billing.invoice_terminated_destinations(
             dst_prefix, country_id, network_id, rate,
             calls_count,
             successful_calls_count,
@@ -106,9 +99,7 @@ module BillingInvoice
             amount,
             invoice_id,
             first_call_at,
-            first_successful_call_at,
-            last_call_at,
-            last_successful_call_at
+            last_call_at
           ) SELECT
             destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
             COUNT(NULLIF(is_last_cdr,false)), -- calls_count
@@ -118,9 +109,7 @@ module BillingInvoice
             SUM(customer_price), -- amount
             ?, -- invoice_id
             MIN(time_start), -- first_call_at
-            MIN(CASE success WHEN true THEN time_start ELSE NULL END), -- first_successful_call_at
-            MAX(time_start), -- last_call_at
-            MAX(CASE success WHEN true THEN time_start ELSE NULL END) -- last_successful_call_at
+            MAX(time_start) -- last_call_at
           FROM (
             SELECT *
             FROM cdr.cdr
@@ -137,7 +126,7 @@ module BillingInvoice
         )
 
       SqlCaller::Cdr.execute(
-          "INSERT INTO billing.invoice_networks(
+          "INSERT INTO billing.invoice_terminated_networks(
             country_id, network_id, rate,
             calls_count,
             successful_calls_count,
@@ -146,9 +135,7 @@ module BillingInvoice
             amount,
             invoice_id,
             first_call_at,
-            first_successful_call_at,
-            last_call_at,
-            last_successful_call_at
+            last_call_at
           ) SELECT
             country_id, network_id, rate,
             SUM(calls_count),
@@ -158,10 +145,8 @@ module BillingInvoice
             SUM(amount),
             ?, -- invoice_id
             MIN(first_call_at),
-            MIN(first_successful_call_at),
-            MAX(last_call_at),
-            MAX(last_successful_call_at)
-          FROM billing.invoice_destinations
+            MAX(last_call_at)
+          FROM billing.invoice_terminated_destinations
           WHERE invoice_id=?
           GROUP BY country_id, network_id, rate",
           invoice.id,
@@ -170,19 +155,27 @@ module BillingInvoice
     end
 
     def update_totals
-      data = invoice.destinations.summary
+      originated_data = invoice.originated_destinations.summary
+      terminated_data = invoice.terminated_destinations.summary
 
       invoice.update!(
           state_id: Billing::InvoiceState::PENDING,
-          amount: data.amount,
-          calls_count: data.calls_count,
-          successful_calls_count: data.successful_calls_count,
-          calls_duration: data.calls_duration,
-          billing_duration: data.billing_duration,
-          first_call_at: data.first_call_at,
-          first_successful_call_at: data.first_successful_call_at,
-          last_call_at: data.last_call_at,
-          last_successful_call_at: data.last_successful_call_at
+
+          originated_amount: originated_data.amount,
+          originated_calls_count: originated_data.calls_count,
+          originated_successful_calls_count: originated_data.successful_calls_count,
+          originated_calls_duration: originated_data.calls_duration,
+          originated_billing_duration: originated_data.billing_duration,
+          first_originated_call_at: originated_data.first_call_at,
+          last_originated_call_at: originated_data.last_call_at,
+
+          terminated_amount: terminated_data.amount,
+          terminated_calls_count: terminated_data.calls_count,
+          terminated_successful_calls_count: terminated_data.successful_calls_count,
+          terminated_calls_duration: terminated_data.calls_duration,
+          terminated_billing_duration: terminated_data.billing_duration,
+          first_terminated_call_at: terminated_data.first_call_at,
+          last_terminated_call_at: terminated_data.last_call_at
         )
     end
 

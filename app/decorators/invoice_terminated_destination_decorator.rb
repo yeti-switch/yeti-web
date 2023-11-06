@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class InvoiceNetworkDecorator < BillingDecorator
+class InvoiceTerminatedDestinationDecorator < BillingDecorator
   delegate_all
-  decorates Billing::InvoiceNetwork
+  decorates Billing::InvoiceTerminatedDestination
 
   def decorated_amount
     money_format :amount

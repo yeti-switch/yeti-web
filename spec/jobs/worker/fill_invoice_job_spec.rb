@@ -9,7 +9,7 @@ RSpec.describe Worker::FillInvoiceJob, '#perform_now' do
 
   let!(:contractor) { FactoryBot.create(:vendor) }
   let!(:account) { FactoryBot.create(:account, contractor: contractor) }
-  let!(:invoice) { FactoryBot.create(:invoice, :vendor, :manual, account: account) }
+  let!(:invoice) { FactoryBot.create(:invoice, :manual, account: account) }
 
   it 'calls BillingInvoice::Fill' do
     expect(BillingInvoice::Fill).to receive(:call).with(invoice: invoice).once.and_call_original

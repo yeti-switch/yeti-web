@@ -30,8 +30,7 @@ RSpec.describe 'Export Accounts', type: :feature do
         ['Origination capacity',    item.origination_capacity.to_s],
         ['Termination capacity',    item.termination_capacity.to_s],
         ['Total capacity',          item.total_capacity.to_s],
-        ['Customer invoice period', item.customer_invoice_template.to_s],
-        ['Vendor invoice period',   item.vendor_invoice_period.to_s]
+        ['Invoice period',          item.invoice_period&.name.to_s]
       ]
     )
   end

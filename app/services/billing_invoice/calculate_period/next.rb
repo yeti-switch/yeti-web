@@ -6,8 +6,6 @@ module BillingInvoice
     class Next < ApplicationService
       # @!method account [Account]
       parameter :account, required: true
-      # @!method is_vendor [Boolean]
-      parameter :is_vendor, required: true
       # @!method period_end [Time]
       parameter :period_end, required: true
 
@@ -44,8 +42,7 @@ module BillingInvoice
       def validate!
         raise Error, 'account is required' if account.nil?
         raise Error, "failed to find time zone #{account.timezone.name}" if time_zone.nil?
-        raise Error, 'account vendor invoice period is required' if is_vendor && account_invoice_period_id.nil?
-        raise Error, 'account customer invoice period is required' if !is_vendor && account_invoice_period_id.nil?
+        raise Error, 'account invoice period is required' if account_invoice_period_id.nil?
       end
 
       # @!method time_zone [ActiveSupport::TimeZone]
@@ -58,9 +55,7 @@ module BillingInvoice
         BillingInvoice::CalculatePeriod.period_class(account_invoice_period_id)
       }
 
-      def account_invoice_period_id
-        is_vendor ? account.vendor_invoice_period_id : account.customer_invoice_period_id
-      end
+      delegate :invoice_period_id, to: :account, prefix: true
     end
   end
 end

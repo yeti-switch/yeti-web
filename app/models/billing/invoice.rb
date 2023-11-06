@@ -2,53 +2,100 @@
 
 # == Schema Information
 #
-# Table name: invoices
+# Table name: billing.invoices
 #
-#  id                       :integer(4)       not null, primary key
-#  amount                   :decimal(, )      not null
-#  billing_duration         :bigint(8)        not null
-#  calls_count              :bigint(8)        not null
-#  calls_duration           :bigint(8)        not null
-#  end_date                 :timestamptz      not null
-#  first_call_at            :timestamptz
-#  first_successful_call_at :timestamptz
-#  last_call_at             :timestamptz
-#  last_successful_call_at  :timestamptz
-#  reference                :string
-#  start_date               :timestamptz      not null
-#  successful_calls_count   :bigint(8)
-#  uuid                     :uuid             not null
-#  vendor_invoice           :boolean          default(FALSE), not null
-#  created_at               :timestamptz      not null
-#  account_id               :integer(4)       not null
-#  contractor_id            :integer(4)
-#  state_id                 :integer(2)       default(1), not null
-#  type_id                  :integer(2)       not null
+#  id                                :integer(4)       not null, primary key
+#  end_date                          :timestamptz      not null
+#  first_originated_call_at          :timestamptz
+#  first_terminated_call_at          :timestamptz
+#  last_originated_call_at           :timestamptz
+#  last_terminated_call_at           :timestamptz
+#  originated_amount                 :decimal(, )      default(0.0), not null
+#  originated_billing_duration       :bigint(8)        default(0), not null
+#  originated_calls_count            :bigint(8)        default(0), not null
+#  originated_calls_duration         :bigint(8)        default(0), not null
+#  originated_successful_calls_count :bigint(8)        default(0), not null
+#  reference                         :string
+#  start_date                        :timestamptz      not null
+#  terminated_amount                 :decimal(, )      default(0.0), not null
+#  terminated_billing_duration       :integer(4)       default(0), not null
+#  terminated_calls_count            :integer(4)       default(0), not null
+#  terminated_calls_duration         :integer(4)       default(0), not null
+#  terminated_successful_calls_count :integer(4)       default(0), not null
+#  uuid                              :uuid             not null
+#  created_at                        :timestamptz      not null
+#  account_id                        :integer(4)       not null
+#  contractor_id                     :integer(4)
+#  state_id                          :integer(2)       default(3), not null
+#  type_id                           :integer(2)       not null
 #
 # Indexes
 #
 #  index_billing.invoices_on_reference  (reference)
 #
-# Foreign Keys
-#
-#  invoices_state_id_fkey  (state_id => invoice_states.id)
-#  invoices_type_id_fkey   (type_id => invoice_types.id)
-#
 
 class Billing::Invoice < Cdr::Base
-  has_many :vendor_cdrs, -> { where vendor_invoice: true }, class_name: 'Cdr', foreign_key: 'vendor_invoice_id'
-  has_many :customer_cdrs, -> { where vendor_invoice: false }, class_name: 'Cdr', foreign_key: 'customer_invoice_id'
+  self.table_name = 'billing.invoices'
+  self.inheritance_column = :_type_disabled
+
+  include WithPaperTrail
+
+  Totals = Struct.new(
+    :total_originated_amount,
+    :total_originated_calls_count,
+    :total_originated_calls_duration,
+    :total_originated_billing_duration,
+    :total_terminated_amount,
+    :total_terminated_calls_count,
+    :total_terminated_calls_duration,
+    :total_terminated_billing_duration
+  )
+
+  class << self
+    def totals
+      row = extending(ActsAsTotalsRelation).totals_row_by(
+        'sum(originated_amount) as total_originated_amount',
+        'sum(originated_calls_count) as total_originated_calls_count',
+        'sum(originated_calls_duration) as total_originated_calls_duration',
+        'sum(originated_billing_duration) as total_originated_billing_duration',
+        'sum(terminated_amount) as total_terminated_amount',
+        'sum(terminated_calls_count) as total_terminated_calls_count',
+        'sum(terminated_calls_duration) as total_terminated_calls_duration',
+        'sum(terminated_billing_duration) as total_terminated_billing_duration'
+      )
+      Totals.new(*row)
+    end
+
+    def last_end_date(account_id:)
+      Billing::Invoice.where(account_id: account_id).order('end_date desc').limit(1).pick(:end_date)
+    end
+  end
+
+  composed_of :state,
+              class_name: 'Billing::InvoiceState',
+              mapping: { state_id: :id },
+              constructor: ->(state_id) { Billing::InvoiceState.find(state_id) }
+
+  composed_of :type,
+              class_name: 'Billing::InvoiceType',
+              mapping: { type_id: :id },
+              constructor: ->(type_id) { Billing::InvoiceType.find(type_id) }
+
+  has_many :vendor_cdrs, class_name: 'Cdr::Cdr', foreign_key: 'vendor_invoice_id'
+  has_many :customer_cdrs, class_name: 'Cdr::Cdr', foreign_key: 'customer_invoice_id'
 
   belongs_to :account, class_name: 'Account', foreign_key: 'account_id'
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id, optional: true # , :conditions => {:customer => true}act
-  belongs_to :state, class_name: 'Billing::InvoiceState', foreign_key: :state_id
-  belongs_to :type, class_name: 'Billing::InvoiceType', foreign_key: :type_id
 
   has_one :invoice_document, dependent: :destroy
-  has_many :full_destinations, class_name: 'Billing::InvoiceDestination', foreign_key: :invoice_id, dependent: :delete_all
-  has_many :full_networks, class_name: 'Billing::InvoiceNetwork', foreign_key: :invoice_id, dependent: :delete_all
-  has_many :destinations, -> { where('successful_calls_count>0') }, class_name: 'Billing::InvoiceDestination', foreign_key: :invoice_id
-  has_many :networks, -> { where('successful_calls_count>0') }, class_name: 'Billing::InvoiceNetwork', foreign_key: :invoice_id
+  has_many :full_originated_destinations, class_name: 'Billing::InvoiceOriginatedDestination', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :full_terminated_destinations, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :full_originated_networks, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :full_terminated_networks, class_name: 'Billing::InvoiceTerminatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :originated_destinations, -> { successful_calls }, class_name: 'Billing::InvoiceOriginatedDestination', foreign_key: :invoice_id
+  has_many :terminated_destinations, -> { successful_calls }, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id
+  has_many :originated_networks, -> { successful_calls }, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id
+  has_many :terminated_networks, -> { successful_calls }, class_name: 'Billing::InvoiceTerminatedNetwork', foreign_key: :invoice_id
 
   validates :contractor,
             :account,
@@ -58,19 +105,20 @@ class Billing::Invoice < Cdr::Base
             :type,
             presence: true
 
-  validate :validate_dates
-  validates :vendor_invoice, inclusion: { in: [true, false] }
-  validates :amount, numericality: { greater_than_or_equal_to: 0 }
+  validates :state_id, inclusion: { in: Billing::InvoiceState.ids }, allow_nil: true
+  validates :type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
 
-  validates :billing_duration,
-            :calls_count,
-            :calls_duration,
+  validate :validate_dates
+  validates :originated_amount, :terminated_amount, numericality: { greater_than_or_equal_to: 0 }
+
+  validates :originated_billing_duration,
+            :originated_calls_count,
+            :originated_calls_duration,
+            :terminated_billing_duration,
+            :terminated_calls_count,
+            :terminated_calls_duration,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  include WithPaperTrail
-
-  scope :for_customer, -> { where vendor_invoice: false }
-  scope :for_vendor, -> { where vendor_invoice: true }
   scope :approved, -> { where state_id: Billing::InvoiceState::APPROVED }
   scope :pending, -> { where state_id: Billing::InvoiceState::PENDING }
   scope :new_invoices, -> { where state_id: Billing::InvoiceState::NEW }
@@ -83,22 +131,8 @@ class Billing::Invoice < Cdr::Base
           end_date
   }
 
-  after_initialize do
-    if new_record?
-      self.amount ||= 0
-      self.calls_count ||= 0
-      self.calls_duration ||= 0
-      self.billing_duration ||= 0
-      self.state_id = Billing::InvoiceState::NEW
-    end
-  end
-
   def display_name
     "Invoice #{id}"
-  end
-
-  def direction
-    vendor_invoice? ? 'Vendor' : 'Customer'
   end
 
   # todo service
@@ -110,11 +144,11 @@ class Billing::Invoice < Cdr::Base
   end
 
   def approvable?
-    state_id == Billing::InvoiceState::PENDING
+    state.pending?
   end
 
   def regenerate_document_allowed?
-    state_id == Billing::InvoiceState::PENDING
+    state.pending?
   end
 
   # todo service
@@ -129,31 +163,11 @@ class Billing::Invoice < Cdr::Base
     end
   end
 
-  def invoice_period
-    if vendor_invoice?
-      account.vendor_invoice_period
-    else
-      account.customer_invoice_period
-    end
-  end
-
   def file_name
     "#{id}_#{start_date}_#{end_date}"
   end
 
-  Totals = Struct.new(:total_amount, :total_calls_count, :total_calls_duration, :total_billing_duration)
-
-  def self.totals
-    row = extending(ActsAsTotalsRelation).totals_row_by(
-        'sum(amount) as total_amount',
-        'sum(calls_count) as total_calls_count',
-        'sum(calls_duration) as total_calls_duration',
-        'sum(billing_duration) as total_billing_duration'
-      )
-    Totals.new(*row)
-  end
-
-  delegate :contacts_for_invoices, to: :account
+  delegate :contacts_for_invoices, :invoice_period, to: :account
 
   def subject
     display_name

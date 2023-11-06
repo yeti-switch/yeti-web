@@ -106,7 +106,6 @@ Rails.application.routes.draw do
           end
 
           namespace :billing do
-            jsonapi_resources :invoice_period
             jsonapi_resources :invoice_template
           end
 

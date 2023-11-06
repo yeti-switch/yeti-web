@@ -6,8 +6,6 @@ module BillingInvoice
     class Current < ApplicationService
       # @!method account [Account]
       parameter :account, required: true
-      # @!method is_vendor [Boolean]
-      parameter :is_vendor, required: true
 
       # @raise [ApplicationService::Error]
       # @return [Hash(:start_time, :end_time, :type_id)]
@@ -19,7 +17,6 @@ module BillingInvoice
 
         last_invoice_end_time = BillingInvoice::CalculatePeriod.last_invoice_end_time(
             time_zone: time_zone,
-            is_vendor: is_vendor,
             account_id: account.id
           )
 
@@ -51,16 +48,13 @@ module BillingInvoice
         BillingInvoice::CalculatePeriod.period_class(account_invoice_period_id)
       }
 
-      def account_invoice_period_id
-        is_vendor ? account.vendor_invoice_period_id : account.customer_invoice_period_id
-      end
+      delegate :invoice_period_id, to: :account, prefix: true
 
       # @raise [ApplicationService::Error]
       def validate!
         raise Error, 'account is required' if account.nil?
         raise Error, "failed to find time zone #{account.timezone.name}" if time_zone.nil?
-        raise Error, 'account vendor invoice period is required' if is_vendor && account_invoice_period_id.nil?
-        raise Error, 'account customer invoice period is required' if !is_vendor && account_invoice_period_id.nil?
+        raise Error, 'account invoice period is required' if account_invoice_period_id.nil?
       end
     end
   end
