@@ -3,7 +3,7 @@
 class NodeApi
   class_attribute :_mutex, instance_accessor: false, default: Thread::Mutex.new
   class_attribute :_nodes, instance_accessor: false, default: {}
-  class_attribute :default_options, instance_writer: false, default: { logger: Rails.logger }
+  class_attribute :default_options, instance_writer: false, default: { read_timeout: 25, logger: Rails.logger }
 
   class << self
     def find(uri)
