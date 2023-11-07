@@ -18,12 +18,14 @@
 #
 # Indexes
 #
+#  routing_plan_lnp_rules_database_id_idx                           (database_id)
 #  routing_plan_lnp_rules_prefix_range_routing_plan_id_idx          (((dst_prefix)::prefix_range), routing_plan_id) USING gist
 #  routing_plan_lnp_rules_routing_plan_id_dst_prefix_database__idx  (routing_plan_id,dst_prefix,database_id) UNIQUE
 #
 # Foreign Keys
 #
-#  routing_plan_lnp_rules_database_id_fkey  (database_id => lnp_databases.id)
+#  routing_plan_lnp_rules_database_id_fkey      (database_id => lnp_databases.id)
+#  routing_plan_lnp_rules_routing_plan_id_fkey  (routing_plan_id => routing_plans.id)
 #
 
 class Lnp::RoutingPlanLnpRule < ApplicationRecord
