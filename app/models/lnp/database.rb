@@ -42,6 +42,7 @@ class Lnp::Database < ApplicationRecord
     freeze
   end
 
+  has_many :lnp_routing_plan_lnp_rules, class_name: 'Lnp::RoutingPlanLnpRule', foreign_key: :database_id, dependent: :restrict_with_error
   belongs_to :database, polymorphic: true, dependent: :delete
   accepts_nested_attributes_for :database
 

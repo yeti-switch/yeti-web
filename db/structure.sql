@@ -30062,6 +30062,13 @@ CREATE UNIQUE INDEX rate_plan_groups_rateplan_id_rate_group_id_idx ON class4.rat
 
 
 --
+-- Name: routing_plan_lnp_rules_database_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX routing_plan_lnp_rules_database_id_idx ON class4.routing_plan_lnp_rules USING btree (database_id);
+
+
+--
 -- Name: routing_plan_lnp_rules_prefix_range_routing_plan_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -31098,6 +31105,14 @@ ALTER TABLE ONLY class4.routing_plan_lnp_rules
 
 
 --
+-- Name: routing_plan_lnp_rules routing_plan_lnp_rules_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.routing_plan_lnp_rules
+    ADD CONSTRAINT routing_plan_lnp_rules_routing_plan_id_fkey FOREIGN KEY (routing_plan_id) REFERENCES class4.routing_plans(id);
+
+
+--
 -- Name: routing_plan_static_routes routing_plan_static_routes_routing_plan_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -31630,6 +31645,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20230928134637'),
 ('20230929114329'),
 ('20231005114627'),
-('20231007204855');
+('20231007204855'),
+('20231107100745');
 
 
