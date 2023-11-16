@@ -59,7 +59,6 @@ RSpec.describe 'Copy CDR Export', js: :true do
       term_gw_external_id_eq: gateway.external_id,
       customer_auth_external_type_eq: customer_auth.external_type,
       customer_auth_external_type_not_eq: customer_auth.external_type,
-      customer_auth_external_id_in: [],
       src_country_iso_in: [country.iso2, country.iso2],
       dst_country_iso_in: [country.iso2, country.iso2]
     }
@@ -126,9 +125,6 @@ RSpec.describe 'Copy CDR Export', js: :true do
                               filters_json: {
                                 time_start_gteq: '2018-01-01T00:00:00.000Z',
                                 time_start_lteq: '2018-03-01T00:00:00.000Z',
-                                customer_auth_external_id_in: [],
-                                src_country_iso_in: [],
-                                dst_country_iso_in: [],
                                 customer_external_id_eq: 9998
                               }
                             )
