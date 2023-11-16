@@ -80,6 +80,18 @@ class CdrExport < ApplicationRecord
     attribute :customer_auth_external_id_in, :integer, array: { reject_blank: true }
     attribute :dst_country_iso_in, :string, array: { reject_blank: true }
     attribute :src_country_iso_in, :string, array: { reject_blank: true }
+
+    def customer_auth_external_id_in=(v)
+      super(v.presence)
+    end
+
+    def dst_country_iso_in=(v)
+      super(v.presence)
+    end
+
+    def src_country_iso_in=(v)
+      super(v.presence)
+    end
   end
 
   STATUS_PENDING = 'Pending'

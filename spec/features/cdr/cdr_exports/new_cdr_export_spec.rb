@@ -39,10 +39,7 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(cdr_export.filters_json).to match(
         time_start_gteq: '2018-01-01T00:00:00.000Z',
         time_start_lteq: '2018-03-01T00:00:00.000Z',
-        customer_acc_id_eq: account.id,
-        customer_auth_external_id_in: [],
-        dst_country_iso_in: [],
-        src_country_iso_in: []
+        customer_acc_id_eq: account.id
       )
     end
   end
@@ -74,10 +71,7 @@ RSpec.describe 'Create new CDR export', js: true do
       expect(cdr_export.filters_json).to match(
         time_start_gteq: '2018-01-01T00:00:00.000Z',
         time_start_lteq: '2018-03-01T00:00:00.000Z',
-        customer_acc_id_eq: account.id,
-        customer_auth_external_id_in: [],
-        dst_country_iso_in: [],
-        src_country_iso_in: []
+        customer_acc_id_eq: account.id
       )
     end
   end
@@ -241,10 +235,7 @@ RSpec.describe 'Create new CDR export', js: true do
                             )
       expect(cdr_export.filters_json).to match(
         time_start_gteq: '2018-01-01T00:00:00.000Z',
-        time_start_lteq: '2018-03-01T00:00:00.000Z',
-        customer_auth_external_id_in: [],
-        dst_country_iso_in: [],
-        src_country_iso_in: []
+        time_start_lteq: '2018-03-01T00:00:00.000Z'
       )
     end
   end
@@ -272,10 +263,7 @@ RSpec.describe 'Create new CDR export', js: true do
                             )
       expect(cdr_export.filters_json).to match(
         time_start_gteq: '2018-01-01T00:00:00.000Z',
-        time_start_lt: '2018-03-01T00:00:00.000Z',
-        customer_auth_external_id_in: [],
-        dst_country_iso_in: [],
-        src_country_iso_in: []
+        time_start_lt: '2018-03-01T00:00:00.000Z'
       )
     end
   end
