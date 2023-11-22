@@ -71,7 +71,6 @@ RSpec.configure do |config|
     :filter_types,
     :sdp_c_location,
     :codecs,
-    :invoice_periods,
     'class4.customers_auth_dst_number_fields',
     'class4.customers_auth_src_number_fields',
     'class4.customers_auth_src_name_fields',

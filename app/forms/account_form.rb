@@ -22,21 +22,17 @@ class AccountForm < ProxyForm
                    :origination_capacity,
                    :termination_capacity,
                    :total_capacity,
-                   :vendor_invoice_period_id,
-                   :customer_invoice_period_id,
-                   :vendor_invoice_template_id,
-                   :customer_invoice_template_id,
+                   :invoice_period_id,
+                   :invoice_template_id,
                    :send_invoices_to,
                    :timezone_id,
                    :uuid,
-                   :customer_invoice_ref_template,
-                   :vendor_invoice_ref_template
+                   :invoice_ref_template
 
   validate :validate_balance_thresholds
 
   after_initialize :assign_from_balance_notification_setting
-  before_save :apply_vendor_invoice_period
-  before_save :apply_customer_invoice_period
+  before_save :apply_invoice_period
   after_save :save_balance_notification_setting
 
   def send_invoices_to=(value)
@@ -45,30 +41,16 @@ class AccountForm < ProxyForm
 
   private
 
-  def apply_customer_invoice_period
-    return unless customer_invoice_period_id_changed?
+  def apply_invoice_period
+    return unless invoice_period_id_changed?
 
-    if customer_invoice_period_id
-
-      invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model, is_vendor: false)
-      model.next_customer_invoice_at = invoice_params[:end_time]
-      model.next_customer_invoice_type_id = invoice_params[:type_id]
+    if invoice_period_id
+      invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model)
+      model.next_invoice_at = invoice_params[:end_time]
+      model.next_invoice_type_id = invoice_params[:type_id]
     else
-      model.next_customer_invoice_at = nil
-      model.next_customer_invoice_type_id = nil
-    end
-  end
-
-  def apply_vendor_invoice_period
-    return unless vendor_invoice_period_id_changed?
-
-    if vendor_invoice_period_id
-      invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model, is_vendor: true)
-      model.next_vendor_invoice_at = invoice_params[:end_time]
-      model.next_vendor_invoice_type_id = invoice_params[:type_id]
-    else
-      model.next_vendor_invoice_at = nil
-      model.next_vendor_invoice_type_id = nil
+      model.next_invoice_at = nil
+      model.next_invoice_type_id = nil
     end
   end
 

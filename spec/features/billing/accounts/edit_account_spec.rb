@@ -8,7 +8,7 @@ RSpec.describe 'Update Account', type: :feature, js: true do
   end
 
   include_context :login_as_admin
-  let!(:account) { create(:account, :filled, :vendor_weekly, account_attrs) }
+  let!(:account) { create(:account, :filled, :invoice_weekly, account_attrs) }
   let(:account_attrs) { {} }
 
   context 'without changes' do
@@ -60,8 +60,7 @@ RSpec.describe 'Update Account', type: :feature, js: true do
 
   context 'with invoice ref templates change' do
     let(:fill_form!) do
-      fill_in 'Customer invoice ref template', with: 'cust-$id'
-      fill_in 'Vendor invoice ref template', with: 'vend-$id'
+      fill_in 'Invoice ref template', with: 'account-$id'
     end
 
     it 'updates account' do
@@ -73,16 +72,14 @@ RSpec.describe 'Update Account', type: :feature, js: true do
       expect(page).to have_current_path account_path(account.id)
 
       expect(account.reload).to have_attributes(
-                                  customer_invoice_ref_template: 'cust-$id',
-                                  vendor_invoice_ref_template: 'vend-$id'
+                                  invoice_ref_template: 'account-$id'
                                 )
     end
   end
 
   context 'when customer and vendor invoice period enable' do
     let(:fill_form!) do
-      chosen_deselect_value 'Customer invoice period'
-      chosen_deselect_value 'Vendor invoice period'
+      chosen_deselect_value 'Invoice period'
     end
 
     it 'updates account' do
@@ -90,8 +87,7 @@ RSpec.describe 'Update Account', type: :feature, js: true do
       expect(page).to have_flash_message('Account was successfully updated.', type: :notice)
       expect(page).to have_current_path account_path(account.id)
       expect(account.reload).to have_attributes(
-                                  customer_invoice_period: nil,
-                                  vendor_invoice_period: nil
+                                  invoice_period: nil
                                 )
     end
   end

@@ -71,8 +71,8 @@ RSpec.describe 'Index interval cdr interval items', js: true do
   let(:customer_auth) { FactoryBot.create(:customers_auth) }
   let(:vendor_acc) { FactoryBot.create(:account) }
   let(:customer_acc) { FactoryBot.create(:account, :with_customer) }
-  let(:vendor_invoice) { FactoryBot.create(:invoice, :vendor, :approved, :auto_full, account: vendor_acc) }
-  let(:customer_invoice) { FactoryBot.create(:invoice, :customer, :approved, :auto_full, account: customer_acc) }
+  let(:vendor_invoice) { FactoryBot.create(:invoice, :approved, :auto_full, account: vendor_acc) }
+  let(:customer_invoice) { FactoryBot.create(:invoice, :approved, :auto_full, account: customer_acc) }
   let(:node) { FactoryBot.create(:node) }
   let(:pop) { FactoryBot.create(:pop) }
   let(:dst_country) { System::Country.take }

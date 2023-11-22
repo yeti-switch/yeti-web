@@ -10,15 +10,11 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :destination_rate_limit, :max_call_duration,
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
-             :send_invoices_to
+             :send_invoices_to, :invoice_period
 
   has_one :contractor
   has_one :timezone, class_name: 'System::Timezone'
-
-  has_one :customer_invoice_period, class_name: 'Billing::InvoicePeriod'
-  has_one :vendor_invoice_period, class_name: 'Billing::InvoicePeriod'
-  has_one :customer_invoice_template, class_name: 'Billing::InvoiceTemplate'
-  has_one :vendor_invoice_template, class_name: 'Billing::InvoiceTemplate'
+  has_one :invoice_template, class_name: 'Billing::InvoiceTemplate'
 
   filter :name
 
@@ -48,6 +44,10 @@ class Api::Rest::Admin::AccountResource < BaseResource
     _model.balance_notification_setting.high_threshold
   end
 
+  def invoice_period
+    _model.invoice_period&.name
+  end
+
   def self.updatable_fields(_context)
     %i[
       name
@@ -68,10 +68,8 @@ class Api::Rest::Admin::AccountResource < BaseResource
 
       contractor
       timezone
-      customer_invoice_period
-      vendor_invoice_period
-      customer_invoice_template
-      vendor_invoice_template
+      invoice_period
+      invoice_template
       external_id
     ]
   end

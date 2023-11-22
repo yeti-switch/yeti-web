@@ -14,19 +14,19 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   decorate_with InvoiceDecorator
 
   scope :all
-  scope :for_customer
-  scope :for_vendor
   scope :approved
   scope :pending
 
   # TODO: Fix, causes error on RSpec
   # acts_as_export
 
-  includes :contractor, :account, :state, :type
-
   controller do
     def build_new_resource
       ManualInvoiceForm.new(*resource_params)
+    end
+
+    def scoped_collection
+      super.preload(:contractor, :account)
     end
   end
 
@@ -67,26 +67,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
   end
 
-  member_action :export_file_csv, method: :get do
-    doc = resource.invoice_document
-    if doc.present? && doc.csv_data.present?
-      send_data doc.csv_data, type: 'text/csv', filename: "#{doc.filename}.csv"
-    else
-      flash[:notice] = 'File not found'
-      redirect_back fallback_location: root_path
-    end
-  end
-
-  member_action :export_file_xls, method: :get do
-    doc = resource.invoice_document
-    if doc.present? && doc.xls_data.present?
-      send_data doc.xls_data, type: 'text/csv', filename: "#{doc.filename}.xls"
-    else
-      flash[:notice] = 'File not found'
-      redirect_back fallback_location: root_path
-    end
-  end
-
   member_action :export_file_pdf, method: :get do
     doc = resource.invoice_document
     if doc.present? && doc.pdf_data.present?
@@ -103,10 +83,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
   action_item :documents, only: :show do
     dropdown_menu 'Files' do
-      item('Document(ODT format)', export_file_odt_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Document(PDF format)', export_file_pdf_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Details(CSV format)', export_file_csv_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Details(XLS format)', export_file_xls_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+      item('Document (ODT format)', export_file_odt_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+      item('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+      item('Originated Details (CSV format)', export_file_originated_csv_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+      item('Terminated Details (CSV format)', export_file_terminated_csv_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+      item('Originated Details (XLS format)', export_file_originated_xls_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+      item('Terminated Details (XLS format)', export_file_terminated_xls_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
     end
   end
 
@@ -129,40 +111,63 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     column :state
     column :start_date
     column :end_date
-    column :amount, footer: lambda {
+    column :originated_amount, footer: lambda {
       strong do
-        @footer_data.money_format :total_amount
+        @footer_data.money_format :total_originated_amount
       end
     } do |c|
       strong do
-        c.decorated_amount
+        c.decorated_originated_amount
+      end
+    end
+    column :terminated_amount, footer: lambda {
+      strong do
+        @footer_data.money_format :total_terminated_amount
+      end
+    } do |c|
+      strong do
+        c.decorated_terminated_amount
       end
     end
     column :type
-    column :direction, sorting: 'vendor_invoice', &:direction
 
-    column :calls_count, footer: lambda {
+    column :originated_calls_count, footer: lambda {
       strong do
-        @footer_data.total_calls_count.to_i
+        @footer_data.total_originated_calls_count.to_i
       end
     }
-    column :calls_duration, footer: lambda {
+    column :terminated_calls_count, footer: lambda {
       strong do
-        @footer_data.time_format_min :total_calls_duration
+        @footer_data.total_terminated_calls_count.to_i
       end
-    }, &:decorated_calls_duration
+    }
+    column :originated_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :total_originated_calls_duration
+      end
+    }, &:decorated_originated_calls_duration
+    column :terminated_calls_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :total_terminated_calls_duration
+      end
+    }, &:decorated_terminated_calls_duration
 
-    column :billing_duration, footer: lambda {
+    column :originated_billing_duration, footer: lambda {
       strong do
-        @footer_data.time_format_min :total_billing_duration
+        @footer_data.time_format_min :total_originated_billing_duration
       end
-    }, &:decorated_billing_duration
+    }, &:decorated_originated_billing_duration
+    column :originated_terminated_duration, footer: lambda {
+      strong do
+        @footer_data.time_format_min :total_terminated_billing_duration
+      end
+    }, &:decorated_terminated_billing_duration
 
     column :created_at
-    column :first_call_at
-    column :first_successful_call_at
-    column :last_call_at
-    column :last_successful_call_at
+    column :first_originated_call_at
+    column :first_terminated_call_at
+    column :last_originated_call_at
+    column :last_terminated_call_at
   end
 
   filter :id
@@ -173,52 +178,80 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :state
   filter :start_date, as: :date_time_range
   filter :end_date, as: :date_time_range
-  filter :vendor_invoice, label: 'Direction', as: :select, collection: [['Vendor', true], ['Customer', false]]
   filter :type
-  filter :amount
-  filter :billing_duration
-  filter :calls_count
-  filter :calls_duration
+  filter :originated_amount
+  filter :originated_billing_duration
+  filter :originated_calls_count
+  filter :originated_calls_duration
+  filter :terminated_amount
+  filter :terminated_billing_duration
+  filter :terminated_calls_count
+  filter :terminated_calls_duration
 
   show do |s|
     tabs do
       tab 'Invoice' do
-        attributes_table_for s do
-          row :id
-          row :uuid
-          row :reference
-          row :contractor_id
-          row :account
-          row :state
-          row :start_date
-          row :end_date
-          row :amount do
-            strong do
-              s.decorated_amount
+        panel 'Details' do
+          attributes_table_for s do
+            row :id
+            row :uuid
+            row :reference
+            row(:contractor) { s.contractor || s.contractor_id }
+            row :account
+            row :state
+            row :start_date
+            row :end_date
+            row :type
+            row :created_at
+          end
+        end
+        columns do
+          column do
+            panel 'Originated' do
+              attributes_table_for s do
+                row :originated_amount do
+                  strong do
+                    s.decorated_originated_amount
+                  end
+                end
+                row :originated_calls_count
+                row :originated_successful_calls_count
+                row :originated_calls_duration do
+                  s.decorated_originated_calls_duration
+                end
+                row :originated_billing_duration do
+                  s.decorated_originated_billing_duration
+                end
+                row :first_originated_call_at
+                row :last_originated_call_at
+              end
+            end
+
+            panel 'Terminated' do
+              attributes_table_for s do
+                row :terminated_amount do
+                  strong do
+                    s.decorated_terminated_amount
+                  end
+                end
+                row :terminated_calls_count
+                row :terminated_successful_calls_count
+                row :terminated_calls_duration do
+                  s.decorated_terminated_calls_duration
+                end
+                row :terminated_billing_duration do
+                  s.decorated_terminated_billing_duration
+                end
+                row :first_terminated_call_at
+                row :last_terminated_call_at
+              end
             end
           end
-          row :calls_count
-          row :successful_calls_count
-          row :calls_duration do
-            s.decorated_calls_duration
-          end
-          row :billing_duration do
-            s.decorated_billing_duration
-          end
-          row :type
-          row :direction do
-            s.direction
-          end
-          row :created_at
-          row :first_call_at
-          row :last_call_at
-          row :first_successful_call_at
-          row :last_successful_call_at
         end
       end
       tab 'Destination prefixes' do
-        panel '' do
-          table_for resource.destinations do
+        panel 'Originated' do
+          table_for resource.originated_destinations do
             column :dst_prefix
             column :country
             column :network
@@ -233,16 +266,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
               end
             end
             column :first_call_at
-            column :first_successful_call_at
             column :last_call_at
-            column :last_successful_call_at
           end
         end
-      end
-
-      tab 'Destination networks' do
-        panel '' do
-          table_for resource.networks do
+        panel 'Terminated' do
+          table_for resource.terminated_destinations do
+            column :dst_prefix
             column :country
             column :network
             column :rate
@@ -256,17 +285,53 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
               end
             end
             column :first_call_at
-            column :first_successful_call_at
             column :last_call_at
-            column :last_successful_call_at
+          end
+        end
+      end
+
+      tab 'Destination networks' do
+        panel 'Originated' do
+          table_for resource.originated_networks do
+            column :country
+            column :network
+            column :rate
+            column :calls_count
+            column :successful_calls_count
+            column :calls_duration, &:decorated_calls_duration
+            column :billing_duration, &:decorated_billing_duration
+            column :amount do |r|
+              strong do
+                r.decorated_amount
+              end
+            end
+            column :first_call_at
+            column :last_call_at
+          end
+        end
+        panel 'Terminated' do
+          table_for resource.terminated_networks do
+            column :country
+            column :network
+            column :rate
+            column :calls_count
+            column :successful_calls_count
+            column :calls_duration, &:decorated_calls_duration
+            column :billing_duration, &:decorated_billing_duration
+            column :amount do |r|
+              strong do
+                r.decorated_amount
+              end
+            end
+            column :first_call_at
+            column :last_call_at
           end
         end
       end
     end
   end
 
-  permit_params :is_vendor,
-                :contractor_id,
+  permit_params :contractor_id,
                 :account_id,
                 :start_date,
                 :end_date
@@ -274,13 +339,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
-      f.input :is_vendor,
-              as: :select,
-              label: 'Vendor invoice',
-              collection: [['Yes', true], ['No', false]],
-              include_blank: false,
-              input_html: { class: 'chosen' }
-
       f.contractor_input :contractor_id
       f.account_input :account_id,
                       fill_params: { contractor_id_eq: f.object.contractor_id },

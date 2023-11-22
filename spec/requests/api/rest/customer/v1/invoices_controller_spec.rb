@@ -16,31 +16,26 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
     let!(:other_customer_account) { create(:account, contractor: other_customer) }
     before do
       # skip invoices for the other customer
-      create(:invoice, :customer, :manual, :approved, account: other_customer_account)
-
-      # skip vendor invoices
-      create(:invoice, :vendor, :manual, :approved, account: accounts.first)
+      create(:invoice, :manual, :approved, account: other_customer_account)
 
       # skip not approved invoices
-      create(:invoice, :customer, :manual, :new, account: accounts.first)
-      create(:invoice, :customer, :manual, :pending, account: accounts.second)
+      create(:invoice, :manual, :new, account: accounts.first)
+      create(:invoice, :manual, :pending, account: accounts.second)
     end
     let!(:invoices) do
       [
         create(
           :invoice,
-          :customer,
           :manual,
           :approved,
           account: accounts.first,
           start_date: 30.days.ago.utc,
           end_date: 25.days.ago.utc
         ),
-        create(:invoice, :customer, :auto_full, :approved, account: accounts.first),
-        create(:invoice, :customer, :manual, :approved, account: accounts.second),
+        create(:invoice, :auto_full, :approved, account: accounts.first),
+        create(:invoice, :manual, :approved, account: accounts.second),
         create(
           :invoice,
-          :customer,
           :auto_partial,
           :approved,
           account: accounts.second,
@@ -58,7 +53,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
       end
       let!(:invoices) do
         (0...records_qty).map do |i|
-          create(:invoice, :customer, :manual, :approved, account: accounts[i])
+          create(:invoice, :manual, :approved, account: accounts[i])
         end
       end
 
@@ -84,7 +79,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
 
         # not allowed account and it's invoice
         not_allowed_account = create(:account, contractor: customer)
-        create(:invoice, :customer, :auto_full, :approved, account: not_allowed_account)
+        create(:invoice, :auto_full, :approved, account: not_allowed_account)
       end
 
       it 'returns records of this customer' do
@@ -112,7 +107,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
         let(:request_filters) { { account_id_eq: another_account.reload.uuid } }
         let!(:another_account) { create(:account, contractor: customer) }
         let!(:expected_records) do
-          create_list(:invoice, 2, :customer, :approved, account: another_account)
+          create_list(:invoice, 2, :approved, account: another_account)
         end
 
         include_examples :responds_with_filtered_records
@@ -122,10 +117,10 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
         let(:request_filters) { { account_id_not_eq: accounts.first.reload.uuid } }
         let!(:another_account) { create(:account, contractor: customer) }
         let!(:invoices) do
-          create_list(:invoice, 2, :customer, :approved, account: accounts.first)
+          create_list(:invoice, 2, :approved, account: accounts.first)
         end
         let!(:expected_records) do
-          create_list(:invoice, 2, :customer, :approved, account: another_account)
+          create_list(:invoice, 2, :approved, account: another_account)
         end
 
         include_examples :responds_with_filtered_records
@@ -137,8 +132,8 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
         let!(:another_account2) { create(:account, contractor: customer) }
         let!(:expected_records) do
           [
-            create(:invoice, :customer, :approved, account: another_account),
-            create(:invoice, :customer, :approved, account: another_account2)
+            create(:invoice, :approved, account: another_account),
+            create(:invoice, :approved, account: another_account2)
           ]
         end
 
@@ -149,7 +144,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
         let(:request_filters) { { account_id_not_in: "#{accounts.first.reload.uuid},#{accounts.second.reload.uuid}" } }
         let!(:another_account) { create(:account, contractor: customer) }
         let!(:expected_records) do
-          create_list(:invoice, 2, :customer, :approved, account: another_account)
+          create_list(:invoice, 2, :approved, account: another_account)
         end
 
         include_examples :responds_with_filtered_records
@@ -197,7 +192,7 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
 
     let!(:account) { create(:account, contractor: customer) }
     let!(:invoice) do
-      create(:invoice, :customer, :auto_full, :approved, account: account)
+      create(:invoice, :auto_full, :approved, account: account)
     end
 
     it_behaves_like :json_api_customer_v1_check_authorization
@@ -213,15 +208,13 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
             reference: invoice.reference,
             'start-date': invoice.start_date.iso8601(3),
             'end-date': invoice.end_date.iso8601(3),
-            amount: invoice.amount.to_s,
-            'calls-count': invoice.calls_count,
-            'successful-calls-count': invoice.successful_calls_count,
-            'calls-duration': invoice.calls_duration,
-            'billing-duration': invoice.billing_duration,
-            'first-call-at': invoice.first_call_at&.iso8601(3),
-            'last-call-at': invoice.last_call_at&.iso8601(3),
-            'first-successful-call-at': invoice.first_successful_call_at&.iso8601(3),
-            'last-successful-call-at': invoice.last_successful_call_at&.iso8601(3),
+            amount: invoice.terminated_amount.to_s,
+            'calls-count': invoice.terminated_calls_count,
+            'successful-calls-count': invoice.terminated_successful_calls_count,
+            'calls-duration': invoice.terminated_calls_duration,
+            'billing-duration': invoice.terminated_billing_duration,
+            'first-call-at': invoice.first_terminated_call_at&.iso8601(3),
+            'last-call-at': invoice.last_terminated_call_at&.iso8601(3),
             'has-pdf': invoice.invoice_document&.pdf_data.present?
           },
           relationships: {

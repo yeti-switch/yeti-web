@@ -4,13 +4,19 @@
 #
 # Table name: billing.invoice_documents
 #
-#  id         :integer          not null, primary key
-#  invoice_id :integer          not null
+#  id         :integer(4)       not null, primary key
 #  data       :binary
 #  filename   :string           not null
 #  pdf_data   :binary
-#  csv_data   :binary
-#  xls_data   :binary
+#  invoice_id :integer(4)       not null
+#
+# Indexes
+#
+#  invoice_documents_invoice_id_idx  (invoice_id) UNIQUE
+#
+# Foreign Keys
+#
+#  invoice_documents_invoice_id_fkey  (invoice_id => invoices.id)
 #
 
 FactoryBot.define do

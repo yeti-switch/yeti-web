@@ -41,29 +41,6 @@ SELECT pg_catalog.setval('accounts_id_seq', 19, true);
 
 
 --
--- TOC entry 3869 (class 0 OID 19050)
--- Dependencies: 286
--- Data for Name: invoice_periods; Type: TABLE DATA; Schema: billing; Owner: yeti
---
-
-INSERT INTO invoice_periods (id, name) VALUES (1, 'Daily');
-INSERT INTO invoice_periods (id, name) VALUES (2, 'Weekly');
-INSERT INTO invoice_periods (id, name) VALUES (4, 'Monthly');
-INSERT INTO invoice_periods (id, name) VALUES (3, 'BiWeekly');
-INSERT INTO invoice_periods (id, name) VALUES (5, 'BiWeekly. Split by new month');
-INSERT INTO invoice_periods (id, name) VALUES (6, 'Weekly. Split by new month');
-
-
---
--- TOC entry 3884 (class 0 OID 0)
--- Dependencies: 287
--- Name: invoice_periods_id_seq; Type: SEQUENCE SET; Schema: billing; Owner: yeti
---
-
-SELECT pg_catalog.setval('invoice_periods_id_seq', 7, true);
-
-
---
 -- TOC entry 3871 (class 0 OID 19058)
 -- Dependencies: 288
 -- Data for Name: invoice_templates; Type: TABLE DATA; Schema: billing; Owner: yeti

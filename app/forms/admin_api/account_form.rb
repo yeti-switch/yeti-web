@@ -19,20 +19,18 @@ module AdminApi
                      :send_invoices_to,
                      :contractor_id,
                      :timezone_id,
-                     :customer_invoice_period_id,
-                     :vendor_invoice_period_id,
-                     :customer_invoice_template_id,
-                     :vendor_invoice_template_id
+                     :invoice_template_id
 
+    attribute :invoice_period, :string
     attribute :balance_low_threshold, :decimal
     attribute :balance_high_threshold, :decimal
     attribute :send_balance_notifications_to, :integer, array: true
 
-    after_initialize :assign_from_balance_notification_setting
+    after_initialize :assign_from_model
     validate :validate_balance_thresholds
+    validates :invoice_period, inclusion: { in: Billing::InvoicePeriod.pluck(:name) }, allow_blank: true
     after_save :save_balance_notification_setting
-    before_save :apply_vendor_invoice_period
-    before_save :apply_customer_invoice_period
+    before_save :apply_invoice_period
 
     def send_invoices_to=(value)
       model.send_invoices_to = Array.wrap(value).reject(&:blank?).presence
@@ -44,11 +42,13 @@ module AdminApi
 
     private
 
-    def assign_from_balance_notification_setting
+    def assign_from_model
       model.build_balance_notification_setting if model.balance_notification_setting.nil?
       self.balance_low_threshold = model.balance_notification_setting.low_threshold
       self.balance_high_threshold = model.balance_notification_setting.high_threshold
       self.send_balance_notifications_to = model.balance_notification_setting.send_to
+
+      self.invoice_period = model.invoice_period&.name
     end
 
     def save_balance_notification_setting
@@ -67,30 +67,17 @@ module AdminApi
       end
     end
 
-    def apply_customer_invoice_period
-      return unless model.customer_invoice_period_id_changed?
+    def apply_invoice_period
+      model.invoice_period_id = Billing::InvoicePeriod.find_by_name(invoice_period)&.id
+      return unless model.invoice_period_id_changed?
 
-      if customer_invoice_period_id
-
-        invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model, is_vendor: false)
-        model.next_customer_invoice_at = invoice_params[:end_time]
-        model.next_customer_invoice_type_id = invoice_params[:type_id]
+      if model.invoice_period
+        invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model)
+        model.next_invoice_at = invoice_params[:end_time]
+        model.next_invoice_type_id = invoice_params[:type_id]
       else
-        model.next_customer_invoice_at = nil
-        model.next_customer_invoice_type_id = nil
-      end
-    end
-
-    def apply_vendor_invoice_period
-      return unless model.vendor_invoice_period_id_changed?
-
-      if vendor_invoice_period_id
-        invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model, is_vendor: true)
-        model.next_vendor_invoice_at = invoice_params[:end_time]
-        model.next_vendor_invoice_type_id = invoice_params[:type_id]
-      else
-        model.next_vendor_invoice_at = nil
-        model.next_vendor_invoice_type_id = nil
+        model.next_invoice_at = nil
+        model.next_invoice_type_id = nil
       end
     end
   end

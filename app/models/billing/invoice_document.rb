@@ -5,11 +5,9 @@
 # Table name: billing.invoice_documents
 #
 #  id         :integer(4)       not null, primary key
-#  csv_data   :binary
 #  data       :binary
 #  filename   :string           not null
 #  pdf_data   :binary
-#  xls_data   :binary
 #  invoice_id :integer(4)       not null
 #
 # Indexes
@@ -34,8 +32,6 @@ class Billing::InvoiceDocument < Cdr::Base
 
   def attachments
     [
-      # Notification::Attachment.new(filename: "#{filename}.csv", data: self.csv_data),
-      Notification::Attachment.new(filename: "#{filename}.xls", data: xls_data),
       Notification::Attachment.new(filename: "#{filename}.pdf", data: pdf_data) # ,
       # Notification::Attachment.new(filename: "#{filename}.odt", data: self.data)
     ].reject { |a| a.data.blank? }

@@ -67,14 +67,10 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            termination_capacity: form_params[:termination_capacity],
                            total_capacity: form_params[:total_capacity],
                            timezone: form_params[:timezone],
-                           vendor_invoice_period_id: nil,
-                           next_vendor_invoice_at: nil,
-                           next_vendor_invoice_type_id: nil,
-                           customer_invoice_period_id: nil,
-                           next_customer_invoice_at: nil,
-                           next_customer_invoice_type_id: nil,
-                           customer_invoice_ref_template: '$id',
-                           vendor_invoice_ref_template: '$id'
+                           invoice_period_id: nil,
+                           next_invoice_at: nil,
+                           next_invoice_type_id: nil,
+                           invoice_ref_template: '$id'
                          )
       expect(account.balance_notification_setting).to have_attributes(
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
@@ -113,14 +109,10 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            termination_capacity: nil,
                            total_capacity: nil,
                            timezone: utc_timezone,
-                           vendor_invoice_period_id: nil,
-                           next_vendor_invoice_at: nil,
-                           next_vendor_invoice_type_id: nil,
-                           customer_invoice_period_id: nil,
-                           next_customer_invoice_at: nil,
-                           next_customer_invoice_type_id: nil,
-                           customer_invoice_ref_template: '$id',
-                           vendor_invoice_ref_template: '$id'
+                           invoice_period_id: nil,
+                           next_invoice_at: nil,
+                           next_invoice_type_id: nil,
+                           invoice_ref_template: '$id'
                          )
       expect(account.balance_notification_setting).to have_attributes(
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
@@ -133,13 +125,11 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
 
   context 'with invoice ref templates' do
     let(:form_params) do
-      super().merge customer_invoice_ref_template: 'cust-$id',
-                    vendor_invoice_ref_template: 'vend-$id'
+      super().merge invoice_ref_template: 'new-$id'
     end
     let(:fill_form!) do
       super()
-      fill_in 'Customer invoice ref template', with: form_params[:customer_invoice_ref_template]
-      fill_in 'Vendor invoice ref template', with: form_params[:vendor_invoice_ref_template]
+      fill_in 'Invoice ref template', with: form_params[:invoice_ref_template]
     end
 
     it 'creates new account successfully' do
@@ -161,14 +151,10 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            termination_capacity: form_params[:termination_capacity],
                            total_capacity: form_params[:total_capacity],
                            timezone: form_params[:timezone],
-                           vendor_invoice_period_id: nil,
-                           next_vendor_invoice_at: nil,
-                           next_vendor_invoice_type_id: nil,
-                           customer_invoice_period_id: nil,
-                           next_customer_invoice_at: nil,
-                           next_customer_invoice_type_id: nil,
-                           customer_invoice_ref_template: form_params[:customer_invoice_ref_template],
-                           vendor_invoice_ref_template: form_params[:vendor_invoice_ref_template]
+                           invoice_period_id: nil,
+                           next_invoice_at: nil,
+                           next_invoice_type_id: nil,
+                           invoice_ref_template: form_params[:invoice_ref_template]
                          )
       expect(account.balance_notification_setting).to have_attributes(
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
@@ -179,17 +165,17 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     end
   end
 
-  context 'with customer invoice period' do
-    let(:invoice_period) { Billing::InvoicePeriod.find Billing::InvoicePeriod::WEEKLY_ID }
+  context 'with invoice period' do
+    let(:invoice_period) { Billing::InvoicePeriod.find Billing::InvoicePeriod::WEEKLY }
     let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone].name) }
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Customer invoice period', with: invoice_period.name, exact: true
+      fill_in_chosen 'Invoice period', with: invoice_period.name, exact: true
     end
 
     before do
       expect(BillingInvoice::CalculatePeriod::Current).to receive(:call)
-        .with(account: a_kind_of(Account), is_vendor: false)
+        .with(account: a_kind_of(Account))
         .and_return(
           end_time: account_time_zone.parse('2020-01-06 00:00:00'),
           type_id: Billing::InvoiceType::AUTO_FULL
@@ -215,69 +201,10 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
                            termination_capacity: form_params[:termination_capacity],
                            total_capacity: form_params[:total_capacity],
                            timezone: form_params[:timezone],
-                           vendor_invoice_period_id: nil,
-                           next_vendor_invoice_at: nil,
-                           next_vendor_invoice_type_id: nil,
-                           customer_invoice_period_id: Billing::InvoicePeriod::WEEKLY_ID,
-                           next_customer_invoice_at: account_time_zone.parse('2020-01-06 00:00:00'),
-                           next_customer_invoice_type_id: Billing::InvoiceType::AUTO_FULL,
-                           customer_invoice_ref_template: '$id',
-                           vendor_invoice_ref_template: '$id'
-                         )
-      expect(account.balance_notification_setting).to have_attributes(
-                                                        state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,
-                                                        low_threshold: form_params[:balance_low_threshold],
-                                                        high_threshold: form_params[:balance_high_threshold],
-                                                        send_to: [form_params[:send_balance_notifications_to].id]
-                                                      )
-    end
-  end
-
-  context 'with vendor invoice period' do
-    let(:form_params) { super().merge contractor: vendor }
-    let(:invoice_period) { Billing::InvoicePeriod.find Billing::InvoicePeriod::WEEKLY_SPLIT_ID }
-    let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone].name) }
-    let(:fill_form!) do
-      super()
-      fill_in_chosen 'Vendor invoice period', with: invoice_period.name, exact: true
-    end
-
-    before do
-      expect(BillingInvoice::CalculatePeriod::Current).to receive(:call)
-        .with(account: a_kind_of(Account), is_vendor: true)
-        .and_return(
-          end_time: account_time_zone.parse('2020-01-02 00:00:00'),
-          type_id: Billing::InvoiceType::AUTO_PARTIAL
-        )
-    end
-
-    it 'creates new account successfully' do
-      expect do
-        subject
-        expect(page).to have_flash_message('Account was successfully created.', type: :notice)
-      end.to change { Account.count }.by(1)
-      account = Account.last!
-      expect(page).to have_current_path account_path(account.id)
-
-      expect(account).to have_attributes(
-                           name: form_params[:name],
-                           contractor: form_params[:contractor],
-                           max_balance: form_params[:max_balance],
-                           min_balance: form_params[:min_balance],
-                           destination_rate_limit: form_params[:destination_rate_limit],
-                           max_call_duration: form_params[:max_call_duration],
-                           origination_capacity: form_params[:origination_capacity],
-                           termination_capacity: form_params[:termination_capacity],
-                           total_capacity: form_params[:total_capacity],
-                           timezone: form_params[:timezone],
-                           vendor_invoice_period_id: Billing::InvoicePeriod::WEEKLY_SPLIT_ID,
-                           next_vendor_invoice_at: account_time_zone.parse('2020-01-02 00:00:00'),
-                           next_vendor_invoice_type_id: Billing::InvoiceType::AUTO_PARTIAL,
-                           customer_invoice_period_id: nil,
-                           next_customer_invoice_at: nil,
-                           next_customer_invoice_type_id: nil,
-                           customer_invoice_ref_template: '$id',
-                           vendor_invoice_ref_template: '$id'
+                           invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+                           next_invoice_at: account_time_zone.parse('2020-01-06 00:00:00'),
+                           next_invoice_type_id: Billing::InvoiceType::AUTO_FULL,
+                           invoice_ref_template: '$id'
                          )
       expect(account.balance_notification_setting).to have_attributes(
                                                         state_id: AccountBalanceNotificationSetting::CONST::STATE_ID_NONE,

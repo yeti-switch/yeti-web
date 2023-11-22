@@ -18,22 +18,22 @@ RSpec.describe BillingInvoice::GenerateDocument do
   let(:account_attrs) do
     {
       contractor: contractor,
-      vendor_invoice_template: invoice_template
+      invoice_template: invoice_template
     }
   end
   let!(:invoice) { FactoryBot.create(:invoice, invoice_attrs) }
   let(:invoice_attrs) do
     {
       account: account,
-      vendor_invoice: true,
       type_id: Billing::InvoiceType::MANUAL,
       state_id: Billing::InvoiceState::NEW,
       start_date: Time.zone.parse('2020-01-01 00:00:00'),
       end_date: Time.zone.parse('2020-02-01 00:00:00')
     }
   end
-  let!(:destinations) do
-    FactoryBot.create_list(:invoice_destination, 20, :success, invoice: invoice)
+  before do
+    FactoryBot.create_list(:invoice_originated_destination, 20, :success, invoice: invoice)
+    FactoryBot.create_list(:invoice_terminated_destination, 15, :success, invoice: invoice)
   end
 
   it 'creates invoice document' do
@@ -42,9 +42,7 @@ RSpec.describe BillingInvoice::GenerateDocument do
     expect(doc).to have_attributes(
                      invoice: invoice,
                      filename: invoice.file_name.to_s,
-                     data: be_present,
-                     csv_data: a_kind_of(String),
-                     xls_data: a_kind_of(String)
+                     data: be_present
                    )
   end
 end

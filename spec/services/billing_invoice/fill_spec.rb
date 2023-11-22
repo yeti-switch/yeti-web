@@ -13,19 +13,20 @@ RSpec.describe BillingInvoice::Fill do
     end
 
     it 'does not change invoice' do
-      expect {
-        begin
-                 subject
-        rescue StandardError
-          nil
-               end
-      }.to_not change {
-                 [invoice.reload.attributes, invoice.networks.count, invoice.destinations.count]
-               }
+      expect { safe_subject }.to_not change {
+        [
+          invoice.reload.attributes,
+          invoice.originated_networks.count,
+          invoice.terminated_networks.count,
+          invoice.originated_destinations.count,
+          invoice.terminated_destinations.count
+        ]
+      }
     end
 
     it 'does not call BillingInvoice::GenerateDocument' do
       expect(BillingInvoice::GenerateDocument).to_not receive(:call)
+      safe_subject
     end
   end
 
@@ -34,20 +35,27 @@ RSpec.describe BillingInvoice::Fill do
       subject
       expect(invoice.reload).to have_attributes(
                                     state_id: Billing::InvoiceState::PENDING,
-                                    amount: 0,
-                                    calls_count: 0,
-                                    successful_calls_count: 0,
-                                    calls_duration: 0,
-                                    billing_duration: 0,
-                                    first_call_at: nil,
-                                    first_successful_call_at: nil,
-                                    last_call_at: nil,
-                                    last_successful_call_at: nil
+                                    originated_amount: 0,
+                                    originated_calls_count: 0,
+                                    originated_successful_calls_count: 0,
+                                    originated_calls_duration: 0,
+                                    originated_billing_duration: 0,
+                                    first_originated_call_at: nil,
+                                    last_originated_call_at: nil,
+                                    terminated_amount: 0,
+                                    terminated_calls_count: 0,
+                                    terminated_successful_calls_count: 0,
+                                    terminated_calls_duration: 0,
+                                    terminated_billing_duration: 0,
+                                    first_terminated_call_at: nil,
+                                    last_terminated_call_at: nil
                                   )
     end
 
-    include_examples :changes_records_qty_of, Billing::InvoiceNetwork, by: 0
-    include_examples :changes_records_qty_of, Billing::InvoiceDestination, by: 0
+    include_examples :changes_records_qty_of, Billing::InvoiceOriginatedNetwork, by: 0
+    include_examples :changes_records_qty_of, Billing::InvoiceTerminatedNetwork, by: 0
+    include_examples :changes_records_qty_of, Billing::InvoiceOriginatedDestination, by: 0
+    include_examples :changes_records_qty_of, Billing::InvoiceTerminatedDestination, by: 0
   end
 
   include_context :timezone_helpers
@@ -63,7 +71,6 @@ RSpec.describe BillingInvoice::Fill do
   let(:invoice_attrs) do
     {
       account: account,
-      vendor_invoice: true,
       type_id: Billing::InvoiceType::MANUAL,
       state_id: Billing::InvoiceState::NEW,
       start_date: account_time_zone.parse('2020-01-01 00:00:00'),

@@ -593,197 +593,6 @@ $$;
 
 
 --
--- Name: invoice_generate(integer); Type: FUNCTION; Schema: billing; Owner: -
---
-
-CREATE FUNCTION billing.invoice_generate(i_id integer) RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-v_id integer;
-v_amount numeric;
-v_count bigint;
-v_duration bigint;
-v_min_date timestamp;
-v_max_date timestamp;
-v_sql varchar;
-v_invoice billing.invoices%rowtype;
-BEGIN
-    lock table billing.invoices in exclusive mode; -- see ticket #108
-    select into strict v_invoice * from billing.invoices where id=i_id;
-
-    if v_invoice.start_date is null then
-        select into v_invoice.start_date end_date from billing.invoices where account_id=v_invoice.account_id order by end_date desc limit 1;
-        if not found then
-            RAise exception 'Can''t detect date start';
-        end if;
-    end if;
-
-    if v_invoice.vendor_invoice then
-        PERFORM * FROM cdr.cdr
-            WHERE vendor_acc_id=v_invoice.account_id AND time_start>=v_invoice.start_date AND time_end<v_invoice.end_date AND vendor_invoice_id IS NOT NULL;
-        IF FOUND THEN
-            RAISE EXCEPTION 'billing.invoice_generate: some vendor invoices already found for this interval';
-        END IF;
-
-        execute format('UPDATE cdr.cdr SET vendor_invoice_id=%L
-            WHERE vendor_acc_id =%L AND time_start>=%L AND time_end<%L AND vendor_invoice_id IS NULL',
-            v_invoice.id, v_invoice.account_id, v_invoice.start_date, v_invoice.end_date
-        );
-
-        execute format('insert into billing.invoice_destinations(
-            dst_prefix,country_id,network_id,rate,calls_count,calls_duration,amount,invoice_id,first_call_at,last_call_at
-            ) select  dialpeer_prefix,
-                            dst_country_id,
-                            dst_network_id,
-                            dialpeer_next_rate,
-                            count(nullif(is_last_cdr,false)),
-                            sum(duration),
-                            sum(vendor_price),
-                            %L,
-                            min(time_start),
-                            max(time_start)
-                    from cdr.cdr
-                    where vendor_acc_id =%L AND time_start>=%L AND time_end<%L AND vendor_invoice_id =%L
-                    group by dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate',
-                    v_invoice.id, v_invoice.account_id, v_invoice.start_date, v_invoice.end_date, v_invoice.id);
-
-        SELECT INTO v_count, v_duration, v_amount, v_min_date, v_max_date
-            coalesce(sum(calls_count),0),
-            coalesce(sum(calls_duration),0),
-            COALESCE(sum(amount),0),
-            min(first_call_at),
-            max(last_call_at)
-        from billing.invoice_destinations
-        where invoice_id =v_invoice.id;
-
-        UPDATE billing.invoices
-        SET amount=v_amount, calls_count=v_count, calls_duration=v_duration, first_call_date=v_min_date,last_call_date=v_max_date, start_date=v_invoice.start_date
-        WHERE id=v_invoice.id;
-    ELSE -- customer invoice generation
-        PERFORM * FROM cdr.cdr
-            WHERE customer_acc_id=v_invoice.account_id AND time_start>=v_invoice.start_date AND time_end<v_invoice.end_date AND customer_invoice_id IS NOT NULL;
-        IF FOUND THEN
-            RAISE EXCEPTION 'billing.invoice_generate: some customer invoices already found for this interval';
-        END IF;
-
-        execute format('UPDATE cdr.cdr SET customer_invoice_id=%L
-            WHERE customer_acc_id =%L AND time_start>=%L AND time_end<%L AND customer_invoice_id IS NULL',
-            v_invoice.id, v_invoice.account_id, v_invoice.start_date, v_invoice.end_date
-        );
-
-        execute format ('insert into billing.invoice_destinations(
-            dst_prefix,country_id,network_id,rate,calls_count,calls_duration,amount,invoice_id,first_call_at,last_call_at
-            ) select  destination_prefix,
-                            dst_country_id,
-                            dst_network_id,
-                            destination_next_rate,
-                            count(nullif(is_last_cdr,false)),
-                            sum(duration),
-                            sum(customer_price),
-                            %L,
-                            min(time_start),
-                            max(time_start)
-                    from cdr.cdr
-                    where customer_acc_id =%L AND time_start>=%L AND time_end<%L AND customer_invoice_id =%L
-                    group by destination_prefix, dst_country_id, dst_network_id, destination_next_rate',
-                    v_invoice.id, v_invoice.account_id, v_invoice.start_date, v_invoice.end_date, v_invoice.id);
-
-        SELECT INTO v_count,v_duration,v_amount,v_min_date,v_max_date
-            coalesce(sum(calls_count),0),
-            coalesce(sum(calls_duration),0),
-            COALESCE(sum(amount),0),
-            min(first_call_at),
-            max(last_call_at)
-        from billing.invoice_destinations
-        where invoice_id =v_invoice.id;
-
-        UPDATE billing.invoices
-        SET amount=v_amount,calls_count=v_count,calls_duration=v_duration, first_call_date=v_min_date,last_call_date=v_max_date, start_date=v_invoice.start_date
-        WHERE id=v_invoice.id;
-        END IF;
-
-RETURN;
-END;
-$$;
-
-
---
--- Name: invoice_generate(integer, integer, boolean, timestamp without time zone, timestamp without time zone); Type: FUNCTION; Schema: billing; Owner: -
---
-
-CREATE FUNCTION billing.invoice_generate(i_contractor_id integer, i_account_id integer, i_vendor_flag boolean, i_startdate timestamp without time zone, i_enddate timestamp without time zone) RETURNS integer
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-v_id integer;
-v_amount numeric;
-v_count bigint;
-v_min_date timestamp;
-v_max_date timestamp;
-BEGIN
-        BEGIN
-                INSERT into billing.invoices(contractor_id,account_id,start_date,end_date,amount,vendor_invoice,calls_count)
-                        VALUES(i_contractor_id,i_account_id,i_startdate,i_enddate,0,i_vendor_flag,0) RETURNING id INTO v_id;
-        EXCEPTION
-                WHEN foreign_key_violation THEN
-                        RAISE EXCEPTION 'billing.invoice_generate: account not found in this moment';
-        END;
-
-        if i_vendor_flag THEN
-                PERFORM * FROM cdr.cdr WHERE vendor_acc_id =i_account_id AND time_start>=i_startdate AND time_end<i_enddate AND vendor_invoice_id IS NOT NULL;
-                IF FOUND THEN
-                        RAISE EXCEPTION 'billing.invoice_generate: some vendor invoices already found for this interval';
-                END IF;
-                UPDATE cdr.cdr SET vendor_invoice_id=v_id WHERE vendor_acc_id =i_account_id AND time_start>=i_startdate AND time_end<i_enddate AND vendor_invoice_id IS NULL;
-                SELECT INTO v_count,v_amount,v_min_date,v_max_date
-                        count(*),
-                        COALESCE(sum(vendor_price),0),
-                        min(time_start),
-                        max(time_start)
-                        from cdr.cdr
-                        WHERE vendor_acc_id =i_account_id AND time_start>=i_startdate AND time_end<i_enddate AND vendor_invoice_id =v_id;
-                        RAISE NOTICE 'wer % - %',v_count,v_amount;
-                UPDATE billing.invoices SET amount=v_amount,calls_count=v_count,first_call_date=v_min_date,last_call_date=v_max_date WHERE id=v_id;
-        ELSE
-                PERFORM * FROM cdr.cdr WHERE customer_acc_id =i_account_id AND time_start>=i_startdate AND time_end<i_enddate AND customer_invoice_id IS NOT NULL;
-                IF FOUND THEN
-                        RAISE EXCEPTION 'billing.invoice_generate: some customer invoices already found for this interval';
-                END IF;
-                UPDATE cdr.cdr SET customer_invoice_id=v_id WHERE customer_acc_id =i_account_id AND time_start>=i_startdate AND time_end<i_enddate AND customer_invoice_id IS NULL;
-
-                /* we need rewrite this ot dynamic SQL to use partiotioning */
-                insert into billing.invoice_destinations(country_id,network_id,rate,calls_count,calls_duration,amount,invoice_id,first_call_at,last_call_at)
-                    select  dst_country_id,
-                            dst_network_id,
-                            destination_next_rate,
-                            count(nullif(is_last_cdr,false)),
-                            sum(duration),
-                            sum(customer_price),
-                            v_id,
-                            min(time_start),
-                            max(time_start)
-                    from cdr.cdr
-                    where customer_acc_id =i_account_id AND time_start>=i_startdate AND time_end<i_enddate AND customer_invoice_id =v_id
-                    group by dst_country_id,dst_network_id,destination_next_rate;
-
-                SELECT INTO v_count,v_amount,v_min_date,v_max_date
-                    coalesce(sum(calls_count),0),
-                    COALESCE(sum(amount),0),
-                    min(first_call_at),
-                    max(last_call_at)
-                from billing.invoice_destinations
-                where invoice_id =v_id;
-
-
-                UPDATE billing.invoices SET amount=v_amount,calls_count=v_count,first_call_date=v_min_date,last_call_date=v_max_date WHERE id=v_id;
-        END IF;
-RETURN v_id;
-END;
-$$;
-
-
---
 -- Name: billing_insert_event(text, anyelement); Type: FUNCTION; Schema: event; Owner: -
 --
 
@@ -2424,48 +2233,6 @@ ALTER SEQUENCE auth_log.auth_log_id_seq OWNED BY auth_log.auth_log.id;
 
 
 --
--- Name: invoice_destinations; Type: TABLE; Schema: billing; Owner: -
---
-
-CREATE TABLE billing.invoice_destinations (
-    id bigint NOT NULL,
-    dst_prefix character varying,
-    country_id integer,
-    network_id integer,
-    rate numeric,
-    calls_count bigint,
-    calls_duration bigint,
-    amount numeric,
-    invoice_id integer NOT NULL,
-    first_call_at timestamp with time zone,
-    last_call_at timestamp with time zone,
-    successful_calls_count bigint,
-    first_successful_call_at timestamp with time zone,
-    last_successful_call_at timestamp with time zone,
-    billing_duration bigint
-);
-
-
---
--- Name: invoice_destinations_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
---
-
-CREATE SEQUENCE billing.invoice_destinations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: invoice_destinations_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
---
-
-ALTER SEQUENCE billing.invoice_destinations_id_seq OWNED BY billing.invoice_destinations.id;
-
-
---
 -- Name: invoice_documents; Type: TABLE; Schema: billing; Owner: -
 --
 
@@ -2474,9 +2241,7 @@ CREATE TABLE billing.invoice_documents (
     invoice_id integer NOT NULL,
     data bytea,
     filename character varying NOT NULL,
-    pdf_data bytea,
-    csv_data bytea,
-    xls_data bytea
+    pdf_data bytea
 );
 
 
@@ -2500,10 +2265,50 @@ ALTER SEQUENCE billing.invoice_documents_id_seq OWNED BY billing.invoice_documen
 
 
 --
--- Name: invoice_networks; Type: TABLE; Schema: billing; Owner: -
+-- Name: invoice_originated_destinations; Type: TABLE; Schema: billing; Owner: -
 --
 
-CREATE TABLE billing.invoice_networks (
+CREATE TABLE billing.invoice_originated_destinations (
+    id bigint NOT NULL,
+    dst_prefix character varying,
+    country_id integer,
+    network_id integer,
+    rate numeric,
+    calls_count bigint,
+    calls_duration bigint,
+    amount numeric,
+    invoice_id integer NOT NULL,
+    first_call_at timestamp with time zone,
+    last_call_at timestamp with time zone,
+    successful_calls_count bigint,
+    billing_duration bigint
+);
+
+
+--
+-- Name: invoice_originated_destinations_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.invoice_originated_destinations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invoice_originated_destinations_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.invoice_originated_destinations_id_seq OWNED BY billing.invoice_originated_destinations.id;
+
+
+--
+-- Name: invoice_originated_networks; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.invoice_originated_networks (
     id bigint NOT NULL,
     country_id integer,
     network_id integer,
@@ -2515,17 +2320,15 @@ CREATE TABLE billing.invoice_networks (
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
-    first_successful_call_at timestamp with time zone,
-    last_successful_call_at timestamp with time zone,
     billing_duration bigint
 );
 
 
 --
--- Name: invoice_networks_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+-- Name: invoice_originated_networks_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE SEQUENCE billing.invoice_networks_id_seq
+CREATE SEQUENCE billing.invoice_originated_networks_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2534,30 +2337,89 @@ CREATE SEQUENCE billing.invoice_networks_id_seq
 
 
 --
--- Name: invoice_networks_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+-- Name: invoice_originated_networks_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
 --
 
-ALTER SEQUENCE billing.invoice_networks_id_seq OWNED BY billing.invoice_networks.id;
+ALTER SEQUENCE billing.invoice_originated_networks_id_seq OWNED BY billing.invoice_originated_networks.id;
 
 
 --
--- Name: invoice_states; Type: TABLE; Schema: billing; Owner: -
+-- Name: invoice_terminated_destinations; Type: TABLE; Schema: billing; Owner: -
 --
 
-CREATE TABLE billing.invoice_states (
-    id smallint NOT NULL,
-    name character varying NOT NULL
+CREATE TABLE billing.invoice_terminated_destinations (
+    id bigint NOT NULL,
+    dst_prefix character varying,
+    country_id integer,
+    network_id integer,
+    rate numeric,
+    calls_count bigint,
+    calls_duration bigint,
+    amount numeric,
+    invoice_id integer NOT NULL,
+    first_call_at timestamp with time zone,
+    last_call_at timestamp with time zone,
+    successful_calls_count bigint,
+    billing_duration bigint
 );
 
 
 --
--- Name: invoice_types; Type: TABLE; Schema: billing; Owner: -
+-- Name: invoice_terminated_destinations_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
 --
 
-CREATE TABLE billing.invoice_types (
-    id smallint NOT NULL,
-    name character varying NOT NULL
+CREATE SEQUENCE billing.invoice_terminated_destinations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invoice_terminated_destinations_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.invoice_terminated_destinations_id_seq OWNED BY billing.invoice_terminated_destinations.id;
+
+
+--
+-- Name: invoice_terminated_networks; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.invoice_terminated_networks (
+    id bigint NOT NULL,
+    country_id integer,
+    network_id integer,
+    rate numeric,
+    calls_count bigint,
+    calls_duration bigint,
+    amount numeric,
+    invoice_id integer NOT NULL,
+    first_call_at timestamp with time zone,
+    last_call_at timestamp with time zone,
+    successful_calls_count bigint,
+    billing_duration bigint
 );
+
+
+--
+-- Name: invoice_terminated_networks_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.invoice_terminated_networks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invoice_terminated_networks_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.invoice_terminated_networks_id_seq OWNED BY billing.invoice_terminated_networks.id;
 
 
 --
@@ -2569,22 +2431,26 @@ CREATE TABLE billing.invoices (
     account_id integer NOT NULL,
     start_date timestamp with time zone NOT NULL,
     end_date timestamp with time zone NOT NULL,
-    amount numeric NOT NULL,
-    vendor_invoice boolean DEFAULT false NOT NULL,
-    calls_count bigint NOT NULL,
-    first_call_at timestamp with time zone,
-    last_call_at timestamp with time zone,
+    originated_amount numeric DEFAULT 0 NOT NULL,
+    originated_calls_count bigint DEFAULT 0 NOT NULL,
+    first_originated_call_at timestamp with time zone,
+    last_originated_call_at timestamp with time zone,
     contractor_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    calls_duration bigint NOT NULL,
-    state_id smallint DEFAULT 1 NOT NULL,
-    first_successful_call_at timestamp with time zone,
-    last_successful_call_at timestamp with time zone,
-    successful_calls_count bigint,
+    originated_calls_duration bigint DEFAULT 0 NOT NULL,
+    state_id smallint DEFAULT 3 NOT NULL,
+    originated_successful_calls_count bigint DEFAULT 0 NOT NULL,
     type_id smallint NOT NULL,
-    billing_duration bigint NOT NULL,
+    originated_billing_duration bigint DEFAULT 0 NOT NULL,
     reference character varying,
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    terminated_amount numeric DEFAULT 0 NOT NULL,
+    terminated_calls_count integer DEFAULT 0 NOT NULL,
+    first_terminated_call_at timestamp with time zone,
+    last_terminated_call_at timestamp with time zone,
+    terminated_calls_duration integer DEFAULT 0 NOT NULL,
+    terminated_successful_calls_count integer DEFAULT 0 NOT NULL,
+    terminated_billing_duration integer DEFAULT 0 NOT NULL
 );
 
 
@@ -3948,13 +3814,6 @@ ALTER TABLE ONLY auth_log.auth_log ALTER COLUMN id SET DEFAULT nextval('auth_log
 
 
 --
--- Name: invoice_destinations id; Type: DEFAULT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_destinations ALTER COLUMN id SET DEFAULT nextval('billing.invoice_destinations_id_seq'::regclass);
-
-
---
 -- Name: invoice_documents id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -3962,10 +3821,31 @@ ALTER TABLE ONLY billing.invoice_documents ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
--- Name: invoice_networks id; Type: DEFAULT; Schema: billing; Owner: -
+-- Name: invoice_originated_destinations id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_networks ALTER COLUMN id SET DEFAULT nextval('billing.invoice_networks_id_seq'::regclass);
+ALTER TABLE ONLY billing.invoice_originated_destinations ALTER COLUMN id SET DEFAULT nextval('billing.invoice_originated_destinations_id_seq'::regclass);
+
+
+--
+-- Name: invoice_originated_networks id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_originated_networks ALTER COLUMN id SET DEFAULT nextval('billing.invoice_originated_networks_id_seq'::regclass);
+
+
+--
+-- Name: invoice_terminated_destinations id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_terminated_destinations ALTER COLUMN id SET DEFAULT nextval('billing.invoice_terminated_destinations_id_seq'::regclass);
+
+
+--
+-- Name: invoice_terminated_networks id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_terminated_networks ALTER COLUMN id SET DEFAULT nextval('billing.invoice_terminated_networks_id_seq'::regclass);
 
 
 --
@@ -4187,10 +4067,10 @@ ALTER TABLE ONLY auth_log.auth_log
 
 
 --
--- Name: invoice_destinations invoice_destinations_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_originated_destinations invoice_destinations_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_destinations
+ALTER TABLE ONLY billing.invoice_originated_destinations
     ADD CONSTRAINT invoice_destinations_pkey PRIMARY KEY (id);
 
 
@@ -4203,43 +4083,27 @@ ALTER TABLE ONLY billing.invoice_documents
 
 
 --
--- Name: invoice_networks invoice_networks_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_originated_networks invoice_networks_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_networks
+ALTER TABLE ONLY billing.invoice_originated_networks
     ADD CONSTRAINT invoice_networks_pkey PRIMARY KEY (id);
 
 
 --
--- Name: invoice_states invoice_states_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_terminated_destinations invoice_terminated_destinations_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_states
-    ADD CONSTRAINT invoice_states_name_key UNIQUE (name);
-
-
---
--- Name: invoice_states invoice_states_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_states
-    ADD CONSTRAINT invoice_states_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY billing.invoice_terminated_destinations
+    ADD CONSTRAINT invoice_terminated_destinations_pkey PRIMARY KEY (id);
 
 
 --
--- Name: invoice_types invoice_types_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_terminated_networks invoice_terminated_networks_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_types
-    ADD CONSTRAINT invoice_types_name_key UNIQUE (name);
-
-
---
--- Name: invoice_types invoice_types_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_types
-    ADD CONSTRAINT invoice_types_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY billing.invoice_terminated_networks
+    ADD CONSTRAINT invoice_terminated_networks_pkey PRIMARY KEY (id);
 
 
 --
@@ -4616,13 +4480,6 @@ CREATE INDEX "index_billing.invoices_on_reference" ON billing.invoices USING btr
 
 
 --
--- Name: invoice_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
---
-
-CREATE INDEX invoice_destinations_invoice_id_idx ON billing.invoice_destinations USING btree (invoice_id);
-
-
---
 -- Name: invoice_documents_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -4630,10 +4487,31 @@ CREATE UNIQUE INDEX invoice_documents_invoice_id_idx ON billing.invoice_document
 
 
 --
--- Name: invoice_networks_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
+-- Name: invoice_originated_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
-CREATE INDEX invoice_networks_invoice_id_idx ON billing.invoice_networks USING btree (invoice_id);
+CREATE INDEX invoice_originated_destinations_invoice_id_idx ON billing.invoice_originated_destinations USING btree (invoice_id);
+
+
+--
+-- Name: invoice_originated_networks_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX invoice_originated_networks_invoice_id_idx ON billing.invoice_originated_networks USING btree (invoice_id);
+
+
+--
+-- Name: invoice_terminated_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX invoice_terminated_destinations_invoice_id_idx ON billing.invoice_terminated_destinations USING btree (invoice_id);
+
+
+--
+-- Name: invoice_terminated_networks_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX invoice_terminated_networks_invoice_id_idx ON billing.invoice_terminated_networks USING btree (invoice_id);
 
 
 --
@@ -4770,14 +4648,6 @@ CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.tr
 
 
 --
--- Name: invoice_destinations invoice_destinations_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoice_destinations
-    ADD CONSTRAINT invoice_destinations_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
-
-
---
 -- Name: invoice_documents invoice_documents_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -4786,27 +4656,35 @@ ALTER TABLE ONLY billing.invoice_documents
 
 
 --
--- Name: invoice_networks invoice_networks_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_originated_destinations invoice_originated_destinations_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoice_networks
-    ADD CONSTRAINT invoice_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
-
-
---
--- Name: invoices invoices_state_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.invoices
-    ADD CONSTRAINT invoices_state_id_fkey FOREIGN KEY (state_id) REFERENCES billing.invoice_states(id);
+ALTER TABLE ONLY billing.invoice_originated_destinations
+    ADD CONSTRAINT invoice_originated_destinations_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
 
 
 --
--- Name: invoices invoices_type_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+-- Name: invoice_originated_networks invoice_originated_networks_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
-ALTER TABLE ONLY billing.invoices
-    ADD CONSTRAINT invoices_type_id_fkey FOREIGN KEY (type_id) REFERENCES billing.invoice_types(id);
+ALTER TABLE ONLY billing.invoice_originated_networks
+    ADD CONSTRAINT invoice_originated_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
+
+
+--
+-- Name: invoice_terminated_destinations invoice_terminated_destinations_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_terminated_destinations
+    ADD CONSTRAINT invoice_terminated_destinations_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
+
+
+--
+-- Name: invoice_terminated_networks invoice_terminated_networks_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_terminated_networks
+    ADD CONSTRAINT invoice_terminated_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
 
 
 --
@@ -4972,6 +4850,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231007121159'),
 ('20231007123320'),
 ('20231027110359'),
-('20231101165858');
+('20231101165858'),
+('20231106100135'),
+('20231106125344');
 
 

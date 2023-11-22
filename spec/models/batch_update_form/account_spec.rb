@@ -14,10 +14,8 @@ RSpec.describe BatchUpdateForm::Account do
       termination_capacity: '300',
       total_capacity: '50',
       max_call_duration: '10',
-      vendor_invoice_period_id: Billing::InvoicePeriod.take!.id.to_s,
-      customer_invoice_period_id: Billing::InvoicePeriod.take!.id.to_s,
-      vendor_invoice_template_id: invoice_template.id.to_s,
-      customer_invoice_template_id: invoice_template.id.to_s,
+      invoice_period_id: Billing::InvoicePeriod::DAILY.to_s,
+      invoice_template_id: invoice_template.id.to_s,
       timezone_id: timezone.id.to_s
     }
   end
