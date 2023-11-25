@@ -82,13 +82,11 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   action_item :documents, only: :show do
-    dropdown_menu 'Files' do
-      item('Document (ODT format)', export_file_odt_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Originated Details (CSV format)', export_file_originated_csv_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Terminated Details (CSV format)', export_file_terminated_csv_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Originated Details (XLS format)', export_file_originated_xls_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
-      item('Terminated Details (XLS format)', export_file_terminated_xls_invoice_path(resource.id), method: :get) if resource.invoice_document.present?
+    if resource.invoice_document.present?
+      dropdown_menu 'Files' do
+        item('Document (ODT format)', export_file_odt_invoice_path(resource.id), method: :get)
+        item('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get)
+      end
     end
   end
 
