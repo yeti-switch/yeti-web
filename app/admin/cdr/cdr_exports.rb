@@ -282,11 +282,14 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                input_html: {
                  class: 'chosen-ajax',
                  data: {
-                   path: '/customers_auths/search_with_return_external_id?q[ordered_by]=name'
+                   path: '/customers_auths/search_with_return_external_id?q[ordered_by]=name&q[external_id_null]=false'
                  }
                },
-               collection: if params.dig(:q, :customer_auth_external_id_in)
-                             CustomersAuth.where(external_id: params.dig(:q, :customer_auth_external_id_in)).order(:name).pluck(:name, :external_id)
+               collection: if ff.object.customer_auth_external_id_in.present?
+                             CustomersAuth
+                               .where(external_id: ff.object.customer_auth_external_id_in)
+                               .order(:name)
+                               .map { |r| [r.display_name, r.external_id] }
                            else
                              CustomersAuth.none
                            end
