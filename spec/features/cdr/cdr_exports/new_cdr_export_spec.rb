@@ -281,6 +281,18 @@ RSpec.describe 'Create new CDR export', js: true do
     end
   end
 
+  context 'when "Customer Auth external ID IN" filter is selected and then form submitted' do
+    let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
+    let(:fill_form!) { fill_in_chosen 'Customer auth external id in', with: customer_auth.display_name, multiple: true, ajax: true }
+
+    it 'should render form with previously selected Customer Auth' do
+      subject
+
+      expect(page).to have_semantic_errors count: 2
+      expect(page).to have_field_chosen 'Customer auth external id in', with: customer_auth.display_name
+    end
+  end
+
   context 'without fields' do
     let(:fill_form!) do
       fill_in 'Time start gteq', with: '2018-01-01'
