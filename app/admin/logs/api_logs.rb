@@ -39,7 +39,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   filter :response_headers
   filter :remote_ip_eq_inet, as: :string, label: 'Remote IP'
 
-  index do
+  index download_links: false do
     id_column
     column :created_at
     column :status

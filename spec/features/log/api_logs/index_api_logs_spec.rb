@@ -3,11 +3,17 @@
 RSpec.describe 'Index Log Api Logs', type: :feature do
   include_context :login_as_admin
 
-  it 'n+1 checks' do
-    api_logs = create_list(:api_log, 2)
-    visit api_logs_path
-    api_logs.each do |api_log|
-      expect(page).to have_css('.resource_id_link', text: api_log.id)
+  context 'when visit index page with two API Logs' do
+    let!(:api_log_first) { FactoryBot.create(:api_log) }
+    let!(:api_log_second) { FactoryBot.create(:api_log) }
+
+    before { visit api_logs_path }
+
+    it 'should render index page properly' do
+      expect(page).to have_table_row count: 2
+      expect(page).to have_table_cell column: 'Id', exact_text: api_log_first.id
+      expect(page).to have_table_cell column: 'Id', exact_text: api_log_second.id
+      expect(page).not_to have_link 'CSV'
     end
   end
 
