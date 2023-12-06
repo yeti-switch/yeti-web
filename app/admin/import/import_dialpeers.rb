@@ -61,6 +61,8 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
     column :asr_limit
     column :short_calls_limit
     column :capacity
+    column :src_name_rewrite_rule
+    column :src_name_rewrite_result
     column :src_rewrite_rule
     column :src_rewrite_result
     column :dst_rewrite_rule

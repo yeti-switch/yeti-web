@@ -97,7 +97,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
     id_column
-    column 'UUID', :uuid
     actions
     column :reference
     column :contractor, footer: lambda {
@@ -107,6 +106,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     }
     column :account
     column :state
+    column :type
     column :start_date
     column :end_date
     column :originated_amount, footer: lambda {
@@ -127,7 +127,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         c.decorated_terminated_amount
       end
     end
-    column :type
 
     column :originated_calls_count, footer: lambda {
       strong do
@@ -162,10 +161,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     }, &:decorated_terminated_billing_duration
 
     column :created_at
-    column :first_originated_call_at
-    column :first_terminated_call_at
-    column :last_originated_call_at
-    column :last_terminated_call_at
+    column 'UUID', :uuid
   end
 
   filter :id
@@ -174,9 +170,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   contractor_filter :contractor_id_eq
   account_filter :account_id_eq
   filter :state
+  filter :type
   filter :start_date, as: :date_time_range
   filter :end_date, as: :date_time_range
-  filter :type
   filter :originated_amount
   filter :originated_billing_duration
   filter :originated_calls_count
@@ -197,67 +193,62 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             row(:contractor) { s.contractor || s.contractor_id }
             row :account
             row :state
+            row :type
             row :start_date
             row :end_date
-            row :type
             row :created_at
           end
         end
-        columns do
-          column do
-            panel 'Originated' do
-              attributes_table_for s do
-                row :originated_amount do
-                  strong do
-                    s.decorated_originated_amount
-                  end
-                end
-                row :originated_calls_count
-                row :originated_successful_calls_count
-                row :originated_calls_duration do
-                  s.decorated_originated_calls_duration
-                end
-                row :originated_billing_duration do
-                  s.decorated_originated_billing_duration
-                end
-                row :first_originated_call_at
-                row :last_originated_call_at
+        panel 'Traffic summary' do
+          attributes_table_for s do
+            row :originated_amount do
+              strong do
+                s.decorated_originated_amount
               end
             end
-
-            panel 'Terminated' do
-              attributes_table_for s do
-                row :terminated_amount do
-                  strong do
-                    s.decorated_terminated_amount
-                  end
-                end
-                row :terminated_calls_count
-                row :terminated_successful_calls_count
-                row :terminated_calls_duration do
-                  s.decorated_terminated_calls_duration
-                end
-                row :terminated_billing_duration do
-                  s.decorated_terminated_billing_duration
-                end
-                row :first_terminated_call_at
-                row :last_terminated_call_at
+            row :originated_calls_count
+            row :terminated_amount do
+              strong do
+                s.decorated_terminated_amount
               end
             end
+            row :terminated_calls_count
           end
         end
+
       end
-      tab 'Destination prefixes' do
-        panel 'Originated' do
+      tab 'Originated traffic' do
+        panel 'Summary' do
+          attributes_table_for s do
+            row :originated_amount do
+              strong do
+                s.decorated_originated_amount
+              end
+            end
+            row :originated_calls_count
+            row :originated_successful_calls_count
+            row :originated_calls_duration do
+              s.decorated_originated_calls_duration
+            end
+            row :originated_billing_duration, title: "Calls duration rounded according to destination billing intervals" do
+              s.decorated_originated_billing_duration
+            end
+            row :first_originated_call_at
+            row :last_originated_call_at
+          end
+        end
+        panel 'By destination(destination prefix)' do
           table_for resource.originated_destinations do
             column :dst_prefix
             column :country
             column :network
             column :rate
-            column :calls_count
-            column :successful_calls_count
-            column :calls_duration, &:decorated_calls_duration
-            column :billing_duration, &:decorated_billing_duration
+            column 'Calls count/successful' do |s|
+              "#{s.calls_count}/#{s.successful_calls_count}"
+            end
+            column 'Duration real/billed' do |s|
+              "#{s.decorated_calls_duration} / #{s.decorated_billing_duration}"
+            end
             column :amount do |r|
               strong do
                 r.decorated_amount
@@ -267,16 +258,19 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             column :last_call_at
           end
         end
-        panel 'Terminated' do
-          table_for resource.terminated_destinations do
-            column :dst_prefix
+        panel 'By destination number country/network' do
+          table_for resource.originated_networks do
             column :country
             column :network
             column :rate
-            column :calls_count
-            column :successful_calls_count
-            column :calls_duration, &:decorated_calls_duration
-            column :billing_duration, &:decorated_billing_duration
+            column 'Calls count/successful' do |s|
+              "#{s.calls_count}/#{s.successful_calls_count}"
+            end
+
+            column 'Duration real/billed' do |s|
+              "#{s.decorated_calls_duration} / #{s.decorated_billing_duration}"
+            end
+
             column :amount do |r|
               strong do
                 r.decorated_amount
@@ -288,14 +282,35 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         end
       end
 
-      tab 'Destination networks' do
-        panel 'Originated' do
-          table_for resource.originated_networks do
+      tab 'Terminated traffic' do
+        panel 'Summary' do
+          attributes_table_for s do
+            row :terminated_amount do
+              strong do
+                s.decorated_terminated_amount
+              end
+            end
+            row :terminated_calls_count
+            row :terminated_successful_calls_count
+            row :terminated_calls_duration do
+              s.decorated_terminated_calls_duration
+            end
+            row :terminated_billing_duration do
+              s.decorated_terminated_billing_duration
+            end
+            row :first_terminated_call_at
+            row :last_terminated_call_at
+          end
+        end
+        panel 'By destination(dialpeer prefix)' do
+          table_for resource.terminated_destinations do
+            column :dst_prefix
             column :country
             column :network
             column :rate
-            column :calls_count
-            column :successful_calls_count
+            column 'Calls count/successful' do |s|
+              "#{s.calls_count}/#{s.successful_calls_count}"
+            end
             column :calls_duration, &:decorated_calls_duration
             column :billing_duration, &:decorated_billing_duration
             column :amount do |r|
@@ -307,13 +322,14 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             column :last_call_at
           end
         end
-        panel 'Terminated' do
+        panel 'By destination number country/network' do
           table_for resource.terminated_networks do
             column :country
             column :network
             column :rate
-            column :calls_count
-            column :successful_calls_count
+            column 'Calls count/successful' do |s|
+              "#{s.calls_count}/#{s.successful_calls_count}"
+            end
             column :calls_duration, &:decorated_calls_duration
             column :billing_duration, &:decorated_billing_duration
             column :amount do |r|

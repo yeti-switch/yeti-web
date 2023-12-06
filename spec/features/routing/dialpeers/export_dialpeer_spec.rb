@@ -56,6 +56,8 @@ RSpec.describe 'Export Dialpeer', type: :feature do
         ['Asr limit', item.asr_limit.to_s, anything],
         ['Short calls limit', item.short_calls_limit.to_s, anything],
         ['Capacity', item.capacity.to_s, anything],
+        ['Src name rewrite rule', item.src_name_rewrite_rule.to_s, anything],
+        ['Src name rewrite result', item.src_name_rewrite_result.to_s, anything],
         ['Src rewrite rule', item.src_rewrite_rule.to_s, anything],
         ['Src rewrite result', item.src_rewrite_result.to_s, anything],
         ['Dst rewrite rule', item.dst_rewrite_rule.to_s, anything],

@@ -33,6 +33,7 @@ ActiveAdmin.register Dialpeer do
                  [:routeset_discriminator_name, proc { |row| row.routeset_discriminator.try(:name) }],
                  :valid_from, :valid_till,
                  :acd_limit, :asr_limit, :short_calls_limit, :capacity,
+                 :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :reverse_billing,
