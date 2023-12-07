@@ -50,7 +50,6 @@ class ChangeInvoiceCdrFields < ActiveRecord::Migration[7.0]
         ADD COLUMN terminated_calls_duration integer NOT NULL DEFAULT 0,
         ADD COLUMN terminated_successful_calls_count integer NOT NULL DEFAULT 0,
         ADD COLUMN terminated_billing_duration integer NOT NULL DEFAULT 0,
-        DROP COLUMN vendor_invoice,
         DROP COLUMN first_successful_call_at,
         DROP COLUMN last_successful_call_at
     }
@@ -87,7 +86,6 @@ class ChangeInvoiceCdrFields < ActiveRecord::Migration[7.0]
         DROP COLUMN terminated_calls_duration,
         DROP COLUMN terminated_successful_calls_count,
         DROP COLUMN terminated_billing_duration,
-        ADD COLUMN vendor_invoice boolean NOT NULL DEFAULT false,
         ADD COLUMN first_successful_call_at timestamp with time zone,
         ADD COLUMN last_successful_call_at timestamp with time zone
     }
@@ -104,9 +102,7 @@ class ChangeInvoiceCdrFields < ActiveRecord::Migration[7.0]
         (2, 'Approved'),
         (3, 'New')
     }
-    execute %q{
-      ALTER SEQUENCE billing.invoice_states_id_seq RESTART WITH 4
-    }
+
     execute %q{
       ALTER TABLE ONLY billing.invoices
         ADD CONSTRAINT invoices_state_id_fkey FOREIGN KEY (state_id) REFERENCES billing.invoice_states(id)
@@ -124,9 +120,7 @@ class ChangeInvoiceCdrFields < ActiveRecord::Migration[7.0]
         (2, 'Auto. Full period'),
         (3, 'Auto. Partial')
     }
-    execute %q{
-      ALTER SEQUENCE billing.invoice_types_id_seq RESTART WITH 4
-    }
+
     execute %q{
       ALTER TABLE ONLY billing.invoices
         ADD CONSTRAINT invoices_type_id_fkey FOREIGN KEY (type_id) REFERENCES billing.invoice_types(id)

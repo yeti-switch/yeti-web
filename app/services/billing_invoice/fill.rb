@@ -23,6 +23,7 @@ module BillingInvoice
     end
 
     def generate_originated_data
+      # traffic originated by account as "customer"
       SqlCaller::Cdr.execute(
           "INSERT INTO billing.invoice_originated_destinations(
             dst_prefix, country_id, network_id, rate,
@@ -87,6 +88,7 @@ module BillingInvoice
     end
 
     def generate_terminated_data
+      # traffic terminated to account as "vendor"
       SqlCaller::Cdr.execute(
           "INSERT INTO billing.invoice_terminated_destinations(
             dst_prefix, country_id, network_id, rate,
@@ -110,9 +112,9 @@ module BillingInvoice
             MAX(time_start) -- last_call_at
           FROM cdr.cdr
           WHERE
-              vendor_acc_id =? AND
-              time_start >=? AND
-              time_start < ?
+            vendor_acc_id =? AND
+            time_start >=? AND
+            time_start < ?
           GROUP BY destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
           invoice.id,
           invoice.account_id,

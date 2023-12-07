@@ -43,6 +43,16 @@ class InvoiceOriginatedTerminatedNetworksDestinations < ActiveRecord::Migration[
 
       ALTER TABLE ONLY billing.invoice_terminated_networks
           ADD CONSTRAINT invoice_terminated_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
+
+      insert into billing.invoice_terminated_networks(
+        country_id, network_id, rate, calls_count,
+        calls_duration, amount, invoice_id,
+        first_call_at, last_call_at, successful_calls_count, billing_duration)
+      SELECT country_id, network_id, rate, calls_count,
+        calls_duration, amount, invoice_id,
+        first_call_at, last_call_at, successful_calls_count, billing_duration
+      from billing.invoice_originated_networks where invoice_id in ( select id from billing.invoices where vendor_invoice);
+      delete from billing.invoice_originated_networks where invoice_id in ( select id from billing.invoices where vendor_invoice);
     }
 
     execute %q{
@@ -81,18 +91,50 @@ class InvoiceOriginatedTerminatedNetworksDestinations < ActiveRecord::Migration[
 
       ALTER TABLE ONLY billing.invoice_terminated_destinations
           ADD CONSTRAINT invoice_terminated_destinations_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
+
+      insert into billing.invoice_terminated_destinations (
+          dst_prefix, country_id, network_id,
+          rate, calls_count, calls_duration, amount, invoice_id,
+          first_call_at, last_call_at,
+          successful_calls_count, billing_duration )
+      SELECT dst_prefix, country_id, network_id,
+          rate, calls_count, calls_duration, amount, invoice_id,
+          first_call_at, last_call_at,
+          successful_calls_count, billing_duration
+      from billing.invoice_originated_destinations where invoice_id in ( select id from billing.invoices where vendor_invoice);
+      delete from billing.invoice_originated_destinations where invoice_id in ( select id from billing.invoices where vendor_invoice);
+
     }
 
     execute %q{
       ALTER TABLE billing.invoice_documents DROP COLUMN csv_data
     }
     execute %q{
-      ALTER TABLE billing.invoice_documents DROP COLUMN xls_data
+      ALTER TABLE billing.invoice_documents DROP COLUMN xls_data;
+
+
+      UPDATE billing.invoices set
+        terminated_amount = originated_amount,
+        terminated_calls_count = originated_calls_count,
+        terminated_calls_duration = originated_calls_duration,
+        terminated_successful_calls_count = originated_successful_calls_count,
+        terminated_billing_duration = originated_billing_duration
+      where vendor_invoice;
+      UPDATE billing.invoices set
+        originated_amount = 0,
+        originated_calls_count = 0,
+        originated_calls_duration = 0,
+        originated_successful_calls_count = 0,
+        originated_billing_duration = 0
+      where vendor_invoice;
+
+      ALTER TABLE billing.invoices DROP COLUMN vendor_invoice;
     }
   end
 
   def down
     execute %q{
+      ALTER TABLE billing.invoices ADD COLUMN vendor_invoice boolean NOT NULL DEFAULT false;
       ALTER TABLE billing.invoice_originated_networks RENAME TO invoice_networks;
 
       ALTER TABLE billing.invoice_networks
@@ -104,7 +146,7 @@ class InvoiceOriginatedTerminatedNetworksDestinations < ActiveRecord::Migration[
       ALTER TABLE billing.invoice_networks
           RENAME CONSTRAINT invoice_originated_networks_invoice_id_fkey TO invoice_networks_invoice_id_fkey;
 
-      ALTER SEQUENCE billing.invoice_originated_destinations_id_seq RENAME TO invoice_destinations_id_seq;
+      ALTER SEQUENCE billing.invoice_originated_networks_id_seq RENAME TO invoice_networks_id_seq;
     }
 
     execute %q{
