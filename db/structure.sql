@@ -24656,7 +24656,9 @@ CREATE TABLE data_import.import_dialpeers (
     routing_tag_mode_name character varying,
     routeset_discriminator_id smallint,
     routeset_discriminator_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    src_name_rewrite_rule character varying,
+    src_name_rewrite_result character varying
 );
 
 
@@ -31419,8 +31421,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31576,6 +31577,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231007204855'),
 ('20231106095901'),
 ('20231106100113'),
-('20231107100745');
+('20231107100745'),
+('20231206200530');
 
 

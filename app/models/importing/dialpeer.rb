@@ -36,6 +36,8 @@
 #  routing_tag_mode_name       :string
 #  routing_tag_names           :string
 #  short_calls_limit           :float            default(1.0), not null
+#  src_name_rewrite_result     :string
+#  src_name_rewrite_rule       :string
 #  src_rewrite_result          :string
 #  src_rewrite_rule            :string
 #  valid_from                  :datetime
@@ -66,7 +68,9 @@ class Importing::Dialpeer < Importing::Base
   self.import_attributes = %w[prefix enabled lcr_rate_multiplier
                               initial_interval next_interval initial_rate next_rate connect_fee reverse_billing
                               gateway_id gateway_group_id routing_group_id
-                              vendor_id account_id src_rewrite_rule src_rewrite_result
+                              vendor_id account_id
+                              src_name_rewrite_rule src_name_rewrite_result
+                              src_rewrite_rule src_rewrite_result
                               dst_rewrite_rule dst_rewrite_result asr_limit acd_limit short_calls_limit priority capacity
                               valid_from valid_till force_hit_rate
                               dst_number_min_length dst_number_max_length
