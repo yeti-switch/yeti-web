@@ -215,7 +215,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             row :terminated_calls_count
           end
         end
-
       end
       tab 'Originated traffic' do
         panel 'Summary' do
@@ -230,7 +229,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             row :originated_calls_duration do
               s.decorated_originated_calls_duration
             end
-            row :originated_billing_duration, title: "Calls duration rounded according to destination billing intervals" do
+            row :originated_billing_duration, title: 'Calls duration rounded according to destination billing intervals' do
               s.decorated_originated_billing_duration
             end
             row :first_originated_call_at
