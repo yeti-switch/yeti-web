@@ -40,8 +40,8 @@ module BillingInvoice
             COUNT(id),  -- calls count
             COUNT(NULLIF(success,false)),  -- successful_calls_count
             SUM(duration), -- calls_duration
-            SUM(vendor_duration), -- billing_duration
-            SUM(vendor_price), -- amount
+            SUM(customer_duration), -- billing_duration
+            SUM(customer_price), -- amount
             ?, -- invoice_id
             MIN(time_start), -- first_call_at
             MAX(time_start) -- last_call_at
@@ -102,11 +102,11 @@ module BillingInvoice
             last_call_at
           ) SELECT
             destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
-            COUNT(NULLIF(is_last_cdr,false)), -- calls_count
-            COUNT(NULLIF((success AND is_last_cdr),false)),  -- successful_calls_count
+            COUNT(*), -- calls_count
+            COUNT(NULLIF((success),false)),  -- successful_calls_count
             SUM(duration), -- calls_duration
-            SUM(customer_duration), -- billing_duration
-            SUM(customer_price), -- amount
+            SUM(vendor_duration), -- billing_duration
+            SUM(vendor_price), -- amount
             ?, -- invoice_id
             MIN(time_start), -- first_call_at
             MAX(time_start) -- last_call_at
