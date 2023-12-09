@@ -49,6 +49,8 @@ Config.setup do |setup_config|
       required(:'logs.api_requests').maybe(:string, format?: /\A\d+ days\z/)
     end
 
+    optional(:partition_detach_before_drop).filled(:bool)
+
     required(:prometheus).schema do
       required(:enabled).value(:bool?)
       required(:host).maybe(:string)

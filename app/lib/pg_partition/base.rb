@@ -116,7 +116,15 @@ module PgPartition
       select_all_serialized(query, *bindings)
     end
 
-    def remove_partition(partition_name)
+    def remove_partition(table_name, partition_name)
+      if YetiConfig.partition_detach_before_drop
+        Rails.logger.info { "Detaching partition #{partition_name} from table #{table_name}" }
+        execute <<-SQL
+          ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} CONCURRENTLY;
+        SQL
+      end
+
+      Rails.logger.info { "Dropping partition #{partition_name}" }
       execute <<-SQL
         DROP TABLE #{partition_name};
       SQL
