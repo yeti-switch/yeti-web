@@ -92,10 +92,10 @@ class Billing::Invoice < Cdr::Base
   has_many :full_terminated_destinations, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id, dependent: :delete_all
   has_many :full_originated_networks, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
   has_many :full_terminated_networks, class_name: 'Billing::InvoiceTerminatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
-  has_many :originated_destinations, -> { successful_calls }, class_name: 'Billing::InvoiceOriginatedDestination', foreign_key: :invoice_id
-  has_many :terminated_destinations, -> { successful_calls }, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id
-  has_many :originated_networks, -> { successful_calls }, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id
-  has_many :terminated_networks, -> { successful_calls }, class_name: 'Billing::InvoiceTerminatedNetwork', foreign_key: :invoice_id
+  has_many :originated_destinations, class_name: 'Billing::InvoiceOriginatedDestination', foreign_key: :invoice_id
+  has_many :terminated_destinations, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id
+  has_many :originated_networks, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id
+  has_many :terminated_networks, class_name: 'Billing::InvoiceTerminatedNetwork', foreign_key: :invoice_id
 
   validates :contractor,
             :account,
