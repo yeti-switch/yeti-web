@@ -169,7 +169,7 @@ RSpec.describe Cdr::Cdr do
 
     before do
       current_partitions.each do |partition|
-        Cdr::Cdr.pg_partition_class.remove_partition partition[:name]
+        Cdr::Cdr.pg_partition_class.remove_partition(partition[:parent_table], partition[:name])
       end
       expect(current_partitions).to be_empty
     end

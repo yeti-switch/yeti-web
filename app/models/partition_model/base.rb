@@ -125,7 +125,7 @@ module PartitionModel
     end
 
     def destroy
-      self.class.pg_partition_class.remove_partition(name)
+      self.class.pg_partition_class.remove_partition(parent_table, name)
       true
     rescue ActiveRecord::StatementInvalid => e
       errors.add(:base, e.message)
