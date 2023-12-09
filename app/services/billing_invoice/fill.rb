@@ -36,7 +36,7 @@ module BillingInvoice
             first_call_at,
             last_call_at
           ) SELECT
-            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
+            destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
             COUNT(id),  -- calls count
             COUNT(NULLIF(success,false)),  -- successful_calls_count
             SUM(duration), -- calls_duration
@@ -51,7 +51,8 @@ module BillingInvoice
             is_last_cdr AND
             time_start>=? AND
             time_start<?
-          GROUP BY dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
+          GROUP BY
+            destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
           invoice.id,
           invoice.account_id,
           invoice.start_date,
@@ -81,7 +82,8 @@ module BillingInvoice
             MAX(last_call_at)
           FROM billing.invoice_originated_destinations
           WHERE invoice_id=?
-          GROUP BY country_id, network_id, rate",
+          GROUP BY
+            country_id, network_id, rate",
           invoice.id,
           invoice.id
         )
@@ -101,7 +103,7 @@ module BillingInvoice
             first_call_at,
             last_call_at
           ) SELECT
-            destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
+            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
             COUNT(*), -- calls_count
             COUNT(NULLIF((success),false)),  -- successful_calls_count
             SUM(duration), -- calls_duration
@@ -115,7 +117,8 @@ module BillingInvoice
             vendor_acc_id =? AND
             time_start >=? AND
             time_start < ?
-          GROUP BY destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
+          GROUP BY
+            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
           invoice.id,
           invoice.account_id,
           invoice.start_date,
@@ -145,7 +148,8 @@ module BillingInvoice
             MAX(last_call_at)
           FROM billing.invoice_terminated_destinations
           WHERE invoice_id=?
-          GROUP BY country_id, network_id, rate",
+          GROUP BY
+            country_id, network_id, rate",
           invoice.id,
           invoice.id
         )
