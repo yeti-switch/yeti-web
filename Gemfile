@@ -154,3 +154,7 @@ gem 'cronex', '~> 0.12.0'
 gem 'click_house'
 
 gem 'cryptomus', '~> 0.2.0'
+
+gem 'opentelemetry-exporter-otlp'
+gem 'opentelemetry-instrumentation-all'
+gem 'opentelemetry-sdk'

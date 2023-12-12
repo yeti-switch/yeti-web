@@ -65,6 +65,10 @@ Config.setup do |setup_config|
       required(:environment).filled(:string)
     end
 
+    optional(:telemetry).schema do
+      optional(:enabled).filled(:bool)
+    end
+
     required(:versioning_disable_for_models).each(:string)
 
     optional(:keep_expired_destinations_days)
