@@ -5,19 +5,24 @@
 # Table name: billing.invoices
 #
 #  id                                :integer(4)       not null, primary key
+#  amount_earned                     :decimal(, )      default(0.0), not null
+#  amount_spent                      :decimal(, )      default(0.0), not null
+#  amount_total                      :decimal(, )      default(0.0), not null
 #  end_date                          :timestamptz      not null
 #  first_originated_call_at          :timestamptz
 #  first_terminated_call_at          :timestamptz
 #  last_originated_call_at           :timestamptz
 #  last_terminated_call_at           :timestamptz
-#  originated_amount                 :decimal(, )      default(0.0), not null
+#  originated_amount_earned          :decimal(, )      default(0.0), not null
+#  originated_amount_spent           :decimal(, )      default(0.0), not null
 #  originated_billing_duration       :bigint(8)        default(0), not null
 #  originated_calls_count            :bigint(8)        default(0), not null
 #  originated_calls_duration         :bigint(8)        default(0), not null
 #  originated_successful_calls_count :bigint(8)        default(0), not null
 #  reference                         :string
 #  start_date                        :timestamptz      not null
-#  terminated_amount                 :decimal(, )      default(0.0), not null
+#  terminated_amount_earned          :decimal(, )      default(0.0), not null
+#  terminated_amount_spent           :decimal(, )      default(0.0), not null
 #  terminated_billing_duration       :integer(4)       default(0), not null
 #  terminated_calls_count            :integer(4)       default(0), not null
 #  terminated_calls_duration         :integer(4)       default(0), not null
@@ -41,11 +46,16 @@ class Billing::Invoice < Cdr::Base
   include WithPaperTrail
 
   Totals = Struct.new(
-    :total_originated_amount,
+    :total_amount_total,
+    :total_amount_spent,
+    :total_amount_earned,
+    :total_originated_amount_spent,
+    :total_originated_amount_earned,
     :total_originated_calls_count,
     :total_originated_calls_duration,
     :total_originated_billing_duration,
-    :total_terminated_amount,
+    :total_terminated_amount_spent,
+    :total_terminated_amount_earned,
     :total_terminated_calls_count,
     :total_terminated_calls_duration,
     :total_terminated_billing_duration
@@ -54,11 +64,16 @@ class Billing::Invoice < Cdr::Base
   class << self
     def totals
       row = extending(ActsAsTotalsRelation).totals_row_by(
-        'sum(originated_amount) as total_originated_amount',
+        'sum(amount_total) as total_amount_total',
+        'sum(amount_spent) as total_amount_spent',
+        'sum(amount_earned) as total_amount_earned',
+        'sum(originated_amount_spent) as total_originated_amount_spent',
+        'sum(originated_amount_earned) as total_originated_amount_earned',
         'sum(originated_calls_count) as total_originated_calls_count',
         'sum(originated_calls_duration) as total_originated_calls_duration',
         'sum(originated_billing_duration) as total_originated_billing_duration',
-        'sum(terminated_amount) as total_terminated_amount',
+        'sum(terminated_amount_spent) as total_terminated_amount_spent',
+        'sum(terminated_amount_earned) as total_terminated_amount_earned',
         'sum(terminated_calls_count) as total_terminated_calls_count',
         'sum(terminated_calls_duration) as total_terminated_calls_duration',
         'sum(terminated_billing_duration) as total_terminated_billing_duration'
@@ -109,7 +124,9 @@ class Billing::Invoice < Cdr::Base
   validates :type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
 
   validate :validate_dates
-  validates :originated_amount, :terminated_amount, numericality: { greater_than_or_equal_to: 0 }
+  validates :amount_spent, :amount_earned,
+            :originated_amount_spent, :originated_amount_earned,
+            :terminated_amount_spent, :terminated_amount_earned, numericality: { greater_than_or_equal_to: 0 }
 
   validates :originated_billing_duration,
             :originated_calls_count,

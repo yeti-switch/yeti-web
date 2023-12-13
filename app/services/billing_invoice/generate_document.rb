@@ -133,8 +133,11 @@ module BillingInvoice
         inv_start_date: invoice.start_date,
         inv_end_date: invoice.end_date,
 
-        inv_orig_amount: invoice.originated_amount,
-        inv_orig_amount_decorated: decorated_invoice.decorated_originated_amount,
+        inv_orig_amount_spent: invoice.originated_amount_spent,
+        inv_orig_amount_earned: invoice.originated_amount_earned,
+        inv_orig_amount_spent_decorated: decorated_invoice.decorated_originated_amount_spent,
+        inv_orig_amount_earned_decorated: decorated_invoice.decorated_originated_amount_earned,
+
         inv_orig_calls_count: invoice.originated_calls_count,
         inv_orig_successful_calls_count: invoice.originated_successful_calls_count,
         inv_orig_calls_durationm: decorated_invoice.decorated_originated_calls_duration_kolon,
@@ -143,8 +146,11 @@ module BillingInvoice
         inv_orig_first_call_at: invoice.first_originated_call_at,
         inv_orig_last_call_at: invoice.last_originated_call_at,
 
-        inv_term_amount: invoice.terminated_amount,
-        inv_term_amount_decorated: decorated_invoice.decorated_terminated_amount,
+        inv_term_amount_spent: invoice.terminated_amount_spent,
+        inv_term_amount_searned: invoice.terminated_amount_earned,
+        inv_term_amount_decorated_spent: decorated_invoice.decorated_terminated_amount_spent,
+        inv_term_amount_decorated_earned: decorated_invoice.decorated_terminated_amount_earned,
+
         inv_term_calls_count: invoice.terminated_calls_count,
         inv_term_first_call_at: invoice.first_terminated_call_at,
         inv_term_last_call_at: invoice.last_terminated_call_at,

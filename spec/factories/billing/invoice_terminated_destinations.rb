@@ -13,6 +13,7 @@
 #  first_call_at          :timestamptz
 #  last_call_at           :timestamptz
 #  rate                   :decimal(, )
+#  spent                  :boolean          default(FALSE), not null
 #  successful_calls_count :bigint(8)
 #  country_id             :integer(4)
 #  invoice_id             :integer(4)       not null

@@ -5,19 +5,24 @@
 # Table name: billing.invoices
 #
 #  id                                :integer(4)       not null, primary key
+#  amount_earned                     :decimal(, )      default(0.0), not null
+#  amount_spent                      :decimal(, )      default(0.0), not null
+#  amount_total                      :decimal(, )      default(0.0), not null
 #  end_date                          :timestamptz      not null
 #  first_originated_call_at          :timestamptz
 #  first_terminated_call_at          :timestamptz
 #  last_originated_call_at           :timestamptz
 #  last_terminated_call_at           :timestamptz
-#  originated_amount                 :decimal(, )      default(0.0), not null
+#  originated_amount_earned          :decimal(, )      default(0.0), not null
+#  originated_amount_spent           :decimal(, )      default(0.0), not null
 #  originated_billing_duration       :bigint(8)        default(0), not null
 #  originated_calls_count            :bigint(8)        default(0), not null
 #  originated_calls_duration         :bigint(8)        default(0), not null
 #  originated_successful_calls_count :bigint(8)        default(0), not null
 #  reference                         :string
 #  start_date                        :timestamptz      not null
-#  terminated_amount                 :decimal(, )      default(0.0), not null
+#  terminated_amount_earned          :decimal(, )      default(0.0), not null
+#  terminated_amount_spent           :decimal(, )      default(0.0), not null
 #  terminated_billing_duration       :integer(4)       default(0), not null
 #  terminated_calls_count            :integer(4)       default(0), not null
 #  terminated_calls_duration         :integer(4)       default(0), not null

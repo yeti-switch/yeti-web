@@ -19,7 +19,7 @@ end
 
 200.times do
   dur = rand(-5000..5000)
-  initial_time = Time.now.utc
+  initial_time = Time.now.utc - 3.days
   if dur > 0
     connect_time = initial_time + rand(40)
     end_time = connect_time + dur
@@ -51,7 +51,13 @@ end
     is_last_cdr: true,
     success: success,
     destination_prefix: 380,
+    destination_initial_rate: rand(0..5),
+    destination_next_rate: rand(0..5),
+    destination_reverse_billing: rand(-1..1).to_i > 0,
     dialpeer_prefix: 380,
+    dialpeer_initial_rate: rand(0..5),
+    dialpeer_next_rate: rand(0..5),
+    dialpeer_reverse_billing: rand(-1..1).to_i > 0,
     customer: customer,
     customer_acc: customer_acc,
     vendor: vendor,
