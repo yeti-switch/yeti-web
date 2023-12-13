@@ -4,10 +4,10 @@ class InvoiceDecorator < BillingDecorator
   delegate_all
   decorates Billing::Invoice
 
-  decorates_association :originated_destinations, with: InvoiceOriginatedDestinationDecorator
-  decorates_association :terminated_destinations, with: InvoiceTerminatedDestinationDecorator
-  decorates_association :originated_networks, with: InvoiceOriginatedNetworkDecorator
-  decorates_association :terminated_networks, with: InvoiceTerminatedNetworkDecorator
+  decorates_association :originated_destinations, with: InvoiceOriginatedDestinationDecorator, scope: :for_invoice
+  decorates_association :terminated_destinations, with: InvoiceTerminatedDestinationDecorator, scope: :for_invoice
+  decorates_association :originated_networks, with: InvoiceOriginatedNetworkDecorator, scope: :for_invoice
+  decorates_association :terminated_networks, with: InvoiceTerminatedNetworkDecorator, scope: :for_invoice
 
   def decorated_amount_total
     money_format :amount_total
