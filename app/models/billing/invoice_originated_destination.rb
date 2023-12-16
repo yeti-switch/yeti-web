@@ -13,6 +13,7 @@
 #  first_call_at          :timestamptz
 #  last_call_at           :timestamptz
 #  rate                   :decimal(, )
+#  spent                  :boolean          default(TRUE), not null
 #  successful_calls_count :bigint(8)
 #  country_id             :integer(4)
 #  invoice_id             :integer(4)       not null
@@ -34,8 +35,7 @@ class Billing::InvoiceOriginatedDestination < Cdr::Base
   belongs_to :country, class_name: 'System::Country', foreign_key: :country_id, optional: true
   belongs_to :network, class_name: 'System::Network', foreign_key: :network_id, optional: true
 
-  scope :for_invoice, -> { preload(:country, :network) }
-  scope :successful_calls, -> { where('successful_calls_count>0') }
+  scope :for_invoice, -> { preload(:country, :network).order(:spent, :dst_prefix) }
 
   def self.to_csv
     csv_string = CSV.generate do |csv|
@@ -64,7 +64,8 @@ class Billing::InvoiceOriginatedDestination < Cdr::Base
       coalesce(sum(successful_calls_count),0) as successful_calls_count,
       coalesce(sum(calls_duration),0) as calls_duration,
       coalesce(sum(billing_duration),0) as billing_duration,
-      COALESCE(sum(amount),0) as amount,
+      COALESCE(sum(amount) FILTER ( WHERE spent ), 0) as amount_spent,
+      COALESCE(sum(amount) FILTER ( WHERE NOT spent ),0) as amount_earned,
       min(first_call_at) as first_call_at,
       max(last_call_at) as last_call_at
     ").to_a[0]

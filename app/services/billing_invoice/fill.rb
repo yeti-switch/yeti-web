@@ -26,7 +26,7 @@ module BillingInvoice
       # traffic originated by account as "customer"
       SqlCaller::Cdr.execute(
           "INSERT INTO billing.invoice_originated_destinations(
-            dst_prefix, country_id, network_id, rate,
+            dst_prefix, country_id, network_id, rate, spent,
             calls_count,
             successful_calls_count,
             calls_duration,
@@ -36,7 +36,7 @@ module BillingInvoice
             first_call_at,
             last_call_at
           ) SELECT
-            destination_prefix, dst_country_id, dst_network_id, destination_next_rate,
+            destination_prefix, dst_country_id, dst_network_id, destination_next_rate, NOT COALESCE(destination_reverse_billing,false),
             COUNT(id),  -- calls count
             COUNT(NULLIF(success,false)),  -- successful_calls_count
             SUM(duration), -- calls_duration
@@ -52,7 +52,7 @@ module BillingInvoice
             time_start>=? AND
             time_start<?
           GROUP BY
-            destination_prefix, dst_country_id, dst_network_id, destination_next_rate",
+            destination_prefix, dst_country_id, dst_network_id, destination_next_rate, COALESCE(destination_reverse_billing,false)",
           invoice.id,
           invoice.account_id,
           invoice.start_date,
@@ -61,7 +61,7 @@ module BillingInvoice
 
       SqlCaller::Cdr.execute(
           "INSERT INTO billing.invoice_originated_networks(
-            country_id, network_id, rate,
+            country_id, network_id, rate, spent,
             calls_count,
             successful_calls_count,
             calls_duration,
@@ -71,7 +71,7 @@ module BillingInvoice
             first_call_at,
             last_call_at
           ) SELECT
-            country_id, network_id, rate,
+            country_id, network_id, rate, spent,
             SUM(calls_count),
             SUM(successful_calls_count),
             SUM(calls_duration),
@@ -83,7 +83,7 @@ module BillingInvoice
           FROM billing.invoice_originated_destinations
           WHERE invoice_id=?
           GROUP BY
-            country_id, network_id, rate",
+            country_id, network_id, rate, spent",
           invoice.id,
           invoice.id
         )
@@ -93,7 +93,7 @@ module BillingInvoice
       # traffic terminated to account as "vendor"
       SqlCaller::Cdr.execute(
           "INSERT INTO billing.invoice_terminated_destinations(
-            dst_prefix, country_id, network_id, rate,
+            dst_prefix, country_id, network_id, rate, spent,
             calls_count,
             successful_calls_count,
             calls_duration,
@@ -103,7 +103,7 @@ module BillingInvoice
             first_call_at,
             last_call_at
           ) SELECT
-            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate,
+            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate, COALESCE(dialpeer_reverse_billing, false),
             COUNT(*), -- calls_count
             COUNT(NULLIF((success),false)),  -- successful_calls_count
             SUM(duration), -- calls_duration
@@ -118,7 +118,7 @@ module BillingInvoice
             time_start >=? AND
             time_start < ?
           GROUP BY
-            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate",
+            dialpeer_prefix, dst_country_id, dst_network_id, dialpeer_next_rate, COALESCE(dialpeer_reverse_billing,false)",
           invoice.id,
           invoice.account_id,
           invoice.start_date,
@@ -127,7 +127,7 @@ module BillingInvoice
 
       SqlCaller::Cdr.execute(
           "INSERT INTO billing.invoice_terminated_networks(
-            country_id, network_id, rate,
+            country_id, network_id, rate, spent,
             calls_count,
             successful_calls_count,
             calls_duration,
@@ -137,7 +137,7 @@ module BillingInvoice
             first_call_at,
             last_call_at
           ) SELECT
-            country_id, network_id, rate,
+            country_id, network_id, rate, spent,
             SUM(calls_count),
             SUM(successful_calls_count),
             SUM(calls_duration),
@@ -149,7 +149,7 @@ module BillingInvoice
           FROM billing.invoice_terminated_destinations
           WHERE invoice_id=?
           GROUP BY
-            country_id, network_id, rate",
+            country_id, network_id, rate, spent",
           invoice.id,
           invoice.id
         )
@@ -162,7 +162,8 @@ module BillingInvoice
       invoice.update!(
           state_id: Billing::InvoiceState::PENDING,
 
-          originated_amount: originated_data.amount,
+          originated_amount_spent: originated_data.amount_spent,
+          originated_amount_earned: originated_data.amount_earned,
           originated_calls_count: originated_data.calls_count,
           originated_successful_calls_count: originated_data.successful_calls_count,
           originated_calls_duration: originated_data.calls_duration,
@@ -170,13 +171,18 @@ module BillingInvoice
           first_originated_call_at: originated_data.first_call_at,
           last_originated_call_at: originated_data.last_call_at,
 
-          terminated_amount: terminated_data.amount,
+          terminated_amount_earned: terminated_data.amount_earned,
+          terminated_amount_spent: terminated_data.amount_spent,
           terminated_calls_count: terminated_data.calls_count,
           terminated_successful_calls_count: terminated_data.successful_calls_count,
           terminated_calls_duration: terminated_data.calls_duration,
           terminated_billing_duration: terminated_data.billing_duration,
           first_terminated_call_at: terminated_data.first_call_at,
-          last_terminated_call_at: terminated_data.last_call_at
+          last_terminated_call_at: terminated_data.last_call_at,
+
+          amount_spent: originated_data.amount_spent + terminated_data.amount_spent,
+          amount_earned: originated_data.amount_earned + terminated_data.amount_earned,
+          amount_total: (originated_data.amount_spent + terminated_data.amount_spent) - (originated_data.amount_earned + terminated_data.amount_earned)
         )
     end
 

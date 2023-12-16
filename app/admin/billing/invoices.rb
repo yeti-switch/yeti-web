@@ -109,22 +109,69 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     column :type
     column :start_date
     column :end_date
-    column :originated_amount, footer: lambda {
+    column :amount_total, footer: lambda {
       strong do
-        @footer_data.money_format :total_originated_amount
+        @footer_data.money_format :total_amount_total
       end
     } do |c|
       strong do
-        c.decorated_originated_amount
+        c.decorated_amount_total
       end
     end
-    column :terminated_amount, footer: lambda {
+    column :amount_spent, footer: lambda {
       strong do
-        @footer_data.money_format :total_terminated_amount
+        @footer_data.money_format :total_amount_spent
       end
     } do |c|
       strong do
-        c.decorated_terminated_amount
+        c.decorated_amount_spent
+      end
+    end
+    column :amount_earned, footer: lambda {
+      strong do
+        @footer_data.money_format :total_amount_earned
+      end
+    } do |c|
+      strong do
+        c.decorated_amount_earned
+      end
+    end
+
+    column :originated_amount_spent, footer: lambda {
+      strong do
+        @footer_data.money_format :total_originated_amount_spent
+      end
+    } do |c|
+      strong do
+        c.decorated_originated_amount_spent
+      end
+    end
+    column :originated_amount_earned, footer: lambda {
+      strong do
+        @footer_data.money_format :total_originated_amount_earned
+      end
+    } do |c|
+      strong do
+        c.decorated_originated_amount_earned
+      end
+    end
+
+    column :terminated_amount_spent, footer: lambda {
+      strong do
+        @footer_data.money_format :total_terminated_amount_spent
+      end
+    } do |c|
+      strong do
+        c.decorated_terminated_amount_spent
+      end
+    end
+    column :terminated_amount_earned, footer: lambda {
+      strong do
+        @footer_data.money_format :total_terminated_amount_earned
+      end
+    } do |c|
+      strong do
+        c.decorated_terminated_amount_earned
       end
     end
 
@@ -173,11 +220,19 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :type
   filter :start_date, as: :date_time_range
   filter :end_date, as: :date_time_range
-  filter :originated_amount
+
+  filter :amount_total
+  filter :amount_spent
+  filter :amount_earned
+
+  filter :originated_amount_spent
+  filter :originated_amount_earned
+  filter :terminated_amount_spent
+  filter :terminated_amount_earned
+
   filter :originated_billing_duration
   filter :originated_calls_count
   filter :originated_calls_duration
-  filter :terminated_amount
   filter :terminated_billing_duration
   filter :terminated_calls_count
   filter :terminated_calls_duration
@@ -197,19 +252,45 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             row :start_date
             row :end_date
             row :created_at
+
+            row :amount_total do
+              strong do
+                s.decorated_amount_total
+              end
+            end
+            row :amount_spent do
+              strong do
+                s.decorated_amount_spent
+              end
+            end
+            row :amount_earned do
+              strong do
+                s.decorated_amount_earned
+              end
+            end
           end
         end
         panel 'Traffic summary' do
           attributes_table_for s do
-            row :originated_amount do
+            row :originated_amount_spent do
               strong do
-                s.decorated_originated_amount
+                s.decorated_originated_amount_spent
+              end
+            end
+            row :originated_amount_earned do
+              strong do
+                s.decorated_originated_amount_earned
               end
             end
             row :originated_calls_count
-            row :terminated_amount do
+            row :terminated_amount_spent do
               strong do
-                s.decorated_terminated_amount
+                s.decorated_terminated_amount_spent
+              end
+            end
+            row :terminated_amount_earned do
+              strong do
+                s.decorated_terminated_amount_earned
               end
             end
             row :terminated_calls_count
@@ -219,9 +300,14 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       tab 'Originated traffic' do
         panel 'Summary' do
           attributes_table_for s do
-            row :originated_amount do
+            row :originated_amount_spent do
               strong do
-                s.decorated_originated_amount
+                s.decorated_originated_amount_spent
+              end
+            end
+            row :originated_amount_earned do
+              strong do
+                s.decorated_originated_amount_earned
               end
             end
             row :originated_calls_count
@@ -238,6 +324,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         end
         panel 'By destination(destination prefix)' do
           table_for resource.originated_destinations do
+            column 'type' do |s|
+              s.spent ? status_tag('spent', class: :blue) : status_tag('earned', class: :green)
+            end
             column :dst_prefix
             column :country
             column :network
@@ -259,6 +348,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         end
         panel 'By destination number country/network' do
           table_for resource.originated_networks do
+            column 'type' do |s|
+              s.spent ? status_tag('spent', class: :blue) : status_tag('earned', class: :green)
+            end
             column :country
             column :network
             column :rate
@@ -284,9 +376,14 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       tab 'Terminated traffic' do
         panel 'Summary' do
           attributes_table_for s do
-            row :terminated_amount do
+            row :terminated_amount_spent do
               strong do
-                s.decorated_terminated_amount
+                s.decorated_terminated_amount_spent
+              end
+            end
+            row :terminated_amount_earned do
+              strong do
+                s.decorated_terminated_amount_earned
               end
             end
             row :terminated_calls_count
@@ -303,6 +400,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         end
         panel 'By destination(dialpeer prefix)' do
           table_for resource.terminated_destinations do
+            column 'type' do |s|
+              s.spent ? status_tag('spent', class: :blue) : status_tag('earned', class: :green)
+            end
             column :dst_prefix
             column :country
             column :network
@@ -323,6 +423,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
         end
         panel 'By destination number country/network' do
           table_for resource.terminated_networks do
+            column 'type' do |s|
+              s.spent ? status_tag('spent', class: :blue) : status_tag('earned', class: :green)
+            end
             column :country
             column :network
             column :rate

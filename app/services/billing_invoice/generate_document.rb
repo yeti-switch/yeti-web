@@ -39,40 +39,57 @@ module BillingInvoice
 
     def self.replaces_list
       %w[
-        acc_name
-        acc_balance
-        acc_balance_decorated
-        acc_min_balance
-        acc_min_balance_decorated
-        acc_max_balance
-        acc_max_balance_decorated
-        acc_inv_period
-        contractor_name
-        contractor_address
-        contractor_phones
-        inv_id
-        inv_ref
-        inv_created_at
-        inv_start_date
-        inv_end_date
-        inv_orig_amount
-        inv_orig_amount_decorated
-        inv_orig_calls_count
-        inv_orig_successful_calls_count
-        inv_orig_calls_durationm
-        inv_orig_calls_duration_dec
-        inv_orig_calls_duration
-        inv_orig_first_call_at
-        inv_orig_last_call_at
-        inv_term_amount
-        inv_term_amount_decorated
-        inv_term_calls_count
-        inv_term_successful_calls_count
-        inv_term_calls_durationm
-        inv_term_calls_duration_dec
-        inv_term_calls_duration
-        inv_term_first_call_at
-        inv_term_last_call_at
+        a_name
+        a_balance
+        a_balance_d
+        a_min_balance
+        a_min_balance_d
+        a_max_balance
+        a_max_balance_d
+        a_inv_period
+
+        c_name
+        c_address
+        c_phones
+
+        i_id
+        i_ref
+        i_created_at
+        i_start_date
+        i_end_date
+
+        i_total
+        i_total_d
+        i_spent
+        i_spent_d
+        i_earned
+        i_earned_d
+
+        i_orig_spent
+        i_orig_earned
+        i_orig_spent_d
+        i_orig_earned_d
+
+        i_orig_calls_count
+        i_orig_successful_calls_count
+        i_orig_calls_durationm
+        i_orig_calls_duration_d
+        i_orig_calls_duration
+        i_orig_first_call_at
+        i_orig_last_call_at
+
+        i_term_spent
+        i_term_earned
+        i_term_spent_d
+        i_term_earned_d
+
+        i_term_calls_count
+        i_term_successful_calls_count
+        i_term_calls_durationm
+        i_term_calls_duration_d
+        i_term_calls_duration
+        i_term_first_call_at
+        i_term_last_call_at
       ]
     end
 
@@ -116,42 +133,59 @@ module BillingInvoice
       decorated_account = AccountDecorator.new(invoice.account)
       decorated_invoice = InvoiceDecorator.new(invoice)
       {
-        acc_name: invoice.account.name,
-        acc_balance: invoice.account.balance,
-        acc_balance_decorated: decorated_account.decorated_balance,
-        acc_min_balance: invoice.account.min_balance,
-        acc_min_balance_decorated: decorated_account.decorated_min_balance,
-        acc_max_balance: invoice.account.max_balance,
-        acc_max_balance_decorated: decorated_account.decorated_max_balance,
-        acc_inv_period: invoice.invoice_period.try(:name),
-        contractor_name: invoice.contractor.name,
-        contractor_address: invoice.contractor.address,
-        contractor_phones: invoice.contractor.phones,
-        inv_id: invoice.id,
-        inv_ref: invoice.reference,
-        inv_created_at: invoice.created_at,
-        inv_start_date: invoice.start_date,
-        inv_end_date: invoice.end_date,
+        a_name: invoice.account.name,
+        a_balance: invoice.account.balance,
+        a_balance_d: decorated_account.decorated_balance,
+        a_min_balance: invoice.account.min_balance,
+        a_min_balance_d: decorated_account.decorated_min_balance,
+        a_max_balance: invoice.account.max_balance,
+        a_max_balance_d: decorated_account.decorated_max_balance,
+        a_inv_period: invoice.invoice_period.try(:name),
 
-        inv_orig_amount: invoice.originated_amount,
-        inv_orig_amount_decorated: decorated_invoice.decorated_originated_amount,
-        inv_orig_calls_count: invoice.originated_calls_count,
-        inv_orig_successful_calls_count: invoice.originated_successful_calls_count,
-        inv_orig_calls_durationm: decorated_invoice.decorated_originated_calls_duration_kolon,
-        inv_orig_calls_duration_dec: decorated_invoice.decorated_originated_calls_duration_dec,
-        inv_orig_calls_duration: invoice.originated_calls_duration,
-        inv_orig_first_call_at: invoice.first_originated_call_at,
-        inv_orig_last_call_at: invoice.last_originated_call_at,
+        c_name: invoice.contractor.name,
+        c_address: invoice.contractor.address,
+        c_phones: invoice.contractor.phones,
 
-        inv_term_amount: invoice.terminated_amount,
-        inv_term_amount_decorated: decorated_invoice.decorated_terminated_amount,
-        inv_term_calls_count: invoice.terminated_calls_count,
-        inv_term_first_call_at: invoice.first_terminated_call_at,
-        inv_term_last_call_at: invoice.last_terminated_call_at,
-        inv_term_calls_durationm: decorated_invoice.decorated_terminated_calls_duration_kolon,
-        inv_term_calls_duration_dec: decorated_invoice.decorated_terminated_calls_duration_dec,
-        inv_term_calls_duration: invoice.terminated_calls_duration,
-        inv_term_successful_calls_count: invoice.terminated_successful_calls_count
+        i_id: invoice.id,
+        i_ref: invoice.reference,
+        i_created_at: invoice.created_at,
+        i_start_date: invoice.start_date,
+        i_end_date: invoice.end_date,
+
+        i_total: invoice.amount_total,
+        i_total_d: decorated_invoice.decorated_amount_total,
+
+        i_spent: invoice.amount_spent,
+        i_spent_d: decorated_invoice.decorated_amount_spent,
+
+        i_earned: invoice.amount_earned,
+        i_earned_d: decorated_invoice.decorated_amount_earned,
+
+        i_orig_spent: invoice.originated_amount_spent,
+        i_orig_earned: invoice.originated_amount_earned,
+        i_orig_spent_d: decorated_invoice.decorated_originated_amount_spent,
+        i_orig_earned_d: decorated_invoice.decorated_originated_amount_earned,
+
+        i_orig_calls_count: invoice.originated_calls_count,
+        i_orig_successful_calls_count: invoice.originated_successful_calls_count,
+        i_orig_calls_durationm: decorated_invoice.decorated_originated_calls_duration_kolon,
+        i_orig_calls_duration_d: decorated_invoice.decorated_originated_calls_duration_dec,
+        i_orig_calls_duration: invoice.originated_calls_duration,
+        i_orig_first_call_at: invoice.first_originated_call_at,
+        i_orig_last_call_at: invoice.last_originated_call_at,
+
+        i_term_spent: invoice.terminated_amount_spent,
+        i_term_earned: invoice.terminated_amount_earned,
+        i_term_spent_d: decorated_invoice.decorated_terminated_amount_spent,
+        i_term_earned_d: decorated_invoice.decorated_terminated_amount_earned,
+
+        i_term_calls_count: invoice.terminated_calls_count,
+        i_term_first_call_at: invoice.first_terminated_call_at,
+        i_term_last_call_at: invoice.last_terminated_call_at,
+        i_term_calls_durationm: decorated_invoice.decorated_terminated_calls_duration_kolon,
+        i_term_calls_duration_dec: decorated_invoice.decorated_terminated_calls_duration_dec,
+        i_term_calls_duration: invoice.terminated_calls_duration,
+        i_term_successful_calls_count: invoice.terminated_successful_calls_count
       }
     end
 

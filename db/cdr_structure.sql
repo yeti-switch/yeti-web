@@ -2281,7 +2281,8 @@ CREATE TABLE billing.invoice_originated_destinations (
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
-    billing_duration bigint
+    billing_duration bigint,
+    spent boolean DEFAULT true NOT NULL
 );
 
 
@@ -2320,7 +2321,8 @@ CREATE TABLE billing.invoice_originated_networks (
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
-    billing_duration bigint
+    billing_duration bigint,
+    spent boolean DEFAULT true NOT NULL
 );
 
 
@@ -2360,7 +2362,8 @@ CREATE TABLE billing.invoice_terminated_destinations (
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
-    billing_duration bigint
+    billing_duration bigint,
+    spent boolean DEFAULT false NOT NULL
 );
 
 
@@ -2399,7 +2402,8 @@ CREATE TABLE billing.invoice_terminated_networks (
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
     successful_calls_count bigint,
-    billing_duration bigint
+    billing_duration bigint,
+    spent boolean DEFAULT false NOT NULL
 );
 
 
@@ -2431,7 +2435,7 @@ CREATE TABLE billing.invoices (
     account_id integer NOT NULL,
     start_date timestamp with time zone NOT NULL,
     end_date timestamp with time zone NOT NULL,
-    originated_amount numeric DEFAULT 0 NOT NULL,
+    originated_amount_spent numeric DEFAULT 0 NOT NULL,
     originated_calls_count bigint DEFAULT 0 NOT NULL,
     first_originated_call_at timestamp with time zone,
     last_originated_call_at timestamp with time zone,
@@ -2444,13 +2448,18 @@ CREATE TABLE billing.invoices (
     originated_billing_duration bigint DEFAULT 0 NOT NULL,
     reference character varying,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
-    terminated_amount numeric DEFAULT 0 NOT NULL,
+    terminated_amount_earned numeric DEFAULT 0 NOT NULL,
     terminated_calls_count integer DEFAULT 0 NOT NULL,
     first_terminated_call_at timestamp with time zone,
     last_terminated_call_at timestamp with time zone,
     terminated_calls_duration integer DEFAULT 0 NOT NULL,
     terminated_successful_calls_count integer DEFAULT 0 NOT NULL,
-    terminated_billing_duration integer DEFAULT 0 NOT NULL
+    terminated_billing_duration integer DEFAULT 0 NOT NULL,
+    terminated_amount_spent numeric DEFAULT 0 NOT NULL,
+    originated_amount_earned numeric DEFAULT 0 NOT NULL,
+    amount_spent numeric DEFAULT 0 NOT NULL,
+    amount_earned numeric DEFAULT 0 NOT NULL,
+    amount_total numeric DEFAULT 0 NOT NULL
 );
 
 
@@ -4852,6 +4861,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231027110359'),
 ('20231101165858'),
 ('20231106100135'),
-('20231106125344');
+('20231106125344'),
+('20231212213111');
 
 
