@@ -7,6 +7,8 @@ class BaseJob < Scheduler::Job::Base
 
   include ::CaptureError::BaseMethods
 
+  class_attribute :timeout, instance_writer: false, default: 1200
+
   class << self
     def type
       name.demodulize
@@ -16,7 +18,7 @@ class BaseJob < Scheduler::Job::Base
       {
         overlap: false,
         name: type,
-        timeout: 1200
+        timeout:
       }
     end
   end
