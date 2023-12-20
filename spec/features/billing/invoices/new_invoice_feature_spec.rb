@@ -63,8 +63,8 @@ RSpec.describe 'New Invoice', type: :feature, js: true do
       }.to_not change { Billing::Invoice.count }
 
       expect(page).to have_semantic_error("Account can't be blank")
-      expect(page).to have_semantic_error("Start time can't be blank")
-      expect(page).to have_semantic_error("End time can't be blank")
+      expect(page).to have_semantic_error("Start date can't be blank")
+      expect(page).to have_semantic_error("End date can't be blank")
     end
   end
 end

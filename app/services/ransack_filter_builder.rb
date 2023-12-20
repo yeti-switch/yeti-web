@@ -47,16 +47,16 @@ class RansackFilterBuilder
 
   # @param values [Array<String>]
   def verify(values)
+    if @collection && values.any? { |val| @collection.exclude?(val) }
+      raise JSONAPI::Exceptions::InvalidFilterValue.new(filter_name, values.join(','))
+    end
+
     if RANSACK_ARRAY_SUFFIXES.include?(@operator)
       values = @verify.call(values) if @verify
       return values
     end
 
     raise JSONAPI::Exceptions::InvalidFilterValue.new(filter_name, values.join(',')) if values.size != 1
-
-    if @collection && values.any? { |val| @collection.exclude?(val) }
-      raise JSONAPI::Exceptions::InvalidFilterValue.new(filter_name, values.join(','))
-    end
 
     values = @verify.call(values) if @verify
     values.first

@@ -20,6 +20,6 @@ RSpec.shared_examples :returns_json_api_record_relationship do |name, status: 20
       eq(true),
       "expect relationship to have data, but it's not\n#{actual_relationships[name]}"
     )
-    expect(actual_relationships[name][:data]).to eq(json_api_relationship_data)
+    expect(actual_relationships[name][:data]).to match(json_api_relationship_data)
   end
 end

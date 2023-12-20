@@ -23,5 +23,10 @@ FactoryBot.define do
   factory :invoice_document, class: Billing::InvoiceDocument do
     invoice
     filename { 'fine.example' }
+
+    trait :filled do
+      data { 'data' }
+      pdf_data { 'pdf_data' }
+    end
   end
 end

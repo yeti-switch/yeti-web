@@ -11,13 +11,12 @@ class ManualInvoiceForm < ApplicationForm
   attribute :end_date, :string
 
   attr_writer :contractor_id
-  attr_reader :invoice
-  delegate :id, to: :invoice, allow_nil: true
+  attr_reader :model
+  delegate :id, to: :model, allow_nil: true
 
   validates :account, presence: true
   validate :validate_generated_invoices
-  validates :start_time, :end_time, presence: true
-  validate :validate_end_time
+  validate :validate_start_end_time
 
   def persisted?
     id.present?
@@ -36,19 +35,23 @@ class ManualInvoiceForm < ApplicationForm
 
   # @!method start_time
   define_memoizable :start_time, apply: lambda {
-    return if account.nil? || start_date.blank?
+    return if start_date.blank?
 
-    account.timezone.time_zone.parse(start_date)
+    account_time_zone.parse(start_date)
   }
 
   # @!method end_time
   define_memoizable :end_time, apply: lambda {
-    return if account.nil? || end_date.blank?
+    return if end_date.blank?
 
-    account.timezone.time_zone.parse(end_date)
+    account_time_zone.parse(end_date)
   }
 
   private
+
+  def account_time_zone
+    account ? account.timezone.time_zone : Time.zone
+  end
 
   def validate_generated_invoices
     return if account.nil?
@@ -66,14 +69,17 @@ class ManualInvoiceForm < ApplicationForm
     errors.add(:base, 'there are invoice(s) within provided period') if covered_invoices.any?
   end
 
-  def validate_end_time
-    return if end_time.nil? || start_time.nil?
+  def validate_start_end_time
+    errors.add(:start_date, :blank) if start_date.blank?
+    errors.add(:start_date, :invalid) if start_date.present? && start_time.nil?
 
-    errors.add(:end_date, 'must be greater than start date') if end_time < start_time
+    errors.add(:end_date, :blank) if end_date.blank?
+    errors.add(:end_date, :invalid) if end_date.present? && end_time.nil?
+    errors.add(:end_date, 'must be greater than start date') if end_time && start_time && end_time < start_time
   end
 
   def _save
-    BillingInvoice::Create.call(
+    @model = BillingInvoice::Create.call(
         account: account,
         start_time: start_time,
         end_time: end_time,
