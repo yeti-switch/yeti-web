@@ -3,6 +3,7 @@
 module Jobs
   class PartitionRemoving < ::BaseJob
     self.cron_line = '20 * * * *'
+    self.timeout = 7200
 
     def execute
       remove_partition! PartitionModel::Cdr, Cdr::Cdr
