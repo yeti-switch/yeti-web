@@ -26,7 +26,10 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
     subject { get json_api_request_path, params: nil, headers: json_api_request_headers }
 
     context 'when controller contains meta info' do
-      before { allow_any_instance_of(described_class).to receive(:meta).and_return({ foo: :bar }) }
+      before do
+        allow_any_instance_of(described_class).to receive(:meta).and_return({ foo: :bar })
+        allow(Thread).to receive(:new).and_yield.and_return(Class.new { def join; end }.new)
+      end
 
       it 'creates Log::ApiLog with meta and remote IP' do
         expect { subject }.to change { Log::ApiLog.count }.by(1)
@@ -35,7 +38,10 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
     end
 
     context 'when controller DO NOT contains meta info' do
-      before { allow_any_instance_of(described_class).to receive(:meta).and_return(nil) }
+      before do
+        allow_any_instance_of(described_class).to receive(:meta).and_return(nil)
+        allow(Thread).to receive(:new).and_yield.and_return(Class.new { def join; end }.new)
+      end
 
       it 'creates Log::ApiLog with meta and remote IP' do
         expect { subject }.to change { Log::ApiLog.count }.by(1)

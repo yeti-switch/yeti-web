@@ -62,12 +62,13 @@ RSpec.describe Log::ApiLog do
     end
 
     context 'when valid IP address' do
+      before { Log::ApiLog.delete_all }
+
       let(:scope_value) { '127.0.0.1' }
       let!(:record) { FactoryBot.create(:api_log, remote_ip: '127.0.0.1') }
+      let(:second_record) { FactoryBot.create(:api_log, remote_ip: '80.80.123.23') }
 
-      before { FactoryBot.create(:api_log, remote_ip: '80.80.123.23') }
-
-      it 'should return filtered recprd only' do
+      it 'should return filtered record only' do
         expect(subject).to contain_exactly(record)
       end
     end

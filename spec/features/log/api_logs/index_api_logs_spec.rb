@@ -3,6 +3,8 @@
 RSpec.describe 'Index Log Api Logs', type: :feature do
   include_context :login_as_admin
 
+  before { Log::ApiLog.destroy_all }
+
   context 'when visit index page with two API Logs' do
     let!(:api_log_first) { FactoryBot.create(:api_log) }
     let!(:api_log_second) { FactoryBot.create(:api_log) }
