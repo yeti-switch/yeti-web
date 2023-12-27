@@ -67,3 +67,6 @@ JSONAPI::Resource.singleton_class.prepend(JsonapiResourceClassPatch)
 JSONAPI::Resource.register_resource_override 'api/rest/admin', 'SipSchema', 'Api::Rest::Admin::System::SipSchema'
 JSONAPI::Resource.register_resource_override 'api/rest/admin', 'Pop', 'Api::Rest::Admin::Pop'
 JSONAPI::Resource.register_resource_override 'api/rest/admin', 'Node', 'Api::Rest::Admin::Node'
+JSONAPI::Resource.register_resource_override 'api/rest/admin/billing', 'Account', 'Api::Rest::Admin::Account'
+JSONAPI::Resource.register_resource_override 'api/rest/admin/billing', 'Country', 'Api::Rest::Admin::System::Country'
+JSONAPI::Resource.register_resource_override 'api/rest/admin/billing', 'Network', 'Api::Rest::Admin::System::Network'

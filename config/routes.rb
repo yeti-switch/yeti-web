@@ -107,6 +107,17 @@ Rails.application.routes.draw do
 
           namespace :billing do
             jsonapi_resources :invoice_template
+            jsonapi_resources :invoices, only: %i[index show create destroy] do
+              jsonapi_relationships
+              member do
+                get :pdf
+                get :odt
+              end
+            end
+            jsonapi_resources :invoice_originated_destinations, only: %i[index show]
+            jsonapi_resources :invoice_originated_networks, only: %i[index show]
+            jsonapi_resources :invoice_terminated_destinations, only: %i[index show]
+            jsonapi_resources :invoice_terminated_networks, only: %i[index show]
           end
 
           namespace :system do

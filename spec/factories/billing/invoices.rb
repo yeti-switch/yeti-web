@@ -58,7 +58,7 @@ FactoryBot.define do
     end
 
     trait :auto_partial do
-      type_id { Billing::InvoiceType::AUTO_FULL }
+      type_id { Billing::InvoiceType::AUTO_PARTIAL }
     end
 
     trait :new do
