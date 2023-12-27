@@ -48,5 +48,29 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
         expect(Log::ApiLog.last).to have_attributes(meta: nil, remote_ip: '127.0.0.1')
       end
     end
+
+    context 'when YETI WEB is configured with API Log tag USA' do
+      before do
+        allow(Thread).to receive(:new).and_yield
+        allow(YetiConfig).to receive(:api_log_tags).and_return(%w[USA])
+      end
+
+      it 'creates Log::ApiLog with USA tag' do
+        expect { subject }.to change { Log::ApiLog.count }.by(1)
+        expect(Log::ApiLog.last).to have_attributes(tags: %w[USA])
+      end
+    end
+
+    context 'when there is NO API Log Tags configuration' do
+      before do
+        allow(Thread).to receive(:new).and_yield
+        allow(YetiConfig).to receive(:api_log_tags).and_return(nil)
+      end
+
+      it 'creates Log::ApiLog without tags' do
+        expect { subject }.to change { Log::ApiLog.count }.by(1)
+        expect(Log::ApiLog.last).to have_attributes(tags: [])
+      end
+    end
   end
 end

@@ -19,6 +19,7 @@
 #  response_body    :text
 #  response_headers :text
 #  status           :integer(4)
+#  tags             :string           default([]), is an Array
 #  created_at       :timestamptz      not null
 #
 # Indexes

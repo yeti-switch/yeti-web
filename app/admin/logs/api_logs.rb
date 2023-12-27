@@ -16,7 +16,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
 
   controller do
     def scoped_collection
-      super.select('id, created_at, status, method, path, db_duration, page_duration, remote_ip')
+      super.select('id, created_at, status, method, path, db_duration, page_duration, remote_ip, tags')
     end
 
     def find_resource
@@ -27,6 +27,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   filter :created_at, as: :date_time_range
   filter :path
   filter :method
+  filter :tag_eq, label: 'Tag Equals'
   filter :status
   filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: :chosen }
   filter :action
@@ -44,6 +45,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
     column :created_at
     column :status
     column :method
+    column :tags, &:tags_separated_by_comma
     column :path
     column :db_duration
     column :page_duration
@@ -56,6 +58,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
       row :created_at
       row :status
       row :method
+      row :tags, &:tags_separated_by_comma
       row :path
       row :controller
       row :action

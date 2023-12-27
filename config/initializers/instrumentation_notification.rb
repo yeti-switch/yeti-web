@@ -21,6 +21,7 @@ module ActionController
         params: request.filtered_parameters,
         format: request.format.try(:ref),
         method: request.method,
+        tags: YetiConfig.api_log_tags || [],
         path: (begin
                       request.fullpath
                rescue StandardError
@@ -59,6 +60,7 @@ ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_n
         api_request.page_duration = (finish - start) * 1000
         api_request.db_duration = payload[:db_runtime]
         api_request.method = payload[:method]
+        api_request.tags = payload[:tags]
         api_request.status = payload[:status]
         api_request.controller = payload[:controller]
         api_request.action = payload[:action]
