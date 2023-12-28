@@ -25426,7 +25426,8 @@ CREATE TABLE logs.api_requests (
     request_headers text,
     response_headers text,
     meta jsonb,
-    remote_ip inet
+    remote_ip inet,
+    tags character varying[] DEFAULT '{}'::character varying[]
 )
 PARTITION BY RANGE (created_at);
 
@@ -31578,6 +31579,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231106095901'),
 ('20231106100113'),
 ('20231107100745'),
-('20231206200530');
+('20231206200530'),
+('20231227093950');
 
 

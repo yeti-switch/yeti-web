@@ -2,22 +2,30 @@
 
 # == Schema Information
 #
-# Table name: api_requests
+# Table name: logs.api_requests
 #
-#  id               :integer          not null, primary key
-#  created_at       :datetime         not null
-#  path             :string
-#  method           :string
-#  status           :integer
-#  controller       :string
+#  id               :bigint(8)        not null, primary key
 #  action           :string
-#  page_duration    :float
+#  controller       :string
 #  db_duration      :float
+#  meta             :jsonb
+#  method           :string
+#  page_duration    :float
 #  params           :text
+#  path             :string
+#  remote_ip        :inet
 #  request_body     :text
-#  response_body    :text
 #  request_headers  :text
+#  response_body    :text
 #  response_headers :text
+#  status           :integer(4)
+#  tags             :string           default([]), is an Array
+#  created_at       :timestamptz      not null
+#
+# Indexes
+#
+#  api_requests_created_at_idx  (created_at)
+#  api_requests_id_idx          (id)
 #
 
 FactoryBot.define do
@@ -34,6 +42,7 @@ FactoryBot.define do
     response_body { nil }
     request_headers { nil }
     response_headers { nil }
+    tags { [] }
 
     before(:create) do |record, _evaluator|
       Log::ApiLog.add_partition_for(record.created_at || Time.now.utc)

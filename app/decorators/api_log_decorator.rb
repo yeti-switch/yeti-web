@@ -35,4 +35,10 @@ class ApiLogDecorator < Draper::Decorator
       ''
     end
   end
+
+  def tags_separated_by_comma
+    return if model.tags.empty?
+
+    model.tags.join(', ')
+  end
 end

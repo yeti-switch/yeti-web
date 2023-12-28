@@ -15,6 +15,7 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
       expect(page).to have_table_row count: 2
       expect(page).to have_table_cell column: 'Id', exact_text: api_log_first.id
       expect(page).to have_table_cell column: 'Id', exact_text: api_log_second.id
+      expect(page).to have_table_cell column: 'Tags', exact_text: ''
       expect(page).not_to have_link 'CSV'
     end
   end
@@ -57,6 +58,37 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
 
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', exact_text: record.id
+      end
+    end
+
+    describe 'by "Tag Equals"' do
+      context 'when filter by tag1' do
+        let(:record_attrs) { super().merge tags: %w[tag1 tag2] }
+
+        before do
+          FactoryBot.create(:api_log, tags: %w[tag5])
+          allow(YetiConfig).to receive(:api_log_tags).and_return(%w[tag1 tag2])
+          visit api_logs_path
+          fill_in 'Tag Equals', with: 'tag1'
+        end
+
+        it 'should render filtered records only' do
+          subject
+
+          expect(page).to have_table_row count: 1
+          expect(page).to have_table_cell column: 'Id', exact_text: record.id
+        end
+      end
+
+      context 'when there is NO any "api_log_tags" configuration' do
+        before do
+          allow(YetiConfig).to receive(:api_log_tags).and_return(nil)
+          visit api_logs_path
+        end
+
+        it 'should render index page properly' do
+          expect(page).to have_page_title 'Api Logs'
+        end
       end
     end
   end
