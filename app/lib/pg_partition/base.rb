@@ -121,9 +121,12 @@ module PgPartition
         Rails.logger.info { "Detaching partition #{partition_name} from table #{table_name}" }
         begin
           execute "ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} CONCURRENTLY;"
-        rescue PG::ObjectNotInPrerequisiteState
-          Rails.logger.info { 'Detach failed, running DETACH FINALIZE' }
-          execute "ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} FINALIZE;"
+        rescue ActiveRecord::StatementInvalid => e
+          Rails.logger.info { "Detach failed, exception #{e.inspect}" }
+          if e.cause.is_a?(PG::ObjectNotInPrerequisiteState)
+            Rails.logger.info { 'Try DETACH FINALIZE' }
+            execute "ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} FINALIZE;"
+          end
         end
       end
 
