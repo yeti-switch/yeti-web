@@ -119,15 +119,19 @@ module PgPartition
     def remove_partition(table_name, partition_name)
       if YetiConfig.partition_detach_before_drop
         Rails.logger.info { "Detaching partition #{partition_name} from table #{table_name}" }
-        execute <<-SQL
-          ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} CONCURRENTLY;
-        SQL
+        begin
+          execute "ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} CONCURRENTLY;"
+        rescue ActiveRecord::StatementInvalid => e
+          Rails.logger.info { "Detach failed, exception #{e.inspect}" }
+          if e.cause.is_a?(PG::ObjectNotInPrerequisiteState)
+            Rails.logger.info { 'Try DETACH FINALIZE' }
+            execute "ALTER TABLE #{table_name} DETACH PARTITION #{partition_name} FINALIZE;"
+          end
+        end
       end
 
       Rails.logger.info { "Dropping partition #{partition_name}" }
-      execute <<-SQL
-        DROP TABLE #{partition_name};
-      SQL
+      execute "DROP TABLE #{partition_name};"
     end
 
     def sql_caller
