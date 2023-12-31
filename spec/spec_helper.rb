@@ -174,6 +174,10 @@ RSpec.configure do |config|
     allow(Sentry).to receive(:send_event).with(a_kind_of(Hash))
   end
 
+  config.after(:each, type: :request) do
+    Log::ApiLog.destroy_all
+  end
+
   config.after(:each) do
     NodeApi.reset_all
   end

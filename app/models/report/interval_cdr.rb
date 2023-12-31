@@ -43,25 +43,17 @@ class Report::IntervalCdr < Cdr::Base
     routing_group_id
     orig_gw_id
     term_gw_id
-    destination_id
-    dialpeer_id
     customer_auth_id
     vendor_acc_id
     customer_acc_id
     disconnect_initiator_id
     node_id
     pop_id
-    destination_next_rate
-    destination_fee
-    dialpeer_next_rate
-    dialpeer_fee
     time_limit
     customer_price
     vendor_price
     duration
     success
-    vendor_billed
-    customer_billed
     profit
     dst_prefix_in
     dst_prefix_out
@@ -81,12 +73,23 @@ class Report::IntervalCdr < Cdr::Base
     sign_term_local_port
     local_tag
     dump_file
+
+    destination_id
+    destination_fee
     destination_initial_rate
-    dialpeer_initial_rate
+    destination_next_rate
     destination_initial_interval
     destination_next_interval
+    destination_reverse_billing
+
+    dialpeer_id
+    dialpeer_fee
+    dialpeer_initial_rate
+    dialpeer_next_rate
     dialpeer_initial_interval
     dialpeer_next_interval
+    dialpeer_reverse_billing
+
     routing_attempt
     is_last_cdr
     lega_disconnect_code
