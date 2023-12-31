@@ -2617,8 +2617,8 @@ CREATE TABLE reports.cdr_custom_report_data (
     vendor_price numeric,
     duration integer,
     success boolean,
-    vendor_billed boolean,
-    customer_billed boolean,
+    dialpeer_reverse_billing boolean,
+    destination_reverse_billing boolean,
     profit numeric,
     dst_prefix_in character varying,
     dst_prefix_out character varying,
@@ -2822,8 +2822,8 @@ CREATE TABLE reports.cdr_interval_report_data (
     vendor_price numeric,
     duration integer,
     success boolean,
-    vendor_billed boolean,
-    customer_billed boolean,
+    dialpeer_reverse_billing boolean,
+    destination_reverse_billing boolean,
     profit numeric,
     dst_prefix_in character varying,
     dst_prefix_out character varying,
@@ -4862,6 +4862,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231101165858'),
 ('20231106100135'),
 ('20231106125344'),
-('20231212213111');
+('20231212213111'),
+('20231231115209');
 
 

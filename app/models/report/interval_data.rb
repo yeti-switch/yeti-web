@@ -7,18 +7,19 @@
 #  id                           :bigint(8)        not null, primary key
 #  aggregated_value             :decimal(, )
 #  auth_orig_ip                 :string
-#  customer_billed              :boolean
 #  customer_price               :decimal(, )
 #  destination_fee              :decimal(, )
 #  destination_initial_interval :integer(4)
 #  destination_initial_rate     :decimal(, )
 #  destination_next_interval    :integer(4)
 #  destination_next_rate        :decimal(, )
+#  destination_reverse_billing  :boolean
 #  dialpeer_fee                 :decimal(, )
 #  dialpeer_initial_interval    :integer(4)
 #  dialpeer_initial_rate        :decimal(, )
 #  dialpeer_next_interval       :integer(4)
 #  dialpeer_next_rate           :decimal(, )
+#  dialpeer_reverse_billing     :boolean
 #  diversion_in                 :string
 #  diversion_out                :string
 #  dst_prefix_in                :string
@@ -55,7 +56,6 @@
 #  time_limit                   :string
 #  time_start                   :timestamptz
 #  timestamp                    :timestamptz
-#  vendor_billed                :boolean
 #  vendor_price                 :decimal(, )
 #  customer_acc_id              :integer(4)
 #  customer_auth_id             :integer(4)
