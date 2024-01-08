@@ -17,7 +17,7 @@ module ActionController
       raw_payload = {
         controller: self.class.name,
         action: action_name,
-        meta: meta,
+        meta: try(:meta),
         params: request.filtered_parameters,
         format: request.format.try(:ref),
         method: request.method,
