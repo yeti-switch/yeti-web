@@ -1840,7 +1840,7 @@ SET default_table_access_method = heap;
 CREATE TABLE sys.network_prefixes (
     id integer NOT NULL,
     prefix character varying NOT NULL,
-    network_id integer NOT NULL,
+    network_id integer,
     country_id integer,
     number_min_length smallint DEFAULT 0 NOT NULL,
     number_max_length smallint DEFAULT 100 NOT NULL,
@@ -31494,6 +31494,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231107100745'),
 ('20231206200530'),
 ('20231227093950'),
-('20231231115912');
+('20231231115912'),
+('20240109201636');
 
 
