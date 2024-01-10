@@ -1,4 +1,6 @@
 
+#https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000DB0007PDFE.pdf
+
 country_id: &ua 222
 
 
@@ -162,27 +164,15 @@ networks:
 
 # Geo
 - id: &geo_dnipro 1523
-  name: Ukraine Dnipro
+  name: Ukraine Dnipro region
   uuid: d094ded4-52f7-11ea-a7a7-525400429a0c
   type_id: 2
-  
-  # TODO: delete
-- id: 1524
-  name: Ukraine Dnipro Fixed
-  uuid: d094ded5-52f7-11ea-a7a7-525400429a0c
-  type_id: 2
-  
-- id: &geo_kharkiv 1525
-  name: Ukraine Kharkiv Fixed
+   
+- id: &geo_kharkiv_region 1525
+  name: Ukraine Kharkiv region
   uuid: d094ded6-52f7-11ea-a7a7-525400429a0c
   type_id: 2
   
-  # TODO: delete
-- id: 1526
-  name: Ukraine Kharkiv
-  uuid: d094ded7-52f7-11ea-a7a7-525400429a0c
-  type_id: 2
-
 - id: &geo_kyiv_region 1527
   name: Ukraine Kyiv region
   uuid: d094ded8-52f7-11ea-a7a7-525400429a0c
@@ -191,12 +181,6 @@ networks:
 - id: &geo_kyiv_city 2551
   name: Ukraine Kyiv city
   uuid: 297b6087-a835-4e87-b28d-edbc69845e8e
-  type_id: 2
-
-  #  TODO: delete
-- id: 1522
-  name: Ukraine Landline
-  uuid: d094ded3-52f7-11ea-a7a7-525400429a0c
   type_id: 2
   
 - id: &geo_lviv_region 2576
@@ -208,22 +192,6 @@ networks:
   name: Ukraine Lviv city
   uuid: d094ded9-52f7-11ea-a7a7-525400429a0c
   type_id: 2
-
-  # TODO: delete  
-- id: 1529
-  name: Ukraine Mobile Others
-  uuid: d094deda-52f7-11ea-a7a7-525400429a0c
-  type_id: 3
-  # TODO: delete
-- id: 1532
-  name: Ukraine MOBILE KYIVSTAR
-  uuid: d094dedd-52f7-11ea-a7a7-525400429a0c
-  type_id: 3
-  # TODO: delete
-- id: 1533
-  name: Ukraine Mobile Others2
-  uuid: d094dede-52f7-11ea-a7a7-525400429a0c
-  type_id: 3
 
 - id: &geo_odesa_region 2577
   name: Ukraine Odesa region
@@ -320,11 +288,6 @@ networks:
   uuid: 4ff5a734-f356-47a8-9eec-23959923bea7
   type_id: 2
 
-- id: &geo_kharkiv_region 2569
-  name: Ukraine Kharkiv region
-  uuid: e3065710-30f6-48e2-b846-7d93823d3c67
-  type_id: 2
-
 - id: &geo_zaporizhzhia_region 2570
   name: Ukraine Zaporizhzhia region
   uuid: ae25b585-ccd3-43bd-b2b0-237e04867101
@@ -345,7 +308,7 @@ networks:
   uuid: edc1583d-8af4-4730-8b80-c07d89f97715
   type_id: 2
 
-- id: &geo_vatastopol_city 2575
+- id: &geo_sevastopol_city 2575
   name: Ukraine Sevastopol sity
   uuid: 386aff21-5ab9-407a-9c5b-5fe93b226329
   type_id: 2
@@ -361,7 +324,7 @@ network_prefixes:
   number_max_length: 100
   uuid: d094e0aa-52f7-11ea-a7a7-525400429a0c
   country_id: *ua
-  network_id: null
+  network_id: null #calls should be rejected to aggregated prefix(when validation enabled). More speficic prefix should exists.
   
   # Mobile prefixes
 - id: 985
@@ -759,7 +722,7 @@ network_prefixes:
   number_max_length: 12
   uuid: d25df956-ba67-445b-851d-2dbd5d5ebe28
   country_id: *ua
-  network_id: *geo_vatastopol_city
+  network_id: *geo_sevastopol_city
   
   # UIFN prefixes
   

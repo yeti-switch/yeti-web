@@ -1787,7 +1787,7 @@ RSpec.describe '#routing logic' do
         let(:validate_src_number_network) { true }
 
         context 'Number is valid' do
-          let(:from_name) { '3809611111111' }
+          let(:from_name) { '380961111111' }
 
           it 'response with ok ' do
             expect(subject.size).to eq(2)
@@ -1818,13 +1818,31 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:disconnect_code_id]).to eq(8010) # last profile with invalid SRC number network error
           end
         end
+        context 'Number has existed network prefix, but wrong length' do
+          let(:from_name) { '3809711' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8010) # last profile with invalid SRC number network error
+          end
+        end
+
+        context 'Number has existed network prefix, but network is not defined' do
+          # 380 prefix exists, but without network(it is aggregated prefix), calls should be rejected
+          let(:from_name) { '380123456789' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8010) # last profile with invalid SRC number network error
+          end
+        end
       end
 
       context 'DST Number format validation enabled' do
         let(:validate_dst_number_format) { true }
 
         context 'Number is valid' do
-          let(:uri_name) { '3809611111111' }
+          let(:uri_name) { '380961111111111111111111' }
 
           it 'response with ok ' do
             expect(subject.size).to eq(2)
@@ -1845,7 +1863,7 @@ RSpec.describe '#routing logic' do
         let(:validate_dst_number_network) { true }
 
         context 'Number is valid' do
-          let(:uri_name) { '3809611111111' }
+          let(:uri_name) { '380961234567' }
 
           it 'response with ok ' do
             expect(subject.size).to eq(2)
@@ -1854,6 +1872,25 @@ RSpec.describe '#routing logic' do
         end
         context 'Number is not valid' do
           let(:uri_name) { '000003809611111111' }
+
+          it 'response with reject ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8007) # last profile with invalid DST number network error
+          end
+        end
+
+        context 'Number has known prefix, but wrong length' do
+          let(:uri_name) { '3809612' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:disconnect_code_id]).to eq(8007) # last profile with route not found error
+          end
+        end
+
+        context 'Number has known network prefix, but network is not defined' do
+          # 380 prefix exists, but without network(it is aggregated prefix), calls should be rejected
+          let(:uri_name) { '380123456789' }
 
           it 'response with reject ' do
             expect(subject.size).to eq(1)
