@@ -1,5 +1,5 @@
 
-#https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000DB0007PDFE.pdf
+# https://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000DB0007PDFE.pdf
 
 country_id: &ua 222
 
@@ -68,10 +68,6 @@ networks:
   uuid: 77530620-52f7-43bc-83fd-e69e998c4964
   type_id: 2
 
-- id: &lincom_fixed 2506
-  name: Ukraine Lincom-3000 Fixed
-  uuid: aaf841a2-717f-4322-b7af-e6740f7da790
-  type_id: 2
 
 # UIFN networks
 
@@ -163,7 +159,7 @@ networks:
   type_id: 11
 
 # Geo
-- id: &geo_dnipro 1523
+- id: &geo_dnipro_region 1523
   name: Ukraine Dnipro region
   uuid: d094ded4-52f7-11ea-a7a7-525400429a0c
   type_id: 2
@@ -281,11 +277,6 @@ networks:
 - id: &geo_kherson_region 2567
   name: Ukraine Kherson region
   uuid: b8e683a5-65a2-471c-89de-35728b6af213
-  type_id: 2
-
-- id: &geo_dnipro_region 2568
-  name: Ukraine Dnipropetrovsk region
-  uuid: 4ff5a734-f356-47a8-9eec-23959923bea7
   type_id: 2
 
 - id: &geo_zaporizhzhia_region 2570
@@ -432,7 +423,58 @@ network_prefixes:
   uuid: d094e081-52f7-11ea-a7a7-525400429a0c
   country_id: *ua
   network_id: *vodafone_mobile
+  
+  
+  # Fixed, not geo
+  
+- id: 47000
+  prefix: '380891'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cae9954c-e5e5-46bf-8be6-8907509371b7
+  country_id: *ua
+  network_id: *datagroup_fixed
+  
+- id: 47001
+  prefix: '380892'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 90c24014-18fb-4ffa-a65d-b6c84b4789e6
+  country_id: *ua
+  network_id: *ukrtelecom_fixed
+  
 
+- id: 47002
+  prefix: '380893'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 3952618c-8fa7-4db8-82c5-fb4666310a63
+  country_id: *ua
+  network_id: *tr_fixed
+  
+- id: 47003
+  prefix: '380894'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 0da1c0ed-3d01-426a-b737-3cba664a1d45
+  country_id: *ua
+  network_id: *atlantis_fixed
+  
+- id: 47004
+  prefix: '380897'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 95a7ed9e-2f33-4ebd-8920-dc37c9278ac0
+  country_id: *ua
+  network_id: *kyivstar_fixed
+  
+- id: 47005
+  prefix: '380899'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cb438472-41a9-4148-b9c1-c5f265f98c36
+  country_id: *ua
+  network_id: *velton_fixed 
   
   # Geo numbers
 - id: 40000
@@ -579,9 +621,6 @@ network_prefixes:
   uuid: d094e07f-52f7-11ea-a7a7-525400429a0c
   country_id: *ua
   network_id: *geo_odesa_city
-  
-  
-  
   
 - id: 41600
   prefix: '38051'
@@ -815,10 +854,27 @@ network_prefixes:
   network_id: *tr_uifn
   
   # Premium
+  
+- id: 46003
+  prefix: '38090023'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: b84cab89-45c3-4161-ac32-e8260d5a13e8
+  country_id: *ua
+  network_id: *audiotex_premium
+
+- id: 46004
+  prefix: '38090025'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: f075c385-e7cb-410f-9da5-9f24e99c6f72
+  country_id: *ua
+  network_id: *tr_premium
+  
 - id: 970
   prefix: '38090030'
-  number_min_length: 0
-  number_max_length: 100
+  number_min_length: 12
+  number_max_length: 13
   uuid: d094e07d-52f7-11ea-a7a7-525400429a0c
   country_id: *ua
   network_id: *ukrtelecom_premium
