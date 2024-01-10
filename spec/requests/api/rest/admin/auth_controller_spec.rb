@@ -87,6 +87,8 @@ RSpec.describe Api::Rest::Admin::AuthController do
     context 'when attributes are invalid' do
       let(:attributes) { { username: 'test-admin', password: 'wrong_password' } }
 
+      before { allow(Thread).to receive(:new).and_yield }
+
       it 'responds with failed login', :aggregate_failures do
         subject
         expect(response.status).to eq(401)
@@ -98,6 +100,12 @@ RSpec.describe Api::Rest::Admin::AuthController do
                                      status: '401'
                                    ]
                                  )
+      end
+
+      it 'should create API Log record' do
+        expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
       end
     end
   end

@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
   include CaptureError::ControllerMethods
   include Rescuers
   include IndexMaxRecords
+  include Memoizable
+  include WithPayloads
+
+  define_memoizable :debug_mode, apply: -> { System::ApiLogConfig.exists?(controller: self.class.name) }
 
   def redirect_to_back(default = root_url)
     if request.env['HTTP_REFERER'].present? && (request.env['HTTP_REFERER'] != request.env['REQUEST_URI'])
