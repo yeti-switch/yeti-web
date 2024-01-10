@@ -20,7 +20,7 @@ RSpec.describe 'instrumentation_notification.rb', type: :request do
           response_body: nil,
           response_headers: nil,
           status: 404,
-          remote_ip: nil
+          remote_ip: '127.0.0.1'
         )
       end
     end

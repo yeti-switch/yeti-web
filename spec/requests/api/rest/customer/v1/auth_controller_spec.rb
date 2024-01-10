@@ -194,6 +194,8 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       build_customer_token(api_access.id, expiration: 1.minute.from_now)
     end
 
+    before { allow(Thread).to receive(:new).and_yield }
+
     it 'responds with 200' do
       subject
       expect(response.status).to eq 200
@@ -201,6 +203,12 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     end
 
     it_behaves_like :json_api_customer_v1_check_authorization
+
+    it 'should create API Log record' do
+      expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+      expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+    end
   end
 
   describe 'DELETE /api/customer/v1/auth' do
