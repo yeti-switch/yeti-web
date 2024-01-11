@@ -10,7 +10,7 @@
 #  prefix            :string           not null
 #  uuid              :uuid             not null
 #  country_id        :integer(4)
-#  network_id        :integer(4)       not null
+#  network_id        :integer(4)
 #
 # Indexes
 #
