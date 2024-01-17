@@ -35,6 +35,7 @@ class Billing::InvoiceOriginatedNetwork < Cdr::Base
   belongs_to :network, class_name: 'System::Network', foreign_key: :network_id, optional: true
 
   scope :for_invoice, -> { preload(:country, :network).order(:spent, :country_id) }
+  scope :for_invoice_succ, -> { preload(:country, :network).order(:spent, :country_id).where('successful_calls_count>0') }
 
   def self.to_csv
     csv_string = CSV.generate do |csv|

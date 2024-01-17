@@ -520,6 +520,7 @@ ActiveAdmin.register Gateway do
           row :contractor do
             auto_link(s.contractor, s.contractor.decorated_display_name)
           end
+          row :is_shared
           row :gateway_group
           row :priority
           row :weight

@@ -193,15 +193,30 @@ module BillingInvoice
       originated_destinations = InvoiceOriginatedDestinationDecorator.decorate_collection(
         invoice.originated_destinations.for_invoice.order('dst_prefix').to_a
       )
+      originated_destinations_succ = InvoiceOriginatedDestinationDecorator.decorate_collection(
+        invoice.originated_destinations.for_invoice_succ.order('dst_prefix').to_a
+      )
+
       terminated_destinations = InvoiceTerminatedDestinationDecorator.decorate_collection(
         invoice.originated_destinations.for_invoice.order('dst_prefix').to_a
+      )
+      terminated_destinations_succ = InvoiceTerminatedDestinationDecorator.decorate_collection(
+        invoice.originated_destinations.for_invoice_succ.order('dst_prefix').to_a
       )
 
       originated_networks = InvoiceOriginatedNetworkDecorator.decorate_collection(
         invoice.originated_networks.for_invoice.order('country_id, network_id').to_a
       )
+      originated_networks_succ = InvoiceOriginatedNetworkDecorator.decorate_collection(
+        invoice.originated_networks.for_invoice_succ.order('country_id, network_id').to_a
+      )
+
       terminated_networks = InvoiceTerminatedNetworkDecorator.decorate_collection(
         invoice.terminated_networks.for_invoice.order('country_id, network_id').to_a
+      )
+
+      terminated_networks_succ = InvoiceTerminatedNetworkDecorator.decorate_collection(
+        invoice.terminated_networks.for_invoice_succ.order('country_id, network_id').to_a
       )
 
       ODFReport::Report.new(odf_path) do |r|
@@ -209,6 +224,21 @@ module BillingInvoice
           r.add_field k, v
         end
         r.add_table('INV_ORIG_DST_TABLE', originated_destinations, header: true, footer: true) do |t|
+          t.add_column(:dst_prefix)
+          t.add_column(:country) { |field| field.country.try(:name) }
+          t.add_column(:network) { |field| field.network.try(:name) }
+          t.add_column(:rate)
+          t.add_column(:calls_count)
+          t.add_column(:successful_calls_count)
+          t.add_column(:calls_duration)
+          t.add_column(:calls_durationm, &:decorated_calls_duration_kolon)
+          t.add_column(:calls_duration_dec, &:decorated_calls_duration_dec)
+          t.add_column(:amount)
+          t.add_column(:amount_decorated, &:decorated_amount)
+          t.add_column(:first_call_at)
+          t.add_column(:last_call_at)
+        end
+        r.add_table('INV_ORIG_DST_SUCC_TABLE', originated_destinations_succ, header: true, footer: true) do |t|
           t.add_column(:dst_prefix)
           t.add_column(:country) { |field| field.country.try(:name) }
           t.add_column(:network) { |field| field.network.try(:name) }
@@ -238,6 +268,21 @@ module BillingInvoice
           t.add_column(:first_call_at)
           t.add_column(:last_call_at)
         end
+        r.add_table('INV_TERM_DST_SUCC_TABLE', terminated_destinations_succ, header: true, footer: true) do |t|
+          t.add_column(:dst_prefix)
+          t.add_column(:country) { |field| field.country.try(:name) }
+          t.add_column(:network) { |field| field.network.try(:name) }
+          t.add_column(:rate)
+          t.add_column(:calls_count)
+          t.add_column(:successful_calls_count)
+          t.add_column(:calls_duration)
+          t.add_column(:calls_durationm, &:decorated_calls_duration_kolon)
+          t.add_column(:calls_duration_dec, &:decorated_calls_duration_dec)
+          t.add_column(:amount)
+          t.add_column(:amount_decorated, &:decorated_amount)
+          t.add_column(:first_call_at)
+          t.add_column(:last_call_at)
+        end
         r.add_table('INV_ORIG_NETWORKS_TABLE', originated_networks, header: true, footer: true) do |t|
           t.add_column(:country) { |field| field.country.try(:name) }
           t.add_column(:network) { |field| field.network.try(:name) }
@@ -252,7 +297,35 @@ module BillingInvoice
           t.add_column(:first_call_at)
           t.add_column(:last_call_at)
         end
+        r.add_table('INV_ORIG_NETWORKS_SUCC_TABLE', originated_networks_succ, header: true, footer: true) do |t|
+          t.add_column(:country) { |field| field.country.try(:name) }
+          t.add_column(:network) { |field| field.network.try(:name) }
+          t.add_column(:rate)
+          t.add_column(:calls_count)
+          t.add_column(:successful_calls_count)
+          t.add_column(:calls_duration)
+          t.add_column(:calls_durationm, &:decorated_calls_duration_kolon)
+          t.add_column(:calls_duration_dec, &:decorated_calls_duration_dec)
+          t.add_column(:amount)
+          t.add_column(:amount_decorated, &:decorated_amount)
+          t.add_column(:first_call_at)
+          t.add_column(:last_call_at)
+        end
         r.add_table('INV_TERM_NETWORKS_TABLE', terminated_networks, header: true, footer: true) do |t|
+          t.add_column(:country) { |field| field.country.try(:name) }
+          t.add_column(:network) { |field| field.network.try(:name) }
+          t.add_column(:rate)
+          t.add_column(:calls_count)
+          t.add_column(:successful_calls_count)
+          t.add_column(:calls_duration)
+          t.add_column(:calls_durationm, &:decorated_calls_duration_kolon)
+          t.add_column(:calls_duration_dec, &:decorated_calls_duration_dec)
+          t.add_column(:amount)
+          t.add_column(:amount_decorated, &:decorated_amount)
+          t.add_column(:first_call_at)
+          t.add_column(:last_call_at)
+        end
+        r.add_table('INV_TERM_NETWORKS_SUCC_TABLE', terminated_networks_succ, header: true, footer: true) do |t|
           t.add_column(:country) { |field| field.country.try(:name) }
           t.add_column(:network) { |field| field.network.try(:name) }
           t.add_column(:rate)
