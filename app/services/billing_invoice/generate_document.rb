@@ -101,7 +101,7 @@ module BillingInvoice
       odf_path = "tmp/invoice-#{invoice.id}.odt"
       pdf_path = "tmp/invoice-#{invoice.id}.pdf"
       [odf_path, pdf_path].each do |f|
-        if File.exists?(f)
+        if File.exist?(f)
           File.unlink(f)
         end
       end
