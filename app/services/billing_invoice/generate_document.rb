@@ -98,7 +98,14 @@ module BillingInvoice
     def call
       raise TemplateUndefined, invoice.id if template.blank?
 
-      odf_path = "tmp/invoice-template-#{template.filename}"
+      odf_path = "tmp/invoice-#{invoice.id}.odt"
+      pdf_path = "tmp/invoice-#{invoice.id}.pdf"
+      [odf_path, pdf_path].each do |f|
+        if File.exists?(f)
+          File.unlink(f)
+        end
+      end
+
       File.open(odf_path, 'wb') do |file|
         file.write(template.data)
       end
@@ -108,8 +115,6 @@ module BillingInvoice
       # generate pdf
       convert_to_pdf(odf_path)
 
-      base_name = File.basename(odf_path, '.*')
-      pdf_path = File.join(File.dirname(odf_path), "#{base_name}.pdf")
       odf_data = save_read_file(odf_path)
       pdf_data = save_read_file(pdf_path)
 
