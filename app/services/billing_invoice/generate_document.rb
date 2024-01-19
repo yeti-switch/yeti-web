@@ -124,6 +124,12 @@ module BillingInvoice
           data: odf_data,
           pdf_data: pdf_data
         )
+
+      [odf_path, pdf_path].each do |f|
+        if File.exist?(f)
+          File.unlink(f)
+        end
+      end
     end
 
     private
