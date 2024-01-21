@@ -209,10 +209,10 @@ module BillingInvoice
       )
 
       terminated_destinations = InvoiceTerminatedDestinationDecorator.decorate_collection(
-        invoice.originated_destinations.for_invoice.order('dst_prefix').to_a
+        invoice.terminated_destinations.for_invoice.order('dst_prefix').to_a
       )
       terminated_destinations_succ = InvoiceTerminatedDestinationDecorator.decorate_collection(
-        invoice.originated_destinations.for_invoice_succ.order('dst_prefix').to_a
+        invoice.terminated_destinations.for_invoice_succ.order('dst_prefix').to_a
       )
 
       originated_networks = InvoiceOriginatedNetworkDecorator.decorate_collection(
