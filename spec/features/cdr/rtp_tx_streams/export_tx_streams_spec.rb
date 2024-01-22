@@ -31,6 +31,7 @@ RSpec.describe 'Export TX streams', type: :feature do
                            ['Rx out of buffer errors', item.rx_out_of_buffer_errors.to_s],
                            ['Rx rtp parse errors', item.rx_rtp_parse_errors.to_s],
                            ['Rx dropped packets', item.rx_dropped_packets.to_s],
+                           ['Rx srtp decrypt errors', item.rx_srtp_decrypt_errors.to_s],
                            ['Tx packets', item.tx_packets.to_s],
                            ['Tx bytes', item.tx_bytes.to_s],
                            ['Tx ssrc', item.tx_ssrc.to_s],

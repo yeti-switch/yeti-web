@@ -22,6 +22,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
                  :rx_out_of_buffer_errors,
                  :rx_rtp_parse_errors,
                  :rx_dropped_packets,
+                 :rx_srtp_decrypt_errors,
                  :tx_packets,
                  :tx_bytes,
                  :tx_ssrc,
@@ -75,6 +76,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
   filter :rx_out_of_buffer_errors
   filter :rx_rtp_parse_errors
   filter :rx_dropped_packets
+  filter :rx_srtp_decrypt_errors
   filter :tx_total_lost
   filter :tx_rtcp_jitter_min
   filter :tx_rtcp_jitter_max
@@ -97,6 +99,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
     column :rx_out_of_buffer_errors
     column :rx_rtp_parse_errors
     column :rx_dropped_packets
+    column :rx_srtp_decrypt_errors
     column :tx_packets
     column :tx_bytes
     column :tx_ssrc do |c|
@@ -129,6 +132,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
       row :rx_out_of_buffer_errors
       row :rx_rtp_parse_errors
       row :rx_dropped_packets
+      row :rx_srtp_decrypt_errors
       row :tx_packets
       row :tx_bytes
       row :tx_ssrc do |c|

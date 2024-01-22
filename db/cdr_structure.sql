@@ -190,7 +190,8 @@ CREATE TYPE rtp_statistics.tx_stream_ty AS (
 	tx_rtcp_jitter_max real,
 	tx_rtcp_jitter_mean real,
 	tx_rtcp_jitter_std real,
-	rx rtp_statistics.rx_stream_ty[]
+	rx rtp_statistics.rx_stream_ty[],
+	rx_srtp_decrypt_errors bigint
 );
 
 
@@ -1015,6 +1016,7 @@ BEGIN
         v_rtp_tx_stream_data.rx_out_of_buffer_errors=v_tx_stream.rx_out_of_buffer_errors;
         v_rtp_tx_stream_data.rx_rtp_parse_errors=v_tx_stream.rx_rtp_parse_errors;
         v_rtp_tx_stream_data.rx_dropped_packets=v_tx_stream.rx_dropped_packets;
+        v_rtp_tx_stream_data.rx_srtp_decrypt_errors = v_tx_stream.rx_srtp_decrypt_errors;
         v_rtp_tx_stream_data.tx_packets=v_tx_stream.tx_packets;
         v_rtp_tx_stream_data.tx_bytes=v_tx_stream.tx_bytes;
         v_rtp_tx_stream_data.tx_ssrc=v_tx_stream.tx_ssrc;
@@ -3367,7 +3369,8 @@ CREATE TABLE rtp_statistics.tx_streams (
     tx_rtcp_jitter_min real,
     tx_rtcp_jitter_max real,
     tx_rtcp_jitter_mean real,
-    tx_rtcp_jitter_std real
+    tx_rtcp_jitter_std real,
+    rx_srtp_decrypt_errors bigint
 )
 PARTITION BY RANGE (time_start);
 
@@ -4863,6 +4866,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231106100135'),
 ('20231106125344'),
 ('20231212213111'),
-('20231231115209');
+('20231231115209'),
+('20240122201619');
 
 

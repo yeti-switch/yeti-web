@@ -15,6 +15,7 @@
 #  rx_dropped_packets      :bigint(8)
 #  rx_out_of_buffer_errors :bigint(8)
 #  rx_rtp_parse_errors     :bigint(8)
+#  rx_srtp_decrypt_errors  :bigint(8)
 #  time_end                :timestamptz
 #  time_start              :timestamptz      not null
 #  tx_bytes                :bigint(8)

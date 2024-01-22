@@ -27,9 +27,10 @@ RSpec.describe 'switch.write_rtp_statistics()' do
         "rtcp_rtt_std": 0.76767676,
         "time_start": 10.seconds.ago.to_f,
         "time_end": Time.now.to_f,
-        "rx_out_of_buffer_errors": 0,
-        "rx_rtp_parse_errors": 0,
-        "rx_dropped_packets": 0,
+        "rx_out_of_buffer_errors": 1,
+        "rx_rtp_parse_errors": 12,
+        "rx_dropped_packets": 11,
+        "rx_srtp_decrypt_errors": 150,
         "rx": [
           {
             "rx_ssrc": 267_906_310,
@@ -79,6 +80,7 @@ RSpec.describe 'switch.write_rtp_statistics()' do
         "rx_out_of_buffer_errors": 0,
         "rx_rtp_parse_errors": 0,
         "rx_dropped_packets": 0,
+        "rx_srtp_decrypt_errors": 10,
         "rx": [
           {
             "rx_ssrc": 267_906_310,
@@ -129,6 +131,7 @@ RSpec.describe 'switch.write_rtp_statistics()' do
         "rx_out_of_buffer_errors": 0,
         "rx_rtp_parse_errors": 0,
         "rx_dropped_packets": 0,
+        "rx_srtp_decrypt_errors": 8,
         "rx": [
           {
             "rx_ssrc": 1_458_718_330,
@@ -178,6 +181,7 @@ RSpec.describe 'switch.write_rtp_statistics()' do
         "rx_out_of_buffer_errors": 0,
         "rx_rtp_parse_errors": 0,
         "rx_dropped_packets": 0,
+        "rx_srtp_decrypt_errors": 1,
         "rx": [
           {
             "rx_ssrc": 1_458_718_330,
