@@ -74,7 +74,7 @@ ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_n
         end
       end
     rescue StandardError => e
-      logger.error { "#{e.message}\n#{e.backtrace&.join("\n")}" }
+      Rails.logger.error { "#{e.message}\n#{e.backtrace&.join("\n")}" }
       CaptureError.capture(e, tags: { component: 'API Logs' })
     end
   end
