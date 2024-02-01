@@ -64,9 +64,9 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
           let(:sql_query) { Contractor.all.to_sql }
           it 'error performed job' do
             expect do
-              expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+              expect { subject }.not_to raise_error
             end.to change(LogicLog, :count).by 1
-            expect(LogicLog.last.msg).to start_with 'Error'
+            expect(LogicLog.last.msg).to start_with 'Success'
           end
         end
       end
@@ -74,23 +74,55 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
       context 'when record cannot be destroyed' do
         let(:model_class) { 'Dialpeer' }
 
-        let!(:dialpeers) { FactoryBot.create_list(:dialpeer, 4) }
+        let!(:dialpeer_with_pricelist) { FactoryBot.create(:dialpeer) }
+        let!(:dialpeer) { FactoryBot.create(:dialpeer) }
         let!(:item) do
-          FactoryBot.create(:rate_management_pricelist_item, :with_pricelist, :filed_from_project, dialpeer: dialpeers.last)
+          FactoryBot.create(:rate_management_pricelist_item, :with_pricelist, :filed_from_project, dialpeer: dialpeer_with_pricelist)
         end
         let(:sql_query) { Dialpeer.all.to_sql }
+        let(:error_message) { "Dialpeer ##{dialpeer_with_pricelist.id} can't be deleted: Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{item.pricelist_id}" }
+        let(:rails_logger) { Rails.logger }
 
-        it 'should raise validation error' do
-          error_message = "Dialpeer ##{dialpeers.last.id} can't be deleted: Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{item.pricelist_id}"
-          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed, error_message)
+        before do
+          allow(Rails).to receive(:logger).and_return(rails_logger)
+          allow(rails_logger).to receive(:info)
+        end
 
-          dialpeers.first(2).each do |dialpeer|
-            expect(Dialpeer).not_to be_exists(dialpeer.id)
-          end
+        it 'should delete dialpeer that do not have related pricelist' do
+          expect { subject }.not_to raise_error
+          expect { dialpeer_with_pricelist.reload }.not_to raise_error ActiveRecord::RecordNotFound
+          expect { dialpeer.reload }.to raise_error ActiveRecord::RecordNotFound
+        end
 
-          dialpeers.last(2).each do |dialpeer|
-            expect(Dialpeer).to be_exists(dialpeer.id)
-          end
+        it 'should log error through Rails logger' do
+          expect(rails_logger).to receive(:warn).once.and_wrap_original { |_m, arg| expect(arg).to eq error_message }
+          subject
+        end
+      end
+
+      context 'when Routing::Numberlist has related customer_auth' do
+        let(:model_class) { 'Routing::Numberlist' }
+        let(:sql_query) { Routing::Numberlist.where(id: [record_that_cant_be_deleted.id, record_that_can_be_deleted.id]).to_sql }
+        let!(:record_that_cant_be_deleted) { FactoryBot.create(:numberlist) }
+        let!(:record_that_can_be_deleted) { FactoryBot.create(:numberlist) }
+        let!(:customers_auth) { FactoryBot.create(:customers_auth, src_numberlist: record_that_cant_be_deleted) }
+
+        it 'should remove number_lists without related Customer Auth' do
+          subject
+
+          expect { record_that_can_be_deleted.reload }.to raise_error ActiveRecord::RecordNotFound
+        end
+      end
+
+      context 'when NumberList already deleted' do
+        let(:model_class) { 'Routing::Numberlist' }
+        let(:sql_query) { Routing::Numberlist.all.to_sql }
+        let!(:record) { FactoryBot.create(:numberlist) }
+
+        before { record.destroy! }
+
+        it 'should perform job without error' do
+          expect { subject }.not_to raise_error
         end
       end
     end
