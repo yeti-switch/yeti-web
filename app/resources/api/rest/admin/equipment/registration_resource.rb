@@ -17,10 +17,10 @@ class Api::Rest::Admin::Equipment::RegistrationResource < ::BaseResource
              :proxy,
              :retry_delay,
              :sip_interface_name,
-             :username
+             :username,
+             :sip_schema_id
 
   has_one :transport_protocol, class_name: 'TransportProtocol'
-  has_one :sip_schema, class_name: 'SipSchema'
   has_one :proxy_transport_protocol, class_name: 'TransportProtocol'
   has_one :pop, class_name: 'Pop'
   has_one :node, class_name: 'Node'

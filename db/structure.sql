@@ -2816,7 +2816,8 @@ CREATE TABLE class4.gateways (
     stir_shaken_mode_id smallint DEFAULT 0 NOT NULL,
     stir_shaken_crt_id smallint,
     to_rewrite_rule character varying,
-    to_rewrite_result character varying
+    to_rewrite_result character varying,
+    privacy_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -26866,16 +26867,6 @@ ALTER SEQUENCE sys.sensors_id_seq OWNED BY sys.sensors.id;
 
 
 --
--- Name: sip_schemas; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.sip_schemas (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -29662,22 +29653,6 @@ ALTER TABLE ONLY sys.sensors
 
 
 --
--- Name: sip_schemas sip_schemas_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.sip_schemas
-    ADD CONSTRAINT sip_schemas_name_key UNIQUE (name);
-
-
---
--- Name: sip_schemas sip_schemas_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.sip_schemas
-    ADD CONSTRAINT sip_schemas_pkey PRIMARY KEY (id);
-
-
---
 -- Name: smtp_connections smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -30740,14 +30715,6 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways gateways_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
-
-
---
 -- Name: gateways gateways_stir_shaken_crt_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30908,14 +30875,6 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations registrations_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.registrations
-    ADD CONSTRAINT registrations_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
-
-
---
 -- Name: registrations registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -31025,14 +30984,6 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 ALTER TABLE ONLY class4.sip_options_probers
     ADD CONSTRAINT sip_options_probers_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
-
-
---
--- Name: sip_options_probers sip_options_probers_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.sip_options_probers
-    ADD CONSTRAINT sip_options_probers_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
 
 
 --
@@ -31495,6 +31446,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231206200530'),
 ('20231227093950'),
 ('20231231115912'),
-('20240109201636');
+('20240109201636'),
+('20240203212630');
 
 

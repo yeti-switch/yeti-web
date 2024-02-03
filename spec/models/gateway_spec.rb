@@ -110,6 +110,7 @@
 #  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
+#  privacy_mode_id                  :integer(2)       default(0), not null
 #  radius_accounting_profile_id     :integer(2)
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
@@ -157,7 +158,6 @@
 #  gateways_sensor_id_fkey                         (sensor_id => sensors.id)
 #  gateways_sensor_level_id_fkey                   (sensor_level_id => sensor_levels.id)
 #  gateways_session_refresh_method_id_fkey         (session_refresh_method_id => session_refresh_methods.id)
-#  gateways_sip_schema_id_fkey                     (sip_schema_id => sip_schemas.id)
 #  gateways_stir_shaken_crt_id_fkey                (stir_shaken_crt_id => stir_shaken_signing_certificates.id)
 #  gateways_term_disconnect_policy_id_fkey         (term_disconnect_policy_id => disconnect_policy.id)
 #  gateways_term_proxy_transport_protocol_id_fkey  (term_proxy_transport_protocol_id => transport_protocols.id)

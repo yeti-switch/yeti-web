@@ -143,20 +143,6 @@ INSERT INTO sys.sensor_modes (id, name) VALUES (3, 'HEPv3');
 
 
 --
--- Data for Name: sensors; Type: TABLE DATA; Schema: sys; Owner: senid
---
-
-
-
---
--- Data for Name: sip_schemas; Type: TABLE DATA; Schema: sys; Owner: senid
---
-
-INSERT INTO sys.sip_schemas (id, name) VALUES (1, 'sip');
-INSERT INTO sys.sip_schemas (id, name) VALUES (2, 'sips');
-
-
---
 -- Data for Name: states; Type: TABLE DATA; Schema: sys; Owner: senid
 --
 

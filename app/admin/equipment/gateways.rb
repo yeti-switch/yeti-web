@@ -45,7 +45,7 @@ ActiveAdmin.register Gateway do
                  :force_cancel_routeset,
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
-                 [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
+                 :sip_schema_name,
                  :host,
                  :port,
                  :registered_aor_mode_name,
@@ -111,7 +111,7 @@ ActiveAdmin.register Gateway do
            :radius_accounting_profile,
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
-           :network_protocol_priority, :media_encryption_mode, :sip_schema,
+           :network_protocol_priority, :media_encryption_mode,
            :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt
 
   controller do
@@ -314,6 +314,7 @@ ActiveAdmin.register Gateway do
   filter :incoming_auth_password
   filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
   filter :diversion_send_mode
+  filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -398,7 +399,7 @@ ActiveAdmin.register Gateway do
           column do
             f.inputs 'Termination' do
               f.input :transport_protocol, as: :select, include_blank: false
-              f.input :sip_schema, as: :select, include_blank: false
+              f.input :sip_schema_id, as: :select, include_blank: false, collection: Gateway::SIP_SCHEMAS.invert
               f.input :host
               f.input :port
               f.input :registered_aor_mode_id, as: :select, include_blank: false,
@@ -586,7 +587,7 @@ ActiveAdmin.register Gateway do
         panel 'Termination' do
           attributes_table_for s do
             row :transport_protocol
-            row :sip_schema
+            row :sip_schema_id, &:sip_schema_name
             row :host
             row :port
 

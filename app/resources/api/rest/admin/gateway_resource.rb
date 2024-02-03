@@ -41,7 +41,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   has_one :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode'
   has_one :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority'
   has_one :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode'
-  has_one :sip_schema, class_name: 'System::SipSchema'
 
   filter :name # DEPRECATED
 
@@ -66,7 +65,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   relationship_filter :tx_inband_dtmf_filtering_mode
   relationship_filter :network_protocol_priority
   relationship_filter :media_encryption_mode
-  relationship_filter :sip_schema
 
   ransack_filter :host, type: :string
   ransack_filter :port, type: :number
@@ -155,6 +153,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :registered_aor_mode_id, type: :number
   ransack_filter :weight, type: :number
   ransack_filter :force_cancel_routeset, type: :boolean
+  ransack_filter :sip_schema_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
@@ -237,7 +236,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       rtp_force_relay_cn
       network_protocol_priority
       media_encryption_mode
-      sip_schema
+      sip_schema_id
       preserve_anonymous_from_domain
       registered_aor_mode_id
       origination_capacity

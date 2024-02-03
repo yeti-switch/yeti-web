@@ -16,6 +16,7 @@ class Api::Rest::Admin::Equipment::SipOptionsProberResource < ::BaseResource
              :ruri_domain,
              :ruri_username,
              :sip_interface_name,
+             :sip_schema_id,
              :to_uri,
              :created_at,
              :updated_at,
@@ -24,6 +25,5 @@ class Api::Rest::Admin::Equipment::SipOptionsProberResource < ::BaseResource
   has_one :node, class_name: 'Node'
   has_one :pop, class_name: 'Pop'
   has_one :proxy_transport_protocol, class_name: 'TransportProtocol'
-  has_one :sip_schema, class_name: 'SipSchema'
   has_one :transport_protocol, class_name: 'TransportProtocol'
 end

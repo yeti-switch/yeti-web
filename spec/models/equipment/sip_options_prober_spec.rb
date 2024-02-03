@@ -37,7 +37,6 @@
 #  sip_options_probers_node_id_fkey                      (node_id => nodes.id)
 #  sip_options_probers_pop_id_fkey                       (pop_id => pops.id)
 #  sip_options_probers_proxy_transport_protocol_id_fkey  (proxy_transport_protocol_id => transport_protocols.id)
-#  sip_options_probers_sip_schema_id_fkey                (sip_schema_id => sip_schemas.id)
 #  sip_options_probers_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 RSpec.describe Equipment::SipOptionsProber do

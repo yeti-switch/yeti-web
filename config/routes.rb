@@ -126,7 +126,6 @@ Rails.application.routes.draw do
             jsonapi_resources :dtmf_send_modes
             jsonapi_resources :sensor_levels
             jsonapi_resources :sensors
-            jsonapi_resources :sip_schemas
             jsonapi_resources :smtp_connections
             jsonapi_resources :countries
             jsonapi_resources :networks
