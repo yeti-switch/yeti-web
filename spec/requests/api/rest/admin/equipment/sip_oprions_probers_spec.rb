@@ -6,7 +6,6 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
   let!(:nodes) { create_list(:node, 2) }
   let(:transport_protocols) { Equipment::TransportProtocol.all.to_a }
   let(:pops) { Pop.all.to_a }
-  let(:sip_schemas) { System::SipSchema.all.to_a }
 
   shared_examples :responds_jsonapi_sip_options_prober do
     it 'responds with correct data' do
@@ -27,6 +26,7 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
           'ruri-domain': sip_options_prober.ruri_domain,
           'ruri-username': sip_options_prober.ruri_username,
           'sip-interface-name': sip_options_prober.sip_interface_name,
+          'sip-schema-id': sip_options_prober.sip_schema_id,
           'to-uri': sip_options_prober.to_uri,
           'created-at': sip_options_prober.created_at.iso8601(3),
           'updated-at': sip_options_prober.updated_at.iso8601(3),
@@ -36,8 +36,7 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
                                         :pop,
                                         :node,
                                         :'transport-protocol',
-                                        :'proxy-transport-protocol',
-                                        :'sip-schema'
+                                        :'proxy-transport-protocol'
                                       )
     end
   end
@@ -84,7 +83,6 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
         subject
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:pop)
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:node)
-        expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'sip-schema')
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'transport-protocol')
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'proxy-transport-protocol')
       end
@@ -93,8 +91,8 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
       include_examples :responds_jsonapi_sip_options_prober
     end
 
-    context 'with include pop,sip-schema,transport-protocol,proxy-transport-protocol,node' do
-      let(:request_params) { { include: 'pop,sip-schema,transport-protocol,proxy-transport-protocol,node' } }
+    context 'with include pop,transport-protocol,proxy-transport-protocol,node' do
+      let(:request_params) { { include: 'pop,transport-protocol,proxy-transport-protocol,node' } }
 
       it 'responds correct included relationships' do
         subject
@@ -117,16 +115,6 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
         expect(response_json[:included]).to have_jsonapi_data_item(
                                               sip_options_prober.node_id,
                                               'nodes'
-                                            )
-
-        expect(response_json[:data]).to have_jsonapi_relationship_data(
-                                          :'sip-schema',
-                                          id: sip_options_prober.sip_schema_id,
-                                          type: 'sip-schemas'
-                                        )
-        expect(response_json[:included]).to have_jsonapi_data_item(
-                                              sip_options_prober.sip_schema_id,
-                                              'sip-schemas'
                                             )
 
         expect(response_json[:data]).to have_jsonapi_relationship_data(
@@ -171,7 +159,8 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
       {
         name: 'Sip Options Prober Tets123',
         'ruri-domain': 'example.com',
-        'ruri-username': 'sip:qwe@asd'
+        'ruri-username': 'sip:qwe@asd',
+        'sip-schema-id': 2
       }
     end
     let(:json_api_request_relationships) { {} }
@@ -195,6 +184,7 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
             ruri_domain: json_api_request_attributes[:'ruri-domain'],
             ruri_username: json_api_request_attributes[:'ruri-username'],
             sip_interface_name: nil,
+            sip_schema_id: json_api_request_attributes[:'sip-schema-id'],
             to_uri: nil,
             external_id: nil
           )
@@ -215,6 +205,7 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
                       'from-uri': '//test_uri.com',
                       'proxy': '//proxy',
                       'sip-interface-name': 'sip interface name test',
+                      'sip-schema-id': 1,
                       'to-uri': '//to_uri_test.com',
                       'external-id': 52_352_125_521_632
       end
@@ -222,7 +213,6 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
         {
           node: jsonapi_relationship(nodes.first.id, 'nodes'),
           pop: jsonapi_relationship(nodes.first.pop_id, 'pops'),
-          'sip-schema': jsonapi_relationship(sip_schemas.last.id, 'sip-schemas'),
           'transport-protocol': jsonapi_relationship(transport_protocols.last.id, 'transport-protocols'),
           'proxy-transport-protocol': jsonapi_relationship(transport_protocols.first.id, 'transport-protocols')
         }
@@ -249,7 +239,7 @@ RSpec.describe Api::Rest::Admin::Equipment::SipOptionsProbersController do
                                     node_id: nodes.first.id,
                                     transport_protocol_id: transport_protocols.last.id,
                                     proxy_transport_protocol_id: transport_protocols.first.id,
-                                    sip_schema_id: sip_schemas.last.id
+                                    sip_schema_id: json_api_request_attributes[:'sip-schema-id']
                                   )
       end
 

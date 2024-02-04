@@ -6,7 +6,6 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
   let!(:nodes) { create_list(:node, 2) }
   let(:transport_protocols) { Equipment::TransportProtocol.all.to_a }
   let(:pops) { Pop.all.to_a }
-  let(:sip_schemas) { System::SipSchema.all.to_a }
 
   shared_examples :responds_jsonapi_registration do
     it 'responds with correct data' do
@@ -28,14 +27,14 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
                                         proxy: registration.proxy,
                                         'retry-delay': registration.retry_delay,
                                         'sip-interface-name': registration.sip_interface_name,
+                                        'sip-schema-id': registration.sip_schema_id,
                                         username: registration.username
                                       )
       expect(response_json[:data]).to have_jsonapi_relationships(
                                         :pop,
                                         :node,
                                         :'transport-protocol',
-                                        :'proxy-transport-protocol',
-                                        :'sip-schema'
+                                        :'proxy-transport-protocol'
                                       )
     end
   end
@@ -82,7 +81,6 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
         subject
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:pop)
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:node)
-        expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'sip-schema')
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'transport-protocol')
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'proxy-transport-protocol')
       end
@@ -91,8 +89,8 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
       include_examples :responds_jsonapi_registration
     end
 
-    context 'with include pop,sip-schema,transport-protocol,proxy-transport-protocol' do
-      let(:request_params) { { include: 'pop,sip-schema,transport-protocol,proxy-transport-protocol,node' } }
+    context 'with include pop,transport-protocol,proxy-transport-protocol' do
+      let(:request_params) { { include: 'pop,transport-protocol,proxy-transport-protocol,node' } }
 
       it 'responds correct included relationships' do
         subject
@@ -115,16 +113,6 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
         expect(response_json[:included]).to have_jsonapi_data_item(
                                               registration.node_id,
                                               'nodes'
-                                            )
-
-        expect(response_json[:data]).to have_jsonapi_relationship_data(
-                                          :'sip-schema',
-                                          id: registration.sip_schema_id,
-                                          type: 'sip-schemas'
-                                        )
-        expect(response_json[:included]).to have_jsonapi_data_item(
-                                              registration.sip_schema_id,
-                                              'sip-schemas'
                                             )
 
         expect(response_json[:data]).to have_jsonapi_relationship_data(
@@ -223,13 +211,13 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
                       'max-attempts': 456,
                       proxy: 'http://proxy.com:8123',
                       'retry-delay': 123,
-                      'sip-interface-name': 'sip interface name'
+                      'sip-interface-name': 'sip interface name',
+                      'sip-schema-id': 1
       end
       let(:json_api_request_relationships) do
         {
           node: jsonapi_relationship(nodes.first.id, 'nodes'),
           pop: jsonapi_relationship(nodes.first.pop_id, 'pops'),
-          'sip-schema': jsonapi_relationship(sip_schemas.last.id, 'sip-schemas'),
           'transport-protocol': jsonapi_relationship(transport_protocols.last.id, 'transport-protocols'),
           'proxy-transport-protocol': jsonapi_relationship(transport_protocols.first.id, 'transport-protocols')
         }
@@ -256,7 +244,7 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
                                   node_id: nodes.first.id,
                                   transport_protocol_id: transport_protocols.last.id,
                                   proxy_transport_protocol_id: transport_protocols.first.id,
-                                  sip_schema_id: sip_schemas.last.id
+                                  sip_schema_id: json_api_request_attributes[:'sip-schema-id']
                                 )
       end
 
@@ -304,16 +292,15 @@ RSpec.describe Api::Rest::Admin::Equipment::RegistrationsController do
     end
 
     context 'when update sip-schema' do
-      let(:registration_attrs) { super().merge(sip_schema: sip_schemas.first) }
-      let(:json_api_request_attributes) { {} }
-      let(:json_api_request_relationships) do
-        { 'sip-schema': jsonapi_relationship(sip_schemas.last.id, 'sip-schemas') }
-      end
+      let(:json_api_request_attributes) {
+        { 'sip-schema-id': 2 }
+      }
+      let(:json_api_request_relationships) { {} }
 
       it 'changes registration sip_schema' do
         subject
         expect(registration.reload).to have_attributes(
-                                         sip_schema_id: sip_schemas.last.id
+                                         sip_schema_id: json_api_request_attributes[:'sip-schema-id']
                                        )
       end
 

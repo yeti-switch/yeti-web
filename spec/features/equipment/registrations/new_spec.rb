@@ -50,7 +50,7 @@ RSpec.describe 'Equipment Registrations new', js: true do
                                 pop: nil,
                                 node: nil,
                                 transport_protocol: Equipment::TransportProtocol.find_by!(name: 'UDP'),
-                                sip_schema: System::SipSchema.find_by!(name: 'sip')
+                                sip_schema_id: 1
                               )
     end
   end
