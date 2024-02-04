@@ -16,7 +16,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
              :rtp_force_relay_cn, :preserve_anonymous_from_domain, :registered_aor_mode_id,
              :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity,
-             :force_cancel_routeset
+             :force_cancel_routeset, :sip_schema_id
 
   paginator :paged
 
