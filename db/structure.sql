@@ -15905,6 +15905,7 @@ DECLARE
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_host varchar;
   v_ruri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
@@ -16372,10 +16373,6 @@ BEGIN
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-
-  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
-  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, i_vendor_gw.host, i_vendor_gw.port, v_to_uri_params);
-
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
       v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
@@ -16386,19 +16383,24 @@ BEGIN
     end if;
   end if;
 
-  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, i_vendor_gw.host, i_vendor_gw.port, v_ruri_params);
-
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
+    v_ruri_host = 'unknown.invalid';
+  else
+    v_ruri_host = i_vendor_gw.host;
   end if;
+
+  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
+
+  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, v_ruri_host, i_vendor_gw.port, v_to_uri_params);
+  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, v_ruri_host, i_vendor_gw.port, v_ruri_params);
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
   i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
 
   i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
-
 
   IF (i_vendor_gw.term_use_outbound_proxy ) THEN
     i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
@@ -16590,6 +16592,7 @@ DECLARE
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_host varchar;
   v_ruri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
@@ -17057,10 +17060,6 @@ BEGIN
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-
-  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
-  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, i_vendor_gw.host, i_vendor_gw.port, v_to_uri_params);
-
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
       v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
@@ -17071,19 +17070,24 @@ BEGIN
     end if;
   end if;
 
-  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, i_vendor_gw.host, i_vendor_gw.port, v_ruri_params);
-
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
+    v_ruri_host = 'unknown.invalid';
+  else
+    v_ruri_host = i_vendor_gw.host;
   end if;
+
+  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
+
+  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, v_ruri_host, i_vendor_gw.port, v_to_uri_params);
+  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, v_ruri_host, i_vendor_gw.port, v_ruri_params);
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
   i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
 
   i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
-
 
   IF (i_vendor_gw.term_use_outbound_proxy ) THEN
     i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
@@ -17275,6 +17279,7 @@ DECLARE
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_host varchar;
   v_ruri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
@@ -17683,10 +17688,6 @@ BEGIN
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-
-  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
-  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, i_vendor_gw.host, i_vendor_gw.port, v_to_uri_params);
-
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
       v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
@@ -17697,19 +17698,24 @@ BEGIN
     end if;
   end if;
 
-  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, i_vendor_gw.host, i_vendor_gw.port, v_ruri_params);
-
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
+    v_ruri_host = 'unknown.invalid';
+  else
+    v_ruri_host = i_vendor_gw.host;
   end if;
+
+  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
+
+  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, v_ruri_host, i_vendor_gw.port, v_to_uri_params);
+  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, v_ruri_host, i_vendor_gw.port, v_ruri_params);
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
   i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
 
   i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
-
 
   IF (i_vendor_gw.term_use_outbound_proxy ) THEN
     i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
@@ -31530,6 +31536,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231227093950'),
 ('20231231115912'),
 ('20240109201636'),
-('20240203212630');
+('20240203212630'),
+('20240205213733');
 
 
