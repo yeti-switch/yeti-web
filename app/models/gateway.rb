@@ -176,10 +176,12 @@ class Gateway < ApplicationRecord
   PAI_SEND_MODE_NO_SEND = 0
   PAI_SEND_MODE_BUILD_TEL = 1
   PAI_SEND_MODE_BUILD_SIP = 2
+  PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE = 3
   PAI_SEND_MODES = {
     PAI_SEND_MODE_NO_SEND => 'Do not send',
     PAI_SEND_MODE_BUILD_TEL => 'Build TEL URI from Source Number',
-    PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number'
+    PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number',
+    PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE => 'Build SIP URI from Source Number with user=phone'
   }.freeze
 
   REGISTERED_AOR_MODE_NO_USE = 0
