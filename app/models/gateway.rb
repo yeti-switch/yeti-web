@@ -110,6 +110,7 @@
 #  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
+#  privacy_mode_id                  :integer(2)       default(0), not null
 #  radius_accounting_profile_id     :integer(2)
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
@@ -157,7 +158,6 @@
 #  gateways_sensor_id_fkey                         (sensor_id => sensors.id)
 #  gateways_sensor_level_id_fkey                   (sensor_level_id => sensor_levels.id)
 #  gateways_session_refresh_method_id_fkey         (session_refresh_method_id => session_refresh_methods.id)
-#  gateways_sip_schema_id_fkey                     (sip_schema_id => sip_schemas.id)
 #  gateways_stir_shaken_crt_id_fkey                (stir_shaken_crt_id => stir_shaken_signing_certificates.id)
 #  gateways_term_disconnect_policy_id_fkey         (term_disconnect_policy_id => disconnect_policy.id)
 #  gateways_term_proxy_transport_protocol_id_fkey  (term_proxy_transport_protocol_id => transport_protocols.id)
@@ -176,10 +176,12 @@ class Gateway < ApplicationRecord
   PAI_SEND_MODE_NO_SEND = 0
   PAI_SEND_MODE_BUILD_TEL = 1
   PAI_SEND_MODE_BUILD_SIP = 2
+  PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE = 3
   PAI_SEND_MODES = {
     PAI_SEND_MODE_NO_SEND => 'Do not send',
     PAI_SEND_MODE_BUILD_TEL => 'Build TEL URI from Source Number',
-    PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number'
+    PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number',
+    PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE => 'Build SIP URI from Source Number with user=phone'
   }.freeze
 
   REGISTERED_AOR_MODE_NO_USE = 0
@@ -196,6 +198,15 @@ class Gateway < ApplicationRecord
   STIR_SHAKEN_MODES = {
     STIR_SHAKEN_MODE_DISABLE => 'Disable',
     STIR_SHAKEN_MODE_INSERT => 'Insert identity'
+  }.freeze
+
+  SIP_SCHEMA_SIP = 1
+  SIP_SCHEMA_SIPS = 2
+  SIP_SCHEMA_SIP_WITH_USER_PHONE = 3
+  SIP_SCHEMAS = {
+    SIP_SCHEMA_SIP => 'sip',
+    SIP_SCHEMA_SIPS => 'sips',
+    SIP_SCHEMA_SIP_WITH_USER_PHONE => 'sip with user=phone'
   }.freeze
 
   class << self
@@ -233,7 +244,6 @@ class Gateway < ApplicationRecord
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
   belongs_to :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority', foreign_key: :network_protocol_priority_id
   belongs_to :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode', foreign_key: :media_encryption_mode_id
-  belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
   belongs_to :termination_dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_dst_numberlist_id, optional: true
   belongs_to :termination_src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :termination_src_numberlist_id, optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
@@ -277,7 +287,7 @@ class Gateway < ApplicationRecord
 
   validates :fake_180_timer, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
   validates :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema, presence: true
+                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema_id, presence: true
 
   validates :registered_aor_mode_id, inclusion: { in: REGISTERED_AOR_MODES.keys }, allow_nil: true
 
@@ -294,6 +304,7 @@ class Gateway < ApplicationRecord
 
   validates :stir_shaken_mode_id, inclusion: { in: STIR_SHAKEN_MODES.keys }, allow_nil: false
   validates :stir_shaken_crt_id, presence: true, if: -> { stir_shaken_mode_id == STIR_SHAKEN_MODE_INSERT }
+  validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
 
   validate :vendor_owners_the_gateway_group
   validate :vendor_can_be_changed
@@ -396,6 +407,10 @@ class Gateway < ApplicationRecord
 
   def stir_shaken_mode_name
     STIR_SHAKEN_MODES[stir_shaken_mode_id]
+  end
+
+  def sip_schema_name
+    SIP_SCHEMAS[sip_schema_id]
   end
 
   def use_registered_aor?

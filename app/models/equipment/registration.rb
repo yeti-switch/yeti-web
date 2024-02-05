@@ -34,32 +34,42 @@
 #  registrations_node_id_fkey                      (node_id => nodes.id)
 #  registrations_pop_id_fkey                       (pop_id => pops.id)
 #  registrations_proxy_transport_protocol_id_fkey  (proxy_transport_protocol_id => transport_protocols.id)
-#  registrations_sip_schema_id_fkey                (sip_schema_id => sip_schemas.id)
 #  registrations_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 
 class Equipment::Registration < ApplicationRecord
   self.table_name = 'class4.registrations'
 
+  SIP_SCHEMA_SIP = 1
+  SIP_SCHEMA_SIPS = 2
+  SIP_SCHEMAS = {
+    SIP_SCHEMA_SIP => 'sip',
+    SIP_SCHEMA_SIPS => 'sips'
+  }.freeze
+
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
   belongs_to :pop, optional: true
   belongs_to :node, optional: true
-  belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
 
   validates :name, uniqueness: { allow_blank: false }
-  validates :name, :domain, :username, :retry_delay, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
+  validates :name, :domain, :username, :retry_delay, :transport_protocol, :proxy_transport_protocol, :sip_schema_id, presence: true
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
   validates :contact, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
 
   validates :retry_delay, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
   validates :max_attempts, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
+  validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
 
   include WithPaperTrail
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def sip_schema_name
+    SIP_SCHEMAS[sip_schema_id]
   end
 
   include Yeti::ResourceStatus

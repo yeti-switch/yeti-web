@@ -30,7 +30,6 @@ module JsonapiResourceClassPatch
 
     # {
     #   'api/rest/admin/equipment/sip_schemas' => 'api/rest/admin/system/sip_schemas',
-    #   'sip_schema' => 'api/rest/admin/system/sip_schemas',
     #   'api/rest/admin/equipment/pops' => 'api/rest/admin/pops',
     #   'pop' => 'api/rest/admin/pops',
     #   'api/rest/admin/equipment/nodes' => 'api/rest/admin/nodes',
@@ -64,7 +63,6 @@ end
 
 JSONAPI::Resource.singleton_class.prepend(JsonapiResourceClassPatch)
 
-JSONAPI::Resource.register_resource_override 'api/rest/admin', 'SipSchema', 'Api::Rest::Admin::System::SipSchema'
 JSONAPI::Resource.register_resource_override 'api/rest/admin', 'Pop', 'Api::Rest::Admin::Pop'
 JSONAPI::Resource.register_resource_override 'api/rest/admin', 'Node', 'Api::Rest::Admin::Node'
 JSONAPI::Resource.register_resource_override 'api/rest/admin/billing', 'Account', 'Api::Rest::Admin::Account'

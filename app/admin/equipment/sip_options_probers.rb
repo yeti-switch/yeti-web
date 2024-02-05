@@ -4,13 +4,13 @@ ActiveAdmin.register Equipment::SipOptionsProber do
   menu parent: 'Equipment', priority: 82, label: 'SIP Options probers'
   config.batch_actions = true
 
-  includes :pop, :node, :transport_protocol, :proxy_transport_protocol, :sip_schema
+  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
 
   acts_as_export :id, :name, :enabled,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
-                 [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
+                 :sip_schema_name,
                  :ruri_domain,
                  :ruri_username,
                  :from_uri,
@@ -43,7 +43,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
     column :enabled
     column :pop
     column :node
-    column :sip_schema
+    column :sip_schema_id, &:sip_schema_name
     column :transport_protocol
     column :ruri_domain
     column :ruri_username
@@ -64,7 +64,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :pop, input_html: { class: 'chosen' }
   filter :node, input_html: { class: 'chosen' }
-  filter :sip_schema
+  filter :sip_schema_id, as: :select, collection: proc { Equipment::SipOptionsProber::SIP_SCHEMAS.invert }
   filter :external_id
 
   form do |f|
@@ -78,7 +78,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       f.input :node, as: :select,
                      include_blank: 'Any',
                      input_html: { class: 'chosen' }
-      f.input :sip_schema, as: :select, include_blank: false
+      f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::SipOptionsProber::SIP_SCHEMAS.invert
       f.input :transport_protocol, as: :select, include_blank: false
       f.input :ruri_domain
       f.input :ruri_username
@@ -102,7 +102,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       row :enabled
       row :pop
       row :node
-      row :sip_schema
+      row :sip_schema_id, &:sip_schema_name
       row :transport_protocol
       row :ruri_domain
       row :ruri_username

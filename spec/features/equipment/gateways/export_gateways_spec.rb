@@ -132,7 +132,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Max 30x redirects',                  item.max_30x_redirects.to_s],
         ['Media encryption mode',              item.media_encryption_mode.name],
         ['Network protocol priority name',     item.network_protocol_priority.name],
-        ['Sip schema name',                    item.sip_schema.name],
+        ['Sip schema name',                    item.sip_schema_name],
         ['Preserve anonymous from domain',     item.preserve_anonymous_from_domain.to_s],
         ['Termination dst numberlist name',    item.termination_dst_numberlist.name],
         ['Termination src numberlist name',    item.termination_src_numberlist.name],

@@ -127,7 +127,6 @@ FactoryBot.define do
       rx_inband_dtmf_filtering_mode { Equipment::GatewayInbandDtmfFilteringMode.take }
       network_protocol_priority { Equipment::GatewayNetworkProtocolPriority.take }
       media_encryption_mode { Equipment::GatewayMediaEncryptionMode.take }
-      sip_schema { System::SipSchema.take }
       termination_dst_numberlist { build :numberlist }
       lua_script
       statistic { build :gateways_stat }

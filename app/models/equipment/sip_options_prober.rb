@@ -37,21 +37,27 @@
 #  sip_options_probers_node_id_fkey                      (node_id => nodes.id)
 #  sip_options_probers_pop_id_fkey                       (pop_id => pops.id)
 #  sip_options_probers_proxy_transport_protocol_id_fkey  (proxy_transport_protocol_id => transport_protocols.id)
-#  sip_options_probers_sip_schema_id_fkey                (sip_schema_id => sip_schemas.id)
 #  sip_options_probers_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 class Equipment::SipOptionsProber < ApplicationRecord
   self.table_name = 'class4.sip_options_probers'
 
+  SIP_SCHEMA_SIP = 1
+  SIP_SCHEMA_SIPS = 2
+  SIP_SCHEMAS = {
+    SIP_SCHEMA_SIP => 'sip',
+    SIP_SCHEMA_SIPS => 'sips'
+  }.freeze
+
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
   belongs_to :proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :proxy_transport_protocol_id
   belongs_to :pop, optional: true
   belongs_to :node, optional: true
-  belongs_to :sip_schema, class_name: 'System::SipSchema', foreign_key: :sip_schema_id
 
   validates :name, uniqueness: { allow_blank: false }
   validates :external_id, uniqueness: { allow_blank: true }
-  validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema, presence: true
+  validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema_id, presence: true
+  validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
   #  validates :contact_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
@@ -62,6 +68,10 @@ class Equipment::SipOptionsProber < ApplicationRecord
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def sip_schema_name
+    SIP_SCHEMAS[sip_schema_id]
   end
 
   include Yeti::ResourceStatus

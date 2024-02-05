@@ -514,7 +514,9 @@ RSpec.describe '#routing logic' do
         create(:gateway,
                contractor_id: vendor.id,
                enabled: true,
+               sip_schema_id: vendor_gw_sip_schema_id,
                host: vendor_gw_host,
+               port: vendor_gw_port,
                allow_termination: true,
                term_append_headers_req: vendor_gw_term_append_headers_req,
                diversion_send_mode_id: vendor_gw_diversion_send_mode_id,
@@ -529,9 +531,12 @@ RSpec.describe '#routing logic' do
                pai_domain: vendor_gw_pai_domain,
                registered_aor_mode_id: vendor_gw_registered_aor_mode_id,
                stir_shaken_mode_id: vendor_gw_stir_shaken_mode_id,
-               stir_shaken_crt_id: vendor_gw_stir_shaken_crt_id)
+               stir_shaken_crt_id: vendor_gw_stir_shaken_crt_id,
+               send_lnp_information: vendor_gw_send_lnp_information)
       }
+      let(:vendor_gw_sip_schema_id) { Gateway::SIP_SCHEMA_SIP }
       let(:vendor_gw_host) { '1.1.2.3' }
+      let(:vendor_gw_port) { nil }
       let(:vendor_gw_term_append_headers_req) { '' }
       let(:vendor_gw_diversion_send_mode_id) { 1 } # do not send
       let(:vendor_gw_diversion_domain) { nil }
@@ -550,6 +555,8 @@ RSpec.describe '#routing logic' do
       let(:vendor_gw_dst_rewrite_result) { nil }
       let(:vendor_gw_to_rewrite_rule) { nil }
       let(:vendor_gw_to_rewrite_result) { nil }
+
+      let(:vendor_gw_send_lnp_information) { false }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) {
@@ -1466,7 +1473,7 @@ RSpec.describe '#routing logic' do
 
         context 'without append headers, SIP ' do
           let(:vendor_gw_term_append_headers_req) { '' }
-          let(:vendor_gw_pai_send_mode_id) { 2 } # sip URI
+          let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_BUILD_SIP } # sip URI
           let(:vendor_gw_pai_domain) { 'sip.pai.com' }
 
           let!(:expected_headers) {
@@ -1481,7 +1488,7 @@ RSpec.describe '#routing logic' do
             ]
           }
 
-          it 'response with Diversion headers ' do
+          it 'response with PAI headers ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:customer_auth_id]).to be
             expect(subject.first[:customer_id]).to be
@@ -1496,7 +1503,7 @@ RSpec.describe '#routing logic' do
 
         context 'without append headers, TEL' do
           let(:vendor_gw_term_append_headers_req) { '' }
-          let(:vendor_gw_pai_send_mode_id) { 1 } # tel: URI
+          let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_BUILD_TEL } # tel: URI
 
           let!(:expected_headers) {
             [
@@ -1523,9 +1530,39 @@ RSpec.describe '#routing logic' do
           end
         end
 
+        context 'without append headers, SIP with user=phone ' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE } # sip URI
+          let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+
+          let!(:expected_headers) {
+            [
+              "P-Asserted-Identity: <sip:123456789@#{vendor_gw_pai_domain};user=phone>"
+            ]
+          }
+
+          let!(:expected_pai_out) {
+            [
+              "<sip:123456789@#{vendor_gw_pai_domain};user=phone>"
+            ]
+          }
+
+          it 'response with PAI headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
         context 'with append headers' do
           let(:vendor_gw_term_append_headers_req) { 'Header5: value5\r\nHeader6: value7' }
-          let(:vendor_gw_pai_send_mode_id) { 2 } # sip: URI
+          let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_BUILD_SIP } # sip: URI
           let(:vendor_gw_pai_domain) { 'sip.pai.com' }
 
           let!(:expected_headers) {
@@ -1552,6 +1589,100 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
             expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'Authorized, SIP schemas' do
+        let(:from_name) { '123456789' }
+
+        context 'SIP ' do
+          let(:vendor_gw_sip_schema_id) { Gateway::SIP_SCHEMA_SIP }
+
+          it 'response with SIP URI' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:from]).to eq('from display name <sip:123456789@$Oi>')
+            expect(subject.first[:to]).to eq('<sip:uri-name@1.1.2.3>')
+            expect(subject.first[:ruri]).to eq('sip:uri-name@1.1.2.3')
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+
+          context 'with defined port' do
+            let(:vendor_gw_port) { 50_060 }
+
+            it 'with port in ruri' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:from]).to eq('from display name <sip:123456789@$Oi>')
+              expect(subject.first[:to]).to eq('<sip:uri-name@1.1.2.3:50060>')
+              expect(subject.first[:ruri]).to eq('sip:uri-name@1.1.2.3:50060')
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+        end
+
+        context 'SIPS' do
+          let(:vendor_gw_sip_schema_id) { Gateway::SIP_SCHEMA_SIPS }
+
+          it 'response with SIPS URI' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:from]).to eq('from display name <sips:123456789@$Oi>')
+            expect(subject.first[:to]).to eq('<sips:uri-name@1.1.2.3>')
+            expect(subject.first[:ruri]).to eq('sips:uri-name@1.1.2.3')
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+
+          context 'with defined port' do
+            let(:vendor_gw_port) { 50_070 }
+
+            it 'with port in ruri' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:from]).to eq('from display name <sips:123456789@$Oi>')
+              expect(subject.first[:to]).to eq('<sips:uri-name@1.1.2.3:50070>')
+              expect(subject.first[:ruri]).to eq('sips:uri-name@1.1.2.3:50070')
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+        end
+
+        context 'SIP with user=phone' do
+          let(:vendor_gw_sip_schema_id) { Gateway::SIP_SCHEMA_SIP_WITH_USER_PHONE }
+
+          it 'response with SIP user=phone' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:from]).to eq('from display name <sip:123456789@$Oi;user=phone>')
+            expect(subject.first[:to]).to eq('<sip:uri-name@1.1.2.3;user=phone>')
+            expect(subject.first[:ruri]).to eq('sip:uri-name@1.1.2.3;user=phone')
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+
+          context 'with defined port' do
+            let(:vendor_gw_port) { 50_061 }
+
+            it 'with port in ruri' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:from]).to eq('from display name <sip:123456789@$Oi;user=phone>')
+              expect(subject.first[:to]).to eq('<sip:uri-name@1.1.2.3:50061;user=phone>')
+              expect(subject.first[:ruri]).to eq('sip:uri-name@1.1.2.3:50061;user=phone')
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
           end
         end
       end

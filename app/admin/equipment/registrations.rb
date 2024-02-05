@@ -4,13 +4,13 @@ ActiveAdmin.register Equipment::Registration do
   menu parent: 'Equipment', priority: 81, label: 'Registrations'
   config.batch_actions = true
 
-  includes :pop, :node, :transport_protocol, :proxy_transport_protocol, :sip_schema
+  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
 
   acts_as_export :id, :name, :enabled,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
                  [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) }],
-                 [:sip_schema_name, proc { |row| row.sip_schema.try(:name) }],
+                 :sip_schema_name,
                  :sip_interface_name,
                  :domain,
                  :username,
@@ -45,7 +45,7 @@ ActiveAdmin.register Equipment::Registration do
     column :enabled
     column :pop
     column :node
-    column :sip_schema
+    column :sip_schema_id, &:sip_schema_name
     column 'SIP Interface Name', :sip_interface_name, sortable: :sip_interface_name
     column :transport_protocol
     column :domain
@@ -67,7 +67,7 @@ ActiveAdmin.register Equipment::Registration do
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
   filter :pop, input_html: { class: 'chosen' }
   filter :node, input_html: { class: 'chosen' }
-  filter :sip_schema
+  filter :sip_schema_id, as: :select, collection: proc { Equipment::Registration::SIP_SCHEMAS.invert }
   filter :sip_interface_name, label: 'SIP Interface Name'
   filter :transport_protocol, input_html: { class: 'chosen' }, collection: proc { Equipment::TransportProtocol.pluck(:name, :id) }
   filter :domain
@@ -87,7 +87,7 @@ ActiveAdmin.register Equipment::Registration do
       f.input :node, as: :select,
                      include_blank: 'Any',
                      input_html: { class: 'chosen' }
-      f.input :sip_schema, as: :select, include_blank: false
+      f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::Registration::SIP_SCHEMAS.invert
       f.input :sip_interface_name, label: 'SIP Interface Name'
       f.input :transport_protocol, as: :select, include_blank: false
       f.input :domain
@@ -113,7 +113,7 @@ ActiveAdmin.register Equipment::Registration do
       row :enabled
       row :pop
       row :node
-      row :sip_schema
+      row :sip_schema_id, &:sip_schema_name
       row :sip_interface_name
       row :transport_protocol
       row :domain

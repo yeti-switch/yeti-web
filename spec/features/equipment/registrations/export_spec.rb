@@ -25,7 +25,7 @@ RSpec.describe 'Equipment Registrations export' do
         'Enabled' => registration.enabled.to_s,
         'Pop name' => registration.pop&.name.to_s,
         'Node name' => registration.node&.name.to_s,
-        'Sip schema name' => registration.sip_schema.name,
+        'Sip schema name' => registration.sip_schema_name,
         'Transport protocol name' => registration.transport_protocol.name,
         'Domain' => registration.domain,
         'Username' => registration.username,

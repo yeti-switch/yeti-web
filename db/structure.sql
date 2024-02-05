@@ -2816,7 +2816,8 @@ CREATE TABLE class4.gateways (
     stir_shaken_mode_id smallint DEFAULT 0 NOT NULL,
     stir_shaken_crt_id smallint,
     to_rewrite_rule character varying,
-    to_rewrite_result character varying
+    to_rewrite_result character varying,
+    privacy_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -14524,6 +14525,44 @@ $$;
 
 
 --
+-- Name: build_uri(boolean, character varying, character varying, character varying, character varying[], character varying, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+--
+
+CREATE FUNCTION switch20.build_uri(i_canonical boolean, i_schema character varying, i_display_name character varying, i_username character varying, i_username_params character varying[], i_domain character varying, i_port integer, i_uri_params character varying[]) RETURNS character varying
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10
+    AS $$
+DECLARE
+  v_domainport varchar;
+  v_username varchar;
+  v_uri varchar;
+BEGIN
+
+  if coalesce(cardinality(i_username_params),0) >0 then
+    v_username = i_username||';'||array_to_string(i_username_params,';');
+  else
+    v_username = i_username;
+  end if;
+
+  -- adding username, domain and port. Username and port are optional
+  v_uri = COALESCE(v_username||'@','')||i_domain||COALESCE(':'||i_port::varchar,'');
+
+  -- adding params after domainport if exists
+  if coalesce(cardinality(i_uri_params),0)>0 then
+    v_uri = v_uri||';'||array_to_string(i_uri_params,';');
+  end if;
+
+  if i_canonical then
+    v_uri = i_schema||':'||v_uri;
+  else
+    v_uri = COALESCE(i_display_name||' ','')||'<'||i_schema||':'||v_uri||'>';
+  end if;
+
+  return v_uri;
+END;
+$$;
+
+
+--
 -- Name: check_event(integer); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
@@ -15864,6 +15903,10 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
   /*dbg{*/
   v_start timestamp;
@@ -16266,6 +16309,9 @@ BEGIN
     -- SIP URL
     v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
@@ -16310,29 +16356,37 @@ BEGIN
     end if;
   end if;
 
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+
   if i_vendor_gw.sip_schema_id = 1 then
     v_schema='sip';
   elsif i_vendor_gw.sip_schema_id = 2 then
     v_schema='sips';
+  elsif i_vendor_gw.sip_schema_id = 3 then
+    v_schema='sip';
+    -- user=phone param require e.164 with + in username, but we are not forcing it
+    v_from_uri_params = array_append(v_from_uri_params,'user=phone');
+    v_to_uri_params = array_append(v_to_uri_params,'user=phone');
+    v_ruri_params = array_append(v_ruri_params,'user=phone');
   else
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
 
-  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
-  i_profile."to":='<'||v_schema||':'||v_to_username||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
+  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, i_vendor_gw.host, i_vendor_gw.port, v_to_uri_params);
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
-      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
       i_profile.lrn=nullif(i_profile.dst_prefix_routing,i_profile.lrn); -- clear lnr field if number not ported;
     else -- if number ported
-      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';rn='||i_profile.lrn||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      v_ruri_user_params = array_append(v_ruri_user_params, 'rn='||i_profile.lrn);
+      v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
     end if;
-  else
-    i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
+
+  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, i_vendor_gw.host, i_vendor_gw.port, v_ruri_params);
 
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
@@ -16534,6 +16588,10 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
   /*dbg{*/
   v_start timestamp;
@@ -16936,6 +16994,9 @@ BEGIN
     -- SIP URL
     v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
@@ -16980,29 +17041,37 @@ BEGIN
     end if;
   end if;
 
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+
   if i_vendor_gw.sip_schema_id = 1 then
     v_schema='sip';
   elsif i_vendor_gw.sip_schema_id = 2 then
     v_schema='sips';
+  elsif i_vendor_gw.sip_schema_id = 3 then
+    v_schema='sip';
+    -- user=phone param require e.164 with + in username, but we are not forcing it
+    v_from_uri_params = array_append(v_from_uri_params,'user=phone');
+    v_to_uri_params = array_append(v_to_uri_params,'user=phone');
+    v_ruri_params = array_append(v_ruri_params,'user=phone');
   else
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
 
-  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
-  i_profile."to":='<'||v_schema||':'||v_to_username||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
+  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, i_vendor_gw.host, i_vendor_gw.port, v_to_uri_params);
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
-      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
       i_profile.lrn=nullif(i_profile.dst_prefix_routing,i_profile.lrn); -- clear lnr field if number not ported;
     else -- if number ported
-      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';rn='||i_profile.lrn||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      v_ruri_user_params = array_append(v_ruri_user_params, 'rn='||i_profile.lrn);
+      v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
     end if;
-  else
-    i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
+
+  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, i_vendor_gw.host, i_vendor_gw.port, v_ruri_params);
 
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
@@ -17204,6 +17273,10 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_params varchar[] not null default ARRAY[]::varchar[];
+  v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
   
 BEGIN
@@ -17547,6 +17620,9 @@ BEGIN
     -- SIP URL
     v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
   END IF;
   i_profile.pai_out = array_to_string(v_pai_out, ',');
 
@@ -17591,29 +17667,37 @@ BEGIN
     end if;
   end if;
 
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+
   if i_vendor_gw.sip_schema_id = 1 then
     v_schema='sip';
   elsif i_vendor_gw.sip_schema_id = 2 then
     v_schema='sips';
+  elsif i_vendor_gw.sip_schema_id = 3 then
+    v_schema='sip';
+    -- user=phone param require e.164 with + in username, but we are not forcing it
+    v_from_uri_params = array_append(v_from_uri_params,'user=phone');
+    v_to_uri_params = array_append(v_to_uri_params,'user=phone');
+    v_ruri_params = array_append(v_ruri_params,'user=phone');
   else
     RAISE exception 'Unknown termination gateway % SIP schema %', i_vendor_gw.id, i_vendor_gw.sip_schema_id;
   end if;
 
-  i_profile."from":=COALESCE(i_profile.src_name_out||' ','')||'<'||v_schema||':'||coalesce(nullif(v_from_user,'')||'@','')||v_from_domain||'>';
 
-  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
-  i_profile."to":='<'||v_schema||':'||v_to_username||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port||'>','>');
+  i_profile."from" = switch20.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
+  i_profile."to" = switch20.build_uri(false, v_schema, null, v_to_username, null, i_vendor_gw.host, i_vendor_gw.port, v_to_uri_params);
 
   if i_vendor_gw.send_lnp_information and i_profile.lrn is not null then
     if i_profile.lrn=i_profile.dst_prefix_routing then -- number not ported, but request was successf we musr add ;npdi=yes;
-      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
       i_profile.lrn=nullif(i_profile.dst_prefix_routing,i_profile.lrn); -- clear lnr field if number not ported;
     else -- if number ported
-      i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||';rn='||i_profile.lrn||';npdi=yes@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,'');
+      v_ruri_user_params = array_append(v_ruri_user_params, 'rn='||i_profile.lrn);
+      v_ruri_user_params = array_append(v_ruri_user_params, 'npdi=yes');
     end if;
-  else
-    i_profile.ruri:=v_schema||':'||i_profile.dst_prefix_out||'@'||i_vendor_gw.host::varchar||COALESCE(':'||i_vendor_gw.port,''); -- no fucking porting
   end if;
+
+  i_profile.ruri = switch20.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, i_vendor_gw.host, i_vendor_gw.port, v_ruri_params);
 
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
@@ -26866,16 +26950,6 @@ ALTER SEQUENCE sys.sensors_id_seq OWNED BY sys.sensors.id;
 
 
 --
--- Name: sip_schemas; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.sip_schemas (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: smtp_connections; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -29662,22 +29736,6 @@ ALTER TABLE ONLY sys.sensors
 
 
 --
--- Name: sip_schemas sip_schemas_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.sip_schemas
-    ADD CONSTRAINT sip_schemas_name_key UNIQUE (name);
-
-
---
--- Name: sip_schemas sip_schemas_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.sip_schemas
-    ADD CONSTRAINT sip_schemas_pkey PRIMARY KEY (id);
-
-
---
 -- Name: smtp_connections smtp_connections_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -30740,14 +30798,6 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways gateways_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
-
-
---
 -- Name: gateways gateways_stir_shaken_crt_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -30908,14 +30958,6 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations registrations_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.registrations
-    ADD CONSTRAINT registrations_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
-
-
---
 -- Name: registrations registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -31025,14 +31067,6 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 ALTER TABLE ONLY class4.sip_options_probers
     ADD CONSTRAINT sip_options_probers_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
-
-
---
--- Name: sip_options_probers sip_options_probers_sip_schema_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.sip_options_probers
-    ADD CONSTRAINT sip_options_probers_sip_schema_id_fkey FOREIGN KEY (sip_schema_id) REFERENCES sys.sip_schemas(id);
 
 
 --
@@ -31495,6 +31529,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231206200530'),
 ('20231227093950'),
 ('20231231115912'),
-('20240109201636');
+('20240109201636'),
+('20240203212630');
 
 

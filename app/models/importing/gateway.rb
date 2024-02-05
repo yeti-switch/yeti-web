@@ -183,6 +183,7 @@ class Importing::Gateway < Importing::Base
     priority
     weight
     pop_id
+    sip_schema_id
     host port
     origination_capacity
     termination_capacity
@@ -243,8 +244,13 @@ class Importing::Gateway < Importing::Base
     registered_aor_mode_id.nil? ? 'unknown' : Gateway::REGISTERED_AOR_MODES[registered_aor_mode_id]
   end
 
+  def sip_schema_display_name
+    sip_schema_id.nil? ? 'unknown' : Gateway::SIP_SCHEMAS[sip_schema_id]
+  end
+
   def self.after_import_hook
     resolve_integer_constant('registered_aor_mode_id', 'registered_aor_mode_name', Gateway::REGISTERED_AOR_MODES)
+    resolve_integer_constant('sip_schema_id', 'sip_schema_name', Gateway::SIP_SCHEMAS)
     super
   end
 end

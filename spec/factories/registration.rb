@@ -6,12 +6,12 @@ FactoryBot.define do
     domain { 'localhost' }
     username { 'user name' }
     contact { 'sip:user@domain' }
+    sip_schema_id { 1 }
 
     trait :filled do
       node
       pop
       transport_protocol { Equipment::TransportProtocol.take }
-      sip_schema { System::SipSchema.take }
       proxy_transport_protocol { Equipment::TransportProtocol.take }
       sequence(:sip_interface_name) { |n| "interface_#{n}" }
     end

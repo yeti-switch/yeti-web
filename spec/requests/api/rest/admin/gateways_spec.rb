@@ -25,7 +25,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     tx-inband-dtmf-filtering-mode
     network-protocol-priority
     media-encryption-mode
-    sip-schema
   ]
 
   describe 'GET /api/rest/admin/gateways' do
@@ -444,13 +443,13 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     end
 
     context 'with filter by sip_schema.id' do
-      let!(:sip_schema) { System::SipSchema.first }
-      let!(:other_sip_schema) { System::SipSchema.second }
-      let!(:gateways) { create_list(:gateway, 3, sip_schema: sip_schema) }
-      before { create(:gateway, sip_schema: other_sip_schema) }
+      let!(:sip_schema) { 2 }
+      let!(:other_sip_schema) { 1 }
+      let!(:gateways) { create_list(:gateway, 3, sip_schema_id: sip_schema) }
+      before { create(:gateway, sip_schema_id: other_sip_schema) }
 
       let(:request_params) do
-        { filter: { 'sip_schema.id': sip_schema.id } }
+        { filter: { 'sip_schema_id_eq': sip_schema } }
       end
 
       it 'returns filtered gateways by sip_schema.id' do
@@ -533,7 +532,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rtp-force-relay-cn': gateway.rtp_force_relay_cn,
         'incoming-auth-username': gateway.incoming_auth_username,
         'incoming-auth-password': gateway.incoming_auth_password,
-        'force-cancel-routeset': gateway.force_cancel_routeset
+        'force-cancel-routeset': gateway.force_cancel_routeset,
+        'sip-schema-id': gateway.sip_schema_id
       }
     end
 
@@ -572,7 +572,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     let(:tx_inband_dtmf_filtering_mode) { Equipment::GatewayInbandDtmfFilteringMode.first }
     let(:network_protocol_priority) { Equipment::GatewayNetworkProtocolPriority.first }
     let(:media_encryption_mode) { Equipment::GatewayMediaEncryptionMode.first }
-    let(:sip_schema) { System::SipSchema.first }
 
     let(:json_api_request_attributes) do
       {
@@ -582,7 +581,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         weight: 100,
         'acd-limit': 0.0,
         'asr-limit': 0.0,
-        host: 'test.example.com'
+        host: 'test.example.com',
+        'sip-schema-id': 2
       }
     end
 
@@ -613,8 +613,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rx-inband-dtmf-filtering-mode': { data: { id: rx_inband_dtmf_filtering_mode.id.to_s, type: 'gateway-inband-dtmf-filtering-modes' } },
         'tx-inband-dtmf-filtering-mode': { data: { id: tx_inband_dtmf_filtering_mode.id.to_s, type: 'gateway-inband-dtmf-filtering-modes' } },
         'network-protocol-priority': { data: { id: network_protocol_priority.id.to_s, type: 'gateway-network-protocol-priorities' } },
-        'media-encryption-mode': { data: { id: media_encryption_mode.id.to_s, type: 'gateway-media-encryption-modes' } },
-        'sip-schema': { data: { id: sip_schema.id.to_s, type: 'sip-schemas' } }
+        'media-encryption-mode': { data: { id: media_encryption_mode.id.to_s, type: 'gateway-media-encryption-modes' } }
       }
     end
 
@@ -656,7 +655,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   tx_inband_dtmf_filtering_mode: tx_inband_dtmf_filtering_mode,
                                   network_protocol_priority: network_protocol_priority,
                                   media_encryption_mode: media_encryption_mode,
-                                  sip_schema: sip_schema
+                                  sip_schema_id: json_api_request_attributes[:'sip-schema-id']
                                 )
     end
 
