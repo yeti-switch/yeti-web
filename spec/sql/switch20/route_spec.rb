@@ -1711,7 +1711,7 @@ RSpec.describe '#routing logic' do
         context 'registered aor mode - As is' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_AS_IS }
           let(:vendor_gw_host) { 'pai.test.domain.com' }
-          let(:expected_ruri_host ) { 'unknown.invalid'}
+          let(:expected_ruri_host) { 'unknown.invalid' }
 
           it 'response' do
             expect(subject.size).to eq(2)
@@ -1730,7 +1730,7 @@ RSpec.describe '#routing logic' do
         context 'registered aor mode - As is, null host' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_AS_IS }
           let(:vendor_gw_host) { nil }
-          let(:expected_ruri_host ) { 'unknown.invalid'}
+          let(:expected_ruri_host) { 'unknown.invalid' }
 
           it 'response' do
             expect(subject.size).to eq(2)
@@ -1748,7 +1748,7 @@ RSpec.describe '#routing logic' do
 
         context 'registered aor mode - replace userpart' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART }
-          let(:expected_ruri_host ) { 'unknown.invalid'}
+          let(:expected_ruri_host) { 'unknown.invalid' }
 
           it 'response' do
             expect(subject.size).to eq(2)
@@ -1767,7 +1767,7 @@ RSpec.describe '#routing logic' do
         context 'registered aor mode - replace userpart, null host' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART }
           let(:vendor_gw_host) { nil }
-          let(:expected_ruri_host ) { 'unknown.invalid'}
+          let(:expected_ruri_host) { 'unknown.invalid' }
 
           it 'response' do
             expect(subject.size).to eq(2)
