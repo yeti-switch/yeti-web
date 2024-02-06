@@ -1689,10 +1689,10 @@ RSpec.describe '#routing logic' do
 
       context 'Authorized, registered Aor modes' do
         let(:uri_name) { '+1234567890' }
-        let(:vendor_gw_host) { 'pai.test.domain.com' }
 
         context 'registered aor mode - disable' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_NO_USE }
+          let(:vendor_gw_host) { 'pai.test.domain.com' }
 
           it 'response with Diversion headers ' do
             expect(subject.size).to eq(2)
@@ -1710,15 +1710,36 @@ RSpec.describe '#routing logic' do
 
         context 'registered aor mode - As is' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_AS_IS }
+          let(:vendor_gw_host) { 'pai.test.domain.com' }
+          let(:expected_ruri_host) { 'unknown.invalid' }
 
-          it 'response with Diversion headers ' do
+          it 'response' do
             expect(subject.size).to eq(2)
             expect(subject.first[:customer_auth_id]).to be
             expect(subject.first[:customer_id]).to be
             expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
             expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
             expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
-            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{expected_ruri_host}")
+            expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
+            expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_AS_IS)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'registered aor mode - As is, null host' do
+          let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_AS_IS }
+          let(:vendor_gw_host) { nil }
+          let(:expected_ruri_host) { 'unknown.invalid' }
+
+          it 'response' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{expected_ruri_host}")
             expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
             expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_AS_IS)
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
@@ -1727,15 +1748,35 @@ RSpec.describe '#routing logic' do
 
         context 'registered aor mode - replace userpart' do
           let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART }
+          let(:expected_ruri_host) { 'unknown.invalid' }
 
-          it 'response with Diversion headers ' do
+          it 'response' do
             expect(subject.size).to eq(2)
             expect(subject.first[:customer_auth_id]).to be
             expect(subject.first[:customer_id]).to be
             expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
             expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
             expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
-            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{vendor_gateway.host}")
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{expected_ruri_host}")
+            expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
+            expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART)
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'registered aor mode - replace userpart, null host' do
+          let(:vendor_gw_registered_aor_mode_id) { Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART }
+          let(:vendor_gw_host) { nil }
+          let(:expected_ruri_host) { 'unknown.invalid' }
+
+          it 'response' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('+1234567890') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('+1234567890') # Original destination
+            expect(subject.first[:ruri]).to eq("sip:+1234567890@#{expected_ruri_host}")
             expect(subject.first[:registered_aor_id]).to eq(vendor_gateway.id)
             expect(subject.first[:registered_aor_mode_id]).to eq(Gateway::REGISTERED_AOR_MODE_REPLACE_USERPART)
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
