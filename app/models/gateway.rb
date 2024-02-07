@@ -430,7 +430,7 @@ class Gateway < ApplicationRecord
   end
 
   def privacy_mode_name
-    PRIVACY_MODES[privacy_mode]
+    PRIVACY_MODES[privacy_mode_id]
   end
 
   def use_registered_aor?

@@ -139,7 +139,8 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Lua script name',                    item.lua_script.name],
         ['Force cancel routeset',              item.force_cancel_routeset.to_s],
         ['Stir shaken mode name',              item.stir_shaken_mode_name],
-        ['Stir shaken crt name',               item.stir_shaken_crt.name]
+        ['Stir shaken crt name',               item.stir_shaken_crt.name],
+        ['Privacy mode name',                  item.privacy_mode_name]
       ]
     )
   end
