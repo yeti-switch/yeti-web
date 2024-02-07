@@ -103,7 +103,7 @@ RSpec.describe '#routing logic' do
   let(:x_orig_protocol_id) { 2 }
   let(:pai) { 'pai' }
   let(:ppi) { 'ppi' }
-  let(:privacy) { 'privacy' }
+  let(:privacy) { 'none' }
   let(:rpid) { 'rpid' }
   let(:rpid_privacy) { 'rpid-privacy' }
 
@@ -532,8 +532,10 @@ RSpec.describe '#routing logic' do
                registered_aor_mode_id: vendor_gw_registered_aor_mode_id,
                stir_shaken_mode_id: vendor_gw_stir_shaken_mode_id,
                stir_shaken_crt_id: vendor_gw_stir_shaken_crt_id,
-               send_lnp_information: vendor_gw_send_lnp_information)
+               send_lnp_information: vendor_gw_send_lnp_information,
+               privacy_mode_id: vendor_gw_privacy_mode_id)
       }
+      let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_SKIP }
       let(:vendor_gw_sip_schema_id) { Gateway::SIP_SCHEMA_SIP }
       let(:vendor_gw_host) { '1.1.2.3' }
       let(:vendor_gw_port) { nil }
@@ -1557,6 +1559,114 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
             expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'without append headers, RELAY' do
+          let(:vendor_gw_term_append_headers_req) { '' }
+          let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_RELAY }
+          let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+          let(:pai) { '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>' }
+          let(:ppi) { '<sip:ppi-user@ppi.domain.example.com>' }
+
+          let!(:expected_headers) {
+            [
+              'P-Asserted-Identity: <sip:pai-user@pai.domain.example.com>',
+              'P-Asserted-Identity: <sip:pai-user2@pai.domain.example.com>',
+              'P-Preferred-Identity: <sip:ppi-user@ppi.domain.example.com>'
+            ]
+          }
+
+          let!(:expected_pai_out) {
+            [
+              '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>'
+            ]
+          }
+
+          let!(:expected_ppi_out) {
+            [
+              '<sip:ppi-user@ppi.domain.example.com>'
+            ]
+          }
+
+          it 'response with PAI headers ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+            expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+            expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
+            expect(subject.first[:ppi_out]).to eq(expected_ppi_out.join(','))
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+
+          context 'with privacy id and apply privacy' do
+            let(:vendor_gw_term_append_headers_req) { '' }
+            let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_APPLY }
+            let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_RELAY }
+            let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+            let(:privacy) { 'id' }
+            let(:pai) { '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>' }
+            let(:ppi) { '<sip:ppi-user@ppi.domain.example.com>' }
+
+            it 'response without PAI headers ' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:src_name_out]).to eq('Anonymous') # Original destination
+              expect(subject.first[:src_prefix_out]).to eq('anonymous') # Original destination
+              expect(subject.first[:from]).to eq('Anonymous <sip:anonymous@anonymous.invalid>') # Original destination
+              expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+              expect(subject.first[:append_headers_req]).to eq("Privacy: #{privacy}")
+              expect(subject.first[:pai_in]).to eq(pai)
+              expect(subject.first[:ppi_in]).to eq(ppi)
+              expect(subject.first[:privacy_in]).to eq(privacy)
+              expect(subject.first[:pai_out]).to eq(nil)
+              expect(subject.first[:ppi_out]).to eq(nil)
+              expect(subject.first[:privacy_out]).to eq(privacy)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+
+          context 'with privacy id and trusted gw' do
+            let(:vendor_gw_term_append_headers_req) { '' }
+            let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_TRUSTED }
+            let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_RELAY }
+            let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+            let(:privacy) { 'id' }
+            let(:pai) { '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>' }
+            let(:ppi) { '<sip:ppi-user@ppi.domain.example.com>' }
+
+            let!(:expected_headers) {
+              [
+                "Privacy: #{privacy}",
+                'P-Asserted-Identity: <sip:pai-user@pai.domain.example.com>',
+                'P-Asserted-Identity: <sip:pai-user2@pai.domain.example.com>',
+                'P-Preferred-Identity: <sip:ppi-user@ppi.domain.example.com>'
+              ]
+            }
+
+            it 'response with PAI headers ' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:src_name_out]).to eq('from display name') # Original destination
+              expect(subject.first[:src_prefix_out]).to eq('123456789') # Original destination
+              expect(subject.first[:from]).to eq('from display name <sip:123456789@$Oi>') # Original destination
+              expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+              expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+              expect(subject.first[:pai_in]).to eq(pai)
+              expect(subject.first[:ppi_in]).to eq(ppi)
+              expect(subject.first[:privacy_in]).to eq(privacy)
+              expect(subject.first[:pai_out]).to eq(pai)
+              expect(subject.first[:ppi_out]).to eq(ppi)
+              expect(subject.first[:privacy_out]).to eq(privacy)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
           end
         end
 
