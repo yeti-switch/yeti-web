@@ -222,7 +222,7 @@ class Gateway < ApplicationRecord
     PRIVACY_MODE_APPLY => 'Not trusted gw. Apply',
     PRIVACY_MODE_TRUSTED => 'Trusted gw. Forward',
     PRIVACY_MODE_TRUSTED_REMOVE_FROM => 'Trusted gw. Forward. Anonymize from'
-  }
+  }.freeze
 
   class << self
     # Returns a reference if host is IPv6, otherwise returns host
