@@ -1,5 +1,5 @@
 class PrivacyModes < ActiveRecord::Migration[7.0]
-  
+
   def up
     execute %q{
 
@@ -336,19 +336,21 @@ CREATE or replace FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i
 
         CASE v_customer_auth_normalized.privacy_mode_id
             WHEN 1 THEN
-              IF cardinality(v_privacy)>0 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
                 v_ret.disconnect_code_id = 8013;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 2 THEN
+            WHEN 3 THEN
               IF 'critical' = ANY(v_privacy) THEN
                 v_ret.disconnect_code_id = 8014;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 3 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -2036,6 +2038,8 @@ BEGIN
 
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -2043,7 +2047,7 @@ BEGIN
         /*}dbg*/
         return null;
       END IF;
-    WHEN 1 THEN
+    WHEN 2 THEN
       IF 'critical' = ANY(i_privacy) THEN
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -2051,7 +2055,7 @@ BEGIN
         /*}dbg*/
         return null;
       END IF;
-    WHEN 2 THEN
+    WHEN 3 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -2068,14 +2072,14 @@ BEGIN
       END IF;
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 3 THEN
+    WHEN 4 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 4 THEN
+    WHEN 5 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -2375,7 +2379,7 @@ $_$;
   def down
     execute %q{
 
-delete from class4.disconnect_codes where id in (8013,8014,8015,142,143,145);
+delete from class4.disconnect_code where id in (8013,8014,8015,142,143,145);
 
 CREATE or replace FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10

@@ -170,16 +170,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     head 200
   end
 
-  member_action :download_call_record_lega, method: :get do
-    file = resource.call_record_filename_lega
-    raise ActiveRecord::RecordNotFound if file.blank?
-
-    response.headers['X-Accel-Redirect'] = file
-    head 200
-  end
-
-  member_action :download_call_record_legb, method: :get do
-    file = resource.call_record_filename_legb
+  member_action :download_call_record, method: :get do
+    file = resource.call_record_filename
     raise ActiveRecord::RecordNotFound if file.blank?
 
     response.headers['X-Accel-Redirect'] = file
@@ -233,12 +225,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     link_to("#{resource.dump_level_name} trace", dump_cdr_path(resource)) if resource.has_dump?
   end
 
-  action_item :call_record_lega, only: :show do
-    link_to('Call record LegA', download_call_record_lega_cdr_path(resource)) if resource.audio_recorded?
-  end
-
-  action_item :call_record_lega, only: :show do
-    link_to('Call record LegB', download_call_record_legb_cdr_path(resource)) if resource.audio_recorded?
+  action_item :call_record, only: :show do
+    link_to('Call record', download_call_record_cdr_path(resource)) if resource.audio_recorded?
   end
 
   action_item :download_csv, only: :index do

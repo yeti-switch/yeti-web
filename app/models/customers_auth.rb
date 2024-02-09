@@ -121,15 +121,15 @@ class CustomersAuth < ApplicationRecord
     SS_STATUS_C => 'Attestation C'
   }.freeze
 
-  PRIVACY_MODE_REJECT = 1
-  PRIVACY_MODE_REJECT_CRITICAL = 2
-  PRIVACY_MODE_REJECT_ANONYMOUS = 3
-  PRIVACY_MODE_ALLOW = 4
+  PRIVACY_MODE_ALLOW = 1
+  PRIVACY_MODE_REJECT = 2
+  PRIVACY_MODE_REJECT_CRITICAL = 3
+  PRIVACY_MODE_REJECT_ANONYMOUS = 4
   PRIVACY_MODES = {
+    PRIVACY_MODE_ALLOW => 'Allow any calls',
     PRIVACY_MODE_REJECT => 'Reject private calls',
     PRIVACY_MODE_REJECT_CRITICAL => 'Reject critical private calls',
-    PRIVACY_MODE_REJECT_ANONYMOUS => 'Reject anonymous(no CLI/PAI/PPI)',
-    PRIVACY_MODE_ALLOW => 'Allow any calls'
+    PRIVACY_MODE_REJECT_ANONYMOUS => 'Reject anonymous(no CLI/PAI/PPI)'
   }.freeze
 
   module CONST

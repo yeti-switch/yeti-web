@@ -16314,6 +16314,8 @@ BEGIN
 
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -16321,7 +16323,7 @@ BEGIN
         /*}dbg*/
         return null;
       END IF;
-    WHEN 1 THEN
+    WHEN 2 THEN
       IF 'critical' = ANY(i_privacy) THEN
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -16329,7 +16331,7 @@ BEGIN
         /*}dbg*/
         return null;
       END IF;
-    WHEN 2 THEN
+    WHEN 3 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -16346,14 +16348,14 @@ BEGIN
       END IF;
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 3 THEN
+    WHEN 4 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 4 THEN
+    WHEN 5 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -17068,6 +17070,8 @@ BEGIN
 
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -17075,7 +17079,7 @@ BEGIN
         /*}dbg*/
         return null;
       END IF;
-    WHEN 1 THEN
+    WHEN 2 THEN
       IF 'critical' = ANY(i_privacy) THEN
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -17083,7 +17087,7 @@ BEGIN
         /*}dbg*/
         return null;
       END IF;
-    WHEN 2 THEN
+    WHEN 3 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -17100,14 +17104,14 @@ BEGIN
       END IF;
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 3 THEN
+    WHEN 4 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 4 THEN
+    WHEN 5 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -17763,16 +17767,18 @@ BEGIN
 
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
         
         return null;
       END IF;
-    WHEN 1 THEN
+    WHEN 2 THEN
       IF 'critical' = ANY(i_privacy) THEN
         
         return null;
       END IF;
-    WHEN 2 THEN
+    WHEN 3 THEN
       
       i_profile.src_prefix_out='anonymous';
       i_profile.src_name_out='Anonymous';
@@ -17783,11 +17789,11 @@ BEGIN
       END IF;
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 3 THEN
+    WHEN 4 THEN
       
       i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
-    WHEN 4 THEN
+    WHEN 5 THEN
       
       i_profile.src_prefix_out='anonymous';
       i_profile.src_name_out='Anonymous';
@@ -18417,19 +18423,21 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         CASE v_customer_auth_normalized.privacy_mode_id
             WHEN 1 THEN
-              IF cardinality(v_privacy)>0 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
                 v_ret.disconnect_code_id = 8013;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 2 THEN
+            WHEN 3 THEN
               IF 'critical' = ANY(v_privacy) THEN
                 v_ret.disconnect_code_id = 8014;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 3 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -19797,19 +19805,21 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         CASE v_customer_auth_normalized.privacy_mode_id
             WHEN 1 THEN
-              IF cardinality(v_privacy)>0 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
                 v_ret.disconnect_code_id = 8013;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 2 THEN
+            WHEN 3 THEN
               IF 'critical' = ANY(v_privacy) THEN
                 v_ret.disconnect_code_id = 8014;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 3 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -21149,19 +21159,21 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         CASE v_customer_auth_normalized.privacy_mode_id
             WHEN 1 THEN
-              IF cardinality(v_privacy)>0 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
                 v_ret.disconnect_code_id = 8013;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 2 THEN
+            WHEN 3 THEN
               IF 'critical' = ANY(v_privacy) THEN
                 v_ret.disconnect_code_id = 8014;
                 RETURN NEXT v_ret;
                 RETURN;
               END IF;
-            WHEN 3 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
