@@ -1602,6 +1602,81 @@ RSpec.describe '#routing logic' do
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
 
+          context 'with privacy id and SKIP GW' do
+            let(:vendor_gw_term_append_headers_req) { '' }
+            let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_SKIP }
+            let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_RELAY }
+            let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+            let(:privacy) { 'id' }
+            let(:pai) { '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>' }
+            let(:ppi) { '<sip:ppi-user@ppi.domain.example.com>' }
+
+            it 'response with skipped route' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:ruri]).to eq(nil)
+              expect(subject.first[:from]).to eq(nil)
+              expect(subject.first[:dst_prefix_routing]).to eq(nil)
+              expect(subject.first[:append_headers_req]).to eq(nil)
+              expect(subject.first[:pai_in]).to eq(nil)
+              expect(subject.first[:ppi_in]).to eq(nil)
+              expect(subject.first[:privacy_in]).to eq(nil)
+              expect(subject.first[:pai_out]).to eq(nil)
+              expect(subject.first[:ppi_out]).to eq(nil)
+              expect(subject.first[:privacy_out]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+
+          context 'with privacy id and SKIP GW critical' do
+            let(:vendor_gw_term_append_headers_req) { '' }
+            let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_SKIP_CRITICAL }
+            let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_RELAY }
+            let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+            let(:privacy) { 'id' }
+            let(:pai) { '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>' }
+            let(:ppi) { '<sip:ppi-user@ppi.domain.example.com>' }
+
+            it 'response with PAI headers ' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:ruri]).to be
+              expect(subject.first[:from]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+              expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+              expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+              expect(subject.first[:pai_out]).to eq(expected_pai_out.join(','))
+              expect(subject.first[:ppi_out]).to eq(expected_ppi_out.join(','))
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+
+          context 'with privacy id; critical and SKIP GW critical' do
+            let(:vendor_gw_term_append_headers_req) { '' }
+            let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_SKIP_CRITICAL }
+            let(:vendor_gw_pai_send_mode_id) { Gateway::PAI_SEND_MODE_RELAY }
+            let(:vendor_gw_pai_domain) { 'sip.pai.com' }
+            let(:privacy) { 'id;critical' }
+            let(:pai) { '<sip:pai-user@pai.domain.example.com>,<sip:pai-user2@pai.domain.example.com>' }
+            let(:ppi) { '<sip:ppi-user@ppi.domain.example.com>' }
+
+            it 'response with skipped route' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:ruri]).to eq(nil)
+              expect(subject.first[:from]).to eq(nil)
+              expect(subject.first[:dst_prefix_routing]).to eq(nil)
+              expect(subject.first[:append_headers_req]).to eq(nil)
+              expect(subject.first[:pai_in]).to eq(nil)
+              expect(subject.first[:ppi_in]).to eq(nil)
+              expect(subject.first[:privacy_in]).to eq(nil)
+              expect(subject.first[:pai_out]).to eq(nil)
+              expect(subject.first[:ppi_out]).to eq(nil)
+              expect(subject.first[:privacy_out]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+
           context 'with privacy id and apply privacy' do
             let(:vendor_gw_term_append_headers_req) { '' }
             let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_APPLY }

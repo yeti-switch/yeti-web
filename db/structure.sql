@@ -16312,7 +16312,6 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
@@ -17067,7 +17066,6 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
@@ -17763,7 +17761,6 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
@@ -18418,6 +18415,27 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         end if;
 
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              IF cardinality(v_privacy)>0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 2 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
+
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
         v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
@@ -19047,7 +19065,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -19777,6 +19795,27 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         end if;
 
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              IF cardinality(v_privacy)>0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 2 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
+
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
         v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
@@ -20406,7 +20445,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -21108,6 +21147,27 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         end if;
 
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              IF cardinality(v_privacy)>0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 2 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
+
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
         v_ret.record_audio=v_customer_auth_normalized.enable_audio_recording;
@@ -21624,7 +21684,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -22941,6 +23001,7 @@ CREATE TABLE class4.customers_auth (
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     external_type character varying,
     rewrite_ss_status_id smallint,
+    privacy_mode_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -23038,6 +23099,7 @@ CREATE TABLE class4.customers_auth_normalized (
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     external_type character varying,
     rewrite_ss_status_id smallint,
+    privacy_mode_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),

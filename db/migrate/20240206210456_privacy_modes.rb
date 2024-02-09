@@ -1,8 +1,18 @@
 class PrivacyModes < ActiveRecord::Migration[7.0]
-
-
+  
   def up
     execute %q{
+
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8013,0,true,true,500,'Privacy calls not allowed',NULL,NULL,false,false,true,false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8014,0,true,true,500,'Critical privacy not allowed',NULL,NULL,false,false,true,false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8015,0,true,true,500,'Anonymous calls not allowed',NULL,NULL,false,false,true,false);
+
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (142, 1, true, false, 500, 'No suitable media', NULL, 'No suitable media', false, false, true, false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (143, 1, true, false, 500, 'Invalid media transport', NULL, 'No suitable media', false, false, true, false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (145, 1, true, false, 500, 'Reinvite error', NULL, 'Reinvite error', false, false, true, false);
+
+    alter table class4.customers_auth add privacy_mode_id smallint not null default 1;
+    alter table class4.customers_auth_normalized add privacy_mode_id smallint not null default 1;
 
 CREATE or replace FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
@@ -323,6 +333,27 @@ CREATE or replace FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i
           RETURN NEXT v_ret;
           RETURN;
         end if;
+
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              IF cardinality(v_privacy)>0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 2 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND cardinality(v_pai) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -953,7 +984,7 @@ CREATE or replace FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -2003,7 +2034,6 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-
   CASE i_vendor_gw.privacy_mode_id
     WHEN 0 THEN
       IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
@@ -2344,6 +2374,8 @@ $_$;
 
   def down
     execute %q{
+
+delete from class4.disconnect_codes where id in (8013,8014,8015,142,143,145);
 
 CREATE or replace FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
@@ -4626,6 +4658,9 @@ $$;
       set search_path TO switch20;
       SELECT * from switch20.preprocess_all();
       set search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+
+    alter table class4.customers_auth drop column privacy_mode_id;
+    alter table class4.customers_auth_normalized drop column privacy_mode_id;
 
     }
   end
