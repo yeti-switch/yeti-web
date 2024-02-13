@@ -102,7 +102,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   end
 
   filter :id
-  filter :request_time
+  filter :request_time, as: :date_time_range
   filter :gateway,
          input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
          collection: proc {

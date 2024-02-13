@@ -24,4 +24,12 @@ class AuditLogItem < PaperTrail::Version
   scope :destroyed, -> { where event: 'destroy' }
   scope :updated,   -> { where event: 'update'  }
   scope :created,   -> { where event: 'create'  }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    @ransackable_attributes ||= authorizable_ransackable_attributes
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    @ransackable_associations ||= authorizable_ransackable_associations
+  end
 end

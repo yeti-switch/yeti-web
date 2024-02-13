@@ -29,6 +29,14 @@ class ApplicationRecord < ActiveRecord::Base
     fetch_sp_val('SELECT pg_relation_size(?)', name)
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    @ransackable_attributes ||= authorizable_ransackable_attributes
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    @ransackable_associations ||= authorizable_ransackable_associations
+  end
+
   def self.execute_sp(sql, *bindings)
     perform_sp(:execute, sql, *bindings)
   end
