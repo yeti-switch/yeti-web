@@ -15359,7 +15359,10 @@ BEGIN
   v_ret.auth_aleg_user:='';
   v_ret.auth_aleg_pwd:='';
   v_ret.call_id:='$ci_leg43';
-
+  --    v_ret.contact:='<sip:$Ri>';
+  v_ret."from":='$f';
+  v_ret."to":='$t';
+  v_ret.ruri:='$r';
   v_ret.force_outbound_proxy:=false;
   v_ret.outbound_proxy:='';
   v_ret.next_hop:='';
@@ -31534,6 +31537,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231231115912'),
 ('20240109201636'),
 ('20240203212630'),
-('20240205213733');
+('20240205213733'),
+('20240205213734');
 
 
