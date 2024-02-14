@@ -26,13 +26,17 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  if ENV['IS_DELAYED_JOB'].present?
-    MiniRacer::Platform.set_flags! :single_threaded
-  end
-
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
-  config.assets.js_compressor = Uglifier.new(harmony: true)
+
+  # Compress JavaScript using a preprocessor.
+  # We do this only when we are precompiling assets, because Uglifier requires ExecJS runtimes.
+  # ExecJS runtimes creates MiniRacer contexts, which raise error on forking.
+  # Puma and Delayed Job use forking.
+  # see https://github.com/rubyjs/mini_racer/issues/152
+  if ENV['RAILS_COMPILE_ASSETS'].present?
+    config.assets.js_compressor = Uglifier.new(harmony: true)
+  end
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
