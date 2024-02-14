@@ -166,7 +166,7 @@ docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml 
 .PHONY: assets
 assets:	gems config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml
 	$(info:msg=Precompile assets)
-	RAILS_ENV=production $(bundle_bin) exec rake assets:precompile
+	RAILS_ENV=production RAILS_COMPILE_ASSETS=true $(bundle_bin) exec rake assets:precompile
 
 
 .PHONY: pgq-processors-gems
