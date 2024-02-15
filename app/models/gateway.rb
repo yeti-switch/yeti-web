@@ -177,11 +177,13 @@ class Gateway < ApplicationRecord
   PAI_SEND_MODE_BUILD_TEL = 1
   PAI_SEND_MODE_BUILD_SIP = 2
   PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE = 3
+  PAI_SEND_MODE_RELAY = 4
   PAI_SEND_MODES = {
     PAI_SEND_MODE_NO_SEND => 'Do not send',
     PAI_SEND_MODE_BUILD_TEL => 'Build TEL URI from Source Number',
     PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number',
-    PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE => 'Build SIP URI from Source Number with user=phone'
+    PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE => 'Build SIP URI from Source Number with user=phone',
+    PAI_SEND_MODE_RELAY => 'Relay PAI and PPI'
   }.freeze
 
   REGISTERED_AOR_MODE_NO_USE = 0
@@ -207,6 +209,21 @@ class Gateway < ApplicationRecord
     SIP_SCHEMA_SIP => 'sip',
     SIP_SCHEMA_SIPS => 'sips',
     SIP_SCHEMA_SIP_WITH_USER_PHONE => 'sip with user=phone'
+  }.freeze
+
+  PRIVACY_MODE_DISABLE = 0
+  PRIVACY_MODE_SKIP = 1
+  PRIVACY_MODE_SKIP_CRITICAL = 2
+  PRIVACY_MODE_APPLY = 3
+  PRIVACY_MODE_TRUSTED = 4
+  PRIVACY_MODE_TRUSTED_REMOVE_FROM = 5
+  PRIVACY_MODES = {
+    PRIVACY_MODE_DISABLE => 'Do nothing',
+    PRIVACY_MODE_SKIP => 'Skip for private calls',
+    PRIVACY_MODE_SKIP_CRITICAL => 'Skip for critical private calls',
+    PRIVACY_MODE_APPLY => 'Not trusted gw. Apply',
+    PRIVACY_MODE_TRUSTED => 'Trusted gw. Forward',
+    PRIVACY_MODE_TRUSTED_REMOVE_FROM => 'Trusted gw. Forward. Anonymize from'
   }.freeze
 
   class << self
@@ -305,6 +322,7 @@ class Gateway < ApplicationRecord
   validates :stir_shaken_mode_id, inclusion: { in: STIR_SHAKEN_MODES.keys }, allow_nil: false
   validates :stir_shaken_crt_id, presence: true, if: -> { stir_shaken_mode_id == STIR_SHAKEN_MODE_INSERT }
   validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
+  validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
 
   validate :vendor_owners_the_gateway_group
   validate :vendor_can_be_changed
@@ -411,6 +429,10 @@ class Gateway < ApplicationRecord
 
   def sip_schema_name
     SIP_SCHEMAS[sip_schema_id]
+  end
+
+  def privacy_mode_name
+    PRIVACY_MODES[privacy_mode_id]
   end
 
   def use_registered_aor?

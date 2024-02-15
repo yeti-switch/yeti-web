@@ -93,6 +93,7 @@ ActiveAdmin.register Gateway do
                  :suppress_early_media,
                  :send_lnp_information,
                  :force_one_way_early_media, :max_30x_redirects,
+                 :privacy_mode_name,
                  :stir_shaken_mode_name,
                  [:stir_shaken_crt_name, proc { |row| row.stir_shaken_crt.try(:name) }]
 
@@ -315,6 +316,7 @@ ActiveAdmin.register Gateway do
   filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
   filter :diversion_send_mode
   filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }
+  filter :privacy_mode_id, as: :select, collection: proc { Gateway::PRIVACY_MODES.invert }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -440,6 +442,7 @@ ActiveAdmin.register Gateway do
       end
       tab 'Translations' do
         f.inputs 'Translations' do
+          f.input :privacy_mode_id, as: :select, include_blank: false, collection: Gateway::PRIVACY_MODES.invert
           f.input :termination_src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :termination_dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :diversion_send_mode, include_blank: false
@@ -628,6 +631,7 @@ ActiveAdmin.register Gateway do
       end
       tab 'Translations' do
         attributes_table_for s do
+          row :privacy_mode_id, &:privacy_mode_name
           row :termination_src_numberlist
           row :termination_dst_numberlist
           row :diversion_send_mode

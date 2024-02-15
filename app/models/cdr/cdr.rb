@@ -339,12 +339,8 @@ class Cdr::Cdr < Cdr::Base
     end
   end
 
-  def call_record_filename_lega
-    "/record/#{local_tag}_legA.mp3" if local_tag.present? && node_id.present?
-  end
-
-  def call_record_filename_legb
-    "/record/#{local_tag}_legB.mp3" if local_tag.present? && node_id.present?
+  def call_record_filename
+    "/record/#{local_tag}.mp3" if local_tag.present? && node_id.present?
   end
 
   def attempts

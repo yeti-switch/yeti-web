@@ -15525,10 +15525,10 @@ $$;
 
 
 --
--- Name: process_dp(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_dp(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_dp(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS SETOF switch20.callprofile_ty
+CREATE FUNCTION switch20.process_dp(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15562,7 +15562,8 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -15580,7 +15581,8 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
     elsif v_gateway_group.balancing_mode_id=1 then
@@ -15595,7 +15597,8 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -15612,7 +15615,8 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
 
@@ -15629,7 +15633,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -15651,7 +15655,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
     end if;
@@ -15665,11 +15669,11 @@ BEGIN
 
       /*rel{*/
       return query select * from
-          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       /*}rel*/
       /*dbg{*/
       return query select * from
-          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       /*}dbg*/
     else
       return;
@@ -15680,10 +15684,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_dp_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_dp_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS SETOF switch20.callprofile_ty
+CREATE FUNCTION switch20.process_dp_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15721,7 +15725,8 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
     elsif v_gateway_group.balancing_mode_id=1 then
@@ -15740,7 +15745,8 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
 
@@ -15765,7 +15771,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
     end if;
@@ -15780,7 +15786,7 @@ BEGIN
       
       /*dbg{*/
       return query select * from
-          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       /*}dbg*/
     else
       return;
@@ -15791,10 +15797,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_dp_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_dp_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS SETOF switch20.callprofile_ty
+CREATE FUNCTION switch20.process_dp_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS SETOF switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -15820,7 +15826,8 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       
@@ -15836,7 +15843,8 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       
@@ -15854,7 +15862,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       
@@ -15869,7 +15877,7 @@ BEGIN
 
       /*rel{*/
       return query select * from
-          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion);
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
       /*}rel*/
       
     else
@@ -15881,10 +15889,10 @@ $$;
 
 
 --
--- Name: process_gw(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_gw(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS switch20.callprofile_ty
+CREATE FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -15903,6 +15911,8 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai varchar;
+  v_allow_pai boolean:=true;
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_host varchar;
@@ -16302,19 +16312,85 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-  IF i_vendor_gw.pai_send_mode_id = 1 THEN
-    -- TEL URI
-    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
-  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-    -- SIP URL
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-  ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  CASE i_vendor_gw.privacy_mode_id
+    WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
+      IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> GW Privacy % requested but privacy_mode_is %. Skipping gw.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+        /*}dbg*/
+        return null;
+      END IF;
+    WHEN 2 THEN
+      IF 'critical' = ANY(i_privacy) THEN
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> GW Privacy % requested but privacy_mode_is %. Skipping gw.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+        /*}dbg*/
+        return null;
+      END IF;
+    WHEN 3 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+      /*}dbg*/
+      i_profile.src_prefix_out='anonymous';
+      i_profile.src_name_out='Anonymous';
+      v_from_domain = 'anonymous.invalid';
+      IF 'id' = ANY(i_privacy) THEN
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. removing PAI/PPI headers.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+        /*}dbg*/
+        v_allow_pai = false;
+      END IF;
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+    WHEN 4 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+      /*}dbg*/
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+    WHEN 5 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+      /*}dbg*/
+      i_profile.src_prefix_out='anonymous';
+      i_profile.src_name_out='Anonymous';
+      v_from_domain = 'anonymous.invalid';
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+  END CASE;
+
+  IF v_allow_pai THEN
+    -- only if privacy mode allows to send PAI
+    IF i_vendor_gw.pai_send_mode_id = 1 THEN
+      -- TEL URI
+      v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+      -- SIP URL
+      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 4 THEN
+      -- relay
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
+      END LOOP;
+      v_pai_out = i_pai;
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
+      i_profile.ppi_out = i_ppi;
+    END IF;
+    i_profile.pai_out = array_to_string(v_pai_out, ',');
   END IF;
-  i_profile.pai_out = array_to_string(v_pai_out, ',');
 
   IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
       -- insert signature
@@ -16347,13 +16423,14 @@ BEGIN
 
   if i_profile.enable_auth then
     v_from_user=COALESCE(i_vendor_gw.auth_from_user,i_profile.src_prefix_out,'');
-    v_from_domain=COALESCE(i_vendor_gw.auth_from_domain,'$Oi');
+    -- may be it already defined by privacy logic
+    v_from_domain=COALESCE(v_from_domain, i_vendor_gw.auth_from_domain, '$Oi');
   else
     v_from_user=COALESCE(i_profile.src_prefix_out,'');
     if i_vendor_gw.preserve_anonymous_from_domain and i_profile.from_domain='anonymous.invalid' then
       v_from_domain='anonymous.invalid';
     else
-      v_from_domain='$Oi';
+      v_from_domain=COALESCE(v_from_domain, '$Oi');
     end if;
   end if;
 
@@ -16568,10 +16645,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_gw_debug(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_gw_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS switch20.callprofile_ty
+CREATE FUNCTION switch20.process_gw_debug(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -16590,6 +16667,8 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai varchar;
+  v_allow_pai boolean:=true;
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_host varchar;
@@ -16989,19 +17068,85 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-  IF i_vendor_gw.pai_send_mode_id = 1 THEN
-    -- TEL URI
-    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
-  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-    -- SIP URL
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-  ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  CASE i_vendor_gw.privacy_mode_id
+    WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
+      IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> GW Privacy % requested but privacy_mode_is %. Skipping gw.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+        /*}dbg*/
+        return null;
+      END IF;
+    WHEN 2 THEN
+      IF 'critical' = ANY(i_privacy) THEN
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> GW Privacy % requested but privacy_mode_is %. Skipping gw.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+        /*}dbg*/
+        return null;
+      END IF;
+    WHEN 3 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+      /*}dbg*/
+      i_profile.src_prefix_out='anonymous';
+      i_profile.src_name_out='Anonymous';
+      v_from_domain = 'anonymous.invalid';
+      IF 'id' = ANY(i_privacy) THEN
+        /*dbg{*/
+        v_end:=clock_timestamp();
+        RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. removing PAI/PPI headers.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+        /*}dbg*/
+        v_allow_pai = false;
+      END IF;
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+    WHEN 4 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+      /*}dbg*/
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+    WHEN 5 THEN
+      /*dbg{*/
+      v_end:=clock_timestamp();
+      RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
+      /*}dbg*/
+      i_profile.src_prefix_out='anonymous';
+      i_profile.src_name_out='Anonymous';
+      v_from_domain = 'anonymous.invalid';
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+  END CASE;
+
+  IF v_allow_pai THEN
+    -- only if privacy mode allows to send PAI
+    IF i_vendor_gw.pai_send_mode_id = 1 THEN
+      -- TEL URI
+      v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+      -- SIP URL
+      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 4 THEN
+      -- relay
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
+      END LOOP;
+      v_pai_out = i_pai;
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
+      i_profile.ppi_out = i_ppi;
+    END IF;
+    i_profile.pai_out = array_to_string(v_pai_out, ',');
   END IF;
-  i_profile.pai_out = array_to_string(v_pai_out, ',');
 
   IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
       -- insert signature
@@ -17034,13 +17179,14 @@ BEGIN
 
   if i_profile.enable_auth then
     v_from_user=COALESCE(i_vendor_gw.auth_from_user,i_profile.src_prefix_out,'');
-    v_from_domain=COALESCE(i_vendor_gw.auth_from_domain,'$Oi');
+    -- may be it already defined by privacy logic
+    v_from_domain=COALESCE(v_from_domain, i_vendor_gw.auth_from_domain, '$Oi');
   else
     v_from_user=COALESCE(i_profile.src_prefix_out,'');
     if i_vendor_gw.preserve_anonymous_from_domain and i_profile.from_domain='anonymous.invalid' then
       v_from_domain='anonymous.invalid';
     else
-      v_from_domain='$Oi';
+      v_from_domain=COALESCE(v_from_domain, '$Oi');
     end if;
   end if;
 
@@ -17255,10 +17401,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[]); Type: FUNCTION; Schema: switch20; Owner: -
+-- Name: process_gw_release(switch20.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch20; Owner: -
 --
 
-CREATE FUNCTION switch20.process_gw_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[]) RETURNS switch20.callprofile_ty
+CREATE FUNCTION switch20.process_gw_release(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -17277,6 +17423,8 @@ DECLARE
   v_diversion_header varchar;
   v_diversion_out varchar[] not null default ARRAY[]::varchar[];
   v_pai_out varchar[] not null default ARRAY[]::varchar[];
+  v_pai varchar;
+  v_allow_pai boolean:=true;
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_host varchar;
@@ -17617,19 +17765,67 @@ BEGIN
     i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
-  IF i_vendor_gw.pai_send_mode_id = 1 THEN
-    -- TEL URI
-    v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
-  ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-    -- SIP URL
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-  ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-    v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
-    v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+  CASE i_vendor_gw.privacy_mode_id
+    WHEN 0 THEN
+      -- do nothing
+    WHEN 1 THEN
+      IF cardinality(array_remove(i_privacy,'none')) > 0 THEN
+        
+        return null;
+      END IF;
+    WHEN 2 THEN
+      IF 'critical' = ANY(i_privacy) THEN
+        
+        return null;
+      END IF;
+    WHEN 3 THEN
+      
+      i_profile.src_prefix_out='anonymous';
+      i_profile.src_name_out='Anonymous';
+      v_from_domain = 'anonymous.invalid';
+      IF 'id' = ANY(i_privacy) THEN
+        
+        v_allow_pai = false;
+      END IF;
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+    WHEN 4 THEN
+      
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+    WHEN 5 THEN
+      
+      i_profile.src_prefix_out='anonymous';
+      i_profile.src_name_out='Anonymous';
+      v_from_domain = 'anonymous.invalid';
+      i_profile.privacy_out = array_to_string(i_privacy,';');
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+  END CASE;
+
+  IF v_allow_pai THEN
+    -- only if privacy mode allows to send PAI
+    IF i_vendor_gw.pai_send_mode_id = 1 THEN
+      -- TEL URI
+      v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+      -- SIP URL
+      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
+      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
+    ELSIF i_vendor_gw.pai_send_mode_id = 4 THEN
+      -- relay
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
+      END LOOP;
+      v_pai_out = i_pai;
+      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
+      i_profile.ppi_out = i_ppi;
+    END IF;
+    i_profile.pai_out = array_to_string(v_pai_out, ',');
   END IF;
-  i_profile.pai_out = array_to_string(v_pai_out, ',');
 
   IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
       -- insert signature
@@ -17662,13 +17858,14 @@ BEGIN
 
   if i_profile.enable_auth then
     v_from_user=COALESCE(i_vendor_gw.auth_from_user,i_profile.src_prefix_out,'');
-    v_from_domain=COALESCE(i_vendor_gw.auth_from_domain,'$Oi');
+    -- may be it already defined by privacy logic
+    v_from_domain=COALESCE(v_from_domain, i_vendor_gw.auth_from_domain, '$Oi');
   else
     v_from_user=COALESCE(i_profile.src_prefix_out,'');
     if i_vendor_gw.preserve_anonymous_from_domain and i_profile.from_domain='anonymous.invalid' then
       v_from_domain='anonymous.invalid';
     else
-      v_from_domain='$Oi';
+      v_from_domain=COALESCE(v_from_domain, '$Oi');
     end if;
   end if;
 
@@ -17955,7 +18152,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_lua_context switch20.lua_call_context;
         v_identity_data switch20.identity_data_ty[];
         v_pai varchar[];
-        v_ppi varchar[];
+        v_ppi varchar;
+        v_privacy varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
         v_cnam_req_json json;
         v_cnam_resp_json json;
@@ -18013,8 +18211,9 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.pai_in=i_pai;
         v_pai=string_to_array(i_pai,',');
         v_ret.ppi_in=i_ppi;
-        v_ppi=string_to_array(i_ppi,',');
+        v_ppi=i_ppi;
         v_ret.privacy_in=i_privacy;
+        v_privacy = string_to_array(i_privacy,';');
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
 
@@ -18221,6 +18420,29 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN NEXT v_ret;
           RETURN;
         end if;
+
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -18851,7 +19073,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -18900,8 +19122,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
           FOR routedata IN (
@@ -18949,8 +19171,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
           FOR routedata in(
@@ -19001,8 +19223,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
           FOR routedata IN (
@@ -19052,8 +19274,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN'5' THEN -- Route test
           FOR routedata IN (
@@ -19103,8 +19325,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
           v_random:=random();
@@ -19170,8 +19392,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
           v_random:=random();
@@ -19235,8 +19457,8 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
 
         ELSE
@@ -19312,7 +19534,8 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_lua_context switch20.lua_call_context;
         v_identity_data switch20.identity_data_ty[];
         v_pai varchar[];
-        v_ppi varchar[];
+        v_ppi varchar;
+        v_privacy varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
         v_cnam_req_json json;
         v_cnam_resp_json json;
@@ -19370,8 +19593,9 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.pai_in=i_pai;
         v_pai=string_to_array(i_pai,',');
         v_ret.ppi_in=i_ppi;
-        v_ppi=string_to_array(i_ppi,',');
+        v_ppi=i_ppi;
         v_ret.privacy_in=i_privacy;
+        v_privacy = string_to_array(i_privacy,';');
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
 
@@ -19578,6 +19802,29 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN NEXT v_ret;
           RETURN;
         end if;
+
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -20208,7 +20455,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -20258,7 +20505,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
           FOR routedata IN (
@@ -20307,7 +20554,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
           FOR routedata in(
@@ -20359,7 +20606,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
           FOR routedata IN (
@@ -20410,7 +20657,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN'5' THEN -- Route test
           FOR routedata IN (
@@ -20461,7 +20708,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
           v_random:=random();
@@ -20528,7 +20775,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
           v_random:=random();
@@ -20593,7 +20840,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
 
         ELSE
@@ -20666,7 +20913,8 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_lua_context switch20.lua_call_context;
         v_identity_data switch20.identity_data_ty[];
         v_pai varchar[];
-        v_ppi varchar[];
+        v_ppi varchar;
+        v_privacy varchar[];
         v_diversion varchar[] not null default ARRAY[]::varchar[];
         v_cnam_req_json json;
         v_cnam_resp_json json;
@@ -20720,8 +20968,9 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.pai_in=i_pai;
         v_pai=string_to_array(i_pai,',');
         v_ret.ppi_in=i_ppi;
-        v_ppi=string_to_array(i_ppi,',');
+        v_ppi=i_ppi;
         v_ret.privacy_in=i_privacy;
+        v_privacy = string_to_array(i_privacy,';');
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
 
@@ -20907,6 +21156,29 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN NEXT v_ret;
           RETURN;
         end if;
+
+        CASE v_customer_auth_normalized.privacy_mode_id
+            WHEN 1 THEN
+              -- allow all
+            WHEN 2 THEN
+              IF cardinality(array_remove(v_privacy,'none')) > 0 THEN
+                v_ret.disconnect_code_id = 8013;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 3 THEN
+              IF 'critical' = ANY(v_privacy) THEN
+                v_ret.disconnect_code_id = 8014;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+            WHEN 4 THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
+                v_ret.disconnect_code_id = 8015;
+                RETURN NEXT v_ret;
+                RETURN;
+              END IF;
+        END CASE;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -21424,7 +21696,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         SELECT INTO v_routing_groups array_agg(routing_group_id) from class4.routing_plan_groups where routing_plan_id = v_customer_auth_normalized.routing_plan_id;
 
         CASE v_rp.sorting_id
-          WHEN'1' THEN -- LCR,Prio, ACD&ASR control
+          WHEN '1' THEN -- LCR,Prio, ACD&ASR control
           FOR routedata IN (
             WITH step1 AS(
                 SELECT
@@ -21473,7 +21745,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
@@ -21522,7 +21794,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
@@ -21574,7 +21846,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
@@ -21625,7 +21897,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           end LOOP;
           WHEN'5' THEN -- Route test
@@ -21676,7 +21948,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
@@ -21743,7 +22015,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
@@ -21808,7 +22080,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
 
@@ -22741,6 +23013,7 @@ CREATE TABLE class4.customers_auth (
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     external_type character varying,
     rewrite_ss_status_id smallint,
+    privacy_mode_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -22838,6 +23111,7 @@ CREATE TABLE class4.customers_auth_normalized (
     src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
     external_type character varying,
     rewrite_ss_status_id smallint,
+    privacy_mode_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -31538,6 +31812,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240109201636'),
 ('20240203212630'),
 ('20240205213733'),
-('20240205213734');
+('20240205213734'),
+('20240206210456');
 
 
