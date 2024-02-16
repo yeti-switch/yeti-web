@@ -340,7 +340,7 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def call_record_filename
-    "/record/#{local_tag}.mp3" if local_tag.present? && node_id.present?
+    "/record/#{local_tag}.mp3" if local_tag.present?
   end
 
   def attempts

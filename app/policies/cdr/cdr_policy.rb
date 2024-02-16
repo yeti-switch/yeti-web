@@ -5,7 +5,7 @@ module Cdr
     section 'Cdr/Cdr'
 
     alias_rule :dump?, :routing_simulation?, to: :perform?
-    alias_rule :download_call_record_lega?, :download_call_record_legb?, to: :perform?
+    alias_rule :download_call_record?, :download_call_record?, to: :perform?
 
     class Scope < ::RolePolicy::Scope
     end

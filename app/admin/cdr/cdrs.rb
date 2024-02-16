@@ -619,7 +619,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   index do
     column :id do |cdr|
       if cdr.has_dump?
-        link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
+        if cdr.audio_recorded?
+          link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace') + ' ' + link_to(fa_icon('file-audio-o'), download_call_record_cdr_path(cdr), title: 'Download record')
+        else
+          link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
+        end
       else
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details')
       end
