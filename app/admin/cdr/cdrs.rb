@@ -624,6 +624,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         else
           link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
         end
+      elsif cdr.audio_recorded?
+        link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('file-audio-o'), download_call_record_cdr_path(cdr), title: 'Download record')
       else
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details')
       end
