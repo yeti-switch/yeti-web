@@ -339,8 +339,12 @@ class Cdr::Cdr < Cdr::Base
     end
   end
 
+  def has_recording?
+    local_tag.present? and duration > 0
+  end
+
   def call_record_filename
-    "/record/#{local_tag}.mp3" if local_tag.present?
+    "/record/#{local_tag}.mp3" if has_recording?
   end
 
   def attempts

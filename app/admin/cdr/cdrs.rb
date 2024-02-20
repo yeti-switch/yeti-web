@@ -226,7 +226,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
   action_item :call_record, only: :show do
-    link_to('Call record', download_call_record_cdr_path(resource)) if resource.audio_recorded?
+    link_to('Call record', download_call_record_cdr_path(resource)) if resource.has_recording?
   end
 
   action_item :download_csv, only: :index do
@@ -619,12 +619,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   index do
     column :id do |cdr|
       if cdr.has_dump?
-        if cdr.audio_recorded?
+        if cdr.has_recording?
           link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace') + ' ' + link_to(fa_icon('file-audio-o'), download_call_record_cdr_path(cdr), title: 'Download record')
         else
           link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
         end
-      elsif cdr.audio_recorded?
+      elsif cdr.has_recording?
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('file-audio-o'), download_call_record_cdr_path(cdr), title: 'Download record')
       else
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details')
