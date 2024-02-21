@@ -340,7 +340,7 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def has_recording?
-    local_tag.present? and duration > 0
+    audio_recorded? and local_tag.present? and duration > 0
   end
 
   def call_record_filename
