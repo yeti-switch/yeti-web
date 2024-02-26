@@ -6,6 +6,7 @@ module AdminApi
     model_class 'Account'
 
     model_attributes :name,
+                     :vat,
                      :balance,
                      :min_balance,
                      :max_balance,

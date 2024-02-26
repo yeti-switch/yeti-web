@@ -12,7 +12,12 @@ RSpec.resource 'Accounts' do
   let(:type) { 'accounts' }
 
   required_params = %i[name min-balance max-balance]
-  optional_params = %i[origination-capacity termination-capacity send-invoices-to external-id balance-low-threshold balance-high-threshold send-balance-notifications-to]
+  optional_params = %i[
+    vat origination-capacity termination-capacity total-capacity
+    send-invoices-to
+    external-id
+    balance-low-threshold balance-high-threshold send-balance-notifications-to
+  ]
 
   required_relationships = %i[contractor timezone]
   optional_relationships = %i[
@@ -49,6 +54,10 @@ RSpec.resource 'Accounts' do
     let(:'balance-low-threshold') { 90 }
     let(:'balance-high-threshold') { 95 }
     let(:'send-balance-notifications-to') { Billing::Contact.collection.map(&:id) }
+    let(:vat) { 11 }
+    let(:'origination-capacity') { 100 }
+    let(:'termination-capacity') { 110 }
+    let(:'total-capacity') { 100 }
 
     let(:timezone) { wrap_relationship(:timezones, 1) }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
