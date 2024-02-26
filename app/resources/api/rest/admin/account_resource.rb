@@ -5,7 +5,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
   paginator :paged
 
   attributes :name,
-             :balance, :min_balance, :max_balance,
+             :balance, :min_balance, :max_balance, :vat,
              :balance_low_threshold, :balance_high_threshold, :send_balance_notifications_to,
              :destination_rate_limit, :max_call_duration,
              :external_id, :uuid,
@@ -20,6 +20,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
 
   ransack_filter :name, type: :string
   ransack_filter :balance, type: :number
+  ransack_filter :vat, type: :number
   ransack_filter :min_balance, type: :number
   ransack_filter :max_balance, type: :number
   ransack_filter :balance_low_threshold, type: :number, column: :balance_notification_setting_low_threshold
