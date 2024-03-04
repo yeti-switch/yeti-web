@@ -407,13 +407,8 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     let(:record_id) { cdr.uuid }
     let(:json_api_request_query) { nil }
 
-    before do
-      create(:cdr, customer_acc: account)
-    end
-
-    let(:cdr) do
-      Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).take
-    end
+    let!(:cdr) { create(:cdr, :with_id, cdr_attrs).reload }
+    let(:cdr_attrs) { { customer_acc: account } }
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
@@ -458,7 +453,8 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
           'auth-orig-port': cdr.auth_orig_port,
           'src-prefix-routing': cdr.src_prefix_routing,
           'dst-prefix-routing': cdr.dst_prefix_routing,
-          'destination-prefix': cdr.destination_prefix
+          'destination-prefix': cdr.destination_prefix,
+          rec: false
         }
       )
     end
@@ -477,6 +473,199 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         let(:json_api_include_attributes) { { 'name': cdr.auth_orig_transport_protocol.name } }
         let(:json_api_include_relationships_names) { nil }
       end
+    end
+
+    context 'when api_access.allow_listen_recording=true' do
+      before { api_access.update!(allow_listen_recording: true) }
+
+      context 'when cdr audio recorded successfully' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: true,
+                        local_tag: SecureRandom.uuid,
+                        duration: 123
+        end
+
+        it 'responds with attribute rec=true' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq true
+        end
+      end
+
+      context 'when cdr audio not recorded' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: false,
+                        local_tag: SecureRandom.uuid,
+                        duration: 123
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+
+      context 'when cdr has no local_tag' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: true,
+                        local_tag: nil,
+                        duration: 123
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+
+      context 'when cdr has duration 0' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: true,
+                        local_tag: SecureRandom.uuid,
+                        duration: 0
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+    end
+
+    context 'when api_access.allow_listen_recording=false' do
+      before { api_access.update!(allow_listen_recording: false) }
+
+      context 'when cdr audio recorded successfully' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: true,
+                        local_tag: SecureRandom.uuid,
+                        duration: 123
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+
+      context 'when cdr audio not recorded' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: false,
+                        local_tag: SecureRandom.uuid,
+                        duration: 123
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+
+      context 'when cdr has no local_tag' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: true,
+                        local_tag: nil,
+                        duration: 123
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+
+      context 'when cdr has duration 0' do
+        let(:cdr_attrs) do
+          super().merge audio_recorded: true,
+                        local_tag: SecureRandom.uuid,
+                        duration: 0
+        end
+
+        it 'responds with attribute rec=false' do
+          subject
+          expect(response_json[:data][:attributes][:rec]).to eq false
+        end
+      end
+    end
+  end
+
+  describe 'GET /api/rest/customer/v1/cdrs/:id/rec' do
+    subject do
+      get json_api_request_path, params: nil, headers: json_api_request_headers
+    end
+
+    shared_examples :responds_404 do
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq 404
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+
+    before { api_access.update!(allow_listen_recording:) }
+
+    let(:allow_listen_recording) { true }
+    let(:json_api_request_path) { "#{super()}/#{record_id}/rec" }
+    let(:record_id) { cdr.uuid }
+    let!(:cdr) { create(:cdr, :with_id, cdr_attrs).reload }
+    let(:cdr_attrs) do
+      { customer_acc: account, audio_recorded: true, local_tag: SecureRandom.uuid, duration: 12 }
+    end
+
+    it 'responds with X-Accel-Redirect' do
+      subject
+      expect(response.status).to eq 200
+      expect(response.body).to be_blank
+      expect(response.headers['X-Accel-Redirect']).to eq cdr.call_record_filename
+    end
+
+    context 'when cdr audio not recorded' do
+      let(:cdr_attrs) do
+        super().merge audio_recorded: false
+      end
+
+      include_examples :responds_404
+    end
+
+    context 'when cdr has no local_tag' do
+      let(:cdr_attrs) do
+        super().merge local_tag: nil
+      end
+
+      include_examples :responds_404
+    end
+
+    context 'when cdr has duration 0' do
+      let(:cdr_attrs) do
+        super().merge duration: 0
+      end
+
+      include_examples :responds_404
+    end
+
+    context 'when api_access.allow_listen_recording=false' do
+      let(:allow_listen_recording) { false }
+
+      include_examples :responds_404
+    end
+
+    context 'with invalid ID' do
+      let(:record_id) { SecureRandom.uuid }
+
+      include_examples :returns_json_api_errors, status: 404, errors: {
+        title: 'Record not found'
+      }
+    end
+
+    context 'when customer allowed_account_ids does not include cdr_export account' do
+      let!(:allowed_account) { FactoryBot.create(:account, contractor: customer) }
+
+      before { api_access.update!(account_ids: [allowed_account.id]) }
+
+      include_examples :returns_json_api_errors, status: 404, errors: {
+        title: 'Record not found'
+      }
     end
   end
 end

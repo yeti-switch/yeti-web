@@ -28,7 +28,7 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
   end
 
   def show
-    head 200
+    render json: { 'allow-rec': current_customer.allow_listen_recording }
   end
 
   def destroy
