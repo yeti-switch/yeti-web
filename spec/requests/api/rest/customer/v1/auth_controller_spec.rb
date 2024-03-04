@@ -199,15 +199,31 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     it 'responds with 200' do
       subject
       expect(response.status).to eq 200
-      expect(response.body).to be_blank
+      expect(response_json).to match('allow-rec': false)
     end
-
-    it_behaves_like :json_api_customer_v1_check_authorization
 
     it 'should create API Log record' do
       expect { subject }.to change(Log::ApiLog, :count).by(1)
 
       expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+    end
+
+    it_behaves_like :json_api_customer_v1_check_authorization
+
+    context 'when api_access.allow_listen_recording=true' do
+      before { api_access.update!(allow_listen_recording: true) }
+
+      it 'responds with 200' do
+        subject
+        expect(response.status).to eq 200
+        expect(response_json).to match('allow-rec': true)
+      end
+
+      it 'should create API Log record' do
+        expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+      end
     end
   end
 

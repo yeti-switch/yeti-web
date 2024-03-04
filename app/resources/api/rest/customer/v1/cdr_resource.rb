@@ -33,7 +33,8 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :auth_orig_port,
              :src_prefix_routing,
              :dst_prefix_routing,
-             :destination_prefix
+             :destination_prefix,
+             :rec
 
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
   has_one :account, class_name: 'Account', relation_name: :customer_acc, foreign_key_on: :related
@@ -154,6 +155,12 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   ransack_filter :vendor_duration, type: :number
 
   association_uuid_filter :account_id, column: :customer_acc_id, class_name: 'Account'
+
+  def rec
+    return false unless context[:current_customer].allow_listen_recording
+
+    _model.has_recording?
+  end
 
   def self.apply_allowed_accounts(records, options)
     context = options[:context]

@@ -173,7 +173,10 @@ Rails.application.routes.draw do
             jsonapi_resources :rateplans, only: %i[index show]
             jsonapi_resources :rates, only: %i[index show]
             jsonapi_resource :check_rate, only: %i[create]
-            jsonapi_resources :cdrs, only: %i[index show]
+            jsonapi_resources :cdrs, only: %i[index show] do
+              jsonapi_relationships
+              member { get :rec }
+            end
             jsonapi_resources :networks, only: %i[index show]
             jsonapi_resources :network_types, only: %i[index show]
             jsonapi_resources :network_prefixes, only: %i[index show]

@@ -11,28 +11,49 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
   end
 
   context 'with pre-filled form' do
-    include_context :fill_form, 'new_system_api_access' do
+    include_context :fill_form, 'new_system_api_access'
+    let(:attributes) do
+      {
+        login: 'Account',
+        password: 'Pass',
+        customer_id: lambda {
+          fill_in_chosen('Customer', with: @customer.name, ajax: true)
+        },
+        formtastic_allowed_ips: '127.0.0.1,1.1.0.0/16'
+      }
+    end
+
+    it 'creates new api access successfully' do
+      click_on_submit
+
+      expect(page).to have_css('.flash_notice', text: 'Api access was successfully created.')
+
+      expect(System::ApiAccess.last).to have_attributes(
+                                          login: attributes[:login],
+                                          customer_id: @account.contractor.id,
+                                          allowed_ips: attributes[:formtastic_allowed_ips].split(','),
+                                          allow_listen_recording: false
+                                        )
+    end
+
+    context 'with allow_listen_recording=true' do
       let(:attributes) do
-        {
-          login: 'Account',
-          password: 'Pass',
-          customer_id: lambda {
-                         fill_in_chosen('Customer', with: @customer.name, ajax: true)
-                       },
-          formtastic_allowed_ips: '127.0.0.1,1.1.0.0/16'
+        super().merge allow_listen_recording: lambda {
+          fill_in_chosen('Allow listen recording', with: 'Yes')
         }
       end
 
-      it 'creates new api access succesfully' do
+      it 'creates new api access successfully' do
         click_on_submit
 
         expect(page).to have_css('.flash_notice', text: 'Api access was successfully created.')
 
         expect(System::ApiAccess.last).to have_attributes(
-          login: attributes[:login],
-          customer_id: @account.contractor.id,
-          allowed_ips: attributes[:formtastic_allowed_ips].split(',')
-        )
+                                            login: attributes[:login],
+                                            customer_id: @account.contractor.id,
+                                            allowed_ips: attributes[:formtastic_allowed_ips].split(','),
+                                            allow_listen_recording: true
+                                          )
       end
     end
   end

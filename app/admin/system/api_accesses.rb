@@ -11,6 +11,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
                 :password,
                 :customer_id,
                 :formtastic_allowed_ips,
+                :allow_listen_recording,
                 account_ids: []
 
   filter :id
@@ -30,6 +31,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
       end
     end
     column :allowed_ips
+    column :allow_listen_recording
   end
 
   show do |r|
@@ -43,6 +45,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
         end
       end
       row :allowed_ips
+      row :allow_listen_recording
     end
   end
 
@@ -63,6 +66,10 @@ ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
                       }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
+      f.input :allow_listen_recording,
+              as: :select,
+              input_html: { class: 'chosen' },
+              collection: [['Yes', true], ['No', false]]
     end
     f.actions
   end

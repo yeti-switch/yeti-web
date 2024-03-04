@@ -26643,7 +26643,8 @@ CREATE TABLE sys.api_access (
     login character varying NOT NULL,
     password_digest character varying NOT NULL,
     account_ids integer[] DEFAULT '{}'::integer[] NOT NULL,
-    allowed_ips inet[] DEFAULT '{0.0.0.0/0,::/0}'::inet[] NOT NULL
+    allowed_ips inet[] DEFAULT '{0.0.0.0/0,::/0}'::inet[] NOT NULL,
+    allow_listen_recording boolean DEFAULT false NOT NULL
 );
 
 
@@ -31649,7 +31650,8 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
+;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31813,6 +31815,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240203212630'),
 ('20240205213733'),
 ('20240205213734'),
-('20240206210456');
+('20240206210456'),
+('20240304194752');
 
 
