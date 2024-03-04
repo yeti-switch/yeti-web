@@ -53,6 +53,7 @@
 #  gateway_id                       :integer(4)       not null
 #  lua_script_id                    :integer(2)
 #  pop_id                           :integer(4)
+#  privacy_mode_id                  :integer(2)       default(1), not null
 #  radius_accounting_profile_id     :integer(2)
 #  radius_auth_profile_id           :integer(2)
 #  rateplan_id                      :integer(4)       not null
