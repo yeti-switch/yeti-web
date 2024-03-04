@@ -83,4 +83,34 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
       end
     end
   end
+
+  describe 'GET /api/rest/admin/cdr/:id/recording' do
+    subject do
+      get json_api_request_path, params: nil, headers: { 'Authorization' => json_api_auth_token }
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}/recording" }
+    let(:record_id) { cdr.id.to_s }
+
+    let!(:cdr) { create(:cdr, audio_recorded: true) }
+
+    it 'responds with X-Accel-Redirect' do
+      subject
+      expect(response.status).to eq 200
+      expect(response.body).to be_blank
+      expect(response.headers['X-Accel-Redirect']).to eq "/record/#{cdr.local_tag}.mp3"
+    end
+
+    context 'when audio not recorded' do
+      let!(:cdr) { create(:cdr, audio_recorded: false) }
+
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq 404
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+  end
 end
