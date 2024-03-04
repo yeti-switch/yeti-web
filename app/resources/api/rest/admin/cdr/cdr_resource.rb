@@ -341,6 +341,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :customer_duration, type: :number
   ransack_filter :vendor_duration, type: :number
   ransack_filter :destination_rate_policy_id, type: :number
+  ransack_filter :audio_recorded, type: :boolean
 
   # add supporting associations from non cdr namespaces
   def self.resource_for(type)
