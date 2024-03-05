@@ -119,8 +119,6 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
 end
 
-gem 'apitome', '~> 0.1.0'
-
 group :test do
   gem 'capybara'
   gem 'capybara_active_admin', github: 'activeadmin-plugins/capybara_active_admin', require: false
