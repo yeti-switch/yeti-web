@@ -195,7 +195,7 @@ RspecApiDocumentation.configure do |config|
     c.exclusion_filter = :admin # must be overriden to anything
     c.filter = :customer_v1
     c.docs_dir = Rails.root.join 'doc/api/customer/v1'
-    c.api_name = 'Customer API V2'
+    c.api_name = 'Customer API V1'
   end
 
   config.response_body_formatter = proc do |content_type, response_body|
