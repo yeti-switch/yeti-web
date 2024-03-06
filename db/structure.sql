@@ -16336,10 +16336,12 @@ BEGIN
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
-      i_profile.src_prefix_out='anonymous';
-      i_profile.src_name_out='Anonymous';
-      v_from_domain = 'anonymous.invalid';
-      IF 'id' = ANY(i_privacy) THEN
+      IF 'id' = ANY(i_privacy) OR 'user' = ANY(i_privacy) THEN
+        i_profile.src_prefix_out='anonymous';
+        i_profile.src_name_out='Anonymous';
+        v_from_domain = 'anonymous.invalid';
+      END IF;
+      IF 'id' = ANY(i_privacy) OR 'header' = ANY(i_privacy) THEN
         /*dbg{*/
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. removing PAI/PPI headers.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -16353,18 +16355,22 @@ BEGIN
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
-      i_profile.privacy_out = array_to_string(i_privacy,';');
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      IF cardinality(i_privacy)>0 THEN
+        i_profile.privacy_out = array_to_string(i_privacy,';');
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      END IF;
     WHEN 5 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
-      i_profile.src_prefix_out='anonymous';
-      i_profile.src_name_out='Anonymous';
-      v_from_domain = 'anonymous.invalid';
-      i_profile.privacy_out = array_to_string(i_privacy,';');
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      IF 'id' = ANY(i_privacy) or 'user' = ANY(i_privacy) THEN
+        i_profile.src_prefix_out='anonymous';
+        i_profile.src_name_out='Anonymous';
+        v_from_domain = 'anonymous.invalid';
+        i_profile.privacy_out = array_to_string(i_privacy,';');
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      END IF;
   END CASE;
 
   IF v_allow_pai THEN
@@ -16386,10 +16392,12 @@ BEGIN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
       END LOOP;
       v_pai_out = i_pai;
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
-      i_profile.ppi_out = i_ppi;
+      IF i_ppi is not null and i_ppi!='' THEN
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
+        i_profile.ppi_out = i_ppi;
+      END IF;
     END IF;
-    i_profile.pai_out = array_to_string(v_pai_out, ',');
+    i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
@@ -17092,10 +17100,12 @@ BEGIN
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. Applying privacy.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
-      i_profile.src_prefix_out='anonymous';
-      i_profile.src_name_out='Anonymous';
-      v_from_domain = 'anonymous.invalid';
-      IF 'id' = ANY(i_privacy) THEN
+      IF 'id' = ANY(i_privacy) OR 'user' = ANY(i_privacy) THEN
+        i_profile.src_prefix_out='anonymous';
+        i_profile.src_name_out='Anonymous';
+        v_from_domain = 'anonymous.invalid';
+      END IF;
+      IF 'id' = ANY(i_privacy) OR 'header' = ANY(i_privacy) THEN
         /*dbg{*/
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. removing PAI/PPI headers.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
@@ -17109,18 +17119,22 @@ BEGIN
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
-      i_profile.privacy_out = array_to_string(i_privacy,';');
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      IF cardinality(i_privacy)>0 THEN
+        i_profile.privacy_out = array_to_string(i_privacy,';');
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      END IF;
     WHEN 5 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding with anonymous From.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
-      i_profile.src_prefix_out='anonymous';
-      i_profile.src_name_out='Anonymous';
-      v_from_domain = 'anonymous.invalid';
-      i_profile.privacy_out = array_to_string(i_privacy,';');
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      IF 'id' = ANY(i_privacy) or 'user' = ANY(i_privacy) THEN
+        i_profile.src_prefix_out='anonymous';
+        i_profile.src_name_out='Anonymous';
+        v_from_domain = 'anonymous.invalid';
+        i_profile.privacy_out = array_to_string(i_privacy,';');
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      END IF;
   END CASE;
 
   IF v_allow_pai THEN
@@ -17142,10 +17156,12 @@ BEGIN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
       END LOOP;
       v_pai_out = i_pai;
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
-      i_profile.ppi_out = i_ppi;
+      IF i_ppi is not null and i_ppi!='' THEN
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
+        i_profile.ppi_out = i_ppi;
+      END IF;
     END IF;
-    i_profile.pai_out = array_to_string(v_pai_out, ',');
+    i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
@@ -17780,10 +17796,12 @@ BEGIN
       END IF;
     WHEN 3 THEN
       
-      i_profile.src_prefix_out='anonymous';
-      i_profile.src_name_out='Anonymous';
-      v_from_domain = 'anonymous.invalid';
-      IF 'id' = ANY(i_privacy) THEN
+      IF 'id' = ANY(i_privacy) OR 'user' = ANY(i_privacy) THEN
+        i_profile.src_prefix_out='anonymous';
+        i_profile.src_name_out='Anonymous';
+        v_from_domain = 'anonymous.invalid';
+      END IF;
+      IF 'id' = ANY(i_privacy) OR 'header' = ANY(i_privacy) THEN
         
         v_allow_pai = false;
       END IF;
@@ -17791,15 +17809,19 @@ BEGIN
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
     WHEN 4 THEN
       
-      i_profile.privacy_out = array_to_string(i_privacy,';');
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      IF cardinality(i_privacy)>0 THEN
+        i_profile.privacy_out = array_to_string(i_privacy,';');
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      END IF;
     WHEN 5 THEN
       
-      i_profile.src_prefix_out='anonymous';
-      i_profile.src_name_out='Anonymous';
-      v_from_domain = 'anonymous.invalid';
-      i_profile.privacy_out = array_to_string(i_privacy,';');
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      IF 'id' = ANY(i_privacy) or 'user' = ANY(i_privacy) THEN
+        i_profile.src_prefix_out='anonymous';
+        i_profile.src_name_out='Anonymous';
+        v_from_domain = 'anonymous.invalid';
+        i_profile.privacy_out = array_to_string(i_privacy,';');
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
+      END IF;
   END CASE;
 
   IF v_allow_pai THEN
@@ -17821,10 +17843,12 @@ BEGIN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
       END LOOP;
       v_pai_out = i_pai;
-      v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
-      i_profile.ppi_out = i_ppi;
+      IF i_ppi is not null and i_ppi!='' THEN
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
+        i_profile.ppi_out = i_ppi;
+      END IF;
     END IF;
-    i_profile.pai_out = array_to_string(v_pai_out, ',');
+    i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
@@ -18209,11 +18233,11 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.to_domain=i_to_domain;
 
         v_ret.pai_in=i_pai;
-        v_pai=string_to_array(i_pai,',');
+        v_pai=string_to_array(COALESCE(i_pai,''),',');
         v_ret.ppi_in=i_ppi;
         v_ppi=i_ppi;
         v_ret.privacy_in=i_privacy;
-        v_privacy = string_to_array(i_privacy,';');
+        v_privacy = string_to_array(COALESCE(i_privacy,''),';');
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
 
@@ -19591,11 +19615,11 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.to_domain=i_to_domain;
 
         v_ret.pai_in=i_pai;
-        v_pai=string_to_array(i_pai,',');
+        v_pai=string_to_array(COALESCE(i_pai,''),',');
         v_ret.ppi_in=i_ppi;
         v_ppi=i_ppi;
         v_ret.privacy_in=i_privacy;
-        v_privacy = string_to_array(i_privacy,';');
+        v_privacy = string_to_array(COALESCE(i_privacy,''),';');
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
 
@@ -20966,11 +20990,11 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.to_domain=i_to_domain;
 
         v_ret.pai_in=i_pai;
-        v_pai=string_to_array(i_pai,',');
+        v_pai=string_to_array(COALESCE(i_pai,''),',');
         v_ret.ppi_in=i_ppi;
         v_ppi=i_ppi;
         v_ret.privacy_in=i_privacy;
-        v_privacy = string_to_array(i_privacy,';');
+        v_privacy = string_to_array(COALESCE(i_privacy,''),';');
         v_ret.rpid_in=i_rpid;
         v_ret.rpid_privacy_in=i_rpid_privacy;
 
@@ -31650,8 +31674,7 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import
-;
+SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20170822151410'),
@@ -31816,6 +31839,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240205213733'),
 ('20240205213734'),
 ('20240206210456'),
-('20240304194752');
+('20240304194752'),
+('20240305181141');
 
 
