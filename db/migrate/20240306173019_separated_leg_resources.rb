@@ -1452,7 +1452,7 @@ BEGIN
   i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
     i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
-    i_profile.resources = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
