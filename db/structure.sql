@@ -974,7 +974,9 @@ CREATE TYPE switch20.callprofile_ty AS (
 	ss_crt_id smallint,
 	ss_otn character varying,
 	ss_dtn character varying,
-	ss_attest_id smallint
+	ss_attest_id smallint,
+	lega_res character varying,
+	legb_res character varying
 );
 
 
@@ -15938,18 +15940,21 @@ BEGIN
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
+  i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
-    i_profile.resources:=i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.resources = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
-    i_profile.resources:=i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+    i_profile.legb_res = i_profile.legb_res||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
   end if;
-
 
   -- dialpeer account capacity limit;
   if i_dp.capacity is not null then
-    i_profile.resources:=i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+    i_profile.legb_res = i_profile.legb_res||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
   end if;
 
   /* */
@@ -16098,6 +16103,7 @@ BEGIN
   --SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth.gateway_id;
   --vendor gw
   if i_vendor_gw.termination_capacity is not null then
+    i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
     i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
@@ -16702,18 +16708,21 @@ BEGIN
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
+  i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
-    i_profile.resources:=i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.resources = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
-    i_profile.resources:=i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+    i_profile.legb_res = i_profile.legb_res||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
   end if;
-
 
   -- dialpeer account capacity limit;
   if i_dp.capacity is not null then
-    i_profile.resources:=i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+    i_profile.legb_res = i_profile.legb_res||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
   end if;
 
   /* */
@@ -16862,6 +16871,7 @@ BEGIN
   --SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth.gateway_id;
   --vendor gw
   if i_vendor_gw.termination_capacity is not null then
+    i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
     i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
@@ -17458,18 +17468,21 @@ BEGIN
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
+  i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
-    i_profile.resources:=i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
+    i_profile.resources = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
-    i_profile.resources:=i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+    i_profile.legb_res = i_profile.legb_res||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
   end if;
-
 
   -- dialpeer account capacity limit;
   if i_dp.capacity is not null then
-    i_profile.resources:=i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+    i_profile.legb_res = i_profile.legb_res||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
+    i_profile.resources = i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
   end if;
 
   /* */
@@ -17600,6 +17613,7 @@ BEGIN
   --SELECT into v_orig_gw * from class4.gateways WHERE id=v_customer_auth.gateway_id;
   --vendor gw
   if i_vendor_gw.termination_capacity is not null then
+    i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
     i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
@@ -18500,20 +18514,25 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
 
-        v_ret.resources:='';
+        v_ret.lega_res='';
+        v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.lega_resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
         if v_c_acc.origination_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
         end if;
 
         if v_c_acc.total_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
         end if;
 
         if v_orig_gw.origination_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
@@ -19882,20 +19901,25 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
 
-        v_ret.resources:='';
+        v_ret.lega_res='';
+        v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.lega_resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
         if v_c_acc.origination_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
         end if;
 
         if v_c_acc.total_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
         end if;
 
         if v_orig_gw.origination_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
@@ -21230,20 +21254,25 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
 
-        v_ret.resources:='';
+        v_ret.lega_res='';
+        v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.resources:=v_ret.resources||'3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.lega_resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
         if v_c_acc.origination_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
         end if;
 
         if v_c_acc.total_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
         end if;
 
         if v_orig_gw.origination_capacity is not null then
+          v_ret.lega_res:=v_ret.lega_res||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
           v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
@@ -31840,6 +31869,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240205213734'),
 ('20240206210456'),
 ('20240304194752'),
-('20240305181141');
+('20240305181141'),
+('20240306173019');
 
 
