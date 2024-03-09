@@ -34,6 +34,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
     end
     column :allowed_ips
     column :allow_listen_recording
+    column :created_at
+    column :updated_at
   end
 
   show do |r|
@@ -48,6 +50,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
       end
       row :allowed_ips
       row :allow_listen_recording
+      row :created_at
+      row :updated_at
     end
   end
 

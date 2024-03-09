@@ -10,6 +10,8 @@
 #  allowed_ips            :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
 #  login                  :string           not null
 #  password_digest        :string           not null
+#  created_at             :timestamptz
+#  updated_at             :timestamptz
 #  customer_id            :integer(4)       not null
 #
 # Indexes
