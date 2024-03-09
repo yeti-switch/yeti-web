@@ -318,6 +318,16 @@ ActiveAdmin.register Gateway do
   filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }
   filter :privacy_mode_id, as: :select, collection: proc { Gateway::PRIVACY_MODES.invert }
 
+  association_ajax_filter :termination_src_numberlist_id_eq,
+                          label: 'Termination SRC Numberlist',
+                          scope: -> { Routing::Numberlist.order(:name) },
+                          path: '/numberlists/search'
+
+  association_ajax_filter :termination_dst_numberlist_id_eq,
+                          label: 'Termination DST Numberlist',
+                          scope: -> { Routing::Numberlist.order(:name) },
+                          path: '/numberlists/search'
+
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
 

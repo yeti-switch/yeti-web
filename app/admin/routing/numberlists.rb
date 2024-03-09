@@ -5,6 +5,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   decorate_with NumberlistDecorator
 
+  search_support!
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
@@ -40,6 +41,17 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       super
     end
   end
+
+  filter :id
+  filter :name
+  filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert
+  filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
+  filter :lua_script, input_html: { class: 'chosen' }
+  filter :external_id, label: 'External ID'
+  filter :external_type
+  filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
+  filter :defer_src_rewrite
+  filter :defer_dst_rewrite
 
   index do
     selectable_column
@@ -107,14 +119,23 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     f.actions
   end
 
-  filter :id
-  filter :name
-  filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert
-  filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
-  filter :lua_script, input_html: { class: 'chosen' }
-  filter :external_id, label: 'External ID'
-  filter :external_type
-  filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
-  filter :defer_src_rewrite
-  filter :defer_dst_rewrite
+  sidebar :links, only: %i[show edit] do
+    ul do
+      li do
+        link_to 'Customer Auths(as SRC numberlist)', customers_auths_path(q: { src_numberlist_id_eq: params[:id] })
+      end
+      li do
+        link_to 'Customer Auths(as DST numberlist)', customers_auths_path(q: { dst_numberlist_id_eq: params[:id] })
+      end
+      li do
+        link_to 'Gateways(as SRC numberlist)', gateways_path(q: { termination_src_numberlist_id_eq: params[:id] })
+      end
+      li do
+        link_to 'Gateways(as DST numberlist)', gateways_path(q: { termination_dst_numberlist_id_eq: params[:id] })
+      end
+      li do
+        link_to 'Numberlist Items', routing_numberlist_items_path(q: { numberlist_id_eq: params[:id] })
+      end
+    end
+  end
 end

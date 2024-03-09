@@ -12,13 +12,14 @@ ActiveAdmin.register Routing::RateGroup do
   filter :id
   filter :name
 
-  permit_params :name
+  permit_params :name, rateplan_ids: []
 
   index do
     selectable_column
     id_column
     actions
     column :name
+    column :rateplans
     column :external_id
   end
 
@@ -26,6 +27,7 @@ ActiveAdmin.register Routing::RateGroup do
     attributes_table do
       row :id
       row :name
+      row :rateplans
       row :external_id
     end
     active_admin_comments
@@ -35,6 +37,9 @@ ActiveAdmin.register Routing::RateGroup do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
+      f.input :rateplans,
+              input_html: { class: 'chosen-sortable', multiple: true },
+              collection: Routing::Rateplan.order(:name)
     end
     f.actions
   end

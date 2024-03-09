@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register System::ApiAccess, as: 'Api Access' do
+ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
   includes :customer
   menu parent: 'System', priority: 3
   config.batch_actions = false
+
+  acts_as_audit
 
   decorate_with ApiAccessDecorator
 

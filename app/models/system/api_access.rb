@@ -35,6 +35,8 @@ class System::ApiAccess < ApplicationRecord
   validate :allowed_ips_is_valid
   validates :allow_listen_recording, inclusion: { in: [true, false] }
 
+  include WithPaperTrail
+
   validate if: :customer_id do |record|
     if record.account_ids
       record.account_ids.reject!(&:blank?)

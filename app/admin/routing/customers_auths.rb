@@ -239,6 +239,16 @@ ActiveAdmin.register CustomersAuth do
          as: :string
   filter :cnam_database, input_html: { class: 'chosen' }
 
+  association_ajax_filter :src_numberlist_id_eq,
+                          label: 'SRC Numberlist',
+                          scope: -> { Routing::Numberlist.order(:name) },
+                          path: '/numberlists/search'
+
+  association_ajax_filter :dst_numberlist_id_eq,
+                          label: 'DST Numberlist',
+                          scope: -> { Routing::Numberlist.order(:name) },
+                          path: '/numberlists/search'
+
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     tabs do
