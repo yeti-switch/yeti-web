@@ -5,7 +5,7 @@ RSpec.describe 'Update Api Access', type: :feature, js: true do
 
   before do
     @account = FactoryBot.create(:account)
-    visit edit_api_access_path(api_access.id)
+    visit edit_customer_portal_login_path(api_access.id)
   end
 
   context 'with Allow listen recording Yes' do

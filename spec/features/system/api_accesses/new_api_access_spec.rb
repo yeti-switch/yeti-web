@@ -7,7 +7,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
     @customer = create(:customer)
     @account = create(:account, contractor: @customer)
 
-    visit new_api_access_path
+    visit new_customer_portal_login_path
   end
 
   context 'with pre-filled form' do
