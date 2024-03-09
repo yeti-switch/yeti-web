@@ -67,6 +67,21 @@ ActiveAdmin.register Contractor do
           end
         end
       end
+
+      tab 'Customer portal access' do
+        panel '' do
+          table_for s.api_access do
+            column :id
+            column :login
+            column :allowed_ips
+            column :accounts
+            column :allow_listen_recording
+            column :created_at
+            column :updated_at
+          end
+        end
+      end
+
       tab 'Comments' do
         active_admin_comments
       end

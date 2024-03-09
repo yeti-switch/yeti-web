@@ -26697,7 +26697,9 @@ CREATE TABLE sys.api_access (
     password_digest character varying NOT NULL,
     account_ids integer[] DEFAULT '{}'::integer[] NOT NULL,
     allowed_ips inet[] DEFAULT '{0.0.0.0/0,::/0}'::inet[] NOT NULL,
-    allow_listen_recording boolean DEFAULT false NOT NULL
+    allow_listen_recording boolean DEFAULT false NOT NULL,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone
 );
 
 
@@ -31870,6 +31872,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240206210456'),
 ('20240304194752'),
 ('20240305181141'),
-('20240306173019');
+('20240306173019'),
+('20240309103228');
 
 

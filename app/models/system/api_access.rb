@@ -10,6 +10,8 @@
 #  allowed_ips            :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
 #  login                  :string           not null
 #  password_digest        :string           not null
+#  created_at             :timestamptz
+#  updated_at             :timestamptz
 #  customer_id            :integer(4)       not null
 #
 # Indexes
@@ -34,6 +36,8 @@ class System::ApiAccess < ApplicationRecord
 
   validate :allowed_ips_is_valid
   validates :allow_listen_recording, inclusion: { in: [true, false] }
+
+  include WithPaperTrail
 
   validate if: :customer_id do |record|
     if record.account_ids
