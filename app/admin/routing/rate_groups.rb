@@ -9,10 +9,12 @@ ActiveAdmin.register Routing::RateGroup do
   acts_as_export :id, :name
   acts_as_import resource_class: Importing::RateGroup
 
+  permit_params :name, rateplan_ids: []
+
+  includes :rateplans
+
   filter :id
   filter :name
-
-  permit_params :name, rateplan_ids: []
 
   index do
     selectable_column
