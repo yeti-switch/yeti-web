@@ -18517,7 +18517,7 @@ CREATE FUNCTION switch20.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.lega_res='';
         v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.lega_resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.lega_res='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
           v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
@@ -19904,7 +19904,7 @@ CREATE FUNCTION switch20.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.lega_res='';
         v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.lega_resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.lega_res='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
           v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
@@ -21257,7 +21257,7 @@ CREATE FUNCTION switch20.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.lega_res='';
         v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
-          v_ret.lega_resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
+          v_ret.lega_res='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
           v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
@@ -31873,6 +31873,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240304194752'),
 ('20240305181141'),
 ('20240306173019'),
-('20240309103228');
+('20240309103228'),
+('20240310195115');
 
 
