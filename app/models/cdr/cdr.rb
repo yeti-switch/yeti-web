@@ -276,6 +276,8 @@ class Cdr::Cdr < Cdr::Base
 
   scope :where_customer, ->(id) { where(customer_id: id) }
   scope :where_account, ->(id) { where(customer_acc_id: id) } # OR vendor_acc_id ???
+  scope :where_vendor, ->(id) { where(vendor_id: id) }
+  scope :where_vendor_account, ->(id) { where(vendor_acc_id: id) }
 
   scope :status_eq, lambda { |success|
     if success.is_a?(String)
