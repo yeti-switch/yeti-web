@@ -34,7 +34,8 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :src_prefix_routing,
              :dst_prefix_routing,
              :destination_prefix,
-             :lega_user_agent
+             :lega_user_agent,
+             :rec
   :rec
 
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
@@ -46,53 +47,54 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
           :lega_disconnect_code, :lega_disconnect_reason, :src_prefix_in,
           :dst_prefix_in, :diversion_in, :src_name_in, :local_tag
 
+  ransack_filter :uuid, type: :uuid
   ransack_filter :time_start, type: :datetime
-  ransack_filter :destination_next_rate, type: :number
-  ransack_filter :destination_fee, type: :number
-  ransack_filter :destination_reverse_billing, type: :boolean
-  ransack_filter :time_limit, type: :string
-  ransack_filter :customer_price, type: :number
-  ransack_filter :duration, type: :number
-  ransack_filter :success, type: :boolean
-  ransack_filter :dst_prefix_in, type: :string
-  ransack_filter :src_prefix_in, type: :string
   ransack_filter :time_connect, type: :datetime
   ransack_filter :time_end, type: :datetime
-  ransack_filter :sign_orig_ip, type: :string
-  ransack_filter :sign_orig_port, type: :number
-  ransack_filter :sign_orig_local_ip, type: :string
-  ransack_filter :sign_orig_local_port, type: :number
-  ransack_filter :orig_call_id, type: :string
-  ransack_filter :local_tag, type: :string
+  ransack_filter :duration, type: :number
+  ransack_filter :success, type: :boolean
+
+  ransack_filter :destination_prefix, type: :string
   ransack_filter :destination_initial_rate, type: :number
+  ransack_filter :destination_next_rate, type: :number
+  ransack_filter :destination_fee, type: :number
   ransack_filter :destination_initial_interval, type: :number
   ransack_filter :destination_next_interval, type: :number
-  ransack_filter :lega_disconnect_code, type: :number
-  ransack_filter :lega_disconnect_reason, type: :string
+  ransack_filter :destination_reverse_billing, type: :boolean
+
+  ransack_filter :customer_acc_vat, type: :number
+  ransack_filter :customer_price, type: :number
+  ransack_filter :customer_price_no_vat, type: :number
+  ransack_filter :customer_duration, type: :number
+
+  ransack_filter :dst_prefix_in, type: :string
+  ransack_filter :src_prefix_in, type: :string
   ransack_filter :src_name_in, type: :string
-  ransack_filter :diversion_in, type: :string
-  ransack_filter :legb_disconnect_code, type: :number
-  ransack_filter :legb_disconnect_reason, type: :string
-  ransack_filter :auth_orig_ip, type: :inet
-  ransack_filter :auth_orig_port, type: :number
-  ransack_filter :global_tag, type: :string
   ransack_filter :src_prefix_routing, type: :string
   ransack_filter :dst_prefix_routing, type: :string
-  ransack_filter :destination_prefix, type: :string
+  ransack_filter :diversion_in, type: :string
+
+  ransack_filter :orig_call_id, type: :string
+  ransack_filter :local_tag, type: :string
+
+  ransack_filter :lega_disconnect_code, type: :number
+  ransack_filter :lega_disconnect_reason, type: :string
 
   ransack_filter :auth_orig_transport_protocol_id, type: :number
+  ransack_filter :auth_orig_ip, type: :inet
+  ransack_filter :auth_orig_port, type: :number
 
   ransack_filter :lega_user_agent, type: :string
-  ransack_filter :uuid, type: :uuid
+
   ransack_filter :pai_in, type: :string
   ransack_filter :ppi_in, type: :string
   ransack_filter :privacy_in, type: :string
   ransack_filter :rpid_in, type: :string
   ransack_filter :rpid_privacy_in, type: :string
 
-  ransack_filter :customer_acc_vat, type: :number
-  ransack_filter :customer_price_no_vat, type: :number
-  ransack_filter :customer_duration, type: :number
+  ransack_filter :ruri_domain, type: :string
+  ransack_filter :to_domain, type: :string
+  ransack_filter :from_domain, type: :string
 
   association_uuid_filter :account_id, column: :customer_acc_id, class_name: 'Account'
 
