@@ -20,7 +20,7 @@ RSpec.resource 'IncomingCdrs', document: :customer_v1 do
   get '/api/rest/customer/v1/incoming-cdrs' do
     jsonapi_filters Api::Rest::Customer::V1::IncomingCdrResource._allowed_filters
 
-    before { create_list(:cdr, 2, vendor_id: vendor.id, vendor_acc_id: vendor_acc.id) }
+    before { create_list(:cdr, 2, vendor_acc_id: vendor_acc.id) }
 
     example_request 'get listing' do
       expect(status).to eq(200)
@@ -28,7 +28,7 @@ RSpec.resource 'IncomingCdrs', document: :customer_v1 do
   end
 
   get '/api/rest/customer/v1/incoming-cdrs/:id' do
-    let(:id) { create(:cdr, vendor_id: vendor.id, vendor_acc_id: vendor_acc.id).uuid }
+    let(:id) { create(:cdr, vendor_acc_id: vendor_acc.id).uuid }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
@@ -36,7 +36,7 @@ RSpec.resource 'IncomingCdrs', document: :customer_v1 do
   end
 
   get '/api/rest/customer/v1/incoming-cdrs/:id/rec' do
-    let(:id) { create(:cdr, vendor_id: vendor.id, vendor_acc_id: vendor_acc.id, audio_recorded: true).uuid }
+    let(:id) { create(:cdr, vendor_acc_id: vendor_acc.id, audio_recorded: true).uuid }
 
     example_request 'get rec' do
       expect(status).to eq(200)

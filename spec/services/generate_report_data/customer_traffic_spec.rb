@@ -13,6 +13,9 @@ RSpec.describe GenerateReportData::CustomerTraffic do
   let!(:customer) do
     FactoryBot.create(:customer)
   end
+  let(:vendor) do
+    FactoryBot.create(:vendor)
+  end
   let!(:report) do
     FactoryBot.create(:customer_traffic, report_attrs)
   end
@@ -39,9 +42,9 @@ RSpec.describe GenerateReportData::CustomerTraffic do
 
   let!(:cdrs) do
     [
-      FactoryBot.create(:cdr, time_start: Time.parse('2019-02-15 00:00:00'), customer: customer),
-      FactoryBot.create(:cdr, time_start: Time.parse('2019-02-15 11:23:05'), customer: customer),
-      FactoryBot.create(:cdr, time_start: Time.parse('2019-02-15 23:59:59'), customer: customer)
+      FactoryBot.create(:cdr, vendor: vendor, time_start: Time.parse('2019-02-15 00:00:00'), customer: customer),
+      FactoryBot.create(:cdr, vendor: vendor, time_start: Time.parse('2019-02-15 11:23:05'), customer: customer),
+      FactoryBot.create(:cdr, vendor: vendor, time_start: Time.parse('2019-02-15 23:59:59'), customer: customer)
     ]
   end
 

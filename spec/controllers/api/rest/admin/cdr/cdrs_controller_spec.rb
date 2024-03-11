@@ -716,22 +716,28 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
               'data' => nil
             ),
             'vendor' => hash_including(
-              'data' => nil
+              'data' => {
+                'type' => 'contractors',
+                'id' => cdr.vendor_id.to_s
+              }
             ),
             'customer' => hash_including(
               'data' => {
                 'type' => 'contractors',
-                'id' => cdr.customer.id.to_s
+                'id' => cdr.customer_id.to_s
               }
             ),
             'customer-acc' => hash_including(
               'data' => {
                 'type' => 'accounts',
-                'id' => cdr.customer_acc.id.to_s
+                'id' => cdr.customer_acc_id.to_s
               }
             ),
             'vendor-acc' => hash_including(
-              'data' => nil
+              'data' => {
+                'type' => 'accounts',
+                'id' => cdr.vendor_acc_id.to_s
+              }
             ),
             'orig-gw' => hash_including(
               'data' => nil

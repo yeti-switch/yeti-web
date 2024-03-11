@@ -46,7 +46,7 @@ FactoryBot.define do
         record.customer_id = record.customer_acc.contractor_id
       end
 
-      # link Customer from associated Account
+      # link Vendor from associated Account
       unless record.vendor_id
         record.vendor_id = record.vendor_acc.contractor_id
       end
