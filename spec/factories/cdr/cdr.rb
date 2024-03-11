@@ -35,6 +35,7 @@ FactoryBot.define do
 
     # association :customer # customer_id
     association :customer_acc, factory: :account # customer_acc_id
+    association :vendor_acc, factory: :account
 
     before(:create) do |record, _evaluator|
       # Create partition for current+next monthes if not exists
@@ -43,6 +44,11 @@ FactoryBot.define do
       # link Customer from associated Account
       unless record.customer_id
         record.customer_id = record.customer_acc.contractor_id
+      end
+
+      # link Customer from associated Account
+      unless record.vendor_id
+        record.vendor_id = record.vendor_acc.contractor_id
       end
     end
 

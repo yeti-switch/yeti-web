@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::CdrsIncomingResource < Api::Rest::Customer::V1::BaseResource
+class Api::Rest::Customer::V1::IncomingCdrResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
 
   def self.default_sort
@@ -19,6 +19,7 @@ class Api::Rest::Customer::V1::CdrsIncomingResource < Api::Rest::Customer::V1::B
              :dialpeer_fee,
              :dialpeer_prefix,
              :vendor_price,
+             :vendor_duration,
              :src_name_out,
              :src_prefix_out,
              :dst_prefix_out,
@@ -37,10 +38,10 @@ class Api::Rest::Customer::V1::CdrsIncomingResource < Api::Rest::Customer::V1::B
 
   has_one :account, class_name: 'Account', relation_name: :vendor_acc, foreign_key_on: :related
 
+  ransack_filter :uuid, type: :uuid
   ransack_filter :time_start, type: :datetime
   ransack_filter :time_connect, type: :datetime
   ransack_filter :time_end, type: :datetime
-  ransack_filter :vendor_duration, type: :number
   ransack_filter :duration, type: :number
   ransack_filter :success, type: :boolean
 
@@ -52,10 +53,7 @@ class Api::Rest::Customer::V1::CdrsIncomingResource < Api::Rest::Customer::V1::B
   ransack_filter :dialpeer_reverse_billing, type: :boolean
   ransack_filter :dialpeer_prefix, type: :string
   ransack_filter :vendor_price, type: :number
-
-  ransack_filter :legb_disconnect_code, type: :number
-  ransack_filter :legb_disconnect_reason, type: :string
-  ransack_filter :disconnect_initiator_id, type: :number
+  ransack_filter :vendor_duration, type: :number
 
   ransack_filter :src_name_out, type: :string
   ransack_filter :dst_prefix_out, type: :string
@@ -64,11 +62,15 @@ class Api::Rest::Customer::V1::CdrsIncomingResource < Api::Rest::Customer::V1::B
   ransack_filter :dst_prefix_routing, type: :string
   ransack_filter :diversion_out, type: :string
 
+  ransack_filter :local_tag, type: :string
+  ransack_filter :legb_disconnect_code, type: :number
+  ransack_filter :legb_disconnect_reason, type: :string
+
   ransack_filter :sign_term_ip, type: :string
   ransack_filter :sign_term_port, type: :number
+  ransack_filter :sign_term_transport_protocol_id, type: :number
   ransack_filter :term_call_id, type: :string
-  ransack_filter :local_tag, type: :string
-  ransack_filter :uuid, type: :uuid
+  ransack_filter :legb_user_agent, type: :string
 
   association_uuid_filter :account_id, column: :vendor_acc_id, class_name: 'Account'
 

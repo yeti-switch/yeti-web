@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::CdrsIncomingController < Api::Rest::Customer::V1::BaseController
+class Api::Rest::Customer::V1::IncomingCdrsController < Api::Rest::Customer::V1::BaseController
   before_action :find_cdr, only: :rec
 
   def rec
@@ -17,7 +17,7 @@ class Api::Rest::Customer::V1::CdrsIncomingController < Api::Rest::Customer::V1:
   private
 
   def find_cdr
-    resource_klass = Api::Rest::Customer::V1::CdrsIncomingResource
+    resource_klass = Api::Rest::Customer::V1::IncomingCdrResource
     key = resource_klass.verify_key(params[:id], context)
     @cdr = resource_klass.find_by_key(key, context: context)._model
   rescue StandardError => e

@@ -177,7 +177,7 @@ Rails.application.routes.draw do
               jsonapi_relationships
               member { get :rec }
             end
-            jsonapi_resources :cdrs_incoming, only: %i[index show] do
+            jsonapi_resources :incoming_cdrs, only: %i[index show] do
               jsonapi_relationships
               member { get :rec }
             end
