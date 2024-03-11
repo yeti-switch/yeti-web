@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
-  include_context :json_api_customer_v1_helpers, type: :cdrs
+RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request do
+  include_context :json_api_customer_v1_helpers, type: :'incoming-cdrs'
 
   let(:account) { create(:account, contractor: customer) }
 
-  # CDR for the other customer, and not last CDR
+  # CDR for the other customer
   before do
     create_list(:cdr, 2)
-    create_list(:cdr, 2, customer_acc: account, is_last_cdr: false)
   end
 
-  describe 'GET /api/rest/customer/v1/cdrs' do
+  describe 'GET /api/rest/customer/v1/incoming-cdrs' do
     subject do
       get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers
     end
@@ -20,20 +19,20 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     it_behaves_like :json_api_customer_v1_check_authorization
 
     context 'account_ids is empty' do
-      let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
+      let(:cdrs) { Cdr::Cdr.where(vendor_id: customer.id) }
       let(:records_qty) { 2 }
 
-      before { create_list(:cdr, records_qty, customer_acc: account) }
+      before { create_list(:cdr, records_qty, vendor_acc: account) }
 
       it 'returns records of this customer' do
         subject
         expect(response.status).to eq(200)
         expect(response_json[:data]).to match_array(
-          [
-            hash_including(id: cdrs[0].uuid),
-            hash_including(id: cdrs[1].uuid)
-          ]
-        )
+                                          [
+                                            hash_including(id: cdrs[0].uuid),
+                                            hash_including(id: cdrs[1].uuid)
+                                          ]
+                                        )
       end
 
       it_behaves_like :json_api_check_pagination do
@@ -47,38 +46,38 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
 
       before do
         api_access.update!(account_ids: allowed_accounts.map(&:id))
-        create(:cdr, customer_acc: allowed_accounts[0])
-        create(:cdr, customer_acc: allowed_accounts[1])
+        create(:cdr, vendor_acc: allowed_accounts[0])
+        create(:cdr, vendor_acc: allowed_accounts[1])
       end
 
       let(:cdrs) do
-        Cdr::Cdr.where(customer_id: customer.id, customer_acc_id: allowed_accounts.map(&:id), is_last_cdr: true)
+        Cdr::Cdr.where(vendor_id: customer.id, vendor_acc_id: allowed_accounts.map(&:id), is_last_cdr: true)
       end
 
       it 'returns CDRs related to allowed_accounts' do
         subject
         expect(response_json[:data]).to match_array(
-          [
-            hash_including(id: cdrs[0].uuid),
-            hash_including(id: cdrs[1].uuid)
-          ]
-        )
+                                          [
+                                            hash_including(id: cdrs[0].uuid),
+                                            hash_including(id: cdrs[1].uuid)
+                                          ]
+                                        )
       end
     end
 
     context 'with filters by account' do
       let(:json_api_request_query) { { filter: request_filters } }
-      let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
+      let(:cdrs) { Cdr::Cdr.where(vendor_id: customer.id, is_last_cdr: true) }
 
-      before { create_list(:cdr, 2, customer_acc: account) }
+      before { create_list(:cdr, 2, vendor_acc: account) }
       let(:expected_record) do
-        create(:cdr, customer_acc: account, attr_name => attr_value)
+        create(:cdr, vendor_acc: account, attr_name => attr_value)
       end
 
       context 'account_id_eq' do
         let(:request_filters) { { account_id_eq: another_account.reload.uuid } }
         let!(:another_account) { create(:account, contractor: customer) }
-        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
 
         it 'response contains only one filtered record' do
           subject
@@ -89,7 +88,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       context 'account_id_not_eq' do
         let(:request_filters) { { account_id_not_eq: account.reload.uuid } }
         let!(:another_account) { create(:account, contractor: customer) }
-        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
 
         it 'response contains only one filtered record' do
           subject
@@ -101,7 +100,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         let(:request_filters) { { account_id_in: "#{another_account.reload.uuid},#{another_account2.reload.uuid}" } }
         let!(:another_account) { create(:account, contractor: customer) }
         let!(:another_account2) { create(:account, contractor: customer) }
-        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
 
         it 'response contains only one filtered record' do
           subject
@@ -113,7 +112,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         let(:request_filters) { { account_id_not_in: "#{account.reload.uuid},#{another_account2.reload.uuid}" } }
         let!(:another_account) { create(:account, contractor: customer) }
         let!(:another_account2) { create(:account, contractor: customer) }
-        let!(:expected_record) { create(:cdr, customer_acc: another_account) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
 
         it 'response contains only one filtered record' do
           subject
@@ -125,7 +124,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     context 'with ransack filters' do
       let(:factory) { :cdr }
       let(:trait) { :with_id_and_uuid }
-      let(:factory_attrs) { { customer: customer } }
+      let(:factory_attrs) { { vendor: customer } }
       let(:pk) { :uuid }
 
       it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
@@ -135,49 +134,34 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       it_behaves_like :jsonapi_filters_by_number_field, :duration
       it_behaves_like :jsonapi_filters_by_boolean_field, :success
 
-      it_behaves_like :jsonapi_filters_by_number_field, :lega_disconnect_code
-      it_behaves_like :jsonapi_filters_by_string_field, :lega_disconnect_reason
+      it_behaves_like :jsonapi_filters_by_number_field, :legb_disconnect_code
+      it_behaves_like :jsonapi_filters_by_string_field, :legb_disconnect_reason
 
-      it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_in
-      it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_in
-      it_behaves_like :jsonapi_filters_by_string_field, :src_name_in
+      it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_out
+      it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_out
+      it_behaves_like :jsonapi_filters_by_string_field, :src_name_out
       it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_routing
       it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_routing
-      it_behaves_like :jsonapi_filters_by_string_field, :diversion_in
-
-      it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_transport_protocol_id
-      it_behaves_like :jsonapi_filters_by_inet_field, :auth_orig_ip
-      it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_port
-      it_behaves_like :jsonapi_filters_by_string_field, :orig_call_id
+      it_behaves_like :jsonapi_filters_by_string_field, :diversion_out
 
       it_behaves_like :jsonapi_filters_by_string_field, :local_tag
-      it_behaves_like :jsonapi_filters_by_string_field, :destination_prefix
-      it_behaves_like :jsonapi_filters_by_number_field, :destination_initial_rate
-      it_behaves_like :jsonapi_filters_by_number_field, :destination_next_rate
-      it_behaves_like :jsonapi_filters_by_number_field, :destination_fee
-      it_behaves_like :jsonapi_filters_by_number_field, :destination_initial_interval
-      it_behaves_like :jsonapi_filters_by_number_field, :destination_next_interval
-      it_behaves_like :jsonapi_filters_by_boolean_field, :destination_reverse_billing
-      it_behaves_like :jsonapi_filters_by_number_field, :customer_acc_vat
-      it_behaves_like :jsonapi_filters_by_number_field, :customer_price
-      it_behaves_like :jsonapi_filters_by_number_field, :customer_price_no_vat
-      it_behaves_like :jsonapi_filters_by_number_field, :customer_duration
+      it_behaves_like :jsonapi_filters_by_string_field, :dialpeer_prefix
+      it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_initial_rate
+      it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_next_rate
+      it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_fee
+      it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_initial_interval
+      it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_next_interval
+      it_behaves_like :jsonapi_filters_by_boolean_field, :dialpeer_reverse_billing
+      it_behaves_like :jsonapi_filters_by_number_field, :vendor_price
+      it_behaves_like :jsonapi_filters_by_number_field, :vendor_duration
 
-      it_behaves_like :jsonapi_filters_by_string_field, :ruri_domain
-      it_behaves_like :jsonapi_filters_by_string_field, :to_domain
-      it_behaves_like :jsonapi_filters_by_string_field, :from_domain
-
-      it_behaves_like :jsonapi_filters_by_string_field, :pai_in
-      it_behaves_like :jsonapi_filters_by_string_field, :ppi_in
-      it_behaves_like :jsonapi_filters_by_string_field, :privacy_in
-      it_behaves_like :jsonapi_filters_by_string_field, :rpid_in
-      it_behaves_like :jsonapi_filters_by_string_field, :rpid_privacy_in
+      it_behaves_like :jsonapi_filters_by_string_field, :legb_user_agent
     end
 
     context 'with include account' do
       let!(:cdrs) do
-        create_list(:cdr, 2, customer_acc: account)
-        Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).to_a
+        create_list(:cdr, 2, vendor_acc: account)
+        Cdr::Cdr.where(vendor_id: customer.id).to_a
       end
       let(:json_api_request_query) do
         { include: 'account' }
@@ -188,11 +172,11 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         cdrs.each do |cdr|
           data = response_json[:data].detect { |item| item[:id] == cdr.uuid }
           expect(data[:relationships][:account][:data]).to eq(
-                                                             id: cdr.customer_acc.uuid,
+                                                             id: cdr.vendor_acc.uuid,
                                                              type: 'accounts'
                                                            )
         end
-        cdrs_accounts = cdrs.map(&:customer_acc).uniq
+        cdrs_accounts = cdrs.map(&:vendor_acc).uniq
         expect(response_json[:included]).to match_array(
                                               cdrs_accounts.map do |account|
                                                 hash_including(id: account.uuid, type: 'accounts')
@@ -207,43 +191,9 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         expect(actual_ids).to match_array cdrs.map(&:uuid)
       end
     end
-
-    context 'with include auth-orig-transport-protocol' do
-      let!(:cdrs) do
-        create_list(:cdr, 2, customer_acc: account)
-        Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).to_a
-      end
-      let(:json_api_request_query) do
-        { include: 'auth-orig-transport-protocol' }
-      end
-
-      it 'responds with included transport-protocols' do
-        subject
-        cdrs.each do |cdr|
-          data = response_json[:data].detect { |item| item[:id] == cdr.uuid }
-          expect(data[:relationships][:'auth-orig-transport-protocol'][:data]).to eq(
-                                                             id: cdr.auth_orig_transport_protocol.id.to_s,
-                                                             type: 'transport-protocols'
-                                                           )
-        end
-        cdrs_transport_protocols = cdrs.map(&:auth_orig_transport_protocol).uniq
-        expect(response_json[:included]).to match_array(
-                                              cdrs_transport_protocols.map do |transport_protocol|
-                                                hash_including(id: transport_protocol.id.to_s, type: 'transport-protocols')
-                                              end
-                                            )
-      end
-
-      it 'returns records of this customer' do
-        subject
-        expect(response.status).to eq(200)
-        actual_ids = response_json[:data].map { |data| data[:id] }
-        expect(actual_ids).to match_array cdrs.map(&:uuid)
-      end
-    end
   end
 
-  describe 'GET /api/rest/customer/v1/cdrs/{id}' do
+  describe 'GET /api/rest/customer/v1/incoming-cdrs/{id}' do
     subject do
       get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers
     end
@@ -253,72 +203,77 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     let(:json_api_request_query) { nil }
 
     let!(:cdr) { create(:cdr, :with_id, cdr_attrs).reload }
-    let(:cdr_attrs) { { customer_acc: account } }
+    let(:cdr_attrs) { { vendor_acc: account } }
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
     it 'returns record with expected attributes' do
       subject
       expect(response_json[:data]).to match(
-        id: cdr.uuid,
-        'type': 'cdrs',
-        'links': anything,
-        'relationships': {
-          'auth-orig-transport-protocol': {
-            'links': anything
-          },
-          account: {
-            'links': anything
-          }
-        },
-        'attributes': {
-          'time-start': cdr.time_start.as_json,
-          'time-connect': cdr.time_connect.as_json,
-          'time-end': cdr.time_end.as_json,
-          'duration': cdr.duration,
-          'success': cdr.success,
-          'destination-initial-interval': cdr.destination_initial_interval,
-          'destination-initial-rate': cdr.destination_initial_rate.as_json,
-          'destination-next-interval': cdr.destination_next_interval,
-          'destination-next-rate': cdr.destination_next_rate.as_json,
-          'destination-fee': cdr.destination_fee.as_json,
-          'customer-price': cdr.customer_price.as_json,
-          'customer-duration': cdr.customer_duration,
-          'src-name-in': cdr.src_name_in,
-          'src-prefix-in': cdr.src_prefix_in,
-          'from-domain': cdr.from_domain,
-          'dst-prefix-in': cdr.dst_prefix_in,
-          'to-domain': cdr.to_domain,
-          'ruri-domain': cdr.ruri_domain,
-          'diversion-in': cdr.diversion_in,
-          'local-tag': cdr.local_tag,
-          'orig-call-id': cdr.orig_call_id,
-          'lega-disconnect-code': cdr.lega_disconnect_code,
-          'lega-disconnect-reason': cdr.lega_disconnect_reason,
-          'auth-orig-transport-protocol-id': cdr.auth_orig_transport_protocol_id,
-          'auth-orig-ip': cdr.auth_orig_ip,
-          'auth-orig-port': cdr.auth_orig_port,
-          'src-prefix-routing': cdr.src_prefix_routing,
-          'dst-prefix-routing': cdr.dst_prefix_routing,
-          'destination-prefix': cdr.destination_prefix,
-          'lega-user-agent': cdr.lega_user_agent,
-          rec: false
-        }
-      )
+                                        id: cdr.uuid,
+                                        'type': 'incoming-cdrs',
+                                        'links': anything,
+                                        'relationships': {
+                                          account: {
+                                            'links': anything
+                                          }
+                                        },
+                                        'attributes': {
+                                          'time-start': cdr.time_start.as_json,
+                                          'time-connect': cdr.time_connect.as_json,
+                                          'time-end': cdr.time_end.as_json,
+                                          'duration': cdr.duration,
+                                          'success': cdr.success,
+                                          'dialpeer-prefix': cdr.dialpeer_prefix,
+                                          'dialpeer-initial-interval': cdr.dialpeer_initial_interval,
+                                          'dialpeer-initial-rate': cdr.dialpeer_initial_rate.as_json,
+                                          'dialpeer-next-interval': cdr.dialpeer_next_interval,
+                                          'dialpeer-next-rate': cdr.dialpeer_next_rate.as_json,
+                                          'dialpeer-fee': cdr.dialpeer_fee.as_json,
+                                          'vendor-price': cdr.vendor_price.as_json,
+                                          'vendor-duration': cdr.vendor_duration,
+                                          'src-name-out': cdr.src_name_out,
+                                          'src-prefix-out': cdr.src_prefix_out,
+                                          'dst-prefix-out': cdr.dst_prefix_out,
+                                          'diversion-out': cdr.diversion_out,
+                                          'local-tag': cdr.local_tag,
+                                          'legb-disconnect-code': cdr.legb_disconnect_code,
+                                          'legb-disconnect-reason': cdr.legb_disconnect_reason,
+                                          'src-prefix-routing': cdr.src_prefix_routing,
+                                          'dst-prefix-routing': cdr.dst_prefix_routing,
+                                          'legb-user-agent': cdr.legb_user_agent,
+                                          'sign-term-ip': cdr.sign_term_ip,
+                                          'sign-term-port': cdr.sign_term_port,
+                                          'sign-term-transport-protocol-id': cdr.sign_term_transport_protocol_id,
+                                          'term-call-id': cdr.term_call_id,
+                                          rec: false
+                                        }
+                                      )
     end
 
-    context 'with include auth-orig-transport-protocol' do
-      let(:json_api_request_query) { { include: 'auth-orig-transport-protocol' } }
+    context 'with include account' do
+      let(:json_api_request_query) { { include: 'account' } }
 
-      include_examples :returns_json_api_record_relationship, :'auth-orig-transport-protocol' do
+      include_examples :returns_json_api_record_relationship, :account do
         let(:json_api_relationship_data) do
-          { id: cdr.auth_orig_transport_protocol_id.to_s, type: 'transport-protocols' }
+          { id: cdr.vendor_acc.uuid, type: 'accounts' }
         end
       end
 
-      include_examples :returns_json_api_record_include, type: :'transport-protocols' do
-        let(:json_api_include_id) { cdr.auth_orig_transport_protocol_id.to_s }
-        let(:json_api_include_attributes) { { 'name': cdr.auth_orig_transport_protocol.name } }
+      include_examples :returns_json_api_record_include, type: :accounts do
+        let(:json_api_include_id) { cdr.vendor_acc.uuid }
+        let(:json_api_include_attributes) {
+          {
+            'name': cdr.vendor_acc.name,
+            'balance': cdr.vendor_acc.balance.to_s,
+            'max-balance': cdr.vendor_acc.max_balance.to_s,
+            'min-balance': cdr.vendor_acc.min_balance.to_s,
+            'destination-rate-limit': cdr.vendor_acc.destination_rate_limit.to_s,
+            'origination-capacity': cdr.vendor_acc.origination_capacity,
+            'termination-capacity': cdr.vendor_acc.termination_capacity,
+            'total-capacity': cdr.vendor_acc.total_capacity
+          }
+        }
         let(:json_api_include_relationships_names) { nil }
       end
     end
@@ -436,7 +391,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     end
   end
 
-  describe 'GET /api/rest/customer/v1/cdrs/:id/rec' do
+  describe 'GET /api/rest/customer/v1/incoming-cdrs/:id/rec' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
@@ -458,7 +413,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
     let(:record_id) { cdr.uuid }
     let!(:cdr) { create(:cdr, :with_id, cdr_attrs).reload }
     let(:cdr_attrs) do
-      { customer_acc: account, audio_recorded: true, local_tag: SecureRandom.uuid, duration: 12 }
+      { vendor_acc: account, audio_recorded: true, local_tag: SecureRandom.uuid, duration: 12 }
     end
 
     it 'responds with X-Accel-Redirect' do
