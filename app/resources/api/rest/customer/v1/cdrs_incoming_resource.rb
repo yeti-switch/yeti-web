@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Customer::V1::CdrIncomingResource < Api::Rest::Customer::V1::BaseResource
+class Api::Rest::Customer::V1::CdrsIncomingResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
 
   def self.default_sort
@@ -44,7 +44,6 @@ class Api::Rest::Customer::V1::CdrIncomingResource < Api::Rest::Customer::V1::Ba
   ransack_filter :duration, type: :number
   ransack_filter :success, type: :boolean
 
-  
   ransack_filter :dialpeer_initial_rate, type: :number
   ransack_filter :dialpeer_next_rate, type: :number
   ransack_filter :dialpeer_initial_interval, type: :number

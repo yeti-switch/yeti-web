@@ -18,7 +18,7 @@ RSpec.resource 'CdrsIncoming', document: :customer_v1 do
   end
 
   get '/api/rest/customer/v1/cdrs-incoming' do
-    jsonapi_filters Api::Rest::Customer::V1::CdrIncomingResource._allowed_filters
+    jsonapi_filters Api::Rest::Customer::V1::CdrsIncomingResource._allowed_filters
 
     before { create_list(:cdr, 2, vendor_id: vendor.id, vendor_acc_id: vendor_acc.id) }
 

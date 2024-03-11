@@ -177,6 +177,10 @@ Rails.application.routes.draw do
               jsonapi_relationships
               member { get :rec }
             end
+            jsonapi_resources :cdrs_incoming, only: %i[index show] do
+              jsonapi_relationships
+              member { get :rec }
+            end
             jsonapi_resources :networks, only: %i[index show]
             jsonapi_resources :network_types, only: %i[index show]
             jsonapi_resources :network_prefixes, only: %i[index show]

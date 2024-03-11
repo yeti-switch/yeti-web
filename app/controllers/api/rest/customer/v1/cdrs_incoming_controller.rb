@@ -17,7 +17,7 @@ class Api::Rest::Customer::V1::CdrsIncomingController < Api::Rest::Customer::V1:
   private
 
   def find_cdr
-    resource_klass = Api::Rest::Customer::V1::CdrIncomingResource
+    resource_klass = Api::Rest::Customer::V1::CdrsIncomingResource
     key = resource_klass.verify_key(params[:id], context)
     @cdr = resource_klass.find_by_key(key, context: context)._model
   rescue StandardError => e
