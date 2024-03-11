@@ -36,7 +36,6 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :destination_prefix,
              :lega_user_agent,
              :rec
-  :rec
 
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
   has_one :account, class_name: 'Account', relation_name: :customer_acc, foreign_key_on: :related
