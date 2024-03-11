@@ -274,8 +274,8 @@ class Cdr::Cdr < Cdr::Base
 
   scope :account_id_eq, ->(account_id) { where('vendor_acc_id =? OR customer_acc_id =?', account_id, account_id) }
 
-  scope :where_customer, ->(id) { where(customer_id: id) }
-  scope :where_account, ->(id) { where(customer_acc_id: id) } # OR vendor_acc_id ???
+  scope :where_customer, ->(id) { where(customer_id: id, is_last_cdr: true) }
+  scope :where_customer_account, ->(id) { where(customer_acc_id: id, is_last_cdr: true) }
   scope :where_vendor, ->(id) { where(vendor_id: id) }
   scope :where_vendor_account, ->(id) { where(vendor_acc_id: id) }
 

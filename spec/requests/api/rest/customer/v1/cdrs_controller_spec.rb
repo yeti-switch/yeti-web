@@ -66,7 +66,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       end
     end
 
-    context 'with filters' do
+    context 'with filters by account' do
       let(:json_api_request_query) { { filter: request_filters } }
       let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
 
@@ -118,99 +118,6 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         it 'response contains only one filtered record' do
           subject
           expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
-        end
-      end
-
-      context 'time_start_gteq and time_start_lteq' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :time_start }
-          let(:attr_value) { 25.seconds.ago.utc }
-          let(:request_filters) do
-            { time_start_gteq: attr_value - 10.seconds, time_start_lteq: attr_value + 10.seconds }
-          end
-        end
-      end
-
-      context 'success' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :success }
-          let(:attr_value) { false }
-        end
-      end
-
-      context 'src_prefix_routing' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :src_prefix_routing }
-        end
-      end
-
-      context 'dst_prefix_routing' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :dst_prefix_routing }
-        end
-      end
-
-      context 'duration' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :duration }
-          let(:attr_value) { 10 }
-        end
-      end
-
-      context 'lega_disconnect_code' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :lega_disconnect_code }
-          let(:attr_value) { 505 }
-        end
-      end
-
-      context 'lega_disconnect_reason' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :lega_disconnect_reason }
-        end
-      end
-
-      context 'src_prefix_in' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :src_prefix_in }
-        end
-      end
-
-      context 'dst_prefix_in' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :dst_prefix_in }
-        end
-      end
-
-      context 'diversion_in' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :diversion_in }
-        end
-      end
-
-      context 'src_name_in' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :src_name_in }
-        end
-      end
-
-      context 'local_tag' do
-        include_examples :jsonapi_request_with_filter do
-          let(:attr_name) { :local_tag }
-        end
-      end
-
-      context 'is_last_cdr false' do
-        let(:request_filters) { { is_last_cdr: false } }
-        let!(:expected_record) { create(:cdr, customer_acc: account, is_last_cdr: false) }
-
-        it 'response contains only one filtered record' do
-          subject
-          expect(response_json[:data]).to match_array(
-            Cdr::Cdr.where(is_last_cdr: false).map do |r|
-              hash_including(id: r.uuid)
-            end
-          )
         end
       end
     end
@@ -376,6 +283,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
           'destination-next-rate': cdr.destination_next_rate.as_json,
           'destination-fee': cdr.destination_fee.as_json,
           'customer-price': cdr.customer_price.as_json,
+          'customer-duration': cdr.customer_duration,
           'src-name-in': cdr.src_name_in,
           'src-prefix-in': cdr.src_prefix_in,
           'from-domain': cdr.from_domain,
@@ -384,6 +292,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
           'ruri-domain': cdr.ruri_domain,
           'diversion-in': cdr.diversion_in,
           'local-tag': cdr.local_tag,
+          'orig-call-id': cdr.orig_call_id,
           'lega-disconnect-code': cdr.lega_disconnect_code,
           'lega-disconnect-reason': cdr.lega_disconnect_reason,
           'auth-orig-transport-protocol-id': cdr.auth_orig_transport_protocol_id,

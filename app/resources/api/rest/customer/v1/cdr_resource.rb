@@ -18,6 +18,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :destination_next_rate,
              :destination_fee,
              :customer_price,
+             :customer_duration,
              :src_name_in,
              :src_prefix_in,
              :from_domain,
@@ -34,17 +35,12 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
              :src_prefix_routing,
              :dst_prefix_routing,
              :destination_prefix,
+             :orig_call_id,
              :lega_user_agent,
              :rec
 
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
   has_one :account, class_name: 'Account', relation_name: :customer_acc, foreign_key_on: :related
-
-  filter :is_last_cdr, default: true
-
-  filters :success, :src_prefix_routing, :dst_prefix_routing, :duration,
-          :lega_disconnect_code, :lega_disconnect_reason, :src_prefix_in,
-          :dst_prefix_in, :diversion_in, :src_name_in, :local_tag
 
   ransack_filter :uuid, type: :uuid
   ransack_filter :time_start, type: :datetime
@@ -106,7 +102,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   def self.apply_allowed_accounts(records, options)
     context = options[:context]
     scope = records.where_customer(context[:customer_id])
-    scope = scope.where_account(context[:allowed_account_ids]) if context[:allowed_account_ids].present?
+    scope = scope.where_customer_account(context[:allowed_account_ids]) if context[:allowed_account_ids].present?
     scope
   end
 end

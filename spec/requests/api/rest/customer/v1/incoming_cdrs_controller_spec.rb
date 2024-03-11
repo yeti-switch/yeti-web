@@ -65,6 +65,62 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       end
     end
 
+    context 'with filters by account' do
+      let(:json_api_request_query) { { filter: request_filters } }
+      let(:cdrs) { Cdr::Cdr.where(vendor_id: customer.id, is_last_cdr: true) }
+
+      before { create_list(:cdr, 2, vendor_acc: account) }
+      let(:expected_record) do
+        create(:cdr, vendor_acc: account, attr_name => attr_value)
+      end
+
+      context 'account_id_eq' do
+        let(:request_filters) { { account_id_eq: another_account.reload.uuid } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
+      context 'account_id_not_eq' do
+        let(:request_filters) { { account_id_not_eq: account.reload.uuid } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
+      context 'account_id_in' do
+        let(:request_filters) { { account_id_in: "#{another_account.reload.uuid},#{another_account2.reload.uuid}" } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:another_account2) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+
+      context 'account_id_not_in' do
+        let(:request_filters) { { account_id_not_in: "#{account.reload.uuid},#{another_account2.reload.uuid}" } }
+        let!(:another_account) { create(:account, contractor: customer) }
+        let!(:another_account2) { create(:account, contractor: customer) }
+        let!(:expected_record) { create(:cdr, vendor_acc: another_account) }
+
+        it 'response contains only one filtered record' do
+          subject
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+        end
+      end
+    end
+
     context 'with ransack filters' do
       let(:factory) { :cdr }
       let(:trait) { :with_id_and_uuid }
@@ -87,11 +143,6 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_routing
       it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_routing
       it_behaves_like :jsonapi_filters_by_string_field, :diversion_out
-
-      #      it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_transport_protocol_id
-      # it_behaves_like :jsonapi_filters_by_inet_field, :auth_orig_ip
-      # it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_port
-      # it_behaves_like :jsonapi_filters_by_string_field, :orig_call_id
 
       it_behaves_like :jsonapi_filters_by_string_field, :local_tag
       it_behaves_like :jsonapi_filters_by_string_field, :dialpeer_prefix
