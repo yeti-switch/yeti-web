@@ -175,6 +175,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     raise ActiveRecord::RecordNotFound if file.blank?
 
     response.headers['X-Accel-Redirect'] = file
+    response.headers['Content-Type'] = 'audio/mpeg'
     head 200
   end
 
