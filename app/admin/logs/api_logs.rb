@@ -10,8 +10,8 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   scope :failed, show_count: false
 
   with_default_params do
-    params[:q] = { created_at_gteq_datetime_picker: 1.day.ago } # only 1 last days by default
-    'Only records for last day are displayed by default'
+    params[:q] = { created_at_gteq_datetime_picker: 0.days.ago.beginning_of_day } # only 1 last days by default
+    'Only records from beginning of the day showed by default'
   end
 
   controller do
@@ -24,6 +24,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
     end
   end
 
+  filter :id
   filter :created_at, as: :date_time_range
   filter :path
   filter :method
