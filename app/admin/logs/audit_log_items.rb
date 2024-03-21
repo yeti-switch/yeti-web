@@ -5,17 +5,18 @@ ActiveAdmin.register AuditLogItem do
   config.batch_actions = false
   actions :index, :show
 
+  filter :id
+  filter :created_at, as: :date_time_range
   filter :item_type, input_html: { class: 'chosen' }
   filter :item_id_eq
   filter :event, as: :select, collection: [%w[create create], %w[destroy destroy], %w[update update]]
   filter :whodunnit
-  filter :created_at, as: :date_time_range
   filter :ip
   filter :txid
 
   with_default_params do
-    params[:q] = { created_at_gteq: 0.days.ago.beginning_of_day }
-    'Only records started from beginning of the day showed by default'
+    params[:q] = { created_at_gteq_datetime_picker: 0.days.ago.beginning_of_day } # only 1 last days by default
+    'Only records from beginning of the day showed by default'
   end
 
   controller do
