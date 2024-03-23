@@ -27,6 +27,7 @@ RSpec.shared_context :ransack_filter_setup do
     response_data.map { |r| r['id'] }
   end
   let(:json_api_request_query) do
-    { filter: { filter_key => filter_value } }
+    current = super() || {}
+    current.deep_merge(filter: { filter_key => filter_value })
   end
 end

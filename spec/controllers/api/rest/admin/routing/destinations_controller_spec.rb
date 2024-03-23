@@ -105,6 +105,7 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
       get :index, params: json_api_request_query
     end
     before { create_list :destination, 2 }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filter_by_external_id do
       let(:subject_record) { create(:destination) }
@@ -152,6 +153,7 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
       get :index, params: json_api_request_query
     end
     let(:factory) { :destination }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
     it_behaves_like :jsonapi_filters_by_string_field, :prefix

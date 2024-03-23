@@ -24,6 +24,7 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
       get :index, params: json_api_request_query
     end
     before { create_list :contractor, 2, vendor: true }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filter_by_name do
       let(:subject_record) { create(:contractor, vendor: true) }
@@ -35,6 +36,7 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
       get :index, params: json_api_request_query
     end
     let(:factory) { :vendor }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled

@@ -20,6 +20,7 @@ RSpec.describe Api::Rest::Admin::Routing::AreasController, type: :controller do
       get :index, params: json_api_request_query
     end
     let(:factory) { :area }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
   end

@@ -93,6 +93,7 @@ RSpec.describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
     end
     let(:factory) { :auth_log }
     let(:trait) { :with_id }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_datetime_field, :request_time
     it_behaves_like :jsonapi_filters_by_boolean_field, :success, type: :boolean

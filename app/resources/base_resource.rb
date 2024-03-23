@@ -50,15 +50,22 @@ class BaseResource < JSONAPI::Resource
   #   @see RansackFilterBuilder::RANSACK_TYPE_SUFIXES_DIC
   # @param column [Symbol]
   # @param verify [Proc, nil] custom validate/change values (receives [Array<String>] values)
-  def self.ransack_filter(attr, type:, column: nil, verify: nil, collection: nil)
+  def self.ransack_filter(attr, type:, column: nil, verify: nil, collection: nil, default: nil)
     raise ArgumentError, "type #{type} is not supported" unless RansackFilterBuilder.type_supported?(type)
     raise ArgumentError, ":collection option for type #{type} is not supported" if collection && type != :enum
 
-    RansackFilterBuilder.suffixes_for_type(type).each do |suf|
+    suffixes = RansackFilterBuilder.suffixes_for_type(type)
+    if default
+      wrong_suffixes = default.keys - suffixes.map(&:to_sym)
+      raise ArgumentError, "ransack_filter :#{attr} has wrong default suffixes: #{wrong_suffixes.join(', ')}" if wrong_suffixes.any?
+    end
+    suffixes.each do |suf|
       builder = RansackFilterBuilder.new(attr: attr, operator: suf, column: column, verify: verify, collection: collection)
       filter builder.filter_name,
              verify: ->(values, _ctx) { builder.verify(values) },
-             apply: ->(records, values, _opts) { builder.apply(records, values) }
+             apply: ->(records, values, _opts) { builder.apply(records, values) },
+             # see JsonapiRequestParserPatch#set_default_filters
+             default: default&.fetch(suf.to_sym, nil)
     end
   end
 

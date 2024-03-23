@@ -24,6 +24,7 @@ RSpec.describe Api::Rest::Admin::Routing::RateplansController, type: :controller
       get :index, params: json_api_request_query
     end
     before { create_list :rateplan, 2 }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filter_by_name do
       let(:subject_record) { create :rateplan }
@@ -35,6 +36,7 @@ RSpec.describe Api::Rest::Admin::Routing::RateplansController, type: :controller
       get :index, params: json_api_request_query
     end
     let(:factory) { :rateplan }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
   end

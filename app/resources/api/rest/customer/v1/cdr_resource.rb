@@ -43,7 +43,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   has_one :account, class_name: 'Account', relation_name: :customer_acc, foreign_key_on: :related
 
   ransack_filter :uuid, type: :uuid
-  ransack_filter :time_start, type: :datetime
+  ransack_filter :time_start, type: :datetime, default: { gteq: :apply_default_filter_time_start_gteq }
   ransack_filter :time_connect, type: :datetime
   ransack_filter :time_end, type: :datetime
   ransack_filter :duration, type: :number
@@ -104,5 +104,12 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
     scope = records.where_customer(context[:customer_id])
     scope = scope.where_customer_account(context[:allowed_account_ids]) if context[:allowed_account_ids].present?
     scope
+  end
+
+  def self.apply_default_filter_time_start_gteq(options)
+    return nil if options.dig(:params, :filter, :time_start_gt).present?
+    return nil if options.dig(:params, :filter, :time_start_eq).present?
+
+    24.hours.ago.strftime('%F %T')
   end
 end

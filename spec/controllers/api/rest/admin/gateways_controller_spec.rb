@@ -9,6 +9,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     end
     let(:factory) { :gateway }
     let(:trait) { :with_incoming_auth }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :host
     it_behaves_like :jsonapi_filters_by_number_field, :port

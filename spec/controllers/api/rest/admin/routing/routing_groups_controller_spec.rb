@@ -24,6 +24,7 @@ RSpec.describe Api::Rest::Admin::Routing::RoutingGroupsController, type: :contro
       get :index, params: json_api_request_query
     end
     before { create_list(:routing_group, 2) }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filter_by_name do
       let(:subject_record) { create(:routing_group) }

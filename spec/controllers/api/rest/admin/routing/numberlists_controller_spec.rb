@@ -8,6 +8,7 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistsController, type: :controll
       get :index, params: json_api_request_query
     end
     let(:factory) { :numberlist }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
     it_behaves_like :jsonapi_filters_by_number_field, :default_action_id
