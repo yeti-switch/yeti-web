@@ -21,6 +21,7 @@ RSpec.describe Api::Rest::Admin::Routing::NumberlistItemsController, type: :cont
       get :index, params: json_api_request_query
     end
     let(:factory) { :numberlist_item }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :key
     it_behaves_like :jsonapi_filters_by_number_field, :action_id

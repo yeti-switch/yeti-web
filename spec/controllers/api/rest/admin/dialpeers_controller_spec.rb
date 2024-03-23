@@ -19,6 +19,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
       get :index, params: json_api_request_query
     end
     before { create_list :dialpeer, 2 }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filter_by_external_id do
       let(:subject_record) { create :dialpeer }
@@ -46,6 +47,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
       get :index, params: json_api_request_query
     end
     let(:factory) { :dialpeer }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
     it_behaves_like :jsonapi_filters_by_number_field, :next_rate

@@ -19,6 +19,91 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
+    context 'with default filters (time_start_gteq)' do
+      let!(:cdrs) do
+        [
+          create(:cdr, customer_acc: account),
+          create(:cdr, customer_acc: account, time_start: 23.hours.ago)
+        ]
+      end
+
+      before do
+        # ignored because default filter is time_start_gteq: 24.hours.ago
+        create(:cdr, customer_acc: account, time_start: 25.hours.ago)
+        create(:cdr, customer_acc: account, time_start: 35.hours.ago)
+
+        # ignored because base collection has only records with is_last_cdr=true
+        create(:cdr, customer_acc: account, is_last_cdr: false)
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].pluck(:id)
+        expect(actual_ids).to match_array(cdrs.map(&:uuid))
+      end
+    end
+
+    context 'with time_start_gteq filter' do
+      let(:json_api_request_query) do
+        { filter: { time_start_gteq: 48.hours.ago.strftime('%F %T') } }
+      end
+      let!(:cdrs) do
+        [
+          create(:cdr, customer_acc: account),
+          create(:cdr, customer_acc: account, time_start: 23.hours.ago),
+          # included in collection because passed filter time_start_gteq overrides default filter time_start_gteq
+          create(:cdr, customer_acc: account, time_start: 47.hours.ago)
+        ]
+      end
+
+      before do
+        # ignored because passed filter is time_start_gteq: 48.hours.ago
+        create(:cdr, customer_acc: account, time_start: 49.hours.ago)
+        create(:cdr, customer_acc: account, time_start: 100.days.ago)
+
+        # ignored because base collection has only records with is_last_cdr=true
+        create(:cdr, customer_acc: account, is_last_cdr: false)
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].pluck(:id)
+        expect(actual_ids).to match_array(cdrs.map(&:uuid))
+      end
+    end
+
+    context 'with time_start_gt filter' do
+      let(:json_api_request_query) do
+        { filter: { time_start_gt: 48.hours.ago.strftime('%F %T') } }
+      end
+      let!(:cdrs) do
+        [
+          create(:cdr, customer_acc: account),
+          create(:cdr, customer_acc: account, time_start: 23.hours.ago),
+          # included in collection because default filter time_start_gteq skipped when filter time_start_gt passed
+          create(:cdr, customer_acc: account, time_start: 47.hours.ago)
+        ]
+      end
+
+      before do
+        # ignored because passed filter is time_start_gteq: 48.hours.ago
+        create(:cdr, customer_acc: account, time_start: 49.hours.ago)
+        create(:cdr, customer_acc: account, time_start: 100.days.ago)
+
+        # ignored because base collection has only records with is_last_cdr=true
+        create(:cdr, customer_acc: account, is_last_cdr: false)
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].pluck(:id)
+        expect(actual_ids).to match_array(cdrs.map(&:uuid))
+      end
+    end
+
     context 'account_ids is empty' do
       let(:cdrs) { Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true) }
       let(:records_qty) { 2 }
@@ -129,7 +214,12 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       let(:pk) { :uuid }
 
       it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
-      it_behaves_like :jsonapi_filters_by_datetime_field, :time_start
+      it_behaves_like :jsonapi_filters_by_datetime_field, :time_start do
+        # overrides default filter to avoid conflicts with tests
+        let(:json_api_request_query) do
+          { filter: { time_start_gteq: 50.days.ago.strftime('%F %T') } }
+        end
+      end
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_connect
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_end
       it_behaves_like :jsonapi_filters_by_number_field, :duration

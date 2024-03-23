@@ -9,6 +9,7 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationNextRatesController, type: 
     end
 
     let(:factory) { :destination_next_rate }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_number_field, :initial_rate
     it_behaves_like :jsonapi_filters_by_number_field, :next_rate

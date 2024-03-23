@@ -24,6 +24,7 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
       get :index, params: json_api_request_query
     end
     before { create_list :account, 2 }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filter_by_name do
       let(:subject_record) { create(:account) }
@@ -36,6 +37,7 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
     end
     let(:factory) { :account }
     let(:trait) { :with_max_balance }
+    let(:json_api_request_query) { nil }
 
     it_behaves_like :jsonapi_filters_by_string_field, :name
     it_behaves_like :jsonapi_filters_by_number_field, :balance
