@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Fetching gems cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -26,7 +26,7 @@ jobs:
       - name: install gems for pgq
         run: make pgq-processors-gems
       - name: Caching gems
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -42,9 +42,9 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -65,9 +65,9 @@ jobs:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:16
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -87,7 +87,7 @@ jobs:
 
       - name: Save artifacts
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: database_consistency-artifacts
           if-no-files-found: ignore
@@ -100,9 +100,9 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -125,9 +125,9 @@ jobs:
 
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -165,9 +165,9 @@ jobs:
         ci_node_index: [0, 1, 2, 3, 4, 5]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -189,7 +189,7 @@ jobs:
 
       - name: Save artifacts
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: rspec-artifacts-${{matrix.ci_node_index}}
           if-no-files-found: ignore
@@ -205,9 +205,9 @@ jobs:
       - gems-caching
       - rspec
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             vendor
@@ -217,7 +217,7 @@ jobs:
             /opt/yeti-web/vendor/rbenv
           key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Download Coverage Outputs
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: coverage
 
