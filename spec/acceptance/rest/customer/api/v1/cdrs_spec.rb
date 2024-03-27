@@ -33,7 +33,7 @@ RSpec.resource 'Cdrs', document: :customer_v1 do
   end
 
   get '/api/rest/customer/v1/cdrs/:id' do
-    let(:id) { create(:cdr, customer_acc: customers_auth.account).uuid }
+    let(:id) { create(:cdr, customer_acc: customers_auth.account).id.to_s }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
@@ -41,7 +41,7 @@ RSpec.resource 'Cdrs', document: :customer_v1 do
   end
 
   get '/api/rest/customer/v1/cdrs/:id/rec' do
-    let(:id) { create(:cdr, customer_acc: customers_auth.account, audio_recorded: true).uuid }
+    let(:id) { create(:cdr, customer_acc: customers_auth.account, audio_recorded: true).id.to_s }
 
     example_request 'get rec' do
       expect(status).to eq(200)
