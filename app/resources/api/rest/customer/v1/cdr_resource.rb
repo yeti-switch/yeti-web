@@ -3,6 +3,9 @@
 class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
 
+  key_type :integer
+  primary_key :id
+
   def self.default_sort
     [{ field: 'time_start', direction: :desc }]
   end
@@ -42,7 +45,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   has_one :auth_orig_transport_protocol, class_name: 'TransportProtocol'
   has_one :account, class_name: 'Account', relation_name: :customer_acc, foreign_key_on: :related
 
-  ransack_filter :uuid, type: :uuid
+  ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime, default: { gteq: :apply_default_filter_time_start_gteq }
   ransack_filter :time_connect, type: :datetime
   ransack_filter :time_end, type: :datetime
