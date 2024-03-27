@@ -3,6 +3,9 @@
 class Api::Rest::Customer::V1::IncomingCdrResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
 
+  key_type :integer
+  primary_key :id
+
   def self.default_sort
     [{ field: 'time_start', direction: :desc }]
   end
@@ -38,7 +41,7 @@ class Api::Rest::Customer::V1::IncomingCdrResource < Api::Rest::Customer::V1::Ba
 
   has_one :account, class_name: 'Account', relation_name: :vendor_acc, foreign_key_on: :related
 
-  ransack_filter :uuid, type: :uuid
+  ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
   ransack_filter :time_connect, type: :datetime
   ransack_filter :time_end, type: :datetime
