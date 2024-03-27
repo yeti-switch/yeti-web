@@ -4562,13 +4562,6 @@ CREATE INDEX cdr_time_start_idx ON ONLY cdr.cdr USING btree (time_start);
 
 
 --
--- Name: cdr_uuid_idx; Type: INDEX; Schema: cdr; Owner: -
---
-
-CREATE INDEX cdr_uuid_idx ON ONLY cdr.cdr USING btree (uuid);
-
-
---
 -- Name: cdr_vendor_id_time_start_idx; Type: INDEX; Schema: cdr; Owner: -
 --
 
@@ -4874,7 +4867,6 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231106125344'),
 ('20231212213111'),
 ('20231231115209'),
-('20240122201619'),
-('20240327101546');
+('20240122201619');
 
 

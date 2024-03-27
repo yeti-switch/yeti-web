@@ -154,7 +154,6 @@
 #  cdr_customer_id_time_start_idx               (customer_id,time_start)
 #  cdr_id_idx                                   (id)
 #  cdr_time_start_idx                           (time_start)
-#  cdr_uuid_idx                                 (uuid)
 #  cdr_vendor_id_time_start_idx                 (vendor_id,time_start)
 #
 

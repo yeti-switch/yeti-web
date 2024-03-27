@@ -29,14 +29,14 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
         expect(response.status).to eq(200)
         expect(response_json[:data]).to match_array(
                                           [
-                                            hash_including(id: cdrs[0].uuid),
-                                            hash_including(id: cdrs[1].uuid)
+                                            hash_including(id: cdrs[0].id.to_s),
+                                            hash_including(id: cdrs[1].id.to_s)
                                           ]
                                         )
       end
 
       it_behaves_like :json_api_check_pagination do
-        let(:records_ids) { cdrs.order(time_start: :desc).map(&:uuid) }
+        let(:records_ids) { cdrs.order(time_start: :desc).map { |c| c.id.to_s } }
       end
     end
 
@@ -58,8 +58,8 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
         subject
         expect(response_json[:data]).to match_array(
                                           [
-                                            hash_including(id: cdrs[0].uuid),
-                                            hash_including(id: cdrs[1].uuid)
+                                            hash_including(id: cdrs[0].id.to_s),
+                                            hash_including(id: cdrs[1].id.to_s)
                                           ]
                                         )
       end
@@ -81,7 +81,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
 
         it 'response contains only one filtered record' do
           subject
-          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.id.to_s)])
         end
       end
 
@@ -92,7 +92,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
 
         it 'response contains only one filtered record' do
           subject
-          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.id.to_s)])
         end
       end
 
@@ -104,7 +104,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
 
         it 'response contains only one filtered record' do
           subject
-          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.id.to_s)])
         end
       end
 
@@ -116,7 +116,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
 
         it 'response contains only one filtered record' do
           subject
-          expect(response_json[:data]).to match_array([hash_including(id: expected_record.uuid)])
+          expect(response_json[:data]).to match_array([hash_including(id: expected_record.id.to_s)])
         end
       end
     end
@@ -125,9 +125,9 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       let(:factory) { :cdr }
       let(:trait) { :with_id_and_uuid }
       let(:factory_attrs) { { vendor: customer } }
-      let(:pk) { :uuid }
+      let(:pk) { :id }
 
-      it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
+      it_behaves_like :jsonapi_filters_by_number_field, :id
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_start
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_connect
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_end
@@ -170,7 +170,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       it 'responds with included accounts' do
         subject
         cdrs.each do |cdr|
-          data = response_json[:data].detect { |item| item[:id] == cdr.uuid }
+          data = response_json[:data].detect { |item| item[:id] == cdr.id.to_s }
           expect(data[:relationships][:account][:data]).to eq(
                                                              id: cdr.vendor_acc.uuid,
                                                              type: 'accounts'
@@ -188,7 +188,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
         subject
         expect(response.status).to eq(200)
         actual_ids = response_json[:data].map { |data| data[:id] }
-        expect(actual_ids).to match_array cdrs.map(&:uuid)
+        expect(actual_ids).to match_array cdrs.map { |c| c.id.to_s }
       end
     end
   end
@@ -199,7 +199,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
     end
 
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
-    let(:record_id) { cdr.uuid }
+    let(:record_id) { cdr.id }
     let(:json_api_request_query) { nil }
 
     let!(:cdr) { create(:cdr, :with_id, cdr_attrs).reload }
@@ -210,7 +210,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
     it 'returns record with expected attributes' do
       subject
       expect(response_json[:data]).to match(
-                                        id: cdr.uuid,
+                                        id: cdr.id.to_s,
                                         'type': 'incoming-cdrs',
                                         'links': anything,
                                         'relationships': {
@@ -410,7 +410,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
 
     let(:allow_listen_recording) { true }
     let(:json_api_request_path) { "#{super()}/#{record_id}/rec" }
-    let(:record_id) { cdr.uuid }
+    let(:record_id) { cdr.id }
     let!(:cdr) { create(:cdr, :with_id, cdr_attrs).reload }
     let(:cdr_attrs) do
       { vendor_acc: account, audio_recorded: true, local_tag: SecureRandom.uuid, duration: 12 }
@@ -454,7 +454,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
     end
 
     context 'with invalid ID' do
-      let(:record_id) { SecureRandom.uuid }
+      let(:record_id) { -1000 }
 
       include_examples :returns_json_api_errors, status: 404, errors: {
         title: 'Record not found'
