@@ -31,6 +31,8 @@ Config.setup do |setup_config|
       required(:token_lifetime).maybe(:int?)
     end
 
+    optional(:rec_format).value(Dry::Types['string'].enum('wav', 'mp3'))
+
     required(:cdr_export).schema do
       required(:dir_path).filled(:string)
       required(:delete_url).filled(:string)

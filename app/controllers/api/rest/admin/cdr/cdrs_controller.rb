@@ -5,6 +5,7 @@ class Api::Rest::Admin::Cdr::CdrsController < Api::Rest::Admin::BaseController
   def recording
     if @cdr.has_recording?
       response.headers['X-Accel-Redirect'] = @cdr.call_record_filename
+      response.headers['Content-Type'] = @cdr.call_record_ct
       render body: nil
     else
       head 404

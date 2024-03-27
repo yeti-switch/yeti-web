@@ -421,6 +421,7 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       expect(response.status).to eq 200
       expect(response.body).to be_blank
       expect(response.headers['X-Accel-Redirect']).to eq cdr.call_record_filename
+      expect(response.headers['Content-Type']).to eq cdr.call_record_ct
     end
 
     context 'when cdr audio not recorded' do
