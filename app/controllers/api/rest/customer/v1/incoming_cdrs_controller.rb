@@ -6,7 +6,7 @@ class Api::Rest::Customer::V1::IncomingCdrsController < Api::Rest::Customer::V1:
   def rec
     if current_customer.allow_listen_recording && @cdr.has_recording?
       response.headers['X-Accel-Redirect'] = @cdr.call_record_filename
-      response.headers['Content-Type'] = 'audio/mpeg'
+      response.headers['Content-Type'] = @cdr.call_record_ct
       render body: nil
     else
       head 404

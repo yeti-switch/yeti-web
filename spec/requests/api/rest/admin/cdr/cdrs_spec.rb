@@ -99,6 +99,7 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
       expect(response.status).to eq 200
       expect(response.body).to be_blank
       expect(response.headers['X-Accel-Redirect']).to eq "/record/#{cdr.local_tag}.mp3"
+      expect(response.headers['Content-Type']).to eq 'audio/mpeg'
     end
 
     context 'when audio not recorded' do

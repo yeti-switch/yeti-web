@@ -346,7 +346,12 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def call_record_filename
-    "/record/#{local_tag}.mp3" if has_recording?
+    fmt = YetiConfig.rec_format == 'wav' ? 'wav' : 'mp3'
+    "/record/#{local_tag}.#{fmt}" if has_recording?
+  end
+
+  def call_record_ct
+    YetiConfig.rec_format == 'wav' ? 'audio/wav' : 'audio/mpeg'
   end
 
   def attempts
