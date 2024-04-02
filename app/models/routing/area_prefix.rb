@@ -29,7 +29,7 @@ class Routing::AreaPrefix < ApplicationRecord
   validates :area, presence: true
 
   scope :prefix_covers, lambda { |prefix|
-    where("prefix_range(prefix) @> prefix_range(?)", prefix)
+    where('prefix_range(prefix) @> prefix_range(?)', prefix)
   }
 
   def display_name

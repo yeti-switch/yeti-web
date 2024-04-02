@@ -32,7 +32,7 @@ module GenerateReportData
         report.id,
         'customer_id',
         'count(id)',
-        Cdr::Cdr.sanitize_sql_array(["count(id) FILTER ( WHERE duration <= ? AND success )", GuiConfig.short_call_length]),
+        Cdr::Cdr.sanitize_sql_array(['count(id) FILTER ( WHERE duration <= ? AND success )', GuiConfig.short_call_length]),
         'count(id) FILTER ( WHERE success )',
         'coalesce(sum(duration),0)',
         'coalesce(sum(customer_duration),0)',
