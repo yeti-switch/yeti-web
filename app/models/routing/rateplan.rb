@@ -70,8 +70,8 @@ class Routing::Rateplan < ApplicationRecord
   end
 
   def number_rates(number)
-    sql_query = %{
-      SELECT *
+    sql_query = sanitize_sql_array([
+      "SELECT *
       FROM (
         SELECT
         d.*,
@@ -82,14 +82,17 @@ class Routing::Rateplan < ApplicationRecord
         FROM class4.destinations d
         JOIN class4.rate_plan_groups rpg ON d.rate_group_id = rpg.rate_group_id
         WHERE
-          prefix_range(prefix)@>prefix_range('#{number}')
-            AND rpg.rateplan_id=#{id}
+          prefix_range(prefix)@>prefix_range(?)
+            AND rpg.rateplan_id = ?
             AND enabled
             AND valid_from <= now()
             AND valid_till >= now()
       ) AS data
-      WHERE data.rank=1;
-    }
+      WHERE data.rank=1",
+      number,
+      id]
+    )
+
     result = self.class.connection.exec_query(sql_query)
     return [] if result.empty?
 

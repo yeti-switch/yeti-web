@@ -21,13 +21,17 @@ module GenerateReportData
     def cdr_scope
       scope = Cdr::Cdr.select(
         report.id,
-        "timestamp 'epoch' + ('#{report.interval_length} minutes'::interval * (date_part('epoch',time_start)::bigint/date_part('epoch','#{report.interval_length} minutes'::interval)::bigint))",
+        Cdr::Cdr.sanitize_sql_array([
+                                      "timestamp 'epoch' + ( ?::interval * (date_part('epoch',time_start)::bigint/date_part('epoch', ?::interval)::bigint))",
+                                      "#{report.interval_length} minutes",
+                                      "#{report.interval_length} minutes"
+                                    ]),
         *report.group_by,
         report.aggregation
       ).where(
         'time_start >= ? AND time_start < ?', report.date_start, report.date_end
       ).group(
-        "(date_part('epoch',time_start)::bigint/date_part('epoch','#{report.interval_length} minutes'::interval)::bigint)",
+        Cdr::Cdr.sanitize_sql_array(["(date_part('epoch',time_start)::bigint/date_part('epoch', ?::interval)::bigint)", "#{report.interval_length} minutes"]),
         *report.group_by
       )
 

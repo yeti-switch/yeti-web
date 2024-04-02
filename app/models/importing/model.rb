@@ -25,7 +25,7 @@ class Importing::Model < ActiveAdminImport::Model
       commands = [script_path.to_s]
       commands << file.tempfile.path.to_s if file.present?
       commands << file.original_filename.shellescape.to_s if file.is_a?(ActionDispatch::Http::UploadedFile)
-      Open3.popen3(commands.join(' ').to_s) do |_stdin, stdout, stderr, wait_thr|
+      Open3.popen3(commands) do |_stdin, stdout, stderr, wait_thr|
         @contents = stdout.read
         @script_std_err = stderr.read
         stdout.close
