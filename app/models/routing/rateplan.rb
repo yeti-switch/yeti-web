@@ -70,8 +70,8 @@ class Routing::Rateplan < ApplicationRecord
   end
 
   def number_rates(number)
-    sql_query = sanitize_sql_array([
-                                     "SELECT *
+    sql_query = self.class.sanitize_sql_array([
+                                                "SELECT *
       FROM (
         SELECT
         d.*,
@@ -89,9 +89,9 @@ class Routing::Rateplan < ApplicationRecord
             AND valid_till >= now()
       ) AS data
       WHERE data.rank=1",
-                                     number,
-                                     id
-                                   ])
+                                                number,
+                                                id
+                                              ])
 
     result = self.class.connection.exec_query(sql_query)
     return [] if result.empty?

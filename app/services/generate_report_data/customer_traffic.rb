@@ -135,7 +135,6 @@ module GenerateReportData
         'dst_network_id',
         'count(id)',
         Cdr::Cdr.sanitize_sql_array(['count(id) FILTER ( WHERE duration <= ? AND success )', GuiConfig.short_call_length]),
-        'count(nullif(success,false))',
         'count(id) FILTER ( WHERE success )',
         'coalesce(sum(duration),0)',
         'coalesce(sum(customer_duration),0)',
