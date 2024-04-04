@@ -34,7 +34,7 @@ module GenerateReportData
         *report.group_by,
         'count(id)',
         'count(id) FILTER ( WHERE success )',
-        "count(id) FILTER ( WHERE duration<=#{GuiConfig.short_call_length} AND success )",
+        Cdr::Cdr.sanitize_sql_array(['count(id) FILTER ( WHERE duration <= ? AND success )', GuiConfig.short_call_length]),
         'count(id) FILTER ( WHERE is_last_cdr )',
         'coalesce(sum(duration),0)',
         'coalesce(sum(customer_duration),0)',

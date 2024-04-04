@@ -25,26 +25,26 @@ class Api::RestController < ApiController
     chain.page(params[:page] || 1).per(per_page)
   end
 
-  def apply_sorting(chain)
-    klass = chain.klass
-    params[:order] ||= (klass.respond_to?(:primary_key) ? klass.primary_key.to_s : 'id') + '_desc'
-    if params[:order] && params[:order] =~ /^([\w\_\.]+)_(desc|asc)$/
-      column = Regexp.last_match(1)
-      order = Regexp.last_match(2)
-      table = klass.column_names.include?(column) ? klass.quoted_table_name : nil
-      table_column = /\./.match?(column) ? column :
-          [table, klass.connection.quote_column_name(column)].compact.join('.')
-
-      chain.reorder(Arel.sql("#{table_column} #{order}"))
-    else
-      chain # just return the chain
-    end
-  end
+  # def apply_sorting(chain)
+  #   klass = chain.klass
+  #   params[:order] ||= (klass.respond_to?(:primary_key) ? klass.primary_key.to_s : 'id') + '_desc'
+  #   if params[:order] && params[:order] =~ /^([\w\_\.]+)_(desc|asc)$/
+  #     column = Regexp.last_match(1)
+  #     order = Regexp.last_match(2)
+  #     table = klass.column_names.include?(column) ? klass.quoted_table_name : nil
+  #     table_column = /\./.match?(column) ? column :
+  #         [table, klass.connection.quote_column_name(column)].compact.join('.')
+  #
+  #     chain.reorder(Arel.sql("#{table_column} #{order}"))
+  #   else
+  #     chain # just return the chain
+  #   end
+  # end
 
   def resource_collection(scope)
     scope = apply_search(scope)
     scope = apply_pagination(scope)
-    scope = apply_sorting(scope)
+    # scope = apply_sorting(scope)
     scope
   end
 
