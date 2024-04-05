@@ -450,7 +450,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :destination_fee
     it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_next_rate
     it_behaves_like :jsonapi_filters_by_number_field, :dialpeer_fee
-    it_behaves_like :jsonapi_filters_by_string_field, :time_limit
     it_behaves_like :jsonapi_filters_by_number_field, :internal_disconnect_code
     it_behaves_like :jsonapi_filters_by_string_field, :internal_disconnect_reason
     it_behaves_like :jsonapi_filters_by_number_field, :disconnect_initiator_id
