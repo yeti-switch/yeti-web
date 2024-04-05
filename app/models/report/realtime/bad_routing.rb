@@ -96,7 +96,6 @@
 #  success                         :boolean
 #  time_connect                    :timestamptz
 #  time_end                        :timestamptz
-#  time_limit                      :string
 #  time_start                      :timestamptz      not null
 #  to_domain                       :string
 #  uuid                            :uuid

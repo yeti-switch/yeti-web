@@ -69,7 +69,6 @@
 #  success                      :boolean
 #  time_connect                 :timestamptz
 #  time_end                     :timestamptz
-#  time_limit                   :string
 #  time_start                   :timestamptz
 #  vendor_price                 :decimal(, )
 #  customer_acc_id              :integer(4)

@@ -587,7 +587,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'destination-fee' => cdr.destination_fee.to_s,
             'dialpeer-next-rate' => cdr.dialpeer_next_rate,
             'dialpeer-fee' => cdr.dialpeer_fee,
-            'time-limit' => cdr.time_limit,
             'internal-disconnect-code' => cdr.internal_disconnect_code,
             'internal-disconnect-reason' => cdr.internal_disconnect_reason,
             'disconnect-initiator-id' => cdr.disconnect_initiator_id,
