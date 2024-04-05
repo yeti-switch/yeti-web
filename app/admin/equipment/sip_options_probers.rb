@@ -33,7 +33,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
                 :ruri_domain, :ruri_username, :from_uri, :to_uri, :contact_uri,
                 :auth_username, :proxy, :auth_password,
                 :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id, :append_headers,
-                :inteval, :sip_interface_name
+                :interval, :sip_interface_name
 
   index do
     selectable_column

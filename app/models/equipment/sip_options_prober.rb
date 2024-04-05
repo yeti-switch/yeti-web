@@ -58,6 +58,7 @@ class Equipment::SipOptionsProber < ApplicationRecord
   validates :external_id, uniqueness: { allow_blank: true }
   validates :name, :ruri_domain, :ruri_username, :transport_protocol, :proxy_transport_protocol, :sip_schema_id, presence: true
   validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
+  validates :interval, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: false, only_integer: true }
 
   # validates_format_of :contact, :with => /\Asip:(.*)\z/
   #  validates :contact_uri, format: URI::DEFAULT_PARSER.make_regexp(%w[sip])
