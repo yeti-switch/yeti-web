@@ -386,7 +386,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           column :vendor_price
           column :vendor_duration
-          column :time_limit
           column :profit
           column('Orig call', &:orig_call_id)
           column :local_tag
@@ -589,8 +588,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :dialpeer_initial_rate
           row :dialpeer_next_interval
           row :dialpeer_next_rate
-
-          row :time_limit
         end
       end
       tab :privacy_information do
@@ -772,7 +769,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
     column :vendor_price
     column :vendor_duration
-    column :time_limit
     column :profit
     column :orig_call_id
     column :local_tag
@@ -996,7 +992,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       column :dialpeer_next_interval
       column :dialpeer_next_rate
       column :vendor_price
-      column :time_limit
       column :profit
       column :orig_call_id
       column :local_tag

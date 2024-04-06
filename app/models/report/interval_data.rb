@@ -53,7 +53,6 @@
 #  success                      :boolean
 #  time_connect                 :timestamptz
 #  time_end                     :timestamptz
-#  time_limit                   :string
 #  time_start                   :timestamptz
 #  timestamp                    :timestamptz
 #  vendor_price                 :decimal(, )

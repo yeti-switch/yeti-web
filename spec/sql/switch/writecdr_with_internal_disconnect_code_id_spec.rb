@@ -385,7 +385,6 @@ RSpec.describe 'switch.writecdr()' do
                      destination_fee: 0.0,
                      dialpeer_next_rate: 1.0,
                      dialpeer_fee: 0.0,
-                     time_limit: '7200',
                      internal_disconnect_code_id: 221,
                      internal_disconnect_code: 200,
                      internal_disconnect_reason: 'Bye',

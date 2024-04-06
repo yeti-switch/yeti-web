@@ -49,7 +49,6 @@ class Report::IntervalCdr < Cdr::Base
     disconnect_initiator_id
     node_id
     pop_id
-    time_limit
     customer_price
     vendor_price
     duration
@@ -116,7 +115,6 @@ class Report::IntervalCdr < Cdr::Base
     destination_fee
     dialpeer_next_rate
     dialpeer_fee
-    time_limit
     customer_price
     vendor_price
     duration

@@ -37,7 +37,6 @@ class Report::CustomCdr < Cdr::Base
     destination_rate_policy_id
     node_id
     pop_id
-    time_limit
     customer_price
     vendor_price
     duration
