@@ -22,6 +22,7 @@
 #  enabled                          :boolean          default(TRUE), not null
 #  external_type                    :string
 #  from_domain                      :string
+#  interface                        :string
 #  ip                               :inet             not null
 #  name                             :string           not null
 #  reject_calls                     :boolean          default(FALSE), not null

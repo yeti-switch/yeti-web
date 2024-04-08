@@ -22,6 +22,7 @@
 #  enabled                          :boolean          default(TRUE), not null
 #  external_type                    :string
 #  from_domain                      :string           default([]), is an Array
+#  interface                        :string           default([]), is an Array
 #  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  name                             :string           not null
 #  reject_calls                     :boolean          default(FALSE), not null
