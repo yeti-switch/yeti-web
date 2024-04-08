@@ -36,7 +36,11 @@ class Routing::DestinationNextRate < ApplicationRecord
             :apply_time,
             presence: true
 
-  validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
+  # we have DB constraints for this
+  validates :initial_interval, :next_interval, numericality: {
+    greater_than: 0,
+    less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT
+  }
   validates :next_rate, :initial_rate, :connect_fee, numericality: true
 
   scope :not_applied, -> { where(applied: false) }

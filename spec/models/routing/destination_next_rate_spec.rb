@@ -52,6 +52,38 @@ RSpec.describe Routing::DestinationNextRate, type: :model do
     end
 
     include_examples :changes_records_qty_of, Routing::DestinationNextRate, by: 1
+
+    context 'when initial_interval is PG_MAX_SMALLINT' do
+      let(:create_params) { super().merge(initial_interval: ApplicationRecord::PG_MAX_SMALLINT) }
+
+      include_examples :creates_record do
+        let(:expected_record_attrs) { create_params.merge(default_params) }
+      end
+    end
+
+    context 'when initial_interval is greater than PG_MAX_SMALLINT' do
+      let(:create_params) { super().merge(initial_interval: ApplicationRecord::PG_MAX_SMALLINT + 1) }
+
+      include_examples :does_not_create_record, errors: {
+        initial_interval: "must be less than or equal to #{ApplicationRecord::PG_MAX_SMALLINT}"
+      }
+    end
+
+    context 'when next_interval is PG_MAX_SMALLINT' do
+      let(:create_params) { super().merge(next_interval: ApplicationRecord::PG_MAX_SMALLINT) }
+
+      include_examples :creates_record do
+        let(:expected_record_attrs) { create_params.merge(default_params) }
+      end
+    end
+
+    context 'when next_interval is greater than PG_MAX_SMALLINT' do
+      let(:create_params) { super().merge(next_interval: ApplicationRecord::PG_MAX_SMALLINT + 1) }
+
+      include_examples :does_not_create_record, errors: {
+        next_interval: "must be less than or equal to #{ApplicationRecord::PG_MAX_SMALLINT}"
+      }
+    end
   end
 
   describe '#update' do
