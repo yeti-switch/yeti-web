@@ -229,7 +229,7 @@ ActiveAdmin.register CustomersAuth do
   filter :from_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.from_domain')
   filter :to_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.to_domain')
   filter :x_yeti_auth_array_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
-  filter :interface_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
+  filter :interface_contains, label: I18n.t('activerecord.attributes.customers_auth.interface')
   filter :lua_script, input_html: { class: 'chosen' }
   boolean_filter :require_incoming_auth
   boolean_filter :check_account_balance
