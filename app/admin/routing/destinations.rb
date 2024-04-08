@@ -12,6 +12,29 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_async_destroy('Routing::Destination')
   acts_as_async_update BatchUpdateForm::Destination
 
+  scoped_collection_action :async_schedule_rate_changes,
+                           title: 'Schedule rate changes',
+                           class: 'scoped_collection_action_button ui',
+                           form: -> { Destination::ScheduleRateChangesForm.form_inputs },
+                           if: -> { authorized?(:batch_update, resource_klass) } do
+    attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee)
+
+    if attrs.present?
+      form = Destination::ScheduleRateChangesForm.new(attrs)
+      form.ids_sql = scoped_collection_records.select(:id).to_sql
+
+      if form.save
+        flash[:notice] = 'Rate changes is scheduled'
+      else
+        flash[:error] = "Validation Error: #{form.errors.full_messages.to_sentence}"
+      end
+    else
+      flash[:error] = 'All Rate params are required'
+    end
+
+    head 200
+  end
+
   acts_as_delayed_job_lock
 
   decorate_with DestinationDecorator
