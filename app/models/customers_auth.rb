@@ -22,6 +22,7 @@
 #  enabled                          :boolean          default(TRUE), not null
 #  external_type                    :string
 #  from_domain                      :string           default([]), is an Array
+#  interface                        :string           default([]), not null, is an Array
 #  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  name                             :string           not null
 #  reject_calls                     :boolean          default(FALSE), not null
@@ -140,7 +141,8 @@ class CustomersAuth < ApplicationRecord
                                     uri_domain
                                     from_domain
                                     to_domain
-                                    x_yeti_auth].freeze
+                                    x_yeti_auth
+                                    interface].freeze
 
     freeze
   end
@@ -291,18 +293,6 @@ class CustomersAuth < ApplicationRecord
       super(value)
     end
   end
-
-  def display_name_for_debug
-    b = "#{customer.display_name} -> #{name} | #{id} IP: #{raw_ip}"
-    b += ", Domain: #{uri_domain}" if uri_domain.present?
-    b += ", POP: #{pop.try(:name)}" unless pop_id.nil?
-    b += ", X-Yeti-Auth: #{x_yeti_auth}" if x_yeti_auth.present?
-    b
-  end
-
-  # def pop_name
-  #   pop.nil? ? "Any" : pop.name
-  # end
 
   # force update IP
   def keys_for_partial_write

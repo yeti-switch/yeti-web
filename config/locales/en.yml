@@ -89,7 +89,13 @@ en:
         hep_capture_id: "Leave it empty to use YETI Node ID as HEP_CAPTURE_ID"
       customers_auth:
         check_account_balance: "Reject calls if originator hasn't enough funds"
-        ip: 'Comma-separated array of IPs'
+        ip: 'Comma-separated list of IPs with masks'
+        src_prefix: 'Comma-separated list of SRC number prefixes accepted by this auth record'
+        dst_prefix: 'Comma-separated list of DST number prefixes accepted by this auth record'
+        uri_domain: 'Comma-separated list of SIP R-URI domains accepted by this auth record'
+        from_domain: 'Comma-separated list of SIP From URI domains accepted by this auth record'
+        to_domain: 'Comma-separated list of SIP To URI domains accepted by this auth record'
+        interface: 'Comma-separated list of SIP interfaces names where initial INVITE may be received. Leave empty to allow any interface. If Gateway locked to specific SIP interface it should be allowed there'
         radius_auth_profile: 'Select for additional RADIUS call authentication before routing'
         radius_accounting_profile: "RADIUS accounting profile for LegA(Origination)"
       destination:
@@ -123,6 +129,7 @@ en:
         from_domain: 'From Domain'
         to_domain: 'To Domain'
         x_yeti_auth: 'X-Yeti-Auth'
+        interface: 'Interface'
       cdr:
         auth_orig_ip: 'Auth Orig IP'
       log/api_log:

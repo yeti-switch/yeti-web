@@ -8,6 +8,7 @@ ActiveAdmin.register_page 'Routing simulation' do
       @dc = Routing::SimulationForm.new(
         params[:routing_simulation]&.permit(
           :auth_id,
+          :interface,
           :transport_protocol_id,
           :remote_ip,
           :remote_port,

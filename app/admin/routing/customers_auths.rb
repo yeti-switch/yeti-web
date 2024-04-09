@@ -25,7 +25,7 @@ ActiveAdmin.register CustomersAuth do
                  :dst_prefix,
                  :dst_number_min_length, :dst_number_max_length,
                  :uri_domain, :from_domain, :to_domain,
-                 :x_yeti_auth,
+                 :x_yeti_auth, :interface,
                  [:customer_name, proc { |row| row.customer.try(:name) }],
                  [:account_name, proc { |row| row.account.try(:name) || '' }],
                  :check_account_balance,
@@ -74,7 +74,7 @@ ActiveAdmin.register CustomersAuth do
                 :ip, :pop_id,
                 :src_prefix, :src_number_min_length, :src_number_max_length,
                 :dst_prefix, :dst_number_min_length, :dst_number_max_length,
-                :uri_domain, :from_domain, :to_domain, :x_yeti_auth,
+                :uri_domain, :from_domain, :to_domain, :x_yeti_auth, :interface,
                 :radius_auth_profile_id,
                 :src_number_radius_rewrite_rule, :src_number_radius_rewrite_result,
                 :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
@@ -120,8 +120,6 @@ ActiveAdmin.register CustomersAuth do
     column :reject_calls
     column :transport_protocol
     column :ip
-    column :external_id
-    column :external_type
     column :pop
     column :src_prefix
     column :src_number_length do |c|
@@ -135,6 +133,7 @@ ActiveAdmin.register CustomersAuth do
     column :from_domain
     column :to_domain
     column :x_yeti_auth
+    column :interface
 
     column :customer, sortable: 'contractors.name' do |row|
       auto_link(row.customer, row.customer.decorated_customer_display_name)
@@ -192,6 +191,8 @@ ActiveAdmin.register CustomersAuth do
 
     column :tag_action
     column :display_tag_action_value
+    column :external_id
+    column :external_type
   end
 
   filter :id
@@ -228,6 +229,7 @@ ActiveAdmin.register CustomersAuth do
   filter :from_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.from_domain')
   filter :to_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.to_domain')
   filter :x_yeti_auth_array_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
+  filter :interface_contains, label: I18n.t('activerecord.attributes.customers_auth.interface')
   filter :lua_script, input_html: { class: 'chosen' }
   boolean_filter :require_incoming_auth
   boolean_filter :check_account_balance
@@ -309,6 +311,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :from_domain, as: :array_of_strings
           f.input :to_domain, as: :array_of_strings
           f.input :x_yeti_auth, as: :array_of_strings
+          f.input :interface, as: :array_of_strings
         end
       end
 
@@ -415,6 +418,7 @@ ActiveAdmin.register CustomersAuth do
             row :from_domain
             row :to_domain
             row :x_yeti_auth
+            row :interface
           end
         end
       end

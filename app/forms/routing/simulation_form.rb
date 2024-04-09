@@ -72,8 +72,9 @@ class Routing::SimulationForm < ApplicationForm
   attribute :rpid, :string
   attribute :rpid_privacy, :string
   attribute :auth_id, :integer
+  attribute :interface, :string
 
-  validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, presence: true
+  validates :remote_ip, :remote_port, :src_number, :dst_number, :pop_id, :transport_protocol_id, :interface, presence: true
 
   validates :pop_id, :transport_protocol_id, numericality: true
 
@@ -138,6 +139,7 @@ class Routing::SimulationForm < ApplicationForm
             ?, /* i_uri_domain character varying */
             ?, /* i_auth_id integer */
             ?, /* i_identity */
+            ?, /* interface */
             ?, /* i_x_yeti_auth character varying, */
             ?, /* i_diversion character varying */
             ?, /* i_x_orig_ip inet */
@@ -170,6 +172,7 @@ class Routing::SimulationForm < ApplicationForm
           uri_domain,
           auth_id,
           '[]',
+          interface,
           x_yeti_auth,
           nil,
           nil,
