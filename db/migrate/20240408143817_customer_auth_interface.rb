@@ -1,7 +1,7 @@
 class CustomerAuthInterface < ActiveRecord::Migration[7.0]
   def up
     execute %q{
-      alter table class4.customers_auth add interface varchar[] default '{}'::character varying[];
+      alter table class4.customers_auth add interface varchar[] not null default '{}'::character varying[];
       alter table class4.customers_auth_normalized add interface varchar;
 
 CREATE SCHEMA switch21;

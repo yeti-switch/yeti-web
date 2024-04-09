@@ -31007,7 +31007,7 @@ CREATE TABLE class4.customers_auth (
     external_type character varying,
     rewrite_ss_status_id smallint,
     privacy_mode_id smallint DEFAULT 1 NOT NULL,
-    interface character varying[] DEFAULT '{}'::character varying[],
+    interface character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 

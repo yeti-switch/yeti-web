@@ -59,7 +59,7 @@ RSpec.describe '#routing logic' do
       uri_domain,
       auth_id,
       identity,
-      interface,
+      i_interface,
       x_yeti_auth,
       diversion,
       x_orig_ip,
@@ -98,7 +98,7 @@ RSpec.describe '#routing logic' do
   let(:uri_domain) { 'uri-domain' }
   let(:auth_id) { nil }
   let(:identity) { '[]' }
-  let(:interface) { 'primary' }
+  let(:i_interface) { 'primary' }
   let(:x_yeti_auth) { nil }
   let(:diversion) { 'diversion' }
   let(:x_orig_ip) { '3.3.3.3' }
@@ -174,7 +174,7 @@ RSpec.describe '#routing logic' do
       end
     end
 
-    context 'Authentification' do
+    context 'Authentification by username/password' do
       before do
         FactoryBot.create(:system_load_balancer,
                           signalling_ip: '1.1.1.1')
@@ -479,6 +479,9 @@ RSpec.describe '#routing logic' do
 
         FactoryBot.create(:customers_auth,
                           ip: '3.3.3.3',
+                          interface: customer_auth_interface,
+                          reject_calls: customer_auth_reject_calls,
+                          require_incoming_auth: customer_auth_require_incoming_auth,
                           check_account_balance: customer_auth_check_account_balance,
                           customer: customer,
                           account: customer_account,
@@ -500,6 +503,9 @@ RSpec.describe '#routing logic' do
 
       let!(:customer_auth_check_account_balance) { true }
       let!(:send_billing_information) { false }
+      let(:customer_auth_interface) { [] }
+      let(:customer_auth_reject_calls) { false }
+      let(:customer_auth_require_incoming_auth) { false }
       let(:customer_auth_diversion_policy_id) { 1 } # do not accept diversion header
       let(:customer_auth_diversion_rewrite_rule) { nil } # removing +380
       let(:customer_auth_diversion_rewrite_result) { nil }
@@ -584,10 +590,14 @@ RSpec.describe '#routing logic' do
                enabled: customer_gw_enabled,
                allow_origination: true,
                orig_append_headers_reply: orig_append_headers_reply,
-               orig_disconnect_policy_id: orig_disconnect_policy.id)
+               orig_disconnect_policy_id: orig_disconnect_policy.id,
+               incoming_auth_username: customer_gw_incoming_auth_username,
+               incoming_auth_password: customer_gw_incoming_auth_password)
       }
 
       let(:customer_gw_enabled) { true }
+      let(:customer_gw_incoming_auth_username) { nil }
+      let(:customer_gw_incoming_auth_password) { nil }
 
       let(:orig_disconnect_policy) {
         create(:disconnect_policy)
@@ -637,6 +647,110 @@ RSpec.describe '#routing logic' do
                account_id: vendor_account.id,
                gateway_id: vendor_gateway.id)
       }
+
+      context 'Authorized by IP, checking interface' do
+        let!(:i_interface) { 'secondary' }
+
+        let!(:customer_auth_reject_calls) { true }
+
+        context 'When CA interface is empty' do
+          let!(:customer_auth_interface) { [] }
+          it 'authorizes call' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_CUSTOMER_AUTH_REJECT)
+          end
+        end
+
+        context 'When CA interface same as routing interface' do
+          let!(:customer_auth_interface) { ['secondary'] }
+          it 'authorizes call' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_CUSTOMER_AUTH_REJECT) # reject by customer auth
+          end
+        end
+
+        context 'When CA interface includes routing interface' do
+          let!(:customer_auth_interface) { %w[primary secondary] }
+          it 'authorizes call' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_CUSTOMER_AUTH_REJECT)
+          end
+        end
+
+        context 'When CA interface not includes routing interface' do
+          let!(:customer_auth_interface) { %w[primary1 secondary2] }
+          it 'CA lookup failed' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be_nil
+            expect(subject.first[:customer_id]).to be_nil
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_CUSTOMER_AUTH_MATCHED)
+          end
+        end
+      end
+
+      context 'Authorized by IP + username/password, checking interface' do
+        let!(:i_interface) { 'secondary' }
+
+        let!(:customer_auth_reject_calls) { true }
+        let(:customer_auth_require_incoming_auth) { true }
+        let(:customer_gw_incoming_auth_username) { 'test-user' }
+        let(:customer_gw_incoming_auth_password) { 'test-password' }
+        let(:auth_id) { customer_gateway.id }
+
+        context 'When CA interface is empty' do
+          let!(:customer_auth_interface) { [] }
+          it 'authorizes call' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_CUSTOMER_AUTH_REJECT)
+          end
+        end
+
+        context 'When CA interface same as routing interface' do
+          let!(:customer_auth_interface) { ['secondary'] }
+          it 'authorizes call' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_CUSTOMER_AUTH_REJECT) # reject by customer auth
+          end
+        end
+
+        context 'When CA interface includes routing interface' do
+          let!(:customer_auth_interface) { %w[primary secondary] }
+          it 'authorizes call' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_CUSTOMER_AUTH_REJECT)
+          end
+        end
+
+        context 'When CA interface not includes routing interface' do
+          let!(:customer_auth_interface) { %w[primary1 secondary2] }
+          it 'CA lookup failed' do
+            expect(subject.size).to eq(1)
+            expect(subject.first[:customer_auth_id]).to be_nil
+            expect(subject.first[:customer_id]).to be_nil
+            expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+            expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_CUSTOMER_AUTH_MATCHED)
+          end
+        end
+      end
 
       context 'Authorized, customer auth CPS Limit' do
         let!(:customer_auth_cps_limit) { 10 }
