@@ -1152,17 +1152,11 @@ CREATE TYPE switch21.callprofile_ty AS (
 	aleg_rtprelay_interface character varying,
 	outbound_interface character varying,
 	aleg_outbound_interface character varying,
-	contact_displayname character varying,
-	contact_user character varying,
-	contact_host character varying,
-	contact_port smallint,
 	try_avoid_transcoding boolean,
 	rtprelay_dtmf_filtering boolean,
 	rtprelay_dtmf_detection boolean,
 	dump_level_id smallint,
 	time_limit integer,
-	resources character varying,
-	cache_time integer,
 	reply_translations character varying,
 	aleg_policy_id integer,
 	bleg_policy_id integer,
@@ -1178,8 +1172,6 @@ CREATE TYPE switch21.callprofile_ty AS (
 	bleg_force_symmetric_rtp boolean,
 	aleg_symmetric_rtp_nonstop boolean,
 	bleg_symmetric_rtp_nonstop boolean,
-	aleg_symmetric_rtp_ignore_rtcp boolean,
-	bleg_symmetric_rtp_ignore_rtcp boolean,
 	aleg_rtp_ping boolean,
 	bleg_rtp_ping boolean,
 	aleg_relay_options boolean,
@@ -3102,7 +3094,6 @@ CREATE TABLE class4.gateways (
     single_codec_in_200ok boolean DEFAULT false NOT NULL,
     ringing_timeout integer,
     symmetric_rtp_nonstop boolean DEFAULT false NOT NULL,
-    symmetric_rtp_ignore_rtcp boolean DEFAULT false NOT NULL,
     resolve_ruri boolean DEFAULT false NOT NULL,
     force_dtmf_relay boolean DEFAULT false NOT NULL,
     relay_options boolean DEFAULT false NOT NULL,
@@ -16899,11 +16890,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -17667,11 +17656,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -18358,11 +18345,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -23295,7 +23280,6 @@ BEGIN
   v_ret.auth_aleg_user:='';
   v_ret.auth_aleg_pwd:='';
   v_ret.call_id:='$ci_leg43';
-  --    v_ret.contact:='<sip:$Ri>';
   v_ret."from":='$f';
   v_ret."to":='$t';
   v_ret.ruri:='$r';
@@ -23343,9 +23327,6 @@ BEGIN
 
   v_ret.aleg_symmetric_rtp_nonstop:=FALSE;
   v_ret.bleg_symmetric_rtp_nonstop:=FALSE;
-
-  v_ret.aleg_symmetric_rtp_ignore_rtcp:=TRUE;
-  v_ret.bleg_symmetric_rtp_ignore_rtcp:=TRUE;
 
   v_ret.aleg_rtp_ping:=FALSE;
   v_ret.bleg_rtp_ping:=FALSE;
@@ -23877,18 +23858,15 @@ BEGIN
   i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
     i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
     i_profile.legb_res = i_profile.legb_res||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
   end if;
 
   -- dialpeer account capacity limit;
   if i_dp.capacity is not null then
     i_profile.legb_res = i_profile.legb_res||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
   end if;
 
   /* */
@@ -24038,7 +24016,6 @@ BEGIN
   --vendor gw
   if i_vendor_gw.termination_capacity is not null then
     i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
-    i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
 
@@ -24483,11 +24460,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -24645,18 +24620,15 @@ BEGIN
   i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
     i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
     i_profile.legb_res = i_profile.legb_res||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
   end if;
 
   -- dialpeer account capacity limit;
   if i_dp.capacity is not null then
     i_profile.legb_res = i_profile.legb_res||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
   end if;
 
   /* */
@@ -24806,7 +24778,6 @@ BEGIN
   --vendor gw
   if i_vendor_gw.termination_capacity is not null then
     i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
-    i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
 
@@ -25251,11 +25222,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -25405,18 +25374,15 @@ BEGIN
   i_profile.legb_res= '';
   if i_vendor_acc.termination_capacity is not null then
     i_profile.legb_res = '2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'2:'||i_dp.account_id::varchar||':'||i_vendor_acc.termination_capacity::varchar||':1;';
   end if;
 
   if i_vendor_acc.total_capacity is not null then
     i_profile.legb_res = i_profile.legb_res||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'7:'||i_dp.account_id::varchar||':'||i_vendor_acc.total_capacity::varchar||':1;';
   end if;
 
   -- dialpeer account capacity limit;
   if i_dp.capacity is not null then
     i_profile.legb_res = i_profile.legb_res||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
-    i_profile.resources = i_profile.resources||'6:'||i_dp.id::varchar||':'||i_dp.capacity::varchar||':1;';
   end if;
 
   /* */
@@ -25548,7 +25514,6 @@ BEGIN
   --vendor gw
   if i_vendor_gw.termination_capacity is not null then
     i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
-    i_profile.resources:=i_profile.resources||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
 
@@ -25942,11 +25907,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -26158,7 +26121,6 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         v_now:=now();
         v_ret:=switch21.new_profile();
-        v_ret.cache_time = 10;
 
         v_ret.diversion_in:=i_diversion;
 
@@ -26451,25 +26413,20 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_acc_vat=v_c_acc.vat;
 
         v_ret.lega_res='';
-        v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
           v_ret.lega_res='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
-          v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
         if v_c_acc.origination_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
         end if;
 
         if v_c_acc.total_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
         end if;
 
         if v_orig_gw.origination_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
         if v_customer_auth_normalized.cps_limit is not null then
@@ -27547,7 +27504,6 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         v_now:=now();
         v_ret:=switch21.new_profile();
-        v_ret.cache_time = 10;
 
         v_ret.diversion_in:=i_diversion;
 
@@ -27840,25 +27796,20 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_acc_vat=v_c_acc.vat;
 
         v_ret.lega_res='';
-        v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
           v_ret.lega_res='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
-          v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
         if v_c_acc.origination_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
         end if;
 
         if v_c_acc.total_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
         end if;
 
         if v_orig_gw.origination_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
         if v_customer_auth_normalized.cps_limit is not null then
@@ -28929,7 +28880,6 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         v_now:=now();
         v_ret:=switch21.new_profile();
-        v_ret.cache_time = 10;
 
         v_ret.diversion_in:=i_diversion;
 
@@ -29195,25 +29145,20 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_acc_vat=v_c_acc.vat;
 
         v_ret.lega_res='';
-        v_ret.resources='';
         if v_customer_auth_normalized.capacity is not null then
           v_ret.lega_res='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
-          v_ret.resources:='3:'||v_customer_auth_normalized.customers_auth_id||':'||v_customer_auth_normalized.capacity::varchar||':1;';
         end if;
 
         if v_c_acc.origination_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'1:'||v_c_acc.id::varchar||':'||v_c_acc.origination_capacity::varchar||':1;';
         end if;
 
         if v_c_acc.total_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'7:'||v_c_acc.id::varchar||':'||v_c_acc.total_capacity::varchar||':1;';
         end if;
 
         if v_orig_gw.origination_capacity is not null then
           v_ret.lega_res:=v_ret.lega_res||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
-          v_ret.resources:=v_ret.resources||'4:'||v_orig_gw.id::varchar||':'||v_orig_gw.origination_capacity::varchar||':1;';
         end if;
 
         if v_customer_auth_normalized.cps_limit is not null then
@@ -33094,7 +33039,6 @@ CREATE TABLE data_import.import_gateways (
     single_codec_in_200ok boolean,
     ringing_timeout integer,
     symmetric_rtp_nonstop boolean,
-    symmetric_rtp_ignore_rtcp boolean,
     resolve_ruri boolean,
     force_dtmf_relay boolean,
     relay_options boolean,
@@ -40005,6 +39949,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240309103228'),
 ('20240310195115'),
 ('20240401193125'),
-('20240408143817');
+('20240408143817'),
+('20240410084634');
 
 

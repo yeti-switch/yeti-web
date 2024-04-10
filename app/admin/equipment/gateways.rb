@@ -80,7 +80,8 @@ ActiveAdmin.register Gateway do
                  :sip_timer_b, :dns_srv_failover_timer,
                  [:sdp_c_location_name, proc { |row| row.sdp_c_location.try(:name) }],
                  [:codec_group_name, proc { |row| row.codec_group.try(:name) }],
-                 :proxy_media, :single_codec_in_200ok, :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp, :force_dtmf_relay, :rtp_ping,
+                 :proxy_media, :single_codec_in_200ok, :force_symmetric_rtp, :symmetric_rtp_nonstop,
+                 :force_dtmf_relay, :rtp_ping,
                  :rtp_timeout,
                  :filter_noaudio_streams,
                  :rtp_relay_timestamp_aligning,
@@ -264,7 +265,6 @@ ActiveAdmin.register Gateway do
     column :single_codec_in_200ok
     column :force_symmetric_rtp
     column :symmetric_rtp_nonstop
-    column :symmetric_rtp_ignore_rtcp
     column :rtp_ping
     column :rtp_timeout
     column :filter_noaudio_streams
@@ -484,7 +484,6 @@ ActiveAdmin.register Gateway do
           f.input :single_codec_in_200ok
           f.input :force_symmetric_rtp
           f.input :symmetric_rtp_nonstop
-          f.input :symmetric_rtp_ignore_rtcp
           f.input :rtp_ping
           f.input :rtp_timeout
           f.input :filter_noaudio_streams
@@ -673,7 +672,6 @@ ActiveAdmin.register Gateway do
           row :single_codec_in_200ok
           row :force_symmetric_rtp
           row :symmetric_rtp_nonstop
-          row :symmetric_rtp_ignore_rtcp
           row :rtp_ping
           row :rtp_timeout
           row :filter_noaudio_streams

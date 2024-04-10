@@ -523,7 +523,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'registered-aor-mode-id': gateway.registered_aor_mode_id,
         'force-symmetric-rtp': gateway.force_symmetric_rtp,
         'symmetric-rtp-nonstop': gateway.symmetric_rtp_nonstop,
-        'symmetric-rtp-ignore-rtcp': gateway.symmetric_rtp_ignore_rtcp,
         'force-dtmf-relay': gateway.force_dtmf_relay,
         'rtp-ping': gateway.rtp_ping,
         'rtp-timeout': gateway.rtp_timeout,

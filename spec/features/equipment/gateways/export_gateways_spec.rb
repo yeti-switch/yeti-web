@@ -115,7 +115,6 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Single codec in 200ok',              item.single_codec_in_200ok.to_s],
         ['Force symmetric rtp',                item.force_symmetric_rtp.to_s],
         ['Symmetric rtp nonstop',              item.symmetric_rtp_nonstop.to_s],
-        ['Symmetric rtp ignore rtcp',          item.symmetric_rtp_ignore_rtcp.to_s],
         ['Force dtmf relay',                   item.force_dtmf_relay.to_s],
         ['Rtp ping',                           item.rtp_ping.to_s],
         ['Rtp timeout',                        item.rtp_timeout.to_s],
