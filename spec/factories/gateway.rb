@@ -75,7 +75,6 @@ FactoryBot.define do
     single_codec_in_200ok { false }
     ringing_timeout { nil }
     symmetric_rtp_nonstop { false }
-    symmetric_rtp_ignore_rtcp { false }
     resolve_ruri { false }
     force_dtmf_relay { false }
     relay_options { false }

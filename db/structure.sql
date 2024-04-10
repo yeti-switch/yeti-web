@@ -16890,11 +16890,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -17658,11 +17656,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -18349,11 +18345,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;

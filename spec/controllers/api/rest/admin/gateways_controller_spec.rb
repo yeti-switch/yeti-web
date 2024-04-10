@@ -60,7 +60,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :single_codec_in_200ok
     it_behaves_like :jsonapi_filters_by_number_field, :ringing_timeout
     it_behaves_like :jsonapi_filters_by_boolean_field, :symmetric_rtp_nonstop
-    it_behaves_like :jsonapi_filters_by_boolean_field, :symmetric_rtp_ignore_rtcp
     it_behaves_like :jsonapi_filters_by_boolean_field, :resolve_ruri
     it_behaves_like :jsonapi_filters_by_boolean_field, :force_dtmf_relay
     it_behaves_like :jsonapi_filters_by_boolean_field, :relay_options
