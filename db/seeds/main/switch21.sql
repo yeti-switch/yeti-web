@@ -103,10 +103,6 @@ INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (788, 'aleg_rtprelay_interface', 'varchar', false, 500, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (791, 'outbound_interface', 'varchar', false, 530, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (792, 'aleg_outbound_interface', 'varchar', false, 540, false);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (793, 'contact_displayname', 'varchar', false, 550, false);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (794, 'contact_user', 'varchar', false, 560, false);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (795, 'contact_host', 'varchar', false, 570, false);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (796, 'contact_port', 'smallint', false, 580, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (817, 'time_limit', 'integer', false, 790, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (818, 'resources', 'varchar', false, 800, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (742, 'to', 'varchar', false, 40, false);
@@ -142,7 +138,6 @@ INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (833, 'dialpeer_initial_interval', 'integer', true, 1775, true);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (834, 'dialpeer_next_interval', 'integer', true, 1776, true);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (835, 'dialpeer_next_rate', 'numeric', true, 1777, true);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (821, 'cache_time', 'integer', false, 810, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (849, 'ringing_timeout', 'integer', false, 913, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (924, 'try_avoid_transcoding', 'boolean', false, 620, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (925, 'rtprelay_dtmf_filtering', 'boolean', false, 630, false);
@@ -153,8 +148,6 @@ INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (934, 'bleg_force_symmetric_rtp', 'boolean', false, 940, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (937, 'aleg_symmetric_rtp_nonstop', 'boolean', false, 945, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (939, 'bleg_symmetric_rtp_nonstop', 'boolean', false, 950, false);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (940, 'aleg_symmetric_rtp_ignore_rtcp', 'boolean', false, 955, false);
-INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (941, 'bleg_symmetric_rtp_ignore_rtcp', 'boolean', false, 960, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (942, 'aleg_rtp_ping', 'boolean', false, 965, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (943, 'bleg_rtp_ping', 'boolean', false, 970, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (946, 'aleg_relay_options', 'boolean', false, 975, false);

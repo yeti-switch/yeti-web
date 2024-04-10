@@ -97,7 +97,6 @@
 #  sst_minimum_timer                  :integer(4)
 #  sst_session_expires                :integer(4)
 #  suppress_early_media               :boolean
-#  symmetric_rtp_ignore_rtcp          :boolean
 #  symmetric_rtp_nonstop              :boolean
 #  term_append_headers_req            :string
 #  term_disconnect_policy_name        :string
@@ -219,7 +218,7 @@ class Importing::Gateway < Importing::Base
     sip_timer_b dns_srv_failover_timer
     sdp_c_location_id codec_group_id
     single_codec_in_200ok force_symmetric_rtp symmetric_rtp_nonstop
-    symmetric_rtp_ignore_rtcp force_dtmf_relay rtp_ping
+    force_dtmf_relay rtp_ping
     rtp_timeout filter_noaudio_streams rtp_relay_timestamp_aligning
     rtp_force_relay_cn
     dtmf_receive_mode_id dtmf_send_mode_id

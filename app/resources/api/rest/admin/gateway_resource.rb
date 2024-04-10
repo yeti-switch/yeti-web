@@ -12,7 +12,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :relay_update, :suppress_early_media, :fake_180_timer, :transit_headers_from_origination,
              :transit_headers_from_termination, :sip_interface_name, :allow_1xx_without_to_tag, :sip_timer_b,
              :dns_srv_failover_timer, :proxy_media, :single_codec_in_200ok,
-             :force_symmetric_rtp, :symmetric_rtp_nonstop, :symmetric_rtp_ignore_rtcp,
+             :force_symmetric_rtp, :symmetric_rtp_nonstop,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
              :rtp_force_relay_cn, :preserve_anonymous_from_domain, :registered_aor_mode_id,
              :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity,
@@ -115,7 +115,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :single_codec_in_200ok, type: :boolean
   ransack_filter :ringing_timeout, type: :number
   ransack_filter :symmetric_rtp_nonstop, type: :boolean
-  ransack_filter :symmetric_rtp_ignore_rtcp, type: :boolean
   ransack_filter :resolve_ruri, type: :boolean
   ransack_filter :force_dtmf_relay, type: :boolean
   ransack_filter :relay_options, type: :boolean
@@ -227,7 +226,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       single_codec_in_200ok
       force_symmetric_rtp
       symmetric_rtp_nonstop
-      symmetric_rtp_ignore_rtcp
       force_dtmf_relay
       rtp_ping
       rtp_timeout

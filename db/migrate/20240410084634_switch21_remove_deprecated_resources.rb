@@ -24,6 +24,10 @@ ALTER TYPE switch21.callprofile_ty drop attribute contact_host;
 ALTER TYPE switch21.callprofile_ty drop attribute contact_port;
 ALTER TYPE switch21.callprofile_ty drop attribute contact_user;
 
+
+alter table class4.gateways drop column symmetric_rtp_ignore_rtcp;
+alter table data_import.import_gateways drop column symmetric_rtp_ignore_rtcp;
+
 CREATE or replace FUNCTION switch21.new_profile() RETURNS switch21.callprofile_ty
     LANGUAGE plpgsql COST 10
     AS $_$
@@ -2182,11 +2186,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -2321,6 +2323,9 @@ ALTER TYPE switch21.callprofile_ty add attribute contact_displayname varchar;
 ALTER TYPE switch21.callprofile_ty add attribute contact_host varchar;
 ALTER TYPE switch21.callprofile_ty add attribute contact_port smallint;
 ALTER TYPE switch21.callprofile_ty add attribute contact_user varchar;
+
+alter table class4.gateways add symmetric_rtp_ignore_rtcp boolean;
+alter table data_import.import_gateways add symmetric_rtp_ignore_rtcp boolean;
 
 CREATE or replace FUNCTION switch21.new_profile() RETURNS switch21.callprofile_ty
     LANGUAGE plpgsql COST 10

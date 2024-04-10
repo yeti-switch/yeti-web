@@ -3094,7 +3094,6 @@ CREATE TABLE class4.gateways (
     single_codec_in_200ok boolean DEFAULT false NOT NULL,
     ringing_timeout integer,
     symmetric_rtp_nonstop boolean DEFAULT false NOT NULL,
-    symmetric_rtp_ignore_rtcp boolean DEFAULT false NOT NULL,
     resolve_ruri boolean DEFAULT false NOT NULL,
     force_dtmf_relay boolean DEFAULT false NOT NULL,
     relay_options boolean DEFAULT false NOT NULL,
@@ -24467,11 +24466,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -25231,11 +25228,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -25918,11 +25913,9 @@ BEGIN
 
   i_profile.bleg_force_symmetric_rtp:=i_vendor_gw.force_symmetric_rtp;
   i_profile.bleg_symmetric_rtp_nonstop=i_vendor_gw.symmetric_rtp_nonstop;
-  i_profile.bleg_symmetric_rtp_ignore_rtcp=i_vendor_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.aleg_force_symmetric_rtp:=i_customer_gw.force_symmetric_rtp;
   i_profile.aleg_symmetric_rtp_nonstop=i_customer_gw.symmetric_rtp_nonstop;
-  i_profile.aleg_symmetric_rtp_ignore_rtcp=i_customer_gw.symmetric_rtp_ignore_rtcp;
 
   i_profile.bleg_rtp_ping=i_vendor_gw.rtp_ping;
   i_profile.aleg_rtp_ping=i_customer_gw.rtp_ping;
@@ -33052,7 +33045,6 @@ CREATE TABLE data_import.import_gateways (
     single_codec_in_200ok boolean,
     ringing_timeout integer,
     symmetric_rtp_nonstop boolean,
-    symmetric_rtp_ignore_rtcp boolean,
     resolve_ruri boolean,
     force_dtmf_relay boolean,
     relay_options boolean,

@@ -81,7 +81,6 @@
 #  sst_minimum_timer                :integer(4)       default(50), not null
 #  sst_session_expires              :integer(4)       default(50)
 #  suppress_early_media             :boolean          default(FALSE), not null
-#  symmetric_rtp_ignore_rtcp        :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
 #  term_append_headers_req          :string
 #  term_force_outbound_proxy        :boolean          default(FALSE), not null
