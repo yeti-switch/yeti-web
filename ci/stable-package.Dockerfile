@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ENV	DEBIAN_FRONTEND=noninteractive \
 	LANG=C.UTF-8 \
@@ -15,8 +15,8 @@ RUN	apt update && \
 		gnupg \
 		ca-certificates \
 		sudo && \
-	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main"	>> /etc/apt/sources.list && \
+      	echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" > /etc/apt/sources.list.d/apt_postgresql_org_pub_repos_apt.list && \
+	curl -sSl https://www.postgresql.org/media/keys/ACCC4CF8.asc -o /etc/apt/trusted.gpg.d/pgdg-key.asc && \
 	apt update && \
 	apt install -f -y --no-install-recommends procps cron
 
