@@ -2070,13 +2070,10 @@ CREATE TABLE reports.cdr_custom_report_data (
     internal_disconnect_code integer,
     internal_disconnect_reason character varying,
     disconnect_initiator_id integer,
-    customer_price numeric,
-    vendor_price numeric,
     duration integer,
     success boolean,
     dialpeer_reverse_billing boolean,
     destination_reverse_billing boolean,
-    profit numeric,
     dst_prefix_in character varying,
     dst_prefix_out character varying,
     src_prefix_in character varying,
@@ -2092,14 +2089,8 @@ CREATE TABLE reports.cdr_custom_report_data (
     sign_term_port integer,
     sign_term_local_ip character varying,
     sign_term_local_port integer,
-    orig_call_id character varying,
-    term_call_id character varying,
     vendor_invoice_id integer,
     customer_invoice_id integer,
-    local_tag character varying,
-    log_sip boolean,
-    log_rtp boolean,
-    dump_file character varying,
     destination_initial_rate numeric,
     dialpeer_initial_rate numeric,
     destination_initial_interval integer,
@@ -4322,6 +4313,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231212213111'),
 ('20231231115209'),
 ('20240122201619'),
-('20240405165010');
+('20240405165010'),
+('20240411092931');
 
 

@@ -37,11 +37,8 @@ class Report::CustomCdr < Cdr::Base
     destination_rate_policy_id
     node_id
     pop_id
-    customer_price
-    vendor_price
     duration
     success
-    profit
     dst_prefix_in
     dst_prefix_out
     src_prefix_in
@@ -58,12 +55,6 @@ class Report::CustomCdr < Cdr::Base
     sign_term_port
     sign_term_local_ip
     sign_term_local_port
-    orig_call_id
-    term_call_id
-    local_tag
-    log_sip
-    log_rtp
-    dump_file
 
     destination_id
     destination_fee
