@@ -23,11 +23,11 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
   let(:apply_time) { 1.month.from_now.to_date }
 
   let(:apply_time_formatted) { apply_time.to_fs(:db) }
-  let(:initial_interval) { 60 }
-  let(:initial_rate) { 0.1 }
-  let(:next_interval) { 60 }
-  let(:next_rate) { 0.2 }
-  let(:connect_fee) { 0.03 }
+  let(:initial_interval) { '60' }
+  let(:initial_rate) { '0.1' }
+  let(:next_interval) { '60' }
+  let(:next_rate) { '0.2' }
+  let(:connect_fee) { '0.03' }
 
   let(:filter!) { nil }
   let(:fill_form!) do
@@ -50,7 +50,7 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
     expect do
       subject
 
-      expect(page).to have_flash_message('Rate changes is scheduled', type: :notice)
+      expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
     end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
       ids_sql,
       {
@@ -81,7 +81,7 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
       expect do
         subject
 
-        expect(page).to have_flash_message('Rate changes is scheduled', type: :notice)
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
       end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
                 ids_sql,
                 {
@@ -123,7 +123,7 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
       expect do
         subject
 
-        expect(page).to have_flash_message('Rate changes is scheduled', type: :notice)
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
       end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
                 ids_sql,
                 {
@@ -157,6 +157,27 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
     let(:next_interval) { '' }
     let(:next_rate) { '' }
     let(:connect_fee) { '' }
+
+    it 'should show error message' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message(
+                          'Validation Error: Initial rate is not a number, Next rate is not a number, Connect fee is not a number,'\
+                            " Initial interval is not a number, Next interval is not a number, and Apply time can't be blank",
+                          type: :error
+                        )
+      end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
+    end
+  end
+
+  context 'with invalid form values' do
+    let(:apply_time_formatted) { 'invalid' }
+    let(:initial_interval) { 'invalid' }
+    let(:initial_rate) { 'invalid' }
+    let(:next_interval) { 'invalid' }
+    let(:next_rate) { 'invalid' }
+    let(:connect_fee) { 'invalid' }
 
     it 'should show error message' do
       expect do

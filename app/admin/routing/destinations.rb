@@ -24,7 +24,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       form.ids_sql = scoped_collection_records.select(:id).to_sql
 
       if form.save
-        flash[:notice] = 'Rate changes is scheduled'
+        flash[:notice] = 'Rate changes are scheduled'
       else
         flash[:error] = "Validation Error: #{form.errors.full_messages.to_sentence}"
       end

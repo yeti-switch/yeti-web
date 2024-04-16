@@ -3,11 +3,11 @@
 module Destination
   class ScheduleRateChangesForm < ApplicationForm
     attribute :apply_time, :date
-    attribute :initial_interval, :integer
-    attribute :initial_rate, :decimal
-    attribute :next_interval, :integer
-    attribute :next_rate, :decimal
-    attribute :connect_fee, :decimal
+    attribute :initial_interval
+    attribute :initial_rate
+    attribute :next_interval
+    attribute :next_rate
+    attribute :connect_fee
     attribute :ids_sql, :string
 
     validates :initial_rate, :next_rate, :connect_fee, numericality: true
