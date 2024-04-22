@@ -24,8 +24,8 @@
 #
 # Indexes
 #
-#  blacklist_items_blacklist_id_key_idx           (numberlist_id,key) UNIQUE
-#  blacklist_items_blacklist_id_prefix_range_idx  (numberlist_id, ((key)::prefix_range)) USING gist
+#  blacklist_items_blacklist_id_key_idx  (numberlist_id,key) UNIQUE
+#  numberlist_items_numberlist_id_idx    (((key)::prefix_range)) USING gist
 #
 # Foreign Keys
 #
