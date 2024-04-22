@@ -38352,10 +38352,10 @@ CREATE INDEX lnp_cache_expires_at_idx ON class4.lnp_cache USING btree (expires_a
 
 
 --
--- Name: numberlist_items_numberlist_id_idx; Type: INDEX; Schema: class4; Owner: -
+-- Name: numberlist_items_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
-CREATE INDEX numberlist_items_numberlist_id_idx ON class4.numberlist_items USING gist (((key)::public.prefix_range));
+CREATE INDEX numberlist_items_prefix_range_idx ON class4.numberlist_items USING gist (((key)::public.prefix_range));
 
 
 --
