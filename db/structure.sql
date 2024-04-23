@@ -38205,13 +38205,6 @@ CREATE UNIQUE INDEX blacklist_items_blacklist_id_key_idx ON class4.numberlist_it
 
 
 --
--- Name: blacklist_items_blacklist_id_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
---
-
-CREATE INDEX blacklist_items_blacklist_id_prefix_range_idx ON class4.numberlist_items USING gist (numberlist_id, ((key)::public.prefix_range));
-
-
---
 -- Name: customers_auth_account_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -38356,6 +38349,13 @@ CREATE UNIQUE INDEX lnp_cache_dst_database_id_idx ON class4.lnp_cache USING btre
 --
 
 CREATE INDEX lnp_cache_expires_at_idx ON class4.lnp_cache USING btree (expires_at);
+
+
+--
+-- Name: numberlist_items_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX numberlist_items_prefix_range_idx ON class4.numberlist_items USING gist (((key)::public.prefix_range));
 
 
 --
@@ -39950,6 +39950,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240310195115'),
 ('20240401193125'),
 ('20240408143817'),
-('20240410084634');
+('20240410084634'),
+('20240422204044');
 
 
