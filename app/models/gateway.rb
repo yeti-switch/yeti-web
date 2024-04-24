@@ -312,6 +312,8 @@ class Gateway < ApplicationRecord
 
   validates :diversion_domain, presence: true, if: proc { diversion_send_mode_id == 2 }
 
+  validates :auth_user, :auth_password, format: { without: /\s/, message: 'must contain no spaces' }
+
   validates :incoming_auth_username, presence: true, if: proc { incoming_auth_password.present? }
   validates :incoming_auth_password, presence: true, if: proc { incoming_auth_username.present? }
   validates :incoming_auth_username, :incoming_auth_password, format: { without: /\s/, message: 'must contain no spaces' }
