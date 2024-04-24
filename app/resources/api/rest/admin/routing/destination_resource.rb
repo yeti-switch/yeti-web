@@ -4,7 +4,7 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   model_name 'Routing::Destination'
 
   module CONST
-    SYSTEM_NAMESPACE_RELATIONS = %w[Country].freeze
+    SYSTEM_NAMESPACE_RELATIONS = %w[Country Network].freeze
   end.freeze
 
   attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
@@ -18,6 +18,8 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   has_one :rate_group, class_name: 'RateGroup'
   has_one :routing_tag_mode, class_name: 'RoutingTagMode'
   has_one :country, class_name: 'Country', force_routed: true, foreign_key_on: :related
+  has_one :network, class_name: 'Network', force_routed: true, foreign_key_on: :related
+  has_many :destination_next_rates, class_name: 'DestinationNextRate'
 
   filters :external_id, :prefix, :rate_group_id
 
