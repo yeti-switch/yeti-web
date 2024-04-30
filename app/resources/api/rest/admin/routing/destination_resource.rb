@@ -85,7 +85,7 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   end
 
   def self.sortable_fields(_context = nil)
-    super + [:'country.name']
+    super + %i[country.name network.name]
   end
 
   def self.resource_for(type)
@@ -105,6 +105,9 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
       when 'country.name'
         local_records = records.left_joins(:country).order("countries.name #{direction}")
         order_options.delete('country.name')
+      when 'network.name'
+        local_records = records.left_joins(:network).order("networks.name #{direction}")
+        order_options.delete('network.name')
       else
         local_records = apply_sort(local_records, order_options, context)
       end
