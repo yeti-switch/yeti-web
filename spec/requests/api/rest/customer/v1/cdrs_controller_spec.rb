@@ -397,6 +397,22 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       )
     end
 
+    context 'when customer_api_cdr_hide_fields configured' do
+      before do
+        allow(YetiConfig).to receive(:customer_api_cdr_hide_fields).and_return(
+          %w[auth_orig_ip lega_user_agent]
+        )
+      end
+
+      it 'returns record with expected attributes' do
+        subject
+        attribute_keys = response_json[:data][:attributes].keys
+        expect(attribute_keys).to include(:'auth-orig-port')
+        expect(attribute_keys).not_to include(:'auth-orig-ip')
+        expect(attribute_keys).not_to include(:'lega-user-agent')
+      end
+    end
+
     context 'with include auth-orig-transport-protocol' do
       let(:json_api_request_query) { { include: 'auth-orig-transport-protocol' } }
 

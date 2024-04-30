@@ -83,6 +83,8 @@ Config.setup do |setup_config|
       optional(:url_callback).maybe(:string)
       optional(:url_return).maybe(:string)
     end
+
+    optional(:customer_api_cdr_hide_fields).array(:string)
   end
 end
 
