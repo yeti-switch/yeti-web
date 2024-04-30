@@ -102,6 +102,12 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
     _model.has_recording?
   end
 
+  def fetchable_fields
+    fields = super
+    hidden_fields = YetiConfig.customer_api_cdr_hide_fields || []
+    fields - hidden_fields.map(&:to_sym)
+  end
+
   def self.apply_allowed_accounts(records, options)
     context = options[:context]
     scope = records.where_customer(context[:customer_id])
