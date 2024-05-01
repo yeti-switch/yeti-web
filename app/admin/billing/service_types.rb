@@ -49,6 +49,4 @@ ActiveAdmin.register Billing::ServiceType, as: 'ServiceType' do
     end
     f.actions
   end
-
 end
-

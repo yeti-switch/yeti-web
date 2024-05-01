@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: transactions
@@ -52,5 +54,4 @@ class Billing::Transaction < ApplicationRecord
       throw(:abort) unless account.save
     end
   end
-
 end

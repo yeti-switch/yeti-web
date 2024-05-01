@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: services
@@ -52,16 +54,18 @@ class Billing::Service < ApplicationRecord
 
   def create_initial_transaction
     return if initial_price == 0
+
     account.lock! # will generate SELECT FOR UPDATE SQL statement
-    t = Billing::Transaction.new(service_id: id, account_id: account_id, amount: initial_price, description: "Service creation")
+    t = Billing::Transaction.new(service_id: id, account_id: account_id, amount: initial_price, description: 'Service creation')
     throw(:abort) unless t.save
   end
+
   def renew
     account.lock! # will generate SELECT FOR UPDATE SQL statement
-    if (account.balance-account.min_balance < renew_price) and not type.force_renew
-      return
+    if (account.balance - account.min_balance < renew_price) && !type.force_renew
+      nil
     else
-      t = Billing::Transaction.new(service_id: id, account_id: account_id, amount: renew_price, description: "Renew service")
+      t = Billing::Transaction.new(service_id: id, account_id: account_id, amount: renew_price, description: 'Renew service')
       throw(:abort) unless t.save
     end
   end

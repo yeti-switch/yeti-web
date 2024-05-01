@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Routing::Rateplan do
   menu parent: 'Routing', label: 'Rateplans', priority: 40
-  config.batch_actions = true
   decorate_with RateplanDecorator
 
   acts_as_audit

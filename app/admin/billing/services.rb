@@ -28,7 +28,6 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
   filter :renew_price
   filter :renew_at
 
-
   index do
     selectable_column
     id_column
@@ -77,10 +76,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
       if f.object.new_record?
         f.input :renew_at, as: :date_time_picker
       end
-
     end
     f.actions
   end
-
 end
-

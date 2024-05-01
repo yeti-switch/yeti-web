@@ -51,6 +51,4 @@ ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
       row :description
     end
   end
-
 end
-

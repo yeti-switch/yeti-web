@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: service_types
@@ -23,10 +25,10 @@ class Billing::ServiceType < ApplicationRecord
   validate :provisioning_class_immutable
 
   protected
+
   def provisioning_class_immutable
     if provisioning_class_changed?
       errors.add(:provisioning_class, I18n.t('activerecord.errors.models.billing.service_type.provisioning_class_immutable')) if services.any?
     end
   end
-
 end
