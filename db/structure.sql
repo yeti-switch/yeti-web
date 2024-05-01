@@ -30589,6 +30589,110 @@ ALTER SEQUENCE billing.payments_id_seq OWNED BY billing.payments.id;
 
 
 --
+-- Name: service_types; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.service_types (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    provisioning_class character varying,
+    variables jsonb,
+    force_renew boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: service_types_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.service_types_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: service_types_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.service_types_id_seq OWNED BY billing.service_types.id;
+
+
+--
+-- Name: services; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.services (
+    id bigint NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    type_id smallint NOT NULL,
+    account_id integer NOT NULL,
+    name character varying,
+    variables jsonb,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    renew_at timestamp with time zone,
+    initial_price numeric NOT NULL,
+    renew_price numeric NOT NULL
+);
+
+
+--
+-- Name: services_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.services_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: services_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.services_id_seq OWNED BY billing.services.id;
+
+
+--
+-- Name: transactions; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.transactions (
+    id bigint NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    account_id integer NOT NULL,
+    service_id bigint,
+    amount numeric NOT NULL,
+    description character varying
+);
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.transactions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.transactions_id_seq OWNED BY billing.transactions.id;
+
+
+--
 -- Name: area_prefixes; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -35379,6 +35483,27 @@ ALTER TABLE ONLY billing.payments ALTER COLUMN id SET DEFAULT nextval('billing.p
 
 
 --
+-- Name: service_types id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.service_types ALTER COLUMN id SET DEFAULT nextval('billing.service_types_id_seq'::regclass);
+
+
+--
+-- Name: services id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.services ALTER COLUMN id SET DEFAULT nextval('billing.services_id_seq'::regclass);
+
+
+--
+-- Name: transactions id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.transactions ALTER COLUMN id SET DEFAULT nextval('billing.transactions_id_seq'::regclass);
+
+
+--
 -- Name: area_prefixes id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -36254,6 +36379,38 @@ ALTER TABLE ONLY billing.payments
 
 ALTER TABLE ONLY billing.payments
     ADD CONSTRAINT payments_uuid_key UNIQUE (uuid);
+
+
+--
+-- Name: service_types service_types_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.service_types
+    ADD CONSTRAINT service_types_name_key UNIQUE (name);
+
+
+--
+-- Name: service_types service_types_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.service_types
+    ADD CONSTRAINT service_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: services services_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.services
+    ADD CONSTRAINT services_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.transactions
+    ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);
 
 
 --
@@ -38198,6 +38355,55 @@ CREATE INDEX payments_account_id_idx ON billing.payments USING btree (account_id
 
 
 --
+-- Name: services_account_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX services_account_id_idx ON billing.services USING btree (account_id);
+
+
+--
+-- Name: services_renew_at_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX services_renew_at_idx ON billing.services USING btree (renew_at);
+
+
+--
+-- Name: services_type_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX services_type_id_idx ON billing.services USING btree (type_id);
+
+
+--
+-- Name: services_uuid_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX services_uuid_idx ON billing.services USING btree (uuid);
+
+
+--
+-- Name: transactions_account_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX transactions_account_id_idx ON billing.transactions USING btree (account_id);
+
+
+--
+-- Name: transactions_service_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX transactions_service_id_idx ON billing.transactions USING btree (service_id);
+
+
+--
+-- Name: transactions_uuid_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX transactions_uuid_idx ON billing.transactions USING btree (uuid);
+
+
+--
 -- Name: blacklist_items_blacklist_id_key_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -38724,6 +38930,30 @@ ALTER TABLE ONLY billing.account_balance_notification_settings
 
 ALTER TABLE ONLY billing.payments
     ADD CONSTRAINT payments_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+
+
+--
+-- Name: services services_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.services
+    ADD CONSTRAINT services_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+
+
+--
+-- Name: services services_type_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.services
+    ADD CONSTRAINT services_type_id_fkey FOREIGN KEY (type_id) REFERENCES billing.service_types(id);
+
+
+--
+-- Name: transactions transactions_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.transactions
+    ADD CONSTRAINT transactions_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
 
 
 --
@@ -39951,6 +40181,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240401193125'),
 ('20240408143817'),
 ('20240410084634'),
-('20240422204044');
+('20240422204044'),
+('20240425124935');
 
 

@@ -3,7 +3,7 @@
 ActiveAdmin.register RealtimeData::IncomingRegistration, as: 'Incoming Registrations' do
   actions :index
   config.batch_actions = false
-  menu parent: 'Realtime Data', priority: 30, if: proc { Node.any? }
+  menu parent: 'Realtime Data', priority: 30, if: proc { authorized?(:index, RealtimeData::IncomingRegistration) && Node.any? }
 
   controller do
     def find_collection
