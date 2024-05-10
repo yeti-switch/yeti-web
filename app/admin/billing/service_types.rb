@@ -3,7 +3,7 @@
 ActiveAdmin.register Billing::ServiceType, as: 'ServiceType' do
   menu parent: %w[Billing Settings], label: 'Service Types', priority: 100
 
-  permit_params :id, :name, :provisioning_class, :variables, :force_renew
+  permit_params :id, :name, :provisioning_class, :force_renew, :variables
 
   acts_as_audit
   acts_as_clone
@@ -45,7 +45,7 @@ ActiveAdmin.register Billing::ServiceType, as: 'ServiceType' do
       f.input :name
       f.input :force_renew
       f.input :provisioning_class
-      f.input :variables
+      f.input :variables, as: :text
     end
     f.actions
   end

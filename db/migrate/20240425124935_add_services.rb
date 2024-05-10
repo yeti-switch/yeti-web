@@ -16,8 +16,10 @@ class AddServices < ActiveRecord::Migration[7.0]
         account_id integer not null references billing.accounts(id),
         name varchar,
         variables jsonb,
+        state_id smallint not null,
         created_at timestamptz not null default now(),
         renew_at timestamptz,
+        renew_period_id smallint,
         initial_price numeric not null,
         renew_price numeric not null
       );

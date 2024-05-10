@@ -30632,8 +30632,10 @@ CREATE TABLE billing.services (
     account_id integer NOT NULL,
     name character varying,
     variables jsonb,
+    state_id smallint NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     renew_at timestamp with time zone,
+    renew_period_id smallint,
     initial_price numeric NOT NULL,
     renew_price numeric NOT NULL
 );

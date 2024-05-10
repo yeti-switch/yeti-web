@@ -7,7 +7,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
   scope :for_renew
   scope :one_time_services
 
-  permit_params :id, :name, :account_id, :type_id, :variables, :initial_price, :renew_price, :renew_at
+  permit_params :id, :name, :account_id, :type_id, :variables, :initial_price, :renew_price, :renew_at, :renew_period_id
 
   acts_as_audit
   acts_as_clone
@@ -36,10 +36,14 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
     column :account
     column :type
     column :variables
+    column :state do |s|
+      status_tag(s.state_name, class: s.state_color)
+    end
     column :initial_price
     column :renew_price
     column :created_at
     column :renew_at
+    column :renew_period, &:renew_period_name
     column :uuid
   end
 
@@ -50,10 +54,14 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
       row :account
       row :type
       row :variables
+      row :state do |s|
+        status_tag(s.state_name, class: s.state_color)
+      end
       row :initial_price
       row :renew_price
       row :created_at
       row :renew_at
+      row :renew_period, &:renew_period_name
       row :uuid
     end
   end
@@ -75,6 +83,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
       f.input :renew_price
       if f.object.new_record?
         f.input :renew_at, as: :date_time_picker
+        f.input :renew_period_id, as: :select, include_blank: 'Disable renew', collection: Billing::Service::RENEW_PERIODS.invert
       end
     end
     f.actions
