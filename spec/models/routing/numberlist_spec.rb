@@ -149,4 +149,17 @@ RSpec.describe Routing::Numberlist do
       end
     end
   end
+
+  describe '.destroy!' do
+    subject { record.destroy! }
+
+    context 'when record has related customer_auth' do
+      let!(:record) { FactoryBot.create(:numberlist) }
+      let!(:customers_auth) { FactoryBot.create(:customers_auth, src_numberlist: record) }
+
+      it 'should destroy record' do
+        expect { subject }.to change(described_class, :count).by(-1)
+      end
+    end
+  end
 end
