@@ -46,6 +46,31 @@ RSpec.describe Worker::ScheduleRateChanges, type: :job do
     expect { subject }.to change { Routing::DestinationNextRate.count }.by(destinations.size)
   end
 
+  context 'when rate_attrs include only one rate field' do
+    let(:rate_attrs) do
+      super().merge(
+        initial_rate: nil,
+        next_interval: nil,
+        next_rate: nil,
+        connect_fee: nil
+      )
+    end
+
+    it 'should call Destination::ScheduleRateChanges service' do
+      expect(Destination::ScheduleRateChanges).to receive(:call).with(
+        ids: match_array(destinations.pluck(:id)),
+        apply_time:,
+        initial_interval:,
+        initial_rate: nil,
+        next_interval: nil,
+        next_rate: nil,
+        connect_fee: nil
+      ).and_call_original
+
+      expect { subject }.to change { Routing::DestinationNextRate.count }.by(destinations.size)
+    end
+  end
+
   context 'when Destination::ScheduleRateChanges service raise error' do
     let(:error) { Destination::ScheduleRateChanges::Error.new('some error') }
 

@@ -19,17 +19,13 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                            if: -> { authorized?(:batch_update, resource_klass) } do
     attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee)
 
-    if attrs.present?
-      form = Destination::ScheduleRateChangesForm.new(attrs)
-      form.ids_sql = scoped_collection_records.select(:id).to_sql
+    form = Destination::ScheduleRateChangesForm.new(attrs)
+    form.ids_sql = scoped_collection_records.select(:id).to_sql
 
-      if form.save
-        flash[:notice] = 'Rate changes are scheduled'
-      else
-        flash[:error] = "Validation Error: #{form.errors.full_messages.to_sentence}"
-      end
+    if form.save
+      flash[:notice] = 'Rate changes are scheduled'
     else
-      flash[:error] = 'All Rate params are required'
+      flash[:error] = "Validation Error: #{form.errors.full_messages.to_sentence}"
     end
 
     head 200

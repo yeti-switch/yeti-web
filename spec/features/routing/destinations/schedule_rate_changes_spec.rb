@@ -64,6 +64,173 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
     )
   end
 
+  context 'when selected only apply_time field' do
+    let(:fill_form!) do
+      check :Apply_time
+      fill_in :apply_time, with: apply_time_formatted
+    end
+
+    it 'should show error message' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message('At least one of the following fields must be filled: '\
+                                             'initial_interval, initial_rate, next_interval, next_rate, connect_fee',
+                                           type: :error)
+      end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
+    end
+  end
+
+  context 'when selected only rate field' do
+    let(:fill_form!) do
+      check :Initial_interval
+      fill_in :initial_interval, with: initial_interval
+    end
+
+    it 'should show error message' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message("Apply time can't be blank", type: :error)
+      end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
+    end
+  end
+
+  context 'when selected only apply_time and initial_interval field' do
+    let(:fill_form!) do
+      check :Apply_time
+      fill_in :apply_time, with: apply_time_formatted
+      check :Initial_interval
+      fill_in :initial_interval, with: initial_interval
+    end
+
+    it 'should enqueue Worker::ScheduleRateChanges job' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
+      end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
+        ids_sql,
+        {
+          apply_time:,
+          initial_interval:,
+          initial_rate: nil,
+          next_interval: nil,
+          next_rate: nil,
+          connect_fee: nil
+        }
+      )
+    end
+  end
+
+  context 'when selected only apply_time and initial_rate field' do
+    let(:fill_form!) do
+      check :Apply_time
+      fill_in :apply_time, with: apply_time_formatted
+      check :Initial_rate
+      fill_in :initial_rate, with: initial_rate
+    end
+
+    it 'should enqueue Worker::ScheduleRateChanges job' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
+      end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
+        ids_sql,
+        {
+          apply_time:,
+          initial_interval: nil,
+          initial_rate:,
+          next_interval: nil,
+          next_rate: nil,
+          connect_fee: nil
+        }
+      )
+    end
+  end
+
+  context 'when selected only apply_time and next_interval field' do
+    let(:fill_form!) do
+      check :Apply_time
+      fill_in :apply_time, with: apply_time_formatted
+      check :Next_interval
+      fill_in :next_interval, with: next_interval
+    end
+
+    it 'should enqueue Worker::ScheduleRateChanges job' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
+      end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
+        ids_sql,
+        {
+          apply_time:,
+          initial_interval: nil,
+          initial_rate: nil,
+          next_interval:,
+          next_rate: nil,
+          connect_fee: nil
+        }
+      )
+    end
+  end
+
+  context 'when selected only apply_time and next_rate field' do
+    let(:fill_form!) do
+      check :Apply_time
+      fill_in :apply_time, with: apply_time_formatted
+      check :Next_rate
+      fill_in :next_rate, with: next_rate
+    end
+
+    it 'should enqueue Worker::ScheduleRateChanges job' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
+      end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
+        ids_sql,
+        {
+          apply_time:,
+          initial_interval: nil,
+          initial_rate: nil,
+          next_interval: nil,
+          next_rate:,
+          connect_fee: nil
+        }
+      )
+    end
+  end
+
+  context 'when selected only apply_time and connect_fee field' do
+    let(:fill_form!) do
+      check :Apply_time
+      fill_in :apply_time, with: apply_time_formatted
+      check :Connect_fee
+      fill_in :connect_fee, with: connect_fee
+    end
+
+    it 'should enqueue Worker::ScheduleRateChanges job' do
+      expect do
+        subject
+
+        expect(page).to have_flash_message('Rate changes are scheduled', type: :notice)
+      end.to have_enqueued_job(Worker::ScheduleRateChanges).on_queue('batch_actions').with(
+        ids_sql,
+        {
+          apply_time:,
+          initial_interval: nil,
+          initial_rate: nil,
+          next_interval: nil,
+          next_rate: nil,
+          connect_fee:
+        }
+      )
+    end
+  end
+
   context 'when selected records' do
     let(:filter!) do
       check "batch_action_item_#{destinations[0].id}"
@@ -145,7 +312,10 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
       expect do
         subject
 
-        expect(page).to have_flash_message('All Rate params are required', type: :error)
+        expect(page).to have_flash_message("Validation Error: Apply time can't be blank and At least one of the "\
+                                             'following fields must be filled: initial_interval, initial_rate, '\
+                                             'next_interval, next_rate, connect_fee',
+                                           type: :error)
       end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
     end
   end
