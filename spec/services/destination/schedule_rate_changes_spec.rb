@@ -60,7 +60,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                next_rate:,
                                connect_fee:,
                                apply_time:,
-                               destination_id: destination.id
+                               destination_id: destination.id,
+                               created_at: be_present,
+                               updated_at: be_present
                              )
     end
   end
@@ -98,7 +100,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate:,
                                  connect_fee:,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -139,7 +143,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate:,
                                  connect_fee:,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -176,7 +182,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate: destination.next_rate,
                                  connect_fee: destination.connect_fee,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -213,7 +221,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate: destination.next_rate,
                                  connect_fee: destination.connect_fee,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -250,7 +260,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate: destination.next_rate,
                                  connect_fee: destination.connect_fee,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -287,7 +299,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate:,
                                  connect_fee: destination.connect_fee,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -324,7 +338,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate: destination.next_rate,
                                  connect_fee:,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
@@ -360,7 +376,9 @@ RSpec.describe Destination::ScheduleRateChanges do
                                  next_rate: destination.next_rate,
                                  connect_fee: destination.connect_fee,
                                  apply_time:,
-                                 destination_id: destination.id
+                                 destination_id: destination.id,
+                                 created_at: be_present,
+                                 updated_at: be_present
                                )
       end
     end
