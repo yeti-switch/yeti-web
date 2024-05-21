@@ -21,14 +21,16 @@ module Destination
         Routing::DestinationNextRate.where(destination_id: ids).delete_all
 
         sql = <<-SQL.squish
-          INSERT INTO class4.destination_next_rates (destination_id, initial_interval, initial_rate, next_interval, next_rate, connect_fee, apply_time)
+          INSERT INTO class4.destination_next_rates (destination_id, initial_interval, initial_rate, next_interval, next_rate, connect_fee, apply_time, created_at, updated_at)
           SELECT id,
                  #{initial_interval.nil? ? 'initial_interval' : ':initial_interval'},
                  #{initial_rate.nil? ? 'initial_rate' : ':initial_rate'},
                  #{next_interval.nil? ? 'next_interval' : ':next_interval'},
                  #{next_rate.nil? ? 'next_rate' : ':next_rate'},
                  #{connect_fee.nil? ? 'connect_fee' : ':connect_fee'},
-                 :apply_time
+                 :apply_time,
+                 NOW(),
+                 NOW()
           FROM class4.destinations
           WHERE id IN (#{ids.join(',')})
         SQL
