@@ -68,4 +68,12 @@ class InvoiceDecorator < BillingDecorator
   def decorated_terminated_calls_duration_dec
     time_format_min_dec :terminated_calls_duration
   end
+
+  def decorated_services_amount_spent
+    money_format :services_amount_spent
+  end
+
+  def decorated_services_amount_earned
+    money_format :services_amount_earned
+  end
 end

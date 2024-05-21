@@ -196,7 +196,13 @@ module BillingInvoice
         i_term_calls_durationm: decorated_invoice.decorated_terminated_calls_duration_kolon,
         i_term_calls_duration_dec: decorated_invoice.decorated_terminated_calls_duration_dec,
         i_term_calls_duration: invoice.terminated_calls_duration,
-        i_term_successful_calls_count: invoice.terminated_successful_calls_count
+        i_term_successful_calls_count: invoice.terminated_successful_calls_count,
+
+        i_srv_spent: invoice.services_amount_spent,
+        i_srv_earned: invoice.services_amount_earned,
+        i_srv_spent_d: decorated_invoice.decorated_services_amount_spent,
+        i_srv_earned_d: decorated_invoice.decorated_services_amount_earned,
+        t_src_transactions_count: invoice.service_transactions_count
       }
     end
 
@@ -228,6 +234,10 @@ module BillingInvoice
 
       terminated_networks_succ = InvoiceTerminatedNetworkDecorator.decorate_collection(
         invoice.terminated_networks.for_invoice_succ.order('country_id, network_id').to_a
+      )
+
+      services = InvoiceServiceDataDecorator.decorate_collection(
+        invoice.services_data.for_invoice.to_a
       )
 
       ODFReport::Report.new(odf_path) do |r|
@@ -349,6 +359,12 @@ module BillingInvoice
           t.add_column(:amount_decorated, &:decorated_amount)
           t.add_column(:first_call_at)
           t.add_column(:last_call_at)
+        end
+        r.add_table('INV_SRV_DATA_TABLE', services, header: true, footer: true) do |t|
+          t.add_column(:service) { |field| field.service.try(:name) }
+          t.add_column(:transactions_count)
+          t.add_column(:amount)
+          t.add_column(:amount_decorated, &:decorated_amount)
         end
       end.generate(odf_path) # New ODFReport constructor return data, not a file name
     end

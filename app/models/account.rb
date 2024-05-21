@@ -74,6 +74,8 @@ class Account < ApplicationRecord
   belongs_to :timezone, class_name: 'System::Timezone', foreign_key: :timezone_id
 
   has_many :payments, dependent: :destroy
+  has_many :services, class_name: 'Billing::Service', dependent: :destroy
+  has_many :transactions, class_name: 'Billing::Transaction', dependent: :destroy
   has_many :invoices, class_name: 'Billing::Invoice'
   has_many :api_access, ->(record) { unscope(:where).where("? = ANY(#{table_name}.account_ids)", record.id) }, class_name: 'System::ApiAccess', autosave: false
   has_many :customers_auths, dependent: :restrict_with_error

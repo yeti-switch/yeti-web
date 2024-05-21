@@ -20,6 +20,9 @@
 #  originated_calls_duration         :bigint(8)        default(0), not null
 #  originated_successful_calls_count :bigint(8)        default(0), not null
 #  reference                         :string
+#  service_transactions_count        :integer(4)       default(0), not null
+#  services_amount_earned            :decimal(, )      default(0.0), not null
+#  services_amount_spent             :decimal(, )      default(0.0), not null
 #  start_date                        :timestamptz      not null
 #  terminated_amount_earned          :decimal(, )      default(0.0), not null
 #  terminated_amount_spent           :decimal(, )      default(0.0), not null

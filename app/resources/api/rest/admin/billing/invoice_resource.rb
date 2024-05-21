@@ -33,11 +33,16 @@ class Api::Rest::Admin::Billing::InvoiceResource < ::BaseResource
   attribute :terminated_first_call_at, delegate: :first_terminated_call_at
   attribute :terminated_last_call_at, delegate: :last_terminated_call_at
 
+  attribute :services_amount_spent
+  attribute :services_amount_earned
+  attribute :service_transactions_count
+
   has_one :account, class_name: 'Account', foreign_key_on: :related
   has_many :originated_destinations, class_name: 'InvoiceOriginatedDestination'
   has_many :originated_networks, class_name: 'InvoiceOriginatedNetwork'
   has_many :terminated_destinations, class_name: 'InvoiceTerminatedDestination'
   has_many :terminated_networks, class_name: 'InvoiceTerminatedNetwork'
+  has_many :service_data, class_name: 'InvoiceServiceDatum'
 
   ransack_filter :reference, type: :string
   ransack_filter :start_date, type: :datetime
@@ -72,6 +77,10 @@ class Api::Rest::Admin::Billing::InvoiceResource < ::BaseResource
   ransack_filter :terminated_billing_duration, type: :number
   ransack_filter :terminated_first_call_at, type: :datetime, column: :first_terminated_call_at
   ransack_filter :terminated_last_call_at, type: :datetime, column: :last_terminated_call_at
+
+  ransack_filter :services_amount_spent, type: :number
+  ransack_filter :services_amount_earned, type: :number
+  ransack_filter :service_transactions_count, type: :number
 
   ransack_filter :account_id, type: :foreign_key
 

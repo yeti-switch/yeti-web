@@ -223,7 +223,9 @@ RSpec.describe Api::Rest::Customer::V1::InvoicesController, type: :request do
             'terminated-billing-duration': invoice.terminated_billing_duration,
             'terminated-first-call-at': invoice.first_terminated_call_at&.iso8601(3),
             'terminated-last-call-at': invoice.last_terminated_call_at&.iso8601(3),
-            'has-pdf': invoice.invoice_document&.pdf_data.present?
+            'has-pdf': invoice.invoice_document&.pdf_data.present?,
+            'services-amount-spent': invoice.services_amount_spent.to_s,
+            'service-transactions-count': invoice.service_transactions_count
           },
           relationships: {
             account: {

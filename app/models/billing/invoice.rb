@@ -20,6 +20,9 @@
 #  originated_calls_duration         :bigint(8)        default(0), not null
 #  originated_successful_calls_count :bigint(8)        default(0), not null
 #  reference                         :string
+#  service_transactions_count        :integer(4)       default(0), not null
+#  services_amount_earned            :decimal(, )      default(0.0), not null
+#  services_amount_spent             :decimal(, )      default(0.0), not null
 #  start_date                        :timestamptz      not null
 #  terminated_amount_earned          :decimal(, )      default(0.0), not null
 #  terminated_amount_spent           :decimal(, )      default(0.0), not null
@@ -58,7 +61,10 @@ class Billing::Invoice < Cdr::Base
     :total_terminated_amount_earned,
     :total_terminated_calls_count,
     :total_terminated_calls_duration,
-    :total_terminated_billing_duration
+    :total_terminated_billing_duration,
+    :total_services_amount_spent,
+    :total_services_amount_earned,
+    :total_service_transactions_count
   )
 
   class << self
@@ -76,7 +82,10 @@ class Billing::Invoice < Cdr::Base
         'sum(terminated_amount_earned) as total_terminated_amount_earned',
         'sum(terminated_calls_count) as total_terminated_calls_count',
         'sum(terminated_calls_duration) as total_terminated_calls_duration',
-        'sum(terminated_billing_duration) as total_terminated_billing_duration'
+        'sum(terminated_billing_duration) as total_terminated_billing_duration',
+        'sum(services_amount_spent) as total_services_amount_spent',
+        'sum(services_amount_earned) as total_services_amount_earned',
+        'sum(service_transactions_count) as total_service_transactions_count'
       )
       Totals.new(*row)
     end
@@ -107,6 +116,7 @@ class Billing::Invoice < Cdr::Base
   has_many :terminated_destinations, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id, dependent: :delete_all
   has_many :originated_networks, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
   has_many :terminated_networks, class_name: 'Billing::InvoiceTerminatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
+  has_many :services_data, class_name: 'Billing::InvoiceServiceData', foreign_key: :invoice_id, dependent: :delete_all
 
   validates :contractor,
             :account,

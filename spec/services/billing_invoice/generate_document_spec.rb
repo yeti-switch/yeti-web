@@ -34,6 +34,7 @@ RSpec.describe BillingInvoice::GenerateDocument do
   before do
     FactoryBot.create_list(:invoice_originated_destination, 20, :success, invoice: invoice)
     FactoryBot.create_list(:invoice_terminated_destination, 15, :success, invoice: invoice)
+    FactoryBot.create_list(:invoice_service_data, 5, :filled, invoice: invoice)
   end
 
   it 'creates invoice document' do
