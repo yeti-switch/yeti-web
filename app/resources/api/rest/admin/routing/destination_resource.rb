@@ -99,17 +99,18 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   # related to issue https://github.com/cerebris/jsonapi-resources/issues/1409
   def self.sort_records(records, order_options, context = {})
     local_records = records
+    custom_sort_fields = %w[country.name network.name]
 
     order_options.each_pair do |field, direction|
       case field.to_s
       when 'country.name'
-        local_records = records.left_joins(:country).order("countries.name #{direction}")
+        local_records = local_records.left_joins(:country).order("countries.name #{direction}")
         order_options.delete('country.name')
       when 'network.name'
-        local_records = records.left_joins(:network).order("networks.name #{direction}")
+        local_records = local_records.left_joins(:network).order("networks.name #{direction}")
         order_options.delete('network.name')
       else
-        local_records = apply_sort(local_records, order_options, context)
+        local_records = apply_sort(local_records, order_options.except(*custom_sort_fields), context)
       end
     end
 

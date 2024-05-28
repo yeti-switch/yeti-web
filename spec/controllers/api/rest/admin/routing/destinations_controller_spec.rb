@@ -85,6 +85,18 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
             end
           end
 
+          context 'when sort by prefix in ASC order and then by country name' do
+            let(:index_params) { { sort: 'prefix,country.name' } }
+
+            it 'returns ordered records' do
+              subject
+
+              expect(response_body[:errors]).to be_nil
+              expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, third_destination_ukraine.id.to_s, second_destination_ukraine.id.to_s]
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 555 999]
+            end
+          end
+
           context 'when sort by country name in ASC order and then by prefix in DESC order' do
             let(:index_params) { { sort: 'country.name,-prefix' } }
 
@@ -94,6 +106,18 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
               expect(response_body[:errors]).to be_nil
               expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, second_destination_ukraine.id.to_s, third_destination_ukraine.id.to_s]
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 999 555]
+            end
+          end
+
+          context 'when sort by prefix in DESC order and then by country name' do
+            let(:index_params) { { sort: '-prefix,country.name' } }
+
+            it 'returns ordered records' do
+              subject
+
+              expect(response_body[:errors]).to be_nil
+              expect(response_body[:data].pluck(:id)).to eq [second_destination_ukraine.id.to_s, third_destination_ukraine.id.to_s, first_destination_afghanistan.id.to_s]
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[999 555 111]
             end
           end
         end
@@ -117,6 +141,15 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
             record
           end
 
+          let!(:fifth_destination_ukraine) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_abc_ua = FactoryBot.create(:network, name: 'ABCUkraineNet', network_type: net_type)
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_abc_ua)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '333')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
           context 'when sort by country name and then by prefix in ASC order' do
             let(:index_params) { { sort: 'country.name,network.name,prefix' } }
 
@@ -126,11 +159,12 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
               expect(response_body[:errors]).to be_nil
               expect(response_body[:data].pluck(:id)).to eq([
                                                               first_destination_afghanistan.id.to_s,
+                                                              fifth_destination_ukraine.id.to_s,
                                                               second_destination_ukraine.id.to_s,
                                                               fourth_destination_ukraine.id.to_s,
                                                               third_destination_ukraine.id.to_s
                                                             ])
-              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 999 444 777])
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 333 999 444 777])
             end
           end
 
@@ -143,11 +177,12 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :control
               expect(response_body[:errors]).to be_nil
               expect(response_body[:data].pluck(:id)).to eq([
                                                               first_destination_afghanistan.id.to_s,
+                                                              fifth_destination_ukraine.id.to_s,
                                                               second_destination_ukraine.id.to_s,
                                                               third_destination_ukraine.id.to_s,
                                                               fourth_destination_ukraine.id.to_s
                                                             ])
-              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 999 777 444])
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 333 999 777 444])
             end
           end
         end
