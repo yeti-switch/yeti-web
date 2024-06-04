@@ -19,7 +19,9 @@ ActiveAdmin.register Pop do
 
   form do |f|
     f.inputs do
-      f.input :id
+      if f.object.new_record?
+        f.input :id
+      end
       f.input :name
     end
     f.actions
