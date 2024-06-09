@@ -4,7 +4,9 @@ ActiveAdmin.setup do |config|
   config.namespace :root do |admin|
     #        admin.build_menu :utility_navigation do |menu|
     admin.build_menu do |menu|
-      menu.add label: 'Billing', priority: 20
+      menu.add label: 'Billing', priority: 20 do |sub_menu|
+        sub_menu.add label: 'Settings', priority: 1000
+      end
       menu.add label: 'Equipment', priority: 30 do |sub_menu|
         sub_menu.add label: 'RADIUS', priority: 900
         sub_menu.add label: 'STIR/SHAKEN', priority: 1000

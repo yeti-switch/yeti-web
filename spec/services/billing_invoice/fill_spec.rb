@@ -16,10 +16,11 @@ RSpec.describe BillingInvoice::Fill do
       expect { safe_subject }.to_not change {
         [
           invoice.reload.attributes,
-          invoice.originated_networks.count,
-          invoice.terminated_networks.count,
-          invoice.originated_destinations.count,
-          invoice.terminated_destinations.count
+          Billing::InvoiceOriginatedNetwork.count,
+          Billing::InvoiceTerminatedNetwork.count,
+          Billing::InvoiceOriginatedDestination.count,
+          Billing::InvoiceTerminatedDestination.count,
+          Billing::InvoiceServiceData.count
         ]
       }
     end
@@ -31,6 +32,12 @@ RSpec.describe BillingInvoice::Fill do
   end
 
   shared_examples :fills_invoice do
+    let(:expected_invoice_orig_net_qty) { 0 }
+    let(:expected_invoice_term_net_qty) { 0 }
+    let(:expected_invoice_orig_dst_qty) { 0 }
+    let(:expected_invoice_term_dst_qty) { 0 }
+    let(:expected_srv_data_qty) { 0 }
+    let(:expected_invoice_attrs) { {} }
     it 'fills invoice' do
       subject
       expect(invoice.reload).to have_attributes(
@@ -53,14 +60,48 @@ RSpec.describe BillingInvoice::Fill do
                                     terminated_calls_duration: 0,
                                     terminated_billing_duration: 0,
                                     first_terminated_call_at: nil,
-                                    last_terminated_call_at: nil
+                                    last_terminated_call_at: nil,
+                                    services_amount_spent: 0,
+                                    services_amount_earned: 0,
+                                    service_transactions_count: 0,
+                                    **expected_invoice_attrs
                                   )
     end
 
-    include_examples :changes_records_qty_of, Billing::InvoiceOriginatedNetwork, by: 0
-    include_examples :changes_records_qty_of, Billing::InvoiceTerminatedNetwork, by: 0
-    include_examples :changes_records_qty_of, Billing::InvoiceOriginatedDestination, by: 0
-    include_examples :changes_records_qty_of, Billing::InvoiceTerminatedDestination, by: 0
+    it 'changes Billing::InvoiceOriginatedNetwork records qty' do
+      expect { subject }.to change {
+        Billing::InvoiceOriginatedNetwork.count
+      }.by(expected_invoice_orig_net_qty)
+      expect(invoice.originated_networks.count).to eq(expected_invoice_orig_net_qty)
+    end
+
+    it 'changes Billing::InvoiceTerminatedNetwork records qty' do
+      expect { subject }.to change {
+        Billing::InvoiceTerminatedNetwork.count
+      }.by(expected_invoice_term_net_qty)
+      expect(invoice.terminated_networks.count).to eq(expected_invoice_term_net_qty)
+    end
+
+    it 'changes Billing::InvoiceOriginatedDestination records qty' do
+      expect { subject }.to change {
+        Billing::InvoiceOriginatedDestination.count
+      }.by(expected_invoice_orig_dst_qty)
+      expect(invoice.originated_destinations.count).to eq(expected_invoice_orig_dst_qty)
+    end
+
+    it 'changes Billing::InvoiceTerminatedDestination records qty' do
+      expect { subject }.to change {
+        Billing::InvoiceTerminatedDestination.count
+      }.by(expected_invoice_term_dst_qty)
+      expect(invoice.terminated_destinations.count).to eq(expected_invoice_term_dst_qty)
+    end
+
+    it 'changes Billing::InvoiceServiceData records qty' do
+      expect { subject }.to change {
+        Billing::InvoiceServiceData.count
+      }.by(expected_srv_data_qty)
+      expect(invoice.services_data.count).to eq(expected_srv_data_qty)
+    end
   end
 
   include_context :timezone_helpers
@@ -93,6 +134,46 @@ RSpec.describe BillingInvoice::Fill do
     before { stubs_generate_document }
 
     include_examples :fills_invoice
+  end
+
+  context 'with only service transactions' do
+    before { stubs_generate_document }
+    let!(:services) { FactoryBot.create_list(:service, 5, account:) }
+    let!(:service_transactions) do
+      [
+        *FactoryBot.create_list(:billing_transaction, 2, service: services[0], created_at: invoice.start_date),
+        FactoryBot.create(:billing_transaction, service: services[1], spent: false, created_at: invoice.end_date - 1.second),
+        FactoryBot.create(:billing_transaction, service: nil, account:, created_at: invoice.start_date + 1.hour)
+      ]
+    end
+
+    before do
+      # not included in time interval
+      FactoryBot.create_list(:billing_transaction, 5, service: services[1], created_at: invoice.start_date - 1.second)
+      FactoryBot.create_list(:billing_transaction, 6, service: services[2], created_at: invoice.end_date)
+      FactoryBot.create_list(:billing_transaction, 7, service: services[0], created_at: invoice.end_date + 1.hour)
+
+      # belongs to another account
+      another_acc = FactoryBot.create(:account)
+      another_service = FactoryBot.create(:service, account: another_acc)
+      FactoryBot.create_list(:billing_transaction, 8, service: another_service, created_at: invoice.start_date)
+    end
+
+    include_examples :fills_invoice do
+      let(:expected_srv_data_qty) { 3 }
+      let(:expected_invoice_attrs) do
+        services_amount_spent = service_transactions[0].amount + service_transactions[1].amount + service_transactions[3].amount
+        services_amount_earned = -1 * service_transactions[2].amount
+        {
+          services_amount_spent:,
+          services_amount_earned:,
+          service_transactions_count: service_transactions.size,
+          amount_spent: services_amount_spent,
+          amount_earned: services_amount_earned,
+          amount_total: services_amount_spent - services_amount_earned
+        }
+      end
+    end
   end
 
   context 'when invoice is pending' do

@@ -11,6 +11,7 @@ module BillingInvoice
 
         generate_originated_data
         generate_terminated_data
+        generate_services_data
         update_totals
         create_invoice_docs
       end
@@ -155,9 +156,35 @@ module BillingInvoice
         )
     end
 
+    def generate_services_data
+      rows = Billing::Transaction
+             .where(account_id: invoice.account_id)
+             .where('created_at >= ? AND created_at < ?', invoice.start_date, invoice.end_date)
+             .group(:service_id, 'amount > 0')
+             .pluck(
+                Arel.sql('service_id'),
+                Arel.sql('amount > 0 AS spent'),
+                Arel.sql('COUNT(id) AS transactions_count'),
+                Arel.sql('SUM(ABS(amount)) AS amount')
+              )
+      attrs_list = rows.map do |row|
+        {
+          service_id: row[0],
+          spent: row[1],
+          transactions_count: row[2],
+          amount: row[3],
+          invoice_id: invoice.id
+        }
+      end
+      Billing::InvoiceServiceData.insert_all!(attrs_list, returning: []) if attrs_list.present?
+    end
+
     def update_totals
       originated_data = invoice.originated_destinations.summary
       terminated_data = invoice.terminated_destinations.summary
+      service_data = invoice.services_data.summary
+      amount_spent = originated_data.amount_spent + terminated_data.amount_spent + service_data.amount_spent
+      amount_earned = originated_data.amount_earned + terminated_data.amount_earned + service_data.amount_earned
 
       invoice.update!(
           state_id: Billing::InvoiceState::PENDING,
@@ -180,9 +207,13 @@ module BillingInvoice
           first_terminated_call_at: terminated_data.first_call_at,
           last_terminated_call_at: terminated_data.last_call_at,
 
-          amount_spent: originated_data.amount_spent + terminated_data.amount_spent,
-          amount_earned: originated_data.amount_earned + terminated_data.amount_earned,
-          amount_total: (originated_data.amount_spent + terminated_data.amount_spent) - (originated_data.amount_earned + terminated_data.amount_earned)
+          services_amount_spent: service_data.amount_spent,
+          services_amount_earned: service_data.amount_earned,
+          service_transactions_count: service_data.transactions_count,
+
+          amount_spent:,
+          amount_earned:,
+          amount_total: amount_spent - amount_earned
         )
     end
 

@@ -119,6 +119,10 @@ Rails.application.routes.draw do
             jsonapi_resources :invoice_originated_networks, only: %i[index show]
             jsonapi_resources :invoice_terminated_destinations, only: %i[index show]
             jsonapi_resources :invoice_terminated_networks, only: %i[index show]
+            jsonapi_resources :invoice_service_data, only: %i[index show]
+            jsonapi_resources :service_types
+            jsonapi_resources :services, only: %i[index show create update]
+            jsonapi_resources :transactions, only: %i[index show]
           end
 
           namespace :system do
@@ -197,6 +201,8 @@ Rails.application.routes.draw do
               member { get :download }
             end
             jsonapi_resources :countries, only: %i[index show]
+            jsonapi_resources :services, only: %i[index show]
+            jsonapi_resources :transactions, only: %i[index show]
           end
         end
 

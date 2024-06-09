@@ -1804,6 +1804,39 @@ ALTER SEQUENCE billing.invoice_originated_networks_id_seq OWNED BY billing.invoi
 
 
 --
+-- Name: invoice_service_data; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.invoice_service_data (
+    id bigint NOT NULL,
+    invoice_id integer NOT NULL,
+    service_id bigint,
+    amount numeric NOT NULL,
+    spent boolean DEFAULT true NOT NULL,
+    transactions_count integer NOT NULL
+);
+
+
+--
+-- Name: invoice_service_data_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.invoice_service_data_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invoice_service_data_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.invoice_service_data_id_seq OWNED BY billing.invoice_service_data.id;
+
+
+--
 -- Name: invoice_terminated_destinations; Type: TABLE; Schema: billing; Owner: -
 --
 
@@ -1917,7 +1950,10 @@ CREATE TABLE billing.invoices (
     originated_amount_earned numeric DEFAULT 0 NOT NULL,
     amount_spent numeric DEFAULT 0 NOT NULL,
     amount_earned numeric DEFAULT 0 NOT NULL,
-    amount_total numeric DEFAULT 0 NOT NULL
+    amount_total numeric DEFAULT 0 NOT NULL,
+    services_amount_spent numeric DEFAULT 0.0 NOT NULL,
+    services_amount_earned numeric DEFAULT 0.0 NOT NULL,
+    service_transactions_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -3292,6 +3328,13 @@ ALTER TABLE ONLY billing.invoice_originated_networks ALTER COLUMN id SET DEFAULT
 
 
 --
+-- Name: invoice_service_data id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_service_data ALTER COLUMN id SET DEFAULT nextval('billing.invoice_service_data_id_seq'::regclass);
+
+
+--
 -- Name: invoice_terminated_destinations id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -3545,6 +3588,14 @@ ALTER TABLE ONLY billing.invoice_documents
 
 ALTER TABLE ONLY billing.invoice_originated_networks
     ADD CONSTRAINT invoice_networks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invoice_service_data invoice_service_data_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_service_data
+    ADD CONSTRAINT invoice_service_data_pkey PRIMARY KEY (id);
 
 
 --
@@ -3958,6 +4009,13 @@ CREATE INDEX invoice_originated_networks_invoice_id_idx ON billing.invoice_origi
 
 
 --
+-- Name: invoice_service_data_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX invoice_service_data_invoice_id_idx ON billing.invoice_service_data USING btree (invoice_id);
+
+
+--
 -- Name: invoice_terminated_destinations_invoice_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -4126,6 +4184,14 @@ ALTER TABLE ONLY billing.invoice_originated_destinations
 
 ALTER TABLE ONLY billing.invoice_originated_networks
     ADD CONSTRAINT invoice_originated_networks_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
+
+
+--
+-- Name: invoice_service_data invoice_service_data_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_service_data
+    ADD CONSTRAINT invoice_service_data_invoice_id_fkey FOREIGN KEY (invoice_id) REFERENCES billing.invoices(id);
 
 
 --
@@ -4314,6 +4380,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20231231115209'),
 ('20240122201619'),
 ('20240405165010'),
-('20240411092931');
+('20240411092931'),
+('20240609092136');
 
 

@@ -207,6 +207,30 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       end
     }, &:decorated_terminated_billing_duration
 
+    column :services_amount_spent, footer: lambda {
+      strong do
+        @footer_data.money_format :total_services_amount_spent
+      end
+    } do |c|
+      strong do
+        c.decorated_services_amount_spent
+      end
+    end
+    column :terminated_amount_earned, footer: lambda {
+      strong do
+        @footer_data.money_format :total_services_amount_earned
+      end
+    } do |c|
+      strong do
+        c.decorated_services_amount_earned
+      end
+    end
+    column :services_transactions_count, footer: lambda {
+      strong do
+        @footer_data.total_service_transactions_count.to_i
+      end
+    }
+
     column :created_at
     column 'UUID', :uuid
   end
@@ -236,6 +260,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :terminated_billing_duration
   filter :terminated_calls_count
   filter :terminated_calls_duration
+  filter :services_amount_spent
+  filter :services_amount_earned
+  filter :services_transactions_count
 
   show do |s|
     tabs do
@@ -297,6 +324,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
           end
         end
       end
+
       tab 'Originated traffic' do
         panel 'Summary' do
           attributes_table_for s do
@@ -441,6 +469,34 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             end
             column :first_call_at
             column :last_call_at
+          end
+        end
+      end
+
+      tab 'Services data' do
+        panel 'Summary' do
+          attributes_table_for s do
+            row :services_amount_spent do
+              strong do
+                s.decorated_services_amount_spent
+              end
+            end
+            row :services_amount_earned do
+              strong do
+                s.decorated_services_amount_earned
+              end
+            end
+            row :services_transactions_count
+          end
+        end
+        panel 'By service' do
+          table_for InvoiceServiceDataDecorator.decorate_collection(resource.services_data.preload(:service)) do
+            column :type, :type_badge
+            column :service, :service_link
+            column :amount do |r|
+              strong { r.decorated_amount }
+            end
+            column :transactions_count
           end
         end
       end

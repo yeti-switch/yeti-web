@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
-  menu parent: 'Billing', label: 'Invoice templates', priority: 40
+  menu parent: %w[Billing Settings], label: 'Invoice templates', priority: 90
   config.batch_actions = false
   actions :all # :index,:create, :new, :destroy, :delete, :edit, :update
   before_action :left_sidebar!

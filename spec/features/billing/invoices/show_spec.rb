@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Invoices show page', js: true do
+RSpec.describe 'Invoices show page', js: true, bullet: [:n] do
   subject do
     visit invoice_path(invoice.id)
   end

@@ -26,6 +26,9 @@ class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseRe
   attribute :terminated_first_call_at, delegate: :first_terminated_call_at
   attribute :terminated_last_call_at, delegate: :last_terminated_call_at
 
+  attribute :services_amount_spent
+  attribute :service_transactions_count
+
   has_one :account, foreign_key_on: :related
 
   ransack_filter :reference, type: :string
@@ -48,6 +51,9 @@ class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :terminated_billing_duration, type: :number
   ransack_filter :terminated_first_call_at, type: :datetime, column: :first_terminated_call_at
   ransack_filter :terminated_last_call_at, type: :datetime, column: :last_terminated_call_at
+
+  ransack_filter :services_amount_spent, type: :number
+  ransack_filter :service_transactions_count, type: :number
 
   association_uuid_filter :account_id, class_name: 'Account'
 

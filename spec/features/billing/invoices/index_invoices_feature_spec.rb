@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Index Invoices', type: :feature do
+RSpec.describe 'Index Invoices', type: :feature, bullet: [:n] do
   include_context :login_as_admin
   before do
     Billing::Invoice.delete_all

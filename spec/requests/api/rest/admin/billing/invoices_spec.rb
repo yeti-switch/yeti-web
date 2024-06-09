@@ -159,7 +159,10 @@ RSpec.describe Api::Rest::Admin::Billing::InvoicesController, type: :request, bu
         'terminated-calls-duration': invoice.terminated_calls_duration,
         'terminated-billing-duration': invoice.terminated_billing_duration,
         'terminated-first-call-at': invoice.first_terminated_call_at&.iso8601(3),
-        'terminated-last-call-at': invoice.last_terminated_call_at&.iso8601(3)
+        'terminated-last-call-at': invoice.last_terminated_call_at&.iso8601(3),
+        'services-amount-spent': invoice.services_amount_spent.to_s,
+        'services-amount-earned': invoice.services_amount_earned.to_s,
+        'service-transactions-count': invoice.service_transactions_count
       }
     end
 
@@ -169,6 +172,7 @@ RSpec.describe Api::Rest::Admin::Billing::InvoicesController, type: :request, bu
       originated-networks
       terminated-destinations
       terminated-networks
+      service-data
     ]
     include_examples :returns_json_api_record, relationships: do
       let(:json_api_record_id) { record_id }
