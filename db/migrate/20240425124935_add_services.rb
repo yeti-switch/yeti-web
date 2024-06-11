@@ -41,7 +41,28 @@ class AddServices < ActiveRecord::Migration[7.0]
       create index on billing.transactions using btree (account_id);
       create index on billing.transactions using btree (service_id);
 
-      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (18, 'ServiceRenew', NULL, NULL, NULL);
+
+      delete from sys.jobs;
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (1, 'CdrPartitioning', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (2, 'EventProcessor', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (3, 'CdrBatchCleaner', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (4, 'PartitionRemoving', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (5, 'CallsMonitoring', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (6, 'StatsClean', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (7, 'StatsAggregation', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (8, 'Invoice', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (9, 'ReportScheduler', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (10, 'TerminationQualityCheck', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (11, 'DialpeerRatesApply', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (12, 'AccountBalanceNotify', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (13, 'SyncDatabaseTables', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (14, 'DeleteExpiredDestinations', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (15, 'DeleteExpiredDialpeers', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (16, 'DeleteAppliedRateManagementPricelists', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (17, 'DeleteBalanceNotifications', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (18, 'PrometheusCustomerAuthStats', NULL, NULL, NULL);
+      INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (19, 'ServiceRenew', NULL, NULL, NULL);
+
     }
   end
 
@@ -51,7 +72,7 @@ class AddServices < ActiveRecord::Migration[7.0]
       drop table billing.services;
       drop table billing.service_types;
 
-      delete from sys.jobs where id = 18;
+      delete from sys.jobs where id = 19;
     }
   end
 end
