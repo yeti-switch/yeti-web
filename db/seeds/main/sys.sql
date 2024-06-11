@@ -90,9 +90,10 @@ INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALU
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (13, 'SyncDatabaseTables', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (14, 'DeleteExpiredDestinations', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (15, 'DeleteExpiredDialpeers', NULL, NULL, NULL);
-INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (16, 'DeleteBalanceNotifications', NULL, NULL, NULL);
-INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (17, 'PrometheusCustomerAuthStats', NULL, NULL, NULL);
-INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (18, 'ServiceRenew', NULL, NULL, NULL);
+INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (16, 'DeleteAppliedRateManagementPricelists', NULL, NULL, NULL);
+INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (17, 'DeleteBalanceNotifications', NULL, NULL, NULL);
+INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (18, 'PrometheusCustomerAuthStats', NULL, NULL, NULL);
+INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (19, 'ServiceRenew', NULL, NULL, NULL);
 --
 -- Data for Name: lnp_resolvers; Type: TABLE DATA; Schema: sys; Owner: senid
 --
