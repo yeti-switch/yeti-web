@@ -20,11 +20,14 @@ ActiveAdmin.register Routing::RoutingPlan do
                  :validate_dst_number_format,
                  :validate_dst_number_network,
                  :validate_src_number_format,
-                 :validate_src_number_network
+                 :validate_src_number_network,
+                 [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) }],
+                 [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) }]
 
   permit_params :name, :sorting_id, :use_lnp, :rate_delta_max, :max_rerouting_attempts,
                 :validate_dst_number_format, :validate_dst_number_network,
                 :validate_src_number_format, :validate_src_number_network,
+                :src_numberlist_id, :dst_numberlist_id,
                 routing_group_ids: []
 
   includes :routing_groups
@@ -52,6 +55,8 @@ ActiveAdmin.register Routing::RoutingPlan do
     column :validate_dst_number_network
     column :validate_src_number_format
     column :validate_src_number_network
+    column :src_numberlist
+    column :dst_numberlist
   end
 
   show do
@@ -71,6 +76,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       row :validate_dst_number_network
       row :validate_src_number_format
       row :validate_src_number_network
+      row :src_numberlist
+      row :dst_numberlist
     end
     active_admin_comments
   end
@@ -90,6 +97,8 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :validate_dst_number_network
       f.input :validate_src_number_format
       f.input :validate_src_number_network
+      f.input :dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
+      f.input :src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
     end
     f.actions
   end

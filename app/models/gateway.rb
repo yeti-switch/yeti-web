@@ -132,8 +132,10 @@
 #
 # Indexes
 #
-#  gateways_contractor_id_idx  (contractor_id)
-#  gateways_name_unique        (name) UNIQUE
+#  gateways_contractor_id_idx      (contractor_id)
+#  gateways_dst_numberlist_id_idx  (termination_dst_numberlist_id)
+#  gateways_name_unique            (name) UNIQUE
+#  gateways_src_numberlist_id_idx  (termination_src_numberlist_id)
 #
 # Foreign Keys
 #
