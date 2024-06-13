@@ -30,7 +30,7 @@ ActiveAdmin.register Routing::RoutingPlan do
                 :src_numberlist_id, :dst_numberlist_id,
                 routing_group_ids: []
 
-  includes :routing_groups
+  includes :routing_groups, :src_numberlist, :dst_numberlist
 
   filter :id
   filter :name

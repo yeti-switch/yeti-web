@@ -6,7 +6,11 @@ RSpec.describe 'Export Routing Plans', type: :feature do
   before { create(:routing_plan) }
 
   let!(:item) do
-    create(:routing_plan)
+    create(
+      :routing_plan,
+      dst_numberlist: create(:numberlist),
+      src_numberlist: create(:numberlist)
+    )
   end
 
   before do
@@ -27,7 +31,9 @@ RSpec.describe 'Export Routing Plans', type: :feature do
         ['Validate dst number format', item.validate_dst_number_format.to_s],
         ['Validate dst number network', item.validate_dst_number_network.to_s],
         ['Validate src number format', item.validate_src_number_format.to_s],
-        ['Validate src number network', item.validate_src_number_network.to_s]
+        ['Validate src number network', item.validate_src_number_network.to_s],
+        ['Src numberlist name', item.src_numberlist.name],
+        ['Dst numberlist name', item.dst_numberlist.name]
       ]
     )
   end
