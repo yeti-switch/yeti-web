@@ -69,9 +69,11 @@
 #
 #  customers_auth_account_id_idx                      (account_id)
 #  customers_auth_customer_id_idx                     (customer_id)
+#  customers_auth_dst_numberlist_id_idx               (dst_numberlist_id)
 #  customers_auth_external_id_external_type_key_uniq  (external_id,external_type) UNIQUE
 #  customers_auth_external_id_key_uniq                (external_id) UNIQUE WHERE (external_type IS NULL)
 #  customers_auth_name_key                            (name) UNIQUE
+#  customers_auth_src_numberlist_id_idx               (src_numberlist_id)
 #
 # Foreign Keys
 #

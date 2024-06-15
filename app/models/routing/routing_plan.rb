@@ -13,13 +13,22 @@
 #  validate_dst_number_network :boolean          default(FALSE), not null
 #  validate_src_number_format  :boolean          default(FALSE), not null
 #  validate_src_number_network :boolean          default(FALSE), not null
+#  dst_numberlist_id           :integer(2)
 #  external_id                 :bigint(8)
 #  sorting_id                  :integer(4)       default(1), not null
+#  src_numberlist_id           :integer(2)
 #
 # Indexes
 #
-#  routing_plans_external_id_key  (external_id) UNIQUE
-#  routing_plans_name_key         (name) UNIQUE
+#  routing_plans_dst_numberlist_id_idx  (dst_numberlist_id)
+#  routing_plans_external_id_key        (external_id) UNIQUE
+#  routing_plans_name_key               (name) UNIQUE
+#  routing_plans_src_numberlist_id_idx  (src_numberlist_id)
+#
+# Foreign Keys
+#
+#  routing_plans_dst_numberlist_id_fkey  (dst_numberlist_id => numberlists.id)
+#  routing_plans_src_numberlist_id_fkey  (src_numberlist_id => numberlists.id)
 #
 
 class Routing::RoutingPlan < ApplicationRecord
@@ -42,6 +51,9 @@ class Routing::RoutingPlan < ApplicationRecord
     SORTING_STATIC_ONLY_NOCONTROL => 'Static only, No ACD&ASR control'
   }.freeze
   SORTINGS_WITH_STATIC_ROUTES = [SORTING_STATIC_LCR_CONTROL, SORTING_STATIC_ONLY_NOCONTROL].freeze
+
+  belongs_to :dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :dst_numberlist_id, optional: true
+  belongs_to :src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
 
   has_and_belongs_to_many :routing_groups, join_table: 'class4.routing_plan_groups', class_name: 'Routing::RoutingGroup'
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: :routing_plan_id, dependent: :restrict_with_error

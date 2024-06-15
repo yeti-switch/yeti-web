@@ -74,6 +74,8 @@ class Routing::Numberlist < ApplicationRecord
   has_many :dst_customers_auths, class_name: 'CustomersAuth', foreign_key: :dst_numberlist_id, dependent: :restrict_with_error
   has_many :termination_dst_gateways, class_name: 'Gateway', foreign_key: :termination_dst_numberlist_id, dependent: :restrict_with_error
   has_many :termination_src_gateways, class_name: 'Gateway', foreign_key: :termination_src_numberlist_id, dependent: :restrict_with_error
+  has_many :src_routing_plans, class_name: 'Routing::RoutingPlan', foreign_key: :src_numberlist_id, dependent: :restrict_with_error
+  has_many :dst_routing_plans, class_name: 'Routing::RoutingPlan', foreign_key: :dst_numberlist_id, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :name, uniqueness: true

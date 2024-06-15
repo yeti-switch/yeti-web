@@ -68,6 +68,7 @@
 #
 # Indexes
 #
+#  customers_auth_normalized_customers_auth_id                  (customers_auth_id)
 #  customers_auth_normalized_ip_prefix_range_prefix_range1_idx  (ip, ((dst_prefix)::prefix_range), ((src_prefix)::prefix_range)) USING gist
 #  customers_auth_normalized_prefix_range_prefix_range1_idx     (((dst_prefix)::prefix_range), ((src_prefix)::prefix_range)) WHERE enabled USING gist
 #
