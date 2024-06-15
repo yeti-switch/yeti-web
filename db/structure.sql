@@ -26723,6 +26723,183 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
           end if;
         end if;
 
+        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+
+        ---- Routing Plan Numberlist processing ----
+        if v_rp.dst_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
+          /*}dbg*/
+
+          v_numberlist_item=switch21.match_numberlist(v_rp.dst_numberlist_id, v_ret.dst_prefix_out);
+          select into v_numberlist * from class4.numberlists where id=v_rp.dst_numberlist_id;
+
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP DST Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8016; --destination blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP DST Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            -- drop by default
+            v_ret.disconnect_code_id=8016; --destination blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        if v_rp.src_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP SRC Numberlist processing. Lookup by key %, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+          /*}dbg*/
+          v_numberlist_item=switch21.match_numberlist(v_rp.src_numberlist_id, v_ret.src_prefix_out);
+
+          select into v_numberlist * from class4.numberlists where id=v_rp.src_numberlist_id;
+
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP SRC Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8017; --source blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP SRC Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            v_ret.disconnect_code_id=8017; --source blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist.default_src_rewrite_rule,
+                    v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+        ---- END of routing plan Numberlist processing
+
         --  setting numbers used for routing & billing
         v_ret.src_prefix_routing=v_ret.src_prefix_out;
         v_ret.dst_prefix_routing=v_ret.dst_prefix_out;
@@ -26781,11 +26958,11 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
+        RAISE NOTICE '% ms -> Routing plan processing',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
 
         v_routing_key=v_ret.dst_prefix_routing;
-        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+
         if v_rp.sorting_id=5 then -- route testing
           v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
           v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
@@ -26926,126 +27103,7 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         END IF;
 
-        --- Routing plan Numberlist processing ---
-        if v_rp.dst_numberlist_id is not null then
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
-          /*}dbg*/
-
-          v_numberlist_item = switch21.match_numberlist(v_rp.dst_numberlist_id, v_ret.dst_prefix_out);
-          select into v_numberlist * from class4.numberlists where id=v_rp.dst_numberlist_id;
-
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
-          /*}dbg*/
-          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> DST Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
-            /*}dbg*/
-            v_ret.disconnect_code_id=8001; --destination blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist_item.src_rewrite_rule,
-              v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist_item.dst_rewrite_rule,
-              v_numberlist_item.dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
-            -- pass call NOP.
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> DST Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-            -- drop by default
-            v_ret.disconnect_code_id=8001; --destination blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                    v_ret.dst_prefix_out,
-                    v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
-            -- pass by default
-          end if;
-        end if;
-
-        if v_rp.src_numberlist_id is not null then
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
-          /*}dbg*/
-          v_numberlist_item=switch21.match_numberlist(v_rp.src_numberlist_id, v_ret.src_prefix_out);
-
-          select into v_numberlist * from class4.numberlists where id=v_rp.src_numberlist_id;
-
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
-          /*}dbg*/
-          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
-            /*}dbg*/
-            v_ret.disconnect_code_id=8002; --source blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist_item.src_rewrite_rule,
-              v_numberlist_item.src_rewrite_result
-            );
-
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist_item.dst_rewrite_rule,
-              v_numberlist_item.dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
-            -- pass call NOP.
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-            v_ret.disconnect_code_id=8002; --source blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist.default_src_rewrite_rule,
-              v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist.default_dst_rewrite_rule,
-              v_numberlist.default_dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
-            -- pass by default
-          end if;
-        end if;
-
-
+        --- rateplan lookup
         SELECT INTO v_rate_groups array_agg(rate_group_id) from class4.rate_plan_groups where rateplan_id = v_customer_auth_normalized.rateplan_id;
 
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
@@ -28226,6 +28284,183 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
           end if;
         end if;
 
+        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+
+        ---- Routing Plan Numberlist processing ----
+        if v_rp.dst_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
+          /*}dbg*/
+
+          v_numberlist_item=switch21.match_numberlist(v_rp.dst_numberlist_id, v_ret.dst_prefix_out);
+          select into v_numberlist * from class4.numberlists where id=v_rp.dst_numberlist_id;
+
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP DST Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8016; --destination blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP DST Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            -- drop by default
+            v_ret.disconnect_code_id=8016; --destination blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        if v_rp.src_numberlist_id is not null then
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP SRC Numberlist processing. Lookup by key %, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
+          /*}dbg*/
+          v_numberlist_item=switch21.match_numberlist(v_rp.src_numberlist_id, v_ret.src_prefix_out);
+
+          select into v_numberlist * from class4.numberlists where id=v_rp.src_numberlist_id;
+
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> RP SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
+          /*}dbg*/
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP SRC Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
+            /*}dbg*/
+            v_ret.disconnect_code_id=8017; --source blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            /*dbg{*/
+            v_end:=clock_timestamp();
+            RAISE NOTICE '% ms -> RP SRC Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
+            /*}dbg*/
+            v_ret.disconnect_code_id=8017; --source blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist.default_src_rewrite_rule,
+                    v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+        ---- END of routing plan Numberlist processing
+
         --  setting numbers used for routing & billing
         v_ret.src_prefix_routing=v_ret.src_prefix_out;
         v_ret.dst_prefix_routing=v_ret.dst_prefix_out;
@@ -28284,11 +28519,11 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> Routing plan search start',EXTRACT(MILLISECOND from v_end-v_start);
+        RAISE NOTICE '% ms -> Routing plan processing',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
 
         v_routing_key=v_ret.dst_prefix_routing;
-        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+
         if v_rp.sorting_id=5 then -- route testing
           v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
           v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
@@ -28429,126 +28664,7 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         END IF;
 
-        --- Routing plan Numberlist processing ---
-        if v_rp.dst_numberlist_id is not null then
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), v_ret.dst_prefix_out;
-          /*}dbg*/
-
-          v_numberlist_item = switch21.match_numberlist(v_rp.dst_numberlist_id, v_ret.dst_prefix_out);
-          select into v_numberlist * from class4.numberlists where id=v_rp.dst_numberlist_id;
-
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> DST Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
-          /*}dbg*/
-          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> DST Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
-            /*}dbg*/
-            v_ret.disconnect_code_id=8001; --destination blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist_item.src_rewrite_rule,
-              v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist_item.dst_rewrite_rule,
-              v_numberlist_item.dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
-            -- pass call NOP.
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> DST Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-            -- drop by default
-            v_ret.disconnect_code_id=8001; --destination blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                    v_ret.dst_prefix_out,
-                    v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
-            -- pass by default
-          end if;
-        end if;
-
-        if v_rp.src_numberlist_id is not null then
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, no fallback', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out;
-          /*}dbg*/
-          v_numberlist_item=switch21.match_numberlist(v_rp.src_numberlist_id, v_ret.src_prefix_out);
-
-          select into v_numberlist * from class4.numberlists where id=v_rp.src_numberlist_id;
-
-          /*dbg{*/
-          v_end:=clock_timestamp();
-          RAISE NOTICE '% ms -> SRC Numberlist. key found: %',EXTRACT(MILLISECOND from v_end-v_start), row_to_json(v_numberlist_item);
-          /*}dbg*/
-          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist. Drop by key action. Key: %',EXTRACT(MILLISECOND from v_end-v_start), v_numberlist_item.key;
-            /*}dbg*/
-            v_ret.disconnect_code_id=8002; --source blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist_item.src_rewrite_rule,
-              v_numberlist_item.src_rewrite_result
-            );
-
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist_item.dst_rewrite_rule,
-              v_numberlist_item.dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
-            -- pass call NOP.
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
-            /*dbg{*/
-            v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist. Drop by default action',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-            v_ret.disconnect_code_id=8002; --source blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist.default_src_rewrite_rule,
-              v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist.default_dst_rewrite_rule,
-              v_numberlist.default_dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
-            -- pass by default
-          end if;
-        end if;
-
-
+        --- rateplan lookup
         SELECT INTO v_rate_groups array_agg(rate_group_id) from class4.rate_plan_groups where rateplan_id = v_customer_auth_normalized.rateplan_id;
 
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
@@ -29650,6 +29766,159 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
           end if;
         end if;
 
+        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+
+        ---- Routing Plan Numberlist processing ----
+        if v_rp.dst_numberlist_id is not null then
+          
+
+          v_numberlist_item=switch21.match_numberlist(v_rp.dst_numberlist_id, v_ret.dst_prefix_out);
+          select into v_numberlist * from class4.numberlists where id=v_rp.dst_numberlist_id;
+
+          
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            
+            v_ret.disconnect_code_id=8016; --destination blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            
+            -- drop by default
+            v_ret.disconnect_code_id=8016; --destination blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                v_ret.src_prefix_out,
+                v_numberlist.default_src_rewrite_rule,
+                v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+
+        if v_rp.src_numberlist_id is not null then
+          
+          v_numberlist_item=switch21.match_numberlist(v_rp.src_numberlist_id, v_ret.src_prefix_out);
+
+          select into v_numberlist * from class4.numberlists where id=v_rp.src_numberlist_id;
+
+          
+          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
+            
+            v_ret.disconnect_code_id=8017; --source blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
+            IF v_numberlist_item.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist_item.src_rewrite_rule, v_numberlist_item.src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist_item.src_rewrite_rule,
+                    v_numberlist_item.src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist_item.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist_item.dst_rewrite_rule, v_numberlist_item.dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist_item.dst_rewrite_rule,
+                    v_numberlist_item.dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            -- pass call NOP.
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
+            
+            v_ret.disconnect_code_id=8017; --source blacklisted by routing plan
+            RETURN NEXT v_ret;
+            RETURN;
+          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
+            IF v_numberlist.defer_src_rewrite THEN
+                v_defered_src_rewrites = array_append(
+                    v_defered_src_rewrites,
+                    (v_numberlist.default_src_rewrite_rule, v_numberlist.default_src_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.src_prefix_out,
+                    v_numberlist.default_src_rewrite_rule,
+                    v_numberlist.default_src_rewrite_result
+                );
+            END IF;
+            IF v_numberlist.defer_dst_rewrite THEN
+                v_defered_dst_rewrites = array_append(
+                    v_defered_dst_rewrites,
+                    (v_numberlist.default_dst_rewrite_rule, v_numberlist.default_dst_rewrite_result)::switch21.defered_rewrite
+                );
+            ELSE
+                v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
+                    v_ret.dst_prefix_out,
+                    v_numberlist.default_dst_rewrite_rule,
+                    v_numberlist.default_dst_rewrite_result
+                );
+            END IF;
+            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            -- pass by default
+          end if;
+        end if;
+        ---- END of routing plan Numberlist processing
+
         --  setting numbers used for routing & billing
         v_ret.src_prefix_routing=v_ret.src_prefix_out;
         v_ret.dst_prefix_routing=v_ret.dst_prefix_out;
@@ -29698,7 +29967,7 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         
 
         v_routing_key=v_ret.dst_prefix_routing;
-        SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
+
         if v_rp.sorting_id=5 then -- route testing
           v_test_vendor_id=regexp_replace(v_routing_key,'(.*)\*(.*)','\1')::integer;
           v_routing_key=regexp_replace(v_routing_key,'(.*)\*(.*)','\2');
@@ -29800,102 +30069,7 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         END IF;
 
-        --- Routing plan Numberlist processing ---
-        if v_rp.dst_numberlist_id is not null then
-          
-
-          v_numberlist_item = switch21.match_numberlist(v_rp.dst_numberlist_id, v_ret.dst_prefix_out);
-          select into v_numberlist * from class4.numberlists where id=v_rp.dst_numberlist_id;
-
-          
-          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
-            
-            v_ret.disconnect_code_id=8001; --destination blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist_item.src_rewrite_rule,
-              v_numberlist_item.src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist_item.dst_rewrite_rule,
-              v_numberlist_item.dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
-            -- pass call NOP.
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
-            
-            -- drop by default
-            v_ret.disconnect_code_id=8001; --destination blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-                v_ret.src_prefix_out,
-                v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-                    v_ret.dst_prefix_out,
-                    v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
-            -- pass by default
-          end if;
-        end if;
-
-        if v_rp.src_numberlist_id is not null then
-          
-          v_numberlist_item=switch21.match_numberlist(v_rp.src_numberlist_id, v_ret.src_prefix_out);
-
-          select into v_numberlist * from class4.numberlists where id=v_rp.src_numberlist_id;
-
-          
-          IF v_numberlist_item.action_id is not null and v_numberlist_item.action_id=1 then
-            
-            v_ret.disconnect_code_id=8002; --source blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is not null and v_numberlist_item.action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist_item.src_rewrite_rule,
-              v_numberlist_item.src_rewrite_result
-            );
-
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist_item.dst_rewrite_rule,
-              v_numberlist_item.dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
-            -- pass call NOP.
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
-            
-            v_ret.disconnect_code_id=8002; --source blacklisted
-            RETURN NEXT v_ret;
-            RETURN;
-          elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=2 then
-            v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.src_prefix_out,
-              v_numberlist.default_src_rewrite_rule,
-              v_numberlist.default_src_rewrite_result
-            );
-            v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
-              v_ret.dst_prefix_out,
-              v_numberlist.default_dst_rewrite_rule,
-              v_numberlist.default_dst_rewrite_result
-            );
-            v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
-            -- pass by default
-          end if;
-        end if;
-
-
+        --- rateplan lookup
         SELECT INTO v_rate_groups array_agg(rate_group_id) from class4.rate_plan_groups where rateplan_id = v_customer_auth_normalized.rateplan_id;
 
         SELECT into v_destination d.*/*,switch.tracelog(d.*)*/
