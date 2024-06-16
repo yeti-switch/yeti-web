@@ -6,6 +6,7 @@
 #
 #  id                     :bigint(8)        not null, primary key
 #  acd_limit              :float            default(0.0), not null
+#  allow_package_billing  :boolean          default(FALSE), not null
 #  asr_limit              :float            default(0.0), not null
 #  connect_fee            :decimal(, )      default(0.0)
 #  dp_margin_fixed        :decimal(, )      default(0.0), not null
