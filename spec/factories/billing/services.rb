@@ -31,6 +31,7 @@
 #
 FactoryBot.define do
   factory :service, class: Billing::Service do
+    sequence(:name) { |n| "Service_#{n}" }
     account { FactoryBot.create(:account) }
     type { FactoryBot.create(:service_type) }
     initial_price { rand(100) + rand.round(2) }

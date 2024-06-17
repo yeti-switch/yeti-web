@@ -30,6 +30,7 @@ RSpec.describe 'Export Destination', type: :feature do
         ['Dst number max length', item.dst_number_max_length.to_s, anything],
         ['Rate group name', item.rate_group.name, anything],
         ['Reject calls', item.reject_calls.to_s, anything],
+        ['Allow package billing', item.allow_package_billing.to_s, anything],
         ['Rate policy name', item.rate_policy_name, anything],
         ['Initial interval', item.initial_interval.to_s, anything],
         ['Next interval', item.next_interval.to_s, anything],

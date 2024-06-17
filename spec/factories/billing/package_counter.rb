@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :billing_package_counter, class: Billing::PackageCounter do
     account { FactoryBot.create(:account) }

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Billing::PackageCounter, as: 'Package Billing Counters' do
-  menu parent: 'Billing', label: 'Package Billing Counters', priority: 11
+ActiveAdmin.register Billing::PackageCounter, as: 'Package Counters' do
+  menu parent: 'Billing', label: 'Package Counters', priority: 11
 
   actions :index, :show
 
   acts_as_export :id,
-                 :account_id,
-                 :service_id,
+                 [:account_name, proc { |row| row.account.try(:name) }],
+                 [:service_name, proc { |row| row.service.try(:name) }],
                  :prefix,
                  :exclude,
                  :duration
@@ -18,7 +18,7 @@ ActiveAdmin.register Billing::PackageCounter, as: 'Package Billing Counters' do
 
   filter :id
   account_filter :account_id_eq
-  filter :service_id, label: 'Service ID'
+  filter :service
   filter :prefix
   filter :duration
   filter :exclude
@@ -28,7 +28,7 @@ ActiveAdmin.register Billing::PackageCounter, as: 'Package Billing Counters' do
     id_column
     actions
     column :account
-    column :service, :service_link
+    column :service
     column :prefix
     column :exclude
     column :duration
@@ -38,7 +38,7 @@ ActiveAdmin.register Billing::PackageCounter, as: 'Package Billing Counters' do
     attributes_table do
       row :id
       row :account
-      row :service, &:service_link
+      row :service
       row :prefix
       row :exclude
       row :duration
