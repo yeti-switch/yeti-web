@@ -63,7 +63,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
   account_filter :vendor_acc_id_eq, label: 'Vendor account'
 
-  filter :customer_auth, collection: proc { CustomersAuth.select(%i[id name]).reorder(:name) }, input_html: { class: 'chosen' }
+  association_ajax_filter :customer_auth_id_eq,
+                          label: 'Customer Auth',
+                          scope: -> { CustomersAuth.order(:name) },
+                          path: '/customers_auths/search'
   filter :src_prefix_routing, filters: %i[equals contains starts_with ends_with]
   filter :src_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'chosen' }
   filter :dst_prefix_routing, filters: %i[equals contains starts_with ends_with]
