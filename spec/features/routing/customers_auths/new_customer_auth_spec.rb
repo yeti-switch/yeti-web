@@ -8,16 +8,20 @@ RSpec.describe 'New Customer Auth', js: true do
   end
 
   include_context :login_as_admin
-  let!(:customer) { create(:customer) }
-  let!(:account) { create(:account, contractor: customer) }
-  let!(:gateway) { create(:gateway, contractor: customer) }
-  let!(:rateplan) { create(:rateplan) }
-  let!(:routing_plan) { create(:routing_plan) }
+  let!(:customer) { FactoryBot.create(:customer) }
+  let!(:account) { FactoryBot.create(:account, contractor: customer) }
+  let!(:gateway) { FactoryBot.create(:gateway, contractor: customer) }
+  let!(:rateplan) { FactoryBot.create(:rateplan) }
+  let!(:routing_plan) { FactoryBot.create(:routing_plan) }
+  let!(:src_numberlist) { FactoryBot.create(:numberlist) }
+  let!(:dst_numberlist) { FactoryBot.create(:numberlist) }
 
   let(:fill_form!) do
     fill_in 'Name', with: 'Test'
     fill_in_chosen 'Customer', with: customer.name, ajax: true
     fill_in_chosen 'Account', with: account.name, ajax: true
+    fill_in_chosen 'DST Numberlist', with: dst_numberlist.display_name, ajax: true
+    fill_in_chosen 'SRC Numberlist', with: src_numberlist.display_name, ajax: true
     fill_in_chosen 'Gateway', with: gateway.name, ajax: true
     fill_in_chosen 'Rateplan', with: rateplan.name
     fill_in_chosen 'Routing plan', with: routing_plan.name
@@ -39,7 +43,9 @@ RSpec.describe 'New Customer Auth', js: true do
                                account: account,
                                gateway: gateway,
                                rateplan: rateplan,
-                               routing_plan: routing_plan
+                               routing_plan: routing_plan,
+                               src_numberlist:,
+                               dst_numberlist:
                              )
   end
 end

@@ -265,6 +265,7 @@ ActiveAdmin.register CustomersAuth do
 
           f.account_input :account_id,
                           fill_params: { contractor_id_eq: f.object.customer_id },
+                          fill_required: :contractor_id_eq,
                           input_html: {
                             'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
                             'data-required-param': 'q[contractor_id_eq]'
@@ -277,6 +278,7 @@ ActiveAdmin.register CustomersAuth do
                                    scope: Gateway.order(:name),
                                    path: '/gateways/search',
                                    fill_params: { origination_contractor_id_eq: f.object.customer_id },
+                                   fill_required: :origination_contractor_id_eq,
                                    input_html: {
                                      'data-path-params': { 'q[origination_contractor_id_eq]': '.customer_id-input' }.to_json,
                                      'data-required-param': 'q[origination_contractor_id_eq]'
@@ -287,8 +289,15 @@ ActiveAdmin.register CustomersAuth do
           f.input :rateplan, input_html: { class: 'chosen' }
           f.input :routing_plan, input_html: { class: 'chosen' }
 
-          f.input :dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
-          f.input :src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.association_ajax_input :dst_numberlist_id,
+                                  label: 'DST Numberlist',
+                                  scope: -> { Routing::Numberlist.order(:name) },
+                                  path: '/numberlists/search'
+
+          f.association_ajax_input :src_numberlist_id,
+                                  label: 'SRC Numberlist',
+                                  scope: -> { Routing::Numberlist.order(:name) },
+                                  path: '/numberlists/search'
           f.input :dump_level_id, as: :select, include_blank: false, collection: CustomersAuth::DUMP_LEVELS.invert
           f.input :enable_audio_recording
           f.input :capacity
