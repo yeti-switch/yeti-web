@@ -118,7 +118,10 @@ ActiveAdmin.register Routing::NumberlistItem do
 
   form do |f|
     f.inputs do
-      f.input :numberlist, input_html: { class: 'chosen' }
+      f.association_ajax_input :numberlist_id,
+                               label: 'Numberlist',
+                               scope: Routing::Numberlist.order(:name),
+                               path: '/numberlists/search'
       f.input :key
       f.input :number_min_length
       f.input :number_max_length

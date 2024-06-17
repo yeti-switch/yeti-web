@@ -19,6 +19,8 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
 
   let!(:contractor) { FactoryBot.create(:customer) }
   let!(:codec_group) { FactoryBot.create(:codec_group) }
+  let!(:termination_src_numberlist) { FactoryBot.create(:numberlist) }
+  let!(:termination_dst_numberlist) { FactoryBot.create(:numberlist) }
 
   before do
     FactoryBot.create(:customer)
@@ -31,6 +33,9 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
     fill_in_chosen 'Contractor', with: contractor.display_name, ajax: true
     switch_tab 'Media'
     fill_in_chosen 'Codec group', with: codec_group.display_name
+    switch_tab 'Translations'
+    fill_in_chosen 'Termination SRC Numberlist', with: termination_src_numberlist.display_name, ajax: true
+    fill_in_chosen 'Termination DST Numberlist', with: termination_dst_numberlist.display_name, ajax: true
   end
 
   context 'with termination' do
@@ -48,7 +53,9 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
         name: 'gw123',
         host: '192.168.112.12',
         allow_termination: true,
-        codec_group_id: codec_group.id
+        codec_group_id: codec_group.id,
+        termination_src_numberlist:,
+        termination_dst_numberlist:
       )
     end
 
@@ -71,7 +78,9 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
         name: 'gw123',
         host: '',
         allow_termination: false,
-        codec_group_id: codec_group.id
+        codec_group_id: codec_group.id,
+        termination_src_numberlist:,
+        termination_dst_numberlist:
       )
     end
 

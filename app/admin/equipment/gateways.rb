@@ -453,8 +453,15 @@ ActiveAdmin.register Gateway do
       tab 'Translations' do
         f.inputs 'Translations' do
           f.input :privacy_mode_id, as: :select, include_blank: false, collection: Gateway::PRIVACY_MODES.invert
-          f.input :termination_src_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
-          f.input :termination_dst_numberlist, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.association_ajax_input :termination_src_numberlist_id,
+                                  label: 'Termination SRC Numberlist',
+                                  scope: -> { Routing::Numberlist.order(:name) },
+                                  path: '/numberlists/search'
+
+          f.association_ajax_input :termination_dst_numberlist_id,
+                                  label: 'Termination DST Numberlist',
+                                  scope: -> { Routing::Numberlist.order(:name) },
+                                  path: '/numberlists/search'
           f.input :diversion_send_mode, include_blank: false
           f.input :diversion_domain
           f.input :diversion_rewrite_rule
