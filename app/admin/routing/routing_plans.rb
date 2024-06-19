@@ -99,12 +99,12 @@ ActiveAdmin.register Routing::RoutingPlan do
       f.input :validate_src_number_network
       f.association_ajax_input :dst_numberlist_id,
                                label: 'DST Numberlist',
-                               scope: -> { Routing::Numberlist.order(:name) },
+                               scope: Routing::Numberlist.order(:name),
                                path: '/numberlists/search'
 
       f.association_ajax_input :src_numberlist_id,
                                label: 'SRC Numberlist',
-                               scope: -> { Routing::Numberlist.order(:name) },
+                               scope: Routing::Numberlist.order(:name),
                                path: '/numberlists/search'
     end
     f.actions
