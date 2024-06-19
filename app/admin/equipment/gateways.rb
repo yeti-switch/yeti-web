@@ -455,12 +455,12 @@ ActiveAdmin.register Gateway do
           f.input :privacy_mode_id, as: :select, include_blank: false, collection: Gateway::PRIVACY_MODES.invert
           f.association_ajax_input :termination_src_numberlist_id,
                                   label: 'Termination SRC Numberlist',
-                                  scope: -> { Routing::Numberlist.order(:name) },
+                                  scope: Routing::Numberlist.order(:name),
                                   path: '/numberlists/search'
 
           f.association_ajax_input :termination_dst_numberlist_id,
                                   label: 'Termination DST Numberlist',
-                                  scope: -> { Routing::Numberlist.order(:name) },
+                                  scope: Routing::Numberlist.order(:name),
                                   path: '/numberlists/search'
           f.input :diversion_send_mode, include_blank: false
           f.input :diversion_domain
