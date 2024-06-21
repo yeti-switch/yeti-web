@@ -28,7 +28,6 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
     context 'when controller contains meta info' do
       before do
         allow_any_instance_of(described_class).to receive(:meta).and_return({ foo: :bar })
-        allow(Thread).to receive(:new).and_yield.and_return(Class.new { def join; end }.new)
       end
 
       it 'creates Log::ApiLog with meta and remote IP' do
@@ -40,7 +39,6 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
     context 'when controller DO NOT contains meta info' do
       before do
         allow_any_instance_of(described_class).to receive(:meta).and_return(nil)
-        allow(Thread).to receive(:new).and_yield.and_return(Class.new { def join; end }.new)
       end
 
       it 'creates Log::ApiLog with meta and remote IP' do
@@ -51,7 +49,6 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
 
     context 'when YETI WEB is configured with API Log tag USA' do
       before do
-        allow(Thread).to receive(:new).and_yield
         allow(YetiConfig).to receive(:api_log_tags).and_return(%w[USA])
       end
 
@@ -63,7 +60,6 @@ RSpec.describe Api::Rest::Admin::Routing::AreaPrefixesController, type: :request
 
     context 'when there is NO API Log Tags configuration' do
       before do
-        allow(Thread).to receive(:new).and_yield
         allow(YetiConfig).to receive(:api_log_tags).and_return(nil)
       end
 

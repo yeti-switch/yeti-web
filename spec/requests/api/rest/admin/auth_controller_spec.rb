@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Admin::AuthController do
+RSpec.describe Api::Rest::Admin::AuthController, type: :request do
   let(:json_request_path) { '/api/rest/admin/auth' }
   let(:json_request_headers) do
     {
@@ -86,8 +86,6 @@ RSpec.describe Api::Rest::Admin::AuthController do
 
     context 'when attributes are invalid' do
       let(:attributes) { { username: 'test-admin', password: 'wrong_password' } }
-
-      before { allow(Thread).to receive(:new).and_yield }
 
       it 'responds with failed login', :aggregate_failures do
         subject

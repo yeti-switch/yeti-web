@@ -181,6 +181,14 @@ RSpec.configure do |config|
     #  disable the should syntax...
     c.syntax = :expect
   end
+
+  config.before(:each, type: :request) do
+    allow(ApiLogThread).to receive(:new).and_yield
+  end
+
+  config.before(:each, type: :controller) do
+    allow(ApiLogThread).to receive(:new).and_yield
+  end
 end
 
 RspecApiDocumentation.configure do |config|
