@@ -5,8 +5,6 @@ RSpec.describe 'instrumentation_notification.rb', type: :request do
     context 'when perform invalid request format' do
       subject { get '/api/rest/invalid_request/1/format' }
 
-      before { allow(Thread).to receive(:new).and_yield }
-
       it 'should create Log::ApiLog with properly attributes' do
         expect { subject }.to change(Log::ApiLog, :count).by(1)
 

@@ -194,8 +194,6 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       build_customer_token(api_access.id, expiration: 1.minute.from_now)
     end
 
-    before { allow(Thread).to receive(:new).and_yield }
-
     it 'responds with 200' do
       subject
       expect(response.status).to eq 200

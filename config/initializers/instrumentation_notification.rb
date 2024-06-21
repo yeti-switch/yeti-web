@@ -42,10 +42,11 @@ module ActionController
   end
 end
 
+ApiLogThread = Class.new(Thread)
 ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_name, start, finish, _id, payload|
   if payload[:path].start_with? '/api/'
 
-    Thread.new do
+    ApiLogThread.new do
       Log::ApiLog.create do |api_request|
         debug_mode = payload[:debug_mode]
 
