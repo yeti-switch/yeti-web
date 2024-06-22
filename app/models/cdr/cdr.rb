@@ -206,7 +206,7 @@ class Cdr::Cdr < Cdr::Base
     routing_plan vendor
     term_gw orig_gw customer_auth vendor_acc customer_acc
     dst_area customer rateplan pop src_area lnp_database
-    node sign_term_transport_protocol
+    node sign_term_transport_protocol package_counter
   ].freeze
 
   include Partitionable
@@ -242,6 +242,7 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :auth_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :auth_orig_transport_protocol_id, optional: true
   belongs_to :sign_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_orig_transport_protocol_id, optional: true
   belongs_to :sign_term_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_term_transport_protocol_id, optional: true
+  belongs_to :package_counter, class_name: 'Billing::PackageCounter', foreign_key: :package_counter_id, optional: true
 
   scope :success, -> { where success: true }
   scope :failure, -> { where success: false }
@@ -271,6 +272,7 @@ class Cdr::Cdr < Cdr::Base
   scope :not_authorized, -> { where('customer_auth_id is null') }
   scope :bad_routing, -> { where('customer_auth_id is not null AND disconnect_initiator_id=0') }
   scope :with_trace, -> { where('dump_level_id > 0') }
+  scope :package_billing, -> { where('package_counter_id is not null') }
 
   scope :account_id_eq, ->(account_id) { where('vendor_acc_id =? OR customer_acc_id =?', account_id, account_id) }
 

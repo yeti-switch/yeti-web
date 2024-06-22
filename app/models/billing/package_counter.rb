@@ -30,6 +30,6 @@ class Billing::PackageCounter < ApplicationRecord
   validates :duration, presence: true
 
   def display_name
-    "Package counter ##{id}"
+    "PC##{id}"
   end
 end

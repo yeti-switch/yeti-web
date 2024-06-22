@@ -296,7 +296,6 @@ RSpec.describe 'switch.writecdr()' do
   end
 
   let(:package_counter_id) { nil }
-
   let!(:metadata) { nil }
 
   let(:writecdr_parameters) do
@@ -611,8 +610,8 @@ RSpec.describe 'switch.writecdr()' do
       expect { subject }.to change { Cdr::Cdr.count }.by(1)
       expect(Cdr::Cdr.last.package_counter_id).to eq(package_counter_id)
       expect(Cdr::Cdr.last.customer_duration).to eq(566)
-      expect(Cdr::Cdr.last.customer_price).to eq(nil)
-      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(nil)
+      expect(Cdr::Cdr.last.customer_price).to eq(0)
+      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0)
     end
   end
 

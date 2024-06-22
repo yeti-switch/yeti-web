@@ -12,8 +12,6 @@ ActiveAdmin.register Billing::PackageCounter, as: 'Package Counters' do
                  :exclude,
                  :duration
 
-  # decorate_with TransactionDecorator
-
   includes :account, :service
 
   filter :id
