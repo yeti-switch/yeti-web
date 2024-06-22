@@ -285,7 +285,8 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	lega_ss_status_id smallint,
 	legb_ss_status_id smallint,
 	metadata character varying,
-	customer_auth_external_type character varying
+	customer_auth_external_type character varying,
+	package_counter_id bigint
 );
 
 
@@ -515,7 +516,8 @@ CREATE TABLE cdr.cdr (
     lega_q850_params character varying,
     legb_q850_cause smallint,
     legb_q850_params character varying,
-    internal_disconnect_code_id smallint
+    internal_disconnect_code_id smallint,
+    package_counter_id bigint
 )
 PARTITION BY RANGE (time_start);
 
@@ -531,7 +533,21 @@ DECLARE
     _v billing.interval_billing_data%rowtype;
 BEGIN
     if i_cdr.duration>0 and i_cdr.success then  -- run billing.
-        _v=billing.interval_billing(
+        if i_cdr.package_counter_id is not null then
+          -- running billing with fake rates to calculate duration
+          _v=billing.interval_billing(
+            i_cdr.duration,
+            '1.0'::numeric,
+            '1.0'::numeric,
+            '1.0'::numeric,
+            i_cdr.destination_initial_interval,
+            i_cdr.destination_next_interval,
+            0::integer);
+         i_cdr.customer_price=0;
+         i_cdr.customer_price_no_vat=0;
+         i_cdr.customer_duration=_v.duration;
+        else
+          _v=billing.interval_billing(
             i_cdr.duration,
             i_cdr.destination_fee,
             i_cdr.destination_initial_rate,
@@ -542,6 +558,7 @@ BEGIN
          i_cdr.customer_price=_v.amount;
          i_cdr.customer_price_no_vat=_v.amount_no_vat;
          i_cdr.customer_duration=_v.duration;
+        end if;
 
          _v=billing.interval_billing(
             i_cdr.duration,
@@ -1185,6 +1202,7 @@ BEGIN
   v_cdr.routing_attempt=i_routing_attempt;
   v_cdr.is_last_cdr=i_is_last_cdr;
 
+  v_cdr.package_counter_id = v_dynamic.package_counter_id;
   v_cdr.destination_initial_rate:=v_dynamic.destination_initial_rate::numeric;
   v_cdr.destination_next_rate:=v_dynamic.destination_next_rate::numeric;
   v_cdr.destination_initial_interval:=v_dynamic.destination_initial_interval;
@@ -1425,6 +1443,7 @@ BEGIN
   v_cdr.vendor_acc_id:=v_dynamic.vendor_acc_id;
   v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
 
+  v_cdr.package_counter_id = v_dynamic.package_counter_id;
   v_cdr.destination_id:=v_dynamic.destination_id;
   v_cdr.destination_prefix:=v_dynamic.destination_prefix;
   v_cdr.dialpeer_id:=v_dynamic.dialpeer_id;
@@ -4381,6 +4400,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240122201619'),
 ('20240405165010'),
 ('20240411092931'),
-('20240609092136');
+('20240609092136'),
+('20240617084103');
 
 
