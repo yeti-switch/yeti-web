@@ -260,7 +260,9 @@ CREATE TYPE billing.cdr_v2 AS (
 	local_tag character varying,
 	from_domain character varying,
 	destination_reverse_billing boolean,
-	dialpeer_reverse_billing boolean
+	dialpeer_reverse_billing boolean,
+	package_counter_id bigint,
+	customer_duration integer
 );
 
 
@@ -1464,6 +1466,7 @@ CREATE FUNCTION billing.bill_cdr_batch(i_batch_id bigint, i_data text, i_data_ve
     AS $$
 DECLARE
     v_batch_data billing.cdr_v2;
+    v_package_data record;
     v_c_acc_data record;
     v_v_acc_data record;
     v_dp_stats_data record;
@@ -1497,7 +1500,7 @@ BEGIN
         sum(customer_price) as customer_price,
         destination_reverse_billing
       from json_populate_recordset(null::billing.cdr_v2,_j_data)
-      where customer_acc_id is not null AND customer_price > 0
+      where customer_acc_id is not null AND customer_price > 0 AND package_counter_id is null
       group by customer_acc_id, destination_reverse_billing
     LOOP
       IF v_c_acc_data.destination_reverse_billing IS NULL OR v_c_acc_data.destination_reverse_billing = false THEN
@@ -1505,6 +1508,17 @@ BEGIN
       ELSE
         UPDATE billing.accounts SET balance = balance + COALESCE(v_c_acc_data.customer_price,0) WHERE id = v_c_acc_data.customer_acc_id;
       END IF;
+    END LOOP;
+
+    for v_package_data in
+      select
+        package_counter_id,
+        sum(customer_duration) as customer_duration
+      from json_populate_recordset(null::billing.cdr_v2,_j_data)
+      where customer_duration is not null AND package_counter_id is not null
+      group by package_counter_id
+    LOOP
+      UPDATE billing.package_counters SET duration = duration-v_package_data.customer_duration WHERE id=v_package_data.package_counter_id;
     END LOOP;
 
     for v_v_acc_data in
@@ -40881,6 +40895,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240422204044'),
 ('20240425124935'),
 ('20240611191911'),
-('20240615214442');
+('20240615214442'),
+('20240622173924');
 
 
