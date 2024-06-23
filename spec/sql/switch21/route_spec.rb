@@ -615,8 +615,10 @@ RSpec.describe '#routing logic' do
                                   next_interval: destination_next_interval,
                                   initial_rate: destination_rate,
                                   next_rate: destination_rate,
-                                  rate_group_id: rate_group.id)
+                                  rate_group_id: rate_group.id,
+                                  allow_package_billing: destination_allow_package_billing)
       }
+      let!(:destination_allow_package_billing) { false }
       let!(:destination_rate) { 0.11 }
       let!(:destination_initial_interval) { 1 }
       let!(:destination_next_interval) { 1 }
@@ -917,6 +919,81 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:customer_auth_id]).to be
             expect(subject.first[:customer_id]).to be
             expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_DESTINATION_WITH_APPROPRIATE_RATE)
+          end
+        end
+      end
+
+      context 'Authorized, destination and package billing' do
+        let!(:destination_rate) { 0.11 }
+        let!(:customer_account_destination_rate_limit) { 0.11 }
+
+        before do
+          create(:billing_package_counter,
+                 account_id: customer_account.id,
+                 duration: 48,
+                 prefix: '')
+        end
+
+        it 'Routing OK without package ' do
+          expect(subject.size).to eq(2)
+          expect(subject.first[:customer_auth_id]).to be
+          expect(subject.first[:customer_id]).to be
+          expect(subject.first[:destination_id]).to be
+          expect(subject.first[:destination_prefix]).to be
+          expect(subject.first[:destination_initial_rate]).to be
+          expect(subject.first[:destination_next_rate]).to be
+          expect(subject.first[:destination_initial_interval]).to be
+          expect(subject.first[:destination_next_interval]).to be
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+        end
+
+        context 'More specific package counter' do
+          let!(:destination_allow_package_billing) { true }
+          before do
+            create(:billing_package_counter,
+                   account_id: customer_account.id,
+                   duration: 480,
+                   prefix: 'uri-name',
+                   exclude: false)
+          end
+
+          it 'Destination found' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:destination_id]).to be
+            expect(subject.first[:destination_prefix]).to be
+            expect(subject.first[:destination_initial_rate]).to eq(nil)
+            expect(subject.first[:destination_next_rate]).to eq(nil)
+            expect(subject.first[:destination_initial_interval]).to be
+            expect(subject.first[:destination_next_interval]).to be
+            expect(subject.first[:package_counter_id]).to be
+            expect(subject.first[:time_limit]).to eq(480)
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+        end
+        context 'More specific, excluded package counter' do
+          let!(:destination_allow_package_billing) { true }
+          before do
+            create(:billing_package_counter,
+                   account_id: customer_account.id,
+                   duration: 480,
+                   prefix: 'uri-name',
+                   exclude: true)
+          end
+
+          it 'Destination found' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:customer_auth_id]).to be
+            expect(subject.first[:customer_id]).to be
+            expect(subject.first[:destination_id]).to be
+            expect(subject.first[:destination_prefix]).to be
+            expect(subject.first[:destination_initial_rate]).to be
+            expect(subject.first[:destination_next_rate]).to be
+            expect(subject.first[:destination_initial_interval]).to be
+            expect(subject.first[:destination_next_interval]).to be
+            expect(subject.first[:package_counter_id]).to eq(nil)
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
           end
         end
       end

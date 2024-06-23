@@ -128,6 +128,7 @@
 #  orig_call_id                    :string
 #  orig_gw_external_id             :bigint(8)
 #  orig_gw_id                      :integer(4)
+#  package_counter_id              :bigint(8)
 #  pop_id                          :integer(4)
 #  rateplan_id                     :integer(4)
 #  routing_group_id                :integer(4)

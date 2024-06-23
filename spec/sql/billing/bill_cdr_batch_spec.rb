@@ -12,6 +12,8 @@ RSpec.describe 'billing.bill_cdr_batch' do
   let(:dp) { FactoryBot.create(:dialpeer) }
   let(:gw) { FactoryBot.create(:gateway) }
 
+  let(:package_counter) { FactoryBot.create(:billing_package_counter, account_id: customer_acc1.id, duration: 120) }
+
   let(:batch_id) { 1 }
   let(:batch_data) do
     [
@@ -24,7 +26,9 @@ RSpec.describe 'billing.bill_cdr_batch' do
         dialpeer_reverse_billing: false,
         dialpeer_id: -22, # there is no such dp
         term_gw_id: -11, # there is no such gw
-        duration: 600
+        duration: 600,
+        customer_duration: 1000,
+        package_counter_id: nil
       },
       {
         customer_acc_id: customer_acc1.id,
@@ -35,7 +39,9 @@ RSpec.describe 'billing.bill_cdr_batch' do
         dialpeer_reverse_billing: false,
         dialpeer_id: dp.id,
         term_gw_id: -11, # there is no such gw
-        duration: 10
+        duration: 10,
+        customer_duration: 10,
+        package_counter_id: nil
       },
       {
         customer_acc_id: customer_acc1.id,
@@ -46,7 +52,9 @@ RSpec.describe 'billing.bill_cdr_batch' do
         dialpeer_reverse_billing: false,
         dialpeer_id: dp.id,
         term_gw_id: gw.id,
-        duration: 22
+        duration: 22,
+        customer_duration: 30,
+        package_counter_id: nil
       },
       {
         customer_acc_id: customer_acc1.id,
@@ -57,7 +65,9 @@ RSpec.describe 'billing.bill_cdr_batch' do
         dialpeer_reverse_billing: true,
         dialpeer_id: dp.id,
         term_gw_id: gw.id,
-        duration: 0
+        duration: 0,
+        customer_duration: 0,
+        package_counter_id: nil
       },
       {
         customer_acc_id: customer_acc2.id,
@@ -68,7 +78,22 @@ RSpec.describe 'billing.bill_cdr_batch' do
         dialpeer_reverse_billing: false,
         dialpeer_id: dp.id,
         term_gw_id: gw.id,
-        duration: -11 # should be skipped in stats
+        duration: -11, # should be skipped in stats
+        customer_duration: 0,
+        package_counter_id: nil
+      },
+      {
+        customer_acc_id: customer_acc1.id,
+        customer_price: nil,
+        destination_reverse_billing: false,
+        vendor_acc_id: vendor_acc2.id,
+        vendor_price: 0,
+        dialpeer_reverse_billing: false,
+        dialpeer_id: dp.id,
+        term_gw_id: gw.id,
+        duration: 22,
+        customer_duration: 30,
+        package_counter_id: package_counter.id
       }
     ]
   end
@@ -89,6 +114,14 @@ RSpec.describe 'billing.bill_cdr_batch' do
     expect(customer_acc2.reload.balance).to eq(customer_acc2_balance - customer_acc2_spending)
   end
 
+  it 'updates customer billing package counter' do
+    duration_before = package_counter.duration
+    duration_spent = batch_data[5][:customer_duration]
+
+    subject
+    expect(package_counter.reload.duration).to eq(duration_before - duration_spent)
+  end
+
   it 'updates vendor accounts' do
     vendor_acc1_balance = vendor_acc1.balance
     # dialpeer_reverse_billing=false and vendor_price > 0
@@ -107,20 +140,20 @@ RSpec.describe 'billing.bill_cdr_batch' do
   it 'updates statistic' do
     subject
     expect(dp.reload.statistic).to have_attributes(
-                                     calls: 3,
-                                     calls_success: 2,
+                                     calls: 4,
+                                     calls_success: 3,
                                      calls_fail: 1,
-                                     total_duration: 32,
-                                     asr: 0.6666667,
-                                     acd: 16
+                                     total_duration: 54,
+                                     asr: 0.75,
+                                     acd: 18.0
                                    )
 
     expect(gw.reload.statistic).to have_attributes(
-                                     calls: 2,
-                                     calls_success: 1,
+                                     calls: 3,
+                                     calls_success: 2,
                                      calls_fail: 1,
-                                     total_duration: 22,
-                                     asr: 0.5,
+                                     total_duration: 44,
+                                     asr: 0.6666667,
                                      acd: 22
                                    )
   end

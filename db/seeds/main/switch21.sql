@@ -271,6 +271,7 @@ INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1044, 'ss_otn', 'varchar', false, 1983, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1045, 'ss_dtn', 'varchar', false, 1984, false);
 INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1046, 'ss_attest_id', 'smallint', false, 1985, false);
+INSERT INTO switch21.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1047, 'package_counter_id', 'bigint', true, 1986, false);
 
 
 --

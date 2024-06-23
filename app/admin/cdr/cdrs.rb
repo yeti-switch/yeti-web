@@ -48,6 +48,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :with_trace, show_count: false
   scope :not_authorized, show_count: false
   scope :bad_routing, show_count: false
+  scope :package_billing, show_count: false
 
   filter :id
   filter :routing_tag_ids_include,
@@ -580,6 +581,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :destination_initial_rate
           row :destination_next_interval
           row :destination_next_rate
+          row :package_counter
 
           row :routing_plan
           row :routing_group

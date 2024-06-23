@@ -260,7 +260,9 @@ CREATE TYPE billing.cdr_v2 AS (
 	local_tag character varying,
 	from_domain character varying,
 	destination_reverse_billing boolean,
-	dialpeer_reverse_billing boolean
+	dialpeer_reverse_billing boolean,
+	package_counter_id bigint,
+	customer_duration integer
 );
 
 
@@ -1318,7 +1320,8 @@ CREATE TYPE switch21.callprofile_ty AS (
 	ss_dtn character varying,
 	ss_attest_id smallint,
 	lega_res character varying,
-	legb_res character varying
+	legb_res character varying,
+	package_counter_id bigint
 );
 
 
@@ -1463,6 +1466,7 @@ CREATE FUNCTION billing.bill_cdr_batch(i_batch_id bigint, i_data text, i_data_ve
     AS $$
 DECLARE
     v_batch_data billing.cdr_v2;
+    v_package_data record;
     v_c_acc_data record;
     v_v_acc_data record;
     v_dp_stats_data record;
@@ -1496,7 +1500,7 @@ BEGIN
         sum(customer_price) as customer_price,
         destination_reverse_billing
       from json_populate_recordset(null::billing.cdr_v2,_j_data)
-      where customer_acc_id is not null AND customer_price > 0
+      where customer_acc_id is not null AND customer_price > 0 AND package_counter_id is null
       group by customer_acc_id, destination_reverse_billing
     LOOP
       IF v_c_acc_data.destination_reverse_billing IS NULL OR v_c_acc_data.destination_reverse_billing = false THEN
@@ -1504,6 +1508,17 @@ BEGIN
       ELSE
         UPDATE billing.accounts SET balance = balance + COALESCE(v_c_acc_data.customer_price,0) WHERE id = v_c_acc_data.customer_acc_id;
       END IF;
+    END LOOP;
+
+    for v_package_data in
+      select
+        package_counter_id,
+        sum(customer_duration) as customer_duration
+      from json_populate_recordset(null::billing.cdr_v2,_j_data)
+      where customer_duration is not null AND package_counter_id is not null
+      group by package_counter_id
+    LOOP
+      UPDATE billing.package_counters SET duration = duration-v_package_data.customer_duration WHERE id=v_package_data.package_counter_id;
     END LOOP;
 
     for v_v_acc_data in
@@ -2972,6 +2987,7 @@ CREATE TABLE class4.destinations (
     reverse_billing boolean DEFAULT false NOT NULL,
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
+    allow_package_billing boolean DEFAULT false NOT NULL,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -23910,6 +23926,7 @@ BEGIN
     i_profile.destination_next_interval:=i_destination.next_interval;
   end if;
 
+  IF i_profile.package_counter_id IS NULL THEN
   CASE i_profile.destination_rate_policy_id
     WHEN 1 THEN -- fixed
     i_profile.destination_next_rate:=i_destination.next_rate::varchar;
@@ -23936,7 +23953,7 @@ BEGIN
   ELSE
   --
   end case;
-
+  END IF;
 
 
   /* time limiting START */
@@ -24672,6 +24689,7 @@ BEGIN
     i_profile.destination_next_interval:=i_destination.next_interval;
   end if;
 
+  IF i_profile.package_counter_id IS NULL THEN
   CASE i_profile.destination_rate_policy_id
     WHEN 1 THEN -- fixed
     i_profile.destination_next_rate:=i_destination.next_rate::varchar;
@@ -24698,7 +24716,7 @@ BEGIN
   ELSE
   --
   end case;
-
+  END IF;
 
 
   /* time limiting START */
@@ -25426,6 +25444,7 @@ BEGIN
     i_profile.destination_next_interval:=i_destination.next_interval;
   end if;
 
+  IF i_profile.package_counter_id IS NULL THEN
   CASE i_profile.destination_rate_policy_id
     WHEN 1 THEN -- fixed
     i_profile.destination_next_rate:=i_destination.next_rate::varchar;
@@ -25452,7 +25471,7 @@ BEGIN
   ELSE
   --
   end case;
-
+  END IF;
 
 
   /* time limiting START */
@@ -26099,6 +26118,7 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_defered_dst_rewrites switch21.defered_rewrite[] not null default ARRAY[]::switch21.defered_rewrite[];
         v_rate_groups integer[];
         v_routing_groups integer[];
+        v_package billing.package_counters%rowtype;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -27069,7 +27089,6 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
           RETURN;
         END IF;
 
-
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -27132,24 +27151,36 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         RAISE NOTICE '% ms -> DST. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_destination, true);
         /*}dbg*/
 
-        v_ret.destination_id:=v_destination.id;
-        v_ret.destination_prefix=v_destination.prefix;
-        v_ret.destination_initial_interval:=v_destination.initial_interval;
-        v_ret.destination_fee:=v_destination.connect_fee::varchar;
-        v_ret.destination_next_interval:=v_destination.next_interval;
-        v_ret.destination_rate_policy_id:=v_destination.rate_policy_id;
-        v_ret.destination_reverse_billing:=v_destination.reverse_billing;
+        v_ret.destination_id = v_destination.id;
+        v_ret.destination_prefix = v_destination.prefix;
+        v_ret.destination_initial_interval = v_destination.initial_interval;
+        v_ret.destination_next_interval = v_destination.next_interval;
+
+        IF v_destination.allow_package_billing THEN
+          SELECT INTO v_package * FROM billing.package_counters pc
+          WHERE pc.account_id = v_customer_auth_normalized.account_id AND
+              prefix_range(pc.prefix)@>prefix_range(v_routing_key)
+          ORDER BY length(prefix_range(pc.prefix)) DESC LIMIT 1;
+        END IF;
+        IF v_package.id is not null AND v_package.duration > 0 AND NOT v_package.exclude THEN
+            v_ret.package_counter_id = v_package.id;
+            v_ret.time_limit = v_package.duration;
+        ELSE
+          v_ret.destination_fee = v_destination.connect_fee::varchar;
+          v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
+          v_ret.destination_reverse_billing = v_destination.reverse_billing;
+          if v_destination.next_rate::float > v_destination_rate_limit then
+            v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
+            RETURN NEXT v_ret;
+            RETURN;
+          end if;
+        END IF;
+
         IF v_destination.reject_calls THEN
           v_ret.disconnect_code_id=112; --Rejected by destination
           RETURN NEXT v_ret;
           RETURN;
         END IF;
-
-        if v_destination.next_rate::float>v_destination_rate_limit then
-          v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
-          RETURN NEXT v_ret;
-          RETURN;
-        end if;
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
@@ -27660,6 +27691,7 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_defered_dst_rewrites switch21.defered_rewrite[] not null default ARRAY[]::switch21.defered_rewrite[];
         v_rate_groups integer[];
         v_routing_groups integer[];
+        v_package billing.package_counters%rowtype;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -28630,7 +28662,6 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
           RETURN;
         END IF;
 
-
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           /*dbg{*/
           v_end:=clock_timestamp();
@@ -28693,24 +28724,36 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         RAISE NOTICE '% ms -> DST. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_destination, true);
         /*}dbg*/
 
-        v_ret.destination_id:=v_destination.id;
-        v_ret.destination_prefix=v_destination.prefix;
-        v_ret.destination_initial_interval:=v_destination.initial_interval;
-        v_ret.destination_fee:=v_destination.connect_fee::varchar;
-        v_ret.destination_next_interval:=v_destination.next_interval;
-        v_ret.destination_rate_policy_id:=v_destination.rate_policy_id;
-        v_ret.destination_reverse_billing:=v_destination.reverse_billing;
+        v_ret.destination_id = v_destination.id;
+        v_ret.destination_prefix = v_destination.prefix;
+        v_ret.destination_initial_interval = v_destination.initial_interval;
+        v_ret.destination_next_interval = v_destination.next_interval;
+
+        IF v_destination.allow_package_billing THEN
+          SELECT INTO v_package * FROM billing.package_counters pc
+          WHERE pc.account_id = v_customer_auth_normalized.account_id AND
+              prefix_range(pc.prefix)@>prefix_range(v_routing_key)
+          ORDER BY length(prefix_range(pc.prefix)) DESC LIMIT 1;
+        END IF;
+        IF v_package.id is not null AND v_package.duration > 0 AND NOT v_package.exclude THEN
+            v_ret.package_counter_id = v_package.id;
+            v_ret.time_limit = v_package.duration;
+        ELSE
+          v_ret.destination_fee = v_destination.connect_fee::varchar;
+          v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
+          v_ret.destination_reverse_billing = v_destination.reverse_billing;
+          if v_destination.next_rate::float > v_destination_rate_limit then
+            v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
+            RETURN NEXT v_ret;
+            RETURN;
+          end if;
+        END IF;
+
         IF v_destination.reject_calls THEN
           v_ret.disconnect_code_id=112; --Rejected by destination
           RETURN NEXT v_ret;
           RETURN;
         END IF;
-
-        if v_destination.next_rate::float>v_destination_rate_limit then
-          v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
-          RETURN NEXT v_ret;
-          RETURN;
-        end if;
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
@@ -29218,6 +29261,7 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_defered_dst_rewrites switch21.defered_rewrite[] not null default ARRAY[]::switch21.defered_rewrite[];
         v_rate_groups integer[];
         v_routing_groups integer[];
+        v_package billing.package_counters%rowtype;
       BEGIN
         
 
@@ -30044,7 +30088,6 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
           RETURN;
         END IF;
 
-
         IF v_rp.validate_dst_number_format AND NOT (v_routing_key ~ '^[0-9]+$') THEN
           
 
@@ -30092,24 +30135,36 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         END IF;
         
 
-        v_ret.destination_id:=v_destination.id;
-        v_ret.destination_prefix=v_destination.prefix;
-        v_ret.destination_initial_interval:=v_destination.initial_interval;
-        v_ret.destination_fee:=v_destination.connect_fee::varchar;
-        v_ret.destination_next_interval:=v_destination.next_interval;
-        v_ret.destination_rate_policy_id:=v_destination.rate_policy_id;
-        v_ret.destination_reverse_billing:=v_destination.reverse_billing;
+        v_ret.destination_id = v_destination.id;
+        v_ret.destination_prefix = v_destination.prefix;
+        v_ret.destination_initial_interval = v_destination.initial_interval;
+        v_ret.destination_next_interval = v_destination.next_interval;
+
+        IF v_destination.allow_package_billing THEN
+          SELECT INTO v_package * FROM billing.package_counters pc
+          WHERE pc.account_id = v_customer_auth_normalized.account_id AND
+              prefix_range(pc.prefix)@>prefix_range(v_routing_key)
+          ORDER BY length(prefix_range(pc.prefix)) DESC LIMIT 1;
+        END IF;
+        IF v_package.id is not null AND v_package.duration > 0 AND NOT v_package.exclude THEN
+            v_ret.package_counter_id = v_package.id;
+            v_ret.time_limit = v_package.duration;
+        ELSE
+          v_ret.destination_fee = v_destination.connect_fee::varchar;
+          v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
+          v_ret.destination_reverse_billing = v_destination.reverse_billing;
+          if v_destination.next_rate::float > v_destination_rate_limit then
+            v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
+            RETURN NEXT v_ret;
+            RETURN;
+          end if;
+        END IF;
+
         IF v_destination.reject_calls THEN
           v_ret.disconnect_code_id=112; --Rejected by destination
           RETURN NEXT v_ret;
           RETURN;
         END IF;
-
-        if v_destination.next_rate::float>v_destination_rate_limit then
-          v_ret.disconnect_code_id=8006; -- No destination with appropriate rate found
-          RETURN NEXT v_ret;
-          RETURN;
-        end if;
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
@@ -31060,6 +31115,39 @@ CREATE SEQUENCE billing.invoices_templates_id_seq
 --
 
 ALTER SEQUENCE billing.invoices_templates_id_seq OWNED BY billing.invoice_templates.id;
+
+
+--
+-- Name: package_counters; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.package_counters (
+    id bigint NOT NULL,
+    account_id integer NOT NULL,
+    service_id bigint,
+    prefix character varying NOT NULL,
+    exclude boolean DEFAULT false NOT NULL,
+    duration integer DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: package_counters_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.package_counters_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: package_counters_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.package_counters_id_seq OWNED BY billing.package_counters.id;
 
 
 --
@@ -35990,6 +36078,13 @@ ALTER TABLE ONLY billing.invoice_templates ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: package_counters id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.package_counters ALTER COLUMN id SET DEFAULT nextval('billing.package_counters_id_seq'::regclass);
+
+
+--
 -- Name: payments id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -36877,6 +36972,14 @@ ALTER TABLE ONLY billing.invoice_templates
 
 ALTER TABLE ONLY billing.invoice_templates
     ADD CONSTRAINT invoices_templates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: package_counters package_counters_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.package_counters
+    ADD CONSTRAINT package_counters_pkey PRIMARY KEY (id);
 
 
 --
@@ -38862,6 +38965,27 @@ CREATE INDEX accounts_contractor_id_idx ON billing.accounts USING btree (contrac
 
 
 --
+-- Name: package_counters_account_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX package_counters_account_id_idx ON billing.package_counters USING btree (account_id);
+
+
+--
+-- Name: package_counters_prefix_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX package_counters_prefix_idx ON billing.package_counters USING gist (((prefix)::public.prefix_range));
+
+
+--
+-- Name: package_counters_service_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX package_counters_service_id_idx ON billing.package_counters USING btree (service_id);
+
+
+--
 -- Name: payments_account_id_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -39485,6 +39609,14 @@ ALTER TABLE ONLY billing.accounts
 
 ALTER TABLE ONLY billing.account_balance_notification_settings
     ADD CONSTRAINT fk_rails_f185d22f87 FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+
+
+--
+-- Name: package_counters package_counters_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.package_counters
+    ADD CONSTRAINT package_counters_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
 
 
 --
@@ -40762,6 +40894,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240410084634'),
 ('20240422204044'),
 ('20240425124935'),
-('20240611191911');
+('20240611191911'),
+('20240615214442'),
+('20240622173924');
 
 

@@ -290,10 +290,12 @@ RSpec.describe 'switch.writecdr()' do
       "metadata": metadata,
       "customer_auth_external_type": 'term',
       "lega_ss_status_id": -1,
-      "legb_ss_status_id": 2
+      "legb_ss_status_id": 2,
+      "package_counter_id": package_counter_id
     }.to_json
   end
 
+  let(:package_counter_id) { nil }
   let!(:metadata) { nil }
 
   let(:writecdr_parameters) do
@@ -595,6 +597,21 @@ RSpec.describe 'switch.writecdr()' do
       expect(Cdr::Cdr.last.customer_price).to eq(0)
       expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0)
       expect(Cdr::Cdr.last.vendor_price).to eq(0)
+    end
+  end
+
+  context 'When package billing' do
+    let(:package_counter_id) { 100_500 }
+
+    it 'customer amount' do
+      # 560 sec duration, 10s first interval, 11s next, rates = 0.0001/60*10 , 0.0001/60*11
+      # (50 × 11) + (1 × 10) = 560s,
+      # 0.0001/60*11 * 50 + 0.0001/60*10 = 0,0009333333333
+      expect { subject }.to change { Cdr::Cdr.count }.by(1)
+      expect(Cdr::Cdr.last.package_counter_id).to eq(package_counter_id)
+      expect(Cdr::Cdr.last.customer_duration).to eq(566)
+      expect(Cdr::Cdr.last.customer_price).to eq(0)
+      expect(Cdr::Cdr.last.customer_price_no_vat).to eq(0)
     end
   end
 
