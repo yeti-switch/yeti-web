@@ -10,6 +10,7 @@ class Api::Rest::Admin::PaymentResource < BaseResource
 
   has_one :account
 
+  relationship_filter :account
   ransack_filter :amount, type: :number
   ransack_filter :notes, type: :string
   ransack_filter :status, type: :enum, collection: Payment::CONST::STATUS_IDS.values
