@@ -58,7 +58,7 @@ class Billing::ServiceType < ApplicationRecord
       return
     end
 
-    if persisted? && services.any?
+    if persisted? && services.any? && attribute_changed?(:provisioning_class)
       errors.add(:provisioning_class, "can't be changed because have linked services")
     end
   end
