@@ -18,7 +18,7 @@ class Api::Rest::Customer::V1::ServiceResource < Api::Rest::Customer::V1::BaseRe
 
   ransack_filter :created_at, type: :datetime
   ransack_filter :name, type: :string
-  ransack_filter :account_id, type: :foreign_key
+  association_uuid_filter :account_id, class_name: 'Account'
   ransack_filter :initial_price, type: :number
   ransack_filter :renew_price, type: :number
   ransack_filter :renew_at, type: :datetime
