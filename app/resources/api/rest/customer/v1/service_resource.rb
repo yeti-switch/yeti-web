@@ -28,7 +28,7 @@ class Api::Rest::Customer::V1::ServiceResource < Api::Rest::Customer::V1::BaseRe
                  collection: Billing::Service::RENEW_PERIODS.values
 
   def service_type
-    type.name
+    _model.type.name
   end
 
   def self.sortable_fields(_ctx = nil)
