@@ -128,7 +128,7 @@ class CustomersAuth < ApplicationRecord
   SS_NO_IDENTITY_ACTION_REWRITE = 2
   SS_NO_IDENTITY_ACTIONS = {
     SS_NO_IDENTITY_ACTION_NOTHING => 'Do nothing',
-    SS_NO_IDENTITY_ACTION_NOTHING => 'Reject call',
+    SS_NO_IDENTITY_ACTION_REJECT => 'Reject call',
     SS_NO_IDENTITY_ACTION_REWRITE => 'Rewrite'
   }.freeze
 
@@ -137,7 +137,7 @@ class CustomersAuth < ApplicationRecord
   SS_INVALID_IDENTITY_ACTION_REWRITE = 2
   SS_INVALID_IDENTITY_ACTIONS = {
     SS_INVALID_IDENTITY_ACTION_NOTHING => 'Do nothing',
-    SS_INVALID_IDENTITY_ACTION_NOTHING => 'Reject call',
+    SS_INVALID_IDENTITY_ACTION_REJECT => 'Reject call',
     SS_INVALID_IDENTITY_ACTION_REWRITE => 'Rewrite'
   }.freeze
 
@@ -305,6 +305,18 @@ class CustomersAuth < ApplicationRecord
     rewrite_ss_status_id.nil? ? nil : SS_STATUSES[rewrite_ss_status_id]
   end
 
+  def ss_mode_name
+    ss_mode_id.nil? ? nil : SS_MODES[ss_mode_id]
+  end
+
+  def ss_invalid_identity_action_name
+    ss_invalid_identity_action_id.nil? ? nil : SS_INVALID_IDENTITY_ACTIONS[ss_invalid_identity_action_id]
+  end
+
+  def ss_no_identity_action_name
+    ss_no_identity_action_id.nil? ? nil : SS_NO_IDENTITY_ACTIONS[ss_no_identity_action_id]
+  end
+
   def privacy_mode_name
     PRIVACY_MODES[privacy_mode_id]
   end
@@ -342,11 +354,11 @@ class CustomersAuth < ApplicationRecord
   end
 
   def validate_rewrite_ss_status
-    return if not rewrite_ss_status_id.nil?
+    return unless rewrite_ss_status_id.nil?
 
     if ss_mode_id == SS_MODE_REWRITE ||
-      ss_no_identity_action_id == SS_NO_IDENTITY_ACTION_REWRITE ||
-        ss_invalid_identity_action_id == SS_INVALID_IDENTITY_ACTION_REWRITE
+       ss_no_identity_action_id == SS_NO_IDENTITY_ACTION_REWRITE ||
+       ss_invalid_identity_action_id == SS_INVALID_IDENTITY_ACTION_REWRITE
       errors.add(:rewrite_ss_status_id, 'Rewrite status should be defined for selected mode')
     end
   end

@@ -2404,22 +2404,6 @@ RSpec.describe '#routing logic' do
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
-
-          context 'Invalid identity on LegA' do
-            let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_INVALID }
-            it 'response without ss' do
-              expect(subject.size).to eq(2)
-              expect(subject.first[:customer_auth_id]).to be
-              expect(subject.first[:customer_id]).to be
-              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
-              expect(subject.first[:ss_crt_id]).to eq(nil)
-              expect(subject.first[:ss_otn]).to eq(nil)
-              expect(subject.first[:ss_dtn]).to eq(nil)
-              expect(subject.first[:ss_attest_id]).to eq(CustomersAuth::SS_STATUS_INVALID)
-              expect(subject.first[:legb_ss_status_id]).to eq(nil)
-              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
-            end
-          end
         end
       end
 

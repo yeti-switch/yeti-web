@@ -2932,30 +2932,29 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, STIR/SHAKEN processing.' do
-
         context 'Disable mode' do
           let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_DISABLE }
-          context ",try to insert with routing numbers" do
-              let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
-              let(:crt) { create(:stir_shaken_signing_certificate) }
-              let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+          context ',try to insert with routing numbers' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:vendor_gw_stir_shaken_crt_id) { crt.id }
 
-              it 'not works' do
-                expect(subject.size).to eq(2)
-                expect(subject.first[:customer_auth_id]).to be
-                expect(subject.first[:customer_id]).to be
-                expect(subject.first[:disconnect_code_id]).to eq(nil)
+            it 'not works' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
 
-                expect(subject.first[:ss_crt_id]).to eq(nil)
-                expect(subject.first[:ss_otn]).to eq(nil)
-                expect(subject.first[:ss_dtn]).to eq(nil)
-                expect(subject.first[:ss_attest_id]).to eq(nil)
-                expect(subject.first[:lega_ss_status_id]).to eq(nil)
-                expect(subject.first[:legb_ss_status_id]).to eq(nil)
-                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
-              end
+              expect(subject.first[:ss_crt_id]).to eq(nil)
+              expect(subject.first[:ss_otn]).to eq(nil)
+              expect(subject.first[:ss_dtn]).to eq(nil)
+              expect(subject.first[:ss_attest_id]).to eq(nil)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
-          context ",try to insert with out numbers" do
+          end
+          context ',try to insert with out numbers' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT_OUT }
             let(:crt) { create(:stir_shaken_signing_certificate) }
             let(:vendor_gw_stir_shaken_crt_id) { crt.id }
@@ -2988,7 +2987,7 @@ RSpec.describe '#routing logic' do
           ].each do |val|
             context "none value #{val}, no action" do
               let(:identity) { val }
-              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING}
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING }
               it 'OK' do
                 expect(subject.size).to eq(2)
                 expect(subject.first[:customer_auth_id]).to be
@@ -3004,7 +3003,7 @@ RSpec.describe '#routing logic' do
             end
             context "none value #{val}, reject" do
               let(:identity) { val }
-              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REJECT}
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REJECT }
               it 'OK' do
                 expect(subject.size).to eq(1)
                 expect(subject.first[:customer_auth_id]).to be
@@ -3016,7 +3015,7 @@ RSpec.describe '#routing logic' do
             end
             context "none value #{val}, rewrite" do
               let(:identity) { val }
-              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REWRITE}
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REWRITE }
               let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
 
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
@@ -3062,7 +3061,7 @@ RSpec.describe '#routing logic' do
           ].each do |val|
             context "invalid value #{val}, no action" do
               let(:identity) { val }
-              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING}
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING }
               it 'OK' do
                 expect(subject.size).to eq(2)
                 expect(subject.first[:customer_auth_id]).to be
@@ -3078,7 +3077,7 @@ RSpec.describe '#routing logic' do
             end
             context "invalid value #{val}, reject" do
               let(:identity) { val }
-              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REJECT}
+              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REJECT }
               it 'OK' do
                 expect(subject.size).to eq(1)
                 expect(subject.first[:customer_auth_id]).to be
@@ -3090,7 +3089,7 @@ RSpec.describe '#routing logic' do
             end
             context "invalid value #{val}, rewrite + insert" do
               let(:identity) { val }
-              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE}
+              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE }
               let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_C }
 
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
@@ -3115,7 +3114,7 @@ RSpec.describe '#routing logic' do
             end
             context "invalid value #{val}, rewrite + can't insert without certificate" do
               let(:identity) { val }
-              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE}
+              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE }
               let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_C }
 
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
@@ -3137,7 +3136,7 @@ RSpec.describe '#routing logic' do
             end
           end
 
-          [  '[{
+          ['[{
                 "parsed":true, "verified":true,
                 "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
                 "payload": {
@@ -3145,7 +3144,7 @@ RSpec.describe '#routing logic' do
                   "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
                 }
               }]',
-             '[{
+           '[{
                 "parsed":true, "verified":true,
                 "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
                 "payload": {
@@ -3153,15 +3152,14 @@ RSpec.describe '#routing logic' do
                   "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
                 }
               }]',
-             '[{
+           '[{
                 "parsed":true, "verified":true,
                 "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
                 "payload": {
                   "attest": "A", "dest": { "tn": ["uri-name","invalid"] },
                   "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
                 }
-              }]'
-          ].each do |val|
+              }]'].each do |val|
             context "valid value #{val}, no action" do
               let(:identity) { val }
               it 'OK' do
@@ -3198,14 +3196,13 @@ RSpec.describe '#routing logic' do
               end
             end
           end
-
         end
 
         context 'Force rewrite mode' do
           let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_REWRITE }
           let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
 
-          context ",try to insert without certificate" do
+          context ',try to insert without certificate' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
 
             it 'not works' do
@@ -3223,8 +3220,7 @@ RSpec.describe '#routing logic' do
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
-          context ",try to insert with routing numbers" do
-
+          context ',try to insert with routing numbers' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
             let(:crt) { create(:stir_shaken_signing_certificate) }
             let(:vendor_gw_stir_shaken_crt_id) { crt.id }
@@ -3244,7 +3240,7 @@ RSpec.describe '#routing logic' do
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
-          context ",try to insert with out numbers" do
+          context ',try to insert with out numbers' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT_OUT }
             let(:crt) { create(:stir_shaken_signing_certificate) }
             let(:vendor_gw_stir_shaken_crt_id) { crt.id }
@@ -3265,7 +3261,6 @@ RSpec.describe '#routing logic' do
             end
           end
         end
-
       end
 
       context 'SRC Number format validation enabled' do
