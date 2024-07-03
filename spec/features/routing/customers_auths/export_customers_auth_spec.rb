@@ -95,7 +95,10 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Tag action name', item.tag_action.name, anything],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything],
         ['Cnam database name', item.cnam_database.name, anything],
-        ['Rewrite ss status name', item.rewrite_ss_status_name, anything]
+        ['Rewrite ss status name', item.rewrite_ss_status_name, anything],
+        ['Ss mode name', item.ss_mode_name, anything],
+        ['Ss no identity action name', item.ss_no_identity_action_name, anything],
+        ['Ss invalid identity action name', item.ss_invalid_identity_action_name, anything]
       ]
     )
   end
