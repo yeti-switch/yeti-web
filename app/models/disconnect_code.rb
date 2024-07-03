@@ -57,6 +57,8 @@ class DisconnectCode < ApplicationRecord
   DC_NO_ENOUGH_CUSTOMER_BALANCE = 8000
   DC_NO_ROUTES = 113
   DC_NO_DESTINATION_WITH_APPROPRIATE_RATE = 8006
+  DC_IDENTITY_REQUIRED = 8018
+  DC_IDENTITY_INVALID = 8019
 
   def namespace_name
     NSS[namespace_id]

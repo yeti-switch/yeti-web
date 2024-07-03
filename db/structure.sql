@@ -23852,6 +23852,8 @@ DECLARE
   v_ruri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
+  v_customer_transit_headers_from_origination varchar[] default ARRAY[]::varchar[];
+  v_vendor_transit_headers_from_origination varchar[] default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -23907,6 +23909,10 @@ BEGIN
   i_profile.customer_account_name=i_customer_acc."name";
 
   i_profile.routing_group_id:=i_dp.routing_group_id;
+
+  -- TODO. store arrays in GW and not convert it there
+  v_customer_transit_headers_from_origination = string_to_array(COALESCE(i_customer_gw.transit_headers_from_origination,''),',');
+  v_vendor_transit_headers_from_origination = string_to_array(COALESCE(i_vendor_gw.transit_headers_from_origination,''),',');
 
   if i_send_billing_information then
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
@@ -24334,13 +24340,26 @@ BEGIN
     i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
-  IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
-      -- insert signature
+  IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
+    IF i_profile.lega_ss_status_id >0 THEN
+      -- relaying valid header from customer
+      i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
+      v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
+      v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL AND THEN
+      -- insert our signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
-      i_profile.ss_otn = i_profile.src_prefix_routing;
-      i_profile.ss_dtn = i_profile.dst_prefix_routing;
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
-  END IF;
+
+      IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+        i_profile.ss_otn = i_profile.src_prefix_routing;
+        i_profile.ss_dtn = i_profile.dst_prefix_routing;
+      ELSIF i_vendor_gw.stir_shaken_mode_id = 2 THEN
+        i_profile.ss_otn = i_profile.src_prefix_out;
+        i_profile.ss_dtn = i_profile.dst_prefix_out;
+      END IF;
+    END IF;
+  END IF ;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
@@ -24442,7 +24461,7 @@ BEGIN
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
 
-  i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
+  i_profile.transit_headers_a2b:=array_to_string(v_customer_transit_headers_from_origination,',')||';'||array_to_string(v_vendor_transit_headers_from_origination,',');
   i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
 
   i_profile.sdp_filter_type_id:=0;
@@ -24615,6 +24634,8 @@ DECLARE
   v_ruri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
+  v_customer_transit_headers_from_origination varchar[] default ARRAY[]::varchar[];
+  v_vendor_transit_headers_from_origination varchar[] default ARRAY[]::varchar[];
   /*dbg{*/
   v_start timestamp;
   v_end timestamp;
@@ -24670,6 +24691,10 @@ BEGIN
   i_profile.customer_account_name=i_customer_acc."name";
 
   i_profile.routing_group_id:=i_dp.routing_group_id;
+
+  -- TODO. store arrays in GW and not convert it there
+  v_customer_transit_headers_from_origination = string_to_array(COALESCE(i_customer_gw.transit_headers_from_origination,''),',');
+  v_vendor_transit_headers_from_origination = string_to_array(COALESCE(i_vendor_gw.transit_headers_from_origination,''),',');
 
   if i_send_billing_information then
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
@@ -25097,13 +25122,26 @@ BEGIN
     i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
-  IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
-      -- insert signature
+  IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
+    IF i_profile.lega_ss_status_id >0 THEN
+      -- relaying valid header from customer
+      i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
+      v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
+      v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL AND THEN
+      -- insert our signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
-      i_profile.ss_otn = i_profile.src_prefix_routing;
-      i_profile.ss_dtn = i_profile.dst_prefix_routing;
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
-  END IF;
+
+      IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+        i_profile.ss_otn = i_profile.src_prefix_routing;
+        i_profile.ss_dtn = i_profile.dst_prefix_routing;
+      ELSIF i_vendor_gw.stir_shaken_mode_id = 2 THEN
+        i_profile.ss_otn = i_profile.src_prefix_out;
+        i_profile.ss_dtn = i_profile.dst_prefix_out;
+      END IF;
+    END IF;
+  END IF ;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
@@ -25205,7 +25243,7 @@ BEGIN
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
 
-  i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
+  i_profile.transit_headers_a2b:=array_to_string(v_customer_transit_headers_from_origination,',')||';'||array_to_string(v_vendor_transit_headers_from_origination,',');
   i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
 
   i_profile.sdp_filter_type_id:=0;
@@ -25378,6 +25416,8 @@ DECLARE
   v_ruri_params varchar[] not null default ARRAY[]::varchar[];
   v_ruri_user_params varchar[] not null default ARRAY[]::varchar[];
   v_to_username varchar;
+  v_customer_transit_headers_from_origination varchar[] default ARRAY[]::varchar[];
+  v_vendor_transit_headers_from_origination varchar[] default ARRAY[]::varchar[];
   
 BEGIN
   
@@ -25425,6 +25465,10 @@ BEGIN
   i_profile.customer_account_name=i_customer_acc."name";
 
   i_profile.routing_group_id:=i_dp.routing_group_id;
+
+  -- TODO. store arrays in GW and not convert it there
+  v_customer_transit_headers_from_origination = string_to_array(COALESCE(i_customer_gw.transit_headers_from_origination,''),',');
+  v_vendor_transit_headers_from_origination = string_to_array(COALESCE(i_vendor_gw.transit_headers_from_origination,''),',');
 
   if i_send_billing_information then
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
@@ -25783,13 +25827,26 @@ BEGIN
     i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
-  IF i_vendor_gw.stir_shaken_mode_id = 1 AND COALESCE(i_profile.ss_attest_id,0) > 0 THEN
-      -- insert signature
+  IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
+    IF i_profile.lega_ss_status_id >0 THEN
+      -- relaying valid header from customer
+      i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
+      v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
+      v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL AND THEN
+      -- insert our signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
-      i_profile.ss_otn = i_profile.src_prefix_routing;
-      i_profile.ss_dtn = i_profile.dst_prefix_routing;
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
-  END IF;
+
+      IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
+        i_profile.ss_otn = i_profile.src_prefix_routing;
+        i_profile.ss_dtn = i_profile.dst_prefix_routing;
+      ELSIF i_vendor_gw.stir_shaken_mode_id = 2 THEN
+        i_profile.ss_otn = i_profile.src_prefix_out;
+        i_profile.ss_dtn = i_profile.dst_prefix_out;
+      END IF;
+    END IF;
+  END IF ;
 
   v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
@@ -25891,7 +25948,7 @@ BEGIN
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
 
-  i_profile.transit_headers_a2b:=i_customer_gw.transit_headers_from_origination||';'||i_vendor_gw.transit_headers_from_origination;
+  i_profile.transit_headers_a2b:=array_to_string(v_customer_transit_headers_from_origination,',')||';'||array_to_string(v_vendor_transit_headers_from_origination,',');
   i_profile.transit_headers_b2a:=i_vendor_gw.transit_headers_from_termination||';'||i_customer_gw.transit_headers_from_termination;
 
   i_profile.sdp_filter_type_id:=0;
@@ -26105,6 +26162,7 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_numberlist_size integer;
         v_lua_context switch21.lua_call_context;
         v_identity_data switch21.identity_data_ty[];
+        v_identity_record switch21.identity_data_ty;
         v_pai varchar[];
         v_ppi varchar;
         v_privacy varchar[];
@@ -26119,6 +26177,7 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_rate_groups integer[];
         v_routing_groups integer[];
         v_package billing.package_counters%rowtype;
+        v_stir_dst_tn varchar;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -26348,11 +26407,6 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
           );
         END IF;
 
-        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch21.identity_data_ty, i_identity_data) d;
-        IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
-        END IF;
-
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
@@ -26399,6 +26453,62 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN;
               END IF;
         END CASE;
+
+        ---- Identity validation ----
+        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch21.identity_data_ty, i_identity_data) d;
+        IF v_customer_auth_normalized.ss_mode_id = 1 THEN
+          /* validate */
+          v_ret.lega_ss_status_id = 0; -- none
+          FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch21.identity_data_ty[]) LOOP
+            IF v_identity_record is null OR v_identity_record.parsed = false THEN
+              -- no valid stir/shaken
+              v_ret.lega_ss_status_id = 0; -- none
+            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ret.src_prefix_in THEN
+              v_ret.lega_ss_status_id = -1; -- invalid
+              FOREACH v_stir_dst_tn IN ARRAY COALESCE(((v_identity_record.payload).dest).tn,'{}'::varchar[]) LOOP
+                IF v_stir_dst_tn = v_ret.dst_prefix_in THEN
+                  CASE (v_identity_record.payload).attest
+                    WHEN 'A' THEN
+                      v_ret.lega_ss_status_id = 1;
+                    WHEN 'B' THEN
+                      v_ret.lega_ss_status_id = 2;
+                    WHEN 'C' THEN
+                      v_ret.lega_ss_status_id = 3;
+                    ELSE
+                      v_ret.lega_ss_status_id = -1;
+                  END CASE;
+                  exit; -- exit from DST checking loop
+                ELSE
+                  v_ret.lega_ss_status_id = -1; -- invalid
+                END IF;
+              END LOOP;
+            ELSE
+              -- parsed but not verified
+              v_ret.lega_ss_status_id = -1; -- invalid
+            END IF;
+          END LOOP;
+
+          IF v_ret.lega_ss_status_id = -1 THEN
+              IF v_customer_auth_normalized.ss_invalid_identity_action_id = 1 THEN
+                v_ret.disconnect_code_id=8019; --Identity invalid
+                RETURN NEXT v_ret;
+                RETURN;
+              ELSIF v_customer_auth_normalized.ss_invalid_identity_action_id = 2 THEN
+                v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+              END IF;
+          ELSIF v_ret.lega_ss_status_id = 0 THEN
+              IF v_customer_auth_normalized.ss_no_identity_action_id = 1 THEN
+                v_ret.disconnect_code_id=8018; --Identity required
+                RETURN NEXT v_ret;
+                RETURN;
+              ELSIF v_customer_auth_normalized.ss_no_identity_action_id = 2 THEN
+                v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+              END IF;
+          END IF;
+
+        ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+        END IF;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -27678,6 +27788,7 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_numberlist_size integer;
         v_lua_context switch21.lua_call_context;
         v_identity_data switch21.identity_data_ty[];
+        v_identity_record switch21.identity_data_ty;
         v_pai varchar[];
         v_ppi varchar;
         v_privacy varchar[];
@@ -27692,6 +27803,7 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_rate_groups integer[];
         v_routing_groups integer[];
         v_package billing.package_counters%rowtype;
+        v_stir_dst_tn varchar;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -27921,11 +28033,6 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
           );
         END IF;
 
-        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch21.identity_data_ty, i_identity_data) d;
-        IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
-        END IF;
-
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
@@ -27972,6 +28079,62 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN;
               END IF;
         END CASE;
+
+        ---- Identity validation ----
+        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch21.identity_data_ty, i_identity_data) d;
+        IF v_customer_auth_normalized.ss_mode_id = 1 THEN
+          /* validate */
+          v_ret.lega_ss_status_id = 0; -- none
+          FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch21.identity_data_ty[]) LOOP
+            IF v_identity_record is null OR v_identity_record.parsed = false THEN
+              -- no valid stir/shaken
+              v_ret.lega_ss_status_id = 0; -- none
+            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ret.src_prefix_in THEN
+              v_ret.lega_ss_status_id = -1; -- invalid
+              FOREACH v_stir_dst_tn IN ARRAY COALESCE(((v_identity_record.payload).dest).tn,'{}'::varchar[]) LOOP
+                IF v_stir_dst_tn = v_ret.dst_prefix_in THEN
+                  CASE (v_identity_record.payload).attest
+                    WHEN 'A' THEN
+                      v_ret.lega_ss_status_id = 1;
+                    WHEN 'B' THEN
+                      v_ret.lega_ss_status_id = 2;
+                    WHEN 'C' THEN
+                      v_ret.lega_ss_status_id = 3;
+                    ELSE
+                      v_ret.lega_ss_status_id = -1;
+                  END CASE;
+                  exit; -- exit from DST checking loop
+                ELSE
+                  v_ret.lega_ss_status_id = -1; -- invalid
+                END IF;
+              END LOOP;
+            ELSE
+              -- parsed but not verified
+              v_ret.lega_ss_status_id = -1; -- invalid
+            END IF;
+          END LOOP;
+
+          IF v_ret.lega_ss_status_id = -1 THEN
+              IF v_customer_auth_normalized.ss_invalid_identity_action_id = 1 THEN
+                v_ret.disconnect_code_id=8019; --Identity invalid
+                RETURN NEXT v_ret;
+                RETURN;
+              ELSIF v_customer_auth_normalized.ss_invalid_identity_action_id = 2 THEN
+                v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+              END IF;
+          ELSIF v_ret.lega_ss_status_id = 0 THEN
+              IF v_customer_auth_normalized.ss_no_identity_action_id = 1 THEN
+                v_ret.disconnect_code_id=8018; --Identity required
+                RETURN NEXT v_ret;
+                RETURN;
+              ELSIF v_customer_auth_normalized.ss_no_identity_action_id = 2 THEN
+                v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+              END IF;
+          END IF;
+
+        ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+        END IF;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -29248,6 +29411,7 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_numberlist_size integer;
         v_lua_context switch21.lua_call_context;
         v_identity_data switch21.identity_data_ty[];
+        v_identity_record switch21.identity_data_ty;
         v_pai varchar[];
         v_ppi varchar;
         v_privacy varchar[];
@@ -29262,6 +29426,7 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_rate_groups integer[];
         v_routing_groups integer[];
         v_package billing.package_counters%rowtype;
+        v_stir_dst_tn varchar;
       BEGIN
         
 
@@ -29466,11 +29631,6 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
           );
         END IF;
 
-        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch21.identity_data_ty, i_identity_data) d;
-        IF v_customer_auth_normalized.rewrite_ss_status_id IS NOT NULL THEN
-          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
-        END IF;
-
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
@@ -29517,6 +29677,62 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN;
               END IF;
         END CASE;
+
+        ---- Identity validation ----
+        select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch21.identity_data_ty, i_identity_data) d;
+        IF v_customer_auth_normalized.ss_mode_id = 1 THEN
+          /* validate */
+          v_ret.lega_ss_status_id = 0; -- none
+          FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch21.identity_data_ty[]) LOOP
+            IF v_identity_record is null OR v_identity_record.parsed = false THEN
+              -- no valid stir/shaken
+              v_ret.lega_ss_status_id = 0; -- none
+            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ret.src_prefix_in THEN
+              v_ret.lega_ss_status_id = -1; -- invalid
+              FOREACH v_stir_dst_tn IN ARRAY COALESCE(((v_identity_record.payload).dest).tn,'{}'::varchar[]) LOOP
+                IF v_stir_dst_tn = v_ret.dst_prefix_in THEN
+                  CASE (v_identity_record.payload).attest
+                    WHEN 'A' THEN
+                      v_ret.lega_ss_status_id = 1;
+                    WHEN 'B' THEN
+                      v_ret.lega_ss_status_id = 2;
+                    WHEN 'C' THEN
+                      v_ret.lega_ss_status_id = 3;
+                    ELSE
+                      v_ret.lega_ss_status_id = -1;
+                  END CASE;
+                  exit; -- exit from DST checking loop
+                ELSE
+                  v_ret.lega_ss_status_id = -1; -- invalid
+                END IF;
+              END LOOP;
+            ELSE
+              -- parsed but not verified
+              v_ret.lega_ss_status_id = -1; -- invalid
+            END IF;
+          END LOOP;
+
+          IF v_ret.lega_ss_status_id = -1 THEN
+              IF v_customer_auth_normalized.ss_invalid_identity_action_id = 1 THEN
+                v_ret.disconnect_code_id=8019; --Identity invalid
+                RETURN NEXT v_ret;
+                RETURN;
+              ELSIF v_customer_auth_normalized.ss_invalid_identity_action_id = 2 THEN
+                v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+              END IF;
+          ELSIF v_ret.lega_ss_status_id = 0 THEN
+              IF v_customer_auth_normalized.ss_no_identity_action_id = 1 THEN
+                v_ret.disconnect_code_id=8018; --Identity required
+                RETURN NEXT v_ret;
+                RETURN;
+              ELSIF v_customer_auth_normalized.ss_no_identity_action_id = 2 THEN
+                v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+              END IF;
+          END IF;
+
+        ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
+          v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+        END IF;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -31657,6 +31873,9 @@ CREATE TABLE class4.customers_auth (
     rewrite_ss_status_id smallint,
     privacy_mode_id smallint DEFAULT 1 NOT NULL,
     interface character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    ss_mode_id smallint DEFAULT 0 NOT NULL,
+    ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
+    ss_invalid_identity_action_id smallint DEFAULT 0 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -31756,6 +31975,9 @@ CREATE TABLE class4.customers_auth_normalized (
     rewrite_ss_status_id smallint,
     privacy_mode_id smallint DEFAULT 1 NOT NULL,
     interface character varying,
+    ss_mode_id smallint DEFAULT 0 NOT NULL,
+    ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
+    ss_invalid_identity_action_id smallint DEFAULT 0 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -40896,6 +41118,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240425124935'),
 ('20240611191911'),
 ('20240615214442'),
-('20240622173924');
+('20240622173924'),
+('20240702142447');
 
 

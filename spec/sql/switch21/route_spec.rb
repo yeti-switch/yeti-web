@@ -498,6 +498,9 @@ RSpec.describe '#routing logic' do
                           dump_level_id: customer_auth_dump_level,
                           src_numberlist_use_diversion: customer_auth_src_numberlist_use_diversion,
                           rewrite_ss_status_id: customer_auth_rewrite_ss_status_id,
+                          ss_mode_id: customer_auth_ss_mode_id,
+                          ss_no_identity_action_id: customer_auth_ss_no_identity_action_id,
+                          ss_invalid_identity_action_id: customer_auth_ss_invalid_identity_action_id,
                           privacy_mode_id: customer_auth_privacy_mode_id)
       end
 
@@ -515,6 +518,9 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_dump_level) { CustomersAuth::DUMP_LEVEL_CAPTURE_SIP }
       let(:customer_auth_src_numberlist_use_diversion) { false }
       let(:customer_auth_rewrite_ss_status_id) { nil }
+      let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_DISABLE }
+      let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING }
+      let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_NOTHING }
       let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_REJECT_ANONYMOUS }
 
       let(:remote_ip) { '1.1.1.1' }
@@ -2925,57 +2931,332 @@ RSpec.describe '#routing logic' do
         end
       end
 
-      context 'Authorized, STIR/SHAKEN modes' do
-        let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
+      context 'Authorized, STIR/SHAKEN processing.' do
+        context 'Disable mode' do
+          let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_DISABLE }
+          context ',try to insert with routing numbers' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:vendor_gw_stir_shaken_crt_id) { crt.id }
 
-        context 'STIR/SHAKEN mode - disable' do
-          let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_DISABLE }
-
-          it 'response without ss' do
-            expect(subject.size).to eq(2)
-            expect(subject.first[:customer_auth_id]).to be
-            expect(subject.first[:customer_id]).to be
-            expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
-            expect(subject.first[:ss_crt_id]).to eq(nil)
-            expect(subject.first[:ss_otn]).to eq(nil)
-            expect(subject.first[:ss_dtn]).to eq(nil)
-            expect(subject.first[:legb_ss_status_id]).to eq(nil)
-            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
-          end
-        end
-
-        context 'STIR/SHAKEN mode - insert' do
-          let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_INSERT }
-          let(:crt) { create(:stir_shaken_signing_certificate) }
-          let(:vendor_gw_stir_shaken_crt_id) { crt.id }
-
-          context 'Valid identity on LegA' do
-            it 'response without ss' do
+            it 'not works' do
               expect(subject.size).to eq(2)
               expect(subject.first[:customer_auth_id]).to be
               expect(subject.first[:customer_id]).to be
-              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
-              expect(subject.first[:ss_crt_id]).to eq(crt.id)
-              expect(subject.first[:ss_otn]).to eq(subject.first[:src_prefix_routing])
-              expect(subject.first[:ss_dtn]).to eq(subject.first[:dst_prefix_routing])
-              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
-              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_rewrite_ss_status_id)
-              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
-            end
-          end
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
 
-          context 'Invalid identity on LegA' do
-            let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_INVALID }
-            it 'response without ss' do
-              expect(subject.size).to eq(2)
-              expect(subject.first[:customer_auth_id]).to be
-              expect(subject.first[:customer_id]).to be
-              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
               expect(subject.first[:ss_crt_id]).to eq(nil)
               expect(subject.first[:ss_otn]).to eq(nil)
               expect(subject.first[:ss_dtn]).to eq(nil)
-              expect(subject.first[:ss_attest_id]).to eq(CustomersAuth::SS_STATUS_INVALID)
+              expect(subject.first[:ss_attest_id]).to eq(nil)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
               expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+          context ',try to insert with out numbers' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT_OUT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+
+            it 'not works' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(nil)
+              expect(subject.first[:ss_otn]).to eq(nil)
+              expect(subject.first[:ss_dtn]).to eq(nil)
+              expect(subject.first[:ss_attest_id]).to eq(nil)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+        end
+
+        context 'Validation mode' do
+          let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_VALIDATE }
+
+          [
+            nil,
+            '[]',
+            '[{"k1":"v1"},{"k2":"v2"}]',
+            '[{"parsed":false,"verified":false}]'
+          ].each do |val|
+            context "none value #{val}, no action" do
+              let(:identity) { val }
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_NONE)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+            context "none value #{val}, reject" do
+              let(:identity) { val }
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REJECT }
+              it 'OK' do
+                expect(subject.size).to eq(1)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_IDENTITY_REQUIRED)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_NONE)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              end
+            end
+            context "none value #{val}, rewrite" do
+              let(:identity) { val }
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REWRITE }
+              let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
+
+              let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+              let(:crt) { create(:stir_shaken_signing_certificate) }
+              let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq(subject.first[:src_prefix_routing])
+                expect(subject.first[:ss_dtn]).to eq(subject.first[:dst_prefix_routing])
+                expect(subject.first[:ss_attest_id]).to eq(Cdr::Cdr::SS_STATUS_B)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_NONE)
+                expect(subject.first[:legb_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_B)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+          end
+
+          [
+            '[{"parsed":true,"verified":false}]',
+            '[{"parsed":true,"verified":true}]',
+            '[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["12022216000"] },
+                  "iat": 1622830203, "orig": { "tn": "213213" }, "origid": "6666"
+                }
+              }]',
+            '[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "AAAA", "dest": { "tn": ["uri-name"] },
+                  "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
+                }
+              }]'
+          ].each do |val|
+            context "invalid value #{val}, no action" do
+              let(:identity) { val }
+              let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_INVALID)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+            context "invalid value #{val}, reject" do
+              let(:identity) { val }
+              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REJECT }
+              it 'OK' do
+                expect(subject.size).to eq(1)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(DisconnectCode::DC_IDENTITY_INVALID)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_INVALID)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              end
+            end
+            context "invalid value #{val}, rewrite + insert" do
+              let(:identity) { val }
+              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE }
+              let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_C }
+
+              let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+              let(:crt) { create(:stir_shaken_signing_certificate) }
+              let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq(subject.first[:src_prefix_routing])
+                expect(subject.first[:ss_dtn]).to eq(subject.first[:dst_prefix_routing])
+                expect(subject.first[:ss_attest_id]).to eq(Cdr::Cdr::SS_STATUS_C)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_INVALID)
+                expect(subject.first[:legb_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_C)
+                expect(subject.first[:transit_headers_a2b]).to eq(';')
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+            context "invalid value #{val}, rewrite + can't insert without certificate" do
+              let(:identity) { val }
+              let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE }
+              let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_C }
+
+              let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:ss_attest_id]).to eq(Cdr::Cdr::SS_STATUS_C)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_INVALID)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+                expect(subject.first[:transit_headers_a2b]).to eq(';')
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+          end
+
+          ['[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["uri-name"] },
+                  "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
+                }
+              }]',
+           '[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["invalid", "uri-name"] },
+                  "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
+                }
+              }]',
+           '[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["uri-name","invalid"] },
+                  "iat": 1622830203, "orig": { "tn": "from_username" }, "origid": "6666"
+                }
+              }]'].each do |val|
+            context "valid value #{val}, no action" do
+              let(:identity) { val }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_A)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+                expect(subject.first[:transit_headers_a2b]).to eq(';')
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+            context "valid value #{val}, relay" do
+              let(:identity) { val }
+              let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+              let(:crt) { create(:stir_shaken_signing_certificate) }
+              let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_A)
+                expect(subject.first[:legb_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_A)
+                expect(subject.first[:transit_headers_a2b]).to eq('Identity;Identity')
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+          end
+        end
+
+        context 'Force rewrite mode' do
+          let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_REWRITE }
+          let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
+
+          context ',try to insert without certificate' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+
+            it 'not works' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(nil)
+              expect(subject.first[:ss_otn]).to eq(nil)
+              expect(subject.first[:ss_dtn]).to eq(nil)
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+          context ',try to insert with routing numbers' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+
+            it 'OK' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(crt.id)
+              expect(subject.first[:ss_otn]).to eq('from_username')
+              expect(subject.first[:ss_dtn]).to eq('uri-name')
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+          context ',try to insert with out numbers' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT_OUT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+
+            it 'OK' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(crt.id)
+              expect(subject.first[:ss_otn]).to eq('from_username')
+              expect(subject.first[:ss_dtn]).to eq('uri-name')
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end

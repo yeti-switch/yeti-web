@@ -58,10 +58,12 @@ ActiveAdmin.register CustomersAuth do
                  [:radius_accounting_profile_name, proc { |row| row.radius_accounting_profile.try(:name) || '' }],
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) || '' }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
+                 :ss_mode_name,
+                 :ss_invalid_identity_action_name,
+                 :ss_no_identity_action_name,
                  :rewrite_ss_status_name
 
-  acts_as_import resource_class: Importing::CustomersAuth,
-                 skip_columns: [:tag_action_value]
+  acts_as_import resource_class: Importing::CustomersAuth, skip_columns: [:tag_action_value]
 
   permit_params :name, :enabled, :reject_calls, :customer_id, :rateplan_id, :routing_plan_id,
                 :gateway_id, :require_incoming_auth, :account_id, :check_account_balance, :diversion_policy_id,
@@ -85,6 +87,7 @@ ActiveAdmin.register CustomersAuth do
                 :tag_action_id, :lua_script_id,
                 :dst_number_field_id, :src_number_field_id, :src_name_field_id,
                 :cnam_database_id, :src_numberlist_use_diversion, :rewrite_ss_status_id,
+                :ss_mode_id, :ss_invalid_identity_action_id, :ss_no_identity_action_id,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
@@ -372,6 +375,9 @@ ActiveAdmin.register CustomersAuth do
 
       tab :stir_shaken do
         f.inputs do
+          f.input :ss_mode_id, as: :select, include_blank: false, collection: CustomersAuth::SS_MODES.invert
+          f.input :ss_invalid_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_INVALID_IDENTITY_ACTIONS.invert
+          f.input :ss_no_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_NO_IDENTITY_ACTIONS.invert
           f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: CustomersAuth::SS_STATUSES.invert
         end
       end
@@ -475,6 +481,9 @@ ActiveAdmin.register CustomersAuth do
 
       tab :stir_shaken do
         attributes_table do
+          row :ss_mode, &:ss_mode_name
+          row :ss_invalid_identity_action, &:ss_invalid_identity_action_name
+          row :ss_no_identity_action, &:ss_no_identity_action_name
           row :rewrite_ss_status, &:rewrite_ss_status_name
         end
       end

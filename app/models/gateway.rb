@@ -197,10 +197,12 @@ class Gateway < ApplicationRecord
   }.freeze
 
   STIR_SHAKEN_MODE_DISABLE = 0
-  STIR_SHAKEN_MODE_INSERT = 1
+  STIR_SHAKEN_MODE_RELAY_INSERT = 1
+  STIR_SHAKEN_MODE_RELAY_INSERT_OUT = 2
   STIR_SHAKEN_MODES = {
     STIR_SHAKEN_MODE_DISABLE => 'Disable',
-    STIR_SHAKEN_MODE_INSERT => 'Insert identity'
+    STIR_SHAKEN_MODE_RELAY_INSERT => 'Relay valid identity or insert our identity(routing numbers)',
+    STIR_SHAKEN_MODE_RELAY_INSERT_OUT => 'Relay valid identity or insert our identity(out numbers)'
   }.freeze
 
   SIP_SCHEMA_SIP = 1
@@ -324,7 +326,6 @@ class Gateway < ApplicationRecord
             format: { with: /\A[a-zA-Z\-\,\*]*\z/, message: 'Enter headers separated by comma. Header name can contain letters, * and -' }
 
   validates :stir_shaken_mode_id, inclusion: { in: STIR_SHAKEN_MODES.keys }, allow_nil: false
-  validates :stir_shaken_crt_id, presence: true, if: -> { stir_shaken_mode_id == STIR_SHAKEN_MODE_INSERT }
   validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
   validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
 
