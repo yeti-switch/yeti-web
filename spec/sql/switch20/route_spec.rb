@@ -2386,7 +2386,7 @@ RSpec.describe '#routing logic' do
         end
 
         context 'STIR/SHAKEN mode - insert' do
-          let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_INSERT }
+          let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
           let(:crt) { create(:stir_shaken_signing_certificate) }
           let(:vendor_gw_stir_shaken_crt_id) { crt.id }
 

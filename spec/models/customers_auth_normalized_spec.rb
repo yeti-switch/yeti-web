@@ -63,6 +63,9 @@
 #  src_name_field_id                :integer(2)       default(1), not null
 #  src_number_field_id              :integer(2)       default(1), not null
 #  src_numberlist_id                :integer(2)
+#  ss_invalid_identity_action_id    :integer(2)       default(0), not null
+#  ss_mode_id                       :integer(2)       default(0), not null
+#  ss_no_identity_action_id         :integer(2)       default(0), not null
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)
 #

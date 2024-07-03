@@ -62,6 +62,9 @@
 #  src_name_field_id                :integer(2)       default(1), not null
 #  src_number_field_id              :integer(2)       default(1), not null
 #  src_numberlist_id                :integer(2)
+#  ss_invalid_identity_action_id    :integer(2)       default(0), not null
+#  ss_mode_id                       :integer(2)       default(0), not null
+#  ss_no_identity_action_id         :integer(2)       default(0), not null
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)
 #
@@ -111,15 +114,37 @@ class CustomersAuth < ApplicationRecord
     DUMP_LEVEL_CAPTURE_ALL => 'Capture all traffic'
   }.freeze
 
-  SS_STATUS_INVALID = -1
-  SS_STATUS_NONE = 0
+  SS_MODE_DISABLE = 0
+  SS_MODE_VALIDATE = 1
+  SS_MODE_REWRITE = 2
+  SS_MODES = {
+    SS_MODE_DISABLE => 'Disable STIR/SHAKEN processing',
+    SS_MODE_VALIDATE => 'Validate identity',
+    SS_MODE_REWRITE => 'Force rewrite attestation level'
+  }.freeze
+
+  SS_NO_IDENTITY_ACTION_NOTHING = 0
+  SS_NO_IDENTITY_ACTION_REJECT = 1
+  SS_NO_IDENTITY_ACTION_REWRITE = 2
+  SS_NO_IDENTITY_ACTIONS = {
+    SS_NO_IDENTITY_ACTION_NOTHING => 'Do nothing',
+    SS_NO_IDENTITY_ACTION_NOTHING => 'Reject call',
+    SS_NO_IDENTITY_ACTION_REWRITE => 'Rewrite'
+  }.freeze
+
+  SS_INVALID_IDENTITY_ACTION_NOTHING = 0
+  SS_INVALID_IDENTITY_ACTION_REJECT = 1
+  SS_INVALID_IDENTITY_ACTION_REWRITE = 2
+  SS_INVALID_IDENTITY_ACTIONS = {
+    SS_INVALID_IDENTITY_ACTION_NOTHING => 'Do nothing',
+    SS_INVALID_IDENTITY_ACTION_NOTHING => 'Reject call',
+    SS_INVALID_IDENTITY_ACTION_REWRITE => 'Rewrite'
+  }.freeze
+
   SS_STATUS_A = 1
   SS_STATUS_B = 2
   SS_STATUS_C = 3
-
   SS_STATUSES = {
-    SS_STATUS_INVALID => 'Validation failed',
-    SS_STATUS_NONE => 'No identity',
     SS_STATUS_A => 'Attestation A',
     SS_STATUS_B => 'Attestation B',
     SS_STATUS_C => 'Attestation C'
@@ -228,6 +253,7 @@ class CustomersAuth < ApplicationRecord
   validates :dump_level_id, presence: true
   validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: true
   validates :rewrite_ss_status_id, inclusion: { in: CustomersAuth::SS_STATUSES.keys }, allow_nil: true
+  validate :validate_rewrite_ss_status
   validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
 
   validates_with TagActionValueValidator
@@ -313,6 +339,16 @@ class CustomersAuth < ApplicationRecord
     return if customer.nil? || gateway.nil?
 
     errors.add(:gateway, 'belongs to different customer') if !gateway.is_shared && gateway.contractor_id != customer_id
+  end
+
+  def validate_rewrite_ss_status
+    return if not rewrite_ss_status_id.nil?
+
+    if ss_mode_id == SS_MODE_REWRITE ||
+      ss_no_identity_action_id == SS_NO_IDENTITY_ACTION_REWRITE ||
+        ss_invalid_identity_action_id == SS_INVALID_IDENTITY_ACTION_REWRITE
+      errors.add(:rewrite_ss_status_id, 'Rewrite status should be defined for selected mode')
+    end
   end
 
   def self.ransackable_scopes(_auth_object = nil)
