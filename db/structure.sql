@@ -26177,6 +26177,8 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_rate_groups integer[];
         v_routing_groups integer[];
         v_package billing.package_counters%rowtype;
+        v_ss_src varchar;
+        v_ss_dst varchar;
         v_stir_dst_tn varchar;
       BEGIN
         /*dbg{*/
@@ -26459,14 +26461,24 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         IF v_customer_auth_normalized.ss_mode_id = 1 THEN
           /* validate */
           v_ret.lega_ss_status_id = 0; -- none
+          v_ss_src = yeti_ext.regexp_replace_rand(
+            v_ret.src_prefix_in,
+            v_customer_auth_normalized.ss_src_rewrite_rule,
+            v_customer_auth_normalized.ss_src_rewrite_result
+          );
+          v_ss_dst = yeti_ext.regexp_replace_rand(
+            v_ret.dst_prefix_in,
+            v_customer_auth_normalized.ss_dst_rewrite_rule,
+            v_customer_auth_normalized.ss_dst_rewrite_result
+          );
           FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch21.identity_data_ty[]) LOOP
             IF v_identity_record is null OR v_identity_record.parsed = false THEN
               -- no valid stir/shaken
               v_ret.lega_ss_status_id = 0; -- none
-            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ret.src_prefix_in THEN
+            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ss_src THEN
               v_ret.lega_ss_status_id = -1; -- invalid
               FOREACH v_stir_dst_tn IN ARRAY COALESCE(((v_identity_record.payload).dest).tn,'{}'::varchar[]) LOOP
-                IF v_stir_dst_tn = v_ret.dst_prefix_in THEN
+                IF v_stir_dst_tn = v_ss_dst THEN
                   CASE (v_identity_record.payload).attest
                     WHEN 'A' THEN
                       v_ret.lega_ss_status_id = 1;
@@ -27803,6 +27815,8 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_rate_groups integer[];
         v_routing_groups integer[];
         v_package billing.package_counters%rowtype;
+        v_ss_src varchar;
+        v_ss_dst varchar;
         v_stir_dst_tn varchar;
       BEGIN
         /*dbg{*/
@@ -28085,14 +28099,24 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         IF v_customer_auth_normalized.ss_mode_id = 1 THEN
           /* validate */
           v_ret.lega_ss_status_id = 0; -- none
+          v_ss_src = yeti_ext.regexp_replace_rand(
+            v_ret.src_prefix_in,
+            v_customer_auth_normalized.ss_src_rewrite_rule,
+            v_customer_auth_normalized.ss_src_rewrite_result
+          );
+          v_ss_dst = yeti_ext.regexp_replace_rand(
+            v_ret.dst_prefix_in,
+            v_customer_auth_normalized.ss_dst_rewrite_rule,
+            v_customer_auth_normalized.ss_dst_rewrite_result
+          );
           FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch21.identity_data_ty[]) LOOP
             IF v_identity_record is null OR v_identity_record.parsed = false THEN
               -- no valid stir/shaken
               v_ret.lega_ss_status_id = 0; -- none
-            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ret.src_prefix_in THEN
+            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ss_src THEN
               v_ret.lega_ss_status_id = -1; -- invalid
               FOREACH v_stir_dst_tn IN ARRAY COALESCE(((v_identity_record.payload).dest).tn,'{}'::varchar[]) LOOP
-                IF v_stir_dst_tn = v_ret.dst_prefix_in THEN
+                IF v_stir_dst_tn = v_ss_dst THEN
                   CASE (v_identity_record.payload).attest
                     WHEN 'A' THEN
                       v_ret.lega_ss_status_id = 1;
@@ -29426,6 +29450,8 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_rate_groups integer[];
         v_routing_groups integer[];
         v_package billing.package_counters%rowtype;
+        v_ss_src varchar;
+        v_ss_dst varchar;
         v_stir_dst_tn varchar;
       BEGIN
         
@@ -29683,14 +29709,24 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         IF v_customer_auth_normalized.ss_mode_id = 1 THEN
           /* validate */
           v_ret.lega_ss_status_id = 0; -- none
+          v_ss_src = yeti_ext.regexp_replace_rand(
+            v_ret.src_prefix_in,
+            v_customer_auth_normalized.ss_src_rewrite_rule,
+            v_customer_auth_normalized.ss_src_rewrite_result
+          );
+          v_ss_dst = yeti_ext.regexp_replace_rand(
+            v_ret.dst_prefix_in,
+            v_customer_auth_normalized.ss_dst_rewrite_rule,
+            v_customer_auth_normalized.ss_dst_rewrite_result
+          );
           FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch21.identity_data_ty[]) LOOP
             IF v_identity_record is null OR v_identity_record.parsed = false THEN
               -- no valid stir/shaken
               v_ret.lega_ss_status_id = 0; -- none
-            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ret.src_prefix_in THEN
+            ELSIF v_identity_record.parsed = true AND v_identity_record.verified = true AND ((v_identity_record.payload).orig).tn = v_ss_src THEN
               v_ret.lega_ss_status_id = -1; -- invalid
               FOREACH v_stir_dst_tn IN ARRAY COALESCE(((v_identity_record.payload).dest).tn,'{}'::varchar[]) LOOP
-                IF v_stir_dst_tn = v_ret.dst_prefix_in THEN
+                IF v_stir_dst_tn = v_ss_dst THEN
                   CASE (v_identity_record.payload).attest
                     WHEN 'A' THEN
                       v_ret.lega_ss_status_id = 1;
@@ -31876,6 +31912,10 @@ CREATE TABLE class4.customers_auth (
     ss_mode_id smallint DEFAULT 0 NOT NULL,
     ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
     ss_invalid_identity_action_id smallint DEFAULT 0 NOT NULL,
+    ss_src_rewrite_rule character varying,
+    ss_src_rewrite_result character varying,
+    ss_dst_rewrite_rule character varying,
+    ss_dst_rewrite_result character varying,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -31978,6 +32018,10 @@ CREATE TABLE class4.customers_auth_normalized (
     ss_mode_id smallint DEFAULT 0 NOT NULL,
     ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
     ss_invalid_identity_action_id smallint DEFAULT 0 NOT NULL,
+    ss_src_rewrite_rule character varying,
+    ss_src_rewrite_result character varying,
+    ss_dst_rewrite_rule character varying,
+    ss_dst_rewrite_result character varying,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -41119,6 +41163,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240611191911'),
 ('20240615214442'),
 ('20240622173924'),
-('20240702142447');
+('20240702142447'),
+('20240704100545');
 
 

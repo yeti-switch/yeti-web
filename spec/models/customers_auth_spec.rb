@@ -38,6 +38,10 @@
 #  src_prefix                       :string           default(["\"\""]), is an Array
 #  src_rewrite_result               :string
 #  src_rewrite_rule                 :string
+#  ss_dst_rewrite_result            :string
+#  ss_dst_rewrite_rule              :string
+#  ss_src_rewrite_result            :string
+#  ss_src_rewrite_rule              :string
 #  tag_action_value                 :integer(2)       default([]), not null, is an Array
 #  to_domain                        :string           default([]), is an Array
 #  uri_domain                       :string           default([]), is an Array

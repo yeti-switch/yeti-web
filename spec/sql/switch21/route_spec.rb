@@ -501,6 +501,10 @@ RSpec.describe '#routing logic' do
                           ss_mode_id: customer_auth_ss_mode_id,
                           ss_no_identity_action_id: customer_auth_ss_no_identity_action_id,
                           ss_invalid_identity_action_id: customer_auth_ss_invalid_identity_action_id,
+                          ss_src_rewrite_rule: customer_auth_ss_src_rewrite_rule,
+                          ss_src_rewrite_result: customer_auth_ss_src_rewrite_result,
+                          ss_dst_rewrite_rule: customer_auth_ss_dst_rewrite_rule,
+                          ss_dst_rewrite_result: customer_auth_ss_dst_rewrite_result,
                           privacy_mode_id: customer_auth_privacy_mode_id)
       end
 
@@ -521,6 +525,11 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_DISABLE }
       let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_NOTHING }
       let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_NOTHING }
+
+      let(:customer_auth_ss_src_rewrite_rule) { nil }
+      let(:customer_auth_ss_src_rewrite_result) { nil }
+      let(:customer_auth_ss_dst_rewrite_rule) { nil }
+      let(:customer_auth_ss_dst_rewrite_result) { nil }
       let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_REJECT_ANONYMOUS }
 
       let(:remote_ip) { '1.1.1.1' }
@@ -3177,6 +3186,77 @@ RSpec.describe '#routing logic' do
               end
             end
             context "valid value #{val}, relay" do
+              let(:identity) { val }
+              let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+              let(:crt) { create(:stir_shaken_signing_certificate) }
+              let(:vendor_gw_stir_shaken_crt_id) { crt.id }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_A)
+                expect(subject.first[:legb_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_A)
+                expect(subject.first[:transit_headers_a2b]).to eq('Identity;Identity')
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+          end
+
+          ['[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["+uri-name"] },
+                  "iat": 1622830203, "orig": { "tn": "00from_username" }, "origid": "6666"
+                }
+              }]',
+           '[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["invalid", "+uri-name"] },
+                  "iat": 1622830203, "orig": { "tn": "00from_username" }, "origid": "6666"
+                }
+              }]',
+           '[{
+                "parsed":true, "verified":true,
+                "header": { "alg": "ES256", "ppt": "shaken", "typ": "passport", "x5u": "http://127.0.0.1/share/test.pem"},
+                "payload": {
+                  "attest": "A", "dest": { "tn": ["+uri-name","invalid"] },
+                  "iat": 1622830203, "orig": { "tn": "00from_username" }, "origid": "6666"
+                }
+              }]'].each do |val|
+            context "valid value #{val}, with rewrite no action" do
+              let(:customer_auth_ss_src_rewrite_rule) { '(.*)' }
+              let(:customer_auth_ss_src_rewrite_result) { '00\1' }
+              let(:customer_auth_ss_dst_rewrite_rule) { '(.*)' }
+              let(:customer_auth_ss_dst_rewrite_result) { '+\1' }
+
+              let(:identity) { val }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+                expect(subject.first[:ss_crt_id]).to eq(nil)
+                expect(subject.first[:ss_otn]).to eq(nil)
+                expect(subject.first[:ss_dtn]).to eq(nil)
+                expect(subject.first[:lega_ss_status_id]).to eq(Cdr::Cdr::SS_STATUS_A)
+                expect(subject.first[:legb_ss_status_id]).to eq(nil)
+                expect(subject.first[:transit_headers_a2b]).to eq(';')
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+            context "valid value #{val}, with rewrite relay" do
+              let(:customer_auth_ss_src_rewrite_rule) { '(.*)' }
+              let(:customer_auth_ss_src_rewrite_result) { '00\1' }
+              let(:customer_auth_ss_dst_rewrite_rule) { '(.*)' }
+              let(:customer_auth_ss_dst_rewrite_result) { '+\1' }
+
               let(:identity) { val }
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
               let(:crt) { create(:stir_shaken_signing_certificate) }

@@ -61,7 +61,11 @@ ActiveAdmin.register CustomersAuth do
                  :ss_mode_name,
                  :ss_invalid_identity_action_name,
                  :ss_no_identity_action_name,
-                 :rewrite_ss_status_name
+                 :rewrite_ss_status_name,
+                 :ss_src_rewrite_rule,
+                 :ss_src_rewrite_result,
+                 :ss_dst_rewrite_rule,
+                 :ss_dst_rewrite_result
 
   acts_as_import resource_class: Importing::CustomersAuth, skip_columns: [:tag_action_value]
 
@@ -88,6 +92,7 @@ ActiveAdmin.register CustomersAuth do
                 :dst_number_field_id, :src_number_field_id, :src_name_field_id,
                 :cnam_database_id, :src_numberlist_use_diversion, :rewrite_ss_status_id,
                 :ss_mode_id, :ss_invalid_identity_action_id, :ss_no_identity_action_id,
+                :ss_src_rewrite_rule, :ss_src_rewrite_result, :ss_dst_rewrite_rule, :ss_dst_rewrite_result,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
@@ -379,6 +384,10 @@ ActiveAdmin.register CustomersAuth do
           f.input :ss_invalid_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_INVALID_IDENTITY_ACTIONS.invert
           f.input :ss_no_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_NO_IDENTITY_ACTIONS.invert
           f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: CustomersAuth::SS_STATUSES.invert
+          f.input :ss_src_rewrite_rule
+          f.input :ss_src_rewrite_result
+          f.input :ss_dst_rewrite_rule
+          f.input :ss_dst_rewrite_result
         end
       end
     end
@@ -485,6 +494,10 @@ ActiveAdmin.register CustomersAuth do
           row :ss_invalid_identity_action, &:ss_invalid_identity_action_name
           row :ss_no_identity_action, &:ss_no_identity_action_name
           row :rewrite_ss_status, &:rewrite_ss_status_name
+          row :ss_src_rewrite_rule
+          row :ss_src_rewrite_result
+          row :ss_dst_rewrite_rule
+          row :ss_dst_rewrite_result
         end
       end
     end
