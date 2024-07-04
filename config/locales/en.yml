@@ -98,6 +98,8 @@ en:
         interface: 'Comma-separated list of SIP interfaces names where initial INVITE may be received. Leave empty to allow any interface. If Gateway locked to specific SIP interface it should be allowed there'
         radius_auth_profile: 'Select for additional RADIUS call authentication before routing'
         radius_accounting_profile: "RADIUS accounting profile for LegA(Origination)"
+        ss_src_rewrite_rule: 'Rewrite rule to adapt SRC number before STIR/SHAKEN Identity validation'
+        ss_dst_rewrite_rule: 'Rewrite rule to adapt DST number before STIR/SHAKEN Identity validation'
       destination:
         reverse_billing: "If enabled, customer account balance is raised"
       routing_routing_plan:
