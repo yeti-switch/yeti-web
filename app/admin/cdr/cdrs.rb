@@ -158,6 +158,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :sign_term_local_ip, filters: %i[equals contains starts_with ends_with]
   filter :sign_term_ip, filters: %i[equals contains starts_with ends_with]
   filter :customer_auth_external_type_eq, as: :string, label: 'CUSTOMER AUTH EXTERNAL TYPE'
+  filter :lega_ss_status_id_eq, label: 'LegA SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'chosen' }
+  filter :legb_ss_status_id_eq, label: 'LegB SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'chosen' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
 
@@ -612,8 +614,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       tab :identity do
         attributes_table do
           row :lega_identity
-          row :lega_ss_status
-          row :legb_ss_status
+          row :lega_ss_status do
+            status_tag(cdr.lega_ss_status.to_s, class: cdr.lega_ss_status_class) unless cdr.lega_ss_status_id.nil?
+          end
+          row :legb_ss_status do
+            status_tag(cdr.legb_ss_status.to_s, class: cdr.legb_ss_status_class) unless cdr.legb_ss_status_id.nil?
+          end
         end
       end
     end
@@ -675,6 +681,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :dst_prefix_in
     column :to_domain
     column :ruri_domain
+
+    column('S/S Status') do |cdr|
+      status_tag(cdr.lega_ss_status.to_s, class: cdr.lega_ss_status_class) unless cdr.lega_ss_status_id.nil?
+      status_tag(cdr.legb_ss_status.to_s, class: cdr.legb_ss_status_class) unless cdr.legb_ss_status_id.nil?
+    end
+
     column :src_prefix_routing
     column :src_area
     column :dst_prefix_routing

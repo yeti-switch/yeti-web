@@ -191,8 +191,8 @@ class Cdr::Cdr < Cdr::Base
   SS_STATUS_C = 3
 
   SS_STATUSES = {
-    SS_STATUS_INVALID => 'Validation failed',
-    SS_STATUS_NONE => 'No identity',
+    SS_STATUS_INVALID => 'Invalid',
+    SS_STATUS_NONE => 'None',
     SS_STATUS_A => 'A',
     SS_STATUS_B => 'B',
     SS_STATUS_C => 'C'
@@ -325,8 +325,22 @@ class Cdr::Cdr < Cdr::Base
     lega_ss_status_id.nil? ? nil : SS_STATUSES[lega_ss_status_id]
   end
 
+  def lega_ss_status_class
+    return :red if lega_ss_status_id == -1
+    return :grey if lega_ss_status_id == 0
+
+    :green
+  end
+
   def legb_ss_status
     legb_ss_status_id.nil? ? nil : SS_STATUSES[legb_ss_status_id]
+  end
+
+  def legb_ss_status_class
+    return :red if legb_ss_status_id == -1
+    return :grey if legb_ss_status_id == 0
+
+    :green
   end
 
   def has_dump?
