@@ -3,6 +3,10 @@
 module Billing
   module Provisioning
     class Logging < Base
+      def after_create
+        Rails.logger.info "Service created service_id=#{service.id}"
+      end
+
       def before_renew
         Rails.logger.info "Renew started service_id=#{service.id}"
       end

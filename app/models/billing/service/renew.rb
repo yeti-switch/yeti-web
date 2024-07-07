@@ -45,7 +45,7 @@ class Billing::Service::Renew
   private
 
   def provisioning_object
-    @provisioning_object ||= service.type.provisioning_class.constantize.new(service)
+    @provisioning_object ||= service.build_provisioning_object
   end
 
   def next_renew_at

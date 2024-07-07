@@ -28,6 +28,10 @@ class Billing::PackageCounter < ApplicationRecord
   belongs_to :service, class_name: 'Billing::Service', optional: true
 
   validates :duration, presence: true
+  validates :duration, allow_nil: true, numericality: { only_integer: true }
+  validates :exclude, inclusion: { in: [true, false] }
+
+  before_save { self.prefix ||= '' }
 
   def display_name
     "PC##{id}"

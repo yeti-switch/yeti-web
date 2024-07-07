@@ -53,6 +53,7 @@ class Billing::Service < ApplicationRecord
   belongs_to :type, class_name: 'Billing::ServiceType'
   belongs_to :account, class_name: 'Account'
   has_many :transactions, class_name: 'Billing::Transaction', dependent: :restrict_with_error
+  has_many :package_counters, class_name: 'Billing::PackageCounter', dependent: :destroy
 
   attr_readonly :account_id, :type_id
 
@@ -63,6 +64,7 @@ class Billing::Service < ApplicationRecord
   validate :validate_variables
 
   after_create :create_initial_transaction
+  after_create :provisioning_object_after_create
 
   scope :ready_for_renew, lambda {
     where('renew_period_id is not null AND renew_at <= ? ', Time.current)
@@ -98,7 +100,15 @@ class Billing::Service < ApplicationRecord
     self.variables = value
   end
 
+  def build_provisioning_object
+    type.provisioning_class.constantize.new(self)
+  end
+
   private
+
+  def provisioning_object_after_create
+    build_provisioning_object.after_create
+  end
 
   def validate_variables
     errors.add(:variables, 'must be a JSON object or empty') if !variables.nil? && !variables.is_a?(Hash)

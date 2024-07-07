@@ -11,6 +11,10 @@ module Billing
         @service = service
       end
 
+      def after_create
+        nil
+      end
+
       # Called before renewing the service
       def before_renew
         nil
