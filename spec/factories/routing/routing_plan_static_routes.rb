@@ -23,9 +23,10 @@
 #  routing_plan_static_routes_vendor_id_fkey        (vendor_id => contractors.id)
 #
 FactoryBot.define do
-  factory :routing_plan_static_route, class: Routing::RoutingPlanStaticRoute do
+  factory :routing_plan_static_route, aliases: [:static_route], class: Routing::RoutingPlanStaticRoute do
     prefix { '' }
     routing_plan { create :routing_plan, :with_static_routes }
+    vendor { FactoryBot.create :vendor }
 
     trait :filled do
       network_prefix { FactoryBot.create :network_prefix }
