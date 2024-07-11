@@ -32,7 +32,7 @@ FactoryBot.define do
     status_id { Payment::CONST::STATUS_ID_COMPLETED }
     type_id { Payment::CONST::TYPE_ID_MANUAL }
 
-    after(:create) do |record|
+    after(:create) do |record| # rubocop:disable Style/SymbolProc
       record.reload # to populate uuid
     end
 
