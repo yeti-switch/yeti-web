@@ -5,17 +5,35 @@ require 'rest-client'
 class CdrHttpBase < Pgq::ConsumerGroup
   AVAILABLE_HTTP_METHODS = %i[post put get patch].freeze
 
+  def initialize(...)
+    super(...)
+    # data_filters: [{field:, op:, value:}]
+    if @params['data_filters'].present?
+      @data_filters = @params['data_filters'].map { |opts| ::EventFilter.new(**opts.transform_keys(&:to_sym)) }
+    else
+      @data_filters = nil
+    end
+  end
+
   def perform_events(events)
     perform_group events.map(&:data)
   end
 
   def perform_group(events)
     events.each do |event|
+      next unless send_event?(event)
+
       perform_http_request permit_field_for(event)
     end
   end
 
   private
+
+  def send_event?(event)
+    return true if @data_filters.nil?
+
+    @data_filters.all? { |filter| filter.match?(event) }
+  end
 
   def http_method
     :post

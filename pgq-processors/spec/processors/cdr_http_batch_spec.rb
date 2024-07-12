@@ -3,9 +3,9 @@
 require 'spec_helper'
 require 'uri'
 
-require File.join(File.dirname(__FILE__), '../../processors/cdr_http')
+require File.join(File.dirname(__FILE__), '../../processors/cdr_http_batch')
 
-RSpec.describe CdrHttp do
+RSpec.describe CdrHttpBatch do
   subject do
     consumer.perform_group(cdrs)
   end
@@ -16,7 +16,7 @@ RSpec.describe CdrHttp do
       { id: 2, duration: 2 }
     ]
   end
-  let(:consumer) { CdrHttp.new(TestContext.logger, 'cdr_billing', 'cdr_http', config) }
+  let(:consumer) { CdrHttpBatch.new(TestContext.logger, 'cdr_billing', 'cdr_http_batch', config) }
   let(:method) { 'POST' }
   let(:cdr_fields) { 'all' }
   let(:config) do
@@ -29,15 +29,21 @@ RSpec.describe CdrHttp do
 
   before :each do
     allow(consumer).to receive(:config).and_return config
-    stub_request config['method'].downcase.to_sym, /#{config['url']}/
+    stub_request :post, /#{config['url']}/
   end
 
   context 'permit all attributes' do
-    it 'performs 2 requests' do
+    it 'sends POST request with cdrs data' do
       subject
-      expect(WebMock).to have_requested(:post, config['url']).times(2)
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 1, duration: 2 })
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 2, duration: 2 })
+      expect(WebMock).to have_requested(:post, config['url']).once
+      expect(WebMock).to have_requested(:post, config['url']).with(
+        body: {
+          data: [
+            { id: 1, duration: 2 },
+            { id: 2, duration: 2 }
+          ]
+        }
+      )
     end
   end
 
@@ -57,11 +63,17 @@ RSpec.describe CdrHttp do
       ]
     end
 
-    it 'performs 2 requests' do
+    it 'sends POST request with cdrs data' do
       subject
-      expect(WebMock).to have_requested(:post, config['url']).times(2)
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 1, duration: 2 })
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 1, duration: 3 })
+      expect(WebMock).to have_requested(:post, config['url']).once
+      expect(WebMock).to have_requested(:post, config['url']).with(
+        body: {
+          data: [
+            { id: 1, duration: 2 },
+            { id: 1, duration: 3 }
+          ]
+        }
+      )
     end
 
     context 'when all events are filtered out' do
@@ -89,22 +101,17 @@ RSpec.describe CdrHttp do
   context 'permit array attribute' do
     let(:cdr_fields) { ['id'] }
 
-    it 'performs 2 requests' do
+    it 'sends POST request with cdrs data' do
       subject
-      expect(WebMock).to have_requested(:post, config['url']).times(2)
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 1 })
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 2 })
-    end
-  end
-
-  context 'GET method' do
-    let(:method) { 'GET' }
-
-    it 'performs 2 requests' do
-      subject
-      expect(WebMock).to have_requested(:get, /\A#{config['url']}?.+/).times(2)
-      expect(WebMock).to have_requested(:get, "#{config['url']}?#{URI.encode_www_form cdrs[0]}")
-      expect(WebMock).to have_requested(:get, "#{config['url']}?#{URI.encode_www_form cdrs[1]}")
+      expect(WebMock).to have_requested(:post, config['url']).once
+      expect(WebMock).to have_requested(:post, config['url']).with(
+        body: {
+          data: [
+            { id: 1 },
+            { id: 2 }
+          ]
+        }
+      )
     end
   end
 end
