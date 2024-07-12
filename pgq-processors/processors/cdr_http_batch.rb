@@ -7,7 +7,10 @@ class CdrHttpBatch < CdrHttpBase
   @consumer_name = 'cdr_http'
 
   def perform_group(events)
-    permitted_events = events.map { |event| permit_field_for(event) }
+    events_to_send = events.select { |event| send_event?(event) }
+    return if events_to_send.empty?
+
+    permitted_events = events_to_send.map { |event| permit_field_for(event) }
     perform_http_request(permitted_events)
   end
 

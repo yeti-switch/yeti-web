@@ -12,6 +12,7 @@ require TestContext.root_path.join('lib/json_coder').to_s
 require TestContext.root_path.join('lib/json_each_row_coder').to_s
 require TestContext.root_path.join('lib/shutdown').to_s
 require TestContext.root_path.join('lib/amqp_factory').to_s
+require TestContext.root_path.join('lib/event_filter').to_s
 
 require 'webmock/rspec'
 require 'bunny-mock'
