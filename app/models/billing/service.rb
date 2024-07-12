@@ -53,9 +53,14 @@ class Billing::Service < ApplicationRecord
   belongs_to :type, class_name: 'Billing::ServiceType'
   belongs_to :account, class_name: 'Account'
   has_many :transactions, class_name: 'Billing::Transaction'
+
+  # callback defined before association because it should be called before it's `dependent: :destroy` callback
+  before_destroy :provisioning_object_before_destroy
   has_many :package_counters, class_name: 'Billing::PackageCounter', dependent: :destroy
 
   attr_readonly :account_id, :type_id
+
+  before_validation { self.variables = nil if variables.blank? }
 
   validates :initial_price, :renew_price, presence: true
   validates :initial_price, :renew_price, numericality: true, allow_nil: true
@@ -63,8 +68,13 @@ class Billing::Service < ApplicationRecord
   validates :renew_period_id, inclusion: { in: RENEW_PERIODS.keys }, allow_nil: true
   validate :validate_variables
 
+  before_create :verify_provisioning_variables
+  before_update :verify_provisioning_variables, if: :variables_changed?
+
   after_create :create_initial_transaction
   after_create :provisioning_object_after_create
+
+  after_destroy :provisioning_object_after_destroy
 
   scope :ready_for_renew, lambda {
     where('renew_period_id is not null AND renew_at <= ? ', Time.current)
@@ -110,8 +120,25 @@ class Billing::Service < ApplicationRecord
     build_provisioning_object.after_create
   end
 
+  def provisioning_object_before_destroy
+    build_provisioning_object.before_destroy
+  end
+
+  def provisioning_object_after_destroy
+    build_provisioning_object.after_destroy
+  end
+
   def validate_variables
-    errors.add(:variables, 'must be a JSON object or empty') if !variables.nil? && !variables.is_a?(Hash)
+    if !variables.nil? && !variables.is_a?(Hash)
+      errors.add(:variables, 'must be a JSON object or empty')
+    end
+  end
+
+  def verify_provisioning_variables
+    self.variables = build_provisioning_object.verify_service_variables!
+  rescue Billing::Provisioning::Errors::InvalidVariablesError => e
+    e.full_error_messages.each { |msg| errors.add(:variables, msg) }
+    throw(:abort)
   end
 
   def create_initial_transaction

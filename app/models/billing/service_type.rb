@@ -21,12 +21,17 @@ class Billing::ServiceType < ApplicationRecord
 
   has_many :services, class_name: 'Billing::Service', foreign_key: :type_id, dependent: :restrict_with_error
 
+  before_validation { self.variables = nil if variables.blank? }
+
   validates :name, presence: true
   validates :name, uniqueness: true, allow_blank: true
   validates :provisioning_class, presence: true
   validate :validate_provisioning_class
   validates :force_renew, inclusion: { in: [true, false] }
   validate :validate_variables
+
+  before_create :verify_provisioning_variables
+  before_update :verify_provisioning_variables, if: proc { variables_changed? || provisioning_class_changed? }
 
   def display_name
     name
@@ -64,6 +69,16 @@ class Billing::ServiceType < ApplicationRecord
   end
 
   def validate_variables
-    errors.add(:variables, 'must be a JSON object or empty') if !variables.nil? && !variables.is_a?(Hash)
+    if !variables.nil? && !variables.is_a?(Hash)
+      errors.add(:variables, 'must be a JSON object or empty')
+    end
+  end
+
+  def verify_provisioning_variables
+    klass = provisioning_class.constantize
+    self.variables = klass.verify_service_type_variables!(self)
+  rescue Billing::Provisioning::Errors::InvalidVariablesError => e
+    e.full_error_messages.each { |msg| errors.add(:variables, msg) }
+    throw(:abort)
   end
 end

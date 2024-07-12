@@ -2,48 +2,58 @@
 
 # == Schema Information
 #
-# Table name: billing.service_types
+# Table name: billing.services
 #
-#  id                 :integer(2)       not null, primary key
-#  force_renew        :boolean          default(FALSE), not null
-#  name               :string           not null
-#  provisioning_class :string
-#  variables          :jsonb
+#  id              :bigint(8)        not null, primary key
+#  initial_price   :decimal(, )      not null
+#  name            :string
+#  renew_at        :timestamptz
+#  renew_price     :decimal(, )      not null
+#  uuid            :uuid             not null
+#  variables       :jsonb
+#  created_at      :timestamptz      not null
+#  account_id      :integer(4)       not null
+#  renew_period_id :integer(2)
+#  state_id        :integer(2)       default(10), not null
+#  type_id         :integer(2)       not null
 #
 # Indexes
 #
-#  service_types_name_key  (name) UNIQUE
+#  services_account_id_idx  (account_id)
+#  services_renew_at_idx    (renew_at)
+#  services_type_id_idx     (type_id)
+#  services_uuid_idx        (uuid)
 #
-RSpec.describe Billing::ServiceType do
-  describe 'validations' do
-    it { is_expected.to allow_value('Billing::Provisioning::Logging').for(:provisioning_class) }
-    it { is_expected.not_to allow_value('').for(:provisioning_class) }
-    it { is_expected.not_to allow_value(nil).for(:provisioning_class) }
-    it { is_expected.not_to allow_value('Billing::Provisioning::Base').for(:provisioning_class) }
-    it { is_expected.not_to allow_value('Billing::Service').for(:provisioning_class) }
-    it { is_expected.not_to allow_value('NotExistingConst').for(:provisioning_class) }
-    it { is_expected.to allow_values('', nil, {}, { foo: 'bar' }).for(:variables) }
-    it { is_expected.not_to allow_value('test').for(:variables) }
-    it { is_expected.not_to allow_value([{ foo: 'bar' }]).for(:variables) }
-    it { is_expected.not_to allow_value(123).for(:variables) }
-    it { is_expected.not_to allow_value(true).for(:variables) }
-  end
-
+# Foreign Keys
+#
+#  services_account_id_fkey  (account_id => accounts.id)
+#  services_type_id_fkey     (type_id => service_types.id)
+#
+RSpec.describe Billing::Service do
   describe '.create' do
     subject do
       described_class.create(create_params)
     end
 
+    let!(:account) { create(:account) }
+    let!(:service_type) { create(:service_type, service_type_attrs) }
+    let(:service_type_attrs) do
+      { provisioning_class: 'Billing::Provisioning::Logging' }
+    end
     let(:create_params) do
       {
         name: 'test',
-        provisioning_class: 'Billing::Provisioning::Logging'
+        account:,
+        type: service_type,
+        initial_price: 10,
+        renew_price: 20
       }
     end
     let(:default_attributes) do
       {
-        variables: nil,
-        force_renew: false
+        renew_at: nil,
+        renew_period_id: nil,
+        state_id: described_class::STATE_ID_ACTIVE
       }
     end
     let(:expected_attrs) do
@@ -65,12 +75,12 @@ RSpec.describe Billing::ServiceType do
     end
 
     context 'with provisioning_class=Billing::Provisioning::FreeMinutes' do
-      let(:create_params) do
+      let(:service_type_attrs) do
         super().merge(provisioning_class: 'Billing::Provisioning::FreeMinutes')
       end
       let(:expected_attrs) do
         super().merge(
-          variables: { 'prefixes' => [] }
+          variables: { 'prefixes' => [], 'ignore_prefixes' => [] }
         )
       end
 
@@ -83,9 +93,10 @@ RSpec.describe Billing::ServiceType do
           super().merge(
             variables: {
               'prefixes' => [
-                { 'prefix' => '123', 'duration' => 60 },
+                { 'prefix' => '123', 'duration' => 60, 'exclude' => false },
                 { 'prefix' => '124', 'duration' => 30, 'exclude' => true }
-              ]
+              ],
+              'ignore_prefixes' => []
             }
           )
         end
@@ -114,6 +125,10 @@ RSpec.describe Billing::ServiceType do
                 { 'prefix' => '118', 'duration' => 60, 'exclude' => 'test' },
                 { 'prefix' => '119', 'duration' => 60, 'exclude' => 123 },
                 {}
+              ],
+              'ignore_prefixes' => [
+                123,
+                nil
               ]
             }
           )
@@ -132,7 +147,9 @@ RSpec.describe Billing::ServiceType do
             'prefixes.8.exclude - must be boolean',
             'prefixes.9.exclude - must be boolean',
             'prefixes.10.prefix - is missing',
-            'prefixes.10.duration - is missing'
+            'prefixes.10.duration - is missing',
+            'ignore_prefixes.0 - must be a string',
+            'ignore_prefixes.1 - must be a string'
           ]
         }
       end
@@ -143,7 +160,7 @@ RSpec.describe Billing::ServiceType do
         end
         let(:expected_attrs) do
           super().merge(
-            variables: { 'prefixes' => [] }
+            variables: { 'prefixes' => [], 'ignore_prefixes' => [] }
           )
         end
 
