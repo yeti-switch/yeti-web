@@ -52,7 +52,7 @@ class Billing::Service < ApplicationRecord
 
   belongs_to :type, class_name: 'Billing::ServiceType'
   belongs_to :account, class_name: 'Account'
-  has_many :transactions, class_name: 'Billing::Transaction', dependent: :restrict_with_error
+  has_many :transactions, class_name: 'Billing::Transaction'
   has_many :package_counters, class_name: 'Billing::PackageCounter', dependent: :destroy
 
   attr_readonly :account_id, :type_id
