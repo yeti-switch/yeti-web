@@ -36,6 +36,7 @@ ActiveAdmin.register RealtimeData::IncomingRegistration, as: 'Incoming Registrat
          input_html: { class: 'chosen' }
 
   index download_links: false do
+    column :node
     column :gateway
     column :contact
     column :expires
