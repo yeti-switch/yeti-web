@@ -27,7 +27,7 @@
 #
 
 FactoryBot.define do
-  factory :routing_tag_detection_rule, class: Routing::RoutingTagDetectionRule do
+  factory :routing_tag_detection_rule, class: 'Routing::RoutingTagDetectionRule' do
     tag_action { Routing::TagAction.clear_action }
 
     trait :filled do

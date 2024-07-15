@@ -22,7 +22,7 @@
 #  package_counters_account_id_fkey  (account_id => accounts.id)
 #
 FactoryBot.define do
-  factory :billing_package_counter, class: Billing::PackageCounter do
+  factory :billing_package_counter, class: 'Billing::PackageCounter' do
     account { FactoryBot.create(:account) }
     service { FactoryBot.create(:service) }
     prefix { '' }

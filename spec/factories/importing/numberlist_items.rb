@@ -27,7 +27,7 @@
 #  tag_action_id          :integer(4)
 #
 FactoryBot.define do
-  factory :importing_numberlist_item, class: Importing::NumberlistItem do
+  factory :importing_numberlist_item, class: 'Importing::NumberlistItem' do
     transient do
       _numberlist { Routing::Numberlist.take || create(:numberlist) }
       _action_id { Routing::NumberlistItem::ACTION_REJECT }

@@ -25,7 +25,7 @@
 #  tag_action_id              :integer(4)
 #
 FactoryBot.define do
-  factory :importing_numberlist, class: Importing::Numberlist do
+  factory :importing_numberlist, class: 'Importing::Numberlist' do
     transient do
       _mode_id { Routing::Numberlist::MODE_STRICT }
       _mode_name { Routing::Numberlist::MODES[Routing::Numberlist::MODE_STRICT] }

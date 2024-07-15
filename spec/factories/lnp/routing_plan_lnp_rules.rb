@@ -29,7 +29,7 @@
 #
 
 FactoryBot.define do
-  factory :lnp_routing_plan_lnp_rule, class: Lnp::RoutingPlanLnpRule do
+  factory :lnp_routing_plan_lnp_rule, class: 'Lnp::RoutingPlanLnpRule' do
     association :routing_plan, factory: :routing_plan
     database { create(:lnp_database, :thinq) }
   end

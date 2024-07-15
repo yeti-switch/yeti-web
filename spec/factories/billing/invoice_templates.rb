@@ -16,7 +16,7 @@
 #  invoices_templates_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :invoice_template, class: Billing::InvoiceTemplate do
+  factory :invoice_template, class: 'Billing::InvoiceTemplate' do
     sequence(:name) { |n| "invoice_template#{n}" }
     filename { 'filename.odt' }
   end

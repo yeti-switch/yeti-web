@@ -40,7 +40,7 @@
 #  routing_tag_mode_id      :integer(2)
 #
 FactoryBot.define do
-  factory :importing_destination, class: Importing::Destination do
+  factory :importing_destination, class: 'Importing::Destination' do
     transient do
       _tags { create_list(:routing_tag, 2) }
     end

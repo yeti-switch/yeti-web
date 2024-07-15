@@ -12,7 +12,7 @@
 #  routing_groups_name_unique  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :routing_group, class: Routing::RoutingGroup do
+  factory :routing_group, class: 'Routing::RoutingGroup' do
     sequence(:name) { |n| "routing_group_#{n}" }
 
     trait :with_dialpeers do

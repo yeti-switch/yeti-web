@@ -29,7 +29,7 @@
 #
 
 FactoryBot.define do
-  factory :invoice_terminated_destination, class: Billing::InvoiceTerminatedDestination do
+  factory :invoice_terminated_destination, class: 'Billing::InvoiceTerminatedDestination' do
     invoice { FactoryBot.create(:invoice, :manual, account: FactoryBot.create(:account)) }
 
     trait :filled do

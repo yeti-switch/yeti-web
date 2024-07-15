@@ -16,7 +16,7 @@
 #  vendor_id           :integer(4)
 #
 FactoryBot.define do
-  factory :importing_gateway_group, class: Importing::GatewayGroup do
+  factory :importing_gateway_group, class: 'Importing::GatewayGroup' do
     o_id { nil }
     name { nil }
     vendor_name { nil }

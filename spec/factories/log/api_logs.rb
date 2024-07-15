@@ -29,7 +29,7 @@
 #
 
 FactoryBot.define do
-  factory :api_log, class: Log::ApiLog do
+  factory :api_log, class: 'Log::ApiLog' do
     path { '/api/rest/qweasd' }
     add_attribute(:method) { 'GET' }
     status { 204 }

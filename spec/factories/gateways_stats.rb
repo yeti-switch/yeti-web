@@ -22,7 +22,7 @@
 #  unique_gw  (gateway_id) UNIQUE
 #
 FactoryBot.define do
-  factory :gateways_stat, class: GatewaysStat do
+  factory :gateways_stat, class: 'GatewaysStat' do
     gateway
     created_at { Time.now.utc }
     updated_at { 1.hour.ago.utc }

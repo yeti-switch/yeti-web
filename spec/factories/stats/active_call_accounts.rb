@@ -16,7 +16,7 @@
 #
 
 FactoryBot.define do
-  factory :active_call_account, class: Stats::ActiveCallAccount do
+  factory :active_call_account, class: 'Stats::ActiveCallAccount' do
     terminated_count { 0 }
     originated_count { 0 }
   end

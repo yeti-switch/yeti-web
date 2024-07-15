@@ -21,7 +21,7 @@
 #  gateway_groups_contractor_id_fkey      (vendor_id => contractors.id)
 #
 FactoryBot.define do
-  factory :gateway_group, class: GatewayGroup do
+  factory :gateway_group, class: 'GatewayGroup' do
     sequence(:name) { |n| "gateway_group_#{n}" }
     balancing_mode_id { 2 }
     association :vendor, factory: :contractor, vendor: true

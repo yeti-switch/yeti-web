@@ -12,7 +12,7 @@
 #  pop_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :pop, class: Pop do
+  factory :pop, class: 'Pop' do
     sequence(:id) { |n| n }
     sequence(:name) { |n| "Point of presence #{n}" }
 

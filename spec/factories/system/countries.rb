@@ -13,7 +13,7 @@
 #  countries_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :country, class: System::Country do
+  factory :country, class: 'System::Country' do
     name { 'United States' }
     iso2 { 'US' }
 

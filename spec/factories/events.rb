@@ -18,7 +18,7 @@
 #
 
 FactoryBot.define do
-  factory :event, class: Event do
+  factory :event, class: 'Event' do
     command { 'reload_registrations' }
     retries { 5 }
     node

@@ -14,7 +14,7 @@
 #  network_types_uuid_key  (uuid) UNIQUE
 #
 FactoryBot.define do
-  factory :network_type, class: System::NetworkType do
+  factory :network_type, class: 'System::NetworkType' do
     sequence(:name) { |n| "Network type #{n}" }
     uuid { SecureRandom.uuid }
 

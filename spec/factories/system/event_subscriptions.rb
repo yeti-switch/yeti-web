@@ -15,7 +15,7 @@
 #
 
 FactoryBot.define do
-  factory :event_subscription, class: System::EventSubscription do
+  factory :event_subscription, class: 'System::EventSubscription' do
     sequence(:event) { |n| "DialpeerLocked #{n}" }
   end
 end

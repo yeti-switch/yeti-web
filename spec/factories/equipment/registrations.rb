@@ -37,7 +37,7 @@
 #  registrations_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 FactoryBot.define do
-  factory :registration, class: Equipment::Registration do
+  factory :registration, class: 'Equipment::Registration' do
     sequence(:name) { |n| "Equipment Registration #{n}" }
     domain { 'localhost' }
     username { 'user name' }

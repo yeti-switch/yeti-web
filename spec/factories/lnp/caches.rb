@@ -25,7 +25,7 @@
 #
 
 FactoryBot.define do
-  factory :lnp_cache, class: Lnp::Cache do
+  factory :lnp_cache, class: 'Lnp::Cache' do
     sequence(:dst) { |n| "dst#{n}" }
     lrn { 'lrn' }
     expires_at { Time.now.utc + 200_000 }

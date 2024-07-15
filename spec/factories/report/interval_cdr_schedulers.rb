@@ -22,7 +22,7 @@
 #
 
 FactoryBot.define do
-  factory :interval_cdr_scheduler, class: Report::IntervalCdrScheduler do
+  factory :interval_cdr_scheduler, class: 'Report::IntervalCdrScheduler' do
     period { Report::SchedulerPeriod.take || build(:period_scheduler) }
     group_by { %w[customer_acc_id] }
     interval_length { 5 }

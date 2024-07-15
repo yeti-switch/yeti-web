@@ -34,7 +34,7 @@
 #  fk_rails_db4b62868c  (src_area_id => areas.id)
 #
 FactoryBot.define do
-  factory :importing_routing_tag_detection_rule, class: Importing::RoutingTagDetectionRule do
+  factory :importing_routing_tag_detection_rule, class: 'Importing::RoutingTagDetectionRule' do
     transient do
       _routing_tags { create_list(:routing_tag, 2) }
       _tag_action { Routing::TagAction.take }

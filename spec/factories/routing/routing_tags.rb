@@ -12,7 +12,7 @@
 #  routing_tags_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :routing_tag, class: Routing::RoutingTag do
+  factory :routing_tag, class: 'Routing::RoutingTag' do
     sequence(:name) { |n| "TAG_#{n}" }
 
     initialize_with { Routing::RoutingTag.find_or_create_by(name: name) }

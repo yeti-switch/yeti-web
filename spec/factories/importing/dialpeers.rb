@@ -53,7 +53,7 @@
 #  vendor_id                   :integer(4)
 #
 FactoryBot.define do
-  factory :importing_dialpeer, class: Importing::Dialpeer do
+  factory :importing_dialpeer, class: 'Importing::Dialpeer' do
     transient do
       _tags { create_list(:routing_tag, 2) }
     end

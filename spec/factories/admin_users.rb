@@ -32,7 +32,7 @@
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 FactoryBot.define do
-  factory :admin_user do
+  factory :admin_user, class: 'AdminUser' do
     sequence(:username) { |n| "admin#{n}" }
     sequence(:email) { |n| "admin#{n}@example.com" }
     password { '111111' }

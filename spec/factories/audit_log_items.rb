@@ -21,7 +21,7 @@
 #
 
 FactoryBot.define do
-  factory :audit_log_item, class: AuditLogItem do
+  factory :audit_log_item, class: 'AuditLogItem' do
     item_type { 'Account' }
     association :item, factory: :account
     event { 'update' }

@@ -15,7 +15,7 @@
 #
 
 FactoryBot.define do
-  factory :lnp_resolver, class: System::LnpResolver do
+  factory :lnp_resolver, class: 'System::LnpResolver' do
     sequence(:name) { |n| "test_#{n}" }
     address { 'example.com' }
     port { 1234 }

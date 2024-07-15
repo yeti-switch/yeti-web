@@ -14,7 +14,7 @@
 #  rate_groups_name_key         (name) UNIQUE
 #
 FactoryBot.define do
-  factory :rate_group, class: Routing::RateGroup do
+  factory :rate_group, class: 'Routing::RateGroup' do
     sequence(:name) { |n| "rateplan#{n}" }
     sequence(:external_id)
 

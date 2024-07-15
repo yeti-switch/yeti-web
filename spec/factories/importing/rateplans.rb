@@ -13,7 +13,7 @@
 #  profit_control_mode_id   :integer(4)
 #
 FactoryBot.define do
-  factory :importing_rateplan, class: Importing::Rateplan do
+  factory :importing_rateplan, class: 'Importing::Rateplan' do
     o_id { nil }
     error_string { nil }
 

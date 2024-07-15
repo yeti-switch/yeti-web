@@ -19,7 +19,7 @@
 #
 
 FactoryBot.define do
-  factory :email_log, class: Log::EmailLog do
+  factory :email_log, class: 'Log::EmailLog' do
     sent_at { Time.now.utc }
     contact
     smtp_connection

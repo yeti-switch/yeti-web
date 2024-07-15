@@ -104,7 +104,7 @@
 #  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 FactoryBot.define do
-  factory :customers_auth, class: CustomersAuth do
+  factory :customers_auth, class: 'CustomersAuth' do
     sequence(:name) { |n| "customers_auth_#{n}" }
     diversion_policy_id { 1 }
     dump_level_id { 1 }

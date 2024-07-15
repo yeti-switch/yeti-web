@@ -23,7 +23,7 @@
 #  transactions_account_id_fkey  (account_id => accounts.id)
 #
 FactoryBot.define do
-  factory :billing_transaction, class: Billing::Transaction do
+  factory :billing_transaction, class: 'Billing::Transaction' do
     transient do
       spent { true }
     end

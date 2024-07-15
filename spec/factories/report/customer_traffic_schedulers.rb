@@ -18,7 +18,7 @@
 #
 
 FactoryBot.define do
-  factory :customer_traffic_scheduler, class: Report::CustomerTrafficScheduler do
+  factory :customer_traffic_scheduler, class: 'Report::CustomerTrafficScheduler' do
     period { Report::SchedulerPeriod.take || build(:period_scheduler) }
     association :customer
   end

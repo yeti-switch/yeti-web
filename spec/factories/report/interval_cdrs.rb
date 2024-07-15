@@ -22,7 +22,7 @@
 #
 
 FactoryBot.define do
-  factory :interval_cdr, class: Report::IntervalCdr do
+  factory :interval_cdr, class: 'Report::IntervalCdr' do
     date_start { Time.now.utc }
     date_end { Time.now.utc + 1.week }
     interval_length { 10 }

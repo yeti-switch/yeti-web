@@ -65,7 +65,7 @@
 #  dialpeers_vendor_id_fkey                  (vendor_id => contractors.id)
 #
 FactoryBot.define do
-  factory :dialpeer, class: Dialpeer do
+  factory :dialpeer, class: 'Dialpeer' do
     sequence(:external_id)
     enabled { true }
     reverse_billing { false }

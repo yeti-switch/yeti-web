@@ -12,7 +12,7 @@
 #  routeset_discriminators_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :routeset_discriminator, class: Routing::RoutesetDiscriminator do
+  factory :routeset_discriminator, class: 'Routing::RoutesetDiscriminator' do
     sequence(:name) { |n| "Discriminator #{n}" }
   end
 end

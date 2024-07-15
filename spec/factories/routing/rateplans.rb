@@ -18,7 +18,7 @@
 #  rateplans_uuid_key         (uuid) UNIQUE
 #
 FactoryBot.define do
-  factory :rateplan, class: Routing::Rateplan do
+  factory :rateplan, class: 'Routing::Rateplan' do
     sequence(:name) { |n| "rateplan#{n}" }
 
     profit_control_mode_id { Routing::RateProfitControlMode::MODE_PER_CALL }

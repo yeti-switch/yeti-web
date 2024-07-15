@@ -88,7 +88,7 @@
 #  cdr_interval_report_data_report_id_fkey  (report_id => cdr_interval_report.id)
 #
 FactoryBot.define do
-  factory :interval_data, class: Report::IntervalData do
+  factory :interval_data, class: 'Report::IntervalData' do
     report { association :interval_cdr }
     disconnect_initiator_id { 1 }
   end

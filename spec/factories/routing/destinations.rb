@@ -46,7 +46,7 @@
 #  destinations_routing_tag_mode_id_fkey  (routing_tag_mode_id => routing_tag_modes.id)
 #
 FactoryBot.define do
-  factory :destination, aliases: [:rate], class: Routing::Destination do
+  factory :destination, aliases: [:rate], class: 'Routing::Destination' do
     sequence(:external_id)
     prefix { nil }
     connect_fee { 0 }

@@ -27,7 +27,7 @@
 #
 
 FactoryBot.define do
-  factory :disconnect_code, class: DisconnectCode do
+  factory :disconnect_code, class: 'DisconnectCode' do
     id { (DisconnectCode.pick(Arel.sql('MAX(id)')) || 0) + 1 } # broken sequence in class4.sql
     sequence(:code, 100) { |n| n }
     sequence(:reason, 100) { |n| "reason_#{n}" }

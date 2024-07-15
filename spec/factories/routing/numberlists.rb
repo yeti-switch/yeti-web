@@ -34,7 +34,7 @@
 #  numberlists_tag_action_id_fkey  (tag_action_id => tag_actions.id)
 #
 FactoryBot.define do
-  factory :numberlist, class: Routing::Numberlist do
+  factory :numberlist, class: 'Routing::Numberlist' do
     sequence(:name) { |n| "numberlist#{n}" }
 
     association :lua_script

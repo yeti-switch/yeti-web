@@ -21,7 +21,7 @@
 #
 
 FactoryBot.define do
-  factory :quality_stat, class: Stats::TerminationQualityStat do
+  factory :quality_stat, class: 'Stats::TerminationQualityStat' do
     time_start { Time.now.utc }
     success { true }
     duration { 2 }

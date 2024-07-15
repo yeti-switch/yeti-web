@@ -14,7 +14,7 @@
 #
 
 FactoryBot.define do
-  factory :customer_traffic, class: Report::CustomerTraffic do
+  factory :customer_traffic, class: 'Report::CustomerTraffic' do
     date_start { Time.now.utc }
     date_end { Time.now.utc + 1.week }
 

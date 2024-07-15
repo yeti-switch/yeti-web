@@ -85,7 +85,7 @@
 #  transport_protocol_id            :integer(2)
 #
 FactoryBot.define do
-  factory :importing_customers_auth, class: Importing::CustomersAuth do
+  factory :importing_customers_auth, class: 'Importing::CustomersAuth' do
     transient do
       _tag_action { Routing::TagAction.last }
       _routing_tags { create_list(:routing_tag, 2) }

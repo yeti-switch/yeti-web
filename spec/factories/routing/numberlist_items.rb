@@ -34,7 +34,7 @@
 #  numberlist_items_tag_action_id_fkey  (tag_action_id => tag_actions.id)
 #
 FactoryBot.define do
-  factory :numberlist_item, class: Routing::NumberlistItem do
+  factory :numberlist_item, class: 'Routing::NumberlistItem' do
     sequence(:key) { |n| "numberlist_item_#{n}" }
 
     association :numberlist

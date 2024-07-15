@@ -10,7 +10,7 @@
 #
 
 FactoryBot.define do
-  factory :notification_attachment, class: Notification::Attachment do
+  factory :notification_attachment, class: 'Notification::Attachment' do
     sequence(:filename) { |n| "some_file#{n}.txt" }
     sequence(:data) { |n| "some data #{n}" }
   end

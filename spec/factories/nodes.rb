@@ -19,7 +19,7 @@
 #  node_pop_id_fkey  (pop_id => pops.id)
 #
 FactoryBot.define do
-  factory :node, class: Node do
+  factory :node, class: 'Node' do
     sequence(:id) { |n| n }
     sequence(:name) { |n| "Node #{n}" }
     sequence(:rpc_endpoint) { |n| "127.0.0.1:#{1 + n}" }

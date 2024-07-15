@@ -20,7 +20,7 @@
 #  invoice_service_data_invoice_id_fkey  (invoice_id => invoices.id)
 #
 FactoryBot.define do
-  factory :invoice_service_data, class: Billing::InvoiceServiceData do
+  factory :invoice_service_data, class: 'Billing::InvoiceServiceData' do
     invoice { FactoryBot.create(:invoice, :manual, account: FactoryBot.create(:account)) }
     transactions_count { 1 }
     amount { 0.01 }

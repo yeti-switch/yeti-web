@@ -19,7 +19,7 @@
 #  customer_auth_stats_customer_auth_id_timestamp_idx  (customer_auth_id,timestamp) UNIQUE
 #
 FactoryBot.define do
-  factory :customer_auth_stats, class: Stats::CustomerAuthStats do
+  factory :customer_auth_stats, class: 'Stats::CustomerAuthStats' do
     calls_count { rand(5) }
     timestamp { Time.now.utc }
 

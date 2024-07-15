@@ -18,7 +18,7 @@
 #
 
 FactoryBot.define do
-  factory :vendor_traffic_scheduler, class: Report::VendorTrafficScheduler do
+  factory :vendor_traffic_scheduler, class: 'Report::VendorTrafficScheduler' do
     period { Report::SchedulerPeriod.take }
     vendor
   end

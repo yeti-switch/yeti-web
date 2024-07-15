@@ -39,7 +39,7 @@
 #  accounts_timezone_id_fkey    (timezone_id => timezones.id)
 #
 FactoryBot.define do
-  factory :account, class: Account do
+  factory :account, class: 'Account' do
     sequence(:name) { |n| "account#{n}" }
     association :contractor, vendor: true
     balance { 0 }

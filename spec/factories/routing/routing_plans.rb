@@ -31,7 +31,7 @@
 #  routing_plans_src_numberlist_id_fkey  (src_numberlist_id => numberlists.id)
 #
 FactoryBot.define do
-  factory :routing_plan, class: Routing::RoutingPlan do
+  factory :routing_plan, class: 'Routing::RoutingPlan' do
     sequence(:name) { |n| "routing_plan_#{n}" }
     sorting_id { Routing::RoutingPlan::SORTING_LCR_PRIO_CONTROL }
     rate_delta_max { 0 }

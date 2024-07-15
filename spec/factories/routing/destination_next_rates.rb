@@ -22,7 +22,7 @@
 #  destination_next_rates_destination_id_fkey  (destination_id => destinations.id)
 #
 FactoryBot.define do
-  factory :destination_next_rate, class: Routing::DestinationNextRate do
+  factory :destination_next_rate, class: 'Routing::DestinationNextRate' do
     initial_rate { 0 }
     next_rate { 0 }
     initial_interval { 5 }

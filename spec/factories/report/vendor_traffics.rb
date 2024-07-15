@@ -14,7 +14,7 @@
 #
 
 FactoryBot.define do
-  factory :vendor_traffic, class: Report::VendorTraffic do
+  factory :vendor_traffic, class: 'Report::VendorTraffic' do
     date_start { Time.now.utc }
     date_end { Time.now.utc + 1.week }
     association :vendor

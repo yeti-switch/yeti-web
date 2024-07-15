@@ -44,7 +44,7 @@
 #  auth_log_request_time_idx  (request_time)
 #
 FactoryBot.define do
-  factory :auth_log, class: Cdr::AuthLog do
+  factory :auth_log, class: 'Cdr::AuthLog' do
     request_time                { 1.minute.ago }
     code                        { 200 }
     reason { 'OK' }

@@ -33,7 +33,7 @@
 #  transport_protocol_id         :integer(2)
 #
 FactoryBot.define do
-  factory :importing_registration, class: Importing::Registration do
+  factory :importing_registration, class: 'Importing::Registration' do
     o_id { nil }
     name { nil }
     enabled { true }

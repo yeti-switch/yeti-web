@@ -157,7 +157,7 @@
 #  cdr_vendor_id_time_start_idx                 (vendor_id,time_start)
 #
 FactoryBot.define do
-  factory :cdr, class: Cdr::Cdr do
+  factory :cdr, class: 'Cdr::Cdr' do
     uuid                         { SecureRandom.uuid }
     is_last_cdr                  { true }
     time_start                   { 1.minute.ago }

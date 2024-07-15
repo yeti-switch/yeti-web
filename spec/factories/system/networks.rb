@@ -19,7 +19,7 @@
 #  networks_type_id_fkey  (type_id => network_types.id)
 #
 FactoryBot.define do
-  factory :network, class: System::Network do
+  factory :network, class: 'System::Network' do
     name { 'US Eagle Mobile' }
     network_type { System::NetworkType.take! }
     uuid { SecureRandom.uuid }

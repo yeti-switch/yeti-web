@@ -19,7 +19,7 @@
 #  config_vendor_amount_round_mode_id_fkey    (vendor_amount_round_mode_id => sys.amount_round_modes.id)
 #
 FactoryBot.define do
-  factory :cdr_config, class: System::CdrConfig do
+  factory :cdr_config, class: 'System::CdrConfig' do
     sequence(:id) { |n| n }
 
     call_duration_round_mode { System::CdrRoundMode.take || create(:cdr_round_mode, :always_up) }

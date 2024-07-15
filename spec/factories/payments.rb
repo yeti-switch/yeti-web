@@ -24,7 +24,7 @@
 #  payments_account_id_fkey  (account_id => accounts.id)
 #
 FactoryBot.define do
-  factory :payment, class: Payment do
+  factory :payment, class: 'Payment' do
     amount { 10 }
     association :account
     notes { 'notes text' }

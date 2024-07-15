@@ -11,7 +11,7 @@
 #  name           :string           not null
 #
 FactoryBot.define do
-  factory :cron_job_info, class: CronJobInfo do
+  factory :cron_job_info, class: 'CronJobInfo' do
     name { nil } # required
 
     trait :active do

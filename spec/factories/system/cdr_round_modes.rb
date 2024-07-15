@@ -13,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :cdr_round_mode, class: System::CdrRoundMode do
+  factory :cdr_round_mode, class: 'System::CdrRoundMode' do
     id { 3 }
     # sequence(:id) { |n| n }
     sequence(:name) { |n| "Always UP #{n}" }

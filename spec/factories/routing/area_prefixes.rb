@@ -17,7 +17,7 @@
 #  area_prefixes_area_id_fkey  (area_id => areas.id)
 #
 FactoryBot.define do
-  factory :area_prefix, class: Routing::AreaPrefix do
+  factory :area_prefix, class: 'Routing::AreaPrefix' do
     sequence(:prefix) { |n| "#{n}#{n + 1}#{n + 2}" } # example: '123', '234'...
 
     association :area

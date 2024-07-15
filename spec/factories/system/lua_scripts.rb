@@ -15,7 +15,7 @@
 #  lua_scripts_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :lua_script, class: System::LuaScript do
+  factory :lua_script, class: 'System::LuaScript' do
     sequence(:name) { |n| "LUA script_#{n}" }
     source { 'arg.a="000"; table.insert(arg.v,9); return arg;' }
 

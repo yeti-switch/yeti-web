@@ -11,7 +11,7 @@
 #
 
 FactoryBot.define do
-  factory :stats_active_call_term_gw, class: Stats::ActiveCallTermGateway do
+  factory :stats_active_call_term_gw, class: 'Stats::ActiveCallTermGateway' do
     count { rand(100) }
     gateway { Gateway.take! || FactoryBot.create(:gateway) }
   end

@@ -26,7 +26,7 @@
 #  o_id                           :integer(4)
 #
 FactoryBot.define do
-  factory :importing_account, class: Importing::Account do
+  factory :importing_account, class: 'Importing::Account' do
     o_id { nil }
     name { nil }
     contractor_name { nil }

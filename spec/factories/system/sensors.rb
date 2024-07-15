@@ -24,7 +24,7 @@
 #  sensors_mode_id_fkey  (mode_id => sensor_modes.id)
 #
 FactoryBot.define do
-  factory :sensor, class: System::Sensor do
+  factory :sensor, class: 'System::Sensor' do
     sequence(:name) { |n| "sensor#{n}" }
     mode_id { 1 }
     source_interface { nil }

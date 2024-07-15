@@ -18,7 +18,7 @@
 #
 
 FactoryBot.define do
-  factory :lnp_database, class: Lnp::Database do
+  factory :lnp_database, class: 'Lnp::Database' do
     sequence(:name) { |n| "LNP Database #{n}" }
     cache_ttl { 120 }
 

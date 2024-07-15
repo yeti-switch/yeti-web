@@ -98,7 +98,7 @@
 #  cdr_custom_report_data_report_id_fkey  (report_id => cdr_custom_report.id)
 #
 FactoryBot.define do
-  factory :custom_data, class: Report::CustomData do
+  factory :custom_data, class: 'Report::CustomData' do
     report { association :interval_cdr }
   end
 end

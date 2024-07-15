@@ -9,7 +9,7 @@
 #  url     :string           not null
 #
 FactoryBot.define do
-  factory :cnam_database_http, class: Cnam::DatabaseHttp do
+  factory :cnam_database_http, class: 'Cnam::DatabaseHttp' do
     url { 'https://example.com/{pai}' }
     timeout { 15_000 }
   end

@@ -34,7 +34,7 @@
 #  pop_id                  :integer(4)
 #
 FactoryBot.define do
-  factory :tx_stream, class: RtpStatistics::TxStream do
+  factory :tx_stream, class: 'RtpStatistics::TxStream' do
     time_start { 1.minute.ago }
     time_end { 30.seconds.ago }
     association :pop

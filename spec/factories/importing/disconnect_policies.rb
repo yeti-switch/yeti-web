@@ -11,7 +11,7 @@
 #  o_id         :integer(4)
 #
 FactoryBot.define do
-  factory :importing_disconnect_policy, class: Importing::DisconnectPolicy do
+  factory :importing_disconnect_policy, class: 'Importing::DisconnectPolicy' do
     o_id { nil }
     name { nil }
     error_string { nil }

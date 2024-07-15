@@ -18,7 +18,7 @@
 #  cnam_databases_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :cnam_database, class: Cnam::Database do
+  factory :cnam_database, class: 'Cnam::Database' do
     sequence(:name) { |n| "CNAM db script_#{n}" }
     request_lua { 'arg.a="000"; table.insert(arg.v,9); return arg;' }
     response_lua { 'arg.a="000"; table.insert(arg.v,9); return arg;' }

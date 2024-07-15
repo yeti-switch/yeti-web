@@ -12,7 +12,7 @@
 #  codec_groups_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :codec_group do
+  factory :codec_group, class: 'CodecGroup' do
     sequence(:name) { |n| "codec_group#{n}" }
     codec_group_codecs do
       [

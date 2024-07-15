@@ -146,7 +146,7 @@
 #  tx_inband_dtmf_filtering_mode_id   :integer(2)
 #
 FactoryBot.define do
-  factory :importing_gateway, class: Importing::Gateway do
+  factory :importing_gateway, class: 'Importing::Gateway' do
     o_id { nil }
     host { nil }
     port { nil }

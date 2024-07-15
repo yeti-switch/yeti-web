@@ -19,7 +19,7 @@
 #  smtp_connection_id   :integer(4)
 #
 FactoryBot.define do
-  factory :importing_contractor, class: Importing::Contractor do
+  factory :importing_contractor, class: 'Importing::Contractor' do
     o_id { nil }
     error_string { nil }
 

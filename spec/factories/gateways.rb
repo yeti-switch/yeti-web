@@ -166,7 +166,7 @@
 #  gateways_tx_inband_dtmf_filtering_mode_id_fkey  (tx_inband_dtmf_filtering_mode_id => gateway_inband_dtmf_filtering_modes.id)
 #
 FactoryBot.define do
-  factory :gateway, class: Gateway do
+  factory :gateway, class: 'Gateway' do
     sequence(:name) { |n| "gateway#{n}" }
     enabled { true }
     priority { 122 }

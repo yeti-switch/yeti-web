@@ -12,7 +12,7 @@
 #  amount_round_modes_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :cdr_price_round_mode, class: System::CdrPriceRoundMode do
+  factory :cdr_price_round_mode, class: 'System::CdrPriceRoundMode' do
     sequence(:id, &:n)
     sequence(:name) { |n| "Always UP #{n}" }
 

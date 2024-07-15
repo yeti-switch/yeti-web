@@ -21,7 +21,7 @@
 #  radius_accounting_profiles_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :accounting_profile, class: Equipment::Radius::AccountingProfile do
+  factory :accounting_profile, class: 'Equipment::Radius::AccountingProfile' do
     sequence(:name) { |n| "profile#{n}" }
     server { 'server' }
     port { '1' }

@@ -26,7 +26,7 @@
 #  dialpeer_next_rates_dialpeer_id_fkey  (dialpeer_id => dialpeers.id)
 #
 FactoryBot.define do
-  factory :dialpeer_next_rate do
+  factory :dialpeer_next_rate, class: 'DialpeerNextRate' do
     initial_rate     { 0 }
     next_rate        { 0 }
     initial_interval { 5 }

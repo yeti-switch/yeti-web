@@ -19,7 +19,7 @@
 #  smtp_connections_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :smtp_connection, class: System::SmtpConnection do
+  factory :smtp_connection, class: 'System::SmtpConnection' do
     sequence(:name) { |n| "smtp_connection#{n}" }
     host { 'host' }
     port { '25' }

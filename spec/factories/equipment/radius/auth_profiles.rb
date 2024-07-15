@@ -18,7 +18,7 @@
 #  radius_auth_profiles_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :auth_profile, class: Equipment::Radius::AuthProfile do
+  factory :auth_profile, class: 'Equipment::Radius::AuthProfile' do
     sequence(:name) { |n| "auth_profile#{n}" }
     server { 'server' }
     port { '1' }

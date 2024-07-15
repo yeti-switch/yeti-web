@@ -16,7 +16,7 @@
 #
 
 FactoryBot.define do
-  factory :custom_cdr, class: Report::CustomCdr do
+  factory :custom_cdr, class: 'Report::CustomCdr' do
     date_start { Time.now.utc }
     date_end { Time.now.utc + 1.week }
     group_by { %w[customer_id rateplan_id] }

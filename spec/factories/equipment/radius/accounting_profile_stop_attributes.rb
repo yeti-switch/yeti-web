@@ -20,7 +20,7 @@
 #
 
 FactoryBot.define do
-  factory :accounting_profile_stop_attribute, class: Equipment::Radius::AccountingProfileStopAttribute do
+  factory :accounting_profile_stop_attribute, class: 'Equipment::Radius::AccountingProfileStopAttribute' do
     association :profile, factory: :accounting_profile
     type_id { 1 }
     sequence(:name) { |n| "accounting_profile_stop_#{n}" }

@@ -18,7 +18,7 @@
 #
 
 FactoryBot.define do
-  factory :balance_notification, class: Log::BalanceNotification do
+  factory :balance_notification, class: 'Log::BalanceNotification' do
     created_at { Time.now.utc }
     event_id { Log::BalanceNotification::CONST::EVENT_ID_HIGH_THRESHOLD_CLEARED }
 

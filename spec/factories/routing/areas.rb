@@ -12,7 +12,7 @@
 #  areas_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :area, class: Routing::Area do
+  factory :area, class: 'Routing::Area' do
     sequence(:name) { |n| "Routing_Area_#{n}" }
 
     trait :filled do

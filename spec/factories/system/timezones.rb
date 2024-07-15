@@ -15,7 +15,7 @@
 #  timezones_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :timezone, class: System::Timezone do
+  factory :timezone, class: 'System::Timezone' do
     sequence(:name) { |n| "TZ#{n}" }
     sequence(:abbrev) { |n| "TZ#{n}" }
     utc_offset { 0 }

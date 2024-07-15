@@ -11,7 +11,7 @@
 #  o_id         :integer(4)
 #
 FactoryBot.define do
-  factory :importing_routing_group, class: Importing::RoutingGroup do
+  factory :importing_routing_group, class: 'Importing::RoutingGroup' do
     o_id { nil }
     name { nil }
     error_string { nil }

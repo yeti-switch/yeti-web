@@ -13,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :period_scheduler, class: Report::SchedulerPeriod do
+  factory :period_scheduler, class: 'Report::SchedulerPeriod' do
     sequence(:id, &:n)
     sequence(:name) { |n| "Period Scheduler #{n}" }
   end

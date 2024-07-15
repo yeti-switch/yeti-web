@@ -22,7 +22,7 @@
 #  contacts_contractor_id_fkey  (contractor_id => contractors.id)
 #
 FactoryBot.define do
-  factory :contact, class: Billing::Contact do
+  factory :contact, class: 'Billing::Contact' do
     sequence(:email) { |n| "rspec_mail_#{n}@example.com" }
 
     association :contractor, factory: :customer
