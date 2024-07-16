@@ -20,6 +20,6 @@
 #  fk_rails_f185d22f87  (account_id => accounts.id)
 #
 FactoryBot.define do
-  factory :account_balance_notification_setting do
+  factory :account_balance_notification_setting, class: 'AccountBalanceNotificationSetting' do
   end
 end

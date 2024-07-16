@@ -20,7 +20,7 @@
 #
 
 FactoryBot.define do
-  factory :invoice_document, class: Billing::InvoiceDocument do
+  factory :invoice_document, class: 'Billing::InvoiceDocument' do
     invoice
     filename { 'fine.example' }
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :incoming_registration, class: RealtimeData::IncomingRegistration do
+  factory :incoming_registration, class: 'RealtimeData::IncomingRegistration' do
     trait :filled do
       auth_id { 123 }
       contact { 'sip:test@10.255.10.2' }

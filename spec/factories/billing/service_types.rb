@@ -15,7 +15,7 @@
 #  service_types_name_key  (name) UNIQUE
 #
 FactoryBot.define do
-  factory :service_type, class: Billing::ServiceType do
+  factory :service_type, class: 'Billing::ServiceType' do
     sequence(:name) { |n| "Service Type #{n}" }
     provisioning_class { 'Billing::Provisioning::Logging' }
     variables { { 'foo' => 'bar' } }

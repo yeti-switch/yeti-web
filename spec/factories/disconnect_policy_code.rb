@@ -19,7 +19,7 @@
 #
 
 FactoryBot.define do
-  factory :disconnect_policy_code, class: DisconnectPolicyCode do
+  factory :disconnect_policy_code, class: 'DisconnectPolicyCode' do
     policy { DisconnectPolicy.take || create(:disconnect_policy) }
     code { DisconnectCode.take! }
   end

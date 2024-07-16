@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :outgoing_registration, class: RealtimeData::OutgoingRegistration do
+  factory :outgoing_registration, class: 'RealtimeData::OutgoingRegistration' do
     trait :filled do
       sequence(:id, 1_000)
       domain { 'qwe.asd.com' }

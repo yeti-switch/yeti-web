@@ -40,7 +40,7 @@
 #  sip_options_probers_transport_protocol_id_fkey        (transport_protocol_id => transport_protocols.id)
 #
 FactoryBot.define do
-  factory :sip_options_prober, class: Equipment::SipOptionsProber do
+  factory :sip_options_prober, class: 'Equipment::SipOptionsProber' do
     sequence(:name) { |n| "SIP Options Prober #{n}" }
     sequence(:ruri_domain) { |n| "#{n}.sip.com" }
     sequence(:ruri_username) { |n| "username_#{n}" }

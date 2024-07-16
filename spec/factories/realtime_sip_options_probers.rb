@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :realtime_sip_options_prober, class: RealtimeData::SipOptionsProber do
+  factory :realtime_sip_options_prober, class: 'RealtimeData::SipOptionsProber' do
     trait :filled do
       sequence(:id)      { |n| n }
       sequence(:node_id) { |n| n }

@@ -42,7 +42,7 @@
 #  index_billing.invoices_on_reference  (reference)
 #
 FactoryBot.define do
-  factory :invoice, class: Billing::Invoice do
+  factory :invoice, class: 'Billing::Invoice' do
     start_date { 7.days.ago.utc }
     end_date { 1.day.ago.utc }
     state_id { Billing::InvoiceState::NEW }

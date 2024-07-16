@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :active_call, class: RealtimeData::ActiveCall do
+  factory :active_call, class: 'RealtimeData::ActiveCall' do
     trait :filled do
       duration { (rand(60) + rand).round(7) }
       start_time { rand(120..179).seconds.ago.to_f }

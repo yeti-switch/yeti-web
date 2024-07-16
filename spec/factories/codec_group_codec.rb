@@ -13,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :codec_group_codec do
+  factory :codec_group_codec, class: 'CodecGroupCodec' do
     sequence(:priority, 10)
     dynamic_payload_type { 100 }
   end
