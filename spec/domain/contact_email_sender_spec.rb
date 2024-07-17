@@ -23,7 +23,6 @@ RSpec.describe ContactEmailSender do
         expect { subject }.to change { Log::EmailLog.count }.by(1)
         email_log = Log::EmailLog.last!
         expect(email_log).to have_attributes(expected_email_log_attrs)
-        expect(Worker::SendEmailLogJob).to have_been_enqueued.with(email_log.id)
       end
 
       it 'enqueues Worker::SendEmailLogJob' do
@@ -99,6 +98,19 @@ RSpec.describe ContactEmailSender do
 
       include_examples :creates_email_log
     end
+
+    context 'when there is NO any SMTP connection' do
+      let(:global_smtp_connection) { nil }
+
+      it 'should NOT create Email Log' do
+        expect { subject }.not_to change(Log::EmailLog, :count)
+      end
+
+      it 'should NOT enqueue Job' do
+        subject
+        expect(Worker::SendEmailLogJob).not_to have_been_enqueued
+      end
+    end
   end
 
   describe '.batch_send_emails' do
@@ -106,6 +118,7 @@ RSpec.describe ContactEmailSender do
       described_class.batch_send_emails(contacts, **service_params)
     end
 
+    let!(:global_smtp_conn) { FactoryBot.create(:smtp_connection, global: true) }
     let!(:contacts) do
       [
         FactoryBot.create(:contact, contractor: FactoryBot.create(:customer)),
