@@ -24,6 +24,8 @@ class ContactEmailSender
   # @param message [String,nil]
   # @param attachments [Array<Notification::Attachment,nil]
   def send_email(subject:, message: nil, attachments: nil)
+    return if contact.smtp_connection.nil?
+
     ApplicationRecord.transaction do
       email_log = create_email_log(
         subject: subject,
