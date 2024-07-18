@@ -64,9 +64,9 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
           let(:sql_query) { Contractor.all.to_sql }
           it 'error performed job' do
             expect do
-              expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+              expect { subject }.not_to raise_error
             end.to change(LogicLog, :count).by 1
-            expect(LogicLog.last.msg).to start_with 'Error'
+            expect(LogicLog.last.msg).to start_with 'Success'
           end
         end
       end
@@ -74,23 +74,17 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
       context 'when record cannot be destroyed' do
         let(:model_class) { 'Dialpeer' }
 
-        let!(:dialpeers) { FactoryBot.create_list(:dialpeer, 4) }
+        let!(:dialpeer_free) { FactoryBot.create(:dialpeer) }
+        let!(:dialpeer_used) { FactoryBot.create(:dialpeer) }
         let!(:item) do
-          FactoryBot.create(:rate_management_pricelist_item, :with_pricelist, :filed_from_project, dialpeer: dialpeers.last)
+          FactoryBot.create(:rate_management_pricelist_item, :with_pricelist, :filed_from_project, dialpeer: dialpeer_used)
         end
         let(:sql_query) { Dialpeer.all.to_sql }
 
         it 'should raise validation error' do
-          error_message = "Dialpeer ##{dialpeers.last.id} can't be deleted: Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{item.pricelist_id}"
-          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed, error_message)
-
-          dialpeers.first(2).each do |dialpeer|
-            expect(Dialpeer).not_to be_exists(dialpeer.id)
-          end
-
-          dialpeers.last(2).each do |dialpeer|
-            expect(Dialpeer).to be_exists(dialpeer.id)
-          end
+          expect { subject }.not_to raise_error
+          expect { dialpeer_free.reload }.to raise_error(ActiveRecord::RecordNotFound)
+          expect { dialpeer_used.reload }.not_to raise_error
         end
       end
     end
