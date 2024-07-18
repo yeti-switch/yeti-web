@@ -212,16 +212,16 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
   action_item :lega_rtp_rx_streams, only: :show do
-    link_to('LegA RX RTP Streams', rtp_rx_streams_path(q: { local_tag_equals: resource.local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+    link_to('LegA RX RTP Streams', rtp_rx_streams_path(q: { local_tag_eq: resource.local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
   action_item :lega_rtp_tx_streams, only: :show do
-    link_to('LegA TX RTP Streams', rtp_tx_streams_path(q: { local_tag_equals: resource.local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+    link_to('LegA TX RTP Streams', rtp_tx_streams_path(q: { local_tag_eq: resource.local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
   action_item :legb_rtp_rx_streams, only: :show do
-    link_to('LegB RX RTP Streams', rtp_rx_streams_path(q: { local_tag_equals: resource.legb_local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+    link_to('LegB RX RTP Streams', rtp_rx_streams_path(q: { local_tag_eq: resource.legb_local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
   action_item :legb_rtp_tx_streams, only: :show do
-    link_to('LegB TX RTP Streams', rtp_tx_streams_path(q: { local_tag_equals: resource.legb_local_tag, time_start_gteq: resource.time_start - 60, time_start_lteq: resource.time_start + 60 }))
+    link_to('LegB TX RTP Streams', rtp_tx_streams_path(q: { local_tag_eq: resource.legb_local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
 
   action_item :routing_simulation, only: :show do
