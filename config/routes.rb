@@ -97,7 +97,8 @@ Rails.application.routes.draw do
           namespace :cdr do
             jsonapi_resources :cdrs, only: %i[index show] do
               member { get :recording }
-              jsonapi_relationships
+              # jsonapi_relationships
+              patched_jsonapi_relationships
             end
             jsonapi_resources :auth_logs, only: %i[index show] do
             end
