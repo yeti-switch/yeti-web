@@ -114,4 +114,31 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :request do
       end
     end
   end
+
+  describe 'GET /api/rest/admin/cdr/cdrs/:id/vendor' do
+    subject do
+      get json_api_request_path, params: json_api_request_params, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_path) { "#{super()}/#{record_id}/vendor" }
+    let(:record_id) { cdr.id.to_s }
+    let(:json_api_request_params) { nil }
+
+    let!(:cdr) do
+      create :cdr, :with_id
+    end
+
+    it 'responds correctly', :aggregate_failures do
+      subject
+      expect(response).to have_http_status(200)
+      expect(response_json).to match(
+                                 data: hash_including(
+                                   id: cdr.vendor.id.to_s,
+                                   type: 'contractors',
+                                   attributes: be_present,
+                                   relationships: be_present
+                                 )
+                               )
+    end
+  end
 end

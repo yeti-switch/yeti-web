@@ -62,6 +62,28 @@ module JsonapiResourceClassPatch
   end
 end
 
+ActionDispatch::Routing::Mapper::Resources.class_eval do
+  def patched_jsonapi_relationships(options = {})
+    overrides = options.delete(:overrides) || {}
+    res = JSONAPI::Resource.resource_for(resource_type_with_module_prefix(@resource_type))
+    res._relationships.each do |relationship_name, relationship|
+      related_resource = JSONAPI::Resource.resource_for(resource_type_with_module_prefix(relationship.class_name.underscore))
+      opts = options.merge(
+        overrides[relationship_name] || {
+          controller: "/#{related_resource.to_s.sub(/Resource\z/, '').underscore.pluralize}"
+        }
+      )
+      if relationship.is_a?(JSONAPI::Relationship::ToMany)
+        jsonapi_links(relationship_name, opts)
+        jsonapi_related_resources(relationship_name, opts)
+      else
+        jsonapi_link(relationship_name, opts)
+        jsonapi_related_resource(relationship_name, opts)
+      end
+    end
+  end
+end
+
 JSONAPI::Resource.singleton_class.prepend(JsonapiResourceClassPatch)
 
 JSONAPI::Resource.register_resource_override 'api/rest/admin', 'Pop', 'Api::Rest::Admin::Pop'
