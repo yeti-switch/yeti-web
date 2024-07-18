@@ -607,7 +607,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
   end
 
-  index do
+  index download_links: %i[csv json] do
     column :id do |cdr|
       if cdr.has_dump?
         if cdr.has_recording?
