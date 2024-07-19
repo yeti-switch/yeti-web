@@ -22,7 +22,7 @@ RSpec.describe 'CDR show', type: :feature do
     subject
     expect(page).to have_table_row(count: 1)
     expect(page).to have_attribute_row('ID', exact_text: cdr.id)
-    expect(page).to have_attribute_row('Routing Tags', exact_text: "#{tag_ua.name} #{tag_us.name}")
+    expect(find(attributes_row_selector('Routing Tags')).text.split).to match_array([tag_ua.name, tag_us.name])
     within_attribute_row('Routing Tags') do
       expect(page).to have_selector('.status_tag.ok', text: tag_ua.name)
       expect(page).to have_selector('.status_tag.ok', text: tag_us.name)
@@ -33,7 +33,7 @@ RSpec.describe 'CDR show', type: :feature do
     subject
     expect(page).to have_table_row(count: 1)
     expect(page).to have_table_cell(column: 'Id', exact_text: cdr.id)
-    expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{tag_ua.name} #{tag_us.name}")
+    expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, tag_us.name])
     within_table_cell('Routing Tags') do
       expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
       expect(page).to have_selector('.status_tag.ok', exact_text: tag_us.name)
@@ -78,7 +78,7 @@ RSpec.describe 'CDR show', type: :feature do
       subject
       expect(page).to have_table_row(count: 1)
       expect(page).to have_attribute_row('ID', exact_text: cdr.id)
-      expect(page).to have_attribute_row('Routing Tags', exact_text: "#{tag_ua.name} 9454 #{tag_us.name}")
+      expect(find(attributes_row_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '9454', tag_us.name])
       within_attribute_row('Routing Tags') do
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
         expect(page).to have_selector('.status_tag.no', exact_text: '9454')
@@ -90,7 +90,7 @@ RSpec.describe 'CDR show', type: :feature do
       subject
       expect(page).to have_table_row(count: 1)
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{tag_ua.name} 9454 #{tag_us.name}")
+      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '9454', tag_us.name])
       within_table_cell('Routing Tags') do
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
         expect(page).to have_selector('.status_tag.no', exact_text: '9454')

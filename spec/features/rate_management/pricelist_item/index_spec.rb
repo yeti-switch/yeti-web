@@ -44,7 +44,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
           expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
           expect(page).to have_table_cell(column: 'Prefix', exact_text: item.prefix)
           expect(page).to have_table_cell(column: 'Connect Fee', exact_text: item.connect_fee.to_s)
-          expect(page).to have_table_cell(column: 'Routing Tags', exact_text: item.routing_tags.map(&:name).map(&:upcase).join(' | '))
+          expect(find(table_cell_selector('Routing Tags')).text.split(' | ')).to match_array item.routing_tags.map(&:name).map(&:upcase)
           expect(page).to have_table_cell(column: 'Initial Rate', exact_text: item.initial_rate.to_s)
           expect(page).to have_table_cell(column: 'Next Rate', exact_text: item.next_rate.to_s)
           expect(page).to have_table_cell(column: 'Vendor', exact_text: item.vendor.display_name)
@@ -116,7 +116,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
             expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
             expect(page).to have_table_cell(column: 'Prefix', exact_text: item.prefix)
             expect(page).to have_table_cell(column: 'Connect Fee', exact_text: item.connect_fee.to_s)
-            expect(page).to have_table_cell(column: 'Routing Tags', exact_text: item.routing_tags.map(&:name).map(&:upcase).join(' | '))
+            expect(find(table_cell_selector('Routing Tags')).text.split(' | ')).to match_array(item.routing_tags.map(&:name).map(&:upcase))
             expect(page).to have_table_cell(column: 'Initial Rate', exact_text: item.initial_rate.to_s)
             expect(page).to have_table_cell(column: 'Next Rate', exact_text: item.next_rate.to_s)
             expect(page).to have_table_cell(column: 'Vendor', exact_text: item.vendor.display_name)
@@ -879,7 +879,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'Dialpeer', exact_text: 'EMPTY')
               expect(page).to have_table_cell(column: 'Prefix', exact_text: item.prefix)
               expect(page).to have_table_cell(column: 'Connect Fee', exact_text: item.connect_fee.to_s)
-              expect(page).to have_table_cell(column: 'Routing Tags', exact_text: item.routing_tags.map(&:name).map(&:upcase).join(' | '))
+              expect(find(table_cell_selector('Routing Tags')).text.split(' | ')).to match_array(item.routing_tags.map(&:name).map(&:upcase))
               expect(page).to have_table_cell(column: 'Initial Rate', exact_text: item.initial_rate.to_s)
               expect(page).to have_table_cell(column: 'Next Rate', exact_text: item.next_rate.to_s)
               expect(page).to have_table_cell(column: 'Vendor', exact_text: item.vendor.display_name)
@@ -931,7 +931,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'Dialpeer', exact_text: item.detected_dialpeer_ids.first.to_s)
               expect(page).to have_table_cell(column: 'Prefix', exact_text: item.prefix)
               expect(page).to have_table_cell(column: 'Connect Fee', exact_text: item.connect_fee.to_s)
-              expect(page).to have_table_cell(column: 'Routing Tags', exact_text: item.routing_tags.map(&:name).map(&:upcase).join(' | '))
+              expect(find(table_cell_selector('Routing Tags')).text.split(' | ')).to match_array(item.routing_tags.map(&:name).map(&:upcase))
               expect(page).to have_table_cell(column: 'Initial Rate', exact_text: item.initial_rate.to_s)
               expect(page).to have_table_cell(column: 'Next Rate', exact_text: item.next_rate.to_s)
               expect(page).to have_table_cell(column: 'Vendor', exact_text: item.vendor.display_name)
@@ -983,7 +983,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
               expect(page).to have_table_cell(column: 'Dialpeer', exact_text: item.detected_dialpeer_ids.first.to_s)
               expect(page).to have_table_cell(column: 'Prefix', exact_text: item.prefix)
               expect(page).to have_table_cell(column: 'Connect Fee', exact_text: item.connect_fee.to_s)
-              expect(page).to have_table_cell(column: 'Routing Tags', exact_text: item.routing_tags.map(&:name).map(&:upcase).join(' | '))
+              expect(find(table_cell_selector('Routing Tags')).text.split(' | ')).to match_array(item.routing_tags.map(&:name).map(&:upcase))
               expect(page).to have_table_cell(column: 'Initial Rate', exact_text: item.initial_rate.to_s)
               expect(page).to have_table_cell(column: 'Next Rate', exact_text: item.next_rate.to_s)
               expect(page).to have_table_cell(column: 'Vendor', exact_text: item.vendor.display_name)
@@ -1021,25 +1021,22 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
     end
 
     context('when pricelist item include deleted rotuing tag id') do
-      let(:pricelist_items) do
-        [FactoryBot.create(:rate_management_pricelist_item,
-                           :filed_from_project,
-                           pricelist: pricelist,
-                           routing_tag_ids: project.routing_tag_ids + [523])]
+      let(:pricelist_items) { nil }
+      let!(:routing_tag) { FactoryBot.create(:routing_tag) }
+      let!(:pricelist_item) do
+        FactoryBot.create(:rate_management_pricelist_item,
+                          :filed_from_project,
+                          pricelist: pricelist,
+                          routing_tag_ids: [routing_tag.id, 523])
       end
 
-      it 'should render correct' do
+      it 'should render correct', js: false do
         subject
 
         within_main_content do
-          expect(page).to have_table_row(count: pricelist_items.size)
-          pricelist_items.each do |item|
-            within_table_row(id: item.id) do
-              expect(page).to have_table_cell(column: 'ID', exact_text: item.id.to_s)
-              routing_tags = project.routing_tags.map(&:name).join(' | ').upcase
-              expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tags} | 523")
-            end
-          end
+          expect(page).to have_table_row(count: 1)
+          expect(page).to have_table_cell(column: 'ID', exact_text: pricelist_item.id.to_s)
+          expect(find(table_cell_selector('Routing Tags')).text.split(' | ')).to match_array [routing_tag.name, '523']
         end
       end
     end

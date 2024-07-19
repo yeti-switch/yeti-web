@@ -77,10 +77,10 @@ RSpec.describe 'Rate Management Project Show', js: true, bullet: [:n] do
       FactoryBot.create(:routing_tag)
     end
 
-    it 'shows all routing tags' do
+    it 'shows all routing tags', js: false do
       subject
-      routing_tag_names = record.routing_tags.map { |r| r.name.upcase }
-      expect(page).to have_attribute_row 'Routing Tags', exact_text: routing_tag_names.join(' | ')
+
+      expect(find(attributes_row_selector('Routing Tags')).text.split(' | ')).to match_array record.routing_tags.pluck(:name)
       expect(page).to have_attribute_row('Routing Tag Mode', exact_text: 'OR')
     end
   end

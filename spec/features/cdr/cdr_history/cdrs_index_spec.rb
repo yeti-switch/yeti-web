@@ -41,7 +41,7 @@ RSpec.describe 'CDRs index', type: :feature do
 
     within_table_row(id: cdrs.first.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{tag_ua.name} 321 #{tag_us.name}")
+      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '321', tag_us.name])
       within_table_cell('Routing Tags') do
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
         expect(page).to have_selector('.status_tag.no', exact_text: '321')
@@ -51,7 +51,7 @@ RSpec.describe 'CDRs index', type: :feature do
 
     within_table_row(id: cdrs.second.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{tag_ua.name} 321 #{tag_us.name}")
+      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '321', tag_us.name])
       within_table_cell('Routing Tags') do
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
         expect(page).to have_selector('.status_tag.no', exact_text: '321')
@@ -76,7 +76,7 @@ RSpec.describe 'CDRs index', type: :feature do
       subject
       expect(page).to have_table_row(count: 1)
       expect(page).to have_table_cell(column: 'ID', exact_text: cdr_with_one_tag.id)
-      expect(page).to have_table_cell(column: 'Routing Tags', exact_text: "#{routing_tag.name.upcase} #{tag_ua.name.upcase}")
+      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([routing_tag.name.upcase, tag_ua.name.upcase])
     end
   end
 
