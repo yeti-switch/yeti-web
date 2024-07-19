@@ -9,10 +9,7 @@ $(document).ready(function(){
                     var $select = $(this).closest('#block_available_columns').find('select'),
                         selected_fields = $select.val();
                     $(this).parent().find('.ui-dialog-buttonset').text('Loading...');
-                    $.getJSON(
-                        this.href,
-                        {index_table_visible_columns: selected_fields}
-                    ).success(function(){
+                    $.getJSON(this.href, {index_table_visible_columns: selected_fields}, function() {
                         window.location.reload();
                     });
                 },
@@ -27,7 +24,7 @@ $(document).ready(function(){
         });
 
         $('#reset_visible_columns').click(function(){
-            $.getJSON(this.href, {index_table_visible_columns: ''}).success(function(){
+            $.getJSON(this.href, {index_table_visible_columns: ''}, function () {
                 window.location.reload();
             });
         });

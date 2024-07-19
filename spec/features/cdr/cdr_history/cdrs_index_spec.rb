@@ -98,4 +98,35 @@ RSpec.describe 'CDRs index', type: :feature do
       expect(page).to have_table_cell(column: 'ID', exact_text: cdr.id)
     end
   end
+
+  describe 'Visible columns feature' do
+    context 'when click to "Reset" link' do
+      subject { click_link :Reset }
+
+      let!(:admin_user) { create :admin_user, visible_columns: { cdrs: %w[id] } }
+
+      before { visit cdrs_path }
+
+      it 'should click to "Reset" link', js: true do
+        expect { subject }.to change { admin_user.reload.visible_columns['cdrs'] }.from(%w[id]).to('')
+      end
+    end
+
+    context 'when select the several columns and submit form' do
+      subject { click_button 'Show' }
+
+      let!(:admin_user) { create :admin_user, visible_columns: { cdrs: %w[id] } }
+
+      before do
+        visit cdrs_path
+        click_link 'Visible columns'
+        select 'time_start', from: 'select_available_columns'
+        select 'time_end', from: 'select_available_columns'
+      end
+
+      it 'should reload index page and then render only selected columns', js: true do
+        expect { subject }.to change { admin_user.reload.visible_columns }.from({ 'cdrs' => %w[id] }).to({ 'cdrs' => %w[id time_start time_end] })
+      end
+    end
+  end
 end
