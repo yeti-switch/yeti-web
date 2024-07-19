@@ -34,8 +34,7 @@ RSpec.describe 'Show Dialpeer', type: :feature, js: true do
     expect(page).to have_attribute_row('ENABLED', exact_text: 'YES')
     expect(page).to have_attribute_row('LOCKED', exact_text: 'NO')
     expect(page).to have_attribute_row('ROUTING GROUP', exact_text: dialpeer.routing_group.display_name)
-    tags_line = "#{routing_tags.first.name.upcase} | #{routing_tags.third.name.upcase} | ANY TAG"
-    expect(page).to have_attribute_row('ROUTING TAGS', exact_text: tags_line)
+    expect(find(attributes_row_selector('ROUTING TAGS')).text.split(' | ')).to match_array [routing_tags.first.name.upcase, routing_tags.third.name.upcase, 'ANY TAG']
     expect(page).to have_attribute_row('ROUTING TAG MODE', exact_text: 'OR')
     expect(page).to have_attribute_row('VENDOR', exact_text: dialpeer.vendor.display_name)
     expect(page).to have_attribute_row('ACCOUNT', exact_text: dialpeer.account.display_name)
