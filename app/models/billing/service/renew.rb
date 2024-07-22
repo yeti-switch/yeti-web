@@ -4,6 +4,12 @@ class Billing::Service::Renew
   Error = Class.new(StandardError)
   DESCRIPTION = 'Renew service'
 
+  class << self
+    def perform(service)
+      new(service).perform
+    end
+  end
+
   attr_reader :service
   delegate :account, to: :service
 
@@ -20,29 +26,31 @@ class Billing::Service::Renew
         service.update!(state_id: Billing::Service::STATE_ID_SUSPENDED)
         provisioning_object.after_failed_renew
         provisioning_object.after_renew
-        return
+        Rails.logger.info { "Not enough balance to renew billing service ##{service.id}" }
+      else
+        service.update!(state_id: Billing::Service::STATE_ID_ACTIVE, renew_at: next_renew_at)
+        transaction = create_transaction
+        provisioning_object.after_success_renew
+        provisioning_object.after_renew
+        transaction
+        Rails.logger.info { "Success renew billing service ##{service.id}" }
       end
-
-      service.update!(
-        state_id: Billing::Service::STATE_ID_ACTIVE,
-        renew_at: next_renew_at
-      )
-
-      transaction = Billing::Transaction.new(
-        service:,
-        account:,
-        amount: service.renew_price,
-        description: DESCRIPTION
-      )
-      raise Error, "Failed to create transaction: #{transaction.errors.full_messages.to_sentence}" unless transaction.save
-
-      provisioning_object.after_success_renew
-      provisioning_object.after_renew
-      transaction
     end
   end
 
   private
+
+  def create_transaction
+    transaction = Billing::Transaction.new(
+      service:,
+      account:,
+      amount: service.renew_price,
+      description: DESCRIPTION
+    )
+    raise Error, "Failed to create transaction: #{transaction.errors.full_messages.to_sentence}" unless transaction.save
+
+    transaction
+  end
 
   def provisioning_object
     @provisioning_object ||= service.build_provisioning_object

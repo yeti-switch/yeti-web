@@ -77,7 +77,7 @@ class Billing::Service < ApplicationRecord
   after_destroy :provisioning_object_after_destroy
 
   scope :ready_for_renew, lambda {
-    where('renew_period_id is not null AND renew_at <= ? ', Time.current)
+    where('renew_period_id is not null AND renew_at <= ? ', Time.current).order(renew_at: :asc)
   }
   scope :one_time_services, lambda {
     where('renew_period_id is null')

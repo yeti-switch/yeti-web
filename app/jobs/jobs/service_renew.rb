@@ -6,13 +6,14 @@ module Jobs
 
     def execute
       Billing::Service.ready_for_renew.find_each do |service|
-        Billing::Service::Renew.new(service).perform
+        renew(service)
       end
     end
 
     def renew(service)
-      Billing::Service::Renew.new(service).perform
+      Billing::Service::Renew.perform(service)
     rescue StandardError => e
+      log_error(e)
       capture_error(e, extra: { service_id: service.id })
     end
   end
