@@ -24346,7 +24346,7 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL AND THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL THEN
       -- insert our signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
@@ -25128,7 +25128,7 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL AND THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL THEN
       -- insert our signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
@@ -25833,7 +25833,7 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL AND THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL THEN
       -- insert our signature
       i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
@@ -41164,6 +41164,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240615214442'),
 ('20240622173924'),
 ('20240702142447'),
-('20240704100545');
+('20240704100545'),
+('20240721201110');
 
 
