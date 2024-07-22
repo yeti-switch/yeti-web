@@ -406,6 +406,8 @@ module Jobs
         begin
           node_id = call[:node_id].to_i
           nodes[node_id].drop_call(local_tag)
+        rescue NodeApi::Error => e
+          logger.error "#{e.class} #{e.message}"
         rescue StandardError => e
           node_id = call.is_a?(Hash) ? call[:node_id] : nil
           capture_error(e, extra: { local_tag: local_tag, node_id: node_id })
