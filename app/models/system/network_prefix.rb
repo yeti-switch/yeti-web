@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  network_prefixes_prefix_key        (prefix) UNIQUE
+#  network_prefixes_prefix_key        (prefix,number_min_length,number_max_length) UNIQUE
 #  network_prefixes_prefix_range_idx  (((prefix)::prefix_range)) USING gist
 #  network_prefixes_uuid_key          (uuid) UNIQUE
 #
@@ -51,8 +51,9 @@ class System::NetworkPrefix < ApplicationRecord
               if: :number_max_length
             }
 
-  validates :prefix, uniqueness: { allow_blank: true }, presence: true
+  validates :prefix, presence: true
   validates :network, presence: true
+  validate :validate_prefix_uniqueness, if: :prefix?, on: %i[create update]
 
   scope :number_contains, lambda { |prefix|
     where('prefix_range(sys.network_prefixes.prefix)@>prefix_range(?)', prefix.to_s)
@@ -82,5 +83,20 @@ class System::NetworkPrefix < ApplicationRecord
     [
       :number_contains
     ]
+  end
+
+  private
+
+  def validate_prefix_uniqueness
+    return if find_conflicting_prefixes.empty?
+
+    errors.add(:prefix, :taken)
+    errors.add(:number_max_length, "length with #{prefix} prefix already taken")
+    errors.add(:number_min_length, "length with #{prefix} prefix already taken")
+  end
+
+  def find_conflicting_prefixes
+    base_query = System::NetworkPrefix.where(prefix:, number_max_length:, number_min_length:)
+    persisted? ? base_query.where.not(id: id) : base_query
   end
 end
