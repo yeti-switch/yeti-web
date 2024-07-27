@@ -39033,14 +39033,6 @@ ALTER TABLE ONLY sys.network_prefixes
 
 
 --
--- Name: network_prefixes network_prefixes_prefix_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.network_prefixes
-    ADD CONSTRAINT network_prefixes_prefix_key UNIQUE (prefix);
-
-
---
 -- Name: network_prefixes network_prefixes_uuid_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -39844,6 +39836,13 @@ CREATE INDEX "index_sys.cdr_exports_on_customer_account_id" ON sys.cdr_exports U
 --
 
 CREATE UNIQUE INDEX "index_sys.cdr_exports_on_uuid" ON sys.cdr_exports USING btree (uuid);
+
+
+--
+-- Name: network_prefixes_prefix_key; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE UNIQUE INDEX network_prefixes_prefix_key ON sys.network_prefixes USING btree (prefix, number_min_length, number_max_length);
 
 
 --
@@ -41166,6 +41165,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240702142447'),
 ('20240704100545'),
 ('20240721201110'),
+('20240725132743'),
 ('20240725135654');
 
 

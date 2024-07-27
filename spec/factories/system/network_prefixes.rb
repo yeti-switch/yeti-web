@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  network_prefixes_prefix_key        (prefix) UNIQUE
+#  network_prefixes_prefix_key        (prefix,number_min_length,number_max_length) UNIQUE
 #  network_prefixes_prefix_range_idx  (((prefix)::prefix_range)) USING gist
 #  network_prefixes_uuid_key          (uuid) UNIQUE
 #
