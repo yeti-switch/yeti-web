@@ -16,6 +16,8 @@
 class CodecGroup < ApplicationRecord
   include WithPaperTrail
 
+  ALLOWED_PTIMES = [10, 20, 30, 40].freeze
+
   has_many :codec_group_codecs, inverse_of: :codec_group, dependent: :destroy
   has_many :codecs, through: :codec_group_codecs
 
@@ -23,6 +25,8 @@ class CodecGroup < ApplicationRecord
 
   validates :name, uniqueness: { allow_blank: false }
   validates :name, presence: true
+
+  validates :ptime, inclusion: { in: ALLOWED_PTIMES, message: 'Ptime %<value>s is not allowed' }, allow_nil: true
   validate :check_uniqueness_of_codecs
 
   def codec_names
