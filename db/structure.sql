@@ -22702,6 +22702,33 @@ $$;
 
 
 --
+-- Name: load_codec_groups(); Type: FUNCTION; Schema: switch21; Owner: -
+--
+
+CREATE FUNCTION switch21.load_codec_groups() RETURNS TABLE(id integer, ptime smallint, codecs json)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN QUERY
+    SELECT
+      cg.id,
+      cg.ptime,
+      json_agg(json_build_object(
+        'id', c.id,
+        'name', c.name,
+        'priority', cgc.priority,
+        'dynamic_payload_type', cgc.dynamic_payload_type,
+        'format_parameters', cgc.format_parameters
+      )) as codecs
+    FROM class4.codec_groups cg
+    LEFT JOIN class4.codec_group_codecs cgc ON cg.id = cgc.codec_group_id
+    LEFT JOIN class4.codecs c ON cgc.codec_id=c.id
+    GROUP BY cg.id;
+END;
+$$;
+
+
+--
 -- Name: load_codecs(); Type: FUNCTION; Schema: switch21; Owner: -
 --
 
@@ -22709,6 +22736,8 @@ CREATE FUNCTION switch21.load_codecs() RETURNS TABLE(o_id integer, o_codec_group
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
+
+  -- TODO: this function replaced by load_codec_groups and should be deleted in future
   RETURN
   QUERY SELECT
           cgc.id,
@@ -31792,7 +31821,8 @@ ALTER SEQUENCE class4.codec_group_codecs_id_seq OWNED BY class4.codec_group_code
 
 CREATE TABLE class4.codec_groups (
     id integer NOT NULL,
-    name character varying NOT NULL
+    name character varying NOT NULL,
+    ptime smallint
 );
 
 
@@ -41166,6 +41196,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240704100545'),
 ('20240721201110'),
 ('20240725132743'),
-('20240725135654');
+('20240725135654'),
+('20240805121644');
 
 
