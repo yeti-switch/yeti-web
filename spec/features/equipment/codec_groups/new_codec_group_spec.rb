@@ -12,6 +12,7 @@ RSpec.describe 'Create new Codec Group', type: :feature, js: true do
     visit new_codec_group_path
 
     fill_in 'Name', with: 'test codec group'
+    fill_in 'Ptime', with: '30'
 
     click_link 'Add New Codec group codec'
     within_form_has_many 'codec_group_codecs', index: 0 do
@@ -31,7 +32,7 @@ RSpec.describe 'Create new Codec Group', type: :feature, js: true do
     record = CodecGroup.last!
     expect(page).to have_current_path codec_group_path(record.id)
 
-    expect(record).to have_attributes(name: 'test codec group')
+    expect(record).to have_attributes(name: 'test codec group', ptime: 30)
     expect(record.codec_group_codecs.size).to eq(1)
     expect(record.codec_group_codecs.first).to have_attributes(
                                                  codec_id: codec.id,

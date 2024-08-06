@@ -4,8 +4,9 @@
 #
 # Table name: codec_groups
 #
-#  id   :integer(4)       not null, primary key
-#  name :string           not null
+#  id    :integer(4)       not null, primary key
+#  name  :string           not null
+#  ptime :integer(2)
 #
 # Indexes
 #

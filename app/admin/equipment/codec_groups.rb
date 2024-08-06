@@ -7,9 +7,9 @@ ActiveAdmin.register CodecGroup do
   acts_as_clone duplicates: [:codec_group_codecs]
   acts_as_safe_destroy
 
-  acts_as_export :id, :name
+  acts_as_export :id, :name, :ptime
 
-  permit_params :name,
+  permit_params :name, :ptime,
                 codec_group_codecs_attributes: %i[
                   id codec_id priority dynamic_payload_type format_parameters _destroy
                 ]
@@ -25,6 +25,7 @@ ActiveAdmin.register CodecGroup do
     id_column
     actions
     column :name
+    column :ptime
     column :codecs do |row|
       codec_names = row.codec_names
 
@@ -40,11 +41,13 @@ ActiveAdmin.register CodecGroup do
 
   filter :id
   filter :name
+  filter :ptime
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
+      f.input :ptime, hint: "Allowed values: #{CodecGroup::ALLOWED_PTIMES.join(', ')}. Leave empty to use value announced by other leg"
     end
 
     f.inputs 'Codecs' do
@@ -63,6 +66,7 @@ ActiveAdmin.register CodecGroup do
     attributes_table do
       row :id
       row :name
+      row :ptime
     end
 
     panel 'Codecs' do
