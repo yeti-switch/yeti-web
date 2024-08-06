@@ -22723,8 +22723,7 @@ BEGIN
     FROM class4.codec_groups cg
     LEFT JOIN class4.codec_group_codecs cgc ON cg.id = cgc.codec_group_id
     LEFT JOIN class4.codecs c ON cgc.codec_id=c.id
-    GROUP BY cg.id
-    ORDER BY cg.id;
+    GROUP BY cg.id;
 END;
 $$;
 
