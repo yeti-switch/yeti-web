@@ -32676,7 +32676,8 @@ CREATE TABLE class4.lnp_databases_thinq (
     port integer,
     timeout smallint DEFAULT 300 NOT NULL,
     username character varying,
-    token character varying
+    token character varying,
+    plain_http boolean DEFAULT false NOT NULL
 );
 
 
@@ -41197,6 +41198,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240721201110'),
 ('20240725132743'),
 ('20240725135654'),
-('20240805121644');
+('20240805121644'),
+('20240806205100');
 
 

@@ -66,7 +66,7 @@ class Routing::RoutingPlan < ApplicationRecord
 
   validates :name, :max_rerouting_attempts, presence: true
   validates :name, uniqueness: { allow_blank: false }
-  validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 10, allow_nil: false, only_integer: true }
+  validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 30, allow_nil: false, only_integer: true }
   validates :external_id, uniqueness: { allow_blank: true }
 
   validates :sorting_id, inclusion: { in: SORTINGS.keys }, allow_nil: false

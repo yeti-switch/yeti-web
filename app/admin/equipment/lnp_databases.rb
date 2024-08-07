@@ -99,6 +99,7 @@ ActiveAdmin.register Lnp::Database do
             case resource.database_type
             when Lnp::Database::CONST::TYPE_THINQ
               row :host
+              row :plain_http
               row :port
               row :timeout
               row :username
@@ -137,7 +138,7 @@ ActiveAdmin.register Lnp::Database do
 
     case database_type
     when Lnp::Database::CONST::TYPE_THINQ
-      database_attrs += %i[host port username token timeout]
+      database_attrs += %i[host plain_http port username token timeout]
     when Lnp::Database::CONST::TYPE_SIP_REDIRECT
       database_attrs += %i[host port timeout format_id]
     when Lnp::Database::CONST::TYPE_CSV
@@ -167,6 +168,7 @@ ActiveAdmin.register Lnp::Database do
       case f.object.database_type
       when Lnp::Database::CONST::TYPE_THINQ
         o.input :host
+        o.input :plain_http
         o.input :port
         o.input :username
         o.input :token
