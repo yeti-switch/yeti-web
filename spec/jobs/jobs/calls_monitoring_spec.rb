@@ -289,6 +289,10 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
     end
   end
 
+  context 'when YetiConfig.calls_monitoring.teardown_on_disabled_customer_auth' do
+
+  end
+
   context 'when YetiConfig.calls_monitoring.write_gateway_stats=false' do
     before do
       expect(YetiConfig.calls_monitoring).to receive(:write_gateway_stats).and_return(false)

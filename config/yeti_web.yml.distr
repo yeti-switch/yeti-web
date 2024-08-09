@@ -3,6 +3,8 @@ site_title_image: "yeti.png"
 calls_monitoring:
   write_account_stats: true
   write_gateway_stats: true
+  teardown_on_disabled_customer_auth: false
+  teardown_on_disabled_term_gw: false
 api:
   token_lifetime: 600 # jwt token lifetime in seconds, empty string means permanent tokens
 cdr_export:
