@@ -276,6 +276,8 @@ module Jobs
     # drop calls where `customer_auth_id`
     # is linked to `CustomersAuth#reject_calls = true`
     def detect_customers_auth_calls_to_reject
+      return unless CallsMonitoring.teardown_on_disabled_customer_auth?
+
       flatten_calls.each do |call|
         customers_auth_id = call[:customer_auth_id]
         customers_auth = active_customers_auths_reject_calls[customers_auth_id]
@@ -286,10 +288,21 @@ module Jobs
       end
     end
 
+    def self.teardown_on_disabled_customer_auth?
+      YetiConfig.calls_monitoring.teardown_on_disabled_customer_auth.nil? || YetiConfig.calls_monitoring.teardown_on_disabled_customer_auth
+    end
+
+    def self.teardown_on_disabled_term_gw?
+      YetiConfig.calls_monitoring.teardown_on_disabled_term_gw.nil? || YetiConfig.calls_monitoring.teardown_on_disabled_term_gw
+    end
+
     # detect gateway is disabled by orig_gw_id and term_gw_id
     def detect_gateway_calls_to_reject
       flatten_calls.each do |call|
-        if disabled_orig_gw_active_calls.key?(call[:orig_gw_id]) || disabled_term_gw_active_calls.key?(call[:term_gw_id])
+        if disabled_orig_gw_active_calls.key?(call[:orig_gw_id])
+          local_tag = call[:local_tag]
+          @terminate_calls[local_tag] = call
+        elsif CallsMonitoring.teardown_on_disabled_term_gw? && disabled_term_gw_active_calls.key?(call[:term_gw_id])
           local_tag = call[:local_tag]
           @terminate_calls[local_tag] = call
         end
