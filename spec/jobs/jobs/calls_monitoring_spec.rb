@@ -419,29 +419,97 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
   context 'when origin gw disabled for origination' do
     before do
       origin_gateway.update!(allow_origination: false)
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_orig_gw).and_return(nil)
     end
     include_examples :drop_calls
+  end
+
+  context 'when origin gw disabled for origination and teardown_on_disabled_orig_gw is true' do
+    before do
+      origin_gateway.update!(allow_origination: false)
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_orig_gw).and_return(true)
+    end
+    include_examples :drop_calls
+  end
+
+  context 'when origin gw disabled for origination and teardown_on_disabled_orig_gw is false' do
+    before do
+      origin_gateway.update!(allow_origination: false)
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_orig_gw).and_return(false)
+    end
+    include_examples :keep_calls
   end
 
   context 'when term gw disabled' do
     before do
       term_gateway.disable!
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_term_gw).and_return(nil)
     end
     include_examples :drop_calls
+  end
+
+  context 'when term gw disabled and teardown_on_disabled_term_gw is true' do
+    before do
+      term_gateway.disable!
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_term_gw).and_return(true)
+    end
+    include_examples :drop_calls
+  end
+
+  context 'when term gw disabled teardown_on_disabled_term_gw is false' do
+    before do
+      term_gateway.disable!
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_term_gw).and_return(false)
+    end
+    include_examples :keep_calls
   end
 
   context 'when term gw disabled for termination' do
     before do
       term_gateway.update!(allow_termination: false)
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_term_gw).and_return(nil)
     end
     include_examples :drop_calls
+  end
+
+  context 'when term gw disabled for termination and teardown_on_disabled_term_gw is true' do
+    before do
+      term_gateway.update!(allow_termination: false)
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_term_gw).and_return(true)
+    end
+    include_examples :drop_calls
+  end
+
+  context 'when term gw disabled for termination and teardown_on_disabled_term_gw is false' do
+    before do
+      term_gateway.update!(allow_termination: false)
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_term_gw).and_return(false)
+    end
+    include_examples :keep_calls
   end
 
   context 'when origin gw disabled' do
     before do
       origin_gateway.disable!
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_orig_gw).and_return(nil)
     end
     include_examples :drop_calls
+  end
+
+  context 'when origin gw disabled and teardown_on_disabled_orig_gw is true' do
+    before do
+      origin_gateway.disable!
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_orig_gw).and_return(true)
+    end
+    include_examples :drop_calls
+  end
+
+  context 'when origin gw disabled and teardown_on_disabled_orig_gw is false' do
+    before do
+      origin_gateway.disable!
+      allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_orig_gw).and_return(false)
+    end
+    include_examples :keep_calls
   end
 
   context 'when Customer has zero balance' do
@@ -630,6 +698,28 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
 
     context 'when CustomersAuth#reject_calls = TRUE' do
       let(:customers_auth_reject_calls) { true }
+
+      before { allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_customer_auth).and_return(nil) }
+
+      it 'drop first call(with customer_auth_id)' do
+        expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
+        expect_any_instance_of(Node).not_to receive(:drop_call).with('reverse-call')
+        subject
+      end
+    end
+
+    context 'when CustomersAuth#reject_calls = TRUE and teardown_on_disabled_customer_auth is false' do
+      let(:customers_auth_reject_calls) { true }
+
+      before { allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_customer_auth).and_return(false) }
+
+      include_examples :keep_calls
+    end
+
+    context 'when CustomersAuth#reject_calls = TRUE and teardown_on_disabled_customer_auth is true' do
+      let(:customers_auth_reject_calls) { true }
+
+      before { allow(YetiConfig.calls_monitoring).to receive(:teardown_on_disabled_customer_auth).and_return(true) }
 
       it 'drop first call(with customer_auth_id)' do
         expect_any_instance_of(Node).to receive(:drop_call).with('normal-call')
