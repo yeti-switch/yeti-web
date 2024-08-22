@@ -13,7 +13,7 @@ class Api::Rest::Customer::V1::TransactionResource < Api::Rest::Customer::V1::Ba
 
   ransack_filter :created_at, type: :datetime
   association_uuid_filter :account_id, class_name: 'Account'
-  ransack_filter :service_id, type: :foreign_key
+  association_uuid_filter :service_id, class_name: 'Billing::Service'
   ransack_filter :amount, type: :number
   ransack_filter :description, type: :string
 

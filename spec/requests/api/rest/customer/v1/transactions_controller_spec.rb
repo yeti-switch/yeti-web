@@ -24,6 +24,18 @@ RSpec.describe Api::Rest::Customer::V1::TransactionsController, type: :request d
     end
   end
 
+  describe 'GET /api/rest/customer/v1/transactions?filter[service-id-eq]=uuid' do
+    subject { get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers }
+
+    let(:json_api_request_query) { { filter: { 'service-id-eq' => service.uuid } } }
+
+    it 'should filter records by UUID of service' do
+      subject
+
+      expect(response_json[:data].pluck(:id)).to contain_exactly service.transactions.first.uuid
+    end
+  end
+
   describe 'GET /api/rest/customer/v1/transactions/{id}?include=service' do
     subject { get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers }
 
