@@ -1,0 +1,81 @@
+country_id: &fm 139
+networks:
+# Fixed Networks
+- id: 3012
+  name: FM Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Supplementary services Networks
+- id: &emergency_services 3662
+  name: FM Emergency services
+  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+  type_id: 14
+- id: &special_services 3075
+  name: FM Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+# Country code Networks
+- id: &fixed 3012
+  name: FM Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 59960
+  prefix: '691320'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: bd883198-43f3-4c27-8dca-3fe7ebcda03e
+  country_id: *fm
+  network_id: *fixed
+- id: 64417
+  prefix: '691330'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 8ccb3564-e333-4624-8bdf-9a6fed4f0b8f
+  country_id: *fm
+  network_id: *fixed
+- id: 79105
+  prefix: '691350'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 4cd8e20a-3c92-4166-b7be-d84eb2e63227
+  country_id: *fm
+  network_id: *fixed
+- id: 82220
+  prefix: '691370'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: fd5bae96-f6d7-4022-8f63-5afcbb66be88
+  country_id: *fm
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 244631
+  prefix: '691311'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 601d8c1a-2a33-43c4-9b99-bfbbcad2877e
+  country_id: *fm
+  network_id: *emergency_services
+- id: 245235
+  prefix: '6914'
+  number_min_length: 7
+  number_max_length: 8
+  uuid: e0dcbf79-6bde-4987-bfa5-a6540c1fc352
+  country_id: *fm
+  network_id: *special_services
+- id: 253355
+  prefix: '691911'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 957dd484-eb26-45b6-9b8c-834388571c46
+  country_id: *fm
+  network_id: *emergency_services
+# Country code Prefixes
+- id: 247866
+  prefix: '691'
+  number_min_length: 6
+  number_max_length: 7
+  uuid: b54f487e-8e95-46a1-a897-65a85f012df0
+  country_id: *fm
+  network_id: *fixed

@@ -1,0 +1,679 @@
+country_id: &hr 256
+networks:
+# Fixed Networks
+- id: 3012
+  name: HR Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Mobile Networks
+- id: &a1_mobile 3135
+  name: HR A1 mobile
+  uuid: 5d643971-cab2-4ed3-be1c-22ae9dc52271
+  type_id: 3
+- id: &telemach_mobile 3579
+  name: HR Telemach mobile
+  uuid: 1c58273c-c29e-47b4-811d-bc600e55a7d9
+  type_id: 3
+- id: &telekom_mobile 3130
+  name: HR Telekom mobile
+  uuid: fac6bdc2-9f05-447b-aed2-e4063024de60
+  type_id: 3
+- id: &tele_focus_mobile 3628
+  name: HR Tele focus mobile
+  uuid: 0b80fc2e-9b70-4f74-ba28-e0854eab3291
+  type_id: 3
+# Supplementary services Networks
+- id: &emergency_services 3662
+  name: HR Emergency services
+  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+  type_id: 14
+- id: &sms/mms_services 3740
+  name: HR Sms/mms services
+  uuid: 5cd79a08-7466-4e6f-bd77-63390d753421
+  type_id: 14
+- id: &sms/mms_services_(prize_games) 3932
+  name: HR Sms/mms services (prize games)
+  uuid: 2357153f-995a-40e6-8815-b70402b97453
+  type_id: 14
+- id: &sms/mms_services_(customer_services) 3968
+  name: HR Sms/mms services (customer services)
+  uuid: e4e4676c-c744-41fa-972b-7060f2edcd68
+  type_id: 14
+- id: &special_services 3075
+  name: HR Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &social_value_services 3680
+  name: HR Social value services
+  uuid: f7476422-0f68-41a9-900e-a45db930cc69
+  type_id: 14
+- id: &directory_enquiry_service 4037
+  name: HR Directory enquiry service
+  uuid: 54f9f098-3fb5-4691-9566-82a065a380f8
+  type_id: 14
+- id: &payment_services 4068
+  name: HR Payment services
+  uuid: 34cf6fca-0809-41c8-8edf-c94f41a0def2
+  type_id: 14
+- id: &customer_care_services 3658
+  name: HR Customer care services
+  uuid: d9dc6472-43a0-4129-bb04-fb5b2014f3c6
+  type_id: 14
+- id: &sms_activation_services 4078
+  name: HR Sms activation services
+  uuid: 05ac6626-b9d8-46e0-881c-aee1d70484c7
+  type_id: 14
+- id: &sms/mms_services_(adults_entertainment) 3915
+  name: HR Sms/mms services (adults entertainment)
+  uuid: d0e99c94-c724-4db3-a14e-af2f2beb546f
+  type_id: 14
+- id: &sms/mms_services_(entertainment) 4157
+  name: HR Sms/mms services (entertainment)
+  uuid: 510f7f2f-1582-4dbe-85a1-b6667020b8c8
+  type_id: 14
+- id: &sms/mms_services_(payment_services) 4166
+  name: HR Sms/mms services (payment services)
+  uuid: 442516ac-e16c-4f44-995c-e433cf3a91a2
+  type_id: 14
+- id: &sms/mms_services_(adults_chat) 4335
+  name: HR Sms/mms services (adults chat)
+  uuid: e3a0da2a-8ecd-4976-aae1-b27908ff43a1
+  type_id: 14
+- id: &sms/mms_services_(free) 3773
+  name: HR Sms/mms services (free)
+  uuid: 7d3943d3-6df0-43e0-843e-6408c4b33e40
+  type_id: 14
+- id: &sms/mms_services_(chat) 4605
+  name: HR Sms/mms services (chat)
+  uuid: 08d141d5-3335-4480-acde-15f6c0e80b86
+  type_id: 14
+- id: &general_content_services 4669
+  name: HR General content services
+  uuid: 2139e2c9-e13f-406d-931d-e0e01af0d3b5
+  type_id: 14
+- id: &humanitarian_services 4680
+  name: HR Humanitarian services
+  uuid: f41635d0-fc73-4d04-b316-d2baa0b228b1
+  type_id: 14
+- id: &televoting_services 3146
+  name: HR Televoting services
+  uuid: e4535230-d04d-466f-9a0c-2249a5cf1705
+  type_id: 14
+- id: &universal_access_number_(uan) 3734
+  name: HR Universal access number (uan)
+  uuid: 1e4a1015-64a8-4176-903f-d407cccc68b9
+  type_id: 14
+- id: &adults_entertainment_services 3415
+  name: HR Adults entertainment services
+  uuid: f17af3e1-f450-4332-a75e-4c848ec21565
+  type_id: 14
+- id: &prize_games_services 4737
+  name: HR Prize games services
+  uuid: 2fbe328b-30d5-4d87-919b-87d750fef34f
+  type_id: 14
+- id: &children_entertainment_services 4780
+  name: HR Children entertainment services
+  uuid: e9b4f67f-954f-4654-bb77-d8bfab21d104
+  type_id: 14
+- id: &personal_number_services 3280
+  name: HR Personal number services
+  uuid: 5046ac1e-0315-4299-80a1-0ebe7ea88d71
+  type_id: 14
+- id: &dial-up_internet_access 3113
+  name: HR Dial-up internet access
+  uuid: 982cd055-0aa6-4f1b-8af7-c68cce23d412
+  type_id: 14
+- id: &freephone_services 3382
+  name: HR Freephone services
+  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+  type_id: 14
+- id: &calling_card_services 3735
+  name: HR Calling card services
+  uuid: 9e6664fa-6003-4aac-84fd-11fae5fcd5b8
+  type_id: 14
+- id: &machine_to_machine_(m2m)_services 3131
+  name: HR Machine to machine (m2m) services
+  uuid: 99239e22-826d-4447-8981-39539f3caf62
+  type_id: 14
+# Country code Networks
+- id: &fixed 3012
+  name: HR Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 7579
+  prefix: '38523'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 4a98ecbe-c4ef-4a9f-bca4-3acbdfa0d2a9
+  country_id: *hr
+  network_id: *fixed
+- id: 9294
+  prefix: '38521'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 6346d0e8-aecc-41af-87b0-c01f655ec179
+  country_id: *hr
+  network_id: *fixed
+- id: 53101
+  prefix: '38531'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 38ed1f15-a8a2-46f4-828e-78593418720e
+  country_id: *hr
+  network_id: *fixed
+- id: 67146
+  prefix: '38532'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: c124fcfe-90b2-4bee-bb71-8f043445f102
+  country_id: *hr
+  network_id: *fixed
+- id: 68004
+  prefix: '38533'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: f8979536-1167-4d15-8746-b255d204a9e7
+  country_id: *hr
+  network_id: *fixed
+- id: 76914
+  prefix: '38534'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 94f3ceab-3542-48a4-8d18-88889925dc53
+  country_id: *hr
+  network_id: *fixed
+- id: 78854
+  prefix: '38535'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: b6f2b94f-6966-426e-954b-9c53fdea98ce
+  country_id: *hr
+  network_id: *fixed
+- id: 87003
+  prefix: '38540'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 7cceeca2-7b8e-4188-b56e-5b135ff5929b
+  country_id: *hr
+  network_id: *fixed
+- id: 106124
+  prefix: '38542'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 2c4829d7-71a2-4163-bccc-085f22929894
+  country_id: *hr
+  network_id: *fixed
+- id: 107535
+  prefix: '38543'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 3b34b2f3-7afc-4d15-b8c2-06744f66bafa
+  country_id: *hr
+  network_id: *fixed
+- id: 110839
+  prefix: '38544'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: e5820ecc-6072-4bf6-a036-2837f70ed958
+  country_id: *hr
+  network_id: *fixed
+- id: 128296
+  prefix: '38547'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 2df9bd21-b762-454b-83dd-607b72e900c4
+  country_id: *hr
+  network_id: *fixed
+- id: 131720
+  prefix: '38548'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: b7329705-1bc3-4f76-8b25-3534ea12b5c5
+  country_id: *hr
+  network_id: *fixed
+- id: 135172
+  prefix: '38549'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 3ec3eb9d-8b97-4c18-9065-cf2d65dd76a0
+  country_id: *hr
+  network_id: *fixed
+- id: 141505
+  prefix: '38553'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 7af0486e-c283-4027-b207-1c44e17245b4
+  country_id: *hr
+  network_id: *fixed
+- id: 149993
+  prefix: '38551'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 7f6ec667-90fa-42bc-aa93-87ba0c885c30
+  country_id: *hr
+  network_id: *fixed
+- id: 154199
+  prefix: '38552'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 9f8737d0-1b06-4b50-a502-70ee43c5e9db
+  country_id: *hr
+  network_id: *fixed
+- id: 254536
+  prefix: '3851'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 8b31bd74-8c26-4a1d-bc7e-93e225ade2b7
+  country_id: *hr
+  network_id: *fixed
+- id: 257673
+  prefix: '38520'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 07718080-0d97-465c-8e68-06aa3e749193
+  country_id: *hr
+  network_id: *fixed
+- id: 272892
+  prefix: '38522'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 0691f138-336b-4c02-b40b-501ebb617ce7
+  country_id: *hr
+  network_id: *fixed
+# Mobile Prefixes
+- id: 171708
+  prefix: '38591'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 8ad6d544-624f-469a-9462-8c4e67bc802c
+  country_id: *hr
+  network_id: *a1_mobile
+- id: 174186
+  prefix: '38592'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 1f97b1e8-7647-45f0-9630-beb21b9b1bce
+  country_id: *hr
+  network_id: *a1_mobile
+- id: 218088
+  prefix: '38595'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: db764977-e0e1-4de3-8a8a-2629807393d8
+  country_id: *hr
+  network_id: *telemach_mobile
+- id: 224629
+  prefix: '385970'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 759dd95c-c638-4037-a8c4-7287ae9c18d9
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 229877
+  prefix: '3859751'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 56b54c25-6e22-4b13-9c3b-f520ad34b47a
+  country_id: *hr
+  network_id: *tele_focus_mobile
+- id: 229879
+  prefix: '385976'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: bb60a308-8e71-40bd-bdac-ae6dc75cb70f
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 229890
+  prefix: '385977'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a0550a75-f78d-4643-a362-3e544d5ac6a8
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 233646
+  prefix: '385979'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: e549adc9-df6c-4198-b4f9-7cf6f4adcb53
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 234056
+  prefix: '38598'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 0cf3a3b6-f908-4dce-92e3-d1cabe9392da
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 238714
+  prefix: '38599'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 6e3d00ba-a806-4030-9cac-89ed63d3c9f1
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 445500
+  prefix: '38589000'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 0bbe33dd-9904-485f-a46d-b7041c908d7a
+  country_id: *hr
+  network_id: *telemach_mobile
+- id: 445501
+  prefix: '38589091'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: b140b0e3-f563-431d-aa34-3a73bd6c77d9
+  country_id: *hr
+  network_id: *a1_mobile
+- id: 445502
+  prefix: '38589097'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: fca1bc43-8aae-4a8f-a75b-586ded642831
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 445503
+  prefix: '38589098'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 64a440ad-d0e2-458a-b8ae-bbb95bcb0052
+  country_id: *hr
+  network_id: *telekom_mobile
+- id: 445504
+  prefix: '38589099'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 4593f637-3095-49d2-baf6-8038e040848e
+  country_id: *hr
+  network_id: *telekom_mobile
+# Supplementary services Prefixes
+- id: 242897
+  prefix: '38519'
+  number_min_length: 8
+  number_max_length: 9
+  uuid: 7470c03e-d922-4491-b3ba-526c46f03c62
+  country_id: *hr
+  network_id: *emergency_services
+- id: 246698
+  prefix: '3856'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 2952bc3a-49ca-411b-93eb-ddafa2c2914d
+  country_id: *hr
+  network_id: *sms/mms_services
+- id: 246736
+  prefix: '38560'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 92364916-bc9d-42d4-b7c0-7837393b6d68
+  country_id: *hr
+  network_id: *sms/mms_services_(prize_games)
+- id: 247051
+  prefix: '38561'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 12c73be4-9eeb-4c3d-b0c7-998f40c5b2bc
+  country_id: *hr
+  network_id: *sms/mms_services_(customer_services)
+- id: 248292
+  prefix: '3851'
+  number_min_length: 7
+  number_max_length: 9
+  uuid: 895d99a9-ba26-44d6-bb1c-61ae1fe7ca8f
+  country_id: *hr
+  network_id: *special_services
+- id: 248499
+  prefix: '385112'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: a17d48c1-44ab-419a-bf83-6bbc3d60d001
+  country_id: *hr
+  network_id: *emergency_services
+- id: 248551
+  prefix: '385116'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f379ab49-256c-437d-8737-fb6c04491c72
+  country_id: *hr
+  network_id: *social_value_services
+- id: 248601
+  prefix: '385118'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: d20c4dae-74cb-412a-95fd-93ffff7d8e58
+  country_id: *hr
+  network_id: *directory_enquiry_service
+- id: 248674
+  prefix: '385129'
+  number_min_length: 10
+  number_max_length: 11
+  uuid: 2faab84b-9449-40a4-8b10-66b3e9b9ceb0
+  country_id: *hr
+  network_id: *payment_services
+- id: 248686
+  prefix: '38513'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 203f03b7-f1e0-4129-9639-e2fd0b835a80
+  country_id: *hr
+  network_id: *customer_care_services
+- id: 248711
+  prefix: '385133'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 575c66ed-b86d-457d-967d-8e4cc3907f4b
+  country_id: *hr
+  network_id: *sms_activation_services
+- id: 250750
+  prefix: '38564'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 1c0dcff2-3a8f-4fa4-b2f5-917accfc80a4
+  country_id: *hr
+  network_id: *sms/mms_services_(adults_entertainment)
+- id: 250965
+  prefix: '38565'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 8a3f895d-efc0-46f1-83a9-80f9f87a81e4
+  country_id: *hr
+  network_id: *sms/mms_services_(prize_games)
+- id: 251315
+  prefix: '38566'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 3201c2d1-16fe-4893-b2df-d05124b4bb92
+  country_id: *hr
+  network_id: *sms/mms_services_(entertainment)
+- id: 251456
+  prefix: '38571'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 808ada26-abfe-4145-ae86-1e22d7f3f154
+  country_id: *hr
+  network_id: *sms/mms_services_(payment_services)
+- id: 252838
+  prefix: '38588'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: f2e485d0-1175-444b-832f-25b78411c32c
+  country_id: *hr
+  network_id: *sms/mms_services_(adults_chat)
+- id: 258605
+  prefix: '3857'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 555ecc22-61cb-478f-b0d6-43d4a429b0a5
+  country_id: *hr
+  network_id: *sms/mms_services
+- id: 258649
+  prefix: '38570'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 671ce747-04ed-4fcb-98c9-638739d8ae19
+  country_id: *hr
+  network_id: *sms/mms_services_(payment_services)
+- id: 259937
+  prefix: '3858'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: c48d5938-bf2a-4a0f-a49e-a55d0b818b55
+  country_id: *hr
+  network_id: *sms/mms_services
+- id: 260010
+  prefix: '385800'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a0dcda54-ac6a-49a2-9ace-39faa2d00592
+  country_id: *hr
+  network_id: *sms/mms_services_(free)
+- id: 260138
+  prefix: '38581'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 94dc6dcc-efbc-4f05-b02e-a45aab5aa248
+  country_id: *hr
+  network_id: *sms/mms_services_(customer_services)
+- id: 260526
+  prefix: '38584'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 91e1980b-b992-458f-8272-40695d2512d6
+  country_id: *hr
+  network_id: *sms/mms_services_(adults_entertainment)
+- id: 260657
+  prefix: '38585'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 536d60ca-f7ee-449a-ae37-4105584407d6
+  country_id: *hr
+  network_id: *sms/mms_services_(chat)
+- id: 260803
+  prefix: '38586'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 47b509e9-1780-40fb-bfca-247fef9a470c
+  country_id: *hr
+  network_id: *sms/mms_services_(entertainment)
+- id: 277855
+  prefix: '38560'
+  number_min_length: 9
+  number_max_length: 11
+  uuid: 9eaeb97c-ffc0-4343-8650-f0f1c9b92961
+  country_id: *hr
+  network_id: *general_content_services
+- id: 282586
+  prefix: '385609'
+  number_min_length: 9
+  number_max_length: 11
+  uuid: e0df4760-060f-4599-83d9-82dbbdee468e
+  country_id: *hr
+  network_id: *humanitarian_services
+- id: 293479
+  prefix: '38561'
+  number_min_length: 9
+  number_max_length: 11
+  uuid: 04ba3a62-ba74-4a51-bcd4-ba1f6fa7d93e
+  country_id: *hr
+  network_id: *televoting_services
+- id: 299728
+  prefix: '38562'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 7ed07559-7dd7-4d6d-9adf-a6974cf4ac12
+  country_id: *hr
+  network_id: *universal_access_number_(uan)
+- id: 307880
+  prefix: '38564'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 47f734f5-0d63-4a1e-9504-dad4cc9463d3
+  country_id: *hr
+  network_id: *adults_entertainment_services
+- id: 319376
+  prefix: '38565'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: fc995c87-3cb8-41a6-bf15-706cef964f45
+  country_id: *hr
+  network_id: *prize_games_services
+- id: 338752
+  prefix: '38569'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 6164fe68-b2d4-4a5e-a536-fefdae4c45b5
+  country_id: *hr
+  network_id: *children_entertainment_services
+- id: 357659
+  prefix: '38572'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 6099d954-d9ae-4e24-99a1-1dc7ea4a3de1
+  country_id: *hr
+  network_id: *universal_access_number_(uan)
+- id: 371653
+  prefix: '38574'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 346e7ec2-82b7-46b6-a428-de7f0031ba73
+  country_id: *hr
+  network_id: *personal_number_services
+- id: 376981
+  prefix: '38575'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: bd901b7c-9222-4420-8584-0f4497625bb2
+  country_id: *hr
+  network_id: *personal_number_services
+- id: 379079
+  prefix: '38576'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: f4d0da34-dab1-4118-af20-bac1a984b7e7
+  country_id: *hr
+  network_id: *dial-up_internet_access
+- id: 385884
+  prefix: '38577'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 84bd008f-54f6-4c85-b474-7ca39adbd6d7
+  country_id: *hr
+  network_id: *dial-up_internet_access
+- id: 400661
+  prefix: '385800'
+  number_min_length: 10
+  number_max_length: 12
+  uuid: 915ddcd6-a4b3-4731-903a-b38baf4384db
+  country_id: *hr
+  network_id: *freephone_services
+- id: 400706
+  prefix: '385801'
+  number_min_length: 10
+  number_max_length: 12
+  uuid: 70a10594-dfdc-43e2-8b89-dd15b37783fc
+  country_id: *hr
+  network_id: *calling_card_services
+- id: 445505
+  prefix: '385'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: b7064275-3f86-4ac5-8d4c-9c8cd49e9f83
+  country_id: *hr
+  network_id: *machine_to_machine_(m2m)_services
+- id: 445505
+  prefix: '385'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: b7064275-3f86-4ac5-8d4c-9c8cd49e9f83
+  country_id: *hr
+  network_id: *machine_to_machine_(m2m)_services
+# Country code Prefixes
+- id: 247884
+  prefix: '385'
+  number_min_length: 6
+  number_max_length: 11
+  uuid: cf8a0ae9-df8d-4df5-842f-8325a5da3bf1
+  country_id: *hr
+  network_id: *fixed

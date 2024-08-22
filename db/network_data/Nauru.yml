@@ -1,0 +1,91 @@
+country_id: &nr 148
+networks:
+# Supplementary services Networks
+- id: &special_services 3075
+  name: NR Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+# Country code Networks
+- id: &fixed 3012
+  name: NR Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Mobile Networks
+- id: &digicel_mobile 3097
+  name: NR Digicel mobile
+  uuid: a497ee4a-0894-4491-a6e9-4e6c07ec03b7
+  type_id: 3
+network_prefixes:
+# Supplementary services Prefixes
+- id: 245255
+  prefix: '6744'
+  number_min_length: 7
+  number_max_length: 8
+  uuid: f385c8ee-d8de-46ec-9899-c46676beb994
+  country_id: *nr
+  network_id: *special_services
+- id: 248347
+  prefix: '6741'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 446e38e3-166a-4f40-ae72-b33cb2863e94
+  country_id: *nr
+  network_id: *special_services
+- id: 249334
+  prefix: '6745'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: bbbe2555-8942-44ad-b336-6fdcf040c43d
+  country_id: *nr
+  network_id: *special_services
+- id: 258620
+  prefix: '6747'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 26603b2b-c1ac-42b8-82ac-4c0fb49bad1b
+  country_id: *nr
+  network_id: *special_services
+# Country code Prefixes
+- id: 247943
+  prefix: '674'
+  number_min_length: 6
+  number_max_length: 10
+  uuid: efd8dab5-3b19-43b3-8976-5733a2748d7a
+  country_id: *nr
+  network_id: *fixed
+# Mobile Prefixes
+- id: 249907
+  prefix: '674555'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: afe195af-6d56-4c98-b5cd-17e28a9917b3
+  country_id: *nr
+  network_id: *digicel_mobile
+- id: 249917
+  prefix: '674556'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: b35678d5-4fd9-4d3e-8075-1c147775f7aa
+  country_id: *nr
+  network_id: *digicel_mobile
+- id: 249920
+  prefix: '674557'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: cb161eb9-b09c-4d3c-a03a-31b688dbd72d
+  country_id: *nr
+  network_id: *digicel_mobile
+- id: 249923
+  prefix: '674558'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: a5acaefa-cdca-4608-9d31-c749eef34170
+  country_id: *nr
+  network_id: *digicel_mobile
+- id: 249926
+  prefix: '674559'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 02007281-dbcb-4390-90be-caaa836b69be
+  country_id: *nr
+  network_id: *digicel_mobile

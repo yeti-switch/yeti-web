@@ -1,0 +1,668 @@
+country_id: &tz 209
+networks:
+# Fixed Networks
+- id: 3012
+  name: TZ Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Supplementary services Networks
+- id: &machine_to_machine_(m2m)_services 3131
+  name: TZ Machine to machine (m2m) services
+  uuid: 99239e22-826d-4447-8981-39539f3caf62
+  type_id: 14
+- id: &corporate_private_data_networks 3396
+  name: TZ Corporate private data networks
+  uuid: fba9e3cf-390c-4bb1-bd23-0b807c8d88f4
+  type_id: 14
+- id: &corporate_services 3399
+  name: TZ Corporate services
+  uuid: a9dc9488-6c91-4b61-a01f-9ea0eb741434
+  type_id: 14
+- id: &premium_rate_services 3232
+  name: TZ Premium rate services
+  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+  type_id: 14
+- id: &sms_value_added_services 3663
+  name: TZ Sms value added services
+  uuid: cc8d4d40-259a-4e49-ac9a-009ca20dd34b
+  type_id: 14
+- id: &free_sms_vas 3666
+  name: TZ Free sms vas
+  uuid: 0e4f88f4-bd77-469f-adbd-152c4fc164f8
+  type_id: 14
+- id: &financial_and_commercial_sms_vas 3670
+  name: TZ Financial and commercial sms vas
+  uuid: 4262ddc9-e830-449a-ba54-fbb7a052dc4d
+  type_id: 14
+- id: &government_sms_vas 3672
+  name: TZ Government sms vas
+  uuid: 583acd97-b586-4a6b-a626-ff8912400958
+  type_id: 14
+- id: &standard_rate_sms_vas 3675
+  name: TZ Standard rate sms vas
+  uuid: 156695cc-994f-4d40-8f29-fb366c60b676
+  type_id: 14
+- id: &basic_premium_rate_sms_vas 3676
+  name: TZ Basic premium rate sms vas
+  uuid: eede1e08-c8e2-41b6-90c8-75273f19d2dd
+  type_id: 14
+- id: &high_premium_rate_sms_vas 3677
+  name: TZ High premium rate sms vas
+  uuid: 1a479f82-6271-4d4b-a598-7fa93e3d9e71
+  type_id: 14
+- id: &carrier_preselection_services 3702
+  name: TZ Carrier preselection services
+  uuid: 7a532752-5cfa-412d-ae85-36838812d3ec
+  type_id: 14
+- id: &customer_care_services 3658
+  name: TZ Customer care services
+  uuid: d9dc6472-43a0-4129-bb04-fb5b2014f3c6
+  type_id: 14
+- id: &emergency_services 3662
+  name: TZ Emergency services
+  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+  type_id: 14
+- id: &voice_mail_services 3642
+  name: TZ Voice mail services
+  uuid: 77e9b8cd-4473-41c7-86bc-6ef4a2ed166e
+  type_id: 14
+- id: &directory_enquiry_services 3100
+  name: TZ Directory enquiry services
+  uuid: eea44042-6a15-4cfe-b429-38d1a26b2af4
+  type_id: 14
+- id: &test_services 4087
+  name: TZ Test services
+  uuid: c04ec2d7-c958-49d8-8d0a-d3aa9e30a36f
+  type_id: 14
+- id: &prepaid_account_calling_services 4558
+  name: TZ Prepaid account calling services
+  uuid: 94aa0d37-7830-4d07-8f5b-2e9b11af8afd
+  type_id: 14
+- id: &account_card_calling_services 4560
+  name: TZ Account card calling services
+  uuid: a49f7ea8-0c3a-4162-9e3c-b2c3aab1bd4d
+  type_id: 14
+- id: &prepaid_card_calling_services 4561
+  name: TZ Prepaid card calling services
+  uuid: 1950dc90-259e-4657-9438-e190db9aaa43
+  type_id: 14
+- id: &credit_card_calling_services 4562
+  name: TZ Credit card calling services
+  uuid: e24f43e1-f8e6-44ba-a78d-258b4928333e
+  type_id: 14
+- id: &corporate_public_data_networks 4661
+  name: TZ Corporate public data networks
+  uuid: 4bcbfa82-d9f9-4a75-a087-fb7fc1b5c500
+  type_id: 14
+- id: &national_freephone_services 3094
+  name: TZ National freephone services
+  uuid: 6bde9d07-c9fc-4a5e-9647-a729e89a42b4
+  type_id: 14
+- id: &international_special_rate_services 4988
+  name: TZ International special rate services
+  uuid: 06dd428b-0266-4fa9-b91b-cbf49cd9aeb6
+  type_id: 14
+- id: &shared_cost_services 3141
+  name: TZ Shared cost services
+  uuid: fcb0a143-e4dd-46b3-a904-2da86f75c2f4
+  type_id: 14
+- id: &national_rate_services 4942
+  name: TZ National rate services
+  uuid: fda6a44a-cf78-485f-a712-2999d9a047dc
+  type_id: 14
+- id: &special_rate_services 4559
+  name: TZ Special rate services
+  uuid: 4159e7cd-c4d4-4db8-b971-70129980125c
+  type_id: 14
+- id: &special_services 3075
+  name: TZ Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &entertainment_services 3491
+  name: TZ Entertainment services
+  uuid: 79e4c378-3269-4dc1-8982-71e4742f0cb3
+  type_id: 14
+- id: &information_services 3029
+  name: TZ Information services
+  uuid: c19977a6-7ce8-4015-929c-607d8b47f7ae
+  type_id: 14
+- id: &competitions_and_televoting_services 5112
+  name: TZ Competitions and televoting services
+  uuid: d7dfed4c-f63e-43de-b1a8-6bd0d6caf036
+  type_id: 14
+# Mobile Networks
+- id: &tigo_mobile 3129
+  name: TZ Tigo mobile
+  uuid: c8e102d2-82a0-4d92-ba77-d35b7d74c6d1
+  type_id: 3
+- id: &airtel_mobile 3142
+  name: TZ Airtel mobile
+  uuid: 08f04e1d-14e6-4fcf-82bb-fd812972b861
+  type_id: 3
+- id: &halotel_mobile 3143
+  name: TZ Halotel mobile
+  uuid: e4233b47-4983-4f1b-ae5f-f0f33cf89e97
+  type_id: 3
+- id: &vodacom_mobile 3144
+  name: TZ Vodacom mobile
+  uuid: 52dd0e13-b9d3-41db-a27b-15f184998427
+  type_id: 3
+- id: &ttcl_mobile_mobile 3145
+  name: TZ Ttcl mobile mobile
+  uuid: 7ff0ce6d-53bd-4c22-a3fb-dab45aaae055
+  type_id: 3
+- id: &smile_mobile 4170
+  name: TZ Smile mobile
+  uuid: 4a2a305f-4ce7-46b0-8291-1653f78f59b6
+  type_id: 3
+- id: &mobile 3013
+  name: TZ Mobile
+  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  type_id: 3
+# Country code Networks
+- id: &fixed 3012
+  name: TZ Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 7598
+  prefix: '25523'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9ea2f417-5365-45ed-9d15-689b48ed9314
+  country_id: *tz
+  network_id: *fixed
+- id: 23240
+  prefix: '25526'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 607c0405-6d1a-4d4b-bac5-4cc9510983d7
+  country_id: *tz
+  network_id: *fixed
+- id: 24924
+  prefix: '25527'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 4a7e4150-4e95-4458-be83-2ca9930c505d
+  country_id: *tz
+  network_id: *fixed
+- id: 28299
+  prefix: '25524'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 233fc8bd-3162-42ed-94b4-f59780981cd3
+  country_id: *tz
+  network_id: *fixed
+- id: 31991
+  prefix: '25525'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b2546107-baf0-46fb-9a85-6d036508e4ea
+  country_id: *tz
+  network_id: *fixed
+- id: 38356
+  prefix: '25528'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 35b03ffc-ded5-4a3c-89cb-58e2ea67d692
+  country_id: *tz
+  network_id: *fixed
+- id: 40808
+  prefix: '255'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: a565f2e7-8934-4362-a0cf-6fb83e278c39
+  country_id: *tz
+  network_id: *fixed
+- id: 91034
+  prefix: '25541'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: fb983b24-b19b-4915-bbea-eb240e68ae63
+  country_id: *tz
+  network_id: *fixed
+- id: 272909
+  prefix: '25522'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 293a4bf2-d466-4acd-9621-313e5d544077
+  country_id: *tz
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 42353
+  prefix: '255300'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 3be22cbb-31c1-4270-9f15-80657bb2c072
+  country_id: *tz
+  network_id: *machine_to_machine_(m2m)_services
+- id: 141526
+  prefix: '25553'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 235a1928-b09c-46b2-b157-bd9b7bf463d1
+  country_id: *tz
+  network_id: *corporate_private_data_networks
+- id: 145861
+  prefix: '255'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: fa713282-e108-464c-9c97-76ab9cf4962d
+  country_id: *tz
+  network_id: *corporate_services
+- id: 150011
+  prefix: '25551'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 72a61db4-75b4-4858-959a-e042236db32f
+  country_id: *tz
+  network_id: *corporate_private_data_networks
+- id: 154218
+  prefix: '25552'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 8647c5d7-2dbc-483a-8807-4e8d46f7fe7e
+  country_id: *tz
+  network_id: *corporate_private_data_networks
+- id: 155691
+  prefix: '25554'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a3aa55cb-91a4-4954-9bf1-b5b858910778
+  country_id: *tz
+  network_id: *corporate_private_data_networks
+- id: 161662
+  prefix: '25555'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: aba7c4b4-9a93-49e0-82ec-0bc4f1590600
+  country_id: *tz
+  network_id: *corporate_private_data_networks
+- id: 171700
+  prefix: '255'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 895e1056-9071-49de-a4dc-9b895ad0d1b1
+  country_id: *tz
+  network_id: *premium_rate_services
+- id: 242672
+  prefix: '25515'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: d5b9065e-12b9-4e87-96c6-2eebaf17199d
+  country_id: *tz
+  network_id: *sms_value_added_services
+- id: 242678
+  prefix: '255150'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 45ef8518-7d70-4f04-b5d5-39d255d488fc
+  country_id: *tz
+  network_id: *free_sms_vas
+- id: 242686
+  prefix: '255151'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 97673007-8ab7-4ed4-b4e7-e7b9bc7bf129
+  country_id: *tz
+  network_id: *financial_and_commercial_sms_vas
+- id: 242697
+  prefix: '255152'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 8180f575-0699-4aa2-97ba-0f9e23bd4e83
+  country_id: *tz
+  network_id: *government_sms_vas
+- id: 242702
+  prefix: '255153'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 94020785-f057-41bc-84c9-e7f44c533426
+  country_id: *tz
+  network_id: *standard_rate_sms_vas
+- id: 242707
+  prefix: '255154'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: b32d431b-18ad-4fce-bad4-152e4a61a935
+  country_id: *tz
+  network_id: *standard_rate_sms_vas
+- id: 242712
+  prefix: '255155'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 5afe73e5-e203-4cd7-ab8a-67cca67dbdbd
+  country_id: *tz
+  network_id: *basic_premium_rate_sms_vas
+- id: 242715
+  prefix: '255156'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: ace9171f-db7b-4290-8bff-8aefd681c913
+  country_id: *tz
+  network_id: *basic_premium_rate_sms_vas
+- id: 242718
+  prefix: '255157'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: deac0242-967b-4f83-b491-685a5758f45c
+  country_id: *tz
+  network_id: *high_premium_rate_sms_vas
+- id: 242788
+  prefix: '25517'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: 65427708-904e-4e21-9be0-689101ff9570
+  country_id: *tz
+  network_id: *carrier_preselection_services
+- id: 248424
+  prefix: '25510'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: 00b630fc-2fb5-40b0-8ca8-3757f8ea5a67
+  country_id: *tz
+  network_id: *customer_care_services
+- id: 248479
+  prefix: '25511'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: eaf911be-6c77-4ab9-9a81-1d9edf78cc2a
+  country_id: *tz
+  network_id: *emergency_services
+- id: 248654
+  prefix: '25512'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: 5ab6ef22-2be6-4ad1-983a-ccea0ec973d8
+  country_id: *tz
+  network_id: *voice_mail_services
+- id: 248698
+  prefix: '25513'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: e7d7117a-46b0-45a9-9fa5-9f5c1493b183
+  country_id: *tz
+  network_id: *directory_enquiry_services
+- id: 248749
+  prefix: '25514'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: c3859899-dfd3-4a51-b2fb-cd4ea3dc434c
+  country_id: *tz
+  network_id: *test_services
+- id: 260044
+  prefix: '2558001'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: fff9da01-6dc4-4681-bfcb-431e0ba9d0be
+  country_id: *tz
+  network_id: *prepaid_account_calling_services
+- id: 260046
+  prefix: '2558002'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 75554785-4cb0-4396-a3ea-49837b4f57b6
+  country_id: *tz
+  network_id: *prepaid_account_calling_services
+- id: 260047
+  prefix: '2558003'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: ebd34c98-2f85-4eb9-a50c-bbc033a44c7c
+  country_id: *tz
+  network_id: *account_card_calling_services
+- id: 260048
+  prefix: '2558004'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 743c548a-1e93-4cf6-8cc5-ae0b13ee763f
+  country_id: *tz
+  network_id: *prepaid_card_calling_services
+- id: 260049
+  prefix: '2558005'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: d86079a4-56c7-41c9-ba6e-5bde99c9f2d5
+  country_id: *tz
+  network_id: *credit_card_calling_services
+- id: 275307
+  prefix: '25556'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9feed667-4661-497b-a3a4-d59981ce6020
+  country_id: *tz
+  network_id: *corporate_public_data_networks
+- id: 280282
+  prefix: '25557'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 688485f4-9fa5-42b2-a13a-b33388481c03
+  country_id: *tz
+  network_id: *corporate_public_data_networks
+- id: 285720
+  prefix: '25558'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a5471d42-e8af-4356-92f6-781b3f4faf54
+  country_id: *tz
+  network_id: *corporate_public_data_networks
+- id: 400683
+  prefix: '255800'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d2ffd92c-9cbd-4d21-b4b8-c5aace1a64cd
+  country_id: *tz
+  network_id: *national_freephone_services
+- id: 405537
+  prefix: '255808'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 08d6e5e0-7327-4def-81a3-cb4069441794
+  country_id: *tz
+  network_id: *international_special_rate_services
+- id: 424387
+  prefix: '255840'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 1ab07a1a-82d4-4237-b0b2-581923dbed7a
+  country_id: *tz
+  network_id: *shared_cost_services
+- id: 429415
+  prefix: '255860'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 598a43f1-10c8-4033-a935-a45ecfb18438
+  country_id: *tz
+  network_id: *national_rate_services
+- id: 430197
+  prefix: '255861'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 411d4b3d-23ed-4cb6-a367-24023f0be28a
+  country_id: *tz
+  network_id: *special_rate_services
+- id: 446479
+  prefix: '255'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 46ead905-f1fd-443f-bd4d-4045381c9d4b
+  country_id: *tz
+  network_id: *special_services
+- id: 447718
+  prefix: '255901'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 75b7205a-855e-4063-bda7-4c409ca928e2
+  country_id: *tz
+  network_id: *entertainment_services
+- id: 453101
+  prefix: '255900'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f4de8330-d378-491c-b923-53ed4bc49aaa
+  country_id: *tz
+  network_id: *information_services
+- id: 453668
+  prefix: '255902'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b52d693c-08c2-48da-b799-5703383334cd
+  country_id: *tz
+  network_id: *competitions_and_televoting_services
+# Mobile Prefixes
+- id: 42354
+  prefix: '2553000'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 0b3a9b1c-6a88-426d-b9b0-8a34f28db70b
+  country_id: *tz
+  network_id: *tigo_mobile
+- id: 42355
+  prefix: '2553001'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 1fb06ed5-1fe7-44b6-b8a8-ef4662a49c8e
+  country_id: *tz
+  network_id: *airtel_mobile
+- id: 42356
+  prefix: '2553002'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: d2707161-3659-4432-817f-772d8fb438db
+  country_id: *tz
+  network_id: *halotel_mobile
+- id: 42357
+  prefix: '2553003'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: f4c49410-3ede-47b0-9ed9-9b1794245ff0
+  country_id: *tz
+  network_id: *vodacom_mobile
+- id: 42358
+  prefix: '2553004'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 33bd0249-7124-4f47-80e5-d7537b0c52fe
+  country_id: *tz
+  network_id: *tigo_mobile
+- id: 42359
+  prefix: '2553005'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 56f004f6-866e-43d8-9d89-b7d68540df0b
+  country_id: *tz
+  network_id: *ttcl_mobile_mobile
+- id: 293499
+  prefix: '25561'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 52725c6e-b8a6-4072-af09-961f7130c7f4
+  country_id: *tz
+  network_id: *halotel_mobile
+- id: 299744
+  prefix: '25562'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: bb6438e9-6191-48c3-a9e0-32f0a37194a7
+  country_id: *tz
+  network_id: *halotel_mobile
+- id: 319391
+  prefix: '25565'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a981e7da-f75d-452d-a772-0e941c470e3b
+  country_id: *tz
+  network_id: *tigo_mobile
+- id: 321934
+  prefix: '25566'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 773df987-03a6-4fbd-8ab9-8a16ca872098
+  country_id: *tz
+  network_id: *smile_mobile
+- id: 334715
+  prefix: '25567'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: fce05610-76d1-4e86-9262-8eb7c5a50a53
+  country_id: *tz
+  network_id: *tigo_mobile
+- id: 336819
+  prefix: '25568'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9d9b7fdd-8738-4ee8-bd59-7dd3340caebb
+  country_id: *tz
+  network_id: *airtel_mobile
+- id: 338764
+  prefix: '25569'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 71b85987-55ed-447d-9c6e-57fdf2eab262
+  country_id: *tz
+  network_id: *airtel_mobile
+- id: 339482
+  prefix: '255'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: adf2925a-064d-4c88-afde-10da82144a78
+  country_id: *tz
+  network_id: *mobile
+- id: 352948
+  prefix: '25571'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: dc28c88a-2b67-4395-809d-2174824d75b7
+  country_id: *tz
+  network_id: *tigo_mobile
+- id: 361413
+  prefix: '25573'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 5582a939-f732-42b7-9d80-79be627322f7
+  country_id: *tz
+  network_id: *ttcl_mobile_mobile
+- id: 371670
+  prefix: '25574'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: e86557a2-40da-47d4-a1ca-66cdbc40ff30
+  country_id: *tz
+  network_id: *vodacom_mobile
+- id: 376997
+  prefix: '25575'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 01c1b0db-095b-42bb-82d8-8b865d4a82a5
+  country_id: *tz
+  network_id: *vodacom_mobile
+- id: 379098
+  prefix: '25576'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 764d1c1e-c2ec-437d-99ab-981b443b2545
+  country_id: *tz
+  network_id: *vodacom_mobile
+- id: 385903
+  prefix: '25577'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a113b76b-8caf-48f6-86cf-a1abb97c7f00
+  country_id: *tz
+  network_id: *tigo_mobile
+- id: 395769
+  prefix: '25578'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 637e8ede-4f9f-44fc-94f8-dae57e6dc3c6
+  country_id: *tz
+  network_id: *airtel_mobile
+# Country code Prefixes
+- id: 247995
+  prefix: '255'
+  number_min_length: 6
+  number_max_length: 12
+  uuid: 0d714d41-33ab-4202-9e6f-3b409b76396a
+  country_id: *tz
+  network_id: *fixed

@@ -1,0 +1,653 @@
+country_id: &il 104
+networks:
+# Fixed Networks
+- id: 3012
+  name: IL Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Mobile Networks
+- id: &hot_mobile_mobile 3394
+  name: IL Hot mobile mobile
+  uuid: fa74ed76-3312-465d-ad63-2dd486f3619b
+  type_id: 3
+- id: &pelephone_mobile 3410
+  name: IL Pelephone mobile
+  uuid: ec372646-3f52-47e5-9879-757a03cc3c04
+  type_id: 3
+- id: &we4g_mobile 3429
+  name: IL We4g mobile
+  uuid: f677dffa-21ba-430a-ae48-97692c481af7
+  type_id: 3
+- id: &cellcom_mobile 3461
+  name: IL Cellcom mobile
+  uuid: 66a2c89e-3d40-4874-aa59-f686c3959640
+  type_id: 3
+- id: &partner_mobile 3466
+  name: IL Partner mobile
+  uuid: 6299bd59-cc4e-4c53-aa7d-aba54dc6f84a
+  type_id: 3
+- id: &019_mobile_mobile 3468
+  name: IL 019 mobile mobile
+  uuid: 03d7e9b3-5618-4645-857f-2923fbd607a6
+  type_id: 3
+- id: &home_cellular_mobile 3469
+  name: IL Home cellular mobile
+  uuid: 55840ca0-3efe-47c9-ac27-b4493a12b6eb
+  type_id: 3
+- id: &free_telecom_mobile 3470
+  name: IL Free telecom mobile
+  uuid: 95707b01-807b-4283-a084-9bdfc5d6f98d
+  type_id: 3
+- id: &maskyoo_mobile 3471
+  name: IL Maskyoo mobile
+  uuid: 0631bb87-df26-4901-9ef2-2ca7fd512ea4
+  type_id: 3
+- id: &ituran_mobile 3472
+  name: IL Ituran mobile
+  uuid: 8b7f302e-8ec4-4abf-91ae-3998cf5200ca
+  type_id: 3
+- id: &annatel_mobile_mobile 3473
+  name: IL Annatel mobile mobile
+  uuid: c672d53a-faed-45ad-b83c-45e0ff8aa937
+  type_id: 3
+- id: &t2t_mobile 3474
+  name: IL T2t mobile
+  uuid: 80a4526e-2ac8-4411-8897-e17d13360d47
+  type_id: 3
+- id: &rami_levy_communications_mobile 3475
+  name: IL Rami levy communications mobile
+  uuid: 0d3102ad-b3b0-4691-be0f-b4abf3409329
+  type_id: 3
+- id: &von_waves_mobile 3476
+  name: IL Von waves mobile
+  uuid: 777410e7-0db1-4a36-8d41-c06e42c06b1a
+  type_id: 3
+- id: &cellact_mobile 3477
+  name: IL Cellact mobile
+  uuid: 00801300-37fa-4068-80e3-838a352be912
+  type_id: 3
+- id: &bynet_mobile 3478
+  name: IL Bynet mobile
+  uuid: 51f8c74e-ccfa-414f-88e2-e2c561833240
+  type_id: 3
+- id: &youphone_mobile 3479
+  name: IL Youphone mobile
+  uuid: dc0a741c-aa3a-4999-ab4a-bfcdab1eb212
+  type_id: 3
+- id: &mobile 3013
+  name: IL Mobile
+  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  type_id: 3
+- id: &beezz_mobile 3485
+  name: IL Beezz mobile
+  uuid: bf2b59a1-7b49-43bd-b439-4d04be6dce5d
+  type_id: 3
+- id: &golan_telecom_mobile 4687
+  name: IL Golan telecom mobile
+  uuid: 2aabce25-8059-4656-aa08-fea2492e7fc4
+  type_id: 3
+# Country code Networks
+- id: &fixed 3012
+  name: IL Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Supplementary services Networks
+- id: &special_services 3075
+  name: IL Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &televoting_services 3146
+  name: IL Televoting services
+  uuid: e4535230-d04d-466f-9a0c-2249a5cf1705
+  type_id: 14
+- id: &hospital_information_center 4433
+  name: IL Hospital information center
+  uuid: eb641451-3662-4704-bd8d-e726e51a316b
+  type_id: 14
+- id: &freephone_services 3382
+  name: IL Freephone services
+  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+  type_id: 14
+- id: &discounted_calls 4456
+  name: IL Discounted calls
+  uuid: c25fb265-362d-4831-b92e-fed1d248630c
+  type_id: 14
+- id: &premium_rate_services 3232
+  name: IL Premium rate services
+  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+  type_id: 14
+- id: &voice_mail 3489
+  name: IL Voice mail
+  uuid: 4455cb12-95b1-4e3d-ba0e-a48642d683df
+  type_id: 14
+- id: &fax_mail 4634
+  name: IL Fax mail
+  uuid: 87613a1e-31d7-49db-89d0-551acf671b03
+  type_id: 14
+- id: &interactive_voice_mail 4641
+  name: IL Interactive voice mail
+  uuid: 659f40b0-7977-4fe6-b615-bc5c558f5ff3
+  type_id: 14
+network_prefixes:
+# Fixed Prefixes
+- id: 40821
+  prefix: '9723'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 2afc8cef-9039-4842-8ccb-fc95c15cef59
+  country_id: *il
+  network_id: *fixed
+- id: 86560
+  prefix: '9724'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 41293f5c-696e-42a0-9e12-f2af94bfa36a
+  country_id: *il
+  network_id: *fixed
+- id: 257263
+  prefix: '9722'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 280dd1a6-d8be-4fdb-87bf-29a468d77632
+  country_id: *il
+  network_id: *fixed
+- id: 392299
+  prefix: '9728'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: b42af04b-67a0-45ea-ac89-7a99d32534ab
+  country_id: *il
+  network_id: *fixed
+- id: 400546
+  prefix: '972'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: f0a8c697-61c7-43d2-a9c9-05973bcd34ab
+  country_id: *il
+  network_id: *fixed
+- id: 446485
+  prefix: '9729'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 2efbc864-e259-47bc-b48f-2f08c7841f0e
+  country_id: *il
+  network_id: *fixed
+# Mobile Prefixes
+- id: 141509
+  prefix: '97253'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a02207a6-67ea-42d8-9079-b0782992ece5
+  country_id: *il
+  network_id: *hot_mobile_mobile
+- id: 146209
+  prefix: '97250'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 94e93f52-7e4d-42f6-81c0-8d443e666df2
+  country_id: *il
+  network_id: *pelephone_mobile
+- id: 146223
+  prefix: '972501'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: c8d697ca-672c-4ae6-b7d9-f26e1f3e963c
+  country_id: *il
+  network_id: *pelephone_mobile
+- id: 149996
+  prefix: '97251'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cc9bd140-4039-4eb5-806d-46ed61da72f8
+  country_id: *il
+  network_id: *we4g_mobile
+- id: 154202
+  prefix: '97252'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 3bdba2b3-b5b9-4213-97ec-f7e09cb6f1c6
+  country_id: *il
+  network_id: *cellcom_mobile
+- id: 154221
+  prefix: '972521'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: e96a07b5-e237-4826-ba7f-a58f3eec5a77
+  country_id: *il
+  network_id: *cellcom_mobile
+- id: 155675
+  prefix: '97254'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f0beaa49-b858-42ac-be5d-ff0fd801068b
+  country_id: *il
+  network_id: *partner_mobile
+- id: 155696
+  prefix: '972541'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: bd3c7a0f-2f0f-4fa2-bd22-484fecee11f7
+  country_id: *il
+  network_id: *partner_mobile
+- id: 157333
+  prefix: '9725519'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 1681c8f7-766d-4dc5-ae6b-7830e3aeaed7
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 157516
+  prefix: '9725522'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 5d396e8d-4db2-471f-ad67-365df3c6e70c
+  country_id: *il
+  network_id: *home_cellular_mobile
+- id: 157615
+  prefix: '9725523'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: dbb34344-8b6f-411b-b01a-cb9e3930dbc6
+  country_id: *il
+  network_id: *home_cellular_mobile
+- id: 157670
+  prefix: '9725524'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 350d1f96-c078-4c76-adde-51c0c45919f2
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 157797
+  prefix: '9725525'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 916e2c93-28bc-4522-ab8e-7fdc0462686f
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 157864
+  prefix: '9725526'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: a62ccc66-1388-40c7-8e66-63974ee521dd
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 157941
+  prefix: '9725527'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 74d84084-a85d-4e4d-a324-6e07d1839c61
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 158010
+  prefix: '9725528'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: bb4eccb5-f4ab-4cd9-be2b-8618c7378739
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 158147
+  prefix: '9725529'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: e842f819-8765-40d6-aac7-3b27b587085e
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 158329
+  prefix: '9725532'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: bd2dc452-3966-4206-8744-dc245287fe5c
+  country_id: *il
+  network_id: *free_telecom_mobile
+- id: 158380
+  prefix: '9725533'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 9a6e7ea3-e3c6-4ad7-a477-9cf025d76484
+  country_id: *il
+  network_id: *free_telecom_mobile
+- id: 158790
+  prefix: '9725543'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 926679c9-46fc-487c-b749-0a71d70b9a2d
+  country_id: *il
+  network_id: *maskyoo_mobile
+- id: 158860
+  prefix: '9725544'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: f2e34784-49c7-41c2-a863-8a5026e264d9
+  country_id: *il
+  network_id: *ituran_mobile
+- id: 158895
+  prefix: '9725545'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: efa4fdcd-e1eb-43a6-a777-ba4ef8dd61bf
+  country_id: *il
+  network_id: *ituran_mobile
+- id: 159066
+  prefix: '9725550'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 49cdc88b-1d64-4e9b-b6a7-0d4fa9af46ca
+  country_id: *il
+  network_id: *annatel_mobile_mobile
+- id: 159151
+  prefix: '9725551'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 30d51e8b-5e8a-49c1-839a-bd75cfe29ff8
+  country_id: *il
+  network_id: *annatel_mobile_mobile
+- id: 159264
+  prefix: '9725554'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 6051d28f-d6d3-4e29-8ab4-c275f88eeec2
+  country_id: *il
+  network_id: *t2t_mobile
+- id: 159334
+  prefix: '9725555'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 25fdc1bb-ce97-493a-b8b5-fd36033a7ca5
+  country_id: *il
+  network_id: *rami_levy_communications_mobile
+- id: 159339
+  prefix: '9725556'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: da63d2c6-17f4-4870-bd73-8b1f388955c9
+  country_id: *il
+  network_id: *rami_levy_communications_mobile
+- id: 159354
+  prefix: '9725558'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: af102e6c-aa0e-4931-801e-c2c7f9166854
+  country_id: *il
+  network_id: *von_waves_mobile
+- id: 159411
+  prefix: '9725559'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 7b818e6f-9210-4b7a-9cd6-f0f2dcbf93e6
+  country_id: *il
+  network_id: *von_waves_mobile
+- id: 159744
+  prefix: '9725566'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: d1e0adea-1e9f-436f-a1ac-14a49b604941
+  country_id: *il
+  network_id: *rami_levy_communications_mobile
+- id: 159820
+  prefix: '9725567'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 971c41ea-3c78-42b8-b00c-8ebcfbe8c85d
+  country_id: *il
+  network_id: *rami_levy_communications_mobile
+- id: 159886
+  prefix: '9725568'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 02b9605a-8126-49e1-a2f8-4a2cbb45d704
+  country_id: *il
+  network_id: *rami_levy_communications_mobile
+- id: 159959
+  prefix: '9725570'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 3439f892-2417-49ca-b373-2aff265d1bfb
+  country_id: *il
+  network_id: *cellact_mobile
+- id: 159995
+  prefix: '9725571'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: d104694e-484b-49ba-ae8e-7e4029906701
+  country_id: *il
+  network_id: *cellact_mobile
+- id: 160047
+  prefix: '9725572'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 56788a2b-869f-4e61-ae67-1ec4ec68db14
+  country_id: *il
+  network_id: *cellact_mobile
+- id: 160144
+  prefix: '9725576'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: c7a28468-ceb9-4f89-a5f8-4096bb4a38b7
+  country_id: *il
+  network_id: *bynet_mobile
+- id: 160234
+  prefix: '9725577'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 58e0cf62-bcd3-4493-ad4d-c80546373a04
+  country_id: *il
+  network_id: *bynet_mobile
+- id: 160881
+  prefix: '9725587'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 1126700f-2c8b-4e15-ac5a-15459119a0b8
+  country_id: *il
+  network_id: *youphone_mobile
+- id: 160980
+  prefix: '9725588'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: caa18e68-3e5d-4464-9024-3d55e1f8d884
+  country_id: *il
+  network_id: *youphone_mobile
+- id: 161041
+  prefix: '9725589'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: ded7d7cd-8cde-4d74-ad50-bdb35b6a6f9f
+  country_id: *il
+  network_id: *youphone_mobile
+- id: 161077
+  prefix: '9725591'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: b8ad58e5-facb-4a30-9927-1ab6908dfbd7
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161131
+  prefix: '9725592'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 121b1ae3-e4b5-4035-ae53-c7fde4c8d85c
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161143
+  prefix: '9725593'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 85f30add-e450-43a1-88a7-b00f299a55e9
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161158
+  prefix: '9725594'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 04236148-ee2a-4561-8062-b329706979e8
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161167
+  prefix: '9725595'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 491fb7f3-3a68-4903-b441-acc5eb99e037
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161172
+  prefix: '9725596'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 63bece39-1758-4f7b-84da-30ba7ccb06c7
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161173
+  prefix: '9725597'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: cc4c4517-9613-4e89-864c-13b1884d8232
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161180
+  prefix: '9725598'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 28a50105-a88c-467b-a624-d627f5fa1c40
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161260
+  prefix: '9725599'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 5f14fb19-074e-47d1-9dd2-e47317e6899a
+  country_id: *il
+  network_id: *019_mobile_mobile
+- id: 161645
+  prefix: '97255'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 1a0bff8e-acc5-42c7-bc44-0d57a94ccd7a
+  country_id: *il
+  network_id: *mobile
+- id: 161667
+  prefix: '972551'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 5cce1730-3c88-4057-b1b6-13b7701d5a89
+  country_id: *il
+  network_id: *beezz_mobile
+- id: 275294
+  prefix: '97256'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 6a636ed6-e195-4430-a656-fdc283306051
+  country_id: *il
+  network_id: *mobile
+- id: 276605
+  prefix: '972'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 8503ad27-aba5-49c2-943c-4025b6cf8433
+  country_id: *il
+  network_id: *mobile
+- id: 285712
+  prefix: '97258'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 235143c0-d1e8-4d54-b90f-c9a086803aa2
+  country_id: *il
+  network_id: *golan_telecom_mobile
+- id: 289419
+  prefix: '97259'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ef887932-03a0-40d8-8719-1f99af977d13
+  country_id: *il
+  network_id: *mobile
+# Country code Prefixes
+- id: 247894
+  prefix: '972'
+  number_min_length: 6
+  number_max_length: 12
+  uuid: 5fc409ed-5612-4c69-8bbf-8f3073690c58
+  country_id: *il
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 248301
+  prefix: '9721'
+  number_min_length: 7
+  number_max_length: 8
+  uuid: 5a315bb5-4e18-4935-aed4-cb37feea7bf1
+  country_id: *il
+  network_id: *special_services
+- id: 255291
+  prefix: '9721200'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 59e792df-211d-44e5-a23b-4490605db1d1
+  country_id: *il
+  network_id: *televoting_services
+- id: 255304
+  prefix: '9721212'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 01959b51-3617-4fc5-8b96-6e6a31fcc41f
+  country_id: *il
+  network_id: *televoting_services
+- id: 255371
+  prefix: '9721255'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 422a6527-e2bc-409a-900e-f3909f770d07
+  country_id: *il
+  network_id: *hospital_information_center
+- id: 256730
+  prefix: '9721800'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: fbefa8f5-c5ac-42ad-8acd-72605c3c593d
+  country_id: *il
+  network_id: *freephone_services
+- id: 256736
+  prefix: '9721801'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 54445f7a-c90e-408b-8df6-198574c6f757
+  country_id: *il
+  network_id: *freephone_services
+- id: 256743
+  prefix: '9721809'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: fd76a45c-ef2b-491f-8b04-8e72e3825f17
+  country_id: *il
+  network_id: *discounted_calls
+- id: 257083
+  prefix: '972'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: e2cc8bef-0466-4bc9-9660-4f220651ec6d
+  country_id: *il
+  network_id: *premium_rate_services
+- id: 262994
+  prefix: '972151'
+  number_min_length: 14
+  number_max_length: 15
+  uuid: 604053e7-da7b-4a6d-b94b-ef9daa6376a8
+  country_id: *il
+  network_id: *voice_mail
+- id: 263057
+  prefix: '972153'
+  number_min_length: 14
+  number_max_length: 15
+  uuid: e332c517-a66e-47ee-a91e-cca4dc382f33
+  country_id: *il
+  network_id: *fax_mail
+- id: 263320
+  prefix: '9721599'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: ed2b7ade-6b2a-4a45-b81a-2a493ce6d429
+  country_id: *il
+  network_id: *interactive_voice_mail
+- id: 263925
+  prefix: '9721700'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 9dfff70d-c254-49a5-acef-728a8244c829
+  country_id: *il
+  network_id: *discounted_calls

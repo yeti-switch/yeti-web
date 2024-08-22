@@ -1,0 +1,108 @@
+country_id: &wf 234
+networks:
+# Mobile Networks
+- id: &manuia_mobile 3865
+  name: WF Manuia mobile
+  uuid: e1e54d9a-3685-430f-b8dd-7ac33e632777
+  type_id: 3
+# Country code Networks
+- id: 3012
+  name: WF Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Supplementary services Networks
+- id: &special_services 3075
+  name: WF Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &grand_danger_service 4630
+  name: WF Grand danger service
+  uuid: caf0ddf4-c645-4432-ac51-e1065476d114
+  type_id: 14
+# Fixed Networks
+- id: &fixed 3012
+  name: WF Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+network_prefixes:
+# Mobile Prefixes
+- id: 245288
+  prefix: '68140'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 5e5af349-cebd-4795-92c5-ccc4a3a3c248
+  country_id: *wf
+  network_id: *manuia_mobile
+- id: 249292
+  prefix: '681499'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 1455399b-1d23-4288-8dc1-bb9e7b9eff49
+  country_id: *wf
+  network_id: *manuia_mobile
+- id: 259991
+  prefix: '68180'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 3cd1a4ba-c9c1-4505-b7a0-f050faf2ba4a
+  country_id: *wf
+  network_id: *manuia_mobile
+- id: 260301
+  prefix: '68182'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 3f0aa154-ec24-4f86-a0d7-879a23a63f78
+  country_id: *wf
+  network_id: *manuia_mobile
+- id: 260417
+  prefix: '68183'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 8c6e0b15-5f2d-4a0b-81df-264c24e464c1
+  country_id: *wf
+  network_id: *manuia_mobile
+# Country code Prefixes
+- id: 248004
+  prefix: '681'
+  number_min_length: 5
+  number_max_length: 9
+  uuid: 073d4f7e-af1f-46c2-af57-c134e6cb25d8
+  country_id: *wf
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 248399
+  prefix: '6811'
+  number_min_length: 6
+  number_max_length: 8
+  uuid: 8915b017-18d3-4f4c-b903-559e0fbbfd1a
+  country_id: *wf
+  network_id: *special_services
+- id: 262255
+  prefix: '6819860'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: f1ab3192-d351-440a-9f4d-4e948322bd25
+  country_id: *wf
+  network_id: *grand_danger_service
+# Fixed Prefixes
+- id: 249366
+  prefix: '68150'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: c5f2a0df-7700-4e90-9421-b294aa26532d
+  country_id: *wf
+  network_id: *fixed
+- id: 251552
+  prefix: '68172'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 19d6cdf4-1ed1-419b-8d83-a8c08229c876
+  country_id: *wf
+  network_id: *fixed
+- id: 258036
+  prefix: '68168'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: f4b0c795-3209-427c-bd6d-b14cc8f707ec
+  country_id: *wf
+  network_id: *fixed

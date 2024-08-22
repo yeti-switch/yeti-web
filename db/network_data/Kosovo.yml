@@ -1,0 +1,342 @@
+country_id: &xk 273
+networks:
+# Fixed Networks
+- id: 3012
+  name: XK Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Mobile Networks
+- id: &ipko_mobile 3304
+  name: XK Ipko mobile
+  uuid: 913f77d2-1948-4026-ab95-c7604c75a474
+  type_id: 3
+- id: &d3_mobile_mobile 3305
+  name: XK D3 mobile mobile
+  uuid: 3c18be87-34cb-420e-a748-c4dc2d588ba8
+  type_id: 3
+- id: &vala_mobile 3311
+  name: XK Vala mobile
+  uuid: 9975c748-2d5e-4f13-8694-b516a9e49750
+  type_id: 3
+- id: &mts_mobile 3363
+  name: XK Mts mobile
+  uuid: 864aad2e-51aa-457d-a280-a2c7cffa7c5a
+  type_id: 3
+# Supplementary services Networks
+- id: &premium_rate_services_(adults_entertainment) 3586
+  name: XK Premium rate services (adults entertainment)
+  uuid: 902a6920-5938-46b3-8316-11450ffefb65
+  type_id: 14
+- id: &sms/mms_services_(adults_entertainment) 3915
+  name: XK Sms/mms services (adults entertainment)
+  uuid: d0e99c94-c724-4db3-a14e-af2f2beb546f
+  type_id: 14
+- id: &special_services 3075
+  name: XK Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &emergency_services 3662
+  name: XK Emergency services
+  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+  type_id: 14
+- id: &sms/mms_services 3740
+  name: XK Sms/mms services
+  uuid: 5cd79a08-7466-4e6f-bd77-63390d753421
+  type_id: 14
+- id: &sms/mms_services_(free) 3773
+  name: XK Sms/mms services (free)
+  uuid: 7d3943d3-6df0-43e0-843e-6408c4b33e40
+  type_id: 14
+- id: &sms/mms_services_(standard_rate) 4119
+  name: XK Sms/mms services (standard rate)
+  uuid: a2c16aa1-c5f5-45b1-bfea-5c21faae2e13
+  type_id: 14
+- id: &sms/mms_services_(medium_rate) 4126
+  name: XK Sms/mms services (medium rate)
+  uuid: fafc97b8-ade4-4944-8819-2cbf2bf0e09b
+  type_id: 14
+- id: &sms/mms_services_(high_rate) 4131
+  name: XK Sms/mms services (high rate)
+  uuid: 864c84cd-ed60-4c0b-94e7-ebe789fdc273
+  type_id: 14
+- id: &freephone_services 3382
+  name: XK Freephone services
+  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+  type_id: 14
+- id: &shared_cost_services 3141
+  name: XK Shared cost services
+  uuid: fcb0a143-e4dd-46b3-a904-2da86f75c2f4
+  type_id: 14
+- id: &premium_rate_services 3232
+  name: XK Premium rate services
+  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+  type_id: 14
+# Country code Networks
+- id: &fixed 3012
+  name: XK Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 26804
+  prefix: '383280'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: cec84be2-c0c6-4013-be08-41a12b2e0bab
+  country_id: *xk
+  network_id: *fixed
+- id: 38358
+  prefix: '38328'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 054fb29b-8566-45fc-adad-d2b13d9de78e
+  country_id: *xk
+  network_id: *fixed
+- id: 49492
+  prefix: '38329'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 333a3f6e-e57b-4f19-a785-7c4181537936
+  country_id: *xk
+  network_id: *fixed
+- id: 49500
+  prefix: '383290'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: 52414df5-ac79-4115-b526-1800f40c3fa8
+  country_id: *xk
+  network_id: *fixed
+- id: 83724
+  prefix: '38338'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 528f1bf3-b003-4b46-ae16-2fb8a37b6e39
+  country_id: *xk
+  network_id: *fixed
+- id: 84948
+  prefix: '38339'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: e0619319-7592-4f3a-80a9-d1b00fca8352
+  country_id: *xk
+  network_id: *fixed
+- id: 84959
+  prefix: '383390'
+  number_min_length: 11
+  number_max_length: 12
+  uuid: d9e559fb-9958-437c-9d04-0afc86934c69
+  country_id: *xk
+  network_id: *fixed
+- id: 392292
+  prefix: '383'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 84bb6994-a0b4-4cd1-abe1-b5577ac0495f
+  country_id: *xk
+  network_id: *fixed
+# Mobile Prefixes
+- id: 107555
+  prefix: '38343'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: de4527f6-e0b4-4058-98a2-1c680ea687a9
+  country_id: *xk
+  network_id: *ipko_mobile
+- id: 107564
+  prefix: '383432'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ba27937f-a540-4916-ac12-353f29fe6006
+  country_id: *xk
+  network_id: *d3_mobile_mobile
+- id: 107579
+  prefix: '383433'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 11ce5d64-524f-4e85-9bc0-25e962fb0c98
+  country_id: *xk
+  network_id: *d3_mobile_mobile
+- id: 107582
+  prefix: '383434'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 49381cf0-6f5f-4912-8894-36c576069677
+  country_id: *xk
+  network_id: *d3_mobile_mobile
+- id: 110861
+  prefix: '38344'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 14a9d5e5-b0a9-4281-a043-dba042f9bbcc
+  country_id: *xk
+  network_id: *vala_mobile
+- id: 124305
+  prefix: '38345'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 6dd02802-3253-4c71-96b1-1d06d1ea82c6
+  country_id: *xk
+  network_id: *vala_mobile
+- id: 126383
+  prefix: '38346'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: ab79d2c1-8641-4b30-96a1-2449c37cf7e3
+  country_id: *xk
+  network_id: *vala_mobile
+- id: 128320
+  prefix: '3834710'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 4270d19d-5cf9-4778-9909-d339ee80ebf8
+  country_id: *xk
+  network_id: *mts_mobile
+- id: 128321
+  prefix: '3834711'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 7adaeecc-d1e3-431b-aaa2-31fee4bd89fa
+  country_id: *xk
+  network_id: *mts_mobile
+- id: 128322
+  prefix: '3834712'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 689fd784-e2c3-4933-ba74-b3cdca30de2c
+  country_id: *xk
+  network_id: *mts_mobile
+- id: 128323
+  prefix: '3834713'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: d0306b99-759d-447e-96a1-08a7f7f3dd50
+  country_id: *xk
+  network_id: *mts_mobile
+- id: 128324
+  prefix: '3834714'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 337827d2-5bc9-487e-a413-b8aec10237fc
+  country_id: *xk
+  network_id: *mts_mobile
+- id: 128325
+  prefix: '3834715'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 196b813e-1c66-4f87-b5f5-3d2994538310
+  country_id: *xk
+  network_id: *mts_mobile
+- id: 131732
+  prefix: '38348'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 0f4d3bd3-fd6a-4001-97b8-32f2b24cfc66
+  country_id: *xk
+  network_id: *ipko_mobile
+- id: 135182
+  prefix: '38349'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 41f3d590-2af9-49cd-b155-54b2bcddaa92
+  country_id: *xk
+  network_id: *ipko_mobile
+# Supplementary services Prefixes
+- id: 221526
+  prefix: '383960'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 0bb898c5-c623-4df5-9267-938fc006e64b
+  country_id: *xk
+  network_id: *premium_rate_services_(adults_entertainment)
+- id: 246564
+  prefix: '38359'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: ea1347b9-14a4-4499-8ad1-eafc898351b5
+  country_id: *xk
+  network_id: *sms/mms_services_(adults_entertainment)
+- id: 248401
+  prefix: '3831'
+  number_min_length: 7
+  number_max_length: 9
+  uuid: 6320d3f6-7e73-4f82-9d22-1043d71a09db
+  country_id: *xk
+  network_id: *special_services
+- id: 248509
+  prefix: '383112'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: dfe0ec95-394a-45f9-8ad0-6696a2d93542
+  country_id: *xk
+  network_id: *emergency_services
+- id: 249347
+  prefix: '3835'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: f2c50a00-c9ff-4568-9b08-76b5b6c2e96e
+  country_id: *xk
+  network_id: *sms/mms_services
+- id: 249367
+  prefix: '38350'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 16d1661f-6474-4972-b46f-2a7c07e11c7d
+  country_id: *xk
+  network_id: *sms/mms_services_(free)
+- id: 249444
+  prefix: '38351'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 4020cc1a-1084-4b74-9d82-e5686397a172
+  country_id: *xk
+  network_id: *sms/mms_services_(standard_rate)
+- id: 249672
+  prefix: '38353'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: d079da00-18ca-4bfd-bec0-1890bb201914
+  country_id: *xk
+  network_id: *sms/mms_services_(medium_rate)
+- id: 249864
+  prefix: '38355'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 8e01f267-d91f-4663-8810-f46d19ea4499
+  country_id: *xk
+  network_id: *sms/mms_services_(high_rate)
+- id: 400688
+  prefix: '383800'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 5c46806c-c107-4700-b202-6d3c775c3b1f
+  country_id: *xk
+  network_id: *freephone_services
+- id: 400713
+  prefix: '383801'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 0249ae8c-5934-479b-b2c8-c8bedebb49a0
+  country_id: *xk
+  network_id: *shared_cost_services
+- id: 401497
+  prefix: '383802'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: bb01dfb8-ea81-460c-ad1d-7e1950f8bb33
+  country_id: *xk
+  network_id: *freephone_services
+- id: 453105
+  prefix: '383900'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 6b029a60-268e-4dd3-999a-f6823cec19f3
+  country_id: *xk
+  network_id: *premium_rate_services
+# Country code Prefixes
+- id: 248006
+  prefix: '383'
+  number_min_length: 6
+  number_max_length: 9
+  uuid: c28cd9da-7846-4ae9-9553-f8847e0b4f1f
+  country_id: *xk
+  network_id: *fixed

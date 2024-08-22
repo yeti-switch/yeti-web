@@ -1,0 +1,277 @@
+country_id: &me 262
+networks:
+# Fixed Networks
+- id: 3012
+  name: ME Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Supplementary services Networks
+- id: &premium_rate_services 3232
+  name: ME Premium rate services
+  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+  type_id: 14
+- id: &special_services 3075
+  name: ME Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &social_value_services 3680
+  name: ME Social value services
+  uuid: f7476422-0f68-41a9-900e-a45db930cc69
+  type_id: 14
+- id: &directory_enquiry_services 3100
+  name: ME Directory enquiry services
+  uuid: eea44042-6a15-4cfe-b429-38d1a26b2af4
+  type_id: 14
+- id: &unique_number_services 4593
+  name: ME Unique number services
+  uuid: 359f2d60-376d-4644-b4c6-c1bd53bd6552
+  type_id: 14
+- id: &machine_to_machine_(m2m)_services 3131
+  name: ME Machine to machine (m2m) services
+  uuid: 99239e22-826d-4447-8981-39539f3caf62
+  type_id: 14
+- id: &access_to_business_customers 4923
+  name: ME Access to business customers
+  uuid: 82bb999d-eefe-46d2-ae28-4e9249adecad
+  type_id: 14
+- id: &freephone_services 3382
+  name: ME Freephone services
+  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+  type_id: 14
+- id: &shared_cost_services 3141
+  name: ME Shared cost services
+  uuid: fcb0a143-e4dd-46b3-a904-2da86f75c2f4
+  type_id: 14
+# Country code Networks
+- id: &fixed 3012
+  name: ME Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Mobile Networks
+- id: &m:tel_mobile 4447
+  name: ME M:tel mobile
+  uuid: c2a72c9b-2ba0-4262-a321-96a94c9f56a1
+  type_id: 3
+- id: &one_mobile 3051
+  name: ME One mobile
+  uuid: 5712963d-5f11-400c-9d09-1ec96281278e
+  type_id: 3
+- id: &telekom_mobile 3130
+  name: ME Telekom mobile
+  uuid: fac6bdc2-9f05-447b-aed2-e4063024de60
+  type_id: 3
+network_prefixes:
+# Fixed Prefixes
+- id: 42247
+  prefix: '38230'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: df76117d-78c1-4cc0-ae51-6b5f657fd4ab
+  country_id: *me
+  network_id: *fixed
+- id: 53111
+  prefix: '38231'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: fb6574e8-1698-436c-92a6-431c5238a989
+  country_id: *me
+  network_id: *fixed
+- id: 67155
+  prefix: '38232'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: ee30b966-20c9-408f-aab3-b02eb27f81d7
+  country_id: *me
+  network_id: *fixed
+- id: 68014
+  prefix: '38233'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: f63b0a97-9e75-4a2d-b4b8-3ea67ebc84de
+  country_id: *me
+  network_id: *fixed
+- id: 87008
+  prefix: '38240'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: a75112e0-1e03-412b-bd41-fcfd7b82b612
+  country_id: *me
+  network_id: *fixed
+- id: 91022
+  prefix: '38241'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 57e20dc5-38f9-44ae-ad41-91fce479418b
+  country_id: *me
+  network_id: *fixed
+- id: 146213
+  prefix: '38250'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 13fc7da3-8ea5-4504-a054-3d8685df6853
+  country_id: *me
+  network_id: *fixed
+- id: 150002
+  prefix: '38251'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 2c52e949-4b3d-4e2a-808e-b2b22560b91b
+  country_id: *me
+  network_id: *fixed
+- id: 154209
+  prefix: '38252'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: cecc5359-0d37-4909-84d9-f18e1c5de23b
+  country_id: *me
+  network_id: *fixed
+- id: 257680
+  prefix: '38220'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: c942b960-067d-4c13-aca2-8e109a6bd4e6
+  country_id: *me
+  network_id: *fixed
+- id: 395763
+  prefix: '38278'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 5cf09a29-c9c7-4428-b0f6-1ced94868e32
+  country_id: *me
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 212567
+  prefix: '38294'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 670ef1ea-91dd-48bb-8dfe-ac54b9c0ef1d
+  country_id: *me
+  network_id: *premium_rate_services
+- id: 218096
+  prefix: '38295'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 1ce47d5c-6b16-46bd-8337-97a248a99167
+  country_id: *me
+  network_id: *premium_rate_services
+- id: 248329
+  prefix: '3821'
+  number_min_length: 7
+  number_max_length: 9
+  uuid: ddd9c92c-3355-4d33-b778-6717b45e9e05
+  country_id: *me
+  network_id: *special_services
+- id: 248562
+  prefix: '382116'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 610d86f4-a23e-465f-b2f8-d73e4ddbe3c4
+  country_id: *me
+  network_id: *social_value_services
+- id: 248610
+  prefix: '382118'
+  number_min_length: 10
+  number_max_length: 11
+  uuid: 1cdedaac-9e8c-4526-9607-19b0ecf04c8a
+  country_id: *me
+  network_id: *directory_enquiry_services
+- id: 340394
+  prefix: '38270'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 594e030b-b048-47cc-8253-5d2e6bc3ce9b
+  country_id: *me
+  network_id: *unique_number_services
+- id: 352937
+  prefix: '38271'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b24902ec-6b0b-4912-8f79-0eaa352c7ec9
+  country_id: *me
+  network_id: *machine_to_machine_(m2m)_services
+- id: 385894
+  prefix: '38277'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 9f6f6b66-abe4-4144-984f-c2d46cc14346
+  country_id: *me
+  network_id: *access_to_business_customers
+- id: 392572
+  prefix: '38280'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: c863d404-86e2-4545-9414-0f0c39b60cbc
+  country_id: *me
+  network_id: *freephone_services
+- id: 412231
+  prefix: '38283'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: a5700b5b-2e37-4b98-bedb-5464df1476ec
+  country_id: *me
+  network_id: *shared_cost_services
+# Country code Prefixes
+- id: 247926
+  prefix: '382'
+  number_min_length: 6
+  number_max_length: 10
+  uuid: bae09f64-cc55-493d-ac33-6a63ab678b82
+  country_id: *me
+  network_id: *fixed
+# Mobile Prefixes
+- id: 277863
+  prefix: '38260'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: c4d9ddbb-b6e9-4aa4-a0cf-884bcd3eb1cc
+  country_id: *me
+  network_id: *m:tel_mobile
+- id: 305416
+  prefix: '38263'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 1592d2a1-5a65-4581-9ca7-1ee5768e1d74
+  country_id: *me
+  network_id: *one_mobile
+- id: 321922
+  prefix: '38266'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: a9e7fcbc-abfd-4157-a30f-af0da41ea860
+  country_id: *me
+  network_id: *telekom_mobile
+- id: 334706
+  prefix: '38267'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 50f63c2d-d883-498a-abfa-0463ff1a0300
+  country_id: *me
+  network_id: *telekom_mobile
+- id: 336811
+  prefix: '38268'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 71174675-1828-49f2-a451-9d84bdbdc3b0
+  country_id: *me
+  network_id: *m:tel_mobile
+- id: 338758
+  prefix: '38269'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 75d553b7-feaf-4f37-8b44-1338b1de43ac
+  country_id: *me
+  network_id: *one_mobile
+- id: 353060
+  prefix: '38271670'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: b206386e-f140-4d24-ade4-576deee3fe63
+  country_id: *me
+  network_id: *telekom_mobile
+- id: 353061
+  prefix: '38271690'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 2bba1d9f-55e0-418e-ae96-4d5d47b76490
+  country_id: *me
+  network_id: *one_mobile

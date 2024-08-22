@@ -1,0 +1,125 @@
+country_id: &tv 220
+networks:
+# Fixed Networks
+- id: 3012
+  name: TV Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Country code Networks
+- id: &fixed 3012
+  name: TV Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Supplementary services Networks
+- id: &special_services 3075
+  name: TV Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+# Mobile Networks
+- id: &tuvalu_telecom_mobile 4169
+  name: TV Tuvalu telecom mobile
+  uuid: 121cd5e0-eeaa-4638-91e1-6d427d2cfab0
+  type_id: 3
+network_prefixes:
+# Fixed Prefixes
+- id: 243022
+  prefix: '68820'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: a95b8368-bb98-4167-a015-f26f9808498e
+  country_id: *tv
+  network_id: *fixed
+- id: 243301
+  prefix: '68822'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 144ab996-e144-4784-8ac8-e07d7cd6f7f7
+  country_id: *tv
+  network_id: *fixed
+- id: 243495
+  prefix: '68823'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 5cc1f50e-e039-4627-959a-139e4f4d23d7
+  country_id: *tv
+  network_id: *fixed
+- id: 243686
+  prefix: '68824'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: cb2befcf-dbc5-477f-aaa9-ff0ae7036749
+  country_id: *tv
+  network_id: *fixed
+- id: 243835
+  prefix: '68825'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 1d5f7cc4-59ae-4216-8493-9b219e35d641
+  country_id: *tv
+  network_id: *fixed
+- id: 244043
+  prefix: '68826'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: ccf4acb4-c999-4371-bcd5-451b0adc796e
+  country_id: *tv
+  network_id: *fixed
+- id: 244186
+  prefix: '68827'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 89656917-e825-462b-9cca-e82cb5289831
+  country_id: *tv
+  network_id: *fixed
+- id: 244321
+  prefix: '68828'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 89ea5ae1-562f-4d90-b23f-68d01afbd88f
+  country_id: *tv
+  network_id: *fixed
+- id: 244400
+  prefix: '68829'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 7f8f7249-514c-4942-8a6a-bf535fe33ea3
+  country_id: *tv
+  network_id: *fixed
+# Country code Prefixes
+- id: 247993
+  prefix: '688'
+  number_min_length: 6
+  number_max_length: 10
+  uuid: 8425ead5-d574-4aea-9010-68cdb1322271
+  country_id: *tv
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 248390
+  prefix: '6881'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 03d84af7-ddf8-460a-b61f-7db3ce695d33
+  country_id: *tv
+  network_id: *special_services
+# Mobile Prefixes
+- id: 251464
+  prefix: '68871'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a156b12f-644f-4c0f-bd74-62f47c8f1167
+  country_id: *tv
+  network_id: *tuvalu_telecom_mobile
+- id: 253167
+  prefix: '68890'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 213f889a-600a-4554-a6d5-dc8fa64b6e5b
+  country_id: *tv
+  network_id: *tuvalu_telecom_mobile
+- id: 258659
+  prefix: '68870'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ac3bd583-19aa-440f-b2d4-f1d91f2598d9
+  country_id: *tv
+  network_id: *tuvalu_telecom_mobile

@@ -1,0 +1,218 @@
+country_id: &ms 143
+networks:
+# Country code Networks
+- id: 3012
+  name: MS Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Supplementary services Networks
+- id: &internal_dispatch 4746
+  name: MS Internal dispatch
+  uuid: 16172e65-ce70-4a32-80c5-7fb18646399d
+  type_id: 14
+- id: &audiotext 3119
+  name: MS Audiotext
+  uuid: 97b5ce3d-e3ac-4266-814d-eab2066675ce
+  type_id: 14
+- id: &audiotext_(usa) 4747
+  name: MS Audiotext (usa)
+  uuid: 6e8c8b60-aaad-4c44-8995-85a424d769bd
+  type_id: 14
+- id: &emergency_services 3662
+  name: MS Emergency services
+  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+  type_id: 14
+# Fixed Networks
+- id: &fixed 3012
+  name: MS Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Mobile Networks
+- id: &digicel_mobile 3097
+  name: MS Digicel mobile
+  uuid: a497ee4a-0894-4491-a6e9-4e6c07ec03b7
+  type_id: 3
+- id: &flow_mobile 3096
+  name: MS Flow mobile
+  uuid: 778d79c9-d0ca-45a6-a580-1145a4605b1d
+  type_id: 3
+network_prefixes:
+# Country code Prefixes
+- id: 323642
+  prefix: '1664'
+  number_min_length: 7
+  number_max_length: 11
+  uuid: ee26382a-e045-4d7f-94a1-46a2652a366f
+  country_id: *ms
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 323674
+  prefix: '1664114'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 52d1e4ce-66a7-459b-9340-62653c3ac225
+  country_id: *ms
+  network_id: *internal_dispatch
+- id: 324120
+  prefix: '1664410'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: edad3af6-e347-4263-97e8-799727556ead
+  country_id: *ms
+  network_id: *audiotext
+- id: 324124
+  prefix: '1664412'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 7698a344-cc7b-43ae-8942-36a192d1798b
+  country_id: *ms
+  network_id: *audiotext
+- id: 324127
+  prefix: '1664413'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: d3780076-bafc-4617-83c1-94649f061cb4
+  country_id: *ms
+  network_id: *audiotext
+- id: 324255
+  prefix: '16644920000'
+  number_min_length: 18
+  number_max_length: 18
+  uuid: be72a2c6-d67c-4cb1-bc80-adfe8d990e2d
+  country_id: *ms
+  network_id: *audiotext_(usa)
+- id: 324256
+  prefix: '16644920999'
+  number_min_length: 18
+  number_max_length: 18
+  uuid: a13e21c4-524d-4efb-97cf-03c1f2d42e8e
+  country_id: *ms
+  network_id: *audiotext_(usa)
+- id: 324257
+  prefix: '16644923000'
+  number_min_length: 18
+  number_max_length: 18
+  uuid: 9186cb92-e49c-43ca-8f2e-ddc643f02234
+  country_id: *ms
+  network_id: *audiotext_(usa)
+- id: 324258
+  prefix: '16644927999'
+  number_min_length: 18
+  number_max_length: 18
+  uuid: 1e518dfa-e2a4-46da-b177-48f944950ee4
+  country_id: *ms
+  network_id: *audiotext_(usa)
+- id: 331899
+  prefix: '1664999'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 6ac82319-7105-470d-8b1d-b0272bd7a4e8
+  country_id: *ms
+  network_id: *emergency_services
+# Fixed Prefixes
+- id: 323993
+  prefix: '1664349'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 0e067206-a80a-4a29-829f-3890e65d0019
+  country_id: *ms
+  network_id: *fixed
+- id: 324061
+  prefix: '1664391'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 8648bc07-8596-4498-b800-63e2d2edb58d
+  country_id: *ms
+  network_id: *fixed
+- id: 324129
+  prefix: '1664414'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 83aea434-3c98-42e8-89ba-2850742caf1f
+  country_id: *ms
+  network_id: *fixed
+- id: 324131
+  prefix: '1664415'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 9bbc6054-8f1b-467e-ad2c-d7ef140400e1
+  country_id: *ms
+  network_id: *fixed
+- id: 324252
+  prefix: '1664491'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: aa6ee5bc-86b4-436b-8f6d-dd1f497f5b13
+  country_id: *ms
+  network_id: *fixed
+# Mobile Prefixes
+- id: 324063
+  prefix: '1664392'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: d408abad-1daf-4e82-bd5b-3ee4e94bf4dd
+  country_id: *ms
+  network_id: *digicel_mobile
+- id: 324066
+  prefix: '1664393'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: b6417142-0038-4f4e-b737-5c29212034b6
+  country_id: *ms
+  network_id: *digicel_mobile
+- id: 324069
+  prefix: '1664394'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 82810c59-d049-460a-ad72-8687eb472f1b
+  country_id: *ms
+  network_id: *digicel_mobile
+- id: 324072
+  prefix: '1664395'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: c82b6248-6dae-4b77-8074-5674f7020299
+  country_id: *ms
+  network_id: *digicel_mobile
+- id: 324075
+  prefix: '1664396'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 55712d6a-e992-4c86-96cd-aff68b289bb6
+  country_id: *ms
+  network_id: *digicel_mobile
+- id: 324254
+  prefix: '1664492'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 9982db30-b75c-4ed3-a85f-335ee2f0bc6f
+  country_id: *ms
+  network_id: *flow_mobile
+- id: 324260
+  prefix: '1664493'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: fe201f48-a4a4-4233-b81c-157a60932e72
+  country_id: *ms
+  network_id: *flow_mobile
+- id: 324262
+  prefix: '1664494'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: c5441ae3-e88d-4cb1-b2c8-be7a1a049ee7
+  country_id: *ms
+  network_id: *flow_mobile
+- id: 324264
+  prefix: '1664495'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 4ed5c127-acd9-4ea1-857c-b216f8dc2e85
+  country_id: *ms
+  network_id: *flow_mobile
+- id: 324266
+  prefix: '1664496'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: e166caa3-c207-4e76-83ce-2c5e8f8c0e4d
+  country_id: *ms
+  network_id: *flow_mobile

@@ -1,0 +1,130 @@
+country_id: &ss 268
+networks:
+# Mobile Networks
+- id: &zain_mobile 3299
+  name: SS Zain mobile
+  uuid: 273c26d5-ef3b-4fa0-ad83-edeb1cc38058
+  type_id: 3
+- id: &mtn_mobile 3090
+  name: SS Mtn mobile
+  uuid: 9254fa34-b4e4-4885-b7b6-0fa059bb3a8a
+  type_id: 3
+- id: &digitel_mobile 3296
+  name: SS Digitel mobile
+  uuid: cab07c08-6c29-4d83-b3b3-aad5a4cc8086
+  type_id: 3
+- id: &mobile 3013
+  name: SS Mobile
+  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  type_id: 3
+# Supplementary services Networks
+- id: &special_services 3075
+  name: SS Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+# Country code Networks
+- id: 3012
+  name: SS Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Fixed Networks
+- id: &fixed 3012
+  name: SS Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+network_prefixes:
+# Mobile Prefixes
+- id: 171722
+  prefix: '21191'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 453b6216-a0ad-4f85-900b-f19aa6947a11
+  country_id: *ss
+  network_id: *zain_mobile
+- id: 174194
+  prefix: '21192'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: dd4cdc0d-7170-4f66-8cd5-8ad492045804
+  country_id: *ss
+  network_id: *mtn_mobile
+- id: 234062
+  prefix: '21198'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 509ea4fe-5058-4c18-9d41-1212270326d6
+  country_id: *ss
+  network_id: *digitel_mobile
+- id: 247786
+  prefix: '211'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 53a220d6-5351-42ab-81d9-841e86f05fd6
+  country_id: *ss
+  network_id: *mobile
+# Supplementary services Prefixes
+- id: 242998
+  prefix: '2112'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 7d23ab04-e7f6-4b1e-a3dc-eb28565242f6
+  country_id: *ss
+  network_id: *special_services
+- id: 248375
+  prefix: '2111'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: a976754b-cec4-4208-9ed4-980007d496a8
+  country_id: *ss
+  network_id: *special_services
+# Country code Prefixes
+- id: 247974
+  prefix: '211'
+  number_min_length: 6
+  number_max_length: 10
+  uuid: 14a22b5b-05bb-47bd-a92e-8392d9e11e18
+  country_id: *ss
+  network_id: *fixed
+# Fixed Prefixes
+- id: 256579
+  prefix: '21118'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9a507292-8fe9-423a-8f11-05f5d01fbe1b
+  country_id: *ss
+  network_id: *fixed
+- id: 256901
+  prefix: '21119'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 28f5fad7-1910-4c16-a393-423778504fbe
+  country_id: *ss
+  network_id: *fixed
+- id: 257248
+  prefix: '211'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 351a919e-6574-49ac-905a-df519e47cd5c
+  country_id: *ss
+  network_id: *fixed
+- id: 262908
+  prefix: '21112'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9584ed31-2549-4ac5-a282-2c63a3658dd2
+  country_id: *ss
+  network_id: *fixed
+- id: 263334
+  prefix: '21116'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9686c204-c3fd-438f-b6b0-72d78c675a08
+  country_id: *ss
+  network_id: *fixed
+- id: 263726
+  prefix: '21117'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 2ed46185-b72d-43d2-b3cb-26dc2c97d86d
+  country_id: *ss
+  network_id: *fixed

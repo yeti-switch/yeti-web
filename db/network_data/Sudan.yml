@@ -1,0 +1,175 @@
+country_id: &sd 200
+networks:
+# Mobile Networks
+- id: &zain_mobile 3299
+  name: SD Zain mobile
+  uuid: 273c26d5-ef3b-4fa0-ad83-edeb1cc38058
+  type_id: 3
+- id: &mtn_mobile 3090
+  name: SD Mtn mobile
+  uuid: 9254fa34-b4e4-4885-b7b6-0fa059bb3a8a
+  type_id: 3
+- id: &mobile 3013
+  name: SD Mobile
+  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  type_id: 3
+- id: &sudani_mobile 4424
+  name: SD Sudani mobile
+  uuid: a41c88a3-9796-4da1-93bc-177eb3c0f5cf
+  type_id: 3
+# Country code Networks
+- id: 3012
+  name: SD Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 17
+# Supplementary services Networks
+- id: &special_services 3075
+  name: SD Special services
+  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+  type_id: 14
+- id: &emergency_services 3662
+  name: SD Emergency services
+  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+  type_id: 14
+# Fixed Networks
+- id: &fixed 3012
+  name: SD Fixed
+  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  type_id: 12
+# Satellite Networks
+- id: &sudani_satellite 4643
+  name: SD Sudani satellite
+  uuid: 339cc86f-e9a6-42b6-a80f-3d20da1db101
+  type_id: 16
+network_prefixes:
+# Mobile Prefixes
+- id: 171721
+  prefix: '24991'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: dfd562b7-022d-42ef-878c-a294800fc786
+  country_id: *sd
+  network_id: *zain_mobile
+- id: 174193
+  prefix: '24992'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 53c4a2a0-7827-43c4-a17f-3cee608d0075
+  country_id: *sd
+  network_id: *mtn_mobile
+- id: 195150
+  prefix: '24993'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 6eef59ad-0ee6-458d-b3ff-73ac349b0762
+  country_id: *sd
+  network_id: *mtn_mobile
+- id: 225794
+  prefix: '24996'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 8ece4165-b684-4be5-a393-338df48319ad
+  country_id: *sd
+  network_id: *zain_mobile
+- id: 238722
+  prefix: '24999'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f6fd4d25-88ec-4e69-8d3b-6806eebb5355
+  country_id: *sd
+  network_id: *mtn_mobile
+- id: 247785
+  prefix: '249'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 67a20671-227f-4fd0-a07f-8b2aec5ff202
+  country_id: *sd
+  network_id: *mobile
+- id: 254794
+  prefix: '24911'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 3c56ab5c-c4e8-4e53-9d3f-746182c1505e
+  country_id: *sd
+  network_id: *sudani_mobile
+- id: 262906
+  prefix: '24912'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 14ea94f8-90d9-40dc-9723-05e581a13b1e
+  country_id: *sd
+  network_id: *sudani_mobile
+- id: 452634
+  prefix: '24990'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 8a8510b3-3b2e-4685-94e4-9730f429a322
+  country_id: *sd
+  network_id: *zain_mobile
+# Country code Prefixes
+- id: 247962
+  prefix: '249'
+  number_min_length: 6
+  number_max_length: 10
+  uuid: 13c2d2d2-cb69-4d18-82c2-b5b13f90da92
+  country_id: *sd
+  network_id: *fixed
+# Supplementary services Prefixes
+- id: 248363
+  prefix: '2491'
+  number_min_length: 7
+  number_max_length: 8
+  uuid: 21913bea-704b-4782-9544-97b373183b11
+  country_id: *sd
+  network_id: *special_services
+- id: 254168
+  prefix: '24999'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: ed5209ac-2002-47b9-8abc-1b37e46deb56
+  country_id: *sd
+  network_id: *emergency_services
+# Fixed Prefixes
+- id: 256370
+  prefix: '24915'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 1a7d2762-75b0-4169-9ace-15532bb1bca7
+  country_id: *sd
+  network_id: *fixed
+- id: 256587
+  prefix: '249183'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: b06c4fa1-a17a-44a9-adc9-35d1fc7b1d74
+  country_id: *sd
+  network_id: *fixed
+- id: 256605
+  prefix: '249185'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: c446b6e1-e5be-423f-b013-23492a37280f
+  country_id: *sd
+  network_id: *fixed
+- id: 256620
+  prefix: '249187'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 8f4a6d03-1a60-4139-854c-7aa4e3fe3ab0
+  country_id: *sd
+  network_id: *fixed
+- id: 257247
+  prefix: '249'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 627138bc-6100-4ac8-9c9a-dc1aeb548af7
+  country_id: *sd
+  network_id: *fixed
+# Satellite Prefixes
+- id: 263740
+  prefix: '249178'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 95e39500-5386-45d7-b533-0feb32ffac59
+  country_id: *sd
+  network_id: *sudani_satellite
