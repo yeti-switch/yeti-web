@@ -37,6 +37,7 @@ ActiveAdmin.register CustomersAuth do
                  [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) || '' }],
                  [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) || '' }],
                  :dump_level_name,
+                 :privacy_mode_name,
                  :enable_audio_recording,
                  :capacity,
                  :cps_limit,
@@ -76,7 +77,7 @@ ActiveAdmin.register CustomersAuth do
                 :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule,
                 :dst_rewrite_result,
                 :dst_numberlist_id, :src_numberlist_id,
-                :dump_level_id, :capacity, :cps_limit, :allow_receive_rate_limit,
+                :dump_level_id, :privacy_mode_id, :capacity, :cps_limit, :allow_receive_rate_limit,
                 :send_billing_information,
                 :ip, :pop_id,
                 :src_prefix, :src_number_min_length, :src_number_max_length,
@@ -166,6 +167,7 @@ ActiveAdmin.register CustomersAuth do
     column :src_numberlist
 
     column :dump_level, &:dump_level_name
+    column :privacy_mode_id, &:privacy_mode_name
     column :enable_audio_recording
     column :capacity
     column :cps_limit
@@ -225,6 +227,7 @@ ActiveAdmin.register CustomersAuth do
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }
   filter :dump_level_id_eq, label: 'Dump Level', as: :select, collection: CustomersAuth::DUMP_LEVELS.invert
+  filter :privacy_mode_id_eq, label: 'Privacy mode', as: :select, collection: CustomersAuth::PRIVACY_MODES.invert, input_html: { class: 'chosen' }
   filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
   filter :transport_protocol
   filter :ip_covers,
@@ -308,6 +311,11 @@ ActiveAdmin.register CustomersAuth do
                                   scope: Routing::Numberlist.order(:name),
                                   path: '/numberlists/search'
           f.input :dump_level_id, as: :select, include_blank: false, collection: CustomersAuth::DUMP_LEVELS.invert
+          f.input :privacy_mode_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::PRIVACY_MODES.invert,
+                  input_html: { class: :chosen }
           f.input :enable_audio_recording
           f.input :capacity
           f.input :cps_limit
@@ -422,6 +430,7 @@ ActiveAdmin.register CustomersAuth do
           row :src_numberlist
 
           row :dump_level, &:dump_level_name
+          row :privacy_mode_id, &:privacy_mode_name
           row :enable_audio_recording
           row :capacity
           row :cps_limit

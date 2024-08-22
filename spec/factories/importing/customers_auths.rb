@@ -36,6 +36,7 @@
 #  min_dst_number_length            :integer(2)
 #  name                             :string
 #  pop_name                         :string
+#  privacy_mode_name                :string
 #  radius_accounting_profile_name   :string
 #  radius_auth_profile_name         :string
 #  rateplan_name                    :string
@@ -73,6 +74,7 @@
 #  lua_script_id                    :integer(2)
 #  o_id                             :bigint(8)
 #  pop_id                           :integer(4)
+#  privacy_mode_id                  :integer(2)
 #  radius_accounting_profile_id     :integer(2)
 #  radius_auth_profile_id           :integer(2)
 #  rateplan_id                      :integer(4)
@@ -110,6 +112,8 @@ FactoryBot.define do
     name { nil }
     dump_level_name { nil }
     dump_level_id { 1 }
+    privacy_mode_id { 1 }
+    privacy_mode_name { CustomersAuth::PRIVACY_MODES.fetch(CustomersAuth::PRIVACY_MODE_ALLOW) }
     capacity { 1 }
     pop_name { nil }
     pop_id { nil }

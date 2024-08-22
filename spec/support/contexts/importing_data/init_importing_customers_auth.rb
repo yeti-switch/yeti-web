@@ -23,6 +23,7 @@ shared_context :init_importing_customers_auth do |args|
       dst_rewrite_result: '',
       name: 'Test Customer auth record',
       dump_level_id: 3,
+      privacy_mode_id: CustomersAuth::PRIVACY_MODE_ALLOW,
       capacity: 1,
       src_name_rewrite_rule: '',
       src_name_rewrite_result: '',
