@@ -68,6 +68,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Dst numberlist name', item.dst_numberlist.name, anything],
         ['Src numberlist name', item.src_numberlist.name, anything],
         ['Dump level name', item.dump_level_name, anything],
+        ['Privacy mode name', item.decorate.privacy_mode_name, item.decorate.privacy_mode_name],
         ['Enable audio recording', item.enable_audio_recording.to_s, anything],
         ['Capacity', item.capacity.to_s, anything],
         ['Cps limit', item.cps_limit.to_s, anything],

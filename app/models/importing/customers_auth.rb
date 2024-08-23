@@ -36,6 +36,7 @@
 #  min_dst_number_length            :integer(2)
 #  name                             :string
 #  pop_name                         :string
+#  privacy_mode_name                :string
 #  radius_accounting_profile_name   :string
 #  radius_auth_profile_name         :string
 #  rateplan_name                    :string
@@ -73,6 +74,7 @@
 #  lua_script_id                    :integer(2)
 #  o_id                             :bigint(8)
 #  pop_id                           :integer(4)
+#  privacy_mode_id                  :integer(2)
 #  radius_accounting_profile_id     :integer(2)
 #  radius_auth_profile_id           :integer(2)
 #  rateplan_id                      :integer(4)
@@ -126,6 +128,7 @@ class Importing::CustomersAuth < Importing::Base
     dst_numberlist_id
     src_numberlist_id
     dump_level_id
+    privacy_mode_id
     enable_audio_recording
     capacity
     allow_receive_rate_limit
@@ -163,6 +166,7 @@ class Importing::CustomersAuth < Importing::Base
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     resolve_integer_constant('dump_level_id', 'dump_level_name', CustomersAuth::DUMP_LEVELS)
+    resolve_integer_constant('privacy_mode_id', 'privacy_mode_name', CustomersAuth::PRIVACY_MODES)
     super
     CustomersAuth.increment_state_value
   end

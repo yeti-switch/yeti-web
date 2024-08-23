@@ -8,6 +8,8 @@ ActiveAdmin.register Importing::CustomersAuth do
   filter :account_name
   boolean_filter :is_changed
 
+  decorate_with Importing::CustomersAuthDecorator
+
   acts_as_import_preview
 
   controller do
@@ -56,6 +58,7 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :dst_numberlist, sortable: :dst_numberlist_name
     column :src_numberlist, sortable: :src_numberlist_name
     column :dump_level, &:dump_level_display_name
+    column :privacy_mode_id, &:privacy_mode_name
 
     column :enable_audio_recording
     column :capacity

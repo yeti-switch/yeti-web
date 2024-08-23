@@ -33743,7 +33743,9 @@ CREATE TABLE data_import.import_customers_auth (
     src_name_field_name smallint,
     dst_number_field_id smallint,
     dst_number_field_name smallint,
-    cps_limit double precision
+    cps_limit double precision,
+    privacy_mode_id smallint,
+    privacy_mode_name character varying
 );
 
 
@@ -41199,6 +41201,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240725132743'),
 ('20240725135654'),
 ('20240805121644'),
-('20240806205100');
+('20240806205100'),
+('20240822145410');
 
 

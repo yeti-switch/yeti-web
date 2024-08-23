@@ -9,6 +9,10 @@ class CustomersAuthDecorator < BillingDecorator
   decorates_association :account, with: AccountDecorator
   decorates_association :routing_plan, with: RoutingPlanDecorator
 
+  def privacy_mode_name
+    CustomersAuth::PRIVACY_MODES[privacy_mode_id]
+  end
+
   def display_tag_action_value
     h.tag_action_values_badges(model.tag_action_value)
   end

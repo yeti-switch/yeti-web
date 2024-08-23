@@ -321,10 +321,6 @@ class CustomersAuth < ApplicationRecord
     ss_no_identity_action_id.nil? ? nil : SS_NO_IDENTITY_ACTIONS[ss_no_identity_action_id]
   end
 
-  def privacy_mode_name
-    PRIVACY_MODES[privacy_mode_id]
-  end
-
   # TODO: move to decorator when ActiveAdmin fix problem
   # Problem is:
   # on "update" AA uses decorated object
