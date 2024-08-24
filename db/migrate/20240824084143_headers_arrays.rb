@@ -1,9 +1,13 @@
 class HeadersArrays < ActiveRecord::Migration[7.0]
   def up
     execute %q{
+      update class4.gateways set orig_append_headers_req = '' where orig_append_headers_req is null;
+      update class4.gateways set orig_append_headers_reply = '{}'::varchar[] where orig_append_headers_reply is null;
+      update class4.gateways set term_append_headers_req = '' where term_append_headers_req is null;
+
       alter table class4.gateways
         alter column orig_append_headers_req  type varchar[] using string_to_array(orig_append_headers_req, '\r\n'),
-        alter column term_append_headers_req  type varchar[] using string_to_array(orig_append_headers_req, '\r\n');
+        alter column term_append_headers_req  type varchar[] using string_to_array(term_append_headers_req, '\r\n');
 
       alter table class4.gateways
         alter column orig_append_headers_req set default '{}'::varchar[],
@@ -1580,7 +1584,7 @@ $_$;
 
       alter table class4.gateways
         alter column orig_append_headers_req  type varchar using array_to_string(orig_append_headers_req, '\r\n'),
-        alter column term_append_headers_req  type varchar using array_to_string(orig_append_headers_req, '\r\n');
+        alter column term_append_headers_req  type varchar using array_to_string(term_append_headers_req, '\r\n');
 
 CREATE or replace FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
