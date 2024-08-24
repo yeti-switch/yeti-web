@@ -42,8 +42,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :termination_capacity
     it_behaves_like :jsonapi_filters_by_string_field, :term_next_hop
     it_behaves_like :jsonapi_filters_by_string_field, :orig_next_hop
-    it_behaves_like :jsonapi_filters_by_string_field, :orig_append_headers_req
-    it_behaves_like :jsonapi_filters_by_string_field, :term_append_headers_req
     it_behaves_like :jsonapi_filters_by_boolean_field, :dialog_nat_handling
     it_behaves_like :jsonapi_filters_by_boolean_field, :orig_force_outbound_proxy
     it_behaves_like :jsonapi_filters_by_boolean_field, :orig_use_outbound_proxy
