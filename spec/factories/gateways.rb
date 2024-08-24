@@ -217,8 +217,9 @@ FactoryBot.define do
     dst_rewrite_result { nil }
     term_next_hop { nil }
     orig_next_hop { nil }
-    orig_append_headers_req { nil }
-    term_append_headers_req { nil }
+    orig_append_headers_req { [] }
+    orig_append_headers_reply { [] }
+    term_append_headers_req { [] }
     dialog_nat_handling { true }
     orig_force_outbound_proxy { false }
     orig_use_outbound_proxy { false }
