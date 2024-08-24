@@ -33,6 +33,8 @@ Config.setup do |setup_config|
 
     optional(:rec_format).value(Dry::Types['string'].enum('wav', 'mp3'))
 
+    optional(:routing_simulation_default_interface).filled(:string)
+
     required(:cdr_export).schema do
       required(:dir_path).filled(:string)
       required(:delete_url).filled(:string)

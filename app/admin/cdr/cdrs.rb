@@ -193,6 +193,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       routing_simulation: {
         auth_id: resource.customer_auth&.require_incoming_auth ? resource.orig_gw_id : nil,
         transport_protocol_id: proto,
+        interface: YetiConfig.routing_simulation_default_interface,
         remote_ip: resource.auth_orig_ip,
         remote_port: resource.auth_orig_port,
         src_number: resource.src_prefix_in,
