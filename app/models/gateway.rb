@@ -39,8 +39,8 @@
 #  max_30x_redirects                :integer(2)       default(0), not null
 #  max_transfers                    :integer(2)       default(0), not null
 #  name                             :string           not null
-#  orig_append_headers_reply        :string           is an Array
-#  orig_append_headers_req          :string
+#  orig_append_headers_reply        :string           default([]), not null, is an Array
+#  orig_append_headers_req          :string           default([]), not null, is an Array
 #  orig_force_outbound_proxy        :boolean          default(FALSE), not null
 #  orig_next_hop                    :string
 #  orig_outbound_proxy              :string
@@ -82,7 +82,7 @@
 #  sst_session_expires              :integer(4)       default(50)
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
-#  term_append_headers_req          :string
+#  term_append_headers_req          :string           default([]), not null, is an Array
 #  term_force_outbound_proxy        :boolean          default(FALSE), not null
 #  term_next_hop                    :string
 #  term_next_hop_for_replies        :boolean          default(FALSE), not null
@@ -394,8 +394,18 @@ class Gateway < ApplicationRecord
   end
 
   def orig_append_headers_reply=(value)
-    value = value.split(',').map(&:strip).reject(&:blank?) if value.is_a? String
+    value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a? String
     self[:orig_append_headers_reply] = value
+  end
+
+  def orig_append_headers_req=(value)
+    value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a? String
+    self[:orig_append_headers_req] = value
+  end
+
+  def term_append_headers_req=(value)
+    value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a? String
+    self[:term_append_headers_req] = value
   end
 
   def host=(value)

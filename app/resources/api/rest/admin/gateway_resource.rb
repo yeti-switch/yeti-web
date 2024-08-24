@@ -8,6 +8,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :dst_rewrite_rule, :dst_rewrite_result, :auth_enabled, :auth_user, :auth_password, :auth_from_user,
              :auth_from_domain, :term_use_outbound_proxy, :term_force_outbound_proxy, :term_outbound_proxy,
              :term_next_hop_for_replies, :term_next_hop, :term_append_headers_req,
+             :orig_append_headers_req, :orig_append_headers_reply,
              :sdp_alines_filter_list, :ringing_timeout, :relay_options, :relay_reinvite, :relay_hold, :relay_prack,
              :relay_update, :suppress_early_media, :fake_180_timer, :transit_headers_from_origination,
              :transit_headers_from_termination, :sip_interface_name, :allow_1xx_without_to_tag, :sip_timer_b,
@@ -97,8 +98,10 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :termination_capacity, type: :number
   ransack_filter :term_next_hop, type: :string
   ransack_filter :orig_next_hop, type: :string
-  ransack_filter :orig_append_headers_req, type: :string
-  ransack_filter :term_append_headers_req, type: :string
+  # Disabled because there is no support for arrays in ransack_filter
+  # ransack_filter :orig_append_headers_req, type: :array_of_strings
+  # ransack_filter :orig_append_headers_reply, type: :array_of_strings
+  # ransack_filter :term_append_headers_req, type: :array_of_strings
   ransack_filter :dialog_nat_handling, type: :boolean
   ransack_filter :orig_force_outbound_proxy, type: :boolean
   ransack_filter :orig_use_outbound_proxy, type: :boolean
@@ -207,6 +210,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       term_next_hop
       term_disconnect_policy
       term_append_headers_req
+      orig_append_headers_req
+      orig_append_headers_reply
       sdp_alines_filter_list
       ringing_timeout
       relay_options

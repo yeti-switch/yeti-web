@@ -3086,8 +3086,8 @@ CREATE TABLE class4.gateways (
     termination_capacity smallint,
     term_next_hop character varying,
     orig_next_hop character varying,
-    orig_append_headers_req character varying,
-    term_append_headers_req character varying,
+    orig_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    term_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     dialog_nat_handling boolean DEFAULT true NOT NULL,
     orig_force_outbound_proxy boolean DEFAULT false NOT NULL,
     orig_use_outbound_proxy boolean DEFAULT false NOT NULL,
@@ -3164,7 +3164,7 @@ CREATE TABLE class4.gateways (
     termination_dst_numberlist_id smallint,
     lua_script_id smallint,
     rtp_acl inet[],
-    orig_append_headers_reply character varying[],
+    orig_append_headers_reply character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     diversion_send_mode_id smallint DEFAULT 1 NOT NULL,
     diversion_domain character varying,
     try_avoid_transcoding boolean DEFAULT false NOT NULL,
@@ -16771,10 +16771,10 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
   END IF;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -17537,10 +17537,10 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
   END IF;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -18226,10 +18226,10 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
   END IF;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -24390,10 +24390,10 @@ BEGIN
     END IF;
   END IF ;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -25172,10 +25172,10 @@ BEGIN
     END IF;
   END IF ;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -25877,10 +25877,10 @@ BEGIN
     END IF;
   END IF ;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, string_to_array(i_vendor_gw.term_append_headers_req,'\r\n')::varchar[]);
+  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req=i_customer_gw.orig_append_headers_req;
+  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -41202,6 +41202,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240725135654'),
 ('20240805121644'),
 ('20240806205100'),
-('20240822145410');
+('20240822145410'),
+('20240824084143');
 
 
