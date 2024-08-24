@@ -501,6 +501,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
         'term-next-hop': gateway.term_next_hop,
         'term-append-headers-req': gateway.term_append_headers_req,
+        'orig-append-headers-req': gateway.orig_append_headers_req,
+        'orig-append-headers-reply': gateway.orig_append_headers_reply,
         'sdp-alines-filter-list': gateway.sdp_alines_filter_list,
         'ringing-timeout': gateway.ringing_timeout,
         'relay-options': gateway.relay_options,

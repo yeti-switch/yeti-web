@@ -5,6 +5,14 @@ class HeadersArrays < ActiveRecord::Migration[7.0]
         alter column orig_append_headers_req  type varchar[] using string_to_array(orig_append_headers_req, '\r\n'),
         alter column term_append_headers_req  type varchar[] using string_to_array(orig_append_headers_req, '\r\n');
 
+      alter table class4.gateways
+        alter column orig_append_headers_req set default '{}'::varchar[],
+        alter column orig_append_headers_req set not null,
+        alter column orig_append_headers_reply set default '{}'::varchar[],
+        alter column orig_append_headers_reply set not null,
+        alter column term_append_headers_req set default '{}'::varchar[],
+        alter column term_append_headers_req set not null;
+
 CREATE or replace FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
@@ -1561,10 +1569,18 @@ $_$;
 
   def down
     execute %q{
+    
+      alter table class4.gateways
+        alter column orig_append_headers_req drop not null,
+        alter column orig_append_headers_req drop default,
+        alter column orig_append_headers_reply drop not null,
+        alter column orig_append_headers_reply drop default,
+        alter column term_append_headers_req drop not null,
+        alter column term_append_headers_req drop default;
+
       alter table class4.gateways
         alter column orig_append_headers_req  type varchar using array_to_string(orig_append_headers_req, '\r\n'),
         alter column term_append_headers_req  type varchar using array_to_string(orig_append_headers_req, '\r\n');
-
 
 CREATE or replace FUNCTION switch20.process_gw(i_profile switch20.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch20.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
