@@ -394,7 +394,7 @@ class Gateway < ApplicationRecord
   end
 
   def orig_append_headers_reply=(value)
-    value = value.split(',').map(&:strip).reject(&:blank?) if value.is_a? String
+    value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a? String
     self[:orig_append_headers_reply] = value
   end
 

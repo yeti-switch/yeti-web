@@ -398,7 +398,7 @@ ActiveAdmin.register Gateway do
             f.inputs 'Origination' do
               f.input :orig_next_hop
               f.input :orig_append_headers_req
-              f.input :orig_append_headers_reply, as: :array_of_strings
+              f.input :orig_append_headers_reply, as: :newline_array_of_headers
               f.input :orig_use_outbound_proxy
               f.input :orig_force_outbound_proxy
               f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
@@ -590,7 +590,9 @@ ActiveAdmin.register Gateway do
           attributes_table_for s do
             row :orig_next_hop
             row :orig_append_headers_req
-            row :orig_append_headers_reply
+            row :orig_append_headers_reply do |row|
+              pre row.orig_append_headers_reply.join("\r\n")
+            end
             row :orig_use_outbound_proxy
             row :orig_force_outbound_proxy
             row :orig_proxy_transport_protocol
