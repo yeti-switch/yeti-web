@@ -3086,8 +3086,8 @@ CREATE TABLE class4.gateways (
     termination_capacity smallint,
     term_next_hop character varying,
     orig_next_hop character varying,
-    orig_append_headers_req character varying,
-    term_append_headers_req character varying,
+    orig_append_headers_req character varying[],
+    term_append_headers_req character varying[],
     dialog_nat_handling boolean DEFAULT true NOT NULL,
     orig_force_outbound_proxy boolean DEFAULT false NOT NULL,
     orig_use_outbound_proxy boolean DEFAULT false NOT NULL,
@@ -41202,6 +41202,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240725135654'),
 ('20240805121644'),
 ('20240806205100'),
-('20240822145410');
+('20240822145410'),
+('20240824084143');
 
 

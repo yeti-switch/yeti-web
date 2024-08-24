@@ -397,7 +397,7 @@ ActiveAdmin.register Gateway do
 
             f.inputs 'Origination' do
               f.input :orig_next_hop
-              f.input :orig_append_headers_req
+              f.input :orig_append_headers_req, as: :newline_array_of_headers
               f.input :orig_append_headers_reply, as: :newline_array_of_headers
               f.input :orig_use_outbound_proxy
               f.input :orig_force_outbound_proxy
@@ -433,7 +433,7 @@ ActiveAdmin.register Gateway do
               f.input :term_next_hop_for_replies
               f.input :term_next_hop
               f.input :term_disconnect_policy, input_html: { class: 'chosen' }, include_blank: true
-              f.input :term_append_headers_req
+              f.input :term_append_headers_req, as: :newline_array_of_headers
               f.input :sdp_alines_filter_type, as: :select, include_blank: false
               f.input :sdp_alines_filter_list
               f.input :ringing_timeout
@@ -589,7 +589,9 @@ ActiveAdmin.register Gateway do
         panel 'Origination' do
           attributes_table_for s do
             row :orig_next_hop
-            row :orig_append_headers_req
+            row :orig_append_headers_req do |row|
+              pre row.orig_append_headers_req.join("\r\n")
+            end
             row :orig_append_headers_reply do |row|
               pre row.orig_append_headers_reply.join("\r\n")
             end
@@ -631,7 +633,9 @@ ActiveAdmin.register Gateway do
             row :term_next_hop_for_replies
             row :term_next_hop
             row :term_disconnect_policy
-            row :term_append_headers_req
+            row :term_append_headers_req do |row|
+              pre row.term_append_headers_req.join("\r\n")
+            end
             row :sdp_alines_filter_type
             row :sdp_alines_filter_list
             row :ringing_timeout
