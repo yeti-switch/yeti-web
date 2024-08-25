@@ -76,31 +76,7 @@ jobs:
           file: ci/pg13.Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/yeti-web/pgsql:13
-
-  postgres-15-build-image:
-    name: Build Postgresql 15 images for CI
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push db image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ci/pg15.Dockerfile
-          push: true
-          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/pgsql:15
-
+          
   postgres-16-build-image:
     name: Build Postgresql 16 images for CI
     runs-on: ubuntu-latest
