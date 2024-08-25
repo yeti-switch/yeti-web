@@ -740,13 +740,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
     column :rateplan
     column :destination
-    column :destination_rate_policy, &:destination_rate_policy_name
-    column :destination_fee
+    column :rate_policy, &:destination_rate_policy_name
 
-    column('Destination rates', sortable: 'destination_next_rate') do |cdr|
-      "#{cdr.destination_initial_rate}/#{cdr.destination_next_rate}".chomp('/')
+    column('Dest. fee and rates', sortable: 'destination_next_rate') do |cdr|
+      "#{cdr.destination_fee} #{cdr.destination_initial_rate}/#{cdr.destination_next_rate}".chomp('/')
     end
-    column('Destination intervals', sortable: 'destination_next_interval') do |cdr|
+    column('Dest. intervals', sortable: 'destination_next_interval') do |cdr|
       "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
     end
 
@@ -759,9 +758,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :routing_tags
     column :dialpeer
 
-    column :dialpeer_fee
-    column('Dialpeer rates', sortable: 'dialpeer_next_rate') do |cdr|
-      "#{cdr.dialpeer_initial_rate}/#{cdr.dialpeer_next_rate}".chomp('/')
+    column('Dialpeer fee and rates', sortable: 'dialpeer_next_rate') do |cdr|
+      "#{cdr.dialpeer_fee} #{cdr.dialpeer_initial_rate}/#{cdr.dialpeer_next_rate}".chomp('/')
     end
     column('Dialpeer intervals', sortable: 'dialpeer_next_interval') do |cdr|
       "#{cdr.dialpeer_initial_interval}/#{cdr.dialpeer_next_interval}".chomp('/')
@@ -788,8 +786,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
     column :p_charge_info_in
 
-    column :core_version
-    column :yeti_version
+    column :yeti_version do |cdr|
+      "#{cdr.core_version} #{cdr.yeti_version}"
+    end
     column :lega_user_agent
     column :legb_user_agent
     column :uuid
